@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structSR__UTILS__NS_1_1InnerType_3_01std_1_1set_3_01T_00_01Compare_00_01Alloc_01_4_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::InnerType&lt; std::set&lt; T, Compare, Alloc &gt; &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename Compare</type>
+      </param>
+      <param>
+        <type>typename Alloc</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structSR__UTILS__NS_1_1InnerType_3_01std_1_1set_3_01T_00_01Compare_00_01Alloc_01_4_01_4_1a1c4ed46dd15d24f36dbc0bec019a9665" prot="public" static="no">
+        <type>typename <ref refid="structSR__UTILS__NS_1_1InnerType" kindref="compound">InnerType</ref>&lt; T &gt;::type</type>
+        <definition>using SR_UTILS_NS::InnerType&lt; std::set&lt; T, Compare, Alloc &gt; &gt;::type =  typename InnerType&lt;T&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>SR_UTILS_NS::InnerType&lt; std::set&lt; T, Compare, Alloc &gt; &gt;::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="144" column="9" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="144" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="143" column="19" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="143" bodyend="145"/>
+    <listofallmembers>
+      <member refid="structSR__UTILS__NS_1_1InnerType_3_01std_1_1set_3_01T_00_01Compare_00_01Alloc_01_4_01_4_1a1c4ed46dd15d24f36dbc0bec019a9665" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::InnerType&lt; std::set&lt; T, Compare, Alloc &gt; &gt;</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

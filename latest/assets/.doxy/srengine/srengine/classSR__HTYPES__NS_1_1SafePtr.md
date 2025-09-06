@@ -90,10 +90,10 @@ Inherited by the following classes: [SR\_GRAPH\_NS::RenderContext](classSR__GRAP
 |   | [**operator bool**](#function-operator-bool) () noexcept const<br>_не должен быть виртуальным_  |
 |  SR\_NODISCARD SR\_INLINE bool | [**operator!=**](#function-operator) (const [**SafePtr**](classSR__HTYPES__NS_1_1SafePtr.md)&lt; T &gt; & right) noexcept const<br> |
 |  T & | [**operator\***](#function-operator_1) () const<br> |
-|  T \* | [**operator-&gt;**](#function-operator_2) () const<br> |
-|  [**SafePtr**](classSR__HTYPES__NS_1_1SafePtr.md)&lt; T &gt; & | [**operator=**](#function-operator_3) (const [**SafePtr**](classSR__HTYPES__NS_1_1SafePtr.md)&lt; T &gt; & ptr) <br> |
-|  [**SafePtr**](classSR__HTYPES__NS_1_1SafePtr.md)&lt; T &gt; & | [**operator=**](#function-operator_4) (T \* ptr) <br> |
-|  SR\_NODISCARD SR\_INLINE bool | [**operator==**](#function-operator_5) (const [**SafePtr**](classSR__HTYPES__NS_1_1SafePtr.md)&lt; T &gt; & right) noexcept const<br> |
+|  T \* | [**operator-&gt;**](#function-operator-) () const<br> |
+|  [**SafePtr**](classSR__HTYPES__NS_1_1SafePtr.md)&lt; T &gt; & | [**operator=**](#function-operator_2) (const [**SafePtr**](classSR__HTYPES__NS_1_1SafePtr.md)&lt; T &gt; & ptr) <br> |
+|  [**SafePtr**](classSR__HTYPES__NS_1_1SafePtr.md)&lt; T &gt; & | [**operator=**](#function-operator_3) (T \* ptr) <br> |
+|  SR\_NODISCARD SR\_INLINE bool | [**operator==**](#function-operator_4) (const [**SafePtr**](classSR__HTYPES__NS_1_1SafePtr.md)&lt; T &gt; & right) noexcept const<br> |
 |   | [**~SafePtr**](#function-safeptr) () <br> |
 
 

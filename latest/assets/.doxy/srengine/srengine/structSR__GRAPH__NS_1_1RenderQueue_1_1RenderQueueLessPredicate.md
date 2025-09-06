@@ -51,7 +51,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_NODISCARD bool | [**operator()**](#function-operator()) (const [**MeshInfo**](structSR__GRAPH__NS_1_1RenderQueue_1_1MeshInfo.md) & left, const [**MeshInfo**](structSR__GRAPH__NS_1_1RenderQueue_1_1MeshInfo.md) & right) noexcept const<br> |
+|  SR\_NODISCARD bool | [**operator()**](#function-operator) (const [**MeshInfo**](structSR__GRAPH__NS_1_1RenderQueue_1_1MeshInfo.md) & left, const [**MeshInfo**](structSR__GRAPH__NS_1_1RenderQueue_1_1MeshInfo.md) & right) noexcept const<br> |
 
 
 

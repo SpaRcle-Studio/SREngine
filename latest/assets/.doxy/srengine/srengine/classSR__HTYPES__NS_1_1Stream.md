@@ -63,7 +63,7 @@ Inherited by the following classes: [SR\_HTYPES\_NS::Marshal](classSR__HTYPES__N
 |   | [**Stream**](#function-stream-16) () <br> |
 |   | [**Stream**](#function-stream-26) (std::ifstream & ifs) <br> |
 |   | [**Stream**](#function-stream-36) (const std::string & str) <br> |
-|   | [**Stream**](#function-stream-46) (const char \* pData, uint64\_t size) <br> |
+|   | [**Stream**](#function-stream-46) (const char \* pData, uint64\_t size, bool copy=true) <br> |
 |   | [**Stream**](#function-stream-56) (const [**Stream**](classSR__HTYPES__NS_1_1Stream.md) & other) noexcept<br> |
 |   | [**Stream**](#function-stream-66) ([**Stream**](classSR__HTYPES__NS_1_1Stream.md) && other) noexcept<br> |
 |  SR\_NODISCARD std::string | [**ToBase64**](#function-tobase64) () noexcept const<br> |
@@ -81,6 +81,12 @@ Inherited by the following classes: [SR\_HTYPES\_NS::Marshal](classSR__HTYPES__N
 |   | [**~Stream**](#function-stream) () <br> |
 
 
+## Public Static Functions
+
+| Type | Name |
+| ---: | :--- |
+|  char \* | [**Allocate**](#function-allocate) (uint64\_t size) <br> |
+|  void | [**Free**](#function-free) (char \* pData) <br> |
 
 
 
@@ -280,7 +286,8 @@ NOLINT
 ```C++
 SR_HTYPES_NS::Stream::Stream (
     const char * pData,
-    uint64_t size
+    uint64_t size,
+    bool copy=true
 ) 
 ```
 
@@ -505,6 +512,38 @@ Stream &SR_FASTCALL SR_HTYPES_NS::Stream::write (
 
 ```C++
 SR_HTYPES_NS::Stream::~Stream () 
+```
+
+
+
+
+<hr>
+## Public Static Functions Documentation
+
+
+
+
+### function Allocate 
+
+```C++
+static char * SR_HTYPES_NS::Stream::Allocate (
+    uint64_t size
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function Free 
+
+```C++
+static void SR_HTYPES_NS::Stream::Free (
+    char * pData
+) 
 ```
 
 

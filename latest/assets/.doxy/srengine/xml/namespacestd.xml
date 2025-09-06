@@ -114,7 +114,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="261" column="36" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="261" bodyend="264"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="273" column="36" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="273" bodyend="276"/>
       </memberdef>
       <memberdef kind="function" id="Vector3_8h_1a7441aa202abe1f2090dadeae987a604b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -141,7 +141,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="805" column="36" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="805" bodyend="808"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="821" column="36" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="821" bodyend="824"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

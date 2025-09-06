@@ -53,7 +53,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  size\_t | [**operator()**](#function-operator()) ([**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; const & ptr) const<br> |
+|  size\_t | [**operator()**](#function-operator) ([**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; const & ptr) const<br> |
 
 
 

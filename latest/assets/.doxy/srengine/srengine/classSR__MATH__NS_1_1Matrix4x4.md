@@ -54,6 +54,7 @@
 |  float\_t | [**m31**](#variable-m31)  <br> |
 |  float\_t | [**m32**](#variable-m32)  <br> |
 |  float\_t | [**m33**](#variable-m33)  <br> |
+|  float\_t | [**mm**](#variable-mm)  <br> |
 |  [**SR\_MATH\_NS::Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; float\_t &gt; | [**position**](#variable-position)  <br> |
 |  [**SR\_MATH\_NS::Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; float\_t &gt; | [**right**](#variable-right)  <br> |
 |  glm::mat4 | [**self**](#variable-self)  <br> |
@@ -85,6 +86,7 @@
 |  bool | [**Decompose**](#function-decompose-35) ([**FVector3**](structSR__MATH__NS_1_1Vector3.md) & translation, [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & eulers, [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & scale) const<br> |
 |  bool | [**Decompose**](#function-decompose-45) ([**FVector3**](structSR__MATH__NS_1_1Vector3.md) & translation, [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & eulers, [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & scale, [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & skew) const<br> |
 |  bool | [**Decompose**](#function-decompose-55) ([**FVector3**](structSR__MATH__NS_1_1Vector3.md) & translation, [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & rotation, [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & scale, [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & skew) const<br> |
+|  SR\_NODISCARD [**FVector3**](structSR__MATH__NS_1_1Vector3.md) | [**Forward**](#function-forward) () const<br> |
 |  SR\_NODISCARD [**FVector4**](structSR__MATH__NS_1_1Vector4.md) | [**GetAxis**](#function-getaxis) (Axis axis) const<br> |
 |  SR\_NODISCARD [**FVector3**](structSR__MATH__NS_1_1Vector3.md) | [**GetEulers**](#function-geteulers) () const<br> |
 |  SR\_NODISCARD [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**GetQuat**](#function-getquat) () const<br> |
@@ -104,6 +106,7 @@
 |   | [**Matrix4x4**](#function-matrix4x4-910) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & rotation, const [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & scale) noexcept<br> |
 |   | [**Matrix4x4**](#function-matrix4x4-1010) (const [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & translate, const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & rotation, const [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & scale, const [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & skew) noexcept<br> |
 |  SR\_NODISCARD [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**OrthogonalNormalize**](#function-orthogonalnormalize) () const<br> |
+|  SR\_NODISCARD [**FVector3**](structSR__MATH__NS_1_1Vector3.md) | [**Right**](#function-right) () const<br> |
 |  SR\_NODISCARD [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**Rotate**](#function-rotate-12) (const [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & angle) const<br> |
 |  SR\_NODISCARD [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**Rotate**](#function-rotate-22) (const [**SR\_MATH\_NS::Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & q) const<br> |
 |  SR\_NODISCARD [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**RotateAxis**](#function-rotateaxis) (const [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & axis, const double & angle) const<br> |
@@ -113,6 +116,7 @@
 |  SR\_NODISCARD [**FVector4**](structSR__MATH__NS_1_1Vector4.md) | [**TransformVector**](#function-transformvector-12) (const [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & point) const<br> |
 |  SR\_NODISCARD [**FVector4**](structSR__MATH__NS_1_1Vector4.md) | [**TransformVector**](#function-transformvector-22) (const [**FVector4**](structSR__MATH__NS_1_1Vector4.md) & point) const<br> |
 |  SR\_NODISCARD [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**Translate**](#function-translate) (const [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & vec3) const<br> |
+|  SR\_NODISCARD [**FVector3**](structSR__MATH__NS_1_1Vector3.md) | [**Up**](#function-up) () const<br> |
 |  [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**operator\***](#function-operator) (const [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & mat) const<br> |
 |  [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**operator\***](#function-operator_1) (const Unit & scalar) const<br> |
 |  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; | [**operator\***](#function-operator_2) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & vector4) const<br> |
@@ -122,16 +126,17 @@
 |  [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**operator+**](#function-operator_6) (const [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & mat) const<br> |
 |  [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**operator+**](#function-operator_7) ([**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) mat) <br> |
 |  void | [**operator+=**](#function-operator_8) (const [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & right) <br> |
-|  [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**operator-**](#function-operator_9) ([**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) mat) <br> |
-|  [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**operator/**](#function-operator_10) ([**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) mat) <br> |
-|  const SR\_MATH\_NS::FVector4 & | [**operator[]**](#function-operator_11) (int32\_t row) const<br> |
-|  SR\_MATH\_NS::FVector4 & | [**operator[]**](#function-operator_12) (int32\_t row) <br> |
+|  [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**operator-**](#function-operator-) ([**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) mat) <br> |
+|  [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**operator/**](#function-operator_9) ([**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) mat) <br> |
+|  const SR\_MATH\_NS::FVector4 & | [**operator[]**](#function-operator_10) (int32\_t row) const<br> |
+|  SR\_MATH\_NS::FVector4 & | [**operator[]**](#function-operator_11) (int32\_t row) <br> |
 
 
 ## Public Static Functions
 
 | Type | Name |
 | ---: | :--- |
+|  [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**CreateOrthographicOffCenter**](#function-createorthographicoffcenter) (Unit left, Unit right, Unit bottom, Unit top, Unit zNear, Unit zFar) <br> |
 |  [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**CreateTRS**](#function-createtrs) (const SR\_MATH\_NS::FVector3 & translation, const [**SR\_MATH\_NS::Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & rotation, const SR\_MATH\_NS::FVector3 & scale) <br> |
 |  [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**CreateViewMat**](#function-createviewmat) (Unit pitch=0, Unit yaw=0, Unit roll=0) <br> |
 |  [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**FromEulers**](#function-fromeulers) (const [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & eulers) <br> |
@@ -428,6 +433,19 @@ float_t SR_MATH_NS::Matrix4x4::m33;
 
 
 
+### variable mm 
+
+```C++
+float_t SR_MATH_NS::Matrix4x4::mm[16];
+```
+
+
+
+
+<hr>
+
+
+
 ### variable position 
 
 ```C++
@@ -585,6 +603,19 @@ bool SR_MATH_NS::Matrix4x4::Decompose (
     FVector3 & scale,
     FVector3 & skew
 ) const
+```
+
+
+
+
+<hr>
+
+
+
+### function Forward 
+
+```C++
+SR_NODISCARD FVector3 SR_MATH_NS::Matrix4x4::Forward () const
 ```
 
 
@@ -877,6 +908,19 @@ SR_NODISCARD Matrix4x4 SR_MATH_NS::Matrix4x4::OrthogonalNormalize () const
 
 
 
+### function Right 
+
+```C++
+SR_NODISCARD FVector3 SR_MATH_NS::Matrix4x4::Right () const
+```
+
+
+
+
+<hr>
+
+
+
 ### function Rotate [1/2]
 
 ```C++
@@ -1002,6 +1046,19 @@ SR_NODISCARD FVector4 SR_MATH_NS::Matrix4x4::TransformVector (
 SR_NODISCARD Matrix4x4 SR_MATH_NS::Matrix4x4::Translate (
     const FVector3 & vec3
 ) const
+```
+
+
+
+
+<hr>
+
+
+
+### function Up 
+
+```C++
+SR_NODISCARD FVector3 SR_MATH_NS::Matrix4x4::Up () const
 ```
 
 
@@ -1207,6 +1264,26 @@ SR_MATH_NS::FVector4 & SR_MATH_NS::Matrix4x4::operator[] (
 <hr>
 ## Public Static Functions Documentation
 
+
+
+
+### function CreateOrthographicOffCenter 
+
+```C++
+static Matrix4x4 SR_MATH_NS::Matrix4x4::CreateOrthographicOffCenter (
+    Unit left,
+    Unit right,
+    Unit bottom,
+    Unit top,
+    Unit zNear,
+    Unit zFar
+) 
+```
+
+
+
+
+<hr>
 
 
 

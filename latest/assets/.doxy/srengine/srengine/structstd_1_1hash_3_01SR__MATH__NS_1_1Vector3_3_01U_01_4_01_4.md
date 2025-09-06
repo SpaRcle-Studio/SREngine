@@ -53,7 +53,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  size\_t | [**operator()**](#function-operator()) ([**SR\_MATH\_NS::Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; const & vec) const<br> |
+|  size\_t | [**operator()**](#function-operator) ([**SR\_MATH\_NS::Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; const & vec) const<br> |
 
 
 

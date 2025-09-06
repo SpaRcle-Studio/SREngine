@@ -3,12 +3,10 @@
   <compounddef id="classSR__GRAPH__NS_1_1MeshDrawerPass" kind="class" language="C++" prot="public">
     <compoundname>SR_GRAPH_NS::MeshDrawerPass</compoundname>
     <basecompoundref refid="classSR__GRAPH__NS_1_1BasePass" prot="public" virt="non-virtual">SR_GRAPH_NS::BasePass</basecompoundref>
-    <basecompoundref refid="classSR__GRAPH__NS_1_1ISamplersPass" prot="public" virt="non-virtual">SR_GRAPH_NS::ISamplersPass</basecompoundref>
     <basecompoundref refid="classSR__GRAPH__NS_1_1LayerFilterPredicate" prot="public" virt="non-virtual">SR_GRAPH_NS::LayerFilterPredicate</basecompoundref>
-    <basecompoundref refid="classSR__GRAPH__NS_1_1ShaderReplacePredicate" prot="public" virt="non-virtual">SR_GRAPH_NS::ShaderReplacePredicate</basecompoundref>
     <basecompoundref refid="classSR__GRAPH__NS_1_1PriorityFilterPredicate" prot="public" virt="non-virtual">SR_GRAPH_NS::PriorityFilterPredicate</basecompoundref>
-    <derivedcompoundref refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass" prot="public" virt="non-virtual">SR_GRAPH_NS::OffScreenMeshDrawerPass</derivedcompoundref>
-    <innerclass refid="structSR__GRAPH__NS_1_1MeshDrawerPass_1_1Sampler" prot="private">SR_GRAPH_NS::MeshDrawerPass::Sampler</innerclass>
+    <derivedcompoundref refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass" prot="public" virt="non-virtual">SR_GRAPH_NS::CascadedShadowMapPass</derivedcompoundref>
+    <derivedcompoundref refid="classSR__GRAPH__NS_1_1ColorBufferPass" prot="public" virt="non-virtual">SR_GRAPH_NS::ColorBufferPass</derivedcompoundref>
     <sectiondef kind="private-type">
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a29620deb813314f8ceb9ffceaffbcbc8" prot="private" static="no">
         <type><ref refid="classSR__GRAPH__NS_1_1BasePass" kindref="compound">BasePass</ref></type>
@@ -22,21 +20,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="22" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="22" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a45e9e1de4f4c47ea89d84aa7d9eeab61" prot="private" static="no">
-        <type>std::vector&lt; Sampler &gt;</type>
-        <definition>using SR_GRAPH_NS::MeshDrawerPass::Samplers =  std::vector&lt;Sampler&gt;</definition>
-        <argsstring></argsstring>
-        <name>Samplers</name>
-        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::Samplers</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="31" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="31" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="54" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="54" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -52,40 +36,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="33" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="56" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="56" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1aea1884b32c6ee339b57443cbe328a648" prot="private" static="no" mutable="no">
-        <type>bool</type>
-        <definition>bool SR_GRAPH_NS::MeshDrawerPass::m_useMaterials</definition>
-        <argsstring></argsstring>
-        <name>m_useMaterials</name>
-        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::m_useMaterials</qualifiedname>
-        <initializer>= true</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="76" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="76" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1aae3e435654d747272ff59dfce9796e2b" prot="private" static="no" mutable="no">
-        <type>bool</type>
-        <definition>bool SR_GRAPH_NS::MeshDrawerPass::m_passWasRendered</definition>
-        <argsstring></argsstring>
-        <name>m_passWasRendered</name>
-        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::m_passWasRendered</qualifiedname>
-        <initializer>= false</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="77" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="77" bodyend="-1"/>
-      </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1aba3d28907e7faad8896c4f3536f9d6e2" prot="private" static="no" mutable="no">
         <type>std::vector&lt; RenderQueuePtr &gt;</type>
         <definition>std::vector&lt;RenderQueuePtr&gt; SR_GRAPH_NS::MeshDrawerPass::m_renderQueues</definition>
@@ -98,37 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="79" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="79" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1ab708ad27f74b6b3f05ace5e944042f84" prot="private" static="no" mutable="no">
-        <type><ref refid="classSR__GRAPH__NS_1_1ShadowMapPass" kindref="compound">ShadowMapPass</ref> *</type>
-        <definition>ShadowMapPass* SR_GRAPH_NS::MeshDrawerPass::m_shadowMapPass</definition>
-        <argsstring></argsstring>
-        <name>m_shadowMapPass</name>
-        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::m_shadowMapPass</qualifiedname>
-        <initializer>= nullptr</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="81" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="81" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1ad19ab119d3b1fd7b8d61e6b1e535b154" prot="private" static="no" mutable="no">
-        <type><ref refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass" kindref="compound">CascadedShadowMapPass</ref> *</type>
-        <definition>CascadedShadowMapPass* SR_GRAPH_NS::MeshDrawerPass::m_cascadedShadowMapPass</definition>
-        <argsstring></argsstring>
-        <name>m_cascadedShadowMapPass</name>
-        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::m_cascadedShadowMapPass</qualifiedname>
-        <initializer>= nullptr</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="82" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="82" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="96" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="96" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7509203f3700de63d4fa28720bd5c5c8" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Time" kindref="compound">SR_HTYPES_NS::Time</ref> &amp;</type>
@@ -142,49 +66,36 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="84" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="84" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="97" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="97" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1acc19d85d93d0b0e500984e0eff684e2b" prot="private" static="no" mutable="no">
-        <type>std::vector&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt;</type>
-        <definition>std::vector&lt;SR_UTILS_NS::StringAtom&gt; SR_GRAPH_NS::MeshDrawerPass::m_materialVariants</definition>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1abacb6a83c6d176a78433d3b0e5989fcf" prot="private" static="no" mutable="no">
+        <type><ref refid="structSR__SRSL__NS_1_1ShaderMacrosParams" kindref="compound">SR_SRSL_NS::ShaderMacrosParams</ref></type>
+        <definition>SR_SRSL_NS::ShaderMacrosParams SR_GRAPH_NS::MeshDrawerPass::m_shaderMacros</definition>
         <argsstring></argsstring>
-        <name>m_materialVariants</name>
-        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::m_materialVariants</qualifiedname>
+        <name>m_shaderMacros</name>
+        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::m_shaderMacros</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="86" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="86" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="98" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="98" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a67b29b7383a6d7111bc2dcf490c4450b" prot="private" static="no" mutable="no">
-        <type>ska::flat_hash_map&lt; ShaderPtr, <ref refid="structSR__GRAPH__NS_1_1ShaderUseInfo" kindref="compound">ShaderUseInfo</ref> &gt;</type>
-        <definition>ska::flat_hash_map&lt;ShaderPtr, ShaderUseInfo&gt; SR_GRAPH_NS::MeshDrawerPass::m_shaderReplacements</definition>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1ae5e3a20c2c773aeb1308a188cbced5b2" prot="private" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t SR_GRAPH_NS::MeshDrawerPass::m_renderLayers</definition>
         <argsstring></argsstring>
-        <name>m_shaderReplacements</name>
-        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::m_shaderReplacements</qualifiedname>
+        <name>m_renderLayers</name>
+        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::m_renderLayers</qualifiedname>
+        <initializer>= 1</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="87" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="87" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a91a969daff90f8134c25b710cd2ed664" prot="private" static="no" mutable="no">
-        <type>ska::flat_hash_map&lt; SR_SRSL_NS::ShaderType, <ref refid="structSR__GRAPH__NS_1_1ShaderUseInfo" kindref="compound">ShaderUseInfo</ref> &gt;</type>
-        <definition>ska::flat_hash_map&lt;SR_SRSL_NS::ShaderType, ShaderUseInfo&gt; SR_GRAPH_NS::MeshDrawerPass::m_shaderTypeReplacements</definition>
-        <argsstring></argsstring>
-        <name>m_shaderTypeReplacements</name>
-        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::m_shaderTypeReplacements</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="88" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="88" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="101" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="101" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a756bdb0dd83fc86f9095e3fd94355a57" prot="private" static="no" mutable="no">
         <type>std::set&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt;</type>
@@ -198,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="89" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="89" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="103" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="103" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a4b1d660b6f84b674d24c82a909edbaf7" prot="private" static="no" mutable="no">
         <type>std::set&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt;</type>
@@ -212,7 +123,49 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="90" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="90" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="105" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1aa9da8ff459e2f19f27f3720c5ce700b0" prot="private" static="no" mutable="no">
+        <type>std::set&lt; std::string &gt;</type>
+        <definition>std::set&lt;std::string&gt; SR_GRAPH_NS::MeshDrawerPass::m_shaderDefines</definition>
+        <argsstring></argsstring>
+        <name>m_shaderDefines</name>
+        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::m_shaderDefines</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="107" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a093a7b7a6ceda9c59273e5a1370e0a22" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__GRAPH__NS_1_1SamplersPassData" kindref="compound">SamplersPassData</ref></type>
+        <definition>SamplersPassData SR_GRAPH_NS::MeshDrawerPass::m_samplers</definition>
+        <argsstring></argsstring>
+        <name>m_samplers</name>
+        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::m_samplers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="109" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a97cb768e3b6c582113b7320dd10e0589" prot="private" static="no" mutable="no">
+        <type><ref refid="structSR__GRAPH__NS_1_1MeshDrawerUniforms" kindref="compound">MeshDrawerUniforms</ref></type>
+        <definition>MeshDrawerUniforms SR_GRAPH_NS::MeshDrawerPass::m_uniforms</definition>
+        <argsstring></argsstring>
+        <name>m_uniforms</name>
+        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::m_uniforms</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="111" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="111" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -228,7 +181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="36" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="59" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a55de8160e5bfe0a4b074ed801001ac79" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -242,27 +195,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="37" column="9"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1ac3d3bb5e3b2deea3eb91486959e159db" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
-        <type>bool</type>
-        <definition>bool SR_GRAPH_NS::MeshDrawerPass::Load</definition>
-        <argsstring>(const SR_XML_NS::Node &amp;passNode) override</argsstring>
-        <name>Load</name>
-        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::Load</qualifiedname>
-        <reimplements refid="classSR__GRAPH__NS_1_1BasePass_1a67cc496e8171dbe8d13c04ae017e4b53">Load</reimplements>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1a6c23fc051c3a4f4fea219162e0052b93">Load</reimplementedby>
-        <param>
-          <type>const SR_XML_NS::Node &amp;</type>
-          <declname>passNode</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="39" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="60" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a578fc888ccea11924e1df5c9e776043b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -271,14 +204,13 @@
         <name>Init</name>
         <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::Init</qualifiedname>
         <reimplements refid="classSR__GRAPH__NS_1_1BasePass_1adf095a26c19b7dee693badc807e3fe4c">Init</reimplements>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1a660d8bc99d6b36b662e68730ca4c81ed">Init</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="41" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="62" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a567caf35c79947385ee0fa54da27e052" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -293,7 +225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="42" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="63" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a3c35b40b7095392be6ae0fe7bd4edf05" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -309,7 +241,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="43" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="64" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1ac08d09bf73b19357108b84e6ba07f6fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -318,7 +250,6 @@
         <name>Render</name>
         <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::Render</qualifiedname>
         <reimplements refid="classSR__GRAPH__NS_1_1BasePass_1a9e71538e4ebaad5232ed9e6eb0292694">Render</reimplements>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1a33fefe9ddd8bac7c20397308bd4c4261">Render</reimplementedby>
         <briefdescription>
 <para>Вызывается только во время построения </para>
         </briefdescription>
@@ -326,7 +257,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="44" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="65" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a37ab910895bbd048cc7b8338b30586d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -335,7 +266,6 @@
         <name>Update</name>
         <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::Update</qualifiedname>
         <reimplements refid="classSR__GRAPH__NS_1_1BasePass_1a2f66471c7a16bd5c4400436288144acc">Update</reimplements>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1a39032468632681f25ca46f0693308a7a">Update</reimplementedby>
         <briefdescription>
 <para>Вызывается постоянно после построения </para>
         </briefdescription>
@@ -343,7 +273,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="45" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="66" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a1d42014b074fbe80087d175bd569168d" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -358,7 +288,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="47" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="47" bodyend="47"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="68" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="68" bodyend="68"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a6005e3b582569eea6cc429174680a804" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -373,7 +303,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="48" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="48" bodyend="48"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="69" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="69" bodyend="69"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1acd800aa604b025a18a45d3fd282451c5" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -387,49 +317,38 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="49" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="49" bodyend="49"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="70" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="70" bodyend="70"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1abe4bb718a5e30d93cd199e0fc1c0d0d7" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
-        <type>SR_NODISCARD bool</type>
-        <definition>virtual SR_NODISCARD bool SR_GRAPH_NS::MeshDrawerPass::IsNeedUseMaterials</definition>
-        <argsstring>() const noexcept</argsstring>
-        <name>IsNeedUseMaterials</name>
-        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::IsNeedUseMaterials</qualifiedname>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1ColorBufferPass_1aca8f7594e4f439183b818c77c6a2d345">IsNeedUseMaterials</reimplementedby>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1aeb792b76365dc9be8ea0675b7ec36b83" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::MeshDrawerPass::SetRenderTechnique</definition>
+        <argsstring>(SR_GRAPH_NS::IRenderTechnique *pRenderTechnique) override</argsstring>
+        <name>SetRenderTechnique</name>
+        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::SetRenderTechnique</qualifiedname>
+        <reimplements refid="classSR__GRAPH__NS_1_1BasePass_1af58022a7df1f3d5b8343647ab9ad78f8">SetRenderTechnique</reimplements>
+        <param>
+          <type><ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">SR_GRAPH_NS::IRenderTechnique</ref> *</type>
+          <declname>pRenderTechnique</declname>
+        </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="50" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="50" bodyend="50"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="72" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1ac37d90adab861b1ec5409a041439646f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
-        <type>SR_NODISCARD uint8_t</type>
-        <definition>virtual SR_NODISCARD uint8_t SR_GRAPH_NS::MeshDrawerPass::GetMeshDrawerFBOLayers</definition>
-        <argsstring>() const noexcept</argsstring>
-        <name>GetMeshDrawerFBOLayers</name>
-        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::GetMeshDrawerFBOLayers</qualifiedname>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1a04760d339cf709f94df212049e62314e">GetMeshDrawerFBOLayers</reimplementedby>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="51" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="51" bodyend="51"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1aac128abd22d7fbbc06e6cf838d1af5e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a2bed7196e5b48532862579df7e2e0c5f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
         <definition>virtual void SR_GRAPH_NS::MeshDrawerPass::UseUniforms</definition>
-        <argsstring>(ShaderUseInfo info, MeshPtr pMesh)</argsstring>
+        <argsstring>(SR_GTYPES_NS::Shader *pShader, MeshPtr pMesh)</argsstring>
         <name>UseUniforms</name>
         <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::UseUniforms</qualifiedname>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a6b7b3dfb130a65c03cf8f36d8a4dc666">UseUniforms</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1ColorBufferPass_1a5528ec20da3e60f71ec4c0244ba771a2">UseUniforms</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1ab064006a3efde27efe72f023051b5698">UseUniforms</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1ColorBufferPass_1accfe31edc8e8f92c9423b4f5afa200ff">UseUniforms</reimplementedby>
         <param>
-          <type><ref refid="structSR__GRAPH__NS_1_1ShaderUseInfo" kindref="compound">ShaderUseInfo</ref></type>
-          <declname>info</declname>
+          <type><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> *</type>
+          <declname>pShader</declname>
         </param>
         <param>
           <type>MeshPtr</type>
@@ -441,56 +360,18 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="53" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="74" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1ae283efc1a5ec3cf1ebc856230078b21f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7c71d4d77dffc063b164f9dd43f3851a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
         <definition>virtual void SR_GRAPH_NS::MeshDrawerPass::UseSharedUniforms</definition>
-        <argsstring>(ShaderUseInfo info)</argsstring>
+        <argsstring>(SR_GTYPES_NS::Shader *pShader)</argsstring>
         <name>UseSharedUniforms</name>
         <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::UseSharedUniforms</qualifiedname>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a0912cb535115952924c5a03d8f81346b">UseSharedUniforms</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a90d0276863e394540a4053b0763a4d42">UseSharedUniforms</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1ColorBufferPass_1ab18513918e9679e81ef9ab7aa7a209c3">UseSharedUniforms</reimplementedby>
         <param>
-          <type><ref refid="structSR__GRAPH__NS_1_1ShaderUseInfo" kindref="compound">ShaderUseInfo</ref></type>
-          <declname>info</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="54" column="22"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a05db44070f810ec8ae1c5c6ed34f1276" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
-        <type>void</type>
-        <definition>virtual void SR_GRAPH_NS::MeshDrawerPass::UseConstants</definition>
-        <argsstring>(ShaderUseInfo info)</argsstring>
-        <name>UseConstants</name>
-        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::UseConstants</qualifiedname>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1ad0228bd7d72ea4351a55160da259448b">UseConstants</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1ColorBufferPass_1ab550fd2e244fe6dd72c6c7749634fcb3">UseConstants</reimplementedby>
-        <param>
-          <type><ref refid="structSR__GRAPH__NS_1_1ShaderUseInfo" kindref="compound">ShaderUseInfo</ref></type>
-          <declname>info</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="55" column="22"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a1f1efedcc65733c7078b6634b690bc17" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
-        <type>SR_NODISCARD <ref refid="structSR__GRAPH__NS_1_1ShaderUseInfo" kindref="compound">ShaderUseInfo</ref></type>
-        <definition>SR_NODISCARD ShaderUseInfo SR_GRAPH_NS::MeshDrawerPass::ReplaceShader</definition>
-        <argsstring>(const SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Shader &gt; &amp;pShader) const override</argsstring>
-        <name>ReplaceShader</name>
-        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::ReplaceShader</qualifiedname>
-        <reimplements refid="classSR__GRAPH__NS_1_1ShaderReplacePredicate_1a66221802b70beaf92fe36665a1101916">ReplaceShader</reimplements>
-        <param>
-          <type>const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> &gt; &amp;</type>
+          <type><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> *</type>
           <declname>pShader</declname>
         </param>
         <briefdescription>
@@ -499,7 +380,94 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="57" column="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="75" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a77aca67fb7c534f6cc89e5b794cfac6a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_GRAPH_NS::MeshDrawerPass::UseConstants</definition>
+        <argsstring>(SR_GTYPES_NS::Shader *pShader)</argsstring>
+        <name>UseConstants</name>
+        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::UseConstants</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1afc5ae2b0beb3b53003b1a5fcec19a047">UseConstants</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1ColorBufferPass_1a1921402f29fb3ca18f799ceb87b35ab4">UseConstants</reimplementedby>
+        <param>
+          <type><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> *</type>
+          <declname>pShader</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="76" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1acf61ab11ac383cf0a129b40ee5652361" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::MeshDrawerPass::UseSamplers</definition>
+        <argsstring>(SR_GTYPES_NS::Shader *pShader) override</argsstring>
+        <name>UseSamplers</name>
+        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::UseSamplers</qualifiedname>
+        <reimplements refid="classSR__GRAPH__NS_1_1BasePass_1a5a009986d09b0e8199c4d40f2eeac6f0">UseSamplers</reimplements>
+        <param>
+          <type><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> *</type>
+          <declname>pShader</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="77" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7c96addbaeb09463d01b26922206431a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_GRAPH_NS::MeshDrawerPass::OnUniformsUpdated</definition>
+        <argsstring>()</argsstring>
+        <name>OnUniformsUpdated</name>
+        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::OnUniformsUpdated</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="79" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="79" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a2c8facd7b70961d91c011f337c8902f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::MeshDrawerPass::OnMultisampleChanged</definition>
+        <argsstring>() override</argsstring>
+        <name>OnMultisampleChanged</name>
+        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::OnMultisampleChanged</qualifiedname>
+        <reimplements refid="classSR__GRAPH__NS_1_1BasePass_1a974885aecc09a1bc200f87a1fbe39b3c">OnMultisampleChanged</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="81" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1aa6fc3fe2752cc600fe681a62a22d4b50" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::MeshDrawerPass::OnResize</definition>
+        <argsstring>(const SR_MATH_NS::UVector2 &amp;size) override</argsstring>
+        <name>OnResize</name>
+        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::OnResize</qualifiedname>
+        <reimplements refid="classSR__GRAPH__NS_1_1BasePass_1aaa28b5cf025e8dd935f30dda21f73c5a">OnResize</reimplements>
+        <param>
+          <type>const SR_MATH_NS::UVector2 &amp;</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="82" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7ead50f17c9c553c5d3f3d62666cfc2a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -518,7 +486,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="58" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="84" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1ac7af32693acf9a88fce3ad540f677f28" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -537,7 +505,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="59" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="59" bodyend="59"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="85" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="85" bodyend="85"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a0a5f8a97c3dbf872cf04c0c81ca58a0e" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const std::vector&lt; RenderQueuePtr &gt; &amp;</type>
@@ -551,79 +519,38 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="61" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="61" bodyend="61"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="87" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="87" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a8fefadac835647287da31ca5f3165152" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="structSR__SRSL__NS_1_1ShaderMacrosParams" kindref="compound">SR_SRSL_NS::ShaderMacrosParams</ref> &amp;</type>
+        <definition>SR_NODISCARD const SR_SRSL_NS::ShaderMacrosParams &amp; SR_GRAPH_NS::MeshDrawerPass::GetShaderMacros</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetShaderMacros</name>
+        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::GetShaderMacros</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="88" column="59" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="88" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a484f04d4928e53af33e948b1e542d3cf" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD uint8_t</type>
+        <definition>SR_NODISCARD uint8_t SR_GRAPH_NS::MeshDrawerPass::GetLayersCount</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetLayersCount</name>
+        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::GetLayersCount</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="89" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="89" bodyend="89"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1aa6fc3fe2752cc600fe681a62a22d4b50" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
-        <type>void</type>
-        <definition>void SR_GRAPH_NS::MeshDrawerPass::OnResize</definition>
-        <argsstring>(const SR_MATH_NS::UVector2 &amp;size) override</argsstring>
-        <name>OnResize</name>
-        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::OnResize</qualifiedname>
-        <reimplements refid="classSR__GRAPH__NS_1_1BasePass_1aaa28b5cf025e8dd935f30dda21f73c5a">OnResize</reimplements>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1a4cecff17587b90edebb89381333c25d9">OnResize</reimplementedby>
-        <param>
-          <type>const SR_MATH_NS::UVector2 &amp;</type>
-          <declname>size</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="64" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a2c8facd7b70961d91c011f337c8902f0" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
-        <type>void</type>
-        <definition>void SR_GRAPH_NS::MeshDrawerPass::OnMultisampleChanged</definition>
-        <argsstring>() override</argsstring>
-        <name>OnMultisampleChanged</name>
-        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::OnMultisampleChanged</qualifiedname>
-        <reimplements refid="classSR__GRAPH__NS_1_1BasePass_1a974885aecc09a1bc200f87a1fbe39b3c">OnMultisampleChanged</reimplements>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="65" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7ff01caedf031547f8416149deae336e" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
-        <type>void</type>
-        <definition>void SR_GRAPH_NS::MeshDrawerPass::OnSamplersChanged</definition>
-        <argsstring>() override</argsstring>
-        <name>OnSamplersChanged</name>
-        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::OnSamplersChanged</qualifiedname>
-        <reimplements refid="classSR__GRAPH__NS_1_1ISamplersPass_1a67a1a0029c412a3f157b9f99995ec938">OnSamplersChanged</reimplements>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="66" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1ad107004af861726eb3616e82c1ff6f6b" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
-        <type>void</type>
-        <definition>void SR_GRAPH_NS::MeshDrawerPass::SetRenderTechnique</definition>
-        <argsstring>(IRenderTechnique *pRenderTechnique) override</argsstring>
-        <name>SetRenderTechnique</name>
-        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::SetRenderTechnique</qualifiedname>
-        <reimplements refid="classSR__GRAPH__NS_1_1BasePass_1af58022a7df1f3d5b8343647ab9ad78f8">SetRenderTechnique</reimplements>
-        <param>
-          <type><ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">IRenderTechnique</ref> *</type>
-          <declname>pRenderTechnique</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="67" column="14"/>
-      </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a4435db91121eee036621f931696007f9" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1RenderStrategy" kindref="compound">RenderStrategy</ref> *</type>
         <definition>SR_NODISCARD RenderStrategy * SR_GRAPH_NS::MeshDrawerPass::GetRenderStrategy</definition>
@@ -636,7 +563,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="69" column="37"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="92" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1adaaa38e13468791bcb6c645092d08a73" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD RenderQueuePtr</type>
@@ -651,23 +578,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="70" column="45"/>
-      </memberdef>
-    </sectiondef>
-    <sectiondef kind="private-func">
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a862d4f6e1da0e3cc73abe359af521218" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_GRAPH_NS::MeshDrawerPass::ClearOverrideShaders</definition>
-        <argsstring>()</argsstring>
-        <name>ClearOverrideShaders</name>
-        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::ClearOverrideShaders</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="73" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="93" column="45"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -680,26 +591,22 @@
         <link refid="classSR__GRAPH__NS_1_1BasePass"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
-        <childnode refid="6" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="14">
-        <label>SR_GRAPH_NS::CascadedShadowMapPass</label>
-        <link refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass"/>
-        <childnode refid="13" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="16">
-        <label>SR_GRAPH_NS::ColorBufferPass</label>
-        <link refid="classSR__GRAPH__NS_1_1ColorBufferPass"/>
-        <childnode refid="13" relation="public-inheritance">
+        <childnode refid="5" relation="public-inheritance">
         </childnode>
       </node>
       <node id="9">
-        <label>SR_GRAPH_NS::ISamplersPass</label>
-        <link refid="classSR__GRAPH__NS_1_1ISamplersPass"/>
+        <label>SR_GRAPH_NS::CascadedShadowMapPass</label>
+        <link refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
       </node>
-      <node id="10">
+      <node id="11">
+        <label>SR_GRAPH_NS::ColorBufferPass</label>
+        <link refid="classSR__GRAPH__NS_1_1ColorBufferPass"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
         <label>SR_GRAPH_NS::LayerFilterPredicate</label>
         <link refid="classSR__GRAPH__NS_1_1LayerFilterPredicate"/>
       </node>
@@ -708,107 +615,71 @@
         <link refid="classSR__GRAPH__NS_1_1MeshDrawerPass"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="9" relation="public-inheritance">
-        </childnode>
-        <childnode refid="10" relation="public-inheritance">
-        </childnode>
-        <childnode refid="11" relation="public-inheritance">
-        </childnode>
-        <childnode refid="12" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="13">
-        <label>SR_GRAPH_NS::OffScreenMeshDrawerPass</label>
-        <link refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="12">
-        <label>SR_GRAPH_NS::PriorityFilterPredicate</label>
-        <link refid="classSR__GRAPH__NS_1_1PriorityFilterPredicate"/>
-      </node>
-      <node id="11">
-        <label>SR_GRAPH_NS::ShaderReplacePredicate</label>
-        <link refid="classSR__GRAPH__NS_1_1ShaderReplacePredicate"/>
-      </node>
-      <node id="15">
-        <label>SR_GRAPH_NS::VarianceShadowMapPass</label>
-        <link refid="classSR__GRAPH__NS_1_1VarianceShadowMapPass"/>
-        <childnode refid="14" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
-        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="5" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="5">
-        <label>SR_HTYPES_NS::SharedPtrBase</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
-      </node>
-      <node id="6">
-        <label>SR_SRLM_NS::IExecutableNode</label>
-        <link refid="classSR__SRLM__NS_1_1IExecutableNode"/>
         <childnode refid="7" relation="public-inheritance">
         </childnode>
-      </node>
-      <node id="7">
-        <label>SR_SRLM_NS::LogicalNode</label>
-        <link refid="classSR__SRLM__NS_1_1LogicalNode"/>
         <childnode refid="8" relation="public-inheritance">
         </childnode>
       </node>
       <node id="8">
-        <label>SR_UTILS_NS::NonCopyable</label>
-        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+        <label>SR_GRAPH_NS::PriorityFilterPredicate</label>
+        <link refid="classSR__GRAPH__NS_1_1PriorityFilterPredicate"/>
+      </node>
+      <node id="10">
+        <label>SR_GRAPH_NS::VarianceShadowMapPass</label>
+        <link refid="classSR__GRAPH__NS_1_1VarianceShadowMapPass"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
       </node>
       <node id="3">
-        <label>SR_UTILS_NS::ResourceContainer</label>
-        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+      </node>
+      <node id="6">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="6" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="18">
-        <label>Entity</label>
-      </node>
       <node id="2">
         <label>SR_GRAPH_NS::BasePass</label>
         <link refid="classSR__GRAPH__NS_1_1BasePass"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
-        <childnode refid="7" relation="public-inheritance">
+        <childnode refid="6" relation="public-inheritance">
         </childnode>
-        <childnode refid="16" relation="usage">
-          <edgelabel>m_camera</edgelabel>
-        </childnode>
-        <childnode refid="21" relation="usage">
+        <childnode refid="8" relation="usage">
           <edgelabel>m_uboManager</edgelabel>
         </childnode>
-        <childnode refid="24" relation="usage">
+        <childnode refid="12" relation="usage">
           <edgelabel>m_descriptorManager</edgelabel>
         </childnode>
       </node>
-      <node id="24">
+      <node id="12">
         <label>SR_GRAPH_NS::DescriptorManager</label>
         <link refid="classSR__GRAPH__NS_1_1DescriptorManager"/>
-        <childnode refid="25" relation="public-inheritance">
+        <childnode refid="13" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="26">
-        <label>SR_GRAPH_NS::ISamplersPass</label>
-        <link refid="classSR__GRAPH__NS_1_1ISamplersPass"/>
-      </node>
-      <node id="27">
+      <node id="14">
         <label>SR_GRAPH_NS::LayerFilterPredicate</label>
         <link refid="classSR__GRAPH__NS_1_1LayerFilterPredicate"/>
       </node>
-      <node id="21">
+      <node id="8">
         <label>SR_GRAPH_NS::Memory::UBOManager</label>
         <link refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager"/>
-        <childnode refid="22" relation="public-inheritance">
+        <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
       <node id="1">
@@ -816,311 +687,173 @@
         <link refid="classSR__GRAPH__NS_1_1MeshDrawerPass"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="26" relation="public-inheritance">
-        </childnode>
-        <childnode refid="27" relation="public-inheritance">
-        </childnode>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-        <childnode refid="29" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="29">
-        <label>SR_GRAPH_NS::PriorityFilterPredicate</label>
-        <link refid="classSR__GRAPH__NS_1_1PriorityFilterPredicate"/>
-      </node>
-      <node id="28">
-        <label>SR_GRAPH_NS::ShaderReplacePredicate</label>
-        <link refid="classSR__GRAPH__NS_1_1ShaderReplacePredicate"/>
-      </node>
-      <node id="16">
-        <label>SR_GTYPES_NS::Camera</label>
-        <link refid="classSR__GTYPES__NS_1_1Camera"/>
-        <childnode refid="17" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
-        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="5" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="5">
-        <label>SR_HTYPES_NS::SharedPtrBase</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
-        <childnode refid="6" relation="usage">
-          <edgelabel>m_data</edgelabel>
-        </childnode>
-      </node>
-      <node id="6">
-        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
-        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
-      </node>
-      <node id="7">
-        <label>SR_SRLM_NS::IExecutableNode</label>
-        <link refid="classSR__SRLM__NS_1_1IExecutableNode"/>
-        <childnode refid="8" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="10">
-        <label>SR_SRLM_NS::LogicalMachine</label>
-        <link refid="classSR__SRLM__NS_1_1LogicalMachine"/>
-        <childnode refid="11" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="8">
-        <label>SR_SRLM_NS::LogicalNode</label>
-        <link refid="classSR__SRLM__NS_1_1LogicalNode"/>
-        <childnode refid="9" relation="public-inheritance">
-        </childnode>
-        <childnode refid="10" relation="usage">
-          <edgelabel>m_machine</edgelabel>
-        </childnode>
-      </node>
-      <node id="17">
-        <label>SR_UTILS_NS::Component</label>
-        <link refid="classSR__UTILS__NS_1_1Component"/>
-        <childnode refid="18" relation="public-inheritance">
-        </childnode>
-        <childnode refid="19" relation="usage">
-          <edgelabel>m_parent</edgelabel>
-        </childnode>
-        <childnode refid="20" relation="usage">
-          <edgelabel>m_scene</edgelabel>
-        </childnode>
-      </node>
-      <node id="19">
-        <label>SR_UTILS_NS::IComponentable</label>
-        <link refid="classSR__UTILS__NS_1_1IComponentable"/>
-        <childnode refid="18" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="11">
-        <label>SR_UTILS_NS::IResource</label>
-        <link refid="classSR__UTILS__NS_1_1IResource"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-        <childnode refid="12" relation="public-inheritance">
-        </childnode>
-        <childnode refid="13" relation="public-inheritance">
-        </childnode>
-        <childnode refid="15" relation="usage">
-          <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
-          <edgelabel>RELOAD_DONE_EVENT</edgelabel>
-        </childnode>
-      </node>
-      <node id="9">
-        <label>SR_UTILS_NS::NonCopyable</label>
-        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
-      </node>
-      <node id="3">
-        <label>SR_UTILS_NS::ResourceContainer</label>
-        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
-        <childnode refid="4" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="14">
-        <label>SR_UTILS_NS::SRClass</label>
-        <link refid="classSR__UTILS__NS_1_1SRClass"/>
-      </node>
-      <node id="13">
-        <label>SR_UTILS_NS::Serializable</label>
-        <link refid="classSR__UTILS__NS_1_1Serializable"/>
         <childnode refid="14" relation="public-inheritance">
         </childnode>
-      </node>
-      <node id="25">
-        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="23" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="22">
-        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="23" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="23">
-        <label>SR_UTILS_NS::SingletonBase</label>
-        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
-        <childnode refid="9" relation="public-inheritance">
+        <childnode refid="15" relation="public-inheritance">
         </childnode>
       </node>
       <node id="15">
-        <label>SR_UTILS_NS::StringAtom</label>
-        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
+        <label>SR_GRAPH_NS::PriorityFilterPredicate</label>
+        <link refid="classSR__GRAPH__NS_1_1PriorityFilterPredicate"/>
       </node>
-      <node id="12">
-        <label>SR_UTILS_NS::SubscriptionHolder</label>
-        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
+      <node id="3">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
       </node>
-      <node id="20">
-        <label>SR_WORLD_NS::Scene</label>
-        <link refid="classSR__WORLD__NS_1_1Scene"/>
-        <childnode refid="19" relation="public-inheritance">
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="11">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="7">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="6">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="11" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="20" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="20" bodyend="92"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="52" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="52" bodyend="113"/>
     <listofallmembers>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1af9087ca5182397a9c7d3b92fb5591523" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>AddDependency</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>AddInputConnection</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a451d30d4d677248caa80bb7ac74baad9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>AddInputData</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac528a232f2481034bf0c9c866aadf580" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>AddOutputConnection</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a968e3caf521de3d586f0ffb6cd9c2e07" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>AddOutputData</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1adaaa38e13468791bcb6c645092d08a73" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>AllocateRenderQueue</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>AllocateStatic</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>AutoFree</name></member>
-      <member refid="classSR__SRLM__NS_1_1IExecutableNode_1a52d82db24c1ba529cf2c3fb289188eae" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>Base</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a0d095ccdf074b9c91026a4f1b7e46f91" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>BasePass</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1afffc5aa7bc9b5e340f99221abdf47be0" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>Bind</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a45ac417b161b1412c23159c307dd5fc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>CalcInput</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1acc31a125e0f4886b1afcb196b55b75ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>CameraPtr</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4b0351f30fc7afe7f45854cde8e09f64" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>ClearLogicalNode</name></member>
-      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a862d4f6e1da0e3cc73abe359af521218" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>ClearOverrideShaders</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a8ff68384102d0f025a1dd259b1d57c17" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>Context</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>CloneTo</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>DecrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a567caf35c79947385ee0fa54da27e052" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>DeInit</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>DynamicCast</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab95638d1f3f8a9b82a1dfdaa63d28d1f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>Execute</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1ae921a9d3d876f3f944a75c48c0670612" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>FindPass</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a5d6f48a0c7f5279d68247638b71a9f07" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>ForEachPass</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1aab763411e8c45d0a660255b3058bd0f5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>FrameBuffers</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>Get</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>Get</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac38d38ae8e248a1b1ad573f3e2ac7ccf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetBaseLogicalNode</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a725e3e44aa2830a8a799d71e13693a73" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetContainerParents</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a149dec24886d7c8700a1b117c469307f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetContext</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a0928ede3e5d5886b93cb7eba8d77b744" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetFrameBuffers</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a7fcb00a1223a4547e39260ce606a3630" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetInputs</name></member>
-      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1ac37d90adab861b1ec5409a041439646f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetMeshDrawerFBOLayers</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a025a93bdbb4371177a46e70a51ffa351" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetName</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a3787e340fcad5f7c498bb18b9bd32ee0" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetNodeHashName</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a3f002bccae511f95dcb0b128a838ce70" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetNodeIndex</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1aee0451ad12205e73d1daf4d5b2369515" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetNodeName</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a9a188617821a9e68cf4f07d1fb92ac1e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetOutput</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1aa14e801043f55bacd8b6ae930d1b063b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetOutputs</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a7734143f7ae123a6088320486af89283" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetBaseMetas</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a70eb32e32dc020ae82b9030505b6e4b1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetCamera</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a97a0919298e9d1d53220613bded5ba69" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetClassStaticName</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a484f04d4928e53af33e948b1e542d3cf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetLayersCount</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a16a351eac01dde110e273cfd05f1f7ed" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetMeta</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a16837ff730fb4e276450a124d70eb2e4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetMetaStatic</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a8f05935a0013471af3796065104ddd87" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetParent</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a95b0ad3eee1d6801d720bc7eab40bc6e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetPassPipeline</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a8bcb00355e5ecacfb2d2275eae0fbc87" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetPassName</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a2677310aa8207b938d07bbe130dadcf9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetPipeline</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetPtrData</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetPtrData</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetRawPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1af8bb85e7d332fde0b2573c9c705a73dc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetRenderContext</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a0a5f8a97c3dbf872cf04c0c81ca58a0e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetRenderQueues</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a2d00f38853dae5296edc23d4c7bfa75c" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetRenderScene</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1ab71fffa3ce7eb1e2b640cd6bbd7aecec" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetRenderScene</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a4435db91121eee036621f931696007f9" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetRenderStrategy</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a8fefadac835647287da31ca5f3165152" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetShaderMacros</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetSRClass</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae8e205c3d55f751a1cffabd6ae2cbafa" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetStatus</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ace5d758ae98e877e7fe6b9b311ca8976" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetTechnique</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetThis</name></member>
-      <member refid="classSR__SRLM__NS_1_1IExecutableNode_1a5e765eb12571b7a44b7f1dc9cfcf2b4e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetType</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>GetUncheckedRef</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a39f67280ae696a53716dbe19ef2461ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>HasErrors</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4b0bdf3803c8a5163c579feab8e93704" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>Hash</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a6005e3b582569eea6cc429174680a804" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>HasPostRender</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a1d42014b074fbe80087d175bd569168d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>HasPreRender</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1af5020f5a4113aab60f3feb34277ca1ea" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>HasRender</name></member>
-      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1af04073e294a30c73c7ed3581d700d58c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>HasSamplers</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1af5c00e9391fad105c30570cbda1a6285" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>HasSerializationFlags</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a63b89d1da5c027690ec57549d061677f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>HasUpdate</name></member>
-      <member refid="classSR__SRLM__NS_1_1IExecutableNode_1a72369ad750e0cbaa06007623f7a5a6aa" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>IExecutableNode</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>IncrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a578fc888ccea11924e1df5c9e776043b" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>Init</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae6934733a21e34c45488912bdac8b9a4" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>InitNode</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a46d4de6ffa829b0ac09255febc01f8c3" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>InitValues</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a7a198b9924e270e946544b410c7e4429" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>IsDirty</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae3301d2d44de7af8fc7e186f8691a854" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>IsEntryPoint</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1aa59c3079158cb09647d0499848d1e7e3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>IsActive</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a264dd4b976655f217e1386a38e0a6b6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>IsInit</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7ead50f17c9c553c5d3f3d62666cfc2a" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>IsLayerAllowed</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1aafd12c320ddcfd1850b69560ba7b3131" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>IsNeedPostRepeat</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a187877bae66f7b85f2e285d83ae2874f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>IsNeedRepeat</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1acd800aa604b025a18a45d3fd282451c5" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>IsNeedUpdate</name></member>
-      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1abe4bb718a5e30d93cd199e0fc1c0d0d7" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>IsNeedUseMaterials</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1ac7af32693acf9a88fce3ad540f677f28" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>IsPriorityAllowed</name></member>
-      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1a278818369eff66faee5881bbc747a27f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>IsSamplersDirty</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a0f333ecbc614fc619a47de757b06b048" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>IsSuccessfullyCompleted</name></member>
-      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1ac3d3bb5e3b2deea3eb91486959e159db" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>Load</name></member>
-      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1a9069d7a809b4d6a4f2bea7c0a7324cd3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>LoadSamplersPass</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a6bcd14ebcd882a6f89e531c1789f7037" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>LoadXml</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1afbc9947b694481f8478c1a75a2fc465e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>Load</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a756bdb0dd83fc86f9095e3fd94355a57" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_allowedLayers</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_basicManually</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1ad98f4d77d135b01f81a76f9534b393c1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_camera</name></member>
-      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1ad19ab119d3b1fd7b8d61e6b1e535b154" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_cascadedShadowMapPass</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_data</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a25fe2fa123f3a2a1fee0ca8ec9e64fa2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_descriptorManager</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a4b1d660b6f84b674d24c82a909edbaf7" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_disallowedLayers</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1aaefebe7fd52cbf14db7c85bbe21b49ef" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_inputs</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a94e08d6063aad6edd1ff62430d08fd20" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_machine</name></member>
-      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1acc19d85d93d0b0e500984e0eff684e2b" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_materialVariants</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a3a2a6ff04f3fe1f0a7d3691fa9c38bad" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_nodeIndex</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1acdfab2ebb3fe8db5559f506f14207265" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_outputs</name></member>
-      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1aae3e435654d747272ff59dfce9796e2b" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_passWasRendered</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1ae5e3a20c2c773aeb1308a188cbced5b2" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_renderLayers</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1aba3d28907e7faad8896c4f3536f9d6e2" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_renderQueues</name></member>
-      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a67b29b7383a6d7111bc2dcf490c4450b" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_shaderReplacements</name></member>
-      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a91a969daff90f8134c25b710cd2ed664" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_shaderTypeReplacements</name></member>
-      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1ab708ad27f74b6b3f05ace5e944042f84" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_shadowMapPass</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a326155de44e7fe4f9a7f6f905f239e83" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_status</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a093a7b7a6ceda9c59273e5a1370e0a22" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_samplers</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1aa9da8ff459e2f19f27f3720c5ce700b0" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_shaderDefines</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1abacb6a83c6d176a78433d3b0e5989fcf" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_shaderMacros</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7509203f3700de63d4fa28720bd5c5c8" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_time</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a8b2e3a39351e9141029bea133f380465" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_uboManager</name></member>
-      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1aea1884b32c6ee339b57443cbe328a648" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_useMaterials</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a97cb768e3b6c582113b7320dd10e0589" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_uniforms</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>MakeShared</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1abeb669de15f340d47b81aff73c8494a7" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>MarkDirty</name></member>
-      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1a7e588f69a586128652fe361e13313764" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>MarkSamplersDirty</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7a70a21bb631f62e665555e71d3b97f8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>MeshDrawerPass</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1aa7c29336844c31150ba16812fc82ad7d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>MeshPtr</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>NonCopyable</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>NonCopyable</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1ad6e7d35a53f2d509bf057186f66481e6" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>OnMeshAdded</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a5f7298ff562c16372c6c233189be0d49" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>OnMeshRemoved</name></member>
-      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a2c8facd7b70961d91c011f337c8902f0" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>OnMultisampleChanged</name></member>
-      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1aa6fc3fe2752cc600fe681a62a22d4b50" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>OnResize</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a833f3da55449659aeb8df7992155dd69" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>OnResourceUpdated</name></member>
-      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7ff01caedf031547f8416149deae336e" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>OnSamplersChanged</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a2c8facd7b70961d91c011f337c8902f0" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>OnMultisampleChanged</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a27569f8d47ee0c52ed5e385253e14460" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>OnPostLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1afbe2a50f0f69bc0f52b51151058830d8" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>OnPostSave</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a2978d969c09702719b2ed5c84453b02d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>OnPreLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a8281e1a68416fd493dce2a48fa8ea660" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>OnPreSave</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1aa6fc3fe2752cc600fe681a62a22d4b50" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>OnResize</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7c96addbaeb09463d01b26922206431a" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>OnUniformsUpdated</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>operator bool</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>operator!=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>operator*</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>operator-&gt;</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>operator=</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>operator=</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>operator=</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_SRLM_NS::IExecutableNode::"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>operator=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>operator==</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1ac8b16fec8d4003ae41fd3fe294595b36" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>OriginType</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a16df7383e3420c9291cb97ec92c2d537" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>Overlay</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a9a07bf1f90447c55603ffa6b1e0bed70" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>Pins</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ac2790f23f7796eb36002c30dc817f1ba" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>PipelinePtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>PolymorphicCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a2618cec5cb8f6f4c384b88bb3878c781" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>PostRender</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ac907cd9eeb58321011db7473671aead2" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>PostUpdate</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a3c35b40b7095392be6ae0fe7bd4edf05" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>Prepare</name></member>
-      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1aba0559086ff8566ead9530dc765081cf" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>PrepareSamplers</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ad2075554ddda52bbe8c83f514951a680" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>PreRender</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a2db19e6bfa97da6d7089665a0edfc3fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>Ptr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1afed952eb55d7441a18c4d3381d315fcf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>RegisterPropertiesCodegen</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>ReinterpretCast</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac21f24c643f3298ec89225361ce96a9f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>RemoveDependency</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae81c72460b1aeba9e7a6d61cfd26ab69" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>RemoveInput</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a3dd7841012e531003e34e7b8cee39c8a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>RemoveInputConnection</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a1d32f0aa31055f7327c207e687fd159f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>RemoveOutput</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1afd6d611ab23c3ebcf79120447d4ca783" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>RemoveOutputConnection</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1ab5d15ff431f7405c8ad940333e6417a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>RemoveSerializationFlags</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1ac08d09bf73b19357108b84e6ba07f6fb" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>Render</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a91e4bb2dd09d0d5ba2927f32be42bc52" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>RenderContextPtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a9fe3f67ad907624d9277f7ade5e02826" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>RenderQueuePtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ad5832c5a9f8abf85ac97967105d3a953" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>RenderScenePtr</name></member>
-      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a1f1efedcc65733c7078b6634b690bc17" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>ReplaceShader</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>Reset</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4fe38d653d32f3462b0f932fe1db83a7" prot="public" virt="virtual" ambiguityscope="SR_SRLM_NS::IExecutableNode::"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>Reset</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac04e4fd8681f829b225da3d92de851f9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>ResetInputFlows</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ad119153e52e8ea5c69fc41d600a6f98b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>ResetOutputFlows</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a26cb3321be56bb940227895f39e39585" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>ResetStatus</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a4fb6331893e314c01da26b361197a75e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>ResourceContainer</name></member>
-      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a45e9e1de4f4c47ea89d84aa7d9eeab61" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>Samplers</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a1d2f00105677e74286e1d1c8dee82255" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>SaveXml</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a62227cc4ae3b9feee5afcca5f23bc919" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>SetContext</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1acee317aea228ef1431a3a4b37010cedb" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>SetInput</name></member>
-      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1aa0e9ab3af5eb652b1333289e32f737da" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>SetISamplerRenderTechnique</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a5b46945b1d679dbd01c1eb4587adfd8b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>SetMachine</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a1f1fe9682ea099f5ca3fbbfb6bc6a9e5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>SetName</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a915d9919621e79a3ee48ddb15799123c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>SetNodeIndex</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1ab5e34c676e9594e60de4ca2e962a0cf7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>SetParent</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>Reset</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>Save</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a06217f9edbf0e8c831a6cc411826f799" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>SetParent</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>SetPointerFromBase</name></member>
-      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1ad107004af861726eb3616e82c1ff6f6b" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>SetRenderTechnique</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1aeb792b76365dc9be8ea0675b7ec36b83" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>SetRenderTechnique</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a65e58bf20b3acc95f7e07f4cef52facb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>ShaderPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>SharedPointerType</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>SharedPtr</name></member>
@@ -1135,23 +868,20 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>TryRecursiveLockIfValid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>Unlock</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a37ab910895bbd048cc7b8338b30586d3" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>Update</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac84a44cf058fa5cb53715e250ae7157c" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>UpdateResources</name></member>
-      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a05db44070f810ec8ae1c5c6ed34f1276" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>UseConstants</name></member>
-      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1af41b07a501d2f5d98fa7d40566d9b529" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>UseSamplers</name></member>
-      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1ae283efc1a5ec3cf1ebc856230078b21f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>UseSharedUniforms</name></member>
-      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1aac128abd22d7fbbc06e6cf838d1af5e4" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>UseUniforms</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>Valid</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a77aca67fb7c534f6cc89e5b794cfac6a" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>UseConstants</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1acf61ab11ac383cf0a129b40ee5652361" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>UseSamplers</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7c71d4d77dffc063b164f9dd43f3851a" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>UseSharedUniforms</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a2bed7196e5b48532862579df7e2e0c5f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>UseUniforms</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a13c0deb13fa86f507531d102f5fd8d7a" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>UseUniformsFromAnotherPass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a783dd9e4a58072de8ff19895693bca05" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>Valid</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a5aab0756802a67de9cb45b83b3e73c70" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>VerifyAfterLoad</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a127a21b6754f470eeddf8af6f2c16cb3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>~BasePass</name></member>
-      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1a4d6ba09d9f666b194cc2a8740e07e256" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>~ISamplersPass</name></member>
       <member refid="classSR__GRAPH__NS_1_1LayerFilterPredicate_1a6b18e07119f3243cf46f63a45c08c0dd" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>~LayerFilterPredicate</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a19b262ecaf034d84c1783c24712ccf2d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>~LogicalNode</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a55de8160e5bfe0a4b074ed801001ac79" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>~MeshDrawerPass</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>~NonCopyable</name></member>
       <member refid="classSR__GRAPH__NS_1_1PriorityFilterPredicate_1a597e5df2d40b6d48c2774bdb34b516ca" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>~PriorityFilterPredicate</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a25f84a35792474f3b2e2eff6431695d3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>~ResourceContainer</name></member>
-      <member refid="classSR__GRAPH__NS_1_1ShaderReplacePredicate_1a8c27d1b6d8ad022203f55c9bcf096d7e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>~ShaderReplacePredicate</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>~SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>~SharedPtrBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1ad88a80732713966d7759d768bd65bbe5" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>~SRClass</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

@@ -58,6 +58,7 @@
 
 * **Publicity** ([**EvoScript**](namespaceEvoScript.md))
 * **PipeLine** ([**SR\_UTILS\_NS::Graph**](namespaceSR__UTILS__NS_1_1Graph.md))
+* **PropertySRClassContainsMode** ([**SR\_UTILS\_NS::Reflection**](namespaceSR__UTILS__NS_1_1Reflection.md))
 
 
 ## r

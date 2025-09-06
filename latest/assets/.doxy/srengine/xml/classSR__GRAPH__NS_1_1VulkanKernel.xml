@@ -34,6 +34,21 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanKernel_1acbd00afac3c60b153d6875ac5ecdb49b" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::VulkanKernel::m_isSwapchainSuboptimal</definition>
+        <argsstring></argsstring>
+        <name>m_isSwapchainSuboptimal</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanKernel::m_isSwapchainSuboptimal</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanKernel.h" line="59" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanKernel.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanKernel_1a69da13b9cf27caeec49c836fa014d6d7" prot="private" static="no" mutable="no">
         <type>PipelinePtr</type>
         <definition>PipelinePtr SR_GRAPH_NS::VulkanKernel::m_pipeline</definition>
@@ -46,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanKernel.h" line="53" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanKernel.h" bodystart="53" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanKernel.h" line="60" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanKernel.h" bodystart="60" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -200,6 +215,48 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanKernel_1a1b53fc9a37603bd20a7edb8935ce5356" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GRAPH_NS::VulkanKernel::SurfaceIsAvailable</definition>
+        <argsstring>() const</argsstring>
+        <name>SurfaceIsAvailable</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanKernel::SurfaceIsAvailable</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanKernel.h" line="46" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanKernel_1ae34e0f3fca924335beab46767385d213" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::VulkanKernel::WaitFences</definition>
+        <argsstring>() override</argsstring>
+        <name>WaitFences</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanKernel::WaitFences</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanKernel.h" line="49" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanKernel_1acf6db6dbda36db17c00eb69755e5180d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::VulkanKernel::WaitAllFences</definition>
+        <argsstring>() override</argsstring>
+        <name>WaitAllFences</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanKernel::WaitAllFences</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanKernel.h" line="50" column="14"/>
+      </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanKernel_1a190e1b17d967ec21e5a74e43b66ccbde" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>EvoVulkan::Core::RenderResult</type>
         <definition>EvoVulkan::Core::RenderResult SR_GRAPH_NS::VulkanKernel::Render</definition>
@@ -212,7 +269,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanKernel.h" line="46" column="39"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanKernel.h" line="52" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanKernel_1a6811748da3c453e26c5274e15ccc9306" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>EvoVulkan::Core::FrameResult</type>
@@ -226,7 +283,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanKernel.h" line="47" column="38"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanKernel.h" line="53" column="38"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanKernel_1a9d17099ce2e0d01c9c8c1a341afc969b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>EvoVulkan::Core::FrameResult</type>
@@ -240,7 +297,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanKernel.h" line="48" column="38"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanKernel.h" line="54" column="38"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanKernel_1ad6535d0b106c26acbc81d57209a4fe92" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>EvoVulkan::Core::FrameResult</type>
@@ -254,7 +311,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanKernel.h" line="49" column="38"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanKernel.h" line="55" column="38"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanKernel_1ac214a6251b75f33c1ea4f3d73447ff68" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>EvoVulkan::Core::FrameResult</type>
@@ -268,7 +325,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanKernel.h" line="50" column="38"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanKernel.h" line="56" column="38"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -297,12 +354,13 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanKernel.h" line="16" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanKernel.h" bodystart="16" bodyend="55"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanKernel.h" line="16" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanKernel.h" bodystart="16" bodyend="62"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1VulkanKernel_1a0aaf4edcb76de2656a7b6c42902bda29" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanKernel</scope><name>BuildCmdBuffers</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanKernel_1a64630087a76ad0bc541b70c4b21dff9f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanKernel</scope><name>Destroy</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanKernel_1a3ff2f54a71fda6cde0028ef57d78889c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanKernel</scope><name>IsRayTracingRequired</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanKernel_1a19d13215a5300dee241d07578e9f3f12" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanKernel</scope><name>IsWindowValid</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanKernel_1acbd00afac3c60b153d6875ac5ecdb49b" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanKernel</scope><name>m_isSwapchainSuboptimal</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanKernel_1a69da13b9cf27caeec49c836fa014d6d7" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanKernel</scope><name>m_pipeline</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanKernel_1a6d20d23b341de2fd84126a670df92e5a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanKernel</scope><name>OnComplete</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanKernel_1a4c5b3416bfb346094a9f5d8a77eccc21" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanKernel</scope><name>OnResize</name></member>
@@ -314,7 +372,10 @@
       <member refid="classSR__GRAPH__NS_1_1VulkanKernel_1aa70bdd877334034e083ee60fd96fecd0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanKernel</scope><name>SetGUIEnabled</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanKernel_1a9d17099ce2e0d01c9c8c1a341afc969b" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanKernel</scope><name>SubmitFrame</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanKernel_1a8446ca302c6631c3709c5ce79a46cf04" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanKernel</scope><name>Super</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanKernel_1a1b53fc9a37603bd20a7edb8935ce5356" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanKernel</scope><name>SurfaceIsAvailable</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanKernel_1a508035a3503515442e8306718481d4b7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanKernel</scope><name>VulkanKernel</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanKernel_1acf6db6dbda36db17c00eb69755e5180d" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanKernel</scope><name>WaitAllFences</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanKernel_1ae34e0f3fca924335beab46767385d213" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanKernel</scope><name>WaitFences</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanKernel_1ac214a6251b75f33c1ea4f3d73447ff68" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanKernel</scope><name>WaitIdle</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanKernel_1a5bf8e6127e900f02d0fb978e938bf6fb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanKernel</scope><name>~VulkanKernel</name></member>
     </listofallmembers>

@@ -3,6 +3,81 @@
   <compounddef id="classSR__CORE__GUI__NS_1_1EngineSettings" kind="class" language="C++" prot="public">
     <compoundname>SR_CORE_GUI_NS::EngineSettings</compoundname>
     <basecompoundref refid="classSR__GRAPH__GUI__NS_1_1Widget" prot="public" virt="non-virtual">SR_GRAPH_GUI_NS::Widget</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__CORE__GUI__NS_1_1EngineSettings_1a18b8b4e5c48ae23012ae259f41420435" prot="private" static="no">
+        <type><ref refid="classSR__GRAPH__GUI__NS_1_1Widget" kindref="compound">SR_GRAPH_GUI_NS::Widget</ref></type>
+        <definition>using SR_CORE_GUI_NS::EngineSettings::Super =  SR_GRAPH_GUI_NS::Widget</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_CORE_GUI_NS::EngineSettings::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="10" column="9" bodyfile="Engine/inc/Engine/GUI/EngineSettings.h" bodystart="10" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EngineSettings_1aa482022dabca00fba9807c184858ea4d" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string SR_CORE_GUI_NS::EngineSettings::m_renderPresetsMemory</definition>
+        <argsstring></argsstring>
+        <name>m_renderPresetsMemory</name>
+        <qualifiedname>SR_CORE_GUI_NS::EngineSettings::m_renderPresetsMemory</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="28" column="21" bodyfile="Engine/inc/Engine/GUI/EngineSettings.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EngineSettings_1a069a781c5591b17a850e869cb255e13b" prot="private" static="no" mutable="no">
+        <type>std::set&lt; std::string &gt;</type>
+        <definition>std::set&lt;std::string&gt; SR_CORE_GUI_NS::EngineSettings::m_renderPresets</definition>
+        <argsstring></argsstring>
+        <name>m_renderPresets</name>
+        <qualifiedname>SR_CORE_GUI_NS::EngineSettings::m_renderPresets</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="29" column="18" bodyfile="Engine/inc/Engine/GUI/EngineSettings.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EngineSettings_1a36eb0751a07d7f42fc957dd7091bb036" prot="private" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t SR_CORE_GUI_NS::EngineSettings::m_activeRenderPreset</definition>
+        <argsstring></argsstring>
+        <name>m_activeRenderPreset</name>
+        <qualifiedname>SR_CORE_GUI_NS::EngineSettings::m_activeRenderPreset</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="30" column="17" bodyfile="Engine/inc/Engine/GUI/EngineSettings.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EngineSettings_1a3b70c2d20d67c0c8d3fd073e659aaf01" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Subscription" kindref="compound">SR_UTILS_NS::Subscription</ref></type>
+        <definition>SR_UTILS_NS::Subscription SR_CORE_GUI_NS::EngineSettings::m_onRenderSettingsChanged</definition>
+        <argsstring></argsstring>
+        <name>m_onRenderSettingsChanged</name>
+        <qualifiedname>SR_CORE_GUI_NS::EngineSettings::m_onRenderSettingsChanged</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="31" column="35" bodyfile="Engine/inc/Engine/GUI/EngineSettings.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <sectiondef kind="public-func">
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EngineSettings_1a8cf8269898ed4fd007abdcd51df371ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -16,12 +91,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="11" column="9"/>
+        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="12" column="9"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EngineSettings_1a758afd3eaeaa571828b0bdb3e9ef6d98" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EngineSettings_1ad68ff8db7f6e08adc3b95cb6a50b6aad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>SR_CORE_GUI_NS::EngineSettings::~EngineSettings</definition>
-        <argsstring>() override=default</argsstring>
+        <argsstring>() override</argsstring>
         <name>~EngineSettings</name>
         <qualifiedname>SR_CORE_GUI_NS::EngineSettings::~EngineSettings</qualifiedname>
         <briefdescription>
@@ -30,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="12" column="9"/>
+        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="13" column="9"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -47,7 +122,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="15" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="16" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EngineSettings_1a7b3ca958d116325af7ffc5f49deb17f8" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::EngineSettings::OnOpen</definition>
+        <argsstring>() override</argsstring>
+        <name>OnOpen</name>
+        <qualifiedname>SR_CORE_GUI_NS::EngineSettings::OnOpen</qualifiedname>
+        <reimplements refid="classSR__GRAPH__GUI__NS_1_1Widget_1aed9b7c656b3efa34f342fbcd1d20a26f">OnOpen</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="17" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -63,7 +153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="18" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="20" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EngineSettings_1a8acef32c8aed31ca7259bd0e409cab7c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -77,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="19" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="21" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EngineSettings_1ac3aa90e47a8d6f86120fee283d68e902" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -91,7 +181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="20" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="22" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EngineSettings_1abd6fabdeda3f62dc1ff897b7090547f2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -105,7 +195,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="21" column="14"/>
+        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="23" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EngineSettings_1ad2691b61b98264b771f131395fb1b773" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::EngineSettings::PrepareRenderPresets</definition>
+        <argsstring>()</argsstring>
+        <name>PrepareRenderPresets</name>
+        <qualifiedname>SR_CORE_GUI_NS::EngineSettings::PrepareRenderPresets</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="25" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -184,7 +288,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="9" column="5" bodyfile="Engine/inc/Engine/GUI/EngineSettings.h" bodystart="9" bodyend="23"/>
+    <location file="Engine/inc/Engine/GUI/EngineSettings.h" line="9" column="5" bodyfile="Engine/inc/Engine/GUI/EngineSettings.h" bodystart="9" bodyend="33"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a4a04e0628b5729444eca1c24a9011fa2" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>AddFlags</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1adb2cb15cb7a11b055f8659f1db8c5521" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>AddSubWidget</name></member>
@@ -215,7 +319,11 @@
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a2284c33f97d1fc8b93f2065328507f40" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>IsHovered</name></member>
       <member refid="classSR__UTILS__NS_1_1InputHandler_1ac2e6a409a38ca80df3a3eb7418490182" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>IsKeyPressed</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aa7b9cc737b77f148ddaf23a2c687681b" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>IsOpen</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EngineSettings_1a36eb0751a07d7f42fc957dd7091bb036" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>m_activeRenderPreset</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a97257c8a73c16a33020b1bdda27f054e" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>m_mutex</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EngineSettings_1a3b70c2d20d67c0c8d3fd073e659aaf01" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>m_onRenderSettingsChanged</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EngineSettings_1a069a781c5591b17a850e869cb255e13b" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>m_renderPresets</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EngineSettings_1aa482022dabca00fba9807c184858ea4d" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>m_renderPresetsMemory</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a4cea7673a9a29502c407f76cf2da6550" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>m_subWidgets</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a55e8701e527dd9134c8349540b951295" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>m_widgetFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>NonCopyable</name></member>
@@ -228,10 +336,11 @@
       <member refid="classSR__UTILS__NS_1_1InputHandler_1a103723382b77ab83ae6468436fb41088" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>OnMouseMove</name></member>
       <member refid="classSR__UTILS__NS_1_1InputHandler_1a6c910542d5f00663837a3af04d774107" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>OnMousePress</name></member>
       <member refid="classSR__UTILS__NS_1_1InputHandler_1af18a761f7df246302137fe44699d0dc8" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>OnMouseUp</name></member>
-      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aed9b7c656b3efa34f342fbcd1d20a26f" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>OnOpen</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EngineSettings_1a7b3ca958d116325af7ffc5f49deb17f8" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>OnOpen</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a214c10395b43d1ae11dd7cfdd0104db0" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>Open</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a3d3dd7631795048741ca59e6d1666a3c" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>OpenFile</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>operator=</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EngineSettings_1ad2691b61b98264b771f131395fb1b773" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>PrepareRenderPresets</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a9d49df74f8eae10ecc78e5886044b38c" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>RenderScenePtr</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a5362809b84a8df38cd96ed91c4fa32c9" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>ResetStrongStorage</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a3926681db7399eebd88b303addf9e106" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>ResetWeakStorage</name></member>
@@ -243,12 +352,13 @@
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a9f93023aaad7df8c9f5572fcd3eec64e" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>SetName</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a7c848e9633f66f96a935090bfb450bcd" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>SetScene</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a206de2fe59b705c189cfb792fa6584de" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>SetSize</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EngineSettings_1a18b8b4e5c48ae23012ae259f41420435" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>Super</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1abb58557f3a79bc2790d525791aedb7ac" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>TextCenter</name></member>
       <member refid="classSR__UTILS__NS_1_1Event_1abd0c24f64093df0ec6e43569eae8d236" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::Event::"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>Trigger</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a9670d827380936251bb9f0af5f305ee4" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>Update</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1ac9672537e4ef15d539d53a1627cab259" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>Widget</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aec9e9fb6de083548c0149a76d6ed0043" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>Widget</name></member>
-      <member refid="classSR__CORE__GUI__NS_1_1EngineSettings_1a758afd3eaeaa571828b0bdb3e9ef6d98" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>~EngineSettings</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EngineSettings_1ad68ff8db7f6e08adc3b95cb6a50b6aad" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>~EngineSettings</name></member>
       <member refid="classSR__UTILS__NS_1_1Event_1a0d08312b78abd09b06ed69b1820d1605" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>~Event</name></member>
       <member refid="classSR__UTILS__NS_1_1IEvent_1a900ba41fdab52a6162b903b476120a7a" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>~IEvent</name></member>
       <member refid="classSR__UTILS__NS_1_1InputHandler_1ad0111971be1665c6d0f0e3fef067e7e6" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EngineSettings</scope><name>~InputHandler</name></member>

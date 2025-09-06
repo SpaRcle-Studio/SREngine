@@ -315,7 +315,7 @@
       <member refid="classSR__NETWORK__NS_1_1Server_1a9e1093ca34b300a65ff34ca9e0cb7924" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::Server</scope><name>Super</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Server</scope><name>TryRecursiveLockIfValid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Server</scope><name>Unlock</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Server</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a783dd9e4a58072de8ff19895693bca05" prot="public" virt="virtual"><scope>SR_NETWORK_NS::Server</scope><name>Valid</name></member>
       <member refid="classSR__NETWORK__NS_1_1Server_1adab8231d2814819d92ac90c80871a888" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Server</scope><name>~Server</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Server</scope><name>~SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_NETWORK_NS::Server</scope><name>~SharedPtrBase</name></member>

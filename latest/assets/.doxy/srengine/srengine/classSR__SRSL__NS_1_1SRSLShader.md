@@ -93,6 +93,7 @@ Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_
 |  SR\_NODISCARD Vertices::VertexType | [**GetVertexType**](#function-getvertextype) () const<br> |
 |  SR\_NODISCARD bool | [**IsCacheActual**](#function-iscacheactual-12) () const<br> |
 |  SR\_NODISCARD bool | [**IsCacheActual**](#function-iscacheactual-22) (ShaderLanguage shaderLanguage) const<br> |
+|  SR\_NODISCARD bool | [**IsMacroDefined**](#function-ismacrodefined) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & name) const<br> |
 |  SR\_NODISCARD std::string | [**ToString**](#function-tostring) (ShaderLanguage shaderLanguage) const<br> |
 
 
@@ -111,7 +112,7 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 | Type | Name |
 | ---: | :--- |
 |  void | [**ClearShadersCache**](#function-clearshaderscache) () <br> |
-|  SR\_NODISCARD SRSLShader::Ptr | [**Load**](#function-load) ([**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) path) <br> |
+|  SR\_NODISCARD SRSLShader::Ptr | [**Load**](#function-load) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path, const [**ShaderMacrosParams**](structSR__SRSL__NS_1_1ShaderMacrosParams.md) & macros) <br> |
 
 
 
@@ -454,6 +455,21 @@ SR_NODISCARD bool SR_SRSL_NS::SRSLShader::IsCacheActual (
 
 
 
+### function IsMacroDefined 
+
+```C++
+SR_NODISCARD bool SR_SRSL_NS::SRSLShader::IsMacroDefined (
+    const SR_UTILS_NS::StringAtom & name
+) const
+```
+
+
+
+
+<hr>
+
+
+
 ### function ToString 
 
 ```C++
@@ -488,7 +504,8 @@ static void SR_SRSL_NS::SRSLShader::ClearShadersCache ()
 
 ```C++
 static SR_NODISCARD SRSLShader::Ptr SR_SRSL_NS::SRSLShader::Load (
-    SR_UTILS_NS::Path path
+    const SR_UTILS_NS::Path & path,
+    const ShaderMacrosParams & macros
 ) 
 ```
 

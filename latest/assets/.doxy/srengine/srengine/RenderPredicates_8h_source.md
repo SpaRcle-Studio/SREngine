@@ -37,11 +37,11 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD virtual bool IsPriorityAllowed(int64_t priority) const = 0;
     };
 
-    class ShaderReplacePredicate {
-    public:
-        virtual ~ShaderReplacePredicate() = default;
-        SR_NODISCARD virtual SR_GRAPH_NS::ShaderUseInfo ReplaceShader(const SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Shader>& pShader) const = 0;
-    };
+    //class ShaderReplacePredicate {
+    //public:
+    //    virtual ~ShaderReplacePredicate() = default;
+    //    SR_NODISCARD virtual SR_GRAPH_NS::ShaderUseInfo ReplaceShader(SR_GTYPES_NS::Shader* pShader) const = 0;
+    //};
 }
 
 #endif //SR_ENGINE_GRAPHICS_RENDER_PREDICATES_H

@@ -3,9 +3,9 @@
   <compounddef id="namespaceSR__UTILS__NS_1_1Events" kind="namespace" language="C++">
     <compoundname>SR_UTILS_NS::Events</compoundname>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="Broadcaster_8h_1acbbfd3f2979ab1c52e8346d90165a8f2" prot="public" static="yes" mutable="no">
-        <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
-        <definition>const SR_UTILS_NS::StringAtom SR_UTILS_NS::Events::EVENT_ON_SCRIPT_MODULE_RELOADED_ID</definition>
+      <memberdef kind="variable" id="Broadcaster_8h_1a8251557d0b401ffaf842eba831210d23" prot="public" static="no" mutable="no">
+        <type>SR_INLINE_STATIC const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_INLINE_STATIC const SR_UTILS_NS::StringAtom SR_UTILS_NS::Events::EVENT_ON_SCRIPT_MODULE_RELOADED_ID</definition>
         <argsstring></argsstring>
         <name>EVENT_ON_SCRIPT_MODULE_RELOADED_ID</name>
         <qualifiedname>SR_UTILS_NS::Events::EVENT_ON_SCRIPT_MODULE_RELOADED_ID</qualifiedname>
@@ -16,11 +16,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Events/Broadcaster.h" line="19" column="53" bodyfile="Engine/libs/Utils/inc/Utils/Events/Broadcaster.h" bodystart="19" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Events/Broadcaster.h" line="19" column="56" bodyfile="Engine/libs/Utils/inc/Utils/Events/Broadcaster.h" bodystart="19" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="Broadcaster_8h_1a3c474057c9a24daf6db122abe7b06a68" prot="public" static="yes" mutable="no">
-        <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
-        <definition>const SR_UTILS_NS::StringAtom SR_UTILS_NS::Events::EVENT_ON_ENGINE_UPDATE_ID</definition>
+      <memberdef kind="variable" id="Broadcaster_8h_1a81f5b042ca569333eea6480ebc147fcf" prot="public" static="no" mutable="no">
+        <type>SR_INLINE_STATIC const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_INLINE_STATIC const SR_UTILS_NS::StringAtom SR_UTILS_NS::Events::EVENT_ON_ENGINE_UPDATE_ID</definition>
         <argsstring></argsstring>
         <name>EVENT_ON_ENGINE_UPDATE_ID</name>
         <qualifiedname>SR_UTILS_NS::Events::EVENT_ON_ENGINE_UPDATE_ID</qualifiedname>
@@ -31,7 +31,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Events/Broadcaster.h" line="20" column="53" bodyfile="Engine/libs/Utils/inc/Utils/Events/Broadcaster.h" bodystart="20" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Events/Broadcaster.h" line="20" column="56" bodyfile="Engine/libs/Utils/inc/Utils/Events/Broadcaster.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="Broadcaster_8h_1ab8168e7b18178487169f1c3c1a6a276a" prot="public" static="no" mutable="no">
+        <type>SR_INLINE_STATIC const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_INLINE_STATIC const SR_UTILS_NS::StringAtom SR_UTILS_NS::Events::EVENT_ON_RENDER_SETTINGS_CHANGED_ID</definition>
+        <argsstring></argsstring>
+        <name>EVENT_ON_RENDER_SETTINGS_CHANGED_ID</name>
+        <qualifiedname>SR_UTILS_NS::Events::EVENT_ON_RENDER_SETTINGS_CHANGED_ID</qualifiedname>
+        <initializer>= &quot;OnRenderSettingsChanged&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Events/Broadcaster.h" line="21" column="56" bodyfile="Engine/libs/Utils/inc/Utils/Events/Broadcaster.h" bodystart="21" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

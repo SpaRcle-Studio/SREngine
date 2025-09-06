@@ -19,6 +19,9 @@
 #include <Utils/Common/StringAtomLiterals.h>
 
 namespace SR_UTILS_NS::Reflection {
+    template<typename T>
+    constexpr bool ContainsSRClassV = IsSRClassV<InnerTypeT<T>>;
+
     class EditorPropertyParams {
     public:
         EditorPropertyParams() = default;
@@ -56,6 +59,13 @@ namespace SR_UTILS_NS::Reflection {
         bool m_notNull = false;
         std::map<SR_UTILS_NS::StringAtom, std::string_view> m_customArgs;
 
+    };
+
+    enum class PropertySRClassContainsMode {
+        NotContains,
+        SharedPointer,
+        Contains,
+        Inner
     };
 
     class Property {
@@ -100,6 +110,8 @@ namespace SR_UTILS_NS::Reflection {
             return m_publicity == PropertyPublicity::ReadOnly || m_publicity == PropertyPublicity::HiddenReadOnly;
         }
 
+        SR_NODISCARD PropertySRClassContainsMode GetSRClassContainsMode() const noexcept { return m_srClassContainsMode; }
+
         Property& SetName(const StringAtom& name) noexcept { m_name = name; return *this; }
         Property& SetSerializeName(const StringAtom& serializeName) noexcept { m_serializeName = serializeName; return *this; }
         Property& SetPublicity(PropertyPublicity publicity) noexcept { m_publicity = publicity; return *this; }
@@ -111,6 +123,22 @@ namespace SR_UTILS_NS::Reflection {
         Property& SetEditorParams(const EditorPropertyParams& params) noexcept { m_editorParams = params; return *this; }
         Property& SetPropertyCondition(PropertyActiveCallbackFn callback) noexcept { m_propertyActiveCallback = callback; return *this; }
         Property& SetHasExplicitSetter(bool hasExplicitSetter) noexcept { m_hasExplicitSetter = hasExplicitSetter; return *this; }
+
+        template<typename T> Property& CheckSRClass() {
+            if constexpr (IsSRClassV<T>) {
+                m_srClassContainsMode = PropertySRClassContainsMode::Contains;
+            }
+            else if constexpr (IsSharedPointerV<T>) {
+                m_srClassContainsMode = PropertySRClassContainsMode::SharedPointer;
+            }
+            else if constexpr (ContainsSRClassV<T>) {
+                m_srClassContainsMode = PropertySRClassContainsMode::Inner;
+            }
+            else {
+                m_srClassContainsMode = PropertySRClassContainsMode::NotContains;
+            }
+            return *this;
+        }
 
     private:
         EditorPropertyParams m_editorParams;
@@ -124,6 +152,7 @@ namespace SR_UTILS_NS::Reflection {
         ChangeCallbackFn m_onChangeCallback = nullptr;
         PropertyActiveCallbackFn m_propertyActiveCallback = nullptr;
         bool m_hasExplicitSetter = false;
+        PropertySRClassContainsMode m_srClassContainsMode = PropertySRClassContainsMode::NotContains;
     };
 
     template<typename T> SR_UTILS_NS::StringAtom GetPropertyInspector() {

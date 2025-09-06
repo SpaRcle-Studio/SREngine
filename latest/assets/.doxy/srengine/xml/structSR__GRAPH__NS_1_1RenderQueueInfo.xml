@@ -15,60 +15,24 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="165" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="165" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="166" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="166" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1RenderQueueInfo_1a7b45eefbc3515d488c638400b5986b9e" prot="public" static="no" mutable="no">
-        <type><ref refid="structSR__GRAPH__NS_1_1ShaderUseInfo" kindref="compound">ShaderUseInfo</ref></type>
-        <definition>ShaderUseInfo SR_GRAPH_NS::RenderQueueInfo::shaderUseInfo</definition>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1RenderQueueInfo_1a6198920c1f18a2e518c78e7ddb0a997c" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> *</type>
+        <definition>SR_GTYPES_NS::Shader* SR_GRAPH_NS::RenderQueueInfo::pShader</definition>
         <argsstring></argsstring>
-        <name>shaderUseInfo</name>
-        <qualifiedname>SR_GRAPH_NS::RenderQueueInfo::shaderUseInfo</qualifiedname>
+        <name>pShader</name>
+        <qualifiedname>SR_GRAPH_NS::RenderQueueInfo::pShader</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="166" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="166" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="167" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="167" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="structSR__GRAPH__NS_1_1RenderQueueInfo_1ab7302d9823969ce80ebdca7f7429d5e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type></type>
-        <definition>SR_GRAPH_NS::RenderQueueInfo::RenderQueueInfo</definition>
-        <argsstring>()=default</argsstring>
-        <name>RenderQueueInfo</name>
-        <qualifiedname>SR_GRAPH_NS::RenderQueueInfo::RenderQueueInfo</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="159" column="9"/>
-      </memberdef>
-      <memberdef kind="function" id="structSR__GRAPH__NS_1_1RenderQueueInfo_1a060cff95d2de586c01724dad8a6f6f8c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type></type>
-        <definition>SR_GRAPH_NS::RenderQueueInfo::RenderQueueInfo</definition>
-        <argsstring>(RenderQueue *pRenderQueue, const ShaderUseInfo &amp;shaderUseInfo)</argsstring>
-        <name>RenderQueueInfo</name>
-        <qualifiedname>SR_GRAPH_NS::RenderQueueInfo::RenderQueueInfo</qualifiedname>
-        <param>
-          <type><ref refid="classSR__GRAPH__NS_1_1RenderQueue" kindref="compound">RenderQueue</ref> *</type>
-          <declname>pRenderQueue</declname>
-        </param>
-        <param>
-          <type>const <ref refid="structSR__GRAPH__NS_1_1ShaderUseInfo" kindref="compound">ShaderUseInfo</ref> &amp;</type>
-          <declname>shaderUseInfo</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="160" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="160" bodyend="163"/>
-      </memberdef>
       <memberdef kind="function" id="structSR__GRAPH__NS_1_1RenderQueueInfo_1a515579405650d3cc0ab3d0111e1cf5ef" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
         <definition>bool SR_GRAPH_NS::RenderQueueInfo::operator==</definition>
@@ -85,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="167" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="167" bodyend="169"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="169" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="169" bodyend="171"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -93,6 +57,9 @@
     <detaileddescription>
     </detaileddescription>
     <collaborationgraph>
+      <node id="14">
+        <label>Memory::IGraphicsResource</label>
+      </node>
       <node id="2">
         <label>SR_GRAPH_NS::RenderQueue</label>
         <link refid="classSR__GRAPH__NS_1_1RenderQueue"/>
@@ -106,14 +73,24 @@
           <edgelabel>pRenderQueue</edgelabel>
         </childnode>
         <childnode refid="6" relation="usage">
-          <edgelabel>shaderUseInfo</edgelabel>
+          <edgelabel>pShader</edgelabel>
         </childnode>
       </node>
       <node id="6">
-        <label>SR_GRAPH_NS::ShaderUseInfo</label>
-        <link refid="structSR__GRAPH__NS_1_1ShaderUseInfo"/>
+        <label>SR_GTYPES_NS::Shader</label>
+        <link refid="classSR__GTYPES__NS_1_1Shader"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+        <childnode refid="14" relation="public-inheritance">
+        </childnode>
       </node>
       <node id="3">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
         <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="4" relation="public-inheritance">
@@ -130,14 +107,50 @@
         <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
         <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
       </node>
+      <node id="7">
+        <label>SR_UTILS_NS::IResource</label>
+        <link refid="classSR__UTILS__NS_1_1IResource"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+        <childnode refid="13" relation="usage">
+          <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
+          <edgelabel>RELOAD_DONE_EVENT</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>SR_UTILS_NS::ResourceContainer</label>
+        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="11">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>SR_UTILS_NS::StringAtom</label>
+        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
+      </node>
+      <node id="10">
+        <label>SR_UTILS_NS::SubscriptionHolder</label>
+        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
+      </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="158" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="158" bodyend="170"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="165" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="165" bodyend="172"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1RenderQueueInfo_1a515579405650d3cc0ab3d0111e1cf5ef" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueueInfo</scope><name>operator==</name></member>
       <member refid="structSR__GRAPH__NS_1_1RenderQueueInfo_1a051766209f727ad4e6a201cb5ea4f12a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueueInfo</scope><name>pRenderQueue</name></member>
-      <member refid="structSR__GRAPH__NS_1_1RenderQueueInfo_1ab7302d9823969ce80ebdca7f7429d5e2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueueInfo</scope><name>RenderQueueInfo</name></member>
-      <member refid="structSR__GRAPH__NS_1_1RenderQueueInfo_1a060cff95d2de586c01724dad8a6f6f8c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueueInfo</scope><name>RenderQueueInfo</name></member>
-      <member refid="structSR__GRAPH__NS_1_1RenderQueueInfo_1a7b45eefbc3515d488c638400b5986b9e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueueInfo</scope><name>shaderUseInfo</name></member>
+      <member refid="structSR__GRAPH__NS_1_1RenderQueueInfo_1a6198920c1f18a2e518c78e7ddb0a997c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueueInfo</scope><name>pShader</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

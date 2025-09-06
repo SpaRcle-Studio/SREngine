@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="664" column="13" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="664" bodyend="666"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="725" column="13" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="725" bodyend="727"/>
       </memberdef>
       <memberdef kind="function" id="structObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01IsSREnumV_3_01T_01_4_01_4_1_1type_01_4_1ae9221575f6c2f52d9787d22aff0626eb" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -58,14 +58,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="668" column="13" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="668" bodyend="677"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="729" column="13" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="729" bodyend="738"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="663" column="1" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="663" bodyend="678"/>
+    <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="724" column="1" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="724" bodyend="739"/>
     <listofallmembers>
       <member refid="structObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01IsSREnumV_3_01T_01_4_01_4_1_1type_01_4_1ae9221575f6c2f52d9787d22aff0626eb" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; T, typename std::enable_if&lt; IsSREnumV&lt; T &gt; &gt;::type &gt;</scope><name>Load</name></member>
       <member refid="structObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01IsSREnumV_3_01T_01_4_01_4_1_1type_01_4_1a0b3ca18b389935891901f213704480b7" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; T, typename std::enable_if&lt; IsSREnumV&lt; T &gt; &gt;::type &gt;</scope><name>Save</name></member>

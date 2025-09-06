@@ -53,7 +53,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  size\_t | [**operator()**](#function-operator()) ([**SR\_WORLD\_NS::TensorKey**](structSR__WORLD__NS_1_1TensorKey.md) const & vecPair) const<br> |
+|  size\_t | [**operator()**](#function-operator) ([**SR\_WORLD\_NS::TensorKey**](structSR__WORLD__NS_1_1TensorKey.md) const & vecPair) const<br> |
 
 
 

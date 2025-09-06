@@ -7,6 +7,7 @@
     <innerfile refid="EmptyPipeline_8h">EmptyPipeline.h</innerfile>
     <innerfile refid="FrameBufferFeatures_8h">FrameBufferFeatures.h</innerfile>
     <innerfile refid="FrameBufferQueue_8h">FrameBufferQueue.h</innerfile>
+    <innerfile refid="GLSLDefaultTBuiltInResource_8h">GLSLDefaultTBuiltInResource.h</innerfile>
     <innerfile refid="IShaderProgram_8h">IShaderProgram.h</innerfile>
     <innerfile refid="Pipeline_8h">Pipeline.h</innerfile>
     <innerfile refid="PipelineState_8h">PipelineState.h</innerfile>

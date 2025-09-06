@@ -135,9 +135,17 @@ Inherits the following classes: [SR\_UTILS\_NS::GlobalSettings](classSR__UTILS__
 |  SR\_NODISCARD uint64\_t | [**GetHashState**](#function-gethashstate) () const<br> |
 |  SR\_NODISCARD uint16\_t | [**GetLayerIndex**](#function-getlayerindex) ([**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) layer) const<br> |
 |  SR\_NODISCARD std::vector&lt; [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) &gt; | [**GetLayers**](#function-getlayers) () const<br> |
+| virtual SR\_NODISCARD [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**GetSettingsPath**](#function-getsettingspath) () override const<br> |
 |  SR\_NODISCARD bool | [**HasLayer**](#function-haslayer) ([**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) layer) const<br> |
 
 
+## Public Functions inherited from SR_UTILS_NS::GlobalSettings
+
+See [SR\_UTILS\_NS::GlobalSettings](classSR__UTILS__NS_1_1GlobalSettings.md)
+
+| Type | Name |
+| ---: | :--- |
+| virtual [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**GetSettingsPath**](classSR__UTILS__NS_1_1GlobalSettings.md#function-getsettingspath) () const = 0<br> |
 
 
 
@@ -308,7 +316,6 @@ See [SR\_UTILS\_NS::SingletonBase](classSR__UTILS__NS_1_1SingletonBase.md)
 | Type | Name |
 | ---: | :--- |
 |  void | [**ClearSettings**](#function-clearsettings) () override<br> |
-|  SR\_NODISCARD [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**InitializeResourcePath**](#function-initializeresourcepath) () override const<br> |
 |  bool | [**LoadSettings**](#function-loadsettings) (const SR\_XML\_NS::Node & node) override<br> |
 
 
@@ -410,6 +417,21 @@ inline SR_NODISCARD std::vector< StringAtom > SR_UTILS_NS::LayerManager::GetLaye
 
 
 
+### function GetSettingsPath 
+
+```C++
+virtual SR_NODISCARD SR_UTILS_NS::Path SR_UTILS_NS::LayerManager::GetSettingsPath () override const
+```
+
+
+
+Implements [*SR\_UTILS\_NS::GlobalSettings::GetSettingsPath*](classSR__UTILS__NS_1_1GlobalSettings.md#function-getsettingspath)
+
+
+<hr>
+
+
+
 ### function HasLayer 
 
 ```C++
@@ -446,19 +468,6 @@ static SR_NODISCARD StringAtom SR_UTILS_NS::LayerManager::GetDefaultLayer ()
 
 ```C++
 void SR_UTILS_NS::LayerManager::ClearSettings () override
-```
-
-
-
-
-<hr>
-
-
-
-### function InitializeResourcePath 
-
-```C++
-SR_NODISCARD SR_UTILS_NS::Path SR_UTILS_NS::LayerManager::InitializeResourcePath () override const
 ```
 
 

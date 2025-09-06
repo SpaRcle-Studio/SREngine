@@ -67,6 +67,7 @@
 |  uint64\_t | [**GetFolderHash**](#function-getfolderhash) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path, uint64\_t deep=SR\_UINT64\_MAX) <br> |
 |  char \* | [**Load**](#function-load) (std::string path) <br> |
 |  std::string | [**NormalizePath**](#function-normalizepath) (const std::string & path) <br> |
+|  void | [**NormalizePathInPlace**](#function-normalizepathinplace) (std::string & path) <br> |
 |  std::vector&lt; std::string &gt; | [**ReadAllLines**](#function-readalllines) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
 |  std::string | [**ReadAllText**](#function-readalltext) (const std::string & path) <br> |
 |  std::vector&lt; std::string\_view &gt; | [**ReadAllTextAsStringViewVector**](#function-readalltextasstringviewvector) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path, std::string & buffer) <br> |
@@ -77,7 +78,7 @@
 |  uint64\_t | [**ReadHashFromFile**](#function-readhashfromfile) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
 |  void | [**UnmapFile**](#function-unmapfile) (const char \* str) <br> |
 |  bool | [**WriteHashToFile**](#function-writehashtofile) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path, uint64\_t hash) <br> |
-|  bool | [**WriteToFile**](#function-writetofile) (const std::string & path, const std::string & text) <br> |
+|  bool | [**WriteToFile**](#function-writetofile) (const std::string & path, const std::string\_view & text) <br> |
 
 
 
@@ -259,6 +260,21 @@ static std::string SR_UTILS_NS::FileSystem::NormalizePath (
 
 
 
+### function NormalizePathInPlace 
+
+```C++
+static void SR_UTILS_NS::FileSystem::NormalizePathInPlace (
+    std::string & path
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function ReadAllLines 
 
 ```C++
@@ -417,7 +433,7 @@ static bool SR_UTILS_NS::FileSystem::WriteHashToFile (
 ```C++
 static bool SR_UTILS_NS::FileSystem::WriteToFile (
     const std::string & path,
-    const std::string & text
+    const std::string_view & text
 ) 
 ```
 

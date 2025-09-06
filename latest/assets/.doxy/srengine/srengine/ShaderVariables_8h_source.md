@@ -18,6 +18,8 @@
 #include <Graphics/SRSL/ShaderType.h>
 
 namespace SR_SRSL_NS {
+    std::string ShaderRenderPassTypeToString(ShaderRenderPassType type);
+
     SR_INLINE_STATIC const std::map<std::string, std::string> SR_SRSL_DEFAULT_PUSH_CONSTANTS = { 
             { "PC_SHADOW_CASCADE_INDEX",           "int"        },
             { "PC_COLOR_BUFFER_MODE",              "int"        },
@@ -34,6 +36,8 @@ namespace SR_SRSL_NS {
             { "LIGHT_SPACE_MATRIX",             "mat4"          },
 
             { "TIME",                           "float"         },
+
+            { "RENDER_PASS_TYPE",               "int"           },
 
             { "RESOLUTION",                     "vec2"          },
             { "ASPECT",                         "vec2"          },

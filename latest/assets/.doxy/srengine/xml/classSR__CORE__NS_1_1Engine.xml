@@ -714,9 +714,9 @@
         </inbodydescription>
         <location file="Engine/inc/Engine/Engine.h" line="90" column="31"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1aa1d44ff5dc302d3770f59d2d81672f80" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>SR_NODISCARD RenderContextPtr</type>
-        <definition>SR_NODISCARD RenderContextPtr SR_CORE_NS::Engine::GetRenderContext</definition>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a05e89bd57c2031b5d5096b9d23c0dd24" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD const RenderContextPtr &amp;</type>
+        <definition>SR_NODISCARD const RenderContextPtr &amp; SR_CORE_NS::Engine::GetRenderContext</definition>
         <argsstring>() const</argsstring>
         <name>GetRenderContext</name>
         <qualifiedname>SR_CORE_NS::Engine::GetRenderContext</qualifiedname>
@@ -726,11 +726,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="91" column="39" bodyfile="Engine/inc/Engine/Engine.h" bodystart="91" bodyend="91"/>
+        <location file="Engine/inc/Engine/Engine.h" line="91" column="45" bodyfile="Engine/inc/Engine/Engine.h" bodystart="91" bodyend="91"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1aefc6e50f10a45721e8453c774157fedd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD RenderScenePtr</type>
-        <definition>SR_NODISCARD RenderScenePtr SR_CORE_NS::Engine::GetRenderScene</definition>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1aa1a15b456dc6d0bee303f40598c27471" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const RenderScenePtr &amp;</type>
+        <definition>SR_NODISCARD const RenderScenePtr &amp; SR_CORE_NS::Engine::GetRenderScene</definition>
         <argsstring>() const</argsstring>
         <name>GetRenderScene</name>
         <qualifiedname>SR_CORE_NS::Engine::GetRenderScene</qualifiedname>
@@ -740,11 +740,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="92" column="37"/>
+        <location file="Engine/inc/Engine/Engine.h" line="92" column="43"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a05d06feb6c7b722d30626af28e40baf1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD PhysicsScenePtr</type>
-        <definition>SR_NODISCARD PhysicsScenePtr SR_CORE_NS::Engine::GetPhysicsScene</definition>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1af6dd62cc7d5218dfab264b7b1814b09a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const PhysicsScenePtr &amp;</type>
+        <definition>SR_NODISCARD const PhysicsScenePtr &amp; SR_CORE_NS::Engine::GetPhysicsScene</definition>
         <argsstring>() const</argsstring>
         <name>GetPhysicsScene</name>
         <qualifiedname>SR_CORE_NS::Engine::GetPhysicsScene</qualifiedname>
@@ -754,7 +754,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Engine.h" line="93" column="38"/>
+        <location file="Engine/inc/Engine/Engine.h" line="93" column="44"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a5e9965b2b205350c9f27f93cb4667a39" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD WindowPtr</type>
@@ -1085,13 +1085,13 @@
       <member refid="classSR__CORE__NS_1_1Engine_1a093606430f8826179fca90ee1537260d" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetEngineScene</name></member>
       <member refid="classSR__CORE__NS_1_1Engine_1a8f14f00214dee82c471bb5186838fce0" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetFocusedWindow</name></member>
       <member refid="classSR__CORE__NS_1_1Engine_1a5e9965b2b205350c9f27f93cb4667a39" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetMainWindow</name></member>
-      <member refid="classSR__CORE__NS_1_1Engine_1a05d06feb6c7b722d30626af28e40baf1" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetPhysicsScene</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1af6dd62cc7d5218dfab264b7b1814b09a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetPhysicsScene</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetPtrData</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetPtrData</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetRawPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetRawPtr</name></member>
-      <member refid="classSR__CORE__NS_1_1Engine_1aa1d44ff5dc302d3770f59d2d81672f80" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetRenderContext</name></member>
-      <member refid="classSR__CORE__NS_1_1Engine_1aefc6e50f10a45721e8453c774157fedd" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetRenderScene</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a05e89bd57c2031b5d5096b9d23c0dd24" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetRenderContext</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1aa1a15b456dc6d0bee303f40598c27471" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetRenderScene</name></member>
       <member refid="classSR__CORE__NS_1_1Engine_1a7651c71af7d7e9232b25b1441a0794ea" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetScene</name></member>
       <member refid="classSR__CORE__NS_1_1Engine_1ac299c8794259158fe78a80089331e3b0" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetSceneBuilder</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_CORE_NS::Engine</scope><name>GetSRClass</name></member>
@@ -1169,7 +1169,7 @@
       <member refid="classSR__CORE__NS_1_1Engine_1aae9cf19dc90d8013746ad937b1483225" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>Super</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>TryRecursiveLockIfValid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>Unlock</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a783dd9e4a58072de8ff19895693bca05" prot="public" virt="virtual"><scope>SR_CORE_NS::Engine</scope><name>Valid</name></member>
       <member refid="classSR__CORE__NS_1_1Engine_1a57f1de323cba08e1fa5cf0950458ab65" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>WindowPtr</name></member>
       <member refid="classSR__CORE__NS_1_1Engine_1ad070284f29f59eb82922edae879b03dd" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>~Engine</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>~SharedPtr</name></member>

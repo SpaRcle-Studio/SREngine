@@ -258,8 +258,20 @@
         </childnode>
       </node>
       <node id="17">
+        <label>SR_CORE_NS::EditorSettings</label>
+        <link refid="classSR__CORE__NS_1_1EditorSettings"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="18">
         <label>SR_GRAPH_NS::FileMaterialResource</label>
         <link refid="classSR__GRAPH__NS_1_1FileMaterialResource"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>SR_GRAPH_NS::FileRenderTechniqueResource</label>
+        <link refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource"/>
         <childnode refid="16" relation="public-inheritance">
         </childnode>
       </node>
@@ -267,6 +279,18 @@
         <label>SR_GRAPH_NS::MaterialData</label>
         <link refid="classSR__GRAPH__NS_1_1MaterialData"/>
         <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>SR_GRAPH_NS::RenderSettings</label>
+        <link refid="classSR__GRAPH__NS_1_1RenderSettings"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>SR_GRAPH_NS::RenderStagesSettings</label>
+        <link refid="classSR__GRAPH__NS_1_1RenderStagesSettings"/>
+        <childnode refid="16" relation="public-inheritance">
         </childnode>
       </node>
       <node id="15">
@@ -305,7 +329,7 @@
         <childnode refid="5" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="18">
+      <node id="22">
         <label>SR_PTYPES_NS::PhysicsMaterial</label>
         <link refid="classSR__PTYPES__NS_1_1PhysicsMaterial"/>
         <childnode refid="16" relation="public-inheritance">
@@ -341,13 +365,13 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="21">
+      <node id="25">
         <label>SR_UTILS_NS::Input</label>
         <link refid="classSR__UTILS__NS_1_1Input"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="20">
+      <node id="24">
         <label>SR_UTILS_NS::Prefab</label>
         <link refid="classSR__UTILS__NS_1_1Prefab"/>
         <childnode refid="5" relation="public-inheritance">
@@ -357,7 +381,7 @@
         <label>SR_UTILS_NS::SubscriptionHolder</label>
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
-      <node id="19">
+      <node id="23">
         <label>SR_UTILS_NS::TestManagerAsset</label>
         <link refid="classSR__UTILS__NS_1_1TestManagerAsset"/>
         <childnode refid="16" relation="public-inheritance">

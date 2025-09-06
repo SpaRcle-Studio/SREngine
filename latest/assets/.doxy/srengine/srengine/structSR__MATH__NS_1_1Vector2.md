@@ -86,6 +86,7 @@
 |  SR\_NODISCARD bool | [**IsFinite**](#function-isfinite) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsNull**](#function-isnull) () const<br> |
 |  SR\_NODISCARD T | [**Length**](#function-length) () noexcept const<br> |
+|  SR\_NODISCARD [**Vector2**](structSR__MATH__NS_1_1Vector2.md) | [**Round**](#function-round) () const<br> |
 |  SR\_NODISCARD [**Vector2**](structSR__MATH__NS_1_1Vector2.md) | [**Singular**](#function-singular) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md) & segment) const<br> |
 |  SR\_NODISCARD T | [**Sum**](#function-sum) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE glm::vec2 | [**ToGLM**](#function-toglm) () noexcept const<br> |
@@ -103,25 +104,25 @@
 |  SR\_FORCE\_INLINE [**Vector2**](structSR__MATH__NS_1_1Vector2.md) | [**operator+**](#function-operator_6) () const<br> |
 |  SR\_FORCE\_INLINE [**Vector2**](structSR__MATH__NS_1_1Vector2.md) | [**operator+**](#function-operator_7) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & p\_v) const<br> |
 |  SR\_FORCE\_INLINE [**Vector2**](structSR__MATH__NS_1_1Vector2.md) & | [**operator+=**](#function-operator_8) ([**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; v) <br> |
-|  SR\_FORCE\_INLINE [**Vector2**](structSR__MATH__NS_1_1Vector2.md) | [**operator-**](#function-operator_9) () const<br> |
-|  SR\_FORCE\_INLINE [**Vector2**](structSR__MATH__NS_1_1Vector2.md) | [**operator-**](#function-operator_10) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & p\_v) const<br> |
-|  SR\_FORCE\_INLINE [**Vector2**](structSR__MATH__NS_1_1Vector2.md) & | [**operator-=**](#function-operator_11) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & p\_v) <br> |
-|  SR\_FORCE\_INLINE [**Vector2**](structSR__MATH__NS_1_1Vector2.md) | [**operator/**](#function-operator_12) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & p\_v) const<br> |
-|  SR\_FORCE\_INLINE [**Vector2**](structSR__MATH__NS_1_1Vector2.md) | [**operator/**](#function-operator_13) (const U & v) const<br> |
-|  SR\_FORCE\_INLINE [**Vector2**](structSR__MATH__NS_1_1Vector2.md) & | [**operator/=**](#function-operator_14) (U p\_scalar) <br> |
-|  SR\_FORCE\_INLINE [**Vector2**](structSR__MATH__NS_1_1Vector2.md) & | [**operator/=**](#function-operator_15) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & p\_v) <br> |
-|  SR\_FORCE\_INLINE bool | [**operator&lt;**](#function-operator_16) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md) & p\_v) const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator&lt;**](#function-operator_17) (T p\_scalar) const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator&lt;=**](#function-operator_18) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md) & p\_v) const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator&lt;=**](#function-operator_19) (T p\_scalar) const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator==**](#function-operator_20) (T p\_scalar) const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator==**](#function-operator_21) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & p\_v) const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator&gt;**](#function-operator_22) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md) & p\_v) const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator&gt;**](#function-operator_23) (T p\_scalar) const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator&gt;=**](#function-operator_24) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md) & p\_v) const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator&gt;=**](#function-operator_25) (T p\_scalar) const<br> |
-|  SR\_FORCE\_INLINE const T & | [**operator[]**](#function-operator_26) (int p\_axis) const<br> |
-|  SR\_FORCE\_INLINE T & | [**operator[]**](#function-operator_27) (int p\_axis) <br> |
+|  SR\_FORCE\_INLINE [**Vector2**](structSR__MATH__NS_1_1Vector2.md) | [**operator-**](#function-operator-) () const<br> |
+|  SR\_FORCE\_INLINE [**Vector2**](structSR__MATH__NS_1_1Vector2.md) | [**operator-**](#function-operator-_1) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & p\_v) const<br> |
+|  SR\_FORCE\_INLINE [**Vector2**](structSR__MATH__NS_1_1Vector2.md) & | [**operator-=**](#function-operator-_2) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & p\_v) <br> |
+|  SR\_FORCE\_INLINE [**Vector2**](structSR__MATH__NS_1_1Vector2.md) | [**operator/**](#function-operator_9) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & p\_v) const<br> |
+|  SR\_FORCE\_INLINE [**Vector2**](structSR__MATH__NS_1_1Vector2.md) | [**operator/**](#function-operator_10) (const U & v) const<br> |
+|  SR\_FORCE\_INLINE [**Vector2**](structSR__MATH__NS_1_1Vector2.md) & | [**operator/=**](#function-operator_11) (U p\_scalar) <br> |
+|  SR\_FORCE\_INLINE [**Vector2**](structSR__MATH__NS_1_1Vector2.md) & | [**operator/=**](#function-operator_12) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & p\_v) <br> |
+|  SR\_FORCE\_INLINE bool | [**operator&lt;**](#function-operator_13) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md) & p\_v) const<br> |
+|  SR\_FORCE\_INLINE bool | [**operator&lt;**](#function-operator_14) (T p\_scalar) const<br> |
+|  SR\_FORCE\_INLINE bool | [**operator&lt;=**](#function-operator_15) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md) & p\_v) const<br> |
+|  SR\_FORCE\_INLINE bool | [**operator&lt;=**](#function-operator_16) (T p\_scalar) const<br> |
+|  SR\_FORCE\_INLINE bool | [**operator==**](#function-operator_17) (T p\_scalar) const<br> |
+|  SR\_FORCE\_INLINE bool | [**operator==**](#function-operator_18) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & p\_v) const<br> |
+|  SR\_FORCE\_INLINE bool | [**operator&gt;**](#function-operator_19) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md) & p\_v) const<br> |
+|  SR\_FORCE\_INLINE bool | [**operator&gt;**](#function-operator_20) (T p\_scalar) const<br> |
+|  SR\_FORCE\_INLINE bool | [**operator&gt;=**](#function-operator_21) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md) & p\_v) const<br> |
+|  SR\_FORCE\_INLINE bool | [**operator&gt;=**](#function-operator_22) (T p\_scalar) const<br> |
+|  SR\_FORCE\_INLINE const T & | [**operator[]**](#function-operator_23) (int p\_axis) const<br> |
+|  SR\_FORCE\_INLINE T & | [**operator[]**](#function-operator_24) (int p\_axis) <br> |
 
 
 ## Public Static Functions
@@ -492,6 +493,19 @@ inline SR_NODISCARD bool SR_MATH_NS::Vector2::IsNull () const
 
 ```C++
 inline SR_NODISCARD T SR_MATH_NS::Vector2::Length () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function Round 
+
+```C++
+inline SR_NODISCARD Vector2 SR_MATH_NS::Vector2::Round () const
 ```
 
 

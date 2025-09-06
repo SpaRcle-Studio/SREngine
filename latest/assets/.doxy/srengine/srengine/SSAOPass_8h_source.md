@@ -16,12 +16,11 @@
 #define SR_ENGINE_SSAOPASS_H
 
 #include <Graphics/Pass/PostProcessPass.h>
-#include <Graphics/Pass/IFramebufferPass.h>
 #include <Graphics/Types/Texture.h>
 
 namespace SR_GRAPH_NS {
-    class SSAOPass : public PostProcessPass, public IFramebufferPass {
-        SR_REGISTER_LOGICAL_NODE(SSAOPass, SSAO Pass, { "Passes" })
+    class SSAOPass : public PostProcessPass {
+        using Super = PostProcessPass;
         using SSAOKernel = std::vector<SR_MATH_NS::FVector4>;
     public:
         bool Init() override;
@@ -34,7 +33,7 @@ namespace SR_GRAPH_NS {
 
         bool Load(const SR_XML_NS::Node& passNode) override;
 
-        void UseSamplers(ShaderUseInfo info) override;
+        void UseSamplers(const ShaderUseInfo& info) override;
 
         SR_NODISCARD std::vector<SR_GTYPES_NS::Framebuffer*> GetFrameBuffers() const override;
 

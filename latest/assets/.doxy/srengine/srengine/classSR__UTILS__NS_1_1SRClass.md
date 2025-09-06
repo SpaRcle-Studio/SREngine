@@ -52,6 +52,7 @@ Inherited by the following classes: [SR\_CORE\_GUI\_NS::PropertyDrawerBase](clas
 
 | Type | Name |
 | ---: | :--- |
+|  void | [**CloneTo**](#function-cloneto) ([**SRClass**](classSR__UTILS__NS_1_1SRClass.md) & clone) const<br> |
 | virtual SR\_NODISCARD const [**SR\_UTILS\_NS::SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md) \* | [**GetMeta**](#function-getmeta) () noexcept const = 0<br> |
 | virtual  | [**~SRClass**](#function-srclass) () = default<br> |
 
@@ -93,6 +94,21 @@ Inherited by the following classes: [SR\_CORE\_GUI\_NS::PropertyDrawerBase](clas
 
 ## Public Functions Documentation
 
+
+
+
+### function CloneTo 
+
+```C++
+void SR_UTILS_NS::SRClass::CloneTo (
+    SRClass & clone
+) const
+```
+
+
+
+
+<hr>
 
 
 

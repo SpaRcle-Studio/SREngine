@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="25" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="26" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="26" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-attrib">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="27" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="28" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="28" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="99" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="99" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="105" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="105" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1a4072c3346c325b019d70e7375f95e683" prot="private" static="no" mutable="no">
         <type>ResourcesTypes</type>
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="100" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="100" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="106" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="106" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1a40721fcf1991aa152e2d8875957fbc5a" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">FileSystemWatcher::Ptr</ref></type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="102" column="32" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="102" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="108" column="32" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="108" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1ae61099ac116d545f38a2be937b80327f" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1IResourceReloader" kindref="compound">IResourceReloader</ref> *</type>
@@ -91,11 +91,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="104" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="104" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="110" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="110" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1a921f8555f64cc32f456586300f7f378a" prot="private" static="no" mutable="no">
-        <type>std::queue&lt; ResourceInfo::WeakPtr &gt;</type>
-        <definition>std::queue&lt;ResourceInfo::WeakPtr&gt; SR_UTILS_NS::ResourceManager::m_dirtyResources</definition>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1a4c9e08726ae2cec930dab5e46f87f0a6" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; ResourceInfo::WeakPtr &gt;</type>
+        <definition>std::vector&lt;ResourceInfo::WeakPtr&gt; SR_UTILS_NS::ResourceManager::m_dirtyResources</definition>
         <argsstring></argsstring>
         <name>m_dirtyResources</name>
         <qualifiedname>SR_UTILS_NS::ResourceManager::m_dirtyResources</qualifiedname>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="106" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="106" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="112" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="112" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1af1e5d7a5ce6f8d9a96d9f4594a3f3fbe" prot="private" static="no" mutable="no">
         <type>std::unordered_map&lt; Hash, SR_HTYPES_NS::Thread::Ptr &gt;</type>
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="108" column="28" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="108" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="114" column="28" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="114" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1a84b6ba8775424e9833f8c4dacda719e7" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -134,7 +134,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="110" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="110" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="116" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="116" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1ac8262fd7ed187b28f02c12786f65275d" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -149,7 +149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="111" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="111" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="117" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="117" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1a7d1bf183963a32f5ebfca8cba7b59936" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -164,7 +164,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="112" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="112" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="118" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="118" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1aa8ee11935a2f8d919c4b97447b43cecd" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -179,7 +179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="113" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="113" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="119" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="119" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1a99281842bbec535994fd1e8347d0f41f" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
@@ -193,7 +193,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="115" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="115" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="121" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="121" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1ab7ef79ff622895059016041c8dac7b22" prot="private" static="no" mutable="no">
         <type>Types::Thread::Ptr</type>
@@ -208,7 +208,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="116" column="28" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="116" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="122" column="28" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="122" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1acf845704c5526c2b5d4a9844cd1a6689" prot="private" static="no" mutable="no">
         <type>uint64_t</type>
@@ -223,7 +223,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="117" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="117" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="123" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="123" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1a9e57cb4016df30bb845d1d5550457ece" prot="private" static="no" mutable="no">
         <type>uint64_t</type>
@@ -238,7 +238,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="118" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="118" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="124" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="124" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1ab7352f9fa1356a84775335e265dc2e99" prot="private" static="no" mutable="no">
         <type>uint64_t</type>
@@ -253,7 +253,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="120" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="120" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="126" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="126" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -269,7 +269,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="30" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="30" bodyend="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="31" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="31" bodyend="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1ab0b03d4b05aaaeb9edbf7035c1a100fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -287,7 +287,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="31" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="32" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a9a073fb3352abc58a34eb79e670d6010" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -301,7 +301,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="32" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="32" bodyend="32"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="33" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="33" bodyend="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1aa99cbe17fc4191c078b64bd39e1b9832" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
@@ -315,7 +315,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="33" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="34" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a66549d95268696d269d39eb1d07f8fe4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &amp;</type>
@@ -329,7 +329,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="34" column="33"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="35" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a42409fce9a9f88cc32fbfde31f52aae0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
@@ -343,7 +343,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="35" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="36" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a12d8581f43c1320da08966f9276f3b88" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">FileSystemWatcher::Ptr</ref></type>
@@ -357,7 +357,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="36" column="45" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="36" bodyend="36"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="37" column="45" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="37" bodyend="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a53733ffadc5f799ab2b3699393d1437c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD IResource::Ptr</type>
@@ -379,7 +379,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="38" column="37"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="39" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a333d17895fe07ef13842ee35575a1e31" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD IResource::Ptr</type>
@@ -397,7 +397,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="39" column="37"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="40" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a230e4c1b1dc0aadb6a3947d57002fef0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -415,7 +415,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="41" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="42" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1ab4fca6c03f1459d9811c987cb9fad1f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -433,7 +433,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="43" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="44" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1ae749aeba77a10b5c27ed011c793f1785" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::ResourceManager::ReloadAll</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom typeName)</argsstring>
+        <name>ReloadAll</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::ReloadAll</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>typeName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="45" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a02d82466fe8c70874a807cf3d7d7f55e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -451,7 +469,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="45" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="47" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a85bc46d33d8e3dff529e89ed11466068" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -469,7 +487,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="46" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="48" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a453f2b6272b58ff282792f80af667bf0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -492,7 +510,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="48" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="48" bodyend="51"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="50" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="50" bodyend="53"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a1ab28b2091cb1456975d8187bc2a7dff" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -515,9 +533,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="53" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="53" bodyend="56"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="55" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="55" bodyend="58"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a702151d5142e036badf487a54b051922" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1ad7015030e3e905d7176659a92424bfc1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -525,12 +543,22 @@
         </templateparamlist>
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; T &gt;</type>
         <definition>SR_HTYPES_NS::SharedPtr&lt; T &gt; SR_UTILS_NS::ResourceManager::GetOrLoadResource</definition>
-        <argsstring>(const Path &amp;rawPath)</argsstring>
+        <argsstring>(const Path &amp;rawPath, const SR_HTYPES_NS::Function&lt; void(T &amp;)&gt; &amp;loadCallback=SR_HTYPES_NS::Function&lt; void(T &amp;)&gt;(), const SR_HTYPES_NS::Function&lt; std::string()&gt; &amp;getPrefix=SR_HTYPES_NS::Function&lt; std::string()&gt;())</argsstring>
         <name>GetOrLoadResource</name>
         <qualifiedname>SR_UTILS_NS::ResourceManager::GetOrLoadResource</qualifiedname>
         <param>
           <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &amp;</type>
           <declname>rawPath</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(T &amp;)&gt; &amp;</type>
+          <declname>loadCallback</declname>
+          <defval><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(T &amp;)&gt;()</defval>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; std::string()&gt; &amp;</type>
+          <declname>getPrefix</declname>
+          <defval><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; std::string()&gt;()</defval>
         </param>
         <briefdescription>
         </briefdescription>
@@ -541,7 +569,7 @@
 <para>auto register</para>
 <para>отложенная ручная регистрация</para>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="58" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="125" bodyend="162"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="60" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="130" bodyend="182"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a3bc09ac972cc06c5dfc37801e34cf82c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -572,7 +600,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="60" column="29" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="60" bodyend="65"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="66" column="29" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="66" bodyend="71"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a46e55c827d2f043781f7915edb0128b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -594,7 +622,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="68" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="74" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a09d9a9dc28e31bf7eb3d108d6c0c6c26" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -616,7 +644,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="71" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="77" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a26481cb339f0f01c2cfc4497d4a82c32" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -634,7 +662,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="73" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="79" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a9b68b933bc17d7b7a075d6b17927e1fa" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -649,7 +677,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="75" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="75" bodyend="75"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="81" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="81" bodyend="81"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1afdef68e025da5f148663edcd6e89db4e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -667,7 +695,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="78" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="84" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1af36e6a8ac41ffa742aef00811ef4bc0f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -681,7 +709,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="79" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="85" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1adc3dda6abed3e33b12a79f36d291c0e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -700,7 +728,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="82" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="88" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1af8a7627faa7b57a640d95f1dab90dcec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -714,7 +742,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="84" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="90" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a7f53193f61393c673d7418d84a983e5a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -728,7 +756,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="86" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="92" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a39b2812e40dee8de88025bdee1eac238" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -742,7 +770,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="87" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="93" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -762,7 +790,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="90" column="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="96" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1ad7af399ebeaffd116929cafe8c86502a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -784,7 +812,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="92" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="98" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a9de1d275cefbd4fbf26d75ac37ec849c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -802,7 +830,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="94" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="100" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1ab260722a941e2a123f8812345123df6b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -816,7 +844,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="95" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="101" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1acd4c89c28759d54e2fd8d202a36f146f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -830,7 +858,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="96" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="102" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -885,7 +913,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="23" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="23" bodyend="122"/>
+    <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="24" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="24" bodyend="128"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceManager_1af36e6a8ac41ffa742aef00811ef4bc0f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>DeInitialize</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceManager_1a09d9a9dc28e31bf7eb3d108d6c0c6c26" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>Destroy</name></member>
@@ -901,7 +929,7 @@
       <member refid="classSR__UTILS__NS_1_1ResourceManager_1a12d8581f43c1320da08966f9276f3b88" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>GetFileSystemWatcher</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a6f131e2fa1b2641f7e9ea8662ba8da53" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>GetMutex</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceManager_1aeaf85d0ac8444bd4bcc54a349a340bdf" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>GetOrCreateResourceType</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a702151d5142e036badf487a54b051922" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>GetOrLoadResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1ad7015030e3e905d7176659a92424bfc1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>GetOrLoadResource</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceManager_1aa99cbe17fc4191c078b64bd39e1b9832" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>GetResPath</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceManager_1a66549d95268696d269d39eb1d07f8fe4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>GetResPathRef</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>GetSingletonName</name></member>
@@ -920,7 +948,7 @@
       <member refid="classSR__UTILS__NS_1_1ResourceManager_1ae61099ac116d545f38a2be937b80327f" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>m_defaultReloader</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceManager_1a9e57cb4016df30bb845d1d5550457ece" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>m_deltaTime</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceManager_1ab1fad66d37ddc08aa93fa1be280dcb8b" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>m_destroyed</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a921f8555f64cc32f456586300f7f378a" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>m_dirtyResources</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a4c9e08726ae2cec930dab5e46f87f0a6" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>m_dirtyResources</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceManager_1a40721fcf1991aa152e2d8875957fbc5a" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>m_fileSystemWatcher</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceManager_1a99281842bbec535994fd1e8347d0f41f" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>m_folder</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceManager_1aa8ee11935a2f8d919c4b97447b43cecd" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>m_force</name></member>
@@ -941,6 +969,7 @@
       <member refid="classSR__UTILS__NS_1_1ResourceManager_1a3bc09ac972cc06c5dfc37801e34cf82c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>RegisterReloader</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceManager_1ad7af399ebeaffd116929cafe8c86502a" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>RegisterReloader</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceManager_1a46e55c827d2f043781f7915edb0128b2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>RegisterResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1ae749aeba77a10b5c27ed011c793f1785" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>ReloadAll</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceManager_1ab4fca6c03f1459d9811c987cb9fad1f4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>ReloadResource</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceManager_1adc3dda6abed3e33b12a79f36d291c0e0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>ReloadResources</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceManager_1a9de1d275cefbd4fbf26d75ac37ec849c" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>Remove</name></member>

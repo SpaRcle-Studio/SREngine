@@ -53,7 +53,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  bool | [**operator()**](#function-operator()) (const [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & lhs, const [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & rhs) const<br> |
+|  bool | [**operator()**](#function-operator) (const [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & lhs, const [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & rhs) const<br> |
 
 
 

@@ -82,6 +82,7 @@
 |  SR\_NODISCARD bool | [**IsFinite**](#function-isfinite) () noexcept const<br> |
 |  SR\_NODISCARD T | [**Length**](#function-length) () const<br> |
 |  SR\_NODISCARD [**Vector4**](structSR__MATH__NS_1_1Vector4.md) | [**Normalize**](#function-normalize) () const<br> |
+|  SR\_NODISCARD [**Vector4**](structSR__MATH__NS_1_1Vector4.md) | [**Round**](#function-round) () const<br> |
 |  SR\_NODISCARD T | [**SqrMagnitude**](#function-sqrmagnitude) () const<br> |
 |  SR\_NODISCARD glm::vec4 | [**ToGLM**](#function-toglm) () const<br> |
 |   | [**Vector4**](#function-vector4-15) () <br>_=========================================== IMPLEMENTATION =====================================================_  |
@@ -104,18 +105,18 @@
 |  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; & | [**operator\*=**](#function-operator_10) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & p\_v) <br> |
 |  [**Vector4**](structSR__MATH__NS_1_1Vector4.md) | [**operator+**](#function-operator_11) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & v) const<br> |
 |  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**operator+**](#function-operator_12) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & v) const<br> |
-|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md) | [**operator-**](#function-operator_13) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & p\_v) const<br> |
-|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md) | [**operator-**](#function-operator_14) () const<br> |
-|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**operator-**](#function-operator_15) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & p\_v) const<br> |
-|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md) | [**operator/**](#function-operator_16) (const U & v) const<br> |
-|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**operator/**](#function-operator_17) (const U & v) const<br> |
-|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md) & | [**operator/=**](#function-operator_18) (U p\_scalar) <br> |
-|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md) & | [**operator/=**](#function-operator_19) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & p\_v) <br> |
-|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; & | [**operator/=**](#function-operator_20) (U p\_scalar) <br> |
-|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; & | [**operator/=**](#function-operator_21) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & p\_v) <br> |
-|  bool | [**operator==**](#function-operator_22) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md) & v) const<br> |
-|  const T & | [**operator[]**](#function-operator_23) (int32\_t axis) const<br> |
-|  T & | [**operator[]**](#function-operator_24) (int32\_t axis) <br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md) | [**operator-**](#function-operator-) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & p\_v) const<br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md) | [**operator-**](#function-operator-_1) () const<br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**operator-**](#function-operator-_2) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & p\_v) const<br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md) | [**operator/**](#function-operator_13) (const U & v) const<br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**operator/**](#function-operator_14) (const U & v) const<br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md) & | [**operator/=**](#function-operator_15) (U p\_scalar) <br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md) & | [**operator/=**](#function-operator_16) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & p\_v) <br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; & | [**operator/=**](#function-operator_17) (U p\_scalar) <br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; & | [**operator/=**](#function-operator_18) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & p\_v) <br> |
+|  bool | [**operator==**](#function-operator_19) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md) & v) const<br> |
+|  const T & | [**operator[]**](#function-operator_20) (int32\_t axis) const<br> |
+|  T & | [**operator[]**](#function-operator_21) (int32\_t axis) <br> |
 
 
 ## Public Static Functions
@@ -442,6 +443,19 @@ SR_NODISCARD T SR_MATH_NS::Vector4::Length () const
 
 ```C++
 SR_NODISCARD Vector4 SR_MATH_NS::Vector4::Normalize () const
+```
+
+
+
+
+<hr>
+
+
+
+### function Round 
+
+```C++
+SR_NODISCARD Vector4 SR_MATH_NS::Vector4::Round () const
 ```
 
 

@@ -41,6 +41,7 @@
 | ---: | :--- |
 | struct | [**ObjectDataAccessor&lt; SR\_UTILS\_NS::Path &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__UTILS__NS_1_1Path_01_4.md) &lt;&gt;<br> |
 | class | [**Path**](classSR__UTILS__NS_1_1Path.md) <br> |
+| struct | [**SupportsNullptrComparison&lt; SR\_UTILS\_NS::Path &gt;**](structSR__UTILS__NS_1_1SupportsNullptrComparison_3_01SR__UTILS__NS_1_1Path_01_4.md) &lt;&gt;<br> |
 | struct | [**formatter&lt; SR\_UTILS\_NS::Path &gt;**](structfmt_1_1formatter_3_01SR__UTILS__NS_1_1Path_01_4.md) &lt;&gt;<br> |
 
 

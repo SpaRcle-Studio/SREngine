@@ -40,7 +40,6 @@
 | ---: | :--- |
 | class | [**LayerFilterPredicate**](classSR__GRAPH__NS_1_1LayerFilterPredicate.md) <br> |
 | class | [**PriorityFilterPredicate**](classSR__GRAPH__NS_1_1PriorityFilterPredicate.md) <br> |
-| class | [**ShaderReplacePredicate**](classSR__GRAPH__NS_1_1ShaderReplacePredicate.md) <br> |
 
 
 

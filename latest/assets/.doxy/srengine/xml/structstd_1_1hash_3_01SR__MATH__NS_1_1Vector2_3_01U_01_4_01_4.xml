@@ -24,14 +24,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="267" column="16" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="267" bodyend="272"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="279" column="16" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="279" bodyend="284"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="266" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="266" bodyend="273"/>
+    <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="278" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="278" bodyend="285"/>
     <listofallmembers>
       <member refid="structstd_1_1hash_3_01SR__MATH__NS_1_1Vector2_3_01U_01_4_01_4_1ac1ca1604bcce5f7aee9824facbe74ad4" prot="public" virt="non-virtual"><scope>std::hash&lt; SR_MATH_NS::Vector2&lt; U &gt; &gt;</scope><name>operator()</name></member>
     </listofallmembers>

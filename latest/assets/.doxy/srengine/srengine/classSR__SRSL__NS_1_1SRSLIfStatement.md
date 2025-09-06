@@ -100,7 +100,7 @@ Inherits the following classes: [SR\_SRSL\_NS::SRSLLexicalUnit](classSR__SRSL__N
 
 | Type | Name |
 | ---: | :--- |
-|   | [**SRSLIfStatement**](#function-srslifstatement-12) () = default<br> |
+|   | [**SRSLIfStatement**](#function-srslifstatement-12) () <br> |
 |   | [**SRSLIfStatement**](#function-srslifstatement-22) (bool isElse) <br> |
 |   | [**~SRSLIfStatement**](#function-srslifstatement) () override<br> |
 
@@ -111,6 +111,8 @@ See [SR\_SRSL\_NS::SRSLLexicalUnit](classSR__SRSL__NS_1_1SRSLLexicalUnit.md)
 
 | Type | Name |
 | ---: | :--- |
+|  SR\_NODISCARD LexicalUnitType | [**GetLexicalUnitType**](classSR__SRSL__NS_1_1SRSLLexicalUnit.md#function-getlexicalunittype) () const<br> |
+|   | [**SRSLLexicalUnit**](classSR__SRSL__NS_1_1SRSLLexicalUnit.md#function-srsllexicalunit) (LexicalUnitType type) <br> |
 | virtual SR\_NODISCARD std::string | [**ToString**](classSR__SRSL__NS_1_1SRSLLexicalUnit.md#function-tostring) (uint32\_t deep) const<br> |
 
 
@@ -267,7 +269,7 @@ SRSLLexicalTree* SR_SRSL_NS::SRSLIfStatement::pLexicalTree;
 ### function SRSLIfStatement [1/2]
 
 ```C++
-SR_SRSL_NS::SRSLIfStatement::SRSLIfStatement () = default
+inline SR_SRSL_NS::SRSLIfStatement::SRSLIfStatement () 
 ```
 
 

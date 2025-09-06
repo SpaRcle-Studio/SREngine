@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structObjectDataAccessor_3_01SR__MATH__NS_1_1FColor_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>ObjectDataAccessor&lt; SR_MATH_NS::FColor &gt;</compoundname>
+    <templateparamlist>
+    </templateparamlist>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structObjectDataAccessor_3_01SR__MATH__NS_1_1FColor_01_4_1a68ba12391fe739d94b9dbb611bb01656" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void ObjectDataAccessor&lt; SR_MATH_NS::FColor &gt;::Save</definition>
+        <argsstring>(ISerializer &amp;serializer, const SR_MATH_NS::FColor &amp;value, const SerializationId &amp;id)</argsstring>
+        <name>Save</name>
+        <qualifiedname>ObjectDataAccessor&lt; SR_MATH_NS::FColor &gt;::Save</qualifiedname>
+        <param>
+          <type>ISerializer &amp;</type>
+          <declname>serializer</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">SR_MATH_NS::FColor</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const SerializationId &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="622" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="622" bodyend="629"/>
+      </memberdef>
+      <memberdef kind="function" id="structObjectDataAccessor_3_01SR__MATH__NS_1_1FColor_01_4_1a7841c2d63f578ce40b37aaef20c19954" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void ObjectDataAccessor&lt; SR_MATH_NS::FColor &gt;::Load</definition>
+        <argsstring>(IDeserializer &amp;deserializer, SR_MATH_NS::FColor &amp;value, const SerializationId &amp;id)</argsstring>
+        <name>Load</name>
+        <qualifiedname>ObjectDataAccessor&lt; SR_MATH_NS::FColor &gt;::Load</qualifiedname>
+        <param>
+          <type>IDeserializer &amp;</type>
+          <declname>deserializer</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">SR_MATH_NS::FColor</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const SerializationId &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="631" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="631" bodyend="640"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="621" column="10" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="621" bodyend="641"/>
+    <listofallmembers>
+      <member refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1FColor_01_4_1a7841c2d63f578ce40b37aaef20c19954" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; SR_MATH_NS::FColor &gt;</scope><name>Load</name></member>
+      <member refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1FColor_01_4_1a68ba12391fe739d94b9dbb611bb01656" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; SR_MATH_NS::FColor &gt;</scope><name>Save</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

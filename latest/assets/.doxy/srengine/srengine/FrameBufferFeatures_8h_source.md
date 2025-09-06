@@ -18,9 +18,13 @@
 #include <Graphics/macros.h>
 
 #include <Utils/Debug.h>
+#include <Utils/Serialization/Serializable.h>
 
 namespace SR_GRAPH_NS {
-    struct FrameBufferFeatures {
+    struct FrameBufferFeatures : public SR_UTILS_NS::Serializable {
+        SR_STRUCT()
+
+        
         bool depthLoad = false;
         bool colorLoad = false;
         bool depthTransferSrc = false;

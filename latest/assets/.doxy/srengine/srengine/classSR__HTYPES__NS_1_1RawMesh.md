@@ -76,7 +76,6 @@ Inherits the following classes: IResource
 |  SR\_NODISCARD float\_t | [**GetScaleFactor**](#function-getscalefactor) () const<br> |
 |  SR\_NODISCARD std::vector&lt; [**SR\_UTILS\_NS::Vertex**](structSR__UTILS__NS_1_1Vertex.md) &gt; | [**GetVertices**](#function-getvertices) (uint32\_t id) const<br> |
 |  SR\_NODISCARD uint32\_t | [**GetVerticesCount**](#function-getverticescount) (uint32\_t id) const<br> |
-|  [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**InitializeResourcePath**](#function-initializeresourcepath) () override const<br> |
 |  SR\_NODISCARD bool | [**IsAllowedToRevive**](#function-isallowedtorevive) () override const<br> |
 |   | [**RawMesh**](#function-rawmesh) () <br> |
 |   | [**~RawMesh**](#function-rawmesh) () override<br> |
@@ -400,19 +399,6 @@ SR_NODISCARD std::vector< SR_UTILS_NS::Vertex > SR_HTYPES_NS::RawMesh::GetVertic
 SR_NODISCARD uint32_t SR_HTYPES_NS::RawMesh::GetVerticesCount (
     uint32_t id
 ) const
-```
-
-
-
-
-<hr>
-
-
-
-### function InitializeResourcePath 
-
-```C++
-SR_UTILS_NS::Path SR_HTYPES_NS::RawMesh::InitializeResourcePath () override const
 ```
 
 

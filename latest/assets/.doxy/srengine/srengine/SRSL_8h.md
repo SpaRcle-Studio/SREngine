@@ -33,16 +33,14 @@
 | ---: | :--- |
 | namespace | [**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md) <br> |
 | namespace | [**SRSL**](namespaceSR__GRAPH__NS_1_1SRSL.md) <br> |
+| namespace | [**SR\_SRSL\_NS**](namespaceSR__SRSL__NS.md) <br> |
 
 
 ## Classes
 
 | Type | Name |
 | ---: | :--- |
-| class | [**SRSLLoader**](classSR__GRAPH__NS_1_1SRSL_1_1SRSLLoader.md) <br> |
-| struct | [**SRSLStage**](structSR__GRAPH__NS_1_1SRSL_1_1SRSLStage.md) <br> |
-| struct | [**SRSLUnit**](structSR__GRAPH__NS_1_1SRSL_1_1SRSLUnit.md) <br> |
-| struct | [**SRSLVariable**](structSR__GRAPH__NS_1_1SRSL_1_1SRSLVariable.md) <br> |
+| struct | [**ShaderMacrosParams**](structSR__SRSL__NS_1_1ShaderMacrosParams.md) <br> |
 
 
 

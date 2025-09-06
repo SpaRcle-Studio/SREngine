@@ -83,6 +83,7 @@ Inherits the following classes: [SR\_HTYPES\_NS::SafePtr](classSR__HTYPES__NS_1_
 |  SR\_NODISCARD FramebufferPtr | [**FindFramebuffer**](#function-findframebuffer-12) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) const<br> |
 |  SR\_NODISCARD FramebufferPtr | [**FindFramebuffer**](#function-findframebuffer-22) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name, CameraPtr pCamera) const<br> |
 |  void | [**GarbageCollect**](#function-garbagecollect) () <br> |
+|  SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetActivePreset**](#function-getactivepreset) () noexcept const<br> |
 |  SR\_NODISCARD ShaderPtr | [**GetCurrentShader**](#function-getcurrentshader) () noexcept const<br> |
 |  SR\_NODISCARD MaterialPtr | [**GetDefaultMaterial**](#function-getdefaultmaterial) () const<br> |
 |  SR\_NODISCARD TexturePtr | [**GetDefaultTexture**](#function-getdefaulttexture) () const<br> |
@@ -94,6 +95,8 @@ Inherits the following classes: [SR\_HTYPES\_NS::SafePtr](classSR__HTYPES__NS_1_
 |  SR\_NODISCARD PipelineType | [**GetPipelineType**](#function-getpipelinetype) () const<br> |
 |  SR\_NODISCARD const std::vector&lt; RenderTechniquePtr &gt; & | [**GetRenderTechniques**](#function-getrendertechniques) () noexcept const<br> |
 |  SR\_NODISCARD const RenderScenes & | [**GetScenes**](#function-getscenes) () noexcept const<br> |
+|  SR\_NODISCARD const [**RenderSettings**](classSR__GRAPH__NS_1_1RenderSettings.md) & | [**GetSettings**](#function-getsettings) () noexcept const<br> |
+|  SR\_NODISCARD const [**RenderSettingsPreset**](structSR__GRAPH__NS_1_1RenderSettingsPreset.md) & | [**GetSettingsPreset**](#function-getsettingspreset) () noexcept const<br> |
 |  SR\_NODISCARD const std::vector&lt; ShaderPtr &gt; & | [**GetShaders**](#function-getshaders) () noexcept const<br> |
 |  SR\_NODISCARD const std::vector&lt; SkyboxPtr &gt; & | [**GetSkyboxes**](#function-getskyboxes) () noexcept const<br> |
 |  SR\_NODISCARD const std::vector&lt; TexturePtr &gt; & | [**GetTextures**](#function-gettextures) () noexcept const<br> |
@@ -108,6 +111,7 @@ Inherits the following classes: [SR\_HTYPES\_NS::SafePtr](classSR__HTYPES__NS_1_
 |  void | [**PrepareFrame**](#function-prepareframe) () <br> |
 |  void | [**Register**](#function-register) ([**Memory::IGraphicsResource**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md) \* pResource, [**SR\_UTILS\_NS::PassKey**](classSR__UTILS__NS_1_1PassKey.md)&lt; [**Memory::IGraphicsResource**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md) &gt;) <br> |
 |   | [**RenderContext**](#function-rendercontext) () <br> |
+|  void | [**SetActivePreset**](#function-setactivepreset) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) <br> |
 |  bool | [**SetCurrentShader**](#function-setcurrentshader) (ShaderPtr pShader) <br> |
 |  void | [**SetDirty**](#function-setdirty) () <br> |
 |  void | [**SetOptimizedRenderUpdateEnabled**](#function-setoptimizedrenderupdateenabled) (bool enabled) noexcept<br> |
@@ -158,10 +162,10 @@ See [SR\_HTYPES\_NS::SafePtr](classSR__HTYPES__NS_1_1SafePtr.md)
 |   | [**operator bool**](classSR__HTYPES__NS_1_1SafePtr.md#function-operator-bool) () noexcept const<br>_не должен быть виртуальным_  |
 |  SR\_NODISCARD SR\_INLINE bool | [**operator!=**](classSR__HTYPES__NS_1_1SafePtr.md#function-operator) (const [**SafePtr**](classSR__HTYPES__NS_1_1SafePtr.md)&lt; T &gt; & right) noexcept const<br> |
 |  T & | [**operator\***](classSR__HTYPES__NS_1_1SafePtr.md#function-operator_1) () const<br> |
-|  T \* | [**operator-&gt;**](classSR__HTYPES__NS_1_1SafePtr.md#function-operator_2) () const<br> |
-|  [**SafePtr**](classSR__HTYPES__NS_1_1SafePtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SafePtr.md#function-operator_3) (const [**SafePtr**](classSR__HTYPES__NS_1_1SafePtr.md)&lt; T &gt; & ptr) <br> |
-|  [**SafePtr**](classSR__HTYPES__NS_1_1SafePtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SafePtr.md#function-operator_4) (T \* ptr) <br> |
-|  SR\_NODISCARD SR\_INLINE bool | [**operator==**](classSR__HTYPES__NS_1_1SafePtr.md#function-operator_5) (const [**SafePtr**](classSR__HTYPES__NS_1_1SafePtr.md)&lt; T &gt; & right) noexcept const<br> |
+|  T \* | [**operator-&gt;**](classSR__HTYPES__NS_1_1SafePtr.md#function-operator-) () const<br> |
+|  [**SafePtr**](classSR__HTYPES__NS_1_1SafePtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SafePtr.md#function-operator_2) (const [**SafePtr**](classSR__HTYPES__NS_1_1SafePtr.md)&lt; T &gt; & ptr) <br> |
+|  [**SafePtr**](classSR__HTYPES__NS_1_1SafePtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SafePtr.md#function-operator_3) (T \* ptr) <br> |
+|  SR\_NODISCARD SR\_INLINE bool | [**operator==**](classSR__HTYPES__NS_1_1SafePtr.md#function-operator_4) (const [**SafePtr**](classSR__HTYPES__NS_1_1SafePtr.md)&lt; T &gt; & right) noexcept const<br> |
 |   | [**~SafePtr**](classSR__HTYPES__NS_1_1SafePtr.md#function-safeptr) () <br> |
 
 
@@ -316,6 +320,19 @@ inline void SR_GRAPH_NS::RenderContext::GarbageCollect ()
 
 
 
+### function GetActivePreset 
+
+```C++
+inline SR_NODISCARD SR_UTILS_NS::StringAtom SR_GRAPH_NS::RenderContext::GetActivePreset () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
 ### function GetCurrentShader 
 
 ```C++
@@ -450,6 +467,32 @@ SR_NODISCARD const std::vector< RenderTechniquePtr > & SR_GRAPH_NS::RenderContex
 
 ```C++
 inline SR_NODISCARD const RenderScenes & SR_GRAPH_NS::RenderContext::GetScenes () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetSettings 
+
+```C++
+SR_NODISCARD const RenderSettings & SR_GRAPH_NS::RenderContext::GetSettings () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetSettingsPreset 
+
+```C++
+SR_NODISCARD const RenderSettingsPreset & SR_GRAPH_NS::RenderContext::GetSettingsPreset () noexcept const
 ```
 
 
@@ -637,6 +680,21 @@ void SR_GRAPH_NS::RenderContext::Register (
 
 ```C++
 SR_GRAPH_NS::RenderContext::RenderContext () 
+```
+
+
+
+
+<hr>
+
+
+
+### function SetActivePreset 
+
+```C++
+void SR_GRAPH_NS::RenderContext::SetActivePreset (
+    SR_UTILS_NS::StringAtom name
+) 
 ```
 
 

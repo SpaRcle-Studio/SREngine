@@ -900,6 +900,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>AutoFree</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform2D_1a0e52dca69afb2d4db5da0170a8e07b1c" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>BuildUITree</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>CloneTo</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>DecrementPointer</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>DynamicCast</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform_1a8d1072763a0b8b4b6e4ef9ab3c2469a0" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>Forward</name></member>
@@ -1033,7 +1034,7 @@
       <member refid="classSR__UTILS__NS_1_1Transform2D_1ab51ebc6fcda53c829599cd5b79326971" prot="protected" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>UpdateMatrix</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform2D_1a5bc22278ec490dc9d3ab61765f0b8582" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>UpdatePriorityTree</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform_1ac4c1bc6acc78f9711350e70a97699d56" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>UpdateTree</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a783dd9e4a58072de8ff19895693bca05" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>Valid</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a5aab0756802a67de9cb45b83b3e73c70" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>VerifyAfterLoad</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>~SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>~SharedPtrBase</name></member>

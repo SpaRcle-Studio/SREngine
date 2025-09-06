@@ -87,6 +87,7 @@ namespace SR_UTILS_NS {
         template<typename EnumType> SR_NODISCARD static int64_t GetIndex(int64_t value);
         template<typename EnumType> SR_NODISCARD static EnumType At(uint64_t index);
         template<typename EnumType> SR_NODISCARD static int64_t AtAsInt(uint64_t index);
+        template<typename EnumType> SR_NODISCARD static int64_t AsInt(EnumType value);
         template<typename EnumType> SR_NODISCARD static SR_UTILS_NS::StringAtom GetName();
         template<typename EnumType> SR_NODISCARD static EnumVariant GetEnumVariant();
 
@@ -258,6 +259,10 @@ namespace SR_UTILS_NS {
         }
 
         return names;
+    }
+
+    template<typename EnumType> int64_t EnumReflector::AsInt(EnumType value) {
+        return static_cast<int64_t>(value);
     }
 
     template<typename EnumType> int64_t EnumReflector::GetIndex(EnumType value) {

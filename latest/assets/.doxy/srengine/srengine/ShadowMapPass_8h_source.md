@@ -18,8 +18,7 @@
 #include <Graphics/Pass/ShaderOverridePass.h>
 
 namespace SR_GRAPH_NS {
-    class ShadowMapPass : public ShaderOverridePass {
-        SR_REGISTER_LOGICAL_NODE(ShadowMapPass, Shadow Map Pass, { "Passes" })
+    /*class ShadowMapPass : public ShaderOverridePass {
         using Super = ShaderOverridePass;
     public:
         bool Init() override;
@@ -40,7 +39,7 @@ namespace SR_GRAPH_NS {
     private:
         SR_MATH_NS::Matrix4x4 m_lightSpaceMatrix;
 
-    };
+    };*/
 }
 
 #endif //SR_ENGINE_SHADOW_MAP_PASS_H

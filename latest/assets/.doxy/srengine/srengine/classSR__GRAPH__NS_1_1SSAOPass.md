@@ -13,7 +13,7 @@
 
 
 
-Inherits the following classes: [SR\_GRAPH\_NS::PostProcessPass](classSR__GRAPH__NS_1_1PostProcessPass.md),  [SR\_GRAPH\_NS::IFramebufferPass](classSR__GRAPH__NS_1_1IFramebufferPass.md)
+Inherits the following classes: [SR\_GRAPH\_NS::PostProcessPass](classSR__GRAPH__NS_1_1PostProcessPass.md)
 
 
 
@@ -39,21 +39,13 @@ See [SR\_GRAPH\_NS::BasePass](classSR__GRAPH__NS_1_1BasePass.md)
 | Type | Name |
 | ---: | :--- |
 | typedef [**SR\_GTYPES\_NS::Camera**](classSR__GTYPES__NS_1_1Camera.md) \* | [**CameraPtr**](classSR__GRAPH__NS_1_1BasePass.md#typedef-cameraptr)  <br> |
-| typedef [**RenderContext**](classSR__GRAPH__NS_1_1RenderContext.md) \* | [**Context**](classSR__GRAPH__NS_1_1BasePass.md#typedef-context)  <br> |
+| typedef std::vector&lt; [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**SR\_GTYPES\_NS::Framebuffer**](classSR__GTYPES__NS_1_1Framebuffer.md) &gt; &gt; | [**FrameBuffers**](classSR__GRAPH__NS_1_1BasePass.md#typedef-framebuffers)  <br> |
 | typedef [**SR\_GTYPES\_NS::Mesh**](classSR__GTYPES__NS_1_1Mesh.md) \* | [**MeshPtr**](classSR__GRAPH__NS_1_1BasePass.md#typedef-meshptr)  <br> |
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Pipeline**](classSR__GRAPH__NS_1_1Pipeline.md) &gt; | [**PipelinePtr**](classSR__GRAPH__NS_1_1BasePass.md#typedef-pipelineptr)  <br> |
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**BasePass**](classSR__GRAPH__NS_1_1BasePass.md) &gt; | [**Ptr**](classSR__GRAPH__NS_1_1BasePass.md#typedef-ptr)  <br> |
+| typedef [**RenderContext**](classSR__GRAPH__NS_1_1RenderContext.md) \* | [**RenderContextPtr**](classSR__GRAPH__NS_1_1BasePass.md#typedef-rendercontextptr)  <br> |
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**RenderScene**](classSR__GRAPH__NS_1_1RenderScene.md) &gt; | [**RenderScenePtr**](classSR__GRAPH__NS_1_1BasePass.md#typedef-rendersceneptr)  <br> |
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) &gt; | [**ShaderPtr**](classSR__GRAPH__NS_1_1BasePass.md#typedef-shaderptr)  <br> |
-
-
-## Public Types inherited from SR_UTILS_NS::ResourceContainer
-
-See [SR\_UTILS\_NS::ResourceContainer](classSR__UTILS__NS_1_1ResourceContainer.md)
-
-| Type | Name |
-| ---: | :--- |
-| typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**ResourceContainer**](classSR__UTILS__NS_1_1ResourceContainer.md) &gt; | [**Ptr**](classSR__UTILS__NS_1_1ResourceContainer.md#typedef-ptr)  <br> |
 
 
 ## Public Types inherited from SR_HTYPES_NS::SharedPtr
@@ -68,101 +60,13 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 
 
 
+## Public Types inherited from SR_UTILS_NS::Serializable
 
-
-## Public Types inherited from SR_SRLM_NS::LogicalNode
-
-See [SR\_SRLM\_NS::LogicalNode](classSR__SRLM__NS_1_1LogicalNode.md)
+See [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 
 | Type | Name |
 | ---: | :--- |
-| typedef uint64\_t | [**Hash**](classSR__SRLM__NS_1_1LogicalNode.md#typedef-hash)  <br> |
-| typedef std::vector&lt; [**NodePin**](structSR__SRLM__NS_1_1LogicalNode_1_1NodePin.md) &gt; | [**Pins**](classSR__SRLM__NS_1_1LogicalNode.md#typedef-pins)  <br> |
-
-
-
-
-
-
-## Public Types inherited from SR_GRAPH_NS::IFramebufferPass
-
-See [SR\_GRAPH\_NS::IFramebufferPass](classSR__GRAPH__NS_1_1IFramebufferPass.md)
-
-| Type | Name |
-| ---: | :--- |
-| typedef std::vector&lt; [**SR\_MATH\_NS::FColor**](classSR__MATH__NS_1_1FColor.md) &gt; | [**ClearColors**](classSR__GRAPH__NS_1_1IFramebufferPass.md#typedef-clearcolors)  <br> |
-| typedef std::list&lt; ImageFormat &gt; | [**ColorFormats**](classSR__GRAPH__NS_1_1IFramebufferPass.md#typedef-colorformats)  <br> |
-| typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**SR\_GTYPES\_NS::Framebuffer**](classSR__GTYPES__NS_1_1Framebuffer.md) &gt; | [**FramebufferPtr**](classSR__GRAPH__NS_1_1IFramebufferPass.md#typedef-framebufferptr)  <br> |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+| typedef [**Serializable**](classSR__UTILS__NS_1_1Serializable.md) | [**OriginType**](classSR__UTILS__NS_1_1Serializable.md#typedef-origintype)  <br> |
 
 
 
@@ -298,13 +202,13 @@ See [SR\_GRAPH\_NS::IFramebufferPass](classSR__GRAPH__NS_1_1IFramebufferPass.md)
 | Type | Name |
 | ---: | :--- |
 | virtual void | [**DeInit**](#function-deinit) () override<br> |
-| virtual SR\_NODISCARD std::vector&lt; [**SR\_GTYPES\_NS::Framebuffer**](classSR__GTYPES__NS_1_1Framebuffer.md) \* &gt; | [**GetFrameBuffers**](#function-getframebuffers) () override const<br> |
+|  SR\_NODISCARD std::vector&lt; [**SR\_GTYPES\_NS::Framebuffer**](classSR__GTYPES__NS_1_1Framebuffer.md) \* &gt; | [**GetFrameBuffers**](#function-getframebuffers) () override const<br> |
 | virtual bool | [**Init**](#function-init) () override<br> |
-| virtual bool | [**Load**](#function-load) (const SR\_XML\_NS::Node & passNode) override<br> |
+|  bool | [**Load**](#function-load) (const SR\_XML\_NS::Node & passNode) override<br> |
 | virtual void | [**OnResize**](#function-onresize) (const SR\_MATH\_NS::UVector2 & size) override<br> |
 | virtual bool | [**Render**](#function-render) () override<br>_Вызывается только во время построения_  |
 | virtual void | [**Update**](#function-update) () override<br>_Вызывается постоянно после построения_  |
-| virtual void | [**UseSamplers**](#function-usesamplers) ([**ShaderUseInfo**](structSR__GRAPH__NS_1_1ShaderUseInfo.md) info) override<br> |
+|  void | [**UseSamplers**](#function-usesamplers) (const ShaderUseInfo & info) override<br> |
 
 
 ## Public Functions inherited from SR_GRAPH_NS::PostProcessPass
@@ -313,12 +217,9 @@ See [SR\_GRAPH\_NS::PostProcessPass](classSR__GRAPH__NS_1_1PostProcessPass.md)
 
 | Type | Name |
 | ---: | :--- |
-| virtual bool | [**Load**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-load) (const SR\_XML\_NS::Node & passNode) override<br> |
 | virtual void | [**OnMultisampleChanged**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-onmultisamplechanged) () override<br> |
 | virtual void | [**OnResize**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-onresize) (const SR\_MATH\_NS::UVector2 & size) override<br> |
-| virtual void | [**OnResourceUpdated**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-onresourceupdated) ([**SR\_UTILS\_NS::ResourceContainer**](classSR__UTILS__NS_1_1ResourceContainer.md) \* pContainer, int32\_t depth) override<br> |
 | virtual bool | [**PreRender**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-prerender) () override<br>_Вызывается только во время построения_  |
-| virtual void | [**Prepare**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-prepare) () override<br>_Вызывается всегда но полсе оверлея_  |
 | virtual bool | [**Render**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-render) () override<br>_Вызывается только во время построения_  |
 | virtual void | [**Update**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-update) () override<br>_Вызывается постоянно после построения_  |
 |   | [**~PostProcessPass**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-postprocesspass) () override<br> |
@@ -333,22 +234,22 @@ See [SR\_GRAPH\_NS::BasePass](classSR__GRAPH__NS_1_1BasePass.md)
 |   | [**BasePass**](classSR__GRAPH__NS_1_1BasePass.md#function-basepass) () <br> |
 | virtual void | [**Bind**](classSR__GRAPH__NS_1_1BasePass.md#function-bind) () <br>_Вызывается перед PreRender, Render, PostRender, Update._  |
 | virtual void | [**DeInit**](classSR__GRAPH__NS_1_1BasePass.md#function-deinit) () <br> |
-|  SR\_NODISCARD [**Context**](classSR__GRAPH__NS_1_1RenderContext.md) | [**GetContext**](classSR__GRAPH__NS_1_1BasePass.md#function-getcontext) () const<br> |
-| virtual SR\_NODISCARD std::vector&lt; [**SR\_GTYPES\_NS::Framebuffer**](classSR__GTYPES__NS_1_1Framebuffer.md) \* &gt; | [**GetFrameBuffers**](classSR__GRAPH__NS_1_1BasePass.md#function-getframebuffers) () const<br> |
-|  SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetName**](classSR__GRAPH__NS_1_1BasePass.md#function-getname) () const<br> |
+| virtual SR\_NODISCARD [**BasePass**](classSR__GRAPH__NS_1_1BasePass.md) \* | [**FindPass**](classSR__GRAPH__NS_1_1BasePass.md#function-findpass) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) <br> |
+| virtual void | [**ForEachPass**](classSR__GRAPH__NS_1_1BasePass.md#function-foreachpass) (const std::function&lt; void([**BasePass**](classSR__GRAPH__NS_1_1BasePass.md) &)&gt; & func) <br> |
+|  SR\_NODISCARD const CameraPtr & | [**GetCamera**](classSR__GRAPH__NS_1_1BasePass.md#function-getcamera) () const<br> |
 |  SR\_NODISCARD [**BasePass**](classSR__GRAPH__NS_1_1BasePass.md) \* | [**GetParent**](classSR__GRAPH__NS_1_1BasePass.md#function-getparent) () const<br> |
-|  SR\_NODISCARD PipelinePtr | [**GetPassPipeline**](classSR__GRAPH__NS_1_1BasePass.md#function-getpasspipeline) () const<br> |
-| virtual SR\_NODISCARD RenderScenePtr | [**GetRenderScene**](classSR__GRAPH__NS_1_1BasePass.md#function-getrenderscene) () const<br> |
+|  SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetPassName**](classSR__GRAPH__NS_1_1BasePass.md#function-getpassname) () const<br> |
+|  SR\_NODISCARD const PipelinePtr & | [**GetPipeline**](classSR__GRAPH__NS_1_1BasePass.md#function-getpipeline) () const<br> |
+|  SR\_NODISCARD const [**RenderContextPtr**](classSR__GRAPH__NS_1_1RenderContext.md) & | [**GetRenderContext**](classSR__GRAPH__NS_1_1BasePass.md#function-getrendercontext) () const<br> |
+|  SR\_NODISCARD const RenderScenePtr & | [**GetRenderScene**](classSR__GRAPH__NS_1_1BasePass.md#function-getrenderscene) () const<br> |
 |  SR\_NODISCARD [**IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \* | [**GetTechnique**](classSR__GRAPH__NS_1_1BasePass.md#function-gettechnique) () const<br> |
 | virtual bool | [**HasPostRender**](classSR__GRAPH__NS_1_1BasePass.md#function-haspostrender) () noexcept const<br> |
 | virtual bool | [**HasPreRender**](classSR__GRAPH__NS_1_1BasePass.md#function-hasprerender) () noexcept const<br> |
 | virtual bool | [**HasRender**](classSR__GRAPH__NS_1_1BasePass.md#function-hasrender) () noexcept const<br> |
 | virtual bool | [**HasUpdate**](classSR__GRAPH__NS_1_1BasePass.md#function-hasupdate) () noexcept const<br> |
 | virtual bool | [**Init**](classSR__GRAPH__NS_1_1BasePass.md#function-init) () <br> |
+|  SR\_NODISCARD bool | [**IsActive**](classSR__GRAPH__NS_1_1BasePass.md#function-isactive) () const<br> |
 |  SR\_NODISCARD bool | [**IsInit**](classSR__GRAPH__NS_1_1BasePass.md#function-isinit) () const<br> |
-| virtual bool | [**Load**](classSR__GRAPH__NS_1_1BasePass.md#function-load) (const SR\_XML\_NS::Node & passNode) <br> |
-| virtual void SR\_FASTCALL | [**OnMeshAdded**](classSR__GRAPH__NS_1_1BasePass.md#function-onmeshadded) ([**SR\_GTYPES\_NS::Mesh**](classSR__GTYPES__NS_1_1Mesh.md) \* pMesh, bool transparent) <br> |
-| virtual void SR\_FASTCALL | [**OnMeshRemoved**](classSR__GRAPH__NS_1_1BasePass.md#function-onmeshremoved) ([**SR\_GTYPES\_NS::Mesh**](classSR__GTYPES__NS_1_1Mesh.md) \* pMesh, bool transparent) <br> |
 | virtual void | [**OnMultisampleChanged**](classSR__GRAPH__NS_1_1BasePass.md#function-onmultisamplechanged) () <br> |
 | virtual void | [**OnResize**](classSR__GRAPH__NS_1_1BasePass.md#function-onresize) (const SR\_MATH\_NS::UVector2 & size) <br> |
 | virtual bool | [**Overlay**](classSR__GRAPH__NS_1_1BasePass.md#function-overlay) () <br>_Вызывается всегда и в самом начале_  |
@@ -357,25 +258,12 @@ See [SR\_GRAPH\_NS::BasePass](classSR__GRAPH__NS_1_1BasePass.md)
 | virtual bool | [**PreRender**](classSR__GRAPH__NS_1_1BasePass.md#function-prerender) () <br>_Вызывается только во время построения_  |
 | virtual void | [**Prepare**](classSR__GRAPH__NS_1_1BasePass.md#function-prepare) () <br>_Вызывается всегда но полсе оверлея_  |
 | virtual bool | [**Render**](classSR__GRAPH__NS_1_1BasePass.md#function-render) () <br>_Вызывается только во время построения_  |
-|  void | [**SetContext**](classSR__GRAPH__NS_1_1BasePass.md#function-setcontext) ([**Context**](classSR__GRAPH__NS_1_1RenderContext.md) pContext) <br> |
-|  void | [**SetName**](classSR__GRAPH__NS_1_1BasePass.md#function-setname) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) <br> |
-|  void | [**SetParent**](classSR__GRAPH__NS_1_1BasePass.md#function-setparent) ([**BasePass**](classSR__GRAPH__NS_1_1BasePass.md) \* pParent) <br> |
+| virtual void | [**SetParent**](classSR__GRAPH__NS_1_1BasePass.md#function-setparent) ([**BasePass**](classSR__GRAPH__NS_1_1BasePass.md) \* pParent) <br> |
 | virtual void | [**SetRenderTechnique**](classSR__GRAPH__NS_1_1BasePass.md#function-setrendertechnique) ([**IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \* pRenderTechnique) <br> |
 | virtual void | [**Update**](classSR__GRAPH__NS_1_1BasePass.md#function-update) () <br>_Вызывается постоянно после построения_  |
+| virtual void | [**UseSamplers**](classSR__GRAPH__NS_1_1BasePass.md#function-usesamplers) ([**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* pShader) <br> |
+| virtual void | [**UseUniformsFromAnotherPass**](classSR__GRAPH__NS_1_1BasePass.md#function-useuniformsfromanotherpass) ([**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* pShader) <br> |
 |   | [**~BasePass**](classSR__GRAPH__NS_1_1BasePass.md#function-basepass) () override<br> |
-
-
-## Public Functions inherited from SR_UTILS_NS::ResourceContainer
-
-See [SR\_UTILS\_NS::ResourceContainer](classSR__UTILS__NS_1_1ResourceContainer.md)
-
-| Type | Name |
-| ---: | :--- |
-|  void | [**AddDependency**](classSR__UTILS__NS_1_1ResourceContainer.md#function-adddependency) (const ResourceContainer::Ptr & pContainer) <br> |
-|  SR\_NODISCARD const std::unordered\_set&lt; ResourceContainer::Ptr &gt; & | [**GetContainerParents**](classSR__UTILS__NS_1_1ResourceContainer.md#function-getcontainerparents) () const<br> |
-|  void | [**RemoveDependency**](classSR__UTILS__NS_1_1ResourceContainer.md#function-removedependency) (const ResourceContainer::Ptr & pContainer) <br> |
-|   | [**ResourceContainer**](classSR__UTILS__NS_1_1ResourceContainer.md#function-resourcecontainer) () <br> |
-|   | [**~ResourceContainer**](classSR__UTILS__NS_1_1ResourceContainer.md#function-resourcecontainer) () override<br> |
 
 
 ## Public Functions inherited from SR_HTYPES_NS::SharedPtr
@@ -392,7 +280,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  SR\_NODISCARD SR\_FORCE\_INLINE T \* | [**Get**](classSR__HTYPES__NS_1_1SharedPtr.md#function-get-22) () <br> |
 |  SR\_NODISCARD const void \* | [**GetRawPtr**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getrawptr-12) () const<br> |
 |  SR\_NODISCARD void \* | [**GetRawPtr**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getrawptr-22) () <br>_NOLINT(modernize-use-nodiscard)_  |
-| virtual SR\_NODISCARD SRClass \* | [**GetSRClass**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getsrclass) () override const<br>_NOLINT(modernize-use-nodiscard)_  |
+| virtual SR\_NODISCARD SRClass \* | [**GetSRClass**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getsrclass) () override const<br> |
 |  SR\_NODISCARD [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; | [**GetThis**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getthis) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE const T &SR\_FASTCALL | [**GetUncheckedRef**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getuncheckedref-12) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE T &SR\_FASTCALL | [**GetUncheckedRef**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getuncheckedref-22) () <br> |
@@ -410,15 +298,15 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; U &gt; | [**StaticCast**](classSR__HTYPES__NS_1_1SharedPtr.md#function-staticcast) () const<br> |
 |  SR\_NODISCARD bool | [**TryRecursiveLockIfValid**](classSR__HTYPES__NS_1_1SharedPtr.md#function-tryrecursivelockifvalid) () noexcept const<br> |
 |  void | [**Unlock**](classSR__HTYPES__NS_1_1SharedPtr.md#function-unlock) () noexcept const<br> |
-|  bool | [**Valid**](classSR__HTYPES__NS_1_1SharedPtr.md#function-valid) () const<br> |
+| virtual SR\_NODISCARD bool | [**Valid**](classSR__HTYPES__NS_1_1SharedPtr.md#function-valid) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE | [**operator bool**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator-bool) () noexcept const<br> |
 |  SR\_INLINE bool | [**operator!=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & right) const<br> |
 |  SR\_FORCE\_INLINE T & | [**operator\***](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_1) () const<br> |
-|  SR\_FORCE\_INLINE T \* | [**operator-&gt;**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_2) () const<br> |
-|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_3) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & ptr) <br> |
-|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_4) (T \* ptr) <br> |
-|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_5) ([**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; && ptr) noexcept<br> |
-|  SR\_INLINE bool | [**operator==**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_6) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & right) const<br> |
+|  SR\_FORCE\_INLINE T \* | [**operator-&gt;**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator-) () const<br> |
+|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_2) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & ptr) <br> |
+|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_3) (T \* ptr) <br> |
+|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_4) ([**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; && ptr) noexcept<br> |
+|  SR\_INLINE bool | [**operator==**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_5) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & right) const<br> |
 |   | [**~SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md#function-sharedptr) () override<br> |
 
 
@@ -437,103 +325,37 @@ See [SR\_HTYPES\_NS::SharedPtrBase](classSR__HTYPES__NS_1_1SharedPtrBase.md)
 | virtual void | [**SetPointerFromBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-setpointerfrombase) ([**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md) \* pBase) = 0<br> |
 |   | [**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase-12) () <br> |
 |   | [**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase-22) ([**SharedPtrDynamicData**](structSR__HTYPES__NS_1_1SharedPtrDynamicData.md) \* data) <br> |
+| virtual SR\_NODISCARD bool | [**Valid**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-valid) () const = 0<br> |
 | virtual  | [**~SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase) () <br> |
 
 
-## Public Functions inherited from SR_SRLM_NS::IExecutableNode
+## Public Functions inherited from SR_UTILS_NS::Serializable
 
-See [SR\_SRLM\_NS::IExecutableNode](classSR__SRLM__NS_1_1IExecutableNode.md)
-
-| Type | Name |
-| ---: | :--- |
-| virtual SR\_NODISCARD LogicalNodeType | [**GetType**](classSR__SRLM__NS_1_1IExecutableNode.md#function-gettype) () noexcept const<br> |
-
-
-## Public Functions inherited from SR_SRLM_NS::LogicalNode
-
-See [SR\_SRLM\_NS::LogicalNode](classSR__SRLM__NS_1_1LogicalNode.md)
+See [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 
 | Type | Name |
 | ---: | :--- |
-|  void | [**AddInputConnection**](classSR__SRLM__NS_1_1LogicalNode.md#function-addinputconnection) ([**LogicalNode**](classSR__SRLM__NS_1_1LogicalNode.md) \* pNode, uint32\_t nodePinIndex, uint32\_t pinIndex) <br> |
-|  [**NodePin**](structSR__SRLM__NS_1_1LogicalNode_1_1NodePin.md) & | [**AddInputData**](classSR__SRLM__NS_1_1LogicalNode.md#function-addinputdata) ([**DataType**](classSR__SRLM__NS_1_1DataType.md) \* pData, uint64\_t hashName=SR\_UINT64\_MAX) <br> |
-|  void | [**AddOutputConnection**](classSR__SRLM__NS_1_1LogicalNode.md#function-addoutputconnection) ([**LogicalNode**](classSR__SRLM__NS_1_1LogicalNode.md) \* pNode, uint32\_t nodePinIndex, uint32\_t pinIndex) <br> |
-|  [**NodePin**](structSR__SRLM__NS_1_1LogicalNode_1_1NodePin.md) & | [**AddOutputData**](classSR__SRLM__NS_1_1LogicalNode.md#function-addoutputdata) ([**DataType**](classSR__SRLM__NS_1_1DataType.md) \* pData, uint64\_t hashName=SR\_UINT64\_MAX) <br> |
-|  SR\_NODISCARD const [**DataType**](classSR__SRLM__NS_1_1DataType.md) \* | [**CalcInput**](classSR__SRLM__NS_1_1LogicalNode.md#function-calcinput) (uint32\_t index) <br> |
-|  void | [**ClearLogicalNode**](classSR__SRLM__NS_1_1LogicalNode.md#function-clearlogicalnode) () <br> |
-| virtual void | [**Execute**](classSR__SRLM__NS_1_1LogicalNode.md#function-execute) (float\_t dt) <br> |
-|  SR\_NODISCARD [**LogicalNode**](classSR__SRLM__NS_1_1LogicalNode.md) \* | [**GetBaseLogicalNode**](classSR__SRLM__NS_1_1LogicalNode.md#function-getbaselogicalnode) () noexcept<br> |
-|  SR\_NODISCARD Pins & | [**GetInputs**](classSR__SRLM__NS_1_1LogicalNode.md#function-getinputs) () <br> |
-| virtual SR\_NODISCARD uint64\_t | [**GetNodeHashName**](classSR__SRLM__NS_1_1LogicalNode.md#function-getnodehashname) () noexcept const = 0<br> |
-|  SR\_NODISCARD uint32\_t | [**GetNodeIndex**](classSR__SRLM__NS_1_1LogicalNode.md#function-getnodeindex) () noexcept const<br> |
-| virtual SR\_NODISCARD std::string | [**GetNodeName**](classSR__SRLM__NS_1_1LogicalNode.md#function-getnodename) () noexcept const = 0<br> |
-| virtual SR\_NODISCARD const [**DataType**](classSR__SRLM__NS_1_1DataType.md) \* | [**GetOutput**](classSR__SRLM__NS_1_1LogicalNode.md#function-getoutput) (uint32\_t index) <br> |
-|  SR\_NODISCARD Pins & | [**GetOutputs**](classSR__SRLM__NS_1_1LogicalNode.md#function-getoutputs) () <br> |
-|  SR\_NODISCARD LogicalNodeStatus | [**GetStatus**](classSR__SRLM__NS_1_1LogicalNode.md#function-getstatus) () noexcept const<br> |
-| virtual SR\_NODISCARD LogicalNodeType | [**GetType**](classSR__SRLM__NS_1_1LogicalNode.md#function-gettype) () noexcept const = 0<br> |
-|  SR\_NODISCARD bool | [**HasErrors**](classSR__SRLM__NS_1_1LogicalNode.md#function-haserrors) () const<br> |
-| virtual void | [**InitNode**](classSR__SRLM__NS_1_1LogicalNode.md#function-initnode) () <br> |
-| virtual void | [**InitValues**](classSR__SRLM__NS_1_1LogicalNode.md#function-initvalues) () <br> |
-| virtual SR\_NODISCARD bool | [**IsDirty**](classSR__SRLM__NS_1_1LogicalNode.md#function-isdirty) () noexcept const<br> |
-| virtual SR\_NODISCARD bool | [**IsEntryPoint**](classSR__SRLM__NS_1_1LogicalNode.md#function-isentrypoint) () noexcept const<br> |
-| virtual SR\_NODISCARD bool | [**IsNeedPostRepeat**](classSR__SRLM__NS_1_1LogicalNode.md#function-isneedpostrepeat) () const<br> |
-| virtual SR\_NODISCARD bool | [**IsNeedRepeat**](classSR__SRLM__NS_1_1LogicalNode.md#function-isneedrepeat) () const<br> |
-|  SR\_NODISCARD bool | [**IsSuccessfullyCompleted**](classSR__SRLM__NS_1_1LogicalNode.md#function-issuccessfullycompleted) () noexcept const<br> |
-| virtual void | [**MarkDirty**](classSR__SRLM__NS_1_1LogicalNode.md#function-markdirty) () <br> |
-|  void | [**RemoveInput**](classSR__SRLM__NS_1_1LogicalNode.md#function-removeinput) (uint32\_t index) <br> |
-|  void | [**RemoveInputConnection**](classSR__SRLM__NS_1_1LogicalNode.md#function-removeinputconnection) ([**LogicalNode**](classSR__SRLM__NS_1_1LogicalNode.md) \* pNode, uint32\_t pinIndex) <br> |
-|  void | [**RemoveOutput**](classSR__SRLM__NS_1_1LogicalNode.md#function-removeoutput) (uint32\_t index) <br> |
-|  void | [**RemoveOutputConnection**](classSR__SRLM__NS_1_1LogicalNode.md#function-removeoutputconnection) ([**LogicalNode**](classSR__SRLM__NS_1_1LogicalNode.md) \* pNode, uint32\_t pinIndex) <br> |
-| virtual void | [**Reset**](classSR__SRLM__NS_1_1LogicalNode.md#function-reset) () <br> |
-|  void | [**ResetInputFlows**](classSR__SRLM__NS_1_1LogicalNode.md#function-resetinputflows) () <br> |
-|  void | [**ResetOutputFlows**](classSR__SRLM__NS_1_1LogicalNode.md#function-resetoutputflows) () <br> |
-|  void | [**ResetStatus**](classSR__SRLM__NS_1_1LogicalNode.md#function-resetstatus) () <br> |
-| virtual void | [**SaveXml**](classSR__SRLM__NS_1_1LogicalNode.md#function-savexml) (SR\_XML\_NS::Node & xmlNode) <br> |
-| virtual void | [**SetInput**](classSR__SRLM__NS_1_1LogicalNode.md#function-setinput) (const [**DataType**](classSR__SRLM__NS_1_1DataType.md) \* pInput, uint32\_t index) <br> |
-|  void | [**SetMachine**](classSR__SRLM__NS_1_1LogicalNode.md#function-setmachine) ([**LogicalMachine**](classSR__SRLM__NS_1_1LogicalMachine.md) \* pMachine) <br> |
-|  void | [**SetNodeIndex**](classSR__SRLM__NS_1_1LogicalNode.md#function-setnodeindex) (uint32\_t index) <br> |
-|   | [**~LogicalNode**](classSR__SRLM__NS_1_1LogicalNode.md#function-logicalnode) () override<br> |
+|  void | [**AddSerializationFlags**](classSR__UTILS__NS_1_1Serializable.md#function-addserializationflags) (SerializationFlags flags) noexcept<br> |
+|  SR\_NODISCARD bool | [**HasSerializationFlags**](classSR__UTILS__NS_1_1Serializable.md#function-hasserializationflags) (SerializationFlags flags) noexcept const<br> |
+| virtual bool | [**Load**](classSR__UTILS__NS_1_1Serializable.md#function-load) ([**IDeserializer**](classSR__UTILS__NS_1_1IDeserializer.md) & deserializer) <br> |
+| virtual void | [**OnPostLoad**](classSR__UTILS__NS_1_1Serializable.md#function-onpostload) () <br> |
+| virtual void | [**OnPostSave**](classSR__UTILS__NS_1_1Serializable.md#function-onpostsave) () <br> |
+| virtual void | [**OnPreLoad**](classSR__UTILS__NS_1_1Serializable.md#function-onpreload) () <br> |
+| virtual void | [**OnPreSave**](classSR__UTILS__NS_1_1Serializable.md#function-onpresave) () <br> |
+|  void | [**RemoveSerializationFlags**](classSR__UTILS__NS_1_1Serializable.md#function-removeserializationflags) (SerializationFlags flags) noexcept<br> |
+| virtual void | [**Save**](classSR__UTILS__NS_1_1Serializable.md#function-save) ([**ISerializer**](classSR__UTILS__NS_1_1ISerializer.md) & serializer) const<br> |
+| virtual void | [**VerifyAfterLoad**](classSR__UTILS__NS_1_1Serializable.md#function-verifyafterload) (SerializableVerifyContext & context) noexcept const<br> |
 
 
-## Public Functions inherited from SR_UTILS_NS::NonCopyable
+## Public Functions inherited from SR_UTILS_NS::SRClass
 
-See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
+See [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-22) (const [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md) &) = delete<br> |
-| virtual [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md) & | [**operator=**](classSR__UTILS__NS_1_1NonCopyable.md#function-operator) (const [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md) &) = delete<br> |
-
-
-## Public Functions inherited from SR_GRAPH_NS::ISamplersPass
-
-See [SR\_GRAPH\_NS::ISamplersPass](classSR__GRAPH__NS_1_1ISamplersPass.md)
-
-| Type | Name |
-| ---: | :--- |
-|  SR\_NODISCARD bool | [**HasSamplers**](classSR__GRAPH__NS_1_1ISamplersPass.md#function-hassamplers) () noexcept const<br> |
-|  SR\_NODISCARD bool | [**IsSamplersDirty**](classSR__GRAPH__NS_1_1ISamplersPass.md#function-issamplersdirty) () noexcept const<br> |
-|  void | [**LoadSamplersPass**](classSR__GRAPH__NS_1_1ISamplersPass.md#function-loadsamplerspass) (const SR\_XML\_NS::Node & passNode) <br> |
-| virtual void | [**UseSamplers**](classSR__GRAPH__NS_1_1ISamplersPass.md#function-usesamplers) ([**ShaderUseInfo**](structSR__GRAPH__NS_1_1ShaderUseInfo.md) info) <br> |
-| virtual  | [**~ISamplersPass**](classSR__GRAPH__NS_1_1ISamplersPass.md#function-isamplerspass) () <br> |
-
-
-## Public Functions inherited from SR_GRAPH_NS::IFramebufferPass
-
-See [SR\_GRAPH\_NS::IFramebufferPass](classSR__GRAPH__NS_1_1IFramebufferPass.md)
-
-| Type | Name |
-| ---: | :--- |
-|  SR\_NODISCARD ClearColors | [**GetClearColors**](classSR__GRAPH__NS_1_1IFramebufferPass.md#function-getclearcolors) () noexcept const<br> |
-|  SR\_NODISCARD std::optional&lt; float\_t &gt; | [**GetClearDepth**](classSR__GRAPH__NS_1_1IFramebufferPass.md#function-getcleardepth) () noexcept const<br> |
-|  SR\_NODISCARD FramebufferPtr | [**GetFramebuffer**](classSR__GRAPH__NS_1_1IFramebufferPass.md#function-getframebuffer) () noexcept const<br> |
-|  SR\_NODISCARD uint8\_t | [**GetLayersCount**](classSR__GRAPH__NS_1_1IFramebufferPass.md#function-getlayerscount) () noexcept const<br> |
-|   | [**IFramebufferPass**](classSR__GRAPH__NS_1_1IFramebufferPass.md#function-iframebufferpass) () <br> |
-|  SR\_NODISCARD bool | [**IsDirectional**](classSR__GRAPH__NS_1_1IFramebufferPass.md#function-isdirectional) () noexcept const<br> |
-|  SR\_NODISCARD bool | [**IsFrameBufferRendered**](classSR__GRAPH__NS_1_1IFramebufferPass.md#function-isframebufferrendered) () noexcept const<br> |
-| virtual  | [**~IFramebufferPass**](classSR__GRAPH__NS_1_1IFramebufferPass.md#function-iframebufferpass) () = default<br> |
-
-
+|  void | [**CloneTo**](classSR__UTILS__NS_1_1SRClass.md#function-cloneto) ([**SRClass**](classSR__UTILS__NS_1_1SRClass.md) & clone) const<br> |
+| virtual SR\_NODISCARD const [**SR\_UTILS\_NS::SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md) \* | [**GetMeta**](classSR__UTILS__NS_1_1SRClass.md#function-getmeta) () noexcept const = 0<br> |
+| virtual  | [**~SRClass**](classSR__UTILS__NS_1_1SRClass.md#function-srclass) () = default<br> |
 
 
 
@@ -555,42 +377,17 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 
 
 
-## Public Static Functions inherited from SR_SRLM_NS::LogicalNode
+## Public Static Functions inherited from SR_UTILS_NS::SRClass
 
-See [SR\_SRLM\_NS::LogicalNode](classSR__SRLM__NS_1_1LogicalNode.md)
-
-| Type | Name |
-| ---: | :--- |
-|  SR\_NODISCARD [**LogicalNode**](classSR__SRLM__NS_1_1LogicalNode.md) \* | [**LoadXml**](classSR__SRLM__NS_1_1LogicalNode.md#function-loadxml) (const SR\_XML\_NS::Node & xmlNode) <br> |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Protected Types inherited from SR_SRLM_NS::IExecutableNode
-
-See [SR\_SRLM\_NS::IExecutableNode](classSR__SRLM__NS_1_1IExecutableNode.md)
+See [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 
 | Type | Name |
 | ---: | :--- |
-| typedef [**IExecutableNode**](classSR__SRLM__NS_1_1IExecutableNode.md) | [**Base**](classSR__SRLM__NS_1_1IExecutableNode.md#typedef-base)  <br> |
-
-
+|  [**SR\_UTILS\_NS::SRClass**](classSR__UTILS__NS_1_1SRClass.md) \* | [**AllocateStatic**](classSR__UTILS__NS_1_1SRClass.md#function-allocatestatic) () noexcept<br> |
+|  SR\_NODISCARD std::span&lt; const [**SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md) \* &gt; | [**GetBaseMetas**](classSR__UTILS__NS_1_1SRClass.md#function-getbasemetas) () noexcept<br> |
+|  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetClassStaticName**](classSR__UTILS__NS_1_1SRClass.md#function-getclassstaticname) () noexcept<br> |
+|  const [**SR\_UTILS\_NS::SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md) \* | [**GetMetaStatic**](classSR__UTILS__NS_1_1SRClass.md#function-getmetastatic) () noexcept<br> |
+|  bool | [**RegisterPropertiesCodegen**](classSR__UTILS__NS_1_1SRClass.md#function-registerpropertiescodegen) () <br> |
 
 
 
@@ -630,9 +427,11 @@ See [SR\_GRAPH\_NS::PostProcessPass](classSR__GRAPH__NS_1_1PostProcessPass.md)
 | Type | Name |
 | ---: | :--- |
 |  bool | [**m\_dirtyShader**](classSR__GRAPH__NS_1_1PostProcessPass.md#variable-m_dirtyshader)   = `true`<br> |
+|  [**SR\_UTILS\_NS::Subscription**](classSR__UTILS__NS_1_1Subscription.md) | [**m\_onShaderReloaded**](classSR__GRAPH__NS_1_1PostProcessPass.md#variable-m_onshaderreloaded)  <br> |
 |  Properties | [**m\_properties**](classSR__GRAPH__NS_1_1PostProcessPass.md#variable-m_properties)  <br> |
 |  ShaderPtr | [**m\_shader**](classSR__GRAPH__NS_1_1PostProcessPass.md#variable-m_shader)   = `nullptr`<br> |
-|  uint32\_t | [**m\_vertices**](classSR__GRAPH__NS_1_1PostProcessPass.md#variable-m_vertices)   = `0`<br> |
+|  [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**m\_shaderPath**](classSR__GRAPH__NS_1_1PostProcessPass.md#variable-m_shaderpath)  <br> |
+|  uint32\_t | [**m\_vertices**](classSR__GRAPH__NS_1_1PostProcessPass.md#variable-m_vertices)   = `3`<br> |
 |  int32\_t | [**m\_virtualDescriptor**](classSR__GRAPH__NS_1_1PostProcessPass.md#variable-m_virtualdescriptor)   = `SR\_ID\_INVALID`<br> |
 |  int32\_t | [**m\_virtualUBO**](classSR__GRAPH__NS_1_1PostProcessPass.md#variable-m_virtualubo)   = `SR\_ID\_INVALID`<br> |
 
@@ -643,11 +442,8 @@ See [SR\_GRAPH\_NS::BasePass](classSR__GRAPH__NS_1_1BasePass.md)
 
 | Type | Name |
 | ---: | :--- |
-|  CameraPtr | [**m\_camera**](classSR__GRAPH__NS_1_1BasePass.md#variable-m_camera)   = `nullptr`<br> |
 |  [**DescriptorManager**](classSR__GRAPH__NS_1_1DescriptorManager.md) & | [**m\_descriptorManager**](classSR__GRAPH__NS_1_1BasePass.md#variable-m_descriptormanager)  <br> |
 |  [**Memory::UBOManager**](classSR__GRAPH__NS_1_1Memory_1_1UBOManager.md) & | [**m\_uboManager**](classSR__GRAPH__NS_1_1BasePass.md#variable-m_ubomanager)  <br> |
-
-
 
 
 
@@ -660,86 +456,6 @@ See [SR\_HTYPES\_NS::SharedPtrBase](classSR__HTYPES__NS_1_1SharedPtrBase.md)
 | ---: | :--- |
 |  bool | [**m\_basicManually**](classSR__HTYPES__NS_1_1SharedPtrBase.md#variable-m_basicmanually)   = `false`<br> |
 |  [**SharedPtrDynamicData**](structSR__HTYPES__NS_1_1SharedPtrDynamicData.md) \* | [**m\_data**](classSR__HTYPES__NS_1_1SharedPtrBase.md#variable-m_data)   = `nullptr`<br> |
-
-
-
-
-## Protected Attributes inherited from SR_SRLM_NS::LogicalNode
-
-See [SR\_SRLM\_NS::LogicalNode](classSR__SRLM__NS_1_1LogicalNode.md)
-
-| Type | Name |
-| ---: | :--- |
-|  Pins | [**m\_inputs**](classSR__SRLM__NS_1_1LogicalNode.md#variable-m_inputs)  <br> |
-|  [**LogicalMachine**](classSR__SRLM__NS_1_1LogicalMachine.md) \* | [**m\_machine**](classSR__SRLM__NS_1_1LogicalNode.md#variable-m_machine)   = `nullptr`<br> |
-|  uint32\_t | [**m\_nodeIndex**](classSR__SRLM__NS_1_1LogicalNode.md#variable-m_nodeindex)   = `SR\_UINT32\_MAX`<br> |
-|  Pins | [**m\_outputs**](classSR__SRLM__NS_1_1LogicalNode.md#variable-m_outputs)  <br> |
-|  LogicalNodeStatus | [**m\_status**](classSR__SRLM__NS_1_1LogicalNode.md#variable-m_status)   = `LogicalNodeStatus::None`<br> |
-
-
-
-
-
-
-## Protected Attributes inherited from SR_GRAPH_NS::IFramebufferPass
-
-See [SR\_GRAPH\_NS::IFramebufferPass](classSR__GRAPH__NS_1_1IFramebufferPass.md)
-
-| Type | Name |
-| ---: | :--- |
-|  bool | [**m\_isFrameBufferRendered**](classSR__GRAPH__NS_1_1IFramebufferPass.md#variable-m_isframebufferrendered)   = `false`<br> |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -850,7 +566,7 @@ See [SR\_GRAPH\_NS::IFramebufferPass](classSR__GRAPH__NS_1_1IFramebufferPass.md)
 | ---: | :--- |
 |  SR\_NODISCARD SSAOKernel | [**CreateKernel**](#function-createkernel) () const<br> |
 |  SR\_NODISCARD SR\_GTYPES\_NS::Texture::Ptr | [**CreateNoise**](#function-createnoise) () const<br> |
-| virtual SR\_NODISCARD [**IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \* | [**GetFrameBufferRenderTechnique**](#function-getframebufferrendertechnique) () override const<br> |
+|  SR\_NODISCARD [**IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \* | [**GetFrameBufferRenderTechnique**](#function-getframebufferrendertechnique) () override const<br> |
 
 
 ## Protected Functions inherited from SR_GRAPH_NS::PostProcessPass
@@ -860,71 +576,9 @@ See [SR\_GRAPH\_NS::PostProcessPass](classSR__GRAPH__NS_1_1PostProcessPass.md)
 | Type | Name |
 | ---: | :--- |
 | virtual void | [**DeInit**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-deinit) () override<br> |
-| virtual void | [**SetRenderTechnique**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-setrendertechnique) ([**IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \* pRenderTechnique) override<br> |
-|  void | [**SetShader**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-setshader) (const [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) &gt; & pShader) <br> |
+|  void | [**SetShader**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-setshader) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & shaderPath) <br> |
 
 
-
-
-## Protected Functions inherited from SR_UTILS_NS::ResourceContainer
-
-See [SR\_UTILS\_NS::ResourceContainer](classSR__UTILS__NS_1_1ResourceContainer.md)
-
-| Type | Name |
-| ---: | :--- |
-| virtual void | [**OnResourceUpdated**](classSR__UTILS__NS_1_1ResourceContainer.md#function-onresourceupdated) ([**ResourceContainer**](classSR__UTILS__NS_1_1ResourceContainer.md) \* pContainer, int32\_t depth) <br> |
-|  void | [**UpdateResources**](classSR__UTILS__NS_1_1ResourceContainer.md#function-updateresources) (int32\_t depth=0) <br> |
-
-
-
-
-
-
-## Protected Functions inherited from SR_SRLM_NS::IExecutableNode
-
-See [SR\_SRLM\_NS::IExecutableNode](classSR__SRLM__NS_1_1IExecutableNode.md)
-
-| Type | Name |
-| ---: | :--- |
-|   | [**IExecutableNode**](classSR__SRLM__NS_1_1IExecutableNode.md#function-iexecutablenode) () = default<br> |
-
-
-
-
-## Protected Functions inherited from SR_UTILS_NS::NonCopyable
-
-See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
-
-| Type | Name |
-| ---: | :--- |
-|   | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () <br> |
-| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () <br> |
-
-
-## Protected Functions inherited from SR_GRAPH_NS::ISamplersPass
-
-See [SR\_GRAPH\_NS::ISamplersPass](classSR__GRAPH__NS_1_1ISamplersPass.md)
-
-| Type | Name |
-| ---: | :--- |
-|  void | [**MarkSamplersDirty**](classSR__GRAPH__NS_1_1ISamplersPass.md#function-marksamplersdirty) () <br> |
-| virtual void | [**OnSamplersChanged**](classSR__GRAPH__NS_1_1ISamplersPass.md#function-onsamplerschanged) () <br> |
-|  void | [**PrepareSamplers**](classSR__GRAPH__NS_1_1ISamplersPass.md#function-preparesamplers) () <br> |
-|  void | [**SetISamplerRenderTechnique**](classSR__GRAPH__NS_1_1ISamplersPass.md#function-setisamplerrendertechnique) ([**IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \* pTechnique) <br> |
-
-
-## Protected Functions inherited from SR_GRAPH_NS::IFramebufferPass
-
-See [SR\_GRAPH\_NS::IFramebufferPass](classSR__GRAPH__NS_1_1IFramebufferPass.md)
-
-| Type | Name |
-| ---: | :--- |
-| virtual SR\_NODISCARD [**IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \* | [**GetFrameBufferRenderTechnique**](classSR__GRAPH__NS_1_1IFramebufferPass.md#function-getframebufferrendertechnique) () const = 0<br> |
-|  void | [**LoadFramebufferSettings**](classSR__GRAPH__NS_1_1IFramebufferPass.md#function-loadframebuffersettings) (const SR\_XML\_NS::Node & passNode) <br> |
-|  bool | [**RenderFrameBuffer**](classSR__GRAPH__NS_1_1IFramebufferPass.md#function-renderframebuffer-12) (const PipelinePtr & pPipeline) <br> |
-| virtual void | [**RenderFrameBufferInner**](classSR__GRAPH__NS_1_1IFramebufferPass.md#function-renderframebufferinner) () <br> |
-|  void | [**UpdateFrameBuffer**](classSR__GRAPH__NS_1_1IFramebufferPass.md#function-updateframebuffer) (const PipelinePtr & pPipeline) <br> |
-| virtual void | [**UpdateFrameBufferInner**](classSR__GRAPH__NS_1_1IFramebufferPass.md#function-updateframebufferinner) () <br> |
 
 
 
@@ -972,12 +626,10 @@ Implements [*SR\_GRAPH\_NS::PostProcessPass::DeInit*](classSR__GRAPH__NS_1_1Post
 ### function GetFrameBuffers 
 
 ```C++
-virtual SR_NODISCARD std::vector< SR_GTYPES_NS::Framebuffer * > SR_GRAPH_NS::SSAOPass::GetFrameBuffers () override const
+SR_NODISCARD std::vector< SR_GTYPES_NS::Framebuffer * > SR_GRAPH_NS::SSAOPass::GetFrameBuffers () override const
 ```
 
 
-
-Implements [*SR\_GRAPH\_NS::BasePass::GetFrameBuffers*](classSR__GRAPH__NS_1_1BasePass.md#function-getframebuffers)
 
 
 <hr>
@@ -1002,14 +654,12 @@ Implements [*SR\_GRAPH\_NS::BasePass::Init*](classSR__GRAPH__NS_1_1BasePass.md#f
 ### function Load 
 
 ```C++
-virtual bool SR_GRAPH_NS::SSAOPass::Load (
+bool SR_GRAPH_NS::SSAOPass::Load (
     const SR_XML_NS::Node & passNode
 ) override
 ```
 
 
-
-Implements [*SR\_GRAPH\_NS::PostProcessPass::Load*](classSR__GRAPH__NS_1_1PostProcessPass.md#function-load)
 
 
 <hr>
@@ -1068,14 +718,12 @@ Implements [*SR\_GRAPH\_NS::PostProcessPass::Update*](classSR__GRAPH__NS_1_1Post
 ### function UseSamplers 
 
 ```C++
-virtual void SR_GRAPH_NS::SSAOPass::UseSamplers (
-    ShaderUseInfo info
+void SR_GRAPH_NS::SSAOPass::UseSamplers (
+    const ShaderUseInfo & info
 ) override
 ```
 
 
-
-Implements [*SR\_GRAPH\_NS::ISamplersPass::UseSamplers*](classSR__GRAPH__NS_1_1ISamplersPass.md#function-usesamplers)
 
 
 <hr>
@@ -1113,12 +761,10 @@ SR_NODISCARD SR_GTYPES_NS::Texture::Ptr SR_GRAPH_NS::SSAOPass::CreateNoise () co
 ### function GetFrameBufferRenderTechnique 
 
 ```C++
-virtual SR_NODISCARD IRenderTechnique * SR_GRAPH_NS::SSAOPass::GetFrameBufferRenderTechnique () override const
+SR_NODISCARD IRenderTechnique * SR_GRAPH_NS::SSAOPass::GetFrameBufferRenderTechnique () override const
 ```
 
 
-
-Implements [*SR\_GRAPH\_NS::IFramebufferPass::GetFrameBufferRenderTechnique*](classSR__GRAPH__NS_1_1IFramebufferPass.md#function-getframebufferrendertechnique)
 
 
 <hr>

@@ -99,9 +99,11 @@
 |  SR\_NODISCARD SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; SR\_FASTCALL | [**Lerp**](#function-lerp) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & vector3, float\_t t) noexcept const<br>_@method_  |
 |  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**Limits**](#function-limits) (int lim) const<br> |
 |  SR\_NODISCARD [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**LookAt**](#function-lookat) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & target) const<br> |
-|  SR\_NODISCARD T | [**Max**](#function-max) () const<br>_@method_  |
+|  SR\_NODISCARD T | [**Max**](#function-max-12) () const<br>_@method_  |
+|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**Max**](#function-max-22) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & v) const<br> |
 |  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Max3**](#function-max3) () const<br>_@method_  |
-|  SR\_NODISCARD T | [**Min**](#function-min) () const<br>_@method_  |
+|  SR\_NODISCARD T | [**Min**](#function-min-12) () const<br>_@method_  |
+|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**Min**](#function-min-22) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & v) const<br> |
 |  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Min3**](#function-min3) () const<br>_@method_  |
 |  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Normalize**](#function-normalize) () const<br>_@method_  |
 |  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Normalized**](#function-normalized) () const<br>_@method_  |
@@ -155,25 +157,25 @@
 |  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; &SR\_FASTCALL | [**operator+=**](#function-operator_12) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; float\_t &gt; & p\_v) <br>_@operator_  |
 |  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; &SR\_FASTCALL | [**operator+=**](#function-operator_13) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; int32\_t &gt; & p\_v) <br>_@operator_  |
 |  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; &SR\_FASTCALL | [**operator+=**](#function-operator_14) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; uint32\_t &gt; & p\_v) <br>_@operator_  |
-|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**operator-**](#function-operator_15) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & p\_v) const<br> |
-|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**operator-**](#function-operator_16) () const<br>_@operator_  |
-|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & | [**operator-=**](#function-operator_17) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & p\_v) <br> |
-|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**operator/**](#function-operator_18) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & p\_v) const<br> |
-|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**operator/**](#function-operator_19) (U p\_scalar) const<br> |
-|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & | [**operator/=**](#function-operator_20) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & p\_v) <br> |
-|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & | [**operator/=**](#function-operator_21) (U p\_scalar) <br> |
-|  SR\_FORCE\_INLINE bool | [**operator&lt;**](#function-operator_22) (U p\_scalar) const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator&lt;**](#function-operator_23) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & p\_v) const<br>_@operator_  |
-|  SR\_FORCE\_INLINE bool | [**operator&lt;=**](#function-operator_24) (U p\_scalar) const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator&lt;=**](#function-operator_25) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & p\_v) const<br>_@operator_  |
-|  SR\_FORCE\_INLINE bool | [**operator==**](#function-operator_26) (U p\_scalar) const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator==**](#function-operator_27) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & p\_v) const<br>_@operator_  |
-|  SR\_FORCE\_INLINE bool | [**operator&gt;**](#function-operator_28) (U p\_scalar) const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator&gt;**](#function-operator_29) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & p\_v) const<br>_@operator_  |
-|  SR\_FORCE\_INLINE bool | [**operator&gt;=**](#function-operator_30) (U p\_scalar) const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator&gt;=**](#function-operator_31) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & p\_v) const<br>_@operator_  |
-|  SR\_FORCE\_INLINE const T & | [**operator[]**](#function-operator_32) (int p\_axis) const<br> |
-|  SR\_FORCE\_INLINE T & | [**operator[]**](#function-operator_33) (int p\_axis) <br> |
+|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**operator-**](#function-operator-) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & p\_v) const<br> |
+|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**operator-**](#function-operator-_1) () const<br>_@operator_  |
+|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & | [**operator-=**](#function-operator-_2) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & p\_v) <br> |
+|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**operator/**](#function-operator_15) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & p\_v) const<br> |
+|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**operator/**](#function-operator_16) (U p\_scalar) const<br> |
+|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & | [**operator/=**](#function-operator_17) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & p\_v) <br> |
+|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & | [**operator/=**](#function-operator_18) (U p\_scalar) <br> |
+|  SR\_FORCE\_INLINE bool | [**operator&lt;**](#function-operator_19) (U p\_scalar) const<br> |
+|  SR\_FORCE\_INLINE bool | [**operator&lt;**](#function-operator_20) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & p\_v) const<br>_@operator_  |
+|  SR\_FORCE\_INLINE bool | [**operator&lt;=**](#function-operator_21) (U p\_scalar) const<br> |
+|  SR\_FORCE\_INLINE bool | [**operator&lt;=**](#function-operator_22) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & p\_v) const<br>_@operator_  |
+|  SR\_FORCE\_INLINE bool | [**operator==**](#function-operator_23) (U p\_scalar) const<br> |
+|  SR\_FORCE\_INLINE bool | [**operator==**](#function-operator_24) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & p\_v) const<br>_@operator_  |
+|  SR\_FORCE\_INLINE bool | [**operator&gt;**](#function-operator_25) (U p\_scalar) const<br> |
+|  SR\_FORCE\_INLINE bool | [**operator&gt;**](#function-operator_26) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & p\_v) const<br>_@operator_  |
+|  SR\_FORCE\_INLINE bool | [**operator&gt;=**](#function-operator_27) (U p\_scalar) const<br> |
+|  SR\_FORCE\_INLINE bool | [**operator&gt;=**](#function-operator_28) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & p\_v) const<br>_@operator_  |
+|  SR\_FORCE\_INLINE const T & | [**operator[]**](#function-operator_29) (int p\_axis) const<br> |
+|  SR\_FORCE\_INLINE T & | [**operator[]**](#function-operator_30) (int p\_axis) <br> |
 
 
 ## Public Static Functions
@@ -780,11 +782,26 @@ inline SR_NODISCARD Quaternion SR_MATH_NS::Vector3::LookAt (
 
 
 
-### function Max 
+### function Max [1/2]
 
 _@method_ 
 ```C++
 inline SR_NODISCARD T SR_MATH_NS::Vector3::Max () const
+```
+
+
+
+
+<hr>
+
+
+
+### function Max [2/2]
+
+```C++
+inline SR_NODISCARD Vector3 SR_MATH_NS::Vector3::Max (
+    const Vector3 & v
+) const
 ```
 
 
@@ -808,11 +825,26 @@ inline SR_NODISCARD Vector3 < T > SR_MATH_NS::Vector3::Max3 () const
 
 
 
-### function Min 
+### function Min [1/2]
 
 _@method_ 
 ```C++
 inline SR_NODISCARD T SR_MATH_NS::Vector3::Min () const
+```
+
+
+
+
+<hr>
+
+
+
+### function Min [2/2]
+
+```C++
+inline SR_NODISCARD Vector3 SR_MATH_NS::Vector3::Min (
+    const Vector3 & v
+) const
 ```
 
 

@@ -12,8 +12,8 @@
 // Created by Monika on 14.07.2022.
 //
 
-#ifndef SR_ENGINE_SKYBOXPASS_H
-#define SR_ENGINE_SKYBOXPASS_H
+#ifndef SR_ENGINE_GRAPHICS_SKYBOX_PASS_H
+#define SR_ENGINE_GRAPHICS_SKYBOX_PASS_H
 
 #include <Graphics/Pass/BasePass.h>
 
@@ -24,23 +24,27 @@ namespace SR_GTYPES_NS {
 namespace SR_GRAPH_NS {
     class SkyboxPass : public BasePass {
         using Super = BasePass;
-        SR_REGISTER_LOGICAL_NODE(SkyboxPass, Skybox Pass, { "Passes" })
+        SR_CLASS()
     public:
         ~SkyboxPass() override;
 
     public:
-        bool Load(const SR_XML_NS::Node& passNode) override;
         bool Render() override;
         void Update() override;
-        bool Init() override;
+
+        void SetSkybox(const SR_UTILS_NS::Path& path);
+        void SetShader(const SR_UTILS_NS::Path& path);
 
     private:
         SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Skybox> m_skybox;
 
+        SR_UTILS_NS::Path m_skyboxPath;
+        SR_UTILS_NS::Path m_shaderPath;
+
     };
 }
 
-#endif //SR_ENGINE_SKYBOXPASS_H
+#endif //SR_ENGINE_GRAPHICS_SKYBOX_PASS_H
 ```
 
 

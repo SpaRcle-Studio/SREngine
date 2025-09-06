@@ -92,12 +92,12 @@
 |  constexpr auto | [**max\_unsafe**](#function-max_unsafe) (const ArithmeticType & left, const ArithmeticType & right) <br> |
 |  constexpr auto | [**min\_unsafe**](#function-min_unsafe) (const ArithmeticType & left, const ArithmeticType & right) <br> |
 |  constexpr auto | [**msb\_helper**](#function-msb_helper) (const UnsignedIntegralType & u) <br> |
-|  constexpr auto | [**msb\_helper&lt; std::uint16\_t &gt;**](#function-msb_helper<-std::uint16_t->) (const std::uint16\_t & u) <br> |
-|  constexpr auto | [**msb\_helper&lt; std::uint16\_t &gt;**](#function-msb_helper<-std::uint16_t->) (const std::uint16\_t & u) <br> |
-|  constexpr auto | [**msb\_helper&lt; std::uint32\_t &gt;**](#function-msb_helper<-std::uint32_t->) (const std::uint32\_t & u) <br> |
-|  constexpr auto | [**msb\_helper&lt; std::uint32\_t &gt;**](#function-msb_helper<-std::uint32_t->) (const std::uint32\_t & u) <br> |
-|  constexpr auto | [**msb\_helper&lt; std::uint8\_t &gt;**](#function-msb_helper<-std::uint8_t->) (const std::uint8\_t & u) <br> |
-|  constexpr auto | [**msb\_helper&lt; std::uint8\_t &gt;**](#function-msb_helper<-std::uint8_t->) (const std::uint8\_t & u) <br> |
+|  constexpr auto | [**msb\_helper&lt; std::uint16\_t &gt;**](#function-msb_helper-std::uint16_t) (const std::uint16\_t & u) <br> |
+|  constexpr auto | [**msb\_helper&lt; std::uint16\_t &gt;**](#function-msb_helper-std::uint16_t) (const std::uint16\_t & u) <br> |
+|  constexpr auto | [**msb\_helper&lt; std::uint32\_t &gt;**](#function-msb_helper-std::uint32_t) (const std::uint32\_t & u) <br> |
+|  constexpr auto | [**msb\_helper&lt; std::uint32\_t &gt;**](#function-msb_helper-std::uint32_t) (const std::uint32\_t & u) <br> |
+|  constexpr auto | [**msb\_helper&lt; std::uint8\_t &gt;**](#function-msb_helper-std::uint8_t) (const std::uint8\_t & u) <br> |
+|  constexpr auto | [**msb\_helper&lt; std::uint8\_t &gt;**](#function-msb_helper-std::uint8_t) (const std::uint8\_t & u) <br> |
 |  constexpr auto | [**negate**](#function-negate) (UnsignedIntegralType u) <br> |
 |  constexpr auto | [**negate**](#function-negate) (SignedIntegralType n) <br> |
 |  constexpr auto | [**strcpy\_unsafe**](#function-strcpy_unsafe) (DestinationIterator dst, SourceIterator src) <br> |

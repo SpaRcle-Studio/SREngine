@@ -62,7 +62,7 @@
 | ---: | :--- |
 |  constexpr | [**InputIteratorPointer**](#function-inputiteratorpointer) (ValueType && value) noexcept<br>_NOLINT(google-explicit-constructor)_  |
 |  SR\_NODISCARD constexpr Reference | [**operator\***](#function-operator) () noexcept<br> |
-|  SR\_NODISCARD constexpr Pointer | [**operator-&gt;**](#function-operator_1) () noexcept<br> |
+|  SR\_NODISCARD constexpr Pointer | [**operator-&gt;**](#function-operator-) () noexcept<br> |
 
 
 

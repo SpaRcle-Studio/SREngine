@@ -156,6 +156,7 @@
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::SceneAssetLogic</scope><name>AllocateStatic</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::SceneAssetLogic</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::SceneAssetLogic</scope><name>AutoFree</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::SceneAssetLogic</scope><name>CloneTo</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_WORLD_NS::SceneAssetLogic</scope><name>DecrementPointer</name></member>
       <member refid="classSR__WORLD__NS_1_1SceneLogic_1a48e3e0f1bb1eac7a62782c7fae540739" prot="public" virt="virtual"><scope>SR_WORLD_NS::SceneAssetLogic</scope><name>Destroy</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::SceneAssetLogic</scope><name>DynamicCast</name></member>
@@ -231,7 +232,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::SceneAssetLogic</scope><name>TryRecursiveLockIfValid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::SceneAssetLogic</scope><name>Unlock</name></member>
       <member refid="classSR__WORLD__NS_1_1SceneLogic_1af783cf5327990ba694b8b831b4f82c88" prot="public" virt="virtual"><scope>SR_WORLD_NS::SceneAssetLogic</scope><name>Update</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::SceneAssetLogic</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a783dd9e4a58072de8ff19895693bca05" prot="public" virt="virtual"><scope>SR_WORLD_NS::SceneAssetLogic</scope><name>Valid</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a5aab0756802a67de9cb45b83b3e73c70" prot="public" virt="virtual"><scope>SR_WORLD_NS::SceneAssetLogic</scope><name>VerifyAfterLoad</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::SceneAssetLogic</scope><name>~SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_WORLD_NS::SceneAssetLogic</scope><name>~SharedPtrBase</name></member>

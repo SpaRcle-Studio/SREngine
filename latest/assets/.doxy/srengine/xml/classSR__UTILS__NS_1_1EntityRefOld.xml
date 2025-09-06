@@ -360,6 +360,7 @@
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefOld</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefOld</scope><name>AllocateStatic</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefOld</scope><name>CloneTo</name></member>
       <member refid="classSR__UTILS__NS_1_1EntityRefOld_1a871f6de77b7af78ea013db9832482221" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefOld</scope><name>Copy</name></member>
       <member refid="classSR__UTILS__NS_1_1EntityRefOld_1a8fa797a45268e456922b4ec279133038" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefOld</scope><name>EntityRefOld</name></member>
       <member refid="classSR__UTILS__NS_1_1EntityRefOld_1a3d7e884a67232a5905a66eabfabbe828" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefOld</scope><name>EntityRefOld</name></member>

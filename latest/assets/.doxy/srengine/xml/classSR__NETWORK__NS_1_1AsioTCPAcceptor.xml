@@ -373,7 +373,7 @@
       <member refid="classSR__NETWORK__NS_1_1AsioTCPAcceptor_1adcd6893808c5ca08a9d34d12f691125a" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>Super</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>TryRecursiveLockIfValid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>Unlock</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a783dd9e4a58072de8ff19895693bca05" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>Valid</name></member>
       <member refid="classSR__NETWORK__NS_1_1Acceptor_1a2b37e9492da2cc24a6ad4fd908f39109" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>~Acceptor</name></member>
       <member refid="classSR__NETWORK__NS_1_1AsioTCPAcceptor_1a0be7b5a6b7096698d4ddb4c0bd61d683" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>~AsioTCPAcceptor</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>~SharedPtr</name></member>

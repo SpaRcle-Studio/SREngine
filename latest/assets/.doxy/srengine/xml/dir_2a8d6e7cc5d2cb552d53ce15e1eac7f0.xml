@@ -13,6 +13,7 @@
     <innerdir refid="dir_f60d182ad98ca085ac1e9e7ce07e0a4d">Engine/libs/Graphics/inc/Graphics/Pass</innerdir>
     <innerdir refid="dir_b95270d167403b29f5d572cffd5b214a">Engine/libs/Graphics/inc/Graphics/Pipeline</innerdir>
     <innerdir refid="dir_043f3e6d57945a3feea385b5c8b9609d">Engine/libs/Graphics/inc/Graphics/Render</innerdir>
+    <innerdir refid="dir_a48bca76098a55b82b6b979c436fb568">Engine/libs/Graphics/inc/Graphics/Settings</innerdir>
     <innerdir refid="dir_8b5756bea5e0d505138eb40b052c312a">Engine/libs/Graphics/inc/Graphics/SRSL</innerdir>
     <innerdir refid="dir_c1000ee3da93f5d04a34b48b4ba0b616">Engine/libs/Graphics/inc/Graphics/Types</innerdir>
     <innerdir refid="dir_0e9eeef58803927b1310c845186ea8b3">Engine/libs/Graphics/inc/Graphics/UI</innerdir>

@@ -200,14 +200,15 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 
 | Type | Name |
 | ---: | :--- |
+|  void | [**AddStage**](#function-addstage) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) stage) <br> |
 |  void | [**Finalize**](#function-finalize) () <br> |
 |  SR\_NODISCARD [**MaterialShaderData**](structSR__GRAPH__NS_1_1MaterialShaderData.md) & | [**GetDefaultShaderData**](#function-getdefaultshaderdata-12) () noexcept<br> |
 |  SR\_NODISCARD const [**MaterialShaderData**](structSR__GRAPH__NS_1_1MaterialShaderData.md) & | [**GetDefaultShaderData**](#function-getdefaultshaderdata-22) () noexcept const<br> |
-|  SR\_NODISCARD SR\_GTYPES\_NS::Shader::Ptr | [**GetShader**](#function-getshader) (const [**Pipeline**](classSR__GRAPH__NS_1_1Pipeline.md) \* pPipeline) noexcept const<br> |
 |  SR\_NODISCARD [**MaterialShaderData**](structSR__GRAPH__NS_1_1MaterialShaderData.md) \* | [**GetShaderData**](#function-getshaderdata-12) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id) noexcept<br> |
 |  SR\_NODISCARD const [**MaterialShaderData**](structSR__GRAPH__NS_1_1MaterialShaderData.md) \* | [**GetShaderData**](#function-getshaderdata-22) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id) noexcept const<br> |
 |  SR\_NODISCARD const std::map&lt; [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md), [**MaterialShaderData**](structSR__GRAPH__NS_1_1MaterialShaderData.md) &gt; & | [**GetShadersData**](#function-getshadersdata-12) () noexcept const<br> |
 |  SR\_NODISCARD std::map&lt; [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md), [**MaterialShaderData**](structSR__GRAPH__NS_1_1MaterialShaderData.md) &gt; & | [**GetShadersData**](#function-getshadersdata-22) () noexcept<br> |
+|  SR\_NODISCARD bool | [**HasStage**](#function-hasstage) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) stage) noexcept const<br> |
 | virtual bool | [**Load**](#function-load) ([**SR\_UTILS\_NS::IDeserializer**](classSR__UTILS__NS_1_1IDeserializer.md) & deserializer) override<br> |
 |   | [**MaterialData**](#function-materialdata) () <br> |
 |  void | [**OnPropertyChanged**](#function-onpropertychanged) (bool onlyUniforms) <br> |
@@ -247,6 +248,7 @@ See [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 
 | Type | Name |
 | ---: | :--- |
+|  void | [**CloneTo**](classSR__UTILS__NS_1_1SRClass.md#function-cloneto) ([**SRClass**](classSR__UTILS__NS_1_1SRClass.md) & clone) const<br> |
 | virtual SR\_NODISCARD const [**SR\_UTILS\_NS::SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md) \* | [**GetMeta**](classSR__UTILS__NS_1_1SRClass.md#function-getmeta) () noexcept const = 0<br> |
 | virtual  | [**~SRClass**](classSR__UTILS__NS_1_1SRClass.md#function-srclass) () = default<br> |
 
@@ -275,7 +277,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  SR\_NODISCARD SR\_FORCE\_INLINE T \* | [**Get**](classSR__HTYPES__NS_1_1SharedPtr.md#function-get-22) () <br> |
 |  SR\_NODISCARD const void \* | [**GetRawPtr**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getrawptr-12) () const<br> |
 |  SR\_NODISCARD void \* | [**GetRawPtr**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getrawptr-22) () <br>_NOLINT(modernize-use-nodiscard)_  |
-| virtual SR\_NODISCARD SRClass \* | [**GetSRClass**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getsrclass) () override const<br>_NOLINT(modernize-use-nodiscard)_  |
+| virtual SR\_NODISCARD SRClass \* | [**GetSRClass**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getsrclass) () override const<br> |
 |  SR\_NODISCARD [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; | [**GetThis**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getthis) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE const T &SR\_FASTCALL | [**GetUncheckedRef**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getuncheckedref-12) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE T &SR\_FASTCALL | [**GetUncheckedRef**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getuncheckedref-22) () <br> |
@@ -293,15 +295,15 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; U &gt; | [**StaticCast**](classSR__HTYPES__NS_1_1SharedPtr.md#function-staticcast) () const<br> |
 |  SR\_NODISCARD bool | [**TryRecursiveLockIfValid**](classSR__HTYPES__NS_1_1SharedPtr.md#function-tryrecursivelockifvalid) () noexcept const<br> |
 |  void | [**Unlock**](classSR__HTYPES__NS_1_1SharedPtr.md#function-unlock) () noexcept const<br> |
-|  bool | [**Valid**](classSR__HTYPES__NS_1_1SharedPtr.md#function-valid) () const<br> |
+| virtual SR\_NODISCARD bool | [**Valid**](classSR__HTYPES__NS_1_1SharedPtr.md#function-valid) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE | [**operator bool**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator-bool) () noexcept const<br> |
 |  SR\_INLINE bool | [**operator!=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & right) const<br> |
 |  SR\_FORCE\_INLINE T & | [**operator\***](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_1) () const<br> |
-|  SR\_FORCE\_INLINE T \* | [**operator-&gt;**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_2) () const<br> |
-|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_3) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & ptr) <br> |
-|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_4) (T \* ptr) <br> |
-|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_5) ([**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; && ptr) noexcept<br> |
-|  SR\_INLINE bool | [**operator==**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_6) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & right) const<br> |
+|  SR\_FORCE\_INLINE T \* | [**operator-&gt;**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator-) () const<br> |
+|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_2) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & ptr) <br> |
+|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_3) (T \* ptr) <br> |
+|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_4) ([**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; && ptr) noexcept<br> |
+|  SR\_INLINE bool | [**operator==**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_5) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & right) const<br> |
 |   | [**~SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md#function-sharedptr) () override<br> |
 
 
@@ -320,6 +322,7 @@ See [SR\_HTYPES\_NS::SharedPtrBase](classSR__HTYPES__NS_1_1SharedPtrBase.md)
 | virtual void | [**SetPointerFromBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-setpointerfrombase) ([**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md) \* pBase) = 0<br> |
 |   | [**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase-12) () <br> |
 |   | [**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase-22) ([**SharedPtrDynamicData**](structSR__HTYPES__NS_1_1SharedPtrDynamicData.md) \* data) <br> |
+| virtual SR\_NODISCARD bool | [**Valid**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-valid) () const = 0<br> |
 | virtual  | [**~SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase) () <br> |
 
 
@@ -619,6 +622,21 @@ SR_INLINE_STATIC const SR_UTILS_NS::StringAtom SR_GRAPH_NS::MaterialData::SHADER
 
 
 
+### function AddStage 
+
+```C++
+void SR_GRAPH_NS::MaterialData::AddStage (
+    SR_UTILS_NS::StringAtom stage
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function Finalize 
 
 ```C++
@@ -649,21 +667,6 @@ inline SR_NODISCARD MaterialShaderData & SR_GRAPH_NS::MaterialData::GetDefaultSh
 
 ```C++
 inline SR_NODISCARD const MaterialShaderData & SR_GRAPH_NS::MaterialData::GetDefaultShaderData () noexcept const
-```
-
-
-
-
-<hr>
-
-
-
-### function GetShader 
-
-```C++
-SR_NODISCARD SR_GTYPES_NS::Shader::Ptr SR_GRAPH_NS::MaterialData::GetShader (
-    const Pipeline * pPipeline
-) noexcept const
 ```
 
 
@@ -720,6 +723,21 @@ inline SR_NODISCARD const std::map< SR_UTILS_NS::StringAtom , MaterialShaderData
 
 ```C++
 inline SR_NODISCARD std::map< SR_UTILS_NS::StringAtom , MaterialShaderData > & SR_GRAPH_NS::MaterialData::GetShadersData () noexcept
+```
+
+
+
+
+<hr>
+
+
+
+### function HasStage 
+
+```C++
+SR_NODISCARD bool SR_GRAPH_NS::MaterialData::HasStage (
+    SR_UTILS_NS::StringAtom stage
+) noexcept const
 ```
 
 

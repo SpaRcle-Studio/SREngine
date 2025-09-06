@@ -123,8 +123,6 @@
 * **SR\_ICON\_STOPWATCH\_20** ([**Icons.h**](Icons_8h.md))
 * **SR\_ICON\_STOP\_CIRCLE** ([**Icons.h**](Icons_8h.md))
 * **SR\_ICON\_UNDO** ([**Icons.h**](Icons_8h.md))
-* **SR\_ALLOCATE\_RENDER\_PASS** ([**BasePass.h**](BasePass_8h.md))
-* **SR\_REGISTER\_RENDER\_PASS** ([**BasePass.h**](BasePass_8h.md))
 * **SR\_TRACY\_VK\_COLLECT** ([**VulkanTracy.h**](VulkanTracy_8h.md))
 * **SR\_TRACY\_VK\_CREATE** ([**VulkanTracy.h**](VulkanTracy_8h.md))
 * **SR\_TRACY\_VK\_FRAME\_ZONE\_N** ([**VulkanTracy.h**](VulkanTracy_8h.md))
@@ -272,6 +270,7 @@
 * **SR\_TRACY\_TEXT\_N** ([**TracyContext.h**](TracyContext_8h.md))
 * **SR\_TRACY\_THREAD\_NAME** ([**TracyContext.h**](TracyContext_8h.md))
 * **SR\_TRACY\_ZONE** ([**TracyContext.h**](TracyContext_8h.md))
+* **SR\_TRACY\_ZONE\_COLOR** ([**TracyContext.h**](TracyContext_8h.md))
 * **SR\_TRACY\_ZONE\_N** ([**TracyContext.h**](TracyContext_8h.md))
 * **SR\_TRACY\_ZONE\_S** ([**TracyContext.h**](TracyContext_8h.md))
 * **SR\_TRACY\_ZONE\_TEXT** ([**TracyContext.h**](TracyContext_8h.md))
@@ -429,6 +428,11 @@
 * **WIDE\_INTEGER\_NAMESPACE\_END** ([**UintWide\_t.h**](UintWide__t_8h.md))
 * **WIDE\_INTEGER\_NODISCARD** ([**UintWide\_t.h**](UintWide__t_8h.md))
 * **WIDE\_INTEGER\_NUM\_LIMITS\_CLASS\_TYPE** ([**UintWide\_t.h**](UintWide__t_8h.md))
+
+
+## x
+
+* **XXH\_STATIC\_LINKING\_ONLY** ([**stdInclude.h**](stdInclude_8h.md))
 
 
 ## _

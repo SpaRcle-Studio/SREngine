@@ -90,7 +90,7 @@ _Template for Merkle trees._ [More...](#detailed-description)
 |  size\_t | [**max\_index**](#function-max_index) () const<br>_Maximum leaf index._  |
 |  size\_t | [**min\_index**](#function-min_index) () const<br>_Minimum leaf index._  |
 |  size\_t | [**num\_leaves**](#function-num_leaves) () const<br>_Number of leaves in the tree._  |
-|   | [**vector&lt; uint8\_t &gt;**](#function-vector<-uint8_t->) () const<br>_Operator to serialise the tree._  |
+|   | [**vector&lt; uint8\_t &gt;**](#function-vector-uint8_t) () const<br>_Operator to serialise the tree._  |
 |  [**MerkleTree**](classSR__HTYPES__NS_1_1TreeT.md#typedef-merkletree) & | [**operator=**](#function-operator) (const [**MerkleTree**](classSR__HTYPES__NS_1_1TreeT.md#typedef-merkletree) & other) <br>_Assigns a tree._  |
 |  const [**MerkleHash**](classSR__HTYPES__NS_1_1TreeT.md#typedef-merklehash) & | [**operator[]**](#function-operator_1) (size\_t index) const<br>_Operator to extract a leaf hash from the tree._  |
 |  std::shared\_ptr&lt; [**MerklePath**](classSR__HTYPES__NS_1_1TreeT.md#typedef-merklepath) &gt; | [**past\_path**](#function-past_path) (size\_t index, size\_t as\_of) <br>_Extracts a past path from a leaf index to the root of the tree._  |

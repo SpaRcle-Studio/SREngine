@@ -758,7 +758,7 @@
       <member refid="classSR__GRAPH__NS_1_1Window_1af9f26136dee904860f27155af657f6c1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>Super</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>TryRecursiveLockIfValid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>Unlock</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a783dd9e4a58072de8ff19895693bca05" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Window</scope><name>Valid</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1afbd9febd591d4946750a0643dd850874" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>Window</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1a89638d41a2b71259a1105ab7fc63544b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>WindowHandle</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>~SharedPtr</name></member>

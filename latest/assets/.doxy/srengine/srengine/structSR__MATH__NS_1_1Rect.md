@@ -106,11 +106,11 @@
 |  void | [**operator\*=**](#function-operator_2) (const [**SR\_MATH\_NS::Rect**](structSR__MATH__NS_1_1Rect.md)&lt; T &gt; & other) noexcept<br> |
 |  SR\_NODISCARD [**Rect**](structSR__MATH__NS_1_1Rect.md) | [**operator+**](#function-operator_3) (const [**SR\_MATH\_NS::Rect**](structSR__MATH__NS_1_1Rect.md)&lt; T &gt; & other) noexcept const<br> |
 |  void | [**operator+=**](#function-operator_4) (const [**SR\_MATH\_NS::Rect**](structSR__MATH__NS_1_1Rect.md)&lt; T &gt; & other) noexcept<br> |
-|  SR\_NODISCARD [**Rect**](structSR__MATH__NS_1_1Rect.md) | [**operator-**](#function-operator_5) (const [**SR\_MATH\_NS::Rect**](structSR__MATH__NS_1_1Rect.md)&lt; T &gt; & other) noexcept const<br> |
-|  void | [**operator-=**](#function-operator_6) (const [**SR\_MATH\_NS::Rect**](structSR__MATH__NS_1_1Rect.md)&lt; T &gt; & other) noexcept<br> |
-|  SR\_NODISCARD [**Rect**](structSR__MATH__NS_1_1Rect.md) | [**operator/**](#function-operator_7) (const [**SR\_MATH\_NS::Rect**](structSR__MATH__NS_1_1Rect.md)&lt; T &gt; & other) noexcept const<br> |
-|  void | [**operator/=**](#function-operator_8) (const [**SR\_MATH\_NS::Rect**](structSR__MATH__NS_1_1Rect.md)&lt; T &gt; & other) noexcept<br> |
-|  SR\_NODISCARD bool | [**operator==**](#function-operator_9) (const [**Rect**](structSR__MATH__NS_1_1Rect.md) & other) noexcept const<br> |
+|  SR\_NODISCARD [**Rect**](structSR__MATH__NS_1_1Rect.md) | [**operator-**](#function-operator-) (const [**SR\_MATH\_NS::Rect**](structSR__MATH__NS_1_1Rect.md)&lt; T &gt; & other) noexcept const<br> |
+|  void | [**operator-=**](#function-operator-_1) (const [**SR\_MATH\_NS::Rect**](structSR__MATH__NS_1_1Rect.md)&lt; T &gt; & other) noexcept<br> |
+|  SR\_NODISCARD [**Rect**](structSR__MATH__NS_1_1Rect.md) | [**operator/**](#function-operator_5) (const [**SR\_MATH\_NS::Rect**](structSR__MATH__NS_1_1Rect.md)&lt; T &gt; & other) noexcept const<br> |
+|  void | [**operator/=**](#function-operator_6) (const [**SR\_MATH\_NS::Rect**](structSR__MATH__NS_1_1Rect.md)&lt; T &gt; & other) noexcept<br> |
+|  SR\_NODISCARD bool | [**operator==**](#function-operator_7) (const [**Rect**](structSR__MATH__NS_1_1Rect.md) & other) noexcept const<br> |
 
 
 ## Public Static Functions

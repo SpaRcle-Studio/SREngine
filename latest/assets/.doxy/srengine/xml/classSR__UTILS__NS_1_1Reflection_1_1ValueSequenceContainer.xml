@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="59" column="16" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="59" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="123" column="16" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="123" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1ab2675d319b05855857fd4ab4806500b9" prot="private" static="no" mutable="no">
         <type>entt::meta_sequence_container</type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="77" column="39" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="77" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="147" column="39" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="147" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="61" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="61" bodyend="63"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="125" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="125" bodyend="127"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -65,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="66" column="53" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="66" bodyend="66"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="130" column="53" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="130" bodyend="130"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1a875fe9fc35fa58b05bfb463d93c2e224" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainerIterator" kindref="compound">ValueSequenceContainerIterator</ref></type>
@@ -79,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="67" column="53" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="67" bodyend="67"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="131" column="53" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="131" bodyend="131"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1ac69730254b894826f33d330aca72910a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -93,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="69" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="133" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1aa402ff805d3dc0c226a6ca971571cb82" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -111,7 +111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="70" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="134" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1af149868692602b50e36dd949dcfd228b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -129,7 +129,47 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="71" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="135" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1a696b2a26c7baedff6f27d7f0e5937bbf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainerIterator" kindref="compound">ValueSequenceContainerIterator</ref></type>
+        <definition>ValueSequenceContainerIterator SR_UTILS_NS::Reflection::ValueSequenceContainer::Erase</definition>
+        <argsstring>(ValueSequenceContainerIterator it)</argsstring>
+        <name>Erase</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::ValueSequenceContainer::Erase</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainerIterator" kindref="compound">ValueSequenceContainerIterator</ref></type>
+          <declname>it</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="137" column="40" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="137" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1a81fa23ca4d099df38793a0a3e0f6beb1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainerIterator" kindref="compound">ValueSequenceContainerIterator</ref></type>
+        <definition>ValueSequenceContainerIterator SR_UTILS_NS::Reflection::ValueSequenceContainer::Insert</definition>
+        <argsstring>(ValueSequenceContainerIterator it, Value value)</argsstring>
+        <name>Insert</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::ValueSequenceContainer::Insert</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainerIterator" kindref="compound">ValueSequenceContainerIterator</ref></type>
+          <declname>it</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">Value</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="141" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1a346fbf70392a2103a370b7778efa50df" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -143,7 +183,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="73" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="73" bodyend="73"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="143" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="143" bodyend="143"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1a4585337cc6e965872f9f85caa83e6653" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -157,19 +197,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="74" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="74" bodyend="74"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="144" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="144" bodyend="144"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="58" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="58" bodyend="78"/>
+    <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="122" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="122" bodyend="148"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1aa278236810f6e74e945ed2034fbd587a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::ValueSequenceContainer</scope><name>begin</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1ac69730254b894826f33d330aca72910a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::ValueSequenceContainer</scope><name>Clear</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1a4585337cc6e965872f9f85caa83e6653" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::ValueSequenceContainer</scope><name>Empty</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1a875fe9fc35fa58b05bfb463d93c2e224" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::ValueSequenceContainer</scope><name>end</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1a696b2a26c7baedff6f27d7f0e5937bbf" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::ValueSequenceContainer</scope><name>Erase</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1a81fa23ca4d099df38793a0a3e0f6beb1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::ValueSequenceContainer</scope><name>Insert</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1ab2675d319b05855857fd4ab4806500b9" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::ValueSequenceContainer</scope><name>m_storage</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1af149868692602b50e36dd949dcfd228b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::ValueSequenceContainer</scope><name>Reserve</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1aa402ff805d3dc0c226a6ca971571cb82" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::ValueSequenceContainer</scope><name>Resize</name></member>

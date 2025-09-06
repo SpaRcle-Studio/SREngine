@@ -15,11 +15,6 @@
 #ifndef SR_ENGINE_GRAPHICS_SHADER_H
 #define SR_ENGINE_GRAPHICS_SHADER_H
 
-#include <Utils/Common/NonCopyable.h>
-#include <Utils/Common/Hashes.h>
-#include <Utils/Resources/IResource.h>
-#include <Utils/Math/Rect.h>
-
 #include <Graphics/Types/Vertices.h>
 #include <Graphics/Types/Uniforms.h>
 #include <Graphics/Memory/ShaderUBOBlock.h>
@@ -28,6 +23,11 @@
 #include <Graphics/Memory/IGraphicsResource.h>
 #include <Graphics/Memory/UBOManager.h>
 
+#include <Utils/Common/NonCopyable.h>
+#include <Utils/Common/Hashes.h>
+#include <Utils/Resources/IResource.h>
+#include <Utils/Math/Rect.h>
+
 namespace SR_GTYPES_NS {
     class Texture;
 }
@@ -35,14 +35,14 @@ namespace SR_GTYPES_NS {
 namespace SR_GRAPH_NS {
     class Render;
     class RenderContext;
+    class ShaderCache;
 }
 
 namespace SR_GTYPES_NS {
-    class Shader;
-
     class Shader : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource {
         SR_CLASS()
         using ShaderProgram = int32_t;
+        friend class ShaderCache;
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<Shader>;
 
@@ -51,7 +51,7 @@ namespace SR_GTYPES_NS {
         ~Shader() override;
 
     public:
-        static Shader::Ptr Load(const SR_UTILS_NS::Path& rawPath);
+        static Shader::Ptr Load(const SR_UTILS_NS::Path& rawPath, const SR_SRSL_NS::ShaderMacrosParams& macros = SR_SRSL_NS::ShaderMacrosParams::GetDefault());
 
         ShaderBindResult Use() noexcept;
 
@@ -74,9 +74,10 @@ namespace SR_GTYPES_NS {
 
         RemoveUPResult RemoveUsePoint() override;
 
+        SR_NODISCARD Shader::Ptr GetShaderVariant(const SR_SRSL_NS::ShaderMacrosParams& macros);
+
     public:
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
-        SR_DEPRECATED SR_NODISCARD int32_t GetID();
         SR_NODISCARD int32_t GetId() noexcept;
         SR_NODISCARD ShaderProgram GetVirtualProgram() const noexcept { return m_shaderProgram; }
         SR_NODISCARD bool Ready() const;
@@ -91,6 +92,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD bool HasSSBOBindings() const noexcept { return !m_ssboBindings.empty(); }
         SR_NODISCARD SR_SRSL_NS::ShaderType GetType() const noexcept;
         SR_NODISCARD const SR_MATH_NS::UVector3& GetComputeWorkGroupSize() const noexcept { return m_computeWorkGroupSize; }
+        SR_NODISCARD const SR_SRSL_NS::ShaderMacrosParams& GetMacros() const noexcept { return m_macros; }
 
     public:
         template<bool constant, typename T> void SetValue(uint64_t hashId, const T* v) noexcept {
@@ -168,6 +170,8 @@ namespace SR_GTYPES_NS {
         std::pair<int32_t, bool> m_virtualUBO = { SR_ID_INVALID, true };
 
         SR_MATH_NS::UVector3 m_computeWorkGroupSize = { 1, 1, 1 };
+
+        SR_SRSL_NS::ShaderMacrosParams m_macros;
 
         std::vector<SR_UTILS_NS::StringAtom> m_includes;
         Memory::ShaderUBOBlock m_uniformBlock;

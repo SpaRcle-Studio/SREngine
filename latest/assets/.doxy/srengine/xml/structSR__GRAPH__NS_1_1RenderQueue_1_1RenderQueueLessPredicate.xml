@@ -27,14 +27,14 @@
 <para>Если шейдеры одинаковые, сравниваем VBO</para>
 <para>Если и VBO одинаковые, сравниваем указатели на меши</para>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="60" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="60" bodyend="78"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="65" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="65" bodyend="83"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="59" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="59" bodyend="79"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="64" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="64" bodyend="84"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1RenderQueue_1_1RenderQueueLessPredicate_1a02a8f259d7a339369159f227ba915f52" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue::RenderQueueLessPredicate</scope><name>operator()</name></member>
     </listofallmembers>

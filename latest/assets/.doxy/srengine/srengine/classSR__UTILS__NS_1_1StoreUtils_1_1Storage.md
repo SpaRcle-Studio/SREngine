@@ -327,7 +327,9 @@ enum SR_UTILS_NS::StoreUtils::Storage::StorageType {
 enum SR_UTILS_NS::StoreUtils::Storage::ValueType {
     AnyType,
     Float,
-    Bool
+    Int,
+    Bool,
+    String
 };
 ```
 

@@ -53,7 +53,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  bool | [**operator()**](#function-operator()) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & lhs, const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & rhs) noexcept const<br> |
+|  bool | [**operator()**](#function-operator) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & lhs, const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & rhs) noexcept const<br> |
 
 
 

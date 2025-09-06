@@ -83,6 +83,7 @@ Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_
 
 | Type | Name |
 | ---: | :--- |
+|  void | [**PostProcess**](#function-postprocess) (const [**ShaderMacrosParams**](structSR__SRSL__NS_1_1ShaderMacrosParams.md) & macros) <br> |
 |   | [**SRSLAnalyzedTree**](#function-srslanalyzedtree) () = default<br> |
 |   | [**~SRSLAnalyzedTree**](#function-srslanalyzedtree) () override<br> |
 
@@ -197,6 +198,21 @@ SRSLLexicalTree* SR_SRSL_NS::SRSLAnalyzedTree::pLexicalTree;
 <hr>
 ## Public Functions Documentation
 
+
+
+
+### function PostProcess 
+
+```C++
+void SR_SRSL_NS::SRSLAnalyzedTree::PostProcess (
+    const ShaderMacrosParams & macros
+) 
+```
+
+
+
+
+<hr>
 
 
 

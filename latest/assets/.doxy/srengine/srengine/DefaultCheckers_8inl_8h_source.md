@@ -34,7 +34,7 @@ template<> struct DefaultChecker<SR_UTILS_NS::StringAtom> {
 
 template<class T> struct DefaultChecker<std::optional<T>> {
     static bool IsDefault(const std::optional<T>& value) {
-        return !value.is_initialized();
+        return !value.has_value();
     }
 };
 

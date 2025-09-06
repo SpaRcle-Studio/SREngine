@@ -10,14 +10,14 @@
 
 
 
+* `#include <Graphics/Types/Uniforms.h>`
+* `#include <Graphics/Types/Vertices.h>`
+* `#include <Graphics/SRSL/ShaderType.h>`
 * `#include <Utils/FileSystem/FileSystem.h>`
 * `#include <Utils/Resources/ResourceManager.h>`
 * `#include <Utils/Common/StringUtils.h>`
 * `#include <Utils/Common/Hashes.h>`
 * `#include <Utils/Common/Enumerations.h>`
-* `#include <Graphics/Types/Uniforms.h>`
-* `#include <Graphics/Types/Vertices.h>`
-* `#include <Graphics/SRSL/ShaderType.h>`
 
 
 
@@ -46,7 +46,6 @@
 | struct | [**SRShaderCreateInfo**](structSR__GRAPH__NS_1_1SRShaderCreateInfo.md) <br> |
 | struct | [**SRShaderPushConstant**](structSR__GRAPH__NS_1_1SRShaderPushConstant.md) <br> |
 | struct | [**SRShaderStageInfo**](structSR__GRAPH__NS_1_1SRShaderStageInfo.md) <br> |
-| struct | [**ShaderUseInfo**](structSR__GRAPH__NS_1_1ShaderUseInfo.md) <br> |
 | struct | [**SourceShader**](structSR__GRAPH__NS_1_1SourceShader.md) <br> |
 | struct | [**Uniform**](structSR__GRAPH__NS_1_1Uniform.md) <br> |
 

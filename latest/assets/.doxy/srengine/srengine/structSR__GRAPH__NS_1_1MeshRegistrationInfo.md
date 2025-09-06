@@ -37,10 +37,9 @@
 | ---: | :--- |
 |  std::optional&lt; int32\_t &gt; | [**VBO**](#variable-vbo)  <br> |
 |  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**layer**](#variable-layer)  <br> |
-|  const [**BaseMaterial**](classSR__GRAPH__NS_1_1BaseMaterial.md) \* | [**pMaterial**](#variable-pmaterial)   = `nullptr`<br> |
+|  [**BaseMaterial**](classSR__GRAPH__NS_1_1BaseMaterial.md) \* | [**pMaterial**](#variable-pmaterial)   = `nullptr`<br> |
 |  [**SR\_GTYPES\_NS::Mesh**](classSR__GTYPES__NS_1_1Mesh.md) \* | [**pMesh**](#variable-pmesh)   = `nullptr`<br> |
 |  [**SR\_GRAPH\_NS::RenderScene**](classSR__GRAPH__NS_1_1RenderScene.md) \* | [**pScene**](#variable-pscene)   = `nullptr`<br> |
-|  [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) &gt; | [**pShader**](#variable-pshader)  <br> |
 |  uint32\_t | [**poolId**](#variable-poolid)   = `static\_cast&lt;uint32\_t&gt;(SR\_ID\_INVALID)`<br> |
 |  std::optional&lt; int64\_t &gt; | [**priority**](#variable-priority)  <br> |
 
@@ -121,7 +120,7 @@ SR_UTILS_NS::StringAtom SR_GRAPH_NS::MeshRegistrationInfo::layer;
 ### variable pMaterial 
 
 ```C++
-const BaseMaterial* SR_GRAPH_NS::MeshRegistrationInfo::pMaterial;
+BaseMaterial* SR_GRAPH_NS::MeshRegistrationInfo::pMaterial;
 ```
 
 
@@ -148,19 +147,6 @@ SR_GTYPES_NS::Mesh* SR_GRAPH_NS::MeshRegistrationInfo::pMesh;
 
 ```C++
 SR_GRAPH_NS::RenderScene* SR_GRAPH_NS::MeshRegistrationInfo::pScene;
-```
-
-
-
-
-<hr>
-
-
-
-### variable pShader 
-
-```C++
-SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Shader> SR_GRAPH_NS::MeshRegistrationInfo::pShader;
 ```
 
 

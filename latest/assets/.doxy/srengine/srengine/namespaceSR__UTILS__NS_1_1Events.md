@@ -31,14 +31,13 @@
 
 
 
-
-
-## Public Static Attributes
+## Public Attributes
 
 | Type | Name |
 | ---: | :--- |
-|  const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**EVENT\_ON\_ENGINE\_UPDATE\_ID**](#variable-event_on_engine_update_id)   = `"OnEngineUpdate"`<br> |
-|  const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**EVENT\_ON\_SCRIPT\_MODULE\_RELOADED\_ID**](#variable-event_on_script_module_reloaded_id)   = `"OnScriptModuleReloaded"`<br> |
+|  SR\_INLINE\_STATIC const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**EVENT\_ON\_ENGINE\_UPDATE\_ID**](#variable-event_on_engine_update_id)   = `"OnEngineUpdate"`<br> |
+|  SR\_INLINE\_STATIC const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**EVENT\_ON\_RENDER\_SETTINGS\_CHANGED\_ID**](#variable-event_on_render_settings_changed_id)   = `"OnRenderSettingsChanged"`<br> |
+|  SR\_INLINE\_STATIC const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**EVENT\_ON\_SCRIPT\_MODULE\_RELOADED\_ID**](#variable-event_on_script_module_reloaded_id)   = `"OnScriptModuleReloaded"`<br> |
 
 
 
@@ -81,7 +80,9 @@
 
 
 
-## Public Static Attributes Documentation
+
+
+## Public Attributes Documentation
 
 
 
@@ -89,7 +90,20 @@
 ### variable EVENT\_ON\_ENGINE\_UPDATE\_ID 
 
 ```C++
-const SR_UTILS_NS::StringAtom SR_UTILS_NS::Events::EVENT_ON_ENGINE_UPDATE_ID;
+SR_INLINE_STATIC const SR_UTILS_NS::StringAtom SR_UTILS_NS::Events::EVENT_ON_ENGINE_UPDATE_ID;
+```
+
+
+
+
+<hr>
+
+
+
+### variable EVENT\_ON\_RENDER\_SETTINGS\_CHANGED\_ID 
+
+```C++
+SR_INLINE_STATIC const SR_UTILS_NS::StringAtom SR_UTILS_NS::Events::EVENT_ON_RENDER_SETTINGS_CHANGED_ID;
 ```
 
 
@@ -102,7 +116,7 @@ const SR_UTILS_NS::StringAtom SR_UTILS_NS::Events::EVENT_ON_ENGINE_UPDATE_ID;
 ### variable EVENT\_ON\_SCRIPT\_MODULE\_RELOADED\_ID 
 
 ```C++
-const SR_UTILS_NS::StringAtom SR_UTILS_NS::Events::EVENT_ON_SCRIPT_MODULE_RELOADED_ID;
+SR_INLINE_STATIC const SR_UTILS_NS::StringAtom SR_UTILS_NS::Events::EVENT_ON_SCRIPT_MODULE_RELOADED_ID;
 ```
 
 

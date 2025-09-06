@@ -17,12 +17,9 @@
 * `#include <Utils/Types/Time.h>`
 * `#include <Utils/Resources/Xml.h>`
 * `#include <Utils/Resources/ResourceContainer.h>`
-* `#include <Utils/SRLM/LogicalNode.h>`
-* `#include <Utils/SRLM/LogicalNodeManager.h>`
-* `#include <Utils/SRLM/DataType.h>`
-* `#include <Utils/SRLM/Utils.h>`
 * `#include <Graphics/Memory/UBOManager.h>`
 * `#include <Graphics/Memory/DescriptorManager.h>`
+* `#include <Graphics/Pass/Data/SamplersPassData.h>`
 
 
 
@@ -48,7 +45,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**BasePass**](classSR__GRAPH__NS_1_1BasePass.md) <br> |
+| class | [**BasePass**](classSR__GRAPH__NS_1_1BasePass.md) <br>_@abstract_  |
 
 
 
@@ -98,48 +95,7 @@
 
 
 
-## Macros
 
-| Type | Name |
-| ---: | :--- |
-| define  | [**SR\_ALLOCATE\_RENDER\_PASS**](BasePass_8h.md#define-sr_allocate_render_pass) (passNode, pTechnique) `/* multi line expression */`<br> |
-| define  | [**SR\_REGISTER\_RENDER\_PASS**](BasePass_8h.md#define-sr_register_render_pass) (name) `/* multi line expression */`<br>_TODO: переделать на встраивание в объявление класса_  |
-
-## Macro Definition Documentation
-
-
-
-
-
-### define SR\_ALLOCATE\_RENDER\_PASS 
-
-```C++
-#define SR_ALLOCATE_RENDER_PASS (
-    passNode,
-    pTechnique
-) `/* multi line expression */`
-```
-
-
-
-
-<hr>
-
-
-
-### define SR\_REGISTER\_RENDER\_PASS 
-
-_TODO: переделать на встраивание в объявление класса_ 
-```C++
-#define SR_REGISTER_RENDER_PASS (
-    name
-) `/* multi line expression */`
-```
-
-
-
-
-<hr>
 
 ------------------------------
 The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h`

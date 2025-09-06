@@ -69,10 +69,10 @@
 |   | [**operator bool**](#function-operator-bool) () noexcept const<br> |
 |  SR\_NODISCARD SR\_INLINE bool | [**operator!=**](#function-operator) (const [**MultiThreadPtr**](classSR__HTYPES__NS_1_1MultiThreadPtr.md)&lt; T &gt; & right) noexcept const<br> |
 |  T & | [**operator\***](#function-operator_1) () const<br> |
-|  T \* | [**operator-&gt;**](#function-operator_2) () const<br> |
-|  [**MultiThreadPtr**](classSR__HTYPES__NS_1_1MultiThreadPtr.md)&lt; T &gt; & | [**operator=**](#function-operator_3) (const [**MultiThreadPtr**](classSR__HTYPES__NS_1_1MultiThreadPtr.md)&lt; T &gt; & ptr) <br>_не должен быть виртуальным_  |
-|  [**MultiThreadPtr**](classSR__HTYPES__NS_1_1MultiThreadPtr.md)&lt; T &gt; & | [**operator=**](#function-operator_4) (T \* ptr) <br> |
-|  SR\_NODISCARD SR\_INLINE bool | [**operator==**](#function-operator_5) (const [**MultiThreadPtr**](classSR__HTYPES__NS_1_1MultiThreadPtr.md)&lt; T &gt; & right) noexcept const<br> |
+|  T \* | [**operator-&gt;**](#function-operator-) () const<br> |
+|  [**MultiThreadPtr**](classSR__HTYPES__NS_1_1MultiThreadPtr.md)&lt; T &gt; & | [**operator=**](#function-operator_2) (const [**MultiThreadPtr**](classSR__HTYPES__NS_1_1MultiThreadPtr.md)&lt; T &gt; & ptr) <br>_не должен быть виртуальным_  |
+|  [**MultiThreadPtr**](classSR__HTYPES__NS_1_1MultiThreadPtr.md)&lt; T &gt; & | [**operator=**](#function-operator_3) (T \* ptr) <br> |
+|  SR\_NODISCARD SR\_INLINE bool | [**operator==**](#function-operator_4) (const [**MultiThreadPtr**](classSR__HTYPES__NS_1_1MultiThreadPtr.md)&lt; T &gt; & right) noexcept const<br> |
 |   | [**~MultiThreadPtr**](#function-multithreadptr) () <br> |
 
 

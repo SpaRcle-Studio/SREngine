@@ -32,11 +32,6 @@
 | namespace | [**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md) <br> |
 
 
-## Classes
-
-| Type | Name |
-| ---: | :--- |
-| class | [**DepthBufferPass**](classSR__GRAPH__NS_1_1DepthBufferPass.md) <br> |
 
 
 

@@ -35,6 +35,11 @@
 
 
 
+## Public Static Attributes
+
+| Type | Name |
+| ---: | :--- |
+|  constexpr SerializationId | [**hasValueId**](#variable-hasvalueid)   = `SerializationId::Create("has")`<br> |
 
 
 
@@ -83,6 +88,21 @@
 
 
 
+## Public Static Attributes Documentation
+
+
+
+
+### variable hasValueId 
+
+```C++
+constexpr SerializationId ObjectDataAccessor< std::optional< T > >::hasValueId;
+```
+
+
+
+
+<hr>
 ## Public Static Functions Documentation
 
 

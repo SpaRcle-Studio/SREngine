@@ -16,8 +16,9 @@
 * `#include <Utils/Types/SafePointer.h>`
 * `#include <Graphics/Memory/UBOManager.h>`
 * `#include <Graphics/Memory/IGraphicsResource.h>`
+* `#include <Graphics/Render/FrameBufferController.h>`
 * `#include <Graphics/Pass/GroupPass.h>`
-* `#include <Graphics/Pass/PassQueue.h>`
+* `#include <Graphics/Pass/RenderTechniqueQueue.h>`
 
 
 
@@ -44,6 +45,7 @@
 | Type | Name |
 | ---: | :--- |
 | class | [**IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) <br> |
+| struct | [**RenderTechniqueData**](structSR__GRAPH__NS_1_1RenderTechniqueData.md) <br> |
 
 
 

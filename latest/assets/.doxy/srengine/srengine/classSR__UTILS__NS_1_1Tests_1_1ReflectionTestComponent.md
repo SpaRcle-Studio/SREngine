@@ -86,7 +86,6 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 |  std::vector&lt; float &gt; & | [**GetTest**](#function-gettest) () <br> |
 |  SR\_NODISCARD const bool & | [**IsWidthChangeable**](#function-iswidthchangeable) () const<br> |
 |  void | [**OnChanged**](#function-onchanged) () <br> |
-| virtual void | [**OnDestroy**](#function-ondestroy) () override<br>_Вызывается когда компонент убирается с объекта, либо объект уничтожается. Может произойти отложенно._  |
 
 
 ## Public Functions inherited from SR_UTILS_NS::Component
@@ -262,22 +261,6 @@ inline void SR_UTILS_NS::Tests::ReflectionTestComponent::OnChanged ()
 ```
 
 
-
-
-<hr>
-
-
-
-### function OnDestroy 
-
-_Вызывается когда компонент убирается с объекта, либо объект уничтожается. Может произойти отложенно._ 
-```C++
-inline virtual void SR_UTILS_NS::Tests::ReflectionTestComponent::OnDestroy () override
-```
-
-
-
-Implements [*SR\_UTILS\_NS::Component::OnDestroy*](classSR__UTILS__NS_1_1Component.md#function-ondestroy)
 
 
 <hr>

@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="46" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="46" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="58" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="58" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1StoreUtils_1_1Storage_1_1ValueHolder_1a1227d6eca86101e5383db78a394f3a11" prot="public" static="no" mutable="no">
         <type>ValueType</type>
@@ -29,7 +29,131 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="47" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="59" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1StoreUtils_1_1Storage_1_1ValueHolder_1ada342c62f47759371b38d0adc54eb713" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::StoreUtils::Storage::ValueHolder::ValueHolder</definition>
+        <argsstring>()</argsstring>
+        <name>ValueHolder</name>
+        <qualifiedname>SR_UTILS_NS::StoreUtils::Storage::ValueHolder::ValueHolder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="61" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1StoreUtils_1_1Storage_1_1ValueHolder_1abd693a887da0ff9dfe070505b31bff0a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::StoreUtils::Storage::ValueHolder::ValueHolder</definition>
+        <argsstring>(Value val, ValueType type)</argsstring>
+        <name>ValueHolder</name>
+        <qualifiedname>SR_UTILS_NS::StoreUtils::Storage::ValueHolder::ValueHolder</qualifiedname>
+        <param>
+          <type>Value</type>
+          <declname>val</declname>
+        </param>
+        <param>
+          <type>ValueType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="62" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1StoreUtils_1_1Storage_1_1ValueHolder_1ac222d71f5006767cb31768fba42f8dae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::StoreUtils::Storage::ValueHolder::ValueHolder</definition>
+        <argsstring>(const ValueHolder &amp;other)</argsstring>
+        <name>ValueHolder</name>
+        <qualifiedname>SR_UTILS_NS::StoreUtils::Storage::ValueHolder::ValueHolder</qualifiedname>
+        <param>
+          <type>const ValueHolder &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="63" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1StoreUtils_1_1Storage_1_1ValueHolder_1a87d2305938afee09dd7cc03480d442c1" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::StoreUtils::Storage::ValueHolder::ValueHolder</definition>
+        <argsstring>(ValueHolder &amp;&amp;other) noexcept</argsstring>
+        <name>ValueHolder</name>
+        <qualifiedname>SR_UTILS_NS::StoreUtils::Storage::ValueHolder::ValueHolder</qualifiedname>
+        <param>
+          <type>ValueHolder &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="64" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1StoreUtils_1_1Storage_1_1ValueHolder_1aaa48e3edcfe5f7927b9fda1b1fcf4f73" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>ValueHolder &amp;</type>
+        <definition>ValueHolder &amp; SR_UTILS_NS::StoreUtils::Storage::ValueHolder::operator=</definition>
+        <argsstring>(const ValueHolder &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_UTILS_NS::StoreUtils::Storage::ValueHolder::operator=</qualifiedname>
+        <param>
+          <type>const ValueHolder &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="65" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1StoreUtils_1_1Storage_1_1ValueHolder_1a0f07ca759f216934dd3cf091caff2255" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>ValueHolder &amp;</type>
+        <definition>ValueHolder &amp; SR_UTILS_NS::StoreUtils::Storage::ValueHolder::operator=</definition>
+        <argsstring>(ValueHolder &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_UTILS_NS::StoreUtils::Storage::ValueHolder::operator=</qualifiedname>
+        <param>
+          <type>ValueHolder &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="66" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1StoreUtils_1_1Storage_1_1ValueHolder_1a07d4cf15e439fd95bb11b33809a0b886" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::StoreUtils::Storage::ValueHolder::~ValueHolder</definition>
+        <argsstring>()</argsstring>
+        <name>~ValueHolder</name>
+        <qualifiedname>SR_UTILS_NS::StoreUtils::Storage::ValueHolder::~ValueHolder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="67" column="13"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -47,10 +171,17 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="45" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="45" bodyend="48"/>
+    <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="57" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="57" bodyend="68"/>
     <listofallmembers>
+      <member refid="structSR__UTILS__NS_1_1StoreUtils_1_1Storage_1_1ValueHolder_1aaa48e3edcfe5f7927b9fda1b1fcf4f73" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StoreUtils::Storage::ValueHolder</scope><name>operator=</name></member>
+      <member refid="structSR__UTILS__NS_1_1StoreUtils_1_1Storage_1_1ValueHolder_1a0f07ca759f216934dd3cf091caff2255" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StoreUtils::Storage::ValueHolder</scope><name>operator=</name></member>
       <member refid="structSR__UTILS__NS_1_1StoreUtils_1_1Storage_1_1ValueHolder_1a1227d6eca86101e5383db78a394f3a11" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StoreUtils::Storage::ValueHolder</scope><name>type</name></member>
       <member refid="structSR__UTILS__NS_1_1StoreUtils_1_1Storage_1_1ValueHolder_1aafd84baacd978003d150a93104d147fb" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StoreUtils::Storage::ValueHolder</scope><name>value</name></member>
+      <member refid="structSR__UTILS__NS_1_1StoreUtils_1_1Storage_1_1ValueHolder_1ada342c62f47759371b38d0adc54eb713" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StoreUtils::Storage::ValueHolder</scope><name>ValueHolder</name></member>
+      <member refid="structSR__UTILS__NS_1_1StoreUtils_1_1Storage_1_1ValueHolder_1abd693a887da0ff9dfe070505b31bff0a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StoreUtils::Storage::ValueHolder</scope><name>ValueHolder</name></member>
+      <member refid="structSR__UTILS__NS_1_1StoreUtils_1_1Storage_1_1ValueHolder_1ac222d71f5006767cb31768fba42f8dae" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StoreUtils::Storage::ValueHolder</scope><name>ValueHolder</name></member>
+      <member refid="structSR__UTILS__NS_1_1StoreUtils_1_1Storage_1_1ValueHolder_1a87d2305938afee09dd7cc03480d442c1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StoreUtils::Storage::ValueHolder</scope><name>ValueHolder</name></member>
+      <member refid="structSR__UTILS__NS_1_1StoreUtils_1_1Storage_1_1ValueHolder_1a07d4cf15e439fd95bb11b33809a0b886" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StoreUtils::Storage::ValueHolder</scope><name>~ValueHolder</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

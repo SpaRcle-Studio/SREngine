@@ -72,9 +72,9 @@ Inherits the following classes: NonCopyable
 |   | [**operator const T &**](#function-operator-const-t-&) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**operator!=**](#function-operator) (const [**SafeVar**](classSR__HTYPES__NS_1_1SafeVar.md)&lt; T &gt; & right) noexcept const<br> |
 |  T & | [**operator\***](#function-operator_1) () noexcept const<br>_NOLINT._  |
-|  T | [**operator-&gt;**](#function-operator_2) () noexcept const<br> |
-|  [**SafeVar**](classSR__HTYPES__NS_1_1SafeVar.md)&lt; T &gt; & | [**operator=**](#function-operator_3) (const T & data) <br> |
-|  SR\_NODISCARD bool | [**operator==**](#function-operator_4) (const [**SafeVar**](classSR__HTYPES__NS_1_1SafeVar.md)&lt; T &gt; & right) noexcept const<br> |
+|  T | [**operator-&gt;**](#function-operator-) () noexcept const<br> |
+|  [**SafeVar**](classSR__HTYPES__NS_1_1SafeVar.md)&lt; T &gt; & | [**operator=**](#function-operator_2) (const T & data) <br> |
+|  SR\_NODISCARD bool | [**operator==**](#function-operator_3) (const [**SafeVar**](classSR__HTYPES__NS_1_1SafeVar.md)&lt; T &gt; & right) noexcept const<br> |
 
 
 

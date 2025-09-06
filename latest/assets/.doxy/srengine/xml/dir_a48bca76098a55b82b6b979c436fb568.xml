@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_a48bca76098a55b82b6b979c436fb568" kind="dir">
+    <compoundname>Engine/libs/Graphics/inc/Graphics/Settings</compoundname>
+    <innerfile refid="RenderSettings_8h">RenderSettings.h</innerfile>
+    <innerfile refid="RenderStagesSettings_8h">RenderStagesSettings.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Graphics/inc/Graphics/Settings/"/>
+  </compounddef>
+</doxygen>

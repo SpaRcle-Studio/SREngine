@@ -78,7 +78,7 @@ See [SR\_UTILS\_NS::SRConditionallyEnabledHash](structSR__UTILS__NS_1_1SRConditi
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_NODISCARD constexpr size\_t | [**operator()**](structSR__UTILS__NS_1_1SRConditionallyEnabledHash.md#function-operator()) (const T & keyVal) noexcept const<br> |
+|  SR\_NODISCARD constexpr size\_t | [**operator()**](structSR__UTILS__NS_1_1SRConditionallyEnabledHash.md#function-operator) (const T & keyVal) noexcept const<br> |
 
 
 ## Public Static Functions

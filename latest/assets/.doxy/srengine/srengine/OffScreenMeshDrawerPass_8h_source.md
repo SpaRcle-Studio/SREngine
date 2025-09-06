@@ -15,11 +15,11 @@
 #ifndef SR_ENGINE_OFF_SCREEN_MESH_DRAWER_PASS_H
 #define SR_ENGINE_OFF_SCREEN_MESH_DRAWER_PASS_H
 
-#include <Graphics/Pass/IFramebufferPass.h>
+#include <Graphics/Pass/Data/FrameBufferPassData.h>
 #include <Graphics/Pass/MeshDrawerPass.h>
 
 namespace SR_GRAPH_NS {
-    class OffScreenMeshDrawerPass : public IFramebufferPass, public MeshDrawerPass {
+    /*class OffScreenMeshDrawerPass : public MeshDrawerPass {
     public:
         bool Load(const SR_XML_NS::Node& passNode) override;
 
@@ -38,7 +38,7 @@ namespace SR_GRAPH_NS {
         void RenderFrameBufferInner() override;
         void UpdateFrameBufferInner() override;
 
-    };
+    };*/
 }
 
 #endif //SR_ENGINE_OFF_SCREEN_MESH_DRAWER_PASS_H

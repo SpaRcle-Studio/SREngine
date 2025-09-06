@@ -5,6 +5,7 @@
     <innerclass refid="classSR__CORE__GUI__NS_1_1About" prot="public">SR_CORE_GUI_NS::About</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1AnimatorEditor" prot="public">SR_CORE_GUI_NS::AnimatorEditor</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1AssetInspector" prot="public">SR_CORE_GUI_NS::AssetInspector</innerclass>
+    <innerclass refid="classSR__CORE__GUI__NS_1_1AssociativePropertyDrawer" prot="public">SR_CORE_GUI_NS::AssociativePropertyDrawer</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1BehaviourNamePropertyDrawer" prot="public">SR_CORE_GUI_NS::BehaviourNamePropertyDrawer</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1BehaviourPropertyDrawer" prot="public">SR_CORE_GUI_NS::BehaviourPropertyDrawer</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1BitMapPropertyDrawer" prot="public">SR_CORE_GUI_NS::BitMapPropertyDrawer</innerclass>
@@ -16,6 +17,7 @@
     <innerclass refid="classSR__CORE__GUI__NS_1_1EngineSettings" prot="public">SR_CORE_GUI_NS::EngineSettings</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1EntityRefPropertyDrawer" prot="public">SR_CORE_GUI_NS::EntityRefPropertyDrawer</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1EnumPropertyDrawer" prot="public">SR_CORE_GUI_NS::EnumPropertyDrawer</innerclass>
+    <innerclass refid="classSR__CORE__GUI__NS_1_1FColorPropertyDrawer" prot="public">SR_CORE_GUI_NS::FColorPropertyDrawer</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1Hierarchy" prot="public">SR_CORE_GUI_NS::Hierarchy</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1Inspector" prot="public">SR_CORE_GUI_NS::Inspector</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1MarginPropertyDrawer" prot="public">SR_CORE_GUI_NS::MarginPropertyDrawer</innerclass>
@@ -26,6 +28,7 @@
     <innerclass refid="classSR__CORE__GUI__NS_1_1MathVectorPropertyDrawer" prot="public">SR_CORE_GUI_NS::MathVectorPropertyDrawer</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1NumericPropertyDrawer" prot="public">SR_CORE_GUI_NS::NumericPropertyDrawer</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1ObjectPropertyDrawer" prot="public">SR_CORE_GUI_NS::ObjectPropertyDrawer</innerclass>
+    <innerclass refid="classSR__CORE__GUI__NS_1_1OptionalPropertyDrawer" prot="public">SR_CORE_GUI_NS::OptionalPropertyDrawer</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1PathPropertyDrawer" prot="public">SR_CORE_GUI_NS::PathPropertyDrawer</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1PointerPropertyDrawer" prot="public">SR_CORE_GUI_NS::PointerPropertyDrawer</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase" prot="public">SR_CORE_GUI_NS::PropertyDrawerBase</innerclass>

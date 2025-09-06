@@ -21,6 +21,7 @@
 * `#include <cfloat>`
 * `#include <span>`
 * `#include <limits>`
+* `#include <bitset>`
 * `#include <type_traits>`
 * `#include <cstdio>`
 * `#include <iosfwd>`
@@ -68,6 +69,7 @@
 * `#include <numeric>`
 * `#include <numbers>`
 * `#include <execution>`
+* `#include <xxHash/xxhash.h>`
 * `#include <zlib.h>`
 * `#include <fmt/format.h>`
 * `#include <fmt/printf.h>`
@@ -102,6 +104,7 @@
 | struct | [**EnumSelector**](structCodegen_1_1EnumSelector.md) &lt;typename EnumType&gt;<br> |
 | struct | [**InputIteratorPointer**](structSR__UTILS__NS_1_1InputIteratorPointer.md) &lt;typename T&gt;<br> |
 | struct | [**IsDerivedFrom**](structSR__UTILS__NS_1_1IsDerivedFrom.md) &lt;T, class U&gt;<br> |
+| struct | [**SmallStack**](structSR__UTILS__NS_1_1SmallStack.md) &lt;typename T, N&gt;<br> |
 
 
 
@@ -174,6 +177,7 @@
 | define  | [**SR\_GET\_CLASS\_NAME**](stdInclude_8h.md#define-sr_get_class_name) () `SRGetClassName(\_\_PRETTY\_FUNCTION\_\_)`<br> |
 | define  | [**SR\_GET\_COMPILE\_TIME\_CLASS\_NAME**](stdInclude_8h.md#define-sr_get_compile_time_class_name) (T) `SR\_UTILS\_NS::GetCompileTimeTypeName&lt;T&gt;()`<br> |
 | define  | [**SR\_IGNORE\_UNUSED**](stdInclude_8h.md#define-sr_ignore_unused) (...) `SR\_UTILS\_NS::IgnoreUnused(\_\_VA\_ARGS\_\_)`<br> |
+| define  | [**XXH\_STATIC\_LINKING\_ONLY**](stdInclude_8h.md#define-xxh_static_linking_only)  <br> |
 
 ## Public Attributes Documentation
 
@@ -334,6 +338,19 @@ C++17 - 201703L C++14 - 201402L C++11 - 201103L C++98 - 199711L
 #define SR_IGNORE_UNUSED (
     ...
 ) `SR_UTILS_NS::IgnoreUnused(__VA_ARGS__)`
+```
+
+
+
+
+<hr>
+
+
+
+### define XXH\_STATIC\_LINKING\_ONLY 
+
+```C++
+#define XXH_STATIC_LINKING_ONLY 
 ```
 
 

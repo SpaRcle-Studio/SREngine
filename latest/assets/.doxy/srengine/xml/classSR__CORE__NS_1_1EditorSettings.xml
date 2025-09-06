@@ -2,60 +2,27 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__CORE__NS_1_1EditorSettings" kind="class" language="C++" prot="public">
     <compoundname>SR_CORE_NS::EditorSettings</compoundname>
-    <basecompoundref refid="classSR__UTILS__NS_1_1GlobalSettings" prot="public" virt="non-virtual">SR_UTILS_NS::GlobalSettings&lt; EditorSettings &gt;</basecompoundref>
-    <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classSR__CORE__NS_1_1EditorSettings_1a4f73d19da6cfc814c8577cbb7d34e305" prot="private" static="no">
-        <type>std::map&lt; EditorIcon, <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &gt;</type>
-        <definition>using SR_CORE_NS::EditorSettings::Icons =  std::map&lt;EditorIcon, SR_UTILS_NS::Path&gt;</definition>
+    <basecompoundref refid="classSR__UTILS__NS_1_1Asset" prot="public" virt="non-virtual">SR_UTILS_NS::Asset</basecompoundref>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__CORE__NS_1_1EditorSettings_1a2b90068b31a3c476f8c6c2d9fdb96bca" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__CORE__NS_1_1EditorSettings" kindref="compound">EditorSettings</ref> &gt;</type>
+        <definition>using SR_CORE_NS::EditorSettings::Ptr =  SR_HTYPES_NS::SharedPtr&lt;EditorSettings&gt;</definition>
         <argsstring></argsstring>
-        <name>Icons</name>
-        <qualifiedname>SR_CORE_NS::EditorSettings::Icons</qualifiedname>
+        <name>Ptr</name>
+        <qualifiedname>SR_CORE_NS::EditorSettings::Ptr</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Settings/EditorSettings.h" line="41" column="9" bodyfile="Engine/inc/Engine/Settings/EditorSettings.h" bodystart="41" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classSR__CORE__NS_1_1EditorSettings_1a335e2561088422603cb22b914fbf326b" prot="private" static="no">
-        <type><ref refid="classSR__UTILS__NS_1_1GlobalSettings" kindref="compound">SR_UTILS_NS::GlobalSettings</ref>&lt; <ref refid="classSR__CORE__NS_1_1EditorSettings" kindref="compound">EditorSettings</ref> &gt;</type>
-        <definition>using SR_CORE_NS::EditorSettings::Super =  SR_UTILS_NS::GlobalSettings&lt;EditorSettings&gt;</definition>
-        <argsstring></argsstring>
-        <name>Super</name>
-        <qualifiedname>SR_CORE_NS::EditorSettings::Super</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/inc/Engine/Settings/EditorSettings.h" line="42" column="9" bodyfile="Engine/inc/Engine/Settings/EditorSettings.h" bodystart="42" bodyend="-1"/>
-      </memberdef>
-    </sectiondef>
-    <sectiondef kind="friend">
-      <memberdef kind="friend" id="classSR__CORE__NS_1_1EditorSettings_1a192751c4551f6b607c042552ac00a406" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>class</type>
-        <definition>friend class SR_UTILS_NS::GlobalSettings&lt; EditorSettings &gt;</definition>
-        <argsstring></argsstring>
-        <name>SR_UTILS_NS::GlobalSettings&lt; EditorSettings &gt;</name>
-        <qualifiedname>SR_CORE_NS::EditorSettings::GlobalSettings&lt; EditorSettings &gt;</qualifiedname>
-        <param>
-          <type><ref refid="classSR__UTILS__NS_1_1GlobalSettings" kindref="compound">SR_UTILS_NS::GlobalSettings</ref>&lt; <ref refid="classSR__CORE__NS_1_1EditorSettings" kindref="compound">EditorSettings</ref> &gt;</type>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/inc/Engine/Settings/EditorSettings.h" line="12" column="5" bodyfile="Engine/inc/Engine/Settings/EditorSettings.h" bodystart="40" bodyend="-1"/>
+        <location file="Engine/inc/Engine/Settings/EditorSettings.h" line="54" column="9" bodyfile="Engine/inc/Engine/Settings/EditorSettings.h" bodystart="54" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classSR__CORE__NS_1_1EditorSettings_1a2723c371bd43eb9ef0c9fb44e3604024" prot="private" static="no" mutable="no">
-        <type>Icons</type>
-        <definition>Icons SR_CORE_NS::EditorSettings::m_icons</definition>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1EditorSettings_1afefeebc1fdeea5b204d0dee08a628443" prot="private" static="no" mutable="no">
+        <type>std::map&lt; EditorIcon, <ref refid="structSR__CORE__NS_1_1EditorSettingsIconInfo" kindref="compound">EditorSettingsIconInfo</ref> &gt;</type>
+        <definition>std::map&lt;EditorIcon, EditorSettingsIconInfo&gt; SR_CORE_NS::EditorSettings::m_icons</definition>
         <argsstring></argsstring>
         <name>m_icons</name>
         <qualifiedname>SR_CORE_NS::EditorSettings::m_icons</qualifiedname>
@@ -65,35 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Settings/EditorSettings.h" line="59" column="15" bodyfile="Engine/inc/Engine/Settings/EditorSettings.h" bodystart="59" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSR__CORE__NS_1_1EditorSettings_1af5180c14e139373e2920eda53e2a0be9" prot="private" static="no" mutable="no">
-        <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
-        <definition>SR_UTILS_NS::Path SR_CORE_NS::EditorSettings::m_renderTechnique</definition>
-        <argsstring></argsstring>
-        <name>m_renderTechnique</name>
-        <qualifiedname>SR_CORE_NS::EditorSettings::m_renderTechnique</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/inc/Engine/Settings/EditorSettings.h" line="61" column="27" bodyfile="Engine/inc/Engine/Settings/EditorSettings.h" bodystart="61" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSR__CORE__NS_1_1EditorSettings_1af58d7a147053e4d36608c347969dec7d" prot="private" static="no" mutable="no">
-        <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
-        <definition>SR_UTILS_NS::Path SR_CORE_NS::EditorSettings::m_prefabEditorRenderTechnique</definition>
-        <argsstring></argsstring>
-        <name>m_prefabEditorRenderTechnique</name>
-        <qualifiedname>SR_CORE_NS::EditorSettings::m_prefabEditorRenderTechnique</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/inc/Engine/Settings/EditorSettings.h" line="62" column="27" bodyfile="Engine/inc/Engine/Settings/EditorSettings.h" bodystart="62" bodyend="-1"/>
+        <location file="Engine/inc/Engine/Settings/EditorSettings.h" line="62" column="18" bodyfile="Engine/inc/Engine/Settings/EditorSettings.h" bodystart="62" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1EditorSettings_1ab6f014a29d359a56976bfd8e42f2b60f" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -108,62 +47,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Settings/EditorSettings.h" line="64" column="14" bodyfile="Engine/inc/Engine/Settings/EditorSettings.h" bodystart="64" bodyend="-1"/>
-      </memberdef>
-    </sectiondef>
-    <sectiondef kind="protected-func">
-      <memberdef kind="function" id="classSR__CORE__NS_1_1EditorSettings_1a0c6de9223158601fc5856c7c4fce525c" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type></type>
-        <definition>SR_CORE_NS::EditorSettings::~EditorSettings</definition>
-        <argsstring>() override=default</argsstring>
-        <name>~EditorSettings</name>
-        <qualifiedname>SR_CORE_NS::EditorSettings::~EditorSettings</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/inc/Engine/Settings/EditorSettings.h" line="44" column="9"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__CORE__NS_1_1EditorSettings_1ac0aacb87aedfa44ee8196cb3f00e253a" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_CORE_NS::EditorSettings::ClearSettings</definition>
-        <argsstring>() override</argsstring>
-        <name>ClearSettings</name>
-        <qualifiedname>SR_CORE_NS::EditorSettings::ClearSettings</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/inc/Engine/Settings/EditorSettings.h" line="55" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__CORE__NS_1_1EditorSettings_1a38f212474493bcb07ea69a932189b9da" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool SR_CORE_NS::EditorSettings::LoadSettings</definition>
-        <argsstring>(const SR_XML_NS::Node &amp;node) override</argsstring>
-        <name>LoadSettings</name>
-        <qualifiedname>SR_CORE_NS::EditorSettings::LoadSettings</qualifiedname>
-        <param>
-          <type>const SR_XML_NS::Node &amp;</type>
-          <declname>node</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/inc/Engine/Settings/EditorSettings.h" line="56" column="14"/>
+        <location file="Engine/inc/Engine/Settings/EditorSettings.h" line="65" column="14" bodyfile="Engine/inc/Engine/Settings/EditorSettings.h" bodystart="65" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classSR__CORE__NS_1_1EditorSettings_1a9b7599c5830468ef06fee8b4d9f589c3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD Icons</type>
-        <definition>SR_NODISCARD Icons SR_CORE_NS::EditorSettings::GetIcons</definition>
-        <argsstring>() const</argsstring>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1EditorSettings_1af92d7c93ff09f6eb00160e48c09a04a4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD const std::map&lt; EditorIcon, <ref refid="structSR__CORE__NS_1_1EditorSettingsIconInfo" kindref="compound">EditorSettingsIconInfo</ref> &gt; &amp;</type>
+        <definition>SR_NODISCARD const std::map&lt; EditorIcon, EditorSettingsIconInfo &gt; &amp; SR_CORE_NS::EditorSettings::GetIcons</definition>
+        <argsstring>() const noexcept</argsstring>
         <name>GetIcons</name>
         <qualifiedname>SR_CORE_NS::EditorSettings::GetIcons</qualifiedname>
         <briefdescription>
@@ -172,35 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Settings/EditorSettings.h" line="47" column="28"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__CORE__NS_1_1EditorSettings_1a3b317546b31b15e1ecd49327417ea97b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
-        <definition>SR_NODISCARD SR_UTILS_NS::Path SR_CORE_NS::EditorSettings::GetRenderTechnique</definition>
-        <argsstring>() const</argsstring>
-        <name>GetRenderTechnique</name>
-        <qualifiedname>SR_CORE_NS::EditorSettings::GetRenderTechnique</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/inc/Engine/Settings/EditorSettings.h" line="48" column="40"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__CORE__NS_1_1EditorSettings_1ad28ae45d1eae297aa3069f31970972bb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
-        <definition>SR_NODISCARD SR_UTILS_NS::Path SR_CORE_NS::EditorSettings::GetPrefabEditorRenderTechnique</definition>
-        <argsstring>() const</argsstring>
-        <name>GetPrefabEditorRenderTechnique</name>
-        <qualifiedname>SR_CORE_NS::EditorSettings::GetPrefabEditorRenderTechnique</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/inc/Engine/Settings/EditorSettings.h" line="49" column="40"/>
+        <location file="Engine/inc/Engine/Settings/EditorSettings.h" line="57" column="37" bodyfile="Engine/inc/Engine/Settings/EditorSettings.h" bodystart="57" bodyend="57"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1EditorSettings_1a09c4ebf5661d3198848725da5058a75a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -214,21 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Settings/EditorSettings.h" line="50" column="27" bodyfile="Engine/inc/Engine/Settings/EditorSettings.h" bodystart="50" bodyend="50"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__CORE__NS_1_1EditorSettings_1a053688d96340194df0bfaa519799140b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
-        <definition>SR_NODISCARD SR_UTILS_NS::Path SR_CORE_NS::EditorSettings::InitializeResourcePath</definition>
-        <argsstring>() const override</argsstring>
-        <name>InitializeResourcePath</name>
-        <qualifiedname>SR_CORE_NS::EditorSettings::InitializeResourcePath</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/inc/Engine/Settings/EditorSettings.h" line="52" column="40"/>
+        <location file="Engine/inc/Engine/Settings/EditorSettings.h" line="58" column="27" bodyfile="Engine/inc/Engine/Settings/EditorSettings.h" bodystart="58" bodyend="58"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -242,32 +91,51 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="2">
-        <label>SR_UTILS_NS::GlobalSettings&lt; T &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1GlobalSettings"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-        <childnode refid="4" relation="public-inheritance">
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="6" relation="public-inheritance">
         </childnode>
       </node>
       <node id="6">
-        <label>SR_UTILS_NS::NonCopyable</label>
-        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Asset</label>
+        <link refid="classSR__UTILS__NS_1_1Asset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
       </node>
       <node id="3">
-        <label>SR_UTILS_NS::Settings</label>
+        <label>SR_UTILS_NS::IResource</label>
+        <link refid="classSR__UTILS__NS_1_1IResource"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
       </node>
       <node id="4">
-        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <label>SR_UTILS_NS::ResourceContainer</label>
+        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
         <childnode refid="5" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="5">
-        <label>SR_UTILS_NS::SingletonBase</label>
-        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
-        <childnode refid="6" relation="public-inheritance">
+      <node id="9">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="8">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="9" relation="public-inheritance">
         </childnode>
+      </node>
+      <node id="7">
+        <label>SR_UTILS_NS::SubscriptionHolder</label>
+        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
     </inheritancegraph>
     <collaborationgraph>
@@ -277,70 +145,222 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="2">
-        <label>SR_UTILS_NS::GlobalSettings&lt; T &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1GlobalSettings"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-        <childnode refid="4" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="6">
-        <label>SR_UTILS_NS::NonCopyable</label>
-        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
-      </node>
-      <node id="3">
-        <label>SR_UTILS_NS::Settings</label>
-      </node>
-      <node id="4">
-        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="5" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="5">
-        <label>SR_UTILS_NS::SingletonBase</label>
-        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="6" relation="public-inheritance">
         </childnode>
       </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="7" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Asset</label>
+        <link refid="classSR__UTILS__NS_1_1Asset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::IResource</label>
+        <link refid="classSR__UTILS__NS_1_1IResource"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
+          <edgelabel>RELOAD_DONE_EVENT</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::ResourceContainer</label>
+        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="9">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>SR_UTILS_NS::StringAtom</label>
+        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
+      </node>
+      <node id="8">
+        <label>SR_UTILS_NS::SubscriptionHolder</label>
+        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
+      </node>
     </collaborationgraph>
-    <location file="Engine/inc/Engine/Settings/EditorSettings.h" line="38" column="5" bodyfile="Engine/inc/Engine/Settings/EditorSettings.h" bodystart="38" bodyend="66"/>
+    <location file="Engine/inc/Engine/Settings/EditorSettings.h" line="51" column="5" bodyfile="Engine/inc/Engine/Settings/EditorSettings.h" bodystart="51" bodyend="67"/>
     <listofallmembers>
-      <member refid="classSR__CORE__NS_1_1EditorSettings_1ac0aacb87aedfa44ee8196cb3f00e253a" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>ClearSettings</name></member>
-      <member refid="classSR__UTILS__NS_1_1GlobalSettings_1a7c384beb02cf67610f00e1d2e0da6f15" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>DestroySettings</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a29df1fb30e5193314521751c849d4015" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>DestroySingleton</name></member>
-      <member refid="classSR__CORE__NS_1_1EditorSettings_1a9b7599c5830468ef06fee8b4d9f589c3" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetIcons</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a6f131e2fa1b2641f7e9ea8662ba8da53" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetMutex</name></member>
-      <member refid="classSR__CORE__NS_1_1EditorSettings_1ad28ae45d1eae297aa3069f31970972bb" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetPrefabEditorRenderTechnique</name></member>
-      <member refid="classSR__CORE__NS_1_1EditorSettings_1a3b317546b31b15e1ecd49327417ea97b" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetRenderTechnique</name></member>
-      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetSingletonName</name></member>
-      <member refid="classSR__CORE__NS_1_1EditorSettings_1a4f73d19da6cfc814c8577cbb7d34e305" prot="private" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>Icons</name></member>
-      <member refid="classSR__CORE__NS_1_1EditorSettings_1a053688d96340194df0bfaa519799140b" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>InitializeResourcePath</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1ad6f59c12e431ce503ac7316ceaa4a5f2" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>Instance</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1af9087ca5182397a9c7d3b92fb5591523" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>AddDependency</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>AddSerializationFlags</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1abcf6bc4fde8bd87a0f1d72d0183af0cf" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>AddUsePoint</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>AllocateStatic</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>AutoFree</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a459ed22e0064b69639129562ea9aad38" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>Broadcast</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a543a91c5e997ad287249110180f9cea2" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>Broadcast</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a6aad227ccd12d3dd92ac9010ba6ac404" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>CheckResourceUsage</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>CloneTo</name></member>
+      <member refid="classSR__UTILS__NS_1_1Asset_1a149c0fd2cf25a101eb8f8c4e8f1796ce" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>CreateNew</name></member>
+      <member refid="classSR__UTILS__NS_1_1Asset_1aadb6e03703c9ff6d510dfaab757451fd" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>CreateNew</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>DecrementPointer</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a1321f66c455d7f59eebb314fe2c83062" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>DeleteResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a700794249e341d5228920451cedf9ee7" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>Destroy</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>DynamicCast</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a5dd9749c79cb65452e9e4d10efda42f8" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>Execute</name></member>
+      <member refid="classSR__UTILS__NS_1_1Asset_1a0d4fff684ea928b986f9ee3de5b3af2a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>EXTENSION_NAME</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a56bb33e9f5864b6fa62e473389a517b7" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>ForceDestroy</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>Get</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1aeabd3a189fe8c7c0c31c1fb6713c5043" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetAssociatedPath</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a7734143f7ae123a6088320486af89283" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetBaseMetas</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a97a0919298e9d1d53220613bded5ba69" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetClassStaticName</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a725e3e44aa2830a8a799d71e13693a73" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetContainerParents</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ab4dd8bb36d912a3d541d63dd00570561" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetCountUses</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ac7b0f5ba1910f845c4f0d2ae3c220fbe" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetFileHash</name></member>
+      <member refid="classSR__CORE__NS_1_1EditorSettings_1af92d7c93ff09f6eb00160e48c09a04a4" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetIcons</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ae6953f64e0856bd2ba3891c1a4529f73" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetLifetime</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a16a351eac01dde110e273cfd05f1f7ed" prot="public" virt="pure-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetMeta</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a16837ff730fb4e276450a124d70eb2e4" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetMetaStatic</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ab9a8347f2812fce37f53741a5865758c" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetReloadCount</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a0186b5dcde6ac4e0d251590619639406" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetResourceHash</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ac4d26a90ba1c28b82f71b28d1eb77dc9" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetResourceId</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1abbc56086aaf55e5a1ec9788dcecee316" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetResourceInfo</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ac663dc33feca74c372905c497dae10d0" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetResourceLoadState</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a4aff4255b8a8bcf7b1424927b450b274" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetResourcePath</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1aeba9dea35c61deaebe82cdda4ea7559e" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetResourceType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetSRClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1af5c00e9391fad105c30570cbda1a6285" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>HasSerializationFlags</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a2a266b012e03eec86b0050d2ff3c9f30" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>HasSubscriptions</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>IncrementPointer</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ac810662984eb60e0bea8b08e455ea2a2" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>IResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ad94ef18d58f13582b7411b749ae81089" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>IsAlive</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a7f41c08e67a57cca18fb3b2c2c350768" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>IsAllowedMultiInstance</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a6ad69fde6a46a6f50fab83b27b3db5b0" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>IsAllowedToRevive</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a47131cd914c3a6c8a7c03a4764559716" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>IsDestroyed</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a91fdfb42142b2e37139e4742442a2fee" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>IsFileResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a9276c48812f77bea62428fa4a59792d0" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>IsForceDestroyed</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a84c1674173da29d57d1528ccb9d9c1b9" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>IsLoaded</name></member>
       <member refid="classSR__CORE__NS_1_1EditorSettings_1a09c4ebf5661d3198848725da5058a75a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>IsNeedDebugChunks</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a31931d2cbc17f064e27db243b971e202" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>IsSingletonInitialized</name></member>
-      <member refid="classSR__CORE__NS_1_1EditorSettings_1a38f212474493bcb07ea69a932189b9da" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>LoadSettings</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1adab1931732d186e76c89e282c748f253" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>LockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a3361a06ad632161eec6f69a4e9aab092" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>IsRegistered</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1aee782635ef745075e9776c3f667904a5" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>IsResourceFromMemory</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a3656bd90f2dfdf9f0df66098d72b2058" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>IsResourceWillBeDeleted</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a6c232e1ee7d10fd08a637cdb85da789b" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>Kill</name></member>
+      <member refid="classSR__UTILS__NS_1_1Asset_1a31ef8f792e6c96ff93a01defb07b5af3" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>Load</name></member>
+      <member refid="classSR__UTILS__NS_1_1Asset_1ad242cbf64717dcaee131a89411d489a6" prot="protected" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>Load</name></member>
+      <member refid="classSR__UTILS__NS_1_1Asset_1a5a22f80bda8941e508875eb30553d80b" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>Load</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1afbc9947b694481f8478c1a75a2fc465e" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::Serializable::"><scope>SR_CORE_NS::EditorSettings</scope><name>Load</name></member>
+      <member refid="classSR__UTILS__NS_1_1Asset_1a97493ae99bd277781ddcba16257c113e" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>LoadOrCreate</name></member>
+      <member refid="classSR__UTILS__NS_1_1Asset_1a72106b05de7fee41bd54577ca39ea461" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>LoadOrCreate</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a0183032aa64809526edb04282f504e4b" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>LoadState</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>m_basicManually</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1adab7288944ca1d4f558cc95cbf099cb8" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>m_countUses</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>m_data</name></member>
       <member refid="classSR__CORE__NS_1_1EditorSettings_1ab6f014a29d359a56976bfd8e42f2b60f" prot="private" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>m_debugChunks</name></member>
-      <member refid="classSR__CORE__NS_1_1EditorSettings_1a2723c371bd43eb9ef0c9fb44e3604024" prot="private" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>m_icons</name></member>
-      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1a38d28fddc83cb3a403821554ea65dd" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>m_mutex</name></member>
-      <member refid="classSR__CORE__NS_1_1EditorSettings_1af58d7a147053e4d36608c347969dec7d" prot="private" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>m_prefabEditorRenderTechnique</name></member>
-      <member refid="classSR__CORE__NS_1_1EditorSettings_1af5180c14e139373e2920eda53e2a0be9" prot="private" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>m_renderTechnique</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>NonCopyable</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>NonCopyable</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>operator=</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a2e34219de0ab53d51b60dd970d07c6ff" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>ScopeLockSingleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a0e21dfc9afab45b0a6a70f6665ce5819" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>Singleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8ae4876316f0fa28dc67547db6f64ec6" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>SingletonBase</name></member>
-      <member refid="classSR__CORE__NS_1_1EditorSettings_1a192751c4551f6b607c042552ac00a406" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>SR_UTILS_NS::GlobalSettings&lt; EditorSettings &gt;</name></member>
-      <member refid="classSR__CORE__NS_1_1EditorSettings_1a335e2561088422603cb22b914fbf326b" prot="private" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>Super</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a0338ed248f78e467760d3095f4a4a71a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>UnlockSingleton</name></member>
-      <member refid="classSR__CORE__NS_1_1EditorSettings_1a0c6de9223158601fc5856c7c4fce525c" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>~EditorSettings</name></member>
-      <member refid="classSR__UTILS__NS_1_1GlobalSettings_1a8bdc50c581ac795faadb323561d27b23" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>~GlobalSettings</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>~NonCopyable</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1aacd91d355a037b260f6cec7ca30ad314" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>~Singleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1SingletonBase_1ab3d1604202974d9417c0ddc7da807d4a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>~SingletonBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ae7bda7ba4fbfba62c2c72b1894bbfe71" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>m_debugUnUseStackTraces</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a020496a1d169218d5379f54ba99cf6a5" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>m_debugUseStackTraces</name></member>
+      <member refid="classSR__CORE__NS_1_1EditorSettings_1afefeebc1fdeea5b204d0dee08a628443" prot="private" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>m_icons</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a45c441a3f4c53aafeb3de6c5aa64766c" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>m_isFromMemory</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a8600327689c36a9c20b5ae589acd4cfa" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>m_loadState</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1afb7bbbb99bc610ce2ec7c9eeefffca59" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>m_watchers</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>MakeShared</name></member>
+      <member refid="classSR__UTILS__NS_1_1Asset_1af82dec72f353a197667fa49266d3c74b" prot="protected" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>OnAssetLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a27569f8d47ee0c52ed5e385253e14460" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>OnPostLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1afbe2a50f0f69bc0f52b51151058830d8" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>OnPostSave</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a2978d969c09702719b2ed5c84453b02d" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>OnPreLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a8281e1a68416fd493dce2a48fa8ea660" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>OnPreSave</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a5b375df8373037b2e3a8d4d824bed858" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>OnReloadDone</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a2a19e0855b7bbd67d6a964c08191cdce" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>OnResourceRegistered</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a833f3da55449659aeb8df7992155dd69" prot="protected" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>OnResourceUpdated</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_CORE_NS::EditorSettings</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_CORE_NS::EditorSettings</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_CORE_NS::EditorSettings</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a0823f7c426d7757297b991c63c4a674d" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::SubscriptionHolder::"><scope>SR_CORE_NS::EditorSettings</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a142ac6c73a3e99175210848dec991313" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::SubscriptionHolder::"><scope>SR_CORE_NS::EditorSettings</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>operator==</name></member>
+      <member refid="classSR__UTILS__NS_1_1Asset_1a6eeb6555020c09fedd47ad7f6a03e7ba" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>OriginType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__CORE__NS_1_1EditorSettings_1a2b90068b31a3c476f8c6c2d9fdb96bca" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>Ptr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1afed952eb55d7441a18c4d3381d315fcf" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>RegisterPropertiesCodegen</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1afbba2810b28b1d82a121eeb91c6f247c" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>Reload</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ab44f094d50d755e9872b7373881d5c05" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>RELOAD_BEGIN_EVENT</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a7f7efd6d454b1324163980ee73d54f08" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>RELOAD_DONE_EVENT</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac21f24c643f3298ec89225361ce96a9f" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>RemoveDependency</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1ab5d15ff431f7405c8ad940333e6417a5" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>RemoveSerializationFlags</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1acfb5ac9abad809ecb7f6453ddd9f581d" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>RemoveUPResult</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ac0cb7963e3bd5008d28412c0aa6196de" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>RemoveUsePoint</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>Reset</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a4fb6331893e314c01da26b361197a75e" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>ResourceContainer</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a70da9b49736de59bddc1f26575f5da33" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>ReviveResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>Save</name></member>
+      <member refid="classSR__UTILS__NS_1_1Asset_1a00710e54037c06621a41e4c5404c725a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>SaveAsset</name></member>
+      <member refid="classSR__UTILS__NS_1_1Asset_1a07b1f378c5b353d51439a74147c03cef" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>SaveAsset</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a0981532a88fdeb242d295a04690ec4dd" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>SetId</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a7349e6cd8d4b8c3ffcd844f310f81602" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>SetId</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a992fe5635f43333348b9c9445293e23b" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>SetLifetime</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a2f72c195e91ef30f20f84ca3d56f7147" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>SetResourceHash</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1afc3c958bc4a0ac65b5f5362512545035" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1af7628077663a2e55a7cf9bff31717743" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>SignalWatch</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a390fbb6e6cd4a4c42f5dc34c0d342e3c" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>StartWatch</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>StaticCast</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a73e9141c84030a503c6a1e51efe33b09" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>StopWatch</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a6e28623e3665ee8d0e153c59497be1f2" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>Subscribe</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a974c352e7a7fa0786b9b5caa886d96c0" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>SubscriptionHolder</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a1308e9577474f509d5d70ec6e025f22a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>SubscriptionHolder</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1add12e4faa76ffece1b1df5ca31da4218" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>SubscriptionHolder</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__UTILS__NS_1_1Asset_1a519b0e89f7e316149b0464e393ea4600" prot="protected" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>Unload</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>Unlock</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a9020c161e4bc8453d005eb5fab808490" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>Unsubscribe</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a8374f937e659f29170b1db2b81ba2594" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>UpdateResourceLifeTime</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac84a44cf058fa5cb53715e250ae7157c" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>UpdateResources</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a783dd9e4a58072de8ff19895693bca05" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>Valid</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a5aab0756802a67de9cb45b83b3e73c70" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>VerifyAfterLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ac4450e90e1fbd14d29931a362b9c05eb" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>~IResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a25f84a35792474f3b2e2eff6431695d3" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>~ResourceContainer</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>~SharedPtrBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1ad88a80732713966d7759d768bd65bbe5" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>~SRClass</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a4ae7f1f1d739e95f4a1c7216e1e07586" prot="public" virt="virtual"><scope>SR_CORE_NS::EditorSettings</scope><name>~SubscriptionHolder</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

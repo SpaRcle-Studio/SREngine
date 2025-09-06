@@ -16,7 +16,7 @@
 Inherits the following classes: [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 
 
-Inherited by the following classes: [SR\_GRAPH\_NS::FileMaterialResource](classSR__GRAPH__NS_1_1FileMaterialResource.md),  [SR\_PTYPES\_NS::PhysicsMaterial](classSR__PTYPES__NS_1_1PhysicsMaterial.md),  [SR\_UTILS\_NS::TestManagerAsset](classSR__UTILS__NS_1_1TestManagerAsset.md)
+Inherited by the following classes: [SR\_CORE\_NS::EditorSettings](classSR__CORE__NS_1_1EditorSettings.md),  [SR\_GRAPH\_NS::FileMaterialResource](classSR__GRAPH__NS_1_1FileMaterialResource.md),  [SR\_GRAPH\_NS::FileRenderTechniqueResource](classSR__GRAPH__NS_1_1FileRenderTechniqueResource.md),  [SR\_GRAPH\_NS::RenderSettings](classSR__GRAPH__NS_1_1RenderSettings.md),  [SR\_GRAPH\_NS::RenderStagesSettings](classSR__GRAPH__NS_1_1RenderStagesSettings.md),  [SR\_PTYPES\_NS::PhysicsMaterial](classSR__PTYPES__NS_1_1PhysicsMaterial.md),  [SR\_UTILS\_NS::TestManagerAsset](classSR__UTILS__NS_1_1TestManagerAsset.md)
 
 
 
@@ -245,6 +245,7 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 | ---: | :--- |
 |  [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; AssetT &gt; | [**CreateNew**](#function-createnew-12) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & rawPath) <br> |
 |  [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; AssetT &gt; | [**Load**](#function-load-13) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
+|  [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; AssetT &gt; | [**LoadOrCreate**](#function-loadorcreate-12) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & rawPath) <br> |
 |  SR\_NODISCARD bool | [**SaveAsset**](#function-saveasset-12) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) const<br> |
 |  SR\_NODISCARD bool | [**SaveAsset**](#function-saveasset-22) () const<br> |
 
@@ -273,7 +274,6 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 |  SR\_NODISCARD [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**GetResourcePath**](classSR__UTILS__NS_1_1IResource.md#function-getresourcepath) () const<br> |
 | virtual SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetResourceType**](classSR__UTILS__NS_1_1IResource.md#function-getresourcetype) () noexcept const<br> |
 |   | [**IResource**](classSR__UTILS__NS_1_1IResource.md#function-iresource) () <br> |
-| virtual SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**InitializeResourcePath**](classSR__UTILS__NS_1_1IResource.md#function-initializeresourcepath) () const<br> |
 |  SR\_NODISCARD bool | [**IsAlive**](classSR__UTILS__NS_1_1IResource.md#function-isalive) () const<br> |
 | virtual SR\_NODISCARD bool | [**IsAllowedMultiInstance**](classSR__UTILS__NS_1_1IResource.md#function-isallowedmultiinstance) () const<br> |
 | virtual SR\_NODISCARD bool | [**IsAllowedToRevive**](classSR__UTILS__NS_1_1IResource.md#function-isallowedtorevive) () const<br> |
@@ -291,7 +291,8 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 | virtual bool | [**Reload**](classSR__UTILS__NS_1_1IResource.md#function-reload) () <br> |
 | virtual RemoveUPResult | [**RemoveUsePoint**](classSR__UTILS__NS_1_1IResource.md#function-removeusepoint) () <br> |
 | virtual void | [**ReviveResource**](classSR__UTILS__NS_1_1IResource.md#function-reviveresource) () <br> |
-|  void | [**SetId**](classSR__UTILS__NS_1_1IResource.md#function-setid) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, bool autoRegister=true) <br> |
+|  void | [**SetId**](classSR__UTILS__NS_1_1IResource.md#function-setid-12) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, bool autoRegister=true) <br> |
+|  void | [**SetId**](classSR__UTILS__NS_1_1IResource.md#function-setid-22) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path, bool autoRegister=true) <br> |
 |  void | [**SetLifetime**](classSR__UTILS__NS_1_1IResource.md#function-setlifetime) (int64\_t lifeTime) <br> |
 |  void | [**SetResourceHash**](classSR__UTILS__NS_1_1IResource.md#function-setresourcehash) (uint64\_t hash) <br> |
 |  void | [**SignalWatch**](classSR__UTILS__NS_1_1IResource.md#function-signalwatch) () <br> |
@@ -329,7 +330,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  SR\_NODISCARD SR\_FORCE\_INLINE T \* | [**Get**](classSR__HTYPES__NS_1_1SharedPtr.md#function-get-22) () <br> |
 |  SR\_NODISCARD const void \* | [**GetRawPtr**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getrawptr-12) () const<br> |
 |  SR\_NODISCARD void \* | [**GetRawPtr**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getrawptr-22) () <br>_NOLINT(modernize-use-nodiscard)_  |
-| virtual SR\_NODISCARD SRClass \* | [**GetSRClass**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getsrclass) () override const<br>_NOLINT(modernize-use-nodiscard)_  |
+| virtual SR\_NODISCARD SRClass \* | [**GetSRClass**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getsrclass) () override const<br> |
 |  SR\_NODISCARD [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; | [**GetThis**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getthis) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE const T &SR\_FASTCALL | [**GetUncheckedRef**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getuncheckedref-12) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE T &SR\_FASTCALL | [**GetUncheckedRef**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getuncheckedref-22) () <br> |
@@ -347,15 +348,15 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; U &gt; | [**StaticCast**](classSR__HTYPES__NS_1_1SharedPtr.md#function-staticcast) () const<br> |
 |  SR\_NODISCARD bool | [**TryRecursiveLockIfValid**](classSR__HTYPES__NS_1_1SharedPtr.md#function-tryrecursivelockifvalid) () noexcept const<br> |
 |  void | [**Unlock**](classSR__HTYPES__NS_1_1SharedPtr.md#function-unlock) () noexcept const<br> |
-|  bool | [**Valid**](classSR__HTYPES__NS_1_1SharedPtr.md#function-valid) () const<br> |
+| virtual SR\_NODISCARD bool | [**Valid**](classSR__HTYPES__NS_1_1SharedPtr.md#function-valid) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE | [**operator bool**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator-bool) () noexcept const<br> |
 |  SR\_INLINE bool | [**operator!=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & right) const<br> |
 |  SR\_FORCE\_INLINE T & | [**operator\***](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_1) () const<br> |
-|  SR\_FORCE\_INLINE T \* | [**operator-&gt;**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_2) () const<br> |
-|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_3) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & ptr) <br> |
-|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_4) (T \* ptr) <br> |
-|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_5) ([**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; && ptr) noexcept<br> |
-|  SR\_INLINE bool | [**operator==**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_6) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & right) const<br> |
+|  SR\_FORCE\_INLINE T \* | [**operator-&gt;**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator-) () const<br> |
+|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_2) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & ptr) <br> |
+|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_3) (T \* ptr) <br> |
+|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_4) ([**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; && ptr) noexcept<br> |
+|  SR\_INLINE bool | [**operator==**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_5) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & right) const<br> |
 |   | [**~SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md#function-sharedptr) () override<br> |
 
 
@@ -374,6 +375,7 @@ See [SR\_HTYPES\_NS::SharedPtrBase](classSR__HTYPES__NS_1_1SharedPtrBase.md)
 | virtual void | [**SetPointerFromBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-setpointerfrombase) ([**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md) \* pBase) = 0<br> |
 |   | [**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase-12) () <br> |
 |   | [**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase-22) ([**SharedPtrDynamicData**](structSR__HTYPES__NS_1_1SharedPtrDynamicData.md) \* data) <br> |
+| virtual SR\_NODISCARD bool | [**Valid**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-valid) () const = 0<br> |
 | virtual  | [**~SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase) () <br> |
 
 
@@ -420,6 +422,7 @@ See [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 
 | Type | Name |
 | ---: | :--- |
+|  void | [**CloneTo**](classSR__UTILS__NS_1_1SRClass.md#function-cloneto) ([**SRClass**](classSR__UTILS__NS_1_1SRClass.md) & clone) const<br> |
 | virtual SR\_NODISCARD const [**SR\_UTILS\_NS::SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md) \* | [**GetMeta**](classSR__UTILS__NS_1_1SRClass.md#function-getmeta) () noexcept const = 0<br> |
 | virtual  | [**~SRClass**](classSR__UTILS__NS_1_1SRClass.md#function-srclass) () = default<br> |
 
@@ -430,6 +433,7 @@ See [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 | ---: | :--- |
 |  SR\_NODISCARD [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; AssetT &gt; | [**CreateNew**](#function-createnew-22) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
 |  SR\_NODISCARD [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; AssetT &gt; | [**Load**](#function-load-23) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
+|  SR\_NODISCARD [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; AssetT &gt; | [**LoadOrCreate**](#function-loadorcreate-22) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
 
 
 
@@ -771,6 +775,22 @@ SR_HTYPES_NS::SharedPtr < AssetT > SR_UTILS_NS::Asset::Load (
 
 
 
+### function LoadOrCreate [1/2]
+
+```C++
+template<class AssetT>
+SR_HTYPES_NS::SharedPtr < AssetT > SR_UTILS_NS::Asset::LoadOrCreate (
+    const Path & rawPath
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function SaveAsset [1/2]
 
 ```C++
@@ -822,6 +842,22 @@ static SR_NODISCARD SR_HTYPES_NS::SharedPtr < AssetT > SR_UTILS_NS::Asset::Creat
 ```C++
 template<class AssetT>
 static SR_NODISCARD SR_HTYPES_NS::SharedPtr < AssetT > SR_UTILS_NS::Asset::Load (
+    const Path & path
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function LoadOrCreate [2/2]
+
+```C++
+template<class AssetT>
+static SR_NODISCARD SR_HTYPES_NS::SharedPtr < AssetT > SR_UTILS_NS::Asset::LoadOrCreate (
     const Path & path
 ) 
 ```

@@ -86,7 +86,7 @@
 |  constexpr | [**operator double**](#function-operator-double) () const<br> |
 |  constexpr | [**operator float**](#function-operator-float) () const<br> |
 |  constexpr | [**operator long double**](#function-operator-long-double) () const<br> |
-|  constexpr | [**operator uintwide\_t&lt; OtherWidth2, LimbType, AllocatorType, OtherIsSigned &gt;**](#function-operator-uintwide_t<-otherwidth2,-limbtype,-allocatortype,-otherissigned->) () const<br> |
+|  constexpr | [**operator uintwide\_t&lt; OtherWidth2, LimbType, AllocatorType, OtherIsSigned &gt;**](#function-operator-uintwide_t-otherwidth2-limbtype-allocatortype-otherissigned) () const<br> |
 |  constexpr auto | [**operator!=**](#function-operator) (const uintwide\_t & other) const<br> |
 |  constexpr auto | [**operator%=**](#function-operator_1) (const uintwide\_t & other) <br> |
 |  constexpr auto | [**operator&=**](#function-operator_2) (const uintwide\_t & other) <br> |
@@ -95,28 +95,28 @@
 |  constexpr auto | [**operator++**](#function-operator_5) () <br> |
 |  constexpr auto | [**operator++**](#function-operator_6) (int) <br> |
 |  constexpr auto | [**operator+=**](#function-operator_7) (const uintwide\_t & other) <br> |
-|  constexpr auto | [**operator-**](#function-operator_8) () const<br> |
-|  constexpr auto | [**operator--**](#function-operator_9) () <br> |
-|  constexpr auto | [**operator--**](#function-operator_10) (int) <br> |
-|  constexpr auto | [**operator-=**](#function-operator_11) (const uintwide\_t & other) <br> |
-|  constexpr auto | [**operator/=**](#function-operator_12) (const uintwide\_t & other) <br> |
-|  constexpr auto | [**operator&lt;**](#function-operator_13) (const uintwide\_t & other) const<br> |
-|  constexpr auto | [**operator&lt;&lt;=**](#function-operator_14) (const SignedIntegralType n) <br> |
-|  constexpr auto | [**operator&lt;&lt;=**](#function-operator_15) (const UnsignedIntegralType n) <br> |
-|  constexpr auto | [**operator&lt;=**](#function-operator_16) (const uintwide\_t & other) const<br> |
-|  constexpr auto | [**operator=**](#function-operator_17) (const uintwide\_t &) <br> |
-|  constexpr auto | [**operator=**](#function-operator_18) (const uintwide\_t&lt; Width2, LimbType, AllocatorType, OtherIsSigned &gt; & other) <br> |
-|  constexpr auto | [**operator=**](#function-operator_19) (uintwide\_t && other) noexcept<br> |
-|  constexpr auto | [**operator=**](#function-operator_20) (uintwide\_t&lt; Width2, LimbType, AllocatorType, OtherIsSigned &gt; && other) <br> |
-|  constexpr auto | [**operator=**](#function-operator_21) (const std::string & estr) <br> |
-|  constexpr auto | [**operator==**](#function-operator_22) (const uintwide\_t & other) const<br> |
-|  constexpr auto | [**operator&gt;**](#function-operator_23) (const uintwide\_t & other) const<br> |
-|  constexpr auto | [**operator&gt;=**](#function-operator_24) (const uintwide\_t & other) const<br> |
-|  constexpr auto | [**operator&gt;&gt;=**](#function-operator_25) (const SignedIntegralType n) <br> |
-|  constexpr auto | [**operator&gt;&gt;=**](#function-operator_26) (const UnsignedIntegralType n) <br> |
-|  constexpr auto | [**operator^=**](#function-operator_27) (const uintwide\_t & other) <br> |
-|  constexpr auto | [**operator\|=**](#function-operator_28) (const uintwide\_t & other) <br> |
-|  constexpr auto | [**operator~**](#function-operator_29) () <br> |
+|  constexpr auto | [**operator-**](#function-operator-) () const<br> |
+|  constexpr auto | [**operator--**](#function-operator-) () <br> |
+|  constexpr auto | [**operator--**](#function-operator-_1) (int) <br> |
+|  constexpr auto | [**operator-=**](#function-operator-_1) (const uintwide\_t & other) <br> |
+|  constexpr auto | [**operator/=**](#function-operator_8) (const uintwide\_t & other) <br> |
+|  constexpr auto | [**operator&lt;**](#function-operator_9) (const uintwide\_t & other) const<br> |
+|  constexpr auto | [**operator&lt;&lt;=**](#function-operator_10) (const SignedIntegralType n) <br> |
+|  constexpr auto | [**operator&lt;&lt;=**](#function-operator_11) (const UnsignedIntegralType n) <br> |
+|  constexpr auto | [**operator&lt;=**](#function-operator_12) (const uintwide\_t & other) const<br> |
+|  constexpr auto | [**operator=**](#function-operator_13) (const uintwide\_t &) <br> |
+|  constexpr auto | [**operator=**](#function-operator_14) (const uintwide\_t&lt; Width2, LimbType, AllocatorType, OtherIsSigned &gt; & other) <br> |
+|  constexpr auto | [**operator=**](#function-operator_15) (uintwide\_t && other) noexcept<br> |
+|  constexpr auto | [**operator=**](#function-operator_16) (uintwide\_t&lt; Width2, LimbType, AllocatorType, OtherIsSigned &gt; && other) <br> |
+|  constexpr auto | [**operator=**](#function-operator_17) (const std::string & estr) <br> |
+|  constexpr auto | [**operator==**](#function-operator_18) (const uintwide\_t & other) const<br> |
+|  constexpr auto | [**operator&gt;**](#function-operator_19) (const uintwide\_t & other) const<br> |
+|  constexpr auto | [**operator&gt;=**](#function-operator_20) (const uintwide\_t & other) const<br> |
+|  constexpr auto | [**operator&gt;&gt;=**](#function-operator_21) (const SignedIntegralType n) <br> |
+|  constexpr auto | [**operator&gt;&gt;=**](#function-operator_22) (const UnsignedIntegralType n) <br> |
+|  constexpr auto | [**operator^=**](#function-operator_23) (const uintwide\_t & other) <br> |
+|  constexpr auto | [**operator\|=**](#function-operator_24) (const uintwide\_t & other) <br> |
+|  constexpr auto | [**operator~**](#function-operator_25) () <br> |
 |  constexpr auto | [**representation**](#function-representation-12) () <br> |
 |  WIDE\_INTEGER\_NODISCARD constexpr auto | [**representation**](#function-representation-22) () const<br> |
 |  constexpr | [**uintwide\_t**](#function-uintwide_t-215) () = default<br> |

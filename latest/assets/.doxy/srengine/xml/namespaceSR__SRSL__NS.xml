@@ -6,6 +6,7 @@
     <innerclass refid="classSR__SRSL__NS_1_1ISRSLCodeGenerator" prot="public">SR_SRSL_NS::ISRSLCodeGenerator</innerclass>
     <innerclass refid="structSR__SRSL__NS_1_1Lexem" prot="public">SR_SRSL_NS::Lexem</innerclass>
     <innerclass refid="structSR__SRSL__NS_1_1LocationEntity" prot="public">SR_SRSL_NS::LocationEntity</innerclass>
+    <innerclass refid="structSR__SRSL__NS_1_1ShaderMacrosParams" prot="public">SR_SRSL_NS::ShaderMacrosParams</innerclass>
     <innerclass refid="classSR__SRSL__NS_1_1SRSLAnalyzedTree" prot="public">SR_SRSL_NS::SRSLAnalyzedTree</innerclass>
     <innerclass refid="classSR__SRSL__NS_1_1SRSLAssignExpander" prot="public">SR_SRSL_NS::SRSLAssignExpander</innerclass>
     <innerclass refid="classSR__SRSL__NS_1_1SRSLDecorator" prot="public">SR_SRSL_NS::SRSLDecorator</innerclass>
@@ -28,6 +29,7 @@
     <innerclass refid="classSR__SRSL__NS_1_1SRSLReturn" prot="public">SR_SRSL_NS::SRSLReturn</innerclass>
     <innerclass refid="structSR__SRSL__NS_1_1SRSLSampler" prot="public">SR_SRSL_NS::SRSLSampler</innerclass>
     <innerclass refid="classSR__SRSL__NS_1_1SRSLShader" prot="public">SR_SRSL_NS::SRSLShader</innerclass>
+    <innerclass refid="classSR__SRSL__NS_1_1SRSLShaderCache" prot="public">SR_SRSL_NS::SRSLShaderCache</innerclass>
     <innerclass refid="classSR__SRSL__NS_1_1SRSLStructureStatement" prot="public">SR_SRSL_NS::SRSLStructureStatement</innerclass>
     <innerclass refid="classSR__SRSL__NS_1_1SRSLTypeInfo" prot="public">SR_SRSL_NS::SRSLTypeInfo</innerclass>
     <innerclass refid="structSR__SRSL__NS_1_1SRSLUniformBlock" prot="public">SR_SRSL_NS::SRSLUniformBlock</innerclass>
@@ -109,7 +111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="27" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="28" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="28" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
@@ -190,7 +192,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" line="11" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" bodystart="11" bodyend="16"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" line="13" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" bodystart="13" bodyend="18"/>
       </memberdef>
       <memberdef kind="variable" id="ShaderVariables_8h_1a5853ef8c7fc1b107584e1db645f8a557" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC const std::map&lt; std::string, std::string &gt;</type>
@@ -208,6 +210,8 @@
 
             { &quot;TIME&quot;,                           &quot;float&quot;         },
 
+            { &quot;RENDER_PASS_TYPE&quot;,               &quot;int&quot;           },
+
             { &quot;RESOLUTION&quot;,                     &quot;vec2&quot;          },
             { &quot;ASPECT&quot;,                         &quot;vec2&quot;          },
 
@@ -224,7 +228,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" line="18" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" bodystart="18" bodyend="37"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" line="20" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" bodystart="20" bodyend="41"/>
       </memberdef>
       <memberdef kind="variable" id="ShaderVariables_8h_1aed44763e927256d2bc12cf1bcaad60b0" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC const std::map&lt; std::string, std::string &gt;</type>
@@ -268,7 +272,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" line="39" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" bodystart="39" bodyend="68"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" line="43" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" bodystart="43" bodyend="72"/>
       </memberdef>
       <memberdef kind="variable" id="ShaderVariables_8h_1ae6d5e9f934ba8cc3056ab1effa0a32fc" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC const std::map&lt; std::string, std::string &gt;</type>
@@ -287,7 +291,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" line="70" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" bodystart="70" bodyend="74"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" line="74" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" bodystart="74" bodyend="78"/>
       </memberdef>
       <memberdef kind="variable" id="ShaderVariables_8h_1a4f07d206af0b359bab803f88d740c2c0" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC const std::string</type>
@@ -302,7 +306,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" line="76" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" bodystart="76" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" line="80" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" bodystart="80" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="ShaderVariables_8h_1a13e8e458924d3dad457feac06fe7bddd" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC const std::set&lt; std::string &gt;</type>
@@ -328,7 +332,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" line="78" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" bodystart="78" bodyend="88"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" line="82" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" bodystart="82" bodyend="92"/>
       </memberdef>
       <memberdef kind="variable" id="ShaderVariables_8h_1a293582117040201786df7bb622c48aaf" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC const std::map&lt; ShaderStage, std::string &gt;</type>
@@ -347,7 +351,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" line="90" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" bodystart="90" bodyend="94"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" line="94" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" bodystart="94" bodyend="98"/>
       </memberdef>
       <memberdef kind="variable" id="ShaderVariables_8h_1a9646456c3273f96bc1fbbcb547802495" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC const std::map&lt; ShaderStage, std::string &gt;</type>
@@ -372,7 +376,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" line="96" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" bodystart="96" bodyend="106"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" line="100" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" bodystart="100" bodyend="110"/>
       </memberdef>
       <memberdef kind="variable" id="ShaderVariables_8h_1a163d8d1d0782cd92acb1d4ba588d20a5" prot="public" static="yes" mutable="no">
         <type>std::map&lt; std::string, ShaderVarType &gt;</type>
@@ -415,7 +419,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" line="108" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" bodystart="108" bodyend="136"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" line="112" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" bodystart="112" bodyend="140"/>
       </memberdef>
       <memberdef kind="variable" id="ShaderVariables_8h_1ad24d2b26f4585e0271f98f45d9f196d6" prot="public" static="yes" mutable="no">
         <type>std::map&lt; std::string, uint64_t &gt;</type>
@@ -451,7 +455,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" line="138" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" bodystart="138" bodyend="159"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" line="142" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" bodystart="142" bodyend="163"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -739,7 +743,63 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="298" column="50" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="298" bodyend="311"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="300" column="50" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="300" bodyend="313"/>
+      </memberdef>
+      <memberdef kind="function" id="LexicalTree_8h_1a053d03daa148c6864e82ae4ba9ffb22e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_SRSL_NS::SR_ENUM_NS_CLASS_T</definition>
+        <argsstring>(LexicalUnitType, uint8_t, Unknown, Expr, Decorator, Decorators, Variable, Function, Struct, Return, IfStatement, ForStatement, WhileStatement, LexcialTree)</argsstring>
+        <name>SR_ENUM_NS_CLASS_T</name>
+        <qualifiedname>SR_SRSL_NS::SR_ENUM_NS_CLASS_T</qualifiedname>
+        <param>
+          <type>LexicalUnitType</type>
+        </param>
+        <param>
+          <type>uint8_t</type>
+        </param>
+        <param>
+          <type>Unknown</type>
+        </param>
+        <param>
+          <type>Expr</type>
+        </param>
+        <param>
+          <type>Decorator</type>
+        </param>
+        <param>
+          <type>Decorators</type>
+        </param>
+        <param>
+          <type>Variable</type>
+        </param>
+        <param>
+          <type>Function</type>
+        </param>
+        <param>
+          <type>Struct</type>
+        </param>
+        <param>
+          <type>Return</type>
+        </param>
+        <param>
+          <type>IfStatement</type>
+        </param>
+        <param>
+          <type>ForStatement</type>
+        </param>
+        <param>
+          <type>WhileStatement</type>
+        </param>
+        <param>
+          <type>LexcialTree</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="12" column="5" declfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" declline="12" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="SRSL_2Shader_8h_1af6cfe1747f8e1a2f9338e936cba6c08d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -771,7 +831,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="15" column="5" declfile="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" declline="15" declcolumn="5"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="16" column="5" declfile="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" declline="16" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="ShaderType_8h_1a0d1a3e7d7709f606dce5622629ec6c5d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -835,6 +895,24 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderType.h" line="11" column="5" declfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderType.h" declline="11" declcolumn="5"/>
       </memberdef>
+      <memberdef kind="function" id="ShaderVariables_8h_1a8a5669e9d443446d1d94c6df01132c1a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string SR_SRSL_NS::ShaderRenderPassTypeToString</definition>
+        <argsstring>(ShaderRenderPassType type)</argsstring>
+        <name>ShaderRenderPassTypeToString</name>
+        <qualifiedname>SR_SRSL_NS::ShaderRenderPassTypeToString</qualifiedname>
+        <param>
+          <type>ShaderRenderPassType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" line="11" column="17" declfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" declline="11" declcolumn="17"/>
+      </memberdef>
       <memberdef kind="function" id="ShaderVariables_8h_1a2c0d08b86e89916ab4cde22f2021da2d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_INLINE_STATIC bool</type>
         <definition>SR_INLINE_STATIC bool SR_SRSL_NS::IsShaderEntryPoint</definition>
@@ -851,7 +929,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" line="161" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" bodystart="161" bodyend="169"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" line="165" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" bodystart="165" bodyend="173"/>
       </memberdef>
       <memberdef kind="function" id="ShaderVariables_8h_1ae50f78e2cdc03a39c14a0f527bf13ac2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_INLINE_STATIC bool</type>
@@ -869,7 +947,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" line="171" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" bodystart="171" bodyend="176"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" line="175" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" bodystart="175" bodyend="180"/>
       </memberdef>
       <memberdef kind="function" id="ShaderVariables_8h_1a2e96e85aa130fbb3a57ba37bfaa5c431" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_INLINE_STATIC uint64_t</type>
@@ -887,13 +965,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" line="178" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" bodystart="178" bodyend="197"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" line="182" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h" bodystart="182" bodyend="201"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="15" column="1"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="13" column="1"/>
   </compounddef>
 </doxygen>

@@ -33,6 +33,7 @@ namespace SR_UTILS_NS {
 
         template<class AssetT = Asset> SR_NODISCARD static SR_HTYPES_NS::SharedPtr<AssetT> Load(const Path& path);
         template<class AssetT> SR_NODISCARD static SR_HTYPES_NS::SharedPtr<AssetT> CreateNew(const Path& path);
+        template<class AssetT> SR_NODISCARD static SR_HTYPES_NS::SharedPtr<AssetT> LoadOrCreate(const Path& path);
 
     protected:
         virtual void OnAssetLoaded() { }
@@ -72,6 +73,18 @@ namespace SR_UTILS_NS {
         }
     }
 
+    template<class AssetT> SR_HTYPES_NS::SharedPtr<AssetT> Asset::LoadOrCreate(const Path& rawPath) {
+        auto&& resourceManager = ResourceManager::Instance();
+        SR_UTILS_NS::Path&& path = rawPath.RemoveSubPath(resourceManager.GetResPath());
+
+        if (resourceManager.GetResPath().Concat(path).Exists(Path::Type::File)) {
+            return Asset::template Load<AssetT>(path);
+        }
+        else {
+            return Asset::template CreateNew<AssetT>(path);
+        }
+    }
+
     template<class AssetT> SR_HTYPES_NS::SharedPtr<AssetT> Asset::CreateNew(const Path& rawPath) {
         auto&& resourceManager = ResourceManager::Instance();
         SR_UTILS_NS::Path&& path = rawPath.RemoveSubPath(resourceManager.GetResPath());
@@ -85,6 +98,8 @@ namespace SR_UTILS_NS {
             static_assert(AlwaysFalseV<AssetT>, "AssetT must be derived from Asset!");
         }
         else {
+            SR_LOG("Asset::CreateNew() : creating new asset {} at path: {}", AssetT::GetClassStaticName(), path);
+
             SR_HTYPES_NS::SharedPtr<AssetT> pAsset = AssetT::template MakeShared<AssetT>();
             pAsset->m_loadState = IResource::LoadState::Loaded;
 

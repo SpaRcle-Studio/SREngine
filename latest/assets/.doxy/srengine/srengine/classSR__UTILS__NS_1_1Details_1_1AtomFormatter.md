@@ -52,7 +52,7 @@
 | Type | Name |
 | ---: | :--- |
 |   | [**AtomFormatter**](#function-atomformatter) (const char \* format) noexcept<br> |
-|  SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**operator()**](#function-operator()) (Args... args) noexcept const<br> |
+|  SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**operator()**](#function-operator) (Args... args) noexcept const<br> |
 
 
 

@@ -53,7 +53,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  size\_t | [**operator()**](#function-operator()) ([**SR\_GRAPH\_NS::Vertices::UIVertex**](structSR__GRAPH__NS_1_1Vertices_1_1UIVertex.md) const & vertex) const<br> |
+|  size\_t | [**operator()**](#function-operator) ([**SR\_GRAPH\_NS::Vertices::UIVertex**](structSR__GRAPH__NS_1_1Vertices_1_1UIVertex.md) const & vertex) const<br> |
 
 
 

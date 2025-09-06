@@ -114,6 +114,7 @@
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>AllocateStatic</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>CloneTo</name></member>
       <member refid="structSR__SCRIPTING__NS_1_1CppScriptModuleInfo_1a45b4e72ca7f814bf92a3469338c9521a" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>dependencies</name></member>
       <member refid="structSR__SCRIPTING__NS_1_1CppScriptModuleInfo_1a6d902c6aafd916b6a9d8b63cd0b856e3" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>enabled</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a7734143f7ae123a6088320486af89283" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>GetBaseMetas</name></member>

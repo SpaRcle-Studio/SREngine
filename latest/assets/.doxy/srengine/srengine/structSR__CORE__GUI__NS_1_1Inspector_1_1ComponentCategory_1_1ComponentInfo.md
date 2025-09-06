@@ -35,6 +35,7 @@
 
 | Type | Name |
 | ---: | :--- |
+|  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**displayName**](#variable-displayname)  <br> |
 |  bool | [**isBehaviour**](#variable-isbehaviour)   = `false`<br> |
 |  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**name**](#variable-name)  <br> |
 
@@ -83,6 +84,19 @@
 
 ## Public Attributes Documentation
 
+
+
+
+### variable displayName 
+
+```C++
+SR_UTILS_NS::StringAtom SR_CORE_GUI_NS::Inspector::ComponentCategory::ComponentInfo::displayName;
+```
+
+
+
+
+<hr>
 
 
 

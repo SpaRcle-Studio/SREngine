@@ -33,7 +33,7 @@
         <link refid="structObjectDataAccessorMathVector"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="543" column="10" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="543" bodyend="543"/>
+    <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="560" column="10" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="560" bodyend="560"/>
     <listofallmembers>
       <member refid="structObjectDataAccessorMathVector_1af34de8082ab9fa206a2c501086aa535a" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; SR_MATH_NS::IVector2 &gt;</scope><name>Load</name></member>
       <member refid="structObjectDataAccessorMathVector_1a685dfeb65c1f7fdffabccbcbab7a5029" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; SR_MATH_NS::IVector2 &gt;</scope><name>Save</name></member>

@@ -214,7 +214,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="122" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="122" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="121" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="121" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1IResource_1adab7288944ca1d4f558cc95cbf099cb8" prot="protected" static="no" mutable="no">
         <type>std::atomic&lt; uint16_t &gt;</type>
@@ -230,7 +230,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="125" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="125" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="124" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="124" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1IResource_1a45c441a3f4c53aafeb3de6c5aa64766c" prot="protected" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -245,7 +245,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="127" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="127" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="126" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="126" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1IResource_1afb7bbbb99bc610ce2ec7c9eeefffca59" prot="protected" static="no" mutable="no">
         <type>std::list&lt; <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__UTILS__NS_1_1FileWatcher" kindref="compound">FileWatcher</ref> &gt; &gt;</type>
@@ -259,7 +259,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="129" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="129" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="128" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="128" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1IResource_1a020496a1d169218d5379f54ba99cf6a5" prot="protected" static="no" mutable="no">
         <type>std::list&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt;</type>
@@ -273,7 +273,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="131" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="131" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="130" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="130" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1IResource_1ae7bda7ba4fbfba62c2c72b1894bbfe71" prot="protected" static="no" mutable="no">
         <type>std::list&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt;</type>
@@ -287,7 +287,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="132" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="132" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="131" column="19" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="131" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -303,7 +303,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="135" column="29" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="135" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="134" column="29" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="134" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1IResource_1aadedc0f50826a54efbfde07e155ee2a0" prot="private" static="no" mutable="no">
         <type>uint64_t</type>
@@ -319,7 +319,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="138" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="138" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="137" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="137" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1IResource_1a41b1622910c0b29ad529f4ecd8ae3a2a" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -333,7 +333,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="140" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="140" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="139" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="139" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1IResource_1abf2d18cadf62dada62c237155867e663" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -347,7 +347,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="141" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="141" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="140" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="140" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1IResource_1a909b9d35bff491fe1c01a70f4bee0640" prot="private" static="no" mutable="no">
         <type>uint16_t</type>
@@ -362,7 +362,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="143" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="143" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="142" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="142" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1IResource_1a04cf3fa518ff497d76ef593477022656" prot="private" static="no" mutable="no">
         <type>int64_t</type>
@@ -377,7 +377,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="145" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="145" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="144" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="144" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1IResource_1a2c8eb55dfcb95a29e1f6a41a353c0139" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -392,7 +392,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="147" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="147" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="146" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="146" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1IResource_1a0de6d49c5e18dc449c769f6b5e8acad7" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -407,7 +407,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="148" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="148" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="147" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="147" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1IResource_1a23f74c5310f2a8f25042a773329a2265" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -422,7 +422,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="149" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="149" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="148" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="148" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1IResource_1a669819c8f38d7f017a9ffc46bf21fa77" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -438,7 +438,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="152" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="152" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="151" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="151" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -470,21 +470,6 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="46" column="9"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a9035e8e13821bbcf09633e80365d0643" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
-        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
-        <definition>virtual SR_NODISCARD Path SR_UTILS_NS::IResource::InitializeResourcePath</definition>
-        <argsstring>() const</argsstring>
-        <name>InitializeResourcePath</name>
-        <qualifiedname>SR_UTILS_NS::IResource::InitializeResourcePath</qualifiedname>
-        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationClip_1afb6f7a265cb7ba5f5ce23cd2131f6689">InitializeResourcePath</reimplementedby>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="49" column="35"/>
-      </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a5dd9749c79cb65452e9e4d10efda42f8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
         <definition>bool SR_UTILS_NS::IResource::Execute</definition>
@@ -501,7 +486,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="51" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="49" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a91fdfb42142b2e37139e4742442a2fee" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -517,7 +502,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="54" column="35" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="54" bodyend="54"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="52" column="35" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="52" bodyend="52"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a7f41c08e67a57cca18fb3b2c2c350768" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -533,7 +518,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="56" column="35" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="56" bodyend="56"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="54" column="35" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="54" bodyend="54"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1ac7b0f5ba1910f845c4f0d2ae3c220fbe" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -551,7 +536,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="58" column="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="56" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a6ad69fde6a46a6f50fab83b27b3db5b0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -572,7 +557,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="59" column="35" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="59" bodyend="59"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="57" column="35" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="57" bodyend="57"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1aeabd3a189fe8c7c0c31c1fb6713c5043" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
@@ -590,7 +575,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="60" column="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="58" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a3656bd90f2dfdf9f0df66098d72b2058" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -604,7 +589,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="62" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="60" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a3361a06ad632161eec6f69a4e9aab092" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -618,7 +603,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="63" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="63" bodyend="63"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="61" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="61" bodyend="61"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a84c1674173da29d57d1528ccb9d9c1b9" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -632,7 +617,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="64" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="62" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a47131cd914c3a6c8a7c03a4764559716" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -646,7 +631,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="65" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="63" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a9276c48812f77bea62428fa4a59792d0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -660,7 +645,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="66" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="66" bodyend="66"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="64" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="64" bodyend="64"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1ad94ef18d58f13582b7411b749ae81089" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -674,7 +659,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="67" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="67" bodyend="67"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="65" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="65" bodyend="65"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1ab9a8347f2812fce37f53741a5865758c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint16_t</type>
@@ -688,7 +673,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="68" column="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="66" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1ae6953f64e0856bd2ba3891c1a4529f73" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -702,7 +687,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="69" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="69" bodyend="69"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="67" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="67" bodyend="67"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1ac4d26a90ba1c28b82f71b28d1eb77dc9" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -716,7 +701,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="70" column="46"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="68" column="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1aeba9dea35c61deaebe82cdda4ea7559e" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -730,7 +715,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="71" column="54"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="69" column="54"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1ac663dc33feca74c372905c497dae10d0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD LoadState</type>
@@ -744,7 +729,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="72" column="32" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="72" bodyend="72"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="70" column="32" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="70" bodyend="70"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a0186b5dcde6ac4e0d251590619639406" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -758,7 +743,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="73" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="73" bodyend="73"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="71" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="71" bodyend="71"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1abbc56086aaf55e5a1ec9788dcecee316" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD ResourceInfoWeakPtr</type>
@@ -772,7 +757,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="74" column="42" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="74" bodyend="74"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="72" column="42" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="72" bodyend="72"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1aee782635ef745075e9776c3f667904a5" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -786,7 +771,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="75" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="75" bodyend="75"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="73" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="73" bodyend="73"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a4aff4255b8a8bcf7b1424927b450b274" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -800,7 +785,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="77" column="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="75" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1ab4dd8bb36d912a3d541d63dd00570561" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint16_t</type>
@@ -814,7 +799,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="78" column="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="76" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1abcf6bc4fde8bd87a0f1d72d0183af0cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -829,7 +814,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="81" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="79" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1ac0cb7963e3bd5008d28412c0aa6196de" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>RemoveUPResult</type>
@@ -845,7 +830,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="84" column="32"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="82" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a6aad227ccd12d3dd92ac9010ba6ac404" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -859,7 +844,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="86" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="84" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a2a19e0855b7bbd67d6a964c08191cdce" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -873,7 +858,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="88" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="88" bodyend="91"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="86" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="86" bodyend="89"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a5b375df8373037b2e3a8d4d824bed858" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -888,7 +873,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="93" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="91" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a1321f66c455d7f59eebb314fe2c83062" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -903,7 +888,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="98" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="96" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a390fbb6e6cd4a4c42f5dc34c0d342e3c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -919,7 +904,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="100" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="98" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a73e9141c84030a503c6a1e51efe33b09" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -933,7 +918,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="101" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="99" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1afbba2810b28b1d82a121eeb91c6f247c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -949,7 +934,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="103" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="101" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1aace2e1cee108563a8d9fa93adadade9b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -973,7 +958,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="104" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="102" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a88e5a84b8ca231eff9e93904fe2543c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -996,7 +981,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="105" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="103" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a8374f937e659f29170b1db2b81ba2594" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1010,7 +995,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="107" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="105" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1af7628077663a2e55a7cf9bff31717743" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1024,7 +1009,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="108" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="106" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a700794249e341d5228920451cedf9ee7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1039,7 +1024,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="111" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="109" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a56bb33e9f5864b6fa62e473389a517b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1053,7 +1038,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="112" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="110" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a6c232e1ee7d10fd08a637cdb85da789b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1067,7 +1052,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="113" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="111" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a2f72c195e91ef30f20f84ca3d56f7147" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1085,7 +1070,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="114" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="112" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a992fe5635f43333348b9c9445293e23b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1103,7 +1088,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="115" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="115" bodyend="115"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="113" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="113" bodyend="113"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a0981532a88fdeb242d295a04690ec4dd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1126,7 +1111,34 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="117" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="115" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a7349e6cd8d4b8c3ffcd844f310f81602" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::IResource::SetId</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom id, const SR_UTILS_NS::Path &amp;path, bool autoRegister=true)</argsstring>
+        <name>SetId</name>
+        <qualifiedname>SR_UTILS_NS::IResource::SetId</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>autoRegister</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="116" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a70da9b49736de59bddc1f26575f5da33" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -1141,7 +1153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="119" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="118" column="22"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1168,8 +1180,32 @@
         </childnode>
       </node>
       <node id="19">
+        <label>SR_CORE_NS::EditorSettings</label>
+        <link refid="classSR__CORE__NS_1_1EditorSettings"/>
+        <childnode refid="18" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="20">
         <label>SR_GRAPH_NS::FileMaterialResource</label>
         <link refid="classSR__GRAPH__NS_1_1FileMaterialResource"/>
+        <childnode refid="18" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>SR_GRAPH_NS::FileRenderTechniqueResource</label>
+        <link refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource"/>
+        <childnode refid="18" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>SR_GRAPH_NS::RenderSettings</label>
+        <link refid="classSR__GRAPH__NS_1_1RenderSettings"/>
+        <childnode refid="18" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>SR_GRAPH_NS::RenderStagesSettings</label>
+        <link refid="classSR__GRAPH__NS_1_1RenderStagesSettings"/>
         <childnode refid="18" relation="public-inheritance">
         </childnode>
       </node>
@@ -1219,7 +1255,7 @@
         <label>SR_HTYPES_NS::SharedPtrBase</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
       </node>
-      <node id="20">
+      <node id="24">
         <label>SR_PTYPES_NS::PhysicsMaterial</label>
         <link refid="classSR__PTYPES__NS_1_1PhysicsMaterial"/>
         <childnode refid="18" relation="public-inheritance">
@@ -1247,7 +1283,7 @@
         <childnode refid="6" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="22">
+      <node id="26">
         <label>SR_UTILS_NS::Prefab</label>
         <link refid="classSR__UTILS__NS_1_1Prefab"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1273,7 +1309,7 @@
         <label>SR_UTILS_NS::SubscriptionHolder</label>
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
-      <node id="21">
+      <node id="25">
         <label>SR_UTILS_NS::TestManagerAsset</label>
         <link refid="classSR__UTILS__NS_1_1TestManagerAsset"/>
         <childnode refid="18" relation="public-inheritance">
@@ -1337,7 +1373,7 @@
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="26" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="26" bodyend="154"/>
+    <location file="Engine/libs/Utils/inc/Utils/Resources/IResource.h" line="26" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="26" bodyend="153"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1af9087ca5182397a9c7d3b92fb5591523" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>AddDependency</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>AddSerializationFlags</name></member>
@@ -1348,6 +1384,7 @@
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a459ed22e0064b69639129562ea9aad38" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>Broadcast</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a543a91c5e997ad287249110180f9cea2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>Broadcast</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a6aad227ccd12d3dd92ac9010ba6ac404" prot="public" virt="virtual"><scope>SR_UTILS_NS::IResource</scope><name>CheckResourceUsage</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>CloneTo</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_UTILS_NS::IResource</scope><name>DecrementPointer</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a1321f66c455d7f59eebb314fe2c83062" prot="public" virt="virtual"><scope>SR_UTILS_NS::IResource</scope><name>DeleteResource</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a700794249e341d5228920451cedf9ee7" prot="public" virt="virtual"><scope>SR_UTILS_NS::IResource</scope><name>Destroy</name></member>
@@ -1383,7 +1420,6 @@
       <member refid="classSR__UTILS__NS_1_1Serializable_1af5c00e9391fad105c30570cbda1a6285" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>HasSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a2a266b012e03eec86b0050d2ff3c9f30" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>HasSubscriptions</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_UTILS_NS::IResource</scope><name>IncrementPointer</name></member>
-      <member refid="classSR__UTILS__NS_1_1IResource_1a9035e8e13821bbcf09633e80365d0643" prot="public" virt="virtual"><scope>SR_UTILS_NS::IResource</scope><name>InitializeResourcePath</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ac810662984eb60e0bea8b08e455ea2a2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>IResource</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ad94ef18d58f13582b7411b749ae81089" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>IsAlive</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a7f41c08e67a57cca18fb3b2c2c350768" prot="public" virt="virtual"><scope>SR_UTILS_NS::IResource</scope><name>IsAllowedMultiInstance</name></member>
@@ -1455,6 +1491,7 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1a70da9b49736de59bddc1f26575f5da33" prot="public" virt="virtual"><scope>SR_UTILS_NS::IResource</scope><name>ReviveResource</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_UTILS_NS::IResource</scope><name>Save</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a0981532a88fdeb242d295a04690ec4dd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>SetId</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a7349e6cd8d4b8c3ffcd844f310f81602" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>SetId</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a992fe5635f43333348b9c9445293e23b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>SetLifetime</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_UTILS_NS::IResource</scope><name>SetPointerFromBase</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a2f72c195e91ef30f20f84ca3d56f7147" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>SetResourceHash</name></member>
@@ -1480,7 +1517,7 @@
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a9020c161e4bc8453d005eb5fab808490" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>Unsubscribe</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a8374f937e659f29170b1db2b81ba2594" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>UpdateResourceLifeTime</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac84a44cf058fa5cb53715e250ae7157c" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>UpdateResources</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a783dd9e4a58072de8ff19895693bca05" prot="public" virt="virtual"><scope>SR_UTILS_NS::IResource</scope><name>Valid</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a5aab0756802a67de9cb45b83b3e73c70" prot="public" virt="virtual"><scope>SR_UTILS_NS::IResource</scope><name>VerifyAfterLoad</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ac4450e90e1fbd14d29931a362b9c05eb" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>~IResource</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a25f84a35792474f3b2e2eff6431695d3" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>~ResourceContainer</name></member>

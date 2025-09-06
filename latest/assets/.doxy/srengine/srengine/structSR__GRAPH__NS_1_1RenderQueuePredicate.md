@@ -56,7 +56,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_NODISCARD bool | [**operator()**](#function-operator()) (const [**Element**](structSR__GRAPH__NS_1_1RenderQueueInfo.md) & left, const [**Element**](structSR__GRAPH__NS_1_1RenderQueueInfo.md) & right) noexcept const<br> |
+|  SR\_NODISCARD bool | [**operator()**](#function-operator) (const [**Element**](structSR__GRAPH__NS_1_1RenderQueueInfo.md) & left, const [**Element**](structSR__GRAPH__NS_1_1RenderQueueInfo.md) & right) noexcept const<br> |
 
 
 

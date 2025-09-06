@@ -16,10 +16,24 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="73" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="73" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="91" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="91" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1ad6aba89d8282e37e5396a9d9bf602790" prot="private" static="no" mutable="no">
+        <type><ref refid="structSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentAssociative" kindref="compound">ReflectionTestComponentAssociative</ref></type>
+        <definition>ReflectionTestComponentAssociative SR_UTILS_NS::Tests::ReflectionTestComponent::m_associative</definition>
+        <argsstring></argsstring>
+        <name>m_associative</name>
+        <qualifiedname>SR_UTILS_NS::Tests::ReflectionTestComponent::m_associative</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="103" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="103" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1aca722c817f9a49c326f857b5165540cb" prot="private" static="no" mutable="no">
         <type>std::string</type>
         <definition>std::string SR_UTILS_NS::Tests::ReflectionTestComponent::m_string</definition>
@@ -33,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="92" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="92" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="105" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="105" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1afd30e66f0c8f555327c03ba869e342a8" prot="private" static="no" mutable="no">
         <type>SR_UTILS_NS::PlatformType</type>
@@ -48,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="94" column="35" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="94" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="107" column="35" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="107" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1a26bd1d41fd5e4bc70d008b755c452c9d" prot="private" static="no" mutable="no">
         <type><ref refid="structSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentData" kindref="compound">ReflectionTestComponentData</ref></type>
@@ -62,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="96" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="96" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="109" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="109" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1a4aacbfd445bb6fd21e7a7d2e65ac47cf" prot="private" static="no" mutable="no">
         <type>ReflectionTestComponentLogicBase::Ptr</type>
@@ -76,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="98" column="47" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="98" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="111" column="47" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="111" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1a31316d43fc68a9dd665f6a68f161214a" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="structSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentData" kindref="compound">ReflectionTestComponentData</ref> &gt;</type>
@@ -90,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="100" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="100" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="113" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="113" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1ac085f6e21719519f7e02f6e17a4db58c" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -105,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="102" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="102" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="115" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="115" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1ab8c4cf115c544afee58e4c918a6f4f0c" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -120,7 +134,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="104" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="104" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="117" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="117" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1a98d62feba95a5bd6eb506759fe27a1ae" prot="private" static="no" mutable="no">
         <type>int32_t</type>
@@ -135,7 +149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="106" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="106" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="119" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="119" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1aa178d967d570b6a8dc5a5ec4fcb4eac9" prot="private" static="no" mutable="no">
         <type>int8_t</type>
@@ -150,7 +164,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="108" column="16" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="108" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="121" column="16" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="121" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1af7f1e266aaa6fc3ef18cb018e49fda26" prot="private" static="no" mutable="no">
         <type>uint64_t</type>
@@ -165,7 +179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="110" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="110" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="123" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="123" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1adfb077dcd041ce231dbb45c08af11e47" prot="private" static="no" mutable="no">
         <type>float_t</type>
@@ -180,7 +194,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="112" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="112" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="125" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="125" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1a163d2256ff7a0f5e06bb50e3730421b2" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
@@ -194,7 +208,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="114" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="114" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="127" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="127" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1abfc4d695965a0df368c3b50f97d4e89f" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::FVector6</type>
@@ -208,7 +222,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="116" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="116" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="129" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="129" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1a6a174cf82d6842ef1c66ac5d2139b7a3" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::FVector2</type>
@@ -222,7 +236,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="118" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="118" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="131" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="131" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1a2d808a6eb061ce1ea705db229943bb10" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::BVector4</type>
@@ -236,7 +250,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="120" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="120" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="133" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="133" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1af219f4234e80fed332f749dc9f44e6b3" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -251,7 +265,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="122" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="122" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="135" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="135" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1ab880349f9c0a853206fb00c12eb08076" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::FSize</type>
@@ -265,7 +279,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="124" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="124" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="137" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="137" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1ad8ed4fffe599c8aa96debe69ae656923" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::FSize2</type>
@@ -279,7 +293,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="126" column="28" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="126" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="139" column="28" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="139" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1af9e51b97a4cab19fff525ff89f5b23ca" prot="private" static="no" mutable="no">
         <type>std::vector&lt; float &gt;</type>
@@ -293,7 +307,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="128" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="128" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="141" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="141" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1a5bf0384c65c9968bf68d36ca0a993e7e" prot="private" static="no" mutable="no">
         <type>std::vector&lt; std::vector&lt; int &gt; &gt;</type>
@@ -307,7 +321,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="130" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="130" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="143" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="143" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1ab30edad2c312f751df1d992a0a52c4c0" prot="private" static="no" mutable="no">
         <type>std::vector&lt; std::vector&lt; std::vector&lt; std::vector&lt; std::vector&lt; std::vector&lt; float_t &gt; &gt; &gt; &gt; &gt; &gt;</type>
@@ -321,7 +335,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="132" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="132" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="145" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="145" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1a8ca496fbba2a30fbc7064d297509ac0d" prot="private" static="no" mutable="no">
         <type>std::vector&lt; int &gt;</type>
@@ -336,7 +350,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="134" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="134" bodyend="134"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="147" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="147" bodyend="147"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1a47cb95f468cfd74c55bd9ee30f62c151" prot="private" static="no" mutable="no">
         <type>std::vector&lt; SR_MATH_NS::FVector3 &gt;</type>
@@ -350,7 +364,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="136" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="136" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="149" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="149" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1a492ff65cc65ae100647dd80cc737daf8" prot="private" static="no" mutable="no">
         <type>std::vector&lt; std::vector&lt; SR_MATH_NS::FVector4 &gt; &gt;</type>
@@ -364,7 +378,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="138" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="138" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="151" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="151" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1a9b1bc797e6e214048c157fc34e5daf78" prot="private" static="no" mutable="no">
         <type>std::vector&lt; SR_UTILS_NS::PlatformType &gt;</type>
@@ -378,7 +392,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="140" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="140" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="153" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="153" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1a9762f7d053ca1943b43f37f285680a13" prot="private" static="no" mutable="no">
         <type>std::vector&lt; SR_MATH_NS::FSize &gt;</type>
@@ -392,7 +406,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="142" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="142" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="155" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="155" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1ac3a67124df65ec52158afdf97e519945" prot="private" static="no" mutable="no">
         <type>std::vector&lt; SR_MATH_NS::FSize2 &gt;</type>
@@ -406,7 +420,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="144" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="144" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="157" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="157" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1af6e8a3ceeaa5e418c25cd27c5ac27242" prot="private" static="no" mutable="no">
         <type>std::vector&lt; bool &gt;</type>
@@ -420,7 +434,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="146" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="146" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="159" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="159" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -436,7 +450,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="76" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="76" bodyend="76"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="94" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="94" bodyend="94"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1a26a225b6bfb97b328df1e001c3d5ecf3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>std::vector&lt; float &gt; &amp;</type>
@@ -450,7 +464,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="77" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="77" bodyend="77"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="95" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="95" bodyend="95"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1a96bdcd658892e794fd21e33f758ab130" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -464,23 +478,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="79" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="79" bodyend="81"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1ac61e1d92bf225f7b153f21d155852959" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
-        <type>void</type>
-        <definition>void SR_UTILS_NS::Tests::ReflectionTestComponent::OnDestroy</definition>
-        <argsstring>() override</argsstring>
-        <name>OnDestroy</name>
-        <qualifiedname>SR_UTILS_NS::Tests::ReflectionTestComponent::OnDestroy</qualifiedname>
-        <reimplements refid="classSR__UTILS__NS_1_1Component_1ae31753f4a155ecfdc85b995a775aab1f">OnDestroy</reimplements>
-        <briefdescription>
-<para>Вызывается когда компонент убирается с объекта, либо объект уничтожается. Может произойти отложенно. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="83" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="83" bodyend="88"/>
+        <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="97" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="97" bodyend="99"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -539,7 +537,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="72" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="72" bodyend="148"/>
+    <location file="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" line="90" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h" bodystart="90" bodyend="161"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_UTILS_NS::Tests::ReflectionTestComponent</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Tests::ReflectionTestComponent</scope><name>BaseComponent</name></member>
@@ -576,6 +574,7 @@
       <member refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1a6a174cf82d6842ef1c66ac5d2139b7a3" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Tests::ReflectionTestComponent</scope><name>m_2d</name></member>
       <member refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1a2d808a6eb061ce1ea705db229943bb10" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Tests::ReflectionTestComponent</scope><name>m_4db</name></member>
       <member refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1abfc4d695965a0df368c3b50f97d4e89f" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Tests::ReflectionTestComponent</scope><name>m_6d</name></member>
+      <member refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1ad6aba89d8282e37e5396a9d9bf602790" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Tests::ReflectionTestComponent</scope><name>m_associative</name></member>
       <member refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1af6e8a3ceeaa5e418c25cd27c5ac27242" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Tests::ReflectionTestComponent</scope><name>m_bitSet</name></member>
       <member refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1a26bd1d41fd5e4bc70d008b755c452c9d" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Tests::ReflectionTestComponent</scope><name>m_data</name></member>
       <member refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1a31316d43fc68a9dd665f6a68f161214a" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Tests::ReflectionTestComponent</scope><name>m_datas</name></member>
@@ -617,7 +616,7 @@
       <member refid="classSR__UTILS__NS_1_1Component_1aaa0c5a5e6d07bf4d4516229fe544dd49" prot="public" virt="virtual"><scope>SR_UTILS_NS::Tests::ReflectionTestComponent</scope><name>OnCollisionEnter</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1af64eb0df50ce6d50cd22662edf0e6a7b" prot="public" virt="virtual"><scope>SR_UTILS_NS::Tests::ReflectionTestComponent</scope><name>OnCollisionExit</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a7a6557ebfc240e92b332b22fe85ebddf" prot="public" virt="virtual"><scope>SR_UTILS_NS::Tests::ReflectionTestComponent</scope><name>OnCollisionStay</name></member>
-      <member refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1ac61e1d92bf225f7b153f21d155852959" prot="public" virt="virtual"><scope>SR_UTILS_NS::Tests::ReflectionTestComponent</scope><name>OnDestroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ae31753f4a155ecfdc85b995a775aab1f" prot="public" virt="virtual"><scope>SR_UTILS_NS::Tests::ReflectionTestComponent</scope><name>OnDestroy</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aba0d2511d0fb2342ae68f97c24f05ffc" prot="public" virt="virtual"><scope>SR_UTILS_NS::Tests::ReflectionTestComponent</scope><name>OnDetached</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a33c4d449284bb7be17ac6c0b66dad816" prot="public" virt="virtual"><scope>SR_UTILS_NS::Tests::ReflectionTestComponent</scope><name>OnDisable</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1af582e05d713cc0849a532ba2554c41ab" prot="public" virt="virtual"><scope>SR_UTILS_NS::Tests::ReflectionTestComponent</scope><name>OnEnable</name></member>

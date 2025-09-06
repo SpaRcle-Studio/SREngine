@@ -35,7 +35,7 @@ Inherited by the following classes: [SR\_GTYPES\_NS::DebugLine](classSR__GTYPES_
 | ---: | :--- |
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; BaseMaterial &gt; | [**MaterialPtr**](#typedef-materialptr)  <br> |
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Mesh**](classSR__GTYPES__NS_1_1Mesh.md) &gt; | [**Ptr**](#typedef-ptr)  <br> |
-| typedef [**SR\_HTYPES\_NS::SortedVector**](classSR__HTYPES__NS_1_1SortedVector.md)&lt; [**SR\_GRAPH\_NS::RenderQueueInfo**](structSR__GRAPH__NS_1_1RenderQueueInfo.md), [**SR\_GRAPH\_NS::RenderQueuePredicate**](structSR__GRAPH__NS_1_1RenderQueuePredicate.md) &gt; | [**RenderQueues**](#typedef-renderqueues)  <br> |
+| typedef [**SR\_HTYPES\_NS::SortedVector**](classSR__HTYPES__NS_1_1SortedVector.md)&lt; RenderQueueInfo, RenderQueuePredicate &gt; | [**RenderQueues**](#typedef-renderqueues)  <br> |
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; RenderScene &gt; | [**RenderScenePtr**](#typedef-rendersceneptr)  <br> |
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Shader**](classSR__GTYPES__NS_1_1Shader.md) &gt; | [**ShaderPtr**](#typedef-shaderptr)  <br> |
 
@@ -128,7 +128,8 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 | virtual SR\_NODISCARD FrustumCullingType | [**GetFrustumCullingType**](#function-getfrustumcullingtype) () noexcept const<br> |
 | virtual SR\_NODISCARD int32\_t | [**GetIBO**](#function-getibo) () <br> |
 | virtual SR\_NODISCARD uint32\_t | [**GetIndicesCount**](#function-getindicescount) () const = 0<br> |
-|  SR\_NODISCARD const MaterialPtr & | [**GetMaterial**](#function-getmaterial) () noexcept const<br> |
+|  SR\_NODISCARD const MaterialPtr & | [**GetMaterial**](#function-getmaterial-12) () noexcept const<br> |
+|  SR\_NODISCARD MaterialPtr & | [**GetMaterial**](#function-getmaterial-22) () noexcept<br> |
 | virtual SR\_NODISCARD const [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & | [**GetMatrix**](#function-getmatrix) () const<br> |
 | virtual SR\_NODISCARD std::string | [**GetMeshIdentifier**](#function-getmeshidentifier) () const<br> |
 | virtual SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetMeshLayer**](#function-getmeshlayer) () const<br> |
@@ -136,7 +137,6 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 | virtual SR\_NODISCARD MeshType | [**GetMeshType**](#function-getmeshtype) () noexcept const = 0<br> |
 |  SR\_NODISCARD Pipeline \* | [**GetPipeline**](#function-getpipeline) () noexcept const<br> |
 |  SR\_NODISCARD RenderQueues & | [**GetRenderQueues**](#function-getrenderqueues) () noexcept<br> |
-|  SR\_NODISCARD ShaderPtr | [**GetShader**](#function-getshader) () const<br> |
 | virtual SR\_NODISCARD int64\_t | [**GetSortingPriority**](#function-getsortingpriority) () const<br> |
 | virtual SR\_NODISCARD int32\_t | [**GetVBO**](#function-getvbo) () <br> |
 | virtual SR\_NODISCARD uint32\_t | [**GetVerticesCount**](#function-getverticescount) () const<br> |
@@ -425,7 +425,7 @@ using SR_GTYPES_NS::Mesh::Ptr =  SR_HTYPES_NS::SharedPtr<Mesh>;
 ### typedef RenderQueues 
 
 ```C++
-using SR_GTYPES_NS::Mesh::RenderQueues =  SR_HTYPES_NS::SortedVector<SR_GRAPH_NS::RenderQueueInfo, SR_GRAPH_NS::RenderQueuePredicate>;
+using SR_GTYPES_NS::Mesh::RenderQueues =  SR_HTYPES_NS::SortedVector<RenderQueueInfo, RenderQueuePredicate>;
 ```
 
 
@@ -556,10 +556,23 @@ virtual SR_NODISCARD uint32_t SR_GTYPES_NS::Mesh::GetIndicesCount () const = 0
 
 
 
-### function GetMaterial 
+### function GetMaterial [1/2]
 
 ```C++
 inline SR_NODISCARD const MaterialPtr & SR_GTYPES_NS::Mesh::GetMaterial () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetMaterial [2/2]
+
+```C++
+inline SR_NODISCARD MaterialPtr & SR_GTYPES_NS::Mesh::GetMaterial () noexcept
 ```
 
 
@@ -651,19 +664,6 @@ inline SR_NODISCARD Pipeline * SR_GTYPES_NS::Mesh::GetPipeline () noexcept const
 
 ```C++
 inline SR_NODISCARD RenderQueues & SR_GTYPES_NS::Mesh::GetRenderQueues () noexcept
-```
-
-
-
-
-<hr>
-
-
-
-### function GetShader 
-
-```C++
-SR_NODISCARD ShaderPtr SR_GTYPES_NS::Mesh::GetShader () const
 ```
 
 

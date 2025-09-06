@@ -65,10 +65,10 @@
 | ---: | :--- |
 |  WIDE\_INTEGER\_NODISCARD auto | [**a**](#function-a) () const<br> |
 |  WIDE\_INTEGER\_NODISCARD auto | [**b**](#function-b) () const<br> |
-|  constexpr auto | [**operator()**](#function-operator()-12) (GeneratorType & generator) <br> |
-|  constexpr auto | [**operator()**](#function-operator()-22) (GeneratorType & input\_generator, const [**param\_type**](structSR__TYPES__NS_1_1uniform__int__distribution_1_1param__type.md) & input\_params) <br> |
-|  auto constexpr | [**operator=**](#function-operator) (const uniform\_int\_distribution & other) <br> |
-|  auto constexpr | [**operator=**](#function-operator_1) (uniform\_int\_distribution && other) noexcept<br> |
+|  constexpr auto | [**operator()**](#function-operator) (GeneratorType & generator) <br> |
+|  constexpr auto | [**operator()**](#function-operator_1) (GeneratorType & input\_generator, const [**param\_type**](structSR__TYPES__NS_1_1uniform__int__distribution_1_1param__type.md) & input\_params) <br> |
+|  auto constexpr | [**operator=**](#function-operator_2) (const uniform\_int\_distribution & other) <br> |
+|  auto constexpr | [**operator=**](#function-operator_3) (uniform\_int\_distribution && other) noexcept<br> |
 |  auto constexpr | [**param**](#function-param-12) (const [**param\_type**](structSR__TYPES__NS_1_1uniform__int__distribution_1_1param__type.md) & new\_params) <br> |
 |  WIDE\_INTEGER\_NODISCARD auto | [**param**](#function-param-22) () const<br> |
 |  constexpr | [**uniform\_int\_distribution**](#function-uniform_int_distribution-14) (const result\_type & p\_a=(std::numeric\_limits&lt; result\_type &gt;::min)(), const result\_type & p\_b=(std::numeric\_limits&lt; result\_type &gt;::max)()) <br> |
@@ -150,7 +150,7 @@ inline WIDE_INTEGER_NODISCARD auto uniform_int_distribution::b () const
 
 
 
-### function operator() [1/2]
+### function operator() 
 
 ```C++
 template<typename GeneratorType, const int GeneratorResultBits>
@@ -166,7 +166,7 @@ inline constexpr auto uniform_int_distribution::operator() (
 
 
 
-### function operator() [2/2]
+### function operator() 
 
 ```C++
 template<typename GeneratorType, const int GeneratorResultBits>

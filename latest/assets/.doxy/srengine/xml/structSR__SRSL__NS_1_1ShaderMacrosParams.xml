@@ -1,0 +1,232 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structSR__SRSL__NS_1_1ShaderMacrosParams" kind="struct" language="C++" prot="public">
+    <compoundname>SR_SRSL_NS::ShaderMacrosParams</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structSR__SRSL__NS_1_1ShaderMacrosParams_1a61fc0433e5c693adc9ec52fc94a66c67" prot="private" static="no" mutable="no">
+        <type>std::map&lt; std::string, std::string &gt;</type>
+        <definition>std::map&lt;std::string, std::string&gt; SR_SRSL_NS::ShaderMacrosParams::m_params</definition>
+        <argsstring></argsstring>
+        <name>m_params</name>
+        <qualifiedname>SR_SRSL_NS::ShaderMacrosParams::m_params</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="50" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__SRSL__NS_1_1ShaderMacrosParams_1a6b3625ac6bb3d2ea11d9c6523dd7612a" prot="private" static="no" mutable="no">
+        <type>SR_UTILS_NS::SRHashType</type>
+        <definition>SR_UTILS_NS::SRHashType SR_SRSL_NS::ShaderMacrosParams::m_hash</definition>
+        <argsstring></argsstring>
+        <name>m_hash</name>
+        <qualifiedname>SR_SRSL_NS::ShaderMacrosParams::m_hash</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="51" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__SRSL__NS_1_1ShaderMacrosParams_1a1abbcb06c30bddcedd83965b047737ab" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_SRSL_NS::ShaderMacrosParams::m_initialized</definition>
+        <argsstring></argsstring>
+        <name>m_initialized</name>
+        <qualifiedname>SR_SRSL_NS::ShaderMacrosParams::m_initialized</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="52" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__SRSL__NS_1_1ShaderMacrosParams_1a15dfbeaab2c4f44edf04b70c3848f279" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRSL_NS::ShaderMacrosParams::InitHash</definition>
+        <argsstring>()</argsstring>
+        <name>InitHash</name>
+        <qualifiedname>SR_SRSL_NS::ShaderMacrosParams::InitHash</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="15" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__SRSL__NS_1_1ShaderMacrosParams_1a9420d176ba78ab863c6c873fc8b086d2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD SR_UTILS_NS::SRHashType</type>
+        <definition>SR_NODISCARD SR_UTILS_NS::SRHashType SR_SRSL_NS::ShaderMacrosParams::GetHash</definition>
+        <argsstring>() const</argsstring>
+        <name>GetHash</name>
+        <qualifiedname>SR_SRSL_NS::ShaderMacrosParams::GetHash</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="19" column="46"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__SRSL__NS_1_1ShaderMacrosParams_1a3cd3f3f1fc692186b09ab9eb4b6ddf8a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRSL_NS::ShaderMacrosParams::GetHashStr</definition>
+        <argsstring>() const</argsstring>
+        <name>GetHashStr</name>
+        <qualifiedname>SR_SRSL_NS::ShaderMacrosParams::GetHashStr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="20" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__SRSL__NS_1_1ShaderMacrosParams_1a1a691d8ceeb860dd6310dac8b00639f1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_SRSL_NS::ShaderMacrosParams::empty</definition>
+        <argsstring>() const</argsstring>
+        <name>empty</name>
+        <qualifiedname>SR_SRSL_NS::ShaderMacrosParams::empty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="21" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="21" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__SRSL__NS_1_1ShaderMacrosParams_1a00a0a8d35daedbd39798c9f85f83884a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD const std::map&lt; std::string, std::string &gt; &amp;</type>
+        <definition>SR_NODISCARD const std::map&lt; std::string, std::string &gt; &amp; SR_SRSL_NS::ShaderMacrosParams::GetParams</definition>
+        <argsstring>() const</argsstring>
+        <name>GetParams</name>
+        <qualifiedname>SR_SRSL_NS::ShaderMacrosParams::GetParams</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="22" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__SRSL__NS_1_1ShaderMacrosParams_1aca15865f9cc3182080f9d4a947b777ef" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRSL_NS::ShaderMacrosParams::Clear</definition>
+        <argsstring>()</argsstring>
+        <name>Clear</name>
+        <qualifiedname>SR_SRSL_NS::ShaderMacrosParams::Clear</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="24" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="24" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__SRSL__NS_1_1ShaderMacrosParams_1a75345b0e8451a47b4a913a3d346b957b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_SRSL_NS::ShaderMacrosParams::IsDefined</definition>
+        <argsstring>(const std::string_view &amp;key) const</argsstring>
+        <name>IsDefined</name>
+        <qualifiedname>SR_SRSL_NS::ShaderMacrosParams::IsDefined</qualifiedname>
+        <param>
+          <type>const std::string_view &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="30" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="30" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__SRSL__NS_1_1ShaderMacrosParams_1aaa9c1e653079015b50df397eae2dee8a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRSL_NS::ShaderMacrosParams::SetParam</definition>
+        <argsstring>(const std::string &amp;key, const std::string &amp;value)</argsstring>
+        <name>SetParam</name>
+        <qualifiedname>SR_SRSL_NS::ShaderMacrosParams::SetParam</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="39" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="39" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__SRSL__NS_1_1ShaderMacrosParams_1a16136c7f676ad9a1005e32e41fff4ce9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRSL_NS::ShaderMacrosParams::AddDefine</definition>
+        <argsstring>(const std::string &amp;define)</argsstring>
+        <name>AddDefine</name>
+        <qualifiedname>SR_SRSL_NS::ShaderMacrosParams::AddDefine</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>define</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="44" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="44" bodyend="47"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structSR__SRSL__NS_1_1ShaderMacrosParams_1ae76f71cb89749854d73edcd0a74faa8c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="structSR__SRSL__NS_1_1ShaderMacrosParams" kindref="compound">ShaderMacrosParams</ref> &amp;</type>
+        <definition>static const ShaderMacrosParams &amp; SR_SRSL_NS::ShaderMacrosParams::GetDefault</definition>
+        <argsstring>()</argsstring>
+        <name>GetDefault</name>
+        <qualifiedname>SR_SRSL_NS::ShaderMacrosParams::GetDefault</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="17" column="41"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="14" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="14" bodyend="54"/>
+    <listofallmembers>
+      <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1a16136c7f676ad9a1005e32e41fff4ce9" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::ShaderMacrosParams</scope><name>AddDefine</name></member>
+      <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1aca15865f9cc3182080f9d4a947b777ef" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::ShaderMacrosParams</scope><name>Clear</name></member>
+      <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1a1a691d8ceeb860dd6310dac8b00639f1" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::ShaderMacrosParams</scope><name>empty</name></member>
+      <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1ae76f71cb89749854d73edcd0a74faa8c" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::ShaderMacrosParams</scope><name>GetDefault</name></member>
+      <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1a9420d176ba78ab863c6c873fc8b086d2" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::ShaderMacrosParams</scope><name>GetHash</name></member>
+      <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1a3cd3f3f1fc692186b09ab9eb4b6ddf8a" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::ShaderMacrosParams</scope><name>GetHashStr</name></member>
+      <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1a00a0a8d35daedbd39798c9f85f83884a" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::ShaderMacrosParams</scope><name>GetParams</name></member>
+      <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1a15dfbeaab2c4f44edf04b70c3848f279" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::ShaderMacrosParams</scope><name>InitHash</name></member>
+      <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1a75345b0e8451a47b4a913a3d346b957b" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::ShaderMacrosParams</scope><name>IsDefined</name></member>
+      <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1a6b3625ac6bb3d2ea11d9c6523dd7612a" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::ShaderMacrosParams</scope><name>m_hash</name></member>
+      <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1a1abbcb06c30bddcedd83965b047737ab" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::ShaderMacrosParams</scope><name>m_initialized</name></member>
+      <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1a61fc0433e5c693adc9ec52fc94a66c67" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::ShaderMacrosParams</scope><name>m_params</name></member>
+      <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1aaa9c1e653079015b50df397eae2dee8a" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::ShaderMacrosParams</scope><name>SetParam</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

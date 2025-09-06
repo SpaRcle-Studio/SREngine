@@ -20,14 +20,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="127" column="9" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="127" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="128" column="9" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="128" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="126" column="15" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="126" bodyend="128"/>
+    <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="127" column="15" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="127" bodyend="129"/>
     <listofallmembers>
       <member refid="structSR__UTILS__NS_1_1InnerType_1a9f70054c6df65ec25605cf25e74eea16" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::InnerType</scope><name>type</name></member>
     </listofallmembers>

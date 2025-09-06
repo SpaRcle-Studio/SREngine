@@ -19,6 +19,10 @@
 #include <Utils/Types/Map.h>
 #include <Graphics/Pipeline/IShaderProgram.h>
 
+namespace SR_GRAPH_NS {
+    class ShaderCache;
+}
+
 namespace SR_GRAPH_NS::Types {
     class Shader;
 }
@@ -26,6 +30,7 @@ namespace SR_GRAPH_NS::Types {
 namespace SR_GRAPH_NS::Memory {
     class ShaderUBOBlock : public SR_UTILS_NS::NonCopyable {
         friend class SR_GRAPH_NS::Types::Shader;
+        friend class SR_GRAPH_NS::ShaderCache;
 
         struct SubBlock {
             uint64_t hashId;

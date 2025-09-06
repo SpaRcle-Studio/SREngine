@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="561" column="13" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="561" bodyend="568"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="578" column="13" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="578" bodyend="585"/>
       </memberdef>
       <memberdef kind="function" id="structObjectDataAccessor_3_01SR__MATH__NS_1_1Quaternion_01_4_1ab18eb8a6d95e96df54a64fa8ba0298f4" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -55,14 +55,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="570" column="13" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="570" bodyend="579"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="587" column="13" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="587" bodyend="596"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="560" column="10" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="560" bodyend="580"/>
+    <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="577" column="10" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="577" bodyend="597"/>
     <listofallmembers>
       <member refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1Quaternion_01_4_1ab18eb8a6d95e96df54a64fa8ba0298f4" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; SR_MATH_NS::Quaternion &gt;</scope><name>Load</name></member>
       <member refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1Quaternion_01_4_1a5c5b24a7e8e7d080013a327e3b66783c" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; SR_MATH_NS::Quaternion &gt;</scope><name>Save</name></member>

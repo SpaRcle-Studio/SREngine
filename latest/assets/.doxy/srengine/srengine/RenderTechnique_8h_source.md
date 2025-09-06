@@ -12,10 +12,12 @@
 // Created by Monika on 17.07.2022.
 //
 
-#ifndef SR_ENGINE_RENDERTECHNIQUE_H
-#define SR_ENGINE_RENDERTECHNIQUE_H
+#ifndef SR_ENGINE_GRAPHICS_RENDER_TECHNIQUE_H
+#define SR_ENGINE_GRAPHICS_RENDER_TECHNIQUE_H
 
 #include <Graphics/Render/IRenderTechnique.h>
+
+#include <Utils/Resources/Asset.h>
 
 namespace SR_GRAPH_NS {
     class FileRenderTechniqueResource;
@@ -31,53 +33,35 @@ namespace SR_GRAPH_NS {
     public:
         static FileRenderTechnique::Ptr Load(const SR_UTILS_NS::Path& path);
 
-    protected:
-        bool Build() override;
-
     private:
-        void LoadPass(const SR_XML_NS::Node& node);
-        void ProcessNode(const SR_XML_NS::Node& passNode);
-
         void SetResource(const SR_HTYPES_NS::SharedPtr<FileRenderTechniqueResource>& pResource);
+        void UpdateDataIfNeeded() override;
 
     private:
         SR_HTYPES_NS::SharedPtr<FileRenderTechniqueResource> m_resource;
+        SR_UTILS_NS::Subscription m_onResourceReloaded;
+        bool m_isResourceReloaded = false;
 
     };
 
-    class FileRenderTechniqueResource : public SR_UTILS_NS::Settings {
+    class FileRenderTechniqueResource : public SR_UTILS_NS::Asset {
         SR_CLASS()
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<FileRenderTechniqueResource>;
 
     public:
-        FileRenderTechniqueResource() = default;
-
-    public:
         static FileRenderTechniqueResource::Ptr Load(const SR_UTILS_NS::Path& path);
 
     public:
-        void RegisterRenderTechnique(const FileRenderTechnique::Ptr& renderTechnique) {
-            m_renderTechniques.insert(renderTechnique);
-        }
+        const RenderTechniqueData& GetData() const noexcept { return m_data; }
 
-        void UnregisterRenderTechnique(const FileRenderTechnique::Ptr& renderTechnique) {
-            m_renderTechniques.erase(renderTechnique);
-        }
-
-        SR_NODISCARD bool IsAllowedMultiInstance() const override { return true; }
-
-    protected:
-        bool Load() override;
-        bool Unload() override;
-
-    protected:
-        std::set<FileRenderTechnique::Ptr> m_renderTechniques;
+    private:
+        RenderTechniqueData m_data;
 
     };
 }
 
-#endif //SR_ENGINE_RENDERTECHNIQUE_H
+#endif //SR_ENGINE_GRAPHICS_RENDER_TECHNIQUE_H
 ```
 
 

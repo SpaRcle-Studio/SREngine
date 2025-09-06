@@ -79,10 +79,12 @@ See [SR\_UTILS\_NS::SRClassMeta](classSR__UTILS__NS_1_1SRClassMeta.md)
 | Type | Name |
 | ---: | :--- |
 | virtual SR\_NODISCARD [**SRClass**](classSR__UTILS__NS_1_1SRClass.md) \* | [**Allocate**](classSR__UTILS__NS_1_1SRClassMeta.md#function-allocate) () noexcept const<br> |
+| virtual void | [**CloneTo**](classSR__UTILS__NS_1_1SRClassMeta.md#function-cloneto) (const [**SRClass**](classSR__UTILS__NS_1_1SRClass.md) & src, [**SRClass**](classSR__UTILS__NS_1_1SRClass.md) & dest) noexcept const<br> |
 |  void | [**ForEachProperty**](classSR__UTILS__NS_1_1SRClassMeta.md#function-foreachproperty) (const std::function&lt; void(const [**SR\_UTILS\_NS::Reflection::Property**](classSR__UTILS__NS_1_1Reflection_1_1Property.md) &property, uint64\_t index)&gt; & func, uint64\_t \* pIndex=nullptr) const<br> |
 | virtual void | [**ForEachSRClass**](classSR__UTILS__NS_1_1SRClassMeta.md#function-foreachsrclass) ([**SRClass**](classSR__UTILS__NS_1_1SRClass.md) & srClass, const [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; void([**SRClass**](classSR__UTILS__NS_1_1SRClass.md) &)&gt; & function) noexcept const<br> |
 | virtual SR\_NODISCARD std::span&lt; const [**SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md) \* &gt; | [**GetBaseMetas**](classSR__UTILS__NS_1_1SRClassMeta.md#function-getbasemetas) () noexcept const<br> |
 | virtual SR\_NODISCARD std::span&lt; const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) &gt; | [**GetCategory**](classSR__UTILS__NS_1_1SRClassMeta.md#function-getcategory) () noexcept const<br> |
+| virtual SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetDisplayName**](classSR__UTILS__NS_1_1SRClassMeta.md#function-getdisplayname) () noexcept const<br> |
 | virtual SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetFactoryName**](classSR__UTILS__NS_1_1SRClassMeta.md#function-getfactoryname) () noexcept const<br> |
 | virtual SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetInspectorName**](classSR__UTILS__NS_1_1SRClassMeta.md#function-getinspectorname) () noexcept const<br> |
 | virtual SR\_NODISCARD std::span&lt; const [**SR\_UTILS\_NS::Reflection::Property**](classSR__UTILS__NS_1_1Reflection_1_1Property.md) &gt; | [**GetProperties**](classSR__UTILS__NS_1_1SRClassMeta.md#function-getproperties) () noexcept const<br> |

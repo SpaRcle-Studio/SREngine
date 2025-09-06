@@ -53,7 +53,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  size\_t | [**operator()**](#function-operator()) ([**SR\_GRAPH\_NS::Vertices::StaticMeshVertex**](structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex.md) const & vertex) const<br> |
+|  size\_t | [**operator()**](#function-operator) ([**SR\_GRAPH\_NS::Vertices::StaticMeshVertex**](structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex.md) const & vertex) const<br> |
 
 
 

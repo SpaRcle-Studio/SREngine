@@ -7,6 +7,7 @@
     <innerclass refid="classSR__CORE__NS_1_1DeltaTimeState" prot="public">SR_CORE_NS::DeltaTimeState</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1DrawState" prot="public">SR_CORE_NS::DrawState</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1EditorSettings" prot="public">SR_CORE_NS::EditorSettings</innerclass>
+    <innerclass refid="structSR__CORE__NS_1_1EditorSettingsIconInfo" prot="public">SR_CORE_NS::EditorSettingsIconInfo</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1Engine" prot="public">SR_CORE_NS::Engine</innerclass>
     <innerclass refid="structSR__CORE__NS_1_1EngineScene" prot="public">SR_CORE_NS::EngineScene</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1GraphicsResourceReloader" prot="public">SR_CORE_NS::GraphicsResourceReloader</innerclass>
@@ -26,10 +27,10 @@
     <innernamespace refid="namespaceSR__CORE__NS_1_1Resources">SR_CORE_NS::Resources</innernamespace>
     <innernamespace refid="namespaceSR__CORE__NS_1_1Tests">SR_CORE_NS::Tests</innernamespace>
     <sectiondef kind="func">
-      <memberdef kind="function" id="namespaceSR__CORE__NS_1afddb4f940e36c2c423e7c000520f9caa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="namespaceSR__CORE__NS_1acbfaf1356b829edb68ee1fb97a5fe5d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>SR_CORE_NS::SR_ENUM_NS_CLASS_T</definition>
-        <argsstring>(EditorIcon, uint32_t, Unknown, Material, Prefab, Asset, File, Shader, Scene, Back, Play, Stop, PauseActive, Pause, FrameSkip, EmptyFolder, Folder, Script, Reset, Shapes, Game, ZIP, JPG, TXT, XML, PNG, DLL, Font, Audio)</argsstring>
+        <argsstring>(EditorIcon, uint32_t, Unknown, Material, Prefab, Asset, File, Shader, Scene, Back, RenderTechnique, Play, Stop, PauseActive, Pause, FrameSkip, EmptyFolder, Folder, Script, Reset, Shapes, Game, ZIP, JPG, TXT, XML, PNG, DLL, Font, Audio)</argsstring>
         <name>SR_ENUM_NS_CLASS_T</name>
         <qualifiedname>SR_CORE_NS::SR_ENUM_NS_CLASS_T</qualifiedname>
         <param>
@@ -61,6 +62,9 @@
         </param>
         <param>
           <type>Back</type>
+        </param>
+        <param>
+          <type>RenderTechnique</type>
         </param>
         <param>
           <type>Play</type>
@@ -126,7 +130,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/Settings/EditorSettings.h" line="12" column="5" declfile="Engine/inc/Engine/Settings/EditorSettings.h" declline="12" declcolumn="5"/>
+        <location file="Engine/inc/Engine/Settings/EditorSettings.h" line="14" column="5" declfile="Engine/inc/Engine/Settings/EditorSettings.h" declline="14" declcolumn="5"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

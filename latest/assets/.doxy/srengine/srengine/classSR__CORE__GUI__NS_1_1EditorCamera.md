@@ -156,12 +156,14 @@ See [SR\_GTYPES\_NS::Camera](classSR__GTYPES__NS_1_1Camera.md)
 |  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**GetViewDirection**](classSR__GTYPES__NS_1_1Camera.md#function-getviewdirection-22) (const SR\_MATH\_NS::FVector3 & pos) noexcept const<br> |
 |  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**GetViewPosition**](classSR__GTYPES__NS_1_1Camera.md#function-getviewposition) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE const [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & | [**GetViewTranslate**](classSR__GTYPES__NS_1_1Camera.md#function-getviewtranslate) () noexcept const<br> |
+|  SR\_NODISCARD SR\_FORCE\_INLINE const SR\_MATH\_NS::UVector2 & | [**GetViewportSize**](classSR__GTYPES__NS_1_1Camera.md#function-getviewportsize) () const<br> |
 | virtual SR\_NODISCARD bool | [**IsEditorCamera**](classSR__GTYPES__NS_1_1Camera.md#function-iseditorcamera) () noexcept const<br> |
 | virtual void | [**OnAttached**](classSR__GTYPES__NS_1_1Camera.md#function-onattached) () override<br>_Вызывается после добавления компонента к игровому объекту_  |
 | virtual void | [**OnMatrixDirty**](classSR__GTYPES__NS_1_1Camera.md#function-onmatrixdirty) () override<br> |
 |  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**ScreenToWorldPoint**](classSR__GTYPES__NS_1_1Camera.md#function-screentoworldpoint-13) (const SR\_MATH\_NS::FVector3 & screenPos) const<br> |
 |  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**ScreenToWorldPoint**](classSR__GTYPES__NS_1_1Camera.md#function-screentoworldpoint-23) (const SR\_MATH\_NS::FVector2 & screenPos) const<br> |
 |  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**ScreenToWorldPoint**](classSR__GTYPES__NS_1_1Camera.md#function-screentoworldpoint-33) (const SR\_MATH\_NS::FVector2 & screenPos, float\_t depth) const<br> |
+|  void | [**SetCameraType**](classSR__GTYPES__NS_1_1Camera.md#function-setcameratype) (CameraType type) <br> |
 |  void | [**SetFOV**](classSR__GTYPES__NS_1_1Camera.md#function-setfov) (float\_t value) <br> |
 |  void | [**SetFar**](classSR__GTYPES__NS_1_1Camera.md#function-setfar) (float\_t value) <br> |
 |  void | [**SetNear**](classSR__GTYPES__NS_1_1Camera.md#function-setnear) (float\_t value) <br> |

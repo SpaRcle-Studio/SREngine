@@ -3,83 +3,9 @@
   <compounddef id="namespaceSR__GRAPH__NS_1_1SRSL" kind="namespace" language="C++">
     <compoundname>SR_GRAPH_NS::SRSL</compoundname>
     <innerclass refid="structSR__GRAPH__NS_1_1SRSL_1_1SRSLFunc" prot="public">SR_GRAPH_NS::SRSL::SRSLFunc</innerclass>
-    <innerclass refid="classSR__GRAPH__NS_1_1SRSL_1_1SRSLLoader" prot="public">SR_GRAPH_NS::SRSL::SRSLLoader</innerclass>
     <innerclass refid="structSR__GRAPH__NS_1_1SRSL_1_1SRSLParseData" prot="public">SR_GRAPH_NS::SRSL::SRSLParseData</innerclass>
-    <innerclass refid="structSR__GRAPH__NS_1_1SRSL_1_1SRSLStage" prot="public">SR_GRAPH_NS::SRSL::SRSLStage</innerclass>
     <innerclass refid="structSR__GRAPH__NS_1_1SRSL_1_1SRSLStruct" prot="public">SR_GRAPH_NS::SRSL::SRSLStruct</innerclass>
-    <innerclass refid="structSR__GRAPH__NS_1_1SRSL_1_1SRSLUnit" prot="public">SR_GRAPH_NS::SRSL::SRSLUnit</innerclass>
-    <innerclass refid="structSR__GRAPH__NS_1_1SRSL_1_1SRSLVariable" prot="public">SR_GRAPH_NS::SRSL::SRSLVariable</innerclass>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="SRSL_8h_1a28945ad6d2b790247acde9d21b12c5b3" prot="public" static="no">
-        <type>uint32_t</type>
-        <definition>typedef uint32_t SR_GRAPH_NS::SRSL::RequireBits</definition>
-        <argsstring></argsstring>
-        <name>RequireBits</name>
-        <qualifiedname>SR_GRAPH_NS::SRSL::RequireBits</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="14" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="14" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="SRSL_8h_1ad02c7a167b395f1981d91f62c0535a00" prot="public" static="no">
-        <type>uint32_t</type>
-        <definition>typedef uint32_t SR_GRAPH_NS::SRSL::VertexAttributeBits</definition>
-        <argsstring></argsstring>
-        <name>VertexAttributeBits</name>
-        <qualifiedname>SR_GRAPH_NS::SRSL::VertexAttributeBits</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="15" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="15" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="SRSL_8h_1a822c4d1dd7a5a3ec2550bf2278b972d8" prot="public" static="no">
-        <type>std::vector&lt; std::string &gt;::const_iterator</type>
-        <definition>typedef std::vector&lt;std::string&gt;::const_iterator SR_GRAPH_NS::SRSL::CodeIter</definition>
-        <argsstring></argsstring>
-        <name>CodeIter</name>
-        <qualifiedname>SR_GRAPH_NS::SRSL::CodeIter</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="16" column="42" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="16" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="SRSL_8h_1a25eec56ad9595db628525fd0f0841fa8" prot="public" static="no">
-        <type>std::map&lt; std::string, <ref refid="structSR__GRAPH__NS_1_1SRSL_1_1SRSLVariable" kindref="compound">SRSLVariable</ref> &gt;</type>
-        <definition>typedef std::map&lt;std::string, SRSLVariable&gt; SR_GRAPH_NS::SRSL::SRSLVariables</definition>
-        <argsstring></argsstring>
-        <name>SRSLVariables</name>
-        <qualifiedname>SR_GRAPH_NS::SRSL::SRSLVariables</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="24" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="24" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="SRSL_8h_1a1e6fa8cb2a571e0699fa20c3c3ffb1ce" prot="public" static="no">
-        <type>std::map&lt; ShaderStage, <ref refid="structSR__GRAPH__NS_1_1SRSL_1_1SRSLStage" kindref="compound">SRSLStage</ref> &gt;</type>
-        <definition>typedef std::map&lt;ShaderStage, SRSLStage&gt; SR_GRAPH_NS::SRSL::SRSLStages</definition>
-        <argsstring></argsstring>
-        <name>SRSLStages</name>
-        <qualifiedname>SR_GRAPH_NS::SRSL::SRSLStages</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="30" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="30" bodyend="-1"/>
-      </memberdef>
       <memberdef kind="typedef" id="SRSLParser_8h_1afe0a22334b1b11ae300157b2bbcf01b1" prot="public" static="no">
         <type>std::list&lt; <ref refid="structSR__GRAPH__NS_1_1SRSL_1_1SRSLStruct" kindref="compound">SRSLStruct</ref> &gt;</type>
         <definition>typedef std::list&lt;SRSLStruct&gt; SR_GRAPH_NS::SRSL::SRSLStructs</definition>
@@ -223,6 +149,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="13" column="1"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="57" column="1"/>
   </compounddef>
 </doxygen>

@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classSR__GRAPH__NS_1_1ShaderCache" kind="class" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::ShaderCache</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonMovable" prot="public" virt="non-virtual">SR_UTILS_NS::NonMovable</basecompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShaderCache_1a084fdc47f235eb330d346a8ceb05e377" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::ShaderCache::ShaderCache</definition>
+        <argsstring>()=delete</argsstring>
+        <name>ShaderCache</name>
+        <qualifiedname>SR_GRAPH_NS::ShaderCache::ShaderCache</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Cache.h" line="41" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShaderCache_1ad2c1aaf8191b11b4f1b461dab68d4917" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void SR_GRAPH_NS::ShaderCache::SaveShaderToCache</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;cachePath, const SR_GTYPES_NS::Shader *pShader)</argsstring>
+        <name>SaveShaderToCache</name>
+        <qualifiedname>SR_GRAPH_NS::ShaderCache::SaveShaderToCache</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>cachePath</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> *</type>
+          <declname>pShader</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Cache.h" line="44" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShaderCache_1a5b6c4d0249d53b0547f93b2734454d5e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool SR_GRAPH_NS::ShaderCache::LoadShaderFromCache</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;cachePath, SR_GTYPES_NS::Shader *pShader)</argsstring>
+        <name>LoadShaderFromCache</name>
+        <qualifiedname>SR_GRAPH_NS::ShaderCache::LoadShaderFromCache</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>cachePath</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> *</type>
+          <declname>pShader</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Cache.h" line="45" column="21"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShaderCache_1a66493677f68808757d2e8d13ebb445b5" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>static uint64_t SR_GRAPH_NS::ShaderCache::GetVersion</definition>
+        <argsstring>()</argsstring>
+        <name>GetVersion</name>
+        <qualifiedname>SR_GRAPH_NS::ShaderCache::GetVersion</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Cache.h" line="48" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShaderCache_1a48e4eb381d7c0004bbdfe00a5c5bce76" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void SR_GRAPH_NS::ShaderCache::SaveUBOBlock</definition>
+        <argsstring>(SR_HTYPES_NS::Marshal &amp;marshal, const Memory::ShaderUBOBlock &amp;block)</argsstring>
+        <name>SaveUBOBlock</name>
+        <qualifiedname>SR_GRAPH_NS::ShaderCache::SaveUBOBlock</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1Marshal" kindref="compound">SR_HTYPES_NS::Marshal</ref> &amp;</type>
+          <declname>marshal</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock" kindref="compound">Memory::ShaderUBOBlock</ref> &amp;</type>
+          <declname>block</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Cache.h" line="50" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShaderCache_1af829766d643e1a5cfa90b755050c5540" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void SR_GRAPH_NS::ShaderCache::LoadUBOBlock</definition>
+        <argsstring>(SR_HTYPES_NS::Marshal &amp;marshal, Memory::ShaderUBOBlock &amp;block)</argsstring>
+        <name>LoadUBOBlock</name>
+        <qualifiedname>SR_GRAPH_NS::ShaderCache::LoadUBOBlock</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1Marshal" kindref="compound">SR_HTYPES_NS::Marshal</ref> &amp;</type>
+          <declname>marshal</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock" kindref="compound">Memory::ShaderUBOBlock</ref> &amp;</type>
+          <declname>block</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Cache.h" line="51" column="21"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::ShaderCache</label>
+        <link refid="classSR__GRAPH__NS_1_1ShaderCache"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonMovable</label>
+        <link refid="classSR__UTILS__NS_1_1NonMovable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::ShaderCache</label>
+        <link refid="classSR__GRAPH__NS_1_1ShaderCache"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonMovable</label>
+        <link refid="classSR__UTILS__NS_1_1NonMovable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Cache.h" line="39" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/Cache.h" bodystart="39" bodyend="53"/>
+    <listofallmembers>
+      <member refid="classSR__GRAPH__NS_1_1ShaderCache_1a66493677f68808757d2e8d13ebb445b5" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::ShaderCache</scope><name>GetVersion</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ShaderCache_1a5b6c4d0249d53b0547f93b2734454d5e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ShaderCache</scope><name>LoadShaderFromCache</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ShaderCache_1af829766d643e1a5cfa90b755050c5540" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::ShaderCache</scope><name>LoadUBOBlock</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ShaderCache</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ShaderCache</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonMovable_1ae406899a3fa845993a32b8f1de7a6f18" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ShaderCache</scope><name>NonMovable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonMovable_1a2d0d6428df71a6a554958c6de2fbed3b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ShaderCache</scope><name>NonMovable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::ShaderCache</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonMovable_1a0e56b9081c63c4d8dcc688f7207e8bdb" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::NonMovable::"><scope>SR_GRAPH_NS::ShaderCache</scope><name>operator=</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ShaderCache_1ad2c1aaf8191b11b4f1b461dab68d4917" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ShaderCache</scope><name>SaveShaderToCache</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ShaderCache_1a48e4eb381d7c0004bbdfe00a5c5bce76" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::ShaderCache</scope><name>SaveUBOBlock</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ShaderCache_1a084fdc47f235eb330d346a8ceb05e377" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ShaderCache</scope><name>ShaderCache</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::ShaderCache</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonMovable_1a890edde24abfd71a81881284bf2bd561" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::ShaderCache</scope><name>~NonMovable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

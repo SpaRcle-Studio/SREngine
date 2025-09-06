@@ -328,6 +328,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>AutoFree</name></member>
       <member refid="classSR__PTYPES__NS_1_1Bullet3CollisionShape_1ad3ac24931c4f7064fc21a9b71795156e" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>Bullet3CollisionShape</name></member>
       <member refid="classSR__PTYPES__NS_1_1Bullet3CollisionShape_1a7a18cb9c7f5c96e35e0400596537d56d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>CalculateLocalInertia</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>CloneTo</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a63e9f8d59e7d9f25345409c1dffc0e2a" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>CollisionShape</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>DecrementPointer</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>DynamicCast</name></member>
@@ -429,7 +430,7 @@
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a1b9765ffacd92281c4b72157fdbf6bf5" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>UpdateDebugShape</name></member>
       <member refid="classSR__PTYPES__NS_1_1Bullet3CollisionShape_1a4007d7fa7f31b61bbe8969cc646c3f88" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>UpdateMatrix</name></member>
       <member refid="classSR__PTYPES__NS_1_1Bullet3CollisionShape_1a6ec0d2c0bb132bafbed93f65ba4930ab" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>UpdateShape</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a783dd9e4a58072de8ff19895693bca05" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>Valid</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a5aab0756802a67de9cb45b83b3e73c70" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>VerifyAfterLoad</name></member>
       <member refid="classSR__PTYPES__NS_1_1Bullet3CollisionShape_1a2a5486ebcd4eaf6aa6a27ebfc6002e90" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>~Bullet3CollisionShape</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1ad7531680cdb928bd184c69186f92a966" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>~CollisionShape</name></member>

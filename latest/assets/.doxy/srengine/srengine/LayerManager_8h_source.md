@@ -28,13 +28,13 @@ namespace SR_UTILS_NS {
         SR_NODISCARD uint16_t GetLayerIndex(StringAtom layer) const;
         SR_NODISCARD std::vector<StringAtom> GetLayers() const { return m_layers; }
 
+        SR_NODISCARD SR_UTILS_NS::Path GetSettingsPath() const override;
+
         SR_NODISCARD static StringAtom GetDefaultLayer();
 
         SR_NODISCARD uint64_t GetHashState() const { return m_hashState; }
 
     protected:
-        SR_NODISCARD SR_UTILS_NS::Path InitializeResourcePath() const override;
-
         void ClearSettings() override;
         bool LoadSettings(const SR_XML_NS::Node& node) override;
 

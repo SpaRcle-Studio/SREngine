@@ -40,6 +40,7 @@
 | class | [**Mesh**](classSR__GTYPES__NS_1_1Mesh.md) <br> |
 | class | [**Mesh3D**](classSR__GTYPES__NS_1_1Mesh3D.md) <br> |
 | class | [**ProceduralMesh**](classSR__GTYPES__NS_1_1ProceduralMesh.md) <br> |
+| class | [**RenderTechniqueComponent**](classSR__GTYPES__NS_1_1RenderTechniqueComponent.md) <br> |
 | class | [**RenderTexture**](classSR__GTYPES__NS_1_1RenderTexture.md) <br> |
 | class | [**Shader**](classSR__GTYPES__NS_1_1Shader.md) <br> |
 | class | [**SkinnedMesh**](classSR__GTYPES__NS_1_1SkinnedMesh.md) <br> |
@@ -75,6 +76,11 @@
 
 
 
+## Public Functions
+
+| Type | Name |
+| ---: | :--- |
+|   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (CameraType, uint8\_t, Main, Offscreen, Editor, EditorPrefab) <br> |
 
 
 
@@ -149,6 +155,28 @@ const std::vector<uint32_t> SR_GTYPES_NS::SR_SPRITE_INDICES;
 _NOLINT._ 
 ```C++
 const std::vector<Vertices::UIVertex> SR_GTYPES_NS::SR_SPRITE_VERTICES;
+```
+
+
+
+
+<hr>
+## Public Functions Documentation
+
+
+
+
+### function SR\_ENUM\_NS\_CLASS\_T 
+
+```C++
+SR_GTYPES_NS::SR_ENUM_NS_CLASS_T (
+    CameraType,
+    uint8_t,
+    Main,
+    Offscreen,
+    Editor,
+    EditorPrefab
+) 
 ```
 
 

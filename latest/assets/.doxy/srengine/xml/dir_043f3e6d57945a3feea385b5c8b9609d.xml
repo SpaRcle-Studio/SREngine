@@ -15,7 +15,6 @@
     <innerfile refid="RenderPredicates_8h">RenderPredicates.h</innerfile>
     <innerfile refid="RenderQueue_8h">RenderQueue.h</innerfile>
     <innerfile refid="RenderScene_8h">RenderScene.h</innerfile>
-    <innerfile refid="RenderSettings_8h">RenderSettings.h</innerfile>
     <innerfile refid="RenderStrategy_8h">RenderStrategy.h</innerfile>
     <innerfile refid="RenderTechnique_8h">RenderTechnique.h</innerfile>
     <innerfile refid="ScriptableRenderTechnique_8h">ScriptableRenderTechnique.h</innerfile>

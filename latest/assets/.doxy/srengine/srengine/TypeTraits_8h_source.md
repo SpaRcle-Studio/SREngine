@@ -55,8 +55,9 @@ namespace SR_UTILS_NS {
             return id;
         }
 
-        SR_NODISCARD SR_INLINE  const char* GetName() const noexcept { return name; }
-        SR_NODISCARD SR_INLINE  uint64_t GetHash() const noexcept { return hash; }
+        SR_NODISCARD SR_INLINE const char* GetName() const noexcept { return name; }
+        SR_NODISCARD SR_INLINE uint64_t GetHash() const noexcept { return hash; }
+        SR_NODISCARD SR_INLINE std::string ToString() const noexcept { return std::string(name); }
 
     private:
         static constexpr uint64_t MaxNameLength = 256;
@@ -139,6 +140,26 @@ namespace SR_UTILS_NS {
 
     template<typename T, typename Alloc> struct InnerType<std::vector<T, Alloc>> {
         using type = typename InnerType<T>::type;
+    };
+
+    template<typename T, size_t N> struct InnerType<std::array<T, N>> {
+        using type = typename InnerType<T>::type;
+    };
+
+    template<typename T, typename Alloc> struct InnerType<std::list<T, Alloc>> {
+        using type = typename InnerType<T>::type;
+    };
+
+    template<typename T, typename Compare, typename Alloc> struct InnerType<std::set<T, Compare, Alloc>> {
+        using type = typename InnerType<T>::type;
+    };
+
+    template<typename Key, typename Value, typename Hash, typename KeyEqual, typename Alloc> struct InnerType<std::unordered_map<Key, Value, Hash, KeyEqual, Alloc>> {
+        using type = typename InnerType<Value>::type;
+    };
+
+    template<typename Key, typename Value, typename Compare, typename Alloc> struct InnerType<std::map<Key, Value, Compare, Alloc>> {
+        using type = typename InnerType<Value>::type;
     };
 
     /*template<typename T, size_t N> struct InnerType<std::array<T, N>> {

@@ -85,6 +85,7 @@
 | define  | [**SR\_TRACY\_TEXT\_N**](TracyContext_8h.md#define-sr_tracy_text_n) (name, text) <br> |
 | define  | [**SR\_TRACY\_THREAD\_NAME**](TracyContext_8h.md#define-sr_tracy_thread_name) (name) <br> |
 | define  | [**SR\_TRACY\_ZONE**](TracyContext_8h.md#define-sr_tracy_zone)  `SR\_NOOP`<br> |
+| define  | [**SR\_TRACY\_ZONE\_COLOR**](TracyContext_8h.md#define-sr_tracy_zone_color) (color) <br> |
 | define  | [**SR\_TRACY\_ZONE\_N**](TracyContext_8h.md#define-sr_tracy_zone_n) (name) `SR\_NOOP`<br> |
 | define  | [**SR\_TRACY\_ZONE\_S**](TracyContext_8h.md#define-sr_tracy_zone_s) (name) `SR\_NOOP`<br> |
 | define  | [**SR\_TRACY\_ZONE\_TEXT**](TracyContext_8h.md#define-sr_tracy_zone_text) (value) `SR\_NOOP`<br> |
@@ -192,6 +193,21 @@
 
 ```C++
 #define SR_TRACY_ZONE `SR_NOOP`
+```
+
+
+
+
+<hr>
+
+
+
+### define SR\_TRACY\_ZONE\_COLOR 
+
+```C++
+#define SR_TRACY_ZONE_COLOR (
+    color
+) 
 ```
 
 

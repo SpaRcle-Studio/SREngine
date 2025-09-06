@@ -87,6 +87,7 @@ Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_
 |  SR\_NODISCARD std::pair&lt; ResourcePath, ResourceInfo::HardPtr &gt; | [**GetInfoByIndex**](#function-getinfobyindex) (uint64\_t index) <br> |
 |  SR\_NODISCARD const std::string & | [**GetName**](#function-getname) () const<br> |
 |  SR\_NODISCARD [**IResourceReloader**](classSR__UTILS__NS_1_1IResourceReloader.md) \* | [**GetReloader**](#function-getreloader) () noexcept const<br> |
+|  SR\_NODISCARD const ResourcesSet & | [**GetResources**](#function-getresources) () const<br> |
 |  SR\_NODISCARD bool | [**IsLast**](#function-islast) (const ResourceId & id) <br> |
 |  void | [**Remove**](#function-remove) (const IResource::Ptr & pResource) <br> |
 |   | [**ResourceType**](#function-resourcetype) (std::string name) <br> |
@@ -312,6 +313,19 @@ inline SR_NODISCARD const std::string & SR_UTILS_NS::ResourceType::GetName () co
 
 ```C++
 inline SR_NODISCARD IResourceReloader * SR_UTILS_NS::ResourceType::GetReloader () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetResources 
+
+```C++
+inline SR_NODISCARD const ResourcesSet & SR_UTILS_NS::ResourceType::GetResources () const
 ```
 
 

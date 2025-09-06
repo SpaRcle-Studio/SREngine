@@ -53,7 +53,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  size\_t | [**operator()**](#function-operator()) ([**SR\_GRAPH\_GUI\_NS::Node**](classSR__GRAPH__GUI__NS_1_1Node.md) const & link) const<br> |
+|  size\_t | [**operator()**](#function-operator) ([**SR\_GRAPH\_GUI\_NS::Node**](classSR__GRAPH__GUI__NS_1_1Node.md) const & link) const<br> |
 
 
 

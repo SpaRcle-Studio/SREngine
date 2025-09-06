@@ -339,6 +339,21 @@ SR_GRAPH_NS::Memory::ShaderUBOBlock::~ShaderUBOBlock () override
 
 
 
+### friend ShaderCache 
+
+```C++
+class SR_GRAPH_NS::Memory::ShaderUBOBlock::ShaderCache (
+    SR_GRAPH_NS::ShaderCache
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### friend Shader 
 
 ```C++

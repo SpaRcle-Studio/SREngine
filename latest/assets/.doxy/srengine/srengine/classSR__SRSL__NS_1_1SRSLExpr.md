@@ -104,7 +104,7 @@ Inherits the following classes: [SR\_SRSL\_NS::SRSLLexicalUnit](classSR__SRSL__N
 | Type | Name |
 | ---: | :--- |
 |  std::string | [**GetAsName**](#function-getasname) () <br> |
-|   | [**SRSLExpr**](#function-srslexpr-16) () = default<br> |
+|   | [**SRSLExpr**](#function-srslexpr-16) () <br> |
 |   | [**SRSLExpr**](#function-srslexpr-26) (std::string && token) <br> |
 |   | [**SRSLExpr**](#function-srslexpr-36) (std::string && token, [**SRSLExpr**](classSR__SRSL__NS_1_1SRSLExpr.md) \* pAExpr) <br> |
 |   | [**SRSLExpr**](#function-srslexpr-46) (std::string && token, [**SRSLExpr**](classSR__SRSL__NS_1_1SRSLExpr.md) \* pAExpr, [**SRSLExpr**](classSR__SRSL__NS_1_1SRSLExpr.md) \* pBExpr) <br> |
@@ -120,6 +120,8 @@ See [SR\_SRSL\_NS::SRSLLexicalUnit](classSR__SRSL__NS_1_1SRSLLexicalUnit.md)
 
 | Type | Name |
 | ---: | :--- |
+|  SR\_NODISCARD LexicalUnitType | [**GetLexicalUnitType**](classSR__SRSL__NS_1_1SRSLLexicalUnit.md#function-getlexicalunittype) () const<br> |
+|   | [**SRSLLexicalUnit**](classSR__SRSL__NS_1_1SRSLLexicalUnit.md#function-srsllexicalunit) (LexicalUnitType type) <br> |
 | virtual SR\_NODISCARD std::string | [**ToString**](classSR__SRSL__NS_1_1SRSLLexicalUnit.md#function-tostring) (uint32\_t deep) const<br> |
 
 
@@ -336,7 +338,7 @@ std::string SR_SRSL_NS::SRSLExpr::GetAsName ()
 ### function SRSLExpr [1/6]
 
 ```C++
-SR_SRSL_NS::SRSLExpr::SRSLExpr () = default
+inline SR_SRSL_NS::SRSLExpr::SRSLExpr () 
 ```
 
 

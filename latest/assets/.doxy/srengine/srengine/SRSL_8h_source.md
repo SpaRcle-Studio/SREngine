@@ -20,7 +20,52 @@
 #include <Graphics/Loaders/SRSLParser.h>
 #include <Graphics/SRSL/ShaderType.h>
 
+namespace SR_SRSL_NS {
+    struct ShaderMacrosParams {
+        void InitHash();
+
+        static const ShaderMacrosParams& GetDefault();
+
+        SR_NODISCARD SR_UTILS_NS::SRHashType GetHash() const;
+        SR_NODISCARD std::string GetHashStr() const;
+        SR_NODISCARD bool empty() const { return m_params.empty(); }
+        SR_NODISCARD const std::map<std::string, std::string>& GetParams() const { return m_params; }
+
+        void Clear() {
+            m_params.clear();
+            m_hash = 0;
+            m_initialized = false;
+        }
+
+        bool IsDefined(const std::string_view& key) const {
+            for (const auto& [k, v] : m_params) {
+                if (k == key) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        void SetParam(const std::string& key, const std::string& value) {
+            m_params[key] = value;
+            m_initialized = false;
+        }
+
+        void AddDefine(const std::string& define) {
+            m_params[define];
+            m_initialized = false;
+        }
+
+    private:
+        std::map<std::string, std::string> m_params;
+        SR_UTILS_NS::SRHashType m_hash = 0;
+        bool m_initialized = false;
+
+    };
+}
+
 namespace SR_GRAPH_NS::SRSL {
+    /*
     typedef uint32_t RequireBits;
     typedef uint32_t VertexAttributeBits;
     typedef std::vector<std::string>::const_iterator CodeIter;
@@ -78,7 +123,7 @@ namespace SR_GRAPH_NS::SRSL {
         bool CreateVertex(SRSLUnit& unit, SRSLParseData& parseData, const std::string& code, SR_UTILS_NS::Path&& path);
         std::string MakeVertexCode(const SRSLUnit &unit, const SRSLParseData& parseData);
 
-    };
+    };*/
 }
 
 #endif //SR_ENGINE_SRSL_H

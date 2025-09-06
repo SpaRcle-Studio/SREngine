@@ -18,6 +18,7 @@
 #include <Utils/Debug.h>
 #include <Utils/Types/Thread.h>
 #include <Utils/Types/SharedPtr.h>
+#include <Utils/Common/ToString.h>
 #include <Utils/Common/Singleton.h>
 #include <Utils/Resources/IResource.h>
 #include <Utils/Resources/FileSystemWatcher.h>
@@ -51,6 +52,7 @@ namespace SR_UTILS_NS {
         void Synchronize(bool force);
 
         void ReloadResource(const IResource::Ptr& pResource);
+        void ReloadAll(SR_UTILS_NS::StringAtom typeName);
 
         void Execute(const SR_HTYPES_NS::Function<void()>& fun);
         void InspectResources(const SR_HTYPES_NS::Function<void(ResourcesTypes &)>& callback);
@@ -65,7 +67,11 @@ namespace SR_UTILS_NS {
             return Find(path.ToStringRef(), T::GetClassStaticName()).template DynamicCast<T>();
         }
 
-        template<typename T> SR_HTYPES_NS::SharedPtr<T> GetOrLoadResource(const Path& rawPath);
+        template<typename T> SR_HTYPES_NS::SharedPtr<T> GetOrLoadResource(
+            const Path& rawPath,
+            const SR_HTYPES_NS::Function<void(T&)>& loadCallback = SR_HTYPES_NS::Function<void(T&)>(),
+            const SR_HTYPES_NS::Function<std::string()>& getPrefix = SR_HTYPES_NS::Function<std::string()>()
+        );
 
         template<typename ResourceT, typename ReloaderT, typename ...Args> bool RegisterReloader(Args&&... args) {
             if constexpr (!std::is_base_of_v<IResource, ResourceT>) {
@@ -110,7 +116,7 @@ namespace SR_UTILS_NS {
 
         IResourceReloader* m_defaultReloader = nullptr;
 
-        std::queue<ResourceInfo::WeakPtr> m_dirtyResources;
+        std::vector<ResourceInfo::WeakPtr> m_dirtyResources;
 
         std::unordered_map<Hash, SR_HTYPES_NS::Thread::Ptr> m_asyncTasks;
 
@@ -128,8 +134,11 @@ namespace SR_UTILS_NS {
 
     };
 
-    template<typename T>
-    SR_HTYPES_NS::SharedPtr<T> ResourceManager::GetOrLoadResource(const Path& rawPath) {
+    template<typename T> SR_HTYPES_NS::SharedPtr<T> ResourceManager::GetOrLoadResource(
+        const Path& rawPath,
+        const SR_HTYPES_NS::Function<void(T&)>& loadCallback,
+        const SR_HTYPES_NS::Function<std::string()>& getPrefix
+    ) {
         SR_TRACY_ZONE;
         SR_LOCK_GUARD;
 
@@ -138,11 +147,19 @@ namespace SR_UTILS_NS {
             return nullptr;
         }
 
-        Path&& path = Path(rawPath).RemoveSubPath(ResourceManager::Instance().GetResPath());
+        Path path = Path(rawPath).RemoveSubPath(ResourceManager::Instance().GetResPath());
+        Path id;
 
-        SR_HTYPES_NS::SharedPtr<T> pResource = Find<T>(path);
+        if (auto&& prefix = getPrefix ? getPrefix() : std::string(); !prefix.empty()) {
+            id = prefix + RESOURCE_ID_SEPARATOR.ToStringRef() + path.ToStringRef();
+        }
+        else {
+            id = path;
+        }
 
-        if (pResource) {
+        SR_HTYPES_NS::SharedPtr<T> pResource = Find<T>(id);
+
+        if (pResource && !pResource->IsAllowedMultiInstance()) {
             return pResource;
         }
 
@@ -152,7 +169,10 @@ namespace SR_UTILS_NS {
         }
 
         pResource = T::template MakeShared<T>();
-        pResource->SetId(path.ToStringRef(), false );
+        if (loadCallback) {
+            loadCallback(*pResource);
+        }
+        pResource->SetId(id.ToStringRef(), path, false );
 
         if (!pResource->Reload()) {
             SR_ERROR("ResourceManager::GetOrLoadResource() : failed to load {}! \n\tPath: {}",

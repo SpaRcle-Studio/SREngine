@@ -15,8 +15,6 @@
 #ifndef SR_ENGINE_MESH_UTILS_H
 #define SR_ENGINE_MESH_UTILS_H
 
-#include <Graphics/macros.h>
-
 #include <Graphics/Utils/MeshTypes.h>
 
 namespace SR_GTYPES_NS {
@@ -42,8 +40,7 @@ namespace SR_GRAPH_NS {
     struct MeshRegistrationInfo {
         uint32_t poolId = static_cast<uint32_t>(SR_ID_INVALID);
         SR_GTYPES_NS::Mesh* pMesh = nullptr;
-        const BaseMaterial* pMaterial = nullptr;
-        SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Shader> pShader;
+        BaseMaterial* pMaterial = nullptr;
         SR_UTILS_NS::StringAtom layer;
         std::optional<int32_t> VBO;
         std::optional<int64_t> priority;

@@ -29,32 +29,52 @@ namespace SR_UTILS_NS::StoreUtils {
         enum class ValueType {
             AnyType,
             Float,
-            Bool
+            Int,
+            Bool,
+            String
         };
     private:
         union Value {
             float_t f;
             bool b;
+            int64_t i;
+            std::string* s;
         };
 
         template<typename T> static T& VisitValue(Value& value) {
             using Type = SR_UTILS_NS::RemoveQualifiersT<T>;
+
             if constexpr (std::is_same_v<Type, float_t>) {
                 return value.f;
+            }
+            else if constexpr (std::is_same_v<Type, int64_t>) {
+                return value.i;
             }
             else if constexpr (std::is_same_v<Type, bool>) {
                 return value.b;
             }
+            else if constexpr (std::is_same_v<Type, std::string>) {
+                if (!value.s) {
+                    value.s = new std::string();
+                }
+                return *value.s;
+            }
             else {
                 static_assert(SR_UTILS_NS::AlwaysFalseV<T>, "Unsupported type!");
             }
-            static T def{};
-            return def;
         }
 
         struct ValueHolder {
             Value value;
             ValueType type;
+
+            ValueHolder();
+            ValueHolder(Value val, ValueType type);
+            ValueHolder(const ValueHolder& other);
+            ValueHolder(ValueHolder&& other) noexcept;
+            ValueHolder& operator=(const ValueHolder& other);
+            ValueHolder& operator=(ValueHolder&& other) noexcept;
+            ~ValueHolder();
         };
     public:
         void Clear() { m_storage.clear(); }
@@ -105,6 +125,7 @@ namespace SR_UTILS_NS::StoreUtils {
             return Storage::Instance().Has(storeType, type, key);
         }
 
+
         SR_NODISCARD static bool HasFloat(SR_UTILS_NS::StringAtom key) { return Has(key, Storage::ValueType::Float); }
         SR_NODISCARD static float_t GetFloat(SR_UTILS_NS::StringAtom key, const std::optional<float_t>& def = std::nullopt) {
             return Storage::Instance().Get<float_t>(storeType, Storage::ValueType::Float, key, def);
@@ -113,12 +134,31 @@ namespace SR_UTILS_NS::StoreUtils {
             Storage::Instance().Set(storeType, Storage::ValueType::Float, key, value);
         }
 
+
         SR_NODISCARD static bool HasBool(SR_UTILS_NS::StringAtom key) { return Has(key, Storage::ValueType::Bool); }
         SR_NODISCARD static bool GetBool(SR_UTILS_NS::StringAtom key, const std::optional<bool>& def = std::nullopt) {
             return Storage::Instance().Get<bool>(storeType, Storage::ValueType::Bool, key, def);
         }
         static void SetBool(SR_UTILS_NS::StringAtom key, bool value) {
             Storage::Instance().Set(storeType, Storage::ValueType::Bool, key, value);
+        }
+
+
+        SR_NODISCARD static bool HasInt(SR_UTILS_NS::StringAtom key) { return Has(key, Storage::ValueType::Int); }
+        SR_NODISCARD static int64_t GetInt(SR_UTILS_NS::StringAtom key, const std::optional<int64_t>& def = std::nullopt) {
+            return Storage::Instance().Get<int64_t>(storeType, Storage::ValueType::Int, key, def);
+        }
+        static void SetInt(SR_UTILS_NS::StringAtom key, int64_t value) {
+            Storage::Instance().Set(storeType, Storage::ValueType::Int, key, value);
+        }
+
+
+        SR_NODISCARD static bool HasString(SR_UTILS_NS::StringAtom key) { return Has(key, Storage::ValueType::String); }
+        SR_NODISCARD static std::string GetString(SR_UTILS_NS::StringAtom key, const std::optional<std::string>& def = std::nullopt) {
+            return Storage::Instance().Get<std::string>(storeType, Storage::ValueType::String, key, def);
+        }
+        static void SetString(SR_UTILS_NS::StringAtom key, const std::string& value) {
+            Storage::Instance().Set(storeType, Storage::ValueType::String, key, value);
         }
 
     };

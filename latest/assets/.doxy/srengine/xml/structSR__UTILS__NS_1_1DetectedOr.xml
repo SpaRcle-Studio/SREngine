@@ -44,7 +44,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="216" column="1" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="217" bodyend="217"/>
+    <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="237" column="1" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="238" bodyend="238"/>
     <listofallmembers>
       <member refid="structSR__UTILS__NS_1_1Details_1_1Detector_1a987cb32621ec11aa223939cbd1746beb" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DetectedOr</scope><name>type</name></member>
       <member refid="structSR__UTILS__NS_1_1Details_1_1Detector_1adbe85a03d9cdbcc2d440a2515d0e6688" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DetectedOr</scope><name>value_t</name></member>

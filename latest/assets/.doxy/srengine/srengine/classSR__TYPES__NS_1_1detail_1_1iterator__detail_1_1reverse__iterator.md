@@ -100,12 +100,12 @@ See [SR\_TYPES\_NS::detail::iterator\_detail::my\_iterator](structSR__TYPES__NS_
 |  constexpr auto | [**operator++**](#function-operator_2) () <br> |
 |  constexpr auto | [**operator++**](#function-operator_3) (int) <br> |
 |  constexpr auto | [**operator+=**](#function-operator_4) (typename [**reverse\_iterator**](classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1reverse__iterator.md)&lt; iterator\_type &gt;::difference\_type n) <br> |
-|  constexpr auto | [**operator-**](#function-operator_5) (typename [**reverse\_iterator**](classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1reverse__iterator.md)&lt; iterator\_type &gt;::difference\_type n) const<br> |
-|  constexpr auto | [**operator--**](#function-operator_6) () <br> |
-|  constexpr auto | [**operator--**](#function-operator_7) (int) <br> |
-|  constexpr auto | [**operator-=**](#function-operator_8) (typename [**reverse\_iterator**](classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1reverse__iterator.md)&lt; iterator\_type &gt;::difference\_type n) <br> |
-|  constexpr auto | [**operator-&gt;**](#function-operator_9) () const<br> |
-|  constexpr auto | [**operator[]**](#function-operator_10) (typename [**reverse\_iterator**](classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1reverse__iterator.md)&lt; iterator\_type &gt;::difference\_type n) const<br> |
+|  constexpr auto | [**operator-**](#function-operator-) (typename [**reverse\_iterator**](classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1reverse__iterator.md)&lt; iterator\_type &gt;::difference\_type n) const<br> |
+|  constexpr auto | [**operator--**](#function-operator-) () <br> |
+|  constexpr auto | [**operator--**](#function-operator-_1) (int) <br> |
+|  constexpr auto | [**operator-=**](#function-operator-_1) (typename [**reverse\_iterator**](classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1reverse__iterator.md)&lt; iterator\_type &gt;::difference\_type n) <br> |
+|  constexpr auto | [**operator-&gt;**](#function-operator-_2) () const<br> |
+|  constexpr auto | [**operator[]**](#function-operator_5) (typename [**reverse\_iterator**](classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1reverse__iterator.md)&lt; iterator\_type &gt;::difference\_type n) const<br> |
 |  constexpr | [**reverse\_iterator**](#function-reverse_iterator-13) () = default<br> |
 |  constexpr | [**reverse\_iterator**](#function-reverse_iterator-23) (iterator\_type x) <br> |
 |  constexpr | [**reverse\_iterator**](#function-reverse_iterator-33) (const [**reverse\_iterator**](classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1reverse__iterator.md)&lt; other &gt; & u) <br> |

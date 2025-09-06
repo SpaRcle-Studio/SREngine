@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="293" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="293" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="295" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="295" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__SRSL__NS_1_1SRSLResult_1af1f9387c1d1a6037774c6a576e2104f5" prot="public" static="no" mutable="no">
         <type>std::list&lt; <ref refid="structSR__SRSL__NS_1_1SRSLMessage" kindref="compound">SRSLMessage</ref> &gt;</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="294" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="294" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="296" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="296" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__SRSL__NS_1_1SRSLResult_1a22d6f399e78b535e963acd5981b5a336" prot="public" static="no" mutable="no">
         <type>std::list&lt; <ref refid="structSR__SRSL__NS_1_1SRSLMessage" kindref="compound">SRSLMessage</ref> &gt;</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="295" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="295" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="297" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="297" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="273" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="273" bodyend="273"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="273" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="273" bodyend="275"/>
       </memberdef>
       <memberdef kind="function" id="structSR__SRSL__NS_1_1SRSLResult_1ad562b23967669a1d7a55245110be2481" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -133,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="275" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="275" bodyend="275"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="277" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="277" bodyend="277"/>
       </memberdef>
       <memberdef kind="function" id="structSR__SRSL__NS_1_1SRSLResult_1ab2ff371d065524c89d14e10c7998d124" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -147,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="276" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="276" bodyend="276"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="278" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="278" bodyend="278"/>
       </memberdef>
       <memberdef kind="function" id="structSR__SRSL__NS_1_1SRSLResult_1ac13ab6683556f94b79df48a7c1e6011f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -161,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="277" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="277" bodyend="277"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="279" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="279" bodyend="279"/>
       </memberdef>
       <memberdef kind="function" id="structSR__SRSL__NS_1_1SRSLResult_1a35467f2ecbb32de727680666dc02eb1b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -184,14 +184,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="279" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="279" bodyend="291"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="281" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="281" bodyend="293"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="262" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="262" bodyend="296"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="262" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="262" bodyend="298"/>
     <listofallmembers>
       <member refid="structSR__SRSL__NS_1_1SRSLResult_1ada484d74464cbb4d0fd7e011059abfac" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLResult</scope><name>AddError</name></member>
       <member refid="structSR__SRSL__NS_1_1SRSLResult_1a22d6f399e78b535e963acd5981b5a336" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLResult</scope><name>errors</name></member>

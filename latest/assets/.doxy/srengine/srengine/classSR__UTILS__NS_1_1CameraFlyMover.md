@@ -85,7 +85,6 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 | ---: | :--- |
 | virtual SR\_NODISCARD bool | [**ExecuteInEditMode**](#function-executeineditmode) () override const<br> |
 | virtual void | [**FixedUpdate**](#function-fixedupdate) () override<br> |
-| virtual void | [**OnDestroy**](#function-ondestroy) () override<br>_Вызывается когда компонент убирается с объекта, либо объект уничтожается. Может произойти отложенно._  |
 |  void | [**SetActive**](#function-setactive) (const bool active) <br> |
 |  void | [**SetExecuteInEditMode**](#function-setexecuteineditmode) (bool enabled) <br> |
 |  void | [**SetRightMouseButtonToRotate**](#function-setrightmousebuttontorotate) (const bool enabled) <br> |
@@ -256,22 +255,6 @@ inline virtual void SR_UTILS_NS::CameraFlyMover::FixedUpdate () override
 
 
 Implements [*SR\_UTILS\_NS::Component::FixedUpdate*](classSR__UTILS__NS_1_1Component.md#function-fixedupdate)
-
-
-<hr>
-
-
-
-### function OnDestroy 
-
-_Вызывается когда компонент убирается с объекта, либо объект уничтожается. Может произойти отложенно._ 
-```C++
-inline virtual void SR_UTILS_NS::CameraFlyMover::OnDestroy () override
-```
-
-
-
-Implements [*SR\_UTILS\_NS::Component::OnDestroy*](classSR__UTILS__NS_1_1Component.md#function-ondestroy)
 
 
 <hr>

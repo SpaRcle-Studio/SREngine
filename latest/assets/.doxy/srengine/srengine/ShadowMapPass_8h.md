@@ -31,11 +31,6 @@
 | namespace | [**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md) <br> |
 
 
-## Classes
-
-| Type | Name |
-| ---: | :--- |
-| class | [**ShadowMapPass**](classSR__GRAPH__NS_1_1ShadowMapPass.md) <br> |
 
 
 

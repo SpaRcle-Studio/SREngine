@@ -55,6 +55,7 @@ namespace SR_GRAPH_NS::GUI {
         void ShowAll();
 
         void SetRenderScene(const RenderScenePtr& renderScene);
+        void SetRenderContext(ContextPtr pContext);
 
     public:
         SR_NODISCARD Widgets& GetWidgets() { return m_widgets; }
@@ -88,6 +89,7 @@ namespace SR_GRAPH_NS::GUI {
 
     private:
         RenderScenePtr m_renderScene;
+        ContextPtr m_renderContext = nullptr;
         Widgets m_widgets;
         bool m_ignoreNonFocused;
 

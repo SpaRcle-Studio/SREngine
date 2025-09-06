@@ -236,6 +236,7 @@ See [SR\_GRAPH\_NS::GUI::WidgetManager](classSR__GRAPH__NS_1_1GUI_1_1WidgetManag
 | virtual void | [**OnMouseUp**](classSR__GRAPH__NS_1_1GUI_1_1WidgetManager.md#function-onmouseup) (const [**SR\_UTILS\_NS::MouseInputData**](classSR__UTILS__NS_1_1MouseInputData.md) \* data) override<br> |
 |  bool | [**Register**](classSR__GRAPH__NS_1_1GUI_1_1WidgetManager.md#function-register) (Widget \* widget) <br> |
 |  bool | [**Remove**](classSR__GRAPH__NS_1_1GUI_1_1WidgetManager.md#function-remove) (Widget \* widget) <br> |
+|  void | [**SetRenderContext**](classSR__GRAPH__NS_1_1GUI_1_1WidgetManager.md#function-setrendercontext) ([**ContextPtr**](classSR__GRAPH__NS_1_1RenderContext.md) pContext) <br> |
 |  void | [**SetRenderScene**](classSR__GRAPH__NS_1_1GUI_1_1WidgetManager.md#function-setrenderscene) (const RenderScenePtr & renderScene) <br> |
 |  void | [**SetScene**](classSR__GRAPH__NS_1_1GUI_1_1WidgetManager.md#function-setscene) (const ScenePtr & scene) <br> |
 |  void | [**ShowAll**](classSR__GRAPH__NS_1_1GUI_1_1WidgetManager.md#function-showall) () <br> |

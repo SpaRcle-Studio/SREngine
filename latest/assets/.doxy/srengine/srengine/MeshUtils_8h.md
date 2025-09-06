@@ -10,7 +10,6 @@
 
 
 
-* `#include <Graphics/macros.h>`
 * `#include <Graphics/Utils/MeshTypes.h>`
 
 

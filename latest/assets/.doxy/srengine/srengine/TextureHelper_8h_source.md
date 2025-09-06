@@ -176,7 +176,7 @@ namespace SR_GRAPH_NS {
 
     uint32_t GetPixelSize(ImageFormat format);
 
-    uint8_t* Compress(uint32_t w, uint32_t h, uint8_t* pixels, SR_GRAPH_NS::TextureCompression method);
+    uint8_t* Compress(uint32_t w, uint32_t h, const uint8_t* pixels, SR_GRAPH_NS::TextureCompression method);
 }
 
 #endif //SR_ENGINE_TEXTUREHELPER_H

@@ -39,6 +39,8 @@
 | Type | Name |
 | ---: | :--- |
 | class | [**Value**](classSR__UTILS__NS_1_1Reflection_1_1Value.md) <br> |
+| class | [**ValueAssociativeContainer**](classSR__UTILS__NS_1_1Reflection_1_1ValueAssociativeContainer.md) <br> |
+| class | [**ValueAssociativeContainerIterator**](classSR__UTILS__NS_1_1Reflection_1_1ValueAssociativeContainerIterator.md) <br> |
 | class | [**ValueSequenceContainer**](classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer.md) <br> |
 | class | [**ValueSequenceContainerIterator**](classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainerIterator.md) <br> |
 

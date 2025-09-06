@@ -43,6 +43,7 @@
 * **Equal** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **End** ([**SR\_GRAPH\_UI\_NS**](namespaceSR__GRAPH__UI__NS.md))
 * **EVENT\_ON\_ENGINE\_UPDATE\_ID** ([**SR\_UTILS\_NS::Events**](namespaceSR__UTILS__NS_1_1Events.md))
+* **EVENT\_ON\_RENDER\_SETTINGS\_CHANGED\_ID** ([**SR\_UTILS\_NS::Events**](namespaceSR__UTILS__NS_1_1Events.md))
 * **EVENT\_ON\_SCRIPT\_MODULE\_RELOADED\_ID** ([**SR\_UTILS\_NS::Events**](namespaceSR__UTILS__NS_1_1Events.md))
 
 
@@ -164,6 +165,9 @@
 * **SHADER\_LINE\_COLOR** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **SHADER\_LINE\_END\_POINT** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **SHADER\_LINE\_START\_POINT** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
+* **SHADER\_MACRO\_SR\_DEFINE\_CASCADED\_SHADOW\_MAP\_PASS** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
+* **SHADER\_MACRO\_SR\_DEFINE\_COLOR\_PASS** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
+* **SHADER\_MACRO\_SR\_DEFINE\_USE\_CASCADED\_SHADOW\_MAP** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **SHADER\_MODEL\_MATRIX** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **SHADER\_MODEL\_NO\_SCALE\_MATRIX** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **SHADER\_NDC\_RECT** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
@@ -173,6 +177,7 @@
 * **SHADER\_PC\_SHADOW\_CASCADE\_INDEX** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **SHADER\_PROJECTION\_MATRIX** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **SHADER\_PROJECTION\_NO\_FOV\_MATRIX** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
+* **SHADER\_RENDER\_PASS\_TYPE** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **SHADER\_RESOLUTION** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **SHADER\_RGBA\_VALUE** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **SHADER\_SKELETON\_MATRICES\_128** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))

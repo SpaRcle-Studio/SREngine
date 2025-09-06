@@ -119,6 +119,8 @@
       <node id="3">
         <label>SR_GRAPH_NS::FrameBufferFeatures</label>
         <link refid="structSR__GRAPH__NS_1_1FrameBufferFeatures"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
       </node>
       <node id="1">
         <label>SR_GRAPH_NS::SRFrameBufferCreateInfo</label>
@@ -128,6 +130,16 @@
         </childnode>
         <childnode refid="3" relation="usage">
           <edgelabel>features</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="5" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>

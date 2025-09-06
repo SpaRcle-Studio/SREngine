@@ -11,6 +11,7 @@
     <derivedcompoundref refid="classSR__GRAPH__UI__NS_1_1Canvas" prot="public" virt="non-virtual">SR_GRAPH_UI_NS::Canvas</derivedcompoundref>
     <derivedcompoundref refid="classSR__GTYPES__NS_1_1Camera" prot="public" virt="non-virtual">SR_GTYPES_NS::Camera</derivedcompoundref>
     <derivedcompoundref refid="classSR__GTYPES__NS_1_1IRenderComponent" prot="public" virt="non-virtual">SR_GTYPES_NS::IRenderComponent</derivedcompoundref>
+    <derivedcompoundref refid="classSR__GTYPES__NS_1_1RenderTechniqueComponent" prot="public" virt="non-virtual">SR_GTYPES_NS::RenderTechniqueComponent</derivedcompoundref>
     <derivedcompoundref refid="classSR__PTYPES__NS_1_1Rigidbody" prot="public" virt="non-virtual">SR_PTYPES_NS::Rigidbody</derivedcompoundref>
     <derivedcompoundref refid="classSR__PTYPES__NS_1_1Vehicle" prot="public" virt="non-virtual">SR_PTYPES_NS::Vehicle</derivedcompoundref>
     <derivedcompoundref refid="classSR__SCRIPTING__NS_1_1Behaviour" prot="public" virt="non-virtual">SR_SCRIPTING_NS::Behaviour</derivedcompoundref>
@@ -439,10 +440,8 @@
         <reimplementedby refid="classSR__PTYPES__NS_1_1Rigidbody_1a37c006bf1edba7e91ba456edc91fc826">OnDestroy</reimplementedby>
         <reimplementedby refid="classSR__PTYPES__NS_1_1Vehicle_1adaaee91ce5b761ea211a1e1c7892113a">OnDestroy</reimplementedby>
         <reimplementedby refid="classSR__SCRIPTING__NS_1_1Behaviour_1a02b2a8f80b4e1e46b508aaf699fede9e">OnDestroy</reimplementedby>
-        <reimplementedby refid="classSR__UTILS__NS_1_1CameraFlyMover_1a9ace3e211c352ab48664e1010f522c3c">OnDestroy</reimplementedby>
         <reimplementedby refid="classSR__UTILS__NS_1_1DebugLogComponent_1abe945641e4b240ea939f9165cb9c2cc7">OnDestroy</reimplementedby>
         <reimplementedby refid="classSR__UTILS__NS_1_1LookAtComponent_1aefa500f2e618b1c0ed7fbdb11978abf6">OnDestroy</reimplementedby>
-        <reimplementedby refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent_1ac61e1d92bf225f7b153f21d155852959">OnDestroy</reimplementedby>
         <reimplementedby refid="classSR__UTILS__NS_1_1UI_1_1UIModifierComponent_1a6c173d591284a7595318939dd6d091ed">OnDestroy</reimplementedby>
         <briefdescription>
 <para>Вызывается когда компонент убирается с объекта, либо объект уничтожается. Может произойти отложенно. </para>
@@ -1303,16 +1302,16 @@
         <childnode refid="11" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="43">
+      <node id="44">
         <label>SR_GRAPH_UI_NS::UICanvasComponent</label>
         <link refid="classSR__GRAPH__UI__NS_1_1UICanvasComponent"/>
-        <childnode refid="42" relation="public-inheritance">
+        <childnode refid="43" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="44">
+      <node id="45">
         <label>SR_GRAPH_UI_NS::UISizeComponent</label>
         <link refid="classSR__GRAPH__UI__NS_1_1UISizeComponent"/>
-        <childnode refid="42" relation="public-inheritance">
+        <childnode refid="43" relation="public-inheritance">
         </childnode>
       </node>
       <node id="9">
@@ -1363,6 +1362,12 @@
         <childnode refid="24" relation="public-inheritance">
         </childnode>
       </node>
+      <node id="31">
+        <label>SR_GTYPES_NS::RenderTechniqueComponent</label>
+        <link refid="classSR__GTYPES__NS_1_1RenderTechniqueComponent"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
       <node id="28">
         <label>SR_GTYPES_NS::SkinnedMesh</label>
         <link refid="classSR__GTYPES__NS_1_1SkinnedMesh"/>
@@ -1381,49 +1386,49 @@
         <childnode refid="22" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="34">
+      <node id="35">
         <label>SR_PTYPES_NS::Bullet3Rigidbody3D</label>
         <link refid="classSR__PTYPES__NS_1_1Bullet3Rigidbody3D"/>
-        <childnode refid="33" relation="public-inheritance">
+        <childnode refid="34" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="31">
+      <node id="32">
         <label>SR_PTYPES_NS::Rigidbody</label>
         <link refid="classSR__PTYPES__NS_1_1Rigidbody"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="32">
+      <node id="33">
         <label>SR_PTYPES_NS::Rigidbody2D</label>
         <link refid="classSR__PTYPES__NS_1_1Rigidbody2D"/>
-        <childnode refid="31" relation="public-inheritance">
+        <childnode refid="32" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="33">
+      <node id="34">
         <label>SR_PTYPES_NS::Rigidbody3D</label>
         <link refid="classSR__PTYPES__NS_1_1Rigidbody3D"/>
-        <childnode refid="31" relation="public-inheritance">
+        <childnode refid="32" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="35">
+      <node id="36">
         <label>SR_PTYPES_NS::Vehicle</label>
         <link refid="classSR__PTYPES__NS_1_1Vehicle"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="36">
+      <node id="37">
         <label>SR_PTYPES_NS::Vehicle4W3D</label>
         <link refid="classSR__PTYPES__NS_1_1Vehicle4W3D"/>
-        <childnode refid="35" relation="public-inheritance">
+        <childnode refid="36" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="37">
+      <node id="38">
         <label>SR_SCRIPTING_NS::Behaviour</label>
         <link refid="classSR__SCRIPTING__NS_1_1Behaviour"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="38">
+      <node id="39">
         <label>SR_UTILS_NS::CameraFlyMover</label>
         <link refid="classSR__UTILS__NS_1_1CameraFlyMover"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1435,25 +1440,25 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="39">
+      <node id="40">
         <label>SR_UTILS_NS::DebugLogComponent</label>
         <link refid="classSR__UTILS__NS_1_1DebugLogComponent"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="40">
+      <node id="41">
         <label>SR_UTILS_NS::LookAtComponent</label>
         <link refid="classSR__UTILS__NS_1_1LookAtComponent"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="41">
+      <node id="42">
         <label>SR_UTILS_NS::Tests::ReflectionTestComponent</label>
         <link refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="42">
+      <node id="43">
         <label>SR_UTILS_NS::UI::UIModifierComponent</label>
         <link refid="classSR__UTILS__NS_1_1UI_1_1UIModifierComponent"/>
         <childnode refid="1" relation="public-inheritance">

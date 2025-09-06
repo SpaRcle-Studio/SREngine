@@ -53,7 +53,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  size\_t | [**operator()**](#function-operator()) (SR\_GRAPH\_NS::ShaderProperties const & value) const<br> |
+|  size\_t | [**operator()**](#function-operator) (SR\_GRAPH\_NS::ShaderProperties const & value) const<br> |
 
 
 

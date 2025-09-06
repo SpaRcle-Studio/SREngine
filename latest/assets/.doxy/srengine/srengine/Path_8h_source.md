@@ -73,14 +73,22 @@ namespace SR_UTILS_NS {
         SR_NODISCARD uint64_t GetFolderHash(uint64_t deep = SR_UINT64_MAX) const;
         SR_NODISCARD const char* CStr() const;
         SR_NODISCARD const char* c_str() const;
+        SR_NODISCARD uint64_t size() const;
 
         SR_NODISCARD Path GetPrevious() const;
         SR_NODISCARD Path GetFolder() const;
+
+        SR_NODISCARD Path Concat(const SR_UTILS_NS::StringAtom path) const;
+        SR_NODISCARD Path Concat(const std::string& path) const;
+        SR_NODISCARD Path Concat(const std::string_view path) const;
+        SR_NODISCARD Path Concat(const char* path) const;
         SR_NODISCARD Path Concat(const Path& path) const;
+
         SR_NODISCARD Path ConcatExt(const std::string& ext) const;
         SR_NODISCARD Path ConcatExt(const std::string_view& ext) const;
         SR_NODISCARD Path ConcatExt(const char* ext) const;
         SR_NODISCARD Path ConcatExt(SR_UTILS_NS::StringAtom ext) const;
+
         SR_NODISCARD Path RemoveSubPath(const Path& subPath) const;
 
         SR_NODISCARD bool empty() const;
@@ -120,6 +128,8 @@ namespace SR_UTILS_NS {
         mutable bool m_isNormalized = false;
 
     };
+
+    template <> struct SupportsNullptrComparison<SR_UTILS_NS::Path> : std::false_type {};
 }
 
 namespace SR_UTILS_NS {

@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="31" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="31" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="32" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__SRSL__NS_1_1SRSLUniformBlock_1_1Field_1aca24f9238d05c3ec7a4f56795401f174" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="32" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="32" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="33" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__SRSL__NS_1_1SRSLUniformBlock_1_1Field_1ab6355a7a2368865a7d22c7093af24a88" prot="public" static="no" mutable="no">
         <type>uint64_t</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="33" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="34" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__SRSL__NS_1_1SRSLUniformBlock_1_1Field_1a3af16d67b5b12e3185395b352739feaf" prot="public" static="no" mutable="no">
         <type>uint64_t</type>
@@ -59,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="34" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="34" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="35" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__SRSL__NS_1_1SRSLUniformBlock_1_1Field_1ad6221275df29f81f978dab07903cef24" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="35" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="35" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="36" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__SRSL__NS_1_1SRSLUniformBlock_1_1Field_1a5174643f06f8a1c53916d532e924dc57" prot="public" static="no" mutable="no">
         <type>std::optional&lt; ShaderPropertyVariant &gt;</type>
@@ -88,7 +88,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="36" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="36" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="37" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="37" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -109,7 +109,7 @@
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="30" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="30" bodyend="37"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" line="31" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/Shader.h" bodystart="31" bodyend="38"/>
     <listofallmembers>
       <member refid="structSR__SRSL__NS_1_1SRSLUniformBlock_1_1Field_1a3af16d67b5b12e3185395b352739feaf" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLUniformBlock::Field</scope><name>alignedSize</name></member>
       <member refid="structSR__SRSL__NS_1_1SRSLUniformBlock_1_1Field_1a5174643f06f8a1c53916d532e924dc57" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLUniformBlock::Field</scope><name>defaultValue</name></member>

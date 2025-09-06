@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structSR__GRAPH__NS_1_1DebugPassShaderInfo_1_1MemInfo" kind="struct" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::DebugPassShaderInfo::MemInfo</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1DebugPassShaderInfo_1_1MemInfo_1a32ee0e8384f78bd5183a0e64f54eb535" prot="public" static="no" mutable="no">
+        <type>Memory::UBOManager::VirtualUBO</type>
+        <definition>Memory::UBOManager::VirtualUBO SR_GRAPH_NS::DebugPassShaderInfo::MemInfo::virtualUBO</definition>
+        <argsstring></argsstring>
+        <name>virtualUBO</name>
+        <qualifiedname>SR_GRAPH_NS::DebugPassShaderInfo::MemInfo::virtualUBO</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="22" column="44" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1DebugPassShaderInfo_1_1MemInfo_1ab8eb61db8f07054056add98bf5f0d5aa" prot="public" static="no" mutable="no">
+        <type>DescriptorManager::VirtualDescriptorSet</type>
+        <definition>DescriptorManager::VirtualDescriptorSet SR_GRAPH_NS::DebugPassShaderInfo::MemInfo::virtualDescriptor</definition>
+        <argsstring></argsstring>
+        <name>virtualDescriptor</name>
+        <qualifiedname>SR_GRAPH_NS::DebugPassShaderInfo::MemInfo::virtualDescriptor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="23" column="53" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1DebugPassShaderInfo_1_1MemInfo_1a736f0d97b03bb971d2d82c0d7a0ecc3e" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::DebugPassShaderInfo::MemInfo::isDirty</definition>
+        <argsstring></argsstring>
+        <name>isDirty</name>
+        <qualifiedname>SR_GRAPH_NS::DebugPassShaderInfo::MemInfo::isDirty</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="24" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="21" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="21" bodyend="25"/>
+    <listofallmembers>
+      <member refid="structSR__GRAPH__NS_1_1DebugPassShaderInfo_1_1MemInfo_1a736f0d97b03bb971d2d82c0d7a0ecc3e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo::MemInfo</scope><name>isDirty</name></member>
+      <member refid="structSR__GRAPH__NS_1_1DebugPassShaderInfo_1_1MemInfo_1ab8eb61db8f07054056add98bf5f0d5aa" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo::MemInfo</scope><name>virtualDescriptor</name></member>
+      <member refid="structSR__GRAPH__NS_1_1DebugPassShaderInfo_1_1MemInfo_1a32ee0e8384f78bd5183a0e64f54eb535" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo::MemInfo</scope><name>virtualUBO</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

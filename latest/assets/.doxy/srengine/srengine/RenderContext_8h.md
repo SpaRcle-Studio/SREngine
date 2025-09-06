@@ -18,6 +18,7 @@
 * `#include <Graphics/Memory/IGraphicsResource.h>`
 * `#include <Graphics/Render/IRenderTechnique.h>`
 * `#include <Graphics/Pipeline/PipelineType.h>`
+* `#include <Graphics/Settings/RenderSettings.h>`
 
 
 

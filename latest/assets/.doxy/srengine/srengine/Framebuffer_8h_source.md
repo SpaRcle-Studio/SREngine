@@ -48,19 +48,19 @@ namespace SR_GTYPES_NS {
 
     public:
         static Ptr Create(uint32_t images, const SR_MATH_NS::IVector2& size);
-        static Ptr Create(const std::list<ImageFormat>& colors, ImageFormat depth);
-        static Ptr Create(const std::list<ImageFormat>& colors, ImageFormat depth, const SR_MATH_NS::IVector2& size);
-        static Ptr Create(const std::list<ImageFormat>& colors, ImageFormat depth, const SR_MATH_NS::IVector2& size, uint8_t samples);
-        static Ptr Create(const std::list<ImageFormat>& colors, ImageFormat depth, const SR_MATH_NS::IVector2& size, uint8_t samples, uint32_t layersCount);
-        static Ptr Create(const std::list<ImageFormat>& colors, ImageFormat depth, const SR_MATH_NS::IVector2& size, uint8_t samples, uint32_t layersCount, ImageAspect depthAspect);
+        static Ptr Create(const std::vector<ImageFormat>& colors, ImageFormat depth);
+        static Ptr Create(const std::vector<ImageFormat>& colors, ImageFormat depth, const SR_MATH_NS::IVector2& size);
+        static Ptr Create(const std::vector<ImageFormat>& colors, ImageFormat depth, const SR_MATH_NS::IVector2& size, uint8_t samples);
+        static Ptr Create(const std::vector<ImageFormat>& colors, ImageFormat depth, const SR_MATH_NS::IVector2& size, uint8_t samples, uint32_t layersCount);
+        static Ptr Create(const std::vector<ImageFormat>& colors, ImageFormat depth, const SR_MATH_NS::IVector2& size, uint8_t samples, uint32_t layersCount, ImageAspect depthAspect);
 
     public:
         bool Update();
         bool Bind();
 
-        bool BeginCmdBuffer();
-        bool BeginCmdBuffer(const ClearColors& clearColors, std::optional<float_t> depth);
-        bool BeginCmdBuffer(const SR_MATH_NS::FColor& clearColor, float_t depth);
+        bool BeginCmdBuffer(uint32_t frame);
+        bool BeginCmdBuffer(uint32_t frame, const ClearColors& clearColors, std::optional<float_t> depth);
+        bool BeginCmdBuffer(uint32_t frame, const SR_MATH_NS::FColor& clearColor, float_t depth);
 
         void SetViewportScissor();
         bool BeginRender();
@@ -75,6 +75,7 @@ namespace SR_GTYPES_NS {
         void SetLayersCount(uint32_t layersCount);
         void SetDepthAspect(ImageAspect depthAspect);
         void SetFeatures(const FrameBufferFeatures& features);
+        void SetName(SR_UTILS_NS::StringAtom name) { m_name = name; }
 
         SR_NODISCARD bool IsFileResource() const noexcept override { return false; }
         SR_NODISCARD bool IsAllowedMultiInstance() const override { return true; }
@@ -85,12 +86,14 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD bool IsDepthEnabled() const { return m_depthEnabled; }
         SR_NODISCARD bool IsDirty() const { return m_dirty; }
         SR_NODISCARD bool IsValid() const { return m_frameBuffer != SR_ID_INVALID && !m_hasErrors && !IsDirty(); }
+        SR_NODISCARD bool IsWasRendered() const { return m_wasRendered; }
         SR_NODISCARD const FrameBufferFeatures& GetFeatures() const { return m_features; }
 
         SR_NODISCARD int32_t GetId() const;
         SR_NODISCARD int32_t GetColorTexture(uint32_t layer);
         SR_NODISCARD int32_t GetDepthTexture(int32_t layer = -1);
 
+        SR_NODISCARD SR_UTILS_NS::StringAtom GetName() const { return m_name; }
         SR_NODISCARD uint32_t GetWidth() const;
         SR_NODISCARD uint32_t GetHeight() const;
         SR_NODISCARD SR_MATH_NS::IVector2 GetSize() const { return m_size; }
@@ -101,8 +104,10 @@ namespace SR_GTYPES_NS {
     private:
         FrameBufferFeatures m_features;
 
+        SR_UTILS_NS::StringAtom m_name;
         std::atomic<bool> m_dirty = true;
         std::atomic<bool> m_hasErrors = false;
+        bool m_wasRendered = false;
 
         std::vector<ColorLayer> m_colors = { };
         DepthLayer m_depth = { };

@@ -41,6 +41,13 @@ namespace SR_GRAPH_NS {
         SR_MATH_NS::FVector4
     > ShaderPropertyVariant;
 
+    SR_ENUM_NS_CLASS_T(ShaderRenderPassType, uint32_t,
+        Undefined,
+        Main,
+        Depth,
+        ColorBuffer
+    );
+
     SR_ENUM_NS_CLASS_T(ShaderVarType, uint8_t,
           Unknown,
           Bool,

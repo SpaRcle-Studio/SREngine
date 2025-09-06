@@ -52,7 +52,7 @@
 | Type | Name |
 | ---: | :--- |
 |   | [**Formatter**](#function-formatter) (const char \* format) noexcept<br> |
-|  SR\_NODISCARD std::string | [**operator()**](#function-operator()) (Args... args) noexcept const<br> |
+|  SR\_NODISCARD std::string | [**operator()**](#function-operator) (Args... args) noexcept const<br> |
 
 
 

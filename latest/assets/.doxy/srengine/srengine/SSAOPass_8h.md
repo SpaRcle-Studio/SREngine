@@ -11,7 +11,6 @@
 
 
 * `#include <Graphics/Pass/PostProcessPass.h>`
-* `#include <Graphics/Pass/IFramebufferPass.h>`
 * `#include <Graphics/Types/Texture.h>`
 
 

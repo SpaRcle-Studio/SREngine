@@ -2,20 +2,20 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__GRAPH__NS_1_1BasePass" kind="class" language="C++" prot="public">
     <compoundname>SR_GRAPH_NS::BasePass</compoundname>
-    <basecompoundref refid="classSR__UTILS__NS_1_1ResourceContainer" prot="public" virt="non-virtual">SR_UTILS_NS::ResourceContainer</basecompoundref>
-    <basecompoundref refid="classSR__SRLM__NS_1_1IExecutableNode" prot="public" virt="non-virtual">SR_SRLM_NS::IExecutableNode</basecompoundref>
+    <basecompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; BasePass &gt;</basecompoundref>
+    <basecompoundref refid="classSR__UTILS__NS_1_1Serializable" prot="public" virt="non-virtual">SR_UTILS_NS::Serializable</basecompoundref>
     <derivedcompoundref refid="classSR__GRAPH__NS_1_1ClearBuffersPass" prot="public" virt="non-virtual">SR_GRAPH_NS::ClearBuffersPass</derivedcompoundref>
     <derivedcompoundref refid="classSR__GRAPH__NS_1_1DebugPass" prot="public" virt="non-virtual">SR_GRAPH_NS::DebugPass</derivedcompoundref>
     <derivedcompoundref refid="classSR__GRAPH__NS_1_1GroupPass" prot="public" virt="non-virtual">SR_GRAPH_NS::GroupPass</derivedcompoundref>
-    <derivedcompoundref refid="classSR__GRAPH__NS_1_1IMeshClusterPass" prot="public" virt="non-virtual">SR_GRAPH_NS::IMeshClusterPass</derivedcompoundref>
     <derivedcompoundref refid="classSR__GRAPH__NS_1_1MeshDrawerPass" prot="public" virt="non-virtual">SR_GRAPH_NS::MeshDrawerPass</derivedcompoundref>
     <derivedcompoundref refid="classSR__GRAPH__NS_1_1PostProcessPass" prot="public" virt="non-virtual">SR_GRAPH_NS::PostProcessPass</derivedcompoundref>
     <derivedcompoundref refid="classSR__GRAPH__NS_1_1SkyboxPass" prot="public" virt="non-virtual">SR_GRAPH_NS::SkyboxPass</derivedcompoundref>
     <derivedcompoundref refid="classSR__GRAPH__NS_1_1WidgetPass" prot="public" virt="non-virtual">SR_GRAPH_NS::WidgetPass</derivedcompoundref>
+    <includes refid="BasePass_8h" local="no">BasePass.h</includes>
     <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1BasePass_1adefd08ce949db8fe6abfb999bd3b8c73" prot="private" static="no">
-        <type><ref refid="classSR__UTILS__NS_1_1ResourceContainer" kindref="compound">SR_UTILS_NS::ResourceContainer</ref></type>
-        <definition>using SR_GRAPH_NS::BasePass::Super =  SR_UTILS_NS::ResourceContainer</definition>
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1BasePass_1a546f702db3ba21e7055deacae7a40cbf" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1BasePass" kindref="compound">BasePass</ref> &gt;</type>
+        <definition>using SR_GRAPH_NS::BasePass::Super =  SR_HTYPES_NS::SharedPtr&lt;BasePass&gt;</definition>
         <argsstring></argsstring>
         <name>Super</name>
         <qualifiedname>SR_GRAPH_NS::BasePass::Super</qualifiedname>
@@ -25,7 +25,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="41" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="41" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="37" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="37" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -41,7 +41,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="43" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="43" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="39" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1BasePass_1aa7c29336844c31150ba16812fc82ad7d" prot="public" static="no">
         <type><ref refid="classSR__GTYPES__NS_1_1Mesh" kindref="compound">SR_GTYPES_NS::Mesh</ref> *</type>
@@ -55,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="44" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="44" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="40" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1BasePass_1acc31a125e0f4886b1afcb196b55b75ab" prot="public" static="no">
         <type><ref refid="classSR__GTYPES__NS_1_1Camera" kindref="compound">SR_GTYPES_NS::Camera</ref> *</type>
@@ -69,21 +69,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="45" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="45" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="41" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="41" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1BasePass_1a8ff68384102d0f025a1dd259b1d57c17" prot="public" static="no">
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1BasePass_1a91e4bb2dd09d0d5ba2927f32be42bc52" prot="public" static="no">
         <type><ref refid="classSR__GRAPH__NS_1_1RenderContext" kindref="compound">RenderContext</ref> *</type>
-        <definition>using SR_GRAPH_NS::BasePass::Context =  RenderContext*</definition>
+        <definition>using SR_GRAPH_NS::BasePass::RenderContextPtr =  RenderContext*</definition>
         <argsstring></argsstring>
-        <name>Context</name>
-        <qualifiedname>SR_GRAPH_NS::BasePass::Context</qualifiedname>
+        <name>RenderContextPtr</name>
+        <qualifiedname>SR_GRAPH_NS::BasePass::RenderContextPtr</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="46" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="46" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="42" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1BasePass_1ac2790f23f7796eb36002c30dc817f1ba" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1Pipeline" kindref="compound">Pipeline</ref> &gt;</type>
@@ -97,7 +97,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="47" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="43" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1BasePass_1ad5832c5a9f8abf85ac97967105d3a953" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1RenderScene" kindref="compound">RenderScene</ref> &gt;</type>
@@ -111,7 +111,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="48" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="48" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="44" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1BasePass_1aab763411e8c45d0a660255b3058bd0f5" prot="public" static="no">
+        <type>std::vector&lt; <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">SR_GTYPES_NS::Framebuffer</ref> &gt; &gt;</type>
+        <definition>using SR_GRAPH_NS::BasePass::FrameBuffers =  std::vector&lt;SR_HTYPES_NS::SharedPtr&lt;SR_GTYPES_NS::Framebuffer&gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>FrameBuffers</name>
+        <qualifiedname>SR_GRAPH_NS::BasePass::FrameBuffers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="45" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1BasePass_1a2db19e6bfa97da6d7089665a0edfc3fd" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1BasePass" kindref="compound">BasePass</ref> &gt;</type>
@@ -125,25 +139,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="50" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="50" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="47" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="47" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasePass_1ad98f4d77d135b01f81a76f9534b393c1" prot="protected" static="no" mutable="no">
-        <type>CameraPtr</type>
-        <definition>CameraPtr SR_GRAPH_NS::BasePass::m_camera</definition>
-        <argsstring></argsstring>
-        <name>m_camera</name>
-        <qualifiedname>SR_GRAPH_NS::BasePass::m_camera</qualifiedname>
-        <initializer>= nullptr</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="109" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="109" bodyend="-1"/>
-      </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasePass_1a8b2e3a39351e9141029bea133f380465" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager" kindref="compound">Memory::UBOManager</ref> &amp;</type>
         <definition>Memory::UBOManager&amp; SR_GRAPH_NS::BasePass::m_uboManager</definition>
@@ -156,7 +155,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="110" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="110" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="105" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="105" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasePass_1a25fe2fa123f3a2a1fee0ca8ec9e64fa2" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1DescriptorManager" kindref="compound">DescriptorManager</ref> &amp;</type>
@@ -170,10 +169,24 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="111" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="111" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="106" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="106" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasePass_1ac61dde4146dd0253d4e9ff622527ca34" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_UTILS_NS::StringAtom SR_GRAPH_NS::BasePass::m_customName</definition>
+        <argsstring></argsstring>
+        <name>m_customName</name>
+        <qualifiedname>SR_GRAPH_NS::BasePass::m_customName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="110" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="110" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasePass_1a4e6ccfa75f4dd8f7253d3855706e5506" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1BasePass" kindref="compound">BasePass</ref> *</type>
         <definition>BasePass* SR_GRAPH_NS::BasePass::m_parent</definition>
@@ -187,51 +200,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="114" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="114" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasePass_1a993a1e9177172476617317c61c35df79" prot="private" static="no" mutable="no">
-        <type><ref refid="classSR__GRAPH__NS_1_1RenderContext" kindref="compound">Context</ref></type>
-        <definition>Context SR_GRAPH_NS::BasePass::m_context</definition>
-        <argsstring></argsstring>
-        <name>m_context</name>
-        <qualifiedname>SR_GRAPH_NS::BasePass::m_context</qualifiedname>
-        <initializer>= nullptr</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="116" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="116" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasePass_1aba152774e1786c2dd0dca8ae9ed6dd5c" prot="private" static="no" mutable="no">
-        <type>PipelinePtr</type>
-        <definition>PipelinePtr SR_GRAPH_NS::BasePass::m_pipeline</definition>
-        <argsstring></argsstring>
-        <name>m_pipeline</name>
-        <qualifiedname>SR_GRAPH_NS::BasePass::m_pipeline</qualifiedname>
-        <initializer>= nullptr</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="117" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="117" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasePass_1a1e507090640a936851b2299a57c3d56a" prot="private" static="no" mutable="no">
-        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
-        <definition>SR_UTILS_NS::StringAtom SR_GRAPH_NS::BasePass::m_name</definition>
-        <argsstring></argsstring>
-        <name>m_name</name>
-        <qualifiedname>SR_GRAPH_NS::BasePass::m_name</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="119" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="119" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="113" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="113" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasePass_1a69919dad0006ceb97f08878995871608" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">IRenderTechnique</ref> *</type>
@@ -246,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="121" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="121" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="115" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="115" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasePass_1a05a1ce39d4095bd79786df0ff1a269d6" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -261,7 +230,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="122" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="122" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="116" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="116" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -277,7 +246,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="53" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="50" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a127a21b6754f470eeddf8af6f2c16cb3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -291,40 +260,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="54" column="9"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a67cc496e8171dbe8d13c04ae017e4b53" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
-        <type>bool</type>
-        <definition>virtual bool SR_GRAPH_NS::BasePass::Load</definition>
-        <argsstring>(const SR_XML_NS::Node &amp;passNode)</argsstring>
-        <name>Load</name>
-        <qualifiedname>SR_GRAPH_NS::BasePass::Load</qualifiedname>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a6eb97c14e3deb1eb14615e8f1e74362d">Load</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1ColorBufferPass_1af2b30bca318e5c56cff97873043ddcdf">Load</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1DebugPass_1a789d91a591d644a853241bc9106f9a0c">Load</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1FramebufferPass_1a8c075b4acea7ded027964851abcfad85">Load</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1ClearBuffersPass_1ab96fe2a0d8a2065bac42c0e838e45c2c">Load</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1afb4405820e3f634ad6eaaf91285c840e">Load</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1ab5b2d079289e877e97e3cb7462362246">Load</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1ac3d3bb5e3b2deea3eb91486959e159db">Load</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1a6c23fc051c3a4f4fea219162e0052b93">Load</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1PostProcessPass_1ab19e43f8ba0885b3eed12dc6e324fcb1">Load</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1ShaderOverridePass_1ac9028c6a77bbdd5b470260c4e30e1e7e">Load</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1ShadowMapPass_1a5073530213d718e16fd129e28df0f546">Load</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1SkyboxPass_1aed7ed4d4fca55a4e07efd61720f9e667">Load</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1SSAOPass_1a6bc1b216556e9e922298a4ff7ff4749a">Load</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1SwapchainPass_1a87407cb2661bb87518e93cf1d1fc6e88">Load</reimplementedby>
-        <param>
-          <type>const SR_XML_NS::Node &amp;</type>
-          <declname>passNode</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="57" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="51" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1adf095a26c19b7dee693badc807e3fe4c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -333,24 +269,16 @@
         <name>Init</name>
         <qualifiedname>SR_GRAPH_NS::BasePass::Init</qualifiedname>
         <reimplementedby refid="classSR__GRAPH__NS_1_1DebugPass_1a754cc25d99190df25422561aa267c74f">Init</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1FramebufferPass_1ae2a0c09a997c4490f78a91ec836b8e37">Init</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1ad5c1af15b98c42ac465ace7d9dc1d520">Init</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1IMesh3DClusterPass_1a09b0a395bbca9251af130eeed0702b8e">Init</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1a661adeb2704d34a3c017111e41b42917">Init</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a578fc888ccea11924e1df5c9e776043b">Init</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1a660d8bc99d6b36b662e68730ca4c81ed">Init</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1ShaderOverridePass_1a9653212e2cb0dbe328edaa9e6769082f">Init</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1ShadowMapPass_1a580aba139da78fe1ed1d2f27f456a831">Init</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1SkyboxPass_1a9392fa5e9339c5d91ebcb805bb1c0836">Init</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1SSAOPass_1a2f1592c4a61c050fb8c1eb2527d14b49">Init</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ab283e950411fbad853de8e59c5c686ad">Init</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="59" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="54" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1aaf1e896ff56e5067a68b3f511bbe8ede" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -362,7 +290,6 @@
         <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1a29b1bfca493d7c9e93b9d2ccd0919a1e">DeInit</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a567caf35c79947385ee0fa54da27e052">DeInit</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1PostProcessPass_1ab8874150879aa212169d50ce46a6a57c">DeInit</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1ShadowMapPass_1acc8957355cb5d896fb564d02374128a0">DeInit</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1SSAOPass_1a64a5335318021c02f2474f6560f5dbde">DeInit</reimplementedby>
         <briefdescription>
         </briefdescription>
@@ -370,7 +297,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="60" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="55" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a3bdab2c8c4f51c17872a2dbd9c27c5d3" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>bool</type>
@@ -385,7 +312,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="62" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="62" bodyend="62"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="57" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="57" bodyend="57"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1af5020f5a4113aab60f3feb34277ca1ea" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>bool</type>
@@ -399,7 +326,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="63" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="63" bodyend="63"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="58" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="58" bodyend="58"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a05a08258b94dbd0e17d74634384ebed4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>bool</type>
@@ -414,7 +341,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="64" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="64" bodyend="64"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="59" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="59" bodyend="59"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a63b89d1da5c027690ec57549d061677f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>bool</type>
@@ -428,7 +355,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="65" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="65" bodyend="65"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="60" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="60" bodyend="60"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a16df7383e3420c9291cb97ec92c2d537" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -438,7 +365,6 @@
         <qualifiedname>SR_GRAPH_NS::BasePass::Overlay</qualifiedname>
         <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1afcd0df18da4c2514e1c04791846424cb">Overlay</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1WidgetPass_1a86e472c6af737085a6a7aad1660e2cec">Overlay</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a0a6c686ad1fa68b3503a00a8069b1a1d">Overlay</reimplementedby>
         <briefdescription>
 <para>Вызывается всегда и в самом начале </para>
         </briefdescription>
@@ -446,7 +372,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="68" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="68" bodyend="68"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="63" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="63" bodyend="63"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1afffc5aa7bc9b5e340f99221abdf47be0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -461,9 +387,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="71" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="71" bodyend="71"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="66" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="66" bodyend="66"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a559ee30abd6fa92f151eb04ec154357f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a559ee30abd6fa92f151eb04ec154357f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
         <definition>virtual void SR_GRAPH_NS::BasePass::Prepare</definition>
         <argsstring>()</argsstring>
@@ -471,11 +397,8 @@
         <qualifiedname>SR_GRAPH_NS::BasePass::Prepare</qualifiedname>
         <reimplementedby refid="classSR__GRAPH__NS_1_1DebugPass_1af6340e2214eba8b099b816f2488310cc">Prepare</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1a1bb5f8f8e93b8068a9d80ab183e1cf66">Prepare</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1abefde6903c1310e9469844939695ae29">Prepare</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a3c35b40b7095392be6ae0fe7bd4edf05">Prepare</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1PostProcessPass_1a96b21122ce1e39f663bc2b1b71e16f0b">Prepare</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1WidgetPass_1ae71846643e4648f729ee4cfd8c20f037">Prepare</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1IRenderTechnique_1af06afdd96b707b8c2bcef3743a557b0e">Prepare</reimplementedby>
         <briefdescription>
 <para>Вызывается всегда но полсе оверлея </para>
         </briefdescription>
@@ -483,7 +406,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="74" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="74" bodyend="74"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="69" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1ad2075554ddda52bbe8c83f514951a680" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -491,7 +414,6 @@
         <argsstring>()</argsstring>
         <name>PreRender</name>
         <qualifiedname>SR_GRAPH_NS::BasePass::PreRender</qualifiedname>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1FramebufferPass_1ab7e6b7984f93accef582690be7aa8dd7">PreRender</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1af5e458a31d0c5bd370bd486d46ae8a75">PreRender</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1PostProcessPass_1aee63a18b98828d01a10509c185aa9ff3">PreRender</reimplementedby>
         <briefdescription>
@@ -501,7 +423,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="77" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="77" bodyend="77"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="72" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="72" bodyend="72"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a9e71538e4ebaad5232ed9e6eb0292694" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -511,21 +433,14 @@
         <qualifiedname>SR_GRAPH_NS::BasePass::Render</qualifiedname>
         <reimplementedby refid="classSR__GRAPH__NS_1_1ColorBufferPass_1a4567549000c8cc50b03d400a0bb8d333">Render</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1DebugPass_1a501b6e1ebe5566cecf1905dbf55f465f">Render</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1FlatClusterPass_1aaa1cfb5e478b2ac881f6d66bdc8c4a99">Render</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1FramebufferPass_1add5c3faa372b9c02729e06251c20548f">Render</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1FrameBufferPass_1a1e28ce743ab8660cef4bd3a143a81ba5">Render</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1ClearBuffersPass_1a13e3aa08b7cba39e82882764140c920f">Render</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1aeb3bb1e19eb614553fd33d63890e03d1">Render</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1IMesh3DClusterPass_1a4ed4b0fed3a2c488362afb6010f13b2b">Render</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1a58fe72b533c23c8986cb298548a11baf">Render</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1ac08d09bf73b19357108b84e6ba07f6fb">Render</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1a33fefe9ddd8bac7c20397308bd4c4261">Render</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1PostProcessPass_1afe3807c59ce206965c62a218db9c28ff">Render</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1ShaderOverridePass_1adab347a3a3473dcf116f98cf87a694af">Render</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1ShadowMapPass_1af5408e577142a13d5d6a33acf1f80ebe">Render</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1SkyboxPass_1a7ec2dcbcc7d3c2e4104151b0d68776be">Render</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1SSAOPass_1a117e63f90fa13a3a6b99fff395f8dfb8">Render</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1SwapchainPass_1af8ab62e5d15d700db602e5ea8079d5a1">Render</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1IRenderTechnique_1acc82c1ef472390c3961ed51fbc28d974">Render</reimplementedby>
         <briefdescription>
 <para>Вызывается только во время построения </para>
         </briefdescription>
@@ -533,7 +448,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="79" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="79" bodyend="79"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="74" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="74" bodyend="74"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a2618cec5cb8f6f4c384b88bb3878c781" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -541,7 +456,6 @@
         <argsstring>()</argsstring>
         <name>PostRender</name>
         <qualifiedname>SR_GRAPH_NS::BasePass::PostRender</qualifiedname>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1FramebufferPass_1a2fc780b0b9338a93229754af63d5f6d5">PostRender</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1aaa25866fae2b8ae8552b8d8508a35ac2">PostRender</reimplementedby>
         <briefdescription>
 <para>Вызывается только во время построения </para>
@@ -550,7 +464,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="81" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="81" bodyend="81"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="76" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="76" bodyend="76"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a2f66471c7a16bd5c4400436288144acc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -559,19 +473,12 @@
         <name>Update</name>
         <qualifiedname>SR_GRAPH_NS::BasePass::Update</qualifiedname>
         <reimplementedby refid="classSR__GRAPH__NS_1_1DebugPass_1a20f04eafd50653bec1f4b38dd4ad2e7c">Update</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1FlatClusterPass_1a95532ec93a62461517c6dc6bb9164496">Update</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1FramebufferPass_1a755f61be9e57184801b8c188ee3edb09">Update</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1FrameBufferPass_1ab36b8ca468db0ec633189ccd073c53ff">Update</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1a023706556f7c21c0f366b64d9ee250fd">Update</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1IMesh3DClusterPass_1a641d7bed746885545c3bf544b10f7f44">Update</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1a0b54458d9dc89d63757ba38e20591da9">Update</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a37ab910895bbd048cc7b8338b30586d3">Update</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1a39032468632681f25ca46f0693308a7a">Update</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1PostProcessPass_1a06bc4f4875d9ca6fb96a77a054e3a5d5">Update</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1ShaderOverridePass_1a3d0a866ef17b7dfc8cdbac6d3ccf0ee2">Update</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1SkyboxPass_1aad5a1eeb1659372fdad4437d6996a5df">Update</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1SSAOPass_1a852fcbdd62931d9e0cc2cf32982226f9">Update</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1SwapchainPass_1ae46fb09d3a4975ecae475dc31844d8f4">Update</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a0f225f27cf92cb04d29b03650f7eb6fe">Update</reimplementedby>
         <briefdescription>
 <para>Вызывается постоянно после построения </para>
         </briefdescription>
@@ -579,7 +486,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="84" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="84" bodyend="84"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="79" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="79" bodyend="79"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1ac907cd9eeb58321011db7473671aead2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -594,24 +501,19 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="85" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="85" bodyend="85"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="80" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="80" bodyend="80"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1aaa28b5cf025e8dd935f30dda21f73c5a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1aaa28b5cf025e8dd935f30dda21f73c5a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
         <definition>virtual void SR_GRAPH_NS::BasePass::OnResize</definition>
         <argsstring>(const SR_MATH_NS::UVector2 &amp;size)</argsstring>
         <name>OnResize</name>
         <qualifiedname>SR_GRAPH_NS::BasePass::OnResize</qualifiedname>
         <reimplementedby refid="classSR__GRAPH__NS_1_1DebugPass_1ae29403bb64ce29618ac0bc8ea0749eff">OnResize</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1FramebufferPass_1af26d60b8538dba1f553991136299e461">OnResize</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1a2b5a1013c99bd74a87e2505f5409dfbc">OnResize</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1a808a79d7f71dcb4477199fd4555aee3f">OnResize</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1aa6fc3fe2752cc600fe681a62a22d4b50">OnResize</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1a4cecff17587b90edebb89381333c25d9">OnResize</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1PostProcessPass_1ab12b11b6f5b8d4ed11c5925e9ef5eb09">OnResize</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1ShaderOverridePass_1a4f11276fea1c66e59b5fce6e760b5860">OnResize</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1SSAOPass_1a5fb104f9c71313f49c4180b13645b9f0">OnResize</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ac330f5ff4ba1b807bb9e84c43924c3a8">OnResize</reimplementedby>
         <param>
           <type>const SR_MATH_NS::UVector2 &amp;</type>
           <declname>size</declname>
@@ -622,41 +524,35 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="87" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="87" bodyend="87"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="82" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a974885aecc09a1bc200f87a1fbe39b3c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a974885aecc09a1bc200f87a1fbe39b3c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
         <definition>virtual void SR_GRAPH_NS::BasePass::OnMultisampleChanged</definition>
         <argsstring>()</argsstring>
         <name>OnMultisampleChanged</name>
         <qualifiedname>SR_GRAPH_NS::BasePass::OnMultisampleChanged</qualifiedname>
         <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1af1ea7ea9db878175331d7e78c3c06991">OnMultisampleChanged</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1ae1818ca6d02dce41e492539ff8540212">OnMultisampleChanged</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a2c8facd7b70961d91c011f337c8902f0">OnMultisampleChanged</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1PostProcessPass_1ad05a141ed0aa624f1f0f2a04855070e5">OnMultisampleChanged</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ac34275c0ff731da6ce455c9b17556f83">OnMultisampleChanged</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="88" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="88" bodyend="88"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="83" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1ad6e7d35a53f2d509bf057186f66481e6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
-        <type>void SR_FASTCALL</type>
-        <definition>virtual void SR_FASTCALL SR_GRAPH_NS::BasePass::OnMeshAdded</definition>
-        <argsstring>(SR_GTYPES_NS::Mesh *pMesh, bool transparent)</argsstring>
-        <name>OnMeshAdded</name>
-        <qualifiedname>SR_GRAPH_NS::BasePass::OnMeshAdded</qualifiedname>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1a4f4001a872701b375649681b01f13e91">OnMeshAdded</reimplementedby>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a13c0deb13fa86f507531d102f5fd8d7a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_GRAPH_NS::BasePass::UseUniformsFromAnotherPass</definition>
+        <argsstring>(SR_GTYPES_NS::Shader *pShader)</argsstring>
+        <name>UseUniformsFromAnotherPass</name>
+        <qualifiedname>SR_GRAPH_NS::BasePass::UseUniformsFromAnotherPass</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a23cc85e8be43fee94f23291da103d4df">UseUniformsFromAnotherPass</reimplementedby>
         <param>
-          <type><ref refid="classSR__GTYPES__NS_1_1Mesh" kindref="compound">SR_GTYPES_NS::Mesh</ref> *</type>
-          <declname>pMesh</declname>
-        </param>
-        <param>
-          <type>bool</type>
-          <declname>transparent</declname>
+          <type><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> *</type>
+          <declname>pShader</declname>
         </param>
         <briefdescription>
         </briefdescription>
@@ -664,22 +560,18 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="90" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="90" bodyend="90"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="85" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="85" bodyend="85"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a5f7298ff562c16372c6c233189be0d49" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
-        <type>void SR_FASTCALL</type>
-        <definition>virtual void SR_FASTCALL SR_GRAPH_NS::BasePass::OnMeshRemoved</definition>
-        <argsstring>(SR_GTYPES_NS::Mesh *pMesh, bool transparent)</argsstring>
-        <name>OnMeshRemoved</name>
-        <qualifiedname>SR_GRAPH_NS::BasePass::OnMeshRemoved</qualifiedname>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1af37e4e5995bd3ff7b33c3df773254ac9">OnMeshRemoved</reimplementedby>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a5a009986d09b0e8199c4d40f2eeac6f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_GRAPH_NS::BasePass::UseSamplers</definition>
+        <argsstring>(SR_GTYPES_NS::Shader *pShader)</argsstring>
+        <name>UseSamplers</name>
+        <qualifiedname>SR_GRAPH_NS::BasePass::UseSamplers</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1acf61ab11ac383cf0a129b40ee5652361">UseSamplers</reimplementedby>
         <param>
-          <type><ref refid="classSR__GTYPES__NS_1_1Mesh" kindref="compound">SR_GTYPES_NS::Mesh</ref> *</type>
-          <declname>pMesh</declname>
-        </param>
-        <param>
-          <type>bool</type>
-          <declname>transparent</declname>
+          <type><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> *</type>
+          <declname>pShader</declname>
         </param>
         <briefdescription>
         </briefdescription>
@@ -687,25 +579,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="91" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="91" bodyend="91"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a0928ede3e5d5886b93cb7eba8d77b744" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
-        <type>SR_NODISCARD std::vector&lt; <ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">SR_GTYPES_NS::Framebuffer</ref> * &gt;</type>
-        <definition>virtual SR_NODISCARD std::vector&lt; SR_GTYPES_NS::Framebuffer * &gt; SR_GRAPH_NS::BasePass::GetFrameBuffers</definition>
-        <argsstring>() const</argsstring>
-        <name>GetFrameBuffers</name>
-        <qualifiedname>SR_GRAPH_NS::BasePass::GetFrameBuffers</qualifiedname>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1FramebufferPass_1adf41fe2d2b508deb6aa251c2d39baf37">GetFrameBuffers</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1acd26e840324963cdb65360c9b6eddb61">GetFrameBuffers</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1ShaderOverridePass_1a8501f6acf557ecea21369325b39f072e">GetFrameBuffers</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1SSAOPass_1aba94366a31e8300db39429be3371d299">GetFrameBuffers</reimplementedby>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="93" column="42" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="93" bodyend="93"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="86" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1af58022a7df1f3d5b8343647ab9ad78f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -713,9 +587,9 @@
         <argsstring>(IRenderTechnique *pRenderTechnique)</argsstring>
         <name>SetRenderTechnique</name>
         <qualifiedname>SR_GRAPH_NS::BasePass::SetRenderTechnique</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1FrameBufferPass_1a4fb00839c6dbf5d53bc81cf86bcf4cfb">SetRenderTechnique</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1a482bd1243f9b252fa81b99aeaa88617c">SetRenderTechnique</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1ad107004af861726eb3616e82c1ff6f6b">SetRenderTechnique</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1PostProcessPass_1a1a44d55a15b735d027045de829fe6146">SetRenderTechnique</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1aeb792b76365dc9be8ea0675b7ec36b83">SetRenderTechnique</reimplementedby>
         <param>
           <type><ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">IRenderTechnique</ref> *</type>
           <declname>pRenderTechnique</declname>
@@ -726,104 +600,91 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="95" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="87" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a1f1fe9682ea099f5ca3fbbfb6bc6a9e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_GRAPH_NS::BasePass::SetName</definition>
-        <argsstring>(SR_UTILS_NS::StringAtom name)</argsstring>
-        <name>SetName</name>
-        <qualifiedname>SR_GRAPH_NS::BasePass::SetName</qualifiedname>
-        <param>
-          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
-          <declname>name</declname>
-        </param>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a8bcb00355e5ecacfb2d2275eae0fbc87" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_NODISCARD SR_UTILS_NS::StringAtom SR_GRAPH_NS::BasePass::GetPassName</definition>
+        <argsstring>() const</argsstring>
+        <name>GetPassName</name>
+        <qualifiedname>SR_GRAPH_NS::BasePass::GetPassName</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="96" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="89" column="46"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a62227cc4ae3b9feee5afcca5f23bc919" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_GRAPH_NS::BasePass::SetContext</definition>
-        <argsstring>(Context pContext)</argsstring>
-        <name>SetContext</name>
-        <qualifiedname>SR_GRAPH_NS::BasePass::SetContext</qualifiedname>
-        <param>
-          <type><ref refid="classSR__GRAPH__NS_1_1RenderContext" kindref="compound">Context</ref></type>
-          <declname>pContext</declname>
-        </param>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1aa59c3079158cb09647d0499848d1e7e3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GRAPH_NS::BasePass::IsActive</definition>
+        <argsstring>() const</argsstring>
+        <name>IsActive</name>
+        <qualifiedname>SR_GRAPH_NS::BasePass::IsActive</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="97" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="90" column="27"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1ab5e34c676e9594e60de4ca2e962a0cf7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_GRAPH_NS::BasePass::SetParent</definition>
-        <argsstring>(BasePass *pParent)</argsstring>
-        <name>SetParent</name>
-        <qualifiedname>SR_GRAPH_NS::BasePass::SetParent</qualifiedname>
-        <param>
-          <type><ref refid="classSR__GRAPH__NS_1_1BasePass" kindref="compound">BasePass</ref> *</type>
-          <declname>pParent</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="98" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="98" bodyend="98"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a2d00f38853dae5296edc23d4c7bfa75c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
-        <type>SR_NODISCARD RenderScenePtr</type>
-        <definition>virtual SR_NODISCARD RenderScenePtr SR_GRAPH_NS::BasePass::GetRenderScene</definition>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1ab71fffa3ce7eb1e2b640cd6bbd7aecec" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const RenderScenePtr &amp;</type>
+        <definition>SR_NODISCARD const RenderScenePtr &amp; SR_GRAPH_NS::BasePass::GetRenderScene</definition>
         <argsstring>() const</argsstring>
         <name>GetRenderScene</name>
         <qualifiedname>SR_GRAPH_NS::BasePass::GetRenderScene</qualifiedname>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a4e7f6c94a109983057926432f8c8e867">GetRenderScene</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="100" column="45"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="91" column="43"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a149dec24886d7c8700a1b117c469307f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1RenderContext" kindref="compound">Context</ref></type>
-        <definition>SR_NODISCARD Context SR_GRAPH_NS::BasePass::GetContext</definition>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a70eb32e32dc020ae82b9030505b6e4b1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const CameraPtr &amp;</type>
+        <definition>SR_NODISCARD const CameraPtr &amp; SR_GRAPH_NS::BasePass::GetCamera</definition>
         <argsstring>() const</argsstring>
-        <name>GetContext</name>
-        <qualifiedname>SR_GRAPH_NS::BasePass::GetContext</qualifiedname>
+        <name>GetCamera</name>
+        <qualifiedname>SR_GRAPH_NS::BasePass::GetCamera</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="101" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="101" bodyend="101"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="92" column="38"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a95b0ad3eee1d6801d720bc7eab40bc6e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>SR_NODISCARD PipelinePtr</type>
-        <definition>SR_NODISCARD PipelinePtr SR_GRAPH_NS::BasePass::GetPassPipeline</definition>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1af8bb85e7d332fde0b2573c9c705a73dc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="classSR__GRAPH__NS_1_1RenderContext" kindref="compound">RenderContextPtr</ref> &amp;</type>
+        <definition>SR_NODISCARD const RenderContextPtr &amp; SR_GRAPH_NS::BasePass::GetRenderContext</definition>
         <argsstring>() const</argsstring>
-        <name>GetPassPipeline</name>
-        <qualifiedname>SR_GRAPH_NS::BasePass::GetPassPipeline</qualifiedname>
+        <name>GetRenderContext</name>
+        <qualifiedname>SR_GRAPH_NS::BasePass::GetRenderContext</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="102" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="102" bodyend="102"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="93" column="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a2677310aa8207b938d07bbe130dadcf9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const PipelinePtr &amp;</type>
+        <definition>SR_NODISCARD const PipelinePtr &amp; SR_GRAPH_NS::BasePass::GetPipeline</definition>
+        <argsstring>() const</argsstring>
+        <name>GetPipeline</name>
+        <qualifiedname>SR_GRAPH_NS::BasePass::GetPipeline</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="94" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1ace5d758ae98e877e7fe6b9b311ca8976" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">IRenderTechnique</ref> *</type>
@@ -837,7 +698,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="103" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="103" bodyend="103"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="95" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="95" bodyend="95"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a264dd4b976655f217e1386a38e0a6b6a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -851,21 +712,26 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="104" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="104" bodyend="104"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="96" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="96" bodyend="96"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a025a93bdbb4371177a46e70a51ffa351" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
-        <definition>SR_NODISCARD SR_UTILS_NS::StringAtom SR_GRAPH_NS::BasePass::GetName</definition>
-        <argsstring>() const</argsstring>
-        <name>GetName</name>
-        <qualifiedname>SR_GRAPH_NS::BasePass::GetName</qualifiedname>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1ae921a9d3d876f3f944a75c48c0670612" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1BasePass" kindref="compound">BasePass</ref> *</type>
+        <definition>virtual SR_NODISCARD BasePass * SR_GRAPH_NS::BasePass::FindPass</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom name)</argsstring>
+        <name>FindPass</name>
+        <qualifiedname>SR_GRAPH_NS::BasePass::FindPass</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1a77f893a5d366530d9e5b1f4cd6371b2d">FindPass</reimplementedby>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>name</declname>
+        </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="105" column="46"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="97" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a8f05935a0013471af3796065104ddd87" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1BasePass" kindref="compound">BasePass</ref> *</type>
@@ -879,10 +745,49 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="106" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="106" bodyend="106"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="99" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="99" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a06217f9edbf0e8c831a6cc411826f799" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_GRAPH_NS::BasePass::SetParent</definition>
+        <argsstring>(BasePass *pParent)</argsstring>
+        <name>SetParent</name>
+        <qualifiedname>SR_GRAPH_NS::BasePass::SetParent</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1ada00c70fad34453fe5e6daeaa9525f08">SetParent</reimplementedby>
+        <param>
+          <type><ref refid="classSR__GRAPH__NS_1_1BasePass" kindref="compound">BasePass</ref> *</type>
+          <declname>pParent</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="100" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="100" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a5d6f48a0c7f5279d68247638b71a9f07" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_GRAPH_NS::BasePass::ForEachPass</definition>
+        <argsstring>(const std::function&lt; void(BasePass &amp;)&gt; &amp;func)</argsstring>
+        <name>ForEachPass</name>
+        <qualifiedname>SR_GRAPH_NS::BasePass::ForEachPass</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1a594fa96d1a4289e876ca241ad0a7cb0c">ForEachPass</reimplementedby>
+        <param>
+          <type>const std::function&lt; void(<ref refid="classSR__GRAPH__NS_1_1BasePass" kindref="compound">BasePass</ref> &amp;)&gt; &amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="102" column="22"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
+<para>@abstract </para>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
@@ -892,457 +797,258 @@
         <link refid="classSR__GRAPH__NS_1_1BasePass"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="5" relation="public-inheritance">
+        <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="26">
+      <node id="12">
         <label>SR_GRAPH_NS::CascadedShadowMapPass</label>
         <link refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass"/>
-        <childnode refid="25" relation="public-inheritance">
+        <childnode refid="11" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="8">
+      <node id="6">
         <label>SR_GRAPH_NS::ClearBuffersPass</label>
         <link refid="classSR__GRAPH__NS_1_1ClearBuffersPass"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="28">
+      <node id="14">
         <label>SR_GRAPH_NS::ColorBufferPass</label>
         <link refid="classSR__GRAPH__NS_1_1ColorBufferPass"/>
-        <childnode refid="25" relation="public-inheritance">
+        <childnode refid="11" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="9">
+      <node id="7">
         <label>SR_GRAPH_NS::DebugPass</label>
         <link refid="classSR__GRAPH__NS_1_1DebugPass"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="21">
-        <label>SR_GRAPH_NS::DepthBufferPass</label>
-        <link refid="classSR__GRAPH__NS_1_1DepthBufferPass"/>
-        <childnode refid="20" relation="public-inheritance">
+      <node id="9">
+        <label>SR_GRAPH_NS::FrameBufferPass</label>
+        <link refid="classSR__GRAPH__NS_1_1FrameBufferPass"/>
+        <childnode refid="8" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="13">
-        <label>SR_GRAPH_NS::FileRenderTechnique</label>
-        <link refid="classSR__GRAPH__NS_1_1FileRenderTechnique"/>
-        <childnode refid="12" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="17">
-        <label>SR_GRAPH_NS::FlatClusterPass</label>
-        <link refid="classSR__GRAPH__NS_1_1FlatClusterPass"/>
-        <childnode refid="16" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="11">
-        <label>SR_GRAPH_NS::FramebufferPass</label>
-        <link refid="classSR__GRAPH__NS_1_1FramebufferPass"/>
-        <childnode refid="10" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="10">
+      <node id="8">
         <label>SR_GRAPH_NS::GroupPass</label>
         <link refid="classSR__GRAPH__NS_1_1GroupPass"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="18">
-        <label>SR_GRAPH_NS::IMesh3DClusterPass</label>
-        <link refid="classSR__GRAPH__NS_1_1IMesh3DClusterPass"/>
-        <childnode refid="16" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="16">
-        <label>SR_GRAPH_NS::IMeshClusterPass</label>
-        <link refid="classSR__GRAPH__NS_1_1IMeshClusterPass"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="12">
-        <label>SR_GRAPH_NS::IRenderTechnique</label>
-        <link refid="classSR__GRAPH__NS_1_1IRenderTechnique"/>
-        <childnode refid="10" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="24">
+      <node id="11">
         <label>SR_GRAPH_NS::MeshDrawerPass</label>
         <link refid="classSR__GRAPH__NS_1_1MeshDrawerPass"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="25">
-        <label>SR_GRAPH_NS::OffScreenMeshDrawerPass</label>
-        <link refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass"/>
-        <childnode refid="24" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="19">
-        <label>SR_GRAPH_NS::OpaquePass</label>
-        <link refid="classSR__GRAPH__NS_1_1OpaquePass"/>
-        <childnode refid="18" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="29">
+      <node id="15">
         <label>SR_GRAPH_NS::PostProcessPass</label>
         <link refid="classSR__GRAPH__NS_1_1PostProcessPass"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="30">
+      <node id="16">
         <label>SR_GRAPH_NS::SSAOPass</label>
         <link refid="classSR__GRAPH__NS_1_1SSAOPass"/>
-        <childnode refid="29" relation="public-inheritance">
+        <childnode refid="15" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="14">
-        <label>SR_GRAPH_NS::ScriptableRenderTechnique</label>
-        <link refid="classSR__GRAPH__NS_1_1ScriptableRenderTechnique"/>
-        <childnode refid="12" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="20">
-        <label>SR_GRAPH_NS::ShaderOverridePass</label>
-        <link refid="classSR__GRAPH__NS_1_1ShaderOverridePass"/>
-        <childnode refid="18" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="22">
-        <label>SR_GRAPH_NS::ShadowMapPass</label>
-        <link refid="classSR__GRAPH__NS_1_1ShadowMapPass"/>
-        <childnode refid="20" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="31">
+      <node id="17">
         <label>SR_GRAPH_NS::SkyboxPass</label>
         <link refid="classSR__GRAPH__NS_1_1SkyboxPass"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="15">
+      <node id="10">
         <label>SR_GRAPH_NS::SwapchainPass</label>
         <link refid="classSR__GRAPH__NS_1_1SwapchainPass"/>
-        <childnode refid="10" relation="public-inheritance">
+        <childnode refid="8" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="23">
-        <label>SR_GRAPH_NS::TransparentPass</label>
-        <link refid="classSR__GRAPH__NS_1_1TransparentPass"/>
-        <childnode refid="18" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="27">
+      <node id="13">
         <label>SR_GRAPH_NS::VarianceShadowMapPass</label>
         <link refid="classSR__GRAPH__NS_1_1VarianceShadowMapPass"/>
-        <childnode refid="26" relation="public-inheritance">
+        <childnode refid="12" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="32">
+      <node id="18">
         <label>SR_GRAPH_NS::WidgetPass</label>
         <link refid="classSR__GRAPH__NS_1_1WidgetPass"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="3">
+      <node id="2">
         <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="4" relation="public-inheritance">
+        <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="4">
+      <node id="3">
         <label>SR_HTYPES_NS::SharedPtrBase</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
       </node>
       <node id="5">
-        <label>SR_SRLM_NS::IExecutableNode</label>
-        <link refid="classSR__SRLM__NS_1_1IExecutableNode"/>
-        <childnode refid="6" relation="public-inheritance">
-        </childnode>
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
       </node>
-      <node id="6">
-        <label>SR_SRLM_NS::LogicalNode</label>
-        <link refid="classSR__SRLM__NS_1_1LogicalNode"/>
-        <childnode refid="7" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="7">
-        <label>SR_UTILS_NS::NonCopyable</label>
-        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
-      </node>
-      <node id="2">
-        <label>SR_UTILS_NS::ResourceContainer</label>
-        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
-        <childnode refid="3" relation="public-inheritance">
+      <node id="4">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="5" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="17">
-        <label>Entity</label>
-      </node>
       <node id="1">
         <label>SR_GRAPH_NS::BasePass</label>
         <link refid="classSR__GRAPH__NS_1_1BasePass"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="6" relation="public-inheritance">
+        <childnode refid="5" relation="public-inheritance">
         </childnode>
-        <childnode refid="15" relation="usage">
-          <edgelabel>m_camera</edgelabel>
-        </childnode>
-        <childnode refid="20" relation="usage">
+        <childnode refid="7" relation="usage">
           <edgelabel>m_uboManager</edgelabel>
         </childnode>
-        <childnode refid="23" relation="usage">
+        <childnode refid="11" relation="usage">
           <edgelabel>m_descriptorManager</edgelabel>
         </childnode>
       </node>
-      <node id="23">
+      <node id="11">
         <label>SR_GRAPH_NS::DescriptorManager</label>
         <link refid="classSR__GRAPH__NS_1_1DescriptorManager"/>
-        <childnode refid="24" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="20">
-        <label>SR_GRAPH_NS::Memory::UBOManager</label>
-        <link refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager"/>
-        <childnode refid="21" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="15">
-        <label>SR_GTYPES_NS::Camera</label>
-        <link refid="classSR__GTYPES__NS_1_1Camera"/>
-        <childnode refid="16" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="3">
-        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="4" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
-        <label>SR_HTYPES_NS::SharedPtrBase</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
-        <childnode refid="5" relation="usage">
-          <edgelabel>m_data</edgelabel>
-        </childnode>
-      </node>
-      <node id="5">
-        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
-        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
-      </node>
-      <node id="6">
-        <label>SR_SRLM_NS::IExecutableNode</label>
-        <link refid="classSR__SRLM__NS_1_1IExecutableNode"/>
-        <childnode refid="7" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="9">
-        <label>SR_SRLM_NS::LogicalMachine</label>
-        <link refid="classSR__SRLM__NS_1_1LogicalMachine"/>
-        <childnode refid="10" relation="public-inheritance">
+        <childnode refid="12" relation="public-inheritance">
         </childnode>
       </node>
       <node id="7">
-        <label>SR_SRLM_NS::LogicalNode</label>
-        <link refid="classSR__SRLM__NS_1_1LogicalNode"/>
+        <label>SR_GRAPH_NS::Memory::UBOManager</label>
+        <link refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager"/>
         <childnode refid="8" relation="public-inheritance">
         </childnode>
-        <childnode refid="9" relation="usage">
-          <edgelabel>m_machine</edgelabel>
-        </childnode>
-      </node>
-      <node id="16">
-        <label>SR_UTILS_NS::Component</label>
-        <link refid="classSR__UTILS__NS_1_1Component"/>
-        <childnode refid="17" relation="public-inheritance">
-        </childnode>
-        <childnode refid="18" relation="usage">
-          <edgelabel>m_parent</edgelabel>
-        </childnode>
-        <childnode refid="19" relation="usage">
-          <edgelabel>m_scene</edgelabel>
-        </childnode>
-      </node>
-      <node id="18">
-        <label>SR_UTILS_NS::IComponentable</label>
-        <link refid="classSR__UTILS__NS_1_1IComponentable"/>
-        <childnode refid="17" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="10">
-        <label>SR_UTILS_NS::IResource</label>
-        <link refid="classSR__UTILS__NS_1_1IResource"/>
-        <childnode refid="2" relation="public-inheritance">
-        </childnode>
-        <childnode refid="11" relation="public-inheritance">
-        </childnode>
-        <childnode refid="12" relation="public-inheritance">
-        </childnode>
-        <childnode refid="14" relation="usage">
-          <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
-          <edgelabel>RELOAD_DONE_EVENT</edgelabel>
-        </childnode>
-      </node>
-      <node id="8">
-        <label>SR_UTILS_NS::NonCopyable</label>
-        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
       <node id="2">
-        <label>SR_UTILS_NS::ResourceContainer</label>
-        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="13">
+      <node id="3">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="10">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="6">
         <label>SR_UTILS_NS::SRClass</label>
         <link refid="classSR__UTILS__NS_1_1SRClass"/>
       </node>
-      <node id="12">
+      <node id="5">
         <label>SR_UTILS_NS::Serializable</label>
         <link refid="classSR__UTILS__NS_1_1Serializable"/>
-        <childnode refid="13" relation="public-inheritance">
+        <childnode refid="6" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="24">
+      <node id="12">
         <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="22" relation="public-inheritance">
+        <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="21">
+      <node id="8">
         <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="22" relation="public-inheritance">
+        <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="22">
+      <node id="9">
         <label>SR_UTILS_NS::SingletonBase</label>
         <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
-        <childnode refid="8" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="14">
-        <label>SR_UTILS_NS::StringAtom</label>
-        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
-      </node>
-      <node id="11">
-        <label>SR_UTILS_NS::SubscriptionHolder</label>
-        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
-      </node>
-      <node id="19">
-        <label>SR_WORLD_NS::Scene</label>
-        <link refid="classSR__WORLD__NS_1_1Scene"/>
-        <childnode refid="18" relation="public-inheritance">
+        <childnode refid="10" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="40" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="40" bodyend="124"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="35" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="35" bodyend="118"/>
     <listofallmembers>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1af9087ca5182397a9c7d3b92fb5591523" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>AddDependency</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>AddInputConnection</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a451d30d4d677248caa80bb7ac74baad9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>AddInputData</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac528a232f2481034bf0c9c866aadf580" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>AddOutputConnection</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a968e3caf521de3d586f0ffb6cd9c2e07" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>AddOutputData</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>AddSerializationFlags</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>AllocateStatic</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>AutoFree</name></member>
-      <member refid="classSR__SRLM__NS_1_1IExecutableNode_1a52d82db24c1ba529cf2c3fb289188eae" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>Base</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a0d095ccdf074b9c91026a4f1b7e46f91" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>BasePass</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1afffc5aa7bc9b5e340f99221abdf47be0" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>Bind</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a45ac417b161b1412c23159c307dd5fc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>CalcInput</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1acc31a125e0f4886b1afcb196b55b75ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>CameraPtr</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4b0351f30fc7afe7f45854cde8e09f64" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>ClearLogicalNode</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a8ff68384102d0f025a1dd259b1d57c17" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>Context</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>CloneTo</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>DecrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1aaf1e896ff56e5067a68b3f511bbe8ede" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>DeInit</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>DynamicCast</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab95638d1f3f8a9b82a1dfdaa63d28d1f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>Execute</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1ae921a9d3d876f3f944a75c48c0670612" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>FindPass</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a5d6f48a0c7f5279d68247638b71a9f07" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>ForEachPass</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1aab763411e8c45d0a660255b3058bd0f5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>FrameBuffers</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>Get</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>Get</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac38d38ae8e248a1b1ad573f3e2ac7ccf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetBaseLogicalNode</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a725e3e44aa2830a8a799d71e13693a73" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetContainerParents</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a149dec24886d7c8700a1b117c469307f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetContext</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a0928ede3e5d5886b93cb7eba8d77b744" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetFrameBuffers</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a7fcb00a1223a4547e39260ce606a3630" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetInputs</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a025a93bdbb4371177a46e70a51ffa351" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetName</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a3787e340fcad5f7c498bb18b9bd32ee0" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetNodeHashName</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a3f002bccae511f95dcb0b128a838ce70" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetNodeIndex</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1aee0451ad12205e73d1daf4d5b2369515" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetNodeName</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a9a188617821a9e68cf4f07d1fb92ac1e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetOutput</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1aa14e801043f55bacd8b6ae930d1b063b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetOutputs</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a7734143f7ae123a6088320486af89283" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetBaseMetas</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a70eb32e32dc020ae82b9030505b6e4b1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetCamera</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a97a0919298e9d1d53220613bded5ba69" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetClassStaticName</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a16a351eac01dde110e273cfd05f1f7ed" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetMeta</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a16837ff730fb4e276450a124d70eb2e4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetMetaStatic</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a8f05935a0013471af3796065104ddd87" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetParent</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a95b0ad3eee1d6801d720bc7eab40bc6e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetPassPipeline</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a8bcb00355e5ecacfb2d2275eae0fbc87" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetPassName</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a2677310aa8207b938d07bbe130dadcf9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetPipeline</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetPtrData</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetPtrData</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetRawPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetRawPtr</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a2d00f38853dae5296edc23d4c7bfa75c" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetRenderScene</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1af8bb85e7d332fde0b2573c9c705a73dc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetRenderContext</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1ab71fffa3ce7eb1e2b640cd6bbd7aecec" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetRenderScene</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetSRClass</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae8e205c3d55f751a1cffabd6ae2cbafa" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetStatus</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ace5d758ae98e877e7fe6b9b311ca8976" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetTechnique</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetThis</name></member>
-      <member refid="classSR__SRLM__NS_1_1IExecutableNode_1a5e765eb12571b7a44b7f1dc9cfcf2b4e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetType</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>GetUncheckedRef</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a39f67280ae696a53716dbe19ef2461ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>HasErrors</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4b0bdf3803c8a5163c579feab8e93704" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>Hash</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a05a08258b94dbd0e17d74634384ebed4" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>HasPostRender</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a3bdab2c8c4f51c17872a2dbd9c27c5d3" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>HasPreRender</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1af5020f5a4113aab60f3feb34277ca1ea" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>HasRender</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1af5c00e9391fad105c30570cbda1a6285" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>HasSerializationFlags</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a63b89d1da5c027690ec57549d061677f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>HasUpdate</name></member>
-      <member refid="classSR__SRLM__NS_1_1IExecutableNode_1a72369ad750e0cbaa06007623f7a5a6aa" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>IExecutableNode</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>IncrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1adf095a26c19b7dee693badc807e3fe4c" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>Init</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae6934733a21e34c45488912bdac8b9a4" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>InitNode</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a46d4de6ffa829b0ac09255febc01f8c3" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>InitValues</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a7a198b9924e270e946544b410c7e4429" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>IsDirty</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae3301d2d44de7af8fc7e186f8691a854" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>IsEntryPoint</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1aa59c3079158cb09647d0499848d1e7e3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>IsActive</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a264dd4b976655f217e1386a38e0a6b6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>IsInit</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1aafd12c320ddcfd1850b69560ba7b3131" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>IsNeedPostRepeat</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a187877bae66f7b85f2e285d83ae2874f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>IsNeedRepeat</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a0f333ecbc614fc619a47de757b06b048" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>IsSuccessfullyCompleted</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a67cc496e8171dbe8d13c04ae017e4b53" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>Load</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a6bcd14ebcd882a6f89e531c1789f7037" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>LoadXml</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1afbc9947b694481f8478c1a75a2fc465e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>Load</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>m_basicManually</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1ad98f4d77d135b01f81a76f9534b393c1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>m_camera</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a993a1e9177172476617317c61c35df79" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>m_context</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1ac61dde4146dd0253d4e9ff622527ca34" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>m_customName</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>m_data</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a25fe2fa123f3a2a1fee0ca8ec9e64fa2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>m_descriptorManager</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1aaefebe7fd52cbf14db7c85bbe21b49ef" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>m_inputs</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a05a1ce39d4095bd79786df0ff1a269d6" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>m_isInit</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a94e08d6063aad6edd1ff62430d08fd20" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>m_machine</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a1e507090640a936851b2299a57c3d56a" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>m_name</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a3a2a6ff04f3fe1f0a7d3691fa9c38bad" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>m_nodeIndex</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1acdfab2ebb3fe8db5559f506f14207265" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>m_outputs</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a4e6ccfa75f4dd8f7253d3855706e5506" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>m_parent</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1aba152774e1786c2dd0dca8ae9ed6dd5c" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>m_pipeline</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a326155de44e7fe4f9a7f6f905f239e83" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>m_status</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a69919dad0006ceb97f08878995871608" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>m_technique</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a8b2e3a39351e9141029bea133f380465" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>m_uboManager</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>MakeShared</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1abeb669de15f340d47b81aff73c8494a7" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>MarkDirty</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1aa7c29336844c31150ba16812fc82ad7d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>MeshPtr</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>NonCopyable</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>NonCopyable</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1ad6e7d35a53f2d509bf057186f66481e6" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>OnMeshAdded</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a5f7298ff562c16372c6c233189be0d49" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>OnMeshRemoved</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a974885aecc09a1bc200f87a1fbe39b3c" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>OnMultisampleChanged</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a27569f8d47ee0c52ed5e385253e14460" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>OnPostLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1afbe2a50f0f69bc0f52b51151058830d8" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>OnPostSave</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a2978d969c09702719b2ed5c84453b02d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>OnPreLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a8281e1a68416fd493dce2a48fa8ea660" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>OnPreSave</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1aaa28b5cf025e8dd935f30dda21f73c5a" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>OnResize</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a833f3da55449659aeb8df7992155dd69" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>OnResourceUpdated</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>operator bool</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>operator!=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>operator*</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>operator-&gt;</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::BasePass</scope><name>operator=</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::BasePass</scope><name>operator=</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::BasePass</scope><name>operator=</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_SRLM_NS::IExecutableNode::"><scope>SR_GRAPH_NS::BasePass</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>operator=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>operator==</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1ac8b16fec8d4003ae41fd3fe294595b36" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>OriginType</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a16df7383e3420c9291cb97ec92c2d537" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>Overlay</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a9a07bf1f90447c55603ffa6b1e0bed70" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>Pins</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ac2790f23f7796eb36002c30dc817f1ba" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>PipelinePtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>PolymorphicCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a2618cec5cb8f6f4c384b88bb3878c781" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>PostRender</name></member>
@@ -1351,27 +1057,15 @@
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ad2075554ddda52bbe8c83f514951a680" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>PreRender</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a2db19e6bfa97da6d7089665a0edfc3fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>Ptr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1afed952eb55d7441a18c4d3381d315fcf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>RegisterPropertiesCodegen</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>ReinterpretCast</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac21f24c643f3298ec89225361ce96a9f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>RemoveDependency</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae81c72460b1aeba9e7a6d61cfd26ab69" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>RemoveInput</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a3dd7841012e531003e34e7b8cee39c8a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>RemoveInputConnection</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a1d32f0aa31055f7327c207e687fd159f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>RemoveOutput</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1afd6d611ab23c3ebcf79120447d4ca783" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>RemoveOutputConnection</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1ab5d15ff431f7405c8ad940333e6417a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>RemoveSerializationFlags</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a9e71538e4ebaad5232ed9e6eb0292694" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>Render</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a91e4bb2dd09d0d5ba2927f32be42bc52" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>RenderContextPtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ad5832c5a9f8abf85ac97967105d3a953" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>RenderScenePtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::BasePass</scope><name>Reset</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4fe38d653d32f3462b0f932fe1db83a7" prot="public" virt="virtual" ambiguityscope="SR_SRLM_NS::IExecutableNode::"><scope>SR_GRAPH_NS::BasePass</scope><name>Reset</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac04e4fd8681f829b225da3d92de851f9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>ResetInputFlows</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ad119153e52e8ea5c69fc41d600a6f98b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>ResetOutputFlows</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a26cb3321be56bb940227895f39e39585" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>ResetStatus</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a4fb6331893e314c01da26b361197a75e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>ResourceContainer</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a1d2f00105677e74286e1d1c8dee82255" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>SaveXml</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a62227cc4ae3b9feee5afcca5f23bc919" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>SetContext</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1acee317aea228ef1431a3a4b37010cedb" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>SetInput</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a5b46945b1d679dbd01c1eb4587adfd8b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>SetMachine</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a1f1fe9682ea099f5ca3fbbfb6bc6a9e5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>SetName</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a915d9919621e79a3ee48ddb15799123c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>SetNodeIndex</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1ab5e34c676e9594e60de4ca2e962a0cf7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>SetParent</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>Reset</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>Save</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a06217f9edbf0e8c831a6cc411826f799" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>SetParent</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>SetPointerFromBase</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1af58022a7df1f3d5b8343647ab9ad78f8" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>SetRenderTechnique</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a65e58bf20b3acc95f7e07f4cef52facb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>ShaderPtr</name></member>
@@ -1384,18 +1078,18 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1afc3c958bc4a0ac65b5f5362512545035" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>StaticCast</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1adefd08ce949db8fe6abfb999bd3b8c73" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>Super</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a546f702db3ba21e7055deacae7a40cbf" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>Super</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>TryRecursiveLockIfValid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>Unlock</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a2f66471c7a16bd5c4400436288144acc" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>Update</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac84a44cf058fa5cb53715e250ae7157c" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>UpdateResources</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>Valid</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a5a009986d09b0e8199c4d40f2eeac6f0" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>UseSamplers</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a13c0deb13fa86f507531d102f5fd8d7a" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>UseUniformsFromAnotherPass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a783dd9e4a58072de8ff19895693bca05" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>Valid</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a5aab0756802a67de9cb45b83b3e73c70" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>VerifyAfterLoad</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a127a21b6754f470eeddf8af6f2c16cb3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>~BasePass</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a19b262ecaf034d84c1783c24712ccf2d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>~LogicalNode</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>~NonCopyable</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a25f84a35792474f3b2e2eff6431695d3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>~ResourceContainer</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>~SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>~SharedPtrBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1ad88a80732713966d7759d768bd65bbe5" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>~SRClass</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

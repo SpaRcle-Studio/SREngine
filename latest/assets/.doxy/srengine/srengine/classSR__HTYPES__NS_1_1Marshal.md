@@ -87,7 +87,7 @@ Inherits the following classes: [SR\_HTYPES\_NS::Stream](classSR__HTYPES__NS_1_1
 |   | [**Marshal**](#function-marshal-14) () <br> |
 |   | [**Marshal**](#function-marshal-24) (std::ifstream & ifs) <br> |
 |   | [**Marshal**](#function-marshal-34) (const std::string & str) <br> |
-|   | [**Marshal**](#function-marshal-44) (const char \* pData, uint64\_t size) <br> |
+|   | [**Marshal**](#function-marshal-44) (const char \* pData, uint64\_t size, bool copy=true) <br> |
 |  T | [**Read**](#function-read-12) () <br> |
 |  T | [**Read**](#function-read-22) (const T & def) <br> |
 |  void | [**ReadBlock**](#function-readblock) (void \* pDestination) <br> |
@@ -119,7 +119,7 @@ See [SR\_HTYPES\_NS::Stream](classSR__HTYPES__NS_1_1Stream.md)
 |   | [**Stream**](classSR__HTYPES__NS_1_1Stream.md#function-stream-16) () <br> |
 |   | [**Stream**](classSR__HTYPES__NS_1_1Stream.md#function-stream-26) (std::ifstream & ifs) <br> |
 |   | [**Stream**](classSR__HTYPES__NS_1_1Stream.md#function-stream-36) (const std::string & str) <br> |
-|   | [**Stream**](classSR__HTYPES__NS_1_1Stream.md#function-stream-46) (const char \* pData, uint64\_t size) <br> |
+|   | [**Stream**](classSR__HTYPES__NS_1_1Stream.md#function-stream-46) (const char \* pData, uint64\_t size, bool copy=true) <br> |
 |   | [**Stream**](classSR__HTYPES__NS_1_1Stream.md#function-stream-56) (const [**Stream**](classSR__HTYPES__NS_1_1Stream.md) & other) noexcept<br> |
 |   | [**Stream**](classSR__HTYPES__NS_1_1Stream.md#function-stream-66) ([**Stream**](classSR__HTYPES__NS_1_1Stream.md) && other) noexcept<br> |
 |  SR\_NODISCARD std::string | [**ToBase64**](classSR__HTYPES__NS_1_1Stream.md#function-tobase64) () noexcept const<br> |
@@ -147,6 +147,14 @@ See [SR\_HTYPES\_NS::Stream](classSR__HTYPES__NS_1_1Stream.md)
 |  [**Marshal::Ptr**](classSR__HTYPES__NS_1_1Marshal.md) | [**LoadPtr**](#function-loadptr) (const Path & path) <br> |
 
 
+## Public Static Functions inherited from SR_HTYPES_NS::Stream
+
+See [SR\_HTYPES\_NS::Stream](classSR__HTYPES__NS_1_1Stream.md)
+
+| Type | Name |
+| ---: | :--- |
+|  char \* | [**Allocate**](classSR__HTYPES__NS_1_1Stream.md#function-allocate) (uint64\_t size) <br> |
+|  void | [**Free**](classSR__HTYPES__NS_1_1Stream.md#function-free) (char \* pData) <br> |
 
 
 
@@ -370,7 +378,8 @@ NOLINT
 ```C++
 SR_HTYPES_NS::Marshal::Marshal (
     const char * pData,
-    uint64_t size
+    uint64_t size,
+    bool copy=true
 ) 
 ```
 

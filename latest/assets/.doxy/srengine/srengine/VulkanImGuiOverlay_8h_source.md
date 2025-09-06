@@ -39,6 +39,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD bool ReCreate() override;
 
         SR_NODISCARD std::string GetName() const override { return "Vulkan ImGUI"; }
+        SR_NODISCARD bool IsDynamicRenderingEnabled() const override { return m_dynamicRendering; }
 
         SR_NODISCARD EvoVulkan::SubmitInfo& Render(uint32_t frame);
         SR_NODISCARD void* GetTextureDescriptorSet(uint32_t textureId) override;
@@ -67,6 +68,8 @@ namespace SR_GRAPH_NS {
     private:
         EvoVulkan::SubmitInfo m_submitInfo = { };
 
+        bool m_dynamicRendering = false;
+
         VkSemaphore m_semaphore = VK_NULL_HANDLE;
 
         VkCommandBufferBeginInfo m_cmdBuffBI = { };
@@ -83,6 +86,9 @@ namespace SR_GRAPH_NS {
         EvoVulkan::Types::Device* m_device = nullptr;
         EvoVulkan::Types::Swapchain* m_swapChain = nullptr;
         EvoVulkan::Types::MultisampleTarget* m_multiSample = nullptr;
+
+        PFN_vkCmdBeginRendering m_pVkCmdBeginRendering = nullptr;
+        PFN_vkCmdEndRendering m_pVkCmdEndRendering = nullptr;
 
         bool m_undockingActive = false;
 

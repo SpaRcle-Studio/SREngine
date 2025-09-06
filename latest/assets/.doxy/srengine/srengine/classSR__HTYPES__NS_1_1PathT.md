@@ -77,7 +77,7 @@ _Template for Merkle paths._ [More...](#detailed-description)
 |  const [**HashT**](structSR__HTYPES__NS_1_1HashT.md)&lt; HASH\_SIZE &gt; & | [**leaf**](#function-leaf) () const<br>_The leaf hash of the path._  |
 |  size\_t | [**leaf\_index**](#function-leaf_index) () const<br>_Index of the leaf of the path._  |
 |  size\_t | [**max\_index**](#function-max_index) () const<br>_Maximum index of the tree at the time the path was extracted._  |
-|   | [**vector&lt; uint8\_t &gt;**](#function-vector<-uint8_t->) () const<br>_Conversion operator to vector of bytes._  |
+|   | [**vector&lt; uint8\_t &gt;**](#function-vector-uint8_t) () const<br>_Conversion operator to vector of bytes._  |
 |  bool | [**operator!=**](#function-operator) (const [**PathT**](classSR__HTYPES__NS_1_1PathT.md)&lt; HASH\_SIZE, HASH\_FUNCTION &gt; & other) <br>_Inequality operator for paths._  |
 |  bool | [**operator==**](#function-operator_1) (const [**PathT**](classSR__HTYPES__NS_1_1PathT.md)&lt; HASH\_SIZE, HASH\_FUNCTION &gt; & other) const<br>_Equality operator for paths._  |
 |  const [**HashT**](structSR__HTYPES__NS_1_1HashT.md)&lt; HASH\_SIZE &gt; & | [**operator[]**](#function-operator_2) (size\_t i) const<br>_Operator to extract the hash of a given path element._  |

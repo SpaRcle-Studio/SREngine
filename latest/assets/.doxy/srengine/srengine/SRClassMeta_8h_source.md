@@ -37,6 +37,7 @@ namespace SR_UTILS_NS {
 
         void ForEachProperty(const std::function<void(const SR_UTILS_NS::Reflection::Property& property, uint64_t index)>& func, uint64_t* pIndex = nullptr) const;
         virtual void ForEachSRClass(SRClass& srClass, const SR_HTYPES_NS::Function<void(SRClass&)>& function) const noexcept;
+        virtual void CloneTo(const SRClass& src, SRClass& dest) const noexcept;
 
         SR_NODISCARD virtual SR_UTILS_NS::StringAtom GetInspectorName() const noexcept;
 
@@ -49,6 +50,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD virtual std::span<const SRClassMeta*> GetBaseMetas() const noexcept;
         SR_NODISCARD virtual std::span<const SR_UTILS_NS::Reflection::Property> GetProperties() const noexcept;
         SR_NODISCARD virtual SR_UTILS_NS::StringAtom GetFactoryName() const noexcept;
+        SR_NODISCARD virtual SR_UTILS_NS::StringAtom GetDisplayName() const noexcept;
         SR_NODISCARD virtual SRClass* Allocate() const noexcept;
 
         SR_NODISCARD bool IsSameOrInherited(SR_UTILS_NS::StringAtom name) const;

@@ -57,7 +57,11 @@
 | Type | Name |
 | ---: | :--- |
 |  SR\_NODISCARD const char \* | [**CStr**](#function-cstr) () const<br> |
-|  SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**Concat**](#function-concat) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) const<br> |
+|  SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**Concat**](#function-concat-15) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) path) const<br> |
+|  SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**Concat**](#function-concat-25) (const std::string & path) const<br> |
+|  SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**Concat**](#function-concat-35) (const std::string\_view path) const<br> |
+|  SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**Concat**](#function-concat-45) (const char \* path) const<br> |
+|  SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**Concat**](#function-concat-55) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) const<br> |
 |  SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**ConcatExt**](#function-concatext-14) (const std::string & ext) const<br> |
 |  SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**ConcatExt**](#function-concatext-24) (const std::string\_view & ext) const<br> |
 |  SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**ConcatExt**](#function-concatext-34) (const char \* ext) const<br> |
@@ -121,6 +125,7 @@
 |  bool | [**operator==**](#function-operator_3) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) noexcept const<br> |
 |  bool | [**operator&gt;**](#function-operator_4) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) noexcept const<br> |
 |  char | [**operator[]**](#function-operator_5) (size\_t index) noexcept const<br> |
+|  SR\_NODISCARD uint64\_t | [**size**](#function-size) () const<br> |
 |   | [**~Path**](#function-path) () <br> |
 
 
@@ -187,7 +192,67 @@ SR_NODISCARD const char * SR_UTILS_NS::Path::CStr () const
 
 
 
-### function Concat 
+### function Concat [1/5]
+
+```C++
+SR_NODISCARD Path SR_UTILS_NS::Path::Concat (
+    const SR_UTILS_NS::StringAtom path
+) const
+```
+
+
+
+
+<hr>
+
+
+
+### function Concat [2/5]
+
+```C++
+SR_NODISCARD Path SR_UTILS_NS::Path::Concat (
+    const std::string & path
+) const
+```
+
+
+
+
+<hr>
+
+
+
+### function Concat [3/5]
+
+```C++
+SR_NODISCARD Path SR_UTILS_NS::Path::Concat (
+    const std::string_view path
+) const
+```
+
+
+
+
+<hr>
+
+
+
+### function Concat [4/5]
+
+```C++
+SR_NODISCARD Path SR_UTILS_NS::Path::Concat (
+    const char * path
+) const
+```
+
+
+
+
+<hr>
+
+
+
+### function Concat [5/5]
 
 ```C++
 SR_NODISCARD Path SR_UTILS_NS::Path::Concat (
@@ -1070,6 +1135,19 @@ bool SR_UTILS_NS::Path::operator> (
 char SR_UTILS_NS::Path::operator[] (
     size_t index
 ) noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function size 
+
+```C++
+SR_NODISCARD uint64_t SR_UTILS_NS::Path::size () const
 ```
 
 

@@ -322,6 +322,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>AutoFree</name></member>
       <member refid="structSR__ANIMATIONS__NS_1_1Bone_1aa91b530cd75c300cf8989cc729345cbe" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>Bone</name></member>
       <member refid="structSR__ANIMATIONS__NS_1_1Bone_1af516861b6f0ed99b305400e29fabf11d" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>bones</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>CloneTo</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>DecrementPointer</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>DynamicCast</name></member>
       <member refid="structSR__ANIMATIONS__NS_1_1Bone_1a9395f62d3650b2dcf30e6c615029819c" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>gameObject</name></member>
@@ -387,7 +388,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>StaticCast</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>TryRecursiveLockIfValid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>Unlock</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a783dd9e4a58072de8ff19895693bca05" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>Valid</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a5aab0756802a67de9cb45b83b3e73c70" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>VerifyAfterLoad</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>~SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>~SharedPtrBase</name></member>

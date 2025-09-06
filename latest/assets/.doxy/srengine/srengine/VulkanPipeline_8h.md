@@ -11,6 +11,7 @@
 
 
 * `#include <Graphics/Pipeline/Pipeline.h>`
+* `#include <EvoVulkan/Types/VmaBuffer.h>`
 
 
 

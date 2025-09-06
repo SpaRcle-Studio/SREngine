@@ -53,7 +53,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_NODISCARD constexpr size\_t | [**operator()**](#function-operator()) (std::nullptr\_t) noexcept const<br> |
+|  SR\_NODISCARD constexpr size\_t | [**operator()**](#function-operator) (std::nullptr\_t) noexcept const<br> |
 
 
 

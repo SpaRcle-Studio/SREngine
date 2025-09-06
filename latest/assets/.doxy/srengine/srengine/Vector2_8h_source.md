@@ -99,6 +99,18 @@ namespace SR_MATH_NS {
             return Vector2(static_cast<T>(abs(x)), static_cast<T>(abs(y)));
         }
 
+        SR_NODISCARD Vector2 Round() const {
+            if constexpr (std::is_same_v<T, float> || std::is_same_v<T, float_t>) {
+                return Vector2(static_cast<T>(std::roundf(x)), static_cast<T>(std::roundf(y)));
+            }
+            else if constexpr (std::is_same_v<T, double> || std::is_same_v<T, double_t>) {
+                return Vector2(static_cast<T>(std::round(x)), static_cast<T>(std::round(y)));
+            }
+            else {
+                return *this;
+            }
+        }
+
         SR_NODISCARD T Sum() const {
             return x + y;
         }

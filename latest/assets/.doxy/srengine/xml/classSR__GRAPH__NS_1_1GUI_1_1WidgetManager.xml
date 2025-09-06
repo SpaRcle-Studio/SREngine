@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="77" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="77" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="78" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="78" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -78,7 +78,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="80" column="24" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="80" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="81" column="24" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a14c2d3a37fb343864b4f19c32204b698" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__GRAPH__NS_1_1RenderContext" kindref="compound">ContextPtr</ref></type>
+        <definition>ContextPtr SR_GRAPH_NS::GUI::WidgetManager::m_renderContext</definition>
+        <argsstring></argsstring>
+        <name>m_renderContext</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::WidgetManager::m_renderContext</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="82" column="20" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="82" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a514d810958a8dfbb7c892ee6427d47e0" prot="private" static="no" mutable="no">
         <type>Widgets</type>
@@ -92,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="81" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="81" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="83" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="83" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a4f68372450e01dd768d6da80cf55613e" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -106,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="82" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="82" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="84" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="84" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -234,6 +249,24 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="47" column="14"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1aca6d4b089822974354ef5219013a5d82" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::GUI::WidgetManager::SetRenderContext</definition>
+        <argsstring>(ContextPtr pContext)</argsstring>
+        <name>SetRenderContext</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::WidgetManager::SetRenderContext</qualifiedname>
+        <param>
+          <type><ref refid="classSR__GRAPH__NS_1_1RenderContext" kindref="compound">ContextPtr</ref></type>
+          <declname>pContext</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="48" column="14"/>
+      </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a6e22b3a3b9d93e10c986f61a09e38b94" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD Widgets &amp;</type>
         <definition>SR_NODISCARD Widgets &amp; SR_GRAPH_NS::GUI::WidgetManager::GetWidgets</definition>
@@ -246,7 +279,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="50" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="50" bodyend="50"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="51" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="51" bodyend="51"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a5d963bdbd14b708459be899f3c82648e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD RenderScenePtr</type>
@@ -260,7 +293,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="51" column="37"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="52" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a433ccfe144da6e797b5745f1a97937cf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1RenderContext" kindref="compound">ContextPtr</ref></type>
@@ -274,7 +307,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="52" column="33"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="53" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1ab0adf93ab24e43acb1121265aea6bb29" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -293,7 +326,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="54" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="54" bodyend="63"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="55" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="55" bodyend="64"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1acef89960927e2ef37fa331eeb31ab991" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -312,7 +345,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="65" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="66" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1abf218b68f59848ffeb12f1a855acf051" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -331,7 +364,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="66" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="67" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1af483854976c631e0f6c91bdaba9d06b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -350,7 +383,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="67" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="68" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a661ba1b65a3b0872493611e6d25cc0f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -369,7 +402,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="68" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="69" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1ab37a4363e4174eb2f199ae804abcf337" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -388,7 +421,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="70" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="71" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a5172e57846779ca91807d5133d0ea47e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -407,7 +440,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="71" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="72" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1af6f3c2331cc123eee6e2ed01664a9bb9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -426,7 +459,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="72" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="73" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a845625c93c125fa99efb739de8af9bc3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -444,7 +477,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="74" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="75" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -517,7 +550,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="31" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="31" bodyend="84"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="31" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="31" bodyend="86"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a8e9792cf2f7784ad986a32dbbe0fb060" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::WidgetManager</scope><name>ContextPtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1acb4b1e5fc1d597452cfd3df1262c840e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::GUI::WidgetManager</scope><name>Draw</name></member>
@@ -532,6 +565,7 @@
       <member refid="classSR__UTILS__NS_1_1InputHandler_1ac2e6a409a38ca80df3a3eb7418490182" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::WidgetManager</scope><name>IsKeyPressed</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a4f68372450e01dd768d6da80cf55613e" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::WidgetManager</scope><name>m_ignoreNonFocused</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a048de7589000d8802ad5bd8918243ac3" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::WidgetManager</scope><name>m_mutex</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a14c2d3a37fb343864b4f19c32204b698" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::WidgetManager</scope><name>m_renderContext</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1ac08625a363049d9f374436060a2fe860" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::WidgetManager</scope><name>m_renderScene</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a514d810958a8dfbb7c892ee6427d47e0" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::WidgetManager</scope><name>m_widgets</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::WidgetManager</scope><name>NonCopyable</name></member>
@@ -548,6 +582,7 @@
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a35853d4777076550add2bf51a682eaaf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::WidgetManager</scope><name>Remove</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a244dd465c04a4d4d3b87a5a9f1ec2e9e" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::WidgetManager</scope><name>RenderScenePtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1ad4e46eb58d8127222be5fa265a7359b6" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::WidgetManager</scope><name>ScenePtr</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1aca6d4b089822974354ef5219013a5d82" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::WidgetManager</scope><name>SetRenderContext</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a321fbec288569bd9b51abe984807016d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::WidgetManager</scope><name>SetRenderScene</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a845625c93c125fa99efb739de8af9bc3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::WidgetManager</scope><name>SetScene</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1af81394b27a7b4630712c2c67d9e39c5f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::WidgetManager</scope><name>ShowAll</name></member>

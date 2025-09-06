@@ -18,26 +18,26 @@
 #include <Graphics/Pass/IMeshClusterPass.h>
 
 namespace SR_GRAPH_NS {
-    class SR_DEPRECATED IMesh3DClusterPass : public IMeshClusterPass {
-        using Super = IMeshClusterPass;
-    public:
-        bool Init() override;
-
-    protected:
-        bool Render() override;
-        void Update() override;
-
-        void OnClusterDirty() override;
-
-        virtual bool RenderCluster(MeshCluster& meshCluster);
-        virtual void UpdateCluster(MeshCluster& meshCluster);
-        virtual void MarkDirtyCluster(MeshCluster& meshCluster);
-
-    protected:
-        ShadowMapPass* m_shadowMapPass = nullptr;
-        CascadedShadowMapPass* m_cascadedShadowMapPass = nullptr;
-
-    };
+     //class SR_DEPRECATED IMesh3DClusterPass : public IMeshClusterPass {
+     //    using Super = IMeshClusterPass;
+     //public:
+     //    bool Init() override;
+ //
+     //protected:
+     //    bool Render() override;
+     //    void Update() override;
+ //
+     //    void OnClusterDirty() override;
+ //
+     //    virtual bool RenderCluster(MeshCluster& meshCluster);
+     //    virtual void UpdateCluster(MeshCluster& meshCluster);
+     //    virtual void MarkDirtyCluster(MeshCluster& meshCluster);
+ //
+     //protected:
+     //    ShadowMapPass* m_shadowMapPass = nullptr;
+     //    CascadedShadowMapPass* m_cascadedShadowMapPass = nullptr;
+ //
+     //};
 }
 
 #endif //SR_ENGINE_IMESH3DCLUSTERPASS_H

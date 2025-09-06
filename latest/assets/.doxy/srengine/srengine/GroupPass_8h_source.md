@@ -19,12 +19,12 @@
 
 namespace SR_GRAPH_NS {
     class GroupPass : public BasePass {
+        using Super = BasePass;
+        SR_CLASS()
     public:
         ~GroupPass() override;
 
     public:
-        bool Load(const SR_XML_NS::Node& passNode) override;
-
         bool Init() override;
         void DeInit() override;
 
@@ -43,36 +43,16 @@ namespace SR_GRAPH_NS {
         void OnMultisampleChanged() override;
 
         void SetRenderTechnique(IRenderTechnique* pRenderTechnique) override;
+        void SetParent(BasePass* pParent) override;
 
-        SR_NODISCARD BasePass* FindPass(const SR_UTILS_NS::StringAtom& name) const;
+        void ForEachPass(const std::function<void(BasePass&)>& func) override;
 
-        bool ForEachPass(const SR_HTYPES_NS::Function<bool(BasePass*)>& callback) const;
-
-        template<typename T> SR_NODISCARD T* FindPass() const;
-
-        void SR_FASTCALL OnMeshAdded(SR_GTYPES_NS::Mesh* pMesh, bool transparent) override;
-        void SR_FASTCALL OnMeshRemoved(SR_GTYPES_NS::Mesh* pMesh, bool transparent) override;
+        SR_NODISCARD BasePass* FindPass(SR_UTILS_NS::StringAtom name) override;
 
     protected:
         std::vector<BasePass::Ptr> m_passes;
 
     };
-
-    template<typename T> T* GroupPass::FindPass() const {
-        for (auto&& pPass : m_passes) {
-            if (auto&& pFoundPass = pPass.DynamicCast<T>()) {
-                return const_cast<T*>(pFoundPass.Get());
-            }
-
-            if (auto&& pGroupPass = pPass.DynamicCast<GroupPass>()) {
-                if (auto&& pFoundPass = pGroupPass->FindPass<T>()) {
-                    return pFoundPass;
-                }
-            }
-        }
-
-        return nullptr;
-    }
 }
 
 #endif //SR_ENGINE_GROUPPASS_H

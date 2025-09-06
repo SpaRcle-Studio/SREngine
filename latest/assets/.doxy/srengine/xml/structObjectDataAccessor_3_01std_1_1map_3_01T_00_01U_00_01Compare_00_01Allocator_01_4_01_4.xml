@@ -46,6 +46,53 @@
         <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="363" column="1" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="363" bodyend="-1"/>
       </memberdef>
     </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structObjectDataAccessor_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4_1a8b8fca883f2d5985754fbf6d87eab8b9" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr SerializationId</type>
+        <definition>constexpr SerializationId ObjectDataAccessor&lt; std::map&lt; T, U, Compare, Allocator &gt; &gt;::itemId</definition>
+        <argsstring></argsstring>
+        <name>itemId</name>
+        <qualifiedname>ObjectDataAccessor&lt; std::map&lt; T, U, Compare, Allocator &gt; &gt;::itemId</qualifiedname>
+        <initializer>= SerializationId::Create(&quot;item&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="367" column="38" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="367" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structObjectDataAccessor_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4_1ababb2d9e0ba345b41797a7a18e33cadd" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr SerializationId</type>
+        <definition>constexpr SerializationId ObjectDataAccessor&lt; std::map&lt; T, U, Compare, Allocator &gt; &gt;::firstId</definition>
+        <argsstring></argsstring>
+        <name>firstId</name>
+        <qualifiedname>ObjectDataAccessor&lt; std::map&lt; T, U, Compare, Allocator &gt; &gt;::firstId</qualifiedname>
+        <initializer>= SerializationId::Create(&quot;first&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="368" column="38" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="368" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structObjectDataAccessor_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4_1a309d37e08eae33dbc6d12d5430d5346b" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr SerializationId</type>
+        <definition>constexpr SerializationId ObjectDataAccessor&lt; std::map&lt; T, U, Compare, Allocator &gt; &gt;::secondId</definition>
+        <argsstring></argsstring>
+        <name>secondId</name>
+        <qualifiedname>ObjectDataAccessor&lt; std::map&lt; T, U, Compare, Allocator &gt; &gt;::secondId</qualifiedname>
+        <initializer>= SerializationId::Create(&quot;second&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="369" column="38" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="369" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <sectiondef kind="public-static-func">
       <memberdef kind="function" id="structObjectDataAccessor_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4_1adf5378d8edb146d2cc3dfc8877aa43ca" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -71,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="367" column="13" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="367" bodyend="381"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="371" column="13" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="371" bodyend="396"/>
       </memberdef>
       <memberdef kind="function" id="structObjectDataAccessor_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4_1aaed5f010350bb5521d1f1c15af385a63" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -102,18 +149,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="384" column="13" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="384" bodyend="435"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="399" column="13" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="399" bodyend="447"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="361" column="1" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="361" bodyend="436"/>
+    <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="361" column="1" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="361" bodyend="448"/>
     <listofallmembers>
+      <member refid="structObjectDataAccessor_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4_1ababb2d9e0ba345b41797a7a18e33cadd" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; std::map&lt; T, U, Compare, Allocator &gt; &gt;</scope><name>firstId</name></member>
+      <member refid="structObjectDataAccessor_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4_1a8b8fca883f2d5985754fbf6d87eab8b9" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; std::map&lt; T, U, Compare, Allocator &gt; &gt;</scope><name>itemId</name></member>
       <member refid="structObjectDataAccessor_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4_1aaed5f010350bb5521d1f1c15af385a63" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; std::map&lt; T, U, Compare, Allocator &gt; &gt;</scope><name>Load</name></member>
       <member refid="structObjectDataAccessor_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4_1a3fc09d793a444233f6b0fb332936ed9f" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; std::map&lt; T, U, Compare, Allocator &gt; &gt;</scope><name>MapType</name></member>
       <member refid="structObjectDataAccessor_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4_1adf5378d8edb146d2cc3dfc8877aa43ca" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; std::map&lt; T, U, Compare, Allocator &gt; &gt;</scope><name>Save</name></member>
+      <member refid="structObjectDataAccessor_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4_1a309d37e08eae33dbc6d12d5430d5346b" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; std::map&lt; T, U, Compare, Allocator &gt; &gt;</scope><name>secondId</name></member>
       <member refid="structObjectDataAccessor_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4_1a43c237a40e2a4a5f421acd3b42f8dd53" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; std::map&lt; T, U, Compare, Allocator &gt; &gt;</scope><name>ValueType</name></member>
     </listofallmembers>
   </compounddef>

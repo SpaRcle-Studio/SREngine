@@ -7,6 +7,23 @@
         <type>typename T</type>
       </param>
     </templateparamlist>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structObjectDataAccessor_3_01std_1_1optional_3_01T_01_4_01_4_1aae892f66458db1ead6d7c84610bdb287" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr SerializationId</type>
+        <definition>constexpr SerializationId ObjectDataAccessor&lt; std::optional&lt; T &gt; &gt;::hasValueId</definition>
+        <argsstring></argsstring>
+        <name>hasValueId</name>
+        <qualifiedname>ObjectDataAccessor&lt; std::optional&lt; T &gt; &gt;::hasValueId</qualifiedname>
+        <initializer>= SerializationId::Create(&quot;has&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="688" column="38" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="688" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <sectiondef kind="public-static-func">
       <memberdef kind="function" id="structObjectDataAccessor_3_01std_1_1optional_3_01T_01_4_01_4_1a1b9896c7d46fac96f59d323400e4c2d4" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -32,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="649" column="13" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="649" bodyend="653"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="690" column="13" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="690" bodyend="700"/>
       </memberdef>
       <memberdef kind="function" id="structObjectDataAccessor_3_01std_1_1optional_3_01T_01_4_01_4_1a6feb04b5c627c265c5609bf89a8811a2" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -58,15 +75,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="654" column="13" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="654" bodyend="659"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="702" column="13" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="702" bodyend="720"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="648" column="11" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="648" bodyend="660"/>
+    <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="687" column="11" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="687" bodyend="721"/>
     <listofallmembers>
+      <member refid="structObjectDataAccessor_3_01std_1_1optional_3_01T_01_4_01_4_1aae892f66458db1ead6d7c84610bdb287" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; std::optional&lt; T &gt; &gt;</scope><name>hasValueId</name></member>
       <member refid="structObjectDataAccessor_3_01std_1_1optional_3_01T_01_4_01_4_1a6feb04b5c627c265c5609bf89a8811a2" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; std::optional&lt; T &gt; &gt;</scope><name>Load</name></member>
       <member refid="structObjectDataAccessor_3_01std_1_1optional_3_01T_01_4_01_4_1a1b9896c7d46fac96f59d323400e4c2d4" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; std::optional&lt; T &gt; &gt;</scope><name>Save</name></member>
     </listofallmembers>

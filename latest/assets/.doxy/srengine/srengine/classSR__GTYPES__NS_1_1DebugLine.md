@@ -43,7 +43,7 @@ See [SR\_GTYPES\_NS::Mesh](classSR__GTYPES__NS_1_1Mesh.md)
 | ---: | :--- |
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; BaseMaterial &gt; | [**MaterialPtr**](classSR__GTYPES__NS_1_1Mesh.md#typedef-materialptr)  <br> |
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Mesh**](classSR__GTYPES__NS_1_1Mesh.md) &gt; | [**Ptr**](classSR__GTYPES__NS_1_1Mesh.md#typedef-ptr)  <br> |
-| typedef [**SR\_HTYPES\_NS::SortedVector**](classSR__HTYPES__NS_1_1SortedVector.md)&lt; [**SR\_GRAPH\_NS::RenderQueueInfo**](structSR__GRAPH__NS_1_1RenderQueueInfo.md), [**SR\_GRAPH\_NS::RenderQueuePredicate**](structSR__GRAPH__NS_1_1RenderQueuePredicate.md) &gt; | [**RenderQueues**](classSR__GTYPES__NS_1_1Mesh.md#typedef-renderqueues)  <br> |
+| typedef [**SR\_HTYPES\_NS::SortedVector**](classSR__HTYPES__NS_1_1SortedVector.md)&lt; RenderQueueInfo, RenderQueuePredicate &gt; | [**RenderQueues**](classSR__GTYPES__NS_1_1Mesh.md#typedef-renderqueues)  <br> |
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; RenderScene &gt; | [**RenderScenePtr**](classSR__GTYPES__NS_1_1Mesh.md#typedef-rendersceneptr)  <br> |
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Shader**](classSR__GTYPES__NS_1_1Shader.md) &gt; | [**ShaderPtr**](classSR__GTYPES__NS_1_1Mesh.md#typedef-shaderptr)  <br> |
 
@@ -172,7 +172,8 @@ See [SR\_GTYPES\_NS::Mesh](classSR__GTYPES__NS_1_1Mesh.md)
 | virtual SR\_NODISCARD FrustumCullingType | [**GetFrustumCullingType**](classSR__GTYPES__NS_1_1Mesh.md#function-getfrustumcullingtype) () noexcept const<br> |
 | virtual SR\_NODISCARD int32\_t | [**GetIBO**](classSR__GTYPES__NS_1_1Mesh.md#function-getibo) () <br> |
 | virtual SR\_NODISCARD uint32\_t | [**GetIndicesCount**](classSR__GTYPES__NS_1_1Mesh.md#function-getindicescount) () const = 0<br> |
-|  SR\_NODISCARD const MaterialPtr & | [**GetMaterial**](classSR__GTYPES__NS_1_1Mesh.md#function-getmaterial) () noexcept const<br> |
+|  SR\_NODISCARD const MaterialPtr & | [**GetMaterial**](classSR__GTYPES__NS_1_1Mesh.md#function-getmaterial-12) () noexcept const<br> |
+|  SR\_NODISCARD MaterialPtr & | [**GetMaterial**](classSR__GTYPES__NS_1_1Mesh.md#function-getmaterial-22) () noexcept<br> |
 | virtual SR\_NODISCARD const [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & | [**GetMatrix**](classSR__GTYPES__NS_1_1Mesh.md#function-getmatrix) () const<br> |
 | virtual SR\_NODISCARD std::string | [**GetMeshIdentifier**](classSR__GTYPES__NS_1_1Mesh.md#function-getmeshidentifier) () const<br> |
 | virtual SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetMeshLayer**](classSR__GTYPES__NS_1_1Mesh.md#function-getmeshlayer) () const<br> |
@@ -180,7 +181,6 @@ See [SR\_GTYPES\_NS::Mesh](classSR__GTYPES__NS_1_1Mesh.md)
 | virtual SR\_NODISCARD MeshType | [**GetMeshType**](classSR__GTYPES__NS_1_1Mesh.md#function-getmeshtype) () noexcept const = 0<br> |
 |  SR\_NODISCARD Pipeline \* | [**GetPipeline**](classSR__GTYPES__NS_1_1Mesh.md#function-getpipeline) () noexcept const<br> |
 |  SR\_NODISCARD RenderQueues & | [**GetRenderQueues**](classSR__GTYPES__NS_1_1Mesh.md#function-getrenderqueues) () noexcept<br> |
-|  SR\_NODISCARD ShaderPtr | [**GetShader**](classSR__GTYPES__NS_1_1Mesh.md#function-getshader) () const<br> |
 | virtual SR\_NODISCARD int64\_t | [**GetSortingPriority**](classSR__GTYPES__NS_1_1Mesh.md#function-getsortingpriority) () const<br> |
 | virtual SR\_NODISCARD int32\_t | [**GetVBO**](classSR__GTYPES__NS_1_1Mesh.md#function-getvbo) () <br> |
 | virtual SR\_NODISCARD uint32\_t | [**GetVerticesCount**](classSR__GTYPES__NS_1_1Mesh.md#function-getverticescount) () const<br> |

@@ -87,6 +87,7 @@ Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_
 
 | Type | Name |
 | ---: | :--- |
+|  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**GetDirectionalLightDirection**](#function-getdirectionallightdirection) () noexcept const<br> |
 |  SR\_NODISCARD const SR\_MATH\_NS::FVector3 & | [**GetDirectionalLightPosition**](#function-getdirectionallightposition) () noexcept const<br> |
 |   | [**LightSystem**](#function-lightsystem) (RenderScenePtr pRenderScene) <br> |
 |  void | [**Register**](#function-register) ([**ILightComponent**](classSR__GRAPH__NS_1_1ILightComponent.md) \* pLightComponent) <br> |
@@ -262,6 +263,19 @@ std::set<SpotLight*> SR_GRAPH_NS::LightSystem::m_spotLights;
 <hr>
 ## Public Functions Documentation
 
+
+
+
+### function GetDirectionalLightDirection 
+
+```C++
+SR_NODISCARD SR_MATH_NS::FVector3 SR_GRAPH_NS::LightSystem::GetDirectionalLightDirection () noexcept const
+```
+
+
+
+
+<hr>
 
 
 

@@ -103,7 +103,7 @@ Inherits the following classes: [SR\_SRSL\_NS::SRSLLexicalUnit](classSR__SRSL__N
 | ---: | :--- |
 |  SR\_NODISCARD std::string | [**GetName**](#function-getname) () const<br> |
 |  SR\_NODISCARD std::string | [**GetType**](#function-gettype) () const<br> |
-|   | [**SRSLVariable**](#function-srslvariable-12) () = default<br> |
+|   | [**SRSLVariable**](#function-srslvariable-12) () <br> |
 |   | [**SRSLVariable**](#function-srslvariable-22) ([**SRSLVariable**](classSR__SRSL__NS_1_1SRSLVariable.md) && other) noexcept<br> |
 | virtual SR\_NODISCARD std::string | [**ToString**](#function-tostring) (uint32\_t deep) override const<br> |
 |  [**SRSLVariable**](classSR__SRSL__NS_1_1SRSLVariable.md) & | [**operator=**](#function-operator) ([**SRSLVariable**](classSR__SRSL__NS_1_1SRSLVariable.md) && other) noexcept<br> |
@@ -116,6 +116,8 @@ See [SR\_SRSL\_NS::SRSLLexicalUnit](classSR__SRSL__NS_1_1SRSLLexicalUnit.md)
 
 | Type | Name |
 | ---: | :--- |
+|  SR\_NODISCARD LexicalUnitType | [**GetLexicalUnitType**](classSR__SRSL__NS_1_1SRSLLexicalUnit.md#function-getlexicalunittype) () const<br> |
+|   | [**SRSLLexicalUnit**](classSR__SRSL__NS_1_1SRSLLexicalUnit.md#function-srsllexicalunit) (LexicalUnitType type) <br> |
 | virtual SR\_NODISCARD std::string | [**ToString**](classSR__SRSL__NS_1_1SRSLLexicalUnit.md#function-tostring) (uint32\_t deep) const<br> |
 
 
@@ -311,7 +313,7 @@ SR_NODISCARD std::string SR_SRSL_NS::SRSLVariable::GetType () const
 ### function SRSLVariable [1/2]
 
 ```C++
-SR_SRSL_NS::SRSLVariable::SRSLVariable () = default
+inline SR_SRSL_NS::SRSLVariable::SRSLVariable () 
 ```
 
 

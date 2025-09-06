@@ -80,13 +80,13 @@
 |  [**FColor**](classSR__MATH__NS_1_1FColor.md) & | [**operator\*=**](#function-operator_3) (Unit p\_scalar) <br> |
 |  [**FColor**](classSR__MATH__NS_1_1FColor.md) & | [**operator\*=**](#function-operator_4) (const [**FColor**](classSR__MATH__NS_1_1FColor.md) & p\_v) <br> |
 |  [**FColor**](classSR__MATH__NS_1_1FColor.md) | [**operator+**](#function-operator_5) (const [**FColor**](classSR__MATH__NS_1_1FColor.md) & v) const<br> |
-|  [**FColor**](classSR__MATH__NS_1_1FColor.md) | [**operator-**](#function-operator_6) (const [**FColor**](classSR__MATH__NS_1_1FColor.md) & p\_v) const<br> |
-|  [**FColor**](classSR__MATH__NS_1_1FColor.md) | [**operator/**](#function-operator_7) (const Unit & v) const<br> |
-|  [**FColor**](classSR__MATH__NS_1_1FColor.md) & | [**operator/=**](#function-operator_8) (Unit p\_scalar) <br> |
-|  [**FColor**](classSR__MATH__NS_1_1FColor.md) & | [**operator/=**](#function-operator_9) (const [**FColor**](classSR__MATH__NS_1_1FColor.md) & p\_v) <br> |
-|  [**FColor**](classSR__MATH__NS_1_1FColor.md) & | [**operator=**](#function-operator_10) (const [**FColor**](classSR__MATH__NS_1_1FColor.md) & color) <br> |
-|  [**FColor**](classSR__MATH__NS_1_1FColor.md) & | [**operator=**](#function-operator_11) ([**FColor**](classSR__MATH__NS_1_1FColor.md) && color) <br> |
-|  bool | [**operator==**](#function-operator_12) (const [**FColor**](classSR__MATH__NS_1_1FColor.md) & v) const<br> |
+|  [**FColor**](classSR__MATH__NS_1_1FColor.md) | [**operator-**](#function-operator-) (const [**FColor**](classSR__MATH__NS_1_1FColor.md) & p\_v) const<br> |
+|  [**FColor**](classSR__MATH__NS_1_1FColor.md) | [**operator/**](#function-operator_6) (const Unit & v) const<br> |
+|  [**FColor**](classSR__MATH__NS_1_1FColor.md) & | [**operator/=**](#function-operator_7) (Unit p\_scalar) <br> |
+|  [**FColor**](classSR__MATH__NS_1_1FColor.md) & | [**operator/=**](#function-operator_8) (const [**FColor**](classSR__MATH__NS_1_1FColor.md) & p\_v) <br> |
+|  [**FColor**](classSR__MATH__NS_1_1FColor.md) & | [**operator=**](#function-operator_9) (const [**FColor**](classSR__MATH__NS_1_1FColor.md) & color) <br> |
+|  [**FColor**](classSR__MATH__NS_1_1FColor.md) & | [**operator=**](#function-operator_10) ([**FColor**](classSR__MATH__NS_1_1FColor.md) && color) <br> |
+|  bool | [**operator==**](#function-operator_11) (const [**FColor**](classSR__MATH__NS_1_1FColor.md) & v) const<br> |
 
 
 ## Public Static Functions

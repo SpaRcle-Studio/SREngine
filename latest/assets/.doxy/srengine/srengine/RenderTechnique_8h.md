@@ -11,6 +11,7 @@
 
 
 * `#include <Graphics/Render/IRenderTechnique.h>`
+* `#include <Utils/Resources/Asset.h>`
 
 
 

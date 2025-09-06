@@ -22,7 +22,6 @@
 
     #ifdef SR_COMMON_OPENSSL
         #include <openssl/sha.h>
-        #include <xxHash/xxhash.h>
     #endif
 #endif
 

@@ -61,7 +61,7 @@ Inherited by the following classes: [SR\_GRAPH\_NS::IRenderTechnique](classSR__G
 | ---: | :--- |
 |  void | [**DeInitGraphicsResource**](#function-deinitgraphicsresource) ([**SR\_UTILS\_NS::PassKey**](classSR__UTILS__NS_1_1PassKey.md)&lt; [**RenderContext**](classSR__GRAPH__NS_1_1RenderContext.md) &gt;) <br> |
 |  SR\_NODISCARD const PipelinePtr & | [**GetPipeline**](#function-getpipeline) () noexcept const<br> |
-|  SR\_NODISCARD [**RenderContextPtr**](classSR__GRAPH__NS_1_1RenderContext.md) | [**GetRenderContext**](#function-getrendercontext) () noexcept const<br> |
+|  SR\_NODISCARD const [**RenderContextPtr**](classSR__GRAPH__NS_1_1RenderContext.md) & | [**GetRenderContext**](#function-getrendercontext) () noexcept const<br> |
 |   | [**IGraphicsResource**](#function-igraphicsresource-22) (const [**IGraphicsResource**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md) &) = delete<br> |
 |  SR\_NODISCARD bool | [**IsGraphicsResourceRegistered**](#function-isgraphicsresourceregistered) () noexcept const<br> |
 |  void | [**RegisterGraphicsResource**](#function-registergraphicsresource) () <br> |
@@ -165,7 +165,7 @@ inline SR_NODISCARD const PipelinePtr & SR_GRAPH_NS::Memory::IGraphicsResource::
 ### function GetRenderContext 
 
 ```C++
-inline SR_NODISCARD RenderContextPtr SR_GRAPH_NS::Memory::IGraphicsResource::GetRenderContext () noexcept const
+inline SR_NODISCARD const RenderContextPtr & SR_GRAPH_NS::Memory::IGraphicsResource::GetRenderContext () noexcept const
 ```
 
 

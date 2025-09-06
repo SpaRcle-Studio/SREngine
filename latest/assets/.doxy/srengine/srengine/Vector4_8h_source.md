@@ -69,6 +69,7 @@ namespace SR_MATH_NS {
         template<typename U> Vector4 operator+(const Vector4<U>& v) const;
 
         SR_NODISCARD Vector4 Cross(const Vector4& v) const;
+        SR_NODISCARD Vector4 Round() const;
         SR_NODISCARD T SqrMagnitude() const;
 
         static Vector4<T> UnitX();
@@ -295,6 +296,15 @@ namespace SR_MATH_NS {
 
     template<typename T> template<typename U> Vector4<T> Vector4<T>::operator+(const Vector4<U>& v) const {
         return Vector4(x + v.x, y + v.y, z + v.z, w + v.w);
+    }
+
+    template<typename T> SR_NODISCARD Vector4<T> Vector4<T>::Round() const {
+        return Vector4(
+            static_cast<T>(std::round(x)),
+            static_cast<T>(std::round(y)),
+            static_cast<T>(std::round(z)),
+            static_cast<T>(std::round(w))
+        );
     }
 
     template<typename T> SR_NODISCARD Vector4<T> Vector4<T>::Cross(const Vector4& v) const {

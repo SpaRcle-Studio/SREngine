@@ -37,7 +37,8 @@
 | Type | Name |
 | ---: | :--- |
 | class | [**DebugPass**](classSR__GRAPH__NS_1_1DebugPass.md) <br> |
-| struct | [**MemInfo**](structSR__GRAPH__NS_1_1DebugPass_1_1ShaderInfo_1_1MemInfo.md) <br> |
+| struct | [**DebugPassShaderInfo**](structSR__GRAPH__NS_1_1DebugPassShaderInfo.md) <br> |
+| struct | [**MemInfo**](structSR__GRAPH__NS_1_1DebugPassShaderInfo_1_1MemInfo.md) <br> |
 
 
 

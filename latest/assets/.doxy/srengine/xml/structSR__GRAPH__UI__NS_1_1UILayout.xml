@@ -215,6 +215,7 @@
       <member refid="structSR__GRAPH__UI__NS_1_1UILayout_1a0d58e76dd93f110355d8d67bb89cd57a" prot="public" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UILayout</scope><name>align</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UILayout</scope><name>AllocateStatic</name></member>
       <member refid="structSR__GRAPH__UI__NS_1_1UILayout_1a8290830417fb5a2ac20c33e9f6c7699e" prot="public" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UILayout</scope><name>aspectRatio</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UILayout</scope><name>CloneTo</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a7734143f7ae123a6088320486af89283" prot="public" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UILayout</scope><name>GetBaseMetas</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a97a0919298e9d1d53220613bded5ba69" prot="public" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UILayout</scope><name>GetClassStaticName</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a16a351eac01dde110e273cfd05f1f7ed" prot="public" virt="pure-virtual"><scope>SR_GRAPH_UI_NS::UILayout</scope><name>GetMeta</name></member>

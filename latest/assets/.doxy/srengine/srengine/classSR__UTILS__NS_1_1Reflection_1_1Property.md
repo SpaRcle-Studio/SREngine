@@ -51,12 +51,14 @@
 
 | Type | Name |
 | ---: | :--- |
+|  [**Property**](classSR__UTILS__NS_1_1Reflection_1_1Property.md) & | [**CheckSRClass**](#function-checksrclass) () <br> |
 |  SR\_NODISCARD [**Value**](classSR__UTILS__NS_1_1Reflection_1_1Value.md) | [**Get**](#function-get) ([**SRClass**](classSR__UTILS__NS_1_1SRClass.md) \* pOwner) noexcept const<br> |
 |  SR\_NODISCARD const [**Value**](classSR__UTILS__NS_1_1Reflection_1_1Value.md) & | [**GetDefaultValue**](#function-getdefaultvalue) () noexcept const<br> |
 |  SR\_NODISCARD const [**EditorPropertyParams**](classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams.md) & | [**GetEditorParams**](#function-geteditorparams) () noexcept const<br> |
 |  SR\_NODISCARD [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetName**](#function-getname) () noexcept const<br> |
 |  SR\_NODISCARD PropertyPublicity | [**GetPublicity**](#function-getpublicity) () noexcept const<br> |
 |  SR\_NODISCARD const [**Value**](classSR__UTILS__NS_1_1Reflection_1_1Value.md) & | [**GetResetValue**](#function-getresetvalue) () noexcept const<br> |
+|  SR\_NODISCARD PropertySRClassContainsMode | [**GetSRClassContainsMode**](#function-getsrclasscontainsmode) () noexcept const<br> |
 |  SR\_NODISCARD [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetSerializeName**](#function-getserializename) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**HasExplicitSetter**](#function-hasexplicitsetter) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsActive**](#function-isactive) ([**SRClass**](classSR__UTILS__NS_1_1SRClass.md) \* pOwner) noexcept const<br> |
@@ -106,6 +108,20 @@
 
 ## Public Functions Documentation
 
+
+
+
+### function CheckSRClass 
+
+```C++
+template<typename T>
+inline Property & SR_UTILS_NS::Reflection::Property::CheckSRClass () 
+```
+
+
+
+
+<hr>
 
 
 
@@ -180,6 +196,19 @@ inline SR_NODISCARD PropertyPublicity SR_UTILS_NS::Reflection::Property::GetPubl
 
 ```C++
 inline SR_NODISCARD const Value & SR_UTILS_NS::Reflection::Property::GetResetValue () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetSRClassContainsMode 
+
+```C++
+inline SR_NODISCARD PropertySRClassContainsMode SR_UTILS_NS::Reflection::Property::GetSRClassContainsMode () noexcept const
 ```
 
 

@@ -41,6 +41,7 @@
 |  float\_t | [**fieldHeight**](#variable-fieldheight)   = `0.f`<br> |
 |  float\_t | [**fieldTitleWidth**](#variable-fieldtitlewidth)   = `90.f`<br> |
 |  float\_t | [**fieldWidth**](#variable-fieldwidth)   = `250.f`<br> |
+|  [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; bool([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md))&gt; | [**isEnumValueAvailableCheckFn**](#variable-isenumvalueavailablecheckfn)  <br> |
 |  float\_t | [**lineHeight**](#variable-lineheight)   = `1.f`<br> |
 |  uint32\_t | [**maxPartsInLine**](#variable-maxpartsinline)   = `3`<br> |
 |  bool | [**noHeader**](#variable-noheader)   = `false`<br> |
@@ -184,6 +185,19 @@ float_t SR_CORE_GUI_NS::PropertyDrawerContext::fieldTitleWidth;
 
 ```C++
 float_t SR_CORE_GUI_NS::PropertyDrawerContext::fieldWidth;
+```
+
+
+
+
+<hr>
+
+
+
+### variable isEnumValueAvailableCheckFn 
+
+```C++
+SR_HTYPES_NS::Function<bool(SR_UTILS_NS::StringAtom)> SR_CORE_GUI_NS::PropertyDrawerContext::isEnumValueAvailableCheckFn;
 ```
 
 

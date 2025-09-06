@@ -62,6 +62,7 @@ namespace SR_GRAPH_NS {
 
         std::vector<MaterialShaderProperty> uniforms;
         std::vector<MaterialShaderProperty> samplers;
+        MaterialStageUseType useType = MaterialStageUseType::Full;
 
         void OnPreLoad() override;
         void OnPostLoad() override;
@@ -93,13 +94,12 @@ namespace SR_GRAPH_NS {
         void Save(SR_UTILS_NS::ISerializer& serializer) const override;
         bool Load(SR_UTILS_NS::IDeserializer& deserializer) override;
 
-        SR_NODISCARD SR_GTYPES_NS::Shader::Ptr GetShader(const Pipeline* pPipeline) const noexcept;
-
         void Finalize();
 
         void UseUniforms(const Pipeline* pPipeline);
         void UseSamplers(const Pipeline* pPipeline);
 
+        SR_NODISCARD bool HasStage(SR_UTILS_NS::StringAtom stage) const noexcept;
         SR_NODISCARD MaterialShaderData& GetDefaultShaderData() noexcept { return m_defaultShader; }
         SR_NODISCARD const MaterialShaderData& GetDefaultShaderData() const noexcept { return m_defaultShader; }
         SR_NODISCARD const std::map<SR_UTILS_NS::StringAtom, MaterialShaderData>& GetShadersData() const noexcept { return m_shaders; }
@@ -113,6 +113,7 @@ namespace SR_GRAPH_NS {
         void SR_FASTCALL SetData(SR_UTILS_NS::StringAtom id, const ShaderPropertyVariant& v, ShaderVarType type) noexcept;
         void SR_FASTCALL OnSamplerChanged(SR_GTYPES_NS::Texture::Ptr pOldTexture, SR_GTYPES_NS::Texture::Ptr pNewTexture) noexcept;
 
+        void AddStage(SR_UTILS_NS::StringAtom stage);
         void RemoveStage(SR_UTILS_NS::StringAtom stage);
         void OnPropertyChanged(bool onlyUniforms);
 

@@ -119,7 +119,7 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_NODISCARD OutResult | [**Process**](#function-process) (std::vector&lt; [**Lexem**](structSR__SRSL__NS_1_1Lexem.md) &gt; && lexems, Includes & includes) <br> |
+|  SR\_NODISCARD OutResult | [**Process**](#function-process) (std::vector&lt; [**Lexem**](structSR__SRSL__NS_1_1Lexem.md) &gt; && lexems, Includes & includes, [**ShaderMacrosParams**](structSR__SRSL__NS_1_1ShaderMacrosParams.md) & macros) <br> |
 
 
 
@@ -345,7 +345,8 @@ using SR_SRSL_NS::SRSLPreProcessor::OutResult =  std::pair<std::vector<Lexem>, S
 ```C++
 SR_NODISCARD OutResult SR_SRSL_NS::SRSLPreProcessor::Process (
     std::vector< Lexem > && lexems,
-    Includes & includes
+    Includes & includes,
+    ShaderMacrosParams & macros
 ) 
 ```
 

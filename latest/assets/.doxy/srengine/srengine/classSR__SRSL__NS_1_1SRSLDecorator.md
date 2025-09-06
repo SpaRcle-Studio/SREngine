@@ -99,7 +99,7 @@ Inherits the following classes: [SR\_SRSL\_NS::SRSLLexicalUnit](classSR__SRSL__N
 
 | Type | Name |
 | ---: | :--- |
-|   | [**SRSLDecorator**](#function-srsldecorator-12) () = default<br> |
+|   | [**SRSLDecorator**](#function-srsldecorator-12) () <br> |
 |   | [**SRSLDecorator**](#function-srsldecorator-22) ([**SRSLDecorator**](classSR__SRSL__NS_1_1SRSLDecorator.md) && other) noexcept<br> |
 | virtual SR\_NODISCARD std::string | [**ToString**](#function-tostring) (uint32\_t deep) override const<br> |
 |   | [**~SRSLDecorator**](#function-srsldecorator) () override<br> |
@@ -111,6 +111,8 @@ See [SR\_SRSL\_NS::SRSLLexicalUnit](classSR__SRSL__NS_1_1SRSLLexicalUnit.md)
 
 | Type | Name |
 | ---: | :--- |
+|  SR\_NODISCARD LexicalUnitType | [**GetLexicalUnitType**](classSR__SRSL__NS_1_1SRSLLexicalUnit.md#function-getlexicalunittype) () const<br> |
+|   | [**SRSLLexicalUnit**](classSR__SRSL__NS_1_1SRSLLexicalUnit.md#function-srsllexicalunit) (LexicalUnitType type) <br> |
 | virtual SR\_NODISCARD std::string | [**ToString**](classSR__SRSL__NS_1_1SRSLLexicalUnit.md#function-tostring) (uint32\_t deep) const<br> |
 
 
@@ -254,7 +256,7 @@ std::string SR_SRSL_NS::SRSLDecorator::name;
 ### function SRSLDecorator [1/2]
 
 ```C++
-SR_SRSL_NS::SRSLDecorator::SRSLDecorator () = default
+inline SR_SRSL_NS::SRSLDecorator::SRSLDecorator () 
 ```
 
 

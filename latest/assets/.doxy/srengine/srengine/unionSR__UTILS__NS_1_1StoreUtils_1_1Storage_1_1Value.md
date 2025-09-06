@@ -37,6 +37,8 @@
 | ---: | :--- |
 |  bool | [**b**](#variable-b)  <br> |
 |  float\_t | [**f**](#variable-f)  <br> |
+|  int64\_t | [**i**](#variable-i)  <br> |
+|  std::string \* | [**s**](#variable-s)  <br> |
 
 
 
@@ -103,6 +105,32 @@ bool SR_UTILS_NS::StoreUtils::Storage::Value::b;
 
 ```C++
 float_t SR_UTILS_NS::StoreUtils::Storage::Value::f;
+```
+
+
+
+
+<hr>
+
+
+
+### variable i 
+
+```C++
+int64_t SR_UTILS_NS::StoreUtils::Storage::Value::i;
+```
+
+
+
+
+<hr>
+
+
+
+### variable s 
+
+```C++
+std::string* SR_UTILS_NS::StoreUtils::Storage::Value::s;
 ```
 
 

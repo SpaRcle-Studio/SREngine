@@ -10,10 +10,6 @@
 
 
 
-* `#include <Utils/Common/NonCopyable.h>`
-* `#include <Utils/Common/Hashes.h>`
-* `#include <Utils/Resources/IResource.h>`
-* `#include <Utils/Math/Rect.h>`
 * `#include <Graphics/Types/Vertices.h>`
 * `#include <Graphics/Types/Uniforms.h>`
 * `#include <Graphics/Memory/ShaderUBOBlock.h>`
@@ -21,6 +17,10 @@
 * `#include <Graphics/Memory/ShaderProgramManager.h>`
 * `#include <Graphics/Memory/IGraphicsResource.h>`
 * `#include <Graphics/Memory/UBOManager.h>`
+* `#include <Utils/Common/NonCopyable.h>`
+* `#include <Utils/Common/Hashes.h>`
+* `#include <Utils/Resources/IResource.h>`
+* `#include <Utils/Math/Rect.h>`
 
 
 

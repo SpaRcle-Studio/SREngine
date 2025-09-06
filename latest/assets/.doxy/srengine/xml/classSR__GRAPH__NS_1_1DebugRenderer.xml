@@ -593,6 +593,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugRenderer</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugRenderer</scope><name>AutoFree</name></member>
       <member refid="classSR__GRAPH__NS_1_1DebugRenderer_1aab854b67b35503c63dc2437d56311bad" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DebugRenderer</scope><name>Clear</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugRenderer</scope><name>CloneTo</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DebugRenderer</scope><name>DecrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1DebugRenderer_1af0b188afe319cbed1696ab30832f06e6" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DebugRenderer</scope><name>DeInit</name></member>
       <member refid="classSR__GRAPH__NS_1_1DebugRenderer_1aef8879be56ddfadf9a1657b978124118" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugRenderer</scope><name>DrawType</name></member>
@@ -662,7 +663,7 @@
       <member refid="classSR__GRAPH__NS_1_1DebugRenderer_1a828b0dac682b04d3e01b99b87a20d8e4" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::DebugRenderer</scope><name>Super</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugRenderer</scope><name>TryRecursiveLockIfValid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugRenderer</scope><name>Unlock</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugRenderer</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a783dd9e4a58072de8ff19895693bca05" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DebugRenderer</scope><name>Valid</name></member>
       <member refid="classSR__GRAPH__NS_1_1DebugRenderer_1a349f1d421ce367650bd8f195889df742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugRenderer</scope><name>~DebugRenderer</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugRenderer</scope><name>~SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DebugRenderer</scope><name>~SharedPtrBase</name></member>

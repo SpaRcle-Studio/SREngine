@@ -85,10 +85,10 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="26" column="9"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Marshal_1ac773d260998d5032d2605a6e3748b2bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Marshal_1a96a510a148156f4b916ad3f36196492b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>SR_HTYPES_NS::Marshal::Marshal</definition>
-        <argsstring>(const char *pData, uint64_t size)</argsstring>
+        <argsstring>(const char *pData, uint64_t size, bool copy=true)</argsstring>
         <name>Marshal</name>
         <qualifiedname>SR_HTYPES_NS::Marshal::Marshal</qualifiedname>
         <param>
@@ -98,6 +98,11 @@
         <param>
           <type>uint64_t</type>
           <declname>size</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>copy</declname>
+          <defval>true</defval>
         </param>
         <briefdescription>
         </briefdescription>
@@ -552,11 +557,13 @@
     </collaborationgraph>
     <location file="Engine/libs/Utils/inc/Utils/Types/Marshal.h" line="18" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Types/Marshal.h" bodystart="18" bodyend="58"/>
     <listofallmembers>
+      <member refid="classSR__HTYPES__NS_1_1Stream_1a78c1d68183adcd90826c69d81bef28ad" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>Allocate</name></member>
       <member refid="classSR__HTYPES__NS_1_1Marshal_1a73760ddd9c60785d2ffc5e6f05c8fc7f" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>Append</name></member>
       <member refid="classSR__HTYPES__NS_1_1Marshal_1ae25b1cd17cac99cee0cb9fd14cb08be6" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>Append</name></member>
       <member refid="classSR__HTYPES__NS_1_1Marshal_1a8625dfbc1086a397255c15fea5a39129" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>Append</name></member>
       <member refid="classSR__HTYPES__NS_1_1Marshal_1a42c1526450f2c8798a3f3faf20546b68" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>Copy</name></member>
       <member refid="classSR__HTYPES__NS_1_1Marshal_1af2832a5dcbc79a63ca3d57126852c7e5" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>CopyPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Stream_1a86188e64cb4fcc3d98ded13486caeb32" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>Free</name></member>
       <member refid="classSR__HTYPES__NS_1_1Marshal_1a02acc1e524c23e3012072b1a1d4dbb93" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>FullCopy</name></member>
       <member refid="classSR__HTYPES__NS_1_1Stream_1a064cccd102a613a72b8b7c4ba7619bed" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>GetCapacity</name></member>
       <member refid="classSR__HTYPES__NS_1_1Stream_1a75ab45c65a93cc3841deb3dca42e2800" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>GetPosition</name></member>
@@ -567,7 +574,7 @@
       <member refid="classSR__HTYPES__NS_1_1Marshal_1a3152b8e25d12aeb142ae756bad452704" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>Marshal</name></member>
       <member refid="classSR__HTYPES__NS_1_1Marshal_1a3be4c442aa7ba4251135888fceae9fa1" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>Marshal</name></member>
       <member refid="classSR__HTYPES__NS_1_1Marshal_1a988c1536023fe2e2334400243bc7e4d2" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>Marshal</name></member>
-      <member refid="classSR__HTYPES__NS_1_1Marshal_1ac773d260998d5032d2605a6e3748b2bd" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>Marshal</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Marshal_1a96a510a148156f4b916ad3f36196492b" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>Marshal</name></member>
       <member refid="classSR__HTYPES__NS_1_1Stream_1ae72a2058ae190eb1e378721b373bebe9" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>operator bool</name></member>
       <member refid="classSR__HTYPES__NS_1_1Stream_1a61b6558ffe64c59581e17a90f0f4b81d" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>operator=</name></member>
       <member refid="classSR__HTYPES__NS_1_1Stream_1abb99e5bba77ba64b862cf63d15700bdf" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>operator=</name></member>
@@ -588,7 +595,7 @@
       <member refid="classSR__HTYPES__NS_1_1Stream_1a57b01f768650419f27f8aaa401245cd9" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>Stream</name></member>
       <member refid="classSR__HTYPES__NS_1_1Stream_1a3d5e03ab8fa262737b17b6f699fd684d" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>Stream</name></member>
       <member refid="classSR__HTYPES__NS_1_1Stream_1adf0bef43f21dec11ff2377b08b07091e" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>Stream</name></member>
-      <member refid="classSR__HTYPES__NS_1_1Stream_1a17248b8375d22c877900d1b8f2832b48" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>Stream</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Stream_1aa720f361b3757117432ded53eaffd982" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>Stream</name></member>
       <member refid="classSR__HTYPES__NS_1_1Stream_1a9e31aaaac21df649bbf8817f848b7e9b" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>Stream</name></member>
       <member refid="classSR__HTYPES__NS_1_1Stream_1a79fa01d76368d12260b700e1a62728f4" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>Stream</name></member>
       <member refid="classSR__HTYPES__NS_1_1Marshal_1adecf56dc0e35dd44f51afb0c73448330" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>Super</name></member>
@@ -600,10 +607,10 @@
       <member refid="classSR__HTYPES__NS_1_1Stream_1aa48f5c80bd649fe933c1fc43adf98a6f" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>Valid</name></member>
       <member refid="classSR__HTYPES__NS_1_1Marshal_1a4d83935039fde3a62bb514fb564da852" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>View</name></member>
       <member refid="classSR__HTYPES__NS_1_1Stream_1a83e706b09d2997f9c35173ae01a136d9" prot="public" virt="non-virtual" ambiguityscope="SR_HTYPES_NS::Stream::"><scope>SR_HTYPES_NS::Marshal</scope><name>View</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Stream_1aa60ea0d6b4a473d9058a3567c6758fc0" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>write</name></member>
       <member refid="classSR__HTYPES__NS_1_1Marshal_1acbf1061211821075069eb2659838e9d1" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>Write</name></member>
       <member refid="classSR__HTYPES__NS_1_1Marshal_1acd918f2cb60c1938e06fdb02f2302b03" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>Write</name></member>
       <member refid="classSR__HTYPES__NS_1_1Stream_1af6e2cd628f5d367190b0da045d0e8a27" prot="public" virt="non-virtual" ambiguityscope="SR_HTYPES_NS::Stream::"><scope>SR_HTYPES_NS::Marshal</scope><name>Write</name></member>
-      <member refid="classSR__HTYPES__NS_1_1Stream_1aa60ea0d6b4a473d9058a3567c6758fc0" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>write</name></member>
       <member refid="classSR__HTYPES__NS_1_1Marshal_1a8f18adb8f1fa99308c36e0a4bc2326d4" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>WriteBlock</name></member>
       <member refid="classSR__HTYPES__NS_1_1Marshal_1acde827327a2b2285d0f91422b14d023d" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>~Marshal</name></member>
       <member refid="classSR__HTYPES__NS_1_1Stream_1ac954b317ab66d7e8b8a5dda6182e009e" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Marshal</scope><name>~Stream</name></member>

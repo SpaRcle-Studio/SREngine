@@ -3,6 +3,53 @@
   <compounddef id="classSR__CORE__NS_1_1GUI_1_1EngineStatistics" kind="class" language="C++" prot="public">
     <compoundname>SR_CORE_NS::GUI::EngineStatistics</compoundname>
     <basecompoundref refid="classSR__GRAPH__GUI__NS_1_1Widget" prot="public" virt="non-virtual">SR_GRAPH_GUI_NS::Widget</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1ae9876b3c675a48b7f045f75a773477fb" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_CORE_NS::GUI::EngineStatistics::m_showShaderMacros</definition>
+        <argsstring></argsstring>
+        <name>m_showShaderMacros</name>
+        <qualifiedname>SR_CORE_NS::GUI::EngineStatistics::m_showShaderMacros</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="44" column="14" bodyfile="Engine/inc/Engine/GUI/EngineStatistics.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1ace9e34079ecbbc94e4343d120303ec6c" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_CORE_NS::GUI::EngineStatistics::m_showShaderPrograms</definition>
+        <argsstring></argsstring>
+        <name>m_showShaderPrograms</name>
+        <qualifiedname>SR_CORE_NS::GUI::EngineStatistics::m_showShaderPrograms</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="45" column="14" bodyfile="Engine/inc/Engine/GUI/EngineStatistics.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1a8e61b89eaf2e01f884c0cd654618c262" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_CORE_NS::GUI::EngineStatistics::m_showUnusedShaders</definition>
+        <argsstring></argsstring>
+        <name>m_showUnusedShaders</name>
+        <qualifiedname>SR_CORE_NS::GUI::EngineStatistics::m_showUnusedShaders</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="46" column="14" bodyfile="Engine/inc/Engine/GUI/EngineStatistics.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <sectiondef kind="public-func">
       <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1af0fd71fb613f9622c250adb9f56fe026" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -312,7 +359,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="20" column="5" bodyfile="Engine/inc/Engine/GUI/EngineStatistics.h" bodystart="20" bodyend="43"/>
+    <location file="Engine/inc/Engine/GUI/EngineStatistics.h" line="20" column="5" bodyfile="Engine/inc/Engine/GUI/EngineStatistics.h" bodystart="20" bodyend="48"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a4a04e0628b5729444eca1c24a9011fa2" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GUI::EngineStatistics</scope><name>AddFlags</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1adb2cb15cb7a11b055f8659f1db8c5521" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::EngineStatistics</scope><name>AddSubWidget</name></member>
@@ -345,6 +392,9 @@
       <member refid="classSR__UTILS__NS_1_1InputHandler_1ac2e6a409a38ca80df3a3eb7418490182" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GUI::EngineStatistics</scope><name>IsKeyPressed</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aa7b9cc737b77f148ddaf23a2c687681b" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::EngineStatistics</scope><name>IsOpen</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a97257c8a73c16a33020b1bdda27f054e" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GUI::EngineStatistics</scope><name>m_mutex</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1ae9876b3c675a48b7f045f75a773477fb" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::EngineStatistics</scope><name>m_showShaderMacros</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1ace9e34079ecbbc94e4343d120303ec6c" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::EngineStatistics</scope><name>m_showShaderPrograms</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1a8e61b89eaf2e01f884c0cd654618c262" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::EngineStatistics</scope><name>m_showUnusedShaders</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a4cea7673a9a29502c407f76cf2da6550" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GUI::EngineStatistics</scope><name>m_subWidgets</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a55e8701e527dd9134c8349540b951295" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GUI::EngineStatistics</scope><name>m_widgetFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GUI::EngineStatistics</scope><name>NonCopyable</name></member>

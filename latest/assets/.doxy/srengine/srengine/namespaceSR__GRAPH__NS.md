@@ -48,7 +48,7 @@
 | class | [**AtlasBuilder**](classSR__GRAPH__NS_1_1AtlasBuilder.md) <br> |
 | struct | [**AtlasBuilderData**](structSR__GRAPH__NS_1_1AtlasBuilderData.md) <br> |
 | class | [**BaseMaterial**](classSR__GRAPH__NS_1_1BaseMaterial.md) <br> |
-| class | [**BasePass**](classSR__GRAPH__NS_1_1BasePass.md) <br> |
+| class | [**BasePass**](classSR__GRAPH__NS_1_1BasePass.md) <br>_@abstract_  |
 | class | [**BasicWindowImpl**](classSR__GRAPH__NS_1_1BasicWindowImpl.md) <br> |
 | class | [**CascadedShadowMapPass**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md) <br> |
 | class | [**ClearBuffersPass**](classSR__GRAPH__NS_1_1ClearBuffersPass.md) <br> |
@@ -57,8 +57,8 @@
 | struct | [**ColorLayer**](structSR__GRAPH__NS_1_1ColorLayer.md) <br> |
 | class | [**DebugMeshCluster**](classSR__GRAPH__NS_1_1DebugMeshCluster.md) <br> |
 | class | [**DebugPass**](classSR__GRAPH__NS_1_1DebugPass.md) <br> |
+| struct | [**DebugPassShaderInfo**](structSR__GRAPH__NS_1_1DebugPassShaderInfo.md) <br> |
 | class | [**DebugRenderer**](classSR__GRAPH__NS_1_1DebugRenderer.md) <br> |
-| class | [**DepthBufferPass**](classSR__GRAPH__NS_1_1DepthBufferPass.md) <br> |
 | struct | [**DepthLayer**](structSR__GRAPH__NS_1_1DepthLayer.md) <br> |
 | class | [**DescriptorManager**](classSR__GRAPH__NS_1_1DescriptorManager.md) <br> |
 | class | [**DirectionalLight**](classSR__GRAPH__NS_1_1DirectionalLight.md) <br> |
@@ -67,12 +67,12 @@
 | class | [**FileMaterialResource**](classSR__GRAPH__NS_1_1FileMaterialResource.md) <br> |
 | class | [**FileRenderTechnique**](classSR__GRAPH__NS_1_1FileRenderTechnique.md) <br> |
 | class | [**FileRenderTechniqueResource**](classSR__GRAPH__NS_1_1FileRenderTechniqueResource.md) <br> |
-| class | [**FlatClusterPass**](classSR__GRAPH__NS_1_1FlatClusterPass.md) <br> |
 | class | [**FlatMeshCluster**](classSR__GRAPH__NS_1_1FlatMeshCluster.md) <br> |
 | class | [**FrameBufferController**](classSR__GRAPH__NS_1_1FrameBufferController.md) <br> |
 | struct | [**FrameBufferFeatures**](structSR__GRAPH__NS_1_1FrameBufferFeatures.md) <br> |
+| class | [**FrameBufferPass**](classSR__GRAPH__NS_1_1FrameBufferPass.md) <br> |
+| class | [**FrameBufferPassData**](classSR__GRAPH__NS_1_1FrameBufferPassData.md) <br> |
 | class | [**FrameBufferQueue**](classSR__GRAPH__NS_1_1FrameBufferQueue.md) <br> |
-| class | [**FramebufferPass**](classSR__GRAPH__NS_1_1FramebufferPass.md) <br> |
 | class | [**FreeTypeDrawContext**](classSR__GRAPH__NS_1_1FreeTypeDrawContext.md) <br> |
 | class | [**FreeTypeFace**](classSR__GRAPH__NS_1_1FreeTypeFace.md) <br> |
 | struct | [**Frustum**](structSR__GRAPH__NS_1_1Frustum.md) <br> |
@@ -84,13 +84,9 @@
 | struct | [**GlyphMetrics**](structSR__GRAPH__NS_1_1GlyphMetrics.md) <br> |
 | class | [**GroupPass**](classSR__GRAPH__NS_1_1GroupPass.md) <br> |
 | class | [**IColorBufferPass**](classSR__GRAPH__NS_1_1IColorBufferPass.md) <br> |
-| class | [**IFramebufferPass**](classSR__GRAPH__NS_1_1IFramebufferPass.md) <br> |
 | class | [**ILightComponent**](classSR__GRAPH__NS_1_1ILightComponent.md) <br> |
-| class | [**IMesh3DClusterPass**](classSR__GRAPH__NS_1_1IMesh3DClusterPass.md) <br> |
-| class | [**IMeshClusterPass**](classSR__GRAPH__NS_1_1IMeshClusterPass.md) <br> |
 | class | [**IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) <br> |
 | class | [**IRenderer**](classSR__GRAPH__NS_1_1IRenderer.md) <br> |
-| class | [**ISamplersPass**](classSR__GRAPH__NS_1_1ISamplersPass.md) <br> |
 | class | [**ImGuiOverlay**](classSR__GRAPH__NS_1_1ImGuiOverlay.md) <br> |
 | struct | [**ImGui\_ImplVulkanH\_FrameRenderBuffers**](structSR__GRAPH__NS_1_1ImGui__ImplVulkanH__FrameRenderBuffers.md) <br> |
 | struct | [**ImGui\_ImplVulkanH\_WindowRenderBuffers**](structSR__GRAPH__NS_1_1ImGui__ImplVulkanH__WindowRenderBuffers.md) <br> |
@@ -105,10 +101,12 @@
 | struct | [**MaterialShaderProperty**](structSR__GRAPH__NS_1_1MaterialShaderProperty.md) <br> |
 | struct | [**Mesh3dUBO**](structSR__GRAPH__NS_1_1Mesh3dUBO.md) <br> |
 | class | [**MeshCluster**](classSR__GRAPH__NS_1_1MeshCluster.md) <br> |
+| struct | [**MeshDrawerMaterialUniforms**](structSR__GRAPH__NS_1_1MeshDrawerMaterialUniforms.md) <br> |
 | class | [**MeshDrawerPass**](classSR__GRAPH__NS_1_1MeshDrawerPass.md) <br> |
+| struct | [**MeshDrawerSharedUniforms**](structSR__GRAPH__NS_1_1MeshDrawerSharedUniforms.md) <br> |
+| struct | [**MeshDrawerUniforms**](structSR__GRAPH__NS_1_1MeshDrawerUniforms.md) <br> |
 | class | [**MeshMaterialProperty**](classSR__GRAPH__NS_1_1MeshMaterialProperty.md) <br> |
 | struct | [**MeshRegistrationInfo**](structSR__GRAPH__NS_1_1MeshRegistrationInfo.md) <br> |
-| class | [**OffScreenMeshDrawerPass**](classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass.md) <br> |
 | class | [**OpaqueMeshCluster**](classSR__GRAPH__NS_1_1OpaqueMeshCluster.md) <br> |
 | class | [**OpaquePass**](classSR__GRAPH__NS_1_1OpaquePass.md) <br> |
 | class | [**Overlay**](classSR__GRAPH__NS_1_1Overlay.md) <br> |
@@ -128,7 +126,11 @@
 | struct | [**RenderQueuePredicate**](structSR__GRAPH__NS_1_1RenderQueuePredicate.md) <br> |
 | class | [**RenderScene**](classSR__GRAPH__NS_1_1RenderScene.md) <br> |
 | class | [**RenderSettings**](classSR__GRAPH__NS_1_1RenderSettings.md) <br> |
+| struct | [**RenderSettingsPreset**](structSR__GRAPH__NS_1_1RenderSettingsPreset.md) <br> |
+| class | [**RenderStagesSettings**](classSR__GRAPH__NS_1_1RenderStagesSettings.md) <br> |
 | class | [**RenderStrategy**](classSR__GRAPH__NS_1_1RenderStrategy.md) <br> |
+| struct | [**RenderTechniqueData**](structSR__GRAPH__NS_1_1RenderTechniqueData.md) <br> |
+| struct | [**RenderTechniqueQueue**](structSR__GRAPH__NS_1_1RenderTechniqueQueue.md) <br> |
 | struct | [**SRCubeMapCreateInfo**](structSR__GRAPH__NS_1_1SRCubeMapCreateInfo.md) <br> |
 | struct | [**SRDescriptorUpdateInfo**](structSR__GRAPH__NS_1_1SRDescriptorUpdateInfo.md) <br> |
 | struct | [**SRFrameBufferCreateInfo**](structSR__GRAPH__NS_1_1SRFrameBufferCreateInfo.md) <br> |
@@ -139,13 +141,12 @@
 | class | [**SSAOPass**](classSR__GRAPH__NS_1_1SSAOPass.md) <br> |
 | struct | [**SSBOBinding**](structSR__GRAPH__NS_1_1SSBOBinding.md) <br> |
 | class | [**SSBOManager**](classSR__GRAPH__NS_1_1SSBOManager.md) <br> |
+| struct | [**SamplerData**](structSR__GRAPH__NS_1_1SamplerData.md) <br> |
+| class | [**SamplersPassData**](classSR__GRAPH__NS_1_1SamplersPassData.md) <br> |
 | class | [**ScriptableRenderTechnique**](classSR__GRAPH__NS_1_1ScriptableRenderTechnique.md) <br> |
 | class | [**ShadedMeshSubCluster**](classSR__GRAPH__NS_1_1ShadedMeshSubCluster.md) <br> |
-| class | [**ShaderOverridePass**](classSR__GRAPH__NS_1_1ShaderOverridePass.md) <br> |
-| class | [**ShaderReplacePredicate**](classSR__GRAPH__NS_1_1ShaderReplacePredicate.md) <br> |
+| class | [**ShaderCache**](classSR__GRAPH__NS_1_1ShaderCache.md) <br> |
 | struct | [**ShaderSampler**](structSR__GRAPH__NS_1_1ShaderSampler.md) <br> |
-| struct | [**ShaderUseInfo**](structSR__GRAPH__NS_1_1ShaderUseInfo.md) <br> |
-| class | [**ShadowMapPass**](classSR__GRAPH__NS_1_1ShadowMapPass.md) <br> |
 | class | [**SkyboxPass**](classSR__GRAPH__NS_1_1SkyboxPass.md) <br> |
 | class | [**SortedMeshQueue**](classSR__GRAPH__NS_1_1SortedMeshQueue.md) <br> |
 | class | [**SortedOpaqueMeshQueue**](classSR__GRAPH__NS_1_1SortedOpaqueMeshQueue.md) <br> |
@@ -181,9 +182,7 @@
 | typedef std::unordered\_set&lt; [**SR\_GTYPES\_NS::Mesh**](classSR__GTYPES__NS_1_1Mesh.md) \* &gt; | [**MeshGroup**](#typedef-meshgroup)  <br> |
 | typedef std::unordered\_map&lt; ClusterVBOId, MeshGroup &gt; | [**MeshGroups**](#typedef-meshgroups)  <br> |
 | typedef bool(\* | [**MeshQSortCmpFn**](#typedef-meshqsortcmpfn)  <br> |
-| typedef std::vector&lt; [**BasePass**](classSR__GRAPH__NS_1_1BasePass.md) \* &gt; | [**PassQueue**](#typedef-passqueue)  <br> |
-| typedef std::vector&lt; PassQueue &gt; | [**PassQueues**](#typedef-passqueues)  <br> |
-| typedef std::map&lt; std::string, [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; [**BasePass**](classSR__GRAPH__NS_1_1BasePass.md) \*(const SR\_XML\_NS::Node &, [**IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \*)&gt; &gt; | [**RenderPassMap**](#typedef-renderpassmap)  <br> |
+| typedef std::vector&lt; [**RenderTechniqueQueue**](structSR__GRAPH__NS_1_1RenderTechniqueQueue.md) &gt; | [**RenderTechniqueQueues**](#typedef-rendertechniquequeues)  <br> |
 | typedef std::vector&lt; [**SRDescriptorUpdateInfo**](structSR__GRAPH__NS_1_1SRDescriptorUpdateInfo.md) &gt; | [**SRDescriptorUpdateInfos**](#typedef-srdescriptorupdateinfos)  <br> |
 | typedef std::vector&lt; [**SSBOBinding**](structSR__GRAPH__NS_1_1SSBOBinding.md) &gt; | [**SSBOBindings**](#typedef-ssbobindings)  <br> |
 | typedef std::list&lt; ShaderProperty &gt; | [**ShaderProperties**](#typedef-shaderproperties)  <br> |
@@ -218,6 +217,9 @@
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_LINE\_COLOR**](#variable-shader_line_color)   = `"LINE\_COLOR"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_LINE\_END\_POINT**](#variable-shader_line_end_point)   = `"LINE\_END\_POINT"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_LINE\_START\_POINT**](#variable-shader_line_start_point)   = `"LINE\_START\_POINT"`<br> |
+|  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_MACRO\_SR\_DEFINE\_CASCADED\_SHADOW\_MAP\_PASS**](#variable-shader_macro_sr_define_cascaded_shadow_map_pass)   = `"SR\_DEFINE\_CASCADED\_SHADOW\_MAP\_PASS"`<br> |
+|  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_MACRO\_SR\_DEFINE\_COLOR\_PASS**](#variable-shader_macro_sr_define_color_pass)   = `"SR\_DEFINE\_COLOR\_PASS"`<br> |
+|  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_MACRO\_SR\_DEFINE\_USE\_CASCADED\_SHADOW\_MAP**](#variable-shader_macro_sr_define_use_cascaded_shadow_map)   = `"SR\_DEFINE\_USE\_CASCADED\_SHADOW\_MAP"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_MODEL\_MATRIX**](#variable-shader_model_matrix)   = `"MODEL\_MATRIX"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_MODEL\_NO\_SCALE\_MATRIX**](#variable-shader_model_no_scale_matrix)   = `"MODEL\_NO\_SCALE\_MATRIX"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_NDC\_RECT**](#variable-shader_ndc_rect)   = `"NDC\_RECT"`<br> |
@@ -227,6 +229,7 @@
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_PC\_SHADOW\_CASCADE\_INDEX**](#variable-shader_pc_shadow_cascade_index)   = `"PC\_SHADOW\_CASCADE\_INDEX"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_PROJECTION\_MATRIX**](#variable-shader_projection_matrix)   = `"PROJECTION\_MATRIX"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_PROJECTION\_NO\_FOV\_MATRIX**](#variable-shader_projection_no_fov_matrix)   = `"PROJECTION\_NO\_FOV\_MATRIX"`<br> |
+|  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_RENDER\_PASS\_TYPE**](#variable-shader_render_pass_type)   = `"RENDER\_PASS\_TYPE"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_RESOLUTION**](#variable-shader_resolution)   = `"RESOLUTION"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_RGBA\_VALUE**](#variable-shader_rgba_value)   = `"RGBA\_VALUE"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_SKELETON\_MATRICES\_128**](#variable-shader_skeleton_matrices_128)   = `"SKELETON\_MATRICES\_128"`<br> |
@@ -276,10 +279,9 @@
 
 | Type | Name |
 | ---: | :--- |
-|  uint8\_t \* | [**Compress**](#function-compress) (uint32\_t w, uint32\_t h, uint8\_t \* pixels, SR\_GRAPH\_NS::TextureCompression method) <br> |
+|  uint8\_t \* | [**Compress**](#function-compress) (uint32\_t w, uint32\_t h, const uint8\_t \* pixels, SR\_GRAPH\_NS::TextureCompression method) <br> |
 |  [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**SR\_GTYPES\_NS::Mesh**](classSR__GTYPES__NS_1_1Mesh.md) &gt; | [**CreateMeshByType**](#function-createmeshbytype) (MeshType type) <br> |
 |  uint32\_t | [**GetPixelSize**](#function-getpixelsize) (ImageFormat format) <br> |
-|  RenderPassMap & | [**GetRenderPassMap**](#function-getrenderpassmap) () <br> |
 |  void | [**LoadMaterialProperties**](#function-loadmaterialproperties) (const std::string & materialDebugIdentifier, const SR\_XML\_NS::Node & propertiesNode, [**MaterialProperties**](classSR__GRAPH__NS_1_1MaterialProperties.md) \* pProperties) <br> |
 |  bool SR\_FASTCALL | [**QuickSort**](#function-quicksort) ([**SR\_GTYPES\_NS::Mesh**](classSR__GTYPES__NS_1_1Mesh.md) \*\* data, const SR\_MATH\_NS::FVector3 & pos, MeshQSortCmpFn cmp, uint32\_t count) <br> |
 |  bool SR\_FASTCALL | [**QuickSortInternal**](#function-quicksortinternal) ([**SR\_GTYPES\_NS::Mesh**](classSR__GTYPES__NS_1_1Mesh.md) \*\* data, const SR\_MATH\_NS::FVector3 & pos, MeshQSortCmpFn cmp, uint32\_t lowestIndex, uint32\_t higherIndex) <br> |
@@ -291,10 +293,13 @@
 |   | [**SR\_ENUM\_NS\_CLASS**](#function-sr_enum_ns_class) (UBOType, Common, Shared) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (FontStyle, uint32\_t, Regular=0, Bold=1, Italic=2, BoldItalic=3) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (LightType, uint8\_t, Directional, Point, Spot, Area, Probe) <br> |
+|   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (ShaderRenderPassType, uint32\_t, Undefined, Main, Depth, ColorBuffer) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (ShaderVarType, uint8\_t, Unknown, Bool, Int, Float, Vec2, Vec3, Vec4, IVec2, IVec3, IVec4, BVec2, BVec3, BVec4, Mat2, Mat3, Mat4, Sampler1D, Sampler2D, Sampler3D, SamplerCube, Sampler1DShadow, Sampler2DShadow, Skeleton128) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (MaterialType, uint8\_t, None, File, Unique) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (OverlayType, uint8\_t, None, All, ImGui, Steam, EpicGames) <br> |
+|   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (SamplerDataUsageType, uint8\_t, Texture, FrameBufferDepth, FrameBufferColor) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (DeviceType, uint8\_t, Nvidia, AMD, Intel) <br> |
+|   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (MaterialStageUseType, uint8\_t, Full, None, Uniforms, Samplers) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (ShaderBindResult, uint8\_t, Failed=0, Success=1, Duplicated, ReAllocated) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (ShaderStage, uint8\_t, Unknown, Vertex, Fragment, Geometry, Tesselation, Compute, Raygen, Intersection, HitClosest, HitAny, MissPrimary, MissSecondary) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (PipelineType, uint8\_t, Unknown, OpenGL, Vulkan, DirectX9, DirectX10, DirectX11, DirectX12) <br> |
@@ -446,36 +451,10 @@ typedef bool(* SR_GRAPH_NS::MeshQSortCmpFn) (const SR_GTYPES_NS::Mesh *left, con
 
 
 
-### typedef PassQueue 
+### typedef RenderTechniqueQueues 
 
 ```C++
-using SR_GRAPH_NS::PassQueue = typedef std::vector<BasePass*>;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef PassQueues 
-
-```C++
-using SR_GRAPH_NS::PassQueues = typedef std::vector<PassQueue>;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef RenderPassMap 
-
-```C++
-typedef std::map<std::string, SR_HTYPES_NS::Function<BasePass*(const SR_XML_NS::Node&, IRenderTechnique*)> > SR_GRAPH_NS::RenderPassMap;
+using SR_GRAPH_NS::RenderTechniqueQueues = typedef std::vector<RenderTechniqueQueue>;
 ```
 
 
@@ -532,7 +511,7 @@ typedef std::variant< SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Texture>, float_t, i
 
 
 
-Реализация аттачментов (выходов кадровых буферов) сделана на уровне проходов рендера. См. [**ISamplersPass**](classSR__GRAPH__NS_1_1ISamplersPass.md). На уровне шейдера не должны поддерживаться аттачменты, т.к. это не безопасно. 
+Реализация аттачментов (выходов кадровых буферов) сделана на уровне проходов рендера. См. ISamplersPass. На уровне шейдера не должны поддерживаться аттачменты, т.к. это не безопасно. 
 
 
         
@@ -834,6 +813,45 @@ SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_LINE_START_POINT;
 
 
 
+### variable SHADER\_MACRO\_SR\_DEFINE\_CASCADED\_SHADOW\_MAP\_PASS 
+
+```C++
+SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_MACRO_SR_DEFINE_CASCADED_SHADOW_MAP_PASS;
+```
+
+
+
+
+<hr>
+
+
+
+### variable SHADER\_MACRO\_SR\_DEFINE\_COLOR\_PASS 
+
+```C++
+SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_MACRO_SR_DEFINE_COLOR_PASS;
+```
+
+
+
+
+<hr>
+
+
+
+### variable SHADER\_MACRO\_SR\_DEFINE\_USE\_CASCADED\_SHADOW\_MAP 
+
+```C++
+SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_MACRO_SR_DEFINE_USE_CASCADED_SHADOW_MAP;
+```
+
+
+
+
+<hr>
+
+
+
 ### variable SHADER\_MODEL\_MATRIX 
 
 ```C++
@@ -942,6 +960,19 @@ SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_PROJECTION_MATRIX;
 
 ```C++
 SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_PROJECTION_NO_FOV_MATRIX;
+```
+
+
+
+
+<hr>
+
+
+
+### variable SHADER\_RENDER\_PASS\_TYPE 
+
+```C++
+SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_RENDER_PASS_TYPE;
 ```
 
 
@@ -1336,7 +1367,7 @@ SR_GRAPH_NS::uint8_t;
 uint8_t * SR_GRAPH_NS::Compress (
     uint32_t w,
     uint32_t h,
-    uint8_t * pixels,
+    const uint8_t * pixels,
     SR_GRAPH_NS::TextureCompression method
 ) 
 ```
@@ -1369,19 +1400,6 @@ SR_HTYPES_NS::SharedPtr < SR_GTYPES_NS::Mesh > SR_GRAPH_NS::CreateMeshByType (
 uint32_t SR_GRAPH_NS::GetPixelSize (
     ImageFormat format
 ) 
-```
-
-
-
-
-<hr>
-
-
-
-### function GetRenderPassMap 
-
-```C++
-RenderPassMap & SR_GRAPH_NS::GetRenderPassMap () 
 ```
 
 
@@ -1638,6 +1656,26 @@ SR_GRAPH_NS::SR_ENUM_NS_CLASS_T (
 
 ```C++
 SR_GRAPH_NS::SR_ENUM_NS_CLASS_T (
+    ShaderRenderPassType,
+    uint32_t,
+    Undefined,
+    Main,
+    Depth,
+    ColorBuffer
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function SR\_ENUM\_NS\_CLASS\_T 
+
+```C++
+SR_GRAPH_NS::SR_ENUM_NS_CLASS_T (
     ShaderVarType,
     uint8_t,
     Unknown,
@@ -1717,11 +1755,50 @@ SR_GRAPH_NS::SR_ENUM_NS_CLASS_T (
 
 ```C++
 SR_GRAPH_NS::SR_ENUM_NS_CLASS_T (
+    SamplerDataUsageType,
+    uint8_t,
+    Texture,
+    FrameBufferDepth,
+    FrameBufferColor
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function SR\_ENUM\_NS\_CLASS\_T 
+
+```C++
+SR_GRAPH_NS::SR_ENUM_NS_CLASS_T (
     DeviceType,
     uint8_t,
     Nvidia,
     AMD,
     Intel
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function SR\_ENUM\_NS\_CLASS\_T 
+
+```C++
+SR_GRAPH_NS::SR_ENUM_NS_CLASS_T (
+    MaterialStageUseType,
+    uint8_t,
+    Full,
+    None,
+    Uniforms,
+    Samplers
 ) 
 ```
 

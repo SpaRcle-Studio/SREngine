@@ -275,6 +275,24 @@ namespace SR_GRAPH_GUI_NS {
             Appearing     = 1 << 3    // Set the variable if the object/window is appearing after being hidden/inactive (or the first time)
         )
 
+        // Note: windows with the ImGuiWindowFlags_NoInputs flag are ignored by IsWindowHovered() calls.
+        SR_ENUM_NS_STRUCT_T(HoveredFlags, uint32_t,
+            None                          = 0,        // Return true if directly over the item/window, not obstructed by another window, not obstructed by an active popup or modal blocking inputs under them.
+            ChildWindows                  = 1 << 0,   // IsWindowHovered() only: Return true if any children of the window is hovered
+            RootWindow                    = 1 << 1,   // IsWindowHovered() only: Test from root window (top most parent of the current hierarchy)
+            AnyWindow                     = 1 << 2,   // IsWindowHovered() only: Return true if any window is hovered
+            NoPopupHierarchy              = 1 << 3,   // IsWindowHovered() only: Do not consider popup hierarchy (do not treat popup emitter as parent of popup) (when used with _ChildWindows or _RootWindow)
+            DockHierarchy                 = 1 << 4,   // IsWindowHovered() only: Consider docking hierarchy (treat dockspace host as parent of docked window) (when used with _ChildWindows or _RootWindow)
+            AllowWhenBlockedByPopup       = 1 << 5,   // Return true even if a popup window is normally blocking access to this item/window
+            s_AllowWhenBlockedByModal     = 1 << 6,   // Return true even if a modal popup window is normally blocking access to this item/window. FIXME-TODO: Unavailable yet.
+            AllowWhenBlockedByActiveItem  = 1 << 7,   // Return true even if an active item is blocking access to this item/window. Useful for Drag and Drop patterns.
+            AllowWhenOverlapped           = 1 << 8,   // IsItemHovered() only: Return true even if the position is obstructed or overlapped by another window
+            AllowWhenDisabled             = 1 << 9,   // IsItemHovered() only: Return true even if the item is disabled
+            NoNavOverride                 = 1 << 10,  // Disable using gamepad/keyboard navigation state when active, always query mouse.
+            RectOnly                      = AllowWhenBlockedByPopup | AllowWhenBlockedByActiveItem | AllowWhenOverlapped,
+            RootAndChildWindows           = RootWindow | ChildWindows
+        )
+
         enum class SR_RENDERER_DLL_API MouseButton
         {
             Left = 0,
@@ -307,7 +325,7 @@ namespace SR_GRAPH_GUI_NS {
         SR_RENDERER_DLL_API extern void PushID(int intId);
         SR_RENDERER_DLL_API extern void PopID();
         SR_RENDERER_DLL_API extern bool IsAnyItemHovered();
-        SR_RENDERER_DLL_API extern bool IsWindowHovered();
+        SR_RENDERER_DLL_API extern bool IsWindowHovered(HoveredFlags flags = HoveredFlags::None);
         SR_RENDERER_DLL_API extern void WindowTreeNodeSetOpen(bool open, uint64_t id);
         SR_RENDERER_DLL_API extern void PushStyleVar(StyleVar idx, float val);
         SR_RENDERER_DLL_API extern void PushStyleVar(StyleVar idx, const SR_MATH_NS::FVector2& val);
@@ -317,6 +335,7 @@ namespace SR_GRAPH_GUI_NS {
         SR_RENDERER_DLL_API extern void SameLine();
         SR_RENDERER_DLL_API extern bool Button(const char* label, const SR_MATH_NS::FVector2& size = { 0.f, 0.f });
         SR_RENDERER_DLL_API extern bool Checkbox(const char* label, bool* v);
+        SR_RENDERER_DLL_API extern bool IsCurrentlyDisabled();
         SR_RENDERER_DLL_API extern bool IsItemHovered();
         SR_RENDERER_DLL_API extern bool IsItemFocused();
         SR_RENDERER_DLL_API extern bool DragScalar(const char* label, ImmediateDataType type, void* pData, float_t vSpeed, const void* pMin = nullptr, const void* pMax = nullptr, const char* format = nullptr);
@@ -345,6 +364,7 @@ namespace SR_GRAPH_GUI_NS {
         SR_RENDERER_DLL_API extern uint32_t GetColorU32(StyleColor idx, float alpha_mul = 1.0f);
         SR_RENDERER_DLL_API extern void RenderArrow(void* pDrawList, const SR_MATH_NS::FVector2& pos, uint32_t color, Direction dir, float_t scale = 1.0f);
         SR_RENDERER_DLL_API extern bool InputFloat(const char* label, float_t* v, float_t step = 0.0f, float_t stepFast = 0.0f, const char* format = "%.3f", InputTextFlags flags = InputTextFlags::None);
+        SR_RENDERER_DLL_API extern bool InputInt(const char* label, int* v, int step = 1, int step_fast = 100, InputTextFlags flags = InputTextFlags::None);
         SR_RENDERER_DLL_API extern bool Combo(const char* label, int* current_item, const char* items_separated_by_zeros);
         SR_RENDERER_DLL_API extern bool Combo(const char* label, int* current_item, bool(*items_getter)(void* data, int idx, const char** out_text), void* data, int items_count, int popup_max_height_in_items = -1);
 

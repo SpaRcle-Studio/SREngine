@@ -82,70 +82,87 @@ namespace SR_HTYPES_NS {
 
 
     template<typename T> void DataStorage::SetPointer(const std::string& name, T* pPointer) {
+        SR_TRACY_ZONE;
         SetPointer(SR_HASH_STR_REGISTER(name), pPointer);
     }
 
     template<typename T> void DataStorage::SetPointer(T* pPointer) {
+        SR_TRACY_ZONE;
         SetPointer(SR_HASH_TYPE_NAME_STR_REGISTER(T), pPointer);
     }
 
     template<typename T> T *DataStorage::GetPointer(const std::string& name) const  {
+        SR_TRACY_ZONE;
         return GetPointer<T>(SR_HASH_STR_REGISTER(name));
     }
 
     template<typename T> T *DataStorage::GetPointer() const {
+        SR_TRACY_ZONE;
         return GetPointer<T>(SR_HASH_TYPE_NAME_STR_REGISTER(T));
     }
 
     template<typename T> void DataStorage::SetValue(const std::string &name, const T &value) {
+        SR_TRACY_ZONE;
         SetValue(SR_HASH_STR_REGISTER(name), value);
     }
 
     template<typename T> void DataStorage::SetValue(const T &value) {
+        SR_TRACY_ZONE;
         SetValue(SR_HASH_TYPE_NAME_STR_REGISTER(T), value);
     }
 
     template<typename T> T DataStorage::GetValue(const char* name) const {
+        SR_TRACY_ZONE;
         return GetValue<T>(SR_HASH_STR_REGISTER(name));
     }
 
     template<typename T> T DataStorage::GetValue(const std::string& name) const {
+        SR_TRACY_ZONE;
         return GetValue<T>(SR_HASH_STR_REGISTER(name));
     }
 
     template<typename T> T DataStorage::GetValue() const {
+        SR_TRACY_ZONE;
         return GetValue<T>(SR_HASH_TYPE_NAME_STR_REGISTER(T));
     }
 
     template<typename T> T DataStorage::GetValueDef(const std::string& name, const T& def) const {
+        SR_TRACY_ZONE;
         return GetValueDef<T>(SR_HASH_STR_REGISTER(name), def);
     }
 
     template<typename T> T DataStorage::GetValueDef(const T& def) const {
+        SR_TRACY_ZONE;
         return GetValueDef<T>(SR_HASH_TYPE_NAME_STR_REGISTER(T), def);
     }
 
     template<typename T> T *DataStorage::GetPointerDef(const std::string& name, T *def) const {
+        SR_TRACY_ZONE;
         return GetPointerDef<T>(SR_HASH_STR_REGISTER(name), def);
     }
 
     template<typename T> T *DataStorage::GetPointerDef(T *def) const {
+        SR_TRACY_ZONE;
         return GetPointerDef<T>(SR_HASH_TYPE_NAME_STR_REGISTER(T), def);
     }
 
     template<typename T> bool DataStorage::RemovePointer() {
+        SR_TRACY_ZONE;
         return RemovePointer<T>(SR_HASH_TYPE_NAME_STR_REGISTER(T));
     }
 
     template<typename T> bool DataStorage::RemovePointer(const std::string& name) {
+        SR_TRACY_ZONE;
         return RemovePointer<T>(SR_HASH_STR_REGISTER(name));
     }
 
     template<typename T> bool DataStorage::RemoveValue(const std::string& name) {
+        SR_TRACY_ZONE;
         return RemoveValue<T>(SR_HASH_STR_REGISTER(name));
     }
 
     template<typename T> bool DataStorage::RemoveValue() {
+        SR_TRACY_ZONE;
         return RemoveValue<T>(SR_HASH_TYPE_NAME_STR_REGISTER(T));
     }
 

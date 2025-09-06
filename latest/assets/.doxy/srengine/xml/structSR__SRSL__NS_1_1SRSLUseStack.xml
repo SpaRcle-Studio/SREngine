@@ -47,6 +47,20 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="31" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" bodystart="31" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="structSR__SRSL__NS_1_1SRSLUseStack_1ad39c08d850767554cbb6c947d8a6d8d7" prot="public" static="no" mutable="no">
+        <type>std::set&lt; std::string &gt;</type>
+        <definition>std::set&lt;std::string&gt; SR_SRSL_NS::SRSLUseStack::forceUsed</definition>
+        <argsstring></argsstring>
+        <name>forceUsed</name>
+        <qualifiedname>SR_SRSL_NS::SRSLUseStack::forceUsed</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="33" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
       <memberdef kind="function" id="structSR__SRSL__NS_1_1SRSLUseStack_1a7bed6d4356b35689b755673c5a71d3f0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
@@ -198,10 +212,11 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="15" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" bodystart="15" bodyend="32"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="15" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" bodystart="15" bodyend="34"/>
     <listofallmembers>
       <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1a61de48b6cf15ec3a8f476d9b2f35fdd6" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLUseStack</scope><name>Concat</name></member>
       <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1a00b3a1160d4395032c036a33644b9067" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLUseStack</scope><name>FindFunction</name></member>
+      <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1ad39c08d850767554cbb6c947d8a6d8d7" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLUseStack</scope><name>forceUsed</name></member>
       <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1a3b2b6b20f4604d856f3856c059e264a9" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLUseStack</scope><name>functions</name></member>
       <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1a8201b130301ef473cdb0f8e50fb2d6f6" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLUseStack</scope><name>IsFunctionUsed</name></member>
       <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1a7dbf33f9ec1a12d54e7a0c602b1e14aa" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLUseStack</scope><name>IsStructUsed</name></member>

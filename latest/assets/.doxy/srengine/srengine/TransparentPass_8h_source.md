@@ -19,7 +19,6 @@
 
 namespace SR_GRAPH_NS {
     class TransparentPass : public IMesh3DClusterPass {
-        SR_REGISTER_LOGICAL_NODE(TransparentPass, Transparent Pass, { "Passes" })
         using Super = IMesh3DClusterPass;
     public:
         SR_NODISCARD MeshClusterType GetClusterType() const noexcept override;

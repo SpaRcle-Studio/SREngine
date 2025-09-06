@@ -53,6 +53,8 @@
 | ---: | :--- |
 |  void | [**Clear**](#function-clear) () <br> |
 |  SR\_NODISCARD bool | [**Empty**](#function-empty) () const<br> |
+|  [**ValueSequenceContainerIterator**](classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainerIterator.md) | [**Erase**](#function-erase) ([**ValueSequenceContainerIterator**](classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainerIterator.md) it) <br> |
+|  [**ValueSequenceContainerIterator**](classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainerIterator.md) | [**Insert**](#function-insert) ([**ValueSequenceContainerIterator**](classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainerIterator.md) it, [**Value**](classSR__UTILS__NS_1_1Reflection_1_1Value.md) value) <br> |
 |  void | [**Reserve**](#function-reserve) (uint64\_t size) <br> |
 |  void | [**Resize**](#function-resize) (uint64\_t size) <br> |
 |  SR\_NODISCARD uint64\_t | [**Size**](#function-size) () const<br> |
@@ -108,6 +110,37 @@ void SR_UTILS_NS::Reflection::ValueSequenceContainer::Clear ()
 
 ```C++
 inline SR_NODISCARD bool SR_UTILS_NS::Reflection::ValueSequenceContainer::Empty () const
+```
+
+
+
+
+<hr>
+
+
+
+### function Erase 
+
+```C++
+inline ValueSequenceContainerIterator SR_UTILS_NS::Reflection::ValueSequenceContainer::Erase (
+    ValueSequenceContainerIterator it
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function Insert 
+
+```C++
+ValueSequenceContainerIterator SR_UTILS_NS::Reflection::ValueSequenceContainer::Insert (
+    ValueSequenceContainerIterator it,
+    Value value
+) 
 ```
 
 

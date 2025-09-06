@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="97" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="97" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="98" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="98" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__MATH__NS_1_1FColor_1a8a6806762d8902752172cb47bc7cc6f0" prot="public" static="no" mutable="no">
         <type>Unit</type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="98" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="98" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="99" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="99" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__MATH__NS_1_1FColor_1ac7f0fbd192c9915759ba8bce9299d680" prot="public" static="no" mutable="no">
         <type>Unit</type>
@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="99" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="99" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="100" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="100" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__MATH__NS_1_1FColor_1aeb88e1fce4c4fe5bbd0ad967c5db2ba6" prot="public" static="no" mutable="no">
         <type>Unit</type>
@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="100" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="100" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="101" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="101" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__MATH__NS_1_1FColor_1a1c9947e4ee418a0208f99a1737e72637" prot="public" static="no" mutable="no">
         <type>Unit</type>
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="104" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="104" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="105" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="105" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__MATH__NS_1_1FColor_1aec007a6df491225f77870d7280c3ecef" prot="public" static="no" mutable="no">
         <type>Unit</type>
@@ -85,7 +85,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="105" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="105" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="106" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="106" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__MATH__NS_1_1FColor_1ad84bb8e1543675f473971257b653aefb" prot="public" static="no" mutable="no">
         <type>Unit</type>
@@ -99,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="106" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="106" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="107" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="107" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__MATH__NS_1_1FColor_1ac5096048b42774f3cc2e1740f8484033" prot="public" static="no" mutable="no">
         <type>Unit</type>
@@ -113,7 +113,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="107" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="107" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="108" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="108" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__MATH__NS_1_1FColor_1ae04e4e4dcf5b40d938fde5064ad6e0f1" prot="public" static="no" mutable="no">
         <type>Unit</type>
@@ -128,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="110" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="110" bodyend="110"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="111" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="111" bodyend="111"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__MATH__NS_1_1FColor_1aeb052aa1c0e9cff1c97c20ecf7cd95c1" prot="public" static="no" mutable="no">
         <type>union <ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">SR_MATH_NS::FColor</ref></type>
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="111" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="112" column="9"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -158,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="113" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="114" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a0959cda756be7ea55274b7ac2a2237bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -176,7 +176,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="114" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="115" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a90ea0acb67cfefccd7ea28439b1cbc2a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -194,7 +194,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="115" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="116" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a581552e7c0125eadef43f2b097227922" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -212,7 +212,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="116" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="117" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a83f9f354190051b144d8893c881d78ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -230,7 +230,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="117" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="118" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1ad02de94e4d7a9d32ce4dd156de761b9a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -248,7 +248,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="118" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="119" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a38472ff5915aa0ea8b23880127b863c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -279,7 +279,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="119" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="120" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a26df06c6752a236329e577e5a3950e22" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -310,7 +310,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="120" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="121" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1aebae8b22049b6d6fc3d778f88be46698" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -341,7 +341,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="121" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="122" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1acf4193febf48960d11f93a6a8f73ad55" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref> &amp;</type>
@@ -359,7 +359,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="123" column="16"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="124" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a45517e2ec13c5b243c7ec22c3fd14736" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref> &amp;</type>
@@ -377,7 +377,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="124" column="16"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="125" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1aabca4c8ff5647fc5da286b6d7efb4cf1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -395,7 +395,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="126" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="127" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a6671f05a94d880beb8bf68dd79eee210" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -413,7 +413,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="127" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="128" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a387337fdea120fcf8616203b8af766d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref> &amp;</type>
@@ -431,7 +431,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="129" column="16"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="130" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1ace02e3bf217b5e891074de62c7bfe767" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref> &amp;</type>
@@ -449,7 +449,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="130" column="16"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="131" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a7e5577472e35075ab78ed2fc766a4b50" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref> &amp;</type>
@@ -467,7 +467,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="131" column="16"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="132" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a9f8a2da2caf748bc9645e5de0379989b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref></type>
@@ -485,7 +485,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="132" column="16"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="133" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a55621ddba186724239d495546128dc73" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref> &amp;</type>
@@ -503,7 +503,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="133" column="16"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="134" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1aaa71344603a027fc4065873b1c2768bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref> &amp;</type>
@@ -521,7 +521,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="134" column="16"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="135" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a610d5bd28b08f039d336c78bc58a2985" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref></type>
@@ -539,7 +539,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="135" column="16"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="136" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a2a4de9ebdcb87294b49dfe37494e74d6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref></type>
@@ -557,7 +557,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="136" column="16"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="137" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1af5b2b7912e06eb32872c88418cf3149a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref></type>
@@ -575,7 +575,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="137" column="16"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="138" column="16"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -591,7 +591,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="139" column="23"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="140" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a585bb9b87e7280967818dfe1c7aab423" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref></type>
@@ -605,7 +605,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="140" column="23"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="141" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a67d17dc4d45fa3ed35b715c186471d27" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref></type>
@@ -619,7 +619,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="141" column="23"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="142" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a1e3e57f1cff1b38940b6789ca1c74832" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref></type>
@@ -633,7 +633,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="142" column="23"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="143" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a2fee5df574ed010e6f18b93f81dab8fb" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref></type>
@@ -647,7 +647,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="143" column="23"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="144" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a45cb26c3872ba2d492b838a744f62d05" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref></type>
@@ -661,7 +661,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="144" column="23"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="145" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a0b295edfda7e3426b044d02cfc6887d7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref></type>
@@ -675,7 +675,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="145" column="23"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="146" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a7d8b339ba8726813a820ef5f814538ef" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref></type>
@@ -689,7 +689,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="146" column="23"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="147" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a421017249da4981798e1295c3f2a1a93" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref></type>
@@ -703,14 +703,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="147" column="23"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="148" column="23"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="93" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="93" bodyend="148"/>
+    <location file="Engine/libs/Utils/inc/Utils/Math/Vector4.h" line="94" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="94" bodyend="149"/>
     <listofallmembers>
       <member refid="classSR__MATH__NS_1_1FColor_1ac5096048b42774f3cc2e1740f8484033" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>a</name></member>
       <member refid="classSR__MATH__NS_1_1FColor_1a421017249da4981798e1295c3f2a1a93" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Alpha</name></member>

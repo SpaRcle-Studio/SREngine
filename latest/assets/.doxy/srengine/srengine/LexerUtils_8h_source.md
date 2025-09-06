@@ -280,7 +280,9 @@ namespace SR_SRSL_NS {
             AddError(SRSLMessage(code, pLexem));
         }
 
-        SRSLMessage& AddError(const SRSLMessage& message) { return errors.emplace_back(message); }
+        SRSLMessage& AddError(const SRSLMessage& message) {
+            return errors.emplace_back(message);
+        }
 
         SR_NODISCARD bool HasErrors() const { return !errors.empty(); }
         SR_NODISCARD bool HasWarnings() const { return !warnings.empty(); }

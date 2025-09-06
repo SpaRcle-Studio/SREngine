@@ -148,6 +148,7 @@ Inherited by the following classes: [SR\_GRAPH\_NS::GUI::GlobalWidgetManager](cl
 | virtual void | [**OnMouseUp**](#function-onmouseup) (const [**SR\_UTILS\_NS::MouseInputData**](classSR__UTILS__NS_1_1MouseInputData.md) \* data) override<br> |
 |  bool | [**Register**](#function-register) (Widget \* widget) <br> |
 |  bool | [**Remove**](#function-remove) (Widget \* widget) <br> |
+|  void | [**SetRenderContext**](#function-setrendercontext) ([**ContextPtr**](classSR__GRAPH__NS_1_1RenderContext.md) pContext) <br> |
 |  void | [**SetRenderScene**](#function-setrenderscene) (const RenderScenePtr & renderScene) <br> |
 |  void | [**SetScene**](#function-setscene) (const ScenePtr & scene) <br> |
 |  void | [**ShowAll**](#function-showall) () <br> |
@@ -583,6 +584,21 @@ bool SR_GRAPH_NS::GUI::WidgetManager::Register (
 ```C++
 bool SR_GRAPH_NS::GUI::WidgetManager::Remove (
     Widget * widget
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function SetRenderContext 
+
+```C++
+void SR_GRAPH_NS::GUI::WidgetManager::SetRenderContext (
+    ContextPtr pContext
 ) 
 ```
 

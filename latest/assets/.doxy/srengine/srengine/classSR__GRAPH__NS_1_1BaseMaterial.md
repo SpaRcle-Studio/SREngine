@@ -175,13 +175,15 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | ---: | :--- |
 |   | [**BaseMaterial**](#function-basematerial) () <br> |
 |  SR\_NODISCARD RenderContextPtr | [**GetContext**](#function-getcontext) () const<br> |
+|  SR\_NODISCARD [**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* | [**GetDefaultShader**](#function-getdefaultshader) () noexcept const<br> |
 | virtual SR\_NODISCARD const MaterialData::Ptr & | [**GetMaterialData**](#function-getmaterialdata) () noexcept const = 0<br> |
 | virtual SR\_NODISCARD MaterialType | [**GetMaterialType**](#function-getmaterialtype) () noexcept const = 0<br> |
 |  SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetRenderStageId**](#function-getrenderstageid) () noexcept const<br> |
-|  SR\_NODISCARD ShaderPtr | [**GetShader**](#function-getshader) () const<br> |
-|  SR\_NODISCARD bool | [**IsTransparent**](#function-istransparent) () const<br> |
+|  SR\_NODISCARD [**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* | [**GetShader**](#function-getshader-12) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id) noexcept const<br> |
+|  SR\_NODISCARD [**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* | [**GetShader**](#function-getshader-22) (const [**SR\_SRSL\_NS::ShaderMacrosParams**](structSR__SRSL__NS_1_1ShaderMacrosParams.md) & macros) noexcept const<br> |
+|  SR\_NODISCARD bool | [**IsValid**](#function-isvalid) () const<br> |
 |  void | [**OnPropertyChanged**](#function-onpropertychanged) (bool onlyUniforms) const<br> |
-|  void | [**OnShaderChanged**](#function-onshaderchanged) () const<br> |
+|  void | [**OnShaderChanged**](#function-onshaderchanged) () <br> |
 | virtual SR\_NODISCARD uint32\_t | [**RegisterMesh**](#function-registermesh) (MeshPtr pMesh) <br> |
 |  void SR\_FASTCALL | [**SetBool**](#function-setbool) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, bool v) noexcept<br> |
 |  void SR\_FASTCALL | [**SetColor**](#function-setcolor) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, const [**SR\_MATH\_NS::FColor**](classSR__MATH__NS_1_1FColor.md) & v) noexcept<br> |
@@ -219,6 +221,7 @@ See [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 
 | Type | Name |
 | ---: | :--- |
+|  void | [**CloneTo**](classSR__UTILS__NS_1_1SRClass.md#function-cloneto) ([**SRClass**](classSR__UTILS__NS_1_1SRClass.md) & clone) const<br> |
 | virtual SR\_NODISCARD const [**SR\_UTILS\_NS::SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md) \* | [**GetMeta**](classSR__UTILS__NS_1_1SRClass.md#function-getmeta) () noexcept const = 0<br> |
 | virtual  | [**~SRClass**](classSR__UTILS__NS_1_1SRClass.md#function-srclass) () = default<br> |
 
@@ -247,7 +250,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  SR\_NODISCARD SR\_FORCE\_INLINE T \* | [**Get**](classSR__HTYPES__NS_1_1SharedPtr.md#function-get-22) () <br> |
 |  SR\_NODISCARD const void \* | [**GetRawPtr**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getrawptr-12) () const<br> |
 |  SR\_NODISCARD void \* | [**GetRawPtr**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getrawptr-22) () <br>_NOLINT(modernize-use-nodiscard)_  |
-| virtual SR\_NODISCARD SRClass \* | [**GetSRClass**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getsrclass) () override const<br>_NOLINT(modernize-use-nodiscard)_  |
+| virtual SR\_NODISCARD SRClass \* | [**GetSRClass**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getsrclass) () override const<br> |
 |  SR\_NODISCARD [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; | [**GetThis**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getthis) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE const T &SR\_FASTCALL | [**GetUncheckedRef**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getuncheckedref-12) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE T &SR\_FASTCALL | [**GetUncheckedRef**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getuncheckedref-22) () <br> |
@@ -265,15 +268,15 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; U &gt; | [**StaticCast**](classSR__HTYPES__NS_1_1SharedPtr.md#function-staticcast) () const<br> |
 |  SR\_NODISCARD bool | [**TryRecursiveLockIfValid**](classSR__HTYPES__NS_1_1SharedPtr.md#function-tryrecursivelockifvalid) () noexcept const<br> |
 |  void | [**Unlock**](classSR__HTYPES__NS_1_1SharedPtr.md#function-unlock) () noexcept const<br> |
-|  bool | [**Valid**](classSR__HTYPES__NS_1_1SharedPtr.md#function-valid) () const<br> |
+| virtual SR\_NODISCARD bool | [**Valid**](classSR__HTYPES__NS_1_1SharedPtr.md#function-valid) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE | [**operator bool**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator-bool) () noexcept const<br> |
 |  SR\_INLINE bool | [**operator!=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & right) const<br> |
 |  SR\_FORCE\_INLINE T & | [**operator\***](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_1) () const<br> |
-|  SR\_FORCE\_INLINE T \* | [**operator-&gt;**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_2) () const<br> |
-|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_3) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & ptr) <br> |
-|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_4) (T \* ptr) <br> |
-|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_5) ([**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; && ptr) noexcept<br> |
-|  SR\_INLINE bool | [**operator==**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_6) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & right) const<br> |
+|  SR\_FORCE\_INLINE T \* | [**operator-&gt;**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator-) () const<br> |
+|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_2) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & ptr) <br> |
+|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_3) (T \* ptr) <br> |
+|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_4) ([**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; && ptr) noexcept<br> |
+|  SR\_INLINE bool | [**operator==**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_5) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & right) const<br> |
 |   | [**~SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md#function-sharedptr) () override<br> |
 
 
@@ -292,6 +295,7 @@ See [SR\_HTYPES\_NS::SharedPtrBase](classSR__HTYPES__NS_1_1SharedPtrBase.md)
 | virtual void | [**SetPointerFromBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-setpointerfrombase) ([**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md) \* pBase) = 0<br> |
 |   | [**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase-12) () <br> |
 |   | [**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase-22) ([**SharedPtrDynamicData**](structSR__HTYPES__NS_1_1SharedPtrDynamicData.md) \* data) <br> |
+| virtual SR\_NODISCARD bool | [**Valid**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-valid) () const = 0<br> |
 | virtual  | [**~SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase) () <br> |
 
 
@@ -365,6 +369,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  [**SR\_HTYPES\_NS::ObjectPool**](classSR__HTYPES__NS_1_1ObjectPool.md)&lt; MeshPtr, uint32\_t &gt; | [**m\_meshes**](#variable-m_meshes)  <br> |
 |  [**SR\_UTILS\_NS::Subscription**](classSR__UTILS__NS_1_1Subscription.md) | [**m\_propertyChangedSubscription**](#variable-m_propertychangedsubscription)  <br> |
 |  [**SR\_UTILS\_NS::Subscription**](classSR__UTILS__NS_1_1Subscription.md) | [**m\_shaderChangedSubscription**](#variable-m_shaderchangedsubscription)  <br> |
+|  std::map&lt; SR\_UTILS\_NS::SRHashType, SR\_GTYPES\_NS::Shader::Ptr &gt; | [**m\_variants**](#variable-m_variants)  <br> |
 
 
 
@@ -473,9 +478,9 @@ See [SR\_HTYPES\_NS::SharedPtrBase](classSR__HTYPES__NS_1_1SharedPtrBase.md)
 
 | Type | Name |
 | ---: | :--- |
-|  void | [**DeInitMaterialDataSubscriptions**](#function-deinitmaterialdatasubscriptions) () const<br> |
+|  void | [**DeInitMaterialDataSubscriptions**](#function-deinitmaterialdatasubscriptions) () <br> |
 | virtual void | [**InitContext**](#function-initcontext) () const<br> |
-|  void | [**InitMaterialDataSubscriptions**](#function-initmaterialdatasubscriptions) () const<br> |
+|  void | [**InitMaterialDataSubscriptions**](#function-initmaterialdatasubscriptions) () <br> |
 
 
 
@@ -554,6 +559,19 @@ inline SR_NODISCARD RenderContextPtr SR_GRAPH_NS::BaseMaterial::GetContext () co
 
 
 
+### function GetDefaultShader 
+
+```C++
+SR_NODISCARD SR_GTYPES_NS::Shader * SR_GRAPH_NS::BaseMaterial::GetDefaultShader () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
 ### function GetMaterialData 
 
 ```C++
@@ -593,10 +611,12 @@ SR_NODISCARD SR_UTILS_NS::StringAtom SR_GRAPH_NS::BaseMaterial::GetRenderStageId
 
 
 
-### function GetShader 
+### function GetShader [1/2]
 
 ```C++
-SR_NODISCARD ShaderPtr SR_GRAPH_NS::BaseMaterial::GetShader () const
+SR_NODISCARD SR_GTYPES_NS::Shader * SR_GRAPH_NS::BaseMaterial::GetShader (
+    SR_UTILS_NS::StringAtom id
+) noexcept const
 ```
 
 
@@ -606,10 +626,25 @@ SR_NODISCARD ShaderPtr SR_GRAPH_NS::BaseMaterial::GetShader () const
 
 
 
-### function IsTransparent 
+### function GetShader [2/2]
 
 ```C++
-SR_NODISCARD bool SR_GRAPH_NS::BaseMaterial::IsTransparent () const
+SR_NODISCARD SR_GTYPES_NS::Shader * SR_GRAPH_NS::BaseMaterial::GetShader (
+    const SR_SRSL_NS::ShaderMacrosParams & macros
+) noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function IsValid 
+
+```C++
+SR_NODISCARD bool SR_GRAPH_NS::BaseMaterial::IsValid () const
 ```
 
 
@@ -637,7 +672,7 @@ void SR_GRAPH_NS::BaseMaterial::OnPropertyChanged (
 ### function OnShaderChanged 
 
 ```C++
-void SR_GRAPH_NS::BaseMaterial::OnShaderChanged () const
+void SR_GRAPH_NS::BaseMaterial::OnShaderChanged () 
 ```
 
 
@@ -917,6 +952,19 @@ SR_UTILS_NS::Subscription SR_GRAPH_NS::BaseMaterial::m_shaderChangedSubscription
 
 
 <hr>
+
+
+
+### variable m\_variants 
+
+```C++
+std::map<SR_UTILS_NS::SRHashType, SR_GTYPES_NS::Shader::Ptr> SR_GRAPH_NS::BaseMaterial::m_variants;
+```
+
+
+
+
+<hr>
 ## Protected Functions Documentation
 
 
@@ -925,7 +973,7 @@ SR_UTILS_NS::Subscription SR_GRAPH_NS::BaseMaterial::m_shaderChangedSubscription
 ### function DeInitMaterialDataSubscriptions 
 
 ```C++
-void SR_GRAPH_NS::BaseMaterial::DeInitMaterialDataSubscriptions () const
+void SR_GRAPH_NS::BaseMaterial::DeInitMaterialDataSubscriptions () 
 ```
 
 
@@ -951,7 +999,7 @@ virtual void SR_GRAPH_NS::BaseMaterial::InitContext () const
 ### function InitMaterialDataSubscriptions 
 
 ```C++
-void SR_GRAPH_NS::BaseMaterial::InitMaterialDataSubscriptions () const
+void SR_GRAPH_NS::BaseMaterial::InitMaterialDataSubscriptions () 
 ```
 
 

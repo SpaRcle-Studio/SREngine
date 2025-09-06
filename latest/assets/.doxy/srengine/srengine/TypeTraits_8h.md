@@ -49,6 +49,11 @@
 | struct | [**GetFirstOfTypeFromSequence&lt; T, Pair &gt;**](structSR__UTILS__NS_1_1GetFirstOfTypeFromSequence_3_01T_00_01Pair_01_4.md) &lt;class T, class Pair&gt;<br> |
 | struct | [**GetFirstOfTypeFromSequenceAssert**](structSR__UTILS__NS_1_1GetFirstOfTypeFromSequenceAssert.md) &lt;class T&gt;<br> |
 | struct | [**InnerType**](structSR__UTILS__NS_1_1InnerType.md) &lt;typename T&gt;<br> |
+| struct | [**InnerType&lt; std::array&lt; T, N &gt; &gt;**](structSR__UTILS__NS_1_1InnerType_3_01std_1_1array_3_01T_00_01N_01_4_01_4.md) &lt;typename T, N&gt;<br> |
+| struct | [**InnerType&lt; std::list&lt; T, Alloc &gt; &gt;**](structSR__UTILS__NS_1_1InnerType_3_01std_1_1list_3_01T_00_01Alloc_01_4_01_4.md) &lt;typename T, typename Alloc&gt;<br> |
+| struct | [**InnerType&lt; std::map&lt; Key, Value, Compare, Alloc &gt; &gt;**](structSR__UTILS__NS_1_1InnerType_3_01std_1_1map_3_01Key_00_01Value_00_01Compare_00_01Alloc_01_4_01_4.md) &lt;typename Key, typename Value, typename Compare, typename Alloc&gt;<br> |
+| struct | [**InnerType&lt; std::set&lt; T, Compare, Alloc &gt; &gt;**](structSR__UTILS__NS_1_1InnerType_3_01std_1_1set_3_01T_00_01Compare_00_01Alloc_01_4_01_4.md) &lt;typename T, typename Compare, typename Alloc&gt;<br> |
+| struct | [**InnerType&lt; std::unordered\_map&lt; Key, Value, Hash, KeyEqual, Alloc &gt; &gt;**](structSR__UTILS__NS_1_1InnerType_3_01std_1_1unordered__map_3_01Key_00_01Value_00_01Hash_00_01KeyEqual_00_01Alloc_01_4_01_4.md) &lt;typename Key, typename Value, typename Hash, typename KeyEqual, typename Alloc&gt;<br> |
 | struct | [**InnerType&lt; std::vector&lt; T, Alloc &gt; &gt;**](structSR__UTILS__NS_1_1InnerType_3_01std_1_1vector_3_01T_00_01Alloc_01_4_01_4.md) &lt;typename T, typename Alloc&gt;<br> |
 | struct | [**IsCompleteType**](structSR__UTILS__NS_1_1IsCompleteType.md) &lt;typename T, typename&gt;<br> |
 | struct | [**IsCompleteType&lt; T, std::void\_t&lt; decltype(sizeof(T))&gt; &gt;**](structSR__UTILS__NS_1_1IsCompleteType_3_01T_00_01std_1_1void__t_3_01decltype_07sizeof_07T_08_08_4_01_4.md) &lt;typename T&gt;<br> |

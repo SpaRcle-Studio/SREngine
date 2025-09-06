@@ -80,6 +80,7 @@ namespace SR_UTILS_NS {
     #define SR_TRACY_ZONE_N(name) ZoneScopedN(name)
     #define SR_TRACY_ZONE_S(name) ZoneTransientN(TracyConcat(__tracy_source_location, TracyLine), name, true)
     #define SR_TRACY_PLOT(name, val) TracyPlot(name, val)
+    #define SR_TRACY_ZONE_COLOR(color) ZoneColor(color)
 
     #define SR_TRACY_GET_CONTEXT(tracyType, pIdentifier) \
         SR_UTILS_NS::TracyContextManager::Instance().GetContext(tracyType, pIdentifier)
@@ -96,6 +97,7 @@ namespace SR_UTILS_NS {
     #define SR_TRACY_ZONE_N(name) SR_NOOP
     #define SR_TRACY_ZONE_S(name) SR_NOOP
     #define SR_TRACY_PLOT(name, val) SR_NOOP
+    #define SR_TRACY_ZONE_COLOR(color)
 
     #define SR_TRACY_GET_CONTEXT(tracyType, pIdentifier)
     #define SR_TRACY_DESTROY(tracyType)

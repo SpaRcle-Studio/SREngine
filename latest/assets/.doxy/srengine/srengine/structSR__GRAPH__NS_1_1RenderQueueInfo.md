@@ -36,7 +36,7 @@
 | Type | Name |
 | ---: | :--- |
 |  [**RenderQueue**](classSR__GRAPH__NS_1_1RenderQueue.md) \* | [**pRenderQueue**](#variable-prenderqueue)  <br> |
-|  [**ShaderUseInfo**](structSR__GRAPH__NS_1_1ShaderUseInfo.md) | [**shaderUseInfo**](#variable-shaderuseinfo)  <br> |
+|  [**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* | [**pShader**](#variable-pshader)  <br> |
 
 
 
@@ -57,8 +57,6 @@
 
 | Type | Name |
 | ---: | :--- |
-|   | [**RenderQueueInfo**](#function-renderqueueinfo-12) () = default<br> |
-|   | [**RenderQueueInfo**](#function-renderqueueinfo-22) ([**RenderQueue**](classSR__GRAPH__NS_1_1RenderQueue.md) \* pRenderQueue, const [**ShaderUseInfo**](structSR__GRAPH__NS_1_1ShaderUseInfo.md) & shaderUseInfo) <br> |
 |  bool | [**operator==**](#function-operator) (const [**RenderQueueInfo**](structSR__GRAPH__NS_1_1RenderQueueInfo.md) & other) const<br> |
 
 
@@ -106,10 +104,10 @@ RenderQueue* SR_GRAPH_NS::RenderQueueInfo::pRenderQueue;
 
 
 
-### variable shaderUseInfo 
+### variable pShader 
 
 ```C++
-ShaderUseInfo SR_GRAPH_NS::RenderQueueInfo::shaderUseInfo;
+SR_GTYPES_NS::Shader* SR_GRAPH_NS::RenderQueueInfo::pShader;
 ```
 
 
@@ -118,35 +116,6 @@ ShaderUseInfo SR_GRAPH_NS::RenderQueueInfo::shaderUseInfo;
 <hr>
 ## Public Functions Documentation
 
-
-
-
-### function RenderQueueInfo [1/2]
-
-```C++
-SR_GRAPH_NS::RenderQueueInfo::RenderQueueInfo () = default
-```
-
-
-
-
-<hr>
-
-
-
-### function RenderQueueInfo [2/2]
-
-```C++
-inline SR_GRAPH_NS::RenderQueueInfo::RenderQueueInfo (
-    RenderQueue * pRenderQueue,
-    const ShaderUseInfo & shaderUseInfo
-) 
-```
-
-
-
-
-<hr>
 
 
 

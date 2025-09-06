@@ -15,7 +15,42 @@
     <derivedcompoundref refid="classSR__SRSL__NS_1_1SRSLVariable" prot="public" virt="non-virtual">SR_SRSL_NS::SRSLVariable</derivedcompoundref>
     <derivedcompoundref refid="classSR__SRSL__NS_1_1SRSLWhileStatement" prot="public" virt="non-virtual">SR_SRSL_NS::SRSLWhileStatement</derivedcompoundref>
     <includes refid="LexicalTree_8h" local="no">LexicalTree.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLLexicalUnit_1ac7e2aa7ab1a7a429fe43a4b57e377b96" prot="private" static="no" mutable="no">
+        <type>LexicalUnitType</type>
+        <definition>LexicalUnitType SR_SRSL_NS::SRSLLexicalUnit::m_type</definition>
+        <argsstring></argsstring>
+        <name>m_type</name>
+        <qualifiedname>SR_SRSL_NS::SRSLLexicalUnit::m_type</qualifiedname>
+        <initializer>= LexicalUnitType::Unknown</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="40" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLLexicalUnit_1a272c5798f145d74e848ff9c74d686ae3" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_SRSL_NS::SRSLLexicalUnit::SRSLLexicalUnit</definition>
+        <argsstring>(LexicalUnitType type)</argsstring>
+        <name>SRSLLexicalUnit</name>
+        <qualifiedname>SR_SRSL_NS::SRSLLexicalUnit::SRSLLexicalUnit</qualifiedname>
+        <param>
+          <type>LexicalUnitType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="30" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="30" bodyend="32"/>
+      </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLLexicalUnit_1a1d2a7f7ba7273de4230e304dff295496" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD std::string</type>
         <definition>virtual SR_NODISCARD std::string SR_SRSL_NS::SRSLLexicalUnit::ToString</definition>
@@ -38,7 +73,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="14" column="42" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="14" bodyend="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="35" column="42" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLLexicalUnit_1a2c32098dfc046e323a7b55880e51d5cf" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD LexicalUnitType</type>
+        <definition>SR_NODISCARD LexicalUnitType SR_SRSL_NS::SRSLLexicalUnit::GetLexicalUnitType</definition>
+        <argsstring>() const</argsstring>
+        <name>GetLexicalUnitType</name>
+        <qualifiedname>SR_SRSL_NS::SRSLLexicalUnit::GetLexicalUnitType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="37" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="37" bodyend="37"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -136,11 +185,14 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="12" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="12" bodyend="16"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="28" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="28" bodyend="42"/>
     <listofallmembers>
+      <member refid="classSR__SRSL__NS_1_1SRSLLexicalUnit_1a2c32098dfc046e323a7b55880e51d5cf" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalUnit</scope><name>GetLexicalUnitType</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLLexicalUnit_1ac7e2aa7ab1a7a429fe43a4b57e377b96" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalUnit</scope><name>m_type</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalUnit</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalUnit</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_SRSL_NS::SRSLLexicalUnit</scope><name>operator=</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLLexicalUnit_1a272c5798f145d74e848ff9c74d686ae3" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalUnit</scope><name>SRSLLexicalUnit</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLLexicalUnit_1a1d2a7f7ba7273de4230e304dff295496" prot="public" virt="virtual"><scope>SR_SRSL_NS::SRSLLexicalUnit</scope><name>ToString</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_SRSL_NS::SRSLLexicalUnit</scope><name>~NonCopyable</name></member>
     </listofallmembers>

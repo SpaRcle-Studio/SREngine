@@ -236,7 +236,7 @@
       <member refid="classSR__SCRIPTING__NS_1_1ScriptHolder_1a05d4d6f74c5d3d614d4ace092c423474" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptHolder</scope><name>Super</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptHolder</scope><name>TryRecursiveLockIfValid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptHolder</scope><name>Unlock</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptHolder</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a783dd9e4a58072de8ff19895693bca05" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::ScriptHolder</scope><name>Valid</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_SCRIPTING_NS::ScriptHolder</scope><name>~NonCopyable</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1ScriptHolder_1a0489cf3fd6f2a4c50f074a529c1bebc2" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptHolder</scope><name>~ScriptHolder</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptHolder</scope><name>~SharedPtr</name></member>

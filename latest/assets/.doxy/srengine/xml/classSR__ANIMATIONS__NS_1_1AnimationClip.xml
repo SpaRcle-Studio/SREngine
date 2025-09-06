@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="53" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="53" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="52" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="52" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1AnimationClip_1a47d676129a9fc1dc5b6a587d3aeabb5e" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classSR__ANIMATIONS__NS_1_1AnimationChannel" kindref="compound">AnimationChannel</ref> * &gt;</type>
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="54" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="54" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="53" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="53" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1AnimationClip_1abf9981f2375388280fb54af4e62dcc25" prot="private" static="no" mutable="no">
         <type>float_t</type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="56" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="56" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="55" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="55" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1AnimationClip_1a511cba213e993391b18dcb601c3440f8" prot="private" static="no" mutable="no">
         <type>uint32_t</type>
@@ -92,7 +92,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="57" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="57" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="56" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="56" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -153,21 +153,6 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="35" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="35" bodyend="35"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationClip_1afb6f7a265cb7ba5f5ce23cd2131f6689" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
-        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
-        <definition>SR_NODISCARD SR_UTILS_NS::Path SR_ANIMATIONS_NS::AnimationClip::InitializeResourcePath</definition>
-        <argsstring>() const override</argsstring>
-        <name>InitializeResourcePath</name>
-        <qualifiedname>SR_ANIMATIONS_NS::AnimationClip::InitializeResourcePath</qualifiedname>
-        <reimplements refid="classSR__UTILS__NS_1_1IResource_1a9035e8e13821bbcf09633e80365d0643">InitializeResourcePath</reimplements>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="37" column="40"/>
-      </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationClip_1a603df0da779ff29d93778f146885bbeb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
         <definition>SR_NODISCARD bool SR_ANIMATIONS_NS::AnimationClip::IsAllowedMultiInstance</definition>
@@ -181,7 +166,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="38" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="38" bodyend="38"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="37" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="37" bodyend="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationClip_1a3f2790e795ccdb909015c83c6c8764aa" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -195,7 +180,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="40" column="46"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="39" column="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationClip_1abfe4c07dd4e7c9d12c5ccf77395cc5b2" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD float_t</type>
@@ -209,7 +194,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="42" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="42" bodyend="42"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="41" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="41" bodyend="41"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationClip_1a579f9dec8e8c5f0de94100c85ab22de3" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -223,7 +208,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="43" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="43" bodyend="43"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="42" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="42" bodyend="42"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -290,7 +275,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="46" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="45" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationClip_1ac39e70a82c5485891de83becb2b15c59" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -305,7 +290,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="47" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="46" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -333,7 +318,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="50" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="49" column="27"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -451,7 +436,7 @@
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="19" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="19" bodyend="59"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" line="19" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Animations/AnimationClip.h" bodystart="19" bodyend="58"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1af9087ca5182397a9c7d3b92fb5591523" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>AddDependency</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>AddSerializationFlags</name></member>
@@ -463,6 +448,7 @@
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a459ed22e0064b69639129562ea9aad38" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>Broadcast</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a543a91c5e997ad287249110180f9cea2" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>Broadcast</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a6aad227ccd12d3dd92ac9010ba6ac404" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>CheckResourceUsage</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>CloneTo</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>DecrementPointer</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a1321f66c455d7f59eebb314fe2c83062" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>DeleteResource</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a700794249e341d5228920451cedf9ee7" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>Destroy</name></member>
@@ -502,7 +488,6 @@
       <member refid="classSR__UTILS__NS_1_1Serializable_1af5c00e9391fad105c30570cbda1a6285" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>HasSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a2a266b012e03eec86b0050d2ff3c9f30" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>HasSubscriptions</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>IncrementPointer</name></member>
-      <member refid="classSR__ANIMATIONS__NS_1_1AnimationClip_1afb6f7a265cb7ba5f5ce23cd2131f6689" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>InitializeResourcePath</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ac810662984eb60e0bea8b08e455ea2a2" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>IResource</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ad94ef18d58f13582b7411b749ae81089" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>IsAlive</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationClip_1a603df0da779ff29d93778f146885bbeb" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>IsAllowedMultiInstance</name></member>
@@ -569,6 +554,7 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1a70da9b49736de59bddc1f26575f5da33" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>ReviveResource</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>Save</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a0981532a88fdeb242d295a04690ec4dd" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>SetId</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a7349e6cd8d4b8c3ffcd844f310f81602" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>SetId</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a992fe5635f43333348b9c9445293e23b" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>SetLifetime</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>SetPointerFromBase</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a2f72c195e91ef30f20f84ca3d56f7147" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>SetResourceHash</name></member>
@@ -595,7 +581,7 @@
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a9020c161e4bc8453d005eb5fab808490" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>Unsubscribe</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a8374f937e659f29170b1db2b81ba2594" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>UpdateResourceLifeTime</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac84a44cf058fa5cb53715e250ae7157c" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>UpdateResources</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a783dd9e4a58072de8ff19895693bca05" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>Valid</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a5aab0756802a67de9cb45b83b3e73c70" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>VerifyAfterLoad</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationClip_1a1fd08ab2cee4e2f5f92745942e6cf13e" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>~AnimationClip</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ac4450e90e1fbd14d29931a362b9c05eb" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationClip</scope><name>~IResource</name></member>

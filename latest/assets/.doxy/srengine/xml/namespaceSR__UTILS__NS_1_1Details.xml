@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="115" column="6" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="115" bodyend="123"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="116" column="6" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="116" bodyend="124"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

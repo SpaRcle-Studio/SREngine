@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="30" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="30" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="31" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="31" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Pipeline_1ac8b7ed3a20ed6d9f300efe0b6b242596" prot="public" static="no">
         <type>std::vector&lt; <ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">SR_MATH_NS::FColor</ref> &gt;</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="31" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="31" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="32" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Pipeline_1a1ee9f48fc0dca762f3a36a945bcf446b" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1Pipeline" kindref="compound">Pipeline</ref> &gt;</type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="32" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="32" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="33" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Pipeline_1a234ad285d6a26d677dc0311c00d21994" prot="public" static="no">
         <type><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> *</type>
@@ -59,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="33" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="34" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Pipeline_1ae5241a07d82b0ff70aa6eb534ee0347b" prot="public" static="no">
         <type><ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">SR_GTYPES_NS::Framebuffer</ref> *</type>
@@ -73,7 +73,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="34" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="34" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="35" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Pipeline_1af0ec6284cb3ee2c81353f8c1b5262894" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SafePtr" kindref="compound">SR_HTYPES_NS::SafePtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1RenderContext" kindref="compound">SR_GRAPH_NS::RenderContext</ref> &gt;</type>
@@ -87,7 +87,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="35" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="35" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="36" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Pipeline_1a0b7d68be8cf3c74bd1b4ee64daf4222d" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1Window" kindref="compound">Window</ref> &gt;</type>
@@ -101,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="36" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="36" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="37" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Pipeline_1a3286735b51ac84f5c4638f1daac13682" prot="public" static="no">
         <type>int32_t</type>
@@ -115,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="37" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="37" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="38" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="38" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -131,7 +131,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="278" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="278" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="284" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="284" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1af227e466b7ee298d25e4536f042a1e05" prot="protected" static="no" mutable="no">
         <type><ref refid="structSR__GRAPH__NS_1_1PipelinePreInitInfo" kindref="compound">PipelinePreInitInfo</ref></type>
@@ -145,7 +145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="280" column="29" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="280" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="286" column="29" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="286" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1a2ff513c21aee7e569113af21d671141f" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1FrameBufferQueue" kindref="compound">FrameBufferQueue</ref></type>
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="282" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="282" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="288" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="288" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1a9bf6facdc86fc483a7dff3d43be49399" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -174,7 +174,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="284" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="284" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="290" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="290" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1a89208b4268dfb03a7a8a2ac7f52092a3" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -189,7 +189,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="285" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="285" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="291" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="291" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1aade6e435dcbb6217f2e9e51736027611" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -204,7 +204,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="286" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="286" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="292" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="292" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1abbf897a18ac1d4c2d7f639cb27e179f0" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -219,7 +219,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="287" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="287" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="293" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="293" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1aff1a6540a018816dc839abee3c42e513" prot="protected" static="no" mutable="yes">
         <type>uint64_t</type>
@@ -234,7 +234,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="289" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="289" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="295" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="295" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1acec79ba280ff6d871d6f315109f7dd53" prot="protected" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -249,7 +249,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="291" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="291" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="297" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="297" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1ae74915965e28656dd6c88c77b534ca04" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -263,7 +263,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="293" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="293" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="299" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="299" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1ab799c01653464ce90c3241823266de3e" prot="protected" static="no" mutable="no">
         <type>WindowPtr</type>
@@ -277,7 +277,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="295" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="295" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="301" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="301" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1a543ddc3c35eb32386f68ccfffcf9e2c2" prot="protected" static="no" mutable="no">
         <type>RenderContextPtr</type>
@@ -291,7 +291,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="296" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="296" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="302" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="302" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1a47ced12c47f7c292d1e1328262213667" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1PoolSet" kindref="compound">SR_HTYPES_NS::PoolSet</ref>&lt; bool &gt;</type>
@@ -305,7 +305,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="298" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="298" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="304" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="304" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1a3432ace5be5b2dd4779af91fb0e81a29" prot="protected" static="no" mutable="no">
         <type><ref refid="structSR__GRAPH__NS_1_1PipelineState" kindref="compound">PipelineState</ref></type>
@@ -319,7 +319,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="300" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="300" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="306" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="306" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1a33a11b6a842c411deae988c93a909a50" prot="protected" static="no" mutable="no">
         <type><ref refid="structSR__GRAPH__NS_1_1PipelineState" kindref="compound">PipelineState</ref></type>
@@ -333,14 +333,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="301" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="301" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="307" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="307" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1ae53ae0c38d1fc5cac4d5315faabbc679" prot="protected" static="no" mutable="no">
-        <type><ref refid="structSR__GRAPH__NS_1_1PipelineState" kindref="compound">PipelineState</ref></type>
-        <definition>PipelineState SR_GRAPH_NS::Pipeline::m_buildState</definition>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1a246857826dd5b915fe502a12fac25071" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structSR__GRAPH__NS_1_1PipelineState" kindref="compound">PipelineState</ref> &gt;</type>
+        <definition>std::vector&lt;PipelineState&gt; SR_GRAPH_NS::Pipeline::m_buildStates</definition>
         <argsstring></argsstring>
-        <name>m_buildState</name>
-        <qualifiedname>SR_GRAPH_NS::Pipeline::m_buildState</qualifiedname>
+        <name>m_buildStates</name>
+        <qualifiedname>SR_GRAPH_NS::Pipeline::m_buildStates</qualifiedname>
         <briefdescription>
 <para>Состояние, которое было на момент постоения сцены рендера </para>
         </briefdescription>
@@ -348,7 +348,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="303" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="303" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="309" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="309" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1ab6755977cb8f8a0523fe435a765f8707" prot="protected" static="no" mutable="no">
         <type>std::optional&lt; uint8_t &gt;</type>
@@ -363,7 +363,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="306" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="306" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="312" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="312" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1a3b17dd263052ffe95f44ff2eb83bc333" prot="protected" static="no" mutable="no">
         <type>uint8_t</type>
@@ -378,7 +378,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="307" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="307" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="313" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="313" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1a9afe91140696dad60bd1981898da2be1" prot="protected" static="no" mutable="no">
         <type>uint8_t</type>
@@ -393,7 +393,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="308" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="308" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="314" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="314" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1a4c66f92cb85ee9d6bbdfdc1838bd1e92" prot="protected" static="no" mutable="no">
         <type>uint8_t</type>
@@ -408,7 +408,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="309" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="309" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="315" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="315" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1a3b2a0e747e1e251e021591a09fe5ad01" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -423,7 +423,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="310" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="310" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="316" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="316" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1a015d23c7170f5284bbf5b5967535a6c5" prot="protected" static="no" mutable="no">
         <type>uint32_t</type>
@@ -438,7 +438,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="312" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="312" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="318" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="318" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1a0df7e8ff5d6ec0d22845fb6ad1a7a83a" prot="protected" static="no" mutable="no">
         <type>uint32_t</type>
@@ -453,7 +453,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="313" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="313" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="319" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="319" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1aa60bb798bce567a0df5c5afce45f7861" prot="protected" static="no" mutable="no">
         <type>std::optional&lt; SR_UTILS_NS::TimePointType &gt;</type>
@@ -467,7 +467,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="314" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="314" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="320" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="320" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1a019fddd8a6b99504451580c87866b548" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -482,7 +482,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="316" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="316" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="322" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="322" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -502,7 +502,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="39" column="18"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="40" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1afdad4a4a7a09b3b1d7cd3bf39af69771" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -516,7 +516,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="40" column="17"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="41" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a0653e0e7ea5806f7aea1025e2eed3713" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -537,7 +537,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="45" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="46" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a338ba61680c6bbb6c2825d1a97587267" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -553,7 +553,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="48" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="49" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1ae8737b0b9ff5066393c1469ec40f0da1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -569,7 +569,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="51" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="51" bodyend="51"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="52" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="52" bodyend="52"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a694487ecd06628b6ab9fb862a70f5ef2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -585,7 +585,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="54" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="54" bodyend="54"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="55" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="55" bodyend="55"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a59d68a94646d1fe584e9f23b66851767" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
         <type>SR_NODISCARD PipelineType</type>
@@ -600,7 +600,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="56" column="43"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="57" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1adad44061e52d76a467952634221452fc" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -617,7 +617,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="61" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="62" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a0ec232f2d1107da2ae71a79a3ae338f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -632,7 +632,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="64" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="65" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1ad846040ca78fa8e11c0719fca8b522d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -647,7 +647,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="65" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="66" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a9bc3dccbd8dbf6c7bc763dc0266ea0f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -663,7 +663,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="69" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="70" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a44e8cb731ec0c2e4e1e8b54e17536f95" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -679,7 +679,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="72" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="73" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a95961969c011a8e8262e2ec06a62043d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -695,7 +695,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="75" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="76" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1afae6010ec55088d5f5c8c2a67064c43b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -711,7 +711,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="78" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="79" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1ae8aea04dacd221f65934afebcc1493fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -727,7 +727,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="81" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="82" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a600eb2752e6810514e688a2e5bb985bb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -743,7 +743,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="84" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="85" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a01f2fe74ff09c104967616a40a0c99d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -759,7 +759,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="87" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="88" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1ad195b1f18e0f6335ce74f60a3db653d4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -784,7 +784,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="89" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="89" bodyend="89"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="90" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="90" bodyend="90"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a666d5711c8f746ad151a3e35d93f3793" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -809,7 +809,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="90" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="90" bodyend="90"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="91" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="91" bodyend="91"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a0ea329322e342c86b39e1b6e02fde87e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -827,7 +827,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="92" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="93" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a637e25787357f859207380f6ecf03c7d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -842,7 +842,36 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="94" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="95" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a163a3966cd1c88ea707cb34d0338329c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_GRAPH_NS::Pipeline::WaitRenderIdle</definition>
+        <argsstring>()</argsstring>
+        <name>WaitRenderIdle</name>
+        <qualifiedname>SR_GRAPH_NS::Pipeline::WaitRenderIdle</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a168b7e6759fd81041cb80ab7ac70a8f6">WaitRenderIdle</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="96" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1ab9591906e0cab4fc2bd8b853419ff0e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::Pipeline::OnFrameBuildEnd</definition>
+        <argsstring>()</argsstring>
+        <name>OnFrameBuildEnd</name>
+        <qualifiedname>SR_GRAPH_NS::Pipeline::OnFrameBuildEnd</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="98" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a9c1e851dd9aa1d7e1b765e91cc3027d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -858,7 +887,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="98" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="102" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1aa4c43b8c64e45dd323004add80803343" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -872,7 +901,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="99" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="103" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1aa5a64ab443d7d624352546e79e627333" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -886,7 +915,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="100" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="104" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a27b5f31af0335610237640390fa7d205" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -900,7 +929,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="101" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="105" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a4c1f291214fdccafdf8f3af1c16b4dcc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1Overlay" kindref="compound">Overlay</ref> &gt; &amp;</type>
@@ -918,7 +947,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="103" column="47"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="107" column="47"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1ad6b7d38ef5d5307b87528eeff26f2f44" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -936,7 +965,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="104" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="108" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1acd5f40351a9b8cfcecc47c1fb8103c43" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -954,7 +983,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="105" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="109" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1acced55d1326270c88a66712286456a43" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -972,7 +1001,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="106" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="110" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a92dfca4a74aaadaa8cdefcd6450f7961" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool SR_GRAPH_NS::Pipeline::HasActiveOverlay</definition>
+        <argsstring>() const</argsstring>
+        <name>HasActiveOverlay</name>
+        <qualifiedname>SR_GRAPH_NS::Pipeline::HasActiveOverlay</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="111" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a5f89edb1c9196fe4e6e04f8752fec942" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -995,7 +1038,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="108" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="113" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1ad9efb5541bc7b8807cf7ba3f99e29ed8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD std::string</type>
@@ -1011,7 +1054,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="112" column="42" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="112" bodyend="112"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="117" column="42" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="117" bodyend="117"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a8631f760e9f59858ad8ba8d84c0a0361" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD std::string</type>
@@ -1026,7 +1069,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="113" column="42" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="113" bodyend="113"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="118" column="42" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="118" bodyend="118"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a51941df6ae1f07e74f1fdd9a99f31851" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD std::string</type>
@@ -1041,7 +1084,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="114" column="42" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="114" bodyend="114"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="119" column="42" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="119" bodyend="119"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a15c5fafc94621d9a92f093197fbc1ddc" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD RenderContextPtr</type>
@@ -1055,7 +1098,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="116" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="116" bodyend="116"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="121" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="121" bodyend="121"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a1be1c9aa13fe7ea42f49e2255079a7ff" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD WindowPtr</type>
@@ -1069,7 +1112,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="117" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="117" bodyend="117"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="122" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="122" bodyend="122"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a7d1dc447d1f83700b91ada7e54d02b0b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD ShaderPtr</type>
@@ -1083,7 +1126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="118" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="118" bodyend="118"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="123" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="123" bodyend="123"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a59d55f0b1cd2900d6222d723e3d5a883" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD FramebufferPtr</type>
@@ -1097,7 +1140,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="119" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="119" bodyend="119"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="124" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="124" bodyend="124"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a335ad9e9b64f52b41aa42efa834ec862" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -1111,7 +1154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="120" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="120" bodyend="120"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="125" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="125" bodyend="125"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a4e14d2c5deafc0ea69a0277404124bbe" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -1125,7 +1168,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="121" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="121" bodyend="121"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="126" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="126" bodyend="126"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a4321ba62417103cb026ceaae034b0a96" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -1139,7 +1182,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="122" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="122" bodyend="122"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="127" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="127" bodyend="127"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a236d3e6b5352e61ef2923b9dc8441501" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -1153,7 +1196,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="123" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="123" bodyend="123"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="128" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="128" bodyend="128"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a3938be107ff67501c33ab4e05daaf9ea" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -1167,7 +1210,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="124" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="124" bodyend="124"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="129" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="129" bodyend="129"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1ae0ca88d622eb9385c8d3495c7a6a3e46" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -1181,7 +1224,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="125" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="125" bodyend="125"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="130" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="130" bodyend="130"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a446a1952b907eef14754edbb04b839d6" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1FrameBufferQueue" kindref="compound">FrameBufferQueue</ref> &amp;</type>
@@ -1195,21 +1238,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="126" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="126" bodyend="126"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1af4af287c45563874f48c377cd1387921" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>SR_NODISCARD uint8_t</type>
-        <definition>SR_NODISCARD uint8_t SR_GRAPH_NS::Pipeline::GetCurrentBuildIteration</definition>
-        <argsstring>() const noexcept</argsstring>
-        <name>GetCurrentBuildIteration</name>
-        <qualifiedname>SR_GRAPH_NS::Pipeline::GetCurrentBuildIteration</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="127" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="127" bodyend="127"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="131" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="131" bodyend="131"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a77de40752cf354ca12519ee751c3655a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1RenderStrategy" kindref="compound">RenderStrategy</ref> *</type>
@@ -1223,7 +1252,36 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="128" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="128" bodyend="128"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="132" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="132" bodyend="132"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a09138daecd6f226335b46b86a9bd9f2f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_NODISCARD SR_UTILS_NS::StringAtom SR_GRAPH_NS::Pipeline::GetRenderStageId</definition>
+        <argsstring>() const</argsstring>
+        <name>GetRenderStageId</name>
+        <qualifiedname>SR_GRAPH_NS::Pipeline::GetRenderStageId</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="133" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="133" bodyend="133"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a8f96345a9ea84032eebc602d7bff8a11" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD uint8_t</type>
+        <definition>virtual SR_NODISCARD uint8_t SR_GRAPH_NS::Pipeline::GetCurrentFrameIndex</definition>
+        <argsstring>() const</argsstring>
+        <name>GetCurrentFrameIndex</name>
+        <qualifiedname>SR_GRAPH_NS::Pipeline::GetCurrentFrameIndex</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1VulkanPipeline_1ab39d7cdebf5c0c032cd8dc98be695a50">GetCurrentFrameIndex</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="135" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="135" bodyend="135"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a5f9386fb5b501d57583449e04350f404" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD void *</type>
@@ -1238,7 +1296,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="130" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="130" bodyend="130"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="136" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="136" bodyend="136"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1ab4a3cda7e2c67ce74101c3afffdef036" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD void *</type>
@@ -1253,7 +1311,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="131" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="131" bodyend="131"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="137" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="137" bodyend="137"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1aeaccc91129ec4c09ba66f2991bb4b989" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD std::set&lt; void * &gt;</type>
@@ -1269,7 +1327,7 @@
         <inbodydescription>
 <para>NOLINT</para>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="132" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="132" bodyend="132"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="138" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="138" bodyend="138"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a276cbbe5cf7a8c0f400e19fadc2005d9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD std::set&lt; void * &gt;</type>
@@ -1285,7 +1343,7 @@
         <inbodydescription>
 <para>NOLINT</para>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="133" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="133" bodyend="133"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="139" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="139" bodyend="139"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a74ff8140b147cb98196eaedcd1bbda87" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD uint8_t</type>
@@ -1300,7 +1358,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="134" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="134" bodyend="134"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="140" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="140" bodyend="140"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a16fca09b49251d2d0652ad62fdf05d93" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD uint8_t</type>
@@ -1315,7 +1373,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="135" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="135" bodyend="135"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="141" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="141" bodyend="141"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a92a340b822c38c39846cd8c270e4b062" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD uint8_t</type>
@@ -1329,7 +1387,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="136" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="136" bodyend="136"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="142" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="142" bodyend="142"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a54ff7ac52adc334ff752c1d739c2d868" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -1344,7 +1402,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="137" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="137" bodyend="137"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="143" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="143" bodyend="143"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1ac6bf21d75c810b6c846288a448d2a387" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">SR_MATH_NS::FColor</ref></type>
@@ -1371,21 +1429,41 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="138" column="49" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="138" bodyend="138"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="144" column="49" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="144" bodyend="144"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1ab3f9df613c23c25957a4e4eab167764e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
-        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
-        <definition>virtual SR_NODISCARD SR_UTILS_NS::StringAtom SR_GRAPH_NS::Pipeline::GetRenderStageId</definition>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a6ef31c9b21af1128c32f4786e3758efc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD uint16_t</type>
+        <definition>virtual SR_NODISCARD uint16_t SR_GRAPH_NS::Pipeline::GetSwapchainImagesCount</definition>
         <argsstring>() const</argsstring>
-        <name>GetRenderStageId</name>
-        <qualifiedname>SR_GRAPH_NS::Pipeline::GetRenderStageId</qualifiedname>
+        <name>GetSwapchainImagesCount</name>
+        <qualifiedname>SR_GRAPH_NS::Pipeline::GetSwapchainImagesCount</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a4393f8734691c3b9004644d75d144533">GetSwapchainImagesCount</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="139" column="54" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="139" bodyend="139"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="145" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="145" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1aa75ed4cf63c698d5c279b4370f1142ce" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_GRAPH_NS::Pipeline::SetSwapchainImagesCount</definition>
+        <argsstring>(uint16_t count)</argsstring>
+        <name>SetSwapchainImagesCount</name>
+        <qualifiedname>SR_GRAPH_NS::Pipeline::SetSwapchainImagesCount</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a78698c4052357b1de7c1bd3459d6e5d1">SetSwapchainImagesCount</reimplementedby>
+        <param>
+          <type>uint16_t</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="147" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="147" bodyend="147"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1ad915a47914a0126d2628f6aef0c7b262" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -1403,7 +1481,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="141" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="141" bodyend="141"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="148" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="148" bodyend="148"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a5ad09ba6ded3804ef3f66051f29c8c03" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -1421,7 +1499,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="142" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="142" bodyend="142"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="149" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="149" bodyend="149"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a6b0eaf9e9a90e7632090761fecfbd44b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -1439,7 +1517,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="143" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="143" bodyend="143"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="150" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="150" bodyend="150"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1ab0a9616214bfe183f02aed0dd3fe9107" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -1457,7 +1535,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="144" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="144" bodyend="144"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="151" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="151" bodyend="151"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a3936460431f5c05862a439b19dd2b580" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -1476,7 +1554,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="145" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="152" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a0cb69929bff7914e9dcbb53ee9e14fed" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -1494,7 +1572,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="146" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="146" bodyend="146"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="153" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="153" bodyend="153"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1ae4d425e665ea056380a7ad8e4c34ae93" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void *</type>
@@ -1516,7 +1594,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="148" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="155" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1ae4bf2dbefcce42f08d405a0c672eaba6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -1534,7 +1612,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="150" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="157" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1ac85d74cd02b3ba4a666a67e9e8fab1b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -1553,7 +1631,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="152" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="159" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1acf5d827c3f6962f6d127bf6ef2119a17" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -1569,7 +1647,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="156" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="163" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1aa1e2eae07a6d2d5434fd9f8f10289d9e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -1608,7 +1686,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="157" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="164" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1ae06a3ec2baf8bfe7f5c13af7bcdd4a2a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -1631,7 +1709,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="158" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="165" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a3fd9d3969b83c1b508038b9fb3bab779" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -1650,7 +1728,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="160" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="167" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a6a6c502a5ef25221fc760a523623bf39" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -1669,7 +1747,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="161" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="168" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1aac75899921a36dd5c0444e34990cd39f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -1689,25 +1767,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="166" column="22"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1af122f524c74d3724a135806d1e287158" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
-        <type>void</type>
-        <definition>virtual void SR_GRAPH_NS::Pipeline::SetBuildIteration</definition>
-        <argsstring>(uint8_t iteration)</argsstring>
-        <name>SetBuildIteration</name>
-        <qualifiedname>SR_GRAPH_NS::Pipeline::SetBuildIteration</qualifiedname>
-        <param>
-          <type>uint8_t</type>
-          <declname>iteration</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="167" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="173" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a477e5d9526688aa7a58637e6a93fcd3e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>uint64_t</type>
@@ -1722,7 +1782,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="169" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="169" bodyend="169"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="175" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="175" bodyend="175"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a08cbedc2d011a36e5c313365d7cdc12d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -1738,7 +1798,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="173" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="179" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1aaf5c1e69dc6a0a6fbe91784d8945c755" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -1752,7 +1812,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="174" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="180" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a35f5177f0fd6c04613b59c0be8744fcb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -1770,7 +1830,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="175" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="181" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a7d42b3258196c5c03c19beb0cc6da402" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -1789,7 +1849,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="177" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="177" bodyend="177"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="183" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="183" bodyend="183"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a48d6c6c7ca6c21d97c70104cb3c221d2" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -1803,7 +1863,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="179" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="179" bodyend="179"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="185" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="185" bodyend="185"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1ae9b8d595095e001212252f96876dcb5c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const <ref refid="structSR__GRAPH__NS_1_1PipelineState" kindref="compound">PipelineState</ref> &amp;</type>
@@ -1817,21 +1877,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="180" column="42" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="180" bodyend="180"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="186" column="42" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="186" bodyend="186"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a93baf7bc732e7059c0dd05aa6dab12c3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a83c508626e3cdcf29430a5c331bdabe7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const <ref refid="structSR__GRAPH__NS_1_1PipelineState" kindref="compound">PipelineState</ref> &amp;</type>
         <definition>SR_NODISCARD const PipelineState &amp; SR_GRAPH_NS::Pipeline::GetBuildState</definition>
-        <argsstring>() const</argsstring>
+        <argsstring>(uint8_t frameIndex) const</argsstring>
         <name>GetBuildState</name>
         <qualifiedname>SR_GRAPH_NS::Pipeline::GetBuildState</qualifiedname>
+        <param>
+          <type>uint8_t</type>
+          <declname>frameIndex</declname>
+        </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="181" column="42" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="181" bodyend="181"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="187" column="42"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a7ba5601d4c263cc845360a6ba4e3f29d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const <ref refid="structSR__GRAPH__NS_1_1PipelineState" kindref="compound">PipelineState</ref> &amp;</type>
@@ -1845,7 +1909,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="182" column="42" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="182" bodyend="182"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="188" column="42" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="188" bodyend="188"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a6bd537edd19543d21248e1fddaa70035" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint8_t</type>
@@ -1859,7 +1923,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="183" column="30"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="189" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1aba519b2de9cef0006de9d8d7c151be73" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -1873,7 +1937,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="184" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="190" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a011342ee0359603347ad1862e3c7e2f9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -1888,7 +1952,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="185" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="185" bodyend="185"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="191" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="191" bodyend="191"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1ab8158d2d108cc87138b24fc328c7ecc4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -1903,7 +1967,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="187" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="187" bodyend="187"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="193" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="193" bodyend="193"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a11387742345370829c013095089720e1" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -1917,7 +1981,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="188" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="188" bodyend="188"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="194" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="194" bodyend="194"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a63849d2f4be5a708ea2b2be89e74561a" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -1931,7 +1995,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="189" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="195" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1af81410f29289ddcdbc64cc6136541152" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -1959,7 +2023,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="193" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="193" bodyend="193"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="199" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="199" bodyend="199"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a9b512eefe13cdf24947049580ee9ddce" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -1986,7 +2050,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="195" column="38"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="201" column="38"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a5421b5f44c1c2889efb8e427b95063b4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -2017,7 +2081,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="196" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="196" bodyend="196"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="202" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="202" bodyend="202"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a935594c34ed6220c3b38a85958fbc636" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -2036,7 +2100,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="197" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="197" bodyend="197"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="203" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="203" bodyend="203"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a98cc83944fc9d1ea7d06d0371d84c19e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -2059,7 +2123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="198" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="198" bodyend="198"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="204" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="204" bodyend="204"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a1489bfad7910dfa67da4cd370a2d85d7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -2078,7 +2142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="199" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="199" bodyend="199"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="205" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="205" bodyend="205"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a3beb13dc26608f91aab033bbdfb57dbc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -2101,7 +2165,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="200" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="200" bodyend="200"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="206" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="206" bodyend="206"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1add33065b5041a3b26b2029f6bb320724" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -2120,7 +2184,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="201" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="201" bodyend="201"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="207" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="207" bodyend="207"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1ad24dd5e9a472b9ab3dd075fddadbc92c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -2139,7 +2203,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="202" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="202" bodyend="202"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="208" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="208" bodyend="208"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a5b28c11cba7ef11d0a97d60a605b5c62" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -2158,7 +2222,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="203" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="203" bodyend="203"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="209" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="209" bodyend="209"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a5aa8cfc226088f5727af44cc6cc77d4d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -2177,7 +2241,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="205" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="205" bodyend="205"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="211" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="211" bodyend="211"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a3dcb36dde792890be71a9dd8a10c45c1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -2196,7 +2260,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="206" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="206" bodyend="206"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="212" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="212" bodyend="212"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a450d9371685e0d33bbdf42e4598fdf31" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -2215,7 +2279,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="207" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="207" bodyend="207"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="213" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="213" bodyend="213"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1ab5074c05db24bd7c6d9ba1e907de104b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -2234,7 +2298,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="208" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="208" bodyend="208"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="214" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="214" bodyend="214"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1aacf62d20f416c38cc7524e91b7f17d2a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -2253,7 +2317,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="209" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="209" bodyend="209"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="215" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="215" bodyend="215"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a242464b2ee0e75daef36f91e64cfb9cf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -2272,7 +2336,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="210" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="210" bodyend="210"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="216" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="216" bodyend="216"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1aa17426026aff743e87b85c44cd4bbe52" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -2291,7 +2355,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="211" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="211" bodyend="211"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="217" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="217" bodyend="217"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a71fc99d948809166425ea0902c37c64f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -2310,7 +2374,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="212" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="212" bodyend="212"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="218" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="218" bodyend="218"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a5e980d2254ac1d64638e1be4d0e4c933" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -2329,7 +2393,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="213" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="213" bodyend="213"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="219" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="219" bodyend="219"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a175e12ad4fc75c0fb7615da27be4d879" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -2348,7 +2412,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="215" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="215" bodyend="215"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="221" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="221" bodyend="221"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1aaceaecea8ed5aeb817c9a8747136059c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -2369,7 +2433,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="220" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="226" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a3b31c5d7b5267cccbf8d19bd3d8caec7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -2389,7 +2453,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="223" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="229" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1aa3316ffc3e585785a7b50ec5284826c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -2417,7 +2481,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="227" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="233" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1ad728c9bfa517597163f4e4bfd932913d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -2437,7 +2501,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="231" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="237" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1acf194951c3347fbcbd72b25b8e059948" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -2452,7 +2516,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="232" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="238" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1ad5f4946cb3a7113a3188b4866e81a448" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -2471,7 +2535,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="234" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="240" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1af7e967878a85363bf4c091db31cc3ffb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -2491,7 +2555,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="237" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="243" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a46661a556f38e3c9751a3cd530028794" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -2511,7 +2575,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="240" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="246" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a55d9eb24202389fe1dd443563703f3ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -2531,7 +2595,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="243" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="249" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1ae704aa6f79d3bedede16b5178b269ded" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -2551,7 +2615,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="246" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="252" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a8e3a1bc5398a3e29e9e94aa0bef3a1f1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -2574,7 +2638,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="248" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="248" bodyend="248"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="254" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="254" bodyend="254"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a863b1a3d49f81492e7b5afe1adae7cb1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -2593,7 +2657,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="249" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="249" bodyend="249"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="255" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="255" bodyend="255"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1acbae5cb2f46970e09acfde68e8331969" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -2620,7 +2684,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="251" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="257" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a69662cc79877bb2e0c1bf234e413d9b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -2648,7 +2712,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="254" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="260" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1aaadace5910d67cb91c3c84aad7c0cd6d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -2676,7 +2740,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="257" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="263" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1afe042f0c53e552ff100cd09adf284dfc" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -2704,7 +2768,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="260" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="266" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1ab3479ba793344cf86fc1d50aa8fad34f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -2728,7 +2792,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="263" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="269" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1ace4671f770642ef3660ea635d5877a10" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -2752,7 +2816,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="267" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="273" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1ab9eaaf13fc7204cb511bf31c2dfa5e56" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -2775,7 +2839,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="269" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="275" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a93ebd325c754dc265ef745457d97efb8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -2798,7 +2862,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="270" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="276" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1a3772df1e1fcbfb93a65a67dcf58e95d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -2818,7 +2882,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="273" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="279" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Pipeline_1aacd471fd5fc1cf6593084ed32fdf2f80" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -2833,7 +2897,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="275" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="281" column="22"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -2887,7 +2951,6 @@
           <edgelabel>m_renderStageId</edgelabel>
         </childnode>
         <childnode refid="9" relation="usage">
-          <edgelabel>m_buildState</edgelabel>
           <edgelabel>m_previousState</edgelabel>
           <edgelabel>m_state</edgelabel>
         </childnode>
@@ -3004,7 +3067,7 @@
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="28" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="28" bodyend="318"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="29" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="29" bodyend="324"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a5b28c11cba7ef11d0a97d60a605b5c62" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>AllocateCubeMap</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1ad24dd5e9a472b9ab3dd075fddadbc92c" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>AllocateFrameBuffer</name></member>
@@ -3063,13 +3126,13 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>Get</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>Get</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a16fca09b49251d2d0652ad62fdf05d93" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetBuildIterationsCount</name></member>
-      <member refid="classSR__GRAPH__NS_1_1Pipeline_1a93baf7bc732e7059c0dd05aa6dab12c3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetBuildState</name></member>
-      <member refid="classSR__GRAPH__NS_1_1Pipeline_1af4af287c45563874f48c377cd1387921" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetCurrentBuildIteration</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Pipeline_1a83c508626e3cdcf29430a5c331bdabe7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetBuildState</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a236d3e6b5352e61ef2923b9dc8441501" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetCurrentDescriptorSet</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1ab4a3cda7e2c67ce74101c3afffdef036" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetCurrentFBOHandle</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a59d55f0b1cd2900d6222d723e3d5a883" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetCurrentFrameBuffer</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a4e14d2c5deafc0ea69a0277404124bbe" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetCurrentFrameBufferId</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a3938be107ff67501c33ab4e05daaf9ea" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetCurrentFrameBufferLayer</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Pipeline_1a8f96345a9ea84032eebc602d7bff8a11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetCurrentFrameIndex</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a77de40752cf354ca12519ee751c3655a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetCurrentRenderStrategy</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a7d1dc447d1f83700b91ada7e54d02b0b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetCurrentShader</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a5f9386fb5b501d57583449e04350f404" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetCurrentShaderHandle</name></member>
@@ -3089,12 +3152,13 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetRawPtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a15c5fafc94621d9a92f093197fbc1ddc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetRenderContext</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a8631f760e9f59858ad8ba8d84c0a0361" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetRenderer</name></member>
-      <member refid="classSR__GRAPH__NS_1_1Pipeline_1ab3f9df613c23c25957a4e4eab167764e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetRenderStageId</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Pipeline_1a09138daecd6f226335b46b86a9bd9f2f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetRenderStageId</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a6bd537edd19543d21248e1fddaa70035" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetSamplesCount</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a276cbbe5cf7a8c0f400e19fadc2005d9" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetShaderHandles</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetSRClass</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a7ba5601d4c263cc845360a6ba4e3f29d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetState</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a92a340b822c38c39846cd8c270e4b062" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetSupportedSamples</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Pipeline_1a6ef31c9b21af1128c32f4786e3758efc" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetSwapchainImagesCount</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetThis</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a59d68a94646d1fe584e9f23b66851767" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetType</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetUncheckedRef</name></member>
@@ -3103,6 +3167,7 @@
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1ad9efb5541bc7b8807cf7ba3f99e29ed8" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetVendor</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a51941df6ae1f07e74f1fdd9a99f31851" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetVersion</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a1be1c9aa13fe7ea42f49e2255079a7ff" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetWindow</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Pipeline_1a92dfca4a74aaadaa8cdefcd6450f7961" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>HasActiveOverlay</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>IncrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a338ba61680c6bbb6c2825d1a97587267" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>Init</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a9c1e851dd9aa1d7e1b765e91cc3027d8" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>InitOverlay</name></member>
@@ -3116,7 +3181,7 @@
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a011342ee0359603347ad1862e3c7e2f9" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>IsVSyncEnabled</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>m_basicManually</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a47ced12c47f7c292d1e1328262213667" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>m_bindedDescriptors</name></member>
-      <member refid="classSR__GRAPH__NS_1_1Pipeline_1ae53ae0c38d1fc5cac4d5315faabbc679" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>m_buildState</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Pipeline_1a246857826dd5b915fe502a12fac25071" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>m_buildStates</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a3b17dd263052ffe95f44ff2eb83bc333" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>m_currentSampleCount</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>m_data</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1acec79ba280ff6d871d6f315109f7dd53" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>m_dirty</name></member>
@@ -3143,6 +3208,7 @@
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1ab799c01653464ce90c3241823266de3e" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>m_window</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>MakeShared</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a8e3a1bc5398a3e29e9e94aa0bef3a1f1" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>MapSSBO</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Pipeline_1ab9591906e0cab4fc2bd8b853419ff0e1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>OnFrameBuildEnd</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a08cbedc2d011a36e5c313365d7cdc12d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>OnMultiSampleChanged</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1ac85d74cd02b3ba4a666a67e9e8fab1b8" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>OnResize</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>operator bool</name></member>
@@ -3170,7 +3236,6 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>Reset</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1aacd471fd5fc1cf6593084ed32fdf2f80" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>ResetLastShader</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1ad846040ca78fa8e11c0719fca8b522d9" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>ResetSubmitQueue</name></member>
-      <member refid="classSR__GRAPH__NS_1_1Pipeline_1af122f524c74d3724a135806d1e287158" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SetBuildIteration</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a3936460431f5c05862a439b19dd2b580" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SetCurrentFrameBuffer</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1ab0a9616214bfe183f02aed0dd3fe9107" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SetCurrentFrameBufferLayer</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a0cb69929bff7914e9dcbb53ee9e14fed" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SetCurrentRenderStrategy</name></member>
@@ -3183,6 +3248,7 @@
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1ad915a47914a0126d2628f6aef0c7b262" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SetRenderStageId</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a35f5177f0fd6c04613b59c0be8744fcb" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SetSampleCount</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a666d5711c8f746ad151a3e35d93f3793" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SetScissor</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Pipeline_1aa75ed4cf63c698d5c279b4370f1142ce" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SetSwapchainImagesCount</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1ad195b1f18e0f6335ce74f60a3db653d4" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SetViewport</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a7d42b3258196c5c03c19beb0cc6da402" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SetVSyncEnabled</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a3286735b51ac84f5c4638f1daac13682" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>ShaderProgram</name></member>
@@ -3207,8 +3273,9 @@
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1aaadace5910d67cb91c3c84aad7c0cd6d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>UpdateSSBO</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a69662cc79877bb2e0c1bf234e413d9b1" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>UpdateUBO</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1ad728c9bfa517597163f4e4bfd932913d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>UseShader</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a783dd9e4a58072de8ff19895693bca05" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>Valid</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a637e25787357f859207380f6ecf03c7d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>WaitComputeIdle</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Pipeline_1a163a3966cd1c88ea707cb34d0338329c" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>WaitRenderIdle</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a0b7d68be8cf3c74bd1b4ee64daf4222d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>WindowPtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1afdad4a4a7a09b3b1d7cd3bf39af69771" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>~Pipeline</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>~SharedPtr</name></member>

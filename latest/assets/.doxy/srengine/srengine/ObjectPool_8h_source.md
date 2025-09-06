@@ -188,6 +188,8 @@ namespace SR_HTYPES_NS {
         }
 
         void RemoveIf(const SR_HTYPES_NS::Function<bool(Index, T&)>& condition, const SR_HTYPES_NS::Function<void(T)>& deleter) {
+            SR_TRACY_ZONE;
+
             Index index = 0;
             for (auto&& [isAlive, object] : m_objects) {
                 if (isAlive) SR_LIKELY_ATTRIBUTE {

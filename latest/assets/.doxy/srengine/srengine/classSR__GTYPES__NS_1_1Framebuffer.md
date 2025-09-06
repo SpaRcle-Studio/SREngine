@@ -239,9 +239,9 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 
 | Type | Name |
 | ---: | :--- |
-|  bool | [**BeginCmdBuffer**](#function-begincmdbuffer-13) () <br> |
-|  bool | [**BeginCmdBuffer**](#function-begincmdbuffer-23) (const ClearColors & clearColors, std::optional&lt; float\_t &gt; depth) <br> |
-|  bool | [**BeginCmdBuffer**](#function-begincmdbuffer-33) (const [**SR\_MATH\_NS::FColor**](classSR__MATH__NS_1_1FColor.md) & clearColor, float\_t depth) <br> |
+|  bool | [**BeginCmdBuffer**](#function-begincmdbuffer-13) (uint32\_t frame) <br> |
+|  bool | [**BeginCmdBuffer**](#function-begincmdbuffer-23) (uint32\_t frame, const ClearColors & clearColors, std::optional&lt; float\_t &gt; depth) <br> |
+|  bool | [**BeginCmdBuffer**](#function-begincmdbuffer-33) (uint32\_t frame, const [**SR\_MATH\_NS::FColor**](classSR__MATH__NS_1_1FColor.md) & clearColor, float\_t depth) <br> |
 |  bool | [**BeginRender**](#function-beginrender) () <br> |
 |  bool | [**Bind**](#function-bind) () <br> |
 |  void | [**EndCmdBuffer**](#function-endcmdbuffer) () <br> |
@@ -257,6 +257,7 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 |  SR\_NODISCARD uint32\_t | [**GetHeight**](#function-getheight) () const<br> |
 |  SR\_NODISCARD int32\_t | [**GetId**](#function-getid) () const<br> |
 |  SR\_NODISCARD uint32\_t | [**GetLayersCount**](#function-getlayerscount) () noexcept const<br> |
+|  SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetName**](#function-getname) () const<br> |
 |  SR\_NODISCARD uint8\_t | [**GetSamplesCount**](#function-getsamplescount) () const<br> |
 |  SR\_NODISCARD SR\_MATH\_NS::IVector2 | [**GetSize**](#function-getsize) () const<br> |
 |  SR\_NODISCARD uint32\_t | [**GetWidth**](#function-getwidth) () const<br> |
@@ -265,11 +266,13 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 |  SR\_NODISCARD bool | [**IsDirty**](#function-isdirty) () const<br> |
 | virtual SR\_NODISCARD bool | [**IsFileResource**](#function-isfileresource) () noexcept override const<br>_является ли ресурс файловым_  |
 |  SR\_NODISCARD bool | [**IsValid**](#function-isvalid) () const<br> |
+|  SR\_NODISCARD bool | [**IsWasRendered**](#function-iswasrendered) () const<br> |
 |  void | [**SetDepthAspect**](#function-setdepthaspect) (ImageAspect depthAspect) <br> |
 |  void | [**SetDepthEnabled**](#function-setdepthenabled) (bool depthEnabled) <br> |
 |  void | [**SetDirty**](#function-setdirty) () <br> |
 |  void | [**SetFeatures**](#function-setfeatures) (const FrameBufferFeatures & features) <br> |
 |  void | [**SetLayersCount**](#function-setlayerscount) (uint32\_t layersCount) <br> |
+|  void | [**SetName**](#function-setname) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) <br> |
 |  void | [**SetSampleCount**](#function-setsamplecount) (uint8\_t samples) <br> |
 |  void | [**SetSize**](#function-setsize) (const SR\_MATH\_NS::IVector2 & size) <br> |
 |  void | [**SetViewportScissor**](#function-setviewportscissor) () <br> |
@@ -301,7 +304,6 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 |  SR\_NODISCARD [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**GetResourcePath**](classSR__UTILS__NS_1_1IResource.md#function-getresourcepath) () const<br> |
 | virtual SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetResourceType**](classSR__UTILS__NS_1_1IResource.md#function-getresourcetype) () noexcept const<br> |
 |   | [**IResource**](classSR__UTILS__NS_1_1IResource.md#function-iresource) () <br> |
-| virtual SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**InitializeResourcePath**](classSR__UTILS__NS_1_1IResource.md#function-initializeresourcepath) () const<br> |
 |  SR\_NODISCARD bool | [**IsAlive**](classSR__UTILS__NS_1_1IResource.md#function-isalive) () const<br> |
 | virtual SR\_NODISCARD bool | [**IsAllowedMultiInstance**](classSR__UTILS__NS_1_1IResource.md#function-isallowedmultiinstance) () const<br> |
 | virtual SR\_NODISCARD bool | [**IsAllowedToRevive**](classSR__UTILS__NS_1_1IResource.md#function-isallowedtorevive) () const<br> |
@@ -319,7 +321,8 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 | virtual bool | [**Reload**](classSR__UTILS__NS_1_1IResource.md#function-reload) () <br> |
 | virtual RemoveUPResult | [**RemoveUsePoint**](classSR__UTILS__NS_1_1IResource.md#function-removeusepoint) () <br> |
 | virtual void | [**ReviveResource**](classSR__UTILS__NS_1_1IResource.md#function-reviveresource) () <br> |
-|  void | [**SetId**](classSR__UTILS__NS_1_1IResource.md#function-setid) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, bool autoRegister=true) <br> |
+|  void | [**SetId**](classSR__UTILS__NS_1_1IResource.md#function-setid-12) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, bool autoRegister=true) <br> |
+|  void | [**SetId**](classSR__UTILS__NS_1_1IResource.md#function-setid-22) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path, bool autoRegister=true) <br> |
 |  void | [**SetLifetime**](classSR__UTILS__NS_1_1IResource.md#function-setlifetime) (int64\_t lifeTime) <br> |
 |  void | [**SetResourceHash**](classSR__UTILS__NS_1_1IResource.md#function-setresourcehash) (uint64\_t hash) <br> |
 |  void | [**SignalWatch**](classSR__UTILS__NS_1_1IResource.md#function-signalwatch) () <br> |
@@ -357,7 +360,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  SR\_NODISCARD SR\_FORCE\_INLINE T \* | [**Get**](classSR__HTYPES__NS_1_1SharedPtr.md#function-get-22) () <br> |
 |  SR\_NODISCARD const void \* | [**GetRawPtr**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getrawptr-12) () const<br> |
 |  SR\_NODISCARD void \* | [**GetRawPtr**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getrawptr-22) () <br>_NOLINT(modernize-use-nodiscard)_  |
-| virtual SR\_NODISCARD SRClass \* | [**GetSRClass**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getsrclass) () override const<br>_NOLINT(modernize-use-nodiscard)_  |
+| virtual SR\_NODISCARD SRClass \* | [**GetSRClass**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getsrclass) () override const<br> |
 |  SR\_NODISCARD [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; | [**GetThis**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getthis) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE const T &SR\_FASTCALL | [**GetUncheckedRef**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getuncheckedref-12) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE T &SR\_FASTCALL | [**GetUncheckedRef**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getuncheckedref-22) () <br> |
@@ -375,15 +378,15 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; U &gt; | [**StaticCast**](classSR__HTYPES__NS_1_1SharedPtr.md#function-staticcast) () const<br> |
 |  SR\_NODISCARD bool | [**TryRecursiveLockIfValid**](classSR__HTYPES__NS_1_1SharedPtr.md#function-tryrecursivelockifvalid) () noexcept const<br> |
 |  void | [**Unlock**](classSR__HTYPES__NS_1_1SharedPtr.md#function-unlock) () noexcept const<br> |
-|  bool | [**Valid**](classSR__HTYPES__NS_1_1SharedPtr.md#function-valid) () const<br> |
+| virtual SR\_NODISCARD bool | [**Valid**](classSR__HTYPES__NS_1_1SharedPtr.md#function-valid) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE | [**operator bool**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator-bool) () noexcept const<br> |
 |  SR\_INLINE bool | [**operator!=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & right) const<br> |
 |  SR\_FORCE\_INLINE T & | [**operator\***](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_1) () const<br> |
-|  SR\_FORCE\_INLINE T \* | [**operator-&gt;**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_2) () const<br> |
-|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_3) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & ptr) <br> |
-|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_4) (T \* ptr) <br> |
-|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_5) ([**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; && ptr) noexcept<br> |
-|  SR\_INLINE bool | [**operator==**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_6) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & right) const<br> |
+|  SR\_FORCE\_INLINE T \* | [**operator-&gt;**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator-) () const<br> |
+|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_2) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & ptr) <br> |
+|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_3) (T \* ptr) <br> |
+|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_4) ([**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; && ptr) noexcept<br> |
+|  SR\_INLINE bool | [**operator==**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_5) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & right) const<br> |
 |   | [**~SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md#function-sharedptr) () override<br> |
 
 
@@ -402,6 +405,7 @@ See [SR\_HTYPES\_NS::SharedPtrBase](classSR__HTYPES__NS_1_1SharedPtrBase.md)
 | virtual void | [**SetPointerFromBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-setpointerfrombase) ([**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md) \* pBase) = 0<br> |
 |   | [**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase-12) () <br> |
 |   | [**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase-22) ([**SharedPtrDynamicData**](structSR__HTYPES__NS_1_1SharedPtrDynamicData.md) \* data) <br> |
+| virtual SR\_NODISCARD bool | [**Valid**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-valid) () const = 0<br> |
 | virtual  | [**~SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase) () <br> |
 
 
@@ -448,6 +452,7 @@ See [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 
 | Type | Name |
 | ---: | :--- |
+|  void | [**CloneTo**](classSR__UTILS__NS_1_1SRClass.md#function-cloneto) ([**SRClass**](classSR__UTILS__NS_1_1SRClass.md) & clone) const<br> |
 | virtual SR\_NODISCARD const [**SR\_UTILS\_NS::SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md) \* | [**GetMeta**](classSR__UTILS__NS_1_1SRClass.md#function-getmeta) () noexcept const = 0<br> |
 | virtual  | [**~SRClass**](classSR__UTILS__NS_1_1SRClass.md#function-srclass) () = default<br> |
 
@@ -457,11 +462,11 @@ See [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 | Type | Name |
 | ---: | :--- |
 |  Ptr | [**Create**](#function-create-16) (uint32\_t images, const SR\_MATH\_NS::IVector2 & size) <br> |
-|  Ptr | [**Create**](#function-create-26) (const std::list&lt; ImageFormat &gt; & colors, ImageFormat depth) <br> |
-|  Ptr | [**Create**](#function-create-36) (const std::list&lt; ImageFormat &gt; & colors, ImageFormat depth, const SR\_MATH\_NS::IVector2 & size) <br> |
-|  Ptr | [**Create**](#function-create-46) (const std::list&lt; ImageFormat &gt; & colors, ImageFormat depth, const SR\_MATH\_NS::IVector2 & size, uint8\_t samples) <br> |
-|  Ptr | [**Create**](#function-create-56) (const std::list&lt; ImageFormat &gt; & colors, ImageFormat depth, const SR\_MATH\_NS::IVector2 & size, uint8\_t samples, uint32\_t layersCount) <br> |
-|  Ptr | [**Create**](#function-create-66) (const std::list&lt; ImageFormat &gt; & colors, ImageFormat depth, const SR\_MATH\_NS::IVector2 & size, uint8\_t samples, uint32\_t layersCount, ImageAspect depthAspect) <br> |
+|  Ptr | [**Create**](#function-create-26) (const std::vector&lt; ImageFormat &gt; & colors, ImageFormat depth) <br> |
+|  Ptr | [**Create**](#function-create-36) (const std::vector&lt; ImageFormat &gt; & colors, ImageFormat depth, const SR\_MATH\_NS::IVector2 & size) <br> |
+|  Ptr | [**Create**](#function-create-46) (const std::vector&lt; ImageFormat &gt; & colors, ImageFormat depth, const SR\_MATH\_NS::IVector2 & size, uint8\_t samples) <br> |
+|  Ptr | [**Create**](#function-create-56) (const std::vector&lt; ImageFormat &gt; & colors, ImageFormat depth, const SR\_MATH\_NS::IVector2 & size, uint8\_t samples, uint32\_t layersCount) <br> |
+|  Ptr | [**Create**](#function-create-66) (const std::vector&lt; ImageFormat &gt; & colors, ImageFormat depth, const SR\_MATH\_NS::IVector2 & size, uint8\_t samples, uint32\_t layersCount, ImageAspect depthAspect) <br> |
 
 
 
@@ -772,7 +777,9 @@ using SR_GTYPES_NS::Framebuffer::Ptr =  SR_HTYPES_NS::SharedPtr<Framebuffer>;
 ### function BeginCmdBuffer [1/3]
 
 ```C++
-bool SR_GTYPES_NS::Framebuffer::BeginCmdBuffer () 
+bool SR_GTYPES_NS::Framebuffer::BeginCmdBuffer (
+    uint32_t frame
+) 
 ```
 
 
@@ -786,6 +793,7 @@ bool SR_GTYPES_NS::Framebuffer::BeginCmdBuffer ()
 
 ```C++
 bool SR_GTYPES_NS::Framebuffer::BeginCmdBuffer (
+    uint32_t frame,
     const ClearColors & clearColors,
     std::optional< float_t > depth
 ) 
@@ -802,6 +810,7 @@ bool SR_GTYPES_NS::Framebuffer::BeginCmdBuffer (
 
 ```C++
 bool SR_GTYPES_NS::Framebuffer::BeginCmdBuffer (
+    uint32_t frame,
     const SR_MATH_NS::FColor & clearColor,
     float_t depth
 ) 
@@ -1015,6 +1024,19 @@ inline SR_NODISCARD uint32_t SR_GTYPES_NS::Framebuffer::GetLayersCount () noexce
 
 
 
+### function GetName 
+
+```C++
+inline SR_NODISCARD SR_UTILS_NS::StringAtom SR_GTYPES_NS::Framebuffer::GetName () const
+```
+
+
+
+
+<hr>
+
+
+
 ### function GetSamplesCount 
 
 ```C++
@@ -1124,6 +1146,19 @@ inline SR_NODISCARD bool SR_GTYPES_NS::Framebuffer::IsValid () const
 
 
 
+### function IsWasRendered 
+
+```C++
+inline SR_NODISCARD bool SR_GTYPES_NS::Framebuffer::IsWasRendered () const
+```
+
+
+
+
+<hr>
+
+
+
 ### function SetDepthAspect 
 
 ```C++
@@ -1187,6 +1222,21 @@ void SR_GTYPES_NS::Framebuffer::SetFeatures (
 ```C++
 void SR_GTYPES_NS::Framebuffer::SetLayersCount (
     uint32_t layersCount
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function SetName 
+
+```C++
+inline void SR_GTYPES_NS::Framebuffer::SetName (
+    SR_UTILS_NS::StringAtom name
 ) 
 ```
 
@@ -1288,7 +1338,7 @@ static Ptr SR_GTYPES_NS::Framebuffer::Create (
 
 ```C++
 static Ptr SR_GTYPES_NS::Framebuffer::Create (
-    const std::list< ImageFormat > & colors,
+    const std::vector< ImageFormat > & colors,
     ImageFormat depth
 ) 
 ```
@@ -1304,7 +1354,7 @@ static Ptr SR_GTYPES_NS::Framebuffer::Create (
 
 ```C++
 static Ptr SR_GTYPES_NS::Framebuffer::Create (
-    const std::list< ImageFormat > & colors,
+    const std::vector< ImageFormat > & colors,
     ImageFormat depth,
     const SR_MATH_NS::IVector2 & size
 ) 
@@ -1321,7 +1371,7 @@ static Ptr SR_GTYPES_NS::Framebuffer::Create (
 
 ```C++
 static Ptr SR_GTYPES_NS::Framebuffer::Create (
-    const std::list< ImageFormat > & colors,
+    const std::vector< ImageFormat > & colors,
     ImageFormat depth,
     const SR_MATH_NS::IVector2 & size,
     uint8_t samples
@@ -1339,7 +1389,7 @@ static Ptr SR_GTYPES_NS::Framebuffer::Create (
 
 ```C++
 static Ptr SR_GTYPES_NS::Framebuffer::Create (
-    const std::list< ImageFormat > & colors,
+    const std::vector< ImageFormat > & colors,
     ImageFormat depth,
     const SR_MATH_NS::IVector2 & size,
     uint8_t samples,
@@ -1358,7 +1408,7 @@ static Ptr SR_GTYPES_NS::Framebuffer::Create (
 
 ```C++
 static Ptr SR_GTYPES_NS::Framebuffer::Create (
-    const std::list< ImageFormat > & colors,
+    const std::vector< ImageFormat > & colors,
     ImageFormat depth,
     const SR_MATH_NS::IVector2 & size,
     uint8_t samples,

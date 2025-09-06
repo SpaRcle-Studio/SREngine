@@ -94,7 +94,7 @@ namespace SR_GRAPH_NS {
         ShaderPtr pShader = nullptr;
         FramebufferPtr pFrameBuffer = nullptr;
 
-        int32_t buildIteration = 0;
+        bool hasRenderData = false;
 
         int32_t UBOId = SR_ID_INVALID;
         int32_t FBOId = SR_ID_INVALID;

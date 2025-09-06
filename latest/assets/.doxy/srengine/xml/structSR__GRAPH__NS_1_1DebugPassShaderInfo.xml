@@ -1,0 +1,221 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structSR__GRAPH__NS_1_1DebugPassShaderInfo" kind="struct" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::DebugPassShaderInfo</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1Serializable" prot="public" virt="non-virtual">SR_UTILS_NS::Serializable</basecompoundref>
+    <innerclass refid="structSR__GRAPH__NS_1_1DebugPassShaderInfo_1_1MemInfo" prot="public">SR_GRAPH_NS::DebugPassShaderInfo::MemInfo</innerclass>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1DebugPassShaderInfo_1a9892ee9a7a273fd9c0d6db98216362c3" prot="public" static="no" mutable="no">
+        <type>SR_GTYPES_NS::Shader::Ptr</type>
+        <definition>SR_GTYPES_NS::Shader::Ptr SR_GRAPH_NS::DebugPassShaderInfo::pShader</definition>
+        <argsstring></argsstring>
+        <name>pShader</name>
+        <qualifiedname>SR_GRAPH_NS::DebugPassShaderInfo::pShader</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="27" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1DebugPassShaderInfo_1a8d57ee90a5bbb9f4dec2005a5483c861" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::DebugPassShaderInfo::uboUsed</definition>
+        <argsstring></argsstring>
+        <name>uboUsed</name>
+        <qualifiedname>SR_GRAPH_NS::DebugPassShaderInfo::uboUsed</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="28" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1DebugPassShaderInfo_1ad45bc30cd7dce9f2b847dad996e602ad" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structSR__GRAPH__NS_1_1DebugPassShaderInfo_1_1MemInfo" kindref="compound">MemInfo</ref> &gt;</type>
+        <definition>std::vector&lt;MemInfo&gt; SR_GRAPH_NS::DebugPassShaderInfo::UBOs</definition>
+        <argsstring></argsstring>
+        <name>UBOs</name>
+        <qualifiedname>SR_GRAPH_NS::DebugPassShaderInfo::UBOs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="29" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1DebugPassShaderInfo_1ab90bd5b72560059dc33acf9aa05c67ff" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::vector&lt; <ref refid="structSR__GRAPH__NS_1_1DebugRenderer_1_1DrawInfo" kindref="compound">DebugRenderer::DrawInfo</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::vector&lt;DebugRenderer::DrawInfo&gt; &gt; SR_GRAPH_NS::DebugPassShaderInfo::drawQueues</definition>
+        <argsstring></argsstring>
+        <name>drawQueues</name>
+        <qualifiedname>SR_GRAPH_NS::DebugPassShaderInfo::drawQueues</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="30" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1DebugPassShaderInfo_1ab5ad80b57e587fed972030ef2ed17f79" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
+        <definition>SR_UTILS_NS::Path SR_GRAPH_NS::DebugPassShaderInfo::shaderPath</definition>
+        <argsstring></argsstring>
+        <name>shaderPath</name>
+        <qualifiedname>SR_GRAPH_NS::DebugPassShaderInfo::shaderPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="35" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1DebugPassShaderInfo_1aeca09c9b7e571820a679cb87f4d30604" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::DebugPassShaderInfo::DebugPassShaderInfo</definition>
+        <argsstring>()=default</argsstring>
+        <name>DebugPassShaderInfo</name>
+        <qualifiedname>SR_GRAPH_NS::DebugPassShaderInfo::DebugPassShaderInfo</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="15" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1DebugPassShaderInfo_1a8fe5cc7ed6b3cf5bfc5c27ac2e9ec2bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::DebugPassShaderInfo::~DebugPassShaderInfo</definition>
+        <argsstring>() override</argsstring>
+        <name>~DebugPassShaderInfo</name>
+        <qualifiedname>SR_GRAPH_NS::DebugPassShaderInfo::~DebugPassShaderInfo</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="16" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1DebugPassShaderInfo_1a69873ecffba07c95e94db0201e820697" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::DebugPassShaderInfo::SetShader</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;path)</argsstring>
+        <name>SetShader</name>
+        <qualifiedname>SR_GRAPH_NS::DebugPassShaderInfo::SetShader</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="18" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1DebugPassShaderInfo_1aa2fde971c2ff302593921295cd025919" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::DebugPassShaderInfo::LoadShader</definition>
+        <argsstring>()</argsstring>
+        <name>LoadShader</name>
+        <qualifiedname>SR_GRAPH_NS::DebugPassShaderInfo::LoadShader</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="19" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::DebugPassShaderInfo</label>
+        <link refid="structSR__GRAPH__NS_1_1DebugPassShaderInfo"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::DebugPassShaderInfo</label>
+        <link refid="structSR__GRAPH__NS_1_1DebugPassShaderInfo"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>shaderPath</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::Path</label>
+        <link refid="classSR__UTILS__NS_1_1Path"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="12" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="12" bodyend="36"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>AddSerializationFlags</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>AllocateStatic</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>CloneTo</name></member>
+      <member refid="structSR__GRAPH__NS_1_1DebugPassShaderInfo_1aeca09c9b7e571820a679cb87f4d30604" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>DebugPassShaderInfo</name></member>
+      <member refid="structSR__GRAPH__NS_1_1DebugPassShaderInfo_1ab90bd5b72560059dc33acf9aa05c67ff" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>drawQueues</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a7734143f7ae123a6088320486af89283" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>GetBaseMetas</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a97a0919298e9d1d53220613bded5ba69" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>GetClassStaticName</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a16a351eac01dde110e273cfd05f1f7ed" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>GetMeta</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a16837ff730fb4e276450a124d70eb2e4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>GetMetaStatic</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1af5c00e9391fad105c30570cbda1a6285" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>HasSerializationFlags</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1afbc9947b694481f8478c1a75a2fc465e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>Load</name></member>
+      <member refid="structSR__GRAPH__NS_1_1DebugPassShaderInfo_1aa2fde971c2ff302593921295cd025919" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>LoadShader</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a27569f8d47ee0c52ed5e385253e14460" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>OnPostLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1afbe2a50f0f69bc0f52b51151058830d8" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>OnPostSave</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a2978d969c09702719b2ed5c84453b02d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>OnPreLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a8281e1a68416fd493dce2a48fa8ea660" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>OnPreSave</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1ac8b16fec8d4003ae41fd3fe294595b36" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>OriginType</name></member>
+      <member refid="structSR__GRAPH__NS_1_1DebugPassShaderInfo_1a9892ee9a7a273fd9c0d6db98216362c3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>pShader</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1afed952eb55d7441a18c4d3381d315fcf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>RegisterPropertiesCodegen</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1ab5d15ff431f7405c8ad940333e6417a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>RemoveSerializationFlags</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>Save</name></member>
+      <member refid="structSR__GRAPH__NS_1_1DebugPassShaderInfo_1a69873ecffba07c95e94db0201e820697" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>SetShader</name></member>
+      <member refid="structSR__GRAPH__NS_1_1DebugPassShaderInfo_1ab5ad80b57e587fed972030ef2ed17f79" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>shaderPath</name></member>
+      <member refid="structSR__GRAPH__NS_1_1DebugPassShaderInfo_1ad45bc30cd7dce9f2b847dad996e602ad" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>UBOs</name></member>
+      <member refid="structSR__GRAPH__NS_1_1DebugPassShaderInfo_1a8d57ee90a5bbb9f4dec2005a5483c861" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>uboUsed</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a5aab0756802a67de9cb45b83b3e73c70" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>VerifyAfterLoad</name></member>
+      <member refid="structSR__GRAPH__NS_1_1DebugPassShaderInfo_1a8fe5cc7ed6b3cf5bfc5c27ac2e9ec2bd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>~DebugPassShaderInfo</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1ad88a80732713966d7759d768bd65bbe5" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DebugPassShaderInfo</scope><name>~SRClass</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

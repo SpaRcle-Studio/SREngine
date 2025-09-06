@@ -10,6 +10,7 @@
     <innerfile refid="MigrationManager_8h">MigrationManager.h</innerfile>
     <innerfile refid="ObjectDataAccessor_8h">ObjectDataAccessor.h</innerfile>
     <innerfile refid="ObjectDataAccessors_8inl_8h">ObjectDataAccessors.inl.h</innerfile>
+    <innerfile refid="OptionalTypes_8h">OptionalTypes.h</innerfile>
     <innerfile refid="SaveCheckers_8inl_8h">SaveCheckers.inl.h</innerfile>
     <innerfile refid="Serializable_8h">Serializable.h</innerfile>
     <innerfile refid="Serialization_8h">Serialization.h</innerfile>

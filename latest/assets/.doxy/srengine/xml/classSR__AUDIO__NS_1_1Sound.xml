@@ -469,6 +469,7 @@
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a459ed22e0064b69639129562ea9aad38" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>Broadcast</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a543a91c5e997ad287249110180f9cea2" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>Broadcast</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a6aad227ccd12d3dd92ac9010ba6ac404" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>CheckResourceUsage</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>CloneTo</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>DecrementPointer</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a1321f66c455d7f59eebb314fe2c83062" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>DeleteResource</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a700794249e341d5228920451cedf9ee7" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>Destroy</name></member>
@@ -511,7 +512,6 @@
       <member refid="classSR__UTILS__NS_1_1Serializable_1af5c00e9391fad105c30570cbda1a6285" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>HasSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a2a266b012e03eec86b0050d2ff3c9f30" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>HasSubscriptions</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>IncrementPointer</name></member>
-      <member refid="classSR__UTILS__NS_1_1IResource_1a9035e8e13821bbcf09633e80365d0643" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>InitializeResourcePath</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ac810662984eb60e0bea8b08e455ea2a2" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>IResource</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ad94ef18d58f13582b7411b749ae81089" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>IsAlive</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a7f41c08e67a57cca18fb3b2c2c350768" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>IsAllowedMultiInstance</name></member>
@@ -575,6 +575,7 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1a70da9b49736de59bddc1f26575f5da33" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>ReviveResource</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>Save</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a0981532a88fdeb242d295a04690ec4dd" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>SetId</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a7349e6cd8d4b8c3ffcd844f310f81602" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>SetId</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a992fe5635f43333348b9c9445293e23b" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>SetLifetime</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>SetPointerFromBase</name></member>
       <member refid="classSR__AUDIO__NS_1_1Sound_1a46f1c42f02876481e22679bf042cb457" prot="private" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>SetRawSound</name></member>
@@ -603,7 +604,7 @@
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a9020c161e4bc8453d005eb5fab808490" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>Unsubscribe</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a8374f937e659f29170b1db2b81ba2594" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>UpdateResourceLifeTime</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac84a44cf058fa5cb53715e250ae7157c" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>UpdateResources</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a783dd9e4a58072de8ff19895693bca05" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>Valid</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a5aab0756802a67de9cb45b83b3e73c70" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>VerifyAfterLoad</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ac4450e90e1fbd14d29931a362b9c05eb" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>~IResource</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a25f84a35792474f3b2e2eff6431695d3" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>~ResourceContainer</name></member>

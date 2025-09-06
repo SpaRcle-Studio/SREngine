@@ -138,6 +138,20 @@
         </inbodydescription>
         <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="44" column="17" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="44" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a1ccc7245d70c08ddc0de47ae23c4e563" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; bool(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>)&gt;</type>
+        <definition>SR_HTYPES_NS::Function&lt;bool(SR_UTILS_NS::StringAtom)&gt; SR_CORE_GUI_NS::PropertyDrawerContext::isEnumValueAvailableCheckFn</definition>
+        <argsstring></argsstring>
+        <name>isEnumValueAvailableCheckFn</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::isEnumValueAvailableCheckFn</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="46" column="32" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a1e4c310f0f1ff0971b3a4d9998019145" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(bool drag)&gt;</type>
         <definition>SR_HTYPES_NS::Function&lt;void(bool drag)&gt; SR_CORE_GUI_NS::PropertyDrawerContext::onBeforeChangeCallback</definition>
@@ -150,7 +164,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="65" column="32" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="65" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="70" column="32" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="70" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1ad1a8afd67542a36f0897762e3afb69f7" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams" kindref="compound">SR_UTILS_NS::Reflection::EditorPropertyParams</ref></type>
@@ -164,7 +178,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="66" column="55" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="66" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="71" column="55" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="71" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1aff00973dc405dfa26a6051f0ee8330e4" prot="public" static="no" mutable="no">
         <type>SR_UTILS_NS::Component::Ptr</type>
@@ -178,7 +192,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="67" column="37" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="67" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="72" column="37" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="72" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1aa115dd5eaab90e4bffaae95d44d68a0c" prot="public" static="no" mutable="no">
         <type>uint64_t</type>
@@ -193,7 +207,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="68" column="18" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="68" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="73" column="18" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="73" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a90defef5eba87969a34307df412ac1cb" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -207,7 +221,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="69" column="33" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="69" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="74" column="33" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="74" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1acd9f0ecc25a4970012d408f24e317da9" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">SR_UTILS_NS::Reflection::Value</ref> *</type>
@@ -222,7 +236,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="70" column="40" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="70" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="75" column="40" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="75" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a67b6b04a53805852f1f1f1c9c4fa5179" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Property" kindref="compound">SR_UTILS_NS::Reflection::Property</ref> const  *</type>
@@ -237,7 +251,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="71" column="49" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="71" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="76" column="49" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="76" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1ab8abf14c601398d83fdaef0b45973d77" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__CORE__GUI__NS_1_1EditorGUI" kindref="compound">EditorGUI</ref> *</type>
@@ -252,7 +266,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="72" column="19" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="72" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="77" column="19" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="77" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a10ae5aeb7ed158b56bbeaf1407eb02ee" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1SRClass" kindref="compound">SR_UTILS_NS::SRClass</ref> *</type>
@@ -267,7 +281,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="73" column="30" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="73" bodyend="-1"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="78" column="30" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="78" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -319,7 +333,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="46" column="30" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="46" bodyend="46"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="48" column="30" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="48" bodyend="48"/>
       </memberdef>
       <memberdef kind="function" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1ad659a85b1caac210ab7448f8a1a65e67" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Reflection_1_1Property" kindref="compound">SR_UTILS_NS::Reflection::Property</ref> const &amp;</type>
@@ -333,7 +347,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="48" column="62" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="48" bodyend="48"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="50" column="62" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="50" bodyend="50"/>
       </memberdef>
       <memberdef kind="function" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a448fb944c2b422c87d09210d6a76a0af" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -347,7 +361,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="49" column="46" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="49" bodyend="49"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="51" column="46" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="51" bodyend="51"/>
       </memberdef>
       <memberdef kind="function" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1ab60ab76c70cfb44408183dbb44a615a6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -361,7 +375,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="50" column="46" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="50" bodyend="50"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="52" column="46" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="52" bodyend="52"/>
       </memberdef>
       <memberdef kind="function" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a8e3b571fd0504f784d3b0db209e18ee6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const <ref refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams" kindref="compound">SR_UTILS_NS::Reflection::EditorPropertyParams</ref> &amp;</type>
@@ -375,7 +389,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="51" column="74" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="51" bodyend="51"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="53" column="74" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="53" bodyend="53"/>
       </memberdef>
       <memberdef kind="function" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a36f14d5ac2903623321783ee4e6cc700" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">SR_UTILS_NS::Reflection::Value</ref></type>
@@ -389,7 +403,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="53" column="53" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="53" bodyend="59"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="55" column="53" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="55" bodyend="64"/>
       </memberdef>
       <memberdef kind="function" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a7db7e790d90116e6138c154b1aebd40c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -403,7 +417,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="61" column="27" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="61" bodyend="63"/>
+        <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="66" column="27" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="66" bodyend="68"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -463,7 +477,7 @@
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="24" column="5" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="24" bodyend="74"/>
+    <location file="Engine/inc/Engine/GUI/PropertyDrawer.h" line="24" column="5" bodyfile="Engine/inc/Engine/GUI/PropertyDrawer.h" bodystart="24" bodyend="79"/>
     <listofallmembers>
       <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a9f22fd5fe160184c97edd496c3ff5986" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>axisButtonWidth</name></member>
       <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a90defef5eba87969a34307df412ac1cb" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>customDisplayName</name></member>
@@ -478,6 +492,7 @@
       <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a448fb944c2b422c87d09210d6a76a0af" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>GetPropertyName</name></member>
       <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a36f14d5ac2903623321783ee4e6cc700" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>GetValue</name></member>
       <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a7db7e790d90116e6138c154b1aebd40c" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>HasExplicitSetter</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a1ccc7245d70c08ddc0de47ae23c4e563" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>isEnumValueAvailableCheckFn</name></member>
       <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a6dae642ec7f65d6290a2d5d2c7080ab9" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>lineHeight</name></member>
       <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a74b8aeeef1b07117bec04b1f33bb8f52" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>maxPartsInLine</name></member>
       <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a629b5deec320cf79a9029d9c67a79162" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>noHeader</name></member>

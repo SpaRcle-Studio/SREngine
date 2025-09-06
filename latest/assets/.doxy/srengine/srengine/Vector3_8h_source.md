@@ -171,6 +171,22 @@ namespace SR_MATH_NS {
             return (x == UnitMAX && y == UnitMAX && z == UnitMAX); // TODO
         }
 
+        SR_NODISCARD Vector3 Min(const Vector3& v) const {
+            return Vector3(
+                x < v.x ? x : v.x,
+                y < v.y ? y : v.y,
+                z < v.z ? z : v.z
+            );
+        }
+
+        SR_NODISCARD Vector3 Max(const Vector3& v) const {
+            return Vector3(
+                x > v.x ? x : v.x,
+                y > v.y ? y : v.y,
+                z > v.z ? z : v.z
+            );
+        }
+
         SR_NODISCARD Vector3 Radians() const noexcept {
             return { static_cast<T>(SR_RAD(x)), static_cast<T>(SR_RAD(y)), static_cast<T>(SR_RAD(z)) };
         }

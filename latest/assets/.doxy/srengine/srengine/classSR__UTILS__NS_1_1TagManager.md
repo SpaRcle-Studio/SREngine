@@ -138,11 +138,19 @@ Inherits the following classes: [SR\_UTILS\_NS::GlobalSettings](classSR__UTILS__
 | Type | Name |
 | ---: | :--- |
 |  SR\_NODISCARD [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetDefaultTag**](#function-getdefaulttag) () const<br> |
+| virtual SR\_NODISCARD [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**GetSettingsPath**](#function-getsettingspath) () override const<br> |
 |  SR\_NODISCARD [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetTagByIndex**](#function-gettagbyindex) (uint16\_t index) const<br> |
 |  SR\_NODISCARD uint16\_t | [**GetTagIndex**](#function-gettagindex) ([**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) tag) const<br> |
 |  SR\_NODISCARD const std::vector&lt; [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) &gt; & | [**GetTags**](#function-gettags) () const<br> |
 
 
+## Public Functions inherited from SR_UTILS_NS::GlobalSettings
+
+See [SR\_UTILS\_NS::GlobalSettings](classSR__UTILS__NS_1_1GlobalSettings.md)
+
+| Type | Name |
+| ---: | :--- |
+| virtual [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**GetSettingsPath**](classSR__UTILS__NS_1_1GlobalSettings.md#function-getsettingspath) () const = 0<br> |
 
 
 
@@ -308,7 +316,6 @@ See [SR\_UTILS\_NS::SingletonBase](classSR__UTILS__NS_1_1SingletonBase.md)
 | Type | Name |
 | ---: | :--- |
 |  void | [**ClearSettings**](#function-clearsettings) () override<br> |
-|  SR\_NODISCARD [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**InitializeResourcePath**](#function-initializeresourcepath) () override const<br> |
 |  bool | [**LoadSettings**](#function-loadsettings) (const SR\_XML\_NS::Node & node) override<br> |
 |  void | [**RegisterTag**](#function-registertag) ([**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) tag) <br> |
 
@@ -398,6 +405,21 @@ SR_NODISCARD StringAtom SR_UTILS_NS::TagManager::GetDefaultTag () const
 
 
 
+### function GetSettingsPath 
+
+```C++
+virtual SR_NODISCARD SR_UTILS_NS::Path SR_UTILS_NS::TagManager::GetSettingsPath () override const
+```
+
+
+
+Implements [*SR\_UTILS\_NS::GlobalSettings::GetSettingsPath*](classSR__UTILS__NS_1_1GlobalSettings.md#function-getsettingspath)
+
+
+<hr>
+
+
+
 ### function GetTagByIndex 
 
 ```C++
@@ -451,19 +473,6 @@ inline SR_NODISCARD const std::vector< StringAtom > & SR_UTILS_NS::TagManager::G
 
 ```C++
 void SR_UTILS_NS::TagManager::ClearSettings () override
-```
-
-
-
-
-<hr>
-
-
-
-### function InitializeResourcePath 
-
-```C++
-SR_NODISCARD SR_UTILS_NS::Path SR_UTILS_NS::TagManager::InitializeResourcePath () override const
 ```
 
 

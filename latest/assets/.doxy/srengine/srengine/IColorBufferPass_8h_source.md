@@ -28,7 +28,7 @@ namespace SR_GTYPES_NS {
 namespace SR_GRAPH_NS {
     class IColorBufferPass {
     public:
-        SR_NODISCARD virtual SR_GTYPES_NS::Framebuffer* GetColorFrameBuffer() const noexcept = 0;
+        SR_NODISCARD virtual const SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Framebuffer>& GetColorFrameBuffer() const noexcept = 0;
 
         SR_NODISCARD SR_GTYPES_NS::Mesh* GetMesh(float_t x, float_t y) const;
         SR_NODISCARD SR_GTYPES_NS::Mesh* GetMesh(SR_MATH_NS::FVector2 pos) const;
@@ -36,13 +36,15 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD uint32_t GetIndex(float_t x, float_t y) const;
         SR_NODISCARD uint32_t GetColorIndex() const noexcept;
         SR_NODISCARD SR_MATH_NS::FVector3 GetMeshColor() const noexcept;
+        SR_NODISCARD uint32_t GetColorMultiplier() const noexcept { return m_multiplier; }
+
+        void SetColorMultiplier(uint32_t multiplier) { m_multiplier = SR_MAX(1, multiplier); }
 
     protected:
         void ClearTable();
         void SetMeshIndex(SR_GTYPES_NS::Mesh* pMesh);
         void IncrementColorIndex() noexcept;
         void ResetColorIndex() noexcept { m_colorId = 0; }
-        void SetColorMultiplier(uint32_t multiplier) { m_multiplier = SR_MAX(1, multiplier); }
 
     private:
         std::vector<SR_GTYPES_NS::Mesh*> m_table;

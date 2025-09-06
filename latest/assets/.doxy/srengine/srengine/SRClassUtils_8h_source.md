@@ -39,8 +39,43 @@ namespace SR_UTILS_NS::Reflection {
         }
     }*/
 
-    template<typename T>
-    constexpr bool ContainsSRClassV = IsSRClassV<InnerTypeT<T>>;
+    template<typename T> SR_INLINE void CloneTo(const T& from, T& to) {
+        if constexpr (IsSRClassV<T>) {
+            from.CloneTo(to);
+        }
+        else if constexpr (IsSharedPointerV<T>) {
+            if (from) {
+                auto&& pClone = SR_UTILS_NS::Factory::Instance().Create<InnerTypeT<T>>(from->GetMeta()->GetFactoryName());
+                from->CloneTo(*pClone);
+                to = std::move(pClone);
+            }
+        }
+        else if constexpr (IsStdVectorV<T> && ContainsSRClassV<T>) {
+            to.resize(from.size());
+            for (size_t i = 0; i < from.size(); ++i) {
+                CloneTo(from[i], to[i]);
+            }
+        }
+        else if constexpr (IsStdSetV<T> && ContainsSRClassV<T>) {
+            to.clear();
+            for (auto&& item : from) {
+                InnerTypeT<T> cloneValue;
+                CloneTo(item, cloneValue);
+                to.insert(std::move(cloneValue));
+            }
+        }
+        else if constexpr (IsStdMapV<T> && ContainsSRClassV<T>) {
+            to.clear();
+            for (auto&& [key, value] : from) {
+                InnerTypeT<T> cloneValue;
+                CloneTo(value, cloneValue);
+                to.emplace(key, std::move(cloneValue));
+            }
+        }
+        else {
+            to = from;
+        }
+    }
 
     template<typename T> SR_INLINE void ForEachSRClass(T&& object, const auto& func) {
         if constexpr (IsSRClassV<T>) {

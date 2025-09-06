@@ -11,7 +11,6 @@
 
 
 * `#include <Graphics/Pass/IColorBufferPass.h>`
-* `#include <Graphics/Pass/IFramebufferPass.h>`
 * `#include <Graphics/Pass/FlatClusterPass.h>`
 
 

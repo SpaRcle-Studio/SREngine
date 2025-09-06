@@ -63,11 +63,17 @@
 | ---: | :--- |
 |  SR\_NODISCARD bool | [**GetBool**](#function-getbool) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) key, const std::optional&lt; bool &gt; & def=std::nullopt) <br> |
 |  SR\_NODISCARD float\_t | [**GetFloat**](#function-getfloat) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) key, const std::optional&lt; float\_t &gt; & def=std::nullopt) <br> |
+|  SR\_NODISCARD int64\_t | [**GetInt**](#function-getint) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) key, const std::optional&lt; int64\_t &gt; & def=std::nullopt) <br> |
+|  SR\_NODISCARD std::string | [**GetString**](#function-getstring) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) key, const std::optional&lt; std::string &gt; & def=std::nullopt) <br> |
 |  SR\_NODISCARD bool | [**Has**](#function-has) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) key, Storage::ValueType type=Storage::ValueType::AnyType) <br> |
-|  SR\_NODISCARD bool | [**HasBool**](#function-hasbool) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) key) <br> |
-|  SR\_NODISCARD bool | [**HasFloat**](#function-hasfloat) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) key) <br> |
+|  SR\_NODISCARD bool | [**HasBool**](#function-hasbool) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) key) <br>_================= Bool =================_  |
+|  SR\_NODISCARD bool | [**HasFloat**](#function-hasfloat) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) key) <br>_================= Float =================_  |
+|  SR\_NODISCARD bool | [**HasInt**](#function-hasint) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) key) <br>_================= Int =================_  |
+|  SR\_NODISCARD bool | [**HasString**](#function-hasstring) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) key) <br>_================= String =================_  |
 |  void | [**SetBool**](#function-setbool) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) key, bool value) <br> |
 |  void | [**SetFloat**](#function-setfloat) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) key, float\_t value) <br> |
+|  void | [**SetInt**](#function-setint) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) key, int64\_t value) <br> |
+|  void | [**SetString**](#function-setstring) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) key, const std::string & value) <br> |
 
 
 
@@ -159,6 +165,38 @@ static inline SR_NODISCARD float_t SR_UTILS_NS::StoreUtils::Template::GetFloat (
 
 
 
+### function GetInt 
+
+```C++
+static inline SR_NODISCARD int64_t SR_UTILS_NS::StoreUtils::Template::GetInt (
+    SR_UTILS_NS::StringAtom key,
+    const std::optional< int64_t > & def=std::nullopt
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function GetString 
+
+```C++
+static inline SR_NODISCARD std::string SR_UTILS_NS::StoreUtils::Template::GetString (
+    SR_UTILS_NS::StringAtom key,
+    const std::optional< std::string > & def=std::nullopt
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function Has 
 
 ```C++
@@ -177,6 +215,7 @@ static inline SR_NODISCARD bool SR_UTILS_NS::StoreUtils::Template::Has (
 
 ### function HasBool 
 
+_================= Bool =================_ 
 ```C++
 static inline SR_NODISCARD bool SR_UTILS_NS::StoreUtils::Template::HasBool (
     SR_UTILS_NS::StringAtom key
@@ -192,8 +231,41 @@ static inline SR_NODISCARD bool SR_UTILS_NS::StoreUtils::Template::HasBool (
 
 ### function HasFloat 
 
+_================= Float =================_ 
 ```C++
 static inline SR_NODISCARD bool SR_UTILS_NS::StoreUtils::Template::HasFloat (
+    SR_UTILS_NS::StringAtom key
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function HasInt 
+
+_================= Int =================_ 
+```C++
+static inline SR_NODISCARD bool SR_UTILS_NS::StoreUtils::Template::HasInt (
+    SR_UTILS_NS::StringAtom key
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function HasString 
+
+_================= String =================_ 
+```C++
+static inline SR_NODISCARD bool SR_UTILS_NS::StoreUtils::Template::HasString (
     SR_UTILS_NS::StringAtom key
 ) 
 ```
@@ -227,6 +299,38 @@ static inline void SR_UTILS_NS::StoreUtils::Template::SetBool (
 static inline void SR_UTILS_NS::StoreUtils::Template::SetFloat (
     SR_UTILS_NS::StringAtom key,
     float_t value
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function SetInt 
+
+```C++
+static inline void SR_UTILS_NS::StoreUtils::Template::SetInt (
+    SR_UTILS_NS::StringAtom key,
+    int64_t value
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function SetString 
+
+```C++
+static inline void SR_UTILS_NS::StoreUtils::Template::SetString (
+    SR_UTILS_NS::StringAtom key,
+    const std::string & value
 ) 
 ```
 

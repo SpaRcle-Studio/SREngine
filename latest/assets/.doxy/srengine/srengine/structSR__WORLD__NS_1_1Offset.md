@@ -64,8 +64,8 @@
 |   | [**Offset**](#function-offset-22) () <br> |
 |  SR\_NODISCARD std::string | [**ToString**](#function-tostring) () const<br> |
 |  SR\_FORCE\_INLINE bool | [**operator!=**](#function-operator) (const [**Offset**](structSR__WORLD__NS_1_1Offset.md) & p\_v) const<br> |
-|  SR\_FORCE\_INLINE [**Offset**](structSR__WORLD__NS_1_1Offset.md) | [**operator-**](#function-operator_1) (const [**Offset**](structSR__WORLD__NS_1_1Offset.md) & p\_v) const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator==**](#function-operator_2) (const [**Offset**](structSR__WORLD__NS_1_1Offset.md) & p\_v) const<br> |
+|  SR\_FORCE\_INLINE [**Offset**](structSR__WORLD__NS_1_1Offset.md) | [**operator-**](#function-operator-) (const [**Offset**](structSR__WORLD__NS_1_1Offset.md) & p\_v) const<br> |
+|  SR\_FORCE\_INLINE bool | [**operator==**](#function-operator_1) (const [**Offset**](structSR__WORLD__NS_1_1Offset.md) & p\_v) const<br> |
 
 
 

@@ -72,6 +72,11 @@ namespace SR_UTILS_NS {
                 stream.write((const char *) &value.y, sizeof(bool));
                 stream.write((const char *) &value.z, sizeof(bool));
             }
+            else if constexpr (std::is_same<T, SR_MATH_NS::UVector3>()) {
+                stream.write((const char *) &value.x, sizeof(uint32_t));
+                stream.write((const char *) &value.y, sizeof(uint32_t));
+                stream.write((const char *) &value.z, sizeof(uint32_t));
+            }
             else if constexpr (std::is_same<T, SR_MATH_NS::IVector2>()) {
                 stream.write((const char *) &value.x, sizeof(int32_t));
                 stream.write((const char *) &value.y, sizeof(int32_t));
@@ -107,6 +112,11 @@ namespace SR_UTILS_NS {
                 stream.read((char*)&value.x, sizeof(SR_MATH_NS::Unit));
                 stream.read((char*)&value.y, sizeof(SR_MATH_NS::Unit));
                 stream.read((char*)&value.z, sizeof(SR_MATH_NS::Unit));
+            }
+            else if constexpr (std::is_same<T, SR_MATH_NS::UVector3>()) {
+                stream.read((char*)&value.x, sizeof(uint32_t));
+                stream.read((char*)&value.y, sizeof(uint32_t));
+                stream.read((char*)&value.z, sizeof(uint32_t));
             }
             else if constexpr (std::is_same<T, SR_MATH_NS::Vector3<float>>()) {
                 stream.read((char*)&value.x, sizeof(float));
@@ -179,6 +189,28 @@ namespace SR_UTILS_NS {
             stream.write((const char*)&str[0], size * sizeof(char));
         }
 
+        SR_MAYBE_UNUSED static void SR_FASTCALL SaveString(SR_HTYPES_NS::Stream& stream, SR_UTILS_NS::StringAtom str) {
+            const size_t size = str.size();
+            stream.write((const char*)&size, sizeof(size_t));
+            stream.write((const char*)&str.c_str()[0], size * sizeof(char));
+        }
+
+        template<typename T> SR_INLINE_STATIC void SR_FASTCALL SaveStringVector(SR_HTYPES_NS::Stream& stream, const std::vector<T>& arr) {
+            const size_t size = arr.size();
+            stream.write((const char*)&size, sizeof(size_t));
+            for (const auto& str : arr) {
+                SaveString(stream, str);
+            }
+        }
+
+        template<typename T> SR_INLINE_STATIC void SR_FASTCALL SaveStringSet(SR_HTYPES_NS::Stream& stream, const std::set<T>& arr) {
+            const size_t size = arr.size();
+            stream.write((const char*)&size, sizeof(size_t));
+            for (const auto& str : arr) {
+                SaveString(stream, str);
+            }
+        }
+
         template<typename T> SR_INLINE_STATIC void SR_FASTCALL SaveVector(SR_HTYPES_NS::Stream& stream, const std::vector<T>& vector) {
             const size_t size = vector.size();
             stream.write((const char*)&size, sizeof(size_t));
@@ -240,6 +272,14 @@ namespace SR_UTILS_NS {
             str.resize(size);
             stream.read((char*)&str[0], size * sizeof(char));
             return str;
+        }
+
+        SR_MAYBE_UNUSED SR_INLINE_STATIC std::string SR_FASTCALL LoadString(SR_HTYPES_NS::Stream& stream) {
+            return LoadStr(stream);
+        }
+
+        SR_MAYBE_UNUSED SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_FASTCALL LoadStrAtom(SR_HTYPES_NS::Stream& stream) {
+            return SR_UTILS_NS::StringAtom(LoadStr(stream));
         }
 
         SR_MAYBE_UNUSED SR_INLINE_STATIC std::string SR_FASTCALL TryLoadShortStr(SR_HTYPES_NS::Stream& stream) {

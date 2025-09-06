@@ -32,9 +32,9 @@ namespace SR_UTILS_NS {
         SR_NODISCARD uint16_t GetTagIndex(StringAtom tag) const;
         SR_NODISCARD const std::vector<StringAtom>& GetTags() const { return m_tags; }
 
-    protected:
-        SR_NODISCARD SR_UTILS_NS::Path InitializeResourcePath() const override;
+        SR_NODISCARD SR_UTILS_NS::Path GetSettingsPath() const override;
 
+    protected:
         void ClearSettings() override;
         bool LoadSettings(const SR_XML_NS::Node& node) override;
 

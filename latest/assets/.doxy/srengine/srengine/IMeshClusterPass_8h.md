@@ -32,12 +32,6 @@
 | namespace | [**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md) <br> |
 
 
-## Classes
-
-| Type | Name |
-| ---: | :--- |
-| class | [**IMeshClusterPass**](classSR__GRAPH__NS_1_1IMeshClusterPass.md) <br> |
-| struct | [**Sampler**](structSR__GRAPH__NS_1_1IMeshClusterPass_1_1Sampler.md) <br> |
 
 
 

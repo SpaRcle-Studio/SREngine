@@ -19,7 +19,7 @@
 #include <Graphics/Render/MeshCluster.h>
 
 namespace SR_GRAPH_NS {
-    class ShadowMapPass;
+    /*class ShadowMapPass;
     class CascadedShadowMapPass;
 
     class SR_DEPRECATED IMeshClusterPass : public BasePass {
@@ -69,7 +69,7 @@ namespace SR_GRAPH_NS {
         Samplers m_samplers;
         MeshClusterType m_meshClusters = MeshClusterType::None;
 
-    };
+    };*/
 }
 
 #endif //SR_ENGINE_IMESHCLUSTERPASS_H

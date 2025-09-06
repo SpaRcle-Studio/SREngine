@@ -54,7 +54,7 @@ Inherited by the following classes: [SR\_UTILS\_NS::SRHash](structSR__UTILS__NS_
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_NODISCARD constexpr size\_t | [**operator()**](#function-operator()) (const T & keyVal) noexcept const<br> |
+|  SR\_NODISCARD constexpr size\_t | [**operator()**](#function-operator) (const T & keyVal) noexcept const<br> |
 
 
 

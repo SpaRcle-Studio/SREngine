@@ -103,13 +103,13 @@
 |  void | [**operator\*=**](#function-operator_5) (const double & s) <br> |
 |  [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**operator+**](#function-operator_6) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & q2) const<br> |
 |  void | [**operator+=**](#function-operator_7) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & p\_q) <br> |
-|  [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**operator-**](#function-operator_8) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & q2) const<br> |
-|  [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**operator-**](#function-operator_9) () const<br> |
-|  void | [**operator-=**](#function-operator_10) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & p\_q) <br> |
-|  [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**operator/**](#function-operator_11) (const double & s) const<br> |
-|  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; Unit &gt; | [**operator/**](#function-operator_12) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; Unit &gt; & v) const<br> |
-|  void | [**operator/=**](#function-operator_13) (const double & s) <br> |
-|  bool | [**operator==**](#function-operator_14) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & q) noexcept const<br> |
+|  [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**operator-**](#function-operator-) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & q2) const<br> |
+|  [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**operator-**](#function-operator-_1) () const<br> |
+|  void | [**operator-=**](#function-operator-_2) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & p\_q) <br> |
+|  [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**operator/**](#function-operator_8) (const double & s) const<br> |
+|  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; Unit &gt; | [**operator/**](#function-operator_9) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; Unit &gt; & v) const<br> |
+|  void | [**operator/=**](#function-operator_10) (const double & s) <br> |
+|  bool | [**operator==**](#function-operator_11) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & q) noexcept const<br> |
 
 
 ## Public Static Functions

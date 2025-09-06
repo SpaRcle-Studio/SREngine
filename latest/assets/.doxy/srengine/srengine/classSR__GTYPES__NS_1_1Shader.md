@@ -248,11 +248,12 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 |  void | [**FreeVMemory**](#function-freevmemory) () override<br> |
 | virtual SR\_NODISCARD [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**GetAssociatedPath**](#function-getassociatedpath) () override const<br> |
 |  SR\_NODISCARD const SR\_MATH\_NS::UVector3 & | [**GetComputeWorkGroupSize**](#function-getcomputeworkgroupsize) () noexcept const<br> |
-|  SR\_DEPRECATED SR\_NODISCARD int32\_t | [**GetID**](#function-getid) () <br> |
 |  SR\_NODISCARD int32\_t | [**GetId**](#function-getid) () noexcept<br> |
+|  SR\_NODISCARD const [**SR\_SRSL\_NS::ShaderMacrosParams**](structSR__SRSL__NS_1_1ShaderMacrosParams.md) & | [**GetMacros**](#function-getmacros) () noexcept const<br> |
 |  SR\_NODISCARD const ShaderProperties & | [**GetProperties**](#function-getproperties) () const<br> |
 |  SR\_NODISCARD const ShaderSamplers & | [**GetSamplers**](#function-getsamplers) () noexcept const<br> |
 |  SR\_NODISCARD uint32\_t | [**GetSamplersCount**](#function-getsamplerscount) () const<br> |
+|  SR\_NODISCARD Shader::Ptr | [**GetShaderVariant**](#function-getshadervariant) (const [**SR\_SRSL\_NS::ShaderMacrosParams**](structSR__SRSL__NS_1_1ShaderMacrosParams.md) & macros) <br> |
 |  SR\_NODISCARD SR\_SRSL\_NS::ShaderType | [**GetType**](#function-gettype) () noexcept const<br> |
 |  SR\_NODISCARD uint64\_t | [**GetUBOBlockSize**](#function-getuboblocksize) () const<br> |
 |  SR\_NODISCARD ShaderProgram | [**GetVirtualProgram**](#function-getvirtualprogram) () noexcept const<br> |
@@ -322,7 +323,6 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 |  SR\_NODISCARD [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**GetResourcePath**](classSR__UTILS__NS_1_1IResource.md#function-getresourcepath) () const<br> |
 | virtual SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetResourceType**](classSR__UTILS__NS_1_1IResource.md#function-getresourcetype) () noexcept const<br> |
 |   | [**IResource**](classSR__UTILS__NS_1_1IResource.md#function-iresource) () <br> |
-| virtual SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**InitializeResourcePath**](classSR__UTILS__NS_1_1IResource.md#function-initializeresourcepath) () const<br> |
 |  SR\_NODISCARD bool | [**IsAlive**](classSR__UTILS__NS_1_1IResource.md#function-isalive) () const<br> |
 | virtual SR\_NODISCARD bool | [**IsAllowedMultiInstance**](classSR__UTILS__NS_1_1IResource.md#function-isallowedmultiinstance) () const<br> |
 | virtual SR\_NODISCARD bool | [**IsAllowedToRevive**](classSR__UTILS__NS_1_1IResource.md#function-isallowedtorevive) () const<br> |
@@ -340,7 +340,8 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 | virtual bool | [**Reload**](classSR__UTILS__NS_1_1IResource.md#function-reload) () <br> |
 | virtual RemoveUPResult | [**RemoveUsePoint**](classSR__UTILS__NS_1_1IResource.md#function-removeusepoint) () <br> |
 | virtual void | [**ReviveResource**](classSR__UTILS__NS_1_1IResource.md#function-reviveresource) () <br> |
-|  void | [**SetId**](classSR__UTILS__NS_1_1IResource.md#function-setid) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, bool autoRegister=true) <br> |
+|  void | [**SetId**](classSR__UTILS__NS_1_1IResource.md#function-setid-12) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, bool autoRegister=true) <br> |
+|  void | [**SetId**](classSR__UTILS__NS_1_1IResource.md#function-setid-22) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path, bool autoRegister=true) <br> |
 |  void | [**SetLifetime**](classSR__UTILS__NS_1_1IResource.md#function-setlifetime) (int64\_t lifeTime) <br> |
 |  void | [**SetResourceHash**](classSR__UTILS__NS_1_1IResource.md#function-setresourcehash) (uint64\_t hash) <br> |
 |  void | [**SignalWatch**](classSR__UTILS__NS_1_1IResource.md#function-signalwatch) () <br> |
@@ -378,7 +379,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  SR\_NODISCARD SR\_FORCE\_INLINE T \* | [**Get**](classSR__HTYPES__NS_1_1SharedPtr.md#function-get-22) () <br> |
 |  SR\_NODISCARD const void \* | [**GetRawPtr**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getrawptr-12) () const<br> |
 |  SR\_NODISCARD void \* | [**GetRawPtr**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getrawptr-22) () <br>_NOLINT(modernize-use-nodiscard)_  |
-| virtual SR\_NODISCARD SRClass \* | [**GetSRClass**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getsrclass) () override const<br>_NOLINT(modernize-use-nodiscard)_  |
+| virtual SR\_NODISCARD SRClass \* | [**GetSRClass**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getsrclass) () override const<br> |
 |  SR\_NODISCARD [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; | [**GetThis**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getthis) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE const T &SR\_FASTCALL | [**GetUncheckedRef**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getuncheckedref-12) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE T &SR\_FASTCALL | [**GetUncheckedRef**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getuncheckedref-22) () <br> |
@@ -396,15 +397,15 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; U &gt; | [**StaticCast**](classSR__HTYPES__NS_1_1SharedPtr.md#function-staticcast) () const<br> |
 |  SR\_NODISCARD bool | [**TryRecursiveLockIfValid**](classSR__HTYPES__NS_1_1SharedPtr.md#function-tryrecursivelockifvalid) () noexcept const<br> |
 |  void | [**Unlock**](classSR__HTYPES__NS_1_1SharedPtr.md#function-unlock) () noexcept const<br> |
-|  bool | [**Valid**](classSR__HTYPES__NS_1_1SharedPtr.md#function-valid) () const<br> |
+| virtual SR\_NODISCARD bool | [**Valid**](classSR__HTYPES__NS_1_1SharedPtr.md#function-valid) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE | [**operator bool**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator-bool) () noexcept const<br> |
 |  SR\_INLINE bool | [**operator!=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & right) const<br> |
 |  SR\_FORCE\_INLINE T & | [**operator\***](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_1) () const<br> |
-|  SR\_FORCE\_INLINE T \* | [**operator-&gt;**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_2) () const<br> |
-|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_3) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & ptr) <br> |
-|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_4) (T \* ptr) <br> |
-|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_5) ([**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; && ptr) noexcept<br> |
-|  SR\_INLINE bool | [**operator==**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_6) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & right) const<br> |
+|  SR\_FORCE\_INLINE T \* | [**operator-&gt;**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator-) () const<br> |
+|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_2) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & ptr) <br> |
+|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_3) (T \* ptr) <br> |
+|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_4) ([**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; && ptr) noexcept<br> |
+|  SR\_INLINE bool | [**operator==**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_5) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & right) const<br> |
 |   | [**~SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md#function-sharedptr) () override<br> |
 
 
@@ -423,6 +424,7 @@ See [SR\_HTYPES\_NS::SharedPtrBase](classSR__HTYPES__NS_1_1SharedPtrBase.md)
 | virtual void | [**SetPointerFromBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-setpointerfrombase) ([**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md) \* pBase) = 0<br> |
 |   | [**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase-12) () <br> |
 |   | [**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase-22) ([**SharedPtrDynamicData**](structSR__HTYPES__NS_1_1SharedPtrDynamicData.md) \* data) <br> |
+| virtual SR\_NODISCARD bool | [**Valid**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-valid) () const = 0<br> |
 | virtual  | [**~SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase) () <br> |
 
 
@@ -469,6 +471,7 @@ See [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 
 | Type | Name |
 | ---: | :--- |
+|  void | [**CloneTo**](classSR__UTILS__NS_1_1SRClass.md#function-cloneto) ([**SRClass**](classSR__UTILS__NS_1_1SRClass.md) & clone) const<br> |
 | virtual SR\_NODISCARD const [**SR\_UTILS\_NS::SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md) \* | [**GetMeta**](classSR__UTILS__NS_1_1SRClass.md#function-getmeta) () noexcept const = 0<br> |
 | virtual  | [**~SRClass**](classSR__UTILS__NS_1_1SRClass.md#function-srclass) () = default<br> |
 
@@ -477,7 +480,7 @@ See [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 
 | Type | Name |
 | ---: | :--- |
-|  Shader::Ptr | [**Load**](#function-load-12) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & rawPath) <br> |
+|  Shader::Ptr | [**Load**](#function-load-12) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & rawPath, const [**SR\_SRSL\_NS::ShaderMacrosParams**](structSR__SRSL__NS_1_1ShaderMacrosParams.md) & macros=SR\_SRSL\_NS::ShaderMacrosParams::GetDefault()) <br> |
 
 
 
@@ -928,10 +931,10 @@ inline SR_NODISCARD const SR_MATH_NS::UVector3 & SR_GTYPES_NS::Shader::GetComput
 
 
 
-### function GetID 
+### function GetId 
 
 ```C++
-SR_DEPRECATED SR_NODISCARD int32_t SR_GTYPES_NS::Shader::GetID () 
+SR_NODISCARD int32_t SR_GTYPES_NS::Shader::GetId () noexcept
 ```
 
 
@@ -941,10 +944,10 @@ SR_DEPRECATED SR_NODISCARD int32_t SR_GTYPES_NS::Shader::GetID ()
 
 
 
-### function GetId 
+### function GetMacros 
 
 ```C++
-SR_NODISCARD int32_t SR_GTYPES_NS::Shader::GetId () noexcept
+inline SR_NODISCARD const SR_SRSL_NS::ShaderMacrosParams & SR_GTYPES_NS::Shader::GetMacros () noexcept const
 ```
 
 
@@ -984,6 +987,21 @@ inline SR_NODISCARD const ShaderSamplers & SR_GTYPES_NS::Shader::GetSamplers () 
 
 ```C++
 SR_NODISCARD uint32_t SR_GTYPES_NS::Shader::GetSamplersCount () const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetShaderVariant 
+
+```C++
+SR_NODISCARD Shader::Ptr SR_GTYPES_NS::Shader::GetShaderVariant (
+    const SR_SRSL_NS::ShaderMacrosParams & macros
+) 
 ```
 
 
@@ -1642,7 +1660,8 @@ SR_GTYPES_NS::Shader::~Shader () override
 
 ```C++
 static Shader::Ptr SR_GTYPES_NS::Shader::Load (
-    const SR_UTILS_NS::Path & rawPath
+    const SR_UTILS_NS::Path & rawPath,
+    const SR_SRSL_NS::ShaderMacrosParams & macros=SR_SRSL_NS::ShaderMacrosParams::GetDefault()
 ) 
 ```
 

@@ -15,14 +15,15 @@
 #ifndef SR_ENGINE_PIPELINE_H
 #define SR_ENGINE_PIPELINE_H
 
-#include <Utils/Math/Vector3.h>
-#include <Utils/Types/SafePointer.h>
-#include <Utils/Types/PoolSet.h>
-
 #include <Graphics/Pipeline/PipelineState.h>
 #include <Graphics/Pipeline/FrameBufferQueue.h>
 #include <Graphics/Pipeline/IShaderProgram.h>
 #include <Graphics/Overlay/OverlayType.h>
+#include <Graphics/Pipeline/TextureHelper.h>
+
+#include <Utils/Math/Vector3.h>
+#include <Utils/Types/SafePointer.h>
+#include <Utils/Types/PoolSet.h>
 
 namespace SR_GTYPES_NS {
     class Shader;
@@ -86,6 +87,9 @@ namespace SR_GRAPH_NS {
         virtual void SwitchWindow(const WindowPtr& pWindow);
 
         virtual void WaitComputeIdle();
+        virtual void WaitRenderIdle();
+
+        void OnFrameBuildEnd();
 
 
         virtual bool InitOverlay();
@@ -97,6 +101,7 @@ namespace SR_GRAPH_NS {
         virtual void PrepareOverlay(OverlayType overlayType);
         virtual bool BeginDrawOverlay(OverlayType overlayType);
         virtual void EndDrawOverlay(OverlayType overlayType);
+        virtual bool HasActiveOverlay() const;
 
         virtual void SetOverlayEnabled(OverlayType overlayType, bool enabled);
 
@@ -116,9 +121,10 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD uint32_t GetCurrentFrameBufferLayer() const noexcept { ++m_state.operations; return m_state.frameBufferLayer; }
         SR_NODISCARD bool IsDirty() const noexcept { ++m_state.operations; return m_dirty; }
         SR_NODISCARD FrameBufferQueue& GetQueue() noexcept { ++m_state.operations; return m_fboQueue; }
-        SR_NODISCARD uint8_t GetCurrentBuildIteration() const noexcept { ++m_state.operations; return m_state.buildIteration; }
         SR_NODISCARD RenderStrategy* GetCurrentRenderStrategy() const noexcept { ++m_state.operations; return m_state.pRenderStrategy; }
+        SR_NODISCARD SR_UTILS_NS::StringAtom GetRenderStageId() const { return m_renderStageId; }
 
+        SR_NODISCARD virtual uint8_t GetCurrentFrameIndex() const { return 0; }
         SR_NODISCARD virtual void* GetCurrentShaderHandle() const { return nullptr; }
         SR_NODISCARD virtual void* GetCurrentFBOHandle() const { return nullptr; }
         SR_NODISCARD virtual std::set<void*> GetFBOHandles() const { return std::set<void*>();  }
@@ -128,8 +134,9 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD virtual uint8_t GetSupportedSamples() const noexcept { return m_supportedSampleCount; }
         SR_NODISCARD virtual bool IsShaderConstantSupport() const { ++m_state.operations; return false; }
         SR_NODISCARD virtual SR_MATH_NS::FColor GetPixelColor(uint32_t textureId, uint32_t x, uint32_t y) { return SR_MATH_NS::FColor(0.f); }
-        SR_NODISCARD virtual SR_UTILS_NS::StringAtom GetRenderStageId() const { return m_renderStageId; }
+        SR_NODISCARD virtual uint16_t GetSwapchainImagesCount() const { return 0; }
 
+        virtual void SetSwapchainImagesCount(uint16_t count) { }
         virtual void SetRenderStageId(SR_UTILS_NS::StringAtom id) { m_renderStageId = id; }
         virtual void SetCurrentShader(ShaderPtr pShader) { ++m_state.operations; m_state.pShader = pShader; }
         virtual void SetCurrentShaderId(int32_t id) { ++m_state.operations; m_state.shaderId = id; }
@@ -151,7 +158,6 @@ namespace SR_GRAPH_NS {
         virtual void ClearColorBuffer(const ClearColors& clearColors);
 
         virtual void SetDirty(bool dirty);
-        virtual void SetBuildIteration(uint8_t iteration);
 
         virtual uint64_t GetUsedMemory() const { return 0; }
 
@@ -164,7 +170,7 @@ namespace SR_GRAPH_NS {
 
         SR_NODISCARD uint32_t GetFramesPerSecond() const noexcept { return m_framesPerSecond; }
         SR_NODISCARD const PipelineState& GetPreviousState() const { return m_previousState; }
-        SR_NODISCARD const PipelineState& GetBuildState() const { return m_buildState; }
+        SR_NODISCARD const PipelineState& GetBuildState(uint8_t frameIndex) const;
         SR_NODISCARD const PipelineState& GetState() const { return m_state; }
         SR_NODISCARD uint8_t GetSamplesCount() const;
         SR_NODISCARD bool IsMultiSamplingSupported() const noexcept;
@@ -266,7 +272,7 @@ namespace SR_GRAPH_NS {
 
         PipelineState m_state;
         PipelineState m_previousState;
-        PipelineState m_buildState;
+        std::vector<PipelineState> m_buildStates;
 
         std::optional<uint8_t> m_newSampleCount;
         uint8_t m_currentSampleCount = 0;

@@ -4,6 +4,7 @@
     <compoundname>macros.h</compoundname>
     <includes refid="libs_2Utils_2inc_2Utils_2macros_8h" local="no">Utils/macros.h</includes>
     <includedby refid="EntryPoint_8h" local="no">Engine/inc/Engine/EntryPoint.h</includedby>
+    <includedby refid="EditorSettings_8h" local="no">Engine/inc/Engine/Settings/EditorSettings.h</includedby>
     <includedby refid="SRSLTest_8h" local="no">Engine/inc/Engine/Tests/SRSLTest.h</includedby>
     <incdepgraph>
       <node id="1">
@@ -33,7 +34,17 @@
         <label>Engine/inc/Engine/EntryPoint.h</label>
         <link refid="EntryPoint_8h_source"/>
       </node>
+      <node id="4">
+        <label>Engine/inc/Engine/GUI/EditorGUI.h</label>
+        <link refid="EditorGUI_8h_source"/>
+      </node>
       <node id="3">
+        <label>Engine/inc/Engine/Settings/EditorSettings.h</label>
+        <link refid="EditorSettings_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
         <label>Engine/inc/Engine/Tests/SRSLTest.h</label>
         <link refid="SRSLTest_8h_source"/>
       </node>
@@ -43,6 +54,8 @@
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

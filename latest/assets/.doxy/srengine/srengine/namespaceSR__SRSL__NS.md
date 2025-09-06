@@ -55,12 +55,14 @@
 | class | [**SRSLReturn**](classSR__SRSL__NS_1_1SRSLReturn.md) <br> |
 | struct | [**SRSLSampler**](structSR__SRSL__NS_1_1SRSLSampler.md) <br> |
 | class | [**SRSLShader**](classSR__SRSL__NS_1_1SRSLShader.md) <br> |
+| class | [**SRSLShaderCache**](classSR__SRSL__NS_1_1SRSLShaderCache.md) <br> |
 | class | [**SRSLStructureStatement**](classSR__SRSL__NS_1_1SRSLStructureStatement.md) <br> |
 | class | [**SRSLTypeInfo**](classSR__SRSL__NS_1_1SRSLTypeInfo.md) <br> |
 | struct | [**SRSLUniformBlock**](structSR__SRSL__NS_1_1SRSLUniformBlock.md) <br> |
 | struct | [**SRSLUseStack**](structSR__SRSL__NS_1_1SRSLUseStack.md) <br> |
 | class | [**SRSLVariable**](classSR__SRSL__NS_1_1SRSLVariable.md) <br> |
 | class | [**SRSLWhileStatement**](classSR__SRSL__NS_1_1SRSLWhileStatement.md) <br> |
+| struct | [**ShaderMacrosParams**](structSR__SRSL__NS_1_1ShaderMacrosParams.md) <br> |
 
 
 ## Public Types
@@ -120,7 +122,9 @@
 |   | [**SR\_ENUM\_NS\_CLASS**](#function-sr_enum_ns_class) (ShaderType, Unknown, Spatial, SpatialCustom, Skinned, PostProcessing, Skybox, Simple, Canvas, Particles, Compute, Line, Text, TextUI, Custom, RayTrace) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (LexemKind, uint16\_t, Unknown, OpeningSquareBracket, ClosingSquareBracket, OpeningAngleBracket, ClosingAngleBracket, OpeningCurlyBracket, ClosingCurlyBracket, OpeningBracket, ClosingBracket, Plus, Minus, Multiply, Divide, Percent, Assign, Semicolon, Dot, Comma, Negation, And, Or, Question, Colon, Tilda, Exponentiation, Integer, Macro, String, Identifier) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (SRSLReturnCode, uint16\_t, Unknown, Success, OutOfBounds, InvalidLexicalTree, UnknownLexem, UnexceptedLexem, UnexceptedDot, InvalidExpression, InvalidComplexExpression, InvalidDecorator, IncompleteExpression, EmptyExpression, InvalidScope, InvalidCall, InvalidIfStatement, UnknownShaderLanguage, InvalidAngleBracket, InvalidAssign, InvalidMathToken, InvalidNumericToken, EmptyToken, InvalidIncrementOrDecrement, InvalidListEnd, WrongMacroName, IncludeNotExists, UnexceptedError, IncludeError, InvalidFunction, InvalidString) <br> |
+|   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (LexicalUnitType, uint8\_t, Unknown, Expr, Decorator, Decorators, Variable, Function, Struct, Return, IfStatement, ForStatement, WhileStatement, LexcialTree) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (ShaderLanguage, uint8\_t, PseudoCode, GLSL, HLSL, Metal) <br> |
+|  std::string | [**ShaderRenderPassTypeToString**](#function-shaderrenderpasstypetostring) (ShaderRenderPassType type) <br> |
 
 
 ## Public Static Functions
@@ -544,12 +548,55 @@ SR_SRSL_NS::SR_ENUM_NS_CLASS_T (
 
 ```C++
 SR_SRSL_NS::SR_ENUM_NS_CLASS_T (
+    LexicalUnitType,
+    uint8_t,
+    Unknown,
+    Expr,
+    Decorator,
+    Decorators,
+    Variable,
+    Function,
+    Struct,
+    Return,
+    IfStatement,
+    ForStatement,
+    WhileStatement,
+    LexcialTree
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function SR\_ENUM\_NS\_CLASS\_T 
+
+```C++
+SR_SRSL_NS::SR_ENUM_NS_CLASS_T (
     ShaderLanguage,
     uint8_t,
     PseudoCode,
     GLSL,
     HLSL,
     Metal
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function ShaderRenderPassTypeToString 
+
+```C++
+std::string SR_SRSL_NS::ShaderRenderPassTypeToString (
+    ShaderRenderPassType type
 ) 
 ```
 
@@ -606,5 +653,5 @@ static std::string SR_SRSL_NS::LexemKindToString (
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h`
+The documentation for this class was generated from the following file `Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h`
 

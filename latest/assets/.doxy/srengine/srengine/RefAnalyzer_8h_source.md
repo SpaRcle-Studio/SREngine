@@ -39,17 +39,21 @@ namespace SR_SRSL_NS {
 
         std::map<std::string, SRSLUseStack::Ptr> functions;
         std::set<std::string> variables;
+
+        std::set<std::string> forceUsed;
     };
 
     class SRSLRefAnalyzer : public SR_UTILS_NS::Singleton<SRSLRefAnalyzer> {
         SR_REGISTER_SINGLETON(SRSLRefAnalyzer)
     public:
-        SR_NODISCARD SRSLUseStack::Ptr Analyze(const SRSLAnalyzedTree::Ptr& pAnalyzedTree);
+        SR_NODISCARD SRSLUseStack::Ptr Analyze(const SRSLAnalyzedTree::Ptr& pAnalyzedTree, const SR_SRSL_NS::ShaderMacrosParams& macros);
 
     private:
         SR_NODISCARD SRSLFunction* FindFunction(const std::string& name) const;
         SR_NODISCARD SRSLFunction* FindFunction(SRSLLexicalTree* pTree, const std::string& name) const;
         SR_NODISCARD SRSLUseStack::Ptr AnalyzeTree(std::list<std::string>& stack, SRSLLexicalTree* pTree);
+
+        void PreprocessUseStack(SRSLUseStack::Ptr& pUseStack, const SR_SRSL_NS::ShaderMacrosParams& macros);
 
         void AnalyzeVariable(SRSLUseStack::Ptr& pUseStack, std::list<std::string>& stack, SRSLVariable* pVariable);
         void AnalyzeExpression(SRSLUseStack::Ptr& pUseStack, std::list<std::string>& stack, SRSLExpr* pExpr);

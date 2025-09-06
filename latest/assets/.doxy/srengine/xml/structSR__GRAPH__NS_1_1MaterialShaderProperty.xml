@@ -200,6 +200,7 @@
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MaterialShaderProperty</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MaterialShaderProperty</scope><name>AllocateStatic</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MaterialShaderProperty</scope><name>CloneTo</name></member>
       <member refid="structSR__GRAPH__NS_1_1MaterialShaderProperty_1a24deb5290e15f5e471e137b73dddf978" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MaterialShaderProperty</scope><name>data</name></member>
       <member refid="structSR__GRAPH__NS_1_1MaterialShaderProperty_1ae8840a2b50f91258ae515f8c20000210" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MaterialShaderProperty</scope><name>displayName</name></member>
       <member refid="structSR__GRAPH__NS_1_1MaterialShaderProperty_1a9dff7d7757b28af70591a93842f195b2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MaterialShaderProperty</scope><name>editorOrder</name></member>

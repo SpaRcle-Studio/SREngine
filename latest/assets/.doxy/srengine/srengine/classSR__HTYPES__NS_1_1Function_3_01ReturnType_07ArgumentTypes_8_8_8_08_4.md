@@ -64,9 +64,9 @@
 |   | [**Function**](#function-function-45) (FunctionType ClassType::\* f) <br>_NOLINT._  |
 |   | [**Function**](#function-function-55) (const [**Function**](classSR__HTYPES__NS_1_1Function.md) & other) <br> |
 |   | [**operator bool**](#function-operator-bool) () const<br> |
-|  ReturnType | [**operator()**](#function-operator()) (ArgumentTypes... args) noexcept const<br> |
-|  [**Function**](classSR__HTYPES__NS_1_1Function.md) & | [**operator=**](#function-operator) ([**Function**](classSR__HTYPES__NS_1_1Function.md) && function) noexcept<br> |
-|  [**Function**](classSR__HTYPES__NS_1_1Function.md) & | [**operator=**](#function-operator_1) (const [**Function**](classSR__HTYPES__NS_1_1Function.md) & other) <br> |
+|  ReturnType | [**operator()**](#function-operator) (ArgumentTypes... args) noexcept const<br> |
+|  [**Function**](classSR__HTYPES__NS_1_1Function.md) & | [**operator=**](#function-operator_1) ([**Function**](classSR__HTYPES__NS_1_1Function.md) && function) noexcept<br> |
+|  [**Function**](classSR__HTYPES__NS_1_1Function.md) & | [**operator=**](#function-operator_2) (const [**Function**](classSR__HTYPES__NS_1_1Function.md) & other) <br> |
 
 
 

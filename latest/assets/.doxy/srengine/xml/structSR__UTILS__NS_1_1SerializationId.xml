@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="52" column="27" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="52" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="53" column="27" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="53" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="53" column="10" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="53" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="54" column="10" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="54" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1SerializationId_1a03a0de48b5947138423c20d449d4b176" prot="private" static="no" mutable="no">
         <type>char</type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="54" column="6" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="54" bodyend="54"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="55" column="6" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="55" bodyend="55"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -92,7 +92,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="48" column="36" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="48" bodyend="48"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="48" column="35" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="48" bodyend="48"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1SerializationId_1adc009b913b265a1600d6b834f6c7c7e5" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_INLINE uint64_t</type>
@@ -106,7 +106,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="49" column="34" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="49" bodyend="49"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="49" column="33" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1SerializationId_1a48a38ebfdd9fae3a9104fc71893d7952" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_INLINE std::string</type>
+        <definition>SR_NODISCARD SR_INLINE std::string SR_UTILS_NS::SerializationId::ToString</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>ToString</name>
+        <qualifiedname>SR_UTILS_NS::SerializationId::ToString</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="50" column="36" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="50" bodyend="50"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -177,7 +191,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="17" column="1" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="17" bodyend="55"/>
+    <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="17" column="1" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="17" bodyend="56"/>
     <listofallmembers>
       <member refid="structSR__UTILS__NS_1_1SerializationId_1a4bb40d69e29c7929ee058b5b2001d869" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SerializationId</scope><name>Create</name></member>
       <member refid="structSR__UTILS__NS_1_1SerializationId_1ac77baf0f1db4ed045cbca89c30e8b22a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SerializationId</scope><name>CreateFromCStr</name></member>
@@ -188,6 +202,7 @@
       <member refid="structSR__UTILS__NS_1_1SerializationId_1a00a6d4bb84a85a73fb8edc7b3b095f99" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::SerializationId</scope><name>MaxNameLength</name></member>
       <member refid="structSR__UTILS__NS_1_1SerializationId_1a03a0de48b5947138423c20d449d4b176" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::SerializationId</scope><name>name</name></member>
       <member refid="structSR__UTILS__NS_1_1SerializationId_1a0dbfe9de0b61f716ad2faf340f4b5019" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SerializationId</scope><name>SerializationId</name></member>
+      <member refid="structSR__UTILS__NS_1_1SerializationId_1a48a38ebfdd9fae3a9104fc71893d7952" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SerializationId</scope><name>ToString</name></member>
       <member refid="structSR__UTILS__NS_1_1SerializationId_1abda5fb9828142c3bdcc485f194802203" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SerializationId</scope><name>~SerializationId</name></member>
     </listofallmembers>
   </compounddef>

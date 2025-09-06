@@ -147,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="141" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="141" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="143" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="143" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1ab016ef3674be127d8a89f947da18a23e" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__ANIMATIONS__NS_1_1Skeleton" kindref="compound">SR_ANIMATIONS_NS::Skeleton</ref> *</type>
@@ -162,7 +162,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="143" column="36" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="143" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="145" column="36" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="145" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1ab766bf5727248ef4f245144c9911a982" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1LightSystem" kindref="compound">LightSystem</ref> *</type>
@@ -177,7 +177,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="145" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="145" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="147" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="147" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1aeccef291bfda2a15549c5060e4b93a9b" prot="private" static="no" mutable="no">
         <type>CameraPtr</type>
@@ -191,7 +191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="146" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="146" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="148" column="19" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="148" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1a60b60be589395e5deec8cf6f544fa6bd" prot="private" static="no" mutable="no">
         <type>std::vector&lt; CameraPtr &gt;</type>
@@ -205,7 +205,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="148" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="148" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="150" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="150" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1ae0e3816c75f76e7a8dafcd5a39c3e01e" prot="private" static="no" mutable="no">
         <type>std::vector&lt; CameraPtr &gt;</type>
@@ -219,7 +219,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="149" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="149" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="151" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="151" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1a60b1b6b60b7a33587b7c4287114972a0" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="structSR__GRAPH__NS_1_1RenderScene_1_1CameraInfo" kindref="compound">CameraInfo</ref> &gt;</type>
@@ -233,7 +233,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="150" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="150" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="152" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="152" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1ad85d1c91083a3201a687394a19dafb4b" prot="private" static="no" mutable="no">
         <type>WidgetManagers</type>
@@ -247,7 +247,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="152" column="24" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="152" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="154" column="24" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="154" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1a614f6635f67e104775cb48c2092970d8" prot="private" static="no" mutable="no">
         <type>ScenePtr</type>
@@ -261,7 +261,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="154" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="154" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="156" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="156" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1aed9a8bf59cff2cd36abd5bf8f6cda5d0" prot="private" static="no" mutable="no">
         <type>std::map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>, <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1IRenderer" kindref="compound">IRenderer</ref> &gt; &gt;</type>
@@ -275,7 +275,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="156" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="156" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="158" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="158" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1ab9148a56d6da810c894d2fca6b9c16c8" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">IRenderTechnique</ref> &gt;</type>
@@ -289,7 +289,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="157" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="157" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="159" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="159" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1a734b6c3eccfa8d43f7f25895e0174c2e" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1RenderContext" kindref="compound">RenderContext</ref> *</type>
@@ -304,21 +304,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="158" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="158" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1aaf8c8cff6eb1e4d3fb02edef94825a92" prot="private" static="no" mutable="no">
-        <type>PassQueues</type>
-        <definition>PassQueues SR_GRAPH_NS::RenderScene::m_queues</definition>
-        <argsstring></argsstring>
-        <name>m_queues</name>
-        <qualifiedname>SR_GRAPH_NS::RenderScene::m_queues</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="160" column="20" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="160" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="160" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="160" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1a22a31c3eaeceaf407820c36f066ee7d8" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::UVector2</type>
@@ -334,20 +320,19 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="162" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="162" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1a1880033b7922c355b644fed5d8ae831b" prot="private" static="no" mutable="no">
-        <type><ref refid="classSR__HTYPES__NS_1_1SafeVar" kindref="compound">SR_HTYPES_NS::SafeVar</ref>&lt; uint32_t &gt;</type>
-        <definition>SR_HTYPES_NS::SafeVar&lt;uint32_t&gt; SR_GRAPH_NS::RenderScene::m_dirty</definition>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1a93e3dcbb3840d3d9e656e943d43bddf1" prot="private" static="no" mutable="no">
+        <type>std::bitset&lt; 8 &gt;</type>
+        <definition>std::bitset&lt;8&gt; SR_GRAPH_NS::RenderScene::m_dirtyFrames</definition>
         <argsstring></argsstring>
-        <name>m_dirty</name>
-        <qualifiedname>SR_GRAPH_NS::RenderScene::m_dirty</qualifiedname>
-        <initializer>= 0</initializer>
+        <name>m_dirtyFrames</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::m_dirtyFrames</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="164" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="164" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="164" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="164" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1ae8da7095781445381953044727c94ce4" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -800,7 +785,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="99" column="44" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="99" bodyend="101"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="99" column="44" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="99" bodyend="102"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a2e1e28b7c18eb18346aceca9c18d0a8d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -819,7 +804,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="103" column="44" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="103" bodyend="105"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="104" column="44" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="104" bodyend="107"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a97500fd56956bc9db12313666da8a1a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1IRenderer" kindref="compound">IRenderer</ref> &gt;</type>
@@ -837,7 +822,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="107" column="33"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="109" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a6c1645b10e2583841edcf3093bc63617" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1IRenderer" kindref="compound">IRenderer</ref> &gt;</type>
@@ -855,7 +840,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="109" column="46"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="111" column="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1ab378e6226159b59d393ed9a94364107c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -869,7 +854,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="110" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="112" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a3231f853c845db4c9f13c736580c0be6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -883,7 +868,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="111" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="113" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a08f3a200a283cdbefa1af5f2e1d642da" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -897,7 +882,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="112" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="114" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a80aa3e928aee62c11a4f5005aabf0d5f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1RenderContext" kindref="compound">RenderContext</ref> *</type>
@@ -911,7 +896,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="113" column="36"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="115" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a1ce67f3d611fc79f7557aaa984b9251c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1LightSystem" kindref="compound">LightSystem</ref> *</type>
@@ -925,7 +910,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="114" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="114" bodyend="114"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="116" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="116" bodyend="116"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a7987e8d85a22e78cbb22945cf317569b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__ANIMATIONS__NS_1_1Skeleton" kindref="compound">SR_ANIMATIONS_NS::Skeleton</ref> *</type>
@@ -939,7 +924,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="115" column="49" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="115" bodyend="115"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="117" column="49" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="117" bodyend="117"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a3cfef17fa9840832a5e07cc42a4062a1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const RenderScene::PipelinePtr &amp;</type>
@@ -953,7 +938,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="116" column="53"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="118" column="53"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a0c63b578cbeeec1d16b168b23b9e4277" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD RenderScene::PipelinePtr</type>
@@ -967,7 +952,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="117" column="47"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="119" column="47"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1ad9ad45cf91036a3a94f9d2a071590990" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD WindowPtr</type>
@@ -981,7 +966,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="118" column="32"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="120" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a3ec0fbd86b0df9ffedd4934a56f28c4a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const WidgetManagers &amp;</type>
@@ -995,7 +980,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="119" column="43"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="121" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a1af8eb77a401cba2ee85c78d2f06b507" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD CameraPtr</type>
@@ -1009,7 +994,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="120" column="32"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="122" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1afeaba6c2e3c504f54f6d2f25ee83a570" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1RenderStrategy" kindref="compound">RenderStrategy</ref> *</type>
@@ -1023,7 +1008,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="121" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="121" bodyend="121"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="123" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="123" bodyend="123"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a3a0d1374fbc69491ad03f35050184c1b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD CameraPtr</type>
@@ -1037,7 +1022,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="122" column="32"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="124" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a98f88d2e09c0e954455b2314449e31b2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::UVector2</type>
@@ -1051,7 +1036,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="123" column="43"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="125" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1abf00de6a73918396d0241000cd2f9829" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const std::vector&lt; <ref refid="structSR__GRAPH__NS_1_1RenderScene_1_1CameraInfo" kindref="compound">CameraInfo</ref> &gt; &amp;</type>
@@ -1065,7 +1050,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="124" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="124" bodyend="124"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="126" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="126" bodyend="126"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -1085,7 +1070,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="127" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="129" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a3da64505aec339bc04755e9d0d8865bb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1099,7 +1084,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="129" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="131" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a48df5eefb2901df0b0bca4091a4c910c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1113,7 +1098,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="130" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="132" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a3d42b6267e7da4e75f14c9b1de83bf18" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1127,7 +1112,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="132" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="134" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1af259300d97f12303d7734f04d9cc6890" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1141,7 +1126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="133" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="135" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a66c83fa24d893b17a38616f8a198740b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1155,7 +1140,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="134" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="136" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a58a62b50a5959573f40e37fecea993a9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1169,7 +1154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="135" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="137" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a53f49e6dceae6fa58c0c8ec9adba3205" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1183,7 +1168,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="136" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="138" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a19a7854df0e135eb61b222edc2289f54" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1197,7 +1182,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="137" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="139" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a5c860db307fee4241462757174a29251" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1211,7 +1196,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="138" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="140" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1309,14 +1294,13 @@
       <member refid="classSR__GRAPH__NS_1_1RenderScene_1a734b6c3eccfa8d43f7f25895e0174c2e" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_context</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderScene_1ab016ef3674be127d8a89f947da18a23e" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_currentSkeleton</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_data</name></member>
-      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a1880033b7922c355b644fed5d8ae831b" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_dirty</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderScene_1ae8da7095781445381953044727c94ce4" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_dirtyCameras</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a93e3dcbb3840d3d9e656e943d43bddf1" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_dirtyFrames</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderScene_1a60b60be589395e5deec8cf6f544fa6bd" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_editorCameras</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderScene_1a8c8695adce7f13ba86593830df9b1643" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_hasDrawData</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderScene_1ab766bf5727248ef4f245144c9911a982" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_lightSystem</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderScene_1aeccef291bfda2a15549c5060e4b93a9b" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_mainCamera</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderScene_1ae0e3816c75f76e7a8dafcd5a39c3e01e" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_offScreenCameras</name></member>
-      <member refid="classSR__GRAPH__NS_1_1RenderScene_1aaf8c8cff6eb1e4d3fb02edef94825a92" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_queues</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderScene_1aed9a8bf59cff2cd36abd5bf8f6cda5d0" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_renderers</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderScene_1ad172800e9b9dde2cd77e7db56629529c" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_renderStrategy</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderScene_1a614f6635f67e104775cb48c2092970d8" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_scene</name></member>
@@ -1380,7 +1364,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>TryRecursiveLockIfValid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Unlock</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderScene_1a19a7854df0e135eb61b222edc2289f54" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Update</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a783dd9e4a58072de8ff19895693bca05" prot="public" virt="virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Valid</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderScene_1a3a6ef061ede974aaadf903025ba2c793" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>WidgetManagerPtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderScene_1a706e7b12b9fe47190faeb80ecb6d919a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>WidgetManagers</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderScene_1aadd6c912feed5b5a52c49bebfe3a1014" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>WindowPtr</name></member>

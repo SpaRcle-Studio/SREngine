@@ -10,7 +10,7 @@
 
 
 
-* `#include <Graphics/Pass/IFramebufferPass.h>`
+* `#include <Graphics/Pass/Data/FrameBufferPassData.h>`
 * `#include <Graphics/Pass/MeshDrawerPass.h>`
 
 
@@ -32,11 +32,6 @@
 | namespace | [**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md) <br> |
 
 
-## Classes
-
-| Type | Name |
-| ---: | :--- |
-| class | [**OffScreenMeshDrawerPass**](classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass.md) <br> |
 
 
 

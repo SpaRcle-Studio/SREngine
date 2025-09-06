@@ -43,7 +43,7 @@ namespace SR_GRAPH_NS::Memory {
         void DeInitGraphicsResource(SR_UTILS_NS::PassKey<RenderContext>);
 
         SR_NODISCARD const PipelinePtr& GetPipeline() const noexcept { return m_pipeline; }
-        SR_NODISCARD RenderContextPtr GetRenderContext() const noexcept { return m_renderContext; }
+        SR_NODISCARD const RenderContextPtr& GetRenderContext() const noexcept { return m_renderContext; }
         SR_NODISCARD bool IsGraphicsResourceRegistered() const noexcept { return m_pipeline; }
 
     protected:

@@ -11,7 +11,6 @@
 
 
 * `#include <Graphics/Pass/IMesh3DClusterPass.h>`
-* `#include <Graphics/Pass/IFramebufferPass.h>`
 * `#include <Graphics/Pipeline/PipelineType.h>`
 
 
@@ -34,11 +33,6 @@
 | namespace | [**SR\_GTYPES\_NS**](namespaceSR__GTYPES__NS.md) <br> |
 
 
-## Classes
-
-| Type | Name |
-| ---: | :--- |
-| class | [**ShaderOverridePass**](classSR__GRAPH__NS_1_1ShaderOverridePass.md) <br> |
 
 
 

@@ -127,7 +127,7 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 |  SR\_NODISCARD IResource::Ptr | [**FindAnyType**](#function-findanytype) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id) const<br> |
 |  SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetCachePath**](#function-getcachepath) () const<br> |
 |  SR\_NODISCARD [**FileSystemWatcher::Ptr**](classSR__HTYPES__NS_1_1SharedPtr.md) | [**GetFileSystemWatcher**](#function-getfilesystemwatcher) () const<br> |
-|  [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; | [**GetOrLoadResource**](#function-getorloadresource) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & rawPath) <br> |
+|  [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; | [**GetOrLoadResource**](#function-getorloadresource) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & rawPath, const [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; void(T &)&gt; & loadCallback=[**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; void(T &)&gt;(), const [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; std::string()&gt; & getPrefix=[**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; std::string()&gt;()) <br> |
 |  SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetResPath**](#function-getrespath) () const<br> |
 |  SR\_NODISCARD const [**Path**](classSR__UTILS__NS_1_1Path.md) & | [**GetResPathRef**](#function-getrespathref) () const<br> |
 |  bool | [**Initialize**](#function-initialize) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & resourcesFolder) <br> |
@@ -140,6 +140,7 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 |  void | [**PullWatchers**](#function-pullwatchers) () <br> |
 |  bool | [**RegisterReloader**](#function-registerreloader-12) (Args &&... args) <br> |
 |  void | [**RegisterResource**](#function-registerresource) (const IResource::Ptr & pResource) <br>_Register resource in resource manager._  |
+|  void | [**ReloadAll**](#function-reloadall) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) typeName) <br> |
 |  void | [**ReloadResource**](#function-reloadresource) (const IResource::Ptr & pResource) <br> |
 |  void | [**ReloadResources**](#function-reloadresources) (float\_t dt) <br>_Проверить хэши ресурсов и перезагрузить их, если это требуется_  |
 |  bool | [**ReviveResource**](#function-reviveresource) (const IResource::Ptr & pResource) <br> |
@@ -500,7 +501,9 @@ inline SR_NODISCARD FileSystemWatcher::Ptr SR_UTILS_NS::ResourceManager::GetFile
 ```C++
 template<typename T>
 SR_HTYPES_NS::SharedPtr < T > SR_UTILS_NS::ResourceManager::GetOrLoadResource (
-    const Path & rawPath
+    const Path & rawPath,
+    const SR_HTYPES_NS::Function < void(T &)> & loadCallback=SR_HTYPES_NS::Function < void(T &)>(),
+    const SR_HTYPES_NS::Function < std::string()> & getPrefix=SR_HTYPES_NS::Function < std::string()>()
 ) 
 ```
 
@@ -687,6 +690,21 @@ Call only from [**IResource**](classSR__UTILS__NS_1_1IResource.md) parents
 
 
         
+
+<hr>
+
+
+
+### function ReloadAll 
+
+```C++
+void SR_UTILS_NS::ResourceManager::ReloadAll (
+    SR_UTILS_NS::StringAtom typeName
+) 
+```
+
+
+
 
 <hr>
 

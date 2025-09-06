@@ -26,7 +26,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="130" column="20" bodyfile="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="130" bodyend="130"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="140" column="20" bodyfile="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="140" bodyend="140"/>
       </memberdef>
       <memberdef kind="function" id="structfmt_1_1formatter_3_01SR__UTILS__NS_1_1Path_01_4_1a5acb080584509aa73b6d8be8f51b7589" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -53,14 +53,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="133" column="10" bodyfile="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="133" bodyend="135"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="143" column="10" bodyfile="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="143" bodyend="145"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="127" column="10" bodyfile="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="128" bodyend="136"/>
+    <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="137" column="10" bodyfile="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="138" bodyend="146"/>
     <listofallmembers>
       <member refid="structfmt_1_1formatter_3_01SR__UTILS__NS_1_1Path_01_4_1a5acb080584509aa73b6d8be8f51b7589" prot="public" virt="non-virtual"><scope>fmt::formatter&lt; SR_UTILS_NS::Path &gt;</scope><name>format</name></member>
       <member refid="structfmt_1_1formatter_3_01SR__UTILS__NS_1_1Path_01_4_1a2a2af46734a17f2bb7d8138cdb3bdd47" prot="public" virt="non-virtual"><scope>fmt::formatter&lt; SR_UTILS_NS::Path &gt;</scope><name>parse</name></member>

@@ -19,7 +19,7 @@
 * `#include <Graphics/Render/FlatCluster.h>`
 * `#include <Graphics/Render/SortedMeshQueue.h>`
 * `#include <Graphics/GUI/WidgetManager.h>`
-* `#include <Graphics/Pass/PassQueue.h>`
+* `#include <Graphics/Pass/RenderTechniqueQueue.h>`
 
 
 

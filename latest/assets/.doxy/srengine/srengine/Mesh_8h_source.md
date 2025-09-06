@@ -60,7 +60,7 @@ namespace SR_GTYPES_NS {
         using MaterialPtr = SR_HTYPES_NS::SharedPtr<BaseMaterial>;
         using Ptr = SR_HTYPES_NS::SharedPtr<Mesh>;
 
-        using RenderQueues = SR_HTYPES_NS::SortedVector<SR_GRAPH_NS::RenderQueueInfo, SR_GRAPH_NS::RenderQueuePredicate>;
+        using RenderQueues = SR_HTYPES_NS::SortedVector<RenderQueueInfo, RenderQueuePredicate>;
 
     public:
         Mesh();
@@ -99,8 +99,9 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
 
         SR_NODISCARD Pipeline* GetPipeline() const noexcept { return m_pipeline; }
-        SR_NODISCARD ShaderPtr GetShader() const;
+        //SR_NODISCARD ShaderPtr GetShader() const;
         SR_NODISCARD const MaterialPtr& GetMaterial() const noexcept { return m_material; }
+        SR_NODISCARD MaterialPtr& GetMaterial() noexcept { return m_material; }
         SR_NODISCARD int32_t GetVirtualUBO() const { return m_virtualUBO; }
         SR_NODISCARD virtual MeshType GetMeshType() const noexcept = 0;
         SR_NODISCARD bool IsWaitReRegister() const noexcept { return m_isWaitReRegister; }

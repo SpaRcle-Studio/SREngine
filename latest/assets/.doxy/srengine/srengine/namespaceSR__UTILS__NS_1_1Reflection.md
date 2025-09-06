@@ -32,10 +32,17 @@
 | class | [**EditorPropertyParams**](classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams.md) <br> |
 | class | [**Property**](classSR__UTILS__NS_1_1Reflection_1_1Property.md) <br> |
 | class | [**Value**](classSR__UTILS__NS_1_1Reflection_1_1Value.md) <br> |
+| class | [**ValueAssociativeContainer**](classSR__UTILS__NS_1_1Reflection_1_1ValueAssociativeContainer.md) <br> |
+| class | [**ValueAssociativeContainerIterator**](classSR__UTILS__NS_1_1Reflection_1_1ValueAssociativeContainerIterator.md) <br> |
 | class | [**ValueSequenceContainer**](classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer.md) <br> |
 | class | [**ValueSequenceContainerIterator**](classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainerIterator.md) <br> |
 
 
+## Public Types
+
+| Type | Name |
+| ---: | :--- |
+| enum  | [**PropertySRClassContainsMode**](#enum-propertysrclasscontainsmode)  <br> |
 
 
 
@@ -65,6 +72,7 @@
 
 | Type | Name |
 | ---: | :--- |
+|  SR\_INLINE void | [**CloneTo**](#function-cloneto) (const T & from, T & to) <br> |
 |  SR\_INLINE void | [**ForEachSRClass**](#function-foreachsrclass) (T && object, const auto & func) <br> |
 |  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetPropertyInspector**](#function-getpropertyinspector) () <br> |
 |  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**MakeDisplayName**](#function-makedisplayname) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) <br> |
@@ -97,6 +105,26 @@
 
 
 
+## Public Types Documentation
+
+
+
+
+### enum PropertySRClassContainsMode 
+
+```C++
+enum SR_UTILS_NS::Reflection::PropertySRClassContainsMode {
+    NotContains,
+    SharedPointer,
+    Contains,
+    Inner
+};
+```
+
+
+
+
+<hr>
 ## Public Attributes Documentation
 
 
@@ -114,6 +142,23 @@ constexpr bool SR_UTILS_NS::Reflection::ContainsSRClassV;
 <hr>
 ## Public Functions Documentation
 
+
+
+
+### function CloneTo 
+
+```C++
+template<typename T>
+SR_INLINE void SR_UTILS_NS::Reflection::CloneTo (
+    const T & from,
+    T & to
+) 
+```
+
+
+
+
+<hr>
 
 
 

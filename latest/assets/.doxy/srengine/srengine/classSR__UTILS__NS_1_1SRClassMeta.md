@@ -52,10 +52,12 @@
 | Type | Name |
 | ---: | :--- |
 | virtual SR\_NODISCARD [**SRClass**](classSR__UTILS__NS_1_1SRClass.md) \* | [**Allocate**](#function-allocate) () noexcept const<br> |
+| virtual void | [**CloneTo**](#function-cloneto) (const [**SRClass**](classSR__UTILS__NS_1_1SRClass.md) & src, [**SRClass**](classSR__UTILS__NS_1_1SRClass.md) & dest) noexcept const<br> |
 |  void | [**ForEachProperty**](#function-foreachproperty) (const std::function&lt; void(const [**SR\_UTILS\_NS::Reflection::Property**](classSR__UTILS__NS_1_1Reflection_1_1Property.md) &property, uint64\_t index)&gt; & func, uint64\_t \* pIndex=nullptr) const<br> |
 | virtual void | [**ForEachSRClass**](#function-foreachsrclass) ([**SRClass**](classSR__UTILS__NS_1_1SRClass.md) & srClass, const [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; void([**SRClass**](classSR__UTILS__NS_1_1SRClass.md) &)&gt; & function) noexcept const<br> |
 | virtual SR\_NODISCARD std::span&lt; const [**SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md) \* &gt; | [**GetBaseMetas**](#function-getbasemetas) () noexcept const<br> |
 | virtual SR\_NODISCARD std::span&lt; const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) &gt; | [**GetCategory**](#function-getcategory) () noexcept const<br> |
+| virtual SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetDisplayName**](#function-getdisplayname) () noexcept const<br> |
 | virtual SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetFactoryName**](#function-getfactoryname) () noexcept const<br> |
 | virtual SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetInspectorName**](#function-getinspectorname) () noexcept const<br> |
 | virtual SR\_NODISCARD std::span&lt; const [**SR\_UTILS\_NS::Reflection::Property**](classSR__UTILS__NS_1_1Reflection_1_1Property.md) &gt; | [**GetProperties**](#function-getproperties) () noexcept const<br> |
@@ -119,6 +121,22 @@ virtual SR_NODISCARD SRClass * SR_UTILS_NS::SRClassMeta::Allocate () noexcept co
 
 
 
+### function CloneTo 
+
+```C++
+virtual void SR_UTILS_NS::SRClassMeta::CloneTo (
+    const SRClass & src,
+    SRClass & dest
+) noexcept const
+```
+
+
+
+
+<hr>
+
+
+
 ### function ForEachProperty 
 
 ```C++
@@ -168,6 +186,19 @@ virtual SR_NODISCARD std::span< const SRClassMeta * > SR_UTILS_NS::SRClassMeta::
 
 ```C++
 virtual SR_NODISCARD std::span< const SR_UTILS_NS::StringAtom > SR_UTILS_NS::SRClassMeta::GetCategory () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetDisplayName 
+
+```C++
+virtual SR_NODISCARD SR_UTILS_NS::StringAtom SR_UTILS_NS::SRClassMeta::GetDisplayName () noexcept const
 ```
 
 

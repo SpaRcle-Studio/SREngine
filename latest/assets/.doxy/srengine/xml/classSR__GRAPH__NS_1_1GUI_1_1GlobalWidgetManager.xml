@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="89" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="91" column="9"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -124,7 +124,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="86" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="86" bodyend="90"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="88" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="88" bodyend="92"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a29df1fb30e5193314521751c849d4015" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>DestroySingleton</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1acb4b1e5fc1d597452cfd3df1262c840e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>Draw</name></member>
@@ -162,6 +162,7 @@
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1ab9e0b2a47319e7406845648b7a5db4c8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>Register</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a35853d4777076550add2bf51a682eaaf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>Remove</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a2e34219de0ab53d51b60dd970d07c6ff" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>ScopeLockSingleton</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1aca6d4b089822974354ef5219013a5d82" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>SetRenderContext</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a321fbec288569bd9b51abe984807016d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>SetRenderScene</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a845625c93c125fa99efb739de8af9bc3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>SetScene</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1af81394b27a7b4630712c2c67d9e39c5f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>ShowAll</name></member>

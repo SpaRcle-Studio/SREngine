@@ -241,14 +241,16 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>AutoFree</name></member>
       <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a5d9dbe6fda56b9b3fce4c03ef7fcade8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>BaseMaterial</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>CloneTo</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>DecrementPointer</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1ad6a6915f5ec2118b1a31c7cd651e97d5" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>DeInitMaterialDataSubscriptions</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a6a2198f7653a2bb1eb02db9869ae4c4a" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>DeInitMaterialDataSubscriptions</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>DynamicCast</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>Get</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>Get</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a7734143f7ae123a6088320486af89283" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>GetBaseMetas</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a97a0919298e9d1d53220613bded5ba69" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>GetClassStaticName</name></member>
       <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1aef301cb16c0609034aeab36bdb616c9b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>GetContext</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a37b649b70f52c2075424d145c105dc6e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>GetDefaultShader</name></member>
       <member refid="classSR__GRAPH__NS_1_1UniqueMaterial_1a58ff6e9894ff47a65c20f4279b43daef" prot="public" virt="virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>GetMaterialData</name></member>
       <member refid="classSR__GRAPH__NS_1_1UniqueMaterial_1a50d117d072e45c1593d7a4230be0c352" prot="public" virt="virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>GetMaterialType</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a16a351eac01dde110e273cfd05f1f7ed" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>GetMeta</name></member>
@@ -258,7 +260,8 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>GetRawPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>GetRawPtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1addd7a75fff2b7b2a015c1fb6925fc2bb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>GetRenderStageId</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1afc0fdc33be15755db556ae76419c446e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>GetShader</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a56870a4c6dbe8253519d396ccaed8783" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>GetShader</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a5024eae654109db47310963eadc218f0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>GetShader</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>GetSRClass</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>GetThis</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>GetUncheckedRef</name></member>
@@ -266,8 +269,8 @@
       <member refid="classSR__UTILS__NS_1_1Serializable_1af5c00e9391fad105c30570cbda1a6285" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>HasSerializationFlags</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>IncrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a397d4e2343ec0662176a319a2f9136dc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>InitContext</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a1f6d3286ce83c0d551b632da1719b92f" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>InitMaterialDataSubscriptions</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a80bcd5bfd9f517dcda9cba03a29609aa" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>IsTransparent</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a8d0f4a6e43195c3de5046d031b2fa7ed" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>InitMaterialDataSubscriptions</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a3d4d3643a853a98c443af1a8b750b064" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>IsValid</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1afbc9947b694481f8478c1a75a2fc465e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>Load</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>m_basicManually</name></member>
       <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a2a5b12f99f4054806650db28fe6d2925" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>m_context</name></member>
@@ -275,6 +278,7 @@
       <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a31412c64e09721f9c352ad2a552f125e" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>m_meshes</name></member>
       <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a6b2790fc232fecca8d01386a28282d55" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>m_propertyChangedSubscription</name></member>
       <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a1caf518d2d7d5d9e2bc45f6eba3ca6fd" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>m_shaderChangedSubscription</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1aafb898dde21f071c2a1f3b4d1a27219c" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>m_variants</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>MakeShared</name></member>
       <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a1b60febc85872aad9f9dfb3dd5dfcba1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>MeshPtr</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>NonCopyable</name></member>
@@ -284,7 +288,7 @@
       <member refid="classSR__UTILS__NS_1_1Serializable_1a2978d969c09702719b2ed5c84453b02d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>OnPreLoad</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a8281e1a68416fd493dce2a48fa8ea660" prot="public" virt="virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>OnPreSave</name></member>
       <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a92a95b1b6960ed0f5ba00b99acb9ffee" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>OnPropertyChanged</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a1765c7bfb2e577fa22dddf54b8567bec" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>OnShaderChanged</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1aac0793260cd4545646a8a9f92e449896" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>OnShaderChanged</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>operator bool</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>operator!=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>operator*</name></member>
@@ -331,7 +335,7 @@
       <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1aa8b535c58e8a90670b530f67f6df2e53" prot="public" virt="virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>UnregisterMesh</name></member>
       <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a60e16713e2e63b1797b5c1201713711f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>Use</name></member>
       <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1af721891f19dafc0675929be355612ee6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>UseSamplers</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a783dd9e4a58072de8ff19895693bca05" prot="public" virt="virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>Valid</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a5aab0756802a67de9cb45b83b3e73c70" prot="public" virt="virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>VerifyAfterLoad</name></member>
       <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1afa769f4b888d7f3900afc25e4019c08b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>~BaseMaterial</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::UniqueMaterial</scope><name>~NonCopyable</name></member>

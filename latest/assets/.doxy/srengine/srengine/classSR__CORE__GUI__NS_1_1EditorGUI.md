@@ -65,6 +65,7 @@ Inherits the following classes: SR_GRAPH_GUI_NS::WidgetManager
 |  SR\_NODISCARD const EnginePtr & | [**GetEngine**](#function-getengine) () const<br> |
 |  SR\_NODISCARD const [**SR\_GTYPES\_NS::Texture**](classSR__GTYPES__NS_1_1Texture.md) \* | [**GetIcon**](#function-geticon) (EditorIcon icon) const<br> |
 |  SR\_NODISCARD void \* | [**GetIconDescriptor**](#function-geticondescriptor) (EditorIcon icon) const<br> |
+|  SR\_NODISCARD const EditorSettings::Ptr & | [**GetSettings**](#function-getsettings) () const<br> |
 |  SR\_NODISCARD [**SR\_GRAPH\_GUI\_NS::Widget**](classSR__GRAPH__GUI__NS_1_1Widget.md) \* | [**GetWidget**](#function-getwidget-12) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & name) const<br> |
 |  T \* | [**GetWidget**](#function-getwidget-22) () <br> |
 |  SR\_DEPRECATED T \* | [**GetWindow**](#function-getwindow) () <br> |
@@ -289,6 +290,19 @@ SR_NODISCARD const SR_GTYPES_NS::Texture * SR_CORE_GUI_NS::EditorGUI::GetIcon (
 SR_NODISCARD void * SR_CORE_GUI_NS::EditorGUI::GetIconDescriptor (
     EditorIcon icon
 ) const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetSettings 
+
+```C++
+inline SR_NODISCARD const EditorSettings::Ptr & SR_CORE_GUI_NS::EditorGUI::GetSettings () const
 ```
 
 

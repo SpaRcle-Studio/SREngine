@@ -40,6 +40,7 @@
 | dir | [**Pipeline**](dir_b95270d167403b29f5d572cffd5b214a.md) <br> |
 | dir | [**Render**](dir_043f3e6d57945a3feea385b5c8b9609d.md) <br> |
 | dir | [**SRSL**](dir_8b5756bea5e0d505138eb40b052c312a.md) <br> |
+| dir | [**Settings**](dir_a48bca76098a55b82b6b979c436fb568.md) <br> |
 | dir | [**Types**](dir_c1000ee3da93f5d04a34b48b4ba0b616.md) <br> |
 | dir | [**UI**](dir_0e9eeef58803927b1310c845186ea8b3.md) <br> |
 | dir | [**Utils**](dir_1d6f88bd3f47a17aa2fb3667e19494af.md) <br> |

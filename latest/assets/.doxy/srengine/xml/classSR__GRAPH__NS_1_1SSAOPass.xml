@@ -3,8 +3,21 @@
   <compounddef id="classSR__GRAPH__NS_1_1SSAOPass" kind="class" language="C++" prot="public">
     <compoundname>SR_GRAPH_NS::SSAOPass</compoundname>
     <basecompoundref refid="classSR__GRAPH__NS_1_1PostProcessPass" prot="public" virt="non-virtual">SR_GRAPH_NS::PostProcessPass</basecompoundref>
-    <basecompoundref refid="classSR__GRAPH__NS_1_1IFramebufferPass" prot="public" virt="non-virtual">SR_GRAPH_NS::IFramebufferPass</basecompoundref>
     <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1SSAOPass_1acad4bb21f4d64fcd3a86cfc1a82ee52f" prot="private" static="no">
+        <type><ref refid="classSR__GRAPH__NS_1_1PostProcessPass" kindref="compound">PostProcessPass</ref></type>
+        <definition>using SR_GRAPH_NS::SSAOPass::Super =  PostProcessPass</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_GRAPH_NS::SSAOPass::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="13" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1SSAOPass_1a207cfef6dfcd7e9098ad83db5dc2df41" prot="private" static="no">
         <type>std::vector&lt; SR_MATH_NS::FVector4 &gt;</type>
         <definition>using SR_GRAPH_NS::SSAOPass::SSAOKernel =  std::vector&lt;SR_MATH_NS::FVector4&gt;</definition>
@@ -17,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="15" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="14" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" bodystart="14" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -33,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="37" column="20" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" bodystart="37" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="36" column="20" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1SSAOPass_1adb522d08dd889b03372fa61064bf8ff1" prot="private" static="no" mutable="no">
         <type>SR_GTYPES_NS::Texture::Ptr</type>
@@ -47,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="38" column="36" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" bodystart="38" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="37" column="36" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" bodystart="37" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -64,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="17" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="16" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SSAOPass_1a64a5335318021c02f2474f6560f5dbde" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -79,7 +92,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="18" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="17" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SSAOPass_1a117e63f90fa13a3a6b99fff395f8dfb8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -95,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="20" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="19" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SSAOPass_1a852fcbdd62931d9e0cc2cf32982226f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -111,7 +124,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="21" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="20" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SSAOPass_1a5fb104f9c71313f49c4180b13645b9f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -130,15 +143,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="23" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="22" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1SSAOPass_1a6bc1b216556e9e922298a4ff7ff4749a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1SSAOPass_1a6bc1b216556e9e922298a4ff7ff4749a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
         <definition>bool SR_GRAPH_NS::SSAOPass::Load</definition>
         <argsstring>(const SR_XML_NS::Node &amp;passNode) override</argsstring>
         <name>Load</name>
         <qualifiedname>SR_GRAPH_NS::SSAOPass::Load</qualifiedname>
-        <reimplements refid="classSR__GRAPH__NS_1_1PostProcessPass_1ab19e43f8ba0885b3eed12dc6e324fcb1">Load</reimplements>
         <param>
           <type>const SR_XML_NS::Node &amp;</type>
           <declname>passNode</declname>
@@ -149,17 +161,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="25" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="24" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1SSAOPass_1a7fdbd68ae30677605bda55699c419394" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1SSAOPass_1afa7cc782dc026d556ef6212eeeef314a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void SR_GRAPH_NS::SSAOPass::UseSamplers</definition>
-        <argsstring>(ShaderUseInfo info) override</argsstring>
+        <argsstring>(const ShaderUseInfo &amp;info) override</argsstring>
         <name>UseSamplers</name>
         <qualifiedname>SR_GRAPH_NS::SSAOPass::UseSamplers</qualifiedname>
-        <reimplements refid="classSR__GRAPH__NS_1_1ISamplersPass_1af41b07a501d2f5d98fa7d40566d9b529">UseSamplers</reimplements>
         <param>
-          <type><ref refid="structSR__GRAPH__NS_1_1ShaderUseInfo" kindref="compound">ShaderUseInfo</ref></type>
+          <type>const ShaderUseInfo &amp;</type>
           <declname>info</declname>
         </param>
         <briefdescription>
@@ -168,22 +179,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="27" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="26" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1SSAOPass_1aba94366a31e8300db39429be3371d299" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1SSAOPass_1aba94366a31e8300db39429be3371d299" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::vector&lt; <ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">SR_GTYPES_NS::Framebuffer</ref> * &gt;</type>
         <definition>SR_NODISCARD std::vector&lt; SR_GTYPES_NS::Framebuffer * &gt; SR_GRAPH_NS::SSAOPass::GetFrameBuffers</definition>
         <argsstring>() const override</argsstring>
         <name>GetFrameBuffers</name>
         <qualifiedname>SR_GRAPH_NS::SSAOPass::GetFrameBuffers</qualifiedname>
-        <reimplements refid="classSR__GRAPH__NS_1_1BasePass_1a0928ede3e5d5886b93cb7eba8d77b744">GetFrameBuffers</reimplements>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="29" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="28" column="34"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -199,7 +209,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="32" column="33"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="31" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SSAOPass_1ab9fbd45c36a94f47e34bf526e1f2c59a" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_GTYPES_NS::Texture::Ptr</type>
@@ -213,22 +223,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="33" column="49"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="32" column="49"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1SSAOPass_1a13dc47f09937e1a0254a128fdb938891" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1SSAOPass_1a13dc47f09937e1a0254a128fdb938891" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">IRenderTechnique</ref> *</type>
         <definition>SR_NODISCARD IRenderTechnique * SR_GRAPH_NS::SSAOPass::GetFrameBufferRenderTechnique</definition>
         <argsstring>() const override</argsstring>
         <name>GetFrameBufferRenderTechnique</name>
         <qualifiedname>SR_GRAPH_NS::SSAOPass::GetFrameBufferRenderTechnique</qualifiedname>
-        <reimplements refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a973cb78e6fad9b35aba317cedc42a2df">GetFrameBufferRenderTechnique</reimplements>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="34" column="39"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="33" column="39"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -241,23 +250,13 @@
         <link refid="classSR__GRAPH__NS_1_1BasePass"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
-        <childnode refid="7" relation="public-inheritance">
+        <childnode refid="6" relation="public-inheritance">
         </childnode>
-      </node>
-      <node id="11">
-        <label>SR_GRAPH_NS::IFramebufferPass</label>
-        <link refid="classSR__GRAPH__NS_1_1IFramebufferPass"/>
-      </node>
-      <node id="10">
-        <label>SR_GRAPH_NS::ISamplersPass</label>
-        <link refid="classSR__GRAPH__NS_1_1ISamplersPass"/>
       </node>
       <node id="2">
         <label>SR_GRAPH_NS::PostProcessPass</label>
         <link refid="classSR__GRAPH__NS_1_1PostProcessPass"/>
         <childnode refid="3" relation="public-inheritance">
-        </childnode>
-        <childnode refid="10" relation="public-inheritance">
         </childnode>
       </node>
       <node id="1">
@@ -265,81 +264,53 @@
         <link refid="classSR__GRAPH__NS_1_1SSAOPass"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="11" relation="public-inheritance">
+      </node>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="5" relation="public-inheritance">
         </childnode>
       </node>
       <node id="5">
-        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="6" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="6">
         <label>SR_HTYPES_NS::SharedPtrBase</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
       </node>
       <node id="7">
-        <label>SR_SRLM_NS::IExecutableNode</label>
-        <link refid="classSR__SRLM__NS_1_1IExecutableNode"/>
-        <childnode refid="8" relation="public-inheritance">
-        </childnode>
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
       </node>
-      <node id="8">
-        <label>SR_SRLM_NS::LogicalNode</label>
-        <link refid="classSR__SRLM__NS_1_1LogicalNode"/>
-        <childnode refid="9" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="9">
-        <label>SR_UTILS_NS::NonCopyable</label>
-        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
-      </node>
-      <node id="4">
-        <label>SR_UTILS_NS::ResourceContainer</label>
-        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
-        <childnode refid="5" relation="public-inheritance">
+      <node id="6">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="7" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="19">
-        <label>Entity</label>
-      </node>
       <node id="3">
         <label>SR_GRAPH_NS::BasePass</label>
         <link refid="classSR__GRAPH__NS_1_1BasePass"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
-        <childnode refid="8" relation="public-inheritance">
+        <childnode refid="7" relation="public-inheritance">
         </childnode>
-        <childnode refid="17" relation="usage">
-          <edgelabel>m_camera</edgelabel>
-        </childnode>
-        <childnode refid="22" relation="usage">
+        <childnode refid="9" relation="usage">
           <edgelabel>m_uboManager</edgelabel>
         </childnode>
-        <childnode refid="25" relation="usage">
+        <childnode refid="13" relation="usage">
           <edgelabel>m_descriptorManager</edgelabel>
         </childnode>
       </node>
-      <node id="25">
+      <node id="13">
         <label>SR_GRAPH_NS::DescriptorManager</label>
         <link refid="classSR__GRAPH__NS_1_1DescriptorManager"/>
-        <childnode refid="26" relation="public-inheritance">
+        <childnode refid="14" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="28">
-        <label>SR_GRAPH_NS::IFramebufferPass</label>
-        <link refid="classSR__GRAPH__NS_1_1IFramebufferPass"/>
-      </node>
-      <node id="27">
-        <label>SR_GRAPH_NS::ISamplersPass</label>
-        <link refid="classSR__GRAPH__NS_1_1ISamplersPass"/>
-      </node>
-      <node id="22">
+      <node id="9">
         <label>SR_GRAPH_NS::Memory::UBOManager</label>
         <link refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager"/>
-        <childnode refid="23" relation="public-inheritance">
+        <childnode refid="10" relation="public-inheritance">
         </childnode>
       </node>
       <node id="2">
@@ -347,7 +318,11 @@
         <link refid="classSR__GRAPH__NS_1_1PostProcessPass"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
-        <childnode refid="27" relation="public-inheritance">
+        <childnode refid="15" relation="usage">
+          <edgelabel>m_onShaderReloaded</edgelabel>
+        </childnode>
+        <childnode refid="16" relation="usage">
+          <edgelabel>m_shaderPath</edgelabel>
         </childnode>
       </node>
       <node id="1">
@@ -355,299 +330,171 @@
         <link refid="classSR__GRAPH__NS_1_1SSAOPass"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="17">
-        <label>SR_GTYPES_NS::Camera</label>
-        <link refid="classSR__GTYPES__NS_1_1Camera"/>
-        <childnode refid="18" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="5">
-        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="6" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="6">
-        <label>SR_HTYPES_NS::SharedPtrBase</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
-        <childnode refid="7" relation="usage">
-          <edgelabel>m_data</edgelabel>
-        </childnode>
-      </node>
-      <node id="7">
-        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
-        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
-      </node>
-      <node id="8">
-        <label>SR_SRLM_NS::IExecutableNode</label>
-        <link refid="classSR__SRLM__NS_1_1IExecutableNode"/>
-        <childnode refid="9" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="11">
-        <label>SR_SRLM_NS::LogicalMachine</label>
-        <link refid="classSR__SRLM__NS_1_1LogicalMachine"/>
-        <childnode refid="12" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="9">
-        <label>SR_SRLM_NS::LogicalNode</label>
-        <link refid="classSR__SRLM__NS_1_1LogicalNode"/>
-        <childnode refid="10" relation="public-inheritance">
-        </childnode>
-        <childnode refid="11" relation="usage">
-          <edgelabel>m_machine</edgelabel>
-        </childnode>
-      </node>
-      <node id="18">
-        <label>SR_UTILS_NS::Component</label>
-        <link refid="classSR__UTILS__NS_1_1Component"/>
-        <childnode refid="19" relation="public-inheritance">
-        </childnode>
-        <childnode refid="20" relation="usage">
-          <edgelabel>m_parent</edgelabel>
-        </childnode>
-        <childnode refid="21" relation="usage">
-          <edgelabel>m_scene</edgelabel>
-        </childnode>
-      </node>
-      <node id="20">
-        <label>SR_UTILS_NS::IComponentable</label>
-        <link refid="classSR__UTILS__NS_1_1IComponentable"/>
-        <childnode refid="19" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="12">
-        <label>SR_UTILS_NS::IResource</label>
-        <link refid="classSR__UTILS__NS_1_1IResource"/>
-        <childnode refid="4" relation="public-inheritance">
-        </childnode>
-        <childnode refid="13" relation="public-inheritance">
-        </childnode>
-        <childnode refid="14" relation="public-inheritance">
-        </childnode>
-        <childnode refid="16" relation="usage">
-          <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
-          <edgelabel>RELOAD_DONE_EVENT</edgelabel>
-        </childnode>
-      </node>
-      <node id="10">
-        <label>SR_UTILS_NS::NonCopyable</label>
-        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
       <node id="4">
-        <label>SR_UTILS_NS::ResourceContainer</label>
-        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="5" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="15">
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="12">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="16">
+        <label>SR_UTILS_NS::Path</label>
+        <link refid="classSR__UTILS__NS_1_1Path"/>
+      </node>
+      <node id="8">
         <label>SR_UTILS_NS::SRClass</label>
         <link refid="classSR__UTILS__NS_1_1SRClass"/>
       </node>
-      <node id="14">
+      <node id="7">
         <label>SR_UTILS_NS::Serializable</label>
         <link refid="classSR__UTILS__NS_1_1Serializable"/>
-        <childnode refid="15" relation="public-inheritance">
+        <childnode refid="8" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="26">
+      <node id="14">
         <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="24" relation="public-inheritance">
+        <childnode refid="11" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="23">
+      <node id="10">
         <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="24" relation="public-inheritance">
+        <childnode refid="11" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="24">
+      <node id="11">
         <label>SR_UTILS_NS::SingletonBase</label>
         <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
-        <childnode refid="10" relation="public-inheritance">
+        <childnode refid="12" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="16">
-        <label>SR_UTILS_NS::StringAtom</label>
-        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
-      </node>
-      <node id="13">
-        <label>SR_UTILS_NS::SubscriptionHolder</label>
-        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
-      </node>
-      <node id="21">
-        <label>SR_WORLD_NS::Scene</label>
-        <link refid="classSR__WORLD__NS_1_1Scene"/>
-        <childnode refid="20" relation="public-inheritance">
+      <node id="15">
+        <label>SR_UTILS_NS::Subscription</label>
+        <link refid="classSR__UTILS__NS_1_1Subscription"/>
+        <childnode refid="12" relation="private-inheritance">
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="13" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" bodystart="13" bodyend="40"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" line="12" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h" bodystart="12" bodyend="39"/>
     <listofallmembers>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1af9087ca5182397a9c7d3b92fb5591523" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>AddDependency</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>AddInputConnection</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a451d30d4d677248caa80bb7ac74baad9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>AddInputData</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac528a232f2481034bf0c9c866aadf580" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>AddOutputConnection</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a968e3caf521de3d586f0ffb6cd9c2e07" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>AddOutputData</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>AddSerializationFlags</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>AllocateStatic</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>AutoFree</name></member>
-      <member refid="classSR__SRLM__NS_1_1IExecutableNode_1a52d82db24c1ba529cf2c3fb289188eae" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>Base</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a0d095ccdf074b9c91026a4f1b7e46f91" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>BasePass</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1afffc5aa7bc9b5e340f99221abdf47be0" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>Bind</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a45ac417b161b1412c23159c307dd5fc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>CalcInput</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1acc31a125e0f4886b1afcb196b55b75ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>CameraPtr</name></member>
-      <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a91d94c55763ed513496dede464a0cdfb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>ClearColors</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4b0351f30fc7afe7f45854cde8e09f64" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>ClearLogicalNode</name></member>
-      <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a6f6e571576126604b2fac770137bdb70" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>ColorFormats</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a8ff68384102d0f025a1dd259b1d57c17" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>Context</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>CloneTo</name></member>
       <member refid="classSR__GRAPH__NS_1_1SSAOPass_1a440952e0a0c58d2589f617eada9ad6af" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>CreateKernel</name></member>
       <member refid="classSR__GRAPH__NS_1_1SSAOPass_1ab9fbd45c36a94f47e34bf526e1f2c59a" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>CreateNoise</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>DecrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1SSAOPass_1a64a5335318021c02f2474f6560f5dbde" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>DeInit</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>DynamicCast</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab95638d1f3f8a9b82a1dfdaa63d28d1f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>Execute</name></member>
-      <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a8fd00ce8264bf9dff6363cc0c4b699cb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>FramebufferPtr</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1ae921a9d3d876f3f944a75c48c0670612" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>FindPass</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a5d6f48a0c7f5279d68247638b71a9f07" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>ForEachPass</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1aab763411e8c45d0a660255b3058bd0f5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>FrameBuffers</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>Get</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>Get</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac38d38ae8e248a1b1ad573f3e2ac7ccf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetBaseLogicalNode</name></member>
-      <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a93387ebe5820fb69594970f92c2b97be" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetClearColors</name></member>
-      <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a2c7f6783a7d03ea990fd4642b3d7043d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetClearDepth</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a725e3e44aa2830a8a799d71e13693a73" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetContainerParents</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a149dec24886d7c8700a1b117c469307f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetContext</name></member>
-      <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a3173139e9ba2929ad7e5c71b8d06e7c3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetFramebuffer</name></member>
-      <member refid="classSR__GRAPH__NS_1_1SSAOPass_1a13dc47f09937e1a0254a128fdb938891" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetFrameBufferRenderTechnique</name></member>
-      <member refid="classSR__GRAPH__NS_1_1SSAOPass_1aba94366a31e8300db39429be3371d299" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetFrameBuffers</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a7fcb00a1223a4547e39260ce606a3630" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetInputs</name></member>
-      <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a39546c14d8c0fe7721c767c19a6218e7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetLayersCount</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a025a93bdbb4371177a46e70a51ffa351" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetName</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a3787e340fcad5f7c498bb18b9bd32ee0" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetNodeHashName</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a3f002bccae511f95dcb0b128a838ce70" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetNodeIndex</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1aee0451ad12205e73d1daf4d5b2369515" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetNodeName</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a9a188617821a9e68cf4f07d1fb92ac1e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetOutput</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1aa14e801043f55bacd8b6ae930d1b063b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetOutputs</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a7734143f7ae123a6088320486af89283" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetBaseMetas</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a70eb32e32dc020ae82b9030505b6e4b1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetCamera</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a97a0919298e9d1d53220613bded5ba69" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetClassStaticName</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SSAOPass_1a13dc47f09937e1a0254a128fdb938891" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetFrameBufferRenderTechnique</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SSAOPass_1aba94366a31e8300db39429be3371d299" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetFrameBuffers</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a16a351eac01dde110e273cfd05f1f7ed" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetMeta</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a16837ff730fb4e276450a124d70eb2e4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetMetaStatic</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a8f05935a0013471af3796065104ddd87" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetParent</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a95b0ad3eee1d6801d720bc7eab40bc6e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetPassPipeline</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a8bcb00355e5ecacfb2d2275eae0fbc87" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetPassName</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a2677310aa8207b938d07bbe130dadcf9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetPipeline</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetPtrData</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetPtrData</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetRawPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetRawPtr</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a2d00f38853dae5296edc23d4c7bfa75c" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetRenderScene</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1af8bb85e7d332fde0b2573c9c705a73dc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetRenderContext</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1ab71fffa3ce7eb1e2b640cd6bbd7aecec" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetRenderScene</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetSRClass</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae8e205c3d55f751a1cffabd6ae2cbafa" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetStatus</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ace5d758ae98e877e7fe6b9b311ca8976" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetTechnique</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetThis</name></member>
-      <member refid="classSR__SRLM__NS_1_1IExecutableNode_1a5e765eb12571b7a44b7f1dc9cfcf2b4e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetType</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>GetUncheckedRef</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a39f67280ae696a53716dbe19ef2461ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>HasErrors</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4b0bdf3803c8a5163c579feab8e93704" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>Hash</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a05a08258b94dbd0e17d74634384ebed4" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>HasPostRender</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a3bdab2c8c4f51c17872a2dbd9c27c5d3" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>HasPreRender</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1af5020f5a4113aab60f3feb34277ca1ea" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>HasRender</name></member>
-      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1af04073e294a30c73c7ed3581d700d58c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>HasSamplers</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1af5c00e9391fad105c30570cbda1a6285" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>HasSerializationFlags</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a63b89d1da5c027690ec57549d061677f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>HasUpdate</name></member>
-      <member refid="classSR__SRLM__NS_1_1IExecutableNode_1a72369ad750e0cbaa06007623f7a5a6aa" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>IExecutableNode</name></member>
-      <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1abaa083530168f30691542a8bca773401" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>IFramebufferPass</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>IncrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1SSAOPass_1a2f1592c4a61c050fb8c1eb2527d14b49" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>Init</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae6934733a21e34c45488912bdac8b9a4" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>InitNode</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a46d4de6ffa829b0ac09255febc01f8c3" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>InitValues</name></member>
-      <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a57536e7013fe6f703b50a35d7f3ecdcc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>IsDirectional</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a7a198b9924e270e946544b410c7e4429" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>IsDirty</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae3301d2d44de7af8fc7e186f8691a854" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>IsEntryPoint</name></member>
-      <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1adfd12f4179637efe46bb285fd11f1989" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>IsFrameBufferRendered</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1aa59c3079158cb09647d0499848d1e7e3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>IsActive</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a264dd4b976655f217e1386a38e0a6b6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>IsInit</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1aafd12c320ddcfd1850b69560ba7b3131" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>IsNeedPostRepeat</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a187877bae66f7b85f2e285d83ae2874f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>IsNeedRepeat</name></member>
-      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1a278818369eff66faee5881bbc747a27f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>IsSamplersDirty</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a0f333ecbc614fc619a47de757b06b048" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>IsSuccessfullyCompleted</name></member>
-      <member refid="classSR__GRAPH__NS_1_1SSAOPass_1a6bc1b216556e9e922298a4ff7ff4749a" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>Load</name></member>
-      <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a4ad51c2c5abff53df15340fd5205c861" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>LoadFramebufferSettings</name></member>
-      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1a9069d7a809b4d6a4f2bea7c0a7324cd3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>LoadSamplersPass</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a6bcd14ebcd882a6f89e531c1789f7037" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>LoadXml</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SSAOPass_1a6bc1b216556e9e922298a4ff7ff4749a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>Load</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1afbc9947b694481f8478c1a75a2fc465e" prot="public" virt="virtual" ambiguityscope="SR_GRAPH_NS::PostProcessPass::"><scope>SR_GRAPH_NS::SSAOPass</scope><name>Load</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>m_basicManually</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1ad98f4d77d135b01f81a76f9534b393c1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>m_camera</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>m_data</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a25fe2fa123f3a2a1fee0ca8ec9e64fa2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>m_descriptorManager</name></member>
       <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1aca7aa8cdbc2a820e2f3dc1f5f4f3d06c" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>m_dirtyShader</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1aaefebe7fd52cbf14db7c85bbe21b49ef" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>m_inputs</name></member>
-      <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1aff07da8d2f7ccbac2aaac6d609b97f7b" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>m_isFrameBufferRendered</name></member>
       <member refid="classSR__GRAPH__NS_1_1SSAOPass_1a7233b9b8aee1196920a72cdb416a7a87" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>m_kernel</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a94e08d6063aad6edd1ff62430d08fd20" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>m_machine</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a3a2a6ff04f3fe1f0a7d3691fa9c38bad" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>m_nodeIndex</name></member>
       <member refid="classSR__GRAPH__NS_1_1SSAOPass_1adb522d08dd889b03372fa61064bf8ff1" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>m_noise</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1acdfab2ebb3fe8db5559f506f14207265" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>m_outputs</name></member>
+      <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1ac9003291dc36291f4cd19a48577258fd" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>m_onShaderReloaded</name></member>
       <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1a5ca8a0f2a8e6eb11c45f4a843195ce1a" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>m_properties</name></member>
       <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1aeb568da68eaef452f4012cf924dfbb8c" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>m_shader</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a326155de44e7fe4f9a7f6f905f239e83" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>m_status</name></member>
+      <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1a936b4e576a75fc7417c98f68f84e98ce" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>m_shaderPath</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a8b2e3a39351e9141029bea133f380465" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>m_uboManager</name></member>
       <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1a3608e405ea2964ef96c03016fa090728" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>m_vertices</name></member>
       <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1a7e9faf18b419e96ae632f7da70771251" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>m_virtualDescriptor</name></member>
       <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1ac42a8113851ae68639f889b4d96d63fe" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>m_virtualUBO</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>MakeShared</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1abeb669de15f340d47b81aff73c8494a7" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>MarkDirty</name></member>
-      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1a7e588f69a586128652fe361e13313764" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>MarkSamplersDirty</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1aa7c29336844c31150ba16812fc82ad7d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>MeshPtr</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>NonCopyable</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>NonCopyable</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1ad6e7d35a53f2d509bf057186f66481e6" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>OnMeshAdded</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a5f7298ff562c16372c6c233189be0d49" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>OnMeshRemoved</name></member>
       <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1ad05a141ed0aa624f1f0f2a04855070e5" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>OnMultisampleChanged</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a27569f8d47ee0c52ed5e385253e14460" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>OnPostLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1afbe2a50f0f69bc0f52b51151058830d8" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>OnPostSave</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a2978d969c09702719b2ed5c84453b02d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>OnPreLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a8281e1a68416fd493dce2a48fa8ea660" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>OnPreSave</name></member>
       <member refid="classSR__GRAPH__NS_1_1SSAOPass_1a5fb104f9c71313f49c4180b13645b9f0" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>OnResize</name></member>
-      <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1af056f40419800fddaac682e304b500ad" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>OnResourceUpdated</name></member>
-      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1a67a1a0029c412a3f157b9f99995ec938" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>OnSamplersChanged</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>operator bool</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>operator!=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>operator*</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>operator-&gt;</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::SSAOPass</scope><name>operator=</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::SSAOPass</scope><name>operator=</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::SSAOPass</scope><name>operator=</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_SRLM_NS::IExecutableNode::"><scope>SR_GRAPH_NS::SSAOPass</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>operator=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>operator==</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1ac8b16fec8d4003ae41fd3fe294595b36" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>OriginType</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a16df7383e3420c9291cb97ec92c2d537" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>Overlay</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a9a07bf1f90447c55603ffa6b1e0bed70" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>Pins</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1ac2790f23f7796eb36002c30dc817f1ba" prot="public" virt="non-virtual" ambiguityscope="SR_GRAPH_NS::"><scope>SR_GRAPH_NS::SSAOPass</scope><name>PipelinePtr</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1ac2790f23f7796eb36002c30dc817f1ba" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>PipelinePtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>PolymorphicCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a2618cec5cb8f6f4c384b88bb3878c781" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>PostRender</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ac907cd9eeb58321011db7473671aead2" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>PostUpdate</name></member>
-      <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1a96b21122ce1e39f663bc2b1b71e16f0b" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>Prepare</name></member>
-      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1aba0559086ff8566ead9530dc765081cf" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>PrepareSamplers</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a559ee30abd6fa92f151eb04ec154357f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>Prepare</name></member>
       <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1aee63a18b98828d01a10509c185aa9ff3" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>PreRender</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a2db19e6bfa97da6d7089665a0edfc3fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>Ptr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1afed952eb55d7441a18c4d3381d315fcf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>RegisterPropertiesCodegen</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>ReinterpretCast</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac21f24c643f3298ec89225361ce96a9f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>RemoveDependency</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae81c72460b1aeba9e7a6d61cfd26ab69" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>RemoveInput</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a3dd7841012e531003e34e7b8cee39c8a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>RemoveInputConnection</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a1d32f0aa31055f7327c207e687fd159f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>RemoveOutput</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1afd6d611ab23c3ebcf79120447d4ca783" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>RemoveOutputConnection</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1ab5d15ff431f7405c8ad940333e6417a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>RemoveSerializationFlags</name></member>
       <member refid="classSR__GRAPH__NS_1_1SSAOPass_1a117e63f90fa13a3a6b99fff395f8dfb8" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>Render</name></member>
-      <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a649d6fd101a0b11e7aff14aaa103ef3c" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>RenderFrameBuffer</name></member>
-      <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a02ea108d29ccc8b2e9817a60a09fff24" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>RenderFrameBufferInner</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a91e4bb2dd09d0d5ba2927f32be42bc52" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>RenderContextPtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ad5832c5a9f8abf85ac97967105d3a953" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>RenderScenePtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::SSAOPass</scope><name>Reset</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4fe38d653d32f3462b0f932fe1db83a7" prot="public" virt="virtual" ambiguityscope="SR_SRLM_NS::IExecutableNode::"><scope>SR_GRAPH_NS::SSAOPass</scope><name>Reset</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac04e4fd8681f829b225da3d92de851f9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>ResetInputFlows</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ad119153e52e8ea5c69fc41d600a6f98b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>ResetOutputFlows</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a26cb3321be56bb940227895f39e39585" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>ResetStatus</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a4fb6331893e314c01da26b361197a75e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>ResourceContainer</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a1d2f00105677e74286e1d1c8dee82255" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>SaveXml</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a62227cc4ae3b9feee5afcca5f23bc919" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>SetContext</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1acee317aea228ef1431a3a4b37010cedb" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>SetInput</name></member>
-      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1aa0e9ab3af5eb652b1333289e32f737da" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>SetISamplerRenderTechnique</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a5b46945b1d679dbd01c1eb4587adfd8b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>SetMachine</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1a1f1fe9682ea099f5ca3fbbfb6bc6a9e5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>SetName</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a915d9919621e79a3ee48ddb15799123c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>SetNodeIndex</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1ab5e34c676e9594e60de4ca2e962a0cf7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>SetParent</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>Reset</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>Save</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a06217f9edbf0e8c831a6cc411826f799" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>SetParent</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>SetPointerFromBase</name></member>
-      <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1a1a44d55a15b735d027045de829fe6146" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>SetRenderTechnique</name></member>
-      <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1abd4882153e80fa338fb33428f487b496" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>SetShader</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1af58022a7df1f3d5b8343647ab9ad78f8" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>SetRenderTechnique</name></member>
+      <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1ad8c42b9852fcafcd68ddeaf1ca94fbc0" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>SetShader</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>SharedPointerType</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>SharedPtr</name></member>
@@ -658,23 +505,20 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__GRAPH__NS_1_1SSAOPass_1a207cfef6dfcd7e9098ad83db5dc2df41" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>SSAOKernel</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>StaticCast</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SSAOPass_1acad4bb21f4d64fcd3a86cfc1a82ee52f" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>Super</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>TryRecursiveLockIfValid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>Unlock</name></member>
       <member refid="classSR__GRAPH__NS_1_1SSAOPass_1a852fcbdd62931d9e0cc2cf32982226f9" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>Update</name></member>
-      <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1aa449983c3593b2bc303d0c6f9a1d6a9f" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>UpdateFrameBuffer</name></member>
-      <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1a2b71aec97c691b563a7a55ce0dae5fa5" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>UpdateFrameBufferInner</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac84a44cf058fa5cb53715e250ae7157c" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>UpdateResources</name></member>
-      <member refid="classSR__GRAPH__NS_1_1SSAOPass_1a7fdbd68ae30677605bda55699c419394" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>UseSamplers</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>Valid</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SSAOPass_1afa7cc782dc026d556ef6212eeeef314a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>UseSamplers</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a5a009986d09b0e8199c4d40f2eeac6f0" prot="public" virt="virtual" ambiguityscope="SR_GRAPH_NS::PostProcessPass::"><scope>SR_GRAPH_NS::SSAOPass</scope><name>UseSamplers</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a13c0deb13fa86f507531d102f5fd8d7a" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>UseUniformsFromAnotherPass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a783dd9e4a58072de8ff19895693bca05" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>Valid</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a5aab0756802a67de9cb45b83b3e73c70" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>VerifyAfterLoad</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a127a21b6754f470eeddf8af6f2c16cb3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>~BasePass</name></member>
-      <member refid="classSR__GRAPH__NS_1_1IFramebufferPass_1aaf06bfe3be77272f4697b4b066491330" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>~IFramebufferPass</name></member>
-      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1a4d6ba09d9f666b194cc2a8740e07e256" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>~ISamplersPass</name></member>
-      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a19b262ecaf034d84c1783c24712ccf2d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>~LogicalNode</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>~NonCopyable</name></member>
       <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1a77a94d767616e805d226fbab61728313" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>~PostProcessPass</name></member>
-      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a25f84a35792474f3b2e2eff6431695d3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>~ResourceContainer</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>~SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>~SharedPtrBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1ad88a80732713966d7759d768bd65bbe5" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SSAOPass</scope><name>~SRClass</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

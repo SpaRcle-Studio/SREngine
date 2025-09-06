@@ -5,10 +5,54 @@
     <innerclass refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams" prot="public">SR_UTILS_NS::Reflection::EditorPropertyParams</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1Reflection_1_1Property" prot="public">SR_UTILS_NS::Reflection::Property</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1Reflection_1_1Value" prot="public">SR_UTILS_NS::Reflection::Value</innerclass>
+    <innerclass refid="classSR__UTILS__NS_1_1Reflection_1_1ValueAssociativeContainer" prot="public">SR_UTILS_NS::Reflection::ValueAssociativeContainer</innerclass>
+    <innerclass refid="classSR__UTILS__NS_1_1Reflection_1_1ValueAssociativeContainerIterator" prot="public">SR_UTILS_NS::Reflection::ValueAssociativeContainerIterator</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer" prot="public">SR_UTILS_NS::Reflection::ValueSequenceContainer</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainerIterator" prot="public">SR_UTILS_NS::Reflection::ValueSequenceContainerIterator</innerclass>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="Reflection_2Property_8h_1a2fb8edd8e0d483a1258e31da2b9829fd" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>PropertySRClassContainsMode</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::PropertySRClassContainsMode</qualifiedname>
+        <enumvalue id="Reflection_2Property_8h_1a2fb8edd8e0d483a1258e31da2b9829fda75daf57db1d55d476f96772ecca737c7" prot="public">
+          <name>NotContains</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Reflection_2Property_8h_1a2fb8edd8e0d483a1258e31da2b9829fdade28634b657af8f02ddc02770b583590" prot="public">
+          <name>SharedPointer</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Reflection_2Property_8h_1a2fb8edd8e0d483a1258e31da2b9829fdab270372be5b4433b4736daaf25e1c74e" prot="public">
+          <name>Contains</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Reflection_2Property_8h_1a2fb8edd8e0d483a1258e31da2b9829fdaa1684698ac3d8ffda353d0458c30b1e7" prot="public">
+          <name>Inner</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Property.h" line="54" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="54" bodyend="59"/>
+      </memberdef>
+    </sectiondef>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="SRClassUtils_8h_1a6273b52cacb6053114f8771307c552be" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="Reflection_2Property_8h_1a6273b52cacb6053114f8771307c552be" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -26,7 +70,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/SRClassUtils.h" line="33" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/SRClassUtils.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Property.h" line="13" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="13" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -47,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Property.h" line="119" column="40" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="119" bodyend="142"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Property.h" line="148" column="40" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="148" bodyend="171"/>
       </memberdef>
       <memberdef kind="function" id="Reflection_2Property_8h_1a45d60c6771f8daffd7b5df8afea32fc9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::string_view</type>
@@ -65,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Property.h" line="144" column="22" declfile="Engine/libs/Utils/inc/Utils/Reflection/Property.h" declline="144" declcolumn="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Property.h" line="173" column="22" declfile="Engine/libs/Utils/inc/Utils/Reflection/Property.h" declline="173" declcolumn="22"/>
       </memberdef>
       <memberdef kind="function" id="Reflection_2Property_8h_1a5e9c0c3ec6d09bdb73844647915ae0d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -83,7 +127,34 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Property.h" line="145" column="29" declfile="Engine/libs/Utils/inc/Utils/Reflection/Property.h" declline="145" declcolumn="29"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Property.h" line="174" column="29" declfile="Engine/libs/Utils/inc/Utils/Reflection/Property.h" declline="174" declcolumn="29"/>
+      </memberdef>
+      <memberdef kind="function" id="SRClassUtils_8h_1a51bcac2a57c0bd253e60e5c0dfca4dba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>SR_INLINE void</type>
+        <definition>SR_INLINE void SR_UTILS_NS::Reflection::CloneTo</definition>
+        <argsstring>(const T &amp;from, T &amp;to)</argsstring>
+        <name>CloneTo</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::CloneTo</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>from</declname>
+        </param>
+        <param>
+          <type>T &amp;</type>
+          <declname>to</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/SRClassUtils.h" line="32" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/SRClassUtils.h" bodystart="32" bodyend="68"/>
       </memberdef>
       <memberdef kind="function" id="SRClassUtils_8h_1aa9027df49f06cbdf506f318f869e48e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -110,7 +181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/SRClassUtils.h" line="35" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/SRClassUtils.h" bodystart="35" bodyend="58"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/SRClassUtils.h" line="70" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/SRClassUtils.h" bodystart="70" bodyend="93"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

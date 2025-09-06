@@ -70,6 +70,11 @@
     <innerclass refid="classSR__UTILS__NS_1_1IMigrator" prot="public">SR_UTILS_NS::IMigrator</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1InnerType" prot="public">SR_UTILS_NS::InnerType</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1InnerType_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_01_4" prot="private">SR_UTILS_NS::InnerType&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt; &gt;</innerclass>
+    <innerclass refid="structSR__UTILS__NS_1_1InnerType_3_01std_1_1array_3_01T_00_01N_01_4_01_4" prot="public">SR_UTILS_NS::InnerType&lt; std::array&lt; T, N &gt; &gt;</innerclass>
+    <innerclass refid="structSR__UTILS__NS_1_1InnerType_3_01std_1_1list_3_01T_00_01Alloc_01_4_01_4" prot="public">SR_UTILS_NS::InnerType&lt; std::list&lt; T, Alloc &gt; &gt;</innerclass>
+    <innerclass refid="structSR__UTILS__NS_1_1InnerType_3_01std_1_1map_3_01Key_00_01Value_00_01Compare_00_01Alloc_01_4_01_4" prot="public">SR_UTILS_NS::InnerType&lt; std::map&lt; Key, Value, Compare, Alloc &gt; &gt;</innerclass>
+    <innerclass refid="structSR__UTILS__NS_1_1InnerType_3_01std_1_1set_3_01T_00_01Compare_00_01Alloc_01_4_01_4" prot="public">SR_UTILS_NS::InnerType&lt; std::set&lt; T, Compare, Alloc &gt; &gt;</innerclass>
+    <innerclass refid="structSR__UTILS__NS_1_1InnerType_3_01std_1_1unordered__map_3_01Key_00_01Value_00_01Hash_00_01KeyEqual_00_01Alloc_01_4_01_4" prot="public">SR_UTILS_NS::InnerType&lt; std::unordered_map&lt; Key, Value, Hash, KeyEqual, Alloc &gt; &gt;</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1InnerType_3_01std_1_1vector_3_01T_00_01Alloc_01_4_01_4" prot="public">SR_UTILS_NS::InnerType&lt; std::vector&lt; T, Alloc &gt; &gt;</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1Input" prot="public">SR_UTILS_NS::Input</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1InputDeviceData" prot="public">SR_UTILS_NS::InputDeviceData</innerclass>
@@ -147,6 +152,7 @@
     <innerclass refid="classSR__UTILS__NS_1_1Singleton" prot="public">SR_UTILS_NS::Singleton</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1SingletonBase" prot="public">SR_UTILS_NS::SingletonBase</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1SingletonManager" prot="public">SR_UTILS_NS::SingletonManager</innerclass>
+    <innerclass refid="structSR__UTILS__NS_1_1SmallStack" prot="public">SR_UTILS_NS::SmallStack</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1SRADeserializer" prot="public">SR_UTILS_NS::SRADeserializer</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1SRAISerialization" prot="public">SR_UTILS_NS::SRAISerialization</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1SRASerializer" prot="public">SR_UTILS_NS::SRASerializer</innerclass>
@@ -180,6 +186,7 @@
     <innerclass refid="structSR__UTILS__NS_1_1SupportsNullptrComparison_3_01SR__MATH__NS_1_1Vector3_3_01T_01_4_01_4" prot="public">SR_UTILS_NS::SupportsNullptrComparison&lt; SR_MATH_NS::Vector3&lt; T &gt; &gt;</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1SupportsNullptrComparison_3_01SR__MATH__NS_1_1Vector4_3_01T_01_4_01_4" prot="public">SR_UTILS_NS::SupportsNullptrComparison&lt; SR_MATH_NS::Vector4&lt; T &gt; &gt;</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1SupportsNullptrComparison_3_01SR__MATH__NS_1_1Vector6_3_01T_01_4_01_4" prot="public">SR_UTILS_NS::SupportsNullptrComparison&lt; SR_MATH_NS::Vector6&lt; T &gt; &gt;</innerclass>
+    <innerclass refid="structSR__UTILS__NS_1_1SupportsNullptrComparison_3_01SR__UTILS__NS_1_1Path_01_4" prot="public">SR_UTILS_NS::SupportsNullptrComparison&lt; SR_UTILS_NS::Path &gt;</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1SupportsNullptrComparison_3_01SR__UTILS__NS_1_1StringAtom_01_4" prot="public">SR_UTILS_NS::SupportsNullptrComparison&lt; SR_UTILS_NS::StringAtom &gt;</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1TagManager" prot="public">SR_UTILS_NS::TagManager</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1Task" prot="public">SR_UTILS_NS::Task</innerclass>
@@ -562,7 +569,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="283" column="5" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="283" bodyend="285"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="306" column="5" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="306" bodyend="308"/>
       </memberdef>
       <memberdef kind="enum" id="namespaceSR__UTILS__NS_1ac36557f19a3e92bb036d9ccb273aca4e" prot="public" static="no" strong="yes">
         <type>uint8_t</type>
@@ -707,7 +714,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="87" column="32" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="87" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="89" column="32" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="89" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a0694a4a9cf90cf0b54e22dde7aaefd1f" prot="public" static="no">
         <templateparamlist>
@@ -745,7 +752,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="192" column="17" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="192" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="215" column="17" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="215" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a6264b8791b5f460d93e46f2daa397260" prot="public" static="no">
         <templateparamlist>
@@ -767,7 +774,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="195" column="5" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="195" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="218" column="5" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="218" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a6d6c7fcefa5595fc4b0a08b8bdc7fe61" prot="public" static="no">
         <type>uint64_t</type>
@@ -781,7 +788,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="197" column="5" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="197" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="220" column="5" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="220" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1aeb836600e154f4f82d233e9027a822c4" prot="public" static="no">
         <type>std::chrono::time_point&lt; std::chrono::steady_clock &gt;</type>
@@ -795,7 +802,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="205" column="13" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="205" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="228" column="13" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="228" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1af5130cfa5410206a49dd6a9322987448" prot="public" static="no">
         <templateparamlist>
@@ -814,7 +821,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="160" column="16" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="160" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="181" column="16" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="181" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a0ef66a69a66f40fad33e05aa4e9f9f20" prot="public" static="no">
         <templateparamlist>
@@ -840,7 +847,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="197" column="1" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="197" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="218" column="1" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="218" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a321a3bcd6723e0c4df9eb193d10d9989" prot="public" static="no">
         <templateparamlist>
@@ -859,7 +866,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="200" column="1" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="200" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="221" column="1" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="221" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1abb356a99ac3f1d128beff9314de3c04f" prot="public" static="no">
         <templateparamlist>
@@ -888,7 +895,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="220" column="1" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="220" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="241" column="1" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="241" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a5182a0d24f4585602f1f2e9521df1a1c" prot="public" static="no">
         <templateparamlist>
@@ -914,7 +921,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="306" column="1" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="306" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="327" column="1" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="327" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a007b43a03f2dedf7b8a6ac9f2439b3cb" prot="public" static="no">
         <templateparamlist>
@@ -938,7 +945,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="328" column="1" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="328" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="349" column="1" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="349" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a4f74ac361f1b016325d039cf0d069589" prot="public" static="no">
         <templateparamlist>
@@ -957,7 +964,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="363" column="1" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="363" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="384" column="1" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="384" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1ab6e4b8bf34362b30d3fee943910879ce" prot="public" static="no">
         <templateparamlist>
@@ -979,7 +986,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="366" column="1" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="366" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="387" column="1" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="387" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1abfe04248b1bdd77eb2727aadf66df6a3" prot="public" static="no">
         <templateparamlist>
@@ -1001,7 +1008,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="369" column="1" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="369" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="390" column="1" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="390" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
@@ -1018,7 +1025,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="138" column="41" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="138" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="137" column="41" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="137" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1a916e57d1337312d742b63dda99078bca" prot="public" static="no" constexpr="yes" mutable="no">
         <type>SR_INLINE_STATIC constexpr uint64_t</type>
@@ -1033,7 +1040,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="139" column="41" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="139" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="138" column="41" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="138" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1ad57b2c6159d4ac536e7c2aaeed7ed665" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1058,7 +1065,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="198" column="34" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="198" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="197" column="34" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="197" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1a63f600cc3ccaa39567363c3e328090b3" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1078,7 +1085,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="199" column="42" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="199" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="198" column="42" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="198" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1ae23b6e6adb1de11ffa9d427dcb34c976" prot="public" static="no" constexpr="yes" mutable="no">
         <type>constexpr uint64_t</type>
@@ -1202,7 +1209,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="21" column="46" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="21" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="22" column="46" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="22" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1adb814e8f04adee5ef681cddcca1626da" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1245,7 +1252,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="267" column="20" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="267" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="290" column="20" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="290" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1abc22e77c752d3e5ac8c93ebe4819f7e9" prot="private" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1265,7 +1272,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="554" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="554" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="555" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="555" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1a0c749a90136a7e18258dae8f3a10545b" prot="private" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1285,7 +1292,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="557" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="557" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" line="558" column="20" bodyfile="Engine/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="558" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1a0e071282110a8ecb79d3f3dfae644145" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1305,7 +1312,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRClass.h" line="61" column="20" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/SRClass.h" bodystart="61" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRClass.h" line="63" column="20" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/SRClass.h" bodystart="63" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1ac2a989d78110ff2e67225cef26356de0" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1325,7 +1332,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="64" column="16" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="64" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="65" column="16" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="65" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1a64ad5a219bd9e98473681d6b2a17c4da" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1347,7 +1354,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="75" column="26" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="75" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="76" column="26" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="76" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1a423efdc8cdfac18fd1593e7a584520c3" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1367,7 +1374,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="86" column="26" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="86" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="87" column="26" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="87" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1a10a41e0be2c6bf670cfd2689dd561d46" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1387,7 +1394,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="169" column="20" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="169" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="190" column="20" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="190" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1aa59e48f121a35d6ab0d2dc5a55246355" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1407,7 +1414,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="178" column="20" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="178" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="199" column="20" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="199" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1a0f6ce0732aea1955a3d534c60b660423" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1427,7 +1434,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="187" column="20" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="187" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="208" column="20" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="208" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1af7df220e06c85aa2cb60de48014c5ef5" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1454,7 +1461,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="194" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="194" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="215" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="215" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1a05b57402950f718d43a1786ef296cd1c" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1474,7 +1481,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="213" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="213" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="234" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="234" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1a030cc9946d12b2b38d5c8b20e83f1d8b" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1504,7 +1511,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="227" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="227" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="248" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="248" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1a8eb5d113299a969c325b7c495b4aa5df" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1534,7 +1541,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="234" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="234" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="255" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="255" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1a8362e557db643812d79474ce83a12795" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1554,7 +1561,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="245" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="245" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="266" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="266" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1a9d175cb4a511146893eab7cca7f0c378" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1581,7 +1588,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="256" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="256" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="277" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="277" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1a597a1de5f8b3401c8a95d251593a681d" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1606,7 +1613,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="267" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="267" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="288" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="288" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1a4b308a0071cc8b6cd4f8bcd395ea599c" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1626,7 +1633,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="285" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="285" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="306" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="306" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1aa9daadf69b55f02387b8d9ccaa855f87" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1646,7 +1653,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="303" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="303" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="324" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="324" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1a35925347e6bfc0de36f8b1330f379e6a" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1671,7 +1678,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="309" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="309" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="330" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="330" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1ade8ecac92a78e2818222a3a68f74fb4d" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1696,7 +1703,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="312" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="312" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="333" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="333" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1a8dfeee0b7ccad66d6c707916d24b969b" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1721,7 +1728,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="315" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="315" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="336" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="336" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1ab181c56c68f43a7633cc7add292b1d4e" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1746,7 +1753,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="325" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="325" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="346" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="346" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1a188afc399020755a0daad049a173a4e8" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1766,7 +1773,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="332" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="332" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="353" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="353" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1ab73b417511b9a4d2b7372f1cdd3a0f46" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1791,7 +1798,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="354" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="354" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="375" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="375" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1a8e6121c7be57f567f59de2082a6b3dd3" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1819,7 +1826,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="389" column="16" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="389" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="410" column="16" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="410" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -2125,7 +2132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="118" column="55" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="118" bodyend="120"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="117" column="55" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="117" bodyend="119"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1ac9610a551730fb5453ee35f8109f9108" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD constexpr uint64_t</type>
@@ -2143,7 +2150,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="122" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="122" bodyend="128"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="121" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="121" bodyend="127"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a2f8f372259a86187d358f42824d94741" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD constexpr uint64_t</type>
@@ -2161,7 +2168,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="130" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="130" bodyend="136"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="129" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="129" bodyend="135"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a90e1dd7e37f688eb4199c3382a0ad2a7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD constexpr SR_INLINE_STATIC uint64_t</type>
@@ -2187,7 +2194,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="141" column="54" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="141" bodyend="148"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="140" column="54" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="140" bodyend="147"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1ac0796bf96a0a289598a2ecfc02b0f106" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -2214,7 +2221,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="150" column="65" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="150" bodyend="152"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="149" column="65" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="149" bodyend="151"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1ae04a6136a0e42a9755415dfcc7672ef3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -2241,7 +2248,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="154" column="48" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="154" bodyend="156"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="153" column="48" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="153" bodyend="155"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1aadcaa06dfaad8fb4c914b790e92a12b9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -2264,7 +2271,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="158" column="48" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="158" bodyend="160"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="157" column="48" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="157" bodyend="159"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a51336579a20fc6a676108e3231a6a5d5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -2287,7 +2294,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="185" column="35" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="185" bodyend="188"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="184" column="35" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="184" bodyend="187"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1ad00397809fb88c6b0c6b3fc00f68cb16" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -2315,7 +2322,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="190" column="35" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="190" bodyend="192"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="189" column="35" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="189" bodyend="191"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a74da1f22fe7e8993cec6f59db8816190" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED static constexpr uint64_t</type>
@@ -2337,7 +2344,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="194" column="47" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="194" bodyend="196"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/Hashes.h" line="193" column="47" bodyfile="Engine/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="193" bodyend="195"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1ac6d3d240a0136bbb1757e43c3bb44808" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -4233,7 +4240,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="139" column="32" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="139" bodyend="150"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="162" column="32" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="162" bodyend="173"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1acbce15d471953221efcf7ea0422420a0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -4269,7 +4276,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="171" column="33" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="171" bodyend="180"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="194" column="33" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="194" bodyend="203"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1af8789cd02e36d41eac334766799b556d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -4288,7 +4295,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="182" column="37" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="182" bodyend="188"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="205" column="37" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="205" bodyend="211"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a6a32422a2c82e41bae3746bb669dfb58" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -4313,7 +4320,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="190" column="35" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="190" bodyend="190"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="213" column="35" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="213" bodyend="213"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a8c9d30f358eaa81bf05be7129c20006e" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -4344,7 +4351,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="209" column="70" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="209" bodyend="213"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="232" column="70" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="232" bodyend="236"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a09588dc82d8c8ee581073c3985c2b75b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -4372,7 +4379,7 @@
         <inbodydescription>
 <para>Slow. But cross-platform.</para>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="227" column="52" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="227" bodyend="253"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="250" column="52" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="250" bodyend="276"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1aec31c4750ff586a7c8f4a0a70dc8025b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -4391,7 +4398,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="269" column="31" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="269" bodyend="271"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="292" column="31" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="292" bodyend="294"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a6cf7a1ab47bd15a772ec7679109c9deb" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -4410,7 +4417,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="273" column="31" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="273" bodyend="279"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="296" column="31" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="296" bodyend="302"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a22e0adbbd372a4829817587b10b78c91" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -4581,7 +4588,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="391" column="36" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="391" bodyend="397"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="412" column="36" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="412" bodyend="418"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

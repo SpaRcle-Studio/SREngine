@@ -11,7 +11,6 @@
 
 
 * `#include <Graphics/Pass/BasePass.h>`
-* `#include <Graphics/Pass/ISamplersPass.h>`
 * `#include <Graphics/Render/RenderPredicates.h>`
 * `#include <Graphics/Pipeline/IShaderProgram.h>`
 * `#include <Graphics/SRSL/ShaderType.h>`
@@ -39,7 +38,10 @@
 
 | Type | Name |
 | ---: | :--- |
+| struct | [**MeshDrawerMaterialUniforms**](structSR__GRAPH__NS_1_1MeshDrawerMaterialUniforms.md) <br> |
 | class | [**MeshDrawerPass**](classSR__GRAPH__NS_1_1MeshDrawerPass.md) <br> |
+| struct | [**MeshDrawerSharedUniforms**](structSR__GRAPH__NS_1_1MeshDrawerSharedUniforms.md) <br> |
+| struct | [**MeshDrawerUniforms**](structSR__GRAPH__NS_1_1MeshDrawerUniforms.md) <br> |
 
 
 

@@ -38,6 +38,7 @@ namespace SR_UTILS_NS {
             , m_path(path)
         { }
 
+        SR_NODISCARD const ResourcesSet& GetResources() const { return m_loaded; }
         SR_NODISCARD IResource::Ptr GetResource() const;
         SR_NODISCARD IResource::Ptr GetFirstResource() const;
         SR_NODISCARD IResourceReloader* GetReloader() const;
@@ -74,6 +75,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD std::pair<ResourcePath, ResourceInfo::HardPtr> GetInfoByIndex(uint64_t index);
         SR_NODISCARD IResourceReloader* GetReloader() const noexcept { return m_reloader; }
         SR_NODISCARD const std::string& GetName() const { return m_name; }
+        SR_NODISCARD const ResourcesSet& GetResources() const { return m_resources; }
 
         void Remove(const IResource::Ptr& pResource);
         void Add(const IResource::Ptr& pResource);

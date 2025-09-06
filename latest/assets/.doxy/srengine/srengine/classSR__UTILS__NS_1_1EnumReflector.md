@@ -77,6 +77,7 @@ Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_
 
 | Type | Name |
 | ---: | :--- |
+|  int64\_t | [**AsInt**](#function-asint-12) (EnumType value) <br> |
 |  EnumType | [**At**](#function-at-12) (uint64\_t index) <br> |
 |  int64\_t | [**AtAsInt**](#function-atasint-12) (uint64\_t index) <br> |
 |  SR\_MAYBE\_UNUSED SR\_NODISCARD std::optional&lt; int64\_t &gt; | [**AtInternal**](#function-atinternal) (uint64\_t index) const<br> |
@@ -125,6 +126,7 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 | Type | Name |
 | ---: | :--- |
+|  SR\_NODISCARD int64\_t | [**AsInt**](#function-asint-22) (EnumType value) <br> |
 |  SR\_NODISCARD EnumType | [**At**](#function-at-22) (uint64\_t index) <br> |
 |  SR\_NODISCARD int64\_t | [**AtAsInt**](#function-atasint-22) (uint64\_t index) <br> |
 |  SR\_NODISCARD uint64\_t | [**Count**](#function-count-22) () <br> |
@@ -205,6 +207,22 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 ## Public Functions Documentation
 
+
+
+
+### function AsInt [1/2]
+
+```C++
+template<typename EnumType>
+int64_t SR_UTILS_NS::EnumReflector::AsInt (
+    EnumType value
+) 
+```
+
+
+
+
+<hr>
 
 
 
@@ -686,6 +704,22 @@ SR_UTILS_NS::EnumReflector::~EnumReflector () override
 <hr>
 ## Public Static Functions Documentation
 
+
+
+
+### function AsInt [2/2]
+
+```C++
+template<typename EnumType>
+static SR_NODISCARD int64_t SR_UTILS_NS::EnumReflector::AsInt (
+    EnumType value
+) 
+```
+
+
+
+
+<hr>
 
 
 

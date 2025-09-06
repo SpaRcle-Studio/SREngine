@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="605" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="605" bodyend="612"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="644" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="644" bodyend="651"/>
       </memberdef>
       <memberdef kind="function" id="structObjectDataAccessor_3_01SR__MATH__NS_1_1IRect_01_4_1a4e4aa55d813448c1848e6e89c5098b03" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -55,14 +55,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="614" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="614" bodyend="623"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="653" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="653" bodyend="662"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="604" column="10" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="604" bodyend="624"/>
+    <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="643" column="10" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="643" bodyend="663"/>
     <listofallmembers>
       <member refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1IRect_01_4_1a4e4aa55d813448c1848e6e89c5098b03" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; SR_MATH_NS::IRect &gt;</scope><name>Load</name></member>
       <member refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1IRect_01_4_1a2403d493fac969b5a0d61259830e6cc7" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; SR_MATH_NS::IRect &gt;</scope><name>Save</name></member>

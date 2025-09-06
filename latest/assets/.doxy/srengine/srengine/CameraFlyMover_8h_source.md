@@ -71,13 +71,6 @@ namespace SR_UTILS_NS {
             }
         }
 
-        void OnDestroy() override {
-            Super::OnDestroy();
-            GetThis().AutoFree([](auto&& pData) {
-                delete pData;
-            });
-        }
-
         void SetVelocityFactor(const float_t factor) { m_velocityFactor = factor; }
         void SetActive(const bool active) { m_active = active; }
         void SetExecuteInEditMode(bool enabled);

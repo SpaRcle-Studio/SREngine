@@ -15,6 +15,7 @@
 * `#include <Utils/ECS/SceneObject.h>`
 * `#include <Graphics/GUI/WidgetManager.h>`
 * `#include <Graphics/Types/Texture.h>`
+* `#include <Engine/Settings/EditorSettings.h>`
 
 
 

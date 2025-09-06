@@ -53,7 +53,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  decltype(auto) | [**operator()**](#function-operator()) (std::any & a, F && f) const<br> |
+|  decltype(auto) | [**operator()**](#function-operator) (std::any & a, F && f) const<br> |
 
 
 

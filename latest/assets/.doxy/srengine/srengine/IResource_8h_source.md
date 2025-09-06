@@ -56,8 +56,6 @@ namespace SR_UTILS_NS {
         ~IResource() override;
 
     public:
-        SR_NODISCARD virtual Path InitializeResourcePath() const;
-
         bool Execute(const SR_HTYPES_NS::Function<bool()>& fun) const;
 
         SR_NODISCARD virtual bool IsFileResource() const noexcept { return true; }
@@ -118,6 +116,7 @@ namespace SR_UTILS_NS {
         void SetLifetime(int64_t lifeTime) { m_lifetime = lifeTime; }
 
         void SetId(SR_UTILS_NS::StringAtom id, bool autoRegister = true);
+        void SetId(SR_UTILS_NS::StringAtom id, const SR_UTILS_NS::Path& path, bool autoRegister = true);
 
         virtual void ReviveResource();
 

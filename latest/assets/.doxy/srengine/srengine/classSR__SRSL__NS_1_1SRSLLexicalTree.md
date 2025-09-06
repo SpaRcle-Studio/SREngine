@@ -99,8 +99,9 @@ Inherits the following classes: [SR\_SRSL\_NS::SRSLLexicalUnit](classSR__SRSL__N
 | Type | Name |
 | ---: | :--- |
 |  SR\_NODISCARD [**SRSLExpr**](classSR__SRSL__NS_1_1SRSLExpr.md) \* | [**AsExpression**](#function-asexpression) () const<br> |
+|  void | [**Clear**](#function-clear) () <br> |
 |  SR\_NODISCARD [**SRSLFunction**](classSR__SRSL__NS_1_1SRSLFunction.md) \* | [**FindFunction**](#function-findfunction) (const std::string & name) const<br> |
-|   | [**SRSLLexicalTree**](#function-srsllexicaltree-12) () = default<br> |
+|   | [**SRSLLexicalTree**](#function-srsllexicaltree-12) () <br> |
 |   | [**SRSLLexicalTree**](#function-srsllexicaltree-22) ([**SRSLLexicalTree**](classSR__SRSL__NS_1_1SRSLLexicalTree.md) && other) noexcept<br> |
 | virtual SR\_NODISCARD std::string | [**ToString**](#function-tostring) (uint32\_t deep) override const<br> |
 |  [**SRSLLexicalTree**](classSR__SRSL__NS_1_1SRSLLexicalTree.md) & | [**operator=**](#function-operator) ([**SRSLLexicalTree**](classSR__SRSL__NS_1_1SRSLLexicalTree.md) && other) noexcept<br> |
@@ -113,6 +114,8 @@ See [SR\_SRSL\_NS::SRSLLexicalUnit](classSR__SRSL__NS_1_1SRSLLexicalUnit.md)
 
 | Type | Name |
 | ---: | :--- |
+|  SR\_NODISCARD LexicalUnitType | [**GetLexicalUnitType**](classSR__SRSL__NS_1_1SRSLLexicalUnit.md#function-getlexicalunittype) () const<br> |
+|   | [**SRSLLexicalUnit**](classSR__SRSL__NS_1_1SRSLLexicalUnit.md#function-srsllexicalunit) (LexicalUnitType type) <br> |
 | virtual SR\_NODISCARD std::string | [**ToString**](classSR__SRSL__NS_1_1SRSLLexicalUnit.md#function-tostring) (uint32\_t deep) const<br> |
 
 
@@ -253,6 +256,19 @@ SR_NODISCARD SRSLExpr * SR_SRSL_NS::SRSLLexicalTree::AsExpression () const
 
 
 
+### function Clear 
+
+```C++
+inline void SR_SRSL_NS::SRSLLexicalTree::Clear () 
+```
+
+
+
+
+<hr>
+
+
+
 ### function FindFunction 
 
 ```C++
@@ -271,7 +287,7 @@ SR_NODISCARD SRSLFunction * SR_SRSL_NS::SRSLLexicalTree::FindFunction (
 ### function SRSLLexicalTree [1/2]
 
 ```C++
-SR_SRSL_NS::SRSLLexicalTree::SRSLLexicalTree () = default
+inline SR_SRSL_NS::SRSLLexicalTree::SRSLLexicalTree () 
 ```
 
 

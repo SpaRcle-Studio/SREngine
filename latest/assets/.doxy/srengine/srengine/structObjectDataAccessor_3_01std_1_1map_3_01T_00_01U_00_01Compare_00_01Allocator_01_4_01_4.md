@@ -41,6 +41,13 @@
 
 
 
+## Public Static Attributes
+
+| Type | Name |
+| ---: | :--- |
+|  constexpr SerializationId | [**firstId**](#variable-firstid)   = `SerializationId::Create("first")`<br> |
+|  constexpr SerializationId | [**itemId**](#variable-itemid)   = `SerializationId::Create("item")`<br> |
+|  constexpr SerializationId | [**secondId**](#variable-secondid)   = `SerializationId::Create("second")`<br> |
 
 
 
@@ -111,6 +118,47 @@ using ObjectDataAccessor< std::map< T, U, Compare, Allocator > >::MapType =  std
 
 ```C++
 using ObjectDataAccessor< std::map< T, U, Compare, Allocator > >::ValueType =  typename MapType::value_type;
+```
+
+
+
+
+<hr>
+## Public Static Attributes Documentation
+
+
+
+
+### variable firstId 
+
+```C++
+constexpr SerializationId ObjectDataAccessor< std::map< T, U, Compare, Allocator > >::firstId;
+```
+
+
+
+
+<hr>
+
+
+
+### variable itemId 
+
+```C++
+constexpr SerializationId ObjectDataAccessor< std::map< T, U, Compare, Allocator > >::itemId;
+```
+
+
+
+
+<hr>
+
+
+
+### variable secondId 
+
+```C++
+constexpr SerializationId ObjectDataAccessor< std::map< T, U, Compare, Allocator > >::secondId;
 ```
 
 

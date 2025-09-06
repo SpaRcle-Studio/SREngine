@@ -60,11 +60,13 @@ namespace SR_GRAPH_NS {
         void SR_FASTCALL SetBool(SR_UTILS_NS::StringAtom id, bool v) noexcept;
         void SR_FASTCALL SetTexture(SR_UTILS_NS::StringAtom id, const SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Texture>& pTexture) noexcept;
 
+        SR_NODISCARD bool IsValid() const;
         SR_NODISCARD SR_UTILS_NS::StringAtom GetRenderStageId() const noexcept;
-        SR_NODISCARD bool IsTransparent() const;
-        SR_NODISCARD ShaderPtr GetShader() const;
         SR_NODISCARD RenderContextPtr GetContext() const { return m_context; }
         SR_NODISCARD virtual const MaterialData::Ptr& GetMaterialData() const noexcept = 0;
+        SR_NODISCARD SR_GTYPES_NS::Shader* GetDefaultShader() const noexcept;
+        SR_NODISCARD SR_GTYPES_NS::Shader* GetShader(SR_UTILS_NS::StringAtom id) const noexcept;
+        SR_NODISCARD SR_GTYPES_NS::Shader* GetShader(const SR_SRSL_NS::ShaderMacrosParams& macros) const noexcept;
 
         SR_NODISCARD virtual MaterialType GetMaterialType() const noexcept = 0;
 
@@ -75,15 +77,15 @@ namespace SR_GRAPH_NS {
         void SetShader(const SR_UTILS_NS::Path& path, SR_UTILS_NS::StringAtom stage = SR_UTILS_NS::StringAtom());
 
         void OnPropertyChanged(bool onlyUniforms) const;
-        void OnShaderChanged() const;
+        void OnShaderChanged();
 
         void Use();
         void UseSamplers();
 
     protected:
         virtual void InitContext() const;
-        void InitMaterialDataSubscriptions() const;
-        void DeInitMaterialDataSubscriptions() const;
+        void InitMaterialDataSubscriptions();
+        void DeInitMaterialDataSubscriptions();
 
     protected:
         mutable RenderContextPtr m_context;
@@ -92,6 +94,8 @@ namespace SR_GRAPH_NS {
 
         mutable SR_UTILS_NS::Subscription m_shaderChangedSubscription;
         mutable SR_UTILS_NS::Subscription m_propertyChangedSubscription;
+
+        mutable std::map<SR_UTILS_NS::SRHashType, SR_GTYPES_NS::Shader::Ptr> m_variants;
 
     };
 }

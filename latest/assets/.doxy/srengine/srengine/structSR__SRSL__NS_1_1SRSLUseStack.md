@@ -40,6 +40,7 @@
 
 | Type | Name |
 | ---: | :--- |
+|  std::set&lt; std::string &gt; | [**forceUsed**](#variable-forceused)  <br> |
 |  std::map&lt; std::string, SRSLUseStack::Ptr &gt; | [**functions**](#variable-functions)  <br> |
 |  std::set&lt; std::string &gt; | [**variables**](#variable-variables)  <br> |
 
@@ -115,6 +116,19 @@ using SR_SRSL_NS::SRSLUseStack::Ptr =  std::shared_ptr<SRSLUseStack>;
 <hr>
 ## Public Attributes Documentation
 
+
+
+
+### variable forceUsed 
+
+```C++
+std::set<std::string> SR_SRSL_NS::SRSLUseStack::forceUsed;
+```
+
+
+
+
+<hr>
 
 
 

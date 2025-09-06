@@ -68,17 +68,17 @@
 |  [**UVector3Iterator**](classSR__MATH__NS_1_1UVector3Iterator.md) & | [**operator++**](#function-operator_3) () <br> |
 |  [**UVector3Iterator**](classSR__MATH__NS_1_1UVector3Iterator.md) | [**operator++**](#function-operator_4) (int) <br> |
 |  [**UVector3Iterator**](classSR__MATH__NS_1_1UVector3Iterator.md) & | [**operator+=**](#function-operator_5) (difference\_type n) <br> |
-|  [**UVector3Iterator**](classSR__MATH__NS_1_1UVector3Iterator.md) | [**operator-**](#function-operator_6) (difference\_type n) const<br> |
-|  difference\_type | [**operator-**](#function-operator_7) (const [**UVector3Iterator**](classSR__MATH__NS_1_1UVector3Iterator.md) & other) const<br> |
-|  [**UVector3Iterator**](classSR__MATH__NS_1_1UVector3Iterator.md) & | [**operator--**](#function-operator_8) () <br> |
-|  [**UVector3Iterator**](classSR__MATH__NS_1_1UVector3Iterator.md) | [**operator--**](#function-operator_9) (int) <br> |
-|  [**UVector3Iterator**](classSR__MATH__NS_1_1UVector3Iterator.md) & | [**operator-=**](#function-operator_10) (difference\_type n) <br> |
-|  bool | [**operator&lt;**](#function-operator_11) (const [**UVector3Iterator**](classSR__MATH__NS_1_1UVector3Iterator.md) & other) const<br> |
-|  bool | [**operator&lt;=**](#function-operator_12) (const [**UVector3Iterator**](classSR__MATH__NS_1_1UVector3Iterator.md) & other) const<br> |
-|  bool | [**operator==**](#function-operator_13) (const [**UVector3Iterator**](classSR__MATH__NS_1_1UVector3Iterator.md) & other) const<br> |
-|  bool | [**operator&gt;**](#function-operator_14) (const [**UVector3Iterator**](classSR__MATH__NS_1_1UVector3Iterator.md) & other) const<br> |
-|  bool | [**operator&gt;=**](#function-operator_15) (const [**UVector3Iterator**](classSR__MATH__NS_1_1UVector3Iterator.md) & other) const<br> |
-|  SR\_MATH\_NS::UVector3 | [**operator[]**](#function-operator_16) (difference\_type n) const<br> |
+|  [**UVector3Iterator**](classSR__MATH__NS_1_1UVector3Iterator.md) | [**operator-**](#function-operator-) (difference\_type n) const<br> |
+|  difference\_type | [**operator-**](#function-operator-_1) (const [**UVector3Iterator**](classSR__MATH__NS_1_1UVector3Iterator.md) & other) const<br> |
+|  [**UVector3Iterator**](classSR__MATH__NS_1_1UVector3Iterator.md) & | [**operator--**](#function-operator-) () <br> |
+|  [**UVector3Iterator**](classSR__MATH__NS_1_1UVector3Iterator.md) | [**operator--**](#function-operator-_1) (int) <br> |
+|  [**UVector3Iterator**](classSR__MATH__NS_1_1UVector3Iterator.md) & | [**operator-=**](#function-operator-_2) (difference\_type n) <br> |
+|  bool | [**operator&lt;**](#function-operator_6) (const [**UVector3Iterator**](classSR__MATH__NS_1_1UVector3Iterator.md) & other) const<br> |
+|  bool | [**operator&lt;=**](#function-operator_7) (const [**UVector3Iterator**](classSR__MATH__NS_1_1UVector3Iterator.md) & other) const<br> |
+|  bool | [**operator==**](#function-operator_8) (const [**UVector3Iterator**](classSR__MATH__NS_1_1UVector3Iterator.md) & other) const<br> |
+|  bool | [**operator&gt;**](#function-operator_9) (const [**UVector3Iterator**](classSR__MATH__NS_1_1UVector3Iterator.md) & other) const<br> |
+|  bool | [**operator&gt;=**](#function-operator_10) (const [**UVector3Iterator**](classSR__MATH__NS_1_1UVector3Iterator.md) & other) const<br> |
+|  SR\_MATH\_NS::UVector3 | [**operator[]**](#function-operator_11) (difference\_type n) const<br> |
 
 
 

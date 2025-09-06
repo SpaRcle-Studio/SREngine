@@ -20,7 +20,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="288" column="1" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="288" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="309" column="1" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="309" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-attrib">
@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="299" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="299" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="320" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="320" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -53,14 +53,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="290" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="290" bodyend="297"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="311" column="23" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="311" bodyend="318"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="287" column="11" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="287" bodyend="300"/>
+    <location file="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="308" column="11" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="308" bodyend="321"/>
     <listofallmembers>
       <member refid="structSR__UTILS__NS_1_1IsSREnum_1a9d060928134f8b8eaf78ad9575bc188d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IsSREnum</scope><name>IsEnumType</name></member>
       <member refid="structSR__UTILS__NS_1_1IsSREnum_1aaea4a66c05426e13479c1850f03d8e9b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IsSREnum</scope><name>Type</name></member>

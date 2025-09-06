@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="117" column="21" bodyfile="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="117" bodyend="119"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="127" column="21" bodyfile="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="127" bodyend="129"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__UTILS__NS_1_1Path_01_4_1a2dd2782d17d1ef8d618f6e3598656667" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -55,14 +55,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="121" column="21" bodyfile="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="121" bodyend="123"/>
+        <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="131" column="21" bodyfile="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="131" bodyend="133"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="116" column="14" bodyfile="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="116" bodyend="124"/>
+    <location file="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" line="126" column="14" bodyfile="Engine/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="126" bodyend="134"/>
     <listofallmembers>
       <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__UTILS__NS_1_1Path_01_4_1a2dd2782d17d1ef8d618f6e3598656667" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ObjectDataAccessor&lt; SR_UTILS_NS::Path &gt;</scope><name>Load</name></member>
       <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__UTILS__NS_1_1Path_01_4_1adb73d68e102c1ed815f91bc8d6cb507d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ObjectDataAccessor&lt; SR_UTILS_NS::Path &gt;</scope><name>Save</name></member>

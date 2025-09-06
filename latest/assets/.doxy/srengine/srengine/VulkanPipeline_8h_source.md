@@ -17,6 +17,8 @@
 
 #include <Graphics/Pipeline/Pipeline.h>
 
+#include <EvoVulkan/Types/VmaBuffer.h>
+
 namespace SR_GRAPH_NS::VulkanTools {
     class MemoryManager;
 }
@@ -63,6 +65,8 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD uint8_t GetBuildIterationsCount() const noexcept override;
         SR_NODISCARD SR_MATH_NS::FColor GetPixelColor(uint32_t textureId, uint32_t x, uint32_t y) override;
         SR_NODISCARD void* GetCurrentShaderHandle() const override;
+        SR_NODISCARD uint16_t GetSwapchainImagesCount() const override;
+        SR_NODISCARD uint8_t GetCurrentFrameIndex() const override;
 
         SR_NODISCARD EvoVulkan::Core::VulkanKernel* GetKernel() const noexcept { return m_kernel; }
         SR_NODISCARD VulkanTools::MemoryManager* GetMemoryManager() const noexcept { return m_memory; }
@@ -100,6 +104,7 @@ namespace SR_GRAPH_NS {
         void OnResize(const SR_MATH_NS::UVector2& size) override;
 
         void WaitComputeIdle() override;
+        void WaitRenderIdle() override;
 
         bool BeginCompute() override;
         void EndCompute() override;
@@ -115,6 +120,7 @@ namespace SR_GRAPH_NS {
 
         void OnMultiSampleChanged() override;
         void SetCurrentFrameBuffer(FramebufferPtr pFrameBuffer) override;
+        void SetSwapchainImagesCount(uint16_t count) override;
 
         void SetViewport(int32_t width, int32_t height) override;
         void SetScissor(int32_t width, int32_t height) override;

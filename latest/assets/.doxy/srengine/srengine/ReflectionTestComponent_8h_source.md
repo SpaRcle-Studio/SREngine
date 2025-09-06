@@ -19,6 +19,19 @@
 #include <Utils/ECS/ComponentManager.h>
 
 namespace SR_UTILS_NS::Tests {
+    struct ReflectionTestComponentAssociative : public SR_UTILS_NS::Serializable {
+        SR_STRUCT()
+
+        
+        std::map<SR_UTILS_NS::StringAtom, int> associativeMapAtom;
+        std::map<std::string, int> associativeMapString;
+        std::map<int, std::string> associativeMap2;
+        std::map<SR_UTILS_NS::PlatformType, int> associativeMap33;
+        std::map<SR_UTILS_NS::PlatformType, std::string> associativeMap3;
+        std::map<SR_UTILS_NS::PlatformType, SR_UTILS_NS::Path> associativeMap4;
+
+    };
+
     struct ReflectionTestComponentDataBase : public SR_UTILS_NS::Serializable {
         SR_STRUCT()
 
@@ -79,14 +92,8 @@ namespace SR_UTILS_NS::Tests {
             m_hasChanged = true;
         }
 
-        void OnDestroy() override {
-            Super::OnDestroy();
-            GetThis().AutoFree([](auto&& pData) {
-                delete pData;
-            });
-        }
-
     private:
+        ReflectionTestComponentAssociative m_associative;
         std::string m_string = "Hello world!";
         SR_UTILS_NS::PlatformType m_platformType = SR_UTILS_NS::PlatformType::Windows;
         ReflectionTestComponentData m_data;

@@ -10,7 +10,7 @@
 
 
 
-* `#include <Graphics/macros.h>`
+* `#include <Graphics/Utils/MeshUtils.h>`
 * `#include <Utils/Types/SharedPtr.h>`
 * `#include <Utils/Types/SortedVector.h>`
 * `#include <Graphics/Memory/UBOManager.h>`
@@ -42,8 +42,6 @@
 | class | [**RenderQueue**](classSR__GRAPH__NS_1_1RenderQueue.md) <br> |
 | struct | [**MeshInfo**](structSR__GRAPH__NS_1_1RenderQueue_1_1MeshInfo.md) <br> |
 | struct | [**RenderQueueLessPredicate**](structSR__GRAPH__NS_1_1RenderQueue_1_1RenderQueueLessPredicate.md) <br> |
-| struct | [**ShaderInfo**](structSR__GRAPH__NS_1_1RenderQueue_1_1ShaderInfo.md) <br> |
-| struct | [**ShaderQueueLessPredicate**](structSR__GRAPH__NS_1_1RenderQueue_1_1ShaderQueueLessPredicate.md) <br> |
 | struct | [**RenderQueueInfo**](structSR__GRAPH__NS_1_1RenderQueueInfo.md) <br> |
 | struct | [**RenderQueuePredicate**](structSR__GRAPH__NS_1_1RenderQueuePredicate.md) <br> |
 

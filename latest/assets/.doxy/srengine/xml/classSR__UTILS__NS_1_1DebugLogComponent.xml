@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Game/DebugLogComponent.h" line="27" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Game/DebugLogComponent.h" bodystart="27" bodyend="33"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/DebugLogComponent.h" line="27" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Game/DebugLogComponent.h" bodystart="27" bodyend="30"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -201,7 +201,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/Game/DebugLogComponent.h" line="15" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Game/DebugLogComponent.h" bodystart="15" bodyend="34"/>
+    <location file="Engine/libs/Utils/inc/Utils/Game/DebugLogComponent.h" line="15" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Game/DebugLogComponent.h" bodystart="15" bodyend="31"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1DebugLogComponent_1a175052b91c36b16622121d56bd8670b7" prot="public" virt="virtual"><scope>SR_UTILS_NS::DebugLogComponent</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugLogComponent</scope><name>BaseComponent</name></member>

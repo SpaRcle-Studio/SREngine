@@ -53,7 +53,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  size\_t | [**operator()**](#function-operator()) ([**SR\_HTYPES\_NS::RawMeshParams**](structSR__HTYPES__NS_1_1RawMeshParams.md) const & params) const<br> |
+|  size\_t | [**operator()**](#function-operator) ([**SR\_HTYPES\_NS::RawMeshParams**](structSR__HTYPES__NS_1_1RawMeshParams.md) const & params) const<br> |
 
 
 

@@ -15,51 +15,59 @@
 #ifndef SR_ENGINE_FRAME_BUFFER_CONTROLLER_H
 #define SR_ENGINE_FRAME_BUFFER_CONTROLLER_H
 
-#include <Graphics/macros.h>
+#include <Graphics/Pipeline/FrameBufferFeatures.h>
+#include <Graphics/Pipeline/TextureHelper.h>
 
 #include <Utils/Math/Vector3.h>
 #include <Utils/Math/Vector2.h>
 #include <Utils/Types/SharedPtr.h>
-#include <Graphics/Pipeline/FrameBufferFeatures.h>
+#include <Utils/Serialization/Serializable.h>
 
 namespace SR_GTYPES_NS {
     class Framebuffer;
 }
 
 namespace SR_GRAPH_NS {
-    class FrameBufferController : public SR_HTYPES_NS::SharedPtr<FrameBufferController> {
+    class FrameBufferController final : public SR_HTYPES_NS::SharedPtr<FrameBufferController>, public SR_UTILS_NS::Serializable {
+        SR_CLASS()
         using Super = SR_HTYPES_NS::SharedPtr<FrameBufferController>;
-        using ColorFormats = std::list<ImageFormat>;
+        using ColorFormats = std::vector<ImageFormat>;
         using ClearColors = std::vector<SR_MATH_NS::FColor>;
     public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<FrameBufferController>;
+
+    public:
         FrameBufferController();
-        ~FrameBufferController();
+        ~FrameBufferController() override;
 
     public:
         SR_NODISCARD const SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Framebuffer>& GetFramebuffer() const noexcept { return m_framebuffer; }
         SR_NODISCARD SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Framebuffer>& GetFramebuffer() noexcept { return m_framebuffer; }
         SR_NODISCARD uint8_t GetLayersCount() const noexcept { return m_layersCount; }
+        SR_NODISCARD SR_UTILS_NS::StringAtom GetName() const noexcept { return m_name; }
 
-        bool LoadFramebufferSettings(const SR_XML_NS::Node& settingsNode);
         bool InitializeFramebuffer(RenderContext* pContext);
 
         void OnResize(const SR_MATH_NS::UVector2& size);
 
     private:
-        bool m_dynamicResizing = false;
+        SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Framebuffer> m_framebuffer;
+
+    private:
+        SR_UTILS_NS::StringAtom m_name;
+
+        bool m_dynamicResizing = true;
         bool m_depthEnabled = true;
 
         SR_MATH_NS::FVector2 m_preScale = SR_MATH_NS::FVector2(1.f);
         SR_MATH_NS::IVector2 m_size;
 
-        SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Framebuffer> m_framebuffer;
-
-        ColorFormats m_colorFormats;
+        ColorFormats m_colorFormats = { ImageFormat::RGBA8_UNORM };
 
         FrameBufferFeatures m_features;
         uint8_t m_samples = 0;
         uint32_t m_layersCount = 1;
-        ImageFormat m_depthFormat = ImageFormat::Unknown;
+        ImageFormat m_depthFormat = ImageFormat::Auto;
         ImageAspect m_depthAspect = ImageAspect::DepthStencil;
 
     };

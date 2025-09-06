@@ -790,6 +790,7 @@
         <argsstring>()</argsstring>
         <name>OnOpen</name>
         <qualifiedname>SR_GRAPH_GUI_NS::Widget::OnOpen</qualifiedname>
+        <reimplementedby refid="classSR__CORE__GUI__NS_1_1EngineSettings_1a7b3ca958d116325af7ffc5f49deb17f8">OnOpen</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1RenderTechniqueEditor_1a73f18cf12576b6a171327f40967bef6d">OnOpen</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a12b0ec4def052308e6ef34ec0d06165a">OnOpen</reimplementedby>
         <briefdescription>

@@ -64,20 +64,20 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" line="87" column="24" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" bodystart="87" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1PipelineState_1a249e63021de3b81735f21bd40c388cba" prot="public" static="no" mutable="no">
-        <type>int32_t</type>
-        <definition>int32_t SR_GRAPH_NS::PipelineState::buildIteration</definition>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1PipelineState_1a1f43ba4fd321e2628604bffe65f29fdd" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::PipelineState::hasRenderData</definition>
         <argsstring></argsstring>
-        <name>buildIteration</name>
-        <qualifiedname>SR_GRAPH_NS::PipelineState::buildIteration</qualifiedname>
-        <initializer>= 0</initializer>
+        <name>hasRenderData</name>
+        <qualifiedname>SR_GRAPH_NS::PipelineState::hasRenderData</qualifiedname>
+        <initializer>= false</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" line="89" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" bodystart="89" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" line="89" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" bodystart="89" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1PipelineState_1ab06df24049af9c66a9a5465de4f12596" prot="public" static="no" mutable="no">
         <type>int32_t</type>
@@ -496,7 +496,6 @@
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1PipelineState_1aa7084b6e45e0ca0336fcc541629f8a43" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PipelineState</scope><name>allocatedMemory</name></member>
       <member refid="structSR__GRAPH__NS_1_1PipelineState_1a2c1149648a9378975a8e3382e992e163" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PipelineState</scope><name>allocations</name></member>
-      <member refid="structSR__GRAPH__NS_1_1PipelineState_1a249e63021de3b81735f21bd40c388cba" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PipelineState</scope><name>buildIteration</name></member>
       <member refid="structSR__GRAPH__NS_1_1PipelineState_1ab7d607e96ffa2b630ea6f1d92975120f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PipelineState</scope><name>deletions</name></member>
       <member refid="structSR__GRAPH__NS_1_1PipelineState_1ad09f506b0ab019f56fe3416045b43ef5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PipelineState</scope><name>descriptorSetId</name></member>
       <member refid="structSR__GRAPH__NS_1_1PipelineState_1a9f7b94ad7c8f5db1f6763364755ad28d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PipelineState</scope><name>drawCalls</name></member>
@@ -504,6 +503,7 @@
       <member refid="structSR__GRAPH__NS_1_1PipelineState_1a15cf28222dd5a632b59009aaac24c06b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PipelineState</scope><name>frameBufferId</name></member>
       <member refid="structSR__GRAPH__NS_1_1PipelineState_1a64c31628781edaf127d1e48a5e0c57dd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PipelineState</scope><name>frameBufferLayer</name></member>
       <member refid="structSR__GRAPH__NS_1_1PipelineState_1a96283e02e6277800e9b9ba7a131ae452" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PipelineState</scope><name>FramebufferPtr</name></member>
+      <member refid="structSR__GRAPH__NS_1_1PipelineState_1a1f43ba4fd321e2628604bffe65f29fdd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PipelineState</scope><name>hasRenderData</name></member>
       <member refid="structSR__GRAPH__NS_1_1PipelineState_1a09a2f4e0d3c06d4e3629685bb3163d72" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PipelineState</scope><name>IBOId</name></member>
       <member refid="structSR__GRAPH__NS_1_1PipelineState_1a72fa4cd453f546eae85145c0df6f06cc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PipelineState</scope><name>operations</name></member>
       <member refid="structSR__GRAPH__NS_1_1PipelineState_1ac907e7e489bc12439a79e3b71131c0ad" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PipelineState</scope><name>pFrameBuffer</name></member>

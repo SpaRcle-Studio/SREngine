@@ -3,6 +3,7 @@
   <compounddef id="dir_8b5756bea5e0d505138eb40b052c312a" kind="dir">
     <compoundname>Engine/libs/Graphics/inc/Graphics/SRSL</compoundname>
     <innerfile refid="AssignExpander_8h">AssignExpander.h</innerfile>
+    <innerfile refid="Cache_8h">Cache.h</innerfile>
     <innerfile refid="Evaluator_8h">Evaluator.h</innerfile>
     <innerfile refid="GLSLCodeGenerator_8h">GLSLCodeGenerator.h</innerfile>
     <innerfile refid="ICodeGenerator_8h">ICodeGenerator.h</innerfile>

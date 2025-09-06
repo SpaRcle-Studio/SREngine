@@ -26,7 +26,7 @@
 #include <Graphics/Render/FlatCluster.h>
 #include <Graphics/Render/SortedMeshQueue.h>
 #include <Graphics/GUI/WidgetManager.h>
-#include <Graphics/Pass/PassQueue.h>
+#include <Graphics/Pass/RenderTechniqueQueue.h>
 
 namespace SR_WORLD_NS {
     class Scene;
@@ -106,10 +106,12 @@ namespace SR_GRAPH_NS {
         void ForEachTechnique(const SR_HTYPES_NS::Function<void(IRenderTechnique*)>& callback);
 
         template<typename T> SR_HTYPES_NS::SharedPtr<T> AddRenderer() {
+            SR_TRACY_ZONE;
             return AddRenderer(T::GetClassStaticName()).template DynamicCast<T>();
         }
 
         template<typename T> SR_HTYPES_NS::SharedPtr<T> GetRenderer() const {
+            SR_TRACY_ZONE;
             return GetRenderer(T::GetClassStaticName()).template DynamicCast<T>();
         }
 
@@ -166,11 +168,9 @@ namespace SR_GRAPH_NS {
         SR_HTYPES_NS::SharedPtr<IRenderTechnique> m_technique;
         RenderContext* m_context = nullptr;
 
-        PassQueues m_queues;
-
         SR_MATH_NS::UVector2 m_surfaceSize;
 
-        SR_HTYPES_NS::SafeVar<uint32_t> m_dirty = 0;
+        std::bitset<8> m_dirtyFrames;
 
         bool m_dirtyCameras = true;
         bool m_hasDrawData  = false;

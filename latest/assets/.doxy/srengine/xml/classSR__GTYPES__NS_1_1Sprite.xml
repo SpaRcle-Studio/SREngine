@@ -415,6 +415,7 @@
       <member refid="classSR__UTILS__NS_1_1Component_1a1bc2cbdfbcd251764907ebd0dddef009" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>GetIndexInSceneUpdater</name></member>
       <member refid="classSR__GTYPES__NS_1_1Sprite_1a42a8a19c0ce2e1f5b1d940c748d4cb70" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>GetIndicesCount</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a1d06cec76546a9849a50b484293b684a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>GetMaterial</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1aa219eff968aacb5e5f58678fe066fbc8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>GetMaterial</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1adff93b7a6119dc188a28c6c0eb8a8e37" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>GetMatrix</name></member>
       <member refid="classSR__GTYPES__NS_1_1Sprite_1a4e17429eecedb5e0c10db5a67e25d6bb" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>GetMeshIdentifier</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1af3adc9e3e276c74ac99cc24eca2208d1" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>GetMeshLayer</name></member>
@@ -427,7 +428,6 @@
       <member refid="classSR__UTILS__NS_1_1Component_1a499a53cb08f173222c9a0bbc06af98fd" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>GetRoot</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a0baa97c9e541c9150845fcd338b6f4f8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>GetScene</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a95a4325a27a80c7fbbf65c8ab86579a5" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>GetSceneObject</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Mesh_1a19c90c90366d059d27a9465ac4c46c8a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>GetShader</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a1db605ebfd240f85388761927305ab1e" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>GetSortingPriority</name></member>
       <member refid="classSR__GTYPES__NS_1_1Sprite_1acde8cd37a1ff0a4d1a61a3586e9a4a81" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>GetTextureBorder</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab6d313e3075c5dabf5b41189b10f236e" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>GetTransform</name></member>
@@ -511,7 +511,7 @@
       <member refid="classSR__UTILS__NS_1_1Component_1a9bb3f2e63ed778951c409dba0bd1915f" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>OnTriggerStay</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a5b3c94dcc9fd4c8f2ed748601d0c4e2a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>OriginType</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a8ccf477eb64e1da05d8b6e0f0e82b0ae" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>Ptr</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Mesh_1a63ebff43aced52991bb2c7a97bccbb5a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>RenderQueues</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a4ba19db4597d73a9c04421f31fa943f7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>RenderQueues</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1add25474bae10f83e8854f3e93c4f7070" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>RenderScenePtr</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a16b24e7c8796db2f1d87bb2fdf22b5c0" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>ReRegisterMesh</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a6e97391d1dc50a29f1bdc0179c925019" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>SceneObjectPtr</name></member>

@@ -417,7 +417,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityController</scope><name>Unlock</name></member>
       <member refid="classSR__UTILS__NS_1_1EntityController_1ab537f9e0c7db049ca63d3280d753201a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityController</scope><name>Unregister</name></member>
       <member refid="classSR__UTILS__NS_1_1EntityController_1a9b8cb0397088159905e8a2757ef8c0ca" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityController</scope><name>UnReserve</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityController</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a783dd9e4a58072de8ff19895693bca05" prot="public" virt="virtual"><scope>SR_UTILS_NS::EntityController</scope><name>Valid</name></member>
       <member refid="classSR__UTILS__NS_1_1EntityController_1acf6e1f2fa44d0bdb370fd6b02bdd23cd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityController</scope><name>~EntityController</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityController</scope><name>~SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_UTILS_NS::EntityController</scope><name>~SharedPtrBase</name></member>

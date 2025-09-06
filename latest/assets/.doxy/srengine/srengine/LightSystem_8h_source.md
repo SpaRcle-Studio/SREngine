@@ -37,6 +37,7 @@ namespace SR_GRAPH_NS {
         void Remove(ILightComponent* pLightComponent);
 
         SR_NODISCARD const SR_MATH_NS::FVector3& GetDirectionalLightPosition() const noexcept { return m_position; }
+        SR_NODISCARD SR_MATH_NS::FVector3 GetDirectionalLightDirection() const noexcept;
         void SetDirectionalLightPosition(const SR_MATH_NS::FVector3& position) noexcept;
 
     public:

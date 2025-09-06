@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="35" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="35" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="36" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1ResourceInfo_1a108a66a00a071c6a59ca9d4c8f4fd5b3" prot="public" static="no" mutable="no">
         <type>uint64_t</type>
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="38" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="38" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="39" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1ResourceInfo_1a50a0d7d93b7fc596624812a191531545" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="40" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="40" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="41" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="41" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1ResourceInfo_1a1023e20642f054e20f5a1cdeba6db263" prot="public" static="no" mutable="no">
         <type>ResourcesSet</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="42" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="42" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="43" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="43" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -121,6 +121,20 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="25" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="25" bodyend="29"/>
       </memberdef>
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1ResourceInfo_1aa8c8e3b9796b078766c57d1ebde7d2da" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD const ResourcesSet &amp;</type>
+        <definition>SR_NODISCARD const ResourcesSet &amp; SR_UTILS_NS::ResourceInfo::GetResources</definition>
+        <argsstring>() const</argsstring>
+        <name>GetResources</name>
+        <qualifiedname>SR_UTILS_NS::ResourceInfo::GetResources</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="31" column="41" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="31" bodyend="31"/>
+      </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1ResourceInfo_1ae1e125e6687cf39c71842f82cba7cf97" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD IResource::Ptr</type>
         <definition>SR_NODISCARD IResource::Ptr SR_UTILS_NS::ResourceInfo::GetResource</definition>
@@ -133,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="31" column="37"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="32" column="37"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1ResourceInfo_1a3e437ce20bd35504265e4923fa426d89" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD IResource::Ptr</type>
@@ -147,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="32" column="37"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="33" column="37"/>
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1ResourceInfo_1aaf217069c316a047230ef171b8bbbd35" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1IResourceReloader" kindref="compound">IResourceReloader</ref> *</type>
@@ -161,7 +175,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="33" column="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="34" column="40"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -194,11 +208,12 @@
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="21" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="21" bodyend="43"/>
+    <location file="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="21" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="21" bodyend="44"/>
     <listofallmembers>
       <member refid="structSR__UTILS__NS_1_1ResourceInfo_1a3e437ce20bd35504265e4923fa426d89" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceInfo</scope><name>GetFirstResource</name></member>
       <member refid="structSR__UTILS__NS_1_1ResourceInfo_1aaf217069c316a047230ef171b8bbbd35" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceInfo</scope><name>GetReloader</name></member>
       <member refid="structSR__UTILS__NS_1_1ResourceInfo_1ae1e125e6687cf39c71842f82cba7cf97" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceInfo</scope><name>GetResource</name></member>
+      <member refid="structSR__UTILS__NS_1_1ResourceInfo_1aa8c8e3b9796b078766c57d1ebde7d2da" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceInfo</scope><name>GetResources</name></member>
       <member refid="structSR__UTILS__NS_1_1ResourceInfo_1a764a1200203c4701ef95efe82db2245f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceInfo</scope><name>HardPtr</name></member>
       <member refid="structSR__UTILS__NS_1_1ResourceInfo_1a1023e20642f054e20f5a1cdeba6db263" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceInfo</scope><name>m_loaded</name></member>
       <member refid="structSR__UTILS__NS_1_1ResourceInfo_1a50a0d7d93b7fc596624812a191531545" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceInfo</scope><name>m_path</name></member>

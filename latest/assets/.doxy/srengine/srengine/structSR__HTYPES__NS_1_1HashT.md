@@ -67,7 +67,7 @@ _Template for fixed-size hashes._ [More...](#detailed-description)
 |   | [**HashT**](#function-hasht-66) (const std::array&lt; uint8\_t, SIZE &gt; & bytes) <br>_Deserialises a MerkleHash from an array of bytes._  |
 |  void | [**deserialise**](#function-deserialise-12) (const std::vector&lt; uint8\_t &gt; & buffer, size\_t & position) <br>_Deserialises a hash._  |
 |  void | [**deserialise**](#function-deserialise-22) (const std::vector&lt; uint8\_t &gt; & buffer) <br>_Deserialises a hash._  |
-|   | [**vector&lt; uint8\_t &gt;**](#function-vector<-uint8_t->) () const<br>_Conversion operator to vector of bytes._  |
+|   | [**vector&lt; uint8\_t &gt;**](#function-vector-uint8_t) () const<br>_Conversion operator to vector of bytes._  |
 |  bool | [**operator!=**](#function-operator) (const [**HashT**](structSR__HTYPES__NS_1_1HashT.md)&lt; SIZE &gt; & other) const<br>_MerkleHash inequality operator._  |
 |  [**HashT**](structSR__HTYPES__NS_1_1HashT.md)&lt; SIZE &gt; | [**operator=**](#function-operator_1) (const [**HashT**](structSR__HTYPES__NS_1_1HashT.md)&lt; SIZE &gt; & other) <br>_MerkleHash assignment operator._  |
 |  bool | [**operator==**](#function-operator_2) (const [**HashT**](structSR__HTYPES__NS_1_1HashT.md)&lt; SIZE &gt; & other) const<br>_MerkleHash equality operator._  |

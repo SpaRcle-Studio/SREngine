@@ -11,6 +11,7 @@
     <innerfile refid="GraphicsCommand_8h">GraphicsCommand.h</innerfile>
     <innerfile refid="IRenderComponent_8h">IRenderComponent.h</innerfile>
     <innerfile refid="Mesh_8h">Mesh.h</innerfile>
+    <innerfile refid="RenderTechniqueComponent_8h">RenderTechniqueComponent.h</innerfile>
     <innerfile refid="RenderTexture_8h">RenderTexture.h</innerfile>
     <innerfile refid="Types_2Shader_8h">Shader.h</innerfile>
     <innerfile refid="Skybox_8h">Skybox.h</innerfile>

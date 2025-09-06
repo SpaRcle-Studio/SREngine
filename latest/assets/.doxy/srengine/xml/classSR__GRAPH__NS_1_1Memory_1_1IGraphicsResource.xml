@@ -190,9 +190,9 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="36" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="36" bodyend="36"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ac6a1c5c4af59a5ad1764c67147ed6966" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1RenderContext" kindref="compound">RenderContextPtr</ref></type>
-        <definition>SR_NODISCARD RenderContextPtr SR_GRAPH_NS::Memory::IGraphicsResource::GetRenderContext</definition>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a416e7c6d7a9efac6b3922572ca435dd2" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="classSR__GRAPH__NS_1_1RenderContext" kindref="compound">RenderContextPtr</ref> &amp;</type>
+        <definition>SR_NODISCARD const RenderContextPtr &amp; SR_GRAPH_NS::Memory::IGraphicsResource::GetRenderContext</definition>
         <argsstring>() const noexcept</argsstring>
         <name>GetRenderContext</name>
         <qualifiedname>SR_GRAPH_NS::Memory::IGraphicsResource::GetRenderContext</qualifiedname>
@@ -202,7 +202,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="37" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="37" bodyend="37"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="37" column="45" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="37" bodyend="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1af8957bbf51d3ceea1ede4c2175480454" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -253,7 +253,7 @@
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1aa6b6a44d97575771ed7b6380d9510940" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::IGraphicsResource</scope><name>DeInitGraphicsResource</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1aeb06d428cd3d206ad391a48803599476" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::Memory::IGraphicsResource</scope><name>FreeVMemory</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ac0a8d051e122d28b14ed80660c938ab8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::IGraphicsResource</scope><name>GetPipeline</name></member>
-      <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ac6a1c5c4af59a5ad1764c67147ed6966" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::IGraphicsResource</scope><name>GetRenderContext</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a416e7c6d7a9efac6b3922572ca435dd2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::IGraphicsResource</scope><name>GetRenderContext</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a2674e73b6c08f0962a2036d6b37f8c0d" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::IGraphicsResource</scope><name>IGraphicsResource</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1afcc66f98c8ca1ccde9afaeb65fe6d9ee" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::IGraphicsResource</scope><name>IGraphicsResource</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1af8957bbf51d3ceea1ede4c2175480454" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::IGraphicsResource</scope><name>IsGraphicsResourceRegistered</name></member>

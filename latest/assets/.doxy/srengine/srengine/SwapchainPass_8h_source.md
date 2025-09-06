@@ -12,20 +12,18 @@
 // Created by Monika on 22.07.2022.
 //
 
-#ifndef SR_ENGINE_SWAPCHAINPASS_H
-#define SR_ENGINE_SWAPCHAINPASS_H
+#ifndef SR_ENGINE_GRAPHICS_SWAPCHAIN_PASS_H
+#define SR_ENGINE_GRAPHICS_SWAPCHAIN_PASS_H
+
+#include <Graphics/Pass/GroupPass.h>
 
 #include <Utils/Math/Vector3.h>
-#include <Graphics/Pass/GroupPass.h>
 
 namespace SR_GRAPH_NS {
     class SwapchainPass : public GroupPass {
-        SR_REGISTER_LOGICAL_NODE(SwapchainPass, Swapchain Pass, { "Passes" })
+        SR_CLASS()
     public:
-        bool Load(const SR_XML_NS::Node& passNode) override;
         bool Render() override;
-        void Update() override;
-        //void InitNode() override;
 
     private:
         float_t m_depth = 1.f;
@@ -34,7 +32,7 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SR_ENGINE_SWAPCHAINPASS_H
+#endif //SR_ENGINE_GRAPHICS_SWAPCHAIN_PASS_H
 ```
 
 

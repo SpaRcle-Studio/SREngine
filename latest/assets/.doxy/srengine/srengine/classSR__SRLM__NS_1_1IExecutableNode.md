@@ -17,7 +17,7 @@
 Inherits the following classes: [SR\_SRLM\_NS::LogicalNode](classSR__SRLM__NS_1_1LogicalNode.md)
 
 
-Inherited by the following classes: [SR\_GRAPH\_NS::BasePass](classSR__GRAPH__NS_1_1BasePass.md),  [SR\_SRLM\_NS::BranchNode](classSR__SRLM__NS_1_1BranchNode.md),  [SR\_SRLM\_NS::DebugPrintNode](classSR__SRLM__NS_1_1DebugPrintNode.md),  [SR\_SRLM\_NS::SequenceNode](classSR__SRLM__NS_1_1SequenceNode.md),  [SR\_SRLM\_NS::StartNode](classSR__SRLM__NS_1_1StartNode.md),  [SR\_SRLM\_NS::SynchronizeNode](classSR__SRLM__NS_1_1SynchronizeNode.md)
+Inherited by the following classes: [SR\_SRLM\_NS::BranchNode](classSR__SRLM__NS_1_1BranchNode.md),  [SR\_SRLM\_NS::DebugPrintNode](classSR__SRLM__NS_1_1DebugPrintNode.md),  [SR\_SRLM\_NS::SequenceNode](classSR__SRLM__NS_1_1SequenceNode.md),  [SR\_SRLM\_NS::StartNode](classSR__SRLM__NS_1_1StartNode.md),  [SR\_SRLM\_NS::SynchronizeNode](classSR__SRLM__NS_1_1SynchronizeNode.md)
 
 
 

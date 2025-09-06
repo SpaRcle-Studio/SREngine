@@ -99,6 +99,10 @@
 #endif
 
 namespace SR_MATH_NS {
+    static SR_FORCE_INLINE float Ceiling(float value) {
+        return std::ceil(value);
+    }
+
     static SR_FORCE_INLINE bool IsNumber(std::string_view str) {
         bool hasDot = false;
         bool hasNumber = false;

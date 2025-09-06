@@ -299,6 +299,20 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="89" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="89" bodyend="91"/>
       </memberdef>
+      <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1abd7ae518f13fa8877b9320ae4a751531" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">Vector2</ref></type>
+        <definition>SR_NODISCARD Vector2 SR_MATH_NS::Vector2&lt; T &gt;::Round</definition>
+        <argsstring>() const</argsstring>
+        <name>Round</name>
+        <qualifiedname>SR_MATH_NS::Vector2::Round</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="93" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="93" bodyend="103"/>
+      </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1ae81e0b7296fecb9213edd1aebebfbdaf" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD T</type>
         <definition>SR_NODISCARD T SR_MATH_NS::Vector2&lt; T &gt;::Sum</definition>
@@ -311,7 +325,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="93" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="93" bodyend="95"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="105" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="105" bodyend="107"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a66bb307d3bd64aee02cd2095c5dbf481" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD Unit</type>
@@ -325,7 +339,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="97" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="97" bodyend="102"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="109" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="109" bodyend="114"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a73b0936804d179bd0f0334d6e1c25789" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD Unit</type>
@@ -339,7 +353,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="104" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="104" bodyend="109"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="116" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="116" bodyend="121"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1af15fdf64030f1d756196ea55d2f59539" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">Vector2</ref>&lt; int32_t &gt;</type>
@@ -353,7 +367,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="111" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="111" bodyend="111"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="123" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="123" bodyend="123"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1aaa478146a9c940145c933c2ff178c9e1" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">Vector2</ref>&lt; float_t &gt;</type>
@@ -367,7 +381,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="112" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="112" bodyend="112"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="124" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="124" bodyend="124"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a9c82ca63f723532c2c1089034c700505" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">Vector2</ref>&lt; uint32_t &gt;</type>
@@ -381,7 +395,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="113" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="113" bodyend="113"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="125" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="125" bodyend="125"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a812f2ebf69cf3bb55bfde530d985152d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE <ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">Vector2</ref></type>
@@ -395,7 +409,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="115" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="115" bodyend="115"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="127" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="127" bodyend="127"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a296aa4ededf19069e2d9f30f52297710" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE <ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">Vector2</ref></type>
@@ -409,7 +423,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="116" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="116" bodyend="116"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="128" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="128" bodyend="128"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a068e21fc796b7db53ddefdf82dce099d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE bool</type>
@@ -427,7 +441,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="118" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="118" bodyend="118"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="130" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="130" bodyend="130"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a04d6509f6d0b79644d300cc574ea2ec6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE bool</type>
@@ -445,7 +459,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="119" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="119" bodyend="119"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="131" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="131" bodyend="131"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a2e27b35708dff9c231f5016e7dc48f53" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE bool</type>
@@ -463,7 +477,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="120" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="120" bodyend="120"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="132" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="132" bodyend="132"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1ad1f224f84763a162a448da3b5e522ff9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE bool</type>
@@ -481,7 +495,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="121" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="121" bodyend="121"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="133" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="133" bodyend="133"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a84dc06d006e5a93a96c45b5be5c69a18" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE bool</type>
@@ -499,7 +513,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="123" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="123" bodyend="123"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="135" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="135" bodyend="135"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a2fc1833cce5fdc8b4f8f52b79b943fb3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE bool</type>
@@ -517,7 +531,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="124" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="124" bodyend="124"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="136" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="136" bodyend="136"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a904f2d9c3d31e02d19e8ecd7f2381773" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE bool</type>
@@ -535,7 +549,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="125" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="125" bodyend="125"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="137" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="137" bodyend="137"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1af550036a14863767a85fb3654fafdf0e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE bool</type>
@@ -553,7 +567,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="126" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="126" bodyend="126"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="138" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="138" bodyend="138"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a76bdee1d69dd42863cbbf408f22445a2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE bool</type>
@@ -571,7 +585,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="127" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="127" bodyend="127"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="139" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="139" bodyend="139"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a58aecdda3f572a56bcb3d0842bae5541" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE bool</type>
@@ -589,7 +603,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="128" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="128" bodyend="128"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="140" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="140" bodyend="140"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1ac3be0bbcccabc8949422fd837af4779c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -612,7 +626,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="130" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="130" bodyend="132"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="142" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="142" bodyend="144"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a4ed96d2ed955bae72157baf89d4ab703" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -635,7 +649,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="134" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="134" bodyend="136"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="146" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="146" bodyend="148"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a50c754837cdca0a27237e0294c80bb35" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -658,7 +672,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="138" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="138" bodyend="140"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="150" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="150" bodyend="152"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1ac6c33e2cb468f04416c3eaa453fca34a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -681,7 +695,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="142" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="142" bodyend="146"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="154" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="154" bodyend="158"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a97282f31b8be882ac6d1c1e4cc2b7120" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -704,7 +718,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="148" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="148" bodyend="152"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="160" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="160" bodyend="164"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a61081a1c4a45a1e47495e552a2b78510" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -727,7 +741,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="154" column="41" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="154" bodyend="156"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="166" column="41" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="166" bodyend="168"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a0922733cb3135052a498403d1df13695" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -750,7 +764,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="158" column="41" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="158" bodyend="160"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="170" column="41" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="170" bodyend="172"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a0cf96f7ae999c9915e3c0740b9f914e5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -773,7 +787,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="162" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="162" bodyend="164"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="174" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="174" bodyend="176"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a4861adee1c57f3b6969a0e9638437d71" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -796,7 +810,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="166" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="166" bodyend="168"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="178" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="178" bodyend="180"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a13f9d881be2b7ea9a698bac557a84aaf" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -819,7 +833,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="170" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="170" bodyend="172"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="182" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="182" bodyend="184"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a02769fa992d74dd401d2c45f9889bcc9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -842,7 +856,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="174" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="174" bodyend="178"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="186" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="186" bodyend="190"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a00d66422d0649e487010751e8645e84a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -865,7 +879,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="180" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="180" bodyend="184"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="192" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="192" bodyend="196"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a0f1cc7140a8c62f024edee594e9cb394" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -888,7 +902,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="186" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="186" bodyend="190"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="198" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="198" bodyend="202"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a050f5ddd8df1d51262c2d6784625cf27" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -911,7 +925,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="192" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="192" bodyend="196"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="204" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="204" bodyend="208"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a589b7e904e37b9bdb252775d55a19163" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE bool</type>
@@ -925,7 +939,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="198" column="43" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="198" bodyend="200"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="210" column="43" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="210" bodyend="212"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1ab6b0f526077c90f246d925deed9d09f1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -939,7 +953,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="202" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="202" bodyend="204"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="214" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="214" bodyend="216"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1ac8517e62ae137a32f9925dd0f6c476f6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -953,7 +967,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="206" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="206" bodyend="208"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="218" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="218" bodyend="220"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a4ecefeca4c44ec68d88e250cb2cad1dc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -967,7 +981,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="210" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="210" bodyend="212"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="222" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="222" bodyend="224"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a22ec8587ef252959d450546eb40c6a2d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -981,7 +995,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="214" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="214" bodyend="216"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="226" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="226" bodyend="228"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1ae241aaf157a5faf8c29ce9a38e619e29" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">Vector2</ref></type>
@@ -1003,7 +1017,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="218" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="218" bodyend="223"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="230" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="230" bodyend="235"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1ad51a06323fabb28a0116f60aa07ae6d8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1026,7 +1040,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="225" column="38" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="225" bodyend="227"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="237" column="38" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="237" bodyend="239"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1ade01e1e78c648726e4bcdb9990d358ec" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE glm::vec2</type>
@@ -1040,7 +1054,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="229" column="48" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="229" bodyend="231"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="241" column="48" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="241" bodyend="243"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1ab462019c6ebf2c616a3ab9c0edb4d6ee" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE const T &amp;</type>
@@ -1058,7 +1072,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="233" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="233" bodyend="235"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="245" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="245" bodyend="247"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a2ac802a836d588001968c9c259918746" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE T &amp;</type>
@@ -1076,7 +1090,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="237" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="237" bodyend="239"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="249" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="249" bodyend="251"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector2_1a817d4f485566b8c0ce2dd42be58c7272" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -1090,7 +1104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="241" column="34" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="241" bodyend="243"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="253" column="34" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="253" bodyend="255"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -1127,7 +1141,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="12" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="12" bodyend="244"/>
+    <location file="Engine/libs/Utils/inc/Utils/Math/Vector2.h" line="12" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="12" bodyend="256"/>
     <listofallmembers>
       <member refid="structSR__MATH__NS_1_1Vector2_1acd868d29f415cd8216c7e94a777f6892" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector2</scope><name>Abs</name></member>
       <member refid="structSR__MATH__NS_1_1Vector2_1a66bb307d3bd64aee02cd2095c5dbf481" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector2</scope><name>Aspect</name></member>
@@ -1178,6 +1192,7 @@
       <member refid="structSR__MATH__NS_1_1Vector2_1a904f2d9c3d31e02d19e8ecd7f2381773" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector2</scope><name>operator&gt;=</name></member>
       <member refid="structSR__MATH__NS_1_1Vector2_1ab462019c6ebf2c616a3ab9c0edb4d6ee" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector2</scope><name>operator[]</name></member>
       <member refid="structSR__MATH__NS_1_1Vector2_1a2ac802a836d588001968c9c259918746" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector2</scope><name>operator[]</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector2_1abd7ae518f13fa8877b9320ae4a751531" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector2</scope><name>Round</name></member>
       <member refid="structSR__MATH__NS_1_1Vector2_1ab54d1680844292660e1d238bd38ecab7" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector2</scope><name>Singular</name></member>
       <member refid="structSR__MATH__NS_1_1Vector2_1ae81e0b7296fecb9213edd1aebebfbdaf" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector2</scope><name>Sum</name></member>
       <member refid="structSR__MATH__NS_1_1Vector2_1ade01e1e78c648726e4bcdb9990d358ec" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector2</scope><name>ToGLM</name></member>

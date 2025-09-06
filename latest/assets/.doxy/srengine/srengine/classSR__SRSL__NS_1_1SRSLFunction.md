@@ -103,6 +103,7 @@ Inherits the following classes: [SR\_SRSL\_NS::SRSLLexicalUnit](classSR__SRSL__N
 | Type | Name |
 | ---: | :--- |
 |  SR\_NODISCARD std::string | [**GetName**](#function-getname) () const<br> |
+|   | [**SRSLFunction**](#function-srslfunction) () <br> |
 | virtual SR\_NODISCARD std::string | [**ToString**](#function-tostring) (uint32\_t deep) override const<br> |
 |   | [**~SRSLFunction**](#function-srslfunction) () override<br> |
 
@@ -113,6 +114,8 @@ See [SR\_SRSL\_NS::SRSLLexicalUnit](classSR__SRSL__NS_1_1SRSLLexicalUnit.md)
 
 | Type | Name |
 | ---: | :--- |
+|  SR\_NODISCARD LexicalUnitType | [**GetLexicalUnitType**](classSR__SRSL__NS_1_1SRSLLexicalUnit.md#function-getlexicalunittype) () const<br> |
+|   | [**SRSLLexicalUnit**](classSR__SRSL__NS_1_1SRSLLexicalUnit.md#function-srsllexicalunit) (LexicalUnitType type) <br> |
 | virtual SR\_NODISCARD std::string | [**ToString**](classSR__SRSL__NS_1_1SRSLLexicalUnit.md#function-tostring) (uint32\_t deep) const<br> |
 
 
@@ -296,6 +299,19 @@ SRSLExpr* SR_SRSL_NS::SRSLFunction::pType;
 
 ```C++
 inline SR_NODISCARD std::string SR_SRSL_NS::SRSLFunction::GetName () const
+```
+
+
+
+
+<hr>
+
+
+
+### function SRSLFunction 
+
+```C++
+inline SR_SRSL_NS::SRSLFunction::SRSLFunction () 
 ```
 
 

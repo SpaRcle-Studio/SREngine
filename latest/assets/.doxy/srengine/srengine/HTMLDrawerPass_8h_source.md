@@ -21,7 +21,6 @@
 namespace SR_GRAPH_NS {
 #ifdef SR_COMMON_LITEHTML
     class HTMLDrawerPass : public BasePass {
-        SR_REGISTER_LOGICAL_NODE(HTMLDrawerPass, HTML Drawer Pass, { "Passes" })
         using Super = BasePass;
     public:
         ~HTMLDrawerPass() override;

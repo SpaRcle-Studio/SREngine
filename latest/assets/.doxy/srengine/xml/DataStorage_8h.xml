@@ -12,56 +12,56 @@
     <includedby refid="Chunk_8h" local="no">Engine/libs/Utils/inc/Utils/World/Chunk.h</includedby>
     <includedby refid="Scene_8h" local="no">Engine/libs/Utils/inc/Utils/World/Scene.h</includedby>
     <incdepgraph>
-      <node id="72">
+      <node id="74">
         <label>Utils/Common/Breakpoint.h</label>
         <link refid="Breakpoint_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="103">
+      <node id="105">
         <label>Utils/Common/CastUtils.h</label>
         <link refid="CastUtils_8h_source"/>
-        <childnode refid="99" relation="include">
+        <childnode refid="101" relation="include">
         </childnode>
       </node>
-      <node id="88">
+      <node id="90">
         <label>Utils/Common/EnumReflector.h</label>
         <link refid="EnumReflector_8h_source"/>
-        <childnode refid="71" relation="include">
+        <childnode refid="73" relation="include">
         </childnode>
-        <childnode refid="68" relation="include">
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="78" relation="include">
         </childnode>
         <childnode refid="76" relation="include">
         </childnode>
-        <childnode refid="74" relation="include">
+        <childnode refid="91" relation="include">
         </childnode>
-        <childnode refid="89" relation="include">
+        <childnode refid="92" relation="include">
         </childnode>
+      </node>
+      <node id="95">
+        <label>Utils/Common/Enumerations.h</label>
+        <link refid="Enumerations_8h_source"/>
         <childnode refid="90" relation="include">
         </childnode>
       </node>
-      <node id="93">
-        <label>Utils/Common/Enumerations.h</label>
-        <link refid="Enumerations_8h_source"/>
-        <childnode refid="88" relation="include">
-        </childnode>
-      </node>
-      <node id="68">
+      <node id="70">
         <label>Utils/Common/HashManager.h</label>
         <link refid="HashManager_8h_source"/>
-        <childnode refid="69" relation="include">
-        </childnode>
         <childnode refid="71" relation="include">
         </childnode>
-        <childnode refid="76" relation="include">
+        <childnode refid="73" relation="include">
+        </childnode>
+        <childnode refid="78" relation="include">
         </childnode>
       </node>
-      <node id="69">
+      <node id="71">
         <label>Utils/Common/Hashes.h</label>
         <link refid="Hashes_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="70" relation="include">
+        <childnode refid="72" relation="include">
         </childnode>
       </node>
       <node id="2">
@@ -70,14 +70,10 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="71">
+      <node id="73">
         <label>Utils/Common/Singleton.h</label>
         <link refid="Singleton_8h_source"/>
         <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="72" relation="include">
-        </childnode>
-        <childnode refid="73" relation="include">
         </childnode>
         <childnode refid="74" relation="include">
         </childnode>
@@ -85,167 +81,171 @@
         </childnode>
         <childnode refid="76" relation="include">
         </childnode>
-      </node>
-      <node id="98">
-        <label>Utils/Common/StringFormat.h</label>
-        <link refid="StringFormat_8h_source"/>
-        <childnode refid="81" relation="include">
+        <childnode refid="77" relation="include">
         </childnode>
-        <childnode refid="74" relation="include">
-        </childnode>
-        <childnode refid="72" relation="include">
-        </childnode>
-        <childnode refid="96" relation="include">
-        </childnode>
-        <childnode refid="99" relation="include">
-        </childnode>
-        <childnode refid="101" relation="include">
-        </childnode>
-        <childnode refid="102" relation="include">
-        </childnode>
-      </node>
-      <node id="101">
-        <label>Utils/Common/StringUtils.h</label>
-        <link refid="Utils_2inc_2Utils_2Common_2StringUtils_8h_source"/>
-        <childnode refid="81" relation="include">
+        <childnode refid="78" relation="include">
         </childnode>
       </node>
       <node id="100">
-        <label>Utils/Common/ThreadUtils.h</label>
-        <link refid="ThreadUtils_8h_source"/>
-        <childnode refid="93" relation="include">
+        <label>Utils/Common/StringFormat.h</label>
+        <link refid="StringFormat_8h_source"/>
+        <childnode refid="83" relation="include">
         </childnode>
-      </node>
-      <node id="79">
-        <label>Utils/Debug.h</label>
-        <link refid="Debug_8h_source"/>
-        <childnode refid="80" relation="include">
+        <childnode refid="76" relation="include">
         </childnode>
-        <childnode refid="71" relation="include">
-        </childnode>
-        <childnode refid="93" relation="include">
+        <childnode refid="74" relation="include">
         </childnode>
         <childnode refid="98" relation="include">
         </childnode>
+        <childnode refid="101" relation="include">
+        </childnode>
         <childnode refid="103" relation="include">
         </childnode>
+        <childnode refid="104" relation="include">
+        </childnode>
       </node>
-      <node id="80">
+      <node id="103">
+        <label>Utils/Common/StringUtils.h</label>
+        <link refid="Utils_2inc_2Utils_2Common_2StringUtils_8h_source"/>
+        <childnode refid="83" relation="include">
+        </childnode>
+      </node>
+      <node id="102">
+        <label>Utils/Common/ThreadUtils.h</label>
+        <link refid="ThreadUtils_8h_source"/>
+        <childnode refid="95" relation="include">
+        </childnode>
+      </node>
+      <node id="81">
+        <label>Utils/Debug.h</label>
+        <link refid="Debug_8h_source"/>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+        <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="100" relation="include">
+        </childnode>
+        <childnode refid="105" relation="include">
+        </childnode>
+      </node>
+      <node id="82">
         <label>Utils/FileSystem/Path.h</label>
         <link refid="Path_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="81" relation="include">
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
         </childnode>
         <childnode refid="74" relation="include">
         </childnode>
-        <childnode refid="72" relation="include">
-        </childnode>
-        <childnode refid="86" relation="include">
+        <childnode refid="88" relation="include">
         </childnode>
       </node>
-      <node id="92">
+      <node id="94">
         <label>Utils/Math/Axis.h</label>
         <link refid="Axis_8h_source"/>
-        <childnode refid="93" relation="include">
+        <childnode refid="95" relation="include">
         </childnode>
       </node>
-      <node id="81">
+      <node id="83">
         <label>Utils/Math/Mathematics.h</label>
         <link refid="Mathematics_8h_source"/>
         <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="82" relation="include">
-        </childnode>
-        <childnode refid="83" relation="include">
         </childnode>
         <childnode refid="84" relation="include">
         </childnode>
         <childnode refid="85" relation="include">
         </childnode>
-      </node>
-      <node id="95">
-        <label>Utils/Math/Quaternion.h</label>
-        <link refid="Quaternion_8h_source"/>
-        <childnode refid="81" relation="include">
+        <childnode refid="86" relation="include">
         </childnode>
-      </node>
-      <node id="91">
-        <label>Utils/Math/Vector2.h</label>
-        <link refid="Vector2_8h_source"/>
-        <childnode refid="81" relation="include">
-        </childnode>
-        <childnode refid="92" relation="include">
-        </childnode>
-      </node>
-      <node id="94">
-        <label>Utils/Math/Vector3.h</label>
-        <link refid="Vector3_8h_source"/>
-        <childnode refid="91" relation="include">
-        </childnode>
-        <childnode refid="95" relation="include">
-        </childnode>
-      </node>
-      <node id="96">
-        <label>Utils/Math/Vector4.h</label>
-        <link refid="Vector4_8h_source"/>
-        <childnode refid="81" relation="include">
-        </childnode>
-        <childnode refid="94" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
       </node>
       <node id="97">
-        <label>Utils/Math/Vector6.h</label>
-        <link refid="Vector6_8h_source"/>
-        <childnode refid="81" relation="include">
+        <label>Utils/Math/Quaternion.h</label>
+        <link refid="Quaternion_8h_source"/>
+        <childnode refid="83" relation="include">
+        </childnode>
+      </node>
+      <node id="93">
+        <label>Utils/Math/Vector2.h</label>
+        <link refid="Vector2_8h_source"/>
+        <childnode refid="83" relation="include">
         </childnode>
         <childnode refid="94" relation="include">
+        </childnode>
+      </node>
+      <node id="96">
+        <label>Utils/Math/Vector3.h</label>
+        <link refid="Vector3_8h_source"/>
+        <childnode refid="93" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
+        </childnode>
+      </node>
+      <node id="98">
+        <label>Utils/Math/Vector4.h</label>
+        <link refid="Vector4_8h_source"/>
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
+      </node>
+      <node id="99">
+        <label>Utils/Math/Vector6.h</label>
+        <link refid="Vector6_8h_source"/>
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
         </childnode>
       </node>
       <node id="6">
         <label>Utils/Memory/Allocator.h</label>
         <link refid="Allocator_8h_source"/>
       </node>
-      <node id="99">
+      <node id="101">
         <label>Utils/Platform/Platform.h</label>
         <link refid="Platform_8h_source"/>
-        <childnode refid="91" relation="include">
+        <childnode refid="93" relation="include">
         </childnode>
-        <childnode refid="100" relation="include">
+        <childnode refid="102" relation="include">
         </childnode>
-        <childnode refid="80" relation="include">
+        <childnode refid="82" relation="include">
         </childnode>
       </node>
-      <node id="73">
+      <node id="75">
         <label>Utils/Platform/Stacktrace.h</label>
         <link refid="Stacktrace_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="102">
+      <node id="104">
         <label>Utils/Profile/TracyContext.h</label>
         <link refid="TracyContext_8h_source"/>
       </node>
-      <node id="86">
+      <node id="88">
         <label>Utils/Serialization/ObjectDataAccessor.h</label>
         <link refid="ObjectDataAccessor_8h_source"/>
-        <childnode refid="87" relation="include">
+        <childnode refid="89" relation="include">
         </childnode>
       </node>
-      <node id="87">
+      <node id="89">
         <label>Utils/TypeTraits/TypeTraits.h</label>
         <link refid="TypeTraits_8h_source"/>
-        <childnode refid="69" relation="include">
+        <childnode refid="71" relation="include">
         </childnode>
-        <childnode refid="88" relation="include">
+        <childnode refid="90" relation="include">
         </childnode>
-        <childnode refid="91" relation="include">
-        </childnode>
-        <childnode refid="94" relation="include">
+        <childnode refid="93" relation="include">
         </childnode>
         <childnode refid="96" relation="include">
         </childnode>
-        <childnode refid="97" relation="include">
+        <childnode refid="98" relation="include">
+        </childnode>
+        <childnode refid="99" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -253,45 +253,45 @@
         <link refid="DataStorage_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="68" relation="include">
+        <childnode refid="70" relation="include">
         </childnode>
-        <childnode refid="79" relation="include">
+        <childnode refid="81" relation="include">
         </childnode>
       </node>
-      <node id="89">
+      <node id="91">
         <label>Utils/Types/Function.h</label>
         <link refid="Function_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="76">
+      <node id="78">
         <label>Utils/Types/Map.h</label>
         <link refid="Map_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="77" relation="include">
+        <childnode refid="79" relation="include">
         </childnode>
-        <childnode refid="78" relation="include">
+        <childnode refid="80" relation="include">
         </childnode>
       </node>
-      <node id="70">
+      <node id="72">
         <label>Utils/Types/MerkleTree.h</label>
         <link refid="MerkleTree_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="75">
+      <node id="77">
         <label>Utils/Types/SafePtrLockGuard.h</label>
         <link refid="SafePtrLockGuard_8h_source"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
-      <node id="74">
+      <node id="76">
         <label>Utils/Types/StringAtom.h</label>
         <link refid="StringAtom_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="69" relation="include">
+        <childnode refid="71" relation="include">
         </childnode>
       </node>
       <node id="4">
@@ -429,212 +429,222 @@
         </childnode>
         <childnode refid="67" relation="include">
         </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
       </node>
-      <node id="90">
+      <node id="92">
         <label>Codegen/EnumsFwd.generated.hpp</label>
       </node>
-      <node id="48">
+      <node id="49">
         <label>algorithm</label>
       </node>
-      <node id="49">
+      <node id="50">
         <label>any</label>
       </node>
       <node id="8">
         <label>array</label>
       </node>
-      <node id="43">
+      <node id="44">
         <label>atomic</label>
       </node>
-      <node id="40">
+      <node id="17">
+        <label>bitset</label>
+      </node>
+      <node id="41">
         <label>cassert</label>
       </node>
-      <node id="30">
+      <node id="31">
         <label>cctype</label>
       </node>
       <node id="14">
         <label>cfloat</label>
       </node>
-      <node id="31">
+      <node id="32">
         <label>charconv</label>
       </node>
-      <node id="56">
+      <node id="57">
         <label>chrono</label>
       </node>
-      <node id="41">
+      <node id="42">
         <label>cmath</label>
       </node>
-      <node id="26">
+      <node id="27">
         <label>codecvt</label>
       </node>
-      <node id="59">
+      <node id="60">
         <label>concepts</label>
       </node>
-      <node id="60">
+      <node id="61">
         <label>condition_variable</label>
       </node>
-      <node id="24">
+      <node id="25">
         <label>cstdarg</label>
       </node>
-      <node id="27">
+      <node id="28">
         <label>cstddef</label>
       </node>
       <node id="11">
         <label>cstdint</label>
       </node>
-      <node id="18">
+      <node id="19">
         <label>cstdio</label>
       </node>
       <node id="5">
         <label>cstdlib</label>
       </node>
-      <node id="33">
+      <node id="34">
         <label>cstring</label>
       </node>
-      <node id="53">
+      <node id="54">
         <label>ctime</label>
       </node>
-      <node id="46">
+      <node id="47">
         <label>exception</label>
       </node>
-      <node id="63">
+      <node id="64">
         <label>execution</label>
       </node>
-      <node id="78">
+      <node id="80">
         <label>flat_hash_map/flat_hash_map.hpp</label>
       </node>
-      <node id="67">
+      <node id="69">
         <label>fmt/color.h</label>
       </node>
-      <node id="65">
+      <node id="67">
         <label>fmt/format.h</label>
       </node>
-      <node id="66">
+      <node id="68">
         <label>fmt/printf.h</label>
       </node>
-      <node id="36">
+      <node id="37">
         <label>fstream</label>
       </node>
-      <node id="45">
+      <node id="46">
         <label>functional</label>
       </node>
-      <node id="82">
+      <node id="84">
         <label>glm/glm.hpp</label>
       </node>
-      <node id="85">
+      <node id="87">
         <label>glm/gtc/quaternion.hpp</label>
       </node>
-      <node id="83">
+      <node id="85">
         <label>glm/gtc/type_ptr.hpp</label>
       </node>
-      <node id="84">
+      <node id="86">
         <label>glm/gtx/string_cast.hpp</label>
       </node>
-      <node id="25">
+      <node id="26">
         <label>initializer_list</label>
       </node>
-      <node id="58">
+      <node id="59">
         <label>iomanip</label>
       </node>
-      <node id="19">
+      <node id="20">
         <label>iosfwd</label>
       </node>
-      <node id="54">
+      <node id="55">
         <label>iostream</label>
       </node>
       <node id="16">
         <label>limits</label>
       </node>
-      <node id="52">
+      <node id="53">
         <label>list</label>
       </node>
-      <node id="32">
+      <node id="33">
         <label>locale</label>
       </node>
       <node id="9">
         <label>map</label>
       </node>
-      <node id="35">
+      <node id="36">
         <label>memory</label>
       </node>
-      <node id="39">
+      <node id="40">
         <label>mutex</label>
       </node>
-      <node id="62">
+      <node id="63">
         <label>numbers</label>
       </node>
-      <node id="61">
+      <node id="62">
         <label>numeric</label>
       </node>
       <node id="13">
         <label>optional</label>
       </node>
-      <node id="37">
+      <node id="38">
         <label>ostream</label>
       </node>
-      <node id="38">
+      <node id="39">
         <label>queue</label>
       </node>
-      <node id="57">
+      <node id="58">
         <label>random</label>
       </node>
-      <node id="42">
+      <node id="43">
         <label>ranges</label>
       </node>
-      <node id="55">
+      <node id="56">
         <label>ratio</label>
       </node>
-      <node id="20">
+      <node id="21">
         <label>regex</label>
       </node>
       <node id="12">
         <label>set</label>
       </node>
-      <node id="23">
+      <node id="24">
         <label>shared_mutex</label>
       </node>
       <node id="15">
         <label>span</label>
       </node>
-      <node id="77">
+      <node id="79">
         <label>sparsehash/dense_hash_map.h</label>
       </node>
-      <node id="51">
+      <node id="52">
         <label>sstream</label>
       </node>
-      <node id="29">
+      <node id="30">
         <label>stack</label>
       </node>
-      <node id="21">
+      <node id="22">
         <label>stdexcept</label>
       </node>
       <node id="7">
         <label>string</label>
       </node>
-      <node id="22">
+      <node id="23">
         <label>string_view</label>
       </node>
-      <node id="50">
+      <node id="51">
         <label>thread</label>
       </node>
-      <node id="17">
+      <node id="18">
         <label>type_traits</label>
       </node>
-      <node id="47">
+      <node id="48">
         <label>unordered_map</label>
       </node>
-      <node id="28">
+      <node id="29">
         <label>unordered_set</label>
       </node>
-      <node id="44">
+      <node id="45">
         <label>utility</label>
       </node>
-      <node id="34">
+      <node id="35">
         <label>variant</label>
       </node>
       <node id="10">
         <label>vector</label>
       </node>
-      <node id="64">
+      <node id="65">
+        <label>xxHash/xxhash.h</label>
+      </node>
+      <node id="66">
         <label>zlib.h</label>
       </node>
     </incdepgraph>
@@ -712,82 +722,90 @@
         </childnode>
         <childnode refid="73" relation="include">
         </childnode>
-        <childnode refid="77" relation="include">
+        <childnode refid="75" relation="include">
         </childnode>
         <childnode refid="78" relation="include">
         </childnode>
-        <childnode refid="80" relation="include">
+        <childnode refid="79" relation="include">
         </childnode>
         <childnode refid="81" relation="include">
         </childnode>
         <childnode refid="82" relation="include">
         </childnode>
+        <childnode refid="83" relation="include">
+        </childnode>
       </node>
       <node id="70">
+        <label>Engine/inc/Engine/GUI/PropertyDrawers/AssociativePropertyDrawer.h</label>
+        <link refid="AssociativePropertyDrawer_8h_source"/>
+      </node>
+      <node id="71">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/BehaviourNamePropertyDrawer.h</label>
         <link refid="BehaviourNamePropertyDrawer_8h_source"/>
       </node>
-      <node id="74">
+      <node id="76">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/BehaviourPropertyDrawer.h</label>
         <link refid="BehaviourPropertyDrawer_8h_source"/>
       </node>
-      <node id="71">
+      <node id="72">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/BitMapPropertyDrawer.h</label>
         <link refid="BitMapPropertyDrawer_8h_source"/>
       </node>
-      <node id="75">
+      <node id="77">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/EntityRefPropertyDrawer.h</label>
         <link refid="EntityRefPropertyDrawer_8h_source"/>
       </node>
-      <node id="72">
+      <node id="73">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/EnumPropertyDrawer.h</label>
         <link refid="EnumPropertyDrawer_8h_source"/>
+        <childnode refid="74" relation="include">
+        </childnode>
       </node>
-      <node id="76">
+      <node id="74">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h</label>
         <link refid="MaterialDataPropertyDrawer_8h_source"/>
       </node>
-      <node id="79">
+      <node id="80">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/MaterialPropertyDrawer.h</label>
         <link refid="MaterialPropertyDrawer_8h_source"/>
       </node>
-      <node id="73">
+      <node id="75">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/ObjectPropertyDrawer.h</label>
         <link refid="ObjectPropertyDrawer_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="74" relation="include">
-        </childnode>
-        <childnode refid="75" relation="include">
-        </childnode>
         <childnode refid="76" relation="include">
         </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
       </node>
-      <node id="77">
+      <node id="78">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/PathPropertyDrawer.h</label>
         <link refid="PathPropertyDrawer_8h_source"/>
       </node>
-      <node id="78">
+      <node id="79">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h</label>
         <link refid="PointerPropertyDrawer_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="79" relation="include">
+        <childnode refid="80" relation="include">
         </childnode>
       </node>
-      <node id="80">
+      <node id="81">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/RectPropertyDrawer.h</label>
         <link refid="RectPropertyDrawer_8h_source"/>
       </node>
-      <node id="81">
+      <node id="82">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/StringPropertyDrawer.h</label>
         <link refid="StringPropertyDrawer_8h_source"/>
       </node>
-      <node id="82">
+      <node id="83">
         <label>Engine/inc/Engine/GUI/PropertyDrawers/VectorPropertyDrawer.h</label>
         <link refid="VectorPropertyDrawer_8h_source"/>
       </node>
@@ -823,39 +841,39 @@
         <label>Engine/inc/Engine/Scripting/ScriptableContext.h</label>
         <link refid="ScriptableContext_8h_source"/>
       </node>
-      <node id="86">
+      <node id="87">
         <label>Engine/inc/Engine/States/ChunkSystemState.h</label>
         <link refid="ChunkSystemState_8h_source"/>
       </node>
-      <node id="87">
+      <node id="88">
         <label>Engine/inc/Engine/States/DeltaTimeState.h</label>
         <link refid="DeltaTimeState_8h_source"/>
       </node>
-      <node id="88">
+      <node id="89">
         <label>Engine/inc/Engine/States/DrawState.h</label>
         <link refid="DrawState_8h_source"/>
       </node>
-      <node id="89">
+      <node id="90">
         <label>Engine/inc/Engine/States/InitializeState.h</label>
         <link refid="InitializeState_8h_source"/>
       </node>
-      <node id="90">
+      <node id="91">
         <label>Engine/inc/Engine/States/PollEventsState.h</label>
         <link refid="PollEventsState_8h_source"/>
       </node>
-      <node id="91">
+      <node id="92">
         <label>Engine/inc/Engine/States/PrepareState.h</label>
         <link refid="PrepareState_8h_source"/>
       </node>
-      <node id="92">
+      <node id="93">
         <label>Engine/inc/Engine/States/SceneUpdateState.h</label>
         <link refid="SceneUpdateState_8h_source"/>
       </node>
-      <node id="93">
+      <node id="94">
         <label>Engine/inc/Engine/States/StopState.h</label>
         <link refid="StopState_8h_source"/>
       </node>
-      <node id="94">
+      <node id="95">
         <label>Engine/inc/Engine/States/SubmitState.h</label>
         <link refid="SubmitState_8h_source"/>
       </node>
@@ -863,7 +881,7 @@
         <label>Engine/inc/Engine/World/EngineScene.h</label>
         <link refid="EngineScene_8h_source"/>
       </node>
-      <node id="96">
+      <node id="97">
         <label>Engine/inc/Engine/World/VisualChunk.h</label>
         <link refid="VisualChunk_8h_source"/>
       </node>
@@ -965,7 +983,7 @@
         <childnode refid="20" relation="include">
         </childnode>
       </node>
-      <node id="83">
+      <node id="84">
         <label>Engine/libs/Graphics/inc/Graphics/Memory/SSBO.h</label>
         <link refid="SSBO_8h_source"/>
         <childnode refid="52" relation="include">
@@ -996,7 +1014,7 @@
         </childnode>
         <childnode refid="52" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
+        <childnode refid="84" relation="include">
         </childnode>
       </node>
       <node id="24">
@@ -1122,7 +1140,7 @@
         </childnode>
         <childnode refid="34" relation="include">
         </childnode>
-        <childnode refid="84" relation="include">
+        <childnode refid="85" relation="include">
         </childnode>
       </node>
       <node id="45">
@@ -1187,12 +1205,10 @@
         <label>Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h</label>
         <link refid="LookAtComponent_8h_source"/>
       </node>
-      <node id="85">
+      <node id="86">
         <label>Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h</label>
         <link refid="ThreadWorker_8h_source"/>
         <childnode refid="41" relation="include">
-        </childnode>
-        <childnode refid="86" relation="include">
         </childnode>
         <childnode refid="87" relation="include">
         </childnode>
@@ -1210,8 +1226,10 @@
         </childnode>
         <childnode refid="94" relation="include">
         </childnode>
+        <childnode refid="95" relation="include">
+        </childnode>
       </node>
-      <node id="84">
+      <node id="85">
         <label>Engine/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h</label>
         <link refid="ReflectionTestComponent_8h_source"/>
       </node>
@@ -1224,17 +1242,17 @@
         </childnode>
         <childnode refid="21" relation="include">
         </childnode>
-        <childnode refid="85" relation="include">
+        <childnode refid="86" relation="include">
         </childnode>
-        <childnode refid="95" relation="include">
+        <childnode refid="96" relation="include">
         </childnode>
         <childnode refid="66" relation="include">
         </childnode>
       </node>
-      <node id="95">
+      <node id="96">
         <label>Engine/libs/Utils/inc/Utils/World/Chunk.h</label>
         <link refid="Chunk_8h_source"/>
-        <childnode refid="96" relation="include">
+        <childnode refid="97" relation="include">
         </childnode>
       </node>
       <node id="66">
@@ -1345,180 +1363,197 @@
 <codeline lineno="72"><highlight class="normal"></highlight></codeline>
 <codeline lineno="74"><highlight class="normal"></highlight></codeline>
 <codeline lineno="75" refid="classSR__HTYPES__NS_1_1DataStorage_1af9dfe6eb7c243a271e9cc752256320f3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DataStorage::SetPointer(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name,<sp/>T*<sp/>pPointer)<sp/>{</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__HTYPES__NS_1_1DataStorage_1af9dfe6eb7c243a271e9cc752256320f3" kindref="member">SetPointer</ref>(SR_HASH_STR_REGISTER(name),<sp/>pPointer);</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"></highlight></codeline>
-<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DataStorage::SetPointer(T*<sp/>pPointer)<sp/>{</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SetPointer(SR_HASH_TYPE_NAME_STR_REGISTER(T),<sp/>pPointer);</highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"></highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>T<sp/>*DataStorage::GetPointer(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name)</highlight><highlight class="keyword"><sp/>const<sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GetPointer&lt;T&gt;(SR_HASH_STR_REGISTER(name));</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"></highlight></codeline>
-<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>T<sp/>*DataStorage::GetPointer()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GetPointer&lt;T&gt;(SR_HASH_TYPE_NAME_STR_REGISTER(T));</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"></highlight></codeline>
-<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DataStorage::SetValue(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;name,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T<sp/>&amp;value)<sp/>{</highlight></codeline>
-<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SetValue(SR_HASH_STR_REGISTER(name),<sp/>value);</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_TRACY_ZONE;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__HTYPES__NS_1_1DataStorage_1af9dfe6eb7c243a271e9cc752256320f3" kindref="member">SetPointer</ref>(SR_HASH_STR_REGISTER(name),<sp/>pPointer);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DataStorage::SetPointer(T*<sp/>pPointer)<sp/>{</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_TRACY_ZONE;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SetPointer(SR_HASH_TYPE_NAME_STR_REGISTER(T),<sp/>pPointer);</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>T<sp/>*DataStorage::GetPointer(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name)</highlight><highlight class="keyword"><sp/>const<sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_TRACY_ZONE;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GetPointer&lt;T&gt;(SR_HASH_STR_REGISTER(name));</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>T<sp/>*DataStorage::GetPointer()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_TRACY_ZONE;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GetPointer&lt;T&gt;(SR_HASH_TYPE_NAME_STR_REGISTER(T));</highlight></codeline>
 <codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="94"><highlight class="normal"></highlight></codeline>
-<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DataStorage::SetValue(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T<sp/>&amp;value)<sp/>{</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SetValue(SR_HASH_TYPE_NAME_STR_REGISTER(T),<sp/>value);</highlight></codeline>
-<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="98"><highlight class="normal"></highlight></codeline>
-<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>T<sp/>DataStorage::GetValue(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>name)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GetValue&lt;T&gt;(SR_HASH_STR_REGISTER(name));</highlight></codeline>
-<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="102"><highlight class="normal"></highlight></codeline>
-<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>T<sp/>DataStorage::GetValue(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GetValue&lt;T&gt;(SR_HASH_STR_REGISTER(name));</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"></highlight></codeline>
-<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>T<sp/>DataStorage::GetValue()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GetValue&lt;T&gt;(SR_HASH_TYPE_NAME_STR_REGISTER(T));</highlight></codeline>
-<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"></highlight></codeline>
-<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>T<sp/>DataStorage::GetValueDef(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;<sp/>def)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GetValueDef&lt;T&gt;(SR_HASH_STR_REGISTER(name),<sp/>def);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DataStorage::SetValue(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;name,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T<sp/>&amp;value)<sp/>{</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_TRACY_ZONE;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SetValue(SR_HASH_STR_REGISTER(name),<sp/>value);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DataStorage::SetValue(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T<sp/>&amp;value)<sp/>{</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_TRACY_ZONE;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SetValue(SR_HASH_TYPE_NAME_STR_REGISTER(T),<sp/>value);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>T<sp/>DataStorage::GetValue(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>name)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_TRACY_ZONE;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GetValue&lt;T&gt;(SR_HASH_STR_REGISTER(name));</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>T<sp/>DataStorage::GetValue(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_TRACY_ZONE;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GetValue&lt;T&gt;(SR_HASH_STR_REGISTER(name));</highlight></codeline>
 <codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="114"><highlight class="normal"></highlight></codeline>
-<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>T<sp/>DataStorage::GetValueDef(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;<sp/>def)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GetValueDef&lt;T&gt;(SR_HASH_TYPE_NAME_STR_REGISTER(T),<sp/>def);</highlight></codeline>
-<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="118"><highlight class="normal"></highlight></codeline>
-<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>T<sp/>*DataStorage::GetPointerDef(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name,<sp/>T<sp/>*def)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GetPointerDef&lt;T&gt;(SR_HASH_STR_REGISTER(name),<sp/>def);</highlight></codeline>
-<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="122"><highlight class="normal"></highlight></codeline>
-<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>T<sp/>*DataStorage::GetPointerDef(T<sp/>*def)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GetPointerDef&lt;T&gt;(SR_HASH_TYPE_NAME_STR_REGISTER(T),<sp/>def);</highlight></codeline>
-<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="126"><highlight class="normal"></highlight></codeline>
-<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>DataStorage::RemovePointer()<sp/>{</highlight></codeline>
-<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>RemovePointer&lt;T&gt;(SR_HASH_TYPE_NAME_STR_REGISTER(T));</highlight></codeline>
-<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="130"><highlight class="normal"></highlight></codeline>
-<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>DataStorage::RemovePointer(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name)<sp/>{</highlight></codeline>
-<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>RemovePointer&lt;T&gt;(SR_HASH_STR_REGISTER(name));</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>T<sp/>DataStorage::GetValue()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_TRACY_ZONE;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GetValue&lt;T&gt;(SR_HASH_TYPE_NAME_STR_REGISTER(T));</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>T<sp/>DataStorage::GetValueDef(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;<sp/>def)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_TRACY_ZONE;</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GetValueDef&lt;T&gt;(SR_HASH_STR_REGISTER(name),<sp/>def);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>T<sp/>DataStorage::GetValueDef(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;<sp/>def)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_TRACY_ZONE;</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GetValueDef&lt;T&gt;(SR_HASH_TYPE_NAME_STR_REGISTER(T),<sp/>def);</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>T<sp/>*DataStorage::GetPointerDef(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name,<sp/>T<sp/>*def)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_TRACY_ZONE;</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GetPointerDef&lt;T&gt;(SR_HASH_STR_REGISTER(name),<sp/>def);</highlight></codeline>
 <codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="134"><highlight class="normal"></highlight></codeline>
-<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>DataStorage::RemoveValue(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name)<sp/>{</highlight></codeline>
-<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>RemoveValue&lt;T&gt;(SR_HASH_STR_REGISTER(name));</highlight></codeline>
-<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="138"><highlight class="normal"></highlight></codeline>
-<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>DataStorage::RemoveValue()<sp/>{</highlight></codeline>
-<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>RemoveValue&lt;T&gt;(SR_HASH_TYPE_NAME_STR_REGISTER(T));</highlight></codeline>
-<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>T<sp/>*DataStorage::GetPointerDef(T<sp/>*def)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_TRACY_ZONE;</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GetPointerDef&lt;T&gt;(SR_HASH_TYPE_NAME_STR_REGISTER(T),<sp/>def);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>DataStorage::RemovePointer()<sp/>{</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_TRACY_ZONE;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>RemovePointer&lt;T&gt;(SR_HASH_TYPE_NAME_STR_REGISTER(T));</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="144"><highlight class="normal"></highlight></codeline>
-<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DataStorage::SetPointer(uint64_t<sp/>hashCore,<sp/>T<sp/>*pointer)<sp/>{</highlight></codeline>
-<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!(m_pointers[hashCore]<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(pointer)))<sp/>{</highlight></codeline>
-<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_ERROR(</highlight><highlight class="stringliteral">&quot;DataStorage::SetPointer()<sp/>:<sp/>invalid<sp/>pointer!&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="150"><highlight class="normal"></highlight></codeline>
-<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DataStorage::SetValue(uint64_t<sp/>hashCode,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T<sp/>&amp;value)<sp/>{</highlight></codeline>
-<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_values[hashCode]<sp/>=<sp/>value;</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>DataStorage::RemovePointer(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name)<sp/>{</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_TRACY_ZONE;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>RemovePointer&lt;T&gt;(SR_HASH_STR_REGISTER(name));</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>DataStorage::RemoveValue(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name)<sp/>{</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_TRACY_ZONE;</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>RemoveValue&lt;T&gt;(SR_HASH_STR_REGISTER(name));</highlight></codeline>
 <codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="154"><highlight class="normal"></highlight></codeline>
-<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>T<sp/>*DataStorage::GetPointer(uint64_t<sp/>hashCode)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(m_pointers.count(hashCode)<sp/>==<sp/>0)<sp/>{</highlight></codeline>
-<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SRHalt(</highlight><highlight class="stringliteral">&quot;DataStorage::GetPointer()<sp/>:<sp/>pointer<sp/>not<sp/>found!&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="160"><highlight class="normal"></highlight></codeline>
-<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(T*<sp/>ptr<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">T*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(m_pointers.at(hashCode)))<sp/>{</highlight></codeline>
-<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ptr;</highlight></codeline>
-<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="164"><highlight class="normal"></highlight></codeline>
-<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SRHalt(</highlight><highlight class="stringliteral">&quot;DataStorage::GetPointer()<sp/>:<sp/>invalid<sp/>pointer!&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="166"><highlight class="normal"></highlight></codeline>
-<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="169"><highlight class="normal"></highlight></codeline>
-<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>T<sp/>*DataStorage::GetPointerDef(uint64_t<sp/>hashCode,<sp/>T<sp/>*def)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(m_pointers.count(hashCode)<sp/>==<sp/>0)<sp/>{</highlight></codeline>
-<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>def;</highlight></codeline>
-<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="174"><highlight class="normal"></highlight></codeline>
-<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(T*<sp/>ptr<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">T*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(m_pointers.at(hashCode)))</highlight></codeline>
-<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ptr;</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>DataStorage::RemoveValue()<sp/>{</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_TRACY_ZONE;</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>RemoveValue&lt;T&gt;(SR_HASH_TYPE_NAME_STR_REGISTER(T));</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DataStorage::SetPointer(uint64_t<sp/>hashCore,<sp/>T<sp/>*pointer)<sp/>{</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!(m_pointers[hashCore]<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(pointer)))<sp/>{</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_ERROR(</highlight><highlight class="stringliteral">&quot;DataStorage::SetPointer()<sp/>:<sp/>invalid<sp/>pointer!&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DataStorage::SetValue(uint64_t<sp/>hashCode,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T<sp/>&amp;value)<sp/>{</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_values[hashCode]<sp/>=<sp/>value;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>T<sp/>*DataStorage::GetPointer(uint64_t<sp/>hashCode)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(m_pointers.count(hashCode)<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SRHalt(</highlight><highlight class="stringliteral">&quot;DataStorage::GetPointer()<sp/>:<sp/>pointer<sp/>not<sp/>found!&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="177"><highlight class="normal"></highlight></codeline>
-<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_ERROR(</highlight><highlight class="stringliteral">&quot;DataStorage::GetPointerDef()<sp/>:<sp/>invalid<sp/>pointer!&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="179"><highlight class="normal"></highlight></codeline>
-<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>def;</highlight></codeline>
-<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="182"><highlight class="normal"></highlight></codeline>
-<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>T<sp/>DataStorage::GetValue(uint64_t<sp/>hashCode)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(m_values.count(hashCode)<sp/>==<sp/>0)<sp/>{</highlight></codeline>
-<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SRHalt(</highlight><highlight class="stringliteral">&quot;DataStorage::GetValue()<sp/>:<sp/>value<sp/>not<sp/>found!&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>T();</highlight></codeline>
-<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="188"><highlight class="normal"></highlight></codeline>
-<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::any_cast&lt;T&gt;(m_values.at(hashCode));</highlight></codeline>
-<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::bad_any_cast&amp;<sp/>e)<sp/>{</highlight></codeline>
-<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SRHalt(</highlight><highlight class="stringliteral">&quot;DataStorage::GetValue()<sp/>:<sp/>bad<sp/>cast!&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>T();</highlight></codeline>
-<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="197"><highlight class="normal"></highlight></codeline>
-<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>T<sp/>DataStorage::GetValueDef(uint64_t<sp/>hashCode,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T<sp/>&amp;def)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(m_values.count(hashCode)<sp/>==<sp/>0)<sp/>{</highlight></codeline>
-<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>def;</highlight></codeline>
-<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="202"><highlight class="normal"></highlight></codeline>
-<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::any_cast&lt;T&gt;(m_values.at(hashCode));</highlight></codeline>
-<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::bad_any_cast&amp;<sp/>e)<sp/>{</highlight></codeline>
-<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SRHalt(</highlight><highlight class="stringliteral">&quot;DataStorage::GetValueDef()<sp/>:<sp/>bad<sp/>cast!&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>def;</highlight></codeline>
-<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="210"><highlight class="normal"></highlight></codeline>
-<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="212"><highlight class="normal"></highlight></codeline>
-<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>DataStorage::RemovePointer(uint64_t<sp/>hashCode)<sp/>{</highlight></codeline>
-<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(m_pointers.count(hashCode)<sp/>==<sp/>0)<sp/>{</highlight></codeline>
-<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="217"><highlight class="normal"></highlight></codeline>
-<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_pointers.erase(hashCode);</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(T*<sp/>ptr<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">T*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(m_pointers.at(hashCode)))<sp/>{</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ptr;</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SRHalt(</highlight><highlight class="stringliteral">&quot;DataStorage::GetPointer()<sp/>:<sp/>invalid<sp/>pointer!&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"></highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>T<sp/>*DataStorage::GetPointerDef(uint64_t<sp/>hashCode,<sp/>T<sp/>*def)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(m_pointers.count(hashCode)<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>def;</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"></highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(T*<sp/>ptr<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">T*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(m_pointers.at(hashCode)))</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ptr;</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_ERROR(</highlight><highlight class="stringliteral">&quot;DataStorage::GetPointerDef()<sp/>:<sp/>invalid<sp/>pointer!&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>def;</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"></highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>T<sp/>DataStorage::GetValue(uint64_t<sp/>hashCode)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(m_values.count(hashCode)<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SRHalt(</highlight><highlight class="stringliteral">&quot;DataStorage::GetValue()<sp/>:<sp/>value<sp/>not<sp/>found!&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>T();</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"></highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::any_cast&lt;T&gt;(m_values.at(hashCode));</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::bad_any_cast&amp;<sp/>e)<sp/>{</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SRHalt(</highlight><highlight class="stringliteral">&quot;DataStorage::GetValue()<sp/>:<sp/>bad<sp/>cast!&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>T();</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"></highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>T<sp/>DataStorage::GetValueDef(uint64_t<sp/>hashCode,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T<sp/>&amp;def)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(m_values.count(hashCode)<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>def;</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="219"><highlight class="normal"></highlight></codeline>
-<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="222"><highlight class="normal"></highlight></codeline>
-<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>DataStorage::RemoveValue(uint64_t<sp/>hashCode)<sp/>{</highlight></codeline>
-<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(m_values.count(hashCode)<sp/>==<sp/>0)<sp/>{</highlight></codeline>
-<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::any_cast&lt;T&gt;(m_values.at(hashCode));</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::bad_any_cast&amp;<sp/>e)<sp/>{</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SRHalt(</highlight><highlight class="stringliteral">&quot;DataStorage::GetValueDef()<sp/>:<sp/>bad<sp/>cast!&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>def;</highlight></codeline>
 <codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="227"><highlight class="normal"></highlight></codeline>
-<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_values.erase(hashCode);</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="229"><highlight class="normal"></highlight></codeline>
-<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="232"><highlight class="normal"></highlight></codeline>
-<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>std::vector&lt;std::pair&lt;std::string,<sp/>T&gt;&gt;<sp/>DataStorage::GetValues()<sp/>{</highlight></codeline>
-<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;std::pair&lt;std::string,<sp/>T&gt;&gt;<sp/>values;</highlight></codeline>
-<codeline lineno="235"><highlight class="normal"></highlight></codeline>
-<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;&amp;<sp/>[hash,<sp/>any]<sp/>:<sp/>m_values)<sp/>{</highlight></codeline>
-<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;&amp;<sp/>type<sp/>=<sp/>std::any_cast&lt;T&gt;(any);</highlight></codeline>
-<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>values.emplace_back(std::make_pair(SR_HASH_TO_STR(hash),<sp/>type));</highlight></codeline>
-<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::bad_any_cast&amp;<sp/>e)<sp/>{</highlight></codeline>
-<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">continue</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="245"><highlight class="normal"></highlight></codeline>
-<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>values;</highlight></codeline>
-<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="248"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>DataStorage::RemovePointer(uint64_t<sp/>hashCode)<sp/>{</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(m_pointers.count(hashCode)<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"></highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_pointers.erase(hashCode);</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"></highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"></highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>DataStorage::RemoveValue(uint64_t<sp/>hashCode)<sp/>{</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(m_values.count(hashCode)<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"></highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_values.erase(hashCode);</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"></highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="249"><highlight class="normal"></highlight></codeline>
-<codeline lineno="250"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_DATASTORAGE_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/>std::vector&lt;std::pair&lt;std::string,<sp/>T&gt;&gt;<sp/>DataStorage::GetValues()<sp/>{</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;std::pair&lt;std::string,<sp/>T&gt;&gt;<sp/>values;</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"></highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;&amp;<sp/>[hash,<sp/>any]<sp/>:<sp/>m_values)<sp/>{</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;&amp;<sp/>type<sp/>=<sp/>std::any_cast&lt;T&gt;(any);</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>values.emplace_back(std::make_pair(SR_HASH_TO_STR(hash),<sp/>type));</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::bad_any_cast&amp;<sp/>e)<sp/>{</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">continue</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"></highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>values;</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="265"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"></highlight></codeline>
+<codeline lineno="267"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_DATASTORAGE_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="Engine/libs/Utils/inc/Utils/Types/DataStorage.h"/>
   </compounddef>

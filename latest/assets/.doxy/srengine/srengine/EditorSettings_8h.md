@@ -10,7 +10,8 @@
 
 
 
-* `#include <Utils/Settings.h>`
+* `#include <Engine/macros.h>`
+* `#include <Utils/Resources/Asset.h>`
 
 
 
@@ -36,6 +37,7 @@
 | Type | Name |
 | ---: | :--- |
 | class | [**EditorSettings**](classSR__CORE__NS_1_1EditorSettings.md) <br> |
+| struct | [**EditorSettingsIconInfo**](structSR__CORE__NS_1_1EditorSettingsIconInfo.md) <br> |
 
 
 

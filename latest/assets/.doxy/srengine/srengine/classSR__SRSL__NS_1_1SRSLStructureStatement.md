@@ -99,7 +99,7 @@ Inherits the following classes: [SR\_SRSL\_NS::SRSLLexicalUnit](classSR__SRSL__N
 | Type | Name |
 | ---: | :--- |
 |  bool | [**HasDynamicArray**](#function-hasdynamicarray) () const<br> |
-|   | [**SRSLStructureStatement**](#function-srslstructurestatement) () = default<br> |
+|   | [**SRSLStructureStatement**](#function-srslstructurestatement) () <br> |
 |   | [**~SRSLStructureStatement**](#function-srslstructurestatement) () override<br> |
 
 
@@ -109,6 +109,8 @@ See [SR\_SRSL\_NS::SRSLLexicalUnit](classSR__SRSL__NS_1_1SRSLLexicalUnit.md)
 
 | Type | Name |
 | ---: | :--- |
+|  SR\_NODISCARD LexicalUnitType | [**GetLexicalUnitType**](classSR__SRSL__NS_1_1SRSLLexicalUnit.md#function-getlexicalunittype) () const<br> |
+|   | [**SRSLLexicalUnit**](classSR__SRSL__NS_1_1SRSLLexicalUnit.md#function-srsllexicalunit) (LexicalUnitType type) <br> |
 | virtual SR\_NODISCARD std::string | [**ToString**](classSR__SRSL__NS_1_1SRSLLexicalUnit.md#function-tostring) (uint32\_t deep) const<br> |
 
 
@@ -257,7 +259,7 @@ bool SR_SRSL_NS::SRSLStructureStatement::HasDynamicArray () const
 ### function SRSLStructureStatement 
 
 ```C++
-SR_SRSL_NS::SRSLStructureStatement::SRSLStructureStatement () = default
+inline SR_SRSL_NS::SRSLStructureStatement::SRSLStructureStatement () 
 ```
 
 

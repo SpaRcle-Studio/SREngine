@@ -15,14 +15,16 @@
 #ifndef SR_ENGINE_EDITORSETTINGS_H
 #define SR_ENGINE_EDITORSETTINGS_H
 
-#include <Utils/Settings.h>
+#include <Engine/macros.h>
+
+#include <Utils/Resources/Asset.h>
 
 namespace SR_CORE_NS {
     SR_ENUM_NS_CLASS_T(EditorIcon, uint32_t,
           Unknown,
           Material, Prefab, Asset,
           File, Shader, Scene,
-          Back,
+          Back, RenderTechnique,
           Play,
           Stop,
           PauseActive,
@@ -44,31 +46,25 @@ namespace SR_CORE_NS {
           Audio
     );
 
-    class EditorSettings : public SR_UTILS_NS::GlobalSettings<EditorSettings> {
-        SR_REGISTER_SINGLETON(EditorSettings)
-        friend class SR_UTILS_NS::GlobalSettings<EditorSettings>;
-        using Icons = std::map<EditorIcon, SR_UTILS_NS::Path>;
-        using Super = SR_UTILS_NS::GlobalSettings<EditorSettings>;
-    protected:
-        ~EditorSettings() override = default;
+    struct EditorSettingsIconInfo : public SR_UTILS_NS::Serializable {
+        SR_STRUCT()
+
+        
+        SR_UTILS_NS::Path path;
+        std::string extensions;
+    };
+
+    class EditorSettings : public SR_UTILS_NS::Asset {
+        SR_CLASS()
+    public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<EditorSettings>;
 
     public:
-        SR_NODISCARD Icons GetIcons() const;
-        SR_NODISCARD SR_UTILS_NS::Path GetRenderTechnique() const;
-        SR_NODISCARD SR_UTILS_NS::Path GetPrefabEditorRenderTechnique() const;
+        SR_NODISCARD const std::map<EditorIcon, EditorSettingsIconInfo>& GetIcons() const noexcept { return m_icons; }
         SR_NODISCARD bool IsNeedDebugChunks() const noexcept { return m_debugChunks; }
 
-        SR_NODISCARD SR_UTILS_NS::Path InitializeResourcePath() const override;
-
-    protected:
-        void ClearSettings() override;
-        bool LoadSettings(const SR_XML_NS::Node& node) override;
-
     private:
-        Icons m_icons;
-
-        SR_UTILS_NS::Path m_renderTechnique;
-        SR_UTILS_NS::Path m_prefabEditorRenderTechnique;
+        std::map<EditorIcon, EditorSettingsIconInfo> m_icons;
 
         bool m_debugChunks = false;
 

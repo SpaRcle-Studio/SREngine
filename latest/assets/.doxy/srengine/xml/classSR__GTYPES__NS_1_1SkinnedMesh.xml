@@ -514,7 +514,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="16" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="16" bodyend="70"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="16" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="16" bodyend="72"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>BaseComponent</name></member>
@@ -547,6 +547,7 @@
       <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a95a1f94c5e642a43c154a24397273694" prot="private" virt="virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>GetIndices</name></member>
       <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1a898c8bb0651bfcdb5c01125c8b34bdc8" prot="public" virt="virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>GetIndicesCount</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a1d06cec76546a9849a50b484293b684a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>GetMaterial</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1aa219eff968aacb5e5f58678fe066fbc8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>GetMaterial</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1adff93b7a6119dc188a28c6c0eb8a8e37" prot="public" virt="virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>GetMatrix</name></member>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a1f90420ae0c606687c75766d55d95621" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>GetMeshId</name></member>
       <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a5b8a1064f113a20c908fc4184bd7e5bd" prot="public" virt="virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>GetMeshIdentifier</name></member>
@@ -563,7 +564,6 @@
       <member refid="classSR__UTILS__NS_1_1Component_1a499a53cb08f173222c9a0bbc06af98fd" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>GetRoot</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a0baa97c9e541c9150845fcd338b6f4f8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>GetScene</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a95a4325a27a80c7fbbf65c8ab86579a5" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>GetSceneObject</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Mesh_1a19c90c90366d059d27a9465ac4c46c8a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>GetShader</name></member>
       <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a76f2368ff33497245826c71a26ad3a30" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>GetSkeletonRef</name></member>
       <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a1cea0e11ad39db087938dba00f6bac82" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>GetSkeletonRef</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a1db605ebfd240f85388761927305ab1e" prot="public" virt="virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>GetSortingPriority</name></member>
@@ -658,7 +658,7 @@
       <member refid="classSR__UTILS__NS_1_1Component_1a5b3c94dcc9fd4c8f2ed748601d0c4e2a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>OriginType</name></member>
       <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a652dc254b5c29c2d69473e2059788a90" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>Ptr</name></member>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a164db9b7fa7f3789548e3fb65af02155" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>RawMeshPtr</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Mesh_1a63ebff43aced52991bb2c7a97bccbb5a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>RenderQueues</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a4ba19db4597d73a9c04421f31fa943f7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>RenderQueues</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1add25474bae10f83e8854f3e93c4f7070" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>RenderScenePtr</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a16b24e7c8796db2f1d87bb2fdf22b5c0" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>ReRegisterMesh</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a6e97391d1dc50a29f1bdc0179c925019" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>SceneObjectPtr</name></member>

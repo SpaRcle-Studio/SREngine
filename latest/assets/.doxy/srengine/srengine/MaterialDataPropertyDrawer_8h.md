@@ -11,6 +11,7 @@
 
 
 * `#include <Engine/GUI/PropertyDrawers/ObjectPropertyDrawer.h>`
+* `#include <Engine/GUI/PropertyDrawers/EnumPropertyDrawer.h>`
 
 
 

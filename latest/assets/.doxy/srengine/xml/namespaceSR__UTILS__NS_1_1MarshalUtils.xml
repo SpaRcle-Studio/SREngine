@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="18" column="54" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="18" bodyend="79"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="18" column="54" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="18" bodyend="84"/>
       </memberdef>
       <memberdef kind="function" id="BaseMarshal_8h_1a4aa1089ae4e495d73eadb766b7078318" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -101,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="81" column="51" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="81" bodyend="146"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="86" column="51" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="86" bodyend="156"/>
       </memberdef>
       <memberdef kind="function" id="BaseMarshal_8h_1af1d2908ca3b87a82789389d989bbe389" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED SR_INLINE_STATIC void SR_FASTCALL</type>
@@ -123,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="148" column="59" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="148" bodyend="152"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="158" column="59" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="158" bodyend="162"/>
       </memberdef>
       <memberdef kind="function" id="BaseMarshal_8h_1abb823ef297392917892cb2922d9e9479" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED SR_INLINE_STATIC void SR_FASTCALL</type>
@@ -145,7 +145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="154" column="59" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="154" bodyend="158"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="164" column="59" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="164" bodyend="168"/>
       </memberdef>
       <memberdef kind="function" id="BaseMarshal_8h_1a92d489dceb4ad1b4f2136fbe3bd918d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED SR_INLINE_STATIC void SR_FASTCALL</type>
@@ -167,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="160" column="59" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="160" bodyend="164"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="170" column="59" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="170" bodyend="174"/>
       </memberdef>
       <memberdef kind="function" id="BaseMarshal_8h_1a08fb5ca83bc09d878cd55e5b8613acd7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED void SR_FASTCALL</type>
@@ -189,7 +189,83 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="166" column="49" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="166" bodyend="170"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="176" column="49" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="176" bodyend="180"/>
+      </memberdef>
+      <memberdef kind="function" id="BaseMarshal_8h_1acce8ae8487457b2f9639da2e8927f649" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED void SR_FASTCALL</type>
+        <definition>static SR_MAYBE_UNUSED void SR_FASTCALL SR_UTILS_NS::MarshalUtils::SaveString</definition>
+        <argsstring>(SR_HTYPES_NS::Stream &amp;stream, SR_UTILS_NS::StringAtom str)</argsstring>
+        <name>SaveString</name>
+        <qualifiedname>SR_UTILS_NS::MarshalUtils::SaveString</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1Stream" kindref="compound">SR_HTYPES_NS::Stream</ref> &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="182" column="49" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="182" bodyend="186"/>
+      </memberdef>
+      <memberdef kind="function" id="BaseMarshal_8h_1a31077a12597b7825f6e18c6d5af4a578" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>SR_INLINE_STATIC void SR_FASTCALL</type>
+        <definition>SR_INLINE_STATIC void SR_FASTCALL SR_UTILS_NS::MarshalUtils::SaveStringVector</definition>
+        <argsstring>(SR_HTYPES_NS::Stream &amp;stream, const std::vector&lt; T &gt; &amp;arr)</argsstring>
+        <name>SaveStringVector</name>
+        <qualifiedname>SR_UTILS_NS::MarshalUtils::SaveStringVector</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1Stream" kindref="compound">SR_HTYPES_NS::Stream</ref> &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; T &gt; &amp;</type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="188" column="54" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="188" bodyend="194"/>
+      </memberdef>
+      <memberdef kind="function" id="BaseMarshal_8h_1acf290a0efc1169487cb0c211a4806a20" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>SR_INLINE_STATIC void SR_FASTCALL</type>
+        <definition>SR_INLINE_STATIC void SR_FASTCALL SR_UTILS_NS::MarshalUtils::SaveStringSet</definition>
+        <argsstring>(SR_HTYPES_NS::Stream &amp;stream, const std::set&lt; T &gt; &amp;arr)</argsstring>
+        <name>SaveStringSet</name>
+        <qualifiedname>SR_UTILS_NS::MarshalUtils::SaveStringSet</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1Stream" kindref="compound">SR_HTYPES_NS::Stream</ref> &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <param>
+          <type>const std::set&lt; T &gt; &amp;</type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="196" column="54" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="196" bodyend="202"/>
       </memberdef>
       <memberdef kind="function" id="BaseMarshal_8h_1ae553b07ef8b29effdc7b38632ce79a6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -216,7 +292,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="172" column="54" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="172" bodyend="178"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="204" column="54" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="204" bodyend="210"/>
       </memberdef>
       <memberdef kind="function" id="BaseMarshal_8h_1ae4d9b751ce7f60daa9c7fcbec28fbe4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -239,7 +315,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="180" column="56" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="180" bodyend="194"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="212" column="56" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="212" bodyend="226"/>
       </memberdef>
       <memberdef kind="function" id="BaseMarshal_8h_1adc80af78a6c6c17e96dd1a02804bdcb8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED SR_INLINE_STATIC std::string SR_FASTCALL</type>
@@ -257,7 +333,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="196" column="66" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="196" bodyend="207"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="228" column="66" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="228" bodyend="239"/>
       </memberdef>
       <memberdef kind="function" id="BaseMarshal_8h_1a4998d18fe764a78ac564d77165db4825" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED SR_INLINE_STATIC <ref refid="classSR__HTYPES__NS_1_1UnicodeString" kindref="compound">SR_HTYPES_NS::UnicodeString</ref> SR_FASTCALL</type>
@@ -275,7 +351,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="209" column="82" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="209" bodyend="220"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="241" column="82" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="241" bodyend="252"/>
       </memberdef>
       <memberdef kind="function" id="BaseMarshal_8h_1a66e436ee03ef16cf88517d767f9129a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED SR_INLINE_STATIC std::string SR_FASTCALL</type>
@@ -294,7 +370,43 @@
         <inbodydescription>
 <para>NOLINT</para>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="222" column="66" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="222" bodyend="233"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="254" column="66" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="254" bodyend="265"/>
+      </memberdef>
+      <memberdef kind="function" id="BaseMarshal_8h_1afe948c9ee50da6cd7d628b30bb3fa92f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED SR_INLINE_STATIC std::string SR_FASTCALL</type>
+        <definition>SR_MAYBE_UNUSED SR_INLINE_STATIC std::string SR_FASTCALL SR_UTILS_NS::MarshalUtils::LoadString</definition>
+        <argsstring>(SR_HTYPES_NS::Stream &amp;stream)</argsstring>
+        <name>LoadString</name>
+        <qualifiedname>SR_UTILS_NS::MarshalUtils::LoadString</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1Stream" kindref="compound">SR_HTYPES_NS::Stream</ref> &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="267" column="66" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="267" bodyend="269"/>
+      </memberdef>
+      <memberdef kind="function" id="BaseMarshal_8h_1a52af7db0b1c1f35eb47b74b59877dd41" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> SR_FASTCALL</type>
+        <definition>SR_MAYBE_UNUSED SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_FASTCALL SR_UTILS_NS::MarshalUtils::LoadStrAtom</definition>
+        <argsstring>(SR_HTYPES_NS::Stream &amp;stream)</argsstring>
+        <name>LoadStrAtom</name>
+        <qualifiedname>SR_UTILS_NS::MarshalUtils::LoadStrAtom</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1Stream" kindref="compound">SR_HTYPES_NS::Stream</ref> &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="271" column="78" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="271" bodyend="273"/>
       </memberdef>
       <memberdef kind="function" id="BaseMarshal_8h_1a97e8e6c907850fbe475d9d14a02a8e59" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED SR_INLINE_STATIC std::string SR_FASTCALL</type>
@@ -312,7 +424,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="235" column="66" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="235" bodyend="246"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="275" column="66" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="275" bodyend="286"/>
       </memberdef>
       <memberdef kind="function" id="BaseMarshal_8h_1af71767b319b1d88628b89ce793a7a4b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED SR_INLINE_STATIC <ref refid="classSR__HTYPES__NS_1_1UnicodeString" kindref="compound">SR_HTYPES_NS::UnicodeString</ref> SR_FASTCALL</type>
@@ -330,7 +442,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="248" column="82" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="248" bodyend="259"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="288" column="82" bodyfile="Engine/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="288" bodyend="299"/>
       </memberdef>
       <memberdef kind="function" id="MarshalUtils_8h_1a29e850a25f2ddec669e451685ccae214" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED void</type>

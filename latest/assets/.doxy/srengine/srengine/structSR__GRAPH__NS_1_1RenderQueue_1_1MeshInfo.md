@@ -35,11 +35,10 @@
 
 | Type | Name |
 | ---: | :--- |
-|  bool | [**hasVBO**](#variable-hasvbo)   = `false`<br> |
-|  MeshPtr | [**pMesh**](#variable-pmesh)   = `nullptr`<br> |
+|  [**SR\_GTYPES\_NS::Mesh**](classSR__GTYPES__NS_1_1Mesh.md) \* | [**pMesh**](#variable-pmesh)   = `nullptr`<br> |
+|  [**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* | [**pShader**](#variable-pshader)   = `nullptr`<br> |
 |  int64\_t | [**priority**](#variable-priority)   = `0`<br> |
-|  [**ShaderUseInfo**](structSR__GRAPH__NS_1_1ShaderUseInfo.md) | [**shaderUseInfo**](#variable-shaderuseinfo)   = `{}`<br> |
-|  QueueStateFlags | [**state**](#variable-state)   = `QUEUE\_STATE\_ERROR`<br> |
+|  QueueStateFlags | [**state**](#variable-state)   = `QUEUE\_STATE\_NOT\_RENDERED`<br> |
 |  VBO | [**vbo**](#variable-vbo)   = `0`<br> |
 
 
@@ -95,10 +94,10 @@
 
 
 
-### variable hasVBO 
+### variable pMesh 
 
 ```C++
-bool SR_GRAPH_NS::RenderQueue::MeshInfo::hasVBO;
+SR_GTYPES_NS::Mesh* SR_GRAPH_NS::RenderQueue::MeshInfo::pMesh;
 ```
 
 
@@ -108,10 +107,10 @@ bool SR_GRAPH_NS::RenderQueue::MeshInfo::hasVBO;
 
 
 
-### variable pMesh 
+### variable pShader 
 
 ```C++
-MeshPtr SR_GRAPH_NS::RenderQueue::MeshInfo::pMesh;
+SR_GTYPES_NS::Shader* SR_GRAPH_NS::RenderQueue::MeshInfo::pShader;
 ```
 
 
@@ -125,19 +124,6 @@ MeshPtr SR_GRAPH_NS::RenderQueue::MeshInfo::pMesh;
 
 ```C++
 int64_t SR_GRAPH_NS::RenderQueue::MeshInfo::priority;
-```
-
-
-
-
-<hr>
-
-
-
-### variable shaderUseInfo 
-
-```C++
-ShaderUseInfo SR_GRAPH_NS::RenderQueue::MeshInfo::shaderUseInfo;
 ```
 
 

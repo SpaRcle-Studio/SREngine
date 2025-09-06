@@ -34,6 +34,7 @@
 | struct | [**ObjectDataAccessor&lt; SR\_HTYPES\_NS::UnicodeString &gt;**](structObjectDataAccessor_3_01SR__HTYPES__NS_1_1UnicodeString_01_4.md) &lt;&gt;<br> |
 | struct | [**ObjectDataAccessor&lt; SR\_MATH\_NS::BVector3 &gt;**](structObjectDataAccessor_3_01SR__MATH__NS_1_1BVector3_01_4.md) &lt;&gt;<br> |
 | struct | [**ObjectDataAccessor&lt; SR\_MATH\_NS::BVector4 &gt;**](structObjectDataAccessor_3_01SR__MATH__NS_1_1BVector4_01_4.md) &lt;&gt;<br> |
+| struct | [**ObjectDataAccessor&lt; SR\_MATH\_NS::FColor &gt;**](structObjectDataAccessor_3_01SR__MATH__NS_1_1FColor_01_4.md) &lt;&gt;<br> |
 | struct | [**ObjectDataAccessor&lt; SR\_MATH\_NS::FRect &gt;**](structObjectDataAccessor_3_01SR__MATH__NS_1_1FRect_01_4.md) &lt;&gt;<br> |
 | struct | [**ObjectDataAccessor&lt; SR\_MATH\_NS::FSize &gt;**](structObjectDataAccessor_3_01SR__MATH__NS_1_1FSize_01_4.md) &lt;&gt;<br> |
 | struct | [**ObjectDataAccessor&lt; SR\_MATH\_NS::FSize2 &gt;**](structObjectDataAccessor_3_01SR__MATH__NS_1_1FSize2_01_4.md) &lt;&gt;<br> |

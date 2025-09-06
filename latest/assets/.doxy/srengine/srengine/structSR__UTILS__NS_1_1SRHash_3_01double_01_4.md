@@ -53,7 +53,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_NODISCARD constexpr size\_t | [**operator()**](#function-operator()) (const double keyVal) noexcept const<br> |
+|  SR\_NODISCARD constexpr size\_t | [**operator()**](#function-operator) (const double keyVal) noexcept const<br> |
 
 
 

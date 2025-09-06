@@ -19,7 +19,7 @@ _SR\_COMMON\_DLL\_API._
 Inherits the following classes: [SR\_HTYPES\_NS::SharedPtrBase](classSR__HTYPES__NS_1_1SharedPtrBase.md)
 
 
-Inherited by the following classes: [SR\_ANIMATIONS\_NS::Bone](structSR__ANIMATIONS__NS_1_1Bone.md),  [SR\_CORE\_GUI\_NS::PropertyDrawerBase](classSR__CORE__GUI__NS_1_1PropertyDrawerBase.md),  [SR\_CORE\_NS::Application](classSR__CORE__NS_1_1Application.md),  [SR\_CORE\_NS::Engine](classSR__CORE__NS_1_1Engine.md),  [SR\_GRAPH\_GUI\_NS::WidgetContainerElement](classSR__GRAPH__GUI__NS_1_1WidgetContainerElement.md),  [SR\_GRAPH\_NS::BaseMaterial](classSR__GRAPH__NS_1_1BaseMaterial.md),  [SR\_GRAPH\_NS::FrameBufferController](classSR__GRAPH__NS_1_1FrameBufferController.md),  [SR\_GRAPH\_NS::IRenderer](classSR__GRAPH__NS_1_1IRenderer.md),  [SR\_GRAPH\_NS::MaterialData](classSR__GRAPH__NS_1_1MaterialData.md),  [SR\_GRAPH\_NS::Memory::BakedMesh](classSR__GRAPH__NS_1_1Memory_1_1BakedMesh.md),  [SR\_GRAPH\_NS::Overlay](classSR__GRAPH__NS_1_1Overlay.md),  [SR\_GRAPH\_NS::Pipeline](classSR__GRAPH__NS_1_1Pipeline.md),  [SR\_GRAPH\_NS::RenderQueue](classSR__GRAPH__NS_1_1RenderQueue.md),  [SR\_GRAPH\_NS::RenderScene](classSR__GRAPH__NS_1_1RenderScene.md),  [SR\_GRAPH\_NS::TextureData](classSR__GRAPH__NS_1_1TextureData.md),  [SR\_GRAPH\_NS::Window](classSR__GRAPH__NS_1_1Window.md),  [SR\_NETWORK\_NS::Acceptor](classSR__NETWORK__NS_1_1Acceptor.md),  [SR\_NETWORK\_NS::Client](classSR__NETWORK__NS_1_1Client.md),  [SR\_NETWORK\_NS::Context](classSR__NETWORK__NS_1_1Context.md),  [SR\_NETWORK\_NS::DataPackage](classSR__NETWORK__NS_1_1DataPackage.md),  [SR\_NETWORK\_NS::PeerToPeer](classSR__NETWORK__NS_1_1PeerToPeer.md),  [SR\_NETWORK\_NS::Server](classSR__NETWORK__NS_1_1Server.md),  [SR\_NETWORK\_NS::Socket](classSR__NETWORK__NS_1_1Socket.md),  [SR\_PTYPES\_NS::CollisionShape](classSR__PTYPES__NS_1_1CollisionShape.md),  [SR\_SCRIPTING\_NS::CppBehaviour](classSR__SCRIPTING__NS_1_1CppBehaviour.md),  [SR\_SCRIPTING\_NS::CppCodeGenerator](classSR__SCRIPTING__NS_1_1CppCodeGenerator.md),  [SR\_SCRIPTING\_NS::CppCompiler](classSR__SCRIPTING__NS_1_1CppCompiler.md),  [SR\_SCRIPTING\_NS::ModuleManager](classSR__SCRIPTING__NS_1_1ModuleManager.md),  [SR\_SCRIPTING\_NS::ScriptHolder](classSR__SCRIPTING__NS_1_1ScriptHolder.md),  [SR\_UTILS\_NS::AutoTests::AutomaticallySharedPtrTestClass](classSR__UTILS__NS_1_1AutoTests_1_1AutomaticallySharedPtrTestClass.md),  [SR\_UTILS\_NS::AutoTests::ManuallySharedPtrTestClass](classSR__UTILS__NS_1_1AutoTests_1_1ManuallySharedPtrTestClass.md),  [SR\_UTILS\_NS::EntityController](classSR__UTILS__NS_1_1EntityController.md),  [SR\_UTILS\_NS::FileSystemWatcher](classSR__UTILS__NS_1_1FileSystemWatcher.md),  [SR\_UTILS\_NS::FileWatcher](classSR__UTILS__NS_1_1FileWatcher.md),  [SR\_UTILS\_NS::IMigrator](classSR__UTILS__NS_1_1IMigrator.md),  [SR\_UTILS\_NS::ITestController](classSR__UTILS__NS_1_1ITestController.md),  [SR\_UTILS\_NS::ResourceContainer](classSR__UTILS__NS_1_1ResourceContainer.md),  [SR\_UTILS\_NS::Tests::ReflectionTestComponentLogicBase](classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentLogicBase.md),  [SR\_UTILS\_NS::ThreadWorker](classSR__UTILS__NS_1_1ThreadWorker.md),  [SR\_UTILS\_NS::ThreadWorkerStateBase](classSR__UTILS__NS_1_1ThreadWorkerStateBase.md),  [SR\_UTILS\_NS::ThreadsWorker](classSR__UTILS__NS_1_1ThreadsWorker.md),  [SR\_UTILS\_NS::Transform](classSR__UTILS__NS_1_1Transform.md),  [SR\_UTILS\_NS::Web::CSS](classSR__UTILS__NS_1_1Web_1_1CSS.md),  [SR\_UTILS\_NS::Web::HTMLContainerInterface](classSR__UTILS__NS_1_1Web_1_1HTMLContainerInterface.md),  [SR\_UTILS\_NS::Web::HTMLPage](classSR__UTILS__NS_1_1Web_1_1HTMLPage.md),  [SR\_WORLD\_NS::SceneLogic](classSR__WORLD__NS_1_1SceneLogic.md)
+Inherited by the following classes: [SR\_ANIMATIONS\_NS::Bone](structSR__ANIMATIONS__NS_1_1Bone.md),  [SR\_CORE\_GUI\_NS::PropertyDrawerBase](classSR__CORE__GUI__NS_1_1PropertyDrawerBase.md),  [SR\_CORE\_NS::Application](classSR__CORE__NS_1_1Application.md),  [SR\_CORE\_NS::Engine](classSR__CORE__NS_1_1Engine.md),  [SR\_GRAPH\_GUI\_NS::WidgetContainerElement](classSR__GRAPH__GUI__NS_1_1WidgetContainerElement.md),  [SR\_GRAPH\_NS::BaseMaterial](classSR__GRAPH__NS_1_1BaseMaterial.md),  [SR\_GRAPH\_NS::BasePass](classSR__GRAPH__NS_1_1BasePass.md),  [SR\_GRAPH\_NS::FrameBufferController](classSR__GRAPH__NS_1_1FrameBufferController.md),  [SR\_GRAPH\_NS::IRenderTechnique](classSR__GRAPH__NS_1_1IRenderTechnique.md),  [SR\_GRAPH\_NS::IRenderer](classSR__GRAPH__NS_1_1IRenderer.md),  [SR\_GRAPH\_NS::MaterialData](classSR__GRAPH__NS_1_1MaterialData.md),  [SR\_GRAPH\_NS::Memory::BakedMesh](classSR__GRAPH__NS_1_1Memory_1_1BakedMesh.md),  [SR\_GRAPH\_NS::Overlay](classSR__GRAPH__NS_1_1Overlay.md),  [SR\_GRAPH\_NS::Pipeline](classSR__GRAPH__NS_1_1Pipeline.md),  [SR\_GRAPH\_NS::RenderQueue](classSR__GRAPH__NS_1_1RenderQueue.md),  [SR\_GRAPH\_NS::RenderScene](classSR__GRAPH__NS_1_1RenderScene.md),  [SR\_GRAPH\_NS::TextureData](classSR__GRAPH__NS_1_1TextureData.md),  [SR\_GRAPH\_NS::Window](classSR__GRAPH__NS_1_1Window.md),  [SR\_NETWORK\_NS::Acceptor](classSR__NETWORK__NS_1_1Acceptor.md),  [SR\_NETWORK\_NS::Client](classSR__NETWORK__NS_1_1Client.md),  [SR\_NETWORK\_NS::Context](classSR__NETWORK__NS_1_1Context.md),  [SR\_NETWORK\_NS::DataPackage](classSR__NETWORK__NS_1_1DataPackage.md),  [SR\_NETWORK\_NS::PeerToPeer](classSR__NETWORK__NS_1_1PeerToPeer.md),  [SR\_NETWORK\_NS::Server](classSR__NETWORK__NS_1_1Server.md),  [SR\_NETWORK\_NS::Socket](classSR__NETWORK__NS_1_1Socket.md),  [SR\_PTYPES\_NS::CollisionShape](classSR__PTYPES__NS_1_1CollisionShape.md),  [SR\_SCRIPTING\_NS::CppBehaviour](classSR__SCRIPTING__NS_1_1CppBehaviour.md),  [SR\_SCRIPTING\_NS::CppCodeGenerator](classSR__SCRIPTING__NS_1_1CppCodeGenerator.md),  [SR\_SCRIPTING\_NS::CppCompiler](classSR__SCRIPTING__NS_1_1CppCompiler.md),  [SR\_SCRIPTING\_NS::ModuleManager](classSR__SCRIPTING__NS_1_1ModuleManager.md),  [SR\_SCRIPTING\_NS::ScriptHolder](classSR__SCRIPTING__NS_1_1ScriptHolder.md),  [SR\_UTILS\_NS::AutoTests::AutomaticallySharedPtrTestClass](classSR__UTILS__NS_1_1AutoTests_1_1AutomaticallySharedPtrTestClass.md),  [SR\_UTILS\_NS::AutoTests::ManuallySharedPtrTestClass](classSR__UTILS__NS_1_1AutoTests_1_1ManuallySharedPtrTestClass.md),  [SR\_UTILS\_NS::EntityController](classSR__UTILS__NS_1_1EntityController.md),  [SR\_UTILS\_NS::FileSystemWatcher](classSR__UTILS__NS_1_1FileSystemWatcher.md),  [SR\_UTILS\_NS::FileWatcher](classSR__UTILS__NS_1_1FileWatcher.md),  [SR\_UTILS\_NS::IMigrator](classSR__UTILS__NS_1_1IMigrator.md),  [SR\_UTILS\_NS::ITestController](classSR__UTILS__NS_1_1ITestController.md),  [SR\_UTILS\_NS::ResourceContainer](classSR__UTILS__NS_1_1ResourceContainer.md),  [SR\_UTILS\_NS::Tests::ReflectionTestComponentLogicBase](classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentLogicBase.md),  [SR\_UTILS\_NS::ThreadWorker](classSR__UTILS__NS_1_1ThreadWorker.md),  [SR\_UTILS\_NS::ThreadWorkerStateBase](classSR__UTILS__NS_1_1ThreadWorkerStateBase.md),  [SR\_UTILS\_NS::ThreadsWorker](classSR__UTILS__NS_1_1ThreadsWorker.md),  [SR\_UTILS\_NS::Transform](classSR__UTILS__NS_1_1Transform.md),  [SR\_UTILS\_NS::Web::CSS](classSR__UTILS__NS_1_1Web_1_1CSS.md),  [SR\_UTILS\_NS::Web::HTMLContainerInterface](classSR__UTILS__NS_1_1Web_1_1HTMLContainerInterface.md),  [SR\_UTILS\_NS::Web::HTMLPage](classSR__UTILS__NS_1_1Web_1_1HTMLPage.md),  [SR\_WORLD\_NS::SceneLogic](classSR__WORLD__NS_1_1SceneLogic.md)
 
 
 
@@ -90,7 +90,7 @@ Inherited by the following classes: [SR\_ANIMATIONS\_NS::Bone](structSR__ANIMATI
 |  SR\_NODISCARD SR\_FORCE\_INLINE T \* | [**Get**](#function-get-22) () <br> |
 |  SR\_NODISCARD const void \* | [**GetRawPtr**](#function-getrawptr-12) () const<br> |
 |  SR\_NODISCARD void \* | [**GetRawPtr**](#function-getrawptr-22) () <br>_NOLINT(modernize-use-nodiscard)_  |
-| virtual SR\_NODISCARD SRClass \* | [**GetSRClass**](#function-getsrclass) () override const<br>_NOLINT(modernize-use-nodiscard)_  |
+| virtual SR\_NODISCARD SRClass \* | [**GetSRClass**](#function-getsrclass) () override const<br> |
 |  SR\_NODISCARD [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; | [**GetThis**](#function-getthis) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE const T &SR\_FASTCALL | [**GetUncheckedRef**](#function-getuncheckedref-12) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE T &SR\_FASTCALL | [**GetUncheckedRef**](#function-getuncheckedref-22) () <br> |
@@ -108,15 +108,15 @@ Inherited by the following classes: [SR\_ANIMATIONS\_NS::Bone](structSR__ANIMATI
 |  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; U &gt; | [**StaticCast**](#function-staticcast) () const<br> |
 |  SR\_NODISCARD bool | [**TryRecursiveLockIfValid**](#function-tryrecursivelockifvalid) () noexcept const<br> |
 |  void | [**Unlock**](#function-unlock) () noexcept const<br> |
-|  bool | [**Valid**](#function-valid) () const<br> |
+| virtual SR\_NODISCARD bool | [**Valid**](#function-valid) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE | [**operator bool**](#function-operator-bool) () noexcept const<br> |
 |  SR\_INLINE bool | [**operator!=**](#function-operator) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & right) const<br> |
 |  SR\_FORCE\_INLINE T & | [**operator\***](#function-operator_1) () const<br> |
-|  SR\_FORCE\_INLINE T \* | [**operator-&gt;**](#function-operator_2) () const<br> |
-|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](#function-operator_3) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & ptr) <br> |
-|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](#function-operator_4) (T \* ptr) <br> |
-|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](#function-operator_5) ([**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; && ptr) noexcept<br> |
-|  SR\_INLINE bool | [**operator==**](#function-operator_6) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & right) const<br> |
+|  SR\_FORCE\_INLINE T \* | [**operator-&gt;**](#function-operator-) () const<br> |
+|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](#function-operator_2) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & ptr) <br> |
+|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](#function-operator_3) (T \* ptr) <br> |
+|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](#function-operator_4) ([**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; && ptr) noexcept<br> |
+|  SR\_INLINE bool | [**operator==**](#function-operator_5) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & right) const<br> |
 |   | [**~SharedPtr**](#function-sharedptr) () override<br> |
 
 
@@ -135,6 +135,7 @@ See [SR\_HTYPES\_NS::SharedPtrBase](classSR__HTYPES__NS_1_1SharedPtrBase.md)
 | virtual void | [**SetPointerFromBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-setpointerfrombase) ([**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md) \* pBase) = 0<br> |
 |   | [**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase-12) () <br> |
 |   | [**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase-22) ([**SharedPtrDynamicData**](structSR__HTYPES__NS_1_1SharedPtrDynamicData.md) \* data) <br> |
+| virtual SR\_NODISCARD bool | [**Valid**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-valid) () const = 0<br> |
 | virtual  | [**~SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase) () <br> |
 
 
@@ -348,7 +349,6 @@ inline SR_NODISCARD void * SR_HTYPES_NS::SharedPtr::GetRawPtr ()
 
 ### function GetSRClass 
 
-_NOLINT(modernize-use-nodiscard)_ 
 ```C++
 inline virtual SR_NODISCARD SRClass * SR_HTYPES_NS::SharedPtr::GetSRClass () override const
 ```
@@ -610,10 +610,12 @@ inline void SR_HTYPES_NS::SharedPtr::Unlock () noexcept const
 ### function Valid 
 
 ```C++
-inline bool SR_HTYPES_NS::SharedPtr::Valid () const
+inline virtual SR_NODISCARD bool SR_HTYPES_NS::SharedPtr::Valid () const
 ```
 
 
+
+Implements [*SR\_HTYPES\_NS::SharedPtrBase::Valid*](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-valid)
 
 
 <hr>

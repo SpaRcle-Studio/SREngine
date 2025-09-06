@@ -29,6 +29,13 @@ namespace SR_GRAPH_NS {
 }
 
 namespace SR_GTYPES_NS {
+    SR_ENUM_NS_CLASS_T(CameraType, uint8_t,
+        Main,
+        Offscreen,
+        Editor,
+        EditorPrefab
+    );
+
     class Camera : public SR_UTILS_NS::Component {
         SR_CLASS()
         struct RenderTechniqueInfo {
@@ -71,6 +78,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD SR_FORCE_INLINE float_t GetFOV() const { return m_FOV; }
         SR_NODISCARD SR_FORCE_INLINE float_t GetAspect() const { return m_aspect; }
         SR_NODISCARD SR_FORCE_INLINE int32_t GetPriority() const { return m_priority; }
+        SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::UVector2& GetViewportSize() const { return m_viewportSize; }
 
         SR_NODISCARD SR_MATH_NS::Matrix4x4 GetImGuizmoView() const noexcept;
         SR_NODISCARD const SR_MATH_NS::FVector3& GetViewDirection() const;
@@ -96,6 +104,7 @@ namespace SR_GTYPES_NS {
         void SetNear(float_t value);
         void SetFOV(float_t value);
         void SetPriority(int32_t priority);
+        void SetCameraType(CameraType type);
 
         void SetRenderTechnique(const SR_UTILS_NS::Path& path);
 
@@ -109,6 +118,9 @@ namespace SR_GTYPES_NS {
         void OnDisable() override;
 
     private:
+        void RemoveTechnique();
+
+    private:
         int32_t m_priority = 0;
 
         float_t m_far = 750.f;
@@ -120,6 +132,9 @@ namespace SR_GTYPES_NS {
         float_t m_aspect = 1.f;
         bool m_hasErrors = false;
         bool m_isRegistered = false;
+        CameraType m_type = CameraType::Main;
+
+        SR_UTILS_NS::Subscription m_onRenderSettingsChanged;
 
         SR_MATH_NS::Matrix4x4 m_projection;
         SR_MATH_NS::Matrix4x4 m_projectionNoFOV;

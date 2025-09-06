@@ -34,7 +34,7 @@ namespace SR_HTYPES_NS {
         Marshal();
         Marshal(std::ifstream& ifs); 
         Marshal(const std::string& str); 
-        Marshal(const char* pData, uint64_t size);
+        Marshal(const char* pData, uint64_t size, bool copy = true);
         ~Marshal();
 
     public:

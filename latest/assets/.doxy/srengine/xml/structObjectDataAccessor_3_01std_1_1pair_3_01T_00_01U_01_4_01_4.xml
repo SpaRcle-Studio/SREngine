@@ -10,6 +10,38 @@
         <type>typename U</type>
       </param>
     </templateparamlist>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structObjectDataAccessor_3_01std_1_1pair_3_01T_00_01U_01_4_01_4_1a006c186da2a760d9a2aed835346fd2b2" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr SerializationId</type>
+        <definition>constexpr SerializationId ObjectDataAccessor&lt; std::pair&lt; T, U &gt; &gt;::firstId</definition>
+        <argsstring></argsstring>
+        <name>firstId</name>
+        <qualifiedname>ObjectDataAccessor&lt; std::pair&lt; T, U &gt; &gt;::firstId</qualifiedname>
+        <initializer>= SerializationId::Create(&quot;first&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="511" column="38" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="511" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structObjectDataAccessor_3_01std_1_1pair_3_01T_00_01U_01_4_01_4_1a44eda1d8773f70cfc8de197104367125" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr SerializationId</type>
+        <definition>constexpr SerializationId ObjectDataAccessor&lt; std::pair&lt; T, U &gt; &gt;::secondId</definition>
+        <argsstring></argsstring>
+        <name>secondId</name>
+        <qualifiedname>ObjectDataAccessor&lt; std::pair&lt; T, U &gt; &gt;::secondId</qualifiedname>
+        <initializer>= SerializationId::Create(&quot;second&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="512" column="38" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="512" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <sectiondef kind="public-static-func">
       <memberdef kind="function" id="structObjectDataAccessor_3_01std_1_1pair_3_01T_00_01U_01_4_01_4_1ae67043d214e010daf8e0ce95b573fe7d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -35,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="497" column="13" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="497" bodyend="502"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="514" column="13" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="514" bodyend="519"/>
       </memberdef>
       <memberdef kind="function" id="structObjectDataAccessor_3_01std_1_1pair_3_01T_00_01U_01_4_01_4_1a6cc8d7be615a86ad46055fb2823a2164" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -61,17 +93,19 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="504" column="13" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="504" bodyend="513"/>
+        <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="521" column="13" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="521" bodyend="530"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="496" column="13" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="496" bodyend="514"/>
+    <location file="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="510" column="13" bodyfile="Engine/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="510" bodyend="531"/>
     <listofallmembers>
+      <member refid="structObjectDataAccessor_3_01std_1_1pair_3_01T_00_01U_01_4_01_4_1a006c186da2a760d9a2aed835346fd2b2" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; std::pair&lt; T, U &gt; &gt;</scope><name>firstId</name></member>
       <member refid="structObjectDataAccessor_3_01std_1_1pair_3_01T_00_01U_01_4_01_4_1a6cc8d7be615a86ad46055fb2823a2164" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; std::pair&lt; T, U &gt; &gt;</scope><name>Load</name></member>
       <member refid="structObjectDataAccessor_3_01std_1_1pair_3_01T_00_01U_01_4_01_4_1ae67043d214e010daf8e0ce95b573fe7d" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; std::pair&lt; T, U &gt; &gt;</scope><name>Save</name></member>
+      <member refid="structObjectDataAccessor_3_01std_1_1pair_3_01T_00_01U_01_4_01_4_1a44eda1d8773f70cfc8de197104367125" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; std::pair&lt; T, U &gt; &gt;</scope><name>secondId</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

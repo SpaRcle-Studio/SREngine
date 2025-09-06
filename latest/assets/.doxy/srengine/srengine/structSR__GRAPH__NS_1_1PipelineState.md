@@ -49,12 +49,12 @@
 |  int32\_t | [**VBOId**](#variable-vboid)   = `SR\_ID\_INVALID`<br> |
 |  uint32\_t | [**allocatedMemory**](#variable-allocatedmemory)   = `0`<br>_Объем выделенной памяти_  |
 |  uint32\_t | [**allocations**](#variable-allocations)   = `0`<br>_Сколько было произведено выделений памяти_  |
-|  int32\_t | [**buildIteration**](#variable-builditeration)   = `0`<br> |
 |  uint32\_t | [**deletions**](#variable-deletions)   = `0`<br>_Сколько было произведено удалений памяти_  |
 |  int32\_t | [**descriptorSetId**](#variable-descriptorsetid)   = `SR\_ID\_INVALID`<br> |
 |  uint32\_t | [**drawCalls**](#variable-drawcalls)   = `0`<br>_Количество вызовов Draw и подобное_  |
 |  int32\_t | [**frameBufferId**](#variable-framebufferid)   = `SR\_ID\_INVALID`<br> |
 |  uint32\_t | [**frameBufferLayer**](#variable-framebufferlayer)   = `0`<br> |
+|  bool | [**hasRenderData**](#variable-hasrenderdata)   = `false`<br> |
 |  uint32\_t | [**operations**](#variable-operations)   = `0`<br>_Количество всех обращений к API в процессе отрисовки_  |
 |  FramebufferPtr | [**pFrameBuffer**](#variable-pframebuffer)   = `nullptr`<br> |
 |  [**RenderStrategy**](classSR__GRAPH__NS_1_1RenderStrategy.md) \* | [**pRenderStrategy**](#variable-prenderstrategy)   = `nullptr`<br> |
@@ -242,19 +242,6 @@ uint32_t SR_GRAPH_NS::PipelineState::allocations;
 
 
 
-### variable buildIteration 
-
-```C++
-int32_t SR_GRAPH_NS::PipelineState::buildIteration;
-```
-
-
-
-
-<hr>
-
-
-
 ### variable deletions 
 
 _Сколько было произведено удалений памяти_ 
@@ -313,6 +300,19 @@ int32_t SR_GRAPH_NS::PipelineState::frameBufferId;
 
 ```C++
 uint32_t SR_GRAPH_NS::PipelineState::frameBufferLayer;
+```
+
+
+
+
+<hr>
+
+
+
+### variable hasRenderData 
+
+```C++
+bool SR_GRAPH_NS::PipelineState::hasRenderData;
 ```
 
 

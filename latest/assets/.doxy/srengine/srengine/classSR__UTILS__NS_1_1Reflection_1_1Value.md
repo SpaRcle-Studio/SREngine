@@ -52,6 +52,8 @@
 
 | Type | Name |
 | ---: | :--- |
+|  SR\_NODISCARD [**ValueAssociativeContainer**](classSR__UTILS__NS_1_1Reflection_1_1ValueAssociativeContainer.md) | [**AsAssociativeContainer**](#function-asassociativecontainer-12) () <br> |
+|  SR\_NODISCARD [**ValueAssociativeContainer**](classSR__UTILS__NS_1_1Reflection_1_1ValueAssociativeContainer.md) | [**AsAssociativeContainer**](#function-asassociativecontainer-22) () const<br> |
 |  SR\_NODISCARD [**ValueSequenceContainer**](classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer.md) | [**AsSequenceContainer**](#function-assequencecontainer-12) () <br> |
 |  SR\_NODISCARD [**ValueSequenceContainer**](classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer.md) | [**AsSequenceContainer**](#function-assequencecontainer-22) () const<br> |
 |  SR\_NODISCARD [**Value**](classSR__UTILS__NS_1_1Reflection_1_1Value.md) | [**Copy**](#function-copy) () const<br> |
@@ -70,10 +72,14 @@
 |  SR\_NODISCARD bool | [**IsBool**](#function-isbool) () const<br> |
 |  SR\_NODISCARD bool | [**IsClass**](#function-isclass) () const<br> |
 |  SR\_NODISCARD bool | [**IsConst**](#function-isconst) () const<br> |
+|  SR\_NODISCARD bool | [**IsDynamic**](#function-isdynamic) () const<br> |
+|  SR\_NODISCARD bool | [**IsEmbedded**](#function-isembedded) () const<br> |
 |  SR\_NODISCARD bool | [**IsEnum**](#function-isenum) () const<br> |
+|  SR\_NODISCARD bool | [**IsFColor**](#function-isfcolor) () const<br> |
 |  SR\_NODISCARD bool | [**IsIntegral**](#function-isintegral) () const<br> |
 |  SR\_NODISCARD bool | [**IsMathSize**](#function-ismathsize) () const<br> |
 |  SR\_NODISCARD bool | [**IsMathVector**](#function-ismathvector) () const<br> |
+|  SR\_NODISCARD bool | [**IsOptional**](#function-isoptional) () const<br> |
 |  SR\_NODISCARD bool | [**IsPath**](#function-ispath) () const<br> |
 |  SR\_NODISCARD bool | [**IsPointer**](#function-ispointer) () const<br> |
 |  SR\_NODISCARD bool | [**IsRect**](#function-isrect) () const<br> |
@@ -102,7 +108,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  [**Value**](classSR__UTILS__NS_1_1Reflection_1_1Value.md) | [**Create**](#function-create) (T && value) <br> |
+|  [**Value**](classSR__UTILS__NS_1_1Reflection_1_1Value.md) | [**Create**](#function-create) (T && value) <br>_Implementation._  |
 |  [**Value**](classSR__UTILS__NS_1_1Reflection_1_1Value.md) | [**CreateCRef**](#function-createcref) (const T & value) <br> |
 |  [**Value**](classSR__UTILS__NS_1_1Reflection_1_1Value.md) | [**CreateRef**](#function-createref) (T & value) <br> |
 
@@ -141,6 +147,32 @@
     
 ## Public Functions Documentation
 
+
+
+
+### function AsAssociativeContainer [1/2]
+
+```C++
+SR_NODISCARD ValueAssociativeContainer SR_UTILS_NS::Reflection::Value::AsAssociativeContainer () 
+```
+
+
+
+
+<hr>
+
+
+
+### function AsAssociativeContainer [2/2]
+
+```C++
+SR_NODISCARD ValueAssociativeContainer SR_UTILS_NS::Reflection::Value::AsAssociativeContainer () const
+```
+
+
+
+
+<hr>
 
 
 
@@ -378,10 +410,49 @@ SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsConst () const
 
 
 
+### function IsDynamic 
+
+```C++
+SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsDynamic () const
+```
+
+
+
+
+<hr>
+
+
+
+### function IsEmbedded 
+
+```C++
+SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsEmbedded () const
+```
+
+
+
+
+<hr>
+
+
+
 ### function IsEnum 
 
 ```C++
 SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsEnum () const
+```
+
+
+
+
+<hr>
+
+
+
+### function IsFColor 
+
+```C++
+SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsFColor () const
 ```
 
 
@@ -421,6 +492,19 @@ SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsMathSize () const
 
 ```C++
 SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsMathVector () const
+```
+
+
+
+
+<hr>
+
+
+
+### function IsOptional 
+
+```C++
+SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsOptional () const
 ```
 
 
@@ -728,6 +812,7 @@ SR_UTILS_NS::Reflection::Value::~Value ()
 
 ### function Create 
 
+_Implementation._ 
 ```C++
 template<typename T>
 static Value SR_UTILS_NS::Reflection::Value::Create (

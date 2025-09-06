@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structSR__UTILS__NS_1_1SmallStack" kind="struct" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::SmallStack</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>size_t</type>
+        <declname>N</declname>
+        <defname>N</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structSR__UTILS__NS_1_1SmallStack_1abdfd6586452633b3f650a3303d83ce0e" prot="private" static="no" mutable="no">
+        <type>T</type>
+        <definition>T SR_UTILS_NS::SmallStack&lt; T, N &gt;::data[N]</definition>
+        <argsstring>[N]</argsstring>
+        <name>data</name>
+        <qualifiedname>SR_UTILS_NS::SmallStack::data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="158" column="11" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="158" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__UTILS__NS_1_1SmallStack_1addc91e3e0eaf57632674977c3677dc31" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t SR_UTILS_NS::SmallStack&lt; T, N &gt;::top</definition>
+        <argsstring></argsstring>
+        <name>top</name>
+        <qualifiedname>SR_UTILS_NS::SmallStack::top</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="159" column="16" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="159" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1SmallStack_1aad034f07d223cd4acdbad8c7b7b9585e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::SmallStack&lt; T, N &gt;::push</definition>
+        <argsstring>(T v)</argsstring>
+        <name>push</name>
+        <qualifiedname>SR_UTILS_NS::SmallStack::push</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="145" column="14" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="145" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1SmallStack_1a29d794f6a7d67b4da47bae2ed6b29631" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::SmallStack&lt; T, N &gt;::pop</definition>
+        <argsstring>()</argsstring>
+        <name>pop</name>
+        <qualifiedname>SR_UTILS_NS::SmallStack::pop</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="152" column="14" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="152" bodyend="152"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1SmallStack_1ab0682f032fa36e8b84f4fd55b25a81ff" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD T &amp;</type>
+        <definition>SR_NODISCARD T &amp; SR_UTILS_NS::SmallStack&lt; T, N &gt;::back</definition>
+        <argsstring>()</argsstring>
+        <name>back</name>
+        <qualifiedname>SR_UTILS_NS::SmallStack::back</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="154" column="24" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="154" bodyend="154"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1SmallStack_1afb24674f0000285ce58c459930e272ee" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::SmallStack&lt; T, N &gt;::empty</definition>
+        <argsstring>() const</argsstring>
+        <name>empty</name>
+        <qualifiedname>SR_UTILS_NS::SmallStack::empty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="155" column="27" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="155" bodyend="155"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="143" column="17" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="143" bodyend="160"/>
+    <listofallmembers>
+      <member refid="structSR__UTILS__NS_1_1SmallStack_1ab0682f032fa36e8b84f4fd55b25a81ff" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SmallStack</scope><name>back</name></member>
+      <member refid="structSR__UTILS__NS_1_1SmallStack_1abdfd6586452633b3f650a3303d83ce0e" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::SmallStack</scope><name>data</name></member>
+      <member refid="structSR__UTILS__NS_1_1SmallStack_1afb24674f0000285ce58c459930e272ee" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SmallStack</scope><name>empty</name></member>
+      <member refid="structSR__UTILS__NS_1_1SmallStack_1a29d794f6a7d67b4da47bae2ed6b29631" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SmallStack</scope><name>pop</name></member>
+      <member refid="structSR__UTILS__NS_1_1SmallStack_1aad034f07d223cd4acdbad8c7b7b9585e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SmallStack</scope><name>push</name></member>
+      <member refid="structSR__UTILS__NS_1_1SmallStack_1addc91e3e0eaf57632674977c3677dc31" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::SmallStack</scope><name>top</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -16,19 +16,23 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="53" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" bodystart="53" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="57" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" bodystart="57" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a5f23d3edd622a199c8239ced6a2507f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a7e3ed2fb024e1bc425b97c3db28b938a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SRSLUseStack::Ptr</type>
         <definition>SR_NODISCARD SRSLUseStack::Ptr SR_SRSL_NS::SRSLRefAnalyzer::Analyze</definition>
-        <argsstring>(const SRSLAnalyzedTree::Ptr &amp;pAnalyzedTree)</argsstring>
+        <argsstring>(const SRSLAnalyzedTree::Ptr &amp;pAnalyzedTree, const SR_SRSL_NS::ShaderMacrosParams &amp;macros)</argsstring>
         <name>Analyze</name>
         <qualifiedname>SR_SRSL_NS::SRSLRefAnalyzer::Analyze</qualifiedname>
         <param>
           <type>const SRSLAnalyzedTree::Ptr &amp;</type>
           <declname>pAnalyzedTree</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__SRSL__NS_1_1ShaderMacrosParams" kindref="compound">SR_SRSL_NS::ShaderMacrosParams</ref> &amp;</type>
+          <declname>macros</declname>
         </param>
         <briefdescription>
         </briefdescription>
@@ -36,7 +40,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="37" column="40"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="39" column="40"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -56,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="40" column="35"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="42" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a5247bd9f7f1adbc37f8e3ab6237d2793" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__SRSL__NS_1_1SRSLFunction" kindref="compound">SRSLFunction</ref> *</type>
@@ -78,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="41" column="35"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="43" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a0ce5b3ffc9b3c20d04584e6ec9e860bf" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SRSLUseStack::Ptr</type>
@@ -100,7 +104,29 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="42" column="40"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="44" column="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a59b17b6115630ed8df41a0c8ed25e51b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRSL_NS::SRSLRefAnalyzer::PreprocessUseStack</definition>
+        <argsstring>(SRSLUseStack::Ptr &amp;pUseStack, const SR_SRSL_NS::ShaderMacrosParams &amp;macros)</argsstring>
+        <name>PreprocessUseStack</name>
+        <qualifiedname>SR_SRSL_NS::SRSLRefAnalyzer::PreprocessUseStack</qualifiedname>
+        <param>
+          <type>SRSLUseStack::Ptr &amp;</type>
+          <declname>pUseStack</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__SRSL__NS_1_1ShaderMacrosParams" kindref="compound">SR_SRSL_NS::ShaderMacrosParams</ref> &amp;</type>
+          <declname>macros</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="46" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1aac832a391ea0622c1eb85f67902d0fb0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -126,7 +152,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="44" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="48" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a506a1b2ab36299647b813b237dd9e79e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -152,7 +178,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="45" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="49" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a910967c46528c0b91a353d73c8fd4ce1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -178,7 +204,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="46" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="50" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1ada0b773f2f27ee64e23ad5c3c55d6e2e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -204,7 +230,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="47" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="51" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a5c17c53e7bf6d07287c1cb6d2186c5ab" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -230,7 +256,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="48" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="52" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1ac67f111dea6b64a1bf94dadb71a83045" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -256,7 +282,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="49" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="53" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a110a0302116a99b8a5554f208fc90f74" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -282,7 +308,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="50" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="54" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -337,9 +363,9 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="34" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" bodystart="34" bodyend="55"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="36" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" bodystart="36" bodyend="59"/>
     <listofallmembers>
-      <member refid="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a5f23d3edd622a199c8239ced6a2507f0" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLRefAnalyzer</scope><name>Analyze</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a7e3ed2fb024e1bc425b97c3db28b938a" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLRefAnalyzer</scope><name>Analyze</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a910967c46528c0b91a353d73c8fd4ce1" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLRefAnalyzer</scope><name>AnalyzeArrayExpression</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a110a0302116a99b8a5554f208fc90f74" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLRefAnalyzer</scope><name>AnalyzeEntryPoint</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a506a1b2ab36299647b813b237dd9e79e" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLRefAnalyzer</scope><name>AnalyzeExpression</name></member>
@@ -364,6 +390,7 @@
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLRefAnalyzer</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8d801220802e887b834edb520b1bf342" prot="protected" virt="virtual"><scope>SR_SRSL_NS::SRSLRefAnalyzer</scope><name>OnSingletonDestroy</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_SRSL_NS::SRSLRefAnalyzer</scope><name>operator=</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a59b17b6115630ed8df41a0c8ed25e51b" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLRefAnalyzer</scope><name>PreprocessUseStack</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a2e34219de0ab53d51b60dd970d07c6ff" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLRefAnalyzer</scope><name>ScopeLockSingleton</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a0e21dfc9afab45b0a6a70f6665ce5819" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLRefAnalyzer</scope><name>Singleton</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8ae4876316f0fa28dc67547db6f64ec6" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLRefAnalyzer</scope><name>SingletonBase</name></member>

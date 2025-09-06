@@ -53,11 +53,15 @@
 | ---: | :--- |
 |  SR\_MAYBE\_UNUSED SR\_INLINE\_STATIC std::string SR\_FASTCALL | [**LoadShortStr**](#function-loadshortstr) ([**SR\_HTYPES\_NS::Stream**](classSR__HTYPES__NS_1_1Stream.md) & stream) <br> |
 |  SR\_MAYBE\_UNUSED SR\_INLINE\_STATIC std::string SR\_FASTCALL | [**LoadStr**](#function-loadstr) ([**SR\_HTYPES\_NS::Stream**](classSR__HTYPES__NS_1_1Stream.md) & stream) <br> |
+|  SR\_MAYBE\_UNUSED SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) SR\_FASTCALL | [**LoadStrAtom**](#function-loadstratom) ([**SR\_HTYPES\_NS::Stream**](classSR__HTYPES__NS_1_1Stream.md) & stream) <br> |
+|  SR\_MAYBE\_UNUSED SR\_INLINE\_STATIC std::string SR\_FASTCALL | [**LoadString**](#function-loadstring) ([**SR\_HTYPES\_NS::Stream**](classSR__HTYPES__NS_1_1Stream.md) & stream) <br> |
 |  SR\_MAYBE\_UNUSED SR\_INLINE\_STATIC [**SR\_HTYPES\_NS::UnicodeString**](classSR__HTYPES__NS_1_1UnicodeString.md) SR\_FASTCALL | [**LoadUnicodeString**](#function-loadunicodestring) ([**SR\_HTYPES\_NS::Stream**](classSR__HTYPES__NS_1_1Stream.md) & stream) <br> |
 |  SR\_INLINE\_STATIC T SR\_FASTCALL | [**LoadValue**](#function-loadvalue) ([**SR\_HTYPES\_NS::Stream**](classSR__HTYPES__NS_1_1Stream.md) & stream) <br> |
 |  SR\_INLINE\_STATIC Vector SR\_FASTCALL | [**LoadVector**](#function-loadvector) ([**SR\_HTYPES\_NS::Stream**](classSR__HTYPES__NS_1_1Stream.md) & stream) <br> |
 |  SR\_MAYBE\_UNUSED SR\_INLINE\_STATIC void SR\_FASTCALL | [**SaveShortString**](#function-saveshortstring) ([**SR\_HTYPES\_NS::Stream**](classSR__HTYPES__NS_1_1Stream.md) & stream, const std::string & str) <br> |
 |  SR\_MAYBE\_UNUSED SR\_INLINE\_STATIC void SR\_FASTCALL | [**SaveString**](#function-savestring) ([**SR\_HTYPES\_NS::Stream**](classSR__HTYPES__NS_1_1Stream.md) & stream, const std::string & str) <br> |
+|  SR\_INLINE\_STATIC void SR\_FASTCALL | [**SaveStringSet**](#function-savestringset) ([**SR\_HTYPES\_NS::Stream**](classSR__HTYPES__NS_1_1Stream.md) & stream, const std::set&lt; T &gt; & arr) <br> |
+|  SR\_INLINE\_STATIC void SR\_FASTCALL | [**SaveStringVector**](#function-savestringvector) ([**SR\_HTYPES\_NS::Stream**](classSR__HTYPES__NS_1_1Stream.md) & stream, const std::vector&lt; T &gt; & arr) <br> |
 |  SR\_MAYBE\_UNUSED SR\_INLINE\_STATIC void SR\_FASTCALL | [**SaveUnicodeString**](#function-saveunicodestring) ([**SR\_HTYPES\_NS::Stream**](classSR__HTYPES__NS_1_1Stream.md) & stream, const [**SR\_HTYPES\_NS::UnicodeString**](classSR__HTYPES__NS_1_1UnicodeString.md) & str) <br> |
 |  SR\_INLINE\_STATIC void SR\_FASTCALL | [**SaveValue**](#function-savevalue) ([**SR\_HTYPES\_NS::Stream**](classSR__HTYPES__NS_1_1Stream.md) & stream, const T & value) <br> |
 |  SR\_INLINE\_STATIC void SR\_FASTCALL | [**SaveVector**](#function-savevector) ([**SR\_HTYPES\_NS::Stream**](classSR__HTYPES__NS_1_1Stream.md) & stream, const std::vector&lt; T &gt; & vector) <br> |
@@ -73,6 +77,7 @@
 |  Any SR\_FASTCALL | [**LoadAny**](#function-loadany) ([**SR\_HTYPES\_NS::Stream**](classSR__HTYPES__NS_1_1Stream.md) & stream) <br> |
 |  void SR\_FASTCALL | [**SaveAny**](#function-saveany) ([**SR\_HTYPES\_NS::Stream**](classSR__HTYPES__NS_1_1Stream.md) & stream, const Any & any) <br> |
 |  SR\_MAYBE\_UNUSED void SR\_FASTCALL | [**SaveString**](#function-savestring) ([**SR\_HTYPES\_NS::Stream**](classSR__HTYPES__NS_1_1Stream.md) & stream, const std::string\_view & str) <br> |
+|  SR\_MAYBE\_UNUSED void SR\_FASTCALL | [**SaveString**](#function-savestring) ([**SR\_HTYPES\_NS::Stream**](classSR__HTYPES__NS_1_1Stream.md) & stream, [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) str) <br> |
 
 
 
@@ -123,6 +128,36 @@ SR_MAYBE_UNUSED SR_INLINE_STATIC std::string SR_FASTCALL SR_UTILS_NS::MarshalUti
 
 ```C++
 SR_MAYBE_UNUSED SR_INLINE_STATIC std::string SR_FASTCALL SR_UTILS_NS::MarshalUtils::LoadStr (
+    SR_HTYPES_NS::Stream & stream
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function LoadStrAtom 
+
+```C++
+SR_MAYBE_UNUSED SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_FASTCALL SR_UTILS_NS::MarshalUtils::LoadStrAtom (
+    SR_HTYPES_NS::Stream & stream
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function LoadString 
+
+```C++
+SR_MAYBE_UNUSED SR_INLINE_STATIC std::string SR_FASTCALL SR_UTILS_NS::MarshalUtils::LoadString (
     SR_HTYPES_NS::Stream & stream
 ) 
 ```
@@ -203,6 +238,40 @@ SR_MAYBE_UNUSED SR_INLINE_STATIC void SR_FASTCALL SR_UTILS_NS::MarshalUtils::Sav
 SR_MAYBE_UNUSED SR_INLINE_STATIC void SR_FASTCALL SR_UTILS_NS::MarshalUtils::SaveString (
     SR_HTYPES_NS::Stream & stream,
     const std::string & str
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function SaveStringSet 
+
+```C++
+template<typename T>
+SR_INLINE_STATIC void SR_FASTCALL SR_UTILS_NS::MarshalUtils::SaveStringSet (
+    SR_HTYPES_NS::Stream & stream,
+    const std::set< T > & arr
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function SaveStringVector 
+
+```C++
+template<typename T>
+SR_INLINE_STATIC void SR_FASTCALL SR_UTILS_NS::MarshalUtils::SaveStringVector (
+    SR_HTYPES_NS::Stream & stream,
+    const std::vector< T > & arr
 ) 
 ```
 
@@ -351,6 +420,22 @@ static void SR_FASTCALL SR_UTILS_NS::MarshalUtils::SaveAny (
 static SR_MAYBE_UNUSED void SR_FASTCALL SR_UTILS_NS::MarshalUtils::SaveString (
     SR_HTYPES_NS::Stream & stream,
     const std::string_view & str
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function SaveString 
+
+```C++
+static SR_MAYBE_UNUSED void SR_FASTCALL SR_UTILS_NS::MarshalUtils::SaveString (
+    SR_HTYPES_NS::Stream & stream,
+    SR_UTILS_NS::StringAtom str
 ) 
 ```
 

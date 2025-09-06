@@ -215,6 +215,7 @@
       <member refid="classSR__GTYPES__NS_1_1Camera_1ac043be8e33d3e1bf2c08b06466f187dd" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetView</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1a217a05198270499cef2c71e0d53007bd" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetViewDirection</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1ad1c14a9ef337688e881bcb172c82d4d4" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetViewDirection</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a4b2ea68d5df695bfe88beb998a348e9a" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetViewportSize</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1a9beac6ee9a3a369748d20c573c2c03b8" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetViewPosition</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1ad5c03a0932eaa69b6693771c1d0076cb" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetViewTranslate</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a0255fd473a25f237c833df1d507bdbfb" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>HasParent</name></member>
@@ -265,6 +266,7 @@
       <member refid="classSR__GTYPES__NS_1_1Camera_1aa923dea811e3ff96d420ce4d0b7b98c9" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>ScreenToWorldPoint</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1a804eded6c3d2b51649c307280b045e02" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>ScreenToWorldPoint</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1aab51d4b350f2e2331c563fe06f0ac24a" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>ScreenToWorldPoint</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1ad73543e220464a294604bb869ec02c17" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>SetCameraType</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ad94a8ad5e03600e4f9bdae868ba6021b" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>SetEnabled</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1af720096a6ae5ad8517abb6d280fc4685" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>SetFar</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1a638d9fe2a73684c15bd909437a50903f" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>SetFOV</name></member>

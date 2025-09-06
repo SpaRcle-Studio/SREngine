@@ -54,6 +54,7 @@
 |  SR\_NODISCARD SR\_INLINE uint64\_t | [**GetHash**](#function-gethash) () noexcept const<br> |
 |  SR\_NODISCARD SR\_INLINE const char \* | [**GetName**](#function-getname) () noexcept const<br> |
 |  SR\_CONSTEXPR | [**SerializationId**](#function-serializationid) () noexcept<br> |
+|  SR\_NODISCARD SR\_INLINE std::string | [**ToString**](#function-tostring) () noexcept const<br> |
 |  SR\_CONSTEXPR | [**~SerializationId**](#function-serializationid) () noexcept<br> |
 
 
@@ -125,6 +126,19 @@ inline SR_NODISCARD SR_INLINE const char * SR_UTILS_NS::SerializationId::GetName
 
 ```C++
 SR_CONSTEXPR SR_UTILS_NS::SerializationId::SerializationId () noexcept
+```
+
+
+
+
+<hr>
+
+
+
+### function ToString 
+
+```C++
+inline SR_NODISCARD SR_INLINE std::string SR_UTILS_NS::SerializationId::ToString () noexcept const
 ```
 
 

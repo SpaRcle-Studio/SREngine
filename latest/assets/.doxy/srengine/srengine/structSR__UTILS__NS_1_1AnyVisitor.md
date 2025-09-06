@@ -53,7 +53,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  void | [**operator()**](#function-operator()) (Any && any, F && f) const<br> |
+|  void | [**operator()**](#function-operator) (Any && any, F && f) const<br> |
 
 
 

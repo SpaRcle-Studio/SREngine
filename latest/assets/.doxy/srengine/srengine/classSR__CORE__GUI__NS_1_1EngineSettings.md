@@ -392,6 +392,7 @@ See [SR\_GRAPH\_GUI\_NS::Widget](classSR__GRAPH__GUI__NS_1_1Widget.md)
 | Type | Name |
 | ---: | :--- |
 | virtual void | [**Draw**](#function-draw) () override<br> |
+| virtual void | [**OnOpen**](#function-onopen) () override<br> |
 
 
 ## Protected Functions inherited from SR_GRAPH_GUI_NS::Widget
@@ -501,6 +502,21 @@ virtual void SR_CORE_GUI_NS::EngineSettings::Draw () override
 
 
 Implements [*SR\_GRAPH\_GUI\_NS::Widget::Draw*](classSR__GRAPH__GUI__NS_1_1Widget.md#function-draw)
+
+
+<hr>
+
+
+
+### function OnOpen 
+
+```C++
+virtual void SR_CORE_GUI_NS::EngineSettings::OnOpen () override
+```
+
+
+
+Implements [*SR\_GRAPH\_GUI\_NS::Widget::OnOpen*](classSR__GRAPH__GUI__NS_1_1Widget.md#function-onopen)
 
 
 <hr>

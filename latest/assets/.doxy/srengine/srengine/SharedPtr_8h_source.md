@@ -123,6 +123,7 @@ namespace SR_HTYPES_NS {
         const SharedPtrDynamicData* GetPtrData() const; 
         SharedPtrDynamicData* GetPtrData();
         SR_NODISCARD virtual SRClass* GetSRClass() const = 0;
+        SR_NODISCARD virtual bool Valid() const = 0;
         virtual void Reset() = 0;
         virtual void IncrementPointer() = 0;
         virtual void DecrementPointer() = 0;
@@ -286,7 +287,7 @@ namespace SR_HTYPES_NS {
             }
         }
 
-        bool Valid() const { return m_data && m_data->valid; } 
+        SR_NODISCARD bool Valid() const final { return m_data && m_data->valid; }
 
         SR_NODISCARD SRClass* GetSRClass() const override {
             if constexpr (SR_UTILS_NS::IsCompleteTypeV<T>) {

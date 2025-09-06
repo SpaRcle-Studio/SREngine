@@ -112,7 +112,7 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_NODISCARD SRSLUseStack::Ptr | [**Analyze**](#function-analyze) (const SRSLAnalyzedTree::Ptr & pAnalyzedTree) <br> |
+|  SR\_NODISCARD SRSLUseStack::Ptr | [**Analyze**](#function-analyze) (const SRSLAnalyzedTree::Ptr & pAnalyzedTree, const [**SR\_SRSL\_NS::ShaderMacrosParams**](structSR__SRSL__NS_1_1ShaderMacrosParams.md) & macros) <br> |
 
 
 
@@ -296,7 +296,8 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 ```C++
 SR_NODISCARD SRSLUseStack::Ptr SR_SRSL_NS::SRSLRefAnalyzer::Analyze (
-    const SRSLAnalyzedTree::Ptr & pAnalyzedTree
+    const SRSLAnalyzedTree::Ptr & pAnalyzedTree,
+    const SR_SRSL_NS::ShaderMacrosParams & macros
 ) 
 ```
 

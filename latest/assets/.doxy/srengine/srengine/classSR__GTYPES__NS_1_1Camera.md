@@ -118,12 +118,14 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 |  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**GetViewDirection**](#function-getviewdirection-22) (const SR\_MATH\_NS::FVector3 & pos) noexcept const<br> |
 |  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**GetViewPosition**](#function-getviewposition) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE const [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & | [**GetViewTranslate**](#function-getviewtranslate) () noexcept const<br> |
+|  SR\_NODISCARD SR\_FORCE\_INLINE const SR\_MATH\_NS::UVector2 & | [**GetViewportSize**](#function-getviewportsize) () const<br> |
 | virtual SR\_NODISCARD bool | [**IsEditorCamera**](#function-iseditorcamera) () noexcept const<br> |
 | virtual void | [**OnAttached**](#function-onattached) () override<br>_Вызывается после добавления компонента к игровому объекту_  |
 | virtual void | [**OnMatrixDirty**](#function-onmatrixdirty) () override<br> |
 |  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**ScreenToWorldPoint**](#function-screentoworldpoint-13) (const SR\_MATH\_NS::FVector3 & screenPos) const<br> |
 |  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**ScreenToWorldPoint**](#function-screentoworldpoint-23) (const SR\_MATH\_NS::FVector2 & screenPos) const<br> |
 |  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**ScreenToWorldPoint**](#function-screentoworldpoint-33) (const SR\_MATH\_NS::FVector2 & screenPos, float\_t depth) const<br> |
+|  void | [**SetCameraType**](#function-setcameratype) (CameraType type) <br> |
 |  void | [**SetFOV**](#function-setfov) (float\_t value) <br> |
 |  void | [**SetFar**](#function-setfar) (float\_t value) <br> |
 |  void | [**SetNear**](#function-setnear) (float\_t value) <br> |
@@ -695,6 +697,19 @@ inline SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::Matrix4x4 & SR_GTYPES_NS::
 
 
 
+### function GetViewportSize 
+
+```C++
+inline SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::UVector2 & SR_GTYPES_NS::Camera::GetViewportSize () const
+```
+
+
+
+
+<hr>
+
+
+
 ### function IsEditorCamera 
 
 ```C++
@@ -776,6 +791,21 @@ SR_NODISCARD SR_MATH_NS::FVector3 SR_GTYPES_NS::Camera::ScreenToWorldPoint (
     const SR_MATH_NS::FVector2 & screenPos,
     float_t depth
 ) const
+```
+
+
+
+
+<hr>
+
+
+
+### function SetCameraType 
+
+```C++
+void SR_GTYPES_NS::Camera::SetCameraType (
+    CameraType type
+) 
 ```
 
 

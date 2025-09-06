@@ -60,9 +60,9 @@
     <derivedcompoundref refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualProgramInfo" prot="public" virt="non-virtual">SR_GRAPH_NS::Memory::VirtualProgramInfo</derivedcompoundref>
     <derivedcompoundref refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo" prot="public" virt="non-virtual">SR_GRAPH_NS::Memory::VirtualUBOInfo</derivedcompoundref>
     <derivedcompoundref refid="classSR__GRAPH__NS_1_1MeshCluster" prot="public" virt="non-virtual">SR_GRAPH_NS::MeshCluster</derivedcompoundref>
-    <derivedcompoundref refid="classSR__GRAPH__NS_1_1RenderSettings" prot="public" virt="non-virtual">SR_GRAPH_NS::RenderSettings</derivedcompoundref>
     <derivedcompoundref refid="classSR__GRAPH__NS_1_1RenderStrategy" prot="public" virt="non-virtual">SR_GRAPH_NS::RenderStrategy</derivedcompoundref>
     <derivedcompoundref refid="classSR__GRAPH__NS_1_1ShadedMeshSubCluster" prot="public" virt="non-virtual">SR_GRAPH_NS::ShadedMeshSubCluster</derivedcompoundref>
+    <derivedcompoundref refid="classSR__GRAPH__NS_1_1ShaderCache" prot="public" virt="non-virtual">SR_GRAPH_NS::ShaderCache</derivedcompoundref>
     <derivedcompoundref refid="classSR__GRAPH__NS_1_1SortedMeshQueue" prot="public" virt="non-virtual">SR_GRAPH_NS::SortedMeshQueue</derivedcompoundref>
     <derivedcompoundref refid="classSR__GRAPH__NS_1_1TextBuilder" prot="private" virt="non-virtual">SR_GRAPH_NS::TextBuilder</derivedcompoundref>
     <derivedcompoundref refid="classSR__GRAPH__NS_1_1TextureData" prot="private" virt="non-virtual">SR_GRAPH_NS::TextureData</derivedcompoundref>
@@ -92,6 +92,7 @@
     <derivedcompoundref refid="classSR__SRSL__NS_1_1SRSLAnalyzedTree" prot="public" virt="non-virtual">SR_SRSL_NS::SRSLAnalyzedTree</derivedcompoundref>
     <derivedcompoundref refid="classSR__SRSL__NS_1_1SRSLLexicalUnit" prot="public" virt="non-virtual">SR_SRSL_NS::SRSLLexicalUnit</derivedcompoundref>
     <derivedcompoundref refid="classSR__SRSL__NS_1_1SRSLShader" prot="public" virt="non-virtual">SR_SRSL_NS::SRSLShader</derivedcompoundref>
+    <derivedcompoundref refid="classSR__SRSL__NS_1_1SRSLShaderCache" prot="public" virt="non-virtual">SR_SRSL_NS::SRSLShaderCache</derivedcompoundref>
     <derivedcompoundref refid="classSR__UTILS__NS_1_1ClassDB" prot="public" virt="non-virtual">SR_UTILS_NS::ClassDB</derivedcompoundref>
     <derivedcompoundref refid="classSR__UTILS__NS_1_1CmdManager" prot="private" virt="non-virtual">SR_UTILS_NS::CmdManager</derivedcompoundref>
     <derivedcompoundref refid="classSR__UTILS__NS_1_1CursorLock" prot="public" virt="non-virtual">SR_UTILS_NS::CursorLock</derivedcompoundref>
@@ -202,22 +203,16 @@
         <childnode refid="1" relation="private-inheritance">
         </childnode>
       </node>
-      <node id="312">
-        <label>SR_UTILS_NS::GlobalSettings&lt; EditorSettings &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1GlobalSettings"/>
-        <childnode refid="311" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="313">
+      <node id="285">
         <label>SR_UTILS_NS::GlobalSettings&lt; LayerManager &gt;</label>
         <link refid="classSR__UTILS__NS_1_1GlobalSettings"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="314">
+      <node id="286">
         <label>SR_UTILS_NS::GlobalSettings&lt; TagManager &gt;</label>
         <link refid="classSR__UTILS__NS_1_1GlobalSettings"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
       <node id="11">
@@ -478,10 +473,10 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="315">
+      <node id="287">
         <label>SR_AUDIO_NS::SoundManager&lt; SoundManager &gt;</label>
         <link refid="classSR__AUDIO__NS_1_1SoundManager"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
       <node id="43">
@@ -556,12 +551,6 @@
         <childnode refid="59" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="356">
-        <label>SR_CORE_NS::EditorSettings&lt; EditorSettings &gt;</label>
-        <link refid="classSR__CORE__NS_1_1EditorSettings"/>
-        <childnode refid="355" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="53">
         <label>SR_CORE_NS::EngineScene</label>
         <link refid="structSR__CORE__NS_1_1EngineScene"/>
@@ -580,10 +569,10 @@
         <childnode refid="59" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="236">
+      <node id="211">
         <label>SR_CORE_NS::GraphicsResourceReloader</label>
         <link refid="classSR__CORE__NS_1_1GraphicsResourceReloader"/>
-        <childnode refid="235" relation="public-inheritance">
+        <childnode refid="210" relation="public-inheritance">
         </childnode>
       </node>
       <node id="54">
@@ -652,34 +641,10 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="182">
-        <label>SR_GRAPH_NS::BasePass</label>
-        <link refid="classSR__GRAPH__NS_1_1BasePass"/>
-        <childnode refid="181" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="78">
         <label>SR_GRAPH_NS::BasicWindowImpl</label>
         <link refid="classSR__GRAPH__NS_1_1BasicWindowImpl"/>
         <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="201">
-        <label>SR_GRAPH_NS::CascadedShadowMapPass</label>
-        <link refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass"/>
-        <childnode refid="200" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="183">
-        <label>SR_GRAPH_NS::ClearBuffersPass</label>
-        <link refid="classSR__GRAPH__NS_1_1ClearBuffersPass"/>
-        <childnode refid="182" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="203">
-        <label>SR_GRAPH_NS::ColorBufferPass</label>
-        <link refid="classSR__GRAPH__NS_1_1ColorBufferPass"/>
-        <childnode refid="200" relation="public-inheritance">
         </childnode>
       </node>
       <node id="99">
@@ -688,22 +653,10 @@
         <childnode refid="98" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="184">
-        <label>SR_GRAPH_NS::DebugPass</label>
-        <link refid="classSR__GRAPH__NS_1_1DebugPass"/>
-        <childnode refid="182" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="196">
-        <label>SR_GRAPH_NS::DepthBufferPass</label>
-        <link refid="classSR__GRAPH__NS_1_1DepthBufferPass"/>
-        <childnode refid="195" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="316">
+      <node id="288">
         <label>SR_GRAPH_NS::DescriptorManager&lt; DescriptorManager &gt;</label>
         <link refid="classSR__GRAPH__NS_1_1DescriptorManager"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
       <node id="76">
@@ -712,28 +665,10 @@
         <childnode refid="75" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="188">
-        <label>SR_GRAPH_NS::FileRenderTechnique</label>
-        <link refid="classSR__GRAPH__NS_1_1FileRenderTechnique"/>
-        <childnode refid="187" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="192">
-        <label>SR_GRAPH_NS::FlatClusterPass</label>
-        <link refid="classSR__GRAPH__NS_1_1FlatClusterPass"/>
-        <childnode refid="191" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="82">
         <label>SR_GRAPH_NS::FlatMeshCluster</label>
         <link refid="classSR__GRAPH__NS_1_1FlatMeshCluster"/>
         <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="186">
-        <label>SR_GRAPH_NS::FramebufferPass</label>
-        <link refid="classSR__GRAPH__NS_1_1FramebufferPass"/>
-        <childnode refid="185" relation="public-inheritance">
         </childnode>
       </node>
       <node id="83">
@@ -766,10 +701,10 @@
         <childnode refid="89" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="317">
+      <node id="289">
         <label>SR_GRAPH_NS::GUI::GlobalWidgetManager&lt; GlobalWidgetManager &gt;</label>
         <link refid="classSR__GRAPH__NS_1_1GUI_1_1GlobalWidgetManager"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
       <node id="86">
@@ -778,10 +713,10 @@
         <childnode refid="1" relation="private-inheritance">
         </childnode>
       </node>
-      <node id="318">
+      <node id="290">
         <label>SR_GRAPH_NS::GUI::MessageBoxWidget&lt; MessageBoxWidget &gt;</label>
         <link refid="classSR__GRAPH__NS_1_1GUI_1_1MessageBoxWidget"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
       <node id="87">
@@ -790,10 +725,10 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="319">
+      <node id="291">
         <label>SR_GRAPH_NS::GUI::NodeManager&lt; NodeManager &gt;</label>
         <link refid="classSR__GRAPH__NS_1_1GUI_1_1NodeManager"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
       <node id="88">
@@ -802,10 +737,10 @@
         <childnode refid="1" relation="private-inheritance">
         </childnode>
       </node>
-      <node id="320">
+      <node id="292">
         <label>SR_GRAPH_NS::GUI::ViewportsTableManager&lt; ViewportsTableManager &gt;</label>
         <link refid="classSR__GRAPH__NS_1_1GUI_1_1ViewportsTableManager"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
       <node id="89">
@@ -826,30 +761,6 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="185">
-        <label>SR_GRAPH_NS::GroupPass</label>
-        <link refid="classSR__GRAPH__NS_1_1GroupPass"/>
-        <childnode refid="182" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="193">
-        <label>SR_GRAPH_NS::IMesh3DClusterPass</label>
-        <link refid="classSR__GRAPH__NS_1_1IMesh3DClusterPass"/>
-        <childnode refid="191" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="191">
-        <label>SR_GRAPH_NS::IMeshClusterPass</label>
-        <link refid="classSR__GRAPH__NS_1_1IMeshClusterPass"/>
-        <childnode refid="182" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="187">
-        <label>SR_GRAPH_NS::IRenderTechnique</label>
-        <link refid="classSR__GRAPH__NS_1_1IRenderTechnique"/>
-        <childnode refid="185" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="93">
         <label>SR_GRAPH_NS::LightSystem</label>
         <link refid="classSR__GRAPH__NS_1_1LightSystem"/>
@@ -862,34 +773,34 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="252">
+      <node id="227">
         <label>SR_GRAPH_NS::MaterialProperties</label>
         <link refid="classSR__GRAPH__NS_1_1MaterialProperties"/>
-        <childnode refid="251" relation="public-inheritance">
+        <childnode refid="226" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="243">
+      <node id="218">
         <label>SR_GRAPH_NS::MaterialProperty</label>
         <link refid="classSR__GRAPH__NS_1_1MaterialProperty"/>
-        <childnode refid="242" relation="public-inheritance">
+        <childnode refid="217" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="321">
+      <node id="293">
         <label>SR_GRAPH_NS::Memory::CameraManager&lt; CameraManager &gt;</label>
         <link refid="classSR__GRAPH__NS_1_1Memory_1_1CameraManager"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="322">
+      <node id="294">
         <label>SR_GRAPH_NS::Memory::MeshManager&lt; MeshManager &gt;</label>
         <link refid="classSR__GRAPH__NS_1_1Memory_1_1MeshManager"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="323">
+      <node id="295">
         <label>SR_GRAPH_NS::Memory::ShaderProgramManager&lt; ShaderProgramManager &gt;</label>
         <link refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
       <node id="95">
@@ -898,16 +809,16 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="324">
+      <node id="296">
         <label>SR_GRAPH_NS::Memory::TextureConfigs&lt; TextureConfigs &gt;</label>
         <link refid="classSR__GRAPH__NS_1_1Memory_1_1TextureConfigs"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="325">
+      <node id="297">
         <label>SR_GRAPH_NS::Memory::UBOManager&lt; UBOManager &gt;</label>
         <link refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
       <node id="96">
@@ -928,22 +839,10 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="199">
-        <label>SR_GRAPH_NS::MeshDrawerPass</label>
-        <link refid="classSR__GRAPH__NS_1_1MeshDrawerPass"/>
-        <childnode refid="182" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="244">
+      <node id="219">
         <label>SR_GRAPH_NS::MeshMaterialProperty</label>
         <link refid="classSR__GRAPH__NS_1_1MeshMaterialProperty"/>
-        <childnode refid="242" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="200">
-        <label>SR_GRAPH_NS::OffScreenMeshDrawerPass</label>
-        <link refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass"/>
-        <childnode refid="199" relation="public-inheritance">
+        <childnode refid="217" relation="public-inheritance">
         </childnode>
       </node>
       <node id="100">
@@ -952,76 +851,28 @@
         <childnode refid="98" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="194">
-        <label>SR_GRAPH_NS::OpaquePass</label>
-        <link refid="classSR__GRAPH__NS_1_1OpaquePass"/>
-        <childnode refid="193" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="204">
-        <label>SR_GRAPH_NS::PostProcessPass</label>
-        <link refid="classSR__GRAPH__NS_1_1PostProcessPass"/>
-        <childnode refid="182" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="102">
-        <label>SR_GRAPH_NS::RenderSettings</label>
-        <link refid="classSR__GRAPH__NS_1_1RenderSettings"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="103">
         <label>SR_GRAPH_NS::RenderStrategy</label>
         <link refid="classSR__GRAPH__NS_1_1RenderStrategy"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="326">
-        <label>SR_GRAPH_NS::SRSL::SRSLLoader&lt; SRSLLoader &gt;</label>
-        <link refid="classSR__GRAPH__NS_1_1SRSL_1_1SRSLLoader"/>
-        <childnode refid="311" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="205">
-        <label>SR_GRAPH_NS::SSAOPass</label>
-        <link refid="classSR__GRAPH__NS_1_1SSAOPass"/>
-        <childnode refid="204" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="327">
+      <node id="298">
         <label>SR_GRAPH_NS::SSBOManager&lt; SSBOManager &gt;</label>
         <link refid="classSR__GRAPH__NS_1_1SSBOManager"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="189">
-        <label>SR_GRAPH_NS::ScriptableRenderTechnique</label>
-        <link refid="classSR__GRAPH__NS_1_1ScriptableRenderTechnique"/>
-        <childnode refid="187" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="104">
+      <node id="103">
         <label>SR_GRAPH_NS::ShadedMeshSubCluster</label>
         <link refid="classSR__GRAPH__NS_1_1ShadedMeshSubCluster"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="195">
-        <label>SR_GRAPH_NS::ShaderOverridePass</label>
-        <link refid="classSR__GRAPH__NS_1_1ShaderOverridePass"/>
-        <childnode refid="193" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="197">
-        <label>SR_GRAPH_NS::ShadowMapPass</label>
-        <link refid="classSR__GRAPH__NS_1_1ShadowMapPass"/>
-        <childnode refid="195" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="206">
-        <label>SR_GRAPH_NS::SkyboxPass</label>
-        <link refid="classSR__GRAPH__NS_1_1SkyboxPass"/>
-        <childnode refid="182" relation="public-inheritance">
+      <node id="104">
+        <label>SR_GRAPH_NS::ShaderCache</label>
+        <link refid="classSR__GRAPH__NS_1_1ShaderCache"/>
+        <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="105">
@@ -1042,12 +893,6 @@
         <childnode refid="105" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="190">
-        <label>SR_GRAPH_NS::SwapchainPass</label>
-        <link refid="classSR__GRAPH__NS_1_1SwapchainPass"/>
-        <childnode refid="185" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="108">
         <label>SR_GRAPH_NS::TextBuilder</label>
         <link refid="classSR__GRAPH__NS_1_1TextBuilder"/>
@@ -1066,34 +911,16 @@
         <childnode refid="98" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="198">
-        <label>SR_GRAPH_NS::TransparentPass</label>
-        <link refid="classSR__GRAPH__NS_1_1TransparentPass"/>
-        <childnode refid="193" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="77">
         <label>SR_GRAPH_NS::UniqueMaterial</label>
         <link refid="classSR__GRAPH__NS_1_1UniqueMaterial"/>
         <childnode refid="75" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="202">
-        <label>SR_GRAPH_NS::VarianceShadowMapPass</label>
-        <link refid="classSR__GRAPH__NS_1_1VarianceShadowMapPass"/>
-        <childnode refid="201" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="110">
         <label>SR_GRAPH_NS::VulkanTools::MemoryManager</label>
         <link refid="classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager"/>
         <childnode refid="1" relation="private-inheritance">
-        </childnode>
-      </node>
-      <node id="207">
-        <label>SR_GRAPH_NS::WidgetPass</label>
-        <link refid="classSR__GRAPH__NS_1_1WidgetPass"/>
-        <childnode refid="182" relation="public-inheritance">
         </childnode>
       </node>
       <node id="81">
@@ -1162,10 +989,10 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="328">
+      <node id="299">
         <label>SR_NETWORK_NS::FileDownloader&lt; FileDownloader &gt;</label>
         <link refid="classSR__NETWORK__NS_1_1FileDownloader"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
       <node id="122">
@@ -1210,10 +1037,10 @@
         <childnode refid="129" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="329">
+      <node id="300">
         <label>SR_PHYSICS_NS::PhysicsLibrary&lt; PhysicsLibrary &gt;</label>
         <link refid="classSR__PHYSICS__NS_1_1PhysicsLibrary"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
       <node id="125">
@@ -1222,10 +1049,10 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="330">
+      <node id="301">
         <label>SR_PHYSICS_NS::Raycast3D&lt; Raycast3D &gt;</label>
         <link refid="classSR__PHYSICS__NS_1_1Raycast3D"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
       <node id="129">
@@ -1308,16 +1135,16 @@
         <childnode refid="139" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="331">
+      <node id="302">
         <label>SR_SCRIPTING_NS::EvoScriptManager&lt; EvoScriptManager &gt;</label>
         <link refid="classSR__SCRIPTING__NS_1_1EvoScriptManager"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="237">
+      <node id="212">
         <label>SR_SCRIPTING_NS::EvoScriptResourceReloader</label>
         <link refid="classSR__SCRIPTING__NS_1_1EvoScriptResourceReloader"/>
-        <childnode refid="235" relation="public-inheritance">
+        <childnode refid="210" relation="public-inheritance">
         </childnode>
       </node>
       <node id="17">
@@ -1326,10 +1153,10 @@
         <childnode refid="16" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="332">
+      <node id="303">
         <label>SR_SCRIPTING_NS::GlobalEvoCompiler&lt; GlobalEvoCompiler &gt;</label>
         <link refid="classSR__SCRIPTING__NS_1_1GlobalEvoCompiler"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
       <node id="141">
@@ -1338,13 +1165,13 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="333">
+      <node id="304">
         <label>SR_SCRIPTING_NS::ScriptSystem&lt; ScriptSystem &gt;</label>
         <link refid="classSR__SCRIPTING__NS_1_1ScriptSystem"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="208">
+      <node id="182">
         <label>SR_SRLM_NS::BranchNode</label>
         <link refid="classSR__SRLM__NS_1_1BranchNode"/>
         <childnode refid="181" relation="public-inheritance">
@@ -1522,10 +1349,10 @@
         <childnode refid="154" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="334">
+      <node id="305">
         <label>SR_SRLM_NS::DataTypeManager&lt; DataTypeManager &gt;</label>
         <link refid="classSR__SRLM__NS_1_1DataTypeManager"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
       <node id="165">
@@ -1570,7 +1397,7 @@
         <childnode refid="154" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="209">
+      <node id="183">
         <label>SR_SRLM_NS::DebugPrintNode</label>
         <link refid="classSR__SRLM__NS_1_1DebugPrintNode"/>
         <childnode refid="181" relation="public-inheritance">
@@ -1600,10 +1427,10 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="335">
+      <node id="306">
         <label>SR_SRLM_NS::LogicalNodeManager&lt; LogicalNodeManager &gt;</label>
         <link refid="classSR__SRLM__NS_1_1LogicalNodeManager"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
       <node id="180">
@@ -1612,509 +1439,515 @@
         <childnode refid="175" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="210">
+      <node id="184">
         <label>SR_SRLM_NS::SequenceNode</label>
         <link refid="classSR__SRLM__NS_1_1SequenceNode"/>
         <childnode refid="181" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="211">
+      <node id="185">
         <label>SR_SRLM_NS::StartNode</label>
         <link refid="classSR__SRLM__NS_1_1StartNode"/>
         <childnode refid="181" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="213">
+      <node id="187">
         <label>SR_SRLM_NS::StartResetNode</label>
         <link refid="classSR__SRLM__NS_1_1StartResetNode"/>
         <childnode refid="172" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="212">
+      <node id="186">
         <label>SR_SRLM_NS::SynchronizeNode</label>
         <link refid="classSR__SRLM__NS_1_1SynchronizeNode"/>
         <childnode refid="181" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="336">
+      <node id="307">
         <label>SR_SRSL_NS::GLSLCodeGenerator&lt; GLSLCodeGenerator &gt;</label>
         <link refid="classSR__SRSL__NS_1_1GLSLCodeGenerator"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="214">
+      <node id="188">
         <label>SR_SRSL_NS::SRSLAnalyzedTree</label>
         <link refid="classSR__SRSL__NS_1_1SRSLAnalyzedTree"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="337">
+      <node id="308">
         <label>SR_SRSL_NS::SRSLAssignExpander&lt; SRSLAssignExpander &gt;</label>
         <link refid="classSR__SRSL__NS_1_1SRSLAssignExpander"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="216">
+      <node id="190">
         <label>SR_SRSL_NS::SRSLDecorator</label>
         <link refid="classSR__SRSL__NS_1_1SRSLDecorator"/>
-        <childnode refid="215" relation="public-inheritance">
+        <childnode refid="189" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="217">
+      <node id="191">
         <label>SR_SRSL_NS::SRSLDecorators</label>
         <link refid="classSR__SRSL__NS_1_1SRSLDecorators"/>
-        <childnode refid="215" relation="public-inheritance">
+        <childnode refid="189" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="338">
+      <node id="309">
         <label>SR_SRSL_NS::SRSLEvaluator&lt; SRSLEvaluator &gt;</label>
         <link refid="classSR__SRSL__NS_1_1SRSLEvaluator"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="218">
+      <node id="192">
         <label>SR_SRSL_NS::SRSLExpr</label>
         <link refid="classSR__SRSL__NS_1_1SRSLExpr"/>
-        <childnode refid="215" relation="public-inheritance">
+        <childnode refid="189" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="219">
+      <node id="193">
         <label>SR_SRSL_NS::SRSLForStatement</label>
         <link refid="classSR__SRSL__NS_1_1SRSLForStatement"/>
-        <childnode refid="215" relation="public-inheritance">
+        <childnode refid="189" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="220">
+      <node id="194">
         <label>SR_SRSL_NS::SRSLFunction</label>
         <link refid="classSR__SRSL__NS_1_1SRSLFunction"/>
-        <childnode refid="215" relation="public-inheritance">
+        <childnode refid="189" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="221">
+      <node id="195">
         <label>SR_SRSL_NS::SRSLIfStatement</label>
         <link refid="classSR__SRSL__NS_1_1SRSLIfStatement"/>
-        <childnode refid="215" relation="public-inheritance">
+        <childnode refid="189" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="339">
+      <node id="310">
         <label>SR_SRSL_NS::SRSLLexer&lt; SRSLLexer &gt;</label>
         <link refid="classSR__SRSL__NS_1_1SRSLLexer"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="340">
+      <node id="311">
         <label>SR_SRSL_NS::SRSLLexicalAnalyzer&lt; SRSLLexicalAnalyzer &gt;</label>
         <link refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="222">
+      <node id="196">
         <label>SR_SRSL_NS::SRSLLexicalTree</label>
         <link refid="classSR__SRSL__NS_1_1SRSLLexicalTree"/>
-        <childnode refid="215" relation="public-inheritance">
+        <childnode refid="189" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="215">
+      <node id="189">
         <label>SR_SRSL_NS::SRSLLexicalUnit</label>
         <link refid="classSR__SRSL__NS_1_1SRSLLexicalUnit"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="341">
+      <node id="312">
         <label>SR_SRSL_NS::SRSLMathExpression&lt; SRSLMathExpression &gt;</label>
         <link refid="classSR__SRSL__NS_1_1SRSLMathExpression"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="342">
+      <node id="313">
         <label>SR_SRSL_NS::SRSLPreProcessor&lt; SRSLPreProcessor &gt;</label>
         <link refid="classSR__SRSL__NS_1_1SRSLPreProcessor"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="343">
+      <node id="314">
         <label>SR_SRSL_NS::SRSLPseudoCodeGenerator&lt; SRSLPseudoCodeGenerator &gt;</label>
         <link refid="classSR__SRSL__NS_1_1SRSLPseudoCodeGenerator"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="344">
+      <node id="315">
         <label>SR_SRSL_NS::SRSLRefAnalyzer&lt; SRSLRefAnalyzer &gt;</label>
         <link refid="classSR__SRSL__NS_1_1SRSLRefAnalyzer"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="223">
+      <node id="197">
         <label>SR_SRSL_NS::SRSLReturn</label>
         <link refid="classSR__SRSL__NS_1_1SRSLReturn"/>
-        <childnode refid="215" relation="public-inheritance">
+        <childnode refid="189" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="227">
+      <node id="201">
         <label>SR_SRSL_NS::SRSLShader</label>
         <link refid="classSR__SRSL__NS_1_1SRSLShader"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="224">
+      <node id="202">
+        <label>SR_SRSL_NS::SRSLShaderCache</label>
+        <link refid="classSR__SRSL__NS_1_1SRSLShaderCache"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="198">
         <label>SR_SRSL_NS::SRSLStructureStatement</label>
         <link refid="classSR__SRSL__NS_1_1SRSLStructureStatement"/>
-        <childnode refid="215" relation="public-inheritance">
+        <childnode refid="189" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="345">
+      <node id="316">
         <label>SR_SRSL_NS::SRSLTypeInfo&lt; SRSLTypeInfo &gt;</label>
         <link refid="classSR__SRSL__NS_1_1SRSLTypeInfo"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="225">
+      <node id="199">
         <label>SR_SRSL_NS::SRSLVariable</label>
         <link refid="classSR__SRSL__NS_1_1SRSLVariable"/>
-        <childnode refid="215" relation="public-inheritance">
+        <childnode refid="189" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="226">
+      <node id="200">
         <label>SR_SRSL_NS::SRSLWhileStatement</label>
         <link refid="classSR__SRSL__NS_1_1SRSLWhileStatement"/>
-        <childnode refid="215" relation="public-inheritance">
+        <childnode refid="189" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="245">
+      <node id="220">
         <label>SR_UTILS_NS::ArrayReferenceProperty</label>
         <link refid="classSR__UTILS__NS_1_1ArrayReferenceProperty"/>
-        <childnode refid="242" relation="public-inheritance">
+        <childnode refid="217" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="346">
+      <node id="317">
         <label>SR_UTILS_NS::Broadcaster&lt; Broadcaster &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Broadcaster"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="347">
+      <node id="318">
         <label>SR_UTILS_NS::CLIManager&lt; CLIManager &gt;</label>
         <link refid="classSR__UTILS__NS_1_1CLIManager"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="228">
+      <node id="203">
         <label>SR_UTILS_NS::ClassDB</label>
         <link refid="classSR__UTILS__NS_1_1ClassDB"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="229">
+      <node id="204">
         <label>SR_UTILS_NS::CmdManager</label>
         <link refid="classSR__UTILS__NS_1_1CmdManager"/>
         <childnode refid="1" relation="private-inheritance">
         </childnode>
       </node>
-      <node id="348">
+      <node id="319">
         <label>SR_UTILS_NS::ComponentManager&lt; ComponentManager &gt;</label>
         <link refid="classSR__UTILS__NS_1_1ComponentManager"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="230">
+      <node id="205">
         <label>SR_UTILS_NS::CursorLock</label>
         <link refid="classSR__UTILS__NS_1_1CursorLock"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="349">
+      <node id="320">
         <label>SR_UTILS_NS::Debug&lt; Debug &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Debug"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="350">
+      <node id="321">
         <label>SR_UTILS_NS::DebugDraw&lt; DebugDraw &gt;</label>
         <link refid="classSR__UTILS__NS_1_1DebugDraw"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="238">
+      <node id="213">
         <label>SR_UTILS_NS::DefaultResourceReloader</label>
         <link refid="classSR__UTILS__NS_1_1DefaultResourceReloader"/>
-        <childnode refid="235" relation="public-inheritance">
+        <childnode refid="210" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="231">
+      <node id="206">
         <label>SR_UTILS_NS::EntityIdList</label>
         <link refid="classSR__UTILS__NS_1_1EntityIdList"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="246">
+      <node id="221">
         <label>SR_UTILS_NS::EntityRefProperty</label>
         <link refid="classSR__UTILS__NS_1_1EntityRefProperty"/>
-        <childnode refid="242" relation="public-inheritance">
+        <childnode refid="217" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="247">
+      <node id="222">
         <label>SR_UTILS_NS::EnumProperty</label>
         <link refid="classSR__UTILS__NS_1_1EnumProperty"/>
-        <childnode refid="242" relation="public-inheritance">
+        <childnode refid="217" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="232">
+      <node id="207">
         <label>SR_UTILS_NS::EnumReflector</label>
         <link refid="classSR__UTILS__NS_1_1EnumReflector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="351">
+      <node id="322">
         <label>SR_UTILS_NS::EnumReflectorManager&lt; EnumReflectorManager &gt;</label>
         <link refid="classSR__UTILS__NS_1_1EnumReflectorManager"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="352">
+      <node id="323">
         <label>SR_UTILS_NS::EventManager&lt; EventManager &gt;</label>
         <link refid="classSR__UTILS__NS_1_1EventManager"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="248">
+      <node id="223">
         <label>SR_UTILS_NS::ExternalProperty</label>
         <link refid="classSR__UTILS__NS_1_1ExternalProperty"/>
-        <childnode refid="242" relation="public-inheritance">
+        <childnode refid="217" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="353">
+      <node id="324">
         <label>SR_UTILS_NS::Features&lt; Features &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Features"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="354">
+      <node id="325">
         <label>SR_UTILS_NS::FileDialog&lt; FileDialog &gt;</label>
         <link refid="classSR__UTILS__NS_1_1FileDialog"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="233">
+      <node id="208">
         <label>SR_UTILS_NS::FileWatcher</label>
         <link refid="classSR__UTILS__NS_1_1FileWatcher"/>
         <childnode refid="1" relation="private-inheritance">
         </childnode>
       </node>
-      <node id="355">
+      <node id="326">
         <label>SR_UTILS_NS::GlobalSettings&lt; T &gt;</label>
         <link refid="classSR__UTILS__NS_1_1GlobalSettings"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="234">
+      <node id="209">
         <label>SR_UTILS_NS::HashManager</label>
         <link refid="classSR__UTILS__NS_1_1HashManager"/>
         <childnode refid="1" relation="private-inheritance">
         </childnode>
       </node>
-      <node id="235">
+      <node id="210">
         <label>SR_UTILS_NS::IResourceReloader</label>
         <link refid="classSR__UTILS__NS_1_1IResourceReloader"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="359">
+      <node id="329">
         <label>SR_UTILS_NS::Input&lt; Input &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Input"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="239">
+      <node id="214">
         <label>SR_UTILS_NS::InputDeviceData</label>
         <link refid="classSR__UTILS__NS_1_1InputDeviceData"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="240">
+      <node id="215">
         <label>SR_UTILS_NS::KeyboardInputData</label>
         <link refid="classSR__UTILS__NS_1_1KeyboardInputData"/>
-        <childnode refid="239" relation="public-inheritance">
+        <childnode refid="214" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="249">
+      <node id="224">
         <label>SR_UTILS_NS::LabelProperty</label>
         <link refid="classSR__UTILS__NS_1_1LabelProperty"/>
-        <childnode refid="242" relation="public-inheritance">
+        <childnode refid="217" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="357">
+      <node id="327">
         <label>SR_UTILS_NS::LayerManager&lt; LayerManager &gt;</label>
         <link refid="classSR__UTILS__NS_1_1LayerManager"/>
-        <childnode refid="355" relation="public-inheritance">
+        <childnode refid="326" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="360">
+      <node id="330">
         <label>SR_UTILS_NS::MigrationManager&lt; MigrationManager &gt;</label>
         <link refid="classSR__UTILS__NS_1_1MigrationManager"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="241">
+      <node id="216">
         <label>SR_UTILS_NS::MouseInputData</label>
         <link refid="classSR__UTILS__NS_1_1MouseInputData"/>
-        <childnode refid="239" relation="public-inheritance">
+        <childnode refid="214" relation="public-inheritance">
         </childnode>
       </node>
       <node id="1">
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
-      <node id="250">
+      <node id="225">
         <label>SR_UTILS_NS::PathProperty</label>
         <link refid="classSR__UTILS__NS_1_1PathProperty"/>
-        <childnode refid="242" relation="public-inheritance">
+        <childnode refid="217" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="242">
+      <node id="217">
         <label>SR_UTILS_NS::Property</label>
         <link refid="classSR__UTILS__NS_1_1Property"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="251">
+      <node id="226">
         <label>SR_UTILS_NS::PropertyContainer</label>
         <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
-        <childnode refid="242" relation="public-inheritance">
+        <childnode refid="217" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="361">
+      <node id="331">
         <label>SR_UTILS_NS::PropertyManager&lt; PropertyManager &gt;</label>
         <link refid="classSR__UTILS__NS_1_1PropertyManager"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="362">
+      <node id="332">
         <label>SR_UTILS_NS::Random&lt; Random &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Random"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="363">
+      <node id="333">
         <label>SR_UTILS_NS::ResourceManager&lt; ResourceManager &gt;</label>
         <link refid="classSR__UTILS__NS_1_1ResourceManager"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="254">
+      <node id="229">
         <label>SR_UTILS_NS::ResourceType</label>
         <link refid="classSR__UTILS__NS_1_1ResourceType"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="255">
+      <node id="230">
         <label>SR_UTILS_NS::ResourcesHolder</label>
         <link refid="classSR__UTILS__NS_1_1ResourcesHolder"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="311">
+      <node id="284">
         <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
+        <childnode refid="231" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="256">
+      <node id="231">
         <label>SR_UTILS_NS::SingletonBase</label>
         <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="370">
+      <node id="340">
         <label>SR_UTILS_NS::SingletonManager</label>
         <link refid="classSR__UTILS__NS_1_1SingletonManager"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="253">
+      <node id="228">
         <label>SR_UTILS_NS::StandardProperty</label>
         <link refid="classSR__UTILS__NS_1_1StandardProperty"/>
-        <childnode refid="242" relation="public-inheritance">
+        <childnode refid="217" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="364">
+      <node id="334">
         <label>SR_UTILS_NS::StoreUtils::Storage&lt; Storage &gt;</label>
         <link refid="classSR__UTILS__NS_1_1StoreUtils_1_1Storage"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="371">
+      <node id="341">
         <label>SR_UTILS_NS::Subscription</label>
         <link refid="classSR__UTILS__NS_1_1Subscription"/>
         <childnode refid="1" relation="private-inheritance">
         </childnode>
       </node>
-      <node id="372">
+      <node id="342">
         <label>SR_UTILS_NS::SubscriptionInternalInfo</label>
         <link refid="classSR__UTILS__NS_1_1SubscriptionInternalInfo"/>
         <childnode refid="1" relation="private-inheritance">
         </childnode>
       </node>
-      <node id="373">
+      <node id="343">
         <label>SR_UTILS_NS::SubscriptionMessage</label>
         <link refid="classSR__UTILS__NS_1_1SubscriptionMessage"/>
         <childnode refid="1" relation="private-inheritance">
         </childnode>
       </node>
-      <node id="358">
+      <node id="328">
         <label>SR_UTILS_NS::TagManager&lt; TagManager &gt;</label>
         <link refid="classSR__UTILS__NS_1_1TagManager"/>
-        <childnode refid="355" relation="public-inheritance">
+        <childnode refid="326" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="374">
+      <node id="344">
         <label>SR_UTILS_NS::Task</label>
         <link refid="classSR__UTILS__NS_1_1Task"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="365">
+      <node id="335">
         <label>SR_UTILS_NS::TaskManager&lt; TaskManager &gt;</label>
         <link refid="classSR__UTILS__NS_1_1TaskManager"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="366">
+      <node id="336">
         <label>SR_UTILS_NS::TestManager&lt; TestManager &gt;</label>
         <link refid="classSR__UTILS__NS_1_1TestManager"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="367">
+      <node id="337">
         <label>SR_UTILS_NS::ThreadWorkerStateRegistration&lt; ThreadWorkerStateRegistration &gt;</label>
         <link refid="classSR__UTILS__NS_1_1ThreadWorkerStateRegistration"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="368">
+      <node id="338">
         <label>SR_UTILS_NS::Web::CSSParser&lt; CSSParser &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Web_1_1CSSParser"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="375">
+      <node id="345">
         <label>SR_UTILS_NS::Xml::Document</label>
         <link refid="classSR__UTILS__NS_1_1Xml_1_1Document"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="376">
+      <node id="346">
         <label>SR_UTILS_NS::Yaml::Document</label>
         <link refid="classSR__UTILS__NS_1_1Yaml_1_1Document"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="369">
+      <node id="339">
         <label>SR_WORLD_NS::SceneAllocator&lt; SceneAllocator &gt;</label>
         <link refid="classSR__WORLD__NS_1_1SceneAllocator"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="284" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="377">
+      <node id="347">
         <label>SR_WORLD_NS::SceneUpdater</label>
         <link refid="classSR__WORLD__NS_1_1SceneUpdater"/>
         <childnode refid="1" relation="public-inheritance">
@@ -2126,328 +1959,316 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="289">
+      <node id="262">
         <label>SR_UTILS_NS::Singleton&lt; Broadcaster &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="290">
-        <label>SR_UTILS_NS::Singleton&lt; CLIManager &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="309">
-        <label>SR_UTILS_NS::Singleton&lt; CSSParser &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="264">
-        <label>SR_UTILS_NS::Singleton&lt; CameraManager &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="291">
-        <label>SR_UTILS_NS::Singleton&lt; ComponentManager &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="277">
-        <label>SR_UTILS_NS::Singleton&lt; DataTypeManager &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="292">
-        <label>SR_UTILS_NS::Singleton&lt; Debug &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="293">
-        <label>SR_UTILS_NS::Singleton&lt; DebugDraw &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="259">
-        <label>SR_UTILS_NS::Singleton&lt; DescriptorManager &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="258">
-        <label>SR_UTILS_NS::Singleton&lt; EditorSettings &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="294">
-        <label>SR_UTILS_NS::Singleton&lt; EnumReflectorManager &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="295">
-        <label>SR_UTILS_NS::Singleton&lt; EventManager &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="274">
-        <label>SR_UTILS_NS::Singleton&lt; EvoScriptManager &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="296">
-        <label>SR_UTILS_NS::Singleton&lt; Features &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="297">
-        <label>SR_UTILS_NS::Singleton&lt; FileDialog &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="271">
-        <label>SR_UTILS_NS::Singleton&lt; FileDownloader &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="279">
-        <label>SR_UTILS_NS::Singleton&lt; GLSLCodeGenerator &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="275">
-        <label>SR_UTILS_NS::Singleton&lt; GlobalEvoCompiler &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="260">
-        <label>SR_UTILS_NS::Singleton&lt; GlobalWidgetManager &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="298">
-        <label>SR_UTILS_NS::Singleton&lt; Input &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="299">
-        <label>SR_UTILS_NS::Singleton&lt; LayerManager &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="278">
-        <label>SR_UTILS_NS::Singleton&lt; LogicalNodeManager &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="265">
-        <label>SR_UTILS_NS::Singleton&lt; MeshManager &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="261">
-        <label>SR_UTILS_NS::Singleton&lt; MessageBoxWidget &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="300">
-        <label>SR_UTILS_NS::Singleton&lt; MigrationManager &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="262">
-        <label>SR_UTILS_NS::Singleton&lt; NodeManager &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="272">
-        <label>SR_UTILS_NS::Singleton&lt; PhysicsLibrary &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="301">
-        <label>SR_UTILS_NS::Singleton&lt; PropertyManager &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="302">
-        <label>SR_UTILS_NS::Singleton&lt; Random &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="273">
-        <label>SR_UTILS_NS::Singleton&lt; Raycast3D &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="303">
-        <label>SR_UTILS_NS::Singleton&lt; ResourceManager &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="280">
-        <label>SR_UTILS_NS::Singleton&lt; SRSLAssignExpander &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="281">
-        <label>SR_UTILS_NS::Singleton&lt; SRSLEvaluator &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="282">
-        <label>SR_UTILS_NS::Singleton&lt; SRSLLexer &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="283">
-        <label>SR_UTILS_NS::Singleton&lt; SRSLLexicalAnalyzer &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="269">
-        <label>SR_UTILS_NS::Singleton&lt; SRSLLoader &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="284">
-        <label>SR_UTILS_NS::Singleton&lt; SRSLMathExpression &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="285">
-        <label>SR_UTILS_NS::Singleton&lt; SRSLPreProcessor &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="286">
-        <label>SR_UTILS_NS::Singleton&lt; SRSLPseudoCodeGenerator &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="287">
-        <label>SR_UTILS_NS::Singleton&lt; SRSLRefAnalyzer &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="288">
-        <label>SR_UTILS_NS::Singleton&lt; SRSLTypeInfo &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="270">
-        <label>SR_UTILS_NS::Singleton&lt; SSBOManager &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="310">
-        <label>SR_UTILS_NS::Singleton&lt; SceneAllocator &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="276">
-        <label>SR_UTILS_NS::Singleton&lt; ScriptSystem &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="266">
-        <label>SR_UTILS_NS::Singleton&lt; ShaderProgramManager &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="257">
-        <label>SR_UTILS_NS::Singleton&lt; SoundManager &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="304">
-        <label>SR_UTILS_NS::Singleton&lt; Storage &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="305">
-        <label>SR_UTILS_NS::Singleton&lt; TagManager &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="306">
-        <label>SR_UTILS_NS::Singleton&lt; TaskManager &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="307">
-        <label>SR_UTILS_NS::Singleton&lt; TestManager &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="267">
-        <label>SR_UTILS_NS::Singleton&lt; TextureConfigs &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="308">
-        <label>SR_UTILS_NS::Singleton&lt; ThreadWorkerStateRegistration &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="268">
-        <label>SR_UTILS_NS::Singleton&lt; UBOManager &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
+        <childnode refid="231" relation="public-inheritance">
         </childnode>
       </node>
       <node id="263">
+        <label>SR_UTILS_NS::Singleton&lt; CLIManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="282">
+        <label>SR_UTILS_NS::Singleton&lt; CSSParser &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="238">
+        <label>SR_UTILS_NS::Singleton&lt; CameraManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="264">
+        <label>SR_UTILS_NS::Singleton&lt; ComponentManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="250">
+        <label>SR_UTILS_NS::Singleton&lt; DataTypeManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="265">
+        <label>SR_UTILS_NS::Singleton&lt; Debug &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="266">
+        <label>SR_UTILS_NS::Singleton&lt; DebugDraw &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="233">
+        <label>SR_UTILS_NS::Singleton&lt; DescriptorManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="267">
+        <label>SR_UTILS_NS::Singleton&lt; EnumReflectorManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="268">
+        <label>SR_UTILS_NS::Singleton&lt; EventManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="247">
+        <label>SR_UTILS_NS::Singleton&lt; EvoScriptManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="269">
+        <label>SR_UTILS_NS::Singleton&lt; Features &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="270">
+        <label>SR_UTILS_NS::Singleton&lt; FileDialog &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="244">
+        <label>SR_UTILS_NS::Singleton&lt; FileDownloader &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="252">
+        <label>SR_UTILS_NS::Singleton&lt; GLSLCodeGenerator &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="248">
+        <label>SR_UTILS_NS::Singleton&lt; GlobalEvoCompiler &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="234">
+        <label>SR_UTILS_NS::Singleton&lt; GlobalWidgetManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="271">
+        <label>SR_UTILS_NS::Singleton&lt; Input &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="272">
+        <label>SR_UTILS_NS::Singleton&lt; LayerManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="251">
+        <label>SR_UTILS_NS::Singleton&lt; LogicalNodeManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="239">
+        <label>SR_UTILS_NS::Singleton&lt; MeshManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="235">
+        <label>SR_UTILS_NS::Singleton&lt; MessageBoxWidget &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="273">
+        <label>SR_UTILS_NS::Singleton&lt; MigrationManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="236">
+        <label>SR_UTILS_NS::Singleton&lt; NodeManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="245">
+        <label>SR_UTILS_NS::Singleton&lt; PhysicsLibrary &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="274">
+        <label>SR_UTILS_NS::Singleton&lt; PropertyManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="275">
+        <label>SR_UTILS_NS::Singleton&lt; Random &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="246">
+        <label>SR_UTILS_NS::Singleton&lt; Raycast3D &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="276">
+        <label>SR_UTILS_NS::Singleton&lt; ResourceManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="253">
+        <label>SR_UTILS_NS::Singleton&lt; SRSLAssignExpander &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="254">
+        <label>SR_UTILS_NS::Singleton&lt; SRSLEvaluator &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="255">
+        <label>SR_UTILS_NS::Singleton&lt; SRSLLexer &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="256">
+        <label>SR_UTILS_NS::Singleton&lt; SRSLLexicalAnalyzer &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="257">
+        <label>SR_UTILS_NS::Singleton&lt; SRSLMathExpression &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="258">
+        <label>SR_UTILS_NS::Singleton&lt; SRSLPreProcessor &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="259">
+        <label>SR_UTILS_NS::Singleton&lt; SRSLPseudoCodeGenerator &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="260">
+        <label>SR_UTILS_NS::Singleton&lt; SRSLRefAnalyzer &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="261">
+        <label>SR_UTILS_NS::Singleton&lt; SRSLTypeInfo &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="243">
+        <label>SR_UTILS_NS::Singleton&lt; SSBOManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="283">
+        <label>SR_UTILS_NS::Singleton&lt; SceneAllocator &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="249">
+        <label>SR_UTILS_NS::Singleton&lt; ScriptSystem &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="240">
+        <label>SR_UTILS_NS::Singleton&lt; ShaderProgramManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="232">
+        <label>SR_UTILS_NS::Singleton&lt; SoundManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="277">
+        <label>SR_UTILS_NS::Singleton&lt; Storage &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="278">
+        <label>SR_UTILS_NS::Singleton&lt; TagManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="279">
+        <label>SR_UTILS_NS::Singleton&lt; TaskManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="280">
+        <label>SR_UTILS_NS::Singleton&lt; TestManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="241">
+        <label>SR_UTILS_NS::Singleton&lt; TextureConfigs &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="281">
+        <label>SR_UTILS_NS::Singleton&lt; ThreadWorkerStateRegistration &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="242">
+        <label>SR_UTILS_NS::Singleton&lt; UBOManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="231" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="237">
         <label>SR_UTILS_NS::Singleton&lt; ViewportsTableManager &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="256" relation="public-inheritance">
+        <childnode refid="231" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>

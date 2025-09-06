@@ -22,7 +22,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="90" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="110" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1af1e375c053d0dbea0040bf00fecce5be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -36,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="91" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="111" column="9"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="94" column="34" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="94" bodyend="96"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="114" column="34" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="114" bodyend="116"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1acf17bf2a44d114ee5fffd3f1412b5713" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -74,12 +74,13 @@
           <declname>key</declname>
         </param>
         <briefdescription>
+<para>================= Float ================= </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="98" column="34" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="98" bodyend="98"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="120" column="34" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="120" bodyend="120"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1afd1d813d035cc91b7b7858e6f6468851" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD float_t</type>
@@ -102,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="99" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="99" bodyend="101"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="121" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="121" bodyend="123"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1a8ba155f55339bfbdbb989db1cff63435" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -124,7 +125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="102" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="102" bodyend="104"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="124" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="124" bodyend="126"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1adf7a9efd5753f55966d8beea4b6c3df7" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -137,12 +138,13 @@
           <declname>key</declname>
         </param>
         <briefdescription>
+<para>================= Bool ================= </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="106" column="34" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="106" bodyend="106"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="130" column="34" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="130" bodyend="130"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1aa0d10fb1d5804f0b3931ca953a0e9e61" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -165,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="107" column="34" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="107" bodyend="109"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="131" column="34" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="131" bodyend="133"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1af38fb4019d2b581e2875db75a25ee20e" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -187,22 +189,156 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="110" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="110" bodyend="112"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="134" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="134" bodyend="136"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1a5285a08cb4a9e442c3143afa2bb25435" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>static SR_NODISCARD bool SR_UTILS_NS::StoreUtils::Template&lt; storeType &gt;::HasInt</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom key)</argsstring>
+        <name>HasInt</name>
+        <qualifiedname>SR_UTILS_NS::StoreUtils::Template::HasInt</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>================= Int ================= </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="140" column="34" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="140" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1abf03837f8c26021fba7d4e3ebaac6371" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD int64_t</type>
+        <definition>static SR_NODISCARD int64_t SR_UTILS_NS::StoreUtils::Template&lt; storeType &gt;::GetInt</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom key, const std::optional&lt; int64_t &gt; &amp;def=std::nullopt)</argsstring>
+        <name>GetInt</name>
+        <qualifiedname>SR_UTILS_NS::StoreUtils::Template::GetInt</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const std::optional&lt; int64_t &gt; &amp;</type>
+          <declname>def</declname>
+          <defval>std::nullopt</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="141" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="141" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1a0ea2ff97027bf23efe0e430784817e1c" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void SR_UTILS_NS::StoreUtils::Template&lt; storeType &gt;::SetInt</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom key, int64_t value)</argsstring>
+        <name>SetInt</name>
+        <qualifiedname>SR_UTILS_NS::StoreUtils::Template::SetInt</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>int64_t</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="144" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="144" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1a44d3379b45aa67f5ed5c997ef43ce1e6" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>static SR_NODISCARD bool SR_UTILS_NS::StoreUtils::Template&lt; storeType &gt;::HasString</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom key)</argsstring>
+        <name>HasString</name>
+        <qualifiedname>SR_UTILS_NS::StoreUtils::Template::HasString</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>================= String ================= </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="150" column="34" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="150" bodyend="150"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1aaf64bafcf0c4e922b0935ddd1554a9f8" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>static SR_NODISCARD std::string SR_UTILS_NS::StoreUtils::Template&lt; storeType &gt;::GetString</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom key, const std::optional&lt; std::string &gt; &amp;def=std::nullopt)</argsstring>
+        <name>GetString</name>
+        <qualifiedname>SR_UTILS_NS::StoreUtils::Template::GetString</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const std::optional&lt; std::string &gt; &amp;</type>
+          <declname>def</declname>
+          <defval>std::nullopt</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="151" column="41" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="151" bodyend="153"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1afb4c3b51acf383b4c14d947698cfb106" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void SR_UTILS_NS::StoreUtils::Template&lt; storeType &gt;::SetString</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom key, const std::string &amp;value)</argsstring>
+        <name>SetString</name>
+        <qualifiedname>SR_UTILS_NS::StoreUtils::Template::SetString</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="154" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="154" bodyend="156"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="88" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="88" bodyend="114"/>
+    <location file="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" line="108" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Common/StoreUtils.h" bodystart="108" bodyend="158"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1aa0d10fb1d5804f0b3931ca953a0e9e61" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StoreUtils::Template</scope><name>GetBool</name></member>
       <member refid="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1afd1d813d035cc91b7b7858e6f6468851" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StoreUtils::Template</scope><name>GetFloat</name></member>
+      <member refid="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1abf03837f8c26021fba7d4e3ebaac6371" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StoreUtils::Template</scope><name>GetInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1aaf64bafcf0c4e922b0935ddd1554a9f8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StoreUtils::Template</scope><name>GetString</name></member>
       <member refid="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1a653bade39d6d4da5b1f3dad46600dcac" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StoreUtils::Template</scope><name>Has</name></member>
       <member refid="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1adf7a9efd5753f55966d8beea4b6c3df7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StoreUtils::Template</scope><name>HasBool</name></member>
       <member refid="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1acf17bf2a44d114ee5fffd3f1412b5713" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StoreUtils::Template</scope><name>HasFloat</name></member>
+      <member refid="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1a5285a08cb4a9e442c3143afa2bb25435" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StoreUtils::Template</scope><name>HasInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1a44d3379b45aa67f5ed5c997ef43ce1e6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StoreUtils::Template</scope><name>HasString</name></member>
       <member refid="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1af38fb4019d2b581e2875db75a25ee20e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StoreUtils::Template</scope><name>SetBool</name></member>
       <member refid="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1a8ba155f55339bfbdbb989db1cff63435" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StoreUtils::Template</scope><name>SetFloat</name></member>
+      <member refid="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1a0ea2ff97027bf23efe0e430784817e1c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StoreUtils::Template</scope><name>SetInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1afb4c3b51acf383b4c14d947698cfb106" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StoreUtils::Template</scope><name>SetString</name></member>
       <member refid="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1a4994e077d10765582e05a16813daa80e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StoreUtils::Template</scope><name>Template</name></member>
       <member refid="classSR__UTILS__NS_1_1StoreUtils_1_1Template_1af1e375c053d0dbea0040bf00fecce5be" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StoreUtils::Template</scope><name>~Template</name></member>
     </listofallmembers>

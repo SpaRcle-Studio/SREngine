@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="84" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="84" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="157" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="157" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a79cdaf48270c71f6eda421b9e9fb31f8" prot="private" static="no">
         <type>void(*)(<ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">Value</ref> &amp;, <ref refid="classSR__UTILS__NS_1_1SRClass" kindref="compound">SRClass</ref> *)</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="85" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="85" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="158" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="158" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -46,7 +46,49 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="83" column="16" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="83" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="153" column="16" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="153" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a7c72e78f3135daa226bddd755c2f7b06" prot="private" static="no" mutable="no">
+        <type>friend</type>
+        <definition>friend SR_UTILS_NS::Reflection::Value::ValueAssociativeContainerIterator</definition>
+        <argsstring></argsstring>
+        <name>ValueAssociativeContainerIterator</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::ValueAssociativeContainerIterator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="154" column="16" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="154" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a694f4bf7e92fa552f68ce5910793080b" prot="private" static="no" mutable="no">
+        <type>friend</type>
+        <definition>friend SR_UTILS_NS::Reflection::Value::ValueAssociativeContainer</definition>
+        <argsstring></argsstring>
+        <name>ValueAssociativeContainer</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::ValueAssociativeContainer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="155" column="16" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1adb37ac542750654bfdceff44a47959f4" prot="private" static="no" mutable="no">
+        <type>friend</type>
+        <definition>friend SR_UTILS_NS::Reflection::Value::ValueSequenceContainer</definition>
+        <argsstring></argsstring>
+        <name>ValueSequenceContainer</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::ValueSequenceContainer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="156" column="16" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="156" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1ae392467b8b98884797c4785304094f7b" prot="private" static="no" mutable="no">
         <type>entt::meta_any</type>
@@ -55,12 +97,13 @@
         <name>m_storage</name>
         <qualifiedname>SR_UTILS_NS::Reflection::Value::m_storage</qualifiedname>
         <briefdescription>
+<para>NOLINT. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="151" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="151" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="231" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="231" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -80,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="87" column="18"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="160" column="18"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -96,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="90" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="163" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1ae16027e4ed50e1a8eeed45dab3414f09" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -114,7 +157,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="91" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="164" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1ab620a81c9de5930f9ba1affdea009f70" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">Value</ref> &amp;</type>
@@ -132,7 +175,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="92" column="15"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="165" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a597157ab436bbe8115a40628a2bf1efc" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">Value</ref> &amp;</type>
@@ -150,7 +193,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="93" column="15"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="166" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1acac61f5e6edcd8213c20076cd5f8fff8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -164,7 +207,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="94" column="9"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="167" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a084cb1797f4b90e1490dd08fe6ae293d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -183,7 +226,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="100" column="28" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="100" bodyend="100"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="173" column="28" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="173" bodyend="173"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a81aacb48604dd2093217278605ee060f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -202,7 +245,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="101" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="101" bodyend="101"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="174" column="22" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="174" bodyend="174"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a0cc194053f41dff0880c6f3335513d9b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">Value</ref> &amp;</type>
@@ -216,7 +259,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="103" column="15"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="176" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a1490be67e8e4597a8357bccc55d87066" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">Value</ref> &amp;</type>
@@ -230,7 +273,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="104" column="15"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="177" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a840c3cdc70848341f40368b10dc6f34d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer" kindref="compound">ValueSequenceContainer</ref></type>
@@ -244,7 +287,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="106" column="45"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="179" column="45"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1ae58b00791f9ba53865a7aae1482d2c6e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer" kindref="compound">ValueSequenceContainer</ref></type>
@@ -258,7 +301,35 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="107" column="45"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="180" column="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1aba9432f730fa8d7d8d73defd13a01033" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Reflection_1_1ValueAssociativeContainer" kindref="compound">ValueAssociativeContainer</ref></type>
+        <definition>SR_NODISCARD ValueAssociativeContainer SR_UTILS_NS::Reflection::Value::AsAssociativeContainer</definition>
+        <argsstring>()</argsstring>
+        <name>AsAssociativeContainer</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::AsAssociativeContainer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="182" column="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1aae5a82bdc25456fdc1f2f7d33ffae371" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Reflection_1_1ValueAssociativeContainer" kindref="compound">ValueAssociativeContainer</ref></type>
+        <definition>SR_NODISCARD ValueAssociativeContainer SR_UTILS_NS::Reflection::Value::AsAssociativeContainer</definition>
+        <argsstring>() const</argsstring>
+        <name>AsAssociativeContainer</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::AsAssociativeContainer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="183" column="48"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a7a08f338ee1d29de77da01c9fa06ff43" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">Value</ref></type>
@@ -272,7 +343,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="109" column="28"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="185" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a523aa908a378a9ab750933955f99ceca" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">Value</ref></type>
@@ -286,7 +357,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="110" column="28"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="186" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a20643a653c758600bb5a4893ccf5cc95" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -300,7 +371,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="112" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="188" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1ab4635d29e20b922589b8483f6b789815" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -314,7 +385,35 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="113" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="189" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a239230b434766f4edaf183979fa424c0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsEmbedded</definition>
+        <argsstring>() const</argsstring>
+        <name>IsEmbedded</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::IsEmbedded</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="190" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1abba208ca7e68630442daffb68a3e3ad9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsDynamic</definition>
+        <argsstring>() const</argsstring>
+        <name>IsDynamic</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::IsDynamic</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="191" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a3dacfcbe188633a6413b2522d54bcd3a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -328,7 +427,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="115" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="193" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a9f3153e39e5f32d2b7f4502aa2e840c2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -342,7 +441,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="116" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="194" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a6106063a446f067526cd7108e7e24a5a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -356,7 +455,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="117" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="195" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a6ce734264c7e86ded5383b0a4fc92f35" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -370,7 +469,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="119" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="197" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a2ff90af84c3000496eb2e001b5d706d2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -384,7 +483,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="120" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="198" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a4ef0f56560149190a5be9a791258a332" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -398,7 +497,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="121" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="199" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a6d26579b2f7f7a3d01208bf37bf98f46" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -412,7 +511,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="122" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="200" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a0c0812bad97ceaa8a5c5d019ad6dea93" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -426,7 +525,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="123" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="201" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a029a8ca52194b4aabceb97d4f80b6607" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -440,7 +539,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="124" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="202" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a128679afe6ca6f5ded454d50226621f4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -454,7 +553,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="125" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="203" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a41cccb6b008269bce0b795ac84821042" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -468,7 +567,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="126" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="204" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a9148c6f28acb98eabcaa44ef0dbfeac2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsFColor</definition>
+        <argsstring>() const</argsstring>
+        <name>IsFColor</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::IsFColor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="205" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1ac1c40fe0568d44758b954ffc8a729980" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -482,7 +595,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="127" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="206" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1ae4ad4c70eb838ee1ea9e1d9ab6b57293" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -496,7 +609,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="128" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="207" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a9d313bec53fefd4cdad9f04eb9ef5975" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -510,7 +623,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="129" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="208" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a5384e935029c9ef884b0cb02b3b3f649" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -524,7 +637,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="130" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="209" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a28880e1164b728758812137c56f2a2f1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsOptional</definition>
+        <argsstring>() const</argsstring>
+        <name>IsOptional</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::IsOptional</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="210" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1aced0a678ac13e145d682a0822b3edb98" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -538,7 +665,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="131" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="211" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a5670ba81258ed4d8fba4f2a3014e12cc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -552,7 +679,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="132" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="212" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a6db249d11d7872177c3c3c528270b307" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -566,7 +693,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="133" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="213" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a933f827411555ca31b4c92a4a7ba5a52" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -580,7 +707,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="134" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="214" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a09973a21533ee13176dfc48b5f525a95" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -594,7 +721,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="135" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="215" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a839bdea940ec62a4bec64e237e5b472a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string_view</type>
@@ -608,7 +735,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="136" column="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="216" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a0991ce1e7c3c57167aba2561632cbc01" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string_view</type>
@@ -622,7 +749,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="137" column="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="217" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a1f8a5e4c52ded1cf87b1e8ae5649c319" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -636,7 +763,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="138" column="31"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="218" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a57c56451d0e29eb4158e58a196dd1874" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD void *</type>
@@ -650,7 +777,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="139" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="219" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1aadf2312704c9c8d853be395c44afd85a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const void *</type>
@@ -664,7 +791,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="140" column="33"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="220" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1afcd247fa2137c10874e1b67f37ba7b30" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string_view</type>
@@ -678,7 +805,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="141" column="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="221" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a13370039c8ec5d66df17cfa9e0aca422" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1SRClass" kindref="compound">SRClass</ref> *</type>
@@ -692,7 +819,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="142" column="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="222" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1acd034e0b8c2ae0495d0ce7da42584c13" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1SharedPtrBase" kindref="compound">SR_HTYPES_NS::SharedPtrBase</ref> *</type>
@@ -706,7 +833,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="143" column="50"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="223" column="50"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a85d448b983a4e873a07852a1f8ddff15" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD</type>
@@ -720,7 +847,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="145" column="22"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="225" column="22"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -740,12 +867,13 @@
           <declname>value</declname>
         </param>
         <briefdescription>
+<para>Implementation. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="96" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="182" bodyend="186"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="169" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="262" bodyend="267"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a39e2a44f7c3d52f1caacfcc5677f273d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -768,7 +896,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="97" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="188" bodyend="192"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="170" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="269" bodyend="274"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1af8634a9694c969b0fae3155b27a273fc" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -791,34 +919,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="98" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="194" bodyend="198"/>
-      </memberdef>
-    </sectiondef>
-    <sectiondef kind="private-static-func">
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a2370f85321dbfe77207a2b777788d803" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>typename T</type>
-          </param>
-        </templateparamlist>
-        <type>void</type>
-        <definition>void SR_UTILS_NS::Reflection::Value::InitBase</definition>
-        <argsstring>(Value &amp;value)</argsstring>
-        <name>InitBase</name>
-        <qualifiedname>SR_UTILS_NS::Reflection::Value::InitBase</qualifiedname>
-        <param>
-          <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">Value</ref> &amp;</type>
-          <declname>value</declname>
-        </param>
-        <briefdescription>
-<para>NOLINT. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>Implementation. </para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="148" column="32" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="157" bodyend="180"/>
+        <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="171" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="276" bodyend="281"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -827,8 +928,10 @@
 <para><hruler/>
  </para>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="82" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="82" bodyend="153"/>
+    <location file="Engine/libs/Utils/inc/Utils/Reflection/Value.h" line="152" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="152" bodyend="233"/>
     <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1aba9432f730fa8d7d8d73defd13a01033" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>AsAssociativeContainer</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1aae5a82bdc25456fdc1f2f7d33ffae371" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>AsAssociativeContainer</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a840c3cdc70848341f40368b10dc6f34d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>AsSequenceContainer</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1ae58b00791f9ba53865a7aae1482d2c6e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>AsSequenceContainer</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a523aa908a378a9ab750933955f99ceca" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>Copy</name></member>
@@ -844,17 +947,20 @@
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a0991ce1e7c3c57167aba2561632cbc01" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>GetSharedPtrType</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a13370039c8ec5d66df17cfa9e0aca422" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>GetSRClass</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a839bdea940ec62a4bec64e237e5b472a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>GetTypeName</name></member>
-      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a2370f85321dbfe77207a2b777788d803" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>InitBase</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a5384e935029c9ef884b0cb02b3b3f649" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsArithmetic</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a9f3153e39e5f32d2b7f4502aa2e840c2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsAssociativeContainer</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a6106063a446f067526cd7108e7e24a5a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsBitMap</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a9d313bec53fefd4cdad9f04eb9ef5975" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsBool</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1aced0a678ac13e145d682a0822b3edb98" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsClass</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1ab4635d29e20b922589b8483f6b789815" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsConst</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1abba208ca7e68630442daffb68a3e3ad9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsDynamic</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a239230b434766f4edaf183979fa424c0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsEmbedded</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a09973a21533ee13176dfc48b5f525a95" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsEnum</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a9148c6f28acb98eabcaa44ef0dbfeac2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsFColor</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a6db249d11d7872177c3c3c528270b307" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsIntegral</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1ae4ad4c70eb838ee1ea9e1d9ab6b57293" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsMathSize</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1ac1c40fe0568d44758b954ffc8a729980" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsMathVector</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a28880e1164b728758812137c56f2a2f1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsOptional</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a128679afe6ca6f5ded454d50226621f4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsPath</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a2ff90af84c3000496eb2e001b5d706d2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsPointer</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a41cccb6b008269bce0b795ac84821042" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsRect</name></member>
@@ -880,6 +986,9 @@
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a94b7bb1390e463f74b322580a81e5d48" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>Value</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a598d28a65593e116e229156802b7a76a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>Value</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1ae16027e4ed50e1a8eeed45dab3414f09" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>Value</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a694f4bf7e92fa552f68ce5910793080b" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>ValueAssociativeContainer</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a7c72e78f3135daa226bddd755c2f7b06" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>ValueAssociativeContainerIterator</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1adb37ac542750654bfdceff44a47959f4" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>ValueSequenceContainer</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a73562a390a7ef5f08c6899fc4c72b291" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>ValueSequenceContainerIterator</name></member>
       <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1acac61f5e6edcd8213c20076cd5f8fff8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>~Value</name></member>
     </listofallmembers>

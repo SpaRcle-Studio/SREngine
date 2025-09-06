@@ -34,13 +34,15 @@
         <link refid="classSR__UTILS__NS_1_1SRClassMeta"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="56" column="15" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" bodystart="56" bodyend="56"/>
+    <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" line="58" column="15" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/SRClassMeta.h" bodystart="58" bodyend="58"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1SRClassMeta_1a9db967125d3723675ee630b87e68234a" prot="public" virt="virtual"><scope>Codegen::SRClassMetaTemplate</scope><name>Allocate</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClassMeta_1a1a508aaaeb567f62ee6721ae72c403e9" prot="public" virt="virtual"><scope>Codegen::SRClassMetaTemplate</scope><name>CloneTo</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClassMeta_1ad88e0fe10086e869a3af7b10cbc1a408" prot="public" virt="non-virtual"><scope>Codegen::SRClassMetaTemplate</scope><name>ForEachProperty</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClassMeta_1a35708cdafddea4a6f6a645d83d5fac27" prot="public" virt="virtual"><scope>Codegen::SRClassMetaTemplate</scope><name>ForEachSRClass</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClassMeta_1ab4c15f4a2d6e4b641aa16b972ea3af03" prot="public" virt="virtual"><scope>Codegen::SRClassMetaTemplate</scope><name>GetBaseMetas</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClassMeta_1af6711458702bb1e3c1e17979c6a3aebb" prot="public" virt="virtual"><scope>Codegen::SRClassMetaTemplate</scope><name>GetCategory</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClassMeta_1a1dc66fc4cdc0c19dfe339bcc4c1d02d7" prot="public" virt="virtual"><scope>Codegen::SRClassMetaTemplate</scope><name>GetDisplayName</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClassMeta_1a70540ba2d08d6fb553a56392dbc8ea63" prot="public" virt="virtual"><scope>Codegen::SRClassMetaTemplate</scope><name>GetFactoryName</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClassMeta_1a66e1c75a69b056d062945b3a0a7e5aa8" prot="public" virt="virtual"><scope>Codegen::SRClassMetaTemplate</scope><name>GetInspectorName</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClassMeta_1ae55d9ab1ad11b516395f72a26cf17e1a" prot="public" virt="virtual"><scope>Codegen::SRClassMetaTemplate</scope><name>GetProperties</name></member>

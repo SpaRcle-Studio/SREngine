@@ -18,7 +18,7 @@
 Inherits the following classes: SR_UTILS_NS::Settings,  [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_1Singleton.md)
 
 
-Inherited by the following classes: [SR\_CORE\_NS::EditorSettings](classSR__CORE__NS_1_1EditorSettings.md),  [SR\_UTILS\_NS::LayerManager](classSR__UTILS__NS_1_1LayerManager.md),  [SR\_UTILS\_NS::TagManager](classSR__UTILS__NS_1_1TagManager.md)
+Inherited by the following classes: [SR\_UTILS\_NS::LayerManager](classSR__UTILS__NS_1_1LayerManager.md),  [SR\_UTILS\_NS::TagManager](classSR__UTILS__NS_1_1TagManager.md)
 
 
 
@@ -111,6 +111,11 @@ Inherited by the following classes: [SR\_CORE\_NS::EditorSettings](classSR__CORE
 
 
 
+## Public Functions
+
+| Type | Name |
+| ---: | :--- |
+| virtual [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**GetSettingsPath**](#function-getsettingspath) () const = 0<br> |
 
 
 
@@ -295,6 +300,21 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 
 
+## Public Functions Documentation
+
+
+
+
+### function GetSettingsPath 
+
+```C++
+virtual SR_UTILS_NS::Path SR_UTILS_NS::GlobalSettings::GetSettingsPath () const = 0
+```
+
+
+
+
+<hr>
 ## Public Static Functions Documentation
 
 

@@ -179,6 +179,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual bool | [**FreeVBO**](#function-freevbo) (int32\_t \* id) override<br> |
 | virtual SR\_NODISCARD uint8\_t | [**GetBuildIterationsCount**](#function-getbuilditerationscount) () noexcept override const<br> |
 | virtual SR\_NODISCARD void \* | [**GetCurrentFBOHandle**](#function-getcurrentfbohandle) () override const<br> |
+| virtual SR\_NODISCARD uint8\_t | [**GetCurrentFrameIndex**](#function-getcurrentframeindex) () override const<br> |
 | virtual SR\_NODISCARD void \* | [**GetCurrentShaderHandle**](#function-getcurrentshaderhandle) () override const<br> |
 | virtual SR\_NODISCARD std::set&lt; void \* &gt; | [**GetFBOHandles**](#function-getfbohandles) () override const<br> |
 | virtual SR\_NODISCARD uint8\_t | [**GetFrameBufferSampleCount**](#function-getframebuffersamplecount) () override const<br> |
@@ -187,6 +188,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual SR\_NODISCARD [**SR\_MATH\_NS::FColor**](classSR__MATH__NS_1_1FColor.md) | [**GetPixelColor**](#function-getpixelcolor) (uint32\_t textureId, uint32\_t x, uint32\_t y) override<br> |
 | virtual SR\_NODISCARD std::string | [**GetRenderer**](#function-getrenderer) () override const<br> |
 | virtual SR\_NODISCARD std::set&lt; void \* &gt; | [**GetShaderHandles**](#function-getshaderhandles) () override const<br> |
+| virtual SR\_NODISCARD uint16\_t | [**GetSwapchainImagesCount**](#function-getswapchainimagescount) () override const<br> |
 | virtual SR\_NODISCARD PipelineType | [**GetType**](#function-gettype) () noexcept override const<br> |
 | virtual SR\_NODISCARD uint64\_t | [**GetUsedMemory**](#function-getusedmemory) () override const<br> |
 | virtual SR\_NODISCARD std::string | [**GetVendor**](#function-getvendor) () override const<br>_------------------------------------_  _Вспомогательные методы ------------------------------------------_ __ |
@@ -210,6 +212,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual void | [**SetDirty**](#function-setdirty) (bool dirty) override<br> |
 | virtual void | [**SetOverlayEnabled**](#function-setoverlayenabled) (OverlayType overlayType, bool enabled) override<br> |
 | virtual void | [**SetScissor**](#function-setscissor) (int32\_t width, int32\_t height) override<br> |
+| virtual void | [**SetSwapchainImagesCount**](#function-setswapchainimagescount) (uint16\_t count) override<br> |
 | virtual void | [**SetVSyncEnabled**](#function-setvsyncenabled) (bool enabled) override<br> |
 | virtual void | [**SetViewport**](#function-setviewport) (int32\_t width, int32\_t height) override<br> |
 | virtual void | [**UnMapSSBO**](#function-unmapssbo) (uint32\_t SSBO) override<br> |
@@ -220,6 +223,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual void | [**UseShader**](#function-useshader) (uint32\_t shaderProgram) override<br>_------------------------------------------_  _Биндинги --------------------------------------------------_ __ |
 |   | [**VulkanPipeline**](#function-vulkanpipeline) (const RenderContextPtr & pContext) <br> |
 | virtual void | [**WaitComputeIdle**](#function-waitcomputeidle) () override<br> |
+| virtual void | [**WaitRenderIdle**](#function-waitrenderidle) () override<br> |
 |   | [**~VulkanPipeline**](#function-vulkanpipeline) () override<br> |
 
 
@@ -278,13 +282,13 @@ See [SR\_GRAPH\_NS::Pipeline](classSR__GRAPH__NS_1_1Pipeline.md)
 | virtual bool | [**FreeUBO**](classSR__GRAPH__NS_1_1Pipeline.md#function-freeubo) (int32\_t \* id) <br> |
 | virtual bool | [**FreeVBO**](classSR__GRAPH__NS_1_1Pipeline.md#function-freevbo) (int32\_t \* id) <br> |
 | virtual SR\_NODISCARD uint8\_t | [**GetBuildIterationsCount**](classSR__GRAPH__NS_1_1Pipeline.md#function-getbuilditerationscount) () noexcept const<br> |
-|  SR\_NODISCARD const [**PipelineState**](structSR__GRAPH__NS_1_1PipelineState.md) & | [**GetBuildState**](classSR__GRAPH__NS_1_1Pipeline.md#function-getbuildstate) () const<br> |
-|  SR\_NODISCARD uint8\_t | [**GetCurrentBuildIteration**](classSR__GRAPH__NS_1_1Pipeline.md#function-getcurrentbuilditeration) () noexcept const<br> |
+|  SR\_NODISCARD const [**PipelineState**](structSR__GRAPH__NS_1_1PipelineState.md) & | [**GetBuildState**](classSR__GRAPH__NS_1_1Pipeline.md#function-getbuildstate) (uint8\_t frameIndex) const<br> |
 |  SR\_NODISCARD int32\_t | [**GetCurrentDescriptorSet**](classSR__GRAPH__NS_1_1Pipeline.md#function-getcurrentdescriptorset) () noexcept const<br> |
 | virtual SR\_NODISCARD void \* | [**GetCurrentFBOHandle**](classSR__GRAPH__NS_1_1Pipeline.md#function-getcurrentfbohandle) () const<br> |
 |  SR\_NODISCARD FramebufferPtr | [**GetCurrentFrameBuffer**](classSR__GRAPH__NS_1_1Pipeline.md#function-getcurrentframebuffer) () noexcept const<br> |
 |  SR\_NODISCARD int32\_t | [**GetCurrentFrameBufferId**](classSR__GRAPH__NS_1_1Pipeline.md#function-getcurrentframebufferid) () noexcept const<br> |
 |  SR\_NODISCARD uint32\_t | [**GetCurrentFrameBufferLayer**](classSR__GRAPH__NS_1_1Pipeline.md#function-getcurrentframebufferlayer) () noexcept const<br> |
+| virtual SR\_NODISCARD uint8\_t | [**GetCurrentFrameIndex**](classSR__GRAPH__NS_1_1Pipeline.md#function-getcurrentframeindex) () const<br> |
 |  SR\_NODISCARD [**RenderStrategy**](classSR__GRAPH__NS_1_1RenderStrategy.md) \* | [**GetCurrentRenderStrategy**](classSR__GRAPH__NS_1_1Pipeline.md#function-getcurrentrenderstrategy) () noexcept const<br> |
 |  SR\_NODISCARD ShaderPtr | [**GetCurrentShader**](classSR__GRAPH__NS_1_1Pipeline.md#function-getcurrentshader) () const<br> |
 | virtual SR\_NODISCARD void \* | [**GetCurrentShaderHandle**](classSR__GRAPH__NS_1_1Pipeline.md#function-getcurrentshaderhandle) () const<br> |
@@ -299,17 +303,19 @@ See [SR\_GRAPH\_NS::Pipeline](classSR__GRAPH__NS_1_1Pipeline.md)
 |  SR\_NODISCARD const [**PipelineState**](structSR__GRAPH__NS_1_1PipelineState.md) & | [**GetPreviousState**](classSR__GRAPH__NS_1_1Pipeline.md#function-getpreviousstate) () const<br> |
 |  SR\_NODISCARD [**FrameBufferQueue**](classSR__GRAPH__NS_1_1FrameBufferQueue.md) & | [**GetQueue**](classSR__GRAPH__NS_1_1Pipeline.md#function-getqueue) () noexcept<br> |
 |  SR\_NODISCARD RenderContextPtr | [**GetRenderContext**](classSR__GRAPH__NS_1_1Pipeline.md#function-getrendercontext) () noexcept const<br> |
-| virtual SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetRenderStageId**](classSR__GRAPH__NS_1_1Pipeline.md#function-getrenderstageid) () const<br> |
+|  SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetRenderStageId**](classSR__GRAPH__NS_1_1Pipeline.md#function-getrenderstageid) () const<br> |
 | virtual SR\_NODISCARD std::string | [**GetRenderer**](classSR__GRAPH__NS_1_1Pipeline.md#function-getrenderer) () const<br> |
 |  SR\_NODISCARD uint8\_t | [**GetSamplesCount**](classSR__GRAPH__NS_1_1Pipeline.md#function-getsamplescount) () const<br> |
 | virtual SR\_NODISCARD std::set&lt; void \* &gt; | [**GetShaderHandles**](classSR__GRAPH__NS_1_1Pipeline.md#function-getshaderhandles) () const<br> |
 |  SR\_NODISCARD const [**PipelineState**](structSR__GRAPH__NS_1_1PipelineState.md) & | [**GetState**](classSR__GRAPH__NS_1_1Pipeline.md#function-getstate) () const<br> |
 | virtual SR\_NODISCARD uint8\_t | [**GetSupportedSamples**](classSR__GRAPH__NS_1_1Pipeline.md#function-getsupportedsamples) () noexcept const<br> |
+| virtual SR\_NODISCARD uint16\_t | [**GetSwapchainImagesCount**](classSR__GRAPH__NS_1_1Pipeline.md#function-getswapchainimagescount) () const<br> |
 | virtual SR\_NODISCARD PipelineType | [**GetType**](classSR__GRAPH__NS_1_1Pipeline.md#function-gettype) () noexcept const = 0<br> |
 | virtual uint64\_t | [**GetUsedMemory**](classSR__GRAPH__NS_1_1Pipeline.md#function-getusedmemory) () const<br> |
 | virtual SR\_NODISCARD std::string | [**GetVendor**](classSR__GRAPH__NS_1_1Pipeline.md#function-getvendor) () const<br>_------------------------------------_  _Вспомогательные методы ------------------------------------------_ __ |
 | virtual SR\_NODISCARD std::string | [**GetVersion**](classSR__GRAPH__NS_1_1Pipeline.md#function-getversion) () const<br> |
 |  SR\_NODISCARD WindowPtr | [**GetWindow**](classSR__GRAPH__NS_1_1Pipeline.md#function-getwindow) () const<br> |
+| virtual bool | [**HasActiveOverlay**](classSR__GRAPH__NS_1_1Pipeline.md#function-hasactiveoverlay) () const<br> |
 | virtual bool | [**Init**](classSR__GRAPH__NS_1_1Pipeline.md#function-init) () <br>_Подключаем окно и настраиваем взаимодействие рендера с ним_  |
 | virtual bool | [**InitOverlay**](classSR__GRAPH__NS_1_1Pipeline.md#function-initoverlay) () <br>_---------------------------------------_  _Работа с_[_**Overlay**_](classSR__GRAPH__NS_1_1Overlay.md) _---------------------------------------------_ __ |
 |  SR\_NODISCARD bool | [**IsDirty**](classSR__GRAPH__NS_1_1Pipeline.md#function-isdirty) () noexcept const<br> |
@@ -321,6 +327,7 @@ See [SR\_GRAPH\_NS::Pipeline](classSR__GRAPH__NS_1_1Pipeline.md)
 | virtual SR\_NODISCARD bool | [**IsShaderConstantSupport**](classSR__GRAPH__NS_1_1Pipeline.md#function-isshaderconstantsupport) () const<br> |
 | virtual SR\_NODISCARD bool | [**IsVSyncEnabled**](classSR__GRAPH__NS_1_1Pipeline.md#function-isvsyncenabled) () const<br> |
 | virtual bool | [**MapSSBO**](classSR__GRAPH__NS_1_1Pipeline.md#function-mapssbo) (uint32\_t SSBO, void \*\* ppData) <br> |
+|  void | [**OnFrameBuildEnd**](classSR__GRAPH__NS_1_1Pipeline.md#function-onframebuildend) () <br> |
 | virtual void | [**OnMultiSampleChanged**](classSR__GRAPH__NS_1_1Pipeline.md#function-onmultisamplechanged) () <br>_-------------------------------------_  _Мультисемплинг и VSync -----------------------------------------_ __ |
 | virtual void | [**OnResize**](classSR__GRAPH__NS_1_1Pipeline.md#function-onresize) (const SR\_MATH\_NS::UVector2 & size) <br> |
 |   | [**Pipeline**](classSR__GRAPH__NS_1_1Pipeline.md#function-pipeline) (const RenderContextPtr & pContext) <br> |
@@ -334,7 +341,6 @@ See [SR\_GRAPH\_NS::Pipeline](classSR__GRAPH__NS_1_1Pipeline.md)
 | virtual void | [**ReadSSBO**](classSR__GRAPH__NS_1_1Pipeline.md#function-readssbo) (uint32\_t SSBO, void \* pData, uint64\_t size) <br>_Читает данные из SSBO в память_  |
 | virtual void | [**ResetLastShader**](classSR__GRAPH__NS_1_1Pipeline.md#function-resetlastshader) () <br> |
 | virtual void | [**ResetSubmitQueue**](classSR__GRAPH__NS_1_1Pipeline.md#function-resetsubmitqueue) () <br> |
-| virtual void | [**SetBuildIteration**](classSR__GRAPH__NS_1_1Pipeline.md#function-setbuilditeration) (uint8\_t iteration) <br> |
 | virtual void | [**SetCurrentFrameBuffer**](classSR__GRAPH__NS_1_1Pipeline.md#function-setcurrentframebuffer) (FramebufferPtr pFrameBuffer) <br> |
 | virtual void | [**SetCurrentFrameBufferLayer**](classSR__GRAPH__NS_1_1Pipeline.md#function-setcurrentframebufferlayer) (uint32\_t layer) <br> |
 | virtual void | [**SetCurrentRenderStrategy**](classSR__GRAPH__NS_1_1Pipeline.md#function-setcurrentrenderstrategy) ([**RenderStrategy**](classSR__GRAPH__NS_1_1RenderStrategy.md) \* pStrategy) <br> |
@@ -346,6 +352,7 @@ See [SR\_GRAPH\_NS::Pipeline](classSR__GRAPH__NS_1_1Pipeline.md)
 | virtual void | [**SetRenderStageId**](classSR__GRAPH__NS_1_1Pipeline.md#function-setrenderstageid) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id) <br> |
 | virtual void | [**SetSampleCount**](classSR__GRAPH__NS_1_1Pipeline.md#function-setsamplecount) (uint8\_t count) <br> |
 | virtual void | [**SetScissor**](classSR__GRAPH__NS_1_1Pipeline.md#function-setscissor) (int32\_t width=-1, int32\_t height=-1) <br> |
+| virtual void | [**SetSwapchainImagesCount**](classSR__GRAPH__NS_1_1Pipeline.md#function-setswapchainimagescount) (uint16\_t count) <br> |
 | virtual void | [**SetVSyncEnabled**](classSR__GRAPH__NS_1_1Pipeline.md#function-setvsyncenabled) (bool enabled) <br> |
 | virtual void | [**SetViewport**](classSR__GRAPH__NS_1_1Pipeline.md#function-setviewport) (int32\_t width=-1, int32\_t height=-1) <br> |
 | virtual void | [**SwitchWindow**](classSR__GRAPH__NS_1_1Pipeline.md#function-switchwindow) (const WindowPtr & pWindow) <br> |
@@ -357,6 +364,7 @@ See [SR\_GRAPH\_NS::Pipeline](classSR__GRAPH__NS_1_1Pipeline.md)
 | virtual void | [**UpdateUBO**](classSR__GRAPH__NS_1_1Pipeline.md#function-updateubo) (uint32\_t UBO, void \* pData, uint64\_t size) <br>_Обеспечивает обновление данных в шейдере_  |
 | virtual void | [**UseShader**](classSR__GRAPH__NS_1_1Pipeline.md#function-useshader) (uint32\_t shaderProgram) <br>_------------------------------------------_  _Биндинги --------------------------------------------------_ __ |
 | virtual void | [**WaitComputeIdle**](classSR__GRAPH__NS_1_1Pipeline.md#function-waitcomputeidle) () <br> |
+| virtual void | [**WaitRenderIdle**](classSR__GRAPH__NS_1_1Pipeline.md#function-waitrenderidle) () <br> |
 | virtual  | [**~Pipeline**](classSR__GRAPH__NS_1_1Pipeline.md#function-pipeline) () <br> |
 
 
@@ -374,7 +382,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  SR\_NODISCARD SR\_FORCE\_INLINE T \* | [**Get**](classSR__HTYPES__NS_1_1SharedPtr.md#function-get-22) () <br> |
 |  SR\_NODISCARD const void \* | [**GetRawPtr**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getrawptr-12) () const<br> |
 |  SR\_NODISCARD void \* | [**GetRawPtr**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getrawptr-22) () <br>_NOLINT(modernize-use-nodiscard)_  |
-| virtual SR\_NODISCARD SRClass \* | [**GetSRClass**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getsrclass) () override const<br>_NOLINT(modernize-use-nodiscard)_  |
+| virtual SR\_NODISCARD SRClass \* | [**GetSRClass**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getsrclass) () override const<br> |
 |  SR\_NODISCARD [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; | [**GetThis**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getthis) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE const T &SR\_FASTCALL | [**GetUncheckedRef**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getuncheckedref-12) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE T &SR\_FASTCALL | [**GetUncheckedRef**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getuncheckedref-22) () <br> |
@@ -392,15 +400,15 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; U &gt; | [**StaticCast**](classSR__HTYPES__NS_1_1SharedPtr.md#function-staticcast) () const<br> |
 |  SR\_NODISCARD bool | [**TryRecursiveLockIfValid**](classSR__HTYPES__NS_1_1SharedPtr.md#function-tryrecursivelockifvalid) () noexcept const<br> |
 |  void | [**Unlock**](classSR__HTYPES__NS_1_1SharedPtr.md#function-unlock) () noexcept const<br> |
-|  bool | [**Valid**](classSR__HTYPES__NS_1_1SharedPtr.md#function-valid) () const<br> |
+| virtual SR\_NODISCARD bool | [**Valid**](classSR__HTYPES__NS_1_1SharedPtr.md#function-valid) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE | [**operator bool**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator-bool) () noexcept const<br> |
 |  SR\_INLINE bool | [**operator!=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & right) const<br> |
 |  SR\_FORCE\_INLINE T & | [**operator\***](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_1) () const<br> |
-|  SR\_FORCE\_INLINE T \* | [**operator-&gt;**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_2) () const<br> |
-|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_3) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & ptr) <br> |
-|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_4) (T \* ptr) <br> |
-|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_5) ([**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; && ptr) noexcept<br> |
-|  SR\_INLINE bool | [**operator==**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_6) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & right) const<br> |
+|  SR\_FORCE\_INLINE T \* | [**operator-&gt;**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator-) () const<br> |
+|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_2) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & ptr) <br> |
+|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_3) (T \* ptr) <br> |
+|  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & | [**operator=**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_4) ([**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; && ptr) noexcept<br> |
+|  SR\_INLINE bool | [**operator==**](classSR__HTYPES__NS_1_1SharedPtr.md#function-operator_5) (const [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & right) const<br> |
 |   | [**~SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md#function-sharedptr) () override<br> |
 
 
@@ -419,6 +427,7 @@ See [SR\_HTYPES\_NS::SharedPtrBase](classSR__HTYPES__NS_1_1SharedPtrBase.md)
 | virtual void | [**SetPointerFromBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-setpointerfrombase) ([**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md) \* pBase) = 0<br> |
 |   | [**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase-12) () <br> |
 |   | [**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase-22) ([**SharedPtrDynamicData**](structSR__HTYPES__NS_1_1SharedPtrDynamicData.md) \* data) <br> |
+| virtual SR\_NODISCARD bool | [**Valid**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-valid) () const = 0<br> |
 | virtual  | [**~SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase) () <br> |
 
 
@@ -462,7 +471,7 @@ See [SR\_GRAPH\_NS::Pipeline](classSR__GRAPH__NS_1_1Pipeline.md)
 | Type | Name |
 | ---: | :--- |
 |  [**SR\_HTYPES\_NS::PoolSet**](classSR__HTYPES__NS_1_1PoolSet.md)&lt; bool &gt; | [**m\_bindedDescriptors**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_bindeddescriptors)  <br> |
-|  [**PipelineState**](structSR__GRAPH__NS_1_1PipelineState.md) | [**m\_buildState**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_buildstate)  <br>_Состояние, которое было на момент постоения сцены рендера_  |
+|  std::vector&lt; [**PipelineState**](structSR__GRAPH__NS_1_1PipelineState.md) &gt; | [**m\_buildStates**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_buildstates)  <br>_Состояние, которое было на момент постоения сцены рендера_  |
 |  uint8\_t | [**m\_currentSampleCount**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_currentsamplecount)   = `0`<br> |
 |  std::atomic&lt; bool &gt; | [**m\_dirty**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_dirty)   = `false`<br> |
 |  bool | [**m\_enableValidationLayers**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_enablevalidationlayers)   = `false`<br> |
@@ -1367,6 +1376,21 @@ Implements [*SR\_GRAPH\_NS::Pipeline::GetCurrentFBOHandle*](classSR__GRAPH__NS_1
 
 
 
+### function GetCurrentFrameIndex 
+
+```C++
+virtual SR_NODISCARD uint8_t SR_GRAPH_NS::VulkanPipeline::GetCurrentFrameIndex () override const
+```
+
+
+
+Implements [*SR\_GRAPH\_NS::Pipeline::GetCurrentFrameIndex*](classSR__GRAPH__NS_1_1Pipeline.md#function-getcurrentframeindex)
+
+
+<hr>
+
+
+
 ### function GetCurrentShaderHandle 
 
 ```C++
@@ -1481,6 +1505,21 @@ virtual SR_NODISCARD std::set< void * > SR_GRAPH_NS::VulkanPipeline::GetShaderHa
 
 
 Implements [*SR\_GRAPH\_NS::Pipeline::GetShaderHandles*](classSR__GRAPH__NS_1_1Pipeline.md#function-getshaderhandles)
+
+
+<hr>
+
+
+
+### function GetSwapchainImagesCount 
+
+```C++
+virtual SR_NODISCARD uint16_t SR_GRAPH_NS::VulkanPipeline::GetSwapchainImagesCount () override const
+```
+
+
+
+Implements [*SR\_GRAPH\_NS::Pipeline::GetSwapchainImagesCount*](classSR__GRAPH__NS_1_1Pipeline.md#function-getswapchainimagescount)
 
 
 <hr>
@@ -1882,6 +1921,23 @@ Implements [*SR\_GRAPH\_NS::Pipeline::SetScissor*](classSR__GRAPH__NS_1_1Pipelin
 
 
 
+### function SetSwapchainImagesCount 
+
+```C++
+virtual void SR_GRAPH_NS::VulkanPipeline::SetSwapchainImagesCount (
+    uint16_t count
+) override
+```
+
+
+
+Implements [*SR\_GRAPH\_NS::Pipeline::SetSwapchainImagesCount*](classSR__GRAPH__NS_1_1Pipeline.md#function-setswapchainimagescount)
+
+
+<hr>
+
+
+
 ### function SetVSyncEnabled 
 
 ```C++
@@ -2050,6 +2106,21 @@ virtual void SR_GRAPH_NS::VulkanPipeline::WaitComputeIdle () override
 
 
 Implements [*SR\_GRAPH\_NS::Pipeline::WaitComputeIdle*](classSR__GRAPH__NS_1_1Pipeline.md#function-waitcomputeidle)
+
+
+<hr>
+
+
+
+### function WaitRenderIdle 
+
+```C++
+virtual void SR_GRAPH_NS::VulkanPipeline::WaitRenderIdle () override
+```
+
+
+
+Implements [*SR\_GRAPH\_NS::Pipeline::WaitRenderIdle*](classSR__GRAPH__NS_1_1Pipeline.md#function-waitrenderidle)
 
 
 <hr>

@@ -35,6 +35,12 @@
 
 
 
+## Public Static Attributes
+
+| Type | Name |
+| ---: | :--- |
+|  constexpr SerializationId | [**firstId**](#variable-firstid)   = `SerializationId::Create("first")`<br> |
+|  constexpr SerializationId | [**secondId**](#variable-secondid)   = `SerializationId::Create("second")`<br> |
 
 
 
@@ -83,6 +89,34 @@
 
 
 
+## Public Static Attributes Documentation
+
+
+
+
+### variable firstId 
+
+```C++
+constexpr SerializationId ObjectDataAccessor< std::pair< T, U > >::firstId;
+```
+
+
+
+
+<hr>
+
+
+
+### variable secondId 
+
+```C++
+constexpr SerializationId ObjectDataAccessor< std::pair< T, U > >::secondId;
+```
+
+
+
+
+<hr>
 ## Public Static Functions Documentation
 
 

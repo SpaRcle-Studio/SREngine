@@ -164,6 +164,7 @@
 | Type | Name |
 | ---: | :--- |
 |  SR\_NODISCARD static SR\_FORCE\_INLINE constexpr T | [**Abs**](#function-abs) (T value) <br> |
+|  SR\_FORCE\_INLINE float | [**Ceiling**](#function-ceiling) (float value) <br> |
 |  SR\_FORCE\_INLINE double\_t SR\_FASTCALL | [**FastSqrt**](#function-fastsqrt) (double\_t value) <br> |
 |  SR\_FORCE\_INLINE bool | [**IsAnyMaskIncludedSubMask**](#function-isanymaskincludedsubmask) (MaskLeft mask, std::initializer\_list&lt; MakeRight &gt; subMasks) <br> |
 |  SR\_FORCE\_INLINE bool | [**IsEquals**](#function-isequals) (const T & a, const Y & b) noexcept<br> |
@@ -1239,6 +1240,21 @@ SR_MATH_NS::SR_ENUM_NS_STRUCT_T (
 template<typename T>
 static SR_NODISCARD static SR_FORCE_INLINE constexpr T SR_MATH_NS::Abs (
     T value
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function Ceiling 
+
+```C++
+static SR_FORCE_INLINE float SR_MATH_NS::Ceiling (
+    float value
 ) 
 ```
 

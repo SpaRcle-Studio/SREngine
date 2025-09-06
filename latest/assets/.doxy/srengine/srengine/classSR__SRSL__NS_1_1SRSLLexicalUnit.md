@@ -74,6 +74,8 @@ Inherited by the following classes: [SR\_SRSL\_NS::SRSLDecorator](classSR__SRSL_
 
 | Type | Name |
 | ---: | :--- |
+|  SR\_NODISCARD LexicalUnitType | [**GetLexicalUnitType**](#function-getlexicalunittype) () const<br> |
+|   | [**SRSLLexicalUnit**](#function-srsllexicalunit) (LexicalUnitType type) <br> |
 | virtual SR\_NODISCARD std::string | [**ToString**](#function-tostring) (uint32\_t deep) const<br> |
 
 
@@ -149,6 +151,34 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 ## Public Functions Documentation
 
+
+
+
+### function GetLexicalUnitType 
+
+```C++
+inline SR_NODISCARD LexicalUnitType SR_SRSL_NS::SRSLLexicalUnit::GetLexicalUnitType () const
+```
+
+
+
+
+<hr>
+
+
+
+### function SRSLLexicalUnit 
+
+```C++
+inline explicit SR_SRSL_NS::SRSLLexicalUnit::SRSLLexicalUnit (
+    LexicalUnitType type
+) 
+```
+
+
+
+
+<hr>
 
 
 

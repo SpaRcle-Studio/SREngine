@@ -122,9 +122,9 @@
         </inbodydescription>
         <location file="Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h" line="28" column="35" bodyfile="Engine/inc/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h" bodystart="28" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1PointerPropertyDrawer_1ad176f14fa08d5d10538cb4beaccc9974" prot="private" static="no" mutable="no">
-        <type>std::vector&lt; std::string &gt;</type>
-        <definition>std::vector&lt;std::string&gt; SR_CORE_GUI_NS::PointerPropertyDrawer::m_typeNames</definition>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1PointerPropertyDrawer_1af42a780f3ced0d5d9a4eba9c21e526b9" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt;</type>
+        <definition>std::vector&lt;SR_UTILS_NS::StringAtom&gt; SR_CORE_GUI_NS::PointerPropertyDrawer::m_typeNames</definition>
         <argsstring></argsstring>
         <name>m_typeNames</name>
         <qualifiedname>SR_CORE_GUI_NS::PointerPropertyDrawer::m_typeNames</qualifiedname>
@@ -264,6 +264,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PointerPropertyDrawer</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PointerPropertyDrawer</scope><name>AutoFree</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase_1a88669cfadc3ca1f7bcabc8630be7a2c7" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PointerPropertyDrawer</scope><name>CheckSearchMatch</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PointerPropertyDrawer</scope><name>CloneTo</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::PointerPropertyDrawer</scope><name>DecrementPointer</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1PointerPropertyDrawer_1a1f6436c015b1548f50620d713cbfa78d" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::PointerPropertyDrawer</scope><name>Draw</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PointerPropertyDrawer</scope><name>DynamicCast</name></member>
@@ -292,7 +293,7 @@
       <member refid="classSR__CORE__GUI__NS_1_1PointerPropertyDrawer_1ae659805245d34ee43a2052030ff13825" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::PointerPropertyDrawer</scope><name>m_objectDrawer</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1PointerPropertyDrawer_1a35f5e818a52a7044ee956d8c5a7fa780" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::PointerPropertyDrawer</scope><name>m_openedByDefault</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1PointerPropertyDrawer_1a0173ab9b8c5167d7c54a011b8a61b2db" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::PointerPropertyDrawer</scope><name>m_searchBuffer</name></member>
-      <member refid="classSR__CORE__GUI__NS_1_1PointerPropertyDrawer_1ad176f14fa08d5d10538cb4beaccc9974" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::PointerPropertyDrawer</scope><name>m_typeNames</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1PointerPropertyDrawer_1af42a780f3ced0d5d9a4eba9c21e526b9" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::PointerPropertyDrawer</scope><name>m_typeNames</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PointerPropertyDrawer</scope><name>MakeShared</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1PointerPropertyDrawer_1a9cbfc1f938c81e97cd5c44285be2f85d" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::PointerPropertyDrawer</scope><name>OnObjectReplaced</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PointerPropertyDrawer</scope><name>operator bool</name></member>
@@ -325,7 +326,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PointerPropertyDrawer</scope><name>StaticCast</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PointerPropertyDrawer</scope><name>TryRecursiveLockIfValid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PointerPropertyDrawer</scope><name>Unlock</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PointerPropertyDrawer</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a783dd9e4a58072de8ff19895693bca05" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::PointerPropertyDrawer</scope><name>Valid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PointerPropertyDrawer</scope><name>~SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::PointerPropertyDrawer</scope><name>~SharedPtrBase</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1ad88a80732713966d7759d768bd65bbe5" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::PointerPropertyDrawer</scope><name>~SRClass</name></member>
