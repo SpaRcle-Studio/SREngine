@@ -14,7 +14,7 @@
        <SegmentationHandler Value="false"/>
 
        <Gizmo Value="true"/>
-       <Tracy Value="false"/>
+       <VulkanTracy Value="false"/>
        <FileWatching Value="true"/>
        <VulkanValidationErrorAsAssert Value="true"/>
 
@@ -39,6 +39,7 @@
        <AccumulateDt Value="true"/>
 
        <FastModelsLoad Value="true"/>
+       <UseGLSLangCompiler Value="true"/>
 
        <Renderer Value="true"/>
        <Physics Value="true"/>
@@ -54,6 +55,7 @@
        <SkyboxCPUUsage Value="false"/>
        <VulkanValidation Value="true"/>
        <MultiRenderTargets Value="false"/>
-       <Undocking Value="false"/>
+       <Undocking Value="true"/>
+       <VulkanDynamicRendering Value="true"/>
    </Common>
 </Features>

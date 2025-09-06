@@ -19,21 +19,25 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
+        SR_MATH_NS::FVector2 buttonSize;
+
         if (!context.pValue || !context.GetPropertyDisplayName().empty()) {
             const bool isPickingEnabled = context.GetEditorParams().GetCustomArg("pick") == "enabled";
 
-            const SR_MATH_NS::FVector2 buttonSize = isPickingEnabled ?
-                SR_MATH_NS::FVector2(context.fieldTitleWidth * 0.75f, context.fieldHeight) :
-                SR_MATH_NS::FVector2(context.fieldTitleWidth, context.fieldHeight);
+            if (!context.noHeader) {
+                buttonSize = isPickingEnabled ?
+                             SR_MATH_NS::FVector2(context.fieldTitleWidth * 0.75f, context.fieldHeight) :
+                             SR_MATH_NS::FVector2(context.fieldTitleWidth, context.fieldHeight);
 
-            if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetPropertyDisplayName().c_str(), buttonSize)) {
-                if (context.pProperty) {
-                    if (context.onBeforeChangeCallback) {
-                        context.onBeforeChangeCallback(false);
+                if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetPropertyDisplayName().c_str(), buttonSize)) {
+                    if (context.pProperty) {
+                        if (context.onBeforeChangeCallback) {
+                            context.onBeforeChangeCallback(false);
+                        }
+                        feedback.isChanged = true;
+                        value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
+                        value = value.DetachIfConst();
                     }
-                    feedback.isChanged = true;
-                    value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
-                    value = value.DetachIfConst();
                 }
             }
 
@@ -43,6 +47,9 @@ namespace SR_CORE_GUI_NS {
                 if (SR_GRAPH_GUI_NS::Immediate::Button("Pick", SR_MATH_NS::FVector2(context.fieldTitleWidth * 0.25f, context.fieldHeight))) {
                     auto&& filterName = context.GetEditorParams().GetCustomArg("filter name");
                     auto&& filterValue = context.GetEditorParams().GetCustomArg("filter value");
+
+                    const bool relativeRes = context.GetEditorParams().GetCustomArg("relative") == "resources";
+
                     if (!filterName.empty() && !filterValue.empty()) {
                         auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                         auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath, { { filterName, filterValue } });
@@ -52,6 +59,11 @@ namespace SR_CORE_GUI_NS {
                                 context.onBeforeChangeCallback(false);
                             }
                             feedback.isChanged = true;
+
+                            if (relativeRes) {
+                                path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
+                            }
+
                             *pPath = path;
                         }
                     }

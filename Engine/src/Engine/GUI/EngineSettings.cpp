@@ -10,7 +10,15 @@
 namespace SR_CORE_GUI_NS {
     EngineSettings::EngineSettings()
         : SR_GRAPH_NS::GUI::Widget("Settings")
-    { }
+    {
+        m_onRenderSettingsChanged = SR_UTILS_NS::Broadcaster::Instance().Subscribe(SR_UTILS_NS::Events::EVENT_ON_RENDER_SETTINGS_CHANGED_ID, [this](auto&&) {
+            PrepareRenderPresets();
+        });
+    }
+
+    EngineSettings::~EngineSettings() {
+        m_onRenderSettingsChanged.Reset();
+    }
 
     void EngineSettings::Draw() {
         DrawMultiSampling();
@@ -77,6 +85,14 @@ namespace SR_CORE_GUI_NS {
         if (SR_GRAPH_GUI_NS::Immediate::Checkbox("VSync", &vsync)) {
             pPipeline->SetVSyncEnabled(vsync);
         }
+
+        int32_t swapchainImages = SR_UTILS_NS::StoreUtils::User::GetInt("SwapchainImages", pPipeline->GetSwapchainImagesCount());
+
+        if (SR_GRAPH_GUI_NS::Immediate::InputInt("Swapchain images", &swapchainImages, 1, 1, SR_GRAPH_GUI_NS::Immediate::InputTextFlags::EnterReturnsTrue)) {
+            swapchainImages = SR_CLAMP(swapchainImages, 1, 16);
+            SR_UTILS_NS::StoreUtils::User::SetInt("SwapchainImages", swapchainImages);
+            pPipeline->SetSwapchainImagesCount(swapchainImages);
+        }
     }
 
     void EngineSettings::DrawEditorSettings() {
@@ -101,6 +117,17 @@ namespace SR_CORE_GUI_NS {
             SR_UTILS_NS::StoreUtils::User::SetBool("ShowHiddenEntities", showHiddenEntities);
         }
 
+        if (SR_GRAPH_GUI_NS::Immediate::Combo("Render preset", &m_activeRenderPreset, m_renderPresetsMemory.c_str())) {
+            uint32_t index = 0;
+            for (auto&& preset : m_renderPresets) {
+                if (index == m_activeRenderPreset) {
+                    GetContext()->SetActivePreset(preset);
+                    break;
+                }
+                index++;
+            }
+        }
+
         if (SR_GRAPH_GUI_NS::Immediate::Button("Save")) {
             SR_UTILS_NS::StoreUtils::Storage::Instance().Save();
         }
@@ -110,5 +137,36 @@ namespace SR_CORE_GUI_NS {
         if (SR_GRAPH_GUI_NS::Immediate::Button("Load")) {
             SR_UTILS_NS::StoreUtils::Storage::Instance().Load();
         }
+    }
+
+    void EngineSettings::PrepareRenderPresets() {
+        m_renderPresets.clear();
+        m_renderPresetsMemory.clear();
+        m_activeRenderPreset = 0;
+
+        m_renderPresets.insert("Default");
+        m_renderPresets.insert(GetContext()->GetSettings().defaultPreset.name);
+
+        for (auto&& preset : GetContext()->GetSettings().presets) {
+            m_renderPresets.insert(preset.name);
+        }
+
+        uint32_t index = 0;
+        for (auto&& preset : m_renderPresets) {
+            if (preset == GetContext()->GetActivePreset()) {
+                m_activeRenderPreset = index;
+                break;
+            }
+            index++;
+        }
+
+        for (auto&& preset : m_renderPresets) {
+            m_renderPresetsMemory += preset + '\0';
+        }
+    }
+
+    void EngineSettings::OnOpen() {
+        Super::OnOpen();
+        PrepareRenderPresets();
     }
 }

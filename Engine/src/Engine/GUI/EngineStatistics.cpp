@@ -9,9 +9,9 @@
 
 #include <Graphics/Types/Framebuffer.h>
 #include <Graphics/Types/Skybox.h>
-#include <Graphics/Pass/IFramebufferPass.h>
 
 #include <Graphics/Memory/ShaderProgramManager.h>
+#include <Graphics/Pass/FrameBufferPass.h>
 #include <Graphics/Pass/MeshDrawerPass.h>
 #include <Graphics/Render/RenderTechnique.h>
 #include <Graphics/Render/DebugRenderer.h>
@@ -181,18 +181,38 @@ namespace SR_CORE_GUI_NS {
             if (SR_GRAPH_GUI_NS::Immediate::CollapsingHeader("Shaders")) {
                 auto&& shaders = pContext->GetShaders();
 
+                SR_GRAPH_GUI_NS::Immediate::Checkbox("Macros", &m_showShaderMacros);
+                SR_GRAPH_GUI_NS::Immediate::SameLine();
+                SR_GRAPH_GUI_NS::Immediate::Checkbox("Programs", &m_showShaderPrograms);
+                SR_GRAPH_GUI_NS::Immediate::SameLine();
+                SR_GRAPH_GUI_NS::Immediate::Checkbox("Show unused", &m_showUnusedShaders);
+
                 auto&& shadersManager = SR_GRAPH_NS::Memory::ShaderProgramManager::Instance();
 
                 if (SR_GRAPH_GUI_NS::Immediate::BeginTable("##ShadersTable", 1)) {
                     for (auto&& pShader : shaders) {
-                        SR_GRAPH_GUI_NS::Immediate::TableNextRow();
-
                         auto&& virtualProgram = pShader->GetVirtualProgram();
+                        if (virtualProgram == SR_ID_INVALID && !m_showUnusedShaders) {
+                            continue;
+                        }
+
+                        SR_GRAPH_GUI_NS::Immediate::TableNextRow();
 
                         SR_GRAPH_GUI_NS::Immediate::TableSetColumnIndex(0);
                         SR_GRAPH_GUI_NS::Immediate::Text("%s [%i]", pShader->GetResourceId().c_str(), virtualProgram);
 
-                        if (shadersManager.HasProgram(virtualProgram)) {
+                        if (auto&& macros = pShader->GetMacros(); m_showShaderMacros && !macros.empty()) {
+                            SR_GRAPH_GUI_NS::Immediate::Text("\tMacros: ");
+                            for (auto&& [key, value] : macros.GetParams()) {
+                                if (value.empty()) {
+                                    SR_GRAPH_GUI_NS::Immediate::Text("\t\t%s ", key.c_str());
+                                    continue;
+                                }
+                                SR_GRAPH_GUI_NS::Immediate::Text("\t\t%s=%s ", key.c_str(), value.c_str());
+                            }
+                        }
+
+                        if (m_showShaderPrograms && shadersManager.HasProgram(virtualProgram)) {
                             auto&& pVirtualInfo = shadersManager.GetInfo(virtualProgram);
 
                             for (auto&& [identifier, program] : pVirtualInfo->m_data) {
@@ -207,14 +227,33 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
+        #define __SR_DRAW_COLUMN_DATA(index, ...) \
+            SR_GRAPH_GUI_NS::Immediate::TableSetColumnIndex(index); \
+            SR_GRAPH_GUI_NS::Immediate::Text(__VA_ARGS__); \
+            SR_GRAPH_GUI_NS::Immediate::Separator(); \
+
             if (SR_GRAPH_GUI_NS::Immediate::CollapsingHeader("Framebuffers")) {
-                if (SR_GRAPH_GUI_NS::Immediate::BeginTable("##FramebuffersTable", 1)) {
+                if (SR_GRAPH_GUI_NS::Immediate::BeginTable("##FramebuffersTable", 7)) {
+                    SR_GRAPH_GUI_NS::Immediate::TableNextRow();
+
+                    __SR_DRAW_COLUMN_DATA(0, "Id")
+                    __SR_DRAW_COLUMN_DATA(1, "Name")
+                    __SR_DRAW_COLUMN_DATA(2, "Size")
+                    __SR_DRAW_COLUMN_DATA(3, "Depth")
+                    __SR_DRAW_COLUMN_DATA(4, "Is valid")
+                    __SR_DRAW_COLUMN_DATA(5, "Was rendered")
+                    __SR_DRAW_COLUMN_DATA(6, "Is dirty")
+
                     for (auto&& pFramebuffer : framebuffers) {
                         SR_GRAPH_GUI_NS::Immediate::TableNextRow();
 
-                        SR_GRAPH_GUI_NS::Immediate::TableSetColumnIndex(0);
-                        SR_GRAPH_GUI_NS::Immediate::Text("%i", pFramebuffer->GetId());
-                        SR_GRAPH_GUI_NS::Immediate::Separator();
+                        __SR_DRAW_COLUMN_DATA(0, "%i", pFramebuffer->GetId());
+                        __SR_DRAW_COLUMN_DATA(1, "%s", pFramebuffer->GetName().c_str());
+                        __SR_DRAW_COLUMN_DATA(2, "%ix%i", pFramebuffer->GetSize().x, pFramebuffer->GetSize().y);
+                        __SR_DRAW_COLUMN_DATA(3, "%s", pFramebuffer->IsDepthEnabled() ? "true" : "false");
+                        __SR_DRAW_COLUMN_DATA(4, "%s", pFramebuffer->IsValid() ? "true" : "false");
+                        __SR_DRAW_COLUMN_DATA(5, "%s", pFramebuffer->IsWasRendered() ? "true" : "false");
+                        __SR_DRAW_COLUMN_DATA(6, "%s", pFramebuffer->IsDirty() ? "true" : "false");
                     }
 
                     SR_GRAPH_GUI_NS::Immediate::EndTable();
@@ -242,7 +281,7 @@ namespace SR_CORE_GUI_NS {
 
                         SR_GRAPH_GUI_NS::Immediate::TableSetColumnIndex(0);
 
-                        SR_GRAPH_GUI_NS::Immediate::Text("%s", pRenderTechnique->GetName().data());
+                        SR_GRAPH_GUI_NS::Immediate::Text("Technique: %s", pRenderTechnique->GetName().data());
 
                         DrawRenderTechnique(const_cast<Graphics::IRenderTechnique *>(pRenderTechnique.Get()));
 
@@ -352,18 +391,34 @@ namespace SR_CORE_GUI_NS {
     }
 
     void EngineStatistics::DrawRenderTechnique(SR_GRAPH_NS::IRenderTechnique* pRenderTechnique) {
-        pRenderTechnique->ForEachPass([this](auto&& pPass) -> bool {
-            if (auto&& pMeshDrawerPass = dynamic_cast<SR_GRAPH_NS::MeshDrawerPass*>(pPass)) {
+        pRenderTechnique->ForEachPass([this](SR_GRAPH_NS::BasePass& pass) -> bool {
+            auto&& pMeshDrawerPass = dynamic_cast<SR_GRAPH_NS::MeshDrawerPass*>(&pass);
+            auto&& pFramebufferPass = dynamic_cast<SR_GRAPH_NS::FrameBufferPass*>(&pass);
+
+            if (!pMeshDrawerPass && !pFramebufferPass) {
+                return false;
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::PushID((void*)&pass);
+            SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, pFramebufferPass ? SR_MATH_NS::FColor::Cyan() : SR_MATH_NS::FColor::White());
+
+            SR_GRAPH_GUI_NS::Immediate::Dummy(10.f);
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+
+            if (!SR_GRAPH_GUI_NS::Immediate::CollapsingHeader(pass.GetPassName())) {
+                SR_GRAPH_GUI_NS::Immediate::PopID();
+                SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
+                return true;
+            }
+            SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
+
+            if (pMeshDrawerPass) {
                 DrawMeshDrawerPass(pMeshDrawerPass);
             }
 
-            auto&& pFramebufferPass = dynamic_cast<SR_GRAPH_NS::IFramebufferPass*>(pPass);
-            if (!pFramebufferPass) {
-                return true;
-            }
-
-            auto&& pFramebuffer = pFramebufferPass->GetFramebuffer();
+            auto&& pFramebuffer = pFramebufferPass ? pFramebufferPass->GetFrameBuffer() : nullptr;
             if (!pFramebuffer) {
+                SR_GRAPH_GUI_NS::Immediate::PopID();
                 return true;
             }
 
@@ -383,6 +438,7 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
+            SR_GRAPH_GUI_NS::Immediate::PopID();
             return true;
         });
     }
@@ -411,10 +467,10 @@ namespace SR_CORE_GUI_NS {
                     SR_GRAPH_GUI_NS::Immediate::Text("\t* Priority: %lli", priority);
                 }
 
-                if (first || pShader != meshInfo.shaderUseInfo.pShader.Get()) {
-                    pShader = meshInfo.shaderUseInfo.pShader.Get();
-                    if (meshInfo.shaderUseInfo.pShader) {
-                        SR_GRAPH_GUI_NS::Immediate::Text("\t\t* Shader: %s", meshInfo.shaderUseInfo.pShader->GetResourceId().c_str());
+                if (first || pShader != meshInfo.pShader) {
+                    pShader = meshInfo.pShader;
+                    if (meshInfo.pShader) {
+                        SR_GRAPH_GUI_NS::Immediate::Text("\t\t* Shader: %s", meshInfo.pShader->GetResourceId().c_str());
                     }
                     else {
                         SR_GRAPH_GUI_NS::Immediate::Text("\t\t* Shader: [no shader]");
@@ -438,16 +494,34 @@ namespace SR_CORE_GUI_NS {
 
                 const bool vboError = SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_VBO_ERROR);
                 const bool shaderError = SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_SHADER_ERROR);
+                const bool notRendered = SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_NOT_RENDERED);
+                const bool waitRegister = SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_WAIT_REGISTER);
+                const bool missingShader = SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_MISSING_SHADER);
 
-                if (vboError || shaderError) {
+                if (vboError || shaderError || notRendered || waitRegister || missingShader) {
                     if (vboError) {
                         SR_GRAPH_GUI_NS::Immediate::SameLine();
-                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1, 0, 0, 1), "VBO");
+                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1, 0, 0, 1), "VBO error");
                     }
 
                     if (shaderError) {
                         SR_GRAPH_GUI_NS::Immediate::SameLine();
-                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1, 0, 0, 1), "Shader");
+                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1, 0, 0, 1), "Shader error");
+                    }
+
+                    if (missingShader) {
+                        SR_GRAPH_GUI_NS::Immediate::SameLine();
+                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1, 0, 0, 1), "Missing shader");
+                    }
+
+                    if (notRendered) {
+                        SR_GRAPH_GUI_NS::Immediate::SameLine();
+                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.0f, 0.5f, 0.0f, 1.0f), "Not rendered");
+                    }
+
+                    if (waitRegister) {
+                        SR_GRAPH_GUI_NS::Immediate::SameLine();
+                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(0.5f, 0.5f, 0.0f, 1.0f), "Wait register");
                     }
                 }
                 else if (SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_ERROR)) {
@@ -516,11 +590,13 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::Separator();
         SR_GRAPH_GUI_NS::Immediate::Text("Draw info:");
 
-        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Vertices count: {}", pPipeline->GetBuildState().vertices));
-        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Triangles count: {}", static_cast<uint32_t>(pPipeline->GetBuildState().vertices / 3)));
-        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Draw calls: {}", pPipeline->GetBuildState().drawCalls));
-        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Used textures: {}", pPipeline->GetBuildState().usedTextures));
-        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Used shaders: {}", pPipeline->GetBuildState().usedShaders));
+        auto&& buildState = pPipeline->GetBuildState(pPipeline->GetCurrentFrameIndex());
+
+        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Vertices count: {}", buildState.vertices));
+        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Triangles count: {}", static_cast<uint32_t>(buildState.vertices / 3)));
+        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Draw calls: {}", buildState.drawCalls));
+        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Used textures: {}", buildState.usedTextures));
+        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Used shaders: {}", buildState.usedShaders));
 
         if (auto&& pDebugRenderer = pRenderScene->GetRenderer<SR_GRAPH_NS::DebugRenderer>()) {
             SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Timed objects pool size: {}", pDebugRenderer->GetTimedObjectPoolSize()));

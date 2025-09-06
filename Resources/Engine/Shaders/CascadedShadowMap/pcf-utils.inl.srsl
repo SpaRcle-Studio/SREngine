@@ -88,8 +88,12 @@ vec4 CalculateShadow(vec3 diffuseColor, vec3 lightColor) {
     vec3 specular = spec * lightColor;
 
     vec4 color = vec4(ambient + shadow * (diff + specular) * diffuseColor, 1.0);
-    //return DebugColorCascade(color, cascadeIndex);
+
+#ifdef SR_DEFINE_DEBUG_CASCADED_SHADOW_MAP_PASS
+    return DebugColorCascade(color, cascadeIndex);
+#else
     return color;
+#endif
 }
 
 void PreparePCF(mat4 modelMatrix) {

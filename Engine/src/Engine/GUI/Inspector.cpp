@@ -307,7 +307,7 @@ namespace SR_CORE_GUI_NS {
 
         ++index;
 
-        const std::string headerName = "[{}] {}"_format(index, pComponent->GetMeta()->GetFactoryName());
+        const std::string headerName = "[{}] {}"_format(index, pComponent->GetMeta()->GetDisplayName());
 
         bool enabled = pComponent->IsEnabled();
         if (SR_GRAPH_GUI_NS::Immediate::Checkbox("##componentEnabled", &enabled)) {
@@ -323,7 +323,7 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor(0.5f, 0.5f, 0.5f));
         }
 
-        const bool isOpened = SR_GRAPH_GUI_NS::Immediate::CollapsingHeader(pComponent->GetMeta()->GetFactoryName().c_str());
+        const bool isOpened = SR_GRAPH_GUI_NS::Immediate::CollapsingHeader(pComponent->GetMeta()->GetDisplayName().c_str());
 
         if (!isComponentActive) {
             SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
@@ -336,7 +336,7 @@ namespace SR_CORE_GUI_NS {
         if (!SR_GRAPH_GUI_NS::Immediate::GetDragDropPayload() && SR_GRAPH_GUI_NS::Immediate::BeginDragDropSource(SR_GRAPH_GUI_NS::Immediate::DragDropFlags::SourceAllowNullID)) {
             m_pointersHolder = { pComponent->DynamicCast<SR_UTILS_NS::Component>() };
             SR_GRAPH_GUI_NS::Immediate::SetDragDropPayload("InspectorComponent##Payload", &m_pointersHolder, sizeof(std::vector<SR_UTILS_NS::Component::Ptr>), SR_GRAPH_GUI_NS::Immediate::Condition::Once);
-            SR_GRAPH_GUI_NS::Immediate::Text("%s ->", pComponent->GetMeta()->GetFactoryName().c_str());
+            SR_GRAPH_GUI_NS::Immediate::Text("%s ->", pComponent->GetMeta()->GetDisplayName().c_str());
             SR_GRAPH_GUI_NS::Immediate::EndDragDropSource();
         }
 
@@ -595,7 +595,7 @@ namespace SR_CORE_GUI_NS {
 
         checkMatch = [&checkMatch](const ComponentCategory& checkCategory, std::string_view search) -> bool {
             const bool hasComponents = std::ranges::any_of(checkCategory.components, [&](auto&& info) {
-                return PropertyDrawerBase::CheckSearchMatch(search, info.name);
+                return PropertyDrawerBase::CheckSearchMatch(search, info.name) || PropertyDrawerBase::CheckSearchMatch(search, info.displayName);
             });
             return hasComponents || std::ranges::any_of(checkCategory.categories, [&](auto&& pair) {
                 return checkMatch(pair.second, search);
@@ -609,8 +609,10 @@ namespace SR_CORE_GUI_NS {
                 }
 
                 for (auto&& info : category.components) {
-                    if (!m_componentSearchBuffer.empty() && !PropertyDrawerBase::CheckSearchMatch(m_componentSearchBuffer, info.name)) {
-                        continue;
+                    if (!m_componentSearchBuffer.empty()) {
+                        if (!PropertyDrawerBase::CheckSearchMatch(m_componentSearchBuffer, info.name) && !PropertyDrawerBase::CheckSearchMatch(m_componentSearchBuffer, info.displayName)) {
+                            continue;
+                        }
                     }
 
                     if (info.isBehaviour) {
@@ -619,7 +621,7 @@ namespace SR_CORE_GUI_NS {
                         }
                     }
                     else {
-                        addComponentFn(this, pComponentable, info.name, info.name);
+                        addComponentFn(this, pComponentable, info.name, info.displayName);
                     }
                 }
 
@@ -715,6 +717,7 @@ namespace SR_CORE_GUI_NS {
         auto&& processComponent = [this](const SR_UTILS_NS::StringAtom& name, bool isBehaviour) {
             ComponentCategory::ComponentInfo componentInfo;
             componentInfo.name = name;
+            componentInfo.displayName = SR_UTILS_NS::Factory::Instance().GetType(name)->GetDisplayName();
             componentInfo.isBehaviour = isBehaviour;
 
             auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(name);

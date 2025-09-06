@@ -81,6 +81,7 @@ namespace SR_CORE_NS {
 
         if (SR_UTILS_NS::Features::Instance().Enabled("Editor")) {
             m_editor = new SR_CORE_GUI_NS::EditorGUI(GetThis());
+            m_editor->SetRenderContext(m_renderContext.Get());
         }
 
         if (m_isCreate) {
@@ -458,12 +459,20 @@ namespace SR_CORE_NS {
         return m_engineScene ? m_engineScene->pSceneUpdater : nullptr;
     }
 
-    Engine::RenderScenePtr Engine::GetRenderScene() const {
-        return m_engineScene ? m_engineScene->pRenderScene : RenderScenePtr();
+    const Engine::RenderScenePtr& Engine::GetRenderScene() const {
+        if (m_engineScene) {
+            return m_engineScene->pRenderScene;
+        }
+        static RenderScenePtr nullRenderScene;
+        return nullRenderScene;
     }
 
-    Engine::PhysicsScenePtr Engine::GetPhysicsScene() const {
-        return m_engineScene ? m_engineScene->pPhysicsScene : PhysicsScenePtr();
+    const Engine::PhysicsScenePtr& Engine::GetPhysicsScene() const {
+        if (m_engineScene) {
+            return m_engineScene->pPhysicsScene;
+        }
+        static PhysicsScenePtr nullPhysicsScene;
+        return nullPhysicsScene;
     }
 
     bool Engine::Execute() {

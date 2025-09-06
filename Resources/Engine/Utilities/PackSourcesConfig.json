@@ -7,6 +7,7 @@
 		"/Engine/libs/Utils/inc/Utils/",
 		"/Engine/libs/Utils/libs/entt/src/",
 		"/Engine/libs/Utils/libs/glm/",
+		"/Engine/libs/Utils/libs/xxHash/",
 		"/Engine/libs/Utils/libs/icu/*.h",
 		"/Engine/libs/Utils/libs/sparsehash/",
 		"/Engine/libs/Utils/libs/flat_hash_map/",

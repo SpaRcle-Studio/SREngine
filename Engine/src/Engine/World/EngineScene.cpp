@@ -13,6 +13,7 @@
 
 #include <Utils/DebugDraw.h>
 #include <Utils/Common/Features.h>
+#include <Utils/Common/ToString.h>
 #include <Utils/World/SceneCubeChunkLogic.h>
 #include <Utils/Events/Broadcaster.h>
 
@@ -52,17 +53,16 @@ namespace SR_CORE_NS {
         m_accumulateDt = SR_UTILS_NS::Features::Instance().Enabled("AccumulateDt", true);
 
         if (SR_UTILS_NS::Features::Instance().Enabled("Renderer", true)) {
-            if (auto&& pContext = pEngine->GetRenderContext(); pContext.LockIfValid()) {
-                pRenderScene = pContext->CreateScene(pScene);
-                pContext.Unlock();
-            }
-            else {
+            auto&& pContext = pEngine->GetRenderContext();
+            if (!pContext) {
                 SR_ERROR("EngineScene::Init() : failed to get render context!");
                 return false;
             }
 
+            pRenderScene = pContext->CreateScene(pScene);
+
             if (pRenderScene) {
-                pRenderScene->SetTechnique("Editor/Configs/OverlayRenderTechnique.xml");
+                pRenderScene->SetTechnique(pContext->GetSettings().overlayRenderTechnique);
 
                 pRenderScene->Register(pEngine->GetEditor());
                 pRenderScene->Register(&Graphics::GUI::GlobalWidgetManager::Instance());
@@ -131,9 +131,9 @@ namespace SR_CORE_NS {
             return;
         }
 
-        if (!EditorSettings::Instance().IsNeedDebugChunks()) {
-            return;
-        }
+        /// if (!EditorSettings::Instance().IsNeedDebugChunks()) {
+        ///     return;
+        /// }
 
         if (!pScene) {
             return;

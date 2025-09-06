@@ -37,6 +37,8 @@
 #include <Graphics/Window/Window.h>
 #include <Graphics/SRSL/Shader.h>
 
+#include <Enum/EditorIcon.hpp>
+
 namespace SR_CORE_GUI_NS {
     static SR_UTILS_NS::Path GetNewScenePath() {
         auto&& scenePath = SR_UTILS_NS::Path(SR_WORLD_NS::Scene::NewScenePath).ConcatExt("scene");
@@ -65,6 +67,11 @@ namespace SR_CORE_GUI_NS {
     EditorGUI::EditorGUI(const EnginePtr& pEngine)
         : Super()
     {
+        m_pSettings = SR_UTILS_NS::Asset::Load<EditorSettings>("Editor/Configs/EditorSettings.sras");
+        if (m_pSettings) {
+            m_pSettings->AddUsePoint();
+        }
+
         m_cachedScenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("/PreviousScenePath").ConcatExt("cache");
 
         m_engine = pEngine;
@@ -103,6 +110,11 @@ namespace SR_CORE_GUI_NS {
             SR_SAFE_DELETE_PTR(widget);
         }
         m_widgets.clear();
+
+        if (m_pSettings) {
+            m_pSettings->RemoveUsePoint();
+            m_pSettings = nullptr;
+        }
     }
 
     bool EditorGUI::Init() {
@@ -178,10 +190,8 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::BeginDocking();
 
         if (SR_GRAPH_GUI_NS::Immediate::BeginMainMenuBar()) {
-            auto&& pMenuBarWindow = SR_GRAPH_GUI_NS::Immediate::FindWindowByName("##MainMenuBar");
-
-            if (m_click == Click::None && SR_GRAPH_GUI_NS::Immediate::IsMouseDragging(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left)) {
-                m_click = SR_GRAPH_GUI_NS::Immediate::GetWindowRect(pMenuBarWindow).Contains(SR_GRAPH_GUI_NS::Immediate::GetMousePos()) ? Click::Drag : Click::Miss;
+            if (SR_GRAPH_GUI_NS::Immediate::IsMouseDragging(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left) && SR_GRAPH_GUI_NS::Immediate::IsWindowHovered()) {
+                m_click = Click::Drag;
             }
             else if (SR_GRAPH_GUI_NS::Immediate::IsMouseReleased(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left)) {
                 m_click = Click::None;
@@ -255,18 +265,23 @@ namespace SR_CORE_GUI_NS {
 
         m_loaded = true;
 
-        auto&& settings = EditorSettings::Instance();
+        if (m_pSettings) {
+            for (auto&& [icon, iconInfo] : m_pSettings->GetIcons()) {
+                if (m_icons.count(icon) == 1) {
+                    SRHalt("EditorGUI::Load() : icon already loaded! Icon: {}", icon);
+                    continue;
+                }
 
-        for (auto&& [icon, path] : settings.GetIcons()) {
-            auto&& pTexture = SR_GTYPES_NS::Texture::Load(path);
-            if (!pTexture) {
-                SR_WARN("EditorGUI::Load() : icon wasn't not found!\n\tPath: " + path.ToString());
-                pTexture = m_context->GetNoneTexture();
+                auto&& pTexture = SR_GTYPES_NS::Texture::Load(iconInfo.path);
+                if (!pTexture) {
+                    SR_WARN("EditorGUI::Load() : icon wasn't not found!\n\tPath: {}", iconInfo.path);
+                    pTexture = m_context->GetNoneTexture();
+                }
+
+                pTexture->AddUsePoint();
+
+                m_icons[icon] = pTexture;
             }
-
-            pTexture->AddUsePoint();
-
-            m_icons[icon] = pTexture;
         }
 
         m_useDocking = SR_UTILS_NS::Features::Instance().Enabled("EditorWidgetsDocking", true);

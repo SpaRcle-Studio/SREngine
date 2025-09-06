@@ -88,9 +88,9 @@ namespace SR_CORE_NS {
 
         SR_NODISCARD bool HasSceneInQueue() const { return !m_sceneQueue.Empty(); }
         SR_NODISCARD ScenePtr GetScene() const;
-        SR_NODISCARD RenderContextPtr GetRenderContext() const { return m_renderContext; }
-        SR_NODISCARD RenderScenePtr GetRenderScene() const;
-        SR_NODISCARD PhysicsScenePtr GetPhysicsScene() const;
+        SR_NODISCARD const RenderContextPtr& GetRenderContext() const { return m_renderContext; }
+        SR_NODISCARD const RenderScenePtr& GetRenderScene() const;
+        SR_NODISCARD const PhysicsScenePtr& GetPhysicsScene() const;
         SR_NODISCARD WindowPtr GetMainWindow() const { return m_windows.empty() ? nullptr : m_windows.front(); }
         SR_NODISCARD WindowPtr GetFocusedWindow() const;
         SR_NODISCARD SR_WORLD_NS::SceneUpdater* GetSceneBuilder() const;

@@ -21,6 +21,7 @@ namespace SR_CORE_GUI_NS {
         m_numericDrawer = SRNew<NumericPropertyDrawer>();
         m_boolDrawer = SRNew<BoolPropertyDrawer>();
         m_pathDrawer = SRNew<PathPropertyDrawer>();
+        m_enumPropertyDrawer = SRNew<EnumPropertyDrawer>();
         m_shaderDataOpened["Default"] = true;
     }
 
@@ -32,6 +33,26 @@ namespace SR_CORE_GUI_NS {
         m_stagesToRemove.clear();
 
         SR_GRAPH_NS::MaterialData& materialData = *static_cast<SR_GRAPH_NS::MaterialData*>(context.pOwner);
+
+        if ((!context.pProperty || !context.pProperty->IsReadOnly()) && !SR_GRAPH_GUI_NS::Immediate::IsCurrentlyDisabled()) {
+            const float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth);
+            const float_t addStageWidth = totalWidth / 4.f;
+
+            if (SR_GRAPH_GUI_NS::Immediate::Button("Add Stage", {SR_MAX(addStageWidth, 0), context.fieldHeight})) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(false);
+                }
+                feedback.isChanged = true;
+                if (!m_newStageName.empty() && !materialData.HasStage(m_newStageName)) {
+                    materialData.AddStage(m_newStageName);
+                }
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(totalWidth - addStageWidth);
+            SR_GRAPH_GUI_NS::Immediate::InputText("#Stage Name", &m_newStageName);
+            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+        }
 
         feedback.isChanged |= DrawShaderData(true, "Default", materialData.GetDefaultShaderData(), context);
 
@@ -62,14 +83,14 @@ namespace SR_CORE_GUI_NS {
             auto&& cursorPos = SR_GRAPH_GUI_NS::Immediate::GetWindowCursorPos(pWindow);
 
             const auto dir = opened ? SR_GRAPH_GUI_NS::Immediate::Direction::Down : SR_GRAPH_GUI_NS::Immediate::Direction::Right;
-            const SR_MATH_NS::FVector2 arrowPos = cursorPos + SR_MATH_NS::FVector2(0, 5);
+            const SR_MATH_NS::FVector2 arrowPos = cursorPos + SR_MATH_NS::FVector2(1, 5);
             SR_GRAPH_GUI_NS::Immediate::RenderArrow(pDrawList, arrowPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f);
 
-            SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.GetArrowWidth(), 0));
+            //SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.GetArrowWidth(), 0));
+            //SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
-
-            const float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth) - context.GetArrowWidth();
+            //const float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth) - context.GetArrowWidth();
+            const float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth);
             const float_t removeWidth = SR_MAX(context.lineHeight * 2.5f, 0);
 
             const SR_MATH_NS::FVector2 mainButtonSize = { SR_MAX(totalWidth - removeWidth, 0), context.fieldHeight };
@@ -99,6 +120,10 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::BeginGroup();
 
             isChanged |= DrawShaderPath(name, shaderData, context);
+
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+
+            isChanged |= DrawUseTypeEnum(shaderData, context);
 
             uint32_t editorOrder = 0;
 
@@ -209,7 +234,7 @@ namespace SR_CORE_GUI_NS {
                 value = SR_UTILS_NS::Reflection::Value::CreateRef(path);
                 feedback = m_pathDrawer->Draw(propertyContext);
                 if (feedback.isChanged) {
-                    auto&& pTexture = SR_GTYPES_NS::Texture::Load(path);
+                    SR_GTYPES_NS::Texture::Ptr pTexture = path.empty() ? nullptr : SR_GTYPES_NS::Texture::Load(path);
                     shaderData.SetData(property.id, pTexture, SR_GRAPH_NS::ShaderVarType::Sampler2D);
                 }
 
@@ -264,6 +289,29 @@ namespace SR_CORE_GUI_NS {
         if (feedback.isChanged || wasReset) {
             const bool onlyUniforms = !SR_GRAPH_NS::IsSamplerType(property.type);
             shaderData.pOwnedMaterialData->OnPropertyChanged(onlyUniforms);
+            return true;
+        }
+
+        return false;
+    }
+
+    bool MaterialDataPropertyDrawer::DrawUseTypeEnum(SR_GRAPH_NS::MaterialShaderData& shaderData, const PropertyDrawerContext& context) {
+        SR_GRAPH_NS::MaterialStageUseType useType = shaderData.useType;
+
+        SR_UTILS_NS::Reflection::Value value = SR_UTILS_NS::Reflection::Value::CreateRef(useType);
+
+        PropertyDrawerContext propertyContext = context;
+        propertyContext.pProperty = nullptr;
+        propertyContext.pValue = &value;
+        float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth) - context.GetArrowWidth();
+        propertyContext.fieldWidth = totalWidth * 0.25f;
+        propertyContext.fieldTitleWidth = 0.f;
+        propertyContext.customDisplayName = "Use mode";
+
+        const PropertyDrawerFeedback feedback = m_enumPropertyDrawer->Draw(propertyContext);
+
+        if (feedback.isChanged) {
+            shaderData.useType = useType;
             return true;
         }
 

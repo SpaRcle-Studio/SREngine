@@ -148,6 +148,7 @@ class CPPEnum:
 class SpaRcleClass:
     def __init__(self, name, namespaces):
         self.name = name
+        self.display_name = None
         self.inspector = None
         self.version = None
         self.category = None

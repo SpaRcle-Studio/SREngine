@@ -17,6 +17,10 @@ namespace SR_CORE_GUI_NS {
             return "BoolPropertyDrawer";
         }
 
+        if (value.IsOptional()) {
+            return "OptionalPropertyDrawer";
+        }
+
         if (value.IsArithmetic()) {
             return "NumericPropertyDrawer";
         }
@@ -25,12 +29,20 @@ namespace SR_CORE_GUI_NS {
             return "VectorPropertyDrawer";
         }
 
+        if (value.IsAssociativeContainer()) {
+            return "AssociativePropertyDrawer";
+        }
+
         if (value.IsMathSize()) {
             return "MathSizePropertyDrawer";
         }
 
         if (value.IsMathVector()) {
             return "MathVectorPropertyDrawer";
+        }
+
+        if (value.IsFColor()) {
+            return "FColorPropertyDrawer";
         }
 
         if (value.IsRect()) {
@@ -106,6 +118,77 @@ namespace SR_CORE_GUI_NS {
         }
         else {
             SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map bool value!");
+        }
+
+        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+
+        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_GRAPH_GUI_NS::Immediate::PopID();
+
+        SetValue(context, feedback, value);
+
+        return feedback;
+    }
+
+    PropertyDrawerFeedback OptionalPropertyDrawer::Draw(const PropertyDrawerContext& context) {
+        PropertyDrawerFeedback feedback;
+
+        SR_UTILS_NS::Reflection::Value value = context.GetValue();
+
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.pOwner);
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
+
+        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+
+        if (!context.pValue) {
+            const SR_MATH_NS::FVector2 buttonSize = { context.fieldTitleWidth, context.fieldHeight };
+
+            if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetEditorParams().GetDisplayName().c_str(), buttonSize)) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(false);
+                }
+                feedback.isChanged = true;
+                value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
+                value = value.DetachIfConst();
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+        }
+
+        const float checkBoxSize = SR_GRAPH_GUI_NS::Immediate::GetFrameHeight();
+
+        if (auto&& pValue = value.TryCast<std::optional<float>>()) {
+            bool hasValue = pValue->has_value();
+            if (SR_GRAPH_GUI_NS::Immediate::Checkbox("##Checkbox", &hasValue)) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(false);
+                }
+                if (hasValue) {
+                    *pValue = float();
+                }
+                else {
+                    pValue->reset();
+                }
+                feedback.isChanged = true;
+            }
+
+            float dataValue = pValue->value_or(0.f);
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard lock(!hasValue);
+            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth - checkBoxSize);
+
+            if (SR_GRAPH_GUI_NS::Immediate::DragFloat("##Value", &dataValue, context.GetEditorParams().GetDragSpeed())) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(true);
+                }
+                *pValue = dataValue;
+                feedback.isChanged = true;
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+        }
+        else {
+            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unsupported optional type!");
         }
 
         SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
@@ -292,6 +375,127 @@ namespace SR_CORE_GUI_NS {
                     SR_GRAPH_GUI_NS::Immediate::SameLine();
                 }
             }
+        }
+
+        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+
+        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_GRAPH_GUI_NS::Immediate::PopID();
+
+        return feedback;
+    }
+
+    PropertyDrawerFeedback FColorPropertyDrawer::Draw(const PropertyDrawerContext& context) {
+        PropertyDrawerFeedback feedback;
+
+        SR_UTILS_NS::Reflection::Value value = context.GetValue();
+
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.pOwner);
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
+
+        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+
+        if (!context.pValue) {
+            const SR_MATH_NS::FVector2 mainButtonSize = { context.fieldTitleWidth, context.fieldHeight };
+
+            if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetPropertyDisplayName().c_str(), mainButtonSize)) {
+                value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
+                value = value.DetachIfConst();
+                SetReflectedValue(context, feedback, value);
+            }
+        }
+
+        SR_GRAPH_GUI_NS::Immediate::SameLine();
+
+        const float_t partItemWidth = (context.fieldWidth / 4.f) - context.axisButtonWidth;
+
+        const SR_MATH_NS::FVector2 buttonSize = { context.axisButtonWidth, context.fieldHeight };
+        const float_t drag = context.GetEditorParams().GetDragSpeed();
+
+        constexpr std::array<const char*, 4> labels = { "R", "G", "B", "A" };
+        static const std::array<SR_MATH_NS::FColor, 6> colors = {
+            SR_MATH_NS::FColor(0.8f, 0.1f, 0.15f, 1.0f), /// red
+            SR_MATH_NS::FColor(0.2f, 0.7f, 0.2f, 1.0f), /// green
+            SR_MATH_NS::FColor(0.1f, 0.25f, 0.8f, 1.0f), /// blue
+            SR_MATH_NS::FColor(0.8f, 0.8f, 0.8f, 1.0f)  /// white
+        };
+
+        for (uint8_t i = 0; i < 4; ++i) {
+            SR_GRAPH_GUI_NS::Immediate::PushID(i);
+
+            SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Button, colors[i]);
+            SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::ButtonHovered, colors[i] + SR_MATH_NS::FColor(0.1f, 0.1f, 0.1f, 0.0f));
+            SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::ButtonActive, colors[i] + SR_MATH_NS::FColor(0.2f, 0.2f, 0.2f, 0.0f));
+
+            if (i != 0) {
+                SR_GRAPH_GUI_NS::Immediate::SameLine();
+            }
+
+            if (SR_GRAPH_GUI_NS::Immediate::Button(labels[i], buttonSize)) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(false);
+                }
+                feedback.isChanged = true;
+                SR_UTILS_NS::Reflection::Value defaultValue = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
+
+                if (!defaultValue.TryCast<SR_MATH_NS::FColor>()) {
+                    defaultValue = SR_UTILS_NS::Reflection::Value::Create(SR_MATH_NS::FColor());
+                }
+
+                if (SR_MATH_NS::FColor* pColor = value.TryCast<SR_MATH_NS::FColor>()) {
+                    if (auto&& pDefaultColor = defaultValue.TryCast<SR_MATH_NS::FColor>()) {
+                        switch (i) {
+                            case 0: pColor->r = pDefaultColor->r; break;
+                            case 1: pColor->g = pDefaultColor->g; break;
+                            case 2: pColor->b = pDefaultColor->b; break;
+                            case 3: pColor->a = pDefaultColor->a; break;
+                        }
+                    }
+                    else {
+                        SRHalt("FColorPropertyDrawer can only be used with FColor type!");
+                    }
+                }
+                else {
+                    SRHalt("FColorPropertyDrawer can only be used with FColor type!");
+                }
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::PopStyleColor(3);
+
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+
+            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(partItemWidth);
+
+            if (SR_MATH_NS::FColor* pColor = value.TryCast<SR_MATH_NS::FColor>()) {
+                SR_MATH_NS::Unit colorValue = 0.f;
+                switch (i) {
+                    default:
+                    case 0: colorValue = pColor->r; break;
+                    case 1: colorValue = pColor->g; break;
+                    case 2: colorValue = pColor->b; break;
+                    case 3: colorValue = pColor->a; break;
+                }
+
+                if (SR_GRAPH_GUI_NS::Immediate::DragScalar("", SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::Float, &colorValue, drag)) {
+                    if (context.onBeforeChangeCallback) {
+                        context.onBeforeChangeCallback(true);
+                    }
+                    feedback.isChanged = true;
+                    switch (i) {
+                        default:
+                        case 0: pColor->r = colorValue; break;
+                        case 1: pColor->g = colorValue; break;
+                        case 2: pColor->b = colorValue; break;
+                        case 3: pColor->a = colorValue; break;
+                    }
+                }
+            }
+            else {
+                SRHalt("FColorPropertyDrawer can only be used with FColor type!");
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+            SR_GRAPH_GUI_NS::Immediate::PopID();
         }
 
         SR_GRAPH_GUI_NS::Immediate::PopStyleVar();

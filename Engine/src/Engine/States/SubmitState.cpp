@@ -27,9 +27,15 @@ namespace SR_CORE_NS {
 
         pRenderScene->Submit();
 
-        SR_TRACY_PLOT("Draw calls", static_cast<int64_t>(pRenderScene->GetPipeline()->GetBuildState().drawCalls));
-        SR_TRACY_PLOT("Vertices", static_cast<int64_t>(pRenderScene->GetPipeline()->GetBuildState().vertices));
-        SR_TRACY_PLOT("VMem Transfer", static_cast<int64_t>(pRenderScene->GetPipeline()->GetBuildState().transferredMemory));
+        const auto dt = GetContext().GetValue<float_t>("DeltaTime");
+
+        const uint8_t frameIndex = pRenderScene->GetPipeline()->GetCurrentFrameIndex();
+        auto&& buildState = pRenderScene->GetPipeline()->GetBuildState(frameIndex);
+
+        SR_TRACY_PLOT("Draw calls", static_cast<int64_t>(buildState.drawCalls));
+        SR_TRACY_PLOT("Vertices", static_cast<int64_t>(buildState.vertices));
+        SR_TRACY_PLOT("VMem Transfer", static_cast<int64_t>(buildState.transferredMemory));
+        SR_TRACY_PLOT("FPS", static_cast<int64_t>(1.0f / dt));
 
         return SR_UTILS_NS::ThreadWorkerResult::Success;
     }

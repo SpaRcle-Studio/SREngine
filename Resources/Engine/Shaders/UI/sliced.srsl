@@ -30,6 +30,14 @@ float sliced_processAxis(float coord, float textureBorder, float windowBorder) {
     return sliced_map(coord, 1 - windowBorder, 1, 1 - textureBorder, 1);
 }
 
+float fragment_alpha() {
+    vec2 newUV = vec2(
+        1.0 - sliced_processAxis(UV.x, SLICED_TEXTURE_BORDER.x, SLICED_WINDOW_BORDER.x),
+        1.0 - sliced_processAxis(UV.y, SLICED_TEXTURE_BORDER.y, SLICED_WINDOW_BORDER.y)
+    );
+    return texture(diffuse, newUV).a;
+}
+
 void fragment() {
     vec2 newUV = vec2(
         1.0 - sliced_processAxis(UV.x, SLICED_TEXTURE_BORDER.x, SLICED_WINDOW_BORDER.x),

@@ -1,0 +1,20 @@
+sra format
+0-r:Root
+	1-o:asset
+		2-v:type
+			3-s:FileRenderTechniqueResource
+		2-o:ptr
+			3-o:data
+				4-v:name
+					5-s:Swapchain
+				4-o:pass
+					5-v:type
+						6-s:SwapchainPass
+					5-o:ptr
+						6-o:color
+							7-v:r
+								8-f:0.219999999
+							7-v:g
+								8-f:0.600000024
+							7-v:b
+								8-f:0.319999993

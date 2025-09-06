@@ -35,7 +35,9 @@ namespace SR_PTYPES_NS {
         /// получаем указатель обязательно до OnDestroy
         PhysicsScene::Ptr physicsScene = GetPhysicsScene();
 
-        Super::OnDestroy();
+        /// Super::OnDestroy();
+        /// TODO: неправильно. уничтожение компонента делегировано другой сущности (PhysicsScene)
+        SetParent(nullptr);
 
         if (physicsScene) {
             physicsScene->Remove(this);

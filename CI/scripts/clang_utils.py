@@ -432,6 +432,8 @@ def parse_sparcle_class(logger, parent_node, code_structure, namespaces):
         # example: @category(Engine.Render.Something other.Something)
         class_obj.category = extract_special_tag_comment_data(parent_node, 'category')
 
+        class_obj.display_name = extract_special_tag_comment_data(parent_node, 'displayName')
+
         class_obj.hidden = has_special_tag_comment(parent_node, 'hidden')
 
         if class_obj.inspector:

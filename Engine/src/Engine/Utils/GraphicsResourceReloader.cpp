@@ -10,24 +10,29 @@ namespace SR_CORE_NS {
     bool GraphicsResourceReloader::Reload(const SR_UTILS_NS::Path& path, SR_UTILS_NS::ResourceInfo* pResourceInfo) {
         SR_TRACY_ZONE;
 
-        auto&& pResource = pResourceInfo->GetResource();
-        if (!pResource) {
-            return false;
-        }
-
-        if (!IsResourceSuitableForReload(pResource)) {
-            return true;
-        }
+        bool hasErrors = false;
 
         SR_LOG("GraphicsResourceReloader::Reload() : reload resource \"" + path.ToStringRef() + "\"");
 
-        if (!pResource->Reload()) {
-            return false;
+        auto resourcesCopy = pResourceInfo->GetResources();
+        for (auto&& pResource : resourcesCopy) {
+            if (!pResource) {
+                continue;
+            }
+
+            if (!IsResourceSuitableForReload(pResource)) {
+                continue;
+            }
+
+            if (!pResource->Reload()) {
+                hasErrors = true;
+                continue;
+            }
+
+            OnResourceReloaded(pResource);
         }
 
-        OnResourceReloaded(pResource);
-
-        return true;
+        return !hasErrors;
     }
 
     void GraphicsResourceReloader::OnResourceReloaded(const SR_UTILS_NS::IResource::Ptr& pResource) {

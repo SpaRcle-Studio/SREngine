@@ -26,7 +26,7 @@ namespace SR_CORE_GUI_NS {
         bool m_isOpened = false;
         bool m_openedByDefault = false;
         ObjectPropertyDrawer::Ptr m_objectDrawer;
-        std::vector<std::string> m_typeNames;
+        std::vector<SR_UTILS_NS::StringAtom> m_typeNames;
 
     };
 }

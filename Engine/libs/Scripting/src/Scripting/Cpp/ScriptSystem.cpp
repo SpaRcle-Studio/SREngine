@@ -155,6 +155,7 @@ namespace SR_SCRIPTING_NS {
 
         while (m_threadRunning) {
             SR_TRACY_ZONE_N("ScriptSystem");
+            SR_PLATFORM_NS::Sleep(50);
 
             m_thread->Synchronize();
 

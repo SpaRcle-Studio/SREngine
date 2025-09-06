@@ -92,6 +92,8 @@ namespace SR_CORE_NS::GUI {
                     current.iconType = Core::EditorIcon::Font;
                 } else if (extension == "prefab") {
                     current.iconType = Core::EditorIcon::Prefab;
+                } else if (extension == "srtech") {
+                    current.iconType = Core::EditorIcon::RenderTechnique;
                 } else if (extension == "sras") {
                     current.iconType = Core::EditorIcon::Asset;
                 } else if (extension == "scene") {
@@ -192,6 +194,10 @@ namespace SR_CORE_NS::GUI {
             //for (auto&& pAnimation : animations) {
             //   // pAnimation->Save()
             //}
+        }
+        if (SR_GRAPH_GUI_NS::Immediate::Selectable("Copy path")) {
+            SR_UTILS_NS::Path path = m_selectedDir.Concat(filename);
+            SR_UTILS_NS::Platform::TextToClipboard(path.ToString());
         }
         if (SR_GRAPH_GUI_NS::Immediate::Selectable("Copy")) {
             SR_UTILS_NS::Path path = m_selectedDir.Concat(filename);
@@ -415,7 +421,11 @@ namespace SR_CORE_NS::GUI {
             m_callbackFunction = CallbackFn();
         }
         else {
-            if (path.GetExtensionView() == SR_UTILS_NS::Asset::EXTENSION_NAME || path.GetExtensionView() == "mat") {
+            static std::set<std::string_view> supportedAssets = {
+                SR_UTILS_NS::Asset::EXTENSION_NAME, "mat", "srtech"
+            };
+
+            if (supportedAssets.count(path.GetExtensionView()) != 0) {
                 if (auto&& pAssetInspector = GetManager()->GetWidget<AssetInspector>()) {
                     pAssetInspector->Inspect(path);
                 }

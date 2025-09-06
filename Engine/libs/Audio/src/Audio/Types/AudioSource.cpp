@@ -156,10 +156,6 @@ namespace SR_AUDIO_NS {
         }
 
         Super::OnDestroy();
-
-        GetThis().AutoFree([](auto&& pData) {
-            delete pData;
-        });
     }
 
     void AudioSource::OnDisable() {

@@ -62,7 +62,7 @@ sra format
 						6-o:ptr
 							7-o:translation
 								8-v:y
-									9-f:0.00832800008
+									9-f:0.0780000687
 							7-o:scale
 								8-v:x
 									9-f:20
@@ -120,6 +120,7 @@ sra format
 								8-o:ptr
 									9-v:entityId
 										10-i:4193520828818589059
+									9-o:associative
 									9-v:platformType
 										10-s:Windows
 									9-o:data
@@ -330,7 +331,7 @@ sra format
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:4.48393393
+									9-f:-0.105999999
 								8-v:y
 									9-f:2.99001503
 								8-v:z
@@ -435,8 +436,6 @@ sra format
 								8-o:ptr
 									9-v:entityId
 										10-i:3192905282459000103
-									9-v:renderTechnique
-										10-s:Engine/Configs/MainRenderTechnique.xml
 						6-k:i
 							7-o:d
 								8-v:type
@@ -446,8 +445,6 @@ sra format
 										10-i:3445474946150253867
 					5-v:name
 						6-s:GameCamera
-					5-v:isEnabled
-						6-b:false
 					5-o:transform
 						6-v:type
 							7-s:Transform3D
@@ -507,6 +504,29 @@ sra format
 								8-o:ptr
 									9-v:entityId
 										10-i:3374659283479041043
+									9-o:associative
+										10-a:associativeMapAtom
+											11-k:item
+												12-v:first
+													13-s:qwwerteee
+												12-v:second
+													13-i:-47
+											11-k:item
+												12-v:first
+													13-s:qwwert
+												12-v:second
+													13-i:27
+										10-a:associativeMap4
+											11-k:item
+												12-v:first
+													13-s:Android
+												12-v:second
+													13-s:23123
+											11-k:item
+												12-v:first
+													13-s:Emscripten
+												12-v:second
+													13-s:asdas
 									9-v:platformType
 										10-s:Windows
 									9-o:data
@@ -551,11 +571,11 @@ sra format
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:3.78744793
+									9-f:4.36361217
 								8-v:y
-									9-f:1.76946199
+									9-f:4.5353241
 								8-v:z
-									9-f:5.01029015
+									9-f:2.58465028
 		2-k:i
 			3-o:d
 				4-v:type
@@ -664,11 +684,15 @@ sra format
 										10-s:Engine/Models/sphere.obj
 					5-v:name
 						6-s:Sphere
+					5-v:isEnabled
+						6-b:false
 					5-o:transform
 						6-v:type
 							7-s:Transform3D
 						6-o:ptr
 							7-o:translation
+								8-v:x
+									9-f:-1.09000003
 								8-v:y
 									9-f:3.5196929
 								8-v:z
@@ -720,17 +744,17 @@ sra format
 										10-s:Engine/Models/statue.obj
 					5-v:name
 						6-s:Statue
-					5-v:isEnabled
-						6-b:false
 					5-o:transform
 						6-v:type
 							7-s:Transform3D
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:5.80669689
+									9-f:6.96542501
+								8-v:y
+									9-f:3.57627869e-07
 								8-v:z
-									9-f:-5.31444883
+									9-f:12.2890882
 							7-o:scale
 								8-v:x
 									9-f:10
@@ -785,8 +809,6 @@ sra format
 										10-s:Engine/Models/monkey.obj
 					5-v:name
 						6-s:Monkey
-					5-v:isEnabled
-						6-b:false
 					5-o:transform
 						6-v:type
 							7-s:Transform3D
@@ -907,6 +929,8 @@ ddddцццゔぅヾボ
 						6-i:4191819035411605343
 					5-v:name
 						6-s:Models/teapot
+					5-v:isEnabled
+						6-b:false
 					5-v:prefab
 						6-s:5345345345.prefab
 					5-o:transform
@@ -929,6 +953,8 @@ ddddцццゔぅヾボ
 						6-i:4022546309212795317
 					5-v:name
 						6-s:Models/teapot
+					5-v:isEnabled
+						6-b:false
 					5-v:prefab
 						6-s:5345345345.prefab
 					5-o:transform
@@ -1188,11 +1214,11 @@ ddddцццゔぅヾボ
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:-8.68903637
+									9-f:-13.0195637
 								8-v:y
-									9-f:2.40208697
+									9-f:2.65349722
 								8-v:z
-									9-f:5.20022821
+									9-f:2.84277725
 		2-k:i
 			3-o:d
 				4-v:type
@@ -1636,6 +1662,7 @@ ddddцццゔぅヾボ
 								8-o:ptr
 									9-v:entityId
 										10-i:4321541742137885967
+									9-o:associative
 									9-v:platformType
 										10-s:Windows
 									9-o:data
@@ -2332,9 +2359,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1611
+											11-f:2560
 										10-v:height
-											11-f:965
+											11-f:1440
 									9-v:direction
 										10-s:Column
 									9-v:containerAlign
@@ -2769,9 +2796,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1611
+											11-f:2560
 										10-v:height
-											11-f:965
+											11-f:1440
 						6-k:i
 							7-o:d
 								8-v:type
@@ -3210,9 +3237,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1611
+											11-f:2560
 										10-v:height
-											11-f:965
+											11-f:1440
 										10-v:align
 											11-s:End
 									9-v:direction
@@ -4153,9 +4180,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1611
+											11-f:2560
 										10-v:height
-											11-f:965
+											11-f:1440
 									9-v:containerAlign
 										10-s:Center
 									9-v:justify
@@ -4540,9 +4567,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1611
+											11-f:2560
 										10-v:height
-											11-f:965
+											11-f:1440
 									9-v:direction
 										10-s:Column
 									9-v:containerAlign
@@ -5487,9 +5514,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1611
+											11-f:2560
 										10-v:height
-											11-f:965
+											11-f:1440
 									9-v:direction
 										10-s:Column
 									9-v:containerAlign
@@ -14778,7 +14805,7 @@ ddddцццゔぅヾボ
 													13-v:entityId
 														14-i:4440690679856616196
 													13-v:renderTechnique
-														14-s:Engine/Configs/MainRenderTechnique.xml
+														14-s:Engine/Render/Swapchain.srtech
 									9-v:name
 										10-s:Camera
 									9-o:transform
@@ -14795,7 +14822,41 @@ ddddцццゔぅヾボ
 													13-f:0.0662739053
 												12-v:w
 													13-f:0.997801483
+					5-v:isEnabled
+						6-b:false
 					5-o:transform
 						6-v:type
 							7-s:Transform3D
 						6-o:ptr
+		2-k:i
+			3-o:d
+				4-v:type
+					5-s:GameObject
+				4-o:ptr
+					5-v:entityId
+						6-i:3943959920745944388
+					5-a:components
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:EditorCamera
+								8-o:ptr
+									9-v:entityId
+										10-i:4580602749432365490
+									9-v:priority
+										10-i:-2147483648
+									9-v:renderTechnique
+										10-s:Editor/Render/Geometry.srtech
+					5-v:name
+						6-s:New GameObject
+					5-v:isEnabled
+						6-b:false
+					5-o:transform
+						6-v:type
+							7-s:Transform3D
+						6-o:ptr
+							7-o:translation
+								8-v:x
+									9-f:-8.71000004
+								8-v:y
+									9-f:1.76999998

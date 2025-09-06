@@ -28,6 +28,7 @@ namespace SR_CORE_GUI_NS {
         struct ComponentCategory {
             struct ComponentInfo {
                 SR_UTILS_NS::StringAtom name;
+                SR_UTILS_NS::StringAtom displayName;
                 bool isBehaviour = false;
             };
             std::vector<ComponentInfo> components;

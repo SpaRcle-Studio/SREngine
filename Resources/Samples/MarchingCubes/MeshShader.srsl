@@ -14,7 +14,7 @@ DepthTest true;
 [[uniform], [public]] int densityCountAxis = 0;
 [[uniform], [public]] ivec3 chunkCoord = ivec3(0, 0, 0);
 
-[[shared]] vec3 vNormal;
+///[[shared]] vec3 vNormal;
 
 #include <Engine/Shaders/CascadedShadowMap/pcf-utils.inl.srsl>
 

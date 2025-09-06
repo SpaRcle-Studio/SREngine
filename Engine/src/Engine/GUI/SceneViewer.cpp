@@ -92,8 +92,11 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_GUI_NS::Immediate::Separator();
 
-        if (auto&& pFrameBuffer = GetContext()->FindFramebuffer("SceneViewFBO"_atom, pCamera.Get())) {
+        if (auto&& pFrameBuffer = GetContext()->FindFramebuffer("SceneView"_atom, pCamera.Get())) {
             m_id = pFrameBuffer->GetColorTexture(0);
+        }
+        else {
+            m_id = SR_ID_INVALID;
         }
 
         if (SR_GRAPH_GUI_NS::Immediate::BeginChild("ViewerTexture"))
@@ -228,12 +231,7 @@ namespace SR_CORE_GUI_NS {
             EditorCamera::Ptr pCameraComponent = pCamera->AddComponent<EditorCamera>();
             pCameraComponent->SetSceneViewer(this);
 
-            if (m_isPrefab) {
-                pCameraComponent->SetRenderTechnique(SR_CORE_NS::EditorSettings::Instance().GetPrefabEditorRenderTechnique());
-            }
-            else {
-                pCameraComponent->SetRenderTechnique(SR_CORE_NS::EditorSettings::Instance().GetRenderTechnique());
-            }
+            pCameraComponent->SetCameraType(m_isPrefab ? SR_GTYPES_NS::CameraType::EditorPrefab : SR_GTYPES_NS::CameraType::Editor);
 
             /// Камера редактора имеет наивысшый закадровый приоритет
             pCameraComponent->SetPriority(SR_INT32_MIN);
