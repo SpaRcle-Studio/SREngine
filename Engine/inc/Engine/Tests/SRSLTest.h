@@ -30,7 +30,6 @@ namespace SR_CORE_NS::Tests {
                     continue;
                 }
 
-
                 file = file.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
 
                 if (auto&& pShader = SR_SRSL_NS::SRSLShader::Load(file, SR_SRSL_NS::ShaderMacrosParams::GetDefault())) {
