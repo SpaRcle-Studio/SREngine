@@ -124,15 +124,15 @@ namespace SR_GRAPH_NS {
     }
 
     struct ColorLayer {
-        int32_t texture = SR_ID_INVALID;
+        std::vector<int32_t> texture;
         ImageFormat format = ImageFormat::Unknown;
     };
 
     struct DepthLayer {
-        int32_t texture = SR_ID_INVALID;
+        std::vector<int32_t> texture;
         ImageFormat format = ImageFormat::Unknown;
         ImageAspect aspect = ImageAspect::DepthStencil;
-        std::vector<int32_t> subLayers;
+        std::vector<std::vector<int32_t>> subLayers;
     };
 
     //inline static bool IsSRGB(ColorFormat f) {

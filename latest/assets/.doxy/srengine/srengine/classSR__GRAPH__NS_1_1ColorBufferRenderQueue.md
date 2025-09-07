@@ -141,7 +141,7 @@ See [SR\_GRAPH\_NS::RenderQueue](classSR__GRAPH__NS_1_1RenderQueue.md)
 | ---: | :--- |
 |  SR\_NODISCARD const std::vector&lt; std::pair&lt; Layer, Queue &gt; &gt; & | [**GetQueues**](classSR__GRAPH__NS_1_1RenderQueue.md#function-getqueues) () noexcept const<br> |
 |  void | [**Init**](classSR__GRAPH__NS_1_1RenderQueue.md#function-init) () <br> |
-|  void | [**OnMeshDirty**](classSR__GRAPH__NS_1_1RenderQueue.md#function-onmeshdirty) ([**SR\_GTYPES\_NS::Mesh**](classSR__GTYPES__NS_1_1Mesh.md) \* pMesh, [**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* pShader) <br> |
+|  void | [**OnMeshDirty**](classSR__GRAPH__NS_1_1RenderQueue.md#function-onmeshdirty) ([**SR\_GTYPES\_NS::Mesh**](classSR__GTYPES__NS_1_1Mesh.md) \* pMesh, [**RenderQueueInfo**](structSR__GRAPH__NS_1_1RenderQueueInfo.md) \* pInfo) <br> |
 |  void | [**Register**](classSR__GRAPH__NS_1_1RenderQueue.md#function-register) (const [**MeshRegistrationInfo**](structSR__GRAPH__NS_1_1MeshRegistrationInfo.md) & info) <br> |
 |  bool | [**Render**](classSR__GRAPH__NS_1_1RenderQueue.md#function-render-12) () <br> |
 |   | [**RenderQueue**](classSR__GRAPH__NS_1_1RenderQueue.md#function-renderqueue) ([**RenderStrategy**](classSR__GRAPH__NS_1_1RenderStrategy.md) \* pStrategy, [**MeshDrawerPass**](classSR__GRAPH__NS_1_1MeshDrawerPass.md) \* pDrawer) <br> |

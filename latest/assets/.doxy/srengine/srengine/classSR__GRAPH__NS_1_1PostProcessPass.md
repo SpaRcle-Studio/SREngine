@@ -185,6 +185,7 @@ See [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 | virtual void | [**OnMultisampleChanged**](#function-onmultisamplechanged) () override<br> |
 | virtual void | [**OnResize**](#function-onresize) (const SR\_MATH\_NS::UVector2 & size) override<br> |
 | virtual bool | [**PreRender**](#function-prerender) () override<br>_Вызывается только во время построения_  |
+| virtual void | [**Prepare**](#function-prepare) () override<br>_Вызывается всегда но полсе оверлея_  |
 | virtual bool | [**Render**](#function-render) () override<br>_Вызывается только во время построения_  |
 | virtual void | [**Update**](#function-update) () override<br>_Вызывается постоянно после построения_  |
 |   | [**~PostProcessPass**](#function-postprocesspass) () override<br> |
@@ -384,6 +385,7 @@ See [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 |  bool | [**m\_dirtyShader**](#variable-m_dirtyshader)   = `true`<br> |
 |  [**SR\_UTILS\_NS::Subscription**](classSR__UTILS__NS_1_1Subscription.md) | [**m\_onShaderReloaded**](#variable-m_onshaderreloaded)  <br> |
 |  Properties | [**m\_properties**](#variable-m_properties)  <br> |
+|  [**SamplersPassData**](classSR__GRAPH__NS_1_1SamplersPassData.md) | [**m\_samplers**](#variable-m_samplers)  <br> |
 |  ShaderPtr | [**m\_shader**](#variable-m_shader)   = `nullptr`<br> |
 |  [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**m\_shaderPath**](#variable-m_shaderpath)  <br> |
 |  uint32\_t | [**m\_vertices**](#variable-m_vertices)   = `3`<br> |
@@ -506,7 +508,9 @@ See [SR\_HTYPES\_NS::SharedPtrBase](classSR__HTYPES__NS_1_1SharedPtrBase.md)
 | Type | Name |
 | ---: | :--- |
 | virtual void | [**DeInit**](#function-deinit) () override<br> |
+| virtual void | [**SetRenderTechnique**](#function-setrendertechnique) ([**SR\_GRAPH\_NS::IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \* pRenderTechnique) override<br> |
 |  void | [**SetShader**](#function-setshader) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & shaderPath) <br> |
+| virtual void | [**UseSamplers**](#function-usesamplers) ([**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* pShader) override<br> |
 
 
 
@@ -578,6 +582,22 @@ virtual bool SR_GRAPH_NS::PostProcessPass::PreRender () override
 
 
 Implements [*SR\_GRAPH\_NS::BasePass::PreRender*](classSR__GRAPH__NS_1_1BasePass.md#function-prerender)
+
+
+<hr>
+
+
+
+### function Prepare 
+
+_Вызывается всегда но полсе оверлея_ 
+```C++
+virtual void SR_GRAPH_NS::PostProcessPass::Prepare () override
+```
+
+
+
+Implements [*SR\_GRAPH\_NS::BasePass::Prepare*](classSR__GRAPH__NS_1_1BasePass.md#function-prepare)
 
 
 <hr>
@@ -670,6 +690,19 @@ Properties SR_GRAPH_NS::PostProcessPass::m_properties;
 
 
 
+### variable m\_samplers 
+
+```C++
+SamplersPassData SR_GRAPH_NS::PostProcessPass::m_samplers;
+```
+
+
+
+
+<hr>
+
+
+
 ### variable m\_shader 
 
 ```C++
@@ -752,6 +785,23 @@ Implements [*SR\_GRAPH\_NS::BasePass::DeInit*](classSR__GRAPH__NS_1_1BasePass.md
 
 
 
+### function SetRenderTechnique 
+
+```C++
+virtual void SR_GRAPH_NS::PostProcessPass::SetRenderTechnique (
+    SR_GRAPH_NS::IRenderTechnique * pRenderTechnique
+) override
+```
+
+
+
+Implements [*SR\_GRAPH\_NS::BasePass::SetRenderTechnique*](classSR__GRAPH__NS_1_1BasePass.md#function-setrendertechnique)
+
+
+<hr>
+
+
+
 ### function SetShader 
 
 ```C++
@@ -761,6 +811,23 @@ void SR_GRAPH_NS::PostProcessPass::SetShader (
 ```
 
 
+
+
+<hr>
+
+
+
+### function UseSamplers 
+
+```C++
+virtual void SR_GRAPH_NS::PostProcessPass::UseSamplers (
+    SR_GTYPES_NS::Shader * pShader
+) override
+```
+
+
+
+Implements [*SR\_GRAPH\_NS::BasePass::UseSamplers*](classSR__GRAPH__NS_1_1BasePass.md#function-usesamplers)
 
 
 <hr>

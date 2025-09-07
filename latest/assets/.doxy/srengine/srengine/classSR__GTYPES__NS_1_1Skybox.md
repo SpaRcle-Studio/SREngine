@@ -236,7 +236,7 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 
 | Type | Name |
 | ---: | :--- |
-|  void | [**Draw**](#function-draw) () <br> |
+|  bool | [**Draw**](#function-draw) () <br> |
 |  void | [**FreeVMemory**](#function-freevmemory) () override<br> |
 |  SR\_NODISCARD int32\_t | [**GetIBO**](#function-getibo) () <br> |
 |  SR\_NODISCARD Shader::Ptr | [**GetShader**](#function-getshader) () noexcept const<br> |
@@ -714,7 +714,7 @@ using SR_GTYPES_NS::Skybox::Ptr =  SR_HTYPES_NS::SharedPtr<Skybox>;
 ### function Draw 
 
 ```C++
-void SR_GTYPES_NS::Skybox::Draw () 
+bool SR_GTYPES_NS::Skybox::Draw () 
 ```
 
 

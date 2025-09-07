@@ -85,6 +85,7 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 | ---: | :--- |
 | virtual SR\_NODISCARD bool | [**ExecuteInEditMode**](#function-executeineditmode) () override const<br> |
 | virtual void | [**FixedUpdate**](#function-fixedupdate) () override<br> |
+| virtual void | [**OnDisable**](#function-ondisable) () override<br> |
 |  void | [**SetActive**](#function-setactive) (const bool active) <br> |
 |  void | [**SetExecuteInEditMode**](#function-setexecuteineditmode) (bool enabled) <br> |
 |  void | [**SetRightMouseButtonToRotate**](#function-setrightmousebuttontorotate) (const bool enabled) <br> |
@@ -249,12 +250,27 @@ Implements [*SR\_UTILS\_NS::Component::ExecuteInEditMode*](classSR__UTILS__NS_1_
 ### function FixedUpdate 
 
 ```C++
-inline virtual void SR_UTILS_NS::CameraFlyMover::FixedUpdate () override
+virtual void SR_UTILS_NS::CameraFlyMover::FixedUpdate () override
 ```
 
 
 
 Implements [*SR\_UTILS\_NS::Component::FixedUpdate*](classSR__UTILS__NS_1_1Component.md#function-fixedupdate)
+
+
+<hr>
+
+
+
+### function OnDisable 
+
+```C++
+virtual void SR_UTILS_NS::CameraFlyMover::OnDisable () override
+```
+
+
+
+Implements [*SR\_UTILS\_NS::Component::OnDisable*](classSR__UTILS__NS_1_1Component.md#function-ondisable)
 
 
 <hr>

@@ -39,7 +39,7 @@ See [SR\_GTYPES\_NS::Mesh](classSR__GTYPES__NS_1_1Mesh.md)
 | ---: | :--- |
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; BaseMaterial &gt; | [**MaterialPtr**](classSR__GTYPES__NS_1_1Mesh.md#typedef-materialptr)  <br> |
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Mesh**](classSR__GTYPES__NS_1_1Mesh.md) &gt; | [**Ptr**](classSR__GTYPES__NS_1_1Mesh.md#typedef-ptr)  <br> |
-| typedef [**SR\_HTYPES\_NS::SortedVector**](classSR__HTYPES__NS_1_1SortedVector.md)&lt; RenderQueueInfo, RenderQueuePredicate &gt; | [**RenderQueues**](classSR__GTYPES__NS_1_1Mesh.md#typedef-renderqueues)  <br> |
+| typedef MeshRenderQueues | [**RenderQueues**](classSR__GTYPES__NS_1_1Mesh.md#typedef-renderqueues)  <br> |
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; RenderScene &gt; | [**RenderScenePtr**](classSR__GTYPES__NS_1_1Mesh.md#typedef-rendersceneptr)  <br> |
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Shader**](classSR__GTYPES__NS_1_1Shader.md) &gt; | [**ShaderPtr**](classSR__GTYPES__NS_1_1Mesh.md#typedef-shaderptr)  <br> |
 
@@ -192,7 +192,6 @@ See [SR\_GTYPES\_NS::Mesh](classSR__GTYPES__NS_1_1Mesh.md)
 | virtual SR\_NODISCARD SR\_FORCE\_INLINE bool | [**IsFlatMesh**](classSR__GTYPES__NS_1_1Mesh.md#function-isflatmesh) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsMeshRegistered**](classSR__GTYPES__NS_1_1Mesh.md#function-ismeshregistered) () noexcept const<br> |
 | virtual SR\_NODISCARD bool | [**IsSupportVBO**](classSR__GTYPES__NS_1_1Mesh.md#function-issupportvbo) () const = 0<br> |
-|  SR\_NODISCARD bool | [**IsUniformsDirty**](classSR__GTYPES__NS_1_1Mesh.md#function-isuniformsdirty) () noexcept const<br> |
 | virtual SR\_NODISCARD bool | [**IsUniqueMesh**](classSR__GTYPES__NS_1_1Mesh.md#function-isuniquemesh) () const<br> |
 |  SR\_NODISCARD bool | [**IsWaitReRegister**](classSR__GTYPES__NS_1_1Mesh.md#function-iswaitreregister) () noexcept const<br> |
 |  void | [**MarkMaterialDirty**](classSR__GTYPES__NS_1_1Mesh.md#function-markmaterialdirty) () <br> |
@@ -213,7 +212,6 @@ See [SR\_GTYPES\_NS::Mesh](classSR__GTYPES__NS_1_1Mesh.md)
 | virtual void | [**SetMatrix**](classSR__GTYPES__NS_1_1Mesh.md#function-setmatrix) (const [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & matrix) <br> |
 |  void | [**SetMeshRegistrationInfo**](classSR__GTYPES__NS_1_1Mesh.md#function-setmeshregistrationinfo) (const std::optional&lt; MeshRegistrationInfo &gt; & info) <br> |
 |  void | [**SetPipeline**](classSR__GTYPES__NS_1_1Mesh.md#function-setpipeline) (Pipeline \* pPipeline) <br> |
-|  void | [**SetUniformsClean**](classSR__GTYPES__NS_1_1Mesh.md#function-setuniformsclean) () <br> |
 |  void | [**UnRegisterMesh**](classSR__GTYPES__NS_1_1Mesh.md#function-unregistermesh) () <br> |
 | virtual void | [**UseMaterial**](classSR__GTYPES__NS_1_1Mesh.md#function-usematerial) () <br> |
 | virtual void | [**UseModelMatrix**](classSR__GTYPES__NS_1_1Mesh.md#function-usemodelmatrix) () <br> |
@@ -351,7 +349,6 @@ See [SR\_GTYPES\_NS::Mesh](classSR__GTYPES__NS_1_1Mesh.md)
 |  FrustumCullingType | [**m\_frustumCullingType**](classSR__GTYPES__NS_1_1Mesh.md#variable-m_frustumcullingtype)   = `FrustumCullingType::Sphere`<br> |
 |  bool | [**m\_hasErrors**](classSR__GTYPES__NS_1_1Mesh.md#variable-m_haserrors)   = `false`<br> |
 |  bool | [**m\_isCalculated**](classSR__GTYPES__NS_1_1Mesh.md#variable-m_iscalculated)   = `false`<br> |
-|  bool | [**m\_isUniformsDirty**](classSR__GTYPES__NS_1_1Mesh.md#variable-m_isuniformsdirty)   = `false`<br> |
 |  bool | [**m\_isWaitReRegister**](classSR__GTYPES__NS_1_1Mesh.md#variable-m_iswaitreregister)   = `false`<br> |
 |  MaterialPtr | [**m\_material**](classSR__GTYPES__NS_1_1Mesh.md#variable-m_material)  <br> |
 |  Pipeline \* | [**m\_pipeline**](classSR__GTYPES__NS_1_1Mesh.md#variable-m_pipeline)   = `nullptr`<br> |

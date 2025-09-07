@@ -249,9 +249,9 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 |   | [**Framebuffer**](#function-framebuffer) () <br> |
 |  void | [**FreeVMemory**](#function-freevmemory) () override<br> |
 |  SR\_NODISCARD uint32\_t | [**GetColorLayersCount**](#function-getcolorlayerscount) () noexcept const<br> |
-|  SR\_NODISCARD int32\_t | [**GetColorTexture**](#function-getcolortexture) (uint32\_t layer) <br> |
+|  SR\_NODISCARD int32\_t | [**GetColorTexture**](#function-getcolortexture) (uint32\_t layer, uint8\_t frame) <br> |
 |  SR\_NODISCARD ImageAspect | [**GetDepthAspect**](#function-getdepthaspect) () noexcept const<br> |
-|  SR\_NODISCARD int32\_t | [**GetDepthTexture**](#function-getdepthtexture) (int32\_t layer=-1) <br> |
+|  SR\_NODISCARD int32\_t | [**GetDepthTexture**](#function-getdepthtexture) (int32\_t layer, uint8\_t frame) <br> |
 |  SR\_NODISCARD const FrameBufferFeatures & | [**GetFeatures**](#function-getfeatures) () const<br> |
 | virtual uint64\_t | [**GetFileHash**](#function-getfilehash) () override const<br> |
 |  SR\_NODISCARD uint32\_t | [**GetHeight**](#function-getheight) () const<br> |
@@ -918,7 +918,8 @@ inline SR_NODISCARD uint32_t SR_GTYPES_NS::Framebuffer::GetColorLayersCount () n
 
 ```C++
 SR_NODISCARD int32_t SR_GTYPES_NS::Framebuffer::GetColorTexture (
-    uint32_t layer
+    uint32_t layer,
+    uint8_t frame
 ) 
 ```
 
@@ -946,7 +947,8 @@ inline SR_NODISCARD ImageAspect SR_GTYPES_NS::Framebuffer::GetDepthAspect () noe
 
 ```C++
 SR_NODISCARD int32_t SR_GTYPES_NS::Framebuffer::GetDepthTexture (
-    int32_t layer=-1
+    int32_t layer,
+    uint8_t frame
 ) 
 ```
 
@@ -1136,7 +1138,7 @@ Implements [*SR\_UTILS\_NS::IResource::IsFileResource*](classSR__UTILS__NS_1_1IR
 ### function IsValid 
 
 ```C++
-inline SR_NODISCARD bool SR_GTYPES_NS::Framebuffer::IsValid () const
+SR_NODISCARD bool SR_GTYPES_NS::Framebuffer::IsValid () const
 ```
 
 

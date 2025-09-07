@@ -398,6 +398,7 @@
         <reimplementedby refid="classSR__GRAPH__NS_1_1DebugPass_1af6340e2214eba8b099b816f2488310cc">Prepare</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1a1bb5f8f8e93b8068a9d80ab183e1cf66">Prepare</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a3c35b40b7095392be6ae0fe7bd4edf05">Prepare</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1PostProcessPass_1a96b21122ce1e39f663bc2b1b71e16f0b">Prepare</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1WidgetPass_1ae71846643e4648f729ee4cfd8c20f037">Prepare</reimplementedby>
         <briefdescription>
 <para>Вызывается всегда но полсе оверлея </para>
@@ -569,6 +570,7 @@
         <name>UseSamplers</name>
         <qualifiedname>SR_GRAPH_NS::BasePass::UseSamplers</qualifiedname>
         <reimplementedby refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1acf61ab11ac383cf0a129b40ee5652361">UseSamplers</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1PostProcessPass_1ad57e78f43a906673d15e363baec2f55c">UseSamplers</reimplementedby>
         <param>
           <type><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> *</type>
           <declname>pShader</declname>
@@ -590,6 +592,7 @@
         <reimplementedby refid="classSR__GRAPH__NS_1_1FrameBufferPass_1a4fb00839c6dbf5d53bc81cf86bcf4cfb">SetRenderTechnique</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1a482bd1243f9b252fa81b99aeaa88617c">SetRenderTechnique</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1aeb792b76365dc9be8ea0675b7ec36b83">SetRenderTechnique</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1PostProcessPass_1ae7a8fbebab006dfa9cda364dbfade31e">SetRenderTechnique</reimplementedby>
         <param>
           <type><ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">IRenderTechnique</ref> *</type>
           <declname>pRenderTechnique</declname>

@@ -42,8 +42,9 @@ namespace SR_GRAPH_NS {
 
         void OnPostLoad() override;
 
-        uint32_t textureId = SR_ID_INVALID;
-        uint32_t fboId = SR_ID_INVALID;
+        SR_NODISCARD uint32_t GetTextureId(uint8_t frame) const noexcept;
+
+        std::vector<uint32_t> textureId;
         SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Texture> pTexture;
 
         SR_NODISCARD bool IsFrameBufferUsage() const noexcept {

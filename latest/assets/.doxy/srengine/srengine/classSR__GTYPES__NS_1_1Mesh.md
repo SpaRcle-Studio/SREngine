@@ -35,7 +35,7 @@ Inherited by the following classes: [SR\_GTYPES\_NS::DebugLine](classSR__GTYPES_
 | ---: | :--- |
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; BaseMaterial &gt; | [**MaterialPtr**](#typedef-materialptr)  <br> |
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Mesh**](classSR__GTYPES__NS_1_1Mesh.md) &gt; | [**Ptr**](#typedef-ptr)  <br> |
-| typedef [**SR\_HTYPES\_NS::SortedVector**](classSR__HTYPES__NS_1_1SortedVector.md)&lt; RenderQueueInfo, RenderQueuePredicate &gt; | [**RenderQueues**](#typedef-renderqueues)  <br> |
+| typedef MeshRenderQueues | [**RenderQueues**](#typedef-renderqueues)  <br> |
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; RenderScene &gt; | [**RenderScenePtr**](#typedef-rendersceneptr)  <br> |
 | typedef [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Shader**](classSR__GTYPES__NS_1_1Shader.md) &gt; | [**ShaderPtr**](#typedef-shaderptr)  <br> |
 
@@ -148,7 +148,6 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 | virtual SR\_NODISCARD SR\_FORCE\_INLINE bool | [**IsFlatMesh**](#function-isflatmesh) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsMeshRegistered**](#function-ismeshregistered) () noexcept const<br> |
 | virtual SR\_NODISCARD bool | [**IsSupportVBO**](#function-issupportvbo) () const = 0<br> |
-|  SR\_NODISCARD bool | [**IsUniformsDirty**](#function-isuniformsdirty) () noexcept const<br> |
 | virtual SR\_NODISCARD bool | [**IsUniqueMesh**](#function-isuniquemesh) () const<br> |
 |  SR\_NODISCARD bool | [**IsWaitReRegister**](#function-iswaitreregister) () noexcept const<br> |
 |  void | [**MarkMaterialDirty**](#function-markmaterialdirty) () <br> |
@@ -169,7 +168,6 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 | virtual void | [**SetMatrix**](#function-setmatrix) (const [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & matrix) <br> |
 |  void | [**SetMeshRegistrationInfo**](#function-setmeshregistrationinfo) (const std::optional&lt; MeshRegistrationInfo &gt; & info) <br> |
 |  void | [**SetPipeline**](#function-setpipeline) (Pipeline \* pPipeline) <br> |
-|  void | [**SetUniformsClean**](#function-setuniformsclean) () <br> |
 |  void | [**UnRegisterMesh**](#function-unregistermesh) () <br> |
 | virtual void | [**UseMaterial**](#function-usematerial) () <br> |
 | virtual void | [**UseModelMatrix**](#function-usemodelmatrix) () <br> |
@@ -287,7 +285,6 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 |  FrustumCullingType | [**m\_frustumCullingType**](#variable-m_frustumcullingtype)   = `FrustumCullingType::Sphere`<br> |
 |  bool | [**m\_hasErrors**](#variable-m_haserrors)   = `false`<br> |
 |  bool | [**m\_isCalculated**](#variable-m_iscalculated)   = `false`<br> |
-|  bool | [**m\_isUniformsDirty**](#variable-m_isuniformsdirty)   = `false`<br> |
 |  bool | [**m\_isWaitReRegister**](#variable-m_iswaitreregister)   = `false`<br> |
 |  MaterialPtr | [**m\_material**](#variable-m_material)  <br> |
 |  Pipeline \* | [**m\_pipeline**](#variable-m_pipeline)   = `nullptr`<br> |
@@ -425,7 +422,7 @@ using SR_GTYPES_NS::Mesh::Ptr =  SR_HTYPES_NS::SharedPtr<Mesh>;
 ### typedef RenderQueues 
 
 ```C++
-using SR_GTYPES_NS::Mesh::RenderQueues =  SR_HTYPES_NS::SortedVector<RenderQueueInfo, RenderQueuePredicate>;
+using SR_GTYPES_NS::Mesh::RenderQueues =  MeshRenderQueues;
 ```
 
 
@@ -819,19 +816,6 @@ virtual SR_NODISCARD bool SR_GTYPES_NS::Mesh::IsSupportVBO () const = 0
 
 
 
-### function IsUniformsDirty 
-
-```C++
-inline SR_NODISCARD bool SR_GTYPES_NS::Mesh::IsUniformsDirty () noexcept const
-```
-
-
-
-
-<hr>
-
-
-
 ### function IsUniqueMesh 
 
 ```C++
@@ -1119,19 +1103,6 @@ inline void SR_GTYPES_NS::Mesh::SetPipeline (
 
 
 
-### function SetUniformsClean 
-
-```C++
-inline void SR_GTYPES_NS::Mesh::SetUniformsClean () 
-```
-
-
-
-
-<hr>
-
-
-
 ### function UnRegisterMesh 
 
 ```C++
@@ -1354,19 +1325,6 @@ bool SR_GTYPES_NS::Mesh::m_hasErrors;
 
 ```C++
 bool SR_GTYPES_NS::Mesh::m_isCalculated;
-```
-
-
-
-
-<hr>
-
-
-
-### variable m\_isUniformsDirty 
-
-```C++
-bool SR_GTYPES_NS::Mesh::m_isUniformsDirty;
 ```
 
 

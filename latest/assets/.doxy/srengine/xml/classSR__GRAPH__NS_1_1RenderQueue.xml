@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="37" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="37" bodyend="46"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="38" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="38" bodyend="47"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1RenderQueue_1adc230febc133cd652da3d4850267de09" prot="public" static="no">
         <type>uint8_t</type>
@@ -88,7 +88,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="47" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="48" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="48" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1RenderQueue_1a4ea7a000ae2d918ca0a2d5f1f3c5cb7c" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SortedVector" kindref="compound">SR_HTYPES_NS::SortedVector</ref>&lt; <ref refid="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshInfo" kindref="compound">MeshInfo</ref>, <ref refid="structSR__GRAPH__NS_1_1RenderQueue_1_1RenderQueueLessPredicate" kindref="compound">RenderQueueLessPredicate</ref> &gt;</type>
@@ -102,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="100" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="100" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="101" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="101" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-type">
@@ -118,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="26" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="26" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="28" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1RenderQueue_1a02e4cc8efbb196050a3dcc62a9fb22fa" prot="private" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> &gt;</type>
@@ -132,7 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="27" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="29" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1RenderQueue_1af984f2fee49e48617f66a0092a0a2ee6" prot="private" static="no">
         <type>uint32_t</type>
@@ -146,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="28" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="28" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="30" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="30" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1RenderQueue_1a1e327fdea7a6d0a17bb436606760722f" prot="private" static="no">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -160,7 +160,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="29" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="31" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="31" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -177,7 +177,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="142" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="142" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="143" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="143" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -194,7 +194,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="145" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="145" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="146" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="146" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderQueue_1a95d82fd9879375ffd2ec7e68e02599fd" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -209,7 +209,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="146" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="146" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="147" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="147" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderQueue_1aa44f8089d7a4f099d40574bffa416851" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -224,7 +224,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="147" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="147" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="148" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="148" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderQueue_1acad8667ea99c850c2b340d409b56b452" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -239,7 +239,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="148" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="148" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="149" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="149" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderQueue_1aa2bb25f05689609f488b88a4772b3e9f" prot="private" static="no" mutable="no">
         <type>uint64_t</type>
@@ -254,7 +254,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="150" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="150" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="151" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="151" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderQueue_1a07baa02212a9d83a8cecefdede3ea809" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager" kindref="compound">Memory::UBOManager</ref> &amp;</type>
@@ -268,7 +268,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="152" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="152" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="153" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="153" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderQueue_1a87797daa71fc9701ed959ec8468288e9" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -282,7 +282,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="154" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="154" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="155" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="155" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderQueue_1a2226a80ed9891b96777345a67656e8d5" prot="private" static="no" mutable="no">
         <type>std::vector&lt; std::pair&lt; Layer, Queue &gt; &gt;</type>
@@ -296,7 +296,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="156" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="156" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="157" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="157" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderQueue_1a16994d7384a0bb8337a7a76def72d903" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SortedVector" kindref="compound">SR_HTYPES_NS::SortedVector</ref>&lt; <ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> * &gt;</type>
@@ -310,7 +310,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="158" column="36" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="158" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="159" column="36" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="159" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderQueue_1acad20c98d1315c6de0605c6654197172" prot="private" static="no" mutable="no">
         <type>std::vector&lt; MeshShaderPair &gt;</type>
@@ -324,7 +324,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="159" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="159" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="160" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="160" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderQueue_1a1e15bd207f4e65e41f753eb8e4384db8" prot="private" static="no" mutable="no">
         <type>std::vector&lt; MeshShaderPair &gt;</type>
@@ -338,7 +338,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="160" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="160" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="161" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="161" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderQueue_1ab85a5448ace088dfa49d051372fba13f" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1MeshDrawerPass" kindref="compound">MeshDrawerPass</ref> *</type>
@@ -353,7 +353,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="162" column="24" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="162" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="163" column="24" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="163" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderQueue_1ab50521cab7561af05e8ec6309d9ebe06" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1RenderContext" kindref="compound">RenderContext</ref> *</type>
@@ -368,7 +368,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="163" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="163" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="164" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="164" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderQueue_1ad1e5a4b8ee84275e9035d7ef0f6cfabe" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1RenderStrategy" kindref="compound">RenderStrategy</ref> *</type>
@@ -383,7 +383,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="164" column="24" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="164" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="165" column="24" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="165" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderQueue_1a8a409ec77c858a4f8d936d56a160825f" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1RenderScene" kindref="compound">RenderScene</ref> *</type>
@@ -398,7 +398,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="165" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="165" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="166" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="166" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderQueue_1af8a60bd459036049260a4f49be43bfeb" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1Pipeline" kindref="compound">Pipeline</ref> *</type>
@@ -413,7 +413,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="166" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="166" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="167" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="167" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -437,7 +437,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="103" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="104" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderQueue_1a7c072710df78a675766f098d3e43ccef" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -451,7 +451,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="104" column="17"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="105" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderQueue_1ad5813a646edab3d75a16b429239f7447" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -469,7 +469,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="106" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="107" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderQueue_1af5d8a8f606ff17e061d537b82cecb7f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -487,7 +487,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="107" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="108" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderQueue_1ad5097a9240b4e2b74d4621e4c8ac7032" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -501,7 +501,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="109" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="110" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderQueue_1a2a7702e7cd233e214e2a90ae959e6f9a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -515,7 +515,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="111" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="112" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderQueue_1aacd2a6957898e96b653d0b1b1958975c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -529,12 +529,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="112" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="113" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderQueue_1a15c4f0e35618f228cfc41c3934292a6d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderQueue_1ab1b6e40be15ff1dc57dc43e6193363cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void SR_GRAPH_NS::RenderQueue::OnMeshDirty</definition>
-        <argsstring>(SR_GTYPES_NS::Mesh *pMesh, SR_GTYPES_NS::Shader *pShader)</argsstring>
+        <argsstring>(SR_GTYPES_NS::Mesh *pMesh, RenderQueueInfo *pInfo)</argsstring>
         <name>OnMeshDirty</name>
         <qualifiedname>SR_GRAPH_NS::RenderQueue::OnMeshDirty</qualifiedname>
         <param>
@@ -542,8 +542,8 @@
           <declname>pMesh</declname>
         </param>
         <param>
-          <type><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> *</type>
-          <declname>pShader</declname>
+          <type><ref refid="structSR__GRAPH__NS_1_1RenderQueueInfo" kindref="compound">RenderQueueInfo</ref> *</type>
+          <declname>pInfo</declname>
         </param>
         <briefdescription>
         </briefdescription>
@@ -551,7 +551,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="114" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="115" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderQueue_1aabfba4d009eea75f10602764e2c55429" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const std::vector&lt; std::pair&lt; Layer, Queue &gt; &gt; &amp;</type>
@@ -565,7 +565,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="116" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="116" bodyend="116"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="117" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="117" bodyend="117"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -586,7 +586,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="119" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="119" bodyend="119"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="120" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="120" bodyend="120"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderQueue_1a5caaef2e7f95f0838e58e780df70db92" prot="protected" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1MeshDrawerPass" kindref="compound">MeshDrawerPass</ref> *</type>
@@ -600,7 +600,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="121" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="121" bodyend="121"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="122" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="122" bodyend="122"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -616,7 +616,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="124" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="125" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderQueue_1a64597287eaae87f5d0473a3c4189ea1d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -630,7 +630,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="125" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="126" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderQueue_1ad4be8459dfe0e64c326693861d686297" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -644,7 +644,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="126" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="127" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderQueue_1a204416c218ba4c164480b6dcb44b00b5" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -662,7 +662,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="128" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="129" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderQueue_1ac2c39a0214f8baae7f1c1a5ff7d8f566" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -684,7 +684,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="130" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="131" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderQueue_1a69c47f578d04c372cae7540051cb5bfd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshInfo" kindref="compound">MeshInfo</ref> *SR_FASTCALL</type>
@@ -706,7 +706,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="132" column="43"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="133" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderQueue_1a0f2f259c46b530fa9c046265f5efc9c9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshInfo" kindref="compound">MeshInfo</ref> *SR_FASTCALL</type>
@@ -728,7 +728,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="133" column="43"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="134" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderQueue_1adbdf54b1f927a25c4f7a251c3433b9b2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool SR_FASTCALL</type>
@@ -746,7 +746,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="135" column="26"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="136" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderQueue_1a3d02c4f44cec973ad732d5e94c2ffa7d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -760,7 +760,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="137" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="138" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -816,7 +816,7 @@
         <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="25" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="25" bodyend="168"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="27" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="27" bodyend="169"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue</scope><name>AutoFree</name></member>
@@ -861,7 +861,7 @@
       <member refid="classSR__GRAPH__NS_1_1RenderQueue_1a07baa02212a9d83a8cecefdede3ea809" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue</scope><name>m_uboManager</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderQueue_1a95d82fd9879375ffd2ec7e68e02599fd" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue</scope><name>m_updateMeshesOnDemand</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue</scope><name>MakeShared</name></member>
-      <member refid="classSR__GRAPH__NS_1_1RenderQueue_1a15c4f0e35618f228cfc41c3934292a6d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue</scope><name>OnMeshDirty</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderQueue_1ab1b6e40be15ff1dc57dc43e6193363cc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue</scope><name>OnMeshDirty</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue</scope><name>operator bool</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue</scope><name>operator!=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue</scope><name>operator*</name></member>

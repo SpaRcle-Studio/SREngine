@@ -1,0 +1,287 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structSR__GRAPH__NS_1_1MeshRenderQueues" kind="struct" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::MeshRenderQueues</compoundname>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1MeshRenderQueues_1a5e62c15d4434fe5598375081368cf9c4" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr size_t</type>
+        <definition>constexpr size_t SR_GRAPH_NS::MeshRenderQueues::MaxQueues</definition>
+        <argsstring></argsstring>
+        <name>MaxQueues</name>
+        <qualifiedname>SR_GRAPH_NS::MeshRenderQueues::MaxQueues</qualifiedname>
+        <initializer>= 64</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="183" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="183" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1MeshRenderQueues_1a35f4117364a4776d2a57311ae05895d8" prot="public" static="no" mutable="no">
+        <type><ref refid="structSR__GRAPH__NS_1_1RenderQueueInfo" kindref="compound">RenderQueueInfo</ref></type>
+        <definition>RenderQueueInfo SR_GRAPH_NS::MeshRenderQueues::queues[MaxQueues]</definition>
+        <argsstring>[MaxQueues]</argsstring>
+        <name>queues</name>
+        <qualifiedname>SR_GRAPH_NS::MeshRenderQueues::queues</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="184" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="184" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1MeshRenderQueues_1abc29e0f1dda41588b0ffaff17761f1ff" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t SR_GRAPH_NS::MeshRenderQueues::count</definition>
+        <argsstring></argsstring>
+        <name>count</name>
+        <qualifiedname>SR_GRAPH_NS::MeshRenderQueues::count</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="185" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="185" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1MeshRenderQueues_1a8f7695e61f3c3f5042431abad678798f" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t SR_GRAPH_NS::MeshRenderQueues::maxCount</definition>
+        <argsstring></argsstring>
+        <name>maxCount</name>
+        <qualifiedname>SR_GRAPH_NS::MeshRenderQueues::maxCount</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="186" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="186" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1MeshRenderQueues_1a9b0f1aba5a52f14bbe56c401aa9a50e4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::MeshRenderQueues::Clear</definition>
+        <argsstring>()</argsstring>
+        <name>Clear</name>
+        <qualifiedname>SR_GRAPH_NS::MeshRenderQueues::Clear</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="188" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="188" bodyend="194"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1MeshRenderQueues_1a52070b786e3d0dcba02e6caeb18659e9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__GRAPH__NS_1_1RenderQueueInfo" kindref="compound">RenderQueueInfo</ref> *</type>
+        <definition>SR_NODISCARD RenderQueueInfo * SR_GRAPH_NS::MeshRenderQueues::data</definition>
+        <argsstring>()</argsstring>
+        <name>data</name>
+        <qualifiedname>SR_GRAPH_NS::MeshRenderQueues::data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="196" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="196" bodyend="196"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1MeshRenderQueues_1a40d683a0f337da29abd975cff4571513" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD size_t</type>
+        <definition>SR_NODISCARD size_t SR_GRAPH_NS::MeshRenderQueues::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <qualifiedname>SR_GRAPH_NS::MeshRenderQueues::size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="197" column="29" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="197" bodyend="197"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1MeshRenderQueues_1ac5d631e59d547901076cdc3064501513" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__GRAPH__NS_1_1RenderQueueInfo" kindref="compound">RenderQueueInfo</ref> *</type>
+        <definition>SR_NODISCARD RenderQueueInfo * SR_GRAPH_NS::MeshRenderQueues::Find</definition>
+        <argsstring>(RenderQueue *pQueue)</argsstring>
+        <name>Find</name>
+        <qualifiedname>SR_GRAPH_NS::MeshRenderQueues::Find</qualifiedname>
+        <param>
+          <type><ref refid="classSR__GRAPH__NS_1_1RenderQueue" kindref="compound">RenderQueue</ref> *</type>
+          <declname>pQueue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="199" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="199" bodyend="207"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1MeshRenderQueues_1a2ee1e88bd7bf191db685a5e3d146bb9f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__GRAPH__NS_1_1RenderQueueInfo" kindref="compound">RenderQueueInfo</ref> *</type>
+        <definition>SR_NODISCARD RenderQueueInfo * SR_GRAPH_NS::MeshRenderQueues::Add</definition>
+        <argsstring>(RenderQueue *pQueue)</argsstring>
+        <name>Add</name>
+        <qualifiedname>SR_GRAPH_NS::MeshRenderQueues::Add</qualifiedname>
+        <param>
+          <type><ref refid="classSR__GRAPH__NS_1_1RenderQueue" kindref="compound">RenderQueue</ref> *</type>
+          <declname>pQueue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="209" column="38" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="209" bodyend="225"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1MeshRenderQueues_1a0a71709f8ac6d4a68160e45eeacb7d16" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structSR__GRAPH__NS_1_1RenderQueueInfo" kindref="compound">RenderQueueInfo</ref></type>
+        <definition>RenderQueueInfo SR_GRAPH_NS::MeshRenderQueues::Remove</definition>
+        <argsstring>(RenderQueue *pQueue)</argsstring>
+        <name>Remove</name>
+        <qualifiedname>SR_GRAPH_NS::MeshRenderQueues::Remove</qualifiedname>
+        <param>
+          <type><ref refid="classSR__GRAPH__NS_1_1RenderQueue" kindref="compound">RenderQueue</ref> *</type>
+          <declname>pQueue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="227" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="227" bodyend="239"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="16">
+        <label>Memory::IGraphicsResource</label>
+      </node>
+      <node id="1">
+        <label>SR_GRAPH_NS::MeshRenderQueues</label>
+        <link refid="structSR__GRAPH__NS_1_1MeshRenderQueues"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>MaxQueues</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>queues</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_GRAPH_NS::RenderQueue</label>
+        <link refid="classSR__GRAPH__NS_1_1RenderQueue"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_GRAPH_NS::RenderQueueInfo</label>
+        <link refid="structSR__GRAPH__NS_1_1RenderQueueInfo"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>pRenderQueue</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>pShader</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>SR_GTYPES_NS::Shader</label>
+        <link refid="classSR__GTYPES__NS_1_1Shader"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="7" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="9">
+        <label>SR_UTILS_NS::IResource</label>
+        <link refid="classSR__UTILS__NS_1_1IResource"/>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+        <childnode refid="13" relation="public-inheritance">
+        </childnode>
+        <childnode refid="15" relation="usage">
+          <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
+          <edgelabel>RELOAD_DONE_EVENT</edgelabel>
+        </childnode>
+      </node>
+      <node id="10">
+        <label>SR_UTILS_NS::ResourceContainer</label>
+        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="13">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="14" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>SR_UTILS_NS::StringAtom</label>
+        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
+      </node>
+      <node id="12">
+        <label>SR_UTILS_NS::SubscriptionHolder</label>
+        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
+      </node>
+      <node id="2">
+        <label>size_t</label>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="182" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="182" bodyend="240"/>
+    <listofallmembers>
+      <member refid="structSR__GRAPH__NS_1_1MeshRenderQueues_1a2ee1e88bd7bf191db685a5e3d146bb9f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshRenderQueues</scope><name>Add</name></member>
+      <member refid="structSR__GRAPH__NS_1_1MeshRenderQueues_1a9b0f1aba5a52f14bbe56c401aa9a50e4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshRenderQueues</scope><name>Clear</name></member>
+      <member refid="structSR__GRAPH__NS_1_1MeshRenderQueues_1abc29e0f1dda41588b0ffaff17761f1ff" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshRenderQueues</scope><name>count</name></member>
+      <member refid="structSR__GRAPH__NS_1_1MeshRenderQueues_1a52070b786e3d0dcba02e6caeb18659e9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshRenderQueues</scope><name>data</name></member>
+      <member refid="structSR__GRAPH__NS_1_1MeshRenderQueues_1ac5d631e59d547901076cdc3064501513" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshRenderQueues</scope><name>Find</name></member>
+      <member refid="structSR__GRAPH__NS_1_1MeshRenderQueues_1a8f7695e61f3c3f5042431abad678798f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshRenderQueues</scope><name>maxCount</name></member>
+      <member refid="structSR__GRAPH__NS_1_1MeshRenderQueues_1a5e62c15d4434fe5598375081368cf9c4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshRenderQueues</scope><name>MaxQueues</name></member>
+      <member refid="structSR__GRAPH__NS_1_1MeshRenderQueues_1a35f4117364a4776d2a57311ae05895d8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshRenderQueues</scope><name>queues</name></member>
+      <member refid="structSR__GRAPH__NS_1_1MeshRenderQueues_1a0a71709f8ac6d4a68160e45eeacb7d16" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshRenderQueues</scope><name>Remove</name></member>
+      <member refid="structSR__GRAPH__NS_1_1MeshRenderQueues_1a40d683a0f337da29abd975cff4571513" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshRenderQueues</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

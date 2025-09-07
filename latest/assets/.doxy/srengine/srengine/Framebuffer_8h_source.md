@@ -85,13 +85,13 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD ImageAspect GetDepthAspect() const noexcept { return m_depth.aspect; }
         SR_NODISCARD bool IsDepthEnabled() const { return m_depthEnabled; }
         SR_NODISCARD bool IsDirty() const { return m_dirty; }
-        SR_NODISCARD bool IsValid() const { return m_frameBuffer != SR_ID_INVALID && !m_hasErrors && !IsDirty(); }
+        SR_NODISCARD bool IsValid() const;
         SR_NODISCARD bool IsWasRendered() const { return m_wasRendered; }
         SR_NODISCARD const FrameBufferFeatures& GetFeatures() const { return m_features; }
 
         SR_NODISCARD int32_t GetId() const;
-        SR_NODISCARD int32_t GetColorTexture(uint32_t layer);
-        SR_NODISCARD int32_t GetDepthTexture(int32_t layer = -1);
+        SR_NODISCARD int32_t GetColorTexture(uint32_t layer, uint8_t frame);
+        SR_NODISCARD int32_t GetDepthTexture(int32_t layer, uint8_t frame);
 
         SR_NODISCARD SR_UTILS_NS::StringAtom GetName() const { return m_name; }
         SR_NODISCARD uint32_t GetWidth() const;
@@ -111,11 +111,13 @@ namespace SR_GTYPES_NS {
 
         std::vector<ColorLayer> m_colors = { };
         DepthLayer m_depth = { };
-        int32_t m_frameBuffer = SR_ID_INVALID;
+        std::vector<int32_t> m_frameBuffer;
 
         SR_MATH_NS::IVector2 m_size = { };
 
         uint8_t m_layersCount = 1;
+
+        bool m_forEachSwapchainImage = false;
 
         uint8_t m_sampleCount = 0;
         uint8_t m_currentSampleCount = 0;

@@ -340,10 +340,9 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 
 | Type | Name |
 | ---: | :--- |
-|  bool | [**m\_FBOForEachSwapchainImage**](#variable-m_fboforeachswapchainimage)   = `false`<br> |
 |  [**SR\_HTYPES\_NS::PoolSet**](classSR__HTYPES__NS_1_1PoolSet.md)&lt; bool &gt; | [**m\_bindedDescriptors**](#variable-m_bindeddescriptors)  <br> |
 |  std::vector&lt; [**PipelineState**](structSR__GRAPH__NS_1_1PipelineState.md) &gt; | [**m\_buildStates**](#variable-m_buildstates)  <br>_Состояние, которое было на момент постоения сцены рендера_  |
-|  uint8\_t | [**m\_currentSampleCount**](#variable-m_currentsamplecount)   = `0`<br> |
+|  uint8\_t | [**m\_currentSampleCount**](#variable-m_currentsamplecount)   = `1`<br> |
 |  std::atomic&lt; bool &gt; | [**m\_dirty**](#variable-m_dirty)   = `false`<br> |
 |  bool | [**m\_enableValidationLayers**](#variable-m_enablevalidationlayers)   = `false`<br> |
 |  uint64\_t | [**m\_errorsCount**](#variable-m_errorscount)   = `0`<br> |
@@ -362,7 +361,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  [**PipelineState**](structSR__GRAPH__NS_1_1PipelineState.md) | [**m\_previousState**](#variable-m_previousstate)  <br> |
 |  RenderContextPtr | [**m\_renderContext**](#variable-m_rendercontext)  <br> |
 |  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**m\_renderStageId**](#variable-m_renderstageid)  <br> |
-|  uint8\_t | [**m\_requiredSampleCount**](#variable-m_requiredsamplecount)   = `0`<br> |
+|  uint8\_t | [**m\_requiredSampleCount**](#variable-m_requiredsamplecount)   = `1`<br> |
 |  [**PipelineState**](structSR__GRAPH__NS_1_1PipelineState.md) | [**m\_state**](#variable-m_state)  <br> |
 |  uint8\_t | [**m\_supportedSampleCount**](#variable-m_supportedsamplecount)   = `0`<br> |
 |  WindowPtr | [**m\_window**](#variable-m_window)  <br> |
@@ -2506,19 +2505,6 @@ virtual SR_GRAPH_NS::Pipeline::~Pipeline ()
 <hr>
 ## Protected Attributes Documentation
 
-
-
-
-### variable m\_FBOForEachSwapchainImage 
-
-```C++
-bool SR_GRAPH_NS::Pipeline::m_FBOForEachSwapchainImage;
-```
-
-
-
-
-<hr>
 
 
 

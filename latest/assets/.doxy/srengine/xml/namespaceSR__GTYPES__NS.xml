@@ -58,6 +58,21 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" line="13" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h" bodystart="13" bodyend="18"/>
       </memberdef>
+      <memberdef kind="variable" id="namespaceSR__GTYPES__NS_1ac122fd2ab3c9bc04cdb8f6578908c602" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr size_t</type>
+        <definition>constexpr size_t SR_GTYPES_NS::SIZE_OF_MESH_CLASS</definition>
+        <argsstring></argsstring>
+        <name>SIZE_OF_MESH_CLASS</name>
+        <qualifiedname>SR_GTYPES_NS::SIZE_OF_MESH_CLASS</qualifiedname>
+        <initializer>= sizeof(<ref refid="classSR__GTYPES__NS_1_1Mesh" kindref="compound">Mesh</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" line="177" column="29" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Mesh.h" bodystart="177" bodyend="-1"/>
+      </memberdef>
     </sectiondef>
     <sectiondef kind="func">
       <memberdef kind="function" id="namespaceSR__GTYPES__NS_1a7220ae08d2b9d212e6f4ec0c2ce01262" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">

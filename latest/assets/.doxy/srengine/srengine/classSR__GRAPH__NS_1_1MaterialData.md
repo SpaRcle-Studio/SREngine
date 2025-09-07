@@ -200,6 +200,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 
 | Type | Name |
 | ---: | :--- |
+|  void | [**AddShaderDefine**](#function-addshaderdefine) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) define, const std::string & value="") <br> |
 |  void | [**Finalize**](#function-finalize) () <br> |
 |  SR\_NODISCARD [**MaterialShaderData**](structSR__GRAPH__NS_1_1MaterialShaderData.md) & | [**GetDefaultShaderData**](#function-getdefaultshaderdata-12) () noexcept<br> |
 |  SR\_NODISCARD const [**MaterialShaderData**](structSR__GRAPH__NS_1_1MaterialShaderData.md) & | [**GetDefaultShaderData**](#function-getdefaultshaderdata-22) () noexcept const<br> |
@@ -616,6 +617,22 @@ SR_INLINE_STATIC const SR_UTILS_NS::StringAtom SR_GRAPH_NS::MaterialData::SHADER
 <hr>
 ## Public Functions Documentation
 
+
+
+
+### function AddShaderDefine 
+
+```C++
+inline void SR_GRAPH_NS::MaterialData::AddShaderDefine (
+    SR_UTILS_NS::StringAtom define,
+    const std::string & value=""
+) 
+```
+
+
+
+
+<hr>
 
 
 

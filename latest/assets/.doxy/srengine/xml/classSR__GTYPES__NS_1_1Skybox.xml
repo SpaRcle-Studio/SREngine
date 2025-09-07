@@ -343,9 +343,9 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Types/Skybox.h" line="36" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Skybox_1aff7ec4b0d77f912fa8e0cce91f5846fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_GTYPES_NS::Skybox::Draw</definition>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Skybox_1a7db4b8e091d2a7fee6fec0acfc7b3309" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_GTYPES_NS::Skybox::Draw</definition>
         <argsstring>()</argsstring>
         <name>Draw</name>
         <qualifiedname>SR_GTYPES_NS::Skybox::Draw</qualifiedname>
@@ -608,7 +608,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>DecrementPointer</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a1321f66c455d7f59eebb314fe2c83062" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>DeleteResource</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a700794249e341d5228920451cedf9ee7" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>Destroy</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Skybox_1aff7ec4b0d77f912fa8e0cce91f5846fa" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>Draw</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Skybox_1a7db4b8e091d2a7fee6fec0acfc7b3309" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>Draw</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>DynamicCast</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a5dd9749c79cb65452e9e4d10efda42f8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>Execute</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a56bb33e9f5864b6fa62e473389a517b7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>ForceDestroy</name></member>

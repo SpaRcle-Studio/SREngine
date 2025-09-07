@@ -113,6 +113,7 @@ namespace SR_GRAPH_NS {
         void SR_FASTCALL OnSamplerChanged(SR_GTYPES_NS::Texture::Ptr pOldTexture, SR_GTYPES_NS::Texture::Ptr pNewTexture) noexcept;
 
         void OnPropertyChanged(bool onlyUniforms);
+        void AddShaderDefine(SR_UTILS_NS::StringAtom define, const std::string& value = "") { m_shaderDefines[define] = value; OnPropertyChanged(false); }
 
     private:
         void OnShaderChanged();

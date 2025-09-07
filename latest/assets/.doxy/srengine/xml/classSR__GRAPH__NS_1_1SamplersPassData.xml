@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" line="84" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" bodystart="84" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" line="85" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" bodystart="85" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1SamplersPassData_1a88020fda05d13d8c780af89f9a2c1685" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" line="87" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" bodystart="87" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" line="88" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" bodystart="88" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1SamplersPassData_1a80aeb737248edea59bb4ab1c6eeda139" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">IRenderTechnique</ref> *</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" line="88" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" bodystart="88" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" line="89" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" bodystart="89" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" line="70" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" line="71" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SamplersPassData_1a587c3aaf3ff6d39c83b913add6e87339" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -80,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" line="73" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" line="74" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SamplersPassData_1af35050566eac951097a7f179bdca92cb" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" line="75" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" bodystart="75" bodyend="75"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" line="76" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" bodystart="76" bodyend="76"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SamplersPassData_1a2a9ee5f4ce9a0f75a72eefb30f1cbe85" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -108,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" line="76" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" bodystart="76" bodyend="76"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" line="77" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" bodystart="77" bodyend="77"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SamplersPassData_1a40fa7c0f5f5ad0e15d1c1fb10f4e75ad" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -122,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" line="78" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" bodystart="78" bodyend="78"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" line="79" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" bodystart="79" bodyend="79"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SamplersPassData_1aa1301455715371008eb5a9fecef0eba5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -136,7 +136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" line="79" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" line="80" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SamplersPassData_1a4b743f0c395824e2ac5fdde3e036912a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -154,7 +154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" line="80" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" bodystart="80" bodyend="80"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" line="81" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" bodystart="81" bodyend="81"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -197,7 +197,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" line="67" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" bodystart="67" bodyend="90"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" line="68" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h" bodystart="68" bodyend="91"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SamplersPassData</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SamplersPassData</scope><name>AllocateStatic</name></member>

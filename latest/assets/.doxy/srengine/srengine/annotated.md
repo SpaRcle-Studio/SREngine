@@ -353,6 +353,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **struct** [**MeshDrawerUniforms**](structSR__GRAPH__NS_1_1MeshDrawerUniforms.md)     
     * **class** [**MeshMaterialProperty**](classSR__GRAPH__NS_1_1MeshMaterialProperty.md)     
     * **struct** [**MeshRegistrationInfo**](structSR__GRAPH__NS_1_1MeshRegistrationInfo.md)     
+    * **struct** [**MeshRenderQueues**](structSR__GRAPH__NS_1_1MeshRenderQueues.md)     
     * **class** [**OpaqueMeshCluster**](classSR__GRAPH__NS_1_1OpaqueMeshCluster.md)     
     * **class** [**OpaquePass**](classSR__GRAPH__NS_1_1OpaquePass.md)     
     * **class** [**Overlay**](classSR__GRAPH__NS_1_1Overlay.md)     

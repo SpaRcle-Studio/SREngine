@@ -32,6 +32,8 @@
 namespace SR_GRAPH_NS::VulkanTools {
     struct VulkanFrameBufferAllocInfo {
         int32_t FBO = SR_ID_INVALID;
+        uint8_t frame = 0;
+        uint8_t maxFrames = 0;
         uint32_t width = 0;
         uint32_t height = 0;
         DepthLayer* pDepth = nullptr;

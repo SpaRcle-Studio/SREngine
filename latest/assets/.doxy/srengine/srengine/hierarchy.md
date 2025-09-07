@@ -16943,6 +16943,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**SR\_GRAPH\_NS::Memory::VirtualUBOInfo::Data**](structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1_1Data.md) 
 * **struct** [**SR\_GRAPH\_NS::Mesh3dUBO**](structSR__GRAPH__NS_1_1Mesh3dUBO.md) 
 * **struct** [**SR\_GRAPH\_NS::MeshRegistrationInfo**](structSR__GRAPH__NS_1_1MeshRegistrationInfo.md) 
+* **struct** [**SR\_GRAPH\_NS::MeshRenderQueues**](structSR__GRAPH__NS_1_1MeshRenderQueues.md) 
 * **struct** [**SR\_GRAPH\_NS::PipelinePreInitInfo**](structSR__GRAPH__NS_1_1PipelinePreInitInfo.md) 
 * **struct** [**SR\_GRAPH\_NS::PipelineState**](structSR__GRAPH__NS_1_1PipelineState.md) 
 * **struct** [**SR\_GRAPH\_NS::PipelineTextureCreateInfo**](structSR__GRAPH__NS_1_1PipelineTextureCreateInfo.md) 

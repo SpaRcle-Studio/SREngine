@@ -147,7 +147,7 @@
       <member refid="classSR__GRAPH__NS_1_1RenderQueue_1a67d606c3dd28738c68744ba2b43b71bc" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ColorBufferRenderQueue</scope><name>m_customMeshDraw</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ColorBufferRenderQueue</scope><name>m_data</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ColorBufferRenderQueue</scope><name>MakeShared</name></member>
-      <member refid="classSR__GRAPH__NS_1_1RenderQueue_1a15c4f0e35618f228cfc41c3934292a6d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ColorBufferRenderQueue</scope><name>OnMeshDirty</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderQueue_1ab1b6e40be15ff1dc57dc43e6193363cc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ColorBufferRenderQueue</scope><name>OnMeshDirty</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ColorBufferRenderQueue</scope><name>operator bool</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ColorBufferRenderQueue</scope><name>operator!=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ColorBufferRenderQueue</scope><name>operator*</name></member>

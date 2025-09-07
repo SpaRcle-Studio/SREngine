@@ -452,7 +452,6 @@
       <member refid="classSR__UTILS__NS_1_1Component_1a3d09e0388a5a982e6fe71cbf59f8c813" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>IsPlayingMode</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a547028a4a9ab2b115832b2000259e127" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>IsStarted</name></member>
       <member refid="classSR__GTYPES__NS_1_1Sprite_1adc6b23cd26da870ee3ff8eb1fc408353" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>IsSupportVBO</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Mesh_1a0c42f4050860150b1bf7d0e53b4486b1" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>IsUniformsDirty</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a8ae2097756a2a2df22c758f7b9b3ed62" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>IsUniqueMesh</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ace675f265b886fef357651e43c29c5d4" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>IsUpdatable</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a2c963fbf2d7b184c1525d1de7e0d3cd4" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>IsWaitReRegister</name></member>
@@ -472,7 +471,6 @@
       <member refid="classSR__UTILS__NS_1_1Component_1aa9bfad916eec33a0f4351054194c53e3" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>m_isComponentLoaded</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ad9e404095f004e707f755beb764ab8e7" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>m_isEnabled</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a4a854563851b2106daf5d678e3a4b3a6" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>m_isStarted</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Mesh_1a4f1e404ddd0c7f28dd411d1b15ce7606" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>m_isUniformsDirty</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a15373448bde91b633ab94a57483baf36" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>m_isWaitReRegister</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1ad418dcf562fe9670d34c11d93711ab83" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>m_material</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a9dddd30253cd78eb28f504e1afb66514" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>m_parent</name></member>
@@ -511,7 +509,7 @@
       <member refid="classSR__UTILS__NS_1_1Component_1a9bb3f2e63ed778951c409dba0bd1915f" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>OnTriggerStay</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a5b3c94dcc9fd4c8f2ed748601d0c4e2a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>OriginType</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a8ccf477eb64e1da05d8b6e0f0e82b0ae" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>Ptr</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Mesh_1a4ba19db4597d73a9c04421f31fa943f7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>RenderQueues</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1ac657acedea1d890d26f4ecfe80c3d8c5" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>RenderQueues</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1add25474bae10f83e8854f3e93c4f7070" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>RenderScenePtr</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a16b24e7c8796db2f1d87bb2fdf22b5c0" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>ReRegisterMesh</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a6e97391d1dc50a29f1bdc0179c925019" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>SceneObjectPtr</name></member>
@@ -526,7 +524,6 @@
       <member refid="classSR__UTILS__NS_1_1Component_1ac9780c1f95cd3106101f4e1595550816" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>SetParent</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a39b340114c4ceae171114ce2d7efaaf6" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>SetPipeline</name></member>
       <member refid="classSR__GTYPES__NS_1_1Sprite_1a5e7dd0111acb5296a94721e9f4ad2ea9" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>SetTextureBorder</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Mesh_1a73a3904579729c1939e4e6757b39ab51" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>SetUniformsClean</name></member>
       <member refid="classSR__GTYPES__NS_1_1Sprite_1a32bc1deebd32dddd217073226e8e60c1" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>SetWindowBorder</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a293bad07f36ba94ea55b3ca8d192d92a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>ShaderPtr</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a572b27823d61376ebbd0c33758ea5d6f" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Sprite</scope><name>Start</name></member>

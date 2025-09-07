@@ -20,6 +20,20 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1CameraFlyMover_1a0c2b327d3227e23d88020357fede0d9b" prot="private" static="no" mutable="no">
+        <type>std::optional&lt; <ref refid="classSR__UTILS__NS_1_1CursorLock" kindref="compound">CursorLock</ref> &gt;</type>
+        <definition>std::optional&lt;CursorLock&gt; SR_UTILS_NS::CameraFlyMover::m_lock</definition>
+        <argsstring></argsstring>
+        <name>m_lock</name>
+        <qualifiedname>SR_UTILS_NS::CameraFlyMover::m_lock</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="27" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1CameraFlyMover_1affab465bef55b37e3da49bdd85faee94" prot="private" static="no" mutable="no">
         <type>bool</type>
         <definition>bool SR_UTILS_NS::CameraFlyMover::m_active</definition>
@@ -33,7 +47,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="74" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="74" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="31" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1CameraFlyMover_1aa2c37f4e1c26580499c05fbdafd0e5bd" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::CameraFlyMover::m_lockCursor</definition>
+        <argsstring></argsstring>
+        <name>m_lockCursor</name>
+        <qualifiedname>SR_UTILS_NS::CameraFlyMover::m_lockCursor</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="33" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1CameraFlyMover_1a17dc07a2fc0015e241a2c2aef809e692" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -48,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="76" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="76" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="35" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1CameraFlyMover_1a53d685d6bdacc55c3a6c9890e3b921b0" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -63,7 +92,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="78" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="78" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="37" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1CameraFlyMover_1afaef3ba87fc85f7cb9c7a6eebd77d4db" prot="private" static="no" mutable="no">
         <type>float_t</type>
@@ -78,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="80" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="80" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="39" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1CameraFlyMover_1a12eeebda9f8772a970843101c6b026ff" prot="private" static="no" mutable="no">
         <type>float_t</type>
@@ -93,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="82" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="82" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="41" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="41" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1CameraFlyMover_1ae299868f665aee3be6158b3e0b1ebd31" prot="private" static="no" mutable="no">
         <type>float_t</type>
@@ -108,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="84" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="84" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="43" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1CameraFlyMover_1ad01484ea2925a836d8d38c3222e1356a" prot="private" static="no" mutable="no">
         <type>float_t</type>
@@ -123,7 +152,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="86" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="86" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="45" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1CameraFlyMover_1afd3766b99c60deb6bfaa68835113a447" prot="private" static="no" mutable="no">
         <type>float_t</type>
@@ -138,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="88" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="88" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="47" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1CameraFlyMover_1a6c55e3a3d619c37769d2029f7a4bcc5a" prot="private" static="no" mutable="no">
         <type>float_t</type>
@@ -153,7 +182,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="90" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="90" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="49" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1CameraFlyMover_1a185a093903938d583b01b641c3dd9fa1" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
@@ -167,11 +196,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="92" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="92" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="51" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="51" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1CameraFlyMover_1a2d0f89cd59c00cf23bbb71906026fb42" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1CameraFlyMover_1a2d0f89cd59c00cf23bbb71906026fb42" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
         <definition>void SR_UTILS_NS::CameraFlyMover::FixedUpdate</definition>
         <argsstring>() override</argsstring>
@@ -184,7 +213,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="16" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="16" bodyend="63"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="16" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1CameraFlyMover_1a1e6fc312cb2e798cc2e37904b7150f12" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::CameraFlyMover::OnDisable</definition>
+        <argsstring>() override</argsstring>
+        <name>OnDisable</name>
+        <qualifiedname>SR_UTILS_NS::CameraFlyMover::OnDisable</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1Component_1a33c4d449284bb7be17ac6c0b66dad816">OnDisable</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="17" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1CameraFlyMover_1a301f8b91472045a64eb1a3b0676209c1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -202,7 +246,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="65" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="65" bodyend="65"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="19" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="19" bodyend="19"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1CameraFlyMover_1a03df57d1fd51a8927eca8aa33a004bb4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -220,7 +264,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="66" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="66" bodyend="66"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="20" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="20" bodyend="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1CameraFlyMover_1a612e80a3035d56ea78efa07839b56bc4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -238,7 +282,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="67" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="21" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1CameraFlyMover_1aa5f6cf4786dfe4062c715e5a56cbfb1c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -256,7 +300,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="68" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="68" bodyend="68"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="22" column="14" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="22" bodyend="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1CameraFlyMover_1ac65458bfe8984f235021b33a5494d63f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -271,7 +315,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="70" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="70" bodyend="70"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="24" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="24" bodyend="24"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -330,7 +374,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="12" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="12" bodyend="94"/>
+    <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="12" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="12" bodyend="53"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_UTILS_NS::CameraFlyMover</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::CameraFlyMover</scope><name>BaseComponent</name></member>
@@ -371,6 +415,8 @@
       <member refid="classSR__UTILS__NS_1_1Component_1aa9bfad916eec33a0f4351054194c53e3" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::CameraFlyMover</scope><name>m_isComponentLoaded</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ad9e404095f004e707f755beb764ab8e7" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::CameraFlyMover</scope><name>m_isEnabled</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a4a854563851b2106daf5d678e3a4b3a6" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::CameraFlyMover</scope><name>m_isStarted</name></member>
+      <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1a0c2b327d3227e23d88020357fede0d9b" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::CameraFlyMover</scope><name>m_lock</name></member>
+      <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1aa2c37f4e1c26580499c05fbdafd0e5bd" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::CameraFlyMover</scope><name>m_lockCursor</name></member>
       <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1a6c55e3a3d619c37769d2029f7a4bcc5a" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::CameraFlyMover</scope><name>m_moveSpeed</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a9dddd30253cd78eb28f504e1afb66514" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::CameraFlyMover</scope><name>m_parent</name></member>
       <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1a17dc07a2fc0015e241a2c2aef809e692" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::CameraFlyMover</scope><name>m_rightMouseButtonToRotate</name></member>
@@ -389,7 +435,7 @@
       <member refid="classSR__UTILS__NS_1_1Component_1a7a6557ebfc240e92b332b22fe85ebddf" prot="public" virt="virtual"><scope>SR_UTILS_NS::CameraFlyMover</scope><name>OnCollisionStay</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ae31753f4a155ecfdc85b995a775aab1f" prot="public" virt="virtual"><scope>SR_UTILS_NS::CameraFlyMover</scope><name>OnDestroy</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aba0d2511d0fb2342ae68f97c24f05ffc" prot="public" virt="virtual"><scope>SR_UTILS_NS::CameraFlyMover</scope><name>OnDetached</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a33c4d449284bb7be17ac6c0b66dad816" prot="public" virt="virtual"><scope>SR_UTILS_NS::CameraFlyMover</scope><name>OnDisable</name></member>
+      <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1a1e6fc312cb2e798cc2e37904b7150f12" prot="public" virt="virtual"><scope>SR_UTILS_NS::CameraFlyMover</scope><name>OnDisable</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1af582e05d713cc0849a532ba2554c41ab" prot="public" virt="virtual"><scope>SR_UTILS_NS::CameraFlyMover</scope><name>OnEnable</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a561f35b144564e8df91651b3f8e57693" prot="public" virt="virtual"><scope>SR_UTILS_NS::CameraFlyMover</scope><name>OnLayerChanged</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1af7e2ecd6bef36595ac12274d6a6cc77c" prot="public" virt="virtual"><scope>SR_UTILS_NS::CameraFlyMover</scope><name>OnLoaded</name></member>

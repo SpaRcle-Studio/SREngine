@@ -15,35 +15,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="32" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="32" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="34" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="34" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshShaderPair_1a0cb8aa51245ae104528abc5375d6f77c" prot="public" static="no" mutable="no">
-        <type><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> *</type>
-        <definition>SR_GTYPES_NS::Shader* SR_GRAPH_NS::RenderQueue::MeshShaderPair::pShader</definition>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshShaderPair_1aafb8dd9d201b7d281ac2d23b1f975a34" prot="public" static="no" mutable="no">
+        <type><ref refid="structSR__GRAPH__NS_1_1RenderQueueInfo" kindref="compound">RenderQueueInfo</ref> *</type>
+        <definition>RenderQueueInfo* SR_GRAPH_NS::RenderQueue::MeshShaderPair::pInfo</definition>
         <argsstring></argsstring>
-        <name>pShader</name>
-        <qualifiedname>SR_GRAPH_NS::RenderQueue::MeshShaderPair::pShader</qualifiedname>
+        <name>pInfo</name>
+        <qualifiedname>SR_GRAPH_NS::RenderQueue::MeshShaderPair::pInfo</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="33" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="33" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshShaderPair_1a1316473f0cd00308c8cba682f4af856c" prot="public" static="no" mutable="no">
-        <type>bool</type>
-        <definition>bool SR_GRAPH_NS::RenderQueue::MeshShaderPair::updatedFrames[16]</definition>
-        <argsstring>[16]</argsstring>
-        <name>updatedFrames</name>
-        <qualifiedname>SR_GRAPH_NS::RenderQueue::MeshShaderPair::updatedFrames</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="34" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="34" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="35" column="29" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="35" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -54,7 +40,7 @@
       <node id="5">
         <label>Entity</label>
       </node>
-      <node id="22">
+      <node id="25">
         <label>Memory::IGraphicsResource</label>
       </node>
       <node id="8">
@@ -63,12 +49,28 @@
         <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
+      <node id="13">
+        <label>SR_GRAPH_NS::RenderQueue</label>
+        <link refid="classSR__GRAPH__NS_1_1RenderQueue"/>
+        <childnode refid="14" relation="public-inheritance">
+        </childnode>
+      </node>
       <node id="1">
         <label>SR_GRAPH_NS::RenderQueue::MeshShaderPair</label>
         <childnode refid="2" relation="usage">
           <edgelabel>pMesh</edgelabel>
         </childnode>
         <childnode refid="12" relation="usage">
+          <edgelabel>pInfo</edgelabel>
+        </childnode>
+      </node>
+      <node id="12">
+        <label>SR_GRAPH_NS::RenderQueueInfo</label>
+        <link refid="structSR__GRAPH__NS_1_1RenderQueueInfo"/>
+        <childnode refid="13" relation="usage">
+          <edgelabel>pRenderQueue</edgelabel>
+        </childnode>
+        <childnode refid="17" relation="usage">
           <edgelabel>pShader</edgelabel>
         </childnode>
       </node>
@@ -87,28 +89,34 @@
           <edgelabel>m_descriptorManager</edgelabel>
         </childnode>
       </node>
-      <node id="12">
+      <node id="17">
         <label>SR_GTYPES_NS::Shader</label>
         <link refid="classSR__GTYPES__NS_1_1Shader"/>
-        <childnode refid="13" relation="public-inheritance">
+        <childnode refid="18" relation="public-inheritance">
         </childnode>
-        <childnode refid="22" relation="public-inheritance">
+        <childnode refid="25" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="15" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="15" relation="public-inheritance">
         </childnode>
       </node>
       <node id="15">
-        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="16" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="16">
         <label>SR_HTYPES_NS::SharedPtrBase</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
-        <childnode refid="17" relation="usage">
+        <childnode refid="16" relation="usage">
           <edgelabel>m_data</edgelabel>
         </childnode>
       </node>
-      <node id="17">
+      <node id="16">
         <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
         <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
       </node>
@@ -130,16 +138,16 @@
         <childnode refid="5" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="13">
+      <node id="18">
         <label>SR_UTILS_NS::IResource</label>
         <link refid="classSR__UTILS__NS_1_1IResource"/>
-        <childnode refid="14" relation="public-inheritance">
-        </childnode>
-        <childnode refid="18" relation="public-inheritance">
-        </childnode>
         <childnode refid="19" relation="public-inheritance">
         </childnode>
-        <childnode refid="21" relation="usage">
+        <childnode refid="21" relation="public-inheritance">
+        </childnode>
+        <childnode refid="22" relation="public-inheritance">
+        </childnode>
+        <childnode refid="24" relation="usage">
           <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
           <edgelabel>RELOAD_DONE_EVENT</edgelabel>
         </childnode>
@@ -148,20 +156,20 @@
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
-      <node id="14">
+      <node id="19">
         <label>SR_UTILS_NS::ResourceContainer</label>
         <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
-        <childnode refid="15" relation="public-inheritance">
+        <childnode refid="20" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="20">
+      <node id="23">
         <label>SR_UTILS_NS::SRClass</label>
         <link refid="classSR__UTILS__NS_1_1SRClass"/>
       </node>
-      <node id="19">
+      <node id="22">
         <label>SR_UTILS_NS::Serializable</label>
         <link refid="classSR__UTILS__NS_1_1Serializable"/>
-        <childnode refid="20" relation="public-inheritance">
+        <childnode refid="23" relation="public-inheritance">
         </childnode>
       </node>
       <node id="9">
@@ -176,11 +184,11 @@
         <childnode refid="11" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="21">
+      <node id="24">
         <label>SR_UTILS_NS::StringAtom</label>
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
-      <node id="18">
+      <node id="21">
         <label>SR_UTILS_NS::SubscriptionHolder</label>
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
@@ -191,11 +199,10 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="31" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="31" bodyend="35"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="33" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="33" bodyend="36"/>
     <listofallmembers>
+      <member refid="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshShaderPair_1aafb8dd9d201b7d281ac2d23b1f975a34" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue::MeshShaderPair</scope><name>pInfo</name></member>
       <member refid="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshShaderPair_1a1ad8ae7d805c2992693dd4f1accdecfa" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue::MeshShaderPair</scope><name>pMesh</name></member>
-      <member refid="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshShaderPair_1a0cb8aa51245ae104528abc5375d6f77c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue::MeshShaderPair</scope><name>pShader</name></member>
-      <member refid="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshShaderPair_1a1316473f0cd00308c8cba682f4af856c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue::MeshShaderPair</scope><name>updatedFrames</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

@@ -1078,6 +1078,8 @@
 ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * [**MeshRegistrationInfo**](structSR__GRAPH__NS_1_1MeshRegistrationInfo.md)
 ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
+* [**MeshRenderQueues**](structSR__GRAPH__NS_1_1MeshRenderQueues.md)
+([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * [**MeshShaderPair**](structSR__GRAPH__NS_1_1RenderQueue_1_1MeshShaderPair.md)
 * [**MeshVidMemInfo**](classSR__GRAPH__NS_1_1Memory_1_1MeshVidMemInfo.md)
 ([**SR\_GRAPH\_NS::Memory**](namespaceSR__GRAPH__NS_1_1Memory.md))

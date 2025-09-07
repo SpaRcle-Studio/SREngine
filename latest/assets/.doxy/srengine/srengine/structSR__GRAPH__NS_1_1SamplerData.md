@@ -51,13 +51,12 @@ See [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 
 | Type | Name |
 | ---: | :--- |
-|  uint32\_t | [**fboId**](#variable-fboid)   = `SR\_ID\_INVALID`<br> |
 |  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**fboName**](#variable-fboname)  <br> |
 |  bool | [**global**](#variable-global)   = `false`<br> |
 |  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**id**](#variable-id)  <br> |
 |  uint64\_t | [**index**](#variable-index)   = `0`<br> |
 |  [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**SR\_GTYPES\_NS::Texture**](classSR__GTYPES__NS_1_1Texture.md) &gt; | [**pTexture**](#variable-ptexture)  <br> |
-|  uint32\_t | [**textureId**](#variable-textureid)   = `SR\_ID\_INVALID`<br> |
+|  std::vector&lt; uint32\_t &gt; | [**textureId**](#variable-textureid)  <br> |
 |  [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**texturePath**](#variable-texturepath)  <br> |
 |  SamplerDataUsageType | [**usageType**](#variable-usagetype)   = `SamplerDataUsageType::Texture`<br> |
 
@@ -112,6 +111,7 @@ See [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 
 | Type | Name |
 | ---: | :--- |
+|  SR\_NODISCARD uint32\_t | [**GetTextureId**](#function-gettextureid) (uint8\_t frame) noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsFrameBufferColorUsage**](#function-isframebuffercolorusage) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsFrameBufferDepthUsage**](#function-isframebufferdepthusage) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsFrameBufferUsage**](#function-isframebufferusage) () noexcept const<br> |
@@ -248,19 +248,6 @@ See [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 
 
 
-### variable fboId 
-
-```C++
-uint32_t SR_GRAPH_NS::SamplerData::fboId;
-```
-
-
-
-
-<hr>
-
-
-
 ### variable fboName 
 
 ```C++
@@ -329,7 +316,7 @@ SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Texture> SR_GRAPH_NS::SamplerData::pTextur
 ### variable textureId 
 
 ```C++
-uint32_t SR_GRAPH_NS::SamplerData::textureId;
+std::vector<uint32_t> SR_GRAPH_NS::SamplerData::textureId;
 ```
 
 
@@ -364,6 +351,21 @@ SamplerDataUsageType SR_GRAPH_NS::SamplerData::usageType;
 <hr>
 ## Public Functions Documentation
 
+
+
+
+### function GetTextureId 
+
+```C++
+SR_NODISCARD uint32_t SR_GRAPH_NS::SamplerData::GetTextureId (
+    uint8_t frame
+) noexcept const
+```
+
+
+
+
+<hr>
 
 
 

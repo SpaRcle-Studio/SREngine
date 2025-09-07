@@ -18,6 +18,36 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="24" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="24" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1abf971805c7c5d37c2f21e60a8d916ccd" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t SR_GRAPH_NS::VulkanTools::VulkanFrameBufferAllocInfo::frame</definition>
+        <argsstring></argsstring>
+        <name>frame</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanTools::VulkanFrameBufferAllocInfo::frame</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="25" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1ac8243b2be2ce1f1126b2b06f284f092d" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t SR_GRAPH_NS::VulkanTools::VulkanFrameBufferAllocInfo::maxFrames</definition>
+        <argsstring></argsstring>
+        <name>maxFrames</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanTools::VulkanFrameBufferAllocInfo::maxFrames</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="26" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1abc7ad29d747fcd24dd8488f0cc6d4dc1" prot="public" static="no" mutable="no">
         <type>uint32_t</type>
         <definition>uint32_t SR_GRAPH_NS::VulkanTools::VulkanFrameBufferAllocInfo::width</definition>
@@ -31,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="25" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="27" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1a5118d18dec609c15e3271063c7373beb" prot="public" static="no" mutable="no">
         <type>uint32_t</type>
@@ -46,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="26" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="26" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="28" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1adbbe4adc1489f68c2ae0211ab9daafaa" prot="public" static="no" mutable="no">
         <type><ref refid="structSR__GRAPH__NS_1_1DepthLayer" kindref="compound">DepthLayer</ref> *</type>
@@ -61,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="27" column="20" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="29" column="20" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1a8f621f7e5f8bd9da472a13a616d0a9d3" prot="public" static="no" mutable="no">
         <type>uint8_t</type>
@@ -76,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="28" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="28" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="30" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="30" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1ab1dd7239c52afa7706666f2f7894f143" prot="public" static="no" mutable="no">
         <type>uint32_t</type>
@@ -91,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="29" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="31" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="31" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1a14461a9b237ae1aba5558927d4ac863b" prot="public" static="no" mutable="no">
         <type>std::vector&lt; int32_t &gt;</type>
@@ -105,7 +135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="30" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="30" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="32" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1a231287a3c1c57fda80a116d9c5436d05" prot="public" static="no" mutable="no">
         <type>std::vector&lt; VkFormat &gt;</type>
@@ -119,7 +149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="31" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="31" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="33" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1ab479a2c535338bfcc4ff9d295dc8bcdd" prot="public" static="no" mutable="no">
         <type>std::vector&lt; int32_t &gt; *</type>
@@ -134,7 +164,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="32" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="32" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="34" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1aabda51286c377356b66071be3101cfc1" prot="public" static="no" mutable="no">
         <type>EvoVulkan::Complexes::FrameBufferFeatures</type>
@@ -148,7 +178,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="33" column="51" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="35" column="51" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="35" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -168,13 +198,15 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="23" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="23" bodyend="34"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" line="23" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanMemory.h" bodystart="23" bodyend="36"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1a02445755abd107052cc2687bb42338b4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanTools::VulkanFrameBufferAllocInfo</scope><name>FBO</name></member>
       <member refid="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1aabda51286c377356b66071be3101cfc1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanTools::VulkanFrameBufferAllocInfo</scope><name>features</name></member>
+      <member refid="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1abf971805c7c5d37c2f21e60a8d916ccd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanTools::VulkanFrameBufferAllocInfo</scope><name>frame</name></member>
       <member refid="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1a5118d18dec609c15e3271063c7373beb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanTools::VulkanFrameBufferAllocInfo</scope><name>height</name></member>
       <member refid="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1a231287a3c1c57fda80a116d9c5436d05" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanTools::VulkanFrameBufferAllocInfo</scope><name>inputColorAttachments</name></member>
       <member refid="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1ab1dd7239c52afa7706666f2f7894f143" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanTools::VulkanFrameBufferAllocInfo</scope><name>layersCount</name></member>
+      <member refid="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1ac8243b2be2ce1f1126b2b06f284f092d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanTools::VulkanFrameBufferAllocInfo</scope><name>maxFrames</name></member>
       <member refid="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1a14461a9b237ae1aba5558927d4ac863b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanTools::VulkanFrameBufferAllocInfo</scope><name>oldColorAttachments</name></member>
       <member refid="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1adbbe4adc1489f68c2ae0211ab9daafaa" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanTools::VulkanFrameBufferAllocInfo</scope><name>pDepth</name></member>
       <member refid="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1ab479a2c535338bfcc4ff9d295dc8bcdd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanTools::VulkanFrameBufferAllocInfo</scope><name>pOutputColorAttachments</name></member>

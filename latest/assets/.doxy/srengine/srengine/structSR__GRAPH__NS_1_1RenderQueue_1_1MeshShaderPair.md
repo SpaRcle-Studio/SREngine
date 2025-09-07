@@ -35,9 +35,8 @@
 
 | Type | Name |
 | ---: | :--- |
+|  [**RenderQueueInfo**](structSR__GRAPH__NS_1_1RenderQueueInfo.md) \* | [**pInfo**](#variable-pinfo)  <br> |
 |  [**SR\_GTYPES\_NS::Mesh**](classSR__GTYPES__NS_1_1Mesh.md) \* | [**pMesh**](#variable-pmesh)  <br> |
-|  [**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* | [**pShader**](#variable-pshader)  <br> |
-|  bool | [**updatedFrames**](#variable-updatedframes)  <br> |
 
 
 
@@ -87,36 +86,23 @@
 
 
 
+### variable pInfo 
+
+```C++
+RenderQueueInfo* SR_GRAPH_NS::RenderQueue::MeshShaderPair::pInfo;
+```
+
+
+
+
+<hr>
+
+
+
 ### variable pMesh 
 
 ```C++
 SR_GTYPES_NS::Mesh* SR_GRAPH_NS::RenderQueue::MeshShaderPair::pMesh;
-```
-
-
-
-
-<hr>
-
-
-
-### variable pShader 
-
-```C++
-SR_GTYPES_NS::Shader* SR_GRAPH_NS::RenderQueue::MeshShaderPair::pShader;
-```
-
-
-
-
-<hr>
-
-
-
-### variable updatedFrames 
-
-```C++
-bool SR_GRAPH_NS::RenderQueue::MeshShaderPair::updatedFrames[16];
 ```
 
 

@@ -36,7 +36,7 @@
 | Type | Name |
 | ---: | :--- |
 |  ImageFormat | [**format**](#variable-format)   = `ImageFormat::Unknown`<br> |
-|  int32\_t | [**texture**](#variable-texture)   = `SR\_ID\_INVALID`<br> |
+|  std::vector&lt; int32\_t &gt; | [**texture**](#variable-texture)  <br> |
 
 
 
@@ -102,7 +102,7 @@ ImageFormat SR_GRAPH_NS::ColorLayer::format;
 ### variable texture 
 
 ```C++
-int32_t SR_GRAPH_NS::ColorLayer::texture;
+std::vector<int32_t> SR_GRAPH_NS::ColorLayer::texture;
 ```
 
 

@@ -1287,7 +1287,9 @@
   </compound>
   <compound refid="classSR__UTILS__NS_1_1CameraFlyMover" kind="class"><name>SR_UTILS_NS::CameraFlyMover</name>
     <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1a802f3290d6e87febae5e3e8526d0fd14" kind="typedef"><name>Super</name></member>
+    <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1a0c2b327d3227e23d88020357fede0d9b" kind="variable"><name>m_lock</name></member>
     <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1affab465bef55b37e3da49bdd85faee94" kind="variable"><name>m_active</name></member>
+    <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1aa2c37f4e1c26580499c05fbdafd0e5bd" kind="variable"><name>m_lockCursor</name></member>
     <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1a17dc07a2fc0015e241a2c2aef809e692" kind="variable"><name>m_rightMouseButtonToRotate</name></member>
     <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1a53d685d6bdacc55c3a6c9890e3b921b0" kind="variable"><name>m_executeInEditorMode</name></member>
     <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1afaef3ba87fc85f7cb9c7a6eebd77d4db" kind="variable"><name>m_velocityDegree</name></member>
@@ -1298,6 +1300,7 @@
     <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1a6c55e3a3d619c37769d2029f7a4bcc5a" kind="variable"><name>m_moveSpeed</name></member>
     <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1a185a093903938d583b01b641c3dd9fa1" kind="variable"><name>m_velocity</name></member>
     <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1a2d0f89cd59c00cf23bbb71906026fb42" kind="function"><name>FixedUpdate</name></member>
+    <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1a1e6fc312cb2e798cc2e37904b7150f12" kind="function"><name>OnDisable</name></member>
     <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1a301f8b91472045a64eb1a3b0676209c1" kind="function"><name>SetVelocityFactor</name></member>
     <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1a03df57d1fd51a8927eca8aa33a004bb4" kind="function"><name>SetActive</name></member>
     <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1a612e80a3035d56ea78efa07839b56bc4" kind="function"><name>SetExecuteInEditMode</name></member>
@@ -1618,7 +1621,7 @@
     <member refid="classSR__GRAPH__NS_1_1ColorBufferRenderQueue_1aae5de2f813ae73bdae449d0652091a0d" kind="function"><name>CustomDrawMesh</name></member>
   </compound>
   <compound refid="structSR__GRAPH__NS_1_1ColorLayer" kind="struct"><name>SR_GRAPH_NS::ColorLayer</name>
-    <member refid="structSR__GRAPH__NS_1_1ColorLayer_1a6dc31b60faa8ebdc802cd7e60711f2a6" kind="variable"><name>texture</name></member>
+    <member refid="structSR__GRAPH__NS_1_1ColorLayer_1a787f7faae2d3a2d943bee1244bd27cc4" kind="variable"><name>texture</name></member>
     <member refid="structSR__GRAPH__NS_1_1ColorLayer_1a7a926113461743bbc2d87cecc47e9502" kind="variable"><name>format</name></member>
   </compound>
   <compound refid="structSR__ANIMATIONS__NS_1_1CompileContext" kind="struct"><name>SR_ANIMATIONS_NS::CompileContext</name>
@@ -2819,10 +2822,10 @@
     <member refid="classSR__CORE__NS_1_1DeltaTimeState_1acfb8abde20e565da540ca89423c2ebf5" kind="function"><name>ExecuteImpl</name></member>
   </compound>
   <compound refid="structSR__GRAPH__NS_1_1DepthLayer" kind="struct"><name>SR_GRAPH_NS::DepthLayer</name>
-    <member refid="structSR__GRAPH__NS_1_1DepthLayer_1aa55e06b6c1fc553471a071831e9dae39" kind="variable"><name>texture</name></member>
+    <member refid="structSR__GRAPH__NS_1_1DepthLayer_1a2ac3b7b491ac2e46aa96bf5c9b283d4d" kind="variable"><name>texture</name></member>
     <member refid="structSR__GRAPH__NS_1_1DepthLayer_1adab2754486fe39b94eae65577c0caf83" kind="variable"><name>format</name></member>
     <member refid="structSR__GRAPH__NS_1_1DepthLayer_1a74062f82ede99f665ed28a17b8f0c214" kind="variable"><name>aspect</name></member>
-    <member refid="structSR__GRAPH__NS_1_1DepthLayer_1a1f1bf6b2086da638d7b56176866ebb4e" kind="variable"><name>subLayers</name></member>
+    <member refid="structSR__GRAPH__NS_1_1DepthLayer_1aa8043f1701f348bb76991c6714459b57" kind="variable"><name>subLayers</name></member>
   </compound>
   <compound refid="classSR__GRAPH__NS_1_1DescriptorManager" kind="class"><name>SR_GRAPH_NS::DescriptorManager</name>
     <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1aeb9bcbb5eb9d880a6b65134b6f075e90" kind="enum"><name>BindResult</name></member>
@@ -4068,9 +4071,10 @@
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a5ecb0749227144299e24b479635fd191" kind="variable"><name>m_wasRendered</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a1463e41167b18250dcbd2f8b6cb14e84" kind="variable"><name>m_colors</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1aeaeff35e6c65ef23a7c05f101bab82c4" kind="variable"><name>m_depth</name></member>
-    <member refid="classSR__GTYPES__NS_1_1Framebuffer_1aead102964fd4d220738723681d122c4e" kind="variable"><name>m_frameBuffer</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a82b56979c8838e74b070ad6a76dd6a2d" kind="variable"><name>m_frameBuffer</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a0bf22f6243c85ea53978180a0d3e4de8" kind="variable"><name>m_size</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a9a8c78804eb222478db6be022206ea06" kind="variable"><name>m_layersCount</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a105d43b18a1450e345815d9be3f4b5eb" kind="variable"><name>m_forEachSwapchainImage</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a97932d38aed0f329969d00f5868230b8" kind="variable"><name>m_sampleCount</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a9e7b86fef05ff9c07ffd07ac3f64b55c" kind="variable"><name>m_currentSampleCount</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a87b38c3c5f1d1b2d8cdf9b8d886bd1a2" kind="variable"><name>m_depthEnabled</name></member>
@@ -4105,8 +4109,8 @@
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1adec20106a943c4087baf8fc1217ff91e" kind="function"><name>IsWasRendered</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1ae528ca2428c5128aa87a9bcbb72f95bb" kind="function"><name>GetFeatures</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a2977be0dc79dce7fac2cdf74113cb246" kind="function"><name>GetId</name></member>
-    <member refid="classSR__GTYPES__NS_1_1Framebuffer_1ad671bc5d31bb5b1cfd4695ae6c78a1cc" kind="function"><name>GetColorTexture</name></member>
-    <member refid="classSR__GTYPES__NS_1_1Framebuffer_1ac1d086f329f2a7682f3f66a053bec0f4" kind="function"><name>GetDepthTexture</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Framebuffer_1aeddca7806fe03d6f016a3ce30c1432e6" kind="function"><name>GetColorTexture</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Framebuffer_1afe865c74dbb7a7af8d3564e9f3e62eea" kind="function"><name>GetDepthTexture</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1aa05e182c75debc6fc1321794b88e5a6a" kind="function"><name>GetName</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a658dd83c2c08be614c39f4b4bcbaeb95" kind="function"><name>GetWidth</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a6c8648fbee25560f26371e9c82202da2" kind="function"><name>GetHeight</name></member>
@@ -6032,6 +6036,7 @@
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1a1c4d02b9cb692037222cc3669f72fcd1" kind="function"><name>SetData</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1a2639109fe39cd4685fd787ae709cab1b" kind="function"><name>OnSamplerChanged</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1a8d3e86291d081bf462d8352701065db2" kind="function"><name>OnPropertyChanged</name></member>
+    <member refid="classSR__GRAPH__NS_1_1MaterialData_1af8fb36fdd6a7ac2d29d912385fe50167" kind="function"><name>AddShaderDefine</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1aa0fefda2989d631eaf76d2eafdf05621" kind="function"><name>OnShaderChanged</name></member>
   </compound>
   <compound refid="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer" kind="class"><name>SR_CORE_GUI_NS::MaterialDataPropertyDrawer</name>
@@ -6341,7 +6346,7 @@
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a293bad07f36ba94ea55b3ca8d192d92a" kind="typedef"><name>ShaderPtr</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a0cfb104ae1007606dc54e9f796e16de8" kind="typedef"><name>MaterialPtr</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a8ccf477eb64e1da05d8b6e0f0e82b0ae" kind="typedef"><name>Ptr</name></member>
-    <member refid="classSR__GTYPES__NS_1_1Mesh_1a4ba19db4597d73a9c04421f31fa943f7" kind="typedef"><name>RenderQueues</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Mesh_1ac657acedea1d890d26f4ecfe80c3d8c5" kind="typedef"><name>RenderQueues</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a3b6365455b15767000675149fb88d932" kind="variable"><name>m_renderQueues</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1ac6c0dd4752763f730a0909861c7612cf" kind="variable"><name>m_uboManager</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a486362b25304d02d8b76702ba2fde3e9" kind="variable"><name>m_pipeline</name></member>
@@ -6354,7 +6359,6 @@
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a64f71ac772e672498b13d6ca842ba8f9" kind="variable"><name>m_isCalculated</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1aa12c514db6c826253a1d368e7279e02a" kind="variable"><name>m_hasErrors</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a1eedf6ed8926b01f933ce6d17942d928" kind="variable"><name>m_dirtyMaterial</name></member>
-    <member refid="classSR__GTYPES__NS_1_1Mesh_1a4f1e404ddd0c7f28dd411d1b15ce7606" kind="variable"><name>m_isUniformsDirty</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a572a050c6c986ad39b6786d1acf8fab7" kind="variable"><name>m_isDestroyingState</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a92400458647bb23e099dba07b27152fe" kind="variable"><name>m_registrationInfo</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a8cfbff9307d9b02e54a398d4026b3b1d" kind="variable"><name>m_materialRegisterId</name></member>
@@ -6387,7 +6391,6 @@
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a36d42f741b1a4d6d4120ba5f0e47c02f" kind="function"><name>GetMeshType</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a2c963fbf2d7b184c1525d1de7e0d3cd4" kind="function"><name>IsWaitReRegister</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1ac6c840cbd67eab2a2defb04f0bd3c323" kind="function"><name>IsMeshRegistered</name></member>
-    <member refid="classSR__GTYPES__NS_1_1Mesh_1a0c42f4050860150b1bf7d0e53b4486b1" kind="function"><name>IsUniformsDirty</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a5f570e2ab732cb7c42d019ccbc211374" kind="function"><name>GetMeshRegistrationInfo</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a2c67cc73081e7682937fe2aaf59c65de" kind="function"><name>GetRenderQueues</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a1857b0420fe2a3b300e35246e756e3c9" kind="function"><name>GetFrustumCullingType</name></member>
@@ -6412,7 +6415,6 @@
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a401fac07ce716a41159227743be22be3" kind="function"><name>SetMaterial</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a6aed03245b902a8b0a1af46d0da4b1ee" kind="function"><name>SetMaterial</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a0459026984bf4bd56d9ceb4f82f48d53" kind="function"><name>SetErrorsClean</name></member>
-    <member refid="classSR__GTYPES__NS_1_1Mesh_1a73a3904579729c1939e4e6757b39ab51" kind="function"><name>SetUniformsClean</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a579cbdb8fac4dba00906f0ff854b0251" kind="function"><name>Load</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a3c93f75ec3bd28586d2719f451bf00a8" kind="function"><name>TryLoad</name></member>
     <member refid="classSR__GTYPES__NS_1_1Mesh_1a272be772ca42d0f7b1e7c43b2af79bda" kind="function"><name>TryLoad</name></member>
@@ -6576,10 +6578,21 @@
     <member refid="structSR__GRAPH__NS_1_1MeshRegistrationInfo_1a3ce501dccfaa3350f75eaefd9fcb5bea" kind="variable"><name>priority</name></member>
     <member refid="structSR__GRAPH__NS_1_1MeshRegistrationInfo_1aeb25273813c90d95da5e671ee56abf17" kind="variable"><name>pScene</name></member>
   </compound>
+  <compound refid="structSR__GRAPH__NS_1_1MeshRenderQueues" kind="struct"><name>SR_GRAPH_NS::MeshRenderQueues</name>
+    <member refid="structSR__GRAPH__NS_1_1MeshRenderQueues_1a5e62c15d4434fe5598375081368cf9c4" kind="variable"><name>MaxQueues</name></member>
+    <member refid="structSR__GRAPH__NS_1_1MeshRenderQueues_1a35f4117364a4776d2a57311ae05895d8" kind="variable"><name>queues</name></member>
+    <member refid="structSR__GRAPH__NS_1_1MeshRenderQueues_1abc29e0f1dda41588b0ffaff17761f1ff" kind="variable"><name>count</name></member>
+    <member refid="structSR__GRAPH__NS_1_1MeshRenderQueues_1a8f7695e61f3c3f5042431abad678798f" kind="variable"><name>maxCount</name></member>
+    <member refid="structSR__GRAPH__NS_1_1MeshRenderQueues_1a9b0f1aba5a52f14bbe56c401aa9a50e4" kind="function"><name>Clear</name></member>
+    <member refid="structSR__GRAPH__NS_1_1MeshRenderQueues_1a52070b786e3d0dcba02e6caeb18659e9" kind="function"><name>data</name></member>
+    <member refid="structSR__GRAPH__NS_1_1MeshRenderQueues_1a40d683a0f337da29abd975cff4571513" kind="function"><name>size</name></member>
+    <member refid="structSR__GRAPH__NS_1_1MeshRenderQueues_1ac5d631e59d547901076cdc3064501513" kind="function"><name>Find</name></member>
+    <member refid="structSR__GRAPH__NS_1_1MeshRenderQueues_1a2ee1e88bd7bf191db685a5e3d146bb9f" kind="function"><name>Add</name></member>
+    <member refid="structSR__GRAPH__NS_1_1MeshRenderQueues_1a0a71709f8ac6d4a68160e45eeacb7d16" kind="function"><name>Remove</name></member>
+  </compound>
   <compound refid="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshShaderPair" kind="struct"><name>SR_GRAPH_NS::RenderQueue::MeshShaderPair</name>
     <member refid="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshShaderPair_1a1ad8ae7d805c2992693dd4f1accdecfa" kind="variable"><name>pMesh</name></member>
-    <member refid="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshShaderPair_1a0cb8aa51245ae104528abc5375d6f77c" kind="variable"><name>pShader</name></member>
-    <member refid="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshShaderPair_1a1316473f0cd00308c8cba682f4af856c" kind="variable"><name>updatedFrames</name></member>
+    <member refid="structSR__GRAPH__NS_1_1RenderQueue_1_1MeshShaderPair_1aafb8dd9d201b7d281ac2d23b1f975a34" kind="variable"><name>pInfo</name></member>
   </compound>
   <compound refid="classSR__GRAPH__NS_1_1Memory_1_1MeshVidMemInfo" kind="class"><name>SR_GRAPH_NS::Memory::MeshVidMemInfo</name>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1MeshVidMemInfo_1a23fe7b0dce869815b7f26b1a09612329" kind="friend"><name>MeshManager</name></member>
@@ -7881,7 +7894,6 @@
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a9afe91140696dad60bd1981898da2be1" kind="variable"><name>m_requiredSampleCount</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a4c66f92cb85ee9d6bbdfdc1838bd1e92" kind="variable"><name>m_supportedSampleCount</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a3b2a0e747e1e251e021591a09fe5ad01" kind="variable"><name>m_isMultiSampleSupported</name></member>
-    <member refid="classSR__GRAPH__NS_1_1Pipeline_1ab3cea003d5f9a8a7d7cfb6ed12de502a" kind="variable"><name>m_FBOForEachSwapchainImage</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a015d23c7170f5284bbf5b5967535a6c5" kind="variable"><name>m_frames</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a0df7e8ff5d6ec0d22845fb6ad1a7a83a" kind="variable"><name>m_framesPerSecond</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1aa60bb798bce567a0df5c5afce45f7861" kind="variable"><name>m_lastSecond</name></member>
@@ -8175,12 +8187,16 @@
     <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1a5ca8a0f2a8e6eb11c45f4a843195ce1a" kind="variable"><name>m_properties</name></member>
     <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1a3608e405ea2964ef96c03016fa090728" kind="variable"><name>m_vertices</name></member>
     <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1a936b4e576a75fc7417c98f68f84e98ce" kind="variable"><name>m_shaderPath</name></member>
+    <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1ad7aad403f8457d244941f060eeb2e6e0" kind="variable"><name>m_samplers</name></member>
     <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1a77a94d767616e805d226fbab61728313" kind="function"><name>~PostProcessPass</name></member>
     <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1ab12b11b6f5b8d4ed11c5925e9ef5eb09" kind="function"><name>OnResize</name></member>
     <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1ad05a141ed0aa624f1f0f2a04855070e5" kind="function"><name>OnMultisampleChanged</name></member>
     <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1aee63a18b98828d01a10509c185aa9ff3" kind="function"><name>PreRender</name></member>
     <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1afe3807c59ce206965c62a218db9c28ff" kind="function"><name>Render</name></member>
     <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1a06bc4f4875d9ca6fb96a77a054e3a5d5" kind="function"><name>Update</name></member>
+    <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1a96b21122ce1e39f663bc2b1b71e16f0b" kind="function"><name>Prepare</name></member>
+    <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1ad57e78f43a906673d15e363baec2f55c" kind="function"><name>UseSamplers</name></member>
+    <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1ae7a8fbebab006dfa9cda364dbfade31e" kind="function"><name>SetRenderTechnique</name></member>
     <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1ad8c42b9852fcafcd68ddeaf1ca94fbc0" kind="function"><name>SetShader</name></member>
     <member refid="classSR__GRAPH__NS_1_1PostProcessPass_1ab8874150879aa212169d50ce46a6a57c" kind="function"><name>DeInit</name></member>
   </compound>
@@ -8929,7 +8945,7 @@
     <member refid="classSR__GRAPH__NS_1_1RenderQueue_1ad5097a9240b4e2b74d4621e4c8ac7032" kind="function"><name>Init</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderQueue_1a2a7702e7cd233e214e2a90ae959e6f9a" kind="function"><name>Render</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderQueue_1aacd2a6957898e96b653d0b1b1958975c" kind="function"><name>Update</name></member>
-    <member refid="classSR__GRAPH__NS_1_1RenderQueue_1a15c4f0e35618f228cfc41c3934292a6d" kind="function"><name>OnMeshDirty</name></member>
+    <member refid="classSR__GRAPH__NS_1_1RenderQueue_1ab1b6e40be15ff1dc57dc43e6193363cc" kind="function"><name>OnMeshDirty</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderQueue_1aabfba4d009eea75f10602764e2c55429" kind="function"><name>GetQueues</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderQueue_1adb36cd282b12b540f8dee9df6399dc15" kind="function"><name>CustomDrawMesh</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderQueue_1a5caaef2e7f95f0838e58e780df70db92" kind="function"><name>GetMeshDrawerPass</name></member>
@@ -8946,6 +8962,8 @@
   <compound refid="structSR__GRAPH__NS_1_1RenderQueueInfo" kind="struct"><name>SR_GRAPH_NS::RenderQueueInfo</name>
     <member refid="structSR__GRAPH__NS_1_1RenderQueueInfo_1a051766209f727ad4e6a201cb5ea4f12a" kind="variable"><name>pRenderQueue</name></member>
     <member refid="structSR__GRAPH__NS_1_1RenderQueueInfo_1a6198920c1f18a2e518c78e7ddb0a997c" kind="variable"><name>pShader</name></member>
+    <member refid="structSR__GRAPH__NS_1_1RenderQueueInfo_1a0ed55ec5c045672b30b7379ee036f3ce" kind="variable"><name>dirtyUniformsFrames</name></member>
+    <member refid="structSR__GRAPH__NS_1_1RenderQueueInfo_1affe38c821366dadb2641e215751385cf" kind="variable"><name>inUpdateQueue</name></member>
     <member refid="structSR__GRAPH__NS_1_1RenderQueueInfo_1a515579405650d3cc0ab3d0111e1cf5ef" kind="function"><name>operator==</name></member>
   </compound>
   <compound refid="structSR__GRAPH__NS_1_1RenderQueue_1_1RenderQueueLessPredicate" kind="struct"><name>SR_GRAPH_NS::RenderQueue::RenderQueueLessPredicate</name>
@@ -9551,8 +9569,7 @@
     <member refid="classSR__HTYPES__NS_1_1SafeVar_1af8b4f2564742668df8decb36e05b969f" kind="function"><name>Do</name></member>
   </compound>
   <compound refid="structSR__GRAPH__NS_1_1SamplerData" kind="struct"><name>SR_GRAPH_NS::SamplerData</name>
-    <member refid="structSR__GRAPH__NS_1_1SamplerData_1a6a55fbb1c839720189b645d4dfdc6232" kind="variable"><name>textureId</name></member>
-    <member refid="structSR__GRAPH__NS_1_1SamplerData_1ad06ae53e869ff53a4e975573f28e7b24" kind="variable"><name>fboId</name></member>
+    <member refid="structSR__GRAPH__NS_1_1SamplerData_1afe2459c3c2c378772bed913219a39ecf" kind="variable"><name>textureId</name></member>
     <member refid="structSR__GRAPH__NS_1_1SamplerData_1a2ad986523587160192db57ad12959250" kind="variable"><name>pTexture</name></member>
     <member refid="structSR__GRAPH__NS_1_1SamplerData_1a8d147b4db5a7a211155f60867d5d726b" kind="variable"><name>id</name></member>
     <member refid="structSR__GRAPH__NS_1_1SamplerData_1a7b59bc0fa3fdeb68a571a57f037d8914" kind="variable"><name>usageType</name></member>
@@ -9567,6 +9584,7 @@
     <member refid="structSR__GRAPH__NS_1_1SamplerData_1adba23f14b6ba11d44292c24de43139ca" kind="function"><name>operator=</name></member>
     <member refid="structSR__GRAPH__NS_1_1SamplerData_1a615acd7d69a86b11d3adabb8c9f155a3" kind="function"><name>operator=</name></member>
     <member refid="structSR__GRAPH__NS_1_1SamplerData_1a1e2ca33c0476718b760bd129d01aacc9" kind="function"><name>OnPostLoad</name></member>
+    <member refid="structSR__GRAPH__NS_1_1SamplerData_1ad812a375c992a3ed9de5098e39b6f10a" kind="function"><name>GetTextureId</name></member>
     <member refid="structSR__GRAPH__NS_1_1SamplerData_1a61aab22d9cad2229ac4226543ffd72fa" kind="function"><name>IsFrameBufferUsage</name></member>
     <member refid="structSR__GRAPH__NS_1_1SamplerData_1a2236eff0df31e584234162a9044095d0" kind="function"><name>IsTextureUsage</name></member>
     <member refid="structSR__GRAPH__NS_1_1SamplerData_1a78f3715d2268b695223e0fe5fce90bf1" kind="function"><name>IsFrameBufferColorUsage</name></member>
@@ -10637,7 +10655,7 @@
     <member refid="classSR__GTYPES__NS_1_1Skybox_1aa49a9f4fb9e881fd51decd0a48108cc9" kind="function"><name>GetVirtualUBO</name></member>
     <member refid="classSR__GTYPES__NS_1_1Skybox_1a5fb71cea01d9b994d5cdd4525405dd54" kind="function"><name>IsAllowedToRevive</name></member>
     <member refid="classSR__GTYPES__NS_1_1Skybox_1aa38d813427889024a4269b3fe7db8de9" kind="function"><name>FreeVMemory</name></member>
-    <member refid="classSR__GTYPES__NS_1_1Skybox_1aff7ec4b0d77f912fa8e0cce91f5846fa" kind="function"><name>Draw</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Skybox_1a7db4b8e091d2a7fee6fec0acfc7b3309" kind="function"><name>Draw</name></member>
     <member refid="classSR__GTYPES__NS_1_1Skybox_1afbd94f704f5839963810c3fec3914b80" kind="function"><name>SetShader</name></member>
     <member refid="classSR__GTYPES__NS_1_1Skybox_1a14067cdde836d48bd1a8bd2d34a201ab" kind="function"><name>StartWatch</name></member>
     <member refid="classSR__GTYPES__NS_1_1Skybox_1aa5960a39e42591e36a5b173e0a97a261" kind="function"><name>Load</name></member>
@@ -10648,6 +10666,7 @@
   <compound refid="classSR__GRAPH__NS_1_1SkyboxPass" kind="class"><name>SR_GRAPH_NS::SkyboxPass</name>
     <member refid="classSR__GRAPH__NS_1_1SkyboxPass_1a159055f6d0ec98fc8493cc43579cb195" kind="typedef"><name>Super</name></member>
     <member refid="classSR__GRAPH__NS_1_1SkyboxPass_1a3cbb99996922f207ea7e0ae87b516ae0" kind="variable"><name>m_skybox</name></member>
+    <member refid="classSR__GRAPH__NS_1_1SkyboxPass_1aa8bc31f8f7db706ac91cceb373302274" kind="variable"><name>m_isRendered</name></member>
     <member refid="classSR__GRAPH__NS_1_1SkyboxPass_1abfa347b4f3656809732dc7f1477e99a1" kind="variable"><name>m_skyboxPath</name></member>
     <member refid="classSR__GRAPH__NS_1_1SkyboxPass_1ae1335046924f4c63eb026b04deae8883" kind="variable"><name>m_shaderPath</name></member>
     <member refid="classSR__GRAPH__NS_1_1SkyboxPass_1ad10fd01637f27ca23878c122f6a38daf" kind="function"><name>~SkyboxPass</name></member>
@@ -11021,7 +11040,7 @@
   </compound>
   <compound refid="structSR__GRAPH__NS_1_1SRFrameBufferCreateInfo" kind="struct"><name>SR_GRAPH_NS::SRFrameBufferCreateInfo</name>
     <member refid="structSR__GRAPH__NS_1_1SRFrameBufferCreateInfo_1a1b81537817272ee17150892149548473" kind="variable"><name>size</name></member>
-    <member refid="structSR__GRAPH__NS_1_1SRFrameBufferCreateInfo_1afd31399d15b214003ed6c369bb2d6c1c" kind="variable"><name>pFBO</name></member>
+    <member refid="structSR__GRAPH__NS_1_1SRFrameBufferCreateInfo_1a6cd266d21f0d476bf502722ee43b0198" kind="variable"><name>pFBO</name></member>
     <member refid="structSR__GRAPH__NS_1_1SRFrameBufferCreateInfo_1a57ea44c84977e22b6224fa8e72212e19" kind="variable"><name>pDepth</name></member>
     <member refid="structSR__GRAPH__NS_1_1SRFrameBufferCreateInfo_1af7843fc4a785120a297147eb84a0eacc" kind="variable"><name>colors</name></member>
     <member refid="structSR__GRAPH__NS_1_1SRFrameBufferCreateInfo_1a3434e5f1a62413c84bd1645f400e86e1" kind="variable"><name>sampleCount</name></member>
@@ -13697,6 +13716,8 @@
   </compound>
   <compound refid="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo" kind="struct"><name>SR_GRAPH_NS::VulkanTools::VulkanFrameBufferAllocInfo</name>
     <member refid="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1a02445755abd107052cc2687bb42338b4" kind="variable"><name>FBO</name></member>
+    <member refid="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1abf971805c7c5d37c2f21e60a8d916ccd" kind="variable"><name>frame</name></member>
+    <member refid="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1ac8243b2be2ce1f1126b2b06f284f092d" kind="variable"><name>maxFrames</name></member>
     <member refid="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1abc7ad29d747fcd24dd8488f0cc6d4dc1" kind="variable"><name>width</name></member>
     <member refid="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1a5118d18dec609c15e3271063c7373beb" kind="variable"><name>height</name></member>
     <member refid="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1adbbe4adc1489f68c2ae0211ab9daafaa" kind="variable"><name>pDepth</name></member>
@@ -14431,6 +14452,7 @@
     <member refid="IShaderProgram_8h_1a76e05f7511afa658ab41a68f1d49141d" kind="variable"><name>Greater</name></member>
     <member refid="IShaderProgram_8h_1a6fa0a9113f19756ff4b336323310b8e2" kind="variable"><name>NotEqual</name></member>
     <member refid="IShaderProgram_8h_1a6d577be54cad16285fb8a73b7c397f37" kind="variable"><name>GreaterOrEqual</name></member>
+    <member refid="RenderQueue_8h_1aee2afacf5e9add2b9e4d80f4987e8a62" kind="variable"><name>SIZE_OF_MESH_RENDER_QUEUES_CLASS</name></member>
     <member refid="MeshUtils_8h_1a238c6a5d30934d8b97e4990ad259ed47" kind="variable"><name>SR_SUPPORTED_MESH_FORMATS</name></member>
     <member refid="MeshUtils_8h_1a4693fdfc7e52635e1752713c6de011bb" kind="variable"><name>SR_SUPPORTED_FONT_FORMATS</name></member>
     <member refid="FreeType_8h_1a19f6f9f0c7a945fa58fbe21650628d7a" kind="function"><name>FreeTypeErrToString</name></member>
@@ -14595,6 +14617,7 @@
   <compound refid="namespaceSR__GTYPES__NS" kind="namespace"><name>SR_GTYPES_NS</name>
     <member refid="namespaceSR__GTYPES__NS_1a3572ae11f084eb959e3de79efec9b84c" kind="variable"><name>SR_SPRITE_INDICES</name></member>
     <member refid="namespaceSR__GTYPES__NS_1a891cb30e128540b5973b759ec77c1c95" kind="variable"><name>SR_SPRITE_VERTICES</name></member>
+    <member refid="namespaceSR__GTYPES__NS_1ac122fd2ab3c9bc04cdb8f6578908c602" kind="variable"><name>SIZE_OF_MESH_CLASS</name></member>
     <member refid="namespaceSR__GTYPES__NS_1a7220ae08d2b9d212e6f4ec0c2ce01262" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
   </compound>
   <compound refid="namespaceSR__HTYPES__NS" kind="namespace"><name>SR_HTYPES_NS</name>

@@ -44,7 +44,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD bool IsAllowedToRevive() const override { return true; }
 
         void FreeVMemory() override;
-        void Draw();
+        bool Draw();
 
         void SetShader(const SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Shader>& shader);
 

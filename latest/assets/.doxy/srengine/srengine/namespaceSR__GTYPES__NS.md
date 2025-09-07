@@ -62,6 +62,11 @@
 |  const std::vector&lt; Vertices::UIVertex &gt; | [**SR\_SPRITE\_VERTICES**](#variable-sr_sprite_vertices)   = `/* multi line expression */`<br>_NOLINT._  |
 
 
+## Public Static Attributes
+
+| Type | Name |
+| ---: | :--- |
+|  constexpr size\_t | [**SIZE\_OF\_MESH\_CLASS**](#variable-size_of_mesh_class)   = `sizeof([**Mesh**](classSR__GTYPES__NS_1_1Mesh.md))`<br> |
 
 
 
@@ -155,6 +160,21 @@ const std::vector<uint32_t> SR_GTYPES_NS::SR_SPRITE_INDICES;
 _NOLINT._ 
 ```C++
 const std::vector<Vertices::UIVertex> SR_GTYPES_NS::SR_SPRITE_VERTICES;
+```
+
+
+
+
+<hr>
+## Public Static Attributes Documentation
+
+
+
+
+### variable SIZE\_OF\_MESH\_CLASS 
+
+```C++
+constexpr size_t SR_GTYPES_NS::SIZE_OF_MESH_CLASS;
 ```
 
 

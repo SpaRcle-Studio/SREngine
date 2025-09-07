@@ -35,6 +35,8 @@
 
 | Type | Name |
 | ---: | :--- |
+|  bool | [**dirtyUniformsFrames**](#variable-dirtyuniformsframes)  <br> |
+|  bool | [**inUpdateQueue**](#variable-inupdatequeue)   = `false`<br> |
 |  [**RenderQueue**](classSR__GRAPH__NS_1_1RenderQueue.md) \* | [**pRenderQueue**](#variable-prenderqueue)  <br> |
 |  [**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* | [**pShader**](#variable-pshader)  <br> |
 
@@ -88,6 +90,32 @@
 
 ## Public Attributes Documentation
 
+
+
+
+### variable dirtyUniformsFrames 
+
+```C++
+bool SR_GRAPH_NS::RenderQueueInfo::dirtyUniformsFrames[3];
+```
+
+
+
+
+<hr>
+
+
+
+### variable inUpdateQueue 
+
+```C++
+bool SR_GRAPH_NS::RenderQueueInfo::inUpdateQueue;
+```
+
+
+
+
+<hr>
 
 
 

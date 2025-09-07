@@ -45,8 +45,11 @@ namespace SR_GRAPH_NS {
         bool PreRender() override;
         bool Render() override;
         void Update() override;
+        void Prepare() override;
 
     protected:
+        void UseSamplers(SR_GTYPES_NS::Shader* pShader) override;
+        void SetRenderTechnique(SR_GRAPH_NS::IRenderTechnique* pRenderTechnique) override;
         void SetShader(const SR_UTILS_NS::Path& shaderPath);
         void DeInit() override;
 
@@ -60,6 +63,7 @@ namespace SR_GRAPH_NS {
 
         uint32_t m_vertices = 3;
         SR_UTILS_NS::Path m_shaderPath;
+        SamplersPassData m_samplers;
 
     };
 }

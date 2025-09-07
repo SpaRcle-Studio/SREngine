@@ -30,7 +30,7 @@ namespace SR_GRAPH_NS {
 
     struct SRFrameBufferCreateInfo {
         SR_MATH_NS::IVector2 size;
-        int32_t* pFBO = nullptr;
+        std::vector<int32_t>* pFBO = nullptr;
         DepthLayer* pDepth = nullptr;
         std::vector<ColorLayer>* colors = nullptr;
         uint8_t sampleCount = 0;

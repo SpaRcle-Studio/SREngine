@@ -32,6 +32,8 @@ namespace SR_GRAPH_NS {
     class RenderContext;
     class RenderScene;
 
+    struct RenderQueueInfo;
+
     class RenderQueue : public SR_HTYPES_NS::SharedPtr<RenderQueue> {
         using Super = SR_HTYPES_NS::SharedPtr<RenderQueue>;
         using ShaderPtr = SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Shader>;
@@ -40,8 +42,7 @@ namespace SR_GRAPH_NS {
 
         struct MeshShaderPair {
             SR_GTYPES_NS::Mesh* pMesh;
-            SR_GTYPES_NS::Shader* pShader;
-            bool updatedFrames[16];
+            RenderQueueInfo* pInfo;
         };
     public:
         enum QueueState : uint8_t {
@@ -117,7 +118,7 @@ namespace SR_GRAPH_NS {
         bool Render();
         void Update();
 
-        void OnMeshDirty(SR_GTYPES_NS::Mesh* pMesh, SR_GTYPES_NS::Shader* pShader);
+        void OnMeshDirty(SR_GTYPES_NS::Mesh* pMesh, RenderQueueInfo* pInfo);
 
         SR_NODISCARD const std::vector<std::pair<Layer, Queue>>& GetQueues() const noexcept { return m_queues; }
 
@@ -176,11 +177,75 @@ namespace SR_GRAPH_NS {
     struct RenderQueueInfo {
         RenderQueue* pRenderQueue;
         SR_GTYPES_NS::Shader* pShader;
+        bool dirtyUniformsFrames[3];
+        bool inUpdateQueue = false;
 
         bool operator==(const RenderQueueInfo& other) const {
             return pRenderQueue == other.pRenderQueue;
         }
     };
+
+    struct MeshRenderQueues {
+        constexpr static size_t MaxQueues = 64;
+        RenderQueueInfo queues[MaxQueues];
+        uint8_t count = 0;
+        uint8_t maxCount = 0;
+
+        void Clear() {
+            count = 0;
+            maxCount = 0;
+            for (auto& q : queues) {
+                q = {};
+            }
+        }
+
+        SR_NODISCARD RenderQueueInfo* data() { return &queues[0]; }
+        SR_NODISCARD size_t size() const { return maxCount; }
+
+        SR_NODISCARD RenderQueueInfo* Find(RenderQueue* pQueue) {
+            SR_TRACY_ZONE;
+            for (size_t i = 0; i < maxCount; ++i) {
+                if (queues[i].pRenderQueue == pQueue) {
+                    return &queues[i];
+                }
+            }
+            return nullptr;
+        }
+
+        SR_NODISCARD RenderQueueInfo* Add(RenderQueue* pQueue) {
+            SR_TRACY_ZONE;
+            if (count >= MaxQueues) {
+                SRHalt("MeshRenderQueues::Add() : max queues limit reached!");
+                return nullptr;
+            }
+            for (size_t i = 0; i < MaxQueues; ++i) {
+                if (queues[i].pRenderQueue == nullptr) {
+                    queues[i].pRenderQueue = pQueue;
+                    count++;
+                    maxCount = SR_MAX(maxCount, i + 1);
+                    return &queues[i];
+                }
+            }
+            SRHalt("MeshRenderQueues::Add() : queue not found, but should be added!");
+            return nullptr;
+        }
+
+        RenderQueueInfo Remove(RenderQueue* pQueue) {
+            SR_TRACY_ZONE;
+            for (size_t i = 0; i < maxCount; ++i) {
+                if (queues[i].pRenderQueue == pQueue) {
+                    RenderQueueInfo tmp = queues[i];
+                    queues[i] = {};
+                    --count;
+                    return tmp;
+                }
+            }
+            SRHalt("MeshRenderQueues::Remove() : queue not found!");
+            return {};
+        }
+    };
+
+    static constexpr size_t SIZE_OF_MESH_RENDER_QUEUES_CLASS = sizeof(MeshRenderQueues);
 
     struct RenderQueuePredicate {
         using Element = RenderQueueInfo;

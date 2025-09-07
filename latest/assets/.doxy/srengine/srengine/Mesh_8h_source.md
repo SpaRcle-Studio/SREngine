@@ -60,7 +60,8 @@ namespace SR_GTYPES_NS {
         using MaterialPtr = SR_HTYPES_NS::SharedPtr<BaseMaterial>;
         using Ptr = SR_HTYPES_NS::SharedPtr<Mesh>;
 
-        using RenderQueues = SR_HTYPES_NS::SortedVector<RenderQueueInfo, RenderQueuePredicate>;
+        //using RenderQueues = SR_HTYPES_NS::SortedVector<RenderQueueInfo, RenderQueuePredicate>;
+        using RenderQueues = MeshRenderQueues;
 
     public:
         Mesh();
@@ -99,14 +100,12 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
 
         SR_NODISCARD Pipeline* GetPipeline() const noexcept { return m_pipeline; }
-        //SR_NODISCARD ShaderPtr GetShader() const;
         SR_NODISCARD const MaterialPtr& GetMaterial() const noexcept { return m_material; }
         SR_NODISCARD MaterialPtr& GetMaterial() noexcept { return m_material; }
         SR_NODISCARD int32_t GetVirtualUBO() const { return m_virtualUBO; }
         SR_NODISCARD virtual MeshType GetMeshType() const noexcept = 0;
         SR_NODISCARD bool IsWaitReRegister() const noexcept { return m_isWaitReRegister; }
         SR_NODISCARD bool IsMeshRegistered() const noexcept { return m_registrationInfo.has_value(); }
-        SR_NODISCARD bool IsUniformsDirty() const noexcept { return m_isUniformsDirty; }
         SR_NODISCARD const MeshRegistrationInfo& GetMeshRegistrationInfo() const noexcept { return m_registrationInfo.value(); }
         SR_NODISCARD RenderQueues& GetRenderQueues() noexcept { return m_renderQueues; }
         SR_NODISCARD virtual FrustumCullingType GetFrustumCullingType() const noexcept { return m_frustumCullingType; }
@@ -140,7 +139,7 @@ namespace SR_GTYPES_NS {
         void SetMaterial(const SR_UTILS_NS::Path& path);
 
         void SetErrorsClean() { m_hasErrors = false; }
-        void SetUniformsClean() { m_isUniformsDirty = false; }
+        //void SetUniformsClean();
 
     protected:
         virtual void FreeVMemory();
@@ -167,7 +166,6 @@ namespace SR_GTYPES_NS {
         bool m_isCalculated = false;
         bool m_hasErrors = false;
         bool m_dirtyMaterial = false;
-        bool m_isUniformsDirty = false;
 
     private:
         bool m_isDestroyingState = false;
@@ -175,6 +173,8 @@ namespace SR_GTYPES_NS {
         uint32_t m_materialRegisterId = SR_ID_INVALID;
 
     };
+
+    constexpr static size_t SIZE_OF_MESH_CLASS = sizeof(Mesh);
 }
 
 #endif //SR_ENGINE_GRAPHICS_MESH_H

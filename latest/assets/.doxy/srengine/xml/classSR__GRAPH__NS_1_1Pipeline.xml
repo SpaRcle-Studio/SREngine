@@ -371,7 +371,7 @@
         <argsstring></argsstring>
         <name>m_currentSampleCount</name>
         <qualifiedname>SR_GRAPH_NS::Pipeline::m_currentSampleCount</qualifiedname>
-        <initializer>= 0</initializer>
+        <initializer>= 1</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -386,7 +386,7 @@
         <argsstring></argsstring>
         <name>m_requiredSampleCount</name>
         <qualifiedname>SR_GRAPH_NS::Pipeline::m_requiredSampleCount</qualifiedname>
-        <initializer>= 0</initializer>
+        <initializer>= 1</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -425,21 +425,6 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="316" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="316" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1ab3cea003d5f9a8a7d7cfb6ed12de502a" prot="protected" static="no" mutable="no">
-        <type>bool</type>
-        <definition>bool SR_GRAPH_NS::Pipeline::m_FBOForEachSwapchainImage</definition>
-        <argsstring></argsstring>
-        <name>m_FBOForEachSwapchainImage</name>
-        <qualifiedname>SR_GRAPH_NS::Pipeline::m_FBOForEachSwapchainImage</qualifiedname>
-        <initializer>= false</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="317" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="317" bodyend="-1"/>
-      </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1a015d23c7170f5284bbf5b5967535a6c5" prot="protected" static="no" mutable="no">
         <type>uint32_t</type>
         <definition>uint32_t SR_GRAPH_NS::Pipeline::m_frames</definition>
@@ -453,7 +438,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="319" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="319" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="318" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="318" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1a0df7e8ff5d6ec0d22845fb6ad1a7a83a" prot="protected" static="no" mutable="no">
         <type>uint32_t</type>
@@ -468,7 +453,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="320" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="320" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="319" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="319" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1aa60bb798bce567a0df5c5afce45f7861" prot="protected" static="no" mutable="no">
         <type>std::optional&lt; SR_UTILS_NS::TimePointType &gt;</type>
@@ -482,7 +467,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="321" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="321" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="320" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="320" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Pipeline_1a019fddd8a6b99504451580c87866b548" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -497,7 +482,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="323" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="323" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="322" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="322" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -3082,7 +3067,7 @@
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="29" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="29" bodyend="325"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="29" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="29" bodyend="324"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a5b28c11cba7ef11d0a97d60a605b5c62" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>AllocateCubeMap</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1ad24dd5e9a472b9ab3dd075fddadbc92c" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>AllocateFrameBuffer</name></member>
@@ -3202,7 +3187,6 @@
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1acec79ba280ff6d871d6f315109f7dd53" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>m_dirty</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1abbf897a18ac1d4c2d7f639cb27e179f0" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>m_enableValidationLayers</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1aff1a6540a018816dc839abee3c42e513" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>m_errorsCount</name></member>
-      <member refid="classSR__GRAPH__NS_1_1Pipeline_1ab3cea003d5f9a8a7d7cfb6ed12de502a" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>m_FBOForEachSwapchainImage</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a2ff513c21aee7e569113af21d671141f" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>m_fboQueue</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a015d23c7170f5284bbf5b5967535a6c5" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>m_frames</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a0df7e8ff5d6ec0d22845fb6ad1a7a83a" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>m_framesPerSecond</name></member>

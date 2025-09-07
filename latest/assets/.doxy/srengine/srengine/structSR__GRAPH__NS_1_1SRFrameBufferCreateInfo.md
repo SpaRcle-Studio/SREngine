@@ -39,7 +39,7 @@
 |  [**FrameBufferFeatures**](structSR__GRAPH__NS_1_1FrameBufferFeatures.md) | [**features**](#variable-features)  <br> |
 |  uint32\_t | [**layersCount**](#variable-layerscount)   = `0`<br> |
 |  [**DepthLayer**](structSR__GRAPH__NS_1_1DepthLayer.md) \* | [**pDepth**](#variable-pdepth)   = `nullptr`<br> |
-|  int32\_t \* | [**pFBO**](#variable-pfbo)   = `nullptr`<br> |
+|  std::vector&lt; int32\_t &gt; \* | [**pFBO**](#variable-pfbo)   = `nullptr`<br> |
 |  uint8\_t | [**sampleCount**](#variable-samplecount)   = `0`<br> |
 |  SR\_MATH\_NS::IVector2 | [**size**](#variable-size)  <br> |
 
@@ -146,7 +146,7 @@ DepthLayer* SR_GRAPH_NS::SRFrameBufferCreateInfo::pDepth;
 ### variable pFBO 
 
 ```C++
-int32_t* SR_GRAPH_NS::SRFrameBufferCreateInfo::pFBO;
+std::vector<int32_t>* SR_GRAPH_NS::SRFrameBufferCreateInfo::pFBO;
 ```
 
 

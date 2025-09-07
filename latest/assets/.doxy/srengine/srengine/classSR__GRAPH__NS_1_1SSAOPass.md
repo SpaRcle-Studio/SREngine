@@ -220,6 +220,7 @@ See [SR\_GRAPH\_NS::PostProcessPass](classSR__GRAPH__NS_1_1PostProcessPass.md)
 | virtual void | [**OnMultisampleChanged**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-onmultisamplechanged) () override<br> |
 | virtual void | [**OnResize**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-onresize) (const SR\_MATH\_NS::UVector2 & size) override<br> |
 | virtual bool | [**PreRender**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-prerender) () override<br>_Вызывается только во время построения_  |
+| virtual void | [**Prepare**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-prepare) () override<br>_Вызывается всегда но полсе оверлея_  |
 | virtual bool | [**Render**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-render) () override<br>_Вызывается только во время построения_  |
 | virtual void | [**Update**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-update) () override<br>_Вызывается постоянно после построения_  |
 |   | [**~PostProcessPass**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-postprocesspass) () override<br> |
@@ -429,6 +430,7 @@ See [SR\_GRAPH\_NS::PostProcessPass](classSR__GRAPH__NS_1_1PostProcessPass.md)
 |  bool | [**m\_dirtyShader**](classSR__GRAPH__NS_1_1PostProcessPass.md#variable-m_dirtyshader)   = `true`<br> |
 |  [**SR\_UTILS\_NS::Subscription**](classSR__UTILS__NS_1_1Subscription.md) | [**m\_onShaderReloaded**](classSR__GRAPH__NS_1_1PostProcessPass.md#variable-m_onshaderreloaded)  <br> |
 |  Properties | [**m\_properties**](classSR__GRAPH__NS_1_1PostProcessPass.md#variable-m_properties)  <br> |
+|  [**SamplersPassData**](classSR__GRAPH__NS_1_1SamplersPassData.md) | [**m\_samplers**](classSR__GRAPH__NS_1_1PostProcessPass.md#variable-m_samplers)  <br> |
 |  ShaderPtr | [**m\_shader**](classSR__GRAPH__NS_1_1PostProcessPass.md#variable-m_shader)   = `nullptr`<br> |
 |  [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**m\_shaderPath**](classSR__GRAPH__NS_1_1PostProcessPass.md#variable-m_shaderpath)  <br> |
 |  uint32\_t | [**m\_vertices**](classSR__GRAPH__NS_1_1PostProcessPass.md#variable-m_vertices)   = `3`<br> |
@@ -576,7 +578,9 @@ See [SR\_GRAPH\_NS::PostProcessPass](classSR__GRAPH__NS_1_1PostProcessPass.md)
 | Type | Name |
 | ---: | :--- |
 | virtual void | [**DeInit**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-deinit) () override<br> |
+| virtual void | [**SetRenderTechnique**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-setrendertechnique) ([**SR\_GRAPH\_NS::IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \* pRenderTechnique) override<br> |
 |  void | [**SetShader**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-setshader) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & shaderPath) <br> |
+| virtual void | [**UseSamplers**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-usesamplers) ([**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* pShader) override<br> |
 
 
 

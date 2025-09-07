@@ -37,8 +37,8 @@
 | ---: | :--- |
 |  ImageAspect | [**aspect**](#variable-aspect)   = `ImageAspect::DepthStencil`<br> |
 |  ImageFormat | [**format**](#variable-format)   = `ImageFormat::Unknown`<br> |
-|  std::vector&lt; int32\_t &gt; | [**subLayers**](#variable-sublayers)  <br> |
-|  int32\_t | [**texture**](#variable-texture)   = `SR\_ID\_INVALID`<br> |
+|  std::vector&lt; std::vector&lt; int32\_t &gt; &gt; | [**subLayers**](#variable-sublayers)  <br> |
+|  std::vector&lt; int32\_t &gt; | [**texture**](#variable-texture)  <br> |
 
 
 
@@ -117,7 +117,7 @@ ImageFormat SR_GRAPH_NS::DepthLayer::format;
 ### variable subLayers 
 
 ```C++
-std::vector<int32_t> SR_GRAPH_NS::DepthLayer::subLayers;
+std::vector<std::vector<int32_t> > SR_GRAPH_NS::DepthLayer::subLayers;
 ```
 
 
@@ -130,7 +130,7 @@ std::vector<int32_t> SR_GRAPH_NS::DepthLayer::subLayers;
 ### variable texture 
 
 ```C++
-int32_t SR_GRAPH_NS::DepthLayer::texture;
+std::vector<int32_t> SR_GRAPH_NS::DepthLayer::texture;
 ```
 
 

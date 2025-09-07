@@ -37,9 +37,11 @@
 | ---: | :--- |
 |  int32\_t | [**FBO**](#variable-fbo)   = `SR\_ID\_INVALID`<br> |
 |  EvoVulkan::Complexes::FrameBufferFeatures | [**features**](#variable-features)  <br> |
+|  uint8\_t | [**frame**](#variable-frame)   = `0`<br> |
 |  uint32\_t | [**height**](#variable-height)   = `0`<br> |
 |  std::vector&lt; VkFormat &gt; | [**inputColorAttachments**](#variable-inputcolorattachments)  <br> |
 |  uint32\_t | [**layersCount**](#variable-layerscount)   = `0`<br> |
+|  uint8\_t | [**maxFrames**](#variable-maxframes)   = `0`<br> |
 |  std::vector&lt; int32\_t &gt; | [**oldColorAttachments**](#variable-oldcolorattachments)  <br> |
 |  [**DepthLayer**](structSR__GRAPH__NS_1_1DepthLayer.md) \* | [**pDepth**](#variable-pdepth)   = `nullptr`<br> |
 |  std::vector&lt; int32\_t &gt; \* | [**pOutputColorAttachments**](#variable-poutputcolorattachments)   = `nullptr`<br> |
@@ -120,6 +122,19 @@ EvoVulkan::Complexes::FrameBufferFeatures SR_GRAPH_NS::VulkanTools::VulkanFrameB
 
 
 
+### variable frame 
+
+```C++
+uint8_t SR_GRAPH_NS::VulkanTools::VulkanFrameBufferAllocInfo::frame;
+```
+
+
+
+
+<hr>
+
+
+
 ### variable height 
 
 ```C++
@@ -150,6 +165,19 @@ std::vector<VkFormat> SR_GRAPH_NS::VulkanTools::VulkanFrameBufferAllocInfo::inpu
 
 ```C++
 uint32_t SR_GRAPH_NS::VulkanTools::VulkanFrameBufferAllocInfo::layersCount;
+```
+
+
+
+
+<hr>
+
+
+
+### variable maxFrames 
+
+```C++
+uint8_t SR_GRAPH_NS::VulkanTools::VulkanFrameBufferAllocInfo::maxFrames;
 ```
 
 

@@ -107,6 +107,7 @@
 | struct | [**MeshDrawerUniforms**](structSR__GRAPH__NS_1_1MeshDrawerUniforms.md) <br> |
 | class | [**MeshMaterialProperty**](classSR__GRAPH__NS_1_1MeshMaterialProperty.md) <br> |
 | struct | [**MeshRegistrationInfo**](structSR__GRAPH__NS_1_1MeshRegistrationInfo.md) <br> |
+| struct | [**MeshRenderQueues**](structSR__GRAPH__NS_1_1MeshRenderQueues.md) <br> |
 | class | [**OpaqueMeshCluster**](classSR__GRAPH__NS_1_1OpaqueMeshCluster.md) <br> |
 | class | [**OpaquePass**](classSR__GRAPH__NS_1_1OpaquePass.md) <br> |
 | class | [**Overlay**](classSR__GRAPH__NS_1_1Overlay.md) <br> |
@@ -261,6 +262,11 @@
 |   | [**uint8\_t**](#variable-uint8_t)  <br> |
 
 
+## Public Static Attributes
+
+| Type | Name |
+| ---: | :--- |
+|  constexpr size\_t | [**SIZE\_OF\_MESH\_RENDER\_QUEUES\_CLASS**](#variable-size_of_mesh_render_queues_class)   = `sizeof([**MeshRenderQueues**](structSR__GRAPH__NS_1_1MeshRenderQueues.md))`<br> |
 
 
 
@@ -1350,6 +1356,21 @@ SR_GRAPH_NS::Unknown;
 
 ```C++
 SR_GRAPH_NS::uint8_t;
+```
+
+
+
+
+<hr>
+## Public Static Attributes Documentation
+
+
+
+
+### variable SIZE\_OF\_MESH\_RENDER\_QUEUES\_CLASS 
+
+```C++
+constexpr size_t SR_GRAPH_NS::SIZE_OF_MESH_RENDER_QUEUES_CLASS;
 ```
 
 

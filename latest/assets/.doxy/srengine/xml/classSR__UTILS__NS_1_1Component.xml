@@ -489,6 +489,7 @@
         <reimplementedby refid="classSR__GRAPH__UI__NS_1_1Gizmo_1aee9f6f515d7d1865a82e4df375f27e45">OnDisable</reimplementedby>
         <reimplementedby refid="classSR__PTYPES__NS_1_1Rigidbody_1a84be4e404cda0202f7aa72549f8c6b90">OnDisable</reimplementedby>
         <reimplementedby refid="classSR__SCRIPTING__NS_1_1Behaviour_1a0bc8bac603e6afa91912b0b6d31663a6">OnDisable</reimplementedby>
+        <reimplementedby refid="classSR__UTILS__NS_1_1CameraFlyMover_1a1e6fc312cb2e798cc2e37904b7150f12">OnDisable</reimplementedby>
         <reimplementedby refid="classSR__UTILS__NS_1_1DebugLogComponent_1a2ed5d03e746a2f9308867f313863ac97">OnDisable</reimplementedby>
         <briefdescription>
         </briefdescription>

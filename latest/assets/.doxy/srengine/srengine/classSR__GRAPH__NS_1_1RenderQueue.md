@@ -116,7 +116,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | ---: | :--- |
 |  SR\_NODISCARD const std::vector&lt; std::pair&lt; Layer, Queue &gt; &gt; & | [**GetQueues**](#function-getqueues) () noexcept const<br> |
 |  void | [**Init**](#function-init) () <br> |
-|  void | [**OnMeshDirty**](#function-onmeshdirty) ([**SR\_GTYPES\_NS::Mesh**](classSR__GTYPES__NS_1_1Mesh.md) \* pMesh, [**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* pShader) <br> |
+|  void | [**OnMeshDirty**](#function-onmeshdirty) ([**SR\_GTYPES\_NS::Mesh**](classSR__GTYPES__NS_1_1Mesh.md) \* pMesh, [**RenderQueueInfo**](structSR__GRAPH__NS_1_1RenderQueueInfo.md) \* pInfo) <br> |
 |  void | [**Register**](#function-register) (const [**MeshRegistrationInfo**](structSR__GRAPH__NS_1_1MeshRegistrationInfo.md) & info) <br> |
 |  bool | [**Render**](#function-render-12) () <br> |
 |   | [**RenderQueue**](#function-renderqueue) ([**RenderStrategy**](classSR__GRAPH__NS_1_1RenderStrategy.md) \* pStrategy, [**MeshDrawerPass**](classSR__GRAPH__NS_1_1MeshDrawerPass.md) \* pDrawer) <br> |
@@ -377,7 +377,7 @@ void SR_GRAPH_NS::RenderQueue::Init ()
 ```C++
 void SR_GRAPH_NS::RenderQueue::OnMeshDirty (
     SR_GTYPES_NS::Mesh * pMesh,
-    SR_GTYPES_NS::Shader * pShader
+    RenderQueueInfo * pInfo
 ) 
 ```
 
