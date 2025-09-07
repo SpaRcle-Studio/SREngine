@@ -58,11 +58,14 @@ namespace SR_CORE_NS {
                 const SR_GRAPH_NS::MeshType meshType = countBones > 0 ? SR_GRAPH_NS::MeshType::Skinned : SR_GRAPH_NS::MeshType::Static;
 
                 if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load(pRawMesh->GetResourcePath(), meshType, node->mMeshes[i])) {
+                    pMesh->SetMaterial(SR_GRAPH_NS::FileMaterial::LoadAsUnique(GetRenderScene()->GetContext()->GetSettings().defaultMaterial));
+
                     if (countBones > 0) {
-                        pMesh->SetMaterial(SR_GRAPH_NS::FileMaterial::LoadAsUnique("Engine/Materials/skinned.mat"));
-                    }
-                    else {
-                        pMesh->SetMaterial(SR_GRAPH_NS::FileMaterial::LoadAsUnique("Engine/Materials/default.mat"));
+                        if (auto&& pMaterial = pMesh->GetMaterial()) {
+                            if (auto&& pData = pMaterial->GetMaterialData()) {
+                                pData->AddShaderDefine("HAS_SKELETON");
+                            }
+                        }
                     }
 
                     processMaterial(pRawMesh, meshId, pMesh.Get(), pScene->mMeshes[meshId]->mMaterialIndex);

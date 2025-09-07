@@ -8,11 +8,24 @@ PolygonMode Fill;
 CullMode Back;
 DepthCompare LessOrEqual;
 PrimitiveTopology TriangleList;
-BlendEnabled false; 
-DepthWrite true;
+
+#ifdef HAS_ALPHA
+    #ifdef SR_DEFINE_CASCADED_SHADOW_MAP_PASS
+        DepthWrite true;
+        BlendEnabled false;
+    #else
+        DepthWrite false;
+        BlendEnabled true;
+    #endif
+#else
+    BlendEnabled false;
+    DepthWrite true;
+#endif
+
 DepthTest true;
 
 [[uniform], [public]] vec4 color = vec4(1.0, 1.0, 1.0, 1.0);
+[[uniform], [public]] float alphaThreshold = 0.0;
 [[uniform], [public]] sampler2D diffuse;
 
 #ifdef HAS_SKELETON
@@ -25,14 +38,27 @@ DepthTest true;
 #endif
 
 void fragment() {
-    vec3 diffuseColor = texture(diffuse, UV).rgb * color.rgb;
+    vec4 diffuseColorBase = texture(diffuse, UV);
+    vec4 diffuseColor = diffuseColorBase * color;
+
+    if (diffuseColorBase.a < alphaThreshold) {
+    #ifdef HAS_ALPHA
+        discard;
+    #endif
+    }
+
+#ifdef HAS_ALPHA
+    float alpha = diffuseColor.a;
+#else
+    float alpha = 1.0;
+#endif
 
 #ifdef SR_DEFINE_USE_CASCADED_SHADOW_MAP
     vec3 lightColor = vec3(1.0);
-    COLOR = CalculateShadow(diffuseColor, lightColor);
+    COLOR = vec4(CalculateShadow(diffuseColor.rgb, lightColor).rgb, alpha);
 #else
     vec3 normalShade = vec3(NORMAL.x + NORMAL.y + NORMAL.z) / 8.0;
-	COLOR = vec4(diffuseColor + normalShade, 1.0);
+	COLOR = vec4(diffuseColor.rgb + normalShade, alpha);
 #endif
 }
 

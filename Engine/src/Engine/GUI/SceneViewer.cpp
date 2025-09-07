@@ -90,7 +90,7 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::Separator();
 
         if (auto&& pFrameBuffer = GetContext()->FindFramebuffer("SceneView"_atom, pCamera.Get())) {
-            m_id = pFrameBuffer->GetColorTexture(0);
+            m_id = pFrameBuffer->GetColorTexture(0, pFrameBuffer->GetPipeline()->GetCurrentFrameIndex());
         }
         else {
             m_id = SR_ID_INVALID;

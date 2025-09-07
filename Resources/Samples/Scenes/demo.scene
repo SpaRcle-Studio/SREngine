@@ -411,7 +411,7 @@ sra format
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:-3.14662552
+									9-f:-4.59850168
 								8-v:y
 									9-f:4.28035975
 								8-v:z
@@ -443,6 +443,8 @@ sra format
 								8-o:ptr
 									9-v:entityId
 										10-i:3445474946150253867
+									9-v:lockCursor
+										10-b:true
 					5-v:name
 						6-s:GameCamera
 					5-o:transform
@@ -849,6 +851,8 @@ ddddцццゔぅヾボ
 						6-i:3114007273209151174
 					5-v:name
 						6-s:Tree
+					5-v:isEnabled
+						6-b:false
 					5-v:prefab
 						6-s:Samples/Oak/oak.prefab
 					5-o:transform
@@ -5520,7 +5524,7 @@ ddddцццゔぅヾボ
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:-4.04317141
+									9-f:-4.5463047
 								8-v:z
 									9-f:-4.39492035
 							7-o:scale
@@ -8384,6 +8388,14 @@ ddddцццゔぅヾボ
 																																																								56-f:1
 																																																							55-v:w
 																																																								56-f:1
+																																																				52-k:i
+																																																					53-o:d
+																																																						54-v:id
+																																																							55-s:alphaThreshold
+																																																						54-v:type
+																																																							55-s:Float
+																																																						54-v:value
+																																																							55-f:0
 																																																			51-a:samplers
 																																																				52-k:i
 																																																					53-o:d
@@ -13599,6 +13611,14 @@ ddddцццゔぅヾボ
 																								24-f:1
 																							23-v:w
 																								24-f:1
+																				20-k:i
+																					21-o:d
+																						22-v:id
+																							23-s:alphaThreshold
+																						22-v:type
+																							23-s:Float
+																						22-v:value
+																							23-f:0
 																			19-a:samplers
 																				20-k:i
 																					21-o:d
@@ -13682,6 +13702,14 @@ ddddцццゔぅヾボ
 																								24-f:1
 																							23-v:w
 																								24-f:1
+																				20-k:i
+																					21-o:d
+																						22-v:id
+																							23-s:alphaThreshold
+																						22-v:type
+																							23-s:Float
+																						22-v:value
+																							23-f:0
 																			19-a:samplers
 																				20-k:i
 																					21-o:d
@@ -13765,6 +13793,14 @@ ddddцццゔぅヾボ
 																								24-f:1
 																							23-v:w
 																								24-f:1
+																				20-k:i
+																					21-o:d
+																						22-v:id
+																							23-s:alphaThreshold
+																						22-v:type
+																							23-s:Float
+																						22-v:value
+																							23-f:0
 																			19-a:samplers
 																				20-k:i
 																					21-o:d
@@ -13848,6 +13884,14 @@ ddddцццゔぅヾボ
 																								24-f:1
 																							23-v:w
 																								24-f:1
+																				20-k:i
+																					21-o:d
+																						22-v:id
+																							23-s:alphaThreshold
+																						22-v:type
+																							23-s:Float
+																						22-v:value
+																							23-f:0
 																			19-a:samplers
 																				20-k:i
 																					21-o:d
@@ -13931,6 +13975,14 @@ ddddцццゔぅヾボ
 																								24-f:1
 																							23-v:w
 																								24-f:1
+																				20-k:i
+																					21-o:d
+																						22-v:id
+																							23-s:alphaThreshold
+																						22-v:type
+																							23-s:Float
+																						22-v:value
+																							23-f:0
 																			19-a:samplers
 																				20-k:i
 																					21-o:d
@@ -14014,6 +14066,14 @@ ddddцццゔぅヾボ
 																								24-f:1
 																							23-v:w
 																								24-f:1
+																				20-k:i
+																					21-o:d
+																						22-v:id
+																							23-s:alphaThreshold
+																						22-v:type
+																							23-s:Float
+																						22-v:value
+																							23-f:0
 																			19-a:samplers
 																				20-k:i
 																					21-o:d
@@ -14097,6 +14157,14 @@ ddddцццゔぅヾボ
 																								24-f:1
 																							23-v:w
 																								24-f:1
+																				20-k:i
+																					21-o:d
+																						22-v:id
+																							23-s:alphaThreshold
+																						22-v:type
+																							23-s:Float
+																						22-v:value
+																							23-f:0
 																			19-a:samplers
 																				20-k:i
 																					21-o:d
@@ -14180,6 +14248,14 @@ ddddцццゔぅヾボ
 																								24-f:1
 																							23-v:w
 																								24-f:1
+																				20-k:i
+																					21-o:d
+																						22-v:id
+																							23-s:alphaThreshold
+																						22-v:type
+																							23-s:Float
+																						22-v:value
+																							23-f:0
 																			19-a:samplers
 																				20-k:i
 																					21-o:d
@@ -14263,6 +14339,14 @@ ddddцццゔぅヾボ
 																								24-f:1
 																							23-v:w
 																								24-f:1
+																				20-k:i
+																					21-o:d
+																						22-v:id
+																							23-s:alphaThreshold
+																						22-v:type
+																							23-s:Float
+																						22-v:value
+																							23-f:0
 																			19-a:samplers
 																				20-k:i
 																					21-o:d
@@ -14725,3 +14809,25 @@ ddddцццゔぅヾボ
 									9-f:8.54655743
 								8-v:z
 									9-f:8.28602886
+		2-k:i
+			3-o:d
+				4-v:type
+					5-s:GameObject
+				4-o:ptr
+					5-v:entityId
+						6-i:3070739225061336587
+					5-v:name
+						6-s:Tsumugi
+					5-v:prefab
+						6-s:Samples/Tsumugi/Tsumugi.prefab
+					5-o:transform
+						6-v:type
+							7-s:Transform3D
+						6-o:ptr
+							7-o:translation
+								8-v:x
+									9-f:-0.166426033
+								8-v:y
+									9-f:-2.38418579e-07
+								8-v:z
+									9-f:-4.2475605

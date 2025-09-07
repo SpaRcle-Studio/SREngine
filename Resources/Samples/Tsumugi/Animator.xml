@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Animator>
+    <Node Type="StateMachine">
+        <State Type="Clip" Skeleton="Samples/Tsumugi/Tsumugi.fbx" Path="Samples/Tsumugi/Tsumugi.fbx" Name="Tsumugi Katashina_arm|Walk" ResetOnPlay="true"/>
+        <Transition From="0" To="1"/>
+    </Node>
+    <Connection FromNode="1" FromPin="0" ToNode="0" ToPin="0"/>
+</Animator>

@@ -2558,6 +2558,14 @@ sra format
 																					21-f:1
 																				20-v:w
 																					21-f:1
+																	17-k:i
+																		18-o:d
+																			19-v:id
+																				20-s:alphaThreshold
+																			19-v:type
+																				20-s:Float
+																			19-v:value
+																				20-f:0
 																16-a:samplers
 																	17-k:i
 																		18-o:d
@@ -2566,7 +2574,7 @@ sra format
 																			19-v:type
 																				20-s:Sampler2D
 																			19-v:value
-																				20-s:Engine/Textures/default_improved.png
+																				20-s:Samples/Liza/body_diffuse.png
 										10-o:skeleton
 											11-v:entityId
 												12-i:2482526730041972321
@@ -2604,6 +2612,11 @@ sra format
 														14-a:shaderDefines
 															15-k:item
 																16-v:first
+																	17-s:HAS_ALPHA
+																16-v:second
+																	17-s:
+															15-k:item
+																16-v:first
 																	17-s:HAS_SKELETON
 																16-v:second
 																	17-s:
@@ -2626,7 +2639,15 @@ sra format
 																				20-v:z
 																					21-f:1
 																				20-v:w
-																					21-f:1
+																					21-f:4.77400017
+																	17-k:i
+																		18-o:d
+																			19-v:id
+																				20-s:alphaThreshold
+																			19-v:type
+																				20-s:Float
+																			19-v:value
+																				20-f:0.158999994
 																16-a:samplers
 																	17-k:i
 																		18-o:d
@@ -2635,7 +2656,7 @@ sra format
 																			19-v:type
 																				20-s:Sampler2D
 																			19-v:value
-																				20-s:Engine/Textures/default_improved.png
+																				20-s:Samples/Liza/hair_diffuse.png
 										10-o:skeleton
 											11-v:entityId
 												12-i:2482526730041972321
@@ -2645,6 +2666,8 @@ sra format
 											11-i:1
 						6-v:name
 							7-s:Hair
+						6-v:layer
+							7-s:Transparent
 						6-o:transform
 							7-v:type
 								8-s:Transform3D
@@ -2698,6 +2721,14 @@ sra format
 																					21-f:1
 																				20-v:w
 																					21-f:1
+																	17-k:i
+																		18-o:d
+																			19-v:id
+																				20-s:alphaThreshold
+																			19-v:type
+																				20-s:Float
+																			19-v:value
+																				20-f:0
 																16-a:samplers
 																	17-k:i
 																		18-o:d
@@ -2706,7 +2737,7 @@ sra format
 																			19-v:type
 																				20-s:Sampler2D
 																			19-v:value
-																				20-s:Engine/Textures/default_improved.png
+																				20-s:Samples/Liza/body_diffuse.png
 										10-o:skeleton
 											11-v:entityId
 												12-i:2482526730041972321
@@ -2746,6 +2777,11 @@ sra format
 														14-a:shaderDefines
 															15-k:item
 																16-v:first
+																	17-s:HAS_ALPHA
+																16-v:second
+																	17-s:
+															15-k:item
+																16-v:first
 																	17-s:HAS_SKELETON
 																16-v:second
 																	17-s:
@@ -2768,7 +2804,15 @@ sra format
 																				20-v:z
 																					21-f:1
 																				20-v:w
-																					21-f:1
+																					21-f:61.5709991
+																	17-k:i
+																		18-o:d
+																			19-v:id
+																				20-s:alphaThreshold
+																			19-v:type
+																				20-s:Float
+																			19-v:value
+																				20-f:0
 																16-a:samplers
 																	17-k:i
 																		18-o:d
@@ -2777,7 +2821,7 @@ sra format
 																			19-v:type
 																				20-s:Sampler2D
 																			19-v:value
-																				20-s:Engine/Textures/default_improved.png
+																				20-s:Samples/Liza/body_diffuse.png
 										10-o:skeleton
 											11-v:entityId
 												12-i:2482526730041972321
@@ -2787,6 +2831,8 @@ sra format
 											11-i:3
 						6-v:name
 							7-s:Eyelashes
+						6-v:layer
+							7-s:Transparent
 						6-o:transform
 							7-v:type
 								8-s:Transform3D
@@ -2840,6 +2886,14 @@ sra format
 																					21-f:1
 																				20-v:w
 																					21-f:1
+																	17-k:i
+																		18-o:d
+																			19-v:id
+																				20-s:alphaThreshold
+																			19-v:type
+																				20-s:Float
+																			19-v:value
+																				20-f:0
 																16-a:samplers
 																	17-k:i
 																		18-o:d
@@ -2848,7 +2902,7 @@ sra format
 																			19-v:type
 																				20-s:Sampler2D
 																			19-v:value
-																				20-s:Engine/Textures/default_improved.png
+																				20-s:Samples/Liza/glove_diffuse.png
 										10-o:skeleton
 											11-v:entityId
 												12-i:2482526730041972321
@@ -2911,6 +2965,14 @@ sra format
 																					21-f:1
 																				20-v:w
 																					21-f:1
+																	17-k:i
+																		18-o:d
+																			19-v:id
+																				20-s:alphaThreshold
+																			19-v:type
+																				20-s:Float
+																			19-v:value
+																				20-f:0
 																16-a:samplers
 																	17-k:i
 																		18-o:d
@@ -2919,7 +2981,7 @@ sra format
 																			19-v:type
 																				20-s:Sampler2D
 																			19-v:value
-																				20-s:Engine/Textures/default_improved.png
+																				20-s:Samples/Liza/shoes_diffuse.png
 										10-o:skeleton
 											11-v:entityId
 												12-i:2482526730041972321
@@ -2982,6 +3044,14 @@ sra format
 																					21-f:1
 																				20-v:w
 																					21-f:1
+																	17-k:i
+																		18-o:d
+																			19-v:id
+																				20-s:alphaThreshold
+																			19-v:type
+																				20-s:Float
+																			19-v:value
+																				20-f:0
 																16-a:samplers
 																	17-k:i
 																		18-o:d
@@ -2990,7 +3060,7 @@ sra format
 																			19-v:type
 																				20-s:Sampler2D
 																			19-v:value
-																				20-s:Engine/Textures/default_improved.png
+																				20-s:Samples/Liza/bottom_diffuse.png
 										10-o:skeleton
 											11-v:entityId
 												12-i:2482526730041972321
@@ -3053,6 +3123,14 @@ sra format
 																					21-f:1
 																				20-v:w
 																					21-f:1
+																	17-k:i
+																		18-o:d
+																			19-v:id
+																				20-s:alphaThreshold
+																			19-v:type
+																				20-s:Float
+																			19-v:value
+																				20-f:0
 																16-a:samplers
 																	17-k:i
 																		18-o:d
@@ -3061,7 +3139,7 @@ sra format
 																			19-v:type
 																				20-s:Sampler2D
 																			19-v:value
-																				20-s:Engine/Textures/default_improved.png
+																				20-s:Samples/Liza/top_diffuse.png
 										10-o:skeleton
 											11-v:entityId
 												12-i:2482526730041972321

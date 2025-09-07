@@ -60,6 +60,7 @@ namespace SR_CORE_GUI_NS {
 
         if (SR_GRAPH_GUI_NS::Immediate::Combo("Multi-sampling", &currentItem, SR_SAMPLE_COUNT_NAME_LIST)) {
             pPipeline->SetSampleCount(SR_SAMPLE_COUNT_VALUE_LIST.at(currentItem));
+            SR_UTILS_NS::StoreUtils::User::SetInt("MultiSampling", SR_SAMPLE_COUNT_VALUE_LIST.at(currentItem));
         }
 
         bool optimizedRenderUpdate = GetContext()->IsOptimizedRenderUpdateEnabled();
