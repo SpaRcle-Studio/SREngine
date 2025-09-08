@@ -13588,6 +13588,11 @@ ddddцццゔぅヾボ
 																	17-a:shaderDefines
 																		18-k:item
 																			19-v:first
+																				20-s:HAS_NORMAL
+																			19-v:second
+																				20-s:
+																		18-k:item
+																			19-v:first
 																				20-s:HAS_SKELETON
 																			19-v:second
 																				20-s:
@@ -13627,7 +13632,15 @@ ddddцццゔぅヾボ
 																						22-v:type
 																							23-s:Sampler2D
 																						22-v:value
-																							23-s:Engine/Textures/default_improved.png
+																							23-s:Samples/Raptoid/Machi_Diffuse.jpeg
+																				20-k:i
+																					21-o:d
+																						22-v:id
+																							23-s:normal
+																						22-v:type
+																							23-s:Sampler2D
+																						22-v:value
+																							23-s:Samples/Raptoid/Machi_Normal.jpeg
 													13-o:skeleton
 														14-v:entityId
 															15-i:2991360132295831570

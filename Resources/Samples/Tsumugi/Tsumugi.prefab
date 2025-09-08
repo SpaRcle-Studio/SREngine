@@ -7070,6 +7070,11 @@ sra format
 																		18-a:shaderDefines
 																			19-k:item
 																				20-v:first
+																					21-s:HAS_NORMAL
+																				20-v:second
+																					21-s:
+																			19-k:item
+																				20-v:first
 																					21-s:HAS_SKELETON
 																				20-v:second
 																					21-s:
@@ -7110,6 +7115,14 @@ sra format
 																								24-s:Sampler2D
 																							23-v:value
 																								24-s:Samples/Tsumugi/Diffuse/cloth.png
+																					21-k:i
+																						22-o:d
+																							23-v:id
+																								24-s:normal
+																							23-v:type
+																								24-s:Sampler2D
+																							23-v:value
+																								24-s:Samples/Tsumugi/Normal/h_yun_a.gmpk_1.png
 														14-o:skeleton
 															15-v:entityId
 																16-i:3895190316009516445
