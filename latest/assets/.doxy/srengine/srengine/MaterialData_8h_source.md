@@ -117,6 +117,7 @@ namespace SR_GRAPH_NS {
 
     private:
         void OnShaderChanged();
+        void OnShaderDefinesChanged();
 
     private:
         std::map<SR_GTYPES_NS::Shader::Ptr, std::pair<SR_UTILS_NS::Subscription, uint32_t>> m_shaderSubscriptions;

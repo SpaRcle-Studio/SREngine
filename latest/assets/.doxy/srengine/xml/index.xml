@@ -4457,6 +4457,7 @@
     <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1afd1e75f560a145805c440b309091e0c8" kind="function"><name>GenerateVariable</name></member>
     <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a09182f2f2a2133d11f3e4284d3cf63c5" kind="function"><name>GenerateTab</name></member>
     <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a072d22dd9e2491c6f48c465b365d9386" kind="function"><name>VertexAttributeToString</name></member>
+    <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ac33746d03ec3c9992a9659677a9fe8ee" kind="function"><name>GetLocationMultiplier</name></member>
     <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a92cc65e15025d1b448c68cba5d9172ce" kind="function"><name>GenerateSSBOBlock</name></member>
     <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ae185b73016d5e0c0fb5b74ddb961dcd1" kind="function"><name>GenerateStages</name></member>
   </compound>
@@ -6038,6 +6039,7 @@
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1a8d3e86291d081bf462d8352701065db2" kind="function"><name>OnPropertyChanged</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1af8fb36fdd6a7ac2d29d912385fe50167" kind="function"><name>AddShaderDefine</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1aa0fefda2989d631eaf76d2eafdf05621" kind="function"><name>OnShaderChanged</name></member>
+    <member refid="classSR__GRAPH__NS_1_1MaterialData_1a150de4d64f89b9af006854051d06ca58" kind="function"><name>OnShaderDefinesChanged</name></member>
   </compound>
   <compound refid="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer" kind="class"><name>SR_CORE_GUI_NS::MaterialDataPropertyDrawer</name>
     <member refid="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer_1ac0cab5d5b242c661d74f52d0f3fac727" kind="typedef"><name>Super</name></member>
@@ -11517,6 +11519,7 @@
     <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1ad39c08d850767554cbb6c947d8a6d8d7" kind="variable"><name>forceUsed</name></member>
     <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1a7bed6d4356b35689b755673c5a71d3f0" kind="function"><name>IsVariableUsedInEntryPointsExt</name></member>
     <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1aa9c218ff6fff75f58ff3f8f0c6aff253" kind="function"><name>IsVariableUsedInEntryPoints</name></member>
+    <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1ad6242339a47d91b7109256888fd11d4d" kind="function"><name>IsVariableUsedInEntryPoint</name></member>
     <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1a880585c2faa0f37d2487689c47ab5875" kind="function"><name>IsVariableUsed</name></member>
     <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1a8201b130301ef473cdb0f8e50fb2d6f6" kind="function"><name>IsFunctionUsed</name></member>
     <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1a7dbf33f9ec1a12d54e7a0c602b1e14aa" kind="function"><name>IsStructUsed</name></member>

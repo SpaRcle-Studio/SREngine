@@ -68,6 +68,7 @@
 |  SR\_NODISCARD bool | [**IsFunctionUsed**](#function-isfunctionused) (const std::string & name) const<br> |
 |  SR\_NODISCARD bool | [**IsStructUsed**](#function-isstructused) (const std::string & name) const<br> |
 |  SR\_NODISCARD bool | [**IsVariableUsed**](#function-isvariableused) (const std::string & name) const<br> |
+|  SR\_NODISCARD bool | [**IsVariableUsedInEntryPoint**](#function-isvariableusedinentrypoint) (SR\_GRAPH\_NS::ShaderStage stage, const std::string & name) const<br> |
 |  SR\_NODISCARD bool | [**IsVariableUsedInEntryPoints**](#function-isvariableusedinentrypoints) (const std::string & name) const<br> |
 |  SR\_NODISCARD std::set&lt; SR\_GRAPH\_NS::ShaderStage &gt; | [**IsVariableUsedInEntryPointsExt**](#function-isvariableusedinentrypointsext) (const std::string & name) const<br> |
 |  SR\_NODISCARD std::string | [**ToString**](#function-tostring) (int32\_t deep) const<br> |
@@ -224,6 +225,22 @@ SR_NODISCARD bool SR_SRSL_NS::SRSLUseStack::IsStructUsed (
 
 ```C++
 SR_NODISCARD bool SR_SRSL_NS::SRSLUseStack::IsVariableUsed (
+    const std::string & name
+) const
+```
+
+
+
+
+<hr>
+
+
+
+### function IsVariableUsedInEntryPoint 
+
+```C++
+SR_NODISCARD bool SR_SRSL_NS::SRSLUseStack::IsVariableUsedInEntryPoint (
+    SR_GRAPH_NS::ShaderStage stage,
     const std::string & name
 ) const
 ```

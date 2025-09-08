@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="65" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" bodystart="65" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="66" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" bodystart="66" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -605,6 +605,24 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="60" column="34"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ac33746d03ec3c9992a9659677a9fe8ee" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD uint32_t</type>
+        <definition>SR_NODISCARD uint32_t SR_SRSL_NS::GLSLCodeGenerator::GetLocationMultiplier</definition>
+        <argsstring>(const std::string &amp;type) const</argsstring>
+        <name>GetLocationMultiplier</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GetLocationMultiplier</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="61" column="31"/>
+      </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a92cc65e15025d1b448c68cba5d9172ce" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void SR_SRSL_NS::GLSLCodeGenerator::GenerateSSBOBlock</definition>
@@ -633,7 +651,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="62" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="63" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -728,7 +746,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="12" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" bodystart="12" bodyend="67"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="12" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" bodystart="12" bodyend="68"/>
     <listofallmembers>
       <member refid="classSR__SRSL__NS_1_1ISRSLCodeGenerator_1aa93fd305bdbd46c3acf2c2109f58c27b" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>Clear</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a29df1fb30e5193314521751c849d4015" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>DestroySingleton</name></member>
@@ -760,6 +778,7 @@
       <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1afd1e75f560a145805c440b309091e0c8" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateVariable</name></member>
       <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ad0922e31901a83dada538d131562d398" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateVertexStage</name></member>
       <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1aa122658a3af1b6a9af5ddf718c852238" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateWhileStatement</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ac33746d03ec3c9992a9659677a9fe8ee" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GetLocationMultiplier</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a6f131e2fa1b2641f7e9ea8662ba8da53" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GetMutex</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GetSingletonName</name></member>
       <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1aa07d1886ef32a61f048750c6de356455" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GetVersion</name></member>

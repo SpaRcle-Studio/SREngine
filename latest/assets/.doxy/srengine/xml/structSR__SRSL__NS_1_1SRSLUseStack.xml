@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="30" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" bodystart="30" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="31" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" bodystart="31" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__SRSL__NS_1_1SRSLUseStack_1a43d6d37eae8d802f5d45975214d74b5d" prot="public" static="no" mutable="no">
         <type>std::set&lt; std::string &gt;</type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="31" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" bodystart="31" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="32" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__SRSL__NS_1_1SRSLUseStack_1ad39c08d850767554cbb6c947d8a6d8d7" prot="public" static="no" mutable="no">
         <type>std::set&lt; std::string &gt;</type>
@@ -59,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="33" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="34" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" bodystart="34" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -99,6 +99,28 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="19" column="27"/>
       </memberdef>
+      <memberdef kind="function" id="structSR__SRSL__NS_1_1SRSLUseStack_1ad6242339a47d91b7109256888fd11d4d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_SRSL_NS::SRSLUseStack::IsVariableUsedInEntryPoint</definition>
+        <argsstring>(SR_GRAPH_NS::ShaderStage stage, const std::string &amp;name) const</argsstring>
+        <name>IsVariableUsedInEntryPoint</name>
+        <qualifiedname>SR_SRSL_NS::SRSLUseStack::IsVariableUsedInEntryPoint</qualifiedname>
+        <param>
+          <type>SR_GRAPH_NS::ShaderStage</type>
+          <declname>stage</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="20" column="27"/>
+      </memberdef>
       <memberdef kind="function" id="structSR__SRSL__NS_1_1SRSLUseStack_1a880585c2faa0f37d2487689c47ab5875" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
         <definition>SR_NODISCARD bool SR_SRSL_NS::SRSLUseStack::IsVariableUsed</definition>
@@ -115,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="20" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="21" column="27"/>
       </memberdef>
       <memberdef kind="function" id="structSR__SRSL__NS_1_1SRSLUseStack_1a8201b130301ef473cdb0f8e50fb2d6f6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -133,7 +155,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="21" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="22" column="27"/>
       </memberdef>
       <memberdef kind="function" id="structSR__SRSL__NS_1_1SRSLUseStack_1a7dbf33f9ec1a12d54e7a0c602b1e14aa" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -151,7 +173,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="22" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="23" column="27"/>
       </memberdef>
       <memberdef kind="function" id="structSR__SRSL__NS_1_1SRSLUseStack_1a00b3a1160d4395032c036a33644b9067" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SRSLUseStack::Ptr</type>
@@ -169,7 +191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="24" column="40"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="25" column="40"/>
       </memberdef>
       <memberdef kind="function" id="structSR__SRSL__NS_1_1SRSLUseStack_1aabc324b3f9f7baec5885423f1d699586" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -187,7 +209,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="26" column="34"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="27" column="34"/>
       </memberdef>
       <memberdef kind="function" id="structSR__SRSL__NS_1_1SRSLUseStack_1a61de48b6cf15ec3a8f476d9b2f35fdd6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -205,14 +227,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="28" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="29" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="15" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" bodystart="15" bodyend="34"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="15" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" bodystart="15" bodyend="35"/>
     <listofallmembers>
       <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1a61de48b6cf15ec3a8f476d9b2f35fdd6" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLUseStack</scope><name>Concat</name></member>
       <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1a00b3a1160d4395032c036a33644b9067" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLUseStack</scope><name>FindFunction</name></member>
@@ -221,6 +243,7 @@
       <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1a8201b130301ef473cdb0f8e50fb2d6f6" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLUseStack</scope><name>IsFunctionUsed</name></member>
       <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1a7dbf33f9ec1a12d54e7a0c602b1e14aa" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLUseStack</scope><name>IsStructUsed</name></member>
       <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1a880585c2faa0f37d2487689c47ab5875" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLUseStack</scope><name>IsVariableUsed</name></member>
+      <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1ad6242339a47d91b7109256888fd11d4d" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLUseStack</scope><name>IsVariableUsedInEntryPoint</name></member>
       <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1aa9c218ff6fff75f58ff3f8f0c6aff253" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLUseStack</scope><name>IsVariableUsedInEntryPoints</name></member>
       <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1a7bed6d4356b35689b755673c5a71d3f0" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLUseStack</scope><name>IsVariableUsedInEntryPointsExt</name></member>
       <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1a769bafd89bd9c0eca17555f51084a454" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLUseStack</scope><name>Ptr</name></member>

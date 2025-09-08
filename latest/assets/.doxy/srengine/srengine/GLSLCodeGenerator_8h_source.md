@@ -68,6 +68,7 @@ namespace SR_SRSL_NS {
         SR_NODISCARD std::string GenerateTab(int32_t deep) const;
 
         SR_NODISCARD std::string VertexAttributeToString(Vertices::Attribute attribute) const;
+        SR_NODISCARD uint32_t GetLocationMultiplier(const std::string& type) const;
 
         void GenerateSSBOBlock(std::string& code, SR_UTILS_NS::StringAtom name, const SRSLUniformBlock& uniformBlock, const SRSLUseStack::Ptr& pFunction) const;
 

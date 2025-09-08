@@ -99,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="119" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="119" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="120" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="120" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MaterialData_1a6ab1075a88352aede27169f0ef900e8f" prot="private" static="no" mutable="no">
         <type>std::map&lt; SR_GTYPES_NS::Texture::Ptr, std::pair&lt; <ref refid="classSR__UTILS__NS_1_1Subscription" kindref="compound">SR_UTILS_NS::Subscription</ref>, uint32_t &gt; &gt;</type>
@@ -113,7 +113,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="120" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="120" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="121" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="121" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MaterialData_1a192cf46278e5f9a7d6261f1d04f65370" prot="private" static="no" mutable="no">
         <type><ref refid="structSR__GRAPH__NS_1_1MaterialShaderData" kindref="compound">MaterialShaderData</ref></type>
@@ -127,7 +127,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="121" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="121" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="122" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="122" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MaterialData_1ab4dd6f542dc71036d068f83a78afb6bb" prot="private" static="no" mutable="no">
         <type>std::map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>, std::string &gt;</type>
@@ -141,7 +141,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="124" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="124" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="125" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="125" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -520,6 +520,20 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="116" column="14"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1MaterialData_1a150de4d64f89b9af006854051d06ca58" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::MaterialData::OnShaderDefinesChanged</definition>
+        <argsstring>()</argsstring>
+        <name>OnShaderDefinesChanged</name>
+        <qualifiedname>SR_GRAPH_NS::MaterialData::OnShaderDefinesChanged</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="117" column="14"/>
+      </memberdef>
     </sectiondef>
     <briefdescription>
 <para>@inspector(MaterialDataPropertyDrawer) </para>
@@ -626,7 +640,7 @@
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="74" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="78" bodyend="126"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="74" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="78" bodyend="127"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MaterialData</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__GRAPH__NS_1_1MaterialData_1af8fb36fdd6a7ac2d29d912385fe50167" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MaterialData</scope><name>AddShaderDefine</name></member>
@@ -681,6 +695,7 @@
       <member refid="classSR__GRAPH__NS_1_1MaterialData_1a8d3e86291d081bf462d8352701065db2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MaterialData</scope><name>OnPropertyChanged</name></member>
       <member refid="classSR__GRAPH__NS_1_1MaterialData_1a2639109fe39cd4685fd787ae709cab1b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MaterialData</scope><name>OnSamplerChanged</name></member>
       <member refid="classSR__GRAPH__NS_1_1MaterialData_1aa0fefda2989d631eaf76d2eafdf05621" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MaterialData</scope><name>OnShaderChanged</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MaterialData_1a150de4d64f89b9af006854051d06ca58" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MaterialData</scope><name>OnShaderDefinesChanged</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MaterialData</scope><name>operator bool</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MaterialData</scope><name>operator!=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MaterialData</scope><name>operator*</name></member>
