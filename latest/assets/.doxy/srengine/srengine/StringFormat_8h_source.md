@@ -26,6 +26,10 @@
 namespace SR_UTILS_NS {
 
     static SR_INLINE double_t ParseDouble(std::string_view sv) {
+    #if defined(__GNUC__) && !defined(__clang__)
+        // GCC не умеет from_chars для double
+        return std::stod(std::string(sv));
+    #else
         double_t result = 0.0;
         auto [ptr, ec] = std::from_chars(sv.data(), sv.data() + sv.size(), result);
         if (ec != std::errc()) {
@@ -33,9 +37,14 @@ namespace SR_UTILS_NS {
             return 0.0;
         }
         return result;
+    #endif
     }
 
     static SR_INLINE float_t ParseFloat(std::string_view sv) {
+    #if defined(__GNUC__) && !defined(__clang__)
+        // GCC не умеет from_chars для float
+        return std::stof(std::string(sv));
+    #else
         float_t result = 0.0f;
         auto [ptr, ec] = std::from_chars(sv.data(), sv.data() + sv.size(), result);
         if (ec != std::errc()) {
@@ -43,6 +52,7 @@ namespace SR_UTILS_NS {
             return 0.0f;
         }
         return result;
+    #endif
     }
 
     SR_NODISCARD SR_INLINE_STATIC uint32_t FastSToU(const char* str) {
