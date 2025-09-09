@@ -411,7 +411,7 @@ sra format
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:-4.59850168
+									9-f:3.4821372
 								8-v:y
 									9-f:4.28035975
 								8-v:z
@@ -5524,9 +5524,11 @@ ddddцццゔぅヾボ
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:-4.5463047
+									9-f:-4.03578043
+								8-v:y
+									9-f:4.76837158e-07
 								8-v:z
-									9-f:-4.39492035
+									9-f:-4.44040489
 							7-o:scale
 								8-v:x
 									9-f:3
@@ -8388,14 +8390,6 @@ ddddцццゔぅヾボ
 																																																								56-f:1
 																																																							55-v:w
 																																																								56-f:1
-																																																				52-k:i
-																																																					53-o:d
-																																																						54-v:id
-																																																							55-s:alphaThreshold
-																																																						54-v:type
-																																																							55-s:Float
-																																																						54-v:value
-																																																							55-f:0
 																																																			51-a:samplers
 																																																				52-k:i
 																																																					53-o:d
@@ -13616,14 +13610,6 @@ ddddцццゔぅヾボ
 																								24-f:1
 																							23-v:w
 																								24-f:1
-																				20-k:i
-																					21-o:d
-																						22-v:id
-																							23-s:alphaThreshold
-																						22-v:type
-																							23-s:Float
-																						22-v:value
-																							23-f:0
 																			19-a:samplers
 																				20-k:i
 																					21-o:d
@@ -13715,14 +13701,6 @@ ddddцццゔぅヾボ
 																								24-f:1
 																							23-v:w
 																								24-f:1
-																				20-k:i
-																					21-o:d
-																						22-v:id
-																							23-s:alphaThreshold
-																						22-v:type
-																							23-s:Float
-																						22-v:value
-																							23-f:0
 																			19-a:samplers
 																				20-k:i
 																					21-o:d
@@ -13806,14 +13784,6 @@ ddddцццゔぅヾボ
 																								24-f:1
 																							23-v:w
 																								24-f:1
-																				20-k:i
-																					21-o:d
-																						22-v:id
-																							23-s:alphaThreshold
-																						22-v:type
-																							23-s:Float
-																						22-v:value
-																							23-f:0
 																			19-a:samplers
 																				20-k:i
 																					21-o:d
@@ -13897,14 +13867,6 @@ ddddцццゔぅヾボ
 																								24-f:1
 																							23-v:w
 																								24-f:1
-																				20-k:i
-																					21-o:d
-																						22-v:id
-																							23-s:alphaThreshold
-																						22-v:type
-																							23-s:Float
-																						22-v:value
-																							23-f:0
 																			19-a:samplers
 																				20-k:i
 																					21-o:d
@@ -13988,14 +13950,6 @@ ddddцццゔぅヾボ
 																								24-f:1
 																							23-v:w
 																								24-f:1
-																				20-k:i
-																					21-o:d
-																						22-v:id
-																							23-s:alphaThreshold
-																						22-v:type
-																							23-s:Float
-																						22-v:value
-																							23-f:0
 																			19-a:samplers
 																				20-k:i
 																					21-o:d
@@ -14079,14 +14033,6 @@ ddddцццゔぅヾボ
 																								24-f:1
 																							23-v:w
 																								24-f:1
-																				20-k:i
-																					21-o:d
-																						22-v:id
-																							23-s:alphaThreshold
-																						22-v:type
-																							23-s:Float
-																						22-v:value
-																							23-f:0
 																			19-a:samplers
 																				20-k:i
 																					21-o:d
@@ -14170,14 +14116,6 @@ ddddцццゔぅヾボ
 																								24-f:1
 																							23-v:w
 																								24-f:1
-																				20-k:i
-																					21-o:d
-																						22-v:id
-																							23-s:alphaThreshold
-																						22-v:type
-																							23-s:Float
-																						22-v:value
-																							23-f:0
 																			19-a:samplers
 																				20-k:i
 																					21-o:d
@@ -14261,14 +14199,6 @@ ddddцццゔぅヾボ
 																								24-f:1
 																							23-v:w
 																								24-f:1
-																				20-k:i
-																					21-o:d
-																						22-v:id
-																							23-s:alphaThreshold
-																						22-v:type
-																							23-s:Float
-																						22-v:value
-																							23-f:0
 																			19-a:samplers
 																				20-k:i
 																					21-o:d
@@ -14352,14 +14282,6 @@ ddddцццゔぅヾボ
 																								24-f:1
 																							23-v:w
 																								24-f:1
-																				20-k:i
-																					21-o:d
-																						22-v:id
-																							23-s:alphaThreshold
-																						22-v:type
-																							23-s:Float
-																						22-v:value
-																							23-f:0
 																			19-a:samplers
 																				20-k:i
 																					21-o:d
@@ -14839,8 +14761,8 @@ ddddцццゔぅヾボ
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:-0.166426033
+									9-f:1.51868546
 								8-v:y
-									9-f:-2.38418579e-07
+									9-f:-2.24400651e-07
 								8-v:z
-									9-f:-4.2475605
+									9-f:-5.01955795

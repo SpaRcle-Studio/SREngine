@@ -28,24 +28,6 @@ sra format
 											11-k:i
 												12-o:d
 													13-v:type
-														14-s:DebugPass
-													13-o:ptr
-														14-a:shaders
-															15-k:item
-																16-v:first
-																	17-s:mesh
-																16-o:second
-																	17-v:shaderPath
-																		18-s:Engine/Shaders/Gizmo/wire-mesh.srsl
-															15-k:item
-																16-v:first
-																	17-s:line
-																16-o:second
-																	17-v:shaderPath
-																		18-s:Engine/Shaders/line.srsl
-											11-k:i
-												12-o:d
-													13-v:type
 														14-s:MeshDrawerPass
 													13-o:ptr
 														14-a:allowedLayers
@@ -126,6 +108,24 @@ sra format
 																		18-v:d
 																			19-s:DepthCascades
 															15-o:material
+											11-k:i
+												12-o:d
+													13-v:type
+														14-s:DebugPass
+													13-o:ptr
+														14-a:shaders
+															15-k:item
+																16-v:first
+																	17-s:mesh
+																16-o:second
+																	17-v:shaderPath
+																		18-s:Engine/Shaders/Gizmo/wire-mesh.srsl
+															15-k:item
+																16-v:first
+																	17-s:line
+																16-o:second
+																	17-v:shaderPath
+																		18-s:Engine/Shaders/line.srsl
 											11-k:i
 												12-o:d
 													13-v:type

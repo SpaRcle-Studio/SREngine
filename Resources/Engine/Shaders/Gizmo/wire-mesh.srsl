@@ -4,7 +4,7 @@ PolygonMode Line;
 CullMode Back;
 DepthCompare LessOrEqual;
 PrimitiveTopology LineList;
-BlendEnabled false;
+BlendEnabled true;
 DepthWrite true;
 DepthTest true;
 

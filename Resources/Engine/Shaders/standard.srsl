@@ -12,9 +12,7 @@ PrimitiveTopology TriangleList;
 DepthWrite true;
 
 #ifdef HAS_ALPHA
-    #ifdef SR_DEFINE_CASCADED_SHADOW_MAP_PASS
-        BlendEnabled false;
-    #else
+    #ifndef SR_DEFINE_CASCADED_SHADOW_MAP_PASS
         BlendEnabled true;
     #endif
 #else
@@ -42,13 +40,10 @@ void fragment() {
     vec4 diffuseColorBase = texture(diffuse, UV);
     vec4 diffuseColor = diffuseColorBase * color;
 
-    if (diffuseColorBase.a < alphaThreshold) {
-    #ifdef HAS_ALPHA
-        discard;
-    #endif
-    }
-
 #ifdef HAS_ALPHA
+    if (diffuseColorBase.a < alphaThreshold) {
+        discard;
+    }
     float alpha = diffuseColor.a;
 #else
     float alpha = 1.0;

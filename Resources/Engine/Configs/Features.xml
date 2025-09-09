@@ -1,66 +1,67 @@
 <?xml version="1.0"?>
 <Features>
-   <Common>
-       <ResourceUsePointStackTraceProfiling Value="false"/>
+    <Common>
+        <ResourceUsePointStackTraceProfiling Value="false"/>
 
-       <EvoCompiler Value="true"/>
-       <CompilePDB Value="true"/>
-       <ScriptMultiInstances Value="false"/>
-       <ShowScriptsCodegenResult Value="false"/>
+        <EvoCompiler Value="true"/>
+        <CompilePDB Value="true"/>
+        <ScriptMultiInstances Value="false"/>
+        <ShowScriptsCodegenResult Value="false"/>
 
-       <ColorBufferPick Value="true"/>
+        <ColorBufferPick Value="true"/>
 
-       <CrashHandler Value="false"/>
-       <SegmentationHandler Value="false"/>
+        <CrashHandler Value="false"/>
+        <SegmentationHandler Value="false"/>
 
-       <Gizmo Value="true"/>
-       <VulkanTracy Value="false"/>
-       <FileWatching Value="true"/>
-       <VulkanValidationErrorAsAssert Value="true"/>
+        <Gizmo Value="true"/>
+        <VulkanTracy Value="false"/>
+        <FileWatching Value="true"/>
+        <VulkanValidationErrorAsAssert Value="true"/>
 
-       <ChunkSystem Value="true"/>
+        <ChunkSystem Value="true"/>
 
-       <OptimizedRenderUpdate Value="true"/>
+        <OptimizedRenderUpdate Value="true"/>
 
-       <ImGUI Value="true"/>
-       <Editor Value="true"/>
-       <EditorOnStartup Value="true"/>
-       <EditorCamera Value="true"/>
-       <EditorWidgetsDocking Value="true"/>
-       <InputIgnoreNonFocusedWidgets Value="true"/>
-       <UpdateNonHoveredSceneViewer Value="false"/>
+        <ImGUI Value="true"/>
+        <Editor Value="true"/>
+        <EditorOnStartup Value="true"/>
+        <EditorCamera Value="true"/>
+        <EditorWidgetsDocking Value="true"/>
+        <InputIgnoreNonFocusedWidgets Value="true"/>
+        <UpdateNonHoveredSceneViewer Value="false"/>
 
-       <AutoReloadResources Value="true"/>
+        <AutoReloadResources Value="true"/>
 
-       <RayTracing Value="false"/>
+        <RayTracing Value="false"/>
 
-       <LoadDefaultGraphicsResources Value="true"/>
+        <LoadDefaultGraphicsResources Value="true"/>
 
-       <AccumulateDt Value="true"/>
+        <AccumulateDt Value="true"/>
 
-       <FastModelsLoad Value="true"/>
-       <UseGLSLangCompiler Value="true"/>
+        <FastModelsLoad Value="true"/>
+        <UseGLSLangCompiler Value="true"/>
 
-       <Renderer Value="true"/>
-       <Physics Value="true"/>
+        <Renderer Value="true"/>
+        <Physics Value="true"/>
 
-       <PVD Value="false"/>
+        <PVD Value="false"/>
 
-       <Vehicles Value="true"/>
+        <Vehicles Value="true"/>
 
-       <MainWindow Value="true"/>
+        <MainWindow Value="true"/>
 
-       <UpdateMeshesOnDemand Value="true"/>
-       <UpdateDebugMeshesOnDemand Value="false"/>
-       <FBOForEachSwapchainImage Value="false"/>
-       <MultiFrameResources Value="true"/>
+        <UpdateMeshesOnDemand Value="true"/>
+        <UpdateDebugMeshesOnDemand Value="false"/>
+        <FBOForEachSwapchainImage Value="false"/>
+        <MultiFrameResources Value="true"/>
+        <MultiFrameSSBOResources Value="true"/>
 
-       <LoadSkybox Value="false"/>
-       <Multisampling Value="true"/>
-       <SkyboxCPUUsage Value="false"/>
-       <VulkanValidation Value="true"/>
-       <MultiRenderTargets Value="false"/>
-       <Undocking Value="true"/>
-       <VulkanDynamicRendering Value="true"/>
-   </Common>
+        <LoadSkybox Value="false"/>
+        <Multisampling Value="true"/>
+        <SkyboxCPUUsage Value="false"/>
+        <VulkanValidation Value="true"/>
+        <MultiRenderTargets Value="false"/>
+        <Undocking Value="true"/>
+        <VulkanDynamicRendering Value="true"/>
+    </Common>
 </Features>
