@@ -1132,19 +1132,19 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="546" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="546" bodyend="548"/>
       </memberdef>
-      <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1aca335cc9099fdc566e2b8d585519e753" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a05db229b7274746653c0b12bc6ea8bb7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; T &gt;</type>
         <definition>SR_NODISCARD Vector3&lt; T &gt; SR_MATH_NS::Vector3&lt; T &gt;::Clamp</definition>
-        <argsstring>(const Vector3&lt; T &gt; &amp;upper, const Vector3&lt; T &gt; &amp;lover) const</argsstring>
+        <argsstring>(const Vector3&lt; T &gt; &amp;lover, const Vector3&lt; T &gt; &amp;upper) const</argsstring>
         <name>Clamp</name>
         <qualifiedname>SR_MATH_NS::Vector3::Clamp</qualifiedname>
         <param>
           <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; T &gt; &amp;</type>
-          <declname>upper</declname>
+          <declname>lover</declname>
         </param>
         <param>
           <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; T &gt; &amp;</type>
-          <declname>lover</declname>
+          <declname>upper</declname>
         </param>
         <briefdescription>
 <para>@method </para>
@@ -2484,7 +2484,7 @@
       <member refid="structSR__MATH__NS_1_1Vector3_1a2148d6d0428c3f0b5c03241b723805b2" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector3</scope><name>CastToFloat</name></member>
       <member refid="structSR__MATH__NS_1_1Vector3_1ae3a75bf7af91a2323cc7731ddc398c6d" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector3</scope><name>CastToInt</name></member>
       <member refid="structSR__MATH__NS_1_1Vector3_1a68a73f602f298d5b0edad392fc7d1cf0" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector3</scope><name>CastToUInt</name></member>
-      <member refid="structSR__MATH__NS_1_1Vector3_1aca335cc9099fdc566e2b8d585519e753" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector3</scope><name>Clamp</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector3_1a05db229b7274746653c0b12bc6ea8bb7" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector3</scope><name>Clamp</name></member>
       <member refid="structSR__MATH__NS_1_1Vector3_1aaa49207536efc9d0a07ffaf8ffce7941" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector3</scope><name>ContainsNaN</name></member>
       <member refid="structSR__MATH__NS_1_1Vector3_1a38cc2c1f6b96c858cde44a912541d43c" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector3</scope><name>coord</name></member>
       <member refid="structSR__MATH__NS_1_1Vector3_1a159d218f33b09912aeac7e419ea75207" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector3</scope><name>Cos</name></member>

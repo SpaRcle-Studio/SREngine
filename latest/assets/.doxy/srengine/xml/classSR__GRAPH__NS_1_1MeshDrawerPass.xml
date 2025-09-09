@@ -344,7 +344,6 @@
         <argsstring>(SR_GTYPES_NS::Shader *pShader, MeshPtr pMesh)</argsstring>
         <name>UseUniforms</name>
         <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::UseUniforms</qualifiedname>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1ab064006a3efde27efe72f023051b5698">UseUniforms</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1ColorBufferPass_1accfe31edc8e8f92c9423b4f5afa200ff">UseUniforms</reimplementedby>
         <param>
           <type><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> *</type>

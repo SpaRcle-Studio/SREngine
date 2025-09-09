@@ -77,7 +77,7 @@
 |  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; float\_t &gt; | [**CastToFloat**](#function-casttofloat) () noexcept const<br>_@method_  |
 |  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; int32\_t &gt; | [**CastToInt**](#function-casttoint) () noexcept const<br>_@method_  |
 |  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; uint32\_t &gt; | [**CastToUInt**](#function-casttouint) () noexcept const<br>_@method_  |
-|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Clamp**](#function-clamp) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & upper, const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & lover) const<br>_@method_  |
+|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Clamp**](#function-clamp) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & lover, const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & upper) const<br>_@method_  |
 |  SR\_NODISCARD bool | [**ContainsNaN**](#function-containsnan) () const<br> |
 |  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Cos**](#function-cos) () const<br>_@method_  |
 |  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Cross**](#function-cross-12) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & p\_b) const<br>_@method_  |
@@ -466,8 +466,8 @@ inline SR_NODISCARD Vector3 < uint32_t > SR_MATH_NS::Vector3::CastToUInt () noex
 _@method_ 
 ```C++
 inline SR_NODISCARD Vector3 < T > SR_MATH_NS::Vector3::Clamp (
-    const Vector3 < T > & upper,
-    const Vector3 < T > & lover
+    const Vector3 < T > & lover,
+    const Vector3 < T > & upper
 ) const
 ```
 

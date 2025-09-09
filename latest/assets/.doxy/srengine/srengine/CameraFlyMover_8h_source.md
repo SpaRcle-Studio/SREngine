@@ -46,6 +46,7 @@ namespace SR_UTILS_NS {
         float_t m_wheelSpeed = 0.4f;
         float_t m_rotateSpeed = 0.15f;
         float_t m_moveSpeed = 0.2f;
+        float_t m_maxVelocity = 2.f;
         SR_MATH_NS::FVector3 m_velocity;
 
     };

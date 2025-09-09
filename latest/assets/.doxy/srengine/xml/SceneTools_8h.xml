@@ -1774,7 +1774,7 @@
 <codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_GRAPH_UI_NS::GizmoOperation<sp/>m_gizmoOperationFlag<sp/>=<sp/>SR_GRAPH_UI_NS::GizmoOperation::None;</highlight></codeline>
 <codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_GRAPH_UI_NS::GizmoMode<sp/>m_gizmoMode<sp/>=<sp/>SR_GRAPH_UI_NS::GizmoMode::Local;</highlight></codeline>
 <codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>EditorSceneViewMode<sp/>m_viewMode<sp/>=<sp/>EditorSceneViewMode::FreeAspect;</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float_t<sp/>m_cameraVelocityFactor<sp/>=<sp/>1.f;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float_t<sp/>m_cameraVelocityFactor<sp/>=<sp/>0.2f;</highlight></codeline>
 <codeline lineno="52"><highlight class="normal"></highlight></codeline>
 <codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="54"><highlight class="normal">}</highlight></codeline>

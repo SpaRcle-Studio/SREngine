@@ -58,7 +58,7 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_UI_NS::GizmoOperation m_gizmoOperationFlag = SR_GRAPH_UI_NS::GizmoOperation::None;
         SR_GRAPH_UI_NS::GizmoMode m_gizmoMode = SR_GRAPH_UI_NS::GizmoMode::Local;
         EditorSceneViewMode m_viewMode = EditorSceneViewMode::FreeAspect;
-        float_t m_cameraVelocityFactor = 1.f;
+        float_t m_cameraVelocityFactor = 0.2f;
 
     };
 }

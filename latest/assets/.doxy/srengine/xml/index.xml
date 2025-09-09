@@ -1298,6 +1298,7 @@
     <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1ad01484ea2925a836d8d38c3222e1356a" kind="variable"><name>m_wheelSpeed</name></member>
     <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1afd3766b99c60deb6bfaa68835113a447" kind="variable"><name>m_rotateSpeed</name></member>
     <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1a6c55e3a3d619c37769d2029f7a4bcc5a" kind="variable"><name>m_moveSpeed</name></member>
+    <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1a3a4db8abb535794722f9df06bdefccb1" kind="variable"><name>m_maxVelocity</name></member>
     <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1a185a093903938d583b01b641c3dd9fa1" kind="variable"><name>m_velocity</name></member>
     <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1a2d0f89cd59c00cf23bbb71906026fb42" kind="function"><name>FixedUpdate</name></member>
     <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1a1e6fc312cb2e798cc2e37904b7150f12" kind="function"><name>OnDisable</name></member>
@@ -1358,23 +1359,18 @@
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1aa6fb1cb20d3ec4171a4b62aff791b2d8" kind="variable"><name>m_near</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a316c137b56d58d88498d8826b75c9d99" kind="variable"><name>m_far</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a4282279a8fb4de5dfaa74cddd3dc72c9" kind="variable"><name>m_cascadeSplitLambda</name></member>
-    <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1ac1cfb486e5b40e21a404aeabccca8bb8" kind="variable"><name>m_usePerspective</name></member>
-    <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1af7eb7d367b54bf72accefb3d7a6a8f0a" kind="variable"><name>m_stabilizeShadowCascades</name></member>
-    <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a7fe585b7f033af5bdbd07f107a5fb6ee" kind="variable"><name>m_useOtherAlgorithm</name></member>
-    <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a3ed3f8d4869623dd4c19c4b1716dcd2a" kind="variable"><name>m_frustumCorners</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a30ef6bef23016db8551b58cdc094c84c" kind="variable"><name>m_cascadeMatrices</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a7c88f47420b46139ad9dfb1a41cc0d4e" kind="variable"><name>m_cascadeSplitDepths</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1ace632509831d31d90df85293e1e39587" kind="variable"><name>m_cascadeRadii</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1aa389d8b46444dfa274aa68cc69e67d85" kind="function"><name>GetCascadeMatrices</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a013ac2ccec3d56f755d585ac7129b981" kind="function"><name>GetSplitDepths</name></member>
-    <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1ab064006a3efde27efe72f023051b5698" kind="function"><name>UseUniforms</name></member>
+    <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a1b6805d2e2e5b7652ace4b9115ea897e" kind="function"><name>Prepare</name></member>
+    <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a9c065392abe9ac2048985d45ce4d8265" kind="function"><name>PostUpdate</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a90d0276863e394540a4053b0763a4d42" kind="function"><name>UseSharedUniforms</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1afc5ae2b0beb3b53003b1a5fcec19a047" kind="function"><name>UseConstants</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a23cc85e8be43fee94f23291da103d4df" kind="function"><name>UseUniformsFromAnotherPass</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a0e10ec729cc354bfba2dbe8715380318" kind="function"><name>CheckCamera</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1aeea9bcce13f150416fca9034b439f906" kind="function"><name>UpdateCascades</name></member>
-    <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1aff4fbf399e8d8b30f20f1687b0f8eeae" kind="function"><name>UpdateCascades2</name></member>
-    <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1af69baff48c2ed0ce0ef88195decb1a32" kind="function"><name>ResetViewFrustumCorners</name></member>
   </compound>
   <compound refid="classEvoScript_1_1CastingGen" kind="class"><name>EvoScript::CastingGen</name>
     <member refid="classEvoScript_1_1CastingGen_1a59c4a26655786e08f2f50d979bd1b7d0" kind="variable"><name>m_incomplete</name></member>
@@ -4161,6 +4157,7 @@
     <member refid="structSR__GRAPH__NS_1_1FrameBufferFeatures_1a56ca9d800f4f131ccefeb6b14871661c" kind="variable"><name>colorTransferDst</name></member>
     <member refid="structSR__GRAPH__NS_1_1FrameBufferFeatures_1a90f875ce20ae87c1750cb71bde8fdbfc" kind="variable"><name>depthShaderRead</name></member>
     <member refid="structSR__GRAPH__NS_1_1FrameBufferFeatures_1add355b6b9f6f7296de36c41ccd7b8562" kind="variable"><name>colorShaderRead</name></member>
+    <member refid="structSR__GRAPH__NS_1_1FrameBufferFeatures_1ae19887caa825e121e300e1f9dfeb37a0" kind="variable"><name>offscreen</name></member>
   </compound>
   <compound refid="classSR__GRAPH__NS_1_1FrameBufferPass" kind="class"><name>SR_GRAPH_NS::FrameBufferPass</name>
     <member refid="classSR__GRAPH__NS_1_1FrameBufferPass_1a019898f45d1adece32a6b0ca968d96ca" kind="typedef"><name>Super</name></member>
@@ -13423,7 +13420,7 @@
     <member refid="structSR__MATH__NS_1_1Vector3_1af2e758a72701fd05668f73b56520b8bb" kind="function"><name>Normalized</name></member>
     <member refid="structSR__MATH__NS_1_1Vector3_1ad450b0771ae52efbb06025b8eff869ce" kind="function"><name>Normalize</name></member>
     <member refid="structSR__MATH__NS_1_1Vector3_1a7bd2a633efc8d90a18a0ca91520e370b" kind="function"><name>SquaredNorm</name></member>
-    <member refid="structSR__MATH__NS_1_1Vector3_1aca335cc9099fdc566e2b8d585519e753" kind="function"><name>Clamp</name></member>
+    <member refid="structSR__MATH__NS_1_1Vector3_1a05db229b7274746653c0b12bc6ea8bb7" kind="function"><name>Clamp</name></member>
     <member refid="structSR__MATH__NS_1_1Vector3_1a2bea74468869076a5d5613c3b7c76cf4" kind="function"><name>ToQuat</name></member>
     <member refid="structSR__MATH__NS_1_1Vector3_1a8fbc6cadcadf3872b9c5698240256c2c" kind="function"><name>operator[]</name></member>
     <member refid="structSR__MATH__NS_1_1Vector3_1a4b1b37f0e0c308e7747270e6405f2a56" kind="function"><name>operator[]</name></member>

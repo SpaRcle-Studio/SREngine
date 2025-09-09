@@ -59,6 +59,7 @@ See [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 |  bool | [**depthShaderRead**](#variable-depthshaderread)   = `false`<br> |
 |  bool | [**depthTransferDst**](#variable-depthtransferdst)   = `false`<br> |
 |  bool | [**depthTransferSrc**](#variable-depthtransfersrc)   = `false`<br> |
+|  bool | [**offscreen**](#variable-offscreen)   = `false`<br> |
 
 
 
@@ -327,6 +328,19 @@ bool SR_GRAPH_NS::FrameBufferFeatures::depthTransferDst;
 
 ```C++
 bool SR_GRAPH_NS::FrameBufferFeatures::depthTransferSrc;
+```
+
+
+
+
+<hr>
+
+
+
+### variable offscreen 
+
+```C++
+bool SR_GRAPH_NS::FrameBufferFeatures::offscreen;
 ```
 
 

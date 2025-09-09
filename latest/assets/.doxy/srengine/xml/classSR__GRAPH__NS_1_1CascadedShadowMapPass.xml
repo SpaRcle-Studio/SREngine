@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="33" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="32" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1aa05bb9ae4b5ec4c6a9b6510e52f04bb4" prot="protected" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="34" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="34" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="33" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a6029524d0a90c307ea0540df53b25f57" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">SR_MATH_NS::Quaternion</ref></type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="35" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="35" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="34" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a220a2c6c443b2b89e8f78cbe5f551668" prot="protected" static="no" mutable="no">
         <type>SR_MATH_NS::UVector2</type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="36" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="36" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="35" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1aa6fb1cb20d3ec4171a4b62aff791b2d8" prot="protected" static="no" mutable="no">
         <type>float_t</type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="39" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="39" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="38" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a316c137b56d58d88498d8826b75c9d99" prot="protected" static="no" mutable="no">
         <type>float_t</type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="41" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="41" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="40" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a4282279a8fb4de5dfaa74cddd3dc72c9" prot="protected" static="no" mutable="no">
         <type>float_t</type>
@@ -120,66 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="43" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="43" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1ac1cfb486e5b40e21a404aeabccca8bb8" prot="protected" static="no" mutable="no">
-        <type>bool</type>
-        <definition>bool SR_GRAPH_NS::CascadedShadowMapPass::m_usePerspective</definition>
-        <argsstring></argsstring>
-        <name>m_usePerspective</name>
-        <qualifiedname>SR_GRAPH_NS::CascadedShadowMapPass::m_usePerspective</qualifiedname>
-        <initializer>= false</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="45" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="45" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1af7eb7d367b54bf72accefb3d7a6a8f0a" prot="protected" static="no" mutable="no">
-        <type>bool</type>
-        <definition>bool SR_GRAPH_NS::CascadedShadowMapPass::m_stabilizeShadowCascades</definition>
-        <argsstring></argsstring>
-        <name>m_stabilizeShadowCascades</name>
-        <qualifiedname>SR_GRAPH_NS::CascadedShadowMapPass::m_stabilizeShadowCascades</qualifiedname>
-        <initializer>= true</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="47" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="47" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a7fe585b7f033af5bdbd07f107a5fb6ee" prot="protected" static="no" mutable="no">
-        <type>bool</type>
-        <definition>bool SR_GRAPH_NS::CascadedShadowMapPass::m_useOtherAlgorithm</definition>
-        <argsstring></argsstring>
-        <name>m_useOtherAlgorithm</name>
-        <qualifiedname>SR_GRAPH_NS::CascadedShadowMapPass::m_useOtherAlgorithm</qualifiedname>
-        <initializer>= false</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="49" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="49" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a3ed3f8d4869623dd4c19c4b1716dcd2a" prot="protected" static="no" mutable="no">
-        <type>SR_MATH_NS::FVector3</type>
-        <definition>SR_MATH_NS::FVector3 SR_GRAPH_NS::CascadedShadowMapPass::m_frustumCorners[8]</definition>
-        <argsstring>[8]</argsstring>
-        <name>m_frustumCorners</name>
-        <qualifiedname>SR_GRAPH_NS::CascadedShadowMapPass::m_frustumCorners</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="51" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="51" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="42" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a30ef6bef23016db8551b58cdc094c84c" prot="protected" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &gt;</type>
@@ -193,7 +134,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="53" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="53" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="44" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a7c88f47420b46139ad9dfb1a41cc0d4e" prot="protected" static="no" mutable="no">
         <type>std::vector&lt; float_t &gt;</type>
@@ -207,7 +148,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="54" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="54" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="45" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1ace632509831d31d90df85293e1e39587" prot="protected" static="no" mutable="no">
         <type>std::vector&lt; float_t &gt;</type>
@@ -221,7 +162,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="55" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="55" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="46" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="46" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -253,28 +194,36 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="18" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="18" bodyend="18"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1ab064006a3efde27efe72f023051b5698" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a1b6805d2e2e5b7652ace4b9115ea897e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
-        <definition>void SR_GRAPH_NS::CascadedShadowMapPass::UseUniforms</definition>
-        <argsstring>(SR_GTYPES_NS::Shader *pShader, MeshPtr pMesh) override</argsstring>
-        <name>UseUniforms</name>
-        <qualifiedname>SR_GRAPH_NS::CascadedShadowMapPass::UseUniforms</qualifiedname>
-        <reimplements refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a2bed7196e5b48532862579df7e2e0c5f">UseUniforms</reimplements>
-        <param>
-          <type><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> *</type>
-          <declname>pShader</declname>
-        </param>
-        <param>
-          <type>MeshPtr</type>
-          <declname>pMesh</declname>
-        </param>
+        <definition>void SR_GRAPH_NS::CascadedShadowMapPass::Prepare</definition>
+        <argsstring>() override</argsstring>
+        <name>Prepare</name>
+        <qualifiedname>SR_GRAPH_NS::CascadedShadowMapPass::Prepare</qualifiedname>
+        <reimplements refid="classSR__GRAPH__NS_1_1BasePass_1a559ee30abd6fa92f151eb04ec154357f">Prepare</reimplements>
         <briefdescription>
+<para>Вызывается всегда но полсе оверлея </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="21" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a9c065392abe9ac2048985d45ce4d8265" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::CascadedShadowMapPass::PostUpdate</definition>
+        <argsstring>() override</argsstring>
+        <name>PostUpdate</name>
+        <qualifiedname>SR_GRAPH_NS::CascadedShadowMapPass::PostUpdate</qualifiedname>
+        <reimplements refid="classSR__GRAPH__NS_1_1BasePass_1ac907cd9eeb58321011db7473671aead2">PostUpdate</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="22" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a90d0276863e394540a4053b0763a4d42" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -293,7 +242,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="22" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="23" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1afc5ae2b0beb3b53003b1a5fcec19a047" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -312,7 +261,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="23" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="24" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a23cc85e8be43fee94f23291da103d4df" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -331,7 +280,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="24" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="25" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -347,7 +296,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="27" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="28" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1aeea9bcce13f150416fca9034b439f906" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -361,35 +310,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="28" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1aff4fbf399e8d8b30f20f1687b0f8eeae" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_GRAPH_NS::CascadedShadowMapPass::UpdateCascades2</definition>
-        <argsstring>()</argsstring>
-        <name>UpdateCascades2</name>
-        <qualifiedname>SR_GRAPH_NS::CascadedShadowMapPass::UpdateCascades2</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="29" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1af69baff48c2ed0ce0ef88195decb1a32" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_GRAPH_NS::CascadedShadowMapPass::ResetViewFrustumCorners</definition>
-        <argsstring>()</argsstring>
-        <name>ResetViewFrustumCorners</name>
-        <qualifiedname>SR_GRAPH_NS::CascadedShadowMapPass::ResetViewFrustumCorners</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="30" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -564,7 +485,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="13" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="13" bodyend="57"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" line="13" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h" bodystart="13" bodyend="48"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1adaaa38e13468791bcb6c645092d08a73" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>AllocateRenderQueue</name></member>
@@ -633,13 +554,9 @@
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a25fe2fa123f3a2a1fee0ca8ec9e64fa2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_descriptorManager</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1ac9171a05a693eaa8174f6d3012c8d114" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_directionalLightPosition</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a316c137b56d58d88498d8826b75c9d99" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_far</name></member>
-      <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a3ed3f8d4869623dd4c19c4b1716dcd2a" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_frustumCorners</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1aa6fb1cb20d3ec4171a4b62aff791b2d8" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_near</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a220a2c6c443b2b89e8f78cbe5f551668" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_screenSize</name></member>
-      <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1af7eb7d367b54bf72accefb3d7a6a8f0a" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_stabilizeShadowCascades</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a8b2e3a39351e9141029bea133f380465" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_uboManager</name></member>
-      <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a7fe585b7f033af5bdbd07f107a5fb6ee" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_useOtherAlgorithm</name></member>
-      <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1ac1cfb486e5b40e21a404aeabccca8bb8" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_usePerspective</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>MakeShared</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7a70a21bb631f62e665555e71d3b97f8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>MeshDrawerPass</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1aa7c29336844c31150ba16812fc82ad7d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>MeshPtr</name></member>
@@ -662,8 +579,8 @@
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ac2790f23f7796eb36002c30dc817f1ba" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>PipelinePtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>PolymorphicCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a2618cec5cb8f6f4c384b88bb3878c781" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>PostRender</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasePass_1ac907cd9eeb58321011db7473671aead2" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>PostUpdate</name></member>
-      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a3c35b40b7095392be6ae0fe7bd4edf05" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>Prepare</name></member>
+      <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a9c065392abe9ac2048985d45ce4d8265" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>PostUpdate</name></member>
+      <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a1b6805d2e2e5b7652ace4b9115ea897e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>Prepare</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ad2075554ddda52bbe8c83f514951a680" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>PreRender</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a2db19e6bfa97da6d7089665a0edfc3fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>Ptr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>RecursiveLockIfValid</name></member>
@@ -675,7 +592,6 @@
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a9fe3f67ad907624d9277f7ade5e02826" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>RenderQueuePtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ad5832c5a9f8abf85ac97967105d3a953" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>RenderScenePtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>Reset</name></member>
-      <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1af69baff48c2ed0ce0ef88195decb1a32" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>ResetViewFrustumCorners</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>Save</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a06217f9edbf0e8c831a6cc411826f799" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>SetParent</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>SetPointerFromBase</name></member>
@@ -695,11 +611,10 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>Unlock</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a37ab910895bbd048cc7b8338b30586d3" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>Update</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1aeea9bcce13f150416fca9034b439f906" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>UpdateCascades</name></member>
-      <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1aff4fbf399e8d8b30f20f1687b0f8eeae" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>UpdateCascades2</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1afc5ae2b0beb3b53003b1a5fcec19a047" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>UseConstants</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1acf61ab11ac383cf0a129b40ee5652361" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>UseSamplers</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a90d0276863e394540a4053b0763a4d42" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>UseSharedUniforms</name></member>
-      <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1ab064006a3efde27efe72f023051b5698" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>UseUniforms</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a2bed7196e5b48532862579df7e2e0c5f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>UseUniforms</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a23cc85e8be43fee94f23291da103d4df" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>UseUniformsFromAnotherPass</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a783dd9e4a58072de8ff19895693bca05" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>Valid</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a5aab0756802a67de9cb45b83b3e73c70" prot="public" virt="virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>VerifyAfterLoad</name></member>

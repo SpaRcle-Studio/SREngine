@@ -33,6 +33,7 @@ namespace SR_GRAPH_NS {
         bool colorTransferDst = false;
         bool depthShaderRead = false;
         bool colorShaderRead = true;
+        bool offscreen = false;
     };
 }
 

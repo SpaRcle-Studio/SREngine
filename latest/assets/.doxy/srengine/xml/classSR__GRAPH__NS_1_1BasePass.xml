@@ -395,6 +395,7 @@
         <argsstring>()</argsstring>
         <name>Prepare</name>
         <qualifiedname>SR_GRAPH_NS::BasePass::Prepare</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a1b6805d2e2e5b7652ace4b9115ea897e">Prepare</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1DebugPass_1af6340e2214eba8b099b816f2488310cc">Prepare</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1a1bb5f8f8e93b8068a9d80ab183e1cf66">Prepare</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a3c35b40b7095392be6ae0fe7bd4edf05">Prepare</reimplementedby>
@@ -495,6 +496,7 @@
         <argsstring>()</argsstring>
         <name>PostUpdate</name>
         <qualifiedname>SR_GRAPH_NS::BasePass::PostUpdate</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a9c065392abe9ac2048985d45ce4d8265">PostUpdate</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1ad52301708b23646274027c680dda84b7">PostUpdate</reimplementedby>
         <briefdescription>
         </briefdescription>

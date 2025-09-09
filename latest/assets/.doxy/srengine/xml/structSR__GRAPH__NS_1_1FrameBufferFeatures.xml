@@ -124,6 +124,21 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" line="32" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" bodystart="32" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1FrameBufferFeatures_1ae19887caa825e121e300e1f9dfeb37a0" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::FrameBufferFeatures::offscreen</definition>
+        <argsstring></argsstring>
+        <name>offscreen</name>
+        <qualifiedname>SR_GRAPH_NS::FrameBufferFeatures::offscreen</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" line="34" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
@@ -165,7 +180,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" line="14" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" bodystart="14" bodyend="33"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" line="14" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" bodystart="14" bodyend="35"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferFeatures</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferFeatures</scope><name>AllocateStatic</name></member>
@@ -184,6 +199,7 @@
       <member refid="classSR__UTILS__NS_1_1SRClass_1a16837ff730fb4e276450a124d70eb2e4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferFeatures</scope><name>GetMetaStatic</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1af5c00e9391fad105c30570cbda1a6285" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferFeatures</scope><name>HasSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1afbc9947b694481f8478c1a75a2fc465e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FrameBufferFeatures</scope><name>Load</name></member>
+      <member refid="structSR__GRAPH__NS_1_1FrameBufferFeatures_1ae19887caa825e121e300e1f9dfeb37a0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferFeatures</scope><name>offscreen</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a27569f8d47ee0c52ed5e385253e14460" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FrameBufferFeatures</scope><name>OnPostLoad</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1afbe2a50f0f69bc0f52b51151058830d8" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FrameBufferFeatures</scope><name>OnPostSave</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a2978d969c09702719b2ed5c84453b02d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FrameBufferFeatures</scope><name>OnPreLoad</name></member>

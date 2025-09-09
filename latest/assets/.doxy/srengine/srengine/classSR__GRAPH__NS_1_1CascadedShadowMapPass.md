@@ -251,9 +251,10 @@ See [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 | ---: | :--- |
 |  SR\_NODISCARD const std::vector&lt; [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) &gt; & | [**GetCascadeMatrices**](#function-getcascadematrices) () const<br> |
 |  SR\_NODISCARD const std::vector&lt; float\_t &gt; & | [**GetSplitDepths**](#function-getsplitdepths) () const<br> |
+| virtual void | [**PostUpdate**](#function-postupdate) () override<br> |
+| virtual void | [**Prepare**](#function-prepare) () override<br>_Вызывается всегда но полсе оверлея_  |
 | virtual void | [**UseConstants**](#function-useconstants) ([**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* pShader) override<br> |
 | virtual void | [**UseSharedUniforms**](#function-useshareduniforms) ([**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* pShader) override<br> |
-| virtual void | [**UseUniforms**](#function-useuniforms) ([**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* pShader, MeshPtr pMesh) override<br> |
 | virtual void | [**UseUniformsFromAnotherPass**](#function-useuniformsfromanotherpass) ([**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* pShader) override<br> |
 
 
@@ -524,12 +525,8 @@ See [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 |  float\_t | [**m\_cascadeSplitLambda**](#variable-m_cascadesplitlambda)   = `0.95f`<br> |
 |  SR\_MATH\_NS::FVector3 | [**m\_directionalLightPosition**](#variable-m_directionallightposition)  <br> |
 |  float\_t | [**m\_far**](#variable-m_far)   = `100.f`<br> |
-|  SR\_MATH\_NS::FVector3 | [**m\_frustumCorners**](#variable-m_frustumcorners)  <br> |
 |  float\_t | [**m\_near**](#variable-m_near)   = `0.1f`<br> |
 |  SR\_MATH\_NS::UVector2 | [**m\_screenSize**](#variable-m_screensize)  <br> |
-|  bool | [**m\_stabilizeShadowCascades**](#variable-m_stabilizeshadowcascades)   = `true`<br> |
-|  bool | [**m\_useOtherAlgorithm**](#variable-m_useotheralgorithm)   = `false`<br> |
-|  bool | [**m\_usePerspective**](#variable-m_useperspective)   = `false`<br> |
 
 
 
@@ -695,9 +692,7 @@ See [SR\_HTYPES\_NS::SharedPtrBase](classSR__HTYPES__NS_1_1SharedPtrBase.md)
 | Type | Name |
 | ---: | :--- |
 |  bool | [**CheckCamera**](#function-checkcamera) () <br> |
-|  void | [**ResetViewFrustumCorners**](#function-resetviewfrustumcorners) () <br> |
 |  void | [**UpdateCascades**](#function-updatecascades) () <br> |
-|  void | [**UpdateCascades2**](#function-updatecascades2) () <br> |
 
 
 ## Protected Functions inherited from SR_GRAPH_NS::MeshDrawerPass
@@ -773,6 +768,37 @@ inline SR_NODISCARD const std::vector< float_t > & SR_GRAPH_NS::CascadedShadowMa
 
 
 
+### function PostUpdate 
+
+```C++
+virtual void SR_GRAPH_NS::CascadedShadowMapPass::PostUpdate () override
+```
+
+
+
+Implements [*SR\_GRAPH\_NS::BasePass::PostUpdate*](classSR__GRAPH__NS_1_1BasePass.md#function-postupdate)
+
+
+<hr>
+
+
+
+### function Prepare 
+
+_Вызывается всегда но полсе оверлея_ 
+```C++
+virtual void SR_GRAPH_NS::CascadedShadowMapPass::Prepare () override
+```
+
+
+
+Implements [*SR\_GRAPH\_NS::BasePass::Prepare*](classSR__GRAPH__NS_1_1BasePass.md#function-prepare)
+
+
+<hr>
+
+
+
 ### function UseConstants 
 
 ```C++
@@ -801,24 +827,6 @@ virtual void SR_GRAPH_NS::CascadedShadowMapPass::UseSharedUniforms (
 
 
 Implements [*SR\_GRAPH\_NS::MeshDrawerPass::UseSharedUniforms*](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-useshareduniforms)
-
-
-<hr>
-
-
-
-### function UseUniforms 
-
-```C++
-virtual void SR_GRAPH_NS::CascadedShadowMapPass::UseUniforms (
-    SR_GTYPES_NS::Shader * pShader,
-    MeshPtr pMesh
-) override
-```
-
-
-
-Implements [*SR\_GRAPH\_NS::MeshDrawerPass::UseUniforms*](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-useuniforms)
 
 
 <hr>
@@ -948,19 +956,6 @@ float_t SR_GRAPH_NS::CascadedShadowMapPass::m_far;
 
 
 
-### variable m\_frustumCorners 
-
-```C++
-SR_MATH_NS::FVector3 SR_GRAPH_NS::CascadedShadowMapPass::m_frustumCorners[8];
-```
-
-
-
-
-<hr>
-
-
-
 ### variable m\_near 
 
 ```C++
@@ -978,45 +973,6 @@ float_t SR_GRAPH_NS::CascadedShadowMapPass::m_near;
 
 ```C++
 SR_MATH_NS::UVector2 SR_GRAPH_NS::CascadedShadowMapPass::m_screenSize;
-```
-
-
-
-
-<hr>
-
-
-
-### variable m\_stabilizeShadowCascades 
-
-```C++
-bool SR_GRAPH_NS::CascadedShadowMapPass::m_stabilizeShadowCascades;
-```
-
-
-
-
-<hr>
-
-
-
-### variable m\_useOtherAlgorithm 
-
-```C++
-bool SR_GRAPH_NS::CascadedShadowMapPass::m_useOtherAlgorithm;
-```
-
-
-
-
-<hr>
-
-
-
-### variable m\_usePerspective 
-
-```C++
-bool SR_GRAPH_NS::CascadedShadowMapPass::m_usePerspective;
 ```
 
 
@@ -1041,36 +997,10 @@ bool SR_GRAPH_NS::CascadedShadowMapPass::CheckCamera ()
 
 
 
-### function ResetViewFrustumCorners 
-
-```C++
-void SR_GRAPH_NS::CascadedShadowMapPass::ResetViewFrustumCorners () 
-```
-
-
-
-
-<hr>
-
-
-
 ### function UpdateCascades 
 
 ```C++
 void SR_GRAPH_NS::CascadedShadowMapPass::UpdateCascades () 
-```
-
-
-
-
-<hr>
-
-
-
-### function UpdateCascades2 
-
-```C++
-void SR_GRAPH_NS::CascadedShadowMapPass::UpdateCascades2 () 
 ```
 
 

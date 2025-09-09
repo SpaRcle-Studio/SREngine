@@ -71,7 +71,7 @@
         <argsstring></argsstring>
         <name>m_cameraVelocityFactor</name>
         <qualifiedname>SR_CORE_GUI_NS::SceneTools::m_cameraVelocityFactor</qualifiedname>
-        <initializer>= 1.f</initializer>
+        <initializer>= 0.2f</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
