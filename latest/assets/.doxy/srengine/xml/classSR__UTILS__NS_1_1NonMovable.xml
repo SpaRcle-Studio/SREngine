@@ -2,8 +2,6 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__UTILS__NS_1_1NonMovable" kind="class" language="C++" prot="public">
     <compoundname>SR_UTILS_NS::NonMovable</compoundname>
-    <derivedcompoundref refid="classSR__GRAPH__NS_1_1ShaderCache" prot="public" virt="non-virtual">SR_GRAPH_NS::ShaderCache</derivedcompoundref>
-    <derivedcompoundref refid="classSR__SRSL__NS_1_1SRSLShaderCache" prot="public" virt="non-virtual">SR_SRSL_NS::SRSLShaderCache</derivedcompoundref>
     <derivedcompoundref refid="classSR__UTILS__NS_1_1ClassDB" prot="public" virt="non-virtual">SR_UTILS_NS::ClassDB</derivedcompoundref>
     <sectiondef kind="protected-func">
       <memberdef kind="function" id="classSR__UTILS__NS_1_1NonMovable_1ae406899a3fa845993a32b8f1de7a6f18" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -77,18 +75,6 @@
     </detaileddescription>
     <inheritancegraph>
       <node id="2">
-        <label>SR_GRAPH_NS::ShaderCache</label>
-        <link refid="classSR__GRAPH__NS_1_1ShaderCache"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="3">
-        <label>SR_SRSL_NS::SRSLShaderCache</label>
-        <link refid="classSR__SRSL__NS_1_1SRSLShaderCache"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
         <label>SR_UTILS_NS::ClassDB</label>
         <link refid="classSR__UTILS__NS_1_1ClassDB"/>
         <childnode refid="1" relation="public-inheritance">

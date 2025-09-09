@@ -76,6 +76,7 @@ namespace SR_GTYPES_NS {
         void SetDepthAspect(ImageAspect depthAspect);
         void SetFeatures(const FrameBufferFeatures& features);
         void SetName(SR_UTILS_NS::StringAtom name) { m_name = name; }
+        void SetInstanceForEachFram(bool forEach) { m_forEachSwapchainImage = forEach; }
 
         SR_NODISCARD bool IsFileResource() const noexcept override { return false; }
         SR_NODISCARD bool IsAllowedMultiInstance() const override { return true; }

@@ -4097,6 +4097,7 @@
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1ac5f28f665420fb2287205c3080a9646a" kind="function"><name>SetDepthAspect</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1ae00d4087480b29a611f32d047e29d5ff" kind="function"><name>SetFeatures</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a1a5bee84451be6176627e09333c7cb8c" kind="function"><name>SetName</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Framebuffer_1aed24ca96d3d344c9ba6c872fefcc99a2" kind="function"><name>SetInstanceForEachFram</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a490b71f8dc30b82757fbfd22e6b5ce08" kind="function"><name>IsFileResource</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a666b0b1b2b08322017e1a7fd00b8d314" kind="function"><name>IsAllowedMultiInstance</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a0afd31f4d6d436bc0feaa7710be061c5" kind="function"><name>GetSamplesCount</name></member>
@@ -4133,6 +4134,7 @@
     <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1a828a8d779567a1bb4d1adb8451df982c" kind="variable"><name>m_name</name></member>
     <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1a8838749bcc10e90ac0500360f663a15e" kind="variable"><name>m_dynamicResizing</name></member>
     <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1ab7fd688b91d2e177a6a9f5b45327e4c4" kind="variable"><name>m_depthEnabled</name></member>
+    <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1abddf46fe987bdb8071c68e13f5f6812a" kind="variable"><name>m_instanceForEachFrame</name></member>
     <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1a99cda2916a8382be9731353bf46a8b4b" kind="variable"><name>m_preScale</name></member>
     <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1a34c9d2c0ebf1a311ef4d860b89ab8771" kind="variable"><name>m_size</name></member>
     <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1a7d4dcfae43720d9a4b6acbe25e6ae360" kind="variable"><name>m_colorFormats</name></member>
@@ -6025,7 +6027,6 @@
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1a51c37cb2d054e0deda3b11bb87b06301" kind="function"><name>Finalize</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1aa69dab7b5cefb44e538578318429af6a" kind="function"><name>UseUniforms</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1ae13251bf9847eb3c754f3ec0de776182" kind="function"><name>UseSamplers</name></member>
-    <member refid="classSR__GRAPH__NS_1_1MaterialData_1a6e1b45e5d7db9b75b0558887628cff96" kind="function"><name>HasStage</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1a40b6fc6e023ad0071d3a0cd34b60c067" kind="function"><name>GetDefaultShaderData</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1ab704be2cb81ff691dd3f823f0695a350" kind="function"><name>GetDefaultShaderData</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1a5723889f5c2f44fd4a61e11962b7a421" kind="function"><name>GetShaderData</name></member>
@@ -6038,8 +6039,16 @@
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1a2639109fe39cd4685fd787ae709cab1b" kind="function"><name>OnSamplerChanged</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1a8d3e86291d081bf462d8352701065db2" kind="function"><name>OnPropertyChanged</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1af8fb36fdd6a7ac2d29d912385fe50167" kind="function"><name>AddShaderDefine</name></member>
+    <member refid="classSR__GRAPH__NS_1_1MaterialData_1a9d321ea5823cd3532d0f172359417145" kind="function"><name>RemoveShaderDefine</name></member>
+    <member refid="classSR__GRAPH__NS_1_1MaterialData_1a57e2d3b54115862fa888fc57dac47a37" kind="function"><name>SwitchShaderDefine</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1aa0fefda2989d631eaf76d2eafdf05621" kind="function"><name>OnShaderChanged</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1a150de4d64f89b9af006854051d06ca58" kind="function"><name>OnShaderDefinesChanged</name></member>
+    <member refid="classSR__GRAPH__NS_1_1MaterialData_1a9a2e8ddea009e87d68a1b4544cddb5ed" kind="function"><name>IsNormalMappingEnabled</name></member>
+    <member refid="classSR__GRAPH__NS_1_1MaterialData_1a17cde33f7a7b71b025f2bad97975a349" kind="function"><name>IsSkeletalAnimationEnabled</name></member>
+    <member refid="classSR__GRAPH__NS_1_1MaterialData_1a042e941783dbf83c0e6037daef4330f6" kind="function"><name>IsAlphaEnabled</name></member>
+    <member refid="classSR__GRAPH__NS_1_1MaterialData_1a20f235440ea6757f54b699d9caeb541e" kind="function"><name>SetNormalMappingEnabled</name></member>
+    <member refid="classSR__GRAPH__NS_1_1MaterialData_1ab056bfac28455b5e9108bbd33d010ab6" kind="function"><name>SetSkeletalAnimationEnabled</name></member>
+    <member refid="classSR__GRAPH__NS_1_1MaterialData_1a0f329f70ee13ee4c27d4acbd9e4abaf7" kind="function"><name>SetAlphaEnabled</name></member>
   </compound>
   <compound refid="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer" kind="class"><name>SR_CORE_GUI_NS::MaterialDataPropertyDrawer</name>
     <member refid="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer_1ac0cab5d5b242c661d74f52d0f3fac727" kind="typedef"><name>Super</name></member>
@@ -10262,12 +10271,11 @@
     <member refid="classSR__GTYPES__NS_1_1Shader_1a47d5bb2fc096e2e5dfc80819a12107b8" kind="function"><name>SetSampler</name></member>
   </compound>
   <compound refid="classSR__GRAPH__NS_1_1ShaderCache" kind="class"><name>SR_GRAPH_NS::ShaderCache</name>
-    <member refid="classSR__GRAPH__NS_1_1ShaderCache_1a084fdc47f235eb330d346a8ceb05e377" kind="function"><name>ShaderCache</name></member>
-    <member refid="classSR__GRAPH__NS_1_1ShaderCache_1ad2c1aaf8191b11b4f1b461dab68d4917" kind="function"><name>SaveShaderToCache</name></member>
-    <member refid="classSR__GRAPH__NS_1_1ShaderCache_1a5b6c4d0249d53b0547f93b2734454d5e" kind="function"><name>LoadShaderFromCache</name></member>
-    <member refid="classSR__GRAPH__NS_1_1ShaderCache_1a66493677f68808757d2e8d13ebb445b5" kind="function"><name>GetVersion</name></member>
-    <member refid="classSR__GRAPH__NS_1_1ShaderCache_1a48e4eb381d7c0004bbdfe00a5c5bce76" kind="function"><name>SaveUBOBlock</name></member>
-    <member refid="classSR__GRAPH__NS_1_1ShaderCache_1af829766d643e1a5cfa90b755050c5540" kind="function"><name>LoadUBOBlock</name></member>
+    <member refid="classSR__GRAPH__NS_1_1ShaderCache_1afa552723d5a9bdf6e77dda9ffebb1ddf" kind="function"><name>SaveShaderToCache</name></member>
+    <member refid="classSR__GRAPH__NS_1_1ShaderCache_1a5b54b502ddd88dd848c13d8fedae9d39" kind="function"><name>LoadShaderFromCache</name></member>
+    <member refid="classSR__GRAPH__NS_1_1ShaderCache_1a1f46d47d5ab195dced25451dfdd86934" kind="function"><name>GetVersion</name></member>
+    <member refid="classSR__GRAPH__NS_1_1ShaderCache_1a1527fc18835724c5da75ea425ede3310" kind="function"><name>SaveUBOBlock</name></member>
+    <member refid="classSR__GRAPH__NS_1_1ShaderCache_1a99d06e828935db99ade626cb4e1fb4df" kind="function"><name>LoadUBOBlock</name></member>
   </compound>
   <compound refid="structSR__SRSL__NS_1_1ShaderMacrosParams" kind="struct"><name>SR_SRSL_NS::ShaderMacrosParams</name>
     <member refid="structSR__SRSL__NS_1_1ShaderMacrosParams_1a807f2cac2ddeeef5c2b3652cb2c531a0" kind="variable"><name>m_params</name></member>
@@ -10598,8 +10606,7 @@
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a652dc254b5c29c2d69473e2059788a90" kind="typedef"><name>Ptr</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a8ccc9d2644a4b78c5639aec643a642d3" kind="typedef"><name>VertexType</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a8353d76f5f64ec8599fdcb8a5f71c4a7" kind="variable"><name>m_skeletonIsBroken</name></member>
-    <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1ab05d8daea896649e20c455db3309295a" kind="variable"><name>m_ssboBones</name></member>
-    <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a56d66bbf33447ad9f2e90085f9c58397" kind="variable"><name>m_ssboOffsets</name></member>
+    <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a47eb6db6e109bd36e92b4ab96b0722f5" kind="variable"><name>m_ssboBones</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1af7710d08ac0288902fc977876440653c" kind="variable"><name>m_skeleton</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a53700f994bf34f8465d2edfd2136151b" kind="function"><name>SkinnedMesh</name></member>
     <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1aac8383df19fbed15c4d227f7de6662bf" kind="function"><name>GetMeshType</name></member>
@@ -11412,7 +11419,7 @@
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a1933389859a2fd5cb72764c4276c7c4d" kind="typedef"><name>Ptr</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1aa7d069e1254a90ff4c759e607fe14ed5" kind="typedef"><name>Super</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a4ab8eab308f5464ada994055700aafc5" kind="typedef"><name>UniformBlocks</name></member>
-    <member refid="classSR__SRSL__NS_1_1SRSLShader_1a87e0d1b68069a646935d3527b1010030" kind="variable"><name>SRSLShaderCache</name></member>
+    <member refid="classSR__SRSL__NS_1_1SRSLShader_1a942f274485e20029baa7160b373f8245" kind="variable"><name>ShaderCache</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1aabf94178e961160ea4370fab2445baab" kind="variable"><name>m_path</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a1d1971e2633e137c938395c17391b054" kind="variable"><name>m_macros</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a1064ffd4083344e31d6a2c4adf6946f4" kind="variable"><name>m_includes</name></member>
@@ -11467,11 +11474,6 @@
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a2c48eaefaadbb5ff8402451dc59c345f" kind="function"><name>GetIncludes</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a54a3f258424f598211d10161b4849ab2" kind="function"><name>GetComputeWorkGroupSize</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1ac49026930cacfc94c7f3f90d6afebd5b" kind="function"><name>IsMacroDefined</name></member>
-  </compound>
-  <compound refid="classSR__SRSL__NS_1_1SRSLShaderCache" kind="class"><name>SR_SRSL_NS::SRSLShaderCache</name>
-    <member refid="classSR__SRSL__NS_1_1SRSLShaderCache_1a7723d7d6faa8b530c4bce3e5f893dbeb" kind="function"><name>SRSLShaderCache</name></member>
-    <member refid="classSR__SRSL__NS_1_1SRSLShaderCache_1a16f6cb2c383cc49393424425e9cf16f5" kind="function"><name>SaveShaderToCache</name></member>
-    <member refid="classSR__SRSL__NS_1_1SRSLShaderCache_1a1befffa3ab6abde1b2cbb268d1908902" kind="function"><name>LoadShaderFromCache</name></member>
   </compound>
   <compound refid="structSR__GRAPH__NS_1_1SRSL_1_1SRSLStruct" kind="struct"><name>SR_GRAPH_NS::SRSL::SRSLStruct</name>
     <member refid="structSR__GRAPH__NS_1_1SRSL_1_1SRSLStruct_1a1562109d725c64162e0a4bbdf0903c29" kind="variable"><name>name</name></member>
@@ -13789,6 +13791,7 @@
     <member refid="classSR__GRAPH__NS_1_1VulkanKernel_1a1b53fc9a37603bd20a7edb8935ce5356" kind="function"><name>SurfaceIsAvailable</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanKernel_1ae34e0f3fca924335beab46767385d213" kind="function"><name>WaitFences</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanKernel_1acf6db6dbda36db17c00eb69755e5180d" kind="function"><name>WaitAllFences</name></member>
+    <member refid="classSR__GRAPH__NS_1_1VulkanKernel_1a2f21f03a8971fbe175ee9bb5504f0a18" kind="function"><name>WaitDeviceIdle</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanKernel_1a190e1b17d967ec21e5a74e43b66ccbde" kind="function"><name>Render</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanKernel_1a6811748da3c453e26c5274e15ccc9306" kind="function"><name>PrepareFrame</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanKernel_1a9d17099ce2e0d01c9c8c1a341afc969b" kind="function"><name>SubmitFrame</name></member>
@@ -14447,6 +14450,9 @@
     <member refid="IShaderProgram_8h_1ac7658dd2dea4ef0d10aecaf78156613d" kind="variable"><name>SHADER_MACRO_SR_DEFINE_COLOR_PASS</name></member>
     <member refid="IShaderProgram_8h_1aa0b4ea9a307e2704f45b6b25e94c10f9" kind="variable"><name>SHADER_MACRO_SR_DEFINE_CASCADED_SHADOW_MAP_PASS</name></member>
     <member refid="IShaderProgram_8h_1ac71c0e0c2460eb4bf6f1907948386577" kind="variable"><name>SHADER_MACRO_SR_DEFINE_USE_CASCADED_SHADOW_MAP</name></member>
+    <member refid="IShaderProgram_8h_1a9df58760a44c7e24fd3e5ab6bd3aff2f" kind="variable"><name>SHADER_MACRO_SR_DEFINE_HAS_NORMAL</name></member>
+    <member refid="IShaderProgram_8h_1a042f501e97f339c0cde28a8f6e4ab555" kind="variable"><name>SHADER_MACRO_SR_DEFINE_HAS_SKELETON</name></member>
+    <member refid="IShaderProgram_8h_1adfefef373aa465ad2751684b4a459e72" kind="variable"><name>SHADER_MACRO_SR_DEFINE_HAS_ALPHA</name></member>
     <member refid="IShaderProgram_8h_1a1ee033c7649c329679583bfab3d5214b" kind="variable"><name>Unknown</name></member>
     <member refid="IShaderProgram_8h_1a2e068e70edf0de623175e688ff5c57d6" kind="variable"><name>Never</name></member>
     <member refid="IShaderProgram_8h_1a7d45f13d85fe867bfcb3f95aaee7e2d0" kind="variable"><name>Less</name></member>

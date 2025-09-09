@@ -12,6 +12,7 @@
 
 * `#include <Graphics/macros.h>`
 * `#include <Utils/FileSystem/Path.h>`
+* `#include <Utils/Common/Singleton.h>`
 
 
 
@@ -41,7 +42,6 @@
 | Type | Name |
 | ---: | :--- |
 | class | [**ShaderCache**](classSR__GRAPH__NS_1_1ShaderCache.md) <br> |
-| class | [**SRSLShaderCache**](classSR__SRSL__NS_1_1SRSLShaderCache.md) <br> |
 
 
 

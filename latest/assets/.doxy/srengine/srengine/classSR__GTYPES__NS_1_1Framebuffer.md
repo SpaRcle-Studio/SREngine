@@ -271,6 +271,7 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 |  void | [**SetDepthEnabled**](#function-setdepthenabled) (bool depthEnabled) <br> |
 |  void | [**SetDirty**](#function-setdirty) () <br> |
 |  void | [**SetFeatures**](#function-setfeatures) (const FrameBufferFeatures & features) <br> |
+|  void | [**SetInstanceForEachFram**](#function-setinstanceforeachfram) (bool forEach) <br> |
 |  void | [**SetLayersCount**](#function-setlayerscount) (uint32\_t layersCount) <br> |
 |  void | [**SetName**](#function-setname) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) <br> |
 |  void | [**SetSampleCount**](#function-setsamplecount) (uint8\_t samples) <br> |
@@ -1209,6 +1210,21 @@ void SR_GTYPES_NS::Framebuffer::SetDirty ()
 ```C++
 void SR_GTYPES_NS::Framebuffer::SetFeatures (
     const FrameBufferFeatures & features
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function SetInstanceForEachFram 
+
+```C++
+inline void SR_GTYPES_NS::Framebuffer::SetInstanceForEachFram (
+    bool forEach
 ) 
 ```
 

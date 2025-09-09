@@ -15,7 +15,7 @@
 
 
 
-Inherited by the following classes: [SR\_GRAPH\_NS::ShaderCache](classSR__GRAPH__NS_1_1ShaderCache.md),  [SR\_SRSL\_NS::SRSLShaderCache](classSR__SRSL__NS_1_1SRSLShaderCache.md),  [SR\_UTILS\_NS::ClassDB](classSR__UTILS__NS_1_1ClassDB.md)
+Inherited by the following classes: [SR\_UTILS\_NS::ClassDB](classSR__UTILS__NS_1_1ClassDB.md)
 
 
 

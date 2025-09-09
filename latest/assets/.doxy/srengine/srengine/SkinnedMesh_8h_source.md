@@ -62,8 +62,7 @@ namespace SR_GTYPES_NS {
 
     private:
         bool m_skeletonIsBroken = false;
-        int32_t m_ssboBones = SR_ID_INVALID;
-        int32_t m_ssboOffsets = SR_ID_INVALID;
+        std::vector<int32_t> m_ssboBones;
 
     private:
         SkeletonRef m_skeleton;

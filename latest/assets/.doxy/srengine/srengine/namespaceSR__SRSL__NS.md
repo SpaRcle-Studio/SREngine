@@ -55,7 +55,6 @@
 | class | [**SRSLReturn**](classSR__SRSL__NS_1_1SRSLReturn.md) <br> |
 | struct | [**SRSLSampler**](structSR__SRSL__NS_1_1SRSLSampler.md) <br> |
 | class | [**SRSLShader**](classSR__SRSL__NS_1_1SRSLShader.md) <br> |
-| class | [**SRSLShaderCache**](classSR__SRSL__NS_1_1SRSLShaderCache.md) <br> |
 | class | [**SRSLStructureStatement**](classSR__SRSL__NS_1_1SRSLStructureStatement.md) <br> |
 | class | [**SRSLTypeInfo**](classSR__SRSL__NS_1_1SRSLTypeInfo.md) <br> |
 | struct | [**SRSLUniformBlock**](structSR__SRSL__NS_1_1SRSLUniformBlock.md) <br> |

@@ -58,6 +58,7 @@ namespace SR_GRAPH_NS {
 
         bool m_dynamicResizing = true;
         bool m_depthEnabled = true;
+        bool m_instanceForEachFrame = false;
 
         SR_MATH_NS::FVector2 m_preScale = SR_MATH_NS::FVector2(1.f);
         SR_MATH_NS::IVector2 m_size;

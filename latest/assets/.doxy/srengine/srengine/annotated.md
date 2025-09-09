@@ -728,7 +728,6 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **class** [**SRSLReturn**](classSR__SRSL__NS_1_1SRSLReturn.md)     
     * **struct** [**SRSLSampler**](structSR__SRSL__NS_1_1SRSLSampler.md)     
     * **class** [**SRSLShader**](classSR__SRSL__NS_1_1SRSLShader.md)     
-    * **class** [**SRSLShaderCache**](classSR__SRSL__NS_1_1SRSLShaderCache.md)     
     * **class** [**SRSLStructureStatement**](classSR__SRSL__NS_1_1SRSLStructureStatement.md)     
     * **class** [**SRSLTypeInfo**](classSR__SRSL__NS_1_1SRSLTypeInfo.md)     
     * **struct** [**SRSLUniformBlock**](structSR__SRSL__NS_1_1SRSLUniformBlock.md)     

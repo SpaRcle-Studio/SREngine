@@ -80,35 +80,19 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="55" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="55" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1SkinnedMesh_1ab05d8daea896649e20c455db3309295a" prot="private" static="no" mutable="no">
-        <type>int32_t</type>
-        <definition>int32_t SR_GTYPES_NS::SkinnedMesh::m_ssboBones</definition>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1SkinnedMesh_1a47eb6db6e109bd36e92b4ab96b0722f5" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; int32_t &gt;</type>
+        <definition>std::vector&lt;int32_t&gt; SR_GTYPES_NS::SkinnedMesh::m_ssboBones</definition>
         <argsstring></argsstring>
         <name>m_ssboBones</name>
         <qualifiedname>SR_GTYPES_NS::SkinnedMesh::m_ssboBones</qualifiedname>
-        <initializer>= SR_ID_INVALID</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="56" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="56" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1SkinnedMesh_1a56d66bbf33447ad9f2e90085f9c58397" prot="private" static="no" mutable="no">
-        <type>int32_t</type>
-        <definition>int32_t SR_GTYPES_NS::SkinnedMesh::m_ssboOffsets</definition>
-        <argsstring></argsstring>
-        <name>m_ssboOffsets</name>
-        <qualifiedname>SR_GTYPES_NS::SkinnedMesh::m_ssboOffsets</qualifiedname>
-        <initializer>= SR_ID_INVALID</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="57" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="57" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="56" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="56" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1SkinnedMesh_1af7710d08ac0288902fc977876440653c" prot="private" static="no" mutable="no">
         <type>SkeletonRef</type>
@@ -122,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="61" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="61" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="60" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="60" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -514,7 +498,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="16" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="16" bodyend="72"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" line="16" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h" bodystart="16" bodyend="71"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>BaseComponent</name></member>
@@ -623,8 +607,7 @@
       <member refid="classSR__UTILS__NS_1_1Component_1a5bbd2e2f1ed3059025e390d428d4d6ac" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>m_sceneObject</name></member>
       <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1af7710d08ac0288902fc977876440653c" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>m_skeleton</name></member>
       <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a8353d76f5f64ec8599fdcb8a5f71c4a7" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>m_skeletonIsBroken</name></member>
-      <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1ab05d8daea896649e20c455db3309295a" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>m_ssboBones</name></member>
-      <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a56d66bbf33447ad9f2e90085f9c58397" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>m_ssboOffsets</name></member>
+      <member refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a47eb6db6e109bd36e92b4ab96b0722f5" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>m_ssboBones</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1ac6c0dd4752763f730a0909861c7612cf" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>m_uboManager</name></member>
       <member refid="classSR__GTYPES__NS_1_1IndexedMesh_1ac8337db392cc53da044963aa01206384" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>m_VBO</name></member>
       <member refid="classSR__GTYPES__NS_1_1Mesh_1a8e92536a0dbb2e45e1f2fda2e74ac7bb" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::SkinnedMesh</scope><name>m_virtualDescriptor</name></member>

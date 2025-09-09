@@ -220,6 +220,9 @@
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_LINE\_START\_POINT**](#variable-shader_line_start_point)   = `"LINE\_START\_POINT"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_MACRO\_SR\_DEFINE\_CASCADED\_SHADOW\_MAP\_PASS**](#variable-shader_macro_sr_define_cascaded_shadow_map_pass)   = `"SR\_DEFINE\_CASCADED\_SHADOW\_MAP\_PASS"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_MACRO\_SR\_DEFINE\_COLOR\_PASS**](#variable-shader_macro_sr_define_color_pass)   = `"SR\_DEFINE\_COLOR\_PASS"`<br> |
+|  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_MACRO\_SR\_DEFINE\_HAS\_ALPHA**](#variable-shader_macro_sr_define_has_alpha)   = `"HAS\_ALPHA"`<br> |
+|  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_MACRO\_SR\_DEFINE\_HAS\_NORMAL**](#variable-shader_macro_sr_define_has_normal)   = `"HAS\_NORMAL"`<br> |
+|  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_MACRO\_SR\_DEFINE\_HAS\_SKELETON**](#variable-shader_macro_sr_define_has_skeleton)   = `"HAS\_SKELETON"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_MACRO\_SR\_DEFINE\_USE\_CASCADED\_SHADOW\_MAP**](#variable-shader_macro_sr_define_use_cascaded_shadow_map)   = `"SR\_DEFINE\_USE\_CASCADED\_SHADOW\_MAP"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_MODEL\_MATRIX**](#variable-shader_model_matrix)   = `"MODEL\_MATRIX"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_MODEL\_NO\_SCALE\_MATRIX**](#variable-shader_model_no_scale_matrix)   = `"MODEL\_NO\_SCALE\_MATRIX"`<br> |
@@ -836,6 +839,45 @@ SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_MACRO_SR_DEFINE_CAS
 
 ```C++
 SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_MACRO_SR_DEFINE_COLOR_PASS;
+```
+
+
+
+
+<hr>
+
+
+
+### variable SHADER\_MACRO\_SR\_DEFINE\_HAS\_ALPHA 
+
+```C++
+SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_MACRO_SR_DEFINE_HAS_ALPHA;
+```
+
+
+
+
+<hr>
+
+
+
+### variable SHADER\_MACRO\_SR\_DEFINE\_HAS\_NORMAL 
+
+```C++
+SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_MACRO_SR_DEFINE_HAS_NORMAL;
+```
+
+
+
+
+<hr>
+
+
+
+### variable SHADER\_MACRO\_SR\_DEFINE\_HAS\_SKELETON 
+
+```C++
+SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_MACRO_SR_DEFINE_HAS_SKELETON;
 ```
 
 

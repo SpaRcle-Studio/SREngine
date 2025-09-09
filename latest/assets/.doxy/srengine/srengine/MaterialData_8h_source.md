@@ -99,7 +99,6 @@ namespace SR_GRAPH_NS {
         void UseUniforms(const Pipeline* pPipeline);
         void UseSamplers(const Pipeline* pPipeline);
 
-        SR_NODISCARD bool HasStage(SR_UTILS_NS::StringAtom stage) const noexcept;
         SR_NODISCARD MaterialShaderData& GetDefaultShaderData() noexcept { return m_defaultShader; }
         SR_NODISCARD const MaterialShaderData& GetDefaultShaderData() const noexcept { return m_defaultShader; }
         SR_NODISCARD MaterialShaderData* GetShaderData(SR_UTILS_NS::StringAtom id) noexcept;
@@ -113,11 +112,21 @@ namespace SR_GRAPH_NS {
         void SR_FASTCALL OnSamplerChanged(SR_GTYPES_NS::Texture::Ptr pOldTexture, SR_GTYPES_NS::Texture::Ptr pNewTexture) noexcept;
 
         void OnPropertyChanged(bool onlyUniforms);
-        void AddShaderDefine(SR_UTILS_NS::StringAtom define, const std::string& value = "") { m_shaderDefines[define] = value; OnPropertyChanged(false); }
+        void AddShaderDefine(SR_UTILS_NS::StringAtom define, const std::string& value = "") { m_shaderDefines[define] = value; OnShaderDefinesChanged(); }
+        void RemoveShaderDefine(SR_UTILS_NS::StringAtom define) { m_shaderDefines.erase(define); OnShaderDefinesChanged(); }
+        void SwitchShaderDefine(SR_UTILS_NS::StringAtom define, bool enabled);
 
     private:
         void OnShaderChanged();
         void OnShaderDefinesChanged();
+
+        SR_NODISCARD bool IsNormalMappingEnabled() const { return m_shaderDefines.count(SHADER_MACRO_SR_DEFINE_HAS_NORMAL) == 1; }
+        SR_NODISCARD bool IsSkeletalAnimationEnabled() const { return m_shaderDefines.count(SHADER_MACRO_SR_DEFINE_HAS_SKELETON) == 1; }
+        SR_NODISCARD bool IsAlphaEnabled() const { return m_shaderDefines.count(SHADER_MACRO_SR_DEFINE_HAS_ALPHA) == 1; }
+
+        void SetNormalMappingEnabled(bool enabled) { SwitchShaderDefine(SHADER_MACRO_SR_DEFINE_HAS_NORMAL, enabled); }
+        void SetSkeletalAnimationEnabled(bool enabled) { SwitchShaderDefine(SHADER_MACRO_SR_DEFINE_HAS_SKELETON, enabled); }
+        void SetAlphaEnabled(bool enabled) { SwitchShaderDefine(SHADER_MACRO_SR_DEFINE_HAS_ALPHA, enabled); }
 
     private:
         std::map<SR_GTYPES_NS::Shader::Ptr, std::pair<SR_UTILS_NS::Subscription, uint32_t>> m_shaderSubscriptions;
@@ -125,6 +134,11 @@ namespace SR_GRAPH_NS {
         MaterialShaderData m_defaultShader;
 
         std::map<SR_UTILS_NS::StringAtom, std::string> m_shaderDefines;
+
+        SR_VIRTUAL_PROPERTY
+        SR_VIRTUAL_PROPERTY
+        SR_VIRTUAL_PROPERTY
+
 
     };
 }

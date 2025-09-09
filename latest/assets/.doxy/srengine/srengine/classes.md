@@ -1751,8 +1751,6 @@
 ([**SR\_SRSL\_NS**](namespaceSR__SRSL__NS.md))
 * [**SRSLShader**](classSR__SRSL__NS_1_1SRSLShader.md)
 ([**SR\_SRSL\_NS**](namespaceSR__SRSL__NS.md))
-* [**SRSLShaderCache**](classSR__SRSL__NS_1_1SRSLShaderCache.md)
-([**SR\_SRSL\_NS**](namespaceSR__SRSL__NS.md))
 * [**SRSLStruct**](structSR__GRAPH__NS_1_1SRSL_1_1SRSLStruct.md)
 ([**SR\_GRAPH\_NS::SRSL**](namespaceSR__GRAPH__NS_1_1SRSL.md))
 * [**SRSLStructureStatement**](classSR__SRSL__NS_1_1SRSLStructureStatement.md)

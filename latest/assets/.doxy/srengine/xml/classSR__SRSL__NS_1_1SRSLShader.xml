@@ -49,12 +49,12 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLShader_1a87e0d1b68069a646935d3527b1010030" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLShader_1a942f274485e20029baa7160b373f8245" prot="private" static="no" mutable="no">
         <type>friend</type>
-        <definition>friend SR_SRSL_NS::SRSLShader::SRSLShaderCache</definition>
+        <definition>friend SR_SRSL_NS::SRSLShader::ShaderCache</definition>
         <argsstring></argsstring>
-        <name>SRSLShaderCache</name>
-        <qualifiedname>SR_SRSL_NS::SRSLShader::SRSLShaderCache</qualifiedname>
+        <name>ShaderCache</name>
+        <qualifiedname>SR_SRSL_NS::SRSLShader::ShaderCache</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -990,8 +990,8 @@
       <member refid="classSR__SRSL__NS_1_1SRSLShader_1a9d39720bae3cb1bb834105d1fd1c9307" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLShader</scope><name>PrepareUniformBlocks</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLShader_1a1933389859a2fd5cb72764c4276c7c4d" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLShader</scope><name>Ptr</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLShader_1af870e926424d5fe1daf7ce223dafafd7" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLShader</scope><name>SaveCache</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLShader_1a942f274485e20029baa7160b373f8245" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLShader</scope><name>ShaderCache</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLShader_1a3c24eee6078d9a5843582e7a981076a4" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLShader</scope><name>SRSLShader</name></member>
-      <member refid="classSR__SRSL__NS_1_1SRSLShader_1a87e0d1b68069a646935d3527b1010030" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLShader</scope><name>SRSLShaderCache</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLShader_1aa7d069e1254a90ff4c759e607fe14ed5" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLShader</scope><name>Super</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLShader_1a8c8a76fe92808222bdf5ffdf354f03c0" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLShader</scope><name>ToString</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLShader_1a4ab8eab308f5464ada994055700aafc5" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLShader</scope><name>UniformBlocks</name></member>
