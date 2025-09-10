@@ -1,0 +1,36 @@
+ShaderType Spatial;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+
+DepthWrite true;
+BlendEnabled true;
+DepthTest true;
+
+[[uniform]] sampler2D colorBufferTest;
+
+#ifdef SR_DEFINE_USE_CASCADED_SHADOW_MAP
+    #include <Engine/Shaders/Common/pcf-utils.inl.srsl>
+#endif
+
+void fragment() {
+    COLOR = texture(colorBufferTest, UV);
+}
+
+void vertex() {
+    mat4 modelMatrix = MODEL_MATRIX;
+
+    VERTEX = (modelMatrix * vec4(VERTEX, 1.0)).xyz;
+
+#ifdef SR_DEFINE_CASCADED_SHADOW_MAP_PASS
+    OUT_POSITION = CASCADE_LIGHT_SPACE_MATRICES[PC_SHADOW_CASCADE_INDEX] * vec4(VERTEX, 1.0);
+#else
+    #ifdef SR_DEFINE_USE_CASCADED_SHADOW_MAP
+        PreparePCF(modelMatrix);
+    #endif
+
+    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * vec4(VERTEX, 1.0);
+#endif
+}

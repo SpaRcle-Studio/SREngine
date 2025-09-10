@@ -445,8 +445,14 @@ sra format
 										10-i:3445474946150253867
 									9-v:lockCursor
 										10-b:true
+									9-v:rightMouseButtonToRotate
+										10-b:true
+									9-v:velocityFactor
+										10-f:0.200000003
 					5-v:name
 						6-s:GameCamera
+					5-v:isEnabled
+						6-b:false
 					5-o:transform
 						6-v:type
 							7-s:Transform3D
@@ -14365,8 +14371,6 @@ ddddцццゔぅヾボ
 													13-f:0.0662739053
 												12-v:w
 													13-f:0.997801483
-					5-v:isEnabled
-						6-b:false
 					5-o:transform
 						6-v:type
 							7-s:Transform3D
@@ -14519,7 +14523,7 @@ ddddцццゔぅヾボ
 								8-v:y
 									9-f:2.55964923
 								8-v:z
-									9-f:8.28602886
+									9-f:8.56285667
 		2-k:i
 			3-o:d
 				4-v:type
@@ -14766,3 +14770,81 @@ ddddцццゔぅヾボ
 									9-f:-2.24400651e-07
 								8-v:z
 									9-f:-5.01955795
+		2-k:i
+			3-o:d
+				4-v:type
+					5-s:GameObject
+				4-o:ptr
+					5-v:entityId
+						6-i:4116046732879613346
+					5-a:components
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Rigidbody3D
+								8-o:ptr
+									9-v:entityId
+										10-i:4507789170385039349
+									9-v:isStatic
+										10-b:true
+									9-o:shape
+										10-v:type
+											11-s:CollisionShape
+										10-o:ptr
+											11-v:type
+												12-s:Plane3D
+											11-o:bounds
+												12-v:x
+													13-f:1
+												12-v:y
+													13-f:1
+												12-v:z
+													13-f:1
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Mesh3D
+								8-o:ptr
+									9-v:entityId
+										10-i:3772990745612449127
+									9-o:material
+										10-v:type
+											11-s:UniqueMaterial
+										10-o:ptr
+											11-o:data
+												12-v:type
+													13-s:MaterialData
+												12-o:ptr
+													13-o:default
+														14-v:shader
+															15-s:Engine/Shaders/image-on-mesh.srsl
+														14-o:data
+									9-v:meshPath
+										10-s:Engine/Models/plane.obj
+					5-v:tag
+						6-s:Ground
+					5-v:name
+						6-s:Plane
+					5-v:isEnabled
+						6-b:false
+					5-o:transform
+						6-v:type
+							7-s:Transform3D
+						6-o:ptr
+							7-o:translation
+								8-v:y
+									9-f:19.7814522
+								8-v:z
+									9-f:19.758522
+							7-o:quaternion
+								8-v:x
+									9-f:-0.707106769
+								8-v:w
+									9-f:0.707106769
+							7-o:scale
+								8-v:x
+									9-f:20
+								8-v:y
+									9-f:1
+								8-v:z
+									9-f:20

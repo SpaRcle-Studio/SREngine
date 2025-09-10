@@ -6,7 +6,7 @@ sra format
 		2-o:ptr
 			3-o:data
 				4-v:name
-					5-s:Editor render
+					5-s:Game render
 				4-o:pass
 					5-v:type
 						6-s:GroupPass
@@ -68,159 +68,6 @@ sra format
 										10-s:FrameBufferPass
 									9-o:ptr
 										10-v:customName
-											11-s:SceneView
-										10-a:passes
-											11-k:i
-												12-o:d
-													13-v:type
-														14-s:ClearBuffersPass
-													13-o:ptr
-											11-k:i
-												12-o:d
-													13-v:type
-														14-s:MeshDrawerPass
-													13-o:ptr
-														14-a:allowedLayers
-															15-k:i
-																16-v:d
-																	17-s:Default
-															15-k:i
-																16-v:d
-																	17-s:Opaque
-														14-o:samplers
-															15-a:samplers
-																16-k:i
-																	17-o:d
-																		18-v:id
-																			19-s:shadowMap
-																		18-v:usageType
-																			19-s:FrameBufferDepth
-																		18-v:fboName
-																			19-s:DepthCascades
-																16-k:i
-																	17-o:d
-																		18-v:id
-																			19-s:colorBufferTest
-																		18-v:usageType
-																			19-s:FrameBufferColor
-																		18-v:fboName
-																			19-s:ColorBuffer
-														14-o:uniforms
-															15-o:shared
-																16-a:useFromPass
-																	17-k:i
-																		18-v:d
-																			19-s:DepthCascades
-															15-o:material
-											11-k:i
-												12-o:d
-													13-v:type
-														14-s:SkyboxPass
-													13-o:ptr
-														14-v:skyboxPath
-															15-s:Engine/Skyboxes/Sun.png
-														14-v:shaderPath
-															15-s:Engine/Shaders/skybox.srsl
-											11-k:i
-												12-o:d
-													13-v:type
-														14-s:PostProcessPass
-													13-o:ptr
-														14-v:vertices
-															15-i:4
-														14-v:shaderPath
-															15-s:Editor/Shaders/grid.srsl
-														14-o:samplers
-											11-k:i
-												12-o:d
-													13-v:type
-														14-s:MeshDrawerPass
-													13-o:ptr
-														14-a:disallowedLayers
-															15-k:i
-																16-v:d
-																	17-s:Gizmo
-															15-k:i
-																16-v:d
-																	17-s:Default
-															15-k:i
-																16-v:d
-																	17-s:Opaque
-															15-k:i
-																16-v:d
-																	17-s:GizmoSelection
-														14-o:samplers
-															15-a:samplers
-																16-k:i
-																	17-o:d
-																		18-v:id
-																			19-s:shadowMap
-																		18-v:usageType
-																			19-s:FrameBufferDepth
-																		18-v:fboName
-																			19-s:DepthCascades
-														14-o:uniforms
-															15-o:shared
-																16-a:useFromPass
-																	17-k:i
-																		18-v:d
-																			19-s:DepthCascades
-															15-o:material
-											11-k:i
-												12-o:d
-													13-v:type
-														14-s:DebugPass
-													13-o:ptr
-														14-a:shaders
-															15-k:item
-																16-v:first
-																	17-s:mesh
-																16-o:second
-																	17-v:shaderPath
-																		18-s:Engine/Shaders/Gizmo/wire-mesh.srsl
-															15-k:item
-																16-v:first
-																	17-s:line
-																16-o:second
-																	17-v:shaderPath
-																		18-s:Engine/Shaders/line.srsl
-											11-k:i
-												12-o:d
-													13-v:type
-														14-s:ClearBuffersPass
-													13-o:ptr
-														14-v:clearColor
-															15-b:false
-											11-k:i
-												12-o:d
-													13-v:type
-														14-s:MeshDrawerPass
-													13-o:ptr
-														14-a:allowedLayers
-															15-k:i
-																16-v:d
-																	17-s:Gizmo
-														14-o:samplers
-														14-o:uniforms
-															15-o:shared
-															15-o:material
-										10-o:data
-											11-a:clearColors
-												12-k:i
-													13-o:d
-											11-v:frameBufferName
-												12-s:SceneView
-											11-o:depth
-												12-v:has
-													13-b:true
-												12-v:value
-													13-f:1
-							7-k:i
-								8-o:d
-									9-v:type
-										10-s:FrameBufferPass
-									9-o:ptr
-										10-v:customName
 											11-s:DepthCascades
 										10-a:passes
 											11-k:i
@@ -262,6 +109,85 @@ sra format
 													13-b:true
 												12-v:value
 													13-f:1
+							7-k:i
+								8-o:d
+									9-v:type
+										10-s:SwapchainPass
+									9-o:ptr
+										10-a:passes
+											11-k:i
+												12-o:d
+													13-v:type
+														14-s:MeshDrawerPass
+													13-o:ptr
+														14-a:allowedLayers
+															15-k:i
+																16-v:d
+																	17-s:Default
+															15-k:i
+																16-v:d
+																	17-s:Opaque
+														14-o:samplers
+															15-a:samplers
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:shadowMap
+																		18-v:usageType
+																			19-s:FrameBufferDepth
+																		18-v:fboName
+																			19-s:DepthCascades
+														14-o:uniforms
+															15-o:shared
+																16-a:useFromPass
+																	17-k:i
+																		18-v:d
+																			19-s:DepthCascades
+															15-o:material
+											11-k:i
+												12-o:d
+													13-v:type
+														14-s:SkyboxPass
+													13-o:ptr
+														14-v:skyboxPath
+															15-s:Engine/Skyboxes/Sun.png
+														14-v:shaderPath
+															15-s:Engine/Shaders/skybox.srsl
+											11-k:i
+												12-o:d
+													13-v:type
+														14-s:MeshDrawerPass
+													13-o:ptr
+														14-a:disallowedLayers
+															15-k:i
+																16-v:d
+																	17-s:Gizmo
+															15-k:i
+																16-v:d
+																	17-s:Default
+															15-k:i
+																16-v:d
+																	17-s:Opaque
+															15-k:i
+																16-v:d
+																	17-s:GizmoSelection
+														14-o:samplers
+															15-a:samplers
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:shadowMap
+																		18-v:usageType
+																			19-s:FrameBufferDepth
+																		18-v:fboName
+																			19-s:DepthCascades
+														14-o:uniforms
+															15-o:shared
+																16-a:useFromPass
+																	17-k:i
+																		18-v:d
+																			19-s:DepthCascades
+															15-o:material
 				4-a:frameBuffers
 					5-k:i
 						6-o:d
@@ -291,31 +217,6 @@ sra format
 										10-b:true
 								8-v:samples
 									9-i:1
-					5-k:i
-						6-o:d
-							7-v:type
-								8-s:FrameBufferController
-							7-o:ptr
-								8-v:name
-									9-s:SceneView
-								8-o:preScale
-									9-v:x
-										10-f:1
-									9-v:y
-										10-f:1
-								8-a:colorFormats
-									9-k:i
-										10-v:d
-											11-s:RGBA8_UNORM
-								8-o:features
-									9-v:depthLoad
-										10-b:true
-									9-v:colorLoad
-										10-b:true
-									9-v:depthTransferDst
-										10-b:true
-									9-v:colorTransferDst
-										10-b:true
 					5-k:i
 						6-o:d
 							7-v:type
@@ -352,10 +253,7 @@ sra format
 							7-a:frameBuffers
 								8-k:i
 									9-v:d
-										10-s:ColorBuffer
-								8-k:i
-									9-v:d
-										10-s:SceneView
-								8-k:i
-									9-v:d
 										10-s:DepthCascades
+								8-k:i
+									9-v:d
+										10-s:ColorBuffer

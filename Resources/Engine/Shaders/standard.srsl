@@ -5,7 +5,9 @@
 #endif
 
 PolygonMode Fill;
+
 CullMode Back;
+
 DepthCompare LessOrEqual;
 PrimitiveTopology TriangleList;
 

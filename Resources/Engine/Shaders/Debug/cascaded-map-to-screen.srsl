@@ -1,0 +1,34 @@
+ShaderType PostProcessing;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled false;
+DepthWrite false;
+DepthTest false;
+
+[[uniform]] sampler2DArray cascadedDepthMap;
+[[shared]] vec2 uv;
+
+float LinearizeDepth(float z) {
+    float n = 1.0; // camera z near
+    float f = 100.0; // camera z far
+    return (2.0 * n) / (f + n - z * (f - n));
+}
+
+void fragment() {
+    // делим экран на 2х2 квадранта
+    vec2 quadrantUV = fract(uv * 2.0);          // нормализованные uv внутри квадранта [0..1]
+    int quadX = int(uv.x * 2.0);                // 0 или 1
+    int quadY = int(uv.y * 2.0);                // 0 или 1
+    int cascadeIndex = quadX + quadY * 2;       // 0..3
+
+    float depth = LinearizeDepth(texture(cascadedDepthMap, vec3(quadrantUV, cascadeIndex)).r);
+    COLOR_INDEX_0 = vec4(vec3(depth), 1.0);
+}
+
+void vertex() {
+    uv = vec2((VERTEX_INDEX << 1) & 2, VERTEX_INDEX & 2);
+    OUT_POSITION = vec4(uv * 2.0 - 1.0, 0.0, 1.0);
+}

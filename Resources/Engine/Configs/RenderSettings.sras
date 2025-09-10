@@ -52,6 +52,38 @@ sra format
 							7-s:Engine/Render/PostProcess.srtech
 						6-v:editorCameraRenderTechnique
 							7-s:Editor/Render/FullRender.srtech
+				4-k:i
+					5-o:d
+						6-v:name
+							7-s:Default with game color buffer
+						6-a:shaderDefines
+							7-k:i
+								8-v:d
+									9-s:SR_DEFINE_USE_CASCADED_SHADOW_MAP
+						6-v:mainCameraRenderTechnique
+							7-s:Engine/Render/FullRenderUnusedWithColorBuffer.srtech
+						6-v:editorCameraRenderTechnique
+							7-s:Editor/Render/FullRender.srtech
+				4-k:i
+					5-o:d
+						6-v:name
+							7-s:Default with game color buffer no shadows
+						6-v:mainCameraRenderTechnique
+							7-s:Engine/Render/FullRenderWithColorBufferNoShadows.srtech
+						6-v:editorCameraRenderTechnique
+							7-s:Editor/Render/FullRender.srtech
+				4-k:i
+					5-o:d
+						6-v:name
+							7-s:Cascades depth debug
+						6-a:shaderDefines
+							7-k:i
+								8-v:d
+									9-s:SR_DEFINE_USE_CASCADED_SHADOW_MAP
+						6-v:mainCameraRenderTechnique
+							7-s:Engine/Render/CascadedMapToScreen.srtech
+						6-v:editorCameraRenderTechnique
+							7-s:Editor/Render/FullRender.srtech
 			3-o:defaultPreset
 				4-v:name
 					5-s:Default
