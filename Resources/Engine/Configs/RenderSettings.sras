@@ -28,21 +28,6 @@ sra format
 				4-k:i
 					5-o:d
 						6-v:name
-							7-s:Debug cascades
-						6-a:shaderDefines
-							7-k:i
-								8-v:d
-									9-s:SR_DEFINE_DEBUG_CASCADED_SHADOW_MAP_PASS
-							7-k:i
-								8-v:d
-									9-s:SR_DEFINE_USE_CASCADED_SHADOW_MAP
-						6-v:mainCameraRenderTechnique
-							7-s:Engine/Render/Geometry.srtech
-						6-v:editorCameraRenderTechnique
-							7-s:Editor/Render/FullRender.srtech
-				4-k:i
-					5-o:d
-						6-v:name
 							7-s:Post process
 						6-a:shaderDefines
 							7-k:i
@@ -51,7 +36,7 @@ sra format
 						6-v:mainCameraRenderTechnique
 							7-s:Engine/Render/PostProcess.srtech
 						6-v:editorCameraRenderTechnique
-							7-s:Editor/Render/FullRender.srtech
+							7-s:Editor/Render/PostProcess.srtech
 				4-k:i
 					5-o:d
 						6-v:name

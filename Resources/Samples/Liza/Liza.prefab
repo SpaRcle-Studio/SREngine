@@ -1,4 +1,5 @@
 sra format
+use tabs: true
 0-r:Root
 	1-v:entityId
 		2-i:3589323541040967580
@@ -2538,43 +2539,34 @@ sra format
 																	17-s:HAS_SKELETON
 																16-v:second
 																	17-s:
-														14-o:default
-															15-v:shader
+														14-o:defaultShader
+															15-v:shaderPath
 																16-s:Engine/Shaders/standard.srsl
-															15-o:data
-																16-a:uniforms
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:color
-																			19-v:type
-																				20-s:Vec4
-																			19-o:value
-																				20-v:x
-																					21-f:1
-																				20-v:y
-																					21-f:1
-																				20-v:z
-																					21-f:1
-																				20-v:w
-																					21-f:1
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:alphaThreshold
-																			19-v:type
-																				20-s:Float
-																			19-v:value
-																				20-f:0
-																16-a:samplers
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:diffuse
-																			19-v:type
-																				20-s:Sampler2D
-																			19-v:value
-																				20-s:Samples/Liza/body_diffuse.png
+															15-a:uniforms
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:color
+																		18-v:type
+																			19-s:Vec4
+																		18-o:value
+																			19-v:x
+																				20-f:1
+																			19-v:y
+																				20-f:1
+																			19-v:z
+																				20-f:1
+																			19-v:w
+																				20-f:1
+															15-a:samplers
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:diffuse
+																		18-v:type
+																			19-s:Sampler2D
+																		18-v:value
+																			19-s:Samples/Liza/body_diffuse.png
 										10-o:skeleton
 											11-v:entityId
 												12-i:2482526730041972321
@@ -2620,43 +2612,42 @@ sra format
 																	17-s:HAS_SKELETON
 																16-v:second
 																	17-s:
-														14-o:default
-															15-v:shader
+														14-o:defaultShader
+															15-v:shaderPath
 																16-s:Engine/Shaders/standard.srsl
-															15-o:data
-																16-a:uniforms
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:color
-																			19-v:type
-																				20-s:Vec4
-																			19-o:value
-																				20-v:x
-																					21-f:1
-																				20-v:y
-																					21-f:1
-																				20-v:z
-																					21-f:1
-																				20-v:w
-																					21-f:4.77400017
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:alphaThreshold
-																			19-v:type
-																				20-s:Float
-																			19-v:value
-																				20-f:0.158999994
-																16-a:samplers
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:diffuse
-																			19-v:type
-																				20-s:Sampler2D
-																			19-v:value
-																				20-s:Samples/Liza/hair_diffuse.png
+															15-a:uniforms
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:color
+																		18-v:type
+																			19-s:Vec4
+																		18-o:value
+																			19-v:x
+																				20-f:1
+																			19-v:y
+																				20-f:1
+																			19-v:z
+																				20-f:1
+																			19-v:w
+																				20-f:4.79099989
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:alphaThreshold
+																		18-v:type
+																			19-s:Float
+																		18-v:value
+																			19-f:0.158999994
+															15-a:samplers
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:diffuse
+																		18-v:type
+																			19-s:Sampler2D
+																		18-v:value
+																			19-s:Samples/Liza/hair_diffuse.png
 										10-o:skeleton
 											11-v:entityId
 												12-i:2482526730041972321
@@ -2701,43 +2692,34 @@ sra format
 																	17-s:HAS_SKELETON
 																16-v:second
 																	17-s:
-														14-o:default
-															15-v:shader
+														14-o:defaultShader
+															15-v:shaderPath
 																16-s:Engine/Shaders/standard.srsl
-															15-o:data
-																16-a:uniforms
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:color
-																			19-v:type
-																				20-s:Vec4
-																			19-o:value
-																				20-v:x
-																					21-f:1
-																				20-v:y
-																					21-f:1
-																				20-v:z
-																					21-f:1
-																				20-v:w
-																					21-f:1
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:alphaThreshold
-																			19-v:type
-																				20-s:Float
-																			19-v:value
-																				20-f:0
-																16-a:samplers
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:diffuse
-																			19-v:type
-																				20-s:Sampler2D
-																			19-v:value
-																				20-s:Samples/Liza/body_diffuse.png
+															15-a:uniforms
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:color
+																		18-v:type
+																			19-s:Vec4
+																		18-o:value
+																			19-v:x
+																				20-f:1
+																			19-v:y
+																				20-f:1
+																			19-v:z
+																				20-f:1
+																			19-v:w
+																				20-f:1
+															15-a:samplers
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:diffuse
+																		18-v:type
+																			19-s:Sampler2D
+																		18-v:value
+																			19-s:Samples/Liza/body_diffuse.png
 										10-o:skeleton
 											11-v:entityId
 												12-i:2482526730041972321
@@ -2785,43 +2767,42 @@ sra format
 																	17-s:HAS_SKELETON
 																16-v:second
 																	17-s:
-														14-o:default
-															15-v:shader
+														14-o:defaultShader
+															15-v:shaderPath
 																16-s:Engine/Shaders/standard.srsl
-															15-o:data
-																16-a:uniforms
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:color
-																			19-v:type
-																				20-s:Vec4
-																			19-o:value
-																				20-v:x
-																					21-f:1
-																				20-v:y
-																					21-f:1
-																				20-v:z
-																					21-f:1
-																				20-v:w
-																					21-f:61.5709991
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:alphaThreshold
-																			19-v:type
-																				20-s:Float
-																			19-v:value
-																				20-f:0
-																16-a:samplers
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:diffuse
-																			19-v:type
-																				20-s:Sampler2D
-																			19-v:value
-																				20-s:Samples/Liza/body_diffuse.png
+															15-a:uniforms
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:color
+																		18-v:type
+																			19-s:Vec4
+																		18-o:value
+																			19-v:x
+																				20-f:1
+																			19-v:y
+																				20-f:1
+																			19-v:z
+																				20-f:1
+																			19-v:w
+																				20-f:84.3000031
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:alphaThreshold
+																		18-v:type
+																			19-s:Float
+																		18-v:value
+																			19-f:0
+															15-a:samplers
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:diffuse
+																		18-v:type
+																			19-s:Sampler2D
+																		18-v:value
+																			19-s:Samples/Liza/body_diffuse.png
 										10-o:skeleton
 											11-v:entityId
 												12-i:2482526730041972321
@@ -2866,43 +2847,34 @@ sra format
 																	17-s:HAS_SKELETON
 																16-v:second
 																	17-s:
-														14-o:default
-															15-v:shader
+														14-o:defaultShader
+															15-v:shaderPath
 																16-s:Engine/Shaders/standard.srsl
-															15-o:data
-																16-a:uniforms
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:color
-																			19-v:type
-																				20-s:Vec4
-																			19-o:value
-																				20-v:x
-																					21-f:1
-																				20-v:y
-																					21-f:1
-																				20-v:z
-																					21-f:1
-																				20-v:w
-																					21-f:1
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:alphaThreshold
-																			19-v:type
-																				20-s:Float
-																			19-v:value
-																				20-f:0
-																16-a:samplers
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:diffuse
-																			19-v:type
-																				20-s:Sampler2D
-																			19-v:value
-																				20-s:Samples/Liza/glove_diffuse.png
+															15-a:uniforms
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:color
+																		18-v:type
+																			19-s:Vec4
+																		18-o:value
+																			19-v:x
+																				20-f:1
+																			19-v:y
+																				20-f:1
+																			19-v:z
+																				20-f:1
+																			19-v:w
+																				20-f:1
+															15-a:samplers
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:diffuse
+																		18-v:type
+																			19-s:Sampler2D
+																		18-v:value
+																			19-s:Samples/Liza/glove_diffuse.png
 										10-o:skeleton
 											11-v:entityId
 												12-i:2482526730041972321
@@ -2945,43 +2917,34 @@ sra format
 																	17-s:HAS_SKELETON
 																16-v:second
 																	17-s:
-														14-o:default
-															15-v:shader
+														14-o:defaultShader
+															15-v:shaderPath
 																16-s:Engine/Shaders/standard.srsl
-															15-o:data
-																16-a:uniforms
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:color
-																			19-v:type
-																				20-s:Vec4
-																			19-o:value
-																				20-v:x
-																					21-f:1
-																				20-v:y
-																					21-f:1
-																				20-v:z
-																					21-f:1
-																				20-v:w
-																					21-f:1
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:alphaThreshold
-																			19-v:type
-																				20-s:Float
-																			19-v:value
-																				20-f:0
-																16-a:samplers
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:diffuse
-																			19-v:type
-																				20-s:Sampler2D
-																			19-v:value
-																				20-s:Samples/Liza/shoes_diffuse.png
+															15-a:uniforms
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:color
+																		18-v:type
+																			19-s:Vec4
+																		18-o:value
+																			19-v:x
+																				20-f:1
+																			19-v:y
+																				20-f:1
+																			19-v:z
+																				20-f:1
+																			19-v:w
+																				20-f:1
+															15-a:samplers
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:diffuse
+																		18-v:type
+																			19-s:Sampler2D
+																		18-v:value
+																			19-s:Samples/Liza/shoes_diffuse.png
 										10-o:skeleton
 											11-v:entityId
 												12-i:2482526730041972321
@@ -3024,43 +2987,34 @@ sra format
 																	17-s:HAS_SKELETON
 																16-v:second
 																	17-s:
-														14-o:default
-															15-v:shader
+														14-o:defaultShader
+															15-v:shaderPath
 																16-s:Engine/Shaders/standard.srsl
-															15-o:data
-																16-a:uniforms
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:color
-																			19-v:type
-																				20-s:Vec4
-																			19-o:value
-																				20-v:x
-																					21-f:1
-																				20-v:y
-																					21-f:1
-																				20-v:z
-																					21-f:1
-																				20-v:w
-																					21-f:1
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:alphaThreshold
-																			19-v:type
-																				20-s:Float
-																			19-v:value
-																				20-f:0
-																16-a:samplers
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:diffuse
-																			19-v:type
-																				20-s:Sampler2D
-																			19-v:value
-																				20-s:Samples/Liza/bottom_diffuse.png
+															15-a:uniforms
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:color
+																		18-v:type
+																			19-s:Vec4
+																		18-o:value
+																			19-v:x
+																				20-f:1
+																			19-v:y
+																				20-f:1
+																			19-v:z
+																				20-f:1
+																			19-v:w
+																				20-f:1
+															15-a:samplers
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:diffuse
+																		18-v:type
+																			19-s:Sampler2D
+																		18-v:value
+																			19-s:Samples/Liza/bottom_diffuse.png
 										10-o:skeleton
 											11-v:entityId
 												12-i:2482526730041972321
@@ -3103,43 +3057,34 @@ sra format
 																	17-s:HAS_SKELETON
 																16-v:second
 																	17-s:
-														14-o:default
-															15-v:shader
+														14-o:defaultShader
+															15-v:shaderPath
 																16-s:Engine/Shaders/standard.srsl
-															15-o:data
-																16-a:uniforms
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:color
-																			19-v:type
-																				20-s:Vec4
-																			19-o:value
-																				20-v:x
-																					21-f:1
-																				20-v:y
-																					21-f:1
-																				20-v:z
-																					21-f:1
-																				20-v:w
-																					21-f:1
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:alphaThreshold
-																			19-v:type
-																				20-s:Float
-																			19-v:value
-																				20-f:0
-																16-a:samplers
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:diffuse
-																			19-v:type
-																				20-s:Sampler2D
-																			19-v:value
-																				20-s:Samples/Liza/top_diffuse.png
+															15-a:uniforms
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:color
+																		18-v:type
+																			19-s:Vec4
+																		18-o:value
+																			19-v:x
+																				20-f:1
+																			19-v:y
+																				20-f:1
+																			19-v:z
+																				20-f:1
+																			19-v:w
+																				20-f:1
+															15-a:samplers
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:diffuse
+																		18-v:type
+																			19-s:Sampler2D
+																		18-v:value
+																			19-s:Samples/Liza/top_diffuse.png
 										10-o:skeleton
 											11-v:entityId
 												12-i:2482526730041972321

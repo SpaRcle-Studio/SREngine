@@ -85,6 +85,41 @@ namespace SR_CORE_GUI_NS {
             .SetWidth(80.f)
             .SetItemSpacing(SR_MATH_NS::FVector2(10.f, 0.f));
 
+        AddElement()
+            .SetCustomDraw([this](auto&& pElement) {
+                SR_GRAPH_GUI_NS::Immediate::PushItemWidth(150.f);
+
+                auto optionFn = [this](SR_UTILS_NS::StringAtom macro, const char* label) {
+                    auto&& pContext = GetRenderScene()->GetContext();
+                    bool value = pContext->IsMacroDefined(macro);
+                    if (value) {
+                        SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor::Green());
+                    }
+                    if (SR_GRAPH_GUI_NS::Immediate::Selectable(label)) {
+                        pContext->SwitchMacro(macro, !value);
+                        pContext->ReloadShaders();
+                    }
+                    if (value) {
+                        SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
+                    }
+                };
+
+                if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("##Options", "Options")) {
+                    optionFn("DEBUG_RENDER", "Debug draw");
+
+                    SR_GRAPH_GUI_NS::Immediate::Separator();
+
+                    optionFn("SR_DEFINE_DEBUG_CASCADED_SHADOW_MAP_PASS", "Debug shadow cascades");
+
+                    SR_GRAPH_GUI_NS::Immediate::Separator();
+
+                    optionFn("SR_DEFINE_WIREFRAME", "Wireframe");
+
+                    SR_GRAPH_GUI_NS::Immediate::EndCombo();
+                }
+            })
+            .SetItemSpacing(SR_MATH_NS::FVector2(10.f, 0.f));
+
         Super::Init();
     }
 

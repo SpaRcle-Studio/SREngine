@@ -1,4 +1,5 @@
 sra format
+use tabs: true
 0-r:Root
 	1-v:entityId
 		2-i:4456090972442280982
@@ -38,58 +39,56 @@ sra format
 													13-v:type
 														14-s:MaterialData
 													13-o:ptr
-														14-o:default
-															15-v:shader
+														14-o:defaultShader
+															15-v:shaderPath
 																16-s:Engine/Shaders/bubble.srsl
-															15-o:data
-																16-a:uniforms
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:BubbleColor
-																			19-v:type
-																				20-s:Vec3
-																			19-o:value
-																				20-v:x
-																					21-f:0.629000008
-																				20-v:y
-																					21-f:0.731999993
-																				20-v:z
-																					21-f:1
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:NoiseSampleSize
-																			19-v:type
-																				20-s:Float
-																			19-v:value
-																				20-f:10.7309999
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:AnimationSpeed
-																			19-v:type
-																				20-s:Float
-																			19-v:value
-																				20-f:0.0309999995
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:HeightMultiplier
-																			19-v:type
-																				20-s:Float
-																			19-v:value
-																				20-f:0.393000007
-																16-a:samplers
-																	17-k:i
-																		18-o:d
-																			19-v:id
-																				20-s:NoiseTex
-																			19-v:type
-																				20-s:Sampler2D
-																			19-v:value
-																				20-s:Engine/Textures/noise.png
-														14-a:stages
+															15-a:uniforms
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:BubbleColor
+																		18-v:type
+																			19-s:Vec3
+																		18-o:value
+																			19-v:x
+																				20-f:0.629000008
+																			19-v:y
+																				20-f:0.731999993
+																			19-v:z
+																				20-f:1
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:NoiseSampleSize
+																		18-v:type
+																			19-s:Float
+																		18-v:value
+																			19-f:10.7309999
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:AnimationSpeed
+																		18-v:type
+																			19-s:Float
+																		18-v:value
+																			19-f:0.0309999995
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:HeightMultiplier
+																		18-v:type
+																			19-s:Float
+																		18-v:value
+																			19-f:0.393000007
+															15-a:samplers
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:NoiseTex
+																		18-v:type
+																			19-s:Sampler2D
+																		18-v:value
+																			19-s:Engine/Textures/noise.png
 										10-v:meshPath
 											11-s:Engine/Models/sphere.obj
 						6-v:name

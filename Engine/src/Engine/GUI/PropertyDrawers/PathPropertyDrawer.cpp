@@ -44,7 +44,7 @@ namespace SR_CORE_GUI_NS {
             if (isPickingEnabled) {
                 SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-                if (SR_GRAPH_GUI_NS::Immediate::Button("Pick", SR_MATH_NS::FVector2(context.fieldTitleWidth * 0.25f, context.fieldHeight))) {
+                if (SR_GRAPH_GUI_NS::Immediate::Button("...", SR_MATH_NS::FVector2(context.fieldTitleWidth * 0.25f, context.fieldHeight))) {
                     auto&& filterName = context.GetEditorParams().GetCustomArg("filter name");
                     auto&& filterValue = context.GetEditorParams().GetCustomArg("filter value");
 

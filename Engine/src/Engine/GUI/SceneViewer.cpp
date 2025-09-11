@@ -56,6 +56,13 @@ namespace SR_CORE_GUI_NS {
             }
             if (m_platform) {
                 m_platform->SetName("PREFAB_PLATFORM");
+
+                if (auto&& pRigidbody = m_platform->AddComponent<SR_PTYPES_NS::Rigidbody3D>()) {
+                    pRigidbody->SetType(SR_PHYSICS_NS::ShapeType::Box3D);
+                    pRigidbody->GetCollisionShape()->SetSize(SR_MATH_NS::FVector3(1.f, 0.01f, 1.f));
+                    pRigidbody->SetIsStatic(true);
+                }
+
                 m_platform->AddSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave);
                 if (!m_platform->GetChildren().empty()) {
                     if (auto&& pMesh = m_platform->GetChildren()[0]->GetComponent<SR_GTYPES_NS::Mesh3D>()) {
