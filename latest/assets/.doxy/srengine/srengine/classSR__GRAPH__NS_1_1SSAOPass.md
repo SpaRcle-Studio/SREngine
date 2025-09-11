@@ -217,6 +217,7 @@ See [SR\_GRAPH\_NS::PostProcessPass](classSR__GRAPH__NS_1_1PostProcessPass.md)
 
 | Type | Name |
 | ---: | :--- |
+| virtual bool | [**Init**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-init) () override<br> |
 | virtual void | [**OnMultisampleChanged**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-onmultisamplechanged) () override<br> |
 | virtual void | [**OnResize**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-onresize) (const SR\_MATH\_NS::UVector2 & size) override<br> |
 | virtual bool | [**PreRender**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-prerender) () override<br>_Вызывается только во время построения_  |
@@ -354,7 +355,7 @@ See [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 
 | Type | Name |
 | ---: | :--- |
-|  void | [**CloneTo**](classSR__UTILS__NS_1_1SRClass.md#function-cloneto) ([**SRClass**](classSR__UTILS__NS_1_1SRClass.md) & clone) const<br> |
+| virtual void | [**CloneTo**](classSR__UTILS__NS_1_1SRClass.md#function-cloneto) ([**SRClass**](classSR__UTILS__NS_1_1SRClass.md) & clone) const<br> |
 | virtual SR\_NODISCARD const [**SR\_UTILS\_NS::SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md) \* | [**GetMeta**](classSR__UTILS__NS_1_1SRClass.md#function-getmeta) () noexcept const = 0<br> |
 | virtual  | [**~SRClass**](classSR__UTILS__NS_1_1SRClass.md#function-srclass) () = default<br> |
 
@@ -428,11 +429,10 @@ See [SR\_GRAPH\_NS::PostProcessPass](classSR__GRAPH__NS_1_1PostProcessPass.md)
 | Type | Name |
 | ---: | :--- |
 |  bool | [**m\_dirtyShader**](classSR__GRAPH__NS_1_1PostProcessPass.md#variable-m_dirtyshader)   = `true`<br> |
+|  BaseMaterial::Ptr | [**m\_material**](classSR__GRAPH__NS_1_1PostProcessPass.md#variable-m_material)  <br> |
 |  [**SR\_UTILS\_NS::Subscription**](classSR__UTILS__NS_1_1Subscription.md) | [**m\_onShaderReloaded**](classSR__GRAPH__NS_1_1PostProcessPass.md#variable-m_onshaderreloaded)  <br> |
 |  Properties | [**m\_properties**](classSR__GRAPH__NS_1_1PostProcessPass.md#variable-m_properties)  <br> |
 |  [**SamplersPassData**](classSR__GRAPH__NS_1_1SamplersPassData.md) | [**m\_samplers**](classSR__GRAPH__NS_1_1PostProcessPass.md#variable-m_samplers)  <br> |
-|  ShaderPtr | [**m\_shader**](classSR__GRAPH__NS_1_1PostProcessPass.md#variable-m_shader)   = `nullptr`<br> |
-|  [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**m\_shaderPath**](classSR__GRAPH__NS_1_1PostProcessPass.md#variable-m_shaderpath)  <br> |
 |  uint32\_t | [**m\_vertices**](classSR__GRAPH__NS_1_1PostProcessPass.md#variable-m_vertices)   = `3`<br> |
 |  int32\_t | [**m\_virtualDescriptor**](classSR__GRAPH__NS_1_1PostProcessPass.md#variable-m_virtualdescriptor)   = `SR\_ID\_INVALID`<br> |
 |  int32\_t | [**m\_virtualUBO**](classSR__GRAPH__NS_1_1PostProcessPass.md#variable-m_virtualubo)   = `SR\_ID\_INVALID`<br> |
@@ -579,7 +579,6 @@ See [SR\_GRAPH\_NS::PostProcessPass](classSR__GRAPH__NS_1_1PostProcessPass.md)
 | ---: | :--- |
 | virtual void | [**DeInit**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-deinit) () override<br> |
 | virtual void | [**SetRenderTechnique**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-setrendertechnique) ([**SR\_GRAPH\_NS::IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \* pRenderTechnique) override<br> |
-|  void | [**SetShader**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-setshader) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & shaderPath) <br> |
 | virtual void | [**UseSamplers**](classSR__GRAPH__NS_1_1PostProcessPass.md#function-usesamplers) ([**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* pShader) override<br> |
 
 
@@ -648,7 +647,7 @@ virtual bool SR_GRAPH_NS::SSAOPass::Init () override
 
 
 
-Implements [*SR\_GRAPH\_NS::BasePass::Init*](classSR__GRAPH__NS_1_1BasePass.md#function-init)
+Implements [*SR\_GRAPH\_NS::PostProcessPass::Init*](classSR__GRAPH__NS_1_1PostProcessPass.md#function-init)
 
 
 <hr>

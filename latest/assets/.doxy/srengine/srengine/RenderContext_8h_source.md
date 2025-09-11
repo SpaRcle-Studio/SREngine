@@ -65,6 +65,7 @@ namespace SR_GRAPH_NS {
         using RenderTechniquePtr = SR_HTYPES_NS::SharedPtr<IRenderTechnique>;
         using WindowPtr = SR_HTYPES_NS::SharedPtr<Window>;
         using RenderScenes = std::list<std::pair<SR_WORLD_NS::Scene::Ptr, RenderScenePtr>>;
+        using Definitions = std::map<SR_UTILS_NS::StringAtom, std::string>;
     public:
         using Ptr = SR_HTYPES_NS::SafePtr<RenderContext>;
 
@@ -114,6 +115,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD const std::vector<SkyboxPtr>& GetSkyboxes() const noexcept;
         SR_NODISCARD const RenderScenes& GetScenes() const noexcept { return m_scenes; }
         SR_NODISCARD const RenderSettingsPreset& GetSettingsPreset() const noexcept;
+        SR_NODISCARD Definitions GetShaderMacros() const;
         SR_NODISCARD const RenderSettings& GetSettings() const noexcept;
         SR_NODISCARD SR_UTILS_NS::StringAtom GetActivePreset() const noexcept { return m_activePreset; }
 
@@ -122,6 +124,14 @@ namespace SR_GRAPH_NS {
         void SetOptimizedRenderUpdateEnabled(bool enabled) noexcept { m_isOptimizedUpdateEnabled = enabled; }
         bool SetCurrentShader(ShaderPtr pShader);
         void GarbageCollect() { m_isNeedGarbageCollection = true; }
+
+        SR_NODISCARD bool IsMacroDefined(SR_UTILS_NS::StringAtom define) const { return m_definitions.find(define) != m_definitions.end(); }
+
+        void SetMacro(SR_UTILS_NS::StringAtom define, std::optional<std::string> value = std::nullopt);
+        void RemoveMacro(SR_UTILS_NS::StringAtom define);
+        void SwitchMacro(SR_UTILS_NS::StringAtom define, bool enable) { if (enable) { SetMacro(define); } else { RemoveMacro(define); } }
+
+        void ReloadShaders();
 
     private:
         bool LoadDefaultResources();
@@ -138,6 +148,7 @@ namespace SR_GRAPH_NS {
         std::vector<ShaderPtr> m_shaders;
         std::vector<TexturePtr> m_textures;
         std::vector<SkyboxPtr> m_skyboxes;
+        Definitions m_definitions;
 
         RenderScenes m_scenes;
 

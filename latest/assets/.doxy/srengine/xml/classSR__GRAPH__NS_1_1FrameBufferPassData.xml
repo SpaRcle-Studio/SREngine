@@ -388,7 +388,7 @@
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPassData</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPassData</scope><name>AllocateStatic</name></member>
       <member refid="classSR__GRAPH__NS_1_1FrameBufferPassData_1aa7adc0a788083ef12e333958a2233694" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPassData</scope><name>ClearColors</name></member>
-      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPassData</scope><name>CloneTo</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1aab9dfdcd9d8baa2e11bdab5697ef429f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FrameBufferPassData</scope><name>CloneTo</name></member>
       <member refid="classSR__GRAPH__NS_1_1FrameBufferPassData_1adba5727f474f04a953e54a17ab40087c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPassData</scope><name>FBRenderCallback</name></member>
       <member refid="classSR__GRAPH__NS_1_1FrameBufferPassData_1ac2f24d5038ffad8c8f9caf6a31523f85" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPassData</scope><name>FBUpdateCallback</name></member>
       <member refid="classSR__GRAPH__NS_1_1FrameBufferPassData_1a007261c56552612ad3f62dbf63c1a1e1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPassData</scope><name>FrameBufferPassData</name></member>

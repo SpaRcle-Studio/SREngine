@@ -56,6 +56,7 @@ Inherited by the following classes: [SR\_GRAPH\_NS::MaterialData](classSR__GRAPH
 |  void | [**Broadcast**](#function-broadcast-22) ([**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, const [**SubscriptionMessage**](classSR__UTILS__NS_1_1SubscriptionMessage.md) & message) <br> |
 |  SR\_NODISCARD bool | [**HasSubscriptions**](#function-hassubscriptions) () noexcept const<br> |
 |  SR\_NODISCARD [**Subscription**](classSR__UTILS__NS_1_1Subscription.md) | [**Subscribe**](#function-subscribe) ([**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; void(const [**SubscriptionMessage**](classSR__UTILS__NS_1_1SubscriptionMessage.md) &)&gt; && callback) <br> |
+|  SR\_NODISCARD [**Subscription**](classSR__UTILS__NS_1_1Subscription.md) \* | [**SubscribeDynamic**](#function-subscribedynamic) ([**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; void(const [**SubscriptionMessage**](classSR__UTILS__NS_1_1SubscriptionMessage.md) &)&gt; && callback) <br> |
 |   | [**SubscriptionHolder**](#function-subscriptionholder-13) () <br> |
 |   | [**SubscriptionHolder**](#function-subscriptionholder-23) ([**SubscriptionHolder**](classSR__UTILS__NS_1_1SubscriptionHolder.md) & other) = delete<br> |
 |   | [**SubscriptionHolder**](#function-subscriptionholder-33) ([**SubscriptionHolder**](classSR__UTILS__NS_1_1SubscriptionHolder.md) && other) = delete<br> |
@@ -144,6 +145,22 @@ SR_NODISCARD bool SR_UTILS_NS::SubscriptionHolder::HasSubscriptions () noexcept 
 
 ```C++
 SR_NODISCARD Subscription SR_UTILS_NS::SubscriptionHolder::Subscribe (
+    StringAtom id,
+    SR_HTYPES_NS::Function < void(const SubscriptionMessage &)> && callback
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function SubscribeDynamic 
+
+```C++
+SR_NODISCARD Subscription * SR_UTILS_NS::SubscriptionHolder::SubscribeDynamic (
     StringAtom id,
     SR_HTYPES_NS::Function < void(const SubscriptionMessage &)> && callback
 ) 

@@ -322,7 +322,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>AutoFree</name></member>
       <member refid="structSR__ANIMATIONS__NS_1_1Bone_1aa91b530cd75c300cf8989cc729345cbe" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>Bone</name></member>
       <member refid="structSR__ANIMATIONS__NS_1_1Bone_1af516861b6f0ed99b305400e29fabf11d" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>bones</name></member>
-      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>CloneTo</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1aab9dfdcd9d8baa2e11bdab5697ef429f" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>CloneTo</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>DecrementPointer</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>DynamicCast</name></member>
       <member refid="structSR__ANIMATIONS__NS_1_1Bone_1a9395f62d3650b2dcf30e6c615029819c" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>gameObject</name></member>

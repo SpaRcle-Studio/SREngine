@@ -12,6 +12,8 @@
 
 * `#include <Graphics/Pass/BasePass.h>`
 * `#include <Graphics/Pipeline/IShaderProgram.h>`
+* `#include <Graphics/Material/MaterialData.h>`
+* `#include <Graphics/Material/UniqueMaterial.h>`
 
 
 

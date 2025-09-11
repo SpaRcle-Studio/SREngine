@@ -421,7 +421,7 @@
       <member refid="classSR__GRAPH__NS_1_1BasePass_1afffc5aa7bc9b5e340f99221abdf47be0" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DebugPass</scope><name>Bind</name></member>
       <member refid="classSR__GRAPH__NS_1_1DebugPass_1a7ab65f985fded2e7e2ab71cfa5528ae4" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPass</scope><name>BuildQueues</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1acc31a125e0f4886b1afcb196b55b75ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPass</scope><name>CameraPtr</name></member>
-      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPass</scope><name>CloneTo</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1aab9dfdcd9d8baa2e11bdab5697ef429f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DebugPass</scope><name>CloneTo</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DebugPass</scope><name>DecrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1DebugPass_1a9c7391221f30fc2fc4e18f08431672fc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::DebugPass</scope><name>DeInit</name></member>
       <member refid="classSR__GRAPH__NS_1_1DebugPass_1ad81b1a97e218143d0fa757a7de386afd" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPass</scope><name>DrawQueue</name></member>

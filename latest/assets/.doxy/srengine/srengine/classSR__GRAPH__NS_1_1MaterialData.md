@@ -201,22 +201,17 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | Type | Name |
 | ---: | :--- |
 |  void | [**AddShaderDefine**](#function-addshaderdefine) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) define, const std::string & value="") <br> |
-|  void | [**Finalize**](#function-finalize) () <br> |
 |  SR\_NODISCARD [**MaterialShaderData**](structSR__GRAPH__NS_1_1MaterialShaderData.md) & | [**GetDefaultShaderData**](#function-getdefaultshaderdata-12) () noexcept<br> |
 |  SR\_NODISCARD const [**MaterialShaderData**](structSR__GRAPH__NS_1_1MaterialShaderData.md) & | [**GetDefaultShaderData**](#function-getdefaultshaderdata-22) () noexcept const<br> |
 |  SR\_NODISCARD [**MaterialShaderData**](structSR__GRAPH__NS_1_1MaterialShaderData.md) \* | [**GetShaderData**](#function-getshaderdata-12) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id) noexcept<br> |
 |  SR\_NODISCARD const [**MaterialShaderData**](structSR__GRAPH__NS_1_1MaterialShaderData.md) \* | [**GetShaderData**](#function-getshaderdata-22) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id) noexcept const<br> |
 |  SR\_NODISCARD const std::map&lt; [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md), std::string &gt; & | [**GetShaderDefines**](#function-getshaderdefines) () noexcept const<br> |
-| virtual bool | [**Load**](#function-load) ([**SR\_UTILS\_NS::IDeserializer**](classSR__UTILS__NS_1_1IDeserializer.md) & deserializer) override<br> |
 |   | [**MaterialData**](#function-materialdata) () <br> |
 |  void | [**OnPropertyChanged**](#function-onpropertychanged) (bool onlyUniforms) <br> |
-|  void SR\_FASTCALL | [**OnSamplerChanged**](#function-onsamplerchanged) (SR\_GTYPES\_NS::Texture::Ptr pOldTexture, SR\_GTYPES\_NS::Texture::Ptr pNewTexture) noexcept<br> |
+|  void | [**OnShaderChanged**](#function-onshaderchanged) () <br> |
 |  void | [**RemoveShaderDefine**](#function-removeshaderdefine) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) define) <br> |
-| virtual void | [**Save**](#function-save) ([**SR\_UTILS\_NS::ISerializer**](classSR__UTILS__NS_1_1ISerializer.md) & serializer) override const<br> |
 |  void SR\_FASTCALL | [**SetData**](#function-setdata) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, const ShaderPropertyVariant & v, ShaderVarType type) noexcept<br> |
 |  void SR\_FASTCALL | [**SetSampler**](#function-setsampler) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) noexcept<br> |
-|  void SR\_FASTCALL | [**SetShader**](#function-setshader-12) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
-|  void SR\_FASTCALL | [**SetShader**](#function-setshader-22) (SR\_GTYPES\_NS::Shader::Ptr pShader) <br> |
 |  void | [**SwitchShaderDefine**](#function-switchshaderdefine) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) define, bool enabled) <br> |
 |  void | [**UseSamplers**](#function-usesamplers) (const [**Pipeline**](classSR__GRAPH__NS_1_1Pipeline.md) \* pPipeline) <br> |
 |  void | [**UseUniforms**](#function-useuniforms) (const [**Pipeline**](classSR__GRAPH__NS_1_1Pipeline.md) \* pPipeline) <br> |
@@ -247,7 +242,7 @@ See [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 
 | Type | Name |
 | ---: | :--- |
-|  void | [**CloneTo**](classSR__UTILS__NS_1_1SRClass.md#function-cloneto) ([**SRClass**](classSR__UTILS__NS_1_1SRClass.md) & clone) const<br> |
+| virtual void | [**CloneTo**](classSR__UTILS__NS_1_1SRClass.md#function-cloneto) ([**SRClass**](classSR__UTILS__NS_1_1SRClass.md) & clone) const<br> |
 | virtual SR\_NODISCARD const [**SR\_UTILS\_NS::SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md) \* | [**GetMeta**](classSR__UTILS__NS_1_1SRClass.md#function-getmeta) () noexcept const = 0<br> |
 | virtual  | [**~SRClass**](classSR__UTILS__NS_1_1SRClass.md#function-srclass) () = default<br> |
 
@@ -335,6 +330,7 @@ See [SR\_UTILS\_NS::SubscriptionHolder](classSR__UTILS__NS_1_1SubscriptionHolder
 |  void | [**Broadcast**](classSR__UTILS__NS_1_1SubscriptionHolder.md#function-broadcast-22) ([**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, const [**SubscriptionMessage**](classSR__UTILS__NS_1_1SubscriptionMessage.md) & message) <br> |
 |  SR\_NODISCARD bool | [**HasSubscriptions**](classSR__UTILS__NS_1_1SubscriptionHolder.md#function-hassubscriptions) () noexcept const<br> |
 |  SR\_NODISCARD [**Subscription**](classSR__UTILS__NS_1_1Subscription.md) | [**Subscribe**](classSR__UTILS__NS_1_1SubscriptionHolder.md#function-subscribe) ([**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; void(const [**SubscriptionMessage**](classSR__UTILS__NS_1_1SubscriptionMessage.md) &)&gt; && callback) <br> |
+|  SR\_NODISCARD [**Subscription**](classSR__UTILS__NS_1_1Subscription.md) \* | [**SubscribeDynamic**](classSR__UTILS__NS_1_1SubscriptionHolder.md#function-subscribedynamic) ([**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; void(const [**SubscriptionMessage**](classSR__UTILS__NS_1_1SubscriptionMessage.md) &)&gt; && callback) <br> |
 |   | [**SubscriptionHolder**](classSR__UTILS__NS_1_1SubscriptionHolder.md#function-subscriptionholder-13) () <br> |
 |   | [**SubscriptionHolder**](classSR__UTILS__NS_1_1SubscriptionHolder.md#function-subscriptionholder-23) ([**SubscriptionHolder**](classSR__UTILS__NS_1_1SubscriptionHolder.md) & other) = delete<br> |
 |   | [**SubscriptionHolder**](classSR__UTILS__NS_1_1SubscriptionHolder.md#function-subscriptionholder-33) ([**SubscriptionHolder**](classSR__UTILS__NS_1_1SubscriptionHolder.md) && other) = delete<br> |
@@ -637,19 +633,6 @@ inline void SR_GRAPH_NS::MaterialData::AddShaderDefine (
 
 
 
-### function Finalize 
-
-```C++
-void SR_GRAPH_NS::MaterialData::Finalize () 
-```
-
-
-
-
-<hr>
-
-
-
 ### function GetDefaultShaderData [1/2]
 
 ```C++
@@ -719,23 +702,6 @@ inline SR_NODISCARD const std::map< SR_UTILS_NS::StringAtom , std::string > & SR
 
 
 
-### function Load 
-
-```C++
-virtual bool SR_GRAPH_NS::MaterialData::Load (
-    SR_UTILS_NS::IDeserializer & deserializer
-) override
-```
-
-
-
-Implements [*SR\_UTILS\_NS::Serializable::Load*](classSR__UTILS__NS_1_1Serializable.md#function-load)
-
-
-<hr>
-
-
-
 ### function MaterialData 
 
 ```C++
@@ -764,13 +730,10 @@ void SR_GRAPH_NS::MaterialData::OnPropertyChanged (
 
 
 
-### function OnSamplerChanged 
+### function OnShaderChanged 
 
 ```C++
-void SR_FASTCALL SR_GRAPH_NS::MaterialData::OnSamplerChanged (
-    SR_GTYPES_NS::Texture::Ptr pOldTexture,
-    SR_GTYPES_NS::Texture::Ptr pNewTexture
-) noexcept
+void SR_GRAPH_NS::MaterialData::OnShaderChanged () 
 ```
 
 
@@ -789,23 +752,6 @@ inline void SR_GRAPH_NS::MaterialData::RemoveShaderDefine (
 ```
 
 
-
-
-<hr>
-
-
-
-### function Save 
-
-```C++
-virtual void SR_GRAPH_NS::MaterialData::Save (
-    SR_UTILS_NS::ISerializer & serializer
-) override const
-```
-
-
-
-Implements [*SR\_UTILS\_NS::Serializable::Save*](classSR__UTILS__NS_1_1Serializable.md#function-save)
 
 
 <hr>
@@ -836,36 +782,6 @@ void SR_FASTCALL SR_GRAPH_NS::MaterialData::SetSampler (
     SR_UTILS_NS::StringAtom id,
     const SR_UTILS_NS::Path & path
 ) noexcept
-```
-
-
-
-
-<hr>
-
-
-
-### function SetShader [1/2]
-
-```C++
-void SR_FASTCALL SR_GRAPH_NS::MaterialData::SetShader (
-    const SR_UTILS_NS::Path & path
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function SetShader [2/2]
-
-```C++
-void SR_FASTCALL SR_GRAPH_NS::MaterialData::SetShader (
-    SR_GTYPES_NS::Shader::Ptr pShader
-) 
 ```
 
 

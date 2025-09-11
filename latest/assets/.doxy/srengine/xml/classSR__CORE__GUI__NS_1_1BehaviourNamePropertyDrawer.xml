@@ -209,7 +209,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BehaviourNamePropertyDrawer</scope><name>AutoFree</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1BehaviourNamePropertyDrawer_1a8bcbb2ab077c0d4e7b20c755784b44fa" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BehaviourNamePropertyDrawer</scope><name>BehaviourNamePropertyDrawer</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase_1a88669cfadc3ca1f7bcabc8630be7a2c7" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BehaviourNamePropertyDrawer</scope><name>CheckSearchMatch</name></member>
-      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BehaviourNamePropertyDrawer</scope><name>CloneTo</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1aab9dfdcd9d8baa2e11bdab5697ef429f" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::BehaviourNamePropertyDrawer</scope><name>CloneTo</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::BehaviourNamePropertyDrawer</scope><name>DecrementPointer</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1BehaviourNamePropertyDrawer_1ae24c1f074f440322d6422d318582b3a2" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::BehaviourNamePropertyDrawer</scope><name>Draw</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BehaviourNamePropertyDrawer</scope><name>DynamicCast</name></member>

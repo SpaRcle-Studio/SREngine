@@ -77,7 +77,6 @@
         <name>Save</name>
         <qualifiedname>SR_UTILS_NS::Serializable::Save</qualifiedname>
         <reimplementedby refid="structSR__GRAPH__NS_1_1MaterialShaderProperty_1a60e0aeed38be5da5350b85d301ea0386">Save</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1MaterialData_1af9ab339d1569c20c25ed861f1cbb5c91">Save</reimplementedby>
         <param>
           <type><ref refid="classSR__UTILS__NS_1_1ISerializer" kindref="compound">ISerializer</ref> &amp;</type>
           <declname>serializer</declname>
@@ -97,7 +96,6 @@
         <name>Load</name>
         <qualifiedname>SR_UTILS_NS::Serializable::Load</qualifiedname>
         <reimplementedby refid="structSR__GRAPH__NS_1_1MaterialShaderProperty_1a18a61688cd2b86a147f45062401be9bc">Load</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1MaterialData_1ab40ff44108f9add971cd25ca43aae0fe">Load</reimplementedby>
         <param>
           <type><ref refid="classSR__UTILS__NS_1_1IDeserializer" kindref="compound">IDeserializer</ref> &amp;</type>
           <declname>deserializer</declname>
@@ -779,7 +777,7 @@
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Serializable</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Serializable</scope><name>AllocateStatic</name></member>
-      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Serializable</scope><name>CloneTo</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1aab9dfdcd9d8baa2e11bdab5697ef429f" prot="public" virt="virtual"><scope>SR_UTILS_NS::Serializable</scope><name>CloneTo</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a7734143f7ae123a6088320486af89283" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Serializable</scope><name>GetBaseMetas</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a97a0919298e9d1d53220613bded5ba69" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Serializable</scope><name>GetClassStaticName</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a16a351eac01dde110e273cfd05f1f7ed" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::Serializable</scope><name>GetMeta</name></member>

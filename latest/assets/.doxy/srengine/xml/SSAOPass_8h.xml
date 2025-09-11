@@ -5,6 +5,28 @@
     <includes refid="PostProcessPass_8h" local="no">Graphics/Pass/PostProcessPass.h</includes>
     <includes refid="Texture_8h" local="no">Graphics/Types/Texture.h</includes>
     <incdepgraph>
+      <node id="175">
+        <label>Graphics/Loaders/SRSL.h</label>
+        <link refid="SRSL_8h_source"/>
+        <childnode refid="155" relation="include">
+        </childnode>
+        <childnode refid="160" relation="include">
+        </childnode>
+        <childnode refid="176" relation="include">
+        </childnode>
+        <childnode refid="159" relation="include">
+        </childnode>
+      </node>
+      <node id="176">
+        <label>Graphics/Loaders/SRSLParser.h</label>
+        <link refid="SRSLParser_8h_source"/>
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="157" relation="include">
+        </childnode>
+        <childnode refid="155" relation="include">
+        </childnode>
+      </node>
       <node id="160">
         <label>Graphics/Loaders/ShaderProperties.h</label>
         <link refid="ShaderProperties_8h_source"/>
@@ -31,6 +53,64 @@
         <childnode refid="151" relation="include">
         </childnode>
       </node>
+      <node id="179">
+        <label>Graphics/Material/BaseMaterial.h</label>
+        <link refid="BaseMaterial_8h_source"/>
+        <childnode refid="130" relation="include">
+        </childnode>
+        <childnode refid="137" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
+        <childnode refid="131" relation="include">
+        </childnode>
+        <childnode refid="139" relation="include">
+        </childnode>
+        <childnode refid="160" relation="include">
+        </childnode>
+        <childnode refid="155" relation="include">
+        </childnode>
+        <childnode refid="180" relation="include">
+        </childnode>
+        <childnode refid="172" relation="include">
+        </childnode>
+        <childnode refid="181" relation="include">
+        </childnode>
+      </node>
+      <node id="172">
+        <label>Graphics/Material/MaterialData.h</label>
+        <link refid="MaterialData_8h_source"/>
+        <childnode refid="139" relation="include">
+        </childnode>
+        <childnode refid="173" relation="include">
+        </childnode>
+        <childnode refid="136" relation="include">
+        </childnode>
+      </node>
+      <node id="181">
+        <label>Graphics/Material/MaterialProperty.h</label>
+        <link refid="MaterialProperty_8h_source"/>
+        <childnode refid="160" relation="include">
+        </childnode>
+        <childnode refid="138" relation="include">
+        </childnode>
+      </node>
+      <node id="180">
+        <label>Graphics/Material/MaterialType.h</label>
+        <link refid="MaterialType_8h_source"/>
+        <childnode refid="130" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+      </node>
+      <node id="178">
+        <label>Graphics/Material/UniqueMaterial.h</label>
+        <link refid="UniqueMaterial_8h_source"/>
+        <childnode refid="179" relation="include">
+        </childnode>
+      </node>
       <node id="133">
         <label>Graphics/Memory/DescriptorManager.h</label>
         <link refid="DescriptorManager_8h_source"/>
@@ -51,6 +131,28 @@
         <childnode refid="112" relation="include">
         </childnode>
         <childnode refid="153" relation="include">
+        </childnode>
+      </node>
+      <node id="177">
+        <label>Graphics/Memory/ShaderProgramManager.h</label>
+        <link refid="ShaderProgramManager_8h_source"/>
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="131" relation="include">
+        </childnode>
+        <childnode refid="155" relation="include">
+        </childnode>
+      </node>
+      <node id="174">
+        <label>Graphics/Memory/ShaderUBOBlock.h</label>
+        <link refid="ShaderUBOBlock_8h_source"/>
+        <childnode refid="160" relation="include">
+        </childnode>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="155" relation="include">
         </childnode>
       </node>
       <node id="151">
@@ -116,6 +218,10 @@
         </childnode>
         <childnode refid="155" relation="include">
         </childnode>
+        <childnode refid="172" relation="include">
+        </childnode>
+        <childnode refid="178" relation="include">
+        </childnode>
       </node>
       <node id="1">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h</label>
@@ -167,6 +273,32 @@
         <childnode refid="130" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="173">
+        <label>Graphics/Types/Shader.h</label>
+        <link refid="Types_2Shader_8h_source"/>
+        <childnode refid="157" relation="include">
+        </childnode>
+        <childnode refid="156" relation="include">
+        </childnode>
+        <childnode refid="174" relation="include">
+        </childnode>
+        <childnode refid="175" relation="include">
+        </childnode>
+        <childnode refid="177" relation="include">
+        </childnode>
+        <childnode refid="152" relation="include">
+        </childnode>
+        <childnode refid="129" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="137" relation="include">
+        </childnode>
+        <childnode refid="143" relation="include">
         </childnode>
       </node>
       <node id="136">

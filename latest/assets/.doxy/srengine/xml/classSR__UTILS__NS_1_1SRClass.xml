@@ -35,12 +35,13 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRClass.h" line="46" column="61"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1SRClass_1aab9dfdcd9d8baa2e11bdab5697ef429f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
-        <definition>void SR_UTILS_NS::SRClass::CloneTo</definition>
+        <definition>virtual void SR_UTILS_NS::SRClass::CloneTo</definition>
         <argsstring>(SRClass &amp;clone) const</argsstring>
         <name>CloneTo</name>
         <qualifiedname>SR_UTILS_NS::SRClass::CloneTo</qualifiedname>
+        <reimplementedby refid="structSR__GRAPH__NS_1_1MaterialShaderData_1a72714830ddbcebd7728afd7239a5f642">CloneTo</reimplementedby>
         <param>
           <type><ref refid="classSR__UTILS__NS_1_1SRClass" kindref="compound">SRClass</ref> &amp;</type>
           <declname>clone</declname>
@@ -51,7 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRClass.h" line="50" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRClass.h" line="50" column="22"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -815,7 +816,7 @@
     <location file="Engine/libs/Utils/inc/Utils/TypeTraits/SRClass.h" line="37" column="5" bodyfile="Engine/libs/Utils/inc/Utils/TypeTraits/SRClass.h" bodystart="37" bodyend="60"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRClass</scope><name>AllocateStatic</name></member>
-      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRClass</scope><name>CloneTo</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1aab9dfdcd9d8baa2e11bdab5697ef429f" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRClass</scope><name>CloneTo</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a7734143f7ae123a6088320486af89283" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRClass</scope><name>GetBaseMetas</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a97a0919298e9d1d53220613bded5ba69" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRClass</scope><name>GetClassStaticName</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a16a351eac01dde110e273cfd05f1f7ed" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::SRClass</scope><name>GetMeta</name></member>

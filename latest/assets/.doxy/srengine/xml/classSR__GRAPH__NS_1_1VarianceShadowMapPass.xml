@@ -208,7 +208,7 @@
       <member refid="classSR__GRAPH__NS_1_1BasePass_1afffc5aa7bc9b5e340f99221abdf47be0" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>Bind</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1acc31a125e0f4886b1afcb196b55b75ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>CameraPtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a0e10ec729cc354bfba2dbe8715380318" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>CheckCamera</name></member>
-      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>CloneTo</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1aab9dfdcd9d8baa2e11bdab5697ef429f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>CloneTo</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>DecrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a567caf35c79947385ee0fa54da27e052" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>DeInit</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>DynamicCast</name></member>

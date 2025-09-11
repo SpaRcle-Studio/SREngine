@@ -97,6 +97,7 @@ Inherits the following classes: [SR\_HTYPES\_NS::SafePtr](classSR__HTYPES__NS_1_
 |  SR\_NODISCARD const RenderScenes & | [**GetScenes**](#function-getscenes) () noexcept const<br> |
 |  SR\_NODISCARD const [**RenderSettings**](classSR__GRAPH__NS_1_1RenderSettings.md) & | [**GetSettings**](#function-getsettings) () noexcept const<br> |
 |  SR\_NODISCARD const [**RenderSettingsPreset**](structSR__GRAPH__NS_1_1RenderSettingsPreset.md) & | [**GetSettingsPreset**](#function-getsettingspreset) () noexcept const<br> |
+|  SR\_NODISCARD Definitions | [**GetShaderMacros**](#function-getshadermacros) () const<br> |
 |  SR\_NODISCARD const std::vector&lt; ShaderPtr &gt; & | [**GetShaders**](#function-getshaders) () noexcept const<br> |
 |  SR\_NODISCARD const std::vector&lt; SkyboxPtr &gt; & | [**GetSkyboxes**](#function-getskyboxes) () noexcept const<br> |
 |  SR\_NODISCARD const std::vector&lt; TexturePtr &gt; & | [**GetTextures**](#function-gettextures) () noexcept const<br> |
@@ -105,16 +106,21 @@ Inherits the following classes: [SR\_HTYPES\_NS::SafePtr](classSR__HTYPES__NS_1_
 |  bool | [**Init**](#function-init) () <br> |
 |  SR\_NODISCARD bool | [**IsDirty**](#function-isdirty) () const<br> |
 |  SR\_NODISCARD bool | [**IsEmpty**](#function-isempty) () const<br> |
+|  SR\_NODISCARD bool | [**IsMacroDefined**](#function-ismacrodefined) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) define) const<br> |
 |  SR\_NODISCARD bool | [**IsOptimizedRenderUpdateEnabled**](#function-isoptimizedrenderupdateenabled) () noexcept const<br> |
 |  void | [**OnMultiSampleChanged**](#function-onmultisamplechanged) () <br> |
 |  void | [**OnResize**](#function-onresize) (const SR\_MATH\_NS::UVector2 & size) <br> |
 |  void | [**PrepareFrame**](#function-prepareframe) () <br> |
 |  void | [**Register**](#function-register) ([**Memory::IGraphicsResource**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md) \* pResource, [**SR\_UTILS\_NS::PassKey**](classSR__UTILS__NS_1_1PassKey.md)&lt; [**Memory::IGraphicsResource**](classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource.md) &gt;) <br> |
+|  void | [**ReloadShaders**](#function-reloadshaders) () <br> |
+|  void | [**RemoveMacro**](#function-removemacro) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) define) <br> |
 |   | [**RenderContext**](#function-rendercontext) () <br> |
 |  void | [**SetActivePreset**](#function-setactivepreset) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) <br> |
 |  bool | [**SetCurrentShader**](#function-setcurrentshader) (ShaderPtr pShader) <br> |
 |  void | [**SetDirty**](#function-setdirty) () <br> |
+|  void | [**SetMacro**](#function-setmacro) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) define, std::optional&lt; std::string &gt; value=std::nullopt) <br> |
 |  void | [**SetOptimizedRenderUpdateEnabled**](#function-setoptimizedrenderupdateenabled) (bool enabled) noexcept<br> |
+|  void | [**SwitchMacro**](#function-switchmacro) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) define, bool enable) <br> |
 |  void | [**SwitchWindow**](#function-switchwindow) (WindowPtr pWindow) <br> |
 |  bool | [**Update**](#function-update-12) () noexcept<br> |
 | virtual  | [**~RenderContext**](#function-rendercontext) () <br> |
@@ -502,6 +508,19 @@ SR_NODISCARD const RenderSettingsPreset & SR_GRAPH_NS::RenderContext::GetSetting
 
 
 
+### function GetShaderMacros 
+
+```C++
+SR_NODISCARD Definitions SR_GRAPH_NS::RenderContext::GetShaderMacros () const
+```
+
+
+
+
+<hr>
+
+
+
 ### function GetShaders 
 
 ```C++
@@ -606,6 +625,21 @@ SR_NODISCARD bool SR_GRAPH_NS::RenderContext::IsEmpty () const
 
 
 
+### function IsMacroDefined 
+
+```C++
+inline SR_NODISCARD bool SR_GRAPH_NS::RenderContext::IsMacroDefined (
+    SR_UTILS_NS::StringAtom define
+) const
+```
+
+
+
+
+<hr>
+
+
+
 ### function IsOptimizedRenderUpdateEnabled 
 
 ```C++
@@ -676,6 +710,34 @@ void SR_GRAPH_NS::RenderContext::Register (
 
 
 
+### function ReloadShaders 
+
+```C++
+void SR_GRAPH_NS::RenderContext::ReloadShaders () 
+```
+
+
+
+
+<hr>
+
+
+
+### function RemoveMacro 
+
+```C++
+void SR_GRAPH_NS::RenderContext::RemoveMacro (
+    SR_UTILS_NS::StringAtom define
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function RenderContext 
 
 ```C++
@@ -732,12 +794,44 @@ void SR_GRAPH_NS::RenderContext::SetDirty ()
 
 
 
+### function SetMacro 
+
+```C++
+void SR_GRAPH_NS::RenderContext::SetMacro (
+    SR_UTILS_NS::StringAtom define,
+    std::optional< std::string > value=std::nullopt
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function SetOptimizedRenderUpdateEnabled 
 
 ```C++
 inline void SR_GRAPH_NS::RenderContext::SetOptimizedRenderUpdateEnabled (
     bool enabled
 ) noexcept
+```
+
+
+
+
+<hr>
+
+
+
+### function SwitchMacro 
+
+```C++
+inline void SR_GRAPH_NS::RenderContext::SwitchMacro (
+    SR_UTILS_NS::StringAtom define,
+    bool enable
+) 
 ```
 
 

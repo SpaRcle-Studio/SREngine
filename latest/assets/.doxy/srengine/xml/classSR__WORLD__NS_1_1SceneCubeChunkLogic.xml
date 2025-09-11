@@ -927,7 +927,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::SceneCubeChunkLogic</scope><name>AutoFree</name></member>
       <member refid="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1ae968f50d7944cf3ac3ce655ac1ff2239" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::SceneCubeChunkLogic</scope><name>CalculateCurrentChunk</name></member>
       <member refid="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a7542f56cc3ab3940785aa0c577f608ef" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::SceneCubeChunkLogic</scope><name>CheckShift</name></member>
-      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::SceneCubeChunkLogic</scope><name>CloneTo</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1aab9dfdcd9d8baa2e11bdab5697ef429f" prot="public" virt="virtual"><scope>SR_WORLD_NS::SceneCubeChunkLogic</scope><name>CloneTo</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_WORLD_NS::SceneCubeChunkLogic</scope><name>DecrementPointer</name></member>
       <member refid="classSR__WORLD__NS_1_1SceneCubeChunkLogic_1a66ffa5aaf155add34182dbe2d6653baf" prot="public" virt="virtual"><scope>SR_WORLD_NS::SceneCubeChunkLogic</scope><name>Destroy</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::SceneCubeChunkLogic</scope><name>DynamicCast</name></member>

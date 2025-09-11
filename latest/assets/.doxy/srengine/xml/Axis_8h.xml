@@ -1143,6 +1143,8 @@
         <link refid="MaterialData_8h_source"/>
         <childnode refid="79" relation="include">
         </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
       </node>
       <node id="199">
         <label>Engine/libs/Graphics/inc/Graphics/Material/MaterialProperty.h</label>
@@ -1161,6 +1163,8 @@
       <node id="81">
         <label>Engine/libs/Graphics/inc/Graphics/Material/UniqueMaterial.h</label>
         <link refid="UniqueMaterial_8h_source"/>
+        <childnode refid="53" relation="include">
+        </childnode>
       </node>
       <node id="321">
         <label>Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h</label>

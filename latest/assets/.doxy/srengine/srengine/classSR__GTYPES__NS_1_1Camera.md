@@ -119,7 +119,7 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 |  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**GetViewPosition**](#function-getviewposition) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE const [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & | [**GetViewTranslate**](#function-getviewtranslate) () noexcept const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE const SR\_MATH\_NS::UVector2 & | [**GetViewportSize**](#function-getviewportsize) () const<br> |
-| virtual SR\_NODISCARD bool | [**IsEditorCamera**](#function-iseditorcamera) () noexcept const<br> |
+|  SR\_NODISCARD bool | [**IsEditorCamera**](#function-iseditorcamera) () const<br> |
 | virtual void | [**OnAttached**](#function-onattached) () override<br>_Вызывается после добавления компонента к игровому объекту_  |
 | virtual void | [**OnMatrixDirty**](#function-onmatrixdirty) () override<br> |
 |  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**ScreenToWorldPoint**](#function-screentoworldpoint-13) (const SR\_MATH\_NS::FVector3 & screenPos) const<br> |
@@ -713,7 +713,7 @@ inline SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::UVector2 & SR_GTYPES_NS::C
 ### function IsEditorCamera 
 
 ```C++
-inline virtual SR_NODISCARD bool SR_GTYPES_NS::Camera::IsEditorCamera () noexcept const
+SR_NODISCARD bool SR_GTYPES_NS::Camera::IsEditorCamera () const
 ```
 
 

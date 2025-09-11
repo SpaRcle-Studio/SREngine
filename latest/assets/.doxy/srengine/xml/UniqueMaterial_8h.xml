@@ -3,6 +3,7 @@
   <compounddef id="UniqueMaterial_8h" kind="file" language="C++">
     <compoundname>UniqueMaterial.h</compoundname>
     <includes refid="BaseMaterial_8h" local="no">Graphics/Material/BaseMaterial.h</includes>
+    <includedby refid="PostProcessPass_8h" local="no">Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h</includedby>
     <incdepgraph>
       <node id="164">
         <label>Graphics/Loaders/SRSL.h</label>
@@ -1410,6 +1411,24 @@
         <label>zlib.h</label>
       </node>
     </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>Engine/libs/Graphics/inc/Graphics/Material/UniqueMaterial.h</label>
+        <link refid="UniqueMaterial_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h</label>
+        <link refid="PostProcessPass_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h</label>
+        <link refid="SSAOPass_8h_source"/>
+      </node>
+    </invincdepgraph>
     <innerclass refid="classSR__GRAPH__NS_1_1UniqueMaterial" prot="public">SR_GRAPH_NS::UniqueMaterial</innerclass>
     <innernamespace refid="namespaceSR__GRAPH__NS">SR_GRAPH_NS</innernamespace>
     <briefdescription>

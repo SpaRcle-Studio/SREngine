@@ -120,7 +120,7 @@
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderSettingsPreset</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderSettingsPreset</scope><name>AllocateStatic</name></member>
-      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderSettingsPreset</scope><name>CloneTo</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1aab9dfdcd9d8baa2e11bdab5697ef429f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::RenderSettingsPreset</scope><name>CloneTo</name></member>
       <member refid="structSR__GRAPH__NS_1_1RenderSettingsPreset_1a0cf5dc19be51276b18486f85b5aeadef" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderSettingsPreset</scope><name>editorCameraRenderTechnique</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a7734143f7ae123a6088320486af89283" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderSettingsPreset</scope><name>GetBaseMetas</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a97a0919298e9d1d53220613bded5ba69" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderSettingsPreset</scope><name>GetClassStaticName</name></member>

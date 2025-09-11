@@ -360,7 +360,7 @@
       <member refid="classSR__GRAPH__NS_1_1BasePass_1afffc5aa7bc9b5e340f99221abdf47be0" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ColorBufferPass</scope><name>Bind</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1acc31a125e0f4886b1afcb196b55b75ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ColorBufferPass</scope><name>CameraPtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1IColorBufferPass_1aa6b97beb22a75bab5a73a74c9ae24180" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ColorBufferPass</scope><name>ClearTable</name></member>
-      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ColorBufferPass</scope><name>CloneTo</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1aab9dfdcd9d8baa2e11bdab5697ef429f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ColorBufferPass</scope><name>CloneTo</name></member>
       <member refid="classSR__GRAPH__NS_1_1ColorBufferPass_1a0b95b571d2bfa48c4a93491fb814648e" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::ColorBufferPass</scope><name>ColorBufferRenderQueue</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ColorBufferPass</scope><name>DecrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a567caf35c79947385ee0fa54da27e052" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ColorBufferPass</scope><name>DeInit</name></member>

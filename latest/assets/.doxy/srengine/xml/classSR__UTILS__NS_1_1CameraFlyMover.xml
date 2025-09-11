@@ -184,20 +184,20 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="49" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="49" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__UTILS__NS_1_1CameraFlyMover_1a3a4db8abb535794722f9df06bdefccb1" prot="private" static="no" mutable="no">
-        <type>float_t</type>
-        <definition>float_t SR_UTILS_NS::CameraFlyMover::m_maxVelocity</definition>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1CameraFlyMover_1a65bd512b782e9d74534516b9b5476a6f" prot="private" static="no" mutable="no">
+        <type>SR_MATH_NS::FVector3</type>
+        <definition>SR_MATH_NS::FVector3 SR_UTILS_NS::CameraFlyMover::m_maxVelocity</definition>
         <argsstring></argsstring>
         <name>m_maxVelocity</name>
         <qualifiedname>SR_UTILS_NS::CameraFlyMover::m_maxVelocity</qualifiedname>
-        <initializer>= 2.f</initializer>
+        <initializer>= SR_MATH_NS::FVector3(0.5f, 0.5f, 2.f)</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="51" column="17" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="51" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" line="51" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Game/CameraFlyMover.h" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1CameraFlyMover_1a185a093903938d583b01b641c3dd9fa1" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
@@ -432,7 +432,7 @@
       <member refid="classSR__UTILS__NS_1_1Component_1a4a854563851b2106daf5d678e3a4b3a6" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::CameraFlyMover</scope><name>m_isStarted</name></member>
       <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1a0c2b327d3227e23d88020357fede0d9b" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::CameraFlyMover</scope><name>m_lock</name></member>
       <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1aa2c37f4e1c26580499c05fbdafd0e5bd" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::CameraFlyMover</scope><name>m_lockCursor</name></member>
-      <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1a3a4db8abb535794722f9df06bdefccb1" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::CameraFlyMover</scope><name>m_maxVelocity</name></member>
+      <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1a65bd512b782e9d74534516b9b5476a6f" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::CameraFlyMover</scope><name>m_maxVelocity</name></member>
       <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1a6c55e3a3d619c37769d2029f7a4bcc5a" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::CameraFlyMover</scope><name>m_moveSpeed</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a9dddd30253cd78eb28f504e1afb66514" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::CameraFlyMover</scope><name>m_parent</name></member>
       <member refid="classSR__UTILS__NS_1_1CameraFlyMover_1a17dc07a2fc0015e241a2c2aef809e692" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::CameraFlyMover</scope><name>m_rightMouseButtonToRotate</name></member>

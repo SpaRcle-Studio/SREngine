@@ -182,6 +182,7 @@ See [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 
 | Type | Name |
 | ---: | :--- |
+| virtual bool | [**Init**](#function-init) () override<br> |
 | virtual void | [**OnMultisampleChanged**](#function-onmultisamplechanged) () override<br> |
 | virtual void | [**OnResize**](#function-onresize) (const SR\_MATH\_NS::UVector2 & size) override<br> |
 | virtual bool | [**PreRender**](#function-prerender) () override<br>_Вызывается только во время построения_  |
@@ -319,7 +320,7 @@ See [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 
 | Type | Name |
 | ---: | :--- |
-|  void | [**CloneTo**](classSR__UTILS__NS_1_1SRClass.md#function-cloneto) ([**SRClass**](classSR__UTILS__NS_1_1SRClass.md) & clone) const<br> |
+| virtual void | [**CloneTo**](classSR__UTILS__NS_1_1SRClass.md#function-cloneto) ([**SRClass**](classSR__UTILS__NS_1_1SRClass.md) & clone) const<br> |
 | virtual SR\_NODISCARD const [**SR\_UTILS\_NS::SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md) \* | [**GetMeta**](classSR__UTILS__NS_1_1SRClass.md#function-getmeta) () noexcept const = 0<br> |
 | virtual  | [**~SRClass**](classSR__UTILS__NS_1_1SRClass.md#function-srclass) () = default<br> |
 
@@ -383,11 +384,10 @@ See [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 | Type | Name |
 | ---: | :--- |
 |  bool | [**m\_dirtyShader**](#variable-m_dirtyshader)   = `true`<br> |
+|  BaseMaterial::Ptr | [**m\_material**](#variable-m_material)  <br> |
 |  [**SR\_UTILS\_NS::Subscription**](classSR__UTILS__NS_1_1Subscription.md) | [**m\_onShaderReloaded**](#variable-m_onshaderreloaded)  <br> |
 |  Properties | [**m\_properties**](#variable-m_properties)  <br> |
 |  [**SamplersPassData**](classSR__GRAPH__NS_1_1SamplersPassData.md) | [**m\_samplers**](#variable-m_samplers)  <br> |
-|  ShaderPtr | [**m\_shader**](#variable-m_shader)   = `nullptr`<br> |
-|  [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**m\_shaderPath**](#variable-m_shaderpath)  <br> |
 |  uint32\_t | [**m\_vertices**](#variable-m_vertices)   = `3`<br> |
 |  int32\_t | [**m\_virtualDescriptor**](#variable-m_virtualdescriptor)   = `SR\_ID\_INVALID`<br> |
 |  int32\_t | [**m\_virtualUBO**](#variable-m_virtualubo)   = `SR\_ID\_INVALID`<br> |
@@ -509,7 +509,6 @@ See [SR\_HTYPES\_NS::SharedPtrBase](classSR__HTYPES__NS_1_1SharedPtrBase.md)
 | ---: | :--- |
 | virtual void | [**DeInit**](#function-deinit) () override<br> |
 | virtual void | [**SetRenderTechnique**](#function-setrendertechnique) ([**SR\_GRAPH\_NS::IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \* pRenderTechnique) override<br> |
-|  void | [**SetShader**](#function-setshader) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & shaderPath) <br> |
 | virtual void | [**UseSamplers**](#function-usesamplers) ([**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* pShader) override<br> |
 
 
@@ -537,6 +536,21 @@ See [SR\_HTYPES\_NS::SharedPtrBase](classSR__HTYPES__NS_1_1SharedPtrBase.md)
 
 ## Public Functions Documentation
 
+
+
+
+### function Init 
+
+```C++
+virtual bool SR_GRAPH_NS::PostProcessPass::Init () override
+```
+
+
+
+Implements [*SR\_GRAPH\_NS::BasePass::Init*](classSR__GRAPH__NS_1_1BasePass.md#function-init)
+
+
+<hr>
 
 
 
@@ -664,6 +678,19 @@ bool SR_GRAPH_NS::PostProcessPass::m_dirtyShader;
 
 
 
+### variable m\_material 
+
+```C++
+BaseMaterial::Ptr SR_GRAPH_NS::PostProcessPass::m_material;
+```
+
+
+
+
+<hr>
+
+
+
 ### variable m\_onShaderReloaded 
 
 ```C++
@@ -694,32 +721,6 @@ Properties SR_GRAPH_NS::PostProcessPass::m_properties;
 
 ```C++
 SamplersPassData SR_GRAPH_NS::PostProcessPass::m_samplers;
-```
-
-
-
-
-<hr>
-
-
-
-### variable m\_shader 
-
-```C++
-ShaderPtr SR_GRAPH_NS::PostProcessPass::m_shader;
-```
-
-
-
-
-<hr>
-
-
-
-### variable m\_shaderPath 
-
-```C++
-SR_UTILS_NS::Path SR_GRAPH_NS::PostProcessPass::m_shaderPath;
 ```
 
 
@@ -796,21 +797,6 @@ virtual void SR_GRAPH_NS::PostProcessPass::SetRenderTechnique (
 
 
 Implements [*SR\_GRAPH\_NS::BasePass::SetRenderTechnique*](classSR__GRAPH__NS_1_1BasePass.md#function-setrendertechnique)
-
-
-<hr>
-
-
-
-### function SetShader 
-
-```C++
-void SR_GRAPH_NS::PostProcessPass::SetShader (
-    const SR_UTILS_NS::Path & shaderPath
-) 
-```
-
-
 
 
 <hr>

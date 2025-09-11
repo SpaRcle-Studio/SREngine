@@ -103,6 +103,7 @@ namespace SR_UTILS_NS {
         virtual ~SubscriptionHolder();
 
         SR_NODISCARD Subscription Subscribe(StringAtom id, SR_HTYPES_NS::Function<void(const SubscriptionMessage&)>&& callback);
+        SR_NODISCARD Subscription* SubscribeDynamic(StringAtom id, SR_HTYPES_NS::Function<void(const SubscriptionMessage&)>&& callback);
         SR_NODISCARD bool HasSubscriptions() const noexcept;
 
         void Unsubscribe(const SubscriptionInternalInfo* pSubscription);

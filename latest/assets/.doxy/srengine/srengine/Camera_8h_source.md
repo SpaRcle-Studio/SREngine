@@ -58,8 +58,6 @@ namespace SR_GTYPES_NS {
         void UpdateProjection(uint32_t w, uint32_t h);
         void Update(float_t dt) override;
 
-        SR_NODISCARD virtual bool IsEditorCamera() const noexcept { return false; }
-
     public:
         SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::Matrix4x4& GetView() const noexcept { return m_viewMat; }
         SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::Matrix4x4& GetOrthogonal() const noexcept { return m_orthogonal; }
@@ -80,6 +78,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD SR_FORCE_INLINE int32_t GetPriority() const { return m_priority; }
         SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::UVector2& GetViewportSize() const { return m_viewportSize; }
 
+        SR_NODISCARD bool IsEditorCamera() const;
         SR_NODISCARD SR_MATH_NS::Matrix4x4 GetImGuizmoView() const noexcept;
         SR_NODISCARD const SR_MATH_NS::FVector3& GetViewDirection() const;
         SR_NODISCARD SR_MATH_NS::FVector3 GetViewDirection(const SR_MATH_NS::FVector3& pos) const noexcept;

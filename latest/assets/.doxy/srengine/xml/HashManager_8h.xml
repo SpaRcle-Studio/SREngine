@@ -490,10 +490,10 @@
         <label>Engine/inc/Engine/GUI/EditorGUI.h</label>
         <link refid="EditorGUI_8h_source"/>
       </node>
-      <node id="97">
+      <node id="99">
         <label>Engine/inc/Engine/GUI/EditorGizmo.h</label>
         <link refid="EditorGizmo_8h_source"/>
-        <childnode refid="98" relation="include">
+        <childnode refid="100" relation="include">
         </childnode>
       </node>
       <node id="158">
@@ -630,7 +630,7 @@
         <label>Engine/inc/Engine/GUI/SceneRunner.h</label>
         <link refid="SceneRunner_8h_source"/>
       </node>
-      <node id="98">
+      <node id="100">
         <label>Engine/inc/Engine/GUI/SceneTools.h</label>
         <link refid="SceneTools_8h_source"/>
       </node>
@@ -726,7 +726,7 @@
         <label>Engine/inc/Engine/Utils/GraphicsResourceReloader.h</label>
         <link refid="GraphicsResourceReloader_8h_source"/>
       </node>
-      <node id="116">
+      <node id="118">
         <label>Engine/inc/Engine/World/EngineScene.h</label>
         <link refid="EngineScene_8h_source"/>
       </node>
@@ -902,10 +902,10 @@
         <label>Engine/libs/Graphics/inc/Graphics/Animations/Animator.h</label>
         <link refid="Animator_8h_source"/>
       </node>
-      <node id="85">
+      <node id="87">
         <label>Engine/libs/Graphics/inc/Graphics/Animations/Bone.h</label>
         <link refid="Bone_8h_source"/>
-        <childnode refid="86" relation="include">
+        <childnode refid="88" relation="include">
         </childnode>
       </node>
       <node id="257">
@@ -918,19 +918,19 @@
         <childnode refid="25" relation="include">
         </childnode>
       </node>
-      <node id="86">
+      <node id="88">
         <label>Engine/libs/Graphics/inc/Graphics/Animations/Skeleton.h</label>
         <link refid="Skeleton_8h_source"/>
         <childnode refid="24" relation="include">
         </childnode>
-        <childnode refid="87" relation="include">
+        <childnode refid="89" relation="include">
         </childnode>
       </node>
       <node id="304">
         <label>Engine/libs/Graphics/inc/Graphics/Font/Font.h</label>
         <link refid="Font_8h_source"/>
       </node>
-      <node id="88">
+      <node id="90">
         <label>Engine/libs/Graphics/inc/Graphics/Font/Text.h</label>
         <link refid="Text_8h_source"/>
       </node>
@@ -1023,7 +1023,7 @@
       <node id="168">
         <label>Engine/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h</label>
         <link refid="WidgetContainer_8h_source"/>
-        <childnode refid="98" relation="include">
+        <childnode refid="100" relation="include">
         </childnode>
       </node>
       <node id="371">
@@ -1082,7 +1082,7 @@
         <childnode refid="55" relation="include">
         </childnode>
       </node>
-      <node id="107">
+      <node id="109">
         <label>Engine/libs/Graphics/inc/Graphics/Loaders/SRSLParser.h</label>
         <link refid="SRSLParser_8h_source"/>
         <childnode refid="41" relation="include">
@@ -1095,11 +1095,11 @@
         </childnode>
         <childnode refid="57" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
+        <childnode refid="85" relation="include">
         </childnode>
-        <childnode refid="99" relation="include">
+        <childnode refid="101" relation="include">
         </childnode>
-        <childnode refid="100" relation="include">
+        <childnode refid="102" relation="include">
         </childnode>
         <childnode refid="54" relation="include">
         </childnode>
@@ -1133,13 +1133,15 @@
         <link refid="MaterialData_8h_source"/>
         <childnode refid="57" relation="include">
         </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
       </node>
-      <node id="83">
+      <node id="85">
         <label>Engine/libs/Graphics/inc/Graphics/Material/MaterialProperty.h</label>
         <link refid="MaterialProperty_8h_source"/>
         <childnode refid="57" relation="include">
         </childnode>
-        <childnode refid="84" relation="include">
+        <childnode refid="86" relation="include">
         </childnode>
       </node>
       <node id="146">
@@ -1153,12 +1155,14 @@
       <node id="147">
         <label>Engine/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h</label>
         <link refid="MeshMaterialProperty_8h_source"/>
-        <childnode refid="84" relation="include">
+        <childnode refid="86" relation="include">
         </childnode>
       </node>
       <node id="76">
         <label>Engine/libs/Graphics/inc/Graphics/Material/UniqueMaterial.h</label>
         <link refid="UniqueMaterial_8h_source"/>
+        <childnode refid="77" relation="include">
+        </childnode>
       </node>
       <node id="372">
         <label>Engine/libs/Graphics/inc/Graphics/Memory/CameraManager.h</label>
@@ -1167,21 +1171,21 @@
       <node id="331">
         <label>Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h</label>
         <link refid="DescriptorManager_8h_source"/>
-        <childnode refid="110" relation="include">
+        <childnode refid="112" relation="include">
         </childnode>
-        <childnode refid="84" relation="include">
+        <childnode refid="86" relation="include">
         </childnode>
       </node>
       <node id="245">
         <label>Engine/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h</label>
         <link refid="IGraphicsResource_8h_source"/>
-        <childnode refid="114" relation="include">
+        <childnode refid="116" relation="include">
         </childnode>
-        <childnode refid="115" relation="include">
+        <childnode refid="117" relation="include">
         </childnode>
         <childnode refid="190" relation="include">
         </childnode>
-        <childnode refid="84" relation="include">
+        <childnode refid="86" relation="include">
         </childnode>
         <childnode refid="55" relation="include">
         </childnode>
@@ -1193,28 +1197,28 @@
       <node id="148">
         <label>Engine/libs/Graphics/inc/Graphics/Memory/MeshManager.h</label>
         <link refid="MeshManager_8h_source"/>
-        <childnode refid="77" relation="include">
+        <childnode refid="79" relation="include">
         </childnode>
-        <childnode refid="90" relation="include">
+        <childnode refid="92" relation="include">
         </childnode>
       </node>
-      <node id="117">
+      <node id="119">
         <label>Engine/libs/Graphics/inc/Graphics/Memory/SSBO.h</label>
         <link refid="SSBO_8h_source"/>
-        <childnode refid="86" relation="include">
+        <childnode refid="88" relation="include">
         </childnode>
       </node>
       <node id="429">
         <label>Engine/libs/Graphics/inc/Graphics/Memory/SSBOManager.h</label>
         <link refid="SSBOManager_8h_source"/>
       </node>
-      <node id="108">
+      <node id="110">
         <label>Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h</label>
         <link refid="ShaderProgramManager_8h_source"/>
         <childnode refid="55" relation="include">
         </childnode>
       </node>
-      <node id="99">
+      <node id="101">
         <label>Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h</label>
         <link refid="ShaderUBOBlock_8h_source"/>
         <childnode refid="55" relation="include">
@@ -1231,17 +1235,17 @@
       <node id="332">
         <label>Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h</label>
         <link refid="UBOManager_8h_source"/>
-        <childnode refid="110" relation="include">
+        <childnode refid="112" relation="include">
         </childnode>
         <childnode refid="135" relation="include">
         </childnode>
-        <childnode refid="114" relation="include">
+        <childnode refid="116" relation="include">
         </childnode>
         <childnode refid="198" relation="include">
         </childnode>
         <childnode refid="140" relation="include">
         </childnode>
-        <childnode refid="84" relation="include">
+        <childnode refid="86" relation="include">
         </childnode>
         <childnode refid="55" relation="include">
         </childnode>
@@ -1270,159 +1274,159 @@
         <label>Engine/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h</label>
         <link refid="VulkanImGuiOverlay_8h_source"/>
       </node>
-      <node id="110">
+      <node id="112">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h</label>
         <link refid="BasePass_8h_source"/>
-        <childnode refid="111" relation="include">
+        <childnode refid="113" relation="include">
         </childnode>
-        <childnode refid="81" relation="include">
+        <childnode refid="83" relation="include">
         </childnode>
-        <childnode refid="120" relation="include">
+        <childnode refid="122" relation="include">
         </childnode>
-        <childnode refid="101" relation="include">
+        <childnode refid="103" relation="include">
         </childnode>
-        <childnode refid="129" relation="include">
+        <childnode refid="77" relation="include">
         </childnode>
         <childnode refid="131" relation="include">
         </childnode>
         <childnode refid="132" relation="include">
         </childnode>
       </node>
-      <node id="102">
+      <node id="104">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h</label>
         <link refid="CascadedShadowMapPass_8h_source"/>
-        <childnode refid="103" relation="include">
+        <childnode refid="105" relation="include">
         </childnode>
       </node>
-      <node id="104">
+      <node id="106">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h</label>
         <link refid="ColorBufferPass_8h_source"/>
       </node>
       <node id="135">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h</label>
         <link refid="FrameBufferPassData_8h_source"/>
-        <childnode refid="104" relation="include">
-        </childnode>
-        <childnode refid="112" relation="include">
-        </childnode>
-        <childnode refid="105" relation="include">
-        </childnode>
-      </node>
-      <node id="109">
-        <label>Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h</label>
-        <link refid="SamplersPassData_8h_source"/>
-        <childnode refid="110" relation="include">
-        </childnode>
-      </node>
-      <node id="78">
-        <label>Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h</label>
-        <link refid="DebugPass_8h_source"/>
-      </node>
-      <node id="126">
-        <label>Engine/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h</label>
-        <link refid="DepthBufferPass_8h_source"/>
-      </node>
-      <node id="121">
-        <label>Engine/libs/Graphics/inc/Graphics/Pass/FlatClusterPass.h</label>
-        <link refid="FlatClusterPass_8h_source"/>
-        <childnode refid="122" relation="include">
-        </childnode>
-      </node>
-      <node id="122">
-        <label>Engine/libs/Graphics/inc/Graphics/Pass/FlatColorBufferPass.h</label>
-        <link refid="FlatColorBufferPass_8h_source"/>
-      </node>
-      <node id="112">
-        <label>Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h</label>
-        <link refid="FrameBufferPass_8h_source"/>
-      </node>
-      <node id="111">
-        <label>Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h</label>
-        <link refid="GroupPass_8h_source"/>
-        <childnode refid="112" relation="include">
-        </childnode>
-        <childnode refid="113" relation="include">
+        <childnode refid="106" relation="include">
         </childnode>
         <childnode refid="114" relation="include">
         </childnode>
+        <childnode refid="107" relation="include">
+        </childnode>
       </node>
-      <node id="81">
+      <node id="111">
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/Data/SamplersPassData.h</label>
+        <link refid="SamplersPassData_8h_source"/>
+        <childnode refid="112" relation="include">
+        </childnode>
+      </node>
+      <node id="80">
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/DebugPass.h</label>
+        <link refid="DebugPass_8h_source"/>
+      </node>
+      <node id="128">
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h</label>
+        <link refid="DepthBufferPass_8h_source"/>
+      </node>
+      <node id="123">
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/FlatClusterPass.h</label>
+        <link refid="FlatClusterPass_8h_source"/>
+        <childnode refid="124" relation="include">
+        </childnode>
+      </node>
+      <node id="124">
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/FlatColorBufferPass.h</label>
+        <link refid="FlatColorBufferPass_8h_source"/>
+      </node>
+      <node id="114">
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h</label>
+        <link refid="FrameBufferPass_8h_source"/>
+      </node>
+      <node id="113">
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h</label>
+        <link refid="GroupPass_8h_source"/>
+        <childnode refid="114" relation="include">
+        </childnode>
+        <childnode refid="115" relation="include">
+        </childnode>
+        <childnode refid="116" relation="include">
+        </childnode>
+      </node>
+      <node id="83">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</label>
         <link refid="HTMLDrawerPass_8h_source"/>
       </node>
       <node id="457">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h</label>
         <link refid="IColorBufferPass_8h_source"/>
-        <childnode refid="104" relation="include">
-        </childnode>
-        <childnode refid="122" relation="include">
-        </childnode>
-      </node>
-      <node id="123">
-        <label>Engine/libs/Graphics/inc/Graphics/Pass/IMesh3DClusterPass.h</label>
-        <link refid="IMesh3DClusterPass_8h_source"/>
-        <childnode refid="78" relation="include">
+        <childnode refid="106" relation="include">
         </childnode>
         <childnode refid="124" relation="include">
         </childnode>
-        <childnode refid="125" relation="include">
+      </node>
+      <node id="125">
+        <label>Engine/libs/Graphics/inc/Graphics/Pass/IMesh3DClusterPass.h</label>
+        <link refid="IMesh3DClusterPass_8h_source"/>
+        <childnode refid="80" relation="include">
         </childnode>
-        <childnode refid="128" relation="include">
+        <childnode refid="126" relation="include">
+        </childnode>
+        <childnode refid="127" relation="include">
+        </childnode>
+        <childnode refid="130" relation="include">
         </childnode>
       </node>
-      <node id="120">
+      <node id="122">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h</label>
         <link refid="IMeshClusterPass_8h_source"/>
-        <childnode refid="121" relation="include">
-        </childnode>
         <childnode refid="123" relation="include">
         </childnode>
+        <childnode refid="125" relation="include">
+        </childnode>
       </node>
-      <node id="101">
+      <node id="103">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</label>
         <link refid="MeshDrawerPass_8h_source"/>
-        <childnode refid="102" relation="include">
-        </childnode>
         <childnode refid="104" relation="include">
         </childnode>
-        <childnode refid="105" relation="include">
+        <childnode refid="106" relation="include">
+        </childnode>
+        <childnode refid="107" relation="include">
         </childnode>
       </node>
-      <node id="105">
+      <node id="107">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</label>
         <link refid="OffScreenMeshDrawerPass_8h_source"/>
       </node>
-      <node id="124">
+      <node id="126">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/OpaquePass.h</label>
         <link refid="OpaquePass_8h_source"/>
       </node>
-      <node id="129">
+      <node id="77">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h</label>
         <link refid="PostProcessPass_8h_source"/>
-        <childnode refid="130" relation="include">
+        <childnode refid="78" relation="include">
         </childnode>
       </node>
       <node id="297">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/RenderTechniqueQueue.h</label>
         <link refid="RenderTechniqueQueue_8h_source"/>
-        <childnode refid="114" relation="include">
+        <childnode refid="116" relation="include">
         </childnode>
         <childnode refid="141" relation="include">
         </childnode>
       </node>
-      <node id="130">
+      <node id="78">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/SSAOPass.h</label>
         <link refid="SSAOPass_8h_source"/>
       </node>
-      <node id="125">
+      <node id="127">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h</label>
         <link refid="ShaderOverridePass_8h_source"/>
-        <childnode refid="126" relation="include">
+        <childnode refid="128" relation="include">
         </childnode>
-        <childnode refid="127" relation="include">
+        <childnode refid="129" relation="include">
         </childnode>
       </node>
-      <node id="127">
+      <node id="129">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/ShadowMapPass.h</label>
         <link refid="ShadowMapPass_8h_source"/>
       </node>
@@ -1430,15 +1434,15 @@
         <label>Engine/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h</label>
         <link refid="SkyboxPass_8h_source"/>
       </node>
-      <node id="113">
+      <node id="115">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h</label>
         <link refid="SwapchainPass_8h_source"/>
       </node>
-      <node id="128">
+      <node id="130">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/TransparentPass.h</label>
         <link refid="TransparentPass_8h_source"/>
       </node>
-      <node id="103">
+      <node id="105">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h</label>
         <link refid="VarianceShadowMapPass_8h_source"/>
       </node>
@@ -1470,26 +1474,26 @@
         <childnode refid="133" relation="include">
         </childnode>
       </node>
-      <node id="106">
+      <node id="108">
         <label>Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h</label>
         <link refid="IShaderProgram_8h_source"/>
         <childnode refid="47" relation="include">
         </childnode>
         <childnode refid="41" relation="include">
         </childnode>
-        <childnode refid="107" relation="include">
+        <childnode refid="109" relation="include">
         </childnode>
         <childnode refid="57" relation="include">
         </childnode>
-        <childnode refid="108" relation="include">
-        </childnode>
-        <childnode refid="99" relation="include">
-        </childnode>
-        <childnode refid="109" relation="include">
+        <childnode refid="110" relation="include">
         </childnode>
         <childnode refid="101" relation="include">
         </childnode>
-        <childnode refid="129" relation="include">
+        <childnode refid="111" relation="include">
+        </childnode>
+        <childnode refid="103" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
         </childnode>
         <childnode refid="133" relation="include">
         </childnode>
@@ -1507,7 +1511,7 @@
         </childnode>
         <childnode refid="144" relation="include">
         </childnode>
-        <childnode refid="84" relation="include">
+        <childnode refid="86" relation="include">
         </childnode>
       </node>
       <node id="133">
@@ -1515,7 +1519,7 @@
         <link refid="Pipeline_8h_source"/>
         <childnode refid="134" relation="include">
         </childnode>
-        <childnode refid="117" relation="include">
+        <childnode refid="119" relation="include">
         </childnode>
         <childnode refid="135" relation="include">
         </childnode>
@@ -1523,9 +1527,9 @@
         </childnode>
         <childnode refid="137" relation="include">
         </childnode>
-        <childnode refid="82" relation="include">
+        <childnode refid="84" relation="include">
         </childnode>
-        <childnode refid="90" relation="include">
+        <childnode refid="92" relation="include">
         </childnode>
       </node>
       <node id="169">
@@ -1541,13 +1545,13 @@
         </childnode>
         <childnode refid="148" relation="include">
         </childnode>
-        <childnode refid="126" relation="include">
+        <childnode refid="128" relation="include">
         </childnode>
-        <childnode refid="125" relation="include">
+        <childnode refid="127" relation="include">
         </childnode>
         <childnode refid="169" relation="include">
         </childnode>
-        <childnode refid="115" relation="include">
+        <childnode refid="117" relation="include">
         </childnode>
         <childnode refid="170" relation="include">
         </childnode>
@@ -1555,7 +1559,7 @@
       <node id="180">
         <label>Engine/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h</label>
         <link refid="TextureHelper_8h_source"/>
-        <childnode refid="117" relation="include">
+        <childnode refid="119" relation="include">
         </childnode>
         <childnode refid="181" relation="include">
         </childnode>
@@ -1596,10 +1600,10 @@
         <label>Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/X11SurfaceInit.h</label>
         <link refid="X11SurfaceInit_8h_source"/>
       </node>
-      <node id="77">
+      <node id="79">
         <label>Engine/libs/Graphics/inc/Graphics/Render/DebugRenderer.h</label>
         <link refid="DebugRenderer_8h_source"/>
-        <childnode refid="78" relation="include">
+        <childnode refid="80" relation="include">
         </childnode>
       </node>
       <node id="248">
@@ -1613,67 +1617,67 @@
         <link refid="FrameBufferController_8h_source"/>
         <childnode refid="135" relation="include">
         </childnode>
-        <childnode refid="114" relation="include">
+        <childnode refid="116" relation="include">
         </childnode>
       </node>
       <node id="453">
         <label>Engine/libs/Graphics/inc/Graphics/Render/FrustumCulling.h</label>
         <link refid="FrustumCulling_8h_source"/>
       </node>
-      <node id="79">
+      <node id="81">
         <label>Engine/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h</label>
         <link refid="HTMLDrawableElement_8h_source"/>
-        <childnode refid="80" relation="include">
+        <childnode refid="82" relation="include">
         </childnode>
       </node>
-      <node id="80">
+      <node id="82">
         <label>Engine/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</label>
         <link refid="HTMLRenderer_8h_source"/>
-        <childnode refid="81" relation="include">
+        <childnode refid="83" relation="include">
         </childnode>
       </node>
-      <node id="114">
+      <node id="116">
         <label>Engine/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h</label>
         <link refid="IRenderTechnique_8h_source"/>
-        <childnode refid="115" relation="include">
+        <childnode refid="117" relation="include">
         </childnode>
-        <childnode refid="118" relation="include">
+        <childnode refid="120" relation="include">
         </childnode>
-        <childnode refid="119" relation="include">
+        <childnode refid="121" relation="include">
         </childnode>
       </node>
       <node id="293">
         <label>Engine/libs/Graphics/inc/Graphics/Render/IRenderer.h</label>
         <link refid="IRenderer_8h_source"/>
-        <childnode refid="77" relation="include">
+        <childnode refid="79" relation="include">
         </childnode>
       </node>
       <node id="249">
         <label>Engine/libs/Graphics/inc/Graphics/Render/MeshCluster.h</label>
         <link refid="MeshCluster_8h_source"/>
-        <childnode refid="120" relation="include">
+        <childnode refid="122" relation="include">
         </childnode>
-        <childnode refid="115" relation="include">
+        <childnode refid="117" relation="include">
         </childnode>
         <childnode refid="141" relation="include">
         </childnode>
       </node>
-      <node id="115">
+      <node id="117">
         <label>Engine/libs/Graphics/inc/Graphics/Render/RenderContext.h</label>
         <link refid="RenderContext_8h_source"/>
         <childnode refid="58" relation="include">
         </childnode>
-        <childnode refid="116" relation="include">
+        <childnode refid="118" relation="include">
         </childnode>
-        <childnode refid="86" relation="include">
+        <childnode refid="88" relation="include">
         </childnode>
-        <childnode refid="117" relation="include">
+        <childnode refid="119" relation="include">
         </childnode>
       </node>
       <node id="139">
         <label>Engine/libs/Graphics/inc/Graphics/Render/RenderPredicates.h</label>
         <link refid="RenderPredicates_8h_source"/>
-        <childnode refid="101" relation="include">
+        <childnode refid="103" relation="include">
         </childnode>
         <childnode refid="140" relation="include">
         </childnode>
@@ -1681,13 +1685,13 @@
       <node id="198">
         <label>Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h</label>
         <link refid="RenderQueue_8h_source"/>
-        <childnode refid="84" relation="include">
+        <childnode refid="86" relation="include">
         </childnode>
       </node>
       <node id="141">
         <label>Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h</label>
         <link refid="RenderScene_8h_source"/>
-        <childnode refid="116" relation="include">
+        <childnode refid="118" relation="include">
         </childnode>
         <childnode refid="142" relation="include">
         </childnode>
@@ -1698,13 +1702,13 @@
         <childnode refid="141" relation="include">
         </childnode>
       </node>
-      <node id="118">
+      <node id="120">
         <label>Engine/libs/Graphics/inc/Graphics/Render/RenderTechnique.h</label>
         <link refid="RenderTechnique_8h_source"/>
-        <childnode refid="116" relation="include">
+        <childnode refid="118" relation="include">
         </childnode>
       </node>
-      <node id="119">
+      <node id="121">
         <label>Engine/libs/Graphics/inc/Graphics/Render/ScriptableRenderTechnique.h</label>
         <link refid="ScriptableRenderTechnique_8h_source"/>
       </node>
@@ -1802,14 +1806,14 @@
         <childnode refid="47" relation="include">
         </childnode>
       </node>
-      <node id="100">
+      <node id="102">
         <label>Engine/libs/Graphics/inc/Graphics/SRSL/ShaderType.h</label>
         <link refid="ShaderType_8h_source"/>
         <childnode refid="41" relation="include">
         </childnode>
-        <childnode refid="101" relation="include">
+        <childnode refid="103" relation="include">
         </childnode>
-        <childnode refid="106" relation="include">
+        <childnode refid="108" relation="include">
         </childnode>
         <childnode refid="44" relation="include">
         </childnode>
@@ -1835,7 +1839,7 @@
       <node id="143">
         <label>Engine/libs/Graphics/inc/Graphics/Settings/RenderSettings.h</label>
         <link refid="RenderSettings_8h_source"/>
-        <childnode refid="115" relation="include">
+        <childnode refid="117" relation="include">
         </childnode>
       </node>
       <node id="144">
@@ -1847,10 +1851,10 @@
         <link refid="Camera_8h_source"/>
         <childnode refid="259" relation="include">
         </childnode>
-        <childnode refid="79" relation="include">
+        <childnode refid="81" relation="include">
         </childnode>
       </node>
-      <node id="82">
+      <node id="84">
         <label>Engine/libs/Graphics/inc/Graphics/Types/ComputeShader.h</label>
         <link refid="ComputeShader_8h_source"/>
       </node>
@@ -1858,49 +1862,49 @@
         <label>Engine/libs/Graphics/inc/Graphics/Types/Framebuffer.h</label>
         <link refid="Framebuffer_8h_source"/>
       </node>
-      <node id="89">
+      <node id="91">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h</label>
         <link refid="DebugLine_8h_source"/>
       </node>
-      <node id="91">
+      <node id="93">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h</label>
         <link refid="DebugWireframeMesh_8h_source"/>
       </node>
-      <node id="90">
+      <node id="92">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h</label>
         <link refid="IndexedMesh_8h_source"/>
-        <childnode refid="91" relation="include">
-        </childnode>
-        <childnode refid="92" relation="include">
-        </childnode>
-      </node>
-      <node id="93">
-        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h</label>
-        <link refid="Mesh3D_8h_source"/>
-      </node>
-      <node id="92">
-        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/MeshComponent.h</label>
-        <link refid="MeshComponent_8h_source"/>
         <childnode refid="93" relation="include">
         </childnode>
         <childnode refid="94" relation="include">
         </childnode>
-        <childnode refid="87" relation="include">
-        </childnode>
+      </node>
+      <node id="95">
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h</label>
+        <link refid="Mesh3D_8h_source"/>
+      </node>
+      <node id="94">
+        <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/MeshComponent.h</label>
+        <link refid="MeshComponent_8h_source"/>
         <childnode refid="95" relation="include">
         </childnode>
         <childnode refid="96" relation="include">
         </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
+        </childnode>
+        <childnode refid="98" relation="include">
+        </childnode>
       </node>
-      <node id="94">
+      <node id="96">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h</label>
         <link refid="ProceduralMesh_8h_source"/>
       </node>
-      <node id="87">
+      <node id="89">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</label>
         <link refid="SkinnedMesh_8h_source"/>
       </node>
-      <node id="95">
+      <node id="97">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h</label>
         <link refid="Sprite_8h_source"/>
       </node>
@@ -1911,23 +1915,23 @@
         </childnode>
         <childnode refid="34" relation="include">
         </childnode>
-        <childnode refid="92" relation="include">
+        <childnode refid="94" relation="include">
         </childnode>
-        <childnode refid="84" relation="include">
+        <childnode refid="86" relation="include">
         </childnode>
-        <childnode refid="96" relation="include">
+        <childnode refid="98" relation="include">
         </childnode>
       </node>
-      <node id="84">
+      <node id="86">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Mesh.h</label>
         <link refid="Mesh_8h_source"/>
-        <childnode refid="85" relation="include">
-        </childnode>
-        <childnode refid="88" relation="include">
-        </childnode>
-        <childnode refid="89" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
         <childnode refid="90" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="92" relation="include">
         </childnode>
       </node>
       <node id="263">
@@ -1943,11 +1947,11 @@
         <link refid="Types_2Shader_8h_source"/>
         <childnode refid="56" relation="include">
         </childnode>
-        <childnode refid="77" relation="include">
-        </childnode>
         <childnode refid="79" relation="include">
         </childnode>
-        <childnode refid="82" relation="include">
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="84" relation="include">
         </childnode>
       </node>
       <node id="183">
@@ -1961,21 +1965,21 @@
         </childnode>
         <childnode refid="56" relation="include">
         </childnode>
-        <childnode refid="109" relation="include">
+        <childnode refid="111" relation="include">
         </childnode>
-        <childnode refid="130" relation="include">
+        <childnode refid="78" relation="include">
         </childnode>
-        <childnode refid="79" relation="include">
+        <childnode refid="81" relation="include">
         </childnode>
       </node>
       <node id="194">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Uniforms.h</label>
         <link refid="Uniforms_8h_source"/>
-        <childnode refid="106" relation="include">
-        </childnode>
-        <childnode refid="89" relation="include">
+        <childnode refid="108" relation="include">
         </childnode>
         <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="93" relation="include">
         </childnode>
         <childnode refid="55" relation="include">
         </childnode>
@@ -1983,19 +1987,19 @@
       <node id="195">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Vertices.h</label>
         <link refid="Graphics_2inc_2Graphics_2Types_2Vertices_8h_source"/>
-        <childnode refid="88" relation="include">
+        <childnode refid="90" relation="include">
         </childnode>
-        <childnode refid="107" relation="include">
+        <childnode refid="109" relation="include">
         </childnode>
         <childnode refid="148" relation="include">
         </childnode>
-        <childnode refid="106" relation="include">
+        <childnode refid="108" relation="include">
         </childnode>
         <childnode refid="49" relation="include">
         </childnode>
-        <childnode refid="89" relation="include">
-        </childnode>
         <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="93" relation="include">
         </childnode>
         <childnode refid="55" relation="include">
         </childnode>
@@ -2008,10 +2012,10 @@
         <label>Engine/libs/Graphics/inc/Graphics/UI/Canvas.h</label>
         <link refid="Canvas_8h_source"/>
       </node>
-      <node id="96">
+      <node id="98">
         <label>Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h</label>
         <link refid="Gizmo_8h_source"/>
-        <childnode refid="97" relation="include">
+        <childnode refid="99" relation="include">
         </childnode>
       </node>
       <node id="281">
@@ -2087,7 +2091,7 @@
         </childnode>
         <childnode refid="140" relation="include">
         </childnode>
-        <childnode refid="84" relation="include">
+        <childnode refid="86" relation="include">
         </childnode>
       </node>
       <node id="171">
@@ -2259,7 +2263,7 @@
       <node id="216">
         <label>Engine/libs/Physics/inc/Physics/PhysicsScene.h</label>
         <link refid="PhysicsScene_8h_source"/>
-        <childnode refid="116" relation="include">
+        <childnode refid="118" relation="include">
         </childnode>
       </node>
       <node id="223">
@@ -2465,7 +2469,7 @@
         </childnode>
         <childnode refid="153" relation="include">
         </childnode>
-        <childnode refid="106" relation="include">
+        <childnode refid="108" relation="include">
         </childnode>
         <childnode refid="154" relation="include">
         </childnode>
@@ -2473,7 +2477,7 @@
         </childnode>
         <childnode refid="192" relation="include">
         </childnode>
-        <childnode refid="84" relation="include">
+        <childnode refid="86" relation="include">
         </childnode>
         <childnode refid="194" relation="include">
         </childnode>
@@ -2619,7 +2623,7 @@
       <node id="430">
         <label>Engine/libs/Utils/inc/Utils/Common/SubscriptionHolder.h</label>
         <link refid="SubscriptionHolder_8h_source"/>
-        <childnode refid="83" relation="include">
+        <childnode refid="85" relation="include">
         </childnode>
         <childnode refid="431" relation="include">
         </childnode>
@@ -2781,7 +2785,7 @@
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
-        <childnode refid="85" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
         <childnode refid="257" relation="include">
         </childnode>
@@ -2857,7 +2861,7 @@
       <node id="289">
         <label>Engine/libs/Utils/inc/Utils/ECS/EntityRef.h</label>
         <link refid="EntityRef_8h_source"/>
-        <childnode refid="87" relation="include">
+        <childnode refid="89" relation="include">
         </childnode>
         <childnode refid="275" relation="include">
         </childnode>
@@ -2903,7 +2907,7 @@
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
-        <childnode refid="85" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
         <childnode refid="226" relation="include">
         </childnode>
@@ -2991,7 +2995,7 @@
         </childnode>
         <childnode refid="178" relation="include">
         </childnode>
-        <childnode refid="86" relation="include">
+        <childnode refid="88" relation="include">
         </childnode>
       </node>
       <node id="238">
@@ -3035,7 +3039,7 @@
         <link refid="FileSystem_8h_source"/>
         <childnode refid="175" relation="include">
         </childnode>
-        <childnode refid="106" relation="include">
+        <childnode refid="108" relation="include">
         </childnode>
         <childnode refid="470" relation="include">
         </childnode>
@@ -3195,7 +3199,7 @@
       <node id="452">
         <label>Engine/libs/Utils/inc/Utils/Math/Matrix4x4.h</label>
         <link refid="Matrix4x4_8h_source"/>
-        <childnode refid="102" relation="include">
+        <childnode refid="104" relation="include">
         </childnode>
         <childnode refid="154" relation="include">
         </childnode>
@@ -3203,7 +3207,7 @@
         </childnode>
         <childnode refid="258" relation="include">
         </childnode>
-        <childnode refid="84" relation="include">
+        <childnode refid="86" relation="include">
         </childnode>
         <childnode refid="214" relation="include">
         </childnode>
@@ -3263,13 +3267,13 @@
         </childnode>
         <childnode refid="33" relation="include">
         </childnode>
-        <childnode refid="110" relation="include">
+        <childnode refid="112" relation="include">
         </childnode>
         <childnode refid="189" relation="include">
         </childnode>
-        <childnode refid="114" relation="include">
+        <childnode refid="116" relation="include">
         </childnode>
-        <childnode refid="115" relation="include">
+        <childnode refid="117" relation="include">
         </childnode>
         <childnode refid="190" relation="include">
         </childnode>
@@ -3331,11 +3335,11 @@
         </childnode>
         <childnode refid="57" relation="include">
         </childnode>
-        <childnode refid="113" relation="include">
+        <childnode refid="115" relation="include">
         </childnode>
         <childnode refid="133" relation="include">
         </childnode>
-        <childnode refid="77" relation="include">
+        <childnode refid="79" relation="include">
         </childnode>
         <childnode refid="189" relation="include">
         </childnode>
@@ -3415,7 +3419,7 @@
         </childnode>
         <childnode refid="457" relation="include">
         </childnode>
-        <childnode refid="77" relation="include">
+        <childnode refid="79" relation="include">
         </childnode>
         <childnode refid="195" relation="include">
         </childnode>
@@ -3587,7 +3591,7 @@
         </childnode>
         <childnode refid="75" relation="include">
         </childnode>
-        <childnode refid="118" relation="include">
+        <childnode refid="120" relation="include">
         </childnode>
         <childnode refid="143" relation="include">
         </childnode>
@@ -3669,7 +3673,7 @@
       <node id="357">
         <label>Engine/libs/Utils/inc/Utils/Resources/ResourceContainer.h</label>
         <link refid="ResourceContainer_8h_source"/>
-        <childnode refid="110" relation="include">
+        <childnode refid="112" relation="include">
         </childnode>
         <childnode refid="301" relation="include">
         </childnode>
@@ -3691,7 +3695,7 @@
         </childnode>
         <childnode refid="47" relation="include">
         </childnode>
-        <childnode refid="106" relation="include">
+        <childnode refid="108" relation="include">
         </childnode>
         <childnode refid="192" relation="include">
         </childnode>
@@ -3715,7 +3719,7 @@
         </childnode>
         <childnode refid="40" relation="include">
         </childnode>
-        <childnode refid="110" relation="include">
+        <childnode refid="112" relation="include">
         </childnode>
         <childnode refid="180" relation="include">
         </childnode>
@@ -3753,7 +3757,7 @@
       <node id="313">
         <label>Engine/libs/Utils/inc/Utils/SRLM/LogicalMachine.h</label>
         <link refid="LogicalMachine_8h_source"/>
-        <childnode refid="119" relation="include">
+        <childnode refid="121" relation="include">
         </childnode>
       </node>
       <node id="409">
@@ -3875,7 +3879,7 @@
       <node id="314">
         <label>Engine/libs/Utils/inc/Utils/Settings.h</label>
         <link refid="Settings_8h_source"/>
-        <childnode refid="114" relation="include">
+        <childnode refid="116" relation="include">
         </childnode>
         <childnode refid="191" relation="include">
         </childnode>
@@ -4043,13 +4047,13 @@
       <node id="325">
         <label>Engine/libs/Utils/inc/Utils/Types/IRawMeshHolder.h</label>
         <link refid="IRawMeshHolder_8h_source"/>
-        <childnode refid="86" relation="include">
-        </childnode>
-        <childnode refid="91" relation="include">
+        <childnode refid="88" relation="include">
         </childnode>
         <childnode refid="93" relation="include">
         </childnode>
-        <childnode refid="87" relation="include">
+        <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
         </childnode>
         <childnode refid="214" relation="include">
         </childnode>
@@ -4093,7 +4097,7 @@
         </childnode>
         <childnode refid="429" relation="include">
         </childnode>
-        <childnode refid="108" relation="include">
+        <childnode refid="110" relation="include">
         </childnode>
         <childnode refid="332" relation="include">
         </childnode>
@@ -4133,19 +4137,19 @@
         </childnode>
         <childnode refid="372" relation="include">
         </childnode>
-        <childnode refid="110" relation="include">
+        <childnode refid="112" relation="include">
         </childnode>
         <childnode refid="133" relation="include">
         </childnode>
         <childnode refid="373" relation="include">
         </childnode>
-        <childnode refid="114" relation="include">
+        <childnode refid="116" relation="include">
         </childnode>
-        <childnode refid="115" relation="include">
+        <childnode refid="117" relation="include">
         </childnode>
         <childnode refid="141" relation="include">
         </childnode>
-        <childnode refid="84" relation="include">
+        <childnode refid="86" relation="include">
         </childnode>
         <childnode refid="184" relation="include">
         </childnode>
@@ -4293,7 +4297,7 @@
         </childnode>
         <childnode refid="198" relation="include">
         </childnode>
-        <childnode refid="84" relation="include">
+        <childnode refid="86" relation="include">
         </childnode>
       </node>
       <node id="433">
@@ -4345,7 +4349,7 @@
         </childnode>
         <childnode refid="26" relation="include">
         </childnode>
-        <childnode refid="110" relation="include">
+        <childnode refid="112" relation="include">
         </childnode>
         <childnode refid="422" relation="include">
         </childnode>
@@ -4407,7 +4411,7 @@
       <node id="383">
         <label>Engine/libs/Utils/inc/Utils/Web/HTML/HTML.h</label>
         <link refid="HTML_8h_source"/>
-        <childnode refid="79" relation="include">
+        <childnode refid="81" relation="include">
         </childnode>
         <childnode refid="384" relation="include">
         </childnode>
@@ -4467,11 +4471,11 @@
         </childnode>
         <childnode refid="165" relation="include">
         </childnode>
-        <childnode refid="116" relation="include">
+        <childnode refid="118" relation="include">
         </childnode>
         <childnode refid="178" relation="include">
         </childnode>
-        <childnode refid="115" relation="include">
+        <childnode refid="117" relation="include">
         </childnode>
       </node>
       <node id="385">
@@ -4517,7 +4521,7 @@
       <node id="422">
         <label>Engine/libs/Utils/inc/Utils/World/SceneUpdater.h</label>
         <link refid="SceneUpdater_8h_source"/>
-        <childnode refid="116" relation="include">
+        <childnode refid="118" relation="include">
         </childnode>
       </node>
       <node id="386">

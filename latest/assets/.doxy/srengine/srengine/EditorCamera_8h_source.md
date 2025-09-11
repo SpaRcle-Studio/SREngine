@@ -29,7 +29,6 @@ namespace SR_CORE_GUI_NS {
         void SetSceneViewer(SceneViewer* pSceneViewer) { m_sceneViewer = pSceneViewer; }
 
         SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
-        SR_NODISCARD bool IsEditorCamera() const noexcept override { return true; }
 
         SR_NODISCARD SR_MATH_NS::FPoint GetMousePos() const override;
 

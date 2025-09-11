@@ -271,6 +271,7 @@
         <reimplementedby refid="classSR__GRAPH__NS_1_1DebugPass_1a754cc25d99190df25422561aa267c74f">Init</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1ad5c1af15b98c42ac465ace7d9dc1d520">Init</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a578fc888ccea11924e1df5c9e776043b">Init</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1PostProcessPass_1a39e6d7aa372f8728ec6734ef556b092a">Init</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1SSAOPass_1a2f1592c4a61c050fb8c1eb2527d14b49">Init</reimplementedby>
         <briefdescription>
         </briefdescription>
@@ -990,7 +991,7 @@
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a0d095ccdf074b9c91026a4f1b7e46f91" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>BasePass</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1afffc5aa7bc9b5e340f99221abdf47be0" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>Bind</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1acc31a125e0f4886b1afcb196b55b75ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>CameraPtr</name></member>
-      <member refid="classSR__UTILS__NS_1_1SRClass_1a3b37402f828ece55136c1980302f855e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>CloneTo</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1aab9dfdcd9d8baa2e11bdab5697ef429f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>CloneTo</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>DecrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1aaf1e896ff56e5067a68b3f511bbe8ede" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>DeInit</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>DynamicCast</name></member>

@@ -51,7 +51,7 @@ See [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 
 | Type | Name |
 | ---: | :--- |
-|  ShaderPropertyVariant | [**data**](#variable-data)  <br> |
+|  std::optional&lt; ShaderPropertyVariant &gt; | [**data**](#variable-data)  <br> |
 |  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**displayName**](#variable-displayname)  <br> |
 |  uint32\_t | [**editorOrder**](#variable-editororder)   = `0`<br> |
 |  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**id**](#variable-id)  <br> |
@@ -137,7 +137,7 @@ See [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 
 | Type | Name |
 | ---: | :--- |
-|  void | [**CloneTo**](classSR__UTILS__NS_1_1SRClass.md#function-cloneto) ([**SRClass**](classSR__UTILS__NS_1_1SRClass.md) & clone) const<br> |
+| virtual void | [**CloneTo**](classSR__UTILS__NS_1_1SRClass.md#function-cloneto) ([**SRClass**](classSR__UTILS__NS_1_1SRClass.md) & clone) const<br> |
 | virtual SR\_NODISCARD const [**SR\_UTILS\_NS::SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md) \* | [**GetMeta**](classSR__UTILS__NS_1_1SRClass.md#function-getmeta) () noexcept const = 0<br> |
 | virtual  | [**~SRClass**](classSR__UTILS__NS_1_1SRClass.md#function-srclass) () = default<br> |
 
@@ -239,7 +239,7 @@ See [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 ### variable data 
 
 ```C++
-ShaderPropertyVariant SR_GRAPH_NS::MaterialShaderProperty::data;
+std::optional<ShaderPropertyVariant> SR_GRAPH_NS::MaterialShaderProperty::data;
 ```
 
 
