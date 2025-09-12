@@ -207,6 +207,10 @@ use tabs: true
 											11-a:clearColors
 												12-k:i
 													13-o:d
+												12-k:i
+													13-o:d
+												12-k:i
+													13-o:d
 											11-v:frameBufferName
 												12-s:Main
 											11-o:depth
@@ -279,11 +283,31 @@ use tabs: true
 																16-k:i
 																	17-o:d
 																		18-v:id
-																			19-s:image
+																			19-s:colorMap
 																		18-v:usageType
 																			19-s:FrameBufferColor
 																		18-v:fboName
 																			19-s:Main
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:depthMap
+																		18-v:usageType
+																			19-s:FrameBufferColor
+																		18-v:fboName
+																			19-s:Main
+																		18-v:index
+																			19-i:1
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:positionMap
+																		18-v:usageType
+																			19-s:FrameBufferColor
+																		18-v:fboName
+																			19-s:Main
+																		18-v:index
+																			19-i:2
 														14-o:material
 															15-v:type
 																16-s:UniqueMaterial
@@ -292,10 +316,24 @@ use tabs: true
 																	17-v:type
 																		18-s:MaterialData
 																	17-o:ptr
+																		18-a:shaderDefines
+																			19-k:item
+																				20-v:first
+																					21-s:SR_CLOUDS
+																				20-v:second
+																					21-s:
 																		18-o:defaultShader
 																			19-v:shaderPath
 																				20-s:Engine/Shaders/vignette.srsl
 																			19-a:uniforms
+																				20-k:i
+																					21-o:d
+																						22-v:id
+																							23-s:vignetteIntensity
+																						22-v:type
+																							23-s:Float
+																						22-v:value
+																							23-f:0.587000012
 																				20-k:i
 																					21-o:d
 																						22-v:id
@@ -304,11 +342,11 @@ use tabs: true
 																							23-s:Vec3
 																						22-o:value
 																							23-v:x
-																								24-f:-10
+																								24-f:-400
 																							23-v:y
-																								24-f:-10
+																								24-f:70
 																							23-v:z
-																								24-f:-10
+																								24-f:-400
 																				20-k:i
 																					21-o:d
 																						22-v:id
@@ -317,19 +355,51 @@ use tabs: true
 																							23-s:Vec3
 																						22-o:value
 																							23-v:x
-																								24-f:10
+																								24-f:400
 																							23-v:y
-																								24-f:10
+																								24-f:105
 																							23-v:z
-																								24-f:10
+																								24-f:400
 																				20-k:i
 																					21-o:d
 																						22-v:id
-																							23-s:vignetteIntensity
+																							23-s:cloudsSpeed
 																						22-v:type
 																							23-s:Float
 																						22-v:value
-																							23-f:0.686999977
+																							23-f:0.800000012
+																				20-k:i
+																					21-o:d
+																						22-v:id
+																							23-s:stepSize
+																						22-v:type
+																							23-s:Float
+																						22-v:value
+																							23-f:0.861999989
+																				20-k:i
+																					21-o:d
+																						22-v:id
+																							23-s:fbmOctaves
+																						22-v:type
+																							23-s:Int
+																						22-v:value
+																							23-i:5
+																				20-k:i
+																					21-o:d
+																						22-v:id
+																							23-s:cloudsFrequency
+																						22-v:type
+																							23-s:Float
+																						22-v:value
+																							23-f:2.25500011
+																				20-k:i
+																					21-o:d
+																						22-v:id
+																							23-s:cloudsAmplitude
+																						22-v:type
+																							23-s:Float
+																						22-v:value
+																							23-f:0.5
 										10-o:data
 											11-a:clearColors
 												12-k:i
@@ -433,6 +503,12 @@ use tabs: true
 									9-k:i
 										10-v:d
 											11-s:RGBA8_UNORM
+									9-k:i
+										10-v:d
+											11-s:R32_SFLOAT
+									9-k:i
+										10-v:d
+											11-s:RGBA16_SFLOAT
 								8-o:features
 									9-v:depthLoad
 										10-b:true

@@ -1,0 +1,83 @@
+float hash(vec3 p) {
+    // простая 3D-хэш-функция
+    return fract(sin(dot(p, vec3(127.1, 311.7, 74.7))) * 43758.5453);
+}
+
+float noise(vec3 p) {
+    vec3 i = floor(p);
+    vec3 f = fract(p);
+
+    // восемь углов куба
+    float n000 = hash(i + vec3(0.0, 0.0, 0.0));
+    float n100 = hash(i + vec3(1.0, 0.0, 0.0));
+    float n010 = hash(i + vec3(0.0, 1.0, 0.0));
+    float n110 = hash(i + vec3(1.0, 1.0, 0.0));
+    float n001 = hash(i + vec3(0.0, 0.0, 1.0));
+    float n101 = hash(i + vec3(1.0, 0.0, 1.0));
+    float n011 = hash(i + vec3(0.0, 1.0, 1.0));
+    float n111 = hash(i + vec3(1.0, 1.0, 1.0));
+
+    // fade-функция (сглаживание)
+    vec3 u = f*f*(3.0 - 2.0*f);
+
+    // трилинейная интерполяция
+    return mix(
+        mix(
+            mix(n000, n100, u.x),
+            mix(n010, n110, u.x), u.y),
+        mix(
+            mix(n001, n101, u.x),
+            mix(n011, n111, u.x), u.y),
+        u.z);
+}
+
+
+float fade(float t) {
+    return t * t * t * (t * (t * 6.0 - 15.0) + 10.0);
+}
+
+float grad(int hash, vec3 p) {
+    int h = hash & 15;
+    float u = h < 8 ? p.x : p.y;
+    float v = h < 4 ? p.y : (h == 12 || h == 14 ? p.x : p.z);
+    return ((h & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v);
+}
+
+int permute(int x) {
+    return int(mod(float((x * 34 + 1) * x + seed), 289.0));
+}
+
+float perlinNoise(vec3 p) {
+    ivec3 pi = ivec3(floor(p));
+    vec3 pf = fract(p);
+
+    int A = permute(pi.x) + pi.y;
+    int AA = permute(A) + pi.z;
+    int AB = permute(A + 1) + pi.z;
+    int B = permute(pi.x + 1) + pi.y;
+    int BA = permute(B) + pi.z;
+    int BB = permute(B + 1) + pi.z;
+
+    vec3 f = vec3(fade(pf.x), fade(pf.y), fade(pf.z));
+
+    float res = mix(
+        mix(
+            mix(grad(permute(AA), pf),
+                grad(permute(BA), pf - vec3(1.0, 0.0, 0.0)),
+                f.x),
+            mix(grad(permute(AB), pf - vec3(0.0, 1.0, 0.0)),
+                grad(permute(BB), pf - vec3(1.0, 1.0, 0.0)),
+                f.x),
+            f.y),
+        mix(
+            mix(grad(permute(AA + 1), pf - vec3(0.0, 0.0, 1.0)),
+                grad(permute(BA + 1), pf - vec3(1.0, 0.0, 1.0)),
+                f.x),
+            mix(grad(permute(AB + 1), pf - vec3(0.0, 1.0, 1.0)),
+                grad(permute(BB + 1), pf - vec3(1.0, 1.0, 1.0)),
+                f.x),
+            f.y),
+        f.z);
+
+    return res * 0.5 + 0.5; // normalize to [0..1]
+}

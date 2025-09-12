@@ -11,11 +11,7 @@ DepthTest false;
 [[uniform]] sampler2DArray cascadedDepthMap;
 [[shared]] vec2 uv;
 
-float LinearizeDepth(float z) {
-    float n = 1.0; // camera z near
-    float f = 100.0; // camera z far
-    return (2.0 * n) / (f + n - z * (f - n));
-}
+#include <Engine/Shaders/Common/linearize-depth.srsl>
 
 void fragment() {
     // делим экран на 2х2 квадранта
@@ -24,7 +20,7 @@ void fragment() {
     int quadY = int(uv.y * 2.0);                // 0 или 1
     int cascadeIndex = quadX + quadY * 2;       // 0..3
 
-    float depth = LinearizeDepth(texture(cascadedDepthMap, vec3(quadrantUV, cascadeIndex)).r);
+    float depth = LinearizeDepth(texture(cascadedDepthMap, vec3(quadrantUV, cascadeIndex)).r, 1.0, 100.0);
     COLOR_INDEX_0 = vec4(vec3(depth), 1.0);
 }
 

@@ -1,4 +1,5 @@
 sra format
+use tabs: true
 0-r:Root
 	1-o:asset
 		2-v:type
@@ -13,14 +14,12 @@ sra format
 					5-o:ptr
 						6-v:customName
 							7-s:SceneView
-						6-o:samplers
 						6-a:passes
 							7-k:i
 								8-o:d
 									9-v:type
 										10-s:SkyboxPass
 									9-o:ptr
-										10-o:samplers
 										10-v:skyboxPath
 											11-s:Engine/Skyboxes/Sun.png
 										10-v:shaderPath
@@ -30,7 +29,6 @@ sra format
 									9-v:type
 										10-s:DebugPass
 									9-o:ptr
-										10-o:samplers
 										10-a:shaders
 											11-k:item
 												12-v:first
@@ -44,9 +42,23 @@ sra format
 												12-o:second
 													13-v:shaderPath
 														14-s:Engine/Shaders/line.srsl
+							7-k:i
+								8-o:d
+									9-v:type
+										10-s:MeshDrawerPass
+									9-o:ptr
+										10-a:allowedLayers
+											11-k:i
+												12-v:d
+													13-s:Default
+											11-k:i
+												12-v:d
+													13-s:Opaque
+										10-o:samplers
+										10-o:uniforms
+											11-o:shared
+											11-o:material
 						6-o:data
-							7-v:frameBufferName
-								8-s:SceneView
 							7-a:clearColors
 								8-k:i
 									9-o:d
@@ -58,6 +70,8 @@ sra format
 											11-f:0.75999999
 										10-v:a
 											11-f:1
+							7-v:frameBufferName
+								8-s:SceneView
 							7-o:depth
 								8-v:has
 									9-b:true
@@ -81,10 +95,12 @@ sra format
 										10-v:d
 											11-s:RGBA8_UNORM
 								8-o:features
+								8-v:samples
+									9-i:1
 				4-a:queues
 					5-k:i
 						6-o:d
-							7-a:passNames
+							7-a:frameBuffers
 								8-k:i
 									9-v:d
 										10-s:SceneView

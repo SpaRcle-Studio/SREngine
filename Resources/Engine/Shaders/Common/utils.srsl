@@ -1,9 +1,3 @@
-float LinearizeDepth(float zNear, float zFar, float depth) {
-    /// преобразуем обратно в NDC
-    float z = depth * 2.0 - 1.0;
-    return (2.0 * zNear * zFar) / (zFar + zNear - z * (zFar - zNear));
-}
-
 float Fresnel(vec3 viewDirectionWorld, vec3 normalWorld) {
 	float d = dot(viewDirectionWorld, normalWorld);
 	d = abs(d);
@@ -11,3 +5,44 @@ float Fresnel(vec3 viewDirectionWorld, vec3 normalWorld) {
 
 	return 1.0 - d;
 }
+
+vec3 getRayDir(vec2 inUV) {
+    // uv в [0,1], переводим в NDC [-1,1]
+    vec4 ndc = vec4(inUV * 2.0 - 1.0, 1.0, 1.0);
+
+    // в view space
+    vec4 view = INVERSE_PROJECTION_MATRIX * ndc;
+    view /= view.w;
+
+    // направление в world space
+    vec4 world = INVERSE_VIEW_MATRIX * vec4(view.xyz, 0.0);
+    return normalize(world.xyz);
+}
+
+vec3 intersectBox(vec3 ro, vec3 rd, vec3 bmin, vec3 bmax) {
+    vec3 t0 = (bmin - ro) / rd;
+    vec3 t1 = (bmax - ro) / rd;
+    vec3 tmin = min(t0, t1);
+    vec3 tmax = max(t0, t1);
+    float tNear = max(max(tmin.x, tmin.y), tmin.z);
+    float tFar = min(min(tmax.x, tmax.y), tmax.z);
+    float intersects = (tNear <= tFar && tFar >= 0.0) ? 1.0 : 0.0;
+    return vec3(tNear, tFar, intersects);
+}
+
+// Returns (dstToBox, dstInsideBox). If ray misses box, dstInsideBox will be zero
+vec2 rayBoxDst(vec3 rayOrigin, vec3 invRaydir, vec3 bmin, vec3 bmax) {
+    // Adapted from: http://jcgt.org/published/0007/03/04/
+    vec3 t0 = (bmin - rayOrigin) * invRaydir;
+    vec3 t1 = (bmax - rayOrigin) * invRaydir;
+    vec3 tmin = min(t0, t1);
+    vec3 tmax = max(t0, t1);
+
+    float dstA = max(max(tmin.x, tmin.y), tmin.z);
+    float dstB = min(tmax.x, min(tmax.y, tmax.z));
+
+    float dstToBox = max(0, dstA);
+    float dstInsideBox = max(0, dstB - dstToBox);
+    return vec2(dstToBox, dstInsideBox);
+}
+

@@ -29,6 +29,8 @@ DepthTest true;
 [[uniform], [public]] sampler2D diffuse;
 [[uniform], [public]] sampler2D normal;
 
+//[[shared]] vec3 originalVertex;
+
 #ifdef HAS_SKELETON
     [[ssbo(bones)]] mat4[] bones;
     [[ssbo(offsets)]] mat4[] boneOffsets;
@@ -39,6 +41,10 @@ DepthTest true;
 #endif
 
 void fragment() {
+    COLOR_INDEX_1 = vec4(gl_FragCoord.z);
+    COLOR_INDEX_2 = vec4(VERTEX, 1.0);
+    //COLOR_INDEX_2 = vec4((VERTEX / 10) + vec3(1), 1.0);
+
     vec4 diffuseColorBase = texture(diffuse, UV);
     vec4 diffuseColor = diffuseColorBase * color;
 
@@ -79,6 +85,7 @@ void vertex() {
     mat4 modelMatrix = MODEL_MATRIX;
 #endif
 
+    //originalVertex = VERTEX;
     VERTEX = (modelMatrix * vec4(VERTEX, 1.0)).xyz;
 
 #ifdef SR_DEFINE_CASCADED_SHADOW_MAP_PASS

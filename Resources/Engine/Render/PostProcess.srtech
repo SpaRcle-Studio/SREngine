@@ -1,4 +1,5 @@
 sra format
+use tabs: true
 0-r:Root
 	1-o:asset
 		2-v:type
@@ -23,18 +24,36 @@ sra format
 													13-v:type
 														14-s:PostProcessPass
 													13-o:ptr
-														14-v:shaderPath
-															15-s:Engine/Shaders/vignette.srsl
 														14-o:samplers
 															15-a:samplers
 																16-k:i
 																	17-o:d
 																		18-v:id
-																			19-s:image
+																			19-s:colorMap
 																		18-v:usageType
 																			19-s:FrameBufferColor
 																		18-v:fboName
 																			19-s:PostProcess
+														14-o:material
+															15-v:type
+																16-s:UniqueMaterial
+															15-o:ptr
+																16-o:data
+																	17-v:type
+																		18-s:MaterialData
+																	17-o:ptr
+																		18-o:defaultShader
+																			19-v:shaderPath
+																				20-s:Engine/Shaders/vignette.srsl
+																			19-a:uniforms
+																				20-k:i
+																					21-o:d
+																						22-v:id
+																							23-s:vignetteIntensity
+																						22-v:type
+																							23-s:Float
+																						22-v:value
+																							23-f:0.349000007
 							7-k:i
 								8-o:d
 									9-v:type

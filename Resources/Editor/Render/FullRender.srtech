@@ -1,4 +1,5 @@
 sra format
+use tabs: true
 0-r:Root
 	1-o:asset
 		2-v:type
@@ -128,8 +129,6 @@ sra format
 													13-o:ptr
 														14-v:vertices
 															15-i:4
-														14-v:shaderPath
-															15-s:Editor/Shaders/grid.srsl
 														14-o:samplers
 											11-k:i
 												12-o:d

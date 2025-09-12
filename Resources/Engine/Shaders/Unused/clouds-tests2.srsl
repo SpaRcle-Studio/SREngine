@@ -1,0 +1,183 @@
+ShaderType PostProcessing;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled false;
+DepthWrite false;
+DepthTest false;
+
+[[uniform]] sampler2D colorMap;
+[[uniform]] sampler2D depthMap;
+[[uniform]] sampler2D positionMap;
+[[public], [uniform]] sampler2D cloudNoiseTexture;
+
+[[public], [uniform(SHARED)]] vec3 boundsMin;
+[[public], [uniform(SHARED)]] vec3 boundsMax;
+[[public], [uniform(SHARED)]] float vignetteIntensity;
+
+[[shared]] vec2 uv;
+[[shared]] vec3 worldPos;
+
+#include <Engine/Shaders/Common/linearize-depth.srsl>
+
+vec3 getRayDir() {
+    // uv в [0,1], переводим в NDC [-1,1]
+    vec4 ndc = vec4(uv * 2.0 - 1.0, 1.0, 1.0);
+
+    // в view space
+    vec4 view = inverse(PROJECTION_MATRIX) * ndc;
+    view /= view.w;
+
+    // направление в world space
+    vec4 world = inverse(VIEW_MATRIX) * vec4(view.xyz, 0.0);
+    //vec4 world = inverse(VIEW_NO_TRANSLATE_MATRIX) * vec4(view.xyz, 0.0);
+    return world.xyz;
+}
+
+// Returns (dstToBox, dstInsideBox). If ray misses box, dstInsideBox will be zero
+vec2 rayBoxDst(vec3 rayOrigin, vec3 invRaydir, vec3 bmin, vec3 bmax) {
+    // Adapted from: http://jcgt.org/published/0007/03/04/
+    vec3 t0 = (bmin - rayOrigin) * invRaydir;
+    vec3 t1 = (bmax - rayOrigin) * invRaydir;
+    vec3 tmin = min(t0, t1);
+    vec3 tmax = max(t0, t1);
+
+    float dstA = max(max(tmin.x, tmin.y), tmin.z);
+    float dstB = min(tmax.x, min(tmax.y, tmax.z));
+
+    float dstToBox = max(0, dstA);
+    float dstInsideBox = max(0, dstB - dstToBox);
+    return vec2(dstToBox, dstInsideBox);
+}
+
+vec3 ReconstructWorldPos(vec2 uv, float depth, mat4 invProj, mat4 invView) {
+    // координата в NDC
+    vec4 ndc = vec4(uv * 2.0 - 1.0, depth * 2.0 - 1.0, 1.0);
+
+    // обратно в view space
+    vec4 view = invProj * ndc;
+    view /= view.w;
+
+    // в world space
+    return (invView * view).xyz;
+}
+
+vec3 intersectBox(vec3 ro, vec3 rd, vec3 bmin, vec3 bmax) {
+    vec3 t0 = (bmin - ro) / rd;
+    vec3 t1 = (bmax - ro) / rd;
+    vec3 tmin = min(t0, t1);
+    vec3 tmax = max(t0, t1);
+    float tNear = max(max(tmin.x, tmin.y), tmin.z);
+    float tFar = min(min(tmax.x, tmax.y), tmax.z);
+    float intersects = (tNear <= tFar && tFar >= 0.0) ? 1.0 : 0.0;
+    return vec3(tNear, tFar, intersects);
+}
+
+void fragment() {
+    /*vec3 color;
+    //vec3 offsetColor = texture(image, uv - vec2(0.002)).rgb;
+    //if (length(color - offsetColor) > 0.1) {
+    //    color = vec3(0.0); // чёрный цвет для краёв
+    //}*/
+
+
+    vec3 rayOrigin = VIEW_POSITION;
+    mat4 invView = inverse(VIEW_MATRIX); // NO_TRANSLATE_
+    mat4 invProj = inverse(PROJECTION_MATRIX);
+
+    float depthValue = texture(depthMap, uv).r;
+
+    float viewZ = LinearEyeDepth(depthValue, CAMERA_NEAR, CAMERA_FAR);
+
+    vec4 viewPos;
+
+    viewPos.xy = (uv * 2.0 - 1.0) * viewZ;
+    viewPos.z  = -viewZ;
+    viewPos.w  = 1.0;
+    vec4 worldPos = invView * viewPos;
+    //worldPos = vec4(normalize(getRayDir()) - VIEW_POSITION, 1.0);
+    //vec4 worldPos = invView * viewPos;
+
+    //worldPos = vec4(ReconstructWorldPos(uv, depthValue, invProj, invView), 1.0);
+
+        //viewPos = inverse(PROJECTION_MATRIX) * vec4(uv * 2.0 - 1.0, 1.0, 1.0);
+        //viewPos /= viewPos.w;
+    //viewPos.xy = (uv * 2.0 - 1.0);
+
+    worldPos = texture(positionMap, uv);
+    //worldPos.rgb -= vec3(1);
+    //worldPos.rgb *= 10.0;
+
+    worldPos /= worldPos.w;
+    //worldPos.xyz = (invView * vec4(viewPos.xyz, 1.0)).xyz;
+    //worldPos.xyz = normalize(worldPos.xyz);
+
+    // Строим луч от камеры к пикселю
+    vec3 rayDir = normalize(getRayDir().xyz);
+
+    //vec4 clip_coord;
+    //clip_coord.x = gl_FragCoord.x / RESOLUTION.x;
+    //clip_coord.y = gl_FragCoord.y / RESOLUTION.y;
+    //clip_coord.z = viewZ;
+    //clip_coord.w = 1.0;
+    //clip_coord = inverse(PROJECTION_MATRIX) * clip_coord;
+
+    //worldPos = clip_coord;
+
+    // Начальное значение цвета — исходная сцена
+    vec3 color = texture(colorMap, uv).rgb;
+//color = vec3(worldPos.xyz);
+
+    vec3 boundsMinV = boundsMin; //vec3(-0.2, -0.2, -0.2);
+    vec3 boundsMaxV = boundsMax;//vec3(1.0, 0.2, 0.2);
+    //color = vec3(worldPos.xyz);
+
+    //if (all(greaterThanEqual(worldPos.xyz, boundsMinV)) &&
+    //    all(lessThanEqual(worldPos.xyz, boundsMaxV)))
+    //{
+    //    color = vec3(worldPos.xyz);
+    //}
+
+    //if (worldPos.x > -1.0 && worldPos.x < 1.0 &&
+    //    worldPos.y > -1.0 && worldPos.y < 1.0 &&
+    //    worldPos.z > -1.0 && worldPos.z < 1.0)
+    //{
+    //    color += vec3(0.0, 1.0, 0.0) / 2;
+    //}
+    //else {
+    //    color += vec3(1.0, 0.0, 0.0) / 2;
+    //}
+
+    // Проверка пересечения луча с кубом
+    vec3 info = intersectBox(rayOrigin, rayDir, boundsMin, boundsMax);
+    if (info.z > 0.0) { // если есть пересечение
+        //if (rayBoxInfo.y > 0.0) { // если есть пересечение
+        //color += vec3(0.0, 0.25, 0.0);
+        float distToSurface = length(worldPos.xyz - VIEW_POSITION);
+
+        // Если ближайшая точка куба ближе, чем поверхность сцены, красим зеленым
+        if (info.x < distToSurface) {
+            color = vec3(LinearizeDepth(depthValue, 1.0, 1000.0));
+            color *= vec3(1.15, 1.0, 1.0);
+        }
+    }
+
+    /////
+
+    ///
+
+    float r = length(uv - 0.5);
+
+    // чем выше vignetteIntensity, тем сильнее затемнение краёв
+    float vignette = smoothstep(0.5, 0.5 + (1.0 - vignetteIntensity), r);
+
+    color *= 1.0 - vignette;
+    COLOR_INDEX_0 = vec4(color, 1.0);
+}
+
+void vertex() {
+    uv = vec2((VERTEX_INDEX << 1) & 2, VERTEX_INDEX & 2);
+    OUT_POSITION = vec4(uv * 2.0 - 1.0, 0.0, 1.0);
+}

@@ -1,4 +1,5 @@
 sra format
+use tabs: true
 0-r:Root
 	1-o:asset
 		2-v:type
@@ -55,6 +56,10 @@ sra format
 															15-k:i
 																16-v:d
 																	17-s:Opaque
+														14-o:samplers
+														14-o:uniforms
+															15-o:shared
+															15-o:material
 											11-k:i
 												12-o:d
 													13-v:type
@@ -82,6 +87,10 @@ sra format
 															15-k:i
 																16-v:d
 																	17-s:GizmoSelection
+														14-o:samplers
+														14-o:uniforms
+															15-o:shared
+															15-o:material
 											11-k:i
 												12-o:d
 													13-v:type
@@ -89,8 +98,7 @@ sra format
 													13-o:ptr
 														14-v:vertices
 															15-i:4
-														14-v:shaderPath
-															15-s:Editor/Shaders/grid.srsl
+														14-o:samplers
 											11-k:i
 												12-o:d
 													13-v:type
@@ -107,6 +115,10 @@ sra format
 															15-k:i
 																16-v:d
 																	17-s:Gizmo
+														14-o:samplers
+														14-o:uniforms
+															15-o:shared
+															15-o:material
 										10-o:data
 											11-a:clearColors
 												12-k:i
@@ -136,14 +148,12 @@ sra format
 										10-v:d
 											11-s:RGBA8_UNORM
 								8-o:features
-									9-v:depthLoad
-										10-b:true
 									9-v:colorLoad
 										10-b:true
 									9-v:depthTransferDst
 										10-b:true
-									9-v:colorTransferDst
-										10-b:true
+								8-v:samples
+									9-i:1
 				4-a:queues
 					5-k:i
 						6-o:d

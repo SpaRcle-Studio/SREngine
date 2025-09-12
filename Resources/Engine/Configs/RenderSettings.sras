@@ -1,4 +1,5 @@
 sra format
+use tabs: true
 0-r:Root
 	1-o:asset
 		2-v:type
@@ -69,6 +70,12 @@ sra format
 							7-s:Engine/Render/CascadedMapToScreen.srtech
 						6-v:editorCameraRenderTechnique
 							7-s:Editor/Render/FullRender.srtech
+				4-k:i
+					5-o:d
+						6-v:name
+							7-s:Simple
+						6-v:editorCameraRenderTechnique
+							7-s:Editor/Render/Simple.srtech
 			3-o:defaultPreset
 				4-v:name
 					5-s:Default

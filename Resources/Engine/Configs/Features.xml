@@ -49,7 +49,7 @@
         <Vehicles Value="true"/>
 
         <MainWindow Value="true"/>
-        <SRARestoreMode Value="true"/>
+        <SRARestoreMode Value="false"/>
 
         <UpdateMeshesOnDemand Value="true"/>
         <UpdateDebugMeshesOnDemand Value="false"/>
