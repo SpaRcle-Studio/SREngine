@@ -209,11 +209,15 @@
 |   | [**Never**](#variable-never)  <br> |
 |   | [**NotEqual**](#variable-notequal)  <br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_ASPECT**](#variable-shader_aspect)   = `"ASPECT"`<br> |
+|  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_CAMERA\_FAR**](#variable-shader_camera_far)   = `"CAMERA\_FAR"`<br> |
+|  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_CAMERA\_NEAR**](#variable-shader_camera_near)   = `"CAMERA\_NEAR"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_CASCADE\_LIGHT\_SPACE\_MATRICES**](#variable-shader_cascade_light_space_matrices)   = `"CASCADE\_LIGHT\_SPACE\_MATRICES"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_CASCADE\_SPLITS**](#variable-shader_cascade_splits)   = `"CASCADE\_SPLITS"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_COMPUTE\_STAGE**](#variable-shader_compute_stage)   = `"COMPUTE\_STAGE"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_DEPTH\_ATTACHMENT**](#variable-shader_depth_attachment)   = `"DEPTH\_ATTACHMENT"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_DIRECTIONAL\_LIGHT\_POSITION**](#variable-shader_directional_light_position)   = `"DIRECTIONAL\_LIGHT\_POSITION"`<br> |
+|  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_INVERSE\_PROJECTION\_MATRIX**](#variable-shader_inverse_projection_matrix)   = `"INVERSE\_PROJECTION\_MATRIX"`<br> |
+|  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_INVERSE\_VIEW\_MATRIX**](#variable-shader_inverse_view_matrix)   = `"INVERSE\_VIEW\_MATRIX"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_LIGHT\_SPACE\_MATRIX**](#variable-shader_light_space_matrix)   = `"LIGHT\_SPACE\_MATRIX"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_LINE\_COLOR**](#variable-shader_line_color)   = `"LINE\_COLOR"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_LINE\_END\_POINT**](#variable-shader_line_end_point)   = `"LINE\_END\_POINT"`<br> |
@@ -705,6 +709,32 @@ SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_ASPECT;
 
 
 
+### variable SHADER\_CAMERA\_FAR 
+
+```C++
+SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_CAMERA_FAR;
+```
+
+
+
+
+<hr>
+
+
+
+### variable SHADER\_CAMERA\_NEAR 
+
+```C++
+SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_CAMERA_NEAR;
+```
+
+
+
+
+<hr>
+
+
+
 ### variable SHADER\_CASCADE\_LIGHT\_SPACE\_MATRICES 
 
 ```C++
@@ -761,6 +791,32 @@ SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_DEPTH_ATTACHMENT;
 
 ```C++
 SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_DIRECTIONAL_LIGHT_POSITION;
+```
+
+
+
+
+<hr>
+
+
+
+### variable SHADER\_INVERSE\_PROJECTION\_MATRIX 
+
+```C++
+SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_INVERSE_PROJECTION_MATRIX;
+```
+
+
+
+
+<hr>
+
+
+
+### variable SHADER\_INVERSE\_VIEW\_MATRIX 
+
+```C++
+SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_INVERSE_VIEW_MATRIX;
 ```
 
 

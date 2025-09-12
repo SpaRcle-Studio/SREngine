@@ -99,6 +99,8 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 |  SR\_NODISCARD SR\_FORCE\_INLINE float\_t | [**GetFar**](#function-getfar) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE glm::vec3 | [**GetGLPosition**](#function-getglposition) () const<br> |
 |  SR\_NODISCARD [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**GetImGuizmoView**](#function-getimguizmoview) () noexcept const<br> |
+|  SR\_NODISCARD const [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & | [**GetInverseProjection**](#function-getinverseprojection) () const<br> |
+|  SR\_NODISCARD const [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & | [**GetInverseViewTranslate**](#function-getinverseviewtranslate) () const<br> |
 | virtual SR\_NODISCARD SR\_MATH\_NS::FPoint | [**GetMousePos**](#function-getmousepos) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE float\_t | [**GetNear**](#function-getnear) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE const [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & | [**GetOrthogonal**](#function-getorthogonal) () noexcept const<br> |
@@ -432,6 +434,32 @@ inline SR_NODISCARD SR_FORCE_INLINE glm::vec3 SR_GTYPES_NS::Camera::GetGLPositio
 
 ```C++
 SR_NODISCARD SR_MATH_NS::Matrix4x4 SR_GTYPES_NS::Camera::GetImGuizmoView () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetInverseProjection 
+
+```C++
+SR_NODISCARD const SR_MATH_NS::Matrix4x4 & SR_GTYPES_NS::Camera::GetInverseProjection () const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetInverseViewTranslate 
+
+```C++
+SR_NODISCARD const SR_MATH_NS::Matrix4x4 & SR_GTYPES_NS::Camera::GetInverseViewTranslate () const
 ```
 
 

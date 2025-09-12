@@ -136,6 +136,8 @@ See [SR\_GTYPES\_NS::Camera](classSR__GTYPES__NS_1_1Camera.md)
 |  SR\_NODISCARD SR\_FORCE\_INLINE float\_t | [**GetFar**](classSR__GTYPES__NS_1_1Camera.md#function-getfar) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE glm::vec3 | [**GetGLPosition**](classSR__GTYPES__NS_1_1Camera.md#function-getglposition) () const<br> |
 |  SR\_NODISCARD [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**GetImGuizmoView**](classSR__GTYPES__NS_1_1Camera.md#function-getimguizmoview) () noexcept const<br> |
+|  SR\_NODISCARD const [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & | [**GetInverseProjection**](classSR__GTYPES__NS_1_1Camera.md#function-getinverseprojection) () const<br> |
+|  SR\_NODISCARD const [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & | [**GetInverseViewTranslate**](classSR__GTYPES__NS_1_1Camera.md#function-getinverseviewtranslate) () const<br> |
 | virtual SR\_NODISCARD SR\_MATH\_NS::FPoint | [**GetMousePos**](classSR__GTYPES__NS_1_1Camera.md#function-getmousepos) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE float\_t | [**GetNear**](classSR__GTYPES__NS_1_1Camera.md#function-getnear) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE const [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & | [**GetOrthogonal**](classSR__GTYPES__NS_1_1Camera.md#function-getorthogonal) () noexcept const<br> |

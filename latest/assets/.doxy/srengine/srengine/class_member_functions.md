@@ -1186,6 +1186,8 @@
 * **GetFar** ([**SR\_GTYPES\_NS::Camera**](classSR__GTYPES__NS_1_1Camera.md))
 * **GetGLPosition** ([**SR\_GTYPES\_NS::Camera**](classSR__GTYPES__NS_1_1Camera.md))
 * **GetImGuizmoView** ([**SR\_GTYPES\_NS::Camera**](classSR__GTYPES__NS_1_1Camera.md))
+* **GetInverseProjection** ([**SR\_GTYPES\_NS::Camera**](classSR__GTYPES__NS_1_1Camera.md))
+* **GetInverseViewTranslate** ([**SR\_GTYPES\_NS::Camera**](classSR__GTYPES__NS_1_1Camera.md))
 * **GetNear** ([**SR\_GTYPES\_NS::Camera**](classSR__GTYPES__NS_1_1Camera.md))
 * **GetOrthogonal** ([**SR\_GTYPES\_NS::Camera**](classSR__GTYPES__NS_1_1Camera.md))
 * **GetPriority** ([**SR\_GTYPES\_NS::Camera**](classSR__GTYPES__NS_1_1Camera.md), [**SR\_SRSL\_NS::SRSLMathExpression**](classSR__SRSL__NS_1_1SRSLMathExpression.md), [**SR\_UTILS\_NS::Transform2D**](classSR__UTILS__NS_1_1Transform2D.md))

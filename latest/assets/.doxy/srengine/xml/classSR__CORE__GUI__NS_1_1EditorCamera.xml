@@ -178,6 +178,8 @@
       <member refid="classSR__GTYPES__NS_1_1Camera_1a6e080a7fd94c6139d5ae4cee2df26d12" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetGLPosition</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1ac03a4e3c575c08d9932d213729688d6d" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetImGuizmoView</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a1bc2cbdfbcd251764907ebd0dddef009" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetIndexInSceneUpdater</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a48c8424a0b1ce9ce08d38b8273f3158a" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetInverseProjection</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a26d5dec32dd84a7f32d40ab780808dd1" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetInverseViewTranslate</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1EditorCamera_1a1fc223bc0f7a87d1c514b5a33d95c37d" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetMousePos</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1aaf438a0365dfd08692aebdc1570e419b" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetNear</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1a3b7e9d3f4240eb89881154169692cc63" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetOrthogonal</name></member>

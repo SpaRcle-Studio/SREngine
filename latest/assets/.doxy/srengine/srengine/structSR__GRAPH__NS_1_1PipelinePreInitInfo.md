@@ -38,6 +38,7 @@
 |  [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**GLSLCompilerPath**](#variable-glslcompilerpath)  <br> |
 |  std::string | [**appName**](#variable-appname)  <br> |
 |  std::string | [**engineName**](#variable-enginename)  <br> |
+|  bool | [**multisampling**](#variable-multisampling)   = `false`<br> |
 |  uint32\_t | [**samplesCount**](#variable-samplescount)   = `0`<br> |
 |  bool | [**vsync**](#variable-vsync)   = `false`<br> |
 
@@ -119,6 +120,19 @@ std::string SR_GRAPH_NS::PipelinePreInitInfo::appName;
 
 ```C++
 std::string SR_GRAPH_NS::PipelinePreInitInfo::engineName;
+```
+
+
+
+
+<hr>
+
+
+
+### variable multisampling 
+
+```C++
+bool SR_GRAPH_NS::PipelinePreInitInfo::multisampling;
 ```
 
 

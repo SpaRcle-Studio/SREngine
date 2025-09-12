@@ -346,7 +346,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="112" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="112" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="116" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="116" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="IShaderProgram_8h_1aee7414ef72723b858b95ab2d146ebc66" prot="public" static="no">
         <type>std::vector&lt; SR_VERTEX_DESCRIPTION &gt;</type>
@@ -360,7 +360,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="113" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="113" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="117" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="117" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="IShaderProgram_8h_1af3ed9349ba9da3bb03bae39bb6b2ea79" prot="public" static="no">
         <type>std::vector&lt; <ref refid="structSR__GRAPH__NS_1_1Uniform" kindref="compound">Uniform</ref> &gt;</type>
@@ -374,7 +374,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="173" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="173" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="177" column="25" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="177" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="PipelineState_8h_1aea8415011633d07cad6f77b894722b8f" prot="public" static="no">
         <type>std::vector&lt; <ref refid="structSR__GRAPH__NS_1_1SRDescriptorUpdateInfo" kindref="compound">SRDescriptorUpdateInfo</ref> &gt;</type>
@@ -460,7 +460,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="116" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="116" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="120" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="120" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="ILightComponent_8h_1adf147afac190841ffe9cab9bb621d169" prot="public" static="no" mutable="no">
         <type></type>
@@ -715,6 +715,21 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="75" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="75" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="IShaderProgram_8h_1aa65a5618fece1abf8b65f2310623135f" prot="public" static="no" mutable="no">
+        <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_INVERSE_VIEW_MATRIX</definition>
+        <argsstring></argsstring>
+        <name>SHADER_INVERSE_VIEW_MATRIX</name>
+        <qualifiedname>SR_GRAPH_NS::SHADER_INVERSE_VIEW_MATRIX</qualifiedname>
+        <initializer>= &quot;INVERSE_VIEW_MATRIX&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="76" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1aa1689100ca1ec4cf539319373b8cfa59" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
         <definition>SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_SSAO_SAMPLES</definition>
@@ -728,7 +743,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="76" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="76" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="77" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="77" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1af945371e0b0463e3df134af58e25ea75" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -743,7 +758,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="77" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="77" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="78" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="78" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1ab23f061ce7457994765dc1e42f4a80b4" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -758,7 +773,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="78" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="78" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="79" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="79" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1a9c6386d12f1f80d02946860c9cdf8ba2" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -773,7 +788,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="79" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="79" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="80" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="IShaderProgram_8h_1a731a32f7cdfb1dfbda1f0a1f429d0698" prot="public" static="no" mutable="no">
+        <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_INVERSE_PROJECTION_MATRIX</definition>
+        <argsstring></argsstring>
+        <name>SHADER_INVERSE_PROJECTION_MATRIX</name>
+        <qualifiedname>SR_GRAPH_NS::SHADER_INVERSE_PROJECTION_MATRIX</qualifiedname>
+        <initializer>= &quot;INVERSE_PROJECTION_MATRIX&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="81" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="81" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1aa98c072df61d9a902949cdf0ed0ce296" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -788,7 +818,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="80" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="80" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="82" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="82" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1aa4ba9503b820208cc9c12fdacfe8175c" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -803,7 +833,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="81" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="81" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="83" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="83" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1a375ed722dcc18bf0b24e39ad7432b288" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -818,7 +848,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="82" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="82" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="84" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="84" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1a9b47ef5fff81bd9d387fa95c9e6e4713" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -833,7 +863,37 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="83" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="83" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="85" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="IShaderProgram_8h_1a06feef19b29977830b1ae7556d5e5dea" prot="public" static="no" mutable="no">
+        <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_CAMERA_FAR</definition>
+        <argsstring></argsstring>
+        <name>SHADER_CAMERA_FAR</name>
+        <qualifiedname>SR_GRAPH_NS::SHADER_CAMERA_FAR</qualifiedname>
+        <initializer>= &quot;CAMERA_FAR&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="86" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="IShaderProgram_8h_1a5b4dcb9842b39824502c9e2d1a9790cd" prot="public" static="no" mutable="no">
+        <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_CAMERA_NEAR</definition>
+        <argsstring></argsstring>
+        <name>SHADER_CAMERA_NEAR</name>
+        <qualifiedname>SR_GRAPH_NS::SHADER_CAMERA_NEAR</qualifiedname>
+        <initializer>= &quot;CAMERA_NEAR&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="87" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="87" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1a4a3f3a92ad61856a1663ec2071cd6484" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -848,7 +908,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="84" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="84" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="88" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="88" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1a2513919d70ee1b10c5532b3d902c297f" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -863,7 +923,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="85" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="85" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="89" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="89" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1a7ac622ddf64b1faa2b642cd800a2b5cc" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -878,7 +938,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="86" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="86" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="90" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="90" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1a8a48cd5c8ed30cf8953ac66b6a13f2c4" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -893,7 +953,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="87" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="87" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="91" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="91" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1a7165e732f6af02ee6fd807ee9f6f1afb" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -908,7 +968,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="88" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="88" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="92" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="92" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1a853789a12ab4366b1e9248f9cd85b854" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -923,7 +983,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="89" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="89" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="93" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="93" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1add2d4e2fd5c749a3863c542740940206" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -938,7 +998,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="90" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="90" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="94" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="94" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1a48d8b52e39a4d78d055cb31d9a99564a" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -953,7 +1013,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="91" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="91" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="95" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="95" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1a4ffc200b9376939526fab933f62c9e6a" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -968,7 +1028,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="92" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="92" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="96" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="96" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1af2fb85b66f65d29b56eb3d68ed950e22" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -983,7 +1043,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="93" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="93" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="97" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="97" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1ac707d0305d1c531345ecb333cea9e983" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -998,7 +1058,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="94" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="94" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="98" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="98" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1a85076f8f8714d299afcb88d869329f84" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -1013,7 +1073,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="95" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="95" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="99" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="99" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1a74c5f8813329c6ac8c238c2ce35c087b" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -1028,7 +1088,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="96" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="96" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="100" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="100" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1afade648822d07f4bc75e70cde2b0c326" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -1043,7 +1103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="97" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="97" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="101" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="101" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1a9bf03e1d1bf0b07ce48d2083ee01148f" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -1058,7 +1118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="98" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="98" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="102" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="102" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1a310253aebfc4384dd93118aea6dc3550" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -1073,7 +1133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="99" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="99" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="103" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="103" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1a3d37b3771a5799d0d2232218c782cc57" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -1088,7 +1148,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="100" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="100" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="104" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="104" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1aed523686a192d8529624fa28c7554967" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -1103,7 +1163,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="101" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="101" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="105" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="105" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1aff6c2c9c4677897ec0714d93964e7a09" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -1118,7 +1178,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="102" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="102" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="106" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="106" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1a917e255895c5ecd4c680cac2c948e693" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -1133,7 +1193,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="103" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="103" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="107" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="107" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1ac7658dd2dea4ef0d10aecaf78156613d" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -1148,7 +1208,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="105" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="105" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="109" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="109" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1aa0b4ea9a307e2704f45b6b25e94c10f9" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -1163,7 +1223,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="106" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="106" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="110" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="110" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1ac71c0e0c2460eb4bf6f1907948386577" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -1178,7 +1238,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="107" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="107" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="111" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="111" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1a9df58760a44c7e24fd3e5ab6bd3aff2f" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -1193,7 +1253,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="108" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="108" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="112" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="112" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1a042f501e97f339c0cde28a8f6e4ab555" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -1208,7 +1268,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="109" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="109" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="113" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="113" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1adfefef373aa465ad2751684b4a459e72" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -1223,7 +1283,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="110" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="110" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="114" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="114" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1a1ee033c7649c329679583bfab3d5214b" prot="public" static="no" mutable="no">
         <type></type>
@@ -1237,7 +1297,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="156" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="156" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="160" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="160" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1a2e068e70edf0de623175e688ff5c57d6" prot="public" static="no" mutable="no">
         <type></type>
@@ -1251,7 +1311,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="157" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="157" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="161" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="161" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1a7d45f13d85fe867bfcb3f95aaee7e2d0" prot="public" static="no" mutable="no">
         <type></type>
@@ -1265,7 +1325,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="158" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="158" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="162" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="162" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1af0f3121784f5a409d921772a3ba802f2" prot="public" static="no" mutable="no">
         <type></type>
@@ -1279,7 +1339,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="159" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="159" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="163" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="163" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1af9b779ac3e7fa57c5f67ba94a3f7c9db" prot="public" static="no" mutable="no">
         <type></type>
@@ -1293,7 +1353,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="160" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="160" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="164" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="164" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1a76e05f7511afa658ab41a68f1d49141d" prot="public" static="no" mutable="no">
         <type></type>
@@ -1307,7 +1367,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="161" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="161" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="165" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="165" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1a6fa0a9113f19756ff4b336323310b8e2" prot="public" static="no" mutable="no">
         <type></type>
@@ -1321,7 +1381,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="162" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="162" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="166" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="166" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1a6d577be54cad16285fb8a73b7c397f37" prot="public" static="no" mutable="no">
         <type></type>
@@ -1335,7 +1395,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="163" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="163" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="167" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="167" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="RenderQueue_8h_1aee2afacf5e9add2b9e4d80f4987e8a62" prot="public" static="yes" constexpr="yes" mutable="no">
         <type>constexpr size_t</type>
@@ -2006,7 +2066,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="118" column="5" declfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" declline="118" declcolumn="5"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="122" column="5" declfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" declline="122" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="IShaderProgram_8h_1a0daacdf5bfa31a3795a19c7ef8a87202" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -2059,7 +2119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="141" column="5"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="145" column="5"/>
       </memberdef>
       <memberdef kind="function" id="IShaderProgram_8h_1ac3031f55a2a364bd59ffcbedc6f9d826" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED CullMode</type>
@@ -2077,7 +2137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="223" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="223" bodyend="232"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="227" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="227" bodyend="236"/>
       </memberdef>
       <memberdef kind="function" id="IShaderProgram_8h_1a07c2847887f47e9af9a8f0b8a92f576f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED LayoutBinding</type>
@@ -2096,7 +2156,7 @@
         <inbodydescription>
 <para>first check sampler, after that check uniform</para>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="234" column="42" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="234" bodyend="259"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="238" column="42" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="238" bodyend="266"/>
       </memberdef>
       <memberdef kind="function" id="PipelineType_8h_1a5542e32605e29ec0021ab8962a295b08" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>

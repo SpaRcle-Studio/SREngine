@@ -78,6 +78,9 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD SR_FORCE_INLINE int32_t GetPriority() const { return m_priority; }
         SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::UVector2& GetViewportSize() const { return m_viewportSize; }
 
+        SR_NODISCARD const SR_MATH_NS::Matrix4x4& GetInverseProjection() const;
+        SR_NODISCARD const SR_MATH_NS::Matrix4x4& GetInverseViewTranslate() const;
+
         SR_NODISCARD bool IsEditorCamera() const;
         SR_NODISCARD SR_MATH_NS::Matrix4x4 GetImGuizmoView() const noexcept;
         SR_NODISCARD const SR_MATH_NS::FVector3& GetViewDirection() const;
@@ -140,6 +143,10 @@ namespace SR_GTYPES_NS {
         SR_MATH_NS::Matrix4x4 m_viewTranslateMat;
         SR_MATH_NS::Matrix4x4 m_viewMat;
         SR_MATH_NS::Matrix4x4 m_orthogonal;
+
+        mutable bool m_isInverseDirty = true;
+        mutable SR_MATH_NS::Matrix4x4 m_inverseProjection;
+        mutable SR_MATH_NS::Matrix4x4 m_inverseViewTranslate;
 
         SR_MATH_NS::Quaternion m_rotation;
 

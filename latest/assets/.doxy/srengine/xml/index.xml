@@ -1216,6 +1216,9 @@
     <member refid="classSR__GTYPES__NS_1_1Camera_1ade6e1f3d207c13d64520ad380191bfb8" kind="variable"><name>m_viewTranslateMat</name></member>
     <member refid="classSR__GTYPES__NS_1_1Camera_1aaea4fb538507b750bdf87ee94e3d895b" kind="variable"><name>m_viewMat</name></member>
     <member refid="classSR__GTYPES__NS_1_1Camera_1a221a61bc7ebdc3ada6e5c51b647c98e7" kind="variable"><name>m_orthogonal</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Camera_1a894966b9535173c30cd8bacbaad01f15" kind="variable"><name>m_isInverseDirty</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Camera_1a7aae6d5e510a5a548aa9d93c4c5a51fd" kind="variable"><name>m_inverseProjection</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Camera_1ab292b4d0e604bfd48b75dc6241ad2ad4" kind="variable"><name>m_inverseViewTranslate</name></member>
     <member refid="classSR__GTYPES__NS_1_1Camera_1a513aa8cb9cd718164b8ceae2e7ab5562" kind="variable"><name>m_rotation</name></member>
     <member refid="classSR__GTYPES__NS_1_1Camera_1a8c4dfc3c3e5cfa117171ef749f1cc4d8" kind="variable"><name>m_viewDirection</name></member>
     <member refid="classSR__GTYPES__NS_1_1Camera_1a8aa94abca619f1fd6b9ba5da2c7d5408" kind="variable"><name>m_position</name></member>
@@ -1246,6 +1249,8 @@
     <member refid="classSR__GTYPES__NS_1_1Camera_1a59e725361492b0c90c1103d41a6c7f85" kind="function"><name>GetAspect</name></member>
     <member refid="classSR__GTYPES__NS_1_1Camera_1aef018d22216b905182903fc1bce5557c" kind="function"><name>GetPriority</name></member>
     <member refid="classSR__GTYPES__NS_1_1Camera_1a4b2ea68d5df695bfe88beb998a348e9a" kind="function"><name>GetViewportSize</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Camera_1a48c8424a0b1ce9ce08d38b8273f3158a" kind="function"><name>GetInverseProjection</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Camera_1a26d5dec32dd84a7f32d40ab780808dd1" kind="function"><name>GetInverseViewTranslate</name></member>
     <member refid="classSR__GTYPES__NS_1_1Camera_1a906bb9b0899c66ff1386e480efae7992" kind="function"><name>IsEditorCamera</name></member>
     <member refid="classSR__GTYPES__NS_1_1Camera_1ac03a4e3c575c08d9932d213729688d6d" kind="function"><name>GetImGuizmoView</name></member>
     <member refid="classSR__GTYPES__NS_1_1Camera_1a217a05198270499cef2c71e0d53007bd" kind="function"><name>GetViewDirection</name></member>
@@ -8047,6 +8052,7 @@
     <member refid="structSR__GRAPH__NS_1_1PipelinePreInitInfo_1a8f925f3c064325aa59b19a588f6f352b" kind="variable"><name>appName</name></member>
     <member refid="structSR__GRAPH__NS_1_1PipelinePreInitInfo_1aef218b221e731a3cae0eb204971030bd" kind="variable"><name>engineName</name></member>
     <member refid="structSR__GRAPH__NS_1_1PipelinePreInitInfo_1a73e7d8d05a2026c7f09cd8aacf7bb21a" kind="variable"><name>vsync</name></member>
+    <member refid="structSR__GRAPH__NS_1_1PipelinePreInitInfo_1a535c24d1ab062d5b144f7adeaff8ba3a" kind="variable"><name>multisampling</name></member>
     <member refid="structSR__GRAPH__NS_1_1PipelinePreInitInfo_1a62b89ea3fcd2b0cbc36567e37cc3c392" kind="variable"><name>GLSLCompilerPath</name></member>
   </compound>
   <compound refid="structSR__GRAPH__NS_1_1PipelineState" kind="struct"><name>SR_GRAPH_NS::PipelineState</name>
@@ -14426,14 +14432,18 @@
     <member refid="IShaderProgram_8h_1afc783ce79fbd690191f656e2e5e327f8" kind="variable"><name>SHADER_SKELETON_MATRICES_384</name></member>
     <member refid="IShaderProgram_8h_1a95729b73bd8a9531570c3c2dfbb35360" kind="variable"><name>SHADER_SKELETON_MATRIX_OFFSETS_384</name></member>
     <member refid="IShaderProgram_8h_1ac14966aac8f79f1174645a68c1b71bb7" kind="variable"><name>SHADER_VIEW_MATRIX</name></member>
+    <member refid="IShaderProgram_8h_1aa65a5618fece1abf8b65f2310623135f" kind="variable"><name>SHADER_INVERSE_VIEW_MATRIX</name></member>
     <member refid="IShaderProgram_8h_1aa1689100ca1ec4cf539319373b8cfa59" kind="variable"><name>SHADER_SSAO_SAMPLES</name></member>
     <member refid="IShaderProgram_8h_1af945371e0b0463e3df134af58e25ea75" kind="variable"><name>SHADER_LIGHT_SPACE_MATRIX</name></member>
     <member refid="IShaderProgram_8h_1ab23f061ce7457994765dc1e42f4a80b4" kind="variable"><name>SHADER_VIEW_NO_TRANSLATE_MATRIX</name></member>
     <member refid="IShaderProgram_8h_1a9c6386d12f1f80d02946860c9cdf8ba2" kind="variable"><name>SHADER_PROJECTION_MATRIX</name></member>
+    <member refid="IShaderProgram_8h_1a731a32f7cdfb1dfbda1f0a1f429d0698" kind="variable"><name>SHADER_INVERSE_PROJECTION_MATRIX</name></member>
     <member refid="IShaderProgram_8h_1aa98c072df61d9a902949cdf0ed0ce296" kind="variable"><name>SHADER_PROJECTION_NO_FOV_MATRIX</name></member>
     <member refid="IShaderProgram_8h_1aa4ba9503b820208cc9c12fdacfe8175c" kind="variable"><name>SHADER_ORTHOGONAL_MATRIX</name></member>
     <member refid="IShaderProgram_8h_1a375ed722dcc18bf0b24e39ad7432b288" kind="variable"><name>SHADER_VIEW_DIRECTION</name></member>
     <member refid="IShaderProgram_8h_1a9b47ef5fff81bd9d387fa95c9e6e4713" kind="variable"><name>SHADER_VIEW_POSITION</name></member>
+    <member refid="IShaderProgram_8h_1a06feef19b29977830b1ae7556d5e5dea" kind="variable"><name>SHADER_CAMERA_FAR</name></member>
+    <member refid="IShaderProgram_8h_1a5b4dcb9842b39824502c9e2d1a9790cd" kind="variable"><name>SHADER_CAMERA_NEAR</name></member>
     <member refid="IShaderProgram_8h_1a4a3f3a92ad61856a1663ec2071cd6484" kind="variable"><name>SHADER_TIME</name></member>
     <member refid="IShaderProgram_8h_1a2513919d70ee1b10c5532b3d902c297f" kind="variable"><name>SHADER_ASPECT</name></member>
     <member refid="IShaderProgram_8h_1a7ac622ddf64b1faa2b642cd800a2b5cc" kind="variable"><name>SHADER_RESOLUTION</name></member>
