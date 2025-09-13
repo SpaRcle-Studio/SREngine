@@ -28,6 +28,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD const std::vector<float_t>& GetSplitDepths() const { return m_cascadeSplitDepths; }
 
     public:
+        bool Render() override;
         void Prepare() override;
         void PostUpdate() override;
         void UseSharedUniforms(SR_GTYPES_NS::Shader* pShader) override;
@@ -38,6 +39,8 @@ namespace SR_GRAPH_NS {
         bool CheckCamera();
         void UpdateCascades();
 
+        void UpdateShaderDefines(SR_SRSL_NS::ShaderMacrosParams& defines) const override;
+
     protected:
         SR_MATH_NS::FVector3 m_directionalLightDirection;
         SR_MATH_NS::FVector3 m_cameraPosition;
@@ -47,6 +50,7 @@ namespace SR_GRAPH_NS {
         float_t m_near = 0.1f;
         float_t m_far = 100.f;
         float_t m_cascadeSplitLambda = 0.95f;
+        bool m_instancing = false;
 
         std::vector<SR_MATH_NS::Matrix4x4> m_cascadeMatrices;
         std::vector<float_t> m_cascadeSplitDepths;

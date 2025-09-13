@@ -219,6 +219,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual void | [**PushConstants**](#function-pushconstants) (void \* pData, uint64\_t size) <br> |
 | virtual void | [**ReCreateOverlay**](#function-recreateoverlay) () <br> |
 | virtual void | [**ReadSSBO**](#function-readssbo) (uint32\_t SSBO, void \* pData, uint64\_t size) <br>_Читает данные из SSBO в память_  |
+|  void | [**ResetDrawInstancesCount**](#function-resetdrawinstancescount) () <br> |
 | virtual void | [**ResetLastShader**](#function-resetlastshader) () <br> |
 | virtual void | [**ResetSubmitQueue**](#function-resetsubmitqueue) () <br> |
 | virtual void | [**SetCurrentFrameBuffer**](#function-setcurrentframebuffer) (FramebufferPtr pFrameBuffer) <br> |
@@ -227,6 +228,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual void | [**SetCurrentShader**](#function-setcurrentshader) (ShaderPtr pShader) <br> |
 | virtual void | [**SetCurrentShaderId**](#function-setcurrentshaderid) (int32\_t id) <br> |
 | virtual void | [**SetDirty**](#function-setdirty) (bool dirty) <br> |
+|  void | [**SetDrawInstancesCount**](#function-setdrawinstancescount) (uint32\_t count) <br> |
 | virtual void | [**SetOverlayEnabled**](#function-setoverlayenabled) (OverlayType overlayType, bool enabled) <br> |
 | virtual void | [**SetOverlaySurfaceDirty**](#function-setoverlaysurfacedirty) () <br> |
 | virtual void | [**SetRenderStageId**](#function-setrenderstageid) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id) <br> |
@@ -344,6 +346,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  std::vector&lt; [**PipelineState**](structSR__GRAPH__NS_1_1PipelineState.md) &gt; | [**m\_buildStates**](#variable-m_buildstates)  <br>_Состояние, которое было на момент постоения сцены рендера_  |
 |  uint8\_t | [**m\_currentSampleCount**](#variable-m_currentsamplecount)   = `1`<br> |
 |  std::atomic&lt; bool &gt; | [**m\_dirty**](#variable-m_dirty)   = `false`<br> |
+|  uint32\_t | [**m\_drawInstancesCount**](#variable-m_drawinstancescount)   = `1`<br> |
 |  bool | [**m\_enableValidationLayers**](#variable-m_enablevalidationlayers)   = `false`<br> |
 |  uint64\_t | [**m\_errorsCount**](#variable-m_errorscount)   = `0`<br> |
 |  [**FrameBufferQueue**](classSR__GRAPH__NS_1_1FrameBufferQueue.md) | [**m\_fboQueue**](#variable-m_fboqueue)  <br> |
@@ -2101,6 +2104,19 @@ virtual void SR_GRAPH_NS::Pipeline::ReadSSBO (
 
 
 
+### function ResetDrawInstancesCount 
+
+```C++
+inline void SR_GRAPH_NS::Pipeline::ResetDrawInstancesCount () 
+```
+
+
+
+
+<hr>
+
+
+
 ### function ResetLastShader 
 
 ```C++
@@ -2216,6 +2232,21 @@ virtual void SR_GRAPH_NS::Pipeline::SetDirty (
 
 
         
+
+<hr>
+
+
+
+### function SetDrawInstancesCount 
+
+```C++
+inline void SR_GRAPH_NS::Pipeline::SetDrawInstancesCount (
+    uint32_t count
+) 
+```
+
+
+
 
 <hr>
 
@@ -2552,6 +2583,19 @@ uint8_t SR_GRAPH_NS::Pipeline::m_currentSampleCount;
 
 ```C++
 std::atomic<bool> SR_GRAPH_NS::Pipeline::m_dirty;
+```
+
+
+
+
+<hr>
+
+
+
+### variable m\_drawInstancesCount 
+
+```C++
+uint32_t SR_GRAPH_NS::Pipeline::m_drawInstancesCount;
 ```
 
 

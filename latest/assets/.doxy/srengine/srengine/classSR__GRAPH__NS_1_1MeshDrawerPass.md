@@ -470,6 +470,11 @@ See [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 
 
 
+## Protected Attributes
+
+| Type | Name |
+| ---: | :--- |
+|  [**SR\_SRSL\_NS::ShaderMacrosParams**](structSR__SRSL__NS_1_1ShaderMacrosParams.md) | [**m\_shaderMacros**](#variable-m_shadermacros)  <br> |
 
 
 ## Protected Attributes inherited from SR_GRAPH_NS::BasePass
@@ -620,6 +625,7 @@ See [SR\_HTYPES\_NS::SharedPtrBase](classSR__HTYPES__NS_1_1SharedPtrBase.md)
 | ---: | :--- |
 | virtual SR\_NODISCARD RenderQueuePtr | [**AllocateRenderQueue**](#function-allocaterenderqueue) () <br> |
 |  SR\_NODISCARD [**RenderStrategy**](classSR__GRAPH__NS_1_1RenderStrategy.md) \* | [**GetRenderStrategy**](#function-getrenderstrategy) () const<br> |
+| virtual void | [**UpdateShaderDefines**](#function-updateshaderdefines) ([**SR\_SRSL\_NS::ShaderMacrosParams**](structSR__SRSL__NS_1_1ShaderMacrosParams.md) & defines) const<br> |
 
 
 
@@ -1001,6 +1007,21 @@ SR_GRAPH_NS::MeshDrawerPass::~MeshDrawerPass () override
 
 
 <hr>
+## Protected Attributes Documentation
+
+
+
+
+### variable m\_shaderMacros 
+
+```C++
+SR_SRSL_NS::ShaderMacrosParams SR_GRAPH_NS::MeshDrawerPass::m_shaderMacros;
+```
+
+
+
+
+<hr>
 ## Protected Functions Documentation
 
 
@@ -1023,6 +1044,21 @@ virtual SR_NODISCARD RenderQueuePtr SR_GRAPH_NS::MeshDrawerPass::AllocateRenderQ
 
 ```C++
 SR_NODISCARD RenderStrategy * SR_GRAPH_NS::MeshDrawerPass::GetRenderStrategy () const
+```
+
+
+
+
+<hr>
+
+
+
+### function UpdateShaderDefines 
+
+```C++
+inline virtual void SR_GRAPH_NS::MeshDrawerPass::UpdateShaderDefines (
+    SR_SRSL_NS::ShaderMacrosParams & defines
+) const
 ```
 
 

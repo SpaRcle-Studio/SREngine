@@ -339,6 +339,7 @@ See [SR\_GRAPH\_NS::Pipeline](classSR__GRAPH__NS_1_1Pipeline.md)
 | virtual void | [**PushConstants**](classSR__GRAPH__NS_1_1Pipeline.md#function-pushconstants) (void \* pData, uint64\_t size) <br> |
 | virtual void | [**ReCreateOverlay**](classSR__GRAPH__NS_1_1Pipeline.md#function-recreateoverlay) () <br> |
 | virtual void | [**ReadSSBO**](classSR__GRAPH__NS_1_1Pipeline.md#function-readssbo) (uint32\_t SSBO, void \* pData, uint64\_t size) <br>_Читает данные из SSBO в память_  |
+|  void | [**ResetDrawInstancesCount**](classSR__GRAPH__NS_1_1Pipeline.md#function-resetdrawinstancescount) () <br> |
 | virtual void | [**ResetLastShader**](classSR__GRAPH__NS_1_1Pipeline.md#function-resetlastshader) () <br> |
 | virtual void | [**ResetSubmitQueue**](classSR__GRAPH__NS_1_1Pipeline.md#function-resetsubmitqueue) () <br> |
 | virtual void | [**SetCurrentFrameBuffer**](classSR__GRAPH__NS_1_1Pipeline.md#function-setcurrentframebuffer) (FramebufferPtr pFrameBuffer) <br> |
@@ -347,6 +348,7 @@ See [SR\_GRAPH\_NS::Pipeline](classSR__GRAPH__NS_1_1Pipeline.md)
 | virtual void | [**SetCurrentShader**](classSR__GRAPH__NS_1_1Pipeline.md#function-setcurrentshader) (ShaderPtr pShader) <br> |
 | virtual void | [**SetCurrentShaderId**](classSR__GRAPH__NS_1_1Pipeline.md#function-setcurrentshaderid) (int32\_t id) <br> |
 | virtual void | [**SetDirty**](classSR__GRAPH__NS_1_1Pipeline.md#function-setdirty) (bool dirty) <br> |
+|  void | [**SetDrawInstancesCount**](classSR__GRAPH__NS_1_1Pipeline.md#function-setdrawinstancescount) (uint32\_t count) <br> |
 | virtual void | [**SetOverlayEnabled**](classSR__GRAPH__NS_1_1Pipeline.md#function-setoverlayenabled) (OverlayType overlayType, bool enabled) <br> |
 | virtual void | [**SetOverlaySurfaceDirty**](classSR__GRAPH__NS_1_1Pipeline.md#function-setoverlaysurfacedirty) () <br> |
 | virtual void | [**SetRenderStageId**](classSR__GRAPH__NS_1_1Pipeline.md#function-setrenderstageid) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id) <br> |
@@ -474,6 +476,7 @@ See [SR\_GRAPH\_NS::Pipeline](classSR__GRAPH__NS_1_1Pipeline.md)
 |  std::vector&lt; [**PipelineState**](structSR__GRAPH__NS_1_1PipelineState.md) &gt; | [**m\_buildStates**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_buildstates)  <br>_Состояние, которое было на момент постоения сцены рендера_  |
 |  uint8\_t | [**m\_currentSampleCount**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_currentsamplecount)   = `1`<br> |
 |  std::atomic&lt; bool &gt; | [**m\_dirty**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_dirty)   = `false`<br> |
+|  uint32\_t | [**m\_drawInstancesCount**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_drawinstancescount)   = `1`<br> |
 |  bool | [**m\_enableValidationLayers**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_enablevalidationlayers)   = `false`<br> |
 |  uint64\_t | [**m\_errorsCount**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_errorscount)   = `0`<br> |
 |  [**FrameBufferQueue**](classSR__GRAPH__NS_1_1FrameBufferQueue.md) | [**m\_fboQueue**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_fboqueue)  <br> |

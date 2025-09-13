@@ -73,21 +73,26 @@ namespace SR_GTYPES_NS {
         void SetDepthEnabled(bool depthEnabled);
         void SetSampleCount(uint8_t samples);
         void SetLayersCount(uint32_t layersCount);
+        void SetArrayLayersCount(uint32_t arrayLayersCount);
         void SetDepthAspect(ImageAspect depthAspect);
         void SetFeatures(const FrameBufferFeatures& features);
         void SetName(SR_UTILS_NS::StringAtom name) { m_name = name; }
         void SetInstanceForEachFram(bool forEach) { m_forEachSwapchainImage = forEach; }
+        void SetRenderAsSingleLayer(bool renderAsSingleLayer) { m_renderAsSingleLayer = renderAsSingleLayer; }
 
         SR_NODISCARD bool IsFileResource() const noexcept override { return false; }
         SR_NODISCARD bool IsAllowedMultiInstance() const override { return true; }
         SR_NODISCARD uint8_t GetSamplesCount() const;
         SR_NODISCARD uint32_t GetColorLayersCount() const noexcept { return m_colors.size(); }
         SR_NODISCARD uint32_t GetLayersCount() const noexcept { return m_layersCount; }
+        SR_NODISCARD uint32_t GetArrayLayersCount() const noexcept { return m_arrayLayersCount; }
         SR_NODISCARD ImageAspect GetDepthAspect() const noexcept { return m_depth.aspect; }
         SR_NODISCARD bool IsDepthEnabled() const { return m_depthEnabled; }
         SR_NODISCARD bool IsDirty() const { return m_dirty; }
         SR_NODISCARD bool IsValid() const;
         SR_NODISCARD bool IsWasRendered() const { return m_wasRendered; }
+        SR_NODISCARD bool IsForEachSwapchainImage() const { return m_forEachSwapchainImage; }
+        SR_NODISCARD bool IsRenderAsSingleLayer() const { return m_renderAsSingleLayer; }
         SR_NODISCARD const FrameBufferFeatures& GetFeatures() const { return m_features; }
 
         SR_NODISCARD int32_t GetId() const;
@@ -109,6 +114,7 @@ namespace SR_GTYPES_NS {
         std::atomic<bool> m_dirty = true;
         std::atomic<bool> m_hasErrors = false;
         bool m_wasRendered = false;
+        bool m_renderAsSingleLayer = false;
 
         std::vector<ColorLayer> m_colors = { };
         DepthLayer m_depth = { };
@@ -117,6 +123,7 @@ namespace SR_GTYPES_NS {
         SR_MATH_NS::IVector2 m_size = { };
 
         uint8_t m_layersCount = 1;
+        uint32_t m_arrayLayersCount = 1;
 
         bool m_forEachSwapchainImage = false;
 

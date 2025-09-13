@@ -35,6 +35,7 @@
 
 | Type | Name |
 | ---: | :--- |
+|  uint32\_t | [**arrayLayersCount**](#variable-arraylayerscount)   = `0`<br> |
 |  std::vector&lt; [**ColorLayer**](structSR__GRAPH__NS_1_1ColorLayer.md) &gt; \* | [**colors**](#variable-colors)   = `nullptr`<br> |
 |  [**FrameBufferFeatures**](structSR__GRAPH__NS_1_1FrameBufferFeatures.md) | [**features**](#variable-features)  <br> |
 |  uint32\_t | [**layersCount**](#variable-layerscount)   = `0`<br> |
@@ -88,6 +89,19 @@
 
 ## Public Attributes Documentation
 
+
+
+
+### variable arrayLayersCount 
+
+```C++
+uint32_t SR_GRAPH_NS::SRFrameBufferCreateInfo::arrayLayersCount;
+```
+
+
+
+
+<hr>
 
 
 

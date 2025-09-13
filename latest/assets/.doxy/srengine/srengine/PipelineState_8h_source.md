@@ -35,6 +35,7 @@ namespace SR_GRAPH_NS {
         std::vector<ColorLayer>* colors = nullptr;
         uint8_t sampleCount = 0;
         uint32_t layersCount = 0;
+        uint32_t arrayLayersCount = 0;
         FrameBufferFeatures features;
 
     };

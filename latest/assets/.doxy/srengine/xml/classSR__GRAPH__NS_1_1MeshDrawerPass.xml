@@ -39,6 +39,22 @@
         <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="56" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="56" bodyend="-1"/>
       </memberdef>
     </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1abacb6a83c6d176a78433d3b0e5989fcf" prot="protected" static="no" mutable="no">
+        <type><ref refid="structSR__SRSL__NS_1_1ShaderMacrosParams" kindref="compound">SR_SRSL_NS::ShaderMacrosParams</ref></type>
+        <definition>SR_SRSL_NS::ShaderMacrosParams SR_GRAPH_NS::MeshDrawerPass::m_shaderMacros</definition>
+        <argsstring></argsstring>
+        <name>m_shaderMacros</name>
+        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::m_shaderMacros</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="95" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="95" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1aba3d28907e7faad8896c4f3536f9d6e2" prot="private" static="no" mutable="no">
         <type>std::vector&lt; RenderQueuePtr &gt;</type>
@@ -52,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="94" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="94" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="98" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="98" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7509203f3700de63d4fa28720bd5c5c8" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Time" kindref="compound">SR_HTYPES_NS::Time</ref> &amp;</type>
@@ -66,21 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="95" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="95" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1abacb6a83c6d176a78433d3b0e5989fcf" prot="private" static="no" mutable="no">
-        <type><ref refid="structSR__SRSL__NS_1_1ShaderMacrosParams" kindref="compound">SR_SRSL_NS::ShaderMacrosParams</ref></type>
-        <definition>SR_SRSL_NS::ShaderMacrosParams SR_GRAPH_NS::MeshDrawerPass::m_shaderMacros</definition>
-        <argsstring></argsstring>
-        <name>m_shaderMacros</name>
-        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::m_shaderMacros</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="96" column="40" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="96" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="99" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="99" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1ae5e3a20c2c773aeb1308a188cbced5b2" prot="private" static="no" mutable="no">
         <type>uint8_t</type>
@@ -95,7 +97,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="99" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="99" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="102" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="102" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a756bdb0dd83fc86f9095e3fd94355a57" prot="private" static="no" mutable="no">
         <type>std::set&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt;</type>
@@ -109,7 +111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="101" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="101" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="104" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="104" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a4b1d660b6f84b674d24c82a909edbaf7" prot="private" static="no" mutable="no">
         <type>std::set&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt;</type>
@@ -123,7 +125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="103" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="103" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="106" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="106" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1aa9da8ff459e2f19f27f3720c5ce700b0" prot="private" static="no" mutable="no">
         <type>std::set&lt; std::string &gt;</type>
@@ -137,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="105" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="105" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="108" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="108" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a093a7b7a6ceda9c59273e5a1370e0a22" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1SamplersPassData" kindref="compound">SamplersPassData</ref></type>
@@ -151,7 +153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="107" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="107" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="110" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="110" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a97cb768e3b6c582113b7320dd10e0589" prot="private" static="no" mutable="no">
         <type><ref refid="structSR__GRAPH__NS_1_1MeshDrawerUniforms" kindref="compound">MeshDrawerUniforms</ref></type>
@@ -165,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="109" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="109" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="112" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="112" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -565,6 +567,25 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="91" column="45"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7d71fca99243766d840ebdffd12b000b" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_GRAPH_NS::MeshDrawerPass::UpdateShaderDefines</definition>
+        <argsstring>(SR_SRSL_NS::ShaderMacrosParams &amp;defines) const</argsstring>
+        <name>UpdateShaderDefines</name>
+        <qualifiedname>SR_GRAPH_NS::MeshDrawerPass::UpdateShaderDefines</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1ab608ee861962996adeaeb8b6934cf529">UpdateShaderDefines</reimplementedby>
+        <param>
+          <type><ref refid="structSR__SRSL__NS_1_1ShaderMacrosParams" kindref="compound">SR_SRSL_NS::ShaderMacrosParams</ref> &amp;</type>
+          <declname>defines</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="92" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="92" bodyend="92"/>
+      </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
@@ -676,6 +697,9 @@
         </childnode>
         <childnode refid="15" relation="public-inheritance">
         </childnode>
+        <childnode refid="16" relation="usage">
+          <edgelabel>m_shaderMacros</edgelabel>
+        </childnode>
       </node>
       <node id="15">
         <label>SR_GRAPH_NS::PriorityFilterPredicate</label>
@@ -697,6 +721,10 @@
       <node id="5">
         <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
         <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="16">
+        <label>SR_SRSL_NS::ShaderMacrosParams</label>
+        <link refid="structSR__SRSL__NS_1_1ShaderMacrosParams"/>
       </node>
       <node id="11">
         <label>SR_UTILS_NS::NonCopyable</label>
@@ -731,7 +759,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="52" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="52" bodyend="111"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" line="52" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h" bodystart="52" bodyend="114"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1adaaa38e13468791bcb6c645092d08a73" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>AllocateRenderQueue</name></member>
@@ -795,7 +823,7 @@
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1aba3d28907e7faad8896c4f3536f9d6e2" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_renderQueues</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a093a7b7a6ceda9c59273e5a1370e0a22" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_samplers</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1aa9da8ff459e2f19f27f3720c5ce700b0" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_shaderDefines</name></member>
-      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1abacb6a83c6d176a78433d3b0e5989fcf" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_shaderMacros</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1abacb6a83c6d176a78433d3b0e5989fcf" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_shaderMacros</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7509203f3700de63d4fa28720bd5c5c8" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_time</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a8b2e3a39351e9141029bea133f380465" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_uboManager</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a97cb768e3b6c582113b7320dd10e0589" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>m_uniforms</name></member>
@@ -852,6 +880,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>TryRecursiveLockIfValid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>Unlock</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a37ab910895bbd048cc7b8338b30586d3" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>Update</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7d71fca99243766d840ebdffd12b000b" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>UpdateShaderDefines</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a77aca67fb7c534f6cc89e5b794cfac6a" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>UseConstants</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1acf61ab11ac383cf0a129b40ee5652361" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>UseSamplers</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7c71d4d77dffc063b164f9dd43f3851a" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>UseSharedUniforms</name></member>

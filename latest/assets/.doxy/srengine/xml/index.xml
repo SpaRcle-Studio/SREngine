@@ -1365,11 +1365,13 @@
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1aa6fb1cb20d3ec4171a4b62aff791b2d8" kind="variable"><name>m_near</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a316c137b56d58d88498d8826b75c9d99" kind="variable"><name>m_far</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a4282279a8fb4de5dfaa74cddd3dc72c9" kind="variable"><name>m_cascadeSplitLambda</name></member>
+    <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a3261403bb7917e9bdbb77d4e3e151c1c" kind="variable"><name>m_instancing</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a30ef6bef23016db8551b58cdc094c84c" kind="variable"><name>m_cascadeMatrices</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a7c88f47420b46139ad9dfb1a41cc0d4e" kind="variable"><name>m_cascadeSplitDepths</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1ace632509831d31d90df85293e1e39587" kind="variable"><name>m_cascadeRadii</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1aa389d8b46444dfa274aa68cc69e67d85" kind="function"><name>GetCascadeMatrices</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a013ac2ccec3d56f755d585ac7129b981" kind="function"><name>GetSplitDepths</name></member>
+    <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1ac4f1c890a61f18a14bf498b13e4c9310" kind="function"><name>Render</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a1b6805d2e2e5b7652ace4b9115ea897e" kind="function"><name>Prepare</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a9c065392abe9ac2048985d45ce4d8265" kind="function"><name>PostUpdate</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a90d0276863e394540a4053b0763a4d42" kind="function"><name>UseSharedUniforms</name></member>
@@ -1377,6 +1379,7 @@
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a23cc85e8be43fee94f23291da103d4df" kind="function"><name>UseUniformsFromAnotherPass</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a0e10ec729cc354bfba2dbe8715380318" kind="function"><name>CheckCamera</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1aeea9bcce13f150416fca9034b439f906" kind="function"><name>UpdateCascades</name></member>
+    <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1ab608ee861962996adeaeb8b6934cf529" kind="function"><name>UpdateShaderDefines</name></member>
   </compound>
   <compound refid="classEvoScript_1_1CastingGen" kind="class"><name>EvoScript::CastingGen</name>
     <member refid="classEvoScript_1_1CastingGen_1a59c4a26655786e08f2f50d979bd1b7d0" kind="variable"><name>m_incomplete</name></member>
@@ -4070,11 +4073,13 @@
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a2d4b4589e9eceec85ee83056cb3eb4b6" kind="variable"><name>m_dirty</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a4461863808838671497f0a4095133a93" kind="variable"><name>m_hasErrors</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a5ecb0749227144299e24b479635fd191" kind="variable"><name>m_wasRendered</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a73d44ccbaf0a5ad9e6cab34f44a96287" kind="variable"><name>m_renderAsSingleLayer</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a1463e41167b18250dcbd2f8b6cb14e84" kind="variable"><name>m_colors</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1aeaeff35e6c65ef23a7c05f101bab82c4" kind="variable"><name>m_depth</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a82b56979c8838e74b070ad6a76dd6a2d" kind="variable"><name>m_frameBuffer</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a0bf22f6243c85ea53978180a0d3e4de8" kind="variable"><name>m_size</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a9a8c78804eb222478db6be022206ea06" kind="variable"><name>m_layersCount</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a5137f1b91dc727654a66c36be48965e2" kind="variable"><name>m_arrayLayersCount</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a105d43b18a1450e345815d9be3f4b5eb" kind="variable"><name>m_forEachSwapchainImage</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a97932d38aed0f329969d00f5868230b8" kind="variable"><name>m_sampleCount</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a9e7b86fef05ff9c07ffd07ac3f64b55c" kind="variable"><name>m_currentSampleCount</name></member>
@@ -4095,20 +4100,25 @@
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a59b34aba63aa4f175c699080d4fe1872" kind="function"><name>SetDepthEnabled</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1abf8e6917d5ef7f95f5acc2f9f23c1888" kind="function"><name>SetSampleCount</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1ae3c161b517803626a8c29a82ceee9da3" kind="function"><name>SetLayersCount</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a723be57efc769e32a9106cec21cb6098" kind="function"><name>SetArrayLayersCount</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1ac5f28f665420fb2287205c3080a9646a" kind="function"><name>SetDepthAspect</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1ae00d4087480b29a611f32d047e29d5ff" kind="function"><name>SetFeatures</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a1a5bee84451be6176627e09333c7cb8c" kind="function"><name>SetName</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1aed24ca96d3d344c9ba6c872fefcc99a2" kind="function"><name>SetInstanceForEachFram</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Framebuffer_1abc7b334f749173974d193bec24059635" kind="function"><name>SetRenderAsSingleLayer</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a490b71f8dc30b82757fbfd22e6b5ce08" kind="function"><name>IsFileResource</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a666b0b1b2b08322017e1a7fd00b8d314" kind="function"><name>IsAllowedMultiInstance</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a0afd31f4d6d436bc0feaa7710be061c5" kind="function"><name>GetSamplesCount</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a8f35400d24010d372058047d10b771c2" kind="function"><name>GetColorLayersCount</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a1e22b8ec6fc5cf210fe3777d8f01a65f" kind="function"><name>GetLayersCount</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a94e64cbb5c26b3d3741ccf4752b75153" kind="function"><name>GetArrayLayersCount</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1af9d48c4d866af444eb8c8057dff19cb1" kind="function"><name>GetDepthAspect</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a5cf763c8a4c1cdda7c6d49d2e80139aa" kind="function"><name>IsDepthEnabled</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a0b0498681dde18808a96c9312e9eb233" kind="function"><name>IsDirty</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a44aa6e41472a67870bb5114a06f5ef50" kind="function"><name>IsValid</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1adec20106a943c4087baf8fc1217ff91e" kind="function"><name>IsWasRendered</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Framebuffer_1af8f3b820a8e80c2b7c2320c0567f009d" kind="function"><name>IsForEachSwapchainImage</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a817e053d2794aab17e101c4cc0ab9622" kind="function"><name>IsRenderAsSingleLayer</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1ae528ca2428c5128aa87a9bcbb72f95bb" kind="function"><name>GetFeatures</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1a2977be0dc79dce7fac2cdf74113cb246" kind="function"><name>GetId</name></member>
     <member refid="classSR__GTYPES__NS_1_1Framebuffer_1aeddca7806fe03d6f016a3ce30c1432e6" kind="function"><name>GetColorTexture</name></member>
@@ -4142,6 +4152,7 @@
     <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1a90bb5a2caec9f5c95faa0c3fc6f7edcd" kind="variable"><name>m_features</name></member>
     <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1a1a166157ee11b1b70106481bcc8838ca" kind="variable"><name>m_samples</name></member>
     <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1ae06a9a193e72ba1e652f314710676914" kind="variable"><name>m_layersCount</name></member>
+    <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1a27d1588e9cb20c9697d5844e01963801" kind="variable"><name>m_arrayLayersCount</name></member>
     <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1ab9c292a80e8616b92618fa1c2f8d884c" kind="variable"><name>m_depthFormat</name></member>
     <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1a55fffe6708b2ede0a39b1b75c1f7ba56" kind="variable"><name>m_depthAspect</name></member>
     <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1a9937bca0e5866e6478d61da952f1a171" kind="function"><name>FrameBufferController</name></member>
@@ -6482,9 +6493,9 @@
   <compound refid="classSR__GRAPH__NS_1_1MeshDrawerPass" kind="class"><name>SR_GRAPH_NS::MeshDrawerPass</name>
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a29620deb813314f8ceb9ffceaffbcbc8" kind="typedef"><name>Super</name></member>
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a9fe3f67ad907624d9277f7ade5e02826" kind="typedef"><name>RenderQueuePtr</name></member>
+    <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1abacb6a83c6d176a78433d3b0e5989fcf" kind="variable"><name>m_shaderMacros</name></member>
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1aba3d28907e7faad8896c4f3536f9d6e2" kind="variable"><name>m_renderQueues</name></member>
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7509203f3700de63d4fa28720bd5c5c8" kind="variable"><name>m_time</name></member>
-    <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1abacb6a83c6d176a78433d3b0e5989fcf" kind="variable"><name>m_shaderMacros</name></member>
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1ae5e3a20c2c773aeb1308a188cbced5b2" kind="variable"><name>m_renderLayers</name></member>
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a756bdb0dd83fc86f9095e3fd94355a57" kind="variable"><name>m_allowedLayers</name></member>
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a4b1d660b6f84b674d24c82a909edbaf7" kind="variable"><name>m_disallowedLayers</name></member>
@@ -6515,6 +6526,7 @@
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a484f04d4928e53af33e948b1e542d3cf" kind="function"><name>GetLayersCount</name></member>
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a4435db91121eee036621f931696007f9" kind="function"><name>GetRenderStrategy</name></member>
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1adaaa38e13468791bcb6c645092d08a73" kind="function"><name>AllocateRenderQueue</name></member>
+    <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7d71fca99243766d840ebdffd12b000b" kind="function"><name>UpdateShaderDefines</name></member>
   </compound>
   <compound refid="structSR__GRAPH__NS_1_1MeshDrawerSharedUniforms" kind="struct"><name>SR_GRAPH_NS::MeshDrawerSharedUniforms</name>
     <member refid="structSR__GRAPH__NS_1_1MeshDrawerSharedUniforms_1ad204bfa8d27ce3ceed104b2ceee919bb" kind="variable"><name>camera</name></member>
@@ -7910,6 +7922,7 @@
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a4c66f92cb85ee9d6bbdfdc1838bd1e92" kind="variable"><name>m_supportedSampleCount</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a3b2a0e747e1e251e021591a09fe5ad01" kind="variable"><name>m_isMultiSampleSupported</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a015d23c7170f5284bbf5b5967535a6c5" kind="variable"><name>m_frames</name></member>
+    <member refid="classSR__GRAPH__NS_1_1Pipeline_1a36b9980f81d92685182b56ba5423ec31" kind="variable"><name>m_drawInstancesCount</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a0df7e8ff5d6ec0d22845fb6ad1a7a83a" kind="variable"><name>m_framesPerSecond</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1aa60bb798bce567a0df5c5afce45f7861" kind="variable"><name>m_lastSecond</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a019fddd8a6b99504451580c87866b548" kind="variable"><name>m_isShaderChanged</name></member>
@@ -8046,6 +8059,8 @@
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a93ebd325c754dc265ef745457d97efb8" kind="function"><name>BindAttachment</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a3772df1e1fcbfb93a65a67dcf58e95d9" kind="function"><name>BindDescriptorSet</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1aacd471fd5fc1cf6593084ed32fdf2f80" kind="function"><name>ResetLastShader</name></member>
+    <member refid="classSR__GRAPH__NS_1_1Pipeline_1ac0d66ec5334ff6ffc69b87f546816646" kind="function"><name>SetDrawInstancesCount</name></member>
+    <member refid="classSR__GRAPH__NS_1_1Pipeline_1aa1d4fa287ccca8409da3e279e880c0de" kind="function"><name>ResetDrawInstancesCount</name></member>
   </compound>
   <compound refid="structSR__GRAPH__NS_1_1PipelinePreInitInfo" kind="struct"><name>SR_GRAPH_NS::PipelinePreInitInfo</name>
     <member refid="structSR__GRAPH__NS_1_1PipelinePreInitInfo_1acde0963234c8c0a878d583a61b978dd1" kind="variable"><name>samplesCount</name></member>
@@ -11073,6 +11088,7 @@
     <member refid="structSR__GRAPH__NS_1_1SRFrameBufferCreateInfo_1af7843fc4a785120a297147eb84a0eacc" kind="variable"><name>colors</name></member>
     <member refid="structSR__GRAPH__NS_1_1SRFrameBufferCreateInfo_1a3434e5f1a62413c84bd1645f400e86e1" kind="variable"><name>sampleCount</name></member>
     <member refid="structSR__GRAPH__NS_1_1SRFrameBufferCreateInfo_1a6eca354f6ce62fd23d5ad180bcb4b36e" kind="variable"><name>layersCount</name></member>
+    <member refid="structSR__GRAPH__NS_1_1SRFrameBufferCreateInfo_1ae044a0d7aa4897ecc327ddc55686e1c3" kind="variable"><name>arrayLayersCount</name></member>
     <member refid="structSR__GRAPH__NS_1_1SRFrameBufferCreateInfo_1a00c66b0d259c52d777bf1ecea5eab1d5" kind="variable"><name>features</name></member>
   </compound>
   <compound refid="structSR__UTILS__NS_1_1SRHash" kind="struct"><name>SR_UTILS_NS::SRHash</name>
@@ -13748,6 +13764,7 @@
     <member refid="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1adbbe4adc1489f68c2ae0211ab9daafaa" kind="variable"><name>pDepth</name></member>
     <member refid="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1a8f621f7e5f8bd9da472a13a616d0a9d3" kind="variable"><name>sampleCount</name></member>
     <member refid="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1ab1dd7239c52afa7706666f2f7894f143" kind="variable"><name>layersCount</name></member>
+    <member refid="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1a8f182b88b0f1331514455aa9bbc4ce9a" kind="variable"><name>arrayLayersCount</name></member>
     <member refid="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1a14461a9b237ae1aba5558927d4ac863b" kind="variable"><name>oldColorAttachments</name></member>
     <member refid="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1a231287a3c1c57fda80a116d9c5436d05" kind="variable"><name>inputColorAttachments</name></member>
     <member refid="structSR__GRAPH__NS_1_1VulkanTools_1_1VulkanFrameBufferAllocInfo_1ab479a2c535338bfcc4ff9d295dc8bcdd" kind="variable"><name>pOutputColorAttachments</name></member>

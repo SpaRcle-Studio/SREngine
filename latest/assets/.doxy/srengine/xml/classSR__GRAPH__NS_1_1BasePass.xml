@@ -434,6 +434,7 @@
         <argsstring>()</argsstring>
         <name>Render</name>
         <qualifiedname>SR_GRAPH_NS::BasePass::Render</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1ac4f1c890a61f18a14bf498b13e4c9310">Render</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1ColorBufferPass_1a4567549000c8cc50b03d400a0bb8d333">Render</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1DebugPass_1a501b6e1ebe5566cecf1905dbf55f465f">Render</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1FrameBufferPass_1a1e28ce743ab8660cef4bd3a143a81ba5">Render</reimplementedby>

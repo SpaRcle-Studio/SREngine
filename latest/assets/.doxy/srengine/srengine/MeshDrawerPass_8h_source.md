@@ -93,11 +93,14 @@ namespace SR_GRAPH_NS {
     protected:
         SR_NODISCARD RenderStrategy* GetRenderStrategy() const;
         SR_NODISCARD virtual RenderQueuePtr AllocateRenderQueue();
+        virtual void UpdateShaderDefines(SR_SRSL_NS::ShaderMacrosParams& defines) const { }
+
+    protected:
+        SR_SRSL_NS::ShaderMacrosParams m_shaderMacros;
 
     private:
         std::vector<RenderQueuePtr> m_renderQueues;
         SR_HTYPES_NS::Time& m_time;
-        SR_SRSL_NS::ShaderMacrosParams m_shaderMacros;
 
         uint8_t m_renderLayers = 1;
         std::set<SR_UTILS_NS::StringAtom> m_allowedLayers;

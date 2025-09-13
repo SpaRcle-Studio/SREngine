@@ -2293,6 +2293,7 @@
       <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1ade17e223ffe43739c0c2d1aa740cd44d" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>m_currentVkShader</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>m_data</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1acec79ba280ff6d871d6f315109f7dd53" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>m_dirty</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Pipeline_1a36b9980f81d92685182b56ba5423ec31" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>m_drawInstancesCount</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1abbf897a18ac1d4c2d7f639cb27e179f0" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>m_enableValidationLayers</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1aff1a6540a018816dc839abee3c42e513" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>m_errorsCount</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a2ff513c21aee7e569113af21d671141f" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>m_fboQueue</name></member>
@@ -2349,6 +2350,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>ReinterpretCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1af0ec6284cb3ee2c81353f8c1b5262894" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>RenderContextPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>Reset</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Pipeline_1aa1d4fa287ccca8409da3e279e880c0de" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>ResetDrawInstancesCount</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1aada0fa4c9e87e9da28f006dceb5ebb3d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>ResetLastShader</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a58ce6c6a275a6049d003abc09d310151" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>ResetSubmitQueue</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1abc61bc46e2bf93e844f7dcf55a0fea6c" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>SetCurrentFrameBuffer</name></member>
@@ -2357,6 +2359,7 @@
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a5ad09ba6ded3804ef3f66051f29c8c03" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>SetCurrentShader</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a6b0eaf9e9a90e7632090761fecfbd44b" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>SetCurrentShaderId</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1acf59f3ba72c6f019a786c85b42c0a85b" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>SetDirty</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Pipeline_1ac0d66ec5334ff6ffc69b87f546816646" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>SetDrawInstancesCount</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a559a33a8a84329fd9ef38c30d0af04d7" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>SetOverlayEnabled</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a27b5f31af0335610237640390fa7d205" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>SetOverlaySurfaceDirty</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>SetPointerFromBase</name></member>

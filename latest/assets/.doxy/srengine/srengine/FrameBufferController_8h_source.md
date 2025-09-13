@@ -68,6 +68,7 @@ namespace SR_GRAPH_NS {
         FrameBufferFeatures m_features;
         uint8_t m_samples = 0;
         uint32_t m_layersCount = 1;
+        uint32_t m_arrayLayersCount = 1;
         ImageFormat m_depthFormat = ImageFormat::Auto;
         ImageAspect m_depthAspect = ImageAspect::DepthStencil;
 

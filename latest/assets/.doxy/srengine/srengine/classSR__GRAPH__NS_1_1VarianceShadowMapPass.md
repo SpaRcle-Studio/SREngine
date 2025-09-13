@@ -276,6 +276,7 @@ See [SR\_GRAPH\_NS::CascadedShadowMapPass](classSR__GRAPH__NS_1_1CascadedShadowM
 |  SR\_NODISCARD const std::vector&lt; float\_t &gt; & | [**GetSplitDepths**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#function-getsplitdepths) () const<br> |
 | virtual void | [**PostUpdate**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#function-postupdate) () override<br> |
 | virtual void | [**Prepare**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#function-prepare) () override<br>_Вызывается всегда но полсе оверлея_  |
+| virtual bool | [**Render**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#function-render) () override<br>_Вызывается только во время построения_  |
 | virtual void | [**UseConstants**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#function-useconstants) ([**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* pShader) override<br> |
 | virtual void | [**UseSharedUniforms**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#function-useshareduniforms) ([**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* pShader) override<br> |
 | virtual void | [**UseUniformsFromAnotherPass**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#function-useuniformsfromanotherpass) ([**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* pShader) override<br> |
@@ -558,10 +559,18 @@ See [SR\_GRAPH\_NS::CascadedShadowMapPass](classSR__GRAPH__NS_1_1CascadedShadowM
 |  float\_t | [**m\_cascadeSplitLambda**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#variable-m_cascadesplitlambda)   = `0.95f`<br> |
 |  SR\_MATH\_NS::FVector3 | [**m\_directionalLightDirection**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#variable-m_directionallightdirection)  <br> |
 |  float\_t | [**m\_far**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#variable-m_far)   = `100.f`<br> |
+|  bool | [**m\_instancing**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#variable-m_instancing)   = `false`<br> |
 |  float\_t | [**m\_near**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#variable-m_near)   = `0.1f`<br> |
 |  SR\_MATH\_NS::UVector2 | [**m\_screenSize**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#variable-m_screensize)  <br> |
 
 
+## Protected Attributes inherited from SR_GRAPH_NS::MeshDrawerPass
+
+See [SR\_GRAPH\_NS::MeshDrawerPass](classSR__GRAPH__NS_1_1MeshDrawerPass.md)
+
+| Type | Name |
+| ---: | :--- |
+|  [**SR\_SRSL\_NS::ShaderMacrosParams**](structSR__SRSL__NS_1_1ShaderMacrosParams.md) | [**m\_shaderMacros**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#variable-m_shadermacros)  <br> |
 
 
 ## Protected Attributes inherited from SR_GRAPH_NS::BasePass
@@ -744,6 +753,7 @@ See [SR\_GRAPH\_NS::CascadedShadowMapPass](classSR__GRAPH__NS_1_1CascadedShadowM
 | ---: | :--- |
 |  bool | [**CheckCamera**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#function-checkcamera) () <br> |
 |  void | [**UpdateCascades**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#function-updatecascades) () <br> |
+| virtual void | [**UpdateShaderDefines**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#function-updateshaderdefines) ([**SR\_SRSL\_NS::ShaderMacrosParams**](structSR__SRSL__NS_1_1ShaderMacrosParams.md) & defines) override const<br> |
 
 
 ## Protected Functions inherited from SR_GRAPH_NS::MeshDrawerPass
@@ -754,6 +764,7 @@ See [SR\_GRAPH\_NS::MeshDrawerPass](classSR__GRAPH__NS_1_1MeshDrawerPass.md)
 | ---: | :--- |
 | virtual SR\_NODISCARD RenderQueuePtr | [**AllocateRenderQueue**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-allocaterenderqueue) () <br> |
 |  SR\_NODISCARD [**RenderStrategy**](classSR__GRAPH__NS_1_1RenderStrategy.md) \* | [**GetRenderStrategy**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-getrenderstrategy) () const<br> |
+| virtual void | [**UpdateShaderDefines**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-updateshaderdefines) ([**SR\_SRSL\_NS::ShaderMacrosParams**](structSR__SRSL__NS_1_1ShaderMacrosParams.md) & defines) const<br> |
 
 
 

@@ -253,6 +253,7 @@ See [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 |  SR\_NODISCARD const std::vector&lt; float\_t &gt; & | [**GetSplitDepths**](#function-getsplitdepths) () const<br> |
 | virtual void | [**PostUpdate**](#function-postupdate) () override<br> |
 | virtual void | [**Prepare**](#function-prepare) () override<br>_Вызывается всегда но полсе оверлея_  |
+| virtual bool | [**Render**](#function-render) () override<br>_Вызывается только во время построения_  |
 | virtual void | [**UseConstants**](#function-useconstants) ([**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* pShader) override<br> |
 | virtual void | [**UseSharedUniforms**](#function-useshareduniforms) ([**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* pShader) override<br> |
 | virtual void | [**UseUniformsFromAnotherPass**](#function-useuniformsfromanotherpass) ([**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* pShader) override<br> |
@@ -525,10 +526,18 @@ See [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 |  float\_t | [**m\_cascadeSplitLambda**](#variable-m_cascadesplitlambda)   = `0.95f`<br> |
 |  SR\_MATH\_NS::FVector3 | [**m\_directionalLightDirection**](#variable-m_directionallightdirection)  <br> |
 |  float\_t | [**m\_far**](#variable-m_far)   = `100.f`<br> |
+|  bool | [**m\_instancing**](#variable-m_instancing)   = `false`<br> |
 |  float\_t | [**m\_near**](#variable-m_near)   = `0.1f`<br> |
 |  SR\_MATH\_NS::UVector2 | [**m\_screenSize**](#variable-m_screensize)  <br> |
 
 
+## Protected Attributes inherited from SR_GRAPH_NS::MeshDrawerPass
+
+See [SR\_GRAPH\_NS::MeshDrawerPass](classSR__GRAPH__NS_1_1MeshDrawerPass.md)
+
+| Type | Name |
+| ---: | :--- |
+|  [**SR\_SRSL\_NS::ShaderMacrosParams**](structSR__SRSL__NS_1_1ShaderMacrosParams.md) | [**m\_shaderMacros**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#variable-m_shadermacros)  <br> |
 
 
 ## Protected Attributes inherited from SR_GRAPH_NS::BasePass
@@ -693,6 +702,7 @@ See [SR\_HTYPES\_NS::SharedPtrBase](classSR__HTYPES__NS_1_1SharedPtrBase.md)
 | ---: | :--- |
 |  bool | [**CheckCamera**](#function-checkcamera) () <br> |
 |  void | [**UpdateCascades**](#function-updatecascades) () <br> |
+| virtual void | [**UpdateShaderDefines**](#function-updateshaderdefines) ([**SR\_SRSL\_NS::ShaderMacrosParams**](structSR__SRSL__NS_1_1ShaderMacrosParams.md) & defines) override const<br> |
 
 
 ## Protected Functions inherited from SR_GRAPH_NS::MeshDrawerPass
@@ -703,6 +713,7 @@ See [SR\_GRAPH\_NS::MeshDrawerPass](classSR__GRAPH__NS_1_1MeshDrawerPass.md)
 | ---: | :--- |
 | virtual SR\_NODISCARD RenderQueuePtr | [**AllocateRenderQueue**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-allocaterenderqueue) () <br> |
 |  SR\_NODISCARD [**RenderStrategy**](classSR__GRAPH__NS_1_1RenderStrategy.md) \* | [**GetRenderStrategy**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-getrenderstrategy) () const<br> |
+| virtual void | [**UpdateShaderDefines**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-updateshaderdefines) ([**SR\_SRSL\_NS::ShaderMacrosParams**](structSR__SRSL__NS_1_1ShaderMacrosParams.md) & defines) const<br> |
 
 
 
@@ -793,6 +804,22 @@ virtual void SR_GRAPH_NS::CascadedShadowMapPass::Prepare () override
 
 
 Implements [*SR\_GRAPH\_NS::BasePass::Prepare*](classSR__GRAPH__NS_1_1BasePass.md#function-prepare)
+
+
+<hr>
+
+
+
+### function Render 
+
+_Вызывается только во время построения_ 
+```C++
+virtual bool SR_GRAPH_NS::CascadedShadowMapPass::Render () override
+```
+
+
+
+Implements [*SR\_GRAPH\_NS::BasePass::Render*](classSR__GRAPH__NS_1_1BasePass.md#function-render)
 
 
 <hr>
@@ -956,6 +983,19 @@ float_t SR_GRAPH_NS::CascadedShadowMapPass::m_far;
 
 
 
+### variable m\_instancing 
+
+```C++
+bool SR_GRAPH_NS::CascadedShadowMapPass::m_instancing;
+```
+
+
+
+
+<hr>
+
+
+
 ### variable m\_near 
 
 ```C++
@@ -1004,6 +1044,23 @@ void SR_GRAPH_NS::CascadedShadowMapPass::UpdateCascades ()
 ```
 
 
+
+
+<hr>
+
+
+
+### function UpdateShaderDefines 
+
+```C++
+virtual void SR_GRAPH_NS::CascadedShadowMapPass::UpdateShaderDefines (
+    SR_SRSL_NS::ShaderMacrosParams & defines
+) override const
+```
+
+
+
+Implements [*SR\_GRAPH\_NS::MeshDrawerPass::UpdateShaderDefines*](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-updateshaderdefines)
 
 
 <hr>

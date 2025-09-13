@@ -247,6 +247,9 @@ namespace SR_GRAPH_NS {
 
         virtual void ResetLastShader();
 
+        void SetDrawInstancesCount(uint32_t count) { ++m_state.operations; m_drawInstancesCount = count; }
+        void ResetDrawInstancesCount() { ++m_state.operations; m_drawInstancesCount = 1; }
+
     protected:
         std::map<OverlayType, SR_HTYPES_NS::SharedPtr<Overlay>> m_overlays;
 
@@ -281,6 +284,7 @@ namespace SR_GRAPH_NS {
         bool m_isMultiSampleSupported = false;
 
         uint32_t m_frames = 0;
+        uint32_t m_drawInstancesCount = 1;
         uint32_t m_framesPerSecond = 0;
         std::optional<SR_UTILS_NS::TimePointType> m_lastSecond;
 

@@ -556,6 +556,13 @@ See [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 
 
 
+## Protected Attributes inherited from SR_GRAPH_NS::MeshDrawerPass
+
+See [SR\_GRAPH\_NS::MeshDrawerPass](classSR__GRAPH__NS_1_1MeshDrawerPass.md)
+
+| Type | Name |
+| ---: | :--- |
+|  [**SR\_SRSL\_NS::ShaderMacrosParams**](structSR__SRSL__NS_1_1ShaderMacrosParams.md) | [**m\_shaderMacros**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#variable-m_shadermacros)  <br> |
 
 
 ## Protected Attributes inherited from SR_GRAPH_NS::BasePass
@@ -756,6 +763,7 @@ See [SR\_GRAPH\_NS::MeshDrawerPass](classSR__GRAPH__NS_1_1MeshDrawerPass.md)
 | ---: | :--- |
 | virtual SR\_NODISCARD RenderQueuePtr | [**AllocateRenderQueue**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-allocaterenderqueue) () <br> |
 |  SR\_NODISCARD [**RenderStrategy**](classSR__GRAPH__NS_1_1RenderStrategy.md) \* | [**GetRenderStrategy**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-getrenderstrategy) () const<br> |
+| virtual void | [**UpdateShaderDefines**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-updateshaderdefines) ([**SR\_SRSL\_NS::ShaderMacrosParams**](structSR__SRSL__NS_1_1ShaderMacrosParams.md) & defines) const<br> |
 
 
 

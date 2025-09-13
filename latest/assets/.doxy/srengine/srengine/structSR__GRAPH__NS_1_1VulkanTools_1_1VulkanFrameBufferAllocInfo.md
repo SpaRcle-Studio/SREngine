@@ -36,6 +36,7 @@
 | Type | Name |
 | ---: | :--- |
 |  int32\_t | [**FBO**](#variable-fbo)   = `SR\_ID\_INVALID`<br> |
+|  uint32\_t | [**arrayLayersCount**](#variable-arraylayerscount)   = `0`<br> |
 |  EvoVulkan::Complexes::FrameBufferFeatures | [**features**](#variable-features)  <br> |
 |  uint8\_t | [**frame**](#variable-frame)   = `0`<br> |
 |  uint32\_t | [**height**](#variable-height)   = `0`<br> |
@@ -100,6 +101,19 @@
 
 ```C++
 int32_t SR_GRAPH_NS::VulkanTools::VulkanFrameBufferAllocInfo::FBO;
+```
+
+
+
+
+<hr>
+
+
+
+### variable arrayLayersCount 
+
+```C++
+uint32_t SR_GRAPH_NS::VulkanTools::VulkanFrameBufferAllocInfo::arrayLayersCount;
 ```
 
 

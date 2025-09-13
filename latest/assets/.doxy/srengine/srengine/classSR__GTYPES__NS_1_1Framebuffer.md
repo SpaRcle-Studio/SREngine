@@ -248,6 +248,7 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 |  void | [**EndRender**](#function-endrender) () <br> |
 |   | [**Framebuffer**](#function-framebuffer) () <br> |
 |  void | [**FreeVMemory**](#function-freevmemory) () override<br> |
+|  SR\_NODISCARD uint32\_t | [**GetArrayLayersCount**](#function-getarraylayerscount) () noexcept const<br> |
 |  SR\_NODISCARD uint32\_t | [**GetColorLayersCount**](#function-getcolorlayerscount) () noexcept const<br> |
 |  SR\_NODISCARD int32\_t | [**GetColorTexture**](#function-getcolortexture) (uint32\_t layer, uint8\_t frame) <br> |
 |  SR\_NODISCARD ImageAspect | [**GetDepthAspect**](#function-getdepthaspect) () noexcept const<br> |
@@ -265,8 +266,11 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 |  SR\_NODISCARD bool | [**IsDepthEnabled**](#function-isdepthenabled) () const<br> |
 |  SR\_NODISCARD bool | [**IsDirty**](#function-isdirty) () const<br> |
 | virtual SR\_NODISCARD bool | [**IsFileResource**](#function-isfileresource) () noexcept override const<br>_является ли ресурс файловым_  |
+|  SR\_NODISCARD bool | [**IsForEachSwapchainImage**](#function-isforeachswapchainimage) () const<br> |
+|  SR\_NODISCARD bool | [**IsRenderAsSingleLayer**](#function-isrenderassinglelayer) () const<br> |
 |  SR\_NODISCARD bool | [**IsValid**](#function-isvalid) () const<br> |
 |  SR\_NODISCARD bool | [**IsWasRendered**](#function-iswasrendered) () const<br> |
+|  void | [**SetArrayLayersCount**](#function-setarraylayerscount) (uint32\_t arrayLayersCount) <br> |
 |  void | [**SetDepthAspect**](#function-setdepthaspect) (ImageAspect depthAspect) <br> |
 |  void | [**SetDepthEnabled**](#function-setdepthenabled) (bool depthEnabled) <br> |
 |  void | [**SetDirty**](#function-setdirty) () <br> |
@@ -274,6 +278,7 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 |  void | [**SetInstanceForEachFram**](#function-setinstanceforeachfram) (bool forEach) <br> |
 |  void | [**SetLayersCount**](#function-setlayerscount) (uint32\_t layersCount) <br> |
 |  void | [**SetName**](#function-setname) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) <br> |
+|  void | [**SetRenderAsSingleLayer**](#function-setrenderassinglelayer) (bool renderAsSingleLayer) <br> |
 |  void | [**SetSampleCount**](#function-setsamplecount) (uint8\_t samples) <br> |
 |  void | [**SetSize**](#function-setsize) (const SR\_MATH\_NS::IVector2 & size) <br> |
 |  void | [**SetViewportScissor**](#function-setviewportscissor) () <br> |
@@ -903,6 +908,19 @@ void SR_GTYPES_NS::Framebuffer::FreeVMemory () override
 
 
 
+### function GetArrayLayersCount 
+
+```C++
+inline SR_NODISCARD uint32_t SR_GTYPES_NS::Framebuffer::GetArrayLayersCount () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
 ### function GetColorLayersCount 
 
 ```C++
@@ -1137,6 +1155,32 @@ Implements [*SR\_UTILS\_NS::IResource::IsFileResource*](classSR__UTILS__NS_1_1IR
 
 
 
+### function IsForEachSwapchainImage 
+
+```C++
+inline SR_NODISCARD bool SR_GTYPES_NS::Framebuffer::IsForEachSwapchainImage () const
+```
+
+
+
+
+<hr>
+
+
+
+### function IsRenderAsSingleLayer 
+
+```C++
+inline SR_NODISCARD bool SR_GTYPES_NS::Framebuffer::IsRenderAsSingleLayer () const
+```
+
+
+
+
+<hr>
+
+
+
 ### function IsValid 
 
 ```C++
@@ -1154,6 +1198,21 @@ SR_NODISCARD bool SR_GTYPES_NS::Framebuffer::IsValid () const
 
 ```C++
 inline SR_NODISCARD bool SR_GTYPES_NS::Framebuffer::IsWasRendered () const
+```
+
+
+
+
+<hr>
+
+
+
+### function SetArrayLayersCount 
+
+```C++
+void SR_GTYPES_NS::Framebuffer::SetArrayLayersCount (
+    uint32_t arrayLayersCount
+) 
 ```
 
 
@@ -1256,6 +1315,21 @@ void SR_GTYPES_NS::Framebuffer::SetLayersCount (
 ```C++
 inline void SR_GTYPES_NS::Framebuffer::SetName (
     SR_UTILS_NS::StringAtom name
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function SetRenderAsSingleLayer 
+
+```C++
+inline void SR_GTYPES_NS::Framebuffer::SetRenderAsSingleLayer (
+    bool renderAsSingleLayer
 ) 
 ```
 
