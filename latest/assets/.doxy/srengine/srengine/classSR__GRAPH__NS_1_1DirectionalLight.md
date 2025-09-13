@@ -132,7 +132,6 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 | Type | Name |
 | ---: | :--- |
 | virtual SR\_NODISCARD LightType | [**GetLightType**](#function-getlighttype) () override const<br> |
-| virtual void | [**OnAttached**](#function-onattached) () override<br>_Вызывается после добавления компонента к игровому объекту_  |
 
 
 ## Public Functions inherited from SR_GRAPH_NS::ILightComponent
@@ -146,6 +145,7 @@ See [SR\_GRAPH\_NS::ILightComponent](classSR__GRAPH__NS_1_1ILightComponent.md)
 | virtual SR\_NODISCARD bool | [**IsUpdatable**](classSR__GRAPH__NS_1_1ILightComponent.md#function-isupdatable) () noexcept override const<br>_Активен и компонент и его родительский объект_  |
 | virtual void | [**OnAttached**](classSR__GRAPH__NS_1_1ILightComponent.md#function-onattached) () override<br>_Вызывается после добавления компонента к игровому объекту_  |
 | virtual void | [**OnDestroy**](classSR__GRAPH__NS_1_1ILightComponent.md#function-ondestroy) () override<br>_Вызывается когда компонент убирается с объекта, либо объект уничтожается. Может произойти отложенно._  |
+| virtual void | [**OnMatrixDirty**](classSR__GRAPH__NS_1_1ILightComponent.md#function-onmatrixdirty) () override<br> |
 
 
 ## Public Functions inherited from SR_GTYPES_NS::IRenderComponent
@@ -378,22 +378,6 @@ inline virtual SR_NODISCARD LightType SR_GRAPH_NS::DirectionalLight::GetLightTyp
 
 
 Implements [*SR\_GRAPH\_NS::ILightComponent::GetLightType*](classSR__GRAPH__NS_1_1ILightComponent.md#function-getlighttype)
-
-
-<hr>
-
-
-
-### function OnAttached 
-
-_Вызывается после добавления компонента к игровому объекту_ 
-```C++
-virtual void SR_GRAPH_NS::DirectionalLight::OnAttached () override
-```
-
-
-
-Implements [*SR\_UTILS\_NS::Component::OnAttached*](classSR__UTILS__NS_1_1Component.md#function-onattached)
 
 
 <hr>

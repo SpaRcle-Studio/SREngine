@@ -82,6 +82,7 @@ Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_
 |  void | [**SetDefault**](#function-setdefault) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & name, const ShaderPropertyVariant & value) <br> |
 |  void SR\_FASTCALL | [**SetField**](#function-setfield-12) (uint64\_t hashId, const void \* data) noexcept<br> |
 |  void SR\_FASTCALL | [**SetField**](#function-setfield-22) (uint64\_t hashId, const ShaderPropertyVariant & property) noexcept<br> |
+|   | [**ShaderUBOBlock**](#function-shaderuboblock) () <br> |
 |  SR\_NODISCARD bool | [**Valid**](#function-valid) () noexcept const<br> |
 |   | [**~ShaderUBOBlock**](#function-shaderuboblock) () override<br> |
 
@@ -302,6 +303,19 @@ void SR_FASTCALL SR_GRAPH_NS::Memory::ShaderUBOBlock::SetField (
     uint64_t hashId,
     const ShaderPropertyVariant & property
 ) noexcept
+```
+
+
+
+
+<hr>
+
+
+
+### function ShaderUBOBlock 
+
+```C++
+SR_GRAPH_NS::Memory::ShaderUBOBlock::ShaderUBOBlock () 
 ```
 
 

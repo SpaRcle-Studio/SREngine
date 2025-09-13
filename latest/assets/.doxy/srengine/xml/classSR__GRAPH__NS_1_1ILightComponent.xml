@@ -8,6 +8,22 @@
     <derivedcompoundref refid="classSR__GRAPH__NS_1_1PointLight" prot="public" virt="non-virtual">SR_GRAPH_NS::PointLight</derivedcompoundref>
     <derivedcompoundref refid="classSR__GRAPH__NS_1_1ProbeLight" prot="public" virt="non-virtual">SR_GRAPH_NS::ProbeLight</derivedcompoundref>
     <derivedcompoundref refid="classSR__GRAPH__NS_1_1SpotLight" prot="public" virt="non-virtual">SR_GRAPH_NS::SpotLight</derivedcompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1ILightComponent_1ad9e771e35b6cd0060a320b7a76f5361c" prot="private" static="no">
+        <type><ref refid="classSR__GTYPES__NS_1_1IRenderComponent" kindref="compound">SR_GTYPES_NS::IRenderComponent</ref></type>
+        <definition>using SR_GRAPH_NS::ILightComponent::Super =  SR_GTYPES_NS::IRenderComponent</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_GRAPH_NS::ILightComponent::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="16" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <sectiondef kind="protected-attrib">
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1ILightComponent_1af02042fc60deb8d5e34b579b1a4e50c0" prot="protected" static="no" mutable="no">
         <type>float_t</type>
@@ -22,7 +38,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="32" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" bodystart="32" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="30" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" bodystart="30" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1ILightComponent_1a76e298638ed28671b35d707975d9d3f3" prot="protected" static="no" mutable="no">
         <type>float_t</type>
@@ -37,7 +53,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="33" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="32" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1ILightComponent_1a3412e5696f828c235dde1ff6aad8e4d4" prot="protected" static="no" mutable="no">
         <type>ShadowType</type>
@@ -55,6 +71,23 @@
         <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="34" column="20" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" bodystart="34" bodyend="-1"/>
       </memberdef>
     </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1ILightComponent_1a97f055af2f98f79e58a201d4e01f2695" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::ILightComponent::m_isLightRegistered</definition>
+        <argsstring></argsstring>
+        <name>m_isLightRegistered</name>
+        <qualifiedname>SR_GRAPH_NS::ILightComponent::m_isLightRegistered</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="37" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <sectiondef kind="public-func">
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ILightComponent_1aecf5343d51a2c3bf56c3799288d586d5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE bool</type>
@@ -69,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="24" column="43" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" bodystart="24" bodyend="24"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="19" column="43" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" bodystart="19" bodyend="19"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ILightComponent_1a0a33ef54fce35d288b67b81c7c6dfad5" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -85,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="25" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" bodystart="25" bodyend="25"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="20" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" bodystart="20" bodyend="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ILightComponent_1a92cd97808ed4fcedd79595fa767ebdbb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>SR_NODISCARD LightType</type>
@@ -93,14 +126,18 @@
         <argsstring>() const =0</argsstring>
         <name>GetLightType</name>
         <qualifiedname>SR_GRAPH_NS::ILightComponent::GetLightType</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1AreaLight_1a4500f6175b2f6114367e8a56de2dd8d3">GetLightType</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1DirectionalLight_1afd81d65152003eded32bb7e25c6e872a">GetLightType</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1PointLight_1a311a953a9214970e27269a5250110b3f">GetLightType</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1ProbeLight_1af5c295b14f8d2a4dd990f92d6c3e4899">GetLightType</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1SpotLight_1a752b2dbef7763d811f494bb2491d2f77">GetLightType</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="26" column="40"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="21" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ILightComponent_1a6106b0f1d3165399d07fa17f8fc3476a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -116,7 +153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="28" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="23" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ILightComponent_1a10ee3185e641149fe7adc6f38124d1af" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -132,7 +169,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="29" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="24" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1ILightComponent_1ab20a6935b503855bfc51855c5238f0ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::ILightComponent::OnMatrixDirty</definition>
+        <argsstring>() override</argsstring>
+        <name>OnMatrixDirty</name>
+        <qualifiedname>SR_GRAPH_NS::ILightComponent::OnMatrixDirty</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1Component_1a6e4032583aabcd6cfebed3e13f39a1a2">OnMatrixDirty</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="26" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -233,7 +285,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="22" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" bodystart="22" bodyend="36"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="15" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" bodystart="15" bodyend="39"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ILightComponent</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ILightComponent</scope><name>BaseComponent</name></member>
@@ -277,6 +329,7 @@
       <member refid="classSR__UTILS__NS_1_1Component_1a01d2835c4cb9cab3dc85a24cb6330830" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ILightComponent</scope><name>m_isAwake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aa9bfad916eec33a0f4351054194c53e3" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ILightComponent</scope><name>m_isComponentLoaded</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ad9e404095f004e707f755beb764ab8e7" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ILightComponent</scope><name>m_isEnabled</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ILightComponent_1a97f055af2f98f79e58a201d4e01f2695" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::ILightComponent</scope><name>m_isLightRegistered</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a4a854563851b2106daf5d678e3a4b3a6" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ILightComponent</scope><name>m_isStarted</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a9dddd30253cd78eb28f504e1afb66514" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ILightComponent</scope><name>m_parent</name></member>
       <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1adf98d6531d11ca6c8946df21461446b7" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ILightComponent</scope><name>m_renderScene</name></member>
@@ -294,7 +347,7 @@
       <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1ae13cacd5b7be1e43cc46f79b4157d07e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ILightComponent</scope><name>OnEnable</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a561f35b144564e8df91651b3f8e57693" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ILightComponent</scope><name>OnLayerChanged</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1af7e2ecd6bef36595ac12274d6a6cc77c" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ILightComponent</scope><name>OnLoaded</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a6e4032583aabcd6cfebed3e13f39a1a2" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ILightComponent</scope><name>OnMatrixDirty</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ILightComponent_1ab20a6935b503855bfc51855c5238f0ea" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ILightComponent</scope><name>OnMatrixDirty</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aee0027f96ce5bec8a30edf069fa4dc10" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ILightComponent</scope><name>OnPriorityChanged</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aac7babfab0aaf8e811e05f8f55dbebb1" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ILightComponent</scope><name>OnTriggerEnter</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a54e04b235d9aaa0f027996b71362242b" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ILightComponent</scope><name>OnTriggerExit</name></member>
@@ -308,6 +361,7 @@
       <member refid="classSR__UTILS__NS_1_1Component_1af57bdc6a2c4f4ed50fec8a5175bcbf8f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ILightComponent</scope><name>SetIndexIdSceneUpdater</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ac9780c1f95cd3106101f4e1595550816" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ILightComponent</scope><name>SetParent</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a572b27823d61376ebbd0c33758ea5d6f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ILightComponent</scope><name>Start</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ILightComponent_1ad9e771e35b6cd0060a320b7a76f5361c" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::ILightComponent</scope><name>Super</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a55ba0d3b4c08092148668bae579366ff" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ILightComponent</scope><name>TryGetParent</name></member>
       <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1ab61fb3a6e950d558e4a24fd316c97062" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ILightComponent</scope><name>TryGetRenderScene</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a02cdaa6ae8c728a1f66192c9e6f54322" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ILightComponent</scope><name>TryGetScene</name></member>

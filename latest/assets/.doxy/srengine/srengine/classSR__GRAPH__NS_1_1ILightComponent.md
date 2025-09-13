@@ -117,6 +117,7 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 | virtual SR\_NODISCARD bool | [**IsUpdatable**](#function-isupdatable) () noexcept override const<br>_Активен и компонент и его родительский объект_  |
 | virtual void | [**OnAttached**](#function-onattached) () override<br>_Вызывается после добавления компонента к игровому объекту_  |
 | virtual void | [**OnDestroy**](#function-ondestroy) () override<br>_Вызывается когда компонент убирается с объекта, либо объект уничтожается. Может произойти отложенно._  |
+| virtual void | [**OnMatrixDirty**](#function-onmatrixdirty) () override<br> |
 
 
 ## Public Functions inherited from SR_GTYPES_NS::IRenderComponent
@@ -382,6 +383,21 @@ virtual void SR_GRAPH_NS::ILightComponent::OnDestroy () override
 
 
 Implements [*SR\_UTILS\_NS::Component::OnDestroy*](classSR__UTILS__NS_1_1Component.md#function-ondestroy)
+
+
+<hr>
+
+
+
+### function OnMatrixDirty 
+
+```C++
+virtual void SR_GRAPH_NS::ILightComponent::OnMatrixDirty () override
+```
+
+
+
+Implements [*SR\_UTILS\_NS::Component::OnMatrixDirty*](classSR__UTILS__NS_1_1Component.md#function-onmatrixdirty)
 
 
 <hr>

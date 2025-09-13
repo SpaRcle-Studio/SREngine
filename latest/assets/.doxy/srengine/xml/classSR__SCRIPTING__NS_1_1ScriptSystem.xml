@@ -150,7 +150,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="62" column="14" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="62" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="64" column="14" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="64" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1af512a870044bfe10d49e8e1ab40e00fe" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -165,7 +165,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="63" column="14" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="63" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="65" column="14" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="65" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a560f39420fb93cd61d3b25e186123e6d" prot="private" static="no" mutable="no">
         <type>std::recursive_mutex</type>
@@ -179,7 +179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="65" column="30" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="65" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="67" column="30" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="67" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a5fc8ae038c62c8899fc1e8a9eed016cd" prot="private" static="no" mutable="no">
         <type>SR_HTYPES_NS::Thread::Ptr</type>
@@ -194,7 +194,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="66" column="35" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="66" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="68" column="35" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="68" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a11363cb5955eed6576ba66823fddd16e" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Subscription" kindref="compound">SR_UTILS_NS::Subscription</ref></type>
@@ -208,7 +208,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="68" column="35" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="68" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="70" column="35" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="70" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a62fd35c4c5743efd1cf3e9ac29395557" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Subscription" kindref="compound">SR_UTILS_NS::Subscription</ref></type>
@@ -222,7 +222,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="69" column="35" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="69" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="71" column="35" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="71" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a06dc6e078da00f2e13ecbbc3d9b53c7b" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Subscription" kindref="compound">SR_UTILS_NS::Subscription</ref></type>
@@ -236,7 +236,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="70" column="35" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="70" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="72" column="35" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="72" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a1e44ab3cc4f56b07b9e23959bf9043f1" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -251,7 +251,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="74" column="27" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="74" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="76" column="27" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="76" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a8d7f6e3eab9dda95b172ca26f5461599" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -265,7 +265,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="75" column="27" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="75" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="77" column="27" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="77" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a4190d4f26339fbf2faa10e741b84f262" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -279,7 +279,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="76" column="27" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="76" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="78" column="27" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="78" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a7f6bf9dde83bcc6688c8b893fe3efa48" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -293,7 +293,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="77" column="27" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="77" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="79" column="27" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="79" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a0bcc431a4522887c4576576b201a6d16" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &gt;</type>
@@ -308,7 +308,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="81" column="21" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="81" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="83" column="21" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="83" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a34b8a58dc1196ea8635c55c98bb84bd8" prot="private" static="no" mutable="no">
         <type>SR_UTILS_NS::TimePointType</type>
@@ -322,7 +322,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="82" column="36" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="82" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="84" column="36" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="84" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a67c5e8a345c177785f0ee34133dd6676" prot="private" static="no" mutable="no">
         <type>CppCompiler::Ptr</type>
@@ -336,7 +336,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="84" column="26" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="84" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="86" column="26" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="86" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a0d8deef3dd4832a184c31638d2088446" prot="private" static="no" mutable="no">
         <type>CppCodeGenerator::Ptr</type>
@@ -350,7 +350,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="85" column="31" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="85" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="87" column="31" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="87" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a44315a0e555895e532751afc8cf68809" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">ModuleManager::Ptr</ref></type>
@@ -364,7 +364,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="86" column="28" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="86" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="88" column="28" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="88" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a8118e9abff87e7b55e06e70a5bfa6bb9" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -379,7 +379,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="88" column="21" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="88" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="90" column="21" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="90" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1ade34756347f0532aec047422e8297abf" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -394,7 +394,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="89" column="21" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="89" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="91" column="21" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="91" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a0ec11fd3a6cba76c210b354efd3e5d9f" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -409,7 +409,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="90" column="21" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="90" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="92" column="21" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="92" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1afa6b27fd4dd710b520f9e0b8cbc0a2a5" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -424,7 +424,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="91" column="21" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="91" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="93" column="21" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="93" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1aff3ddb46a22dce0440e47cebc1828e0f" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -439,7 +439,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="92" column="21" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="92" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="94" column="21" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="94" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1acb7c74d0a15952b785efe2e53584ebf2" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; State &gt;</type>
@@ -454,7 +454,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="93" column="21" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="93" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="95" column="21" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="95" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a59f60fe9be7174ee1965dd5560069f06" prot="private" static="no" mutable="no">
         <type>std::set&lt; <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &gt;</type>
@@ -468,7 +468,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="95" column="18" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="95" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="97" column="18" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="97" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a4354ce231d22ad087eed3921e439bc08" prot="private" static="no" mutable="no">
         <type>std::set&lt; <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &gt;</type>
@@ -482,7 +482,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="96" column="18" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="96" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="98" column="18" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="98" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1adb148fb7bb50a3e821dec2d7b26067d7" prot="private" static="no" mutable="no">
         <type>std::set&lt; <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &gt;</type>
@@ -496,7 +496,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="97" column="18" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="97" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="99" column="18" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="99" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a2bcb8f06b9d6bf73eebd6e35f4b74396" prot="private" static="no" mutable="no">
         <type>std::set&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt;</type>
@@ -510,7 +510,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="99" column="18" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="99" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="101" column="18" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="101" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -562,7 +562,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="49" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="51" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1adae49e173f30ac54d1c53fc809f7d4be" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -576,7 +576,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="50" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="52" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a11f97a4259b47f0eea630f469bd38b0c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -590,7 +590,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="51" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="53" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a34771b98c48d9a4e24e97884856a2187" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -604,7 +604,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="53" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="55" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a5ae00b594532c2c43024b77982fccd06" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -618,7 +618,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="54" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="56" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1ab70bc0b38b0231cf05b2d7c64b8091dd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -632,7 +632,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="55" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="57" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1ab3e87bff908127c953a48690d49968e9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -646,7 +646,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="56" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="58" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1af5eecfcc97969de6675ea11e5beea26a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -660,7 +660,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="57" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="59" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a2e0b7c4e7ae5e0a9337a7cb85cf7c512" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -674,7 +674,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="59" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="61" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -762,6 +762,34 @@
         </inbodydescription>
         <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="42" column="46" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="42" bodyend="42"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a6c7d6d45bce6289c45590762cf0dbf7e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD State</type>
+        <definition>SR_NODISCARD State SR_SCRIPTING_NS::ScriptSystem::GetState</definition>
+        <argsstring>() const</argsstring>
+        <name>GetState</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::GetState</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="43" column="28" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a86630e9ceb05e0a550cb6631c9bc094d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SCRIPTING_NS::ScriptSystem::WaitForIdle</definition>
+        <argsstring>()</argsstring>
+        <name>WaitForIdle</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::WaitForIdle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="45" column="14"/>
+      </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a65c87a598484baa44f29dab43bc17fdd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void SR_SCRIPTING_NS::ScriptSystem::ReloadModulesIfNeeded</definition>
@@ -774,7 +802,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="44" column="14"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="46" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -790,7 +818,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="46" column="33"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="48" column="33"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -852,7 +880,7 @@
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="18" column="5" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="18" bodyend="101"/>
+    <location file="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="18" column="5" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="18" bodyend="103"/>
     <listofallmembers>
       <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a3fea942016d8a2bacbb67bf3db961c25" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>ALLOWED_CPP_EXTENSIONS</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a3efeea587d6f6d26ccb221517c8d765a" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>ALLOWED_CPP_MODULE_EXTENSIONS</name></member>
@@ -867,6 +895,7 @@
       <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a12e298ef97423c477e698859c3ef8275" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>GetModuleManager</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a6f131e2fa1b2641f7e9ea8662ba8da53" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>GetMutex</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>GetSingletonName</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a6c7d6d45bce6289c45590762cf0dbf7e" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>GetState</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1aa3c63ddb0e0b2aebd015350877d42103" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>HandleFileSystemEvent</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a99534292ab8c99a8b6ce8066975b3389" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>Init</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a11f97a4259b47f0eea630f469bd38b0c" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>InitEngineSources</name></member>
@@ -920,6 +949,7 @@
       <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1adae49e173f30ac54d1c53fc809f7d4be" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>ThreadFunc</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a5ae00b594532c2c43024b77982fccd06" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>ThreadIdle</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a0338ed248f78e467760d3095f4a4a71a" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>UnlockSingleton</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a86630e9ceb05e0a550cb6631c9bc094d" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>WaitForIdle</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>~NonCopyable</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a0ff10b9f4b3b2802de069c966d0f9156" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>~ScriptSystem</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1aacd91d355a037b260f6cec7ca30ad314" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>~Singleton</name></member>

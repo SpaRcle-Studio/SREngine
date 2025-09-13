@@ -462,7 +462,7 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="120" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="120" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="ILightComponent_8h_1adf147afac190841ffe9cab9bb621d169" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="LightType_8h_1adf147afac190841ffe9cab9bb621d169" prot="public" static="no" mutable="no">
         <type></type>
         <definition>SR_GRAPH_NS::uint8_t</definition>
         <argsstring></argsstring>
@@ -474,9 +474,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="18" column="6" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" bodystart="18" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightType.h" line="17" column="6" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/LightType.h" bodystart="17" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="ILightComponent_8h_1a67b7870919fd9876fa548f83eec36589" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="LightType_8h_1a67b7870919fd9876fa548f83eec36589" prot="public" static="no" mutable="no">
         <type></type>
         <definition>SR_GRAPH_NS::Soft</definition>
         <argsstring></argsstring>
@@ -488,7 +488,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="19" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" bodystart="19" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightType.h" line="18" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/LightType.h" bodystart="18" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="IShaderProgram_8h_1a5adbec57a3620271e558b2971bf561c9" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -1030,13 +1030,13 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="96" column="46" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="96" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="IShaderProgram_8h_1af2fb85b66f65d29b56eb3d68ed950e22" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="IShaderProgram_8h_1afd617fc1018231850f8e5cb8631d8a7b" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
-        <definition>SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_DIRECTIONAL_LIGHT_POSITION</definition>
+        <definition>SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_DIRECTIONAL_LIGHT_DIRECTION</definition>
         <argsstring></argsstring>
-        <name>SHADER_DIRECTIONAL_LIGHT_POSITION</name>
-        <qualifiedname>SR_GRAPH_NS::SHADER_DIRECTIONAL_LIGHT_POSITION</qualifiedname>
-        <initializer>= &quot;DIRECTIONAL_LIGHT_POSITION&quot;</initializer>
+        <name>SHADER_DIRECTIONAL_LIGHT_DIRECTION</name>
+        <qualifiedname>SR_GRAPH_NS::SHADER_DIRECTIONAL_LIGHT_DIRECTION</qualifiedname>
+        <initializer>= &quot;DIRECTIONAL_LIGHT_DIRECTION&quot;</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -1512,7 +1512,7 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="17" column="5" declfile="Engine/libs/Graphics/inc/Graphics/Font/TextBuilder.h" declline="17" declcolumn="5"/>
       </memberdef>
-      <memberdef kind="function" id="ILightComponent_8h_1ac43ce22e8b348e4a217a16c868157bbe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="LightType_8h_1ac43ce22e8b348e4a217a16c868157bbe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>SR_GRAPH_NS::SR_ENUM_NS_CLASS_T</definition>
         <argsstring>(LightType, uint8_t, Directional, Point, Spot, Area, Probe) SR_ENUM_NS_CLASS_T(ShadowType</argsstring>
@@ -1545,7 +1545,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h" line="14" column="5"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightType.h" line="13" column="5"/>
       </memberdef>
       <memberdef kind="function" id="ShaderProperties_8h_1a54dafadad29087e44a0b80b44e1e0adc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>

@@ -21,12 +21,12 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1ac9171a05a693eaa8174f6d3012c8d114" prot="protected" static="no" mutable="no">
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1afa15c78fa412fe392e36351cec69fda8" prot="protected" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
-        <definition>SR_MATH_NS::FVector3 SR_GRAPH_NS::CascadedShadowMapPass::m_directionalLightPosition</definition>
+        <definition>SR_MATH_NS::FVector3 SR_GRAPH_NS::CascadedShadowMapPass::m_directionalLightDirection</definition>
         <argsstring></argsstring>
-        <name>m_directionalLightPosition</name>
-        <qualifiedname>SR_GRAPH_NS::CascadedShadowMapPass::m_directionalLightPosition</qualifiedname>
+        <name>m_directionalLightDirection</name>
+        <qualifiedname>SR_GRAPH_NS::CascadedShadowMapPass::m_directionalLightDirection</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -552,7 +552,7 @@
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a4282279a8fb4de5dfaa74cddd3dc72c9" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_cascadeSplitLambda</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_data</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a25fe2fa123f3a2a1fee0ca8ec9e64fa2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_descriptorManager</name></member>
-      <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1ac9171a05a693eaa8174f6d3012c8d114" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_directionalLightPosition</name></member>
+      <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1afa15c78fa412fe392e36351cec69fda8" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_directionalLightDirection</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a316c137b56d58d88498d8826b75c9d99" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_far</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1aa6fb1cb20d3ec4171a4b62aff791b2d8" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_near</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a220a2c6c443b2b89e8f78cbe5f551668" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::CascadedShadowMapPass</scope><name>m_screenSize</name></member>

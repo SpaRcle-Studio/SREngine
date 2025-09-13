@@ -10,7 +10,9 @@
 
 
 
-* `#include <Graphics/Pipeline/Pipeline.h>`
+* `#include <Graphics/Lighting/LightType.h>`
+* `#include <Utils/Math/Vector3.h>`
+* `#include <Utils/Types/SharedPtr.h>`
 
 
 

@@ -39,7 +39,7 @@ namespace SR_GRAPH_NS {
         void UpdateCascades();
 
     protected:
-        SR_MATH_NS::FVector3 m_directionalLightPosition;
+        SR_MATH_NS::FVector3 m_directionalLightDirection;
         SR_MATH_NS::FVector3 m_cameraPosition;
         SR_MATH_NS::Quaternion m_cameraRotation;
         SR_MATH_NS::UVector2 m_screenSize;

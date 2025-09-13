@@ -334,6 +334,7 @@
         <qualifiedname>SR_UTILS_NS::Component::OnMatrixDirty</qualifiedname>
         <reimplementedby refid="classSR__AUDIO__NS_1_1AudioListener_1a8340431f3e58ff22e26b04894e765435">OnMatrixDirty</reimplementedby>
         <reimplementedby refid="classSR__AUDIO__NS_1_1AudioSource_1ad3131c00bc5492d93e029d829859634a">OnMatrixDirty</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1ILightComponent_1ab20a6935b503855bfc51855c5238f0ea">OnMatrixDirty</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Camera_1a08a31e8f19278cf24c8d370612983b4f">OnMatrixDirty</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Mesh_1a1b0a2c9312c0344c53db90eae676a60d">OnMatrixDirty</reimplementedby>
         <reimplementedby refid="classSR__PTYPES__NS_1_1Rigidbody_1a151d548ab301e1d0d2768c9f098952e9">OnMatrixDirty</reimplementedby>
@@ -385,7 +386,6 @@
         <reimplementedby refid="classSR__AUDIO__NS_1_1AudioListener_1a1a7a57c1c0b1adb4fa55378fa2d1db4f">OnAttached</reimplementedby>
         <reimplementedby refid="classSR__ANIMATIONS__NS_1_1Animator_1ac68edbb2432cbce78f21b1925aaceecb">OnAttached</reimplementedby>
         <reimplementedby refid="classSR__ANIMATIONS__NS_1_1Skeleton_1af7cab0877c6f06d9e32f40d58eb7b395">OnAttached</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1DirectionalLight_1ab9681129f321a3edc8b9cfd527ab0dd6">OnAttached</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1ILightComponent_1a6106b0f1d3165399d07fa17f8fc3476a">OnAttached</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Camera_1a80415b28eefa8c58dc1503fc65eb93e3">OnAttached</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__UI__NS_1_1Canvas_1ac97064aed1cb1bb557b51bcc4d2098e2">OnAttached</reimplementedby>

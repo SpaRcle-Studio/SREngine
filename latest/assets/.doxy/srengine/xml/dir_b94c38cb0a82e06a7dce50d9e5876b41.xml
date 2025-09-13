@@ -6,6 +6,7 @@
     <innerfile refid="DirectionalLight_8h">DirectionalLight.h</innerfile>
     <innerfile refid="ILightComponent_8h">ILightComponent.h</innerfile>
     <innerfile refid="LightSystem_8h">LightSystem.h</innerfile>
+    <innerfile refid="LightType_8h">LightType.h</innerfile>
     <innerfile refid="PointLight_8h">PointLight.h</innerfile>
     <innerfile refid="ProbeLight_8h">ProbeLight.h</innerfile>
     <innerfile refid="SpotLight_8h">SpotLight.h</innerfile>

@@ -1238,10 +1238,10 @@
         <label>Engine/inc/Engine/GUI/AssetInspector.h</label>
         <link refid="AssetInspector_8h_source"/>
       </node>
-      <node id="91">
+      <node id="90">
         <label>Engine/inc/Engine/GUI/EditorGizmo.h</label>
         <link refid="EditorGizmo_8h_source"/>
-        <childnode refid="92" relation="include">
+        <childnode refid="91" relation="include">
         </childnode>
       </node>
       <node id="21">
@@ -1350,7 +1350,7 @@
         <label>Engine/inc/Engine/GUI/PropertyDrawers/VectorPropertyDrawer.h</label>
         <link refid="VectorPropertyDrawer_8h_source"/>
       </node>
-      <node id="92">
+      <node id="91">
         <label>Engine/inc/Engine/GUI/SceneTools.h</label>
         <link refid="SceneTools_8h_source"/>
       </node>
@@ -1366,7 +1366,7 @@
         <label>Engine/libs/Graphics/inc/Graphics/Animations/Animator.h</label>
         <link refid="Animator_8h_source"/>
       </node>
-      <node id="101">
+      <node id="100">
         <label>Engine/libs/Graphics/inc/Graphics/Animations/Bone.h</label>
         <link refid="Bone_8h_source"/>
         <childnode refid="57" relation="include">
@@ -1380,13 +1380,9 @@
         <childnode refid="59" relation="include">
         </childnode>
       </node>
-      <node id="102">
+      <node id="101">
         <label>Engine/libs/Graphics/inc/Graphics/Font/Text.h</label>
         <link refid="Text_8h_source"/>
-      </node>
-      <node id="80">
-        <label>Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h</label>
-        <link refid="LightSystem_8h_source"/>
       </node>
       <node id="3">
         <label>Engine/libs/Graphics/inc/Graphics/Loaders/SRSL.h</label>
@@ -1478,7 +1474,7 @@
         <label>Engine/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h</label>
         <link refid="ColorBufferPass_8h_source"/>
       </node>
-      <node id="81">
+      <node id="80">
         <label>Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h</label>
         <link refid="FrameBufferPassData_8h_source"/>
         <childnode refid="75" relation="include">
@@ -1610,7 +1606,7 @@
         <label>Engine/libs/Graphics/inc/Graphics/Pass/WidgetPass.h</label>
         <link refid="WidgetPass_8h_source"/>
       </node>
-      <node id="82">
+      <node id="81">
         <label>Engine/libs/Graphics/inc/Graphics/Pipeline/EmptyPipeline.h</label>
         <link refid="EmptyPipeline_8h_source"/>
       </node>
@@ -1637,46 +1633,44 @@
         </childnode>
         <childnode refid="79" relation="include">
         </childnode>
+        <childnode refid="92" relation="include">
+        </childnode>
         <childnode refid="93" relation="include">
         </childnode>
         <childnode refid="94" relation="include">
-        </childnode>
-        <childnode refid="95" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
+        <childnode refid="97" relation="include">
+        </childnode>
         <childnode refid="98" relation="include">
         </childnode>
         <childnode refid="99" relation="include">
-        </childnode>
-        <childnode refid="100" relation="include">
         </childnode>
       </node>
       <node id="79">
         <label>Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h</label>
         <link refid="Pipeline_8h_source"/>
-        <childnode refid="80" relation="include">
-        </childnode>
         <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
         </childnode>
         <childnode refid="81" relation="include">
         </childnode>
         <childnode refid="82" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
-        </childnode>
         <childnode refid="45" relation="include">
         </childnode>
-        <childnode refid="84" relation="include">
+        <childnode refid="83" relation="include">
         </childnode>
       </node>
-      <node id="93">
+      <node id="92">
         <label>Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h</label>
         <link refid="AbstractCasts_8h_source"/>
       </node>
-      <node id="83">
+      <node id="82">
         <label>Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanPipeline.h</label>
         <link refid="VulkanPipeline_8h_source"/>
       </node>
@@ -1720,26 +1714,26 @@
         <childnode refid="60" relation="include">
         </childnode>
       </node>
-      <node id="94">
+      <node id="93">
         <label>Engine/libs/Graphics/inc/Graphics/Render/RenderPredicates.h</label>
         <link refid="RenderPredicates_8h_source"/>
         <childnode refid="72" relation="include">
         </childnode>
-        <childnode refid="95" relation="include">
+        <childnode refid="94" relation="include">
         </childnode>
       </node>
-      <node id="96">
+      <node id="95">
         <label>Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h</label>
         <link refid="RenderScene_8h_source"/>
         <childnode refid="56" relation="include">
         </childnode>
-        <childnode refid="97" relation="include">
+        <childnode refid="96" relation="include">
         </childnode>
       </node>
-      <node id="95">
+      <node id="94">
         <label>Engine/libs/Graphics/inc/Graphics/Render/RenderStrategy.h</label>
         <link refid="RenderStrategy_8h_source"/>
-        <childnode refid="96" relation="include">
+        <childnode refid="95" relation="include">
         </childnode>
       </node>
       <node id="61">
@@ -1828,13 +1822,13 @@
         <label>Engine/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h</label>
         <link refid="Graphics_2inc_2Graphics_2SRSL_2TypeInfo_8h_source"/>
       </node>
-      <node id="98">
+      <node id="97">
         <label>Engine/libs/Graphics/inc/Graphics/Settings/RenderSettings.h</label>
         <link refid="RenderSettings_8h_source"/>
         <childnode refid="55" relation="include">
         </childnode>
       </node>
-      <node id="99">
+      <node id="98">
         <label>Engine/libs/Graphics/inc/Graphics/Settings/RenderStagesSettings.h</label>
         <link refid="RenderStagesSettings_8h_source"/>
       </node>
@@ -1842,41 +1836,41 @@
         <label>Engine/libs/Graphics/inc/Graphics/Types/ComputeShader.h</label>
         <link refid="ComputeShader_8h_source"/>
       </node>
-      <node id="103">
+      <node id="102">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h</label>
         <link refid="DebugLine_8h_source"/>
       </node>
-      <node id="85">
+      <node id="84">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h</label>
         <link refid="DebugWireframeMesh_8h_source"/>
       </node>
-      <node id="84">
+      <node id="83">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h</label>
         <link refid="IndexedMesh_8h_source"/>
+        <childnode refid="84" relation="include">
+        </childnode>
         <childnode refid="85" relation="include">
         </childnode>
-        <childnode refid="86" relation="include">
-        </childnode>
       </node>
-      <node id="87">
+      <node id="86">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h</label>
         <link refid="Mesh3D_8h_source"/>
       </node>
-      <node id="86">
+      <node id="85">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/MeshComponent.h</label>
         <link refid="MeshComponent_8h_source"/>
-        <childnode refid="87" relation="include">
+        <childnode refid="86" relation="include">
         </childnode>
-        <childnode refid="88" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
         <childnode refid="59" relation="include">
         </childnode>
+        <childnode refid="88" relation="include">
+        </childnode>
         <childnode refid="89" relation="include">
         </childnode>
-        <childnode refid="90" relation="include">
-        </childnode>
       </node>
-      <node id="88">
+      <node id="87">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h</label>
         <link refid="ProceduralMesh_8h_source"/>
       </node>
@@ -1884,20 +1878,20 @@
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</label>
         <link refid="SkinnedMesh_8h_source"/>
       </node>
-      <node id="89">
+      <node id="88">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h</label>
         <link refid="Sprite_8h_source"/>
       </node>
-      <node id="100">
+      <node id="99">
         <label>Engine/libs/Graphics/inc/Graphics/Types/Mesh.h</label>
         <link refid="Mesh_8h_source"/>
+        <childnode refid="100" relation="include">
+        </childnode>
         <childnode refid="101" relation="include">
         </childnode>
         <childnode refid="102" relation="include">
         </childnode>
-        <childnode refid="103" relation="include">
-        </childnode>
-        <childnode refid="84" relation="include">
+        <childnode refid="83" relation="include">
         </childnode>
       </node>
       <node id="16">
@@ -1912,14 +1906,14 @@
         <childnode refid="45" relation="include">
         </childnode>
       </node>
-      <node id="97">
+      <node id="96">
         <label>Engine/libs/Graphics/inc/Graphics/UI/Canvas.h</label>
         <link refid="Canvas_8h_source"/>
       </node>
-      <node id="90">
+      <node id="89">
         <label>Engine/libs/Graphics/inc/Graphics/UI/Gizmo.h</label>
         <link refid="Gizmo_8h_source"/>
-        <childnode refid="91" relation="include">
+        <childnode refid="90" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -2031,7 +2025,7 @@
 <codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_TEXT_RECT_Y<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;TEXT_RECT_Y&quot;</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_TEXT_RECT_WIDTH<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;TEXT_RECT_WIDTH&quot;</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_TEXT_RECT_HEIGHT<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;TEXT_RECT_HEIGHT&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_DIRECTIONAL_LIGHT_POSITION<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;DIRECTIONAL_LIGHT_POSITION&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_DIRECTIONAL_LIGHT_DIRECTION<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;DIRECTIONAL_LIGHT_DIRECTION&quot;</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_PC_SHADOW_CASCADE_INDEX<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;PC_SHADOW_CASCADE_INDEX&quot;</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_CASCADE_LIGHT_SPACE_MATRICES<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;CASCADE_LIGHT_SPACE_MATRICES&quot;</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>SHADER_RENDER_PASS_TYPE<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;RENDER_PASS_TYPE&quot;</highlight><highlight class="normal">;</highlight></codeline>

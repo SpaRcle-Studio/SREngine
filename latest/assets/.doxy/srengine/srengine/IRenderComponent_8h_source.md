@@ -19,6 +19,10 @@
 
 #include <Utils/ECS/Component.h>
 
+namespace SR_GRAPH_NS {
+    class RenderScene;
+}
+
 namespace SR_GTYPES_NS {
     class Camera;
 

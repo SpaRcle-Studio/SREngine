@@ -11,7 +11,7 @@
 
 
 * `#include <Graphics/Types/IRenderComponent.h>`
-* `#include <Utils/Common/Enumerations.h>`
+* `#include <Graphics/Lighting/LightType.h>`
 
 
 

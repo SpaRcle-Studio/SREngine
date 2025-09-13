@@ -45,12 +45,8 @@ Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_
 
 | Type | Name |
 | ---: | :--- |
-|  std::set&lt; [**AreaLight**](classSR__GRAPH__NS_1_1AreaLight.md) \* &gt; | [**m\_areaLights**](#variable-m_arealights)  <br> |
-|  std::set&lt; [**DirectionalLight**](classSR__GRAPH__NS_1_1DirectionalLight.md) \* &gt; | [**m\_directionalLights**](#variable-m_directionallights)  <br> |
-|  std::set&lt; [**PointLight**](classSR__GRAPH__NS_1_1PointLight.md) \* &gt; | [**m\_pointLights**](#variable-m_pointlights)  <br> |
-|  std::set&lt; [**ProbeLight**](classSR__GRAPH__NS_1_1ProbeLight.md) \* &gt; | [**m\_probeLights**](#variable-m_probelights)  <br> |
+|  std::array&lt; std::set&lt; [**ILightComponent**](classSR__GRAPH__NS_1_1ILightComponent.md) \* &gt;, [**SR\_UTILS\_NS::EnumTraits**](structSR__UTILS__NS_1_1EnumTraits.md)&lt; LightType &gt;::NumItems &gt; | [**m\_lights**](#variable-m_lights)  <br> |
 |  RenderScenePtr | [**m\_renderScene**](#variable-m_renderscene)  <br> |
-|  std::set&lt; [**SpotLight**](classSR__GRAPH__NS_1_1SpotLight.md) \* &gt; | [**m\_spotLights**](#variable-m_spotlights)  <br> |
 
 
 
@@ -88,11 +84,10 @@ Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_
 | Type | Name |
 | ---: | :--- |
 |  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**GetDirectionalLightDirection**](#function-getdirectionallightdirection) () noexcept const<br> |
-|  SR\_NODISCARD const SR\_MATH\_NS::FVector3 & | [**GetDirectionalLightPosition**](#function-getdirectionallightposition) () noexcept const<br> |
 |   | [**LightSystem**](#function-lightsystem) (RenderScenePtr pRenderScene) <br> |
+|  void | [**OnLightTransformChanged**](#function-onlighttransformchanged) ([**ILightComponent**](classSR__GRAPH__NS_1_1ILightComponent.md) \* pLightComponent) <br> |
 |  void | [**Register**](#function-register) ([**ILightComponent**](classSR__GRAPH__NS_1_1ILightComponent.md) \* pLightComponent) <br> |
 |  void | [**Remove**](#function-remove) ([**ILightComponent**](classSR__GRAPH__NS_1_1ILightComponent.md) \* pLightComponent) <br> |
-|  void | [**SetDirectionalLightPosition**](#function-setdirectionallightposition) (const SR\_MATH\_NS::FVector3 & position) noexcept<br> |
 |   | [**~LightSystem**](#function-lightsystem) () override<br> |
 
 
@@ -186,49 +181,10 @@ using SR_GRAPH_NS::LightSystem::RenderScenePtr =  SR_HTYPES_NS::SharedPtr<SR_GRA
 
 
 
-### variable m\_areaLights 
+### variable m\_lights 
 
 ```C++
-std::set<AreaLight*> SR_GRAPH_NS::LightSystem::m_areaLights;
-```
-
-
-
-
-<hr>
-
-
-
-### variable m\_directionalLights 
-
-```C++
-std::set<DirectionalLight*> SR_GRAPH_NS::LightSystem::m_directionalLights;
-```
-
-
-
-
-<hr>
-
-
-
-### variable m\_pointLights 
-
-```C++
-std::set<PointLight*> SR_GRAPH_NS::LightSystem::m_pointLights;
-```
-
-
-
-
-<hr>
-
-
-
-### variable m\_probeLights 
-
-```C++
-std::set<ProbeLight*> SR_GRAPH_NS::LightSystem::m_probeLights;
+std::array<std::set<ILightComponent*>, SR_UTILS_NS::EnumTraits<LightType>::NumItems> SR_GRAPH_NS::LightSystem::m_lights;
 ```
 
 
@@ -242,19 +198,6 @@ std::set<ProbeLight*> SR_GRAPH_NS::LightSystem::m_probeLights;
 
 ```C++
 RenderScenePtr SR_GRAPH_NS::LightSystem::m_renderScene;
-```
-
-
-
-
-<hr>
-
-
-
-### variable m\_spotLights 
-
-```C++
-std::set<SpotLight*> SR_GRAPH_NS::LightSystem::m_spotLights;
 ```
 
 
@@ -279,10 +222,12 @@ SR_NODISCARD SR_MATH_NS::FVector3 SR_GRAPH_NS::LightSystem::GetDirectionalLightD
 
 
 
-### function GetDirectionalLightPosition 
+### function LightSystem 
 
 ```C++
-inline SR_NODISCARD const SR_MATH_NS::FVector3 & SR_GRAPH_NS::LightSystem::GetDirectionalLightPosition () noexcept const
+explicit SR_GRAPH_NS::LightSystem::LightSystem (
+    RenderScenePtr pRenderScene
+) 
 ```
 
 
@@ -292,11 +237,11 @@ inline SR_NODISCARD const SR_MATH_NS::FVector3 & SR_GRAPH_NS::LightSystem::GetDi
 
 
 
-### function LightSystem 
+### function OnLightTransformChanged 
 
 ```C++
-explicit SR_GRAPH_NS::LightSystem::LightSystem (
-    RenderScenePtr pRenderScene
+void SR_GRAPH_NS::LightSystem::OnLightTransformChanged (
+    ILightComponent * pLightComponent
 ) 
 ```
 
@@ -328,21 +273,6 @@ void SR_GRAPH_NS::LightSystem::Register (
 void SR_GRAPH_NS::LightSystem::Remove (
     ILightComponent * pLightComponent
 ) 
-```
-
-
-
-
-<hr>
-
-
-
-### function SetDirectionalLightPosition 
-
-```C++
-void SR_GRAPH_NS::LightSystem::SetDirectionalLightPosition (
-    const SR_MATH_NS::FVector3 & position
-) noexcept
 ```
 
 

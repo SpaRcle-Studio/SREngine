@@ -36,8 +36,8 @@
 | Type | Name |
 | ---: | :--- |
 |  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**name**](#variable-name)  <br> |
-|  uint16\_t | [**offset**](#variable-offset)   = `0`<br> |
-|  uint16\_t | [**size**](#variable-size)   = `0`<br> |
+|  uint32\_t | [**offset**](#variable-offset)   = `0`<br> |
+|  uint32\_t | [**size**](#variable-size)   = `0`<br> |
 |  ShaderPropertyVariant | [**value**](#variable-value)  <br> |
 
 
@@ -104,7 +104,7 @@ SR_UTILS_NS::StringAtom SR_GRAPH_NS::Memory::ShaderUBOBlock::DefaultValue::name;
 ### variable offset 
 
 ```C++
-uint16_t SR_GRAPH_NS::Memory::ShaderUBOBlock::DefaultValue::offset;
+uint32_t SR_GRAPH_NS::Memory::ShaderUBOBlock::DefaultValue::offset;
 ```
 
 
@@ -117,7 +117,7 @@ uint16_t SR_GRAPH_NS::Memory::ShaderUBOBlock::DefaultValue::offset;
 ### variable size 
 
 ```C++
-uint16_t SR_GRAPH_NS::Memory::ShaderUBOBlock::DefaultValue::size;
+uint32_t SR_GRAPH_NS::Memory::ShaderUBOBlock::DefaultValue::size;
 ```
 
 

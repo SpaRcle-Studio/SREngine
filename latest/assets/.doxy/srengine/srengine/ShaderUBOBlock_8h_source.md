@@ -29,6 +29,7 @@ namespace SR_GRAPH_NS::Types {
 
 namespace SR_GRAPH_NS::Memory {
     class ShaderUBOBlock : public SR_UTILS_NS::NonCopyable {
+        using Super = SR_UTILS_NS::NonCopyable;
         friend class SR_GRAPH_NS::Types::Shader;
         friend class SR_GRAPH_NS::ShaderCache;
 
@@ -40,6 +41,7 @@ namespace SR_GRAPH_NS::Memory {
         };
 
     public:
+        ShaderUBOBlock();
         ~ShaderUBOBlock() override;
 
         void Append(uint64_t hashId, uint64_t size, bool hidden);
@@ -73,7 +75,7 @@ namespace SR_GRAPH_NS::Memory {
         uint32_t m_binding = SR_ID_INVALID;
 
         SubBlock* m_data = nullptr;
-        uint8_t m_dataCount = 0;
+        uint32_t m_dataCount = 0;
 
         uint32_t m_size = 0;
         char* m_memory = nullptr;
@@ -82,8 +84,8 @@ namespace SR_GRAPH_NS::Memory {
 
         struct DefaultValue {
             SR_UTILS_NS::StringAtom name;
-            uint16_t size = 0;
-            uint16_t offset = 0;
+            uint32_t size = 0;
+            uint32_t offset = 0;
             ShaderPropertyVariant value;
         };
         std::vector<DefaultValue> m_defaultValues;

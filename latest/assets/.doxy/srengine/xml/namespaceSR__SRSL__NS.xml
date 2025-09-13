@@ -221,7 +221,7 @@
             { &quot;CASCADE_LIGHT_SPACE_MATRICES&quot;,   &quot;mat4[4]&quot;       },
             { &quot;CASCADE_SPLITS&quot;,                 &quot;vec4&quot;          },
 
-            { &quot;DIRECTIONAL_LIGHT_POSITION&quot;,     &quot;vec3&quot;          },
+            { &quot;DIRECTIONAL_LIGHT_DIRECTION&quot;,    &quot;vec3&quot;          },
             { &quot;VIEW_POSITION&quot;,                  &quot;vec3&quot;          },
             { &quot;VIEW_DIRECTION&quot;,                 &quot;vec3&quot;          },
     }</initializer>

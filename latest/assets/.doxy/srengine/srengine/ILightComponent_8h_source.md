@@ -16,20 +16,14 @@
 #define SR_ENGINE_ILIGHTCOMPONENT_H
 
 #include <Graphics/Types/IRenderComponent.h>
-#include <Utils/Common/Enumerations.h>
+#include <Graphics/Lighting/LightType.h>
 
 namespace SR_GRAPH_NS {
     class RenderScene;
 
-    SR_ENUM_NS_CLASS_T(LightType, uint8_t,
-        Directional, Point, Spot, Area, Probe
-    )
-
-    SR_ENUM_NS_CLASS_T(ShadowType, uint8_t,
-        Soft, Hard
-    )
-
     class ILightComponent : public SR_GTYPES_NS::IRenderComponent {
+        using Super = SR_GTYPES_NS::IRenderComponent;
+        SR_CLASS()
     public:
         SR_NODISCARD SR_FORCE_INLINE bool ExecuteInEditMode() const override { return true; }
         SR_NODISCARD bool IsUpdatable() const noexcept override { return false; }
@@ -38,10 +32,15 @@ namespace SR_GRAPH_NS {
         void OnAttached() override;
         void OnDestroy() override;
 
+        void OnMatrixDirty() override;
+
     protected:
         float_t m_intensity = 1.f;
         float_t m_bounceIntensity = 1.f;
         ShadowType m_shadowType = ShadowType::Soft;
+
+    private:
+        bool m_isLightRegistered = false;
 
     };
 }

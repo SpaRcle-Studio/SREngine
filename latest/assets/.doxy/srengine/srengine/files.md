@@ -179,6 +179,7 @@ Here is a list of all files with brief descriptions:
                         * **file** [**DirectionalLight.h**](DirectionalLight_8h.md)     
                         * **file** [**ILightComponent.h**](ILightComponent_8h.md)     
                         * **file** [**LightSystem.h**](LightSystem_8h.md)     
+                        * **file** [**LightType.h**](LightType_8h.md)     
                         * **file** [**PointLight.h**](PointLight_8h.md)     
                         * **file** [**ProbeLight.h**](ProbeLight_8h.md)     
                         * **file** [**SpotLight.h**](SpotLight_8h.md)     

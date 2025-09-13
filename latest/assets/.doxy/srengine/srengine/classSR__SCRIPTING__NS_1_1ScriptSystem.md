@@ -128,9 +128,11 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 |  SR\_NODISCARD const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & | [**GetEngineSourcesPath**](#function-getenginesourcespath) () const<br> |
 |  SR\_NODISCARD const [**ModuleManager**](classSR__SCRIPTING__NS_1_1ModuleManager.md) \* | [**GetModuleManager**](#function-getmodulemanager-12) () const<br> |
 |  SR\_NODISCARD [**ModuleManager**](classSR__SCRIPTING__NS_1_1ModuleManager.md) \* | [**GetModuleManager**](#function-getmodulemanager-22) () <br> |
+|  SR\_NODISCARD State | [**GetState**](#function-getstate) () const<br> |
 |  SR\_NODISCARD bool | [**Init**](#function-init) () <br> |
 |  SR\_NODISCARD bool | [**IsInitialized**](#function-isinitialized) () const<br> |
 |  void | [**ReloadModulesIfNeeded**](#function-reloadmodulesifneeded) () <br> |
+|  void | [**WaitForIdle**](#function-waitforidle) () <br> |
 
 
 
@@ -423,6 +425,19 @@ inline SR_NODISCARD ModuleManager * SR_SCRIPTING_NS::ScriptSystem::GetModuleMana
 
 
 
+### function GetState 
+
+```C++
+inline SR_NODISCARD State SR_SCRIPTING_NS::ScriptSystem::GetState () const
+```
+
+
+
+
+<hr>
+
+
+
 ### function Init 
 
 ```C++
@@ -453,6 +468,19 @@ inline SR_NODISCARD bool SR_SCRIPTING_NS::ScriptSystem::IsInitialized () const
 
 ```C++
 void SR_SCRIPTING_NS::ScriptSystem::ReloadModulesIfNeeded () 
+```
+
+
+
+
+<hr>
+
+
+
+### function WaitForIdle 
+
+```C++
+void SR_SCRIPTING_NS::ScriptSystem::WaitForIdle () 
 ```
 
 

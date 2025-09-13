@@ -215,7 +215,7 @@
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_CASCADE\_SPLITS**](#variable-shader_cascade_splits)   = `"CASCADE\_SPLITS"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_COMPUTE\_STAGE**](#variable-shader_compute_stage)   = `"COMPUTE\_STAGE"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_DEPTH\_ATTACHMENT**](#variable-shader_depth_attachment)   = `"DEPTH\_ATTACHMENT"`<br> |
-|  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_DIRECTIONAL\_LIGHT\_POSITION**](#variable-shader_directional_light_position)   = `"DIRECTIONAL\_LIGHT\_POSITION"`<br> |
+|  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_DIRECTIONAL\_LIGHT\_DIRECTION**](#variable-shader_directional_light_direction)   = `"DIRECTIONAL\_LIGHT\_DIRECTION"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_INVERSE\_PROJECTION\_MATRIX**](#variable-shader_inverse_projection_matrix)   = `"INVERSE\_PROJECTION\_MATRIX"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_INVERSE\_VIEW\_MATRIX**](#variable-shader_inverse_view_matrix)   = `"INVERSE\_VIEW\_MATRIX"`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**SHADER\_LIGHT\_SPACE\_MATRIX**](#variable-shader_light_space_matrix)   = `"LIGHT\_SPACE\_MATRIX"`<br> |
@@ -787,10 +787,10 @@ SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_DEPTH_ATTACHMENT;
 
 
 
-### variable SHADER\_DIRECTIONAL\_LIGHT\_POSITION 
+### variable SHADER\_DIRECTIONAL\_LIGHT\_DIRECTION 
 
 ```C++
-SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_DIRECTIONAL_LIGHT_POSITION;
+SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_GRAPH_NS::SHADER_DIRECTIONAL_LIGHT_DIRECTION;
 ```
 
 

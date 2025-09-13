@@ -3,6 +3,22 @@
   <compounddef id="classSR__GRAPH__NS_1_1LightSystem" kind="class" language="C++" prot="public">
     <compoundname>SR_GRAPH_NS::LightSystem</compoundname>
     <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="private" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1LightSystem_1a6e2e2ae57a2537bfa39d9b2c2318cec5" prot="private" static="no">
+        <type><ref refid="classSR__UTILS__NS_1_1NonCopyable" kindref="compound">SR_UTILS_NS::NonCopyable</ref></type>
+        <definition>using SR_GRAPH_NS::LightSystem::Super =  SR_UTILS_NS::NonCopyable</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_GRAPH_NS::LightSystem::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="18" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <sectiondef kind="public-type">
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1LightSystem_1a64768c0a515b6b24dfb116a7f2383d7c" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1RenderScene" kindref="compound">SR_GRAPH_NS::RenderScene</ref> &gt;</type>
@@ -16,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="21" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" bodystart="21" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="20" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" bodystart="20" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-attrib">
@@ -32,94 +48,37 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="34" column="24" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" bodystart="34" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="32" column="24" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" bodystart="32" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1LightSystem_1a7493eaf60af577f76564f60547d817a4" prot="public" static="no" mutable="no">
-        <type>std::set&lt; <ref refid="classSR__GRAPH__NS_1_1DirectionalLight" kindref="compound">DirectionalLight</ref> * &gt;</type>
-        <definition>std::set&lt;DirectionalLight*&gt; SR_GRAPH_NS::LightSystem::m_directionalLights</definition>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1LightSystem_1a2cfc9897c00ae5d352092cbb1b558368" prot="public" static="no" mutable="no">
+        <type>std::array&lt; std::set&lt; <ref refid="classSR__GRAPH__NS_1_1ILightComponent" kindref="compound">ILightComponent</ref> * &gt;, <ref refid="structSR__UTILS__NS_1_1EnumTraits" kindref="compound">SR_UTILS_NS::EnumTraits</ref>&lt; LightType &gt;::NumItems &gt;</type>
+        <definition>std::array&lt;std::set&lt;ILightComponent*&gt;, SR_UTILS_NS::EnumTraits&lt;LightType&gt;::NumItems&gt; SR_GRAPH_NS::LightSystem::m_lights</definition>
         <argsstring></argsstring>
-        <name>m_directionalLights</name>
-        <qualifiedname>SR_GRAPH_NS::LightSystem::m_directionalLights</qualifiedname>
+        <name>m_lights</name>
+        <qualifiedname>SR_GRAPH_NS::LightSystem::m_lights</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="35" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" bodystart="35" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1LightSystem_1a8854b44d924351ce8850b93d3507fba5" prot="public" static="no" mutable="no">
-        <type>std::set&lt; <ref refid="classSR__GRAPH__NS_1_1PointLight" kindref="compound">PointLight</ref> * &gt;</type>
-        <definition>std::set&lt;PointLight*&gt; SR_GRAPH_NS::LightSystem::m_pointLights</definition>
-        <argsstring></argsstring>
-        <name>m_pointLights</name>
-        <qualifiedname>SR_GRAPH_NS::LightSystem::m_pointLights</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="36" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" bodystart="36" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1LightSystem_1af6a415d00387203c7cb5ad49e1728176" prot="public" static="no" mutable="no">
-        <type>std::set&lt; <ref refid="classSR__GRAPH__NS_1_1AreaLight" kindref="compound">AreaLight</ref> * &gt;</type>
-        <definition>std::set&lt;AreaLight*&gt; SR_GRAPH_NS::LightSystem::m_areaLights</definition>
-        <argsstring></argsstring>
-        <name>m_areaLights</name>
-        <qualifiedname>SR_GRAPH_NS::LightSystem::m_areaLights</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="37" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" bodystart="37" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1LightSystem_1a2261fb57e992ed0a09ba37cbe3f38ebf" prot="public" static="no" mutable="no">
-        <type>std::set&lt; <ref refid="classSR__GRAPH__NS_1_1SpotLight" kindref="compound">SpotLight</ref> * &gt;</type>
-        <definition>std::set&lt;SpotLight*&gt; SR_GRAPH_NS::LightSystem::m_spotLights</definition>
-        <argsstring></argsstring>
-        <name>m_spotLights</name>
-        <qualifiedname>SR_GRAPH_NS::LightSystem::m_spotLights</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="38" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" bodystart="38" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1LightSystem_1a54bb52f10ccc1116856485f24218dd03" prot="public" static="no" mutable="no">
-        <type>std::set&lt; <ref refid="classSR__GRAPH__NS_1_1ProbeLight" kindref="compound">ProbeLight</ref> * &gt;</type>
-        <definition>std::set&lt;ProbeLight*&gt; SR_GRAPH_NS::LightSystem::m_probeLights</definition>
-        <argsstring></argsstring>
-        <name>m_probeLights</name>
-        <qualifiedname>SR_GRAPH_NS::LightSystem::m_probeLights</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="39" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" bodystart="39" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="34" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" bodystart="34" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1LightSystem_1a075a2796edf649c5d098fa6f28b66d79" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1LightSystem_1a181d6c9f9215c90486b1a3a74aeffc15" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
-        <definition>SR_MATH_NS::FVector3 SR_GRAPH_NS::LightSystem::m_position</definition>
+        <definition>SR_MATH_NS::FVector3 SR_GRAPH_NS::LightSystem::m_directionalLightDir</definition>
         <argsstring></argsstring>
-        <name>m_position</name>
-        <qualifiedname>SR_GRAPH_NS::LightSystem::m_position</qualifiedname>
-        <initializer>= SR_MATH_NS::FVector3(20, 60, 5)</initializer>
+        <name>m_directionalLightDir</name>
+        <qualifiedname>SR_GRAPH_NS::LightSystem::m_directionalLightDir</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="42" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" bodystart="42" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="37" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" bodystart="37" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -139,7 +98,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="23" column="18"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="22" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1LightSystem_1ac0393d70e2f1dd699033ad3b2d7acf67" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -153,7 +112,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="24" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="23" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1LightSystem_1a6f1bfdcbaf8e4049dfa72f3604d00e30" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -171,7 +130,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="26" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="25" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1LightSystem_1abca0c74d8047eab5de88ec9bc9474795" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -189,21 +148,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="27" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="26" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1LightSystem_1abdeef7a624f77ba32f47332bd3fa5f16" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>SR_NODISCARD const SR_MATH_NS::FVector3 &amp;</type>
-        <definition>SR_NODISCARD const SR_MATH_NS::FVector3 &amp; SR_GRAPH_NS::LightSystem::GetDirectionalLightPosition</definition>
-        <argsstring>() const noexcept</argsstring>
-        <name>GetDirectionalLightPosition</name>
-        <qualifiedname>SR_GRAPH_NS::LightSystem::GetDirectionalLightPosition</qualifiedname>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1LightSystem_1a83c45cafdd42c6d1f19815e57b6a836d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::LightSystem::OnLightTransformChanged</definition>
+        <argsstring>(ILightComponent *pLightComponent)</argsstring>
+        <name>OnLightTransformChanged</name>
+        <qualifiedname>SR_GRAPH_NS::LightSystem::OnLightTransformChanged</qualifiedname>
+        <param>
+          <type><ref refid="classSR__GRAPH__NS_1_1ILightComponent" kindref="compound">ILightComponent</ref> *</type>
+          <declname>pLightComponent</declname>
+        </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="29" column="49" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" bodystart="29" bodyend="29"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="27" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1LightSystem_1ad8a9e1945b3b4739f3d47c30d5deb663" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -217,25 +180,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="30" column="43"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1LightSystem_1a2a298aebf4b2fe961263f655955a7ce4" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_GRAPH_NS::LightSystem::SetDirectionalLightPosition</definition>
-        <argsstring>(const SR_MATH_NS::FVector3 &amp;position) noexcept</argsstring>
-        <name>SetDirectionalLightPosition</name>
-        <qualifiedname>SR_GRAPH_NS::LightSystem::SetDirectionalLightPosition</qualifiedname>
-        <param>
-          <type>const SR_MATH_NS::FVector3 &amp;</type>
-          <declname>position</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="31" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="29" column="43"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -266,22 +211,18 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="19" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" bodystart="19" bodyend="44"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" line="17" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/LightSystem.h" bodystart="17" bodyend="39"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1LightSystem_1ad8a9e1945b3b4739f3d47c30d5deb663" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::LightSystem</scope><name>GetDirectionalLightDirection</name></member>
-      <member refid="classSR__GRAPH__NS_1_1LightSystem_1abdeef7a624f77ba32f47332bd3fa5f16" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::LightSystem</scope><name>GetDirectionalLightPosition</name></member>
       <member refid="classSR__GRAPH__NS_1_1LightSystem_1a4a67a9a2bb6964ae2146c3e9d706b6fc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::LightSystem</scope><name>LightSystem</name></member>
-      <member refid="classSR__GRAPH__NS_1_1LightSystem_1af6a415d00387203c7cb5ad49e1728176" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::LightSystem</scope><name>m_areaLights</name></member>
-      <member refid="classSR__GRAPH__NS_1_1LightSystem_1a7493eaf60af577f76564f60547d817a4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::LightSystem</scope><name>m_directionalLights</name></member>
-      <member refid="classSR__GRAPH__NS_1_1LightSystem_1a8854b44d924351ce8850b93d3507fba5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::LightSystem</scope><name>m_pointLights</name></member>
-      <member refid="classSR__GRAPH__NS_1_1LightSystem_1a075a2796edf649c5d098fa6f28b66d79" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::LightSystem</scope><name>m_position</name></member>
-      <member refid="classSR__GRAPH__NS_1_1LightSystem_1a54bb52f10ccc1116856485f24218dd03" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::LightSystem</scope><name>m_probeLights</name></member>
+      <member refid="classSR__GRAPH__NS_1_1LightSystem_1a181d6c9f9215c90486b1a3a74aeffc15" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::LightSystem</scope><name>m_directionalLightDir</name></member>
+      <member refid="classSR__GRAPH__NS_1_1LightSystem_1a2cfc9897c00ae5d352092cbb1b558368" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::LightSystem</scope><name>m_lights</name></member>
       <member refid="classSR__GRAPH__NS_1_1LightSystem_1ae4f70f232afbef6bf94a9a68ac4bc787" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::LightSystem</scope><name>m_renderScene</name></member>
-      <member refid="classSR__GRAPH__NS_1_1LightSystem_1a2261fb57e992ed0a09ba37cbe3f38ebf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::LightSystem</scope><name>m_spotLights</name></member>
+      <member refid="classSR__GRAPH__NS_1_1LightSystem_1a83c45cafdd42c6d1f19815e57b6a836d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::LightSystem</scope><name>OnLightTransformChanged</name></member>
       <member refid="classSR__GRAPH__NS_1_1LightSystem_1a6f1bfdcbaf8e4049dfa72f3604d00e30" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::LightSystem</scope><name>Register</name></member>
       <member refid="classSR__GRAPH__NS_1_1LightSystem_1abca0c74d8047eab5de88ec9bc9474795" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::LightSystem</scope><name>Remove</name></member>
       <member refid="classSR__GRAPH__NS_1_1LightSystem_1a64768c0a515b6b24dfb116a7f2383d7c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::LightSystem</scope><name>RenderScenePtr</name></member>
-      <member refid="classSR__GRAPH__NS_1_1LightSystem_1a2a298aebf4b2fe961263f655955a7ce4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::LightSystem</scope><name>SetDirectionalLightPosition</name></member>
+      <member refid="classSR__GRAPH__NS_1_1LightSystem_1a6e2e2ae57a2537bfa39d9b2c2318cec5" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::LightSystem</scope><name>Super</name></member>
       <member refid="classSR__GRAPH__NS_1_1LightSystem_1ac0393d70e2f1dd699033ad3b2d7acf67" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::LightSystem</scope><name>~LightSystem</name></member>
     </listofallmembers>
   </compounddef>

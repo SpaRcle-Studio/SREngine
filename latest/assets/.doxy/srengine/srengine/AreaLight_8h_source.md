@@ -19,6 +19,10 @@
 
 namespace SR_GRAPH_NS {
     class AreaLight : public ILightComponent {
+        SR_CLASS()
+    public:
+        SR_NODISCARD LightType GetLightType() const override { return LightType::Area; };
+
     protected:
         float_t m_radius = 1.f;
         float_t m_distance = 10.f;

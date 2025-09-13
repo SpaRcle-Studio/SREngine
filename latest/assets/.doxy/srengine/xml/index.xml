@@ -503,6 +503,7 @@
   <compound refid="classSR__GRAPH__NS_1_1AreaLight" kind="class"><name>SR_GRAPH_NS::AreaLight</name>
     <member refid="classSR__GRAPH__NS_1_1AreaLight_1a7db4a595471fc0fdaa6f53f926264c06" kind="variable"><name>m_radius</name></member>
     <member refid="classSR__GRAPH__NS_1_1AreaLight_1a5f4583a656bb98223fdb2972c7ace125" kind="variable"><name>m_distance</name></member>
+    <member refid="classSR__GRAPH__NS_1_1AreaLight_1a4500f6175b2f6114367e8a56de2dd8d3" kind="function"><name>GetLightType</name></member>
   </compound>
   <compound refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array" kind="class"><name>SR_TYPES_NS::detail::array_detail::array</name>
     <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1aa8af8081c8e638f826a254038c5fe0b0" kind="typedef"><name>size_type</name></member>
@@ -1357,7 +1358,7 @@
   </compound>
   <compound refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass" kind="class"><name>SR_GRAPH_NS::CascadedShadowMapPass</name>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a9e9f33179e231a3ecb23ecb6bd6f310b" kind="typedef"><name>Super</name></member>
-    <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1ac9171a05a693eaa8174f6d3012c8d114" kind="variable"><name>m_directionalLightPosition</name></member>
+    <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1afa15c78fa412fe392e36351cec69fda8" kind="variable"><name>m_directionalLightDirection</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1aa05bb9ae4b5ec4c6a9b6510e52f04bb4" kind="variable"><name>m_cameraPosition</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a6029524d0a90c307ea0540df53b25f57" kind="variable"><name>m_cameraRotation</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a220a2c6c443b2b89e8f78cbe5f551668" kind="variable"><name>m_screenSize</name></member>
@@ -2813,8 +2814,8 @@
   </compound>
   <compound refid="structSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1_1DefaultValue" kind="struct"><name>SR_GRAPH_NS::Memory::ShaderUBOBlock::DefaultValue</name>
     <member refid="structSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1_1DefaultValue_1a208f0c2e5689bcbbd1cab1130ae36ba6" kind="variable"><name>name</name></member>
-    <member refid="structSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1_1DefaultValue_1adb66416afe588ac6f77e50c1021e3883" kind="variable"><name>size</name></member>
-    <member refid="structSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1_1DefaultValue_1a6bbe1c62aaf66374566bc6b5501dbe8a" kind="variable"><name>offset</name></member>
+    <member refid="structSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1_1DefaultValue_1aa338311a9e8b7f452457d9843a30185f" kind="variable"><name>size</name></member>
+    <member refid="structSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1_1DefaultValue_1abc8bc46c7181fd03cba78f3c58830342" kind="variable"><name>offset</name></member>
     <member refid="structSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1_1DefaultValue_1a32a41029b844b9dc17993537b8414a3a" kind="variable"><name>value</name></member>
   </compound>
   <compound refid="classSR__CORE__NS_1_1DeltaTimeState" kind="class"><name>SR_CORE_NS::DeltaTimeState</name>
@@ -2885,8 +2886,8 @@
     <member refid="structSR__TYPES__NS_1_1uintwide__t_1_1digits__ratio_1a539be9541487caa041009ca13e765e0e" kind="function"><name>extract</name></member>
   </compound>
   <compound refid="classSR__GRAPH__NS_1_1DirectionalLight" kind="class"><name>SR_GRAPH_NS::DirectionalLight</name>
+    <member refid="classSR__GRAPH__NS_1_1DirectionalLight_1a0285de384a9d0434c39b7a0863e33ac7" kind="typedef"><name>Super</name></member>
     <member refid="classSR__GRAPH__NS_1_1DirectionalLight_1afd81d65152003eded32bb7e25c6e872a" kind="function"><name>GetLightType</name></member>
-    <member refid="classSR__GRAPH__NS_1_1DirectionalLight_1ab9681129f321a3edc8b9cfd527ab0dd6" kind="function"><name>OnAttached</name></member>
   </compound>
   <compound refid="categorydisplayName_07Render_01Technique_08" kind="category"><name>displayName(Render Technique)</name>
   </compound>
@@ -4993,14 +4994,17 @@
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1af8957bbf51d3ceea1ede4c2175480454" kind="function"><name>IsGraphicsResourceRegistered</name></member>
   </compound>
   <compound refid="classSR__GRAPH__NS_1_1ILightComponent" kind="class"><name>SR_GRAPH_NS::ILightComponent</name>
+    <member refid="classSR__GRAPH__NS_1_1ILightComponent_1ad9e771e35b6cd0060a320b7a76f5361c" kind="typedef"><name>Super</name></member>
     <member refid="classSR__GRAPH__NS_1_1ILightComponent_1af02042fc60deb8d5e34b579b1a4e50c0" kind="variable"><name>m_intensity</name></member>
     <member refid="classSR__GRAPH__NS_1_1ILightComponent_1a76e298638ed28671b35d707975d9d3f3" kind="variable"><name>m_bounceIntensity</name></member>
     <member refid="classSR__GRAPH__NS_1_1ILightComponent_1a3412e5696f828c235dde1ff6aad8e4d4" kind="variable"><name>m_shadowType</name></member>
+    <member refid="classSR__GRAPH__NS_1_1ILightComponent_1a97f055af2f98f79e58a201d4e01f2695" kind="variable"><name>m_isLightRegistered</name></member>
     <member refid="classSR__GRAPH__NS_1_1ILightComponent_1aecf5343d51a2c3bf56c3799288d586d5" kind="function"><name>ExecuteInEditMode</name></member>
     <member refid="classSR__GRAPH__NS_1_1ILightComponent_1a0a33ef54fce35d288b67b81c7c6dfad5" kind="function"><name>IsUpdatable</name></member>
     <member refid="classSR__GRAPH__NS_1_1ILightComponent_1a92cd97808ed4fcedd79595fa767ebdbb" kind="function"><name>GetLightType</name></member>
     <member refid="classSR__GRAPH__NS_1_1ILightComponent_1a6106b0f1d3165399d07fa17f8fc3476a" kind="function"><name>OnAttached</name></member>
     <member refid="classSR__GRAPH__NS_1_1ILightComponent_1a10ee3185e641149fe7adc6f38124d1af" kind="function"><name>OnDestroy</name></member>
+    <member refid="classSR__GRAPH__NS_1_1ILightComponent_1ab20a6935b503855bfc51855c5238f0ea" kind="function"><name>OnMatrixDirty</name></member>
   </compound>
   <compound refid="classSR__GRAPH__NS_1_1ImageLoader" kind="class"><name>SR_GRAPH_NS::ImageLoader</name>
   </compound>
@@ -5746,21 +5750,17 @@
     <member refid="classSR__PHYSICS__NS_1_1LibraryImpl_1aef3ea6e1dd14497f3d7a47f6bd61d76b" kind="function"><name>IsVehicleSupported</name></member>
   </compound>
   <compound refid="classSR__GRAPH__NS_1_1LightSystem" kind="class"><name>SR_GRAPH_NS::LightSystem</name>
+    <member refid="classSR__GRAPH__NS_1_1LightSystem_1a6e2e2ae57a2537bfa39d9b2c2318cec5" kind="typedef"><name>Super</name></member>
     <member refid="classSR__GRAPH__NS_1_1LightSystem_1a64768c0a515b6b24dfb116a7f2383d7c" kind="typedef"><name>RenderScenePtr</name></member>
     <member refid="classSR__GRAPH__NS_1_1LightSystem_1ae4f70f232afbef6bf94a9a68ac4bc787" kind="variable"><name>m_renderScene</name></member>
-    <member refid="classSR__GRAPH__NS_1_1LightSystem_1a7493eaf60af577f76564f60547d817a4" kind="variable"><name>m_directionalLights</name></member>
-    <member refid="classSR__GRAPH__NS_1_1LightSystem_1a8854b44d924351ce8850b93d3507fba5" kind="variable"><name>m_pointLights</name></member>
-    <member refid="classSR__GRAPH__NS_1_1LightSystem_1af6a415d00387203c7cb5ad49e1728176" kind="variable"><name>m_areaLights</name></member>
-    <member refid="classSR__GRAPH__NS_1_1LightSystem_1a2261fb57e992ed0a09ba37cbe3f38ebf" kind="variable"><name>m_spotLights</name></member>
-    <member refid="classSR__GRAPH__NS_1_1LightSystem_1a54bb52f10ccc1116856485f24218dd03" kind="variable"><name>m_probeLights</name></member>
-    <member refid="classSR__GRAPH__NS_1_1LightSystem_1a075a2796edf649c5d098fa6f28b66d79" kind="variable"><name>m_position</name></member>
+    <member refid="classSR__GRAPH__NS_1_1LightSystem_1a2cfc9897c00ae5d352092cbb1b558368" kind="variable"><name>m_lights</name></member>
+    <member refid="classSR__GRAPH__NS_1_1LightSystem_1a181d6c9f9215c90486b1a3a74aeffc15" kind="variable"><name>m_directionalLightDir</name></member>
     <member refid="classSR__GRAPH__NS_1_1LightSystem_1a4a67a9a2bb6964ae2146c3e9d706b6fc" kind="function"><name>LightSystem</name></member>
     <member refid="classSR__GRAPH__NS_1_1LightSystem_1ac0393d70e2f1dd699033ad3b2d7acf67" kind="function"><name>~LightSystem</name></member>
     <member refid="classSR__GRAPH__NS_1_1LightSystem_1a6f1bfdcbaf8e4049dfa72f3604d00e30" kind="function"><name>Register</name></member>
     <member refid="classSR__GRAPH__NS_1_1LightSystem_1abca0c74d8047eab5de88ec9bc9474795" kind="function"><name>Remove</name></member>
-    <member refid="classSR__GRAPH__NS_1_1LightSystem_1abdeef7a624f77ba32f47332bd3fa5f16" kind="function"><name>GetDirectionalLightPosition</name></member>
+    <member refid="classSR__GRAPH__NS_1_1LightSystem_1a83c45cafdd42c6d1f19815e57b6a836d" kind="function"><name>OnLightTransformChanged</name></member>
     <member refid="classSR__GRAPH__NS_1_1LightSystem_1ad8a9e1945b3b4739f3d47c30d5deb663" kind="function"><name>GetDirectionalLightDirection</name></member>
-    <member refid="classSR__GRAPH__NS_1_1LightSystem_1a2a298aebf4b2fe961263f655955a7ce4" kind="function"><name>SetDirectionalLightPosition</name></member>
   </compound>
   <compound refid="classSR__GRAPH__NS_1_1GUI_1_1Link" kind="class"><name>SR_GRAPH_NS::GUI::Link</name>
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1Link_1a95cebdab53a63f1f6a22fd34373b3674" kind="variable"><name>m_startPin</name></member>
@@ -8162,6 +8162,7 @@
   </compound>
   <compound refid="classSR__GRAPH__NS_1_1PointLight" kind="class"><name>SR_GRAPH_NS::PointLight</name>
     <member refid="classSR__GRAPH__NS_1_1PointLight_1a90f3497dad77351d6d4a1f54c2a151a5" kind="variable"><name>m_radius</name></member>
+    <member refid="classSR__GRAPH__NS_1_1PointLight_1a311a953a9214970e27269a5250110b3f" kind="function"><name>GetLightType</name></member>
   </compound>
   <compound refid="classSR__CORE__NS_1_1PollEventsState" kind="class"><name>SR_CORE_NS::PollEventsState</name>
     <member refid="classSR__CORE__NS_1_1PollEventsState_1a223bc68dc67232bf9c6b54c2202718fc" kind="typedef"><name>Super</name></member>
@@ -8242,6 +8243,7 @@
   <compound refid="classSR__GRAPH__NS_1_1ProbeLight" kind="class"><name>SR_GRAPH_NS::ProbeLight</name>
     <member refid="classSR__GRAPH__NS_1_1ProbeLight_1a7fef85d0634bb4a76fd5f0019071260c" kind="variable"><name>m_radius</name></member>
     <member refid="classSR__GRAPH__NS_1_1ProbeLight_1ad9e95b54794ccbad5c80aa3a40c80af9" kind="variable"><name>m_distance</name></member>
+    <member refid="classSR__GRAPH__NS_1_1ProbeLight_1af5c295b14f8d2a4dd990f92d6c3e4899" kind="function"><name>GetLightType</name></member>
   </compound>
   <compound refid="classSR__GTYPES__NS_1_1ProceduralMesh" kind="class"><name>SR_GTYPES_NS::ProceduralMesh</name>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a187a9a2afaff3e74e1e168ae5ab63244" kind="typedef"><name>Super</name></member>
@@ -10091,6 +10093,8 @@
     <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a12e298ef97423c477e698859c3ef8275" kind="function"><name>GetModuleManager</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a707955a08e2d7e2cea1ad0abd63c376e" kind="function"><name>GetEngineSourcesIncludePaths</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1af4e135850566cb6f313d12f370422ded" kind="function"><name>GetEngineSourcesPath</name></member>
+    <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a6c7d6d45bce6289c45590762cf0dbf7e" kind="function"><name>GetState</name></member>
+    <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a86630e9ceb05e0a550cb6631c9bc094d" kind="function"><name>WaitForIdle</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a65c87a598484baa44f29dab43bc17fdd" kind="function"><name>ReloadModulesIfNeeded</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1ace2d87e558dfd99248921e8c206fc3d7" kind="function"><name>GetDynamicLibraryExtension</name></member>
   </compound>
@@ -10342,17 +10346,19 @@
     <member refid="structSR__GRAPH__NS_1_1ShaderSampler_1a66cd17d66f06ba84b70892fc75a5a379" kind="variable"><name>defaultValue</name></member>
   </compound>
   <compound refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock" kind="class"><name>SR_GRAPH_NS::Memory::ShaderUBOBlock</name>
+    <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a0d999ab08f78c7169fdd5100de33fb63" kind="typedef"><name>Super</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a48b258b27e7a068c43722d971f5cccb7" kind="friend"><name>SR_GRAPH_NS::Types::Shader</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a18b88bdd3d639858b2b17560cf053682" kind="friend"><name>SR_GRAPH_NS::ShaderCache</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a616b05d9e694d5fc96b7c05b276c4222" kind="variable"><name>m_alignedBlock</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a7f791113a081671f1c6879c58620684b" kind="variable"><name>m_align</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1abc14536c03955db686a7d0cdedc70672" kind="variable"><name>m_binding</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1ae74fd989dcbd53dd0da421952983a4ef" kind="variable"><name>m_data</name></member>
-    <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1afeffea4fbcce2737acced5716dbc1d68" kind="variable"><name>m_dataCount</name></member>
+    <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a9e40e3f33b20c23c5b219d7c25000ad5" kind="variable"><name>m_dataCount</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a6381aa6bac228389be5cdecad11cf70f" kind="variable"><name>m_size</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a27652844bef44949e6ab8bc46183c730" kind="variable"><name>m_memory</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a853e3f2c0b5fa68c1544aa2217562847" kind="variable"><name>m_initialized</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1adb1c87e5c3af7feefe9cb0d73f8442ff" kind="variable"><name>m_defaultValues</name></member>
+    <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a98de61913fb383c5d452a135dc5b42a2" kind="function"><name>ShaderUBOBlock</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a2e9fd0d1988d675df8b1d7c1562c659f" kind="function"><name>~ShaderUBOBlock</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a0001816c0379b116e695fa364b3d12b9" kind="function"><name>Append</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a967dcfb60da07bcd341b99927e561595" kind="function"><name>Append</name></member>
@@ -10957,6 +10963,7 @@
   <compound refid="classSR__GRAPH__NS_1_1SpotLight" kind="class"><name>SR_GRAPH_NS::SpotLight</name>
     <member refid="classSR__GRAPH__NS_1_1SpotLight_1a466602d3f6f91d0d843abeef4990d53f" kind="variable"><name>m_radius</name></member>
     <member refid="classSR__GRAPH__NS_1_1SpotLight_1a96b00fe6582b03f3b85b7d3a08c3ad8e" kind="variable"><name>m_distance</name></member>
+    <member refid="classSR__GRAPH__NS_1_1SpotLight_1a752b2dbef7763d811f494bb2491d2f77" kind="function"><name>GetLightType</name></member>
   </compound>
   <compound refid="classSR__GTYPES__NS_1_1Sprite" kind="class"><name>SR_GTYPES_NS::Sprite</name>
     <member refid="classSR__GTYPES__NS_1_1Sprite_1a0458ac8c8a25951b25dc0e3d16e6c412" kind="typedef"><name>Super</name></member>
@@ -14415,8 +14422,8 @@
     <member refid="MeshCluster_8h_1a7eca809f30f816af48fcc6bb0392e52e" kind="typedef"><name>MeshGroups</name></member>
     <member refid="MeshQuickSort_8h_1a05cdfdec65debdc6b7e8a61687ed90f7" kind="typedef"><name>MeshQSortCmpFn</name></member>
     <member refid="IShaderProgram_8h_1abe9b59f1104ee12988b8b32da15e65bb" kind="variable"><name>ShaderVariable</name></member>
-    <member refid="ILightComponent_8h_1adf147afac190841ffe9cab9bb621d169" kind="variable"><name>uint8_t</name></member>
-    <member refid="ILightComponent_8h_1a67b7870919fd9876fa548f83eec36589" kind="variable"><name>Soft</name></member>
+    <member refid="LightType_8h_1adf147afac190841ffe9cab9bb621d169" kind="variable"><name>uint8_t</name></member>
+    <member refid="LightType_8h_1a67b7870919fd9876fa548f83eec36589" kind="variable"><name>Soft</name></member>
     <member refid="IShaderProgram_8h_1a5adbec57a3620271e558b2971bf561c9" kind="variable"><name>SHADER_LINE_START_POINT</name></member>
     <member refid="IShaderProgram_8h_1ac19825f73833bd317724ac6d9dfb9749" kind="variable"><name>SHADER_LINE_END_POINT</name></member>
     <member refid="IShaderProgram_8h_1ac322a39f54c8aac14cab46ba059f952a" kind="variable"><name>SHADER_LINE_COLOR</name></member>
@@ -14453,7 +14460,7 @@
     <member refid="IShaderProgram_8h_1add2d4e2fd5c749a3863c542740940206" kind="variable"><name>SHADER_TEXT_RECT_Y</name></member>
     <member refid="IShaderProgram_8h_1a48d8b52e39a4d78d055cb31d9a99564a" kind="variable"><name>SHADER_TEXT_RECT_WIDTH</name></member>
     <member refid="IShaderProgram_8h_1a4ffc200b9376939526fab933f62c9e6a" kind="variable"><name>SHADER_TEXT_RECT_HEIGHT</name></member>
-    <member refid="IShaderProgram_8h_1af2fb85b66f65d29b56eb3d68ed950e22" kind="variable"><name>SHADER_DIRECTIONAL_LIGHT_POSITION</name></member>
+    <member refid="IShaderProgram_8h_1afd617fc1018231850f8e5cb8631d8a7b" kind="variable"><name>SHADER_DIRECTIONAL_LIGHT_DIRECTION</name></member>
     <member refid="IShaderProgram_8h_1ac707d0305d1c531345ecb333cea9e983" kind="variable"><name>SHADER_PC_SHADOW_CASCADE_INDEX</name></member>
     <member refid="IShaderProgram_8h_1a85076f8f8714d299afcb88d869329f84" kind="variable"><name>SHADER_CASCADE_LIGHT_SPACE_MATRICES</name></member>
     <member refid="IShaderProgram_8h_1a74c5f8813329c6ac8c238c2ce35c087b" kind="variable"><name>SHADER_RENDER_PASS_TYPE</name></member>
@@ -14484,7 +14491,7 @@
     <member refid="FreeType_8h_1a19f6f9f0c7a945fa58fbe21650628d7a" kind="function"><name>FreeTypeErrToString</name></member>
     <member refid="FreeType_8h_1ae0e9584fa176b2c27dbaae5bd271a3d9" kind="function"><name>FTUnusedFunctions</name></member>
     <member refid="TextBuilder_8h_1a8478dc92a885118fbb413cd20d6778f7" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
-    <member refid="ILightComponent_8h_1ac43ce22e8b348e4a217a16c868157bbe" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
+    <member refid="LightType_8h_1ac43ce22e8b348e4a217a16c868157bbe" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
     <member refid="ShaderProperties_8h_1a54dafadad29087e44a0b80b44e1e0adc" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
     <member refid="ShaderProperties_8h_1a86200cb12b2df093218e5fe7ad116fa1" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
     <member refid="ShaderProperties_8h_1a3b515f3675d8e349c207afed9e9a05d5" kind="function"><name>IsSamplerType</name></member>
@@ -15937,6 +15944,8 @@
   <compound refid="ILightComponent_8h" kind="file"><name>ILightComponent.h</name>
   </compound>
   <compound refid="LightSystem_8h" kind="file"><name>LightSystem.h</name>
+  </compound>
+  <compound refid="LightType_8h" kind="file"><name>LightType.h</name>
   </compound>
   <compound refid="PointLight_8h" kind="file"><name>PointLight.h</name>
   </compound>

@@ -556,7 +556,7 @@ See [SR\_GRAPH\_NS::CascadedShadowMapPass](classSR__GRAPH__NS_1_1CascadedShadowM
 |  std::vector&lt; float\_t &gt; | [**m\_cascadeRadii**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#variable-m_cascaderadii)  <br> |
 |  std::vector&lt; float\_t &gt; | [**m\_cascadeSplitDepths**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#variable-m_cascadesplitdepths)  <br> |
 |  float\_t | [**m\_cascadeSplitLambda**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#variable-m_cascadesplitlambda)   = `0.95f`<br> |
-|  SR\_MATH\_NS::FVector3 | [**m\_directionalLightPosition**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#variable-m_directionallightposition)  <br> |
+|  SR\_MATH\_NS::FVector3 | [**m\_directionalLightDirection**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#variable-m_directionallightdirection)  <br> |
 |  float\_t | [**m\_far**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#variable-m_far)   = `100.f`<br> |
 |  float\_t | [**m\_near**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#variable-m_near)   = `0.1f`<br> |
 |  SR\_MATH\_NS::UVector2 | [**m\_screenSize**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#variable-m_screensize)  <br> |

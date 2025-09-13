@@ -523,7 +523,7 @@ See [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 |  std::vector&lt; float\_t &gt; | [**m\_cascadeRadii**](#variable-m_cascaderadii)  <br> |
 |  std::vector&lt; float\_t &gt; | [**m\_cascadeSplitDepths**](#variable-m_cascadesplitdepths)  <br> |
 |  float\_t | [**m\_cascadeSplitLambda**](#variable-m_cascadesplitlambda)   = `0.95f`<br> |
-|  SR\_MATH\_NS::FVector3 | [**m\_directionalLightPosition**](#variable-m_directionallightposition)  <br> |
+|  SR\_MATH\_NS::FVector3 | [**m\_directionalLightDirection**](#variable-m_directionallightdirection)  <br> |
 |  float\_t | [**m\_far**](#variable-m_far)   = `100.f`<br> |
 |  float\_t | [**m\_near**](#variable-m_near)   = `0.1f`<br> |
 |  SR\_MATH\_NS::UVector2 | [**m\_screenSize**](#variable-m_screensize)  <br> |
@@ -930,10 +930,10 @@ float_t SR_GRAPH_NS::CascadedShadowMapPass::m_cascadeSplitLambda;
 
 
 
-### variable m\_directionalLightPosition 
+### variable m\_directionalLightDirection 
 
 ```C++
-SR_MATH_NS::FVector3 SR_GRAPH_NS::CascadedShadowMapPass::m_directionalLightPosition;
+SR_MATH_NS::FVector3 SR_GRAPH_NS::CascadedShadowMapPass::m_directionalLightDirection;
 ```
 
 

@@ -3,6 +3,22 @@
   <compounddef id="classSR__GRAPH__NS_1_1DirectionalLight" kind="class" language="C++" prot="public">
     <compoundname>SR_GRAPH_NS::DirectionalLight</compoundname>
     <basecompoundref refid="classSR__GRAPH__NS_1_1ILightComponent" prot="public" virt="non-virtual">SR_GRAPH_NS::ILightComponent</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1DirectionalLight_1a0285de384a9d0434c39b7a0863e33ac7" prot="private" static="no">
+        <type><ref refid="classSR__GRAPH__NS_1_1ILightComponent" kindref="compound">ILightComponent</ref></type>
+        <definition>using SR_GRAPH_NS::DirectionalLight::Super =  ILightComponent</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_GRAPH_NS::DirectionalLight::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/DirectionalLight.h" line="12" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/DirectionalLight.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <sectiondef kind="public-func">
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1DirectionalLight_1afd81d65152003eded32bb7e25c6e872a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD LightType</type>
@@ -17,23 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/DirectionalLight.h" line="13" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/DirectionalLight.h" bodystart="13" bodyend="13"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1DirectionalLight_1ab9681129f321a3edc8b9cfd527ab0dd6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
-        <type>void</type>
-        <definition>void SR_GRAPH_NS::DirectionalLight::OnAttached</definition>
-        <argsstring>() override</argsstring>
-        <name>OnAttached</name>
-        <qualifiedname>SR_GRAPH_NS::DirectionalLight::OnAttached</qualifiedname>
-        <reimplements refid="classSR__UTILS__NS_1_1Component_1a6e3f39cd7894486df8af8336c6778036">OnAttached</reimplements>
-        <briefdescription>
-<para>Вызывается после добавления компонента к игровому объекту </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/DirectionalLight.h" line="14" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Lighting/DirectionalLight.h" line="15" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/DirectionalLight.h" bodystart="15" bodyend="15"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -116,7 +116,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Lighting/DirectionalLight.h" line="11" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/DirectionalLight.h" bodystart="11" bodyend="15"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Lighting/DirectionalLight.h" line="11" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Lighting/DirectionalLight.h" bodystart="11" bodyend="17"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DirectionalLight</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DirectionalLight</scope><name>BaseComponent</name></member>
@@ -166,7 +166,7 @@
       <member refid="classSR__UTILS__NS_1_1Component_1ae7b09faaab768e65bf45cef6d3a84666" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::DirectionalLight</scope><name>m_scene</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a5bbd2e2f1ed3059025e390d428d4d6ac" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::DirectionalLight</scope><name>m_sceneObject</name></member>
       <member refid="classSR__GRAPH__NS_1_1ILightComponent_1a3412e5696f828c235dde1ff6aad8e4d4" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::DirectionalLight</scope><name>m_shadowType</name></member>
-      <member refid="classSR__GRAPH__NS_1_1DirectionalLight_1ab9681129f321a3edc8b9cfd527ab0dd6" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DirectionalLight</scope><name>OnAttached</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ILightComponent_1a6106b0f1d3165399d07fa17f8fc3476a" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DirectionalLight</scope><name>OnAttached</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a1a42ced6421db34114f544ba2d7b6c6d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DirectionalLight</scope><name>OnBeforeLayerChanged</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aaa0c5a5e6d07bf4d4516229fe544dd49" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DirectionalLight</scope><name>OnCollisionEnter</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1af64eb0df50ce6d50cd22662edf0e6a7b" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DirectionalLight</scope><name>OnCollisionExit</name></member>
@@ -177,7 +177,7 @@
       <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1ae13cacd5b7be1e43cc46f79b4157d07e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DirectionalLight</scope><name>OnEnable</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a561f35b144564e8df91651b3f8e57693" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DirectionalLight</scope><name>OnLayerChanged</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1af7e2ecd6bef36595ac12274d6a6cc77c" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DirectionalLight</scope><name>OnLoaded</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a6e4032583aabcd6cfebed3e13f39a1a2" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DirectionalLight</scope><name>OnMatrixDirty</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ILightComponent_1ab20a6935b503855bfc51855c5238f0ea" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DirectionalLight</scope><name>OnMatrixDirty</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aee0027f96ce5bec8a30edf069fa4dc10" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DirectionalLight</scope><name>OnPriorityChanged</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aac7babfab0aaf8e811e05f8f55dbebb1" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DirectionalLight</scope><name>OnTriggerEnter</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a54e04b235d9aaa0f027996b71362242b" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DirectionalLight</scope><name>OnTriggerExit</name></member>
@@ -191,6 +191,7 @@
       <member refid="classSR__UTILS__NS_1_1Component_1af57bdc6a2c4f4ed50fec8a5175bcbf8f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DirectionalLight</scope><name>SetIndexIdSceneUpdater</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ac9780c1f95cd3106101f4e1595550816" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::DirectionalLight</scope><name>SetParent</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a572b27823d61376ebbd0c33758ea5d6f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DirectionalLight</scope><name>Start</name></member>
+      <member refid="classSR__GRAPH__NS_1_1DirectionalLight_1a0285de384a9d0434c39b7a0863e33ac7" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::DirectionalLight</scope><name>Super</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a55ba0d3b4c08092148668bae579366ff" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DirectionalLight</scope><name>TryGetParent</name></member>
       <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1ab61fb3a6e950d558e4a24fd316c97062" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DirectionalLight</scope><name>TryGetRenderScene</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a02cdaa6ae8c728a1f66192c9e6f54322" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DirectionalLight</scope><name>TryGetScene</name></member>

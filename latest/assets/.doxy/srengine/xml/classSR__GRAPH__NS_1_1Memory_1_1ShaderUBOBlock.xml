@@ -5,6 +5,22 @@
     <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
     <innerclass refid="structSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1_1DefaultValue" prot="private">SR_GRAPH_NS::Memory::ShaderUBOBlock::DefaultValue</innerclass>
     <innerclass refid="structSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1_1SubBlock" prot="private">SR_GRAPH_NS::Memory::ShaderUBOBlock::SubBlock</innerclass>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a0d999ab08f78c7169fdd5100de33fb63" prot="private" static="no">
+        <type><ref refid="classSR__UTILS__NS_1_1NonCopyable" kindref="compound">SR_UTILS_NS::NonCopyable</ref></type>
+        <definition>using SR_GRAPH_NS::Memory::ShaderUBOBlock::Super =  SR_UTILS_NS::NonCopyable</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::ShaderUBOBlock::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="22" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <sectiondef kind="friend">
       <memberdef kind="friend" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a48b258b27e7a068c43722d971f5cccb7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>class</type>
@@ -21,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="22" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="22" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="23" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="23" bodyend="-1"/>
       </memberdef>
       <memberdef kind="friend" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a18b88bdd3d639858b2b17560cf053682" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>class</type>
@@ -38,7 +54,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="23" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="23" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="24" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="24" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -55,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="60" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="60" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="62" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="62" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a7f791113a081671f1c6879c58620684b" prot="private" static="no" mutable="no">
         <type>uint32_t</type>
@@ -70,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="61" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="61" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="63" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="63" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1abc14536c03955db686a7d0cdedc70672" prot="private" static="no" mutable="no">
         <type>uint32_t</type>
@@ -85,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="63" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="63" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="65" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="65" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1ae74fd989dcbd53dd0da421952983a4ef" prot="private" static="no" mutable="no">
         <type>SubBlock *</type>
@@ -100,11 +116,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="65" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="65" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="67" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="67" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1afeffea4fbcce2737acced5716dbc1d68" prot="private" static="no" mutable="no">
-        <type>uint8_t</type>
-        <definition>uint8_t SR_GRAPH_NS::Memory::ShaderUBOBlock::m_dataCount</definition>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a9e40e3f33b20c23c5b219d7c25000ad5" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::Memory::ShaderUBOBlock::m_dataCount</definition>
         <argsstring></argsstring>
         <name>m_dataCount</name>
         <qualifiedname>SR_GRAPH_NS::Memory::ShaderUBOBlock::m_dataCount</qualifiedname>
@@ -115,7 +131,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="66" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="66" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="68" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="68" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a6381aa6bac228389be5cdecad11cf70f" prot="private" static="no" mutable="no">
         <type>uint32_t</type>
@@ -130,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="68" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="68" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="70" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="70" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a27652844bef44949e6ab8bc46183c730" prot="private" static="no" mutable="no">
         <type>char *</type>
@@ -145,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="69" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="69" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="71" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="71" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a853e3f2c0b5fa68c1544aa2217562847" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -160,7 +176,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="71" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="71" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="73" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="73" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1adb1c87e5c3af7feefe9cb0d73f8442ff" prot="private" static="no" mutable="no">
         <type>std::vector&lt; DefaultValue &gt;</type>
@@ -174,10 +190,24 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="79" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="79" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="81" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="81" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a98de61913fb383c5d452a135dc5b42a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::Memory::ShaderUBOBlock::ShaderUBOBlock</definition>
+        <argsstring>()</argsstring>
+        <name>ShaderUBOBlock</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::ShaderUBOBlock::ShaderUBOBlock</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="34" column="9"/>
+      </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a2e9fd0d1988d675df8b1d7c1562c659f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>SR_GRAPH_NS::Memory::ShaderUBOBlock::~ShaderUBOBlock</definition>
@@ -190,7 +220,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="33" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="35" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a0001816c0379b116e695fa364b3d12b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -216,7 +246,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="35" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="37" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a967dcfb60da07bcd341b99927e561595" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -246,7 +276,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="36" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="38" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a3985869b3159cdfd57fd6a2c672882a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -260,7 +290,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="38" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="40" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a5b0a6350f223d991f25352e2c8511a98" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -274,7 +304,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="39" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="41" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a17497b1eb397ebf8ec6e5c7123f0ce81" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void SR_FASTCALL</type>
@@ -296,7 +326,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="41" column="26"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="43" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a6aec43fc54563e03e94174b9f6bf684a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void SR_FASTCALL</type>
@@ -318,7 +348,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="42" column="26"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="44" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1aab1c4fada6f78d2368ac44171cd2ce37" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -336,7 +366,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="44" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="46" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a6786ad37aaebc71381a42704f566c891" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -350,7 +380,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="46" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="46" bodyend="46"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="48" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="48" bodyend="48"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1ab74fa2d9075d533070b85d001a5b7d85" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -364,7 +394,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="47" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="47" bodyend="47"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="49" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="49" bodyend="49"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a35b8079631a3856b84b4641c2cdbdd27" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -386,7 +416,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="49" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="51" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1ace5f49070ed0ca534799ffa06e8f6db0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -400,7 +430,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="50" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="52" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -420,7 +450,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="53" column="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="55" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1abaf5893ed824caf2c63bea21bebf62f4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -438,7 +468,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="54" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="56" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a20ec81bf06e20ccb3db63673cd81cfe4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>char *</type>
@@ -456,7 +486,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="55" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="57" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a4069dc419c7f968b1c1e75c5456224ad" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -474,7 +504,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="56" column="18"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="58" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a216ef9e03a8bc17c3bebb53b7a7631c8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -492,7 +522,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="57" column="18"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="59" column="18"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -523,7 +553,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="21" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="21" bodyend="81"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="21" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="21" bodyend="83"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a43f9b51c8383bf428575ab43b44f759f" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderUBOBlock</scope><name>Align</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a20ec81bf06e20ccb3db63673cd81cfe4" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderUBOBlock</scope><name>AllocMemory</name></member>
@@ -538,7 +568,7 @@
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a616b05d9e694d5fc96b7c05b276c4222" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderUBOBlock</scope><name>m_alignedBlock</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1abc14536c03955db686a7d0cdedc70672" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderUBOBlock</scope><name>m_binding</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1ae74fd989dcbd53dd0da421952983a4ef" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderUBOBlock</scope><name>m_data</name></member>
-      <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1afeffea4fbcce2737acced5716dbc1d68" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderUBOBlock</scope><name>m_dataCount</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a9e40e3f33b20c23c5b219d7c25000ad5" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderUBOBlock</scope><name>m_dataCount</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1adb1c87e5c3af7feefe9cb0d73f8442ff" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderUBOBlock</scope><name>m_defaultValues</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a853e3f2c0b5fa68c1544aa2217562847" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderUBOBlock</scope><name>m_initialized</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a27652844bef44949e6ab8bc46183c730" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderUBOBlock</scope><name>m_memory</name></member>
@@ -551,8 +581,10 @@
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a35b8079631a3856b84b4641c2cdbdd27" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderUBOBlock</scope><name>SetDefault</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a17497b1eb397ebf8ec6e5c7123f0ce81" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderUBOBlock</scope><name>SetField</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a6aec43fc54563e03e94174b9f6bf684a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderUBOBlock</scope><name>SetField</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a98de61913fb383c5d452a135dc5b42a2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderUBOBlock</scope><name>ShaderUBOBlock</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a18b88bdd3d639858b2b17560cf053682" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderUBOBlock</scope><name>SR_GRAPH_NS::ShaderCache</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a48b258b27e7a068c43722d971f5cccb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderUBOBlock</scope><name>SR_GRAPH_NS::Types::Shader</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a0d999ab08f78c7169fdd5100de33fb63" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderUBOBlock</scope><name>Super</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1a216ef9e03a8bc17c3bebb53b7a7631c8" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderUBOBlock</scope><name>TopAlign</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1ab74fa2d9075d533070b85d001a5b7d85" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderUBOBlock</scope><name>Valid</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::Memory::ShaderUBOBlock</scope><name>~NonCopyable</name></member>

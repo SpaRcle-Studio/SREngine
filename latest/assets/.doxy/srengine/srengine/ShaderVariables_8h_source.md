@@ -49,7 +49,7 @@ namespace SR_SRSL_NS {
             { "CASCADE_LIGHT_SPACE_MATRICES",   "mat4[4]"       },
             { "CASCADE_SPLITS",                 "vec4"          },
 
-            { "DIRECTIONAL_LIGHT_POSITION",     "vec3"          },
+            { "DIRECTIONAL_LIGHT_DIRECTION",    "vec3"          },
             { "VIEW_POSITION",                  "vec3"          },
             { "VIEW_DIRECTION",                 "vec3"          },
     };
