@@ -8,7 +8,9 @@ BlendEnabled false;
 DepthWrite false;
 DepthTest false;
 
-[[public], [uniform(SHARED)]] float vignetteIntensity;
+[[public], [uniform(SHARED)]] float vignetteIntensity = 0.585;
+[[public], [uniform(SHARED)]] float chromaticAberrationIntensity = 1.0;
+
 [[uniform]] sampler2D colorMap;
 
 [[shared]] vec2 uv;
@@ -18,7 +20,19 @@ DepthTest false;
 #endif
 
 void fragment() {
-    vec3 color = texture(colorMap, uv).rgb;
+    vec3 color;
+
+    if (chromaticAberrationIntensity > 0.0) {
+        float intensity = 0.005 * chromaticAberrationIntensity;
+        vec2 dir = uv - vec2(0.5, 0.5);
+        float dist = length(dir);
+        color.r = texture(colorMap, uv + dir * (intensity) * dist).r;
+        color.g = texture(colorMap, uv + dir * (0.0) * dist).g;
+        color.b = texture(colorMap, uv + dir * (-intensity) * dist).b;
+    }
+    else {
+        color = texture(colorMap, uv).rgb;
+    }
 
 #ifdef SR_CLOUDS
     color = applyClouds(color, uv);

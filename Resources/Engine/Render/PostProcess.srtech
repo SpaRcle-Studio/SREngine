@@ -44,7 +44,7 @@ use tabs: true
 																	17-o:ptr
 																		18-o:defaultShader
 																			19-v:shaderPath
-																				20-s:Engine/Shaders/vignette.srsl
+																				20-s:Engine/Shaders/post-process.srsl
 																			19-a:uniforms
 																				20-k:i
 																					21-o:d

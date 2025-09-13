@@ -233,8 +233,6 @@ use tabs: true
 													13-o:ptr
 														14-v:customName
 															15-s:DepthCascades
-														14-v:renderLayers
-															15-i:4
 														14-a:allowedLayers
 															15-k:i
 																16-v:d
@@ -257,8 +255,6 @@ use tabs: true
 															15-f:895.919983
 														14-v:cascadeSplitLambda
 															15-f:0.959999979
-														14-v:instancing
-															15-b:false
 										10-o:data
 											11-v:frameBufferName
 												12-s:DepthCascades
@@ -493,7 +489,7 @@ use tabs: true
 										10-b:false
 								8-v:samples
 									9-i:1
-								8-v:layersCount
+								8-v:arrayLayersCount
 									9-i:4
 								8-v:depthAspect
 									9-s:Depth

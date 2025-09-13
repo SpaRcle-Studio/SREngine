@@ -422,6 +422,13 @@ namespace SR_CORE_GUI_NS {
                 return true;
             }
 
+            if (pFramebuffer->GetArrayLayersCount() > 1) {
+                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Yellow(), "Cannot display framebuffer with multiple layers!");
+                SR_GRAPH_GUI_NS::Immediate::Text("Array layers: %i", pFramebuffer->GetArrayLayersCount());
+                SR_GRAPH_GUI_NS::Immediate::PopID();
+                return true;
+            }
+
             for (uint32_t i = 0; i < pFramebuffer->GetColorLayersCount(); ++i) {
                 if (auto&& textureId = pFramebuffer->GetColorTexture(i, pFramebuffer->GetPipeline()->GetCurrentFrameIndex()); textureId != SR_ID_INVALID) {
                     auto&& pPipeline = GetContext()->GetPipeline();

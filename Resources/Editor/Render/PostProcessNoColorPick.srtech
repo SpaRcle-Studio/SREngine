@@ -19,56 +19,6 @@ use tabs: true
 										10-s:FrameBufferPass
 									9-o:ptr
 										10-v:customName
-											11-s:ColorBuffer
-										10-a:passes
-											11-k:i
-												12-o:d
-													13-v:type
-														14-s:ColorBufferPass
-													13-o:ptr
-														14-a:allowedLayers
-															15-k:i
-																16-v:d
-																	17-s:UI
-															15-k:i
-																16-v:d
-																	17-s:Default
-															15-k:i
-																16-v:d
-																	17-s:Opaque
-															15-k:i
-																16-v:d
-																	17-s:GizmoSelection
-															15-k:i
-																16-v:d
-																	17-s:Transparent
-														14-a:shaderDefines
-															15-k:i
-																16-v:d
-																	17-s:SR_DEFINE_COLOR_PASS
-														14-o:samplers
-														14-o:uniforms
-															15-o:shared
-															15-o:material
-														14-v:colorMultiplier
-															15-i:5000
-										10-o:data
-											11-a:clearColors
-												12-k:i
-													13-o:d
-											11-v:frameBufferName
-												12-s:ColorBuffer
-											11-o:depth
-												12-v:has
-													13-b:true
-												12-v:value
-													13-f:1
-							7-k:i
-								8-o:d
-									9-v:type
-										10-s:FrameBufferPass
-									9-o:ptr
-										10-v:customName
 											11-s:Main
 										10-a:passes
 											11-k:i
@@ -98,14 +48,6 @@ use tabs: true
 																			19-s:FrameBufferDepth
 																		18-v:fboName
 																			19-s:DepthCascades
-																16-k:i
-																	17-o:d
-																		18-v:id
-																			19-s:colorBufferTest
-																		18-v:usageType
-																			19-s:FrameBufferColor
-																		18-v:fboName
-																			19-s:ColorBuffer
 														14-o:uniforms
 															15-o:shared
 																16-a:useFromPass
@@ -257,8 +199,6 @@ use tabs: true
 															15-f:895.919983
 														14-v:cascadeSplitLambda
 															15-f:0.959999979
-														14-v:instancing
-															15-b:false
 										10-o:data
 											11-v:frameBufferName
 												12-s:DepthCascades
@@ -402,14 +342,6 @@ use tabs: true
 																							23-s:Float
 																						22-v:value
 																							23-f:0.5
-																				20-k:i
-																					21-o:d
-																						22-v:id
-																							23-s:chromaticAberrationIntensity
-																						22-v:type
-																							23-s:Float
-																						22-v:value
-																							23-f:1
 										10-o:data
 											11-a:clearColors
 												12-k:i
@@ -422,34 +354,6 @@ use tabs: true
 												12-v:value
 													13-f:1
 				4-a:frameBuffers
-					5-k:i
-						6-o:d
-							7-v:type
-								8-s:FrameBufferController
-							7-o:ptr
-								8-v:name
-									9-s:ColorBuffer
-								8-v:dynamicResizing
-									9-b:false
-								8-o:preScale
-									9-v:x
-										10-f:1
-									9-v:y
-										10-f:1
-								8-o:size
-									9-v:x
-										10-i:1024
-									9-v:y
-										10-i:1024
-								8-a:colorFormats
-									9-k:i
-										10-v:d
-											11-s:RGBA8_UNORM
-								8-o:features
-									9-v:colorTransferSrc
-										10-b:true
-								8-v:samples
-									9-i:1
 					5-k:i
 						6-o:d
 							7-v:type
@@ -532,9 +436,6 @@ use tabs: true
 					5-k:i
 						6-o:d
 							7-a:frameBuffers
-								8-k:i
-									9-v:d
-										10-s:ColorBuffer
 								8-k:i
 									9-v:d
 										10-s:Main

@@ -76,6 +76,38 @@ use tabs: true
 							7-s:Simple
 						6-v:editorCameraRenderTechnique
 							7-s:Editor/Render/Simple.srtech
+				4-k:i
+					5-o:d
+						6-v:name
+							7-s:Post process no color pick
+						6-a:shaderDefines
+							7-k:i
+								8-v:d
+									9-s:SR_DEFINE_USE_CASCADED_SHADOW_MAP
+						6-v:editorCameraRenderTechnique
+							7-s:Editor/Render/PostProcessNoColorPick.srtech
+				4-k:i
+					5-o:d
+						6-v:name
+							7-s:Post process instancing
+						6-a:shaderDefines
+							7-k:i
+								8-v:d
+									9-s:SR_DEFINE_USE_CASCADED_SHADOW_MAP
+						6-v:editorCameraRenderTechnique
+							7-s:Editor/Render/PostProcessInstancing.srtech
+				4-k:i
+					5-o:d
+						6-v:name
+							7-s:Debug cascades map instancing
+						6-v:editorCameraRenderTechnique
+							7-s:Editor/Render/CascadesToScreenInstancing.srtech
+				4-k:i
+					5-o:d
+						6-v:name
+							7-s:Debug cascades map
+						6-v:editorCameraRenderTechnique
+							7-s:Editor/Render/CascadesToScreen.srtech
 			3-o:defaultPreset
 				4-v:name
 					5-s:Default

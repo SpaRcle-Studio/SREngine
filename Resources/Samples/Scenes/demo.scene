@@ -648,9 +648,9 @@ use tabs: true
 								8-v:x
 									9-f:-1.09000003
 								8-v:y
-									9-f:3.5196929
+									9-f:10.6350336
 								8-v:z
-									9-f:10.3776283
+									9-f:27.8154716
 		2-k:i
 			3-o:d
 				4-v:type
@@ -1023,53 +1023,6 @@ ddddцццゔぅヾボ
 					5-s:GameObject
 				4-o:ptr
 					5-v:entityId
-						6-i:2590761511784213758
-					5-a:components
-						6-k:i
-							7-o:d
-								8-v:type
-									9-s:Behaviour
-								8-o:ptr
-									9-v:entityId
-										10-i:4303846025122881923
-									9-v:behaviourName
-										10-s:MarchingCubesOptimized
-									9-o:data
-						6-k:i
-							7-o:d
-								8-v:type
-									9-s:ProceduralMesh
-								8-o:ptr
-									9-v:entityId
-										10-i:3299722899804483194
-									9-o:material
-										10-v:type
-											11-s:UniqueMaterial
-										10-o:ptr
-											11-o:data
-												12-v:type
-													13-s:MaterialData
-												12-o:ptr
-													13-o:defaultShader
-					5-v:name
-						6-s:MarchingCubesOptimized
-					5-v:isEnabled
-						6-b:false
-					5-o:transform
-						6-v:type
-							7-s:Transform3D
-						6-o:ptr
-							7-o:translation
-								8-v:y
-									9-f:7.17259121
-								8-v:z
-									9-f:3.94984698
-		2-k:i
-			3-o:d
-				4-v:type
-					5-s:GameObject
-				4-o:ptr
-					5-v:entityId
 						6-i:2916835386551013127
 					5-v:name
 						6-s:Bubble
@@ -1151,6 +1104,33 @@ ddddцццゔぅヾボ
 																	17-s:MaterialData
 																16-o:ptr
 																	17-o:defaultShader
+																		18-v:shaderPath
+																			19-s:Engine/Shaders/standard.srsl
+																		18-a:uniforms
+																			19-k:i
+																				20-o:d
+																					21-v:id
+																						22-s:color
+																					21-v:type
+																						22-s:Vec4
+																					21-o:value
+																						22-v:x
+																							23-f:1
+																						22-v:y
+																							23-f:1
+																						22-v:z
+																							23-f:1
+																						22-v:w
+																							23-f:1
+																		18-a:samplers
+																			19-k:i
+																				20-o:d
+																					21-v:id
+																						22-s:diffuse
+																					21-v:type
+																						22-s:Sampler2D
+																					21-v:value
+																						22-s:Engine/Textures/grid.png
 									9-v:name
 										10-s:MarchingCubes
 									9-o:transform
@@ -1210,6 +1190,33 @@ ddddцццゔぅヾボ
 																	17-s:MaterialData
 																16-o:ptr
 																	17-o:defaultShader
+																		18-v:shaderPath
+																			19-s:Engine/Shaders/standard.srsl
+																		18-a:uniforms
+																			19-k:i
+																				20-o:d
+																					21-v:id
+																						22-s:color
+																					21-v:type
+																						22-s:Vec4
+																					21-o:value
+																						22-v:x
+																							23-f:1
+																						22-v:y
+																							23-f:1
+																						22-v:z
+																							23-f:1
+																						22-v:w
+																							23-f:1
+																		18-a:samplers
+																			19-k:i
+																				20-o:d
+																					21-v:id
+																						22-s:diffuse
+																					21-v:type
+																						22-s:Sampler2D
+																					21-v:value
+																						22-s:Engine/Textures/grid.png
 									9-v:name
 										10-s:MarchingCubes
 									9-o:transform
@@ -1269,6 +1276,33 @@ ddddцццゔぅヾボ
 																	17-s:MaterialData
 																16-o:ptr
 																	17-o:defaultShader
+																		18-v:shaderPath
+																			19-s:Engine/Shaders/standard.srsl
+																		18-a:uniforms
+																			19-k:i
+																				20-o:d
+																					21-v:id
+																						22-s:color
+																					21-v:type
+																						22-s:Vec4
+																					21-o:value
+																						22-v:x
+																							23-f:1
+																						22-v:y
+																							23-f:1
+																						22-v:z
+																							23-f:1
+																						22-v:w
+																							23-f:1
+																		18-a:samplers
+																			19-k:i
+																				20-o:d
+																					21-v:id
+																						22-s:diffuse
+																					21-v:type
+																						22-s:Sampler2D
+																					21-v:value
+																						22-s:Engine/Textures/grid.png
 									9-v:name
 										10-s:MarchingCubes
 									9-o:transform
@@ -4276,81 +4310,6 @@ ddddцццゔぅヾボ
 									9-f:-2.24400651e-07
 								8-v:z
 									9-f:-5.01955795
-		2-k:i
-			3-o:d
-				4-v:type
-					5-s:GameObject
-				4-o:ptr
-					5-v:entityId
-						6-i:4116046732879613346
-					5-a:components
-						6-k:i
-							7-o:d
-								8-v:type
-									9-s:Rigidbody3D
-								8-o:ptr
-									9-v:entityId
-										10-i:4507789170385039349
-									9-v:isStatic
-										10-b:true
-									9-o:shape
-										10-v:type
-											11-s:CollisionShape
-										10-o:ptr
-											11-v:type
-												12-s:Plane3D
-											11-o:bounds
-												12-v:x
-													13-f:1
-												12-v:y
-													13-f:1
-												12-v:z
-													13-f:1
-						6-k:i
-							7-o:d
-								8-v:type
-									9-s:Mesh3D
-								8-o:ptr
-									9-v:entityId
-										10-i:3772990745612449127
-									9-o:material
-										10-v:type
-											11-s:UniqueMaterial
-										10-o:ptr
-											11-o:data
-												12-v:type
-													13-s:MaterialData
-												12-o:ptr
-													13-o:defaultShader
-									9-v:meshPath
-										10-s:Engine/Models/plane.obj
-					5-v:tag
-						6-s:Ground
-					5-v:name
-						6-s:Plane
-					5-v:isEnabled
-						6-b:false
-					5-o:transform
-						6-v:type
-							7-s:Transform3D
-						6-o:ptr
-							7-o:translation
-								8-v:y
-									9-f:19.7814522
-								8-v:z
-									9-f:19.758522
-							7-o:quaternion
-								8-v:x
-									9-f:-0.707106769
-								8-v:w
-									9-f:0.707106769
-							7-o:scale
-								8-v:x
-									9-f:20
-								8-v:y
-									9-f:1
-								8-v:z
-									9-f:20
 		2-k:i
 			3-o:d
 				4-v:type
