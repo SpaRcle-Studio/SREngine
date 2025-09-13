@@ -411,6 +411,18 @@ namespace SR_SCRIPTING_NS {
         }
     }
 
+    void ScriptSystem::WaitForIdle() {
+        if (GetState() == State::Idle) {
+            return;
+        }
+
+        SR_INFO("ScriptSystem::WaitForIdle() : waiting for script system idle...");
+
+        while (m_state != State::Idle) {
+            SR_PLATFORM_NS::Sleep(10);
+        }
+    }
+
     void ScriptSystem::ReloadModulesIfNeeded() {
         {
             SR_TRACY_ZONE;

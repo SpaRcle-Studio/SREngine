@@ -25,15 +25,18 @@ void fragment() {
     vec3 viewDirectionWorld = (VIEW_MATRIX * vec4(VIEW_DIRECTION, 0)).xyz;
     vec3 normalWorld = (VIEW_MATRIX * vec4(NORMAL, 0.0)).xyz;
     COLOR = vec4(BubbleColor, Fresnel(viewDirectionWorld, normalWorld));
+    COLOR_INDEX_1 = vec4(gl_FragCoord.z) * max(0, COLOR.a - 0.8);
+    COLOR_INDEX_2 = vec4(VERTEX, 1.0);
 }
 
 void vertex() {
 	float height = texture(NoiseTex, VERTEX.xz * (NoiseSampleSize / 100.0) + vec2(TIME) * (AnimationSpeed / 1000.0)).r;
 	VERTEX += VERTEX * height * HeightMultiplier;
+	VERTEX = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 
 #ifdef SR_DEFINE_CASCADED_SHADOW_MAP_PASS
-    OUT_POSITION = CASCADE_LIGHT_SPACE_MATRICES[PC_SHADOW_CASCADE_INDEX] * MODEL_MATRIX * vec4(VERTEX, 1.0);
+    OUT_POSITION = CASCADE_LIGHT_SPACE_MATRICES[PC_SHADOW_CASCADE_INDEX] * vec4(VERTEX, 1.0);
 #else
-    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
+    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * vec4(VERTEX, 1.0);
 #endif
 }

@@ -233,6 +233,8 @@ namespace SR_CORE_NS {
 
         SR_INFO("Engine::Close() : closing game engine...");
 
+        SR_SCRIPTING_NS::ScriptSystem::Instance().WaitForIdle();
+
         SRAssert2(!m_editor, "Engine::Close() : editor is not destroyed! Call DestroyEditor() before closing the engine!");
 
         m_isRun = false;

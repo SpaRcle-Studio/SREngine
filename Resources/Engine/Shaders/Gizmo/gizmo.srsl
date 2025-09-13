@@ -19,13 +19,17 @@ DepthWrite true;
 
 void fragment() {
 	COLOR = color;
+    COLOR_INDEX_1 = vec4(gl_FragCoord.z);
+    COLOR_INDEX_2 = vec4(VERTEX, 1.0);
 }
 
 void vertex() {
     if (useOrthogonal == 1) {
-        OUT_POSITION = ORTHOGONAL_MATRIX * MODEL_MATRIX * vec4(VERTEX + vec3(0, 0, 5), 1.0);
+        VERTEX = (MODEL_MATRIX * vec4(VERTEX + vec3(0, 0, 5), 1.0)).xyz;
+        OUT_POSITION = ORTHOGONAL_MATRIX * vec4(VERTEX, 1.0);
     }
     else {
-        OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
+        VERTEX = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+        OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * vec4(VERTEX, 1.0);
     }
 }

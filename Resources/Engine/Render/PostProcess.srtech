@@ -241,8 +241,6 @@ use tabs: true
 										10-v:d
 											11-s:RGBA8_UNORM
 								8-o:features
-								8-v:samples
-									9-i:1
 				4-a:queues
 					5-k:i
 						6-o:d

@@ -36,6 +36,11 @@
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Window/Window.h>
 #include <Graphics/SRSL/Shader.h>
+#include <Graphics/Lighting/DirectionalLight.h>
+#include <Graphics/Lighting/PointLight.h>
+#include <Graphics/Lighting/SpotLight.h>
+#include <Graphics/Lighting/AreaLight.h>
+#include <Graphics/Lighting/ProbeLight.h>
 
 #include <Enum/EditorIcon.hpp>
 
@@ -741,6 +746,48 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
 
+                SR_GRAPH_GUI_NS::Immediate::EndMenu();
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+
+            if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Lights")) {
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Directional light")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        auto&& pGameObject = pScene->InstanceGameObject("Directional light"_atom);
+                        pGameObject->AddComponent<SR_GRAPH_NS::DirectionalLight>();
+                        pGameObject->GetTransform()->SetRotation(60, -45, 0);
+                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                    }
+                }
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Point light")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        auto&& pGameObject = pScene->InstanceGameObject("Point light"_atom);
+                        auto&& pLight = pGameObject->AddComponent<SR_GRAPH_NS::PointLight>();
+                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                    }
+                }
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Spot light")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        auto&& pGameObject = pScene->InstanceGameObject("Spot light"_atom);
+                        auto&& pLight = pGameObject->AddComponent<SR_GRAPH_NS::SpotLight>();
+                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                    }
+                }
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Area light")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        auto&& pGameObject = pScene->InstanceGameObject("Area light"_atom);
+                        auto&& pLight = pGameObject->AddComponent<SR_GRAPH_NS::AreaLight>();
+                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                    }
+                }
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Probe light")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        auto&& pGameObject = pScene->InstanceGameObject("Probe light"_atom);
+                        auto&& pLight = pGameObject->AddComponent<SR_GRAPH_NS::ProbeLight>();
+                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                    }
+                }
                 SR_GRAPH_GUI_NS::Immediate::EndMenu();
             }
 

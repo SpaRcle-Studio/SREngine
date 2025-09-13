@@ -412,11 +412,11 @@ use tabs: true
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:13.4762192
+									9-f:14.8570194
 								8-v:y
-									9-f:18.6594849
+									9-f:1.81379271
 								8-v:z
-									9-f:0.499684662
+									9-f:8.33693886
 							7-o:quaternion
 								8-v:x
 									9-f:0.213029996
@@ -4351,3 +4351,33 @@ ddddцццゔぅヾボ
 									9-f:1
 								8-v:z
 									9-f:20
+		2-k:i
+			3-o:d
+				4-v:type
+					5-s:GameObject
+				4-o:ptr
+					5-v:entityId
+						6-i:4327564058778499569
+					5-a:components
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:DirectionalLight
+								8-o:ptr
+									9-v:entityId
+										10-i:4257070071528267107
+					5-v:name
+						6-s:Directional light
+					5-o:transform
+						6-v:type
+							7-s:Transform3D
+						6-o:ptr
+							7-o:quaternion
+								8-v:x
+									9-f:-0.483188033
+								8-v:y
+									9-f:-0.222683504
+								8-v:z
+									9-f:0.128566384
+								8-v:w
+									9-f:-0.836906195
