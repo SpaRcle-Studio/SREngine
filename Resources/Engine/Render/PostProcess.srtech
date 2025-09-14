@@ -7,7 +7,7 @@ use tabs: true
 		2-o:ptr
 			3-o:data
 				4-v:name
-					5-s:Game render
+					5-s:Editor render
 				4-o:pass
 					5-v:type
 						6-s:GroupPass
@@ -16,44 +16,208 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:type
-										10-s:SwapchainPass
+										10-s:FrameBufferPass
 									9-o:ptr
+										10-v:customName
+											11-s:ColorBuffer
 										10-a:passes
 											11-k:i
 												12-o:d
 													13-v:type
-														14-s:PostProcessPass
+														14-s:ColorBufferPass
 													13-o:ptr
+														14-a:allowedLayers
+															15-k:i
+																16-v:d
+																	17-s:UI
+															15-k:i
+																16-v:d
+																	17-s:Default
+															15-k:i
+																16-v:d
+																	17-s:Opaque
+															15-k:i
+																16-v:d
+																	17-s:GizmoSelection
+															15-k:i
+																16-v:d
+																	17-s:Transparent
+														14-a:shaderDefines
+															15-k:i
+																16-v:d
+																	17-s:SR_DEFINE_COLOR_PASS
+														14-o:samplers
+														14-o:uniforms
+															15-o:shared
+															15-o:material
+														14-v:colorMultiplier
+															15-i:5000
+										10-o:data
+											11-a:clearColors
+												12-k:i
+													13-o:d
+											11-v:frameBufferName
+												12-s:ColorBuffer
+											11-o:depth
+												12-v:has
+													13-b:true
+												12-v:value
+													13-f:1
+							7-k:i
+								8-o:d
+									9-v:type
+										10-s:FrameBufferPass
+									9-o:ptr
+										10-v:customName
+											11-s:Main
+										10-a:passes
+											11-k:i
+												12-o:d
+													13-v:type
+														14-s:ClearBuffersPass
+													13-o:ptr
+											11-k:i
+												12-o:d
+													13-v:type
+														14-s:MeshDrawerPass
+													13-o:ptr
+														14-a:allowedLayers
+															15-k:i
+																16-v:d
+																	17-s:Default
+															15-k:i
+																16-v:d
+																	17-s:Opaque
 														14-o:samplers
 															15-a:samplers
 																16-k:i
 																	17-o:d
 																		18-v:id
-																			19-s:colorMap
+																			19-s:shadowMap
+																		18-v:usageType
+																			19-s:FrameBufferDepth
+																		18-v:fboName
+																			19-s:DepthCascades
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:colorBufferTest
 																		18-v:usageType
 																			19-s:FrameBufferColor
 																		18-v:fboName
-																			19-s:PostProcess
-														14-o:material
-															15-v:type
-																16-s:UniqueMaterial
-															15-o:ptr
-																16-o:data
-																	17-v:type
-																		18-s:MaterialData
-																	17-o:ptr
-																		18-o:defaultShader
-																			19-v:shaderPath
-																				20-s:Engine/Shaders/post-process.srsl
-																			19-a:uniforms
-																				20-k:i
-																					21-o:d
-																						22-v:id
-																							23-s:vignetteIntensity
-																						22-v:type
-																							23-s:Float
-																						22-v:value
-																							23-f:0.349000007
+																			19-s:ColorBuffer
+														14-o:uniforms
+															15-o:shared
+																16-a:useFromPass
+																	17-k:i
+																		18-v:d
+																			19-s:DepthCascades
+															15-o:material
+											11-k:i
+												12-o:d
+													13-v:type
+														14-s:SkyboxPass
+													13-o:ptr
+														14-v:skyboxPath
+															15-s:Engine/Skyboxes/Sun.png
+														14-v:shaderPath
+															15-s:Engine/Shaders/skybox.srsl
+											11-k:i
+												12-o:d
+													13-v:type
+														14-s:PostProcessPass
+													13-o:ptr
+														14-v:vertices
+															15-i:4
+														14-o:samplers
+											11-k:i
+												12-o:d
+													13-v:type
+														14-s:MeshDrawerPass
+													13-o:ptr
+														14-a:disallowedLayers
+															15-k:i
+																16-v:d
+																	17-s:Gizmo
+															15-k:i
+																16-v:d
+																	17-s:Default
+															15-k:i
+																16-v:d
+																	17-s:Opaque
+															15-k:i
+																16-v:d
+																	17-s:GizmoSelection
+														14-o:samplers
+															15-a:samplers
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:shadowMap
+																		18-v:usageType
+																			19-s:FrameBufferDepth
+																		18-v:fboName
+																			19-s:DepthCascades
+														14-o:uniforms
+															15-o:shared
+																16-a:useFromPass
+																	17-k:i
+																		18-v:d
+																			19-s:DepthCascades
+															15-o:material
+											11-k:i
+												12-o:d
+													13-v:type
+														14-s:DebugPass
+													13-o:ptr
+														14-a:shaders
+															15-k:item
+																16-v:first
+																	17-s:mesh
+																16-o:second
+																	17-v:shaderPath
+																		18-s:Engine/Shaders/Gizmo/wire-mesh.srsl
+															15-k:item
+																16-v:first
+																	17-s:line
+																16-o:second
+																	17-v:shaderPath
+																		18-s:Engine/Shaders/line.srsl
+											11-k:i
+												12-o:d
+													13-v:type
+														14-s:ClearBuffersPass
+													13-o:ptr
+														14-v:clearColor
+															15-b:false
+											11-k:i
+												12-o:d
+													13-v:type
+														14-s:MeshDrawerPass
+													13-o:ptr
+														14-a:allowedLayers
+															15-k:i
+																16-v:d
+																	17-s:Gizmo
+														14-o:samplers
+														14-o:uniforms
+															15-o:shared
+															15-o:material
+										10-o:data
+											11-a:clearColors
+												12-k:i
+													13-o:d
+												12-k:i
+													13-o:d
+												12-k:i
+													13-o:d
+											11-v:frameBufferName
+												12-s:Main
+											11-o:depth
+												12-v:has
+													13-b:true
+												12-v:value
+													13-f:1
 							7-k:i
 								8-o:d
 									9-v:type
@@ -104,96 +268,173 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:type
-										10-s:FrameBufferPass
+										10-s:SwapchainPass
 									9-o:ptr
-										10-v:customName
-											11-s:PostProcess
 										10-a:passes
 											11-k:i
 												12-o:d
 													13-v:type
-														14-s:MeshDrawerPass
+														14-s:PostProcessPass
 													13-o:ptr
-														14-a:allowedLayers
-															15-k:i
-																16-v:d
-																	17-s:Default
-															15-k:i
-																16-v:d
-																	17-s:Opaque
 														14-o:samplers
 															15-a:samplers
 																16-k:i
 																	17-o:d
 																		18-v:id
-																			19-s:shadowMap
+																			19-s:colorMap
 																		18-v:usageType
-																			19-s:FrameBufferDepth
+																			19-s:FrameBufferColor
 																		18-v:fboName
-																			19-s:DepthCascades
-														14-o:uniforms
-															15-o:shared
-																16-a:useFromPass
-																	17-k:i
-																		18-v:d
-																			19-s:DepthCascades
-															15-o:material
-											11-k:i
-												12-o:d
-													13-v:type
-														14-s:SkyboxPass
-													13-o:ptr
-														14-v:skyboxPath
-															15-s:Engine/Skyboxes/Sun.png
-														14-v:shaderPath
-															15-s:Engine/Shaders/skybox.srsl
-											11-k:i
-												12-o:d
-													13-v:type
-														14-s:MeshDrawerPass
-													13-o:ptr
-														14-a:disallowedLayers
-															15-k:i
-																16-v:d
-																	17-s:Gizmo
-															15-k:i
-																16-v:d
-																	17-s:Default
-															15-k:i
-																16-v:d
-																	17-s:Opaque
-															15-k:i
-																16-v:d
-																	17-s:GizmoSelection
-														14-o:samplers
-															15-a:samplers
+																			19-s:Main
 																16-k:i
 																	17-o:d
 																		18-v:id
-																			19-s:shadowMap
+																			19-s:depthMap
 																		18-v:usageType
-																			19-s:FrameBufferDepth
+																			19-s:FrameBufferColor
 																		18-v:fboName
-																			19-s:DepthCascades
-														14-o:uniforms
-															15-o:shared
-																16-a:useFromPass
-																	17-k:i
-																		18-v:d
-																			19-s:DepthCascades
-															15-o:material
-										10-o:data
-											11-a:clearColors
-												12-k:i
-													13-o:d
-											11-v:frameBufferName
-												12-s:PostProcess
-											11-o:depth
-												12-v:has
-													13-b:true
-												12-v:value
-													13-f:1
+																			19-s:Main
+																		18-v:index
+																			19-i:1
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:positionMap
+																		18-v:usageType
+																			19-s:FrameBufferColor
+																		18-v:fboName
+																			19-s:Main
+																		18-v:index
+																			19-i:2
+														14-o:material
+															15-v:type
+																16-s:UniqueMaterial
+															15-o:ptr
+																16-o:data
+																	17-v:type
+																		18-s:MaterialData
+																	17-o:ptr
+																		18-a:shaderDefines
+																			19-k:item
+																				20-v:first
+																					21-s:SR_CLOUDS
+																				20-v:second
+																					21-s:
+																		18-o:defaultShader
+																			19-v:shaderPath
+																				20-s:Engine/Shaders/post-process.srsl
+																			19-a:uniforms
+																				20-k:i
+																					21-o:d
+																						22-v:id
+																							23-s:vignetteIntensity
+																						22-v:type
+																							23-s:Float
+																						22-v:value
+																							23-f:0.587000012
+																				20-k:i
+																					21-o:d
+																						22-v:id
+																							23-s:boundsMin
+																						22-v:type
+																							23-s:Vec3
+																						22-o:value
+																							23-v:x
+																								24-f:-400
+																							23-v:y
+																								24-f:70
+																							23-v:z
+																								24-f:-400
+																				20-k:i
+																					21-o:d
+																						22-v:id
+																							23-s:boundsMax
+																						22-v:type
+																							23-s:Vec3
+																						22-o:value
+																							23-v:x
+																								24-f:400
+																							23-v:y
+																								24-f:105
+																							23-v:z
+																								24-f:400
+																				20-k:i
+																					21-o:d
+																						22-v:id
+																							23-s:cloudsSpeed
+																						22-v:type
+																							23-s:Float
+																						22-v:value
+																							23-f:0.800000012
+																				20-k:i
+																					21-o:d
+																						22-v:id
+																							23-s:stepSize
+																						22-v:type
+																							23-s:Float
+																						22-v:value
+																							23-f:0.861999989
+																				20-k:i
+																					21-o:d
+																						22-v:id
+																							23-s:fbmOctaves
+																						22-v:type
+																							23-s:Int
+																						22-v:value
+																							23-i:5
+																				20-k:i
+																					21-o:d
+																						22-v:id
+																							23-s:cloudsFrequency
+																						22-v:type
+																							23-s:Float
+																						22-v:value
+																							23-f:2.25500011
+																				20-k:i
+																					21-o:d
+																						22-v:id
+																							23-s:cloudsAmplitude
+																						22-v:type
+																							23-s:Float
+																						22-v:value
+																							23-f:0.5
+																				20-k:i
+																					21-o:d
+																						22-v:id
+																							23-s:chromaticAberrationIntensity
+																						22-v:type
+																							23-s:Float
+																						22-v:value
+																							23-f:1
 				4-a:frameBuffers
+					5-k:i
+						6-o:d
+							7-v:type
+								8-s:FrameBufferController
+							7-o:ptr
+								8-v:name
+									9-s:ColorBuffer
+								8-v:dynamicResizing
+									9-b:false
+								8-o:preScale
+									9-v:x
+										10-f:1
+									9-v:y
+										10-f:1
+								8-o:size
+									9-v:x
+										10-i:1024
+									9-v:y
+										10-i:1024
+								8-a:colorFormats
+									9-k:i
+										10-v:d
+											11-s:RGBA8_UNORM
+								8-o:features
+									9-v:colorTransferSrc
+										10-b:true
+								8-v:samples
+									9-i:1
 					5-k:i
 						6-o:d
 							7-v:type
@@ -230,7 +471,7 @@ use tabs: true
 								8-s:FrameBufferController
 							7-o:ptr
 								8-v:name
-									9-s:PostProcess
+									9-s:Main
 								8-o:preScale
 									9-v:x
 										10-f:1
@@ -240,14 +481,31 @@ use tabs: true
 									9-k:i
 										10-v:d
 											11-s:RGBA8_UNORM
+									9-k:i
+										10-v:d
+											11-s:R32_SFLOAT
+									9-k:i
+										10-v:d
+											11-s:RGBA16_SFLOAT
 								8-o:features
+									9-v:depthLoad
+										10-b:true
+									9-v:colorLoad
+										10-b:true
+									9-v:depthTransferDst
+										10-b:true
+									9-v:colorTransferDst
+										10-b:true
 				4-a:queues
 					5-k:i
 						6-o:d
 							7-a:frameBuffers
 								8-k:i
 									9-v:d
+										10-s:ColorBuffer
+								8-k:i
+									9-v:d
 										10-s:DepthCascades
 								8-k:i
 									9-v:d
-										10-s:PostProcess
+										10-s:Main

@@ -37,7 +37,7 @@ use tabs: true
 						6-v:mainCameraRenderTechnique
 							7-s:Engine/Render/PostProcess.srtech
 						6-v:editorCameraRenderTechnique
-							7-s:Editor/Render/PostProcess.srtech
+							7-s:Engine/Render/PostProcess.srtech
 				4-k:i
 					5-o:d
 						6-v:name
@@ -94,8 +94,10 @@ use tabs: true
 							7-k:i
 								8-v:d
 									9-s:SR_DEFINE_USE_CASCADED_SHADOW_MAP
+						6-v:mainCameraRenderTechnique
+							7-s:Engine/Render/PostProcessInstancing.srtech
 						6-v:editorCameraRenderTechnique
-							7-s:Editor/Render/PostProcessInstancing.srtech
+							7-s:Engine/Render/PostProcessInstancing.srtech
 				4-k:i
 					5-o:d
 						6-v:name

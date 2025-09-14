@@ -1,4 +1,5 @@
 sra format
+use tabs: true
 0-r:Root
 	1-o:asset
 		2-v:type
@@ -106,8 +107,6 @@ sra format
 													13-o:ptr
 														14-v:customName
 															15-s:DepthCascades
-														14-v:renderLayers
-															15-i:4
 														14-a:allowedLayers
 															15-k:i
 																16-v:d
@@ -130,6 +129,8 @@ sra format
 															15-f:895.919983
 														14-v:cascadeSplitLambda
 															15-f:0.959999979
+														14-v:instancing
+															15-b:true
 										10-o:data
 											11-v:frameBufferName
 												12-s:DepthCascades
@@ -165,7 +166,7 @@ sra format
 										10-b:false
 								8-v:samples
 									9-i:1
-								8-v:layersCount
+								8-v:arrayLayersCount
 									9-i:4
 								8-v:depthAspect
 									9-s:Depth

@@ -255,6 +255,8 @@ use tabs: true
 															15-f:895.919983
 														14-v:cascadeSplitLambda
 															15-f:0.959999979
+														14-v:instancing
+															15-b:true
 										10-o:data
 											11-v:frameBufferName
 												12-s:DepthCascades
@@ -266,10 +268,8 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:type
-										10-s:FrameBufferPass
+										10-s:SwapchainPass
 									9-o:ptr
-										10-v:customName
-											11-s:SceneView
 										10-a:passes
 											11-k:i
 												12-o:d
@@ -406,17 +406,6 @@ use tabs: true
 																							23-s:Float
 																						22-v:value
 																							23-f:1
-										10-o:data
-											11-a:clearColors
-												12-k:i
-													13-o:d
-											11-v:frameBufferName
-												12-s:SceneView
-											11-o:depth
-												12-v:has
-													13-b:true
-												12-v:value
-													13-f:1
 				4-a:frameBuffers
 					5-k:i
 						6-o:d
@@ -446,23 +435,6 @@ use tabs: true
 										10-b:true
 								8-v:samples
 									9-i:1
-					5-k:i
-						6-o:d
-							7-v:type
-								8-s:FrameBufferController
-							7-o:ptr
-								8-v:name
-									9-s:SceneView
-								8-o:preScale
-									9-v:x
-										10-f:1
-									9-v:y
-										10-f:1
-								8-a:colorFormats
-									9-k:i
-										10-v:d
-											11-s:RGBA8_UNORM
-								8-o:features
 					5-k:i
 						6-o:d
 							7-v:type
@@ -533,10 +505,7 @@ use tabs: true
 										10-s:ColorBuffer
 								8-k:i
 									9-v:d
-										10-s:Main
-								8-k:i
-									9-v:d
-										10-s:SceneView
-								8-k:i
-									9-v:d
 										10-s:DepthCascades
+								8-k:i
+									9-v:d
+										10-s:Main
