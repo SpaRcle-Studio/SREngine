@@ -49,6 +49,9 @@ namespace SR_GRAPH_NS {
         void UpdateFrameBuffer(const FBUpdateCallback& callback);
 
         void SetRenderTechnique(IRenderTechnique* pRenderTechnique) noexcept { m_renderTechnique = pRenderTechnique; }
+        void SetFrameBufferName(SR_UTILS_NS::StringAtom name) noexcept { m_frameBufferName = name; }
+        void SetClearColors(const ClearColors& colors) { m_clearColors = colors; }
+        void SetClearDepth(float_t depth) { m_depth = depth; }
 
     private:
         bool RenderFrameBuffer(const FBRenderCallback& callback, uint8_t layers);

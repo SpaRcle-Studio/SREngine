@@ -80,6 +80,8 @@ namespace SR_GRAPH_NS {
         void SetRenderScene(const RenderScenePtr& pRScene);
         void SetRenderTechniqueData(RenderTechniqueData&& data);
 
+        SR_NODISCARD const RenderTechniqueData& GetRenderTechniqueData() const noexcept { return m_data; }
+        SR_NODISCARD RenderTechniqueData& GetRenderTechniqueData() noexcept { return m_data; }
         SR_NODISCARD const CameraPtr& GetCamera() const noexcept { return m_camera; }
         SR_NODISCARD const RenderScenePtr& GetRenderScene() const noexcept { return m_renderScene; }
         SR_NODISCARD bool IsEmpty() const;
@@ -88,6 +90,7 @@ namespace SR_GRAPH_NS {
 
         void OnResize(const SR_MATH_NS::UVector2& size);
         void OnMultisampleChanged();
+        void OnHierarchyChanged();
 
         void ForEachPass(const std::function<void(BasePass&)>& func);
 

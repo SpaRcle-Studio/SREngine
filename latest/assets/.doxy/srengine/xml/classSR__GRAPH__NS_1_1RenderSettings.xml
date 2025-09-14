@@ -110,6 +110,21 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Settings/RenderSettings.h" line="68" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Settings/RenderSettings.h" bodystart="68" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderSettings_1a3516acb92f6c9c3384d6a220045a0c31" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_UTILS_NS::StringAtom SR_GRAPH_NS::RenderSettings::editorSceneImageName</definition>
+        <argsstring></argsstring>
+        <name>editorSceneImageName</name>
+        <qualifiedname>SR_GRAPH_NS::RenderSettings::editorSceneImageName</qualifiedname>
+        <initializer>= &quot;SceneView&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Settings/RenderSettings.h" line="70" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Settings/RenderSettings.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderSettings_1a5481d57129b5a9deceb38a794e9cff20" prot="public" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="structSR__GRAPH__NS_1_1RenderSettingsPreset" kindref="compound">RenderSettingsPreset</ref> &gt;</type>
         <definition>std::vector&lt;RenderSettingsPreset&gt; SR_GRAPH_NS::RenderSettings::presets</definition>
@@ -122,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Settings/RenderSettings.h" line="71" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Settings/RenderSettings.h" bodystart="71" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Settings/RenderSettings.h" line="73" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Settings/RenderSettings.h" bodystart="73" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderSettings_1ab4b775ac8ab8b506affff257f3e013d6" prot="public" static="no" mutable="no">
         <type><ref refid="structSR__GRAPH__NS_1_1RenderSettingsPreset" kindref="compound">RenderSettingsPreset</ref></type>
@@ -136,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Settings/RenderSettings.h" line="73" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Settings/RenderSettings.h" bodystart="73" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Settings/RenderSettings.h" line="75" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Settings/RenderSettings.h" bodystart="75" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -225,6 +240,7 @@
         </childnode>
         <childnode refid="11" relation="usage">
           <edgelabel>appName</edgelabel>
+          <edgelabel>editorSceneImageName</edgelabel>
           <edgelabel>engineName</edgelabel>
         </childnode>
         <childnode refid="12" relation="usage">
@@ -316,7 +332,7 @@
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Settings/RenderSettings.h" line="41" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Settings/RenderSettings.h" bodystart="41" bodyend="75"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Settings/RenderSettings.h" line="41" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Settings/RenderSettings.h" bodystart="41" bodyend="77"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1af9087ca5182397a9c7d3b92fb5591523" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderSettings</scope><name>AddDependency</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderSettings</scope><name>AddSerializationFlags</name></member>
@@ -339,6 +355,7 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1a700794249e341d5228920451cedf9ee7" prot="public" virt="virtual"><scope>SR_GRAPH_NS::RenderSettings</scope><name>Destroy</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderSettings</scope><name>DynamicCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderSettings_1ab397a116a889ce6646de61b567f5849e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderSettings</scope><name>editorPrefabSkybox</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderSettings_1a3516acb92f6c9c3384d6a220045a0c31" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderSettings</scope><name>editorSceneImageName</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderSettings_1af8737c565ac9b707a005ffd7a1c592f4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderSettings</scope><name>engineName</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a5dd9749c79cb65452e9e4d10efda42f8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderSettings</scope><name>Execute</name></member>
       <member refid="classSR__UTILS__NS_1_1Asset_1a0d4fff684ea928b986f9ee3de5b3af2a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderSettings</scope><name>EXTENSION_NAME</name></member>

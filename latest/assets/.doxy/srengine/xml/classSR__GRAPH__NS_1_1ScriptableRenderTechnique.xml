@@ -304,6 +304,8 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1ab9a8347f2812fce37f53741a5865758c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>GetReloadCount</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a416e7c6d7a9efac6b3922572ca435dd2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>GetRenderContext</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a181cc3715bbb27367619e1e0d5373003" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>GetRenderScene</name></member>
+      <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ab600e9aee016836f952392fc48e8bcb9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>GetRenderTechniqueData</name></member>
+      <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1abe3d0657713200e00b41f867df07af59" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>GetRenderTechniqueData</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a0186b5dcde6ac4e0d251590619639406" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>GetResourceHash</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ac4d26a90ba1c28b82f71b28d1eb77dc9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>GetResourceId</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1abbc56086aaf55e5a1ec9788dcecee316" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>GetResourceInfo</name></member>
@@ -364,6 +366,7 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1afb7bbbb99bc610ce2ec7c9eeefffca59" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>m_watchers</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual" ambiguityscope="SR_GRAPH_NS::"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>MakeShared</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual" ambiguityscope="SR_SRLM_NS::LogicalMachine::"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>MakeShared</name></member>
+      <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ae58d3701ac4edb1b23bfd3f4ef7082a2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>OnHierarchyChanged</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a154929248aba91ae3ef955c7e6dd8ee3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>OnMultisampleChanged</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a27569f8d47ee0c52ed5e385253e14460" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>OnPostLoad</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1afbe2a50f0f69bc0f52b51151058830d8" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>OnPostSave</name></member>

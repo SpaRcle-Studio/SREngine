@@ -55,6 +55,7 @@ namespace SR_GRAPH_NS {
         std::vector<SR_MATH_NS::Matrix4x4> m_cascadeMatrices;
         std::vector<float_t> m_cascadeSplitDepths;
         std::vector<float_t> m_cascadeRadii;
+        uint32_t m_cascadeCount = 4;
 
     };
 }

@@ -283,6 +283,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
         * **struct** [**DrawInfo**](structSR__GRAPH__NS_1_1DebugRenderer_1_1DrawInfo.md)     
     * **struct** [**DepthLayer**](structSR__GRAPH__NS_1_1DepthLayer.md)     
     * **class** [**DescriptorManager**](classSR__GRAPH__NS_1_1DescriptorManager.md)     
+    * **namespace** [**Details**](namespaceSR__GRAPH__NS_1_1Details.md)     
     * **class** [**DirectionalLight**](classSR__GRAPH__NS_1_1DirectionalLight.md)     
     * **class** [**EmptyPipeline**](classSR__GRAPH__NS_1_1EmptyPipeline.md) 
     * **class** [**FileMaterial**](classSR__GRAPH__NS_1_1FileMaterial.md)     

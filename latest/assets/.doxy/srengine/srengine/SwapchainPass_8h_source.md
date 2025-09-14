@@ -25,6 +25,9 @@ namespace SR_GRAPH_NS {
     public:
         bool Render() override;
 
+        SR_NODISCARD float_t GetClearDepth() const { return m_depth; }
+        SR_NODISCARD SR_MATH_NS::FColor GetClearColor() const { return m_color; }
+
     private:
         float_t m_depth = 1.f;
         SR_MATH_NS::FColor m_color;

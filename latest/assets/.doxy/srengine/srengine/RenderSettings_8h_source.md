@@ -56,6 +56,7 @@ namespace SR_GRAPH_NS {
         SR_UTILS_NS::Path editorPrefabSkybox = "Engine/Skyboxes/Gray.png";
         SR_UTILS_NS::Path defaultShader = "Engine/Shaders/standard.srsl";
         SR_UTILS_NS::Path defaultMaterial = "Engine/Materials/default.mat";
+        SR_UTILS_NS::StringAtom editorSceneImageName = "SceneView";
 
         std::vector<RenderSettingsPreset> presets;
         RenderSettingsPreset defaultPreset;

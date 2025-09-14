@@ -265,6 +265,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>m_basicManually</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1aa05bb9ae4b5ec4c6a9b6510e52f04bb4" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>m_cameraPosition</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a6029524d0a90c307ea0540df53b25f57" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>m_cameraRotation</name></member>
+      <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a5505d57a93b179d988c1288a86a5c1a8" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>m_cascadeCount</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a30ef6bef23016db8551b58cdc094c84c" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>m_cascadeMatrices</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1ace632509831d31d90df85293e1e39587" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>m_cascadeRadii</name></member>
       <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a7c88f47420b46139ad9dfb1a41cc0d4e" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>m_cascadeSplitDepths</name></member>
@@ -314,6 +315,7 @@
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ad5832c5a9f8abf85ac97967105d3a953" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>RenderScenePtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>Reset</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>Save</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a669b48407e7d4d60c055424228649923" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>SetCustomName</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a06217f9edbf0e8c831a6cc411826f799" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>SetParent</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>SetPointerFromBase</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1aeb792b76365dc9be8ea0675b7ec36b83" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>SetRenderTechnique</name></member>

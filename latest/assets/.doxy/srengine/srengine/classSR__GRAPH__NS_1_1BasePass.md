@@ -188,6 +188,7 @@ See [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 | virtual bool | [**PreRender**](#function-prerender) () <br>_Вызывается только во время построения_  |
 | virtual void | [**Prepare**](#function-prepare) () <br>_Вызывается всегда но полсе оверлея_  |
 | virtual bool | [**Render**](#function-render) () <br>_Вызывается только во время построения_  |
+|  void | [**SetCustomName**](#function-setcustomname) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & name) <br> |
 | virtual void | [**SetParent**](#function-setparent) ([**BasePass**](classSR__GRAPH__NS_1_1BasePass.md) \* pParent) <br> |
 | virtual void | [**SetRenderTechnique**](#function-setrendertechnique) ([**IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \* pRenderTechnique) <br> |
 | virtual void | [**Update**](#function-update) () <br>_Вызывается постоянно после построения_  |
@@ -915,6 +916,21 @@ virtual void SR_GRAPH_NS::BasePass::Prepare ()
 _Вызывается только во время построения_ 
 ```C++
 inline virtual bool SR_GRAPH_NS::BasePass::Render () 
+```
+
+
+
+
+<hr>
+
+
+
+### function SetCustomName 
+
+```C++
+inline void SR_GRAPH_NS::BasePass::SetCustomName (
+    const SR_UTILS_NS::StringAtom & name
+) 
 ```
 
 

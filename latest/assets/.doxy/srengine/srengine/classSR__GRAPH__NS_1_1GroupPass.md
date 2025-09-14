@@ -185,6 +185,8 @@ See [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 | virtual void | [**DeInit**](#function-deinit) () override<br> |
 | virtual SR\_NODISCARD [**BasePass**](classSR__GRAPH__NS_1_1BasePass.md) \* | [**FindPass**](#function-findpass) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) override<br> |
 | virtual void | [**ForEachPass**](#function-foreachpass) (const std::function&lt; void([**BasePass**](classSR__GRAPH__NS_1_1BasePass.md) &)&gt; & func) override<br> |
+|  const std::vector&lt; BasePass::Ptr &gt; & | [**GetPasses**](#function-getpasses-12) () const<br> |
+|  std::vector&lt; BasePass::Ptr &gt; & | [**GetPasses**](#function-getpasses-22) () <br> |
 | virtual bool | [**Init**](#function-init) () override<br> |
 | virtual void | [**OnMultisampleChanged**](#function-onmultisamplechanged) () override<br> |
 | virtual void | [**OnResize**](#function-onresize) (const SR\_MATH\_NS::UVector2 & size) override<br> |
@@ -195,6 +197,7 @@ See [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 | virtual void | [**Prepare**](#function-prepare) () override<br>_Вызывается всегда но полсе оверлея_  |
 | virtual bool | [**Render**](#function-render) () override<br>_Вызывается только во время построения_  |
 | virtual void | [**SetParent**](#function-setparent) ([**BasePass**](classSR__GRAPH__NS_1_1BasePass.md) \* pParent) override<br> |
+|  void | [**SetPasses**](#function-setpasses) (const std::vector&lt; BasePass::Ptr &gt; & passes) <br> |
 | virtual void | [**SetRenderTechnique**](#function-setrendertechnique) ([**IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \* pRenderTechnique) override<br> |
 | virtual void | [**Update**](#function-update) () override<br>_Вызывается постоянно после построения_  |
 |   | [**~GroupPass**](#function-grouppass) () override<br> |
@@ -233,6 +236,7 @@ See [SR\_GRAPH\_NS::BasePass](classSR__GRAPH__NS_1_1BasePass.md)
 | virtual bool | [**PreRender**](classSR__GRAPH__NS_1_1BasePass.md#function-prerender) () <br>_Вызывается только во время построения_  |
 | virtual void | [**Prepare**](classSR__GRAPH__NS_1_1BasePass.md#function-prepare) () <br>_Вызывается всегда но полсе оверлея_  |
 | virtual bool | [**Render**](classSR__GRAPH__NS_1_1BasePass.md#function-render) () <br>_Вызывается только во время построения_  |
+|  void | [**SetCustomName**](classSR__GRAPH__NS_1_1BasePass.md#function-setcustomname) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & name) <br> |
 | virtual void | [**SetParent**](classSR__GRAPH__NS_1_1BasePass.md#function-setparent) ([**BasePass**](classSR__GRAPH__NS_1_1BasePass.md) \* pParent) <br> |
 | virtual void | [**SetRenderTechnique**](classSR__GRAPH__NS_1_1BasePass.md#function-setrendertechnique) ([**IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \* pRenderTechnique) <br> |
 | virtual void | [**Update**](classSR__GRAPH__NS_1_1BasePass.md#function-update) () <br>_Вызывается постоянно после построения_  |
@@ -582,6 +586,32 @@ Implements [*SR\_GRAPH\_NS::BasePass::ForEachPass*](classSR__GRAPH__NS_1_1BasePa
 
 
 
+### function GetPasses [1/2]
+
+```C++
+inline const std::vector< BasePass::Ptr > & SR_GRAPH_NS::GroupPass::GetPasses () const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetPasses [2/2]
+
+```C++
+inline std::vector< BasePass::Ptr > & SR_GRAPH_NS::GroupPass::GetPasses () 
+```
+
+
+
+
+<hr>
+
+
+
 ### function Init 
 
 ```C++
@@ -735,6 +765,21 @@ virtual void SR_GRAPH_NS::GroupPass::SetParent (
 
 
 Implements [*SR\_GRAPH\_NS::BasePass::SetParent*](classSR__GRAPH__NS_1_1BasePass.md#function-setparent)
+
+
+<hr>
+
+
+
+### function SetPasses 
+
+```C++
+inline void SR_GRAPH_NS::GroupPass::SetPasses (
+    const std::vector< BasePass::Ptr > & passes
+) 
+```
+
+
 
 
 <hr>

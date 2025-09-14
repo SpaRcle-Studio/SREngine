@@ -279,6 +279,8 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechnique</scope><name>GetRawPtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a416e7c6d7a9efac6b3922572ca435dd2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechnique</scope><name>GetRenderContext</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a181cc3715bbb27367619e1e0d5373003" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechnique</scope><name>GetRenderScene</name></member>
+      <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ab600e9aee016836f952392fc48e8bcb9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechnique</scope><name>GetRenderTechniqueData</name></member>
+      <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1abe3d0657713200e00b41f867df07af59" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechnique</scope><name>GetRenderTechniqueData</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FileRenderTechnique</scope><name>GetSRClass</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechnique</scope><name>GetThis</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechnique</scope><name>GetUncheckedRef</name></member>
@@ -304,6 +306,7 @@
       <member refid="classSR__GRAPH__NS_1_1FileRenderTechnique_1a60db32b8f851637f943cb3222d3963a6" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechnique</scope><name>m_resource</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1aca3bc98ac7d59e4db78270373d6cdfb5" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechnique</scope><name>m_surfaceSize</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechnique</scope><name>MakeShared</name></member>
+      <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ae58d3701ac4edb1b23bfd3f4ef7082a2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechnique</scope><name>OnHierarchyChanged</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a154929248aba91ae3ef955c7e6dd8ee3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechnique</scope><name>OnMultisampleChanged</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1af6e218eb78b4c552e57321a2f83f71a9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechnique</scope><name>OnResize</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechnique</scope><name>operator bool</name></member>

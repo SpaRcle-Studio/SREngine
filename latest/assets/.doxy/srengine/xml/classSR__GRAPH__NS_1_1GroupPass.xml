@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="44" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" bodystart="44" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="49" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" bodystart="49" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -266,6 +266,52 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="36" column="14"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GroupPass_1a19f7d23951aadc042e27a66a87c33bc4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::vector&lt; BasePass::Ptr &gt; &amp;</type>
+        <definition>const std::vector&lt; BasePass::Ptr &gt; &amp; SR_GRAPH_NS::GroupPass::GetPasses</definition>
+        <argsstring>() const</argsstring>
+        <name>GetPasses</name>
+        <qualifiedname>SR_GRAPH_NS::GroupPass::GetPasses</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="38" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GroupPass_1a3f6be37f8a9eedaf070b93dab57363f2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; BasePass::Ptr &gt; &amp;</type>
+        <definition>std::vector&lt; BasePass::Ptr &gt; &amp; SR_GRAPH_NS::GroupPass::GetPasses</definition>
+        <argsstring>()</argsstring>
+        <name>GetPasses</name>
+        <qualifiedname>SR_GRAPH_NS::GroupPass::GetPasses</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="39" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GroupPass_1a35a946b3d86a2090b6b28291cbbcb668" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::GroupPass::SetPasses</definition>
+        <argsstring>(const std::vector&lt; BasePass::Ptr &gt; &amp;passes)</argsstring>
+        <name>SetPasses</name>
+        <qualifiedname>SR_GRAPH_NS::GroupPass::SetPasses</qualifiedname>
+        <param>
+          <type>const std::vector&lt; BasePass::Ptr &gt; &amp;</type>
+          <declname>passes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="41" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" bodystart="41" bodyend="41"/>
+      </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GroupPass_1a594fa96d1a4289e876ca241ad0a7cb0c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
         <definition>void SR_GRAPH_NS::GroupPass::ForEachPass</definition>
@@ -283,7 +329,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="38" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="43" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GroupPass_1a77f893a5d366530d9e5b1f4cd6371b2d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1BasePass" kindref="compound">BasePass</ref> *</type>
@@ -302,7 +348,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="40" column="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="45" column="31"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -440,7 +486,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="11" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" bodystart="11" bodyend="46"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" line="11" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/GroupPass.h" bodystart="11" bodyend="51"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GroupPass</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GroupPass</scope><name>AllocateStatic</name></member>
@@ -464,6 +510,8 @@
       <member refid="classSR__UTILS__NS_1_1SRClass_1a16a351eac01dde110e273cfd05f1f7ed" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::GroupPass</scope><name>GetMeta</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a16837ff730fb4e276450a124d70eb2e4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GroupPass</scope><name>GetMetaStatic</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a8f05935a0013471af3796065104ddd87" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GroupPass</scope><name>GetParent</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GroupPass_1a19f7d23951aadc042e27a66a87c33bc4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GroupPass</scope><name>GetPasses</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GroupPass_1a3f6be37f8a9eedaf070b93dab57363f2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GroupPass</scope><name>GetPasses</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a8bcb00355e5ecacfb2d2275eae0fbc87" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GroupPass</scope><name>GetPassName</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a2677310aa8207b938d07bbe130dadcf9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GroupPass</scope><name>GetPipeline</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GroupPass</scope><name>GetPtrData</name></member>
@@ -526,7 +574,9 @@
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ad5832c5a9f8abf85ac97967105d3a953" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GroupPass</scope><name>RenderScenePtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::GroupPass</scope><name>Reset</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_GRAPH_NS::GroupPass</scope><name>Save</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a669b48407e7d4d60c055424228649923" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GroupPass</scope><name>SetCustomName</name></member>
       <member refid="classSR__GRAPH__NS_1_1GroupPass_1ada00c70fad34453fe5e6daeaa9525f08" prot="public" virt="virtual"><scope>SR_GRAPH_NS::GroupPass</scope><name>SetParent</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GroupPass_1a35a946b3d86a2090b6b28291cbbcb668" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GroupPass</scope><name>SetPasses</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::GroupPass</scope><name>SetPointerFromBase</name></member>
       <member refid="classSR__GRAPH__NS_1_1GroupPass_1a482bd1243f9b252fa81b99aeaa88617c" prot="public" virt="virtual"><scope>SR_GRAPH_NS::GroupPass</scope><name>SetRenderTechnique</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a65e58bf20b3acc95f7e07f4cef52facb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GroupPass</scope><name>ShaderPtr</name></member>

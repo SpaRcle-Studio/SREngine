@@ -101,6 +101,7 @@ namespace SR_GRAPH_NS {
     private:
         std::vector<RenderQueuePtr> m_renderQueues;
         SR_HTYPES_NS::Time& m_time;
+        std::vector<BasePass*> m_useSharedFromPass;
 
         uint8_t m_renderLayers = 1;
         std::set<SR_UTILS_NS::StringAtom> m_allowedLayers;

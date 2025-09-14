@@ -5,6 +5,7 @@
     <innerfile refid="FbxLoader_8h">FbxLoader.h</innerfile>
     <innerfile refid="ImageLoader_8h">ImageLoader.h</innerfile>
     <innerfile refid="ObjLoader_8h">ObjLoader.h</innerfile>
+    <innerfile refid="RenderTechniquePostProcess_8h">RenderTechniquePostProcess.h</innerfile>
     <innerfile refid="ShaderProperties_8h">ShaderProperties.h</innerfile>
     <innerfile refid="SRSL_8h">SRSL.h</innerfile>
     <innerfile refid="SRSLParser_8h">SRSLParser.h</innerfile>

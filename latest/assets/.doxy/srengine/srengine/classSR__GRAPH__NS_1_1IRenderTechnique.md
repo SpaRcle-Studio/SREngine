@@ -146,10 +146,13 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetName**](#function-getname) () noexcept const<br> |
 |  SR\_NODISCARD const RenderTechniqueQueues & | [**GetQueues**](#function-getqueues) () const<br> |
 |  SR\_NODISCARD const RenderScenePtr & | [**GetRenderScene**](#function-getrenderscene) () noexcept const<br> |
+|  SR\_NODISCARD const [**RenderTechniqueData**](structSR__GRAPH__NS_1_1RenderTechniqueData.md) & | [**GetRenderTechniqueData**](#function-getrendertechniquedata-12) () noexcept const<br> |
+|  SR\_NODISCARD [**RenderTechniqueData**](structSR__GRAPH__NS_1_1RenderTechniqueData.md) & | [**GetRenderTechniqueData**](#function-getrendertechniquedata-22) () noexcept<br> |
 |   | [**IRenderTechnique**](#function-irendertechnique) () <br> |
 |  SR\_NODISCARD bool | [**IsEmpty**](#function-isempty) () const<br> |
 |  SR\_NODISCARD bool | [**IsTechniqueDead**](#function-istechniquedead) () const<br> |
 |  void | [**KillTechnique**](#function-killtechnique) () <br> |
+|  void | [**OnHierarchyChanged**](#function-onhierarchychanged) () <br> |
 |  void | [**OnMultisampleChanged**](#function-onmultisamplechanged) () <br> |
 |  void | [**OnResize**](#function-onresize) (const SR\_MATH\_NS::UVector2 & size) <br> |
 |  bool | [**Overlay**](#function-overlay) () <br> |
@@ -570,6 +573,32 @@ inline SR_NODISCARD const RenderScenePtr & SR_GRAPH_NS::IRenderTechnique::GetRen
 
 
 
+### function GetRenderTechniqueData [1/2]
+
+```C++
+inline SR_NODISCARD const RenderTechniqueData & SR_GRAPH_NS::IRenderTechnique::GetRenderTechniqueData () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetRenderTechniqueData [2/2]
+
+```C++
+inline SR_NODISCARD RenderTechniqueData & SR_GRAPH_NS::IRenderTechnique::GetRenderTechniqueData () noexcept
+```
+
+
+
+
+<hr>
+
+
+
 ### function IRenderTechnique 
 
 ```C++
@@ -613,6 +642,19 @@ SR_NODISCARD bool SR_GRAPH_NS::IRenderTechnique::IsTechniqueDead () const
 
 ```C++
 void SR_GRAPH_NS::IRenderTechnique::KillTechnique () 
+```
+
+
+
+
+<hr>
+
+
+
+### function OnHierarchyChanged 
+
+```C++
+void SR_GRAPH_NS::IRenderTechnique::OnHierarchyChanged () 
 ```
 
 

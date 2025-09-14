@@ -130,6 +130,7 @@
     <innerclass refid="classSR__GRAPH__NS_1_1Window" prot="public">SR_GRAPH_NS::Window</innerclass>
     <innerclass refid="structSR__GRAPH__NS_1_1WireframeUBO" prot="public">SR_GRAPH_NS::WireframeUBO</innerclass>
     <innerclass refid="classSR__GRAPH__NS_1_1X11SurfaceInit" prot="public">SR_GRAPH_NS::X11SurfaceInit</innerclass>
+    <innernamespace refid="namespaceSR__GRAPH__NS_1_1Details">SR_GRAPH_NS::Details</innernamespace>
     <innernamespace refid="namespaceSR__GRAPH__NS_1_1GUI">SR_GRAPH_NS::GUI</innernamespace>
     <innernamespace refid="namespaceSR__GRAPH__NS_1_1Memory">SR_GRAPH_NS::Memory</innernamespace>
     <innernamespace refid="namespaceSR__GRAPH__NS_1_1SDF">SR_GRAPH_NS::SDF</innernamespace>

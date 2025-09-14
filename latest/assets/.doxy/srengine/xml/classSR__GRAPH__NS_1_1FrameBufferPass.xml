@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" line="31" column="29" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" bodystart="31" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" line="33" column="29" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" bodystart="33" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -96,6 +96,34 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" line="25" column="52"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1FrameBufferPass_1a5e4a4fbf5101a93e14e586c837275c1a" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1FrameBufferPassData" kindref="compound">FrameBufferPassData</ref> &amp;</type>
+        <definition>SR_NODISCARD FrameBufferPassData &amp; SR_GRAPH_NS::FrameBufferPass::GetFrameBufferPassData</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>GetFrameBufferPassData</name>
+        <qualifiedname>SR_GRAPH_NS::FrameBufferPass::GetFrameBufferPassData</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" line="26" column="42" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" bodystart="26" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1FrameBufferPass_1ab2501a927c1995a6fb4f38ceff862514" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="classSR__GRAPH__NS_1_1FrameBufferPassData" kindref="compound">FrameBufferPassData</ref> &amp;</type>
+        <definition>SR_NODISCARD const FrameBufferPassData &amp; SR_GRAPH_NS::FrameBufferPass::GetFrameBufferPassData</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetFrameBufferPassData</name>
+        <qualifiedname>SR_GRAPH_NS::FrameBufferPass::GetFrameBufferPassData</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" line="27" column="48" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" bodystart="27" bodyend="27"/>
+      </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FrameBufferPass_1a4fb00839c6dbf5d53bc81cf86bcf4cfb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
         <definition>void SR_GRAPH_NS::FrameBufferPass::SetRenderTechnique</definition>
@@ -113,7 +141,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" line="27" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" line="29" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -251,7 +279,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" line="16" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" bodystart="16" bodyend="33"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" line="16" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" bodystart="16" bodyend="35"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPass</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPass</scope><name>AllocateStatic</name></member>
@@ -274,9 +302,13 @@
       <member refid="classSR__UTILS__NS_1_1SRClass_1a97a0919298e9d1d53220613bded5ba69" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPass</scope><name>GetClassStaticName</name></member>
       <member refid="classSR__GRAPH__NS_1_1FrameBufferPass_1a2ec0e8ec50d0cd6cdede44e251416b1d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPass</scope><name>GetClearColors</name></member>
       <member refid="classSR__GRAPH__NS_1_1FrameBufferPass_1afd2023ca8713aec3e4b4d09b49e640f8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPass</scope><name>GetFrameBuffer</name></member>
+      <member refid="classSR__GRAPH__NS_1_1FrameBufferPass_1a5e4a4fbf5101a93e14e586c837275c1a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPass</scope><name>GetFrameBufferPassData</name></member>
+      <member refid="classSR__GRAPH__NS_1_1FrameBufferPass_1ab2501a927c1995a6fb4f38ceff862514" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPass</scope><name>GetFrameBufferPassData</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a16a351eac01dde110e273cfd05f1f7ed" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::FrameBufferPass</scope><name>GetMeta</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a16837ff730fb4e276450a124d70eb2e4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPass</scope><name>GetMetaStatic</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a8f05935a0013471af3796065104ddd87" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPass</scope><name>GetParent</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GroupPass_1a19f7d23951aadc042e27a66a87c33bc4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPass</scope><name>GetPasses</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GroupPass_1a3f6be37f8a9eedaf070b93dab57363f2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPass</scope><name>GetPasses</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a8bcb00355e5ecacfb2d2275eae0fbc87" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPass</scope><name>GetPassName</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a2677310aa8207b938d07bbe130dadcf9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPass</scope><name>GetPipeline</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPass</scope><name>GetPtrData</name></member>
@@ -339,7 +371,9 @@
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ad5832c5a9f8abf85ac97967105d3a953" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPass</scope><name>RenderScenePtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FrameBufferPass</scope><name>Reset</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FrameBufferPass</scope><name>Save</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a669b48407e7d4d60c055424228649923" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPass</scope><name>SetCustomName</name></member>
       <member refid="classSR__GRAPH__NS_1_1GroupPass_1ada00c70fad34453fe5e6daeaa9525f08" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FrameBufferPass</scope><name>SetParent</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GroupPass_1a35a946b3d86a2090b6b28291cbbcb668" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPass</scope><name>SetPasses</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FrameBufferPass</scope><name>SetPointerFromBase</name></member>
       <member refid="classSR__GRAPH__NS_1_1FrameBufferPass_1a4fb00839c6dbf5d53bc81cf86bcf4cfb" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FrameBufferPass</scope><name>SetRenderTechnique</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a65e58bf20b3acc95f7e07f4cef52facb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPass</scope><name>ShaderPtr</name></member>

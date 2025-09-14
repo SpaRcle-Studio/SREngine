@@ -929,6 +929,7 @@
     <member refid="classSR__GRAPH__NS_1_1BasePass_1a13c0deb13fa86f507531d102f5fd8d7a" kind="function"><name>UseUniformsFromAnotherPass</name></member>
     <member refid="classSR__GRAPH__NS_1_1BasePass_1a5a009986d09b0e8199c4d40f2eeac6f0" kind="function"><name>UseSamplers</name></member>
     <member refid="classSR__GRAPH__NS_1_1BasePass_1af58022a7df1f3d5b8343647ab9ad78f8" kind="function"><name>SetRenderTechnique</name></member>
+    <member refid="classSR__GRAPH__NS_1_1BasePass_1a669b48407e7d4d60c055424228649923" kind="function"><name>SetCustomName</name></member>
     <member refid="classSR__GRAPH__NS_1_1BasePass_1a8bcb00355e5ecacfb2d2275eae0fbc87" kind="function"><name>GetPassName</name></member>
     <member refid="classSR__GRAPH__NS_1_1BasePass_1aa59c3079158cb09647d0499848d1e7e3" kind="function"><name>IsActive</name></member>
     <member refid="classSR__GRAPH__NS_1_1BasePass_1ab71fffa3ce7eb1e2b640cd6bbd7aecec" kind="function"><name>GetRenderScene</name></member>
@@ -1369,6 +1370,7 @@
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a30ef6bef23016db8551b58cdc094c84c" kind="variable"><name>m_cascadeMatrices</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a7c88f47420b46139ad9dfb1a41cc0d4e" kind="variable"><name>m_cascadeSplitDepths</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1ace632509831d31d90df85293e1e39587" kind="variable"><name>m_cascadeRadii</name></member>
+    <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a5505d57a93b179d988c1288a86a5c1a8" kind="variable"><name>m_cascadeCount</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1aa389d8b46444dfa274aa68cc69e67d85" kind="function"><name>GetCascadeMatrices</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a013ac2ccec3d56f755d585ac7129b981" kind="function"><name>GetSplitDepths</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1ac4f1c890a61f18a14bf498b13e4c9310" kind="function"><name>Render</name></member>
@@ -4162,6 +4164,7 @@
     <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1a4b3a25d1947ccbe17eae07731a7880c9" kind="function"><name>GetLayersCount</name></member>
     <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1a9d947e68ad1ad8ffceebbfbafb0439e8" kind="function"><name>GetName</name></member>
     <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1a5427a7a1de770ed4c28b11c62a0eb774" kind="function"><name>InitializeFramebuffer</name></member>
+    <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1a50626fd772bee768bf26ddafe5d6b210" kind="function"><name>SetName</name></member>
     <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1a1c5df9597dbc3c142def9743fb67fa02" kind="function"><name>OnResize</name></member>
   </compound>
   <compound refid="structSR__GRAPH__NS_1_1FrameBufferFeatures" kind="struct"><name>SR_GRAPH_NS::FrameBufferFeatures</name>
@@ -4182,6 +4185,8 @@
     <member refid="classSR__GRAPH__NS_1_1FrameBufferPass_1ab36b8ca468db0ec633189ccd073c53ff" kind="function"><name>Update</name></member>
     <member refid="classSR__GRAPH__NS_1_1FrameBufferPass_1a2ec0e8ec50d0cd6cdede44e251416b1d" kind="function"><name>GetClearColors</name></member>
     <member refid="classSR__GRAPH__NS_1_1FrameBufferPass_1afd2023ca8713aec3e4b4d09b49e640f8" kind="function"><name>GetFrameBuffer</name></member>
+    <member refid="classSR__GRAPH__NS_1_1FrameBufferPass_1a5e4a4fbf5101a93e14e586c837275c1a" kind="function"><name>GetFrameBufferPassData</name></member>
+    <member refid="classSR__GRAPH__NS_1_1FrameBufferPass_1ab2501a927c1995a6fb4f38ceff862514" kind="function"><name>GetFrameBufferPassData</name></member>
     <member refid="classSR__GRAPH__NS_1_1FrameBufferPass_1a4fb00839c6dbf5d53bc81cf86bcf4cfb" kind="function"><name>SetRenderTechnique</name></member>
   </compound>
   <compound refid="classSR__GRAPH__NS_1_1FrameBufferPassData" kind="class"><name>SR_GRAPH_NS::FrameBufferPassData</name>
@@ -4204,6 +4209,9 @@
     <member refid="classSR__GRAPH__NS_1_1FrameBufferPassData_1a64c9525c08024f2689abb10b715f1dd7" kind="function"><name>RenderFrameBuffer</name></member>
     <member refid="classSR__GRAPH__NS_1_1FrameBufferPassData_1ada51fc2f39106461a0fd942ca2af748e" kind="function"><name>UpdateFrameBuffer</name></member>
     <member refid="classSR__GRAPH__NS_1_1FrameBufferPassData_1ad51868636d76e52df65af22ba01ce70a" kind="function"><name>SetRenderTechnique</name></member>
+    <member refid="classSR__GRAPH__NS_1_1FrameBufferPassData_1ab5f7892238f565ae7b5c51438881a4d3" kind="function"><name>SetFrameBufferName</name></member>
+    <member refid="classSR__GRAPH__NS_1_1FrameBufferPassData_1ab3687b0b80464f8bb2aa5ea266778de8" kind="function"><name>SetClearColors</name></member>
+    <member refid="classSR__GRAPH__NS_1_1FrameBufferPassData_1a6fed7135c69421095c4bc7b5d4d49fd4" kind="function"><name>SetClearDepth</name></member>
     <member refid="classSR__GRAPH__NS_1_1FrameBufferPassData_1ad85dde6cb9ab0f6aae425b5965e0e5d4" kind="function"><name>RenderFrameBuffer</name></member>
     <member refid="classSR__GRAPH__NS_1_1FrameBufferPassData_1a06fd4b7c97081d8753eb5ae66026943f" kind="function"><name>GetPipeline</name></member>
     <member refid="classSR__GRAPH__NS_1_1FrameBufferPassData_1ad8aaad9d183bee290981f9d3d73216d3" kind="function"><name>GetFrameBufferController</name></member>
@@ -4564,6 +4572,9 @@
     <member refid="classSR__GRAPH__NS_1_1GroupPass_1af1ea7ea9db878175331d7e78c3c06991" kind="function"><name>OnMultisampleChanged</name></member>
     <member refid="classSR__GRAPH__NS_1_1GroupPass_1a482bd1243f9b252fa81b99aeaa88617c" kind="function"><name>SetRenderTechnique</name></member>
     <member refid="classSR__GRAPH__NS_1_1GroupPass_1ada00c70fad34453fe5e6daeaa9525f08" kind="function"><name>SetParent</name></member>
+    <member refid="classSR__GRAPH__NS_1_1GroupPass_1a19f7d23951aadc042e27a66a87c33bc4" kind="function"><name>GetPasses</name></member>
+    <member refid="classSR__GRAPH__NS_1_1GroupPass_1a3f6be37f8a9eedaf070b93dab57363f2" kind="function"><name>GetPasses</name></member>
+    <member refid="classSR__GRAPH__NS_1_1GroupPass_1a35a946b3d86a2090b6b28291cbbcb668" kind="function"><name>SetPasses</name></member>
     <member refid="classSR__GRAPH__NS_1_1GroupPass_1a594fa96d1a4289e876ca241ad0a7cb0c" kind="function"><name>ForEachPass</name></member>
     <member refid="classSR__GRAPH__NS_1_1GroupPass_1a77f893a5d366530d9e5b1f4cd6371b2d" kind="function"><name>FindPass</name></member>
   </compound>
@@ -5374,6 +5385,8 @@
     <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a2119c9686c62b599fffcea483955d43a" kind="function"><name>SetCamera</name></member>
     <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a2fca4b2845f1c2cec6b501230ad6821f" kind="function"><name>SetRenderScene</name></member>
     <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ad732ee1e8d7f4d38e35eb1c48638a5ad" kind="function"><name>SetRenderTechniqueData</name></member>
+    <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ab600e9aee016836f952392fc48e8bcb9" kind="function"><name>GetRenderTechniqueData</name></member>
+    <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1abe3d0657713200e00b41f867df07af59" kind="function"><name>GetRenderTechniqueData</name></member>
     <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ad342c11dbb69517dbc72a13dd3b1a459" kind="function"><name>GetCamera</name></member>
     <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a181cc3715bbb27367619e1e0d5373003" kind="function"><name>GetRenderScene</name></member>
     <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a9c5f6a49b7b57933fdc7a57330b165aa" kind="function"><name>IsEmpty</name></member>
@@ -5381,6 +5394,7 @@
     <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a9f819ec627842eb611e774907f6dad71" kind="function"><name>GetName</name></member>
     <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1af6e218eb78b4c552e57321a2f83f71a9" kind="function"><name>OnResize</name></member>
     <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a154929248aba91ae3ef955c7e6dd8ee3" kind="function"><name>OnMultisampleChanged</name></member>
+    <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ae58d3701ac4edb1b23bfd3f4ef7082a2" kind="function"><name>OnHierarchyChanged</name></member>
     <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a207b721b3ad31d43c2d2da70c68772a6" kind="function"><name>ForEachPass</name></member>
     <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a0d18c8d1c684174738d7260c87a028e5" kind="function"><name>FindPass</name></member>
     <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a75042ed8700cd2b624bbe71f27719ec0" kind="function"><name>GetFrameBufferController</name></member>
@@ -6496,6 +6510,7 @@
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1abacb6a83c6d176a78433d3b0e5989fcf" kind="variable"><name>m_shaderMacros</name></member>
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1aba3d28907e7faad8896c4f3536f9d6e2" kind="variable"><name>m_renderQueues</name></member>
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7509203f3700de63d4fa28720bd5c5c8" kind="variable"><name>m_time</name></member>
+    <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a398b72a4a0acb48a3a44c15763117b8d" kind="variable"><name>m_useSharedFromPass</name></member>
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1ae5e3a20c2c773aeb1308a188cbced5b2" kind="variable"><name>m_renderLayers</name></member>
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a756bdb0dd83fc86f9095e3fd94355a57" kind="variable"><name>m_allowedLayers</name></member>
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a4b1d660b6f84b674d24c82a909edbaf7" kind="variable"><name>m_disallowedLayers</name></member>
@@ -9101,6 +9116,7 @@
     <member refid="classSR__GRAPH__NS_1_1RenderSettings_1ab397a116a889ce6646de61b567f5849e" kind="variable"><name>editorPrefabSkybox</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderSettings_1a1152768124a405c34f7c4e444bd66da2" kind="variable"><name>defaultShader</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderSettings_1a470d8b668c14eceacc250de85a2bc2fb" kind="variable"><name>defaultMaterial</name></member>
+    <member refid="classSR__GRAPH__NS_1_1RenderSettings_1a3516acb92f6c9c3384d6a220045a0c31" kind="variable"><name>editorSceneImageName</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderSettings_1a5481d57129b5a9deceb38a794e9cff20" kind="variable"><name>presets</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderSettings_1ab4b775ac8ab8b506affff257f3e013d6" kind="variable"><name>defaultPreset</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderSettings_1a486a5b315bbc187a788406f758615d11" kind="function"><name>GetPreset</name></member>
@@ -12017,6 +12033,8 @@
     <member refid="classSR__GRAPH__NS_1_1SwapchainPass_1ab6e948bef96bdfb5fa1788a3705d28ee" kind="variable"><name>m_depth</name></member>
     <member refid="classSR__GRAPH__NS_1_1SwapchainPass_1af9e33bd2ffb1bc69ca255bd24bf4b977" kind="variable"><name>m_color</name></member>
     <member refid="classSR__GRAPH__NS_1_1SwapchainPass_1af8ab62e5d15d700db602e5ea8079d5a1" kind="function"><name>Render</name></member>
+    <member refid="classSR__GRAPH__NS_1_1SwapchainPass_1a139ab029d46cadf538879a9e7445e2d9" kind="function"><name>GetClearDepth</name></member>
+    <member refid="classSR__GRAPH__NS_1_1SwapchainPass_1a34a15ac27ca6a89fbcd12b59b0b7b73d" kind="function"><name>GetClearColor</name></member>
   </compound>
   <compound refid="classSR__SRLM__NS_1_1SynchronizeNode" kind="class"><name>SR_SRLM_NS::SynchronizeNode</name>
     <member refid="classSR__SRLM__NS_1_1SynchronizeNode_1a862f9654cbdd2f2e8e3180c77bf931f6" kind="typedef"><name>Super</name></member>
@@ -14553,6 +14571,9 @@
     <member refid="MeshUtils_8h_1a26052e8477fdf358854ce6cbf9efa47d" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
     <member refid="MeshUtils_8h_1a100ef03176a6cbc0a94301b405aef1e8" kind="function"><name>CreateMeshByType</name></member>
   </compound>
+  <compound refid="namespaceSR__GRAPH__NS_1_1Details" kind="namespace"><name>SR_GRAPH_NS::Details</name>
+    <member refid="RenderTechniquePostProcess_8h_1ae908fefbc371f162ec564ecda1c72c6d" kind="function"><name>PostProcessRenderTechnique</name></member>
+  </compound>
   <compound refid="namespaceSR__GRAPH__NS_1_1GUI" kind="namespace"><name>SR_GRAPH_NS::GUI</name>
     <member refid="Graphics_2inc_2Graphics_2GUI_2Editor_2MessageBox_8h_1a346b8b32e5ec83aac7eb5765f72806b1" kind="enum"><name>MessageBoxType</name></member>
     <member refid="Graphics_2inc_2Graphics_2GUI_2Editor_2MessageBox_8h_1a346b8b32e5ec83aac7eb5765f72806b1a4059b0251f66a18cb56f544728796875" kind="enumvalue"><name>Info</name></member>
@@ -15975,6 +15996,8 @@
   <compound refid="ImageLoader_8h" kind="file"><name>ImageLoader.h</name>
   </compound>
   <compound refid="ObjLoader_8h" kind="file"><name>ObjLoader.h</name>
+  </compound>
+  <compound refid="RenderTechniquePostProcess_8h" kind="file"><name>RenderTechniquePostProcess.h</name>
   </compound>
   <compound refid="ShaderProperties_8h" kind="file"><name>ShaderProperties.h</name>
   </compound>

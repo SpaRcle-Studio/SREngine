@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h" line="20" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h" bodystart="20" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h" line="23" column="17" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h" bodystart="23" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1SwapchainPass_1af9e33bd2ffb1bc69ca255bd24bf4b977" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">SR_MATH_NS::FColor</ref></type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h" line="22" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h" bodystart="22" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h" line="25" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h" bodystart="25" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -50,6 +50,34 @@
         <inbodydescription>
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h" line="16" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1SwapchainPass_1a139ab029d46cadf538879a9e7445e2d9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD float_t</type>
+        <definition>SR_NODISCARD float_t SR_GRAPH_NS::SwapchainPass::GetClearDepth</definition>
+        <argsstring>() const</argsstring>
+        <name>GetClearDepth</name>
+        <qualifiedname>SR_GRAPH_NS::SwapchainPass::GetClearDepth</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h" line="18" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h" bodystart="18" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1SwapchainPass_1a34a15ac27ca6a89fbcd12b59b0b7b73d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">SR_MATH_NS::FColor</ref></type>
+        <definition>SR_NODISCARD SR_MATH_NS::FColor SR_GRAPH_NS::SwapchainPass::GetClearColor</definition>
+        <argsstring>() const</argsstring>
+        <name>GetClearColor</name>
+        <qualifiedname>SR_GRAPH_NS::SwapchainPass::GetClearColor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h" line="19" column="41" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h" bodystart="19" bodyend="19"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -187,7 +215,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h" line="13" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h" bodystart="13" bodyend="24"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h" line="13" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h" bodystart="13" bodyend="27"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>AllocateStatic</name></member>
@@ -208,9 +236,13 @@
       <member refid="classSR__UTILS__NS_1_1SRClass_1a7734143f7ae123a6088320486af89283" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>GetBaseMetas</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a70eb32e32dc020ae82b9030505b6e4b1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>GetCamera</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a97a0919298e9d1d53220613bded5ba69" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>GetClassStaticName</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SwapchainPass_1a34a15ac27ca6a89fbcd12b59b0b7b73d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>GetClearColor</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SwapchainPass_1a139ab029d46cadf538879a9e7445e2d9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>GetClearDepth</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a16a351eac01dde110e273cfd05f1f7ed" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>GetMeta</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a16837ff730fb4e276450a124d70eb2e4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>GetMetaStatic</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a8f05935a0013471af3796065104ddd87" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>GetParent</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GroupPass_1a19f7d23951aadc042e27a66a87c33bc4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>GetPasses</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GroupPass_1a3f6be37f8a9eedaf070b93dab57363f2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>GetPasses</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a8bcb00355e5ecacfb2d2275eae0fbc87" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>GetPassName</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a2677310aa8207b938d07bbe130dadcf9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>GetPipeline</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>GetPtrData</name></member>
@@ -275,7 +307,9 @@
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ad5832c5a9f8abf85ac97967105d3a953" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>RenderScenePtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>Reset</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>Save</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a669b48407e7d4d60c055424228649923" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>SetCustomName</name></member>
       <member refid="classSR__GRAPH__NS_1_1GroupPass_1ada00c70fad34453fe5e6daeaa9525f08" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>SetParent</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GroupPass_1a35a946b3d86a2090b6b28291cbbcb668" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>SetPasses</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>SetPointerFromBase</name></member>
       <member refid="classSR__GRAPH__NS_1_1GroupPass_1a482bd1243f9b252fa81b99aeaa88617c" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>SetRenderTechnique</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a65e58bf20b3acc95f7e07f4cef52facb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SwapchainPass</scope><name>ShaderPtr</name></member>

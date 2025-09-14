@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" line="37" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" bodystart="37" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" line="39" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" bodystart="39" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" line="43" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" bodystart="43" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" line="45" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1ClearBuffersPass_1a5824a848ec4ea0504a58d5ec25e112ef" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" line="45" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" bodystart="45" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" line="47" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" bodystart="47" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" line="39" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" line="41" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -192,7 +192,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" line="35" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" bodystart="35" bodyend="47"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" line="37" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/FrameBufferPass.h" bodystart="37" bodyend="49"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ClearBuffersPass</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ClearBuffersPass</scope><name>AllocateStatic</name></member>
@@ -279,6 +279,7 @@
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ad5832c5a9f8abf85ac97967105d3a953" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ClearBuffersPass</scope><name>RenderScenePtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ClearBuffersPass</scope><name>Reset</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ClearBuffersPass</scope><name>Save</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a669b48407e7d4d60c055424228649923" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ClearBuffersPass</scope><name>SetCustomName</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a06217f9edbf0e8c831a6cc411826f799" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ClearBuffersPass</scope><name>SetParent</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ClearBuffersPass</scope><name>SetPointerFromBase</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1af58022a7df1f3d5b8343647ab9ad78f8" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ClearBuffersPass</scope><name>SetRenderTechnique</name></member>

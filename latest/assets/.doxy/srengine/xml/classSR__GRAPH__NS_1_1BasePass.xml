@@ -155,7 +155,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="105" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="105" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="107" column="28" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="107" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasePass_1a25fe2fa123f3a2a1fee0ca8ec9e64fa2" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1DescriptorManager" kindref="compound">DescriptorManager</ref> &amp;</type>
@@ -169,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="106" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="106" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="108" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="108" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -185,7 +185,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="110" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="110" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="112" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="112" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasePass_1a4e6ccfa75f4dd8f7253d3855706e5506" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1BasePass" kindref="compound">BasePass</ref> *</type>
@@ -200,7 +200,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="113" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="113" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="115" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="115" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasePass_1a69919dad0006ceb97f08878995871608" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">IRenderTechnique</ref> *</type>
@@ -215,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="115" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="115" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="117" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="117" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BasePass_1a05a1ce39d4095bd79786df0ff1a269d6" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -230,7 +230,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="116" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="116" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="118" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="118" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -609,6 +609,24 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="87" column="22"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a669b48407e7d4d60c055424228649923" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::BasePass::SetCustomName</definition>
+        <argsstring>(const SR_UTILS_NS::StringAtom &amp;name)</argsstring>
+        <name>SetCustomName</name>
+        <qualifiedname>SR_GRAPH_NS::BasePass::SetCustomName</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="89" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="89" bodyend="89"/>
+      </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a8bcb00355e5ecacfb2d2275eae0fbc87" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
         <definition>SR_NODISCARD SR_UTILS_NS::StringAtom SR_GRAPH_NS::BasePass::GetPassName</definition>
@@ -621,7 +639,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="89" column="46"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="91" column="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1aa59c3079158cb09647d0499848d1e7e3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -635,7 +653,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="90" column="27"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="92" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1ab71fffa3ce7eb1e2b640cd6bbd7aecec" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const RenderScenePtr &amp;</type>
@@ -649,7 +667,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="91" column="43"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="93" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a70eb32e32dc020ae82b9030505b6e4b1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const CameraPtr &amp;</type>
@@ -663,7 +681,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="92" column="38"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="94" column="38"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1af8bb85e7d332fde0b2573c9c705a73dc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const <ref refid="classSR__GRAPH__NS_1_1RenderContext" kindref="compound">RenderContextPtr</ref> &amp;</type>
@@ -677,7 +695,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="93" column="45"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="95" column="45"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a2677310aa8207b938d07bbe130dadcf9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const PipelinePtr &amp;</type>
@@ -691,7 +709,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="94" column="40"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="96" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1ace5d758ae98e877e7fe6b9b311ca8976" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">IRenderTechnique</ref> *</type>
@@ -705,7 +723,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="95" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="95" bodyend="95"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="97" column="39" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="97" bodyend="97"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a264dd4b976655f217e1386a38e0a6b6a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -719,7 +737,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="96" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="96" bodyend="96"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="98" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="98" bodyend="98"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1ae921a9d3d876f3f944a75c48c0670612" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1BasePass" kindref="compound">BasePass</ref> *</type>
@@ -738,7 +756,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="97" column="39"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="99" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a8f05935a0013471af3796065104ddd87" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1BasePass" kindref="compound">BasePass</ref> *</type>
@@ -752,7 +770,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="99" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="99" bodyend="99"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="101" column="31" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="101" bodyend="101"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a06217f9edbf0e8c831a6cc411826f799" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -771,7 +789,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="100" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="100" bodyend="100"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="102" column="22" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="102" bodyend="102"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1BasePass_1a5d6f48a0c7f5279d68247638b71a9f07" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -790,7 +808,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="102" column="22"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="104" column="22"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -983,7 +1001,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="35" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="35" bodyend="118"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="35" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="35" bodyend="120"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>AllocateStatic</name></member>
@@ -1072,6 +1090,7 @@
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ad5832c5a9f8abf85ac97967105d3a953" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>RenderScenePtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>Reset</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>Save</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a669b48407e7d4d60c055424228649923" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>SetCustomName</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a06217f9edbf0e8c831a6cc411826f799" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>SetParent</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>SetPointerFromBase</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1af58022a7df1f3d5b8343647ab9ad78f8" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BasePass</scope><name>SetRenderTechnique</name></member>

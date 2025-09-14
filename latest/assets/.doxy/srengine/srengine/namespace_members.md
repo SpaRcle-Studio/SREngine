@@ -574,6 +574,7 @@
 * **PrintSet** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
 * **Publicity** ([**EvoScript**](namespaceEvoScript.md))
 * **PublicityToString** ([**EvoScript**](namespaceEvoScript.md))
+* **PostProcessRenderTechnique** ([**SR\_GRAPH\_NS::Details**](namespaceSR__GRAPH__NS_1_1Details.md))
 * **Parse** ([**SR\_GRAPH\_NS::SRSL**](namespaceSR__GRAPH__NS_1_1SRSL.md))
 * **PreProcess** ([**SR\_GRAPH\_NS::SRSL**](namespaceSR__GRAPH__NS_1_1SRSL.md))
 * **perm** ([**SR\_MATH\_NS::NoiseTable**](namespaceSR__MATH__NS_1_1NoiseTable.md))

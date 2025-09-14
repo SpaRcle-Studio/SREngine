@@ -345,6 +345,7 @@ See [SR\_GRAPH\_NS::BasePass](classSR__GRAPH__NS_1_1BasePass.md)
 | virtual bool | [**PreRender**](classSR__GRAPH__NS_1_1BasePass.md#function-prerender) () <br>_Вызывается только во время построения_  |
 | virtual void | [**Prepare**](classSR__GRAPH__NS_1_1BasePass.md#function-prepare) () <br>_Вызывается всегда но полсе оверлея_  |
 | virtual bool | [**Render**](classSR__GRAPH__NS_1_1BasePass.md#function-render) () <br>_Вызывается только во время построения_  |
+|  void | [**SetCustomName**](classSR__GRAPH__NS_1_1BasePass.md#function-setcustomname) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & name) <br> |
 | virtual void | [**SetParent**](classSR__GRAPH__NS_1_1BasePass.md#function-setparent) ([**BasePass**](classSR__GRAPH__NS_1_1BasePass.md) \* pParent) <br> |
 | virtual void | [**SetRenderTechnique**](classSR__GRAPH__NS_1_1BasePass.md#function-setrendertechnique) ([**IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \* pRenderTechnique) <br> |
 | virtual void | [**Update**](classSR__GRAPH__NS_1_1BasePass.md#function-update) () <br>_Вызывается постоянно после построения_  |
@@ -553,6 +554,7 @@ See [SR\_GRAPH\_NS::CascadedShadowMapPass](classSR__GRAPH__NS_1_1CascadedShadowM
 | ---: | :--- |
 |  SR\_MATH\_NS::FVector3 | [**m\_cameraPosition**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#variable-m_cameraposition)  <br> |
 |  [**SR\_MATH\_NS::Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**m\_cameraRotation**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#variable-m_camerarotation)  <br> |
+|  uint32\_t | [**m\_cascadeCount**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#variable-m_cascadecount)   = `4`<br> |
 |  std::vector&lt; [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) &gt; | [**m\_cascadeMatrices**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#variable-m_cascadematrices)  <br> |
 |  std::vector&lt; float\_t &gt; | [**m\_cascadeRadii**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#variable-m_cascaderadii)  <br> |
 |  std::vector&lt; float\_t &gt; | [**m\_cascadeSplitDepths**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#variable-m_cascadesplitdepths)  <br> |

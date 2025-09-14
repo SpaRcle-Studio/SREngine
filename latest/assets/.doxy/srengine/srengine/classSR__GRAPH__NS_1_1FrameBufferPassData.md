@@ -113,6 +113,9 @@ See [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 |  SR\_NODISCARD uint8\_t | [**GetLayersCount**](#function-getlayerscount) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsFrameBufferRendered**](#function-isframebufferrendered) () noexcept const<br> |
 |  bool | [**RenderFrameBuffer**](#function-renderframebuffer-12) (const FBRenderCallback & callback) <br> |
+|  void | [**SetClearColors**](#function-setclearcolors) (const ClearColors & colors) <br> |
+|  void | [**SetClearDepth**](#function-setcleardepth) (float\_t depth) <br> |
+|  void | [**SetFrameBufferName**](#function-setframebuffername) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) noexcept<br> |
 |  void | [**SetRenderTechnique**](#function-setrendertechnique) ([**IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \* pRenderTechnique) noexcept<br> |
 |  void | [**UpdateFrameBuffer**](#function-updateframebuffer) (const FBUpdateCallback & callback) <br> |
 
@@ -365,6 +368,51 @@ inline SR_NODISCARD bool SR_GRAPH_NS::FrameBufferPassData::IsFrameBufferRendered
 bool SR_GRAPH_NS::FrameBufferPassData::RenderFrameBuffer (
     const FBRenderCallback & callback
 ) 
+```
+
+
+
+
+<hr>
+
+
+
+### function SetClearColors 
+
+```C++
+inline void SR_GRAPH_NS::FrameBufferPassData::SetClearColors (
+    const ClearColors & colors
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function SetClearDepth 
+
+```C++
+inline void SR_GRAPH_NS::FrameBufferPassData::SetClearDepth (
+    float_t depth
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function SetFrameBufferName 
+
+```C++
+inline void SR_GRAPH_NS::FrameBufferPassData::SetFrameBufferName (
+    SR_UTILS_NS::StringAtom name
+) noexcept
 ```
 
 

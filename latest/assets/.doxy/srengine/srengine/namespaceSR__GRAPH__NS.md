@@ -27,6 +27,7 @@
 
 | Type | Name |
 | ---: | :--- |
+| namespace | [**Details**](namespaceSR__GRAPH__NS_1_1Details.md) <br> |
 | namespace | [**GUI**](namespaceSR__GRAPH__NS_1_1GUI.md) <br> |
 | namespace | [**Memory**](namespaceSR__GRAPH__NS_1_1Memory.md) <br> |
 | namespace | [**SDF**](namespaceSR__GRAPH__NS_1_1SDF.md) <br> |

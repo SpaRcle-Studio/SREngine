@@ -117,6 +117,7 @@ See [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 |  [**RenderSettingsPreset**](structSR__GRAPH__NS_1_1RenderSettingsPreset.md) | [**defaultPreset**](#variable-defaultpreset)  <br> |
 |  [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**defaultShader**](#variable-defaultshader)   = `"Engine/Shaders/standard.srsl"`<br> |
 |  [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**editorPrefabSkybox**](#variable-editorprefabskybox)   = `"Engine/Skyboxes/Gray.png"`<br> |
+|  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**editorSceneImageName**](#variable-editorsceneimagename)   = `"SceneView"`<br> |
 |  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**engineName**](#variable-enginename)   = `"SREngine"`<br> |
 |  [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**overlayRenderTechnique**](#variable-overlayrendertechnique)   = `"Editor/Render/Overlay.srtech"`<br> |
 |  std::vector&lt; [**RenderSettingsPreset**](structSR__GRAPH__NS_1_1RenderSettingsPreset.md) &gt; | [**presets**](#variable-presets)  <br> |
@@ -851,6 +852,19 @@ SR_UTILS_NS::Path SR_GRAPH_NS::RenderSettings::defaultShader;
 
 ```C++
 SR_UTILS_NS::Path SR_GRAPH_NS::RenderSettings::editorPrefabSkybox;
+```
+
+
+
+
+<hr>
+
+
+
+### variable editorSceneImageName 
+
+```C++
+SR_UTILS_NS::StringAtom SR_GRAPH_NS::RenderSettings::editorSceneImageName;
 ```
 
 

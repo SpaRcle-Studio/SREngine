@@ -26,6 +26,7 @@ Here is a list of all namespaces with brief descriptions:
 * **namespace** [**SR\_CORE\_UI\_NS**](namespaceSR__CORE__UI__NS.md)     
 * **namespace** [**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md)     
 * **namespace** [**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md)     
+    * **namespace** [**Details**](namespaceSR__GRAPH__NS_1_1Details.md)     
     * **namespace** [**GUI**](namespaceSR__GRAPH__NS_1_1GUI.md)     
     * **namespace** [**Memory**](namespaceSR__GRAPH__NS_1_1Memory.md)     
     * **namespace** [**SDF**](namespaceSR__GRAPH__NS_1_1SDF.md)     

@@ -182,10 +182,13 @@ See [SR\_GRAPH\_NS::IRenderTechnique](classSR__GRAPH__NS_1_1IRenderTechnique.md)
 |  SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetName**](classSR__GRAPH__NS_1_1IRenderTechnique.md#function-getname) () noexcept const<br> |
 |  SR\_NODISCARD const RenderTechniqueQueues & | [**GetQueues**](classSR__GRAPH__NS_1_1IRenderTechnique.md#function-getqueues) () const<br> |
 |  SR\_NODISCARD const RenderScenePtr & | [**GetRenderScene**](classSR__GRAPH__NS_1_1IRenderTechnique.md#function-getrenderscene) () noexcept const<br> |
+|  SR\_NODISCARD const [**RenderTechniqueData**](structSR__GRAPH__NS_1_1RenderTechniqueData.md) & | [**GetRenderTechniqueData**](classSR__GRAPH__NS_1_1IRenderTechnique.md#function-getrendertechniquedata-12) () noexcept const<br> |
+|  SR\_NODISCARD [**RenderTechniqueData**](structSR__GRAPH__NS_1_1RenderTechniqueData.md) & | [**GetRenderTechniqueData**](classSR__GRAPH__NS_1_1IRenderTechnique.md#function-getrendertechniquedata-22) () noexcept<br> |
 |   | [**IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md#function-irendertechnique) () <br> |
 |  SR\_NODISCARD bool | [**IsEmpty**](classSR__GRAPH__NS_1_1IRenderTechnique.md#function-isempty) () const<br> |
 |  SR\_NODISCARD bool | [**IsTechniqueDead**](classSR__GRAPH__NS_1_1IRenderTechnique.md#function-istechniquedead) () const<br> |
 |  void | [**KillTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md#function-killtechnique) () <br> |
+|  void | [**OnHierarchyChanged**](classSR__GRAPH__NS_1_1IRenderTechnique.md#function-onhierarchychanged) () <br> |
 |  void | [**OnMultisampleChanged**](classSR__GRAPH__NS_1_1IRenderTechnique.md#function-onmultisamplechanged) () <br> |
 |  void | [**OnResize**](classSR__GRAPH__NS_1_1IRenderTechnique.md#function-onresize) (const SR\_MATH\_NS::UVector2 & size) <br> |
 |  bool | [**Overlay**](classSR__GRAPH__NS_1_1IRenderTechnique.md#function-overlay) () <br> |

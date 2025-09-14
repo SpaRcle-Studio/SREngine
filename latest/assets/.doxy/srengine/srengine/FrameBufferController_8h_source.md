@@ -48,6 +48,7 @@ namespace SR_GRAPH_NS {
 
         bool InitializeFramebuffer(RenderContext* pContext);
 
+        void SetName(const SR_UTILS_NS::StringAtom& name) { m_name = name; }
         void OnResize(const SR_MATH_NS::UVector2& size);
 
     private:

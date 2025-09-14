@@ -88,6 +88,8 @@ namespace SR_GRAPH_NS {
         virtual void UseSamplers(SR_GTYPES_NS::Shader* pShader);
         virtual void SetRenderTechnique(IRenderTechnique* pRenderTechnique);
 
+        void SetCustomName(const SR_UTILS_NS::StringAtom& name) { m_customName = name; }
+
         SR_NODISCARD SR_UTILS_NS::StringAtom GetPassName() const;
         SR_NODISCARD bool IsActive() const;
         SR_NODISCARD const RenderScenePtr& GetRenderScene() const;

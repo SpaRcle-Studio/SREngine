@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespaceSR__GRAPH__NS_1_1Details" kind="namespace" language="C++">
+    <compoundname>SR_GRAPH_NS::Details</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="RenderTechniquePostProcess_8h_1ae908fefbc371f162ec564ecda1c72c6d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::Details::PostProcessRenderTechnique</definition>
+        <argsstring>(IRenderTechnique *pTechnique, RenderContext *pContext, SR_GTYPES_NS::CameraType cameraType)</argsstring>
+        <name>PostProcessRenderTechnique</name>
+        <qualifiedname>SR_GRAPH_NS::Details::PostProcessRenderTechnique</qualifiedname>
+        <param>
+          <type><ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">IRenderTechnique</ref> *</type>
+          <declname>pTechnique</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__GRAPH__NS_1_1RenderContext" kindref="compound">RenderContext</ref> *</type>
+          <declname>pContext</declname>
+        </param>
+        <param>
+          <type>SR_GTYPES_NS::CameraType</type>
+          <declname>cameraType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Loaders/RenderTechniquePostProcess.h" line="20" column="10" declfile="Engine/libs/Graphics/inc/Graphics/Loaders/RenderTechniquePostProcess.h" declline="20" declcolumn="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Graphics/inc/Graphics/Loaders/RenderTechniquePostProcess.h" line="19" column="1"/>
+  </compounddef>
+</doxygen>

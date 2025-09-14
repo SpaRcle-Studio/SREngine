@@ -33,6 +33,8 @@ namespace SR_GRAPH_NS {
     public:
         SR_NODISCARD const FrameBufferPassData::ClearColors& GetClearColors() const noexcept;
         SR_NODISCARD const SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Framebuffer>& GetFrameBuffer() const noexcept;
+        SR_NODISCARD FrameBufferPassData& GetFrameBufferPassData() noexcept { return m_data; }
+        SR_NODISCARD const FrameBufferPassData& GetFrameBufferPassData() const noexcept { return m_data; }
 
         void SetRenderTechnique(IRenderTechnique* pRenderTechnique) override;
 

@@ -465,6 +465,7 @@
       <member refid="classSR__GRAPH__NS_1_1IColorBufferPass_1a28bb1904478ef26ca3dc5b38e3361db9" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ColorBufferPass</scope><name>ResetColorIndex</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ColorBufferPass</scope><name>Save</name></member>
       <member refid="classSR__GRAPH__NS_1_1IColorBufferPass_1adb0b4f098607c3822bb87755e8c0330b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ColorBufferPass</scope><name>SetColorMultiplier</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasePass_1a669b48407e7d4d60c055424228649923" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ColorBufferPass</scope><name>SetCustomName</name></member>
       <member refid="classSR__GRAPH__NS_1_1IColorBufferPass_1a091ed9638d7ef847cbbfd7ada5e2bbd5" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ColorBufferPass</scope><name>SetMeshIndex</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a06217f9edbf0e8c831a6cc411826f799" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ColorBufferPass</scope><name>SetParent</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ColorBufferPass</scope><name>SetPointerFromBase</name></member>

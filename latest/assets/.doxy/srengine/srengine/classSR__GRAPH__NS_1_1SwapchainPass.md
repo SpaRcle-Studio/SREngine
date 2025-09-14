@@ -201,6 +201,8 @@ See [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 
 | Type | Name |
 | ---: | :--- |
+|  SR\_NODISCARD [**SR\_MATH\_NS::FColor**](classSR__MATH__NS_1_1FColor.md) | [**GetClearColor**](#function-getclearcolor) () const<br> |
+|  SR\_NODISCARD float\_t | [**GetClearDepth**](#function-getcleardepth) () const<br> |
 | virtual bool | [**Render**](#function-render) () override<br>_Вызывается только во время построения_  |
 
 
@@ -213,6 +215,8 @@ See [SR\_GRAPH\_NS::GroupPass](classSR__GRAPH__NS_1_1GroupPass.md)
 | virtual void | [**DeInit**](classSR__GRAPH__NS_1_1GroupPass.md#function-deinit) () override<br> |
 | virtual SR\_NODISCARD [**BasePass**](classSR__GRAPH__NS_1_1BasePass.md) \* | [**FindPass**](classSR__GRAPH__NS_1_1GroupPass.md#function-findpass) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) override<br> |
 | virtual void | [**ForEachPass**](classSR__GRAPH__NS_1_1GroupPass.md#function-foreachpass) (const std::function&lt; void([**BasePass**](classSR__GRAPH__NS_1_1BasePass.md) &)&gt; & func) override<br> |
+|  const std::vector&lt; BasePass::Ptr &gt; & | [**GetPasses**](classSR__GRAPH__NS_1_1GroupPass.md#function-getpasses-12) () const<br> |
+|  std::vector&lt; BasePass::Ptr &gt; & | [**GetPasses**](classSR__GRAPH__NS_1_1GroupPass.md#function-getpasses-22) () <br> |
 | virtual bool | [**Init**](classSR__GRAPH__NS_1_1GroupPass.md#function-init) () override<br> |
 | virtual void | [**OnMultisampleChanged**](classSR__GRAPH__NS_1_1GroupPass.md#function-onmultisamplechanged) () override<br> |
 | virtual void | [**OnResize**](classSR__GRAPH__NS_1_1GroupPass.md#function-onresize) (const SR\_MATH\_NS::UVector2 & size) override<br> |
@@ -223,6 +227,7 @@ See [SR\_GRAPH\_NS::GroupPass](classSR__GRAPH__NS_1_1GroupPass.md)
 | virtual void | [**Prepare**](classSR__GRAPH__NS_1_1GroupPass.md#function-prepare) () override<br>_Вызывается всегда но полсе оверлея_  |
 | virtual bool | [**Render**](classSR__GRAPH__NS_1_1GroupPass.md#function-render) () override<br>_Вызывается только во время построения_  |
 | virtual void | [**SetParent**](classSR__GRAPH__NS_1_1GroupPass.md#function-setparent) ([**BasePass**](classSR__GRAPH__NS_1_1BasePass.md) \* pParent) override<br> |
+|  void | [**SetPasses**](classSR__GRAPH__NS_1_1GroupPass.md#function-setpasses) (const std::vector&lt; BasePass::Ptr &gt; & passes) <br> |
 | virtual void | [**SetRenderTechnique**](classSR__GRAPH__NS_1_1GroupPass.md#function-setrendertechnique) ([**IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \* pRenderTechnique) override<br> |
 | virtual void | [**Update**](classSR__GRAPH__NS_1_1GroupPass.md#function-update) () override<br>_Вызывается постоянно после построения_  |
 |   | [**~GroupPass**](classSR__GRAPH__NS_1_1GroupPass.md#function-grouppass) () override<br> |
@@ -261,6 +266,7 @@ See [SR\_GRAPH\_NS::BasePass](classSR__GRAPH__NS_1_1BasePass.md)
 | virtual bool | [**PreRender**](classSR__GRAPH__NS_1_1BasePass.md#function-prerender) () <br>_Вызывается только во время построения_  |
 | virtual void | [**Prepare**](classSR__GRAPH__NS_1_1BasePass.md#function-prepare) () <br>_Вызывается всегда но полсе оверлея_  |
 | virtual bool | [**Render**](classSR__GRAPH__NS_1_1BasePass.md#function-render) () <br>_Вызывается только во время построения_  |
+|  void | [**SetCustomName**](classSR__GRAPH__NS_1_1BasePass.md#function-setcustomname) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & name) <br> |
 | virtual void | [**SetParent**](classSR__GRAPH__NS_1_1BasePass.md#function-setparent) ([**BasePass**](classSR__GRAPH__NS_1_1BasePass.md) \* pParent) <br> |
 | virtual void | [**SetRenderTechnique**](classSR__GRAPH__NS_1_1BasePass.md#function-setrendertechnique) ([**IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \* pRenderTechnique) <br> |
 | virtual void | [**Update**](classSR__GRAPH__NS_1_1BasePass.md#function-update) () <br>_Вызывается постоянно после построения_  |
@@ -586,6 +592,32 @@ See [SR\_HTYPES\_NS::SharedPtrBase](classSR__HTYPES__NS_1_1SharedPtrBase.md)
 
 ## Public Functions Documentation
 
+
+
+
+### function GetClearColor 
+
+```C++
+inline SR_NODISCARD SR_MATH_NS::FColor SR_GRAPH_NS::SwapchainPass::GetClearColor () const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetClearDepth 
+
+```C++
+inline SR_NODISCARD float_t SR_GRAPH_NS::SwapchainPass::GetClearDepth () const
+```
+
+
+
+
+<hr>
 
 
 

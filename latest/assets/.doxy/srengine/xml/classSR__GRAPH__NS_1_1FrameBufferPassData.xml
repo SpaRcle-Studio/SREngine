@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" line="50" column="44" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" bodystart="50" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" line="53" column="44" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" bodystart="53" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1FrameBufferPassData_1ad453b7ff00cf1d9343e86dad9b7d2733" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">IRenderTechnique</ref> *</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" line="51" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" bodystart="51" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" line="54" column="26" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" bodystart="54" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1FrameBufferPassData_1a19c16140aafd11202af2e00c60be6a1b" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" line="52" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" bodystart="52" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" line="55" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" bodystart="55" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1FrameBufferPassData_1a7face556638dbfe5d27b4440d1a7e2e0" prot="private" static="no" mutable="no">
         <type>ClearColors</type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" line="55" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" bodystart="55" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" line="58" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" bodystart="58" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1FrameBufferPassData_1a6703a3c32565508211ba982caafab4a0" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -134,7 +134,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" line="57" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" bodystart="57" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" line="60" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" bodystart="60" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1FrameBufferPassData_1a17ffb8e77b307b793cfb92ce3e63c426" prot="private" static="no" mutable="no">
         <type>std::optional&lt; float_t &gt;</type>
@@ -148,7 +148,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" line="59" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" bodystart="59" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" line="62" column="23" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" bodystart="62" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -290,6 +290,60 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" line="41" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" bodystart="41" bodyend="41"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1FrameBufferPassData_1ab5f7892238f565ae7b5c51438881a4d3" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::FrameBufferPassData::SetFrameBufferName</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom name) noexcept</argsstring>
+        <name>SetFrameBufferName</name>
+        <qualifiedname>SR_GRAPH_NS::FrameBufferPassData::SetFrameBufferName</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" line="42" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1FrameBufferPassData_1ab3687b0b80464f8bb2aa5ea266778de8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::FrameBufferPassData::SetClearColors</definition>
+        <argsstring>(const ClearColors &amp;colors)</argsstring>
+        <name>SetClearColors</name>
+        <qualifiedname>SR_GRAPH_NS::FrameBufferPassData::SetClearColors</qualifiedname>
+        <param>
+          <type>const ClearColors &amp;</type>
+          <declname>colors</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" line="43" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1FrameBufferPassData_1a6fed7135c69421095c4bc7b5d4d49fd4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::FrameBufferPassData::SetClearDepth</definition>
+        <argsstring>(float_t depth)</argsstring>
+        <name>SetClearDepth</name>
+        <qualifiedname>SR_GRAPH_NS::FrameBufferPassData::SetClearDepth</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>depth</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" line="44" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" bodystart="44" bodyend="44"/>
+      </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FrameBufferPassData_1ad85dde6cb9ab0f6aae425b5965e0e5d4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -312,7 +366,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" line="44" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" line="47" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FrameBufferPassData_1a06fd4b7c97081d8753eb5ae66026943f" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const Pipeline::Ptr &amp;</type>
@@ -326,7 +380,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" line="46" column="42"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" line="49" column="42"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1FrameBufferPassData_1ad8aaad9d183bee290981f9d3d73216d3" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const FrameBufferController::Ptr &amp;</type>
@@ -340,7 +394,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" line="47" column="55"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" line="50" column="55"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -383,7 +437,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" line="20" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" bodystart="20" bodyend="61"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" line="20" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pass/Data/FrameBufferPassData.h" bodystart="20" bodyend="64"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPassData</scope><name>AddSerializationFlags</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPassData</scope><name>AllocateStatic</name></member>
@@ -421,6 +475,9 @@
       <member refid="classSR__GRAPH__NS_1_1FrameBufferPassData_1a64c9525c08024f2689abb10b715f1dd7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPassData</scope><name>RenderFrameBuffer</name></member>
       <member refid="classSR__GRAPH__NS_1_1FrameBufferPassData_1ad85dde6cb9ab0f6aae425b5965e0e5d4" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPassData</scope><name>RenderFrameBuffer</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_GRAPH_NS::FrameBufferPassData</scope><name>Save</name></member>
+      <member refid="classSR__GRAPH__NS_1_1FrameBufferPassData_1ab3687b0b80464f8bb2aa5ea266778de8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPassData</scope><name>SetClearColors</name></member>
+      <member refid="classSR__GRAPH__NS_1_1FrameBufferPassData_1a6fed7135c69421095c4bc7b5d4d49fd4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPassData</scope><name>SetClearDepth</name></member>
+      <member refid="classSR__GRAPH__NS_1_1FrameBufferPassData_1ab5f7892238f565ae7b5c51438881a4d3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPassData</scope><name>SetFrameBufferName</name></member>
       <member refid="classSR__GRAPH__NS_1_1FrameBufferPassData_1ad51868636d76e52df65af22ba01ce70a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPassData</scope><name>SetRenderTechnique</name></member>
       <member refid="classSR__GRAPH__NS_1_1FrameBufferPassData_1a5d3a220f8186aa13a17551a78187e508" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPassData</scope><name>Super</name></member>
       <member refid="classSR__GRAPH__NS_1_1FrameBufferPassData_1ada51fc2f39106461a0fd942ca2af748e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferPassData</scope><name>UpdateFrameBuffer</name></member>
