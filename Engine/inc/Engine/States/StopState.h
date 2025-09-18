@@ -9,7 +9,7 @@
 
 namespace SR_CORE_NS {
     class StopState : public SR_UTILS_NS::ThreadWorkerStateBase {
-        SR_REGISTER_THREAD_STATE(StopState)
+        SR_CLASS()
         using Super = SR_UTILS_NS::ThreadWorkerStateBase;
     public:
         SR_UTILS_NS::ThreadWorkerResult ExecuteImpl() override;

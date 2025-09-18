@@ -51,10 +51,14 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::Localization::SetLocale();
         SR_UTILS_NS::Random::Initialize();
 
-        m_applicationPath = SR_PLATFORM_NS::GetApplicationPath().GetFolder();
+        if (auto&& cache = SR_PLATFORM_NS::GetApplicationCachePath()) {
+            m_applicationCachePath = cache.value();
+        }
+        else {
+            m_applicationCachePath = SR_PLATFORM_NS::GetApplicationPath().GetFolder();
+        }
 
-        auto&& defaultLogDir = SR_UTILS_NS::Path(m_applicationPath);
-        SR_UTILS_NS::Path logDir = SR_UTILS_NS::CLIManager::Instance().GetOptionValue(SR_UTILS_NS::CLIOptions::LogDir).value_or(defaultLogDir);
+        SR_UTILS_NS::Path logDir = SR_UTILS_NS::CLIManager::Instance().GetOptionValue(SR_UTILS_NS::CLIOptions::LogDir).value_or(m_applicationCachePath);
 
         return InitLogger(logDir);
     }

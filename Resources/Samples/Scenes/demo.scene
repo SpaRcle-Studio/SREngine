@@ -285,8 +285,6 @@ use tabs: true
 											11-f:2
 					5-v:name
 						6-s:GameCamera
-					5-v:isEnabled
-						6-b:false
 					5-o:transform
 						6-v:type
 							7-s:Transform3D

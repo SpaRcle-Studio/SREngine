@@ -13,6 +13,7 @@
 #include <android/sensor.h>
 
 #include <Engine/Application.h>
+#include <Engine/EntryPoint.h>
 #include <Utils/Platform/Platform.h>
 #include <Utils/Platform/AndroidNativeAppGlue.h>
 #include <Utils/Debug.h>
@@ -275,18 +276,58 @@ ASensorManager* AcquireASensorManagerInstance(android_app* app) {
 
 #include <unistd.h>
 
-void android_main(struct android_app* state) {
 
+void android_main(struct android_app* state) {
     state->onInputEvent = engine_handle_input;
+
+    SR_PLATFORM_NS::SetInstance(state);
+
+    SR_PLATFORM_NS::WriteConsoleLog("android_main() : waiting main window...");
+
+    // --- Ждём появления окна ---
+    ANativeWindow* window = nullptr;
+    while (!window) {
+        [[maybe_unused]] int ident = 0;
+        [[maybe_unused]] int events = 0;
+        struct android_poll_source* source;
+
+        // Блокируем до следующего события, пока нет окна
+        while ((ident = ALooper_pollOnce(-1, nullptr, &events, (void**)&source)) >= 0) {
+            if (source) {
+                source->process(state, source);
+            }
+
+            if (state->destroyRequested) {
+                return; // Прекращаем запуск, если приложение закрыли
+            }
+
+            if (state->window) {
+                window = state->window;
+                break;
+            }
+        }
+    }
+
+    SR_PLATFORM_NS::WriteConsoleLog("android_main() : running engine entry point...");
+
+    char** argv = nullptr;
+    int argc = 1;
+
+    if (const int code = SREngineEntryPoint(argc, argv); code == 0) {
+        SR_PLATFORM_NS::WriteConsoleLog("android_main() : engine successfully closed!");
+    }
+    else {
+        SR_PLATFORM_NS::WriteConsoleError("android_main() : engine closed with errors!");
+    }
+
+    return;
+
 
     /*//SREngine
 
     auto&& pApplication = SR_CORE_NS::Application::MakeShared();
 
     int32_t code = 0;
-
-    char **argv = nullptr;
-    int argc = 1;
 
     if (!pApplication->PreInit(argc, argv)) {
         SR_PLATFORM_NS::WriteConsoleError("Failed to pre-initialize application!\n");

@@ -12,6 +12,8 @@
 #include <Utils/World/SceneLogic.h>
 #include <Utils/DebugDraw.h>
 
+#include <Codegen/SceneUpdateState.generated.hpp>
+
 namespace SR_CORE_NS {
     SR_UTILS_NS::ThreadWorkerResult SceneUpdateState::ExecuteImpl() {
         SR_TRACY_ZONE_N("SceneUpdateState");

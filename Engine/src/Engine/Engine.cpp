@@ -62,17 +62,7 @@ namespace SR_CORE_NS {
             AddWindow(CreateMainWindow());
         }
 
-        SR_LOG("Engine::RegisterLibraries() : registering all libraries...");
-
-        //SpaRcle::API::RegisterEvoScriptClasses(this);
-
         m_localizationManager = new SR_UTILS_NS::Localization::LocalizationManager();
-
-        ///TEST
-        /// SR_UTILS_NS::Path configPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-        /// configPath = configPath.Concat(R"(Localization\Editor\loc_config.yml)");
-        /// m_localizationManager->LoadInfoAsConfigFile(configPath);
-        ///TEST
 
         m_renderContext = new SR_GRAPH_NS::RenderContext();
 

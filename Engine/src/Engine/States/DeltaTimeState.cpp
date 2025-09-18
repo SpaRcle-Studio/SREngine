@@ -4,6 +4,8 @@
 
 #include <Engine/States/DeltaTimeState.h>
 
+#include <Codegen/DeltaTimeState.generated.hpp>
+
 namespace SR_CORE_NS {
     SR_UTILS_NS::ThreadWorkerResult DeltaTimeState::ExecuteImpl() {
         SR_HTYPES_NS::Time::Instance().Update();

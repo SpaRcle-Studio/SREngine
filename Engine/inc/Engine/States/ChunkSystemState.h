@@ -10,7 +10,7 @@
 
 namespace SR_CORE_NS {
     class ChunkSystemState : public SR_UTILS_NS::ThreadWorkerStateBase {
-        SR_REGISTER_THREAD_STATE(ChunkSystemState)
+        SR_CLASS()
         using Super = SR_UTILS_NS::ThreadWorkerStateBase;
     public:
         SR_UTILS_NS::ThreadWorkerResult ExecuteImpl() override;

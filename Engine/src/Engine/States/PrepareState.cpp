@@ -6,8 +6,6 @@
 #include <Engine/World/EngineScene.h>
 #include <Engine/Engine.h>
 
-//#include <Scripting/Impl/EvoScriptManager.h>
-
 #include <Physics/3D/Raycast3D.h>
 #include <Physics/PhysicsScene.h>
 
@@ -18,6 +16,8 @@
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/DebugDraw.h>
 #include <Utils/Common/Features.h>
+
+#include <Codegen/PrepareState.generated.hpp>
 
 namespace SR_CORE_NS {
     SR_UTILS_NS::ThreadWorkerResult PrepareState::ExecuteImpl() {

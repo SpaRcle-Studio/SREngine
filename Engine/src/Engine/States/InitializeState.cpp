@@ -10,6 +10,8 @@
 #include <Engine/Engine.h>
 #include <Engine/GUI/EditorGUI.h>
 
+#include <Codegen/InitializeState.generated.hpp>
+
 namespace SR_CORE_NS {
     SR_UTILS_NS::ThreadWorkerResult InitializeState::ExecuteImpl() {
         if (m_isInitialized) {

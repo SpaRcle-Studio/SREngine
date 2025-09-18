@@ -8,6 +8,8 @@
 
 #include <Engine/Engine.h>
 
+#include <Codegen/PollEventsState.generated.hpp>
+
 namespace SR_CORE_NS {
     SR_UTILS_NS::ThreadWorkerResult PollEventsState::ExecuteImpl() {
         auto&& pEngine = GetContext().GetPointer<Engine>();

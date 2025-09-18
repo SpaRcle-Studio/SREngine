@@ -12,6 +12,8 @@
 #include <Utils/World/Scene.h>
 #include <Utils/World/SceneCubeChunkLogic.h>
 
+#include <Codegen/ChunkSystemState.generated.hpp>
+
 namespace SR_CORE_NS {
     SR_UTILS_NS::ThreadWorkerResult ChunkSystemState::ExecuteImpl() {
         if (!m_worldTimer.Update()) {

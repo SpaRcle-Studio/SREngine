@@ -9,6 +9,8 @@
 #include <Engine/Engine.h>
 #include <Engine/World/EngineScene.h>
 
+#include <Codegen/DrawState.generated.hpp>
+
 namespace SR_CORE_NS {
     SR_UTILS_NS::ThreadWorkerResult DrawState::ExecuteImpl() {
         auto&& pEngine = GetContext().GetPointer<Engine>();

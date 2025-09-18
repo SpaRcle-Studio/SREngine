@@ -4,6 +4,8 @@
 
 #include <Engine/States/StopState.h>
 
+#include <Codegen/StopState.generated.hpp>
+
 namespace SR_CORE_NS {
     SR_UTILS_NS::ThreadWorkerResult StopState::ExecuteImpl() {
         GetThreadsWorker()->StopAsync();

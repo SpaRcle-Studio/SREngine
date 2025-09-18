@@ -39,12 +39,13 @@ namespace SR_SCRIPTING_NS {
         m_cacheFolder = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
         m_apiFolder = m_resourcesFolder.Concat("SpaRcleAPI");
 
-        if (!InitEngineSources()) {
+        m_isCompilationEnabled = SR_UTILS_NS::Features::Instance().Enabled("ScriptCompilation", true);
+        m_isCompilationEnabled &= !SR_PLATFORM_NS::IsMobilePlatform();
+
+        if (m_isCompilationEnabled && !InitEngineSources()) {
             SR_ERROR("ScriptSystem::Init() : failed to initialize engine sources!");
             return false;
         }
-
-        m_isCompilationEnabled = SR_UTILS_NS::Features::Instance().Enabled("ScriptCompilation", true);
 
         m_moduleManager = ModuleManager::MakeShared(this);
 
@@ -70,30 +71,30 @@ namespace SR_SCRIPTING_NS {
                 SR_ERROR("ScriptSystem::Init() : failed to initialize code generator!");
                 return false;
             }
+
+            auto&& pFileSystemWatcher = SR_UTILS_NS::ResourceManager::Instance().GetFileSystemWatcher();
+
+            m_fileChangedSubscription = pFileSystemWatcher->Subscribe(SR_UTILS_NS::FileSystemWatcher::MODIFIED_EVENT_ID,
+                std::bind(&ScriptSystem::HandleFileSystemEvent, this, std::placeholders::_1, SR_UTILS_NS::FileSystemWatcher::EventType::Modified));
+
+            m_fileCreatedSubscription = pFileSystemWatcher->Subscribe(SR_UTILS_NS::FileSystemWatcher::ADDED_EVENT_ID,
+                std::bind(&ScriptSystem::HandleFileSystemEvent, this, std::placeholders::_1, SR_UTILS_NS::FileSystemWatcher::EventType::Add));
+
+            m_fileDeletedSubscription = pFileSystemWatcher->Subscribe(SR_UTILS_NS::FileSystemWatcher::DELETED_EVENT_ID,
+                std::bind(&ScriptSystem::HandleFileSystemEvent, this, std::placeholders::_1, SR_UTILS_NS::FileSystemWatcher::EventType::Delete));
+
+            SR_LOG("ScriptSystem::Init() : creating script system thread...");
+
+            m_threadRunning = true;
+
+            SR_HTYPES_NS::Thread::Factory::Instance().Create(m_thread, &ScriptSystem::ThreadFunc, this);
+
+            m_thread->SetName("Script system");
         }
         else {
             SR_LOG("ScriptSystem::Init() : script compilation is disabled!");
             return true;
         }
-
-        auto&& pFileSystemWatcher = SR_UTILS_NS::ResourceManager::Instance().GetFileSystemWatcher();
-
-        m_fileChangedSubscription = pFileSystemWatcher->Subscribe(SR_UTILS_NS::FileSystemWatcher::MODIFIED_EVENT_ID,
-            std::bind(&ScriptSystem::HandleFileSystemEvent, this, std::placeholders::_1, SR_UTILS_NS::FileSystemWatcher::EventType::Modified));
-
-        m_fileCreatedSubscription = pFileSystemWatcher->Subscribe(SR_UTILS_NS::FileSystemWatcher::ADDED_EVENT_ID,
-            std::bind(&ScriptSystem::HandleFileSystemEvent, this, std::placeholders::_1, SR_UTILS_NS::FileSystemWatcher::EventType::Add));
-
-        m_fileDeletedSubscription = pFileSystemWatcher->Subscribe(SR_UTILS_NS::FileSystemWatcher::DELETED_EVENT_ID,
-            std::bind(&ScriptSystem::HandleFileSystemEvent, this, std::placeholders::_1, SR_UTILS_NS::FileSystemWatcher::EventType::Delete));
-
-        SR_LOG("ScriptSystem::Init() : creating script system thread...");
-
-        m_threadRunning = true;
-
-        SR_HTYPES_NS::Thread::Factory::Instance().Create(m_thread, &ScriptSystem::ThreadFunc, this);
-
-        m_thread->SetName("Script system");
 
         SR_LOG("ScriptSystem::Init() : script system initialized successfully!");
 
@@ -412,7 +413,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     void ScriptSystem::WaitForIdle() {
-        if (GetState() == State::Idle) {
+        if (GetState() == State::Idle || !m_threadRunning) {
             return;
         }
 
