@@ -19,15 +19,19 @@
         </childnode>
         <childnode refid="133" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
         <childnode refid="151" relation="include">
         </childnode>
-        <childnode refid="152" relation="include">
+        <childnode refid="162" relation="include">
         </childnode>
-        <childnode refid="154" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="156" relation="include">
+        <childnode refid="155" relation="include">
+        </childnode>
+        <childnode refid="164" relation="include">
+        </childnode>
+        <childnode refid="166" relation="include">
+        </childnode>
+        <childnode refid="158" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
@@ -73,13 +77,13 @@
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="161" relation="include">
-        </childnode>
-        <childnode refid="165" relation="include">
+        <childnode refid="168" relation="include">
         </childnode>
         <childnode refid="151" relation="include">
         </childnode>
-        <childnode refid="154" relation="include">
+        <childnode refid="155" relation="include">
+        </childnode>
+        <childnode refid="166" relation="include">
         </childnode>
       </node>
       <node id="126">
@@ -140,7 +144,7 @@
         <childnode refid="101" relation="include">
         </childnode>
       </node>
-      <node id="167">
+      <node id="161">
         <label>Utils/Common/CollisionData.h</label>
         <link refid="CollisionData_8h_source"/>
         <childnode refid="89" relation="include">
@@ -214,7 +218,7 @@
         <childnode refid="13" relation="include">
         </childnode>
       </node>
-      <node id="164">
+      <node id="157">
         <label>Utils/Common/Numeric.h</label>
         <link refid="Numeric_8h_source"/>
         <childnode refid="11" relation="include">
@@ -312,7 +316,7 @@
         <childnode refid="112" relation="include">
         </childnode>
       </node>
-      <node id="153">
+      <node id="165">
         <label>Utils/Common/Vertices.h</label>
         <link refid="Utils_2inc_2Utils_2Common_2Vertices_8h_source"/>
         <childnode refid="113" relation="include">
@@ -332,14 +336,14 @@
         <childnode refid="114" relation="include">
         </childnode>
       </node>
-      <node id="165">
+      <node id="151">
         <label>Utils/ECS/Component.h</label>
         <link refid="Component_8h_source"/>
-        <childnode refid="163" relation="include">
+        <childnode refid="152" relation="include">
         </childnode>
         <childnode refid="89" relation="include">
         </childnode>
-        <childnode refid="151" relation="include">
+        <childnode refid="155" relation="include">
         </childnode>
         <childnode refid="98" relation="include">
         </childnode>
@@ -351,73 +355,81 @@
         </childnode>
         <childnode refid="116" relation="include">
         </childnode>
-        <childnode refid="166" relation="include">
+        <childnode refid="160" relation="include">
         </childnode>
-        <childnode refid="167" relation="include">
+        <childnode refid="161" relation="include">
         </childnode>
-        <childnode refid="156" relation="include">
+        <childnode refid="158" relation="include">
         </childnode>
       </node>
-      <node id="161">
+      <node id="168">
         <label>Utils/ECS/ComponentManager.h</label>
         <link refid="ComponentManager_8h_source"/>
-        <childnode refid="162" relation="include">
+        <childnode refid="163" relation="include">
         </childnode>
-        <childnode refid="165" relation="include">
+        <childnode refid="151" relation="include">
         </childnode>
         <childnode refid="146" relation="include">
         </childnode>
         <childnode refid="87" relation="include">
         </childnode>
-        <childnode refid="168" relation="include">
+        <childnode refid="169" relation="include">
         </childnode>
-        <childnode refid="151" relation="include">
+        <childnode refid="155" relation="include">
         </childnode>
         <childnode refid="89" relation="include">
         </childnode>
         <childnode refid="107" relation="include">
         </childnode>
-        <childnode refid="169" relation="include">
+        <childnode refid="170" relation="include">
         </childnode>
       </node>
-      <node id="163">
+      <node id="152">
         <label>Utils/ECS/Entity.h</label>
         <link refid="Entity_8h_source"/>
         <childnode refid="133" relation="include">
         </childnode>
-        <childnode refid="159" relation="include">
+        <childnode refid="153" relation="include">
         </childnode>
-        <childnode refid="164" relation="include">
+        <childnode refid="157" relation="include">
         </childnode>
         <childnode refid="98" relation="include">
         </childnode>
-        <childnode refid="156" relation="include">
+        <childnode refid="158" relation="include">
         </childnode>
         <childnode refid="115" relation="include">
         </childnode>
       </node>
-      <node id="162">
+      <node id="163">
         <label>Utils/ECS/EntityController.h</label>
         <link refid="EntityController_8h_source"/>
+        <childnode refid="152" relation="include">
+        </childnode>
+      </node>
+      <node id="162">
+        <label>Utils/ECS/EntityRef.h</label>
+        <link refid="EntityRef_8h_source"/>
+        <childnode refid="133" relation="include">
+        </childnode>
         <childnode refid="163" relation="include">
         </childnode>
       </node>
-      <node id="159">
+      <node id="153">
         <label>Utils/ECS/EntityRefOld.h</label>
         <link refid="EntityRefOld_8h_source"/>
-        <childnode refid="160" relation="include">
+        <childnode refid="154" relation="include">
         </childnode>
-        <childnode refid="158" relation="include">
+        <childnode refid="156" relation="include">
         </childnode>
       </node>
-      <node id="160">
+      <node id="154">
         <label>Utils/ECS/EntityRefUtils.h</label>
         <link refid="EntityRefUtils_8h_source"/>
         <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="133" relation="include">
         </childnode>
-        <childnode refid="151" relation="include">
+        <childnode refid="155" relation="include">
         </childnode>
         <childnode refid="98" relation="include">
         </childnode>
@@ -436,27 +448,27 @@
         <childnode refid="104" relation="include">
         </childnode>
       </node>
-      <node id="172">
+      <node id="173">
         <label>Utils/Localization/Convert.h</label>
         <link refid="Convert_8h_source"/>
-        <childnode refid="173" relation="include">
-        </childnode>
-      </node>
-      <node id="171">
-        <label>Utils/Localization/Encoding.h</label>
-        <link refid="Encoding_8h_source"/>
-        <childnode refid="172" relation="include">
-        </childnode>
         <childnode refid="174" relation="include">
         </childnode>
       </node>
-      <node id="173">
+      <node id="172">
+        <label>Utils/Localization/Encoding.h</label>
+        <link refid="Encoding_8h_source"/>
+        <childnode refid="173" relation="include">
+        </childnode>
+        <childnode refid="175" relation="include">
+        </childnode>
+      </node>
+      <node id="174">
         <label>Utils/Localization/Icu.h</label>
         <link refid="Icu_8h_source"/>
         <childnode refid="113" relation="include">
         </childnode>
       </node>
-      <node id="174">
+      <node id="175">
         <label>Utils/Localization/UTF.h</label>
         <link refid="UTF_8h_source"/>
         <childnode refid="13" relation="include">
@@ -482,7 +494,7 @@
         <childnode refid="95" relation="include">
         </childnode>
       </node>
-      <node id="154">
+      <node id="166">
         <label>Utils/Math/Matrix4x4.h</label>
         <link refid="Matrix4x4_8h_source"/>
         <childnode refid="97" relation="include">
@@ -491,7 +503,7 @@
         </childnode>
         <childnode refid="100" relation="include">
         </childnode>
-        <childnode refid="155" relation="include">
+        <childnode refid="167" relation="include">
         </childnode>
       </node>
       <node id="97">
@@ -670,16 +682,16 @@
         <childnode refid="108" relation="include">
         </childnode>
       </node>
-      <node id="170">
+      <node id="171">
         <label>Utils/Serialization/BaseSerialization.h</label>
         <link refid="BaseSerialization_8h_source"/>
         <childnode refid="124" relation="include">
         </childnode>
         <childnode refid="125" relation="include">
         </childnode>
-        <childnode refid="171" relation="include">
+        <childnode refid="172" relation="include">
         </childnode>
-        <childnode refid="175" relation="include">
+        <childnode refid="176" relation="include">
         </childnode>
       </node>
       <node id="141">
@@ -706,10 +718,10 @@
         <label>Utils/Serialization/ObjectDataAccessors.inl.h</label>
         <link refid="ObjectDataAccessors_8inl_8h_source"/>
       </node>
-      <node id="169">
+      <node id="170">
         <label>Utils/Serialization/SRASerialization.h</label>
         <link refid="SRASerialization_8h_source"/>
-        <childnode refid="170" relation="include">
+        <childnode refid="171" relation="include">
         </childnode>
       </node>
       <node id="140">
@@ -786,15 +798,15 @@
         <childnode refid="123" relation="include">
         </childnode>
       </node>
-      <node id="156">
+      <node id="158">
         <label>Utils/TypeTraits/Properties.h</label>
         <link refid="Properties_8h_source"/>
-        <childnode refid="157" relation="include">
-        </childnode>
         <childnode refid="159" relation="include">
         </childnode>
+        <childnode refid="153" relation="include">
+        </childnode>
       </node>
-      <node id="158">
+      <node id="156">
         <label>Utils/TypeTraits/Property.h</label>
         <link refid="TypeTraits_2Property_8h_source"/>
         <childnode refid="12" relation="include">
@@ -834,10 +846,10 @@
         <childnode refid="125" relation="include">
         </childnode>
       </node>
-      <node id="157">
+      <node id="159">
         <label>Utils/TypeTraits/StandardProperty.h</label>
         <link refid="StandardProperty_8h_source"/>
-        <childnode refid="158" relation="include">
+        <childnode refid="156" relation="include">
         </childnode>
       </node>
       <node id="105">
@@ -856,7 +868,7 @@
         <childnode refid="106" relation="include">
         </childnode>
       </node>
-      <node id="168">
+      <node id="169">
         <label>Utils/Types/DataStorage.h</label>
         <link refid="DataStorage_8h_source"/>
         <childnode refid="12" relation="include">
@@ -866,7 +878,7 @@
         <childnode refid="113" relation="include">
         </childnode>
       </node>
-      <node id="175">
+      <node id="176">
         <label>Utils/Types/FastMemoryArray.h</label>
         <link refid="FastMemoryArray_8h_source"/>
         <childnode refid="12" relation="include">
@@ -878,12 +890,12 @@
         <childnode refid="13" relation="include">
         </childnode>
       </node>
-      <node id="152">
+      <node id="164">
         <label>Utils/Types/IRawMeshHolder.h</label>
         <link refid="IRawMeshHolder_8h_source"/>
         <childnode refid="115" relation="include">
         </childnode>
-        <childnode refid="153" relation="include">
+        <childnode refid="165" relation="include">
         </childnode>
         <childnode refid="130" relation="include">
         </childnode>
@@ -938,7 +950,7 @@
         <childnode refid="99" relation="include">
         </childnode>
       </node>
-      <node id="151">
+      <node id="155">
         <label>Utils/Types/SafePointer.h</label>
         <link refid="SafePointer_8h_source"/>
         <childnode refid="99" relation="include">
@@ -956,7 +968,7 @@
         <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="166">
+      <node id="160">
         <label>Utils/Types/SafeVariable.h</label>
         <link refid="SafeVariable_8h_source"/>
         <childnode refid="87" relation="include">
@@ -1262,7 +1274,7 @@
       <node id="93">
         <label>glm/gtc/type_ptr.hpp</label>
       </node>
-      <node id="155">
+      <node id="167">
         <label>glm/gtx/matrix_decompose.hpp</label>
       </node>
       <node id="94">
@@ -1422,50 +1434,56 @@
 <codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3<sp/>GetLinearVelocity()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
 <codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3<sp/>GetAngularVelocity()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
 <codeline lineno="16"><highlight class="normal"></highlight></codeline>
-<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddLinearVelocity(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>velocity)<sp/>{<sp/>}</highlight></codeline>
-<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddAngularVelocity(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>velocity)<sp/>{<sp/>}</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddForce(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>force)<sp/>{<sp/>}</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddTorque(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>torque)<sp/>{<sp/>}</highlight></codeline>
 <codeline lineno="19"><highlight class="normal"></highlight></codeline>
-<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetLinearVelocity(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>velocity)<sp/>{<sp/>}</highlight></codeline>
-<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetAngularVelocity(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>velocity)<sp/>{<sp/>}</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddLinearVelocity(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>velocity)<sp/>{<sp/>}</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddAngularVelocity(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>velocity)<sp/>{<sp/>}</highlight></codeline>
 <codeline lineno="22"><highlight class="normal"></highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetLinearLock(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::BVector3&amp;<sp/>lock)<sp/>{<sp/>}</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetAngularLock(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::BVector3&amp;<sp/>lock)<sp/>{<sp/>}</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetLinearVelocity(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>velocity)<sp/>{<sp/>}</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetAngularVelocity(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>velocity)<sp/>{<sp/>}</highlight></codeline>
 <codeline lineno="25"><highlight class="normal"></highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="27"><highlight class="normal"></highlight></codeline>
-<codeline lineno="29"></codeline>
-<codeline lineno="31" refid="classSR__PTYPES__NS_1_1Rigidbody3D" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__PTYPES__NS_1_1Rigidbody3D" kindref="compound">Rigidbody3D</ref><sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__PTYPES__NS_1_1Rigidbody" kindref="compound">Rigidbody</ref><sp/>{</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_CLASS()</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classSR__PTYPES__NS_1_1Rigidbody" kindref="compound">Super</ref><sp/>=<sp/><ref refid="classSR__PTYPES__NS_1_1Rigidbody" kindref="compound">Rigidbody</ref>;</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_UTILS_NS::Measurement<sp/>GetMeasurement()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"></highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_MATH_NS::BVector3<sp/>GetLinearLock()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_linearLock;<sp/>}</highlight></codeline>
-<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_MATH_NS::BVector3<sp/>GetAngularLock()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_angularLock;<sp/>}</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetLinearLock(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::BVector3&amp;<sp/>lock)<sp/>{<sp/>}</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetAngularLock(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::BVector3&amp;<sp/>lock)<sp/>{<sp/>}</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"></codeline>
+<codeline lineno="34" refid="classSR__PTYPES__NS_1_1Rigidbody3D" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__PTYPES__NS_1_1Rigidbody3D" kindref="compound">Rigidbody3D</ref><sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__PTYPES__NS_1_1Rigidbody" kindref="compound">Rigidbody</ref><sp/>{</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_CLASS()</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classSR__PTYPES__NS_1_1Rigidbody" kindref="compound">Super</ref><sp/>=<sp/><ref refid="classSR__PTYPES__NS_1_1Rigidbody" kindref="compound">Rigidbody</ref>;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_UTILS_NS::Measurement<sp/>GetMeasurement()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="39"><highlight class="normal"></highlight></codeline>
-<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_MATH_NS::FVector3<sp/>GetLinearVelocity()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_MATH_NS::FVector3<sp/>GetAngularVelocity()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_MATH_NS::BVector3<sp/>GetLinearLock()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_linearLock;<sp/>}</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_MATH_NS::BVector3<sp/>GetAngularLock()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_angularLock;<sp/>}</highlight></codeline>
 <codeline lineno="42"><highlight class="normal"></highlight></codeline>
-<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetLinearLock(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::BVector3&amp;<sp/>lock);</highlight></codeline>
-<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetAngularLock(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::BVector3&amp;<sp/>lock);</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_MATH_NS::FVector3<sp/>GetLinearVelocity()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_MATH_NS::FVector3<sp/>GetAngularVelocity()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="45"><highlight class="normal"></highlight></codeline>
-<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddLinearVelocity(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>velocity);</highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddAngularVelocity(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>velocity);</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetLinearLock(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::BVector3&amp;<sp/>lock);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetAngularLock(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::BVector3&amp;<sp/>lock);</highlight></codeline>
 <codeline lineno="48"><highlight class="normal"></highlight></codeline>
-<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetLinearVelocity(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>velocity);</highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetAngularVelocity(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>velocity);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddForce(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>force);</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddTorque(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>torque);</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"></highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_MATH_NS::BVector3<sp/>m_linearLock;</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_MATH_NS::BVector3<sp/>m_angularLock;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddLinearVelocity(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>velocity);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AddAngularVelocity(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>velocity);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetLinearVelocity(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>velocity);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetAngularVelocity(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>velocity);</highlight></codeline>
 <codeline lineno="57"><highlight class="normal"></highlight></codeline>
-<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_VIRTUAL_PROPERTY</highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_VIRTUAL_PROPERTY</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"></highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="64"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="65"><highlight class="normal"></highlight></codeline>
-<codeline lineno="66"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_RIGIDBODY3D_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_MATH_NS::BVector3<sp/>m_linearLock;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_MATH_NS::BVector3<sp/>m_angularLock;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_VIRTUAL_PROPERTY</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_VIRTUAL_PROPERTY</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="70"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_RIGIDBODY3D_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h"/>
   </compounddef>

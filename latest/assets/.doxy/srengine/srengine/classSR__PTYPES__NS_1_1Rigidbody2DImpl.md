@@ -100,6 +100,7 @@ See [SR\_PTYPES\_NS::RigidbodyImpl](classSR__PTYPES__NS_1_1RigidbodyImpl.md)
 | virtual SR\_NODISCARD void \* | [**GetHandle**](classSR__PTYPES__NS_1_1RigidbodyImpl.md#function-gethandle) () noexcept const = 0<br> |
 | virtual bool | [**InitBody**](classSR__PTYPES__NS_1_1RigidbodyImpl.md#function-initbody) () <br> |
 |  void | [**SetRigidbody**](classSR__PTYPES__NS_1_1RigidbodyImpl.md#function-setrigidbody) ([**Rigidbody**](classSR__PTYPES__NS_1_1Rigidbody.md) \* pRigidbody) <br> |
+|  void | [**SetSyncAllowed**](classSR__PTYPES__NS_1_1RigidbodyImpl.md#function-setsyncallowed) (bool allowed) <br> |
 | virtual void | [**Synchronize**](classSR__PTYPES__NS_1_1RigidbodyImpl.md#function-synchronize) () <br> |
 | virtual void | [**UpdateInertia**](classSR__PTYPES__NS_1_1RigidbodyImpl.md#function-updateinertia) () <br> |
 | virtual bool | [**UpdateMatrix**](classSR__PTYPES__NS_1_1RigidbodyImpl.md#function-updatematrix) (bool force) <br> |
@@ -151,6 +152,7 @@ See [SR\_PTYPES\_NS::RigidbodyImpl](classSR__PTYPES__NS_1_1RigidbodyImpl.md)
 
 | Type | Name |
 | ---: | :--- |
+|  bool | [**m\_isSyncAllowed**](classSR__PTYPES__NS_1_1RigidbodyImpl.md#variable-m_issyncallowed)   = `true`<br> |
 |  [**Rigidbody**](classSR__PTYPES__NS_1_1Rigidbody.md) \* | [**m\_rigidbody**](classSR__PTYPES__NS_1_1RigidbodyImpl.md#variable-m_rigidbody)   = `nullptr`<br> |
 |  [**SR\_MATH\_NS::Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**m\_rigidbodyRotation**](classSR__PTYPES__NS_1_1RigidbodyImpl.md#variable-m_rigidbodyrotation)   = `SR\_MATH\_NS::InfinityQuaternion`<br> |
 |  SR\_MATH\_NS::FVector3 | [**m\_rigidbodyTranslation**](classSR__PTYPES__NS_1_1RigidbodyImpl.md#variable-m_rigidbodytranslation)   = `SR\_MATH\_NS::InfinityFV3`<br> |

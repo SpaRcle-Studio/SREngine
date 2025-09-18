@@ -78,6 +78,7 @@
 * **CalcTranslationPlanNormal** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
 * **Ceiling** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
 * **CmpEpsilonFV3** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
+* **Cross** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
 * **ComputeChecksum** ([**SR\_NETWORK\_NS**](namespaceSR__NETWORK__NS.md))
 * **CombineToPxCombine** ([**SR\_PHYSICS\_UTILS\_NS**](namespaceSR__PHYSICS__UTILS__NS.md))
 * **CreatePvdConnection** ([**SR\_PHYSICS\_UTILS\_NS**](namespaceSR__PHYSICS__UTILS__NS.md))
@@ -137,6 +138,7 @@
 * **DFCalculate** ([**SR\_GRAPH\_NS::SDF**](namespaceSR__GRAPH__NS_1_1SDF.md))
 * **deserialise\_uint64\_t** ([**SR\_HTYPES\_NS**](namespaceSR__HTYPES__NS.md))
 * **DecomposeTransform** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
+* **Dot** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
 * **DoubleMAX** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
 * **do\_distance\_unsafe** ([**SR\_TYPES\_NS::detail::distance\_detail**](namespaceSR__TYPES__NS_1_1detail_1_1distance__detail.md))
 * **distance\_unsafe** ([**SR\_TYPES\_NS::detail**](namespaceSR__TYPES__NS_1_1detail.md))
@@ -579,6 +581,7 @@
 * **PreProcess** ([**SR\_GRAPH\_NS::SRSL**](namespaceSR__GRAPH__NS_1_1SRSL.md))
 * **perm** ([**SR\_MATH\_NS::NoiseTable**](namespaceSR__MATH__NS_1_1NoiseTable.md))
 * **PhysXPvdConnection** ([**SR\_PHYSICS\_NS**](namespaceSR__PHYSICS__NS.md))
+* **PxQuatToQuat** ([**SR\_PHYSICS\_UTILS\_NS**](namespaceSR__PHYSICS__UTILS__NS.md))
 * **PxV3ToFV3** ([**SR\_PHYSICS\_UTILS\_NS**](namespaceSR__PHYSICS__UTILS__NS.md))
 * **ptrdiff\_t** ([**SR\_TYPES\_NS::detail**](namespaceSR__TYPES__NS_1_1detail.md))
 * **pow** ([**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
@@ -597,6 +600,7 @@
 
 * **QuickSort** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **QuickSortInternal** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
+* **QuatToPxQuat** ([**SR\_PHYSICS\_UTILS\_NS**](namespaceSR__PHYSICS__UTILS__NS.md))
 
 
 ## r

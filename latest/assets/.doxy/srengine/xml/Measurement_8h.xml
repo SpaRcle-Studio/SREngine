@@ -807,7 +807,7 @@
         </childnode>
         <childnode refid="55" relation="include">
         </childnode>
-        <childnode refid="56" relation="include">
+        <childnode refid="57" relation="include">
         </childnode>
         <childnode refid="52" relation="include">
         </childnode>
@@ -829,14 +829,20 @@
         </childnode>
         <childnode refid="50" relation="include">
         </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
       </node>
-      <node id="56">
+      <node id="57">
         <label>Engine/libs/Utils/inc/Utils/ECS/TransformZero.h</label>
         <link refid="TransformZero_8h_source"/>
       </node>
       <node id="52">
         <label>Engine/libs/Utils/inc/Utils/Game/DebugLogComponent.h</label>
         <link refid="DebugLogComponent_8h_source"/>
+      </node>
+      <node id="56">
+        <label>Engine/libs/Utils/inc/Utils/Game/LockPositionComponent.h</label>
+        <link refid="LockPositionComponent_8h_source"/>
       </node>
       <node id="53">
         <label>Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h</label>

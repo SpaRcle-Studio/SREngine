@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="78" column="9" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="78" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="81" column="9" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="81" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__PTYPES__NS_1_1Rigidbody_1a8e838f328c8579bd08b3853050cb51bd" prot="protected" static="no">
         <type><ref refid="classSR__PHYSICS__NS_1_1LibraryImpl" kindref="compound">SR_PHYSICS_NS::LibraryImpl</ref> *</type>
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="79" column="9" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="79" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="82" column="9" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="82" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__PTYPES__NS_1_1Rigidbody_1accc65a4dccf75bfdf211035af6a07deb" prot="protected" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SafePtr" kindref="compound">SR_HTYPES_NS::SafePtr</ref>&lt; PhysicsScene &gt;</type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="80" column="9" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="80" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="83" column="9" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="83" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="83" column="9" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="83" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="86" column="9" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="86" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="friend">
@@ -82,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="75" column="22" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="75" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="78" column="22" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="78" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -99,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="162" column="17" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="162" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="166" column="17" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="166" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__PTYPES__NS_1_1Rigidbody_1a20c687b68c7afa168ee330e90a54125d" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -114,7 +114,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="164" column="14" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="164" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="168" column="14" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="168" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__PTYPES__NS_1_1Rigidbody_1adcfc142eb3791ccfbd8d8328e98ce0c9" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -129,35 +129,51 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="166" column="14" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="166" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="170" column="14" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="170" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__PTYPES__NS_1_1Rigidbody_1a95d7e88cf17f0fea60805bb11ea0ae8c" prot="protected" static="no" mutable="no">
+      <memberdef kind="variable" id="classSR__PTYPES__NS_1_1Rigidbody_1a7bd3423c7da92d2a455f06bf616d09d9" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_PTYPES_NS::Rigidbody::m_useGravity</definition>
+        <argsstring></argsstring>
+        <name>m_useGravity</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody::m_useGravity</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="172" column="14" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="172" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__PTYPES__NS_1_1Rigidbody_1a0da3f30ef80d396be9327fd4c56168e3" prot="protected" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
-        <definition>SR_MATH_NS::FVector3 SR_PTYPES_NS::Rigidbody::m_center</definition>
+        <definition>SR_MATH_NS::FVector3 SR_PTYPES_NS::Rigidbody::m_centerOfMassOffset</definition>
         <argsstring></argsstring>
-        <name>m_center</name>
-        <qualifiedname>SR_PTYPES_NS::Rigidbody::m_center</qualifiedname>
+        <name>m_centerOfMassOffset</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody::m_centerOfMassOffset</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="168" column="30" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="168" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="174" column="30" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="174" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__PTYPES__NS_1_1Rigidbody_1aad07b277cddf078ff8f1e9c18597020f" prot="protected" static="no" mutable="yes">
-        <type>CollisionShape::Ptr</type>
-        <definition>CollisionShape::Ptr SR_PTYPES_NS::Rigidbody::m_shape</definition>
+      <memberdef kind="variable" id="classSR__PTYPES__NS_1_1Rigidbody_1a4702332764b3902390b17fc407855f93" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_PTYPES_NS::Rigidbody::m_fetchResults</definition>
         <argsstring></argsstring>
-        <name>m_shape</name>
-        <qualifiedname>SR_PTYPES_NS::Rigidbody::m_shape</qualifiedname>
+        <name>m_fetchResults</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody::m_fetchResults</qualifiedname>
+        <initializer>= true</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="170" column="37" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="170" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="176" column="14" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="176" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__PTYPES__NS_1_1Rigidbody_1aed9af4d13f070b9657baa23b92677473" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__PTYPES__NS_1_1RigidbodyImpl" kindref="compound">RigidbodyImpl</ref> *</type>
@@ -172,7 +188,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="172" column="23" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="172" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="178" column="23" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="178" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__PTYPES__NS_1_1Rigidbody_1aed08208749be420ad1b023ebb2c2913b" prot="protected" static="no" mutable="no">
         <type>LibraryPtr</type>
@@ -187,7 +203,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="173" column="20" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="173" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="179" column="20" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="179" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__PTYPES__NS_1_1Rigidbody_1a4d3314fa37ee1b40b9d7b7d65bc1f155" prot="protected" static="no" mutable="yes">
+        <type>std::vector&lt; <ref refid="classSR__PTYPES__NS_1_1CollisionShape" kindref="compound">CollisionShape</ref> * &gt;</type>
+        <definition>std::vector&lt;CollisionShape*&gt; SR_PTYPES_NS::Rigidbody::m_shapes</definition>
+        <argsstring></argsstring>
+        <name>m_shapes</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody::m_shapes</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="181" column="29" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="181" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__PTYPES__NS_1_1Rigidbody_1a5791f0b028bda41452be41ab59d8beca" prot="protected" static="no" mutable="yes">
         <type>PhysicsScenePtr</type>
@@ -201,7 +231,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="175" column="33" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="175" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="182" column="33" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="182" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__PTYPES__NS_1_1Rigidbody_1ac5a77c81d47ce273a54cbdc09545a132" prot="protected" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
@@ -210,12 +240,13 @@
         <name>m_translation</name>
         <qualifiedname>SR_PTYPES_NS::Rigidbody::m_translation</qualifiedname>
         <briefdescription>
+<para>decomposed matrix </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="177" column="30" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="177" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="185" column="30" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="185" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__PTYPES__NS_1_1Rigidbody_1a4928c92a79aa48c51ac74947733f789d" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">SR_MATH_NS::Quaternion</ref></type>
@@ -229,7 +260,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="178" column="32" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="178" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="186" column="32" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="186" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__PTYPES__NS_1_1Rigidbody_1a690813a298023a0a2ce8f8229e44d9ab" prot="protected" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
@@ -244,22 +275,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="180" column="30" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="180" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSR__PTYPES__NS_1_1Rigidbody_1aa19173288dcf9f86621fc5f0dca1ae5a" prot="protected" static="no" mutable="no">
-        <type>SR_PTYPES_NS::PhysicsMaterial::Ptr</type>
-        <definition>SR_PTYPES_NS::PhysicsMaterial::Ptr SR_PTYPES_NS::Rigidbody::m_material</definition>
-        <argsstring></argsstring>
-        <name>m_material</name>
-        <qualifiedname>SR_PTYPES_NS::Rigidbody::m_material</qualifiedname>
-        <initializer>= nullptr</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="182" column="44" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="182" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="187" column="30" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="187" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__PTYPES__NS_1_1Rigidbody_1a2a6f7be0b7fc4b7f596c8045802e40d8" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -274,7 +290,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="184" column="14" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="184" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="190" column="14" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="190" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__PTYPES__NS_1_1Rigidbody_1a857b2c43c24c3913dbbca2243a96116d" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -289,7 +305,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="185" column="14" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="185" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="191" column="14" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="191" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__PTYPES__NS_1_1Rigidbody_1aa525477eef474862aee24d63ed7cd1b1" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -304,7 +320,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="186" column="14" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="186" bodyend="-1"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="192" column="14" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="192" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -320,7 +336,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="86" column="9"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="89" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a1fa8a6f06b50934611628390dd37d924" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -334,7 +350,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="87" column="9"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="90" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a0abcc33f4e227627724cb3bb5cb698a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -353,7 +369,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="90" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="93" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a1a49fdcaeb455399028f744de86e04ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -367,7 +383,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="91" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="94" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a7aa40e106c7d9c98ef6b4c3ef6c4eb54" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -381,7 +397,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="93" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="96" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a6f8dd5e7fd02e9ef4069b283631ca0c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -395,7 +411,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="94" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="97" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a857b1f9fa92df7df614cdec68cbed33a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>SR_NODISCARD SR_UTILS_NS::Measurement</type>
@@ -411,7 +427,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="96" column="55"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="99" column="55"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a4b0a3a17900c987f5a7a5b7e25d4ed41" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -426,63 +442,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="98" column="27" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="98" bodyend="98"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="101" column="27" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="101" bodyend="101"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1aaa34b7423d64495c8330eff4eb2794de" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>SR_NODISCARD ShapeType</type>
-        <definition>SR_NODISCARD ShapeType SR_PTYPES_NS::Rigidbody::GetType</definition>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a672ab4b53f43fbd473f589842e0c67c7" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD const std::vector&lt; <ref refid="classSR__PTYPES__NS_1_1CollisionShape" kindref="compound">CollisionShape</ref> * &gt; &amp;</type>
+        <definition>SR_NODISCARD const std::vector&lt; CollisionShape * &gt; &amp; SR_PTYPES_NS::Rigidbody::GetShapes</definition>
         <argsstring>() const noexcept</argsstring>
-        <name>GetType</name>
-        <qualifiedname>SR_PTYPES_NS::Rigidbody::GetType</qualifiedname>
+        <name>GetShapes</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody::GetShapes</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="99" column="32"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a8ff4e09efeb16c0cb212f54a11e47afe" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>SR_NODISCARD const CollisionShape::Ptr &amp;</type>
-        <definition>SR_NODISCARD const CollisionShape::Ptr &amp; SR_PTYPES_NS::Rigidbody::GetCollisionShape</definition>
-        <argsstring>() const noexcept</argsstring>
-        <name>GetCollisionShape</name>
-        <qualifiedname>SR_PTYPES_NS::Rigidbody::GetCollisionShape</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="100" column="48"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1ad47d428ca458072a49ece50e0cbdaaf0" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
-        <definition>SR_NODISCARD SR_MATH_NS::FVector3 SR_PTYPES_NS::Rigidbody::GetCenter</definition>
-        <argsstring>() const noexcept</argsstring>
-        <name>GetCenter</name>
-        <qualifiedname>SR_PTYPES_NS::Rigidbody::GetCenter</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="101" column="43"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a4cc2f1afea660661f0868ec2865af99b" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
-        <definition>SR_NODISCARD SR_MATH_NS::FVector3 SR_PTYPES_NS::Rigidbody::GetCenterDirection</definition>
-        <argsstring>() const noexcept</argsstring>
-        <name>GetCenterDirection</name>
-        <qualifiedname>SR_PTYPES_NS::Rigidbody::GetCenterDirection</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="102" column="43"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="103" column="40" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="103" bodyend="103"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a7e379c9556c3315218ff96bb5ab77796" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD float_t</type>
@@ -496,7 +470,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="103" column="30"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="104" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1aa9481f582333acf391072a0091ff88cd" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -510,7 +484,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="104" column="27" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="104" bodyend="104"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="105" column="27" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="105" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1aac8714b486a84ca9ae62176e65ac134f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_PTYPES_NS::Rigidbody::IsUseGravity</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsUseGravity</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody::IsUseGravity</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="106" column="27" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="106" bodyend="106"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1adc9677e981f2184c1382c1686b7605fb" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -524,7 +512,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="105" column="27"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="107" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1ab1e9d4cd70f235b9f1a4f6e8cce09caf" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -538,7 +526,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="106" column="27" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="106" bodyend="106"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="108" column="27" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="108" bodyend="108"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a57b2e63bbbc6bb1d272470da5d92952e" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -552,7 +540,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="107" column="27" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="107" bodyend="107"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="109" column="27" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="109" bodyend="109"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a673709aff2f5f806291d34c309fa104b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -566,7 +554,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="108" column="27" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="108" bodyend="108"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="110" column="27" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="110" bodyend="110"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a34d6be2eeb49a1c6b12fed3d62e7c9aa" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD void *</type>
@@ -580,11 +568,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="109" column="27"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="111" column="27"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a9cb03ac6ee1cdad67094fe7340330319" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
-        <definition>SR_NODISCARD SR_MATH_NS::FVector3 SR_PTYPES_NS::Rigidbody::GetTranslation</definition>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a6aa24fcac9dd4e90ce25cfcd395524d1" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD const SR_MATH_NS::FVector3 &amp;</type>
+        <definition>SR_NODISCARD const SR_MATH_NS::FVector3 &amp; SR_PTYPES_NS::Rigidbody::GetTranslation</definition>
         <argsstring>() const noexcept</argsstring>
         <name>GetTranslation</name>
         <qualifiedname>SR_PTYPES_NS::Rigidbody::GetTranslation</qualifiedname>
@@ -594,11 +582,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="110" column="43" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="110" bodyend="110"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="112" column="49" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="112" bodyend="112"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1aff96b9c3a8d4d54dd60d6462d4e2d959" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">SR_MATH_NS::Quaternion</ref></type>
-        <definition>SR_NODISCARD SR_MATH_NS::Quaternion SR_PTYPES_NS::Rigidbody::GetRotation</definition>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1addde6618ac0e68a8c2d790a236e8f99f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">SR_MATH_NS::Quaternion</ref> &amp;</type>
+        <definition>SR_NODISCARD const SR_MATH_NS::Quaternion &amp; SR_PTYPES_NS::Rigidbody::GetRotation</definition>
         <argsstring>() const noexcept</argsstring>
         <name>GetRotation</name>
         <qualifiedname>SR_PTYPES_NS::Rigidbody::GetRotation</qualifiedname>
@@ -608,11 +596,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="111" column="45" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="111" bodyend="111"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="113" column="51" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="113" bodyend="113"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a4f8904be33576494d8b8780a5358ab74" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
-        <definition>SR_NODISCARD SR_MATH_NS::FVector3 SR_PTYPES_NS::Rigidbody::GetScale</definition>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1ac8ff6954199a26b78f7a9cb2aeafde13" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD const SR_MATH_NS::FVector3 &amp;</type>
+        <definition>SR_NODISCARD const SR_MATH_NS::FVector3 &amp; SR_PTYPES_NS::Rigidbody::GetScale</definition>
         <argsstring>() const noexcept</argsstring>
         <name>GetScale</name>
         <qualifiedname>SR_PTYPES_NS::Rigidbody::GetScale</qualifiedname>
@@ -622,21 +610,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="112" column="43" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="112" bodyend="112"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="114" column="49" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="114" bodyend="114"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1ae4f143109f962a743ba423ee86c6e43a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>SR_NODISCARD PhysicsMaterial::Ptr</type>
-        <definition>SR_NODISCARD PhysicsMaterial::Ptr SR_PTYPES_NS::Rigidbody::GetPhysicsMaterial</definition>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a669d6690de06c762aebc5a27b94e9ed2" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD const SR_MATH_NS::FVector3 &amp;</type>
+        <definition>SR_NODISCARD const SR_MATH_NS::FVector3 &amp; SR_PTYPES_NS::Rigidbody::GetCenterOfMassOffset</definition>
         <argsstring>() const noexcept</argsstring>
-        <name>GetPhysicsMaterial</name>
-        <qualifiedname>SR_PTYPES_NS::Rigidbody::GetPhysicsMaterial</qualifiedname>
+        <name>GetCenterOfMassOffset</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody::GetCenterOfMassOffset</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="113" column="43" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="113" bodyend="113"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="115" column="49" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="115" bodyend="115"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a8dc1dc6d573773758afa15c305261d00" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -650,7 +638,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="114" column="27"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="116" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1ab2d7e35d3053f99f974dc28f4b045bf9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD RBUpdShapeRes</type>
@@ -664,7 +652,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="115" column="36"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="117" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1ab45a2e1491e7f2c5444f5f1699557866" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -682,7 +670,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="116" column="27"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="118" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a610deabaeb0070ab226f9ee916cda38b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__PTYPES__NS_1_1CollisionShape" kindref="compound">CollisionShape</ref> &gt;</type>
+        <definition>SR_HTYPES_NS::SharedPtr&lt; CollisionShape &gt; SR_PTYPES_NS::Rigidbody::AddCollider</definition>
+        <argsstring>(ShapeType type)</argsstring>
+        <name>AddCollider</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody::AddCollider</qualifiedname>
+        <param>
+          <type>ShapeType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="120" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1aa7725c58c8f77e15a16ecb07a2295b1f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -701,7 +707,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="118" column="14" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="118" bodyend="118"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="122" column="14" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="122" bodyend="122"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1aaf6b85e6c78c67639bf4358a8a5f54d4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -720,7 +726,43 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="119" column="14" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="119" bodyend="119"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="123" column="14" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="123" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a98525b709547e6c7ad0ae162436c6e9a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_PTYPES_NS::Rigidbody::AttachShape</definition>
+        <argsstring>(CollisionShape *pShape)</argsstring>
+        <name>AttachShape</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody::AttachShape</qualifiedname>
+        <param>
+          <type><ref refid="classSR__PTYPES__NS_1_1CollisionShape" kindref="compound">CollisionShape</ref> *</type>
+          <declname>pShape</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="125" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1ab2b167554f4ca159976dcc4aea86ced7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_PTYPES_NS::Rigidbody::DetachShape</definition>
+        <argsstring>(CollisionShape *pShape)</argsstring>
+        <name>DetachShape</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody::DetachShape</qualifiedname>
+        <param>
+          <type><ref refid="classSR__PTYPES__NS_1_1CollisionShape" kindref="compound">CollisionShape</ref> *</type>
+          <declname>pShape</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="126" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a2acd2a0ab912c157b997b346fc886110" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -738,7 +780,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="121" column="22"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="128" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1aff81ad08e33d8df8a7e038a48eee36b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -756,17 +798,53 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="122" column="22"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="129" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a994633cb07d2ac86d7b16c12463c6f8f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a8bf85c19c0a4e6f1710306a7e89ec3f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
-        <definition>virtual void SR_PTYPES_NS::Rigidbody::SetCenter</definition>
-        <argsstring>(const SR_MATH_NS::FVector3 &amp;center)</argsstring>
-        <name>SetCenter</name>
-        <qualifiedname>SR_PTYPES_NS::Rigidbody::SetCenter</qualifiedname>
+        <definition>virtual void SR_PTYPES_NS::Rigidbody::SetUseGravity</definition>
+        <argsstring>(bool value)</argsstring>
+        <name>SetUseGravity</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody::SetUseGravity</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="130" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a7482739e89847b8903cb59e21c7bcf8c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_PTYPES_NS::Rigidbody::SetFetchResults</definition>
+        <argsstring>(bool value)</argsstring>
+        <name>SetFetchResults</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody::SetFetchResults</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="131" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1ad0264393de31cbfc13edc60ea6a720ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_PTYPES_NS::Rigidbody::SetCenterOfMassOffset</definition>
+        <argsstring>(const SR_MATH_NS::FVector3 &amp;offset)</argsstring>
+        <name>SetCenterOfMassOffset</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody::SetCenterOfMassOffset</qualifiedname>
         <param>
           <type>const SR_MATH_NS::FVector3 &amp;</type>
-          <declname>center</declname>
+          <declname>offset</declname>
         </param>
         <briefdescription>
         </briefdescription>
@@ -774,25 +852,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="124" column="22"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a24f5465a52226de77a208a098157cbd2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
-        <type>void</type>
-        <definition>virtual void SR_PTYPES_NS::Rigidbody::SetType</definition>
-        <argsstring>(ShapeType type)</argsstring>
-        <name>SetType</name>
-        <qualifiedname>SR_PTYPES_NS::Rigidbody::SetType</qualifiedname>
-        <param>
-          <type>ShapeType</type>
-          <declname>type</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="125" column="22"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="133" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a4ecd16cddd8b0df30345daf0041fb74f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -810,43 +870,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="126" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1acee9d7c5ffbccdb4eb4eda9efd2135e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_PTYPES_NS::Rigidbody::SetMaterial</definition>
-        <argsstring>(const PhysicsMaterial::Ptr &amp;pMaterial)</argsstring>
-        <name>SetMaterial</name>
-        <qualifiedname>SR_PTYPES_NS::Rigidbody::SetMaterial</qualifiedname>
-        <param>
-          <type>const PhysicsMaterial::Ptr &amp;</type>
-          <declname>pMaterial</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="128" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a4445f1afdadd8f48a5623c9cc455d1c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_PTYPES_NS::Rigidbody::SetMaterial</definition>
-        <argsstring>(const SR_UTILS_NS::Path &amp;path)</argsstring>
-        <name>SetMaterial</name>
-        <qualifiedname>SR_PTYPES_NS::Rigidbody::SetMaterial</qualifiedname>
-        <param>
-          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
-          <declname>path</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="129" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="135" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1abea25ed2ee078e4efdcadcc75a6baf76" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -860,7 +884,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="131" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="137" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a7f2e8699bd3193038337a5d70bccb3a9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -880,7 +904,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="133" column="37" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="133" bodyend="139"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="139" column="37" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="139" bodyend="145"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -896,7 +920,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="142" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="148" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1ac5f56aecdce13e617ad21d3f0d2ca808" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -915,7 +939,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="144" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="150" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a5f07661c4a5634c6ca706569dc67d58b" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -930,7 +954,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="145" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="151" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a84be4e404cda0202f7aa72549f8c6b90" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -945,7 +969,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="146" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="152" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a1549f428c9f7f1b02d23976a7b115643" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -961,7 +985,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="147" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="153" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a37c006bf1edba7e91ba456edc91fc826" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -977,7 +1001,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="148" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="154" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a151d548ab301e1d0d2768c9f098952e9" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -992,7 +1016,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="150" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="156" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1afcffc336186393fff3ef13e44f46d063" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const PhysicsScenePtr &amp;</type>
@@ -1006,7 +1030,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="152" column="44"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="158" column="44"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1ad030330291748075ebb435a67d654a5a" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1025,25 +1049,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="154" column="35" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="154" bodyend="156"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody_1a7e5a02d29c41e3b04cd8f1da9f3bd70a" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_PTYPES_NS::Rigidbody::SetShape</definition>
-        <argsstring>(const CollisionShape::Ptr &amp;pShape)</argsstring>
-        <name>SetShape</name>
-        <qualifiedname>SR_PTYPES_NS::Rigidbody::SetShape</qualifiedname>
-        <param>
-          <type>const CollisionShape::Ptr &amp;</type>
-          <declname>pShape</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="158" column="14"/>
+        <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="160" column="35" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="160" bodyend="162"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1107,7 +1113,7 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
         <childnode refid="6" relation="usage">
-          <edgelabel>m_center</edgelabel>
+          <edgelabel>m_centerOfMassOffset</edgelabel>
           <edgelabel>m_scale</edgelabel>
           <edgelabel>m_translation</edgelabel>
         </childnode>
@@ -1169,8 +1175,10 @@
         <link refid="structSR__MATH__NS_1_1Vector3"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="74" column="5" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="74" bodyend="188"/>
+    <location file="Engine/libs/Physics/inc/Physics/Rigidbody.h" line="77" column="5" bodyfile="Engine/libs/Physics/inc/Physics/Rigidbody.h" bodystart="77" bodyend="194"/>
     <listofallmembers>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a610deabaeb0070ab226f9ee916cda38b" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>AddCollider</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a98525b709547e6c7ad0ae162436c6e9a" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>AttachShape</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>BaseComponent</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ad595cda1bf5fd49695826b348848bea7" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>CheckActivity</name></member>
@@ -1178,13 +1186,12 @@
       <member refid="classSR__UTILS__NS_1_1Component_1ae178f96f84ede2be45870eab162e794d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>CloneComponent</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a399c77c103e176a04ad7781b72c314ee" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>Component</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1af21012e67de013634a8e25e8900f4f7c" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>Detach</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1ab2b167554f4ca159976dcc4aea86ced7" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>DetachShape</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a4b0a3a17900c987f5a7a5b7e25d4ed41" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>ExecuteInEditMode</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1acae95de33825449f163ab99828593fd5" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>FixedUpdate</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aebb43fee7f75dd142ad299853208ee1e" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>GameObjectPtr</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ad0630357a7ef40b1c526565323c1cea0" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>GetBarycenter</name></member>
-      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1ad47d428ca458072a49ece50e0cbdaaf0" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>GetCenter</name></member>
-      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a4cc2f1afea660661f0868ec2865af99b" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>GetCenterDirection</name></member>
-      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a8ff4e09efeb16c0cb212f54a11e47afe" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>GetCollisionShape</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a669d6690de06c762aebc5a27b94e9ed2" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>GetCenterOfMassOffset</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a9d72186be6f9c2f138a8ad989b440c01" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>GetGameObject</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a34d6be2eeb49a1c6b12fed3d62e7c9aa" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>GetHandle</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1ad030330291748075ebb435a67d654a5a" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>GetImpl</name></member>
@@ -1193,16 +1200,15 @@
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a7e379c9556c3315218ff96bb5ab77796" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>GetMass</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a857b1f9fa92df7df614cdec68cbed33a" prot="public" virt="pure-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>GetMeasurement</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ae81e0c4dd084a7d3d4620e53c10ca2fc" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>GetParent</name></member>
-      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1ae4f143109f962a743ba423ee86c6e43a" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>GetPhysicsMaterial</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1afcffc336186393fff3ef13e44f46d063" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>GetPhysicsScene</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a499a53cb08f173222c9a0bbc06af98fd" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>GetRoot</name></member>
-      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1aff96b9c3a8d4d54dd60d6462d4e2d959" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>GetRotation</name></member>
-      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a4f8904be33576494d8b8780a5358ab74" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>GetScale</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1addde6618ac0e68a8c2d790a236e8f99f" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>GetRotation</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1ac8ff6954199a26b78f7a9cb2aeafde13" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>GetScale</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a0baa97c9e541c9150845fcd338b6f4f8" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>GetScene</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a95a4325a27a80c7fbbf65c8ab86579a5" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>GetSceneObject</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a672ab4b53f43fbd473f589842e0c67c7" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>GetShapes</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab6d313e3075c5dabf5b41189b10f236e" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>GetTransform</name></member>
-      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a9cb03ac6ee1cdad67094fe7340330319" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>GetTranslation</name></member>
-      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1aaa34b7423d64495c8330eff4eb2794de" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>GetType</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a6aa24fcac9dd4e90ce25cfcd395524d1" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>GetTranslation</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a0255fd473a25f237c833df1d507bdbfb" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>HasParent</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a5dc93a6f5bb2867f7a20476c569451ed" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>HasScene</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1abea25ed2ee078e4efdcadcc75a6baf76" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>InitBody</name></member>
@@ -1223,9 +1229,11 @@
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1adc9677e981f2184c1382c1686b7605fb" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>IsStatic</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1aa9481f582333acf391072a0091ff88cd" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>IsTrigger</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ace675f265b886fef357651e43c29c5d4" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>IsUpdatable</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1aac8714b486a84ca9ae62176e65ac134f" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>IsUseGravity</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1af7cb379e3802c66b0a864bf1178bfda8" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>LateUpdate</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a8e838f328c8579bd08b3853050cb51bd" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>LibraryPtr</name></member>
-      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a95d7e88cf17f0fea60805bb11ea0ae8c" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>m_center</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a0da3f30ef80d396be9327fd4c56168e3" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>m_centerOfMassOffset</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a4702332764b3902390b17fc407855f93" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>m_fetchResults</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1aed9af4d13f070b9657baa23b92677473" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>m_impl</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aa9adbbbd60ec4e4065d8a953778488df" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>m_indexInSceneUpdater</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a58ed325cff4da93cce7d1ffd323e4886" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>m_isActive</name></member>
@@ -1241,15 +1249,15 @@
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a20c687b68c7afa168ee330e90a54125d" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>m_isTrigger</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1aed08208749be420ad1b023ebb2c2913b" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>m_library</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a526956950f5acfc4b0b2aad5dfae0895" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>m_mass</name></member>
-      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1aa19173288dcf9f86621fc5f0dca1ae5a" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>m_material</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a9dddd30253cd78eb28f504e1afb66514" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>m_parent</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a5791f0b028bda41452be41ab59d8beca" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>m_physicsScene</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a4928c92a79aa48c51ac74947733f789d" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>m_rotation</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a690813a298023a0a2ce8f8229e44d9ab" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>m_scale</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ae7b09faaab768e65bf45cef6d3a84666" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>m_scene</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a5bbd2e2f1ed3059025e390d428d4d6ac" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>m_sceneObject</name></member>
-      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1aad07b277cddf078ff8f1e9c18597020f" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>m_shape</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a4d3314fa37ee1b40b9d7b7d65bc1f155" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>m_shapes</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1ac5a77c81d47ce273a54cbdc09545a132" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>m_translation</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a7bd3423c7da92d2a455f06bf616d09d9" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>m_useGravity</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a1549f428c9f7f1b02d23976a7b115643" prot="protected" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>OnAttached</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a1a42ced6421db34114f544ba2d7b6c6d" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>OnBeforeLayerChanged</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aaa0c5a5e6d07bf4d4516229fe544dd49" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>OnCollisionEnter</name></member>
@@ -1272,19 +1280,17 @@
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1ac993ace86683dcb490f72bcc44b7b12d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>Rigidbody</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a6e97391d1dc50a29f1bdc0179c925019" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>SceneObjectPtr</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a2e37d2ebbceab36530a6c79cad4b3606" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>ScenePtr</name></member>
-      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a994633cb07d2ac86d7b16c12463c6f8f" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>SetCenter</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1ad0264393de31cbfc13edc60ea6a720ad" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>SetCenterOfMassOffset</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ad94a8ad5e03600e4f9bdae868ba6021b" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>SetEnabled</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a7482739e89847b8903cb59e21c7bcf8c" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>SetFetchResults</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1af57bdc6a2c4f4ed50fec8a5175bcbf8f" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>SetIndexIdSceneUpdater</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1aff81ad08e33d8df8a7e038a48eee36b9" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>SetIsStatic</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a2acd2a0ab912c157b997b346fc886110" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>SetIsTrigger</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a4ecd16cddd8b0df30345daf0041fb74f" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>SetMass</name></member>
-      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1acee9d7c5ffbccdb4eb4eda9efd2135e8" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>SetMaterial</name></member>
-      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a4445f1afdadd8f48a5623c9cc455d1c9" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>SetMaterial</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1aa7725c58c8f77e15a16ecb07a2295b1f" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>SetMatrixDirty</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ac9780c1f95cd3106101f4e1595550816" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>SetParent</name></member>
-      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a7e5a02d29c41e3b04cd8f1da9f3bd70a" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>SetShape</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1aaf6b85e6c78c67639bf4358a8a5f54d4" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>SetShapeDirty</name></member>
-      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a24f5465a52226de77a208a098157cbd2" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>SetType</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a8bf85c19c0a4e6f1710306a7e89ec3f3" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>SetUseGravity</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1ae75945d7d4a4f7efa234f9204138aa17" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>SR_PHYSICS_NS::PhysicsScene</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a572b27823d61376ebbd0c33758ea5d6f" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>Start</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a3791d9222d5fdbb33d34241e641812cc" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody</scope><name>Super</name></member>

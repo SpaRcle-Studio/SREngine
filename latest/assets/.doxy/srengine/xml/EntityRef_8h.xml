@@ -6,6 +6,7 @@
     <includes refid="EntityController_8h" local="no">Utils/ECS/EntityController.h</includes>
     <includedby refid="SkinnedMesh_8h" local="no">Engine/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</includedby>
     <includedby refid="UIWindowNode_8h" local="no">Engine/libs/Graphics/inc/Graphics/UI/UIWindowNode.h</includedby>
+    <includedby refid="CollisionShape_8h" local="no">Engine/libs/Physics/inc/Physics/CollisionShape.h</includedby>
     <incdepgraph>
       <node id="112">
         <label>Utils/Common/AnyMarshal.h</label>
@@ -1005,12 +1006,60 @@
         <label>Engine/libs/Graphics/inc/Graphics/UI/UIWindowNode.h</label>
         <link refid="UIWindowNode_8h_source"/>
       </node>
+      <node id="8">
+        <label>Engine/libs/Physics/inc/Physics/2D/Rigidbody2D.h</label>
+        <link refid="Rigidbody2D_8h_source"/>
+      </node>
+      <node id="9">
+        <label>Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h</label>
+        <link refid="Rigidbody3D_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h</label>
+        <link refid="Bullet3CollisionShape_8h_source"/>
+      </node>
+      <node id="10">
+        <label>Engine/libs/Physics/inc/Physics/Bullet3/Bullet3Rigidbody3D.h</label>
+        <link refid="Bullet3Rigidbody3D_8h_source"/>
+      </node>
+      <node id="4">
+        <label>Engine/libs/Physics/inc/Physics/CollisionShape.h</label>
+        <link refid="CollisionShape_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h</label>
+        <link refid="PhysXCollisionShape_8h_source"/>
+      </node>
+      <node id="11">
+        <label>Engine/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h</label>
+        <link refid="PhysXRigidbody3D_8h_source"/>
+      </node>
+      <node id="7">
+        <label>Engine/libs/Physics/inc/Physics/Rigidbody.h</label>
+        <link refid="Rigidbody_8h_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
       <node id="1">
         <label>Engine/libs/Utils/inc/Utils/ECS/EntityRef.h</label>
         <link refid="EntityRef_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

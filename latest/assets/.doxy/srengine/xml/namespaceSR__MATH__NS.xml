@@ -283,7 +283,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="777" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="777" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="781" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="781" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector3_8h_1add6b330eb901c035034dd90071be1fd3" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; int32_t &gt;</type>
@@ -297,7 +297,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="778" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="778" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="782" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="782" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector3_8h_1a8094d49587a7bdbb32095580b21f3569" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; uint32_t &gt;</type>
@@ -311,7 +311,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="779" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="779" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="783" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="783" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector3_8h_1a2e21de6b81820721056fa8a6f478873f" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; bool &gt;</type>
@@ -325,7 +325,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="780" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="780" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="784" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="784" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Vector4_8h_1afea3818a990ae3c65e79ef5aa83fd9e4" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">Vector4</ref>&lt; Unit &gt;</type>
@@ -501,7 +501,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="102" column="36" bodyfile="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="102" bodyend="102"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="105" column="36" bodyfile="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="105" bodyend="105"/>
       </memberdef>
       <memberdef kind="variable" id="Vector2_8h_1a2cd38c94ec3d103af40e77f0a2a0cee4" prot="public" static="yes" mutable="no">
         <type>SR_INLINE const <ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">FVector2</ref></type>
@@ -546,7 +546,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="782" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="782" bodyend="782"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="786" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="786" bodyend="786"/>
       </memberdef>
       <memberdef kind="variable" id="Vector3_8h_1a2273f6a66c33776961808f35ac2add59" prot="public" static="yes" mutable="no">
         <type>SR_INLINE const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref></type>
@@ -565,7 +565,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="783" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="783" bodyend="787"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="787" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="787" bodyend="791"/>
       </memberdef>
       <memberdef kind="variable" id="Vector4_8h_1a3c1b358c33546a81df1e0a72caad36ee" prot="public" static="no" extern="yes" mutable="no">
         <type>std::unordered_map&lt; SRHashType, <ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref> &gt;</type>
@@ -1587,6 +1587,60 @@
         <inbodydescription>
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Math/Size.h" line="12" column="5" declfile="Engine/libs/Utils/inc/Utils/Math/Size.h" declline="12" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="Vector3_8h_1a9145333d0f2cddc66166284ad2b080da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>SR_NODISCARD T</type>
+        <definition>SR_NODISCARD T SR_MATH_NS::Dot</definition>
+        <argsstring>(const Vector3&lt; T &gt; &amp;a, const Vector3&lt; T &gt; &amp;b)</argsstring>
+        <name>Dot</name>
+        <qualifiedname>SR_MATH_NS::Dot</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; T &gt; &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; T &gt; &amp;</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="823" column="31" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="823" bodyend="825"/>
+      </memberdef>
+      <memberdef kind="function" id="Vector3_8h_1a643cf519f81d08c9db9faabbfa1f174a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; T &gt;</type>
+        <definition>SR_NODISCARD Vector3&lt; T &gt; SR_MATH_NS::Cross</definition>
+        <argsstring>(const Vector3&lt; T &gt; &amp;a, const Vector3&lt; T &gt; &amp;b)</argsstring>
+        <name>Cross</name>
+        <qualifiedname>SR_MATH_NS::Cross</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; T &gt; &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; T &gt; &amp;</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="827" column="37" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="827" bodyend="833"/>
       </memberdef>
       <memberdef kind="function" id="Vector4_8h_1a057315e58c05b1f6d781e56882180c6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">FVector4</ref></type>

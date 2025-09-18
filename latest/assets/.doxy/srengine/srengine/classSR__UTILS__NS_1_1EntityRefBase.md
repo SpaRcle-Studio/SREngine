@@ -17,7 +17,7 @@ _@inspector(EntityRefPropertyDrawer)_
 Inherits the following classes: [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 
 
-Inherited by the following classes: [SR\_UTILS\_NS::EntityRef](classSR__UTILS__NS_1_1EntityRef.md),  [SR\_UTILS\_NS::EntityRef](classSR__UTILS__NS_1_1EntityRef.md),  [SR\_UTILS\_NS::EntityRef](classSR__UTILS__NS_1_1EntityRef.md)
+Inherited by the following classes: [SR\_UTILS\_NS::EntityRef](classSR__UTILS__NS_1_1EntityRef.md),  [SR\_UTILS\_NS::EntityRef](classSR__UTILS__NS_1_1EntityRef.md),  [SR\_UTILS\_NS::EntityRef](classSR__UTILS__NS_1_1EntityRef.md),  [SR\_UTILS\_NS::EntityRef](classSR__UTILS__NS_1_1EntityRef.md)
 
 
 

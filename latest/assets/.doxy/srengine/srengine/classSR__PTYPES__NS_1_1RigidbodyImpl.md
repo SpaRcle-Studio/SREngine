@@ -77,6 +77,7 @@ Inherited by the following classes: [SR\_PTYPES\_NS::Rigidbody2DImpl](classSR__P
 | virtual SR\_NODISCARD void \* | [**GetHandle**](#function-gethandle) () noexcept const = 0<br> |
 | virtual bool | [**InitBody**](#function-initbody) () <br> |
 |  void | [**SetRigidbody**](#function-setrigidbody) ([**Rigidbody**](classSR__PTYPES__NS_1_1Rigidbody.md) \* pRigidbody) <br> |
+|  void | [**SetSyncAllowed**](#function-setsyncallowed) (bool allowed) <br> |
 | virtual void | [**Synchronize**](#function-synchronize) () <br> |
 | virtual void | [**UpdateInertia**](#function-updateinertia) () <br> |
 | virtual bool | [**UpdateMatrix**](#function-updatematrix) (bool force) <br> |
@@ -116,6 +117,7 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 | Type | Name |
 | ---: | :--- |
+|  bool | [**m\_isSyncAllowed**](#variable-m_issyncallowed)   = `true`<br> |
 |  [**Rigidbody**](classSR__PTYPES__NS_1_1Rigidbody.md) \* | [**m\_rigidbody**](#variable-m_rigidbody)   = `nullptr`<br> |
 |  [**SR\_MATH\_NS::Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**m\_rigidbodyRotation**](#variable-m_rigidbodyrotation)   = `SR\_MATH\_NS::InfinityQuaternion`<br> |
 |  SR\_MATH\_NS::FVector3 | [**m\_rigidbodyTranslation**](#variable-m_rigidbodytranslation)   = `SR\_MATH\_NS::InfinityFV3`<br> |
@@ -231,6 +233,21 @@ inline void SR_PTYPES_NS::RigidbodyImpl::SetRigidbody (
 
 
 
+### function SetSyncAllowed 
+
+```C++
+inline void SR_PTYPES_NS::RigidbodyImpl::SetSyncAllowed (
+    bool allowed
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function Synchronize 
 
 ```C++
@@ -325,6 +342,19 @@ using SR_PTYPES_NS::RigidbodyImpl::Super =  SR_UTILS_NS::NonCopyable;
 <hr>
 ## Protected Attributes Documentation
 
+
+
+
+### variable m\_isSyncAllowed 
+
+```C++
+bool SR_PTYPES_NS::RigidbodyImpl::m_isSyncAllowed;
+```
+
+
+
+
+<hr>
 
 
 

@@ -135,19 +135,12 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
+      <node id="4">
+        <label>Entity</label>
+      </node>
       <node id="5">
         <label>SR_HTYPES_NS::IRawMeshHolder</label>
         <link refid="classSR__HTYPES__NS_1_1IRawMeshHolder"/>
-      </node>
-      <node id="3">
-        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="4" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
-        <label>SR_HTYPES_NS::SharedPtrBase</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
       </node>
       <node id="1">
         <label>SR_PTYPES_NS::Bullet3CollisionShape</label>
@@ -162,53 +155,30 @@
         </childnode>
         <childnode refid="5" relation="public-inheritance">
         </childnode>
-        <childnode refid="6" relation="public-inheritance">
-        </childnode>
       </node>
-      <node id="7">
-        <label>SR_UTILS_NS::SRClass</label>
-        <link refid="classSR__UTILS__NS_1_1SRClass"/>
-      </node>
-      <node id="6">
-        <label>SR_UTILS_NS::Serializable</label>
-        <link refid="classSR__UTILS__NS_1_1Serializable"/>
-        <childnode refid="7" relation="public-inheritance">
+      <node id="3">
+        <label>SR_UTILS_NS::Component</label>
+        <link refid="classSR__UTILS__NS_1_1Component"/>
+        <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="13">
+      <node id="4">
         <label>Entity</label>
       </node>
-      <node id="6">
+      <node id="7">
         <label>SR_HTYPES_NS::IRawMeshHolder</label>
         <link refid="classSR__HTYPES__NS_1_1IRawMeshHolder"/>
       </node>
-      <node id="3">
-        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="4" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
-        <label>SR_HTYPES_NS::SharedPtrBase</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
-        <childnode refid="5" relation="usage">
-          <edgelabel>m_data</edgelabel>
-        </childnode>
-      </node>
-      <node id="5">
-        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
-        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
-      </node>
-      <node id="18">
+      <node id="12">
         <label>SR_MATH_NS::Quaternion</label>
         <link refid="classSR__MATH__NS_1_1Quaternion"/>
       </node>
-      <node id="19">
+      <node id="13">
         <label>SR_PHYSICS_NS::LibraryImpl</label>
         <link refid="classSR__PHYSICS__NS_1_1LibraryImpl"/>
-        <childnode refid="10" relation="public-inheritance">
+        <childnode refid="11" relation="public-inheritance">
         </childnode>
       </node>
       <node id="1">
@@ -222,222 +192,239 @@
         <link refid="classSR__PTYPES__NS_1_1CollisionShape"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
-        <childnode refid="6" relation="public-inheritance">
-        </childnode>
         <childnode refid="7" relation="public-inheritance">
         </childnode>
-        <childnode refid="9" relation="usage">
+        <childnode refid="8" relation="usage">
+          <edgelabel>m_currentRigidbody</edgelabel>
+        </childnode>
+        <childnode refid="14" relation="usage">
           <edgelabel>m_impl</edgelabel>
         </childnode>
-        <childnode refid="11" relation="usage">
-          <edgelabel>m_rigidbody</edgelabel>
-        </childnode>
-        <childnode refid="16" relation="usage">
+        <childnode refid="9" relation="usage">
           <edgelabel>m_bounds</edgelabel>
-        </childnode>
-      </node>
-      <node id="9">
-        <label>SR_PTYPES_NS::CollisionShapeImpl</label>
-        <link refid="classSR__PTYPES__NS_1_1CollisionShapeImpl"/>
-        <childnode refid="10" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="11">
-        <label>SR_PTYPES_NS::Rigidbody</label>
-        <link refid="classSR__PTYPES__NS_1_1Rigidbody"/>
-        <childnode refid="12" relation="public-inheritance">
-        </childnode>
-        <childnode refid="16" relation="usage">
           <edgelabel>m_center</edgelabel>
           <edgelabel>m_scale</edgelabel>
           <edgelabel>m_translation</edgelabel>
         </childnode>
-        <childnode refid="17" relation="usage">
-          <edgelabel>m_impl</edgelabel>
-        </childnode>
-        <childnode refid="19" relation="usage">
-          <edgelabel>m_library</edgelabel>
-        </childnode>
-        <childnode refid="18" relation="usage">
+        <childnode refid="12" relation="usage">
           <edgelabel>m_rotation</edgelabel>
         </childnode>
-      </node>
-      <node id="17">
-        <label>SR_PTYPES_NS::RigidbodyImpl</label>
-        <link refid="classSR__PTYPES__NS_1_1RigidbodyImpl"/>
-        <childnode refid="10" relation="public-inheritance">
-        </childnode>
-        <childnode refid="11" relation="usage">
-          <edgelabel>m_rigidbody</edgelabel>
-        </childnode>
-        <childnode refid="18" relation="usage">
-          <edgelabel>m_rigidbodyRotation</edgelabel>
-        </childnode>
-        <childnode refid="16" relation="usage">
-          <edgelabel>m_rigidbodyTranslation</edgelabel>
-        </childnode>
-      </node>
-      <node id="12">
-        <label>SR_UTILS_NS::Component</label>
-        <link refid="classSR__UTILS__NS_1_1Component"/>
-        <childnode refid="13" relation="public-inheritance">
-        </childnode>
-        <childnode refid="14" relation="usage">
-          <edgelabel>m_parent</edgelabel>
-        </childnode>
         <childnode refid="15" relation="usage">
-          <edgelabel>m_scene</edgelabel>
+          <edgelabel>m_material</edgelabel>
         </childnode>
       </node>
       <node id="14">
-        <label>SR_UTILS_NS::IComponentable</label>
-        <link refid="classSR__UTILS__NS_1_1IComponentable"/>
-        <childnode refid="13" relation="public-inheritance">
+        <label>SR_PTYPES_NS::CollisionShapeImpl</label>
+        <link refid="classSR__PTYPES__NS_1_1CollisionShapeImpl"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>SR_PTYPES_NS::Rigidbody</label>
+        <link refid="classSR__PTYPES__NS_1_1Rigidbody"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>m_centerOfMassOffset</edgelabel>
+          <edgelabel>m_scale</edgelabel>
+          <edgelabel>m_translation</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>m_impl</edgelabel>
+        </childnode>
+        <childnode refid="13" relation="usage">
+          <edgelabel>m_library</edgelabel>
+        </childnode>
+        <childnode refid="12" relation="usage">
+          <edgelabel>m_rotation</edgelabel>
         </childnode>
       </node>
       <node id="10">
+        <label>SR_PTYPES_NS::RigidbodyImpl</label>
+        <link refid="classSR__PTYPES__NS_1_1RigidbodyImpl"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>m_rigidbody</edgelabel>
+        </childnode>
+        <childnode refid="12" relation="usage">
+          <edgelabel>m_rigidbodyRotation</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>m_rigidbodyTranslation</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::Component</label>
+        <link refid="classSR__UTILS__NS_1_1Component"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>m_parent</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_scene</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::IComponentable</label>
+        <link refid="classSR__UTILS__NS_1_1IComponentable"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
-      <node id="8">
-        <label>SR_UTILS_NS::SRClass</label>
-        <link refid="classSR__UTILS__NS_1_1SRClass"/>
-      </node>
-      <node id="7">
-        <label>SR_UTILS_NS::Serializable</label>
-        <link refid="classSR__UTILS__NS_1_1Serializable"/>
-        <childnode refid="8" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="15">
+        <label>SR_UTILS_NS::Path</label>
+        <link refid="classSR__UTILS__NS_1_1Path"/>
+      </node>
+      <node id="6">
         <label>SR_WORLD_NS::Scene</label>
         <link refid="classSR__WORLD__NS_1_1Scene"/>
-        <childnode refid="14" relation="public-inheritance">
+        <childnode refid="5" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="16">
+      <node id="9">
         <label>SR_MATH_NS::Vector3&lt; Unit &gt;</label>
         <link refid="structSR__MATH__NS_1_1Vector3"/>
       </node>
     </collaborationgraph>
     <location file="Engine/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" line="13" column="5" bodyfile="Engine/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h" bodystart="13" bodyend="30"/>
     <listofallmembers>
-      <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>AddSerializationFlags</name></member>
-      <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>AllocateStatic</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>AutoFree</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>AutoFree</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>Awake</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>BaseComponent</name></member>
       <member refid="classSR__PTYPES__NS_1_1Bullet3CollisionShape_1ad3ac24931c4f7064fc21a9b71795156e" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>Bullet3CollisionShape</name></member>
       <member refid="classSR__PTYPES__NS_1_1Bullet3CollisionShape_1a7a18cb9c7f5c96e35e0400596537d56d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>CalculateLocalInertia</name></member>
-      <member refid="classSR__UTILS__NS_1_1SRClass_1aab9dfdcd9d8baa2e11bdab5697ef429f" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>CloneTo</name></member>
-      <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a63e9f8d59e7d9f25345409c1dffc0e2a" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>CollisionShape</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>DecrementPointer</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>DynamicCast</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad15959b03040b4d3565ad5e847374898" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0150e1ba4d25a23f03f682f151c87592" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>Get</name></member>
-      <member refid="classSR__UTILS__NS_1_1SRClass_1a7734143f7ae123a6088320486af89283" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetBaseMetas</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad595cda1bf5fd49695826b348848bea7" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>CheckActivity</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ae178f96f84ede2be45870eab162e794d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>CloneComponent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a399c77c103e176a04ad7781b72c314ee" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>Component</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af21012e67de013634a8e25e8900f4f7c" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>Detach</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a0fc572b3d070357332937056cc0f3662" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>ExecuteInEditMode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1acae95de33825449f163ab99828593fd5" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>FixedUpdate</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aebb43fee7f75dd142ad299853208ee1e" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GameObjectPtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad0630357a7ef40b1c526565323c1cea0" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetBarycenter</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a5f6f3709e86da6137a31ed98197f4d38" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetBounds</name></member>
-      <member refid="classSR__UTILS__NS_1_1SRClass_1a97a0919298e9d1d53220613bded5ba69" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetClassStaticName</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a748dca0600451bffed8536ccb3bc6451" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetCenter</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a296f2edb8e6f155e294620cdec103d8f" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetCenterDirection</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9d72186be6f9c2f138a8ad989b440c01" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetGameObject</name></member>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a8cedda755c832cabdaaf14644939695d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetGeometryName</name></member>
       <member refid="classSR__PTYPES__NS_1_1Bullet3CollisionShape_1a2297f44ab771cb72fc9bae17a1a79f94" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetHandle</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a46758fc1f75e744e3ec3c0e33e1cfc7c" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetHeight</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1bc2cbdfbcd251764907ebd0dddef009" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetIndexInSceneUpdater</name></member>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a1f90420ae0c606687c75766d55d95621" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetMeshId</name></member>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a39436d2cc283eb4a57a268d6448f4fd3" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetMeshPath</name></member>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1af16c3ef83f6a6e8b98a62fc85a6928d0" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetMeshStringPath</name></member>
-      <member refid="classSR__UTILS__NS_1_1SRClass_1a16a351eac01dde110e273cfd05f1f7ed" prot="public" virt="pure-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetMeta</name></member>
-      <member refid="classSR__UTILS__NS_1_1SRClass_1a16837ff730fb4e276450a124d70eb2e4" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetMetaStatic</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ae81e0c4dd084a7d3d4620e53c10ca2fc" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetParent</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a5f1292710d1754f5bc83b5ad5ba48a79" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetPhysicsMaterial</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a2bc7ef2daab35462c864b0469708c018" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetPlaneSize</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetPtrData</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetPtrData</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a3a24afeef1bfafabb24b2382f97d7b0d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetRadius</name></member>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a699eb97dff6b2823a8606b356546d256" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetRawMesh</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetRawPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetRawPtr</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1aba6eeeec75f5607a7a052ebcc665272f" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetRigidbody</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a499a53cb08f173222c9a0bbc06af98fd" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetRoot</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShape_1ac8022c3e7e2a2a9d08a2072611a8e869" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetRotation</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a8d3c8afe2897917994beb2c8f035f251" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetScale</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a0baa97c9e541c9150845fcd338b6f4f8" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetScene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a95a4325a27a80c7fbbf65c8ab86579a5" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetSceneObject</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a31c04226ff49e04007fec2c8c0636cb5" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetSize</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetSRClass</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetThis</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ab6d313e3075c5dabf5b41189b10f236e" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetTransform</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a7d15be8e262414bc5b73f5eb390acc77" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetTranslation</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1ab1daff1452ec6b1fead62070e4b4e31c" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetType</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetUncheckedRef</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a5b9e46a96d1f3ffdcd128f071e6934ac" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetVertices</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a230b13e649bcde0823986aca025651e0" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>HasGeometry</name></member>
-      <member refid="classSR__UTILS__NS_1_1Serializable_1af5c00e9391fad105c30570cbda1a6285" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>HasSerializationFlags</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>IncrementPointer</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a0255fd473a25f237c833df1d507bdbfb" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>HasParent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a5dc93a6f5bb2867f7a20476c569451ed" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>HasScene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1601529fb5946634c4e4d235769b4b80" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>IsActive</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a3e946a2df87f7f239b757e7c95c3a7dc" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>IsAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aaa40b9cae6a7b9c771bcf20671f80455" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>IsAwake</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ac2786bf69d61b8eea8560256d1dee009" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>IsComponentLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a26327e3091acd6936c2fd29a5a5c9330" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>IsComponentValid</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a8f95ff169b8df189b211b036ba06def5" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>IsEnabled</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af9ad40b9b09d748d7e0b591f4b78b60f" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>IsPausedMode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a3d09e0388a5a982e6fe71cbf59f8c813" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>IsPlayingMode</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1af766ddc2bbffee81c0c5591e41ddcae1" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>IsShapeValid</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a547028a4a9ab2b115832b2000259e127" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>IsStarted</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ace675f265b886fef357651e43c29c5d4" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>IsUpdatable</name></member>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a38601beec7f801e569e00c1236d9e487" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>IsValidMeshId</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af7cb379e3802c66b0a864bf1178bfda8" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>LateUpdate</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1aae603ade2ab137101c2bf623738b111d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>LibraryPtr</name></member>
-      <member refid="classSR__UTILS__NS_1_1Serializable_1afbc9947b694481f8478c1a75a2fc465e" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>Load</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>m_basicManually</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a8fac0b531811f61b4a3207058e8366b9" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>m_bounds</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>m_data</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShape_1ab8cf8615aede21228fcb89e3144d6c4e" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>m_center</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShape_1aea51e2c9ac5e541243c061ebbb97364b" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>m_currentRigidbody</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a2d2d6d00ecdf80e0ffba5993af3810bb" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>m_debugId</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a02073e897b0153f09699f37cd4e87800" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>m_impl</name></member>
-      <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a0b3bb2266040a5311530ccd1ce52d916" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>m_rigidbody</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aa9adbbbd60ec4e4065d8a953778488df" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>m_indexInSceneUpdater</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a58ed325cff4da93cce7d1ffd323e4886" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>m_isActive</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a353c88717dd50e343371ffe0d0d8c068" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>m_isAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a01d2835c4cb9cab3dc85a24cb6330830" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>m_isAwake</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aa9bfad916eec33a0f4351054194c53e3" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>m_isComponentLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad9e404095f004e707f755beb764ab8e7" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>m_isEnabled</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a81d4029e3bdad67dc82ae854bb19aee7" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>m_isShapeDirty</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a4a854563851b2106daf5d678e3a4b3a6" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>m_isStarted</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a02b174e3751583d05b430f654813ed9a" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>m_material</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShape_1ad9ed14937c0aed7d03f578a9fd343046" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>m_materialData</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9dddd30253cd78eb28f504e1afb66514" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>m_parent</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a9fe0661915769fe66c3fd851344c6f62" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>m_rigidbody</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a57360cd66ea09794602601e2147a03a9" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>m_rotation</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShape_1ad48c73d80062593062296d83f912c39b" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>m_scale</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ae7b09faaab768e65bf45cef6d3a84666" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>m_scene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a5bbd2e2f1ed3059025e390d428d4d6ac" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>m_sceneObject</name></member>
       <member refid="classSR__PTYPES__NS_1_1Bullet3CollisionShape_1ab91cb7a778e3f1d3005cf5a7ba034f39" prot="private" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>m_shape</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a087c59af9760ac14246d8800b946da0f" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>m_translation</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a950802b4153d92deed19f5c527d3bc8a" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>m_type</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>MakeShared</name></member>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a1e49a98ca25d90f7b5a7208a58477f84" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>MeshIndex</name></member>
-      <member refid="classSR__UTILS__NS_1_1Serializable_1a27569f8d47ee0c52ed5e385253e14460" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>OnPostLoad</name></member>
-      <member refid="classSR__UTILS__NS_1_1Serializable_1afbe2a50f0f69bc0f52b51151058830d8" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>OnPostSave</name></member>
-      <member refid="classSR__UTILS__NS_1_1Serializable_1a2978d969c09702719b2ed5c84453b02d" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>OnPreLoad</name></member>
-      <member refid="classSR__UTILS__NS_1_1Serializable_1a8281e1a68416fd493dce2a48fa8ea660" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>OnPreSave</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a6e3f39cd7894486df8af8336c6778036" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>OnAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1a42ced6421db34114f544ba2d7b6c6d" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>OnBeforeLayerChanged</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aaa0c5a5e6d07bf4d4516229fe544dd49" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>OnCollisionEnter</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af64eb0df50ce6d50cd22662edf0e6a7b" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>OnCollisionExit</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a7a6557ebfc240e92b332b22fe85ebddf" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>OnCollisionStay</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ae31753f4a155ecfdc85b995a775aab1f" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>OnDestroy</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a41d2247200b367c2ed8eb0b65c872d1e" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>OnDetached</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a06176c791fe9aad499a12eb7200d2f86" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>OnDisable</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a36970940e195b2b4b7966e8b4b78c398" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>OnEnable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a561f35b144564e8df91651b3f8e57693" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>OnLayerChanged</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af7e2ecd6bef36595ac12274d6a6cc77c" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>OnLoaded</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShape_1abbfaf898b7975df1ff2580ad2e225193" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>OnMatrixDirty</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aee0027f96ce5bec8a30edf069fa4dc10" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>OnPriorityChanged</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1add34bdd0ff6bf78697d39ce2b155ae7c" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>OnRawMeshChanged</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>operator bool</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>operator!=</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>operator*</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>operator-&gt;</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>operator=</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>operator=</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>operator=</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>operator==</name></member>
-      <member refid="classSR__UTILS__NS_1_1Serializable_1ac8b16fec8d4003ae41fd3fe294595b36" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>OriginType</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a9f69b851462665ef5e55e94ecf77d6f2" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>OnRigidbodyDetached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aac7babfab0aaf8e811e05f8f55dbebb1" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>OnTriggerEnter</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a54e04b235d9aaa0f027996b71362242b" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>OnTriggerExit</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9bb3f2e63ed778951c409dba0bd1915f" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>OnTriggerStay</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a5b3c94dcc9fd4c8f2ed748601d0c4e2a" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>OriginType</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a18d31de7e76a270ccbf6399af87032f0" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>PhysicsScenePtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>PolymorphicCast</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a964d06a9debef4224caf3e79cab1557f" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>Ptr</name></member>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a164db9b7fa7f3789548e3fb65af02155" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>RawMeshPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>RecursiveLockIfValid</name></member>
-      <member refid="classSR__UTILS__NS_1_1SRClass_1afed952eb55d7441a18c4d3381d315fcf" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>RegisterPropertiesCodegen</name></member>
-      <member refid="classSR__PTYPES__NS_1_1CollisionShape_1aa9f46865f61b3173fb4196cddebafa02" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>ReInitDebugShape</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>ReinterpretCast</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a94b0c3672317a30a366af7a65697950e" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>RemoveDebugShape</name></member>
-      <member refid="classSR__UTILS__NS_1_1Serializable_1ab5d15ff431f7405c8ad940333e6417a5" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>RemoveSerializationFlags</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>Reset</name></member>
-      <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>Save</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a6e97391d1dc50a29f1bdc0179c925019" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SceneObjectPtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a2e37d2ebbceab36530a6c79cad4b3606" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>ScenePtr</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a6153ff5d49b470bbb64db12c63cf1e39" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SetBounds</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a2dd4d4ac8875229e3a7aa0122947c5f6" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SetCenter</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad94a8ad5e03600e4f9bdae868ba6021b" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SetEnabled</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1ad3127578427f4adb2c2530b32c8163d6" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SetHeight</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af57bdc6a2c4f4ed50fec8a5175bcbf8f" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SetIndexIdSceneUpdater</name></member>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a5a6bc29a5ae54972e18fb7d61124ecff" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SetMeshId</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ac9780c1f95cd3106101f4e1595550816" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SetParent</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a7ce02d5fdcd7e384f7a0d396dee9db01" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SetPlaneSize</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SetPointerFromBase</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1af7cfba14e9f9e6e5fc460d7970e7ee83" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SetRadius</name></member>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a8f54083212793185d112dfc01e612baf" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SetRawMesh</name></member>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1ad5f9834371708471d3f6712e145aa7ae" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SetRawMesh</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1af3bf913c9123e5e7c04f738707b6aa4d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SetRigidbody</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a763c4dbeb490f52cb4d0bf7d253514c9" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SetSize</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1abac2b9f7d97aa353fdcc13ce1baa2b91" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SetType</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SharedPointerType</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1afc3c958bc4a0ac65b5f5362512545035" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SharedPtrBase</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SharedPtrBase</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>StaticCast</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a572b27823d61376ebbd0c33758ea5d6f" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>Start</name></member>
       <member refid="classSR__PTYPES__NS_1_1Bullet3CollisionShape_1ac56371ff2d87d429ed48fa0474ccde2f" prot="private" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>Super</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>TryRecursiveLockIfValid</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>Unlock</name></member>
-      <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a4026e23408491761aa40dcea19cf8915" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>Update</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a55ba0d3b4c08092148668bae579366ff" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>TryGetParent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a02cdaa6ae8c728a1f66192c9e6f54322" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>TryGetScene</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a4ba2063604cbaa9adaf9807a7cc11f54" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>Update</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a1b9765ffacd92281c4b72157fdbf6bf5" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>UpdateDebugShape</name></member>
       <member refid="classSR__PTYPES__NS_1_1Bullet3CollisionShape_1a4007d7fa7f31b61bbe8969cc646c3f88" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>UpdateMatrix</name></member>
       <member refid="classSR__PTYPES__NS_1_1Bullet3CollisionShape_1a6ec0d2c0bb132bafbed93f65ba4930ab" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>UpdateShape</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a783dd9e4a58072de8ff19895693bca05" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>Valid</name></member>
-      <member refid="classSR__UTILS__NS_1_1Serializable_1a5aab0756802a67de9cb45b83b3e73c70" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>VerifyAfterLoad</name></member>
       <member refid="classSR__PTYPES__NS_1_1Bullet3CollisionShape_1a2a5486ebcd4eaf6aa6a27ebfc6002e90" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>~Bullet3CollisionShape</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1ad7531680cdb928bd184c69186f92a966" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>~CollisionShape</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a135465a44a99fa3e946782dbc11f56c7" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>~Component</name></member>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a13569cf849ebce2239302bf23a63690a" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>~IRawMeshHolder</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>~SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>~SharedPtrBase</name></member>
-      <member refid="classSR__UTILS__NS_1_1SRClass_1ad88a80732713966d7759d768bd65bbe5" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>~SRClass</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

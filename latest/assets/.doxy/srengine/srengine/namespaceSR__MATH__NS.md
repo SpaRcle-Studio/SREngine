@@ -133,7 +133,9 @@
 |  SR\_MAYBE\_UNUSED [**FVector4**](structSR__MATH__NS_1_1Vector4.md) | [**CalcRotationPlanNormal**](#function-calcrotationplannormal) (const [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & model, const SR\_MATH\_NS::FVector3 & cameraDir, Axis axis) <br> |
 |  SR\_MAYBE\_UNUSED [**FVector4**](structSR__MATH__NS_1_1Vector4.md) | [**CalcRotationPlanNormal**](#function-calcrotationplannormal) (const SR\_MATH\_NS::FVector3 & cameraDir, Axis axis) <br> |
 |  SR\_MAYBE\_UNUSED [**FVector4**](structSR__MATH__NS_1_1Vector4.md) | [**CalcTranslationPlanNormal**](#function-calctranslationplannormal) (const [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & model, const SR\_MATH\_NS::FVector3 & cameraEye, const SR\_MATH\_NS::FVector3 & cameraDir, Axis axis) <br> |
+|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Cross**](#function-cross) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & a, const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & b) <br> |
 |  SR\_MAYBE\_UNUSED bool | [**DecomposeTransform**](#function-decomposetransform) (const glm::mat4 & matrix, [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & translation, [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & rotation, [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & scale) <br> |
+|  SR\_NODISCARD T | [**Dot**](#function-dot) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & a, const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & b) <br> |
 |  SR\_INLINE\_STATIC void SR\_FASTCALL | [**GLMMultiplyMat4x4**](#function-glmmultiplymat4x4) (glm::mat4 & result, const glm::mat4 & m1, const glm::mat4 & m2) noexcept<br> |
 |  SR\_INLINE\_STATIC void SR\_FASTCALL | [**GLMMultiplyMat4x4**](#function-glmmultiplymat4x4) (glm::mat4 & result, const glm::mat4 & m1, const glm::mat3 & m2) noexcept<br> |
 |  SR\_NODISCARD SR\_INLINE\_STATIC glm::mat4 SR\_FASTCALL | [**GLMMultiplyMat4x4**](#function-glmmultiplymat4x4) (const glm::mat4 & m1, const glm::mat4 & m2) noexcept<br> |
@@ -833,6 +835,23 @@ SR_MAYBE_UNUSED FVector4 SR_MATH_NS::CalcTranslationPlanNormal (
 
 
 
+### function Cross 
+
+```C++
+template<typename T>
+SR_NODISCARD Vector3 < T > SR_MATH_NS::Cross (
+    const Vector3 < T > & a,
+    const Vector3 < T > & b
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function DecomposeTransform 
 
 ```C++
@@ -841,6 +860,23 @@ SR_MAYBE_UNUSED bool SR_MATH_NS::DecomposeTransform (
     FVector3 & translation,
     FVector3 & rotation,
     FVector3 & scale
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function Dot 
+
+```C++
+template<typename T>
+SR_NODISCARD T SR_MATH_NS::Dot (
+    const Vector3 < T > & a,
+    const Vector3 < T > & b
 ) 
 ```
 

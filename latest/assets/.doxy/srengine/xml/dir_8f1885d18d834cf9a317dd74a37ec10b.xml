@@ -4,6 +4,7 @@
     <compoundname>Engine/libs/Utils/inc/Utils/Game</compoundname>
     <innerfile refid="CameraFlyMover_8h">CameraFlyMover.h</innerfile>
     <innerfile refid="DebugLogComponent_8h">DebugLogComponent.h</innerfile>
+    <innerfile refid="LockPositionComponent_8h">LockPositionComponent.h</innerfile>
     <innerfile refid="LookAtComponent_8h">LookAtComponent.h</innerfile>
     <briefdescription>
     </briefdescription>

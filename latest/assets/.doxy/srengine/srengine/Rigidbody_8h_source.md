@@ -66,12 +66,15 @@ namespace SR_PTYPES_NS {
         virtual bool UpdateMatrix(bool force) { return true; }
         virtual bool UpdateShapeInternal() { return true; }
 
+        void SetSyncAllowed(bool allowed) { m_isSyncAllowed = allowed; }
+
     protected:
         template<typename T> SR_NODISCARD T* GetRigidbody() const noexcept {
             return dynamic_cast<T*>(m_rigidbody);
         }
 
     protected:
+        bool m_isSyncAllowed = true;
         Rigidbody* m_rigidbody = nullptr;
         SR_MATH_NS::Quaternion m_rigidbodyRotation = SR_MATH_NS::InfinityQuaternion;
         SR_MATH_NS::FVector3 m_rigidbodyTranslation = SR_MATH_NS::InfinityFV3;
@@ -104,37 +107,40 @@ namespace SR_PTYPES_NS {
         SR_NODISCARD virtual SR_UTILS_NS::Measurement GetMeasurement() const = 0;
 
         SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
-        SR_NODISCARD ShapeType GetType() const noexcept;
-        SR_NODISCARD const CollisionShape::Ptr& GetCollisionShape() const noexcept;
-        SR_NODISCARD SR_MATH_NS::FVector3 GetCenter() const noexcept;
-        SR_NODISCARD SR_MATH_NS::FVector3 GetCenterDirection() const noexcept;
+        //SR_NODISCARD ShapeType GetType() const noexcept;
+        SR_NODISCARD const std::vector<CollisionShape*>& GetShapes() const noexcept { return m_shapes; }
         SR_NODISCARD float_t GetMass() const noexcept;
         SR_NODISCARD bool IsTrigger() const noexcept { return m_isTrigger; }
+        SR_NODISCARD bool IsUseGravity() const noexcept { return m_useGravity; }
         SR_NODISCARD bool IsStatic() const noexcept;
         SR_NODISCARD bool IsMatrixDirty() const noexcept { return m_isMatrixDirty; }
         SR_NODISCARD bool IsShapeDirty() const noexcept { return m_isShapeDirty; }
         SR_NODISCARD bool IsBodyDirty() const noexcept { return m_isBodyDirty; }
         SR_NODISCARD void* GetHandle() const noexcept;
-        SR_NODISCARD SR_MATH_NS::FVector3 GetTranslation() const noexcept { return m_translation; }
-        SR_NODISCARD SR_MATH_NS::Quaternion GetRotation() const noexcept { return m_rotation; }
-        SR_NODISCARD SR_MATH_NS::FVector3 GetScale() const noexcept { return m_scale; }
-        SR_NODISCARD PhysicsMaterial::Ptr GetPhysicsMaterial() const noexcept { return m_material; }
+        SR_NODISCARD const SR_MATH_NS::FVector3& GetTranslation() const noexcept { return m_translation; }
+        SR_NODISCARD const SR_MATH_NS::Quaternion& GetRotation() const noexcept { return m_rotation; }
+        SR_NODISCARD const SR_MATH_NS::FVector3& GetScale() const noexcept { return m_scale; }
+        SR_NODISCARD const SR_MATH_NS::FVector3& GetCenterOfMassOffset() const noexcept { return m_centerOfMassOffset; }
         SR_NODISCARD bool IsDebugEnabled() const noexcept;
         SR_NODISCARD RBUpdShapeRes UpdateShape();
         SR_NODISCARD bool IsShapeSupported(ShapeType type) const;
 
+        SR_HTYPES_NS::SharedPtr<CollisionShape> AddCollider(ShapeType type);
+
         void SetMatrixDirty(const bool value = true) { m_isMatrixDirty = value; }
         void SetShapeDirty(const bool value = true) { m_isShapeDirty = value; }
 
+        void AttachShape(CollisionShape* pShape);
+        void DetachShape(CollisionShape* pShape);
+
         virtual void SetIsTrigger(bool value);
         virtual void SetIsStatic(bool value);
+        virtual void SetUseGravity(bool value);
+        virtual void SetFetchResults(bool value);
 
-        virtual void SetCenter(const SR_MATH_NS::FVector3& center);
-        virtual void SetType(ShapeType type);
+        virtual void SetCenterOfMassOffset(const SR_MATH_NS::FVector3& offset);
+
         void SetMass(float_t mass);
-
-        void SetMaterial(const PhysicsMaterial::Ptr& pMaterial);
-        void SetMaterial(const SR_UTILS_NS::Path& path);
 
         bool InitBody();
 
@@ -163,26 +169,25 @@ namespace SR_PTYPES_NS {
             return dynamic_cast<T*>(m_impl);
         }
 
-        void SetShape(const CollisionShape::Ptr& pShape);
-
     protected:
         float_t m_mass = 1.f;
         bool m_isTrigger = false;
         bool m_isStatic = false;
-        SR_MATH_NS::FVector3 m_center;
-        mutable CollisionShape::Ptr m_shape;
+        bool m_useGravity = true;
+        SR_MATH_NS::FVector3 m_centerOfMassOffset;
+
+        bool m_fetchResults = true;
 
         RigidbodyImpl* m_impl = nullptr;
         LibraryPtr m_library = nullptr;
 
+        mutable std::vector<CollisionShape*> m_shapes;
         mutable PhysicsScenePtr m_physicsScene;
 
         SR_MATH_NS::FVector3 m_translation;
         SR_MATH_NS::Quaternion m_rotation;
-
         SR_MATH_NS::FVector3 m_scale = SR_MATH_NS::FVector3::One();
 
-        SR_PTYPES_NS::PhysicsMaterial::Ptr m_material = nullptr;
 
         bool m_isBodyDirty = true;
         bool m_isMatrixDirty = false;

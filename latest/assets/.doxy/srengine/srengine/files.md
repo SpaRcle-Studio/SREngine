@@ -523,6 +523,7 @@ Here is a list of all files with brief descriptions:
                     * **dir** [**Game**](dir_8f1885d18d834cf9a317dd74a37ec10b.md)     
                         * **file** [**CameraFlyMover.h**](CameraFlyMover_8h.md)     
                         * **file** [**DebugLogComponent.h**](DebugLogComponent_8h.md)     
+                        * **file** [**LockPositionComponent.h**](LockPositionComponent_8h.md)     
                         * **file** [**LookAtComponent.h**](LookAtComponent_8h.md)     
                     * **dir** [**Input**](dir_133fa8d60355654b3e9ec84c6210a08b.md)     
                         * **file** [**InputDevice.h**](InputDevice_8h.md)     

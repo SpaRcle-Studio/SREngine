@@ -113,6 +113,7 @@
     <innerclass refid="classSR__UTILS__NS_1_1KeyboardInputData" prot="public">SR_UTILS_NS::KeyboardInputData</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1LabelProperty" prot="public">SR_UTILS_NS::LabelProperty</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1LayerManager" prot="public">SR_UTILS_NS::LayerManager</innerclass>
+    <innerclass refid="classSR__UTILS__NS_1_1LockPositionComponent" prot="public">SR_UTILS_NS::LockPositionComponent</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1LookAtComponent" prot="public">SR_UTILS_NS::LookAtComponent</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1MigrationManager" prot="public">SR_UTILS_NS::MigrationManager</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1MouseInputData" prot="public">SR_UTILS_NS::MouseInputData</innerclass>
@@ -653,7 +654,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="378" column="5" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="378" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="379" column="5" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="379" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1ab192df1afaebb0bac9955bc678acb475" prot="public" static="no">
         <templateparamlist>
@@ -672,7 +673,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="386" column="5" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="386" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="387" column="5" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="387" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a82cc699d8c44225ad19521205bfe0d6d" prot="public" static="no">
         <type>std::list&lt; IResource::Ptr &gt;</type>
@@ -4095,7 +4096,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="388" column="28" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="388" bodyend="390"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="389" column="28" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="389" bodyend="391"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a3bd31173e8c1be13b2b332e552163c52" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -4118,7 +4119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="392" column="28" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="392" bodyend="394"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="393" column="28" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="393" bodyend="395"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1ab1be933ed50ca61779617edb34bfef7f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>

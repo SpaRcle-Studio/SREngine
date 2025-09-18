@@ -1000,6 +1000,8 @@
 ([**SR\_SRSL\_NS**](namespaceSR__SRSL__NS.md))
 * [**LockGuard**](classSR__HTYPES__NS_1_1LockGuard.md)
 ([**SR\_HTYPES\_NS**](namespaceSR__HTYPES__NS.md))
+* [**LockPositionComponent**](classSR__UTILS__NS_1_1LockPositionComponent.md)
+([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * [**LogicalMachine**](classSR__SRLM__NS_1_1LogicalMachine.md)
 ([**SR\_SRLM\_NS**](namespaceSR__SRLM__NS.md))
 * [**LogicalNode**](classSR__SRLM__NS_1_1LogicalNode.md)

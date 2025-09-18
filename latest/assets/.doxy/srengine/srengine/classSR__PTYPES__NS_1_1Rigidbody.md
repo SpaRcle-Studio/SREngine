@@ -90,20 +90,20 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 
 | Type | Name |
 | ---: | :--- |
+|  [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**CollisionShape**](classSR__PTYPES__NS_1_1CollisionShape.md) &gt; | [**AddCollider**](#function-addcollider) (ShapeType type) <br> |
+|  void | [**AttachShape**](#function-attachshape) ([**CollisionShape**](classSR__PTYPES__NS_1_1CollisionShape.md) \* pShape) <br> |
 |  void | [**ClearForces**](#function-clearforces) () <br> |
+|  void | [**DetachShape**](#function-detachshape) ([**CollisionShape**](classSR__PTYPES__NS_1_1CollisionShape.md) \* pShape) <br> |
 | virtual SR\_NODISCARD bool | [**ExecuteInEditMode**](#function-executeineditmode) () override const<br> |
-|  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**GetCenter**](#function-getcenter) () noexcept const<br> |
-|  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**GetCenterDirection**](#function-getcenterdirection) () noexcept const<br> |
-|  SR\_NODISCARD const CollisionShape::Ptr & | [**GetCollisionShape**](#function-getcollisionshape) () noexcept const<br> |
+|  SR\_NODISCARD const SR\_MATH\_NS::FVector3 & | [**GetCenterOfMassOffset**](#function-getcenterofmassoffset) () noexcept const<br> |
 |  SR\_NODISCARD void \* | [**GetHandle**](#function-gethandle) () noexcept const<br> |
 |  SR\_NODISCARD T \* | [**GetLibrary**](#function-getlibrary) () const<br> |
 |  SR\_NODISCARD float\_t | [**GetMass**](#function-getmass) () noexcept const<br> |
 | virtual SR\_NODISCARD SR\_UTILS\_NS::Measurement | [**GetMeasurement**](#function-getmeasurement) () const = 0<br> |
-|  SR\_NODISCARD PhysicsMaterial::Ptr | [**GetPhysicsMaterial**](#function-getphysicsmaterial) () noexcept const<br> |
-|  SR\_NODISCARD [**SR\_MATH\_NS::Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**GetRotation**](#function-getrotation) () noexcept const<br> |
-|  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**GetScale**](#function-getscale) () noexcept const<br> |
-|  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**GetTranslation**](#function-gettranslation) () noexcept const<br> |
-|  SR\_NODISCARD ShapeType | [**GetType**](#function-gettype) () noexcept const<br> |
+|  SR\_NODISCARD const [**SR\_MATH\_NS::Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & | [**GetRotation**](#function-getrotation) () noexcept const<br> |
+|  SR\_NODISCARD const SR\_MATH\_NS::FVector3 & | [**GetScale**](#function-getscale) () noexcept const<br> |
+|  SR\_NODISCARD const std::vector&lt; [**CollisionShape**](classSR__PTYPES__NS_1_1CollisionShape.md) \* &gt; & | [**GetShapes**](#function-getshapes) () noexcept const<br> |
+|  SR\_NODISCARD const SR\_MATH\_NS::FVector3 & | [**GetTranslation**](#function-gettranslation) () noexcept const<br> |
 |  bool | [**InitBody**](#function-initbody) () <br> |
 |  SR\_NODISCARD bool | [**IsBodyDirty**](#function-isbodydirty) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsDebugEnabled**](#function-isdebugenabled) () noexcept const<br> |
@@ -112,16 +112,16 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 |  SR\_NODISCARD bool | [**IsShapeSupported**](#function-isshapesupported) (ShapeType type) const<br> |
 |  SR\_NODISCARD bool | [**IsStatic**](#function-isstatic) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsTrigger**](#function-istrigger) () noexcept const<br> |
+|  SR\_NODISCARD bool | [**IsUseGravity**](#function-isusegravity) () noexcept const<br> |
 |   | [**Rigidbody**](#function-rigidbody) () <br> |
-| virtual void | [**SetCenter**](#function-setcenter) (const SR\_MATH\_NS::FVector3 & center) <br> |
+| virtual void | [**SetCenterOfMassOffset**](#function-setcenterofmassoffset) (const SR\_MATH\_NS::FVector3 & offset) <br> |
+| virtual void | [**SetFetchResults**](#function-setfetchresults) (bool value) <br> |
 | virtual void | [**SetIsStatic**](#function-setisstatic) (bool value) <br> |
 | virtual void | [**SetIsTrigger**](#function-setistrigger) (bool value) <br> |
 |  void | [**SetMass**](#function-setmass) (float\_t mass) <br> |
-|  void | [**SetMaterial**](#function-setmaterial-12) (const PhysicsMaterial::Ptr & pMaterial) <br> |
-|  void | [**SetMaterial**](#function-setmaterial-22) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
 |  void | [**SetMatrixDirty**](#function-setmatrixdirty) (const bool value=true) <br> |
 |  void | [**SetShapeDirty**](#function-setshapedirty) (const bool value=true) <br> |
-| virtual void | [**SetType**](#function-settype) (ShapeType type) <br> |
+| virtual void | [**SetUseGravity**](#function-setusegravity) (bool value) <br> |
 |  void | [**Synchronize**](#function-synchronize) () <br> |
 |  void | [**UpdateInertia**](#function-updateinertia) () <br> |
 |  bool | [**UpdateMatrix**](#function-updatematrix) (bool force=false) <br> |
@@ -212,7 +212,8 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_MATH\_NS::FVector3 | [**m\_center**](#variable-m_center)  <br> |
+|  SR\_MATH\_NS::FVector3 | [**m\_centerOfMassOffset**](#variable-m_centerofmassoffset)  <br> |
+|  bool | [**m\_fetchResults**](#variable-m_fetchresults)   = `true`<br> |
 |  [**RigidbodyImpl**](classSR__PTYPES__NS_1_1RigidbodyImpl.md) \* | [**m\_impl**](#variable-m_impl)   = `nullptr`<br> |
 |  bool | [**m\_isBodyDirty**](#variable-m_isbodydirty)   = `true`<br> |
 |  bool | [**m\_isMatrixDirty**](#variable-m_ismatrixdirty)   = `false`<br> |
@@ -221,12 +222,12 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 |  bool | [**m\_isTrigger**](#variable-m_istrigger)   = `false`<br> |
 |  LibraryPtr | [**m\_library**](#variable-m_library)   = `nullptr`<br> |
 |  float\_t | [**m\_mass**](#variable-m_mass)   = `1.f`<br> |
-|  SR\_PTYPES\_NS::PhysicsMaterial::Ptr | [**m\_material**](#variable-m_material)   = `nullptr`<br> |
 |  PhysicsScenePtr | [**m\_physicsScene**](#variable-m_physicsscene)  <br> |
 |  [**SR\_MATH\_NS::Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**m\_rotation**](#variable-m_rotation)  <br> |
 |  SR\_MATH\_NS::FVector3 | [**m\_scale**](#variable-m_scale)   = `SR\_MATH\_NS::FVector3::One()`<br> |
-|  CollisionShape::Ptr | [**m\_shape**](#variable-m_shape)  <br> |
-|  SR\_MATH\_NS::FVector3 | [**m\_translation**](#variable-m_translation)  <br> |
+|  std::vector&lt; [**CollisionShape**](classSR__PTYPES__NS_1_1CollisionShape.md) \* &gt; | [**m\_shapes**](#variable-m_shapes)  <br> |
+|  SR\_MATH\_NS::FVector3 | [**m\_translation**](#variable-m_translation)  <br>_decomposed matrix_  |
+|  bool | [**m\_useGravity**](#variable-m_usegravity)   = `true`<br> |
 
 
 ## Protected Attributes inherited from SR_UTILS_NS::Component
@@ -286,7 +287,6 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 | virtual void | [**OnDisable**](#function-ondisable) () override<br> |
 | virtual void | [**OnEnable**](#function-onenable) () override<br> |
 | virtual void | [**OnMatrixDirty**](#function-onmatrixdirty) () override<br> |
-|  void | [**SetShape**](#function-setshape) (const CollisionShape::Ptr & pShape) <br> |
 | virtual void | [**Update**](#function-update) (float\_t dt) override<br> |
 |  bool | [**UpdateShapeInternal**](#function-updateshapeinternal) () <br> |
 
@@ -332,10 +332,55 @@ using SR_PTYPES_NS::Rigidbody::Ptr =  SR_HTYPES_NS::SharedPtr<Rigidbody>;
 
 
 
+### function AddCollider 
+
+```C++
+SR_HTYPES_NS::SharedPtr < CollisionShape > SR_PTYPES_NS::Rigidbody::AddCollider (
+    ShapeType type
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function AttachShape 
+
+```C++
+void SR_PTYPES_NS::Rigidbody::AttachShape (
+    CollisionShape * pShape
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function ClearForces 
 
 ```C++
 void SR_PTYPES_NS::Rigidbody::ClearForces () 
+```
+
+
+
+
+<hr>
+
+
+
+### function DetachShape 
+
+```C++
+void SR_PTYPES_NS::Rigidbody::DetachShape (
+    CollisionShape * pShape
+) 
 ```
 
 
@@ -360,36 +405,10 @@ Implements [*SR\_UTILS\_NS::Component::ExecuteInEditMode*](classSR__UTILS__NS_1_
 
 
 
-### function GetCenter 
+### function GetCenterOfMassOffset 
 
 ```C++
-SR_NODISCARD SR_MATH_NS::FVector3 SR_PTYPES_NS::Rigidbody::GetCenter () noexcept const
-```
-
-
-
-
-<hr>
-
-
-
-### function GetCenterDirection 
-
-```C++
-SR_NODISCARD SR_MATH_NS::FVector3 SR_PTYPES_NS::Rigidbody::GetCenterDirection () noexcept const
-```
-
-
-
-
-<hr>
-
-
-
-### function GetCollisionShape 
-
-```C++
-SR_NODISCARD const CollisionShape::Ptr & SR_PTYPES_NS::Rigidbody::GetCollisionShape () noexcept const
+inline SR_NODISCARD const SR_MATH_NS::FVector3 & SR_PTYPES_NS::Rigidbody::GetCenterOfMassOffset () noexcept const
 ```
 
 
@@ -452,23 +471,10 @@ virtual SR_NODISCARD SR_UTILS_NS::Measurement SR_PTYPES_NS::Rigidbody::GetMeasur
 
 
 
-### function GetPhysicsMaterial 
-
-```C++
-inline SR_NODISCARD PhysicsMaterial::Ptr SR_PTYPES_NS::Rigidbody::GetPhysicsMaterial () noexcept const
-```
-
-
-
-
-<hr>
-
-
-
 ### function GetRotation 
 
 ```C++
-inline SR_NODISCARD SR_MATH_NS::Quaternion SR_PTYPES_NS::Rigidbody::GetRotation () noexcept const
+inline SR_NODISCARD const SR_MATH_NS::Quaternion & SR_PTYPES_NS::Rigidbody::GetRotation () noexcept const
 ```
 
 
@@ -481,7 +487,20 @@ inline SR_NODISCARD SR_MATH_NS::Quaternion SR_PTYPES_NS::Rigidbody::GetRotation 
 ### function GetScale 
 
 ```C++
-inline SR_NODISCARD SR_MATH_NS::FVector3 SR_PTYPES_NS::Rigidbody::GetScale () noexcept const
+inline SR_NODISCARD const SR_MATH_NS::FVector3 & SR_PTYPES_NS::Rigidbody::GetScale () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetShapes 
+
+```C++
+inline SR_NODISCARD const std::vector< CollisionShape * > & SR_PTYPES_NS::Rigidbody::GetShapes () noexcept const
 ```
 
 
@@ -494,20 +513,7 @@ inline SR_NODISCARD SR_MATH_NS::FVector3 SR_PTYPES_NS::Rigidbody::GetScale () no
 ### function GetTranslation 
 
 ```C++
-inline SR_NODISCARD SR_MATH_NS::FVector3 SR_PTYPES_NS::Rigidbody::GetTranslation () noexcept const
-```
-
-
-
-
-<hr>
-
-
-
-### function GetType 
-
-```C++
-SR_NODISCARD ShapeType SR_PTYPES_NS::Rigidbody::GetType () noexcept const
+inline SR_NODISCARD const SR_MATH_NS::FVector3 & SR_PTYPES_NS::Rigidbody::GetTranslation () noexcept const
 ```
 
 
@@ -623,6 +629,19 @@ inline SR_NODISCARD bool SR_PTYPES_NS::Rigidbody::IsTrigger () noexcept const
 
 
 
+### function IsUseGravity 
+
+```C++
+inline SR_NODISCARD bool SR_PTYPES_NS::Rigidbody::IsUseGravity () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
 ### function Rigidbody 
 
 ```C++
@@ -636,11 +655,26 @@ SR_PTYPES_NS::Rigidbody::Rigidbody ()
 
 
 
-### function SetCenter 
+### function SetCenterOfMassOffset 
 
 ```C++
-virtual void SR_PTYPES_NS::Rigidbody::SetCenter (
-    const SR_MATH_NS::FVector3 & center
+virtual void SR_PTYPES_NS::Rigidbody::SetCenterOfMassOffset (
+    const SR_MATH_NS::FVector3 & offset
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function SetFetchResults 
+
+```C++
+virtual void SR_PTYPES_NS::Rigidbody::SetFetchResults (
+    bool value
 ) 
 ```
 
@@ -696,36 +730,6 @@ void SR_PTYPES_NS::Rigidbody::SetMass (
 
 
 
-### function SetMaterial [1/2]
-
-```C++
-void SR_PTYPES_NS::Rigidbody::SetMaterial (
-    const PhysicsMaterial::Ptr & pMaterial
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function SetMaterial [2/2]
-
-```C++
-void SR_PTYPES_NS::Rigidbody::SetMaterial (
-    const SR_UTILS_NS::Path & path
-) 
-```
-
-
-
-
-<hr>
-
-
-
 ### function SetMatrixDirty 
 
 ```C++
@@ -756,11 +760,11 @@ inline void SR_PTYPES_NS::Rigidbody::SetShapeDirty (
 
 
 
-### function SetType 
+### function SetUseGravity 
 
 ```C++
-virtual void SR_PTYPES_NS::Rigidbody::SetType (
-    ShapeType type
+virtual void SR_PTYPES_NS::Rigidbody::SetUseGravity (
+    bool value
 ) 
 ```
 
@@ -881,10 +885,23 @@ using SR_PTYPES_NS::Rigidbody::Super =  SR_UTILS_NS::Component;
 
 
 
-### variable m\_center 
+### variable m\_centerOfMassOffset 
 
 ```C++
-SR_MATH_NS::FVector3 SR_PTYPES_NS::Rigidbody::m_center;
+SR_MATH_NS::FVector3 SR_PTYPES_NS::Rigidbody::m_centerOfMassOffset;
+```
+
+
+
+
+<hr>
+
+
+
+### variable m\_fetchResults 
+
+```C++
+bool SR_PTYPES_NS::Rigidbody::m_fetchResults;
 ```
 
 
@@ -998,19 +1015,6 @@ float_t SR_PTYPES_NS::Rigidbody::m_mass;
 
 
 
-### variable m\_material 
-
-```C++
-SR_PTYPES_NS::PhysicsMaterial::Ptr SR_PTYPES_NS::Rigidbody::m_material;
-```
-
-
-
-
-<hr>
-
-
-
 ### variable m\_physicsScene 
 
 ```C++
@@ -1050,10 +1054,10 @@ SR_MATH_NS::FVector3 SR_PTYPES_NS::Rigidbody::m_scale;
 
 
 
-### variable m\_shape 
+### variable m\_shapes 
 
 ```C++
-CollisionShape::Ptr SR_PTYPES_NS::Rigidbody::m_shape;
+std::vector<CollisionShape*> SR_PTYPES_NS::Rigidbody::m_shapes;
 ```
 
 
@@ -1065,8 +1069,22 @@ CollisionShape::Ptr SR_PTYPES_NS::Rigidbody::m_shape;
 
 ### variable m\_translation 
 
+_decomposed matrix_ 
 ```C++
 SR_MATH_NS::FVector3 SR_PTYPES_NS::Rigidbody::m_translation;
+```
+
+
+
+
+<hr>
+
+
+
+### variable m\_useGravity 
+
+```C++
+bool SR_PTYPES_NS::Rigidbody::m_useGravity;
 ```
 
 
@@ -1176,21 +1194,6 @@ virtual void SR_PTYPES_NS::Rigidbody::OnMatrixDirty () override
 
 
 Implements [*SR\_UTILS\_NS::Component::OnMatrixDirty*](classSR__UTILS__NS_1_1Component.md#function-onmatrixdirty)
-
-
-<hr>
-
-
-
-### function SetShape 
-
-```C++
-void SR_PTYPES_NS::Rigidbody::SetShape (
-    const CollisionShape::Ptr & pShape
-) 
-```
-
-
 
 
 <hr>

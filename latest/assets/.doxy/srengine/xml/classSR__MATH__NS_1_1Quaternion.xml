@@ -472,6 +472,20 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="58" column="33"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a37ed743f1196af3f494e49852192dad0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
+        <definition>SR_NODISCARD Quaternion SR_MATH_NS::Quaternion::Conjurate</definition>
+        <argsstring>() const</argsstring>
+        <name>Conjurate</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::Conjurate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="59" column="33"/>
+      </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a09f4678ee120131750a8ce4e8231d67e" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool SR_FASTCALL</type>
         <definition>SR_NODISCARD bool SR_FASTCALL SR_MATH_NS::Quaternion::IsEquals</definition>
@@ -492,7 +506,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="60" column="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="61" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1abbedcf8940f95f2bda08846b8dc77fb2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
@@ -514,7 +528,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="62" column="33"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="63" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a2c078f2cb94447d5dee42370034cb0a2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
@@ -528,7 +542,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="67" column="33"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="68" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a558a8b7f475627a940a04b5e82bd7251" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
@@ -542,7 +556,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="68" column="33"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="69" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a27591fdd8eab8116d7f4d9c53291e4d4" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD Unit</type>
@@ -556,7 +570,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="70" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="71" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1aad6b2f78b919ba00662675853666070c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD Unit</type>
@@ -570,7 +584,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="71" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="72" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a79bd33d7465111592761eeab0fb972f0" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD Unit</type>
@@ -584,7 +598,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="72" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="73" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a1bf620b912ea1f4b31fcaae8cb6b62ac" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD Unit</type>
+        <definition>SR_NODISCARD Unit SR_MATH_NS::Quaternion::Magnitude</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>Magnitude</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::Magnitude</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="75" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a3433ab628de291a8ba71285bcde22e09" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD Unit</type>
@@ -598,7 +626,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="74" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="76" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a073b93162d54e779963c85fd2e882c23" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -612,7 +640,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="76" column="34"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="78" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a1b4b9291cc316f96e4bd4c9d12c7713d" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -630,7 +658,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="78" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="80" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a17c2de18384af3da0224dbe25078c6ae" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -648,7 +676,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="79" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="81" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a70a577c7ab5d82f8f2346918a563c9bf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD Unit SR_FASTCALL</type>
@@ -666,7 +694,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="81" column="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="83" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a9f47c6e7c0e607902c63bbd7b4c8f6b1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD Unit SR_FASTCALL</type>
@@ -684,7 +712,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="82" column="39"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="84" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1ad9379f360b6271501442e0cc56c00c9d" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -698,7 +726,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="84" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="86" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1ab1cd175c70719c806aaae0e988953b6e" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -712,7 +740,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="85" column="27"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="87" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1ab7edb9d390d5fbf6630615b98fc0906c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_MATH_NS::Quaternion::IsSane</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsSane</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::IsSane</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="88" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a178b5f8d2599f81c36bb7439da0f37eb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -730,7 +772,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="87" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="90" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a391da409248dd22993507b69097cbe44" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -748,7 +790,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="88" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="91" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1af6c999727d499b2ea5af23ccaa3b2889" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -766,7 +808,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="89" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="92" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a328871c596f9efd8a3476895689203df" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -784,7 +826,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="90" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="93" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a887212d09e5888ec4c3a22b6c8221dbf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -802,7 +844,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="91" column="14"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="94" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a86ae5e97e846b315fa1aba1e83507807" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
@@ -820,7 +862,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="92" column="20"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="95" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a79c38f32de155e2a7fe87b79c50e93bd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
@@ -838,7 +880,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="93" column="20"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="96" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1ad78e3715506511fe97e89ae4c6b71722" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
@@ -852,7 +894,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="94" column="20"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="97" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1aef180439339b603efd87eddda4657c25" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
@@ -870,7 +912,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="95" column="20"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="98" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a1d3d007196c7951bfc8c85c164a7c627" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
@@ -888,7 +930,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="96" column="20"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="99" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1acb315082473f93cc623f039754698a91" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; Unit &gt;</type>
@@ -906,7 +948,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="97" column="17"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="100" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a372b4b5d831f72c47515d15af4bf9da9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; Unit &gt;</type>
@@ -924,7 +966,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="98" column="17"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="101" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a8327af5cce74853ce24be79fbeb640ca" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
@@ -942,7 +984,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="99" column="20"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="102" column="20"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -994,7 +1036,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="64" column="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="65" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a7b8c226f1f9367acbaa04f36af1d3c2a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
@@ -1016,16 +1058,17 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="65" column="40"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="66" column="40"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="16" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="16" bodyend="100"/>
+    <location file="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" line="16" column="5" bodyfile="Engine/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="16" bodyend="103"/>
     <listofallmembers>
       <member refid="classSR__MATH__NS_1_1Quaternion_1a9f47c6e7c0e607902c63bbd7b4c8f6b1" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Angle</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a37ed743f1196af3f494e49852192dad0" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Conjurate</name></member>
       <member refid="classSR__MATH__NS_1_1Quaternion_1a70a577c7ab5d82f8f2346918a563c9bf" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Distance</name></member>
       <member refid="classSR__MATH__NS_1_1Quaternion_1ad340f046c05805c0dfd994fe6f53527d" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>EulerAngle</name></member>
       <member refid="classSR__MATH__NS_1_1Quaternion_1a3a9a25a0899985b10541106b004a81f5" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>FromEuler</name></member>
@@ -1034,8 +1077,10 @@
       <member refid="classSR__MATH__NS_1_1Quaternion_1a09f4678ee120131750a8ce4e8231d67e" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>IsEquals</name></member>
       <member refid="classSR__MATH__NS_1_1Quaternion_1ad9379f360b6271501442e0cc56c00c9d" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>IsFinite</name></member>
       <member refid="classSR__MATH__NS_1_1Quaternion_1ab1cd175c70719c806aaae0e988953b6e" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>IsIdentity</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1ab7edb9d390d5fbf6630615b98fc0906c" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>IsSane</name></member>
       <member refid="classSR__MATH__NS_1_1Quaternion_1a50b1087d0237efc5cf04ce76e1b058c6" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>LookAt</name></member>
       <member refid="classSR__MATH__NS_1_1Quaternion_1a7b8c226f1f9367acbaa04f36af1d3c2a" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>LookAt</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a1bf620b912ea1f4b31fcaae8cb6b62ac" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Magnitude</name></member>
       <member refid="classSR__MATH__NS_1_1Quaternion_1a558a8b7f475627a940a04b5e82bd7251" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Normalize</name></member>
       <member refid="classSR__MATH__NS_1_1Quaternion_1a2c078f2cb94447d5dee42370034cb0a2" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Normalized</name></member>
       <member refid="classSR__MATH__NS_1_1Quaternion_1a1b4b9291cc316f96e4bd4c9d12c7713d" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>operator!=</name></member>

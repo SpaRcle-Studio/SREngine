@@ -342,6 +342,7 @@
 * **SR\_FUNCTION\_SIGNATURE** ([**macros.h**](libs_2Utils_2inc_2Utils_2macros_8h.md))
 * **SR\_GCC\_CLANG\_REMOVE\_PADDING\_ATTRIB** ([**macros.h**](libs_2Utils_2inc_2Utils_2macros_8h.md))
 * **SR\_GLOBAL\_LOCK** ([**macros.h**](libs_2Utils_2inc_2Utils_2macros_8h.md))
+* **SR\_GLOBAL\_RECURSIVE\_LOCK** ([**macros.h**](libs_2Utils_2inc_2Utils_2macros_8h.md))
 * **SR\_GRAPH\_GUI\_NS** ([**macros.h**](libs_2Utils_2inc_2Utils_2macros_8h.md))
 * **SR\_GRAPH\_NS** ([**macros.h**](libs_2Utils_2inc_2Utils_2macros_8h.md))
 * **SR\_GRAPH\_UI\_NS** ([**macros.h**](libs_2Utils_2inc_2Utils_2macros_8h.md))

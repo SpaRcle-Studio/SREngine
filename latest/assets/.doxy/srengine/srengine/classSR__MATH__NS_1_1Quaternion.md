@@ -62,12 +62,15 @@
 | Type | Name |
 | ---: | :--- |
 |  SR\_NODISCARD Unit SR\_FASTCALL | [**Angle**](#function-angle) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & q) const<br> |
+|  SR\_NODISCARD [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**Conjurate**](#function-conjurate) () const<br> |
 |  SR\_NODISCARD Unit SR\_FASTCALL | [**Distance**](#function-distance) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & q) const<br> |
 |  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**EulerAngle**](#function-eulerangle) () const<br> |
 |  SR\_NODISCARD [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**Inverse**](#function-inverse) () const<br> |
 |  SR\_NODISCARD bool SR\_FASTCALL | [**IsEquals**](#function-isequals) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & q, Unit tolerance) noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsFinite**](#function-isfinite) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsIdentity**](#function-isidentity) () noexcept const<br> |
+|  SR\_NODISCARD bool | [**IsSane**](#function-issane) () noexcept const<br> |
+|  SR\_NODISCARD Unit | [**Magnitude**](#function-magnitude) () noexcept const<br> |
 |  SR\_NODISCARD [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**Normalize**](#function-normalize) () const<br> |
 |  SR\_NODISCARD [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**Normalized**](#function-normalized) () const<br> |
 |  SR\_NODISCARD Unit | [**Pitch**](#function-pitch) () noexcept const<br> |
@@ -246,6 +249,19 @@ SR_NODISCARD Unit SR_FASTCALL SR_MATH_NS::Quaternion::Angle (
 
 
 
+### function Conjurate 
+
+```C++
+SR_NODISCARD Quaternion SR_MATH_NS::Quaternion::Conjurate () const
+```
+
+
+
+
+<hr>
+
+
+
 ### function Distance 
 
 ```C++
@@ -320,6 +336,32 @@ SR_NODISCARD bool SR_MATH_NS::Quaternion::IsFinite () noexcept const
 
 ```C++
 SR_NODISCARD bool SR_MATH_NS::Quaternion::IsIdentity () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function IsSane 
+
+```C++
+SR_NODISCARD bool SR_MATH_NS::Quaternion::IsSane () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function Magnitude 
+
+```C++
+SR_NODISCARD Unit SR_MATH_NS::Quaternion::Magnitude () noexcept const
 ```
 
 

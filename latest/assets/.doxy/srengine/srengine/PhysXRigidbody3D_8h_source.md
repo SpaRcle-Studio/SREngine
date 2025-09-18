@@ -31,6 +31,9 @@ namespace SR_PTYPES_NS {
         bool InitBody() override;
         void ClearForces() override;
 
+        void AddForce(const SR_MATH_NS::FVector3& force) override;
+        void AddTorque(const SR_MATH_NS::FVector3& torque) override;
+
         void AddLinearVelocity(const SR_MATH_NS::FVector3& velocity) override;
         void AddAngularVelocity(const SR_MATH_NS::FVector3& velocity) override;
 

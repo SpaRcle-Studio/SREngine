@@ -75,6 +75,42 @@
         </inbodydescription>
         <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" line="33" column="49" bodyfile="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" bodystart="33" bodyend="35"/>
       </memberdef>
+      <memberdef kind="function" id="PhysXUtils_8h_1a5d334175ece39b31f77b9bf11f5cdb75" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED physx::PxQuat</type>
+        <definition>static SR_MAYBE_UNUSED physx::PxQuat SR_PHYSICS_UTILS_NS::QuatToPxQuat</definition>
+        <argsstring>(const SR_MATH_NS::Quaternion &amp;quaternion)</argsstring>
+        <name>QuatToPxQuat</name>
+        <qualifiedname>SR_PHYSICS_UTILS_NS::QuatToPxQuat</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">SR_MATH_NS::Quaternion</ref> &amp;</type>
+          <declname>quaternion</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" line="37" column="42" bodyfile="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" bodystart="37" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="PhysXUtils_8h_1a99033afdb47d7914bfce07f3d9f4c402" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">SR_MATH_NS::Quaternion</ref></type>
+        <definition>static SR_MAYBE_UNUSED SR_MATH_NS::Quaternion SR_PHYSICS_UTILS_NS::PxQuatToQuat</definition>
+        <argsstring>(const physx::PxQuat &amp;quaternion)</argsstring>
+        <name>PxQuatToQuat</name>
+        <qualifiedname>SR_PHYSICS_UTILS_NS::PxQuatToQuat</qualifiedname>
+        <param>
+          <type>const physx::PxQuat &amp;</type>
+          <declname>quaternion</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" line="41" column="51" bodyfile="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" bodystart="41" bodyend="43"/>
+      </memberdef>
       <memberdef kind="function" id="PhysXUtils_8h_1ab5c7a7285e58314f90eb183fb5e27577" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>physx::PxCombineMode::Enum</type>
         <definition>static physx::PxCombineMode::Enum SR_PHYSICS_UTILS_NS::CombineToPxCombine</definition>
@@ -91,7 +127,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" line="37" column="39" bodyfile="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" bodystart="37" bodyend="51"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" line="45" column="39" bodyfile="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" bodystart="45" bodyend="59"/>
       </memberdef>
       <memberdef kind="function" id="PhysXUtils_8h_1ad933fdaa38942c2bd434eb65536dab8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>PhysXPvdConnection *</type>
@@ -121,7 +157,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" line="53" column="24" bodyfile="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" bodystart="53" bodyend="64"/>
+        <location file="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" line="61" column="24" bodyfile="Engine/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" bodystart="61" bodyend="72"/>
       </memberdef>
       <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1a1c28045e08bc39187bcb207211b9a536" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>

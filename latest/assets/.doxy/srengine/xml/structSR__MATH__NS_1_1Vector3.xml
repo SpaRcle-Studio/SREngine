@@ -110,7 +110,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="27" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="789" bodyend="793"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="27" column="9" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="793" bodyend="797"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a9448d16133b5b75cd70c86de7c30fe07" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -1242,6 +1242,20 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="579" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="579" bodyend="584"/>
       </memberdef>
+      <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a7a98b5e245cdd9757032bf847fc72652" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD Unit</type>
+        <definition>SR_NODISCARD Unit SR_MATH_NS::Vector3&lt; T &gt;::LengthSqr</definition>
+        <argsstring>() const</argsstring>
+        <name>LengthSqr</name>
+        <qualifiedname>SR_MATH_NS::Vector3::LengthSqr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="586" column="27" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="586" bodyend="588"/>
+      </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1aba21c407f21733bc378a0c84abc86ee4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; T &gt;</type>
         <definition>SR_NODISCARD Vector3&lt; T &gt; SR_MATH_NS::Vector3&lt; T &gt;::Abs</definition>
@@ -1255,7 +1269,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="587" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="587" bodyend="589"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="591" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="591" bodyend="593"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a6fd20b26088b9eecbde0e2e81d5b774e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; T &gt;</type>
@@ -1270,7 +1284,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="592" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="592" bodyend="594"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="596" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="596" bodyend="598"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a159d218f33b09912aeac7e419ea75207" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; T &gt;</type>
@@ -1285,7 +1299,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="597" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="597" bodyend="599"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="601" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="601" bodyend="603"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a42a3627bd369398574e3a9f223c71b6d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; T &gt;</type>
@@ -1300,7 +1314,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="602" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="602" bodyend="604"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="606" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="606" bodyend="608"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a6b1dbfc398dd1ac795d03ebd05c02090" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref></type>
@@ -1314,7 +1328,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="606" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="606" bodyend="608"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="610" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="610" bodyend="612"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a8e883ebcccdafdbde5d672f893661806" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD T</type>
@@ -1333,7 +1347,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="611" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="611" bodyend="611"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="615" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="615" bodyend="615"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a47e90f6bec22e498c6fa48d28b8b324b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; T &gt;</type>
@@ -1352,7 +1366,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="614" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="614" bodyend="621"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="618" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="618" bodyend="625"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a87d37bc484adb598ef39549b2dc542fb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; T &gt;</type>
@@ -1370,7 +1384,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="623" column="30"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="627" column="30"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1afccd79f5533063f8755b883cd058a4fc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1393,7 +1407,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="625" column="56" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="625" bodyend="632"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="629" column="56" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="629" bodyend="636"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1aeb3d770e6ca9d740ff1ac0be6e91aea2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; T &gt; &amp;SR_FASTCALL</type>
@@ -1412,7 +1426,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="635" column="45" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="635" bodyend="635"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="639" column="45" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="639" bodyend="639"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a498b6a87ed029367977bac4627cec0dc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; T &gt; &amp;SR_FASTCALL</type>
@@ -1431,7 +1445,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="637" column="45" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="637" bodyend="637"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="641" column="45" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="641" bodyend="641"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a8513005d52a385dcbb6c23eb6726f0fa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; T &gt; &amp;SR_FASTCALL</type>
@@ -1450,7 +1464,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="639" column="45" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="639" bodyend="639"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="643" column="45" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="643" bodyend="643"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a3fa5adaf65c25fbf29a210425e9b3472" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -1473,7 +1487,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="641" column="56" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="641" bodyend="643"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="645" column="56" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="645" bodyend="647"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1af856f75a93cf024581e4e1147fb1f620" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; T &gt; SR_FASTCALL</type>
@@ -1492,7 +1506,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="646" column="45" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="646" bodyend="646"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="650" column="45" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="650" bodyend="650"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a171624b750ee42ac99c4e5f25687fc46" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; T &gt; SR_FASTCALL</type>
@@ -1511,7 +1525,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="648" column="45" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="648" bodyend="648"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="652" column="45" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="652" bodyend="652"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a2d0a8ebd8e686977604695172e836535" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; T &gt; SR_FASTCALL</type>
@@ -1530,7 +1544,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="650" column="45" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="650" bodyend="650"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="654" column="45" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="654" bodyend="654"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a283fdd923e9c816a728258e63d89addf" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1553,7 +1567,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="652" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="652" bodyend="658"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="656" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="656" bodyend="662"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a1685e1b952e1ee8f7f3d515fd0b1f155" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1576,7 +1590,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="660" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="660" bodyend="665"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="664" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="664" bodyend="669"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a011c4a3f6fbb990339fe28ec5ab4340e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1599,7 +1613,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="666" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="666" bodyend="668"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="670" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="670" bodyend="672"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1ae83b46d7f817e9a94afd9b8c1c624af6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1622,7 +1636,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="669" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="669" bodyend="674"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="673" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="673" bodyend="678"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a3a74e1b0ef2d8e743d37abe81812da80" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1645,7 +1659,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="675" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="675" bodyend="680"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="679" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="679" bodyend="684"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1af9eab1497e3a06bf25f63c2980dbf3a7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1668,7 +1682,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="682" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="682" bodyend="684"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="686" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="686" bodyend="688"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1aea0ac3b0416c7e6d72f5167f3ca19514" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1691,7 +1705,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="686" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="686" bodyend="691"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="690" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="690" bodyend="695"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1aa65b2689f5b6716fabec8ab599d8df1e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1714,7 +1728,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="692" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="692" bodyend="694"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="696" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="696" bodyend="698"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a3fa765489e1386b7f2531fc4623f5fdd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1737,7 +1751,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="696" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="696" bodyend="701"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="700" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="700" bodyend="705"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1af92144c13c69aa99b4e6dfd63904f0af" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1760,7 +1774,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="702" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="702" bodyend="704"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="706" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="706" bodyend="708"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a0ac3182ccfa0d5ef8562a7e4aa35510f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1783,7 +1797,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="705" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="705" bodyend="710"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="709" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="709" bodyend="714"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a52f475b9b726ca3f4aebab618f5b75f5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1806,7 +1820,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="711" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="711" bodyend="713"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="715" column="44" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="715" bodyend="717"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1aedf28a8978b876b8ae7ec23bf9753bfd" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1829,7 +1843,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="715" column="41" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="715" bodyend="715"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="719" column="41" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="719" bodyend="719"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1aa168893d4738540c5949d712cd37832b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1852,7 +1866,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="716" column="36" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="716" bodyend="716"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="720" column="36" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="720" bodyend="720"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a9f4cebb215aa8361eb72bb7aad4a6785" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1875,7 +1889,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="717" column="41" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="717" bodyend="717"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="721" column="41" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="721" bodyend="721"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1ae8ee99eeb6b483f41913c3a29f2dd572" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1898,7 +1912,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="718" column="36" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="718" bodyend="718"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="722" column="36" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="722" bodyend="722"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1abdc3270516f9b55cc30ff9e7a1eb4c79" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1921,7 +1935,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="719" column="41" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="719" bodyend="719"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="723" column="41" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="723" bodyend="723"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a0d349322553befbdf8d590c4276cb7a8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1944,7 +1958,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="720" column="41" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="720" bodyend="720"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="724" column="41" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="724" bodyend="724"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a0a7cddcb7871523d1076a46ec4442bd9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; T &gt;</type>
@@ -1959,7 +1973,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="723" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="723" bodyend="730"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="727" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="727" bodyend="734"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a666c7642f6624bd356d880612ea3feb3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; T &gt;</type>
@@ -1974,7 +1988,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="732" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="732" bodyend="732"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="736" column="33" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="736" bodyend="736"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a8b5cb55ba6dd8e937894bff7b55e0db9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE bool</type>
@@ -1993,7 +2007,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="735" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="735" bodyend="735"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="739" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="739" bodyend="739"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a586c74f145b55d93e2dd8cd183f1b22b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE bool</type>
@@ -2012,7 +2026,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="737" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="737" bodyend="737"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="741" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="741" bodyend="741"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a3a26a79b69b0368b01d0c1f4e1802996" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE bool</type>
@@ -2031,7 +2045,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="740" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="740" bodyend="740"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="744" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="744" bodyend="744"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1ad4d1113e52babcfa4f8fb2649181a31c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE bool</type>
@@ -2050,7 +2064,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="742" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="742" bodyend="742"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="746" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="746" bodyend="746"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a9e203518c3146d096cc0bed2bb771b19" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE bool</type>
@@ -2069,7 +2083,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="744" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="744" bodyend="744"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="748" column="25" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="748" bodyend="748"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1aad9966dedac571f193c85eea615890c8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE bool</type>
@@ -2088,7 +2102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="746" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="746" bodyend="746"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="750" column="30" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="750" bodyend="750"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a808ce6a7e3946d0cd7cd09c194c7dc4c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD glm::vec3</type>
@@ -2102,7 +2116,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="749" column="32" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="749" bodyend="751"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="753" column="32" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="753" bodyend="755"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -2402,7 +2416,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="752" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="752" bodyend="754"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="756" column="21" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="756" bodyend="758"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1a918a09bd2365c4b3b7c100654dde6ab5" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>T</type>
@@ -2424,7 +2438,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="756" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="756" bodyend="756"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="760" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="760" bodyend="760"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1abed9cd41c4d954f5022dda64516b581f" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref></type>
@@ -2446,7 +2460,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="757" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="757" bodyend="763"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="761" column="24" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="761" bodyend="767"/>
       </memberdef>
       <memberdef kind="function" id="structSR__MATH__NS_1_1Vector3_1ae03e8a7f6fe0b401f89a800f36f8801b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>T</type>
@@ -2464,14 +2478,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="765" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="765" bodyend="774"/>
+        <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="769" column="18" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="769" bodyend="778"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="12" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="12" bodyend="775"/>
+    <location file="Engine/libs/Utils/inc/Utils/Math/Vector3.h" line="12" column="15" bodyfile="Engine/libs/Utils/inc/Utils/Math/Vector3.h" bodystart="12" bodyend="779"/>
     <listofallmembers>
       <member refid="structSR__MATH__NS_1_1Vector3_1aba21c407f21733bc378a0c84abc86ee4" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector3</scope><name>Abs</name></member>
       <member refid="structSR__MATH__NS_1_1Vector3_1a22e1f78d8bc90c2cc6df494ad3e05927" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector3</scope><name>Angle</name></member>
@@ -2508,6 +2522,7 @@
       <member refid="structSR__MATH__NS_1_1Vector3_1a8d3070bab7cf03632398d98b7de400e3" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector3</scope><name>IsFinite</name></member>
       <member refid="structSR__MATH__NS_1_1Vector3_1afb5688a446fe217fc37ff93aee5526c5" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector3</scope><name>IsInfinity</name></member>
       <member refid="structSR__MATH__NS_1_1Vector3_1a234aa9126eb4e6a39cfd00bc7de2ba5c" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector3</scope><name>Length</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector3_1a7a98b5e245cdd9757032bf847fc72652" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector3</scope><name>LengthSqr</name></member>
       <member refid="structSR__MATH__NS_1_1Vector3_1a41959acb160000b1d0d8a5d2f0d640c3" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector3</scope><name>Lerp</name></member>
       <member refid="structSR__MATH__NS_1_1Vector3_1ac119682832d386072dd163de3724064e" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector3</scope><name>Limits</name></member>
       <member refid="structSR__MATH__NS_1_1Vector3_1aed87363c923edcc2ff60244bf4210b1b" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector3</scope><name>LookAt</name></member>

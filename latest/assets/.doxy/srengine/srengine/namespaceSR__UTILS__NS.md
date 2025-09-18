@@ -165,6 +165,7 @@
 | class | [**KeyboardInputData**](classSR__UTILS__NS_1_1KeyboardInputData.md) <br> |
 | class | [**LabelProperty**](classSR__UTILS__NS_1_1LabelProperty.md) <br> |
 | class | [**LayerManager**](classSR__UTILS__NS_1_1LayerManager.md) <br> |
+| class | [**LockPositionComponent**](classSR__UTILS__NS_1_1LockPositionComponent.md) <br> |
 | class | [**LookAtComponent**](classSR__UTILS__NS_1_1LookAtComponent.md) <br> |
 | class | [**MigrationManager**](classSR__UTILS__NS_1_1MigrationManager.md) <br> |
 | class | [**MouseInputData**](classSR__UTILS__NS_1_1MouseInputData.md) <br> |

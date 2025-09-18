@@ -130,6 +130,7 @@
 | define  | [**SR\_FUNCTION\_SIGNATURE**](libs_2Utils_2inc_2Utils_2macros_8h.md#define-sr_function_signature)  `\_\_PRETTY\_FUNCTION\_\_`<br> |
 | define  | [**SR\_GCC\_CLANG\_REMOVE\_PADDING\_ATTRIB**](libs_2Utils_2inc_2Utils_2macros_8h.md#define-sr_gcc_clang_remove_padding_attrib)  <br> |
 | define  | [**SR\_GLOBAL\_LOCK**](libs_2Utils_2inc_2Utils_2macros_8h.md#define-sr_global_lock)  `static std::mutex codegenGlobalMutex##\_\_LINE\_\_; std::lock\_guard&lt;std::mutex&gt; codegenLock##\_\_LINE\_\_(codegenGlobalMutex##\_\_LINE\_\_);`<br> |
+| define  | [**SR\_GLOBAL\_RECURSIVE\_LOCK**](libs_2Utils_2inc_2Utils_2macros_8h.md#define-sr_global_recursive_lock)  `static std::recursive\_mutex codegenGlobalRecursiveMutex##\_\_LINE\_\_; std::lock\_guard&lt;std::recursive\_mutex&gt; codegenLock##\_\_LINE\_\_(codegenGlobalRecursiveMutex##\_\_LINE\_\_);`<br> |
 | define  | [**SR\_GRAPH\_GUI\_NS**](libs_2Utils_2inc_2Utils_2macros_8h.md#define-sr_graph_gui_ns)  `SpaRcle::Graphics::GUI`<br> |
 | define  | [**SR\_GRAPH\_NS**](libs_2Utils_2inc_2Utils_2macros_8h.md#define-sr_graph_ns)  `SpaRcle::Graphics`<br> |
 | define  | [**SR\_GRAPH\_UI\_NS**](libs_2Utils_2inc_2Utils_2macros_8h.md#define-sr_graph_ui_ns)  `SpaRcle::Graphics::UI`<br> |
@@ -829,6 +830,19 @@
 
 ```C++
 #define SR_GLOBAL_LOCK `static std::mutex codegenGlobalMutex##__LINE__; std::lock_guard<std::mutex> codegenLock##__LINE__(codegenGlobalMutex##__LINE__);`
+```
+
+
+
+
+<hr>
+
+
+
+### define SR\_GLOBAL\_RECURSIVE\_LOCK 
+
+```C++
+#define SR_GLOBAL_RECURSIVE_LOCK `static std::recursive_mutex codegenGlobalRecursiveMutex##__LINE__; std::lock_guard<std::recursive_mutex> codegenLock##__LINE__(codegenGlobalRecursiveMutex##__LINE__);`
 ```
 
 

@@ -45,7 +45,7 @@
         <childnode refid="5" relation="public-inheritance">
         </childnode>
         <childnode refid="9" relation="usage">
-          <edgelabel>m_center</edgelabel>
+          <edgelabel>m_centerOfMassOffset</edgelabel>
           <edgelabel>m_scale</edgelabel>
           <edgelabel>m_translation</edgelabel>
         </childnode>
@@ -120,6 +120,7 @@
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a508579f47438da42f63a01779e8a41a3" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody2DImpl</scope><name>GetRigidbody</name></member>
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a929d18eadf9b3c1adeab0557fa0fad2a" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody2DImpl</scope><name>InitBody</name></member>
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a035f236a87bbaa11248891b80e0d9c25" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody2DImpl</scope><name>LibraryPtr</name></member>
+      <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a446c021cbaf78e2f0bcbe861605b6707" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody2DImpl</scope><name>m_isSyncAllowed</name></member>
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a68329c322874647a5bdd1e359c29b24c" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody2DImpl</scope><name>m_rigidbody</name></member>
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1ac64e11b6b8d4d6808129b7d529d1ee03" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody2DImpl</scope><name>m_rigidbodyRotation</name></member>
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a08b7a98f60c575a9653846a364421d18" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody2DImpl</scope><name>m_rigidbodyTranslation</name></member>
@@ -128,6 +129,7 @@
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody2DImpl</scope><name>operator=</name></member>
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a6fc49788a6962100241d99ec120f3b9d" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody2DImpl</scope><name>PhysicsScenePtr</name></member>
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a8aebbc2660c9fdb82cb4a11c5fe37a59" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody2DImpl</scope><name>SetRigidbody</name></member>
+      <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a4155376893a75b858cd12088df87014d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody2DImpl</scope><name>SetSyncAllowed</name></member>
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1ab032adc0e2c478f63a09fc411092a682" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody2DImpl</scope><name>Super</name></member>
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1af6f2e1627106730b48ff19bc485924a8" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody2DImpl</scope><name>Synchronize</name></member>
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1aaef6188500b24ed9e12254731132c56e" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody2DImpl</scope><name>UpdateInertia</name></member>

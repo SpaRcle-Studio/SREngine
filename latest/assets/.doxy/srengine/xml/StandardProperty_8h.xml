@@ -1658,7 +1658,7 @@
         <childnode refid="64" relation="include">
         </childnode>
       </node>
-      <node id="176">
+      <node id="177">
         <label>Engine/libs/Graphics/inc/Graphics/UI/UICanvasComponent.h</label>
         <link refid="UICanvasComponent_8h_source"/>
       </node>
@@ -1690,7 +1690,7 @@
         <childnode refid="163" relation="include">
         </childnode>
       </node>
-      <node id="177">
+      <node id="178">
         <label>Engine/libs/Graphics/inc/Graphics/UI/UISizeComponent.h</label>
         <link refid="UISizeComponent_8h_source"/>
       </node>
@@ -1823,6 +1823,8 @@
         </childnode>
         <childnode refid="106" relation="include">
         </childnode>
+        <childnode refid="111" relation="include">
+        </childnode>
         <childnode refid="114" relation="include">
         </childnode>
         <childnode refid="137" relation="include">
@@ -1837,11 +1839,13 @@
         </childnode>
         <childnode refid="159" relation="include">
         </childnode>
+        <childnode refid="175" relation="include">
+        </childnode>
         <childnode refid="160" relation="include">
         </childnode>
         <childnode refid="173" relation="include">
         </childnode>
-        <childnode refid="175" relation="include">
+        <childnode refid="176" relation="include">
         </childnode>
       </node>
       <node id="142">
@@ -1860,34 +1864,36 @@
         <childnode refid="173" relation="include">
         </childnode>
       </node>
-      <node id="179">
+      <node id="180">
         <label>Engine/libs/Utils/inc/Utils/ECS/Entity.h</label>
         <link refid="Entity_8h_source"/>
         <childnode refid="119" relation="include">
         </childnode>
-        <childnode refid="180" relation="include">
+        <childnode refid="181" relation="include">
         </childnode>
         <childnode refid="143" relation="include">
         </childnode>
       </node>
-      <node id="180">
+      <node id="181">
         <label>Engine/libs/Utils/inc/Utils/ECS/EntityController.h</label>
         <link refid="EntityController_8h_source"/>
         <childnode refid="149" relation="include">
         </childnode>
         <childnode refid="142" relation="include">
         </childnode>
-        <childnode refid="181" relation="include">
+        <childnode refid="182" relation="include">
         </childnode>
         <childnode refid="144" relation="include">
         </childnode>
       </node>
-      <node id="181">
+      <node id="182">
         <label>Engine/libs/Utils/inc/Utils/ECS/EntityRef.h</label>
         <link refid="EntityRef_8h_source"/>
         <childnode refid="54" relation="include">
         </childnode>
         <childnode refid="168" relation="include">
+        </childnode>
+        <childnode refid="111" relation="include">
         </childnode>
       </node>
       <node id="151">
@@ -1944,7 +1950,7 @@
         <childnode refid="169" relation="include">
         </childnode>
       </node>
-      <node id="178">
+      <node id="179">
         <label>Engine/libs/Utils/inc/Utils/ECS/Transform2D.h</label>
         <link refid="Transform2D_8h_source"/>
         <childnode refid="152" relation="include">
@@ -1957,6 +1963,10 @@
       <node id="159">
         <label>Engine/libs/Utils/inc/Utils/Game/DebugLogComponent.h</label>
         <link refid="DebugLogComponent_8h_source"/>
+      </node>
+      <node id="175">
+        <label>Engine/libs/Utils/inc/Utils/Game/LockPositionComponent.h</label>
+        <link refid="LockPositionComponent_8h_source"/>
       </node>
       <node id="160">
         <label>Engine/libs/Utils/inc/Utils/Game/LookAtComponent.h</label>
@@ -1979,7 +1989,7 @@
         </childnode>
         <childnode refid="119" relation="include">
         </childnode>
-        <childnode refid="179" relation="include">
+        <childnode refid="180" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -1988,14 +1998,14 @@
         <childnode refid="2" relation="include">
         </childnode>
       </node>
-      <node id="175">
+      <node id="176">
         <label>Engine/libs/Utils/inc/Utils/UI/UIModifier.h</label>
         <link refid="UIModifier_8h_source"/>
-        <childnode refid="176" relation="include">
-        </childnode>
         <childnode refid="177" relation="include">
         </childnode>
         <childnode refid="178" relation="include">
+        </childnode>
+        <childnode refid="179" relation="include">
         </childnode>
       </node>
       <node id="170">

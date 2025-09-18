@@ -59,6 +59,7 @@
 * **CalcRotationPlanNormal** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
 * **CalcTranslationPlanNormal** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
 * **Ceiling** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
+* **Cross** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
 * **ComputeChecksum** ([**SR\_NETWORK\_NS**](namespaceSR__NETWORK__NS.md))
 * **CombineToPxCombine** ([**SR\_PHYSICS\_UTILS\_NS**](namespaceSR__PHYSICS__UTILS__NS.md))
 * **CreatePvdConnection** ([**SR\_PHYSICS\_UTILS\_NS**](namespaceSR__PHYSICS__UTILS__NS.md))
@@ -101,6 +102,7 @@
 * **DFCalculate** ([**SR\_GRAPH\_NS::SDF**](namespaceSR__GRAPH__NS_1_1SDF.md))
 * **deserialise\_uint64\_t** ([**SR\_HTYPES\_NS**](namespaceSR__HTYPES__NS.md))
 * **DecomposeTransform** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
+* **Dot** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
 * **do\_distance\_unsafe** ([**SR\_TYPES\_NS::detail::distance\_detail**](namespaceSR__TYPES__NS_1_1detail_1_1distance__detail.md))
 * **distance\_unsafe** ([**SR\_TYPES\_NS::detail**](namespaceSR__TYPES__NS_1_1detail.md))
 * **divmod** ([**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
@@ -387,6 +389,7 @@
 * **PostProcessRenderTechnique** ([**SR\_GRAPH\_NS::Details**](namespaceSR__GRAPH__NS_1_1Details.md))
 * **Parse** ([**SR\_GRAPH\_NS::SRSL**](namespaceSR__GRAPH__NS_1_1SRSL.md))
 * **PreProcess** ([**SR\_GRAPH\_NS::SRSL**](namespaceSR__GRAPH__NS_1_1SRSL.md))
+* **PxQuatToQuat** ([**SR\_PHYSICS\_UTILS\_NS**](namespaceSR__PHYSICS__UTILS__NS.md))
 * **PxV3ToFV3** ([**SR\_PHYSICS\_UTILS\_NS**](namespaceSR__PHYSICS__UTILS__NS.md))
 * **pow** ([**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
 * **powm** ([**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
@@ -401,6 +404,7 @@
 
 * **QuickSort** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **QuickSortInternal** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
+* **QuatToPxQuat** ([**SR\_PHYSICS\_UTILS\_NS**](namespaceSR__PHYSICS__UTILS__NS.md))
 
 
 ## r

@@ -918,6 +918,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
             * **struct** [**UtfTraits&lt; CharType, 1 &gt;**](structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_011_01_4.md)     
             * **struct** [**UtfTraits&lt; CharType, 2 &gt;**](structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_012_01_4.md) _utf8_     
             * **struct** [**UtfTraits&lt; CharType, 4 &gt;**](structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_014_01_4.md) _utf16;_     
+    * **class** [**LockPositionComponent**](classSR__UTILS__NS_1_1LockPositionComponent.md)     
     * **class** [**LookAtComponent**](classSR__UTILS__NS_1_1LookAtComponent.md)     
     * **namespace** [**MarshalUtils**](namespaceSR__UTILS__NS_1_1MarshalUtils.md)     
     * **class** [**MigrationManager**](classSR__UTILS__NS_1_1MigrationManager.md)     

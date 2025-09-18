@@ -66,6 +66,7 @@ namespace SR_MATH_NS {
         static Quaternion Identity();
 
         SR_NODISCARD Quaternion Inverse() const;
+        SR_NODISCARD Quaternion Conjurate() const;
 
         SR_NODISCARD bool SR_FASTCALL IsEquals(const Quaternion& q, Unit tolerance) const noexcept;
 
@@ -81,6 +82,7 @@ namespace SR_MATH_NS {
         SR_NODISCARD Unit Pitch() const noexcept;
         SR_NODISCARD Unit Yaw() const noexcept;
 
+        SR_NODISCARD Unit Magnitude() const noexcept;
         SR_NODISCARD Unit SquaredNorm() const noexcept;
 
         SR_NODISCARD std::string ToString() const;
@@ -93,6 +95,7 @@ namespace SR_MATH_NS {
 
         SR_NODISCARD bool IsFinite() const noexcept;
         SR_NODISCARD bool IsIdentity() const noexcept;
+        SR_NODISCARD bool IsSane() const noexcept;
 
         void operator+=(const Quaternion &p_q);
         void operator-=(const Quaternion &p_q);

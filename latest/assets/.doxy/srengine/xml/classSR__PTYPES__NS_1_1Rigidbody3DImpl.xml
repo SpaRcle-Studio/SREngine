@@ -51,6 +51,44 @@
         </inbodydescription>
         <location file="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="15" column="51"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody3DImpl_1a9bb39c6cdc82089ed8f4cc4500b0b79a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_PTYPES_NS::Rigidbody3DImpl::AddForce</definition>
+        <argsstring>(const SR_MATH_NS::FVector3 &amp;force)</argsstring>
+        <name>AddForce</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody3DImpl::AddForce</qualifiedname>
+        <reimplementedby refid="classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl_1a07bd114690193855b55fad6a5338dbb4">AddForce</reimplementedby>
+        <param>
+          <type>const SR_MATH_NS::FVector3 &amp;</type>
+          <declname>force</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="17" column="22" bodyfile="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" bodystart="17" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody3DImpl_1a006dbba2613d30058ee33ec189c7901e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_PTYPES_NS::Rigidbody3DImpl::AddTorque</definition>
+        <argsstring>(const SR_MATH_NS::FVector3 &amp;torque)</argsstring>
+        <name>AddTorque</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody3DImpl::AddTorque</qualifiedname>
+        <reimplementedby refid="classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl_1a46f62346e509c4365efeb896b3b6093c">AddTorque</reimplementedby>
+        <param>
+          <type>const SR_MATH_NS::FVector3 &amp;</type>
+          <declname>torque</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="18" column="22" bodyfile="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" bodystart="18" bodyend="18"/>
+      </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody3DImpl_1af44976b9c581e2485a073b07d3d5c6b6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
         <definition>virtual void SR_PTYPES_NS::Rigidbody3DImpl::AddLinearVelocity</definition>
@@ -68,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="17" column="22" bodyfile="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" bodystart="17" bodyend="17"/>
+        <location file="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="20" column="22" bodyfile="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" bodystart="20" bodyend="20"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody3DImpl_1a63575fe60d00e175e89ab8ab2571c829" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -87,7 +125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="18" column="22" bodyfile="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" bodystart="18" bodyend="18"/>
+        <location file="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="21" column="22" bodyfile="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" bodystart="21" bodyend="21"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody3DImpl_1a3022b75cd185f59facbfd8cb3db6595e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -106,7 +144,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="20" column="22" bodyfile="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" bodystart="20" bodyend="20"/>
+        <location file="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="23" column="22" bodyfile="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" bodystart="23" bodyend="23"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody3DImpl_1a09adfc018b866ae275a2e6ce7408dc30" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -125,7 +163,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="21" column="22" bodyfile="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" bodystart="21" bodyend="21"/>
+        <location file="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="24" column="22" bodyfile="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" bodystart="24" bodyend="24"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody3DImpl_1a749e884bf791c770087bd24224509aa4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -144,7 +182,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="23" column="22" bodyfile="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" bodystart="23" bodyend="23"/>
+        <location file="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="26" column="22" bodyfile="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" bodystart="26" bodyend="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody3DImpl_1aebba28badd142d8c2abdcbf611a3ece9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -163,7 +201,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="24" column="22" bodyfile="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" bodystart="24" bodyend="24"/>
+        <location file="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="27" column="22" bodyfile="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" bodystart="27" bodyend="27"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -214,7 +252,7 @@
         <childnode refid="5" relation="public-inheritance">
         </childnode>
         <childnode refid="9" relation="usage">
-          <edgelabel>m_center</edgelabel>
+          <edgelabel>m_centerOfMassOffset</edgelabel>
           <edgelabel>m_scale</edgelabel>
           <edgelabel>m_translation</edgelabel>
         </childnode>
@@ -282,10 +320,12 @@
         <link refid="structSR__MATH__NS_1_1Vector3"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="11" column="5" bodyfile="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" bodystart="11" bodyend="26"/>
+    <location file="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="11" column="5" bodyfile="Engine/libs/Physics/inc/Physics/3D/Rigidbody3D.h" bodystart="11" bodyend="29"/>
     <listofallmembers>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody3DImpl_1a63575fe60d00e175e89ab8ab2571c829" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>AddAngularVelocity</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody3DImpl_1a9bb39c6cdc82089ed8f4cc4500b0b79a" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>AddForce</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody3DImpl_1af44976b9c581e2485a073b07d3d5c6b6" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>AddLinearVelocity</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody3DImpl_1a006dbba2613d30058ee33ec189c7901e" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>AddTorque</name></member>
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a83f6c74a873186b4920c0df977f6bce4" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>ClearForces</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody3DImpl_1ab7789d919f443e04474c9dbf5a056ed9" prot="public" virt="pure-virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>GetAngularVelocity</name></member>
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1af62c18b6b8b7602e2c4898e57c7f7824" prot="public" virt="pure-virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>GetHandle</name></member>
@@ -293,6 +333,7 @@
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a508579f47438da42f63a01779e8a41a3" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>GetRigidbody</name></member>
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a929d18eadf9b3c1adeab0557fa0fad2a" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>InitBody</name></member>
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a035f236a87bbaa11248891b80e0d9c25" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>LibraryPtr</name></member>
+      <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a446c021cbaf78e2f0bcbe861605b6707" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>m_isSyncAllowed</name></member>
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a68329c322874647a5bdd1e359c29b24c" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>m_rigidbody</name></member>
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1ac64e11b6b8d4d6808129b7d529d1ee03" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>m_rigidbodyRotation</name></member>
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a08b7a98f60c575a9653846a364421d18" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>m_rigidbodyTranslation</name></member>
@@ -305,6 +346,7 @@
       <member refid="classSR__PTYPES__NS_1_1Rigidbody3DImpl_1a749e884bf791c770087bd24224509aa4" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>SetLinearLock</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody3DImpl_1a3022b75cd185f59facbfd8cb3db6595e" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>SetLinearVelocity</name></member>
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a8aebbc2660c9fdb82cb4a11c5fe37a59" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>SetRigidbody</name></member>
+      <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a4155376893a75b858cd12088df87014d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>SetSyncAllowed</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody3DImpl_1a1bc52c78d615ded919d0b4cd76362123" prot="private" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>Super</name></member>
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1af6f2e1627106730b48ff19bc485924a8" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>Synchronize</name></member>
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1aaef6188500b24ed9e12254731132c56e" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>UpdateInertia</name></member>

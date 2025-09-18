@@ -12,11 +12,13 @@
     <derivedcompoundref refid="classSR__GTYPES__NS_1_1Camera" prot="public" virt="non-virtual">SR_GTYPES_NS::Camera</derivedcompoundref>
     <derivedcompoundref refid="classSR__GTYPES__NS_1_1IRenderComponent" prot="public" virt="non-virtual">SR_GTYPES_NS::IRenderComponent</derivedcompoundref>
     <derivedcompoundref refid="classSR__GTYPES__NS_1_1RenderTechniqueComponent" prot="public" virt="non-virtual">SR_GTYPES_NS::RenderTechniqueComponent</derivedcompoundref>
+    <derivedcompoundref refid="classSR__PTYPES__NS_1_1CollisionShape" prot="public" virt="non-virtual">SR_PTYPES_NS::CollisionShape</derivedcompoundref>
     <derivedcompoundref refid="classSR__PTYPES__NS_1_1Rigidbody" prot="public" virt="non-virtual">SR_PTYPES_NS::Rigidbody</derivedcompoundref>
     <derivedcompoundref refid="classSR__PTYPES__NS_1_1Vehicle" prot="public" virt="non-virtual">SR_PTYPES_NS::Vehicle</derivedcompoundref>
     <derivedcompoundref refid="classSR__SCRIPTING__NS_1_1Behaviour" prot="public" virt="non-virtual">SR_SCRIPTING_NS::Behaviour</derivedcompoundref>
     <derivedcompoundref refid="classSR__UTILS__NS_1_1CameraFlyMover" prot="public" virt="non-virtual">SR_UTILS_NS::CameraFlyMover</derivedcompoundref>
     <derivedcompoundref refid="classSR__UTILS__NS_1_1DebugLogComponent" prot="public" virt="non-virtual">SR_UTILS_NS::DebugLogComponent</derivedcompoundref>
+    <derivedcompoundref refid="classSR__UTILS__NS_1_1LockPositionComponent" prot="public" virt="non-virtual">SR_UTILS_NS::LockPositionComponent</derivedcompoundref>
     <derivedcompoundref refid="classSR__UTILS__NS_1_1LookAtComponent" prot="public" virt="non-virtual">SR_UTILS_NS::LookAtComponent</derivedcompoundref>
     <derivedcompoundref refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent" prot="public" virt="non-virtual">SR_UTILS_NS::Tests::ReflectionTestComponent</derivedcompoundref>
     <derivedcompoundref refid="classSR__UTILS__NS_1_1UI_1_1UIModifierComponent" prot="public" virt="non-virtual">SR_UTILS_NS::UI::UIModifierComponent</derivedcompoundref>
@@ -337,6 +339,7 @@
         <reimplementedby refid="classSR__GRAPH__NS_1_1ILightComponent_1ab20a6935b503855bfc51855c5238f0ea">OnMatrixDirty</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Camera_1a08a31e8f19278cf24c8d370612983b4f">OnMatrixDirty</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Mesh_1a1b0a2c9312c0344c53db90eae676a60d">OnMatrixDirty</reimplementedby>
+        <reimplementedby refid="classSR__PTYPES__NS_1_1CollisionShape_1abbfaf898b7975df1ff2580ad2e225193">OnMatrixDirty</reimplementedby>
         <reimplementedby refid="classSR__PTYPES__NS_1_1Rigidbody_1a151d548ab301e1d0d2768c9f098952e9">OnMatrixDirty</reimplementedby>
         <briefdescription>
         </briefdescription>
@@ -409,6 +412,7 @@
         <argsstring>()</argsstring>
         <name>OnDetached</name>
         <qualifiedname>SR_UTILS_NS::Component::OnDetached</qualifiedname>
+        <reimplementedby refid="classSR__PTYPES__NS_1_1CollisionShape_1a41d2247200b367c2ed8eb0b65c872d1e">OnDetached</reimplementedby>
         <reimplementedby refid="classSR__SCRIPTING__NS_1_1Behaviour_1a34f9154f170305728e597fa3eadd1822">OnDetached</reimplementedby>
         <reimplementedby refid="classSR__UTILS__NS_1_1DebugLogComponent_1a0e0c7773d3046833d9fdbff7bed742fa">OnDetached</reimplementedby>
         <reimplementedby refid="classSR__UTILS__NS_1_1UI_1_1UIModifierComponent_1a670cae14956d5e918778051a2f28dc28">OnDetached</reimplementedby>
@@ -464,6 +468,7 @@
         <reimplementedby refid="classSR__GTYPES__NS_1_1IRenderComponent_1ae13cacd5b7be1e43cc46f79b4157d07e">OnEnable</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Mesh_1acd546e323a875a9139aeb061de5a8be9">OnEnable</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__UI__NS_1_1Gizmo_1a83f2194e19d57e2f224a250ab42e475e">OnEnable</reimplementedby>
+        <reimplementedby refid="classSR__PTYPES__NS_1_1CollisionShape_1a36970940e195b2b4b7966e8b4b78c398">OnEnable</reimplementedby>
         <reimplementedby refid="classSR__PTYPES__NS_1_1Rigidbody_1a5f07661c4a5634c6ca706569dc67d58b">OnEnable</reimplementedby>
         <reimplementedby refid="classSR__SCRIPTING__NS_1_1Behaviour_1a8e720ddeb7afc36fc5747cd93bf526d9">OnEnable</reimplementedby>
         <reimplementedby refid="classSR__UTILS__NS_1_1DebugLogComponent_1a51adb7870c6b6f32d68e9e18ad5f65ff">OnEnable</reimplementedby>
@@ -487,6 +492,7 @@
         <reimplementedby refid="classSR__GTYPES__NS_1_1IRenderComponent_1a341f5491cabb294266eec545684cc553">OnDisable</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Mesh_1a89241c5fbef2a125453e3c102a8abe5b">OnDisable</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__UI__NS_1_1Gizmo_1aee9f6f515d7d1865a82e4df375f27e45">OnDisable</reimplementedby>
+        <reimplementedby refid="classSR__PTYPES__NS_1_1CollisionShape_1a06176c791fe9aad499a12eb7200d2f86">OnDisable</reimplementedby>
         <reimplementedby refid="classSR__PTYPES__NS_1_1Rigidbody_1a84be4e404cda0202f7aa72549f8c6b90">OnDisable</reimplementedby>
         <reimplementedby refid="classSR__SCRIPTING__NS_1_1Behaviour_1a0bc8bac603e6afa91912b0b6d31663a6">OnDisable</reimplementedby>
         <reimplementedby refid="classSR__UTILS__NS_1_1CameraFlyMover_1a1e6fc312cb2e798cc2e37904b7150f12">OnDisable</reimplementedby>
@@ -507,6 +513,7 @@
         <qualifiedname>SR_UTILS_NS::Component::Awake</qualifiedname>
         <reimplementedby refid="classSR__SCRIPTING__NS_1_1Behaviour_1a1972527c85697fbb355f1b5f0ddc1883">Awake</reimplementedby>
         <reimplementedby refid="classSR__UTILS__NS_1_1DebugLogComponent_1a175052b91c36b16622121d56bd8670b7">Awake</reimplementedby>
+        <reimplementedby refid="classSR__UTILS__NS_1_1LockPositionComponent_1ab9b4b736350ef5eee234bcee1eff05f4">Awake</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -545,9 +552,11 @@
         <reimplementedby refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a5dccf08ae83a9f1a8b16dc8b835f0823">Update</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Camera_1a4cbe75de74328d6615d636a811847cee">Update</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__UI__NS_1_1Canvas_1ab7536799855608b8f9c19e88e9453a0c">Update</reimplementedby>
+        <reimplementedby refid="classSR__PTYPES__NS_1_1CollisionShape_1a4ba2063604cbaa9adaf9807a7cc11f54">Update</reimplementedby>
         <reimplementedby refid="classSR__PTYPES__NS_1_1Rigidbody_1ac5f56aecdce13e617ad21d3f0d2ca808">Update</reimplementedby>
         <reimplementedby refid="classSR__SCRIPTING__NS_1_1Behaviour_1a317c3a1d17d3e1255b86fcfe10d0b976">Update</reimplementedby>
         <reimplementedby refid="classSR__UTILS__NS_1_1LookAtComponent_1a4175484c1f635692fea02d5952e2f806">Update</reimplementedby>
+        <reimplementedby refid="classSR__UTILS__NS_1_1LockPositionComponent_1af9de26a466695f0c5718e96547533f51">Update</reimplementedby>
         <param>
           <type>float_t</type>
           <declname>dt</declname>
@@ -963,6 +972,7 @@
         <reimplementedby refid="classSR__GTYPES__NS_1_1Mesh_1a22918d631dae5a7843f30de199b8963b">ExecuteInEditMode</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__UI__NS_1_1Canvas_1ac9940dba08a320b73bca4113af9c6793">ExecuteInEditMode</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__UI__NS_1_1Gizmo_1ada8ab8ef34bd9850e674eeaf2c500e88">ExecuteInEditMode</reimplementedby>
+        <reimplementedby refid="classSR__PTYPES__NS_1_1CollisionShape_1a0fc572b3d070357332937056cc0f3662">ExecuteInEditMode</reimplementedby>
         <reimplementedby refid="classSR__PTYPES__NS_1_1Rigidbody_1a4b0a3a17900c987f5a7a5b7e25d4ed41">ExecuteInEditMode</reimplementedby>
         <reimplementedby refid="classSR__SCRIPTING__NS_1_1Behaviour_1aee45c569c5cc92f89fc28ce66758762b">ExecuteInEditMode</reimplementedby>
         <reimplementedby refid="classSR__UTILS__NS_1_1CameraFlyMover_1ac65458bfe8984f235021b33a5494d63f">ExecuteInEditMode</reimplementedby>
@@ -1303,16 +1313,16 @@
         <childnode refid="11" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="44">
+      <node id="47">
         <label>SR_GRAPH_UI_NS::UICanvasComponent</label>
         <link refid="classSR__GRAPH__UI__NS_1_1UICanvasComponent"/>
-        <childnode refid="43" relation="public-inheritance">
+        <childnode refid="46" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="45">
+      <node id="48">
         <label>SR_GRAPH_UI_NS::UISizeComponent</label>
         <link refid="classSR__GRAPH__UI__NS_1_1UISizeComponent"/>
-        <childnode refid="43" relation="public-inheritance">
+        <childnode refid="46" relation="public-inheritance">
         </childnode>
       </node>
       <node id="9">
@@ -1387,49 +1397,61 @@
         <childnode refid="22" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="35">
+      <node id="33">
+        <label>SR_PTYPES_NS::Bullet3CollisionShape</label>
+        <link refid="classSR__PTYPES__NS_1_1Bullet3CollisionShape"/>
+        <childnode refid="32" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="37">
         <label>SR_PTYPES_NS::Bullet3Rigidbody3D</label>
         <link refid="classSR__PTYPES__NS_1_1Bullet3Rigidbody3D"/>
-        <childnode refid="34" relation="public-inheritance">
+        <childnode refid="36" relation="public-inheritance">
         </childnode>
       </node>
       <node id="32">
+        <label>SR_PTYPES_NS::CollisionShape</label>
+        <link refid="classSR__PTYPES__NS_1_1CollisionShape"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="34">
         <label>SR_PTYPES_NS::Rigidbody</label>
         <link refid="classSR__PTYPES__NS_1_1Rigidbody"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="33">
+      <node id="35">
         <label>SR_PTYPES_NS::Rigidbody2D</label>
         <link refid="classSR__PTYPES__NS_1_1Rigidbody2D"/>
-        <childnode refid="32" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="34">
-        <label>SR_PTYPES_NS::Rigidbody3D</label>
-        <link refid="classSR__PTYPES__NS_1_1Rigidbody3D"/>
-        <childnode refid="32" relation="public-inheritance">
+        <childnode refid="34" relation="public-inheritance">
         </childnode>
       </node>
       <node id="36">
+        <label>SR_PTYPES_NS::Rigidbody3D</label>
+        <link refid="classSR__PTYPES__NS_1_1Rigidbody3D"/>
+        <childnode refid="34" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="38">
         <label>SR_PTYPES_NS::Vehicle</label>
         <link refid="classSR__PTYPES__NS_1_1Vehicle"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="37">
+      <node id="39">
         <label>SR_PTYPES_NS::Vehicle4W3D</label>
         <link refid="classSR__PTYPES__NS_1_1Vehicle4W3D"/>
-        <childnode refid="36" relation="public-inheritance">
+        <childnode refid="38" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="38">
+      <node id="40">
         <label>SR_SCRIPTING_NS::Behaviour</label>
         <link refid="classSR__SCRIPTING__NS_1_1Behaviour"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="39">
+      <node id="41">
         <label>SR_UTILS_NS::CameraFlyMover</label>
         <link refid="classSR__UTILS__NS_1_1CameraFlyMover"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1441,25 +1463,31 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="40">
+      <node id="42">
         <label>SR_UTILS_NS::DebugLogComponent</label>
         <link refid="classSR__UTILS__NS_1_1DebugLogComponent"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="41">
+      <node id="43">
+        <label>SR_UTILS_NS::LockPositionComponent</label>
+        <link refid="classSR__UTILS__NS_1_1LockPositionComponent"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="44">
         <label>SR_UTILS_NS::LookAtComponent</label>
         <link refid="classSR__UTILS__NS_1_1LookAtComponent"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="42">
+      <node id="45">
         <label>SR_UTILS_NS::Tests::ReflectionTestComponent</label>
         <link refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponent"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="43">
+      <node id="46">
         <label>SR_UTILS_NS::UI::UIModifierComponent</label>
         <link refid="classSR__UTILS__NS_1_1UI_1_1UIModifierComponent"/>
         <childnode refid="1" relation="public-inheritance">

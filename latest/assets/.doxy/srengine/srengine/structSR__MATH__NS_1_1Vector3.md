@@ -96,6 +96,7 @@
 |  SR\_NODISCARD bool | [**IsFinite**](#function-isfinite) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsInfinity**](#function-isinfinity) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE T | [**Length**](#function-length) () const<br>_@method_  |
+|  SR\_NODISCARD Unit | [**LengthSqr**](#function-lengthsqr) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; SR\_FASTCALL | [**Lerp**](#function-lerp) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & vector3, float\_t t) noexcept const<br>_@method_  |
 |  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**Limits**](#function-limits) (int lim) const<br> |
 |  SR\_NODISCARD [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**LookAt**](#function-lookat) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & target) const<br> |
@@ -726,6 +727,19 @@ inline SR_NODISCARD bool SR_MATH_NS::Vector3::IsInfinity () const
 _@method_ 
 ```C++
 inline SR_NODISCARD SR_FORCE_INLINE T SR_MATH_NS::Vector3::Length () const
+```
+
+
+
+
+<hr>
+
+
+
+### function LengthSqr 
+
+```C++
+inline SR_NODISCARD Unit SR_MATH_NS::Vector3::LengthSqr () const
 ```
 
 

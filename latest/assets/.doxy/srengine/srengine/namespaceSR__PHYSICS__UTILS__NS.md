@@ -75,7 +75,9 @@
 |  SR\_MAYBE\_UNUSED constexpr bool | [**IsShapeHasSize**](#function-isshapehassize) (ShapeType type) <br> |
 |  SR\_MAYBE\_UNUSED constexpr bool | [**IsSphere**](#function-issphere) (ShapeType type) <br> |
 |  SR\_MAYBE\_UNUSED constexpr bool | [**IsTriangleMesh**](#function-istrianglemesh) (ShapeType type) <br> |
+|  SR\_MAYBE\_UNUSED [**SR\_MATH\_NS::Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**PxQuatToQuat**](#function-pxquattoquat) (const physx::PxQuat & quaternion) <br> |
 |  SR\_MAYBE\_UNUSED SR\_MATH\_NS::FVector3 | [**PxV3ToFV3**](#function-pxv3tofv3) (const physx::PxVec3 & vector3) <br> |
+|  SR\_MAYBE\_UNUSED physx::PxQuat | [**QuatToPxQuat**](#function-quattopxquat) (const [**SR\_MATH\_NS::Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & quaternion) <br> |
 
 
 
@@ -382,11 +384,41 @@ static SR_MAYBE_UNUSED constexpr bool SR_PHYSICS_UTILS_NS::IsTriangleMesh (
 
 
 
+### function PxQuatToQuat 
+
+```C++
+static SR_MAYBE_UNUSED SR_MATH_NS::Quaternion SR_PHYSICS_UTILS_NS::PxQuatToQuat (
+    const physx::PxQuat & quaternion
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function PxV3ToFV3 
 
 ```C++
 static SR_MAYBE_UNUSED SR_MATH_NS::FVector3 SR_PHYSICS_UTILS_NS::PxV3ToFV3 (
     const physx::PxVec3 & vector3
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function QuatToPxQuat 
+
+```C++
+static SR_MAYBE_UNUSED physx::PxQuat SR_PHYSICS_UTILS_NS::QuatToPxQuat (
+    const SR_MATH_NS::Quaternion & quaternion
 ) 
 ```
 

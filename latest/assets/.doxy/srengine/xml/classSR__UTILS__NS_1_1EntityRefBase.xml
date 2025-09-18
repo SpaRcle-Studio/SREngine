@@ -5,6 +5,7 @@
     <basecompoundref refid="classSR__UTILS__NS_1_1Serializable" prot="public" virt="non-virtual">SR_UTILS_NS::Serializable</basecompoundref>
     <derivedcompoundref refid="classSR__UTILS__NS_1_1EntityRef" prot="public" virt="non-virtual">SR_UTILS_NS::EntityRef&lt; SR_GTYPES_NS::Sprite &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__UTILS__NS_1_1EntityRef" prot="public" virt="non-virtual">SR_UTILS_NS::EntityRef&lt; SR_ANIMATIONS_NS::Skeleton &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classSR__UTILS__NS_1_1EntityRef" prot="public" virt="non-virtual">SR_UTILS_NS::EntityRef&lt; SR_PTYPES_NS::Rigidbody &gt;</derivedcompoundref>
     <derivedcompoundref refid="classSR__UTILS__NS_1_1EntityRef" prot="public" virt="non-virtual">SR_UTILS_NS::EntityRef&lt; T &gt;</derivedcompoundref>
     <includes refid="EntityRef_8h" local="no">EntityRef.h</includes>
     <sectiondef kind="private-type">
@@ -75,6 +76,7 @@
         <argsstring>() const noexcept</argsstring>
         <name>GetTypeName</name>
         <qualifiedname>SR_UTILS_NS::EntityRefBase::GetTypeName</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1EntityRef_1ab06b6af8f76ceabaa0a5f6b5c5960f60">GetTypeName</reimplementedby>
         <reimplementedby refid="classSR__UTILS__NS_1_1EntityRef_1ab06b6af8f76ceabaa0a5f6b5c5960f60">GetTypeName</reimplementedby>
         <reimplementedby refid="classSR__UTILS__NS_1_1EntityRef_1ab06b6af8f76ceabaa0a5f6b5c5960f60">GetTypeName</reimplementedby>
         <reimplementedby refid="classSR__UTILS__NS_1_1EntityRef_1ab06b6af8f76ceabaa0a5f6b5c5960f60">GetTypeName</reimplementedby>
@@ -212,6 +214,12 @@
         </childnode>
       </node>
       <node id="6">
+        <label>SR_UTILS_NS::EntityRef&lt; SR_PTYPES_NS::Rigidbody &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1EntityRef"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
         <label>SR_UTILS_NS::EntityRef&lt; T &gt;</label>
         <link refid="classSR__UTILS__NS_1_1EntityRef"/>
         <childnode refid="1" relation="public-inheritance">

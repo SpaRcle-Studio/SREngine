@@ -313,6 +313,7 @@
     4, 3, 2, 1, 0)
 
 #define SR_GLOBAL_LOCK static std::mutex codegenGlobalMutex##__LINE__; std::lock_guard<std::mutex> codegenLock##__LINE__(codegenGlobalMutex##__LINE__);
+#define SR_GLOBAL_RECURSIVE_LOCK static std::recursive_mutex codegenGlobalRecursiveMutex##__LINE__; std::lock_guard<std::recursive_mutex> codegenLock##__LINE__(codegenGlobalRecursiveMutex##__LINE__);
 
 #define SR_STATIC_ASSERT2(expr, msg) static_assert(expr, msg)
 

@@ -12,6 +12,8 @@
 
 * `#include <Physics/macros.h>`
 * `#include <Utils/Serialization/Serializable.h>`
+* `#include <Utils/ECS/Component.h>`
+* `#include <Utils/ECS/EntityRef.h>`
 * `#include <Utils/Common/NonCopyable.h>`
 * `#include <Utils/Types/SafePointer.h>`
 * `#include <Utils/Types/IRawMeshHolder.h>`

@@ -564,6 +564,10 @@ namespace SR_MATH_NS {
                     z == from ? to : z);
         }
 
+        SR_NODISCARD Unit LengthSqr() const {
+            return x * x + y * y + z * z;
+        }
+
         SR_NODISCARD Vector3<T> Abs() const {
             return Vector3(static_cast<T>(SR_ABS(x)), static_cast<T>(SR_ABS(y)), static_cast<T>(SR_ABS(z)));
         }
@@ -776,6 +780,18 @@ namespace SR_MATH_NS {
                + Cross(u, v) * 2.0f * s;
     }
 #endif
+
+    template<typename T> SR_NODISCARD T Dot(const Vector3<T>& a, const Vector3<T>& b) {
+        return a.x * b.x + a.y * b.y + a.z * b.z;
+    }
+
+    template<typename T> SR_NODISCARD Vector3<T> Cross(const Vector3<T>& a, const Vector3<T>& b) {
+        return Vector3<T>(
+                (a.y * b.z) - (a.z * b.y),
+                (a.z * b.x) - (a.x * b.z),
+                (a.x * b.y) - (a.y * b.x)
+        );
+    }
 }
 
 namespace std {
