@@ -2867,7 +2867,6 @@
 * **m\_updateNonHoveredSceneViewer** ([**SR\_CORE\_GUI\_NS::SceneViewer**](classSR__CORE__GUI__NS_1_1SceneViewer.md))
 * **m\_window** ([**SR\_CORE\_GUI\_NS::SceneViewer**](classSR__CORE__GUI__NS_1_1SceneViewer.md), [**SR\_GRAPH\_NS::GLFWWindow**](classSR__GRAPH__NS_1_1GLFWWindow.md), [**SR\_GRAPH\_NS::Pipeline**](classSR__GRAPH__NS_1_1Pipeline.md), [**SR\_GRAPH\_NS::RenderContext**](classSR__GRAPH__NS_1_1RenderContext.md))
 * **m\_windowSize** ([**SR\_CORE\_GUI\_NS::SceneViewer**](classSR__CORE__GUI__NS_1_1SceneViewer.md))
-* **m\_applicationCachePath** ([**SR\_CORE\_NS::Application**](classSR__CORE__NS_1_1Application.md))
 * **m\_isNeedReload** ([**SR\_CORE\_NS::Application**](classSR__CORE__NS_1_1Application.md))
 * **m\_resourcesPath** ([**SR\_CORE\_NS::Application**](classSR__CORE__NS_1_1Application.md), [**SR\_SCRIPTING\_NS::CppCompiler**](classSR__SCRIPTING__NS_1_1CppCompiler.md), [**SR\_SCRIPTING\_NS::ModuleManager**](classSR__SCRIPTING__NS_1_1ModuleManager.md))
 * **m\_worldTimer** ([**SR\_CORE\_NS::ChunkSystemState**](classSR__CORE__NS_1_1ChunkSystemState.md))

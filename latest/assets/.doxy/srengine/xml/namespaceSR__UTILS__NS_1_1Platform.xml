@@ -962,6 +962,20 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="99" column="44" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="99" declcolumn="44"/>
       </memberdef>
+      <memberdef kind="function" id="Platform_8h_1a731d3ce8e177f5893fd6554551a9082b" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_COMMON_DLL_API std::optional&lt; <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &gt;</type>
+        <definition>SR_COMMON_DLL_API std::optional&lt; Path &gt; SR_UTILS_NS::Platform::GetApplicationLogPath</definition>
+        <argsstring>()</argsstring>
+        <name>GetApplicationLogPath</name>
+        <qualifiedname>SR_UTILS_NS::Platform::GetApplicationLogPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="100" column="44" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="100" declcolumn="44"/>
+      </memberdef>
       <memberdef kind="function" id="Platform_8h_1a2cba344e5b20a7f8d120cb5a8c84f90f" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
         <definition>SR_COMMON_DLL_API void SR_UTILS_NS::Platform::SetMousePos</definition>
@@ -978,7 +992,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="101" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="101" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="102" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="102" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a5a18ad9c714a0f7c4d516086d4377cfe" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -996,7 +1010,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="102" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="102" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="103" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="103" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1aa1d8eb2c1b9a04bcc82d6fd6cfb30b1f" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -1010,7 +1024,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="103" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="103" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="104" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="104" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1a438b53243ec3b9dd8ce94036ce4dc6d8" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -1024,7 +1038,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="104" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="104" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="105" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="105" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1acd75ef9876cd2d3a7457c8dad0a471e6" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -1046,7 +1060,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="105" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="105" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="106" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="106" declcolumn="35"/>
       </memberdef>
       <memberdef kind="function" id="Platform_8h_1aa120142f714aca63c6153474c7a0d84e" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_COMMON_DLL_API void</type>
@@ -1068,7 +1082,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="106" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="106" declcolumn="35"/>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="107" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="107" declcolumn="35"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

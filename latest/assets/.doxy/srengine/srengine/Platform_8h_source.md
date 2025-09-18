@@ -102,6 +102,7 @@ namespace SR_UTILS_NS::Platform {
     SR_COMMON_DLL_API extern bool IsRunningUnderDebugger();
     SR_COMMON_DLL_API extern bool IsFileDeletable(const SR_UTILS_NS::Path& path);
     SR_COMMON_DLL_API extern std::optional<Path> GetApplicationCachePath();
+    SR_COMMON_DLL_API extern std::optional<Path> GetApplicationLogPath();
 
     SR_COMMON_DLL_API extern void SetMousePos(const SR_MATH_NS::IVector2& pos);
     SR_COMMON_DLL_API extern void SetCursorVisible(bool isVisible);

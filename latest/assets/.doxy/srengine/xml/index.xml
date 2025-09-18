@@ -482,7 +482,6 @@
   </compound>
   <compound refid="classSR__CORE__NS_1_1Application" kind="class"><name>SR_CORE_NS::Application</name>
     <member refid="classSR__CORE__NS_1_1Application_1a185ee674671dc64febc79bb671ed13b5" kind="typedef"><name>Super</name></member>
-    <member refid="classSR__CORE__NS_1_1Application_1ad34f72ae12bbb8eef5a86fcc21ee915d" kind="variable"><name>m_applicationCachePath</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1aa1aa847a32be788607fa6d8192a56de1" kind="variable"><name>m_resourcesPath</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1a5ced4ed9e4d84acd64f73e25ccc1f236" kind="variable"><name>m_isNeedReload</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1add69171ec556c00ec2972be8fd210d6f" kind="variable"><name>m_engine</name></member>
@@ -15492,6 +15491,7 @@
     <member refid="Platform_8h_1ad34daa9606ec04fdecc6ad0c73afaa19" kind="function"><name>IsRunningUnderDebugger</name></member>
     <member refid="Platform_8h_1a9286b2b90eb69dbbd187c906fc5ff065" kind="function"><name>IsFileDeletable</name></member>
     <member refid="Platform_8h_1a93ec4b5517a7c8a7f5f1480cbee81a9f" kind="function"><name>GetApplicationCachePath</name></member>
+    <member refid="Platform_8h_1a731d3ce8e177f5893fd6554551a9082b" kind="function"><name>GetApplicationLogPath</name></member>
     <member refid="Platform_8h_1a2cba344e5b20a7f8d120cb5a8c84f90f" kind="function"><name>SetMousePos</name></member>
     <member refid="Platform_8h_1a5a18ad9c714a0f7c4d516086d4377cfe" kind="function"><name>SetCursorVisible</name></member>
     <member refid="Platform_8h_1aa1d8eb2c1b9a04bcc82d6fd6cfb30b1f" kind="function"><name>ConfineCursor</name></member>

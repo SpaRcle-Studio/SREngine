@@ -75,6 +75,7 @@
 |  SR\_COMMON\_DLL\_API std::list&lt; [**Path**](classSR__UTILS__NS_1_1Path.md) &gt; | [**GetAllInDirectory**](#function-getallindirectory) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & dir) <br> |
 |  SR\_COMMON\_DLL\_API std::optional&lt; [**Path**](classSR__UTILS__NS_1_1Path.md) &gt; | [**GetApplicationCachePath**](#function-getapplicationcachepath) () <br> |
 |  SR\_COMMON\_DLL\_API [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetApplicationDirectory**](#function-getapplicationdirectory) () <br> |
+|  SR\_COMMON\_DLL\_API std::optional&lt; [**Path**](classSR__UTILS__NS_1_1Path.md) &gt; | [**GetApplicationLogPath**](#function-getapplicationlogpath) () <br> |
 |  SR\_COMMON\_DLL\_API [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetApplicationName**](#function-getapplicationname) () <br> |
 |  SR\_COMMON\_DLL\_API [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetApplicationPath**](#function-getapplicationpath) () <br> |
 |  SR\_COMMON\_DLL\_API [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetApplicationResourcesPath**](#function-getapplicationresourcespath) () <br> |
@@ -357,6 +358,19 @@ SR_COMMON_DLL_API std::optional< Path > SR_UTILS_NS::Platform::GetApplicationCac
 
 ```C++
 SR_COMMON_DLL_API Path SR_UTILS_NS::Platform::GetApplicationDirectory () 
+```
+
+
+
+
+<hr>
+
+
+
+### function GetApplicationLogPath 
+
+```C++
+SR_COMMON_DLL_API std::optional< Path > SR_UTILS_NS::Platform::GetApplicationLogPath () 
 ```
 
 
