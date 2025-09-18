@@ -1029,8 +1029,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
         * **class** [**ReflectionTestComponentLogicComplex**](classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentLogicComplex.md)     
         * **class** [**ReflectionTestComponentLogicSimple**](classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentLogicSimple.md)     
     * **class** [**ThreadWorker**](classSR__UTILS__NS_1_1ThreadWorker.md)     
-    * **class** [**ThreadWorkerStateBase**](classSR__UTILS__NS_1_1ThreadWorkerStateBase.md)     
-    * **class** [**ThreadWorkerStateRegistration**](classSR__UTILS__NS_1_1ThreadWorkerStateRegistration.md)     
+    * **class** [**ThreadWorkerStateBase**](classSR__UTILS__NS_1_1ThreadWorkerStateBase.md) _@abstract_     
     * **class** [**ThreadsWorker**](classSR__UTILS__NS_1_1ThreadsWorker.md)     
     * **class** [**Transform**](classSR__UTILS__NS_1_1Transform.md)     
     * **class** [**Transform2D**](classSR__UTILS__NS_1_1Transform2D.md)     

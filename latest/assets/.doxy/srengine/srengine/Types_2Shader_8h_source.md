@@ -42,7 +42,7 @@ namespace SR_GTYPES_NS {
     class Shader : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource {
         SR_CLASS()
         using ShaderProgram = int32_t;
-        friend class ShaderCache;
+        friend class SR_GRAPH_NS::ShaderCache;
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<Shader>;
 

@@ -37,14 +37,14 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="friend">
-      <memberdef kind="friend" id="classSR__GTYPES__NS_1_1Shader_1aed010b4417d1c9d243a122bbb6036c64" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="friend" id="classSR__GTYPES__NS_1_1Shader_1a18b88bdd3d639858b2b17560cf053682" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>class</type>
-        <definition>friend class ShaderCache</definition>
+        <definition>friend class SR_GRAPH_NS::ShaderCache</definition>
         <argsstring></argsstring>
-        <name>ShaderCache</name>
+        <name>SR_GRAPH_NS::ShaderCache</name>
         <qualifiedname>SR_GTYPES_NS::Shader::ShaderCache</qualifiedname>
         <param>
-          <type>ShaderCache</type>
+          <type><ref refid="classSR__GRAPH__NS_1_1ShaderCache" kindref="compound">SR_GRAPH_NS::ShaderCache</ref></type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -1876,7 +1876,6 @@
       <member refid="classSR__GTYPES__NS_1_1Shader_1ad867ee33cdee7080034fa4526133bff0" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>SetVec3</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1a9e1a756a0ac780ec209862201f5728a3" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>SetVec4</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1ab37bf5209ff98dfe565667f77d4d7408" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>Shader</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Shader_1aed010b4417d1c9d243a122bbb6036c64" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>ShaderCache</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1ae14c4dfccc3ec3efe9423691625e9362" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>ShaderProgram</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>SharedPointerType</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>SharedPtr</name></member>
@@ -1887,6 +1886,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1afc3c958bc4a0ac65b5f5362512545035" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1af7628077663a2e55a7cf9bff31717743" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>SignalWatch</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Shader_1a18b88bdd3d639858b2b17560cf053682" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>SR_GRAPH_NS::ShaderCache</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1a7bd3b986354c80acd5aadde8777dfa6a" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Shader</scope><name>StartWatch</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>StaticCast</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a73e9141c84030a503c6a1e51efe33b09" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Shader</scope><name>StopWatch</name></member>

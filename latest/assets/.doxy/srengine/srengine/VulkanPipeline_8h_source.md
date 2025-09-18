@@ -167,6 +167,8 @@ namespace SR_GRAPH_NS {
         bool InitEvoVulkanHooks();
 
     private:
+        bool m_isGlslLangInit = false;
+
         VkDeviceSize m_offsets[1] = { 0 };
         VkViewport m_viewport = { };
         VkRect2D m_scissor = { };

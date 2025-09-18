@@ -73,6 +73,7 @@
 |  SR\_COMMON\_DLL\_API std::string | [**ExecuteCommand**](#function-executecommand) (const std::string & command, const std::vector&lt; std::string &gt; & env={}) <br> |
 |  SR\_COMMON\_DLL\_API bool | [**FileIsHidden**](#function-fileishidden) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
 |  SR\_COMMON\_DLL\_API std::list&lt; [**Path**](classSR__UTILS__NS_1_1Path.md) &gt; | [**GetAllInDirectory**](#function-getallindirectory) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & dir) <br> |
+|  SR\_COMMON\_DLL\_API std::optional&lt; [**Path**](classSR__UTILS__NS_1_1Path.md) &gt; | [**GetApplicationCachePath**](#function-getapplicationcachepath) () <br> |
 |  SR\_COMMON\_DLL\_API [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetApplicationDirectory**](#function-getapplicationdirectory) () <br> |
 |  SR\_COMMON\_DLL\_API [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetApplicationName**](#function-getapplicationname) () <br> |
 |  SR\_COMMON\_DLL\_API [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetApplicationPath**](#function-getapplicationpath) () <br> |
@@ -85,6 +86,7 @@
 |  SR\_COMMON\_DLL\_API void \* | [**GetLibraryFunctionAddress**](#function-getlibraryfunctionaddress) (void \* pLibrary, const char \* pFunctionName) <br> |
 |  SR\_COMMON\_DLL\_API SR\_MATH\_NS::FVector2 | [**GetMousePos**](#function-getmousepos) () <br> |
 |  SR\_COMMON\_DLL\_API [**MouseState**](structSR__UTILS__NS_1_1Platform_1_1MouseState.md) | [**GetMouseState**](#function-getmousestate) () <br> |
+|  SR\_COMMON\_DLL\_API Path::Type | [**GetPathType**](#function-getpathtype) (std::string\_view path) <br> |
 |  SR\_COMMON\_DLL\_API uint64\_t | [**GetProcessUsedMemory**](#function-getprocessusedmemory) () <br> |
 |  SR\_COMMON\_DLL\_API double\_t | [**GetScreenDPI**](#function-getscreendpi) () <br> |
 |  SR\_COMMON\_DLL\_API SR\_MATH\_NS::UVector2 | [**GetScreenResolution**](#function-getscreenresolution) () <br> |
@@ -96,6 +98,7 @@
 |  SR\_COMMON\_DLL\_API bool | [**IsAbsolutePath**](#function-isabsolutepath) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
 |  SR\_COMMON\_DLL\_API bool | [**IsExists**](#function-isexists) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
 |  SR\_COMMON\_DLL\_API bool | [**IsFileDeletable**](#function-isfiledeletable) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
+|  SR\_COMMON\_DLL\_API bool | [**IsMobilePlatform**](#function-ismobileplatform) () <br> |
 |  SR\_COMMON\_DLL\_API bool | [**IsRunningUnderDebugger**](#function-isrunningunderdebugger) () <br> |
 |  SR\_COMMON\_DLL\_API void \* | [**LoadLibraryModule**](#function-loadlibrarymodule) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
 |  SR\_COMMON\_DLL\_API void | [**OpenFile**](#function-openfile) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path, const std::string & args) <br> |
@@ -337,6 +340,19 @@ SR_COMMON_DLL_API std::list< Path > SR_UTILS_NS::Platform::GetAllInDirectory (
 
 
 
+### function GetApplicationCachePath 
+
+```C++
+SR_COMMON_DLL_API std::optional< Path > SR_UTILS_NS::Platform::GetApplicationCachePath () 
+```
+
+
+
+
+<hr>
+
+
+
 ### function GetApplicationDirectory 
 
 ```C++
@@ -501,6 +517,21 @@ SR_COMMON_DLL_API MouseState SR_UTILS_NS::Platform::GetMouseState ()
 
 
 
+### function GetPathType 
+
+```C++
+SR_COMMON_DLL_API Path::Type SR_UTILS_NS::Platform::GetPathType (
+    std::string_view path
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function GetProcessUsedMemory 
 
 ```C++
@@ -643,6 +674,19 @@ SR_COMMON_DLL_API bool SR_UTILS_NS::Platform::IsExists (
 SR_COMMON_DLL_API bool SR_UTILS_NS::Platform::IsFileDeletable (
     const SR_UTILS_NS::Path & path
 ) 
+```
+
+
+
+
+<hr>
+
+
+
+### function IsMobilePlatform 
+
+```C++
+SR_COMMON_DLL_API bool SR_UTILS_NS::Platform::IsMobilePlatform () 
 ```
 
 

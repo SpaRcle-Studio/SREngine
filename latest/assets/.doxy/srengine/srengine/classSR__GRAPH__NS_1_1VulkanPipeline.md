@@ -477,6 +477,7 @@ See [SR\_GRAPH\_NS::Pipeline](classSR__GRAPH__NS_1_1Pipeline.md)
 |  uint8\_t | [**m\_currentSampleCount**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_currentsamplecount)   = `1`<br> |
 |  std::atomic&lt; bool &gt; | [**m\_dirty**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_dirty)   = `false`<br> |
 |  uint32\_t | [**m\_drawInstancesCount**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_drawinstancescount)   = `1`<br> |
+|  bool | [**m\_enableValidationDebug**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_enablevalidationdebug)   = `false`<br> |
 |  bool | [**m\_enableValidationLayers**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_enablevalidationlayers)   = `false`<br> |
 |  uint64\_t | [**m\_errorsCount**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_errorscount)   = `0`<br> |
 |  [**FrameBufferQueue**](classSR__GRAPH__NS_1_1FrameBufferQueue.md) | [**m\_fboQueue**](classSR__GRAPH__NS_1_1Pipeline.md#variable-m_fboqueue)  <br> |

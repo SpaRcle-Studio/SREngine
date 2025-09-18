@@ -1073,6 +1073,7 @@
         <argsstring>() const</argsstring>
         <name>GetHandle</name>
         <qualifiedname>SR_GRAPH_NS::BasicWindowImpl::GetHandle</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1AndroidWindow_1aa2a199f85da21d1b3237829bd3f46531">GetHandle</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1GLFWWindow_1a665f5b0ec3c186c1b30c0c753401de83">GetHandle</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1Win32Window_1ad8f3406da9288ee6230b582ca1c86844">GetHandle</reimplementedby>
         <briefdescription>

@@ -17,6 +17,7 @@
 
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/Singleton.h>
+#include <Utils/Serialization/Serializable.h>
 #include <Utils/Types/DataStorage.h>
 #include <Utils/Types/Thread.h>
 #include <Utils/Types/SharedPtr.h>
@@ -36,8 +37,9 @@ namespace SR_UTILS_NS {
     class ThreadsWorker;
     class ThreadWorker;
 
-    class ThreadWorkerStateBase : public SR_HTYPES_NS::SharedPtr<ThreadWorkerStateBase> {
+    class ThreadWorkerStateBase : public SR_HTYPES_NS::SharedPtr<ThreadWorkerStateBase>, public SR_UTILS_NS::Serializable {
         using Super = SR_HTYPES_NS::SharedPtr<ThreadWorkerStateBase>;
+        SR_CLASS()
     public:
         ThreadWorkerStateBase();
         virtual ~ThreadWorkerStateBase() = default;
@@ -50,8 +52,6 @@ namespace SR_UTILS_NS {
         void Finalize();
 
         void SetThreadWorker(ThreadWorker* pThreadWorker) { m_threadWorker = pThreadWorker; }
-
-        virtual StringAtom GetName() const = 0;
 
         SR_NODISCARD ThreadWorker* GetThreadWorker() const { return m_threadWorker; }
         SR_NODISCARD ThreadsWorker* GetThreadsWorker() const;
@@ -131,43 +131,7 @@ namespace SR_UTILS_NS {
         std::recursive_mutex m_mutex;
 
     };
-
-    class ThreadWorkerStateRegistration final : public SR_UTILS_NS::Singleton<ThreadWorkerStateRegistration> {
-        SR_REGISTER_SINGLETON(ThreadWorkerStateRegistration)
-        using AllocateFn = SR_HTYPES_NS::Function<ThreadWorkerStateBase::Ptr()>;
-    public:
-        bool IsSingletonCanBeDestroyed() const override { return false; }
-
-        bool RegisterState(SR_UTILS_NS::StringAtom name, AllocateFn&& allocateFn);
-
-        SR_NODISCARD ThreadWorkerStateBase::Ptr AllocateState(SR_UTILS_NS::StringAtom name);
-
-    private:
-        std::map<SR_UTILS_NS::StringAtom, AllocateFn> m_states;
-
-    };
 }
-
-#define SR_REGISTER_THREAD_STATE(name) \
-    SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_CODEGEN_REGISTER_THREAD_STATE_NAME_##name =                             \
-        [str = std::string(#name)]() {                                                                                  \
-            const size_t index = str.find("State");                                                                     \
-            if (index == std::string::npos) {                                                                           \
-                std::cerr << "ThreadWorkerStateRegistration error: " << str << std::endl;                               \
-                return std::string();                                                                                   \
-            }                                                                                                           \
-            return str.substr(0, index);                                                                                \
-        }();                                                                                                            \
-    static SR_UTILS_NS::ThreadWorkerStateBase::Ptr SR_CODEGEN_REGISTER_THREAD_STATE_ALLOCATE_##name() {                 \
-        return dynamic_cast<SR_UTILS_NS::ThreadWorkerStateBase*>(new name());                                           \
-    }                                                                                                                   \
-    SR_INLINE_STATIC const bool SR_CODEGEN_REGISTER_THREAD_STATE_##name =                                               \
-        SR_UTILS_NS::ThreadWorkerStateRegistration::Instance().RegisterState(                                           \
-        SR_CODEGEN_REGISTER_THREAD_STATE_NAME_##name,                                                                   \
-        []() {                                                                                                          \
-            return SR_CODEGEN_REGISTER_THREAD_STATE_ALLOCATE_##name();                                                  \
-        });                                                                                                             \
-    SR_NODISCARD SR_UTILS_NS::StringAtom GetName() const final { return SR_CODEGEN_REGISTER_THREAD_STATE_NAME_##name; } \
 
 #endif //SR_ENGINE_UTILS_THREAD_WORKER_H
 ```

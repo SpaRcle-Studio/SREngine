@@ -54,7 +54,6 @@
     <derivedcompoundref refid="classSR__UTILS__NS_1_1StoreUtils_1_1Storage" prot="public" virt="non-virtual">SR_UTILS_NS::StoreUtils::Storage</derivedcompoundref>
     <derivedcompoundref refid="classSR__UTILS__NS_1_1TaskManager" prot="public" virt="non-virtual">SR_UTILS_NS::TaskManager</derivedcompoundref>
     <derivedcompoundref refid="classSR__UTILS__NS_1_1TestManager" prot="public" virt="non-virtual">SR_UTILS_NS::TestManager</derivedcompoundref>
-    <derivedcompoundref refid="classSR__UTILS__NS_1_1ThreadWorkerStateRegistration" prot="public" virt="non-virtual">SR_UTILS_NS::ThreadWorkerStateRegistration</derivedcompoundref>
     <derivedcompoundref refid="classSR__UTILS__NS_1_1Web_1_1CSSParser" prot="public" virt="non-virtual">SR_UTILS_NS::Web::CSSParser</derivedcompoundref>
     <derivedcompoundref refid="classSR__WORLD__NS_1_1SceneAllocator" prot="public" virt="non-virtual">SR_WORLD_NS::SceneAllocator</derivedcompoundref>
     <templateparamlist>
@@ -549,18 +548,12 @@
         </childnode>
       </node>
       <node id="57">
-        <label>SR_UTILS_NS::ThreadWorkerStateRegistration&lt; ThreadWorkerStateRegistration &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1ThreadWorkerStateRegistration"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="58">
         <label>SR_UTILS_NS::Web::CSSParser&lt; CSSParser &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Web_1_1CSSParser"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="59">
+      <node id="58">
         <label>SR_WORLD_NS::SceneAllocator&lt; SceneAllocator &gt;</label>
         <link refid="classSR__WORLD__NS_1_1SceneAllocator"/>
         <childnode refid="1" relation="public-inheritance">

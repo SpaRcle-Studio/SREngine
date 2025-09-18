@@ -1880,8 +1880,6 @@
 ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * [**ThreadWorkerStateBase**](classSR__UTILS__NS_1_1ThreadWorkerStateBase.md)
 ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
-* [**ThreadWorkerStateRegistration**](classSR__UTILS__NS_1_1ThreadWorkerStateRegistration.md)
-([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * [**Time**](classSR__HTYPES__NS_1_1Time.md)
 ([**SR\_HTYPES\_NS**](namespaceSR__HTYPES__NS.md))
 * [**TimeInfo**](structSR__HTYPES__NS_1_1Time_1_1TimeInfo.md)

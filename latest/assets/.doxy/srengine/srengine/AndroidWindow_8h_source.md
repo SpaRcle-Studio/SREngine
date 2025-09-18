@@ -43,6 +43,8 @@ namespace SR_GRAPH_NS {
 
         SR_NODISCARD ANativeWindow* GetNativeWindow() const;
 
+        void* GetHandle() const { return GetNativeWindow(); }
+
     private:
         static int32_t HandleInput(struct android_app* app, AInputEvent* event);
         static void HandleCmd(struct android_app* app, int32_t cmd);

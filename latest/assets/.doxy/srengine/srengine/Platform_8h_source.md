@@ -21,7 +21,7 @@
 
 namespace SR_UTILS_NS {
     SR_ENUM_NS_CLASS_T(PlatformType, uint8_t,
-        Unknown, Windows, Linux, Android, MacOS, Emscripten
+        Unknown, Windows, Linux, Android, MacOS, Emscripten, IOS
     );
 }
 
@@ -52,6 +52,7 @@ namespace SR_UTILS_NS::Platform {
     SR_COMMON_DLL_API extern void SetInstance(void* pInstance);
     SR_COMMON_DLL_API extern void* GetInstance();
     SR_COMMON_DLL_API extern PlatformType GetType();
+    SR_COMMON_DLL_API extern bool IsMobilePlatform();
 
     SR_COMMON_DLL_API extern std::string ExecuteCommand(const std::string& command, const std::vector<std::string>& env = {});
     SR_COMMON_DLL_API extern void SetEnvironmentVar(const std::string_view& name, const std::string_view& value);
@@ -78,6 +79,7 @@ namespace SR_UTILS_NS::Platform {
     SR_COMMON_DLL_API extern bool UnloadLibraryModule(void* pLibrary);
     SR_COMMON_DLL_API extern void* GetLibraryFunctionAddress(void* pLibrary, const char* pFunctionName);
 
+    SR_COMMON_DLL_API extern Path::Type GetPathType(std::string_view path);
     SR_COMMON_DLL_API extern uint64_t GetProcessUsedMemory();
     SR_COMMON_DLL_API extern uint16_t GetCurrentProcessId();
     SR_COMMON_DLL_API extern SR_MATH_NS::FVector2 GetMousePos();
@@ -99,6 +101,7 @@ namespace SR_UTILS_NS::Platform {
     SR_COMMON_DLL_API extern bool IsAbsolutePath(const Path& path);
     SR_COMMON_DLL_API extern bool IsRunningUnderDebugger();
     SR_COMMON_DLL_API extern bool IsFileDeletable(const SR_UTILS_NS::Path& path);
+    SR_COMMON_DLL_API extern std::optional<Path> GetApplicationCachePath();
 
     SR_COMMON_DLL_API extern void SetMousePos(const SR_MATH_NS::IVector2& pos);
     SR_COMMON_DLL_API extern void SetCursorVisible(bool isVisible);

@@ -114,6 +114,21 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Window/AndroidWindow.h" line="34" column="36"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1AndroidWindow_1aa2a199f85da21d1b3237829bd3f46531" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>void *</type>
+        <definition>void * SR_GRAPH_NS::AndroidWindow::GetHandle</definition>
+        <argsstring>() const</argsstring>
+        <name>GetHandle</name>
+        <qualifiedname>SR_GRAPH_NS::AndroidWindow::GetHandle</qualifiedname>
+        <reimplements refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a7b4af825526ab40be0cb2f90c4817a26">GetHandle</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/AndroidWindow.h" line="36" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/AndroidWindow.h" bodystart="36" bodyend="36"/>
+      </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-func">
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1AndroidWindow_1a3da4c466afa2745ebb05636369b5af1f" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -136,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Window/AndroidWindow.h" line="37" column="24"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/AndroidWindow.h" line="39" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1AndroidWindow_1ae5a64a37aee06e23f431d87978a07aa4" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -158,7 +173,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Window/AndroidWindow.h" line="38" column="21"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/AndroidWindow.h" line="40" column="21"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -201,7 +216,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Window/AndroidWindow.h" line="17" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/AndroidWindow.h" bodystart="17" bodyend="40"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Window/AndroidWindow.h" line="17" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/AndroidWindow.h" bodystart="17" bodyend="42"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1AndroidWindow_1afb1161f30a9f225bba6fb1d2c05efe8a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::AndroidWindow</scope><name>AndroidWindow</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1ab042a7c3ec62e016f28d1a7897ca6404" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::AndroidWindow</scope><name>BasicWindowImpl</name></member>
@@ -214,7 +229,7 @@
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a9f720e1811e97e3c54fa747e47cb9ab5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::AndroidWindow</scope><name>DrawCallback</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a881df22ba7f0a3128d1e445791d5f1a6" prot="public" virt="virtual"><scope>SR_GRAPH_NS::AndroidWindow</scope><name>Expand</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a6872acee06a37fb838df9a507bd4d919" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::AndroidWindow</scope><name>FocusCallback</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a7b4af825526ab40be0cb2f90c4817a26" prot="public" virt="virtual"><scope>SR_GRAPH_NS::AndroidWindow</scope><name>GetHandle</name></member>
+      <member refid="classSR__GRAPH__NS_1_1AndroidWindow_1aa2a199f85da21d1b3237829bd3f46531" prot="public" virt="virtual"><scope>SR_GRAPH_NS::AndroidWindow</scope><name>GetHandle</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a7d8e63f05b83ae8cc4051d4cf9476169" prot="public" virt="virtual"><scope>SR_GRAPH_NS::AndroidWindow</scope><name>GetHeight</name></member>
       <member refid="classSR__GRAPH__NS_1_1AndroidWindow_1a6a9b59150ae091c5bd43bc1b7a4f0ef1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::AndroidWindow</scope><name>GetNativeWindow</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a47a6f76e304c072da80d13c922e5fd30" prot="public" virt="virtual"><scope>SR_GRAPH_NS::AndroidWindow</scope><name>GetPosition</name></member>

@@ -111,7 +111,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  bool | [**PreInit**](#function-preinit) () <br> |
 |  void | [**Reload**](#function-reload) () <br> |
 |  void | [**SwitchResourcesFolder**](#function-switchresourcesfolder) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
-|   | [**~Application**](#function-application) () <br> |
+|   | [**~Application**](#function-application) () override<br> |
 
 
 ## Public Functions inherited from SR_HTYPES_NS::SharedPtr
@@ -428,7 +428,7 @@ void SR_CORE_NS::Application::SwitchResourcesFolder (
 ### function ~Application 
 
 ```C++
-SR_CORE_NS::Application::~Application () 
+SR_CORE_NS::Application::~Application () override
 ```
 
 

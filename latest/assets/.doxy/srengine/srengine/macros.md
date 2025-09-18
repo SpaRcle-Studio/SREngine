@@ -285,7 +285,6 @@
 * **SR\_LM\_REGISTER\_TYPE\_NO\_META** ([**Utils.h**](Utils_2inc_2Utils_2SRLM_2Utils_8h.md))
 * **SR\_LM\_REGISTER\_TYPE\_SG\_COPY** ([**Utils.h**](Utils_2inc_2Utils_2SRLM_2Utils_8h.md))
 * **SR\_REGISTER\_LOGICAL\_NODE** ([**Utils.h**](Utils_2inc_2Utils_2SRLM_2Utils_8h.md))
-* **SR\_REGISTER\_THREAD\_STATE** ([**ThreadWorker.h**](ThreadWorker_8h.md))
 * **SR\_REGISTER\_TYPE\_TRAITS\_PROPERTY** ([**Property.h**](TypeTraits_2Property_8h.md))
 * **SR\_CLASS** ([**SRClassMeta.h**](SRClassMeta_8h.md))
 * **SR\_CLASS\_BASE** ([**SRClassMeta.h**](SRClassMeta_8h.md))

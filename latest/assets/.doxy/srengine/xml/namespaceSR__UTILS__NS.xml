@@ -198,7 +198,6 @@
     <innerclass refid="classSR__UTILS__NS_1_1ThreadsWorker" prot="public">SR_UTILS_NS::ThreadsWorker</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1ThreadWorker" prot="public">SR_UTILS_NS::ThreadWorker</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1ThreadWorkerStateBase" prot="public">SR_UTILS_NS::ThreadWorkerStateBase</innerclass>
-    <innerclass refid="classSR__UTILS__NS_1_1ThreadWorkerStateRegistration" prot="public">SR_UTILS_NS::ThreadWorkerStateRegistration</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1Transform" prot="public">SR_UTILS_NS::Transform</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1Transform2D" prot="public">SR_UTILS_NS::Transform2D</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1Transform3D" prot="public">SR_UTILS_NS::Transform3D</innerclass>
@@ -570,7 +569,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="306" column="5" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="306" bodyend="308"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="309" column="5" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="309" bodyend="311"/>
       </memberdef>
       <memberdef kind="enum" id="namespaceSR__UTILS__NS_1ac36557f19a3e92bb036d9ccb273aca4e" prot="public" static="no" strong="yes">
         <type>uint8_t</type>
@@ -753,7 +752,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="215" column="17" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="215" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="218" column="17" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="218" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a6264b8791b5f460d93e46f2daa397260" prot="public" static="no">
         <templateparamlist>
@@ -775,7 +774,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="218" column="5" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="218" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="221" column="5" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="221" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a6d6c7fcefa5595fc4b0a08b8bdc7fe61" prot="public" static="no">
         <type>uint64_t</type>
@@ -789,7 +788,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="220" column="5" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="220" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="223" column="5" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="223" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1aeb836600e154f4f82d233e9027a822c4" prot="public" static="no">
         <type>std::chrono::time_point&lt; std::chrono::steady_clock &gt;</type>
@@ -803,7 +802,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="228" column="13" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="228" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="231" column="13" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="231" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1af5130cfa5410206a49dd6a9322987448" prot="public" static="no">
         <templateparamlist>
@@ -1253,7 +1252,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="290" column="20" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="290" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="293" column="20" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="293" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1abc22e77c752d3e5ac8c93ebe4819f7e9" prot="private" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -3678,6 +3677,42 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="15" column="5" declfile="Engine/libs/Utils/inc/Utils/Debug.h" declline="15" declcolumn="5"/>
       </memberdef>
+      <memberdef kind="function" id="namespaceSR__UTILS__NS_1a3e460e7a99ee4ee7cdca1dbff5701195" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool SR_UTILS_NS::IsErrorLogType</definition>
+        <argsstring>(DebugLogType type)</argsstring>
+        <name>IsErrorLogType</name>
+        <qualifiedname>SR_UTILS_NS::IsErrorLogType</qualifiedname>
+        <param>
+          <type>DebugLogType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="20" column="17" declfile="Engine/libs/Utils/inc/Utils/Debug.h" declline="20" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceSR__UTILS__NS_1a6bdaeb49f4c96c80d805d9f28f77859b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool SR_UTILS_NS::IsWarningLogType</definition>
+        <argsstring>(DebugLogType type)</argsstring>
+        <name>IsWarningLogType</name>
+        <qualifiedname>SR_UTILS_NS::IsWarningLogType</qualifiedname>
+        <param>
+          <type>DebugLogType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="21" column="17" declfile="Engine/libs/Utils/inc/Utils/Debug.h" declline="21" declcolumn="17"/>
+      </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1ae22165290eb0649097efba553a1b9bf1" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>fmt::text_style</type>
         <definition>static fmt::text_style SR_UTILS_NS::GetTextStyleColorByLogType</definition>
@@ -3694,7 +3729,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="20" column="28" declfile="Engine/libs/Utils/inc/Utils/Debug.h" declline="20" declcolumn="28"/>
+        <location file="Engine/libs/Utils/inc/Utils/Debug.h" line="23" column="28" declfile="Engine/libs/Utils/inc/Utils/Debug.h" declline="23" declcolumn="28"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a242d7f279667004c063392216b2b2122" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -4121,10 +4156,10 @@
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/macros.h" line="393" column="28" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="393" bodyend="395"/>
       </memberdef>
-      <memberdef kind="function" id="namespaceSR__UTILS__NS_1ab1be933ed50ca61779617edb34bfef7f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="namespaceSR__UTILS__NS_1a14b64ae7bfa3bc26d4b6d4d0f5853887" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>SR_UTILS_NS::SR_ENUM_NS_CLASS_T</definition>
-        <argsstring>(PlatformType, uint8_t, Unknown, Windows, Linux, Android, MacOS, Emscripten)</argsstring>
+        <argsstring>(PlatformType, uint8_t, Unknown, Windows, Linux, Android, MacOS, Emscripten, IOS)</argsstring>
         <name>SR_ENUM_NS_CLASS_T</name>
         <qualifiedname>SR_UTILS_NS::SR_ENUM_NS_CLASS_T</qualifiedname>
         <param>
@@ -4150,6 +4185,9 @@
         </param>
         <param>
           <type>Emscripten</type>
+        </param>
+        <param>
+          <type>IOS</type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -4241,7 +4279,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="162" column="32" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="162" bodyend="173"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="165" column="32" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="165" bodyend="176"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1acbce15d471953221efcf7ea0422420a0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -4277,7 +4315,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="194" column="33" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="194" bodyend="203"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="197" column="33" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="197" bodyend="206"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1af8789cd02e36d41eac334766799b556d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -4296,7 +4334,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="205" column="37" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="205" bodyend="211"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="208" column="37" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="208" bodyend="214"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a6a32422a2c82e41bae3746bb669dfb58" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -4321,7 +4359,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="213" column="35" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="213" bodyend="213"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="216" column="35" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="216" bodyend="216"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a8c9d30f358eaa81bf05be7129c20006e" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -4352,7 +4390,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="232" column="70" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="232" bodyend="236"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="235" column="70" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="235" bodyend="239"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a09588dc82d8c8ee581073c3985c2b75b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -4380,7 +4418,7 @@
         <inbodydescription>
 <para>Slow. But cross-platform.</para>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="250" column="52" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="250" bodyend="276"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="253" column="52" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="253" bodyend="279"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1aec31c4750ff586a7c8f4a0a70dc8025b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -4399,7 +4437,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="292" column="31" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="292" bodyend="294"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="295" column="31" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="295" bodyend="297"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a6cf7a1ab47bd15a772ec7679109c9deb" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -4418,7 +4456,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="296" column="31" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="296" bodyend="302"/>
+        <location file="Engine/libs/Utils/inc/Utils/stdInclude.h" line="299" column="31" bodyfile="Engine/libs/Utils/inc/Utils/stdInclude.h" bodystart="299" bodyend="305"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a22e0adbbd372a4829817587b10b78c91" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -4447,7 +4485,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="18" column="5" declfile="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" declline="18" declcolumn="5"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="19" column="5" declfile="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" declline="19" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1aa99585b6dcd410dfc4082ab44f3670d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -4479,7 +4517,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="22" column="5" declfile="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" declline="22" declcolumn="5"/>
+        <location file="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="23" column="5" declfile="Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" declline="23" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a302d1be38422f325b790c2e5123f11fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>

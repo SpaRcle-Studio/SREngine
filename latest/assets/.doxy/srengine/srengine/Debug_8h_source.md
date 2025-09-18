@@ -27,6 +27,9 @@ namespace SR_UTILS_NS {
         Error, ScriptError, ScriptLog, Vulkan, VulkanLog, VulkanError, Assert, Success, Test
     );
 
+    static bool IsErrorLogType(DebugLogType type);
+    static bool IsWarningLogType(DebugLogType type);
+
     static fmt::text_style GetTextStyleColorByLogType(DebugLogType type);
 
     class Debug : public Singleton<Debug> {

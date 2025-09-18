@@ -12,7 +12,6 @@
 * **AddElementFn** ([**SR\_UTILS\_NS::ArrayReferenceProperty**](classSR__UTILS__NS_1_1ArrayReferenceProperty.md))
 * **AllocatorT** ([**SR\_UTILS\_NS::Factory**](classSR__UTILS__NS_1_1Factory.md))
 * **ActiveConditionFn** ([**SR\_UTILS\_NS::Property**](classSR__UTILS__NS_1_1Property.md))
-* **AllocateFn** ([**SR\_UTILS\_NS::ThreadWorkerStateRegistration**](classSR__UTILS__NS_1_1ThreadWorkerStateRegistration.md))
 * **Allocator** ([**SR\_WORLD\_NS::Chunk**](classSR__WORLD__NS_1_1Chunk.md), [**SR\_WORLD\_NS::Region**](classSR__WORLD__NS_1_1Region.md), [**SR\_WORLD\_NS::SceneAllocator**](classSR__WORLD__NS_1_1SceneAllocator.md))
 
 

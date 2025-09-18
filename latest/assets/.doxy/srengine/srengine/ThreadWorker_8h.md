@@ -12,6 +12,7 @@
 
 * `#include <Utils/Common/NonCopyable.h>`
 * `#include <Utils/Common/Singleton.h>`
+* `#include <Utils/Serialization/Serializable.h>`
 * `#include <Utils/Types/DataStorage.h>`
 * `#include <Utils/Types/Thread.h>`
 * `#include <Utils/Types/SharedPtr.h>`
@@ -43,8 +44,7 @@
 | Type | Name |
 | ---: | :--- |
 | class | [**ThreadWorker**](classSR__UTILS__NS_1_1ThreadWorker.md) <br> |
-| class | [**ThreadWorkerStateBase**](classSR__UTILS__NS_1_1ThreadWorkerStateBase.md) <br> |
-| class | [**ThreadWorkerStateRegistration**](classSR__UTILS__NS_1_1ThreadWorkerStateRegistration.md) <br> |
+| class | [**ThreadWorkerStateBase**](classSR__UTILS__NS_1_1ThreadWorkerStateBase.md) <br>_@abstract_  |
 | class | [**ThreadsWorker**](classSR__UTILS__NS_1_1ThreadsWorker.md) <br> |
 
 
@@ -95,30 +95,7 @@
 
 
 
-## Macros
 
-| Type | Name |
-| ---: | :--- |
-| define  | [**SR\_REGISTER\_THREAD\_STATE**](ThreadWorker_8h.md#define-sr_register_thread_state) (name) `/* multi line expression */`<br> |
-
-## Macro Definition Documentation
-
-
-
-
-
-### define SR\_REGISTER\_THREAD\_STATE 
-
-```C++
-#define SR_REGISTER_THREAD_STATE (
-    name
-) `/* multi line expression */`
-```
-
-
-
-
-<hr>
 
 ------------------------------
 The documentation for this class was generated from the following file `Engine/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h`

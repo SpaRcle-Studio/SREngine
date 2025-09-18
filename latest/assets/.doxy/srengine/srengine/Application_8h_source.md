@@ -25,7 +25,7 @@ namespace SR_CORE_NS {
         using Super = SR_HTYPES_NS::SharedPtr<Application>;
     public:
         Application();
-        ~Application();
+        ~Application() override;
 
     public:
         bool PreInit();
@@ -48,7 +48,7 @@ namespace SR_CORE_NS {
         bool InitLogger(const SR_UTILS_NS::Path& logDir);
 
     private:
-        SR_UTILS_NS::Path m_applicationPath;
+        SR_UTILS_NS::Path m_applicationCachePath;
         SR_UTILS_NS::Path m_resourcesPath;
 
         std::atomic<bool> m_isNeedReload = false;

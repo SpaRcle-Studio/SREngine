@@ -97,9 +97,12 @@
         #include <iomanip>
     #endif
 
+    #if defined(SR_LINUX) || defined(SR_ANDROID)
+        #include <sys/stat.h>
+    #endif
+
     #ifdef SR_LINUX
         #include <cstdarg>
-        #include <sys/stat.h>
         #include <signal.h>
     #endif
 

@@ -246,8 +246,7 @@
 | class | [**TestManager**](classSR__UTILS__NS_1_1TestManager.md) <br> |
 | class | [**TestManagerAsset**](classSR__UTILS__NS_1_1TestManagerAsset.md) <br> |
 | class | [**ThreadWorker**](classSR__UTILS__NS_1_1ThreadWorker.md) <br> |
-| class | [**ThreadWorkerStateBase**](classSR__UTILS__NS_1_1ThreadWorkerStateBase.md) <br> |
-| class | [**ThreadWorkerStateRegistration**](classSR__UTILS__NS_1_1ThreadWorkerStateRegistration.md) <br> |
+| class | [**ThreadWorkerStateBase**](classSR__UTILS__NS_1_1ThreadWorkerStateBase.md) <br>_@abstract_  |
 | class | [**ThreadsWorker**](classSR__UTILS__NS_1_1ThreadsWorker.md) <br> |
 | class | [**Transform**](classSR__UTILS__NS_1_1Transform.md) <br> |
 | class | [**Transform2D**](classSR__UTILS__NS_1_1Transform2D.md) <br> |
@@ -434,7 +433,7 @@
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (LookAtAxis, uint8\_t, AxisX, AxisY, AxisZ, InvAxisX, InvAxisY, InvAxisZ) <br>_Ось, которая будет разворачиваться в сторону цели_  |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (InputDeviceType, uint8\_t, Unknown, Mouse, Keyboard, Joystick) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (KeyCode, uint8\_t, MouseLeft=0, MouseRight=1, MouseMiddle=2, MouseButton4=3, MouseButton5=4, BackSpace=8, Tab=9, Enter=13, LShift=16, Ctrl=17, Alt=18, Esc=27, Escape=27, Space=32, LeftArrow=37, UpArrow=38, RightArrow=39, DownArrow=40, Del=46, \_0=48, \_1=49, \_2=50, \_3=51, \_4=52, \_5=53, \_6=54, \_7=55, \_8=56, \_9=57, A=65, B=66, C=67, D=68, E=69, F=70, G=71, H=72, I=73, J=74, K=75, L=76, M=77, N=78, O=79, P=80, Q=81, S=83, R=82, T=84, U=85, V=86, W=87, X=88, Y=89, Z=90, F1=112, F2=113, F3=114, F4=115, F5=116, F6=117, F7=118, F8=119, F9=120, F10=121, F11=122, F12=123, Plus=187, Minus=189, Dot=190, Tilde=192, None=std::numeric\_limits&lt; uint8\_t &gt;::max() - 1) <br> |
-|   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (PlatformType, uint8\_t, Unknown, Windows, Linux, Android, MacOS, Emscripten) <br> |
+|   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (PlatformType, uint8\_t, Unknown, Windows, Linux, Android, MacOS, Emscripten, IOS) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (ThreadWorkerState, uint8\_t, Idle, Working, Ready) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (ThreadWorkerResult, uint8\_t, Success, Working, Repeat, Break) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (TestExecutionResult, uint8\_t, Success, Error, Fatal, Skipped, Count) <br> |
@@ -459,7 +458,9 @@
 |  fmt::text\_style | [**GetTextStyleColorByLogType**](#function-gettextstylecolorbylogtype) (DebugLogType type) <br> |
 |  SR\_MAYBE\_UNUSED uint64\_t | [**GetTypeSize**](#function-gettypesize) (const StandardType & type) <br> |
 |  std::vector&lt; T &gt; | [**IndexedVerticesToNonIndexed**](#function-indexedverticestononindexed) (const std::vector&lt; T &gt; & vertices, const std::vector&lt; uint32\_t &gt; & indices) <br> |
+|  bool | [**IsErrorLogType**](#function-iserrorlogtype) (DebugLogType type) <br> |
 |  SR\_MAYBE\_UNUSED bool | [**IsNumber**](#function-isnumber) (const StandardType & type) <br> |
+|  bool | [**IsWarningLogType**](#function-iswarninglogtype) (DebugLogType type) <br> |
 |  SR\_INLINE double\_t | [**ParseDouble**](#function-parsedouble) (std::string\_view sv) <br>_Функция для преобразования hex символа в целое число_  |
 |  SR\_INLINE float\_t | [**ParseFloat**](#function-parsefloat) (std::string\_view sv) <br> |
 |  SR\_INLINE std::string | [**SerializeDouble**](#function-serializedouble) (double\_t value) <br> |
@@ -2737,7 +2738,8 @@ SR_UTILS_NS::SR_ENUM_NS_CLASS_T (
     Linux,
     Android,
     MacOS,
-    Emscripten
+    Emscripten,
+    IOS
 ) 
 ```
 
@@ -3063,11 +3065,41 @@ static std::vector< T > SR_UTILS_NS::IndexedVerticesToNonIndexed (
 
 
 
+### function IsErrorLogType 
+
+```C++
+static bool SR_UTILS_NS::IsErrorLogType (
+    DebugLogType type
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function IsNumber 
 
 ```C++
 static SR_MAYBE_UNUSED bool SR_UTILS_NS::IsNumber (
     const StandardType & type
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function IsWarningLogType 
+
+```C++
+static bool SR_UTILS_NS::IsWarningLogType (
+    DebugLogType type
 ) 
 ```
 

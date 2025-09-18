@@ -1758,6 +1758,23 @@ void SR_GTYPES_NS::Shader::UnloadDefaultSamplers ()
 
 
 
+<hr>## Friends Documentation
+
+
+
+
+
+### friend ShaderCache 
+
+```C++
+class SR_GTYPES_NS::Shader::ShaderCache (
+    SR_GRAPH_NS::ShaderCache
+) 
+```
+
+
+
+
 <hr>
 
 ------------------------------

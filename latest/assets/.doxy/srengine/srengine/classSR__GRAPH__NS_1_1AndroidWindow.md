@@ -106,6 +106,7 @@ See [SR\_GRAPH\_NS::BasicWindowImpl](classSR__GRAPH__NS_1_1BasicWindowImpl.md)
 | Type | Name |
 | ---: | :--- |
 |   | [**AndroidWindow**](#function-androidwindow) () <br> |
+| virtual void \* | [**GetHandle**](#function-gethandle) () const<br> |
 |  SR\_NODISCARD ANativeWindow \* | [**GetNativeWindow**](#function-getnativewindow) () const<br> |
 | virtual SR\_NODISCARD WindowType | [**GetType**](#function-gettype) () override const<br> |
 | virtual bool | [**Initialize**](#function-initialize) (const std::string & name, const SR\_MATH\_NS::IVector2 & position, const SR\_MATH\_NS::UVector2 & size, bool fullScreen, bool resizable) override<br>_Вызывать только в том потоке, в котором будет использоваться окно_  |
@@ -303,6 +304,21 @@ inline explicit SR_GRAPH_NS::AndroidWindow::AndroidWindow ()
 ```
 
 
+
+
+<hr>
+
+
+
+### function GetHandle 
+
+```C++
+inline virtual void * SR_GRAPH_NS::AndroidWindow::GetHandle () const
+```
+
+
+
+Implements [*SR\_GRAPH\_NS::BasicWindowImpl::GetHandle*](classSR__GRAPH__NS_1_1BasicWindowImpl.md#function-gethandle)
 
 
 <hr>

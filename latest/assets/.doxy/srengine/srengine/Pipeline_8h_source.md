@@ -261,6 +261,7 @@ namespace SR_GRAPH_NS {
         bool m_isRenderState = false;
         bool m_isCmdState = false;
         bool m_enableValidationLayers = false;
+        bool m_enableValidationDebug = false;
 
         mutable uint64_t m_errorsCount = 0;
 

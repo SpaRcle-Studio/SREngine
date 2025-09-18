@@ -136,6 +136,7 @@
     <member refid="classSR__GRAPH__NS_1_1AndroidWindow_1a448a5a6595ad0d4e90d3e407d0b2d87d" kind="function"><name>GetType</name></member>
     <member refid="classSR__GRAPH__NS_1_1AndroidWindow_1a80c8f9ee29f1e5106ce1af816fc57dad" kind="function"><name>PollEvents</name></member>
     <member refid="classSR__GRAPH__NS_1_1AndroidWindow_1a6a9b59150ae091c5bd43bc1b7a4f0ef1" kind="function"><name>GetNativeWindow</name></member>
+    <member refid="classSR__GRAPH__NS_1_1AndroidWindow_1aa2a199f85da21d1b3237829bd3f46531" kind="function"><name>GetHandle</name></member>
     <member refid="classSR__GRAPH__NS_1_1AndroidWindow_1a3da4c466afa2745ebb05636369b5af1f" kind="function"><name>HandleInput</name></member>
     <member refid="classSR__GRAPH__NS_1_1AndroidWindow_1ae5a64a37aee06e23f431d87978a07aa4" kind="function"><name>HandleCmd</name></member>
   </compound>
@@ -481,12 +482,12 @@
   </compound>
   <compound refid="classSR__CORE__NS_1_1Application" kind="class"><name>SR_CORE_NS::Application</name>
     <member refid="classSR__CORE__NS_1_1Application_1a185ee674671dc64febc79bb671ed13b5" kind="typedef"><name>Super</name></member>
-    <member refid="classSR__CORE__NS_1_1Application_1a6b1ba970ebfd6659d2c5fbd689abbf52" kind="variable"><name>m_applicationPath</name></member>
+    <member refid="classSR__CORE__NS_1_1Application_1ad34f72ae12bbb8eef5a86fcc21ee915d" kind="variable"><name>m_applicationCachePath</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1aa1aa847a32be788607fa6d8192a56de1" kind="variable"><name>m_resourcesPath</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1a5ced4ed9e4d84acd64f73e25ccc1f236" kind="variable"><name>m_isNeedReload</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1add69171ec556c00ec2972be8fd210d6f" kind="variable"><name>m_engine</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1af85f31252d1349b8a520a785d95f8e99" kind="function"><name>Application</name></member>
-    <member refid="classSR__CORE__NS_1_1Application_1a3b54ac854218deb82364ef38598f531a" kind="function"><name>~Application</name></member>
+    <member refid="classSR__CORE__NS_1_1Application_1a5e5080dfd28a7e0fd2f701a96b8c0966" kind="function"><name>~Application</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1a6e037d3105baab40feeaaf2188dc7748" kind="function"><name>PreInit</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1a89007c2cdb2d6e5e2005fb172e916866" kind="function"><name>EarlyInit</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1a049d443ca8eda9edfb95d35eacffc69a" kind="function"><name>Init</name></member>
@@ -7953,6 +7954,7 @@
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a89208b4268dfb03a7a8a2ac7f52092a3" kind="variable"><name>m_isRenderState</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1aade6e435dcbb6217f2e9e51736027611" kind="variable"><name>m_isCmdState</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1abbf897a18ac1d4c2d7f639cb27e179f0" kind="variable"><name>m_enableValidationLayers</name></member>
+    <member refid="classSR__GRAPH__NS_1_1Pipeline_1afc4a063838b67b41417eb9b59b7efbb6" kind="variable"><name>m_enableValidationDebug</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1aff1a6540a018816dc839abee3c42e513" kind="variable"><name>m_errorsCount</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1acec79ba280ff6d871d6f315109f7dd53" kind="variable"><name>m_dirty</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1ae74915965e28656dd6c88c77b534ca04" kind="variable"><name>m_renderStageId</name></member>
@@ -10267,7 +10269,7 @@
   <compound refid="classSR__GTYPES__NS_1_1Shader" kind="class"><name>SR_GTYPES_NS::Shader</name>
     <member refid="classSR__GTYPES__NS_1_1Shader_1ae14c4dfccc3ec3efe9423691625e9362" kind="typedef"><name>ShaderProgram</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a4a96369338bb2198cb7f3b86501d1e83" kind="typedef"><name>Ptr</name></member>
-    <member refid="classSR__GTYPES__NS_1_1Shader_1aed010b4417d1c9d243a122bbb6036c64" kind="friend"><name>ShaderCache</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Shader_1a18b88bdd3d639858b2b17560cf053682" kind="friend"><name>SR_GRAPH_NS::ShaderCache</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a8b6a34414216ceedb548983b4866e01b" kind="variable"><name>m_uboManager</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1ade4d036b36ccc03adc155363ea54ed00" kind="variable"><name>m_manager</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a075588b1f1744fb476cbd8b7bf2ed635" kind="variable"><name>m_shaderProgram</name></member>
@@ -12466,20 +12468,12 @@
     <member refid="classSR__UTILS__NS_1_1ThreadWorkerStateBase_1ab551f04264dd47b17537519a571fe70d" kind="function"><name>Execute</name></member>
     <member refid="classSR__UTILS__NS_1_1ThreadWorkerStateBase_1a811ecfa6f376fdec68576470f5a4b830" kind="function"><name>Finalize</name></member>
     <member refid="classSR__UTILS__NS_1_1ThreadWorkerStateBase_1a33b27887ff21431936a0fef619ad6cc5" kind="function"><name>SetThreadWorker</name></member>
-    <member refid="classSR__UTILS__NS_1_1ThreadWorkerStateBase_1a04596f43c01d0f11e94ad939255d7040" kind="function"><name>GetName</name></member>
     <member refid="classSR__UTILS__NS_1_1ThreadWorkerStateBase_1a6c75fb7f4d7d974c4cf00e74134bf4eb" kind="function"><name>GetThreadWorker</name></member>
     <member refid="classSR__UTILS__NS_1_1ThreadWorkerStateBase_1a5ecc4b1017a4105b17ba45acd505e53a" kind="function"><name>GetThreadsWorker</name></member>
     <member refid="classSR__UTILS__NS_1_1ThreadWorkerStateBase_1a0630aacc1001b6a7c4d6089733b13302" kind="function"><name>GetState</name></member>
     <member refid="classSR__UTILS__NS_1_1ThreadWorkerStateBase_1af7270ead7656442eadd903005a69feb0" kind="function"><name>GetContext</name></member>
     <member refid="classSR__UTILS__NS_1_1ThreadWorkerStateBase_1a8e9fc77c2de08548e80fbb34aa15acde" kind="function"><name>ExecuteImpl</name></member>
     <member refid="classSR__UTILS__NS_1_1ThreadWorkerStateBase_1a22c60d82696bcd57ecad96771baa4aff" kind="function"><name>FinalizeImpl</name></member>
-  </compound>
-  <compound refid="classSR__UTILS__NS_1_1ThreadWorkerStateRegistration" kind="class"><name>SR_UTILS_NS::ThreadWorkerStateRegistration</name>
-    <member refid="classSR__UTILS__NS_1_1ThreadWorkerStateRegistration_1a56dcd602d7a16afeaf46e1639d71d1e1" kind="typedef"><name>AllocateFn</name></member>
-    <member refid="classSR__UTILS__NS_1_1ThreadWorkerStateRegistration_1af25e80e57cfe96defc126b776d714fe8" kind="variable"><name>m_states</name></member>
-    <member refid="classSR__UTILS__NS_1_1ThreadWorkerStateRegistration_1afd43cb105392f5729498d1ecabb8bf5e" kind="function"><name>IsSingletonCanBeDestroyed</name></member>
-    <member refid="classSR__UTILS__NS_1_1ThreadWorkerStateRegistration_1a228330143209b29d84ae939e2741bba4" kind="function"><name>RegisterState</name></member>
-    <member refid="classSR__UTILS__NS_1_1ThreadWorkerStateRegistration_1a3de8cf2f620c26c098efacb3c548b711" kind="function"><name>AllocateState</name></member>
   </compound>
   <compound refid="classSR__HTYPES__NS_1_1Time" kind="class"><name>SR_HTYPES_NS::Time</name>
     <member refid="classSR__HTYPES__NS_1_1Time_1a5419367405f9892ddb8bf2c19520510a" kind="typedef"><name>ClockT</name></member>
@@ -13896,6 +13890,7 @@
   </compound>
   <compound refid="classSR__GRAPH__NS_1_1VulkanPipeline" kind="class"><name>SR_GRAPH_NS::VulkanPipeline</name>
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1ab25a68dffc75afeba53a880507c8f862" kind="typedef"><name>Super</name></member>
+    <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a1998fe4befbcb3690ed2eeb9bed3a0e9" kind="variable"><name>m_isGlslLangInit</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1ab44e6717db5fb6150929d79c29145af6" kind="variable"><name>m_offsets</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a2dbcbd21a2d9ce0c714a52cdfada23cc" kind="variable"><name>m_viewport</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a01934d0e299da5074b01c55ce26e27c6" kind="variable"><name>m_scissor</name></member>
@@ -15325,13 +15320,15 @@
     <member refid="namespaceSR__UTILS__NS_1a36a155d3b16c5aa8d9588f0dbed3e645" kind="function"><name>ComputeConvexHull</name></member>
     <member refid="namespaceSR__UTILS__NS_1a568ca4d56af97898a1561009021c47ee" kind="function"><name>IndexedVerticesToNonIndexed</name></member>
     <member refid="namespaceSR__UTILS__NS_1a861a149ac1ad5805c1c78f5ca9d01c60" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
+    <member refid="namespaceSR__UTILS__NS_1a3e460e7a99ee4ee7cdca1dbff5701195" kind="function"><name>IsErrorLogType</name></member>
+    <member refid="namespaceSR__UTILS__NS_1a6bdaeb49f4c96c80d805d9f28f77859b" kind="function"><name>IsWarningLogType</name></member>
     <member refid="namespaceSR__UTILS__NS_1ae22165290eb0649097efba553a1b9bf1" kind="function"><name>GetTextStyleColorByLogType</name></member>
     <member refid="namespaceSR__UTILS__NS_1a242d7f279667004c063392216b2b2122" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
     <member refid="namespaceSR__UTILS__NS_1a8168033d9114e8b998bf7d8a42f25c84" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
     <member refid="namespaceSR__UTILS__NS_1ace39bdb76b8c4e1cf699643d94361252" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
     <member refid="namespaceSR__UTILS__NS_1a8a60bc92d2d026dbc977c84e9b8da93c" kind="function"><name>Forward</name></member>
     <member refid="namespaceSR__UTILS__NS_1a3bd31173e8c1be13b2b332e552163c52" kind="function"><name>Forward</name></member>
-    <member refid="namespaceSR__UTILS__NS_1ab1be933ed50ca61779617edb34bfef7f" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
+    <member refid="namespaceSR__UTILS__NS_1a14b64ae7bfa3bc26d4b6d4d0f5853887" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
     <member refid="namespaceSR__UTILS__NS_1ad8e95edbf677f2986f36bd4e2f68c698" kind="function"><name>DisableStacktrace</name></member>
     <member refid="namespaceSR__UTILS__NS_1ac0de8bb31dfddf8c24688d9a9d66b34d" kind="function"><name>GetStacktrace</name></member>
     <member refid="namespaceSR__UTILS__NS_1ae5e3efb537ef2b48661f3f3563d276a0" kind="function"><name>StacktraceInit</name></member>
@@ -15447,6 +15444,7 @@
     <member refid="Platform_8h_1a6af1b85a9bfe97ba30c350d12d694226" kind="function"><name>SetInstance</name></member>
     <member refid="Platform_8h_1a53e27a650c3b31900ea0cee84ba55a65" kind="function"><name>GetInstance</name></member>
     <member refid="Platform_8h_1ab07839c4540b526e56191911e0852fb5" kind="function"><name>GetType</name></member>
+    <member refid="Platform_8h_1af9e7c411a95ad815fd0cfe73d9aaef2a" kind="function"><name>IsMobilePlatform</name></member>
     <member refid="Platform_8h_1aa8fbd5f03a4a611a3834f90975254eb6" kind="function"><name>ExecuteCommand</name></member>
     <member refid="Platform_8h_1aca2d1d80ba98ad24d363db8bc7450e4d" kind="function"><name>SetEnvironmentVar</name></member>
     <member refid="Platform_8h_1a22cae6c3e3843e0705a3d2e2cf4b750e" kind="function"><name>ReadFile</name></member>
@@ -15471,6 +15469,7 @@
     <member refid="Platform_8h_1a080724aeae210171e6ae0700fcb37c4d" kind="function"><name>LoadLibraryModule</name></member>
     <member refid="Platform_8h_1aede803f3aec3b916c3e08c1502063ccb" kind="function"><name>UnloadLibraryModule</name></member>
     <member refid="Platform_8h_1a7a9d5f26614d7c7e9f9ba0f967ae34f7" kind="function"><name>GetLibraryFunctionAddress</name></member>
+    <member refid="Platform_8h_1ab6db2248dd94a8c64ff564e58f9538ca" kind="function"><name>GetPathType</name></member>
     <member refid="Platform_8h_1a9b1c71736355d2b7fa6059503dda74e6" kind="function"><name>GetProcessUsedMemory</name></member>
     <member refid="Platform_8h_1a6a11dc1253fb2ce33da5c0711a994710" kind="function"><name>GetCurrentProcessId</name></member>
     <member refid="Platform_8h_1aa59ef9bee913dd1fc7ce80eaa9d14ac5" kind="function"><name>GetMousePos</name></member>
@@ -15492,6 +15491,7 @@
     <member refid="Platform_8h_1a11d789cc06bd275e182bf81c7b0bddcd" kind="function"><name>IsAbsolutePath</name></member>
     <member refid="Platform_8h_1ad34daa9606ec04fdecc6ad0c73afaa19" kind="function"><name>IsRunningUnderDebugger</name></member>
     <member refid="Platform_8h_1a9286b2b90eb69dbbd187c906fc5ff065" kind="function"><name>IsFileDeletable</name></member>
+    <member refid="Platform_8h_1a93ec4b5517a7c8a7f5f1480cbee81a9f" kind="function"><name>GetApplicationCachePath</name></member>
     <member refid="Platform_8h_1a2cba344e5b20a7f8d120cb5a8c84f90f" kind="function"><name>SetMousePos</name></member>
     <member refid="Platform_8h_1a5a18ad9c714a0f7c4d516086d4377cfe" kind="function"><name>SetCursorVisible</name></member>
     <member refid="Platform_8h_1aa1d8eb2c1b9a04bcc82d6fd6cfb30b1f" kind="function"><name>ConfineCursor</name></member>
@@ -17182,7 +17182,6 @@
   <compound refid="TaskManager_8h" kind="file"><name>TaskManager.h</name>
   </compound>
   <compound refid="ThreadWorker_8h" kind="file"><name>ThreadWorker.h</name>
-    <member refid="ThreadWorker_8h_1a8d277f7a9f0e91aa132f66afce0a6b67" kind="define"><name>SR_REGISTER_THREAD_STATE</name></member>
   </compound>
   <compound refid="inc_2Engine_2Tests_2AtlasBuilderTest_8h" kind="file"><name>AtlasBuilderTest.h</name>
   </compound>
