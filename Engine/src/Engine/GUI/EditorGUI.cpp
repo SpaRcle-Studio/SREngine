@@ -624,7 +624,7 @@ namespace SR_CORE_GUI_NS {
                         auto&& pGameObject = pScene->InstanceGameObject("Cube"_atom);
                         if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
                             pRigidbody->SetMass(1.0f);
-                            pRigidbody->SetType(SR_PHYSICS_NS::ShapeType::Box3D);
+                            pRigidbody->AddCollider(SR_PHYSICS_NS::ShapeType::Box3D);
                         }
 
                         auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/cube.obj", SR_GRAPH_NS::MeshType::Static);
@@ -642,7 +642,7 @@ namespace SR_CORE_GUI_NS {
                         auto&& pGameObject = pScene->InstanceGameObject("Sphere"_atom);
                         if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
                             pRigidbody->SetMass(1.0f);
-                            pRigidbody->SetType(SR_PHYSICS_NS::ShapeType::Sphere3D);
+                            pRigidbody->AddCollider(SR_PHYSICS_NS::ShapeType::Sphere3D);
                         }
 
                         auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/sphere.obj", SR_GRAPH_NS::MeshType::Static);
@@ -660,7 +660,7 @@ namespace SR_CORE_GUI_NS {
                         auto&& pGameObject = pScene->InstanceGameObject("Capsule"_atom);
                         if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
                             pRigidbody->SetMass(1.0f);
-                            pRigidbody->SetType(SR_PHYSICS_NS::ShapeType::Capsule3D);
+                            pRigidbody->AddCollider(SR_PHYSICS_NS::ShapeType::Capsule3D);
                         }
 
                         auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/capsule.obj", SR_GRAPH_NS::MeshType::Static);
@@ -678,7 +678,7 @@ namespace SR_CORE_GUI_NS {
                         auto&& pGameObject = pScene->InstanceGameObject("Cylinder"_atom);
                         if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
                             pRigidbody->SetMass(1.0f);
-                            pRigidbody->SetType(SR_PHYSICS_NS::ShapeType::Cylinder3D);
+                            pRigidbody->AddCollider(SR_PHYSICS_NS::ShapeType::Cylinder3D);
                         }
 
                         auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/cylinder.obj", SR_GRAPH_NS::MeshType::Static);
@@ -696,7 +696,7 @@ namespace SR_CORE_GUI_NS {
                         auto&& pGameObject = pScene->InstanceGameObject("Plane"_atom);
                         if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
                             pRigidbody->SetMass(1.0f);
-                            pRigidbody->SetType(SR_PHYSICS_NS::ShapeType::Plane3D);
+                            pRigidbody->AddCollider(SR_PHYSICS_NS::ShapeType::Plane3D);
                         }
 
                         auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/plane.obj", SR_GRAPH_NS::MeshType::Static);
@@ -715,8 +715,8 @@ namespace SR_CORE_GUI_NS {
                         pGameObject->GetTransform()->SetScale(10.f, 10.f, 10.f);
                         if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
                             pRigidbody->SetMass(1.0f);
-                            pRigidbody->SetType(SR_PHYSICS_NS::ShapeType::Convex3D);
-                            pRigidbody->GetCollisionShape()->SetRawMesh("Engine/Models/statue.obj");
+                            auto&& pCollider = pRigidbody->AddCollider(SR_PHYSICS_NS::ShapeType::Convex3D);
+                            pCollider->SetRawMesh("Engine/Models/statue.obj");
                         }
 
                         auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/statue.obj", SR_GRAPH_NS::MeshType::Static);
@@ -734,8 +734,8 @@ namespace SR_CORE_GUI_NS {
                         auto&& pGameObject = pScene->InstanceGameObject("Monkey"_atom);
                         if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
                             pRigidbody->SetMass(1.0f);
-                            pRigidbody->SetType(SR_PHYSICS_NS::ShapeType::Convex3D);
-                            pRigidbody->GetCollisionShape()->SetRawMesh("Engine/Models/monkey.obj");
+                            auto&& pCollider = pRigidbody->AddCollider(SR_PHYSICS_NS::ShapeType::Convex3D);
+                            pCollider->SetRawMesh("Engine/Models/monkey.obj");
                         }
 
                         auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/monkey.obj", SR_GRAPH_NS::MeshType::Static);

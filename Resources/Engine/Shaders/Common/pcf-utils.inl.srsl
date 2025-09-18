@@ -80,6 +80,8 @@ vec4 CalculateShadow(vec3 diffuseColor, vec3 lightColor) {
     vec3 norm = NORMAL;
 #endif
 
+    //return vec4(NORMAL, 1.0);
+
     uint cascadeIndex = 0;
     for (uint i = 0; i < 3; ++i) {
         if (pcf_viewPos.z < CASCADE_SPLITS[i]) {

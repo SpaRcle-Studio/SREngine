@@ -26,6 +26,12 @@ namespace SR_PTYPES_NS {
 
         if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()) {
             physx::PxRigidBodyExt::updateMassAndInertia(*pRigidBody, m_rigidbody->GetMass());
+
+            if (auto&& centerOfMass = m_rigidbody->GetCenterOfMassOffset(); !centerOfMass.Empty()) {
+                physx::PxTransform cm = pRigidBody->getCMassLocalPose();
+                cm.p += physx::PxVec3(centerOfMass.x, centerOfMass.y, centerOfMass.z);
+                pRigidBody->setCMassLocalPose(cm);
+            }
         }
     }
 
@@ -62,6 +68,8 @@ namespace SR_PTYPES_NS {
             SR_ERROR("PhysXRigidbody3D::InitBody() : failed to create rigid body!");
             return false;
         }
+
+        m_rigidActor->setActorFlag(physx::PxActorFlag::eDISABLE_GRAVITY, !m_rigidbody->IsUseGravity());
 
         UpdateLocks();
 
@@ -150,18 +158,18 @@ namespace SR_PTYPES_NS {
             return false;
         }
 
-        auto&& translation = m_rigidbody->GetTranslation() + m_rigidbody->GetCenterDirection();
+        auto&& translation = m_rigidbody->GetTranslation(); // + m_rigidbody->GetCenterDirection();
 
         physx::PxTransform transform;
 
         SR_MATH_NS::Quaternion q;
 
-        if (m_rigidbody->GetCollisionShape()->GetType() == ShapeType::Capsule3D) {
-            q = m_rigidbody->GetRotation().RotateZ(90);
-        }
-        else {
+        //if (m_rigidbody->GetCollisionShape()->GetType() == ShapeType::Capsule3D) {
+        //    q = m_rigidbody->GetRotation().RotateZ(90);
+        //}
+        //else {
             q = m_rigidbody->GetRotation();
-        }
+        //}
 
         transform.p = physx::PxVec3(translation.x, translation.y, translation.z);
         transform.q = physx::PxQuat(q.X(), q.Y(), q.Z(), q.W());
@@ -191,14 +199,15 @@ namespace SR_PTYPES_NS {
             }
         }
 
-        if (!m_rigidbody->GetCollisionShape()->GetHandle()) {
-            SRHalt("Internal shape is nullptr!");
-            return false;
-        }
-
-        if (!m_rigidActor->attachShape(*(physx::PxShape*)m_rigidbody->GetCollisionShape()->GetHandle())) {
-            SRHalt("PhysXRigidbody3D::UpdateShapeInternal() : failed to attach shape!");
-            return false;
+        for (auto&& pShape : m_rigidbody->GetShapes()) {
+            if (!pShape) {
+                SRHalt("PhysXRigidbody3D::UpdateShapeInternal() : shape is nullptr!");
+                return false;
+            }
+            if (!m_rigidActor->attachShape(*(physx::PxShape *) pShape->GetHandle())) {
+                SRHalt("PhysXRigidbody3D::UpdateShapeInternal() : failed to attach shape!");
+                return false;
+            }
         }
 
         return true;
@@ -251,7 +260,7 @@ namespace SR_PTYPES_NS {
     }
 
     void PhysXRigidbody3DImpl::Synchronize() {
-        if (!m_rigidActor) {
+        if (!m_rigidActor || !m_isSyncAllowed) {
             return;
         }
 
@@ -265,9 +274,9 @@ namespace SR_PTYPES_NS {
         auto&& rigidbodyTranslation = SR_MATH_NS::FVector3(globalPose.p.x, globalPose.p.y, globalPose.p.z);
         auto&& rigidbodyRotation = SR_MATH_NS::Quaternion(globalPose.q.x, globalPose.q.y, globalPose.q.z, globalPose.q.w);
 
-        if (m_rigidbody->GetType() == ShapeType::Capsule3D) {
-            rigidbodyRotation = rigidbodyRotation.RotateZ(-90);
-        }
+        //if (m_rigidbody->GetType() == ShapeType::Capsule3D) {
+        //    rigidbodyRotation = rigidbodyRotation.RotateZ(-90);
+        //}
 
         /// ------------------------------------------------------------------------------------------------------------
 
@@ -276,12 +285,16 @@ namespace SR_PTYPES_NS {
         SR_MATH_NS::FVector3 deltaTranslation(SR_MATH_NS::Unit(0));
         SR_MATH_NS::Quaternion deltaQuaternion(SR_MATH_NS::Quaternion::Identity());
 
+        bool changed = false;
+
         if (m_rigidbodyTranslation.IsFinite()) {
-            deltaTranslation = (rigidbodyTranslation - m_rigidbody->GetCenterDirection()) - m_rigidbodyTranslation;
+            //deltaTranslation = (rigidbodyTranslation - m_rigidbody->GetCenterDirection()) - m_rigidbodyTranslation;
+            deltaTranslation = (rigidbodyTranslation) - m_rigidbodyTranslation;
         }
 
         if (!deltaTranslation.IsEquals(SR_MATH_NS::FVector3(SR_MATH_NS::Unit(0)), SR_MATH_NS::Unit(0.001))) {
             pTransform->GlobalTranslate(deltaTranslation);
+            changed = true;
         }
 
         if (pRigidbody3D->GetAngularLock() != SR_MATH_NS::BVector3(true)) {
@@ -291,15 +304,38 @@ namespace SR_PTYPES_NS {
 
             if (!deltaQuaternion.IsEquals(SR_MATH_NS::FVector3(SR_MATH_NS::Unit(0)), SR_MATH_NS::Unit(0.0001))) {
                 pTransform->SetRotation(rigidbodyRotation);
+                changed = true;
                 // TODO: maybe use? pTransform->Rotate(deltaQuaternion);
             }
         }
 
-        m_rigidbody->UpdateMatrix(true);
+        if (changed) {
+            m_rigidbody->UpdateMatrix(true);
+        }
 
         m_rigidbodyTranslation = m_rigidbody->GetTranslation();
         m_rigidbodyRotation = m_rigidbody->GetRotation();
 
         Super::Synchronize();
+    }
+
+    void PhysXRigidbody3DImpl::AddForce(const SR_MATH_NS::FVector3& force) {
+        if (!m_rigidActor) {
+            return;
+        }
+
+        if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()) {
+            pRigidBody->addForce(SR_PHYSICS_UTILS_NS::FV3ToPxV3(force));
+        }
+    }
+
+    void PhysXRigidbody3DImpl::AddTorque(const SR_MATH_NS::FVector3& torque) {
+        if (!m_rigidActor) {
+            return;
+        }
+
+        if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()) {
+            pRigidBody->addTorque(SR_PHYSICS_UTILS_NS::FV3ToPxV3(torque));
+        }
     }
 }

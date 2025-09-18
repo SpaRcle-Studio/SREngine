@@ -109,6 +109,8 @@ namespace SR_PTYPES_NS {
             m_shape->userData = static_cast<void*>(GetShape());
         }
 
+        UpdateMatrix();
+
         if (GetShape()->GetRigidbody()->IsTrigger()) {
             m_shape->setFlag(physx::PxShapeFlag::eSIMULATION_SHAPE, false);
             m_shape->setFlag(physx::PxShapeFlag::eTRIGGER_SHAPE, true);
@@ -124,7 +126,11 @@ namespace SR_PTYPES_NS {
             return false;
         }
 
-        auto&& scale = GetShape()->GetRigidbody() ? GetShape()->GetRigidbody()->GetScale() : SR_MATH_NS::FVector3::One();
+        auto&& scale = GetShape()->GetScale();
+
+        const SR_MATH_NS::Matrix4x4 localToRigidBody = GetShape()->GetRigidbody()->GetTransform()->GetMatrix().Inverse() * GetShape()->GetTransform()->GetMatrix();
+        physx::PxVec3 translation = SR_PHYSICS_UTILS_NS::FV3ToPxV3((localToRigidBody.GetTranslate() + GetShape()->GetCenter()));
+        physx::PxQuat rotation = SR_PHYSICS_UTILS_NS::QuatToPxQuat(localToRigidBody.GetQuat());
 
         switch (GetShape()->GetType()) {
             case ShapeType::Plane3D: {
@@ -139,6 +145,7 @@ namespace SR_PTYPES_NS {
             case ShapeType::Capsule3D: {
                 auto&& maxXZ = SR_MAX(scale.x, scale.z);
                 m_shape->setGeometry(physx::PxCapsuleGeometry(GetShape()->GetRadius() * maxXZ, GetShape()->GetHeight() * scale.y));
+                rotation = physx::PxQuat(physx::PxHalfPi, physx::PxVec3(0, 0, 1)) * rotation; /// капсула в PhysX ориентирована вдоль оси Z, а в SR - вдоль Y
                 break;
             }
             case ShapeType::Sphere3D:
@@ -148,6 +155,11 @@ namespace SR_PTYPES_NS {
             default:
                 break;
         }
+
+        physx::PxTransform localPose(translation, rotation);
+        m_shape->setLocalPose(localPose);
+
+        GetShape()->GetRigidbody()->UpdateInertia();
 
         return true;
     }
@@ -245,21 +257,20 @@ namespace SR_PTYPES_NS {
     }
 
     physx::PxMaterial* PhysXCollisionShape::GetMaterial() const {
-        auto&& pMaterial = GetShape()->GetRigidbody()->GetPhysicsMaterial();
-        if (!pMaterial) {
-            return nullptr;
+        if (auto&& pMaterial = GetShape()->GetPhysicsMaterial()) {
+            if (auto&& pMaterialImpl = pMaterial->GetMaterialImpl(LibraryType::PhysX)) {
+                if (auto&& pPxMaterial = pMaterialImpl->GetHandle()) {
+                    return (physx::PxMaterial*)pPxMaterial;
+                }
+            }
         }
-
-        auto&& pMaterialImpl = pMaterial->GetMaterialImpl(LibraryType::PhysX);
-        if (!pMaterialImpl) {
-            return nullptr;
+        if (auto&& pDefaultMat = SR_PHYSICS_NS::PhysicsLibrary::Instance().GetDefaultMaterial()) {
+            if (auto&& pMaterialImpl = pDefaultMat->GetMaterialImpl(LibraryType::PhysX)) {
+                if (auto&& pPxMaterial = pMaterialImpl->GetHandle()) {
+                    return (physx::PxMaterial*)pPxMaterial;
+                }
+            }
         }
-
-        auto&& pPxMaterial = pMaterialImpl->GetHandle();
-        if (!pPxMaterial) {
-            return nullptr;
-        }
-
-        return (physx::PxMaterial*)pPxMaterial;
+        return nullptr;
     }
 }

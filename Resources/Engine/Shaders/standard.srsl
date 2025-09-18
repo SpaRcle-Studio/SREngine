@@ -6,7 +6,11 @@
 
 PolygonMode Fill;
 
-CullMode Back;
+#ifdef DISABLE_CULLING
+    CullMode None;
+#else
+    CullMode Back;
+#endif
 
 DepthCompare LessOrEqual;
 PrimitiveTopology TriangleList;

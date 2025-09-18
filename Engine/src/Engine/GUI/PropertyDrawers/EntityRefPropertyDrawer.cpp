@@ -72,7 +72,7 @@ namespace SR_CORE_GUI_NS {
                     if (auto&& pData = SR_GRAPH_GUI_NS::Immediate::GetDataFromDragDropPayload(payload)) {
                         std::list<SR_UTILS_NS::Component::Ptr> components = *(std::list<SR_UTILS_NS::Component::Ptr> *)(pData);
                         if (!components.empty() && components.front()) {
-                            if (entityType == components.front()->GetMeta()->GetFactoryName()) {
+                            if (components.front()->GetMeta()->IsSameOrInherited(entityType)) {
                                 if (context.onBeforeChangeCallback) {
                                     context.onBeforeChangeCallback(false);
                                 }

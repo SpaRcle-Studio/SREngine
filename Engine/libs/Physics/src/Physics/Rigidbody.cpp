@@ -5,6 +5,7 @@
 #include <Physics/Rigidbody.h>
 
 #include <Utils/ECS/Transform.h>
+#include <Utils/ECS/SceneObject.h>
 #include <Utils/World/Scene.h>
 #include <Utils/DebugDraw.h>
 #include <Utils/Types/RawMesh.h>
@@ -19,18 +20,17 @@
 #include <Codegen/Rigidbody.generated.hpp>
 
 namespace SR_PTYPES_NS {
-    Rigidbody::Rigidbody() {
-        GetCollisionShape()->SetRigidbody(this);
-    }
+    Rigidbody::Rigidbody() { }
 
     Rigidbody::~Rigidbody() {
-        m_shape.AutoFree();
+        SRAssert(m_shapes.empty());
         SR_SAFE_DELETE_PTR(m_impl);
-        SetMaterial(SR_PTYPES_NS::PhysicsMaterial::Ptr());
     }
 
     void Rigidbody::OnDestroy() {
-        GetCollisionShape()->RemoveDebugShape();
+        for (auto&& pShape : m_shapes) {
+            pShape->OnRigidbodyDetached();
+        }
 
         /// получаем указатель обязательно до OnDestroy
         PhysicsScene::Ptr physicsScene = GetPhysicsScene();
@@ -51,7 +51,6 @@ namespace SR_PTYPES_NS {
 
     void Rigidbody::OnAttached() {
         Component::OnAttached();
-        GetCollisionShape()->UpdateDebugShape();
     }
 
     const Rigidbody::PhysicsScenePtr& Rigidbody::GetPhysicsScene() const {
@@ -68,23 +67,6 @@ namespace SR_PTYPES_NS {
         return m_physicsScene;
     }
 
-    void Rigidbody::SetShape(const CollisionShape::Ptr& pShape) {
-        if (m_shape == pShape) {
-            return;
-        }
-
-        if (!pShape) {
-            SRHalt("Rigidbody::SetShape() : shape is nullptr!");
-            return;
-        }
-
-        m_shape.AutoFree();
-        m_shape = pShape;
-        m_shape->SetRigidbody(this);
-
-        SetShapeDirty();
-    }
-
     void Rigidbody::OnMatrixDirty() {
         if (auto&& pTransform = GetTransform()) {
             pTransform->GetMatrix().Decompose(
@@ -93,7 +75,9 @@ namespace SR_PTYPES_NS {
                 m_scale
             );
 
-            GetCollisionShape()->UpdateDebugShape();
+            for (auto&& pShape : m_shapes) {
+                pShape->UpdateDebugShape();
+            }
         }
 
         SetMatrixDirty(true);
@@ -114,62 +98,37 @@ namespace SR_PTYPES_NS {
 
         SetMatrixDirty(false);
 
-        GetCollisionShape()->UpdateMatrix();
+        for (auto&& pShape : m_shapes) {
+            pShape->UpdateMatrix();
+        }
 
         return true;
     }
 
-    SR_MATH_NS::FVector3 Rigidbody::GetCenter() const noexcept {
-        return m_center;
-    }
+    //SR_MATH_NS::FVector3 Rigidbody::GetCenter() const noexcept {
+    //    return m_center;
+    //}
 
     float_t Rigidbody::GetMass() const noexcept {
         return m_mass;
     }
 
     bool Rigidbody::IsStatic() const noexcept {
-        const ShapeType type = GetCollisionShape()->GetType();
+        //const ShapeType type = GetCollisionShape()->GetType();
 
-        if (type == ShapeType::Plane3D || type == ShapeType::TriangleMesh2D || type == ShapeType::TriangleMesh3D) {
-            return true;
-        }
+        //if (type == ShapeType::Plane3D || type == ShapeType::TriangleMesh2D || type == ShapeType::TriangleMesh3D) {
+        //    return true;
+        //}
 
         return m_isStatic;
     }
 
-    void Rigidbody::SetCenter(const SR_MATH_NS::FVector3& center) {
-        m_center = center;
-        SetMatrixDirty(true);
-        GetCollisionShape()->UpdateDebugShape();
-    }
-
     void Rigidbody::SetMass(float_t mass) {
-        m_mass = mass;
+        if (m_mass == mass) {
+            return;
+        }
+        m_mass = SR_CLAMP(mass, SR_EPSILON, std::numeric_limits<float_t>::max());
         UpdateInertia();
-    }
-
-    SR_MATH_NS::FVector3 Rigidbody::GetCenterDirection() const noexcept {
-        /// TODO: cache direction
-        return m_rotation * (m_scale * m_center);
-    }
-
-    ShapeType Rigidbody::GetType() const noexcept {
-        return GetCollisionShape()->GetType();
-    }
-
-    void Rigidbody::SetType(ShapeType type) {
-        if (GetCollisionShape()->GetType() == type) {
-            return;
-        }
-
-        if (m_library && !m_library->IsShapeSupported(type)) {
-            SR_ERROR("Rigidbody::SetType() : shape \"" + SR_UTILS_NS::EnumReflector::ToStringAtom(type).ToStringRef() + "\" unsupported!");
-            return;
-        }
-
-        GetCollisionShape()->SetType(type);
-
-        SetShapeDirty(true);
     }
 
     void Rigidbody::OnEnable() {
@@ -184,7 +143,9 @@ namespace SR_PTYPES_NS {
             SRHalt("Failed to get physics scene!");
         }
 
-        GetCollisionShape()->UpdateDebugShape();
+        for (auto&& pShape : m_shapes) {
+            pShape->UpdateDebugShape();
+        }
 
         Super::OnEnable();
     }
@@ -197,9 +158,29 @@ namespace SR_PTYPES_NS {
             SRHalt("Failed to get physics scene!");
         }
 
-        GetCollisionShape()->RemoveDebugShape();
+        for (auto&& pShape : m_shapes) {
+            pShape->RemoveDebugShape();
+        }
 
         Super::OnDisable();
+    }
+
+    void Rigidbody::AttachShape(CollisionShape* pShape) {
+        if (std::ranges::find(m_shapes, pShape) != m_shapes.end()) {
+            SRHalt("Rigidbody::AttachShape() : shape already attached!");
+            return;
+        }
+        m_shapes.emplace_back(pShape);
+        m_isBodyDirty = true;
+    }
+
+    void Rigidbody::DetachShape(CollisionShape* pShape) {
+        auto&& pIt = std::ranges::find(m_shapes, pShape);
+        if (pIt != m_shapes.end()) {
+            m_shapes.erase(pIt);
+            pShape->OnRigidbodyDetached();
+            m_isBodyDirty = true;
+        }
     }
 
     void Rigidbody::SetIsTrigger(bool value) {
@@ -212,6 +193,19 @@ namespace SR_PTYPES_NS {
         m_isBodyDirty = true;
     }
 
+    void Rigidbody::SetUseGravity(bool value) {
+        m_useGravity = value;
+        m_isBodyDirty = true;
+    }
+
+    void Rigidbody::SetFetchResults(bool value) {
+        m_fetchResults = value;
+
+        if (auto&& pImpl = GetImpl<RigidbodyImpl>()) {
+            pImpl->SetSyncAllowed(m_fetchResults);
+        }
+    }
+
     RBUpdShapeRes Rigidbody::UpdateShape() {
         SR_TRACY_ZONE;
 
@@ -219,19 +213,17 @@ namespace SR_PTYPES_NS {
             return RBUpdShapeRes::Nothing;
         }
 
-        GetCollisionShape()->RemoveDebugShape();
-
-        if (!GetCollisionShape()->UpdateShape()) {
-            SR_ERROR("Rigidbody::UpdateShape() : failed to update shape!");
-            return RBUpdShapeRes::Error;
+        for (auto&& pShape : m_shapes) {
+            if (!pShape->UpdateShape()) {
+                SR_ERROR("Rigidbody::UpdateShape() : failed to update shape!");
+                return RBUpdShapeRes::Error;
+            }
         }
 
         if (!UpdateShapeInternal()) {
             SR_ERROR("Rigidbody::UpdateShape() : failed to internal update shape!");
             return RBUpdShapeRes::Error;
         }
-
-        GetCollisionShape()->UpdateDebugShape();
 
         UpdateMatrix(true);
 
@@ -276,26 +268,11 @@ namespace SR_PTYPES_NS {
         }
 
         m_impl->InitBody();
+        m_impl->SetSyncAllowed(m_fetchResults);
 
         m_isBodyDirty = false;
 
         return true;
-    }
-
-    void Rigidbody::SetMaterial(const SR_PTYPES_NS::PhysicsMaterial::Ptr& pMaterial) {
-        if (pMaterial == m_material) {
-            return;
-        }
-
-        if (m_material) {
-            m_material->RemoveRigidbody(this);
-            m_material->RemoveUsePoint();
-        }
-
-        if ((m_material = pMaterial)) {
-            m_material->AddUsePoint();
-            m_material->SetRigidbody(this);
-        }
     }
 
     bool Rigidbody::IsDebugEnabled() const noexcept {
@@ -307,16 +284,8 @@ namespace SR_PTYPES_NS {
     }
 
     void Rigidbody::Update(float_t dt) {
-        GetCollisionShape()->Update(dt);
+        //GetCollisionShape()->Update(dt);
         Super::Update(dt);
-    }
-
-    void Rigidbody::SetMaterial(const SR_UTILS_NS::Path& path) {
-        if (path.IsEmpty()) {
-            SetMaterial(SR_PTYPES_NS::PhysicsMaterial::Ptr());
-            return;
-        }
-        SetMaterial(SR_UTILS_NS::Asset::Load<PhysicsMaterial>(path));
     }
 
     void Rigidbody::UpdateInertia() {
@@ -366,10 +335,28 @@ namespace SR_PTYPES_NS {
         return false;
     }
 
-    const CollisionShape::Ptr& Rigidbody::GetCollisionShape() const noexcept {
-        if (!m_shape) {
-            m_shape = CollisionShape::MakeShared();
+    void Rigidbody::SetCenterOfMassOffset(const SR_MATH_NS::FVector3& offset) {
+        m_centerOfMassOffset = offset;
+        if (m_impl) {
+            m_impl->UpdateInertia();
         }
-        return m_shape;
+    }
+
+    SR_HTYPES_NS::SharedPtr<CollisionShape> Rigidbody::AddCollider(ShapeType type) {
+        auto&& pSceneObject = GetSceneObject();
+        if (!pSceneObject) {
+            SRHalt("Rigidbody::AddCollider() : scene object is nullptr!");
+            return nullptr;
+        }
+
+        auto&& pCollider = pSceneObject->AddComponent<CollisionShape>();
+        if (!pCollider) {
+            SRHalt("Rigidbody::AddCollider() : failed to add collider!");
+            return nullptr;
+        }
+
+        pCollider->SetType(type);
+        pCollider->SetRigidbody(this);
+        return pCollider;
     }
 }

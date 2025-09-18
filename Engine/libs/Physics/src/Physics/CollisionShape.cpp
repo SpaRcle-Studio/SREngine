@@ -8,34 +8,53 @@
 #include <Codegen/CollisionShape.generated.hpp>
 
 namespace SR_PTYPES_NS {
-    CollisionShape::CollisionShape()
-        : SR_HTYPES_NS::SharedPtr<CollisionShape>(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
-    { }
-
     CollisionShape::~CollisionShape() {
         RemoveDebugShape();
+        if (m_materialData) {
+            m_materialData->RemoveUsePoint();
+            m_materialData = nullptr;
+        }
         SR_SAFE_DELETE_PTR(m_impl);
+    }
+
+    void CollisionShape::OnMatrixDirty() {
+        SR_TRACY_ZONE;
+
+        if (auto&& pTransform = GetTransform()) {
+            pTransform->GetMatrix().Decompose(
+                m_translation,
+                m_rotation,
+                m_scale
+            );
+        }
+
+        m_isShapeDirty = true;
+        Super::OnMatrixDirty();
     }
 
     void CollisionShape::UpdateDebugShape() {
         SR_TRACY_ZONE;
 
-        if (!m_rigidbody || !m_rigidbody->IsDebugEnabled()) {
+        auto&& pRigidbody = GetRigidbody();
+
+        if (!pRigidbody || !pRigidbody->IsDebugEnabled()) {
             return;
         }
 
-        if (!m_rigidbody->IsAttached() || !m_rigidbody->IsActive()) {
+        if (!pRigidbody->IsAttached() || !pRigidbody->IsActive()) {
             return;
         }
+
+        m_isShapeDirty = false;
 
         const ShapeType type = GetType();
 
         if (SR_PHYSICS_UTILS_NS::IsBox(type)) {
             m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawCube(
                     m_debugId,
-                    m_rigidbody->GetTranslation() + m_rigidbody->GetCenterDirection(),
-                    m_rigidbody->GetRotation(),
-                    m_rigidbody->GetScale() * GetSize(),
+                    m_translation + GetCenterDirection(),
+                    m_rotation,
+                    m_scale * GetSize(),
                     SR_MATH_NS::FColor(0, 255, 200, 255),
                     SR_FLOAT_MAX
             );
@@ -43,9 +62,9 @@ namespace SR_PTYPES_NS {
         else if (SR_PHYSICS_UTILS_NS::IsPlane(type)) {
             m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawPlane(
                     m_debugId,
-                    m_rigidbody->GetTranslation() + m_rigidbody->GetCenterDirection(),
-                    m_rigidbody->GetRotation(),
-                    m_rigidbody->GetScale() * SR_MATH_NS::FVector3(GetPlaneSize().x, 0.f, GetPlaneSize().y),
+                    m_translation + GetCenterDirection(),
+                    m_rotation,
+                    m_scale * SR_MATH_NS::FVector3(GetPlaneSize().x, 0.f, GetPlaneSize().y),
                     SR_MATH_NS::FColor(0, 255, 200, 255),
                     SR_FLOAT_MAX
             );
@@ -53,20 +72,20 @@ namespace SR_PTYPES_NS {
         else if (SR_PHYSICS_UTILS_NS::IsSphere(type)) {
                     m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawSphere(
                     m_debugId,
-                    m_rigidbody->GetTranslation() + m_rigidbody->GetCenterDirection(),
-                    m_rigidbody->GetRotation(),
-                    (m_rigidbody->GetScale() * GetRadius()).Max3(),
+                    m_translation + GetCenterDirection(),
+                    m_rotation,
+                    (m_scale * GetRadius()).Max3(),
                     SR_MATH_NS::FColor(0, 255, 200, 255),
                     SR_FLOAT_MAX
             );
         }
         else if (SR_PHYSICS_UTILS_NS::IsCapsule(type)) {
-            SR_MATH_NS::Unit width = (m_rigidbody->GetScale() * GetRadius()).ZeroAxis(SR_MATH_NS::Axis::Y).Max();
-            SR_MATH_NS::FVector3 size = SR_MATH_NS::FVector3(width, GetHeight() * m_rigidbody->GetScale().y, width);
+            SR_MATH_NS::Unit width = (m_scale * GetRadius()).ZeroAxis(SR_MATH_NS::Axis::Y).Max();
+            SR_MATH_NS::FVector3 size = SR_MATH_NS::FVector3(width, GetHeight() * m_scale.y, width);
             m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawCapsule(
                     m_debugId,
-                    m_rigidbody->GetTranslation() + m_rigidbody->GetCenterDirection(),
-                    m_rigidbody->GetRotation(),
+                    m_translation + GetCenterDirection(),
+                    m_rotation,
                     size,
                     SR_MATH_NS::FColor(0, 255, 200, 255),
                     SR_FLOAT_MAX
@@ -76,9 +95,9 @@ namespace SR_PTYPES_NS {
             m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawMesh(
                     const_cast<SR_HTYPES_NS::RawMesh*>(GetRawMesh().Get()), GetMeshId(),
                     m_debugId,
-                    m_rigidbody->GetTranslation() + m_rigidbody->GetCenterDirection(),
-                    m_rigidbody->GetRotation(),
-                    m_rigidbody->GetScale() * GetSize(),
+                    m_translation + GetCenterDirection(),
+                    m_rotation,
+                    m_scale * GetSize(),
                     SR_MATH_NS::FColor(0, 255, 200, 255),
                     SR_FLOAT_MAX
             );
@@ -87,7 +106,7 @@ namespace SR_PTYPES_NS {
 
     void CollisionShape::SetHeight(const float_t height) {
         m_bounds.y = height;
-        UpdateDebugShape();
+        OnShapeDirty();
         UpdateMatrix();
     }
 
@@ -100,13 +119,13 @@ namespace SR_PTYPES_NS {
             m_bounds = SR_MATH_NS::FVector3(radius);
         }
 
-        UpdateDebugShape();
+        OnShapeDirty();
         UpdateMatrix();
     }
 
     void CollisionShape::SetSize(const SR_MATH_NS::FVector3& size) {
         m_bounds = SR_MATH_NS::FVector3(size.x, size.y, size.z);
-        UpdateDebugShape();
+        OnShapeDirty();
         UpdateMatrix();
     }
 
@@ -133,11 +152,77 @@ namespace SR_PTYPES_NS {
     }
 
     Rigidbody* CollisionShape::GetRigidbody() const {
-        return m_rigidbody;
+        return m_rigidbody.Get().Get();
     }
 
     bool CollisionShape::HasGeometry() const noexcept {
         return SR_PHYSICS_UTILS_NS::IsShapeHasGeometry(m_type);
+    }
+
+    void CollisionShape::OnDisable() {
+        if (auto&& pRigidbody = GetRigidbody()) {
+            pRigidbody->DetachShape(this);
+        }
+        Super::OnDisable();
+    }
+
+    void CollisionShape::OnEnable() {
+        ReInitRigidbody();
+        Super::OnEnable();
+    }
+
+    void CollisionShape::OnDetached() {
+        if (auto&& pRigidbody = GetRigidbody()) {
+            pRigidbody->DetachShape(this);
+        }
+        Super::OnDetached();
+    }
+
+    void CollisionShape::OnRigidbodyDetached() {
+        RemoveDebugShape();
+        m_currentRigidbody = nullptr;
+    }
+
+    void CollisionShape::SetMaterial(const SR_UTILS_NS::Path& path) {
+        if (m_material == path) {
+            return;
+        }
+
+        m_material = path;
+
+        if (m_materialData) {
+            m_materialData->RemoveUsePoint();
+            m_materialData = nullptr;
+        }
+
+        if (!m_material.IsEmpty()) {
+            if ((m_materialData = SR_UTILS_NS::Asset::Load<PhysicsMaterial>(m_material))) {
+                m_materialData->AddUsePoint();
+            }
+        }
+    }
+
+    void CollisionShape::OnShapeDirty() {
+        if (m_currentRigidbody) {
+            m_currentRigidbody->SetShapeDirty(true);
+        }
+        m_isShapeDirty = true;
+    }
+
+    void CollisionShape::ReInitRigidbody() {
+        SR_TRACY_ZONE;
+
+        if (m_currentRigidbody) {
+            m_currentRigidbody->DetachShape(this);
+            m_currentRigidbody = nullptr;
+        }
+
+        if (auto&& pRigidbody = GetRigidbody()) {
+            pRigidbody->AttachShape(this);
+            m_currentRigidbody = pRigidbody;
+        }
+
+        OnShapeDirty();
     }
 
     ShapeType CollisionShape::GetType() const noexcept {
@@ -147,6 +232,26 @@ namespace SR_PTYPES_NS {
     void* CollisionShape::GetHandle() const noexcept {
         return m_impl ? m_impl->GetHandle() : nullptr;
     }
+
+    void CollisionShape::SetCenter(const SR_MATH_NS::FVector3& center) {
+        m_center = center;
+        OnShapeDirty();
+    }
+
+    /*void CollisionShape::SetType(ShapeType type) {
+        if (GetType() == type) {
+            return;
+        }
+
+        if (m_library && !m_library->IsShapeSupported(type)) {
+            SR_ERROR("Rigidbody::SetType() : shape \"" + SR_UTILS_NS::EnumReflector::ToStringAtom(type).ToStringRef() + "\" unsupported!");
+            return;
+        }
+
+        GetCollisionShape()->SetType(type);
+
+        SetShapeDirty(true);
+    }*/
 
     SR_MATH_NS::FVector3 CollisionShape::CalculateLocalInertia(float_t mass) const {
         if (m_impl) {
@@ -159,15 +264,20 @@ namespace SR_PTYPES_NS {
         return GetRigidbody()->GetLibrary()->IsShapeSupported(m_type);
     }
 
+    void CollisionShape::SetRigidbody(Rigidbody* pRigidbody) {
+        if (!pRigidbody) {
+            m_rigidbody = SR_UTILS_NS::EntityRef<Rigidbody>();
+        }
+        else {
+            m_rigidbody.SetEntityId(pRigidbody->GetEntityId());
+        }
+        ReInitRigidbody();
+    }
+
     void CollisionShape::SetType(const ShapeType type) {
         m_type = type;
         m_bounds = SR_MATH_NS::FVector3(1.f);
-
-        ReInitDebugShape();
-
-        if (m_rigidbody) {
-            m_rigidbody->SetShapeDirty(true);
-        }
+        OnShapeDirty();
     }
 
     void CollisionShape::RemoveDebugShape() {
@@ -181,13 +291,17 @@ namespace SR_PTYPES_NS {
 
     void CollisionShape::SetBounds(const SR_MATH_NS::FVector3& bounds) {
         m_bounds = bounds;
-        UpdateDebugShape();
+        OnShapeDirty();
         UpdateMatrix();
+    }
+
+    SR_MATH_NS::FVector3 CollisionShape::GetCenterDirection() const noexcept {
+        return m_rotation * (m_scale * m_center);
     }
 
     void CollisionShape::SetPlaneSize(const SR_MATH_NS::FVector2& size) {
         m_bounds = SR_MATH_NS::FVector3(size.x, 0.f, size.y);
-        UpdateDebugShape();
+        OnShapeDirty();
         UpdateMatrix();
     }
 
@@ -196,9 +310,15 @@ namespace SR_PTYPES_NS {
             m_impl->Update(dt);
         }
 
-        const bool isDebugEnabled = m_rigidbody->IsDebugEnabled();
+        auto&& pRigidbody = GetRigidbody();
+        if (!pRigidbody) {
+            RemoveDebugShape();
+            return;
+        }
 
-        if (isDebugEnabled && m_debugId == SR_ID_INVALID) {
+        const bool isDebugEnabled = pRigidbody->IsDebugEnabled();
+
+        if (isDebugEnabled && (m_debugId == SR_ID_INVALID || m_isShapeDirty)) {
             UpdateDebugShape();
         }
         else if (!isDebugEnabled && m_debugId != SR_ID_INVALID) {
@@ -213,11 +333,7 @@ namespace SR_PTYPES_NS {
             return;
         }
 
-        if (m_rigidbody) {
-            m_rigidbody->SetShapeDirty(true);
-        }
-
-        ReInitDebugShape();
+        OnShapeDirty();
     }
 
     bool CollisionShape::UpdateShape() {
@@ -235,10 +351,5 @@ namespace SR_PTYPES_NS {
 
     bool CollisionShape::UpdateMatrix() {
         return m_impl && m_impl->UpdateMatrix();
-    }
-
-    void CollisionShape::ReInitDebugShape() {
-        RemoveDebugShape();
-        UpdateDebugShape();
     }
 }

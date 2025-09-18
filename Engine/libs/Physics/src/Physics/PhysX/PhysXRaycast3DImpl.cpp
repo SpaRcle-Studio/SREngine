@@ -22,41 +22,43 @@ namespace SR_PHYSICS_NS {
                 return;
             }
 
-            physx::PxShape* pShape = ((physx::PxShape*)pRigidbody->GetCollisionShape()->GetHandle());
+            for (auto&& pPhysShape : pRigidbody->GetShapes()) {
+                physx::PxShape* pShape = ((physx::PxShape*)pPhysShape->GetHandle());
 
-            if (!pShape) {
-                if (auto&& gameObject = pRigidbody->GetGameObject()) {
-                    SRHaltOnce("PhysXRaycast3DImpl::Cast() : " + gameObject->GetName().ToStringRef() + " does not have a collision shape!");
+                if (!pShape) {
+                    if (auto&& gameObject = pRigidbody->GetGameObject()) {
+                        SRHaltOnce("PhysXRaycast3DImpl::Cast() : " + gameObject->GetName().ToStringRef() + " does not have a collision shape!");
+                    }
+                    else {
+                        SRHaltOnce("PhysXRaycast3DImpl::Cast() : rigidbody does not have a collision shape!");
+                    }
+                    return;
                 }
-                else {
-                    SRHaltOnce("PhysXRaycast3DImpl::Cast() : rigidbody does not have a collision shape!");
+
+                physx::PxRaycastHit pxHit;
+                physx::PxU32 hitCount = physx::PxGeometryQuery::raycast(
+                        SR_PHYSICS_UTILS_NS::FV3ToPxV3(origin),
+                        SR_PHYSICS_UTILS_NS::FV3ToPxV3(direction),
+                        pShape->getGeometry().any(),
+                        pose,
+                        maxDistance,
+                        physx::PxHitFlag::eDEFAULT,
+                        1,
+                        &pxHit
+                );
+
+                if (hitCount == 0){
+                    continue;
                 }
-                return;
+
+                SR_UTILS_NS::RaycastHit hit;
+                hit.pHandler = dynamic_cast<SR_PTYPES_NS::Rigidbody*>(pRigidbody);
+                hit.distance = pxHit.distance;
+                hit.normal = SR_PHYSICS_UTILS_NS::PxV3ToFV3(pxHit.normal);
+                hit.position = SR_PHYSICS_UTILS_NS::PxV3ToFV3(pxHit.position);
+
+                hits.emplace_back(hit);
             }
-
-            physx::PxRaycastHit pxHit;
-            physx::PxU32 hitCount = physx::PxGeometryQuery::raycast(
-                    SR_PHYSICS_UTILS_NS::FV3ToPxV3(origin),
-                    SR_PHYSICS_UTILS_NS::FV3ToPxV3(direction),
-                    pShape->getGeometry().any(),
-                    pose,
-                    maxDistance,
-                    physx::PxHitFlag::eDEFAULT,
-                    1,
-                    &pxHit
-            );
-
-            if (hitCount == 0){
-                return;
-            }
-
-            SR_UTILS_NS::RaycastHit hit;
-            hit.pHandler = dynamic_cast<SR_PTYPES_NS::Rigidbody*>(pRigidbody);
-            hit.distance = pxHit.distance;
-            hit.normal = SR_PHYSICS_UTILS_NS::PxV3ToFV3(pxHit.normal);
-            hit.position = SR_PHYSICS_UTILS_NS::PxV3ToFV3(pxHit.position);
-
-            hits.emplace_back(hit);
         });
 
         return hits;

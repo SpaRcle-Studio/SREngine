@@ -34,6 +34,14 @@ namespace SR_PHYSICS_UTILS_NS {
         return SR_MATH_NS::FVector3(vector3.x, vector3.y, vector3.z);
     }
 
+    SR_MAYBE_UNUSED static physx::PxQuat QuatToPxQuat(const SR_MATH_NS::Quaternion &quaternion) {
+        return physx::PxQuat(quaternion.x, quaternion.y, quaternion.z, quaternion.w);
+    }
+
+    SR_MAYBE_UNUSED static SR_MATH_NS::Quaternion PxQuatToQuat(const physx::PxQuat &quaternion) {
+        return SR_MATH_NS::Quaternion(quaternion.x, quaternion.y, quaternion.z, quaternion.w);
+    }
+
     static physx::PxCombineMode::Enum CombineToPxCombine(const Combine mode){
         switch (mode) {
             case Combine::Minimum:

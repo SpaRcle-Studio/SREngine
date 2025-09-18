@@ -22,15 +22,12 @@ namespace SR_PHYSICS_NS {
                 return;
             }
 
-            auto&& type = pRigidbody->GetType();
+            auto&& type = pRigidbody->GetMeasurement();
 
-            if (type == SR_PHYSICS_NS::ShapeType::Unknown) {
-                /// Not registered rigidbody
-            }
-            else if (SR_PHYSICS_UTILS_NS::Is2DShape(type)) {
+            if (type == SR_UTILS_NS::Measurement::Space2D) {
                 m_2DWorld->RemoveRigidbody(pRigidbody);
             }
-            else if (SR_PHYSICS_UTILS_NS::Is3DShape(type)) {
+            else if (type == SR_UTILS_NS::Measurement::Space3D) {
                 m_3DWorld->RemoveRigidbody(pRigidbody);
             }
             else {
@@ -132,12 +129,12 @@ namespace SR_PHYSICS_NS {
         const bool needFlush = !m_rigidbodyToRemove.empty();
 
         for (auto&& pRigidbody : m_rigidbodyToRegister) {
-            auto&& type = pRigidbody->GetType();
+            auto&& type = pRigidbody->GetMeasurement();
 
-            if (SR_PHYSICS_UTILS_NS::Is2DShape(type)) {
+            if (type == SR_UTILS_NS::Measurement::Space2D) {
                 m_2DWorld->AddRigidbody(pRigidbody);
             }
-            else if (SR_PHYSICS_UTILS_NS::Is3DShape(type)) {
+            else if (type == SR_UTILS_NS::Measurement::Space3D) {
                 m_3DWorld->AddRigidbody(pRigidbody);
             }
             else {
@@ -146,12 +143,12 @@ namespace SR_PHYSICS_NS {
         }
 
         for (auto&& pRigidbody : m_rigidbodyToRemove) {
-            auto&& type = pRigidbody->GetType();
+            auto&& type = pRigidbody->GetMeasurement();
 
-            if (SR_PHYSICS_UTILS_NS::Is2DShape(type)) {
+            if (type == SR_UTILS_NS::Measurement::Space2D) {
                 m_2DWorld->RemoveRigidbody(pRigidbody);
             }
-            else if (SR_PHYSICS_UTILS_NS::Is3DShape(type)) {
+            else if (type == SR_UTILS_NS::Measurement::Space3D) {
                 m_3DWorld->RemoveRigidbody(pRigidbody);
             }
             else {

@@ -8,6 +8,8 @@
 #include <Physics/macros.h>
 
 #include <Utils/Serialization/Serializable.h>
+#include <Utils/ECS/Component.h>
+#include <Utils/ECS/EntityRef.h>
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Types/SafePointer.h>
 #include <Utils/Types/IRawMeshHolder.h>
@@ -45,23 +47,30 @@ namespace SR_PTYPES_NS {
 
     };
 
-    class CollisionShape final : public SR_HTYPES_NS::SharedPtr<CollisionShape>
-        , public SR_HTYPES_NS::IRawMeshHolder
-        , public SR_UTILS_NS::Serializable
-    {
+    /// @category(Physics)
+    class CollisionShape final : public SR_UTILS_NS::Component, public SR_HTYPES_NS::IRawMeshHolder {
         SR_CLASS()
         friend class SR_PHYSICS_NS::PhysicsScene;
+        using Super = SR_UTILS_NS::Component;
     public:
         using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<PhysicsScene>;
         using Ptr = SR_HTYPES_NS::SharedPtr<CollisionShape>;
         using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
 
     public:
-        CollisionShape();
         ~CollisionShape() override;
 
     public:
-        void Update(float_t dt);
+        bool ExecuteInEditMode() const override { return true; }
+
+        void Update(float_t dt) override;
+        void OnDetached() override;
+        void OnMatrixDirty() override;
+
+        void OnDisable() override;
+        void OnEnable() override;
+
+        void OnRigidbodyDetached();
 
         void OnRawMeshChanged() override;
 
@@ -71,16 +80,17 @@ namespace SR_PTYPES_NS {
         void UpdateDebugShape();
         void RemoveDebugShape();
 
-        void ReInitDebugShape();
-
         void SetType(ShapeType type);
+        void SetRigidbody(Rigidbody* pRigidbody);
 
         void SetHeight(float_t height);
         void SetRadius(float_t radius);
         void SetSize(const SR_MATH_NS::FVector3& size);
         void SetBounds(const SR_MATH_NS::FVector3& bounds);
         void SetPlaneSize(const SR_MATH_NS::FVector2& size);
-        void SetRigidbody(Rigidbody* pRigidbody) { m_rigidbody = pRigidbody; };
+
+        SR_NODISCARD SR_MATH_NS::FVector3 GetCenter() const noexcept { return m_center; }
+        SR_NODISCARD SR_MATH_NS::FVector3 GetCenterDirection() const noexcept;
 
         SR_NODISCARD SR_MATH_NS::FVector3 CalculateLocalInertia(float_t mass) const;
 
@@ -91,20 +101,46 @@ namespace SR_PTYPES_NS {
         SR_NODISCARD SR_MATH_NS::FVector2 GetPlaneSize() const { return SR_MATH_NS::FVector2(m_bounds.x, m_bounds.z); }
         SR_NODISCARD Rigidbody* GetRigidbody() const;
 
+        SR_NODISCARD const SR_MATH_NS::FVector3& GetTranslation() const noexcept { return m_translation; }
+        SR_NODISCARD const SR_MATH_NS::Quaternion& GetRotation() const noexcept { return m_rotation; }
+        SR_NODISCARD const SR_MATH_NS::FVector3& GetScale() const noexcept { return m_scale; }
+        SR_NODISCARD PhysicsMaterial::Ptr GetPhysicsMaterial() const noexcept { return m_materialData; }
+
         SR_NODISCARD bool HasGeometry() const noexcept;
         SR_NODISCARD bool IsShapeValid() const noexcept;
         SR_NODISCARD ShapeType GetType() const noexcept;
         SR_NODISCARD void* GetHandle() const noexcept;
 
+        virtual void SetCenter(const SR_MATH_NS::FVector3& center);
+
+    private:
+        void ReInitRigidbody();
+        void OnShapeDirty();
+        void SetMaterial(const SR_UTILS_NS::Path& path);
+
     protected:
+        Rigidbody* m_currentRigidbody = nullptr;
         CollisionShapeImpl* m_impl = nullptr;
-        Rigidbody* m_rigidbody = nullptr;
-
         uint64_t m_debugId = SR_ID_INVALID;
+        bool m_isShapeDirty = true;
+
+        /// decomposed matrix
+        SR_MATH_NS::FVector3 m_translation;
+        SR_MATH_NS::Quaternion m_rotation;
+        SR_MATH_NS::FVector3 m_scale = SR_MATH_NS::FVector3::One();
+        SR_PTYPES_NS::PhysicsMaterial::Ptr m_materialData;
 
     protected:
+        /// @property @onChanged(ReInitRigidbody)
+        SR_UTILS_NS::EntityRef<Rigidbody> m_rigidbody;
         /// @property @setter(SetType) @getter(GetType)
         ShapeType m_type = ShapeType::Unknown;
+        /// @property @setter(SetMaterial)
+        /// @customArgs(pick: enabled, filter name: Physics material, relative: resources)
+        /// @customArg(filter value: sras)
+        SR_UTILS_NS::Path m_material;
+        /// @property @setter(SetCenter) @getter(GetCenter) @drag(0.01f)
+        SR_MATH_NS::FVector3 m_center;
         /// @property @setter(SetBounds) @getter(GetBounds) @hidden
         SR_MATH_NS::FVector3 m_bounds = SR_MATH_NS::FVector3::One();
 

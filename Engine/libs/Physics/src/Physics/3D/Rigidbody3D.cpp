@@ -55,6 +55,18 @@ namespace SR_PTYPES_NS {
         return SR_MATH_NS::FVector3();
     }
 
+    void Rigidbody3D::AddForce(const SR_MATH_NS::FVector3& force) {
+        if (auto&& pImpl = GetImpl<Rigidbody3DImpl>()) {
+            return pImpl->AddForce(force);
+        }
+    }
+
+    void Rigidbody3D::AddTorque(const SR_MATH_NS::FVector3& torque) {
+        if (auto&& pImpl = GetImpl<Rigidbody3DImpl>()) {
+            return pImpl->AddTorque(torque);
+        }
+    }
+
     void Rigidbody3D::AddLinearVelocity(const SR_MATH_NS::FVector3& velocity) {
         if (auto&& pImpl = GetImpl<Rigidbody3DImpl>()) {
             return pImpl->AddLinearVelocity(velocity);
