@@ -2,6 +2,8 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="namespaceSR__UTILS__NS" kind="namespace" language="C++">
     <compoundname>SR_UTILS_NS</compoundname>
+    <innerclass refid="structSR__UTILS__NS_1_1AndroidEvent" prot="public">SR_UTILS_NS::AndroidEvent</innerclass>
+    <innerclass refid="classSR__UTILS__NS_1_1AndroidEventQueue" prot="public">SR_UTILS_NS::AndroidEventQueue</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1AnyVisitor" prot="public">SR_UTILS_NS::AnyVisitor</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1AnyVisitor_3_4" prot="public">SR_UTILS_NS::AnyVisitor&lt;&gt;</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1ArrayReferenceProperty" prot="public">SR_UTILS_NS::ArrayReferenceProperty</innerclass>

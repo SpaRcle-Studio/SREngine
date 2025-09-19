@@ -578,6 +578,7 @@ Here is a list of all files with brief descriptions:
                         * **file** [**Socket.h**](Socket_8h.md)     
                         * **file** [**Utils.h**](Utils_2inc_2Utils_2Network_2Utils_8h.md)     
                     * **dir** [**Platform**](dir_c017a2c280f4c252cdb104ea7a64a7b4.md)     
+                        * **file** [**AndroidEvent.h**](AndroidEvent_8h.md)     
                         * **file** [**AndroidNativeAppGlue.h**](AndroidNativeAppGlue_8h.md)     
                         * **file** [**MessageBox.h**](Utils_2inc_2Utils_2Platform_2MessageBox_8h.md)     
                         * **file** [**Platform.h**](Platform_8h.md)     

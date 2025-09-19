@@ -129,6 +129,35 @@
     <member refid="structandroid__poll__source_1a216d0c0e22d09dcf8189baba94bf418b" kind="variable"><name>app</name></member>
     <member refid="structandroid__poll__source_1ab93931c2565dc43339fc93944a44445b" kind="variable"><name>process</name></member>
   </compound>
+  <compound refid="structSR__UTILS__NS_1_1AndroidEvent" kind="struct"><name>SR_UTILS_NS::AndroidEvent</name>
+    <member refid="structSR__UTILS__NS_1_1AndroidEvent_1af9171383f7325e87d40b29d359ce24a4" kind="enum"><name>Type</name></member>
+    <member refid="structSR__UTILS__NS_1_1AndroidEvent_1af9171383f7325e87d40b29d359ce24a4a2f469823a5c34d55cebf795ddd53d5b7" kind="enumvalue"><name>Motion</name></member>
+    <member refid="structSR__UTILS__NS_1_1AndroidEvent_1af9171383f7325e87d40b29d359ce24a4a4d5d3c7e5c37e23b0d895ae3c6ea6096" kind="enumvalue"><name>Key</name></member>
+    <member refid="structSR__UTILS__NS_1_1AndroidEvent_1af9171383f7325e87d40b29d359ce24a4acb696fd5cc8de85c981df2231554bc94" kind="enumvalue"><name>Lifecycle</name></member>
+    <member refid="structSR__UTILS__NS_1_1AndroidEvent_1af9171383f7325e87d40b29d359ce24a4aff1793c8afa6770eebc26344cc851ee3" kind="enumvalue"><name>Window</name></member>
+    <member refid="structSR__UTILS__NS_1_1AndroidEvent_1af9171383f7325e87d40b29d359ce24a4a3aea13a9a1fd02be5856cb9e809eaa73" kind="enumvalue"><name>Sensor</name></member>
+    <member refid="structSR__UTILS__NS_1_1AndroidEvent_1ae0c7dad4733297201a0f451e2ae090e2" kind="variable"><name>type</name></member>
+    <member refid="structSR__UTILS__NS_1_1AndroidEvent_1a0e38248f660298d91c12b07cf36233eb" kind="variable"><name>action</name></member>
+    <member refid="structSR__UTILS__NS_1_1AndroidEvent_1adcf2577685839c6eabe2a16f25211666" kind="variable"><name>x</name></member>
+    <member refid="structSR__UTILS__NS_1_1AndroidEvent_1a13f83132ed16e6e0e1ddd21dd5d56d0c" kind="variable"><name>y</name></member>
+    <member refid="structSR__UTILS__NS_1_1AndroidEvent_1a05b78d882d50c749d215434d3b670524" kind="variable"><name>pointerId</name></member>
+    <member refid="structSR__UTILS__NS_1_1AndroidEvent_1af529f7ead946cfa2a527df755f110855" kind="variable"><name>motion</name></member>
+    <member refid="structSR__UTILS__NS_1_1AndroidEvent_1af2135809a6222abd4b2de94313019ea1" kind="variable"><name>keyCode</name></member>
+    <member refid="structSR__UTILS__NS_1_1AndroidEvent_1a97167be6b420e7b9db3349fc2163ef55" kind="variable"><name>key</name></member>
+    <member refid="structSR__UTILS__NS_1_1AndroidEvent_1ab3a482fc9bc3856a4064da8e4faf71f0" kind="variable"><name>command</name></member>
+    <member refid="structSR__UTILS__NS_1_1AndroidEvent_1a9c6703878966ff46848d752c133d5159" kind="variable"><name>lifecycle</name></member>
+    <member refid="structSR__UTILS__NS_1_1AndroidEvent_1adf7ff855b5e15aa827c7dfb5451fd0d6" kind="variable"><name>window</name></member>
+    <member refid="structSR__UTILS__NS_1_1AndroidEvent_1a333369e071904963db38cc0ab623a897" kind="variable"><name>windowEvent</name></member>
+    <member refid="structSR__UTILS__NS_1_1AndroidEvent_1a6b6ac6f299b6b28d582bddf56b898b68" kind="variable"><name>sensor</name></member>
+    <member refid="structSR__UTILS__NS_1_1AndroidEvent_1a523490a10fee0f835f89b07adbc33489" kind="variable"><name>sensorEvent</name></member>
+    <member refid="structSR__UTILS__NS_1_1AndroidEvent_1a37eaf3eb308eb7ca22776fdcc018be75" kind="variable"><name></name></member>
+  </compound>
+  <compound refid="classSR__UTILS__NS_1_1AndroidEventQueue" kind="class"><name>SR_UTILS_NS::AndroidEventQueue</name>
+    <member refid="classSR__UTILS__NS_1_1AndroidEventQueue_1ae2f3e6d592bbc8661ce1c55b2e07ad5e" kind="variable"><name>m_events</name></member>
+    <member refid="classSR__UTILS__NS_1_1AndroidEventQueue_1a0e078e791428663a01e4056432025634" kind="function"><name>SR_REGISTER_SINGLETON</name></member>
+    <member refid="classSR__UTILS__NS_1_1AndroidEventQueue_1abedafb91869e1508c3e29390509cdb43" kind="function"><name>PushEvent</name></member>
+    <member refid="classSR__UTILS__NS_1_1AndroidEventQueue_1aef8ab9c6e43f0e097fd08e541ceeb236" kind="function"><name>PopEvent</name></member>
+  </compound>
   <compound refid="classSR__GRAPH__NS_1_1AndroidWindow" kind="class"><name>SR_GRAPH_NS::AndroidWindow</name>
     <member refid="classSR__GRAPH__NS_1_1AndroidWindow_1ad7d7cbb1cafb281a82bf3d6b4f9e0912" kind="typedef"><name>Super</name></member>
     <member refid="classSR__GRAPH__NS_1_1AndroidWindow_1afb1161f30a9f225bba6fb1d2c05efe8a" kind="function"><name>AndroidWindow</name></member>
@@ -137,8 +166,6 @@
     <member refid="classSR__GRAPH__NS_1_1AndroidWindow_1a80c8f9ee29f1e5106ce1af816fc57dad" kind="function"><name>PollEvents</name></member>
     <member refid="classSR__GRAPH__NS_1_1AndroidWindow_1a6a9b59150ae091c5bd43bc1b7a4f0ef1" kind="function"><name>GetNativeWindow</name></member>
     <member refid="classSR__GRAPH__NS_1_1AndroidWindow_1aa2a199f85da21d1b3237829bd3f46531" kind="function"><name>GetHandle</name></member>
-    <member refid="classSR__GRAPH__NS_1_1AndroidWindow_1a3da4c466afa2745ebb05636369b5af1f" kind="function"><name>HandleInput</name></member>
-    <member refid="classSR__GRAPH__NS_1_1AndroidWindow_1ae5a64a37aee06e23f431d87978a07aa4" kind="function"><name>HandleCmd</name></member>
   </compound>
   <compound refid="classSR__ANIMATIONS__NS_1_1AnimationChannel" kind="class"><name>SR_ANIMATIONS_NS::AnimationChannel</name>
     <member refid="classSR__ANIMATIONS__NS_1_1AnimationChannel_1a6aadce5630b2e68e270514ca6dac2f00" kind="typedef"><name>Keys</name></member>
@@ -956,8 +983,9 @@
     <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1af66e8340bd1b735814c7703ecc1900f2" kind="variable"><name>m_isResizable</name></member>
     <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a9ea99c4a491837453d12024e41f2d967" kind="variable"><name>m_isFocused</name></member>
     <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1af00eb8823d8cb0971b2681eca5d9d1a9" kind="variable"><name>m_maximize</name></member>
-    <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a1f3602de7d5fc6e0b583c4b168aa4264" kind="variable"><name>m_isValid</name></member>
-    <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a47645e76755ec95d1a18df857f79285e" kind="variable"><name>m_isClosed</name></member>
+    <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a145ac9a5b48df4ec17e17eae23d8ac5e" kind="variable"><name>m_isClosed</name></member>
+    <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1add6b74c5f84034774587caf7a1cd2fce" kind="variable"><name>m_isValid</name></member>
+    <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a47b78c9d9cdf4402bd7e8bf58b3ad64b" kind="variable"><name>m_isInitialized</name></member>
     <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a5b670f266756957ff7d4fda3437df0df" kind="variable"><name>m_resizeCallback</name></member>
     <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a13f95061d9738f44b52d17e957f2b8e5" kind="variable"><name>m_moveCallback</name></member>
     <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a2fbeb9ff9a3f57359d95a5be03b575ab" kind="variable"><name>m_scrollCallback</name></member>
@@ -989,6 +1017,7 @@
     <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a4f82ad908dbb3b7b736c9117201de5c8" kind="function"><name>IsHeaderEnabled</name></member>
     <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a8bda25c6d5f223d39f984783ecb339db" kind="function"><name>IsFocused</name></member>
     <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1ab5de98a5abdd159dcae1792b9e386e51" kind="function"><name>IsClosed</name></member>
+    <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1ada0abf0d00fd86a8d9c9e616bfb4dba6" kind="function"><name>IsInitialized</name></member>
     <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a47a6f76e304c072da80d13c922e5fd30" kind="function"><name>GetPosition</name></member>
     <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1aab2f39cbe19d458b2480cee8db470733" kind="function"><name>GetScreenResolution</name></member>
     <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a6436a0d24a88b86e35eefbd36c1c000e" kind="function"><name>ClientToScreen</name></member>
@@ -2094,7 +2123,7 @@
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSDirection_1aaeda44b670fe0b20aad9e1b392e00393" kind="variable"><name>type</name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSDirection_1a94f2bc7d29e9c42e28bab70275017378" kind="variable"><name>direction</name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSDirection_1a91f59540be25dfa4adc532f6e4cceb0c" kind="variable"><name>degree</name></member>
-    <member refid="structSR__UTILS__NS_1_1Web_1_1CSSDirection_1a0f670c7b37027352bfbf77ecc6d36338" kind="variable"><name></name></member>
+    <member refid="structSR__UTILS__NS_1_1Web_1_1CSSDirection_1a4aff8a333603584ac7940aa944538c88" kind="variable"><name></name></member>
   </compound>
   <compound refid="structSR__UTILS__NS_1_1Web_1_1CSSGradientColor" kind="struct"><name>SR_UTILS_NS::Web::CSSGradientColor</name>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSGradientColor_1a49b905f66d5b3d3ba91af4dffc67428d" kind="variable"><name>color</name></member>
@@ -2197,7 +2226,7 @@
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1ad3579d47e3f497ca3d4152eb15bb3478" kind="variable"><name>percent</name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1a52001a76a637197e9937f1b5f58d7330" kind="variable"><name>dpi</name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1a091cd7f8d1d79db1a4332834add1efa9" kind="variable"><name>deg</name></member>
-    <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1a1a3300e87d8b2970063346a870a343f4" kind="variable"><name></name></member>
+    <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1ac01d064b58bbd6c047debdea9ae4af12" kind="variable"><name></name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1a248defadfbdae30a585a521b88acb427" kind="function"><name>CSSSizeValue</name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1a5e2d6b1465a1b725206848946d49b41c" kind="function"><name>CSSSizeValue</name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1aaf98edc7b6d691eeef454ce75196ccef" kind="function"><name>CSSSizeValue</name></member>
@@ -9052,7 +9081,7 @@
   <compound refid="structSR__GRAPH__NS_1_1RenderQueueInfo" kind="struct"><name>SR_GRAPH_NS::RenderQueueInfo</name>
     <member refid="structSR__GRAPH__NS_1_1RenderQueueInfo_1a051766209f727ad4e6a201cb5ea4f12a" kind="variable"><name>pRenderQueue</name></member>
     <member refid="structSR__GRAPH__NS_1_1RenderQueueInfo_1a6198920c1f18a2e518c78e7ddb0a997c" kind="variable"><name>pShader</name></member>
-    <member refid="structSR__GRAPH__NS_1_1RenderQueueInfo_1a0ed55ec5c045672b30b7379ee036f3ce" kind="variable"><name>dirtyUniformsFrames</name></member>
+    <member refid="structSR__GRAPH__NS_1_1RenderQueueInfo_1a16c714317baa217a5853004e027f7ea7" kind="variable"><name>dirtyUniformsFrames</name></member>
     <member refid="structSR__GRAPH__NS_1_1RenderQueueInfo_1affe38c821366dadb2641e215751385cf" kind="variable"><name>inUpdateQueue</name></member>
     <member refid="structSR__GRAPH__NS_1_1RenderQueueInfo_1a515579405650d3cc0ab3d0111e1cf5ef" kind="function"><name>operator==</name></member>
   </compound>
@@ -9086,7 +9115,7 @@
     <member refid="classSR__GRAPH__NS_1_1RenderScene_1ab9148a56d6da810c894d2fca6b9c16c8" kind="variable"><name>m_technique</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderScene_1a734b6c3eccfa8d43f7f25895e0174c2e" kind="variable"><name>m_context</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderScene_1a22a31c3eaeceaf407820c36f066ee7d8" kind="variable"><name>m_surfaceSize</name></member>
-    <member refid="classSR__GRAPH__NS_1_1RenderScene_1a93e3dcbb3840d3d9e656e943d43bddf1" kind="variable"><name>m_dirtyFrames</name></member>
+    <member refid="classSR__GRAPH__NS_1_1RenderScene_1a98f3d86ff68d40e291649c96a17acc20" kind="variable"><name>m_dirtyFrames</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderScene_1ae8da7095781445381953044727c94ce4" kind="variable"><name>m_dirtyCameras</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderScene_1a8c8695adce7f13ba86593830df9b1643" kind="variable"><name>m_hasDrawData</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderScene_1a1aed9628a2e739b8da5894617948af3e" kind="variable"><name>m_bOverlay</name></member>
@@ -17014,28 +17043,30 @@
   </compound>
   <compound refid="Socket_8h" kind="file"><name>Socket.h</name>
   </compound>
+  <compound refid="AndroidEvent_8h" kind="file"><name>AndroidEvent.h</name>
+  </compound>
   <compound refid="AndroidNativeAppGlue_8h" kind="file"><name>AndroidNativeAppGlue.h</name>
-    <member refid="AndroidNativeAppGlue_8h_1a2f80701c36e79c0640d91c788feee0b3" kind="enum"><name></name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a2f80701c36e79c0640d91c788feee0b3a66661a2e57566ddd214710ca3494b0b9" kind="enumvalue"><name>LOOPER_ID_MAIN</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a2f80701c36e79c0640d91c788feee0b3a5e50c78fcf09cc1b0ab723f71aa7004a" kind="enumvalue"><name>LOOPER_ID_INPUT</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a2f80701c36e79c0640d91c788feee0b3a9310453935dbed3c38ca54243f8d1114" kind="enumvalue"><name>LOOPER_ID_USER</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493" kind="enum"><name></name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a7819d1cf24caefafd27bc595faa90cff" kind="enumvalue"><name>APP_CMD_INPUT_CHANGED</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a0d6fca4488718da1af972b5eb76b4e70" kind="enumvalue"><name>APP_CMD_INIT_WINDOW</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493ae4454163b5148d7feb2c1398e87f1bd5" kind="enumvalue"><name>APP_CMD_TERM_WINDOW</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a448514d4220320ec7a7e7324e019f42c" kind="enumvalue"><name>APP_CMD_WINDOW_RESIZED</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a1b0e01d7dd6e8ca91e8a51033ca3e59a" kind="enumvalue"><name>APP_CMD_WINDOW_REDRAW_NEEDED</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a867d94e17fcae1afb7a1518b7716f3f4" kind="enumvalue"><name>APP_CMD_CONTENT_RECT_CHANGED</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a185c97bb056e5f4b95ddadecbec20e7e" kind="enumvalue"><name>APP_CMD_GAINED_FOCUS</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a0288cde5cba1809643528f87a08b7652" kind="enumvalue"><name>APP_CMD_LOST_FOCUS</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a1e522859766d39850cbc3f1c015b632c" kind="enumvalue"><name>APP_CMD_CONFIG_CHANGED</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a81f8fd5d321c73ce40ac190c097dfc07" kind="enumvalue"><name>APP_CMD_LOW_MEMORY</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493af3fe7e75c6650752c617380c1dae3e5a" kind="enumvalue"><name>APP_CMD_START</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493ae74474be4b21cdcde2ef833e6e8cd239" kind="enumvalue"><name>APP_CMD_RESUME</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a90c4a6ced7ede689613ce2b1e0f95d66" kind="enumvalue"><name>APP_CMD_SAVE_STATE</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a074614e1c74af041e42a982d85a22fee" kind="enumvalue"><name>APP_CMD_PAUSE</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493a85fd01d255415043aeb43f552ae1c970" kind="enumvalue"><name>APP_CMD_STOP</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a531c35e38ede3ea4e5ba5afb24b29493af816e28d8f833b5e9597b40ce725974f" kind="enumvalue"><name>APP_CMD_DESTROY</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a109bfaad92bd6d348dab484aec11edbb" kind="enum"><name></name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a109bfaad92bd6d348dab484aec11edbba66661a2e57566ddd214710ca3494b0b9" kind="enumvalue"><name>LOOPER_ID_MAIN</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a109bfaad92bd6d348dab484aec11edbba5e50c78fcf09cc1b0ab723f71aa7004a" kind="enumvalue"><name>LOOPER_ID_INPUT</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a109bfaad92bd6d348dab484aec11edbba9310453935dbed3c38ca54243f8d1114" kind="enumvalue"><name>LOOPER_ID_USER</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a550cb4231d535863c55643bbd2d3c6ba" kind="enum"><name></name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a550cb4231d535863c55643bbd2d3c6baa7819d1cf24caefafd27bc595faa90cff" kind="enumvalue"><name>APP_CMD_INPUT_CHANGED</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a550cb4231d535863c55643bbd2d3c6baa0d6fca4488718da1af972b5eb76b4e70" kind="enumvalue"><name>APP_CMD_INIT_WINDOW</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a550cb4231d535863c55643bbd2d3c6baae4454163b5148d7feb2c1398e87f1bd5" kind="enumvalue"><name>APP_CMD_TERM_WINDOW</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a550cb4231d535863c55643bbd2d3c6baa448514d4220320ec7a7e7324e019f42c" kind="enumvalue"><name>APP_CMD_WINDOW_RESIZED</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a550cb4231d535863c55643bbd2d3c6baa1b0e01d7dd6e8ca91e8a51033ca3e59a" kind="enumvalue"><name>APP_CMD_WINDOW_REDRAW_NEEDED</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a550cb4231d535863c55643bbd2d3c6baa867d94e17fcae1afb7a1518b7716f3f4" kind="enumvalue"><name>APP_CMD_CONTENT_RECT_CHANGED</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a550cb4231d535863c55643bbd2d3c6baa185c97bb056e5f4b95ddadecbec20e7e" kind="enumvalue"><name>APP_CMD_GAINED_FOCUS</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a550cb4231d535863c55643bbd2d3c6baa0288cde5cba1809643528f87a08b7652" kind="enumvalue"><name>APP_CMD_LOST_FOCUS</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a550cb4231d535863c55643bbd2d3c6baa1e522859766d39850cbc3f1c015b632c" kind="enumvalue"><name>APP_CMD_CONFIG_CHANGED</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a550cb4231d535863c55643bbd2d3c6baa81f8fd5d321c73ce40ac190c097dfc07" kind="enumvalue"><name>APP_CMD_LOW_MEMORY</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a550cb4231d535863c55643bbd2d3c6baaf3fe7e75c6650752c617380c1dae3e5a" kind="enumvalue"><name>APP_CMD_START</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a550cb4231d535863c55643bbd2d3c6baae74474be4b21cdcde2ef833e6e8cd239" kind="enumvalue"><name>APP_CMD_RESUME</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a550cb4231d535863c55643bbd2d3c6baa90c4a6ced7ede689613ce2b1e0f95d66" kind="enumvalue"><name>APP_CMD_SAVE_STATE</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a550cb4231d535863c55643bbd2d3c6baa074614e1c74af041e42a982d85a22fee" kind="enumvalue"><name>APP_CMD_PAUSE</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a550cb4231d535863c55643bbd2d3c6baa85fd01d255415043aeb43f552ae1c970" kind="enumvalue"><name>APP_CMD_STOP</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a550cb4231d535863c55643bbd2d3c6baaf816e28d8f833b5e9597b40ce725974f" kind="enumvalue"><name>APP_CMD_DESTROY</name></member>
     <member refid="AndroidNativeAppGlue_8h_1a05d3cc727656e360f4d2bb290ceec365" kind="function"><name>android_app_read_cmd</name></member>
     <member refid="AndroidNativeAppGlue_8h_1a19fcc2ceab1c8d7f0664f9436950bf18" kind="function"><name>android_app_pre_exec_cmd</name></member>
     <member refid="AndroidNativeAppGlue_8h_1af0b682de686fba098479227bc5a2f044" kind="function"><name>android_app_post_exec_cmd</name></member>

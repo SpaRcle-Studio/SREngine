@@ -2,6 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="dir_c017a2c280f4c252cdb104ea7a64a7b4" kind="dir">
     <compoundname>Engine/libs/Utils/inc/Utils/Platform</compoundname>
+    <innerfile refid="AndroidEvent_8h">AndroidEvent.h</innerfile>
     <innerfile refid="AndroidNativeAppGlue_8h">AndroidNativeAppGlue.h</innerfile>
     <innerfile refid="Utils_2inc_2Utils_2Platform_2MessageBox_8h">MessageBox.h</innerfile>
     <innerfile refid="Platform_8h">Platform.h</innerfile>

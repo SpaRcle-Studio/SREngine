@@ -67,6 +67,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD virtual bool IsHeaderEnabled() const { return m_headerEnabled; };
         SR_NODISCARD virtual bool IsFocused() const { return m_isFocused; };
         SR_NODISCARD bool IsClosed() const { return m_isClosed; };
+        SR_NODISCARD bool IsInitialized() const { return m_isInitialized; };
         SR_NODISCARD virtual SR_MATH_NS::IVector2 GetPosition() const { return SR_MATH_NS::IVector2(); }
         SR_NODISCARD virtual SR_MATH_NS::IVector2 GetScreenResolution() const { return SR_MATH_NS::IVector2(); }
         SR_NODISCARD virtual SR_MATH_NS::IVector2 ClientToScreen(const SR_MATH_NS::IVector2& pos) const { return SR_MATH_NS::IVector2(); }
@@ -105,8 +106,9 @@ namespace SR_GRAPH_NS {
         bool m_isResizable = false;
         bool m_isFocused = false;
         bool m_maximize = false;
-        bool m_isValid = false;
-        bool m_isClosed = false;
+        std::atomic<bool> m_isClosed = false;
+        std::atomic<bool> m_isValid = false;
+        std::atomic<bool> m_isInitialized = false;
 
         ResizeCallback m_resizeCallback;
         MoveCallback m_moveCallback;

@@ -71,8 +71,8 @@
 
 ## t
 
+* **Type** ([**SR\_UTILS\_NS::AndroidEvent**](structSR__UTILS__NS_1_1AndroidEvent.md), [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md), [**SR\_UTILS\_NS::Web::CSSDirection**](structSR__UTILS__NS_1_1Web_1_1CSSDirection.md))
 * **Theme** ([**SR\_UTILS\_NS::Debug**](classSR__UTILS__NS_1_1Debug.md))
-* **Type** ([**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md), [**SR\_UTILS\_NS::Web::CSSDirection**](structSR__UTILS__NS_1_1Web_1_1CSSDirection.md))
 
 
 ## u

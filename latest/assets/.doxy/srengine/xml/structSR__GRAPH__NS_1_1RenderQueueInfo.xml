@@ -31,10 +31,10 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="173" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="173" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1RenderQueueInfo_1a0ed55ec5c045672b30b7379ee036f3ce" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1RenderQueueInfo_1a16c714317baa217a5853004e027f7ea7" prot="public" static="no" mutable="no">
         <type>bool</type>
-        <definition>bool SR_GRAPH_NS::RenderQueueInfo::dirtyUniformsFrames[3]</definition>
-        <argsstring>[3]</argsstring>
+        <definition>bool SR_GRAPH_NS::RenderQueueInfo::dirtyUniformsFrames[16]</definition>
+        <argsstring>[16]</argsstring>
         <name>dirtyUniformsFrames</name>
         <qualifiedname>SR_GRAPH_NS::RenderQueueInfo::dirtyUniformsFrames</qualifiedname>
         <briefdescription>
@@ -177,7 +177,7 @@
     </collaborationgraph>
     <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="171" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="171" bodyend="180"/>
     <listofallmembers>
-      <member refid="structSR__GRAPH__NS_1_1RenderQueueInfo_1a0ed55ec5c045672b30b7379ee036f3ce" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueueInfo</scope><name>dirtyUniformsFrames</name></member>
+      <member refid="structSR__GRAPH__NS_1_1RenderQueueInfo_1a16c714317baa217a5853004e027f7ea7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueueInfo</scope><name>dirtyUniformsFrames</name></member>
       <member refid="structSR__GRAPH__NS_1_1RenderQueueInfo_1affe38c821366dadb2641e215751385cf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueueInfo</scope><name>inUpdateQueue</name></member>
       <member refid="structSR__GRAPH__NS_1_1RenderQueueInfo_1a515579405650d3cc0ab3d0111e1cf5ef" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueueInfo</scope><name>operator==</name></member>
       <member refid="structSR__GRAPH__NS_1_1RenderQueueInfo_1a051766209f727ad4e6a201cb5ea4f12a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueueInfo</scope><name>pRenderQueue</name></member>

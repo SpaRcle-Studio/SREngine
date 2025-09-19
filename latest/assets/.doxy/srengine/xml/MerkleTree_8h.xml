@@ -2598,6 +2598,8 @@
         </childnode>
         <childnode refid="491" relation="include">
         </childnode>
+        <childnode refid="492" relation="include">
+        </childnode>
         <childnode refid="316" relation="include">
         </childnode>
         <childnode refid="318" relation="include">
@@ -2606,7 +2608,7 @@
         </childnode>
         <childnode refid="368" relation="include">
         </childnode>
-        <childnode refid="492" relation="include">
+        <childnode refid="493" relation="include">
         </childnode>
         <childnode refid="319" relation="include">
         </childnode>
@@ -2618,7 +2620,7 @@
         </childnode>
         <childnode refid="374" relation="include">
         </childnode>
-        <childnode refid="493" relation="include">
+        <childnode refid="494" relation="include">
         </childnode>
         <childnode refid="423" relation="include">
         </childnode>
@@ -3615,6 +3617,10 @@
         <childnode refid="351" relation="include">
         </childnode>
       </node>
+      <node id="492">
+        <label>Engine/libs/Utils/inc/Utils/Platform/AndroidEvent.h</label>
+        <link refid="AndroidEvent_8h_source"/>
+      </node>
       <node id="245">
         <label>Engine/libs/Utils/inc/Utils/Platform/Platform.h</label>
         <link refid="Platform_8h_source"/>
@@ -3883,7 +3889,7 @@
         <label>Engine/libs/Utils/inc/Utils/Serialization/IMigrator.h</label>
         <link refid="IMigrator_8h_source"/>
       </node>
-      <node id="492">
+      <node id="493">
         <label>Engine/libs/Utils/inc/Utils/Serialization/MigrationManager.h</label>
         <link refid="MigrationManager_8h_source"/>
       </node>
@@ -4021,7 +4027,7 @@
         <childnode refid="314" relation="include">
         </childnode>
       </node>
-      <node id="494">
+      <node id="495">
         <label>Engine/libs/Utils/inc/Utils/TypeTraits/ClassDB.h</label>
         <link refid="ClassDB_8h_source"/>
         <childnode refid="297" relation="include">
@@ -4059,7 +4065,7 @@
         <childnode refid="296" relation="include">
         </childnode>
       </node>
-      <node id="493">
+      <node id="494">
         <label>Engine/libs/Utils/inc/Utils/TypeTraits/PropertyManager.h</label>
         <link refid="PropertyManager_8h_source"/>
       </node>
@@ -4434,11 +4440,11 @@
         </childnode>
         <childnode refid="325" relation="include">
         </childnode>
-        <childnode refid="494" relation="include">
+        <childnode refid="495" relation="include">
         </childnode>
         <childnode refid="289" relation="include">
         </childnode>
-        <childnode refid="493" relation="include">
+        <childnode refid="494" relation="include">
         </childnode>
         <childnode refid="465" relation="include">
         </childnode>

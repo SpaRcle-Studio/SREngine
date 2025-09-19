@@ -55,6 +55,8 @@
 
 | Type | Name |
 | ---: | :--- |
+| struct | [**AndroidEvent**](structSR__UTILS__NS_1_1AndroidEvent.md) <br> |
+| class | [**AndroidEventQueue**](classSR__UTILS__NS_1_1AndroidEventQueue.md) <br> |
 | struct | [**AnyVisitor**](structSR__UTILS__NS_1_1AnyVisitor.md) &lt;Ts&gt;<br> |
 | struct | [**AnyVisitor&lt;&gt;**](structSR__UTILS__NS_1_1AnyVisitor_3_4.md) &lt;&gt;<br> |
 | class | [**ArrayReferenceProperty**](classSR__UTILS__NS_1_1ArrayReferenceProperty.md) <br>_---------------------------------------_  __[_**ArrayReferenceProperty**_](classSR__UTILS__NS_1_1ArrayReferenceProperty.md) _-------------------------------------------_ __ |

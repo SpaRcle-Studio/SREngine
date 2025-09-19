@@ -141,6 +141,7 @@ See [SR\_GRAPH\_NS::BasicWindowImpl](classSR__GRAPH__NS_1_1BasicWindowImpl.md)
 | virtual SR\_NODISCARD bool | [**IsFocused**](classSR__GRAPH__NS_1_1BasicWindowImpl.md#function-isfocused) () const<br> |
 | virtual bool | [**IsFullScreen**](classSR__GRAPH__NS_1_1BasicWindowImpl.md#function-isfullscreen) () <br> |
 | virtual SR\_NODISCARD bool | [**IsHeaderEnabled**](classSR__GRAPH__NS_1_1BasicWindowImpl.md#function-isheaderenabled) () const<br> |
+|  SR\_NODISCARD bool | [**IsInitialized**](classSR__GRAPH__NS_1_1BasicWindowImpl.md#function-isinitialized) () const<br> |
 | virtual SR\_NODISCARD bool | [**IsMaximized**](classSR__GRAPH__NS_1_1BasicWindowImpl.md#function-ismaximized) () const<br> |
 | virtual SR\_NODISCARD bool | [**IsValid**](classSR__GRAPH__NS_1_1BasicWindowImpl.md#function-isvalid) () const<br> |
 | virtual SR\_NODISCARD bool | [**IsVisible**](classSR__GRAPH__NS_1_1BasicWindowImpl.md#function-isvisible) () const<br> |
@@ -214,10 +215,11 @@ See [SR\_GRAPH\_NS::BasicWindowImpl](classSR__GRAPH__NS_1_1BasicWindowImpl.md)
 |  DrawCallback | [**m\_drawCallback**](classSR__GRAPH__NS_1_1BasicWindowImpl.md#variable-m_drawcallback)  <br> |
 |  FocusCallback | [**m\_focusCallback**](classSR__GRAPH__NS_1_1BasicWindowImpl.md#variable-m_focuscallback)  <br> |
 |  bool | [**m\_headerEnabled**](classSR__GRAPH__NS_1_1BasicWindowImpl.md#variable-m_headerenabled)   = `true`<br> |
-|  bool | [**m\_isClosed**](classSR__GRAPH__NS_1_1BasicWindowImpl.md#variable-m_isclosed)   = `false`<br> |
+|  std::atomic&lt; bool &gt; | [**m\_isClosed**](classSR__GRAPH__NS_1_1BasicWindowImpl.md#variable-m_isclosed)   = `false`<br> |
 |  bool | [**m\_isFocused**](classSR__GRAPH__NS_1_1BasicWindowImpl.md#variable-m_isfocused)   = `false`<br> |
+|  std::atomic&lt; bool &gt; | [**m\_isInitialized**](classSR__GRAPH__NS_1_1BasicWindowImpl.md#variable-m_isinitialized)   = `false`<br> |
 |  bool | [**m\_isResizable**](classSR__GRAPH__NS_1_1BasicWindowImpl.md#variable-m_isresizable)   = `false`<br> |
-|  bool | [**m\_isValid**](classSR__GRAPH__NS_1_1BasicWindowImpl.md#variable-m_isvalid)   = `false`<br> |
+|  std::atomic&lt; bool &gt; | [**m\_isValid**](classSR__GRAPH__NS_1_1BasicWindowImpl.md#variable-m_isvalid)   = `false`<br> |
 |  bool | [**m\_maximize**](classSR__GRAPH__NS_1_1BasicWindowImpl.md#variable-m_maximize)   = `false`<br> |
 |  MoveCallback | [**m\_moveCallback**](classSR__GRAPH__NS_1_1BasicWindowImpl.md#variable-m_movecallback)  <br> |
 |  SR\_MATH\_NS::IVector2 | [**m\_position**](classSR__GRAPH__NS_1_1BasicWindowImpl.md#variable-m_position)  <br> |

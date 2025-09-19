@@ -82,7 +82,7 @@ namespace SR_GRAPH_NS {
 
         SR_NODISCARD BasicWindowImpl* GetBaseWindow() const noexcept { return m_windowImpl; }
 
-        template<typename T> SR_NODISCARD T* GetImplementation() const {
+        template<typename T = BasicWindowImpl> SR_NODISCARD T* GetImplementation() const {
             return dynamic_cast<T*>(m_windowImpl);
         }
 

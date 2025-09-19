@@ -96,7 +96,7 @@
 ### variable dirtyUniformsFrames 
 
 ```C++
-bool SR_GRAPH_NS::RenderQueueInfo::dirtyUniformsFrames[3];
+bool SR_GRAPH_NS::RenderQueueInfo::dirtyUniformsFrames[16];
 ```
 
 

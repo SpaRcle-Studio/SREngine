@@ -106,6 +106,7 @@ Inherited by the following classes: [SR\_GRAPH\_NS::AndroidWindow](classSR__GRAP
 | virtual SR\_NODISCARD bool | [**IsFocused**](#function-isfocused) () const<br> |
 | virtual bool | [**IsFullScreen**](#function-isfullscreen) () <br> |
 | virtual SR\_NODISCARD bool | [**IsHeaderEnabled**](#function-isheaderenabled) () const<br> |
+|  SR\_NODISCARD bool | [**IsInitialized**](#function-isinitialized) () const<br> |
 | virtual SR\_NODISCARD bool | [**IsMaximized**](#function-ismaximized) () const<br> |
 | virtual SR\_NODISCARD bool | [**IsValid**](#function-isvalid) () const<br> |
 | virtual SR\_NODISCARD bool | [**IsVisible**](#function-isvisible) () const<br> |
@@ -167,10 +168,11 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 |  DrawCallback | [**m\_drawCallback**](#variable-m_drawcallback)  <br> |
 |  FocusCallback | [**m\_focusCallback**](#variable-m_focuscallback)  <br> |
 |  bool | [**m\_headerEnabled**](#variable-m_headerenabled)   = `true`<br> |
-|  bool | [**m\_isClosed**](#variable-m_isclosed)   = `false`<br> |
+|  std::atomic&lt; bool &gt; | [**m\_isClosed**](#variable-m_isclosed)   = `false`<br> |
 |  bool | [**m\_isFocused**](#variable-m_isfocused)   = `false`<br> |
+|  std::atomic&lt; bool &gt; | [**m\_isInitialized**](#variable-m_isinitialized)   = `false`<br> |
 |  bool | [**m\_isResizable**](#variable-m_isresizable)   = `false`<br> |
-|  bool | [**m\_isValid**](#variable-m_isvalid)   = `false`<br> |
+|  std::atomic&lt; bool &gt; | [**m\_isValid**](#variable-m_isvalid)   = `false`<br> |
 |  bool | [**m\_maximize**](#variable-m_maximize)   = `false`<br> |
 |  MoveCallback | [**m\_moveCallback**](#variable-m_movecallback)  <br> |
 |  SR\_MATH\_NS::IVector2 | [**m\_position**](#variable-m_position)  <br> |
@@ -620,6 +622,19 @@ inline virtual SR_NODISCARD bool SR_GRAPH_NS::BasicWindowImpl::IsHeaderEnabled (
 
 
 
+### function IsInitialized 
+
+```C++
+inline SR_NODISCARD bool SR_GRAPH_NS::BasicWindowImpl::IsInitialized () const
+```
+
+
+
+
+<hr>
+
+
+
 ### function IsMaximized 
 
 ```C++
@@ -1042,7 +1057,7 @@ bool SR_GRAPH_NS::BasicWindowImpl::m_headerEnabled;
 ### variable m\_isClosed 
 
 ```C++
-bool SR_GRAPH_NS::BasicWindowImpl::m_isClosed;
+std::atomic<bool> SR_GRAPH_NS::BasicWindowImpl::m_isClosed;
 ```
 
 
@@ -1056,6 +1071,19 @@ bool SR_GRAPH_NS::BasicWindowImpl::m_isClosed;
 
 ```C++
 bool SR_GRAPH_NS::BasicWindowImpl::m_isFocused;
+```
+
+
+
+
+<hr>
+
+
+
+### variable m\_isInitialized 
+
+```C++
+std::atomic<bool> SR_GRAPH_NS::BasicWindowImpl::m_isInitialized;
 ```
 
 
@@ -1081,7 +1109,7 @@ bool SR_GRAPH_NS::BasicWindowImpl::m_isResizable;
 ### variable m\_isValid 
 
 ```C++
-bool SR_GRAPH_NS::BasicWindowImpl::m_isValid;
+std::atomic<bool> SR_GRAPH_NS::BasicWindowImpl::m_isValid;
 ```
 
 

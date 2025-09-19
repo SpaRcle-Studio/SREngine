@@ -177,7 +177,7 @@ namespace SR_GRAPH_NS {
     struct RenderQueueInfo {
         RenderQueue* pRenderQueue;
         SR_GTYPES_NS::Shader* pShader;
-        bool dirtyUniformsFrames[3];
+        bool dirtyUniformsFrames[16];
         bool inUpdateQueue = false;
 
         bool operator==(const RenderQueueInfo& other) const {

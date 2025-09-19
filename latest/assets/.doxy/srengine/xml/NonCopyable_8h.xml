@@ -2694,35 +2694,35 @@
         </childnode>
         <childnode refid="431" relation="include">
         </childnode>
-        <childnode refid="508" relation="include">
+        <childnode refid="509" relation="include">
         </childnode>
         <childnode refid="344" relation="include">
         </childnode>
         <childnode refid="433" relation="include">
         </childnode>
-        <childnode refid="505" relation="include">
+        <childnode refid="506" relation="include">
         </childnode>
         <childnode refid="443" relation="include">
         </childnode>
         <childnode refid="351" relation="include">
         </childnode>
-        <childnode refid="509" relation="include">
+        <childnode refid="510" relation="include">
         </childnode>
         <childnode refid="315" relation="include">
         </childnode>
         <childnode refid="436" relation="include">
         </childnode>
-        <childnode refid="510" relation="include">
-        </childnode>
         <childnode refid="511" relation="include">
-        </childnode>
-        <childnode refid="286" relation="include">
         </childnode>
         <childnode refid="512" relation="include">
         </childnode>
+        <childnode refid="286" relation="include">
+        </childnode>
         <childnode refid="513" relation="include">
         </childnode>
-        <childnode refid="517" relation="include">
+        <childnode refid="514" relation="include">
+        </childnode>
+        <childnode refid="518" relation="include">
         </childnode>
         <childnode refid="455" relation="include">
         </childnode>
@@ -2808,15 +2808,17 @@
         </childnode>
         <childnode refid="504" relation="include">
         </childnode>
+        <childnode refid="505" relation="include">
+        </childnode>
         <childnode refid="342" relation="include">
         </childnode>
         <childnode refid="344" relation="include">
         </childnode>
-        <childnode refid="505" relation="include">
+        <childnode refid="506" relation="include">
         </childnode>
         <childnode refid="391" relation="include">
         </childnode>
-        <childnode refid="506" relation="include">
+        <childnode refid="507" relation="include">
         </childnode>
         <childnode refid="345" relation="include">
         </childnode>
@@ -2828,7 +2830,7 @@
         </childnode>
         <childnode refid="397" relation="include">
         </childnode>
-        <childnode refid="507" relation="include">
+        <childnode refid="508" relation="include">
         </childnode>
         <childnode refid="442" relation="include">
         </childnode>
@@ -3825,6 +3827,10 @@
         <childnode refid="374" relation="include">
         </childnode>
       </node>
+      <node id="505">
+        <label>Engine/libs/Utils/inc/Utils/Platform/AndroidEvent.h</label>
+        <link refid="AndroidEvent_8h_source"/>
+      </node>
       <node id="273">
         <label>Engine/libs/Utils/inc/Utils/Platform/Platform.h</label>
         <link refid="Platform_8h_source"/>
@@ -4021,7 +4027,7 @@
         <childnode refid="405" relation="include">
         </childnode>
       </node>
-      <node id="508">
+      <node id="509">
         <label>Engine/libs/Utils/inc/Utils/Resources/Yaml.h</label>
         <link refid="Yaml_8h_source"/>
       </node>
@@ -4059,7 +4065,7 @@
         <childnode refid="435" relation="include">
         </childnode>
       </node>
-      <node id="505">
+      <node id="506">
         <label>Engine/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h</label>
         <link refid="LogicalNodeManager_8h_source"/>
         <childnode refid="435" relation="include">
@@ -4097,7 +4103,7 @@
         <label>Engine/libs/Utils/inc/Utils/Serialization/IMigrator.h</label>
         <link refid="IMigrator_8h_source"/>
       </node>
-      <node id="506">
+      <node id="507">
         <label>Engine/libs/Utils/inc/Utils/Serialization/MigrationManager.h</label>
         <link refid="MigrationManager_8h_source"/>
       </node>
@@ -4235,7 +4241,7 @@
         <childnode refid="340" relation="include">
         </childnode>
       </node>
-      <node id="509">
+      <node id="510">
         <label>Engine/libs/Utils/inc/Utils/TypeTraits/ClassDB.h</label>
         <link refid="ClassDB_8h_source"/>
         <childnode refid="323" relation="include">
@@ -4273,7 +4279,7 @@
         <childnode refid="322" relation="include">
         </childnode>
       </node>
-      <node id="507">
+      <node id="508">
         <label>Engine/libs/Utils/inc/Utils/TypeTraits/PropertyManager.h</label>
         <link refid="PropertyManager_8h_source"/>
       </node>
@@ -4329,10 +4335,10 @@
         <childnode refid="367" relation="include">
         </childnode>
       </node>
-      <node id="514">
+      <node id="515">
         <label>Engine/libs/Utils/inc/Utils/Types/BinarySearchTree.h</label>
         <link refid="BinarySearchTree_8h_source"/>
-        <childnode refid="515" relation="include">
+        <childnode refid="516" relation="include">
         </childnode>
       </node>
       <node id="436">
@@ -4355,7 +4361,7 @@
         <label>Engine/libs/Utils/inc/Utils/Types/EDMarshal.h</label>
         <link refid="EDMarshal_8h_source"/>
       </node>
-      <node id="510">
+      <node id="511">
         <label>Engine/libs/Utils/inc/Utils/Types/FastMemoryArray.h</label>
         <link refid="FastMemoryArray_8h_source"/>
         <childnode refid="159" relation="include">
@@ -4385,17 +4391,17 @@
         <childnode refid="111" relation="include">
         </childnode>
       </node>
-      <node id="516">
+      <node id="517">
         <label>Engine/libs/Utils/inc/Utils/Types/LinkedList.h</label>
         <link refid="LinkedList_8h_source"/>
-        <childnode refid="515" relation="include">
+        <childnode refid="516" relation="include">
         </childnode>
       </node>
       <node id="437">
         <label>Engine/libs/Utils/inc/Utils/Types/List.h</label>
         <link refid="List_8h_source"/>
       </node>
-      <node id="511">
+      <node id="512">
         <label>Engine/libs/Utils/inc/Utils/Types/LockGuard.h</label>
         <link refid="LockGuard_8h_source"/>
       </node>
@@ -4425,23 +4431,23 @@
         <childnode refid="401" relation="include">
         </childnode>
       </node>
-      <node id="512">
+      <node id="513">
         <label>Engine/libs/Utils/inc/Utils/Types/Mutex.h</label>
         <link refid="Mutex_8h_source"/>
-        <childnode refid="509" relation="include">
+        <childnode refid="510" relation="include">
         </childnode>
         <childnode refid="440" relation="include">
         </childnode>
       </node>
-      <node id="513">
+      <node id="514">
         <label>Engine/libs/Utils/inc/Utils/Types/Node.h</label>
         <link refid="Utils_2inc_2Utils_2Types_2Node_8h_source"/>
-        <childnode refid="514" relation="include">
+        <childnode refid="515" relation="include">
         </childnode>
-        <childnode refid="516" relation="include">
+        <childnode refid="517" relation="include">
         </childnode>
       </node>
-      <node id="515">
+      <node id="516">
         <label>Engine/libs/Utils/inc/Utils/Types/NodeDictionary.h</label>
         <link refid="NodeDictionary_8h_source"/>
         <childnode refid="385" relation="include">
@@ -4543,7 +4549,7 @@
         <childnode refid="308" relation="include">
         </childnode>
       </node>
-      <node id="517">
+      <node id="518">
         <label>Engine/libs/Utils/inc/Utils/Types/SafePtrLockGuard.h</label>
         <link refid="SafePtrLockGuard_8h_source"/>
         <childnode refid="136" relation="include">

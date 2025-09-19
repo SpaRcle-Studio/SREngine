@@ -41,6 +41,7 @@
     <includedby refid="FileDialog_8h" local="no">Engine/libs/Utils/inc/Utils/FileSystem/FileDialog.h</includedby>
     <includedby refid="InputSystem_8h" local="no">Engine/libs/Utils/inc/Utils/Input/InputSystem.h</includedby>
     <includedby refid="FileDownloader_8h" local="no">Engine/libs/Utils/inc/Utils/Network/FileDownloader.h</includedby>
+    <includedby refid="AndroidEvent_8h" local="no">Engine/libs/Utils/inc/Utils/Platform/AndroidEvent.h</includedby>
     <includedby refid="ResourceManager_8h" local="no">Engine/libs/Utils/inc/Utils/Resources/ResourceManager.h</includedby>
     <includedby refid="LogicalMachine_8h" local="no">Engine/libs/Utils/inc/Utils/SRLM/LogicalMachine.h</includedby>
     <includedby refid="LogicalNodeManager_8h" local="no">Engine/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h</includedby>
@@ -2692,15 +2693,17 @@
         </childnode>
         <childnode refid="487" relation="include">
         </childnode>
+        <childnode refid="488" relation="include">
+        </childnode>
         <childnode refid="320" relation="include">
         </childnode>
         <childnode refid="322" relation="include">
         </childnode>
-        <childnode refid="488" relation="include">
+        <childnode refid="489" relation="include">
         </childnode>
         <childnode refid="370" relation="include">
         </childnode>
-        <childnode refid="489" relation="include">
+        <childnode refid="490" relation="include">
         </childnode>
         <childnode refid="323" relation="include">
         </childnode>
@@ -2712,7 +2715,7 @@
         </childnode>
         <childnode refid="376" relation="include">
         </childnode>
-        <childnode refid="490" relation="include">
+        <childnode refid="491" relation="include">
         </childnode>
         <childnode refid="424" relation="include">
         </childnode>
@@ -3709,6 +3712,10 @@
         <childnode refid="353" relation="include">
         </childnode>
       </node>
+      <node id="488">
+        <label>Engine/libs/Utils/inc/Utils/Platform/AndroidEvent.h</label>
+        <link refid="AndroidEvent_8h_source"/>
+      </node>
       <node id="249">
         <label>Engine/libs/Utils/inc/Utils/Platform/Platform.h</label>
         <link refid="Platform_8h_source"/>
@@ -3939,7 +3946,7 @@
         <childnode refid="417" relation="include">
         </childnode>
       </node>
-      <node id="488">
+      <node id="489">
         <label>Engine/libs/Utils/inc/Utils/SRLM/LogicalNodeManager.h</label>
         <link refid="LogicalNodeManager_8h_source"/>
         <childnode refid="417" relation="include">
@@ -3977,7 +3984,7 @@
         <label>Engine/libs/Utils/inc/Utils/Serialization/IMigrator.h</label>
         <link refid="IMigrator_8h_source"/>
       </node>
-      <node id="489">
+      <node id="490">
         <label>Engine/libs/Utils/inc/Utils/Serialization/MigrationManager.h</label>
         <link refid="MigrationManager_8h_source"/>
       </node>
@@ -4147,7 +4154,7 @@
         <childnode refid="300" relation="include">
         </childnode>
       </node>
-      <node id="490">
+      <node id="491">
         <label>Engine/libs/Utils/inc/Utils/TypeTraits/PropertyManager.h</label>
         <link refid="PropertyManager_8h_source"/>
       </node>

@@ -26,8 +26,9 @@
 * **ALLOWED\_CPP\_MODULE\_EXTENSIONS** ([**SR\_SCRIPTING\_NS::ScriptSystem**](classSR__SCRIPTING__NS_1_1ScriptSystem.md))
 * **attachment** ([**SR\_SRSL\_NS::SRSLSampler**](structSR__SRSL__NS_1_1SRSLSampler.md))
 * **alignedSize** ([**SR\_SRSL\_NS::SRSLUniformBlock::Field**](structSR__SRSL__NS_1_1SRSLUniformBlock_1_1Field.md))
+* **AndroidEvent** ([**SR\_UTILS\_NS::AndroidEvent**](structSR__UTILS__NS_1_1AndroidEvent.md))
+* **action** ([**SR\_UTILS\_NS::AndroidEvent**](structSR__UTILS__NS_1_1AndroidEvent.md), [**SR\_UTILS\_NS::EntityRefUtils::PathItem**](structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem.md))
 * **ACTIVE\_CONTROLLER** ([**SR\_UTILS\_NS::EntityController**](classSR__UTILS__NS_1_1EntityController.md))
-* **action** ([**SR\_UTILS\_NS::EntityRefUtils::PathItem**](structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem.md))
 * **ADDED\_EVENT\_ID** ([**SR\_UTILS\_NS::FileSystemWatcher**](classSR__UTILS__NS_1_1FileSystemWatcher.md))
 * **associativeMap2** ([**SR\_UTILS\_NS::Tests::ReflectionTestComponentAssociative**](structSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentAssociative.md))
 * **associativeMap3** ([**SR\_UTILS\_NS::Tests::ReflectionTestComponentAssociative**](structSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentAssociative.md))
@@ -101,6 +102,7 @@
 * **characterIndex** ([**SR\_SRSL\_NS::SRSLMessage**](structSR__SRSL__NS_1_1SRSLMessage.md))
 * **current** ([**SR\_TYPES\_NS::detail::iterator\_detail::reverse\_iterator**](classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1reverse__iterator.md))
 * **conditional\_value** ([**SR\_TYPES\_NS::detail::verify\_power\_of\_two\_times\_granularity\_one\_sixty\_fourth**](structSR__TYPES__NS_1_1detail_1_1verify__power__of__two__times__granularity__one__sixty__fourth.md), [**SR\_TYPES\_NS::detail::verify\_power\_of\_two**](structSR__TYPES__NS_1_1detail_1_1verify__power__of__two.md))
+* **command** ([**SR\_UTILS\_NS::AndroidEvent**](structSR__UTILS__NS_1_1AndroidEvent.md))
 * **children** ([**SR\_UTILS\_NS::SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md))
 * **callback** ([**SR\_UTILS\_NS::SubscriptionInternalInfo**](classSR__UTILS__NS_1_1SubscriptionInternalInfo.md))
 * **childSize** ([**SR\_UTILS\_NS::UI::UIModifierContext**](structSR__UTILS__NS_1_1UI_1_1UIModifierContext.md))
@@ -345,6 +347,8 @@
 ## k
 
 * **kind** ([**SR\_SRSL\_NS::Lexem**](structSR__SRSL__NS_1_1Lexem.md))
+* **key** ([**SR\_UTILS\_NS::AndroidEvent**](structSR__UTILS__NS_1_1AndroidEvent.md))
+* **keyCode** ([**SR\_UTILS\_NS::AndroidEvent**](structSR__UTILS__NS_1_1AndroidEvent.md))
 
 
 ## l
@@ -365,6 +369,7 @@
 * **line** ([**SR\_SRSL\_NS::LocationEntity**](structSR__SRSL__NS_1_1LocationEntity.md), [**SR\_SRSL\_NS::SRSLMessage**](structSR__SRSL__NS_1_1SRSLMessage.md))
 * **lexicalTree** ([**SR\_SRSL\_NS::SRSLLexicalTree**](classSR__SRSL__NS_1_1SRSLLexicalTree.md))
 * **lexemKind** ([**SR\_SRSL\_NS::SRSLMessage**](structSR__SRSL__NS_1_1SRSLMessage.md))
+* **lifecycle** ([**SR\_UTILS\_NS::AndroidEvent**](structSR__UTILS__NS_1_1AndroidEvent.md))
 * **lockMode** ([**SR\_UTILS\_NS::CursorLockInfo**](structSR__UTILS__NS_1_1CursorLockInfo.md))
 * **lockRect** ([**SR\_UTILS\_NS::CursorLockInfo**](structSR__UTILS__NS_1_1CursorLockInfo.md))
 * **lastWriteTime** ([**SR\_UTILS\_NS::Platform::FileMetadata**](structSR__UTILS__NS_1_1Platform_1_1FileMetadata.md))
@@ -664,7 +669,7 @@
 * **m\_blueprints** ([**SR\_CORE\_NS::GUI::VisualScriptEditor**](classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor.md))
 * **m\_links** ([**SR\_CORE\_NS::GUI::VisualScriptEditor**](classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor.md), [**SR\_GRAPH\_GUI\_NS::NodeWidget**](classSR__GRAPH__GUI__NS_1_1NodeWidget.md), [**SR\_GRAPH\_NS::GUI::Pin**](classSR__GRAPH__NS_1_1GUI_1_1Pin.md))
 * **m\_contextGetter** ([**SR\_CORE\_NS::GraphicsResourceReloader**](classSR__CORE__NS_1_1GraphicsResourceReloader.md))
-* **m\_isInitialized** ([**SR\_CORE\_NS::InitializeState**](classSR__CORE__NS_1_1InitializeState.md), [**SR\_GRAPH\_NS::RenderQueue**](classSR__GRAPH__NS_1_1RenderQueue.md), [**SR\_SCRIPTING\_NS::CppCompiler**](classSR__SCRIPTING__NS_1_1CppCompiler.md), [**SR\_UTILS\_NS::Features**](classSR__UTILS__NS_1_1Features.md), [**SR\_UTILS\_NS::MigrationManager**](classSR__UTILS__NS_1_1MigrationManager.md), [**SR\_WORLD\_NS::Scene**](classSR__WORLD__NS_1_1Scene.md))
+* **m\_isInitialized** ([**SR\_CORE\_NS::InitializeState**](classSR__CORE__NS_1_1InitializeState.md), [**SR\_GRAPH\_NS::BasicWindowImpl**](classSR__GRAPH__NS_1_1BasicWindowImpl.md), [**SR\_GRAPH\_NS::RenderQueue**](classSR__GRAPH__NS_1_1RenderQueue.md), [**SR\_SCRIPTING\_NS::CppCompiler**](classSR__SCRIPTING__NS_1_1CppCompiler.md), [**SR\_UTILS\_NS::Features**](classSR__UTILS__NS_1_1Features.md), [**SR\_UTILS\_NS::MigrationManager**](classSR__UTILS__NS_1_1MigrationManager.md), [**SR\_WORLD\_NS::Scene**](classSR__WORLD__NS_1_1Scene.md))
 * **m\_loadMesh** ([**SR\_CORE\_NS::VisualChunk**](classSR__CORE__NS_1_1VisualChunk.md))
 * **m\_stayMesh** ([**SR\_CORE\_NS::VisualChunk**](classSR__CORE__NS_1_1VisualChunk.md))
 * **m\_mesh** ([**SR\_CORE\_NS::VisualRegion**](classSR__CORE__NS_1_1VisualRegion.md))
@@ -1436,6 +1441,8 @@
 * **my\_mantissa\_part** ([**SR\_TYPES\_NS::detail::native\_float\_parts**](classSR__TYPES__NS_1_1detail_1_1native__float__parts.md))
 * **my\_width2** ([**SR\_TYPES\_NS::uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md))
 * **my\_params** ([**SR\_TYPES\_NS::uniform\_int\_distribution**](classSR__TYPES__NS_1_1uniform__int__distribution.md))
+* **motion** ([**SR\_UTILS\_NS::AndroidEvent**](structSR__UTILS__NS_1_1AndroidEvent.md))
+* **m\_events** ([**SR\_UTILS\_NS::AndroidEventQueue**](classSR__UTILS__NS_1_1AndroidEventQueue.md), [**SR\_UTILS\_NS::EventDispatcher**](classSR__UTILS__NS_1_1EventDispatcher.md), [**SR\_UTILS\_NS::FileSystemWatcher**](classSR__UTILS__NS_1_1FileSystemWatcher.md))
 * **m\_addElement** ([**SR\_UTILS\_NS::ArrayReferenceProperty**](classSR__UTILS__NS_1_1ArrayReferenceProperty.md))
 * **m\_isProperty** ([**SR\_UTILS\_NS::ArrayReferenceProperty**](classSR__UTILS__NS_1_1ArrayReferenceProperty.md))
 * **m\_loadArray** ([**SR\_UTILS\_NS::ArrayReferenceProperty**](classSR__UTILS__NS_1_1ArrayReferenceProperty.md))
@@ -1494,7 +1501,6 @@
 * **m\_enumVariant** ([**SR\_UTILS\_NS::EnumReflector**](classSR__UTILS__NS_1_1EnumReflector.md))
 * **m\_integralTypeSize** ([**SR\_UTILS\_NS::EnumReflector**](classSR__UTILS__NS_1_1EnumReflector.md))
 * **m\_reflectors** ([**SR\_UTILS\_NS::EnumReflectorManager**](classSR__UTILS__NS_1_1EnumReflectorManager.md))
-* **m\_events** ([**SR\_UTILS\_NS::EventDispatcher**](classSR__UTILS__NS_1_1EventDispatcher.md), [**SR\_UTILS\_NS::FileSystemWatcher**](classSR__UTILS__NS_1_1FileSystemWatcher.md))
 * **m\_subscriptions** ([**SR\_UTILS\_NS::EventManager**](classSR__UTILS__NS_1_1EventManager.md), [**SR\_UTILS\_NS::SubscriptionHolder**](classSR__UTILS__NS_1_1SubscriptionHolder.md))
 * **MODIFIED\_EVENT\_ID** ([**SR\_UTILS\_NS::FileSystemWatcher**](classSR__UTILS__NS_1_1FileSystemWatcher.md))
 * **MOVED\_EVENT\_ID** ([**SR\_UTILS\_NS::FileSystemWatcher**](classSR__UTILS__NS_1_1FileSystemWatcher.md))
@@ -1884,6 +1890,7 @@
 * **processedLexems** ([**SR\_SRSL\_NS::SRSLResult**](structSR__SRSL__NS_1_1SRSLResult.md))
 * **param\_a** ([**SR\_TYPES\_NS::uniform\_int\_distribution::param\_type**](structSR__TYPES__NS_1_1uniform__int__distribution_1_1param__type.md))
 * **param\_b** ([**SR\_TYPES\_NS::uniform\_int\_distribution::param\_type**](structSR__TYPES__NS_1_1uniform__int__distribution_1_1param__type.md))
+* **pointerId** ([**SR\_UTILS\_NS::AndroidEvent**](structSR__UTILS__NS_1_1AndroidEvent.md))
 * **pInherits** ([**SR\_UTILS\_NS::ClassInfo**](structSR__UTILS__NS_1_1ClassInfo.md))
 * **pHandler** ([**SR\_UTILS\_NS::CollisionData**](structSR__UTILS__NS_1_1CollisionData.md), [**SR\_UTILS\_NS::RaycastHit**](structSR__UTILS__NS_1_1RaycastHit.md))
 * **point** ([**SR\_UTILS\_NS::CollisionData**](structSR__UTILS__NS_1_1CollisionData.md))
@@ -1980,6 +1987,8 @@
 * **sourceFiles** ([**SR\_SCRIPTING\_NS::CppCompilerContext**](structSR__SCRIPTING__NS_1_1CppCompilerContext.md))
 * **ShaderCache** ([**SR\_SRSL\_NS::SRSLShader**](classSR__SRSL__NS_1_1SRSLShader.md))
 * **static\_size** ([**SR\_TYPES\_NS::detail::array\_detail::array**](classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array.md))
+* **sensor** ([**SR\_UTILS\_NS::AndroidEvent**](structSR__UTILS__NS_1_1AndroidEvent.md))
+* **sensorEvent** ([**SR\_UTILS\_NS::AndroidEvent**](structSR__UTILS__NS_1_1AndroidEvent.md))
 * **str** ([**SR\_UTILS\_NS::ConstexprStringHashEntry**](structSR__UTILS__NS_1_1ConstexprStringHashEntry.md))
 * **SRASerializer** ([**SR\_UTILS\_NS::SRADeserializer**](classSR__UTILS__NS_1_1SRADeserializer.md))
 * **string** ([**SR\_UTILS\_NS::SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md))
@@ -1995,7 +2004,7 @@
 * **TYPE\_ID** ([**ObjectDataAccessor&lt; SR\_HTYPES\_NS::SharedPtr&lt; T &gt;, std::enable\_if\_t&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt; &gt;**](structObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_32bd86362c60b521e671c70984ad6674.md))
 * **translation** ([**SR\_ANIMATIONS\_NS::AnimationGameObjectData**](structSR__ANIMATIONS__NS_1_1AnimationGameObjectData.md), [**SR\_ANIMATIONS\_NS::TranslationKey**](structSR__ANIMATIONS__NS_1_1TranslationKey.md))
 * **time** ([**SR\_ANIMATIONS\_NS::UnionAnimationKey**](structSR__ANIMATIONS__NS_1_1UnionAnimationKey.md), [**SR\_GRAPH\_NS::MeshDrawerSharedUniforms**](structSR__GRAPH__NS_1_1MeshDrawerSharedUniforms.md))
-* **type** ([**SR\_ANIMATIONS\_NS::UnionAnimationKey**](structSR__ANIMATIONS__NS_1_1UnionAnimationKey.md), [**SR\_GRAPH\_NS::DebugRenderer::DrawInfo**](structSR__GRAPH__NS_1_1DebugRenderer_1_1DrawInfo.md), [**SR\_GRAPH\_NS::MaterialShaderProperty**](structSR__GRAPH__NS_1_1MaterialShaderProperty.md), [**SR\_GRAPH\_NS::Uniform**](structSR__GRAPH__NS_1_1Uniform.md), [**SR\_GRAPH\_NS::PostProcessPass::Property**](structSR__GRAPH__NS_1_1PostProcessPass_1_1Property.md), [**SR\_NETWORK\_NS::P2PAnnounceHeader**](structSR__NETWORK__NS_1_1P2PAnnounceHeader.md), [**SR\_NETWORK\_NS::P2PConnectionHeader**](structSR__NETWORK__NS_1_1P2PConnectionHeader.md), [**SR\_NETWORK\_NS::P2PDisconnectionHeader**](structSR__NETWORK__NS_1_1P2PDisconnectionHeader.md), [**SR\_NETWORK\_NS::P2PKnownHostHeader**](structSR__NETWORK__NS_1_1P2PKnownHostHeader.md), [**SR\_NETWORK\_NS::P2PKnownHostsListInfoHeader**](structSR__NETWORK__NS_1_1P2PKnownHostsListInfoHeader.md), [**SR\_SRSL\_NS::SRSLSampler**](structSR__SRSL__NS_1_1SRSLSampler.md), [**SR\_SRSL\_NS::SRSLUniformBlock::Field**](structSR__SRSL__NS_1_1SRSLUniformBlock_1_1Field.md), [**SR\_UTILS\_NS::FileSystemWatcher::Event**](structSR__UTILS__NS_1_1FileSystemWatcher_1_1Event.md), [**SR\_UTILS\_NS::SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md), [**SR\_UTILS\_NS::Web::CSSDirection**](structSR__UTILS__NS_1_1Web_1_1CSSDirection.md), [**SR\_UTILS\_NS::SRPropertyVariant::Object**](structSR__UTILS__NS_1_1SRPropertyVariant_1_1Object.md), [**SR\_UTILS\_NS::StoreUtils::Storage::ValueHolder**](structSR__UTILS__NS_1_1StoreUtils_1_1Storage_1_1ValueHolder.md))
+* **type** ([**SR\_ANIMATIONS\_NS::UnionAnimationKey**](structSR__ANIMATIONS__NS_1_1UnionAnimationKey.md), [**SR\_GRAPH\_NS::DebugRenderer::DrawInfo**](structSR__GRAPH__NS_1_1DebugRenderer_1_1DrawInfo.md), [**SR\_GRAPH\_NS::MaterialShaderProperty**](structSR__GRAPH__NS_1_1MaterialShaderProperty.md), [**SR\_GRAPH\_NS::Uniform**](structSR__GRAPH__NS_1_1Uniform.md), [**SR\_GRAPH\_NS::PostProcessPass::Property**](structSR__GRAPH__NS_1_1PostProcessPass_1_1Property.md), [**SR\_NETWORK\_NS::P2PAnnounceHeader**](structSR__NETWORK__NS_1_1P2PAnnounceHeader.md), [**SR\_NETWORK\_NS::P2PConnectionHeader**](structSR__NETWORK__NS_1_1P2PConnectionHeader.md), [**SR\_NETWORK\_NS::P2PDisconnectionHeader**](structSR__NETWORK__NS_1_1P2PDisconnectionHeader.md), [**SR\_NETWORK\_NS::P2PKnownHostHeader**](structSR__NETWORK__NS_1_1P2PKnownHostHeader.md), [**SR\_NETWORK\_NS::P2PKnownHostsListInfoHeader**](structSR__NETWORK__NS_1_1P2PKnownHostsListInfoHeader.md), [**SR\_SRSL\_NS::SRSLSampler**](structSR__SRSL__NS_1_1SRSLSampler.md), [**SR\_SRSL\_NS::SRSLUniformBlock::Field**](structSR__SRSL__NS_1_1SRSLUniformBlock_1_1Field.md), [**SR\_UTILS\_NS::AndroidEvent**](structSR__UTILS__NS_1_1AndroidEvent.md), [**SR\_UTILS\_NS::FileSystemWatcher::Event**](structSR__UTILS__NS_1_1FileSystemWatcher_1_1Event.md), [**SR\_UTILS\_NS::SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md), [**SR\_UTILS\_NS::Web::CSSDirection**](structSR__UTILS__NS_1_1Web_1_1CSSDirection.md), [**SR\_UTILS\_NS::SRPropertyVariant::Object**](structSR__UTILS__NS_1_1SRPropertyVariant_1_1Object.md), [**SR\_UTILS\_NS::StoreUtils::Storage::ValueHolder**](structSR__UTILS__NS_1_1StoreUtils_1_1Storage_1_1ValueHolder.md))
 * **tolerance** ([**SR\_ANIMATIONS\_NS::UpdateContext**](structSR__ANIMATIONS__NS_1_1UpdateContext.md))
 * **texture** ([**SR\_GRAPH\_NS::ColorLayer**](structSR__GRAPH__NS_1_1ColorLayer.md), [**SR\_GRAPH\_NS::DepthLayer**](structSR__GRAPH__NS_1_1DepthLayer.md))
 * **topFace** ([**SR\_GRAPH\_NS::Frustum**](structSR__GRAPH__NS_1_1Frustum.md))
@@ -2097,20 +2106,21 @@
 * **walk\_stack** ([**SR\_HTYPES\_NS::TreeT**](classSR__HTYPES__NS_1_1TreeT.md))
 * **wh** ([**SR\_MATH\_NS::Rect**](structSR__MATH__NS_1_1Rect.md))
 * **warnings** ([**SR\_SRSL\_NS::SRSLResult**](structSR__SRSL__NS_1_1SRSLResult.md))
+* **window** ([**SR\_UTILS\_NS::AndroidEvent**](structSR__UTILS__NS_1_1AndroidEvent.md), [**android\_app**](structandroid__app.md))
+* **windowEvent** ([**SR\_UTILS\_NS::AndroidEvent**](structSR__UTILS__NS_1_1AndroidEvent.md))
 * **weightsNum** ([**SR\_UTILS\_NS::Vertex**](structSR__UTILS__NS_1_1Vertex.md))
-* **window** ([**android\_app**](structandroid__app.md))
 
 
 ## x
 
-* **x** ([**SR\_MATH\_NS::FColor**](classSR__MATH__NS_1_1FColor.md), [**SR\_MATH\_NS::Quaternion**](classSR__MATH__NS_1_1Quaternion.md), [**SR\_MATH\_NS::Rect**](structSR__MATH__NS_1_1Rect.md), [**SR\_MATH\_NS::Vector2**](structSR__MATH__NS_1_1Vector2.md), [**SR\_MATH\_NS::Vector3**](structSR__MATH__NS_1_1Vector3.md), [**SR\_MATH\_NS::Vector4**](structSR__MATH__NS_1_1Vector4.md), [**SR\_MATH\_NS::Vector6**](structSR__MATH__NS_1_1Vector6.md), [**SR\_UTILS\_NS::Vec2**](structSR__UTILS__NS_1_1Vec2.md), [**SR\_UTILS\_NS::Vec3**](structSR__UTILS__NS_1_1Vec3.md), [**SR\_UTILS\_NS::AnyVisitor::accum**](structSR__UTILS__NS_1_1AnyVisitor_1_1accum.md))
+* **x** ([**SR\_MATH\_NS::FColor**](classSR__MATH__NS_1_1FColor.md), [**SR\_MATH\_NS::Quaternion**](classSR__MATH__NS_1_1Quaternion.md), [**SR\_MATH\_NS::Rect**](structSR__MATH__NS_1_1Rect.md), [**SR\_MATH\_NS::Vector2**](structSR__MATH__NS_1_1Vector2.md), [**SR\_MATH\_NS::Vector3**](structSR__MATH__NS_1_1Vector3.md), [**SR\_MATH\_NS::Vector4**](structSR__MATH__NS_1_1Vector4.md), [**SR\_MATH\_NS::Vector6**](structSR__MATH__NS_1_1Vector6.md), [**SR\_UTILS\_NS::AndroidEvent**](structSR__UTILS__NS_1_1AndroidEvent.md), [**SR\_UTILS\_NS::Vec2**](structSR__UTILS__NS_1_1Vec2.md), [**SR\_UTILS\_NS::Vec3**](structSR__UTILS__NS_1_1Vec3.md), [**SR\_UTILS\_NS::AnyVisitor::accum**](structSR__UTILS__NS_1_1AnyVisitor_1_1accum.md))
 * **xy** ([**SR\_MATH\_NS::Rect**](structSR__MATH__NS_1_1Rect.md))
 * **xSizeChangable** ([**SR\_UTILS\_NS::UI::UIModifierContext**](structSR__UTILS__NS_1_1UI_1_1UIModifierContext.md))
 
 
 ## y
 
-* **y** ([**SR\_MATH\_NS::FColor**](classSR__MATH__NS_1_1FColor.md), [**SR\_MATH\_NS::Quaternion**](classSR__MATH__NS_1_1Quaternion.md), [**SR\_MATH\_NS::Rect**](structSR__MATH__NS_1_1Rect.md), [**SR\_MATH\_NS::Vector2**](structSR__MATH__NS_1_1Vector2.md), [**SR\_MATH\_NS::Vector3**](structSR__MATH__NS_1_1Vector3.md), [**SR\_MATH\_NS::Vector4**](structSR__MATH__NS_1_1Vector4.md), [**SR\_MATH\_NS::Vector6**](structSR__MATH__NS_1_1Vector6.md), [**SR\_UTILS\_NS::Vec2**](structSR__UTILS__NS_1_1Vec2.md), [**SR\_UTILS\_NS::Vec3**](structSR__UTILS__NS_1_1Vec3.md))
+* **y** ([**SR\_MATH\_NS::FColor**](classSR__MATH__NS_1_1FColor.md), [**SR\_MATH\_NS::Quaternion**](classSR__MATH__NS_1_1Quaternion.md), [**SR\_MATH\_NS::Rect**](structSR__MATH__NS_1_1Rect.md), [**SR\_MATH\_NS::Vector2**](structSR__MATH__NS_1_1Vector2.md), [**SR\_MATH\_NS::Vector3**](structSR__MATH__NS_1_1Vector3.md), [**SR\_MATH\_NS::Vector4**](structSR__MATH__NS_1_1Vector4.md), [**SR\_MATH\_NS::Vector6**](structSR__MATH__NS_1_1Vector6.md), [**SR\_UTILS\_NS::AndroidEvent**](structSR__UTILS__NS_1_1AndroidEvent.md), [**SR\_UTILS\_NS::Vec2**](structSR__UTILS__NS_1_1Vec2.md), [**SR\_UTILS\_NS::Vec3**](structSR__UTILS__NS_1_1Vec3.md))
 * **ySizeChangable** ([**SR\_UTILS\_NS::UI::UIModifierContext**](structSR__UTILS__NS_1_1UI_1_1UIModifierContext.md))
 
 

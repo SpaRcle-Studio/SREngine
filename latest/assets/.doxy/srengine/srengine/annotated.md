@@ -777,6 +777,8 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**uniform\_int\_distribution**](classSR__TYPES__NS_1_1uniform__int__distribution.md)     
     * **struct** [**param\_type**](structSR__TYPES__NS_1_1uniform__int__distribution_1_1param__type.md)     
 * **namespace** [**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md)     
+    * **struct** [**AndroidEvent**](structSR__UTILS__NS_1_1AndroidEvent.md)     
+    * **class** [**AndroidEventQueue**](classSR__UTILS__NS_1_1AndroidEventQueue.md)     
     * **struct** [**AnyVisitor**](structSR__UTILS__NS_1_1AnyVisitor.md)     
     * **struct** [**AnyVisitor&lt;&gt;**](structSR__UTILS__NS_1_1AnyVisitor_3_4.md)     
     * **class** [**ArrayReferenceProperty**](classSR__UTILS__NS_1_1ArrayReferenceProperty.md) _---------------------------------------_  __[_**ArrayReferenceProperty**_](classSR__UTILS__NS_1_1ArrayReferenceProperty.md) _-------------------------------------------_ __    

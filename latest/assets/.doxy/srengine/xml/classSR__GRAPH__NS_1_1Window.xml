@@ -613,6 +613,7 @@
         <templateparamlist>
           <param>
             <type>typename T</type>
+            <defval><ref refid="classSR__GRAPH__NS_1_1BasicWindowImpl" kindref="compound">BasicWindowImpl</ref></defval>
           </param>
         </templateparamlist>
         <type>SR_NODISCARD T *</type>
@@ -626,7 +627,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Window/Window.h" line="75" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="75" bodyend="77"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Window/Window.h" line="75" column="37" bodyfile="Engine/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="75" bodyend="77"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

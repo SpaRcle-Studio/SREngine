@@ -320,9 +320,9 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="162" column="30" bodyfile="Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="162" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1a93e3dcbb3840d3d9e656e943d43bddf1" prot="private" static="no" mutable="no">
-        <type>std::bitset&lt; 8 &gt;</type>
-        <definition>std::bitset&lt;8&gt; SR_GRAPH_NS::RenderScene::m_dirtyFrames</definition>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1a98f3d86ff68d40e291649c96a17acc20" prot="private" static="no" mutable="no">
+        <type>std::bitset&lt; 16 &gt;</type>
+        <definition>std::bitset&lt;16&gt; SR_GRAPH_NS::RenderScene::m_dirtyFrames</definition>
         <argsstring></argsstring>
         <name>m_dirtyFrames</name>
         <qualifiedname>SR_GRAPH_NS::RenderScene::m_dirtyFrames</qualifiedname>
@@ -1295,7 +1295,7 @@
       <member refid="classSR__GRAPH__NS_1_1RenderScene_1ab016ef3674be127d8a89f947da18a23e" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_currentSkeleton</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_data</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderScene_1ae8da7095781445381953044727c94ce4" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_dirtyCameras</name></member>
-      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a93e3dcbb3840d3d9e656e943d43bddf1" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_dirtyFrames</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a98f3d86ff68d40e291649c96a17acc20" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_dirtyFrames</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderScene_1a60b60be589395e5deec8cf6f544fa6bd" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_editorCameras</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderScene_1a8c8695adce7f13ba86593830df9b1643" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_hasDrawData</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderScene_1ab766bf5727248ef4f245144c9911a982" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_lightSystem</name></member>

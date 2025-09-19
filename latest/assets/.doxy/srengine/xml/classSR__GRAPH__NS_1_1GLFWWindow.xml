@@ -346,6 +346,7 @@
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a8bda25c6d5f223d39f984783ecb339db" prot="public" virt="virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>IsFocused</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a947133acc9ef1ea40f798aeaf7734072" prot="public" virt="virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>IsFullScreen</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a4f82ad908dbb3b7b736c9117201de5c8" prot="public" virt="virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>IsHeaderEnabled</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1ada0abf0d00fd86a8d9c9e616bfb4dba6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>IsInitialized</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a102db6e9f4d28cddd71ce0470efe6fa5" prot="public" virt="virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>IsMaximized</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a6da7b3514a3098f675e31fca805b3cc8" prot="public" virt="virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>IsValid</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a69f19c0a01c9ad3b4c908be9f4c04f65" prot="public" virt="virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>IsVisible</name></member>
@@ -354,10 +355,11 @@
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1afa3f5867894b46617b4cb552723908e0" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>m_drawCallback</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a8fbeb8ad6892b0a7e1c634df1f7b07a7" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>m_focusCallback</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a98ae4d7c48b90ac3676ccc263cbe6fd7" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>m_headerEnabled</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a47645e76755ec95d1a18df857f79285e" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>m_isClosed</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a145ac9a5b48df4ec17e17eae23d8ac5e" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>m_isClosed</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a9ea99c4a491837453d12024e41f2d967" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>m_isFocused</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a47b78c9d9cdf4402bd7e8bf58b3ad64b" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>m_isInitialized</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1af66e8340bd1b735814c7703ecc1900f2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>m_isResizable</name></member>
-      <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a1f3602de7d5fc6e0b583c4b168aa4264" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>m_isValid</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1add6b74c5f84034774587caf7a1cd2fce" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>m_isValid</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1af00eb8823d8cb0971b2681eca5d9d1a9" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>m_maximize</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a13f95061d9738f44b52d17e957f2b8e5" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>m_moveCallback</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1aa2283172ffe549b680599aa7d1037086" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>m_position</name></member>

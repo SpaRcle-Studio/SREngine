@@ -111,6 +111,7 @@ namespace SR_UTILS_NS::Platform {
     SR_COMMON_DLL_API extern void SetThreadPriority(void* nativeHandle, ThreadPriority priority);
     SR_COMMON_DLL_API extern void CopyPermissions(const SR_UTILS_NS::Path& source, const SR_UTILS_NS::Path& destination);
 }
+
 #endif //SR_ENGINE_UTILS_PLATFORM_H
 ```
 

@@ -170,7 +170,7 @@ namespace SR_GRAPH_NS {
 
         SR_MATH_NS::UVector2 m_surfaceSize;
 
-        std::bitset<8> m_dirtyFrames;
+        std::bitset<16> m_dirtyFrames;
 
         bool m_dirtyCameras = true;
         bool m_hasDrawData  = false;
