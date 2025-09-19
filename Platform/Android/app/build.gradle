@@ -22,9 +22,12 @@ try {
 }
 
 def hasPhysical = adbOutput.readLines().any { line ->
-    line.contains("device") &&
-            !line.contains("emulator-") &&
-            !line.contains("sdk_gphone")
+    line = line.trim()
+    if (line.isEmpty()) return false
+    def parts = line.split(/\s+/)
+    // Проверяем, что это устройство в состоянии "device" и не эмулятор
+    parts.size() > 1 && parts[1] == "device" &&
+            !parts[0].startsWith("emulator-") && !parts[0].contains("sdk_gphone")
 }
 
 println "Devices: ${adbOutput}"

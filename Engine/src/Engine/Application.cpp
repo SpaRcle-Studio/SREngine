@@ -179,7 +179,7 @@ namespace SR_CORE_NS {
 
         while (!hasErrors) {
             SR_TRACY_ZONE;
-            SR_PLATFORM_NS::Sleep(50);
+            //SR_PLATFORM_NS::Sleep(50);
 
             if (m_isNeedReload) {
                 Close();

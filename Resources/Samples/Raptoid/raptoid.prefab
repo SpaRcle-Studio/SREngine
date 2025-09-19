@@ -1934,24 +1934,6 @@ use tabs: true
 							7-i:3520227093907133592
 						6-v:mass
 							7-f:7.25
-						6-o:center
-							7-v:y
-								8-f:0.779999971
-							7-v:z
-								8-f:-0.200000003
-						6-o:shape
-							7-v:type
-								8-s:CollisionShape
-							7-o:ptr
-								8-v:type
-									9-s:Box3D
-								8-o:bounds
-									9-v:x
-										10-f:0.49000001
-									9-v:y
-										10-f:0.769999981
-									9-v:z
-										10-f:0.829999983
 						6-o:angularLock
 							7-v:x
 								8-b:true
