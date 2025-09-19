@@ -1,22 +1,33 @@
-set APK_FOLDER=app/build/outputs/apk/release
-set APK_UNSIGNED_FILE=%APK_FOLDER%/app-release-unsigned.apk
-set APK_SIGNED_FILE=%APK_FOLDER%/app-release-signed.apk
-set PLATFORM_TOOLS=platform-tools
+@echo off
+setlocal enabledelayedexpansion
 
-IF NOT EXIST "key.keystore" (
-	echo Create key.keystore
-	"%PLATFORM_TOOLS%/keytool.exe" -noprompt -genkey -v -keystore key.keystore -alias android -keyalg RSA -keysize 2048 -validity 20000
-) 
+set "APK_FOLDER=app/build/outputs/apk/release"
+set "PLATFORM_TOOLS=platform-tools"
+set "KEYSTORE=key.keystore"
+set "KEY_ALIAS=android"
+set "KEY_PASS=123456"
 
-echo Build application
+REM Создаём keystore если не существует
+IF NOT EXIST "%KEYSTORE%" (
+    echo Creating keystore...
+    "%PLATFORM_TOOLS%/keytool.exe" -noprompt -genkey -v -keystore "%KEYSTORE%" -alias "%KEY_ALIAS%" -keyalg RSA -keysize 2048 -validity 20000 -storepass %KEY_PASS% -keypass %KEY_PASS%
+)
 
-"%PLATFORM_TOOLS%/jarsigner.exe" -storepass 123456 -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore key.keystore "%APK_UNSIGNED_FILE%" android
-"%PLATFORM_TOOLS%/jarsigner.exe" -verify "%APK_UNSIGNED_FILE%"
+REM Проходим по всем APK в папке
+for %%F in ("%APK_FOLDER%\*-unsigned.apk") do (
+    set "APK_UNSIGNED=%%F"
+    set "APK_BASE=%%~nF"
+    set "APK_SIGNED=%APK_FOLDER%\!APK_BASE:-unsigned=!.apk"
 
-echo Zip align apk...
+    echo Signing !APK_UNSIGNED! ...
 
-"%PLATFORM_TOOLS%/zipalign.exe" -v 4 "%APK_UNSIGNED_FILE%" "%APK_SIGNED_FILE%"
+    REM Zipalign
+    "%PLATFORM_TOOLS%/zipalign.exe" -v 4 "!APK_UNSIGNED!" "!APK_SIGNED!"
 
-echo Apk signing...
+    REM Подписываем через apksigner
+    java -jar "%PLATFORM_TOOLS%/apksigner.jar" sign --ks "%KEYSTORE%" --ks-pass pass:%KEY_PASS% --key-pass pass:%KEY_PASS% --ks-key-alias "%KEY_ALIAS%" "!APK_SIGNED!"
 
-echo 123456|"java.exe" -jar "%PLATFORM_TOOLS%/apksigner.jar" sign --ks key.keystore --ks-key-alias android "%APK_SIGNED_FILE%"
+    echo Done: !APK_SIGNED!
+)
+
+echo All APKs signed.
