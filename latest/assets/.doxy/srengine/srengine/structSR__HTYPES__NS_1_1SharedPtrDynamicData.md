@@ -37,9 +37,9 @@
 | ---: | :--- |
 |  bool | [**deallocated**](#variable-deallocated)   = `false`<br> |
 |  SR\_UTILS\_NS::SharedPtrPolicy | [**policy**](#variable-policy)   = `SR\_UTILS\_NS::SharedPtrPolicy::Automatic`<br> |
-|  std::atomic&lt; uint16\_t &gt; | [**strongCount**](#variable-strongcount)   = `0`<br> |
+|  std::atomic&lt; uint64\_t &gt; | [**strongCount**](#variable-strongcount)   = `0`<br> |
 |  bool | [**valid**](#variable-valid)   = `false`<br> |
-|  std::atomic&lt; uint16\_t &gt; | [**weakCount**](#variable-weakcount)   = `0`<br> |
+|  std::atomic&lt; uint64\_t &gt; | [**weakCount**](#variable-weakcount)   = `0`<br> |
 
 
 
@@ -62,9 +62,9 @@
 | ---: | :--- |
 |  void | [**DecrementStrong**](#function-decrementstrong) () <br> |
 |  SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetDebugTrace**](#function-getdebugtrace) () const<br> |
-|  SR\_NODISCARD uint16\_t | [**GetStrongCount**](#function-getstrongcount) () const<br> |
+|  SR\_NODISCARD uint64\_t | [**GetStrongCount**](#function-getstrongcount) () const<br> |
 |  void | [**IncrementStrong**](#function-incrementstrong) () <br> |
-|   | [**SharedPtrDynamicData**](#function-sharedptrdynamicdata) (uint16\_t strongCount, uint16\_t weakCount, bool valid, SR\_UTILS\_NS::SharedPtrPolicy policy) <br> |
+|   | [**SharedPtrDynamicData**](#function-sharedptrdynamicdata) (uint64\_t strongCount, uint64\_t weakCount, bool valid, SR\_UTILS\_NS::SharedPtrPolicy policy) <br> |
 |   | [**~SharedPtrDynamicData**](#function-sharedptrdynamicdata) () <br> |
 
 
@@ -128,7 +128,7 @@ SR_UTILS_NS::SharedPtrPolicy SR_HTYPES_NS::SharedPtrDynamicData::policy;
 ### variable strongCount 
 
 ```C++
-std::atomic<uint16_t> SR_HTYPES_NS::SharedPtrDynamicData::strongCount;
+std::atomic<uint64_t> SR_HTYPES_NS::SharedPtrDynamicData::strongCount;
 ```
 
 
@@ -154,7 +154,7 @@ bool SR_HTYPES_NS::SharedPtrDynamicData::valid;
 ### variable weakCount 
 
 ```C++
-std::atomic<uint16_t> SR_HTYPES_NS::SharedPtrDynamicData::weakCount;
+std::atomic<uint64_t> SR_HTYPES_NS::SharedPtrDynamicData::weakCount;
 ```
 
 
@@ -195,7 +195,7 @@ inline SR_NODISCARD SR_UTILS_NS::StringAtom SR_HTYPES_NS::SharedPtrDynamicData::
 ### function GetStrongCount 
 
 ```C++
-inline SR_NODISCARD uint16_t SR_HTYPES_NS::SharedPtrDynamicData::GetStrongCount () const
+inline SR_NODISCARD uint64_t SR_HTYPES_NS::SharedPtrDynamicData::GetStrongCount () const
 ```
 
 
@@ -222,8 +222,8 @@ inline void SR_HTYPES_NS::SharedPtrDynamicData::IncrementStrong ()
 
 ```C++
 inline SR_HTYPES_NS::SharedPtrDynamicData::SharedPtrDynamicData (
-    uint16_t strongCount,
-    uint16_t weakCount,
+    uint64_t strongCount,
+    uint64_t weakCount,
     bool valid,
     SR_UTILS_NS::SharedPtrPolicy policy
 ) 

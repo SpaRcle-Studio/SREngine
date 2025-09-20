@@ -3262,7 +3262,7 @@
     <member refid="classSR__CORE__NS_1_1Engine_1a0ac071e93869c1bd49d2cf5dbed0bc14" kind="function"><name>LoadStartupScene</name></member>
     <member refid="classSR__CORE__NS_1_1Engine_1a6382d281e4a1169fd4fd816f04f41b02" kind="function"><name>AddWindow</name></member>
     <member refid="classSR__CORE__NS_1_1Engine_1ad3907eb36de4cca5814134551bff4d2a" kind="function"><name>HasSceneInQueue</name></member>
-    <member refid="classSR__CORE__NS_1_1Engine_1a7651c71af7d7e9232b25b1441a0794ea" kind="function"><name>GetScene</name></member>
+    <member refid="classSR__CORE__NS_1_1Engine_1a4d5af38f5b62202686e3f5a6c10f633c" kind="function"><name>GetScene</name></member>
     <member refid="classSR__CORE__NS_1_1Engine_1a05e89bd57c2031b5d5096b9d23c0dd24" kind="function"><name>GetRenderContext</name></member>
     <member refid="classSR__CORE__NS_1_1Engine_1aa1a15b456dc6d0bee303f40598c27471" kind="function"><name>GetRenderScene</name></member>
     <member refid="classSR__CORE__NS_1_1Engine_1af6dd62cc7d5218dfab264b7b1814b09a" kind="function"><name>GetPhysicsScene</name></member>
@@ -10537,15 +10537,15 @@
     <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a642ded2e25bdb37a68410a7497993ae1" kind="function"><name>SetPointerFromBase</name></member>
   </compound>
   <compound refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData" kind="struct"><name>SR_HTYPES_NS::SharedPtrDynamicData</name>
-    <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a849b8cfc69de84ef8dbaa2baa746b13c" kind="variable"><name>strongCount</name></member>
-    <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a589b1cae236b7f2a03e03a2a26a3ac5b" kind="variable"><name>weakCount</name></member>
+    <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a156d755e156e717462dc5f69414b87b2" kind="variable"><name>strongCount</name></member>
+    <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a8251bffd3861f73cc35fc80840d88187" kind="variable"><name>weakCount</name></member>
     <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a8cffdfea7aa99fe9be9d2ebbd64f9752" kind="variable"><name>valid</name></member>
     <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a0b7857f246571b22541bc4c96ac22649" kind="variable"><name>deallocated</name></member>
     <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1acc433e8736ab15ef769894164521fe69" kind="variable"><name>policy</name></member>
-    <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1ac20a0c56189b0c39c80bd538e828ed9c" kind="function"><name>SharedPtrDynamicData</name></member>
+    <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1ad9db0b0375c16bb5840a046357ba8332" kind="function"><name>SharedPtrDynamicData</name></member>
     <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1ab55eceecd5cfda804f3575f2c72ae46e" kind="function"><name>~SharedPtrDynamicData</name></member>
     <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1ab6ac3d1692ff45ea4909ff191bc4a45e" kind="function"><name>GetDebugTrace</name></member>
-    <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a290520c4e55e26ab8b130132b627ca74" kind="function"><name>GetStrongCount</name></member>
+    <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1a6d7e62f5a1e251edb9115ed140ef5577" kind="function"><name>GetStrongCount</name></member>
     <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1abb6c1e4a4fa28365ef156ace4fd67e0d" kind="function"><name>IncrementStrong</name></member>
     <member refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData_1af7effed899c43f643e0912a0305b3745" kind="function"><name>DecrementStrong</name></member>
   </compound>

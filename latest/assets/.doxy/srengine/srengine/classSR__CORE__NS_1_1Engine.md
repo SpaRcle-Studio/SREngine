@@ -118,7 +118,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  SR\_NODISCARD const PhysicsScenePtr & | [**GetPhysicsScene**](#function-getphysicsscene) () const<br> |
 |  SR\_NODISCARD const RenderContextPtr & | [**GetRenderContext**](#function-getrendercontext) () const<br> |
 |  SR\_NODISCARD const RenderScenePtr & | [**GetRenderScene**](#function-getrenderscene) () const<br> |
-|  SR\_NODISCARD ScenePtr | [**GetScene**](#function-getscene) () const<br> |
+|  SR\_NODISCARD const ScenePtr & | [**GetScene**](#function-getscene) () const<br> |
 |  SR\_NODISCARD [**SR\_WORLD\_NS::SceneUpdater**](classSR__WORLD__NS_1_1SceneUpdater.md) \* | [**GetSceneBuilder**](#function-getscenebuilder) () const<br> |
 |  SR\_NODISCARD bool | [**HasSceneInQueue**](#function-hassceneinqueue) () const<br> |
 |  bool | [**Init**](#function-init) () <br> |
@@ -544,7 +544,7 @@ SR_NODISCARD const RenderScenePtr & SR_CORE_NS::Engine::GetRenderScene () const
 ### function GetScene 
 
 ```C++
-SR_NODISCARD ScenePtr SR_CORE_NS::Engine::GetScene () const
+SR_NODISCARD const ScenePtr & SR_CORE_NS::Engine::GetScene () const
 ```
 
 

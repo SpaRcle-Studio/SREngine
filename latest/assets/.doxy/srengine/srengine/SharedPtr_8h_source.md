@@ -65,7 +65,7 @@ namespace SR_HTYPES_NS {
     };
 
     struct SharedPtrDynamicData {
-        SharedPtrDynamicData(uint16_t strongCount, uint16_t weakCount, bool valid, SR_UTILS_NS::SharedPtrPolicy policy)
+        SharedPtrDynamicData(uint64_t strongCount, uint64_t weakCount, bool valid, SR_UTILS_NS::SharedPtrPolicy policy)
             : strongCount(strongCount)
             , weakCount(weakCount)
             , valid(valid)
@@ -89,10 +89,10 @@ namespace SR_HTYPES_NS {
             #endif
         }
 
-        SR_NODISCARD uint16_t GetStrongCount() const { return strongCount; }
+        SR_NODISCARD uint64_t GetStrongCount() const { return strongCount; }
 
         void IncrementStrong() {
-            SRAssert2(strongCount != SR_UINT16_MAX, "Strong count overflow!");
+            SRAssert2(strongCount != SR_UINT64_MAX, "Strong count overflow!");
             ++strongCount;
         }
 
@@ -101,8 +101,8 @@ namespace SR_HTYPES_NS {
             --strongCount;
         }
 
-        std::atomic<uint16_t> strongCount = 0;
-        std::atomic<uint16_t> weakCount = 0;
+        std::atomic<uint64_t> strongCount = 0;
+        std::atomic<uint64_t> weakCount = 0;
         bool valid = false;
         bool deallocated = false;
         SR_UTILS_NS::SharedPtrPolicy policy = SR_UTILS_NS::SharedPtrPolicy::Automatic;
