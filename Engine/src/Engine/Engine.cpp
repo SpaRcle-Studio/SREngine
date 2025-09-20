@@ -443,8 +443,9 @@ namespace SR_CORE_NS {
         return m_autoReloadResources && !IsGameMode();
     }
 
-    Engine::ScenePtr Engine::GetScene() const {
-        return m_engineScene ? m_engineScene->pScene : ScenePtr();
+    const Engine::ScenePtr& Engine::GetScene() const {
+        static ScenePtr nullScene;
+        return m_engineScene ? m_engineScene->pScene : nullScene;
     }
 
     SR_WORLD_NS::SceneUpdater* Engine::GetSceneBuilder() const {

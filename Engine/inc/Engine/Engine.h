@@ -87,7 +87,7 @@ namespace SR_CORE_NS {
         void AddWindow(WindowPtr pWindow);
 
         SR_NODISCARD bool HasSceneInQueue() const { return !m_sceneQueue.Empty(); }
-        SR_NODISCARD ScenePtr GetScene() const;
+        SR_NODISCARD const ScenePtr& GetScene() const;
         SR_NODISCARD const RenderContextPtr& GetRenderContext() const { return m_renderContext; }
         SR_NODISCARD const RenderScenePtr& GetRenderScene() const;
         SR_NODISCARD const PhysicsScenePtr& GetPhysicsScene() const;
