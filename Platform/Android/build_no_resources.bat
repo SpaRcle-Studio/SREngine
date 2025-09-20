@@ -11,8 +11,6 @@ if "%ARCH%"=="" (
 echo Selected architecture: %ARCH%
 
 set APK_FOLDER=app/build/outputs/apk/release
-set APK_UNSIGNED_FILE=%APK_FOLDER%\app-release-unsigned.apk
-set APK_SIGNED_FILE=%APK_FOLDER%\app-release-signed.apk
 set PLATFORM_TOOLS=platform-tools
 set GRADLEW=gradlew.bat
 set APP_NAME=com.monika.sparcle
@@ -34,11 +32,6 @@ if errorlevel 1 goto LABEL_FAIL
 echo Build application
 call %GRADLEW% assembleRelease -Parchs=%ARCH%
 if errorlevel 1 goto LABEL_FAIL
-
-if not exist "%APK_UNSIGNED_FILE%" (
-    echo Unsigned APK not found!
-    goto LABEL_FAIL
-)
 
 echo Sign apk...
 call sign_apk.bat
