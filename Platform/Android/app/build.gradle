@@ -4,7 +4,7 @@ plugins {
 }
 
 // =================================================================================================
-// adb devices -l РёРЅРѕРіРґР° РїРёС€РµС‚ "emulator-5554"
+// adb devices -l иногда пишет "emulator-5554"
 def sdkDir = android.getSdkDirectory().absolutePath
 def adbPath = "${sdkDir}/platform-tools/adb"
 
@@ -25,7 +25,7 @@ def hasPhysical = adbOutput.readLines().any { line ->
     line = line.trim()
     if (line.isEmpty()) return false
     def parts = line.split(/\s+/)
-    // РџСЂРѕРІРµСЂСЏРµРј, С‡С‚Рѕ СЌС‚Рѕ СѓСЃС‚СЂРѕР№СЃС‚РІРѕ РІ СЃРѕСЃС‚РѕСЏРЅРёРё "device" Рё РЅРµ СЌРјСѓР»СЏС‚РѕСЂ
+    // Проверяем, что это устройство в состоянии "device" и не эмулятор
     parts.size() > 1 && parts[1] == "device" &&
             !parts[0].startsWith("emulator-") && !parts[0].contains("sdk_gphone")
 }
@@ -36,9 +36,9 @@ def archs
 if (project.hasProperty("archs")) {
     archs = project.getProperty("archs").split(',')
 } else if (hasPhysical) {
-    archs = ['armeabi-v7a', 'arm64-v8a']  // РІСЃРµ СЂРµР°Р»СЊРЅС‹Рµ ABI
+    archs = ['armeabi-v7a', 'arm64-v8a']  // все реальные ABI
 } else {
-    archs = ['x86_64']  // СЌРјСѓР»СЏС‚РѕСЂ
+    archs = ['x86_64']  // эмулятор
 }
 
 println "Selected architectures: ${archs}"

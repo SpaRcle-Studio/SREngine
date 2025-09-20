@@ -54,6 +54,26 @@ echo Check available versions...
 sdkmanager --list | findstr /C:"ndk;"
 sdkmanager --list | findstr cmake
 
+
+:: ---- Генерация local.properties ----
+set "CMAKE_VERSION=3.30.3"
+set "LOCAL_PROPERTIES_DIR=%~dp0"
+
+:: Преобразуем пути в формат с прямыми слешами
+set "SDK_DIR_SLASH=%SDK_DIR:\=/%"
+set "CMAKE_DIR_SLASH=%SDK_DIR%\cmake\%CMAKE_VERSION%"
+set "CMAKE_DIR_SLASH=%CMAKE_DIR_SLASH:\=/%"
+
+:: Создаем local.properties
+(
+    echo sdk.dir=%SDK_DIR_SLASH%
+    echo cmake.dir=%CMAKE_DIR_SLASH%
+) > "%LOCAL_PROPERTIES_DIR%local.properties"
+
+echo local.properties generated:
+type "%LOCAL_PROPERTIES_DIR%local.properties"
+:: -----------------------------------
+
 :: Скачиваем необходимые компоненты
 echo Installing SDK components...
 :: sdkmanager --install "platform-tools" "platforms;android-34" "build-tools;34.0.0" "ndk;25.2.9519653" "cmake;3.22.1"
@@ -62,5 +82,3 @@ sdkmanager --install "platform-tools" "platforms;android-34" "build-tools;34.0.0
 
 echo Android SDK setup completed!
 :: exit /b 0
-
-pause
