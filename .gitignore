@@ -58,3 +58,4 @@ Resources/**/*.so
 /Platform/Emscripten/ninja.exe
 codegen.spec
 /Resources/ModuleTests/SRSL/Result
+/Platform/Android/app/src/main/res/drawable/ic_launcher_background.xml
