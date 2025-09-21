@@ -59,3 +59,11 @@ Resources/**/*.so
 codegen.spec
 /Resources/ModuleTests/SRSL/Result
 /Platform/Android/app/src/main/res/drawable/ic_launcher_background.xml
+/Platform/Android/app/src/main/res/drawable-v24/ic_launcher_foreground.png
+/Platform/Android/app/src/main/res/mipmap-mdpi
+/Platform/Android/app/src/main/res/mipmap-xhdpi
+/Platform/Android/app/src/main/res/mipmap-xxhdpi
+/Platform/Android/app/src/main/res/mipmap-xxxhdpi
+/Platform/Android/app/src/main/res/drawable
+/Platform/Android/app/src/main/res/drawable-v24
+/Platform/Android/app/src/main/res/mipmap-hdpi
