@@ -832,6 +832,7 @@
 * **m\_isLightRegistered** ([**SR\_GRAPH\_NS::ILightComponent**](classSR__GRAPH__NS_1_1ILightComponent.md))
 * **m\_shadowType** ([**SR\_GRAPH\_NS::ILightComponent**](classSR__GRAPH__NS_1_1ILightComponent.md))
 * **m\_isDead** ([**SR\_GRAPH\_NS::IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md))
+* **m\_modulesApplied** ([**SR\_GRAPH\_NS::IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md))
 * **m\_fontSize** ([**SR\_GRAPH\_NS::ImGuiOverlay**](classSR__GRAPH__NS_1_1ImGuiOverlay.md), [**SR\_GRAPH\_NS::TextBuilder**](classSR__GRAPH__NS_1_1TextBuilder.md), [**SR\_GTYPES\_NS::Text**](classSR__GTYPES__NS_1_1Text.md))
 * **m\_iconFont** ([**SR\_GRAPH\_NS::ImGuiOverlay**](classSR__GRAPH__NS_1_1ImGuiOverlay.md))
 * **m\_iconFontSize** ([**SR\_GRAPH\_NS::ImGuiOverlay**](classSR__GRAPH__NS_1_1ImGuiOverlay.md))

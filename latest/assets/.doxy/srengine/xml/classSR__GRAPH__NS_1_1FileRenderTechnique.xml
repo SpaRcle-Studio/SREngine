@@ -301,6 +301,7 @@
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ae8c981d2c083b5953b02feb06e294d8e" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechnique</scope><name>m_hasErrors</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ad6f8c70c4885e0ce6a6a523e794371a7" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechnique</scope><name>m_isDead</name></member>
       <member refid="classSR__GRAPH__NS_1_1FileRenderTechnique_1a15bd9426b3fb4964042da0c9f1e9cd5b" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechnique</scope><name>m_isResourceReloaded</name></member>
+      <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a1f600928b3862d84f60589cc1e4cb296" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechnique</scope><name>m_modulesApplied</name></member>
       <member refid="classSR__GRAPH__NS_1_1FileRenderTechnique_1aa11a4190300e618ecc841432ac6742aa" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechnique</scope><name>m_onResourceReloaded</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a693f9e83b3499d00aff3ec8ba31a2841" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechnique</scope><name>m_renderScene</name></member>
       <member refid="classSR__GRAPH__NS_1_1FileRenderTechnique_1a60db32b8f851637f943cb3222d3963a6" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::FileRenderTechnique</scope><name>m_resource</name></member>

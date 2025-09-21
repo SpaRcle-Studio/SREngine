@@ -172,6 +172,7 @@
       <member refid="classSR__UTILS__NS_1_1Component_1ad0630357a7ef40b1c526565323c1cea0" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetBarycenter</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1aaeac6e6c7b9560a49cf7b6ed22234c5a" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetCameraDir</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1af47099ba966e1e925987e7084d78379b" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetCameraEye</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1adf4965fe942d5fd47255f1ce162e834b" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetCameraType</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1a491365285fecd62019ca1c5aaa9c8910" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetFar</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1a21584738fd44c76be964931a576a61ac" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetFOV</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a9d72186be6f9c2f138a8ad989b440c01" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetGameObject</name></member>

@@ -205,6 +205,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual bool | [**IsSamplerValid**](#function-issamplervalid) (int32\_t id) const<br> |
 |  SR\_NODISCARD bool | [**IsShaderChanged**](#function-isshaderchanged) () noexcept const<br>_Изменился ли текущий шейдер после UseShader. Даже если был вызван UnUseShader. Низкоуровневая проверка._  |
 | virtual SR\_NODISCARD bool | [**IsShaderConstantSupport**](#function-isshaderconstantsupport) () const<br> |
+| virtual SR\_NODISCARD bool | [**IsShaderViewportIndexLayerSupported**](#function-isshaderviewportindexlayersupported) () const<br> |
 | virtual SR\_NODISCARD bool | [**IsVSyncEnabled**](#function-isvsyncenabled) () const<br> |
 | virtual bool | [**MapSSBO**](#function-mapssbo) (uint32\_t SSBO, void \*\* ppData) <br> |
 |  void | [**OnFrameBuildEnd**](#function-onframebuildend) () <br> |
@@ -1877,6 +1878,19 @@ inline SR_NODISCARD bool SR_GRAPH_NS::Pipeline::IsShaderChanged () noexcept cons
 
 ```C++
 inline virtual SR_NODISCARD bool SR_GRAPH_NS::Pipeline::IsShaderConstantSupport () const
+```
+
+
+
+
+<hr>
+
+
+
+### function IsShaderViewportIndexLayerSupported 
+
+```C++
+inline virtual SR_NODISCARD bool SR_GRAPH_NS::Pipeline::IsShaderViewportIndexLayerSupported () const
 ```
 
 

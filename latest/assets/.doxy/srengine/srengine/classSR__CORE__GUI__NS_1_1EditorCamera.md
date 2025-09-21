@@ -132,6 +132,7 @@ See [SR\_GTYPES\_NS::Camera](classSR__GTYPES__NS_1_1Camera.md)
 |  SR\_NODISCARD SR\_FORCE\_INLINE float\_t | [**GetAspect**](classSR__GTYPES__NS_1_1Camera.md#function-getaspect) () const<br> |
 |  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**GetCameraDir**](classSR__GTYPES__NS_1_1Camera.md#function-getcameradir) () const<br> |
 |  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**GetCameraEye**](classSR__GTYPES__NS_1_1Camera.md#function-getcameraeye) () const<br> |
+|  SR\_NODISCARD CameraType | [**GetCameraType**](classSR__GTYPES__NS_1_1Camera.md#function-getcameratype) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE float\_t | [**GetFOV**](classSR__GTYPES__NS_1_1Camera.md#function-getfov) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE float\_t | [**GetFar**](classSR__GTYPES__NS_1_1Camera.md#function-getfar) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE glm::vec3 | [**GetGLPosition**](classSR__GTYPES__NS_1_1Camera.md#function-getglposition) () const<br> |

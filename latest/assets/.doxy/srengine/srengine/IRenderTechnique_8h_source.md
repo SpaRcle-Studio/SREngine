@@ -118,6 +118,7 @@ namespace SR_GRAPH_NS {
         RenderTechniqueData m_data;
         RenderScenePtr m_renderScene;
         CameraPtr m_camera = nullptr;
+        bool m_modulesApplied = false;
         std::atomic<bool> m_dirty = true;
         std::atomic<bool> m_hasErrors = false;
         std::atomic<bool> m_isDead = false;

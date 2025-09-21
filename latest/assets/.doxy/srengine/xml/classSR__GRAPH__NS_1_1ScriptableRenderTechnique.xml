@@ -361,6 +361,7 @@
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ad6f8c70c4885e0ce6a6a523e794371a7" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>m_isDead</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a45c441a3f4c53aafeb3de6c5aa64766c" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>m_isFromMemory</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a8600327689c36a9c20b5ae589acd4cfa" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>m_loadState</name></member>
+      <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a1f600928b3862d84f60589cc1e4cb296" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>m_modulesApplied</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a693f9e83b3499d00aff3ec8ba31a2841" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>m_renderScene</name></member>
       <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1aca3bc98ac7d59e4db78270373d6cdfb5" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>m_surfaceSize</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1afb7bbbb99bc610ce2ec7c9eeefffca59" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ScriptableRenderTechnique</scope><name>m_watchers</name></member>

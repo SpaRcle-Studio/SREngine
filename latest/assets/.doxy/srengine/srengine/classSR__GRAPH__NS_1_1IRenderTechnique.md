@@ -290,6 +290,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  std::atomic&lt; bool &gt; | [**m\_dirty**](#variable-m_dirty)   = `true`<br> |
 |  std::atomic&lt; bool &gt; | [**m\_hasErrors**](#variable-m_haserrors)   = `false`<br> |
 |  std::atomic&lt; bool &gt; | [**m\_isDead**](#variable-m_isdead)   = `false`<br> |
+|  bool | [**m\_modulesApplied**](#variable-m_modulesapplied)   = `false`<br> |
 |  RenderScenePtr | [**m\_renderScene**](#variable-m_renderscene)  <br> |
 |  std::optional&lt; SR\_MATH\_NS::UVector2 &gt; | [**m\_surfaceSize**](#variable-m_surfacesize)  <br> |
 
@@ -964,6 +965,19 @@ std::atomic<bool> SR_GRAPH_NS::IRenderTechnique::m_hasErrors;
 
 ```C++
 std::atomic<bool> SR_GRAPH_NS::IRenderTechnique::m_isDead;
+```
+
+
+
+
+<hr>
+
+
+
+### variable m\_modulesApplied 
+
+```C++
+bool SR_GRAPH_NS::IRenderTechnique::m_modulesApplied;
 ```
 
 

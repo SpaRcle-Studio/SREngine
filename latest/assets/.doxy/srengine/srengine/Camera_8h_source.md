@@ -82,6 +82,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD const SR_MATH_NS::Matrix4x4& GetInverseViewTranslate() const;
 
         SR_NODISCARD bool IsEditorCamera() const;
+        SR_NODISCARD CameraType GetCameraType() const { return m_type; }
         SR_NODISCARD SR_MATH_NS::Matrix4x4 GetImGuizmoView() const noexcept;
         SR_NODISCARD const SR_MATH_NS::FVector3& GetViewDirection() const;
         SR_NODISCARD SR_MATH_NS::FVector3 GetViewDirection(const SR_MATH_NS::FVector3& pos) const noexcept;

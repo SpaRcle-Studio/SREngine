@@ -341,6 +341,7 @@ See [SR\_GRAPH\_NS::IRenderTechnique](classSR__GRAPH__NS_1_1IRenderTechnique.md)
 |  std::atomic&lt; bool &gt; | [**m\_dirty**](classSR__GRAPH__NS_1_1IRenderTechnique.md#variable-m_dirty)   = `true`<br> |
 |  std::atomic&lt; bool &gt; | [**m\_hasErrors**](classSR__GRAPH__NS_1_1IRenderTechnique.md#variable-m_haserrors)   = `false`<br> |
 |  std::atomic&lt; bool &gt; | [**m\_isDead**](classSR__GRAPH__NS_1_1IRenderTechnique.md#variable-m_isdead)   = `false`<br> |
+|  bool | [**m\_modulesApplied**](classSR__GRAPH__NS_1_1IRenderTechnique.md#variable-m_modulesapplied)   = `false`<br> |
 |  RenderScenePtr | [**m\_renderScene**](classSR__GRAPH__NS_1_1IRenderTechnique.md#variable-m_renderscene)  <br> |
 |  std::optional&lt; SR\_MATH\_NS::UVector2 &gt; | [**m\_surfaceSize**](classSR__GRAPH__NS_1_1IRenderTechnique.md#variable-m_surfacesize)  <br> |
 

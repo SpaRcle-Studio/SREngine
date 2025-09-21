@@ -1283,6 +1283,7 @@
     <member refid="classSR__GTYPES__NS_1_1Camera_1a48c8424a0b1ce9ce08d38b8273f3158a" kind="function"><name>GetInverseProjection</name></member>
     <member refid="classSR__GTYPES__NS_1_1Camera_1a26d5dec32dd84a7f32d40ab780808dd1" kind="function"><name>GetInverseViewTranslate</name></member>
     <member refid="classSR__GTYPES__NS_1_1Camera_1a906bb9b0899c66ff1386e480efae7992" kind="function"><name>IsEditorCamera</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Camera_1adf4965fe942d5fd47255f1ce162e834b" kind="function"><name>GetCameraType</name></member>
     <member refid="classSR__GTYPES__NS_1_1Camera_1ac03a4e3c575c08d9932d213729688d6d" kind="function"><name>GetImGuizmoView</name></member>
     <member refid="classSR__GTYPES__NS_1_1Camera_1a217a05198270499cef2c71e0d53007bd" kind="function"><name>GetViewDirection</name></member>
     <member refid="classSR__GTYPES__NS_1_1Camera_1ad1c14a9ef337688e881bcb172c82d4d4" kind="function"><name>GetViewDirection</name></member>
@@ -5420,6 +5421,7 @@
     <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1aee10a4bb931e16fa4eb737c62b74c08b" kind="variable"><name>m_data</name></member>
     <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a693f9e83b3499d00aff3ec8ba31a2841" kind="variable"><name>m_renderScene</name></member>
     <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a34c74bfaffe22e646c437d6ac2f311a1" kind="variable"><name>m_camera</name></member>
+    <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a1f600928b3862d84f60589cc1e4cb296" kind="variable"><name>m_modulesApplied</name></member>
     <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a53592eedb14ed307d0ca2caefd5e74c2" kind="variable"><name>m_dirty</name></member>
     <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ae8c981d2c083b5953b02feb06e294d8e" kind="variable"><name>m_hasErrors</name></member>
     <member refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ad6f8c70c4885e0ce6a6a523e794371a7" kind="variable"><name>m_isDead</name></member>
@@ -8060,6 +8062,7 @@
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a16fca09b49251d2d0652ad62fdf05d93" kind="function"><name>GetBuildIterationsCount</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a92a340b822c38c39846cd8c270e4b062" kind="function"><name>GetSupportedSamples</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a54ff7ac52adc334ff752c1d739c2d868" kind="function"><name>IsShaderConstantSupport</name></member>
+    <member refid="classSR__GRAPH__NS_1_1Pipeline_1a79c9cff3883b350e8891766a44dbbce6" kind="function"><name>IsShaderViewportIndexLayerSupported</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1ac6bf21d75c810b6c846288a448d2a387" kind="function"><name>GetPixelColor</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a6ef31c9b21af1128c32f4786e3758efc" kind="function"><name>GetSwapchainImagesCount</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1aa75ed4cf63c698d5c279b4370f1142ce" kind="function"><name>SetSwapchainImagesCount</name></member>
@@ -13957,6 +13960,7 @@
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1aa21d85a911260d1b9fdc725cf99faeb3" kind="function"><name>GetMemoryManager</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1ac4c20385cf714a74bf66440c2b984792" kind="function"><name>GetUsedMemory</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a321cd962bc01483c7c6d69d5211cc53c" kind="function"><name>IsShaderConstantSupport</name></member>
+    <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a7fe0902e5ad8940fcd0e5e4c32472c19" kind="function"><name>IsShaderViewportIndexLayerSupported</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a18196f98ad2d075a03daf1588e9fce6c" kind="function"><name>AllocateUBO</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a5eec835fe52aa8ab74bc32f6cd9047f7" kind="function"><name>AllocateVBO</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a33a3e35de5cf8ecde794b593abfb4082" kind="function"><name>AllocateIBO</name></member>

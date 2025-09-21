@@ -95,6 +95,7 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 |  SR\_NODISCARD SR\_FORCE\_INLINE float\_t | [**GetAspect**](#function-getaspect) () const<br> |
 |  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**GetCameraDir**](#function-getcameradir) () const<br> |
 |  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**GetCameraEye**](#function-getcameraeye) () const<br> |
+|  SR\_NODISCARD CameraType | [**GetCameraType**](#function-getcameratype) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE float\_t | [**GetFOV**](#function-getfov) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE float\_t | [**GetFar**](#function-getfar) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE glm::vec3 | [**GetGLPosition**](#function-getglposition) () const<br> |
@@ -382,6 +383,19 @@ SR_NODISCARD SR_MATH_NS::FVector3 SR_GTYPES_NS::Camera::GetCameraDir () const
 
 ```C++
 SR_NODISCARD SR_MATH_NS::FVector3 SR_GTYPES_NS::Camera::GetCameraEye () const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetCameraType 
+
+```C++
+inline SR_NODISCARD CameraType SR_GTYPES_NS::Camera::GetCameraType () const
 ```
 
 

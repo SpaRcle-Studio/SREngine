@@ -197,6 +197,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual bool | [**InitOverlay**](#function-initoverlay) () override<br>_---------------------------------------_  _Работа с_[_**Overlay**_](classSR__GRAPH__NS_1_1Overlay.md) _---------------------------------------------_ __ |
 | virtual bool | [**IsSamplerValid**](#function-issamplervalid) (int32\_t id) override const<br> |
 | virtual SR\_NODISCARD bool | [**IsShaderConstantSupport**](#function-isshaderconstantsupport) () noexcept override const<br> |
+| virtual SR\_NODISCARD bool | [**IsShaderViewportIndexLayerSupported**](#function-isshaderviewportindexlayersupported) () noexcept override const<br> |
 | virtual SR\_NODISCARD bool | [**IsVSyncEnabled**](#function-isvsyncenabled) () override const<br> |
 | virtual bool | [**MapSSBO**](#function-mapssbo) (uint32\_t SSBO, void \*\* ppData) override<br> |
 | virtual void | [**OnMultiSampleChanged**](#function-onmultisamplechanged) () override<br>_-------------------------------------_  _Мультисемплинг и VSync -----------------------------------------_ __ |
@@ -325,6 +326,7 @@ See [SR\_GRAPH\_NS::Pipeline](classSR__GRAPH__NS_1_1Pipeline.md)
 | virtual bool | [**IsSamplerValid**](classSR__GRAPH__NS_1_1Pipeline.md#function-issamplervalid) (int32\_t id) const<br> |
 |  SR\_NODISCARD bool | [**IsShaderChanged**](classSR__GRAPH__NS_1_1Pipeline.md#function-isshaderchanged) () noexcept const<br>_Изменился ли текущий шейдер после UseShader. Даже если был вызван UnUseShader. Низкоуровневая проверка._  |
 | virtual SR\_NODISCARD bool | [**IsShaderConstantSupport**](classSR__GRAPH__NS_1_1Pipeline.md#function-isshaderconstantsupport) () const<br> |
+| virtual SR\_NODISCARD bool | [**IsShaderViewportIndexLayerSupported**](classSR__GRAPH__NS_1_1Pipeline.md#function-isshaderviewportindexlayersupported) () const<br> |
 | virtual SR\_NODISCARD bool | [**IsVSyncEnabled**](classSR__GRAPH__NS_1_1Pipeline.md#function-isvsyncenabled) () const<br> |
 | virtual bool | [**MapSSBO**](classSR__GRAPH__NS_1_1Pipeline.md#function-mapssbo) (uint32\_t SSBO, void \*\* ppData) <br> |
 |  void | [**OnFrameBuildEnd**](classSR__GRAPH__NS_1_1Pipeline.md#function-onframebuildend) () <br> |
@@ -1649,6 +1651,21 @@ inline virtual SR_NODISCARD bool SR_GRAPH_NS::VulkanPipeline::IsShaderConstantSu
 
 
 Implements [*SR\_GRAPH\_NS::Pipeline::IsShaderConstantSupport*](classSR__GRAPH__NS_1_1Pipeline.md#function-isshaderconstantsupport)
+
+
+<hr>
+
+
+
+### function IsShaderViewportIndexLayerSupported 
+
+```C++
+virtual SR_NODISCARD bool SR_GRAPH_NS::VulkanPipeline::IsShaderViewportIndexLayerSupported () noexcept override const
+```
+
+
+
+Implements [*SR\_GRAPH\_NS::Pipeline::IsShaderViewportIndexLayerSupported*](classSR__GRAPH__NS_1_1Pipeline.md#function-isshaderviewportindexlayersupported)
 
 
 <hr>

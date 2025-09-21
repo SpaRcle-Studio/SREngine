@@ -133,6 +133,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD virtual uint8_t GetBuildIterationsCount() const noexcept { ++m_state.operations; return 0; }
         SR_NODISCARD virtual uint8_t GetSupportedSamples() const noexcept { return m_supportedSampleCount; }
         SR_NODISCARD virtual bool IsShaderConstantSupport() const { ++m_state.operations; return false; }
+        SR_NODISCARD virtual bool IsShaderViewportIndexLayerSupported() const { ++m_state.operations; return false; }
         SR_NODISCARD virtual SR_MATH_NS::FColor GetPixelColor(uint32_t textureId, uint32_t x, uint32_t y) { return SR_MATH_NS::FColor(0.f); }
         SR_NODISCARD virtual uint16_t GetSwapchainImagesCount() const { return 0; }
 
