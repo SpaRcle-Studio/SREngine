@@ -93,6 +93,7 @@ Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_
 |  SR\_NODISCARD Vertices::VertexType | [**GetVertexType**](#function-getvertextype) () const<br> |
 |  SR\_NODISCARD bool | [**IsCacheActual**](#function-iscacheactual-12) () const<br> |
 |  SR\_NODISCARD bool | [**IsCacheActual**](#function-iscacheactual-22) (ShaderLanguage shaderLanguage) const<br> |
+|  SR\_NODISCARD bool | [**IsGLayerUsed**](#function-isglayerused) () const<br> |
 |  SR\_NODISCARD bool | [**IsMacroDefined**](#function-ismacrodefined) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & name) const<br> |
 |  SR\_NODISCARD std::string | [**ToString**](#function-tostring) (ShaderLanguage shaderLanguage) const<br> |
 
@@ -446,6 +447,19 @@ SR_NODISCARD bool SR_SRSL_NS::SRSLShader::IsCacheActual () const
 SR_NODISCARD bool SR_SRSL_NS::SRSLShader::IsCacheActual (
     ShaderLanguage shaderLanguage
 ) const
+```
+
+
+
+
+<hr>
+
+
+
+### function IsGLayerUsed 
+
+```C++
+inline SR_NODISCARD bool SR_SRSL_NS::SRSLShader::IsGLayerUsed () const
 ```
 
 

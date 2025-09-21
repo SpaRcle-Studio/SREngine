@@ -102,6 +102,7 @@ namespace SR_SRSL_NS {
         SR_NODISCARD const std::vector<SR_UTILS_NS::StringAtom>& GetIncludes() const { return m_includes; }
         SR_NODISCARD const SR_MATH_NS::UVector3& GetComputeWorkGroupSize() const { return m_computeWorkGroupSize; }
         SR_NODISCARD bool IsMacroDefined(const SR_UTILS_NS::StringAtom& name) const;
+        SR_NODISCARD bool IsGLayerUsed() const { return m_gLayerUsed; }
 
     private:
         SR_NODISCARD SR_UTILS_NS::Path GetCachePath() const;
@@ -127,6 +128,7 @@ namespace SR_SRSL_NS {
     private:
         SR_UTILS_NS::Path m_path;
 
+        bool m_gLayerUsed = false;
         ShaderMacrosParams m_macros;
         std::vector<SR_UTILS_NS::StringAtom> m_includes;
         std::vector<std::pair<SR_UTILS_NS::StringAtom, SRSLVariable*>> m_shared;

@@ -1488,38 +1488,39 @@
 <codeline lineno="78"><highlight class="normal"></highlight></codeline>
 <codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnMultisampleChanged()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnResize(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::UVector2&amp;<sp/>size)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="81"><highlight class="normal"></highlight></codeline>
-<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsLayerAllowed(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>layer)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsPriorityAllowed(int64_t<sp/>priority)</highlight><highlight class="keyword"><sp/>const<sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
-<codeline lineno="84"><highlight class="normal"></highlight></codeline>
-<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;RenderQueuePtr&gt;&amp;<sp/>GetRenderQueues()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_renderQueues;<sp/>}</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__SRSL__NS_1_1ShaderMacrosParams" kindref="compound">SR_SRSL_NS::ShaderMacrosParams</ref>&amp;<sp/>GetShaderMacros()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_shaderMacros;<sp/>}</highlight></codeline>
-<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>uint8_t<sp/>GetLayersCount()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_renderLayers;<sp/>}</highlight></codeline>
-<codeline lineno="88"><highlight class="normal"></highlight></codeline>
-<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>RenderStrategy*<sp/>GetRenderStrategy()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>RenderQueuePtr<sp/>AllocateRenderQueue();</highlight></codeline>
-<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>UpdateShaderDefines(<ref refid="structSR__SRSL__NS_1_1ShaderMacrosParams" kindref="compound">SR_SRSL_NS::ShaderMacrosParams</ref>&amp;<sp/>defines)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/>}</highlight></codeline>
-<codeline lineno="93"><highlight class="normal"></highlight></codeline>
-<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__SRSL__NS_1_1ShaderMacrosParams" kindref="compound">SR_SRSL_NS::ShaderMacrosParams</ref><sp/>m_shaderMacros;</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"></highlight></codeline>
-<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;RenderQueuePtr&gt;<sp/>m_renderQueues;</highlight></codeline>
-<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__HTYPES__NS_1_1Time" kindref="compound">SR_HTYPES_NS::Time</ref>&amp;<sp/>m_time;</highlight></codeline>
-<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;BasePass*&gt;<sp/>m_useSharedFromPass;</highlight></codeline>
-<codeline lineno="101"><highlight class="normal"></highlight></codeline>
-<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint8_t<sp/>m_renderLayers<sp/>=<sp/>1;</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::set&lt;SR_UTILS_NS::StringAtom&gt;<sp/>m_allowedLayers;</highlight></codeline>
-<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::set&lt;SR_UTILS_NS::StringAtom&gt;<sp/>m_disallowedLayers;</highlight></codeline>
-<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::set&lt;std::string&gt;<sp/>m_shaderDefines;</highlight></codeline>
-<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SamplersPassData<sp/>m_samplers;</highlight></codeline>
-<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MeshDrawerUniforms<sp/>m_uniforms;</highlight></codeline>
-<codeline lineno="114"><highlight class="normal"></highlight></codeline>
-<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="116"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="117"><highlight class="normal"></highlight></codeline>
-<codeline lineno="118"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_MESH_DRAWER_PASS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetRenderLayers(uint8_t<sp/>layers)<sp/>{<sp/>m_renderLayers<sp/>=<sp/>layers;<sp/>}</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsLayerAllowed(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>layer)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsPriorityAllowed(int64_t<sp/>priority)</highlight><highlight class="keyword"><sp/>const<sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;RenderQueuePtr&gt;&amp;<sp/>GetRenderQueues()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_renderQueues;<sp/>}</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__SRSL__NS_1_1ShaderMacrosParams" kindref="compound">SR_SRSL_NS::ShaderMacrosParams</ref>&amp;<sp/>GetShaderMacros()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_shaderMacros;<sp/>}</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>uint8_t<sp/>GetLayersCount()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_renderLayers;<sp/>}</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>RenderStrategy*<sp/>GetRenderStrategy()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>RenderQueuePtr<sp/>AllocateRenderQueue();</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>UpdateShaderDefines(<ref refid="structSR__SRSL__NS_1_1ShaderMacrosParams" kindref="compound">SR_SRSL_NS::ShaderMacrosParams</ref>&amp;<sp/>defines)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/>}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__SRSL__NS_1_1ShaderMacrosParams" kindref="compound">SR_SRSL_NS::ShaderMacrosParams</ref><sp/>m_shaderMacros;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;RenderQueuePtr&gt;<sp/>m_renderQueues;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__HTYPES__NS_1_1Time" kindref="compound">SR_HTYPES_NS::Time</ref>&amp;<sp/>m_time;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;BasePass*&gt;<sp/>m_useSharedFromPass;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint8_t<sp/>m_renderLayers<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::set&lt;SR_UTILS_NS::StringAtom&gt;<sp/>m_allowedLayers;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::set&lt;SR_UTILS_NS::StringAtom&gt;<sp/>m_disallowedLayers;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::set&lt;std::string&gt;<sp/>m_shaderDefines;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SamplersPassData<sp/>m_samplers;</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MeshDrawerUniforms<sp/>m_uniforms;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="117"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_MESH_DRAWER_PASS_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="Engine/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h"/>
   </compounddef>

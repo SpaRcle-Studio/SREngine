@@ -1214,32 +1214,35 @@
 <codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetName(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>&amp;<sp/>name)<sp/>{<sp/>m_name<sp/>=<sp/>name;<sp/>}</highlight></codeline>
 <codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnResize(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::UVector2&amp;<sp/>size);</highlight></codeline>
 <codeline lineno="43"><highlight class="normal"></highlight></codeline>
-<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;SR_GTYPES_NS::Framebuffer&gt;</ref><sp/>m_framebuffer;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetLayersCount(uint32_t<sp/>count);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetArrayLayersCount(uint32_t<sp/>count);</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"></highlight></codeline>
 <codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>m_name;</highlight></codeline>
-<codeline lineno="50"><highlight class="normal"></highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_dynamicResizing<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_depthEnabled<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_instanceForEachFrame<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="57"><highlight class="normal"></highlight></codeline>
-<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_MATH_NS::FVector2<sp/>m_preScale<sp/>=<sp/>SR_MATH_NS::FVector2(1.f);</highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_MATH_NS::IVector2<sp/>m_size;</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"></highlight></codeline>
-<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ColorFormats<sp/>m_colorFormats<sp/>=<sp/>{<sp/>ImageFormat::RGBA8_UNORM<sp/>};</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;SR_GTYPES_NS::Framebuffer&gt;</ref><sp/>m_framebuffer;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>m_name;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_dynamicResizing<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_depthEnabled<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_instanceForEachFrame<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_MATH_NS::FVector2<sp/>m_preScale<sp/>=<sp/>SR_MATH_NS::FVector2(1.f);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_MATH_NS::IVector2<sp/>m_size;</highlight></codeline>
 <codeline lineno="65"><highlight class="normal"></highlight></codeline>
-<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__GRAPH__NS_1_1FrameBufferFeatures" kindref="compound">FrameBufferFeatures</ref><sp/>m_features;</highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint8_t<sp/>m_samples<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>m_layersCount<sp/>=<sp/>1;</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>m_arrayLayersCount<sp/>=<sp/>1;</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ImageFormat<sp/>m_depthFormat<sp/>=<sp/>ImageFormat::Auto;</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ImageAspect<sp/>m_depthAspect<sp/>=<sp/>ImageAspect::DepthStencil;</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"></highlight></codeline>
-<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="80"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ColorFormats<sp/>m_colorFormats<sp/>=<sp/>{<sp/>ImageFormat::RGBA8_UNORM<sp/>};</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__GRAPH__NS_1_1FrameBufferFeatures" kindref="compound">FrameBufferFeatures</ref><sp/>m_features;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint8_t<sp/>m_samples<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>m_layersCount<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>m_arrayLayersCount<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ImageFormat<sp/>m_depthFormat<sp/>=<sp/>ImageFormat::Auto;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ImageAspect<sp/>m_depthAspect<sp/>=<sp/>ImageAspect::DepthStencil;</highlight></codeline>
 <codeline lineno="81"><highlight class="normal"></highlight></codeline>
-<codeline lineno="82"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_FRAME_BUFFER_CONTROLLER_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="83"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_FRAME_BUFFER_CONTROLLER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="Engine/libs/Graphics/inc/Graphics/Render/FrameBufferController.h"/>
   </compounddef>

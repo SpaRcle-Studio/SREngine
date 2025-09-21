@@ -242,6 +242,7 @@ See [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 | virtual void | [**OnResize**](#function-onresize) (const SR\_MATH\_NS::UVector2 & size) override<br> |
 | virtual void | [**Prepare**](#function-prepare) () override<br>_Вызывается всегда но полсе оверлея_  |
 | virtual bool | [**Render**](#function-render) () override<br>_Вызывается только во время построения_  |
+|  void | [**SetRenderLayers**](#function-setrenderlayers) (uint8\_t layers) <br> |
 | virtual void | [**SetRenderTechnique**](#function-setrendertechnique) ([**SR\_GRAPH\_NS::IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \* pRenderTechnique) override<br> |
 | virtual void | [**Update**](#function-update) () override<br>_Вызывается постоянно после построения_  |
 | virtual void | [**UseConstants**](#function-useconstants) ([**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* pShader) <br> |
@@ -896,6 +897,21 @@ virtual bool SR_GRAPH_NS::MeshDrawerPass::Render () override
 
 
 Implements [*SR\_GRAPH\_NS::BasePass::Render*](classSR__GRAPH__NS_1_1BasePass.md#function-render)
+
+
+<hr>
+
+
+
+### function SetRenderLayers 
+
+```C++
+inline void SR_GRAPH_NS::MeshDrawerPass::SetRenderLayers (
+    uint8_t layers
+) 
+```
+
+
 
 
 <hr>

@@ -251,6 +251,7 @@ See [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 | ---: | :--- |
 |  SR\_NODISCARD const std::vector&lt; [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) &gt; & | [**GetCascadeMatrices**](#function-getcascadematrices) () const<br> |
 |  SR\_NODISCARD const std::vector&lt; float\_t &gt; & | [**GetSplitDepths**](#function-getsplitdepths) () const<br> |
+| virtual bool | [**Init**](#function-init) () override<br> |
 | virtual void | [**PostUpdate**](#function-postupdate) () override<br> |
 | virtual void | [**Prepare**](#function-prepare) () override<br>_Вызывается всегда но полсе оверлея_  |
 | virtual bool | [**Render**](#function-render) () override<br>_Вызывается только во время построения_  |
@@ -280,6 +281,7 @@ See [SR\_GRAPH\_NS::MeshDrawerPass](classSR__GRAPH__NS_1_1MeshDrawerPass.md)
 | virtual void | [**OnResize**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-onresize) (const SR\_MATH\_NS::UVector2 & size) override<br> |
 | virtual void | [**Prepare**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-prepare) () override<br>_Вызывается всегда но полсе оверлея_  |
 | virtual bool | [**Render**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-render) () override<br>_Вызывается только во время построения_  |
+|  void | [**SetRenderLayers**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-setrenderlayers) (uint8\_t layers) <br> |
 | virtual void | [**SetRenderTechnique**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-setrendertechnique) ([**SR\_GRAPH\_NS::IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \* pRenderTechnique) override<br> |
 | virtual void | [**Update**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-update) () override<br>_Вызывается постоянно после построения_  |
 | virtual void | [**UseConstants**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-useconstants) ([**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* pShader) <br> |
@@ -775,6 +777,21 @@ inline SR_NODISCARD const std::vector< float_t > & SR_GRAPH_NS::CascadedShadowMa
 ```
 
 
+
+
+<hr>
+
+
+
+### function Init 
+
+```C++
+virtual bool SR_GRAPH_NS::CascadedShadowMapPass::Init () override
+```
+
+
+
+Implements [*SR\_GRAPH\_NS::BasePass::Init*](classSR__GRAPH__NS_1_1BasePass.md#function-init)
 
 
 <hr>

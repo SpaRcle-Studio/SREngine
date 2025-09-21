@@ -274,6 +274,7 @@ See [SR\_GRAPH\_NS::CascadedShadowMapPass](classSR__GRAPH__NS_1_1CascadedShadowM
 | ---: | :--- |
 |  SR\_NODISCARD const std::vector&lt; [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) &gt; & | [**GetCascadeMatrices**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#function-getcascadematrices) () const<br> |
 |  SR\_NODISCARD const std::vector&lt; float\_t &gt; & | [**GetSplitDepths**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#function-getsplitdepths) () const<br> |
+| virtual bool | [**Init**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#function-init) () override<br> |
 | virtual void | [**PostUpdate**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#function-postupdate) () override<br> |
 | virtual void | [**Prepare**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#function-prepare) () override<br>_Вызывается всегда но полсе оверлея_  |
 | virtual bool | [**Render**](classSR__GRAPH__NS_1_1CascadedShadowMapPass.md#function-render) () override<br>_Вызывается только во время построения_  |
@@ -303,6 +304,7 @@ See [SR\_GRAPH\_NS::MeshDrawerPass](classSR__GRAPH__NS_1_1MeshDrawerPass.md)
 | virtual void | [**OnResize**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-onresize) (const SR\_MATH\_NS::UVector2 & size) override<br> |
 | virtual void | [**Prepare**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-prepare) () override<br>_Вызывается всегда но полсе оверлея_  |
 | virtual bool | [**Render**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-render) () override<br>_Вызывается только во время построения_  |
+|  void | [**SetRenderLayers**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-setrenderlayers) (uint8\_t layers) <br> |
 | virtual void | [**SetRenderTechnique**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-setrendertechnique) ([**SR\_GRAPH\_NS::IRenderTechnique**](classSR__GRAPH__NS_1_1IRenderTechnique.md) \* pRenderTechnique) override<br> |
 | virtual void | [**Update**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-update) () override<br>_Вызывается постоянно после построения_  |
 | virtual void | [**UseConstants**](classSR__GRAPH__NS_1_1MeshDrawerPass.md#function-useconstants) ([**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* pShader) <br> |

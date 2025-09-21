@@ -315,6 +315,21 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Types/Shader.h" line="171" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="171" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Shader_1ae13e24b4cd1d4ccf6c7808d9ac91e9b4" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GTYPES_NS::Shader::m_isGLayerUsed</definition>
+        <argsstring></argsstring>
+        <name>m_isGLayerUsed</name>
+        <qualifiedname>SR_GTYPES_NS::Shader::m_isGLayerUsed</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Shader.h" line="172" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="172" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Shader_1aa49e5643508c25fa02cce097da891c04" prot="private" static="no" mutable="no">
         <type>SR_SRSL_NS::ShaderType</type>
         <definition>SR_SRSL_NS::ShaderType SR_GTYPES_NS::Shader::m_type</definition>
@@ -328,7 +343,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Types/Shader.h" line="173" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="173" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Types/Shader.h" line="174" column="32" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="174" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -1690,7 +1705,7 @@
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Types/Shader.h" line="32" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="32" bodyend="175"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Types/Shader.h" line="32" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="32" bodyend="176"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1af9087ca5182397a9c7d3b92fb5591523" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>AddDependency</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>AddSerializationFlags</name></member>
@@ -1792,6 +1807,7 @@
       <member refid="classSR__GTYPES__NS_1_1Shader_1ad9454178092b54fdf31e8259b57a15d9" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>m_includes</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1ad41ab5ae4aec0e23d87af82430bb625d" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>m_isDirty</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a45c441a3f4c53aafeb3de6c5aa64766c" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>m_isFromMemory</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Shader_1ae13e24b4cd1d4ccf6c7808d9ac91e9b4" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>m_isGLayerUsed</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a8600327689c36a9c20b5ae589acd4cfa" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>m_loadState</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1a4bd2eac50e619a2ec38c02d6d6d1f4fc" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>m_macros</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1ade4d036b36ccc03adc155363ea54ed00" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>m_manager</name></member>

@@ -51,6 +51,9 @@ namespace SR_GRAPH_NS {
         void SetName(const SR_UTILS_NS::StringAtom& name) { m_name = name; }
         void OnResize(const SR_MATH_NS::UVector2& size);
 
+        void SetLayersCount(uint32_t count);
+        void SetArrayLayersCount(uint32_t count);
+
     private:
         SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Framebuffer> m_framebuffer;
 

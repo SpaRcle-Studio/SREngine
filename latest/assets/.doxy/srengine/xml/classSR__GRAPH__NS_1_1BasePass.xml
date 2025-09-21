@@ -268,6 +268,7 @@
         <argsstring>()</argsstring>
         <name>Init</name>
         <qualifiedname>SR_GRAPH_NS::BasePass::Init</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1af10a0a45e1c57670f676c50e1788c447">Init</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1DebugPass_1a754cc25d99190df25422561aa267c74f">Init</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1ad5c1af15b98c42ac465ace7d9dc1d520">Init</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a578fc888ccea11924e1df5c9e776043b">Init</reimplementedby>

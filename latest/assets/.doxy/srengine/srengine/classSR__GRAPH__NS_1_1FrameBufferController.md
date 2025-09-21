@@ -159,6 +159,8 @@ See [SR\_UTILS\_NS::Serializable](classSR__UTILS__NS_1_1Serializable.md)
 |  SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetName**](#function-getname) () noexcept const<br> |
 |  bool | [**InitializeFramebuffer**](#function-initializeframebuffer) ([**RenderContext**](classSR__GRAPH__NS_1_1RenderContext.md) \* pContext) <br> |
 |  void | [**OnResize**](#function-onresize) (const SR\_MATH\_NS::UVector2 & size) <br> |
+|  void | [**SetArrayLayersCount**](#function-setarraylayerscount) (uint32\_t count) <br> |
+|  void | [**SetLayersCount**](#function-setlayerscount) (uint32\_t count) <br> |
 |  void | [**SetName**](#function-setname) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & name) <br> |
 |   | [**~FrameBufferController**](#function-framebuffercontroller) () override<br> |
 
@@ -516,6 +518,36 @@ bool SR_GRAPH_NS::FrameBufferController::InitializeFramebuffer (
 ```C++
 void SR_GRAPH_NS::FrameBufferController::OnResize (
     const SR_MATH_NS::UVector2 & size
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function SetArrayLayersCount 
+
+```C++
+void SR_GRAPH_NS::FrameBufferController::SetArrayLayersCount (
+    uint32_t count
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function SetLayersCount 
+
+```C++
+void SR_GRAPH_NS::FrameBufferController::SetLayersCount (
+    uint32_t count
 ) 
 ```
 

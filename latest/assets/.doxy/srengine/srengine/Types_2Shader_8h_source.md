@@ -179,6 +179,7 @@ namespace SR_GTYPES_NS {
         ShaderProperties m_properties;
         SSBOBindings m_ssboBindings;
         std::map<SR_UTILS_NS::StringAtom, SR_HTYPES_NS::SharedPtr<Texture>> m_defaultSamplers;
+        bool m_isGLayerUsed = false;
 
         SR_SRSL_NS::ShaderType m_type = SR_SRSL_NS::ShaderType::Unknown;
 

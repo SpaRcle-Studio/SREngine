@@ -255,7 +255,7 @@
       <member refid="classSR__UTILS__NS_1_1Serializable_1af5c00e9391fad105c30570cbda1a6285" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>HasSerializationFlags</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a63b89d1da5c027690ec57549d061677f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>HasUpdate</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>IncrementPointer</name></member>
-      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a578fc888ccea11924e1df5c9e776043b" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>Init</name></member>
+      <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1af10a0a45e1c57670f676c50e1788c447" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>Init</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1aa59c3079158cb09647d0499848d1e7e3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>IsActive</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a264dd4b976655f217e1386a38e0a6b6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>IsInit</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7ead50f17c9c553c5d3f3d62666cfc2a" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>IsLayerAllowed</name></member>
@@ -318,6 +318,7 @@
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a669b48407e7d4d60c055424228649923" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>SetCustomName</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a06217f9edbf0e8c831a6cc411826f799" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>SetParent</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a155895c5095814278389c6fbd642c07d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>SetRenderLayers</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1aeb792b76365dc9be8ea0675b7ec36b83" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>SetRenderTechnique</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a65e58bf20b3acc95f7e07f4cef52facb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>ShaderPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VarianceShadowMapPass</scope><name>SharedPointerType</name></member>

@@ -28,6 +28,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD const std::vector<float_t>& GetSplitDepths() const { return m_cascadeSplitDepths; }
 
     public:
+        bool Init() override;
         bool Render() override;
         void Prepare() override;
         void PostUpdate() override;

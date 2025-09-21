@@ -469,6 +469,7 @@
       <member refid="classSR__GRAPH__NS_1_1IColorBufferPass_1a091ed9638d7ef847cbbfd7ada5e2bbd5" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ColorBufferPass</scope><name>SetMeshIndex</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1a06217f9edbf0e8c831a6cc411826f799" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ColorBufferPass</scope><name>SetParent</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ColorBufferPass</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a155895c5095814278389c6fbd642c07d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ColorBufferPass</scope><name>SetRenderLayers</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1aeb792b76365dc9be8ea0675b7ec36b83" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ColorBufferPass</scope><name>SetRenderTechnique</name></member>
       <member refid="classSR__GRAPH__NS_1_1ColorBufferPass_1a5d6dda522b1836a6ee24c6cbf192517e" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::ColorBufferPass</scope><name>ShaderPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ColorBufferPass</scope><name>SharedPointerType</name></member>

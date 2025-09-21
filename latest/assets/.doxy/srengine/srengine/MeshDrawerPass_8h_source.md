@@ -82,6 +82,7 @@ namespace SR_GRAPH_NS {
 
         void OnMultisampleChanged() override;
         void OnResize(const SR_MATH_NS::UVector2& size) override;
+        void SetRenderLayers(uint8_t layers) { m_renderLayers = layers; }
 
         SR_NODISCARD bool IsLayerAllowed(SR_UTILS_NS::StringAtom layer) const override;
         SR_NODISCARD bool IsPriorityAllowed(int64_t priority) const override { return true; }

@@ -1403,6 +1403,7 @@
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a5505d57a93b179d988c1288a86a5c1a8" kind="variable"><name>m_cascadeCount</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1aa389d8b46444dfa274aa68cc69e67d85" kind="function"><name>GetCascadeMatrices</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a013ac2ccec3d56f755d585ac7129b981" kind="function"><name>GetSplitDepths</name></member>
+    <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1af10a0a45e1c57670f676c50e1788c447" kind="function"><name>Init</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1ac4f1c890a61f18a14bf498b13e4c9310" kind="function"><name>Render</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a1b6805d2e2e5b7652ace4b9115ea897e" kind="function"><name>Prepare</name></member>
     <member refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a9c065392abe9ac2048985d45ce4d8265" kind="function"><name>PostUpdate</name></member>
@@ -4219,6 +4220,8 @@
     <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1a5427a7a1de770ed4c28b11c62a0eb774" kind="function"><name>InitializeFramebuffer</name></member>
     <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1a50626fd772bee768bf26ddafe5d6b210" kind="function"><name>SetName</name></member>
     <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1a1c5df9597dbc3c142def9743fb67fa02" kind="function"><name>OnResize</name></member>
+    <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1aec94364f29020e346472c2007c97fb58" kind="function"><name>SetLayersCount</name></member>
+    <member refid="classSR__GRAPH__NS_1_1FrameBufferController_1ab514a698117cef87a3d1c4b4271c1701" kind="function"><name>SetArrayLayersCount</name></member>
   </compound>
   <compound refid="structSR__GRAPH__NS_1_1FrameBufferFeatures" kind="struct"><name>SR_GRAPH_NS::FrameBufferFeatures</name>
     <member refid="structSR__GRAPH__NS_1_1FrameBufferFeatures_1ab8cc11682375adc905130acf6f9b514e" kind="variable"><name>depthLoad</name></member>
@@ -6594,6 +6597,7 @@
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1acf61ab11ac383cf0a129b40ee5652361" kind="function"><name>UseSamplers</name></member>
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a2c8facd7b70961d91c011f337c8902f0" kind="function"><name>OnMultisampleChanged</name></member>
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1aa6fc3fe2752cc600fe681a62a22d4b50" kind="function"><name>OnResize</name></member>
+    <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a155895c5095814278389c6fbd642c07d" kind="function"><name>SetRenderLayers</name></member>
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7ead50f17c9c553c5d3f3d62666cfc2a" kind="function"><name>IsLayerAllowed</name></member>
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1ac7af32693acf9a88fce3ad540f677f28" kind="function"><name>IsPriorityAllowed</name></member>
     <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a0a5f8a97c3dbf872cf04c0c81ca58a0e" kind="function"><name>GetRenderQueues</name></member>
@@ -10319,6 +10323,7 @@
     <member refid="classSR__GTYPES__NS_1_1Shader_1ac047f10bb997a687f0152f8236314d6a" kind="variable"><name>m_properties</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1ad00b4043b418737710487395fdcc84e6" kind="variable"><name>m_ssboBindings</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a82734057bad0c815a818d508ed4a2a01" kind="variable"><name>m_defaultSamplers</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Shader_1ae13e24b4cd1d4ccf6c7808d9ac91e9b4" kind="variable"><name>m_isGLayerUsed</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1aa49e5643508c25fa02cce097da891c04" kind="variable"><name>m_type</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1ab37bf5209ff98dfe565667f77d4d7408" kind="function"><name>Shader</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a0d8212208e4a7361361fc81a9fa1f3ec" kind="function"><name>~Shader</name></member>
@@ -11545,6 +11550,7 @@
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a4ab8eab308f5464ada994055700aafc5" kind="typedef"><name>UniformBlocks</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a942f274485e20029baa7160b373f8245" kind="variable"><name>ShaderCache</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1aabf94178e961160ea4370fab2445baab" kind="variable"><name>m_path</name></member>
+    <member refid="classSR__SRSL__NS_1_1SRSLShader_1a9fb0f2cb1f5985d4eaeeca9a4444666f" kind="variable"><name>m_gLayerUsed</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a1d1971e2633e137c938395c17391b054" kind="variable"><name>m_macros</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a1064ffd4083344e31d6a2c4adf6946f4" kind="variable"><name>m_includes</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a77a37b96be88ee4798c628530ae89f4b" kind="variable"><name>m_shared</name></member>
@@ -11598,6 +11604,7 @@
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a2c48eaefaadbb5ff8402451dc59c345f" kind="function"><name>GetIncludes</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a54a3f258424f598211d10161b4849ab2" kind="function"><name>GetComputeWorkGroupSize</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1ac49026930cacfc94c7f3f90d6afebd5b" kind="function"><name>IsMacroDefined</name></member>
+    <member refid="classSR__SRSL__NS_1_1SRSLShader_1a1d43e7535a90eb9d0167c21ba2de7a8e" kind="function"><name>IsGLayerUsed</name></member>
   </compound>
   <compound refid="structSR__GRAPH__NS_1_1SRSL_1_1SRSLStruct" kind="struct"><name>SR_GRAPH_NS::SRSL::SRSLStruct</name>
     <member refid="structSR__GRAPH__NS_1_1SRSL_1_1SRSLStruct_1a1562109d725c64162e0a4bbdf0903c29" kind="variable"><name>name</name></member>

@@ -1693,13 +1693,14 @@
 <codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ShaderProperties<sp/>m_properties;</highlight></codeline>
 <codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SSBOBindings<sp/>m_ssboBindings;</highlight></codeline>
 <codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;SR_UTILS_NS::StringAtom,<sp/>SR_HTYPES_NS::SharedPtr&lt;Texture&gt;&gt;<sp/>m_defaultSamplers;</highlight></codeline>
-<codeline lineno="172"><highlight class="normal"></highlight></codeline>
-<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_SRSL_NS::ShaderType<sp/>m_type<sp/>=<sp/>SR_SRSL_NS::ShaderType::Unknown;</highlight></codeline>
-<codeline lineno="174"><highlight class="normal"></highlight></codeline>
-<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="176"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="177"><highlight class="normal"></highlight></codeline>
-<codeline lineno="178"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GRAPHICS_SHADER_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_isGLayerUsed<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_SRSL_NS::ShaderType<sp/>m_type<sp/>=<sp/>SR_SRSL_NS::ShaderType::Unknown;</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="177"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GRAPHICS_SHADER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="Engine/libs/Graphics/inc/Graphics/Types/Shader.h"/>
   </compounddef>
