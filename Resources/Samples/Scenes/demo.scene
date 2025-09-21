@@ -3481,6 +3481,9 @@ ddddцццゔぅヾボ
 									9-v:name
 										10-s:UIWindowNode
 									9-o:layout
+									9-o:border
+										10-v:entityId
+											11-i:2371051644986324699
 					5-v:isEnabled
 						6-b:false
 					5-o:transform
@@ -3647,6 +3650,9 @@ ddddцццゔぅヾボ
 								8-o:ptr
 									9-v:entityId
 										10-i:4577757369579952888
+									9-o:rigidbody
+										10-v:entityId
+											11-i:4091622810159070019
 									9-v:type
 										10-s:Sphere3D
 									9-o:bounds
@@ -3970,6 +3976,9 @@ ddddцццゔぅヾボ
 												12-o:ptr
 													13-v:entityId
 														14-i:3919453531537305797
+													13-o:rigidbody
+														14-v:entityId
+															15-i:2609107334133799760
 													13-v:type
 														14-s:Box3D
 													13-o:bounds
@@ -4051,6 +4060,9 @@ ddddцццゔぅヾボ
 												12-o:ptr
 													13-v:entityId
 														14-i:3460249477580246094
+													13-o:rigidbody
+														14-v:entityId
+															15-i:3302544588512304044
 													13-v:type
 														14-s:Box3D
 													13-o:bounds
@@ -4123,6 +4135,9 @@ ddddцццゔぅヾボ
 												12-o:ptr
 													13-v:entityId
 														14-i:4539823912799628853
+													13-o:rigidbody
+														14-v:entityId
+															15-i:3554614823386592442
 													13-v:type
 														14-s:Box3D
 													13-o:bounds
@@ -4259,6 +4274,9 @@ ddddцццゔぅヾボ
 												12-o:ptr
 													13-v:entityId
 														14-i:4421242648330124142
+													13-o:rigidbody
+														14-v:entityId
+															15-i:3020958402533982344
 													13-v:type
 														14-s:Box3D
 													13-o:bounds
@@ -4384,6 +4402,9 @@ ddddцццゔぅヾボ
 												12-o:ptr
 													13-v:entityId
 														14-i:4418681173845569842
+													13-o:rigidbody
+														14-v:entityId
+															15-i:4012245804352601281
 													13-v:type
 														14-s:Box3D
 													13-o:bounds
@@ -4509,6 +4530,9 @@ ddddцццゔぅヾボ
 												12-o:ptr
 													13-v:entityId
 														14-i:3822368019745363510
+													13-o:rigidbody
+														14-v:entityId
+															15-i:4028536780220786775
 													13-v:type
 														14-s:Box3D
 													13-o:bounds
@@ -4555,6 +4579,9 @@ ddddцццゔぅヾボ
 												12-o:ptr
 													13-v:entityId
 														14-i:2334322218413846102
+													13-o:rigidbody
+														14-v:entityId
+															15-i:4078930444530442512
 													13-v:type
 														14-s:Box3D
 													13-o:bounds
@@ -4706,6 +4733,9 @@ ddddцццゔぅヾボ
 												12-o:ptr
 													13-v:entityId
 														14-i:3547928336817760255
+													13-o:rigidbody
+														14-v:entityId
+															15-i:3732698943543304606
 													13-v:type
 														14-s:Box3D
 													13-o:bounds
@@ -4831,6 +4861,9 @@ ddddцццゔぅヾボ
 												12-o:ptr
 													13-v:entityId
 														14-i:3196306372969519456
+													13-o:rigidbody
+														14-v:entityId
+															15-i:3692932959675892614
 													13-v:type
 														14-s:Box3D
 													13-o:bounds
@@ -4956,6 +4989,9 @@ ddddцццゔぅヾボ
 												12-o:ptr
 													13-v:entityId
 														14-i:3384436801209272381
+													13-o:rigidbody
+														14-v:entityId
+															15-i:2544195126707265876
 													13-v:type
 														14-s:Box3D
 													13-o:bounds
@@ -5153,6 +5189,9 @@ ddddцццゔぅヾボ
 												12-o:ptr
 													13-v:entityId
 														14-i:3975809363767127663
+													13-o:rigidbody
+														14-v:entityId
+															15-i:3190196421964012705
 													13-v:type
 														14-s:Box3D
 													13-o:bounds
@@ -5197,6 +5236,9 @@ ddddцццゔぅヾボ
 												12-o:ptr
 													13-v:entityId
 														14-i:2704556955348839020
+													13-o:rigidbody
+														14-v:entityId
+															15-i:2906223744920217893
 													13-v:type
 														14-s:Capsule3D
 													13-o:bounds
