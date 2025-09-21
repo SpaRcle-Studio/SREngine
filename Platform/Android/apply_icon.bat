@@ -41,7 +41,7 @@ rem if not exist "%RES_DIR%\drawable" mkdir "%RES_DIR%\drawable"
 rem copy /y "%SRC_ICON%" "%RES_DIR%\drawable\ic_launcher_background.png"
 
 REM Создаем drawable для foreground и background
-if not exist "%RES_DIR%\drawable" mkdir "%RES_DIR%\drawable"
+if not exist "%RES_DIR%\drawable-v24" mkdir "%RES_DIR%\drawable-v24"
 copy /y "%SRC_ICON%" "%RES_DIR%\drawable-v24\ic_launcher_foreground.png"
 
 REM Файл background.xml

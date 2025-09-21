@@ -89,7 +89,7 @@ void ProcessSensorEvents(ASensorEventQueue* sensorQueue, struct android_app* app
     }
 }
 
-void WainApplicationWindowShow(struct android_app* state) {
+void WaitApplicationWindowShow(struct android_app* state) {
     SR_PLATFORM_NS::WriteConsoleLog("android_main() : waiting main window...");
 
     ANativeWindow* window = nullptr;
@@ -175,7 +175,7 @@ void SetImmersiveMode(ANativeActivity* activity) {
 
 void android_main(struct android_app* state) {
     SR_PLATFORM_NS::SetInstance(state);
-    WainApplicationWindowShow(state);
+    WaitApplicationWindowShow(state);
 
     SetImmersiveMode(state->activity);
 
@@ -211,7 +211,6 @@ void android_main(struct android_app* state) {
         int ident = 0;
         int events = 0;
         struct android_poll_source* source = nullptr;
-
 
         // 0 — не блокирует, можно поставить timeout в миллисекундах
         while ((ident = ALooper_pollOnce(0, nullptr, &events, (void**)&source)) >= 0) {
