@@ -45,6 +45,7 @@ if not exist "%RES_DIR%\drawable-v24" mkdir "%RES_DIR%\drawable-v24"
 copy /y "%SRC_ICON%" "%RES_DIR%\drawable-v24\ic_launcher_foreground.png"
 
 REM Файл background.xml
+if not exist "%RES_DIR%\drawable" mkdir "%RES_DIR%\drawable"
 (
 echo ^<?xml version="1.0" encoding="utf-8"?^>
 echo ^<layer-list xmlns:android="http://schemas.android.com/apk/res/android"^>
