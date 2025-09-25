@@ -91,6 +91,7 @@ plugins:
       separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
   - minify:
       minify_html: true
+  - include-markdown
 
 extra:
   homepage: https://sparcles.dev/
@@ -171,6 +172,8 @@ nav:
       - Building on Windows: WindowsBuild.md
   #- API:
   - Contributing: Contributing.md
+  - Roadmap: Roadmap.md
+  - Documentation: Documentation.md
   #- Reference:
   #    - srengine/functions.md
   #    - srengine/macros.md

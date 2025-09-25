@@ -11,13 +11,7 @@ You can get your SpaRcle Engine with the following methods:
 
 ### Supported platforms 
 
-- [x] Windows 11
-- [x] Linux 
-- [x] Android
-- [ ] Web
-- [ ] iOS - not planned in near future
-- [ ] macOS - not planned in near future
-
+{! Platforms.md !}
 
 ### Supported compilers
 

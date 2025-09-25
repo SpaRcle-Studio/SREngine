@@ -1,0 +1,6 @@
+- [x] Windows 11
+- [x] Linux
+- [x] Android
+- [ ] Web
+- [ ] iOS - not planned in near future
+- [ ] macOS - not planned in near future

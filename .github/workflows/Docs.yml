@@ -30,6 +30,7 @@ jobs:
           pip install mkdocs mkdocs-material mkdocs-minify-plugin mkdoxy pymdown-extensions mike
           pip install "mkdocs-material[imaging]"
           pip install "mkdocs-material[recommended]"
+          pip install "mkdocs-include-markdown-plugin"
           sudo apt-get install doxygen
 
       - name: Clone the submodules

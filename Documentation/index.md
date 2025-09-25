@@ -3,7 +3,7 @@
 !!! warning "The docs are currently under construction." 
 
 
-Roadmap: 
+Site roadmap: 
 
 - [ ] Getting started
     * [x] Installation
