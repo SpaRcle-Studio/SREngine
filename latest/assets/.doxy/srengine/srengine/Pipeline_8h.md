@@ -44,6 +44,7 @@
 | Type | Name |
 | ---: | :--- |
 | class | [**Pipeline**](classSR__GRAPH__NS_1_1Pipeline.md) <br> |
+| struct | [**UsedVideoMemoryInfo**](structSR__GRAPH__NS_1_1UsedVideoMemoryInfo.md) <br> |
 
 
 

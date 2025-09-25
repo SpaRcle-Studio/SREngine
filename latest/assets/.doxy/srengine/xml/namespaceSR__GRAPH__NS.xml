@@ -121,6 +121,7 @@
     <innerclass refid="classSR__GRAPH__NS_1_1TransparentPass" prot="public">SR_GRAPH_NS::TransparentPass</innerclass>
     <innerclass refid="structSR__GRAPH__NS_1_1Uniform" prot="public">SR_GRAPH_NS::Uniform</innerclass>
     <innerclass refid="classSR__GRAPH__NS_1_1UniqueMaterial" prot="public">SR_GRAPH_NS::UniqueMaterial</innerclass>
+    <innerclass refid="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo" prot="public">SR_GRAPH_NS::UsedVideoMemoryInfo</innerclass>
     <innerclass refid="classSR__GRAPH__NS_1_1VarianceShadowMapPass" prot="public">SR_GRAPH_NS::VarianceShadowMapPass</innerclass>
     <innerclass refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay" prot="public">SR_GRAPH_NS::VulkanImGuiOverlay</innerclass>
     <innerclass refid="classSR__GRAPH__NS_1_1VulkanKernel" prot="public">SR_GRAPH_NS::VulkanKernel</innerclass>

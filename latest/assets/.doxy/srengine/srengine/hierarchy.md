@@ -16725,6 +16725,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**SR\_GRAPH\_NS::ShaderSampler**](structSR__GRAPH__NS_1_1ShaderSampler.md) 
 * **struct** [**SR\_GRAPH\_NS::SourceShader**](structSR__GRAPH__NS_1_1SourceShader.md) 
 * **struct** [**SR\_GRAPH\_NS::Uniform**](structSR__GRAPH__NS_1_1Uniform.md) 
+* **struct** [**SR\_GRAPH\_NS::UsedVideoMemoryInfo**](structSR__GRAPH__NS_1_1UsedVideoMemoryInfo.md) 
 * **struct** [**SR\_GRAPH\_NS::Vertices::SimpleVertex**](structSR__GRAPH__NS_1_1Vertices_1_1SimpleVertex.md) 
 * **struct** [**SR\_GRAPH\_NS::Vertices::SkinnedMeshVertex**](structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex.md) 
 * **struct** [**SR\_GRAPH\_NS::Vertices::StaticMeshVertex**](structSR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex.md) 

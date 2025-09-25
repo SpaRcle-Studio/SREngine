@@ -152,6 +152,7 @@
 | define  | [**SR\_MARSHAL\_USE\_LIST**](libs_2Utils_2inc_2Utils_2macros_8h.md#define-sr_marshal_use_list)  `1`<br> |
 | define  | [**SR\_MATH\_NS**](libs_2Utils_2inc_2Utils_2macros_8h.md#define-sr_math_ns)  `SpaRcle::Utils::Math`<br> |
 | define  | [**SR\_MAX\_BONES\_ON\_VERTEX**](libs_2Utils_2inc_2Utils_2macros_8h.md#define-sr_max_bones_on_vertex)  `16`<br> |
+| define  | [**SR\_MAX\_FRAMES\_IN\_FLIGHT**](libs_2Utils_2inc_2Utils_2macros_8h.md#define-sr_max_frames_in_flight)  `16`<br> |
 | define  | [**SR\_MAYBE\_UNUSED**](libs_2Utils_2inc_2Utils_2macros_8h.md#define-sr_maybe_unused)  `[[maybe\_unused]]`<br> |
 | define  | [**SR\_MAYBE\_UNUSED\_VAR**](libs_2Utils_2inc_2Utils_2macros_8h.md#define-sr_maybe_unused_var)  `SR\_MAYBE\_UNUSED auto&& SR\_COMBINE(unused\_var, \_\_LINE\_\_) =`<br> |
 | define  | [**SR\_NETWORK\_NS**](libs_2Utils_2inc_2Utils_2macros_8h.md#define-sr_network_ns)  `SR\_UTILS\_NS::Network`<br> |
@@ -1126,6 +1127,19 @@
 
 ```C++
 #define SR_MAX_BONES_ON_VERTEX `16`
+```
+
+
+
+
+<hr>
+
+
+
+### define SR\_MAX\_FRAMES\_IN\_FLIGHT 
+
+```C++
+#define SR_MAX_FRAMES_IN_FLIGHT `16`
 ```
 
 

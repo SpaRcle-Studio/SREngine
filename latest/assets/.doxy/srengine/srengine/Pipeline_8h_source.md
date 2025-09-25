@@ -36,6 +36,18 @@ namespace SR_GRAPH_NS {
     class Overlay;
     class Window;
 
+    struct UsedVideoMemoryInfo {
+        uint64_t videoMemoryUsed = 0;
+        uint32_t descriptorSetsCount = 0;
+        uint32_t shaderProgramsCount = 0;
+        uint32_t UBOsCount = 0;
+        uint32_t VBOsCount = 0;
+        uint32_t IBOsCount = 0;
+        uint32_t SSBOsCount = 0;
+        uint32_t FBOsCount = 0;
+        uint32_t texturesCount = 0;
+    };
+
     class Pipeline : public SR_HTYPES_NS::SharedPtr<Pipeline> {
     public:
         using Super = SR_HTYPES_NS::SharedPtr<Pipeline>;
@@ -160,8 +172,6 @@ namespace SR_GRAPH_NS {
 
         virtual void SetDirty(bool dirty);
 
-        virtual uint64_t GetUsedMemory() const { return 0; }
-
 
         virtual void OnMultiSampleChanged();
         virtual void UpdateMultiSampling();
@@ -180,6 +190,8 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD bool IsRenderState() const noexcept { return m_isRenderState; }
         SR_NODISCARD bool IsFBOQueueValid() const noexcept;
 
+
+        SR_NODISCARD virtual UsedVideoMemoryInfo GetUsedVideoMemoryInfo() const { return UsedVideoMemoryInfo(); }
 
         SR_NODISCARD virtual int32_t AllocateVBO(const void* pVertices, Vertices::VertexType type, size_t count) { return SR_ID_INVALID; }
         SR_NODISCARD virtual int32_t AllocateVBO(const SR_UTILS_NS::Vertex* pVertices, Vertices::VertexType type, size_t count);

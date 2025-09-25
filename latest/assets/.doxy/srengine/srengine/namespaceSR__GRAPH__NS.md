@@ -163,6 +163,7 @@
 | class | [**TransparentPass**](classSR__GRAPH__NS_1_1TransparentPass.md) <br> |
 | struct | [**Uniform**](structSR__GRAPH__NS_1_1Uniform.md) <br> |
 | class | [**UniqueMaterial**](classSR__GRAPH__NS_1_1UniqueMaterial.md) <br> |
+| struct | [**UsedVideoMemoryInfo**](structSR__GRAPH__NS_1_1UsedVideoMemoryInfo.md) <br> |
 | class | [**VarianceShadowMapPass**](classSR__GRAPH__NS_1_1VarianceShadowMapPass.md) <br> |
 | class | [**VulkanImGuiOverlay**](classSR__GRAPH__NS_1_1VulkanImGuiOverlay.md) <br> |
 | class | [**VulkanKernel**](classSR__GRAPH__NS_1_1VulkanKernel.md) <br> |

@@ -363,6 +363,7 @@
 * **SR\_MARSHAL\_USE\_LIST** ([**macros.h**](libs_2Utils_2inc_2Utils_2macros_8h.md))
 * **SR\_MATH\_NS** ([**macros.h**](libs_2Utils_2inc_2Utils_2macros_8h.md))
 * **SR\_MAX\_BONES\_ON\_VERTEX** ([**macros.h**](libs_2Utils_2inc_2Utils_2macros_8h.md))
+* **SR\_MAX\_FRAMES\_IN\_FLIGHT** ([**macros.h**](libs_2Utils_2inc_2Utils_2macros_8h.md))
 * **SR\_MAYBE\_UNUSED** ([**macros.h**](libs_2Utils_2inc_2Utils_2macros_8h.md))
 * **SR\_MAYBE\_UNUSED\_VAR** ([**macros.h**](libs_2Utils_2inc_2Utils_2macros_8h.md))
 * **SR\_NETWORK\_NS** ([**macros.h**](libs_2Utils_2inc_2Utils_2macros_8h.md))

@@ -1112,7 +1112,7 @@
 * **GetShaderHandles** ([**SR\_GRAPH\_NS::Pipeline**](classSR__GRAPH__NS_1_1Pipeline.md), [**SR\_GRAPH\_NS::VulkanPipeline**](classSR__GRAPH__NS_1_1VulkanPipeline.md))
 * **GetSupportedSamples** ([**SR\_GRAPH\_NS::Pipeline**](classSR__GRAPH__NS_1_1Pipeline.md))
 * **GetSwapchainImagesCount** ([**SR\_GRAPH\_NS::Pipeline**](classSR__GRAPH__NS_1_1Pipeline.md), [**SR\_GRAPH\_NS::VulkanPipeline**](classSR__GRAPH__NS_1_1VulkanPipeline.md))
-* **GetUsedMemory** ([**SR\_GRAPH\_NS::Pipeline**](classSR__GRAPH__NS_1_1Pipeline.md), [**SR\_GRAPH\_NS::VulkanPipeline**](classSR__GRAPH__NS_1_1VulkanPipeline.md))
+* **GetUsedVideoMemoryInfo** ([**SR\_GRAPH\_NS::Pipeline**](classSR__GRAPH__NS_1_1Pipeline.md), [**SR\_GRAPH\_NS::VulkanPipeline**](classSR__GRAPH__NS_1_1VulkanPipeline.md))
 * **GetVendor** ([**SR\_GRAPH\_NS::Pipeline**](classSR__GRAPH__NS_1_1Pipeline.md), [**SR\_GRAPH\_NS::VulkanPipeline**](classSR__GRAPH__NS_1_1VulkanPipeline.md))
 * **GetVersion** ([**SR\_GRAPH\_NS::Pipeline**](classSR__GRAPH__NS_1_1Pipeline.md), [**SR\_GRAPH\_NS::ShaderCache**](classSR__GRAPH__NS_1_1ShaderCache.md), [**SR\_GRAPH\_NS::VulkanPipeline**](classSR__GRAPH__NS_1_1VulkanPipeline.md), [**SR\_SRSL\_NS::GLSLCodeGenerator**](classSR__SRSL__NS_1_1GLSLCodeGenerator.md), [**SR\_UTILS\_NS::SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md))
 * **GarbageCollect** ([**SR\_GRAPH\_NS::RenderContext**](classSR__GRAPH__NS_1_1RenderContext.md))

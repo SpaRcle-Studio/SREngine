@@ -34,8 +34,7 @@ namespace SR_GRAPH_NS {
         using DescriptorSet = int32_t;
         struct DescriptorSetInfo {
             void* pShaderHandle = nullptr;
-            uint8_t frameIndex = 0;
-            DescriptorSet descriptorSet = SR_ID_INVALID;
+            std::array<DescriptorSet, SR_MAX_FRAMES_IN_FLIGHT> descriptorSets;
         };
     public:
         using VirtualDescriptorSet = int32_t;

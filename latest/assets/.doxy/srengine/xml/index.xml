@@ -2327,8 +2327,7 @@
     <member refid="unionSR__ANIMATIONS__NS_1_1UnionAnimationKey_1_1Data_1a11950fb495802ccf5a01de89f0fc6b0f" kind="function"><name>~Data</name></member>
   </compound>
   <compound refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1_1Data" kind="struct"><name>SR_GRAPH_NS::Memory::VirtualUBOInfo::Data</name>
-    <member refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1_1Data_1ae95caf30965bb84de28fad2ea344a182" kind="variable"><name>ubo</name></member>
-    <member refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1_1Data_1aea28d924041623b986472e1c4ce54986" kind="variable"><name>frameIndex</name></member>
+    <member refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1_1Data_1a20c1b9d270b7661c68a4985117b8ee49" kind="variable"><name>ubos</name></member>
     <member refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1_1Data_1ad958797212adcb53552d32f8ee990d60" kind="variable"><name>pShaderHandle</name></member>
     <member refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1_1Data_1a0dccbb88c9b01fc1b866574f77ec3a5a" kind="variable"><name>uboSize</name></member>
     <member refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1_1Data_1adad7807380cb32d2e365e0a549897a9f" kind="function"><name>Validate</name></member>
@@ -2930,8 +2929,7 @@
   </compound>
   <compound refid="structSR__GRAPH__NS_1_1DescriptorManager_1_1DescriptorSetInfo" kind="struct"><name>SR_GRAPH_NS::DescriptorManager::DescriptorSetInfo</name>
     <member refid="structSR__GRAPH__NS_1_1DescriptorManager_1_1DescriptorSetInfo_1a9cd55b3c6f480ede6b54b604c7445a82" kind="variable"><name>pShaderHandle</name></member>
-    <member refid="structSR__GRAPH__NS_1_1DescriptorManager_1_1DescriptorSetInfo_1a0ecbd317c3e374ef698257c2b3c9ff6c" kind="variable"><name>frameIndex</name></member>
-    <member refid="structSR__GRAPH__NS_1_1DescriptorManager_1_1DescriptorSetInfo_1ad56737793465bceeacf2a49c89181983" kind="variable"><name>descriptorSet</name></member>
+    <member refid="structSR__GRAPH__NS_1_1DescriptorManager_1_1DescriptorSetInfo_1a4fd1f59dff172d912a44cc3178ca51c4" kind="variable"><name>descriptorSets</name></member>
   </compound>
   <compound refid="structSR__UTILS__NS_1_1DetectedOr" kind="struct"><name>SR_UTILS_NS::DetectedOr</name>
   </compound>
@@ -8104,7 +8102,6 @@
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a3fd9d3969b83c1b508038b9fb3bab779" kind="function"><name>ClearDepthBuffer</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a6a6c502a5ef25221fc760a523623bf39" kind="function"><name>ClearColorBuffer</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1aac75899921a36dd5c0444e34990cd39f" kind="function"><name>SetDirty</name></member>
-    <member refid="classSR__GRAPH__NS_1_1Pipeline_1a477e5d9526688aa7a58637e6a93fcd3e" kind="function"><name>GetUsedMemory</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a08cbedc2d011a36e5c313365d7cdc12d" kind="function"><name>OnMultiSampleChanged</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1aaf5c1e69dc6a0a6fbe91784d8945c755" kind="function"><name>UpdateMultiSampling</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a35f5177f0fd6c04613b59c0be8744fcb" kind="function"><name>SetSampleCount</name></member>
@@ -8119,6 +8116,7 @@
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1ab8158d2d108cc87138b24fc328c7ecc4" kind="function"><name>IsShaderChanged</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a11387742345370829c013095089720e1" kind="function"><name>IsRenderState</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a63849d2f4be5a708ea2b2be89e74561a" kind="function"><name>IsFBOQueueValid</name></member>
+    <member refid="classSR__GRAPH__NS_1_1Pipeline_1aee27e9fe81e16063ed3d0c93b5ba0415" kind="function"><name>GetUsedVideoMemoryInfo</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1af81410f29289ddcdbc64cc6136541152" kind="function"><name>AllocateVBO</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a9b512eefe13cdf24947049580ee9ddce" kind="function"><name>AllocateVBO</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a5421b5f44c1c2889efb8e427b95063b4" kind="function"><name>AllocateIBO</name></member>
@@ -13234,6 +13232,17 @@
     <member refid="structSR__ANIMATIONS__NS_1_1UpdateContext_1a42b1fe2917ff697ba407512516589880" kind="variable"><name>pGraph</name></member>
     <member refid="structSR__ANIMATIONS__NS_1_1UpdateContext_1abf782b87f10bca7641d33bd1b585b1b9" kind="variable"><name>tolerance</name></member>
   </compound>
+  <compound refid="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo" kind="struct"><name>SR_GRAPH_NS::UsedVideoMemoryInfo</name>
+    <member refid="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo_1a8bb5848c111118cec16d471b09a894b3" kind="variable"><name>videoMemoryUsed</name></member>
+    <member refid="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo_1a53b466bc89494e15c63ea46804c05d08" kind="variable"><name>descriptorSetsCount</name></member>
+    <member refid="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo_1a85f04791d1b0a9f7bd739e94c6d64cd9" kind="variable"><name>shaderProgramsCount</name></member>
+    <member refid="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo_1ad8e24a99983c3d1a660cb24cdfe420d2" kind="variable"><name>UBOsCount</name></member>
+    <member refid="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo_1a3d0c2161787f76a39a2d02e6c8663628" kind="variable"><name>VBOsCount</name></member>
+    <member refid="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo_1aec8dd03b85deb4c4fb7f8ce86ce88ff7" kind="variable"><name>IBOsCount</name></member>
+    <member refid="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo_1a9fd98f7674ce2e2801c2ad29642f9675" kind="variable"><name>SSBOsCount</name></member>
+    <member refid="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo_1a2293b397195b28cd66e004b74748804a" kind="variable"><name>FBOsCount</name></member>
+    <member refid="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo_1ad4d148ddbf8f3e561585a36e6c763508" kind="variable"><name>texturesCount</name></member>
+  </compound>
   <compound refid="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits" kind="struct"><name>SR_UTILS_NS::Localization::Utf::UtfTraits</name>
   </compound>
   <compound refid="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_011_01_4" kind="struct"><name>SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;</name>
@@ -14007,9 +14016,9 @@
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1ab39d7cdebf5c0c032cd8dc98be695a50" kind="function"><name>GetCurrentFrameIndex</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a36d06e39f0caa9c298e572ec39e77112" kind="function"><name>GetKernel</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1aa21d85a911260d1b9fdc725cf99faeb3" kind="function"><name>GetMemoryManager</name></member>
-    <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1ac4c20385cf714a74bf66440c2b984792" kind="function"><name>GetUsedMemory</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a321cd962bc01483c7c6d69d5211cc53c" kind="function"><name>IsShaderConstantSupport</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a7fe0902e5ad8940fcd0e5e4c32472c19" kind="function"><name>IsShaderViewportIndexLayerSupported</name></member>
+    <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1af2e08e346ace1000fb89a4b69e0b604a" kind="function"><name>GetUsedVideoMemoryInfo</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a18196f98ad2d075a03daf1588e9fce6c" kind="function"><name>AllocateUBO</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a5eec835fe52aa8ab74bc32f6cd9047f7" kind="function"><name>AllocateVBO</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a33a3e35de5cf8ecde794b593abfb4082" kind="function"><name>AllocateIBO</name></member>
@@ -15926,6 +15935,7 @@
     <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a73e39319eb89901b5462394dfc308725" kind="define"><name>SR_FASTCALL_ATTRIBUTE</name></member>
     <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ae888130d972d0abf79927c3849f0b602" kind="define"><name>SR_CONSTEXPR</name></member>
     <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a0aa792aeb9cc49c0c147cde87abdcc7a" kind="define"><name>SR_INLINE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a3b2597be1eba92255ffe8fec0bc0657f" kind="define"><name>SR_MAX_FRAMES_IN_FLIGHT</name></member>
     <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ad4e3884dd6f5f9aef0843a2dcb78d2b5" kind="define"><name>SR_FASTCALL</name></member>
     <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1af28f49e3d796382879e675917ad8f8b4" kind="define"><name>SR_FORCE_INLINE</name></member>
     <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a54f2504cfb42f2c88f8d088aaa192841" kind="define"><name>SR_RESTRICT</name></member>

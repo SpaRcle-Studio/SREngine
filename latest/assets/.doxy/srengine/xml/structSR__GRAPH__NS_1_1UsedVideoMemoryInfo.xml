@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo" kind="struct" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::UsedVideoMemoryInfo</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo_1a8bb5848c111118cec16d471b09a894b3" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_GRAPH_NS::UsedVideoMemoryInfo::videoMemoryUsed</definition>
+        <argsstring></argsstring>
+        <name>videoMemoryUsed</name>
+        <qualifiedname>SR_GRAPH_NS::UsedVideoMemoryInfo::videoMemoryUsed</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="30" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo_1a53b466bc89494e15c63ea46804c05d08" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::UsedVideoMemoryInfo::descriptorSetsCount</definition>
+        <argsstring></argsstring>
+        <name>descriptorSetsCount</name>
+        <qualifiedname>SR_GRAPH_NS::UsedVideoMemoryInfo::descriptorSetsCount</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="31" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo_1a85f04791d1b0a9f7bd739e94c6d64cd9" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::UsedVideoMemoryInfo::shaderProgramsCount</definition>
+        <argsstring></argsstring>
+        <name>shaderProgramsCount</name>
+        <qualifiedname>SR_GRAPH_NS::UsedVideoMemoryInfo::shaderProgramsCount</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="32" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo_1ad8e24a99983c3d1a660cb24cdfe420d2" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::UsedVideoMemoryInfo::UBOsCount</definition>
+        <argsstring></argsstring>
+        <name>UBOsCount</name>
+        <qualifiedname>SR_GRAPH_NS::UsedVideoMemoryInfo::UBOsCount</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="33" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo_1a3d0c2161787f76a39a2d02e6c8663628" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::UsedVideoMemoryInfo::VBOsCount</definition>
+        <argsstring></argsstring>
+        <name>VBOsCount</name>
+        <qualifiedname>SR_GRAPH_NS::UsedVideoMemoryInfo::VBOsCount</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="34" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo_1aec8dd03b85deb4c4fb7f8ce86ce88ff7" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::UsedVideoMemoryInfo::IBOsCount</definition>
+        <argsstring></argsstring>
+        <name>IBOsCount</name>
+        <qualifiedname>SR_GRAPH_NS::UsedVideoMemoryInfo::IBOsCount</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="35" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo_1a9fd98f7674ce2e2801c2ad29642f9675" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::UsedVideoMemoryInfo::SSBOsCount</definition>
+        <argsstring></argsstring>
+        <name>SSBOsCount</name>
+        <qualifiedname>SR_GRAPH_NS::UsedVideoMemoryInfo::SSBOsCount</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="36" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo_1a2293b397195b28cd66e004b74748804a" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::UsedVideoMemoryInfo::FBOsCount</definition>
+        <argsstring></argsstring>
+        <name>FBOsCount</name>
+        <qualifiedname>SR_GRAPH_NS::UsedVideoMemoryInfo::FBOsCount</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="37" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo_1ad4d148ddbf8f3e561585a36e6c763508" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::UsedVideoMemoryInfo::texturesCount</definition>
+        <argsstring></argsstring>
+        <name>texturesCount</name>
+        <qualifiedname>SR_GRAPH_NS::UsedVideoMemoryInfo::texturesCount</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="38" column="18" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" line="29" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h" bodystart="29" bodyend="39"/>
+    <listofallmembers>
+      <member refid="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo_1a53b466bc89494e15c63ea46804c05d08" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UsedVideoMemoryInfo</scope><name>descriptorSetsCount</name></member>
+      <member refid="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo_1a2293b397195b28cd66e004b74748804a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UsedVideoMemoryInfo</scope><name>FBOsCount</name></member>
+      <member refid="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo_1aec8dd03b85deb4c4fb7f8ce86ce88ff7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UsedVideoMemoryInfo</scope><name>IBOsCount</name></member>
+      <member refid="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo_1a85f04791d1b0a9f7bd739e94c6d64cd9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UsedVideoMemoryInfo</scope><name>shaderProgramsCount</name></member>
+      <member refid="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo_1a9fd98f7674ce2e2801c2ad29642f9675" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UsedVideoMemoryInfo</scope><name>SSBOsCount</name></member>
+      <member refid="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo_1ad4d148ddbf8f3e561585a36e6c763508" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UsedVideoMemoryInfo</scope><name>texturesCount</name></member>
+      <member refid="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo_1ad8e24a99983c3d1a660cb24cdfe420d2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UsedVideoMemoryInfo</scope><name>UBOsCount</name></member>
+      <member refid="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo_1a3d0c2161787f76a39a2d02e6c8663628" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UsedVideoMemoryInfo</scope><name>VBOsCount</name></member>
+      <member refid="structSR__GRAPH__NS_1_1UsedVideoMemoryInfo_1a8bb5848c111118cec16d471b09a894b3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::UsedVideoMemoryInfo</scope><name>videoMemoryUsed</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -35,10 +35,9 @@
 
 | Type | Name |
 | ---: | :--- |
-|  uint8\_t | [**frameIndex**](#variable-frameindex)   = `0`<br> |
 |  void \* | [**pShaderHandle**](#variable-pshaderhandle)   = `nullptr`<br> |
-|  UBO | [**ubo**](#variable-ubo)   = `SR\_ID\_INVALID`<br> |
 |  uint16\_t | [**uboSize**](#variable-ubosize)   = `0`<br> |
+|  std::array&lt; UBO, SR\_MAX\_FRAMES\_IN\_FLIGHT &gt; | [**ubos**](#variable-ubos)  <br> |
 
 
 
@@ -93,19 +92,6 @@
 
 
 
-### variable frameIndex 
-
-```C++
-uint8_t SR_GRAPH_NS::Memory::VirtualUBOInfo::Data::frameIndex;
-```
-
-
-
-
-<hr>
-
-
-
 ### variable pShaderHandle 
 
 ```C++
@@ -119,10 +105,10 @@ void* SR_GRAPH_NS::Memory::VirtualUBOInfo::Data::pShaderHandle;
 
 
 
-### variable ubo 
+### variable uboSize 
 
 ```C++
-UBO SR_GRAPH_NS::Memory::VirtualUBOInfo::Data::ubo;
+uint16_t SR_GRAPH_NS::Memory::VirtualUBOInfo::Data::uboSize;
 ```
 
 
@@ -132,10 +118,10 @@ UBO SR_GRAPH_NS::Memory::VirtualUBOInfo::Data::ubo;
 
 
 
-### variable uboSize 
+### variable ubos 
 
 ```C++
-uint16_t SR_GRAPH_NS::Memory::VirtualUBOInfo::Data::uboSize;
+std::array<UBO, SR_MAX_FRAMES_IN_FLIGHT> SR_GRAPH_NS::Memory::VirtualUBOInfo::Data::ubos;
 ```
 
 

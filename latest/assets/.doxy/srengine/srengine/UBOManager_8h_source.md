@@ -35,13 +35,15 @@ namespace SR_GRAPH_NS::Memory {
         using UBO = int32_t;
 
         struct Data {
-            UBO ubo = SR_ID_INVALID;
-            uint8_t frameIndex = 0;
+            std::array<UBO, SR_MAX_FRAMES_IN_FLIGHT> ubos;
             void* pShaderHandle = nullptr;
             uint16_t uboSize = 0;
 
             void Validate() const {
-                SRAssert(ubo != SR_ID_INVALID);
+                SR_TRACY_ZONE;
+                for (auto ubo : ubos) {
+                    SRAssert(ubo != SR_ID_INVALID);
+                }
                 SRAssert(pShaderHandle);
                 SRAssert(uboSize != 0);
             }

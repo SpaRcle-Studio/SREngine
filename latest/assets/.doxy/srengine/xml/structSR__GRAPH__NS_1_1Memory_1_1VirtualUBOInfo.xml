@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="62" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="62" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="64" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="64" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1ab158ddca0081aed44c6ec7883451384f" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="65" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="65" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="67" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="67" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -65,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="40" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="42" column="9"/>
       </memberdef>
       <memberdef kind="function" id="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1a847733fbca8f6a22967612f8ca2f9510" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -79,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="41" column="9"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="43" column="9"/>
       </memberdef>
       <memberdef kind="function" id="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1af0554c19d5521dda36afbb79225c19df" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -97,7 +97,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="43" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="43" bodyend="46"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="45" column="9" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="45" bodyend="48"/>
       </memberdef>
       <memberdef kind="function" id="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1abd674cec64aa7eabf8f34a10c907d376" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo" kindref="compound">VirtualUBOInfo</ref> &amp;</type>
@@ -115,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="48" column="24" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="48" bodyend="52"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="50" column="24" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="50" bodyend="54"/>
       </memberdef>
       <memberdef kind="function" id="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1ad1030b1bbf1a2d0df4c510d9eaf25378" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -129,7 +129,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="54" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="54" bodyend="56"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="56" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="56" bodyend="58"/>
       </memberdef>
       <memberdef kind="function" id="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1a4ccc19b4d9be2f55de1a8b84dd611186" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="58" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="58" bodyend="60"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="60" column="27" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="60" bodyend="62"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -174,7 +174,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="24" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="24" bodyend="67"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="24" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="24" bodyend="69"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1aeac45cec150947e6a19ac1c3c61cccd0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::VirtualUBOInfo</scope><name>data</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::VirtualUBOInfo</scope><name>NonCopyable</name></member>

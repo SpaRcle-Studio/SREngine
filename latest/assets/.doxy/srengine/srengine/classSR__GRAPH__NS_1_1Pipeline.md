@@ -121,7 +121,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual SR\_NODISCARD int32\_t | [**AllocateShaderProgram**](#function-allocateshaderprogram) (const [**SRShaderCreateInfo**](structSR__GRAPH__NS_1_1SRShaderCreateInfo.md) & createInfo, int32\_t fbo) <br> |
 | virtual SR\_NODISCARD int32\_t | [**AllocateTexture**](#function-allocatetexture) (const [**SRTextureCreateInfo**](structSR__GRAPH__NS_1_1SRTextureCreateInfo.md) & createInfo) <br> |
 | virtual SR\_NODISCARD int32\_t | [**AllocateUBO**](#function-allocateubo) (uint32\_t uboSize) <br> |
-| virtual SR\_NODISCARD int32\_t | [**AllocateVBO**](#function-allocatevbo-12) (const void \* pVertices, Vertices::VertexType type, size\_t count) <br>_---------------------------------------_  _Работа с памятью ---------------------------------------------_ __ |
+| virtual SR\_NODISCARD int32\_t | [**AllocateVBO**](#function-allocatevbo-12) (const void \* pVertices, Vertices::VertexType type, size\_t count) <br> |
 | virtual SR\_NODISCARD int32\_t | [**AllocateVBO**](#function-allocatevbo-22) (const [**SR\_UTILS\_NS::Vertex**](structSR__UTILS__NS_1_1Vertex.md) \* pVertices, Vertices::VertexType type, size\_t count) <br>_Продвинутая версия AllocateVBO, может сама выполнить преобразование типа памяти базовых вершин к нужному выравниванию._  |
 | virtual bool | [**BeginCmdBuffer**](#function-begincmdbuffer) () <br>_Начало записи в буфер команд. Разделение необходимо некоторым графическим API._  |
 | virtual bool | [**BeginCompute**](#function-begincompute) () <br>_Начало вычислений в Compute Shader._  |
@@ -191,7 +191,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual SR\_NODISCARD uint8\_t | [**GetSupportedSamples**](#function-getsupportedsamples) () noexcept const<br> |
 | virtual SR\_NODISCARD uint16\_t | [**GetSwapchainImagesCount**](#function-getswapchainimagescount) () const<br> |
 | virtual SR\_NODISCARD PipelineType | [**GetType**](#function-gettype) () noexcept const = 0<br> |
-| virtual uint64\_t | [**GetUsedMemory**](#function-getusedmemory) () const<br> |
+| virtual SR\_NODISCARD [**UsedVideoMemoryInfo**](structSR__GRAPH__NS_1_1UsedVideoMemoryInfo.md) | [**GetUsedVideoMemoryInfo**](#function-getusedvideomemoryinfo) () const<br>_---------------------------------------_  _Работа с памятью ---------------------------------------------_ __ |
 | virtual SR\_NODISCARD std::string | [**GetVendor**](#function-getvendor) () const<br>_------------------------------------_  _Вспомогательные методы ------------------------------------------_ __ |
 | virtual SR\_NODISCARD std::string | [**GetVersion**](#function-getversion) () const<br> |
 |  SR\_NODISCARD WindowPtr | [**GetWindow**](#function-getwindow) () const<br> |
@@ -676,7 +676,6 @@ inline virtual SR_NODISCARD int32_t SR_GRAPH_NS::Pipeline::AllocateUBO (
 
 ### function AllocateVBO [1/2]
 
-_---------------------------------------_  _Работа с памятью ---------------------------------------------_ __
 ```C++
 inline virtual SR_NODISCARD int32_t SR_GRAPH_NS::Pipeline::AllocateVBO (
     const void * pVertices,
@@ -1703,10 +1702,11 @@ virtual SR_NODISCARD PipelineType SR_GRAPH_NS::Pipeline::GetType () noexcept con
 
 
 
-### function GetUsedMemory 
+### function GetUsedVideoMemoryInfo 
 
+_---------------------------------------_  _Работа с памятью ---------------------------------------------_ __
 ```C++
-inline virtual uint64_t SR_GRAPH_NS::Pipeline::GetUsedMemory () const
+inline virtual SR_NODISCARD UsedVideoMemoryInfo SR_GRAPH_NS::Pipeline::GetUsedVideoMemoryInfo () const
 ```
 
 

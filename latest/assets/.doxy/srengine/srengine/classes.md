@@ -1967,6 +1967,8 @@
 ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * [**UpdateContext**](structSR__ANIMATIONS__NS_1_1UpdateContext.md)
 ([**SR\_ANIMATIONS\_NS**](namespaceSR__ANIMATIONS__NS.md))
+* [**UsedVideoMemoryInfo**](structSR__GRAPH__NS_1_1UsedVideoMemoryInfo.md)
+([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * [**UtfTraits**](structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits.md)
 ([**SR\_UTILS\_NS::Localization::Utf**](namespaceSR__UTILS__NS_1_1Localization_1_1Utf.md))
 * [**UtfTraits&lt; CharType, 1 &gt;**](structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_011_01_4.md)

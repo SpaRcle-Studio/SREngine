@@ -655,7 +655,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="379" column="5" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="379" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="381" column="5" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="381" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1ab192df1afaebb0bac9955bc678acb475" prot="public" static="no">
         <templateparamlist>
@@ -674,7 +674,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="387" column="5" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="387" bodyend="-1"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="389" column="5" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="389" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a82cc699d8c44225ad19521205bfe0d6d" prot="public" static="no">
         <type>std::list&lt; IResource::Ptr &gt;</type>
@@ -4133,7 +4133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="389" column="28" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="389" bodyend="391"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="391" column="28" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="391" bodyend="393"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a3bd31173e8c1be13b2b332e552163c52" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -4156,7 +4156,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="393" column="28" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="393" bodyend="395"/>
+        <location file="Engine/libs/Utils/inc/Utils/macros.h" line="395" column="28" bodyfile="Engine/libs/Utils/inc/Utils/macros.h" bodystart="395" bodyend="397"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a14b64ae7bfa3bc26d4b6d4d0f5853887" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>

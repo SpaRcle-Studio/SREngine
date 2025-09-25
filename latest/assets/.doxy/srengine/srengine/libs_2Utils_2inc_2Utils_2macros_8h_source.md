@@ -160,6 +160,8 @@
 #define SR_CONSTEXPR constexpr
 #define SR_INLINE inline
 
+#define SR_MAX_FRAMES_IN_FLIGHT 16
+
 #if defined(SR_ANDROID)
     #define SR_FASTCALL
     #define SR_FORCE_INLINE SR_INLINE

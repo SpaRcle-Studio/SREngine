@@ -424,6 +424,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **namespace** [**UI**](namespaceSR__GRAPH__NS_1_1UI.md) 
     * **struct** [**Uniform**](structSR__GRAPH__NS_1_1Uniform.md)     
     * **class** [**UniqueMaterial**](classSR__GRAPH__NS_1_1UniqueMaterial.md)     
+    * **struct** [**UsedVideoMemoryInfo**](structSR__GRAPH__NS_1_1UsedVideoMemoryInfo.md)     
     * **class** [**VarianceShadowMapPass**](classSR__GRAPH__NS_1_1VarianceShadowMapPass.md)     
     * **namespace** [**Vertices**](namespaceSR__GRAPH__NS_1_1Vertices.md)     
         * **struct** [**SimpleVertex**](structSR__GRAPH__NS_1_1Vertices_1_1SimpleVertex.md)     

@@ -35,8 +35,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  DescriptorSet | [**descriptorSet**](#variable-descriptorset)   = `SR\_ID\_INVALID`<br> |
-|  uint8\_t | [**frameIndex**](#variable-frameindex)   = `0`<br> |
+|  std::array&lt; DescriptorSet, SR\_MAX\_FRAMES\_IN\_FLIGHT &gt; | [**descriptorSets**](#variable-descriptorsets)  <br> |
 |  void \* | [**pShaderHandle**](#variable-pshaderhandle)   = `nullptr`<br> |
 
 
@@ -87,23 +86,10 @@
 
 
 
-### variable descriptorSet 
+### variable descriptorSets 
 
 ```C++
-DescriptorSet SR_GRAPH_NS::DescriptorManager::DescriptorSetInfo::descriptorSet;
-```
-
-
-
-
-<hr>
-
-
-
-### variable frameIndex 
-
-```C++
-uint8_t SR_GRAPH_NS::DescriptorManager::DescriptorSetInfo::frameIndex;
+std::array<DescriptorSet, SR_MAX_FRAMES_IN_FLIGHT> SR_GRAPH_NS::DescriptorManager::DescriptorSetInfo::descriptorSets;
 ```
 
 
