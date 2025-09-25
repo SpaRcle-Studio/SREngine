@@ -7,4 +7,4 @@
 - [ ] Scripting
 
 ## Platforms
-{! Platforms.md !}
+!!! include "Platforms.md"

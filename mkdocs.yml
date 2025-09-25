@@ -85,13 +85,13 @@ plugins:
           doxy-cfg:
             FILE_PATTERNS: "*.h"
             RECURSIVE: True
-            EXCLUDE_PATTERNS: "**/libs/*/libs/**"
+            EXCLUDE_PATTERNS: "**/*" # временно отключена генерация доков
+            #EXCLUDE_PATTERNS: "**/libs/*/libs/**"
             #EXCLUDE_PATTERNS: "**/libs/**"
   - search:
       separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
   - minify:
       minify_html: true
-  - include-markdown
 
 extra:
   homepage: https://sparcles.dev/
