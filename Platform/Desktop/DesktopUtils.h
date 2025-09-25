@@ -28,7 +28,8 @@ enum ERROR_CODES {
     ERROR_MODULE_NOT_FOUND = 1,
     ERROR_MODULE_LOAD_FAILED = 2,
     ERROR_MODULE_ENTRY_POINT_NOT_FOUND = 3,
-    ERROR_MODULE_UNLOAD_FAILED = 4
+    ERROR_MODULE_UNLOAD_FAILED = 4,
+    ERROR_ENGINE_EXIT = 5,
 };
 
 #if defined(WIN32)
@@ -158,9 +159,10 @@ int SREngineEntryPointFromExternalModule(int argc, char** argv, bool notFoundAsE
         return ERROR_MODULE_ENTRY_POINT_NOT_FOUND;
     }
 
-    const int code = pEntryPointFunction(argc, argv);
+    int code = pEntryPointFunction(argc, argv);
     if (code != 0) {
         std::cerr << "Engine entry point failed with code: " << code << std::endl;
+        code = ERROR_ENGINE_EXIT;
     }
 
     if (!UnloadDynamicModule(pModuleHandle)) {

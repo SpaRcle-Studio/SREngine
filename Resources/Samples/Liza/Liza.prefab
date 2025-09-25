@@ -2604,6 +2604,11 @@ use tabs: true
 														14-a:shaderDefines
 															15-k:item
 																16-v:first
+																	17-s:DISABLE_CULLING
+																16-v:second
+																	17-s:
+															15-k:item
+																16-v:first
 																	17-s:HAS_ALPHA
 																16-v:second
 																	17-s:
@@ -2757,6 +2762,11 @@ use tabs: true
 														14-s:MaterialData
 													13-o:ptr
 														14-a:shaderDefines
+															15-k:item
+																16-v:first
+																	17-s:DISABLE_CULLING
+																16-v:second
+																	17-s:
 															15-k:item
 																16-v:first
 																	17-s:HAS_ALPHA

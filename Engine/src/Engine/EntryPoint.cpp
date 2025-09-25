@@ -49,7 +49,7 @@ int SREngineEntryPoint(int argc, char** argv) {
     auto&& launcherInitStatus = pLauncher->InitLauncher();
 
     if (!SR_UTILS_NS::ResourceManager::Instance().IsInitialized()) {
-        if (!SR_UTILS_NS::ResourceManager::Instance().Initialize(pLauncher->GetResourcesPath())) {
+        if (!SR_UTILS_NS::ResourceManager::Instance().Initialize(pLauncher->GetResourcesPath(), pLauncher->GetEngineResourcesPath())) {
             SR_PLATFORM_NS::WriteConsoleError("Failed to initialize resources manager!");
             code = 1;
         }

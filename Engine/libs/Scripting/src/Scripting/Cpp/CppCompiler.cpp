@@ -31,6 +31,7 @@ namespace SR_SCRIPTING_NS {
     bool CppCompiler::Init() {
         m_cachePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
         m_resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+        m_engineResourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetEngineResPath();
 
         auto&& settingsPath = m_cachePath.Concat(CPP_COMPILER_SETTINGS_PATH);
         if (SR_PLATFORM_NS::IsExists(settingsPath)) {
@@ -226,7 +227,7 @@ namespace SR_SCRIPTING_NS {
             return false;
         }
 
-        std::string sourceFiles = m_cachePath.Concat("Scripts/Codegen/{}.cxx "_format(context.moduleName));
+        std::string sourceFiles = "\"" + m_cachePath.Concat("Scripts/Codegen/{}.cxx"_format(context.moduleName)).ToString() + "\" ";
 
         std::string includePaths;
         for (auto&& includePath : context.includePaths) {
@@ -241,7 +242,7 @@ namespace SR_SCRIPTING_NS {
         std::string outArgs;
 
         if (m_settings.compilerType == CppCompilerType::MSVC) {
-            outArgs += "/Fe" + outModulePath + " ";
+            outArgs += "/Fe\"" + outModulePath + "\" ";
             std::string msvcInclude = m_settings.compilerPath.GetPrevious().GetPrevious().GetPrevious().GetPrevious().Concat("include");
             includePaths += "/I\"" + msvcInclude + "\" ";
 
@@ -286,7 +287,7 @@ namespace SR_SCRIPTING_NS {
         if (m_settings.compilerType == CppCompilerType::MSVC) {
             //command += " /LIBPATH:\"C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.42.34433/lib/x64\"";
             if (context.isDebug) {
-                command += " /link /DEBUG /PDB:" + outPdbPath;
+                command += " /link /DEBUG /PDB:\"" + outPdbPath + "\"";
             }
         }
 
@@ -434,7 +435,7 @@ namespace SR_SCRIPTING_NS {
                 SR_PLATFORM_NS::MessageBoxIconType::Info,
                 SR_PLATFORM_NS::MessageBoxDefaultButtonType::YesOk
             );
-            auto&& pathToVSBuildToolsInstaller = m_resourcesPath.Concat("Engine/Utilities/vs_BuildTools.exe");
+            auto&& pathToVSBuildToolsInstaller = m_engineResourcesPath.Concat("Engine/Utilities/vs_BuildTools.exe");
             SR_SYSTEM_LOG("CppCompiler::FindWindowsCompiler() : path to VS Build Tools installer: " + pathToVSBuildToolsInstaller.ToStringRef());
             SR_SYSTEM_LOG("CppCompiler::FindWindowsCompiler() : engine will be terminated after installer launched!");
             SR_PLATFORM_NS::ExecuteCommand(pathToVSBuildToolsInstaller.ToStringRef());

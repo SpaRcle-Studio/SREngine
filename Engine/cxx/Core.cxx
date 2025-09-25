@@ -9,6 +9,7 @@
 #include "../src/Engine/Parsers/BlueprintParser.cpp"
 
 #include "../src/Engine/Settings/EditorSettings.cpp"
+#include "../src/Engine/Settings/ProjectSettings.cpp"
 
 #include "../src/Engine/UI/Button.cpp"
 #include "../src/Engine/UI/IButton.cpp"

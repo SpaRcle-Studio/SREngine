@@ -36,11 +36,12 @@ namespace SR_SCRIPTING_NS {
         SR_LOG("ScriptSystem::Init() : initializing script system...");
 
         m_resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+        m_engineResourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetEngineResPath();
         m_cacheFolder = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
-        m_apiFolder = m_resourcesFolder.Concat("SpaRcleAPI");
 
         m_isCompilationEnabled = SR_UTILS_NS::Features::Instance().Enabled("ScriptCompilation", true);
         m_isCompilationEnabled &= !SR_PLATFORM_NS::IsMobilePlatform();
+        m_apiFolder = m_engineResourcesFolder.Concat("API");
 
         if (m_isCompilationEnabled && !InitEngineSources()) {
             SR_ERROR("ScriptSystem::Init() : failed to initialize engine sources!");
@@ -450,7 +451,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     bool ScriptSystem::InitEngineSources() {
-        m_pathToEngineSourcesRoot = m_resourcesFolder.Concat("API");
+        m_pathToEngineSourcesRoot = m_engineResourcesFolder.Concat("API");
         if (!m_pathToEngineSourcesRoot.IsDir()) {
             SR_ERROR("ScriptSystem::InitEngineSources() : engine sources folder not found!\n\tPath: {}", m_pathToEngineSourcesRoot);
             return false;

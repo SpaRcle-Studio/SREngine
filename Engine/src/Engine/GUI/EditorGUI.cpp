@@ -20,6 +20,7 @@
 #include <Engine/GUI/RenderTechniqueEditor.h>
 #include <Engine/GUI/FileBrowser.h>
 #include <Engine/GUI/About.h>
+#include <Engine/GUI/CreateNewProject.h>
 #include <Engine/GUI/SceneTools.h>
 #include <Engine/EngineCommands.h>
 
@@ -94,6 +95,7 @@ namespace SR_CORE_GUI_NS {
 		AddWidget(new About());
 		AddWidget(new SoundDebug());
         AddWidget(new RenderTechniqueEditor());
+        AddWidget(new CreateNewProject());
         AddWidget(new SceneViewer(m_engine, GetWidget<Hierarchy>()));
 
         for (auto& [id, widget] : m_widgets) {
@@ -488,6 +490,14 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::WindowPadding, SR_MATH_NS::FVector2(8, 8));
 
         if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("File")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("New project")) {
+                //auto&& projectPath = SR_UTILS_NS::FileDialog::Instance().SaveDialog(SR_UTILS_NS::ResourceManager::Instance().GetResPath(), { { "Project folder", "" } });
+                //SR_LOG("EditorGUI::DrawMenuBar() : new project path: {}", projectPath.ToString());
+                OpenWidget<CreateNewProject>();
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem("New scene")) {
                 m_engine->AddSceneToQueue(SR_WORLD_NS::Scene::NewScene(GetNewScenePath(), SR_WORLD_NS::SceneLogicType::Asset));
                 CacheScenePath(m_engine->GetScene()->GetPath());

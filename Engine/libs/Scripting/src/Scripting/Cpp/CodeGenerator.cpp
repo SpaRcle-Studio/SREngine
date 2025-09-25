@@ -183,10 +183,10 @@ namespace SR_SCRIPTING_NS {
             }
 
             const SR_UTILS_NS::Path buildDir = m_cacheFolder.Concat("Scripts/Modules/{}"_format(module.moduleInfo.moduleName));
-            const SR_UTILS_NS::Path configFolder = m_resourcesFolder.Concat("Engine/Utilities");
+            SR_UTILS_NS::Path libclangFolder = m_engineResourcesFolder.Concat("Engine/Utilities");
 
             const std::string command = "{} --codegen_dir \"{}\" --root_build_dir \"{}\" --repo_dir \"{}\" --config_dir \"{}\" --module_name \"{}\" --is_script --help_sources_dir \"{}\""_format(
-                m_codegenExecutablePath, buildDir, buildDir, module.path.GetFolder(), configFolder, module.moduleInfo.moduleName, m_pScriptSystem->GetEngineSourcesPath().Concat("Engine")
+                m_codegenExecutablePath, buildDir, buildDir, module.path.GetFolder(), libclangFolder, module.moduleInfo.moduleName, m_pScriptSystem->GetEngineSourcesPath().Concat("Engine")
             );
 
             SR_LOG("CppCodeGenerator::RegenerateChangedModules() : generating module...\n\tModule: {}\n\tCommand: {}", module.moduleInfo.moduleName, command);
@@ -288,13 +288,14 @@ namespace SR_SCRIPTING_NS {
 
     bool CppCodeGenerator::Init() {
         m_resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+        m_engineResourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetEngineResPath();
         m_cacheFolder = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
 
         if (SR_PLATFORM_NS::GetType() == SR_UTILS_NS::PlatformType::Windows) {
-            m_codegenExecutablePath = m_resourcesFolder.Concat("Engine/Utilities/codegen.exe");
+            m_codegenExecutablePath = m_engineResourcesFolder.Concat("Engine/Utilities/codegen.exe");
         }
         else {
-            m_codegenExecutablePath = m_resourcesFolder.Concat("Engine/Utilities/codegen");
+            m_codegenExecutablePath = m_engineResourcesFolder.Concat("Engine/Utilities/codegen");
         }
 
         return true;

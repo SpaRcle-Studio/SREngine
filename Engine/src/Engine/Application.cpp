@@ -124,9 +124,84 @@ namespace SR_CORE_NS {
         }
     }*/
 
+    static std::string_view ResolvePath(const std::string_view& original, const std::string_view& engineRoot, decltype(&SR_PLATFORM_NS::GetPathType) getFileType) {
+        SR_TRACY_ZONE;
+
+        if (getFileType(original) != SR_UTILS_NS::Path::Type::Undefined) {
+            return original;
+        }
+
+        constexpr const char* anchor = "Resources/";
+        constexpr size_t anchorLen = 10;
+        const char* pos = std::strstr(original.data(), anchor);
+        if (!pos) {
+            return original;
+        }
+
+        /// если файл в Resources/Cache, то не трогаем
+        if (std::strncmp(pos + anchorLen, "Cache/", 6) == 0) {
+            return original;
+        }
+
+        const char* tail = pos + anchorLen;
+
+        thread_local char buf[4096];
+        char* p = buf;
+
+        size_t lenRoot = engineRoot.size();
+        size_t lenTail = std::strlen(tail);
+        size_t need = lenRoot + 1 + lenTail + 1;
+
+        if (need > sizeof(buf)) SR_UNLIKELY_ATTRIBUTE {
+            SR_PLATFORM_NS::WriteConsoleError(SR_FORMAT("Resolved path is too long! Path: {}\n", original));
+            return original;
+        }
+
+        std::memcpy(p, engineRoot.data(), lenRoot);
+        p += lenRoot;
+        *p++ = '/';
+
+        std::memcpy(p, tail, lenTail);
+        p += lenTail;
+        *p = '\0';
+
+        if (getFileType(buf) != SR_UTILS_NS::Path::Type::Undefined) {
+            return std::string_view(buf, need - 1); // минус '\0'
+        }
+
+        return original;
+    }
+
     bool Application::InitializeResourcesFolder() {
-        m_resourcesPath = SR_PLATFORM_NS::GetApplicationResourcesPath();
-        return m_resourcesPath.Exists(SR_UTILS_NS::Path::Type::Folder);
+        m_engineResourcesPath = SR_PLATFORM_NS::GetApplicationResourcesPath();
+        if (!m_engineResourcesPath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
+            return false;
+        }
+
+        m_resourcesPath = m_engineResourcesPath;
+
+        if (auto&& projectPath = SR_UTILS_NS::CLIManager::Instance().GetProjectPath()) {
+            auto&& resourcesPath = projectPath->GetFolder().Concat("Resources");
+            if (resourcesPath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
+                m_resourcesPath = resourcesPath;
+
+                SR_PLATFORM_NS::InitializeHooks([applicationResources = m_engineResourcesPath](SR_PLATFORM_NS::PlatformHooks& hooks) {
+                    if (hooks.originalReadFile && hooks.originalGetPathType) {
+                        hooks.getFileTypeHook = [applicationResources, hooks](auto&& path) {
+                            return hooks.originalGetPathType(ResolvePath(path, applicationResources.ToStringView(), hooks.originalGetPathType));
+                        };
+                        hooks.readFileHook = [applicationResources, hooks](auto&& path) {
+                            return hooks.originalReadFile(ResolvePath(path.ToStringView(), applicationResources.ToStringView(), hooks.originalGetPathType));
+                        };
+                        hooks.pathResolver = [applicationResources, hooks](std::string_view path) {
+                            return ResolvePath(path, applicationResources.ToStringView(), hooks.originalGetPathType);
+                        };
+                    }
+                });
+            }
+        }
+
+        return true;
     }
 
     bool Application::InitLogger(const SR_UTILS_NS::Path& logDir) {
@@ -227,10 +302,6 @@ namespace SR_CORE_NS {
         SR_GRAPH_NS::Memory::MeshManager::DestroySingleton();
 
         SR_UTILS_NS::Debug::Instance().System("Application::Close() : all systems were successfully closed!");
-    }
-
-    void Application::SwitchResourcesFolder(const SR_UTILS_NS::Path& path) {
-        // SR_STATIC_ASSERT("Not yet implemented.");
     }
 
     void Application::Reload() {

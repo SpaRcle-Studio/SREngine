@@ -91,6 +91,7 @@ namespace SR_SCRIPTING_NS {
         CppCompiler* m_compiler = nullptr;
         std::vector<CppCodegenModule> m_modules;
         SR_UTILS_NS::Path m_resourcesFolder;
+        SR_UTILS_NS::Path m_engineResourcesFolder;
         SR_UTILS_NS::Path m_cacheFolder;
         SR_UTILS_NS::Path m_codegenExecutablePath;
 

@@ -4,6 +4,7 @@
 
 #include <Engine/GUI/FileBrowser.h>
 #include <Engine/GUI/AssetInspector.h>
+#include <Engine/Settings/ProjectSettings.h>
 
 #include <Utils/FileSystem/Path.h>
 #include <Utils/Common/VectorUtils.h>
@@ -422,7 +423,7 @@ namespace SR_CORE_NS::GUI {
         }
         else {
             static std::set<std::string_view> supportedAssets = {
-                SR_UTILS_NS::Asset::EXTENSION_NAME, "mat", "srtech"
+                SR_CORE_NS::ProjectSettings::EXTENSION_NAME, SR_UTILS_NS::Asset::EXTENSION_NAME, "mat", "srtech"
             };
 
             if (supportedAssets.count(path.GetExtensionView()) != 0) {

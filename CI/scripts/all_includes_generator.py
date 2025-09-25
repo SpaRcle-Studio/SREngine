@@ -36,26 +36,30 @@ def collect_files(logger: logger_utils.Logger, context: codegen_context.CodegenC
 
     end = perf_counter()
     logger.log_info(f'Loading config \"{config_path}\" time: {end - start:.2f} sec')
+    logger.log_info(f'Analyze dir: {context.analyze_dir}')
 
     collected_files = []
 
-    for dir_path, _, _ in os.walk(context.analyze_dir):
-        for file_path in glob(os.path.join(dir_path, '*.*'), recursive=False):
-            file_path = sparcle_utils.normalize_path(file_path)
-            if any((check_dir in file_path) for check_dir in excludes):
-                continue
-            if any((check_dir in file_path) for check_dir in includes):
-                collected_files.append(file_path)
+    try:
+        for dir_path, _, _ in os.walk(context.analyze_dir):
+            for file_path in glob(os.path.join(dir_path, '*.*'), recursive=False):
+                file_path = sparcle_utils.normalize_path(file_path)
+                if any((check_dir in file_path) for check_dir in excludes):
+                    continue
+                if any((check_dir in file_path) for check_dir in includes):
+                    collected_files.append(file_path)
 
 
-    files_for_codegen = []
-    for file_path in collected_files:
-        with open(file_path, 'r', encoding='utf-8') as f:
-            for line in f:
-                if any(token in line for token in TARGET_TOKENS):
-                    files_for_codegen.append(file_path)
-                    break
-
+        files_for_codegen = []
+        for file_path in collected_files:
+            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+                for line in f:
+                    if any(token in line for token in TARGET_TOKENS):
+                        files_for_codegen.append(file_path)
+                        break
+    except Exception as e:
+        logger.log_fatal_error(f'Error during file collection: {e}')
+        return []
 
     return files_for_codegen
 

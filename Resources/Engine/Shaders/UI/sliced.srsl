@@ -10,8 +10,7 @@ DepthTest true;
 
 [[uniform], [public]] vec4 color = vec4(1.0, 1.0, 1.0, 1.0);
 [[uniform], [public]] sampler2D diffuse;
-[[uniform], [public]] vec4 NDC_RECT;
-
+[[uniform]] vec4 NDC_RECT;
 [[shared]] vec2 UV;
 
 float sliced_map(float value, float originalMin, float originalMax, float newMin, float newMax) {

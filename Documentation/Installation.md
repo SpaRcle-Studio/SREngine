@@ -13,15 +13,18 @@ You can get your SpaRcle Engine with the following methods:
 
 - [x] Windows 11
 - [x] Linux 
-- [x] Android (currently only build supported)
+- [x] Android
+- [ ] Web
 - [ ] iOS - not planned in near future
+- [ ] macOS - not planned in near future
 
 
 ### Supported compilers
 
 - [x] MSVC (stable)
 - [x] GCC (stable)
-- [x] Clang
+- [x] Clang (stable)
+- [ ] MinGW
 
 
 ## Building 

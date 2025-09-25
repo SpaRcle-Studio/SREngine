@@ -61,7 +61,10 @@ int main(int argc, char** argv) {
             }
         }
 
-        return RunUnpackedApplication(executablePath);
+        if (runResult != ERROR_ENGINE_EXIT) {
+            return RunUnpackedApplication(executablePath);
+        }
+        return runResult;
     }
 
     return unpackResult;

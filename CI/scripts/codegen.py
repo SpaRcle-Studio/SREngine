@@ -71,7 +71,7 @@ if __name__ == "__main__":
     logger_utils.init_utf8_console()
 
     logger = logger_utils.Logger()
-    logger.set_module_name(context.module_name )
+    logger.set_module_name(context.module_name)
     logger.create_log_file(os.path.join(context.build_dir, 'codegen.log'))
 
     logger.log_info('Start codegen...')

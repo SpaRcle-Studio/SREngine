@@ -74,6 +74,7 @@ namespace SR_SCRIPTING_NS {
         /// shared parameters (read only)
 
         SR_UTILS_NS::Path m_pathToEngineSourcesRoot;
+        SR_UTILS_NS::Path m_engineResourcesFolder;
         SR_UTILS_NS::Path m_resourcesFolder;
         SR_UTILS_NS::Path m_cacheFolder;
         SR_UTILS_NS::Path m_apiFolder;

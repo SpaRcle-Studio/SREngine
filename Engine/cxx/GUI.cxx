@@ -27,4 +27,5 @@
 #include "../src/Engine/GUI/PropertyDrawer.cpp"
 #include "../src/Engine/GUI/EditorCamera.cpp"
 #include "../src/Engine/GUI/EditorGizmo.cpp"
+#include "../src/Engine/GUI/CreateNewProject.cpp"
 #include "../src/Engine/GUI/SceneTools.cpp"

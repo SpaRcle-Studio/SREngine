@@ -37,7 +37,7 @@ namespace SR_CORE_NS {
             return LauncherInitStatus::Error;
         }
 
-        if (CloneResources()) {
+        if (CloneResources() && InitializeResourcesFolder()) {
             SR_LOG("Launcher::InitLauncher() : resources cloned.");
             return LauncherInitStatus::Success;
         }
@@ -50,6 +50,11 @@ namespace SR_CORE_NS {
 
     bool Launcher::UnpackEmbedded() {
         SR_LOG("Launcher::UnpackEmbedded() : unpacking embedded resources...");
+
+        if (SR_UTILS_NS::CLIManager::Instance().GetProjectPath()) {
+            SR_ERROR("Launcher::UnpackEmbedded() : unable to unpack embedded resources in project mode!");
+            return false;
+        }
 
         auto&& applicationPath = SR_PLATFORM_NS::GetApplicationPath();
         SR_UTILS_NS::Path unpackDirectory = applicationPath.GetFolder().GetPrevious().GetPrevious();

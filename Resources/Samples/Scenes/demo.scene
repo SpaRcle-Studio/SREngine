@@ -1807,9 +1807,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:2560
+											11-f:1368
 										10-v:height
-											11-f:1440
+											11-f:1020
 						6-k:i
 							7-o:d
 								8-v:type
@@ -1873,6 +1873,33 @@ ddddцццゔぅヾボ
 																					21-s:MaterialData
 																				20-o:ptr
 																					21-o:defaultShader
+																						22-v:shaderPath
+																							23-s:Engine/Shaders/UI/sliced.srsl
+																						22-a:uniforms
+																							23-k:i
+																								24-o:d
+																									25-v:id
+																										26-s:color
+																									25-v:type
+																										26-s:Vec4
+																									25-o:value
+																										26-v:x
+																											27-f:1
+																										26-v:y
+																											27-f:1
+																										26-v:z
+																											27-f:1
+																										26-v:w
+																											27-f:1
+																						22-a:samplers
+																							23-k:i
+																								24-o:d
+																									25-v:id
+																										26-s:diffuse
+																									25-v:type
+																										26-s:Sampler2D
+																									25-v:value
+																										26-s:Engine/Textures/uv.png
 																	17-o:textureBorder
 																		18-v:x
 																			19-f:0.150000006
@@ -1910,6 +1937,33 @@ ddddцццゔぅヾボ
 																									25-s:MaterialData
 																								24-o:ptr
 																									25-o:defaultShader
+																										26-v:shaderPath
+																											27-s:Engine/Shaders/UI/sliced.srsl
+																										26-a:uniforms
+																											27-k:i
+																												28-o:d
+																													29-v:id
+																														30-s:color
+																													29-v:type
+																														30-s:Vec4
+																													29-o:value
+																														30-v:x
+																															31-f:1
+																														30-v:y
+																															31-f:1
+																														30-v:z
+																															31-f:1
+																														30-v:w
+																															31-f:1
+																										26-a:samplers
+																											27-k:i
+																												28-o:d
+																													29-v:id
+																														30-s:diffuse
+																													29-v:type
+																														30-s:Sampler2D
+																													29-v:value
+																														30-s:Engine/Textures/uv.png
 																					21-o:textureBorder
 																						22-v:x
 																							23-f:0.150000006
@@ -1959,6 +2013,33 @@ ddddцццゔぅヾボ
 																									25-s:MaterialData
 																								24-o:ptr
 																									25-o:defaultShader
+																										26-v:shaderPath
+																											27-s:Engine/Shaders/UI/sliced.srsl
+																										26-a:uniforms
+																											27-k:i
+																												28-o:d
+																													29-v:id
+																														30-s:color
+																													29-v:type
+																														30-s:Vec4
+																													29-o:value
+																														30-v:x
+																															31-f:1
+																														30-v:y
+																															31-f:1
+																														30-v:z
+																															31-f:1
+																														30-v:w
+																															31-f:1
+																										26-a:samplers
+																											27-k:i
+																												28-o:d
+																													29-v:id
+																														30-s:diffuse
+																													29-v:type
+																														30-s:Sampler2D
+																													29-v:value
+																														30-s:Engine/Textures/uv.png
 																					21-o:textureBorder
 																						22-v:x
 																							23-f:0.150000006
@@ -1996,6 +2077,33 @@ ddddцццゔぅヾボ
 																													29-s:MaterialData
 																												28-o:ptr
 																													29-o:defaultShader
+																														30-v:shaderPath
+																															31-s:Engine/Shaders/UI/sliced.srsl
+																														30-a:uniforms
+																															31-k:i
+																																32-o:d
+																																	33-v:id
+																																		34-s:color
+																																	33-v:type
+																																		34-s:Vec4
+																																	33-o:value
+																																		34-v:x
+																																			35-f:1
+																																		34-v:y
+																																			35-f:1
+																																		34-v:z
+																																			35-f:1
+																																		34-v:w
+																																			35-f:1
+																														30-a:samplers
+																															31-k:i
+																																32-o:d
+																																	33-v:id
+																																		34-s:diffuse
+																																	33-v:type
+																																		34-s:Sampler2D
+																																	33-v:value
+																																		34-s:Engine/Textures/uv.png
 																									25-o:textureBorder
 																										26-v:x
 																											27-f:0.150000006
@@ -2068,9 +2176,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:2560
+											11-f:1368
 										10-v:height
-											11-f:1440
+											11-f:1020
 										10-v:align
 											11-s:End
 									9-v:direction
@@ -2648,6 +2756,33 @@ ddddцццゔぅヾボ
 																	17-s:MaterialData
 																16-o:ptr
 																	17-o:defaultShader
+																		18-v:shaderPath
+																			19-s:Engine/Shaders/UI/sliced.srsl
+																		18-a:uniforms
+																			19-k:i
+																				20-o:d
+																					21-v:id
+																						22-s:color
+																					21-v:type
+																						22-s:Vec4
+																					21-o:value
+																						22-v:x
+																							23-f:1
+																						22-v:y
+																							23-f:1
+																						22-v:z
+																							23-f:1
+																						22-v:w
+																							23-f:1
+																		18-a:samplers
+																			19-k:i
+																				20-o:d
+																					21-v:id
+																						22-s:diffuse
+																					21-v:type
+																						22-s:Sampler2D
+																					21-v:value
+																						22-s:Engine/Textures/uv.png
 													13-o:textureBorder
 														14-v:x
 															15-f:0.150000006
@@ -2695,6 +2830,33 @@ ddddцццゔぅヾボ
 																									25-s:MaterialData
 																								24-o:ptr
 																									25-o:defaultShader
+																										26-v:shaderPath
+																											27-s:Engine/Shaders/UI/sliced.srsl
+																										26-a:uniforms
+																											27-k:i
+																												28-o:d
+																													29-v:id
+																														30-s:color
+																													29-v:type
+																														30-s:Vec4
+																													29-o:value
+																														30-v:x
+																															31-f:1
+																														30-v:y
+																															31-f:1
+																														30-v:z
+																															31-f:1
+																														30-v:w
+																															31-f:1
+																										26-a:samplers
+																											27-k:i
+																												28-o:d
+																													29-v:id
+																														30-s:diffuse
+																													29-v:type
+																														30-s:Sampler2D
+																													29-v:value
+																														30-s:Engine/Textures/uv.png
 																					21-o:textureBorder
 																						22-v:x
 																							23-f:0.409999996
@@ -2749,6 +2911,33 @@ ddddцццゔぅヾボ
 																									25-s:MaterialData
 																								24-o:ptr
 																									25-o:defaultShader
+																										26-v:shaderPath
+																											27-s:Engine/Shaders/UI/sliced.srsl
+																										26-a:uniforms
+																											27-k:i
+																												28-o:d
+																													29-v:id
+																														30-s:color
+																													29-v:type
+																														30-s:Vec4
+																													29-o:value
+																														30-v:x
+																															31-f:1
+																														30-v:y
+																															31-f:1
+																														30-v:z
+																															31-f:1
+																														30-v:w
+																															31-f:1
+																										26-a:samplers
+																											27-k:i
+																												28-o:d
+																													29-v:id
+																														30-s:diffuse
+																													29-v:type
+																														30-s:Sampler2D
+																													29-v:value
+																														30-s:Engine/Textures/uv.png
 																					21-o:textureBorder
 																						22-v:x
 																							23-f:0.409999996
@@ -2803,6 +2992,33 @@ ddddцццゔぅヾボ
 																									25-s:MaterialData
 																								24-o:ptr
 																									25-o:defaultShader
+																										26-v:shaderPath
+																											27-s:Engine/Shaders/UI/sliced.srsl
+																										26-a:uniforms
+																											27-k:i
+																												28-o:d
+																													29-v:id
+																														30-s:color
+																													29-v:type
+																														30-s:Vec4
+																													29-o:value
+																														30-v:x
+																															31-f:1
+																														30-v:y
+																															31-f:1
+																														30-v:z
+																															31-f:1
+																														30-v:w
+																															31-f:1
+																										26-a:samplers
+																											27-k:i
+																												28-o:d
+																													29-v:id
+																														30-s:diffuse
+																													29-v:type
+																														30-s:Sampler2D
+																													29-v:value
+																														30-s:Engine/Textures/uv.png
 																					21-o:textureBorder
 																						22-v:x
 																							23-f:0.409999996
@@ -2848,8 +3064,6 @@ ddddцццゔぅヾボ
 														14-s:Center
 													13-v:justify
 														14-s:FlexEnd
-									9-v:isEnabled
-										10-b:false
 									9-v:layer
 										10-s:UI
 									9-o:layout
@@ -2858,9 +3072,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:2560
+											11-f:1368
 										10-v:height
-											11-f:1440
+											11-f:1020
 									9-v:direction
 										10-s:Column
 									9-v:containerAlign
@@ -2882,8 +3096,6 @@ ddddцццゔぅヾボ
 												12-o:ptr
 													13-v:entityId
 														14-i:2311192610925393374
-													13-v:isEnabled
-														14-b:false
 													13-o:material
 														14-v:type
 															15-s:UniqueMaterial
@@ -2893,6 +3105,33 @@ ddddцццゔぅヾボ
 																	17-s:MaterialData
 																16-o:ptr
 																	17-o:defaultShader
+																		18-v:shaderPath
+																			19-s:Engine/Shaders/UI/sliced.srsl
+																		18-a:uniforms
+																			19-k:i
+																				20-o:d
+																					21-v:id
+																						22-s:color
+																					21-v:type
+																						22-s:Vec4
+																					21-o:value
+																						22-v:x
+																							23-f:1
+																						22-v:y
+																							23-f:1
+																						22-v:z
+																							23-f:1
+																						22-v:w
+																							23-f:1
+																		18-a:samplers
+																			19-k:i
+																				20-o:d
+																					21-v:id
+																						22-s:diffuse
+																					21-v:type
+																						22-s:Sampler2D
+																					21-v:value
+																						22-s:Engine/Textures/uv.png
 													13-o:textureBorder
 														14-v:x
 															15-f:0.150000006
@@ -3382,6 +3621,8 @@ ddddцццゔぅヾボ
 																		18-s:Center
 																	17-v:justify
 																		18-s:SpaceBetween
+													13-v:isEnabled
+														14-b:false
 													13-v:layer
 														14-s:UI
 													13-o:layout
@@ -3401,17 +3642,17 @@ ddddцццゔぅヾボ
 														14-s:Center
 													13-v:justify
 														14-s:SpaceAround
-									9-v:layer
-										10-s:UI
+									9-v:isEnabled
+										10-b:false
 									9-o:layout
 										10-v:widthPolicy
 											11-s:Fixed
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:2560
+											11-f:1368
 										10-v:height
-											11-f:1440
+											11-f:1020
 									9-v:direction
 										10-s:Column
 									9-v:containerAlign
@@ -3480,12 +3721,12 @@ ddddцццゔぅヾボ
 															15-f:0.150000006
 									9-v:name
 										10-s:UIWindowNode
+									9-v:isEnabled
+										10-b:false
 									9-o:layout
 									9-o:border
 										10-v:entityId
 											11-i:2371051644986324699
-					5-v:isEnabled
-						6-b:false
 					5-o:transform
 						6-v:type
 							7-s:Transform3D
@@ -5009,7 +5250,7 @@ ddddцццゔぅヾボ
 										10-o:ptr
 											11-o:translation
 												12-v:x
-													13-f:-4.2347393
+													13-f:0.0502895117
 												12-v:y
 													13-f:4.5353241
 												12-v:z
