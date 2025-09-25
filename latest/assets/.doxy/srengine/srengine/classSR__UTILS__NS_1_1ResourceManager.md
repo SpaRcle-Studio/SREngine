@@ -126,11 +126,13 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 |  [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; | [**Find**](#function-find-33) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
 |  SR\_NODISCARD IResource::Ptr | [**FindAnyType**](#function-findanytype) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id) const<br> |
 |  SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetCachePath**](#function-getcachepath) () const<br> |
+|  SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetEngineResPath**](#function-getenginerespath) () const<br> |
+|  SR\_NODISCARD const [**Path**](classSR__UTILS__NS_1_1Path.md) & | [**GetEngineResPathRef**](#function-getenginerespathref) () const<br> |
 |  SR\_NODISCARD [**FileSystemWatcher::Ptr**](classSR__HTYPES__NS_1_1SharedPtr.md) | [**GetFileSystemWatcher**](#function-getfilesystemwatcher) () const<br> |
 |  [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; | [**GetOrLoadResource**](#function-getorloadresource) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & rawPath, const [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; void(T &)&gt; & loadCallback=[**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; void(T &)&gt;(), const [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; std::string()&gt; & getPrefix=[**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; std::string()&gt;()) <br> |
 |  SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetResPath**](#function-getrespath) () const<br> |
 |  SR\_NODISCARD const [**Path**](classSR__UTILS__NS_1_1Path.md) & | [**GetResPathRef**](#function-getrespathref) () const<br> |
-|  bool | [**Initialize**](#function-initialize) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & resourcesFolder) <br> |
+|  bool | [**Initialize**](#function-initialize) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & resourcesFolder, const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & engineResourcesFolder) <br> |
 |  void | [**InspectResources**](#function-inspectresources) (const [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; void(ResourcesTypes &)&gt; & callback) <br> |
 |  SR\_NODISCARD bool | [**IsInitialized**](#function-isinitialized) () const<br> |
 |  SR\_NODISCARD bool | [**IsLastResource**](#function-islastresource) (const IResource::Ptr & pResource) <br> |
@@ -483,6 +485,32 @@ SR_NODISCARD Path SR_UTILS_NS::ResourceManager::GetCachePath () const
 
 
 
+### function GetEngineResPath 
+
+```C++
+inline SR_NODISCARD Path SR_UTILS_NS::ResourceManager::GetEngineResPath () const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetEngineResPathRef 
+
+```C++
+inline SR_NODISCARD const Path & SR_UTILS_NS::ResourceManager::GetEngineResPathRef () const
+```
+
+
+
+
+<hr>
+
+
+
 ### function GetFileSystemWatcher 
 
 ```C++
@@ -544,7 +572,8 @@ SR_NODISCARD const Path & SR_UTILS_NS::ResourceManager::GetResPathRef () const
 
 ```C++
 bool SR_UTILS_NS::ResourceManager::Initialize (
-    const SR_UTILS_NS::Path & resourcesFolder
+    const SR_UTILS_NS::Path & resourcesFolder,
+    const SR_UTILS_NS::Path & engineResourcesFolder
 ) 
 ```
 

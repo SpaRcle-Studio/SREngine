@@ -127,8 +127,8 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD virtual uint8_t GetCurrentFrameIndex() const { return 0; }
         SR_NODISCARD virtual void* GetCurrentShaderHandle() const { return nullptr; }
         SR_NODISCARD virtual void* GetCurrentFBOHandle() const { return nullptr; }
-        SR_NODISCARD virtual std::set<void*> GetFBOHandles() const { return std::set<void*>();  }
-        SR_NODISCARD virtual std::set<void*> GetShaderHandles() const { return std::set<void*>();  }
+        SR_NODISCARD virtual void GetFBOHandles(std::vector<void*>& handles) const { }
+        SR_NODISCARD virtual void GetShaderHandles(std::vector<void*>& handles) const { }
         SR_NODISCARD virtual uint8_t GetFrameBufferSampleCount() const { ++m_state.operations; return 0; }
         SR_NODISCARD virtual uint8_t GetBuildIterationsCount() const noexcept { ++m_state.operations; return 0; }
         SR_NODISCARD virtual uint8_t GetSupportedSamples() const noexcept { return m_supportedSampleCount; }

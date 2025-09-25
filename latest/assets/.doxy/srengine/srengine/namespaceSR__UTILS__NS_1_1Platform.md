@@ -31,6 +31,7 @@
 | ---: | :--- |
 | struct | [**FileMetadata**](structSR__UTILS__NS_1_1Platform_1_1FileMetadata.md) <br> |
 | struct | [**MouseState**](structSR__UTILS__NS_1_1Platform_1_1MouseState.md) <br> |
+| struct | [**PlatformHooks**](structSR__UTILS__NS_1_1Platform_1_1PlatformHooks.md) <br> |
 
 
 
@@ -41,6 +42,7 @@
 
 | Type | Name |
 | ---: | :--- |
+|  [**PlatformHooks**](structSR__UTILS__NS_1_1Platform_1_1PlatformHooks.md) | [**g\_platformHooks**](#variable-g_platformhooks)  <br> |
 |  std::mutex | [**g\_platformLogMutex**](#variable-g_platformlogmutex)  <br> |
 
 
@@ -95,6 +97,7 @@
 |  SR\_COMMON\_DLL\_API bool | [**GetSystemKeyboardState**](#function-getsystemkeyboardstate) (uint8\_t \* pKeyCodes) <br> |
 |  SR\_COMMON\_DLL\_API PlatformType | [**GetType**](#function-gettype) () <br> |
 |  SR\_COMMON\_DLL\_API void | [**InitSegmentationHandler**](#function-initsegmentationhandler) () <br> |
+|  SR\_COMMON\_DLL\_API void | [**InitializeHooks**](#function-initializehooks) (const std::function&lt; void([**PlatformHooks**](structSR__UTILS__NS_1_1Platform_1_1PlatformHooks.md) &hooks)&gt; & callback) <br> |
 |  SR\_COMMON\_DLL\_API void | [**InitializePlatform**](#function-initializeplatform) () <br> |
 |  SR\_COMMON\_DLL\_API bool | [**IsAbsolutePath**](#function-isabsolutepath) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
 |  SR\_COMMON\_DLL\_API bool | [**IsExists**](#function-isexists) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
@@ -158,6 +161,19 @@
 
 ## Public Attributes Documentation
 
+
+
+
+### variable g\_platformHooks 
+
+```C++
+PlatformHooks SR_UTILS_NS::Platform::g_platformHooks;
+```
+
+
+
+
+<hr>
 
 
 
@@ -630,6 +646,21 @@ SR_COMMON_DLL_API PlatformType SR_UTILS_NS::Platform::GetType ()
 
 ```C++
 SR_COMMON_DLL_API void SR_UTILS_NS::Platform::InitSegmentationHandler () 
+```
+
+
+
+
+<hr>
+
+
+
+### function InitializeHooks 
+
+```C++
+SR_COMMON_DLL_API void SR_UTILS_NS::Platform::InitializeHooks (
+    const std::function< void( PlatformHooks &hooks)> & callback
+) 
 ```
 
 

@@ -77,6 +77,20 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="147" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" bodystart="147" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1a7d357f8cefd5887b179ec40ac8c18337" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; void * &gt;</type>
+        <definition>std::vector&lt;void*&gt; SR_GRAPH_NS::Memory::ShaderProgramManager::m_handles</definition>
+        <argsstring></argsstring>
+        <name>m_handles</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::ShaderProgramManager::m_handles</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="148" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" bodystart="148" bodyend="-1"/>
+      </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1a060c7e6260eb5ffe1f937e102c859367" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -432,7 +446,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="109" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" bodystart="109" bodyend="149"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" line="109" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/ShaderProgramManager.h" bodystart="109" bodyend="150"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1aad37bb35d64cecd63487488677c17c45" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderProgramManager</scope><name>Allocate</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1af886cbd384ecfc447adc3a6c61a359c7" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderProgramManager</scope><name>AllocateShaderProgram</name></member>
@@ -454,6 +468,7 @@
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1aec4b20fa9410d3b3ffb866ad2307a3cc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::Memory::ShaderProgramManager</scope><name>IsSingletonCanBeDestroyed</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a31931d2cbc17f064e27db243b971e202" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderProgramManager</scope><name>IsSingletonInitialized</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1adab1931732d186e76c89e282c748f253" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderProgramManager</scope><name>LockSingleton</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1a7d357f8cefd5887b179ec40ac8c18337" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderProgramManager</scope><name>m_handles</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1a38d28fddc83cb3a403821554ea65dd" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderProgramManager</scope><name>m_mutex</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1a7042608842cc331923ea6ac98d45184a" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderProgramManager</scope><name>m_pipeline</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1a03492b4511944c6b632a566d39fe55fa" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderProgramManager</scope><name>m_programPool</name></member>

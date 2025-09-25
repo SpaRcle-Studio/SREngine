@@ -1,0 +1,306 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classSR__CORE__GUI__NS_1_1CreateNewProject" kind="class" language="C++" prot="public">
+    <compoundname>SR_CORE_GUI_NS::CreateNewProject</compoundname>
+    <basecompoundref refid="classSR__GRAPH__GUI__NS_1_1Widget" prot="public" virt="non-virtual">SR_GRAPH_GUI_NS::Widget</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__CORE__GUI__NS_1_1CreateNewProject_1a3c938062d33e61a2140ba1e5416c6982" prot="private" static="no">
+        <type><ref refid="classSR__GRAPH__GUI__NS_1_1Widget" kindref="compound">SR_GRAPH_GUI_NS::Widget</ref></type>
+        <definition>using SR_CORE_GUI_NS::CreateNewProject::Super =  SR_GRAPH_GUI_NS::Widget</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_CORE_GUI_NS::CreateNewProject::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/GUI/CreateNewProject.h" line="14" column="9" bodyfile="Engine/inc/Engine/GUI/CreateNewProject.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1CreateNewProject_1a23dc76510bf937287d402f7328e8fc06" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string SR_CORE_GUI_NS::CreateNewProject::m_projectName</definition>
+        <argsstring></argsstring>
+        <name>m_projectName</name>
+        <qualifiedname>SR_CORE_GUI_NS::CreateNewProject::m_projectName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/GUI/CreateNewProject.h" line="27" column="21" bodyfile="Engine/inc/Engine/GUI/CreateNewProject.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1CreateNewProject_1a7e46fb6d695c55cbf8c3edcfe99339c5" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string SR_CORE_GUI_NS::CreateNewProject::m_projectPathInput</definition>
+        <argsstring></argsstring>
+        <name>m_projectPathInput</name>
+        <qualifiedname>SR_CORE_GUI_NS::CreateNewProject::m_projectPathInput</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/GUI/CreateNewProject.h" line="28" column="21" bodyfile="Engine/inc/Engine/GUI/CreateNewProject.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1CreateNewProject_1ab1e3f1631bd0d17e1eb144b6291e6aa8" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
+        <definition>SR_UTILS_NS::Path SR_CORE_GUI_NS::CreateNewProject::m_projectFinalPath</definition>
+        <argsstring></argsstring>
+        <name>m_projectFinalPath</name>
+        <qualifiedname>SR_CORE_GUI_NS::CreateNewProject::m_projectFinalPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/GUI/CreateNewProject.h" line="29" column="27" bodyfile="Engine/inc/Engine/GUI/CreateNewProject.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1CreateNewProject_1af296f89fba19c331148251cd7ba79375" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
+        <definition>SR_UTILS_NS::Path SR_CORE_GUI_NS::CreateNewProject::m_projectPath</definition>
+        <argsstring></argsstring>
+        <name>m_projectPath</name>
+        <qualifiedname>SR_CORE_GUI_NS::CreateNewProject::m_projectPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/GUI/CreateNewProject.h" line="30" column="27" bodyfile="Engine/inc/Engine/GUI/CreateNewProject.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1CreateNewProject_1ac4a8136e9dea9a6dc700d5d60c23f81a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_CORE_GUI_NS::CreateNewProject::CreateNewProject</definition>
+        <argsstring>()</argsstring>
+        <name>CreateNewProject</name>
+        <qualifiedname>SR_CORE_GUI_NS::CreateNewProject::CreateNewProject</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/GUI/CreateNewProject.h" line="16" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1CreateNewProject_1af12fc9286dbcedba7813967e0453f993" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::CreateNewProject::Draw</definition>
+        <argsstring>() override</argsstring>
+        <name>Draw</name>
+        <qualifiedname>SR_CORE_GUI_NS::CreateNewProject::Draw</qualifiedname>
+        <reimplements refid="classSR__GRAPH__GUI__NS_1_1Widget_1af99c84543427d4895a4e70a156da5997">Draw</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/GUI/CreateNewProject.h" line="19" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1CreateNewProject_1a845e2ef8b2b4303364d600385b6aba72" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::CreateNewProject::OnOpen</definition>
+        <argsstring>() override</argsstring>
+        <name>OnOpen</name>
+        <qualifiedname>SR_CORE_GUI_NS::CreateNewProject::OnOpen</qualifiedname>
+        <reimplements refid="classSR__GRAPH__GUI__NS_1_1Widget_1aed9b7c656b3efa34f342fbcd1d20a26f">OnOpen</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/GUI/CreateNewProject.h" line="20" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1CreateNewProject_1a4a06d76547e1b2d7cba5b91c87bdf119" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_CORE_GUI_NS::CreateNewProject::CreateProject</definition>
+        <argsstring>()</argsstring>
+        <name>CreateProject</name>
+        <qualifiedname>SR_CORE_GUI_NS::CreateNewProject::CreateProject</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/GUI/CreateNewProject.h" line="23" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1CreateNewProject_1a890c45dd0388e4b0005584246c672b06" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::CreateNewProject::ResetSettings</definition>
+        <argsstring>()</argsstring>
+        <name>ResetSettings</name>
+        <qualifiedname>SR_CORE_GUI_NS::CreateNewProject::ResetSettings</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/inc/Engine/GUI/CreateNewProject.h" line="24" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_CORE_GUI_NS::CreateNewProject</label>
+        <link refid="classSR__CORE__GUI__NS_1_1CreateNewProject"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_GRAPH_GUI_NS::Widget</label>
+        <link refid="classSR__GRAPH__GUI__NS_1_1Widget"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::Event&lt; _args &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Event"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_UTILS_NS::IEvent</label>
+        <link refid="classSR__UTILS__NS_1_1IEvent"/>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::InputHandler</label>
+        <link refid="classSR__UTILS__NS_1_1InputHandler"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_CORE_GUI_NS::CreateNewProject</label>
+        <link refid="classSR__CORE__GUI__NS_1_1CreateNewProject"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_GRAPH_GUI_NS::Widget</label>
+        <link refid="classSR__GRAPH__GUI__NS_1_1Widget"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::Event&lt; _args &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Event"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_UTILS_NS::IEvent</label>
+        <link refid="classSR__UTILS__NS_1_1IEvent"/>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::InputHandler</label>
+        <link refid="classSR__UTILS__NS_1_1InputHandler"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/inc/Engine/GUI/CreateNewProject.h" line="13" column="5" bodyfile="Engine/inc/Engine/GUI/CreateNewProject.h" bodystart="13" bodyend="32"/>
+    <listofallmembers>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a4a04e0628b5729444eca1c24a9011fa2" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>AddFlags</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1adb2cb15cb7a11b055f8659f1db8c5521" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>AddSubWidget</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1abe2d33de27ab9ac621ec9a1c215a09be" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>CheckFocused</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a354cc7474ff0b80508a170aaa7cdd842" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>CheckHovered</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a1c39213178a2434ac3088d4b1dc2c14f" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>Close</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aba6d1657b1057318338eb150c404a4de" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>ContextPtr</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1CreateNewProject_1ac4a8136e9dea9a6dc700d5d60c23f81a" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>CreateNewProject</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1CreateNewProject_1a4a06d76547e1b2d7cba5b91c87bdf119" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>CreateProject</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1CreateNewProject_1af12fc9286dbcedba7813967e0453f993" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>Draw</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a60366ac8c85837e5c043d9ba80ea2a5a" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>DrawAsSubWindow</name></member>
+      <member refid="classSR__UTILS__NS_1_1Event_1a583e75807829d0eeae4b8def1d73eb19" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>Event</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a1d31a548d7f29f92191c4e3c8da0745a" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>FixedUpdate</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a2ca0c5942f5e6a6d743a83b08f7817a7" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>Focus</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1afe5e46c56d62178290ebe24ce4d87026" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>GetContext</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aa413cba2094f8133d1b3cbd5243d4525" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>GetManager</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a6cd4f0b58e82722cb159f403aac45b36" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>GetName</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a3209e5899cda24a44d5d034ad4bbd408" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>GetRenderScene</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1af19cbdf7545915b8da48e009896e99c8" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>GetStrongStorage</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a92ff8fa719f572e4a37877d1186ba6de" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>GetWeakStorage</name></member>
+      <member refid="classSR__UTILS__NS_1_1IEvent_1a2e73cf16d0d7039bd0f1416ae0e17a9b" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>IEvent</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a1a44342ba62f3a35d4c4dfa2c4b16aab" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>Init</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1a0f186dcfab2d26eeced90d670b98fb63" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>InputHandler</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1ab9dde2f2f151ebf9d0a532437509e809" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>IsFocused</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a2284c33f97d1fc8b93f2065328507f40" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>IsHovered</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1ac2e6a409a38ca80df3a3eb7418490182" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>IsKeyPressed</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aa7b9cc737b77f148ddaf23a2c687681b" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>IsOpen</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a97257c8a73c16a33020b1bdda27f054e" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>m_mutex</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1CreateNewProject_1ab1e3f1631bd0d17e1eb144b6291e6aa8" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>m_projectFinalPath</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1CreateNewProject_1a23dc76510bf937287d402f7328e8fc06" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>m_projectName</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1CreateNewProject_1af296f89fba19c331148251cd7ba79375" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>m_projectPath</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1CreateNewProject_1a7e46fb6d695c55cbf8c3edcfe99339c5" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>m_projectPathInput</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a4cea7673a9a29502c407f76cf2da6550" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>m_subWidgets</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a55e8701e527dd9134c8349540b951295" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>m_widgetFlags</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>NonCopyable</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aa49560b82a3fbb6982fb725e70b92ea8" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>OnClose</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1ac8fcf132f1cec281a572818e0faa9cae" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>OnKeyDown</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aced28345faf97a190e126802d65b856b" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>OnKeyPress</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1ad6bba161a4fb2edb8fa157443709b8cb" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>OnKeyUp</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1a047cdbebece4c4baa00673a647f9a686" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>OnMouseDown</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1a103723382b77ab83ae6468436fb41088" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>OnMouseMove</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1a6c910542d5f00663837a3af04d774107" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>OnMousePress</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1af18a761f7df246302137fe44699d0dc8" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>OnMouseUp</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1CreateNewProject_1a845e2ef8b2b4303364d600385b6aba72" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>OnOpen</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a214c10395b43d1ae11dd7cfdd0104db0" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>Open</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a3d3dd7631795048741ca59e6d1666a3c" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>OpenFile</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>operator=</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a9d49df74f8eae10ecc78e5886044b38c" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>RenderScenePtr</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1CreateNewProject_1a890c45dd0388e4b0005584246c672b06" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>ResetSettings</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a5362809b84a8df38cd96ed91c4fa32c9" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>ResetStrongStorage</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a3926681db7399eebd88b303addf9e106" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>ResetWeakStorage</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1ad5871dbdbb8862c1a21a7600e6bc872c" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>ScenePtr</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a6344cd24337dddf086e04093a7f7b279" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>SetCenter</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a9e088783939e6d5aa8bdf158c52e295a" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>SetDefaultSize</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a6221bbe02c9c66ce324814da3ae8377c" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>SetFlags</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a628d6e08d267e2bab19fa6a0247f2de6" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>SetManager</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a9f93023aaad7df8c9f5572fcd3eec64e" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>SetName</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a7c848e9633f66f96a935090bfb450bcd" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>SetScene</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a206de2fe59b705c189cfb792fa6584de" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>SetSize</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1CreateNewProject_1a3c938062d33e61a2140ba1e5416c6982" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>Super</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1abb58557f3a79bc2790d525791aedb7ac" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>TextCenter</name></member>
+      <member refid="classSR__UTILS__NS_1_1Event_1abd0c24f64093df0ec6e43569eae8d236" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::Event::"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>Trigger</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a9670d827380936251bb9f0af5f305ee4" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>Update</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1ac9672537e4ef15d539d53a1627cab259" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>Widget</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aec9e9fb6de083548c0149a76d6ed0043" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>Widget</name></member>
+      <member refid="classSR__UTILS__NS_1_1Event_1a0d08312b78abd09b06ed69b1820d1605" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>~Event</name></member>
+      <member refid="classSR__UTILS__NS_1_1IEvent_1a900ba41fdab52a6162b903b476120a7a" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>~IEvent</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1ad0111971be1665c6d0f0e3fef067e7e6" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>~InputHandler</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a24f551a86adf83d2b1059fb8a3fd7c59" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::CreateNewProject</scope><name>~Widget</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -63,6 +63,7 @@
 * **grads3** ([**SR\_MATH\_NS::NoiseTable**](namespaceSR__MATH__NS_1_1NoiseTable.md))
 * **grads4** ([**SR\_MATH\_NS::NoiseTable**](namespaceSR__MATH__NS_1_1NoiseTable.md))
 * **GetFirstOfTypeFromSequenceV** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
+* **g\_platformHooks** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
 * **g\_platformLogMutex** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
 * **g\_xml\_last\_error** ([**SR\_UTILS\_NS::Xml**](namespaceSR__UTILS__NS_1_1Xml.md))
 

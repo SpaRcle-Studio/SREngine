@@ -439,35 +439,43 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanPipeline.h" line="51" column="27"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanPipeline_1aacf1e8ba821531626b84e1694df97118" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
-        <type>SR_NODISCARD std::set&lt; void * &gt;</type>
-        <definition>SR_NODISCARD std::set&lt; void * &gt; SR_GRAPH_NS::VulkanPipeline::GetFBOHandles</definition>
-        <argsstring>() const override</argsstring>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanPipeline_1a5436c99f57fe0e492c33442911eb9cd4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD void</type>
+        <definition>SR_NODISCARD void SR_GRAPH_NS::VulkanPipeline::GetFBOHandles</definition>
+        <argsstring>(std::vector&lt; void * &gt; &amp;handles) const override</argsstring>
         <name>GetFBOHandles</name>
         <qualifiedname>SR_GRAPH_NS::VulkanPipeline::GetFBOHandles</qualifiedname>
-        <reimplements refid="classSR__GRAPH__NS_1_1Pipeline_1aeaccc91129ec4c09ba66f2991bb4b989">GetFBOHandles</reimplements>
+        <reimplements refid="classSR__GRAPH__NS_1_1Pipeline_1abc74bcb9152c721890968124c8fcf48e">GetFBOHandles</reimplements>
+        <param>
+          <type>std::vector&lt; void * &gt; &amp;</type>
+          <declname>handles</declname>
+        </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanPipeline.h" line="52" column="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanPipeline.h" line="52" column="27"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanPipeline_1a1cd0a5e6fecea798e75a2accf539547b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
-        <type>SR_NODISCARD std::set&lt; void * &gt;</type>
-        <definition>SR_NODISCARD std::set&lt; void * &gt; SR_GRAPH_NS::VulkanPipeline::GetShaderHandles</definition>
-        <argsstring>() const override</argsstring>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanPipeline_1a8f79282f4d50e14c5564f360256184ae" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD void</type>
+        <definition>SR_NODISCARD void SR_GRAPH_NS::VulkanPipeline::GetShaderHandles</definition>
+        <argsstring>(std::vector&lt; void * &gt; &amp;handles) const override</argsstring>
         <name>GetShaderHandles</name>
         <qualifiedname>SR_GRAPH_NS::VulkanPipeline::GetShaderHandles</qualifiedname>
-        <reimplements refid="classSR__GRAPH__NS_1_1Pipeline_1a276cbbe5cf7a8c0f400e19fadc2005d9">GetShaderHandles</reimplements>
+        <reimplements refid="classSR__GRAPH__NS_1_1Pipeline_1a05d9b2a3366740667abb299de69e7c2c">GetShaderHandles</reimplements>
+        <param>
+          <type>std::vector&lt; void * &gt; &amp;</type>
+          <declname>handles</declname>
+        </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanPipeline.h" line="53" column="31"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanPipeline.h" line="53" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanPipeline_1ae2ff0159a0a8cd99b3046f6d29e7aab9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD uint8_t</type>
@@ -2266,7 +2274,7 @@
       <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a593d619f06c15797c7d582341ace6aef" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>GetCurrentShaderHandle</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a335ad9e9b64f52b41aa42efa834ec862" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>GetCurrentShaderId</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a4321ba62417103cb026ceaae034b0a96" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>GetCurrentUBO</name></member>
-      <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1aacf1e8ba821531626b84e1694df97118" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>GetFBOHandles</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a5436c99f57fe0e492c33442911eb9cd4" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>GetFBOHandles</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1ae2ff0159a0a8cd99b3046f6d29e7aab9" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>GetFrameBufferSampleCount</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a48d6c6c7ca6c21d97c70104cb3c221d2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>GetFramesPerSecond</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a36d06e39f0caa9c298e572ec39e77112" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>GetKernel</name></member>
@@ -2284,7 +2292,7 @@
       <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a506fd8b5be42626215f24051279a0a15" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>GetRenderer</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a09138daecd6f226335b46b86a9bd9f2f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>GetRenderStageId</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a6bd537edd19543d21248e1fddaa70035" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>GetSamplesCount</name></member>
-      <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a1cd0a5e6fecea798e75a2accf539547b" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>GetShaderHandles</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a8f79282f4d50e14c5564f360256184ae" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>GetShaderHandles</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>GetSRClass</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a7ba5601d4c263cc845360a6ba4e3f29d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>GetState</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a92a340b822c38c39846cd8c270e4b062" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanPipeline</scope><name>GetSupportedSamples</name></member>

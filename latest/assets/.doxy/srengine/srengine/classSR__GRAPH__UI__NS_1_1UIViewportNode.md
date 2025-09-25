@@ -58,6 +58,8 @@ Inherits the following classes: UIContainerNode
 | Type | Name |
 | ---: | :--- |
 |  void | [**Layout**](#function-layout) (const SR\_MATH\_NS::FRect &) override<br> |
+|  void | [**OnDisabled**](#function-ondisabled) () override<br> |
+|  void | [**OnEnabled**](#function-onenabled) () override<br> |
 |   | [**UIViewportNode**](#function-uiviewportnode) () <br> |
 
 
@@ -113,6 +115,32 @@ using SR_GRAPH_UI_NS::UIViewportNode::Ptr =  SR_HTYPES_NS::SharedPtr<UIViewportN
 void SR_GRAPH_UI_NS::UIViewportNode::Layout (
     const SR_MATH_NS::FRect &
 ) override
+```
+
+
+
+
+<hr>
+
+
+
+### function OnDisabled 
+
+```C++
+void SR_GRAPH_UI_NS::UIViewportNode::OnDisabled () override
+```
+
+
+
+
+<hr>
+
+
+
+### function OnEnabled 
+
+```C++
+void SR_GRAPH_UI_NS::UIViewportNode::OnEnabled () override
 ```
 
 

@@ -378,6 +378,10 @@
         <label>Engine/inc/Engine/GUI/AssetInspector.h</label>
         <link refid="AssetInspector_8h_source"/>
       </node>
+      <node id="106">
+        <label>Engine/inc/Engine/GUI/CreateNewProject.h</label>
+        <link refid="CreateNewProject_8h_source"/>
+      </node>
       <node id="58">
         <label>Engine/inc/Engine/GUI/EditorGUI.h</label>
         <link refid="EditorGUI_8h_source"/>
@@ -542,7 +546,7 @@
         <label>Engine/inc/Engine/Scripting/ScriptableContext.h</label>
         <link refid="ScriptableContext_8h_source"/>
       </node>
-      <node id="111">
+      <node id="112">
         <label>Engine/inc/Engine/Tests/HTMLTest.h</label>
         <link refid="HTMLTest_8h_source"/>
       </node>
@@ -629,9 +633,11 @@
       <node id="105">
         <label>Engine/libs/Graphics/inc/Graphics/GUI/WidgetManager.h</label>
         <link refid="WidgetManager_8h_source"/>
+        <childnode refid="106" relation="include">
+        </childnode>
         <childnode refid="58" relation="include">
         </childnode>
-        <childnode refid="106" relation="include">
+        <childnode refid="107" relation="include">
         </childnode>
       </node>
       <node id="45">
@@ -876,12 +882,12 @@
         <childnode refid="26" relation="include">
         </childnode>
       </node>
-      <node id="106">
+      <node id="107">
         <label>Engine/libs/Graphics/inc/Graphics/Render/RenderScene.h</label>
         <link refid="RenderScene_8h_source"/>
         <childnode refid="22" relation="include">
         </childnode>
-        <childnode refid="107" relation="include">
+        <childnode refid="108" relation="include">
         </childnode>
       </node>
       <node id="27">
@@ -990,7 +996,7 @@
         <childnode refid="52" relation="include">
         </childnode>
       </node>
-      <node id="107">
+      <node id="108">
         <label>Engine/libs/Graphics/inc/Graphics/UI/Canvas.h</label>
         <link refid="Canvas_8h_source"/>
       </node>
@@ -1033,10 +1039,10 @@
         </childnode>
         <childnode refid="88" relation="include">
         </childnode>
-        <childnode refid="109" relation="include">
+        <childnode refid="110" relation="include">
         </childnode>
       </node>
-      <node id="108">
+      <node id="109">
         <label>Engine/libs/Utils/inc/Utils/Input/InputHandler.h</label>
         <link refid="InputHandler_8h_source"/>
         <childnode refid="84" relation="include">
@@ -1055,21 +1061,21 @@
         </childnode>
         <childnode refid="105" relation="include">
         </childnode>
-        <childnode refid="108" relation="include">
+        <childnode refid="109" relation="include">
         </childnode>
       </node>
-      <node id="109">
+      <node id="110">
         <label>Engine/libs/Utils/inc/Utils/Web/HTML/HTML.h</label>
         <link refid="HTML_8h_source"/>
         <childnode refid="52" relation="include">
         </childnode>
-        <childnode refid="110" relation="include">
+        <childnode refid="111" relation="include">
         </childnode>
       </node>
-      <node id="110">
+      <node id="111">
         <label>Engine/libs/Utils/inc/Utils/Web/HTML/HTMLParser.h</label>
         <link refid="HTMLParser_8h_source"/>
-        <childnode refid="111" relation="include">
+        <childnode refid="112" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

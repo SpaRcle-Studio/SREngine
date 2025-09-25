@@ -50,6 +50,7 @@
 | class | [**InitializeState**](classSR__CORE__NS_1_1InitializeState.md) <br> |
 | class | [**PollEventsState**](classSR__CORE__NS_1_1PollEventsState.md) <br> |
 | class | [**PrepareState**](classSR__CORE__NS_1_1PrepareState.md) <br> |
+| class | [**ProjectSettings**](classSR__CORE__NS_1_1ProjectSettings.md) <br> |
 | class | [**SceneUpdateState**](classSR__CORE__NS_1_1SceneUpdateState.md) <br> |
 | struct | [**ScriptableContext**](structSR__CORE__NS_1_1ScriptableContext.md) <br> |
 | class | [**StopState**](classSR__CORE__NS_1_1StopState.md) <br> |

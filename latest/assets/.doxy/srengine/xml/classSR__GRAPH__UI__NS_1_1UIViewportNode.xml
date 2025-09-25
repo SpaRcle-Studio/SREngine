@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h" line="27" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h" line="29" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__UI__NS_1_1UIViewportNode_1a58cb3960294f7bc1a7cd49201fac15c6" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Subscription" kindref="compound">SR_UTILS_NS::Subscription</ref></type>
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h" line="28" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h" bodystart="28" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h" line="30" column="35" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h" bodystart="30" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__UI__NS_1_1UIViewportNode_1ae1d760b4cefa79104684dddca20798cf" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h" line="31" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h" bodystart="31" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h" line="33" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__UI__NS_1_1UIViewportNode_1ab67b939ccc393932365ef5dc9caf63c6" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -92,7 +92,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h" line="33" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h" line="35" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h" bodystart="35" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -127,6 +127,34 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h" line="21" column="14"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1UIViewportNode_1a43445c2ab6ab2fa7c1f5bca124a89dc2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_UI_NS::UIViewportNode::OnEnabled</definition>
+        <argsstring>() override</argsstring>
+        <name>OnEnabled</name>
+        <qualifiedname>SR_GRAPH_UI_NS::UIViewportNode::OnEnabled</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h" line="22" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1UIViewportNode_1af424cd6e6bdf8734e1bef58623a5b841" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_UI_NS::UIViewportNode::OnDisabled</definition>
+        <argsstring>() override</argsstring>
+        <name>OnDisabled</name>
+        <qualifiedname>SR_GRAPH_UI_NS::UIViewportNode::OnDisabled</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h" line="23" column="14"/>
+      </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
       <memberdef kind="function" id="classSR__GRAPH__UI__NS_1_1UIViewportNode_1ab356d49b829f6184c1944d0aefad3a2f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -141,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h" line="24" column="14"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h" line="26" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -170,7 +198,7 @@
         <label>UIContainerNode</label>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h" line="11" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h" bodystart="11" bodyend="35"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h" line="11" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/UI/UIViewportNode.h" bodystart="11" bodyend="37"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1ab356d49b829f6184c1944d0aefad3a2f" prot="private" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UIViewportNode</scope><name>CalculateLayout</name></member>
       <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1ad8cc144f617d08aafb6bd7b82bc301a1" prot="public" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UIViewportNode</scope><name>Layout</name></member>
@@ -178,6 +206,8 @@
       <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1a58cb3960294f7bc1a7cd49201fac15c6" prot="private" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UIViewportNode</scope><name>m_keyDown</name></member>
       <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1ae1d760b4cefa79104684dddca20798cf" prot="private" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UIViewportNode</scope><name>m_manualLayoutRecalc</name></member>
       <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1aa93d3080aebc86abf6d56b1488f992f3" prot="private" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UIViewportNode</scope><name>m_onEngineUpdate</name></member>
+      <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1af424cd6e6bdf8734e1bef58623a5b841" prot="public" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UIViewportNode</scope><name>OnDisabled</name></member>
+      <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1a43445c2ab6ab2fa7c1f5bca124a89dc2" prot="public" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UIViewportNode</scope><name>OnEnabled</name></member>
       <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1a7dee1c349e7d1644ac4625740a6b4290" prot="public" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UIViewportNode</scope><name>Ptr</name></member>
       <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1a6c7a9e7fd46277280d28123eab070d7e" prot="private" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UIViewportNode</scope><name>Super</name></member>
       <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1a6ee2f58d0015b3bd5ee6c1cd4500613b" prot="public" virt="non-virtual"><scope>SR_GRAPH_UI_NS::UIViewportNode</scope><name>UIViewportNode</name></member>

@@ -7,6 +7,7 @@
     <innerfile refid="AnimatorEditor_8h">AnimatorEditor.h</innerfile>
     <innerfile refid="AssetInspector_8h">AssetInspector.h</innerfile>
     <innerfile refid="ComponentDrawer_8h">ComponentDrawer.h</innerfile>
+    <innerfile refid="CreateNewProject_8h">CreateNewProject.h</innerfile>
     <innerfile refid="DragNDropHelper_8h">DragNDropHelper.h</innerfile>
     <innerfile refid="EditorCamera_8h">EditorCamera.h</innerfile>
     <innerfile refid="EditorGizmo_8h">EditorGizmo.h</innerfile>

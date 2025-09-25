@@ -4,6 +4,7 @@
     <compoundname>SR_UTILS_NS::Asset</compoundname>
     <basecompoundref refid="classSR__UTILS__NS_1_1IResource" prot="public" virt="non-virtual">SR_UTILS_NS::IResource</basecompoundref>
     <derivedcompoundref refid="classSR__CORE__NS_1_1EditorSettings" prot="public" virt="non-virtual">SR_CORE_NS::EditorSettings</derivedcompoundref>
+    <derivedcompoundref refid="classSR__CORE__NS_1_1ProjectSettings" prot="public" virt="non-virtual">SR_CORE_NS::ProjectSettings</derivedcompoundref>
     <derivedcompoundref refid="classSR__GRAPH__NS_1_1FileMaterialResource" prot="public" virt="non-virtual">SR_GRAPH_NS::FileMaterialResource</derivedcompoundref>
     <derivedcompoundref refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource" prot="public" virt="non-virtual">SR_GRAPH_NS::FileRenderTechniqueResource</derivedcompoundref>
     <derivedcompoundref refid="classSR__GRAPH__NS_1_1RenderSettings" prot="public" virt="non-virtual">SR_GRAPH_NS::RenderSettings</derivedcompoundref>
@@ -328,24 +329,30 @@
         </childnode>
       </node>
       <node id="10">
+        <label>SR_CORE_NS::ProjectSettings</label>
+        <link refid="classSR__CORE__NS_1_1ProjectSettings"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
         <label>SR_GRAPH_NS::FileMaterialResource</label>
         <link refid="classSR__GRAPH__NS_1_1FileMaterialResource"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="11">
+      <node id="12">
         <label>SR_GRAPH_NS::FileRenderTechniqueResource</label>
         <link refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="12">
+      <node id="13">
         <label>SR_GRAPH_NS::RenderSettings</label>
         <link refid="classSR__GRAPH__NS_1_1RenderSettings"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="13">
+      <node id="14">
         <label>SR_GRAPH_NS::RenderStagesSettings</label>
         <link refid="classSR__GRAPH__NS_1_1RenderStagesSettings"/>
         <childnode refid="1" relation="public-inheritance">
@@ -361,7 +368,7 @@
         <label>SR_HTYPES_NS::SharedPtrBase</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
       </node>
-      <node id="14">
+      <node id="15">
         <label>SR_PTYPES_NS::PhysicsMaterial</label>
         <link refid="classSR__PTYPES__NS_1_1PhysicsMaterial"/>
         <childnode refid="1" relation="public-inheritance">
@@ -403,7 +410,7 @@
         <label>SR_UTILS_NS::SubscriptionHolder</label>
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
-      <node id="15">
+      <node id="16">
         <label>SR_UTILS_NS::TestManagerAsset</label>
         <link refid="classSR__UTILS__NS_1_1TestManagerAsset"/>
         <childnode refid="1" relation="public-inheritance">

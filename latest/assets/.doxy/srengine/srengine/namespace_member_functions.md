@@ -296,6 +296,7 @@
 * **InitialHash** ([**SR\_UTILS\_NS::Hash::Detail**](namespaceSR__UTILS__NS_1_1Hash_1_1Detail.md))
 * **IsValidCodePoint** ([**SR\_UTILS\_NS::Localization::Utf**](namespaceSR__UTILS__NS_1_1Localization_1_1Utf.md))
 * **InitSegmentationHandler** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
+* **InitializeHooks** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
 * **InitializePlatform** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
 * **IsAbsolutePath** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
 * **IsCompiledUnderMSVC** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))

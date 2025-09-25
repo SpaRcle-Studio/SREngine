@@ -81,6 +81,7 @@ namespace SR_SCRIPTING_NS {
         std::vector<SR_UTILS_NS::Path> m_engineLibs;
         SR_UTILS_NS::Path m_cachePath;
         SR_UTILS_NS::Path m_resourcesPath;
+        SR_UTILS_NS::Path m_engineResourcesPath;
         bool m_isInitialized = false;
         ScriptSystem* m_pScriptSystem = nullptr;
 

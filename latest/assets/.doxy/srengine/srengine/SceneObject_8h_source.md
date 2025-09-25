@@ -117,6 +117,9 @@ namespace SR_UTILS_NS {
 
         virtual void OnParentChanged(const SceneObject::Ptr& pOldParent) { }
 
+        virtual void OnEnabled() { }
+        virtual void OnDisabled() { }
+
         void DestroyImpl();
 
         void OnPostLoad() override;

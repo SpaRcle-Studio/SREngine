@@ -110,6 +110,20 @@ namespace SR_UTILS_NS::Platform {
     SR_COMMON_DLL_API extern void ReleaseCursorConfinement(); // TODO: add ability to confine cursor to a specific window
     SR_COMMON_DLL_API extern void SetThreadPriority(void* nativeHandle, ThreadPriority priority);
     SR_COMMON_DLL_API extern void CopyPermissions(const SR_UTILS_NS::Path& source, const SR_UTILS_NS::Path& destination);
+
+    struct SR_COMMON_DLL_API PlatformHooks {
+        decltype(&ReadFile) originalReadFile = nullptr;
+        decltype(&GetPathType) originalGetPathType = nullptr;
+
+        std::function<std::optional<std::string>(const Path&)> readFileHook;
+        std::function<Path::Type(const std::string_view&)> getFileTypeHook;
+
+        std::function<std::string_view(std::string_view)> pathResolver;
+    };
+
+    extern PlatformHooks g_platformHooks;
+
+    SR_COMMON_DLL_API extern void InitializeHooks(const std::function<void(PlatformHooks& hooks)>& callback);
 }
 
 #endif //SR_ENGINE_UTILS_PLATFORM_H

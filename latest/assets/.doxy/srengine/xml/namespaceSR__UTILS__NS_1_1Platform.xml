@@ -4,6 +4,7 @@
     <compoundname>SR_UTILS_NS::Platform</compoundname>
     <innerclass refid="structSR__UTILS__NS_1_1Platform_1_1FileMetadata" prot="public">SR_UTILS_NS::Platform::FileMetadata</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1Platform_1_1MouseState" prot="public">SR_UTILS_NS::Platform::MouseState</innerclass>
+    <innerclass refid="structSR__UTILS__NS_1_1Platform_1_1PlatformHooks" prot="public">SR_UTILS_NS::Platform::PlatformHooks</innerclass>
     <sectiondef kind="var">
       <memberdef kind="variable" id="Platform_8h_1a68e2be033e45aeb900bd022d3b96b25b" prot="public" static="no" extern="yes" mutable="no">
         <type>std::mutex</type>
@@ -18,6 +19,20 @@
         <inbodydescription>
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="41" column="23" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="41" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="variable" id="Platform_8h_1a1570cb7bd239dfe40a28ebe6b12baa48" prot="public" static="no" extern="yes" mutable="no">
+        <type><ref refid="structSR__UTILS__NS_1_1Platform_1_1PlatformHooks" kindref="compound">PlatformHooks</ref></type>
+        <definition>PlatformHooks SR_UTILS_NS::Platform::g_platformHooks</definition>
+        <argsstring></argsstring>
+        <name>g_platformHooks</name>
+        <qualifiedname>SR_UTILS_NS::Platform::g_platformHooks</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="119" column="26" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="119" declcolumn="26"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -1083,6 +1098,24 @@
         <inbodydescription>
         </inbodydescription>
         <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="107" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="107" declcolumn="35"/>
+      </memberdef>
+      <memberdef kind="function" id="Platform_8h_1a26141d166bc306a223c12b9d4f500093" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_COMMON_DLL_API void</type>
+        <definition>SR_COMMON_DLL_API void SR_UTILS_NS::Platform::InitializeHooks</definition>
+        <argsstring>(const std::function&lt; void(PlatformHooks &amp;hooks)&gt; &amp;callback)</argsstring>
+        <name>InitializeHooks</name>
+        <qualifiedname>SR_UTILS_NS::Platform::InitializeHooks</qualifiedname>
+        <param>
+          <type>const std::function&lt; void(<ref refid="structSR__UTILS__NS_1_1Platform_1_1PlatformHooks" kindref="compound">PlatformHooks</ref> &amp;hooks)&gt; &amp;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Utils/inc/Utils/Platform/Platform.h" line="121" column="35" declfile="Engine/libs/Utils/inc/Utils/Platform/Platform.h" declline="121" declcolumn="35"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

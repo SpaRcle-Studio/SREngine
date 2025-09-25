@@ -7,6 +7,7 @@
     <derivedcompoundref refid="classSR__CORE__GUI__NS_1_1About" prot="public" virt="non-virtual">SR_CORE_GUI_NS::About</derivedcompoundref>
     <derivedcompoundref refid="classSR__CORE__GUI__NS_1_1AnimatorEditor" prot="public" virt="non-virtual">SR_CORE_GUI_NS::AnimatorEditor</derivedcompoundref>
     <derivedcompoundref refid="classSR__CORE__GUI__NS_1_1AssetInspector" prot="public" virt="non-virtual">SR_CORE_GUI_NS::AssetInspector</derivedcompoundref>
+    <derivedcompoundref refid="classSR__CORE__GUI__NS_1_1CreateNewProject" prot="public" virt="non-virtual">SR_CORE_GUI_NS::CreateNewProject</derivedcompoundref>
     <derivedcompoundref refid="classSR__CORE__GUI__NS_1_1EngineSettings" prot="public" virt="non-virtual">SR_CORE_GUI_NS::EngineSettings</derivedcompoundref>
     <derivedcompoundref refid="classSR__CORE__GUI__NS_1_1Inspector" prot="public" virt="non-virtual">SR_CORE_GUI_NS::Inspector</derivedcompoundref>
     <derivedcompoundref refid="classSR__CORE__GUI__NS_1_1SceneViewer" prot="public" virt="non-virtual">SR_CORE_GUI_NS::SceneViewer</derivedcompoundref>
@@ -751,6 +752,7 @@
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1About_1acd72223ce630fec5cea7ee2f24389003">Draw</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1AnimatorEditor_1a4b6b327798b2ef07364b9d75ded7f2ed">Draw</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1AssetInspector_1a17ffca65091219779bab697df638192f">Draw</reimplementedby>
+        <reimplementedby refid="classSR__CORE__GUI__NS_1_1CreateNewProject_1af12fc9286dbcedba7813967e0453f993">Draw</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1EngineSettings_1af4fea5a0b1495ae63f7db721175264cb">Draw</reimplementedby>
         <reimplementedby refid="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1a4e3e6e73b001338101a0fb76ba6de98c">Draw</reimplementedby>
         <reimplementedby refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a33f127d23f628f8b0f3c5f2d4a38ab29">Draw</reimplementedby>
@@ -790,6 +792,7 @@
         <argsstring>()</argsstring>
         <name>OnOpen</name>
         <qualifiedname>SR_GRAPH_GUI_NS::Widget::OnOpen</qualifiedname>
+        <reimplementedby refid="classSR__CORE__GUI__NS_1_1CreateNewProject_1a845e2ef8b2b4303364d600385b6aba72">OnOpen</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1EngineSettings_1a7b3ca958d116325af7ffc5f49deb17f8">OnOpen</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1RenderTechniqueEditor_1a73f18cf12576b6a171327f40967bef6d">OnOpen</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a12b0ec4def052308e6ef34ec0d06165a">OnOpen</reimplementedby>
@@ -1016,60 +1019,66 @@
         </childnode>
       </node>
       <node id="9">
+        <label>SR_CORE_GUI_NS::CreateNewProject</label>
+        <link refid="classSR__CORE__GUI__NS_1_1CreateNewProject"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
         <label>SR_CORE_GUI_NS::EngineSettings</label>
         <link refid="classSR__CORE__GUI__NS_1_1EngineSettings"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="10">
+      <node id="11">
         <label>SR_CORE_GUI_NS::Inspector</label>
         <link refid="classSR__CORE__GUI__NS_1_1Inspector"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="17">
+      <node id="18">
         <label>SR_CORE_GUI_NS::RenderTechniqueEditor</label>
         <link refid="classSR__CORE__GUI__NS_1_1RenderTechniqueEditor"/>
-        <childnode refid="16" relation="public-inheritance">
+        <childnode refid="17" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="19">
+      <node id="20">
         <label>SR_CORE_GUI_NS::SceneTools</label>
         <link refid="classSR__CORE__GUI__NS_1_1SceneTools"/>
-        <childnode refid="18" relation="public-inheritance">
+        <childnode refid="19" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="11">
+      <node id="12">
         <label>SR_CORE_GUI_NS::SceneViewer</label>
         <link refid="classSR__CORE__GUI__NS_1_1SceneViewer"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="12">
+      <node id="13">
         <label>SR_CORE_GUI_NS::SoundDebug</label>
         <link refid="classSR__CORE__GUI__NS_1_1SoundDebug"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="13">
+      <node id="14">
         <label>SR_CORE_GUI_NS::WorldEdit</label>
         <link refid="classSR__CORE__GUI__NS_1_1WorldEdit"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="14">
+      <node id="15">
         <label>SR_CORE_NS::GUI::EngineStatistics</label>
         <link refid="classSR__CORE__NS_1_1GUI_1_1EngineStatistics"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="15">
+      <node id="16">
         <label>SR_CORE_NS::GUI::FileBrowser</label>
         <link refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="16">
+      <node id="17">
         <label>SR_GRAPH_GUI_NS::NodeWidget</label>
         <link refid="classSR__GRAPH__GUI__NS_1_1NodeWidget"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1083,7 +1092,7 @@
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="18">
+      <node id="19">
         <label>SR_GRAPH_GUI_NS::WidgetContainer</label>
         <link refid="classSR__GRAPH__GUI__NS_1_1WidgetContainer"/>
         <childnode refid="1" relation="public-inheritance">

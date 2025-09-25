@@ -16,7 +16,7 @@
 Inherits the following classes: [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 
 
-Inherited by the following classes: [SR\_CORE\_NS::EditorSettings](classSR__CORE__NS_1_1EditorSettings.md),  [SR\_GRAPH\_NS::FileMaterialResource](classSR__GRAPH__NS_1_1FileMaterialResource.md),  [SR\_GRAPH\_NS::FileRenderTechniqueResource](classSR__GRAPH__NS_1_1FileRenderTechniqueResource.md),  [SR\_GRAPH\_NS::RenderSettings](classSR__GRAPH__NS_1_1RenderSettings.md),  [SR\_GRAPH\_NS::RenderStagesSettings](classSR__GRAPH__NS_1_1RenderStagesSettings.md),  [SR\_PTYPES\_NS::PhysicsMaterial](classSR__PTYPES__NS_1_1PhysicsMaterial.md),  [SR\_UTILS\_NS::TestManagerAsset](classSR__UTILS__NS_1_1TestManagerAsset.md)
+Inherited by the following classes: [SR\_CORE\_NS::EditorSettings](classSR__CORE__NS_1_1EditorSettings.md),  [SR\_CORE\_NS::ProjectSettings](classSR__CORE__NS_1_1ProjectSettings.md),  [SR\_GRAPH\_NS::FileMaterialResource](classSR__GRAPH__NS_1_1FileMaterialResource.md),  [SR\_GRAPH\_NS::FileRenderTechniqueResource](classSR__GRAPH__NS_1_1FileRenderTechniqueResource.md),  [SR\_GRAPH\_NS::RenderSettings](classSR__GRAPH__NS_1_1RenderSettings.md),  [SR\_GRAPH\_NS::RenderStagesSettings](classSR__GRAPH__NS_1_1RenderStagesSettings.md),  [SR\_PTYPES\_NS::PhysicsMaterial](classSR__PTYPES__NS_1_1PhysicsMaterial.md),  [SR\_UTILS\_NS::TestManagerAsset](classSR__UTILS__NS_1_1TestManagerAsset.md)
 
 
 

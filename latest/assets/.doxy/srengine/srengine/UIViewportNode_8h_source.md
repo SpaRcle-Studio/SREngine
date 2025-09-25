@@ -29,6 +29,8 @@ namespace SR_GRAPH_UI_NS {
 
     public:
         void Layout(const SR_MATH_NS::FRect&) override;
+        void OnEnabled() override;
+        void OnDisabled() override;
 
     private:
         void CalculateLayout();

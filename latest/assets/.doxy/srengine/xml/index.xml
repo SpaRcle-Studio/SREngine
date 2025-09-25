@@ -509,6 +509,7 @@
   </compound>
   <compound refid="classSR__CORE__NS_1_1Application" kind="class"><name>SR_CORE_NS::Application</name>
     <member refid="classSR__CORE__NS_1_1Application_1a185ee674671dc64febc79bb671ed13b5" kind="typedef"><name>Super</name></member>
+    <member refid="classSR__CORE__NS_1_1Application_1a8f4e82cd5d87b512f96dc0ba44bb2a20" kind="variable"><name>m_engineResourcesPath</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1aa1aa847a32be788607fa6d8192a56de1" kind="variable"><name>m_resourcesPath</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1a5ced4ed9e4d84acd64f73e25ccc1f236" kind="variable"><name>m_isNeedReload</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1add69171ec556c00ec2972be8fd210d6f" kind="variable"><name>m_engine</name></member>
@@ -519,9 +520,9 @@
     <member refid="classSR__CORE__NS_1_1Application_1a049d443ca8eda9edfb95d35eacffc69a" kind="function"><name>Init</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1a760502cfa2fc0410344bd635c5ca10bb" kind="function"><name>Execute</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1aa42b8160f77905ef454f505d2ac07626" kind="function"><name>Close</name></member>
-    <member refid="classSR__CORE__NS_1_1Application_1abd83c37f0f456a64df9a2fa98917b766" kind="function"><name>SwitchResourcesFolder</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1a217d9cb735fc113f9a9695afd38f9918" kind="function"><name>Reload</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1aa247936af48d33974b194ffbd338d44f" kind="function"><name>GetResourcesPath</name></member>
+    <member refid="classSR__CORE__NS_1_1Application_1a01fe8c7cfce9c882360b8c9b3f7207c7" kind="function"><name>GetEngineResourcesPath</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1a23d58bfc090ba72d69d439dcc72b8db2" kind="function"><name>GetEngine</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1a7f96884faa28ef03576dff9f664c74dd" kind="function"><name>GetEngine</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1ab83517299729dd471f152619ada62cfc" kind="function"><name>InitializeResourcesFolder</name></member>
@@ -1538,12 +1539,14 @@
   <compound refid="classSR__UTILS__NS_1_1CLIManager" kind="class"><name>SR_UTILS_NS::CLIManager</name>
     <member refid="classSR__UTILS__NS_1_1CLIManager_1ad94b03bd229227a02d822a0c93e574ce" kind="variable"><name>m_options</name></member>
     <member refid="classSR__UTILS__NS_1_1CLIManager_1a9b75519043f087ef98b4c9a54494ce0b" kind="variable"><name>m_flags</name></member>
+    <member refid="classSR__UTILS__NS_1_1CLIManager_1a612d4245b14f816c7f8ab19fc6770ae2" kind="variable"><name>m_projectPath</name></member>
     <member refid="classSR__UTILS__NS_1_1CLIManager_1ac4a951a38a6914ab4ba2abac5645b620" kind="function"><name>SR_REGISTER_SINGLETON</name></member>
     <member refid="classSR__UTILS__NS_1_1CLIManager_1a1811eed10264ecbd4f5725cfbee80743" kind="function"><name>Init</name></member>
     <member refid="classSR__UTILS__NS_1_1CLIManager_1acd29dcf73b625bc857bcf11c82f400ae" kind="function"><name>GetOptionValue</name></member>
     <member refid="classSR__UTILS__NS_1_1CLIManager_1a3db7e6f408fa1aa0884bea3d742b8c87" kind="function"><name>IsFlagPresent</name></member>
     <member refid="classSR__UTILS__NS_1_1CLIManager_1a484a47bb5e7f51c2632166b938e3d6b1" kind="function"><name>GetOptions</name></member>
     <member refid="classSR__UTILS__NS_1_1CLIManager_1a9b33515bf2985710b9a8346e9ed9fcd4" kind="function"><name>GetFlags</name></member>
+    <member refid="classSR__UTILS__NS_1_1CLIManager_1a2152439ad069e8a463d2d946b07abb7f" kind="function"><name>GetProjectPath</name></member>
     <member refid="classSR__UTILS__NS_1_1CLIManager_1a64995f3eb46187ba1c76f8ec6efcecb3" kind="function"><name>IsSingletonCanBeDestroyed</name></member>
   </compound>
   <compound refid="classEvoScript_1_1CMakeCodeGen" kind="class"><name>EvoScript::CMakeCodeGen</name>
@@ -2007,6 +2010,7 @@
     <member refid="classSR__SCRIPTING__NS_1_1CppCodeGenerator_1a1ba229851b5e70dea8ed6281b2bf8e1b" kind="variable"><name>m_compiler</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1CppCodeGenerator_1ae380713b48f4b1d59a2ee8237e44f219" kind="variable"><name>m_modules</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1CppCodeGenerator_1affb5e8b253efdb5dc2a889e8afae8d81" kind="variable"><name>m_resourcesFolder</name></member>
+    <member refid="classSR__SCRIPTING__NS_1_1CppCodeGenerator_1aec53c83ca72327174bf618bf9873d9df" kind="variable"><name>m_engineResourcesFolder</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1CppCodeGenerator_1a8f594758a7fc6e7bf8c01d6e037d633e" kind="variable"><name>m_cacheFolder</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1CppCodeGenerator_1a1c55d8dd56f0b8211faf55b8741926be" kind="variable"><name>m_codegenExecutablePath</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1CppCodeGenerator_1aba50b9b613217faac0665370c8b04495" kind="function"><name>CppCodeGenerator</name></member>
@@ -2044,6 +2048,7 @@
     <member refid="classSR__SCRIPTING__NS_1_1CppCompiler_1aa186efeae4185a27447912b78903ec9e" kind="variable"><name>m_engineLibs</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1CppCompiler_1a608fd2400694e4a2b3f92b473ade3cda" kind="variable"><name>m_cachePath</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1CppCompiler_1a45d91a7aa9285f5ab851e673a4cbbc2a" kind="variable"><name>m_resourcesPath</name></member>
+    <member refid="classSR__SCRIPTING__NS_1_1CppCompiler_1a5c275a30ff2682ec861c980e5d07ba2a" kind="variable"><name>m_engineResourcesPath</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1CppCompiler_1a43df5f9a11c8c6abd59939cfb56439a3" kind="variable"><name>m_isInitialized</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1CppCompiler_1a805d8f00c111911267a7547a7d78b841" kind="variable"><name>m_pScriptSystem</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1CppCompiler_1a4e1cd0d00b2e18ff5d933c98a22a8aff" kind="function"><name>CppCompiler</name></member>
@@ -2075,6 +2080,18 @@
     <member refid="structSR__SCRIPTING__NS_1_1CppScriptModuleInfo_1a50524083e3612a2d052144bdb88955f7" kind="variable"><name>linkMode</name></member>
     <member refid="structSR__SCRIPTING__NS_1_1CppScriptModuleInfo_1a45b4e72ca7f814bf92a3469338c9521a" kind="variable"><name>dependencies</name></member>
     <member refid="structSR__SCRIPTING__NS_1_1CppScriptModuleInfo_1a6d902c6aafd916b6a9d8b63cd0b856e3" kind="variable"><name>enabled</name></member>
+  </compound>
+  <compound refid="classSR__CORE__GUI__NS_1_1CreateNewProject" kind="class"><name>SR_CORE_GUI_NS::CreateNewProject</name>
+    <member refid="classSR__CORE__GUI__NS_1_1CreateNewProject_1a3c938062d33e61a2140ba1e5416c6982" kind="typedef"><name>Super</name></member>
+    <member refid="classSR__CORE__GUI__NS_1_1CreateNewProject_1a23dc76510bf937287d402f7328e8fc06" kind="variable"><name>m_projectName</name></member>
+    <member refid="classSR__CORE__GUI__NS_1_1CreateNewProject_1a7e46fb6d695c55cbf8c3edcfe99339c5" kind="variable"><name>m_projectPathInput</name></member>
+    <member refid="classSR__CORE__GUI__NS_1_1CreateNewProject_1ab1e3f1631bd0d17e1eb144b6291e6aa8" kind="variable"><name>m_projectFinalPath</name></member>
+    <member refid="classSR__CORE__GUI__NS_1_1CreateNewProject_1af296f89fba19c331148251cd7ba79375" kind="variable"><name>m_projectPath</name></member>
+    <member refid="classSR__CORE__GUI__NS_1_1CreateNewProject_1ac4a8136e9dea9a6dc700d5d60c23f81a" kind="function"><name>CreateNewProject</name></member>
+    <member refid="classSR__CORE__GUI__NS_1_1CreateNewProject_1af12fc9286dbcedba7813967e0453f993" kind="function"><name>Draw</name></member>
+    <member refid="classSR__CORE__GUI__NS_1_1CreateNewProject_1a845e2ef8b2b4303364d600385b6aba72" kind="function"><name>OnOpen</name></member>
+    <member refid="classSR__CORE__GUI__NS_1_1CreateNewProject_1a4a06d76547e1b2d7cba5b91c87bdf119" kind="function"><name>CreateProject</name></member>
+    <member refid="classSR__CORE__GUI__NS_1_1CreateNewProject_1a890c45dd0388e4b0005584246c672b06" kind="function"><name>ResetSettings</name></member>
   </compound>
   <compound refid="classSR__SRLM__NS_1_1CreateStructNode" kind="class"><name>SR_SRLM_NS::CreateStructNode</name>
     <member refid="classSR__SRLM__NS_1_1CreateStructNode_1a2649f822bb75dafd1046da23050fd08a" kind="typedef"><name>Super</name></member>
@@ -2899,6 +2916,7 @@
     <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a1afc0ee308fedcab8eec5ab7e5751a66" kind="typedef"><name>DescriptorSet</name></member>
     <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a8a0d107353de4877c54d7f59048ade93" kind="variable"><name>m_descriptorPool</name></member>
     <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1aecf3c2a43605148da6debe626d98acee" kind="variable"><name>m_pipeline</name></member>
+    <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1abad2a8bc39aaafbbe123354890cb9913" kind="variable"><name>m_handles</name></member>
     <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a90fba1c97b3c6bbdac068a07d301838c" kind="variable"><name>m_multiFrameMode</name></member>
     <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a38d76ce5645b49866375dcd4024e8125" kind="variable"><name>m_allocationTypesCache</name></member>
     <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1adc3686de2222032481b7d8030cf5cd21" kind="function"><name>InitSingleton</name></member>
@@ -7571,6 +7589,7 @@
     <member refid="classSR__UTILS__NS_1_1Path_1a19073e46f3c626f291a9933ab6d2c34f" kind="function"><name>Make</name></member>
     <member refid="classSR__UTILS__NS_1_1Path_1a2b0b6d65fb83ad855dcaea1331b1138d" kind="function"><name>Create</name></member>
     <member refid="classSR__UTILS__NS_1_1Path_1a1303337230a1832e0cce2ff209d374f0" kind="function"><name>CreateIfNotExists</name></member>
+    <member refid="classSR__UTILS__NS_1_1Path_1afa6c567200d14d36f1dd002c92128a0f" kind="function"><name>IsValidPath</name></member>
     <member refid="classSR__UTILS__NS_1_1Path_1aa116a2d72108b3211b5417022ea59dde" kind="function"><name>Copy</name></member>
     <member refid="classSR__UTILS__NS_1_1Path_1aa1836cb432ad15352db0eeedce67f7b7" kind="function"><name>ToString</name></member>
     <member refid="classSR__UTILS__NS_1_1Path_1a3bc351fdb28132b90373fc82448f5ca4" kind="function"><name>ConvertToFileName</name></member>
@@ -8060,8 +8079,8 @@
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a8f96345a9ea84032eebc602d7bff8a11" kind="function"><name>GetCurrentFrameIndex</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a5f9386fb5b501d57583449e04350f404" kind="function"><name>GetCurrentShaderHandle</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1ab4a3cda7e2c67ce74101c3afffdef036" kind="function"><name>GetCurrentFBOHandle</name></member>
-    <member refid="classSR__GRAPH__NS_1_1Pipeline_1aeaccc91129ec4c09ba66f2991bb4b989" kind="function"><name>GetFBOHandles</name></member>
-    <member refid="classSR__GRAPH__NS_1_1Pipeline_1a276cbbe5cf7a8c0f400e19fadc2005d9" kind="function"><name>GetShaderHandles</name></member>
+    <member refid="classSR__GRAPH__NS_1_1Pipeline_1abc74bcb9152c721890968124c8fcf48e" kind="function"><name>GetFBOHandles</name></member>
+    <member refid="classSR__GRAPH__NS_1_1Pipeline_1a05d9b2a3366740667abb299de69e7c2c" kind="function"><name>GetShaderHandles</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a74ff8140b147cb98196eaedcd1bbda87" kind="function"><name>GetFrameBufferSampleCount</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a16fca09b49251d2d0652ad62fdf05d93" kind="function"><name>GetBuildIterationsCount</name></member>
     <member refid="classSR__GRAPH__NS_1_1Pipeline_1a92a340b822c38c39846cd8c270e4b062" kind="function"><name>GetSupportedSamples</name></member>
@@ -8189,6 +8208,13 @@
     <member refid="structSR__GRAPH__NS_1_1PipelineTextureCreateInfo_1ac4a3666d937b0123c18b3d7c44d1f84a" kind="variable"><name>mipLevels</name></member>
     <member refid="structSR__GRAPH__NS_1_1PipelineTextureCreateInfo_1aec1ebc23c1e5713cc472afe5c34ca9e7" kind="variable"><name>alpha</name></member>
     <member refid="structSR__GRAPH__NS_1_1PipelineTextureCreateInfo_1a58835fffa15066dd857b833adeb6dd9a" kind="variable"><name>cpuUsage</name></member>
+  </compound>
+  <compound refid="structSR__UTILS__NS_1_1Platform_1_1PlatformHooks" kind="struct"><name>SR_UTILS_NS::Platform::PlatformHooks</name>
+    <member refid="structSR__UTILS__NS_1_1Platform_1_1PlatformHooks_1a45016009555cbd9778908baea11fdeec" kind="variable"><name>originalReadFile</name></member>
+    <member refid="structSR__UTILS__NS_1_1Platform_1_1PlatformHooks_1aa588d953330f2579ed50c01dfe4b3100" kind="variable"><name>originalGetPathType</name></member>
+    <member refid="structSR__UTILS__NS_1_1Platform_1_1PlatformHooks_1a6d796e87433c382a0f8da25dcacdb183" kind="variable"><name>readFileHook</name></member>
+    <member refid="structSR__UTILS__NS_1_1Platform_1_1PlatformHooks_1ab47dbd37f4957fe86e9eb4966884a525" kind="variable"><name>getFileTypeHook</name></member>
+    <member refid="structSR__UTILS__NS_1_1Platform_1_1PlatformHooks_1aad4ed6a85602e6f0b801592c4d33c7b4" kind="variable"><name>pathResolver</name></member>
   </compound>
   <compound refid="structSR__AUDIO__NS_1_1PlayData" kind="struct"><name>SR_AUDIO_NS::PlayData</name>
     <member refid="structSR__AUDIO__NS_1_1PlayData_1a95bb1efcd4d8e612c56ad887e892640c" kind="variable"><name>pSound</name></member>
@@ -8373,6 +8399,11 @@
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1af0db779a0e3c83254570f0a2eac408c7" kind="function"><name>SetDirtyMesh</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a292312ee2f8a2f8882184fc41366d2aa" kind="function"><name>UseSSBO</name></member>
     <member refid="classSR__GTYPES__NS_1_1ProceduralMesh_1aacc095e2cbe3cd01a7beed6fd7e54c85" kind="function"><name>GetIndices</name></member>
+  </compound>
+  <compound refid="classSR__CORE__NS_1_1ProjectSettings" kind="class"><name>SR_CORE_NS::ProjectSettings</name>
+    <member refid="classSR__CORE__NS_1_1ProjectSettings_1ab2f034c4e2c32ffd05c4fea20312be80" kind="typedef"><name>Ptr</name></member>
+    <member refid="classSR__CORE__NS_1_1ProjectSettings_1a6d0fb171eedcf5358f931480cd5947ea" kind="variable"><name>EXTENSION_NAME</name></member>
+    <member refid="classSR__CORE__NS_1_1ProjectSettings_1ae0167f5e58493e803a75fb532bdfce32" kind="variable"><name>projectName</name></member>
   </compound>
   <compound refid="structSR__GRAPH__NS_1_1ProjViewUBO" kind="struct"><name>SR_GRAPH_NS::ProjViewUBO</name>
     <member refid="structSR__GRAPH__NS_1_1ProjViewUBO_1aeebeb4eb37c24710cbfd8facf8895c6d" kind="variable"><name>proj</name></member>
@@ -9333,6 +9364,7 @@
     <member refid="classSR__UTILS__NS_1_1ResourceManager_1a7d1bf183963a32f5ebfca8cba7b59936" kind="variable"><name>m_isRun</name></member>
     <member refid="classSR__UTILS__NS_1_1ResourceManager_1aa8ee11935a2f8d919c4b97447b43cecd" kind="variable"><name>m_force</name></member>
     <member refid="classSR__UTILS__NS_1_1ResourceManager_1a99281842bbec535994fd1e8347d0f41f" kind="variable"><name>m_folder</name></member>
+    <member refid="classSR__UTILS__NS_1_1ResourceManager_1ab86a4f43eeda9a87c7de20de8c65dccc" kind="variable"><name>m_engineFolder</name></member>
     <member refid="classSR__UTILS__NS_1_1ResourceManager_1ab7ef79ff622895059016041c8dac7b22" kind="variable"><name>m_thread</name></member>
     <member refid="classSR__UTILS__NS_1_1ResourceManager_1acf845704c5526c2b5d4a9844cd1a6689" kind="variable"><name>m_lastTime</name></member>
     <member refid="classSR__UTILS__NS_1_1ResourceManager_1a9e57cb4016df30bb845d1d5550457ece" kind="variable"><name>m_deltaTime</name></member>
@@ -9342,6 +9374,8 @@
     <member refid="classSR__UTILS__NS_1_1ResourceManager_1a9a073fb3352abc58a34eb79e670d6010" kind="function"><name>IsUsePointStackTraceProfilingEnabled</name></member>
     <member refid="classSR__UTILS__NS_1_1ResourceManager_1aa99cbe17fc4191c078b64bd39e1b9832" kind="function"><name>GetResPath</name></member>
     <member refid="classSR__UTILS__NS_1_1ResourceManager_1a66549d95268696d269d39eb1d07f8fe4" kind="function"><name>GetResPathRef</name></member>
+    <member refid="classSR__UTILS__NS_1_1ResourceManager_1ac0bf8d578657b26b77f20d0ec74396b4" kind="function"><name>GetEngineResPath</name></member>
+    <member refid="classSR__UTILS__NS_1_1ResourceManager_1a1d9c0ae6bd78d17d5ec02abf81c1a511" kind="function"><name>GetEngineResPathRef</name></member>
     <member refid="classSR__UTILS__NS_1_1ResourceManager_1a42409fce9a9f88cc32fbfde31f52aae0" kind="function"><name>GetCachePath</name></member>
     <member refid="classSR__UTILS__NS_1_1ResourceManager_1a12d8581f43c1320da08966f9276f3b88" kind="function"><name>GetFileSystemWatcher</name></member>
     <member refid="classSR__UTILS__NS_1_1ResourceManager_1a53733ffadc5f799ab2b3699393d1437c" kind="function"><name>Find</name></member>
@@ -9359,7 +9393,7 @@
     <member refid="classSR__UTILS__NS_1_1ResourceManager_1a09d9a9dc28e31bf7eb3d108d6c0c6c26" kind="function"><name>Destroy</name></member>
     <member refid="classSR__UTILS__NS_1_1ResourceManager_1a26481cb339f0f01c2cfc4497d4a82c32" kind="function"><name>ReviveResource</name></member>
     <member refid="classSR__UTILS__NS_1_1ResourceManager_1a9b68b933bc17d7b7a075d6b17927e1fa" kind="function"><name>IsSingletonCanBeDestroyed</name></member>
-    <member refid="classSR__UTILS__NS_1_1ResourceManager_1afdef68e025da5f148663edcd6e89db4e" kind="function"><name>Initialize</name></member>
+    <member refid="classSR__UTILS__NS_1_1ResourceManager_1a5faacc8fb46a9a3372c02b704544cf4b" kind="function"><name>Initialize</name></member>
     <member refid="classSR__UTILS__NS_1_1ResourceManager_1af36e6a8ac41ffa742aef00811ef4bc0f" kind="function"><name>DeInitialize</name></member>
     <member refid="classSR__UTILS__NS_1_1ResourceManager_1adc3dda6abed3e33b12a79f36d291c0e0" kind="function"><name>ReloadResources</name></member>
     <member refid="classSR__UTILS__NS_1_1ResourceManager_1af8a7627faa7b57a640d95f1dab90dcec" kind="function"><name>PullWatchers</name></member>
@@ -10166,6 +10200,7 @@
     <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a62fd35c4c5743efd1cf3e9ac29395557" kind="variable"><name>m_fileCreatedSubscription</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a06dc6e078da00f2e13ecbbc3d9b53c7b" kind="variable"><name>m_fileDeletedSubscription</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a1e44ab3cc4f56b07b9e23959bf9043f1" kind="variable"><name>m_pathToEngineSourcesRoot</name></member>
+    <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a4642690138dffdda81c1173e4bf2325c" kind="variable"><name>m_engineResourcesFolder</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a8d7f6e3eab9dda95b172ca26f5461599" kind="variable"><name>m_resourcesFolder</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a4190d4f26339fbf2faa10e741b84f262" kind="variable"><name>m_cacheFolder</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a7f6bf9dde83bcc6688c8b893fe3efa48" kind="variable"><name>m_apiFolder</name></member>
@@ -10429,6 +10464,7 @@
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1ae7007abaa97bb888afeefb97400b4a0e" kind="typedef"><name>ShaderProgram</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1a03492b4511944c6b632a566d39fe55fa" kind="variable"><name>m_programPool</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1a7042608842cc331923ea6ac98d45184a" kind="variable"><name>m_pipeline</name></member>
+    <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1a7d357f8cefd5887b179ec40ac8c18337" kind="variable"><name>m_handles</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1a060c7e6260eb5ffe1f937e102c859367" kind="function"><name>ShaderProgramManager</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1a32f86e1af67e0cd8abf1911ed20934e2" kind="function"><name>~ShaderProgramManager</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager_1acd62b16f17fc2f1f1d69605061553627" kind="function"><name>GetCurrentIdentifier</name></member>
@@ -12051,6 +12087,7 @@
     <member refid="classSR__UTILS__NS_1_1Subscription_1afdd2bfc7c723c28d2bbec9126198489c" kind="function"><name>Subscription</name></member>
     <member refid="classSR__UTILS__NS_1_1Subscription_1ab958c3a56f4da428bd86500aa4de8c29" kind="function"><name>Subscription</name></member>
     <member refid="classSR__UTILS__NS_1_1Subscription_1ae887bb61f8e30102d08e8691d7c72402" kind="function"><name>operator=</name></member>
+    <member refid="classSR__UTILS__NS_1_1Subscription_1aeed79bf88c064d3c3a199fc975416786" kind="function"><name>IsValid</name></member>
     <member refid="classSR__UTILS__NS_1_1Subscription_1aed433439d85413526c460a3801ba9129" kind="function"><name>Reset</name></member>
   </compound>
   <compound refid="classSR__UTILS__NS_1_1SubscriptionHolder" kind="class"><name>SR_UTILS_NS::SubscriptionHolder</name>
@@ -12803,6 +12840,7 @@
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a96d9fb2382298172ab62075b58264caf" kind="typedef"><name>PipelinePtr</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a0c5f2d55a8a52ea5cb826f1c31ebb302" kind="variable"><name>m_pipeline</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a3a911f2f4552825a4295cd134ee5ea72" kind="variable"><name>m_uboPool</name></member>
+    <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a50be45fb82a94c941f2757e6c4c0aa0c" kind="variable"><name>m_handles</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1aed56de63a3b98c7ccc31bb57fab926c5" kind="variable"><name>m_multiFrameMode</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a6ae9c83e178a5476971ff9c9819cd40a" kind="function"><name>UBOManager</name></member>
     <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1adec78a4e5354f66a387cfe3c752220e6" kind="function"><name>~UBOManager</name></member>
@@ -13091,6 +13129,8 @@
     <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1ab67b939ccc393932365ef5dc9caf63c6" kind="variable"><name>m_doRecalcLayout</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1a6ee2f58d0015b3bd5ee6c1cd4500613b" kind="function"><name>UIViewportNode</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1ad8cc144f617d08aafb6bd7b82bc301a1" kind="function"><name>Layout</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1a43445c2ab6ab2fa7c1f5bca124a89dc2" kind="function"><name>OnEnabled</name></member>
+    <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1af424cd6e6bdf8734e1bef58623a5b841" kind="function"><name>OnDisabled</name></member>
     <member refid="classSR__GRAPH__UI__NS_1_1UIViewportNode_1ab356d49b829f6184c1944d0aefad3a2f" kind="function"><name>CalculateLayout</name></member>
   </compound>
   <compound refid="classSR__GRAPH__UI__NS_1_1UIWindowNode" kind="class"><name>SR_GRAPH_UI_NS::UIWindowNode</name>
@@ -13715,6 +13755,8 @@
     <member refid="classSR__UTILS__NS_1_1VectorUtils_1a3cf81772b34075d02cc92838853b87df" kind="function"><name>VectorUtils</name></member>
     <member refid="classSR__UTILS__NS_1_1VectorUtils_1a7f3dd403af1c4e833464ba02cf0115cb" kind="function"><name>~VectorUtils</name></member>
     <member refid="classSR__UTILS__NS_1_1VectorUtils_1ab9bd0f22ceaee1e03765af10b3d225b8" kind="function"><name>operator=</name></member>
+    <member refid="classSR__UTILS__NS_1_1VectorUtils_1a6839d9780f0abdc154d10d3b8d2b7fea" kind="function"><name>InsertSorted</name></member>
+    <member refid="classSR__UTILS__NS_1_1VectorUtils_1a0e876102b17675395a4ede9c3e3d1c02" kind="function"><name>Contains</name></member>
     <member refid="classSR__UTILS__NS_1_1VectorUtils_1ab87914b0bbe66c65d0bfd5f4c30024bb" kind="function"><name>Combine</name></member>
     <member refid="classSR__UTILS__NS_1_1VectorUtils_1a6b6e390aa5c326f445ccce8a08fe75ec" kind="function"><name>Cast</name></member>
     <member refid="classSR__UTILS__NS_1_1VectorUtils_1a6ccc52588f35a5c1ce101d62f7e2474d" kind="function"><name>Merge</name></member>
@@ -13955,8 +13997,8 @@
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a506fd8b5be42626215f24051279a0a15" kind="function"><name>GetRenderer</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1af1df15bc778fd35a6badfc9347a472e8" kind="function"><name>GetVersion</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a6b6d327ce2195b09a526058bddabc5d1" kind="function"><name>GetCurrentFBOHandle</name></member>
-    <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1aacf1e8ba821531626b84e1694df97118" kind="function"><name>GetFBOHandles</name></member>
-    <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a1cd0a5e6fecea798e75a2accf539547b" kind="function"><name>GetShaderHandles</name></member>
+    <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a5436c99f57fe0e492c33442911eb9cd4" kind="function"><name>GetFBOHandles</name></member>
+    <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a8f79282f4d50e14c5564f360256184ae" kind="function"><name>GetShaderHandles</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1ae2ff0159a0a8cd99b3046f6d29e7aab9" kind="function"><name>GetFrameBufferSampleCount</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a19732eada27b8ef894723ef421c9c351" kind="function"><name>GetBuildIterationsCount</name></member>
     <member refid="classSR__GRAPH__NS_1_1VulkanPipeline_1a0c74c4567fe16e5f54fca05b52c66af5" kind="function"><name>GetPixelColor</name></member>
@@ -15476,6 +15518,7 @@
   </compound>
   <compound refid="namespaceSR__UTILS__NS_1_1Platform" kind="namespace"><name>SR_UTILS_NS::Platform</name>
     <member refid="Platform_8h_1a68e2be033e45aeb900bd022d3b96b25b" kind="variable"><name>g_platformLogMutex</name></member>
+    <member refid="Platform_8h_1a1570cb7bd239dfe40a28ebe6b12baa48" kind="variable"><name>g_platformHooks</name></member>
     <member refid="Platform_8h_1ade7cec0dcca1bfeeed240e4a2c7f6169" kind="function"><name>IsCompiledUnderMSVC</name></member>
     <member refid="Platform_8h_1a823e92d1527ade945d551d6ad41d4c55" kind="function"><name>Terminate</name></member>
     <member refid="Platform_8h_1adfece0fe545b0f7df1bfa64586708819" kind="function"><name>InitializePlatform</name></member>
@@ -15538,6 +15581,7 @@
     <member refid="Platform_8h_1a438b53243ec3b9dd8ce94036ce4dc6d8" kind="function"><name>ReleaseCursorConfinement</name></member>
     <member refid="Platform_8h_1acd75ef9876cd2d3a7457c8dad0a471e6" kind="function"><name>SetThreadPriority</name></member>
     <member refid="Platform_8h_1aa120142f714aca63c6153474c7a0d84e" kind="function"><name>CopyPermissions</name></member>
+    <member refid="Platform_8h_1a26141d166bc306a223c12b9d4f500093" kind="function"><name>InitializeHooks</name></member>
   </compound>
   <compound refid="namespaceSR__UTILS__NS_1_1Reflection" kind="namespace"><name>SR_UTILS_NS::Reflection</name>
     <member refid="Reflection_2Property_8h_1a2fb8edd8e0d483a1258e31da2b9829fd" kind="enum"><name>PropertySRClassContainsMode</name></member>
@@ -15775,6 +15819,8 @@
   </compound>
   <compound refid="ComponentDrawer_8h" kind="file"><name>ComponentDrawer.h</name>
   </compound>
+  <compound refid="CreateNewProject_8h" kind="file"><name>CreateNewProject.h</name>
+  </compound>
   <compound refid="DragNDropHelper_8h" kind="file"><name>DragNDropHelper.h</name>
   </compound>
   <compound refid="EditorCamera_8h" kind="file"><name>EditorCamera.h</name>
@@ -15845,11 +15891,132 @@
   </compound>
   <compound refid="Launcher_8h" kind="file"><name>Launcher.h</name>
   </compound>
+  <compound refid="inc_2Engine_2macros_8h" kind="file"><name>macros.h</name>
+    <member refid="inc_2Engine_2macros_8h_1abc7f1e49c33ed9f32d3ec557925dbc3d" kind="define"><name>SR_ENGINE_DLL_API</name></member>
+  </compound>
+  <compound refid="libs_2Audio_2inc_2Audio_2macros_8h" kind="file"><name>macros.h</name>
+    <member refid="libs_2Audio_2inc_2Audio_2macros_8h_1a4f8d587c1f6eba31c5b7b467a07627a6" kind="define"><name>SR_AUDIO_DLL_API</name></member>
+  </compound>
+  <compound refid="libs_2Graphics_2inc_2Graphics_2macros_8h" kind="file"><name>macros.h</name>
+    <member refid="libs_2Graphics_2inc_2Graphics_2macros_8h_1ad943d9b010bf6be5fed929a5389726c2" kind="define"><name>SR_GRAPHICS_DLL_API</name></member>
+  </compound>
+  <compound refid="libs_2Physics_2inc_2Physics_2macros_8h" kind="file"><name>macros.h</name>
+    <member refid="libs_2Physics_2inc_2Physics_2macros_8h_1a7ac73e5e845d9f4bf768233b3182f572" kind="define"><name>SR_PHYSICS_DLL_API</name></member>
+  </compound>
+  <compound refid="libs_2Scripting_2inc_2Scripting_2macros_8h" kind="file"><name>macros.h</name>
+    <member refid="libs_2Scripting_2inc_2Scripting_2macros_8h_1a51cd7b48d580cc1dd99c60f77886b941" kind="define"><name>SR_SCRIPTING_DLL_API</name></member>
+  </compound>
+  <compound refid="libs_2Utils_2inc_2Utils_2macros_8h" kind="file"><name>macros.h</name>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a816ab7d5c2ce1f0a01216042837beb93" kind="define"><name>GLM_FORCE_RADIANS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1aa53e0967978ad7a8792f6961156ec968" kind="define"><name>GLM_FORCE_DEPTH_ZERO_TO_ONE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a54a3814d1062a0be10e553faf30a8ef0" kind="define"><name>CRT_SECURE_NO_WARNINGS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ab327acd0a24a2ccb9dfc3af0a807172f" kind="define"><name>_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a599c03dc0e32c96863b3fbeca7bef935" kind="define"><name>_HAS_AUTO_PTR_ETC</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1aa8cecfc5c5c054d2875c03e77b7be15d" kind="define"><name>TRUE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1aa93f0eb578d23995850d61f7d61c55c1" kind="define"><name>FALSE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a36baea32c6788d2d164dc0eb74f7a34c" kind="define"><name>SR_HAS_ATTRIBUTE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a269d44eb38a17e1579d6008646119e1a" kind="define"><name>SR_LIKELY_ATTRIBUTE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1afcab8d12c6db8db15b5d7105859ed6ae" kind="define"><name>SR_UNLIKELY_ATTRIBUTE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a82f8fa01a35cd3019703b95ea7e803db" kind="define"><name>SR_LIKELY</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a3336e92e604978dffc5b057233423b59" kind="define"><name>SR_UNLIKELY</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a82af4d3cdbc171f7baf9567a7130fbe8" kind="define"><name>SR_SAFE_DELETE_PTR</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a1bd2754799ee160184f368b9ce1339aa" kind="define"><name>SR_SAFE_DELETE_ARRAY_PTR</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1afec1d4590305551d272212aa7496313b" kind="define"><name>SR_COMBINE_Utils</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ae7b963fb1c07c0b8df6bce4f4fdc4729" kind="define"><name>SR_COMBINE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a73e39319eb89901b5462394dfc308725" kind="define"><name>SR_FASTCALL_ATTRIBUTE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ae888130d972d0abf79927c3849f0b602" kind="define"><name>SR_CONSTEXPR</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a0aa792aeb9cc49c0c147cde87abdcc7a" kind="define"><name>SR_INLINE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ad4e3884dd6f5f9aef0843a2dcb78d2b5" kind="define"><name>SR_FASTCALL</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1af28f49e3d796382879e675917ad8f8b4" kind="define"><name>SR_FORCE_INLINE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a54f2504cfb42f2c88f8d088aaa192841" kind="define"><name>SR_RESTRICT</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a7e99847fb00b39f363ce87a554cc02b1" kind="define"><name>SR_CLOCKS_PER_SEC</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a5ed4ecb53271983f9f546867278c2c3a" kind="define"><name>SR_NODISCARD</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ae57e254b6bf4eae3590548092ecbf31c" kind="define"><name>SR_FALLTHROUGH</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a5ed4630e2bcf2c8168a8f4cb806022b3" kind="define"><name>SR_DEPRECATED</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ab480da21ad07010bf19f94707f896bcd" kind="define"><name>SR_DEPRECATED_EX</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a4927892346728e324508bcb1943536d4" kind="define"><name>SR_MAYBE_UNUSED</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a03e5d0d1872131df12bef49d4fa2bca0" kind="define"><name>SR_MAYBE_UNUSED_VAR</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a6bd3bcd09f90af6f0648791b598dba27" kind="define"><name>SR_INLINE_STATIC</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a57fad190a3dadff42987f408685255d7" kind="define"><name>SR_NULL</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a90d32338b66c081bdefe5efcdef2adf0" kind="define"><name>SR_MARSHAL_USE_LIST</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a5d917c412008f1ef22f4b13cb9fd45fb" kind="define"><name>SR_MARSHAL_ENCODE_AND_DECODE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ab0a9f8483bfcea04a2adf34d136aab0b" kind="define"><name>SR_INVALID_STR_POS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ac0e82a756dcc374f5aa21729f6701d91" kind="define"><name>SR_ID_INVALID</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a88ea964e413c77498c6cba2886545efc" kind="define"><name>SR_SHADER_PROGRAM</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a86607188aa700ba0c36b12b779790ff5" kind="define"><name>SR_NULL_SHADER</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a15e82f15c3d7dbf323b6c5258e2e47b3" kind="define"><name>SR_VERTEX_DESCRIPTION</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1abd75661fe7969e19439052a5f69ba5d1" kind="define"><name>GLM_ENABLE_EXPERIMENTAL</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a00502f698de5bf20e6d979d0cdb00765" kind="define"><name>SR_NOOP</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a9635bf9d5897ba7f5f02f8bd4b324a74" kind="define"><name>SR_FLT_EPSILON</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ac8d27c03feecf16430debe4b495b8c4e" kind="define"><name>SR_NORETURN</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a819a2273e0e6fea4e84c5046a4860c5e" kind="define"><name>SR_MAX_BONES_ON_VERTEX</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1affc597af11259f495bdd804566dbc1d2" kind="define"><name>SR_HUMANOID_MAX_BONES</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a0d9c5465ae4bfd0873d409539114919f" kind="define"><name>SR_FAST_CONSTRUCTOR</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a8a222dd5c009d13644e0fb5b4f96013d" kind="define"><name>SR_UNUSED_VARIABLE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ae60710434468ed7b7e0d0b7e9258d42f" kind="define"><name>SR_WIN32_BOOL</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a2774df9818d72a6be270ea375bf9650b" kind="define"><name>SR_SIMD_SUPPORT</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1aaceb6c766e952dcd626fb0b944fc47a5" kind="define"><name>SR_MACRO_CONCAT_UTIL</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1aaedcdfbfafeeec1634e2d4ddb40e11a6" kind="define"><name>SR_MACRO_CONCAT</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a8205a64da40fa9df39a2432561116d0d" kind="define"><name>SR_STRINGIFY</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1afff02dfb9b1ceac78eeb06fee6c76cbd" kind="define"><name>SR_EXPAND_AND_STRINGIFY</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a85be71c7a7d0066e3c7d1373bc563763" kind="define"><name>SR_PROTECT</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ad68a0520ffad979c9546b30f6eb97a3e" kind="define"><name>SR_EXPAND</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1af6236fdef49652b3904e5c97417c7f15" kind="define"><name>SR_LINE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a6c7209aa879d2a79acd14d6458821ad2" kind="define"><name>SR_AF_INET</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a7b4115f749d66a20e8eaabc76af5e4bf" kind="define"><name>SR_SOCK_STREAM</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a5bece2d6d52e45af832a2b72b045324b" kind="define"><name>SR_INADDR_ANY</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a10ddbe4c51d33c325875196ef89c685b" kind="define"><name>SR_XML_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a050d4c5991eb39d026ef44e08f607bd7" kind="define"><name>SR_YAML_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a071a2e9d76180094796d980c1c9aea17" kind="define"><name>SR_PHYSICS_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ae69d521522be5f1e2a77d271b1b72991" kind="define"><name>SR_PTYPES_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a10f3816984e322927f26e3d258856743" kind="define"><name>SR_PHYSICS_UTILS_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ad435cd8ff2653f6f18232fff22d8a983" kind="define"><name>SR_UTILS_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ae5c50cb7ca1ab1b3e0904463d9060787" kind="define"><name>SR_SRLM_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1aa22cc1609ccf32185836c25b7473acbe" kind="define"><name>SR_NETWORK_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ad48137f6b266a09652634fe6c475e8a2" kind="define"><name>SR_PLATFORM_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a1242779feef05131e72c86a892262f80" kind="define"><name>SR_MATH_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a424b80f0ecc4b98e95a2e592e83e4333" kind="define"><name>SR_GRAPH_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ac6f061f35fb40f50057a35bca0caaaad" kind="define"><name>SR_SRSL_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a9ad611b14cdb01f53ea00c2f32a05e12" kind="define"><name>SR_GRAPH_UI_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1aa9a7d2658a527d59dd87642e8a175112" kind="define"><name>SR_GRAPH_GUI_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a05d1591858b5a562711e4cccecd8aefc" kind="define"><name>SR_ANIMATIONS_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a0014e080ea159193c4c6361dbd5b6f15" kind="define"><name>SR_HTYPES_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a21fe194564e3a4bbcbc0dcdbdc56e9c2" kind="define"><name>SR_GTYPES_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ab65e97039b6e8e5a9a9a7c6136b1038c" kind="define"><name>SR_WORLD_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ab1949e5415321dd829e9a3f44609bcba" kind="define"><name>SR_CORE_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a75d40e18bf07fa8f1bcc3073bb723163" kind="define"><name>SR_CORE_UI_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a1d4cea11e28ba600838cf71237c8ea6e" kind="define"><name>SR_CORE_GUI_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a4f0c0ef2f81e5f0c6c9bdf866f3dc9fc" kind="define"><name>SR_SCRIPTING_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a9e0f16862cffa3345985f16591c30714" kind="define"><name>SR_AUDIO_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a907d1ea4c8c3b9c91b3c57f3b00def3f" kind="define"><name>SR_UTILS_GUI_NS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1aa134a6d1e33aaa41d3d0230315a0fb5f" kind="define"><name>SR_COUNT_ARGS_IMPL2</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a5c5cb0389ad7d23245af13997794b577" kind="define"><name>SR_COUNT_ARGS_IMPL</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1aeb77752aad0b749ab4266bc2dd1970c2" kind="define"><name>SR_COUNT_ARGS</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a514adad1320c745f8c7f6b9babb76d42" kind="define"><name>SR_GLOBAL_LOCK</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a19e266d9567e2a3bffaa2d330f155e75" kind="define"><name>SR_GLOBAL_RECURSIVE_LOCK</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1abbd4b76667b7d7aa594aaf44d57ac83f" kind="define"><name>SR_STATIC_ASSERT2</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a22fa442b99a5d96433c10a5b67a3e7f3" kind="define"><name>SR_STATIC_ASSERT</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a295e7aec1eceffe473a297f46a4b4e71" kind="define"><name>SR_RENDERER_DLL_API</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a522703230a4e759b921e95958799fc14" kind="define"><name>SR_CORE_DLL_API</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a84af508d0e9e1c956bce88c776757849" kind="define"><name>SR_DLL_API_IMPORT</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a7ecb9b3834ba4c72e7c15fa192a48ebe" kind="define"><name>SR_DLL_API_EXPORT</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1afdd5d4651cde3b3141d03d993dbdcabc" kind="define"><name>SR_CODEGEN_DLL_API_IMPORT</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1abc5c96e0559f2dd941f6e318f8d44ac2" kind="define"><name>SR_CODEGEN_DLL_API_EXPORT</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1af6f55d5bc7a7a14d3cd2c10648d4f22b" kind="define"><name>SR_COMMON_DLL_API</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a29bf9b95e3d36b498d1c96f126b77340" kind="define"><name>SR_STRCMPI</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1af6d72565571625ce242f7b32ddfdd4b8" kind="define"><name>SR_STRNCPY</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a98f527cf0d63142b6b6dc4be01cdff14" kind="define"><name>SR_FUNCTION_SIGNATURE</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1adba5c3290b0282780b1d6052dbfe8b15" kind="define"><name>SR_GCC_CLANG_REMOVE_PADDING_ATTRIB</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a074582c33e07e707faa8017cc5726ca3" kind="define"><name>SR_CODEGEN_HEADER_COMMENT</name></member>
+    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a2f4af09115b4b3f8fe6c0bb412b005f3" kind="define"><name>SR_OFFSETOF</name></member>
+  </compound>
   <compound refid="BlueprintParser_8h" kind="file"><name>BlueprintParser.h</name>
   </compound>
   <compound refid="ScriptableContext_8h" kind="file"><name>ScriptableContext.h</name>
   </compound>
   <compound refid="EditorSettings_8h" kind="file"><name>EditorSettings.h</name>
+  </compound>
+  <compound refid="ProjectSettings_8h" kind="file"><name>ProjectSettings.h</name>
   </compound>
   <compound refid="ChunkSystemState_8h" kind="file"><name>ChunkSystemState.h</name>
   </compound>
@@ -15868,6 +16035,10 @@
   <compound refid="StopState_8h" kind="file"><name>StopState.h</name>
   </compound>
   <compound refid="SubmitState_8h" kind="file"><name>SubmitState.h</name>
+  </compound>
+  <compound refid="inc_2Engine_2Tests_2AtlasBuilderTest_8h" kind="file"><name>AtlasBuilderTest.h</name>
+  </compound>
+  <compound refid="libs_2Utils_2inc_2Utils_2Tests_2AtlasBuilderTest_8h" kind="file"><name>AtlasBuilderTest.h</name>
   </compound>
   <compound refid="HTMLTest_8h" kind="file"><name>HTMLTest.h</name>
   </compound>
@@ -16801,125 +16972,6 @@
   </compound>
   <compound refid="UTF_8h" kind="file"><name>UTF.h</name>
   </compound>
-  <compound refid="inc_2Engine_2macros_8h" kind="file"><name>macros.h</name>
-    <member refid="inc_2Engine_2macros_8h_1abc7f1e49c33ed9f32d3ec557925dbc3d" kind="define"><name>SR_ENGINE_DLL_API</name></member>
-  </compound>
-  <compound refid="libs_2Audio_2inc_2Audio_2macros_8h" kind="file"><name>macros.h</name>
-    <member refid="libs_2Audio_2inc_2Audio_2macros_8h_1a4f8d587c1f6eba31c5b7b467a07627a6" kind="define"><name>SR_AUDIO_DLL_API</name></member>
-  </compound>
-  <compound refid="libs_2Graphics_2inc_2Graphics_2macros_8h" kind="file"><name>macros.h</name>
-    <member refid="libs_2Graphics_2inc_2Graphics_2macros_8h_1ad943d9b010bf6be5fed929a5389726c2" kind="define"><name>SR_GRAPHICS_DLL_API</name></member>
-  </compound>
-  <compound refid="libs_2Physics_2inc_2Physics_2macros_8h" kind="file"><name>macros.h</name>
-    <member refid="libs_2Physics_2inc_2Physics_2macros_8h_1a7ac73e5e845d9f4bf768233b3182f572" kind="define"><name>SR_PHYSICS_DLL_API</name></member>
-  </compound>
-  <compound refid="libs_2Scripting_2inc_2Scripting_2macros_8h" kind="file"><name>macros.h</name>
-    <member refid="libs_2Scripting_2inc_2Scripting_2macros_8h_1a51cd7b48d580cc1dd99c60f77886b941" kind="define"><name>SR_SCRIPTING_DLL_API</name></member>
-  </compound>
-  <compound refid="libs_2Utils_2inc_2Utils_2macros_8h" kind="file"><name>macros.h</name>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a816ab7d5c2ce1f0a01216042837beb93" kind="define"><name>GLM_FORCE_RADIANS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1aa53e0967978ad7a8792f6961156ec968" kind="define"><name>GLM_FORCE_DEPTH_ZERO_TO_ONE</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a54a3814d1062a0be10e553faf30a8ef0" kind="define"><name>CRT_SECURE_NO_WARNINGS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ab327acd0a24a2ccb9dfc3af0a807172f" kind="define"><name>_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a599c03dc0e32c96863b3fbeca7bef935" kind="define"><name>_HAS_AUTO_PTR_ETC</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1aa8cecfc5c5c054d2875c03e77b7be15d" kind="define"><name>TRUE</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1aa93f0eb578d23995850d61f7d61c55c1" kind="define"><name>FALSE</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a36baea32c6788d2d164dc0eb74f7a34c" kind="define"><name>SR_HAS_ATTRIBUTE</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a269d44eb38a17e1579d6008646119e1a" kind="define"><name>SR_LIKELY_ATTRIBUTE</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1afcab8d12c6db8db15b5d7105859ed6ae" kind="define"><name>SR_UNLIKELY_ATTRIBUTE</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a82f8fa01a35cd3019703b95ea7e803db" kind="define"><name>SR_LIKELY</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a3336e92e604978dffc5b057233423b59" kind="define"><name>SR_UNLIKELY</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a82af4d3cdbc171f7baf9567a7130fbe8" kind="define"><name>SR_SAFE_DELETE_PTR</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a1bd2754799ee160184f368b9ce1339aa" kind="define"><name>SR_SAFE_DELETE_ARRAY_PTR</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1afec1d4590305551d272212aa7496313b" kind="define"><name>SR_COMBINE_Utils</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ae7b963fb1c07c0b8df6bce4f4fdc4729" kind="define"><name>SR_COMBINE</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a73e39319eb89901b5462394dfc308725" kind="define"><name>SR_FASTCALL_ATTRIBUTE</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ae888130d972d0abf79927c3849f0b602" kind="define"><name>SR_CONSTEXPR</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a0aa792aeb9cc49c0c147cde87abdcc7a" kind="define"><name>SR_INLINE</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ad4e3884dd6f5f9aef0843a2dcb78d2b5" kind="define"><name>SR_FASTCALL</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1af28f49e3d796382879e675917ad8f8b4" kind="define"><name>SR_FORCE_INLINE</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a54f2504cfb42f2c88f8d088aaa192841" kind="define"><name>SR_RESTRICT</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a7e99847fb00b39f363ce87a554cc02b1" kind="define"><name>SR_CLOCKS_PER_SEC</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a5ed4ecb53271983f9f546867278c2c3a" kind="define"><name>SR_NODISCARD</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ae57e254b6bf4eae3590548092ecbf31c" kind="define"><name>SR_FALLTHROUGH</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a5ed4630e2bcf2c8168a8f4cb806022b3" kind="define"><name>SR_DEPRECATED</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ab480da21ad07010bf19f94707f896bcd" kind="define"><name>SR_DEPRECATED_EX</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a4927892346728e324508bcb1943536d4" kind="define"><name>SR_MAYBE_UNUSED</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a03e5d0d1872131df12bef49d4fa2bca0" kind="define"><name>SR_MAYBE_UNUSED_VAR</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a6bd3bcd09f90af6f0648791b598dba27" kind="define"><name>SR_INLINE_STATIC</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a57fad190a3dadff42987f408685255d7" kind="define"><name>SR_NULL</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a90d32338b66c081bdefe5efcdef2adf0" kind="define"><name>SR_MARSHAL_USE_LIST</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a5d917c412008f1ef22f4b13cb9fd45fb" kind="define"><name>SR_MARSHAL_ENCODE_AND_DECODE</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ab0a9f8483bfcea04a2adf34d136aab0b" kind="define"><name>SR_INVALID_STR_POS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ac0e82a756dcc374f5aa21729f6701d91" kind="define"><name>SR_ID_INVALID</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a88ea964e413c77498c6cba2886545efc" kind="define"><name>SR_SHADER_PROGRAM</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a86607188aa700ba0c36b12b779790ff5" kind="define"><name>SR_NULL_SHADER</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a15e82f15c3d7dbf323b6c5258e2e47b3" kind="define"><name>SR_VERTEX_DESCRIPTION</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1abd75661fe7969e19439052a5f69ba5d1" kind="define"><name>GLM_ENABLE_EXPERIMENTAL</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a00502f698de5bf20e6d979d0cdb00765" kind="define"><name>SR_NOOP</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a9635bf9d5897ba7f5f02f8bd4b324a74" kind="define"><name>SR_FLT_EPSILON</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ac8d27c03feecf16430debe4b495b8c4e" kind="define"><name>SR_NORETURN</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a819a2273e0e6fea4e84c5046a4860c5e" kind="define"><name>SR_MAX_BONES_ON_VERTEX</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1affc597af11259f495bdd804566dbc1d2" kind="define"><name>SR_HUMANOID_MAX_BONES</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a0d9c5465ae4bfd0873d409539114919f" kind="define"><name>SR_FAST_CONSTRUCTOR</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a8a222dd5c009d13644e0fb5b4f96013d" kind="define"><name>SR_UNUSED_VARIABLE</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ae60710434468ed7b7e0d0b7e9258d42f" kind="define"><name>SR_WIN32_BOOL</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a2774df9818d72a6be270ea375bf9650b" kind="define"><name>SR_SIMD_SUPPORT</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1aaceb6c766e952dcd626fb0b944fc47a5" kind="define"><name>SR_MACRO_CONCAT_UTIL</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1aaedcdfbfafeeec1634e2d4ddb40e11a6" kind="define"><name>SR_MACRO_CONCAT</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a8205a64da40fa9df39a2432561116d0d" kind="define"><name>SR_STRINGIFY</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1afff02dfb9b1ceac78eeb06fee6c76cbd" kind="define"><name>SR_EXPAND_AND_STRINGIFY</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a85be71c7a7d0066e3c7d1373bc563763" kind="define"><name>SR_PROTECT</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ad68a0520ffad979c9546b30f6eb97a3e" kind="define"><name>SR_EXPAND</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1af6236fdef49652b3904e5c97417c7f15" kind="define"><name>SR_LINE</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a6c7209aa879d2a79acd14d6458821ad2" kind="define"><name>SR_AF_INET</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a7b4115f749d66a20e8eaabc76af5e4bf" kind="define"><name>SR_SOCK_STREAM</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a5bece2d6d52e45af832a2b72b045324b" kind="define"><name>SR_INADDR_ANY</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a10ddbe4c51d33c325875196ef89c685b" kind="define"><name>SR_XML_NS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a050d4c5991eb39d026ef44e08f607bd7" kind="define"><name>SR_YAML_NS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a071a2e9d76180094796d980c1c9aea17" kind="define"><name>SR_PHYSICS_NS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ae69d521522be5f1e2a77d271b1b72991" kind="define"><name>SR_PTYPES_NS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a10f3816984e322927f26e3d258856743" kind="define"><name>SR_PHYSICS_UTILS_NS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ad435cd8ff2653f6f18232fff22d8a983" kind="define"><name>SR_UTILS_NS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ae5c50cb7ca1ab1b3e0904463d9060787" kind="define"><name>SR_SRLM_NS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1aa22cc1609ccf32185836c25b7473acbe" kind="define"><name>SR_NETWORK_NS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ad48137f6b266a09652634fe6c475e8a2" kind="define"><name>SR_PLATFORM_NS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a1242779feef05131e72c86a892262f80" kind="define"><name>SR_MATH_NS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a424b80f0ecc4b98e95a2e592e83e4333" kind="define"><name>SR_GRAPH_NS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ac6f061f35fb40f50057a35bca0caaaad" kind="define"><name>SR_SRSL_NS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a9ad611b14cdb01f53ea00c2f32a05e12" kind="define"><name>SR_GRAPH_UI_NS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1aa9a7d2658a527d59dd87642e8a175112" kind="define"><name>SR_GRAPH_GUI_NS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a05d1591858b5a562711e4cccecd8aefc" kind="define"><name>SR_ANIMATIONS_NS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a0014e080ea159193c4c6361dbd5b6f15" kind="define"><name>SR_HTYPES_NS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a21fe194564e3a4bbcbc0dcdbdc56e9c2" kind="define"><name>SR_GTYPES_NS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ab65e97039b6e8e5a9a9a7c6136b1038c" kind="define"><name>SR_WORLD_NS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1ab1949e5415321dd829e9a3f44609bcba" kind="define"><name>SR_CORE_NS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a75d40e18bf07fa8f1bcc3073bb723163" kind="define"><name>SR_CORE_UI_NS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a1d4cea11e28ba600838cf71237c8ea6e" kind="define"><name>SR_CORE_GUI_NS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a4f0c0ef2f81e5f0c6c9bdf866f3dc9fc" kind="define"><name>SR_SCRIPTING_NS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a9e0f16862cffa3345985f16591c30714" kind="define"><name>SR_AUDIO_NS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a907d1ea4c8c3b9c91b3c57f3b00def3f" kind="define"><name>SR_UTILS_GUI_NS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1aa134a6d1e33aaa41d3d0230315a0fb5f" kind="define"><name>SR_COUNT_ARGS_IMPL2</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a5c5cb0389ad7d23245af13997794b577" kind="define"><name>SR_COUNT_ARGS_IMPL</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1aeb77752aad0b749ab4266bc2dd1970c2" kind="define"><name>SR_COUNT_ARGS</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a514adad1320c745f8c7f6b9babb76d42" kind="define"><name>SR_GLOBAL_LOCK</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a19e266d9567e2a3bffaa2d330f155e75" kind="define"><name>SR_GLOBAL_RECURSIVE_LOCK</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1abbd4b76667b7d7aa594aaf44d57ac83f" kind="define"><name>SR_STATIC_ASSERT2</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a22fa442b99a5d96433c10a5b67a3e7f3" kind="define"><name>SR_STATIC_ASSERT</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a295e7aec1eceffe473a297f46a4b4e71" kind="define"><name>SR_RENDERER_DLL_API</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a522703230a4e759b921e95958799fc14" kind="define"><name>SR_CORE_DLL_API</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a84af508d0e9e1c956bce88c776757849" kind="define"><name>SR_DLL_API_IMPORT</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a7ecb9b3834ba4c72e7c15fa192a48ebe" kind="define"><name>SR_DLL_API_EXPORT</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1afdd5d4651cde3b3141d03d993dbdcabc" kind="define"><name>SR_CODEGEN_DLL_API_IMPORT</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1abc5c96e0559f2dd941f6e318f8d44ac2" kind="define"><name>SR_CODEGEN_DLL_API_EXPORT</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1af6f55d5bc7a7a14d3cd2c10648d4f22b" kind="define"><name>SR_COMMON_DLL_API</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a29bf9b95e3d36b498d1c96f126b77340" kind="define"><name>SR_STRCMPI</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1af6d72565571625ce242f7b32ddfdd4b8" kind="define"><name>SR_STRNCPY</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a98f527cf0d63142b6b6dc4be01cdff14" kind="define"><name>SR_FUNCTION_SIGNATURE</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1adba5c3290b0282780b1d6052dbfe8b15" kind="define"><name>SR_GCC_CLANG_REMOVE_PADDING_ATTRIB</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a074582c33e07e707faa8017cc5726ca3" kind="define"><name>SR_CODEGEN_HEADER_COMMENT</name></member>
-    <member refid="libs_2Utils_2inc_2Utils_2macros_8h_1a2f4af09115b4b3f8fe6c0bb412b005f3" kind="define"><name>SR_OFFSETOF</name></member>
-  </compound>
   <compound refid="AABB_8h" kind="file"><name>AABB.h</name>
   </compound>
   <compound refid="Axis_8h" kind="file"><name>Axis.h</name>
@@ -17224,10 +17276,6 @@
   <compound refid="TaskManager_8h" kind="file"><name>TaskManager.h</name>
   </compound>
   <compound refid="ThreadWorker_8h" kind="file"><name>ThreadWorker.h</name>
-  </compound>
-  <compound refid="inc_2Engine_2Tests_2AtlasBuilderTest_8h" kind="file"><name>AtlasBuilderTest.h</name>
-  </compound>
-  <compound refid="libs_2Utils_2inc_2Utils_2Tests_2AtlasBuilderTest_8h" kind="file"><name>AtlasBuilderTest.h</name>
   </compound>
   <compound refid="ReflectionTestComponent_8h" kind="file"><name>ReflectionTestComponent.h</name>
   </compound>

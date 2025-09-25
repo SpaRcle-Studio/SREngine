@@ -133,6 +133,20 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="114" column="34" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="114" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a50be45fb82a94c941f2757e6c4c0aa0c" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; void * &gt;</type>
+        <definition>std::vector&lt;void*&gt; SR_GRAPH_NS::Memory::UBOManager::m_handles</definition>
+        <argsstring></argsstring>
+        <name>m_handles</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::UBOManager::m_handles</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="115" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1aed56de63a3b98c7ccc31bb57fab926c5" prot="private" static="no" mutable="no">
         <type>bool</type>
         <definition>bool SR_GRAPH_NS::Memory::UBOManager::m_multiFrameMode</definition>
@@ -146,7 +160,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="115" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="115" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="116" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="116" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -463,7 +477,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="72" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="72" bodyend="117"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="72" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="72" bodyend="118"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a2140879c1b8695a0c5515b17b82f42c1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::UBOManager</scope><name>AllocateUBO</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1ae0cf339f518de072f8b048d4f4d8cf2d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::UBOManager</scope><name>AllocateUBO</name></member>
@@ -484,6 +498,7 @@
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1aec4b20fa9410d3b3ffb866ad2307a3cc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::Memory::UBOManager</scope><name>IsSingletonCanBeDestroyed</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a31931d2cbc17f064e27db243b971e202" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::UBOManager</scope><name>IsSingletonInitialized</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1adab1931732d186e76c89e282c748f253" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::UBOManager</scope><name>LockSingleton</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a50be45fb82a94c941f2757e6c4c0aa0c" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::UBOManager</scope><name>m_handles</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1aed56de63a3b98c7ccc31bb57fab926c5" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::UBOManager</scope><name>m_multiFrameMode</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1a38d28fddc83cb3a403821554ea65dd" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::UBOManager</scope><name>m_mutex</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager_1a0c5f2d55a8a52ea5cb826f1c31ebb302" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::UBOManager</scope><name>m_pipeline</name></member>

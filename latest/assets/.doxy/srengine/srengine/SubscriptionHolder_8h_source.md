@@ -86,6 +86,8 @@ namespace SR_UTILS_NS {
         Subscription(Subscription&& other) noexcept;
         Subscription& operator=(Subscription&& other) noexcept;
 
+        SR_NODISCARD bool IsValid() const noexcept { return m_internalInfo != nullptr; }
+
         void Reset();
 
     private:

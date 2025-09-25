@@ -10,6 +10,7 @@
     <innerclass refid="classSR__CORE__GUI__NS_1_1BehaviourPropertyDrawer" prot="public">SR_CORE_GUI_NS::BehaviourPropertyDrawer</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1BitMapPropertyDrawer" prot="public">SR_CORE_GUI_NS::BitMapPropertyDrawer</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1BoolPropertyDrawer" prot="public">SR_CORE_GUI_NS::BoolPropertyDrawer</innerclass>
+    <innerclass refid="classSR__CORE__GUI__NS_1_1CreateNewProject" prot="public">SR_CORE_GUI_NS::CreateNewProject</innerclass>
     <innerclass refid="structSR__CORE__GUI__NS_1_1DrawPropertyContext" prot="public">SR_CORE_GUI_NS::DrawPropertyContext</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1EditorCamera" prot="public">SR_CORE_GUI_NS::EditorCamera</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1EditorGizmo" prot="public">SR_CORE_GUI_NS::EditorGizmo</innerclass>

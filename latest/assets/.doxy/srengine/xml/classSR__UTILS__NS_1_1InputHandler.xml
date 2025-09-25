@@ -277,60 +277,66 @@
         </childnode>
       </node>
       <node id="8">
+        <label>SR_CORE_GUI_NS::CreateNewProject</label>
+        <link refid="classSR__CORE__GUI__NS_1_1CreateNewProject"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
         <label>SR_CORE_GUI_NS::EngineSettings</label>
         <link refid="classSR__CORE__GUI__NS_1_1EngineSettings"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="9">
+      <node id="10">
         <label>SR_CORE_GUI_NS::Inspector</label>
         <link refid="classSR__CORE__GUI__NS_1_1Inspector"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="16">
+      <node id="17">
         <label>SR_CORE_GUI_NS::RenderTechniqueEditor</label>
         <link refid="classSR__CORE__GUI__NS_1_1RenderTechniqueEditor"/>
-        <childnode refid="15" relation="public-inheritance">
+        <childnode refid="16" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="18">
+      <node id="19">
         <label>SR_CORE_GUI_NS::SceneTools</label>
         <link refid="classSR__CORE__GUI__NS_1_1SceneTools"/>
-        <childnode refid="17" relation="public-inheritance">
+        <childnode refid="18" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="10">
+      <node id="11">
         <label>SR_CORE_GUI_NS::SceneViewer</label>
         <link refid="classSR__CORE__GUI__NS_1_1SceneViewer"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="11">
+      <node id="12">
         <label>SR_CORE_GUI_NS::SoundDebug</label>
         <link refid="classSR__CORE__GUI__NS_1_1SoundDebug"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="12">
+      <node id="13">
         <label>SR_CORE_GUI_NS::WorldEdit</label>
         <link refid="classSR__CORE__GUI__NS_1_1WorldEdit"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="13">
+      <node id="14">
         <label>SR_CORE_NS::GUI::EngineStatistics</label>
         <link refid="classSR__CORE__NS_1_1GUI_1_1EngineStatistics"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="14">
+      <node id="15">
         <label>SR_CORE_NS::GUI::FileBrowser</label>
         <link refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="15">
+      <node id="16">
         <label>SR_GRAPH_GUI_NS::NodeWidget</label>
         <link refid="classSR__GRAPH__GUI__NS_1_1NodeWidget"/>
         <childnode refid="4" relation="public-inheritance">
@@ -342,25 +348,25 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="17">
+      <node id="18">
         <label>SR_GRAPH_GUI_NS::WidgetContainer</label>
         <link refid="classSR__GRAPH__GUI__NS_1_1WidgetContainer"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="19">
+      <node id="20">
         <label>SR_GRAPH_GUI_NS::WidgetContainerElement</label>
         <link refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="21">
+      <node id="22">
         <label>SR_GRAPH_NS::GUI::GlobalWidgetManager</label>
         <link refid="classSR__GRAPH__NS_1_1GUI_1_1GlobalWidgetManager"/>
-        <childnode refid="20" relation="public-inheritance">
+        <childnode refid="21" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="20">
+      <node id="21">
         <label>SR_GRAPH_NS::GUI::WidgetManager</label>
         <link refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager"/>
         <childnode refid="1" relation="public-inheritance">

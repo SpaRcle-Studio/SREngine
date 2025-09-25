@@ -1186,24 +1186,30 @@
         </childnode>
       </node>
       <node id="20">
+        <label>SR_CORE_NS::ProjectSettings</label>
+        <link refid="classSR__CORE__NS_1_1ProjectSettings"/>
+        <childnode refid="18" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="21">
         <label>SR_GRAPH_NS::FileMaterialResource</label>
         <link refid="classSR__GRAPH__NS_1_1FileMaterialResource"/>
         <childnode refid="18" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="21">
+      <node id="22">
         <label>SR_GRAPH_NS::FileRenderTechniqueResource</label>
         <link refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource"/>
         <childnode refid="18" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="22">
+      <node id="23">
         <label>SR_GRAPH_NS::RenderSettings</label>
         <link refid="classSR__GRAPH__NS_1_1RenderSettings"/>
         <childnode refid="18" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="23">
+      <node id="24">
         <label>SR_GRAPH_NS::RenderStagesSettings</label>
         <link refid="classSR__GRAPH__NS_1_1RenderStagesSettings"/>
         <childnode refid="18" relation="public-inheritance">
@@ -1255,7 +1261,7 @@
         <label>SR_HTYPES_NS::SharedPtrBase</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
       </node>
-      <node id="24">
+      <node id="25">
         <label>SR_PTYPES_NS::PhysicsMaterial</label>
         <link refid="classSR__PTYPES__NS_1_1PhysicsMaterial"/>
         <childnode refid="18" relation="public-inheritance">
@@ -1283,7 +1289,7 @@
         <childnode refid="6" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="26">
+      <node id="27">
         <label>SR_UTILS_NS::Prefab</label>
         <link refid="classSR__UTILS__NS_1_1Prefab"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1309,7 +1315,7 @@
         <label>SR_UTILS_NS::SubscriptionHolder</label>
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
-      <node id="25">
+      <node id="26">
         <label>SR_UTILS_NS::TestManagerAsset</label>
         <link refid="classSR__UTILS__NS_1_1TestManagerAsset"/>
         <childnode refid="18" relation="public-inheritance">

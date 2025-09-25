@@ -51,6 +51,8 @@
 
 | Type | Name |
 | ---: | :--- |
+|  bool | [**Contains**](#function-contains) (const std::vector&lt; T &gt; & v, const T & value) <br> |
+|  void | [**InsertSorted**](#function-insertsorted) (std::vector&lt; T &gt; & v, const T & value) <br> |
 |   | [**VectorUtils**](#function-vectorutils-12) () = delete<br> |
 |   | [**VectorUtils**](#function-vectorutils-22) ([**VectorUtils**](classSR__UTILS__NS_1_1VectorUtils.md) &) = delete<br> |
 |  [**VectorUtils**](classSR__UTILS__NS_1_1VectorUtils.md) | [**operator=**](#function-operator) ([**VectorUtils**](classSR__UTILS__NS_1_1VectorUtils.md) &) = delete<br> |
@@ -92,6 +94,40 @@
 
 ## Public Functions Documentation
 
+
+
+
+### function Contains 
+
+```C++
+template<typename T>
+inline bool SR_UTILS_NS::VectorUtils::Contains (
+    const std::vector< T > & v,
+    const T & value
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function InsertSorted 
+
+```C++
+template<typename T>
+inline void SR_UTILS_NS::VectorUtils::InsertSorted (
+    std::vector< T > & v,
+    const T & value
+) 
+```
+
+
+
+
+<hr>
 
 
 

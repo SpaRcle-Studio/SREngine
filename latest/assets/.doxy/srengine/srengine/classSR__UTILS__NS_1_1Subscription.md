@@ -72,6 +72,7 @@ Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_
 
 | Type | Name |
 | ---: | :--- |
+|  SR\_NODISCARD bool | [**IsValid**](#function-isvalid) () noexcept const<br> |
 |  void | [**Reset**](#function-reset) () <br> |
 |   | [**Subscription**](#function-subscription-13) () <br> |
 |   | [**Subscription**](#function-subscription-23) ([**SubscriptionInternalInfo**](classSR__UTILS__NS_1_1SubscriptionInternalInfo.md) \* pInternalInfo) <br> |
@@ -152,6 +153,19 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 ## Public Functions Documentation
 
+
+
+
+### function IsValid 
+
+```C++
+inline SR_NODISCARD bool SR_UTILS_NS::Subscription::IsValid () noexcept const
+```
+
+
+
+
+<hr>
 
 
 

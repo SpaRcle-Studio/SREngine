@@ -17,6 +17,7 @@
 
 #include <Utils/Common/Singleton.h>
 #include <Utils/Common/Enumerations.h>
+#include <Utils/FileSystem/Path.h>
 #include <Utils/Math/Mathematics.h>
 
 namespace SR_UTILS_NS {
@@ -42,6 +43,7 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD const std::map<CLIOptions, std::optional<std::string>>& GetOptions() const { return m_options; }
         SR_NODISCARD CLIFlags GetFlags() const { return m_flags; }
+        SR_NODISCARD const std::optional<Path>& GetProjectPath() const { return m_projectPath; }
 
     public:
         bool IsSingletonCanBeDestroyed() const override { return false; }
@@ -49,6 +51,7 @@ namespace SR_UTILS_NS {
     private:
         std::map<CLIOptions, std::optional<std::string>> m_options;
         CLIFlags m_flags = CLIFlags::None;
+        std::optional<Path> m_projectPath;
     };
 }
 

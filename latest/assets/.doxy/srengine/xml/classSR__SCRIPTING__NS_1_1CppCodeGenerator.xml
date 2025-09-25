@@ -111,6 +111,20 @@
         </inbodydescription>
         <location file="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="93" column="27" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="93" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1CppCodeGenerator_1aec53c83ca72327174bf618bf9873d9df" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
+        <definition>SR_UTILS_NS::Path SR_SCRIPTING_NS::CppCodeGenerator::m_engineResourcesFolder</definition>
+        <argsstring></argsstring>
+        <name>m_engineResourcesFolder</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppCodeGenerator::m_engineResourcesFolder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="94" column="27" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1CppCodeGenerator_1a8f594758a7fc6e7bf8c01d6e037d633e" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
         <definition>SR_UTILS_NS::Path SR_SCRIPTING_NS::CppCodeGenerator::m_cacheFolder</definition>
@@ -123,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="94" column="27" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="94" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="95" column="27" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="95" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1CppCodeGenerator_1a1c55d8dd56f0b8211faf55b8741926be" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -137,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="95" column="27" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="95" bodyend="-1"/>
+        <location file="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="96" column="27" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="96" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -441,7 +455,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="52" column="5" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="52" bodyend="97"/>
+    <location file="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="52" column="5" bodyfile="Engine/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="52" bodyend="98"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodeGenerator</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodeGenerator</scope><name>AutoFree</name></member>
@@ -471,6 +485,7 @@
       <member refid="classSR__SCRIPTING__NS_1_1CppCodeGenerator_1a1c55d8dd56f0b8211faf55b8741926be" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodeGenerator</scope><name>m_codegenExecutablePath</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1CppCodeGenerator_1a1ba229851b5e70dea8ed6281b2bf8e1b" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodeGenerator</scope><name>m_compiler</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodeGenerator</scope><name>m_data</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppCodeGenerator_1aec53c83ca72327174bf618bf9873d9df" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodeGenerator</scope><name>m_engineResourcesFolder</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1CppCodeGenerator_1ae380713b48f4b1d59a2ee8237e44f219" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodeGenerator</scope><name>m_modules</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1CppCodeGenerator_1aa3e177bfe6239440cda770fae8ab474b" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodeGenerator</scope><name>m_pScriptSystem</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1CppCodeGenerator_1affb5e8b253efdb5dc2a889e8afae8d81" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodeGenerator</scope><name>m_resourcesFolder</name></member>

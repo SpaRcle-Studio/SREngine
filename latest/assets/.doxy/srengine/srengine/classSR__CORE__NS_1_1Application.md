@@ -106,11 +106,11 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  bool | [**Execute**](#function-execute) () <br> |
 |  SR\_NODISCARD const [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Engine**](classSR__CORE__NS_1_1Engine.md) &gt; & | [**GetEngine**](#function-getengine-12) () const<br> |
 |  SR\_NODISCARD [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Engine**](classSR__CORE__NS_1_1Engine.md) &gt; & | [**GetEngine**](#function-getengine-22) () <br> |
+|  SR\_NODISCARD const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & | [**GetEngineResourcesPath**](#function-getengineresourcespath) () const<br> |
 |  SR\_NODISCARD const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & | [**GetResourcesPath**](#function-getresourcespath) () const<br> |
 |  bool | [**Init**](#function-init) () <br> |
 |  bool | [**PreInit**](#function-preinit) () <br> |
 |  void | [**Reload**](#function-reload) () <br> |
-|  void | [**SwitchResourcesFolder**](#function-switchresourcesfolder) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
 |   | [**~Application**](#function-application) () override<br> |
 
 
@@ -358,6 +358,19 @@ inline SR_NODISCARD SR_HTYPES_NS::SharedPtr < Engine > & SR_CORE_NS::Application
 
 
 
+### function GetEngineResourcesPath 
+
+```C++
+inline SR_NODISCARD const SR_UTILS_NS::Path & SR_CORE_NS::Application::GetEngineResourcesPath () const
+```
+
+
+
+
+<hr>
+
+
+
 ### function GetResourcesPath 
 
 ```C++
@@ -401,21 +414,6 @@ bool SR_CORE_NS::Application::PreInit ()
 
 ```C++
 void SR_CORE_NS::Application::Reload () 
-```
-
-
-
-
-<hr>
-
-
-
-### function SwitchResourcesFolder 
-
-```C++
-void SR_CORE_NS::Application::SwitchResourcesFolder (
-    const SR_UTILS_NS::Path & path
-) 
 ```
 
 

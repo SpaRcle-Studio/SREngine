@@ -83,6 +83,7 @@ namespace SR_SCRIPTING_NS {
 
 
         SR_UTILS_NS::Path m_pathToEngineSourcesRoot;
+        SR_UTILS_NS::Path m_engineResourcesFolder;
         SR_UTILS_NS::Path m_resourcesFolder;
         SR_UTILS_NS::Path m_cacheFolder;
         SR_UTILS_NS::Path m_apiFolder;

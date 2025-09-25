@@ -322,22 +322,22 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="103">
+      <node id="104">
         <label>SR_CORE_NS::ChunkSystemState</label>
         <link refid="classSR__CORE__NS_1_1ChunkSystemState"/>
-        <childnode refid="102" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="104">
-        <label>SR_CORE_NS::DeltaTimeState</label>
-        <link refid="classSR__CORE__NS_1_1DeltaTimeState"/>
-        <childnode refid="102" relation="public-inheritance">
+        <childnode refid="103" relation="public-inheritance">
         </childnode>
       </node>
       <node id="105">
+        <label>SR_CORE_NS::DeltaTimeState</label>
+        <link refid="classSR__CORE__NS_1_1DeltaTimeState"/>
+        <childnode refid="103" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="106">
         <label>SR_CORE_NS::DrawState</label>
         <link refid="classSR__CORE__NS_1_1DrawState"/>
-        <childnode refid="102" relation="public-inheritance">
+        <childnode refid="103" relation="public-inheritance">
         </childnode>
       </node>
       <node id="84">
@@ -352,46 +352,52 @@
         <childnode refid="27" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="106">
+      <node id="107">
         <label>SR_CORE_NS::InitializeState</label>
         <link refid="classSR__CORE__NS_1_1InitializeState"/>
-        <childnode refid="102" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="107">
-        <label>SR_CORE_NS::PollEventsState</label>
-        <link refid="classSR__CORE__NS_1_1PollEventsState"/>
-        <childnode refid="102" relation="public-inheritance">
+        <childnode refid="103" relation="public-inheritance">
         </childnode>
       </node>
       <node id="108">
-        <label>SR_CORE_NS::PrepareState</label>
-        <link refid="classSR__CORE__NS_1_1PrepareState"/>
-        <childnode refid="102" relation="public-inheritance">
+        <label>SR_CORE_NS::PollEventsState</label>
+        <link refid="classSR__CORE__NS_1_1PollEventsState"/>
+        <childnode refid="103" relation="public-inheritance">
         </childnode>
       </node>
       <node id="109">
-        <label>SR_CORE_NS::SceneUpdateState</label>
-        <link refid="classSR__CORE__NS_1_1SceneUpdateState"/>
-        <childnode refid="102" relation="public-inheritance">
+        <label>SR_CORE_NS::PrepareState</label>
+        <link refid="classSR__CORE__NS_1_1PrepareState"/>
+        <childnode refid="103" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="85">
+        <label>SR_CORE_NS::ProjectSettings</label>
+        <link refid="classSR__CORE__NS_1_1ProjectSettings"/>
+        <childnode refid="83" relation="public-inheritance">
         </childnode>
       </node>
       <node id="110">
-        <label>SR_CORE_NS::StopState</label>
-        <link refid="classSR__CORE__NS_1_1StopState"/>
-        <childnode refid="102" relation="public-inheritance">
+        <label>SR_CORE_NS::SceneUpdateState</label>
+        <link refid="classSR__CORE__NS_1_1SceneUpdateState"/>
+        <childnode refid="103" relation="public-inheritance">
         </childnode>
       </node>
       <node id="111">
-        <label>SR_CORE_NS::SubmitState</label>
-        <link refid="classSR__CORE__NS_1_1SubmitState"/>
-        <childnode refid="102" relation="public-inheritance">
+        <label>SR_CORE_NS::StopState</label>
+        <link refid="classSR__CORE__NS_1_1StopState"/>
+        <childnode refid="103" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="93">
+      <node id="112">
+        <label>SR_CORE_NS::SubmitState</label>
+        <link refid="classSR__CORE__NS_1_1SubmitState"/>
+        <childnode refid="103" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="94">
         <label>SR_CORE_NS::Tests::SRSLTest</label>
         <link refid="classSR__CORE__NS_1_1Tests_1_1SRSLTest"/>
-        <childnode refid="92" relation="public-inheritance">
+        <childnode refid="93" relation="public-inheritance">
         </childnode>
       </node>
       <node id="30">
@@ -448,13 +454,13 @@
         <childnode refid="30" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="85">
+      <node id="86">
         <label>SR_GRAPH_NS::FileMaterialResource</label>
         <link refid="classSR__GRAPH__NS_1_1FileMaterialResource"/>
         <childnode refid="83" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="86">
+      <node id="87">
         <label>SR_GRAPH_NS::FileRenderTechniqueResource</label>
         <link refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource"/>
         <childnode refid="83" relation="public-inheritance">
@@ -544,7 +550,7 @@
         <childnode refid="33" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="87">
+      <node id="88">
         <label>SR_GRAPH_NS::RenderSettings</label>
         <link refid="classSR__GRAPH__NS_1_1RenderSettings"/>
         <childnode refid="83" relation="public-inheritance">
@@ -556,7 +562,7 @@
         <childnode refid="27" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="88">
+      <node id="89">
         <label>SR_GRAPH_NS::RenderStagesSettings</label>
         <link refid="classSR__GRAPH__NS_1_1RenderStagesSettings"/>
         <childnode refid="83" relation="public-inheritance">
@@ -664,7 +670,7 @@
         <childnode refid="72" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="89">
+      <node id="90">
         <label>SR_PTYPES_NS::PhysicsMaterial</label>
         <link refid="classSR__PTYPES__NS_1_1PhysicsMaterial"/>
         <childnode refid="83" relation="public-inheritance">
@@ -730,13 +736,13 @@
         <childnode refid="27" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="92">
+      <node id="93">
         <label>SR_UTILS_NS::ITestController</label>
         <link refid="classSR__UTILS__NS_1_1ITestController"/>
         <childnode refid="27" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="91">
+      <node id="92">
         <label>SR_UTILS_NS::Prefab</label>
         <link refid="classSR__UTILS__NS_1_1Prefab"/>
         <childnode refid="72" relation="public-inheritance">
@@ -752,118 +758,118 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="94">
+      <node id="95">
         <label>SR_UTILS_NS::SharedPtrTest</label>
         <link refid="classSR__UTILS__NS_1_1SharedPtrTest"/>
-        <childnode refid="92" relation="public-inheritance">
+        <childnode refid="93" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="95">
+      <node id="96">
         <label>SR_UTILS_NS::TestGroupController</label>
         <link refid="classSR__UTILS__NS_1_1TestGroupController"/>
-        <childnode refid="92" relation="public-inheritance">
+        <childnode refid="93" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="90">
+      <node id="91">
         <label>SR_UTILS_NS::TestManagerAsset</label>
         <link refid="classSR__UTILS__NS_1_1TestManagerAsset"/>
         <childnode refid="83" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="96">
+      <node id="97">
         <label>SR_UTILS_NS::Tests::ReflectionTestComponentAssociative</label>
         <link refid="structSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentAssociative"/>
         <childnode refid="27" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="98">
+      <node id="99">
         <label>SR_UTILS_NS::Tests::ReflectionTestComponentData</label>
         <link refid="structSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentData"/>
-        <childnode refid="97" relation="public-inheritance">
+        <childnode refid="98" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="97">
+      <node id="98">
         <label>SR_UTILS_NS::Tests::ReflectionTestComponentDataBase</label>
         <link refid="structSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentDataBase"/>
         <childnode refid="27" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="99">
+      <node id="100">
         <label>SR_UTILS_NS::Tests::ReflectionTestComponentLogicBase</label>
         <link refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentLogicBase"/>
         <childnode refid="27" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="100">
+      <node id="101">
         <label>SR_UTILS_NS::Tests::ReflectionTestComponentLogicComplex</label>
         <link refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentLogicComplex"/>
-        <childnode refid="99" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="101">
-        <label>SR_UTILS_NS::Tests::ReflectionTestComponentLogicSimple</label>
-        <link refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentLogicSimple"/>
-        <childnode refid="99" relation="public-inheritance">
+        <childnode refid="100" relation="public-inheritance">
         </childnode>
       </node>
       <node id="102">
+        <label>SR_UTILS_NS::Tests::ReflectionTestComponentLogicSimple</label>
+        <link refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentLogicSimple"/>
+        <childnode refid="100" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="103">
         <label>SR_UTILS_NS::ThreadWorkerStateBase</label>
         <link refid="classSR__UTILS__NS_1_1ThreadWorkerStateBase"/>
         <childnode refid="27" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="112">
+      <node id="113">
         <label>SR_UTILS_NS::Transform</label>
         <link refid="classSR__UTILS__NS_1_1Transform"/>
         <childnode refid="27" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="113">
+      <node id="114">
         <label>SR_UTILS_NS::Transform2D</label>
         <link refid="classSR__UTILS__NS_1_1Transform2D"/>
-        <childnode refid="112" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="114">
-        <label>SR_UTILS_NS::Transform3D</label>
-        <link refid="classSR__UTILS__NS_1_1Transform3D"/>
-        <childnode refid="112" relation="public-inheritance">
+        <childnode refid="113" relation="public-inheritance">
         </childnode>
       </node>
       <node id="115">
-        <label>SR_UTILS_NS::TransformHolder</label>
-        <link refid="classSR__UTILS__NS_1_1TransformHolder"/>
-        <childnode refid="112" relation="public-inheritance">
+        <label>SR_UTILS_NS::Transform3D</label>
+        <link refid="classSR__UTILS__NS_1_1Transform3D"/>
+        <childnode refid="113" relation="public-inheritance">
         </childnode>
       </node>
       <node id="116">
-        <label>SR_UTILS_NS::TransformZero</label>
-        <link refid="classSR__UTILS__NS_1_1TransformZero"/>
-        <childnode refid="112" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="118">
-        <label>SR_WORLD_NS::SceneAssetLogic</label>
-        <link refid="classSR__WORLD__NS_1_1SceneAssetLogic"/>
-        <childnode refid="117" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="119">
-        <label>SR_WORLD_NS::SceneCubeChunkLogic</label>
-        <link refid="classSR__WORLD__NS_1_1SceneCubeChunkLogic"/>
-        <childnode refid="117" relation="public-inheritance">
+        <label>SR_UTILS_NS::TransformHolder</label>
+        <link refid="classSR__UTILS__NS_1_1TransformHolder"/>
+        <childnode refid="113" relation="public-inheritance">
         </childnode>
       </node>
       <node id="117">
+        <label>SR_UTILS_NS::TransformZero</label>
+        <link refid="classSR__UTILS__NS_1_1TransformZero"/>
+        <childnode refid="113" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="119">
+        <label>SR_WORLD_NS::SceneAssetLogic</label>
+        <link refid="classSR__WORLD__NS_1_1SceneAssetLogic"/>
+        <childnode refid="118" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="120">
+        <label>SR_WORLD_NS::SceneCubeChunkLogic</label>
+        <link refid="classSR__WORLD__NS_1_1SceneCubeChunkLogic"/>
+        <childnode refid="118" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="118">
         <label>SR_WORLD_NS::SceneLogic</label>
         <link refid="classSR__WORLD__NS_1_1SceneLogic"/>
         <childnode refid="27" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="120">
+      <node id="121">
         <label>SR_WORLD_NS::ScenePrefabLogic</label>
         <link refid="classSR__WORLD__NS_1_1ScenePrefabLogic"/>
-        <childnode refid="117" relation="public-inheritance">
+        <childnode refid="118" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>

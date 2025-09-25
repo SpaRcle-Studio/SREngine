@@ -181,13 +181,13 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual SR\_NODISCARD void \* | [**GetCurrentFBOHandle**](#function-getcurrentfbohandle) () override const<br> |
 | virtual SR\_NODISCARD uint8\_t | [**GetCurrentFrameIndex**](#function-getcurrentframeindex) () override const<br> |
 | virtual SR\_NODISCARD void \* | [**GetCurrentShaderHandle**](#function-getcurrentshaderhandle) () override const<br> |
-| virtual SR\_NODISCARD std::set&lt; void \* &gt; | [**GetFBOHandles**](#function-getfbohandles) () override const<br> |
+| virtual SR\_NODISCARD void | [**GetFBOHandles**](#function-getfbohandles) (std::vector&lt; void \* &gt; & handles) override const<br> |
 | virtual SR\_NODISCARD uint8\_t | [**GetFrameBufferSampleCount**](#function-getframebuffersamplecount) () override const<br> |
 |  SR\_NODISCARD EvoVulkan::Core::VulkanKernel \* | [**GetKernel**](#function-getkernel) () noexcept const<br> |
 |  SR\_NODISCARD [**VulkanTools::MemoryManager**](classSR__GRAPH__NS_1_1VulkanTools_1_1MemoryManager.md) \* | [**GetMemoryManager**](#function-getmemorymanager) () noexcept const<br> |
 | virtual SR\_NODISCARD [**SR\_MATH\_NS::FColor**](classSR__MATH__NS_1_1FColor.md) | [**GetPixelColor**](#function-getpixelcolor) (uint32\_t textureId, uint32\_t x, uint32\_t y) override<br> |
 | virtual SR\_NODISCARD std::string | [**GetRenderer**](#function-getrenderer) () override const<br> |
-| virtual SR\_NODISCARD std::set&lt; void \* &gt; | [**GetShaderHandles**](#function-getshaderhandles) () override const<br> |
+| virtual SR\_NODISCARD void | [**GetShaderHandles**](#function-getshaderhandles) (std::vector&lt; void \* &gt; & handles) override const<br> |
 | virtual SR\_NODISCARD uint16\_t | [**GetSwapchainImagesCount**](#function-getswapchainimagescount) () override const<br> |
 | virtual SR\_NODISCARD PipelineType | [**GetType**](#function-gettype) () noexcept override const<br> |
 | virtual SR\_NODISCARD uint64\_t | [**GetUsedMemory**](#function-getusedmemory) () override const<br> |
@@ -295,7 +295,7 @@ See [SR\_GRAPH\_NS::Pipeline](classSR__GRAPH__NS_1_1Pipeline.md)
 | virtual SR\_NODISCARD void \* | [**GetCurrentShaderHandle**](classSR__GRAPH__NS_1_1Pipeline.md#function-getcurrentshaderhandle) () const<br> |
 |  SR\_NODISCARD int32\_t | [**GetCurrentShaderId**](classSR__GRAPH__NS_1_1Pipeline.md#function-getcurrentshaderid) () const<br> |
 |  SR\_NODISCARD int32\_t | [**GetCurrentUBO**](classSR__GRAPH__NS_1_1Pipeline.md#function-getcurrentubo) () const<br> |
-| virtual SR\_NODISCARD std::set&lt; void \* &gt; | [**GetFBOHandles**](classSR__GRAPH__NS_1_1Pipeline.md#function-getfbohandles) () const<br> |
+| virtual SR\_NODISCARD void | [**GetFBOHandles**](classSR__GRAPH__NS_1_1Pipeline.md#function-getfbohandles) (std::vector&lt; void \* &gt; & handles) const<br> |
 | virtual SR\_NODISCARD uint8\_t | [**GetFrameBufferSampleCount**](classSR__GRAPH__NS_1_1Pipeline.md#function-getframebuffersamplecount) () const<br> |
 |  SR\_NODISCARD uint32\_t | [**GetFramesPerSecond**](classSR__GRAPH__NS_1_1Pipeline.md#function-getframespersecond) () noexcept const<br> |
 | virtual const [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Overlay**](classSR__GRAPH__NS_1_1Overlay.md) &gt; & | [**GetOverlay**](classSR__GRAPH__NS_1_1Pipeline.md#function-getoverlay) (OverlayType overlayType) const<br> |
@@ -307,7 +307,7 @@ See [SR\_GRAPH\_NS::Pipeline](classSR__GRAPH__NS_1_1Pipeline.md)
 |  SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetRenderStageId**](classSR__GRAPH__NS_1_1Pipeline.md#function-getrenderstageid) () const<br> |
 | virtual SR\_NODISCARD std::string | [**GetRenderer**](classSR__GRAPH__NS_1_1Pipeline.md#function-getrenderer) () const<br> |
 |  SR\_NODISCARD uint8\_t | [**GetSamplesCount**](classSR__GRAPH__NS_1_1Pipeline.md#function-getsamplescount) () const<br> |
-| virtual SR\_NODISCARD std::set&lt; void \* &gt; | [**GetShaderHandles**](classSR__GRAPH__NS_1_1Pipeline.md#function-getshaderhandles) () const<br> |
+| virtual SR\_NODISCARD void | [**GetShaderHandles**](classSR__GRAPH__NS_1_1Pipeline.md#function-getshaderhandles) (std::vector&lt; void \* &gt; & handles) const<br> |
 |  SR\_NODISCARD const [**PipelineState**](structSR__GRAPH__NS_1_1PipelineState.md) & | [**GetState**](classSR__GRAPH__NS_1_1Pipeline.md#function-getstate) () const<br> |
 | virtual SR\_NODISCARD uint8\_t | [**GetSupportedSamples**](classSR__GRAPH__NS_1_1Pipeline.md#function-getsupportedsamples) () noexcept const<br> |
 | virtual SR\_NODISCARD uint16\_t | [**GetSwapchainImagesCount**](classSR__GRAPH__NS_1_1Pipeline.md#function-getswapchainimagescount) () const<br> |
@@ -1415,7 +1415,9 @@ Implements [*SR\_GRAPH\_NS::Pipeline::GetCurrentShaderHandle*](classSR__GRAPH__N
 ### function GetFBOHandles 
 
 ```C++
-virtual SR_NODISCARD std::set< void * > SR_GRAPH_NS::VulkanPipeline::GetFBOHandles () override const
+virtual SR_NODISCARD void SR_GRAPH_NS::VulkanPipeline::GetFBOHandles (
+    std::vector< void * > & handles
+) override const
 ```
 
 
@@ -1505,7 +1507,9 @@ Implements [*SR\_GRAPH\_NS::Pipeline::GetRenderer*](classSR__GRAPH__NS_1_1Pipeli
 ### function GetShaderHandles 
 
 ```C++
-virtual SR_NODISCARD std::set< void * > SR_GRAPH_NS::VulkanPipeline::GetShaderHandles () override const
+virtual SR_NODISCARD void SR_GRAPH_NS::VulkanPipeline::GetShaderHandles (
+    std::vector< void * > & handles
+) override const
 ```
 
 

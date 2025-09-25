@@ -40,6 +40,7 @@
 | ---: | :--- |
 | struct | [**FileMetadata**](structSR__UTILS__NS_1_1Platform_1_1FileMetadata.md) <br> |
 | struct | [**MouseState**](structSR__UTILS__NS_1_1Platform_1_1MouseState.md) <br> |
+| struct | [**PlatformHooks**](structSR__UTILS__NS_1_1Platform_1_1PlatformHooks.md) <br> |
 
 
 

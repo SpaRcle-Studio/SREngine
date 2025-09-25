@@ -152,6 +152,7 @@ namespace SR_GRAPH_NS::Memory {
     private:
         SR_HTYPES_NS::ObjectPool<VirtualProgramInfo, VirtualProgram> m_programPool;
         PipelinePtr m_pipeline;
+        std::vector<void*> m_handles;
 
     };
 }

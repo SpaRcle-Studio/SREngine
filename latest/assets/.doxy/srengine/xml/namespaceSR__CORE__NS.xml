@@ -14,6 +14,7 @@
     <innerclass refid="classSR__CORE__NS_1_1InitializeState" prot="public">SR_CORE_NS::InitializeState</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1PollEventsState" prot="public">SR_CORE_NS::PollEventsState</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1PrepareState" prot="public">SR_CORE_NS::PrepareState</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1ProjectSettings" prot="public">SR_CORE_NS::ProjectSettings</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1SceneUpdateState" prot="public">SR_CORE_NS::SceneUpdateState</innerclass>
     <innerclass refid="structSR__CORE__NS_1_1ScriptableContext" prot="public">SR_CORE_NS::ScriptableContext</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1StopState" prot="public">SR_CORE_NS::StopState</innerclass>

@@ -174,7 +174,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual SR\_NODISCARD void \* | [**GetCurrentShaderHandle**](#function-getcurrentshaderhandle) () const<br> |
 |  SR\_NODISCARD int32\_t | [**GetCurrentShaderId**](#function-getcurrentshaderid) () const<br> |
 |  SR\_NODISCARD int32\_t | [**GetCurrentUBO**](#function-getcurrentubo) () const<br> |
-| virtual SR\_NODISCARD std::set&lt; void \* &gt; | [**GetFBOHandles**](#function-getfbohandles) () const<br> |
+| virtual SR\_NODISCARD void | [**GetFBOHandles**](#function-getfbohandles) (std::vector&lt; void \* &gt; & handles) const<br> |
 | virtual SR\_NODISCARD uint8\_t | [**GetFrameBufferSampleCount**](#function-getframebuffersamplecount) () const<br> |
 |  SR\_NODISCARD uint32\_t | [**GetFramesPerSecond**](#function-getframespersecond) () noexcept const<br> |
 | virtual const [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Overlay**](classSR__GRAPH__NS_1_1Overlay.md) &gt; & | [**GetOverlay**](#function-getoverlay) (OverlayType overlayType) const<br> |
@@ -186,7 +186,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetRenderStageId**](#function-getrenderstageid) () const<br> |
 | virtual SR\_NODISCARD std::string | [**GetRenderer**](#function-getrenderer) () const<br> |
 |  SR\_NODISCARD uint8\_t | [**GetSamplesCount**](#function-getsamplescount) () const<br> |
-| virtual SR\_NODISCARD std::set&lt; void \* &gt; | [**GetShaderHandles**](#function-getshaderhandles) () const<br> |
+| virtual SR\_NODISCARD void | [**GetShaderHandles**](#function-getshaderhandles) (std::vector&lt; void \* &gt; & handles) const<br> |
 |  SR\_NODISCARD const [**PipelineState**](structSR__GRAPH__NS_1_1PipelineState.md) & | [**GetState**](#function-getstate) () const<br> |
 | virtual SR\_NODISCARD uint8\_t | [**GetSupportedSamples**](#function-getsupportedsamples) () noexcept const<br> |
 | virtual SR\_NODISCARD uint16\_t | [**GetSwapchainImagesCount**](#function-getswapchainimagescount) () const<br> |
@@ -1472,7 +1472,9 @@ inline SR_NODISCARD int32_t SR_GRAPH_NS::Pipeline::GetCurrentUBO () const
 ### function GetFBOHandles 
 
 ```C++
-inline virtual SR_NODISCARD std::set< void * > SR_GRAPH_NS::Pipeline::GetFBOHandles () const
+inline virtual SR_NODISCARD void SR_GRAPH_NS::Pipeline::GetFBOHandles (
+    std::vector< void * > & handles
+) const
 ```
 
 
@@ -1637,7 +1639,9 @@ SR_NODISCARD uint8_t SR_GRAPH_NS::Pipeline::GetSamplesCount () const
 ### function GetShaderHandles 
 
 ```C++
-inline virtual SR_NODISCARD std::set< void * > SR_GRAPH_NS::Pipeline::GetShaderHandles () const
+inline virtual SR_NODISCARD void SR_GRAPH_NS::Pipeline::GetShaderHandles (
+    std::vector< void * > & handles
+) const
 ```
 
 

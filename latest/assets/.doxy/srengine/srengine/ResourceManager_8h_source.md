@@ -43,6 +43,8 @@ namespace SR_UTILS_NS {
         SR_NODISCARD bool IsUsePointStackTraceProfilingEnabled() const { return m_usePointStackTraceProfiling; }
         SR_NODISCARD Path GetResPath() const;
         SR_NODISCARD const Path& GetResPathRef() const;
+        SR_NODISCARD Path GetEngineResPath() const { return m_engineFolder; }
+        SR_NODISCARD const Path& GetEngineResPathRef() const { return m_engineFolder; }
         SR_NODISCARD Path GetCachePath() const;
         SR_NODISCARD FileSystemWatcher::Ptr GetFileSystemWatcher() const { return m_fileSystemWatcher; }
 
@@ -89,7 +91,7 @@ namespace SR_UTILS_NS {
         bool IsSingletonCanBeDestroyed() const override { return false; }
 
     public:
-        bool Initialize(const SR_UTILS_NS::Path& resourcesFolder);
+        bool Initialize(const SR_UTILS_NS::Path& resourcesFolder, const SR_UTILS_NS::Path& engineResourcesFolder);
         void DeInitialize();
 
         void ReloadResources(float_t dt);
@@ -126,6 +128,7 @@ namespace SR_UTILS_NS {
         std::atomic<bool> m_force = false;
 
         Path m_folder;
+        Path m_engineFolder;
         Types::Thread::Ptr m_thread = nullptr;
         uint64_t m_lastTime = 0;
         uint64_t m_deltaTime = 0;
@@ -163,8 +166,9 @@ namespace SR_UTILS_NS {
             return pResource;
         }
 
-        if (!GetResPathRef().Concat(path).Exists()) {
-            SR_ERROR("ResourceManager::GetOrLoadResource() : resource \"{}\" not existing!\n\tPath: {}", T::GetClassStaticName(), path);
+        Path fullPath = GetResPathRef().Concat(path);
+        if (!fullPath.Exists()) {
+            SR_ERROR("ResourceManager::GetOrLoadResource() : resource \"{}\" not existing!\n\tPath: {}", T::GetClassStaticName(), fullPath);
             return nullptr;
         }
 

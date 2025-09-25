@@ -1931,7 +1931,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/CLIManager.h" line="13" column="5" declfile="Engine/libs/Utils/inc/Utils/Common/CLIManager.h" declline="13" declcolumn="5"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/CLIManager.h" line="14" column="5" declfile="Engine/libs/Utils/inc/Utils/Common/CLIManager.h" declline="14" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a927f87242579260a5a7e99ecf2fc721c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -1957,7 +1957,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/CLIManager.h" line="20" column="5" declfile="Engine/libs/Utils/inc/Utils/Common/CLIManager.h" declline="20" declcolumn="5"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/CLIManager.h" line="21" column="5" declfile="Engine/libs/Utils/inc/Utils/Common/CLIManager.h" declline="21" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a15791cf350662a5b9c01c67c915f139e" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -3471,7 +3471,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/VectorUtils.h" line="47" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Common/VectorUtils.h" bodystart="47" bodyend="55"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/VectorUtils.h" line="57" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Common/VectorUtils.h" bodystart="57" bodyend="65"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a813db636f41a6c951d642c6fbc33bdec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -3501,7 +3501,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/VectorUtils.h" line="57" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Common/VectorUtils.h" bodystart="57" bodyend="65"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/VectorUtils.h" line="67" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Common/VectorUtils.h" bodystart="67" bodyend="75"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a6193eea5e0487b274a3426e03bee9f58" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -3531,7 +3531,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/VectorUtils.h" line="67" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Common/VectorUtils.h" bodystart="67" bodyend="75"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/VectorUtils.h" line="77" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Common/VectorUtils.h" bodystart="77" bodyend="85"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a5c64b270d6b05cc9541b29139db26217" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -3561,7 +3561,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Utils/inc/Utils/Common/VectorUtils.h" line="77" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Common/VectorUtils.h" bodystart="77" bodyend="85"/>
+        <location file="Engine/libs/Utils/inc/Utils/Common/VectorUtils.h" line="87" column="23" bodyfile="Engine/libs/Utils/inc/Utils/Common/VectorUtils.h" bodystart="87" bodyend="95"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a36a155d3b16c5aa8d9588f0dbed3e645" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::vector&lt; <ref refid="structSR__UTILS__NS_1_1Vertex" kindref="compound">Vertex</ref> &gt;</type>

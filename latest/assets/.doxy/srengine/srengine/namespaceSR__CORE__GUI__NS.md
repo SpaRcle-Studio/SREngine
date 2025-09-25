@@ -37,6 +37,7 @@
 | class | [**BehaviourPropertyDrawer**](classSR__CORE__GUI__NS_1_1BehaviourPropertyDrawer.md) <br> |
 | class | [**BitMapPropertyDrawer**](classSR__CORE__GUI__NS_1_1BitMapPropertyDrawer.md) <br> |
 | class | [**BoolPropertyDrawer**](classSR__CORE__GUI__NS_1_1BoolPropertyDrawer.md) <br> |
+| class | [**CreateNewProject**](classSR__CORE__GUI__NS_1_1CreateNewProject.md) <br> |
 | struct | [**DrawPropertyContext**](structSR__CORE__GUI__NS_1_1DrawPropertyContext.md) <br> |
 | class | [**EditorCamera**](classSR__CORE__GUI__NS_1_1EditorCamera.md) <br> |
 | class | [**EditorGUI**](classSR__CORE__GUI__NS_1_1EditorGUI.md) <br> |

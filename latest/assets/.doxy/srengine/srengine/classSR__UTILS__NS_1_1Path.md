@@ -97,6 +97,7 @@
 |  SR\_NODISCARD bool | [**IsFile**](#function-isfile) () const<br> |
 |  SR\_NODISCARD bool | [**IsHidden**](#function-ishidden) () const<br> |
 |  SR\_NODISCARD bool | [**IsSubPath**](#function-issubpath) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & subPath) const<br> |
+|  SR\_NODISCARD bool | [**IsValidPath**](#function-isvalidpath) () const<br> |
 |  void | [**Load**](#function-load) ([**IDeserializer**](classSR__UTILS__NS_1_1IDeserializer.md) & deserializer, const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) & id) <br> |
 |  SR\_DEPRECATED bool | [**Make**](#function-make) (Type type=Type::Undefined) const<br> |
 |   | [**Path**](#function-path-18) () <br> |
@@ -731,6 +732,19 @@ SR_NODISCARD bool SR_UTILS_NS::Path::IsHidden () const
 SR_NODISCARD bool SR_UTILS_NS::Path::IsSubPath (
     const Path & subPath
 ) const
+```
+
+
+
+
+<hr>
+
+
+
+### function IsValidPath 
+
+```C++
+SR_NODISCARD bool SR_UTILS_NS::Path::IsValidPath () const
 ```
 
 

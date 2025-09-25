@@ -115,6 +115,7 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 |  SR\_NODISCARD CLIFlags | [**GetFlags**](#function-getflags) () const<br> |
 |  std::optional&lt; std::string &gt; | [**GetOptionValue**](#function-getoptionvalue) (CLIOptions option) <br> |
 |  SR\_NODISCARD const std::map&lt; CLIOptions, std::optional&lt; std::string &gt; &gt; & | [**GetOptions**](#function-getoptions) () const<br> |
+|  SR\_NODISCARD const std::optional&lt; [**Path**](classSR__UTILS__NS_1_1Path.md) &gt; & | [**GetProjectPath**](#function-getprojectpath) () const<br> |
 |  void | [**Init**](#function-init) (int argc, char \*\* argv) <br> |
 |  bool | [**IsFlagPresent**](#function-isflagpresent) (CLIFlags flag) const<br> |
 | virtual bool | [**IsSingletonCanBeDestroyed**](#function-issingletoncanbedestroyed) () override const<br> |
@@ -329,6 +330,19 @@ std::optional< std::string > SR_UTILS_NS::CLIManager::GetOptionValue (
 
 ```C++
 inline SR_NODISCARD const std::map< CLIOptions, std::optional< std::string > > & SR_UTILS_NS::CLIManager::GetOptions () const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetProjectPath 
+
+```C++
+inline SR_NODISCARD const std::optional< Path > & SR_UTILS_NS::CLIManager::GetProjectPath () const
 ```
 
 

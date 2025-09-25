@@ -59,8 +59,8 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD std::string GetVersion() const override { return "VK_API_VERSION_1_3"; }
 
         SR_NODISCARD void* GetCurrentFBOHandle() const override;
-        SR_NODISCARD std::set<void*> GetFBOHandles() const override;
-        SR_NODISCARD std::set<void*> GetShaderHandles() const override;
+        SR_NODISCARD void GetFBOHandles(std::vector<void*>& handles) const override;
+        SR_NODISCARD void GetShaderHandles(std::vector<void*>& handles) const override;
         SR_NODISCARD uint8_t GetFrameBufferSampleCount() const override;
         SR_NODISCARD uint8_t GetBuildIterationsCount() const noexcept override;
         SR_NODISCARD SR_MATH_NS::FColor GetPixelColor(uint32_t textureId, uint32_t x, uint32_t y) override;

@@ -1010,22 +1010,22 @@
         <childnode refid="93" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="207">
+      <node id="208">
         <label>SR_CORE_NS::ChunkSystemState</label>
         <link refid="classSR__CORE__NS_1_1ChunkSystemState"/>
-        <childnode refid="206" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="208">
-        <label>SR_CORE_NS::DeltaTimeState</label>
-        <link refid="classSR__CORE__NS_1_1DeltaTimeState"/>
-        <childnode refid="206" relation="public-inheritance">
+        <childnode refid="207" relation="public-inheritance">
         </childnode>
       </node>
       <node id="209">
+        <label>SR_CORE_NS::DeltaTimeState</label>
+        <link refid="classSR__CORE__NS_1_1DeltaTimeState"/>
+        <childnode refid="207" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="210">
         <label>SR_CORE_NS::DrawState</label>
         <link refid="classSR__CORE__NS_1_1DrawState"/>
-        <childnode refid="206" relation="public-inheritance">
+        <childnode refid="207" relation="public-inheritance">
         </childnode>
       </node>
       <node id="194">
@@ -1040,40 +1040,46 @@
         <childnode refid="93" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="210">
+      <node id="211">
         <label>SR_CORE_NS::InitializeState</label>
         <link refid="classSR__CORE__NS_1_1InitializeState"/>
-        <childnode refid="206" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="211">
-        <label>SR_CORE_NS::PollEventsState</label>
-        <link refid="classSR__CORE__NS_1_1PollEventsState"/>
-        <childnode refid="206" relation="public-inheritance">
+        <childnode refid="207" relation="public-inheritance">
         </childnode>
       </node>
       <node id="212">
-        <label>SR_CORE_NS::PrepareState</label>
-        <link refid="classSR__CORE__NS_1_1PrepareState"/>
-        <childnode refid="206" relation="public-inheritance">
+        <label>SR_CORE_NS::PollEventsState</label>
+        <link refid="classSR__CORE__NS_1_1PollEventsState"/>
+        <childnode refid="207" relation="public-inheritance">
         </childnode>
       </node>
       <node id="213">
-        <label>SR_CORE_NS::SceneUpdateState</label>
-        <link refid="classSR__CORE__NS_1_1SceneUpdateState"/>
-        <childnode refid="206" relation="public-inheritance">
+        <label>SR_CORE_NS::PrepareState</label>
+        <link refid="classSR__CORE__NS_1_1PrepareState"/>
+        <childnode refid="207" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="195">
+        <label>SR_CORE_NS::ProjectSettings</label>
+        <link refid="classSR__CORE__NS_1_1ProjectSettings"/>
+        <childnode refid="193" relation="public-inheritance">
         </childnode>
       </node>
       <node id="214">
-        <label>SR_CORE_NS::StopState</label>
-        <link refid="classSR__CORE__NS_1_1StopState"/>
-        <childnode refid="206" relation="public-inheritance">
+        <label>SR_CORE_NS::SceneUpdateState</label>
+        <link refid="classSR__CORE__NS_1_1SceneUpdateState"/>
+        <childnode refid="207" relation="public-inheritance">
         </childnode>
       </node>
       <node id="215">
+        <label>SR_CORE_NS::StopState</label>
+        <link refid="classSR__CORE__NS_1_1StopState"/>
+        <childnode refid="207" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="216">
         <label>SR_CORE_NS::SubmitState</label>
         <link refid="classSR__CORE__NS_1_1SubmitState"/>
-        <childnode refid="206" relation="public-inheritance">
+        <childnode refid="207" relation="public-inheritance">
         </childnode>
       </node>
       <node id="179">
@@ -1142,7 +1148,7 @@
         <childnode refid="120" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="195">
+      <node id="196">
         <label>SR_GRAPH_NS::FileMaterialResource</label>
         <link refid="classSR__GRAPH__NS_1_1FileMaterialResource"/>
         <childnode refid="193" relation="public-inheritance">
@@ -1154,7 +1160,7 @@
         <childnode refid="138" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="196">
+      <node id="197">
         <label>SR_GRAPH_NS::FileRenderTechniqueResource</label>
         <link refid="classSR__GRAPH__NS_1_1FileRenderTechniqueResource"/>
         <childnode refid="193" relation="public-inheritance">
@@ -1244,13 +1250,13 @@
         <childnode refid="93" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="197">
+      <node id="198">
         <label>SR_GRAPH_NS::RenderSettings</label>
         <link refid="classSR__GRAPH__NS_1_1RenderSettings"/>
         <childnode refid="193" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="198">
+      <node id="199">
         <label>SR_GRAPH_NS::RenderStagesSettings</label>
         <link refid="classSR__GRAPH__NS_1_1RenderStagesSettings"/>
         <childnode refid="193" relation="public-inheritance">
@@ -1430,7 +1436,7 @@
         <childnode refid="93" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="199">
+      <node id="200">
         <label>SR_PTYPES_NS::PhysicsMaterial</label>
         <link refid="classSR__PTYPES__NS_1_1PhysicsMaterial"/>
         <childnode refid="193" relation="public-inheritance">
@@ -1532,7 +1538,7 @@
         <childnode refid="93" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="201">
+      <node id="202">
         <label>SR_UTILS_NS::Prefab</label>
         <link refid="classSR__UTILS__NS_1_1Prefab"/>
         <childnode refid="183" relation="public-inheritance">
@@ -1556,118 +1562,118 @@
         <childnode refid="178" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="200">
+      <node id="201">
         <label>SR_UTILS_NS::TestManagerAsset</label>
         <link refid="classSR__UTILS__NS_1_1TestManagerAsset"/>
         <childnode refid="193" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="202">
+      <node id="203">
         <label>SR_UTILS_NS::Tests::ReflectionTestComponentLogicBase&lt; ReflectionTestComponentLogicBase &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentLogicBase"/>
         <childnode refid="93" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="203">
+      <node id="204">
         <label>SR_UTILS_NS::Tests::ReflectionTestComponentLogicComplex</label>
         <link refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentLogicComplex"/>
-        <childnode refid="202" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="204">
-        <label>SR_UTILS_NS::Tests::ReflectionTestComponentLogicSimple</label>
-        <link refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentLogicSimple"/>
-        <childnode refid="202" relation="public-inheritance">
+        <childnode refid="203" relation="public-inheritance">
         </childnode>
       </node>
       <node id="205">
+        <label>SR_UTILS_NS::Tests::ReflectionTestComponentLogicSimple</label>
+        <link refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentLogicSimple"/>
+        <childnode refid="203" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="206">
         <label>SR_UTILS_NS::ThreadWorker&lt; ThreadWorker &gt;</label>
         <link refid="classSR__UTILS__NS_1_1ThreadWorker"/>
         <childnode refid="93" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="206">
+      <node id="207">
         <label>SR_UTILS_NS::ThreadWorkerStateBase&lt; ThreadWorkerStateBase &gt;</label>
         <link refid="classSR__UTILS__NS_1_1ThreadWorkerStateBase"/>
         <childnode refid="93" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="216">
+      <node id="217">
         <label>SR_UTILS_NS::ThreadsWorker&lt; ThreadsWorker &gt;</label>
         <link refid="classSR__UTILS__NS_1_1ThreadsWorker"/>
         <childnode refid="93" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="218">
+      <node id="219">
         <label>SR_UTILS_NS::Transform2D</label>
         <link refid="classSR__UTILS__NS_1_1Transform2D"/>
-        <childnode refid="217" relation="public-inheritance">
+        <childnode refid="218" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="219">
+      <node id="220">
         <label>SR_UTILS_NS::Transform3D</label>
         <link refid="classSR__UTILS__NS_1_1Transform3D"/>
-        <childnode refid="217" relation="public-inheritance">
+        <childnode refid="218" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="217">
+      <node id="218">
         <label>SR_UTILS_NS::Transform&lt; Transform &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Transform"/>
         <childnode refid="93" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="220">
+      <node id="221">
         <label>SR_UTILS_NS::TransformHolder</label>
         <link refid="classSR__UTILS__NS_1_1TransformHolder"/>
-        <childnode refid="217" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="221">
-        <label>SR_UTILS_NS::TransformZero</label>
-        <link refid="classSR__UTILS__NS_1_1TransformZero"/>
-        <childnode refid="217" relation="public-inheritance">
+        <childnode refid="218" relation="public-inheritance">
         </childnode>
       </node>
       <node id="222">
+        <label>SR_UTILS_NS::TransformZero</label>
+        <link refid="classSR__UTILS__NS_1_1TransformZero"/>
+        <childnode refid="218" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="223">
         <label>SR_UTILS_NS::Web::CSS&lt; CSS &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Web_1_1CSS"/>
         <childnode refid="93" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="223">
+      <node id="224">
         <label>SR_UTILS_NS::Web::HTMLContainerInterface&lt; HTMLContainerInterface &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Web_1_1HTMLContainerInterface"/>
         <childnode refid="93" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="224">
+      <node id="225">
         <label>SR_UTILS_NS::Web::HTMLPage&lt; HTMLPage &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Web_1_1HTMLPage"/>
         <childnode refid="93" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="226">
+      <node id="227">
         <label>SR_WORLD_NS::SceneAssetLogic</label>
         <link refid="classSR__WORLD__NS_1_1SceneAssetLogic"/>
-        <childnode refid="225" relation="public-inheritance">
+        <childnode refid="226" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="227">
+      <node id="228">
         <label>SR_WORLD_NS::SceneCubeChunkLogic</label>
         <link refid="classSR__WORLD__NS_1_1SceneCubeChunkLogic"/>
-        <childnode refid="225" relation="public-inheritance">
+        <childnode refid="226" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="225">
+      <node id="226">
         <label>SR_WORLD_NS::SceneLogic&lt; SceneLogic &gt;</label>
         <link refid="classSR__WORLD__NS_1_1SceneLogic"/>
         <childnode refid="93" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="228">
+      <node id="229">
         <label>SR_WORLD_NS::ScenePrefabLogic</label>
         <link refid="classSR__WORLD__NS_1_1ScenePrefabLogic"/>
-        <childnode refid="225" relation="public-inheritance">
+        <childnode refid="226" relation="public-inheritance">
         </childnode>
       </node>
       <node id="20">

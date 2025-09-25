@@ -119,6 +119,20 @@
         </inbodydescription>
         <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="56" column="33" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="56" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1DescriptorManager_1abad2a8bc39aaafbbe123354890cb9913" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; void * &gt;</type>
+        <definition>std::vector&lt;void*&gt; SR_GRAPH_NS::DescriptorManager::m_handles</definition>
+        <argsstring></argsstring>
+        <name>m_handles</name>
+        <qualifiedname>SR_GRAPH_NS::DescriptorManager::m_handles</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="57" column="21" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1DescriptorManager_1a90fba1c97b3c6bbdac068a07d301838c" prot="private" static="no" mutable="no">
         <type>bool</type>
         <definition>bool SR_GRAPH_NS::DescriptorManager::m_multiFrameMode</definition>
@@ -132,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="58" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="58" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="59" column="14" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="59" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1DescriptorManager_1a38d76ce5645b49866375dcd4024e8125" prot="private" static="no" mutable="yes">
         <type>std::vector&lt; DescriptorType &gt;</type>
@@ -146,7 +160,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="60" column="29" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="60" bodyend="-1"/>
+        <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="61" column="29" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="61" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -339,7 +353,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="21" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="21" bodyend="62"/>
+    <location file="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="21" column="5" bodyfile="Engine/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="21" bodyend="63"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1acb6d2719e41b0b734ab781be63e63b88" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>AllocateDescriptorSet</name></member>
       <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a236ffb02af589b653d82eede9836d721" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>AllocateMemory</name></member>
@@ -359,6 +373,7 @@
       <member refid="classSR__UTILS__NS_1_1Singleton_1adab1931732d186e76c89e282c748f253" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>LockSingleton</name></member>
       <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a38d76ce5645b49866375dcd4024e8125" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>m_allocationTypesCache</name></member>
       <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a8a0d107353de4877c54d7f59048ade93" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>m_descriptorPool</name></member>
+      <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1abad2a8bc39aaafbbe123354890cb9913" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>m_handles</name></member>
       <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a90fba1c97b3c6bbdac068a07d301838c" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>m_multiFrameMode</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1a38d28fddc83cb3a403821554ea65dd" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>m_mutex</name></member>
       <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1aecf3c2a43605148da6debe626d98acee" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>m_pipeline</name></member>

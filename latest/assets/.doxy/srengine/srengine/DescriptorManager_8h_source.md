@@ -64,6 +64,7 @@ namespace SR_GRAPH_NS {
     private:
         SR_HTYPES_NS::ObjectPool<std::vector<DescriptorSetInfo>, VirtualDescriptorSet> m_descriptorPool;
         SR_HTYPES_NS::SharedPtr<Pipeline> m_pipeline;
+        std::vector<void*> m_handles;
 
         bool m_multiFrameMode = false;
 

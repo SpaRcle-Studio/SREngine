@@ -52,6 +52,16 @@ namespace SR_UTILS_NS {
 
             return merged;
         }
+
+        template<typename T> void InsertSorted(std::vector<T>& v, const T& value) {
+            auto it = std::lower_bound(v.begin(), v.end(), value);
+            v.insert(it, value);
+        }
+
+        template<typename T> bool Contains(const std::vector<T>& v, const T& value) {
+            auto it = std::lower_bound(v.begin(), v.end(), value);
+            return it != v.end() && *it == value;
+        }
     };
 
     template<typename T, typename U> bool ForEach(const std::function<bool(T& type, const uint32_t& index)> &fn, std::vector<U>& vector) {
