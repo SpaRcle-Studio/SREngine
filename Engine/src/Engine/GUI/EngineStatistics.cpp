@@ -583,28 +583,6 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Pipeline use count: {}", pPipeline->GetPtrData()->strongCount.load()));
 
-        if (pPipeline->GetPreviousState().transferredMemory >= 1024) {
-            const uint32_t transferredKBytes = pPipeline->GetPreviousState().transferredMemory / 1024;
-            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Transferred memory: {}Kb", transferredKBytes));
-        }
-        else {
-            const uint32_t transferredBytes = pPipeline->GetPreviousState().transferredMemory;
-            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Transferred memory: {}B", transferredBytes));
-        }
-
-        SR_GRAPH_GUI_NS::Immediate::Text("%", SR_FORMAT_C("Transferred count: {}", pPipeline->GetPreviousState().transferredCount));
-
-        SR_GRAPH_GUI_NS::Immediate::Separator();
-        SR_GRAPH_GUI_NS::Immediate::Text("Draw info:");
-
-        auto&& buildState = pPipeline->GetBuildState(pPipeline->GetCurrentFrameIndex());
-
-        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Vertices count: {}", buildState.vertices));
-        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Triangles count: {}", static_cast<uint32_t>(buildState.vertices / 3)));
-        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Draw calls: {}", buildState.drawCalls));
-        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Used textures: {}", buildState.usedTextures));
-        SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Used shaders: {}", buildState.usedShaders));
-
         if (auto&& pDebugRenderer = pRenderScene->GetRenderer<SR_GRAPH_NS::DebugRenderer>()) {
             SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Timed objects pool size: {}", pDebugRenderer->GetTimedObjectPoolSize()));
             SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Timed empty ids pool size: {}", pDebugRenderer->GetEmptyIdsPoolSize()));
@@ -615,18 +593,40 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
         }
 
-        /*if (auto&& pVulkanPipeline = pPipeline.DynamicCast<SR_GRAPH_NS::VulkanPipeline>()) {
-            SR_GRAPH_GUI_NS::Immediate::Separator();
-            SR_GRAPH_GUI_NS::Immediate::Text("Vulkan memory:");
-            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Descriptor sets count: {}", pVulkanPipeline->GetMemoryManager()->GetDescriptorSetsCount()));
-            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Shader programs count: {}", pVulkanPipeline->GetMemoryManager()->GetShaderProgramsCount()));
-            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("UBOs count: {}", pVulkanPipeline->GetMemoryManager()->GetUBOsCount()));
-            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("VBOs count: {}", pVulkanPipeline->GetMemoryManager()->GetVBOsCount()));
-            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("IBOs count: {}", pVulkanPipeline->GetMemoryManager()->GetIBOsCount()));
-            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("SSBOs count: {}", pVulkanPipeline->GetMemoryManager()->GetSSBOsCount()));
-            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("FBOs count: {}", pVulkanPipeline->GetMemoryManager()->GetFBOsCount()));
-            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Textures count: {}", pVulkanPipeline->GetMemoryManager()->GetTexturesCount()));
-        }*/
+        if (SR_GRAPH_GUI_NS::Immediate::CollapsingHeader("Draw info")) {
+            auto&& buildState = pPipeline->GetBuildState(pPipeline->GetCurrentFrameIndex());
+
+            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Vertices count: {}", buildState.vertices));
+            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Triangles count: {}", static_cast<uint32_t>(buildState.vertices / 3)));
+            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Draw calls: {}", buildState.drawCalls));
+            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Used textures: {}", buildState.usedTextures));
+            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Used shaders: {}", buildState.usedShaders));
+        }
+
+        if (SR_GRAPH_GUI_NS::Immediate::CollapsingHeader("Video memory info")) {
+            auto&& memoryInfo = pPipeline->GetUsedVideoMemoryInfo();
+
+            if (pPipeline->GetPreviousState().transferredMemory >= 1024) {
+                const uint32_t transferredKBytes = pPipeline->GetPreviousState().transferredMemory / 1024;
+                SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Transferred memory: {}Kb", transferredKBytes));
+            }
+            else {
+                const uint32_t transferredBytes = pPipeline->GetPreviousState().transferredMemory;
+                SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Transferred memory: {}B", transferredBytes));
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::Text("%", SR_FORMAT_C("Transferred count: {}", pPipeline->GetPreviousState().transferredCount));
+
+            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Used memory in bytes: {}", memoryInfo.videoMemoryUsed));
+            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Descriptor sets count: {}", memoryInfo.descriptorSetsCount));
+            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Shader programs count: {}", memoryInfo.shaderProgramsCount));
+            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("UBOs count: {}", memoryInfo.UBOsCount));
+            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("VBOs count: {}", memoryInfo.VBOsCount));
+            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("IBOs count: {}", memoryInfo.IBOsCount));
+            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("SSBOs count: {}", memoryInfo.SSBOsCount));
+            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("FBOs count: {}", memoryInfo.FBOsCount));
+            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Textures count: {}", memoryInfo.texturesCount));
+        }
 
         SR_GRAPH_GUI_NS::Immediate::Separator();
 

@@ -52,7 +52,7 @@
 
        <LoadSkybox Value="false"/>
        <Multisampling Value="true"/>
-       <UpdateMeshesOnDemand Value="false"/>
+       <UpdateMeshesOnDemand Value="true"/>
        <FBOForEachSwapchainImage Value="false"/>
        <SkyboxCPUUsage Value="false"/>
        <VulkanValidation Value="true"/>
