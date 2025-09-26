@@ -10,6 +10,7 @@ Site roadmap:
     * [x] Building
     * [ ] Editor and GUI
     * [ ] Scripting
+- [x] Roadmap
 - [ ] Scripting API 
 - [x] Contributing
     * [ ] Pull Request Guidelines
