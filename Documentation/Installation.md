@@ -11,7 +11,7 @@ You can get your SpaRcle Engine with the following methods:
 
 ### Supported platforms 
 
-!!! include "Platforms.md"
+--8<-- "Documentation/Platforms.md"
 
 ### Supported compilers
 

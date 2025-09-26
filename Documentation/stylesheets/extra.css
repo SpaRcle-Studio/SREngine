@@ -1,0 +1,105 @@
+:root {
+    --md-admonition-icon--scripting: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><title>Script SVG Icon</title><path fill="currentColor" d="m18.83 26l2.58-2.58L20 22l-4 4l4 4l1.42-1.41zm8.34 0l-2.58 2.58L26 30l4-4l-4-4l-1.42 1.41z"/><path fill="currentColor" d="M14 28H8V4h8v6a2.006 2.006 0 0 0 2 2h6v6h2v-8a.91.91 0 0 0-.3-.7l-7-7A.909.909 0 0 0 18 2H8a2.006 2.006 0 0 0-2 2v24a2.006 2.006 0 0 0 2 2h6Zm4-23.6l5.6 5.6H18Z"/></svg>')
+}
+.md-typeset .admonition.scripting,
+.md-typeset details.scripting {
+    border-color: rgb(184, 110, 255);
+}
+.md-typeset .scripting > .admonition-title,
+.md-typeset .scripting > summary {
+    background-color: rgba(184, 110, 255, 0.1);
+}
+.md-typeset .scripting > .admonition-title::before,
+.md-typeset .scripting > summary::before {
+    background-color: rgb(184, 110, 255);
+    -webkit-mask-image: var(--md-admonition-icon--scripting);
+    mask-image: var(--md-admonition-icon--scripting);
+}
+
+
+
+
+
+:root {
+    --md-admonition-icon--editor: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>Gear SVG Icon</title><g fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3.269C14 2.568 13.432 2 12.731 2H11.27C10.568 2 10 2.568 10 3.269c0 .578-.396 1.074-.935 1.286c-.085.034-.17.07-.253.106c-.531.23-1.162.16-1.572-.249a1.269 1.269 0 0 0-1.794 0L4.412 5.446a1.269 1.269 0 0 0 0 1.794c.41.41.48 1.04.248 1.572a7.946 7.946 0 0 0-.105.253c-.212.539-.708.935-1.286.935C2.568 10 2 10.568 2 11.269v1.462C2 13.432 2.568 14 3.269 14c.578 0 1.074.396 1.286.935c.034.085.07.17.105.253c.231.531.161 1.162-.248 1.572a1.269 1.269 0 0 0 0 1.794l1.034 1.034a1.269 1.269 0 0 0 1.794 0c.41-.41 1.04-.48 1.572-.249c.083.037.168.072.253.106c.539.212.935.708.935 1.286c0 .701.568 1.269 1.269 1.269h1.462c.701 0 1.269-.568 1.269-1.269c0-.578.396-1.074.935-1.287c.085-.033.17-.068.253-.104c.531-.232 1.162-.161 1.571.248a1.269 1.269 0 0 0 1.795 0l1.034-1.034a1.269 1.269 0 0 0 0-1.794c-.41-.41-.48-1.04-.249-1.572c.037-.083.072-.168.106-.253c.212-.539.708-.935 1.286-.935c.701 0 1.269-.568 1.269-1.269V11.27c0-.701-.568-1.269-1.269-1.269c-.578 0-1.074-.396-1.287-.935a7.755 7.755 0 0 0-.105-.253c-.23-.531-.16-1.162.249-1.572a1.269 1.269 0 0 0 0-1.794l-1.034-1.034a1.269 1.269 0 0 0-1.794 0c-.41.41-1.04.48-1.572.249a7.913 7.913 0 0 0-.253-.106C14.396 4.343 14 3.847 14 3.27z"/><path d="M16 12a4 4 0 1 1-8 0a4 4 0 0 1 8 0Z"/></g></svg>')
+}
+.md-typeset .admonition.editor,
+.md-typeset details.editor {
+    border-color: rgb(0, 121, 191);
+}
+.md-typeset .editor > .admonition-title,
+.md-typeset .editor > summary {
+    background-color: rgba(0, 121, 191, 0.1);
+}
+.md-typeset .editor > .admonition-title::before,
+.md-typeset .editor > summary::before {
+    background-color: rgb(0, 121, 191);
+    -webkit-mask-image: var(--md-admonition-icon--editor);
+    mask-image: var(--md-admonition-icon--editor);
+}
+
+
+
+
+
+:root {
+    --md-admonition-icon--physics: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><title>Falling SVG Icon</title><path fill="currentColor" d="M221.313 16a23.682 23.695 0 0 0-23.688 23.688v106.406a23.682 23.695 0 0 0 2.156 9.72a23.682 23.695 0 0 0 3.157 13.81l41.75 71.626l-79 55.438l6.094-48.625a23.682 23.695 0 0 0-8.186-20.97l-66.28-81.937a23.682 23.695 0 0 0-33.314-3.5l-9.188 7.438a23.682 23.695 0 0 0-3.53 33.344l59.78 73.906l-11.25 89.937a23.682 23.695 0 0 0 12.47 23.876l37.468 53.47a23.695 23.682 1.57 0 0 2.344 2.812a23.682 23.695 0 0 0 13.594 20.062L262 491.53a23.682 23.695 0 0 0 9.97 2.22a23.682 23.695 0 0 0 23.53-2.063l87.156-60.937a23.682 23.695 0 0 0 5.844-33l-6.78-9.688a23.682 23.695 0 0 0-32.97-5.875l-72.406 50.657l-59.063-27.625l120.595-84.626a23.695 23.682 1.57 0 0 5.53-5.5a23.682 23.695 0 0 0 14.626-13.594l37.22-91.53l87.813-44.845a23.694 23.682 1.18 0 0 10.312-31.875L488 122.687a23.694 23.682 1.18 0 0-31.875-10.343l-94.688 48.375a23.694 23.682 1.18 0 0-9.843 9.436a23.682 23.695 0 0 0-8.344 10.47l-27.375 67.31l-5.22-7.436a23.682 23.695 0 0 0-3-8.844l-50.81-87.094V39.688A23.682 23.695 0 0 0 233.154 16h-11.843zM77.75 376A59.994 60 0 0 0 16 436a59.994 60 0 1 0 120 0a59.994 60 0 0 0-58.25-60"/></svg>')
+}
+.md-typeset .admonition.physics,
+.md-typeset details.physics {
+    border-color: rgb(219, 75, 57);
+}
+.md-typeset .physics > .admonition-title,
+.md-typeset .physics > summary {
+    background-color: rgba(219, 75, 57, 0.1);
+}
+.md-typeset .physics > .admonition-title::before,
+.md-typeset .physics > summary::before {
+    background-color: rgb(219, 75, 57);
+    -webkit-mask-image: var(--md-admonition-icon--physics);
+    mask-image: var(--md-admonition-icon--physics);
+}
+
+
+
+
+
+:root {
+    --md-admonition-icon--android: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>Android-fill SVG Icon</title><path fill="currentColor" d="M17.532 15.106a1.003 1.003 0 1 1 .001-2.007a1.003 1.003 0 0 1 0 2.007m-11.044 0a1.003 1.003 0 1 1 .001-2.007a1.003 1.003 0 0 1 0 2.007m11.4-6.018l2.006-3.459a.413.413 0 1 0-.721-.407l-2.027 3.5a12.243 12.243 0 0 0-5.13-1.108c-1.85 0-3.595.398-5.141 1.098l-2.027-3.5a.413.413 0 1 0-.72.407l1.995 3.458C2.696 10.947.345 14.417 0 18.523h24c-.334-4.096-2.675-7.565-6.112-9.435"/></svg>')
+}
+.md-typeset .admonition.android,
+.md-typeset details.android {
+    border-color: rgb(43, 155, 70);
+}
+.md-typeset .android > .admonition-title,
+.md-typeset .android > summary {
+    background-color: rgba(43, 155, 70, 0.1);
+}
+.md-typeset .android > .admonition-title::before,
+.md-typeset .android > summary::before {
+    background-color: rgb(43, 155, 70);
+    -webkit-mask-image: var(--md-admonition-icon--android);
+    mask-image: var(--md-admonition-icon--android);
+}
+
+
+
+
+
+:root {
+    --md-admonition-icon--renderer: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><title>Cube-escape SVG Icon</title><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M41.727 13.803L23.887 3.5L6.163 13.729l17.84 10.303z"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M24.003 24.032L6.163 13.729v20.468L24.003 44.5zm17.724-10.229L24.003 24.032V44.5l17.724-10.229z"/></svg>')
+}
+.md-typeset .admonition.renderer,
+.md-typeset details.renderer {
+    border-color: rgb(255, 140, 0);
+}
+.md-typeset .renderer > .admonition-title,
+.md-typeset .renderer > summary {
+    background-color: rgba(255, 140, 0, 0.1);
+}
+.md-typeset .renderer > .admonition-title::before,
+.md-typeset .renderer > summary::before {
+    background-color: rgb(255, 140, 0);
+    -webkit-mask-image: var(--md-admonition-icon--renderer);
+    mask-image: var(--md-admonition-icon--renderer);
+}
