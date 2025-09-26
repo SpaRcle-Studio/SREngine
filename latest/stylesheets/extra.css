@@ -1,3 +1,5 @@
+/* Scripting icon */
+
 :root {
     --md-admonition-icon--scripting: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><title>Script SVG Icon</title><path fill="currentColor" d="m18.83 26l2.58-2.58L20 22l-4 4l4 4l1.42-1.41zm8.34 0l-2.58 2.58L26 30l4-4l-4-4l-1.42 1.41z"/><path fill="currentColor" d="M14 28H8V4h8v6a2.006 2.006 0 0 0 2 2h6v6h2v-8a.91.91 0 0 0-.3-.7l-7-7A.909.909 0 0 0 18 2H8a2.006 2.006 0 0 0-2 2v24a2.006 2.006 0 0 0 2 2h6Zm4-23.6l5.6 5.6H18Z"/></svg>')
 }
@@ -16,9 +18,7 @@
     mask-image: var(--md-admonition-icon--scripting);
 }
 
-
-
-
+/* Editor icon */
 
 :root {
     --md-admonition-icon--editor: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>Gear SVG Icon</title><g fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3.269C14 2.568 13.432 2 12.731 2H11.27C10.568 2 10 2.568 10 3.269c0 .578-.396 1.074-.935 1.286c-.085.034-.17.07-.253.106c-.531.23-1.162.16-1.572-.249a1.269 1.269 0 0 0-1.794 0L4.412 5.446a1.269 1.269 0 0 0 0 1.794c.41.41.48 1.04.248 1.572a7.946 7.946 0 0 0-.105.253c-.212.539-.708.935-1.286.935C2.568 10 2 10.568 2 11.269v1.462C2 13.432 2.568 14 3.269 14c.578 0 1.074.396 1.286.935c.034.085.07.17.105.253c.231.531.161 1.162-.248 1.572a1.269 1.269 0 0 0 0 1.794l1.034 1.034a1.269 1.269 0 0 0 1.794 0c.41-.41 1.04-.48 1.572-.249c.083.037.168.072.253.106c.539.212.935.708.935 1.286c0 .701.568 1.269 1.269 1.269h1.462c.701 0 1.269-.568 1.269-1.269c0-.578.396-1.074.935-1.287c.085-.033.17-.068.253-.104c.531-.232 1.162-.161 1.571.248a1.269 1.269 0 0 0 1.795 0l1.034-1.034a1.269 1.269 0 0 0 0-1.794c-.41-.41-.48-1.04-.249-1.572c.037-.083.072-.168.106-.253c.212-.539.708-.935 1.286-.935c.701 0 1.269-.568 1.269-1.269V11.27c0-.701-.568-1.269-1.269-1.269c-.578 0-1.074-.396-1.287-.935a7.755 7.755 0 0 0-.105-.253c-.23-.531-.16-1.162.249-1.572a1.269 1.269 0 0 0 0-1.794l-1.034-1.034a1.269 1.269 0 0 0-1.794 0c-.41.41-1.04.48-1.572.249a7.913 7.913 0 0 0-.253-.106C14.396 4.343 14 3.847 14 3.27z"/><path d="M16 12a4 4 0 1 1-8 0a4 4 0 0 1 8 0Z"/></g></svg>')
@@ -38,9 +38,7 @@
     mask-image: var(--md-admonition-icon--editor);
 }
 
-
-
-
+/* Physics icon */
 
 :root {
     --md-admonition-icon--physics: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><title>Falling SVG Icon</title><path fill="currentColor" d="M221.313 16a23.682 23.695 0 0 0-23.688 23.688v106.406a23.682 23.695 0 0 0 2.156 9.72a23.682 23.695 0 0 0 3.157 13.81l41.75 71.626l-79 55.438l6.094-48.625a23.682 23.695 0 0 0-8.186-20.97l-66.28-81.937a23.682 23.695 0 0 0-33.314-3.5l-9.188 7.438a23.682 23.695 0 0 0-3.53 33.344l59.78 73.906l-11.25 89.937a23.682 23.695 0 0 0 12.47 23.876l37.468 53.47a23.695 23.682 1.57 0 0 2.344 2.812a23.682 23.695 0 0 0 13.594 20.062L262 491.53a23.682 23.695 0 0 0 9.97 2.22a23.682 23.695 0 0 0 23.53-2.063l87.156-60.937a23.682 23.695 0 0 0 5.844-33l-6.78-9.688a23.682 23.695 0 0 0-32.97-5.875l-72.406 50.657l-59.063-27.625l120.595-84.626a23.695 23.682 1.57 0 0 5.53-5.5a23.682 23.695 0 0 0 14.626-13.594l37.22-91.53l87.813-44.845a23.694 23.682 1.18 0 0 10.312-31.875L488 122.687a23.694 23.682 1.18 0 0-31.875-10.343l-94.688 48.375a23.694 23.682 1.18 0 0-9.843 9.436a23.682 23.695 0 0 0-8.344 10.47l-27.375 67.31l-5.22-7.436a23.682 23.695 0 0 0-3-8.844l-50.81-87.094V39.688A23.682 23.695 0 0 0 233.154 16h-11.843zM77.75 376A59.994 60 0 0 0 16 436a59.994 60 0 1 0 120 0a59.994 60 0 0 0-58.25-60"/></svg>')
@@ -60,9 +58,7 @@
     mask-image: var(--md-admonition-icon--physics);
 }
 
-
-
-
+/* Platform icon */
 
 :root {
     --md-admonition-icon--android: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>Android-fill SVG Icon</title><path fill="currentColor" d="M17.532 15.106a1.003 1.003 0 1 1 .001-2.007a1.003 1.003 0 0 1 0 2.007m-11.044 0a1.003 1.003 0 1 1 .001-2.007a1.003 1.003 0 0 1 0 2.007m11.4-6.018l2.006-3.459a.413.413 0 1 0-.721-.407l-2.027 3.5a12.243 12.243 0 0 0-5.13-1.108c-1.85 0-3.595.398-5.141 1.098l-2.027-3.5a.413.413 0 1 0-.72.407l1.995 3.458C2.696 10.947.345 14.417 0 18.523h24c-.334-4.096-2.675-7.565-6.112-9.435"/></svg>')
@@ -82,9 +78,7 @@
     mask-image: var(--md-admonition-icon--android);
 }
 
-
-
-
+/* Renderer icon */
 
 :root {
     --md-admonition-icon--renderer: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><title>Cube-escape SVG Icon</title><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M41.727 13.803L23.887 3.5L6.163 13.729l17.84 10.303z"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M24.003 24.032L6.163 13.729v20.468L24.003 44.5zm17.724-10.229L24.003 24.032V44.5l17.724-10.229z"/></svg>')
@@ -102,4 +96,47 @@
     background-color: rgb(255, 140, 0);
     -webkit-mask-image: var(--md-admonition-icon--renderer);
     mask-image: var(--md-admonition-icon--renderer);
+}
+
+/* Audio icon */
+
+:root {
+    --md-admonition-icon--audio: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>Music-note SVG Icon</title><g fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v14"/><path d="M19 7.674v-.657a4 4 0 0 0-2.901-3.846l-2.824-.807A1 1 0 0 0 12 3.326V7l5.725 1.636A1 1 0 0 0 19 7.674Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3 3 0 1 1-6 0c0-1.657 1.343-2 3-2s3 .343 3 2"/></g></svg>')
+}
+
+.md-typeset .admonition.audio,
+.md-typeset details.audio {
+    border-color: rgb(255, 193, 7);
+}
+.md-typeset .audio > .admonition-title,
+.md-typeset .audio > summary {
+    background-color: rgba(255, 193, 7, 0.1);
+}
+.md-typeset .audio > .admonition-title::before,
+.md-typeset .audio > summary::before {
+    background-color: rgb(255, 193, 7);
+    -webkit-mask-image: var(--md-admonition-icon--audio);
+    mask-image: var(--md-admonition-icon--audio);
+}
+
+/* Engine icon */
+
+:root {
+    --md-admonition-icon--engine: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" version="1.1"><path d="M 239.936 14.204 C 235.846 17.616, 221.925 29.442, 209 40.483 C 196.075 51.525, 177.850 67.051, 168.500 74.985 C 159.150 82.920, 147.939 92.469, 143.587 96.206 C 139.235 99.943, 135.048 103, 134.282 103 C 133.170 103, 112.380 91.381, 81.862 73.703 C 80.156 72.715, 78.591 72.076, 78.383 72.283 C 78.176 72.490, 81.302 78.249, 85.330 85.080 C 89.358 91.911, 96.557 104.115, 101.327 112.199 C 106.097 120.284, 110 127.318, 110 127.829 C 110 128.341, 106.782 132.527, 102.850 137.130 C 98.917 141.734, 93.416 148.200, 90.626 151.500 C 87.835 154.800, 85.309 157.725, 85.012 158 C 84.715 158.275, 82.456 160.975, 79.991 164 C 77.526 167.025, 74.966 170.073, 74.303 170.773 C 73.231 171.905, 59.635 187.845, 39.640 211.414 C 35.867 215.861, 31.690 220.750, 30.358 222.278 C 29.025 223.806, 24.277 229.431, 19.806 234.778 C 15.335 240.125, 10.737 245.611, 9.588 246.970 C 7.274 249.706, 7.734 249.414, 16.801 242.385 C 20.267 239.698, 24.598 236.352, 26.426 234.949 C 28.253 233.546, 33.968 229.013, 39.124 224.877 C 44.281 220.740, 60.381 207.938, 74.903 196.428 C 89.425 184.918, 108.477 169.788, 117.240 162.808 C 134.778 148.837, 133.611 149.244, 141.701 154.277 C 143.791 155.577, 150.450 159.274, 156.500 162.493 C 162.550 165.712, 169.075 169.232, 171 170.315 C 172.925 171.397, 176.451 173.380, 178.836 174.722 C 183.601 177.401, 185.144 177.061, 183.097 173.783 C 181.523 171.263, 178.999 166.671, 172.498 154.500 C 169.854 149.550, 165.511 141.561, 162.846 136.748 C 160.181 131.934, 158 127.348, 158 126.557 C 158 125.377, 163.390 117.721, 169.622 110.049 C 170.918 108.453, 194.545 77.854, 199 72.001 C 204.281 65.063, 224.345 39.051, 231.748 29.545 C 240.944 17.736, 248.151 8, 247.697 8 C 247.518 8, 244.025 10.792, 239.936 14.204" stroke="none" fill="white" fill-rule="evenodd"/></svg>')
+}
+
+.md-typeset .admonition.engine,
+.md-typeset details.engine {
+    border-color: rgb(255, 255, 255);
+}
+.md-typeset .engine > .admonition-title,
+.md-typeset .engine > summary {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.md-typeset .engine > .admonition-title::before,
+.md-typeset .engine > summary::before {
+    background-color: rgb(255, 255, 255);
+    -webkit-mask-image: var(--md-admonition-icon--engine);
+    mask-image: var(--md-admonition-icon--engine);
 }
