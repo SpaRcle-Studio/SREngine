@@ -283,6 +283,16 @@ use tabs: true
 											11-f:0.5
 										10-v:z
 											11-f:2
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Behaviour
+								8-o:ptr
+									9-v:entityId
+										10-i:4048817772720006293
+									9-v:behaviourName
+										10-s:AABBVisualizer
+									9-o:data
 					5-v:name
 						6-s:GameCamera
 					5-o:transform
@@ -291,9 +301,9 @@ use tabs: true
 						6-o:ptr
 							7-o:translation
 								8-v:y
-									9-f:3.65281796
+									9-f:21.6087189
 								8-v:z
-									9-f:-6.08059978
+									9-f:-85.6449585
 		2-k:i
 			3-o:d
 				4-v:type
@@ -374,6 +384,16 @@ use tabs: true
 												12-s:Engine/Materials/default.mat
 									9-v:meshPath
 										10-s:Engine/Models/statue.obj
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Behaviour
+								8-o:ptr
+									9-v:entityId
+										10-i:2847758965694069574
+									9-v:behaviourName
+										10-s:AABBVisualizer
+									9-o:data
 					5-v:name
 						6-s:Statue
 					5-o:transform
@@ -382,11 +402,11 @@ use tabs: true
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:6.96542501
+									9-f:12.4124184
 								8-v:y
-									9-f:3.57627869e-07
+									9-f:2.37242762e-06
 								8-v:z
-									9-f:12.2890882
+									9-f:-11.5704899
 							7-o:scale
 								8-v:x
 									9-f:10
@@ -426,6 +446,16 @@ use tabs: true
 												12-s:Engine/Materials/default.mat
 									9-v:meshPath
 										10-s:Engine/Models/monkey.obj
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Behaviour
+								8-o:ptr
+									9-v:entityId
+										10-i:3210295223105218236
+									9-v:behaviourName
+										10-s:AABBVisualizer
+									9-o:data
 					5-v:name
 						6-s:Monkey
 					5-o:transform
@@ -3072,7 +3102,7 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1368
+											11-f:1338
 										10-v:height
 											11-f:1020
 									9-v:direction
@@ -3788,11 +3818,11 @@ ddddцццゔぅヾボ
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:-4.70441103
+									9-f:-15.2304764
 								8-v:y
-									9-f:-1.05145602e-07
+									9-f:0.173783898
 								8-v:z
-									9-f:-3.65026212
+									9-f:-4.91187954
 							7-o:scale
 								8-v:x
 									9-f:3
@@ -4244,6 +4274,16 @@ ddddцццゔぅヾボ
 																16-s:Engine/Materials/default.mat
 													13-v:meshPath
 														14-s:Engine/Models/plane.obj
+										10-k:i
+											11-o:d
+												12-v:type
+													13-s:Behaviour
+												12-o:ptr
+													13-v:entityId
+														14-i:4482368412905177127
+													13-v:behaviourName
+														14-s:AABBVisualizer
+													13-o:data
 									9-v:tag
 										10-s:Ground
 									9-v:name
@@ -5114,6 +5154,16 @@ ddddцццゔぅヾボ
 															15-f:1
 														14-v:z
 															15-f:1
+										10-k:i
+											11-o:d
+												12-v:type
+													13-s:Behaviour
+												12-o:ptr
+													13-v:entityId
+														14-i:2371166489774993252
+													13-v:behaviourName
+														14-s:AABBVisualizer
+													13-o:data
 									9-v:name
 										10-s:Cube
 									9-o:transform
@@ -5122,11 +5172,20 @@ ddddцццゔぅヾボ
 										10-o:ptr
 											11-o:translation
 												12-v:x
-													13-f:-9.22004604
+													13-f:-10.0145111
 												12-v:y
 													13-f:4.5353241
 												12-v:z
-													13-f:-3.00461006
+													13-f:-5.33521938
+											11-o:quaternion
+												12-v:x
+													13-f:-0.398578882
+												12-v:y
+													13-f:-0.771477401
+												12-v:z
+													13-f:-0.424685478
+												12-v:w
+													13-f:0.256124496
 						6-k:i
 							7-o:d
 								8-v:type
@@ -5250,11 +5309,11 @@ ddddцццゔぅヾボ
 										10-o:ptr
 											11-o:translation
 												12-v:x
-													13-f:0.0502895117
+													13-f:-0.280000001
 												12-v:y
-													13-f:4.5353241
+													13-f:17.8841801
 												12-v:z
-													13-f:-2.67712402
+													13-f:-4.97389841
 						6-k:i
 							7-o:d
 								8-v:type

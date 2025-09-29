@@ -76,6 +76,7 @@ namespace SR_SCRIPTING_NS {
 
     void Behaviour::Update(float_t dt) {
         if (m_cppBehaviour) {
+            m_cppBehaviour->SetSceneObject(GetSceneObject());
             m_cppBehaviour->Update(dt);
         }
         Super::Update(dt);

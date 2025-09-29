@@ -17,6 +17,13 @@ namespace SR_CORE_NS {
     SR_UTILS_NS::ThreadWorkerResult SubmitState::ExecuteImpl() {
         auto&& pEngine = GetContext().GetPointer<Engine>();
 
+        {
+            SR_TRACY_ZONE_N("Submit frame");
+            if (auto&& pContext = pEngine->GetRenderContext()) {
+                pContext->GetPipeline()->DrawFrame();
+            }
+        }
+
         auto&& pWindow = pEngine->GetMainWindow();
         if (!pWindow || !pWindow->IsVisible()) {
             return SR_UTILS_NS::ThreadWorkerResult::Break;
@@ -26,8 +33,6 @@ namespace SR_CORE_NS {
         if (!pRenderScene) {
             return SR_UTILS_NS::ThreadWorkerResult::Break;
         }
-
-        pRenderScene->Submit();
 
         const auto dt = GetContext().GetValue<float_t>("DeltaTime");
 

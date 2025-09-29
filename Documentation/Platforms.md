@@ -5,6 +5,8 @@
     * [ ] Wayland (planned)
     * [ ] Flatpak (planned)
 - [x] Android
+    * [ ] VR Meta Quest (planned)
 - [ ] Web (planned)
 - [ ] iOS (not planned in near future)
 - [ ] MacOS (not planned in near future)
+- [ ] Consoles (not planned in near future)

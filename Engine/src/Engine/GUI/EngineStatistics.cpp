@@ -504,8 +504,9 @@ namespace SR_CORE_GUI_NS {
                 const bool notRendered = SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_NOT_RENDERED);
                 const bool waitRegister = SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_WAIT_REGISTER);
                 const bool missingShader = SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_MISSING_SHADER);
+                const bool invisible = SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_INVISIBLE);
 
-                if (vboError || shaderError || notRendered || waitRegister || missingShader) {
+                if (vboError || shaderError || notRendered || waitRegister || missingShader || invisible) {
                     if (vboError) {
                         SR_GRAPH_GUI_NS::Immediate::SameLine();
                         SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1, 0, 0, 1), "VBO error");
@@ -529,6 +530,11 @@ namespace SR_CORE_GUI_NS {
                     if (waitRegister) {
                         SR_GRAPH_GUI_NS::Immediate::SameLine();
                         SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(0.5f, 0.5f, 0.0f, 1.0f), "Wait register");
+                    }
+
+                    if (invisible) {
+                        SR_GRAPH_GUI_NS::Immediate::SameLine();
+                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(0, 0, 1, 1), "Invisible");
                     }
                 }
                 else if (SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_ERROR)) {

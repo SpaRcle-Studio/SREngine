@@ -15,10 +15,14 @@ namespace SR_SCRIPTING_NS {
     void CppBehaviourInstance::SetSceneObject(const SR_UTILS_NS::SceneObject::Ptr& pSceneObject) {
         if (m_pBehaviour) {
             m_pBehaviour->sceneObject = pSceneObject;
-            m_pBehaviour->gameObject = pSceneObject.DynamicCast<SR_UTILS_NS::GameObject>();
 
-            if (m_pBehaviour->gameObject) {
+            if (pSceneObject && pSceneObject->GetSceneObjectType() == SR_UTILS_NS::SceneObjectType::GameObject) {
+                m_pBehaviour->gameObject = pSceneObject.StaticCast<SR_UTILS_NS::GameObject>();
                 m_pBehaviour->transform = m_pBehaviour->gameObject->GetTransform();
+            }
+            else {
+                m_pBehaviour->gameObject = nullptr;
+                m_pBehaviour->transform = nullptr;
             }
         }
     }

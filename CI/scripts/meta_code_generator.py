@@ -1102,12 +1102,7 @@ def generate_classes_code(logger: logger_utils.Logger, context: codegen_context.
                 f.write('\t' * (tabs + 1) + 'else {\n')
                 f.write('\t' * (tabs + 2) + f'return static_cast<SR_UTILS_NS::SRClass*>(SRNew<{class_obj.name}>());' + '\n')
                 f.write('\t' * (tabs + 1) + '}\n')
-                f.write('\t' * tabs + '}\n\n')
-
-                f.write('\t' * tabs + f'bool {class_obj.name}::RegisterPropertiesCodegen() {{' + '\n')
-                f.write('\t' * (tabs + 1))
-                f.write('return true; // Register properties\n')
-                f.write(('\t' * tabs) + '}\n')
+                f.write('\t' * tabs + '}\n')
                 if len(class_obj.namespaces) > 0:
                     f.write('}\n')
             f.write('\n')
