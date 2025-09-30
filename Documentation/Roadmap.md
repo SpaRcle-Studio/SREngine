@@ -76,7 +76,7 @@
             * [X] MSAA
             * [X] Multi-cameras rendering
             * [X] Bufferization
-            * [ ] Frustum culling (in progress)
+            * [X] Frustum culling
             * [ ] Particle system (planned)
             * [ ] Bloom
             * [ ] SSAO

@@ -16,7 +16,7 @@
        <Gizmo Value="true"/>
        <VulkanTracy Value="false"/>
        <FileWatching Value="true"/>
-       <FrustumCulling Value="false"/>
+       <FrustumCulling Value="true"/>
        <VulkanValidationErrorAsAssert Value="true"/>
 
        <ChunkSystem Value="true"/>
