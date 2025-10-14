@@ -13,7 +13,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     bool CreateNewProject::CreateProject() {
-        auto&& settingsPath = m_projectFinalPath.Concat(std::string(".") + ProjectSettings::EXTENSION_NAME);
+        auto&& settingsPath = m_projectFinalPath.ConcatExt(ProjectSettings::GetMetaStatic()->GetExtension());
         ProjectSettings::Ptr pSettings = SRNew<ProjectSettings>();
         pSettings->projectName = m_projectName;
 

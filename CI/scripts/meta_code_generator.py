@@ -442,6 +442,12 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
         f.write('\t' * (tabs + 1) + 'return categories;\n')
         f.write('\t' * tabs + '}\n\n')
 
+    if class_obj.extension:
+        f.write('\t' * tabs + 'SR_NODISCARD SR_UTILS_NS::StringAtom GetExtension() const noexcept final {\n')
+        f.write('\t' * (tabs + 1) + f'static const SR_UTILS_NS::StringAtom extension = "{class_obj.extension}";' + '\n')
+        f.write('\t' * (tabs + 1) + 'return extension;\n')
+        f.write('\t' * tabs + '}\n\n')
+
     #######################################
     if class_obj.inspector:
         f.write('\t' * tabs + 'SR_NODISCARD SR_UTILS_NS::StringAtom GetInspectorName() const noexcept final {\n')

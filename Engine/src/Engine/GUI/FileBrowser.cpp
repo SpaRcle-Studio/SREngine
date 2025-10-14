@@ -285,7 +285,9 @@ namespace SR_CORE_NS::GUI {
         auto&& pOverlay = pEngine->GetRenderContext()->GetPipeline()->GetOverlay(SR_GRAPH_NS::OverlayType::ImGui);
         auto&& pSmallFont = pOverlay.DynamicCast<SR_GRAPH_NS::ImGuiOverlay>()->GetSmallFont();
 
-        if (SR_GRAPH_GUI_NS::Immediate::BeginChild("item view", SR_MATH_NS::FVector2(0, -SR_GRAPH_GUI_NS::Immediate::GetFrameHeightWithSpacing())))
+        const float frameHeight = SR_GRAPH_GUI_NS::Immediate::GetFrameHeightWithSpacing();
+
+        if (SR_GRAPH_GUI_NS::Immediate::BeginChild("item view", SR_MATH_NS::FVector2(0, -frameHeight * 1.2f)))
         {
             SR_GRAPH_GUI_NS::Immediate::Separator();
 
@@ -350,6 +352,67 @@ namespace SR_CORE_NS::GUI {
 
             CheckHovered();
             CheckFocused();
+
+            SR_GRAPH_GUI_NS::Immediate::EndChild();
+        }
+
+        if (SR_GRAPH_GUI_NS::Immediate::BeginChild("create new asset"))
+        {
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+
+            auto wndSize = SR_GRAPH_GUI_NS::Immediate::GetWindowSize();
+
+            bool isAvailable = true;
+
+            isAvailable &= m_newAssetIndex >= 0 && m_newAssetIndex < (int32_t)m_availableAssets.size();
+            isAvailable &= m_newAssetPath.IsValidPath() && m_newAssetPath.GetType() == SR_UTILS_NS::Path::Type::Undefined;
+
+            {
+                SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard lock(!isAvailable);
+                if (SR_GRAPH_GUI_NS::Immediate::Button("Create asset") && isAvailable) {
+                    auto&& pAsset = SR_UTILS_NS::Asset::CreateNew(m_newAssetPath, m_availableAssets[m_newAssetIndex]);
+                    if (pAsset) {
+                        pAsset->Destroy();
+                    }
+                    m_dirtySelectedDir = true;
+                    m_newAssetPath.clear();
+                    m_newAssetName.clear();
+                    m_newAssetIndex = -1;
+                }
+            }
+
+            bool doUpdatePath = false;
+
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+
+            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(wndSize.x * 0.25f);
+            if (SR_GRAPH_GUI_NS::Immediate::Combo("Type", &m_newAssetIndex, m_comboBoxBuffer.data())) {
+                doUpdatePath = true;
+            }
+            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(wndSize.x * 0.25f);
+            if (SR_GRAPH_GUI_NS::Immediate::InputText("Name", &m_newAssetName)) {
+                std::erase_if(m_newAssetName, [](char c) {
+                    return !SR_UTILS_NS::FileSystem::IsAllowedPathSymbol(c) || SR_UTILS_NS::FileSystem::IsPathSeparator(c);
+                });
+                doUpdatePath = true;
+            }
+            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+
+            if (doUpdatePath) {
+                m_newAssetPath = m_selectedDir.Concat(m_newAssetName);
+                if (m_newAssetIndex >= 0 && m_newAssetIndex < (int32_t)m_availableAssets.size()) {
+                    std::string_view extension = SR_UTILS_NS::Factory::Instance().GetType(m_availableAssets[m_newAssetIndex])->GetExtension();
+                    if (m_newAssetName.ends_with(extension) && m_newAssetName.size() > extension.size() && m_newAssetName[m_newAssetName.size() - extension.size() - 1] == '.') {
+                        /// ok
+                    }
+                    else {
+                        m_newAssetPath = m_newAssetPath.ConcatExt(extension);
+                    }
+                }
+            }
 
             SR_GRAPH_GUI_NS::Immediate::EndChild();
         }
@@ -423,7 +486,10 @@ namespace SR_CORE_NS::GUI {
         }
         else {
             static std::set<std::string_view> supportedAssets = {
-                SR_CORE_NS::ProjectSettings::EXTENSION_NAME, SR_UTILS_NS::Asset::EXTENSION_NAME, "mat", "srtech"
+                SR_UTILS_NS::Asset::GetMetaStatic()->GetExtension(),
+                SR_CORE_NS::ProjectSettings::GetMetaStatic()->GetExtension(),
+                SR_GRAPH_NS::FileMaterialResource::GetMetaStatic()->GetExtension(),
+                SR_GRAPH_NS::FileRenderTechniqueResource::GetMetaStatic()->GetExtension()
             };
 
             if (supportedAssets.count(path.GetExtensionView()) != 0) {
@@ -450,6 +516,24 @@ namespace SR_CORE_NS::GUI {
             }
         }
         m_elements.clear();
+    }
+
+    void FileBrowser::OnOpen() {
+        m_availableAssets = SR_UTILS_NS::Factory::Instance().GetInheritances(SR_UTILS_NS::Asset::GetClassStaticName());
+
+        std::erase_if(m_availableAssets, [](auto&& name) {
+            auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(name);
+            return pMeta->IsAbstract() || pMeta->IsHidden();
+        });
+
+        m_comboBoxBuffer.clear();
+        for (auto&& name : m_availableAssets) {
+            std::copy(name.begin(), name.end(), std::back_inserter(m_comboBoxBuffer));
+            m_comboBoxBuffer.push_back('\0');
+        }
+        m_comboBoxBuffer.push_back('\0');
+
+        Super::OnOpen();
     }
 
     void FileBrowser::OnClose() {

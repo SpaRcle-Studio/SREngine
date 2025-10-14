@@ -152,6 +152,7 @@ class SpaRcleClass:
         self.inspector = None
         self.version = None
         self.category = None
+        self.extension = None
         self.hidden = False
         self.namespaces = namespaces
         self.variables = []

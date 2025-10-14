@@ -40,6 +40,7 @@ namespace SR_CORE_NS::GUI {
         void Draw() override;
 
     private:
+        void OnOpen() override;
         void OnClose() override;
         void FileContextMenu(const std::string &element);
         void CurrentDirectoryContextMenu();
@@ -70,6 +71,13 @@ namespace SR_CORE_NS::GUI {
         std::atomic<bool> m_dirtyFoldersTree;
 
         std::list<FBElement> m_elements;
+
+        std::vector<SR_UTILS_NS::StringAtom> m_availableAssets;
+        std::vector<char> m_comboBoxBuffer;
+        int32_t m_newAssetIndex = -1;
+        SR_UTILS_NS::Path m_newAssetPath;
+        std::string m_newAssetName;
+
     };
 }
 

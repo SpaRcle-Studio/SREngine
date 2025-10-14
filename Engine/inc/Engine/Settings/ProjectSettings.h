@@ -10,11 +10,9 @@
 #include <Utils/Resources/Asset.h>
 
 namespace SR_CORE_NS {
+    /// @extension(srproject)
     class ProjectSettings : public SR_UTILS_NS::Asset {
         SR_CLASS()
-    public:
-        SR_INLINE static const char* EXTENSION_NAME = "srproject";
-
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<ProjectSettings>;
 

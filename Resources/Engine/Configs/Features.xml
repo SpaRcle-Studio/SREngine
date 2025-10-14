@@ -42,6 +42,8 @@
        <FastModelsLoad Value="true"/>
        <UseGLSLangCompiler Value="true"/>
 
+       <MTRendering Value="false"/>
+
        <Renderer Value="true"/>
        <Physics Value="true"/>
 

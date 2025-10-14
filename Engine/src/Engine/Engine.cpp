@@ -91,7 +91,7 @@ namespace SR_CORE_NS {
 
         m_autoReloadResources = SR_UTILS_NS::Features::Instance().Enabled("AutoReloadResources", false);
 
-        m_threadsWorker = SR_UTILS_NS::ThreadsWorker::Load("Engine/Configs/Threads.yml");
+        m_threadsWorker = SR_UTILS_NS::ThreadsWorker::Load("Engine/Configs/Threads.sras");
         if (!m_threadsWorker) {
             SR_ERROR("Engine::Create() : failed to load threads worker!");
             return false;
@@ -116,10 +116,17 @@ namespace SR_CORE_NS {
             return nullptr;
         }
         else {
-            SR_LOG("Engine::CreateMainWindow() : found " + std::to_string(resolutions.size()) + " resolutions");
+            std::string logResolutions;
+            uint32_t index = 0;
+            for (auto&& resolution : resolutions) {
+                logResolutions += "\n\t{}: {}x{}"_format(++index, resolution.x, resolution.y);
+            }
+            SR_LOG("Engine::CreateMainWindow() : found {} resolutions:{}", resolutions.size(), logResolutions);
         }
 
         SR_MATH_NS::UVector2 resolution = resolutions[SR_MAX(static_cast<uint32_t>(resolutions.size() / 2), 0)];
+
+        SR_LOG("Engine::CreateMainWindow() : selected resolution {}x{}", resolution.x, resolution.y);
 
         if (resolution.HasZero()) {
             SR_ERROR("Engine::CreateMainWindow() : resolution can not be {}x{}!", resolution.x, resolution.y);
