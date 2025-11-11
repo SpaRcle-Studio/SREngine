@@ -468,17 +468,17 @@ def parse_sparcle_class(logger, parent_node, code_structure, namespaces):
                 process_property(property_obj, child)
                 class_obj.add_variable(property_obj)
 
-            #elif child.kind == clang.cindex.CursorKind.CXX_METHOD and is_method_comment(child):
-            #    method_name = child.spelling
-            #    method_return_type = child.result_type.spelling
-            #    method_obj = reflection_utils.CPPMethod(method_name, method_return_type)
-            #    for param in child.get_children():
-            #        if param.kind == clang.cindex.CursorKind.PARM_DECL:
-            #            param_name = param.spelling
-            #            param_type = param.type.spelling
-            #            method_obj.add_parameter(reflection_utils.CPPProperty(param_name, param_type))
-            #
-            #    class_obj.add_method(method_obj)
+            elif child.kind == clang.cindex.CursorKind.CXX_METHOD and is_method_comment(child):
+                method_name = child.spelling
+                method_return_type = child.result_type.spelling
+                method_obj = reflection_utils.CPPMethod(method_name, method_return_type)
+                for param in child.get_children():
+                    if param.kind == clang.cindex.CursorKind.PARM_DECL:
+                        param_name = param.spelling
+                        param_type = param.type.spelling
+                        method_obj.add_parameter(reflection_utils.CPPParameter(param_name, param_type))
+
+                class_obj.add_method(method_obj)
 
         code_structure.sparcle_classes.append(class_obj)
 

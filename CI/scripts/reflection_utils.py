@@ -156,6 +156,7 @@ class SpaRcleClass:
         self.hidden = False
         self.namespaces = namespaces
         self.variables = []
+        self.methods: list[CPPMethod] = []
         self.path = None
         self.inherited_classes = []
         self.is_help_source = False
@@ -163,6 +164,8 @@ class SpaRcleClass:
     def add_variable(self, variable):
         self.variables.append(variable)
 
+    def add_method(self, method: CPPMethod):
+        self.methods.append(method)
 
     def to_string(self, depth):
         namespace_str = '::'.join(self.namespaces)

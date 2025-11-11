@@ -290,6 +290,8 @@ use tabs: true
 								8-o:ptr
 									9-v:entityId
 										10-i:4048817772720006293
+									9-v:isEnabled
+										10-b:false
 									9-v:behaviourName
 										10-s:AABBVisualizer
 									9-o:data
@@ -3102,9 +3104,9 @@ ddddцццゔぅヾボ
 										10-v:heightPolicy
 											11-s:Fixed
 										10-v:width
-											11-f:1304
+											11-f:919
 										10-v:height
-											11-f:1020
+											11-f:725
 									9-v:direction
 										10-s:Column
 									9-v:containerAlign

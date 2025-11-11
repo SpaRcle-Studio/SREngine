@@ -1,0 +1,33 @@
+ShaderType Line;
+
+PolygonMode Line;
+CullMode None;
+DepthCompare LessOrEqual;
+PrimitiveTopology LineList;
+BlendEnabled false;
+DepthWrite true;
+DepthTest true;
+
+struct SynapseRenderData {
+    vec3 from;
+    vec3 to;
+    vec4 startColor;
+    vec4 endColor;
+};
+
+[[ssbo(synapses)]] uint synapsesCount;
+[[ssbo(synapses)]] SynapseRenderData[] synapses;
+
+[[shared]] vec4 startColor;
+[[shared]] vec4 endColor;
+
+void fragment() {
+    COLOR = mix(startColor, endColor, gl_FragCoord.z);
+}
+
+void vertex() {
+    startColor = synapses[gl_InstanceIndex].startColor;
+    endColor = synapses[gl_InstanceIndex].endColor;
+    vec3 position = float(VERTEX_INDEX == 0) * synapses[gl_InstanceIndex].from + float(VERTEX_INDEX == 1) * synapses[gl_InstanceIndex].to;
+    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * vec4(position, 1.0);
+}

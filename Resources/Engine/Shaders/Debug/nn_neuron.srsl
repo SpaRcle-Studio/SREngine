@@ -1,9 +1,9 @@
-ShaderType Line;
+ShaderType PostProcessing;
 
-PolygonMode Line;
+PolygonMode Point;
 CullMode None;
 DepthCompare LessOrEqual;
-PrimitiveTopology LineList;
+PrimitiveTopology PointList;
 BlendEnabled false;
 DepthWrite true;
 DepthTest true;
@@ -19,10 +19,11 @@ struct NeuronRenderData {
 [[shared]] vec4 neuronColor;
 
 void fragment() {
-    COLOR = LINE_COLOR;
+    COLOR = neuronColor;
 }
 
 void vertex() {
-    vec3 position = float(VERTEX_INDEX == 0) * LINE_START_POINT + float(VERTEX_INDEX == 1) * LINE_END_POINT;
-    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * vec4(position, 1.0);
+    gl_PointSize = 5.0;
+    neuronColor = neurons[gl_InstanceIndex].color;
+    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * vec4(neurons[gl_InstanceIndex].position, 1.0);
 }

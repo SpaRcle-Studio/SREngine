@@ -99,6 +99,7 @@ set(SR_ENGINE_CORE_SOURCES
     ${CORE_ROOT_DIR}/cxx/Codegen.cxx
     ${CORE_ROOT_DIR}/cxx/States.cxx
     ${CORE_ROOT_DIR}/cxx/Tests.cxx
+    ${CORE_ROOT_DIR}/cxx/AI.cxx
     ${CORE_ROOT_DIR}/cxx/PropertyDrawers.cxx
     ${CORE_ROOT_DIR}/src/Engine/EntryPoint.cpp
 )

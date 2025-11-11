@@ -214,6 +214,15 @@ use tabs: true
 														14-o:uniforms
 															15-o:shared
 															15-o:material
+											11-k:i
+												12-o:d
+													13-v:type
+														14-s:NNRenderPass
+													13-o:ptr
+														14-v:neuronShaderPath
+															15-s:Engine/Shaders/Debug/nn_neuron.srsl
+														14-v:synapseShaderPath
+															15-s:Engine/Shaders/Debug/nn_synapse.srsl
 										10-o:data
 											11-a:clearColors
 												12-k:i
