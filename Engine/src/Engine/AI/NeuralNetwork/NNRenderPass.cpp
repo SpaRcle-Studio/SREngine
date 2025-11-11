@@ -6,6 +6,8 @@
 
 #include <Graphics/Types/Camera.h>
 
+#include <Utils/Math/Vector4.h>
+
 #include <Codegen/NNRenderPass.generated.hpp>
 
 namespace SpaRcle::AI {
