@@ -2,6 +2,7 @@
 // Created by innerviewer on 10/11/2023.
 //
 
+#include <Audio/Impl/OpenALDevice.h>
 #include <Audio/Impl/OpenALSoundListener.h>
 #include <Audio/Impl/OpenALTools.h>
 

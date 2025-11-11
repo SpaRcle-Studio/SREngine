@@ -5,9 +5,8 @@
 #ifndef SR_ENGINE_AUDIOLISTENER_H
 #define SR_ENGINE_AUDIOLISTENER_H
 
-#include <Audio/macros.h>
-
 #include <Audio/ListenerData.h>
+
 #include <Utils/ECS/Component.h>
 
 namespace SR_AUDIO_NS

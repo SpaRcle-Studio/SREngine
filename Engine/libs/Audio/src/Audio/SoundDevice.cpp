@@ -3,8 +3,9 @@
 //
 
 #include <Audio/SoundDevice.h>
-
 #include <Audio/Impl/OpenALDevice.h>
+
+#include <Utils/Debug.h>
 
 namespace SR_AUDIO_NS {
     SoundDevice::SoundDevice(AudioLibrary library, const std::string& name)

@@ -7,7 +7,7 @@
 
 #include <Audio/SoundDevice.h>
 
-class ALCdevice;
+struct ALCdevice;
 
 namespace SR_AUDIO_NS {
     class OpenALDevice : public SoundDevice {

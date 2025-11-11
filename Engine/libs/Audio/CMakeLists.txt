@@ -6,6 +6,9 @@ endif()
 
 project(Audio)
 
+SR_COMMON_GENERATE_BUILD_SOURCES(${PROJECT_SOURCE_DIR})
+SR_COMMON_GET_SOURCES(Audio)
+
 set(CMAKE_CXX_STANDARD 20)
 
 option(SR_AUDIO_DLL_EXPORTS "" ON)
@@ -32,7 +35,6 @@ set(LIBTYPE STATIC)
 
 if (NOT SR_EMSCRIPTEN)
     add_subdirectory(libs/OpenAL)
-
     add_subdirectory(libs/libmodplug)
 
     if(MSVC)
@@ -41,15 +43,9 @@ if (NOT SR_EMSCRIPTEN)
 endif()
 
 if (SR_AUDIO_STATIC_LIBRARY)
-    add_library(Audio STATIC Audio.cxx)
-
-    if (CYGWIN)
-
-    else()
-
-    endif()
+    add_library(Audio STATIC ${Audio_SOURCES})
 else()
-    add_library(Audio SHARED Audio.cxx)
+    add_library(Audio SHARED ${Audio_SOURCES})
     add_library(Audio::lib ALIAS Audio)
 
     if (UNIX)

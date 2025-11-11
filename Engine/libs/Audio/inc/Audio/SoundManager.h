@@ -5,13 +5,11 @@
 #ifndef SR_ENGINE_SOUNDMANAGER_H
 #define SR_ENGINE_SOUNDMANAGER_H
 
-#include <Audio/macros.h>
+#include <Audio/ListenerData.h>
+#include <Audio/PlayParams.h>
 
 #include <Utils/Common/Singleton.h>
 #include <Utils/Types/Thread.h>
-
-#include <Audio/ListenerData.h>
-#include <Audio/PlayParams.h>
 
 namespace SR_AUDIO_NS {
     class Sound;

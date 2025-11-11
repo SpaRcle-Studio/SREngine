@@ -2,10 +2,12 @@
 // Created by Monika on 08.07.2022.
 //
 
-#include <alext.h>
 #include <Audio/PlayParams.h>
 #include <Audio/Impl/OpenALSoundContext.h>
 #include <Audio/Impl/OpenALTools.h>
+#include <Audio/Impl/OpenALDevice.h>
+
+#include <alext.h>
 
 namespace SR_AUDIO_NS {
     OpenALSoundContext::OpenALSoundContext(SoundDevice *pDevice)

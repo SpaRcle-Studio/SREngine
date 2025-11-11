@@ -3,8 +3,11 @@
 //
 
 #include <Audio/SoundContext.h>
+#include <Audio/SoundDevice.h>
 #include <Audio/Impl/OpenALSoundContext.h>
 #include <Audio/Impl/OpenALSoundListener.h>
+
+#include <Utils/Debug.h>
 
 namespace SR_AUDIO_NS {
     SoundContext::SoundContext(SoundDevice *pDevice)

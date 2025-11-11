@@ -6,14 +6,17 @@ endif()
 
 project(Scripting)
 
+SR_COMMON_GENERATE_BUILD_SOURCES(${PROJECT_SOURCE_DIR})
+SR_COMMON_GET_SOURCES(Scripting)
+
 set(CMAKE_CXX_STANDARD 20)
 
 option(SR_SCRIPTING_DLL_EXPORTS "" ON)
 
 if (SR_SCRIPTING_STATIC_LIBRARY)
-    add_library(Scripting STATIC Scripting.cxx)
+    add_library(Scripting STATIC ${Scripting_SOURCES})
 else()
-    add_library(Scripting SHARED Scripting.cxx)
+    add_library(Scripting SHARED ${Scripting_SOURCES})
     add_library(Scripting::lib ALIAS Scripting)
 
     if (UNIX)

@@ -7,7 +7,7 @@
 
 #include <Scripting/macros.h>
 
-#include <Utils/Common/NonCopyable.h>
+#include <Utils/Serialization/Serializable.h>
 #include <Utils/Types/SharedPtr.h>
 
 namespace SR_SCRIPTING_NS {

@@ -7,6 +7,7 @@
 #include <Audio/SoundDevice.h>
 #include <Audio/SoundContext.h>
 #include <Audio/SoundListener.h>
+#include <Audio/Sound.h>
 
 namespace SR_AUDIO_NS {
     void SoundManager::OnSingletonDestroy() {

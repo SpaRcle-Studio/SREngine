@@ -5,7 +5,13 @@
 #ifndef SR_ENGINE_IWAVEDATAPROVIDER_H
 #define SR_ENGINE_IWAVEDATAPROVIDER_H
 
-#include <Utils/macros.h>
+#include <Audio/stdInclude.h>
+
+#include <Utils/Common/NonCopyable.h>
+
+namespace SR_UTILS_NS {
+    class Path;
+}
 
 namespace SR_AUDIO_NS {
     typedef std::vector<uint8_t> RawSoundData;

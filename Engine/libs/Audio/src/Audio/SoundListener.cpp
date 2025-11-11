@@ -3,7 +3,10 @@
 //
 
 #include <Audio/SoundListener.h>
+#include <Audio/SoundDevice.h>
 #include <Audio/Impl/OpenALSoundListener.h>
+
+#include <Utils/Debug.h>
 
 namespace SR_AUDIO_NS {
     SoundListener* SoundListener::Allocate(SoundDevice* pDevice) {
@@ -20,6 +23,7 @@ namespace SR_AUDIO_NS {
             case AudioLibrary::Allegro:
             case AudioLibrary::SoLoud:
             case AudioLibrary::Unknown:
+            default:
                 SR_ERROR("SoundContext::Allocate() : unsupported library!");
                 break;
         }

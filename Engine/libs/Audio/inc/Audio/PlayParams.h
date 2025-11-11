@@ -5,13 +5,11 @@
 #ifndef SR_ENGINE_PLAYPARAMS_H
 #define SR_ENGINE_PLAYPARAMS_H
 
-#include <Audio/macros.h>
+#include <Audio/AudioLibrary.h>
+#include <Audio/SoundFormat.h>
 
 #include <Utils/Math/Vector3.h>
 #include <Utils/Math/Vector6.h>
-
-#include <Audio/AudioLibrary.h>
-#include <Audio/SoundFormat.h>
 
 namespace SR_AUDIO_NS {
     SR_ENUM_NS_CLASS_T(PlayParamType, uint8_t,

@@ -5,6 +5,7 @@
 #include <Audio/Sound.h>
 #include <Audio/SoundManager.h>
 #include <Audio/SoundData.h>
+#include <Audio/RawSound.h>
 
 #include <Utils/Resources/ResourceManager.h>
 

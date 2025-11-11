@@ -5,10 +5,10 @@
 #ifndef SR_ENGINE_SOUNDCONTEXT_H
 #define SR_ENGINE_SOUNDCONTEXT_H
 
-#include <Audio/macros.h>
-
-#include <Utils/Common/NonCopyable.h>
 #include <Audio/SoundFormat.h>
+#include <Audio/PlayParams.h>
+
+#include <Utils/Profile/TracyContext.h>
 
 namespace SR_AUDIO_NS {
     class SoundDevice;

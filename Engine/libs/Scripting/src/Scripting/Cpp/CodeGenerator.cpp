@@ -5,7 +5,9 @@
 #include <Scripting/Cpp/CodeGenerator.h>
 #include <Scripting/Cpp/ScriptSystem.h>
 
-#include <tree_sitter/api.h>
+#include <Utils/Types/Time.h>
+#include <Utils/Common/Features.h>
+#include <Utils/FileSystem/FileSystem.h>
 
 namespace SR_SCRIPTING_NS {
     void CppCodeGenerator::ProcessChangedCodeFiles(const std::set<SR_UTILS_NS::Path>& changedFiles) {

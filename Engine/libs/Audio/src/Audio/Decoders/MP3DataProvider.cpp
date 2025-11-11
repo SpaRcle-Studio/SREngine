@@ -4,6 +4,8 @@
 
 #include <Audio/Decoders/MP3DataProvider.h>
 
+#include <Utils/Debug.h>
+
 #define MINIMP3_IMPLEMENTATION 1
 #include <minimp3/minimp3_ex.h>
 

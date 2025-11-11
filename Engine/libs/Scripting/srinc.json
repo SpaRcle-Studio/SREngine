@@ -1,0 +1,9 @@
+{
+    "module_name": "Scripting",
+    "include": [
+        "src/Scripting/"
+    ],
+    "exclude": [
+        "src/Scripting/Old"
+    ]
+}

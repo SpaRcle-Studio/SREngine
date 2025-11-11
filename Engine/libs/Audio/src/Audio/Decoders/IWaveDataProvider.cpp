@@ -7,6 +7,8 @@
 #include <Audio/Decoders/MP3DataProvider.h>
 #include <Audio/Decoders/ModPlugDataProvider.h>
 
+#include <Utils/Debug.h>
+
 namespace SR_AUDIO_NS::Tools {
     bool IsModule( const char* Ext )
     {

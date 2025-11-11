@@ -7,6 +7,7 @@
 
 #include <Utils/ECS/Transform.h>
 #include <Utils/ECS/ComponentManager.h>
+#include <Utils/Resources/ResourceManager.h>
 
 #include <Codegen/AudioSource.generated.hpp>
 

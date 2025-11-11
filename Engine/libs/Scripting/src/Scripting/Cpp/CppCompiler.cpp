@@ -4,9 +4,12 @@
 
 #include <Scripting/Cpp/CppCompiler.h>
 
+#include <Utils/Types/Time.h>
 #include <Utils/Platform/Platform.h>
 #include <Utils/Platform/MessageBox.h>
 #include <Utils/FileSystem/FileDialog.h>
+#include <Utils/Resources/ResourceManager.h>
+#include <Utils/Serialization/SRASerialization.h>
 
 #include <Enum/CppCompilerType.hpp>
 

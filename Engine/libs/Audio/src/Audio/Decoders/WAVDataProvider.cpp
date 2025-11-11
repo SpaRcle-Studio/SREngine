@@ -4,6 +4,8 @@
 
 #include <Audio/Decoders/WAVDataProvider.h>
 
+#include <Utils/Debug.h>
+
 #pragma pack(push, 1)
     #if !defined(_MSC_VER)
         #define PACKED_STRUCT(n) __attribute__((packed,aligned(n)))
