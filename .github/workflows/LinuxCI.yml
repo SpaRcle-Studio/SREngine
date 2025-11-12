@@ -148,7 +148,7 @@ jobs:
         name: Uploading a successful ${{ matrix.buildType }} build artifact.
         uses: actions/upload-artifact@v4
         with:
-          name: "Linux ${{ matrix.buildType }} ${{ matrix.compiler }} Executable"
+          name: "Linux ${{ matrix.buildType }} ${{ matrix.compiler }} Unity(${{ matrix.unity }}) Executable"
           path: "${{github.workspace}}/build/Engine/SREngineBuild"
 
       #- if: env.buildSuccessful == 'false'
