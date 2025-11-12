@@ -9,6 +9,7 @@
 
 #include <Physics/PhysicsLib.h>
 #include <Physics/VehicleInternalData.h>
+#include <Physics/PhysicsScene.h>
 
 #include <Utils/ECS/Component.h>
 #include <Utils/Common/Measurement.h>

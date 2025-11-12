@@ -6,6 +6,7 @@
 #include <Physics/LibraryImpl.h>
 #include <Physics/PhysicsLib.h>
 
+#include <Utils/ECS/Transform.h>
 #include <Utils/ECS/ComponentManager.h>
 
 #include <Codegen/Rigidbody3D.generated.hpp>

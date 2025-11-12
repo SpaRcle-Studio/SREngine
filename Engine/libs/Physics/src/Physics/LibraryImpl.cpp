@@ -5,6 +5,8 @@
 #include <Physics/LibraryImpl.h>
 #include <Utils/Common/Features.h>
 
+#include <Utils/Profile/TracyContext.h>
+
 namespace SR_PHYSICS_NS {
     LibraryImpl::LibraryImpl()
         : Super()

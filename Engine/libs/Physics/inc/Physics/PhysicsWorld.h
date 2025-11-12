@@ -8,6 +8,10 @@
 #include <Physics/macros.h>
 
 #include <Physics/Utils/Utils.h>
+#include <Physics/Rigidbody.h>
+#include <Physics/3D/Rigidbody3D.h>
+
+#include <Utils/Types/SharedPtr.h>
 
 namespace SR_PHYSICS_NS {
     class LibraryImpl;

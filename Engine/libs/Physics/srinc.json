@@ -1,0 +1,11 @@
+{
+    "module_name": "Physics",
+    "include": [
+        "src/"
+    ],
+    "exclude": [
+        "src/Physics/Box2D/",
+        "src/Physics/Bullet3/",
+        "src/Physics/PhysX/"
+    ]
+}

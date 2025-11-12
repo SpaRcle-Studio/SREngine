@@ -145,9 +145,13 @@ if (SR_PHYSICS_USE_PHYSX)
 endif()
 # ----------------------------------------------------------------------------------------------------------------------
 
+
+SR_COMMON_GENERATE_BUILD_SOURCES(${PROJECT_SOURCE_DIR})
+SR_COMMON_GET_SOURCES(Physics)
+
 if (SR_PHYSICS_STATIC_LIBRARY)
     add_compile_definitions(PX_PHYSX_STATIC_LIB)
-    add_library(Physics STATIC Physics.cxx)
+    add_library(Physics STATIC ${Physics_SOURCES})
 
     if (CYGWIN)
 
@@ -155,7 +159,7 @@ if (SR_PHYSICS_STATIC_LIBRARY)
 
     endif()
 else()
-    add_library(Physics SHARED Physics.cxx)
+    add_library(Physics SHARED ${Physics_SOURCES})
     add_library(Physics::lib ALIAS Physics)
 
     if (UNIX)

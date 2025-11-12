@@ -1,23 +1,3 @@
-//
-// Created by Monika on 27.07.2022.
-//
-
-#include <Utils/macros.h>
-
-#include "src/Physics/Rigidbody.cpp"
-#include "src/Physics/Vehicle.cpp"
-#include "src/Physics/PhysicsMaterial.cpp"
-#include "src/Physics/CollisionShape.cpp"
-#include "src/Physics/PhysicsScene.cpp"
-#include "src/Physics/PhysicsWorld.cpp"
-#include "src/Physics/PhysicsLib.cpp"
-#include "src/Physics/LibraryImpl.cpp"
-
-#include "src/Physics/3D/Rigidbody3D.cpp"
-#include "src/Physics/2D/Rigidbody2D.cpp"
-#include "src/Physics/3D/Raycast3D.cpp"
-#include "src/Physics/3D/Vehicle4W3D.cpp"
-
 #ifdef SR_PHYSICS_USE_BULLET3
     #include "src/Physics/Bullet3/Bullet3Rigidbody3D.cpp"
     #include "src/Physics/Bullet3/Bullet3LibraryImpl.cpp"

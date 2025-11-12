@@ -6,6 +6,7 @@
 #define SR_ENGINE_PHYSXUTILS_H
 
 #include <Physics/macros.h>
+#include <Physics/PhysicsMaterial.h>
 
 #include <Utils/stdInclude.h>
 #include <Utils/Math/Vector3.h>
@@ -58,18 +59,7 @@ namespace SR_PHYSICS_UTILS_NS {
         }
     }
 
-    PhysXPvdConnection* CreatePvdConnection(physx::PxFoundation* pFoundation, const std::string& ip, uint16_t port, uint32_t timeout) {
-        auto&& pPvd = PxCreatePvd(*pFoundation);
-        auto&& pTransport = physx::PxDefaultPvdSocketTransportCreate(ip.c_str(), port, timeout);
-
-        if (pPvd->connect(*pTransport, physx::PxPvdInstrumentationFlag::eALL)) {
-            return pPvd;
-        }
-
-        pPvd->release();
-
-        return nullptr;
-    }
+    PhysXPvdConnection* CreatePvdConnection(physx::PxFoundation* pFoundation, const std::string& ip, uint16_t port, uint32_t timeout);
 }
 
 #endif //SR_ENGINE_PHYSXUTILS_H

@@ -7,6 +7,9 @@
 
 #include <Physics/PhysicsMaterial.h>
 #include <Physics/PhysicsMaterialImpl.h>
+#include <Physics/PhysicsLib.h>
+#include <Physics/LibraryImpl.h>
+#include <Physics/Rigidbody.h>
 
 #include <Codegen/PhysicsMaterial.generated.hpp>
 

@@ -5,7 +5,8 @@
 #ifndef SR_ENGINE_PHYSICS_COLLISION_SHAPE_H
 #define SR_ENGINE_PHYSICS_COLLISION_SHAPE_H
 
-#include <Physics/macros.h>
+#include <Physics/PhysicsLib.h>
+#include <Physics/PhysicsMaterial.h>
 
 #include <Utils/Serialization/Serializable.h>
 #include <Utils/ECS/Component.h>
@@ -15,8 +16,8 @@
 #include <Utils/Types/IRawMeshHolder.h>
 #include <Utils/Math/Matrix4x4.h>
 #include <Utils/TypeTraits/Properties.h>
+#include <Utils/ECS/Transform.h>
 
-#include <Physics/PhysicsLib.h>
 
 namespace SR_PHYSICS_NS {
     class PhysicsScene;

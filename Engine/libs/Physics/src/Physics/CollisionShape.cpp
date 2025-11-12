@@ -4,6 +4,10 @@
 
 #include <Physics/CollisionShape.h>
 #include <Physics/LibraryImpl.h>
+#include <Physics/Rigidbody.h>
+
+#include <Utils/ECS/Transform.h>
+#include <Utils/DebugDraw.h>
 
 #include <Codegen/CollisionShape.generated.hpp>
 

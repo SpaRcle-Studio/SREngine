@@ -9,6 +9,8 @@
 
 #include <Physics/Utils/Utils.h>
 
+#include <Utils/Debug.h>
+
 namespace SR_PTYPES_NS {
     class Rigidbody2DImpl;
     class Rigidbody3DImpl;

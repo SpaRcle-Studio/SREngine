@@ -5,6 +5,8 @@
 #include <Physics/PhysX/PhysXCollisionShape.h>
 #include <Physics/PhysX/PhysXRigidbody3D.h>
 
+#include <Utils/Types/RawMesh.h>
+
 #include <Enum/ShapeType.hpp>
 
 namespace SR_PTYPES_NS {
