@@ -12,6 +12,14 @@ jobs:
       matrix:
         buildType: [Debug, Release]
         compiler: [gcc, clang]
+        unity: [OFF]
+        include:
+          - buildType: Debug
+            compiler: gcc
+            unity: ON
+          - buildType: Debug
+            compiler: clang
+            extra: ON
     steps:
       - name: Fetching repository.
         uses: actions/checkout@v4
@@ -39,7 +47,7 @@ jobs:
               echo "  - $DEP"
           done
           echo "::endgroup::"
-          
+
           echo "::group::🚀 Installing all packages at once"
           if ! sudo apt-get install -y "${DEP_ARRAY[@]}"; then
               echo "::endgroup::"
@@ -112,8 +120,8 @@ jobs:
         working-directory: ${{github.workspace}}/build
         run: |
           echo "buildSuccessful=false" >> "$GITHUB_ENV"
-          cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=${{ matrix.buildType }}
-          cmake --build . -j 4
+          cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=${{ matrix.buildType }} -DSR_COMMON_UNITY_BUILD=${{ matrix.unity }}
+          cmake --build .
           echo "buildSuccessful=true" >> "$GITHUB_ENV"
 
       - name: Creating a ${{ matrix.buildType }} build trace.
