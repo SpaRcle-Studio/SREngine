@@ -5,8 +5,9 @@ on:
 
 jobs:
   Build:
-    name: Build.
+    name: "Build (${{ matrix.buildType }} | ${{ matrix.compiler }} | ${{ matrix.unity == 'ON' && 'Unity' || 'NoUnity' }})"
     runs-on: ubuntu-22.04
+
     strategy:
       fail-fast: false
       matrix:
