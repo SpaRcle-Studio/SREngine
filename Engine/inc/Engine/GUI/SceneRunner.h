@@ -12,6 +12,8 @@
 #include <Utils/Input/InputEvents.h>
 
 namespace SR_CORE_GUI_NS {
+    class EditorGUI;
+
     class SceneRunner : public SR_GRAPH_NS::GUI::Widget {
     public:
         SceneRunner();

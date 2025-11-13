@@ -6,6 +6,7 @@
 
 #include <Utils/Resources/ResourceEmbedder.h>
 #include <Utils/Common/Compression.h>
+#include <Utils/Common/CLIManager.h>
 
 namespace SR_CORE_NS {
     LauncherInitStatus Launcher::InitLauncher() {

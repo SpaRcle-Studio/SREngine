@@ -5,6 +5,9 @@
 #ifndef SR_ENGINE_ENGINESETTINGS_H
 #define SR_ENGINE_ENGINESETTINGS_H
 
+#include <Engine/stdInclude.h>
+#include <Graphics/GUI/Widget.h>
+
 namespace SR_CORE_GUI_NS {
     class EngineSettings : public SR_GRAPH_GUI_NS::Widget {
         using Super = SR_GRAPH_GUI_NS::Widget;

@@ -3,9 +3,12 @@
 //
 
 #include <Engine/GUI/EngineSettings.h>
+
 #include <Graphics/Lighting/LightSystem.h>
+#include <Graphics/Render/RenderContext.h>
 
 #include <Utils/Common/StoreUtils.h>
+#include <Utils/Events/Broadcaster.h>
 
 namespace SR_CORE_GUI_NS {
     EngineSettings::EngineSettings()

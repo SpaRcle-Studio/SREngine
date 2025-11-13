@@ -93,21 +93,14 @@ add_subdirectory(libs/Graphics)
 message(STATUS "SpaRcle Engine: CONFIGURING Scripting")
 add_subdirectory(libs/Scripting)
 
-set(SR_ENGINE_CORE_SOURCES
-    ${CORE_ROOT_DIR}/cxx/Core.cxx
-    ${CORE_ROOT_DIR}/cxx/GUI.cxx
-    ${CORE_ROOT_DIR}/cxx/Codegen.cxx
-    ${CORE_ROOT_DIR}/cxx/States.cxx
-    ${CORE_ROOT_DIR}/cxx/Tests.cxx
-    ${CORE_ROOT_DIR}/cxx/AI.cxx
-    ${CORE_ROOT_DIR}/cxx/PropertyDrawers.cxx
-    ${CORE_ROOT_DIR}/src/Engine/EntryPoint.cpp
-)
+
+SR_COMMON_GENERATE_BUILD_SOURCES(${PROJECT_SOURCE_DIR})
+SR_COMMON_GET_SOURCES(Engine)
 
 if (SR_ENGINE_STATIC_LIBRARY)
-    add_library(Engine STATIC ${SR_ENGINE_CORE_SOURCES})
+    add_library(Engine STATIC ${Engine_SOURCES})
 else()
-    add_library(Engine SHARED ${SR_ENGINE_CORE_SOURCES})
+    add_library(Engine SHARED ${Engine_SOURCES})
     add_library(Engine::lib ALIAS Engine)
 
     if (UNIX)
