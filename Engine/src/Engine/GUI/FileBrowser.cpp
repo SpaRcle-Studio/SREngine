@@ -2,18 +2,29 @@
 // Created by Monika on 27.12.2021.
 //
 
-#include <Engine/GUI/FileBrowser.h>
-#include <Engine/GUI/AssetInspector.h>
+#include <Engine/Engine.h>
+
+#include <Engine/Settings/EditorSettings.h>
 #include <Engine/Settings/ProjectSettings.h>
 
+#include <Engine/GUI/EditorGUI.h>
+#include <Engine/GUI/FileBrowser.h>
+#include <Engine/GUI/AssetInspector.h>
+#include <Graphics/GUI/Icons.h>
+#include <Graphics/GUI/Utils.h>
+
+#include <Graphics/Material/FileMaterial.h>
+#include <Graphics/Animations/AnimationClip.h>
+#include <Graphics/Overlay/ImGuiOverlay.h>
+#include <Graphics/Render/RenderTechnique.h>
+#include <Graphics/Pipeline/Pipeline.h>
+
+#include <Utils/ECS/Prefab.h>
+#include <Utils/Common/StoreUtils.h>
 #include <Utils/FileSystem/Path.h>
 #include <Utils/Common/VectorUtils.h>
 #include <Utils/Debug.h>
 #include <Utils/Resources/ResourceManager.h>
-
-#include <Graphics/GUI/Icons.h>
-#include <Graphics/Animations/AnimationClip.h>
-#include <Graphics/Overlay/ImGuiOverlay.h>
 
 namespace SR_CORE_NS::GUI {
     FileBrowser::FileBrowser()

@@ -2,6 +2,8 @@
 // Created by Monika on 06.04.2022.
 //
 
+#include <Engine/Engine.h>
+#include <Engine/Common/Importers.h>
 #include <Engine/World/World.h>
 
 #include <Utils/Types/RawMesh.h>

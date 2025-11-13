@@ -2,21 +2,31 @@
 // Created by Monika on 26.03.2022.
 //
 
+#include <Engine/GUI/Hierarchy.h>
 #include <Engine/GUI/EngineStatistics.h>
+#include <Engine/GUI/EditorGUI.h>
+#include <Engine/Engine.h>
 
-#include <Utils/Resources/ResourceManager.h>
-#include <Utils/DebugDraw.h>
 
 #include <Graphics/Types/Framebuffer.h>
 #include <Graphics/Types/Skybox.h>
+#include <Graphics/Types/Camera.h>
+#include <Graphics/Types/Mesh.h>
 
 #include <Graphics/Memory/ShaderProgramManager.h>
+
 #include <Graphics/Pass/FrameBufferPass.h>
 #include <Graphics/Pass/MeshDrawerPass.h>
+
 #include <Graphics/Render/RenderTechnique.h>
+#include <Graphics/Render/RenderContext.h>
 #include <Graphics/Render/DebugRenderer.h>
 #include <Graphics/Render/RenderScene.h>
 #include <Graphics/Render/RenderQueue.h>
+
+#include <Utils/Types/IRawMeshHolder.h>
+#include <Utils/Resources/ResourceManager.h>
+#include <Utils/DebugDraw.h>
 
 // #include <Graphics/Pipeline/Vulkan/VulkanPipeline.h>
 // #include <Graphics/Pipeline/Vulkan/VulkanKernel.h>

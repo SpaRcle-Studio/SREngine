@@ -3,19 +3,12 @@
 //
 
 #include <Engine/Engine.h>
+#include <Engine/Application.h>
 #include <Engine/EngineResources.h>
 #include <Engine/EngineMigrators.h>
 #include <Engine/GUI/EditorGUI.h>
 #include <Engine/World/EngineScene.h>
 #include <Engine/EngineCommands.h>
-
-#include <Utils/Events/EventManager.h>
-#include <Utils/World/Scene.h>
-#include <Utils/World/SceneUpdater.h>
-#include <Utils/Common/Features.h>
-#include <Utils/ECS/ComponentManager.h>
-#include <Utils/Localization/LocalizationManager.h>
-#include <Utils/Serialization/SRASerialization.h>
 
 #include <Graphics/GUI/WidgetManager.h>
 #include <Graphics/Render/RenderScene.h>
@@ -34,6 +27,13 @@
 #include <Physics/3D/Raycast3D.h>
 #include <Physics/PhysicsMaterial.h>
 
+#include <Utils/Events/EventManager.h>
+#include <Utils/World/Scene.h>
+#include <Utils/World/SceneUpdater.h>
+#include <Utils/Common/Features.h>
+#include <Utils/ECS/ComponentManager.h>
+#include <Utils/Localization/LocalizationManager.h>
+#include <Utils/Serialization/SRASerialization.h>
 //#include <Scripting/Impl/EvoScriptManager.h>
 
 namespace SR_CORE_NS {

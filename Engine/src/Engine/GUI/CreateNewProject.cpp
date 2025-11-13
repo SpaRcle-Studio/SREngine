@@ -3,6 +3,13 @@
 //
 
 #include <Engine/GUI/CreateNewProject.h>
+#include <Engine/Settings/ProjectSettings.h>
+
+// #include <Graphics/GUI/ImmediateGUI.h>
+
+#include <Utils/Resources/ResourceManager.h>
+#include <Utils/Serialization/SRASerialization.h>
+#include <Utils/FileSystem/FileDialog.h>
 
 namespace SR_CORE_GUI_NS {
     CreateNewProject::CreateNewProject()

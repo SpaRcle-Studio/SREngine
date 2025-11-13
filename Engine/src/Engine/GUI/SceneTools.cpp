@@ -3,6 +3,15 @@
 //
 
 #include <Engine/GUI/SceneTools.h>
+#include <Engine/GUI/EditorGUI.h>
+#include <Engine/Engine.h>
+
+#include <Graphics/GUI/WidgetManager.h>
+#include <Graphics/Render/RenderContext.h>
+#include <Graphics/Render/RenderScene.h>
+
+#include <Physics/PhysicsLib.h>
+#include <Physics/LibraryImpl.h>
 
 namespace SR_CORE_GUI_NS {
     void SceneTools::Init() {

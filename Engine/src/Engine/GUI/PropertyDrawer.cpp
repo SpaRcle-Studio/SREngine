@@ -3,7 +3,9 @@
 //
 
 #include <Engine/GUI/PropertyDrawer.h>
+
 #include <Graphics/Material/UniqueMaterial.h>
+#include <Graphics/GUI/Utils.h>
 
 #include <Codegen/PropertyDrawer.generated.hpp>
 

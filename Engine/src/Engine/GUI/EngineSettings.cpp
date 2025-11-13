@@ -6,6 +6,7 @@
 
 #include <Graphics/Lighting/LightSystem.h>
 #include <Graphics/Render/RenderContext.h>
+#include <Graphics/Pipeline/Pipeline.h>
 
 #include <Utils/Common/StoreUtils.h>
 #include <Utils/Events/Broadcaster.h>

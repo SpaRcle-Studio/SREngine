@@ -12,7 +12,7 @@ namespace SR_CORE_NS {
 }
 
 namespace SR_CORE_NS::Resources {
-    bool RegisterResources(const SR_HTYPES_NS::SharedPtr<Engine>& pEngin);
+    bool RegisterResources(const SR_HTYPES_NS::SharedPtr<Engine>& pEngine);
 }
 
 #endif //SR_ENGINE_ENGINERESOURCES_H

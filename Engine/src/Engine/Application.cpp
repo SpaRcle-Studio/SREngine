@@ -3,6 +3,26 @@
 //
 
 #include <Engine/Application.h>
+#include <Engine/World/World.h>
+
+#include <Graphics/GUI/NodeManager.h>
+#include <Graphics/Types/Shader.h>
+#include <Graphics/Memory/CameraManager.h>
+#include <Graphics/Memory/MeshManager.h>
+#include <Graphics/Font/Font.h>
+#include <Graphics/Types/Skybox.h>
+#include <Graphics/Types/Texture.h>
+#include <Graphics/Types/Framebuffer.h>
+#include <Graphics/Animations/AnimationClip.h>
+
+#include <Audio/Sound.h>
+#include <Audio/SoundManager.h>
+#include <Audio/RawSound.h>
+
+#include <Scripting/Base/Behaviour.h>
+
+#include <Physics/PhysicsMaterial.h>
+#include <Physics/PhysicsLib.h>
 
 #include <Utils/Debug.h>
 #include <Utils/Common/CmdOptions.h>
@@ -20,22 +40,8 @@
 #include <Utils/TaskManager/ThreadWorker.h>
 #include <Utils/Common/StoreUtils.h>
 #include <Utils/Common/CLIManager.h>
-
-#include <Graphics/GUI/NodeManager.h>
-#include <Graphics/Types/Shader.h>
-#include <Graphics/Font/Font.h>
-#include <Graphics/Types/Skybox.h>
-#include <Graphics/Types/Texture.h>
-#include <Graphics/Types/Framebuffer.h>
-#include <Graphics/Animations/AnimationClip.h>
-
-#include <Audio/Sound.h>
-#include <Audio/SoundManager.h>
-#include <Audio/RawSound.h>
-
-#include <Scripting/Base/Behaviour.h>
-
-#include <Physics/PhysicsMaterial.h>
+#include <Utils/Types/Time.h>
+#include <Utils/Common/Features.h>
 
 namespace SR_CORE_NS {
     Application::Application()

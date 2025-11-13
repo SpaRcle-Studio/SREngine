@@ -2,9 +2,11 @@
 // Created by Monika on 14.01.2023.
 //
 
+#include <Engine/GUI/Hierarchy.h>
 #include <Engine/GUI/AnimatorEditor.h>
 
 #include <Graphics/Animations/Animator.h>
+#include <Graphics/GUI/WidgetManager.h>
 
 namespace SR_CORE_GUI_NS {
     AnimatorEditor::AnimatorEditor()

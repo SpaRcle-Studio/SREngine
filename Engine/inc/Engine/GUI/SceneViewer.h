@@ -5,15 +5,22 @@
 #ifndef SR_ENGINE_SCENE_VIEWER_H
 #define SR_ENGINE_SCENE_VIEWER_H
 
+#include <Graphics/GUI/Widget.h>
+
 #include <Utils/ECS/GameObject.h>
 #include <Utils/World/Scene.h>
 
 namespace SR_GTYPES_NS {
     class Camera;
+    class IRenderComponent;
 }
 
 namespace SR_GRAPH_NS {
     class Window;
+}
+
+namespace SR_CORE_NS {
+    class Engine;
 }
 
 namespace SR_CORE_GUI_NS {
@@ -29,7 +36,7 @@ namespace SR_CORE_GUI_NS {
         SR_INLINE_STATIC const std::string CAMERA_XML = "Editor/Camera.xml";
     public:
         SceneViewer() = default;
-        SceneViewer(const EnginePtr& pEngine, Hierarchy* hierarchy);
+        SceneViewer(const SR_HTYPES_NS::SharedPtr<Engine>& pEngine, Hierarchy* hierarchy);
         ~SceneViewer() override;
 
     public:

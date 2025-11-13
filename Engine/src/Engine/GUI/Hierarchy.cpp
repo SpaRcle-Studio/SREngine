@@ -2,16 +2,23 @@
 // Created by Monika on 11.02.2022.
 //
 
+#include <Engine/EngineCommands.h>
 #include <Engine/GUI/Hierarchy.h>
 #include <Engine/GUI/SceneRunner.h>
+#include <Engine/GUI/EditorGUI.h>
+
+#include <Graphics/GUI/Icons.h>
+#include <Graphics/UI/UINode.h>
+#include <Graphics/GUI/Utils.h>
 
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Platform/Platform.h>
 #include <Utils/Types/SafePtrLockGuard.h>
 #include <Utils/TaskManager/TaskManager.h>
-
-#include <Graphics/GUI/Icons.h>
-#include <Graphics/UI/UINode.h>
+#include <Utils/Common/StoreUtils.h>
+#include <Utils/World/ScenePrefabLogic.h>
+#include <Utils/CommandManager/ReversibleCommand.h>
+#include <Utils/FileSystem/FileDialog.h>
 
 namespace SR_CORE_GUI_NS {
     const SR_MATH_NS::FColor SR_PREFAB_COLOR_FIRST = SR_MATH_NS::FColor(39.f / 255.f, 225 / 255.f, 193.f / 255.f, 1.f);
