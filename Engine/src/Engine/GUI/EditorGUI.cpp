@@ -24,7 +24,6 @@
 #include <Engine/GUI/CreateNewProject.h>
 #include <Engine/GUI/SceneTools.h>
 #include <Engine/EngineCommands.h>
-#include <Engine/GUI/EditorGUI.h>
 
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Render/RenderContext.h>
