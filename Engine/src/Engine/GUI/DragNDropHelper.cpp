@@ -12,6 +12,19 @@
 #include <Utils/ECS/Component.h>
 
 namespace SR_CORE_GUI_NS {
+    /**
+     * @brief Renders a drag-and-drop widget for viewing and editing an EntityRefOld.
+     *
+     * Displays a preview of the current target, accepts hierarchy or component drag-and-drop to set the reference,
+     * and provides Reset, Show, Update, and Relative controls. User actions may change the reference path, toggle
+     * relativity, call UpdateTarget(), or select the referenced object in the Hierarchy widget.
+     *
+     * @param pContext GUI context used to access other widgets (for example, Hierarchy).
+     * @param entityRef The EntityRefOld being edited; this function may modify its path or relativity and call UpdateTarget().
+     * @param id Identifier used to create unique GUI element names.
+     * @param width Width of the main widget area.
+     * @return true if entityRef was modified by user interaction during this call, false otherwise.
+     */
     bool DragDropTargetEntityRef(EditorGUI* pContext, SR_UTILS_NS::EntityRefOld& entityRef, const char* id, float_t width) {
         std::string preview;
 

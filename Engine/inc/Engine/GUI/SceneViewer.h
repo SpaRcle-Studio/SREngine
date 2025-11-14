@@ -23,6 +23,92 @@ namespace SR_CORE_NS {
     class Engine;
 }
 
+/**
+ * Create a SceneViewer bound to the given engine and hierarchy.
+ * @param pEngine Shared pointer to the Engine used for rendering and scene interaction.
+ * @param hierarchy Pointer to the Hierarchy UI component associated with this viewer.
+ */
+/**
+ * Set the scene that this viewer displays and interacts with.
+ * @param scene Pointer to the Scene to display.
+ */
+/**
+ * Enable or disable the scene viewer.
+ * @param value `true` to enable the viewer, `false` to disable it.
+ */
+/**
+ * Perform fixed-interval updates for the viewer (called by the engine tick).
+ */
+/**
+ * Handle mouse button press events directed at the viewer.
+ * @param data Pointer to mouse input data describing the event.
+ */
+/**
+ * Handle mouse button release events directed at the viewer.
+ * @param data Pointer to mouse input data describing the event.
+ */
+/**
+ * Handle key down events while the viewer has focus.
+ * @param data Pointer to keyboard input data describing the key event.
+ */
+/**
+ * Handle key press (character) events while the viewer has focus.
+ * @param data Pointer to keyboard input data describing the key press.
+ */
+/**
+ * Position of the rendered image inside the widget.
+ * @returns The image position as an FPoint.
+ */
+/**
+ * Size of the rendered texture used by the viewer.
+ * @returns The texture size as an FPoint.
+ */
+/**
+ * The gizmo game object currently used by the viewer.
+ * @returns Shared pointer to the gizmo GameObject, or `nullptr` if none is set.
+ */
+/**
+ * Access the SceneTools instance associated with this viewer.
+ * @returns Pointer to SceneTools, or `nullptr` if not available.
+ */
+/**
+ * Select the specified mesh render component in the viewer (for editing/inspection).
+ * @param pMesh Pointer to the render component to select.
+ */
+/**
+ * Load camera configuration for the viewer from its configured source.
+ */
+/**
+ * Backup current camera configuration maintained by the viewer.
+ */
+/**
+ * Called when the viewer widget is closed.
+ */
+/**
+ * Called when the viewer widget is opened.
+ */
+/**
+ * Render the viewer contents into the widget.
+ */
+/**
+ * Update internal view and texture sizes based on the current widget/window size.
+ * @returns `true` if the view size changed and an update was performed, `false` otherwise.
+ */
+/**
+ * Enable or disable camera controls for this viewer.
+ * @param enabled `true` to enable camera controls, `false` to disable them.
+ */
+/**
+ * Enable or disable gizmo interaction in the viewer.
+ * @param enabled `true` to enable the gizmo, `false` to disable it.
+ */
+/**
+ * Draw the provided texture within the given window area.
+ * @param winSize Window size in pixels.
+ * @param texSize Texture size in pixels.
+ * @param id Texture identifier to draw.
+ * @param centralize `true` to center the texture inside the window area, `false` to align to the origin.
+ */
 namespace SR_CORE_GUI_NS {
     class Hierarchy;
     class Guizmo;

@@ -14,6 +14,11 @@
 #include <Physics/LibraryImpl.h>
 
 namespace SR_CORE_GUI_NS {
+    /**
+     * @brief Initializes SceneTools state and registers editor UI controls for manipulating gizmo behaviour, camera speed, view mode, rendering toggles, and related actions.
+     *
+     * Sets the initial gizmo operation flag, creates UI elements (Local/Global toggle, Translate/Rotate/Scale toggles, Camera Speed slider, Connect PVD button, View Mode combo, Re-Draw button, and an Options macro menu) with their activation states and callbacks, and then invokes the superclass initialization.
+     */
     void SceneTools::Init() {
         m_gizmoOperationFlag = SR_GRAPH_UI_NS::GizmoOperation::TranslateAll;
 

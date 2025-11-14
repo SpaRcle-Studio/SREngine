@@ -30,6 +30,15 @@
 #include <Utils/World/SceneLogic.h>
 
 namespace SR_CORE_GUI_NS {
+    /**
+     * @brief Constructs a SceneViewer bound to the given engine and hierarchy.
+     *
+     * Initializes the viewer widget, stores the engine and its main window, sets an invalid id,
+     * restores camera settings from cache, and attaches a SceneTools sub-widget.
+     *
+     * @param pEngine Shared pointer to the Engine instance the viewer will use.
+     * @param hierarchy Pointer to the Hierarchy used for scene object selection and management.
+     */
     SceneViewer::SceneViewer(const EnginePtr& pEngine, Hierarchy* hierarchy)
         : Widget("Scene")
         , m_engine(pEngine)

@@ -9,6 +9,11 @@
 #include <Graphics/GUI/WidgetManager.h>
 
 namespace SR_CORE_GUI_NS {
+    /**
+     * @brief Creates an AnimatorEditor configured for editing animator graphs.
+     *
+     * Initializes the editor with the window title "Animator".
+     */
     AnimatorEditor::AnimatorEditor()
         : Super("Animator")
     { }
@@ -134,4 +139,3 @@ namespace SR_CORE_GUI_NS {
   // #endif
   // }
 }
-

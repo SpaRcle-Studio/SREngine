@@ -16,6 +16,12 @@
 #include <Graphics/Pipeline/Pipeline.h>
 
 namespace SR_CORE_NS::GUI {
+    /**
+     * @brief Constructs the SceneRunner GUI widget.
+     *
+     * Initializes the base Widget with the title "Scene runner" and an initial position/size
+     * vector of (0, 60).
+     */
     SceneRunner::SceneRunner()
         : SR_GRAPH_NS::GUI::Widget("Scene runner", SR_MATH_NS::IVector2(0, 60))
     { }

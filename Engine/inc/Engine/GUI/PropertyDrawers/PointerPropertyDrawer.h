@@ -7,6 +7,18 @@
 
 #include <Engine/GUI/PropertyDrawer.h>
 
+/**
+ * Render and manage the editor UI for a pointer property in the property inspector.
+ *
+ * @param context Context information and state used to draw the property UI.
+ * @returns `PropertyDrawerFeedback` value describing the outcome of the draw operation (for example whether the property value changed or other follow-up is required).
+ */
+/**
+ * Handle a replacement of the referenced object's class.
+ *
+ * @param pOld Pointer to the previous class of the referenced object (may be nullptr).
+ * @param pNew Pointer to the new class of the referenced object (may be nullptr).
+ */
 namespace SR_CORE_GUI_NS {
     class ObjectPropertyDrawer;
 
@@ -34,4 +46,3 @@ namespace SR_CORE_GUI_NS {
 }
 
 #endif //SR_ENGINE_GUI_POINTER_PROPERTY_DRAWER_H
-

@@ -165,6 +165,16 @@ namespace SR_CORE_NS {
         pSceneUpdater->FixedUpdate(isPaused);
     }
 
+    /**
+     * @brief Advance scene and engine update logic by the given delta time.
+     *
+     * Prepares scene logic, updates the scene updater with the provided delta time and current paused state,
+     * broadcasts the engine update event, accumulates delta time (respecting the accumulate flag),
+     * clamps extreme accumulator values, executes one or more fixed-step updates while the accumulator
+     * meets the fixed update frequency, performs a late update, and clears the engine's one-frame pause skip.
+     *
+     * @param dt Delta time in seconds; negative values are clamped to 0.
+     */
     void EngineScene::Update(float_t dt) {
         SR_TRACY_ZONE;
 

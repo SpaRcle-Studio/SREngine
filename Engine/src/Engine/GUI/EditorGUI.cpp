@@ -934,6 +934,18 @@ namespace SR_CORE_GUI_NS {
         return nullptr;
     }
 
+    /**
+     * @brief Instantiates a scene object into the editor's current scene.
+     *
+     * Attaches the provided scene object as a child of the current instantiation target:
+     * - If exactly one object is selected in the Hierarchy, that selection is used as the target.
+     * - Otherwise, if the active scene uses a prefab logic, the prefab root is used as the target.
+     * If no target is found, the object is still wrapped in a SceneObjectInstance command and stored.
+     * If a prefab root is expected but missing, the function calls SRHalt and destroys the provided object.
+     * The operation is recorded by creating a SceneObjectInstance command and storing it in the engine's command manager for undo/redo.
+     *
+     * @param pSO Scene object to instantiate. Null pointers are ignored.
+     */
     void EditorGUI::InstantiateSO(const SR_UTILS_NS::SceneObject::Ptr& pSO) {
         if (!pSO) {
             return;

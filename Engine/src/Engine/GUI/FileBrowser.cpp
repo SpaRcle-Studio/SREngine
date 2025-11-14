@@ -27,6 +27,9 @@
 #include <Utils/Resources/ResourceManager.h>
 
 namespace SR_CORE_NS::GUI {
+    /**
+     * @brief Initializes a FileBrowser widget and sets its window title to "Assets".
+     */
     FileBrowser::FileBrowser()
         : Widget("Assets")
     { }
@@ -547,6 +550,11 @@ namespace SR_CORE_NS::GUI {
         Super::OnOpen();
     }
 
+    /**
+     * @brief Perform cleanup when the FileBrowser is closed.
+     *
+     * Frees cached textures used by the browser and invokes the base-class close handler to perform any additional shutdown tasks.
+     */
     void FileBrowser::OnClose() {
         FreeTextures();
         Super::OnClose();

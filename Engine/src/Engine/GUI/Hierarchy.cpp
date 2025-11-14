@@ -583,6 +583,13 @@ namespace SR_CORE_GUI_NS {
 #endif
     }
 
+    /**
+     * @brief Expands hierarchy tree nodes for the given scene object and all its ancestors.
+     *
+     * Ensures the tree nodes corresponding to the object and each parent up to the root are opened
+     * so the object's path is visible in the hierarchy. If `gm` is null, the function does nothing.
+     *
+     * @param gm Scene object whose ancestor path should be expanded. */
     void Hierarchy::ExpandPath(const SR_UTILS_NS::SceneObject::Ptr& gm) { /** NOLINT */
         if (!gm) {
             return;

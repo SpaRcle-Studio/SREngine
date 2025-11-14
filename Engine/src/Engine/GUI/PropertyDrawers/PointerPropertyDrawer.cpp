@@ -8,6 +8,15 @@
 #include <Codegen/PointerPropertyDrawer.generated.hpp>
 
 namespace SR_CORE_GUI_NS {
+    /**
+     * @brief Renders and manages the GUI for a pointer property, providing type selection, clipboard copy/paste and an expandable inspector for the pointed object.
+     *
+     * Draws the property's header and inline type selector (with search), handles replacing or clearing the pointed object (including clipboard-based serialization/deserialization when available),
+     * and, when expanded, displays a nested object inspector for the current value. Uses context-provided sizes, editor parameters and optional onBeforeChange callback to coordinate changes.
+     *
+     * @param context Context that supplies the property value, layout metrics, editor parameters, owner and callbacks required for drawing and value updates.
+     * @return PropertyDrawerFeedback Feedback indicating whether the drawer caused the property value to change.
+     */
     PropertyDrawerFeedback PointerPropertyDrawer::Draw(const PropertyDrawerContext& context) {
         PropertyDrawerFeedback feedback;
 

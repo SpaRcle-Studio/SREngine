@@ -11,6 +11,36 @@
 #include <Utils/World/Scene.h>
 #include <Utils/Input/InputEvents.h>
 
+/**
+ * Construct a SceneRunner widget.
+ */
+
+/**
+ * Destroy the SceneRunner.
+ */
+
+/**
+ * Assigns a scene to be managed and displayed by this SceneRunner.
+ * @param scene Shared pointer to the scene to manage. May be null to clear the current scene.
+ */
+
+/**
+ * Render the SceneRunner widget and its controls.
+ */
+
+/**
+ * Start or resume playback of the currently assigned scene.
+ * @returns `true` if playback was started or resumed, `false` if there is no scene or playback could not be started.
+ */
+
+/**
+ * Stop playback and return the editor to its non-playing state.
+ */
+
+/**
+ * Retrieve the owning EditorGUI instance for this widget.
+ * @returns Pointer to the EditorGUI that contains this widget, or `nullptr` if not attached to an editor.
+ */
 namespace SR_CORE_GUI_NS {
     class EditorGUI;
 

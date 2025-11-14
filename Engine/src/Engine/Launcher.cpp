@@ -9,6 +9,15 @@
 #include <Utils/Common/CLIManager.h>
 
 namespace SR_CORE_NS {
+    /**
+     * @brief Initializes the launcher and ensures required resource folders and assets are available.
+     *
+     * Performs pre-initialization and platform-specific resource setup, optionally unpacking embedded
+     * resources and cloning resource repositories when necessary.
+     *
+     * @return LauncherInitStatus `Success` if launcher initialization and resource setup completed
+     *         and required resources are available, `Error` otherwise.
+     */
     LauncherInitStatus Launcher::InitLauncher() {
         if (!PreInit()) {
             SR_PLATFORM_NS::WriteConsoleError("Launcher::Init() : failed to pre-initialize application!\n");

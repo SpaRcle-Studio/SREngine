@@ -12,6 +12,12 @@
 #include <Utils/FileSystem/FileDialog.h>
 
 namespace SR_CORE_GUI_NS {
+    /**
+     * @brief Initializes a "Create New Project" dialog with default UI state.
+     *
+     * Constructs the dialog titled "Create New Project", sets the default window size
+     * to 400×300, and initializes project-related fields by calling ResetSettings().
+     */
     CreateNewProject::CreateNewProject()
         : Super("Create New Project")
     {

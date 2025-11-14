@@ -44,6 +44,12 @@
 #include <Utils/Common/Features.h>
 
 namespace SR_CORE_NS {
+    /**
+     * @brief Constructs an Application instance and configures its ownership policy.
+     *
+     * Initializes the base class using the automatic shared-pointer policy so the
+     * Application instance is managed with automatic shared ownership.
+     */
     Application::Application()
         : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
     { }

@@ -33,6 +33,14 @@
 #include <Utils/Events/Broadcaster.h>
 
 namespace SR_CORE_GUI_NS {
+    /**
+     * @brief Constructs an Inspector widget for a given hierarchy.
+     *
+     * Initializes the inspector's pointer property drawer, prepares component categories,
+     * and subscribes to script-module reload events to refresh categories when scripts change.
+     *
+     * @param hierarchy Pointer to the Hierarchy this inspector will operate on (non-owning).
+     */
     Inspector::Inspector(Hierarchy* hierarchy)
         : SR_GRAPH_GUI_NS::Widget("Inspector")
         , m_hierarchy(hierarchy)

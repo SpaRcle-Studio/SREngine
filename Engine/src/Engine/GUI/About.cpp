@@ -16,6 +16,13 @@ namespace SR_CORE_GUI_NS {
         : Super("About", SR_MATH_NS::IVector2(400, 300))
     { }
 
+    /**
+     * @brief Renders the "About" tab of the GUI.
+     *
+     * Displays the engine version, author and contributors, linked libraries, build version,
+     * executable and modules hash, and licensing information. When SR_COMMON_GIT_METADATA
+     * is defined, displays cached Git metadata (commit SHA, branch, author and commit time).
+     */
     void About::Draw() {
         if (SR_GRAPH_GUI_NS::Immediate::BeginTabBar("About")) {
             SR_GRAPH_GUI_NS::Immediate::Text("SpaRcle Engine v0.0.7");

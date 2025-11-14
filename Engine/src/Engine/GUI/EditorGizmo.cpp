@@ -237,6 +237,20 @@ namespace SR_CORE_GUI_NS {
         Super::EndGizmo();
     }
 
+    /**
+     * @brief Adjusts gizmo operation flags to match the first selected object's measurement space.
+     *
+     * Reads the first selected scene object and, if it is a valid GameObject, configures the gizmo's
+     * operation mask for 2D or 3D measurement:
+     * - If the object's measurement is Space2D and the current operation includes Rotate:
+     *   clears X, Y and Center flags and sets Rotate2D and Z.
+     * - If the object's measurement is Space2D and Rotate is not set:
+     *   sets Space2D and clears Z.
+     * - If the object's measurement is not Space2D:
+     *   clears Space2D and sets Z, X, Y and Center.
+     *
+     * After adjusting the operation mask, delegates further preparation to the base class.
+     */
     void EditorGizmo::PrepareGizmo() {
         auto&& pSceneObject = *m_hierarchy->GetSelected().begin();
         if (!pSceneObject) {

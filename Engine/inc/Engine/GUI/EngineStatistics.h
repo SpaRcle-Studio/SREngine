@@ -13,6 +13,11 @@ namespace SR_GRAPH_NS {
     class RenderQueue;
 }
 
+/**
+ * Represents submission parameters for a GPU queue used by EvoVulkan.
+ *
+ * Opaque forward declaration of submission information passed to functions that inspect or render details about command-buffer submissions.
+ */
 namespace EvoVulkan {
     struct SubmitInfo;
 }

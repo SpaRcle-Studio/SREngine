@@ -12,6 +12,14 @@
 #include <Utils/Events/Broadcaster.h>
 
 namespace SR_CORE_GUI_NS {
+    /**
+     * @brief Initializes the Settings widget and subscribes to render-settings updates.
+     *
+     * Constructs the EngineSettings widget (named "Settings") and registers a subscription
+     * to the render-settings-changed event. When that event fires, the subscription
+     * will invoke PrepareRenderPresets() to refresh available render presets. The
+     * subscription handle is stored in m_onRenderSettingsChanged.
+     */
     EngineSettings::EngineSettings()
         : SR_GRAPH_NS::GUI::Widget("Settings")
     {
