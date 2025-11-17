@@ -6,9 +6,9 @@
 #define SR_ENGINE_MATERIALEDITOR_H
 
 namespace SR_CORE_GUI_NS {
-    class MaterialEditor : public SR_GRAPH_NS::GUI::Widget {
-
-    };
+    // class MaterialEditor : public SR_GRAPH_NS::GUI::Widget {
+    //
+    // };
 }
 
 #endif //SR_ENGINE_MATERIALEDITOR_H

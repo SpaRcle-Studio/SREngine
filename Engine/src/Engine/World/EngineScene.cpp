@@ -2,6 +2,7 @@
 // Created by Monika on 22.05.2023.
 //
 
+#include <Engine/Engine.h>
 #include <Engine/World/EngineScene.h>
 #include <Engine/GUI/EditorGUI.h>
 

@@ -2,7 +2,10 @@
 // Created by Monika on 13.02.2025.
 //
 
+#include <Engine/GUI/PropertyDrawers/PathPropertyDrawer.h>
 #include <Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h>
+
+#include <Utils/FileSystem/FileDialog.h>
 
 #include <Enum/ImageAspect.hpp>
 #include <Enum/ImageFormat.hpp>

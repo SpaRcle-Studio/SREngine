@@ -2,25 +2,32 @@
 // Created by Monika on 11.02.2022.
 //
 
+#include <Engine/Engine.h>
+#include <Engine/GUI/SceneTools.h>
 #include <Engine/GUI/SceneViewer.h>
 #include <Engine/GUI/Hierarchy.h>
 #include <Engine/GUI/EditorCamera.h>
 #include <Engine/GUI/EditorGizmo.h>
 #include <Engine/GUI/Guizmo.h>
-#include <Graphics/Material/UniqueMaterial.h>
 
+#include <Graphics/Material/UniqueMaterial.h>
+#include <Graphics/Types/Camera.h>
+#include <Graphics/Types/Framebuffer.h>
+#include <Graphics/Window/Window.h>
+#include <Graphics/Render/RenderContext.h>
+#include <Graphics/Types/Geometry/Mesh3D.h>
+#include <Graphics/Render/RenderTechnique.h>
+#include <Graphics/Pass/ColorBufferPass.h>
+#include <Graphics/Pass/FlatColorBufferPass.h>
+
+#include <Physics/Utils/Utils.h>
+#include <Physics/3D/Rigidbody3D.h>
+
+#include <Utils/Game/CameraFlyMover.h>
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Common/Features.h>
 #include <Utils/ECS/Transform3D.h>
 #include <Utils/World/SceneLogic.h>
-
-#include <Graphics/Window/Window.h>
-#include <Graphics/Types/Camera.h>
-#include <Graphics/Types/Framebuffer.h>
-#include <Graphics/Render/RenderTechnique.h>
-#include <Graphics/Pass/ColorBufferPass.h>
-#include <Graphics/Pass/FlatColorBufferPass.h>
-#include <Utils/Game/CameraFlyMover.h>
 
 namespace SR_CORE_GUI_NS {
     SceneViewer::SceneViewer(const EnginePtr& pEngine, Hierarchy* hierarchy)

@@ -3,6 +3,9 @@
 //
 
 #include <Engine/GUI/EditorGizmo.h>
+#include <Engine/GUI/Hierarchy.h>
+#include <Engine/EngineCommands.h>
+#include <Engine/GUI/EditorGUI.h>
 
 #include <Utils/ECS/GameObject.h>
 

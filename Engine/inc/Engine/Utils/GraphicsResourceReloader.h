@@ -6,8 +6,7 @@
 #define SR_ENGINE_GRAPHICSRESOURCERELOADER_H
 
 #include <Utils/Resources/IResourceReloader.h>
-
-#include <utility>
+#include <Utils/Types/SafePointer.h>
 
 namespace SR_GRAPH_NS {
     class RenderContext;
@@ -27,7 +26,7 @@ namespace SR_CORE_NS {
         SR_NODISCARD bool Reload(const SR_UTILS_NS::Path& path, SR_UTILS_NS::ResourceInfo* pResourceInfo) override;
 
     private:
-        void OnResourceReloaded(const SR_UTILS_NS::IResource::Ptr& pResource);
+        void OnResourceReloaded(const SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::IResource>& pResource);
 
     private:
         ContextGetterFn m_contextGetter;

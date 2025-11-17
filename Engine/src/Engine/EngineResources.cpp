@@ -4,6 +4,7 @@
 
 #include <Engine/EngineResources.h>
 #include <Engine/Utils/GraphicsResourceReloader.h>
+#include <Engine/Engine.h>
 
 #include <Utils/Types/RawMesh.h>
 #include <Utils/SRLM/LogicalMachine.h>
@@ -14,6 +15,8 @@
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Types/Framebuffer.h>
 #include <Graphics/Animations/AnimationClip.h>
+#include <Graphics/Render/RenderContext.h>
+#include <Graphics/Material/FileMaterial.h>
 
 #include <Audio/RawSound.h>
 #include <Audio/Sound.h>

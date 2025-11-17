@@ -10,6 +10,7 @@
 namespace SR_GRAPH_NS {
     class IRenderTechnique;
     class MeshDrawerPass;
+    class RenderQueue;
 }
 
 namespace EvoVulkan {

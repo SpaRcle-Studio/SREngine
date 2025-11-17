@@ -2,6 +2,7 @@
 // Created by Monika on 03.02.2025.
 //
 
+#include <Engine/GUI/PropertyDrawers/ObjectPropertyDrawer.h>
 #include <Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h>
 
 #include <Codegen/PointerPropertyDrawer.generated.hpp>

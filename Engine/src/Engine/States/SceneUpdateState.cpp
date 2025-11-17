@@ -2,8 +2,9 @@
 // Created by Monika on 10.04.2024.
 //
 
-#include <Engine/States/SceneUpdateState.h>
 #include <Engine/Engine.h>
+#include <Engine/GUI/EditorGUI.h>
+#include <Engine/States/SceneUpdateState.h>
 #include <Engine/World/EngineScene.h>
 
 #include <Graphics/Render/RenderScene.h>

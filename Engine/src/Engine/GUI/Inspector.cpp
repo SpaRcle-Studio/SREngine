@@ -2,8 +2,26 @@
 // Created by Monika on 14.02.2022.
 //
 
+#include <Engine/GUI/EditorGUI.h>
+#include <Engine/GUI/Hierarchy.h>
 #include <Engine/GUI/Inspector.h>
 #include <Engine/EngineCommands.h>
+
+#include <Scripting/Base/Behaviour.h>
+
+#include <Physics/3D/Rigidbody3D.h>
+#include <Physics/2D/Rigidbody2D.h>
+
+#include <Audio/Types/AudioSource.h>
+
+#include <Graphics/Types/Geometry/Sprite.h>
+#include <Graphics/UI/Canvas.h>
+#include <Graphics/UI/Gizmo.h>
+#include <Graphics/Types/Geometry/ProceduralMesh.h>
+#include <Graphics/GUI/Utils.h>
+#include <Graphics/Types/Geometry/SkinnedMesh.h>
+#include <Graphics/Animations/Animator.h>
+#include <Graphics/Animations/BoneComponent.h>
 
 #include <Utils/ECS/Transform3D.h>
 #include <Utils/ECS/Transform2D.h>
@@ -13,21 +31,6 @@
 #include <Utils/World/ScenePrefabLogic.h>
 #include <Utils/Common/StoreUtils.h>
 #include <Utils/Events/Broadcaster.h>
-
-#include <Scripting/Base/Behaviour.h>
-
-#include <Physics/3D/Rigidbody3D.h>
-#include <Physics/2D/Rigidbody2D.h>
-
-#include <Graphics/Types/Geometry/Sprite.h>
-#include <Audio/Types/AudioSource.h>
-#include <Graphics/UI/Canvas.h>
-#include <Graphics/UI/Gizmo.h>
-#include <Graphics/Types/Geometry/ProceduralMesh.h>
-#include <Graphics/GUI/Utils.h>
-#include <Graphics/Types/Geometry/SkinnedMesh.h>
-#include <Graphics/Animations/Animator.h>
-#include <Graphics/Animations/BoneComponent.h>
 
 namespace SR_CORE_GUI_NS {
     Inspector::Inspector(Hierarchy* hierarchy)

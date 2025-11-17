@@ -4,6 +4,9 @@
 
 #include <Engine/GUI/About.h>
 
+#include <Utils/Common/ToString.h>
+#include <Utils/FileSystem/FileSystem.h>
+
 #ifdef SR_COMMON_GIT_METADATA
     #include <git.h>
 #endif

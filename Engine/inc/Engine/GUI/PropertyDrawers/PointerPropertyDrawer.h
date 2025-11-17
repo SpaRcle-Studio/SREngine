@@ -8,6 +8,8 @@
 #include <Engine/GUI/PropertyDrawer.h>
 
 namespace SR_CORE_GUI_NS {
+    class ObjectPropertyDrawer;
+
     class PointerPropertyDrawer : public PropertyDrawerBase {
         SR_CLASS()
     public:
@@ -25,7 +27,7 @@ namespace SR_CORE_GUI_NS {
         bool m_comboOpened = false;
         bool m_isOpened = false;
         bool m_openedByDefault = false;
-        ObjectPropertyDrawer::Ptr m_objectDrawer;
+        SR_HTYPES_NS::SharedPtr<ObjectPropertyDrawer> m_objectDrawer;
         std::vector<SR_UTILS_NS::StringAtom> m_typeNames;
 
     };

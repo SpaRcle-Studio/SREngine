@@ -7,6 +7,7 @@
 #include <Engine/Settings/EditorSettings.h>
 
 #include <Engine/GUI/EditorGUI.h>
+#include <Engine/GUI/SoundDebug.h>
 #include <Engine/GUI/AnimatorEditor.h>
 #include <Engine/GUI/Inspector.h>
 #include <Engine/GUI/VisualScriptEditor.h>
@@ -24,15 +25,6 @@
 #include <Engine/GUI/SceneTools.h>
 #include <Engine/EngineCommands.h>
 
-#include <Utils/Common/Features.h>
-#include <Utils/ECS/Prefab.h>
-#include <Utils/ECS/ComponentManager.h>
-#include <Utils/Platform/Platform.h>
-#include <Utils/Profile/TracyContext.h>
-#include <Utils/World/SceneUpdater.h>
-#include <Utils/World/ScenePrefabLogic.h>
-#include <Utils/Common/StringAtomLiterals.h>
-
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Window/Window.h>
@@ -42,6 +34,18 @@
 #include <Graphics/Lighting/SpotLight.h>
 #include <Graphics/Lighting/AreaLight.h>
 #include <Graphics/Lighting/ProbeLight.h>
+
+#include <Physics/3D/Rigidbody3D.h>
+
+#include <Utils/Common/Features.h>
+#include <Utils/ECS/Prefab.h>
+#include <Utils/ECS/ComponentManager.h>
+#include <Utils/Platform/Platform.h>
+#include <Utils/FileSystem/FileDialog.h>
+#include <Utils/Profile/TracyContext.h>
+#include <Utils/World/SceneUpdater.h>
+#include <Utils/World/ScenePrefabLogic.h>
+#include <Utils/Common/StringAtomLiterals.h>
 
 #include <Enum/EditorIcon.hpp>
 

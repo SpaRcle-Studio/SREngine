@@ -3,9 +3,17 @@
 //
 
 #include <Engine/GUI/SceneRunner.h>
+#include <Engine/GUI/EditorGUI.h>
+#include <Engine/Engine.h>
+
 #include <Utils/TaskManager/TaskManager.h>
+#include <Utils/Common/StoreUtils.h>
+
 #include <Audio/SoundManager.h>
+
 #include <Graphics/Overlay/ImGuiOverlay.h>
+#include <Graphics/Render/RenderContext.h>
+#include <Graphics/Pipeline/Pipeline.h>
 
 namespace SR_CORE_NS::GUI {
     SceneRunner::SceneRunner()
