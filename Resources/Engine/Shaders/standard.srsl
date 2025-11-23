@@ -76,6 +76,10 @@ void fragment() {
         COLOR = vec4(diffuseColor.rgb + normalShade, alpha);
     #endif
 #endif
+
+#ifdef SR_DEFINE_DEBUG_NORMALS
+    COLOR = vec4(NORMAL, 1.0);
+#endif
 }
 
 void vertex() {

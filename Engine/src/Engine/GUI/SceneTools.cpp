@@ -122,6 +122,10 @@ namespace SR_CORE_GUI_NS {
 
                     SR_GRAPH_GUI_NS::Immediate::Separator();
 
+                    optionFn("SR_DEFINE_DEBUG_NORMALS", "Normals");
+
+                    SR_GRAPH_GUI_NS::Immediate::Separator();
+
                     optionFn("SR_DEFINE_WIREFRAME", "Wireframe");
 
                     SR_GRAPH_GUI_NS::Immediate::EndCombo();

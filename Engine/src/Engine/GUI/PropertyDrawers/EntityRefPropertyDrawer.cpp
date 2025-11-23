@@ -3,6 +3,8 @@
 //
 
 #include <Engine/GUI/PropertyDrawers/EntityRefPropertyDrawer.h>
+#include <Engine/GUI/Hierarchy.h>
+#include <Engine/GUI/EditorGUI.h>
 
 #include <Utils/ECS/EntityRef.h>
 #include <Utils/ECS/SceneObject.h>
@@ -42,8 +44,20 @@ namespace SR_CORE_GUI_NS {
         if (auto&& pEntityRef = dynamic_cast<SR_UTILS_NS::EntityRefBase*>(value.GetSRClass())) {
             SR_UTILS_NS::StringAtom entityType = pEntityRef->GetTypeName();
             if (pEntityRef->GetEntity()) {
-                std::string formatted = " {} ({})"_format(pEntityRef->GetEntity()->GetEntityId(), entityType.ToCStr());
-                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 1.f, 1.f, 1.f), formatted.c_str());
+                SR_UTILS_NS::SceneObject::Ptr pSceneObject;
+                if (pEntityRef->GetEntity()->GetMeta()->IsSameOrInherited(SR_UTILS_NS::SceneObject::GetMetaStatic()->GetFactoryName())) {
+                    pSceneObject = pEntityRef->GetEntity().DynamicCast<SR_UTILS_NS::SceneObject>();
+                }
+                std::string formatted = pSceneObject ? pSceneObject->GetName().ToStringRef() : " {} ({})"_format(pEntityRef->GetEntity()->GetEntityId(), entityType.ToCStr());
+                SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor(1.f, 1.f, 1.f, 1.f));
+                if (SR_GRAPH_GUI_NS::Immediate::Button(formatted.c_str(), SR_MATH_NS::FVector2(context.fieldWidth, 0))) {
+                    if (pSceneObject) {
+                        if (auto&& pHierarchy = context.pEditor->GetWidget<SR_CORE_GUI_NS::Hierarchy>()) {
+                            pHierarchy->SelectGameObject(pSceneObject);
+                        }
+                    }
+                }
+                SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
             }
             else if (pEntityRef->GetEntityId() != SR_ID_INVALID) {
                 std::string formatted = " {} ({})"_format(pEntityRef->GetEntityId(), entityType.ToCStr());
@@ -58,7 +72,7 @@ namespace SR_CORE_GUI_NS {
                 if (auto&& payload = SR_GRAPH_GUI_NS::Immediate::AcceptDragDropPayload("Hierarchy##Payload")) {
                     if (auto&& pData = SR_GRAPH_GUI_NS::Immediate::GetDataFromDragDropPayload(payload)) {
                         std::list<SR_UTILS_NS::SceneObject::Ptr> sceneObjects = *(std::list<SR_UTILS_NS::SceneObject::Ptr>*)(pData);
-                        if (!sceneObjects.empty() && sceneObjects.front() && sceneObjects.front()->GetMeta()->GetFactoryName() == entityType) {
+                        if (!sceneObjects.empty() && sceneObjects.front() && sceneObjects.front()->GetMeta()->IsSameOrInherited(entityType)) {
                             if (context.onBeforeChangeCallback) {
                                 context.onBeforeChangeCallback(false);
                             }
