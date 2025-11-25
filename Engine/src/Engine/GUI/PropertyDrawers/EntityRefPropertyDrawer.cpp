@@ -50,6 +50,7 @@ namespace SR_CORE_GUI_NS {
                 }
                 std::string formatted = pSceneObject ? pSceneObject->GetName().ToStringRef() : " {} ({})"_format(pEntityRef->GetEntity()->GetEntityId(), entityType.ToCStr());
                 SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor(1.f, 1.f, 1.f, 1.f));
+                SR_GRAPH_GUI_NS::Immediate::PushID((void*)pEntityRef);
                 if (SR_GRAPH_GUI_NS::Immediate::Button(formatted.c_str(), SR_MATH_NS::FVector2(context.fieldWidth, 0))) {
                     if (pSceneObject) {
                         if (auto&& pHierarchy = context.pEditor->GetWidget<SR_CORE_GUI_NS::Hierarchy>()) {
@@ -57,6 +58,7 @@ namespace SR_CORE_GUI_NS {
                         }
                     }
                 }
+                SR_GRAPH_GUI_NS::Immediate::PopID();
                 SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
             }
             else if (pEntityRef->GetEntityId() != SR_ID_INVALID) {
