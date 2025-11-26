@@ -7863,7 +7863,7 @@ use tabs: true
 							7-v:type
 								8-s:Transform3D
 							7-o:ptr
-								8-o:skew
+								8-o:scale
 									9-v:x
 										10-f:0.0250000004
 									9-v:y
