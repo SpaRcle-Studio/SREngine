@@ -127,7 +127,7 @@ namespace SR_PTYPES_NS {
         if (m_mass == mass) {
             return;
         }
-        m_mass = SR_CLAMP(mass, SR_EPSILON, std::numeric_limits<float_t>::max());
+        m_mass = SR_CLAMP(mass, static_cast<float_t>(SR_EPSILON), std::numeric_limits<float_t>::max());
         UpdateInertia();
     }
 
