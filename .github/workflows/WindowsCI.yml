@@ -66,9 +66,10 @@ jobs:
 
       - if: env.buildSuccessful == 'true'
         name: Creating ${{ matrix.buildType }} artifact.
-        working-directory: ${{github.workspace}}/build/Engine
+        working-directory: ${{github.workspace}}/build/
         shell: bash
         run: |
+          ls -la
           mkdir -p SREngineBuild
           find . -maxdepth 1 -name "SREngine_*" -exec cp {} SREngineBuild/ \;
           ls -la SREngineBuild
@@ -78,7 +79,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: "Windows ${{ matrix.buildType }} Executable"
-          path: "${{github.workspace}}/build/Engine/SREngineBuild"
+          path: "${{github.workspace}}/build/Bin/SREngineBuild"
 
       #- if: env.buildSuccessful == 'false'
       #  name: Windows ${{ matrix.buildType }} Build Directory Artifact
