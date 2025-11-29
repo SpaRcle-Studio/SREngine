@@ -405,7 +405,7 @@ def parse_sparcle_enum(logger, parent_node, code_structure, namespaces):
         logger.log_fatal_error(f'Error: enum {parent_node.spelling} not found all fields! Found {all_found} of 6! Name: {name}, Variant: {variant}, Count: {count}, Type: {enum_type}, Class: {enum_class}, VA Args: {va_args}')
 
 
-def parse_sparcle_class(logger, parent_node, code_structure, namespaces):
+def parse_sparcle_class(logger, context: codegen_context.CodegenContext, parent_node, code_structure, namespaces):
     is_class_or_struct = parent_node.kind == clang.cindex.CursorKind.CLASS_DECL or parent_node.kind == clang.cindex.CursorKind.STRUCT_DECL
     if is_class_or_struct and parent_node.is_definition():
         if not has_static_function(parent_node, 'GetMetaStatic'):
@@ -415,6 +415,14 @@ def parse_sparcle_class(logger, parent_node, code_structure, namespaces):
         class_name = parent_node.spelling
         class_obj = reflection_utils.SpaRcleClass(class_name, namespaces)
         class_obj.path = parent_node.location.file.name
+
+        # classicify code module name by path
+        if class_obj.path:
+            class_path = sparcle_utils.normalize_path(class_obj.path)
+            for module_mask in context.modules_mask:
+                if module_mask[1] in class_path:
+                    class_obj.code_module_name = module_mask[0]
+                    break
 
         #if is_help_source:
         #    class_obj.is_help_source = True
@@ -625,7 +633,7 @@ def parse_header_tree(logger, deep, parent_node, code_structure, namespaces, con
         return
 
     parse_sparcle_enum(logger, parent_node, code_structure, namespaces)
-    parse_sparcle_class(logger, parent_node, code_structure, namespaces)
+    parse_sparcle_class(logger, context, parent_node, code_structure, namespaces)
 
     # Проверяем, является ли текущий узел пространством имен
     if parent_node.kind == clang.cindex.CursorKind.NAMESPACE:

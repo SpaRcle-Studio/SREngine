@@ -5,6 +5,8 @@
 #ifndef SR_ENGINE_EDITOR_CAMERA_H
 #define SR_ENGINE_EDITOR_CAMERA_H
 
+#include <Engine/stdInclude.h>
+
 #include <Graphics/Types/Camera.h>
 
 namespace SR_CORE_GUI_NS {

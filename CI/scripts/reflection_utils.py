@@ -158,6 +158,7 @@ class SpaRcleClass:
         self.variables = []
         self.methods: list[CPPMethod] = []
         self.path = None
+        self.code_module_name = None
         self.inherited_classes = []
         self.is_help_source = False
 

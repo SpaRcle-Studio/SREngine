@@ -81,6 +81,8 @@ if __name__ == "__main__":
 
     context.codegen_dir = sparcle_utils.normalize_path(os.path.abspath(args.codegen_dir.replace('\"', '')) + '/Codegen/Codegen') # double "Codegen" for cmake pretty include
 
+    context.initialize()
+
     logger.log_info(f'Codegen directory: {context.codegen_dir}')
     logger.log_info(f'Analyze directory: {context.analyze_dir}')
     logger.log_info(f'Root build directory: {context.build_dir}')

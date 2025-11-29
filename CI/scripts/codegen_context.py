@@ -1,3 +1,6 @@
+import json
+from pathlib import Path
+
 class CodegenContext:
     def __init__(self):
         self.resources_dir = ''
@@ -11,3 +14,11 @@ class CodegenContext:
         self.files_for_codegen = []
         self.valid_files_for_codegen = set()
         self.codegen_stack_trace = []
+        self.modules_mask = []
+
+    def initialize(self):
+        config_path = Path(self.config_dir) / 'codegen-modules.json'
+        with open(config_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            pairs = list(data["modules"].items())
+            self.modules_mask = pairs

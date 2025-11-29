@@ -5,6 +5,8 @@
 #ifndef SR_ENGINE_CORE_PROPERTY_DRAWER_H
 #define SR_ENGINE_CORE_PROPERTY_DRAWER_H
 
+#include <Engine/stdInclude.h>
+
 #include <Graphics/Material/BaseMaterial.h>
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/GUI/ImmediateGUI.h>

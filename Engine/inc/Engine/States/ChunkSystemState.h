@@ -5,6 +5,8 @@
 #ifndef SR_ENGINE_CORE_CHUNK_SYSTEM_STATE_H
 #define SR_ENGINE_CORE_CHUNK_SYSTEM_STATE_H
 
+#include <Engine/stdInclude.h>
+
 #include <Utils/TaskManager/ThreadWorker.h>
 #include <Utils/Types/Timer.h>
 

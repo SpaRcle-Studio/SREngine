@@ -5,6 +5,8 @@
 #ifndef SR_ENGINE_CORE_SCENE_UPDATE_STATE_H
 #define SR_ENGINE_CORE_SCENE_UPDATE_STATE_H
 
+#include <Engine/stdInclude.h>
+
 #include <Utils/TaskManager/ThreadWorker.h>
 
 namespace SR_CORE_NS {

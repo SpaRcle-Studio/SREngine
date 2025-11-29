@@ -354,7 +354,7 @@ def generate_class_meta_clone(f, class_obj: reflection_utils.SpaRcleClass, tabs)
     f.write('\t' * tabs + '}\n\n')
 
 
-def generate_class_meta(f, context: codegen_context.CodegenContext, class_structures, class_obj, tabs):
+def generate_class_meta(f, context: codegen_context.CodegenContext, class_structures, class_obj, tabs, dll_export_macro):
     if len(class_obj.inherited_classes) > 0:
         f.write('\t' * tabs + f'/// Include inherited classes.\n')
         for inherited_class in class_obj.inherited_classes:
@@ -592,11 +592,11 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
     tabs -= 1
     f.write('\t' * tabs + '};\n\n')
 
-    f.write(f'\t' * tabs + f'extern "C" SR_CODEGEN_DLL_API_EXPORT void RegisterClassMeta_{class_obj.name}() {{' + '\n')
+    f.write(f'\t' * tabs + f'extern "C" {dll_export_macro} void RegisterClassMeta_{class_obj.name}() {{' + '\n')
     f.write(f'\t' * (tabs + 1) + f'SR_UTILS_NS::Factory::Instance().Register<{class_name}>("{context.module_name}");' + '\n')
     f.write(f'\t' * tabs + f'}}\n\n')
 
-    f.write(f'\t' * tabs + f'extern "C" SR_CODEGEN_DLL_API_EXPORT void UnregisterClassMeta_{class_obj.name}() {{' + '\n')
+    f.write(f'\t' * tabs + f'extern "C" {dll_export_macro} void UnregisterClassMeta_{class_obj.name}() {{' + '\n')
     f.write(f'\t' * (tabs + 1) + f'SR_UTILS_NS::Factory::Instance().Unregister<{class_name}>();' + '\n')
     f.write(f'\t' * tabs + '}\n\n')
 
@@ -925,7 +925,17 @@ def generate_meta_module_core_code(logger: logger_utils.Logger, context: codegen
         f.write(f'#ifndef SR_CODEGEN_SPARCLE_MODULE_{context.module_name.upper()}_CORE_HPP' + '\n')
         f.write(f'#define SR_CODEGEN_SPARCLE_MODULE_{context.module_name.upper()}_CORE_HPP' + '\n\n')
 
-        f.write('#include <Utils/stdInclude.h>\n\n')
+        f.write('#include <Utils/stdInclude.h>\n')
+
+        already_included = set()
+        already_included.add('Utils')
+        for class_obj in class_structures:
+            if not class_obj.is_help_source and class_obj.code_module_name:
+                if class_obj.code_module_name not in already_included:
+                    already_included.add(class_obj.code_module_name)
+                    f.write(f'#include <{class_obj.code_module_name}/stdInclude.h>\n')
+        if len(already_included) > 1:
+            f.write(f'\n')
 
         f.write('namespace Codegen {\n')
 
@@ -933,8 +943,11 @@ def generate_meta_module_core_code(logger: logger_utils.Logger, context: codegen
 
         for class_obj in class_structures:
             if not class_obj.is_help_source:
-                f.write(tabs * "\t" + f'extern "C" SR_CODEGEN_DLL_API_IMPORT void RegisterClassMeta_{class_obj.name}();' + '\n')
-                f.write(tabs * "\t" + f'extern "C" SR_CODEGEN_DLL_API_IMPORT void UnregisterClassMeta_{class_obj.name}();' + '\n')
+                dll_export_macro = 'SR_CODEGEN_DLL_API_EXPORT'
+                if class_obj.code_module_name:
+                    dll_export_macro = f'SR_CODEGEN_DLL_API_EXPORT_{class_obj.code_module_name.upper()}_MODULE'
+                f.write(tabs * "\t" + f'extern "C" {dll_export_macro} void RegisterClassMeta_{class_obj.name}();' + '\n')
+                f.write(tabs * "\t" + f'extern "C" {dll_export_macro} void UnregisterClassMeta_{class_obj.name}();' + '\n')
 
         ############################### register #################################
         f.write('\n' + tabs * "\t" + f'void RegisterModule_{context.module_name}() {{' + '\n')
@@ -1069,6 +1082,11 @@ def generate_classes_code(logger: logger_utils.Logger, context: codegen_context.
 
                 _, ext = os.path.splitext(class_obj.path)
 
+                dll_export_macro = 'SR_CODEGEN_DLL_API_EXPORT'
+                if class_obj.code_module_name:
+                    f.write(f'/// Code module: {class_obj.code_module_name}' + '\n')
+                    dll_export_macro = f'SR_CODEGEN_DLL_API_EXPORT_{class_obj.code_module_name.upper()}_MODULE'
+
                 if ext == '.h':
                     f.write(f'#include "{os.path.abspath(os.path.normpath(class_obj.path))}"' + '\n\n')
 
@@ -1082,7 +1100,7 @@ def generate_classes_code(logger: logger_utils.Logger, context: codegen_context.
 
                 tabs = 0
 
-                generate_class_meta(f, context, class_structures, class_obj, tabs)
+                generate_class_meta(f, context, class_structures, class_obj, tabs, dll_export_macro)
 
                 if len(class_obj.namespaces) > 0:
                     tabs = 1
