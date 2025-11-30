@@ -102,12 +102,5 @@ jobs:
         name: Upload packed build
         uses: actions/upload-artifact@v4
         with:
-          name: "Windows ${{ matrix.buildType }} Packed Executable"
+          name: "Windows ${{ matrix.buildType }} SpaRcle Engine"
           path: "${{github.workspace}}/build/Bin/PackedBuild"
-
-      #- if: env.buildSuccessful == 'false'
-      #  name: Windows ${{ matrix.buildType }} Build Directory Artifact
-      #  uses: actions/upload-artifact@v4
-      #  with:
-      #    name: "Windows ${{ matrix.buildType }} Build Directory Artifact"
-      #    path: "${{github.workspace}}/build"

@@ -136,24 +136,42 @@ jobs:
           name: "SREngine ${{ matrix.buildType }} ${{ matrix.compiler }} ${{ matrix.unity == 'ON' && 'Unity' || 'NoUnity' }} Linux Build Trace Artifact"
           path: "${{github.workspace}}/CI/trace.json"
 
-      - name: Creating ${{ matrix.buildType }} artifact.
-        working-directory: ${{github.workspace}}/build/Engine
+      - if: env.buildSuccessful == 'true'
+        name: Pack executable with resources
+        working-directory: ${{ github.workspace }}/build/Bin
         shell: bash
         run: |
-          mkdir -p SREngineBuild
-          find . -maxdepth 1 -name "SREngine_*" -exec cp {} SREngineBuild/ \;
-          ls -la SREngineBuild
+          # Ищем один бинарник, начинающийся с SREngine_
+          BIN_FILE=$(find . -maxdepth 1 -type f -perm -u+x -name "SREngine_*" | head -n 1)
+
+          if [ -z "$BIN_FILE" ]; then
+            echo "Не найден ни один исполняемый файл SREngine_*"
+            exit 1
+          fi
+
+          echo "Нашёл бинарник: $BIN_FILE"
+
+          # Запускаем
+          "$BIN_FILE" --pack-with-res
+
+          # Ожидаемый packed файл: имя + "-packed"
+          PACKED_FILE="${BIN_FILE}-packed"
+
+          if [ ! -f "$PACKED_FILE" ]; then
+            echo "Файл $PACKED_FILE не появился. Значит packing не сработал."
+            exit 1
+          fi
+
+          echo "Packed файл создан: $PACKED_FILE"
+
+          mkdir -p PackedBuild
+          cp "$PACKED_FILE" PackedBuild/
+
+          ls -la PackedBuild
 
       - if: env.buildSuccessful == 'true'
-        name: Uploading a successful ${{ matrix.buildType }} build artifact.
+        name: Upload packed build
         uses: actions/upload-artifact@v4
         with:
-          name: "Linux ${{ matrix.buildType }} ${{ matrix.compiler }} ${{ matrix.unity == 'ON' && 'Unity' || 'NoUnity' }} Executable"
-          path: "${{github.workspace}}/build/Engine/SREngineBuild"
-
-      #- if: env.buildSuccessful == 'false'
-      #  name: Linux ${{ matrix.buildType }} Build Directory Artifact.
-      #  uses: actions/upload-artifact@v4
-      #  with:
-      #    name: "Linux ${{ matrix.buildType }} Build Directory Artifact"
-      #    path: "${{github.workspace}}/build"
+          name: "Linux ${{ matrix.buildType }} ${{ matrix.compiler }} ${{ matrix.unity == 'ON' && 'Unity' || 'NoUnity' }} SpaRcle Engine"
+          path: "${{github.workspace}}/build/Bin/PackedBuild"
