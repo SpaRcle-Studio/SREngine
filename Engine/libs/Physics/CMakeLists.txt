@@ -177,6 +177,10 @@ if (SR_PHYSICS_DLL_EXPORTS)
     target_compile_definitions(Physics PUBLIC SR_PHYSICS_DLL_EXPORTS)
 endif()
 
+if (SR_USE_PCH)
+    target_precompile_headers(Physics PRIVATE ${SR_COMMON_PCH_HEADER_PATH})
+endif()
+
 target_link_libraries(Physics PUBLIC ${SR_PHYSICS_LINK_LIBRARIES})
 
 target_include_directories(Physics PUBLIC inc)
