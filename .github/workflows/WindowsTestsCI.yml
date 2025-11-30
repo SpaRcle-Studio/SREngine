@@ -1,9 +1,18 @@
-name: SpaRcle Engine Windows Tests CI
-
 on:
   workflow_call:
+    inputs:
+      commitMessage:
+        required: true
+        type: string
+    secrets:
+      CITOKEN:
+        required: true
 
 jobs:
-  Preparing:
-    name: Tests.
+  TestsWindows:
+    name: Windows Tests.
     runs-on: windows-latest
+    steps:
+      - run: |
+          echo "Commit Message: ${{ inputs.commitMessage }}"
+        name: Debug log.

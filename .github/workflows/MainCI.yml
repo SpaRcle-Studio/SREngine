@@ -36,7 +36,11 @@ jobs:
   TestsWindowsJob:
     name: Windows Tests.
     needs: [BuildWindowsJob]
+    if: ${{ always() }}
     uses: ./.github/workflows/WindowsTestsCI.yml
+    with:
+      commitMessage: ${{github.event.head_commit.message}}
+    secrets: inherit
 
   BuildLinuxJob:
     name: Linux.
