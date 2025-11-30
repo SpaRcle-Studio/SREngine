@@ -1,0 +1,9 @@
+name: SpaRcle Engine Windows Tests CI
+
+on:
+  workflow_call:
+
+jobs:
+  Preparing:
+    name: Tests.
+    runs-on: windows-latest

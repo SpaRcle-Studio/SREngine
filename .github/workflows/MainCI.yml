@@ -33,6 +33,11 @@ jobs:
     needs: [Main]
     uses: ./.github/workflows/WindowsCI.yml
 
+  TestsWindowsJob:
+    name: Windows Tests.
+    needs: [BuildWindowsJob]
+    uses: ./.github/workflows/WindowsTestsCI.yml
+
   BuildLinuxJob:
     name: Linux.
     needs: [Main]
@@ -50,7 +55,7 @@ jobs:
 
   PostBuild:
     name: PostBuild.
-    needs: [BuildWindowsJob, BuildLinuxJob, BuildAndroidJob, BuildFlatpakJob]
+    needs: [TestsWindowsJob, BuildLinuxJob, BuildAndroidJob, BuildFlatpakJob]
     if: ${{ always() }}
     uses: ./.github/workflows/PostBuild.yml
     with:

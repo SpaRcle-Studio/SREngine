@@ -218,7 +218,7 @@ int PackFiles(const std::string& executablePath, const std::vector<std::string>&
 #if defined(WIN32)
     std::string packedFileName = executablePath.substr(0, executablePath.find_last_of('.')) + "-packed.exe";
 #elif defined(__linux__)
-    std::string packedFileName = executablePath.substr(0, executablePath.find_last_of('.')) + "-packed";
+    std::string packedFileName = executablePath + "-packed";
 #elif defined(__APPLE__)
     std::string packedFileName = executablePath.substr(0, executablePath.find_last_of('.')) + "-packed";
 #else
