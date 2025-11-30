@@ -133,7 +133,7 @@ jobs:
       - name: Uploading a ${{ matrix.buildType }} build trace artifact.
         uses: actions/upload-artifact@v4
         with:
-          name: "SREngine ${{ matrix.buildType }} ${{ matrix.compiler }} Linux Build Trace Artifact"
+          name: "SREngine ${{ matrix.buildType }} ${{ matrix.compiler }} ${{ matrix.unity == 'ON' && 'Unity' || 'NoUnity' }} Linux Build Trace Artifact"
           path: "${{github.workspace}}/CI/trace.json"
 
       - name: Creating ${{ matrix.buildType }} artifact.
@@ -148,7 +148,7 @@ jobs:
         name: Uploading a successful ${{ matrix.buildType }} build artifact.
         uses: actions/upload-artifact@v4
         with:
-          name: "Linux ${{ matrix.buildType }} ${{ matrix.compiler }} Unity(${{ matrix.unity }}) Executable"
+          name: "Linux ${{ matrix.buildType }} ${{ matrix.compiler }} ${{ matrix.unity == 'ON' && 'Unity' || 'NoUnity' }} Executable"
           path: "${{github.workspace}}/build/Engine/SREngineBuild"
 
       #- if: env.buildSuccessful == 'false'

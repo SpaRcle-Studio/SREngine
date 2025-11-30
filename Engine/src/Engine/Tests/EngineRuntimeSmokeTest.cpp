@@ -118,7 +118,7 @@ namespace SR_CORE_NS::Tests {
         SR_PLATFORM_NS::Sleep(5000);
 
         SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : third step - closing launcher");
-        pState->AddEngineAction([pLauncher](Engine& engine) {
+        pState->AddEngineAction([](Engine& engine) {
             SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : executing delayed action in DelayedActionsState - closing launcher.");
             engine.GetMainWindow()->Close();
         });
