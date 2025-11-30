@@ -5,6 +5,8 @@
 #include <Engine/Tests/EngineRuntimeSmokeTest.h>
 #include <Engine/LauncherEntryPoint.h>
 #include <Engine/States/DelayedActionsState.h>
+#include <Engine/Engine.h>
+#include <Engine/GUI/EditorGUI.h>
 #include <Engine/GUI/SceneRunner.h>
 #include <Engine/GUI/Hierarchy.h>
 
