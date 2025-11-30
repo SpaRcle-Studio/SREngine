@@ -5,14 +5,19 @@
 #ifndef SR_ENGINE_CORE_PROPERTY_DRAWER_H
 #define SR_ENGINE_CORE_PROPERTY_DRAWER_H
 
-#include <Engine/stdInclude.h>
+#include <Engine/macros.h>
 
-#include <Graphics/Material/BaseMaterial.h>
-#include <Graphics/Render/RenderContext.h>
-#include <Graphics/GUI/ImmediateGUI.h>
-
+#include <Utils/Types/SafePointer.h>
 #include <Utils/TypeTraits/SRClass.h>
 #include <Utils/Reflection/Property.h>
+
+namespace SR_UTILS_NS {
+    class Component;
+}
+
+namespace SR_GRAPH_NS {
+    class RenderContext;
+}
 
 namespace SR_CORE_GUI_NS {
     class EditorGUI;
@@ -71,7 +76,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_HTYPES_NS::Function<void(bool drag)> onBeforeChangeCallback;
         SR_UTILS_NS::Reflection::EditorPropertyParams editorPropertyParams;
-        SR_UTILS_NS::Component::Ptr pComponent;
+        SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::Component> pComponent;
         uint64_t propertyIndex = 0;
         SR_UTILS_NS::StringAtom customDisplayName;
         SR_UTILS_NS::Reflection::Value* pValue = nullptr;
@@ -156,10 +161,10 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-        SR_NODISCARD SR_GRAPH_NS::RenderContext::Ptr GetRenderContext() const;
+        SR_NODISCARD SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext> GetRenderContext() const;
 
     private:
-        mutable SR_GRAPH_NS::RenderContext::Ptr m_context;
+        mutable SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext> m_context;
 
     };
 

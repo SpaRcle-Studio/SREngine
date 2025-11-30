@@ -9,7 +9,7 @@
 #include <Graphics/Render/RenderScene.h>
 
 namespace SR_CORE_NS {
-    void VisualRegion::OnEnter() {
+    /*void VisualRegion::OnEnter() {
         Region::OnEnter();
     }
 
@@ -82,5 +82,5 @@ namespace SR_CORE_NS {
     void VisualRegion::ApplyOffset() {
         UpdateFacesPos();
         Region::ApplyOffset();
-    }
+    }*/
 }

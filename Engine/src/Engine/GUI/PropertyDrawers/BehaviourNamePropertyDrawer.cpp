@@ -4,6 +4,8 @@
 
 #include <Engine/GUI/PropertyDrawers/BehaviourNamePropertyDrawer.h>
 
+#include <Graphics/GUI/ImmediateGUI.h>
+
 #include <Scripting/Base/Behaviour.h>
 
 #include <Utils/Events/Broadcaster.h>

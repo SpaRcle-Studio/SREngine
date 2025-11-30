@@ -140,9 +140,9 @@ namespace SR_CORE_NS {
             return;
         }
 
-        if (auto&& pLogic = pScene->GetLogicBase().DynamicCast<SR_WORLD_NS::SceneCubeChunkLogic>()) {
-            pLogic->UpdateDebug();
-        }
+        //if (auto&& pLogic = pScene->GetLogicBase().DynamicCast<SR_WORLD_NS::SceneCubeChunkLogic>()) {
+        //    pLogic->UpdateDebug();
+        //}
 
         pScene.Unlock();
     }

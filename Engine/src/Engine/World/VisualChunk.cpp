@@ -11,7 +11,7 @@
 #include <Engine/Engine.h>
 
 namespace SR_CORE_NS {
-    VisualChunk::VisualChunk(SRChunkAllocArgs)
+    /*VisualChunk::VisualChunk(SRChunkAllocArgs)
         : SR_UTILS_NS::World::Chunk(SRChunkAllocVArgs)
     { }
 
@@ -128,5 +128,5 @@ namespace SR_CORE_NS {
 
     void VisualChunk::Reload() {
         Chunk::Reload();
-    }
+    }*/
 }

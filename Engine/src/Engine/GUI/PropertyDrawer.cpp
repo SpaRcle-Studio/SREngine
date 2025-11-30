@@ -6,6 +6,10 @@
 
 #include <Graphics/Material/UniqueMaterial.h>
 #include <Graphics/GUI/Utils.h>
+#include <Graphics/Render/RenderContext.h>
+#include <Graphics/GUI/ImmediateGUI.h>
+
+#include <Utils/Common/LexicalCast.h>
 
 #include <Codegen/PropertyDrawer.generated.hpp>
 

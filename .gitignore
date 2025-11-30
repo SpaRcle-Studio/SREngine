@@ -67,3 +67,4 @@ codegen.spec
 /Platform/Android/app/src/main/res/drawable
 /Platform/Android/app/src/main/res/drawable-v24
 /Platform/Android/app/src/main/res/mipmap-hdpi
+/CI/trace.json

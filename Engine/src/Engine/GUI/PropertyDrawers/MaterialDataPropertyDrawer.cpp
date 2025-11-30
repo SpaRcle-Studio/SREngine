@@ -5,6 +5,9 @@
 #include <Engine/GUI/PropertyDrawers/PathPropertyDrawer.h>
 #include <Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h>
 
+#include <Graphics/GUI/ImmediateGUI.h>
+#include <Graphics/Material/MaterialData.h>
+
 #include <Utils/FileSystem/FileDialog.h>
 
 #include <Enum/ImageAspect.hpp>

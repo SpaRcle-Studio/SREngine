@@ -16,7 +16,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     void WorldEdit::Draw() {
-        if (m_scene.TryRecursiveLockIfValid()) {
+        /*if (m_scene.TryRecursiveLockIfValid()) {
             auto&& pLogic = m_scene->GetLogicBase().DynamicCast<SR_WORLD_NS::SceneCubeChunkLogic>();
 
             if (!pLogic) {
@@ -37,7 +37,7 @@ namespace SR_CORE_GUI_NS {
             auto&& editorRenderTechniquePath = dataStorage.GetValueDef<SR_UTILS_NS::Path>("EditorRenderTechnique", "");
             if (SR_GRAPH_GUI_NS::Immediate::InputText("Editor Render Technique", editorRenderTechniquePath.ToStringPtr())) {
                 dataStorage.SetValue("EditorRenderTechnique", editorRenderTechniquePath);
-            }
+            }*/
 
             /*if (const auto&& observer = pLogic->GetObserver()) {
                 const auto offset = observer->m_offset;
@@ -71,7 +71,7 @@ namespace SR_CORE_GUI_NS {
                 }
             }*/
 
-            m_scene.Unlock();
-        }
+        //    m_scene.Unlock();
+        //}
     }
 }

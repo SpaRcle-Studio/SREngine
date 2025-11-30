@@ -10,6 +10,7 @@
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/Serialization/SRASerialization.h>
 #include <Utils/FileSystem/FileDialog.h>
+#include <Utils/TypeTraits/SRClassMeta.h>
 
 namespace SR_CORE_GUI_NS {
     CreateNewProject::CreateNewProject()

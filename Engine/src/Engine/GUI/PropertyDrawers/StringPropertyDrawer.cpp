@@ -4,6 +4,11 @@
 
 #include <Engine/GUI/PropertyDrawers/StringPropertyDrawer.h>
 
+#include <Graphics/GUI/ImmediateGUI.h>
+
+#include <Utils/Localization/LocalizationManager.h>
+#include <Utils/Localization/Encoding.h>
+
 #include <Codegen/StringPropertyDrawer.generated.hpp>
 
 namespace SR_CORE_GUI_NS {

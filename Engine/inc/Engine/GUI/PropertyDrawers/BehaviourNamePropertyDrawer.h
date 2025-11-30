@@ -7,6 +7,8 @@
 
 #include <Engine/GUI/PropertyDrawer.h>
 
+#include <Utils/Common/SubscriptionHolder.h>
+
 namespace SR_CORE_GUI_NS {
     class BehaviourNamePropertyDrawer : public PropertyDrawerBase {
         SR_CLASS()

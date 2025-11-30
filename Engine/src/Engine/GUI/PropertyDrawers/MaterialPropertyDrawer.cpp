@@ -4,6 +4,8 @@
 
 #include <Engine/GUI/PropertyDrawers/MaterialPropertyDrawer.h>
 
+#include <Graphics/Material/BaseMaterial.h>
+
 #include <Codegen/MaterialPropertyDrawer.generated.hpp>
 
 namespace SR_CORE_GUI_NS {

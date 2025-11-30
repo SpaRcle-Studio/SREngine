@@ -1092,7 +1092,6 @@ def generate_classes_code(logger: logger_utils.Logger, context: codegen_context.
 
                 f.write('#include <Utils/Reflection/Property.h>\n')
                 f.write('#include <Utils/Reflection/SRClassUtils.h>\n')
-                f.write('#include <Utils/TypeTraits/ClassDB.h>\n')
                 f.write('#include <Utils/TypeTraits/SRClass.h>\n')
                 f.write('#include <Utils/TypeTraits/Factory.h>\n')
                 f.write('#include <Utils/TypeTraits/SRClassMeta.h>\n')

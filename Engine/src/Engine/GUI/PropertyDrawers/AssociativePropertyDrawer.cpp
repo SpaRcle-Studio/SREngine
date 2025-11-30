@@ -4,6 +4,8 @@
 
 #include <Engine/GUI/PropertyDrawers/AssociativePropertyDrawer.h>
 
+#include <Graphics/GUI/ImmediateGUI.h>
+
 #include <Codegen/AssociativePropertyDrawer.generated.hpp>
 
 namespace SR_CORE_GUI_NS {

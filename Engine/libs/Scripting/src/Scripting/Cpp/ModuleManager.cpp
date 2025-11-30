@@ -6,6 +6,7 @@
 #include <Scripting/Cpp/ScriptSystem.h>
 
 #include <Utils/Events/Broadcaster.h>
+#include <Utils/TypeTraits/SRClassMeta.h>
 
 namespace SR_SCRIPTING_NS {
     void CppBehaviourInstance::OnBehaviourUnloaded(ManagerPasskey) {

@@ -5,6 +5,11 @@
 #include <Engine/GUI/PropertyDrawers/ObjectPropertyDrawer.h>
 #include <Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h>
 
+#include <Graphics/GUI/ImmediateGUI.h>
+
+#include <Utils/Serialization/SRASerialization.h>
+#include <Utils/Common/StringUtils.h>
+
 #include <Codegen/PointerPropertyDrawer.generated.hpp>
 
 namespace SR_CORE_GUI_NS {

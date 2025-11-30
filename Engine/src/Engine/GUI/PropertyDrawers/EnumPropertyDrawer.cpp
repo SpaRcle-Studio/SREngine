@@ -4,6 +4,8 @@
 
 #include <Engine/GUI/PropertyDrawers/EnumPropertyDrawer.h>
 
+#include <Graphics/GUI/ImmediateGUI.h>
+
 #include <Codegen/EnumPropertyDrawer.generated.hpp>
 
 namespace SR_CORE_GUI_NS {

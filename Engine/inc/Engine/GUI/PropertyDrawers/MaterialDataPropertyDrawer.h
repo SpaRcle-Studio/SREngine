@@ -8,6 +8,11 @@
 #include <Engine/GUI/PropertyDrawers/ObjectPropertyDrawer.h>
 #include <Engine/GUI/PropertyDrawers/EnumPropertyDrawer.h>
 
+namespace SR_GRAPH_NS {
+    struct MaterialShaderData;
+    struct MaterialShaderProperty;
+}
+
 namespace SR_CORE_GUI_NS {
     class MaterialDataPropertyDrawer final : public ObjectPropertyDrawer {
         using Super = ObjectPropertyDrawer;

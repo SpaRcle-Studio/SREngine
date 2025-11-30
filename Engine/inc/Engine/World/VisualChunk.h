@@ -21,7 +21,7 @@ namespace SR_WORLD_NS {
 }
 
 namespace SR_CORE_NS {
-    class VisualChunk : public SR_WORLD_NS::Chunk {
+    /*class VisualChunk : public SR_WORLD_NS::Chunk {
         using RenderScenePtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::RenderScene>;
     public:
         explicit VisualChunk(SRChunkAllocArgs);
@@ -45,7 +45,7 @@ namespace SR_CORE_NS {
 
         void Update(float_t dt) override;
 
-    };
+    };*/
 }
 
 #endif //SR_ENGINE_VISUALCHUNK_H

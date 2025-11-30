@@ -4,6 +4,10 @@
 
 #include <Engine/GUI/PropertyDrawers/RectPropertyDrawer.h>
 
+#include <Graphics/GUI/ImmediateGUI.h>
+
+#include <Utils/Common/StringUtils.h>
+
 #include <Codegen/RectPropertyDrawer.generated.hpp>
 
 namespace SR_CORE_GUI_NS {

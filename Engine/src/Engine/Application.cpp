@@ -25,6 +25,7 @@
 #include <Physics/PhysicsLib.h>
 
 #include <Utils/Debug.h>
+#include <Utils/Common/Numeric.h>
 #include <Utils/Common/CmdOptions.h>
 #include <Utils/TaskManager/TaskManager.h>
 #include <Utils/World/SceneAllocator.h>

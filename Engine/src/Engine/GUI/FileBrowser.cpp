@@ -18,12 +18,14 @@
 #include <Graphics/Overlay/ImGuiOverlay.h>
 #include <Graphics/Render/RenderTechnique.h>
 #include <Graphics/Pipeline/Pipeline.h>
+#include <Graphics/Render/RenderContext.h>
 
 #include <Utils/ECS/Prefab.h>
 #include <Utils/Common/StoreUtils.h>
 #include <Utils/FileSystem/Path.h>
 #include <Utils/Common/VectorUtils.h>
 #include <Utils/Debug.h>
+#include <Utils/TypeTraits/SRClassMeta.h>
 #include <Utils/Resources/ResourceManager.h>
 
 namespace SR_CORE_NS::GUI {
