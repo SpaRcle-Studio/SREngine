@@ -22,11 +22,11 @@ namespace SR_CORE_GUI_NS {
     public:
         void SetScene(const SR_WORLD_NS::Scene::Ptr &scene);
 
-    private:
-        void Draw() override;
-
         bool PlayScene();
         void ReturnScene();
+
+    private:
+        void Draw() override;
 
         SR_NODISCARD EditorGUI* GetEditor() const;
 

@@ -17,6 +17,9 @@ namespace SR_CORE_NS {
     class Launcher : public SR_CORE_NS::Application {
         using Super = SR_CORE_NS::Application;
     public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<Launcher>;
+
+    public:
         LauncherInitStatus InitLauncher();
 
     private:

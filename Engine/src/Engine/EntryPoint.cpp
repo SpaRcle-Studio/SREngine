@@ -3,10 +3,9 @@
 //
 
 #include <Engine/EntryPoint.h>
-#include <Engine/Launcher.h>
+#include <Engine/LauncherEntryPoint.h>
 
 #include <Utils/Common/CLIManager.h>
-#include <Utils/Resources/ResourceManager.h>
 #include <Utils/Tests/TestManager.h>
 #include <Utils/Profile/TracyContext.h>
 
@@ -42,42 +41,7 @@ int SREngineEntryPoint(int argc, char** argv) {
         }
     }
 
-    int32_t code = 0;
-
-    SR_HTYPES_NS::SharedPtr pLauncher = new SR_CORE_NS::Launcher();
-
-    auto&& launcherInitStatus = pLauncher->InitLauncher();
-
-    if (!SR_UTILS_NS::ResourceManager::Instance().IsInitialized()) {
-        if (!SR_UTILS_NS::ResourceManager::Instance().Initialize(pLauncher->GetResourcesPath(), pLauncher->GetEngineResourcesPath())) {
-            SR_PLATFORM_NS::WriteConsoleError("Failed to initialize resources manager!");
-            code = 1;
-        }
-    }
-
-    if (launcherInitStatus == SR_CORE_NS::LauncherInitStatus::Error) {
-        SR_PLATFORM_NS::WriteConsoleError("Failed to initialize launcher!\n");
-        code = 2;
-    }
-
-    if (code == 0 && !pLauncher->EarlyInit()) {
-        SR_ERROR("Failed to early initialize application!");
-        code = 3;
-    }
-
-    if (code == 0 && !pLauncher->Init()) {
-        SR_ERROR("Failed to initialize application!");
-        code = 4;
-    }
-
-    if (code == 0 && !pLauncher->Execute()) {
-        SR_ERROR("Failed to execute application!");
-        code = 5;
-    }
-
-    pLauncher.AutoFree([](auto&& pData) {
-        delete pData;
-    });
+    const int code = LauncherEntryPoint();
 
     ShutdownApplication();
 

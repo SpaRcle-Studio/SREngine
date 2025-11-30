@@ -90,6 +90,7 @@ namespace SR_CORE_NS {
         SR_NODISCARD const ScenePtr& GetScene() const;
         SR_NODISCARD const RenderContextPtr& GetRenderContext() const { return m_renderContext; }
         SR_NODISCARD const RenderScenePtr& GetRenderScene() const;
+        SR_NODISCARD const SR_UTILS_NS::ThreadsWorker::Ptr& GetThreadsWorker() const { return m_threadsWorker; }
         SR_NODISCARD const PhysicsScenePtr& GetPhysicsScene() const;
         SR_NODISCARD WindowPtr GetMainWindow() const { return m_windows.empty() ? nullptr : m_windows.front(); }
         SR_NODISCARD WindowPtr GetFocusedWindow() const;

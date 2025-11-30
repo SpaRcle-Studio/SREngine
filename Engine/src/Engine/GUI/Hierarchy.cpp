@@ -591,4 +591,8 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::WindowTreeNodeSetOpen(true, id);
         ExpandPath(gm->GetParent());
     }
+
+    SR_GRAPH_NS::GUI::Widget* Hierarchy::GetSceneRunnerWidget() const noexcept {
+        return m_sceneRunnerWidget;
+    }
 }

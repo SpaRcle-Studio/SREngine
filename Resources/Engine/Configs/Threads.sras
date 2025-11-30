@@ -47,6 +47,10 @@ use tabs: true
 										10-k:i
 											11-o:d
 												12-v:name
+													13-s:DelayedActionsState
+										10-k:i
+											11-o:d
+												12-v:name
 													13-s:DrawState
 												12-a:startConditions
 													13-k:i
@@ -107,6 +111,10 @@ use tabs: true
 											11-o:d
 												12-v:name
 													13-s:PollEventsState
+										10-k:i
+											11-o:d
+												12-v:name
+													13-s:DelayedActionsState
 										10-k:i
 											11-o:d
 												12-v:name
