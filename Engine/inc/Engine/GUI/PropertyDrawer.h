@@ -59,16 +59,7 @@ namespace SR_CORE_GUI_NS {
         SR_NODISCARD SR_UTILS_NS::StringAtom GetPropertyDisplayName() const { return pProperty ? pProperty->GetEditorParams().GetDisplayName() : customDisplayName; }
         SR_NODISCARD const SR_UTILS_NS::Reflection::EditorPropertyParams& GetEditorParams() const { return pProperty ? pProperty->GetEditorParams() : editorPropertyParams; }
 
-        SR_NODISCARD SR_UTILS_NS::Reflection::Value GetValue() const {
-            if (pValue) {
-                if (pValue->IsEmbedded() || pValue->IsDynamic()) {
-                    return pValue->Ref();
-                }
-                return *pValue;
-            }
-
-            return pProperty->Get(pOwner).DetachIfConst();
-        }
+        SR_NODISCARD SR_UTILS_NS::Reflection::Value GetValue() const;
 
         SR_NODISCARD bool HasExplicitSetter() const {
             return pProperty && pProperty->HasExplicitSetter();
@@ -124,42 +115,9 @@ namespace SR_CORE_GUI_NS {
         }
 
     protected:
-        static void SetValue(const PropertyDrawerContext& context, const PropertyDrawerFeedback& feedback, const SR_UTILS_NS::Reflection::Value& value) {
-            if (!context.pValue && feedback.isChanged && (!value.IsRef() || context.HasExplicitSetter())) {
-                context.GetProperty().Set(context.pOwner, value);
-            }
-        }
+        static void SetValue(const PropertyDrawerContext& context, const PropertyDrawerFeedback& feedback, const SR_UTILS_NS::Reflection::Value& value);
 
-        static void SetReflectedValue(const PropertyDrawerContext& context, PropertyDrawerFeedback& feedback, const SR_UTILS_NS::Reflection::Value& value, bool drag = false) {
-            if (context.onBeforeChangeCallback) {
-                context.onBeforeChangeCallback(drag);
-            }
-
-            feedback.isChanged = true;
-
-            if (!context.pValue) {
-                context.GetProperty().Set(context.pOwner, value);
-            }
-            else {
-                SRAssert2(value.SizeOf() == context.pValue->SizeOf(), "PropertyDrawerBase::SetReflectedValue() : size mismatch!");
-                std::memcpy(context.pValue->Data(), value.Data(), value.SizeOf());
-            }
-        }
-
-        template<typename MappedVal, typename NewVal> static void SetMappedValue(const PropertyDrawerContext& context, PropertyDrawerFeedback& feedback, MappedVal pMapped, NewVal value, bool drag = false) {
-            if (context.onBeforeChangeCallback) {
-                context.onBeforeChangeCallback(drag);
-            }
-
-            feedback.isChanged = true;
-
-            if (!context.pValue) {
-                context.GetProperty().Set(context.pOwner, SR_UTILS_NS::Reflection::Value::Create(value));
-            }
-            else {
-                *pMapped = value;
-            }
-        }
+        static void SetReflectedValue(const PropertyDrawerContext& context, PropertyDrawerFeedback& feedback, const SR_UTILS_NS::Reflection::Value& value, bool drag = false);
 
         SR_NODISCARD SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext> GetRenderContext() const;
 

@@ -3,6 +3,7 @@
 //
 
 #include <Engine/GUI/PropertyDrawers/StringPropertyDrawer.h>
+#include <Engine/GUI/PropertyDrawers/PropertyDrawerUtils.h>
 
 #include <Graphics/GUI/ImmediateGUI.h>
 
@@ -44,7 +45,7 @@ namespace SR_CORE_GUI_NS {
                 SR_GRAPH_GUI_NS::Immediate::InputText("##Input", &copy);
 
                 if (SR_GRAPH_GUI_NS::Immediate::IsItemDeactivatedAfterEdit()) {
-                    SetMappedValue(context, feedback, pString, copy);
+                    SetPropertyDrawerMappedValue(context, feedback, pString, copy);
                 }
             }
             else {
@@ -72,7 +73,7 @@ namespace SR_CORE_GUI_NS {
                 SR_GRAPH_GUI_NS::Immediate::InputText("##Input", &str);
 
                 if (SR_GRAPH_GUI_NS::Immediate::IsItemDeactivatedAfterEdit()) {
-                    SetMappedValue(context, feedback, pStringAtom, SR_UTILS_NS::StringAtom(str));
+                    SetPropertyDrawerMappedValue(context, feedback, pStringAtom, SR_UTILS_NS::StringAtom(str));
                 }
             }
             else {
@@ -91,7 +92,7 @@ namespace SR_CORE_GUI_NS {
                 }
 
                 if (SR_GRAPH_GUI_NS::Immediate::IsItemDeactivatedAfterEdit()) {
-                    SetMappedValue(context, feedback, pUnicodeString, SR_HTYPES_NS::UnicodeString(SR_UTILS_NS::Localization::UtfToUtf<char32_t, char>(text)));
+                    SetPropertyDrawerMappedValue(context, feedback, pUnicodeString, SR_HTYPES_NS::UnicodeString(SR_UTILS_NS::Localization::UtfToUtf<char32_t, char>(text)));
                 }
             }
             else {

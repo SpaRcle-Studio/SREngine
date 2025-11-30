@@ -10,10 +10,22 @@
 #include <Graphics/GUI/ImmediateGUI.h>
 
 #include <Utils/Common/LexicalCast.h>
+#include <Utils/Reflection/Value.h>
 
 #include <Codegen/PropertyDrawer.generated.hpp>
 
 namespace SR_CORE_GUI_NS {
+    SR_UTILS_NS::Reflection::Value PropertyDrawerContext::GetValue() const {
+        if (pValue) {
+            if (pValue->IsEmbedded() || pValue->IsDynamic()) {
+                return pValue->Ref();
+            }
+            return *pValue;
+        }
+
+        return pProperty->Get(pOwner).DetachIfConst();
+    }
+
     SR_UTILS_NS::StringAtom GetValueInspector(const SR_UTILS_NS::Reflection::Value& value) {
         if (value.IsBitMap()) {
             return "BitMapPropertyDrawer";
@@ -85,6 +97,28 @@ namespace SR_CORE_GUI_NS {
         m_context = SR_THIS_THREAD->GetContext()->GetValue<SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext>>();
         SRAssert2(m_context, "Failed to get render context!");
         return m_context;
+    }
+
+    void PropertyDrawerBase::SetValue(const PropertyDrawerContext& context, const PropertyDrawerFeedback& feedback, const SR_UTILS_NS::Reflection::Value& value) {
+        if (!context.pValue && feedback.isChanged && (!value.IsRef() || context.HasExplicitSetter())) {
+            context.GetProperty().Set(context.pOwner, value);
+        }
+    }
+
+    void PropertyDrawerBase::SetReflectedValue(const PropertyDrawerContext& context, PropertyDrawerFeedback& feedback, const SR_UTILS_NS::Reflection::Value& value, bool drag) {
+        if (context.onBeforeChangeCallback) {
+            context.onBeforeChangeCallback(drag);
+        }
+
+        feedback.isChanged = true;
+
+        if (!context.pValue) {
+            context.GetProperty().Set(context.pOwner, value);
+        }
+        else {
+            SRAssert2(value.SizeOf() == context.pValue->SizeOf(), "PropertyDrawerBase::SetReflectedValue() : size mismatch!");
+            std::memcpy(context.pValue->Data(), value.Data(), value.SizeOf());
+        }
     }
 
     PropertyDrawerFeedback BoolPropertyDrawer::Draw(const PropertyDrawerContext& context) {

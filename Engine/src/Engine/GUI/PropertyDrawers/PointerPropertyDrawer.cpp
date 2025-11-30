@@ -9,6 +9,7 @@
 
 #include <Utils/Serialization/SRASerialization.h>
 #include <Utils/Common/StringUtils.h>
+#include <Utils/Serialization/Serializable.h>
 
 #include <Codegen/PointerPropertyDrawer.generated.hpp>
 

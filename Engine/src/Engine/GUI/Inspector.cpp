@@ -31,6 +31,7 @@
 #include <Utils/World/ScenePrefabLogic.h>
 #include <Utils/Common/StoreUtils.h>
 #include <Utils/Events/Broadcaster.h>
+#include <Utils/Reflection/Value.h>
 
 namespace SR_CORE_GUI_NS {
     Inspector::Inspector(Hierarchy* hierarchy)

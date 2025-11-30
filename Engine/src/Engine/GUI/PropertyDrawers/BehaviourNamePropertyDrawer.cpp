@@ -3,6 +3,7 @@
 //
 
 #include <Engine/GUI/PropertyDrawers/BehaviourNamePropertyDrawer.h>
+#include <Engine/GUI/PropertyDrawers/PropertyDrawerUtils.h>
 
 #include <Graphics/GUI/ImmediateGUI.h>
 
@@ -98,7 +99,7 @@ namespace SR_CORE_GUI_NS {
                 }
 
                 if (selectedIndex && *pStringAtom != m_existingNames[selectedIndex.value()]) {
-                    SetMappedValue(context, feedback, pStringAtom, m_existingNames[selectedIndex.value()]);
+                    SetPropertyDrawerMappedValue(context, feedback, pStringAtom, m_existingNames[selectedIndex.value()]);
                 }
             }
             else {

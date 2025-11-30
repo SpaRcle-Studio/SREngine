@@ -4,7 +4,9 @@
 
 #include <Engine/GUI/AssetInspector.h>
 #include <Engine/GUI/EditorGUI.h>
+
 #include <Utils/TypeTraits/SRClassMeta.h>
+#include <Utils/Reflection/Value.h>
 
 namespace SR_CORE_GUI_NS {
     AssetInspector::AssetInspector()

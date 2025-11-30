@@ -162,7 +162,7 @@ def generate_class_meta_save(f, class_obj: reflection_utils.SpaRcleClass, tabs):
             f.write('\t' * tabs + f'if (serializer.IsWriteVersion()) {{\n')
             f.write('\t' * (tabs + 1) + f'const uint64_t version = obj.GetMeta()->GetVersion();\n')
             f.write('\t' * (tabs + 1) + f'if (version != 0) {{\n')
-            f.write('\t' * (tabs + 2) + f'static constexpr SR_UTILS_NS::SerializationId keyName_version = SR_UTILS_NS::SerializationId::Create("@version");\n')
+            f.write('\t' * (tabs + 2) + f'static const SR_UTILS_NS::SerializationId keyName_version = SR_UTILS_NS::SerializationId::CreateFromString("@version");\n')
             f.write('\t' * (tabs + 2) + f'SR_UTILS_NS::Serialization::Save(serializer, obj.GetMeta()->GetVersion(), keyName_version);\n')
             f.write('\t' * (tabs + 1) + f'}}\n')
             f.write('\t' * tabs + f'}}\n')
@@ -212,7 +212,7 @@ def generate_class_meta_save(f, class_obj: reflection_utils.SpaRcleClass, tabs):
             else:
                 f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || !SR_UTILS_NS::IsDefault(propValue))) {{\n')
 
-            f.write('\t' * (tabs + 2) + f'static constexpr SR_UTILS_NS::SerializationId keyName_{prop.serialize_name} = SR_UTILS_NS::SerializationId::Create("{prop.serialize_name}");\n')
+            f.write('\t' * (tabs + 2) + f'static const SR_UTILS_NS::SerializationId keyName_{prop.serialize_name} = SR_UTILS_NS::SerializationId::CreateFromString("{prop.serialize_name}");\n')
             f.write('\t' * (tabs + 2) + f'SR_UTILS_NS::Serialization::Save(serializer, propValue, keyName_{prop.serialize_name});\n')
 
             f.write('\t' * (tabs + 1) + f'}}\n')
@@ -221,7 +221,7 @@ def generate_class_meta_save(f, class_obj: reflection_utils.SpaRcleClass, tabs):
                 f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || value.{prop.name} != GetDefault_{prop.serialize_name}())) {{\n')
             else:
                 f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || !SR_UTILS_NS::IsDefault(value.{prop.name}))) {{\n')
-            f.write('\t' * (tabs + 2) + f'static constexpr SR_UTILS_NS::SerializationId keyName_{prop.serialize_name} = SR_UTILS_NS::SerializationId::Create("{prop.serialize_name}");\n')
+            f.write('\t' * (tabs + 2) + f'static const SR_UTILS_NS::SerializationId keyName_{prop.serialize_name} = SR_UTILS_NS::SerializationId::CreateFromString("{prop.serialize_name}");\n')
             f.write('\t' * (tabs + 2) + f'SR_UTILS_NS::Serialization::Save(serializer, value.{prop.name}, keyName_{prop.serialize_name});\n')
             f.write('\t' * (tabs + 1) + f'}}\n')
 
@@ -239,7 +239,7 @@ def generate_class_meta_load(f, class_obj, tabs):
             f.write('\t' * tabs + 'bool Load(SR_UTILS_NS::IDeserializer& deserializer, SR_UTILS_NS::Serializable& obj) const final {\n')
             tabs += 1
 
-            f.write('\t' * (tabs) + 'static constexpr SR_UTILS_NS::SerializationId keyName_version = SR_UTILS_NS::SerializationId::Create("@version");\n')
+            f.write('\t' * (tabs) + 'static const SR_UTILS_NS::SerializationId keyName_version = SR_UTILS_NS::SerializationId::CreateFromString("@version");\n')
             f.write('\t' * (tabs) + 'uint64_t version = 0;\n')
             f.write('\t' * (tabs) + 'uint64_t currentVersion = obj.GetMeta()->GetVersion();\n')
             f.write('\t' * (tabs) + 'SR_UTILS_NS::Serialization::Load(deserializer, version, keyName_version);\n')
@@ -289,7 +289,7 @@ def generate_class_meta_load(f, class_obj, tabs):
             cond_str = " && ".join(can_load_conditions)
             f.write('\t' * tabs + f'if ({cond_str}) {{\n')
 
-        f.write('\t' * (tabs + 1) + f'static constexpr SR_UTILS_NS::SerializationId keyName_{prop.serialize_name} = SR_UTILS_NS::SerializationId::Create("{prop.serialize_name}");' + '\n')
+        f.write('\t' * (tabs + 1) + f'static const SR_UTILS_NS::SerializationId keyName_{prop.serialize_name} = SR_UTILS_NS::SerializationId::CreateFromString("{prop.serialize_name}");' + '\n')
 
         if prop.setter:
             if prop.getter:
@@ -1091,6 +1091,7 @@ def generate_classes_code(logger: logger_utils.Logger, context: codegen_context.
                     f.write(f'#include "{os.path.abspath(os.path.normpath(class_obj.path))}"' + '\n\n')
 
                 f.write('#include <Utils/Reflection/Property.h>\n')
+                f.write('#include <Utils/Reflection/Value.h>\n')
                 f.write('#include <Utils/Reflection/SRClassUtils.h>\n')
                 f.write('#include <Utils/TypeTraits/SRClass.h>\n')
                 f.write('#include <Utils/TypeTraits/Factory.h>\n')

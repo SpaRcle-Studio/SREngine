@@ -13,8 +13,17 @@ namespace SR_CORE_GUI_NS {
         : Super()
     { }
 
+    AssociativePropertyDrawer::~AssociativePropertyDrawer()
+    {
+        SR_SAFE_DELETE_PTR(m_keyValue);
+    }
+
     PropertyDrawerFeedback AssociativePropertyDrawer::Draw(const PropertyDrawerContext& context) {
         SR_TRACY_ZONE;
+
+        if (!m_keyValue) {
+            m_keyValue = new SR_UTILS_NS::Reflection::Value();
+        }
 
         PropertyDrawerFeedback feedback;
 
@@ -65,8 +74,8 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::EndDisabled();
 
         if (!m_keyDrawer) {
-            m_keyValue = container.GetKeyType();
-            SR_UTILS_NS::StringAtom inspectorName = GetValueInspector(m_keyValue);
+            *m_keyValue = container.GetKeyType();
+            SR_UTILS_NS::StringAtom inspectorName = GetValueInspector(*m_keyValue);
             m_keyDrawer = SR_UTILS_NS::Factory::Instance().Create<PropertyDrawerBase>(inspectorName);
         }
 
@@ -79,7 +88,7 @@ namespace SR_CORE_GUI_NS {
                 context.onBeforeChangeCallback(false);
             }
             feedback.isChanged = true;
-            container.Insert(m_keyValue, container.GetMappedType());
+            container.Insert(*m_keyValue, container.GetMappedType());
         }
 
         SR_GRAPH_GUI_NS::Immediate::SameLine();
@@ -87,12 +96,12 @@ namespace SR_CORE_GUI_NS {
         PropertyDrawerContext keyCtx = context;
 
         keyCtx.isEnumValueAvailableCheckFn = [&](SR_UTILS_NS::StringAtom enumValue) {
-            if (!m_keyValue.IsEnum()) {
+            if (!m_keyValue->IsEnum()) {
                 SRHalt("AssociativePropertyDrawer::Draw() : key value is not an enum type!");
                 return true;
             }
 
-            SR_UTILS_NS::EnumReflector* pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().GetReflector(m_keyValue.GetEnumType());
+            SR_UTILS_NS::EnumReflector* pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().GetReflector(m_keyValue->GetEnumType());
             if (!pReflector) {
                 SRHalt("AssociativePropertyDrawer::Draw() : key value enum reflector is not found!");
                 return true;
@@ -109,7 +118,7 @@ namespace SR_CORE_GUI_NS {
             return true;
         };
 
-        keyCtx.pValue = &m_keyValue;
+        keyCtx.pValue = m_keyValue;
         keyCtx.fieldTitleWidth = 0.f;
         keyCtx.noHeader = true;
         keyCtx.fieldWidth = context.fieldWidth - counterButtonWidth.x - buttonSize.x;
@@ -137,7 +146,7 @@ namespace SR_CORE_GUI_NS {
 
                 m_keyDrawers.resize(SR_MAX(m_keyDrawers.size(), index + 1));
                 if (!m_keyDrawers[index]) {
-                    m_keyDrawers[index] = SR_UTILS_NS::Factory::Instance().Create<PropertyDrawerBase>(GetValueInspector(m_keyValue));
+                    m_keyDrawers[index] = SR_UTILS_NS::Factory::Instance().Create<PropertyDrawerBase>(GetValueInspector(*m_keyValue));
                 }
 
                 PropertyDrawerContext keyContext = context;
