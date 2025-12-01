@@ -76,15 +76,20 @@ jobs:
           Write-Host "===== Unpack Log ====="
           Get-Content $logUnpackFile
           
-          $binDir = "SREngine/Engine/Bin"
+          # Папка, где лежит первый exe (packed)
+          $exeDir = Split-Path $exe -Parent
+          
+          # Путь к распакованному бинарнику
+          $binDir = Join-Path $exeDir "SREngine/Engine/Bin"
+          
           if (-not (Test-Path $binDir)) {
-              Write-Host "Папка $binDir не найдена. Значит упакованный exe ничего не распаковал."
+              Write-Host "Folder $binDir not found. It means the packed exe did not unpack anything."
               exit 1
           }
 
           $unpackedExe = Get-ChildItem -Path $binDir -Filter "SREngine_*.exe" -File | Select-Object -First 1
           if (-not $unpackedExe) {
-              Write-Host "Распакованный exe не найден в $binDir"
+              Write-Host "Unpacked exe not found in $binDir"
               exit 1
           }
 
@@ -124,15 +129,20 @@ jobs:
           Write-Host "===== Unpack Log ====="
           Get-Content $logUnpackFile
           
-          $binDir = "SREngine/Engine/Bin"
+          # Папка, где лежит первый exe (packed)
+          $exeDir = Split-Path $exe -Parent
+          
+          # Путь к распакованному бинарнику
+          $binDir = Join-Path $exeDir "SREngine/Engine/Bin"
+          
           if (-not (Test-Path $binDir)) {
-              Write-Host "Папка $binDir не найдена. Значит упакованный exe ничего не распаковал."
+              Write-Host "Folder $binDir not found. It means the packed exe did not unpack anything."
               exit 1
           }
 
           $unpackedExe = Get-ChildItem -Path $binDir -Filter "SREngine_*.exe" -File | Select-Object -First 1
           if (-not $unpackedExe) {
-              Write-Host "Распакованный exe не найден в $binDir"
+              Write-Host "Unpacked exe not found in $binDir"
               exit 1
           }
 
