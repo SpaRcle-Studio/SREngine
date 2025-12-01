@@ -8,6 +8,7 @@
 
 #include <Utils/ECS/Transform.h>
 #include <Utils/DebugDraw.h>
+#include <Utils/FileSystem/PathDataAccessor.h>
 
 #include <Codegen/CollisionShape.generated.hpp>
 

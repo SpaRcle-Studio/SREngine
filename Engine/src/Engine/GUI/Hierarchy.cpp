@@ -13,9 +13,9 @@
 
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Platform/Platform.h>
-#include <Utils/Types/SafePtrLockGuard.h>
 #include <Utils/TaskManager/TaskManager.h>
 #include <Utils/Common/StoreUtils.h>
+#include <Utils/Common/StringUtils.h>
 #include <Utils/World/ScenePrefabLogic.h>
 #include <Utils/CommandManager/ReversibleCommand.h>
 #include <Utils/FileSystem/FileDialog.h>

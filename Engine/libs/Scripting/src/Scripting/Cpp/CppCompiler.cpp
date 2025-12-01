@@ -10,6 +10,7 @@
 #include <Utils/FileSystem/FileDialog.h>
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/Serialization/SRASerialization.h>
+#include <Utils/FileSystem/PathDataAccessor.h>
 
 #include <Enum/CppCompilerType.hpp>
 

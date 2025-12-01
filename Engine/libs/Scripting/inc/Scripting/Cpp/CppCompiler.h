@@ -9,6 +9,7 @@
 
 #include <Utils/Serialization/Serializable.h>
 #include <Utils/Types/SharedPtr.h>
+#include <Utils/FileSystem/Path.h>
 
 namespace SR_SCRIPTING_NS {
     class ScriptSystem;

@@ -4,6 +4,8 @@
 
 #include <Engine/Settings/EditorSettings.h>
 
+#include <Utils/FileSystem/PathDataAccessor.h>
+
 #include <Codegen/EditorSettings.generated.hpp>
 
 namespace SR_CORE_NS {

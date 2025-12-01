@@ -2,15 +2,14 @@
 // Created by Monika on 24.11.2022.
 //
 
-#include <Utils/Common/Features.h>
-
 #include <Physics/PhysX/PhysXLibraryImpl.h>
-
 #include <Physics/PhysX/PhysXPhysicsWorld.h>
 #include <Physics/PhysX/PhysXCollisionShape.h>
 #include <Physics/PhysX/PhysXRigidbody3D.h>
 #include <Physics/PhysX/PhysXMaterialImpl.h>
 #include <Physics/PhysX/PhysXVehicle4W3D.h>
+
+#include <Utils/Common/StringAtomLiterals.h>
 
 namespace SR_PHYSICS_NS {
     class PhysXAssertHandler : public physx::PxAssertHandler {

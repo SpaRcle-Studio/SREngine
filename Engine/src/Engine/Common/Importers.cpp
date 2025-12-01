@@ -7,6 +7,7 @@
 #include <Utils/Debug.h>
 #include <Utils/Types/RawMesh.h>
 #include <Utils/ECS/ComponentManager.h>
+#include <Utils/TypeTraits/Factory.h>
 
 #include <Graphics/Animations/Skeleton.h>
 

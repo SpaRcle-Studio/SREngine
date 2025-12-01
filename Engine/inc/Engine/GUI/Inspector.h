@@ -74,7 +74,7 @@ namespace SR_CORE_GUI_NS {
         std::vector<SR_UTILS_NS::StringAtom> m_availableCppBehaviours;
         ComponentCategory m_componentsCategories;
 
-        std::list<SR_UTILS_NS::Component::Ptr> m_pointersHolder;
+        std::list<SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::Component>> m_pointersHolder;
         SR_UTILS_NS::SceneObject::Ptr m_sceneObject;
         Hierarchy* m_hierarchy = nullptr;
         SR_WORLD_NS::Scene::Ptr m_scene;
@@ -96,7 +96,7 @@ namespace SR_CORE_GUI_NS {
         std::unique_ptr<SR_UTILS_NS::ISerializer> m_pTransformSerializer;
         std::unique_ptr<SR_UTILS_NS::ISerializer> m_pComponentsSerializer;
         std::unique_ptr<SR_UTILS_NS::ISerializer> m_pComponentSerializer;
-        SR_UTILS_NS::Component::Ptr m_editableComponent;
+        SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::Component> m_editableComponent;
         SR_UTILS_NS::Subscription m_moduleReloadSubscription;
 
     };

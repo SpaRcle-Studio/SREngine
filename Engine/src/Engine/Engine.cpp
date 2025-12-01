@@ -22,6 +22,7 @@
 #include <Utils/World/Scene.h>
 #include <Utils/World/SceneUpdater.h>
 #include <Utils/Common/Features.h>
+#include <Utils/Common/StringAtomLiterals.h>
 #include <Utils/TaskManager/ThreadWorker.h>
 #include <Utils/Localization/LocalizationManager.h>
 

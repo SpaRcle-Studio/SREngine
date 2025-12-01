@@ -15,4 +15,4 @@ else
 fi
 
 # Запустить Python скрипт
-"$PYTHON" scripts/analyze_ninja_tracking_json.py
+"$PYTHON" scripts/analyze_ninja_tracking_json.py "$@"

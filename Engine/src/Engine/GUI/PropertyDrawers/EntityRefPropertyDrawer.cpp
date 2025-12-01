@@ -8,6 +8,7 @@
 
 #include <Utils/ECS/EntityRef.h>
 #include <Utils/ECS/SceneObject.h>
+#include <Utils/ECS/Component.h>
 
 #include <Codegen/EntityRefPropertyDrawer.generated.hpp>
 

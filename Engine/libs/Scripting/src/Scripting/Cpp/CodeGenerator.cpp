@@ -7,7 +7,9 @@
 
 #include <Utils/Types/Time.h>
 #include <Utils/Common/Features.h>
+#include <Utils/Common/StringAtomLiterals.h>
 #include <Utils/FileSystem/FileSystem.h>
+#include <Utils/Serialization/SRASerialization.h>
 
 namespace SR_SCRIPTING_NS {
     void CppCodeGenerator::ProcessChangedCodeFiles(const std::set<SR_UTILS_NS::Path>& changedFiles) {

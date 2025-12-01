@@ -277,4 +277,6 @@ namespace SR_CORE_GUI_NS {
 
         Super::PrepareGizmo();
     }
+
+    EditorGizmo::~EditorGizmo() = default;
 }

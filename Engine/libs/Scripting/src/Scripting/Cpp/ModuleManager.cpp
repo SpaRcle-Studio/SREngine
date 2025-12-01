@@ -7,6 +7,8 @@
 
 #include <Utils/Events/Broadcaster.h>
 #include <Utils/TypeTraits/SRClassMeta.h>
+#include <Utils/TypeTraits/Factory.h>
+#include <Utils/Common/StringAtomLiterals.h>
 
 namespace SR_SCRIPTING_NS {
     void CppBehaviourInstance::OnBehaviourUnloaded(ManagerPasskey) {

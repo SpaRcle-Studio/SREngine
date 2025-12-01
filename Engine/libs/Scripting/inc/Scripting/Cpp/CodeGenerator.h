@@ -8,6 +8,7 @@
 #include <Scripting/Cpp/ScriptModuleInfo.h>
 
 #include <Utils/Types/SharedPtr.h>
+#include <Utils/FileSystem/Path.h>
 
 namespace SR_SCRIPTING_NS {
     class CppCompiler;

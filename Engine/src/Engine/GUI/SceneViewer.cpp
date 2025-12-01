@@ -23,11 +23,14 @@
 #include <Physics/Utils/Utils.h>
 #include <Physics/3D/Rigidbody3D.h>
 
+#include <Utils/TypeTraits/Factory.h>
 #include <Utils/Game/CameraFlyMover.h>
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Common/Features.h>
+#include <Utils/Common/StringAtomLiterals.h>
 #include <Utils/ECS/Transform3D.h>
 #include <Utils/World/SceneLogic.h>
+#include <Utils/Serialization/SerializationFlags.h>
 
 namespace SR_CORE_GUI_NS {
     SceneViewer::SceneViewer(const EnginePtr& pEngine, Hierarchy* hierarchy)

@@ -1,6 +1,7 @@
 import json
 import gzip
 from pathlib import Path
+import argparse
 
 def load_trace(path):
     try:
@@ -18,7 +19,7 @@ def load_trace(path):
 
     raise RuntimeError("Файл не читается как JSON или gzip JSON")
 
-def extract_longest_events(trace, top=50):
+def extract_longest_events(trace, top):
     # если trace — объект с traceEvents
     if isinstance(trace, dict) and "traceEvents" in trace:
         events = trace["traceEvents"]
@@ -49,9 +50,11 @@ def extract_longest_events(trace, top=50):
     result.sort(reverse=True, key=lambda x: x[0])
     return [sum(dur for dur, _, _ in result), result[:top]]
 
+parser = argparse.ArgumentParser()
+parser.add_argument('--top', type=int, default=50, help='Number of top longest events to display')
 
 trace = load_trace("trace.json")
-[total_time, longest] = extract_longest_events(trace, top=50)
+[total_time, longest] = extract_longest_events(trace, top=parser.parse_args().top)
 
 total_time_top = sum(dur for dur, _, _ in longest)
 

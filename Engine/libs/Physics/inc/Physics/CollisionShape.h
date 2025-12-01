@@ -18,7 +18,6 @@
 #include <Utils/TypeTraits/Properties.h>
 #include <Utils/ECS/Transform.h>
 
-
 namespace SR_PHYSICS_NS {
     class PhysicsScene;
     class LibraryImpl;

@@ -9,6 +9,7 @@
 
 #include <Utils/ECS/Component.h>
 #include <Utils/Resources/IResource.h>
+#include <Utils/Serialization/BaseSerialization.h>
 
 namespace SR_UTILS_NS {
     class GameObject;

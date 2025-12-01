@@ -368,20 +368,20 @@ def generate_class_meta_clone(f, class_obj: reflection_utils.SpaRcleClass, tabs)
 
 
 def generate_class_meta(f, context: codegen_context.CodegenContext, class_structures, class_obj, tabs, dll_export_macro):
-    if len(class_obj.inherited_classes) > 0:
-        f.write('\t' * tabs + f'/// Include inherited classes.\n')
-        for inherited_class in class_obj.inherited_classes:
-            inherited_class_obj = None
-            inherited_class_formated = inherited_class.split('::')[-1]
-            for class_structure in class_structures:
-                if class_structure.name == inherited_class_formated:
-                    inherited_class_obj = class_structure
-                    break
+    #if len(class_obj.inherited_classes) > 0:
+    #    f.write('\t' * tabs + f'/// Include inherited classes.\n')
+    #    for inherited_class in class_obj.inherited_classes:
+    #        inherited_class_obj = None
+    #        inherited_class_formated = inherited_class.split('::')[-1]
+    #        for class_structure in class_structures:
+    #            if class_structure.name == inherited_class_formated:
+    #                inherited_class_obj = class_structure
+    #                break
 
-            if inherited_class_obj:
-                f.write('\t' * tabs + f'#include "{os.path.abspath(os.path.normpath(inherited_class_obj.path))}"' + '\n')
+    #        if inherited_class_obj:
+    #            f.write('\t' * tabs + f'#include "{os.path.abspath(os.path.normpath(inherited_class_obj.path))}"' + '\n')
 
-        f.write('\n')
+    #    f.write('\n')
 
     f.write('\t' * tabs + 'namespace Codegen {\n')
     tabs += 1
@@ -808,27 +808,27 @@ def generate_enums_header(logger: logger_utils.Logger, context: codegen_context.
         f.write('\t}                                                                                                                   \\\n\n')
 
         # generate code
-        for enum_obj in enums:
-            namespace_str = ''
-            if len(enum_obj.namespaces) > 0:
-                namespace_str = '::'.join(enum_obj.namespaces)
+        #for enum_obj in enums:
+        #    namespace_str = ''
+        #    if len(enum_obj.namespaces) > 0:
+        #        namespace_str = '::'.join(enum_obj.namespaces)
 
-            if len(namespace_str) > 0:
-                namespace_str += '::'
+        #    if len(namespace_str) > 0:
+        #        namespace_str += '::'
 
-            class_full_name = namespace_str + enum_obj.name
+        #    class_full_name = namespace_str + enum_obj.name
 
-            f.write('namespace Codegen {\n')
+        #    f.write('namespace Codegen {\n')
 
-            f.write(f'\ttemplate<> constexpr SpaRcle::Utils::EnumVariant GetEnumVariant(Codegen::EnumSelector<{class_full_name}>) noexcept {{' + '\n')
-            f.write(f'\t\treturn SpaRcle::Utils::EnumVariant::{enum_obj.variant};' + '\n')
-            f.write('\t}\n\n')
+        #    #f.write(f'\ttemplate<> constexpr SpaRcle::Utils::EnumVariant GetEnumVariant(Codegen::EnumSelector<{class_full_name}>) noexcept {{' + '\n')
+        #    #f.write(f'\t\treturn SpaRcle::Utils::EnumVariant::{enum_obj.variant};' + '\n')
+        #    #f.write('\t}\n\n')
+        #    #
+        #    #f.write(f'\ttemplate<> constexpr size_t GetEnumItemsCount(Codegen::EnumSelector<{class_full_name}>) noexcept {{' + '\n')
+        #    #f.write(f'\t\treturn {enum_obj.count};' + '\n')
+        #    #f.write('\t}\n\n')
 
-            f.write(f'\ttemplate<> constexpr size_t GetEnumItemsCount(Codegen::EnumSelector<{class_full_name}>) noexcept {{' + '\n')
-            f.write(f'\t\treturn {enum_obj.count};' + '\n')
-            f.write('\t}\n\n')
-
-            f.write('}\n\n')
+        #    f.write('}\n\n')
 
         # operators
         for enum_obj in enums:
@@ -1103,6 +1103,7 @@ def generate_classes_code(logger: logger_utils.Logger, context: codegen_context.
                     f.write(f'#include "{os.path.abspath(os.path.normpath(class_obj.path))}"' + '\n\n')
 
                 if not def_includes_included:
+                    f.write('#include <Utils/Serialization/SerializableDataAccessor.h>\n')
                     f.write('#include <Utils/Reflection/Property.h>\n')
                     f.write('#include <Utils/Reflection/Value.h>\n')
                     f.write('#include <Utils/Reflection/SRClassUtils.h>\n')
