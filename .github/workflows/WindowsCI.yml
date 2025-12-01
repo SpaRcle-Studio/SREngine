@@ -50,7 +50,7 @@ jobs:
         run: |
           echo "buildSuccessful=false" >> "$GITHUB_ENV"
           cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=${{ matrix.buildType }} "-DCMAKE_MAKE_PROGRAM=${{github.workspace}}/ninja-build/ninja.exe"
-          cmake --build . -j 4
+          cmake --build . -j $(nproc || sysctl -n hw.ncpu)
           echo "buildSuccessful=true" >> "$GITHUB_ENV"
 
       - name: Creating a ${{ matrix.buildType }} build trace.

@@ -122,7 +122,7 @@ jobs:
         run: |
           echo "buildSuccessful=false" >> "$GITHUB_ENV"
           cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=${{ matrix.buildType }} -DSR_COMMON_UNITY_BUILD=${{ matrix.unity }}
-          cmake --build .
+          cmake --build . -j $(nproc || sysctl -n hw.ncpu)
           echo "buildSuccessful=true" >> "$GITHUB_ENV"
 
       - name: Creating a ${{ matrix.buildType }} build trace.
