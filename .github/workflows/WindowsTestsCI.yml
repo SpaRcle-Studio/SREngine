@@ -92,7 +92,7 @@ jobs:
 
           # ---- RUN UNPACKED EXE ----
           try {
-              & $unpackedExe.FullName --test *>&1 | Tee-Object -FilePath $logFile
+              & $unpackedExe.FullName --unit-tests *>&1 | Tee-Object -FilePath $logFile
           }
           catch {
               Write-Host "Exception during unpacked exe execution:"
@@ -140,7 +140,7 @@ jobs:
 
           # ---- RUN UNPACKED EXE ----
           try {
-              & $unpackedExe.FullName --test *>&1 | Tee-Object -FilePath $logFile
+              & $unpackedExe.FullName --unit-tests *>&1 | Tee-Object -FilePath $logFile
           }
           catch {
               Write-Host "Exception during unpacked exe execution:"
