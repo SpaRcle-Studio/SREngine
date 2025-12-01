@@ -35,6 +35,10 @@ add_library(sparcle SHARED
     main.cpp
 )
 
+if (SR_USE_PCH)
+    target_precompile_headers(sparcle PRIVATE ${SR_COMMON_PCH_HEADER_PATH})
+endif()
+
 find_library(log-lib log)
 
 target_link_libraries(sparcle
