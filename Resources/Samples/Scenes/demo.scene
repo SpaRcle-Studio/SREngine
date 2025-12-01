@@ -565,50 +565,6 @@ ddddцццゔぅヾボ
 					5-s:GameObject
 				4-o:ptr
 					5-v:entityId
-						6-i:4191819035411605343
-					5-v:name
-						6-s:Models/teapot
-					5-v:prefab
-						6-s:5345345345.prefab
-					5-o:transform
-						6-v:type
-							7-s:Transform3D
-						6-o:ptr
-							7-o:translation
-								8-v:x
-									9-f:-11.5481148
-								8-v:y
-									9-f:0.451848418
-								8-v:z
-									9-f:-1.64829946
-		2-k:i
-			3-o:d
-				4-v:type
-					5-s:GameObject
-				4-o:ptr
-					5-v:entityId
-						6-i:4022546309212795317
-					5-v:name
-						6-s:Models/teapot
-					5-v:prefab
-						6-s:5345345345.prefab
-					5-o:transform
-						6-v:type
-							7-s:Transform3D
-						6-o:ptr
-							7-o:translation
-								8-v:x
-									9-f:-12.5984221
-								8-v:y
-									9-f:0.463966042
-								8-v:z
-									9-f:-2.56373668
-		2-k:i
-			3-o:d
-				4-v:type
-					5-s:GameObject
-				4-o:ptr
-					5-v:entityId
 						6-i:3192340470299138010
 					5-a:components
 						6-k:i

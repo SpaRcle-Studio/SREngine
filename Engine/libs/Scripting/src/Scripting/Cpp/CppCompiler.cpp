@@ -11,6 +11,7 @@
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/Serialization/SRASerialization.h>
 #include <Utils/FileSystem/PathDataAccessor.h>
+#include <Utils/Common/CLIManager.h>
 
 #include <Enum/CppCompilerType.hpp>
 
@@ -403,6 +404,18 @@ namespace SR_SCRIPTING_NS {
         m_settings.useBuiltInCompiler = false;
 
         const auto builtInCompilerPath = GetBuiltInMSVCCompilerPath();
+
+        if (SR_UTILS_NS::CLIManager::Instance().IsHeadlessMode()) {
+            if (SR_PLATFORM_NS::IsExists(builtInCompilerPath)) {
+                SR_LOG("CppCompiler::FindWindowsCompiler() : headless mode detected, using built-in MSVC compiler!");
+                m_settings.useBuiltInCompiler = true;
+                m_settings.compilerPath = builtInCompilerPath;
+                return true;
+            }
+            SR_LOG("CppCompiler::FindWindowsCompiler() : headless mode detected, but built-in MSVC compiler not found!");
+            return false;
+        }
+
         if (SR_PLATFORM_NS::IsExists(builtInCompilerPath)) {
             const auto&& result = SR_PLATFORM_NS::ShowMessageBox(
                 "Choose compiler",

@@ -14,6 +14,7 @@
 
 namespace SR_CORE_GUI_NS {
     class Hierarchy : public SR_GRAPH_NS::GUI::Widget {
+        using Super = SR_GRAPH_NS::GUI::Widget;
     public:
         Hierarchy();
         ~Hierarchy() override;
@@ -21,6 +22,7 @@ namespace SR_CORE_GUI_NS {
     public:
         void Update(float_t dt) override;
 
+        void SetManager(SR_GRAPH_GUI_NS::WidgetManager* pManager) override;
         void SetScene(const SR_WORLD_NS::Scene::Ptr& scene) override;
 
         void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) override;

@@ -63,7 +63,6 @@ namespace SR_CORE_GUI_NS {
             m_tree.clear();
         }
 
-        m_sceneRunnerWidget->SetManager(GetManager());
         m_sceneRunnerWidget->DrawAsSubWindow();
 
         ContextMenu();
@@ -596,5 +595,12 @@ namespace SR_CORE_GUI_NS {
 
     SR_GRAPH_NS::GUI::Widget* Hierarchy::GetSceneRunnerWidget() const noexcept {
         return m_sceneRunnerWidget;
+    }
+
+    void Hierarchy::SetManager(SR_GRAPH_NS::GUI::WidgetManager* pManager) {
+        Super::SetManager(pManager);
+        if (m_sceneRunnerWidget) {
+            m_sceneRunnerWidget->SetManager(GetManager());
+        }
     }
 }

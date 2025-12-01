@@ -56,6 +56,11 @@ namespace SR_CORE_NS {
 
         m_renderContext = new SR_GRAPH_NS::RenderContext();
 
+        if (!m_renderContext->PreInit()) {
+            SR_ERROR("Engine::Create() : failed to pre-initialize render context!");
+            return false;
+        }
+
         m_cmdManager = new SR_UTILS_NS::CmdManager();
         m_input = new SR_UTILS_NS::InputDispatcher();
 

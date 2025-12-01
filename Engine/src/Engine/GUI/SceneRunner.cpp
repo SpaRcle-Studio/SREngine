@@ -146,6 +146,15 @@ namespace SR_CORE_NS::GUI {
         SR_TRACY_ZONE;
         SR_LOCK_GUARD;
 
+        if (m_lastPath.IsEmpty() && m_scene) {
+            m_lastPath = std::move(m_scene->GetPath());
+        }
+
+        if (m_lastPath.IsEmpty()) {
+            SRHalt("SceneRunner::PlayScene() : scene path is empty!");
+            return false;
+        }
+
         SR_LOG("SceneRunner::PlayScene() : playing scene \"" + m_lastPath.ToString() + "\"");
 
         if (!m_scene->SaveScene()) {
@@ -158,7 +167,12 @@ namespace SR_CORE_NS::GUI {
         const std::string extension = m_scene->GetPath().GetExtension();
 
         auto&& runtimePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(SR_UTILS_NS::Path(SR_WORLD_NS::Scene::RuntimeScenePath).ConcatExt(extension));
-        auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+        auto&& pEditor = dynamic_cast<EditorGUI*>(GetManager());
+        if (!pEditor) {
+            SRHalt("SceneRunner::PlayScene() : failed to get editor!");
+            return false;
+        }
+        auto pEngine = pEditor->GetEngine();
 
         if (runtimePath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
             if (!SR_PLATFORM_NS::Delete(runtimePath)) {

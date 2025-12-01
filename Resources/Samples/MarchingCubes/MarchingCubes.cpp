@@ -6,6 +6,9 @@
 
 #include <Scripting/Cpp/CppBehaviour.h>
 
+#include <Utils/Common/StringAtomLiterals.h>
+#include <Utils/FileSystem/PathDataAccessor.h>
+
 namespace SpaRcle::Scripts::Samples {
     class MarchingCubes : public SpaRcle::Scripting::CppBehaviour {
         SR_CLASS()

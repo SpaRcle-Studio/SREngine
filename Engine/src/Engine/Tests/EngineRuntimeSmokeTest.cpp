@@ -78,7 +78,17 @@ namespace SR_CORE_NS::Tests {
         SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : waiting for scripting system to become idle...");
         SR_SCRIPTING_NS::ScriptSystem::Instance().WaitForIdle();
 
-        SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : first step - setting game mode");
+        SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : first step - load demo scene");
+
+        pState->AddEngineAction([this](Engine& engine) {
+            SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : executing delayed action in DelayedActionsState - setting game mode.");
+            engine.AddSceneToQueue(SR_WORLD_NS::Scene::LoadScene("Samples/Scenes/Demo.scene"));
+        });
+
+        SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : waiting five seconds...");
+        SR_PLATFORM_NS::Sleep(5000);
+
+        SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : second step - setting game mode");
 
         pState->AddEngineAction([this](Engine& engine) {
             SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : executing delayed action in DelayedActionsState - setting game mode.");
@@ -99,7 +109,7 @@ namespace SR_CORE_NS::Tests {
         SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : waiting five seconds...");
         SR_PLATFORM_NS::Sleep(5000);
 
-        SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : second step - unsetting game mode");
+        SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : third step - unsetting game mode");
         pState->AddEngineAction([this](Engine& engine) {
             SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : executing delayed action in DelayedActionsState - unsetting game mode.");
             if (auto&& pEditor = engine.GetEditor()) {
@@ -119,7 +129,7 @@ namespace SR_CORE_NS::Tests {
         SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : waiting five seconds...");
         SR_PLATFORM_NS::Sleep(5000);
 
-        SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : third step - closing launcher");
+        SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : four step - closing launcher");
         pState->AddEngineAction([](Engine& engine) {
             SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : executing delayed action in DelayedActionsState - closing launcher.");
             engine.GetMainWindow()->Close();
