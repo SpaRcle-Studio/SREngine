@@ -9,13 +9,14 @@
 #include <Physics/3D/Raycast3D.h>
 #include <Physics/PhysicsScene.h>
 
+#include <Scripting/Cpp/ScriptSystem.h>
+
 #include <Graphics/Render/RenderScene.h>
 #include <Graphics/Render/DebugRenderer.h>
 
 #include <Utils/CommandManager/CmdManager.h>
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/DebugDraw.h>
-#include <Utils/Common/Features.h>
 
 #include <Codegen/PrepareState.generated.hpp>
 

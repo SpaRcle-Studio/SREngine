@@ -5,36 +5,25 @@
 #include <Engine/Engine.h>
 #include <Engine/Application.h>
 #include <Engine/EngineResources.h>
-#include <Engine/EngineMigrators.h>
 #include <Engine/GUI/EditorGUI.h>
 #include <Engine/World/EngineScene.h>
-#include <Engine/EngineCommands.h>
 
 #include <Graphics/GUI/WidgetManager.h>
-#include <Graphics/Render/RenderScene.h>
-#include <Graphics/Render/DebugRenderer.h>
 #include <Graphics/Render/RenderContext.h>
-#include <Graphics/Memory/CameraManager.h>
 #include <Graphics/Window/Window.h>
-#include <Graphics/Types/Geometry/SkinnedMesh.h>
-#include <Graphics/GUI/Editor/Theme.h>
-#include <Graphics/Pipeline/Vulkan/VulkanTracy.h>
 
-#include <Physics/Rigidbody.h>
 #include <Physics/LibraryImpl.h>
-#include <Physics/PhysicsLib.h>
-#include <Physics/PhysicsScene.h>
-#include <Physics/3D/Raycast3D.h>
-#include <Physics/PhysicsMaterial.h>
 
-#include <Utils/Events/EventManager.h>
+#include <Scripting/Cpp/ScriptSystem.h>
+
+#include <Utils/CommandManager/CmdManager.h>
+#include <Utils/Input/InputDispatcher.h>
+#include <Utils/Input/InputSystem.h>
 #include <Utils/World/Scene.h>
 #include <Utils/World/SceneUpdater.h>
 #include <Utils/Common/Features.h>
-#include <Utils/ECS/ComponentManager.h>
+#include <Utils/TaskManager/ThreadWorker.h>
 #include <Utils/Localization/LocalizationManager.h>
-#include <Utils/Serialization/SRASerialization.h>
-//#include <Scripting/Impl/EvoScriptManager.h>
 
 namespace SR_CORE_NS {
     Engine::Engine(Application* pApplication)
@@ -525,5 +514,9 @@ namespace SR_CORE_NS {
         }
         static WindowPtr nullWindow;
         return nullWindow;
+    }
+
+    const SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::ThreadsWorker>& Engine::GetThreadsWorker() const {
+        return m_threadsWorker;
     }
 }

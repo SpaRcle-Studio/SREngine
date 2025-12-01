@@ -22,19 +22,19 @@ def generate_class_meta_for_each_sr_class(f, class_structures, class_obj, tabs):
 
     class_name = '::'.join(class_obj.namespaces) + '::' + class_obj.name
 
-    f.write('\t' * tabs + f'void ForEachSRClass(SR_UTILS_NS::SRClass& srClass, const SR_HTYPES_NS::Function<void(SR_UTILS_NS::SRClass&)>& function) const noexcept final {{\n')
+    f.write('\t' * tabs + f'void ForEachSRClass(SpaRcle::Utils::SRClass& srClass, const SR_HTYPES_NS::Function<void(SpaRcle::Utils::SRClass&)>& function) const noexcept final {{\n')
 
     if is_sr_class:
         f.write('\t' * (tabs + 1) + f'function(srClass);\n')
     else:
-        f.write('\t' * (tabs + 1) + f'SR_UTILS_NS::SRClassMeta::ForEachSRClass(srClass, function);\n\n')
+        f.write('\t' * (tabs + 1) + f'SpaRcle::Utils::SRClassMeta::ForEachSRClass(srClass, function);\n\n')
 
         f.write('\t' * (tabs + 1) + f'SR_MAYBE_UNUSED auto&& object = static_cast<{class_name}&>(srClass);\n\n')
 
         for prop in class_obj.variables:
             if prop.virtual:
                 continue
-            f.write('\t' * (tabs + 1) + f'SR_UTILS_NS::Reflection::ForEachSRClass(object.{prop.name}, function);\n')
+            f.write('\t' * (tabs + 1) + f'SpaRcle::Utils::Reflection::ForEachSRClass(object.{prop.name}, function);\n')
 
     f.write('\t' * tabs + '}\n\n')
 
@@ -43,29 +43,33 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
     if len(class_obj.variables) == 0:
         return
 
-    f.write('\t' * tabs + f'SR_NODISCARD virtual std::span<const SR_UTILS_NS::Reflection::Property> GetProperties() const noexcept final {{\n')
-    f.write('\t' * (tabs + 1) + f'static const std::array<const SR_UTILS_NS::Reflection::Property, {len(class_obj.variables)}> properties {{ \n')
+    f.write('\t' * tabs + f'SR_NODISCARD virtual std::span<const SpaRcle::Utils::Reflection::Property> GetProperties() const noexcept final {{\n')
+    f.write('\t' * (tabs + 1) + f'static const std::array<const SpaRcle::Utils::Reflection::Property, {len(class_obj.variables)}> properties {{ \n')
 
     for prop in class_obj.variables:
-        f.write('\t' * (tabs + 2) + f'SR_UTILS_NS::Reflection::Property()')
+        f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Reflection::Property()')
         f.write('\n' + '\t' * (tabs + 3) + f'.SetName("{prop.name}")')
         f.write('\n' + '\t' * (tabs + 3) + f'.SetSerializeName("{prop.serialize_name}")')
 
         if prop.private:
-            f.write('\n' + '\t' * (tabs + 3) + f'.SetPublicity(SR_UTILS_NS::PropertyPublicity::Private)')
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetPublicity(SpaRcle::Utils::PropertyPublicity::Private)')
         elif prop.hidden and prop.read_only:
-            f.write('\n' + '\t' * (tabs + 3) + f'.SetPublicity(SR_UTILS_NS::PropertyPublicity::HiddenReadOnly)')
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetPublicity(SpaRcle::Utils::PropertyPublicity::HiddenReadOnly)')
         elif prop.hidden:
-            f.write('\n' + '\t' * (tabs + 3) + f'.SetPublicity(SR_UTILS_NS::PropertyPublicity::Hidden)')
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetPublicity(SpaRcle::Utils::PropertyPublicity::Hidden)')
         elif prop.read_only:
-            f.write('\n' + '\t' * (tabs + 3) + f'.SetPublicity(SR_UTILS_NS::PropertyPublicity::ReadOnly)')
-        else:
-            f.write('\n' + '\t' * (tabs + 3) + f'.SetPublicity(SR_UTILS_NS::PropertyPublicity::Public)')
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetPublicity(SpaRcle::Utils::PropertyPublicity::ReadOnly)')
+        # else:
+        #     f.write('\n' + '\t' * (tabs + 3) + f'.SetPublicity(SpaRcle::Utils::PropertyPublicity::Public)')
 
-        f.write('\n' + '\t' * (tabs + 3) + f'.SetHasExplicitSetter({"true" if prop.setter else "false"})')
+        if prop.setter:
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetHasExplicitSetter({"true" if prop.setter else "false"})')
+
         f.write('\n' + '\t' * (tabs + 3) + f'.SetSetter(&SRClassMetaTemplate::Set_{prop.name})')
         f.write('\n' + '\t' * (tabs + 3) + f'.SetGetter(&SRClassMetaTemplate::Get_{prop.name})')
-        f.write('\n' + '\t' * (tabs + 3) + f'.SetChangeCallback(&SRClassMetaTemplate::OnChange_{prop.name})')
+
+        if prop.change_callback:
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetChangeCallback(&SRClassMetaTemplate::OnChange_{prop.name})')
 
         if prop.virtual:
             f.write('\n' + '\t' * (tabs + 3) + f'.CheckSRClass<decltype(DeclTypeStub()->{prop.getter}())>()')
@@ -80,19 +84,19 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
             default_value = f'decltype({class_obj.name}::{prop.name})(GetDefault_{prop.serialize_name}())'
         elif prop.virtual:
             if prop.getter:
-                default_value = f'SR_UTILS_NS::RemoveQualifiersT<decltype(DeclTypeStub()->{prop.getter}())>()'
+                default_value = f'SpaRcle::Utils::RemoveQualifiersT<decltype(DeclTypeStub()->{prop.getter}())>()'
             else:
                 default_value = None
 
         if default_value:
-            f.write('\n' + '\t' * (tabs + 3) + f'.SetDefaultValue(SR_UTILS_NS::Reflection::Value::Create({default_value}))')
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetDefaultValue(SpaRcle::Utils::Reflection::Value::Create({default_value}))')
 
         if prop.reset_value:
-            f.write('\n' + '\t' * (tabs + 3) + f'.SetResetValue(SR_UTILS_NS::Reflection::Value::Create({prop.reset_value}))')
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetResetValue(SpaRcle::Utils::Reflection::Value::Create({prop.reset_value}))')
 
         # editor params
 
-        f.write('\n' + '\t' * (tabs + 3) + f'.SetEditorParams(SR_UTILS_NS::Reflection::EditorPropertyParams()')
+        f.write('\n' + '\t' * (tabs + 3) + f'.SetEditorParams(SpaRcle::Utils::Reflection::EditorPropertyParams()')
 
         for key, value in prop.custom_args.items():
             f.write('\n' + '\t' * (tabs + 4) + f'.SetCustomArg("{key}", "{value}")')
@@ -156,14 +160,14 @@ def generate_class_meta_save(f, class_obj: reflection_utils.SpaRcleClass, tabs):
 
     if len(class_obj.variables) == 0:
         if class_name == 'SpaRcle::Utils::Serializable':
-            f.write('\t' * tabs + f'void Save(SR_UTILS_NS::ISerializer& serializer, const SR_UTILS_NS::Serializable& obj) const final {{\n')
+            f.write('\t' * tabs + f'void Save(SpaRcle::Utils::ISerializer& serializer, const SpaRcle::Utils::Serializable& obj) const final {{\n')
             tabs += 1
 
             f.write('\t' * tabs + f'if (serializer.IsWriteVersion()) {{\n')
             f.write('\t' * (tabs + 1) + f'const uint64_t version = obj.GetMeta()->GetVersion();\n')
             f.write('\t' * (tabs + 1) + f'if (version != 0) {{\n')
-            f.write('\t' * (tabs + 2) + f'static const SR_UTILS_NS::SerializationId keyName_version = SR_UTILS_NS::SerializationId::CreateFromString("@version");\n')
-            f.write('\t' * (tabs + 2) + f'SR_UTILS_NS::Serialization::Save(serializer, obj.GetMeta()->GetVersion(), keyName_version);\n')
+            f.write('\t' * (tabs + 2) + f'static const SpaRcle::Utils::SerializationId keyName_version = SpaRcle::Utils::SerializationId::CreateFromString("@version");\n')
+            f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Serialization::Save(serializer, obj.GetMeta()->GetVersion(), keyName_version);\n')
             f.write('\t' * (tabs + 1) + f'}}\n')
             f.write('\t' * tabs + f'}}\n')
 
@@ -172,11 +176,11 @@ def generate_class_meta_save(f, class_obj: reflection_utils.SpaRcleClass, tabs):
 
         return
 
-    f.write('\t' * tabs + f'void Save(SR_UTILS_NS::ISerializer& serializer, const SR_UTILS_NS::Serializable& obj) const final {{\n')
+    f.write('\t' * tabs + f'void Save(SpaRcle::Utils::ISerializer& serializer, const SpaRcle::Utils::Serializable& obj) const final {{\n')
     tabs += 1
 
-    f.write('\t' * tabs + f'SR_UTILS_NS::SRClassMeta::Save(serializer, obj);\n\n')
-    f.write('\t' * tabs + f'auto&& value = static_cast<{class_name}&>(const_cast<SR_UTILS_NS::Serializable&>(obj));\n\n')
+    f.write('\t' * tabs + f'SpaRcle::Utils::SRClassMeta::Save(serializer, obj);\n\n')
+    f.write('\t' * tabs + f'auto&& value = static_cast<{class_name}&>(const_cast<SpaRcle::Utils::Serializable&>(obj));\n\n')
 
     for prop in class_obj.variables:
         if prop.dontSave:
@@ -189,7 +193,7 @@ def generate_class_meta_save(f, class_obj: reflection_utils.SpaRcleClass, tabs):
         can_save_conditions = []
 
         if len(prop.dont_save_tags) > 0:
-            f.write('\t' * tabs + f'const static std::set<SR_UTILS_NS::StringAtom> {prop.serialize_name}_dontSaveTags = {{')
+            f.write('\t' * tabs + f'const static std::set<SpaRcle::Utils::StringAtom> {prop.serialize_name}_dontSaveTags = {{')
             for tag in prop.dont_save_tags:
                 f.write(f'"{tag}", ')
             f.write('};\n')
@@ -210,19 +214,19 @@ def generate_class_meta_save(f, class_obj: reflection_utils.SpaRcleClass, tabs):
             if prop.default_value:
                 f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || propValue != GetDefault_{prop.serialize_name}())) {{\n')
             else:
-                f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || !SR_UTILS_NS::IsDefault(propValue))) {{\n')
+                f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || !SpaRcle::Utils::IsDefault(propValue))) {{\n')
 
-            f.write('\t' * (tabs + 2) + f'static const SR_UTILS_NS::SerializationId keyName_{prop.serialize_name} = SR_UTILS_NS::SerializationId::CreateFromString("{prop.serialize_name}");\n')
-            f.write('\t' * (tabs + 2) + f'SR_UTILS_NS::Serialization::Save(serializer, propValue, keyName_{prop.serialize_name});\n')
+            f.write('\t' * (tabs + 2) + f'static const SpaRcle::Utils::SerializationId keyName_{prop.serialize_name} = SpaRcle::Utils::SerializationId::CreateFromString("{prop.serialize_name}");\n')
+            f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Serialization::Save(serializer, propValue, keyName_{prop.serialize_name});\n')
 
             f.write('\t' * (tabs + 1) + f'}}\n')
         else:
             if prop.default_value:
                 f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || value.{prop.name} != GetDefault_{prop.serialize_name}())) {{\n')
             else:
-                f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || !SR_UTILS_NS::IsDefault(value.{prop.name}))) {{\n')
-            f.write('\t' * (tabs + 2) + f'static const SR_UTILS_NS::SerializationId keyName_{prop.serialize_name} = SR_UTILS_NS::SerializationId::CreateFromString("{prop.serialize_name}");\n')
-            f.write('\t' * (tabs + 2) + f'SR_UTILS_NS::Serialization::Save(serializer, value.{prop.name}, keyName_{prop.serialize_name});\n')
+                f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || !SpaRcle::Utils::IsDefault(value.{prop.name}))) {{\n')
+            f.write('\t' * (tabs + 2) + f'static const SpaRcle::Utils::SerializationId keyName_{prop.serialize_name} = SpaRcle::Utils::SerializationId::CreateFromString("{prop.serialize_name}");\n')
+            f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Serialization::Save(serializer, value.{prop.name}, keyName_{prop.serialize_name});\n')
             f.write('\t' * (tabs + 1) + f'}}\n')
 
         f.write('\t' * tabs + f'}}\n')
@@ -236,15 +240,15 @@ def generate_class_meta_load(f, class_obj, tabs):
 
     if len(class_obj.variables) == 0:
         if class_name == 'SpaRcle::Utils::Serializable':
-            f.write('\t' * tabs + 'bool Load(SR_UTILS_NS::IDeserializer& deserializer, SR_UTILS_NS::Serializable& obj) const final {\n')
+            f.write('\t' * tabs + 'bool Load(SpaRcle::Utils::IDeserializer& deserializer, SpaRcle::Utils::Serializable& obj) const final {\n')
             tabs += 1
 
-            f.write('\t' * (tabs) + 'static const SR_UTILS_NS::SerializationId keyName_version = SR_UTILS_NS::SerializationId::CreateFromString("@version");\n')
+            f.write('\t' * (tabs) + 'static const SpaRcle::Utils::SerializationId keyName_version = SpaRcle::Utils::SerializationId::CreateFromString("@version");\n')
             f.write('\t' * (tabs) + 'uint64_t version = 0;\n')
             f.write('\t' * (tabs) + 'uint64_t currentVersion = obj.GetMeta()->GetVersion();\n')
-            f.write('\t' * (tabs) + 'SR_UTILS_NS::Serialization::Load(deserializer, version, keyName_version);\n')
+            f.write('\t' * (tabs) + 'SpaRcle::Utils::Serialization::Load(deserializer, version, keyName_version);\n')
             f.write('\t' * (tabs) + 'if (version != currentVersion) {\n')
-            f.write('\t' * (tabs + 1) + 'if (SR_UTILS_NS::MigrationManager::Instance().Migrate(deserializer, obj, version, currentVersion) == SR_UTILS_NS::MigrationResult::Fatal) {\n')
+            f.write('\t' * (tabs + 1) + 'if (SpaRcle::Utils::MigrationManager::Instance().Migrate(deserializer, obj, version, currentVersion) == SpaRcle::Utils::MigrationResult::Fatal) {\n')
             f.write('\t' * (tabs + 2) + 'return false;\n')
             f.write('\t' * (tabs + 1) + '}\n')
             f.write('\t' * (tabs) + '}\n')
@@ -256,10 +260,10 @@ def generate_class_meta_load(f, class_obj, tabs):
 
         return
 
-    f.write('\t' * tabs + 'bool Load(SR_UTILS_NS::IDeserializer& deserializer, SR_UTILS_NS::Serializable& obj) const final {\n')
+    f.write('\t' * tabs + 'bool Load(SpaRcle::Utils::IDeserializer& deserializer, SpaRcle::Utils::Serializable& obj) const final {\n')
     tabs += 1
 
-    f.write('\t' * tabs + 'if (!SR_UTILS_NS::SRClassMeta::Load(deserializer, obj)) {\n')
+    f.write('\t' * tabs + 'if (!SpaRcle::Utils::SRClassMeta::Load(deserializer, obj)) {\n')
     f.write('\t' * (tabs + 1) + 'return false;\n')
     f.write('\t' * tabs + '}\n\n')
     f.write('\t' * tabs + f'auto&& value = static_cast<{class_name}&>(obj);' + '\n\n')
@@ -274,7 +278,7 @@ def generate_class_meta_load(f, class_obj, tabs):
         can_load_conditions = []
 
         if len(prop.dont_save_tags) > 0:
-            f.write('\t' * tabs + f'const static std::set<SR_UTILS_NS::StringAtom> {prop.serialize_name}_dontLoadTags = {{')
+            f.write('\t' * tabs + f'const static std::set<SpaRcle::Utils::StringAtom> {prop.serialize_name}_dontLoadTags = {{')
             for tag in prop.dont_save_tags:
                 f.write(f'"{tag}", ')
             f.write('};\n')
@@ -289,28 +293,37 @@ def generate_class_meta_load(f, class_obj, tabs):
             cond_str = " && ".join(can_load_conditions)
             f.write('\t' * tabs + f'if ({cond_str}) {{\n')
 
-        f.write('\t' * (tabs + 1) + f'static const SR_UTILS_NS::SerializationId keyName_{prop.serialize_name} = SR_UTILS_NS::SerializationId::CreateFromString("{prop.serialize_name}");' + '\n')
+        f.write('\t' * (tabs + 1) + f'static const SpaRcle::Utils::SerializationId keyName_{prop.serialize_name} = SpaRcle::Utils::SerializationId::CreateFromString("{prop.serialize_name}");' + '\n')
 
         if prop.setter:
             if prop.getter:
-                f.write('\t' * (tabs + 1) + f'using Type = SR_UTILS_NS::RemoveQualifiersT<decltype(value.{prop.getter}())>;' + '\n')
+                f.write('\t' * (tabs + 1) + f'using Type = SpaRcle::Utils::RemoveQualifiersT<decltype(value.{prop.getter}())>;' + '\n')
             elif prop.virtual:
                 raise Exception(f'Virtual property {prop.name} must have getter!')
             else:
-                f.write('\t' * (tabs + 1) + f'using Type = SR_UTILS_NS::RemoveQualifiersT<decltype(value.{prop.name})>;' + '\n')
+                f.write('\t' * (tabs + 1) + f'using Type = SpaRcle::Utils::RemoveQualifiersT<decltype(value.{prop.name})>;' + '\n')
+
+            load_fn = f'SpaRcle::Utils::Serialization::Load(deserializer, propValue, keyName_{prop.serialize_name})'
 
             f.write('\t' * (tabs + 1) + 'Type propValue {};\n')
-            f.write('\t' * (tabs + 1) + f'if (!SR_UTILS_NS::Serialization::Load(deserializer, propValue, keyName_{prop.serialize_name})) {{' + '\n')
+
             if prop.default_value:
+                f.write('\t' * (tabs + 1) + f'if (!{load_fn}) {{' + '\n')
                 f.write('\t' * (tabs + 2) + f'propValue = GetDefault_{prop.serialize_name}();' + '\n')
-            f.write('\t' * (tabs + 1) + '}\n')
+                f.write('\t' * (tabs + 1) + '}\n')
+            else:
+                f.write('\t' * (tabs + 1) + f'{load_fn};' + '\n')
+
             f.write('\t' * (tabs + 1) + f'value.{prop.setter}(propValue);' + '\n')
 
         else:
-            f.write('\t' * (tabs + 1) + f'if (!SR_UTILS_NS::Serialization::Load(deserializer, value.{prop.name}, keyName_{prop.serialize_name})) {{' + '\n')
+            load_fn = f'SpaRcle::Utils::Serialization::Load(deserializer, value.{prop.name}, keyName_{prop.serialize_name})'
             if prop.default_value:
+                f.write('\t' * (tabs + 1) + f'if (!{load_fn}) {{' + '\n')
                 f.write('\t' * (tabs + 2) + f'value.{prop.name} = GetDefault_{prop.serialize_name}();' + '\n')
-            f.write('\t' * (tabs + 1) + '}\n')
+                f.write('\t' * (tabs + 1) + '}\n')
+            else:
+                f.write('\t' * (tabs + 1) + f'{load_fn};' + '\n')
 
         f.write('\t' * tabs + '}\n')
 
@@ -324,10 +337,10 @@ def generate_class_meta_load(f, class_obj, tabs):
 def generate_class_meta_clone(f, class_obj: reflection_utils.SpaRcleClass, tabs):
     class_name = '::'.join(class_obj.namespaces) + '::' + class_obj.name
 
-    f.write('\t' * tabs + f'void CloneTo(const SR_UTILS_NS::SRClass& src, SR_UTILS_NS::SRClass& dest) const noexcept final {{\n')
+    f.write('\t' * tabs + f'void CloneTo(const SpaRcle::Utils::SRClass& src, SpaRcle::Utils::SRClass& dest) const noexcept final {{\n')
     tabs += 1
 
-    f.write('\t' * tabs + f'SR_UTILS_NS::SRClassMeta::CloneTo(src, dest);\n\n')
+    f.write('\t' * tabs + f'SpaRcle::Utils::SRClassMeta::CloneTo(src, dest);\n\n')
 
     f.write('\t' * tabs + f'SR_MAYBE_UNUSED auto&& srcObject = const_cast<{class_name}&>(static_cast<const {class_name}&>(src));\n')
     f.write('\t' * tabs + f'SR_MAYBE_UNUSED auto&& destObject = static_cast<{class_name}&>(dest);\n\n')
@@ -344,11 +357,11 @@ def generate_class_meta_clone(f, class_obj: reflection_utils.SpaRcleClass, tabs)
         f.write('\t' * (tabs) + f'/// Clone property "{prop.name}"' + '\n')
 
         if prop.setter:
-            f.write('\t' * (tabs) + f'SR_UTILS_NS::RemoveQualifiersT<decltype({getter_code})> clone_{prop.name};\n')
-            f.write('\t' * (tabs) + f'SR_UTILS_NS::Reflection::CloneTo({getter_code}, clone_{prop.name});\n')
+            f.write('\t' * (tabs) + f'SpaRcle::Utils::RemoveQualifiersT<decltype({getter_code})> clone_{prop.name};\n')
+            f.write('\t' * (tabs) + f'SpaRcle::Utils::Reflection::CloneTo({getter_code}, clone_{prop.name});\n')
             f.write('\t' * (tabs) + f'destObject.{prop.setter}(std::move(clone_{prop.name}));\n')
         else:
-            f.write('\t' * (tabs) + f'SR_UTILS_NS::Reflection::CloneTo({getter_code}, destObject.{prop.name});\n')
+            f.write('\t' * (tabs) + f'SpaRcle::Utils::Reflection::CloneTo({getter_code}, destObject.{prop.name});\n')
 
     tabs -= 1
     f.write('\t' * tabs + '}\n\n')
@@ -380,7 +393,7 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
         f.write('\n')
 
     class_name = '::'.join(class_obj.namespaces) + '::' + class_obj.name
-    f.write('\t' * tabs + f'template<> struct SRClassMetaTemplate<{class_name}> final : public SR_UTILS_NS::SRClassMeta {{' + '\n')
+    f.write('\t' * tabs + f'template<> struct SRClassMetaTemplate<{class_name}> final : public SpaRcle::Utils::SRClassMeta {{' + '\n')
     tabs += 1
 
     f.write('\t' * tabs + f'static SRClassMetaTemplate<{class_name}>& Instance() {{' + '\n')
@@ -390,8 +403,8 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
 
     f.write('\t' * tabs + f'SR_NODISCARD {class_name}* DeclTypeStub() const noexcept {{ return nullptr; }}' + '\n\n')
 
-    #f.write('\t' * (tabs + 0) + f'template <typename T> T static SetterSharedSRClassConvert(SR_UTILS_NS::SRClass* pSRClass) {{\n')
-    #f.write('\t' * (tabs + 1) + f'if constexpr (SR_UTILS_NS::IsSharedPointerV<T>) {{\n')
+    #f.write('\t' * (tabs + 0) + f'template <typename T> T static SetterSharedSRClassConvert(SpaRcle::Utils::SRClass* pSRClass) {{\n')
+    #f.write('\t' * (tabs + 1) + f'if constexpr (SpaRcle::Utils::IsSharedPointerV<T>) {{\n')
     #f.write('\t' * (tabs + 2) + f'if (pSRClass) {{\n')
     #f.write('\t' * (tabs + 3) + f'return dynamic_cast<typename T::SharedPointerType*>(pSRClass);\n')
     #f.write('\t' * (tabs + 2) + f'}}\n')
@@ -408,7 +421,7 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
     for prop in class_obj.variables:
         if not prop.property_condition:
             continue
-        f.write('\t' * tabs + f'static auto IsPropertyActive_{prop.serialize_name}(SR_UTILS_NS::SRClass* pClass) {{' + '\n')
+        f.write('\t' * tabs + f'static auto IsPropertyActive_{prop.serialize_name}(SpaRcle::Utils::SRClass* pClass) {{' + '\n')
         f.write('\t' * (tabs + 1) + f'{class_name}& This = *dynamic_cast<{class_name}*>(pClass);' + '\n')
         f.write('\t' * (tabs + 1) + f'return {prop.property_condition};' + '\n')
         f.write('\t' * tabs + '}\n\n')
@@ -416,7 +429,7 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
     for prop in class_obj.variables:
         if not prop.load_condition:
             continue
-        f.write('\t' * tabs + f'static auto IsPropertyLoadAllowed_{prop.serialize_name}(SR_UTILS_NS::SRClass* pClass) {{' + '\n')
+        f.write('\t' * tabs + f'static auto IsPropertyLoadAllowed_{prop.serialize_name}(SpaRcle::Utils::SRClass* pClass) {{' + '\n')
         f.write('\t' * (tabs + 1) + f'{class_name}& This = *dynamic_cast<{class_name}*>(pClass);' + '\n')
         f.write('\t' * (tabs + 1) + f'return {prop.load_condition};' + '\n')
         f.write('\t' * tabs + '}\n\n')
@@ -434,8 +447,8 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
 
     if class_obj.category:
         category_split = class_obj.category.split('.')
-        f.write('\t' * tabs + 'SR_NODISCARD std::span<const SR_UTILS_NS::StringAtom> GetCategory() const noexcept final {\n')
-        f.write('\t' * (tabs + 1) + f'static std::array<const SR_UTILS_NS::StringAtom, {len(category_split)}> categories {{ ')
+        f.write('\t' * tabs + 'SR_NODISCARD std::span<const SpaRcle::Utils::StringAtom> GetCategory() const noexcept final {\n')
+        f.write('\t' * (tabs + 1) + f'static std::array<const SpaRcle::Utils::StringAtom, {len(category_split)}> categories {{ ')
         for category in category_split:
             f.write(f'"{category}", ')
         f.write('};\n')
@@ -443,15 +456,15 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
         f.write('\t' * tabs + '}\n\n')
 
     if class_obj.extension:
-        f.write('\t' * tabs + 'SR_NODISCARD SR_UTILS_NS::StringAtom GetExtension() const noexcept final {\n')
-        f.write('\t' * (tabs + 1) + f'static const SR_UTILS_NS::StringAtom extension = "{class_obj.extension}";' + '\n')
+        f.write('\t' * tabs + 'SR_NODISCARD SpaRcle::Utils::StringAtom GetExtension() const noexcept final {\n')
+        f.write('\t' * (tabs + 1) + f'static const SpaRcle::Utils::StringAtom extension = "{class_obj.extension}";' + '\n')
         f.write('\t' * (tabs + 1) + 'return extension;\n')
         f.write('\t' * tabs + '}\n\n')
 
     #######################################
     if class_obj.inspector:
-        f.write('\t' * tabs + 'SR_NODISCARD SR_UTILS_NS::StringAtom GetInspectorName() const noexcept final {\n')
-        f.write('\t' * (tabs + 1) + f'static const SR_UTILS_NS::StringAtom id = "{class_obj.inspector}";' + '\n')
+        f.write('\t' * tabs + 'SR_NODISCARD SpaRcle::Utils::StringAtom GetInspectorName() const noexcept final {\n')
+        f.write('\t' * (tabs + 1) + f'static const SpaRcle::Utils::StringAtom id = "{class_obj.inspector}";' + '\n')
         f.write('\t' * (tabs + 1) + 'return id;\n')
         f.write('\t' * tabs + '}\n\n')
     #######################################
@@ -474,24 +487,25 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
     generate_class_meta_load(f, class_obj, tabs)
     generate_class_meta_clone(f, class_obj, tabs)
 
-    f.write('\t' * tabs + 'SR_NODISCARD virtual SR_UTILS_NS::StringAtom GetFactoryName() const noexcept final {\n')
+    f.write('\t' * tabs + 'SR_NODISCARD virtual SpaRcle::Utils::StringAtom GetFactoryName() const noexcept final {\n')
     f.write('\t' * (tabs + 1) + f'return {class_name}::GetClassStaticName();' + '\n')
     f.write('\t' * tabs + '}\n\n')
 
     if class_obj.display_name:
-        f.write('\t' * tabs + 'SR_NODISCARD virtual SR_UTILS_NS::StringAtom GetDisplayName() const noexcept final {\n')
-        f.write('\t' * (tabs + 1) + f'const static SR_UTILS_NS::StringAtom displayName = \"{class_obj.display_name}\";' + '\n')
+        f.write('\t' * tabs + 'SR_NODISCARD virtual SpaRcle::Utils::StringAtom GetDisplayName() const noexcept final {\n')
+        f.write('\t' * (tabs + 1) + f'const static SpaRcle::Utils::StringAtom displayName = \"{class_obj.display_name}\";' + '\n')
         f.write('\t' * (tabs + 1) + f'return displayName;' + '\n')
         f.write('\t' * tabs + '}\n\n')
 
     f.write('\t' * (tabs - 1) + 'private:\n')
-    #f.write('\t' * tabs + f'static inline const bool SR_CODEGEN_REGISTER_FACTORY = SR_UTILS_NS::Factory::Instance().Register<{class_name}>();\n\n')
+    #f.write('\t' * tabs + f'static inline const bool SR_CODEGEN_REGISTER_FACTORY = SpaRcle::Utils::Factory::Instance().Register<{class_name}>();\n\n')
 
     f.write('\t' * tabs + f'/// Bindings for class {class_obj.name}' + '\n')
 
     for property in class_obj.variables:
-        f.write('\t' * tabs + f'static void Set_{property.name}(SR_UTILS_NS::SRClass* pClass, const SR_UTILS_NS::Reflection::Value& value) {{' + '\n')
-        f.write('\t' * (tabs + 1) + f'{class_name}* pClassImpl = dynamic_cast<{class_name}*>(pClass);' + '\n')
+        f.write('\t' * tabs + f'static void Set_{property.name}(SpaRcle::Utils::SRClass* pClass, const SpaRcle::Utils::Reflection::Value& value) {{' + '\n')
+        #f.write('\t' * (tabs + 1) + f'{class_name}* pClassImpl = dynamic_cast<{class_name}*>(pClass);' + '\n')
+        get_class_impl_code = f'dynamic_cast<{class_name}*>(pClass)'
 
         #f.write('\t' * (tabs + 1) + f'const decltype({class_name}::{property.name})* pData;\n')
         #f.write('\t' * (tabs + 1) + f'if (!value.Map(pData)) {{\n')
@@ -505,18 +519,18 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
                 f.write('\t' * (tabs + 1) + 'return;\n')
                 bool_do_gen_setter = False
             else:
-                f.write('\t' * (tabs + 1) + f'using Type = SR_UTILS_NS::RemoveQualifiersT<decltype(pClassImpl->{property.getter}())>;' + '\n')
+                f.write('\t' * (tabs + 1) + f'using Type = SpaRcle::Utils::RemoveQualifiersT<decltype({get_class_impl_code}->{property.getter}())>;' + '\n')
         else:
             f.write('\t' * (tabs + 1) + f'using Type = decltype({class_name}::{property.name});' + '\n')
 
         if bool_do_gen_setter:
-            #f.write('\t' * (tabs + 1) + f'if constexpr (SR_UTILS_NS::IsSharedPointerV<Type>) {{\n')
-            #f.write('\t' * (tabs + 2) + f'auto&& pSRClassRef = value.TryCast<SR_UTILS_NS::SRClass*>();\n')
+            #f.write('\t' * (tabs + 1) + f'if constexpr (SpaRcle::Utils::IsSharedPointerV<Type>) {{\n')
+            #f.write('\t' * (tabs + 2) + f'auto&& pSRClassRef = value.TryCast<SpaRcle::Utils::SRClass*>();\n')
             #f.write('\t' * (tabs + 2) + f'if (!pSRClassRef) {{\n')
             #f.write('\t' * (tabs + 3) + f'SRHalt("Failed to cast value!");\n')
             #f.write('\t' * (tabs + 3) + f'return;\n')
             #f.write('\t' * (tabs + 2) + f'}}\n')
-            #f.write('\t' * (tabs + 2) + f'auto&& pSRClass = const_cast<SR_UTILS_NS::SRClass*>(*pSRClassRef);\n')
+            #f.write('\t' * (tabs + 2) + f'auto&& pSRClass = const_cast<SpaRcle::Utils::SRClass*>(*pSRClassRef);\n')
             #if property.setter:
             #    f.write('\t' * (tabs + 2) + f'pClassImpl->{property.setter}(SetterSharedSRClassConvert<Type>(pSRClass));\n')
             #else:
@@ -530,7 +544,7 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
                 f.write('\t' * (tabs + 2) + 'return;\n')
                 f.write('\t' * (tabs + 1) + '}\n')
 
-                f.write('\t' * (tabs + 1) + f'pClassImpl->{property.setter}(*pData);' + '\n')
+                f.write('\t' * (tabs + 1) + f'{get_class_impl_code}->{property.setter}(*pData);' + '\n')
             else:
                 f.write('\t' * (tabs + 1) + 'auto&& pData = value.TryCast<Type>();\n')
                 f.write('\t' * (tabs + 1) + 'if (!pData) {\n')
@@ -540,9 +554,9 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
                 f.write('\t' * (tabs + 1) + '}\n')
 
                 if property.setter:
-                    f.write('\t' * (tabs + 1) + f'pClassImpl->{property.setter}(*pData);' + '\n')
+                    f.write('\t' * (tabs + 1) + f'{get_class_impl_code}->{property.setter}(*pData);' + '\n')
                 else:
-                    f.write('\t' * (tabs + 1) + f'pClassImpl->{property.name} = *pData;' + '\n')
+                    f.write('\t' * (tabs + 1) + f'{get_class_impl_code}->{property.name} = *pData;' + '\n')
 
             #f.write('\t' * (tabs + 1) + f'}}\n')
 
@@ -550,61 +564,58 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
 
         # =================================== getter ===================================
 
-        f.write('\t' * tabs + f'static SR_UTILS_NS::Reflection::Value Get_{property.name}(SR_UTILS_NS::SRClass* pClass) {{\n')
-        f.write('\t' * (tabs + 1) + f'{class_name}* pClassImpl = dynamic_cast<{class_name}*>(pClass);\n')
+        f.write('\t' * tabs + f'static SpaRcle::Utils::Reflection::Value Get_{property.name}(SpaRcle::Utils::SRClass* pClass) {{\n')
+        #f.write('\t' * (tabs + 1) + f'{class_name}* pClassImpl = dynamic_cast<{class_name}*>(pClass);\n')
         if property.getter:
-            f.write('\t' * (tabs + 1) + f'auto&& value = pClassImpl->{property.getter}();\n')
+            f.write('\t' * (tabs + 1) + f'auto&& value = {get_class_impl_code}->{property.getter}();\n')
 
-            #f.write('\t' * (tabs + 1) + f'if constexpr (SR_UTILS_NS::IsSharedPointerV<decltype(value)>) {{\n')
-            #f.write('\t' * (tabs + 2) + f'return SR_UTILS_NS::Reflection::Value::TryCreateSRClass(value);\n')
+            #f.write('\t' * (tabs + 1) + f'if constexpr (SpaRcle::Utils::IsSharedPointerV<decltype(value)>) {{\n')
+            #f.write('\t' * (tabs + 2) + f'return SpaRcle::Utils::Reflection::Value::TryCreateSRClass(value);\n')
             #f.write('\t' * (tabs + 1) + f'}} else ')
 
             f.write('\t' * (tabs + 1) + 'if constexpr (std::is_lvalue_reference_v<decltype(value)>) {\n')
             f.write('\t' * (tabs + 2) + 'if constexpr (std::is_const_v<std::remove_reference_t<decltype(value)>>) {\n')
-            f.write('\t' * (tabs + 3) + 'return SR_UTILS_NS::Reflection::Value::CreateCRef(value);\n')
+            f.write('\t' * (tabs + 3) + 'return SpaRcle::Utils::Reflection::Value::CreateCRef(value);\n')
             f.write('\t' * (tabs + 2) + '} else {\n')
-            f.write('\t' * (tabs + 3) + 'return SR_UTILS_NS::Reflection::Value::CreateRef(value);\n')
+            f.write('\t' * (tabs + 3) + 'return SpaRcle::Utils::Reflection::Value::CreateRef(value);\n')
             f.write('\t' * (tabs + 2) + '}\n')
             f.write('\t' * (tabs + 1) + '} else {\n')
-            f.write('\t' * (tabs + 2) + 'return SR_UTILS_NS::Reflection::Value::Create(std::move(value));\n')
+            f.write('\t' * (tabs + 2) + 'return SpaRcle::Utils::Reflection::Value::Create(std::move(value));\n')
             f.write('\t' * (tabs + 1) + '}\n')
         else:
-            #f.write('\t' * (tabs + 1) + f'if constexpr (SR_UTILS_NS::IsSharedPointerV<decltype(pClassImpl->{property.name})>) {{\n')
-            #f.write('\t' * (tabs + 2) + f'return SR_UTILS_NS::Reflection::Value::TryCreateSRClass(pClassImpl->{property.name});\n')
+            #f.write('\t' * (tabs + 1) + f'if constexpr (SpaRcle::Utils::IsSharedPointerV<decltype(pClassImpl->{property.name})>) {{\n')
+            #f.write('\t' * (tabs + 2) + f'return SpaRcle::Utils::Reflection::Value::TryCreateSRClass(pClassImpl->{property.name});\n')
             #f.write('\t' * (tabs + 1) + f'}}\n')
 
             if property.read_only:
-                f.write('\t' * (tabs + 1) + f'return SR_UTILS_NS::Reflection::Value::CreateCRef(pClassImpl->{property.name});' + '\n')
+                f.write('\t' * (tabs + 1) + f'return SpaRcle::Utils::Reflection::Value::CreateCRef({get_class_impl_code}->{property.name});' + '\n')
             else:
-                f.write('\t' * (tabs + 1) + f'return SR_UTILS_NS::Reflection::Value::CreateRef(pClassImpl->{property.name});' + '\n')
+                f.write('\t' * (tabs + 1) + f'return SpaRcle::Utils::Reflection::Value::CreateRef({get_class_impl_code}->{property.name});' + '\n')
 
 
         f.write('\t' * tabs + '}\n')
 
-        f.write('\t' * tabs + f'static void OnChange_{property.name}(SR_UTILS_NS::SRClass* pClass) {{' + '\n')
         if property.change_callback:
-            f.write('\t' * (tabs + 1) + f'{class_name}* pClassImpl = dynamic_cast<{class_name}*>(pClass);' + '\n')
-            f.write('\t' * (tabs + 1) + f'pClassImpl->{property.change_callback}();' + '\n')
-        f.write('\t' * tabs + '}\n')
-
-        f.write('\n')
+            f.write('\t' * tabs + f'static void OnChange_{property.name}(SpaRcle::Utils::SRClass* pClass) {{' + '\n')
+            f.write('\t' * (tabs + 1) + f'dynamic_cast<{class_name}*>(pClass)->{property.change_callback}();\n')
+            f.write('\t' * tabs + '}\n\n')
 
     tabs -= 1
     f.write('\t' * tabs + '};\n\n')
 
     f.write(f'\t' * tabs + f'extern "C" {dll_export_macro} void RegisterClassMeta_{class_obj.name}() {{' + '\n')
-    f.write(f'\t' * (tabs + 1) + f'SR_UTILS_NS::Factory::Instance().Register<{class_name}>("{context.module_name}");' + '\n')
+    f.write(f'\t' * (tabs + 1) + f'SpaRcle::Utils::Factory::Instance().Register<{class_name}>("{context.module_name}");' + '\n')
     f.write(f'\t' * tabs + f'}}\n\n')
 
     f.write(f'\t' * tabs + f'extern "C" {dll_export_macro} void UnregisterClassMeta_{class_obj.name}() {{' + '\n')
-    f.write(f'\t' * (tabs + 1) + f'SR_UTILS_NS::Factory::Instance().Unregister<{class_name}>();' + '\n')
+    f.write(f'\t' * (tabs + 1) + f'SpaRcle::Utils::Factory::Instance().Unregister<{class_name}>();' + '\n')
     f.write(f'\t' * tabs + '}\n\n')
 
     #for inherited_class in class_obj.inherited_classes:
     #    inherited_class_formated = inherited_class.split('::')[-1]
     #    f.write('\t' * tabs + f'// class {class_obj.name} inherits from {inherited_class}\n')
     #    f.write('\t' * tabs + f'inline static bool SR_CODEGEN_REGISTER_INHERITANCE_{class_obj.name}_{inherited_class_formated} '
-    #                          f'= SR_UTILS_NS::ClassDB::Instance().RegisterInheritance(\"{class_obj.name}\", \"{inherited_class_formated}\");\n\n')
+    #                          f'= SpaRcle::Utils::ClassDB::Instance().RegisterInheritance(\"{class_obj.name}\", \"{inherited_class_formated}\");\n\n')
 
     tabs -= 1
     f.write('\t' * tabs + '}\n\n')
@@ -809,8 +820,8 @@ def generate_enums_header(logger: logger_utils.Logger, context: codegen_context.
 
             f.write('namespace Codegen {\n')
 
-            f.write(f'\ttemplate<> constexpr SR_UTILS_NS::EnumVariant GetEnumVariant(Codegen::EnumSelector<{class_full_name}>) noexcept {{' + '\n')
-            f.write(f'\t\treturn SR_UTILS_NS::EnumVariant::{enum_obj.variant};' + '\n')
+            f.write(f'\ttemplate<> constexpr SpaRcle::Utils::EnumVariant GetEnumVariant(Codegen::EnumSelector<{class_full_name}>) noexcept {{' + '\n')
+            f.write(f'\t\treturn SpaRcle::Utils::EnumVariant::{enum_obj.variant};' + '\n')
             f.write('\t}\n\n')
 
             f.write(f'\ttemplate<> constexpr size_t GetEnumItemsCount(Codegen::EnumSelector<{class_full_name}>) noexcept {{' + '\n')
@@ -885,8 +896,8 @@ def generate_enums_code(logger: logger_utils.Logger, context: codegen_context.Co
             f.write('\tconstexpr auto parse(format_parse_context& ctx) { return ctx.begin(); }\n')
             f.write(f'\tauto format(const {namespace_str}{enum_obj.name}& val, format_context& ctx) const {{' + '\n')
 
-            #f.write(f'\t\tstatic_assert(SR_UTILS_NS::IsCompleteTypeV<{namespace_str}CodegenEnumIncludedChecked_{enum_obj.name}>, "Formatted enum is not included, please include it!");' + '\n')
-            f.write('\t\treturn fmt::format_to(ctx.out(), "{}", SR_UTILS_NS::EnumReflector::ToStringAtom(val).ToStringView());' + '\n')
+            #f.write(f'\t\tstatic_assert(SpaRcle::Utils::IsCompleteTypeV<{namespace_str}CodegenEnumIncludedChecked_{enum_obj.name}>, "Formatted enum is not included, please include it!");' + '\n')
+            f.write('\t\treturn fmt::format_to(ctx.out(), "{}", SpaRcle::Utils::EnumReflector::ToStringAtom(val).ToStringView());' + '\n')
 
             f.write('\t}\n')
             f.write('};\n')
@@ -1071,6 +1082,7 @@ def generate_classes_code(logger: logger_utils.Logger, context: codegen_context.
         generated_files.add(f'{file_name}.generated.hpp')
 
         f = sparcle_utils.StringStream()
+        def_includes_included = False
 
         if True:
             f.write(sparcle_utils.codegen_cpp_header_comment)
@@ -1090,13 +1102,15 @@ def generate_classes_code(logger: logger_utils.Logger, context: codegen_context.
                 if ext == '.h':
                     f.write(f'#include "{os.path.abspath(os.path.normpath(class_obj.path))}"' + '\n\n')
 
-                f.write('#include <Utils/Reflection/Property.h>\n')
-                f.write('#include <Utils/Reflection/Value.h>\n')
-                f.write('#include <Utils/Reflection/SRClassUtils.h>\n')
-                f.write('#include <Utils/TypeTraits/SRClass.h>\n')
-                f.write('#include <Utils/TypeTraits/Factory.h>\n')
-                f.write('#include <Utils/TypeTraits/SRClassMeta.h>\n')
-                f.write('#include <Utils/Serialization/MigrationManager.h>\n\n')
+                if not def_includes_included:
+                    f.write('#include <Utils/Reflection/Property.h>\n')
+                    f.write('#include <Utils/Reflection/Value.h>\n')
+                    f.write('#include <Utils/Reflection/SRClassUtils.h>\n')
+                    f.write('#include <Utils/TypeTraits/SRClass.h>\n')
+                    f.write('#include <Utils/TypeTraits/Factory.h>\n')
+                    f.write('#include <Utils/TypeTraits/SRClassMeta.h>\n')
+                    f.write('#include <Utils/Serialization/MigrationManager.h>\n\n')
+                    def_includes_included = True
 
                 tabs = 0
 
@@ -1108,23 +1122,23 @@ def generate_classes_code(logger: logger_utils.Logger, context: codegen_context.
                     f.write(f'namespace {namespace_str} {{' + '\n')
 
 
-                f.write('\t' * tabs + f'const SR_UTILS_NS::SRClassMeta* {class_obj.name}::GetMetaStatic() noexcept {{' + '\n')
+                f.write('\t' * tabs + f'const SpaRcle::Utils::SRClassMeta* {class_obj.name}::GetMetaStatic() noexcept {{' + '\n')
                 f.write('\t' * (tabs + 1) + f'return &::Codegen::SRClassMetaTemplate<{class_obj.name}>::Instance();' + '\n')
                 f.write('\t' * tabs + '}\n\n')
 
                 factory_name = class_obj.name.split('::')[-1]
                 #factory_name = factory_name[0].lower() + factory_name[1:]
-                f.write('\t' * tabs + f'SR_UTILS_NS::StringAtom {class_obj.name}::GetClassStaticName() noexcept {{' + '\n')
+                f.write('\t' * tabs + f'SpaRcle::Utils::StringAtom {class_obj.name}::GetClassStaticName() noexcept {{' + '\n')
                 f.write('\t' * (tabs + 1) + f'return \"{factory_name}\";' + '\n')
                 f.write('\t' * tabs + '}\n\n')
 
-                f.write('\t' * tabs + f'SR_UTILS_NS::SRClass* {class_obj.name}::AllocateStatic() noexcept {{' + '\n')
+                f.write('\t' * tabs + f'SpaRcle::Utils::SRClass* {class_obj.name}::AllocateStatic() noexcept {{' + '\n')
                 f.write('\t' * (tabs + 1) + f'if constexpr (std::is_abstract_v<{class_obj.name}>) {{' + '\n')
                 f.write('\t' * (tabs + 2) + f'SRHalt("Cannot allocate abstract class \\\"{class_obj.name}\\\"!");' + '\n')
                 f.write('\t' * (tabs + 2) + 'return nullptr;\n')
                 f.write('\t' * (tabs + 1) + '}\n')
                 f.write('\t' * (tabs + 1) + 'else {\n')
-                f.write('\t' * (tabs + 2) + f'return static_cast<SR_UTILS_NS::SRClass*>(SRNew<{class_obj.name}>());' + '\n')
+                f.write('\t' * (tabs + 2) + f'return static_cast<SpaRcle::Utils::SRClass*>(SRNew<{class_obj.name}>());' + '\n')
                 f.write('\t' * (tabs + 1) + '}\n')
                 f.write('\t' * tabs + '}\n')
                 if len(class_obj.namespaces) > 0:

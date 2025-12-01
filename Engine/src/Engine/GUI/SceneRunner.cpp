@@ -8,6 +8,7 @@
 
 #include <Utils/TaskManager/TaskManager.h>
 #include <Utils/Common/StoreUtils.h>
+#include <Utils/ECS/Prefab.h>
 
 #include <Audio/SoundManager.h>
 

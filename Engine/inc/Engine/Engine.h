@@ -5,31 +5,17 @@
 #ifndef SR_ENGINE_ENGINE_H
 #define SR_ENGINE_ENGINE_H
 
-#include <Engine/EngineResources.h>
+#include <Engine/stdInclude.h>
 
-#include <Graphics/Window/Window.h>
-
-#include <Scripting/Cpp/ScriptSystem.h>
-
-#include <Utils/Events/EventManager.h>
-#include <Utils/Types/Time.h>
-#include <Utils/Types/Timer.h>
-#include <Utils/FileSystem/FileSystem.h>
-#include <Utils/Types/Thread.h>
+#include <Utils/Types/SharedPtr.h>
 #include <Utils/Types/SafePointer.h>
-#include <Utils/Input/InputDispatcher.h>
-#include <Utils/Input/InputHandler.h>
-#include <Utils/Types/Function.h>
-#include <Utils/Types/SafeGateArray.h>
-#include <Utils/TaskManager/ThreadWorker.h>
 #include <Utils/Types/SafeQueue.h>
-#include <Utils/Localization/LocalizationManager.h>
-#include <Utils/CommandManager/CmdManager.h>
 
 namespace SR_GRAPH_NS {
     class Render;
     class RenderScene;
     class RenderContext;
+    class Window;
 }
 
 namespace SR_PHYSICS_NS {
@@ -43,6 +29,17 @@ namespace SR_GTYPES_NS {
 namespace SR_WORLD_NS {
     class Scene;
     class SceneUpdater;
+}
+
+namespace SR_UTILS_NS {
+    class CmdManager;
+    class Debug;
+    class InputDispatcher;
+    class ThreadsWorker;
+
+    namespace Localization {
+        class LocalizationManager;
+    }
 }
 
 namespace SR_CORE_GUI_NS {
@@ -90,7 +87,7 @@ namespace SR_CORE_NS {
         SR_NODISCARD const ScenePtr& GetScene() const;
         SR_NODISCARD const RenderContextPtr& GetRenderContext() const { return m_renderContext; }
         SR_NODISCARD const RenderScenePtr& GetRenderScene() const;
-        SR_NODISCARD const SR_UTILS_NS::ThreadsWorker::Ptr& GetThreadsWorker() const { return m_threadsWorker; }
+        SR_NODISCARD const SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::ThreadsWorker>& GetThreadsWorker() const;
         SR_NODISCARD const PhysicsScenePtr& GetPhysicsScene() const;
         SR_NODISCARD WindowPtr GetMainWindow() const { return m_windows.empty() ? nullptr : m_windows.front(); }
         SR_NODISCARD WindowPtr GetFocusedWindow() const;
@@ -133,7 +130,7 @@ namespace SR_CORE_NS {
         float_t m_speed = 1.f;
         SR_UTILS_NS::TimePointType m_timeStart;
 
-        SR_UTILS_NS::ThreadsWorker::Ptr m_threadsWorker;
+        SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::ThreadsWorker> m_threadsWorker;
 
         SR_UTILS_NS::CmdManager* m_cmdManager  = nullptr;
         SR_UTILS_NS::InputDispatcher* m_input = nullptr;

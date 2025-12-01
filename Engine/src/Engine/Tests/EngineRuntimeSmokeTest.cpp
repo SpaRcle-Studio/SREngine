@@ -10,6 +10,8 @@
 #include <Engine/GUI/SceneRunner.h>
 #include <Engine/GUI/Hierarchy.h>
 
+#include <Graphics/Window/Window.h>
+
 #include <Scripting/Cpp/ScriptSystem.h>
 
 #include <Utils/Types/Thread.h>

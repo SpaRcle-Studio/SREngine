@@ -7,17 +7,13 @@
 #include <Engine/GUI/EditorGUI.h>
 #include <Engine/Engine.h>
 
-
 #include <Graphics/Types/Framebuffer.h>
 #include <Graphics/Types/Skybox.h>
 #include <Graphics/Types/Camera.h>
 #include <Graphics/Types/Mesh.h>
-
 #include <Graphics/Memory/ShaderProgramManager.h>
-
 #include <Graphics/Pass/FrameBufferPass.h>
 #include <Graphics/Pass/MeshDrawerPass.h>
-
 #include <Graphics/Render/RenderTechnique.h>
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Render/DebugRenderer.h>
@@ -27,10 +23,7 @@
 #include <Utils/Types/IRawMeshHolder.h>
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/DebugDraw.h>
-
-// #include <Graphics/Pipeline/Vulkan/VulkanPipeline.h>
-// #include <Graphics/Pipeline/Vulkan/VulkanKernel.h>
-// #include <Graphics/Pipeline/Vulkan/VulkanMemory.h>
+#include <Utils/CommandManager/CmdManager.h>
 
 namespace SR_CORE_GUI_NS {
     EngineStatistics::EngineStatistics()

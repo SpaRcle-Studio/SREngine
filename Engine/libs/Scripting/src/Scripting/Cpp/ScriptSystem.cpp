@@ -5,6 +5,7 @@
 #include <Scripting/Cpp/ScriptSystem.h>
 
 #include <Utils/Common/Features.h>
+#include <Utils/Common/SubscriptionMessage.h>
 #include <Utils/FileSystem/FileSystem.h>
 #include <Utils/Types/Time.h>
 
