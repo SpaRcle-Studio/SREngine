@@ -124,10 +124,6 @@ list(APPEND SR_CORE_LINK_LIBRARIES Scripting)
 
 target_link_libraries(Engine ${SR_CORE_LINK_LIBRARIES})
 
-if (SR_USE_PCH)
-    target_precompile_headers(Engine PRIVATE ${SR_COMMON_PCH_HEADER_PATH})
-endif()
-
 target_include_directories(Engine PUBLIC ${CORE_ROOT_DIR}/inc)
 
 target_include_directories(Engine PUBLIC ${CMAKE_CURRENT_BINARY_DIR})

@@ -71,10 +71,6 @@ if (SR_ENGINE_MONO_SUPPORT)
     endif()
 endif()
 
-if (SR_USE_PCH)
-    target_precompile_headers(Scripting PRIVATE ${SR_COMMON_PCH_HEADER_PATH})
-endif()
-
 target_include_directories(Scripting PUBLIC inc)
 target_include_directories(Scripting PUBLIC libs/EvoScript/Core/inc)
 target_include_directories(Scripting PUBLIC ${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Engine/libs/Utils/libs/tree-sitter/lib/include)

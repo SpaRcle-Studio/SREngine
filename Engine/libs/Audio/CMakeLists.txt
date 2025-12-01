@@ -58,10 +58,6 @@ else()
     SR_COPY_STATIC_LIBRARY_TO_LIBRARY_FOLDER(Audio)
 endif()
 
-if (SR_USE_PCH)
-    target_precompile_headers(Audio PRIVATE ${SR_COMMON_PCH_HEADER_PATH})
-endif()
-
 if (SR_AUDIO_DLL_EXPORTS)
     message("Audio will be using DLL exports")
     target_compile_definitions(Audio PUBLIC SR_AUDIO_DLL_EXPORTS)
