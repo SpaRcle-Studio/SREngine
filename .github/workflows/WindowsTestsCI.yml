@@ -13,6 +13,85 @@ jobs:
     name: Windows Tests.
     runs-on: windows-latest
     steps:
-      - run: |
-          echo "Commit Message: ${{ inputs.commitMessage }}"
-        name: Debug log.
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 1) Скачать Debug
+      - name: Download Debug build
+        uses: actions/download-artifact@v4
+        with:
+          name: "Windows Debug SpaRcle Engine"
+          path: "artifacts/debug"
+
+      # 2) Скачать Release
+      - name: Download Release build
+        uses: actions/download-artifact@v4
+        with:
+          name: "Windows Release SpaRcle Engine"
+          path: "artifacts/release"
+
+      # 3) Найти exe в debug
+      - name: Find debug exe
+        id: find_debug
+        shell: bash
+        run: |
+          EXE=$(find artifacts/debug -type f -name "*.exe" | head -n 1)
+          if [ -z "$EXE" ]; then
+            echo "Debug exe not found"
+            exit 1
+          fi
+          echo "debug_exe=$EXE" >> $GITHUB_OUTPUT
+
+      # 4) Найти exe в release
+      - name: Find release exe
+        id: find_release
+        shell: bash
+        run: |
+          EXE=$(find artifacts/release -type f -name "*.exe" | head -n 1)
+          if [ -z "$EXE" ]; then
+            echo "Release exe not found"
+            exit 1
+          fi
+          echo "release_exe=$EXE" >> $GITHUB_OUTPUT
+
+      - name: Run Debug tests
+        shell: powershell
+        continue-on-error: true
+        run: |
+          $exe = "${{ steps.find_debug.outputs.debug_exe }}"
+          Write-Host "Running: $exe"
+          
+          # Запускаем приложение, перехватываем вывод
+          $logFile = "debug_test_log.txt"
+          
+          try {
+              & $exe --unit-tests *>&1 | Tee-Object -FilePath $logFile
+          }
+          catch {
+              Write-Host "Exception during test execution:"
+              Write-Host $_
+          }
+          
+          Write-Host "===== Debug Test Log ====="
+          Get-Content $logFile
+
+      - name: Run Release tests
+        shell: powershell
+        continue-on-error: true
+        run: |
+          $exe = "${{ steps.find_release.outputs.release_exe }}"
+          Write-Host "Running: $exe"
+      
+          $logFile = "release_test_log.txt"
+      
+          try {
+              & $exe --run-tests *>&1 | Tee-Object -FilePath $logFile
+          }
+          catch {
+              Write-Host "Exception during test execution:"
+              Write-Host $_
+          }
+      
+          Write-Host "===== Release Test Log ====="
+          Get-Content $logFile
+
