@@ -33,6 +33,8 @@
 #include <Utils/Events/Broadcaster.h>
 #include <Utils/Reflection/Value.h>
 
+#include <Enum/TreeNodeFlags.hpp>
+
 namespace SR_CORE_GUI_NS {
     Inspector::Inspector(Hierarchy* hierarchy)
         : SR_GRAPH_GUI_NS::Widget("Inspector")

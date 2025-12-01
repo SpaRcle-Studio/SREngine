@@ -9,6 +9,8 @@
 
 #include <Utils/ECS/GameObject.h>
 
+#include <Enum/GizmoOperation.hpp>
+
 #include <Codegen/EditorGizmo.generated.hpp>
 
 namespace SR_CORE_GUI_NS {

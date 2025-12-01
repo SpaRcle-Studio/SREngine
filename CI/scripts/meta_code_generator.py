@@ -659,6 +659,8 @@ def generate_enums_fwd_header(logger: logger_utils.Logger, context: codegen_cont
 
 
 def generate_enums_header(logger: logger_utils.Logger, context: codegen_context.CodegenContext, enums):
+    return
+
     full_path = os.path.normpath(f'{context.codegen_dir}/Enums.generated.hpp')
     f = sparcle_utils.StringStream()
     if True:
@@ -882,8 +884,9 @@ def generate_enums_code(logger: logger_utils.Logger, context: codegen_context.Co
             f.write(f'#define SR_CODEGEN_ENUM_{caps_enum_name}_HPP' + '\n\n')
 
             f.write(f'#include \"{enum_obj.source_path}\"' + '\n\n')
+            f.write(f'#include <Utils/Common/EnumOperators.h>\n\n')
 
-            f.write('#include <Codegen/Enums.generated.hpp>\n\n')
+            #f.write('#include <Codegen/Enums.generated.hpp>\n\n')
 
             namespace_str = ''
             if len(enum_obj.namespaces) > 0:
@@ -891,6 +894,9 @@ def generate_enums_code(logger: logger_utils.Logger, context: codegen_context.Co
 
             if len(namespace_str) > 0:
                 namespace_str += '::'
+
+            class_full_name = namespace_str + enum_obj.name
+            f.write(f'SR_CODEGEN_ENUM_OPERATORS(inline, inline, {class_full_name})' + '\n\n')
 
             f.write(f'template<> struct fmt::formatter<{namespace_str}{enum_obj.name}> {{' + '\n')
             f.write('\tconstexpr auto parse(format_parse_context& ctx) { return ctx.begin(); }\n')

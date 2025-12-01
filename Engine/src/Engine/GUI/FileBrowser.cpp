@@ -28,6 +28,8 @@
 #include <Utils/TypeTraits/SRClassMeta.h>
 #include <Utils/Resources/ResourceManager.h>
 
+#include <Enum/TreeNodeFlags.hpp>
+
 namespace SR_CORE_NS::GUI {
     FileBrowser::FileBrowser()
         : Widget("Assets")

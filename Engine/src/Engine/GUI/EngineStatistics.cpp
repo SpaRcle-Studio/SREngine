@@ -63,7 +63,7 @@ namespace SR_CORE_GUI_NS {
                     node.append(" (").append(stream.str()).append(")");
                 }
 
-                SR_GRAPH_GUI_NS::Immediate::TreeNodeEx(pRes, SR_GRAPH_GUI_NS::Immediate::SR_NODE_FLAGS_WITHOUT_CHILD, "%s", node.c_str());
+                SR_GRAPH_GUI_NS::Immediate::TreeNodeEx(pRes, SR_GRAPH_GUI_NS::Immediate::GetNodeFlagsWithoutChild(), "%s", node.c_str());
 
                 if (isDestroyed) {
                     if (SR_GRAPH_GUI_NS::Immediate::IsMouseDoubleClicked(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left) && SR_GRAPH_GUI_NS::Immediate::IsItemHovered()) {
@@ -79,7 +79,7 @@ namespace SR_CORE_GUI_NS {
 
                 const auto node = SR_FORMAT("[{}] {} ({})", index, (*resources.begin())->GetResourceId().data(), resources.size());
 
-                const bool open = SR_GRAPH_GUI_NS::Immediate::TreeNodeEx((void*)(intptr_t)index, SR_GRAPH_GUI_NS::Immediate::SR_NODE_FLAGS_WITH_CHILD, "%s", node.c_str());
+                const bool open = SR_GRAPH_GUI_NS::Immediate::TreeNodeEx((void*)(intptr_t)index, SR_GRAPH_GUI_NS::Immediate::GetNodeFlagsWithChild(), "%s", node.c_str());
 
                 if (open) {
                     for (const SR_UTILS_NS::IResource::Ptr& pRes : resources) {
@@ -91,7 +91,7 @@ namespace SR_CORE_GUI_NS {
 
             SR_UTILS_NS::ResourceManager::Instance().InspectResources([=](auto &groups) {
                 for (auto& [groupHashName, pResourceType] : groups) {
-                    const bool open = SR_GRAPH_GUI_NS::Immediate::TreeNodeEx((void*)(intptr_t)pResourceType, SR_GRAPH_GUI_NS::Immediate::SR_NODE_FLAGS_WITH_CHILD, "%s", pResourceType->GetName().data());
+                    const bool open = SR_GRAPH_GUI_NS::Immediate::TreeNodeEx((void*)(intptr_t)pResourceType, SR_GRAPH_GUI_NS::Immediate::GetNodeFlagsWithChild(), "%s", pResourceType->GetName().data());
 
                     if (open) {
                         uint32_t index = 0;

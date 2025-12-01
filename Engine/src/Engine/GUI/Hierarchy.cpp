@@ -20,6 +20,8 @@
 #include <Utils/CommandManager/ReversibleCommand.h>
 #include <Utils/FileSystem/FileDialog.h>
 
+#include <Enum/TreeNodeFlags.hpp>
+
 namespace SR_CORE_GUI_NS {
     const SR_MATH_NS::FColor SR_PREFAB_COLOR_FIRST = SR_MATH_NS::FColor(39.f / 255.f, 225 / 255.f, 193.f / 255.f, 1.f);
     const SR_MATH_NS::FColor SR_PREFAB_COLOR_SECOND = SR_MATH_NS::FColor(1.f, 140.f / 255.f, 0.f, 1.f);
@@ -180,7 +182,7 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-        const SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags flags = (hasChild ? SR_GRAPH_GUI_NS::Immediate::SR_NODE_FLAGS_WITH_CHILD : SR_GRAPH_GUI_NS::Immediate::SR_NODE_FLAGS_WITHOUT_CHILD) |
+        const SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags flags = (hasChild ? SR_GRAPH_GUI_NS::Immediate::GetNodeFlagsWithChild() : SR_GRAPH_GUI_NS::Immediate::GetNodeFlagsWithoutChild()) |
                                          ((m_selected.count(pRoot) == 1) ? SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::Selected : SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::None);
 
         if (pRoot->IsPrefabOwner()) {
