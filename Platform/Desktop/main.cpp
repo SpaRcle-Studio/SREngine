@@ -27,6 +27,9 @@ int main(int argc, char** argv) {
         if (strcmp(argv[i], "--pack") == 0) {
             return PackFiles(executablePath, GetPackFiles(executablePath), {}, false);
         }
+        if (strcmp(argv[i], "--unpack") == 0) {
+            return TryUnpackFiles(executablePath);
+        }
         if (strcmp(argv[i], "--pack-with-res") == 0) {
             return PackFiles(executablePath, GetPackFiles(executablePath), GetResourcesPackFiles(), false);
         }

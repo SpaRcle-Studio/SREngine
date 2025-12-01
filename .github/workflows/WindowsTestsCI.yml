@@ -62,17 +62,44 @@ jobs:
           Write-Host "Running: $exe"
           
           # Запускаем приложение, перехватываем вывод
+          $logUnpackFile = "debug_unpack_log.txt"
           $logFile = "debug_test_log.txt"
           
           try {
-              & $exe --unit-tests *>&1 | Tee-Object -FilePath $logFile
+              & $exe --unpack *>&1 | Tee-Object -FilePath $logUnpackFile
           }
           catch {
               Write-Host "Exception during test execution:"
               Write-Host $_
           }
           
-          Write-Host "===== Debug Test Log ====="
+          Write-Host "===== Unpack Log ====="
+          Get-Content $logUnpackFile
+          
+          $binDir = "SREngine/Engine/Bin"
+          if (-not (Test-Path $binDir)) {
+              Write-Host "Папка $binDir не найдена. Значит упакованный exe ничего не распаковал."
+              exit 1
+          }
+
+          $unpackedExe = Get-ChildItem -Path $binDir -Filter "SREngine_*.exe" -File | Select-Object -First 1
+          if (-not $unpackedExe) {
+              Write-Host "Распакованный exe не найден в $binDir"
+              exit 1
+          }
+
+          Write-Host "Found unpacked exe: $($unpackedExe.FullName)"
+
+          # ---- RUN UNPACKED EXE ----
+          try {
+              & $unpackedExe.FullName --test *>&1 | Tee-Object -FilePath $logFile
+          }
+          catch {
+              Write-Host "Exception during unpacked exe execution:"
+              Write-Host $_
+          }
+
+          Write-Host "===== Test Log ====="
           Get-Content $logFile
 
       - name: Run Release tests
@@ -81,17 +108,45 @@ jobs:
         run: |
           $exe = "${{ steps.find_release.outputs.release_exe }}"
           Write-Host "Running: $exe"
-      
+          
+          # Запускаем приложение, перехватываем вывод
+          $logUnpackFile = "release_unpack_log.txt"
           $logFile = "release_test_log.txt"
-      
+          
           try {
-              & $exe --run-tests *>&1 | Tee-Object -FilePath $logFile
+              & $exe --unpack *>&1 | Tee-Object -FilePath $logUnpackFile
           }
           catch {
               Write-Host "Exception during test execution:"
               Write-Host $_
           }
-      
-          Write-Host "===== Release Test Log ====="
+          
+          Write-Host "===== Unpack Log ====="
+          Get-Content $logUnpackFile
+          
+          $binDir = "SREngine/Engine/Bin"
+          if (-not (Test-Path $binDir)) {
+              Write-Host "Папка $binDir не найдена. Значит упакованный exe ничего не распаковал."
+              exit 1
+          }
+
+          $unpackedExe = Get-ChildItem -Path $binDir -Filter "SREngine_*.exe" -File | Select-Object -First 1
+          if (-not $unpackedExe) {
+              Write-Host "Распакованный exe не найден в $binDir"
+              exit 1
+          }
+
+          Write-Host "Found unpacked exe: $($unpackedExe.FullName)"
+
+          # ---- RUN UNPACKED EXE ----
+          try {
+              & $unpackedExe.FullName --test *>&1 | Tee-Object -FilePath $logFile
+          }
+          catch {
+              Write-Host "Exception during unpacked exe execution:"
+              Write-Host $_
+          }
+
+          Write-Host "===== Test Log ====="
           Get-Content $logFile
 
