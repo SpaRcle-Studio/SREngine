@@ -9,6 +9,8 @@
 #include <Audio/SoundListener.h>
 #include <Audio/Sound.h>
 
+#include <Utils/Platform/Platform.h>
+
 namespace SR_AUDIO_NS {
     void SoundManager::OnSingletonDestroy() {
         m_state = State::Stopped;

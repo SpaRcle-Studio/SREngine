@@ -5,7 +5,9 @@
 #ifndef SR_ENGINE_SCRIPTING_MACROS_H
 #define SR_ENGINE_SCRIPTING_MACROS_H
 
-#include <Utils/macros.h>
+#ifndef SR_USE_PCH
+    #include <Utils/macros.h>
+#endif
 
 #ifdef SR_SCRIPTING_DLL_EXPORTS
     #define SR_SCRIPTING_DLL_API SR_DLL_API_EXPORT

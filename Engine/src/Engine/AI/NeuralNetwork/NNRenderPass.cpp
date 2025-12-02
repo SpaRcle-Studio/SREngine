@@ -5,6 +5,7 @@
 #include <Engine/AI/NeuralNetwork/NNRenderPass.h>
 
 #include <Graphics/Types/Camera.h>
+#include <Graphics/Pipeline/Pipeline.h>
 
 #include <Utils/Math/Vector4.h>
 #include <Utils/FileSystem/PathDataAccessor.h>

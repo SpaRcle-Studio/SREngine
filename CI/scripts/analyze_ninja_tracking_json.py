@@ -19,7 +19,7 @@ def load_trace(path):
 
     raise RuntimeError("Файл не читается как JSON или gzip JSON")
 
-def extract_longest_events(trace, top):
+def extract_longest_events(trace, top, nolib=False):
     # если trace — объект с traceEvents
     if isinstance(trace, dict) and "traceEvents" in trace:
         events = trace["traceEvents"]
@@ -43,6 +43,17 @@ def extract_longest_events(trace, top):
             continue
 
         name = e.get("name", "<unknown>")
+
+        if nolib:
+            modules = ['Utils', 'Physics', 'Audio', 'Scripting', 'Graphics']
+            skip = False
+            for module in modules:
+                if module + "/libs" in name:
+                    skip = True
+                    break
+            if skip:
+                continue
+
         args = e.get("args", {}).get("command", "")
 
         result.append((dur, name, args))
@@ -52,9 +63,11 @@ def extract_longest_events(trace, top):
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--top', type=int, default=50, help='Number of top longest events to display')
+parser.add_argument('--nolib', action='store_true', help='Exclude library commands from the output')
 
 trace = load_trace("trace.json")
-[total_time, longest] = extract_longest_events(trace, top=parser.parse_args().top)
+arguments = parser.parse_args()
+[total_time, longest] = extract_longest_events(trace, top=arguments.top, nolib=arguments.nolib)
 
 total_time_top = sum(dur for dur, _, _ in longest)
 

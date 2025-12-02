@@ -2,24 +2,21 @@
 // Created by Monika on 06.04.2022.
 //
 
-#include <Engine/Engine.h>
 #include <Engine/Common/Importers.h>
 #include <Engine/World/World.h>
+
+#include <Graphics/Render/RenderScene.h>
+#include <Graphics/Render/RenderContext.h>
+#include <Graphics/Animations/Skeleton.h>
+#include <Graphics/Types/Geometry/SkinnedMesh.h>
+#include <Graphics/Material/FileMaterial.h>
+#include <Graphics/Types/Texture.h>
+
+#include <Physics/LibraryImpl.h>
 
 #include <Utils/Types/RawMesh.h>
 #include <Utils/ECS/GameObject.h>
 #include <Utils/World/Scene.h>
-
-#include <Graphics/Memory/CameraManager.h>
-#include <Graphics/Render/RenderScene.h>
-#include <Graphics/Animations/Skeleton.h>
-#include <Graphics/Types/Geometry/SkinnedMesh.h>
-#include <Graphics/Material/FileMaterial.h>
-
-#include <Physics/PhysicsLib.h>
-#include <Physics/LibraryImpl.h>
-
-#include <Graphics/Types/Texture.h>
 
 #ifdef SR_UTILS_ASSIMP
     #include <assimp/scene.h>
@@ -27,7 +24,7 @@
 
 namespace SR_CORE_NS {
     SR_UTILS_NS::SceneObject::Ptr World::Instance(const SR_HTYPES_NS::RawMesh* pRawMesh) {
-        GameObjectPtr root;
+        SR_UTILS_NS::GameObject::Ptr root;
     #ifdef SR_UTILS_ASSIMP
         static std::function processMaterial = [](const SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t meshId, SR_GTYPES_NS::Mesh* pMesh, uint64_t materialIndex) {
             const aiScene* pScene = static_cast<const aiScene*>(pRawMesh->GetAssimpScene());
@@ -49,8 +46,8 @@ namespace SR_CORE_NS {
 
         std::list<SR_GTYPES_NS::SkinnedMesh::Ptr> skinnedMeshes;
 
-        const std::function<GameObjectPtr(aiNode*)> processNode = [&processNode, &skinnedMeshes, this, pRawMesh](aiNode* node) -> GameObjectPtr {
-            GameObjectPtr ptr = Scene::InstanceGameObject(node->mName.C_Str());
+        const std::function<SR_UTILS_NS::GameObject::Ptr(aiNode*)> processNode = [&processNode, &skinnedMeshes, this, pRawMesh](aiNode* node) -> SR_UTILS_NS::GameObject::Ptr {
+            SR_UTILS_NS::GameObject::Ptr ptr = Scene::InstanceGameObject(node->mName.C_Str());
 
             const aiScene* pScene = static_cast<const aiScene*>(pRawMesh->GetAssimpScene());
 

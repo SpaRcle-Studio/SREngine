@@ -8,11 +8,7 @@
 #include <Engine/Engine.h>
 
 #include <Utils/World/Scene.h>
-#include <Utils/ECS/Component.h>
-#include <Utils/ECS/Transform3D.h>
-#include <Utils/ECS/GameObject.h>
-
-#include <Graphics/Window/Window.h>
+#include <Utils/ECS/SceneObject.h>
 
 namespace SR_GRAPH_NS {
     class RenderScene;
@@ -20,7 +16,6 @@ namespace SR_GRAPH_NS {
 
 namespace SR_CORE_NS {
     class SR_CORE_DLL_API World : public SR_WORLD_NS::Scene {
-        using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;
         using CameraPtr = SR_GTYPES_NS::Camera*;
         using RenderScenePtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::RenderScene>;
     public:

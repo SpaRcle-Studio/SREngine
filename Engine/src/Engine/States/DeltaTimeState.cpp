@@ -4,6 +4,8 @@
 
 #include <Engine/States/DeltaTimeState.h>
 
+#include <Utils/Types/DataStorage.h>
+
 #include <Codegen/DeltaTimeState.generated.hpp>
 
 namespace SR_CORE_NS {

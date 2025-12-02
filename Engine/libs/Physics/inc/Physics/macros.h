@@ -1,7 +1,9 @@
 #ifndef SR_ENGINE_PHYSICS_MACROS_H
 #define SR_ENGINE_PHYSICS_MACROS_H
 
-#include <Utils/macros.h>
+#ifndef SR_USE_PCH
+    #include <Utils/macros.h>
+#endif
 
 #ifdef SR_PHYSICS_DLL_EXPORTS
     #define SR_PHYSICS_DLL_API SR_DLL_API_EXPORT
