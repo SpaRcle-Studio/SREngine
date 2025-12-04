@@ -22,6 +22,8 @@
 
 namespace SR_CORE_NS {
     SR_UTILS_NS::ThreadWorkerResult PrepareState::ExecuteImpl() {
+        SR_TRACY_ZONE;
+
         auto&& pEngine = GetContext().GetPointer<Engine>();
 
         pEngine->FlushScene();
@@ -35,6 +37,9 @@ namespace SR_CORE_NS {
         if (auto&& pRenderScene = pEngine->GetRenderScene()) {
             if (auto&& pDebugRenderer = pRenderScene->GetRenderer<SR_GRAPH_NS::DebugRenderer>()) {
                 SR_UTILS_NS::DebugDraw::Instance().SwitchCallbacks(pDebugRenderer.GetRawPtr());
+            }
+            if (auto&& pDebugRenderer = pRenderScene->GetRenderer<SR_GRAPH_NS::DebugOverlayRenderer>()) {
+                SR_UTILS_NS::DebugOverlayDraw::Instance().SwitchCallbacks(pDebugRenderer.GetRawPtr());
             }
         }
 

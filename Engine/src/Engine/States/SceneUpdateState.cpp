@@ -12,6 +12,7 @@
 #include <Utils/World/Scene.h>
 #include <Utils/World/SceneLogic.h>
 #include <Utils/DebugDraw.h>
+#include <Utils/Types/Time.h>
 
 #include <Codegen/SceneUpdateState.generated.hpp>
 
@@ -20,6 +21,8 @@ namespace SR_CORE_NS {
         SR_TRACY_ZONE_N("SceneUpdateState");
 
         const auto dt = GetContext().GetValue<float_t>("DeltaTime");
+
+        SR_HTYPES_NS::Time::Instance().SetDeltaTime(dt);
 
         auto&& pEngine = GetContext().GetPointer<Engine>();
         if (auto&& pEngineScene = pEngine->GetEngineScene()) {

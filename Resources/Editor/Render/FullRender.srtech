@@ -204,6 +204,26 @@ use tabs: true
 											11-k:i
 												12-o:d
 													13-v:type
+														14-s:DebugPass
+													13-o:ptr
+														14-a:shaders
+															15-k:item
+																16-v:first
+																	17-s:mesh
+																16-o:second
+																	17-v:shaderPath
+																		18-s:Engine/Shaders/Gizmo/wire-mesh.srsl
+															15-k:item
+																16-v:first
+																	17-s:line
+																16-o:second
+																	17-v:shaderPath
+																		18-s:Engine/Shaders/line.srsl
+														14-v:isOverlay
+															15-b:true
+											11-k:i
+												12-o:d
+													13-v:type
 														14-s:MeshDrawerPass
 													13-o:ptr
 														14-a:allowedLayers
@@ -214,7 +234,7 @@ use tabs: true
 														14-o:uniforms
 															15-o:shared
 															15-o:material
-									10-o:data
+										10-o:data
 											11-a:clearColors
 												12-k:i
 													13-o:d

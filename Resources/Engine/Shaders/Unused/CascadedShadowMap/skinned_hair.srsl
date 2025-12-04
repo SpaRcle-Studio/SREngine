@@ -21,7 +21,7 @@ void fragment() {
     vec3 diffuseColor = textureColor.rgb * color.rgb;
     vec3 lightColor = vec3(1.0);
 
-    COLOR = vec4(CalculateShadow(diffuseColor, lightColor).rgb, textureColor.a * color.a);
+    COLOR = vec4(CalculateShadow(diffuseColor, lightColor, 1.0, 1.0, 1.0, 1.0, 0.0).rgb, textureColor.a * color.a);
 }
 
 void vertex() {

@@ -64,7 +64,7 @@ vec4 DebugColorCascade(vec4 color, uint cascadeIndex) {
     return color;
 }
 
-vec4 CalculateShadow(vec3 diffuseColor, vec3 lightColor) {
+vec4 CalculateShadow(vec3 diffuseColor, vec3 lightColor, float specularSharpness, float specularIntensity, float ambientIntensity, float shadowIntensity, float diffuseMin) {
 #ifdef HAS_NORMAL
     vec3 N = normalize(NORMAL);
     vec3 T = normalize(TANGENT);
@@ -90,12 +90,16 @@ vec4 CalculateShadow(vec3 diffuseColor, vec3 lightColor) {
     }
     vec4 shadowCoord = (biasMat * CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex]) * vec4(VERTEX, 1.0);
 	float shadow = filterPCF(norm, shadowCoord / shadowCoord.w, cascadeIndex);
+	shadow = mix(1.0, shadow, shadowIntensity);
 
-    vec3 ambient = 0.15 * diffuseColor;
-    vec3 diff = max(dot(normalize(DIRECTIONAL_LIGHT_DIRECTION), norm), 0.0) * lightColor;
+    vec3 ambient = ambientIntensity * 0.15 * diffuseColor;
+
+    float ndotl = dot(normalize(DIRECTIONAL_LIGHT_DIRECTION), norm);
+    float diffuseTerm = max(ndotl, diffuseMin);
+    vec3 diff = diffuseTerm * lightColor;
 
     vec3 halfwayDir = normalize(DIRECTIONAL_LIGHT_DIRECTION + normalize(pcf_viewDir));
-    float spec = pow(max(dot(norm, halfwayDir), 0.0), 64.0);
+    float spec = pow(max(dot(norm, halfwayDir), 0.0), specularSharpness * 64) * specularIntensity;
     vec3 specular = spec * lightColor;
 
     vec4 color = vec4(ambient + shadow * (diff + specular) * diffuseColor, 1.0);
@@ -119,7 +123,7 @@ void PreparePCF(mat4 modelMatrix) {
     pcf_viewPos = (VIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
 }
 
-vec4 CalculateShadowCustom(vec3 diffuseColor, vec3 lightColor, vec3 vertexPos) {
+vec4 CalculateShadowCustom(vec3 diffuseColor, vec3 lightColor, vec3 vertexPos, float specularSharpness, float specularIntensity, float ambientIntensity, float shadowIntensity, float diffuseMin) {
     uint cascadeIndex = 0;
 
     for (uint i = 0; i < 3; ++i) {
@@ -130,13 +134,13 @@ vec4 CalculateShadowCustom(vec3 diffuseColor, vec3 lightColor, vec3 vertexPos) {
 
     vec4 shadowCoord = (biasMat * CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex]) * pcf_modelMatrix * vec4(vertexPos, 1.0);
 
-	float shadow = filterPCF(shadowCoord / shadowCoord.w, cascadeIndex);
+	float shadow = filterPCF(shadowCoord / shadowCoord.w, cascadeIndex) * shadowIntensity;
 
-    vec3 ambient = 0.15 * diffuseColor;
-    vec3 diff = max(dot(normalize(DIRECTIONAL_LIGHT_DIRECTION), normalize(pcf_normal)), 0.0) * lightColor;
+    vec3 ambient = ambientIntensity * 0.15 * diffuseColor;
+    vec3 diff = max(dot(normalize(DIRECTIONAL_LIGHT_DIRECTION), normalize(pcf_normal)), diffuseMin) * lightColor;
 
     vec3 halfwayDir = normalize(DIRECTIONAL_LIGHT_DIRECTION + normalize(pcf_viewDir));
-    float spec = pow(max(dot(normalize(pcf_normal), halfwayDir), 0.0), 64.0);
+    float spec = pow(max(dot(normalize(pcf_normal), halfwayDir), 0.0), specularSharpness * 64) * specularIntensity;
     vec3 specular = spec * lightColor;
 
     vec4 color = vec4(ambient + shadow * (diff + specular) * diffuseColor, 1.0);

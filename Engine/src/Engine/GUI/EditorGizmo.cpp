@@ -201,14 +201,23 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        auto&& pSceneObject = *m_hierarchy->GetSelected().begin();
-        auto&& pGameObject = pSceneObject.DynamicCast<SR_UTILS_NS::GameObject>();
-        if (!pGameObject) {
-            return;
-        }
+        m_pSerializers.clear();
+        m_pSerializers.reserve(m_hierarchy->GetSelected().size());
 
-        m_pSerializer = SR_CORE_NS::Commands::CreateSerializer();
-        SR_UTILS_NS::Serialization::Save(*m_pSerializer, pGameObject->GetTransform(), SR_UTILS_NS::ICommand::DATA_ID);
+        for (auto&& pSceneObject : m_hierarchy->GetSelected()) {
+            if (!pSceneObject) {
+                continue;
+            }
+
+            auto&& pGameObject = pSceneObject.DynamicCast<SR_UTILS_NS::GameObject>();
+            if (!pGameObject) {
+                continue;
+            }
+
+            auto&& pSerializer = SR_CORE_NS::Commands::CreateSerializer();
+            SR_UTILS_NS::Serialization::Save(*pSerializer, pGameObject->GetTransform(), SR_UTILS_NS::ICommand::DATA_ID);
+            m_pSerializers.emplace_back(std::make_pair(pGameObject->GetEntityId(), std::move(pSerializer)));
+        }
 
         Super::BeginGizmo();
     }
@@ -224,17 +233,35 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        auto&& pSceneObject = *m_hierarchy->GetSelected().begin();
-        auto&& pGameObject = pSceneObject.DynamicCast<SR_UTILS_NS::GameObject>();
-        if (!pGameObject) {
-            return;
-        }
 
         auto&& pEngine = dynamic_cast<EditorGUI*>(m_hierarchy->GetManager())->GetEngine();
+        std::vector<SR_UTILS_NS::ReversibleCommand*> commands;
+        commands.reserve(m_hierarchy->GetSelected().size());
 
-        pEngine->GetCmdManager()->Store(new SR_CORE_NS::Commands::GameObjectTransform(
-            pEngine, pGameObject, std::move(m_pSerializer)
-        ));
+        for (auto&& pSceneObject : m_hierarchy->GetSelected()) {
+            if (!pSceneObject) {
+                continue;
+            }
+
+            auto&& pGameObject = pSceneObject.DynamicCast<SR_UTILS_NS::GameObject>();
+            if (!pGameObject) {
+                continue;
+            }
+
+            for (auto&& [entityId, pSerializer] : m_pSerializers) {
+                if (entityId == pGameObject->GetEntityId()) {
+                    commands.push_back(new SR_CORE_NS::Commands::GameObjectTransform(
+                        pEngine, pGameObject, std::move(pSerializer)
+                    ));
+                    break;
+                }
+            }
+        }
+
+        if (!commands.empty()) {
+            auto&& pCmd = new SR_UTILS_NS::GroupCommand(std::move(commands));
+            pEngine->GetCmdManager()->Store(pCmd);
+        }
 
         Super::EndGizmo();
     }

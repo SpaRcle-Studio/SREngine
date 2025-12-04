@@ -1,2 +1,3 @@
 renderers:
   - name: "DebugRenderer"
+  - name: "DebugOverlayRenderer"

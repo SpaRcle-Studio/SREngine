@@ -38,6 +38,12 @@ DepthTest true;
     [[ssbo(offsets)]] mat4[] boneOffsets;
 #endif
 
+[[uniform], [public]] float specularSharpness = 1.0;
+[[uniform], [public]] float specularIntensity = 1.0;
+[[uniform], [public]] float ambientIntensity = 1.0;
+[[uniform], [public]] float shadowIntensity = 1.0;
+[[uniform], [public]] float diffuseMin = 0.0; // 0.0 = классический Ламберт, >0 = подсветка обратной стороны
+
 #ifdef SR_DEFINE_USE_CASCADED_SHADOW_MAP
     #include <Engine/Shaders/Common/pcf-utils.inl.srsl>
 #endif
@@ -58,9 +64,22 @@ void fragment() {
     float alpha = 1.0;
 #endif
 
+    float maybe_unused_specularSharpness = specularSharpness;
+    float maybe_unused_specularIntensity = specularIntensity;
+    float maybe_unused_ambientIntensity = ambientIntensity;
+    float maybe_unused_shadowIntensity = shadowIntensity;
+    float maybe_unused_diffuseMin = diffuseMin;
+
 #ifdef SR_DEFINE_USE_CASCADED_SHADOW_MAP
     vec3 lightColor = vec3(1.0);
-    COLOR = vec4(CalculateShadow(diffuseColor.rgb, lightColor).rgb, alpha);
+    vec3 shadowColor = CalculateShadow(diffuseColor.rgb, lightColor,
+        maybe_unused_specularSharpness,
+        maybe_unused_specularIntensity,
+        maybe_unused_ambientIntensity,
+        maybe_unused_shadowIntensity,
+        maybe_unused_diffuseMin
+    ).rgb;
+    COLOR = vec4(shadowColor, alpha);
 #else
     #ifdef HAS_NORMAL
         vec3 normalMap = texture(normal, UV).xyz * 2.0 - 1.0;

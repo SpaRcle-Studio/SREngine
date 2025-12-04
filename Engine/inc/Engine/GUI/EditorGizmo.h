@@ -37,7 +37,7 @@ namespace SR_CORE_GUI_NS {
 
     private:
         Hierarchy* m_hierarchy = nullptr;
-        std::unique_ptr<SR_UTILS_NS::ISerializer> m_pSerializer;
+        std::vector<std::pair<uint64_t, std::unique_ptr<SR_UTILS_NS::ISerializer>>> m_pSerializers;
 
     };
 }
