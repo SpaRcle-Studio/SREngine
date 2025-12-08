@@ -82,7 +82,7 @@ namespace SR_CORE_NS::Tests {
 
         pState->AddEngineAction([this](Engine& engine) {
             SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : executing delayed action in DelayedActionsState - setting game mode.");
-            engine.AddSceneToQueue(SR_WORLD_NS::Scene::LoadScene("Samples/Scenes/Demo.scene"));
+            engine.AddSceneToQueue(SR_WORLD_NS::Scene::LoadScene("ModuleTests/RuntimeSmokeTest/test.scene"));
         });
 
         SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : waiting five seconds...");

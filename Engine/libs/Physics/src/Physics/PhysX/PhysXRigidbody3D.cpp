@@ -204,6 +204,12 @@ namespace SR_PTYPES_NS {
                 SRHalt("PhysXRigidbody3D::UpdateShapeInternal() : shape is nullptr!");
                 return false;
             }
+
+            if (!pShape->GetHandle()) {
+                SRHalt("PhysXRigidbody3D::UpdateShapeInternal() : shape handle is nullptr!");
+                return false;
+            }
+
             if (!m_rigidActor->attachShape(*(physx::PxShape *) pShape->GetHandle())) {
                 SRHalt("PhysXRigidbody3D::UpdateShapeInternal() : failed to attach shape!");
                 return false;

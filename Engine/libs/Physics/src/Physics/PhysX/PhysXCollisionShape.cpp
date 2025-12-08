@@ -75,7 +75,7 @@ namespace SR_PTYPES_NS {
                     return false;
                 }
 
-                m_shape = pPhysics->createShape(physx::PxConvexMeshGeometry(convexMesh), *pMaterial);
+                m_shape = pPhysics->createShape(physx::PxConvexMeshGeometry(convexMesh), *pMaterial, true);
                 break;
             }
             case ShapeType::TriangleMesh3D: {

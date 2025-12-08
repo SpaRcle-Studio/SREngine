@@ -68,3 +68,7 @@ codegen.spec
 /Platform/Android/app/src/main/res/drawable-v24
 /Platform/Android/app/src/main/res/mipmap-hdpi
 /CI/trace.json
+/Resources/Engine/SREngine.dll
+/Resources/Engine/SREngine.obj
+/Resources/Engine/SREngine.pdb
+/Resources/Engine/vc140.pdb
