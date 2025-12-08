@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<Animator>
-    <Node Type="StateMachine">
-        <State Type="Clip" Skeleton="Samples/Liza/Liza.fbx" Path="Samples/Liza/Dancing Twerk.fbx" Name="mixamo.com" ResetOnPlay="true"/>
-        <Transition From="0" To="1"/>
-    </Node>
-    <Connection FromNode="1" FromPin="0" ToNode="0" ToPin="0"/>
-</Animator>

@@ -1,6 +1,0 @@
-sra format
-0-r:Root
-	1-v:moduleName
-		2-s:Samples
-	1-v:linkMode
-		2-s:Dynamic
