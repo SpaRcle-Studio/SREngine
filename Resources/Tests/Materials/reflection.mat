@@ -1,5 +1,0 @@
-sra format
-0-r:Root
-	1-o:default
-		2-v:shader
-			3-s:Tests/Shaders/reflection.srsl

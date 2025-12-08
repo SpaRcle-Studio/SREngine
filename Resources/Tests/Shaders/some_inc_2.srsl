@@ -1,7 +1,0 @@
-#if (!SOME_INC_2_DEFINED) {
-    #define SOME_INC_2_DEFINED true
-
-    #include <Test/Shaders/some_inc_1.srsl>
-
-    void some_inc_1_fn() { }
-}
