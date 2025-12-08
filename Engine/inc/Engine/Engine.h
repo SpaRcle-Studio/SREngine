@@ -89,7 +89,7 @@ namespace SR_CORE_NS {
         SR_NODISCARD const RenderScenePtr& GetRenderScene() const;
         SR_NODISCARD const SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::ThreadsWorker>& GetThreadsWorker() const;
         SR_NODISCARD const PhysicsScenePtr& GetPhysicsScene() const;
-        SR_NODISCARD WindowPtr GetMainWindow() const { return m_windows.empty() ? nullptr : m_windows.front(); }
+        SR_NODISCARD WindowPtr GetMainWindow() const { return m_windows.empty() ? SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::Window>() : m_windows.front(); }
         SR_NODISCARD WindowPtr GetFocusedWindow() const;
         SR_NODISCARD SR_WORLD_NS::SceneUpdater* GetSceneBuilder() const;
         SR_NODISCARD bool IsActive() const { return m_isActive; }

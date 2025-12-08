@@ -46,7 +46,7 @@ namespace SR_PHYSICS_NS {
         std::map<Space, LibraryType> m_activeLibs;
         std::set<LibraryType> m_supportedLibs;
 
-        SR_HTYPES_NS::SharedPtr<SR_PTYPES_NS::PhysicsMaterial> m_defaultMaterial = nullptr;
+        SR_HTYPES_NS::SharedPtr<SR_PTYPES_NS::PhysicsMaterial> m_defaultMaterial;
     };
 }
 
