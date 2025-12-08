@@ -8,7 +8,7 @@
 #include <Physics/RaycastImpl.h>
 
 namespace SR_PHYSICS_NS {
-    class Raycast3DImpl : public RaycastImpl{
+    class Raycast3DImpl : public RaycastImpl {
         using Super = RaycastImpl;
     public:
         explicit Raycast3DImpl(SR_PHYSICS_NS::PhysicsWorld* world)

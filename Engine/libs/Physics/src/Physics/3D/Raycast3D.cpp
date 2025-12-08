@@ -8,10 +8,21 @@
 
 namespace SR_PHYSICS_NS {
     Raycast3D::RaycastHits Raycast3D::Cast(const SR_MATH_NS::FVector3 &origin, const SR_MATH_NS::FVector3 &direction, float_t maxDistance, uint32_t maxHits){
+        SR_TRACY_ZONE;
         return m_world->GetRaycast3DImpl()->Cast(origin, direction, maxDistance, maxHits);
     }
 
     Raycast3D::RaycastHits Raycast3D::Cast(const SR_MATH_NS::FVector3 &origin, const SR_MATH_NS::FVector3 &direction, float_t maxDistance){
+        SR_TRACY_ZONE;
         return m_world->GetRaycast3DImpl()->Cast(origin, direction, maxDistance, 1);
+    }
+
+    std::optional<SR_UTILS_NS::RaycastHit> Raycast3D::CastSingle(const SR_MATH_NS::FVector3& origin, const SR_MATH_NS::FVector3& direction, float_t maxDistance) {
+        SR_TRACY_ZONE;
+        auto hits = Cast(origin, direction, maxDistance, 1);
+        if (hits.empty()) {
+            return std::nullopt;
+        }
+        return hits[0];
     }
 }

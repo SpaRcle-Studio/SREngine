@@ -8,6 +8,8 @@
 
 namespace SR_PHYSICS_NS {
     PhysXRaycast3DImpl::RaycastHits PhysXRaycast3DImpl::Cast(const SR_MATH_NS::FVector3 &origin, const SR_MATH_NS::FVector3 &direction, float_t maxDistance, uint32_t maxHits) {
+        SR_TRACY_ZONE;
+
         RaycastHits hits;
         hits.reserve(maxHits);
 

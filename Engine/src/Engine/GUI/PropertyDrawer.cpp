@@ -3,6 +3,7 @@
 //
 
 #include <Engine/GUI/PropertyDrawer.h>
+#include <Engine/GUI/PropertyDrawers/EntityRefPropertyDrawer.h>
 
 #include <Graphics/Material/UniqueMaterial.h>
 #include <Graphics/GUI/Utils.h>
@@ -27,6 +28,8 @@ namespace SR_CORE_GUI_NS {
     }
 
     SR_UTILS_NS::StringAtom GetValueInspector(const SR_UTILS_NS::Reflection::Value& value) {
+        SR_TRACY_ZONE;
+
         if (value.IsBitMap()) {
             return "BitMapPropertyDrawer";
         }
@@ -81,6 +84,10 @@ namespace SR_CORE_GUI_NS {
 
         if (value.IsPath()) {
             return "PathPropertyDrawer";
+        }
+
+        if (value.IsEntityRef()) {
+            return SR_CORE_GUI_NS::EntityRefPropertyDrawer::GetClassStaticName();
         }
 
         if (value.IsClass()) {
