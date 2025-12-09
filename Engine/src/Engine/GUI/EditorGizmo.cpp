@@ -7,6 +7,8 @@
 #include <Engine/EngineCommands.h>
 #include <Engine/GUI/EditorGUI.h>
 
+#include <Physics/3D/Rigidbody3D.h>
+
 #include <Utils/ECS/GameObject.h>
 
 #include <Enum/GizmoOperation.hpp>
@@ -191,8 +193,6 @@ namespace SR_CORE_GUI_NS {
     }
 
     void EditorGizmo::BeginGizmo() {
-        /// TODO: multiple selection
-
         if (!m_hierarchy || m_hierarchy->GetSelected().empty()) {
             return;
         }
@@ -219,11 +219,12 @@ namespace SR_CORE_GUI_NS {
             m_pSerializers.emplace_back(std::make_pair(pGameObject->GetEntityId(), std::move(pSerializer)));
         }
 
+        m_holding = true;
         Super::BeginGizmo();
     }
 
     void EditorGizmo::EndGizmo() {
-        /// TODO: multiple selection
+        m_holding = false;
 
         if (!m_hierarchy || m_hierarchy->GetSelected().empty()) {
             return;
@@ -264,6 +265,24 @@ namespace SR_CORE_GUI_NS {
         }
 
         Super::EndGizmo();
+    }
+
+    void EditorGizmo::Update(float_t dt) {
+        Super::Update(dt);
+
+        if (!m_holding) {
+            return;
+        }
+
+        for (auto&& pSceneObject : m_hierarchy->GetSelected()) {
+            if (!pSceneObject) {
+                continue;
+            }
+
+            if (auto&& pRigidbody = pSceneObject->GetComponent<SR_PTYPES_NS::Rigidbody3D>()) {
+                pRigidbody->ClearForces();
+            }
+        }
     }
 
     void EditorGizmo::PrepareGizmo() {

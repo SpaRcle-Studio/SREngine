@@ -31,11 +31,14 @@ namespace SR_CORE_GUI_NS {
         void OnGizmoScaled(const SR_MATH_NS::FVector3& delta) override;
         void OnGizmoRotated(const SR_MATH_NS::Quaternion& delta) override;
 
+        void Update(float_t dt) override;
+
         void PrepareGizmo() override;
         void BeginGizmo() override;
         void EndGizmo() override;
 
     private:
+        bool m_holding = false;
         Hierarchy* m_hierarchy = nullptr;
         std::vector<std::pair<uint64_t, std::unique_ptr<SR_UTILS_NS::ISerializer>>> m_pSerializers;
 

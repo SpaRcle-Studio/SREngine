@@ -7,5 +7,6 @@
         <Wall/>
         <Stone/>
         <Water/>
+        <Player/>
     </Tags>
 </Settings>

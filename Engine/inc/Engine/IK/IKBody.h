@@ -42,12 +42,16 @@ namespace SR_CORE_NS {
         /// @property
         SR_MATH_NS::FVector3 m_walkDirection = SR_MATH_NS::FVector3::Forward();
         /// @property
+        SR_MATH_NS::FVector2 m_velocityLimit = SR_MATH_NS::FVector2(1.f, 1.f);
+        /// @property
         SR_MATH_NS::FVector3 m_walkResetPos;
         /// @property
         float_t m_walkResetDistance = 5.f;
 
 
 
+        /// @property
+        float_t m_bodyYOffset = 0.1f;
         /// @property
         float_t m_yStepShakeOffset = 0.3f;
         /// @property

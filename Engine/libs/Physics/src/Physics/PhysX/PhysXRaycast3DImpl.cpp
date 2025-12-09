@@ -7,20 +7,32 @@
 #include <Utils/ECS/GameObject.h>
 
 namespace SR_PHYSICS_NS {
-    PhysXRaycast3DImpl::RaycastHits PhysXRaycast3DImpl::Cast(const SR_MATH_NS::FVector3 &origin, const SR_MATH_NS::FVector3 &direction, float_t maxDistance, uint32_t maxHits) {
+    PhysXRaycast3DImpl::RaycastHits PhysXRaycast3DImpl::Cast(const SR_MATH_NS::FVector3 &origin, const SR_MATH_NS::FVector3 &direction, float_t maxDistance, uint32_t maxHits, const SR_UTILS_NS::LayerMask& layerMask) {
         SR_TRACY_ZONE;
 
         RaycastHits hits;
         hits.reserve(maxHits);
 
+        auto&& tagManager = SR_UTILS_NS::TagManager::Instance();
+
         m_world->ForEachRigidbody3D([&](SR_PTYPES_NS::Rigidbody3D* pRigidbody){
-            if (hits.size() == maxHits){
+            if (hits.size() == maxHits) {
                 return;
             }
 
             physx::PxTransform pose = ((physx::PxRigidActor*)pRigidbody->GetHandle())->getGlobalPose();
 
             if (pose.p == SR_PHYSICS_UTILS_NS::FV3ToPxV3(origin)){
+                return;
+            }
+
+            auto&& pSO = pRigidbody->GetSceneObject();
+            if (!pSO) {
+                return;
+            }
+
+            uint64_t tag = tagManager.TagToMask(pSO->GetTag());
+            if (!SR_MATH_NS::IsMaskIncludedSubMask(layerMask.mask, tag)) {
                 return;
             }
 
@@ -49,7 +61,7 @@ namespace SR_PHYSICS_NS {
                         &pxHit
                 );
 
-                if (hitCount == 0){
+                if (hitCount == 0) {
                     continue;
                 }
 
