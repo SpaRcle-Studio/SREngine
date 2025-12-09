@@ -35,7 +35,7 @@ jobs:
         shell: powershell
         working-directory: ${{ github.workspace }}
         run: |
-          echo "buildSuccessful=false" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "buildSuccessful=false" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
           cd Platform/Android
           echo "Install android SDK..."
           dir
@@ -45,7 +45,7 @@ jobs:
           ./build.bat ${{ matrix.arch }}
 
           if ($LASTEXITCODE -eq 0) {
-              echo "buildSuccessful=true" | Out-File -FilePath $env:GITHUB_ENV -Append
+              "buildSuccessful=true" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
           }
           else {
               Write-Error "Build failed with exit code $LASTEXITCODE"

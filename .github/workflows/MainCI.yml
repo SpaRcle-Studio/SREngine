@@ -19,6 +19,12 @@ on:
       - master
       - dev
       - features/*
+  schedule:
+    - cron: "0 0 * * *"
+
+permissions:
+  contents: write
+  actions: read
 
 jobs:
   Main:
@@ -72,3 +78,76 @@ jobs:
       commitBranch: ${{github.ref_name}}
       commitMessage: ${{github.event.head_commit.message}}
     secrets: inherit
+
+  NightlyRelease:
+    name: Nightly Release
+    runs-on: ubuntu-latest
+
+    # Only run AFTER all builds
+    needs: [BuildWindowsJob, BuildLinuxJob, BuildAndroidJob, BuildFlatpakJob]
+
+    # Only run on master or dev + nightly schedule
+    if: github.event_name == 'schedule' && (github.ref_name == 'master' || github.ref_name == 'dev')
+
+    steps:
+      - name: Checkout with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      ###################################################
+      # DOWNLOAD ALL ARTIFACTS from all build jobs
+      ###################################################
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: downloads
+
+      ###################################################
+      # GENERATE CHANGELOG SINCE LAST NIGHTLY
+      ###################################################
+      - name: Generate changelog
+        id: changelog
+        run: |
+          LAST_TAG=$(git describe --tags --abbrev=0 || echo "")
+          echo "Last tag: $LAST_TAG"
+
+          if [ -z "$LAST_TAG" ]; then
+            echo "Generating full changelog."
+            git log --pretty=format:"- %h %s" > changelog.txt
+          else
+            echo "Generating changelog since $LAST_TAG."
+            git log $LAST_TAG..HEAD --pretty=format:"- %h %s" > changelog.txt
+          fi
+
+      ###################################################
+      # PUBLISH RELEASE (master → nightly-master, dev → nightly-dev)
+      ###################################################
+      - name: Determine tag for release
+        id: tag
+        run: |
+          if [ "${{ github.ref_name }}" = "master" ]; then
+            echo "tag=nightly-master" >> $GITHUB_OUTPUT
+          else
+            echo "tag=nightly-dev" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Collect SpaRcle Engine artifacts
+        id: sparcle_files
+        run: |
+          files=$(find downloads -type f -name "*SpaRcle Engine*" -printf "%p\n")
+          echo "files<<EOF" >> $GITHUB_OUTPUT
+          echo "$files" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Publish nightly release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag.outputs.tag }}
+          name: "Nightly build (${{ github.ref_name }})"
+          body_path: changelog.txt
+          prerelease: true
+          draft: false
+          files: ${{ steps.sparcle_files.outputs.files }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
