@@ -43,6 +43,8 @@ DepthTest true;
 [[uniform], [public]] float ambientIntensity = 1.0;
 [[uniform], [public]] float shadowIntensity = 1.0;
 [[uniform], [public]] float diffuseMin = 0.0; // 0.0 = классический Ламберт, >0 = подсветка обратной стороны
+[[uniform], [public]] vec2 tiling = vec2(1.0, 1.0);
+[[uniform], [public]] vec2 offset = vec2(0.0, 0.0);
 
 #ifdef SR_DEFINE_USE_CASCADED_SHADOW_MAP
     #include <Engine/Shaders/Common/pcf-utils.inl.srsl>
@@ -52,7 +54,8 @@ void fragment() {
     COLOR_INDEX_1 = vec4(gl_FragCoord.z);
     COLOR_INDEX_2 = vec4(VERTEX, 1.0);
 
-    vec4 diffuseColorBase = texture(diffuse, UV);
+    vec2 tiledUV = UV * tiling + offset;
+    vec4 diffuseColorBase = texture(diffuse, tiledUV);
     vec4 diffuseColor = diffuseColorBase * color;
 
 #ifdef HAS_ALPHA

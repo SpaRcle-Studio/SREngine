@@ -4,6 +4,8 @@
 
 #include <Engine/GUI/PropertyDrawers/PathPropertyDrawer.h>
 #include <Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h>
+#include <Engine/GUI/TextureInspector.h>
+#include <Engine/GUI/EditorGUI.h>
 
 #include <Graphics/GUI/ImmediateGUI.h>
 #include <Graphics/Material/MaterialData.h>
@@ -233,11 +235,15 @@ namespace SR_CORE_GUI_NS {
                 if (void* pDescriptor = pTexture ? pTexture->GetDescriptor() : nullptr) {
                     const float_t imageSize = context.lineHeight * 2.5f;
 
-                    SR_GRAPH_GUI_NS::Immediate::ImageButton((void*)pDescriptor, SR_MATH_NS::FVector2(imageSize), 0.25f * context.lineHeight);
+                    if (SR_GRAPH_GUI_NS::Immediate::ImageButton((void*)pDescriptor, SR_MATH_NS::FVector2(imageSize), 0.25f * context.lineHeight)) {
+                        if (auto&& pInspector = context.pEditor->GetWidget<SR_CORE_GUI_NS::TextureInspector>()) {
+                            pInspector->Inspect(pTexture->GetResourcePath());
+                        }
+                    }
 
                     SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-                    const SR_GRAPH_NS::Memory::TextureConfig& config = pTexture->GetTextureConfig();
+                    const auto& imageMeta = pTexture->GetImageMetaInfo();
 
                     SR_GRAPH_GUI_NS::Immediate::BeginGroup();
 
@@ -245,8 +251,8 @@ namespace SR_CORE_GUI_NS {
                         pTexture->GetWidth(),
                         pTexture->GetHeight(),
                         pTexture->GetChannels(),
-                        config.GetFormat(),
-                        config.GetFilter()).c_str()
+                        imageMeta.GetFormat(),
+                        imageMeta.GetFilter()).c_str()
                     );
 
                     SR_GRAPH_GUI_NS::Immediate::EndGroup();
@@ -258,10 +264,10 @@ namespace SR_CORE_GUI_NS {
                     SR_GRAPH_GUI_NS::Immediate::BeginGroup();
 
                     SR_GRAPH_GUI_NS::Immediate::Text("%s", "Compression: {}\nMipLevels: {}\nCpuUsage: {}\nAlpha: {}"_format(
-                        config.GetCompression(),
-                        config.GetMipLevels(),
-                        config.GetCpuUsage(),
-                        config.GetAlpha()).c_str()
+                        imageMeta.GetCompression(),
+                        imageMeta.GetMipLevels(),
+                        imageMeta.GetCpuUsage(),
+                        imageMeta.GetAlpha()).c_str()
                     );
 
                     SR_GRAPH_GUI_NS::Immediate::EndGroup();

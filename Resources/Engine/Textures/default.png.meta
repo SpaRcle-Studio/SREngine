@@ -1,0 +1,7 @@
+sra format
+use tabs: true
+0-r:Root
+	1-v:filter
+		2-s:NEAREST
+	1-v:alpha
+		2-s:None

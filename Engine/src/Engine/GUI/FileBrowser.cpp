@@ -9,6 +9,7 @@
 
 #include <Engine/GUI/EditorGUI.h>
 #include <Engine/GUI/FileBrowser.h>
+#include <Engine/GUI/TextureInspector.h>
 #include <Engine/GUI/AssetInspector.h>
 #include <Graphics/GUI/Icons.h>
 #include <Graphics/GUI/Utils.h>
@@ -86,6 +87,9 @@ namespace SR_CORE_NS::GUI {
                 current.cutName = SR_UTILS_NS::StringUtils::CutName(current.filename, static_cast<uint32_t>(17.f * m_itemsScale));
 
                 auto&& extension = path.GetExtensionView();
+                if (extension == "meta") {
+                    continue;
+                }
 
                 if (extension.empty()) { //TODO Сделать красивым
                     path.IsEmpty() ? current.iconType = Core::EditorIcon::EmptyFolder
@@ -507,7 +511,15 @@ namespace SR_CORE_NS::GUI {
                 SR_GRAPH_NS::FileRenderTechniqueResource::GetMetaStatic()->GetExtension()
             };
 
-            if (supportedAssets.count(path.GetExtensionView()) != 0) {
+            static std::set<std::string_view> supportedTextures = { "png", "jpg", "jpeg", "tga", "bmp" };
+
+            if (supportedTextures.count(path.GetExtensionView()) != 0) {
+                if (auto&& pTextureInspector = GetManager()->GetWidget<TextureInspector>()) {
+                    pTextureInspector->Inspect(path);
+                }
+                return;
+            }
+            else if (supportedAssets.count(path.GetExtensionView()) != 0) {
                 if (auto&& pAssetInspector = GetManager()->GetWidget<AssetInspector>()) {
                     pAssetInspector->Inspect(path);
                 }
