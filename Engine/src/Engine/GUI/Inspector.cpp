@@ -140,7 +140,7 @@ namespace SR_CORE_GUI_NS {
         const float_t layerAndTagWidth = SR_GRAPH_GUI_NS::Immediate::GetContentRegionAvail().x - lineHeight;
 
         SR_GRAPH_GUI_NS::Immediate::PushItemWidth(layerAndTagWidth / 2.f - SR_GRAPH_GUI_NS::Immediate::CalcTextSize("Tag").x);
-        InspectTag(m_sceneObject->GetTag(), [&](auto&& tag) {
+        InspectTag(m_sceneObject->GetLocalTag(), [&](auto&& tag) {
             pEngine->GetCmdManager()->Execute<SR_CORE_NS::Commands::SceneObjectTag>(SR_UTILS_NS::SyncType::Async, pEngine, m_sceneObject, tag);
         });
         SR_GRAPH_GUI_NS::Immediate::PopItemWidth();

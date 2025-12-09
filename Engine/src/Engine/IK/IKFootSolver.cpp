@@ -48,12 +48,13 @@ namespace SR_CORE_NS {
                 hit->position, hit->GetRayEndPoint(), SR_MATH_NS::FColor::Green(), SR_FLOAT_MAX
             );
 
+            m_hitYPosition = hit->position.y;
             auto&& newPos = hit->position + target.TransformDirection(m_footOffset);
             const float_t distance = newPos.Distance(target.GetGlobalTranslation());
 
             const bool forceStepped = distance > config.forceStepDistance;
             if (auto&& pAnotherFoot = m_anotherFoot.Get()) {
-                const bool isStepping = pAnotherFoot->GetProgress() < config.minProgressToAllowStep;
+                const bool isStepping = pAnotherFoot->GetProgress() < config.minProgressToAllowStep && m_stepProgress <= 0.f;
                 if (isStepping && !pAnotherFoot->IsForceStepped() && !forceStepped && m_anotherFootWaitingTime < config.maxWaitingTimeAnotherFoot) {
                     m_anotherFootWaitingTime += dt;
                     Super::Update(dt);
@@ -103,16 +104,16 @@ namespace SR_CORE_NS {
                 //const float_t lift = SR_MATH_NS::Curve::SinusoidalEaseInOut(m_stepProgress) * m_stepHeight;
                 //footPos.y += lift;
 
-                const float_t ver = SR_MATH_NS::Sin(SR_PI * SR_MIN(m_stepProgress, 1.f));  // чистая синусоида
+                const float_t ver = SR_MATH_NS::Sin(SR_PI * SR_MIN(ease, 1.f));  // чистая синусоида
                 footPos.y += ver * config.stepHeight;
 
-                const float_t sideways = SR_MATH_NS::Curve::CubicEaseInOut(SR_MIN(m_stepProgress, 1.f));
+                const float_t sideways = hor;
                 m_lastSideWayOffset = SR_MATH_NS::FVector3(m_bodyVelocity.x, 0.f, m_bodyVelocity.z) * sideways * config.walkDirPredictionFactor;
-                footPos += m_lastSideWayOffset;
             }
             else {
-                m_lastSideWayOffset = SR_MATH_NS::FVector3();
+                //m_lastSideWayOffset = SR_MATH_NS::FVector3();
             }
+            footPos += m_lastSideWayOffset;
 
             target.SetGlobalTranslation(footPos);
             target.SetRotation(SR_MATH_NS::Quaternion::Slerp(m_footCurrentRotation, m_footTargetRotation, ease));

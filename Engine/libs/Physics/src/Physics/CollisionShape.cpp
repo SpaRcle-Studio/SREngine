@@ -239,6 +239,9 @@ namespace SR_PTYPES_NS {
     }
 
     void CollisionShape::SetCenter(const SR_MATH_NS::FVector3& center) {
+        if (m_center == center) {
+            return;
+        }
         m_center = center;
         OnShapeDirty();
     }
@@ -341,17 +344,21 @@ namespace SR_PTYPES_NS {
         OnShapeDirty();
     }
 
-    bool CollisionShape::UpdateShape() {
+    std::optional<bool> CollisionShape::UpdateShape() {
         if (!m_impl) {
             if (m_type == ShapeType::Unknown) {
                 SetType(GetRigidbody()->GetLibrary()->GetDefaultShape());
             }
 
             m_impl = GetRigidbody()->GetLibrary()->CreateCollisionShapeImpl();
+            if (!m_impl) {
+                return false;
+            }
+
             m_impl->SetShape(this);
         }
 
-        return m_impl && m_impl->UpdateShape();
+        return m_impl->UpdateShape();
     }
 
     bool CollisionShape::UpdateMatrix() {

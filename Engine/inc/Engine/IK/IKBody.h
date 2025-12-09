@@ -49,7 +49,10 @@ namespace SR_CORE_NS {
         float_t m_walkResetDistance = 5.f;
 
 
-
+        /// @property
+        float_t m_colliderCenterYOffset = 0.f;
+        /// @property
+        float_t m_colliderYPosLerpSpeed = 5.f;
         /// @property
         float_t m_bodyYOffset = 0.1f;
         /// @property

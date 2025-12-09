@@ -213,14 +213,18 @@ namespace SR_PTYPES_NS {
             return RBUpdShapeRes::Nothing;
         }
 
+        bool changed = false;
         for (auto&& pShape : m_shapes) {
-            if (!pShape->UpdateShape()) {
+            const auto result = pShape->UpdateShape();
+            changed |= result.has_value() && result.value();
+
+            if (result && !result.value()) {
                 SR_ERROR("Rigidbody::UpdateShape() : failed to update shape!");
                 return RBUpdShapeRes::Error;
             }
         }
 
-        if (!UpdateShapeInternal()) {
+        if (changed && !UpdateShapeInternal()) {
             SR_ERROR("Rigidbody::UpdateShape() : failed to internal update shape!");
             return RBUpdShapeRes::Error;
         }

@@ -16,7 +16,7 @@ namespace SR_PTYPES_NS {
         ~PhysXCollisionShape() override;
 
     public:
-        bool UpdateShape() override;
+        std::optional<bool> UpdateShape() override;
         bool UpdateMatrix() override;
 
         SR_NODISCARD physx::PxMaterial* GetMaterial() const;
@@ -28,6 +28,9 @@ namespace SR_PTYPES_NS {
 
     private:
         physx::PxShape* m_shape = nullptr;
+        ShapeType m_currentShapeType = ShapeType::Unknown;
+        SR_MATH_NS::FVector3 m_currentBounds;
+        bool m_isTrigger = false;
 
     };
 }

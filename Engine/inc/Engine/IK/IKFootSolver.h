@@ -25,6 +25,7 @@ namespace SR_CORE_NS {
 
         SR_NODISCARD bool IsStepping() const noexcept;
         SR_NODISCARD bool IsForceStepped() const noexcept { return m_forceStepped; }
+        SR_NODISCARD float_t GetHitYPosition() const noexcept { return m_hitYPosition; }
         SR_NODISCARD float_t GetProgress() const noexcept;
 
     private:
@@ -50,6 +51,8 @@ namespace SR_CORE_NS {
         bool m_forceStepped = false;
         uint64_t m_debugHitId = SR_UINT64_MAX;
         float_t m_anotherFootWaitingTime = 0.f;
+
+        float_t m_hitYPosition = 0.f;
 
         SR_MATH_NS::FVector3 m_lastBodyPosition;
         SR_MATH_NS::FVector3 m_lastSideWayOffset;

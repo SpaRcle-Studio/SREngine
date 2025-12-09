@@ -34,6 +34,8 @@ namespace SR_PHYSICS_NS {
 
         void Flush() override;
 
+        SR_NODISCARD physx::PxScene* GetPxScene() const { return m_scene; }
+
     private:
         bool SynchronizeStatic();
         bool SynchronizeDynamic();

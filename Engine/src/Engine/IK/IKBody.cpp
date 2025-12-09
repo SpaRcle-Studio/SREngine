@@ -40,30 +40,41 @@ namespace SR_CORE_NS {
             }
         }
 
+        float_t minStepProgress = std::numeric_limits<float_t>::max();
+        float_t maxStepProgress = std::numeric_limits<float_t>::min();
+        float_t minFootYHitPos = std::numeric_limits<float_t>::max();
+        float_t maxFootYHitPos = std::numeric_limits<float_t>::min();
 
+        for (auto&& pFootSolverRef : m_footSolvers) {
+            if (auto&& pFootSolver = pFootSolverRef.Get()) {
+                const float_t footStep = SR_MIN(1.f, pFootSolver->GetProgress());
+                minStepProgress = SR_MIN(minStepProgress, footStep);
+                maxStepProgress = SR_MAX(maxStepProgress, footStep);
 
-
-        auto&& pBodyShakeTarget = m_bodyShakeTarget.Get();
-        if (m_yStepShakeOffset != 0.f && pBodyShakeTarget && !m_footSolvers.empty()) {
-            float_t minStep = std::numeric_limits<float_t>::max();
-            float_t maxStep = std::numeric_limits<float_t>::min();
-
-            for (auto&& pFootSolverRef : m_footSolvers) {
-                if (auto&& pFootSolver = pFootSolverRef.Get()) {
-                    const float_t footStep = SR_MIN(1.f, pFootSolver->GetProgress());
-                    minStep = SR_MIN(minStep, footStep);
-                    maxStep = SR_MAX(maxStep, footStep);
-                }
+                const float_t footYHitPos = pFootSolver->GetHitYPosition();
+                minFootYHitPos = SR_MIN(minFootYHitPos, footYHitPos);
+                maxFootYHitPos = SR_MAX(maxFootYHitPos, footYHitPos);
             }
+        }
 
-            const float_t stepDelta = maxStep - minStep;
+        if (auto&& pBodyShakeTarget = m_bodyShakeTarget.Get()) {
+            const float_t stepDelta = maxStepProgress - minStepProgress;
 
             const SR_MATH_NS::FVector3 bodyPosition = pBodyShakeTarget->GetTransform()->GetTranslation();
             const float_t yOffset = m_bodyYOffset + m_yStepShakeOffset * SR_SIN(stepDelta * static_cast<float_t>(SR_PI));
-            const SR_MATH_NS::FVector3 newPosition = SR_MATH_NS::FVector3(bodyPosition.x, yOffset, bodyPosition.z);
+
+            const float_t footDeltaY = maxFootYHitPos - minFootYHitPos;
+
+            const SR_MATH_NS::FVector3 newPosition = SR_MATH_NS::FVector3(bodyPosition.x, yOffset - SR_ABS(footDeltaY), bodyPosition.z);
 
             pBodyShakeTarget->GetTransform()->SetTranslation(bodyPosition.Lerp(newPosition, dt * m_yStepShakeSpeed));
         }
+
+        //if (auto&& pCollisionShape = GetSceneObject()->GetComponent<SR_PTYPES_NS::CollisionShape>()) {
+        //
+        //    const auto&& newCenter = SR_MATH_NS::FVector3(center.x, m_colliderCenterYOffset + SR_ABS(footDeltaY), center.z);
+        //    pCollisionShape->SetCenter(center.Lerp(newCenter, dt * m_colliderYPosLerpSpeed));
+        //}
 
         Super::Update(dt);
     }

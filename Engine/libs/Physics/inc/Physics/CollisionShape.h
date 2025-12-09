@@ -30,7 +30,7 @@ namespace SR_PTYPES_NS {
     class CollisionShapeImpl : public SR_UTILS_NS::NonCopyable {
     public:
         virtual void Update(float_t dt) { }
-        virtual bool UpdateShape() { return false; }
+        virtual std::optional<bool> UpdateShape() { return false; }
         virtual bool UpdateMatrix() { return false; }
 
         void SetShape(CollisionShape* pShape) { m_shape = pShape; }
@@ -74,7 +74,7 @@ namespace SR_PTYPES_NS {
 
         void OnRawMeshChanged() override;
 
-        bool UpdateShape();
+        std::optional<bool> UpdateShape();
         bool UpdateMatrix();
 
         void UpdateDebugShape();
