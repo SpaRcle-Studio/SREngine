@@ -6,8 +6,15 @@
 #include <Audio/Decoders/WAVDataProvider.h>
 #include <Audio/Decoders/MP3DataProvider.h>
 #include <Audio/Decoders/ModPlugDataProvider.h>
+#include <Audio/Decoders/OGGVorbisDataProvider.h>
+#include <Audio/Decoders/FlacDataProvider.h>
+#include <Audio/Decoders/OGGCodec.h>
 
-#include <Utils/Debug.h>
+#include <Utils/FileSystem/Path.h>
+#include <Utils/Common/AssertFwd.h>
+#include <Utils/Profile/TracyContext.h>
+
+#include <Enum/OggCodec.hpp>
 
 namespace SR_AUDIO_NS::Tools {
     bool IsModule( const char* Ext )
@@ -56,14 +63,42 @@ namespace SR_AUDIO_NS::Tools {
 }
 
 namespace SR_AUDIO_NS {
-    IWaveDataProvider::Ptr CreateWaveDataProvider(const SR_UTILS_NS::Path &path, const RawSoundDataPtr &data) {
+    IWaveDataProvider::Ptr CreateWaveDataProvider(const SR_UTILS_NS::Path& path, const RawSoundDataPtr &data) {
+        SR_TRACY_ZONE;
+
+        if (!data || data->empty()) {
+            SRHalt("CreateWaveDataProvider() : data is null or empty!");
+            return nullptr;
+        }
         const char* ext = path.GetExtensionView().data();
 
-        if (SR_STRCMPI(ext, "mp3") == 0)
+        if (SR_STRCMPI(ext, "mp3") == 0) {
             return std::make_shared<MP3DataProvider>(data);
+        }
 
-        //if ( strcmpi( Ext, "ogg" ) == 0 )
-        //    return std::make_shared<clOGGDataProvider>( Data );
+        if (SR_STRCMPI(ext, "ogg") == 0) {
+            const OggCodec oggCodec = DetectOggCodec(data->data(), data->size());
+            switch (oggCodec) {
+            #ifdef SR_AUDIO_USE_VORBIS
+                case OggCodec::Vorbis:
+                    return std::make_shared<OGGVorbisDataProvider>(data);
+            #endif
+            #ifdef SR_AUDIO_USE_FLAC
+                case OggCodec::Flac: {
+                    auto&& pUnpacked = UnpackOggData(*data);
+                    if (!pUnpacked) {
+                        SR_ERROR("CreateWaveDataProvider() : failed to unpack OGG-FLAC data!");
+                        return nullptr;
+                    }
+
+                    return std::make_shared<FlacDataProvider>(pUnpacked);
+                }
+            #endif
+                default:
+                    SR_ERROR("CreateWaveDataProvider() : unsupported OGG codec! Codec: {}", oggCodec);
+                    return nullptr;
+            }
+        }
         //
         //if ( strcmpi( Ext, "flac" ) == 0 )
         //    return std::make_shared<clFLACDataProvider>( Data );

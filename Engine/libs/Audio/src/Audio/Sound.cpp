@@ -22,6 +22,10 @@ namespace SR_AUDIO_NS {
     }
 
     Sound::Ptr Sound::Load(const SR_UTILS_NS::Path& rawPath) {
+        SR_TRACY_ZONE;
+        SR_TRACY_ZONE_TEXT(rawPath.ToString());
+        SR_GLOBAL_LOCK;
+
         auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
         SR_UTILS_NS::Path&& path = rawPath.RemoveSubPath(resourceManager.GetResPath());

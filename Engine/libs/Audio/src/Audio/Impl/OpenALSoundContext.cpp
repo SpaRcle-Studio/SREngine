@@ -147,6 +147,11 @@ namespace SR_AUDIO_NS {
     }
 
     void OpenALSoundContext::ApplyParamImpl(SoundSource pSource, PlayParamType paramType, const void* pValue) {
+        if (!pSource || !pValue) {
+            SR_ERROR("OpenALContext::ApplyParamImpl() : invalid source or value!");
+            return;
+        }
+
         ALuint* alSource = reinterpret_cast<ALuint*>(pSource);
 
         //alSourcei(*alSource, AL_DISTANCE_MODEL, AL_INVERSE_DISTANCE_CLAMPED);

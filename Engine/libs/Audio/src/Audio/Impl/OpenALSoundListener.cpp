@@ -96,11 +96,20 @@ namespace SR_AUDIO_NS {
     }
 
     void OpenALSoundListener::SetGain(float_t gain) {
-        if (!SR_AL_CALL(alListenerf, AL_GAIN, gain)) {
+        if (!SR_AL_CALL(alListenerf, AL_GAIN, gain * m_data.globalGain)) {
             SR_ERROR("OpenALListenerContext::SetDopplerFactor() : failed to set gain!");
             return;
         }
 
         Super::SetGain(gain);
+    }
+
+    void OpenALSoundListener::SetGlobalGain(float_t gain) {
+        if (!SR_AL_CALL(alListenerf, AL_GAIN, gain * m_data.gain)) {
+            SR_ERROR("OpenALListenerContext::SetDopplerFactor() : failed to set gain!");
+            return;
+        }
+
+        Super::SetGlobalGain(gain);
     }
 }

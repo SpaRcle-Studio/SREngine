@@ -4,4 +4,6 @@
 
 #include <Engine/IK/IKFootSolverConfig.h>
 
+#include <Utils/FileSystem/PathDataAccessor.h>
+
 #include <Codegen/IKFootSolverConfig.generated.hpp>

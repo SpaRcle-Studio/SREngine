@@ -26,6 +26,7 @@ namespace SR_AUDIO_NS {
         ListenerDistanceModel distanceModel = ListenerDistanceModel::InverseClamped;
         SR_MATH_NS::FVector3 velocity;
         float_t gain = 1.0f;
+        float_t globalGain = 1.0f;
         SR_MATH_NS::FVector3 position;
         SR_MATH_NS::FVector6 orientation;
     };

@@ -6,7 +6,10 @@
 
 #include <Physics/3D/Raycast3D.h>
 
+#include <Audio/Types/AudioSource.h>
+
 #include <Utils/DebugDraw.h>
+#include <Utils/Common/Numeric.h>
 #include <Utils/Math/Curve.h>
 
 #include <Codegen/IKFootSolver.generated.hpp>
@@ -19,6 +22,10 @@ namespace SR_CORE_NS {
 
     void IKFootSolver::Update(float_t dt) {
         SR_TRACY_ZONE;
+
+        if (m_soundPlayDelay > 0.f) {
+            m_soundPlayDelay -= dt;
+        }
 
         if (!m_body || !m_footTarget || !m_config) {
             return;
@@ -69,6 +76,15 @@ namespace SR_CORE_NS {
             if (m_stepProgress >= 1.f + config.stepRelaxTime) {
                 m_anotherFootWaitingTime = 0.f;
                 m_stepProgress = 1.f + config.stepRelaxTime;
+
+                if (m_soundPlayDelay <= 0.f && !m_footTargetReached) {
+                    m_soundPlayDelay = config.soundPlayMinInterval;
+                    if (auto&& pSource = m_audioSource.Get()) {
+                        pSource->SetPath(config.stepSounds[SR_UTILS_NS::Random::Instance().Int32Range(0, static_cast<int32_t>(config.stepSounds.size() - 1))]);
+                    }
+                }
+
+                m_footTargetReached = true;
             }
 
             if (!m_initialized || distance > SR_MIN(config.forceStepDistance, distanceToStep)) {
@@ -82,6 +98,7 @@ namespace SR_CORE_NS {
                 //}
 
                 m_initialized = true;
+                m_footTargetReached = false;
 
                 m_footTargetPosition = newPos - m_lastSideWayOffset;
                 m_footTargetRotation = body.GetGlobalRotation() * SR_MATH_NS::Quaternion::AngleAxis(config.footXAngle, SR_MATH_NS::FVector3::Right());

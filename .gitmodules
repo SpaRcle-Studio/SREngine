@@ -19,3 +19,12 @@
 [submodule "Engine/libs/Audio/libs/minimp3"]
 	path = Engine/libs/Audio/libs/minimp3
 	url = https://github.com/SpaRcle-Studio/minimp3
+[submodule "Engine/libs/Audio/libs/vorbis"]
+	path = Engine/libs/Audio/libs/vorbis
+	url = https://github.com/SpaRcle-Studio/vorbis
+[submodule "Engine/libs/Audio/libs/ogg"]
+	path = Engine/libs/Audio/libs/ogg
+	url = https://github.com/SpaRcle-Studio/ogg
+[submodule "Engine/libs/Audio/libs/flac"]
+	path = Engine/libs/Audio/libs/flac
+	url = https://github.com/SpaRcle-Studio/flac

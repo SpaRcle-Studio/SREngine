@@ -9,6 +9,7 @@
 #include <Engine/stdInclude.h>
 
 #include <Utils/ECS/Component.h>
+#include <Utils/FileSystem/Path.h>
 
 namespace SR_CORE_NS {
     /// @category(Animations)
@@ -47,6 +48,12 @@ namespace SR_CORE_NS {
         float_t uncompletedStepResetProgress = 0.5f;
         /// @property
         float_t minProgressToAllowStep = 0.7f;
+        /// @property
+        float_t soundPlayMinInterval = 0.2f;
+        /// @property
+        /// @customArgs(pick: enabled, filter name: Audio, relative: resources)
+        /// @customArg(filter value: mp3,wav,ogg)
+        std::vector<SR_UTILS_NS::Path> stepSounds;
 
     };
 }

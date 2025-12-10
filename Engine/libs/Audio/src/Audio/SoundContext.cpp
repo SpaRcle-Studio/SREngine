@@ -33,7 +33,7 @@ namespace SR_AUDIO_NS {
         playParams.loop = false;
         playParams.spatialize = SpatializeMode::Auto;
         playParams.library = AudioLibrary::OpenAL;
-        playParams.maxDistance = 10.f;
+        playParams.maxDistance = 50.f;
         playParams.referenceDistance = 1.f;
         playParams.rolloffFactor = 1.f;
         playParams.relative = 360.f;

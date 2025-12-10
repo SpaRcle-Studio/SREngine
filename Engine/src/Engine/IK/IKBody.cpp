@@ -70,12 +70,6 @@ namespace SR_CORE_NS {
             pBodyShakeTarget->GetTransform()->SetTranslation(bodyPosition.Lerp(newPosition, dt * m_yStepShakeSpeed));
         }
 
-        //if (auto&& pCollisionShape = GetSceneObject()->GetComponent<SR_PTYPES_NS::CollisionShape>()) {
-        //
-        //    const auto&& newCenter = SR_MATH_NS::FVector3(center.x, m_colliderCenterYOffset + SR_ABS(footDeltaY), center.z);
-        //    pCollisionShape->SetCenter(center.Lerp(newCenter, dt * m_colliderYPosLerpSpeed));
-        //}
-
         Super::Update(dt);
     }
 }

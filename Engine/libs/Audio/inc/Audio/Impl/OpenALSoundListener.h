@@ -28,6 +28,7 @@ namespace SR_AUDIO_NS {
         void SetDistanceModel(ListenerDistanceModel distanceModel) override;
         void SetVelocity(SR_MATH_NS::FVector3 velocity) override;
         void SetGain(float_t gain) override;
+        void SetGlobalGain(float_t gain) override;
     };
 }
 #endif //SR_ENGINE_OPENALSOUNDLISTENER_H

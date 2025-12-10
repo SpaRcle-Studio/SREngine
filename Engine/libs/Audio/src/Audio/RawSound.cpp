@@ -16,6 +16,9 @@ namespace SR_AUDIO_NS {
     RawSound::~RawSound() = default;
 
     RawSound::Ptr RawSound::Load(const SR_UTILS_NS::Path& rawPath) {
+        SR_TRACY_ZONE;
+        SR_TRACY_ZONE_TEXT(rawPath.ToString());
+
         auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
         SR_UTILS_NS::Path&& path = rawPath.RemoveSubPath(resourceManager.GetResPath());

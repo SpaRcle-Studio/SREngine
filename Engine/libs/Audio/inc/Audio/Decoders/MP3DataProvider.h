@@ -17,12 +17,12 @@ namespace SR_AUDIO_NS {
 
         SR_NODISCARD const WaveDataFormat& GetWaveDataFormat() const override { return m_format; }
 
-        const uint8_t* GetWaveData() const override;
-        size_t GetWaveDataSize() const override;
+        SR_NODISCARD const uint8_t* GetWaveData() const override;
+        SR_NODISCARD size_t GetWaveDataSize() const override;
 
         size_t StreamWaveData(size_t size) override;
-        bool IsStreaming() const override { return true; }
-        bool IsEndOfStream() const override { return m_isEndOfStream; }
+        SR_NODISCARD bool IsStreaming() const override { return true; }
+        SR_NODISCARD bool IsEndOfStream() const override { return m_isEndOfStream; }
         void Seek(float_t seconds) override;
 
     private:

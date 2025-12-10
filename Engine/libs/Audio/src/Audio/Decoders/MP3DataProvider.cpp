@@ -16,14 +16,14 @@ namespace SR_AUDIO_NS {
     };
 
     MP3DataProvider::MP3DataProvider(const RawSoundDataPtr& data)
-            : m_data(data)
-            , m_format()
-            , m_decodingBuffer(MINIMP3_MAX_SAMPLES_PER_FRAME * 16 )
-            , m_bufferUsed(0)
-            , m_streamPos(0)
-            , m_initialStreamPos(0)
-            , m_isEndOfStream(false)
-            , m_decoderData(new DecoderData())
+        : m_data(data)
+        , m_format()
+        , m_decodingBuffer(MINIMP3_MAX_SAMPLES_PER_FRAME * 16 )
+        , m_bufferUsed(0)
+        , m_streamPos(0)
+        , m_initialStreamPos(0)
+        , m_isEndOfStream(false)
+        , m_decoderData(new DecoderData())
     {
         if (mp3dec_ex_open_buf(&m_decoderData->mp3d, data->data(), data->size(), MP3D_SEEK_TO_SAMPLE)) {
             SR_ERROR("MP3DataProvider::MP3DataProvider() : failed to load a buffer!");

@@ -12,6 +12,8 @@ SR_COMMON_GET_SOURCES(Audio)
 set(CMAKE_CXX_STANDARD 20)
 
 option(SR_AUDIO_DLL_EXPORTS "" ON)
+option(SR_AUDIO_USE_VORBIS "" ON)
+option(SR_AUDIO_USE_FLAC "" ON)
 
 add_definitions(
     -DMODPLUG_STATIC
@@ -42,6 +44,35 @@ if (NOT SR_EMSCRIPTEN)
     endif()
 endif()
 
+if (SR_AUDIO_USE_VORBIS OR SR_AUDIO_USE_FLAC)
+    message("Audio will be built with OGG support")
+    add_definitions(-DSR_AUDIO_USE_OGG)
+    add_subdirectory(libs/ogg)
+endif()
+
+if (SR_AUDIO_USE_VORBIS)
+    message("Audio will be built with VORBIS support")
+    add_definitions(-DSR_AUDIO_USE_VORBIS)
+    add_subdirectory(libs/vorbis)
+endif()
+
+if (SR_AUDIO_USE_FLAC)
+    message("Audio will be built with FLAC support")
+
+    # Flac
+    set(BUILD_CXXLIBS             OFF CACHE BOOL "")
+    set(BUILD_PROGRAMS            OFF CACHE BOOL "")
+    set(BUILD_EXAMPLES            OFF CACHE BOOL "")
+    set(BUILD_TESTING             OFF CACHE BOOL "")
+    set(BUILD_DOCS                OFF CACHE BOOL "")
+    set(INSTALL_MANPAGES          OFF CACHE BOOL "")
+    set(INSTALL_PKGCONFIG_MODULES OFF CACHE BOOL "")
+    set(WITH_OGG                  ON CACHE BOOL "")
+
+    add_definitions(-DSR_AUDIO_USE_FLAC)
+    add_subdirectory(libs/flac)
+endif()
+
 if (SR_AUDIO_STATIC_LIBRARY)
     add_library(Audio STATIC ${Audio_SOURCES})
 else()
@@ -69,6 +100,16 @@ if (NOT SR_EMSCRIPTEN)
 
     target_link_libraries(Audio PUBLIC modplug)
     target_include_directories(Audio PUBLIC libs/libmodplug/src)
+endif()
+
+if (SR_AUDIO_USE_VORBIS)
+    target_link_libraries(Audio PUBLIC vorbis vorbisfile ogg)
+    target_include_directories(Audio PUBLIC libs/vorbis/include)
+endif()
+
+if (SR_AUDIO_USE_FLAC)
+    target_link_libraries(Audio PUBLIC FLAC)
+    target_include_directories(Audio PUBLIC libs/flac/include)
 endif()
 
 target_include_directories(Audio PUBLIC inc)

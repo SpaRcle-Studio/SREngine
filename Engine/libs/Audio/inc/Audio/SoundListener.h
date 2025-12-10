@@ -36,6 +36,7 @@ namespace SR_AUDIO_NS{
         SR_NODISCARD virtual SR_MATH_NS::FVector3 GetPosition() const noexcept { return m_data.position; }
         SR_NODISCARD virtual SR_MATH_NS::FVector6 GetOrientation() const noexcept { return m_data.orientation; }
         SR_NODISCARD virtual float_t GetGain() const noexcept { return m_data.gain; }
+        SR_NODISCARD virtual float_t GetGlobalGain() const noexcept { return m_data.globalGain; }
 
         SR_NODISCARD SoundDevice* GetDevice() const noexcept { return m_pDevice; }
 
@@ -44,6 +45,7 @@ namespace SR_AUDIO_NS{
         virtual void SetDistanceModel(ListenerDistanceModel distanceModel) { m_data.distanceModel = distanceModel; }
         virtual void SetVelocity(SR_MATH_NS::FVector3 velocity) { m_data.velocity = velocity; }
         virtual void SetGain(float_t gain) { m_data.gain = gain; }
+        virtual void SetGlobalGain(float_t gain) { m_data.globalGain = gain; }
 
     protected:
         ListenerData m_data;

@@ -67,9 +67,12 @@ namespace SR_AUDIO_NS {
         void SetListenerVelocity(SoundListener* pListenerContext, SR_MATH_NS::FVector3 velocity);
         void SetListenerTransform(SoundListener* pListenerContext, const SR_MATH_NS::FVector3& position, const SR_MATH_NS::Quaternion& quaternion);
 
+        void SetGlobalGain(float_t gain) noexcept;
+
         SR_NODISCARD const std::set<SoundListener*>& GetListeners() const noexcept { return m_listeners; }
         SR_NODISCARD const std::list<PlayData*>& GetPlayStack() const noexcept { return m_playStack; }
 
+        SR_NODISCARD float_t GetGlobalGain() const noexcept { return m_globalGain.load(); }
         SR_NODISCARD SR_HTYPES_NS::Thread::ThreadId GetThreadId() const noexcept { return m_threadId; }
         SR_NODISCARD SoundListener* CreateListener();
         SR_NODISCARD SoundListener* CreateListener(AudioLibrary library);
@@ -79,7 +82,7 @@ namespace SR_AUDIO_NS {
         SR_NODISCARD SoundContext* GetSoundContext(const PlayParams& params) noexcept;
         SR_NODISCARD AudioLibrary GetRelevantLibrary() const noexcept;
 
-        void DestroyPlayData(PlayData* pPlayData);
+        static void DestroyPlayData(PlayData* pPlayData);
 
         bool PlayInternal(PlayData* pPlayData);
         bool PrepareData(PlayData* pPlayData);
@@ -94,6 +97,7 @@ namespace SR_AUDIO_NS {
         void Sleep();
 
     private:
+        std::atomic<float_t> m_globalGain = 1.f;
         std::atomic<SR_HTYPES_NS::Thread::ThreadId> m_threadId = SR_HTYPES_NS::Thread::EmptyThreadId();
         std::set<SoundListener*> m_listeners;
         SR_HTYPES_NS::Thread::Ptr m_thread = nullptr;

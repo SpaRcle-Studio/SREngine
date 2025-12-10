@@ -23,6 +23,8 @@
 #include <Physics/Utils/Utils.h>
 #include <Physics/3D/Rigidbody3D.h>
 
+#include <Audio/Types/AudioListener.h>
+
 #include <Utils/TypeTraits/Factory.h>
 #include <Utils/Game/CameraFlyMover.h>
 #include <Utils/Input/InputSystem.h>
@@ -241,6 +243,8 @@ namespace SR_CORE_GUI_NS {
             else {
                 return;
             }
+
+            pCamera->AddComponent<SR_AUDIO_NS::AudioListener>();
 
             EditorCamera::Ptr pCameraComponent = pCamera->AddComponent<EditorCamera>();
             pCameraComponent->SetSceneViewer(this);

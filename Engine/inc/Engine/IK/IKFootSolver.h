@@ -7,6 +7,8 @@
 
 #include <Engine/IK/IKFootSolverConfig.h>
 
+#include <Audio/Types/AudioSource.h>
+
 #include <Utils/ECS/Component.h>
 #include <Utils/ECS/EntityRef.h>
 #include <Utils/ECS/GameObject.h>
@@ -32,6 +34,8 @@ namespace SR_CORE_NS {
         /// @property
         SR_UTILS_NS::EntityRef<IKFootSolverConfig> m_config;
         /// @property
+        SR_UTILS_NS::EntityRef<SR_AUDIO_NS::AudioSource> m_audioSource;
+        /// @property
         SR_UTILS_NS::EntityRef<IKFootSolver> m_anotherFoot;
         /// @property
         SR_UTILS_NS::EntityRef<SR_UTILS_NS::GameObject> m_body;
@@ -53,6 +57,8 @@ namespace SR_CORE_NS {
         float_t m_anotherFootWaitingTime = 0.f;
 
         float_t m_hitYPosition = 0.f;
+        float_t m_soundPlayDelay = 0.f;
+        bool m_footTargetReached = false;
 
         SR_MATH_NS::FVector3 m_lastBodyPosition;
         SR_MATH_NS::FVector3 m_lastSideWayOffset;

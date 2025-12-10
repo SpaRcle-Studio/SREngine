@@ -125,6 +125,8 @@ namespace SR_AUDIO_NS {
     }
 
     void AudioSource::SetPath(const SR_UTILS_NS::Path& path) {
+        SR_TRACY_ZONE;
+
         m_path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
 
         if (IsActive() && !m_path.empty()) {

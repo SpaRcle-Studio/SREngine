@@ -51,11 +51,10 @@ namespace SR_AUDIO_NS {
             for (auto&& pPlayData : m_playStack) {
                 DestroyPlayData(pPlayData);
             }
+            m_playStack.clear();
+            m_playing.clear();
             return true;
         });
-
-        m_playStack.clear();
-        m_playing.clear();
     }
 
     std::optional<PlayParams> SoundManager::GetSourceParams(const PlayData* pPlayData) const {
@@ -191,14 +190,17 @@ namespace SR_AUDIO_NS {
             return nullptr;
         }
 
+        if (!pSound->GetData()) {
+            SRHalt("SoundManager::Play() : sound data is nullptr!");
+            return nullptr;
+        }
+
         ///// синхронно добавляем звук в стек
         Handle pHandle = nullptr;
-        {
-            SR_LOCK_GUARD;
-
+        const bool result = m_thread->Execute([this, &pHandle, pSound, &params]() {
             if (m_playStack.size() >= 256) {
                 SR_WARN("SoundManager::Play() : stack overflow!");
-                return nullptr;
+                return false;
             }
 
             auto&& pPlayData = new PlayData();
@@ -213,6 +215,12 @@ namespace SR_AUDIO_NS {
 
             m_playStack.emplace_back(pPlayData);
             m_playing.emplace(pPlayData);
+
+            return true;
+        });
+
+        if (!result) {
+            return nullptr;
         }
 
         bool async = params.async.has_value() ? params.async.value() : true; /// NOLINT
@@ -238,18 +246,19 @@ namespace SR_AUDIO_NS {
 
     bool SoundManager::IsPlaying(Handle pHandle) const {
         SR_TRACY_ZONE;
-        SR_LOCK_GUARD;
 
-        for (auto&& pPlayData : m_playStack) {
-            if (pHandle == pPlayData) {
-                if (!pPlayData->pData->initialized) {
-                    return false;
+        return m_thread->Execute([this, pHandle]() {
+            for (auto&& pPlayData : m_playStack) {
+                if (pHandle == pPlayData) {
+                    if (!pPlayData->pData->initialized) {
+                        return false;
+                    }
+                    return pPlayData->pData->pContext->IsPlaying(pPlayData->pSource);
                 }
-                return pPlayData->pData->pContext->IsPlaying(pPlayData->pSource);
             }
-        }
 
-        return false;
+            return false;
+        });
     }
 
     SoundData* SoundManager::Register(Sound *pSound) {
@@ -335,45 +344,48 @@ namespace SR_AUDIO_NS {
 
     bool SoundManager::IsInitialized(SoundManager::Handle pHandle) const {
         SR_TRACY_ZONE;
-        SR_LOCK_GUARD;
 
-        for (auto&& pPlayData : m_playStack) {
-            if (pHandle == pPlayData) {
-                return pPlayData->pData->initialized;
+        return m_thread->Execute([this, pHandle]() {
+            for (auto&& pPlayData: m_playStack) {
+                if (pHandle == pPlayData) {
+                    return pPlayData->pData->initialized;
+                }
             }
-        }
 
-        SRHalt("Handle not found!");
+            SRHalt("Handle not found!");
 
-        return false;
+            return false;
+        });
     }
 
     bool SoundManager::IsExists(SoundManager::Handle pHandle) const {
         SR_TRACY_ZONE;
-        SR_LOCK_GUARD;
 
-        for (auto&& pPlayData : m_playStack) {
-            if (pHandle == pPlayData) {
-                return true;
+        return m_thread->Execute([this, pHandle]() {
+            for (auto&& pPlayData : m_playStack) {
+                if (pHandle == pPlayData) {
+                    return true;
+                }
             }
-        }
 
-        return false;
+            return false;
+        });
     }
 
     bool SoundManager::IsFailed(SoundManager::Handle pHandle) const {
         SR_TRACY_ZONE;
-        SR_LOCK_GUARD;
 
-        for (auto&& pPlayData : m_playStack) {
-            if (pHandle == pPlayData) {
-                return pPlayData->isFailed;
+        return m_thread->Execute([this, pHandle]() {
+            for (auto&& pPlayData: m_playStack) {
+                if (pHandle == pPlayData) {
+                    return pPlayData->isFailed;
+                }
             }
-        }
 
-        SRHalt("Handle not found!");
+            SRHalt("Handle not found!");
 
-        return false;
+            return false;
+        });
     }
 
 
@@ -449,7 +461,6 @@ namespace SR_AUDIO_NS {
 
     SoundManager::Handle SoundManager::Play(const std::string& path, const PlayParams& params) {
         SR_TRACY_ZONE;
-        SR_LOCK_GUARD;
 
         if (path.empty()) {
             SRHalt("Empty sound path!");
@@ -485,6 +496,12 @@ namespace SR_AUDIO_NS {
                     if (!pPlayData->pData->initialized) {
                         break;
                     }
+
+                    if (!pPlayData->pSource) {
+                        SRHalt("SoundManager::ApplyParams() : source is nullptr!");
+                        break;
+                    }
+
                     pPlayData->pData->pContext->ApplyParams(pPlayData->pSource, params);
                     break;
                 }
@@ -545,7 +562,10 @@ namespace SR_AUDIO_NS {
                 return false;
             }
 
+            pListener->SetGlobalGain(m_globalGain.load());
+
             m_listeners.insert(pListener);
+
             return true;
         });
 
@@ -571,6 +591,18 @@ namespace SR_AUDIO_NS {
             }
             SR_ERROR("SoundManager::DestroyListenerContext() : listener not found!");
             return false;
+        });
+    }
+
+    void SoundManager::SetGlobalGain(float_t gain) noexcept {
+        SR_TRACY_ZONE;
+
+        m_thread->Execute([gain, this]() {
+            m_globalGain.store(gain);
+            for (auto&& pListener : m_listeners) {
+                pListener->SetGlobalGain(gain);
+            }
+            return true;
         });
     }
 }
