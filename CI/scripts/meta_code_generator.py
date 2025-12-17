@@ -883,7 +883,7 @@ def generate_enums_code(logger: logger_utils.Logger, context: codegen_context.Co
             f.write(f'#ifndef SR_CODEGEN_ENUM_{caps_enum_name}_HPP' + '\n')
             f.write(f'#define SR_CODEGEN_ENUM_{caps_enum_name}_HPP' + '\n\n')
 
-            f.write(f'#include \"{enum_obj.source_path}\"' + '\n\n')
+            #f.write(f'#include \"{enum_obj.source_path}\"' + '\n\n')
             f.write(f'#include <Utils/Common/EnumOperators.h>\n\n')
 
             #f.write('#include <Codegen/Enums.generated.hpp>\n\n')

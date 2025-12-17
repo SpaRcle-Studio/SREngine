@@ -19,6 +19,7 @@
 #include <Utils/World/ScenePrefabLogic.h>
 #include <Utils/CommandManager/ReversibleCommand.h>
 #include <Utils/FileSystem/FileDialog.h>
+#include <Utils/Serialization/SerializationFlags.h>
 
 #include <Enum/TreeNodeFlags.hpp>
 

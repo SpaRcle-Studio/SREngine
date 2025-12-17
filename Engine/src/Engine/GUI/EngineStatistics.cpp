@@ -218,7 +218,8 @@ namespace SR_CORE_GUI_NS {
                         if (m_showShaderPrograms && shadersManager.HasProgram(virtualProgram)) {
                             auto&& pVirtualInfo = shadersManager.GetInfo(virtualProgram);
 
-                            for (auto&& [identifier, program] : pVirtualInfo->m_data) {
+                            for (uint32_t dataIndex = 0; dataIndex < pVirtualInfo->m_dataUsed; ++dataIndex) {
+                                auto&& [identifier, program] = pVirtualInfo->m_data[dataIndex];
                                 SR_GRAPH_GUI_NS::Immediate::Text("\t[%llu] = %i", identifier, program.id);
                             }
                         }

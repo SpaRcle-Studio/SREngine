@@ -32,6 +32,7 @@
 #include <Utils/Common/StoreUtils.h>
 #include <Utils/Events/Broadcaster.h>
 #include <Utils/Reflection/Value.h>
+#include <Utils/Serialization/SerializationFlags.h>
 
 #include <Enum/TreeNodeFlags.hpp>
 
