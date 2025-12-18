@@ -114,6 +114,9 @@ namespace SR_CORE_NS::Commands {
             auto&& pDeserializer = m_pNew->CreateDeserializer();
 
             SR_UTILS_NS::Serialization::Load(*pDeserializer, *pObject, DATA_ID);
+            if (auto&& pGameObject =pObject.DynamicCast<SR_UTILS_NS::GameObject>()) {
+                pGameObject->OnMatrixDirty();
+            }
 
             return true;
         }
@@ -130,6 +133,9 @@ namespace SR_CORE_NS::Commands {
             auto&& pDeserializer = m_pOld->CreateDeserializer();
 
             SR_UTILS_NS::Serialization::Load(*pDeserializer, *pObject, DATA_ID);
+            if (auto&& pGameObject =pObject.DynamicCast<SR_UTILS_NS::GameObject>()) {
+                pGameObject->OnMatrixDirty();
+            }
 
             return true;
         }

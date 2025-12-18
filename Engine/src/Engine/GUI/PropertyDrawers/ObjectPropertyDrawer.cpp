@@ -25,6 +25,11 @@ namespace SR_CORE_GUI_NS {
         auto&& pWindow = SR_GRAPH_GUI_NS::Immediate::GetCurrentWindow();
         auto&& pDrawList = SR_GRAPH_GUI_NS::Immediate::GetWindowDrawList(pWindow);
 
+        if (!m_openedByDefault) {
+            m_isOpened |= context.openedByDefault;
+            m_openedByDefault = true;
+        }
+
         m_isOpened |= context.noHeader;
         const auto dir = m_isOpened ? SR_GRAPH_GUI_NS::Immediate::Direction::Down : SR_GRAPH_GUI_NS::Immediate::Direction::Right;
 

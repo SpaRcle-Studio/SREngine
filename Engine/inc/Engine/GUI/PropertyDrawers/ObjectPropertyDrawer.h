@@ -19,6 +19,7 @@ namespace SR_CORE_GUI_NS {
         virtual PropertyDrawerFeedback DrawCustomProperties(const PropertyDrawerContext& context) { return PropertyDrawerFeedback(); }
 
     private:
+        bool m_openedByDefault = false;
         bool m_isOpened = false;
         std::vector<PropertyDrawerBase::Ptr> m_drawers;
 
