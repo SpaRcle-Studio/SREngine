@@ -74,6 +74,7 @@ namespace SR_PTYPES_NS {
 
     /// ----------------------------------------------------------------------------------------------------------------
 
+    /// @abstract
     class Rigidbody : public SR_UTILS_NS::Component {
         friend class SR_PHYSICS_NS::PhysicsScene;
         SR_CLASS()
@@ -96,7 +97,10 @@ namespace SR_PTYPES_NS {
         void UpdateInertia();
         void ClearForces();
 
-        SR_NODISCARD virtual SR_UTILS_NS::Measurement GetMeasurement() const = 0;
+        SR_NODISCARD virtual SR_UTILS_NS::Measurement GetMeasurement() const {
+            SRHalt("Abstract method called!");
+            return SR_UTILS_NS::Measurement::MeasurementMAX;
+        }
 
         SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
         //SR_NODISCARD ShapeType GetType() const noexcept;

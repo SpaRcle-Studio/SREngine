@@ -11,11 +11,14 @@ DepthWrite true;
     DepthTest false;
 #else
     BlendEnabled false;
-    DepthTest true;
+    #ifdef USE_ORTHOGONAL
+        DepthTest false;
+    #else
+        DepthTest true;
+    #endif
 #endif
 
 [[uniform], [public]] vec4 color;
-[[uniform], [public]] bool useOrthogonal;
 
 void fragment() {
 	COLOR = color;
@@ -24,12 +27,15 @@ void fragment() {
 }
 
 void vertex() {
-    if (useOrthogonal == 1) {
-        VERTEX = (MODEL_MATRIX * vec4(VERTEX + vec3(0, 0, 5), 1.0)).xyz;
-        OUT_POSITION = ORTHOGONAL_MATRIX * vec4(VERTEX, 1.0);
-    }
-    else {
+    mat4 orthogonalMat = ORTHOGONAL_MATRIX;
+    mat4 viewMat = VIEW_MATRIX;
+    mat4 projMat = PROJECTION_MATRIX;
+
+    #ifdef USE_ORTHOGONAL
         VERTEX = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
-        OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * vec4(VERTEX, 1.0);
-    }
+        OUT_POSITION = orthogonalMat * vec4(VERTEX, 1.0);
+    #else
+        VERTEX = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+        OUT_POSITION = projMat * viewMat * vec4(VERTEX, 1.0);
+    #endif
 }

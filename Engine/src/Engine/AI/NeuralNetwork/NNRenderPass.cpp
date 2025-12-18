@@ -63,7 +63,7 @@ namespace SpaRcle::AI {
         Super::DeInit();
     }
 
-    void NNRenderPass::Prepare() {
+    bool NNRenderPass::Prepare() {
         SR_TRACY_ZONE;
 
         for (auto pIt = m_instances.begin(); pIt != m_instances.end(); ) {
@@ -84,7 +84,7 @@ namespace SpaRcle::AI {
             ++pIt;
         }
 
-        Super::Prepare();
+        return Super::Prepare();
     }
 
     void NNRenderPass::Draw(bool isNeurons) {

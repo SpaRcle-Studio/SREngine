@@ -72,21 +72,23 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
             f.write('\n' + '\t' * (tabs + 3) + f'.SetChangeCallback(&SRClassMetaTemplate::OnChange_{prop.name})')
 
         if prop.virtual:
-            f.write('\n' + '\t' * (tabs + 3) + f'.CheckSRClass<decltype(DeclTypeStub()->{prop.getter}())>()')
+            f.write('\n' + '\t' * (tabs + 3) + f'.CheckSRClass<decltype(DefaultTypeInstance()->{prop.getter}())>()')
         else:
             f.write('\n' + '\t' * (tabs + 3) + f'.CheckSRClass<decltype({class_obj.name}::{prop.name})>()')
 
         if prop.property_condition:
             f.write('\n' + '\t' * (tabs + 3) + f'.SetPropertyCondition(&SRClassMetaTemplate::IsPropertyActive_{prop.serialize_name})')
 
-        default_value = f'decltype({class_obj.name}::{prop.name})()'
+        default_value = None
         if prop.default_value:
             default_value = f'decltype({class_obj.name}::{prop.name})(GetDefault_{prop.serialize_name}())'
         elif prop.virtual:
             if prop.getter:
-                default_value = f'SpaRcle::Utils::RemoveQualifiersT<decltype(DeclTypeStub()->{prop.getter}())>()'
+                default_value = f'SpaRcle::Utils::RemoveQualifiersT<decltype(DefaultTypeInstance()->{prop.getter}())>()'
             else:
                 default_value = None
+        else:
+            default_value = 'DefaultTypeInstance() ? DefaultTypeInstance()->' + prop.name + ' : ' + f'decltype({class_obj.name}::{prop.name})()'
 
         if default_value:
             f.write('\n' + '\t' * (tabs + 3) + f'.SetDefaultValue(SpaRcle::Utils::Reflection::Value::Create({default_value}))')
@@ -213,8 +215,10 @@ def generate_class_meta_save(f, class_obj: reflection_utils.SpaRcleClass, tabs):
 
             if prop.default_value:
                 f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || propValue != GetDefault_{prop.serialize_name}())) {{\n')
-            else:
+            elif prop.virtual:
                 f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || !SpaRcle::Utils::IsDefault(propValue))) {{\n')
+            else:
+                f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || !(DefaultTypeInstance() ? SpaRcle::Utils::IsDefault(propValue, &DefaultTypeInstance()->{prop.name}) : SpaRcle::Utils::IsDefault(propValue)))) {{\n')
 
             f.write('\t' * (tabs + 2) + f'static const SpaRcle::Utils::SerializationId keyName_{prop.serialize_name} = SpaRcle::Utils::SerializationId::CreateFromString("{prop.serialize_name}");\n')
             f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Serialization::Save(serializer, propValue, keyName_{prop.serialize_name});\n')
@@ -223,8 +227,11 @@ def generate_class_meta_save(f, class_obj: reflection_utils.SpaRcleClass, tabs):
         else:
             if prop.default_value:
                 f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || value.{prop.name} != GetDefault_{prop.serialize_name}())) {{\n')
-            else:
+            elif prop.virtual:
                 f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || !SpaRcle::Utils::IsDefault(value.{prop.name}))) {{\n')
+            else:
+                f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || !(DefaultTypeInstance() ? SpaRcle::Utils::IsDefault(value.{prop.name}, &DefaultTypeInstance()->{prop.name}) : SpaRcle::Utils::IsDefault(value.{prop.name})))) {{\n')
+
             f.write('\t' * (tabs + 2) + f'static const SpaRcle::Utils::SerializationId keyName_{prop.serialize_name} = SpaRcle::Utils::SerializationId::CreateFromString("{prop.serialize_name}");\n')
             f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Serialization::Save(serializer, value.{prop.name}, keyName_{prop.serialize_name});\n')
             f.write('\t' * (tabs + 1) + f'}}\n')
@@ -311,6 +318,10 @@ def generate_class_meta_load(f, class_obj, tabs):
                 f.write('\t' * (tabs + 1) + f'if (!{load_fn}) {{' + '\n')
                 f.write('\t' * (tabs + 2) + f'propValue = GetDefault_{prop.serialize_name}();' + '\n')
                 f.write('\t' * (tabs + 1) + '}\n')
+            elif not prop.virtual:
+                f.write('\t' * (tabs + 1) + f'if (!{load_fn} && DefaultTypeInstance()) {{' + '\n')
+                f.write('\t' * (tabs + 2) + f'propValue = DefaultTypeInstance()->{prop.name};\n')
+                f.write('\t' * (tabs + 1) + '}\n')
             else:
                 f.write('\t' * (tabs + 1) + f'{load_fn};' + '\n')
 
@@ -321,6 +332,10 @@ def generate_class_meta_load(f, class_obj, tabs):
             if prop.default_value:
                 f.write('\t' * (tabs + 1) + f'if (!{load_fn}) {{' + '\n')
                 f.write('\t' * (tabs + 2) + f'value.{prop.name} = GetDefault_{prop.serialize_name}();' + '\n')
+                f.write('\t' * (tabs + 1) + '}\n')
+            elif not prop.virtual:
+                f.write('\t' * (tabs + 1) + f'if (!{load_fn} && DefaultTypeInstance()) {{' + '\n')
+                f.write('\t' * (tabs + 2) + f'value.{prop.name} = DefaultTypeInstance()->{prop.name};\n')
                 f.write('\t' * (tabs + 1) + '}\n')
             else:
                 f.write('\t' * (tabs + 1) + f'{load_fn};' + '\n')
@@ -401,7 +416,18 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
     f.write('\t' * (tabs + 1) + 'return instance;\n')
     f.write('\t' * tabs + '}\n\n')
 
-    f.write('\t' * tabs + f'SR_NODISCARD {class_name}* DeclTypeStub() const noexcept {{ return nullptr; }}' + '\n\n')
+    f.write('\t' * (tabs) + f'mutable {class_name}* pDefaultInstance = nullptr;\n')
+
+    f.write('\t' * tabs + f'SR_NODISCARD {class_name}* DefaultTypeInstance() const noexcept {{\n')
+    f.write('\t' * (tabs + 1) + f'if constexpr (!std::is_abstract_v<{class_name}>) {{\n')
+    f.write('\t' * (tabs + 2) + f'if (!pDefaultInstance) {{\n')
+    f.write('\t' * (tabs + 3) + f'pDefaultInstance = SRNew<{class_name}>();\n')
+    f.write('\t' * (tabs + 2) + f'}}\n')
+    f.write('\t' * (tabs + 2) + f'return pDefaultInstance;\n')
+    f.write('\t' * (tabs + 1) + f'}} else {{\n')
+    f.write('\t' * (tabs + 2) + f'return nullptr;' + '\n')
+    f.write('\t' * (tabs + 1) + f'}}\n')
+    f.write('\t' * tabs + '}\n\n')
 
     #f.write('\t' * (tabs + 0) + f'template <typename T> T static SetterSharedSRClassConvert(SpaRcle::Utils::SRClass* pSRClass) {{\n')
     #f.write('\t' * (tabs + 1) + f'if constexpr (SpaRcle::Utils::IsSharedPointerV<T>) {{\n')
@@ -439,7 +465,8 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
     #    f.write('\t' * tabs + f'const {prop.type_name}& Get_{prop.name}({class_name}* pClass) {{ return pClass->{prop.name}; }}\n')
     #    f.write('\t' * tabs + f'void Set_{prop.name}({class_name}* pClass, const {prop.type_name}& value) {{ pClass->{prop.name} = value; }}\n\n')
 
-    f.write('\t' * tabs + f'SR_NODISCARD bool IsAbstract() const noexcept final {{ return std::is_abstract_v<{class_name}>; }}' + '\n\n')
+    abstract_str = 'true' if class_obj.abstract else f'std::is_abstract_v<{class_name}>'
+    f.write('\t' * tabs + f'SR_NODISCARD bool IsAbstract() const noexcept final {{ return {abstract_str}; }}' + '\n\n')
     f.write('\t' * tabs + f'SR_NODISCARD bool IsHidden() const noexcept final {{ return { "true" if class_obj.hidden else "false" }; }}' + '\n\n')
 
     if class_obj.version:
@@ -608,6 +635,11 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
     f.write(f'\t' * tabs + f'}}\n\n')
 
     f.write(f'\t' * tabs + f'extern "C" {dll_export_macro} void UnregisterClassMeta_{class_obj.name}() {{' + '\n')
+    # free pDefaultInstance if allocated
+    f.write(f'\t' * (tabs + 1) + f'auto& meta = SRClassMetaTemplate<{class_name}>::Instance();' + '\n')
+    f.write(f'\t' * (tabs + 1) + f'if (meta.pDefaultInstance) {{' + '\n')
+    f.write(f'\t' * (tabs + 2) + f'SRDelete(meta.pDefaultInstance);' + '\n')
+    f.write(f'\t' * (tabs + 1) + f'}}\n')
     f.write(f'\t' * (tabs + 1) + f'SpaRcle::Utils::Factory::Instance().Unregister<{class_name}>();' + '\n')
     f.write(f'\t' * tabs + '}\n\n')
 

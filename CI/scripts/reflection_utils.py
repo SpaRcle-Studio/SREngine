@@ -161,6 +161,7 @@ class SpaRcleClass:
         self.code_module_name = None
         self.inherited_classes = []
         self.is_help_source = False
+        self.abstract = False
 
     def add_variable(self, variable):
         self.variables.append(variable)

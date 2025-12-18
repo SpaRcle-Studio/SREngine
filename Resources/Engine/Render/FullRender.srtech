@@ -31,6 +31,8 @@ use tabs: true
 															15-k:i
 																16-v:d
 																	17-s:Opaque
+														14-a:disallowedLayers
+														14-a:shaderDefines
 														14-o:samplers
 															15-a:samplers
 																16-k:i
@@ -62,6 +64,7 @@ use tabs: true
 													13-v:type
 														14-s:MeshDrawerPass
 													13-o:ptr
+														14-a:allowedLayers
 														14-a:disallowedLayers
 															15-k:i
 																16-v:d
@@ -75,6 +78,7 @@ use tabs: true
 															15-k:i
 																16-v:d
 																	17-s:GizmoSelection
+														14-a:shaderDefines
 														14-o:samplers
 															15-a:samplers
 																16-k:i
@@ -117,6 +121,7 @@ use tabs: true
 															15-k:i
 																16-v:d
 																	17-s:Transparent
+														14-a:disallowedLayers
 														14-a:shaderDefines
 															15-k:i
 																16-v:d
@@ -124,11 +129,12 @@ use tabs: true
 														14-o:samplers
 														14-o:uniforms
 															15-o:shared
+																16-a:useFromPass
 															15-o:material
 														14-v:far
-															15-f:895.919983
+															15-f:895.92
 														14-v:cascadeSplitLambda
-															15-f:0.959999979
+															15-f:0.96
 														14-v:instancing
 															15-b:true
 										10-o:data
@@ -149,16 +155,12 @@ use tabs: true
 									9-s:DepthCascades
 								8-v:dynamicResizing
 									9-b:false
-								8-o:preScale
-									9-v:x
-										10-f:1
-									9-v:y
-										10-f:1
 								8-o:size
 									9-v:x
 										10-i:4096
 									9-v:y
 										10-i:4096
+								8-a:colorFormats
 								8-o:features
 									9-v:depthShaderRead
 										10-b:true

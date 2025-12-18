@@ -188,7 +188,10 @@ def debug_extract_property_default_value(cursor, deep=0):
 
 
 def extract_property_default_value(cursor):
-    debug_extract_property_default_value(cursor)
+    #debug_extract_property_default_value(cursor)
+
+    if cursor.kind != clang.cindex.CursorKind.FIELD_DECL:
+        return None
 
     if cursor.kind != clang.cindex.CursorKind.FIELD_DECL:
         return None
@@ -446,6 +449,7 @@ def parse_sparcle_class(logger, context: codegen_context.CodegenContext, parent_
         class_obj.display_name = extract_special_tag_comment_data(parent_node, 'displayName')
 
         class_obj.hidden = has_special_tag_comment(parent_node, 'hidden')
+        class_obj.abstract = has_special_tag_comment(parent_node, 'abstract')
 
         if class_obj.inspector:
             #print(f'Found class inspector: {class_obj.inspector}')

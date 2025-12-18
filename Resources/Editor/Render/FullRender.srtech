@@ -42,6 +42,7 @@ use tabs: true
 															15-k:i
 																16-v:d
 																	17-s:Transparent
+														14-a:disallowedLayers
 														14-a:shaderDefines
 															15-k:i
 																16-v:d
@@ -49,6 +50,7 @@ use tabs: true
 														14-o:samplers
 														14-o:uniforms
 															15-o:shared
+																16-a:useFromPass
 															15-o:material
 														14-v:colorMultiplier
 															15-i:5000
@@ -88,6 +90,8 @@ use tabs: true
 															15-k:i
 																16-v:d
 																	17-s:Opaque
+														14-a:disallowedLayers
+														14-a:shaderDefines
 														14-o:samplers
 															15-a:samplers
 																16-k:i
@@ -138,6 +142,7 @@ use tabs: true
 																	17-v:type
 																		18-s:MaterialData
 																	17-o:ptr
+																		18-a:shaderDefines
 																		18-o:defaultShader
 																			19-v:shaderPath
 																				20-s:Editor/Shaders/grid.srsl
@@ -146,7 +151,11 @@ use tabs: true
 													13-v:type
 														14-s:MeshDrawerPass
 													13-o:ptr
+														14-a:allowedLayers
 														14-a:disallowedLayers
+															15-k:i
+																16-v:d
+																	17-s:UI
 															15-k:i
 																16-v:d
 																	17-s:Gizmo
@@ -159,6 +168,7 @@ use tabs: true
 															15-k:i
 																16-v:d
 																	17-s:GizmoSelection
+														14-a:shaderDefines
 														14-o:samplers
 															15-a:samplers
 																16-k:i
@@ -226,13 +236,38 @@ use tabs: true
 													13-v:type
 														14-s:MeshDrawerPass
 													13-o:ptr
+														14-v:frustumCulling
+															15-b:false
+														14-a:allowedLayers
+															15-k:i
+																16-v:d
+																	17-s:UI
+														14-a:disallowedLayers
+														14-a:shaderDefines
+														14-o:samplers
+														14-o:uniforms
+															15-o:shared
+																16-v:light
+																	17-b:false
+																16-a:useFromPass
+															15-o:material
+											11-k:i
+												12-o:d
+													13-v:type
+														14-s:MeshDrawerPass
+													13-o:ptr
+														14-v:frustumCulling
+															15-b:false
 														14-a:allowedLayers
 															15-k:i
 																16-v:d
 																	17-s:Gizmo
+														14-a:disallowedLayers
+														14-a:shaderDefines
 														14-o:samplers
 														14-o:uniforms
 															15-o:shared
+																16-a:useFromPass
 															15-o:material
 										10-o:data
 											11-a:clearColors
@@ -270,6 +305,7 @@ use tabs: true
 															15-k:i
 																16-v:d
 																	17-s:Transparent
+														14-a:disallowedLayers
 														14-a:shaderDefines
 															15-k:i
 																16-v:d
@@ -277,11 +313,12 @@ use tabs: true
 														14-o:samplers
 														14-o:uniforms
 															15-o:shared
+																16-a:useFromPass
 															15-o:material
 														14-v:far
-															15-f:895.919983
+															15-f:895.92
 														14-v:cascadeSplitLambda
-															15-f:0.959999979
+															15-f:0.96
 														14-v:instancing
 															15-b:true
 										10-o:data
@@ -302,20 +339,11 @@ use tabs: true
 									9-s:ColorBuffer
 								8-v:dynamicResizing
 									9-b:false
-								8-o:preScale
-									9-v:x
-										10-f:1
-									9-v:y
-										10-f:1
 								8-o:size
 									9-v:x
 										10-i:1024
 									9-v:y
 										10-i:1024
-								8-a:colorFormats
-									9-k:i
-										10-v:d
-											11-s:RGBA8_UNORM
 								8-o:features
 									9-v:colorTransferSrc
 										10-b:true
@@ -328,15 +356,6 @@ use tabs: true
 							7-o:ptr
 								8-v:name
 									9-s:SceneView
-								8-o:preScale
-									9-v:x
-										10-f:1
-									9-v:y
-										10-f:1
-								8-a:colorFormats
-									9-k:i
-										10-v:d
-											11-s:RGBA8_UNORM
 								8-o:features
 									9-v:depthLoad
 										10-b:true
@@ -355,16 +374,12 @@ use tabs: true
 									9-s:DepthCascades
 								8-v:dynamicResizing
 									9-b:false
-								8-o:preScale
-									9-v:x
-										10-f:1
-									9-v:y
-										10-f:1
 								8-o:size
 									9-v:x
 										10-i:4096
 									9-v:y
 										10-i:4096
+								8-a:colorFormats
 								8-o:features
 									9-v:depthShaderRead
 										10-b:true

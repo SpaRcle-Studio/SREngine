@@ -17,7 +17,6 @@
 
 namespace SR_UTILS_NS {
     class Transform3D;
-    class Transform2D;
 }
 
 namespace SR_CORE_GUI_NS {

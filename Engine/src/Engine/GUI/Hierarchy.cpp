@@ -36,13 +36,13 @@ namespace SR_CORE_GUI_NS {
 
         auto&& factory = SR_UTILS_NS::Factory::Instance();
 
-        static const SR_UTILS_NS::StringAtom uiNodeName = SR_GRAPH_UI_NS::UINode::GetClassStaticName();
-        for (auto&& className : SR_UTILS_NS::Factory::Instance().GetInheritances(uiNodeName)) {
-            if (factory.IsAbstract(className)) {
-                continue;
-            }
-            m_availableUINodes.emplace_back(className);
-        }
+        //static const SR_UTILS_NS::StringAtom uiNodeName = SR_GRAPH_UI_NS::UINode::GetClassStaticName();
+        //for (auto&& className : SR_UTILS_NS::Factory::Instance().GetInheritances(uiNodeName)) {
+        //    if (factory.IsAbstract(className)) {
+        //        continue;
+        //    }
+        //    m_availableUINodes.emplace_back(className);
+        //}
     }
 
     Hierarchy::~Hierarchy() {

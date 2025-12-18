@@ -24,7 +24,6 @@
 #include <Graphics/Animations/BoneComponent.h>
 
 #include <Utils/ECS/Transform3D.h>
-#include <Utils/ECS/Transform2D.h>
 #include <Utils/ECS/TransformZero.h>
 #include <Utils/ECS/LayerManager.h>
 #include <Utils/Types/SafePtrLockGuard.h>

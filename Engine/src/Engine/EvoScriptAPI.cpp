@@ -2,31 +2,6 @@
 // Created by Nikita on 11.07.2021.
 //
 
-#include <Engine/EvoScriptAPI.h>
-#include <Engine/Engine.h>
-
-#include <Engine/UI/Button.h>
-
-//#include <Scripting/Compilation/CMakeCodeGen.h>
-
-#include <Utils/Input/InputSystem.h>
-#include <Utils/Math/Noise.h>
-#include <Utils/ECS/TransformZero.h>
-#include <Utils/ECS/Transform2D.h>
-#include <Utils/Resources/ResourceManager.h>
-
-#include <Graphics/Loaders/ObjLoader.h>
-#include <Graphics/Types/Skybox.h>
-#include <Graphics/Font/Text.h>
-#include <Graphics/Types/Geometry/ProceduralMesh.h>
-#include <Graphics/Animations/Animator.h>
-#include <Graphics/Animations/AnimationGraph.h>
-
-#include <Physics/3D/Rigidbody3D.h>
-#include <Physics/3D/Raycast3D.h>
-
-#include <Audio/Types/AudioSource.h>
-
 namespace SpaRcle {
     /*void API::RegisterEvoScriptClasses(SR_CORE_NS::Engine* pEngine) {
         Initialize();

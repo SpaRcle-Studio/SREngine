@@ -10,8 +10,9 @@ DepthTest true;
 
 [[uniform], [public]] vec4 color = vec4(1.0, 1.0, 1.0, 1.0);
 [[uniform], [public]] sampler2D diffuse;
-[[uniform]] vec4 NDC_RECT;
 [[shared]] vec2 UV;
+
+[[uniform]] vec4 NDC_RECT;
 
 float sliced_map(float value, float originalMin, float originalMax, float newMin, float newMax) {
     return (value - originalMin) / (originalMax - originalMin) * (newMax - newMin) + newMin;
@@ -54,13 +55,42 @@ void fragment() {
 void vertex() {
     #include <Engine/Shaders/UI/sprite-vertices.inl.srsl>
 
-    vec3 sprite_vertices[4] = {
-        vec3(NDC_RECT.x, NDC_RECT.w, 0.0), /// vec3(left, bottom, 0.0),
-        vec3(NDC_RECT.x, NDC_RECT.z, 0.0), /// vec3(left, top, 0.0),
-        vec3(NDC_RECT.y, NDC_RECT.w, 0.0), /// vec3(right, bottom, 0.0),
-        vec3(NDC_RECT.y, NDC_RECT.z, 0.0)  /// vec3(right, top, 0.0),
+    vec2 sprite_vertices[4] = {
+        //vec2(NDC_RECT.x, NDC_RECT.w), /// vec3(left, bottom, 0.0),
+        //vec2(NDC_RECT.x, NDC_RECT.z), /// vec3(left, top, 0.0),
+        //vec2(NDC_RECT.y, NDC_RECT.w), /// vec3(right, bottom, 0.0),
+        //vec2(NDC_RECT.y, NDC_RECT.z)  /// vec3(right, top, 0.0),
+
+        //vec2(0.0, 0.0),
+        //vec2(0.0, 1.0),
+        //vec2(1.0, 0.0),
+        //vec2(1.0, 1.0)
+
+        //vec2(0.0, 0.0),
+        //vec2(0.0, RESOLUTION.y - RESOLUTION.y / 2.0),
+        //vec2(RESOLUTION.x - RESOLUTION.x / 2.0, 0.0),
+        //vec2(RESOLUTION.x - RESOLUTION.x / 2.0, RESOLUTION.y - RESOLUTION.y / 2.0)
+
+        NDC_RECT.xy + vec2(0.0, 0.0) * NDC_RECT.zw, // левый-нижний
+        NDC_RECT.xy + vec2(0.0, 1.0) * NDC_RECT.zw, // левый-верхний
+        NDC_RECT.xy + vec2(1.0, 0.0) * NDC_RECT.zw, // правый-нижний
+        NDC_RECT.xy + vec2(1.0, 1.0) * NDC_RECT.zw  // правый-верхний
     };
-    
-    OUT_POSITION = ORTHOGONAL_MATRIX * vec4(sprite_vertices[VERTEX_INDEX], 1.0);
+
+    //vec2 positions[4] = {
+    //    vec2(-0.5,  0.5), // левый нижний -> после поворота
+    //    vec2(-0.5, -0.5), // правый нижний
+    //    vec2( 0.5,  0.5), // левый верхний
+    //    vec2( 0.5, -0.5)  // правый верхний
+    //};
+
+
+    //vec4 pos = MODEL_MATRIX * vec4(sprite_vertices[VERTEX_INDEX], 1.0);
+    //vec2 ndc = pos.xy / RESOLUTION * 2.0 - 1.0;
+    //ndc.y = 1.0 - ndc.y;
+
+    //OUT_POSITION = ORTHOGONAL_MATRIX * vec4(ndc, pos.z, 1.0);
+    OUT_POSITION = PIXEL_ORTHOGONAL_MATRIX * MODEL_MATRIX * vec4(sprite_vertices[VERTEX_INDEX], 0.0, 1.0);
+    //OUT_POSITION = ORTHOGONAL_MATRIX * vec4(sprite_vertices[VERTEX_INDEX], 1.0);
     UV = uv[VERTEX_INDEX];
 }

@@ -14,7 +14,6 @@
 namespace SR_UTILS_NS {
     class GameObject;
     class Transform3D;
-    class Transform2D;
     class Transform;
 }
 

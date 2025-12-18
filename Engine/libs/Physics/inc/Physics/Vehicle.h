@@ -16,7 +16,7 @@
 #include <Utils/Types/SafePointer.h>
 
 namespace SR_PTYPES_NS {
-    /// @category(Physics)
+    /// @category(Physics) @abstract
     class Vehicle : public SR_UTILS_NS::Component {
         SR_CLASS()
     protected:
@@ -27,7 +27,12 @@ namespace SR_PTYPES_NS {
     public:
         SR_NODISCARD virtual SR_UTILS_NS::Measurement GetMeasurement() const;
         SR_NODISCARD VehicleInternalData& GetVehicleData() { return m_internalData; }
-        SR_NODISCARD virtual void* GetHandle() const noexcept = 0;
+
+        SR_NODISCARD virtual void* GetHandle() const noexcept {
+            SRHalt("Abstract method called!");
+            return nullptr;
+        }
+
         virtual bool InitVehicle();
 
         void OnDestroy() override;

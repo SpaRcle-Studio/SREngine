@@ -40,7 +40,7 @@ namespace SpaRcle::AI {
     public:
         void Register(SpaRcle::AI::NeuralNetwork::Ptr pNetwork);
 
-        void Prepare() override;
+        bool Prepare() override;
         bool Render() override;
         void Update() override;
 

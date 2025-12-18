@@ -59,6 +59,7 @@
        <FBOForEachSwapchainImage Value="false"/>
        <SkyboxCPUUsage Value="false"/>
        <VulkanValidation Value="true"/>
+       <VulkanGPUAssist Value="true"/>
        <MultiRenderTargets Value="false"/>
        <MultiFrameResources Value="true"/>
        <Undocking Value="true"/>
