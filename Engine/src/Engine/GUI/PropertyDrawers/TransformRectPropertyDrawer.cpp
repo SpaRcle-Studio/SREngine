@@ -365,6 +365,24 @@ namespace SR_CORE_GUI_NS {
         return changed;
     }
 
+    bool TransformRectEditDragInt(const char* label, const SR_MATH_NS::FVector2& buttonSize, const SR_MATH_NS::FColor& color, int32_t& value, float fieldWidth) {
+        SR_GRAPH_GUI_NS::Immediate::PushID(label);
+
+        bool changed = false;
+        if (SR_GRAPH_GUI_NS::Immediate::ButtonColored(label, color, buttonSize)) {
+            value = 0;
+            changed = true;
+        }
+
+        SR_GRAPH_GUI_NS::Immediate::SameLine();
+        SR_GRAPH_GUI_NS::Immediate::PushItemWidth(fieldWidth);
+        changed |= SR_GRAPH_GUI_NS::Immediate::DragScalar("", SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::Int32, &value, 1.0f);
+        SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+
+        SR_GRAPH_GUI_NS::Immediate::PopID();
+        return changed;
+    }
+
     TransformRectPropertyDrawer::TransformRectPropertyDrawer()
         : Super()
     {
@@ -419,6 +437,7 @@ namespace SR_CORE_GUI_NS {
         static const auto greenColor = SR_MATH_NS::FColor(0.2f, 0.7f, 0.2f, 1.0f);
         static const auto blueColor = SR_MATH_NS::FColor(0.1f, 0.3f, 0.8f, 1.0f);
         static const auto whiteColor = SR_MATH_NS::FColor(0.6f, 0.6f, 0.6f, 1.0f);
+        static const auto yellowColor = SR_MATH_NS::FColor(0.8f, 0.8f, 0.1f, 1.0f);
 
         const SR_MATH_NS::FVector2 smallButtonSize = {context.lineHeight, context.fieldHeight};
         const SR_MATH_NS::FVector2 buttonSize = {context.lineHeight * 2.2f, context.fieldHeight};
@@ -466,11 +485,10 @@ namespace SR_CORE_GUI_NS {
 
             SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-            float_t posZValue = anchoredPos.z;
-            if (TransformRectEditDragFloat("Pos Z", buttonSize, blueColor, posZValue, dragSpeed, threeSegmentWidth)) {
+            int32_t order = pTransformRect->GetLocalPriority();
+            if (TransformRectEditDragInt("Order", buttonSize, blueColor, order, threeSegmentWidth)) {
                 feedback.isChanged = true;
-                anchoredPos.z = posZValue;
-                pTransformRect->SetTranslation(anchoredPos);
+                pTransformRect->SetLocalPriority(order);
             }
 
             /// ========================================= Size / Right-Bottom ==========================================
@@ -501,6 +519,16 @@ namespace SR_CORE_GUI_NS {
                     offsetMin.y = heightBottomValue;
                     pTransformRect->SetOffsetMin(offsetMin);
                 }
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+
+            bool isRelative = pTransformRect->IsRelativePriority();
+
+            if (SR_GRAPH_GUI_NS::Immediate::ButtonColored(isRelative ? "Relative" : "Absolute", whiteColor, SR_MATH_NS::FVector2(buttonSize.x + threeSegmentWidth, buttonSize.y))) {
+                feedback.isChanged = true;
+                isRelative = !isRelative;
+                pTransformRect->SetRelativePriority(isRelative);
             }
         }
         SR_GRAPH_GUI_NS::Immediate::EndGroup();

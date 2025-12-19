@@ -28,7 +28,7 @@ float sliced_processAxis(float coord, float texMin, float texMax, float winMin, 
 }
 
 vec2 calculate_sliced_uv(vec2 uv) {
-    return vec2(
+    vec2 newUV = vec2(
         sliced_processAxis(uv.x,
             SLICED_TEXTURE_BORDER.x, // left
             SLICED_TEXTURE_BORDER.y, // right
@@ -41,6 +41,7 @@ vec2 calculate_sliced_uv(vec2 uv) {
             SLICED_WINDOW_BORDER.z,
             SLICED_WINDOW_BORDER.w)
     );
+    return vec2(1.0 - newUV.x, 1.0 - newUV.y);
 }
 
 void fragment_color_buffer_discard() {
