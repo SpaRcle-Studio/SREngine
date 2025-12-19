@@ -40,7 +40,7 @@
         * mat4 MODEL_MATRIX                   
         * mat4 MODEL_NO_SCALE_MATRIX          
         * vec2 HALF_SIZE_NEAR_PLANE           
-        * vec2 SLICED_TEXTURE_BORDER          
+        * vec4 SLICED_TEXTURE_BORDER          
         * vec2 SLICED_WINDOW_BORDER           
         * vec3 LINE_START_POINT               
         * vec3 LINE_END_POINT                 

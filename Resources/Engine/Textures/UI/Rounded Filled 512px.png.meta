@@ -1,0 +1,14 @@
+sra format
+use tabs: true
+0-r:Root
+	1-v:mipLevels
+		2-i:1
+	1-o:border
+		2-v:x
+			3-f:32
+		2-v:y
+			3-f:32
+		2-v:w
+			3-f:32
+		2-v:h
+			3-f:32

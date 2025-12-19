@@ -14,83 +14,64 @@ DepthTest true;
 
 [[uniform]] vec4 NDC_RECT;
 
-float sliced_map(float value, float originalMin, float originalMax, float newMin, float newMax) {
-    return (value - originalMin) / (originalMax - originalMin) * (newMax - newMin) + newMin;
-}
+float sliced_processAxis(float coord, float texMin, float texMax, float winMin, float winMax) {
+    if (coord < winMin) {
+        return coord / winMin * texMin;
+   }
 
-float sliced_processAxis(float coord, float textureBorder, float windowBorder) {
-    if (coord < windowBorder) {
-        return sliced_map(coord, 0, windowBorder, 0, textureBorder);
+    if (coord > 1.0 - winMax) {
+        return 1.0 - (1.0 - coord) / winMax * texMax;
     }
 
-    if (coord < 1 - windowBorder) {
-        return sliced_map(coord, windowBorder, 1 - windowBorder, textureBorder, 1 - textureBorder);
-    }
-
-    return sliced_map(coord, 1 - windowBorder, 1, 1 - textureBorder, 1);
+    float centerCoord = (coord - winMin) / (1.0 - winMin - winMax);
+    return texMin + centerCoord * (1.0 - texMin - texMax);
 }
 
-float fragment_alpha() {
-    vec2 newUV = vec2(
-        1.0 - sliced_processAxis(UV.x, SLICED_TEXTURE_BORDER.x, SLICED_WINDOW_BORDER.x),
-        1.0 - sliced_processAxis(UV.y, SLICED_TEXTURE_BORDER.y, SLICED_WINDOW_BORDER.y)
+vec2 calculate_sliced_uv(vec2 uv) {
+    return vec2(
+        sliced_processAxis(uv.x,
+            SLICED_TEXTURE_BORDER.x, // left
+            SLICED_TEXTURE_BORDER.y, // right
+            SLICED_WINDOW_BORDER.x,
+            SLICED_WINDOW_BORDER.y),
+
+        sliced_processAxis(uv.y,
+            SLICED_TEXTURE_BORDER.z, // bottom
+            SLICED_TEXTURE_BORDER.w, // top
+            SLICED_WINDOW_BORDER.z,
+            SLICED_WINDOW_BORDER.w)
     );
-    return texture(diffuse, newUV).a;
+}
+
+void fragment_color_buffer_discard() {
+    if (FILL_CENTER == 0 && (UV.x > SLICED_WINDOW_BORDER.x && UV.x < 1.0 - SLICED_WINDOW_BORDER.y) && (UV.y > SLICED_WINDOW_BORDER.z && UV.y < 1.0 - SLICED_WINDOW_BORDER.w)) {
+        discard;
+    }
+    vec2 newUV = calculate_sliced_uv(UV);
+    if (texture(diffuse, newUV).a * color.a <= 0.0) {
+        discard;
+    }
 }
 
 void fragment() {
-    vec2 newUV = vec2(
-        1.0 - sliced_processAxis(UV.x, SLICED_TEXTURE_BORDER.x, SLICED_WINDOW_BORDER.x),
-        1.0 - sliced_processAxis(UV.y, SLICED_TEXTURE_BORDER.y, SLICED_WINDOW_BORDER.y)
-    );
-
-    if (PC_COLOR_BUFFER_MODE == 1) {
-        COLOR = vec4(PC_COLOR_BUFFER_VALUE, 1.0) * float(texture(diffuse, newUV).a > 0.0);
+    if (FILL_CENTER == 0 && (UV.x > SLICED_WINDOW_BORDER.x && UV.x < 1.0 - SLICED_WINDOW_BORDER.y) && (UV.y > SLICED_WINDOW_BORDER.z && UV.y < 1.0 - SLICED_WINDOW_BORDER.w)) {
+        discard;
     }
-    else {
-        COLOR = texture(diffuse, newUV).rgba * color;
-	}
+
+    vec2 newUV = calculate_sliced_uv(UV);
+    COLOR = texture(diffuse, newUV).rgba * color;
 }
 
 void vertex() {
     #include <Engine/Shaders/UI/sprite-vertices.inl.srsl>
 
     vec2 sprite_vertices[4] = {
-        //vec2(NDC_RECT.x, NDC_RECT.w), /// vec3(left, bottom, 0.0),
-        //vec2(NDC_RECT.x, NDC_RECT.z), /// vec3(left, top, 0.0),
-        //vec2(NDC_RECT.y, NDC_RECT.w), /// vec3(right, bottom, 0.0),
-        //vec2(NDC_RECT.y, NDC_RECT.z)  /// vec3(right, top, 0.0),
-
-        //vec2(0.0, 0.0),
-        //vec2(0.0, 1.0),
-        //vec2(1.0, 0.0),
-        //vec2(1.0, 1.0)
-
-        //vec2(0.0, 0.0),
-        //vec2(0.0, RESOLUTION.y - RESOLUTION.y / 2.0),
-        //vec2(RESOLUTION.x - RESOLUTION.x / 2.0, 0.0),
-        //vec2(RESOLUTION.x - RESOLUTION.x / 2.0, RESOLUTION.y - RESOLUTION.y / 2.0)
-
         NDC_RECT.xy + vec2(0.0, 0.0) * NDC_RECT.zw, // левый-нижний
         NDC_RECT.xy + vec2(0.0, 1.0) * NDC_RECT.zw, // левый-верхний
         NDC_RECT.xy + vec2(1.0, 0.0) * NDC_RECT.zw, // правый-нижний
         NDC_RECT.xy + vec2(1.0, 1.0) * NDC_RECT.zw  // правый-верхний
     };
 
-    //vec2 positions[4] = {
-    //    vec2(-0.5,  0.5), // левый нижний -> после поворота
-    //    vec2(-0.5, -0.5), // правый нижний
-    //    vec2( 0.5,  0.5), // левый верхний
-    //    vec2( 0.5, -0.5)  // правый верхний
-    //};
-
-
-    //vec4 pos = MODEL_MATRIX * vec4(sprite_vertices[VERTEX_INDEX], 1.0);
-    //vec2 ndc = pos.xy / RESOLUTION * 2.0 - 1.0;
-    //ndc.y = 1.0 - ndc.y;
-
-    //OUT_POSITION = ORTHOGONAL_MATRIX * vec4(ndc, pos.z, 1.0);
     OUT_POSITION = PIXEL_ORTHOGONAL_MATRIX * MODEL_MATRIX * vec4(sprite_vertices[VERTEX_INDEX], 0.0, 1.0);
-    //OUT_POSITION = ORTHOGONAL_MATRIX * vec4(sprite_vertices[VERTEX_INDEX], 1.0);
     UV = uv[VERTEX_INDEX];
 }

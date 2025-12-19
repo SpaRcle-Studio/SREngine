@@ -131,13 +131,6 @@ use tabs: true
 											11-i:3134850880497372356
 									9-v:type
 										10-s:Box3D
-									9-o:bounds
-										10-v:x
-											11-f:1
-										10-v:y
-											11-f:1
-										10-v:z
-											11-f:1
 						6-k:i
 							7-o:d
 								8-v:type
@@ -191,13 +184,6 @@ use tabs: true
 											11-i:3460612966991860966
 									9-v:type
 										10-s:Convex3D
-									9-o:bounds
-										10-v:x
-											11-f:1
-										10-v:y
-											11-f:1
-										10-v:z
-											11-f:1
 									9-v:meshPath
 										10-s:Engine/Models/statue.obj
 						6-k:i
@@ -260,13 +246,6 @@ use tabs: true
 											11-i:2835832519096981822
 									9-v:type
 										10-s:Sphere3D
-									9-o:bounds
-										10-v:x
-											11-f:1
-										10-v:y
-											11-f:1
-										10-v:z
-											11-f:1
 						6-k:i
 							7-o:d
 								8-v:type
@@ -384,13 +363,6 @@ use tabs: true
 											11-i:4477939339855286056
 									9-v:type
 										10-s:Convex3D
-									9-o:bounds
-										10-v:x
-											11-f:1
-										10-v:y
-											11-f:1
-										10-v:z
-											11-f:1
 									9-v:meshPath
 										10-s:Engine/Models/monkey.obj
 						6-k:i
@@ -453,13 +425,6 @@ use tabs: true
 											11-i:4287181300540844545
 									9-v:type
 										10-s:Capsule3D
-									9-o:bounds
-										10-v:x
-											11-f:1
-										10-v:y
-											11-f:1
-										10-v:z
-											11-f:1
 						6-k:i
 							7-o:d
 								8-v:type
@@ -546,13 +511,6 @@ use tabs: true
 											11-i:4214326274672644406
 									9-v:type
 										10-s:Convex3D
-									9-o:bounds
-										10-v:x
-											11-f:1
-										10-v:y
-											11-f:1
-										10-v:z
-											11-f:1
 									9-v:meshPath
 										10-s:Engine/Models/monkey.obj
 						6-k:i
