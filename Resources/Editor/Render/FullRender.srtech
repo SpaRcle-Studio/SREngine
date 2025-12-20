@@ -76,11 +76,6 @@ use tabs: true
 											11-k:i
 												12-o:d
 													13-v:type
-														14-s:ClearBuffersPass
-													13-o:ptr
-											11-k:i
-												12-o:d
-													13-v:type
 														14-s:MeshDrawerPass
 													13-o:ptr
 														14-a:allowedLayers
@@ -207,10 +202,8 @@ use tabs: true
 											11-k:i
 												12-o:d
 													13-v:type
-														14-s:ClearBuffersPass
+														14-s:ClearDepthAttachmentPass
 													13-o:ptr
-														14-v:clearColor
-															15-b:false
 											11-k:i
 												12-o:d
 													13-v:type
@@ -357,14 +350,6 @@ use tabs: true
 								8-v:name
 									9-s:SceneView
 								8-o:features
-									9-v:depthLoad
-										10-b:true
-									9-v:colorLoad
-										10-b:true
-									9-v:depthTransferDst
-										10-b:true
-									9-v:colorTransferDst
-										10-b:true
 					5-k:i
 						6-o:d
 							7-v:type

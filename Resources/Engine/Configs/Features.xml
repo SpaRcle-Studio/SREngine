@@ -17,7 +17,7 @@
        <VulkanTracy Value="false"/>
        <FileWatching Value="true"/>
        <FrustumCulling Value="true"/>
-       <VulkanValidationErrorAsAssert Value="true"/>
+       <VulkanValidationErrorAsAssert Value="false"/>
 
        <ChunkSystem Value="true"/>
 

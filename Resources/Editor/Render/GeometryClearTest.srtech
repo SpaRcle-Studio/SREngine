@@ -7,7 +7,7 @@ use tabs: true
 		2-o:ptr
 			3-o:data
 				4-v:name
-					5-s:Geometry + ColorPick
+					5-s:Only geometry
 				4-o:pass
 					5-v:type
 						6-s:GroupPass
@@ -132,58 +132,6 @@ use tabs: true
 													13-b:true
 												12-v:value
 													13-f:1
-							7-k:i
-								8-o:d
-									9-v:type
-										10-s:FrameBufferPass
-									9-o:ptr
-										10-v:customName
-											11-s:ColorBuffer
-										10-a:passes
-											11-k:i
-												12-o:d
-													13-v:type
-														14-s:ColorBufferPass
-													13-o:ptr
-														14-a:allowedLayers
-															15-k:i
-																16-v:d
-																	17-s:UI
-															15-k:i
-																16-v:d
-																	17-s:Default
-															15-k:i
-																16-v:d
-																	17-s:Opaque
-															15-k:i
-																16-v:d
-																	17-s:GizmoSelection
-															15-k:i
-																16-v:d
-																	17-s:Transparent
-														14-a:disallowedLayers
-														14-a:shaderDefines
-															15-k:i
-																16-v:d
-																	17-s:SR_DEFINE_COLOR_PASS
-														14-o:samplers
-														14-o:uniforms
-															15-o:shared
-																16-a:useFromPass
-															15-o:material
-														14-v:colorMultiplier
-															15-i:5000
-										10-o:data
-											11-a:clearColors
-												12-k:i
-													13-o:d
-											11-v:frameBufferName
-												12-s:ColorBuffer
-											11-o:depth
-												12-v:has
-													13-b:true
-												12-v:value
-													13-f:1
 				4-a:frameBuffers
 					5-k:i
 						6-o:d
@@ -193,23 +141,6 @@ use tabs: true
 								8-v:name
 									9-s:SceneView
 								8-o:features
-					5-k:i
-						6-o:d
-							7-v:type
-								8-s:FrameBufferController
-							7-o:ptr
-								8-v:name
-									9-s:ColorBuffer
-								8-o:preScale
-									9-v:x
-										10-f:0.85
-									9-v:y
-										10-f:0.85
-								8-o:features
-									9-v:colorTransferSrc
-										10-b:true
-								8-v:samples
-									9-i:1
 				4-a:queues
 					5-k:i
 						6-o:d
@@ -217,6 +148,3 @@ use tabs: true
 								8-k:i
 									9-v:d
 										10-s:SceneView
-								8-k:i
-									9-v:d
-										10-s:ColorBuffer

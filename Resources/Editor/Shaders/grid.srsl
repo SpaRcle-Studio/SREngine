@@ -8,6 +8,8 @@ BlendEnabled true;
 DepthWrite false;
 DepthTest true;
 
+#define USE_COLOR_INDEX_0
+
 [[shared]] vec3 nearPoint;
 [[shared]] vec3 farPoint;
 [[shared]] vec3 fragProjView;
