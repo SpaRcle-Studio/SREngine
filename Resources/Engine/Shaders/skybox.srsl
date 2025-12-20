@@ -8,6 +8,8 @@ BlendEnabled false;
 DepthWrite true;
 DepthTest true;
 
+#define USE_COLOR_INDEX_0
+
 void fragment() {
 	COLOR = texture(SKYBOX_DIFFUSE, VERTEX);
 }
