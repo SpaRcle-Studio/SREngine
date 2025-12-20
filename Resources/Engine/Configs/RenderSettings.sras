@@ -9,19 +9,22 @@ use tabs: true
 				4-k:i
 					5-o:d
 						6-v:name
-							7-s:Only geometry
+							7-s:Only geometry MSAA
+						6-a:shaderDefines
 						6-v:mainCameraRenderTechnique
 							7-s:Engine/Render/Geometry.srtech
 						6-v:editorCameraRenderTechnique
-							7-s:Editor/Render/Geometry.srtech
+							7-s:Editor/Render/GeometryClearTest.srtech
 				4-k:i
 					5-o:d
 						6-v:name
 							7-s:Empty
+						6-a:shaderDefines
 				4-k:i
 					5-o:d
 						6-v:name
 							7-s:Geometry + No debug
+						6-a:shaderDefines
 						6-v:mainCameraRenderTechnique
 							7-s:Engine/Render/Geometry.srtech
 						6-v:editorCameraRenderTechnique
@@ -54,6 +57,7 @@ use tabs: true
 					5-o:d
 						6-v:name
 							7-s:Default with game color buffer no shadows
+						6-a:shaderDefines
 						6-v:mainCameraRenderTechnique
 							7-s:Engine/Render/FullRenderWithColorBufferNoShadows.srtech
 						6-v:editorCameraRenderTechnique
@@ -74,6 +78,7 @@ use tabs: true
 					5-o:d
 						6-v:name
 							7-s:Simple
+						6-a:shaderDefines
 						6-v:editorCameraRenderTechnique
 							7-s:Editor/Render/Simple.srtech
 				4-k:i
@@ -102,14 +107,23 @@ use tabs: true
 					5-o:d
 						6-v:name
 							7-s:Debug cascades map instancing
+						6-a:shaderDefines
 						6-v:editorCameraRenderTechnique
 							7-s:Editor/Render/CascadesToScreenInstancing.srtech
 				4-k:i
 					5-o:d
 						6-v:name
 							7-s:Debug cascades map
+						6-a:shaderDefines
 						6-v:editorCameraRenderTechnique
 							7-s:Editor/Render/CascadesToScreen.srtech
+				4-k:i
+					5-o:d
+						6-v:name
+							7-s:Geometry with color pick
+						6-a:shaderDefines
+						6-v:editorCameraRenderTechnique
+							7-s:Editor/Render/GeometryWithColorPick.srtech
 			3-o:defaultPreset
 				4-v:name
 					5-s:Default

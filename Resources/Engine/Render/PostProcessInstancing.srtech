@@ -42,6 +42,7 @@ use tabs: true
 															15-k:i
 																16-v:d
 																	17-s:Transparent
+														14-a:disallowedLayers
 														14-a:shaderDefines
 															15-k:i
 																16-v:d
@@ -49,6 +50,7 @@ use tabs: true
 														14-o:samplers
 														14-o:uniforms
 															15-o:shared
+																16-a:useFromPass
 															15-o:material
 														14-v:colorMultiplier
 															15-i:5000
@@ -74,11 +76,6 @@ use tabs: true
 											11-k:i
 												12-o:d
 													13-v:type
-														14-s:ClearBuffersPass
-													13-o:ptr
-											11-k:i
-												12-o:d
-													13-v:type
 														14-s:MeshDrawerPass
 													13-o:ptr
 														14-a:allowedLayers
@@ -88,6 +85,8 @@ use tabs: true
 															15-k:i
 																16-v:d
 																	17-s:Opaque
+														14-a:disallowedLayers
+														14-a:shaderDefines
 														14-o:samplers
 															15-a:samplers
 																16-k:i
@@ -135,6 +134,7 @@ use tabs: true
 													13-v:type
 														14-s:MeshDrawerPass
 													13-o:ptr
+														14-a:allowedLayers
 														14-a:disallowedLayers
 															15-k:i
 																16-v:d
@@ -148,6 +148,7 @@ use tabs: true
 															15-k:i
 																16-v:d
 																	17-s:GizmoSelection
+														14-a:shaderDefines
 														14-o:samplers
 															15-a:samplers
 																16-k:i
@@ -186,10 +187,8 @@ use tabs: true
 											11-k:i
 												12-o:d
 													13-v:type
-														14-s:ClearBuffersPass
+														14-s:ClearDepthAttachmentPass
 													13-o:ptr
-														14-v:clearColor
-															15-b:false
 											11-k:i
 												12-o:d
 													13-v:type
@@ -199,9 +198,12 @@ use tabs: true
 															15-k:i
 																16-v:d
 																	17-s:Gizmo
+														14-a:disallowedLayers
+														14-a:shaderDefines
 														14-o:samplers
 														14-o:uniforms
 															15-o:shared
+																16-a:useFromPass
 															15-o:material
 										10-o:data
 											11-a:clearColors
@@ -243,6 +245,7 @@ use tabs: true
 															15-k:i
 																16-v:d
 																	17-s:Transparent
+														14-a:disallowedLayers
 														14-a:shaderDefines
 															15-k:i
 																16-v:d
@@ -250,11 +253,12 @@ use tabs: true
 														14-o:samplers
 														14-o:uniforms
 															15-o:shared
+																16-a:useFromPass
 															15-o:material
 														14-v:far
-															15-f:895.919983
+															15-f:895.92
 														14-v:cascadeSplitLambda
-															15-f:0.959999979
+															15-f:0.96
 														14-v:instancing
 															15-b:true
 										10-o:data
@@ -331,7 +335,7 @@ use tabs: true
 																						22-v:type
 																							23-s:Float
 																						22-v:value
-																							23-f:0.619000018
+																							23-f:0.619
 																				20-k:i
 																					21-o:d
 																						22-v:id
@@ -365,7 +369,7 @@ use tabs: true
 																						22-v:type
 																							23-s:Float
 																						22-v:value
-																							23-f:0.800000012
+																							23-f:0.8
 																				20-k:i
 																					21-o:d
 																						22-v:id
@@ -373,7 +377,7 @@ use tabs: true
 																						22-v:type
 																							23-s:Float
 																						22-v:value
-																							23-f:0.861999989
+																							23-f:0.862
 																				20-k:i
 																					21-o:d
 																						22-v:id
@@ -389,7 +393,7 @@ use tabs: true
 																						22-v:type
 																							23-s:Float
 																						22-v:value
-																							23-f:2.25500011
+																							23-f:2.255
 																				20-k:i
 																					21-o:d
 																						22-v:id
@@ -416,20 +420,11 @@ use tabs: true
 									9-s:ColorBuffer
 								8-v:dynamicResizing
 									9-b:false
-								8-o:preScale
-									9-v:x
-										10-f:1
-									9-v:y
-										10-f:1
 								8-o:size
 									9-v:x
 										10-i:1024
 									9-v:y
 										10-i:1024
-								8-a:colorFormats
-									9-k:i
-										10-v:d
-											11-s:RGBA8_UNORM
 								8-o:features
 									9-v:colorTransferSrc
 										10-b:true
@@ -444,11 +439,6 @@ use tabs: true
 									9-s:DepthCascades
 								8-v:dynamicResizing
 									9-b:false
-								8-o:preScale
-									9-v:x
-										10-f:1
-									9-v:y
-										10-f:1
 								8-o:size
 									9-v:x
 										10-i:4096
@@ -472,11 +462,6 @@ use tabs: true
 							7-o:ptr
 								8-v:name
 									9-s:Main
-								8-o:preScale
-									9-v:x
-										10-f:1
-									9-v:y
-										10-f:1
 								8-a:colorFormats
 									9-k:i
 										10-v:d
@@ -488,14 +473,6 @@ use tabs: true
 										10-v:d
 											11-s:RGBA16_SFLOAT
 								8-o:features
-									9-v:depthLoad
-										10-b:true
-									9-v:colorLoad
-										10-b:true
-									9-v:depthTransferDst
-										10-b:true
-									9-v:colorTransferDst
-										10-b:true
 				4-a:queues
 					5-k:i
 						6-o:d
