@@ -15,6 +15,6 @@ else
 fi
 
 # Запустить Python скрипт
-"$PYTHON" scripts/remove_images_meta.py
+"$PYTHON" scripts/remove_images_meta.py "$@"
 
 read -p "Press Enter to continue..."
