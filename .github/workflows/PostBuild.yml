@@ -54,11 +54,6 @@ jobs:
       #    assignees: ${{inputs.commitActor}}
       #    labels: build-failed
 
-      - name: Fetching repository.
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-
       - name: Managing the issues.
         #if: inputs.linuxBuildState != 'failure' && inputs.windowsBuildState != 'failure'
         id: auto-issue-script
