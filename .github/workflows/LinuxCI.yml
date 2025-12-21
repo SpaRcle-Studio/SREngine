@@ -22,11 +22,6 @@ jobs:
             compiler: clang
             extra: ON
     steps:
-      - name: Fetching repository.
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-
       - name: Installing dependencies.
         run: |
           echo "Used dependencies=$DEPENDENCIES" >> "$GITHUB_ENV"

@@ -12,11 +12,6 @@ jobs:
         arch: [arm64-v8a, x86_64]
 
     steps:
-      - name: Fetching repository.
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-
       - name: Installing Vulkan.
         uses: TWoolhouse/setup-vulkan-sdk@v1.1.0
         with:
@@ -35,7 +30,7 @@ jobs:
         shell: powershell
         working-directory: ${{ github.workspace }}
         run: |
-          echo "buildSuccessful=false" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "buildSuccessful=false" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
           cd Platform/Android
           echo "Install android SDK..."
           dir
@@ -45,7 +40,7 @@ jobs:
           ./build.bat ${{ matrix.arch }}
 
           if ($LASTEXITCODE -eq 0) {
-              echo "buildSuccessful=true" | Out-File -FilePath $env:GITHUB_ENV -Append
+              "buildSuccessful=true" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
           }
           else {
               Write-Error "Build failed with exit code $LASTEXITCODE"

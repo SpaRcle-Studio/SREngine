@@ -12,11 +12,6 @@ jobs:
         buildType: [Debug, Release]
 
     steps:
-      - name: Fetching repository.
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-
       - name: Installing Vulkan.
         uses: TWoolhouse/setup-vulkan-sdk@v1.1.0
         with:
@@ -49,12 +44,12 @@ jobs:
         working-directory: ${{github.workspace}}/build
         run: |
           echo "buildSuccessful=false" >> "$GITHUB_ENV"
-          
+
           cmake -G "Ninja" ../ \
             -DCMAKE_BUILD_TYPE=${{ matrix.buildType }} \
             -DSR_COMMON_UNITY_BUILD="${{ matrix.buildType == 'Release' && 'ON' || 'OFF' }}" \
             "-DCMAKE_MAKE_PROGRAM=${{ github.workspace }}/ninja-build/ninja.exe"
-          
+
           cmake --build . -j $(nproc || sysctl -n hw.ncpu)
           echo "buildSuccessful=true" >> "$GITHUB_ENV"
 
@@ -76,31 +71,31 @@ jobs:
         run: |
           # Ищем один exe, который начинается с SREngine_
           EXE_FILE=$(find . -maxdepth 1 -type f -name "SREngine_*.exe" | head -n 1)
-          
+
           if [ -z "$EXE_FILE" ]; then
             echo "Не найден ни один SREngine_*.exe"
             exit 1
           fi
-          
+
           echo "Нашёл exe: $EXE_FILE"
-          
+
           # Запускаем его с аргументом
           "$EXE_FILE" --pack-with-res
-          
+
           # После выполнения ожидается файл *-packed.exe
           PACKED_FILE="${EXE_FILE%.exe}-packed.exe"
-          
+
           if [ ! -f "$PACKED_FILE" ]; then
             echo "Файл $PACKED_FILE не появился. Значит packing не сработал."
             exit 1
           fi
-          
+
           echo "Packed файл создан: $PACKED_FILE"
-          
+
           # Копируем packed в специальную директорию под артефакт
           mkdir -p PackedBuild
           cp "$PACKED_FILE" PackedBuild/
-          
+
           ls -la PackedBuild
 
       - if: env.buildSuccessful == 'true'
