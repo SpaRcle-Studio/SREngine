@@ -32,7 +32,7 @@ use tabs: true
 				4-k:i
 					5-o:d
 						6-v:name
-							7-s:[Broken] Post process
+							7-s:Post process
 						6-a:shaderDefines
 							7-k:i
 								8-v:d
@@ -40,7 +40,7 @@ use tabs: true
 						6-v:mainCameraRenderTechnique
 							7-s:Engine/Render/PostProcess.srtech
 						6-v:editorCameraRenderTechnique
-							7-s:Engine/Render/PostProcess.srtech
+							7-s:Editor/Render/PostProcess.srtech
 				4-k:i
 					5-o:d
 						6-v:name

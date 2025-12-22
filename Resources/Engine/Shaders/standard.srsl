@@ -6,10 +6,14 @@
 
 PolygonMode Fill;
 
-#ifdef DISABLE_CULLING
-    CullMode None;
+#ifdef SR_DEFINE_CASCADED_SHADOW_MAP_PASS
+    CullMode Front;
 #else
-    CullMode Back;
+    #ifdef DISABLE_CULLING
+        CullMode None;
+    #else
+        CullMode Back;
+    #endif
 #endif
 
 DepthCompare LessOrEqual;

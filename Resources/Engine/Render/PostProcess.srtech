@@ -38,13 +38,13 @@ use tabs: true
 																	17-s:Opaque
 															15-k:i
 																16-v:d
+																	17-s:TransparentSecond
+															15-k:i
+																16-v:d
 																	17-s:GizmoSelection
 															15-k:i
 																16-v:d
 																	17-s:Transparent
-															15-k:i
-																16-v:d
-																	17-s:TransparentSecond
 														14-a:disallowedLayers
 														14-a:shaderDefines
 															15-k:i
@@ -249,10 +249,10 @@ use tabs: true
 																	17-s:Opaque
 															15-k:i
 																16-v:d
-																	17-s:Transparent
+																	17-s:TransparentSecond
 															15-k:i
 																16-v:d
-																	17-s:TransparentSecond
+																	17-s:Transparent
 														14-a:disallowedLayers
 														14-a:shaderDefines
 															15-k:i
@@ -263,10 +263,16 @@ use tabs: true
 															15-o:shared
 																16-a:useFromPass
 															15-o:material
-														14-v:far
-															15-f:895.92
-														14-v:cascadeSplitLambda
-															15-f:0.96
+														14-v:instancing
+															15-b:true
+														14-v:maxShadowDistance
+															15-f:150
+														14-v:split1
+															15-f:4
+														14-v:split2
+															15-f:10
+														14-v:split3
+															15-f:50
 										10-o:data
 											11-v:frameBufferName
 												12-s:DepthCascades
@@ -450,6 +456,7 @@ use tabs: true
 										10-i:4096
 									9-v:y
 										10-i:4096
+								8-a:colorFormats
 								8-o:features
 									9-v:depthShaderRead
 										10-b:true
@@ -489,6 +496,9 @@ use tabs: true
 								8-k:i
 									9-v:d
 										10-s:DepthCascades
+					5-k:i
+						6-o:d
+							7-a:frameBuffers
 								8-k:i
 									9-v:d
 										10-s:Main

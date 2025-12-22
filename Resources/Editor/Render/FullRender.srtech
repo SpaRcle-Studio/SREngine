@@ -314,12 +314,12 @@ use tabs: true
 															15-o:shared
 																16-a:useFromPass
 															15-o:material
+														14-v:near
+															15-f:0
 														14-v:far
-															15-f:600
+															15-f:0
 														14-v:cascadeSplitLambda
-															15-f:0.96
-														14-v:instancing
-															15-b:true
+															15-f:1
 										10-o:data
 											11-v:frameBufferName
 												12-s:DepthCascades

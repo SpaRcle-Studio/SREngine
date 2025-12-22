@@ -19,9 +19,28 @@ DepthTest false;
     #include <Engine/Shaders/Common/clouds.srsl>
 #endif
 
+/// #define SR_LINEARIZE_DEPTH_CASCADES
+
+#ifdef SR_LINEARIZE_DEPTH_CASCADES
+    #include <Engine/Shaders/Common/linearize-depth.srsl>
+    [[uniform]] sampler2DArray shadowMap;
+#endif
+
 #define USE_COLOR_INDEX_0
 
 void fragment() {
+#ifdef SR_LINEARIZE_DEPTH_CASCADES
+    if (uv.x < 0.3 && uv.y < 0.3) {
+        vec2 localUV = uv / 0.3; // локальные uv миникарты [0..1]
+        ivec2 quad = ivec2(localUV * 2.0); // 2x2 квадранта
+        int cascadeIndex = quad.x + quad.y * 2; // 0..3
+        vec2 quadUV = fract(localUV * 2.0); // uv внутри квадранта
+        float depth = LinearizeDepth(texture(shadowMap, vec3(quadUV, cascadeIndex)).r, 10, 100);
+        COLOR_INDEX_0 = vec4(vec3(depth), 1.0);
+        return;
+    }
+#endif
+
     vec3 color;
 
     if (chromaticAberrationIntensity > 0.0) {
@@ -46,6 +65,7 @@ void fragment() {
     float vignette = smoothstep(0.5, 0.5 + (1.0 - vignetteIntensity), r);
 
     color *= 1.0 - vignette;
+
     COLOR_INDEX_0 = vec4(color, 1.0);
 }
 
