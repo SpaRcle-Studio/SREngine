@@ -7,7 +7,7 @@ use tabs: true
 		2-o:ptr
 			3-o:data
 				4-v:name
-					5-s:Editor render
+					5-s:Full Render
 				4-o:pass
 					5-v:type
 						6-s:GroupPass
@@ -36,6 +36,9 @@ use tabs: true
 															15-k:i
 																16-v:d
 																	17-s:Opaque
+															15-k:i
+																16-v:d
+																	17-s:TransparentSecond
 															15-k:i
 																16-v:d
 																	17-s:GizmoSelection
@@ -297,6 +300,9 @@ use tabs: true
 																	17-s:Opaque
 															15-k:i
 																16-v:d
+																	17-s:TransparentSecond
+															15-k:i
+																16-v:d
 																	17-s:Transparent
 														14-a:disallowedLayers
 														14-a:shaderDefines
@@ -309,7 +315,7 @@ use tabs: true
 																16-a:useFromPass
 															15-o:material
 														14-v:far
-															15-f:895.92
+															15-f:600
 														14-v:cascadeSplitLambda
 															15-f:0.96
 														14-v:instancing

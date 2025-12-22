@@ -41,6 +41,9 @@ sra format
 															15-k:i
 																16-v:d
 																	17-s:Transparent
+															15-k:i
+																16-v:d
+																	17-s:TransparentSecond
 														14-a:shaderDefines
 															15-k:i
 																16-v:d

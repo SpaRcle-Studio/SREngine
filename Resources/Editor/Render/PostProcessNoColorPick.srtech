@@ -187,6 +187,9 @@ use tabs: true
 															15-k:i
 																16-v:d
 																	17-s:Transparent
+															15-k:i
+																16-v:d
+																	17-s:TransparentSecond
 														14-a:disallowedLayers
 														14-a:shaderDefines
 															15-k:i
@@ -386,6 +389,7 @@ use tabs: true
 										10-i:4096
 									9-v:y
 										10-i:4096
+								8-a:colorFormats
 								8-o:features
 									9-v:depthShaderRead
 										10-b:true
@@ -393,7 +397,7 @@ use tabs: true
 										10-b:false
 								8-v:samples
 									9-i:1
-								8-v:layersCount
+								8-v:arrayLayersCount
 									9-i:4
 								8-v:depthAspect
 									9-s:Depth
@@ -421,10 +425,10 @@ use tabs: true
 							7-a:frameBuffers
 								8-k:i
 									9-v:d
+										10-s:DepthCascades
+								8-k:i
+									9-v:d
 										10-s:Main
 								8-k:i
 									9-v:d
 										10-s:SceneView
-								8-k:i
-									9-v:d
-										10-s:DepthCascades

@@ -19,6 +19,8 @@ DepthTest false;
     #include <Engine/Shaders/Common/clouds.srsl>
 #endif
 
+#define USE_COLOR_INDEX_0
+
 void fragment() {
     vec3 color;
 

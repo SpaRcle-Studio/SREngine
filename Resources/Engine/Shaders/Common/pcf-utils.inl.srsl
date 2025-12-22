@@ -3,50 +3,6 @@
 [[shared]] vec3 pcf_viewPos;
 [[shared]] vec3 pcf_viewDir;
 
-[[const]] mat4 biasMat = mat4(
-    0.5, 0.0, 0.0, 0.0,
-    0.0, 0.5, 0.0, 0.0,
-    0.0, 0.0, 1.0, 0.0,
-    0.5, 0.5, 0.0, 1.0
-);
-
-float textureProj(vec4 shadowCoord, vec3 norm, vec2 offset, uint cascadeIndex) {
-	float shadow = 1.0;
-
-	float bias = max(0.05 * (1.0 - dot(norm, normalize(DIRECTIONAL_LIGHT_DIRECTION))), 0.005);
-
-	if (shadowCoord.z > -1.0 && shadowCoord.z < 1.0) {
-		float dist = texture(shadowMap, vec3(shadowCoord.st + offset, cascadeIndex)).r;
-		if (shadowCoord.w > 0 && dist < shadowCoord.z - bias) {
-			shadow = 0.2;
-		}
-	}
-
-	return shadow;
-}
-
-float filterPCF(vec3 norm, vec4 sc, uint cascadeIndex) {
-	ivec2 texDim = textureSize(shadowMap, 0).xy;
-	float scale = 0.75;
-	float dx = scale * 1.0 / float(texDim.x);
-	float dy = scale * 1.0 / float(texDim.y);
-
-	float shadowFactor = 0.0;
-	int count = 0;
-	int range = 1;
-
-	for (int x = -range; x <= range; x++)
-	{
-		for (int y = -range; y <= range; y++)
-		{
-			shadowFactor += textureProj(sc, norm, vec2(dx * x, dy * y), cascadeIndex);
-			count++;
-		}
-	}
-
-	return shadowFactor / count;
-}
-
 vec4 DebugColorCascade(vec4 color, uint cascadeIndex) {
     if (cascadeIndex == 0) {
         color.rgb *= vec3(1.0, 0.25, 0.25);
@@ -62,6 +18,105 @@ vec4 DebugColorCascade(vec4 color, uint cascadeIndex) {
     }
 
     return color;
+}
+
+[[const]] mat4 biasMat = mat4(
+    0.5, 0.0, 0.0, 0.0,
+    0.0, 0.5, 0.0, 0.0,
+    0.0, 0.0, 1.0, 0.0,
+    0.5, 0.5, 0.0, 1.0
+);
+
+float textureProj(vec4 shadowCoord, vec3 norm, vec2 offset, uint cascadeIndex) {
+    float shadow = 1.0;
+    float bias = max(0.05 * (1.0 - dot(norm, normalize(DIRECTIONAL_LIGHT_DIRECTION))), 0.005);
+    if (shadowCoord.z > -1.0 && shadowCoord.z < 1.0) {
+    	float dist = texture(shadowMap, vec3(shadowCoord.st + offset, cascadeIndex)).r;
+    	if (shadowCoord.w > 0 && dist < shadowCoord.z - bias) {
+    		shadow = 0.2;
+    	}
+    }
+    return shadow;
+
+    /*vec3 sc = shadowCoord.xyz / shadowCoord.w;
+    vec2 uv = sc.xy + offset;
+    //if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0 ||  sc.z < 0.0 || sc.z > 1.0) {
+    uv = clamp(uv, 0.001, 0.999);
+
+    float ndotl = clamp(dot(norm, normalize(DIRECTIONAL_LIGHT_DIRECTION)), 0.0, 1.0);
+    float cascadeBias[4] = { 0.0003, 0.0008, 0.0015, 0.003 };
+    //float bias = cascadeBias[cascadeIndex] * (1.0 - ndotl);
+
+    //bias += 0.0005;
+
+    float bias = max(
+        cascadeBias[cascadeIndex] * (1.0 - ndotl),
+        cascadeBias[cascadeIndex] * 0.25
+    );
+
+    //bias += 0.0005;
+
+    float dzdx = dFdx(sc.z);
+    float dzdy = dFdy(sc.z);
+    float receiverBias = max(abs(dzdx), abs(dzdy));
+
+    bias += receiverBias * 2.0;   // коэффициент подбирается
+    //bias += 0.0002;               // маленький safety
+    bias += 0.015;               // маленький safety
+
+    float depth = texture(shadowMap, vec3(uv, cascadeIndex)).r;
+    return depth < sc.z - bias ? 0.0 : 1.0;*/
+
+    /*// perspective divide
+    vec3 proj = shadowCoord.xyz / shadowCoord.w;
+    vec2 uv = proj.xy + offset;
+    uv = clamp(uv, 0.001, 0.999);
+    float z = clamp(proj.z, 0.0, 1.0);
+
+    // bias по нормали
+    float ndotl = max(dot(norm, normalize(DIRECTIONAL_LIGHT_DIRECTION)), 0.0);
+    float cascadeBias[4] = { 0.0003, 0.0008, 0.0015, 0.003 };
+    float bias = cascadeBias[cascadeIndex] * (1.0 - ndotl);
+
+    // читаем глубину из карты
+    float depth = texture(shadowMap, vec3(uv, cascadeIndex)).r;
+
+    float dzdx = dFdx(shadowCoord.z);
+    float dzdy = dFdy(shadowCoord.z);
+    float receiverBias = max(abs(dzdx), abs(dzdy));
+
+    bias += receiverBias * 2.0;   // коэффициент подбирается
+    bias += 0.0015;
+
+    if ((z - bias) <= depth) {
+        return 1.0;
+    }
+    return 0.0;*/
+}
+
+float filterPCF(vec3 norm, vec4 sc, uint cascadeIndex) {
+	ivec2 texDim = textureSize(shadowMap, 0).xy;
+
+	float cascadeScale[4] = { 1.5, 1.0, 0.7, 0.4 };
+    float scale = cascadeScale[cascadeIndex];
+    int range = (cascadeIndex == 0) ? 2 : 1;
+
+	float dx = scale * 1.0 / float(texDim.x);
+	float dy = scale * 1.0 / float(texDim.y);
+
+	float shadowFactor = 0.0;
+	int count = 0;
+
+	for (int x = -range; x <= range; x++)
+	{
+		for (int y = -range; y <= range; y++)
+		{
+			shadowFactor += textureProj(sc, norm, vec2(dx * x, dy * y), cascadeIndex);
+			count++;
+		}
+	}
+
+	return shadowFactor / count;
 }
 
 vec4 CalculateShadow(vec3 diffuseColor, vec3 lightColor, float specularSharpness, float specularIntensity, float ambientIntensity, float shadowIntensity, float diffuseMin) {
@@ -80,16 +135,50 @@ vec4 CalculateShadow(vec3 diffuseColor, vec3 lightColor, float specularSharpness
     vec3 norm = NORMAL;
 #endif
 
-    //return vec4(NORMAL, 1.0);
+    int NUM_CASCADES = 4;
+    int SHADOW_MAP_RESOLUTION = 4096;
 
     uint cascadeIndex = 0;
-    for (uint i = 0; i < 3; ++i) {
+    for (uint i = 0; i < NUM_CASCADES - 1; ++i) {
         if (pcf_viewPos.z < CASCADE_SPLITS[i]) {
             cascadeIndex = i + 1;
         }
     }
-    vec4 shadowCoord = (biasMat * CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex]) * vec4(VERTEX, 1.0);
-	float shadow = filterPCF(norm, shadowCoord / shadowCoord.w, cascadeIndex);
+
+    //uint cascadeIndex = 0;
+    //for (uint i = 0; i < NUM_CASCADES - 1; ++i) {
+    //    if (pcf_viewPos.z < CASCADE_SPLITS[i]) {
+    //        cascadeIndex = i;
+    //        break;
+    //    }
+    //}
+
+    float cascadeBlend = 0.0;
+    if (cascadeIndex < NUM_CASCADES - 1) {
+        float splitNear = (cascadeIndex == 0) ? 0.0 : CASCADE_SPLITS[cascadeIndex - 1];
+        float splitFar  = CASCADE_SPLITS[cascadeIndex];
+        float fade = (splitFar - splitNear) * 0.1; // 10%
+
+        cascadeBlend = smoothstep(
+            splitFar - fade,
+            splitFar,
+            pcf_viewPos.z
+        );
+    }
+
+    vec4 sc0 = biasMat * CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex] * vec4(VERTEX, 1.0);
+    float s0 = filterPCF(norm, sc0, cascadeIndex);
+
+    float shadow = s0;
+
+    if (cascadeBlend > 0.0 && cascadeIndex + 1 < NUM_CASCADES) {
+        vec4 sc1 = biasMat * CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex + 1] * vec4(VERTEX, 1.0);
+        float s1 = filterPCF(norm, sc1, cascadeIndex + 1);
+        shadow = mix(s0, s1, cascadeBlend);
+    }
+
+    //vec4 shadowCoord = (biasMat * CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex]) * vec4(VERTEX, 1.0);
+    //float shadow = filterPCF(norm, shadowCoord / shadowCoord.w, cascadeIndex);
 	shadow = mix(1.0, shadow, shadowIntensity);
 
     vec3 ambient = ambientIntensity * 0.15 * diffuseColor;
