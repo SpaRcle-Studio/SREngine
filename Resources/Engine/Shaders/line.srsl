@@ -8,21 +8,15 @@ BlendEnabled false;
 DepthWrite true;
 DepthTest true;
 
-struct NeuronRenderData {
-    vec3 position;
-    vec4 color;
-};
-
-[[ssbo(neurons)]] uint neuronsCount;
-[[ssbo(neurons)]] NeuronRenderData[] neurons;
-
-[[shared]] vec4 neuronColor;
+[[shared]] vec3 position;
 
 void fragment() {
     COLOR = LINE_COLOR;
+    COLOR_INDEX_1 = vec4(gl_FragCoord.z);
+    COLOR_INDEX_2 = vec4(position, 1.0);
 }
 
 void vertex() {
-    vec3 position = float(VERTEX_INDEX == 0) * LINE_START_POINT + float(VERTEX_INDEX == 1) * LINE_END_POINT;
+    position = float(VERTEX_INDEX == 0) * LINE_START_POINT + float(VERTEX_INDEX == 1) * LINE_END_POINT;
     OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * vec4(position, 1.0);
 }

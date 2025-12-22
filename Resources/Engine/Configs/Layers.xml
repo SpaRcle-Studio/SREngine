@@ -7,6 +7,7 @@
 		<Opaque/>
         <Debug/>
     	<Transparent/>
+    	<TransparentSecond/>
     	<UI/>
         <DebugUI/>
         <Gizmo/>

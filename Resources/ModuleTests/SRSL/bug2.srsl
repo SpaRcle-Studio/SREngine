@@ -1,0 +1,9 @@
+ShaderType Compute;
+
+[[ssbo(bones)]] mat4[] bones;
+
+[[THREADS(1, 1, 1)]]
+void compute() {
+    bones[0];
+}
+

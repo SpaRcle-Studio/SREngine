@@ -1,0 +1,16 @@
+ShaderType Compute;
+
+[[THREADS(1, 1, 1)]]
+void compute() {
+    CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex] * vec4();
+    CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex] * vec4(1);
+    CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex] * vec4(1, 2, 3);
+
+    CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex + 1] * vec4();
+    CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex + 1] * vec4(1);
+    CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex + 1] * vec4(1, 2, 3);
+
+    CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex + CASCADE_LIGHT_SPACE_MATRICES[3 * 2] + 1] * vec4(1, 2, 3);
+    CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex + CASCADE_LIGHT_SPACE_MATRICES[3 * 2] + 1 + CASCADE[2]] * vec4(1, 2, 3);
+    CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex + CASCADE_LIGHT_SPACE_MATRICES[3 * 2] + 1 + CASCADE[2 + 3]] * vec4(1, 2, 3);
+}

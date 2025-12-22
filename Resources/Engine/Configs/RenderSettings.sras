@@ -32,7 +32,7 @@ use tabs: true
 				4-k:i
 					5-o:d
 						6-v:name
-							7-s:Post process
+							7-s:[Broken] Post process
 						6-a:shaderDefines
 							7-k:i
 								8-v:d
@@ -84,7 +84,7 @@ use tabs: true
 				4-k:i
 					5-o:d
 						6-v:name
-							7-s:Post process no color pick
+							7-s:[Broken] Post process no color pick
 						6-a:shaderDefines
 							7-k:i
 								8-v:d
@@ -94,7 +94,7 @@ use tabs: true
 				4-k:i
 					5-o:d
 						6-v:name
-							7-s:Post process instancing
+							7-s:[Broken] Post process instancing
 						6-a:shaderDefines
 							7-k:i
 								8-v:d
