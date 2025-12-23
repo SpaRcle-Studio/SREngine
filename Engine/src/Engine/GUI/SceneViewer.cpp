@@ -19,6 +19,7 @@
 #include <Graphics/Render/RenderTechnique.h>
 #include <Graphics/Pass/ColorBufferPass.h>
 #include <Graphics/Pass/FlatColorBufferPass.h>
+#include <Graphics/Lighting/DirectionalLight.h>
 
 #include <Physics/Utils/Utils.h>
 #include <Physics/3D/Rigidbody3D.h>
@@ -61,7 +62,16 @@ namespace SR_CORE_GUI_NS {
             SetGizmoEnabled(true);
         }
 
-        if (m_enabled && !m_platform && m_isPrefab) {
+        if (m_enabled && (!m_platform || !m_directionalLight) && m_isPrefab) {
+            m_directionalLight = m_scene->Find("PREFAB_DIRECTIONAL_LIGHT"_atom).DynamicCast<SR_UTILS_NS::GameObject>();
+            if (!m_directionalLight) {
+                m_directionalLight = m_scene->InstanceGameObject("PREFAB_DIRECTIONAL_LIGHT"_atom);
+                m_directionalLight->AddComponent<SR_GRAPH_NS::DirectionalLight>();
+                m_directionalLight->GetTransform()->SetRotation(60, -45, 0);
+                m_directionalLight->AddSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave);
+                m_directionalLight->AddEditorFlags(SR_UTILS_NS::EditorFlags::Hidden);
+            }
+
             m_platform = m_scene->Find("PREFAB_PLATFORM"_atom).DynamicCast<SR_UTILS_NS::GameObject>();
             if (!m_platform) {
                 m_platform = m_scene->InstanceFromFile("Engine/Models/plane_extended.obj").DynamicCast<SR_UTILS_NS::GameObject>();

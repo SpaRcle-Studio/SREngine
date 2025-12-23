@@ -19,8 +19,21 @@ namespace SR_CORE_GUI_NS {
         virtual PropertyDrawerFeedback DrawCustomProperties(const PropertyDrawerContext& context) { return PropertyDrawerFeedback(); }
 
     private:
+        void DrawPropertyGroup(
+            SR_UTILS_NS::StringAtom group,
+            SR_UTILS_NS::SRClass* pClassValue,
+            uint64_t index,
+            const SR_UTILS_NS::Reflection::Property& property,
+            const PropertyDrawerContext& context,
+            PropertyDrawerContext& propertyContext,
+            PropertyDrawerFeedback& feedback
+        );
+
+    private:
         bool m_openedByDefault = false;
         bool m_isOpened = false;
+        std::set<SR_UTILS_NS::StringAtom> m_openedGroups;
+        std::vector<SR_UTILS_NS::StringAtom> m_groups;
         std::vector<PropertyDrawerBase::Ptr> m_drawers;
 
     };

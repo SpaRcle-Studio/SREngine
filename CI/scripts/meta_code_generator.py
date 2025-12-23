@@ -109,6 +109,9 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
         if prop.not_null:
             f.write('\n' + '\t' * (tabs + 4) + f'.SetNotNull()')
 
+        if prop.group:
+            f.write('\n' + '\t' * (tabs + 4) + f'.SetGroup("{prop.group}")')
+
         f.write('\n' + '\t' * (tabs + 4) + f'.SetDisplayName("{prop.display_name}")')
 
         if prop.inspector:

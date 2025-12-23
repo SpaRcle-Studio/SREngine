@@ -86,7 +86,7 @@ namespace SR_CORE_NS::GUI {
 
                 current.cutName = SR_UTILS_NS::StringUtils::CutName(current.filename, static_cast<uint32_t>(17.f * m_itemsScale));
 
-                auto&& extension = path.GetExtensionView();
+                auto&& extension = SR_UTILS_NS::StringUtils::ToLower(path.GetExtensionView());
                 if (extension == "meta") {
                     continue;
                 }
@@ -504,6 +504,8 @@ namespace SR_CORE_NS::GUI {
             m_callbackFunction = CallbackFn();
         }
         else {
+            std::string extension = SR_UTILS_NS::StringUtils::ToLower(path.GetExtension());
+
             static std::set<std::string_view> supportedAssets = {
                 SR_UTILS_NS::Asset::GetMetaStatic()->GetExtension(),
                 SR_CORE_NS::ProjectSettings::GetMetaStatic()->GetExtension(),
@@ -513,19 +515,19 @@ namespace SR_CORE_NS::GUI {
 
             static std::set<std::string_view> supportedTextures = { "png", "jpg", "jpeg", "tga", "bmp" };
 
-            if (supportedTextures.count(path.GetExtensionView()) != 0) {
+            if (supportedTextures.count(extension) != 0) {
                 if (auto&& pTextureInspector = GetManager()->GetWidget<TextureInspector>()) {
                     pTextureInspector->Inspect(path);
                 }
                 return;
             }
-            else if (supportedAssets.count(path.GetExtensionView()) != 0) {
+            else if (supportedAssets.count(extension) != 0) {
                 if (auto&& pAssetInspector = GetManager()->GetWidget<AssetInspector>()) {
                     pAssetInspector->Inspect(path);
                 }
                 return;
             }
-            else if (path.GetExtensionView() == SR_UTILS_NS::Prefab::EXTENSION || path.GetExtensionView() == "scene") {
+            else if (extension == SR_UTILS_NS::Prefab::EXTENSION || extension == "scene") {
                 auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
                 if (auto&& pScene = SR_WORLD_NS::Scene::LoadScene(path)) {
                     pEngine->AddSceneToQueue(pScene);

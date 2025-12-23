@@ -28,6 +28,8 @@ use tabs: true
 													13-o:ptr
 														14-v:customName
 															15-s:DepthCascades
+														14-v:frustumCulling
+															15-b:false
 														14-v:renderLayers
 															15-i:4
 														14-a:allowedLayers
@@ -55,14 +57,16 @@ use tabs: true
 															15-o:material
 														14-v:instancing
 															15-b:true
+														14-v:lightFrustumCount
+															15-i:4
 														14-v:maxShadowDistance
-															15-f:150
+															15-f:44
 														14-v:split1
-															15-f:4
+															15-f:2.8
 														14-v:split2
-															15-f:10
+															15-f:8
 														14-v:split3
-															15-f:50
+															15-f:17
 										10-o:data
 											11-v:frameBufferName
 												12-s:DepthCascades
@@ -187,6 +191,26 @@ use tabs: true
 													13-v:type
 														14-s:ClearDepthAttachmentPass
 													13-o:ptr
+											11-k:i
+												12-o:d
+													13-v:type
+														14-s:DebugPass
+													13-o:ptr
+														14-a:shaders
+															15-k:item
+																16-v:first
+																	17-s:mesh
+																16-o:second
+																	17-v:shaderPath
+																		18-s:Engine/Shaders/Gizmo/wire-mesh.srsl
+															15-k:item
+																16-v:first
+																	17-s:line
+																16-o:second
+																	17-v:shaderPath
+																		18-s:Engine/Shaders/line.srsl
+														14-v:isOverlay
+															15-b:true
 											11-k:i
 												12-o:d
 													13-v:type

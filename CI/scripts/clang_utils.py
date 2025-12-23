@@ -307,6 +307,8 @@ def process_property(property_obj: reflection_utils.CPPProperty, clang_child):
     property_obj.no_header = has_special_tag_comment(clang_child, 'noHeader')
     property_obj.private = has_special_tag_comment(clang_child, 'private')
 
+    property_obj.group = extract_special_tag_comment_data(clang_child, 'group')
+
     property_obj.dontLoad = has_special_tag_comment(clang_child, 'dontLoad')
     property_obj.dontSave = has_special_tag_comment(clang_child, 'dontSave')
 

@@ -7,7 +7,7 @@
 PolygonMode Fill;
 
 #ifdef SR_DEFINE_CASCADED_SHADOW_MAP_PASS
-    CullMode Front;
+    CullMode None;
 #else
     #ifdef DISABLE_CULLING
         CullMode None;
@@ -23,10 +23,10 @@ DepthWrite true;
 
 #ifdef HAS_ALPHA
     #ifndef SR_DEFINE_CASCADED_SHADOW_MAP_PASS
-        BlendEnabled true;
+        #ifndef DISABLE_BLENDING
+            BlendEnabled true;
+        #endif
     #endif
-#else
-    BlendEnabled false;
 #endif
 
 DepthTest true;
@@ -36,6 +36,7 @@ DepthTest true;
 
 [[uniform], [public]] sampler2D diffuse;
 [[uniform], [public]] sampler2D normal;
+[[uniform], [public]] sampler2D alphaMask;
 
 #ifdef HAS_SKELETON
     [[ssbo(bones)]] mat4[] bones;
@@ -63,7 +64,12 @@ void fragment() {
     vec4 diffuseColor = diffuseColorBase * color;
 
 #ifdef HAS_ALPHA
-    if (diffuseColorBase.a < alphaThreshold) {
+    #ifdef HAS_ALPHA_MASK
+        float maskAlpha = texture(alphaMask, tiledUV).r;
+        diffuseColor.a *= maskAlpha;
+    #endif
+
+    if (diffuseColor.a < alphaThreshold) {
         discard;
     }
     float alpha = diffuseColor.a;

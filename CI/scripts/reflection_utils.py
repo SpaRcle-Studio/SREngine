@@ -95,6 +95,7 @@ class CPPProperty:
         self.read_only = False
         self.not_null = False
         self.no_header = False
+        self.group = None
         self.hidden = False
         self.private = False
         self.dontLoad = False

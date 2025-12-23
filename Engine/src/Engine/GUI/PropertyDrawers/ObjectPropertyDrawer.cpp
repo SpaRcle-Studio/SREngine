@@ -78,71 +78,60 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::EndDisabled();
         }
 
+        m_groups.clear();
+
         if (m_isOpened) {
             if (const SR_UTILS_NS::SRClassMeta* pMeta = pClassValue->GetMeta()) {
+                const float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth);
+                float_t widthNoArrow = totalWidth - ((!context.pValue && !context.noHeader) ? context.GetArrowWidth() : 0.f);
+
                 PropertyDrawerContext propertyContext = context;
                 propertyContext.pValue = nullptr;
-                float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth);
-                totalWidth -= ((!context.pValue && !context.noHeader) ? context.GetArrowWidth() : 0.f);
-                propertyContext.fieldWidth = totalWidth * 0.7f;
-                propertyContext.fieldTitleWidth = totalWidth * 0.3f;
+                propertyContext.fieldWidth = widthNoArrow * 0.7f;
+                propertyContext.fieldTitleWidth = widthNoArrow * 0.3f;
                 propertyContext.pOwner = pClassValue;
                 propertyContext.noHeader = false;
 
                 pMeta->ForEachProperty([&](auto&& property, uint64_t index) {
-                    if (property.IsHidden(pClassValue)) {
-                        return;
-                    }
+                    DrawPropertyGroup(SR_UTILS_NS::StringAtom(), pClassValue, index, property, context, propertyContext, feedback);
+                });
 
-                    SR_UTILS_NS::StringAtom inspector = property.GetEditorParams().GetInspector();
-                    if (inspector.Empty()) {
-                        inspector = GetValueInspector(property.Get(pClassValue));
-                    }
+                widthNoArrow = widthNoArrow - context.GetArrowWidth();
+                propertyContext.fieldWidth = widthNoArrow * 0.7f;
+                propertyContext.fieldTitleWidth = widthNoArrow * 0.3f;
 
-                    if (inspector == ObjectPropertyDrawer::GetClassStaticName()) {
-                        /// возможно, это не безопасно, и может привести к UB
-                        if (SR_UTILS_NS::SRClass* pValueClass = property.Get(pClassValue).GetSRClass()) {
-                            inspector = pValueClass->GetMeta()->GetInspectorName();
+                for (const auto& group : m_groups) {
+                    SR_GRAPH_GUI_NS::Immediate::PushID(group.c_str());
+
+                    bool isGroupOpened = m_openedGroups.count(group) > 0;
+                    const auto groupDir = isGroupOpened ? SR_GRAPH_GUI_NS::Immediate::Direction::Down : SR_GRAPH_GUI_NS::Immediate::Direction::Right;
+                    const SR_MATH_NS::FVector2 arrowPos = SR_GRAPH_GUI_NS::Immediate::GetWindowCursorPos(pWindow) + SR_MATH_NS::FVector2(1, 5);
+                    SR_GRAPH_GUI_NS::Immediate::RenderArrow(pDrawList, arrowPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), groupDir, 1.f);
+
+                    auto&& stackSize = SR_GRAPH_GUI_NS::Immediate::BeginForceEnabled();
+                    if (SR_GRAPH_GUI_NS::Immediate::Button(group.c_str(), { context.fieldTitleWidth + context.fieldWidth, context.fieldHeight })) {
+                        if (isGroupOpened) {
+                            m_openedGroups.erase(group);
                         }
+                        else {
+                            m_openedGroups.insert(group);
+                        }
+                        isGroupOpened = !isGroupOpened;
                     }
+                    SR_GRAPH_GUI_NS::Immediate::EndForceEnabled(stackSize);
 
-                    if (inspector.Empty()) {
-                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Missing inspector for element!");
-                        return;
-                    }
-
-                    if (m_drawers.size() <= index) {
-                        m_drawers.resize(index + 1);
-                    }
-
-                    if (!m_drawers[index] || m_drawers[index]->GetMeta()->GetFactoryName() != inspector) {
-                        m_drawers[index] = SR_UTILS_NS::Factory::Instance().Create<PropertyDrawerBase>(inspector);
-                    }
-
-                    if (!m_drawers[index]) {
-                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Missing inspector for element!");
-                        return;
-                    }
-
-                    if (!context.pValue && !context.noHeader) {
+                    if (isGroupOpened) {
                         SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.GetArrowWidth(), 5.0f));
                         SR_GRAPH_GUI_NS::Immediate::SameLine();
+                        SR_GRAPH_GUI_NS::Immediate::BeginGroup();
+                        pMeta->ForEachProperty([&](auto&& property, uint64_t index) {
+                            DrawPropertyGroup(group, pClassValue, index, property, context, propertyContext, feedback);
+                        });
+                        SR_GRAPH_GUI_NS::Immediate::EndGroup();
                     }
 
-                    propertyContext.noHeader = property.GetEditorParams().IsNoHeader();
-                    propertyContext.pProperty = &property;
-
-                    SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard guard(property.IsReadOnly());
-
-                    SR_GRAPH_GUI_NS::Immediate::BeginGroup();
-                    PropertyDrawerFeedback propertyFeedback = m_drawers[index]->Draw(propertyContext);
-                    SR_GRAPH_GUI_NS::Immediate::EndGroup();
-
-                    if (propertyFeedback.isChanged) {
-                        property.OnChanged(propertyContext.pOwner);
-                        feedback.isChanged = true;
-                    }
-                });
+                    SR_GRAPH_GUI_NS::Immediate::PopID();
+                }
 
                 propertyContext.noHeader = false;
 
@@ -164,5 +153,78 @@ namespace SR_CORE_GUI_NS {
         SetValue(context, feedback, value);
 
         return feedback;
+    }
+
+    void ObjectPropertyDrawer::DrawPropertyGroup(
+        SR_UTILS_NS::StringAtom group,
+        SR_UTILS_NS::SRClass* pClassValue,
+        uint64_t index,
+        const SR_UTILS_NS::Reflection::Property& property,
+        const PropertyDrawerContext& context,
+        PropertyDrawerContext& propertyContext,
+        PropertyDrawerFeedback& feedback
+    ) {
+        SR_TRACY_ZONE;
+
+        if (property.IsHidden(pClassValue)) {
+            return;
+        }
+
+        const SR_UTILS_NS::StringAtom propertyGroup = property.GetEditorParams().GetGroup();
+        if (group != propertyGroup) {
+            if (!propertyGroup.empty() && group.empty() && std::ranges::find(m_groups, propertyGroup) == m_groups.end()) {
+                m_groups.emplace_back(propertyGroup);
+            }
+            return;
+        }
+
+        SR_UTILS_NS::StringAtom inspector = property.GetEditorParams().GetInspector();
+        if (inspector.Empty()) {
+            inspector = GetValueInspector(property.Get(pClassValue));
+        }
+
+        if (inspector == ObjectPropertyDrawer::GetClassStaticName()) {
+            /// возможно, это не безопасно, и может привести к UB
+            if (SR_UTILS_NS::SRClass* pValueClass = property.Get(pClassValue).GetSRClass()) {
+                inspector = pValueClass->GetMeta()->GetInspectorName();
+            }
+        }
+
+        if (inspector.Empty()) {
+            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Missing inspector for element!");
+            return;
+        }
+
+        if (m_drawers.size() <= index) {
+            m_drawers.resize(index + 1);
+        }
+
+        if (!m_drawers[index] || m_drawers[index]->GetMeta()->GetFactoryName() != inspector) {
+            m_drawers[index] = SR_UTILS_NS::Factory::Instance().Create<PropertyDrawerBase>(inspector);
+        }
+
+        if (!m_drawers[index]) {
+            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Missing inspector for element!");
+            return;
+        }
+
+        if (!context.pValue && !context.noHeader) {
+            SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.GetArrowWidth(), 5.0f));
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+        }
+
+        propertyContext.noHeader = property.GetEditorParams().IsNoHeader();
+        propertyContext.pProperty = &property;
+
+        SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard guard(property.IsReadOnly());
+
+        SR_GRAPH_GUI_NS::Immediate::BeginGroup();
+        PropertyDrawerFeedback propertyFeedback = m_drawers[index]->Draw(propertyContext);
+        SR_GRAPH_GUI_NS::Immediate::EndGroup();
+
+        if (propertyFeedback.isChanged) {
+            property.OnChanged(propertyContext.pOwner);
+            feedback.isChanged = true;
+        }
     }
 }

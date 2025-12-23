@@ -5,20 +5,24 @@
 
 vec4 DebugColorCascade(vec4 color, uint cascadeIndex) {
     if (cascadeIndex == 0) {
-        color.rgb *= vec3(0.25, 0.25, 1.0);
+        color.rgb *= vec3(0.8, 0.8, 1.5);
     }
     else if (cascadeIndex == 1) {
-        color.rgb *= vec3(0.25, 1.0, 0.25);
+        color.rgb *= vec3(0.8, 1.5, 0.8);
     }
     else if (cascadeIndex == 2) {
-        color.rgb *= vec3(1.0, 1.0, 0.25);
+        color.rgb *= vec3(1.5, 1.5, 0.8);
     }
     else if (cascadeIndex == 3) {
-        color.rgb *= vec3(1.0, 0.25, 0.25);
+        color.rgb *= vec3(1.5, 0.8, 0.8);
     }
 
     return color;
 }
+
+#define SR_CASCADE_USE_RADII
+//#define SR_CASCADE_BLEND_ZONES
+//#define SR_CASCADE_ACCENT_CAMERA_DIR
 
 [[const]] int NUM_CASCADES = 4;
 
@@ -30,6 +34,33 @@ vec4 DebugColorCascade(vec4 color, uint cascadeIndex) {
 );
 
 [[const]] float cascadeBias[4] = { 0.0003, 0.0008, 0.0015, 0.003 };
+[[const]] float cascadeScale[4] = { 2.0, 1.5, 1.0, 0.7 };
+[[const]] int cascadeRange[4] = { 3, 2, 1, 1 };
+[[const]] float cascadeFadePercent[4] = { 0.05, 0.08, 0.12, 0.15 };
+
+#ifdef SR_CASCADE_USE_RADII
+    uint SelectCascade(vec3 worldPos) {
+        float lastSplit = CASCADE_SPLITS[0];
+
+        for (uint i = 0; i < NUM_CASCADES; ++i)
+        {
+        #ifdef SR_CASCADE_ACCENT_CAMERA_DIR
+            float currentSplit = CASCADE_SPLITS[i];
+            float forwardOffset = 0.5 * (lastSplit + currentSplit);
+            vec3 cascadeCenter = VIEW_POSITION + VIEW_DIRECTION * forwardOffset;
+            lastSplit = currentSplit;
+        #else
+            vec3 cascadeCenter = VIEW_POSITION;
+        #endif
+
+            if (length(worldPos - cascadeCenter) <= CASCADE_RADII[i]) {
+                return i;
+            }
+        }
+
+        return NUM_CASCADES + 1;
+    }
+#endif
 
 float textureProj(vec4 shadowCoord, vec3 norm, vec2 offset, uint cascadeIndex) {
     /*// float bias = max(0.05 * (1.0 - dot(norm, normalize(DIRECTIONAL_LIGHT_DIRECTION))), 0.005);
@@ -151,10 +182,7 @@ float textureProj(vec4 shadowCoord, vec3 norm, vec2 offset, uint cascadeIndex) {
     //bias += receiverBias * 2.0;   // коэффициент подбирается
     bias += 0.0005;
 
-    if ((z - bias) <= depth) {
-        return 1.0;
-    }
-    return 0.0;
+    return step(z - bias, depth);
 }
 
 float filterPCF(vec3 norm, vec4 sc, uint cascadeIndex) {
@@ -165,15 +193,9 @@ float filterPCF(vec3 norm, vec4 sc, uint cascadeIndex) {
 	// Дальние каскады получают меньше фильтрации для производительности
     
     // Увеличиваем range для первого каскада (ближайшего к камере) для лучшего качества
-    int range = 1;
-    if (cascadeIndex == 0) {
-        range = 3;
-    }
-    else if (cascadeIndex == 1) {
-        range = 2;
-    }
-    float cascadeScale[4] = { 2.0, 1.5, 1.0, 0.7 };
+    int range = cascadeRange[cascadeIndex];
     float scale = cascadeScale[cascadeIndex];
+
     float dx = scale * 1.0 / float(texelSize.x);
     float dy = scale * 1.0 / float(texelSize.y);
 
@@ -208,47 +230,49 @@ vec4 CalculateShadow(vec3 diffuseColor, vec3 lightColor, float specularSharpness
     vec3 norm = NORMAL;
 #endif
 
-    float depth = -pcf_viewPos.z; // ДЕЛАЕМ ПОЛОЖИТЕЛЬНУЮ ГЛУБИНУ
-
+#ifdef SR_CASCADE_USE_RADII
+    uint cascadeIndex = SelectCascade(VERTEX);
+#else
     uint cascadeIndex = 0;
+    float depth = -pcf_viewPos.z; // ДЕЛАЕМ ПОЛОЖИТЕЛЬНУЮ ГЛУБИНУ
     for (uint i = 0; i < NUM_CASCADES - 1; ++i) {
         if (depth > CASCADE_SPLITS[i]) {
             cascadeIndex = i + 1;
         }
     }
+#endif
 
-    float cascadeBlend = 0.0;
-    if (cascadeIndex < NUM_CASCADES - 1) {
-        float splitNear = CASCADE_SPLITS[max(cascadeIndex - 1, 0)];
-        float splitFar  = CASCADE_SPLITS[cascadeIndex];
+    float shadow = 1.0;
 
-        // Улучшенный fade zone: используем процент от расстояния между каскадами
-        // Для ближних каскадов используем меньший fade для более резкого перехода (меньше видимых артефактов)
-        // Для дальних - больший fade для плавности
-        float fadePercent = 0.12;
-        if (cascadeIndex == 0) {
-            fadePercent = 0.05;
+    if (cascadeIndex < NUM_CASCADES) {
+        vec4 sc0 = biasMat * CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex] * vec4(VERTEX, 1.0);
+        float s0 = filterPCF(norm, sc0, cascadeIndex);
+        shadow = s0;
+
+    #ifdef SR_CASCADE_BLEND_ZONES
+        if (cascadeIndex < NUM_CASCADES - 1) {
+            float splitNear = CASCADE_SPLITS[max(cascadeIndex - 1, 0)];
+            float splitFar  = CASCADE_SPLITS[cascadeIndex];
+
+            // Улучшенный fade zone: используем процент от расстояния между каскадами
+            // Для ближних каскадов используем меньший fade для более резкого перехода (меньше видимых артефактов)
+            // Для дальних - больший fade для плавности
+            float fadePercent = cascadeFadePercent[cascadeIndex];
+            float fade = (splitFar - splitNear) * fadePercent;
+
+            // Используем более плавный переход для уменьшения видимости границ
+            float cascadeBlend = smoothstep(splitFar - fade, splitFar, pcf_viewPos.z);
+
+            if (cascadeBlend > 0.0 && cascadeIndex + 1 < NUM_CASCADES) {
+                vec4 sc1 = biasMat * CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex + 1] * vec4(VERTEX, 1.0);
+                float s1 = filterPCF(norm, sc1, cascadeIndex + 1);
+                shadow = mix(s0, s1, cascadeBlend);
+            }
         }
-        else if (cascadeIndex == 1) {
-            fadePercent = 0.08;
-        }
-        float fade = (splitFar - splitNear) * fadePercent;
+    #endif
 
-        // Используем более плавный переход для уменьшения видимости границ
-        cascadeBlend = smoothstep(splitFar - fade, splitFar, pcf_viewPos.z);
+        shadow = mix(1.0, shadow, shadowIntensity);
     }
-
-    vec4 sc0 = biasMat * CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex] * vec4(VERTEX, 1.0);
-    float s0 = filterPCF(norm, sc0, cascadeIndex);
-    float shadow = s0;
-
-    if (cascadeBlend > 0.0 && cascadeIndex + 1 < NUM_CASCADES) {
-        vec4 sc1 = biasMat * CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex + 1] * vec4(VERTEX, 1.0);
-        float s1 = filterPCF(norm, sc1, cascadeIndex + 1);
-        shadow = mix(s0, s1, cascadeBlend);
-    }
-
-	shadow = mix(1.0, shadow, shadowIntensity);
 
     vec3 ambient = ambientIntensity * 0.15 * diffuseColor;
 
