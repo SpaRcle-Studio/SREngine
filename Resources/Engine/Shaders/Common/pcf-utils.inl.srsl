@@ -22,7 +22,7 @@ vec4 DebugColorCascade(vec4 color, uint cascadeIndex) {
 
 #define SR_CASCADE_USE_RADII
 //#define SR_CASCADE_BLEND_ZONES
-//#define SR_CASCADE_ACCENT_CAMERA_DIR
+#define SR_CASCADE_ACCENT_CAMERA_DIR
 
 [[const]] int NUM_CASCADES = 4;
 
@@ -40,10 +40,9 @@ vec4 DebugColorCascade(vec4 color, uint cascadeIndex) {
 
 #ifdef SR_CASCADE_USE_RADII
     uint SelectCascade(vec3 worldPos) {
-        float lastSplit = CASCADE_SPLITS[0];
+        float lastSplit = 0.0;
 
-        for (uint i = 0; i < NUM_CASCADES; ++i)
-        {
+        for (uint i = 0; i < NUM_CASCADES; ++i) {
         #ifdef SR_CASCADE_ACCENT_CAMERA_DIR
             float currentSplit = CASCADE_SPLITS[i];
             float forwardOffset = 0.5 * (lastSplit + currentSplit);

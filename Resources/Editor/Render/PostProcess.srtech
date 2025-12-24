@@ -59,14 +59,8 @@ use tabs: true
 															15-b:true
 														14-v:lightFrustumCount
 															15-i:4
-														14-v:maxShadowDistance
-															15-f:44
-														14-v:split1
-															15-f:2.8
-														14-v:split2
-															15-f:8
-														14-v:split3
-															15-f:17
+														14-v:oneMeterUnit
+															15-f:0.1
 										10-o:data
 											11-v:frameBufferName
 												12-s:DepthCascades
