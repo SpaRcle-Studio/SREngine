@@ -36,7 +36,32 @@ DepthTest true;
 
 [[uniform], [public]] sampler2D diffuse;
 [[uniform], [public]] sampler2D normal;
+[[uniform], [public]] sampler2D roughness;
+[[uniform], [public]] sampler2D detailWeight;
+[[uniform], [public]] sampler2D sss;
+[[uniform], [public]] sampler2D emission;
 [[uniform], [public]] sampler2D alphaMask;
+
+/*
+    Кожа (персонажи)
+    SSS_COLOR     = vec3(1.0, 0.35, 0.25);
+    SSS_INTENSITY = 0.4 – 0.7;
+
+    Уши / нос (через mask)
+    SSS mask ≈ 0.8 – 1.0
+
+    Воск / мыло
+    SSS_COLOR     = vec3(1.0, 0.9, 0.7);
+    SSS_INTENSITY = 0.6 – 1.0;
+
+    Листва
+    SSS_COLOR     = vec3(0.3, 0.8, 0.2);
+    SSS_INTENSITY = 0.5 – 0.9;
+
+    Камень / мрамор
+    SSS_COLOR     = vec3(1.0, 0.95, 0.9);
+    SSS_INTENSITY = 0.1 – 0.3;
+*/
 
 #ifdef HAS_SKELETON
     [[ssbo(bones)]] mat4[] bones;
@@ -45,11 +70,14 @@ DepthTest true;
 
 [[uniform], [public]] float specularSharpness = 1.0;
 [[uniform], [public]] float specularIntensity = 1.0;
-[[uniform], [public]] float ambientIntensity = 1.0;
 [[uniform], [public]] float shadowIntensity = 1.0;
-[[uniform], [public]] float diffuseMin = 0.0; // 0.0 = классический Ламберт, >0 = подсветка обратной стороны
 [[uniform], [public]] vec2 tiling = vec2(1.0, 1.0);
 [[uniform], [public]] vec2 offset = vec2(0.0, 0.0);
+[[uniform], [public]] vec3 sssColor = vec3(1.0, 0.35, 0.25);
+[[uniform], [public]] float sssIntensity = 0.5;
+[[uniform], [public]] float detailRoughnessStrength = 0.5;
+[[uniform], [public]] vec3 emissionColor = vec3(1.0, 1.0, 1.0);
+[[uniform], [public]] float emissionIntensity = 1.0;
 
 #ifdef SR_DEFINE_USE_CASCADED_SHADOW_MAP
     #include <Engine/Shaders/Common/pcf-utils.inl.srsl>
@@ -79,18 +107,48 @@ void fragment() {
 
     float maybe_unused_specularSharpness = specularSharpness;
     float maybe_unused_specularIntensity = specularIntensity;
-    float maybe_unused_ambientIntensity = ambientIntensity;
     float maybe_unused_shadowIntensity = shadowIntensity;
-    float maybe_unused_diffuseMin = diffuseMin;
+
+#ifdef HAS_DETAIL_WEIGHT
+    float detailWeightValue = texture(detailWeight, UV).r;
+#endif
+
+#ifdef HAS_ROUGHNESS
+    float roughnessValue = texture(roughness, UV).r;
+    #ifdef HAS_DETAIL_WEIGHT
+        // базовый roughness → более шероховатый в местах detail
+        roughnessValue = mix(
+            roughnessValue,
+            clamp(roughnessValue + detailRoughnessStrength, 0.04, 1.0), detailWeightValue
+        );
+    #endif
+#else
+    float roughnessValue = 1.0;
+#endif
+
+#ifdef HAS_SSS
+    float maybe_unused_sssIntensity = sssIntensity * texture(sss, tiledUV).r;
+    vec3 maybe_unused_sssColor = sssColor;
+#else
+    float maybe_unused_sssIntensity = 0.0;
+    vec3 maybe_unused_sssColor = vec3(0.0);
+#endif
+
+#ifdef HAS_EMISSION
+    vec3 emissionValue = texture(emission, UV).rgb * emissionIntensity * emissionColor;
+#else
+    vec3 emissionValue = vec3(0.0);
+#endif
 
 #ifdef SR_DEFINE_USE_CASCADED_SHADOW_MAP
-    vec3 lightColor = vec3(1.0);
-    vec3 shadowColor = CalculateShadow(diffuseColor.rgb, lightColor,
+    vec3 shadowColor = CalculateShadow(diffuseColor.rgb,
         maybe_unused_specularSharpness,
         maybe_unused_specularIntensity,
-        maybe_unused_ambientIntensity,
         maybe_unused_shadowIntensity,
-        maybe_unused_diffuseMin
+        roughnessValue,
+        maybe_unused_sssIntensity,
+        maybe_unused_sssColor,
+        emissionValue
     ).rgb;
     COLOR = vec4(shadowColor, alpha);
 #else

@@ -535,9 +535,6 @@ use tabs: true
 								8-k:i
 									9-v:d
 										10-s:ColorBuffer
-					5-k:i
-						6-o:d
-							7-a:frameBuffers
 								8-k:i
 									9-v:d
 										10-s:Main

@@ -20,6 +20,29 @@ vec4 DebugColorCascade(vec4 color, uint cascadeIndex) {
     return color;
 }
 
+vec3 ACESFilm(vec3 x) {
+    float a = 2.51;
+    float b = 0.03;
+    float c = 2.43;
+    float d = 0.59;
+    float e = 0.14;
+    return clamp((x * (a * x + b)) / (x * (c * x + d) + e), 0.0, 1.0);
+}
+
+
+// Sun (Directional Light / Celestial Body)
+[[const]] vec3  SUN_COLOR      = vec3(1.0, 0.95, 0.85); // тёплое солнце
+[[const]] float SUN_LUX        = 130000.0;              // условные люксы
+[[const]] float SUN_INTENSITY  = 130000.0 * 0.00001;    // масштаб под HDR
+
+// Sky ambient
+[[const]] vec3 SKY_COLOR    = vec3(0.45, 0.6, 0.9);     // небо
+[[const]] vec3 GROUND_COLOR = vec3(0.25, 0.23, 0.2);    // отражение от земли
+[[const]] float AMBIENT_INTENSITY = 1.0;
+
+[[const]] float SHADOW_STRENGTH = 0.9; // интенсивность теней
+
+
 #define SR_CASCADE_USE_RADII
 //#define SR_CASCADE_BLEND_ZONES
 #define SR_CASCADE_ACCENT_CAMERA_DIR
@@ -62,105 +85,6 @@ vec4 DebugColorCascade(vec4 color, uint cascadeIndex) {
 #endif
 
 float textureProj(vec4 shadowCoord, vec3 norm, vec2 offset, uint cascadeIndex) {
-    /*// float bias = max(0.05 * (1.0 - dot(norm, normalize(DIRECTIONAL_LIGHT_DIRECTION))), 0.005);
-
-	float shadow = 1.0;
-	float bias = 0.005;
-
-	if (shadowCoord.z > -1.0 && shadowCoord.z < 1.0)
-	{
-		float dist = texture(shadowMap, vec3(shadowCoord.xy + offset, cascadeIndex)).r;
-		if (shadowCoord.w > 0.0 && dist < shadowCoord.z - bias)
-		{
-			shadow = 0.1;
-		}
-	}
-
-	return shadow;*/
-
-
-
-
-    /*// Перспективное деление
-    vec3 proj = shadowCoord.xyz / shadowCoord.w;
-
-    // Проверка границ
-    if (proj.x < 0.0 || proj.x > 1.0 || proj.y < 0.0 || proj.y > 1.0 || proj.z < 0.0 || proj.z > 1.0) {
-        return 1.0;
-    }
-
-    // Clamp для предотвращения артефактов на границах
-    vec2 uv = clamp(proj.xy + offset, 0.001, 0.999);
-    float z = clamp(proj.z, 0.0, 1.0);
-
-    // Каскад-зависимый базовый bias (дальние каскады требуют большего bias)
-    // Уменьшаем bias для ближних каскадов для лучшего качества
-    float cascadeBiasBase[4] = { 0.0003, 0.0006, 0.0012, 0.0025 };
-    float baseBias = cascadeBiasBase[cascadeIndex];
-
-    // Bias на основе наклона поверхности (dot product нормали и направления света)
-    float ndotl = clamp(dot(norm, normalize(DIRECTIONAL_LIGHT_DIRECTION)), 0.0, 1.0);
-    float slopeBias = baseBias * (1.0 - ndotl);
-
-    // Минимальный bias для предотвращения shadow acne (меньше для ближних каскадов)
-    float minBiasMultiplier = 0.25;
-    if (cascadeIndex == 0) {
-        minBiasMultiplier = 0.15;
-    }
-    else if (cascadeIndex == 1) {
-        minBiasMultiplier = 0.2;
-    }
-    float minBias = baseBias * minBiasMultiplier;
-    float bias = max(slopeBias, minBias);
-
-    // Добавляем небольшой safety bias (меньше для ближних каскадов)
-    float safetyBias = 0.0005;
-    if (cascadeIndex == 0) {
-        safetyBias = 0.0002;
-    }
-    else if (cascadeIndex == 1) {
-        safetyBias = 0.0003;
-    }
-    bias += safetyBias;
-
-    // Читаем глубину из shadow map
-    float depth = texture(shadowMap, vec3(uv, cascadeIndex)).r;
-
-    // Сравниваем глубины
-    if ((z - bias) <= depth) {
-        return 1.0;
-    }
-    return 0.0;*/
-
-    /*vec3 sc = shadowCoord.xyz / shadowCoord.w;
-    vec2 uv = sc.xy + offset;
-    //if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0 ||  sc.z < 0.0 || sc.z > 1.0) {
-    uv = clamp(uv, 0.001, 0.999);
-
-    float ndotl = clamp(dot(norm, normalize(DIRECTIONAL_LIGHT_DIRECTION)), 0.0, 1.0);
-    float cascadeBias[4] = { 0.0003, 0.0008, 0.0015, 0.003 };
-    //float bias = cascadeBias[cascadeIndex] * (1.0 - ndotl);
-
-    //bias += 0.0005;
-
-    float bias = max(
-        cascadeBias[cascadeIndex] * (1.0 - ndotl),
-        cascadeBias[cascadeIndex] * 0.25
-    );
-
-    //bias += 0.0005;
-
-    float dzdx = dFdx(sc.z);
-    float dzdy = dFdy(sc.z);
-    float receiverBias = max(abs(dzdx), abs(dzdy));
-
-    bias += receiverBias * 2.0;   // коэффициент подбирается
-    //bias += 0.0002;               // маленький safety
-    bias += 0.015;               // маленький safety
-
-    float depth = texture(shadowMap, vec3(uv, cascadeIndex)).r;
-    return depth < sc.z - bias ? 0.0 : 1.0;*/
-
     // perspective divide
     vec3 proj = shadowCoord.xyz / shadowCoord.w;
     vec2 uv = proj.xy + offset;
@@ -174,11 +98,6 @@ float textureProj(vec4 shadowCoord, vec3 norm, vec2 offset, uint cascadeIndex) {
     // читаем глубину из карты
     float depth = texture(shadowMap, vec3(uv, cascadeIndex)).r;
 
-    //float dzdx = dFdx(shadowCoord.z);
-    //float dzdy = dFdy(shadowCoord.z);
-    //float receiverBias = max(abs(dzdx), abs(dzdy));
-
-    //bias += receiverBias * 2.0;   // коэффициент подбирается
     bias += 0.0005;
 
     return step(z - bias, depth);
@@ -213,9 +132,18 @@ float filterPCF(vec3 norm, vec4 sc, uint cascadeIndex) {
 	return shadowFactor / float(count);
 }
 
-vec4 CalculateShadow(vec3 diffuseColor, vec3 lightColor, float specularSharpness, float specularIntensity, float ambientIntensity, float shadowIntensity, float diffuseMin) {
-#ifdef HAS_NORMAL
+vec4 CalculateShadow(
+    vec3 diffuseColor, float specularSharpness, float specularIntensity, float shadowIntensity,
+    float roughnessValue,
+    float sssIntensity, vec3 sssColor,
+    vec3 emissionValue
+) {
     vec3 N = normalize(NORMAL);
+    vec3 L = normalize(-DIRECTIONAL_LIGHT_DIRECTION);
+    vec3 V = normalize(pcf_viewDir);
+    vec3 H = normalize(L + V);
+
+#ifdef HAS_NORMAL
     vec3 T = normalize(TANGENT);
     // TODO: доработать расчет B
     // vec3 B = normalize(cross(N, T));
@@ -273,17 +201,50 @@ vec4 CalculateShadow(vec3 diffuseColor, vec3 lightColor, float specularSharpness
         shadow = mix(1.0, shadow, shadowIntensity);
     }
 
-    vec3 ambient = ambientIntensity * 0.15 * diffuseColor;
+    float upFactor = clamp(N.y * 0.5 + 0.5, 0.0, 1.0);
+    vec3 ambientColor = mix(GROUND_COLOR, SKY_COLOR, upFactor);
 
-    float ndotl = dot(normalize(-DIRECTIONAL_LIGHT_DIRECTION), norm);
-    float diffuseTerm = max(ndotl, diffuseMin);
-    vec3 diff = diffuseTerm * lightColor;
+    vec3 ambient = ambientColor * AMBIENT_INTENSITY * diffuseColor;
 
-    vec3 halfwayDir = normalize(-DIRECTIONAL_LIGHT_DIRECTION + normalize(pcf_viewDir));
-    float spec = pow(max(dot(norm, halfwayDir), 0.0), specularSharpness * 64) * specularIntensity;
-    vec3 specular = spec * lightColor;
+    float ndotl = max(dot(N, L), 0.0);
+    vec3 diffuse = ndotl * SUN_COLOR * SUN_INTENSITY;
 
-    vec4 color = vec4(ambient + shadow * (diff + specular) * diffuseColor, 1.0);
+#ifdef HAS_ROUGHNESS
+    roughnessValue = clamp(roughnessValue, 0.04, 1.0);
+
+    float roughnessAlpha = roughnessValue * roughnessValue;
+    float specPow = max(2.0 / (roughnessAlpha * roughnessAlpha) - 2.0, 1.0);
+
+    float ndoth = max(dot(N, H), 0.0);
+    float spec = pow(ndoth, specPow);
+
+    float specEnergy = (specPow + 2.0) / 8.0;
+    vec3 specular = spec * specEnergy * specularIntensity * SUN_COLOR * SUN_INTENSITY;
+#else
+    float specPow = specularSharpness * 64.0;
+    float spec = pow(max(dot(N, H), 0.0), specPow);
+    vec3 specular = spec * specularIntensity * SUN_COLOR * SUN_INTENSITY;
+#endif
+
+#ifdef HAS_SSS
+    float backNDotL = max(dot(-N, L), 0.0); // свет с обратной стороны
+    float sssTerm = backNDotL * sssIntensity; // простая аппроксимация рассеивания
+    vec3 sss = sssTerm * sssColor * SUN_COLOR * SUN_INTENSITY;
+#else
+    vec3 sss = vec3(0.0);
+#endif
+
+    float shadowFactor = mix(1.0 - SHADOW_STRENGTH, 1.0, shadow);
+
+    vec3 lightingHDR = ambient
+                     + shadowFactor * (diffuse + specular)
+                     + sss
+                     + emissionValue;
+
+    vec3 colorHDR = lightingHDR * diffuseColor;
+    vec3 colorLDR = ACESFilm(colorHDR);
+
+    vec4 color = vec4(colorLDR, 1);
 
 #ifdef SR_DEFINE_DEBUG_CASCADED_SHADOW_MAP_PASS
     return DebugColorCascade(color, cascadeIndex);
