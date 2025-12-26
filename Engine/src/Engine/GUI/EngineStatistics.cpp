@@ -627,7 +627,8 @@ namespace SR_CORE_GUI_NS {
 
             SR_GRAPH_GUI_NS::Immediate::Text("%", SR_FORMAT_C("Transferred count: {}", pPipeline->GetPreviousState().transferredCount));
 
-            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Used memory in bytes: {}", memoryInfo.videoMemoryUsed));
+            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Used memory: {} MB", uint64_t(memoryInfo.videoMemoryUsed / 1024 / 1024)));
+            SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Allocated heaps count: {}", memoryInfo.videoMemoryHeaps));
             SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Descriptor sets count: {}", memoryInfo.descriptorSetsCount));
             SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Shader programs count: {}", memoryInfo.shaderProgramsCount));
             SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("UBOs count: {}", memoryInfo.UBOsCount));

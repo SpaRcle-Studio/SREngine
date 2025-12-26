@@ -1,0 +1,41 @@
+#ifdef HAS_SKELETON
+    ShaderType Skinned;
+#else
+    ShaderType Spatial;
+#endif
+
+PolygonMode Fill;
+
+#ifdef SR_DEFINE_CASCADED_SHADOW_MAP_PASS
+    CullMode None;
+#else
+    #ifdef DISABLE_CULLING
+        CullMode None;
+    #else
+        CullMode Back;
+    #endif
+#endif
+
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+
+DepthWrite true;
+
+#ifdef HAS_ALPHA
+    #ifndef SR_DEFINE_CASCADED_SHADOW_MAP_PASS
+        #ifndef DISABLE_BLENDING
+            BlendEnabled true;
+        #endif
+    #endif
+#endif
+
+DepthTest true;
+
+#ifdef HAS_SKELETON
+    [[ssbo(bones)]] mat4[] bones;
+    [[ssbo(offsets)]] mat4[] boneOffsets;
+#endif
+
+#ifdef SR_DEFINE_USE_CASCADED_SHADOW_MAP
+    #include <Engine/Shaders/Common/pcf-utils.inl.srsl>
+#endif

@@ -68,7 +68,7 @@ vec3 ACESFilm(vec3 x) {
         for (uint i = 0; i < NUM_CASCADES; ++i) {
         #ifdef SR_CASCADE_ACCENT_CAMERA_DIR
             float currentSplit = CASCADE_SPLITS[i];
-            float forwardOffset = 0.5 * (lastSplit + currentSplit);
+            float forwardOffset = 0.65 * (lastSplit + currentSplit);
             vec3 cascadeCenter = VIEW_POSITION + VIEW_DIRECTION * forwardOffset;
             lastSplit = currentSplit;
         #else
@@ -84,26 +84,26 @@ vec3 ACESFilm(vec3 x) {
     }
 #endif
 
-float textureProj(vec4 shadowCoord, vec3 norm, vec2 offset, uint cascadeIndex) {
-    // perspective divide
-    vec3 proj = shadowCoord.xyz / shadowCoord.w;
+float textureProj(vec3 proj, float ndotl, vec2 offset, uint cascadeIndex) {
     vec2 uv = proj.xy + offset;
-    uv = clamp(uv, 0.001, 0.999);
-    float z = clamp(proj.z, 0.0, 1.0);
+    //uv = clamp(uv, 0.001, 0.999);
 
-    // bias по нормали
-    float ndotl = max(dot(norm, normalize(DIRECTIONAL_LIGHT_DIRECTION)), 0.0);
     float bias = cascadeBias[cascadeIndex] * (1.0 - ndotl);
-
-    // читаем глубину из карты
     float depth = texture(shadowMap, vec3(uv, cascadeIndex)).r;
 
     bias += 0.0005;
 
-    return step(z - bias, depth);
+    return step(proj.z - bias, depth);
 }
 
-float filterPCF(vec3 norm, vec4 sc, uint cascadeIndex) {
+float filterPCF(vec3 norm, vec4 shadowCoord, uint cascadeIndex) {
+    float ndotl = max(dot(norm, DIRECTIONAL_LIGHT_DIRECTION), 0.0);
+    vec3 proj = shadowCoord.xyz / shadowCoord.w;
+    proj.z = clamp(proj.z, 0.0, 1.0);
+
+#ifdef SR_NO_PCF_FILTER
+    return textureProj(proj, ndotl, vec2(0.0), cascadeIndex);
+#else
 	ivec2 texelSize = textureSize(shadowMap, 0).xy;
 
 	// Улучшенное масштабирование для разных каскадов
@@ -124,38 +124,34 @@ float filterPCF(vec3 norm, vec4 sc, uint cascadeIndex) {
 	{
 		for (int y = -range; y <= range; y++)
 		{
-			shadowFactor += textureProj(sc, norm, vec2(dx * x, dy * y), cascadeIndex);
+			shadowFactor += textureProj(proj, ndotl, vec2(dx * x, dy * y), cascadeIndex);
 			count++;
 		}
 	}
 
 	return shadowFactor / float(count);
+#endif
 }
 
 vec4 CalculateShadow(
+    vec3 tangentNormal,
     vec3 diffuseColor, float specularSharpness, float specularIntensity, float shadowIntensity,
     float roughnessValue,
     float sssIntensity, vec3 sssColor,
     vec3 emissionValue
 ) {
-    vec3 N = normalize(NORMAL);
-    vec3 L = normalize(-DIRECTIONAL_LIGHT_DIRECTION);
-    vec3 V = normalize(pcf_viewDir);
+    vec3 N = NORMAL;
+    vec3 L = -DIRECTIONAL_LIGHT_DIRECTION;
+    vec3 V = pcf_viewDir;
     vec3 H = normalize(L + V);
 
-#ifdef HAS_NORMAL
     vec3 T = normalize(TANGENT);
     // TODO: доработать расчет B
     // vec3 B = normalize(cross(N, T));
     // vec3 B = cross(N, T) * tangentW; // где tangentW = ±1
     vec3 B = normalize(BITANGENT);
     mat3 TBN = mat3(T, B, N);
-
-    vec3 tangentNormal = texture(normal, UV).xyz * 2.0 - 1.0;
     vec3 norm = normalize(TBN * tangentNormal);
-#else
-    vec3 norm = NORMAL;
-#endif
 
 #ifdef SR_CASCADE_USE_RADII
     uint cascadeIndex = SelectCascade(VERTEX);
@@ -209,20 +205,20 @@ vec4 CalculateShadow(
     float ndotl = max(dot(N, L), 0.0);
     vec3 diffuse = ndotl * SUN_COLOR * SUN_INTENSITY;
 
+    float ndoth = max(dot(N, H), 0.0);
+
 #ifdef HAS_ROUGHNESS
     roughnessValue = clamp(roughnessValue, 0.04, 1.0);
 
     float roughnessAlpha = roughnessValue * roughnessValue;
     float specPow = max(2.0 / (roughnessAlpha * roughnessAlpha) - 2.0, 1.0);
-
-    float ndoth = max(dot(N, H), 0.0);
     float spec = pow(ndoth, specPow);
 
     float specEnergy = (specPow + 2.0) / 8.0;
     vec3 specular = spec * specEnergy * specularIntensity * SUN_COLOR * SUN_INTENSITY;
 #else
     float specPow = specularSharpness * 64.0;
-    float spec = pow(max(dot(N, H), 0.0), specPow);
+    float spec = pow(ndoth, specPow);
     vec3 specular = spec * specularIntensity * SUN_COLOR * SUN_INTENSITY;
 #endif
 
@@ -261,7 +257,7 @@ void PreparePCF(mat4 modelMatrix) {
 #endif
     NORMAL = normalize(normalMatrix * NORMAL);
 
-    pcf_viewDir = VIEW_POSITION - VERTEX;
+    pcf_viewDir = normalize(VIEW_POSITION - VERTEX);
     pcf_viewPos = (VIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
 }
 
@@ -281,7 +277,7 @@ vec4 CalculateShadowCustom(vec3 diffuseColor, vec3 lightColor, vec3 vertexPos, f
     vec3 ambient = ambientIntensity * 0.15 * diffuseColor;
     vec3 diff = max(dot(normalize(DIRECTIONAL_LIGHT_DIRECTION), normalize(pcf_normal)), diffuseMin) * lightColor;
 
-    vec3 halfwayDir = normalize(DIRECTIONAL_LIGHT_DIRECTION + normalize(pcf_viewDir));
+    vec3 halfwayDir = normalize(DIRECTIONAL_LIGHT_DIRECTION + pcf_viewDir);
     float spec = pow(max(dot(normalize(pcf_normal), halfwayDir), 0.0), specularSharpness * 64) * specularIntensity;
     vec3 specular = spec * lightColor;
 
@@ -293,6 +289,6 @@ vec4 CalculateShadowCustom(vec3 diffuseColor, vec3 lightColor, vec3 vertexPos, f
 void PreparePCFCustom(mat4 modelMatrix, vec3 vertexPos, vec3 normal) {
     pcf_modelMatrix = modelMatrix;
     pcf_normal = mat3(modelMatrix) * normal;
-    pcf_viewDir = VIEW_POSITION - vertexPos;
+    pcf_viewDir = normalize(VIEW_POSITION - vertexPos);
     pcf_viewPos = (VIEW_MATRIX * modelMatrix * vec4(normal, 1.0)).xyz;
 }

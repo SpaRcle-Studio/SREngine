@@ -1,35 +1,5 @@
-#ifdef HAS_SKELETON
-    ShaderType Skinned;
-#else
-    ShaderType Spatial;
-#endif
-
-PolygonMode Fill;
-
-#ifdef SR_DEFINE_CASCADED_SHADOW_MAP_PASS
-    CullMode None;
-#else
-    #ifdef DISABLE_CULLING
-        CullMode None;
-    #else
-        CullMode Back;
-    #endif
-#endif
-
-DepthCompare LessOrEqual;
-PrimitiveTopology TriangleList;
-
-DepthWrite true;
-
-#ifdef HAS_ALPHA
-    #ifndef SR_DEFINE_CASCADED_SHADOW_MAP_PASS
-        #ifndef DISABLE_BLENDING
-            BlendEnabled true;
-        #endif
-    #endif
-#endif
-
-DepthTest true;
+#include <Engine/Shaders/Common/standard-header.srsl>
+#include <Engine/Shaders/Common/standard-vertex.srsl>
 
 [[uniform], [public]] vec4 color = vec4(1.0, 1.0, 1.0, 1.0);
 [[uniform], [public]] float alphaThreshold = 0.0;
@@ -42,32 +12,6 @@ DepthTest true;
 [[uniform], [public]] sampler2D emission;
 [[uniform], [public]] sampler2D alphaMask;
 
-/*
-    Кожа (персонажи)
-    SSS_COLOR     = vec3(1.0, 0.35, 0.25);
-    SSS_INTENSITY = 0.4 – 0.7;
-
-    Уши / нос (через mask)
-    SSS mask ≈ 0.8 – 1.0
-
-    Воск / мыло
-    SSS_COLOR     = vec3(1.0, 0.9, 0.7);
-    SSS_INTENSITY = 0.6 – 1.0;
-
-    Листва
-    SSS_COLOR     = vec3(0.3, 0.8, 0.2);
-    SSS_INTENSITY = 0.5 – 0.9;
-
-    Камень / мрамор
-    SSS_COLOR     = vec3(1.0, 0.95, 0.9);
-    SSS_INTENSITY = 0.1 – 0.3;
-*/
-
-#ifdef HAS_SKELETON
-    [[ssbo(bones)]] mat4[] bones;
-    [[ssbo(offsets)]] mat4[] boneOffsets;
-#endif
-
 [[uniform], [public]] float specularSharpness = 1.0;
 [[uniform], [public]] float specularIntensity = 1.0;
 [[uniform], [public]] float shadowIntensity = 1.0;
@@ -78,10 +22,6 @@ DepthTest true;
 [[uniform], [public]] float detailRoughnessStrength = 0.5;
 [[uniform], [public]] vec3 emissionColor = vec3(1.0, 1.0, 1.0);
 [[uniform], [public]] float emissionIntensity = 1.0;
-
-#ifdef SR_DEFINE_USE_CASCADED_SHADOW_MAP
-    #include <Engine/Shaders/Common/pcf-utils.inl.srsl>
-#endif
 
 void fragment() {
     COLOR_INDEX_1 = vec4(gl_FragCoord.z);
@@ -140,8 +80,16 @@ void fragment() {
     vec3 emissionValue = vec3(0.0);
 #endif
 
+#ifdef HAS_NORMAL
+    vec3 tangentNormal = texture(normal, UV).xyz * 2.0 - 1.0;
+#else
+    vec3 tangentNormal = NORMAL;
+#endif
+
 #ifdef SR_DEFINE_USE_CASCADED_SHADOW_MAP
-    vec3 shadowColor = CalculateShadow(diffuseColor.rgb,
+    vec3 shadowColor = CalculateShadow(
+        tangentNormal,
+        diffuseColor.rgb,
         maybe_unused_specularSharpness,
         maybe_unused_specularIntensity,
         maybe_unused_shadowIntensity,
@@ -153,9 +101,8 @@ void fragment() {
     COLOR = vec4(shadowColor, alpha);
 #else
     #ifdef HAS_NORMAL
-        vec3 normalMap = texture(normal, UV).xyz * 2.0 - 1.0;
         mat3 TBN = mat3(normalize(TANGENT), normalize(BITANGENT), normalize(NORMAL));
-        vec3 mappedNormal = normalize(TBN * normalMap);
+        vec3 mappedNormal = normalize(TBN * tangentNormal);
 
         float light = dot(mappedNormal, normalize(vec3(0.5, 0.5, 1.0))); // условный свет сверху
         light = clamp(light, 0.0, 1.0);
@@ -169,26 +116,5 @@ void fragment() {
 
 #ifdef SR_DEFINE_DEBUG_NORMALS
     COLOR = vec4(NORMAL, 1.0);
-#endif
-}
-
-void vertex() {
-#ifdef HAS_SKELETON
-    #include <Engine/Shaders/Common/bone-transform.inl.srsl>
-    mat4 modelMatrix = boneTransform;
-#else
-    mat4 modelMatrix = MODEL_MATRIX;
-#endif
-
-    VERTEX = (modelMatrix * vec4(VERTEX, 1.0)).xyz;
-
-#ifdef SR_DEFINE_CASCADED_SHADOW_MAP_PASS
-    #include <Engine/Shaders/Common/apply-cascades-transform.inl.srsl>
-#else
-    #ifdef SR_DEFINE_USE_CASCADED_SHADOW_MAP
-        PreparePCF(modelMatrix);
-    #endif
-
-    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * vec4(VERTEX, 1.0);
 #endif
 }

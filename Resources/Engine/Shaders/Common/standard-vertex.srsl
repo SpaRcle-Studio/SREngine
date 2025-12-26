@@ -1,0 +1,24 @@
+void vertex() {
+#ifdef HAS_SKELETON
+    #include <Engine/Shaders/Common/bone-transform.inl.srsl>
+    mat4 modelMatrix = boneTransform;
+#else
+    mat4 modelMatrix = MODEL_MATRIX;
+#endif
+
+#ifdef SR_STANDARD_VERTEX_OFFSET_FUNC
+    VERTEX = (modelMatrix * vec4(VERTEX + CalculateVertexOffset(), 1.0)).xyz;
+#else
+    VERTEX = (modelMatrix * vec4(VERTEX, 1.0)).xyz;
+#endif
+
+#ifdef SR_DEFINE_CASCADED_SHADOW_MAP_PASS
+    #include <Engine/Shaders/Common/apply-cascades-transform.inl.srsl>
+#else
+    #ifdef SR_DEFINE_USE_CASCADED_SHADOW_MAP
+        PreparePCF(modelMatrix);
+    #endif
+
+    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * vec4(VERTEX, 1.0);
+#endif
+}

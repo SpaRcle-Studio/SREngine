@@ -55,7 +55,7 @@ void fragment() {
         color = texture(colorMap, uv).rgb;
     }
 
-#ifdef SR_CLOUDS
+#ifdef SR_CLOUDS_DISABLE
     color = applyClouds(color, uv);
 #endif
 

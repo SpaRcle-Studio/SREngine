@@ -1,26 +1,129 @@
-ShaderType Spatial;
+#define SR_STANDARD_VERTEX_OFFSET_FUNC
+#define SR_NO_PCF_FILTER
 
-PolygonMode Fill;
-CullMode Back;
-DepthCompare LessOrEqual;
-PrimitiveTopology TriangleList;
-BlendEnabled true;
-DepthWrite false;
-DepthTest true;
- 
-[[uniform], [public]] vec4 color;
-[[uniform], [public]] sampler2D diffuse;
+#include <Engine/Shaders/Common/standard-header.srsl>
+#include <Engine/Shaders/Common/standard-vertex.srsl>
 
-void fragment() {
-	COLOR = texture(diffuse, UV) * color;
+[[uniform], [public]] sampler2D ambient;
+[[uniform], [public]] sampler2D specular;
+[[uniform], [public]] sampler2D translucency;
+[[uniform], [public]] sampler2D depth;
+[[uniform], [public]] sampler2D alpha;
+[[uniform], [public]] sampler2D root;
+[[uniform], [public]] sampler2D wind;
+[[uniform], [public]] sampler2D direction;
+[[uniform], [public]] sampler2D albedo;
+[[uniform], [public]] sampler2D normal;
+[[uniform], [public]] sampler2D ID;
 
-    if (COLOR.a == 0) {
-        discard;
-    }
+[[uniform], [public]] vec2 tiling = vec2(1.0, 1.0);
+[[uniform], [public]] vec2 offset = vec2(0.0, 0.0);
+[[uniform], [public]] vec3 rootColor = vec3(0.1, 0.05, 0.02); // цвет корней волос
+[[uniform], [public]] vec3 hairColor = vec3(1.0, 0.8, 0.6); // базовый цвет волос
 
-    COLOR.a = 0.75;
+[[uniform], [public]] float hairColorStrength = 0.5;
+[[uniform], [public]] float rootDarken = 0.5;
+[[uniform], [public]] float depthShadowStrength = 0.4;
+[[uniform], [public]] float alphaThreshold = 0.05;
+
+[[uniform], [public]] float windSpeed = 1.0;
+[[uniform], [public]] float windStrength = 1.0;
+[[uniform], [public]] float translucencyIntensity = 0.3;
+[[uniform], [public]] float specularSharpness = 1.0;
+[[uniform], [public]] float specularIntensity = 1.0;
+[[uniform], [public]] float shadowIntensity = 1.0;
+[[uniform], [public]] float shininess = 16.0;
+
+[[const]] vec3 WIND_DIRECTION = vec3(1.0, 0.0, 0.0);
+
+vec3 CalculateVertexOffset() {
+    vec2 tiledUV = UV * tiling + offset;
+    float rootMask = texture(root, tiledUV).r;
+    float id = texture(ID, tiledUV).r;
+    id = floor(id * 255.0) / 255.0; // дискретизация
+
+    float time = TIME * 0.001;
+    float strandWeight = rootMask;
+    strandWeight *= strandWeight;
+
+    float phase = time * windSpeed + id * 10.0 + dot(tiledUV, vec2(21.7, 9.2));
+
+    float wind = sin(phase) * windStrength * strandWeight;
+
+    //vec3 windDir = normalize((inverse(matrix) * vec4(WIND_DIRECTION, 0.0)).xyz);
+    vec3 windDir = WIND_DIRECTION;
+    return windDir * wind * 0.001;
 }
 
-void vertex() {
-    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
+void fragment() {
+    COLOR_INDEX_1 = vec4(gl_FragCoord.z);
+    COLOR_INDEX_2 = vec4(VERTEX, 1.0);
+
+#ifdef SR_DEFINE_DEBUG_NORMALS
+    COLOR = vec4(NORMAL, 1.0);
+#else
+    vec2 tiledUV = UV * tiling + offset;
+
+    float alphaVal = texture(alpha, tiledUV).r;
+    alphaVal = smoothstep(alphaThreshold - 0.02, alphaThreshold + 0.02, alphaVal);
+
+    // ---------- TEXTURE FETCH ----------
+    vec3 texAlbedo     = texture(albedo, tiledUV).rgb;
+    vec3 directionVal  = texture(direction, tiledUV).xyz;
+    float rootMask     = texture(root, tiledUV).r;
+    float depthVal     = texture(depth, tiledUV).r;
+    float ambientVal   = texture(ambient, tiledUV).r;
+    float transVal     = texture(translucency, tiledUV).r;
+    float specMap      = texture(specular, tiledUV).r;
+
+    // ---------- COLOR TINT ----------
+    vec3 hairTint = mix(vec3(1.0), hairColor, hairColorStrength);
+    vec3 color = texAlbedo * hairTint;
+
+    // ---------- ROOT ----------
+    color *= mix(1.0, rootDarken, rootMask);
+
+    // ---------- DEPTH + AO ----------
+    float selfShadow = 1.0 - depthVal * depthShadowStrength;
+    float occlusion  = selfShadow * ambientVal;
+
+    // ---------- ANISOTROPIC SPECULAR ----------
+    vec3 hairDir = normalize(directionVal * 2.0 - 1.0);
+
+    vec3 L = DIRECTIONAL_LIGHT_DIRECTION;
+    vec3 V = pcf_viewDir;
+    vec3 H = normalize(L + V);
+
+    // UE-style dual lobe
+    float x = max(dot(hairDir, H), 0.0);
+    float specPrimary   = x * x; // ^2
+    specPrimary *= specPrimary;  // ^4
+    specPrimary *= specPrimary;  // ^8
+    specPrimary *= specPrimary;  // ^16
+    specPrimary *= specPrimary;  // ^32
+
+    float hairSpec = specPrimary * 0.7;
+    vec3 hairSpecular = hairSpec * specMap * specularIntensity * SUN_COLOR * SUN_INTENSITY;
+
+#ifdef HAS_NORMAL
+    vec3 tangentNormal = texture(normal, tiledUV).xyz * 2.0 - 1.0;
+#else
+    vec3 tangentNormal = NORMAL;
+#endif
+
+    // ---------- BASE LIGHTING (КАСКАДЫ, ТЕНИ, SSS) ----------
+    vec4 lighting = CalculateShadow(
+        tangentNormal,
+        color * occlusion,   // diffuseColor
+        0.0,                 // specularSharpness (НЕ ИСПОЛЬЗУЕМ)
+        0.0,                 // specularIntensity (ОТКЛЮЧЕНО)
+        1.0,                 // shadowIntensity
+        1.0,                 // roughnessValue (НЕ ВАЖЕН)
+        transVal,            // sssIntensity
+        color,               // sssColor
+        vec3(0.0)            // emission
+    );
+
+    COLOR = vec4(lighting.rgb + hairSpecular, alphaVal);
+#endif
 }
