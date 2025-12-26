@@ -48,12 +48,24 @@ if (SR_AUDIO_USE_VORBIS OR SR_AUDIO_USE_FLAC)
     message("Audio will be built with OGG support")
     add_definitions(-DSR_AUDIO_USE_OGG)
     add_subdirectory(libs/ogg)
+
+    if (UNIX)
+        target_compile_options(ogg PRIVATE -fPIC)
+    endif()
 endif()
 
 if (SR_AUDIO_USE_VORBIS)
     message("Audio will be built with VORBIS support")
+
+    set(BUILD_SHARED_LIBS OFF CACHE BOOL "")
+
     add_definitions(-DSR_AUDIO_USE_VORBIS)
     add_subdirectory(libs/vorbis)
+
+    if (UNIX)
+        target_compile_options(vorbis PRIVATE -fPIC)
+        target_compile_options(vorbisfile PRIVATE -fPIC)
+    endif()
 endif()
 
 if (SR_AUDIO_USE_FLAC)
@@ -68,9 +80,14 @@ if (SR_AUDIO_USE_FLAC)
     set(INSTALL_MANPAGES          OFF CACHE BOOL "")
     set(INSTALL_PKGCONFIG_MODULES OFF CACHE BOOL "")
     set(WITH_OGG                  ON CACHE BOOL "")
+    set(BUILD_SHARED_LIBS         OFF CACHE BOOL "")
 
     add_definitions(-DSR_AUDIO_USE_FLAC)
     add_subdirectory(libs/flac)
+
+    if (UNIX)
+        target_compile_options(FLAC PRIVATE -fPIC)
+    endif()
 endif()
 
 if (SR_AUDIO_STATIC_LIBRARY)

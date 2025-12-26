@@ -8,7 +8,7 @@
 
 #ifdef SR_AUDIO_USE_FLAC
 
-#include <flac/all.h>
+#include <FLAC/all.h>
 
 namespace SR_AUDIO_NS {
     class FLACDecoderCallbacks {
