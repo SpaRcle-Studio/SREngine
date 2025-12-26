@@ -86,6 +86,14 @@ void fragment() {
     vec3 tangentNormal = NORMAL;
 #endif
 
+    vec3 unused_var0 = GROUND_COLOR;
+    vec3 unused_var1 = SKY_COLOR;
+    vec3 unused_var2 = SUN_COLOR;
+    float unused_var3 = AMBIENT_INTENSITY;
+    float unused_var4 = SUN_INTENSITY;
+    float unused_var5 = SHADOW_STRENGTH;
+    float unused_var6 = AMBIENT_INTENSITY;
+
 #ifdef SR_DEFINE_USE_CASCADED_SHADOW_MAP
     vec3 shadowColor = CalculateShadow(
         tangentNormal,

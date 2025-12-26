@@ -113,10 +113,8 @@ use tabs: true
 													13-v:type
 														14-s:SkyboxPass
 													13-o:ptr
-														14-v:skyboxPath
-															15-s:Engine/Skyboxes/Sun.png
 														14-v:shaderPath
-															15-s:Engine/Shaders/skybox.srsl
+															15-s:Engine/Shaders/skybox-procedural.srsl
 											11-k:i
 												12-o:d
 													13-v:type

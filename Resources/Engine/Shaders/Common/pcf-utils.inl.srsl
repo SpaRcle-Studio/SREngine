@@ -29,20 +29,6 @@ vec3 ACESFilm(vec3 x) {
     return clamp((x * (a * x + b)) / (x * (c * x + d) + e), 0.0, 1.0);
 }
 
-
-// Sun (Directional Light / Celestial Body)
-[[const]] vec3  SUN_COLOR      = vec3(1.0, 0.95, 0.85); // тёплое солнце
-[[const]] float SUN_LUX        = 130000.0;              // условные люксы
-[[const]] float SUN_INTENSITY  = 130000.0 * 0.00001;    // масштаб под HDR
-
-// Sky ambient
-[[const]] vec3 SKY_COLOR    = vec3(0.45, 0.6, 0.9);     // небо
-[[const]] vec3 GROUND_COLOR = vec3(0.25, 0.23, 0.2);    // отражение от земли
-[[const]] float AMBIENT_INTENSITY = 1.0;
-
-[[const]] float SHADOW_STRENGTH = 0.9; // интенсивность теней
-
-
 #define SR_CASCADE_USE_RADII
 //#define SR_CASCADE_BLEND_ZONES
 #define SR_CASCADE_ACCENT_CAMERA_DIR
@@ -140,18 +126,16 @@ vec4 CalculateShadow(
     float sssIntensity, vec3 sssColor,
     vec3 emissionValue
 ) {
-    vec3 N = NORMAL;
     vec3 L = -DIRECTIONAL_LIGHT_DIRECTION;
     vec3 V = pcf_viewDir;
     vec3 H = normalize(L + V);
 
-    vec3 T = normalize(TANGENT);
-    // TODO: доработать расчет B
-    // vec3 B = normalize(cross(N, T));
-    // vec3 B = cross(N, T) * tangentW; // где tangentW = ±1
-    vec3 B = normalize(BITANGENT);
-    mat3 TBN = mat3(T, B, N);
-    vec3 norm = normalize(TBN * tangentNormal);
+#ifdef HAS_NORMAL
+    mat3 TBN = mat3(TANGENT, BITANGENT, NORMAL); // NORMAL = world space из вершин
+    vec3 N = normalize(TBN * tangentNormal);  // tangentNormal = из текстуры [-1,1]
+#else
+    vec3 N = NORMAL; // fallback
+#endif
 
 #ifdef SR_CASCADE_USE_RADII
     uint cascadeIndex = SelectCascade(VERTEX);
@@ -169,7 +153,7 @@ vec4 CalculateShadow(
 
     if (cascadeIndex < NUM_CASCADES) {
         vec4 sc0 = biasMat * CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex] * vec4(VERTEX, 1.0);
-        float s0 = filterPCF(norm, sc0, cascadeIndex);
+        float s0 = filterPCF(N, sc0, cascadeIndex);
         shadow = s0;
 
     #ifdef SR_CASCADE_BLEND_ZONES
@@ -188,7 +172,7 @@ vec4 CalculateShadow(
 
             if (cascadeBlend > 0.0 && cascadeIndex + 1 < NUM_CASCADES) {
                 vec4 sc1 = biasMat * CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex + 1] * vec4(VERTEX, 1.0);
-                float s1 = filterPCF(norm, sc1, cascadeIndex + 1);
+                float s1 = filterPCF(N, sc1, cascadeIndex + 1);
                 shadow = mix(s0, s1, cascadeBlend);
             }
         }
@@ -197,15 +181,16 @@ vec4 CalculateShadow(
         shadow = mix(1.0, shadow, shadowIntensity);
     }
 
-    float upFactor = clamp(N.y * 0.5 + 0.5, 0.0, 1.0);
-    vec3 ambientColor = mix(GROUND_COLOR, SKY_COLOR, upFactor);
-
-    vec3 ambient = ambientColor * AMBIENT_INTENSITY * diffuseColor;
-
     float ndotl = max(dot(N, L), 0.0);
-    vec3 diffuse = ndotl * SUN_COLOR * SUN_INTENSITY;
+    //float wrap = 0.5;
+    //ndotl = (ndotl + wrap) / (1.0 + wrap);
+    //ndotl = max(ndotl, 0.0);
 
     float ndoth = max(dot(N, H), 0.0);
+
+    vec3 diffuse = ndotl * SUN_COLOR * SUN_INTENSITY;
+
+    vec3 specLightColor = mix(SKY_COLOR, SUN_COLOR, 0.3);
 
 #ifdef HAS_ROUGHNESS
     roughnessValue = clamp(roughnessValue, 0.04, 1.0);
@@ -215,11 +200,11 @@ vec4 CalculateShadow(
     float spec = pow(ndoth, specPow);
 
     float specEnergy = (specPow + 2.0) / 8.0;
-    vec3 specular = spec * specEnergy * specularIntensity * SUN_COLOR * SUN_INTENSITY;
+    vec3 specular = spec * specEnergy * specularIntensity * SUN_COLOR * specLightColor * SUN_INTENSITY;
 #else
     float specPow = specularSharpness * 64.0;
     float spec = pow(ndoth, specPow);
-    vec3 specular = spec * specularIntensity * SUN_COLOR * SUN_INTENSITY;
+    vec3 specular = spec * specularIntensity * SUN_COLOR * specLightColor * SUN_INTENSITY;
 #endif
 
 #ifdef HAS_SSS
@@ -230,8 +215,17 @@ vec4 CalculateShadow(
     vec3 sss = vec3(0.0);
 #endif
 
-    float shadowFactor = mix(1.0 - SHADOW_STRENGTH, 1.0, shadow);
+    float shadowFactor = mix(1.0 - SHADOW_STRENGTH, 1.0, smoothstep(0.2, 1.0, shadow));
+    //float shadowFactor = mix(1.0 - SHADOW_STRENGTH, 1.0, shadow);
 
+    float upFactor = clamp(N.y * 0.5 + 0.5, 0.0, 1.0);
+    vec3 ambientColor = mix(GROUND_COLOR, SKY_COLOR, upFactor);
+    vec3 ambient = ambientColor * AMBIENT_INTENSITY * diffuseColor;
+
+    //vec3 sunDiffuse  = SUN_COLOR * SUN_INTENSITY * ndotl; // direct light
+    //vec3 skyDiffuse  = mix(GROUND_COLOR, SKY_COLOR, N.y * 0.5 + 0.5) * AMBIENT_INTENSITY; // sky ambient
+
+    //vec3 lightingHDR = skyDiffuse + shadowFactor * sunDiffuse + specular + sss + emissionValue;
     vec3 lightingHDR = ambient
                      + shadowFactor * (diffuse + specular)
                      + sss
@@ -251,14 +245,19 @@ vec4 CalculateShadow(
 
 void PreparePCF(mat4 modelMatrix) {
     mat3 normalMatrix = transpose(inverse(mat3(modelMatrix)));
-#ifdef HAS_NORMAL
-    TANGENT = normalize(normalMatrix * TANGENT);
-    BITANGENT = normalize(normalMatrix * BITANGENT);
-#endif
     NORMAL = normalize(normalMatrix * NORMAL);
+#ifdef HAS_NORMAL
+    TANGENT = normalize(mat3(modelMatrix) * TANGENT);
+    BITANGENT = normalize(cross(NORMAL, TANGENT));
+#endif
 
     pcf_viewDir = normalize(VIEW_POSITION - VERTEX);
     pcf_viewPos = (VIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
+
+
+     // TODO: доработать расчет B
+    // vec3 B = normalize(cross(N, T));
+    // vec3 B = cross(N, T) * tangentW; // где tangentW = ±1
 }
 
 vec4 CalculateShadowCustom(vec3 diffuseColor, vec3 lightColor, vec3 vertexPos, float specularSharpness, float specularIntensity, float ambientIntensity, float shadowIntensity, float diffuseMin) {

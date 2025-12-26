@@ -62,6 +62,14 @@ void fragment() {
 #ifdef SR_DEFINE_DEBUG_NORMALS
     COLOR = vec4(NORMAL, 1.0);
 #else
+    vec3 unused_var0 = GROUND_COLOR;
+    vec3 unused_var1 = SKY_COLOR;
+    vec3 unused_var2 = SUN_COLOR;
+    float unused_var3 = AMBIENT_INTENSITY;
+    float unused_var4 = SUN_INTENSITY;
+    float unused_var5 = SHADOW_STRENGTH;
+    float unused_var6 = AMBIENT_INTENSITY;
+
     vec2 tiledUV = UV * tiling + offset;
 
     float alphaVal = texture(alpha, tiledUV).r;
