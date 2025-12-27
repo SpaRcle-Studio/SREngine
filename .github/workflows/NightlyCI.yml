@@ -36,7 +36,10 @@ jobs:
           fetch-depth: 0
 
       - uses: ./.github/workflows/WindowsCI.yml
+
       - uses: ./.github/workflows/WindowsTestsCI.yml
+        secrets: inherit
+
       - uses: ./.github/workflows/LinuxCI.yml
       - uses: ./.github/workflows/AndroidCI.yml
       - uses: ./.github/workflows/FlatpakCI.yml
