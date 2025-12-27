@@ -13,6 +13,9 @@ jobs:
     name: Windows Tests.
     runs-on: windows-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       # 1) Скачать Debug
       - name: Download Debug build
         uses: actions/download-artifact@v4
@@ -57,11 +60,11 @@ jobs:
         run: |
           $exe = "${{ steps.find_debug.outputs.debug_exe }}"
           Write-Host "Running: $exe"
-
+          
           # Запускаем приложение, перехватываем вывод
           $logUnpackFile = "debug_unpack_log.txt"
           $logFile = "debug_test_log.txt"
-
+          
           try {
               & $exe --unpack *>&1 | Tee-Object -FilePath $logUnpackFile
           }
@@ -69,16 +72,16 @@ jobs:
               Write-Host "Exception during test execution:"
               Write-Host $_
           }
-
+          
           Write-Host "===== Unpack Log ====="
           Get-Content $logUnpackFile
-
+          
           # Папка, где лежит первый exe (packed)
           $exeDir = Split-Path $exe -Parent
-
+          
           # Путь к распакованному бинарнику
           $binDir = Join-Path $exeDir "SREngine/Engine/Bin"
-
+          
           if (-not (Test-Path $binDir)) {
               Write-Host "Folder $binDir not found. It means the packed exe did not unpack anything."
               exit 1
@@ -110,11 +113,11 @@ jobs:
         run: |
           $exe = "${{ steps.find_release.outputs.release_exe }}"
           Write-Host "Running: $exe"
-
+          
           # Запускаем приложение, перехватываем вывод
           $logUnpackFile = "release_unpack_log.txt"
           $logFile = "release_test_log.txt"
-
+          
           try {
               & $exe --unpack *>&1 | Tee-Object -FilePath $logUnpackFile
           }
@@ -122,16 +125,16 @@ jobs:
               Write-Host "Exception during test execution:"
               Write-Host $_
           }
-
+          
           Write-Host "===== Unpack Log ====="
           Get-Content $logUnpackFile
-
+          
           # Папка, где лежит первый exe (packed)
           $exeDir = Split-Path $exe -Parent
-
+          
           # Путь к распакованному бинарнику
           $binDir = Join-Path $exeDir "SREngine/Engine/Bin"
-
+          
           if (-not (Test-Path $binDir)) {
               Write-Host "Folder $binDir not found. It means the packed exe did not unpack anything."
               exit 1
@@ -156,3 +159,4 @@ jobs:
 
           Write-Host "===== Test Log ====="
           Get-Content $logFile
+

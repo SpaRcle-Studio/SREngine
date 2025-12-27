@@ -51,20 +51,6 @@ if (NOT SR_EMSCRIPTEN)
     endif()
 endif()
 
-find_package(Git QUIET)
-
-if(GIT_FOUND AND EXISTS "${CMAKE_SOURCE_DIR}/.git")
-    execute_process(
-        COMMAND ${GIT_EXECUTABLE} rev-parse --abbrev-ref HEAD
-        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        OUTPUT_VARIABLE GIT_BRANCH
-        OUTPUT_STRIP_TRAILING_WHITESPACE
-        ERROR_QUIET
-    )
-else()
-    set(GIT_BRANCH "unknown")
-endif()
-
 if (NOT ANDROID_NDK AND NOT SR_EMSCRIPTEN)
     # TODO: implement an easy way to set if a build is 'stable' or 'latest'
     if (${CMAKE_BUILD_TYPE} STREQUAL "Release")
@@ -80,9 +66,9 @@ if (NOT ANDROID_NDK AND NOT SR_EMSCRIPTEN)
 
     if (SR_ENGINE_EXTENDED_NAME)
         if (UNIX AND NOT APPLE)
-            set_target_properties(${SR_EXECUTABLE_NAME} PROPERTIES OUTPUT_NAME "${SR_EXECUTABLE_NAME}_${GIT_BRANCH}-${executableType}_linux.${CURRENT_TARGET_ARCHITECTURE}")
+            set_target_properties(${SR_EXECUTABLE_NAME} PROPERTIES OUTPUT_NAME "${SR_EXECUTABLE_NAME}_v${SR_ENGINE_VERSION}-${executableType}_linux.${CURRENT_TARGET_ARCHITECTURE}")
         elseif (WIN32)
-            set_target_properties(${SR_EXECUTABLE_NAME} PROPERTIES OUTPUT_NAME "${SR_EXECUTABLE_NAME}_${GIT_BRANCH}-${executableType}_windows.${CURRENT_TARGET_ARCHITECTURE}")
+            set_target_properties(${SR_EXECUTABLE_NAME} PROPERTIES OUTPUT_NAME "${SR_EXECUTABLE_NAME}_v${SR_ENGINE_VERSION}-${executableType}_windows.${CURRENT_TARGET_ARCHITECTURE}")
         endif()
     else()
         set_target_properties(${SR_EXECUTABLE_NAME} PROPERTIES OUTPUT_NAME "srengine")

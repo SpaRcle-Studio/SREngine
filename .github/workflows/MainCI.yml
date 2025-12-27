@@ -1,6 +1,7 @@
 name: SpaRcle Engine Main CI
 
 on:
+  workflow_dispatch:
   push:
     paths-ignore:
       - "Documentation/**"
@@ -19,55 +20,55 @@ on:
       - dev
       - features/*
 
-permissions:
-  contents: read
-  actions: read
-
 jobs:
   Main:
+    name: Main.
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Main CI running"
+      - name: Main CI.
+        run: echo "Main CI is running."
 
   BuildWindowsJob:
-    needs: Main
+    name: Windows.
+    needs: [Main]
     uses: ./.github/workflows/WindowsCI.yml
 
   TestsWindowsJob:
-    needs: BuildWindowsJob
-    if: always()
+    name: Windows Tests.
+    needs: [BuildWindowsJob]
+    if: ${{ always() }}
     uses: ./.github/workflows/WindowsTestsCI.yml
     with:
-      commitMessage: ${{ github.event.head_commit.message }}
+      commitMessage: ${{github.event.head_commit.message}}
     secrets: inherit
 
   BuildLinuxJob:
-    needs: Main
+    name: Linux.
+    needs: [Main]
     uses: ./.github/workflows/LinuxCI.yml
 
   BuildAndroidJob:
-    needs: Main
+    name: Android.
+    needs: [Main]
     uses: ./.github/workflows/AndroidCI.yml
 
   BuildFlatpakJob:
-    needs: Main
+    name: Flatpak.
+    needs: [Main]
     uses: ./.github/workflows/FlatpakCI.yml
 
   PostBuild:
-    needs:
-      - TestsWindowsJob
-      - BuildLinuxJob
-      - BuildAndroidJob
-      - BuildFlatpakJob
-    if: always()
+    name: PostBuild.
+    needs: [TestsWindowsJob, BuildLinuxJob, BuildAndroidJob, BuildFlatpakJob]
+    if: ${{ always() }}
     uses: ./.github/workflows/PostBuild.yml
     with:
-      windowsBuildState: ${{ needs.BuildWindowsJob.result }}
-      linuxBuildState: ${{ needs.BuildLinuxJob.result }}
-      androidBuildState: ${{ needs.BuildAndroidJob.result }}
-      flatpakBuildState: ${{ needs.BuildFlatpakJob.result }}
-      commitActor: ${{ github.actor }}
-      commitSha: ${{ github.sha }}
-      commitBranch: ${{ github.ref_name }}
-      commitMessage: ${{ github.event.head_commit.message }}
+      windowsBuildState: ${{needs.BuildWindowsJob.result}}
+      linuxBuildState: ${{needs.BuildLinuxJob.result}}
+      androidBuildState: ${{needs.BuildAndroidJob.result}}
+      flatpakBuildState: ${{needs.BuildFlatpakJob.result}}
+      commitActor: ${{github.actor}}
+      commitSha: ${{github.sha}}
+      commitBranch: ${{github.ref_name}}
+      commitMessage: ${{github.event.head_commit.message}}
     secrets: inherit
