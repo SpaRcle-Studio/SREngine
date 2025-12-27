@@ -1,5 +1,3 @@
-name: SpaRcle Engine Windows CI Tests
-
 on:
   workflow_call:
     inputs:
