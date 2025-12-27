@@ -434,7 +434,7 @@ namespace SR_CORE_GUI_NS {
             }
 
             for (uint32_t i = 0; i < pFramebuffer->GetColorLayersCount(); ++i) {
-                if (auto&& textureId = pFramebuffer->GetColorTexture(i, pFramebuffer->GetPipeline()->GetCurrentFrameIndex()); textureId != SR_ID_INVALID) {
+                if (auto&& textureId = pFramebuffer->GetColorTexture(i, pFramebuffer->GetPipeline()->GetCurrentImageIndex()); textureId != SR_ID_INVALID) {
                     auto&& pPipeline = GetContext()->GetPipeline();
                     SR_GRAPH_GUI_NS::Immediate::DrawTexture(pPipeline.Get(), textureId, 256, false);
                 }
@@ -442,7 +442,7 @@ namespace SR_CORE_GUI_NS {
 
             if (pFramebuffer->GetDepthAspect() == SR_GRAPH_NS::ImageAspect::Depth) {
                 for (uint32_t i = 0; i < pFramebuffer->GetLayersCount(); ++i) {
-                    if (auto&& textureId = pFramebuffer->GetDepthTexture(i, pFramebuffer->GetPipeline()->GetCurrentFrameIndex()); textureId != SR_ID_INVALID) {
+                    if (auto&& textureId = pFramebuffer->GetDepthTexture(i, pFramebuffer->GetPipeline()->GetCurrentImageIndex()); textureId != SR_ID_INVALID) {
                         auto&& pPipeline = GetContext()->GetPipeline();
                         SR_GRAPH_GUI_NS::Immediate::DrawTexture(pPipeline.Get(), textureId, 256, false);
                     }
@@ -604,7 +604,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (SR_GRAPH_GUI_NS::Immediate::CollapsingHeader("Draw info")) {
-            auto&& buildState = pPipeline->GetBuildState(pPipeline->GetCurrentFrameIndex());
+            auto&& buildState = pPipeline->GetBuildState(pPipeline->GetCurrentImageIndex());
 
             SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Vertices count: {}", buildState.vertices));
             SR_GRAPH_GUI_NS::Immediate::Text(SR_FORMAT_C("Triangles count: {}", static_cast<uint32_t>(buildState.vertices / 3)));

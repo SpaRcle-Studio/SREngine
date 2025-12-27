@@ -36,7 +36,7 @@ namespace SR_CORE_NS {
 
         const auto dt = GetContext().GetValue<float_t>("DeltaTime");
 
-        const uint8_t frameIndex = pRenderScene->GetPipeline()->GetCurrentFrameIndex();
+        const uint8_t frameIndex = pRenderScene->GetPipeline()->GetCurrentImageIndex();
         auto&& buildState = pRenderScene->GetPipeline()->GetBuildState(frameIndex);
 
         SR_TRACY_PLOT("Draw calls", static_cast<int64_t>(buildState.drawCalls));

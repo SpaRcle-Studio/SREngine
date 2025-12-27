@@ -17,12 +17,13 @@
        <VulkanTracy Value="false"/>
        <FileWatching Value="true"/>
        <FrustumCulling Value="true"/>
-       <VulkanValidationErrorAsAssert Value="true"/>
+       <VulkanValidationErrorAsAssert Value="false"/>
 
        <ChunkSystem Value="true"/>
 
        <OptimizedRenderUpdate Value="true"/>
 
+       <BorderlessWindow Value="true"/>
        <ImGUI Value="true"/>
        <Editor Value="true"/>
        <EditorOnStartup Value="true"/>

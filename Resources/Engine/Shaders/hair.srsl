@@ -4,9 +4,7 @@
 #include <Engine/Shaders/Common/standard-header.srsl>
 #include <Engine/Shaders/Common/standard-vertex.srsl>
 
-#ifndef SR_DEFINE_CASCADED_SHADOW_MAP_PASS
-    AlphaCoverage true;
-#endif
+AlphaCoverage true;
 
 [[uniform], [public]] sampler2D ambient;
 [[uniform], [public]] sampler2D specular;
