@@ -63,6 +63,7 @@
        <VulkanGPUAssist Value="true"/>
        <MultiRenderTargets Value="false"/>
        <MultiFrameResources Value="true"/>
+       <MultiFrameSSBOResources Value="false"/>
        <Undocking Value="true"/>
        <VulkanDynamicRendering Value="true"/>
    </Common>
