@@ -25,10 +25,14 @@ namespace SR_PHYSICS_NS {
             auto&& type = pRigidbody->GetMeasurement();
 
             if (type == SR_UTILS_NS::Measurement::Space2D) {
-                m_2DWorld->RemoveRigidbody(pRigidbody);
+                if (m_2DWorld) {
+                    m_2DWorld->RemoveRigidbody(pRigidbody);
+                }
             }
             else if (type == SR_UTILS_NS::Measurement::Space3D) {
-                m_3DWorld->RemoveRigidbody(pRigidbody);
+                if (m_3DWorld) {
+                    m_3DWorld->RemoveRigidbody(pRigidbody);
+                }
             }
             else {
                 SRHalt("Unknown measurement of rigidbody!");
@@ -132,10 +136,14 @@ namespace SR_PHYSICS_NS {
             auto&& type = pRigidbody->GetMeasurement();
 
             if (type == SR_UTILS_NS::Measurement::Space2D) {
-                m_2DWorld->AddRigidbody(pRigidbody);
+                if (m_2DWorld) {
+                    m_2DWorld->AddRigidbody(pRigidbody);
+                }
             }
             else if (type == SR_UTILS_NS::Measurement::Space3D) {
-                m_3DWorld->AddRigidbody(pRigidbody);
+                if (m_3DWorld) {
+                    m_3DWorld->AddRigidbody(pRigidbody);
+                }
             }
             else {
                 SRHalt("Unknown measurement of rigidbody!");
@@ -146,10 +154,14 @@ namespace SR_PHYSICS_NS {
             auto&& type = pRigidbody->GetMeasurement();
 
             if (type == SR_UTILS_NS::Measurement::Space2D) {
-                m_2DWorld->RemoveRigidbody(pRigidbody);
+                if (m_2DWorld) {
+                    m_2DWorld->RemoveRigidbody(pRigidbody);
+                }
             }
             else if (type == SR_UTILS_NS::Measurement::Space3D) {
-                m_3DWorld->RemoveRigidbody(pRigidbody);
+                if (m_3DWorld) {
+                    m_3DWorld->RemoveRigidbody(pRigidbody);
+                }
             }
             else {
                 SRHalt("Unknown measurement of rigidbody!");
@@ -169,14 +181,18 @@ namespace SR_PHYSICS_NS {
     }
 
     bool PhysicsScene::CreateDynamicWorld() {
-        if (!m_2DWorld->Initialize()) {
-            SR_ERROR("PhysicsScene::Initialize() : failed to create dynamic world for 2d world!");
-            return false;
+        if (m_2DWorld) {
+            if (!m_2DWorld->Initialize()) {
+                SR_ERROR("PhysicsScene::Initialize() : failed to create dynamic world for 2d world!");
+                return false;
+            }
         }
 
-        if (!m_3DWorld->Initialize()) {
-            SR_ERROR("PhysicsScene::Initialize() : failed to create dynamic world for 3d world!");
-            return false;
+        if (m_3DWorld) {
+            if (!m_3DWorld->Initialize()) {
+                SR_ERROR("PhysicsScene::Initialize() : failed to create dynamic world for 3d world!");
+                return false;
+            }
         }
 
         return true;
@@ -192,21 +208,40 @@ namespace SR_PHYSICS_NS {
         SR_TRACY_ZONE;
 
         if (Flush()) {
-            m_2DWorld->Flush();
-            m_3DWorld->Flush();
+            if (m_2DWorld) {
+                m_2DWorld->Flush();
+            }
+
+            if (m_3DWorld) {
+                m_3DWorld->Flush();
+            }
         }
 
         if (m_needClearForces) {
-            m_2DWorld->ClearForces();
-            m_3DWorld->ClearForces();
+            if (m_2DWorld) {
+                m_2DWorld->ClearForces();
+            }
+            if (m_3DWorld) {
+                m_3DWorld->ClearForces();
+            }
             m_needClearForces = false;
         }
 
-        m_2DWorld->StepSimulation(dt);
-        m_3DWorld->StepSimulation(dt);
+        if (m_2DWorld) {
+            m_2DWorld->StepSimulation(dt);
+        }
 
-        m_2DWorld->Synchronize();
-        m_3DWorld->Synchronize();
+        if (m_3DWorld) {
+            m_3DWorld->StepSimulation(dt);
+        }
+
+        if (m_2DWorld) {
+            m_2DWorld->Synchronize();
+        }
+
+        if (m_3DWorld) {
+            m_3DWorld->Synchronize();
+        }
     }
 
     void PhysicsScene::Register(PhysicsScene::RigidbodyPtr pRigidbody) {

@@ -2,7 +2,9 @@
 // Created by Monika on 22.11.2022.
 //
 
+#include <Physics/LibraryImpl.h>
 #include <Physics/PhysicsLib.h>
+#include <Physics/PhysicsMaterial.h>
 
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/Resources/Asset.h>
