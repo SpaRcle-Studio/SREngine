@@ -72,6 +72,7 @@ namespace SR_SCRIPTING_NS {
 
         if (!ValidateCompilerAndOS()) {
             SR_ERROR("CppCompiler::Init() : compiler or OS are not compatible!");
+            SaveSettings();
             return false;
         }
 
