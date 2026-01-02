@@ -1,70 +1,74 @@
 <?xml version="1.0"?>
 <Features>
-   <Common>
-       <ResourceUsePointStackTraceProfiling Value="false"/>
+    <Unused>
+        <CompilePDB Value="true"/>
+        <VulkanTracy Value="false"/>
+        <SkyboxCPUUsage Value="false"/>
+        <LoadSkybox Value="false"/>
+        <MTRendering Value="false"/>
+        <ChunkSystem Value="true"/>
+    </Unused>
+    <Common>
+        <!-- Debug -->
+        <ShowScriptsCodegenResult Value="false"/>
+        <SegmentationHandler Value="false"/>
+        <ResourceUsePointStackTraceProfiling Value="false"/>
+        <VulkanValidationErrorAsAssert Value="false"/>
+        <VulkanValidation Value="false"/>
+        <VulkanGPUAssist Value="false"/>
 
-       <EvoCompiler Value="true"/>
-       <CompilePDB Value="true"/>
-       <ScriptMultiInstances Value="false"/>
-       <ShowScriptsCodegenResult Value="false"/>
+        <!-- Render -->
+        <ColorBufferPick Value="true"/>
+        <RayTracing Value="false"/>
+        <Renderer Value="true"/>
+        <MainWindow Value="true"/>
+        <Multisampling Value="true"/>
+        <FrustumCulling Value="true"/>
+        <OptimizedRenderUpdate Value="true"/>
+        <BorderlessWindow Value="true"/>
+        <VulkanDynamicRendering Value="true"/>
+        <UpdateMeshesOnDemand Value="true"/>
+        <FBOForEachSwapchainImage Value="false"/>
+        <MultiRenderTargets Value="false"/>
+        <MultiFrameResources Value="true"/>
+        <MultiFrameSSBOResources Value="false"/>
+        <UseGLSLangCompiler Value="true"/>
 
-       <ColorBufferPick Value="true"/>
+        <!-- Editor -->
+        <Gizmo Value="true"/>
+        <ImGUI Value="true"/>
+        <Editor Value="true"/>
+        <EditorOnStartup Value="true"/>
+        <EditorCamera Value="true"/>
+        <EditorWidgetsDocking Value="true"/>
+        <InputIgnoreNonFocusedWidgets Value="true"/>
+        <UpdateNonHoveredSceneViewer Value="false"/>
+        <Undocking Value="true"/>
 
-       <CrashHandler Value="false"/>
-       <SegmentationHandler Value="false"/>
+        <!-- Core -->
+        <AutoReloadResources Value="true"/>
+        <LoadDefaultGraphicsResources Value="true"/>
+        <AccumulateDt Value="true"/>
+        <FastModelsLoad Value="true"/>
+        <FileWatching Value="true"/>
 
-       <Gizmo Value="true"/>
-       <VulkanTracy Value="false"/>
-       <FileWatching Value="true"/>
-       <FrustumCulling Value="true"/>
-       <VulkanValidationErrorAsAssert Value="false"/>
+        <!-- Physics -->
+        <Physics Value="true"/>
+        <PVD Value="false"/>
+        <Vehicles Value="true"/>
 
-       <ChunkSystem Value="true"/>
+        <!-- Variants -->
+        <Variant Name="Debug">
+        </Variant>
 
-       <OptimizedRenderUpdate Value="true"/>
+        <Variant Name="Release">
+            <VulkanValidation Value="false"/>
+            <VulkanGPUAssist Value="false"/>
+        </Variant>
 
-       <BorderlessWindow Value="true"/>
-       <ImGUI Value="true"/>
-       <Editor Value="true"/>
-       <EditorOnStartup Value="true"/>
-       <EditorCamera Value="true"/>
-       <EditorWidgetsDocking Value="true"/>
-       <InputIgnoreNonFocusedWidgets Value="true"/>
-       <UpdateNonHoveredSceneViewer Value="false"/>
-
-       <AutoReloadResources Value="true"/>
-
-       <RayTracing Value="false"/>
-
-       <LoadDefaultGraphicsResources Value="true"/>
-
-       <AccumulateDt Value="true"/>
-
-       <FastModelsLoad Value="true"/>
-       <UseGLSLangCompiler Value="true"/>
-
-       <MTRendering Value="false"/>
-
-       <Renderer Value="true"/>
-       <Physics Value="true"/>
-
-       <PVD Value="false"/>
-
-       <Vehicles Value="true"/>
-
-       <MainWindow Value="true"/>
-
-       <LoadSkybox Value="false"/>
-       <Multisampling Value="true"/>
-       <UpdateMeshesOnDemand Value="true"/>
-       <FBOForEachSwapchainImage Value="false"/>
-       <SkyboxCPUUsage Value="false"/>
-       <VulkanValidation Value="true"/>
-       <VulkanGPUAssist Value="true"/>
-       <MultiRenderTargets Value="false"/>
-       <MultiFrameResources Value="true"/>
-       <MultiFrameSSBOResources Value="false"/>
-       <Undocking Value="true"/>
-       <VulkanDynamicRendering Value="true"/>
-   </Common>
+        <Variant Name="Validation">
+            <VulkanValidation Value="true"/>
+            <VulkanGPUAssist Value="true"/>
+        </Variant>
+    </Common>
 </Features>
