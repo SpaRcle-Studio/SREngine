@@ -114,6 +114,10 @@ namespace SR_CORE_NS::GUI {
                     current.iconType = Core::EditorIcon::Prefab;
                 } else if (extension == "srtech") {
                     current.iconType = Core::EditorIcon::RenderTechnique;
+                } else if (extension == "animation") {
+                    current.iconType = Core::EditorIcon::Animation;
+                } else if (extension == "animator") {
+                    current.iconType = Core::EditorIcon::Animator;
                 } else if (extension == "sras") {
                     current.iconType = Core::EditorIcon::Asset;
                 } else if (extension == "scene") {
@@ -208,13 +212,13 @@ namespace SR_CORE_NS::GUI {
             SR_UTILS_NS::Path path = m_selectedDir.Concat(filename);
             OpenFileWithApp(path);
         }
-        if (SR_GRAPH_GUI_NS::Immediate::Selectable("Extract animations")) {
-            SR_UTILS_NS::Path path = m_selectedDir.Concat(filename);
-            //auto&& animations = SR_ANIMATIONS_NS::AnimationClip::Load(path);
-            //for (auto&& pAnimation : animations) {
-            //   // pAnimation->Save()
-            //}
-        }
+        //if (SR_GRAPH_GUI_NS::Immediate::Selectable("Extract animations")) {
+        //    SR_UTILS_NS::Path path = m_selectedDir.Concat(filename);
+        //    //auto&& animations = SR_ANIMATIONS_NS::AnimationClip::Load(path);
+        //    //for (auto&& pAnimation : animations) {
+        //    //   // pAnimation->Save()
+        //    //}
+        //}
         if (SR_GRAPH_GUI_NS::Immediate::Selectable("Copy path")) {
             SR_UTILS_NS::Path path = m_selectedDir.Concat(filename);
             SR_UTILS_NS::Platform::TextToClipboard(path.ToString());
@@ -506,12 +510,17 @@ namespace SR_CORE_NS::GUI {
         else {
             std::string extension = SR_UTILS_NS::StringUtils::ToLower(path.GetExtension());
 
-            static std::set<std::string_view> supportedAssets = {
-                SR_UTILS_NS::Asset::GetMetaStatic()->GetExtension(),
-                SR_CORE_NS::ProjectSettings::GetMetaStatic()->GetExtension(),
-                SR_GRAPH_NS::FileMaterialResource::GetMetaStatic()->GetExtension(),
-                SR_GRAPH_NS::FileRenderTechniqueResource::GetMetaStatic()->GetExtension()
-            };
+            static bool initialized = false;
+            static std::set<std::string_view> supportedAssets;
+            if (!initialized) {
+                for (const auto& name : SR_UTILS_NS::Factory::Instance().GetInheritances(SR_UTILS_NS::Asset::GetClassStaticName())) {
+                    auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(name);
+                    if (!pMeta->IsAbstract() && !pMeta->IsHidden()) {
+                        supportedAssets.insert(pMeta->GetExtension());
+                    }
+                }
+                initialized = true;
+            }
 
             static std::set<std::string_view> supportedTextures = { "png", "jpg", "jpeg", "tga", "bmp" };
 

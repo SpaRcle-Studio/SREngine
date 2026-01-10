@@ -165,8 +165,8 @@ namespace SR_PTYPES_NS {
     }
 
     void CollisionShape::OnDisable() {
-        if (auto&& pRigidbody = GetRigidbody()) {
-            pRigidbody->DetachShape(this);
+        if (m_currentRigidbody) {
+            m_currentRigidbody->DetachShape(this);
         }
         Super::OnDisable();
     }
@@ -177,8 +177,8 @@ namespace SR_PTYPES_NS {
     }
 
     void CollisionShape::OnDetached() {
-        if (auto&& pRigidbody = GetRigidbody()) {
-            pRigidbody->DetachShape(this);
+        if (m_currentRigidbody) {
+            m_currentRigidbody->DetachShape(this);
         }
         Super::OnDetached();
     }

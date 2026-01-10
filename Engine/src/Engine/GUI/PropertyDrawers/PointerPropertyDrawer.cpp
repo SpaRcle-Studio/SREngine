@@ -116,7 +116,7 @@ namespace SR_CORE_GUI_NS {
 
             SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth);
 
-            if (m_typeNames.size() <= 1) {
+            if (m_typeNames.size() < 1) {
                 SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
             }
 
@@ -154,7 +154,7 @@ namespace SR_CORE_GUI_NS {
                 m_searchBuffer.clear();
             }
 
-            if (m_typeNames.size() <= 1) {
+            if (m_typeNames.size() < 1) {
                 SR_GRAPH_GUI_NS::Immediate::EndDisabled();
             }
 

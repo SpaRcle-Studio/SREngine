@@ -61,6 +61,18 @@ sra format
 							7-s:Editor/Textures/waterfall-chart.png
 				4-k:item
 					5-v:first
+						6-s:Animation
+					5-o:second
+						6-v:path
+							7-s:Editor/Textures/animation.png
+				4-k:item
+					5-v:first
+						6-s:Animator
+					5-o:second
+						6-v:path
+							7-s:Editor/Textures/animator.png
+				4-k:item
+					5-v:first
 						6-s:Play
 					5-o:second
 						6-v:path

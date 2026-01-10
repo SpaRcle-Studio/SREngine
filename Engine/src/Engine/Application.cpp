@@ -72,6 +72,13 @@ namespace SR_CORE_NS {
 
         SR_SYSTEM_LOG("Application::EarlyInit() : early initializing application...");
 
+        if (SR_MATH_NS::HasSSE41()) {
+            SR_SYSTEM_LOG("Application::EarlyInit() : SSE4.1 is supported.");
+        }
+        else {
+            SR_SYSTEM_LOG("Application::EarlyInit() : SSE4.1 is NOT supported.");
+        }
+
         if (m_resourcesPath.IsEmpty()) {
             SR_ERROR("Application::EarlyInit() : resources path is empty!");
             return false;

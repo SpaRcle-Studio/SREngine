@@ -43,8 +43,17 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
     if len(class_obj.variables) == 0:
         return
 
+    f.write('\t' * tabs + f'mutable std::array<SpaRcle::Utils::Reflection::Property, {len(class_obj.variables)}> properties;\n')
+    f.write('\t' * tabs + f'mutable bool isPropertiesInited = false;\n\n')
+
     f.write('\t' * tabs + f'SR_NODISCARD virtual std::span<const SpaRcle::Utils::Reflection::Property> GetProperties() const noexcept final {{\n')
-    f.write('\t' * (tabs + 1) + f'static const std::array<const SpaRcle::Utils::Reflection::Property, {len(class_obj.variables)}> properties {{ \n')
+    f.write('\t' * (tabs + 1) + f'if (isPropertiesInited) {{\n')
+    f.write('\t' * (tabs + 2) + f'return properties;\n')
+    f.write('\t' * (tabs + 1) + f'}}\n\n')
+
+    f.write('\t' * (tabs + 1) + f'isPropertiesInited = true;\n\n')
+
+    f.write('\t' * (tabs + 1) + f'properties = {{ \n')
 
     for prop in class_obj.variables:
         f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Reflection::Property()')
@@ -323,7 +332,8 @@ def generate_class_meta_load(f, class_obj, tabs):
                 f.write('\t' * (tabs + 1) + '}\n')
             elif not prop.virtual:
                 f.write('\t' * (tabs + 1) + f'if (!{load_fn} && DefaultTypeInstance()) {{' + '\n')
-                f.write('\t' * (tabs + 2) + f'propValue = DefaultTypeInstance()->{prop.name};\n')
+                #f.write('\t' * (tabs + 2) + f'propValue = DefaultTypeInstance()->{prop.name};\n')
+                f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Reflection::CloneTo(DefaultTypeInstance()->{prop.name}, propValue);' + '\n')
                 f.write('\t' * (tabs + 1) + '}\n')
             else:
                 f.write('\t' * (tabs + 1) + f'{load_fn};' + '\n')
@@ -338,7 +348,8 @@ def generate_class_meta_load(f, class_obj, tabs):
                 f.write('\t' * (tabs + 1) + '}\n')
             elif not prop.virtual:
                 f.write('\t' * (tabs + 1) + f'if (!{load_fn} && DefaultTypeInstance()) {{' + '\n')
-                f.write('\t' * (tabs + 2) + f'value.{prop.name} = DefaultTypeInstance()->{prop.name};\n')
+                #f.write('\t' * (tabs + 2) + f'value.{prop.name} = DefaultTypeInstance()->{prop.name};\n')
+                f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Reflection::CloneTo(DefaultTypeInstance()->{prop.name}, value.{prop.name});' + '\n')
                 f.write('\t' * (tabs + 1) + '}\n')
             else:
                 f.write('\t' * (tabs + 1) + f'{load_fn};' + '\n')
@@ -640,7 +651,23 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
     f.write(f'\t' * tabs + f'extern "C" {dll_export_macro} void UnregisterClassMeta_{class_obj.name}() {{' + '\n')
     # free pDefaultInstance if allocated
     f.write(f'\t' * (tabs + 1) + f'auto& meta = SRClassMetaTemplate<{class_name}>::Instance();' + '\n')
+
+    if len(class_obj.variables) > 0:
+        f.write(f'\t' * (tabs + 1) + f'if (meta.isPropertiesInited) {{' + '\n')
+        f.write(f'\t' * (tabs + 2) + f'meta.isPropertiesInited = false;' + '\n')
+        f.write(f'\t' * (tabs + 2) + f'for (auto& property : meta.properties) {{' + '\n')
+        f.write(f'\t' * (tabs + 3) + f'property = SpaRcle::Utils::Reflection::Property();' + '\n')
+        f.write(f'\t' * (tabs + 2) + f'}}\n')
+        f.write(f'\t' * (tabs + 1) + f'}}\n\n')
+
     f.write(f'\t' * (tabs + 1) + f'if (meta.pDefaultInstance) {{' + '\n')
+    f.write(f'\t' * (tabs + 2) + f'if constexpr (std::is_base_of_v<SpaRcle::Utils::Types::SharedPtrBase, {class_name}>) {{' + '\n')
+    f.write(f'\t' * (tabs + 3) + f'const auto count = dynamic_cast<SpaRcle::Utils::Types::SharedPtrBase*>(meta.pDefaultInstance)->GetStrongCount();' + '\n')
+    f.write(f'\t' * (tabs + 3) + f'if (count != 0) {{\n')
+    f.write(f'\t' * (tabs + 4) + f'SpaRcle::Utils::Breakpoint();\n')
+    f.write(f'\t' * (tabs + 4) + f'std::cerr << "Warning: Deleting default instance of shared pointer type {class_name} with zero strong references!" << std::endl;\n')
+    f.write(f'\t' * (tabs + 3) + f'}}\n')
+    f.write(f'\t' * (tabs + 2) + f'}}\n')
     f.write(f'\t' * (tabs + 2) + f'SRDelete(meta.pDefaultInstance);' + '\n')
     f.write(f'\t' * (tabs + 1) + f'}}\n')
     f.write(f'\t' * (tabs + 1) + f'SpaRcle::Utils::Factory::Instance().Unregister<{class_name}>();' + '\n')
@@ -1144,6 +1171,7 @@ def generate_classes_code(logger: logger_utils.Logger, context: codegen_context.
                     f.write(f'#include "{os.path.abspath(os.path.normpath(class_obj.path))}"' + '\n\n')
 
                 if not def_includes_included:
+                    f.write('#include <Utils/Common/Breakpoint.h>\n')
                     f.write('#include <Utils/Serialization/SerializableDataAccessor.h>\n')
                     f.write('#include <Utils/Reflection/Property.h>\n')
                     f.write('#include <Utils/Reflection/Value.h>\n')

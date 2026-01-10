@@ -37,7 +37,7 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        for (auto&& pNode : pGraph->GetNodes()) {
+        /*for (auto&& pNode : pGraph->GetNodes()) {
             SR_GRAPH_GUI_NS::Immediate::Separator();
             SR_GRAPH_GUI_NS::Immediate::Text("Node: %s", SR_UTILS_NS::EnumReflector::ToStringAtom(pNode->GetType()).c_str());
 
@@ -58,7 +58,7 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
             }
-        }
+        }*/
     }
 
     //void AnimatorEditor::OnOpen() {

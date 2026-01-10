@@ -79,6 +79,27 @@ namespace SR_CORE_GUI_NS {
                 context.onBeforeChangeCallback(false);
             }
             container.Resize(container.Size() + 1);
+            if (context.GetEditorParams().IsNotNull()) {
+                auto&& newElement = container.Back();
+                if (auto&& newElementValue = newElement->Ref(); newElementValue.IsSmartPtr()) {
+                    if (auto&& pSharedPtrBase = newElementValue.GetSharedPtrBase()) {
+                        std::string_view typeName = newElementValue.GetSharedPtrType();
+                        if (size_t pos = typeName.rfind(':'); pos != std::string_view::npos) {
+                            typeName.remove_prefix(pos + 1);
+                        }
+
+                        if (auto&& pInstance = SR_UTILS_NS::Factory::Instance().CreateBase(typeName)) {
+                            pSharedPtrBase->SetPointerFromBase(dynamic_cast<SR_HTYPES_NS::SharedPtrBase*>(pInstance));
+                        }
+                        else {
+                            SRHalt("VectorPropertyDrawer::Draw() : failed to create instance of type {}!", typeName);
+                        }
+                    }
+                    else {
+                        SRHalt("VectorPropertyDrawer::Draw() : new element is smart pointer, but GetSharedPtrBase() returned nullptr!");
+                    }
+                }
+            }
             feedback.isChanged = true;
         }
 
