@@ -21,6 +21,7 @@ namespace SR_PTYPES_NS {
         bool InitBody() override;
         void ClearForces() override;
 
+        void AddImpulse(const SR_MATH_NS::FVector3& impulse) override;
         void AddForce(const SR_MATH_NS::FVector3& force) override;
         void AddTorque(const SR_MATH_NS::FVector3& torque) override;
 

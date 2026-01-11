@@ -71,6 +71,12 @@ namespace SR_PTYPES_NS {
 
         m_rigidActor->setActorFlag(physx::PxActorFlag::eDISABLE_GRAVITY, !m_rigidbody->IsUseGravity());
 
+        //if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()) {
+        //    pRigidBody->setRigidBodyFlag(physx::PxRigidBodyFlag::eENABLE_CCD, false);
+        //    pRigidBody->setLinearDamping(0.f);
+        //    pRigidBody->setAngularDamping(0.f);
+        //}
+
         UpdateLocks();
 
         m_rigidActor->userData = (void*)m_rigidbody;
@@ -325,13 +331,23 @@ namespace SR_PTYPES_NS {
         Super::Synchronize();
     }
 
+    void PhysXRigidbody3DImpl::AddImpulse(const SR_MATH_NS::FVector3& impulse) {
+        if (!m_rigidActor) {
+            return;
+        }
+
+        if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()) {
+            pRigidBody->addForce(SR_PHYSICS_UTILS_NS::FV3ToPxV3(impulse), physx::PxForceMode::eIMPULSE);
+        }
+    }
+
     void PhysXRigidbody3DImpl::AddForce(const SR_MATH_NS::FVector3& force) {
         if (!m_rigidActor) {
             return;
         }
 
         if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()) {
-            pRigidBody->addForce(SR_PHYSICS_UTILS_NS::FV3ToPxV3(force));
+            pRigidBody->addForce(SR_PHYSICS_UTILS_NS::FV3ToPxV3(force), physx::PxForceMode::eFORCE);
         }
     }
 

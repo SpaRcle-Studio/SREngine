@@ -119,6 +119,9 @@ namespace SR_PTYPES_NS {
 
         if (m_shape) {
             m_shape->userData = static_cast<void*>(GetShape());
+
+            //m_shape->setContactOffset(0.05f);
+            //m_shape->setRestOffset(0.0f);
         }
 
         UpdateMatrix();

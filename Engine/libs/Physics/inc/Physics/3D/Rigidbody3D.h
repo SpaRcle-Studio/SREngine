@@ -14,6 +14,7 @@ namespace SR_PTYPES_NS {
         SR_NODISCARD virtual SR_MATH_NS::FVector3 GetLinearVelocity() const = 0;
         SR_NODISCARD virtual SR_MATH_NS::FVector3 GetAngularVelocity() const = 0;
 
+        virtual void AddImpulse(const SR_MATH_NS::FVector3& impulse) { }
         virtual void AddForce(const SR_MATH_NS::FVector3& force) { }
         virtual void AddTorque(const SR_MATH_NS::FVector3& torque) { }
 
@@ -46,6 +47,7 @@ namespace SR_PTYPES_NS {
         void SetLinearLock(const SR_MATH_NS::BVector3& lock);
         void SetAngularLock(const SR_MATH_NS::BVector3& lock);
 
+        void AddImpulse(const SR_MATH_NS::FVector3& impulse);
         void AddForce(const SR_MATH_NS::FVector3& force);
         void AddTorque(const SR_MATH_NS::FVector3& torque);
 

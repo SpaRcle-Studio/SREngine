@@ -78,6 +78,17 @@ namespace SR_CORE_GUI_NS {
                     color = SR_MATH_NS::FColor(1, 1, 0, 1);
                     gameObjectPage += " (Dont Save)";
                 }
+
+                //if (auto&& pGameObject = m_sceneObject.DynamicCast<SR_UTILS_NS::GameObject>()) {
+                //    if (auto&& pTransform = pGameObject->GetTransform()) {
+                //        if (pTransform->IsDirtyRotation()) {
+                //            gameObjectPage += " (DR)";
+                //        }
+                //        if (pTransform->IsDirty()) {
+                //            gameObjectPage += " (DM)";
+                //        }
+                //    }
+                //}
             }
 
             SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, color);

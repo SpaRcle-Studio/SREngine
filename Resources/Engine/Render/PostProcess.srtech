@@ -100,14 +100,6 @@ use tabs: true
 																			19-s:FrameBufferDepth
 																		18-v:fboName
 																			19-s:DepthCascades
-																16-k:i
-																	17-o:d
-																		18-v:id
-																			19-s:colorBufferTest
-																		18-v:usageType
-																			19-s:FrameBufferColor
-																		18-v:fboName
-																			19-s:ColorBuffer
 														14-o:uniforms
 															15-o:shared
 																16-a:useFromPass
@@ -120,10 +112,8 @@ use tabs: true
 													13-v:type
 														14-s:SkyboxPass
 													13-o:ptr
-														14-v:skyboxPath
-															15-s:Engine/Skyboxes/Sun.png
 														14-v:shaderPath
-															15-s:Engine/Shaders/skybox.srsl
+															15-s:Engine/Shaders/skybox-procedural.srsl
 											11-k:i
 												12-o:d
 													13-v:type
@@ -169,24 +159,6 @@ use tabs: true
 																		18-v:d
 																			19-s:DepthCascades
 															15-o:material
-											11-k:i
-												12-o:d
-													13-v:type
-														14-s:DebugPass
-													13-o:ptr
-														14-a:shaders
-															15-k:item
-																16-v:first
-																	17-s:mesh
-																16-o:second
-																	17-v:shaderPath
-																		18-s:Engine/Shaders/Gizmo/wire-mesh.srsl
-															15-k:item
-																16-v:first
-																	17-s:line
-																16-o:second
-																	17-v:shaderPath
-																		18-s:Engine/Shaders/line.srsl
 											11-k:i
 												12-o:d
 													13-v:type
@@ -238,6 +210,8 @@ use tabs: true
 													13-o:ptr
 														14-v:customName
 															15-s:DepthCascades
+														14-v:frustumCulling
+															15-b:false
 														14-v:renderLayers
 															15-i:4
 														14-a:allowedLayers
@@ -265,14 +239,10 @@ use tabs: true
 															15-o:material
 														14-v:instancing
 															15-b:true
-														14-v:maxShadowDistance
-															15-f:150
-														14-v:split1
-															15-f:4
-														14-v:split2
-															15-f:10
-														14-v:split3
-															15-f:50
+														14-v:lightFrustumCount
+															15-i:4
+														14-v:oneMeterUnit
+															15-f:0.1
 										10-o:data
 											11-v:frameBufferName
 												12-s:DepthCascades
@@ -351,72 +321,6 @@ use tabs: true
 																				20-k:i
 																					21-o:d
 																						22-v:id
-																							23-s:boundsMin
-																						22-v:type
-																							23-s:Vec3
-																						22-o:value
-																							23-v:x
-																								24-f:-400
-																							23-v:y
-																								24-f:70
-																							23-v:z
-																								24-f:-400
-																				20-k:i
-																					21-o:d
-																						22-v:id
-																							23-s:boundsMax
-																						22-v:type
-																							23-s:Vec3
-																						22-o:value
-																							23-v:x
-																								24-f:400
-																							23-v:y
-																								24-f:105
-																							23-v:z
-																								24-f:400
-																				20-k:i
-																					21-o:d
-																						22-v:id
-																							23-s:cloudsSpeed
-																						22-v:type
-																							23-s:Float
-																						22-v:value
-																							23-f:0.8
-																				20-k:i
-																					21-o:d
-																						22-v:id
-																							23-s:stepSize
-																						22-v:type
-																							23-s:Float
-																						22-v:value
-																							23-f:0.862
-																				20-k:i
-																					21-o:d
-																						22-v:id
-																							23-s:fbmOctaves
-																						22-v:type
-																							23-s:Int
-																						22-v:value
-																							23-i:5
-																				20-k:i
-																					21-o:d
-																						22-v:id
-																							23-s:cloudsFrequency
-																						22-v:type
-																							23-s:Float
-																						22-v:value
-																							23-f:2.255
-																				20-k:i
-																					21-o:d
-																						22-v:id
-																							23-s:cloudsAmplitude
-																						22-v:type
-																							23-s:Float
-																						22-v:value
-																							23-f:0.5
-																				20-k:i
-																					21-o:d
-																						22-v:id
 																							23-s:chromaticAberrationIntensity
 																						22-v:type
 																							23-s:Float
@@ -464,7 +368,7 @@ use tabs: true
 										10-b:false
 								8-v:samples
 									9-i:1
-								8-v:layersCount
+								8-v:arrayLayersCount
 									9-i:4
 								8-v:depthAspect
 									9-s:Depth

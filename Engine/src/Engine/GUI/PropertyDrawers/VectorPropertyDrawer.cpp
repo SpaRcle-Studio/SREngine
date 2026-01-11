@@ -88,11 +88,26 @@ namespace SR_CORE_GUI_NS {
                             typeName.remove_prefix(pos + 1);
                         }
 
-                        if (auto&& pInstance = SR_UTILS_NS::Factory::Instance().CreateBase(typeName)) {
-                            pSharedPtrBase->SetPointerFromBase(dynamic_cast<SR_HTYPES_NS::SharedPtrBase*>(pInstance));
+                        if (SR_UTILS_NS::Factory::Instance().IsAbstract(typeName)) {
+                            auto&& inheritances = SR_UTILS_NS::Factory::Instance().GetInheritances(typeName);
+                            for (auto&& inheritance : inheritances) {
+                                if (!SR_UTILS_NS::Factory::Instance().IsAbstract(inheritance)) {
+                                    typeName = inheritance;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (SR_UTILS_NS::Factory::Instance().IsAbstract(typeName)) {
+                            SRHalt("VectorPropertyDrawer::Draw() : failed to find concrete type for abstract type {}!", typeName);
                         }
                         else {
-                            SRHalt("VectorPropertyDrawer::Draw() : failed to create instance of type {}!", typeName);
+                            if (auto&& pInstance = SR_UTILS_NS::Factory::Instance().CreateBase(typeName)) {
+                                pSharedPtrBase->SetPointerFromBase(dynamic_cast<SR_HTYPES_NS::SharedPtrBase*>(pInstance));
+                            }
+                            else {
+                                SRHalt("VectorPropertyDrawer::Draw() : failed to create instance of type {}!", typeName);
+                            }
                         }
                     }
                     else {

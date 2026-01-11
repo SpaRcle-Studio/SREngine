@@ -92,12 +92,11 @@ namespace SR_CORE_NS {
 
     void EngineScene::SetSpeed(float_t speed) {
         m_speed = speed;
+        if (pScene) {
+            pScene->SetSpeed(m_speed);
+        }
         UpdateFrequency();
         m_accumulator = m_updateFrequency;
-    }
-
-    void EngineScene::SkipDraw() {
-        m_accumulator = 0.f;
     }
 
     void EngineScene::UpdateMainCamera() {
@@ -179,7 +178,7 @@ namespace SR_CORE_NS {
         const bool isPaused = pEngine->IsPaused() || !pEngine->IsActive() || pEngine->HasSceneInQueue();
 
         pSceneUpdater->Build(isPaused);
-        pSceneUpdater->Update(dt, isPaused);
+        pSceneUpdater->Update(dt * m_speed, isPaused);
 
         SR_UTILS_NS::Broadcaster::Instance().Broadcast(SR_UTILS_NS::Events::EVENT_ON_ENGINE_UPDATE_ID);
 

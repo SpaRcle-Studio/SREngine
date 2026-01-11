@@ -33,6 +33,7 @@ namespace SR_CORE_NS {
         SR_NODISCARD bool Init();
 
         SR_NODISCARD CameraPtr GetMainCamera() const { return pMainCamera; }
+        SR_NODISCARD float_t GetSpeed() const { return m_speed; }
 
         void SetActive(bool active);
         void SetPaused(bool pause);
@@ -40,7 +41,6 @@ namespace SR_CORE_NS {
 
         void UpdateMainCamera();
         void Update(float_t dt);
-        void SkipDraw();
         void SetSpeed(float_t speed);
         void UpdateChunkDebug();
 

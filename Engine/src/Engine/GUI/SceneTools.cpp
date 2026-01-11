@@ -4,6 +4,7 @@
 
 #include <Engine/GUI/SceneTools.h>
 #include <Engine/GUI/EditorGUI.h>
+#include <Engine/World/EngineScene.h>
 #include <Engine/Engine.h>
 
 #include <Graphics/GUI/WidgetManager.h>
@@ -46,18 +47,6 @@ namespace SR_CORE_GUI_NS {
                 if (isActive) { SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperation::None); }
                 else { SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperation::Scale); }
             });
-
-        AddElement()
-            .SetCustomDraw([this](auto&& pElement) {
-                SR_GRAPH_GUI_NS::Immediate::Text("Camera Speed");
-                SR_GRAPH_GUI_NS::Immediate::SameLine();
-                SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(10, 0));
-                SR_GRAPH_GUI_NS::Immediate::SameLine();
-                SR_GRAPH_GUI_NS::Immediate::PushItemWidth(200.f);
-                SR_GRAPH_GUI_NS::Immediate::SliderFloat("##", &m_cameraVelocityFactor, 0.01f, 10.f);
-                SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
-            })
-            .SetItemSpacing(SR_MATH_NS::FVector2(10.f, 0.f));
 
         AddElement("Connect PVD")
             .SetIsActive([]() { return false; })
@@ -116,6 +105,38 @@ namespace SR_CORE_GUI_NS {
                 };
 
                 if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("##Options", "Options")) {
+                    {
+                        if (SR_GRAPH_GUI_NS::Immediate::Button("Camera Speed", SR_MATH_NS::FVector2(6.f * SR_GRAPH_GUI_NS::Immediate::GetFontSize(), 0))) {
+                            m_cameraVelocityFactor = 1.f;
+                        }
+
+                        SR_GRAPH_GUI_NS::Immediate::SameLine();
+
+                        if (SR_GRAPH_GUI_NS::Immediate::SliderFloat("##Camera Speed", &m_cameraVelocityFactor, 0.01f, 10.f)) {
+                            SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
+                        }
+                    }
+
+                    SR_GRAPH_GUI_NS::Immediate::Separator();
+
+                    {
+                        float_t gameSpeed = static_cast<EditorGUI*>(GetManager())->GetEngine()->GetEngineScene()->GetSpeed();
+
+                        if (SR_GRAPH_GUI_NS::Immediate::Button("Game Speed", SR_MATH_NS::FVector2(6.f * SR_GRAPH_GUI_NS::Immediate::GetFontSize(), 0))) {
+                            gameSpeed = 1.f;
+                            static_cast<EditorGUI*>(GetManager())->GetEngine()->GetEngineScene()->SetSpeed(1.f);
+                        }
+
+                        SR_GRAPH_GUI_NS::Immediate::SameLine();
+
+                        if (SR_GRAPH_GUI_NS::Immediate::SliderFloat("##Game Speed", &gameSpeed, 0.0f, 5.f)) {
+                            SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
+                            static_cast<EditorGUI*>(GetManager())->GetEngine()->GetEngineScene()->SetSpeed(gameSpeed);
+                        }
+                    }
+
+                    SR_GRAPH_GUI_NS::Immediate::Separator();
+
                     optionFn("DEBUG_RENDER", "Debug draw");
 
                     SR_GRAPH_GUI_NS::Immediate::Separator();
