@@ -8,6 +8,7 @@
         <Debug/>
     	<Transparent/>
     	<TransparentSecond/>
+        <Shadow/>
     	<UI/>
         <DebugUI/>
         <Gizmo/>

@@ -38,6 +38,9 @@ use tabs: true
 																	17-s:Default
 															15-k:i
 																16-v:d
+																	17-s:Shadow
+															15-k:i
+																16-v:d
 																	17-s:Opaque
 															15-k:i
 																16-v:d
@@ -136,6 +139,9 @@ use tabs: true
 															15-k:i
 																16-v:d
 																	17-s:Default
+															15-k:i
+																16-v:d
+																	17-s:Shadow
 															15-k:i
 																16-v:d
 																	17-s:Opaque

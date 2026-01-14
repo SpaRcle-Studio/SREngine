@@ -44,7 +44,7 @@ namespace SR_CORE_NS::GUI {
         if (m_scene.TryRecursiveLockIfValid()) {
             m_isActive = pEngine->IsActive();
             m_isPaused = pEngine->IsPaused();
-            m_lastPath = std::move(m_scene->GetPath());
+            m_lastPath = m_scene->GetPath();
             locked = true;
         }
 

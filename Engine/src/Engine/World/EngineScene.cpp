@@ -153,7 +153,7 @@ namespace SR_CORE_NS {
 
     void EngineScene::FixedStep(bool isPaused) {
         SR_TRACY_ZONE;
-        SR_TRACY_ZONE_TEXT(SR_UTILS_NS::ToString(m_accumulator));
+        SR_TRACY_ZONE_VALUE(m_accumulator);
 
         if (!isPaused && pPhysicsScene) {
             pPhysicsScene->FixedUpdate();

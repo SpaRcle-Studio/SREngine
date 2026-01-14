@@ -328,11 +328,11 @@ namespace SR_CORE_NS::GUI {
 
                 SR_GRAPH_GUI_NS::Immediate::BeginGroup();
 
-                const std::string headerid = "##FileBrowserElement%s" + element.filename;
+                SR_GRAPH_GUI_NS::Immediate::PushID(element.filename.c_str());
                 if (element.isDir) {
                     void* descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(element.iconType);
 
-                    if (SR_GRAPH_GUI_NS::Immediate::ImageButtonDouble(headerid, descriptor, SR_MATH_NS::FVector2(iconSize), iconSize / 3.f)) {
+                    if (SR_GRAPH_GUI_NS::Immediate::ImageButtonDouble("", descriptor, SR_MATH_NS::FVector2(iconSize), iconSize / 3.f)) {
                         m_selectedDir = m_selectedDir.Concat(element.filename);
                         m_dirtySelectedDir = true;
                     }
@@ -350,7 +350,7 @@ namespace SR_CORE_NS::GUI {
                         descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(element.iconType);
                     }
 
-                    if (SR_GRAPH_GUI_NS::Immediate::ImageButtonDouble(headerid, descriptor, SR_MATH_NS::FVector2(iconSize), iconSize / 3.f)) {
+                    if (SR_GRAPH_GUI_NS::Immediate::ImageButtonDouble("", descriptor, SR_MATH_NS::FVector2(iconSize), iconSize / 3.f)) {
                         SR_UTILS_NS::Path path = m_selectedDir.Concat(element.filename);
                         OpenFileWithApp(path);
                     }
@@ -358,6 +358,7 @@ namespace SR_CORE_NS::GUI {
                     FileContextMenu(element.filename);
                 }
 
+                SR_GRAPH_GUI_NS::Immediate::PopID();
                 SR_GRAPH_GUI_NS::Immediate::PushFont(pSmallFont);
                 SR_GRAPH_GUI_NS::Immediate::Text("%s", element.cutName.c_str());
                 SR_GRAPH_GUI_NS::Immediate::PopFont();

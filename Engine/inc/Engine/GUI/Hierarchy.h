@@ -12,6 +12,10 @@
 
 #include <Graphics/GUI/Widget.h>
 
+namespace SR_CORE_NS {
+    class Engine;
+}
+
 namespace SR_CORE_GUI_NS {
     class Hierarchy : public SR_GRAPH_NS::GUI::Widget {
         using Super = SR_GRAPH_NS::GUI::Widget;
@@ -48,6 +52,7 @@ namespace SR_CORE_GUI_NS {
         void SR_INLINE Delete();
 
     private:
+        Engine* m_engine = nullptr;
         std::vector<SR_UTILS_NS::StringAtom> m_availableUINodes;
         SR_WORLD_NS::Scene::Ptr m_scene;
         std::list<SR_UTILS_NS::SceneObject::Ptr> m_pointersHolder;
@@ -55,6 +60,7 @@ namespace SR_CORE_GUI_NS {
         std::vector<SR_UTILS_NS::SceneObject::Ptr> m_tree;
 
         std::atomic<bool> m_shiftPressed;
+        bool m_showHidden = false;
 
         SR_GRAPH_NS::GUI::Widget* m_sceneRunnerWidget = nullptr;
 

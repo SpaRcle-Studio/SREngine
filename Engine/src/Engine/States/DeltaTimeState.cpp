@@ -22,7 +22,8 @@ namespace SR_CORE_NS {
         const auto dt = static_cast<float_t>(deltaTime.count()) / SR_CLOCKS_PER_SEC / SR_CLOCKS_PER_SEC / SR_CLOCKS_PER_SEC; /// Seconds
         m_timeStart = now;
 
-        GetContext().SetValue("DeltaTime", dt);
+        static const std::string deltaTimeKey = "DeltaTime";
+        GetContext().SetValue(deltaTimeKey, dt);
 
         return SR_UTILS_NS::ThreadWorkerResult::Success;
     }

@@ -1199,7 +1199,8 @@ def generate_classes_code(logger: logger_utils.Logger, context: codegen_context.
                 factory_name = class_obj.name.split('::')[-1]
                 #factory_name = factory_name[0].lower() + factory_name[1:]
                 f.write('\t' * tabs + f'SpaRcle::Utils::StringAtom {class_obj.name}::GetClassStaticName() noexcept {{' + '\n')
-                f.write('\t' * (tabs + 1) + f'return \"{factory_name}\";' + '\n')
+                f.write('\t' * (tabs + 1) + f'static const SpaRcle::Utils::StringAtom factoryName(\"{factory_name}\");' + '\n')
+                f.write('\t' * (tabs + 1) + f'return factoryName;\n')
                 f.write('\t' * tabs + '}\n\n')
 
                 f.write('\t' * tabs + f'SpaRcle::Utils::SRClass* {class_obj.name}::AllocateStatic() noexcept {{' + '\n')

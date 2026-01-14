@@ -122,7 +122,7 @@ namespace SR_CORE_GUI_NS {
             auto&& pCommandManager = pEngine->GetCmdManager();
 
             if (pCommandManager) {
-                std::string lastCmdName = pCommandManager->GetLastCmdName();
+                auto&& lastCmdName = pCommandManager->GetLastCmdName();
 
                 SR_GRAPH_GUI_NS::Immediate::Text("Command manager:");
                 SR_GRAPH_GUI_NS::Immediate::Text("  History PC: %i", pCommandManager->GetHistoryPC());
