@@ -77,6 +77,7 @@ namespace SR_CORE_NS {
 
         bool IsNeedReloadResources();
 
+        void ProcessInput();
         void FixedUpdate();
         bool FlushScene();
         void LoadStartupScene();

@@ -65,6 +65,8 @@ namespace SR_CORE_NS {
 
         SR_SCRIPTING_NS::ScriptSystem::Instance().ReloadModulesIfNeeded();
 
+        pEngine->ProcessInput();
+
         return SR_UTILS_NS::ThreadWorkerResult::Success;
     }
 }

@@ -272,51 +272,6 @@ namespace SR_CORE_NS {
 
         const auto&& pFocusedWindow = GetFocusedWindow();
 
-        if (pFocusedWindow) {
-            SR_UTILS_NS::Input::Instance().SetFocusedWindowRect(pFocusedWindow->GetWindowRect());
-        }
-        else {
-            SR_UTILS_NS::Input::Instance().SetFocusedWindowRect(std::nullopt);
-        }
-
-        SR_UTILS_NS::Input::Instance().SetPlayMode(!IsPaused() && IsGameMode());
-        SR_UTILS_NS::Input::Instance().Update();
-
-        if (pFocusedWindow) {
-            m_input->Check();
-
-            bool lShiftPressed = SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::LShift);
-
-            if (!IsGameMode() && SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Ctrl)) {
-                if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Z)) {
-                    m_cmdManager->Cancel();
-                }
-
-                if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Y)) {
-                    if (!m_cmdManager->Redo()) {
-                        SR_WARN("Engine::FixedUpdate() : failed to redo \"" + m_cmdManager->GetLastCmdName() + "\" command!");
-                    }
-                }
-            }
-
-            //if (!IsGameMode() && m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F1)) {
-            //    m_editor->SetDockingEnabled(!m_editor->IsDockingEnabled());
-            //}
-
-            // if (m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F9)) {
-            //     SR_UTILS_NS::Input::Instance().LockCursor(!SR_UTILS_NS::Input::Instance().IsCursorLocked());
-            // }
-
-            if (m_editor && IsActive() && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F2)) {
-                SetGameMode(!IsGameMode());
-            }
-
-            if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F3) && lShiftPressed) {
-                Reload();
-                return;
-            }
-        }
-
         if (m_editor && pFocusedWindow) {
             m_editor->FixedUpdate();
         }
@@ -524,5 +479,53 @@ namespace SR_CORE_NS {
 
     const SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::ThreadsWorker>& Engine::GetThreadsWorker() const {
         return m_threadsWorker;
+    }
+
+    void Engine::ProcessInput() {
+        SR_TRACY_ZONE;
+
+        const auto&& pFocusedWindow = GetFocusedWindow();
+
+        if (pFocusedWindow) {
+            SR_UTILS_NS::Input::Instance().SetFocusedWindowRect(pFocusedWindow->GetWindowRect());
+        }
+        else {
+            SR_UTILS_NS::Input::Instance().SetFocusedWindowRect(std::nullopt);
+        }
+
+        SR_UTILS_NS::Input::Instance().SetPlayMode(!IsPaused() && IsGameMode());
+        SR_UTILS_NS::Input::Instance().Update();
+
+        if (pFocusedWindow) {
+            if (m_input) {
+                m_input->Check();
+            }
+
+            bool lShiftPressed = SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::LShift);
+
+            if (m_cmdManager && !IsGameMode() && SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Ctrl)) {
+                if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Z)) {
+                    m_cmdManager->Cancel();
+                }
+
+                if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Y)) {
+                    if (!m_cmdManager->Redo()) {
+                        SR_WARN("Engine::FixedUpdate() : failed to redo \"" + m_cmdManager->GetLastCmdName() + "\" command!");
+                    }
+                }
+            }
+
+            /// if (!IsGameMode() && m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F1)) {
+            ///     m_editor->SetDockingEnabled(!m_editor->IsDockingEnabled());
+            /// }
+
+            if (m_editor && IsActive() && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F2)) {
+                SetGameMode(!IsGameMode());
+            }
+
+            if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F3) && lShiftPressed) {
+                Reload();
+            }
+        }
     }
 }
