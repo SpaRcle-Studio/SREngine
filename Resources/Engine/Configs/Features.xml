@@ -31,7 +31,7 @@
         <FBOForEachSwapchainImage Value="false"/>
         <MultiRenderTargets Value="false"/>
         <MultiFrameResources Value="true"/>
-        <MultiFrameSSBOResources Value="false"/>
+        <MultiFrameSSBOResources Value="true"/>
         <UseGLSLangCompiler Value="true"/>
 
         <!-- Editor -->

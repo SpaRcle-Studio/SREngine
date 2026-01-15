@@ -114,7 +114,7 @@ namespace SR_CORE_NS::Commands {
             auto&& pDeserializer = m_pNew->CreateDeserializer();
 
             SR_UTILS_NS::Serialization::Load(*pDeserializer, *pObject, DATA_ID);
-            if (auto&& pGameObject =pObject.DynamicCast<SR_UTILS_NS::GameObject>()) {
+            if (auto&& pGameObject = pObject.DynamicCast<SR_UTILS_NS::GameObject>()) {
                 pGameObject->OnMatrixDirty();
             }
 
@@ -128,8 +128,6 @@ namespace SR_CORE_NS::Commands {
         auto&& pEntity = m_scene->GetEntityController()->FindById(m_entityId);
 
         if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>()) {
-            SR_DEBUG_LOG(m_pOld->ToString());
-
             auto&& pDeserializer = m_pOld->CreateDeserializer();
 
             SR_UTILS_NS::Serialization::Load(*pDeserializer, *pObject, DATA_ID);

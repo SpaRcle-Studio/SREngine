@@ -19,26 +19,7 @@
 
 namespace SR_CORE_NS {
     bool Importers::ImportSkeletonFromRawMesh(const SR_HTYPES_NS::RawMesh* pRawMesh, SR_ANIMATIONS_NS::Skeleton::Ptr pSkeleton) {
-    #ifdef SR_UTILS_ASSIMP
-        const aiScene* pScene = static_cast<const aiScene*>(pRawMesh->GetAssimpScene());
-
-        if (!pScene->mRootNode) {
-            return false;
-        }
-
-
-        pSkeleton->SetRawMesh(pRawMesh);
-
-        const SR_HTYPES_NS::Function<void(aiNode*, SR_ANIMATIONS_NS::Bone*)> processNode = [&](aiNode* node, SR_ANIMATIONS_NS::Bone* pBone) {
-            pBone = pSkeleton->AddBone(pBone, node->mName.C_Str(), false);
-
-            for (uint32_t i = 0; i < node->mNumChildren; ++i) {
-                processNode(node->mChildren[i], pBone);
-            }
-        };
-
-        processNode(pScene->mRootNode, pSkeleton->GetRootBone());
-    #endif
+        pSkeleton->GetSkeletonRawMesh().SetRawMesh(pRawMesh);
 
         /// если нет сцены, значит загружаем сырой компонент
         if (!pSkeleton->HasScene()) {

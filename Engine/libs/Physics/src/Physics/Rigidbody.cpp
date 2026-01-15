@@ -20,7 +20,7 @@
 #include <Codegen/Rigidbody.generated.hpp>
 
 namespace SR_PTYPES_NS {
-    Rigidbody::Rigidbody() { }
+    Rigidbody::Rigidbody() = default;
 
     Rigidbody::~Rigidbody() {
         SRAssert(m_shapes.empty());
