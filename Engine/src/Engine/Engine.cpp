@@ -6,6 +6,8 @@
 #include <Engine/Application.h>
 #include <Engine/EngineResources.h>
 #include <Engine/GUI/EditorGUI.h>
+#include <Engine/GUI/SceneRunner.h>
+#include <Engine/GUI/Hierarchy.h>
 #include <Engine/World/EngineScene.h>
 
 #include <Graphics/GUI/WidgetManager.h>
@@ -369,6 +371,39 @@ namespace SR_CORE_NS {
                 AddSceneToQueue(SR_WORLD_NS::Scene::NewScene(scenePath, SR_WORLD_NS::SceneLogicType::Asset));
             }
         }
+    }
+    
+    void Engine::RunSceneGameMode(const SR_UTILS_NS::Path& path) {
+        if (auto&& pScene = SR_WORLD_NS::Scene::LoadScene(path)) {
+            RunSceneGameMode(pScene);
+        }
+        else {
+            SR_ERROR("Engine::RunSceneGameMode() : failed to load scene from path: \n\t{}", path);
+        }
+    }
+
+    void Engine::RunSceneGameMode(const ScenePtr& scene) {
+        if (GetScene() != scene) {
+            AddSceneToQueue(scene);
+        }
+
+        if (auto&& pEditor = GetEditor()) {
+            if (auto&& pHierarchy = pEditor->GetWidget<SR_CORE_GUI_NS::Hierarchy>()) {
+                if (auto&& pSceneRunner = dynamic_cast<SR_CORE_GUI_NS::SceneRunner*>(pHierarchy->GetSceneRunnerWidget())) {
+                    pSceneRunner->SetScene(scene);
+                    
+                    pSceneRunner->PlayScene();
+                    SetGameMode(true);
+                    SetActive(true);
+
+                    SR_LOG("Engine::RunSceneGameMode() : running scene from command line option: \n\t{}", scene->GetPath());
+
+                    return;
+                }
+            }
+        }
+
+        SR_ERROR("Engine::RunSceneGameMode() : failed to run scene: \n\t{}", scene->GetPath());
     }
 
     void Engine::SetGameMode(bool enabled) {

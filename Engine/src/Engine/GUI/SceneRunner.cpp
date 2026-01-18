@@ -146,6 +146,8 @@ namespace SR_CORE_NS::GUI {
         SR_TRACY_ZONE;
         SR_LOCK_GUARD;
 
+        // TODO: Refactor to use Engine::RunSceneGameMode instead.
+
         if (m_lastPath.IsEmpty() && m_scene) {
             m_lastPath = std::move(m_scene->GetPath());
         }

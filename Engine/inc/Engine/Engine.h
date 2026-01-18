@@ -68,6 +68,9 @@ namespace SR_CORE_NS {
 
         void Reload();
 
+        void RunSceneGameMode(const SR_UTILS_NS::Path& path);
+        void RunSceneGameMode(const ScenePtr& scene);
+
         void AddSceneToQueue(const ScenePtr& scene);
         void SetActive(bool isActive);
         void SetPaused(bool isPaused);

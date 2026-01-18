@@ -90,6 +90,8 @@ namespace SR_CORE_NS::Tests {
 
         SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : second step - setting game mode");
 
+        // TODO: Refactor to use Engine::RunSceneGameMode instead.
+
         pState->AddEngineAction([this](Engine& engine) {
             SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : executing delayed action in DelayedActionsState - setting game mode.");
             if (auto&& pEditor = engine.GetEditor()) {

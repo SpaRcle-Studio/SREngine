@@ -259,6 +259,14 @@ namespace SR_CORE_NS {
 
         volatile bool hasErrors = false;
 
+        auto&& optionPath =  SR_UTILS_NS::CLIManager::Instance().GetOptionValue(SR_UTILS_NS::CLIOptions::RunScene);
+        if (m_engine && optionPath.has_value()) {
+            SR_LOG("Application::Execute() : command line option to run scene detected: {}", optionPath.value());
+
+            auto&& path = optionPath.value();
+            m_engine->RunSceneGameMode(path);
+        }
+
         while (!hasErrors) {
             SR_TRACY_ZONE;
             SR_PLATFORM_NS::Sleep(50);
