@@ -23,7 +23,6 @@ set(SR_ICU ON)
 add_definitions(
     -DSR_ICU
     -DSR_USE_IMGUI
-    -DSR_USE_IMGUI_NODE_EDITOR
     -DSR_USE_VULKAN
     -DSR_SUPPORT_PARALLEL
     -DSR_CXX_20

@@ -3,17 +3,16 @@
 //
 
 #include <Engine/Engine.h>
-
 #include <Engine/Settings/EditorSettings.h>
 #include <Engine/Settings/ProjectSettings.h>
-
 #include <Engine/GUI/EditorGUI.h>
 #include <Engine/GUI/FileBrowser.h>
 #include <Engine/GUI/TextureInspector.h>
 #include <Engine/GUI/AssetInspector.h>
+#include <Engine/GUI/AnimatorEditor.h>
+
 #include <Graphics/GUI/Icons.h>
 #include <Graphics/GUI/Utils.h>
-
 #include <Graphics/Material/FileMaterial.h>
 #include <Graphics/Animations/AnimationClip.h>
 #include <Graphics/Overlay/ImGuiOverlay.h>
@@ -525,6 +524,13 @@ namespace SR_CORE_NS::GUI {
 
             static std::set<std::string_view> supportedTextures = { "png", "jpg", "jpeg", "tga", "bmp" };
 
+            //if (extension == "animator") {
+            //    if (auto&& pAnimatorEditor = GetManager()->GetWidget<AnimatorEditor>()) {
+            //        pAnimatorEditor->SetGraphPath(path);
+            //    }
+            //    return;
+            //}
+            //else
             if (supportedTextures.count(extension) != 0) {
                 if (auto&& pTextureInspector = GetManager()->GetWidget<TextureInspector>()) {
                     pTextureInspector->Inspect(path);

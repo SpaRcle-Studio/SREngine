@@ -77,9 +77,10 @@ float textureProj(vec3 proj, float ndotl, vec2 offset, uint cascadeIndex) {
     float bias = cascadeBias[cascadeIndex] * (1.0 - ndotl);
     float depth = texture(shadowMap, vec3(uv, cascadeIndex)).r;
 
-    bias += 0.0005;
+    proj.z -= bias;
+    proj.z -= 0.0005;// * ndotl; // небольшое смещение по нормали
 
-    return step(proj.z - bias, depth);
+    return step(proj.z, depth);
 }
 
 float filterPCF(vec3 norm, vec4 shadowCoord, uint cascadeIndex) {
@@ -208,9 +209,19 @@ vec4 CalculateShadow(
 #endif
 
 #ifdef HAS_SSS
-    float backNDotL = max(dot(-N, L), 0.0); // свет с обратной стороны
-    float sssTerm = backNDotL * sssIntensity; // простая аппроксимация рассеивания
-    vec3 sss = sssTerm * sssColor * SUN_COLOR * SUN_INTENSITY;
+    //float backNDotL = max(dot(-N, L), 0.0); // свет с обратной стороны
+    //float sssTerm = backNDotL * sssIntensity; // простая аппроксимация рассеивания
+    //vec3 sss = sssTerm * sssColor * SUN_COLOR * SUN_INTENSITY;
+
+    //float NdotL = max(dot(N,L),0.0);
+    //float NdotV = max(dot(N,V),0.0);
+    //float sssFactor = pow(1.0 - NdotV, 2.0) * sssIntensity; // rim-like SSS
+    //vec3 sss = sssFactor * sssColor * SUN_COLOR * SUN_INTENSITY;
+
+    float wrap = 0.5;
+    float ndotlWrapped = (ndotl + wrap) / (1.0 + wrap);
+    vec3 diffuseWrapped = ndotlWrapped * SUN_COLOR * SUN_INTENSITY;
+    vec3 sss = diffuseWrapped * sssColor * sssIntensity;
 #else
     vec3 sss = vec3(0.0);
 #endif

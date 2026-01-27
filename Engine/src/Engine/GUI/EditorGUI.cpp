@@ -97,7 +97,6 @@ namespace SR_CORE_GUI_NS {
         AddWidget(new EngineSettings());
         AddWidget(new AnimatorEditor());
         AddWidget(new EngineStatistics());
-		//AddWidget(new PhysicsMaterialEditor());
 		AddWidget(new About());
 		AddWidget(new SoundDebug());
         AddWidget(new RenderTechniqueEditor());
@@ -888,11 +887,11 @@ namespace SR_CORE_GUI_NS {
 
             SR_GRAPH_GUI_NS::Immediate::Separator();
 
-            /// if (ImGui::MenuItem("Animator")) {
-            ///    OpenWidget<AnimatorEditor>();
-            /// }
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Animator")) {
+               OpenWidget<AnimatorEditor>();
+            }
 
-            /// ImGui::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
 
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem("World edit")) {
                OpenWidget<WorldEdit>();
