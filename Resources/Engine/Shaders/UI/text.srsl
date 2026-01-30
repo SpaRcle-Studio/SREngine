@@ -1,0 +1,34 @@
+ShaderType Canvas;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleStrip;
+BlendEnabled true;
+DepthWrite true;
+DepthTest true;
+
+[[shared]] vec2 UV;
+[[uniform]] vec4 NDC_RECT;
+
+void fragment() {
+    COLOR = texture(TEXT_ATLAS_TEXTURE, UV);
+
+    if (COLOR.a == 0) {
+        discard;
+    }
+}
+
+void vertex() {
+    #include <Engine/Shaders/UI/sprite-vertices.inl.srsl>
+
+    vec2 sprite_vertices[4] = {
+        NDC_RECT.xy + vec2(0.0, 0.0) * NDC_RECT.zw, // левый-нижний
+        NDC_RECT.xy + vec2(0.0, 1.0) * NDC_RECT.zw, // левый-верхний
+        NDC_RECT.xy + vec2(1.0, 0.0) * NDC_RECT.zw, // правый-нижний
+        NDC_RECT.xy + vec2(1.0, 1.0) * NDC_RECT.zw  // правый-верхний
+    };
+
+    OUT_POSITION = PIXEL_ORTHOGONAL_MATRIX * MODEL_MATRIX * vec4(sprite_vertices[VERTEX_INDEX], 0.0, 1.0);
+    UV = uv[VERTEX_INDEX];
+}

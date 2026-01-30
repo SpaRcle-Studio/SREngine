@@ -171,6 +171,24 @@ namespace SR_CORE_GUI_NS {
     }
 
     void SceneViewer::FixedUpdate() {
+        SR_TRACY_ZONE;
+
+        if (m_colorRequest && m_colorRequest->IsReady()) {
+            if (auto&& pMesh = m_colorRequest->GetMesh(true)) {
+                if (auto&& pRenderComponent = dynamic_cast<SR_GTYPES_NS::IRenderComponent*>(pMesh)) {
+                    SelectMesh(pRenderComponent);
+                }
+                else {
+                    m_hierarchy->ClearSelected();
+                }
+            }
+            else {
+                m_hierarchy->ClearSelected();
+            }
+
+            m_colorRequest = nullptr;
+        }
+
         const float_t velocityFactor = GetSceneTools()->GetCameraVelocityFactor();
         const bool isDisabled = !IsOpen() || (!IsHovered() && !m_updateNonHoveredSceneViewer);
 
@@ -323,14 +341,9 @@ namespace SR_CORE_GUI_NS {
 
         auto&& pRenderTechnique = pCamera->GetRenderTechnique();
 
-        if (pRenderTechnique && IsHovered() && (!pGizmo || (!pGizmo->IsGizmoActive() && !pGizmo->IsGizmoHovered()))) {
-            auto&& pMesh = pRenderTechnique->PickMeshAt(pCamera->GetMousePos());
-            if (auto&& pRenderComponent = dynamic_cast<SR_GTYPES_NS::IRenderComponent*>(pMesh)) {
-                SelectMesh(pRenderComponent);
-            }
-            else {
-                m_hierarchy->ClearSelected();
-            }
+        if (!m_colorRequest && pRenderTechnique && IsHovered() && (!pGizmo || (!pGizmo->IsGizmoActive() && !pGizmo->IsGizmoHovered()))) {
+            auto&& pColorBufferPass = pRenderTechnique->FindPassAs<SR_GRAPH_NS::ColorBufferPass>();
+            m_colorRequest = pColorBufferPass ? pColorBufferPass->CreateColorRequest(pCamera->GetMousePos()) : nullptr;
         }
 
         Super::OnMouseUp(data);

@@ -234,6 +234,68 @@ namespace SR_CORE_GUI_NS {
 
             SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
         }
+        else if (auto&& pValue = value.TryCast<std::optional<bool>>()) {
+            bool hasValue = pValue->has_value();
+            if (SR_GRAPH_GUI_NS::Immediate::Checkbox("##Checkbox", &hasValue)) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(false);
+                }
+                if (hasValue) {
+                    *pValue = false;
+                }
+                else {
+                    pValue->reset();
+                }
+                feedback.isChanged = true;
+            }
+
+            bool dataValue = pValue->value_or(false);
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard lock(!hasValue);
+            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth - checkBoxSize);
+
+            if (SR_GRAPH_GUI_NS::Immediate::Checkbox("Value", &dataValue)) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(false);
+                }
+                *pValue = dataValue;
+                feedback.isChanged = true;
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+        }
+        else if (auto&& pValue = value.TryCast<std::optional<SR_UTILS_NS::StringAtom>>()) {
+            bool hasValue = pValue->has_value();
+            if (SR_GRAPH_GUI_NS::Immediate::Checkbox("##Checkbox", &hasValue)) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(false);
+                }
+                if (hasValue) {
+                    *pValue = SR_UTILS_NS::StringAtom();
+                }
+                else {
+                    pValue->reset();
+                }
+                feedback.isChanged = true;
+            }
+
+            SR_UTILS_NS::StringAtom dataValue = pValue->value_or(SR_UTILS_NS::StringAtom());
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard lock(!hasValue);
+            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth - checkBoxSize);
+
+            char buffer[256] = { 0 };
+            std::strncpy(buffer, dataValue.c_str(), sizeof(buffer) - 1);
+            if (SR_GRAPH_GUI_NS::Immediate::InputText("##Value", buffer, sizeof(buffer))) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(false);
+                }
+                *pValue = SR_UTILS_NS::StringAtom(buffer);
+                feedback.isChanged = true;
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+        }
         else {
             SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unsupported optional type!");
         }

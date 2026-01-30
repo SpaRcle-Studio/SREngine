@@ -6,6 +6,7 @@
 #define SR_ENGINE_SCENE_VIEWER_H
 
 #include <Graphics/GUI/Widget.h>
+#include <Graphics/Pass/ColorBufferPass.h>
 
 #include <Utils/ECS/GameObject.h>
 #include <Utils/World/Scene.h>
@@ -82,6 +83,7 @@ namespace SR_CORE_GUI_NS {
         SR_MATH_NS::FVector3 m_cameraRotation;
         SR_MATH_NS::FVector3 m_cameraTranslation;
 
+        SR_GRAPH_NS::ColorBufferPassRequest::Ptr m_colorRequest;
         bool m_isPrefab = false;
         Hierarchy* m_hierarchy = nullptr;
         int32_t m_id = SR_ID_INVALID;
