@@ -39,6 +39,44 @@ def generate_class_meta_for_each_sr_class(f, class_structures, class_obj, tabs):
     f.write('\t' * tabs + '}\n\n')
 
 
+def generate_class_meta_methods(f, class_structures, class_obj, tabs):
+    if len(class_obj.methods) == 0:
+        return
+
+    f.write('\t' * tabs + f'mutable std::array<SpaRcle::Utils::Reflection::Method, {len(class_obj.methods)}> methods;\n')
+    f.write('\t' * tabs + f'mutable bool isMethodsInited = false;\n\n')
+
+    f.write('\t' * tabs + f'SR_NODISCARD virtual std::span<const SpaRcle::Utils::Reflection::Method> GetMethods() const noexcept final {{\n')
+    f.write('\t' * (tabs + 1) + f'if (isMethodsInited) {{\n')
+    f.write('\t' * (tabs + 2) + f'return methods;\n')
+    f.write('\t' * (tabs + 1) + f'}}\n\n')
+
+    f.write('\t' * (tabs + 1) + f'isMethodsInited = true;\n\n')
+    f.write('\t' * (tabs + 1) + f'methods = {{ \n')
+
+    for method in class_obj.methods:
+        is_method_has_return = method.return_type.get_full_type() != 'void'
+        is_method_has_params = len(method.parameters) > 0
+
+        f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Reflection::Method()')
+        f.write('\n' + '\t' * (tabs + 3) + f'.SetName("{method.name}")')
+        f.write('\n' + '\t' * (tabs + 3) + f'.SetHasReturn({"true" if is_method_has_return else "false"})')
+        f.write('\n' + '\t' * (tabs + 3) + f'.SetParamsCount({len(method.parameters)})')
+
+        if not is_method_has_return and not is_method_has_params:
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetNoReturnNoParams([](SpaRcle::Utils::SRClass& obj) {{ ')
+            f.write(f'static_cast<{class_obj.name}&>(obj).{method.name}(); ')
+            f.write('})')
+        else:
+            f.write('\n' + '\t' * (tabs + 3) + f'.TODO()')  # Further implementation needed for methods with return values or parameters
+
+        f.write(',\n')
+
+    f.write('\t' * (tabs + 1) + '};\n')
+    f.write('\t' * (tabs + 1) + 'return methods;\n')
+    f.write('\t' * tabs + '}\n\n')
+
+
 def generate_class_meta_properties(f, class_structures, class_obj, tabs):
     if len(class_obj.variables) == 0:
         return
@@ -512,6 +550,7 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
 
     generate_class_meta_get_base_metas(f, class_structures, class_obj, tabs)
     generate_class_meta_properties(f, class_structures, class_obj, tabs)
+    generate_class_meta_methods(f, class_structures, class_obj, tabs)
     generate_class_meta_for_each_sr_class(f, class_structures, class_obj, tabs)
 
     #has_serializable_fields = len(class_obj.variables) > 0
@@ -1174,6 +1213,7 @@ def generate_classes_code(logger: logger_utils.Logger, context: codegen_context.
                     f.write('#include <Utils/Common/Breakpoint.h>\n')
                     f.write('#include <Utils/Serialization/SerializableDataAccessor.h>\n')
                     f.write('#include <Utils/Reflection/Property.h>\n')
+                    f.write('#include <Utils/Reflection/Method.h>\n')
                     f.write('#include <Utils/Reflection/Value.h>\n')
                     f.write('#include <Utils/Reflection/SRClassUtils.h>\n')
                     f.write('#include <Utils/TypeTraits/SRClass.h>\n')

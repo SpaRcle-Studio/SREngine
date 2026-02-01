@@ -14,6 +14,7 @@
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Platform/Platform.h>
 #include <Utils/TaskManager/TaskManager.h>
+#include <Utils/ECS/TransformRect.h>
 #include <Utils/Common/StoreUtils.h>
 #include <Utils/Common/StringUtils.h>
 #include <Utils/World/ScenePrefabLogic.h>
@@ -366,6 +367,10 @@ namespace SR_CORE_GUI_NS {
                     SR_GRAPH_GUI_NS::Immediate::Separator();
                     if (SR_GRAPH_GUI_NS::Immediate::Selectable("Add child game object")) {
                         auto&& pNewSO = pSceneObject->GetScene()->InstanceGameObject("New GameObject"_atom).StaticCast<SR_UTILS_NS::SceneObject>();
+                        if (pSceneObject->StaticCast<SR_UTILS_NS::GameObject>()->GetTransform()->GetMeasurement() == SR_UTILS_NS::Measurement::Space2D) {
+                            pNewSO->StaticCast<SR_UTILS_NS::GameObject>()->SetTransform(SRNew<SR_UTILS_NS::TransformRect>());
+                        }
+
                         pSceneObject->AddChild(pNewSO);
                         auto&& pCmd = new SR_CORE_NS::Commands::SceneObjectInstance(m_engine, pNewSO);
                         m_engine->GetCmdManager()->Store(pCmd);

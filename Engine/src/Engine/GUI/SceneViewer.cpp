@@ -29,6 +29,7 @@
 #include <Utils/TypeTraits/Factory.h>
 #include <Utils/Game/CameraFlyMover.h>
 #include <Utils/Input/InputSystem.h>
+#include <Utils/Common/StoreUtils.h>
 #include <Utils/Common/Features.h>
 #include <Utils/Common/StringAtomLiterals.h>
 #include <Utils/ECS/Transform3D.h>
@@ -59,7 +60,7 @@ namespace SR_CORE_GUI_NS {
         /// что-то пошло не так, потеряли камеру
         if (m_enabled && !m_camera) {
             SetCameraEnabled(true);
-            SetGizmoEnabled(true);
+            SetGizmoEnabled(m_isGizmoEnabled);
         }
 
         if (m_enabled && (!m_platform || !m_directionalLight) && m_isPrefab) {
@@ -166,12 +167,15 @@ namespace SR_CORE_GUI_NS {
 
         if (!m_camera.Valid()) {
             SetCameraEnabled(true);
-            SetGizmoEnabled(true);
+            SetGizmoEnabled(m_isGizmoEnabled);
         }
     }
 
     void SceneViewer::FixedUpdate() {
         SR_TRACY_ZONE;
+
+        const SR_UTILS_NS::StringAtom gizmoId = "SCENE_GIZMO_ENABLED";
+        m_isGizmoEnabled = SR_UTILS_NS::StoreUtils::Temp::GetBool(gizmoId, true);
 
         if (m_colorRequest && m_colorRequest->IsReady()) {
             if (auto&& pMesh = m_colorRequest->GetMesh(true)) {
@@ -193,16 +197,20 @@ namespace SR_CORE_GUI_NS {
         const bool isDisabled = !IsOpen() || (!IsHovered() && !m_updateNonHoveredSceneViewer);
 
         auto&& pFocusedWindow = m_engine->GetFocusedWindow();
+        const auto viewportRect = SR_MATH_NS::FRect(
+            pFocusedWindow ? pFocusedWindow->GetPosition().CastToFloat() + GetImagePosition() : SR_MATH_NS::FVector2(),
+            m_textureSize
+        );
+
+        if (auto&& pCamera = m_camera ? m_camera->GetComponent<EditorCamera>() : nullptr) {
+            pCamera->SetViewportRect(viewportRect);
+        }
 
         const bool isNeedLock = SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseRight) ||
             SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseMiddle);
 
         if (isNeedLock && !isDisabled) {
-            const auto rect = SR_MATH_NS::FRect(
-                pFocusedWindow ? pFocusedWindow->GetPosition().CastToFloat() + GetImagePosition() : SR_MATH_NS::FVector2(),
-                m_textureSize
-            );
-            m_cursorLock = SR_UTILS_NS::CursorLock(SR_UTILS_NS::CursorLockMode::Editor, rect);
+            m_cursorLock = SR_UTILS_NS::CursorLock(SR_UTILS_NS::CursorLockMode::Editor, viewportRect);
         }
         else {
             m_cursorLock.reset();
@@ -222,7 +230,10 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        if (m_camera && !m_gizmo) {
+        if (!m_isGizmoEnabled) {
+            SetGizmoEnabled(false);
+        }
+        else if (m_camera && !m_gizmo) {
             SetGizmoEnabled(true); /// если пропал, вернем
         }
     }
@@ -323,7 +334,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         auto&& pGizmo = m_gizmo ? m_gizmo->GetComponent<EditorGizmo>() : nullptr;
-        if (pGizmo && !pGizmo->IsGizmoEnabled()) {
+        if (!pGizmo || !pGizmo->IsGizmoEnabled()) {
             Super::OnMouseUp(data);
             return;
         }

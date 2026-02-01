@@ -9,7 +9,6 @@
 
 namespace SR_CORE_NS {
     struct ScriptableContext {
-        /// @method
         SR_CORE_NS::Engine& GetEngine() {
             return *pEngine;
         }

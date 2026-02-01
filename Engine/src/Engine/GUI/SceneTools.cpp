@@ -14,6 +14,8 @@
 #include <Physics/PhysicsLib.h>
 #include <Physics/LibraryImpl.h>
 
+#include <Utils/Common/StoreUtils.h>
+
 #include <Enum/GizmoOperation.hpp>
 
 namespace SR_CORE_GUI_NS {
@@ -150,6 +152,21 @@ namespace SR_CORE_GUI_NS {
                     SR_GRAPH_GUI_NS::Immediate::Separator();
 
                     optionFn("SR_DEFINE_WIREFRAME", "Wireframe");
+
+                    SR_GRAPH_GUI_NS::Immediate::Separator();
+
+                    const SR_UTILS_NS::StringAtom gizmoId = "SCENE_GIZMO_ENABLED";
+                    const bool isGizmoEnabled = SR_UTILS_NS::StoreUtils::Temp::GetBool(gizmoId, true);
+                    if (isGizmoEnabled) {
+                        SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor::Green());
+                    }
+                    if (SR_GRAPH_GUI_NS::Immediate::Selectable("Gizmo")) {
+                        SR_UTILS_NS::StoreUtils::Temp::SetBool(gizmoId, !isGizmoEnabled);
+                    }
+                    if (isGizmoEnabled) {
+                        SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
+                    }
+
 
                     SR_GRAPH_GUI_NS::Immediate::EndCombo();
                 }

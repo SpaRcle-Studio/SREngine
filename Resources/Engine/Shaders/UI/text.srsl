@@ -22,11 +22,13 @@ void fragment() {
 void vertex() {
     #include <Engine/Shaders/UI/sprite-vertices.inl.srsl>
 
+    vec2 size = TEXT_ATLAS_SIZE;
+
     vec2 sprite_vertices[4] = {
-        NDC_RECT.xy + vec2(0.0, 0.0) * NDC_RECT.zw, // левый-нижний
-        NDC_RECT.xy + vec2(0.0, 1.0) * NDC_RECT.zw, // левый-верхний
-        NDC_RECT.xy + vec2(1.0, 0.0) * NDC_RECT.zw, // правый-нижний
-        NDC_RECT.xy + vec2(1.0, 1.0) * NDC_RECT.zw  // правый-верхний
+        NDC_RECT.xy + vec2(0.0, 0.0) * size, // левый-нижний
+        NDC_RECT.xy + vec2(0.0, 1.0) * size, // левый-верхний
+        NDC_RECT.xy + vec2(1.0, 0.0) * size, // правый-нижний
+        NDC_RECT.xy + vec2(1.0, 1.0) * size  // правый-верхний
     };
 
     OUT_POSITION = PIXEL_ORTHOGONAL_MATRIX * MODEL_MATRIX * vec4(sprite_vertices[VERTEX_INDEX], 0.0, 1.0);

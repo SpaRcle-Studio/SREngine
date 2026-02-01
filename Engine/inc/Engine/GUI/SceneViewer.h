@@ -85,6 +85,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_NS::ColorBufferPassRequest::Ptr m_colorRequest;
         bool m_isPrefab = false;
+        bool m_isGizmoEnabled = true;
         Hierarchy* m_hierarchy = nullptr;
         int32_t m_id = SR_ID_INVALID;
         GameObjectPtr m_camera;

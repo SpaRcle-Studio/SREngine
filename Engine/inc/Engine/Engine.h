@@ -105,7 +105,6 @@ namespace SR_CORE_NS {
         SR_NODISCARD EngineScene* GetEngineScene() const { return m_engineScene; }
         SR_NODISCARD bool IsApplicationFocused() const;
 
-        /// @method
         SR_NODISCARD SR_UTILS_NS::Debug& GetDebugger() const;
 
     public:

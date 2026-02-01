@@ -140,7 +140,7 @@ namespace SR_CORE_NS {
         SR_LOG("Engine::CreateMainWindow() : initializing window callbacks...");
 
         pWindow->SetFocusCallback([](bool focus) {
-            SR_SYSTEM_LOG("Window focus state: {}", focus ? "True" : "False");
+            //SR_SYSTEM_LOG("Window focus state: {}", focus ? "True" : "False");
             SR_UTILS_NS::Input::Instance().Reload();
         });
 

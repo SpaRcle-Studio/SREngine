@@ -55,50 +55,16 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::FrameRounding, 0.0f);
 
         if (SR_GRAPH_GUI_NS::Immediate::BeginTabBar("Inspector#TabBar")) {
-            std::string gameObjectPage = "No object selected";
+            static SR_UTILS_NS::StringAtom noObjectSelectedId = "No object selected";
+            SR_UTILS_NS::StringAtom gameObjectPage = noObjectSelectedId;
 
             if (m_sceneObject) {
                 gameObjectPage = m_sceneObject->GetMeta()->GetFactoryName();
             }
 
-            SR_MATH_NS::FColor color = SR_MATH_NS::FColor(1, 1, 1, 1);
-
-            if (m_sceneObject) {
-                if (m_sceneObject->IsPrefab()) {
-                    color = SR_MATH_NS::FColor(0, 1, 1, 1);
-                    gameObjectPage += " (Changes won't be saved)";
-                }
-
-                if (m_sceneObject->IsDirty()) {
-                    color = SR_MATH_NS::FColor(1, 1, 0, 1);
-                    gameObjectPage += " (Is dirty)";
-                }
-
-                if (m_sceneObject->HasSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave)) {
-                    color = SR_MATH_NS::FColor(1, 1, 0, 1);
-                    gameObjectPage += " (Dont Save)";
-                }
-
-                //if (auto&& pGameObject = m_sceneObject.DynamicCast<SR_UTILS_NS::GameObject>()) {
-                //    if (auto&& pTransform = pGameObject->GetTransform()) {
-                //        if (pTransform->IsDirtyRotation()) {
-                //            gameObjectPage += " (DR)";
-                //        }
-                //        if (pTransform->IsDirty()) {
-                //            gameObjectPage += " (DM)";
-                //        }
-                //    }
-                //}
-            }
-
-            SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, color);
             if (SR_GRAPH_GUI_NS::Immediate::BeginTabItem(gameObjectPage.data())) {
-                SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
                 InspectGameObject();
                 SR_GRAPH_GUI_NS::Immediate::EndTabItem();
-            }
-            else {
-                SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
             }
 
             if (SR_GRAPH_GUI_NS::Immediate::BeginTabItem("Scene")) {
@@ -117,6 +83,32 @@ namespace SR_CORE_GUI_NS {
         }
 
         SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+    }
+
+    void WarningBox(const char* text)
+    {
+        SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::ChildBg, SR_MATH_NS::FColor(40, 40, 40, 255) / 255.0f);
+        SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Border, SR_MATH_NS::FColor(255, 180, 0, 255) / 255.0f);
+        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ChildBorderSize, 1.0f);
+        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::WindowPadding, SR_MATH_NS::FVector2(8, 6));
+
+        SR_GRAPH_GUI_NS::Immediate::BeginChild(
+            "##warning",
+            SR_MATH_NS::FVector2(0, 40),
+            true,
+            SR_GRAPH_GUI_NS::WindowFlags::AlwaysAutoResize
+        );
+
+        SR_GRAPH_GUI_NS::Immediate::TextColored(
+            SR_MATH_NS::FColor(255, 200, 0, 255) / 255.0f,
+            "⚠ %s",
+            text
+        );
+
+        SR_GRAPH_GUI_NS::Immediate::EndChild();
+
+        SR_GRAPH_GUI_NS::Immediate::PopStyleVar(2);
+        SR_GRAPH_GUI_NS::Immediate::PopStyleColor(2);
     }
 
     void Inspector::InspectGameObject() {
@@ -143,6 +135,18 @@ namespace SR_CORE_GUI_NS {
 
         if (SR_UTILS_NS::StoreUtils::User::GetBool("ShowEntityId", false)) {
             SR_GRAPH_GUI_NS::Immediate::Text("Entity id: %llu", m_sceneObject->GetEntityId());
+        }
+
+        if (m_sceneObject->IsPrefab()) {
+            WarningBox("Changes won't be saved");
+        }
+
+        if (m_sceneObject->IsDirty()) {
+            WarningBox("Object is dirty");
+        }
+
+        if (m_sceneObject->HasSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave)) {
+            WarningBox("Saving is disabled for this object");
         }
 
         /// --------------------------------------------------------------------------------------------------------
