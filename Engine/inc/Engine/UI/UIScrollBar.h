@@ -2,8 +2,8 @@
 // Created by Monika on 01.02.2026.
 //
 
-#ifndef SR_ENGINE_UI_SCROLLBAR_H
-#define SR_ENGINE_UI_SCROLLBAR_H
+#ifndef SR_ENGINE_UI_SCROLL_BAR_H
+#define SR_ENGINE_UI_SCROLL_BAR_H
 
 #include <Engine/stdInclude.h>
 
@@ -13,15 +13,15 @@
 #include <Utils/ECS/TransformRect.h>
 
 namespace SR_CORE_UI_NS {
-    SR_ENUM_NS_CLASS_T(ScrollbarDirection, uint8_t,
+    SR_ENUM_NS_CLASS_T(ScrollBarDirection, uint8_t,
         LeftToRight,
         RightToLeft,
         BottomToTop,
         TopToBottom
     );
 
-    /// @category(UI)
-    class UIScrollbar : public SR_UTILS_NS::Component, public SR_GRAPH_NS::UI::IFindCanvasOwner {
+    /// @category(UI) @displayName(Scroll Bar)
+    class UIScrollBar : public SR_UTILS_NS::Component, public SR_GRAPH_NS::UI::IFindCanvasOwner {
         SR_CLASS()
         using Super = SR_UTILS_NS::Component;
         enum class State : uint8_t {
@@ -60,7 +60,7 @@ namespace SR_CORE_UI_NS {
 
     private:
         /// @property
-        ScrollbarDirection m_direction = ScrollbarDirection::LeftToRight;
+        ScrollBarDirection m_direction = ScrollBarDirection::LeftToRight;
         /// @property
         SR_UTILS_NS::EntityRef<SR_UTILS_NS::SceneObject> m_handle;
 
@@ -81,5 +81,5 @@ namespace SR_CORE_UI_NS {
     };
 }
 
-#endif //SR_ENGINE_UI_SCROLLBAR_H
+#endif //SR_ENGINE_UI_SCROLL_BAR_H
 

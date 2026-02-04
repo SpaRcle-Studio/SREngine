@@ -4,6 +4,8 @@
 
 #include <Engine/UI/UIButton.h>
 
+#include <Graphics/Window/Window.h>
+
 #include <Utils/Input/InputSystem.h>
 #include <Utils/ECS/TransformRect.h>
 
@@ -19,36 +21,34 @@ namespace SR_CORE_UI_NS {
 
         auto&& input = SR_UTILS_NS::Input::Instance();
 
-        const SR_MATH_NS::FVector2 mousePos = input.GetMousePos();
-        const SR_MATH_NS::FRect viewportRect = pCanvas->GetViewportRect();
-
-        SR_MATH_NS::FVector2 uiMousePos = (mousePos - viewportRect.XY()) / viewportRect.Size() * pCanvas->GetSize().CastToFloat();
-        uiMousePos.y = pCanvas->GetSize().CastToFloat().y - uiMousePos.y;
+        const SR_MATH_NS::FVector2 uiMousePos = pCanvas->ScreenToCanvasSpace(input.GetMousePos());
 
         if (pTransformRect->GetLayoutRect().Contains(uiMousePos)) {
             const bool isDown = m_leftClick && input.GetMouseDown(SR_UTILS_NS::MouseCode::MouseLeft)
-                || m_rightClick && input.GetMouseDown(SR_UTILS_NS::MouseCode::MouseRight)
-                || m_middleClick && input.GetMouseDown(SR_UTILS_NS::MouseCode::MouseMiddle);
+                                || m_rightClick && input.GetMouseDown(SR_UTILS_NS::MouseCode::MouseRight)
+                                || m_middleClick && input.GetMouseDown(SR_UTILS_NS::MouseCode::MouseMiddle);
 
-            const bool isUp = m_leftClick && input.GetMouseUp(SR_UTILS_NS::MouseCode::MouseLeft)
-                || m_rightClick && input.GetMouseUp(SR_UTILS_NS::MouseCode::MouseRight)
-                || m_middleClick && input.GetMouseUp(SR_UTILS_NS::MouseCode::MouseMiddle);
-
-            if (isDown) {
-                if (m_state != State::Pressed) {
-                    for (auto&& event : m_onClickEvents) {
-                        if (auto&& pObject = event.object.Get()) {
-                            SR_UTILS_NS::Reflection::InvokeMethodVoid(*pObject, event.method);
-                        }
+            if (isDown && m_state != State::Pressed) {
+                for (auto&& event : m_onClickEvents) {
+                    if (auto&& pObject = event.object.Get()) {
+                        SR_UTILS_NS::Reflection::InvokeMethodVoid(*pObject, event.method);
                     }
                 }
                 m_state = State::Pressed;
             }
-            if (m_state == State::Pressed && isUp) {
-
+            else if (m_state == State::Idle || m_state == State::Hovered) {
+                m_state = State::Hovered;
+            }
+            else if (m_state == State::Pressed) {
+                const bool isUp = m_leftClick && input.GetMouseUp(SR_UTILS_NS::MouseCode::MouseLeft)
+                                  || m_rightClick && input.GetMouseUp(SR_UTILS_NS::MouseCode::MouseRight)
+                                  || m_middleClick && input.GetMouseUp(SR_UTILS_NS::MouseCode::MouseMiddle);
+                if (isUp) {
+                    m_state = State::Hovered;
+                }
             }
             else {
-                m_state = State::Hovered;
+                m_state = State::Idle;
             }
         }
         else {

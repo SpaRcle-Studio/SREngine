@@ -197,13 +197,11 @@ namespace SR_CORE_GUI_NS {
         const bool isDisabled = !IsOpen() || (!IsHovered() && !m_updateNonHoveredSceneViewer);
 
         auto&& pFocusedWindow = m_engine->GetFocusedWindow();
-        const auto viewportRect = SR_MATH_NS::FRect(
-            pFocusedWindow ? pFocusedWindow->GetPosition().CastToFloat() + GetImagePosition() : SR_MATH_NS::FVector2(),
-            m_textureSize
-        );
+        const SR_MATH_NS::FVector2 windowPos = pFocusedWindow ? pFocusedWindow->GetPosition().CastToFloat() : SR_MATH_NS::FVector2();
+        const auto viewportRect = SR_MATH_NS::FRect(GetImagePosition(), m_textureSize);
 
         if (auto&& pCamera = m_camera ? m_camera->GetComponent<EditorCamera>() : nullptr) {
-            pCamera->SetViewportRect(viewportRect);
+            pCamera->SetViewportRect(viewportRect - SR_MATH_NS::FRect(windowPos, SR_MATH_NS::FVector2::Zero()));
         }
 
         const bool isNeedLock = SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseRight) ||
