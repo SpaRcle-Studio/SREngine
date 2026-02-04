@@ -89,7 +89,7 @@ enum ERROR_CODES {
     }
 
     bool UnloadDynamicModule(void* pModule) {
-        return dlclose(pModule) != 0;
+        return dlclose(pModule) == 0;
     }
     auto FindEngineEntryPoint(void* pModule) {
         return (int(*)(int, char**))dlsym(pModule, ENTRY_POINT_MODULE_NAME);

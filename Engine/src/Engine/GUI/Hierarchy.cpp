@@ -53,6 +53,10 @@ namespace SR_CORE_GUI_NS {
     void Hierarchy::Draw() {
         SR_TRACY_ZONE;
 
+        if (!m_engine) {
+            return;
+        }
+
         m_shiftPressed = SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::LShift);
 
         bool isPrefabLogic = false;
