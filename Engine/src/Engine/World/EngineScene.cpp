@@ -39,9 +39,7 @@ namespace SR_CORE_NS {
             delete pData;
         });
 
-        pScene.AutoFree([](SR_WORLD_NS::Scene* pData) {
-            delete pData;
-        });
+        pScene.AutoFree();
     }
 
     bool EngineScene::Init() {

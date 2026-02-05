@@ -34,11 +34,7 @@ namespace SR_CORE_NS {
         , m_application(pApplication)
     { }
 
-    Engine::~Engine() {
-        m_renderContext.AutoFree([](auto&& pContext) {
-            delete pContext;
-        });
-    }
+    Engine::~Engine() = default;
 
     bool Engine::Create() {
         SR_INFO("Engine::Create() : registering all resources...");
@@ -247,11 +243,13 @@ namespace SR_CORE_NS {
 
         SR_SAFE_DELETE_PTR(m_cmdManager);
 
+        m_renderContext.AutoFree([](auto&& pContext) { delete pContext; });
+
         for (auto&& pWindow : m_windows) {
-            pWindow.AutoFree([](auto&& pWindow) {
+            if (pWindow) {
                 pWindow->Close();
-                delete pWindow;
-            });
+            }
+            pWindow.AutoFree();
         }
 
         //SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(true);

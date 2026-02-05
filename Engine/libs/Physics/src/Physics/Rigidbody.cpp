@@ -43,9 +43,7 @@ namespace SR_PTYPES_NS {
             physicsScene->Remove(this);
         }
         else {
-           GetThis().AutoFree([](auto&& pData) {
-               delete pData;
-           });
+           GetThis().AutoFree();
         }
     }
 

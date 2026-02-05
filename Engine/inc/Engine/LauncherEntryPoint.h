@@ -49,9 +49,7 @@ static int LauncherEntryPoint(const LauncherEntryPointAfterInitCallback& afterIn
         code = 5;
     }
 
-    pLauncher.AutoFree([](auto&& pData) {
-        delete pData;
-    });
+    pLauncher.AutoFree();
 
     return code;
 }

@@ -298,9 +298,7 @@ namespace SR_CORE_NS {
             m_engine->Close();
         }
 
-        m_engine.AutoFree([](auto&& pEngine) {
-            delete pEngine;
-        });
+        m_engine.AutoFree();
 
         SR_SCRIPTING_NS::ScriptSystem::DestroySingleton();
 

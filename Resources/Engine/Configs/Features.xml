@@ -36,9 +36,9 @@
 
         <!-- Editor -->
         <Gizmo Value="true"/>
-        <ImGUI Value="true"/>
-        <Editor Value="true"/>
-        <EditorOnStartup Value="true"/>
+        <ImGUI Value="false"/>
+        <Editor Value="false"/>
+        <EditorOnStartup Value="false"/>
         <EditorCamera Value="true"/>
         <EditorWidgetsDocking Value="true"/>
         <InputIgnoreNonFocusedWidgets Value="true"/>
