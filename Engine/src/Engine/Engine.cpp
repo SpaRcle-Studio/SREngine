@@ -399,9 +399,14 @@ namespace SR_CORE_NS {
                     return;
                 }
             }
+            SR_ERROR("Engine::RunSceneGameMode() : failed to run scene: \n\t{}", scene->GetPath());
         }
-
-        SR_ERROR("Engine::RunSceneGameMode() : failed to run scene: \n\t{}", scene->GetPath());
+        else {
+            SR_CORE_GUI_NS::SceneRunner::PlayScene(scene, this);
+            SetGameMode(true);
+            SetActive(true);
+            SR_LOG("Engine::RunSceneGameMode() : running scene from command line option: \n\t{}", scene->GetPath());
+        }
     }
 
     void Engine::SetGameMode(bool enabled) {

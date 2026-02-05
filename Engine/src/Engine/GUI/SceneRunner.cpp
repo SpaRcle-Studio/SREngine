@@ -142,6 +142,43 @@ namespace SR_CORE_NS::GUI {
         SetSize(SR_MATH_NS::IVector2(0, widgetSize));
     }
 
+    bool SceneRunner::PlayScene(SR_WORLD_NS::Scene::Ptr pScene, Engine* pEngine) {
+        if (!pScene->SaveScene()) {
+            SR_ERROR("SceneRunner::PlayScene() : failed to save scene!");
+            return false;
+        }
+
+        const std::string extension = pScene->GetPath().GetExtension();
+
+        auto&& runtimePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(SR_UTILS_NS::Path(SR_WORLD_NS::Scene::RuntimeScenePath).ConcatExt(extension));
+
+        if (runtimePath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
+            if (!SR_PLATFORM_NS::Delete(runtimePath)) {
+                SR_ERROR("SceneRunner::PlayScene() : failed to delete cached scene!");
+                return false;
+            }
+        }
+
+        SR_LOG("SceneRunner::PlayScene() : copying scene: \n\tFrom: " + pScene->GetAbsPath().ToString() + "\n\tTo: " + runtimePath.ToString());
+
+        if (!runtimePath.Create()) {
+            SR_ERROR("SceneRunner::PlayScene() : failed to create runtime scene folder!");
+            return false;
+        }
+
+        if (!pScene->GetAbsPath().Copy(runtimePath)) {
+            SR_ERROR("SceneRunner::PlayScene() : failed to copy scene!\n\tSource: "
+                + pScene->GetPath().ToString() + "\n\tDestination: " + runtimePath.ToString());
+            return false;
+        }
+
+        if (auto&& runtimeScene = SR_WORLD_NS::Scene::LoadScene(SR_UTILS_NS::Path(SR_WORLD_NS::Scene::RuntimeScenePath).ConcatExt(extension))) {
+            pEngine->AddSceneToQueue(runtimeScene);
+            return true;
+        }
+        return false;
+    }
+
     bool SceneRunner::PlayScene() {
         SR_TRACY_ZONE;
         SR_LOCK_GUARD;
@@ -159,16 +196,6 @@ namespace SR_CORE_NS::GUI {
 
         SR_LOG("SceneRunner::PlayScene() : playing scene \"" + m_lastPath.ToString() + "\"");
 
-        if (!m_scene->SaveScene()) {
-            SR_ERROR("SceneRunner::PlayScene() : failed to save scene!");
-            return false;
-        }
-
-        m_scenePath = m_lastPath;
-
-        const std::string extension = m_scene->GetPath().GetExtension();
-
-        auto&& runtimePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(SR_UTILS_NS::Path(SR_WORLD_NS::Scene::RuntimeScenePath).ConcatExt(extension));
         auto&& pEditor = dynamic_cast<EditorGUI*>(GetManager());
         if (!pEditor) {
             SRHalt("SceneRunner::PlayScene() : failed to get editor!");
@@ -176,28 +203,8 @@ namespace SR_CORE_NS::GUI {
         }
         auto pEngine = pEditor->GetEngine();
 
-        if (runtimePath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
-            if (!SR_PLATFORM_NS::Delete(runtimePath)) {
-                SR_ERROR("SceneRunner::PlayScene() : failed to delete cached scene!");
-                return false;
-            }
-        }
-
-        SR_LOG("SceneRunner::PlayScene() : copying scene: \n\tFrom: " + m_scene->GetAbsPath().ToString() + "\n\tTo: " + runtimePath.ToString());
-
-        if (!runtimePath.Create()) {
-            SR_ERROR("SceneRunner::PlayScene() : failed to create runtime scene folder!");
-            return false;
-        }
-
-        if (!m_scene->GetAbsPath().Copy(runtimePath)) {
-            SR_ERROR("SceneRunner::PlayScene() : failed to copy scene!\n\tSource: "
-                + m_scene->GetPath().ToString() + "\n\tDestination: " + runtimePath.ToString());
-            return false;
-        }
-
-        if (auto&& runtimeScene = SR_WORLD_NS::Scene::LoadScene(SR_UTILS_NS::Path(SR_WORLD_NS::Scene::RuntimeScenePath).ConcatExt(extension))) {
-            pEngine->AddSceneToQueue(runtimeScene);
+        if (PlayScene(m_scene, pEngine.Get())) {
+            m_scenePath = m_lastPath;
             return true;
         }
         return false;

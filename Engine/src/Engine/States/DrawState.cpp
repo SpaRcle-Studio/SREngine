@@ -5,6 +5,7 @@
 #include <Engine/States/DrawState.h>
 
 #include <Graphics/Window/Window.h>
+#include <Graphics/Pipeline/Pipeline.h>
 
 #include <Engine/Engine.h>
 #include <Engine/World/EngineScene.h>
@@ -14,10 +15,10 @@
 namespace SR_CORE_NS {
     SR_UTILS_NS::ThreadWorkerResult DrawState::ExecuteImpl() {
         auto&& pEngine = GetContext().GetPointer<Engine>();
-        auto&& pEngineScene = pEngine->GetEngineScene();
+        auto&& pRenderContext = pEngine->GetRenderContext();
 
-        if (!pEngineScene) {
-            return SR_UTILS_NS::ThreadWorkerResult::Break;
+        if (pRenderContext) {
+            pRenderContext->PrepareFrame();
         }
 
         auto&& pWindow = pEngine->GetMainWindow();
@@ -25,25 +26,27 @@ namespace SR_CORE_NS {
             return SR_UTILS_NS::ThreadWorkerResult::Break;
         }
 
-        auto&& pRenderScene = pEngine->GetRenderScene();
-        if (!pRenderScene) {
-            return SR_UTILS_NS::ThreadWorkerResult::Break;
-        }
+        if (auto&& pRenderScene = pEngine->GetRenderScene()) {
+            if (auto&& pWin = pWindow->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()) {
+                const bool isOverlay = pRenderScene->IsOverlayEnabled();
+                const bool isMaximized = pWin->IsMaximized();
+                const bool isHeaderEnabled = pWin->IsHeaderEnabled();
 
-        if (auto&& pWin = pWindow->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()) {
-            const bool isOverlay = pRenderScene->IsOverlayEnabled();
-            const bool isMaximized = pWin->IsMaximized();
-            const bool isHeaderEnabled = pWin->IsHeaderEnabled();
-
-            if (isHeaderEnabled != !isOverlay) {
-                pWin->SetHeaderEnabled(!isOverlay);
-                if (isMaximized) {
-                    pWin->Maximize();
+                if (isHeaderEnabled != !isOverlay) {
+                    pWin->SetHeaderEnabled(!isOverlay);
+                    if (isMaximized) {
+                        pWin->Maximize();
+                    }
                 }
             }
-        }
 
-        pRenderScene->Render();
+            pRenderScene->Render();
+        }
+        else if (auto&& pPipeline = pRenderContext->GetPipeline()) {
+            pPipeline->OnFrameBuildBegin();
+            SR_GRAPH_NS::RenderScene::RenderBlackScreen(pPipeline.Get(), false);
+            pPipeline->OnFrameBuildEnd();
+        }
 
         return SR_UTILS_NS::ThreadWorkerResult::Success;
     }

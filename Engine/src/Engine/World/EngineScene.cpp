@@ -63,10 +63,14 @@ namespace SR_CORE_NS {
             if (pRenderScene) {
                 pRenderScene->SetTechnique(pContext->GetSettings().overlayRenderTechnique);
 
-                pRenderScene->Register(pEngine->GetEditor());
+                if (pEngine->GetEditor()) {
+                    pRenderScene->Register(pEngine->GetEditor());
+                }
                 pRenderScene->Register(&Graphics::GUI::GlobalWidgetManager::Instance());
 
-                pRenderScene->SetOverlayEnabled(pEngine->GetEditor()->Enabled());
+                if (pEngine->GetEditor()) {
+                    pRenderScene->SetOverlayEnabled(pEngine->GetEditor()->Enabled());
+                }
             }
         }
 

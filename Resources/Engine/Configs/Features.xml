@@ -18,6 +18,7 @@
         <VulkanGPUAssist Value="false"/>
 
         <!-- Render -->
+        <HeadlessPipeline Value="false"/>
         <ColorBufferPick Value="true"/>
         <RayTracing Value="false"/>
         <Renderer Value="true"/>

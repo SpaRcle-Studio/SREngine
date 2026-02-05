@@ -29,20 +29,17 @@ namespace SR_CORE_NS {
             return SR_UTILS_NS::ThreadWorkerResult::Break;
         }
 
-        auto&& pRenderScene = pEngine->GetRenderScene();
-        if (!pRenderScene) {
-            return SR_UTILS_NS::ThreadWorkerResult::Break;
+        if (auto&& pRenderScene = pEngine->GetRenderScene()) {
+            const auto dt = GetContext().GetValue<float_t>("DeltaTime");
+
+            const uint8_t frameIndex = pRenderScene->GetPipeline()->GetCurrentImageIndex();
+            auto&& buildState = pRenderScene->GetPipeline()->GetBuildState(frameIndex);
+
+            SR_TRACY_PLOT("Draw calls", static_cast<int64_t>(buildState.drawCalls));
+            SR_TRACY_PLOT("Vertices", static_cast<int64_t>(buildState.vertices));
+            SR_TRACY_PLOT("VMem Transfer", static_cast<int64_t>(buildState.transferredMemory));
+            SR_TRACY_PLOT("FPS", static_cast<int64_t>(1.0f / dt));
         }
-
-        const auto dt = GetContext().GetValue<float_t>("DeltaTime");
-
-        const uint8_t frameIndex = pRenderScene->GetPipeline()->GetCurrentImageIndex();
-        auto&& buildState = pRenderScene->GetPipeline()->GetBuildState(frameIndex);
-
-        SR_TRACY_PLOT("Draw calls", static_cast<int64_t>(buildState.drawCalls));
-        SR_TRACY_PLOT("Vertices", static_cast<int64_t>(buildState.vertices));
-        SR_TRACY_PLOT("VMem Transfer", static_cast<int64_t>(buildState.transferredMemory));
-        SR_TRACY_PLOT("FPS", static_cast<int64_t>(1.0f / dt));
 
         return SR_UTILS_NS::ThreadWorkerResult::Success;
     }

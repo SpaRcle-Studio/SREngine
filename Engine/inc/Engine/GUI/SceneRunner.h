@@ -11,6 +11,10 @@
 #include <Utils/World/Scene.h>
 #include <Utils/Input/InputEvents.h>
 
+namespace SR_CORE_NS {
+    class Engine;
+}
+
 namespace SR_CORE_GUI_NS {
     class EditorGUI;
 
@@ -22,6 +26,7 @@ namespace SR_CORE_GUI_NS {
     public:
         void SetScene(const SR_WORLD_NS::Scene::Ptr &scene);
 
+        static bool PlayScene(SR_WORLD_NS::Scene::Ptr pScene, Engine* pEngine);
         bool PlayScene();
         void ReturnScene();
 
