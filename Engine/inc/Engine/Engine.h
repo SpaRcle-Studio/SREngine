@@ -113,6 +113,7 @@ namespace SR_CORE_NS {
         bool Run();
         bool Close();
         void DestroyEditor();
+        void StopEngine();
 
     private:
         static WindowPtr CreateMainWindow();

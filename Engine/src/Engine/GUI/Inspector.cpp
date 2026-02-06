@@ -26,6 +26,7 @@
 #include <Utils/ECS/Transform3D.h>
 #include <Utils/ECS/TransformZero.h>
 #include <Utils/ECS/LayerManager.h>
+#include <Utils/ECS/Component.h>
 #include <Utils/Types/SafePtrLockGuard.h>
 #include <Utils/World/ScenePrefabLogic.h>
 #include <Utils/Common/StoreUtils.h>
@@ -355,8 +356,9 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (!SR_GRAPH_GUI_NS::Immediate::GetDragDropPayload() && SR_GRAPH_GUI_NS::Immediate::BeginDragDropSource(SR_GRAPH_GUI_NS::Immediate::DragDropFlags::SourceAllowNullID)) {
-            m_pointersHolder = { pComponent->DynamicCast<SR_UTILS_NS::Component>() };
-            SR_GRAPH_GUI_NS::Immediate::SetDragDropPayload("InspectorComponent##Payload", &m_pointersHolder, sizeof(std::vector<SR_UTILS_NS::Component::Ptr>), SR_GRAPH_GUI_NS::Immediate::Condition::Once);
+            m_pointersHolder = { pComponent->GetEntityId() };
+            SR_GRAPH_GUI_NS::PayloadArrayData payloadData = { m_pointersHolder.data(), m_pointersHolder.size() };
+            SR_GRAPH_GUI_NS::Immediate::SetDragDropPayload("InspectorComponent##Payload", &payloadData, sizeof(SR_GRAPH_GUI_NS::PayloadArrayData), SR_GRAPH_GUI_NS::Immediate::Condition::Once);
             SR_GRAPH_GUI_NS::Immediate::Text("%s ->", pComponent->GetMeta()->GetDisplayName().c_str());
             SR_GRAPH_GUI_NS::Immediate::EndDragDropSource();
         }

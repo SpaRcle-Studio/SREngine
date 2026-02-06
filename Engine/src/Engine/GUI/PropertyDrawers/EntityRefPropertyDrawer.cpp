@@ -11,6 +11,7 @@
 #include <Utils/ECS/Component.h>
 
 #include <Codegen/EntityRefPropertyDrawer.generated.hpp>
+#include <Engine/Engine.h>
 
 namespace SR_CORE_GUI_NS {
     PropertyDrawerFeedback EntityRefPropertyDrawer::Draw(const PropertyDrawerContext& context) {
@@ -74,7 +75,16 @@ namespace SR_CORE_GUI_NS {
             if (SR_GRAPH_GUI_NS::Immediate::BeginDragDropTarget()) {
                 if (auto&& payload = SR_GRAPH_GUI_NS::Immediate::AcceptDragDropPayload("Hierarchy##Payload")) {
                     if (auto&& pData = SR_GRAPH_GUI_NS::Immediate::GetDataFromDragDropPayload(payload)) {
-                        std::list<SR_UTILS_NS::SceneObject::Ptr> sceneObjects = *(std::list<SR_UTILS_NS::SceneObject::Ptr>*)(pData);
+                        SR_GRAPH_GUI_NS::PayloadArrayData payloadData = *(SR_GRAPH_GUI_NS::PayloadArrayData*)(pData);
+                        std::vector<SR_UTILS_NS::SceneObject::Ptr> sceneObjects;
+
+                        for (size_t i = 0; i < payloadData.size; ++i) {
+                            uint64_t entityId = static_cast<uint64_t*>(payloadData.data)[i];
+                            if (auto&& pSO = context.pEditor->GetEngine()->GetScene()->GetEntityController()->FindById(entityId).StaticCast<SR_UTILS_NS::SceneObject>()) {
+                                sceneObjects.emplace_back(pSO);
+                            }
+                        }
+
                         if (!sceneObjects.empty() && sceneObjects.front() && sceneObjects.front()->GetMeta()->IsSameOrInherited(entityType)) {
                             if (context.onBeforeChangeCallback) {
                                 context.onBeforeChangeCallback(false);
@@ -87,7 +97,14 @@ namespace SR_CORE_GUI_NS {
 
                 if (auto&& payload = SR_GRAPH_GUI_NS::Immediate::AcceptDragDropPayload("InspectorComponent##Payload")) {
                     if (auto&& pData = SR_GRAPH_GUI_NS::Immediate::GetDataFromDragDropPayload(payload)) {
-                        std::list<SR_UTILS_NS::Component::Ptr> components = *(std::list<SR_UTILS_NS::Component::Ptr> *)(pData);
+                        SR_GRAPH_GUI_NS::PayloadArrayData payloadData = *(SR_GRAPH_GUI_NS::PayloadArrayData*)(pData);
+                        std::list<SR_UTILS_NS::Component::Ptr> components;
+                        for (size_t i = 0; i < payloadData.size; ++i) {
+                            uint64_t entityId = static_cast<uint64_t*>(payloadData.data)[i];
+                            if (auto&& pEntity = context.pEditor->GetEngine()->GetScene()->GetEntityController()->FindById(entityId)) {
+                                components.emplace_back(pEntity.StaticCast<SR_UTILS_NS::Component>());
+                            }
+                        }
                         if (!components.empty() && components.front()) {
                             if (components.front()->GetMeta()->IsSameOrInherited(entityType)) {
                                 if (context.onBeforeChangeCallback) {

@@ -55,7 +55,7 @@ namespace SR_CORE_GUI_NS {
         Engine* m_engine = nullptr;
         std::vector<SR_UTILS_NS::StringAtom> m_availableUINodes;
         SR_WORLD_NS::Scene::Ptr m_scene;
-        std::list<SR_UTILS_NS::SceneObject::Ptr> m_pointersHolder;
+        std::vector<uint64_t> m_pointersHolder;
         std::set<SR_UTILS_NS::SceneObject::Ptr> m_selected;
         std::vector<SR_UTILS_NS::SceneObject::Ptr> m_tree;
 

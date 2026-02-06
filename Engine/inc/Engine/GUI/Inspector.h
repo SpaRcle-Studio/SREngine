@@ -73,7 +73,7 @@ namespace SR_CORE_GUI_NS {
         std::vector<SR_UTILS_NS::StringAtom> m_availableCppBehaviours;
         ComponentCategory m_componentsCategories;
 
-        std::list<SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::Component>> m_pointersHolder;
+        std::vector<SR_UTILS_NS::EntityId> m_pointersHolder;
         SR_UTILS_NS::SceneObject::Ptr m_sceneObject;
         Hierarchy* m_hierarchy = nullptr;
         SR_WORLD_NS::Scene::Ptr m_scene;

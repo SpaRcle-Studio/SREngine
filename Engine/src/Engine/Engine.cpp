@@ -218,6 +218,11 @@ namespace SR_CORE_NS {
         SR_SAFE_DELETE_PTR(m_editor);
     }
 
+    void Engine::StopEngine() {
+        SR_SYSTEM_LOG("Engine::StopEngine() : stopping the engine...");
+        m_isRun = false;
+    }
+
     bool Engine::Close() {
         SR_TRACY_ZONE;
 

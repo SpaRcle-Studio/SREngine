@@ -86,8 +86,11 @@ namespace SR_CORE_GUI_NS {
                     std::vector<SR_UTILS_NS::ReversibleCommand*> commands;
                     if (auto&& pData = SR_GRAPH_GUI_NS::Immediate::GetDataFromDragDropPayload(pPayload)) {
                         commands.emplace_back(new SR_CORE_NS::Commands::ChangeHierarchySelected(m_engine, this, m_selected, { }));
-                        for (auto&& pSO : *(std::list<SR_UTILS_NS::SceneObject::Ptr>*)(pData)) {
-                            if (pSO) {
+
+                        SR_GRAPH_GUI_NS::PayloadArrayData payloadData = *(SR_GRAPH_GUI_NS::PayloadArrayData*)(pData);
+                        for (size_t i = 0; i < payloadData.size; ++i) {
+                            uint64_t entityId = static_cast<uint64_t*>(payloadData.data)[i];
+                            if (auto&& pSO = m_scene->GetEntityController()->FindById(entityId).StaticCast<SR_UTILS_NS::SceneObject>()) {
                                 commands.emplace_back(new SR_CORE_NS::Commands::GameObjectMove(m_engine, pSO, SR_ID_INVALID));
                             }
                         }
@@ -235,15 +238,16 @@ namespace SR_CORE_GUI_NS {
             if (useSelected) {
                 for (auto&& ptr : m_selected) {
                     if (ptr) {
-                        m_pointersHolder.emplace_back(ptr);
+                        m_pointersHolder.emplace_back(ptr->GetEntityId());
                     }
                 }
             }
             else {
-                m_pointersHolder.emplace_back(pRoot);
+                m_pointersHolder.emplace_back(pRoot->GetEntityId());
             }
 
-            SR_GRAPH_GUI_NS::Immediate::SetDragDropPayload("Hierarchy##Payload", &m_pointersHolder, sizeof(std::list<SR_UTILS_NS::SceneObject::Ptr>), SR_GRAPH_GUI_NS::Immediate::Condition::Once);
+            SR_GRAPH_GUI_NS::PayloadArrayData payloadData = { m_pointersHolder.data(), m_pointersHolder.size() };
+            SR_GRAPH_GUI_NS::Immediate::SetDragDropPayload("Hierarchy##Payload", &payloadData, sizeof(SR_GRAPH_GUI_NS::PayloadArrayData), SR_GRAPH_GUI_NS::Immediate::Condition::Once);
             SR_GRAPH_GUI_NS::Immediate::Text("%s ->", name.c_str());
             SR_GRAPH_GUI_NS::Immediate::EndDragDropSource();
         }
@@ -264,8 +268,10 @@ namespace SR_CORE_GUI_NS {
                     if (m_scene) {
                         std::vector<SR_UTILS_NS::ReversibleCommand*> commands;
                         commands.emplace_back(new SR_CORE_NS::Commands::ChangeHierarchySelected(m_engine, this, m_selected, {}));
-                        for (auto&& pSO : *(std::list<SR_UTILS_NS::SceneObject::Ptr>*)(pData)) {
-                            if (pSO) {
+                        SR_GRAPH_GUI_NS::PayloadArrayData payloadData = *(SR_GRAPH_GUI_NS::PayloadArrayData*)(pData);
+                        for (size_t i = 0; i < payloadData.size; ++i) {
+                            uint64_t entityId = static_cast<uint64_t*>(payloadData.data)[i];
+                            if (auto&& pSO = m_scene->GetEntityController()->FindById(entityId).StaticCast<SR_UTILS_NS::SceneObject>()) {
                                 commands.emplace_back(new SR_CORE_NS::Commands::GameObjectMove(m_engine, pSO, pRoot->GetEntityId()));
                             }
                         }

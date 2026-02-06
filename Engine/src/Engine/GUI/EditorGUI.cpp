@@ -223,7 +223,8 @@ namespace SR_CORE_GUI_NS {
             auto&& pWindow = m_engine->GetMainWindow()->GetBaseWindow();
 
             if (SR_GRAPH_GUI_NS::Immediate::SmallButton("×")) {
-                pWindow->Close();
+                SR_LOG("EditorGUI::DrawDockingSpace() : close button was clicked!");
+                m_engine->StopEngine();
             }
 
             SR_GRAPH_GUI_NS::Immediate::SetCursorPosX(SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x - 45);
