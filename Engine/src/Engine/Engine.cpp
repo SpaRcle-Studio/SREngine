@@ -322,9 +322,8 @@ namespace SR_CORE_NS {
                 m_cmdManager->Clear();
             }
 
-            if (m_engineScene && m_engineScene->pScene.RecursiveLockIfValid()) {
+            if (m_engineScene && m_engineScene->pScene) {
                 m_engineScene->pScene->SaveScene();
-                m_engineScene->pScene.Unlock();
             }
 
             SR_SAFE_DELETE_PTR(m_engineScene);

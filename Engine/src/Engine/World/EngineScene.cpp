@@ -144,8 +144,6 @@ namespace SR_CORE_NS {
         //if (auto&& pLogic = pScene->GetLogicBase().DynamicCast<SR_WORLD_NS::SceneCubeChunkLogic>()) {
         //    pLogic->UpdateDebug();
         //}
-
-        pScene.Unlock();
     }
 
     void EngineScene::UpdateFrequency() {

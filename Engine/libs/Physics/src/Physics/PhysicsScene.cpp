@@ -93,18 +93,15 @@ namespace SR_PHYSICS_NS {
             return false;
         }
 
-        if (m_scene.RecursiveLockIfValid()) {
+        if (m_scene) {
             auto&& dataStorage = m_scene->GetDataStorage();
 
             if (dataStorage.GetValueDef<Ptr>(Ptr())) {
                 SR_ERROR("PhysicsScene::Init() : render scene is already exists!");
-                m_scene.Unlock();
                 return false;
             }
 
             dataStorage.SetValue<Ptr>(GetThis());
-
-            m_scene.Unlock();
         }
         else {
             SRHalt("PhysicsScene::Init() : scene is invalid!");

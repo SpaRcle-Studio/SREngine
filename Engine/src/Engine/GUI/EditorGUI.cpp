@@ -514,11 +514,10 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::Separator();
 
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem("New prefab")) {
-                if (auto&& pScene = m_engine->GetScene(); pScene.RecursiveLockIfValid()) {
+                if (auto&& pScene = m_engine->GetScene()) {
                     //TODO: проверку на то, что нынешний префаб не сохранён, чтобы не спамить ими
                     pScene->SaveScene();
                     CacheScenePath(m_engine->GetScene()->GetPath());
-                    pScene.Unlock();
                 }
 
                 m_engine->AddSceneToQueue(SR_WORLD_NS::Scene::NewScene(GetNewPrefabPath(), SR_WORLD_NS::SceneLogicType::Prefab));
@@ -543,16 +542,15 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::Separator();
 
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Save")) {
-                if (auto&& pScene = m_engine->GetScene(); pScene.RecursiveLockIfValid()) {
+                if (auto&& pScene = m_engine->GetScene()) {
                     pScene->SaveScene();
-                    pScene.Unlock();
                 }
             }
 
             SR_GRAPH_GUI_NS::Immediate::Separator();
 
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Save at")) {
-                if (auto&& pScene = m_engine->GetScene(); pScene.RecursiveLockIfValid())
+                if (auto&& pScene = m_engine->GetScene())
                 {
                     const auto scenesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
 
@@ -573,8 +571,6 @@ namespace SR_CORE_GUI_NS {
                             SR_ERROR("GUISystem::BeginMenuBar() : failed to save scene! \n\tPath: \"" + path.ToString() + "\"");
                         }
                     }
-
-                    pScene.Unlock();
                 }
                 else {
                     SR_WARN("GUISystem::BeginMenuBar() : scene is not valid!");
@@ -620,12 +616,11 @@ namespace SR_CORE_GUI_NS {
 
         if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Editor")) {
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Instance from file")) {
-                if (auto&& pScene = m_engine->GetScene(); pScene.RecursiveLockIfValid()) {
+                if (auto&& pScene = m_engine->GetScene()) {
                     auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                     if (auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath.ToString(), { { "Any model", "prefab,pmx,fbx,obj,blend,dae,abc,stl,ply,glb,gltf,x3d,sfg,bvh,3ds,gltf" } }); !path.IsEmpty()) {
                         InstantiateSO(pScene->InstanceFromFile(path));
                     }
-                    pScene.Unlock();
                 }
                 else {
                     SR_WARN("GUISystem::BeginMenuBar() : scene is not valid!");

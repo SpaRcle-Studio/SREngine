@@ -41,7 +41,7 @@ namespace SR_CORE_NS::GUI {
 
         bool locked = false;
 
-        if (m_scene.TryRecursiveLockIfValid()) {
+        if (m_scene) {
             m_isActive = pEngine->IsActive();
             m_isPaused = pEngine->IsPaused();
             m_lastPath = m_scene->GetPath();
@@ -134,7 +134,6 @@ namespace SR_CORE_NS::GUI {
         if (locked) {
             pEngine->SetActive((m_isActive = active));
             pEngine->SetPaused((m_isPaused = paused));
-            m_scene.Unlock();
         }
 
         const float_t lineHeight = SR_GRAPH_GUI_NS::Immediate::GetFontSize() + SR_GRAPH_GUI_NS::Immediate::GetFramePadding().y * 2.0f;
