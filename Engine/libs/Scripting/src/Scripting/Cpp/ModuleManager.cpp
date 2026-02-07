@@ -144,7 +144,7 @@ namespace SR_SCRIPTING_NS {
 
         std::string registerFunctionName = "RegisterModule_" + moduleName.ToString();
         using LoadFunctionType = void(*)();
-        LoadFunctionType pRegisterFunction = (LoadFunctionType)(SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, registerFunctionName.c_str()));
+        auto pRegisterFunction = (LoadFunctionType)(SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, registerFunctionName.c_str()));
         if (!pRegisterFunction) {
             SR_ERROR("ModuleManager::LoadModule() : failed to find register function in module!\n\tPath: " + runtimePath.ToString() + "\n\tFunction name: " + registerFunctionName);
             SR_PLATFORM_NS::UnloadLibraryModule(pLibraryHandle);
@@ -216,7 +216,7 @@ namespace SR_SCRIPTING_NS {
 
         std::string unregisterFunctionName = "UnregisterModule_" + module.GetModuleName().ToString();
         using UnloadFunctionType = void(*)();
-        UnloadFunctionType pUnregisterFunction = (UnloadFunctionType)(SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, unregisterFunctionName.c_str()));
+        auto pUnregisterFunction = (UnloadFunctionType)(SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, unregisterFunctionName.c_str()));
         if (pUnregisterFunction) {
             pUnregisterFunction();
         }

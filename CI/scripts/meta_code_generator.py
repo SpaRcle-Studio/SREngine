@@ -1069,7 +1069,7 @@ def generate_meta_module_core_code(logger: logger_utils.Logger, context: codegen
                 f.write(tabs * "\t" + f'extern "C" {dll_export_macro} void UnregisterClassMeta_{class_obj.name}();' + '\n')
 
         ############################### register #################################
-        f.write('\n' + tabs * "\t" + f'extern "C" SR_CODEGEN_DLL_API_EXPORT void RegisterModule_{context.module_name}() {{' + '\n')
+        f.write('\n' + tabs * "\t" + f'extern "C" SR_MAYBE_UNUSED SR_DLL_API_EXPORT void SR_DLL_CDECL RegisterModule_{context.module_name}() {{' + '\n')
 
         tabs += 1
 
@@ -1082,7 +1082,7 @@ def generate_meta_module_core_code(logger: logger_utils.Logger, context: codegen
         f.write(tabs * "\t" + '}\n')
 
         ############################### unregister #################################
-        f.write('\n' + tabs * "\t" + f'extern "C" SR_CODEGEN_DLL_API_EXPORT void UnregisterModule_{context.module_name}() {{' + '\n')
+        f.write('\n' + tabs * "\t" + f'extern "C" SR_MAYBE_UNUSED SR_DLL_API_EXPORT void SR_DLL_CDECL UnregisterModule_{context.module_name}() {{' + '\n')
 
         tabs += 1
 
