@@ -38,6 +38,8 @@
 
 #include <Physics/3D/Rigidbody3D.h>
 
+#include <Scripting/Cpp/ScriptSystem.h>
+
 #include <Utils/Common/Features.h>
 #include <Utils/ECS/Prefab.h>
 #include <Utils/ECS/ComponentManager.h>
@@ -593,6 +595,12 @@ namespace SR_CORE_GUI_NS {
 
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Clear shaders cache")) {
                 SR_SRSL_NS::SRSLShader::ClearShadersCache();
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Reload scripts")) {
+                SR_SCRIPTING_NS::ScriptSystem::Instance().SetReloadRequest();
             }
 
             SR_GRAPH_GUI_NS::Immediate::Separator();

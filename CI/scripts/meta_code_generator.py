@@ -708,6 +708,7 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
     f.write(f'\t' * (tabs + 3) + f'}}\n')
     f.write(f'\t' * (tabs + 2) + f'}}\n')
     f.write(f'\t' * (tabs + 2) + f'SRDelete(meta.pDefaultInstance);' + '\n')
+    f.write(f'\t' * (tabs + 2) + f'meta.pDefaultInstance = nullptr;' + '\n')
     f.write(f'\t' * (tabs + 1) + f'}}\n')
     f.write(f'\t' * (tabs + 1) + f'SpaRcle::Utils::Factory::Instance().Unregister<{class_name}>();' + '\n')
     f.write(f'\t' * tabs + '}\n\n')
@@ -1068,7 +1069,7 @@ def generate_meta_module_core_code(logger: logger_utils.Logger, context: codegen
                 f.write(tabs * "\t" + f'extern "C" {dll_export_macro} void UnregisterClassMeta_{class_obj.name}();' + '\n')
 
         ############################### register #################################
-        f.write('\n' + tabs * "\t" + f'void RegisterModule_{context.module_name}() {{' + '\n')
+        f.write('\n' + tabs * "\t" + f'extern "C" SR_CODEGEN_DLL_API_EXPORT void RegisterModule_{context.module_name}() {{' + '\n')
 
         tabs += 1
 
@@ -1081,7 +1082,7 @@ def generate_meta_module_core_code(logger: logger_utils.Logger, context: codegen
         f.write(tabs * "\t" + '}\n')
 
         ############################### unregister #################################
-        f.write('\n' + tabs * "\t" + f'void UnregisterModule_{context.module_name}() {{' + '\n')
+        f.write('\n' + tabs * "\t" + f'extern "C" SR_CODEGEN_DLL_API_EXPORT void UnregisterModule_{context.module_name}() {{' + '\n')
 
         tabs += 1
 
@@ -1095,34 +1096,34 @@ def generate_meta_module_core_code(logger: logger_utils.Logger, context: codegen
 
         f.write('}\n\n')
 
-        f.write('#if defined(SR_WIN32) && defined(SR_ENGINE_SCRIPT_API_MODE)')
-        f.write(f'''
-    bool __stdcall DllMain(void* hModule, unsigned long ulReasonForCall, void* lpReserved) {{
-        switch (ulReasonForCall) {{
-        case 1: /// DLL_PROCESS_ATTACH
-            Codegen::RegisterModule_{context.module_name}();
-            break;
-        case 0: /// DLL_PROCESS_DETACH
-            Codegen::UnregisterModule_{context.module_name}();
-            break;
-        }}
-        return true;
-    }}''' + '\n')
-
-        f.write('#endif\n\n')
-
-        f.write(f'#if defined(SR_LINUX) && defined(SR_ENGINE_SCRIPT_API_MODE)')
-        f.write(f'''
-    __attribute__((constructor))
-    void OnLibraryLoad() {{
-        Codegen::RegisterModule_{context.module_name}();
-    }}
-
-    __attribute__((destructor))
-    void OnLibraryUnload() {{
-        Codegen::UnregisterModule_{context.module_name}();
-    }}''' + '\n')
-        f.write('#endif\n\n')
+#        f.write('#if defined(SR_WIN32) && defined(SR_ENGINE_SCRIPT_API_MODE)')
+#        f.write(f'''
+#    bool __stdcall DllMain(void* hModule, unsigned long ulReasonForCall, void* lpReserved) {{
+#        switch (ulReasonForCall) {{
+#        case 1: /// DLL_PROCESS_ATTACH
+#            Codegen::RegisterModule_{context.module_name}();
+#            break;
+#        case 0: /// DLL_PROCESS_DETACH
+#            Codegen::UnregisterModule_{context.module_name}();
+#            break;
+#        }}
+#        return true;
+#    }}''' + '\n')
+#
+#        f.write('#endif\n\n')
+#
+#        f.write(f'#if defined(SR_LINUX) && defined(SR_ENGINE_SCRIPT_API_MODE)')
+#        f.write(f'''
+#    __attribute__((constructor))
+#    void OnLibraryLoad() {{
+#        Codegen::RegisterModule_{context.module_name}();
+#    }}
+#
+#    __attribute__((destructor))
+#    void OnLibraryUnload() {{
+#        Codegen::UnregisterModule_{context.module_name}();
+#    }}''' + '\n')
+#        f.write('#endif\n\n')
 
         f.write(f'#endif // SR_CODEGEN_SPARCLE_MODULE_{context.module_name.upper()}_CORE_HPP' + '\n')
 

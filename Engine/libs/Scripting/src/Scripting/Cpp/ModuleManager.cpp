@@ -142,6 +142,17 @@ namespace SR_SCRIPTING_NS {
             return nullptr;
         }
 
+        std::string registerFunctionName = "RegisterModule_" + moduleName.ToString();
+        using LoadFunctionType = void(*)();
+        LoadFunctionType pRegisterFunction = (LoadFunctionType)(SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, registerFunctionName.c_str()));
+        if (!pRegisterFunction) {
+            SR_ERROR("ModuleManager::LoadModule() : failed to find register function in module!\n\tPath: " + runtimePath.ToString() + "\n\tFunction name: " + registerFunctionName);
+            SR_PLATFORM_NS::UnloadLibraryModule(pLibraryHandle);
+            return nullptr;
+        }
+
+        pRegisterFunction();
+
         return pLibraryHandle;
     }
 
@@ -203,13 +214,30 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
+        std::string unregisterFunctionName = "UnregisterModule_" + module.GetModuleName().ToString();
+        using UnloadFunctionType = void(*)();
+        UnloadFunctionType pUnregisterFunction = (UnloadFunctionType)(SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, unregisterFunctionName.c_str()));
+        if (pUnregisterFunction) {
+            pUnregisterFunction();
+        }
+        else {
+            SR_ERROR("ModuleManager::UnloadModule() : failed to find unregister function in module!\n\tPath: " + module.GetPath().ToString() + "\n\tFunction name: " + unregisterFunctionName);
+        }
+
         if (!SR_PLATFORM_NS::UnloadLibraryModule(pLibraryHandle)) {
             SRHalt("ModuleManager::UnloadModule() : failed to unload module! Something went wrong...\n\tPath: " + module.GetPath().ToString());
             return false;
         }
-        else {
-            SR_LOG("ModuleManager::UnloadModule() : module \"" + module.GetPath().ToString() + "\" unloaded.");
+        SR_LOG("ModuleManager::UnloadModule() : module \"" + module.GetPath().ToString() + "\" unloaded.");
+
+    #ifdef SR_LINUX
+        if (SR_PLATFORM_NS::IsLibraryModuleLoaded(module.GetPath())) {
+            SR_ERROR("ModuleManager::UnloadModule() : module is still loaded after unloading! Something went wrong...\n\tPath: " + module.GetPath().ToString());
         }
+        else if (SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, unregisterFunctionName.c_str())) {
+            SR_INFO("ModuleManager::UnloadModule() : module functions are still accessible after unloading!\n\tPath: " + module.GetPath().ToString());
+        }
+    #endif
 
         module.SetModuleHandle(nullptr);
 

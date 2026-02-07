@@ -506,6 +506,17 @@ namespace SR_CORE_NS {
         return GetFocusedWindow();
     }
 
+    float_t Engine::GetFramerate() const {
+        if (m_threadsWorker) {
+            auto&& context = m_threadsWorker->GetContext();
+            static const SR_UTILS_NS::StringAtom deltaTimeKey = "DeltaTime";
+            if (const auto dt = context.GetValueDef<float_t>(deltaTimeKey, 0.f); dt > 0.f) {
+                return 1.f / dt;
+            }
+        }
+        return 0.f;
+    }
+
     SR_UTILS_NS::Debug& Engine::GetDebugger() const {
         return SR_UTILS_NS::Debug::Instance();
     }
@@ -546,7 +557,7 @@ namespace SR_CORE_NS {
 
             bool lShiftPressed = SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::LShift);
 
-            if (m_cmdManager && !IsGameMode() && SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Ctrl)) {
+            if (m_cmdManager && !IsGameMode() && SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::LCtrl)) {
                 if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Z)) {
                     m_cmdManager->Cancel();
                 }

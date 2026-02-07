@@ -262,7 +262,7 @@ namespace SR_SCRIPTING_NS {
             return;
         }
 
-        if (m_hasModuleReloadRequest) {
+        if (m_hasModuleReloadRequest || m_forceReloadModules) {
             SR_INFO("ScriptSystem::ThreadIdle() : script system thread detected module reload request!");
             m_state = State::Reloading;
             return;
@@ -319,6 +319,8 @@ namespace SR_SCRIPTING_NS {
             m_modulesToCopy.insert(module.moduleInfo.moduleName);
             m_codeGenerator->OnModuleCompiled(module.moduleInfo.moduleName);
         }
+
+        SR_LOG("ScriptSystem::CompileModules() : modules compiled!");
     }
 
     void ScriptSystem::CopyModules() {
@@ -389,6 +391,17 @@ namespace SR_SCRIPTING_NS {
         SR_TRACY_ZONE;
         SR_LOG("ScriptSystem::ReloadModules() : reloading modules...");
 
+        if (m_forceReloadModules) {
+            m_forceReloadModules = false;
+            for (auto&& module : m_codeGenerator->GetModules()) {
+                if (!module.moduleInfo.enabled) {
+                    continue;
+                }
+                const auto modulePath = module.path.GetFolder().Concat(module.moduleInfo.moduleName).ConcatExt(GetDynamicLibraryExtension());
+                SR_LOG("ScriptSystem::ReloadModules() : force reloading module: {}", modulePath);
+                m_changedCppModules.insert(modulePath);
+            }
+        }
         std::set<SR_UTILS_NS::Path> changedCppModules = SR_EXCHANGE(m_changedCppModules, {});
 
         for (auto&& modulePath : changedCppModules) {
@@ -450,6 +463,11 @@ namespace SR_SCRIPTING_NS {
         SR_TRACY_ZONE_N("Wait for module reload");
 
         while (m_hasModuleReloadRequest);
+    }
+
+    void ScriptSystem::SetReloadRequest() {
+        SR_LOCK_GUARD;
+        m_forceReloadModules = true;
     }
 
     bool ScriptSystem::InitEngineSources() {

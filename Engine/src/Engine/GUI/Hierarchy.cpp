@@ -403,16 +403,16 @@ namespace SR_CORE_GUI_NS {
     void Hierarchy::OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) {
         switch (data->GetKeyCode()) {
             case SR_UTILS_NS::KeyCode::C: {
-                if (IsKeyPressed(SR_UTILS_NS::KeyCode::Ctrl))
+                if (IsKeyPressed(SR_UTILS_NS::KeyCode::LCtrl))
                     Copy();
                 break;
             }
             case SR_UTILS_NS::KeyCode::V: {
-                if (IsKeyPressed(SR_UTILS_NS::KeyCode::Ctrl))
+                if (IsKeyPressed(SR_UTILS_NS::KeyCode::LCtrl))
                     Paste((m_selected.size() == 1) ? m_selected.begin()->Get() : nullptr, false);
                 break;
             }
-            case SR_UTILS_NS::KeyCode::Del: {
+            case SR_UTILS_NS::KeyCode::Delete: {
                 Delete();
                 break;
             }

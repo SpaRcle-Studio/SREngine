@@ -233,7 +233,13 @@ namespace SR_SCRIPTING_NS {
             return false;
         }
 
-        std::string sourceFiles = "\"" + m_cachePath.Concat("Scripts/Codegen/{}.cxx"_format(context.moduleName)).ToString() + "\" ";
+        std::string sourceFiles;
+        if (m_settings.compilerType == CppCompilerType::GCC) {
+            sourceFiles = m_cachePath.Concat("Scripts/Codegen/{}.cxx"_format(context.moduleName)).ToString() + " ";
+        }
+        else {
+            sourceFiles = "\"" + m_cachePath.Concat("Scripts/Codegen/{}.cxx"_format(context.moduleName)).ToString() + "\" ";
+        }
 
         std::string includePaths;
         for (auto&& includePath : context.includePaths) {

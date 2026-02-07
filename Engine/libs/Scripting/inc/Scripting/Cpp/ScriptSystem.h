@@ -44,6 +44,7 @@ namespace SR_SCRIPTING_NS {
 
         void WaitForIdle();
         void ReloadModulesIfNeeded();
+        void SetReloadRequest();
 
         static std::string_view GetDynamicLibraryExtension();
 
@@ -93,6 +94,7 @@ namespace SR_SCRIPTING_NS {
         std::atomic<bool> m_hasCompileErrors = false;
         std::atomic<bool> m_hasModuleCopyErrors = false;
         std::atomic<bool> m_hasModuleReloadRequest = false;
+        std::atomic<bool> m_forceReloadModules = false;
         std::atomic<State> m_state = State::InitialAnalyse;
 
         std::set<SR_UTILS_NS::Path> m_changedCppFiles;
