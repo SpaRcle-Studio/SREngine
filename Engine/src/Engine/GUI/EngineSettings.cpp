@@ -25,6 +25,8 @@ namespace SR_CORE_GUI_NS {
     }
 
     void EngineSettings::Draw() {
+        SR_TRACY_ZONE;
+
         DrawMultiSampling();
         SR_GRAPH_GUI_NS::Immediate::Separator();
         DrawVSync();
@@ -35,6 +37,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     void EngineSettings::DrawMultiSampling() {
+        SR_TRACY_ZONE;
         static const char* SR_SAMPLE_COUNT_NAME_LIST = {
                 "Sample 1\0"
                 "Sample 2\0"
@@ -59,7 +62,8 @@ namespace SR_CORE_GUI_NS {
                 1, 2, 4, 8, 16, 32, 64
         };
 
-        auto&& pPipeline = GetContext()->GetPipeline();
+        auto&& pContext = GetContext();
+        auto&& pPipeline = pContext->GetPipeline();
         int32_t currentItem = SR_SAMPLE_COUNT_KEY_LIST.at(pPipeline->GetSamplesCount());
 
         if (SR_GRAPH_GUI_NS::Immediate::Combo("Multi-sampling", &currentItem, SR_SAMPLE_COUNT_NAME_LIST)) {
@@ -67,17 +71,18 @@ namespace SR_CORE_GUI_NS {
             SR_UTILS_NS::StoreUtils::User::SetInt("MultiSampling", SR_SAMPLE_COUNT_VALUE_LIST.at(currentItem));
         }
 
-        bool optimizedRenderUpdate = GetContext()->IsOptimizedRenderUpdateEnabled();
+        bool optimizedRenderUpdate = pContext->IsOptimizedRenderUpdateEnabled();
         if (SR_GRAPH_GUI_NS::Immediate::Checkbox("Optimized render update", &optimizedRenderUpdate)) {
-            GetContext()->SetOptimizedRenderUpdateEnabled(optimizedRenderUpdate);
+            pContext->SetOptimizedRenderUpdateEnabled(optimizedRenderUpdate);
         }
     }
 
     void EngineSettings::DrawLighting() {
-
+        SR_TRACY_ZONE;
     }
 
     void EngineSettings::DrawVSync() {
+        SR_TRACY_ZONE;
         auto&& pPipeline = GetContext()->GetPipeline();
         if (!pPipeline) {
             return;
@@ -88,38 +93,47 @@ namespace SR_CORE_GUI_NS {
             pPipeline->SetVSyncEnabled(vsync);
         }
 
-        int32_t swapchainImages = SR_UTILS_NS::StoreUtils::User::GetInt("SwapchainImages", pPipeline->GetSwapchainImagesCount());
+        static const SR_UTILS_NS::StringAtom swapchainImagesKey = "SwapchainImages";
+        const auto suggestedSwapchainImages = pPipeline->GetSwapchainImagesCount();
+        int32_t swapchainImages = SR_UTILS_NS::StoreUtils::User::GetInt(swapchainImagesKey, suggestedSwapchainImages);
 
         if (SR_GRAPH_GUI_NS::Immediate::InputInt("Swapchain images", &swapchainImages, 1, 1, SR_GRAPH_GUI_NS::Immediate::InputTextFlags::EnterReturnsTrue)) {
             swapchainImages = SR_CLAMP(swapchainImages, 1, 16);
-            SR_UTILS_NS::StoreUtils::User::SetInt("SwapchainImages", swapchainImages);
+            SR_UTILS_NS::StoreUtils::User::SetInt(swapchainImagesKey, swapchainImages);
         }
 
-        if (swapchainImages != pPipeline->GetSwapchainImagesCount()) {
+        if (swapchainImages != suggestedSwapchainImages) {
             SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Yellow(), "Requires restart!");
         }
     }
 
     void EngineSettings::DrawEditorSettings() {
-        float_t fontSize = SR_UTILS_NS::StoreUtils::User::GetFloat("ImGuiFontSize", 0.f);
-        float_t iconFontSize = SR_UTILS_NS::StoreUtils::User::GetFloat("ImGuiIconFontSize", 0.f);
-        bool showEntityId = SR_UTILS_NS::StoreUtils::User::GetBool("ShowEntityId", false);
-        bool showHiddenEntities = SR_UTILS_NS::StoreUtils::User::GetBool("ShowHiddenEntities", false);
+        SR_TRACY_ZONE;
+
+        static const SR_UTILS_NS::StringAtom showEntityIdKey = "ShowEntityId";
+        static const SR_UTILS_NS::StringAtom showHiddenEntitiesKey = "ShowHiddenEntities";
+        static const SR_UTILS_NS::StringAtom fontSizeKey = "ImGuiFontSize";
+        static const SR_UTILS_NS::StringAtom iconFontSizeKey = "ImGuiIconFontSize";
+
+        float_t fontSize = SR_UTILS_NS::StoreUtils::User::GetFloat(fontSizeKey, 0.f);
+        float_t iconFontSize = SR_UTILS_NS::StoreUtils::User::GetFloat(iconFontSizeKey, 0.f);
+        bool showEntityId = SR_UTILS_NS::StoreUtils::User::GetBool(showEntityIdKey, false);
+        bool showHiddenEntities = SR_UTILS_NS::StoreUtils::User::GetBool(showHiddenEntitiesKey, false);
 
         if (SR_GRAPH_GUI_NS::Immediate::InputFloat("Font size", &fontSize, 1.0f, 1.0f, "%.1f", SR_GRAPH_GUI_NS::Immediate::InputTextFlags::EnterReturnsTrue)) {
-            SR_UTILS_NS::StoreUtils::User::SetFloat("ImGuiFontSize", fontSize);
+            SR_UTILS_NS::StoreUtils::User::SetFloat(fontSizeKey, fontSize);
         }
 
         if (SR_GRAPH_GUI_NS::Immediate::InputFloat("Icon font size", &iconFontSize, 1.0f, 1.0f, "%.1f", SR_GRAPH_GUI_NS::Immediate::InputTextFlags::EnterReturnsTrue)) {
-            SR_UTILS_NS::StoreUtils::User::SetFloat("ImGuiIconFontSize", iconFontSize);
+            SR_UTILS_NS::StoreUtils::User::SetFloat(iconFontSizeKey, iconFontSize);
         }
 
         if (SR_GRAPH_GUI_NS::Immediate::Checkbox("Show entity id", &showEntityId)) {
-            SR_UTILS_NS::StoreUtils::User::SetBool("ShowEntityId", showEntityId);
+            SR_UTILS_NS::StoreUtils::User::SetBool(showEntityIdKey, showEntityId);
         }
 
         if (SR_GRAPH_GUI_NS::Immediate::Checkbox("Show hidden entities", &showHiddenEntities)) {
-            SR_UTILS_NS::StoreUtils::User::SetBool("ShowHiddenEntities", showHiddenEntities);
+            SR_UTILS_NS::StoreUtils::User::SetBool(showHiddenEntitiesKey, showHiddenEntities);
         }
 
         if (SR_GRAPH_GUI_NS::Immediate::Combo("Render preset", &m_activeRenderPreset, m_renderPresetsMemory.c_str())) {

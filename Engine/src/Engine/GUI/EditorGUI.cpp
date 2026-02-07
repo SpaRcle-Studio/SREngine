@@ -495,6 +495,8 @@ namespace SR_CORE_GUI_NS {
     }
 
     void EditorGUI::DrawMenuBar() {
+        SR_TRACY_ZONE;
+
         SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::WindowPadding, SR_MATH_NS::FVector2(8, 8));
 
         if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("File")) {
@@ -608,7 +610,7 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::Separator();
 
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Exit")) {
-                m_engine->GetMainWindow()->GetBaseWindow()->Close();
+                m_engine->StopEngine();
             }
 
             SR_GRAPH_GUI_NS::Immediate::EndMenu();
@@ -842,6 +844,8 @@ namespace SR_CORE_GUI_NS {
     }
 
     void EditorGUI::DrawWindowPage() {
+        SR_TRACY_ZONE;
+
         if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Window")) {
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Assets")) {
                 OpenWidget<FileBrowser>();
