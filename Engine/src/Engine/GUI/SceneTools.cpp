@@ -14,6 +14,8 @@
 #include <Physics/PhysicsLib.h>
 #include <Physics/LibraryImpl.h>
 
+#include <Scripting/Cpp/ScriptSystem.h>
+
 #include <Utils/Common/StoreUtils.h>
 
 #include <Enum/GizmoOperation.hpp>
@@ -169,6 +171,39 @@ namespace SR_CORE_GUI_NS {
 
 
                     SR_GRAPH_GUI_NS::Immediate::EndCombo();
+                }
+            })
+            .SetItemSpacing(SR_MATH_NS::FVector2(10.f, 0.f));
+
+        AddElement()
+            .SetCustomDraw([](auto&& pElement) {
+                const auto scriptsState = SR_SCRIPTING_NS::ScriptSystem::Instance().GetState();
+                const bool hasErrors = SR_SCRIPTING_NS::ScriptSystem::Instance().HasErrors();
+
+                switch (scriptsState) {
+                    case Scripting::ScriptSystemState::InitialAnalyse:
+                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Yellow(), "Scripts: Initial analysis...");
+                        break;
+                    case Scripting::ScriptSystemState::CheckModules:
+                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Yellow(), "Scripts: Checking modules...");
+                        break;
+                    case Scripting::ScriptSystemState::Codegen:
+                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Yellow(), "Scripts: Generating code...");
+                        break;
+                    case Scripting::ScriptSystemState::Compiling:
+                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Yellow(), "Scripts: Compiling...");
+                        break;
+                    case Scripting::ScriptSystemState::Reloading:
+                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Yellow(), "Scripts: Reloading...");
+                        break;
+                    default: {
+                        if (hasErrors) {
+                            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Red(), "Scripts: Errors");
+                        } else {
+                            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Green(), "Scripts: OK");
+                        }
+                        break;
+                    }
                 }
             })
             .SetItemSpacing(SR_MATH_NS::FVector2(10.f, 0.f));

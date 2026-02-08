@@ -131,6 +131,9 @@ use tabs: true
 														14-a:disallowedLayers
 															15-k:i
 																16-v:d
+																	17-s:UI
+															15-k:i
+																16-v:d
 																	17-s:Gizmo
 															15-k:i
 																16-v:d
@@ -167,6 +170,24 @@ use tabs: true
 													13-v:type
 														14-s:ClearDepthAttachmentPass
 													13-o:ptr
+											11-k:i
+												12-o:d
+													13-v:type
+														14-s:MeshDrawerPass
+													13-o:ptr
+														14-v:frustumCulling
+															15-b:false
+														14-a:allowedLayers
+															15-k:i
+																16-v:d
+																	17-s:UI
+														14-a:disallowedLayers
+														14-a:shaderDefines
+														14-o:samplers
+														14-o:uniforms
+															15-o:shared
+																16-a:useFromPass
+															15-o:material
 											11-k:i
 												12-o:d
 													13-v:type

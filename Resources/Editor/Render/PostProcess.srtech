@@ -135,6 +135,9 @@ use tabs: true
 														14-a:disallowedLayers
 															15-k:i
 																16-v:d
+																	17-s:UI
+															15-k:i
+																16-v:d
 																	17-s:Gizmo
 															15-k:i
 																16-v:d
@@ -209,6 +212,24 @@ use tabs: true
 																		18-s:Engine/Shaders/line.srsl
 														14-v:isOverlay
 															15-b:true
+											11-k:i
+												12-o:d
+													13-v:type
+														14-s:MeshDrawerPass
+													13-o:ptr
+														14-v:frustumCulling
+															15-b:false
+														14-a:allowedLayers
+															15-k:i
+																16-v:d
+																	17-s:UI
+														14-a:disallowedLayers
+														14-a:shaderDefines
+														14-o:samplers
+														14-o:uniforms
+															15-o:shared
+																16-a:useFromPass
+															15-o:material
 											11-k:i
 												12-o:d
 													13-v:type
@@ -317,72 +338,6 @@ use tabs: true
 																							23-s:Float
 																						22-v:value
 																							23-f:0.587
-																				20-k:i
-																					21-o:d
-																						22-v:id
-																							23-s:boundsMin
-																						22-v:type
-																							23-s:Vec3
-																						22-o:value
-																							23-v:x
-																								24-f:-400
-																							23-v:y
-																								24-f:70
-																							23-v:z
-																								24-f:-400
-																				20-k:i
-																					21-o:d
-																						22-v:id
-																							23-s:boundsMax
-																						22-v:type
-																							23-s:Vec3
-																						22-o:value
-																							23-v:x
-																								24-f:400
-																							23-v:y
-																								24-f:105
-																							23-v:z
-																								24-f:400
-																				20-k:i
-																					21-o:d
-																						22-v:id
-																							23-s:cloudsSpeed
-																						22-v:type
-																							23-s:Float
-																						22-v:value
-																							23-f:0.8
-																				20-k:i
-																					21-o:d
-																						22-v:id
-																							23-s:stepSize
-																						22-v:type
-																							23-s:Float
-																						22-v:value
-																							23-f:0.862
-																				20-k:i
-																					21-o:d
-																						22-v:id
-																							23-s:fbmOctaves
-																						22-v:type
-																							23-s:Int
-																						22-v:value
-																							23-i:5
-																				20-k:i
-																					21-o:d
-																						22-v:id
-																							23-s:cloudsFrequency
-																						22-v:type
-																							23-s:Float
-																						22-v:value
-																							23-f:2.255
-																				20-k:i
-																					21-o:d
-																						22-v:id
-																							23-s:cloudsAmplitude
-																						22-v:type
-																							23-s:Float
-																						22-v:value
-																							23-f:0.5
 																				20-k:i
 																					21-o:d
 																						22-v:id

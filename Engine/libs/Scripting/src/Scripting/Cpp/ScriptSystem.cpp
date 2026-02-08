@@ -130,14 +130,14 @@ namespace SR_SCRIPTING_NS {
 
         if (m_isCompilationEnabled) {
             if (path.GetBaseNameAndExt() == ENGINE_MODULE_FILE_NAME) {
-                if (m_state != State::InitialAnalyse) {
+                if (m_state != ScriptSystemState::InitialAnalyse) {
                     SR_DEBUG_LOG("ScriptSystem::HandleFileSystemEvent() : engine module change detected!\n\tPath: {}", path);
                 }
                 m_lastFileSystemEvent = SR_HTYPES_NS::Time::Instance().Now();
                 m_changedModules.insert(path);
             }
             else if (ALLOWED_CPP_EXTENSIONS.find(path.GetExtensionView()) != ALLOWED_CPP_EXTENSIONS.end()) {
-                if (m_state != State::InitialAnalyse) {
+                if (m_state != ScriptSystemState::InitialAnalyse) {
                     SR_DEBUG_LOG("ScriptSystem::HandleFileSystemEvent() : c++ file change detected!\n\tPath: {}", path);
                 }
                 m_lastFileSystemEvent = SR_HTYPES_NS::Time::Instance().Now();
@@ -146,7 +146,7 @@ namespace SR_SCRIPTING_NS {
         }
 
         if (ALLOWED_CPP_MODULE_EXTENSIONS.find(path.GetExtensionView()) != ALLOWED_CPP_MODULE_EXTENSIONS.end()) {
-            if (m_state != State::InitialAnalyse) {
+            if (m_state != ScriptSystemState::InitialAnalyse) {
                 SR_DEBUG_LOG("ScriptSystem::HandleFileSystemEvent() : c++ module change detected!\n\tPath: {}", path);
             }
             m_lastFileSystemEvent = SR_HTYPES_NS::Time::Instance().Now();
@@ -172,24 +172,24 @@ namespace SR_SCRIPTING_NS {
             }
 
             switch (m_state) {
-                case State::InitialAnalyse:
+                case ScriptSystemState::InitialAnalyse:
                     InitialAnalyse();
-                    m_state = State::Idle;
+                    m_state = ScriptSystemState::Idle;
                     break;
-                case State::Idle:
+                case ScriptSystemState::Idle:
                     ThreadIdle();
                     break;
-                case State::CheckModules: {
+                case ScriptSystemState::CheckModules: {
                     std::set<SR_UTILS_NS::Path> changedModules;
                     {
                         SR_LOCK_GUARD;
                         changedModules = SR_EXCHANGE(m_changedModules, {});
                     }
                     m_codeGenerator->ProcessChangedModules(changedModules);
-                    m_state = State::Codegen;
+                    m_state = ScriptSystemState::Codegen;
                     break;
                 }
-                case State::Codegen: {
+                case ScriptSystemState::Codegen: {
                     std::set<SR_UTILS_NS::Path> changedCppFiles;
                     {
                         SR_LOCK_GUARD;
@@ -200,20 +200,20 @@ namespace SR_SCRIPTING_NS {
                         m_codeGenerator->RegenerateChangedModules();
                         m_isCompiled = false;
                     }
-                    m_state = State::Idle;
+                    m_state = ScriptSystemState::Idle;
                     break;
                 }
-                case State::Compiling:
+                case ScriptSystemState::Compiling:
                     CompileModules();
                     if (!m_hasCompileErrors) {
                         CopyModules();
                     }
-                    m_state = State::Idle;
+                    m_state = ScriptSystemState::Idle;
                     m_isCompiled = true;
                     break;
-                case State::Reloading:
+                case ScriptSystemState::Reloading:
                     ReloadModules();
-                    m_state = State::Idle;
+                    m_state = ScriptSystemState::Idle;
                     m_hasModuleReloadRequest = false;
                     break;
             }
@@ -235,7 +235,7 @@ namespace SR_SCRIPTING_NS {
 
         /// first, check if we have any changes in the modules
         if (!m_changedModules.empty()) {
-            m_state = State::CheckModules;
+            m_state = ScriptSystemState::CheckModules;
             m_hasModuleReloadRequest = false;
             return;
         }
@@ -244,7 +244,7 @@ namespace SR_SCRIPTING_NS {
         if (!m_changedCppFiles.empty()) {
             if (SRVerify2(m_isCompilationEnabled, "Script system thread detected file changes but compilation is disabled!")) {
                 SR_INFO("ScriptSystem::ThreadIdle() : script system thread detected file changes!");
-                m_state = State::Codegen;
+                m_state = ScriptSystemState::Codegen;
             }
             m_hasModuleReloadRequest = false;
             return;
@@ -252,7 +252,7 @@ namespace SR_SCRIPTING_NS {
 
         /// after codegen we need to compile the code
         if (!m_isCompiled && m_isCompilationEnabled) {
-            m_state = State::Compiling;
+            m_state = ScriptSystemState::Compiling;
             m_hasModuleReloadRequest = false;
             return;
         }
@@ -264,7 +264,7 @@ namespace SR_SCRIPTING_NS {
 
         if (m_hasModuleReloadRequest || m_forceReloadModules) {
             SR_INFO("ScriptSystem::ThreadIdle() : script system thread detected module reload request!");
-            m_state = State::Reloading;
+            m_state = ScriptSystemState::Reloading;
             return;
         }
     }
@@ -429,13 +429,13 @@ namespace SR_SCRIPTING_NS {
     }
 
     void ScriptSystem::WaitForIdle() {
-        if (GetState() == State::Idle || !m_threadRunning) {
+        if (GetState() == ScriptSystemState::Idle || !m_threadRunning) {
             return;
         }
 
         SR_INFO("ScriptSystem::WaitForIdle() : waiting for script system idle...");
 
-        while (m_state != State::Idle) {
+        while (m_state != ScriptSystemState::Idle) {
             SR_PLATFORM_NS::Sleep(10);
         }
     }
@@ -445,7 +445,7 @@ namespace SR_SCRIPTING_NS {
             SR_TRACY_ZONE;
             SR_LOCK_GUARD;
 
-            if (m_hasModuleReloadRequest || m_state != State::Idle) {
+            if (m_hasModuleReloadRequest || m_state != ScriptSystemState::Idle) {
                 return;
             }
 

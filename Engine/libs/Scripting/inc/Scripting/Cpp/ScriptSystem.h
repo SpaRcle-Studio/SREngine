@@ -15,12 +15,13 @@
 #include <Utils/Types/SharedPtr.h>
 
 namespace SR_SCRIPTING_NS {
+    SR_ENUM_NS_CLASS_T(ScriptSystemState, uint8_t,
+        InitialAnalyse, Idle, CheckModules, Codegen, Compiling, Reloading
+    );
+
     class ScriptSystem : public SR_UTILS_NS::Singleton<ScriptSystem> {
         SR_REGISTER_SINGLETON(ScriptSystem)
         using Super = SR_HTYPES_NS::SharedPtr<ScriptSystem>;
-        enum class State {
-            InitialAnalyse, Idle, CheckModules, Codegen, Compiling, Reloading
-        };
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<ScriptSystem>;
 
@@ -40,7 +41,8 @@ namespace SR_SCRIPTING_NS {
         SR_NODISCARD ModuleManager* GetModuleManager() { return m_moduleManager.Get(); }
         SR_NODISCARD const std::vector<SR_UTILS_NS::Path>& GetEngineSourcesIncludePaths() const { return m_engineSourcesIncludePaths; }
         SR_NODISCARD const SR_UTILS_NS::Path& GetEngineSourcesPath() const { return m_pathToEngineSourcesRoot; }
-        SR_NODISCARD State GetState() const { return m_state; }
+        SR_NODISCARD ScriptSystemState GetState() const { return m_state; }
+        SR_NODISCARD bool HasErrors() const { return m_hasCompileErrors || m_hasModuleCopyErrors; }
 
         void WaitForIdle();
         void ReloadModulesIfNeeded();
@@ -95,7 +97,7 @@ namespace SR_SCRIPTING_NS {
         std::atomic<bool> m_hasModuleCopyErrors = false;
         std::atomic<bool> m_hasModuleReloadRequest = false;
         std::atomic<bool> m_forceReloadModules = false;
-        std::atomic<State> m_state = State::InitialAnalyse;
+        std::atomic<ScriptSystemState> m_state = ScriptSystemState::InitialAnalyse;
 
         std::set<SR_UTILS_NS::Path> m_changedCppFiles;
         std::set<SR_UTILS_NS::Path> m_changedCppModules;

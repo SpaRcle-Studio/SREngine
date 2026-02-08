@@ -107,7 +107,8 @@ namespace SR_CORE_GUI_NS {
             if (pClassValue) {
                 const SR_UTILS_NS::SRClassMeta* pMeta = pClassValue->GetMeta();
                 SRAssert(pMeta);
-                pTypeNameIt = std::find(m_typeNames.begin(), m_typeNames.end(), pMeta->GetFactoryName());
+                const SR_UTILS_NS::StringAtom factoryName = pMeta->GetFactoryName();
+                pTypeNameIt = std::find(m_typeNames.begin(), m_typeNames.end(), factoryName);
             }
 
             std::optional<uint64_t> selectedIndex = pTypeNameIt != m_typeNames.end() ? std::make_optional(std::distance(m_typeNames.begin(), pTypeNameIt)) : std::nullopt;
@@ -253,8 +254,9 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (m_isOpened && pClassValue) {
-            if (m_lastTypeName != pClassValue->GetMeta()->GetFactoryName()) {
-                m_lastTypeName = pClassValue->GetMeta()->GetFactoryName();
+            const SR_UTILS_NS::StringAtom factoryName = pClassValue->GetMeta()->GetFactoryName();
+            if (m_lastTypeName != factoryName) {
+                m_lastTypeName = factoryName;
 
                 if (auto&& inspectorName = pClassValue->GetMeta()->GetInspectorName(); !inspectorName.empty()) {
                     m_objectDrawer = SR_UTILS_NS::Factory::Instance().Create<ObjectPropertyDrawer>(inspectorName);
