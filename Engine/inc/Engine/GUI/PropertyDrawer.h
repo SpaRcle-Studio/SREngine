@@ -82,6 +82,7 @@ namespace SR_CORE_GUI_NS {
         bool isDrag = false;
     };
 
+    /// @abstract
     class PropertyDrawerBase : public SR_UTILS_NS::SRClass, public SR_HTYPES_NS::SharedPtr<PropertyDrawerBase> {
         SR_CLASS()
     public:
@@ -91,7 +92,7 @@ namespace SR_CORE_GUI_NS {
             : Ptr(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
         { }
 
-        virtual PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) = 0;
+        virtual PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) { return {}; }
 
         SR_NODISCARD static bool CheckSearchMatch(std::string_view searchBuffer, std::string_view text) {
             for (uint64_t textStartPos = 0; textStartPos < text.size(); ++textStartPos) {
