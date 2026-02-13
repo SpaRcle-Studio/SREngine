@@ -30,28 +30,32 @@ jobs:
           name: "Linux Release gcc NoUnity SpaRcle Engine"
           path: "artifacts/release"
 
-      # 3) Найти бинарник в debug
+      # 3) Найти packed-бинарник в debug (SREngine_*_linux.*-packed без расширения; артефакт теряет +x)
       - name: Find debug binary
         id: find_debug
         shell: bash
         run: |
-          BIN=$(find artifacts/debug -type f -perm -u+x ! -name "*.so*" | head -n 1)
+          BIN=$(find artifacts/debug -type f -name "*-packed" | head -n 1)
           if [ -z "$BIN" ]; then
-            echo "Debug binary not found"
+            echo "Debug binary not found. Contents of artifacts/debug:"
+            find artifacts/debug -type f
             exit 1
           fi
+          chmod +x "$BIN"
           echo "debug_bin=$BIN" >> $GITHUB_OUTPUT
 
-      # 4) Найти бинарник в release
+      # 4) Найти packed-бинарник в release
       - name: Find release binary
         id: find_release
         shell: bash
         run: |
-          BIN=$(find artifacts/release -type f -perm -u+x ! -name "*.so*" | head -n 1)
+          BIN=$(find artifacts/release -type f -name "*-packed" | head -n 1)
           if [ -z "$BIN" ]; then
-            echo "Release binary not found"
+            echo "Release binary not found. Contents of artifacts/release:"
+            find artifacts/release -type f
             exit 1
           fi
+          chmod +x "$BIN"
           echo "release_bin=$BIN" >> $GITHUB_OUTPUT
 
       - name: Run Debug tests
@@ -79,11 +83,12 @@ jobs:
             exit 1
           fi
 
-          unpacked_bin=$(find "$bin_dir" -maxdepth 1 -type f -perm -u+x -name "SREngine_*" ! -name "*.so*" | head -n 1)
+          unpacked_bin=$(find "$bin_dir" -maxdepth 1 -type f -name "SREngine_*" ! -name "*.so*" ! -name "*.so" | head -n 1)
           if [ -z "$unpacked_bin" ]; then
             echo "Unpacked binary not found in $bin_dir"
             exit 1
           fi
+          chmod +x "$unpacked_bin"
 
           echo "Found unpacked binary: $unpacked_bin"
 
@@ -119,11 +124,12 @@ jobs:
             exit 1
           fi
 
-          unpacked_bin=$(find "$bin_dir" -maxdepth 1 -type f -perm -u+x -name "SREngine_*" ! -name "*.so*" | head -n 1)
+          unpacked_bin=$(find "$bin_dir" -maxdepth 1 -type f -name "SREngine_*" ! -name "*.so*" ! -name "*.so" | head -n 1)
           if [ -z "$unpacked_bin" ]; then
             echo "Unpacked binary not found in $bin_dir"
             exit 1
           fi
+          chmod +x "$unpacked_bin"
 
           echo "Found unpacked binary: $unpacked_bin"
 
