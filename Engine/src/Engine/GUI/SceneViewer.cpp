@@ -13,6 +13,7 @@
 #include <Graphics/Material/UniqueMaterial.h>
 #include <Graphics/Types/Camera.h>
 #include <Graphics/Types/Framebuffer.h>
+#include <Graphics/Types/SkyboxComponent.h>
 #include <Graphics/Window/Window.h>
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Types/Geometry/Mesh3D.h>
@@ -63,7 +64,7 @@ namespace SR_CORE_GUI_NS {
             SetGizmoEnabled(m_isGizmoEnabled);
         }
 
-        if (m_enabled && (!m_platform || !m_directionalLight) && m_isPrefab) {
+        if (m_enabled && (!m_platform || !m_skybox || !m_directionalLight) && m_isPrefab) {
             m_directionalLight = m_scene->Find("PREFAB_DIRECTIONAL_LIGHT"_atom).DynamicCast<SR_UTILS_NS::GameObject>();
             if (!m_directionalLight) {
                 m_directionalLight = m_scene->InstanceGameObject("PREFAB_DIRECTIONAL_LIGHT"_atom);
@@ -77,6 +78,19 @@ namespace SR_CORE_GUI_NS {
             if (!m_platform) {
                 m_platform = m_scene->InstanceFromFile("Engine/Models/plane_extended.obj").DynamicCast<SR_UTILS_NS::GameObject>();
             }
+
+            m_skybox = m_scene->Find("PREFAB_SKYBOX").DynamicCast<SR_UTILS_NS::GameObject>();
+            if (!m_skybox) {
+                m_skybox = m_scene->InstanceGameObject("PREFAB_SKYBOX");
+
+                if (auto&& pSkyboxComponent = m_skybox->AddComponent<SR_GTYPES_NS::SkyboxComponent>()) {
+                    pSkyboxComponent->SetParams("Engine/Skyboxes/Gray.png", "Engine/Shaders/skybox.srsl", false);
+                }
+
+                m_skybox->AddSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave);
+                m_skybox->AddEditorFlags(SR_UTILS_NS::EditorFlags::Hidden);
+            }
+
             if (m_platform) {
                 m_platform->SetName("PREFAB_PLATFORM");
 

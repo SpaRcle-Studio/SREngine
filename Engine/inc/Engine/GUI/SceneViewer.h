@@ -91,6 +91,7 @@ namespace SR_CORE_GUI_NS {
         GameObjectPtr m_camera;
         GameObjectPtr m_gizmo;
         GameObjectPtr m_platform;
+        GameObjectPtr m_skybox;
         GameObjectPtr m_directionalLight;
         SR_WORLD_NS::Scene::Ptr m_scene;
         std::atomic<bool> m_enabled = true;

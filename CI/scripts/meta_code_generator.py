@@ -450,6 +450,11 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
 
     #    f.write('\n')
 
+    #f.write('\t' * tabs + 'namespace SpaRcle::Utils {\n')
+    #tabs += 1
+    #f.write('\t' * tabs + 'template<typename T> struct SRClassMetaTemplate;\n')
+
+
     f.write('\t' * tabs + 'namespace Codegen {\n')
     tabs += 1
 
@@ -460,6 +465,7 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
         f.write('\n')
 
     class_name = '::'.join(class_obj.namespaces) + '::' + class_obj.name
+
     f.write('\t' * tabs + f'template<> struct SRClassMetaTemplate<{class_name}> final : public SpaRcle::Utils::SRClassMeta {{' + '\n')
     tabs += 1
 

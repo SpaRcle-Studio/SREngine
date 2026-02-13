@@ -136,7 +136,7 @@ namespace SR_CORE_NS::GUI {
 
                 if (extension == "png" || extension == "jpg") {
                     if (!current.pTexture) {
-                        if (auto &&pTexture = SR_GTYPES_NS::Texture::Load(path)) {
+                        if (auto&& pTexture = SR_GTYPES_NS::Texture::Load(path)) {
                             pTexture->AddUsePoint();
                             current.pTexture = pTexture;
                         }

@@ -28,6 +28,7 @@
 
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Types/Camera.h>
+#include <Graphics/Types/SkyboxComponent.h>
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Window/Window.h>
 #include <Graphics/SRSL/Shader.h>
@@ -781,6 +782,18 @@ namespace SR_CORE_GUI_NS {
                         InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
                     }
                 }
+
+                SR_GRAPH_GUI_NS::Immediate::Separator();
+
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Skybox")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        auto&& pGameObject = pScene->InstanceGameObject("Skybox"_atom);
+                        auto&& pSkybox = pGameObject->AddComponent<SR_GTYPES_NS::SkyboxComponent>();
+                        pSkybox->SetParams("Engine/Skyboxes/Sun.png", "Engine/Shaders/Skybox.srsl", false);
+                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                    }
+                }
+
                 SR_GRAPH_GUI_NS::Immediate::EndMenu();
             }
 
