@@ -47,6 +47,15 @@ jobs:
     needs: [Main]
     uses: ./.github/workflows/LinuxCI.yml
 
+  TestsLinuxJob:
+    name: Linux Tests.
+    needs: [BuildLinuxJob]
+    if: ${{ always() }}
+    uses: ./.github/workflows/LinuxTestsCI.yml
+    with:
+      commitMessage: ${{github.event.head_commit.message}}
+    secrets: inherit
+
   BuildAndroidJob:
     name: Android.
     needs: [Main]
@@ -59,12 +68,12 @@ jobs:
 
   PostBuild:
     name: PostBuild.
-    needs: [TestsWindowsJob, BuildLinuxJob, BuildAndroidJob, BuildFlatpakJob]
+    needs: [TestsWindowsJob, TestsLinuxJob, BuildAndroidJob, BuildFlatpakJob]
     if: ${{ always() }}
     uses: ./.github/workflows/PostBuild.yml
     with:
       windowsBuildState: ${{needs.TestsWindowsJob.result}}
-      linuxBuildState: ${{needs.BuildLinuxJob.result}}
+      linuxBuildState: ${{needs.TestsLinuxJob.result}}
       androidBuildState: ${{needs.BuildAndroidJob.result}}
       flatpakBuildState: ${{needs.BuildFlatpakJob.result}}
       commitActor: ${{github.actor}}

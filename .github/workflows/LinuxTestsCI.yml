@@ -1,0 +1,135 @@
+on:
+  workflow_call:
+    inputs:
+      commitMessage:
+        required: true
+        type: string
+    secrets:
+      CITOKEN:
+        required: true
+
+jobs:
+  TestsLinux:
+    name: Linux Tests.
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 1) Скачать Debug
+      - name: Download Debug build
+        uses: actions/download-artifact@v4
+        with:
+          name: "Linux Debug gcc NoUnity SpaRcle Engine"
+          path: "artifacts/debug"
+
+      # 2) Скачать Release
+      - name: Download Release build
+        uses: actions/download-artifact@v4
+        with:
+          name: "Linux Release gcc NoUnity SpaRcle Engine"
+          path: "artifacts/release"
+
+      # 3) Найти бинарник в debug
+      - name: Find debug binary
+        id: find_debug
+        shell: bash
+        run: |
+          BIN=$(find artifacts/debug -type f -perm -u+x ! -name "*.so*" | head -n 1)
+          if [ -z "$BIN" ]; then
+            echo "Debug binary not found"
+            exit 1
+          fi
+          echo "debug_bin=$BIN" >> $GITHUB_OUTPUT
+
+      # 4) Найти бинарник в release
+      - name: Find release binary
+        id: find_release
+        shell: bash
+        run: |
+          BIN=$(find artifacts/release -type f -perm -u+x ! -name "*.so*" | head -n 1)
+          if [ -z "$BIN" ]; then
+            echo "Release binary not found"
+            exit 1
+          fi
+          echo "release_bin=$BIN" >> $GITHUB_OUTPUT
+
+      - name: Run Debug tests
+        shell: bash
+        continue-on-error: true
+        run: |
+          BIN="${{ steps.find_debug.outputs.debug_bin }}"
+          echo "Running: $BIN"
+
+          log_unpack="debug_unpack_log.txt"
+          log_test="debug_test_log.txt"
+
+          set +e
+          "$BIN" --unpack 2>&1 | tee "$log_unpack"
+          set -e
+
+          echo "===== Unpack Log ====="
+          cat "$log_unpack"
+
+          exe_dir=$(dirname "$BIN")
+          bin_dir="$exe_dir/SREngine/Engine/Bin"
+
+          if [ ! -d "$bin_dir" ]; then
+            echo "Folder $bin_dir not found. Packed binary did not unpack."
+            exit 1
+          fi
+
+          unpacked_bin=$(find "$bin_dir" -maxdepth 1 -type f -perm -u+x -name "SREngine_*" ! -name "*.so*" | head -n 1)
+          if [ -z "$unpacked_bin" ]; then
+            echo "Unpacked binary not found in $bin_dir"
+            exit 1
+          fi
+
+          echo "Found unpacked binary: $unpacked_bin"
+
+          set +e
+          "$unpacked_bin" --unit-tests --headless 2>&1 | tee "$log_test"
+          set -e
+
+          echo "===== Test Log ====="
+          cat "$log_test"
+
+      - name: Run Release tests
+        shell: bash
+        continue-on-error: true
+        run: |
+          BIN="${{ steps.find_release.outputs.release_bin }}"
+          echo "Running: $BIN"
+
+          log_unpack="release_unpack_log.txt"
+          log_test="release_test_log.txt"
+
+          set +e
+          "$BIN" --unpack 2>&1 | tee "$log_unpack"
+          set -e
+
+          echo "===== Unpack Log ====="
+          cat "$log_unpack"
+
+          exe_dir=$(dirname "$BIN")
+          bin_dir="$exe_dir/SREngine/Engine/Bin"
+
+          if [ ! -d "$bin_dir" ]; then
+            echo "Folder $bin_dir not found. Packed binary did not unpack."
+            exit 1
+          fi
+
+          unpacked_bin=$(find "$bin_dir" -maxdepth 1 -type f -perm -u+x -name "SREngine_*" ! -name "*.so*" | head -n 1)
+          if [ -z "$unpacked_bin" ]; then
+            echo "Unpacked binary not found in $bin_dir"
+            exit 1
+          fi
+
+          echo "Found unpacked binary: $unpacked_bin"
+
+          set +e
+          "$unpacked_bin" --unit-tests --headless 2>&1 | tee "$log_test"
+          set -e
+
+          echo "===== Test Log ====="
+          cat "$log_test"
