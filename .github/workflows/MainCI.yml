@@ -63,7 +63,7 @@ jobs:
     if: ${{ always() }}
     uses: ./.github/workflows/PostBuild.yml
     with:
-      windowsBuildState: ${{needs.BuildWindowsJob.result}}
+      windowsBuildState: ${{needs.TestsWindowsJob.result}}
       linuxBuildState: ${{needs.BuildLinuxJob.result}}
       androidBuildState: ${{needs.BuildAndroidJob.result}}
       flatpakBuildState: ${{needs.BuildFlatpakJob.result}}
