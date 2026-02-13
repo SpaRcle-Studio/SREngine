@@ -81,3 +81,78 @@ jobs:
       commitBranch: ${{github.ref_name}}
       commitMessage: ${{github.event.head_commit.message}}
     secrets: inherit
+
+  PublishDevRelease:
+    name: Publish Dev Release
+    if: ${{ github.ref_name == 'dev' && github.event_name == 'push' && needs.BuildWindowsJob.result == 'success' && needs.BuildLinuxJob.result == 'success' && needs.BuildAndroidJob.result == 'success' }}
+    needs: [BuildWindowsJob, BuildLinuxJob, BuildAndroidJob]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Delete existing dev-nightly release and tag
+        run: |
+          gh release delete dev-nightly --yes 2>/dev/null || true
+          git push origin :refs/tags/dev-nightly 2>/dev/null || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create tag dev-nightly
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag dev-nightly ${{ github.sha }}
+          git push origin dev-nightly
+
+      - name: Download Windows Release artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: "Windows Release SpaRcle Engine"
+          path: artifacts/win
+
+      - name: Download Linux Release artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: "Linux Release gcc NoUnity SpaRcle Engine"
+          path: artifacts/linux
+
+      - name: Download Android Release artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: "Android Release SpaRcle Engine arm64-v8a"
+          path: artifacts/android/arm64-v8a
+
+      - name: Download Android x86_64 artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: "Android Release SpaRcle Engine x86_64"
+          path: artifacts/android/x86_64
+
+      - name: Prepare release files
+        run: |
+          mkdir -p release
+          cp artifacts/win/*.exe release/SREngine-Windows-Release-packed.exe
+          LINUX_BIN=$(find artifacts/linux -type f -perm -u+x ! -name "*.so*" | head -n 1)
+          cp "$LINUX_BIN" release/SREngine-Linux-Release-packed
+          chmod +x release/SREngine-Linux-Release-packed
+          cp artifacts/android/arm64-v8a/*.apk release/SREngine-Android-Release-arm64-v8a.apk
+          cp artifacts/android/x86_64/*.apk release/SREngine-Android-Release-x86_64.apk
+          ls -la release
+
+      - name: Create or update release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: dev-nightly
+          name: "Dev Nightly (${{ github.sha }})"
+          body: |
+            Auto-built from branch **dev** at ${{ github.sha }}
+            Commit: ${{ github.event.head_commit.message }}
+          files: release/*
+          overwrite: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

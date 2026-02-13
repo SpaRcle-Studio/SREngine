@@ -51,3 +51,21 @@ jobs:
               Write-Error "Build failed with exit code $LASTEXITCODE"
               exit 1
           }
+
+      - if: success()
+        name: Prepare APK for upload
+        shell: powershell
+        working-directory: ${{ github.workspace }}/Platform/Android
+        run: |
+          $releaseDir = "app/build/outputs/apk/release"
+          $uploadDir = "apk_upload"
+          New-Item -ItemType Directory -Force -Path $uploadDir | Out-Null
+          Get-ChildItem -Path $releaseDir -Filter "*.apk" | Where-Object { $_.Name -notlike "*-unsigned*" } | ForEach-Object { Copy-Item $_.FullName -Destination $uploadDir }
+          Get-ChildItem $uploadDir
+
+      - if: success()
+        name: Upload packed APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Android Release SpaRcle Engine ${{ matrix.arch }}"
+          path: "${{ github.workspace }}/Platform/Android/apk_upload"
