@@ -45,13 +45,6 @@ jobs:
           grep -r ^deb /etc/apt/
           echo "======================="
 
-          echo "===== POLICY ====="
-          apt-cache policy wayland-protocols || true
-          echo "=================="
-          
-          echo "Installing wayland..."
-          sudo apt-get install -y wayland-protocols
-
           echo "Installing build-essential..."
           sudo apt-get install -y build-essential
 
