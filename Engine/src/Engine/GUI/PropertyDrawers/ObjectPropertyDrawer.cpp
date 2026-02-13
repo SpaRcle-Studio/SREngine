@@ -17,7 +17,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pOwner);
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
         SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
 
         SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
@@ -90,10 +90,13 @@ namespace SR_CORE_GUI_NS {
                 propertyContext.fieldWidth = widthNoArrow * 0.7f;
                 propertyContext.fieldTitleWidth = widthNoArrow * 0.3f;
                 propertyContext.pOwner = pClassValue;
+                //propertyContext.pUID = value.IsRef() ? pClassValue : (static_cast<void*>(static_cast<uint64_t*>(propertyContext.pUID) + 1));
                 propertyContext.noHeader = false;
 
                 pMeta->ForEachProperty([&](auto&& property, uint64_t index) {
+                    SR_GRAPH_GUI_NS::Immediate::PushID(index);
                     DrawPropertyGroup(SR_UTILS_NS::StringAtom(), pClassValue, index, property, context, propertyContext, feedback);
+                    SR_GRAPH_GUI_NS::Immediate::PopID();
                 });
 
                 widthNoArrow = widthNoArrow - context.GetArrowWidth();
@@ -125,7 +128,9 @@ namespace SR_CORE_GUI_NS {
                         SR_GRAPH_GUI_NS::Immediate::SameLine();
                         SR_GRAPH_GUI_NS::Immediate::BeginGroup();
                         pMeta->ForEachProperty([&](auto&& property, uint64_t index) {
+                            SR_GRAPH_GUI_NS::Immediate::PushID(index);
                             DrawPropertyGroup(group, pClassValue, index, property, context, propertyContext, feedback);
+                            SR_GRAPH_GUI_NS::Immediate::PopID();
                         });
                         SR_GRAPH_GUI_NS::Immediate::EndGroup();
                     }

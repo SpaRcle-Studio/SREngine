@@ -5,8 +5,11 @@
 #ifndef SR_ENGINE_ENGINESETTINGS_H
 #define SR_ENGINE_ENGINESETTINGS_H
 
-#include <Engine/stdInclude.h>
+#include <Engine/GUI/PropertyDrawers/ObjectPropertyDrawer.h>
+
 #include <Graphics/GUI/Widget.h>
+
+#include <Utils/Types/SetVector.h>
 
 namespace SR_CORE_GUI_NS {
     class EngineSettings : public SR_GRAPH_GUI_NS::Widget {
@@ -21,17 +24,19 @@ namespace SR_CORE_GUI_NS {
 
     private:
         void DrawMultiSampling();
-        void DrawLighting();
         void DrawVSync();
         void DrawEditorSettings();
+        void DrawGraphicsSettings();
 
         void PrepareRenderPresets();
 
     private:
+        float_t m_scrollBarWidth = 0.0f;
         std::string m_renderPresetsMemory;
-        std::set<std::string> m_renderPresets;
+        SR_HTYPES_NS::SetVector<SR_UTILS_NS::StringAtom> m_renderPresets;
         int32_t m_activeRenderPreset = 0;
         SR_UTILS_NS::Subscription m_onRenderSettingsChanged;
+        ObjectPropertyDrawer::Ptr m_graphicsSettingsDrawer;
 
     };
 }

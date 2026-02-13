@@ -27,6 +27,7 @@
 #include <Engine/EngineCommands.h>
 
 #include <Graphics/Types/Texture.h>
+#include <Graphics/Types/Camera.h>
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Window/Window.h>
 #include <Graphics/SRSL/Shader.h>
@@ -85,7 +86,7 @@ namespace SR_CORE_GUI_NS {
             m_pSettings->AddUsePoint();
         }
 
-        m_cachedScenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("/PreviousScenePath").ConcatExt("cache");
+        m_cachedScenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("User/PreviousScenePath.cache");
 
         m_engine = pEngine;
 
@@ -767,6 +768,19 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
 
+                SR_GRAPH_GUI_NS::Immediate::EndMenu();
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+
+            if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Render")) {
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Camera")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        auto&& pGameObject = pScene->InstanceGameObject("Camera"_atom);
+                        auto&& pCamera = pGameObject->AddComponent<SR_GTYPES_NS::Camera>();
+                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                    }
+                }
                 SR_GRAPH_GUI_NS::Immediate::EndMenu();
             }
 

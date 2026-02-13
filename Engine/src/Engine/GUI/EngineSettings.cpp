@@ -10,6 +10,8 @@
 
 #include <Utils/Common/StoreUtils.h>
 #include <Utils/Events/Broadcaster.h>
+#include <Utils/Reflection/Value.h>
+#include <Utils/Serialization/SRASerialization.h>
 
 namespace SR_CORE_GUI_NS {
     EngineSettings::EngineSettings()
@@ -27,13 +29,25 @@ namespace SR_CORE_GUI_NS {
     void EngineSettings::Draw() {
         SR_TRACY_ZONE;
 
+        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::FrameRounding, 0.0f);
+        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+
         DrawMultiSampling();
         SR_GRAPH_GUI_NS::Immediate::Separator();
         DrawVSync();
         SR_GRAPH_GUI_NS::Immediate::Separator();
-        DrawLighting();
-        SR_GRAPH_GUI_NS::Immediate::Separator();
         DrawEditorSettings();
+        SR_GRAPH_GUI_NS::Immediate::Separator();
+        DrawGraphicsSettings();
+
+        if (SR_GRAPH_GUI_NS::Immediate::GetScrollMaxY() > 0) {
+            m_scrollBarWidth = SR_GRAPH_GUI_NS::Immediate::GetScrollbarSize();
+        }
+        else {
+            m_scrollBarWidth = 0;
+        }
+
+        SR_GRAPH_GUI_NS::Immediate::PopStyleVar(2);
     }
 
     void EngineSettings::DrawMultiSampling() {
@@ -77,10 +91,6 @@ namespace SR_CORE_GUI_NS {
         }
     }
 
-    void EngineSettings::DrawLighting() {
-        SR_TRACY_ZONE;
-    }
-
     void EngineSettings::DrawVSync() {
         SR_TRACY_ZONE;
         auto&& pPipeline = GetContext()->GetPipeline();
@@ -105,6 +115,60 @@ namespace SR_CORE_GUI_NS {
         if (swapchainImages != suggestedSwapchainImages) {
             SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Yellow(), "Requires restart!");
         }
+    }
+
+    void EngineSettings::DrawGraphicsSettings() {
+        SR_TRACY_ZONE;
+
+        SR_GRAPH_GUI_NS::Immediate::PushID("GraphicsSettings");
+
+        if (!m_graphicsSettingsDrawer) {
+            m_graphicsSettingsDrawer = new ObjectPropertyDrawer();
+        }
+
+        SR_GRAPH_NS::ActiveGraphicsSettings& settings = GetContext()->GetActiveGraphicsSettings();
+        auto&& value = SR_UTILS_NS::Reflection::Value::CreateRef(settings);
+
+        const float_t lineHeight = SR_GRAPH_GUI_NS::Immediate::GetFontSize() + SR_GRAPH_GUI_NS::Immediate::GetFramePadding().y * 2.0f;
+        float_t windowWidth = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x - m_scrollBarWidth;
+
+        if (SR_GRAPH_GUI_NS::Immediate::Button("Save", { windowWidth * 0.2f, lineHeight })) {
+            SR_UTILS_NS::SRASerializer serializer;
+            settings.Save(serializer);
+            auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(SR_GRAPH_NS::ActiveGraphicsSettings::SETTINGS_PATH);
+            if (!serializer.SaveToFile(path)) {
+                SR_ERROR("EngineSettings::DrawGraphicsSettings() : failed to save graphics settings to path: {}", path);
+            }
+        }
+
+        SR_GRAPH_GUI_NS::Immediate::SameLine();
+
+        SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
+        SR_GRAPH_GUI_NS::Immediate::Button("Graphics settings", { windowWidth * 0.6f, lineHeight });
+        SR_GRAPH_GUI_NS::Immediate::EndDisabled();
+
+        SR_GRAPH_GUI_NS::Immediate::SameLine();
+
+        if (SR_GRAPH_GUI_NS::Immediate::Button("Reset", { windowWidth * 0.2f, lineHeight })) {
+            GetContext()->ReloadGraphicsSettings();
+        }
+
+        PropertyDrawerContext context(&value);
+        context.lineHeight = lineHeight;
+        context.axisButtonWidth = context.lineHeight;
+        context.spaceWidth = windowWidth;
+        context.fieldHeight = lineHeight;
+        context.fieldTitleWidth = windowWidth * 0.4f;
+        context.fieldWidth = windowWidth * 0.6f;
+        context.noHeader = true;
+        context.editorPropertyParams.SetDragSpeed(0.1f);
+
+        auto&& feedback = m_graphicsSettingsDrawer->Draw(context);
+        if (feedback.isChanged) {
+            GetContext()->ReloadShaders();
+        }
+
+        SR_GRAPH_GUI_NS::Immediate::PopID();
     }
 
     void EngineSettings::DrawEditorSettings() {
@@ -180,7 +244,8 @@ namespace SR_CORE_GUI_NS {
         }
 
         for (auto&& preset : m_renderPresets) {
-            m_renderPresetsMemory += preset + '\0';
+            m_renderPresetsMemory += preset.ToStringRef();
+            m_renderPresetsMemory += '\0';
         }
     }
 

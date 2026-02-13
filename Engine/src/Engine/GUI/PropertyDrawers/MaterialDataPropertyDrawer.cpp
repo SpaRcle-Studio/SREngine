@@ -36,7 +36,7 @@ namespace SR_CORE_GUI_NS {
     PropertyDrawerFeedback MaterialDataPropertyDrawer::DrawCustomProperties(const PropertyDrawerContext& context) {
         PropertyDrawerFeedback feedback;
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pOwner);
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
 
         SR_GRAPH_NS::MaterialData& materialData = *static_cast<SR_GRAPH_NS::MaterialData*>(context.pOwner);
 

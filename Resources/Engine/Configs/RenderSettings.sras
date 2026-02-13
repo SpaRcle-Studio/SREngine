@@ -34,9 +34,6 @@ use tabs: true
 						6-v:name
 							7-s:Post process
 						6-a:shaderDefines
-							7-k:i
-								8-v:d
-									9-s:SR_DEFINE_USE_CASCADED_SHADOW_MAP
 						6-v:mainCameraRenderTechnique
 							7-s:Engine/Render/PostProcess.srtech
 						6-v:editorCameraRenderTechnique
@@ -135,3 +132,25 @@ use tabs: true
 					5-s:Engine/Render/FullRender.srtech
 				4-v:editorCameraRenderTechnique
 					5-s:Editor/Render/FullRender.srtech
+			3-a:shadowQualityPresets
+				4-k:item
+					5-v:first
+						6-s:Low
+					5-o:second
+						6-v:shadowMapResolution
+							7-i:1024
+						6-v:cascadesCount
+							7-i:2
+				4-k:item
+					5-v:first
+						6-s:Medium
+					5-o:second
+						6-v:cascadesCount
+							7-i:3
+				4-k:item
+					5-v:first
+						6-s:Extreme
+					5-o:second
+						6-v:shadowMapResolution
+							7-i:2048
+			3-a:colorBufferQualityPresets

@@ -67,11 +67,6 @@ use tabs: true
 										10-o:data
 											11-v:frameBufferName
 												12-s:DepthCascades
-											11-o:depth
-												12-v:has
-													13-b:true
-												12-v:value
-													13-f:1
 							7-k:i
 								8-o:d
 									9-v:type
@@ -94,6 +89,9 @@ use tabs: true
 																	17-s:Opaque
 														14-a:disallowedLayers
 														14-a:shaderDefines
+															15-k:i
+																16-v:d
+																	17-s:SR_DEFINE_USE_CASCADED_SHADOW_MAP
 														14-o:samplers
 															15-a:samplers
 																16-k:i
@@ -152,6 +150,9 @@ use tabs: true
 																16-v:d
 																	17-s:GizmoSelection
 														14-a:shaderDefines
+															15-k:i
+																16-v:d
+																	17-s:SR_DEFINE_USE_CASCADED_SHADOW_MAP
 														14-o:samplers
 															15-a:samplers
 																16-k:i
@@ -256,11 +257,6 @@ use tabs: true
 													13-o:d
 											11-v:frameBufferName
 												12-s:Main
-											11-o:depth
-												12-v:has
-													13-b:true
-												12-v:value
-													13-f:1
 							7-k:i
 								8-o:d
 									9-v:type
@@ -352,11 +348,6 @@ use tabs: true
 													13-o:d
 											11-v:frameBufferName
 												12-s:SceneView
-											11-o:depth
-												12-v:has
-													13-b:true
-												12-v:value
-													13-f:1
 							7-k:i
 								8-o:d
 									9-v:type
@@ -407,11 +398,6 @@ use tabs: true
 													13-o:d
 											11-v:frameBufferName
 												12-s:ColorBuffer
-											11-o:depth
-												12-v:has
-													13-b:true
-												12-v:value
-													13-f:1
 				4-a:frameBuffers
 					5-k:i
 						6-o:d

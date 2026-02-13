@@ -19,7 +19,7 @@ namespace SR_CORE_GUI_NS {
             return feedback;
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pOwner);
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
         SR_GRAPH_GUI_NS::Immediate::PushID(context.GetProperty().GetName().ToCStr());
 
         SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
@@ -43,9 +43,12 @@ namespace SR_CORE_GUI_NS {
 
             const SR_MATH_NS::FVector2 mainButtonSize = { 30, context.fieldHeight };
             buttonSize = { (context.fieldWidth - (counterButtonWidth.x + mainButtonSize.x)) / 3, context.fieldHeight };
+
+            auto&& stackSize = SR_GRAPH_GUI_NS::Immediate::BeginForceEnabled();
             if (SR_GRAPH_GUI_NS::Immediate::Button("", mainButtonSize)) {
                 m_isOpened = !m_isOpened;
             }
+            SR_GRAPH_GUI_NS::Immediate::EndForceEnabled(stackSize);
         }
         else {
             const SR_MATH_NS::FVector2 arrowPos = cursorPos + SR_MATH_NS::FVector2(1, 5);
@@ -61,9 +64,11 @@ namespace SR_CORE_GUI_NS {
             const float_t partItemWidth = ((context.fieldWidth + context.fieldTitleWidth) - titleTotalWidth) / 3;
             buttonSize = { partItemWidth, context.fieldHeight };
 
+            auto&& stackSize = SR_GRAPH_GUI_NS::Immediate::BeginForceEnabled();
             if (SR_GRAPH_GUI_NS::Immediate::Button(displayName.c_str(), mainButtonSize)) {
                 m_isOpened = !m_isOpened;
             }
+            SR_GRAPH_GUI_NS::Immediate::EndForceEnabled(stackSize);
         }
 
         SR_GRAPH_GUI_NS::Immediate::SameLine();

@@ -133,7 +133,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pOwner);
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
         SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
 
         SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
@@ -182,7 +182,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pOwner);
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
         SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
 
         SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
@@ -320,7 +320,7 @@ namespace SR_CORE_GUI_NS {
             return feedback;
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pOwner);
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
         SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
 
         SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
@@ -385,7 +385,7 @@ namespace SR_CORE_GUI_NS {
         std::string_view vectorPartType = SR_UTILS_NS::StringUtils::GetBetween(vectorType, '<', '>');
         const uint8_t dimension = SR_UTILS_NS::CharToInt(vectorType[sizeof("Vector") - 1]);
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pOwner);
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
         SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
 
         SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
@@ -499,7 +499,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pOwner);
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
         SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
 
         SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
@@ -633,7 +633,7 @@ namespace SR_CORE_GUI_NS {
             return feedback;
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pOwner);
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
         SR_GRAPH_GUI_NS::Immediate::PushID(context.GetProperty().GetName().ToCStr());
 
         if (!context.pValue) {

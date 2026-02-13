@@ -32,7 +32,7 @@ namespace SR_CORE_NS {
             }
 
             auto&& cachePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
-            auto&& windowSettingsPath = cachePath.Concat("WindowSettings.xml");
+            auto&& windowSettingsPath = cachePath.Concat("User/WindowSettings.xml");
 
             const bool windowSettingsExist = windowSettingsPath.Exists();
 
@@ -98,7 +98,7 @@ namespace SR_CORE_NS {
 
         if (auto&& pWindow = pEngine->GetMainWindow()) {
             auto&& cachePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
-            auto&& windowSettingsPath = cachePath.Concat("WindowSettings.xml");
+            auto&& windowSettingsPath = cachePath.Concat("User/WindowSettings.xml");
 
             auto&& windowSettings = SR_XML_NS::Document::New();
             auto&& rootNode = windowSettings.Root().AppendNode("Settings");

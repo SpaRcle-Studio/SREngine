@@ -22,7 +22,7 @@ namespace SR_CORE_GUI_NS {
 
         auto&& editorParams = context.GetEditorParams();
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pOwner);
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
         SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
 
         SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
@@ -280,6 +280,7 @@ namespace SR_CORE_GUI_NS {
             propertyContext.fieldTitleWidth = totalWidth * 0.3f;
             propertyContext.pProperty = nullptr;
             propertyContext.pOwner = pClassValue;
+            //propertyContext.pUID = value.IsRef() ? pClassValue : (static_cast<void*>(static_cast<uint64_t*>(propertyContext.pUID) + 1));
             propertyContext.noHeader = true;
 
             SR_GRAPH_GUI_NS::Immediate::BeginGroup();

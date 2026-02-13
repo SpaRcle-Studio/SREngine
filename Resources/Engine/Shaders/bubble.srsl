@@ -15,7 +15,7 @@ DepthTest true;
 
 #include <Engine/Shaders/Common/utils.srsl>
 
-[[uniform], [public]] sampler2D NoiseTex;
+[[uniform], [public]] sampler2D NoiseTex = "Engine/Textures/noise.png";
 [[uniform], [public]] vec3 BubbleColor;
 [[uniform], [public]] float NoiseSampleSize;
 [[uniform], [public]] float AnimationSpeed;

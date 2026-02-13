@@ -408,7 +408,7 @@ namespace SR_CORE_GUI_NS {
             };
 
             auto&& context = CreateDrawerContext(&value);
-            context.pOwner = pComponent;
+            context.pUID = context.pOwner = pComponent;
             context.pComponent = pComponent;
 
             auto&& componentContext = m_componentContexts.at(pComponent->GetEntityId());

@@ -18,7 +18,7 @@
 #include <Codegen/CppCompiler.generated.hpp>
 
 namespace SR_SCRIPTING_NS {
-    static std::string_view CPP_COMPILER_SETTINGS_PATH = "Scripts/CppCompilerSettings.sra";
+    static std::string_view CPP_COMPILER_SETTINGS_PATH = "User/CppCompilerSettings.sra";
 
     CppCompiler::~CppCompiler() = default;
 
