@@ -107,6 +107,7 @@ def generate_all_includes_cxx(logger: logger_utils.Logger, context: codegen_cont
         f.write(sparcle_utils.codegen_cpp_header_comment)
 
         f.write('#define SR_ENGINE_CODEGEN_CLANG_PARSE_MODE\n\n')
+        f.write('#define SR_ENGINE_COMMON_PCH_FOR_BASE_CODE\n\n')
 
         for file in context.files_for_codegen:
             f.write(f'#include "{os.path.abspath(file)}"' + '\n')
