@@ -9,6 +9,7 @@
 
 #include <Utils/Input/InputSystem.h>
 #include <Utils/ECS/TransformRect.h>
+#include <Utils/ECS/SceneObject.h>
 
 #include <Codegen/UIScrollBar.generated.hpp>
 

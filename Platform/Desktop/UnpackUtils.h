@@ -70,7 +70,7 @@ int ParseData(const std::vector<char>& data, const std::string& executablePath) 
         std::string ext = path.extension().string();
 
         std::filesystem::path outputDir = std::filesystem::path(executablePath).parent_path();
-        if (ext == ".dll" || ext == ".so" || ext == ".dylib" || ext == ".exe" || ext.empty()) {
+        if (ext == ".dll" || ext == ".so" || ext == ".dylib" || ext == ".exe" || ext == ".x86_64" || ext.empty()) {
             outputDir /= SR_APPLICATION_NAME + "/Engine/Bin";
         }
         else if (ext == ".lib") {

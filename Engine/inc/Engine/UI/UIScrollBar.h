@@ -9,8 +9,10 @@
 
 #include <Graphics/UI/Canvas.h>
 
-#include <Utils/ECS/SceneObject.h>
-#include <Utils/ECS/TransformRect.h>
+namespace SR_UTILS_NS {
+    class TransformRect;
+    class SceneObject;
+}
 
 namespace SR_CORE_UI_NS {
     SR_ENUM_NS_CLASS_T(ScrollBarDirection, uint8_t,
@@ -55,8 +57,8 @@ namespace SR_CORE_UI_NS {
     private:
         State m_state = State::Idle;
 
-        SR_UTILS_NS::TransformRect::Ptr m_handleRect;
-        SR_UTILS_NS::TransformRect::Ptr m_containerRect;
+        SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::TransformRect> m_handleRect;
+        SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::TransformRect> m_containerRect;
 
     private:
         /// @property

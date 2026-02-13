@@ -3,12 +3,12 @@
 //
 
 #include <Engine/States/InitializeState.h>
+#include <Engine/Engine.h>
+#include <Engine/GUI/EditorGUI.h>
 
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Window/Window.h>
-
-#include <Engine/Engine.h>
-#include <Engine/GUI/EditorGUI.h>
+#include <Graphics/Window/BasicWindowImpl.h>
 
 #include <Codegen/InitializeState.generated.hpp>
 

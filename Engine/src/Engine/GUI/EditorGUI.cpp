@@ -30,6 +30,7 @@
 #include <Graphics/Types/Camera.h>
 #include <Graphics/Types/SkyboxComponent.h>
 #include <Graphics/Render/RenderContext.h>
+#include <Graphics/Window/BasicWindowImpl.h>
 #include <Graphics/Window/Window.h>
 #include <Graphics/SRSL/Shader.h>
 #include <Graphics/Lighting/DirectionalLight.h>

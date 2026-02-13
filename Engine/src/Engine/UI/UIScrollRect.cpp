@@ -4,6 +4,8 @@
 
 #include <Engine/UI/UIScrollRect.h>
 
+#include <Utils/Input/InputSystem.h>
+
 #include <Codegen/UIScrollRect.generated.hpp>
 
 namespace SR_CORE_UI_NS {
