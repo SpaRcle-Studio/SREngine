@@ -84,8 +84,9 @@ jobs:
 
   PublishDevRelease:
     name: Publish Dev Release
-    if: ${{ github.ref_name == 'dev' && github.event_name == 'push' && needs.TestsWindowsJob.result == 'success' && needs.TestsLinuxJob.result == 'success' && needs.BuildAndroidJob.result == 'success' }}
-    needs: [PostBuild]
+    #if: ${{ github.ref_name == 'dev' && github.event_name == 'push' && needs.TestsWindowsJob.result == 'success' && needs.TestsLinuxJob.result == 'success' && needs.BuildAndroidJob.result == 'success' }}
+    if: ${{ github.ref_name == 'dev' && github.event_name == 'push' && needs.TestsWindowsJob.result == 'success' }}
+    needs: [TestsWindowsJob]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -106,6 +107,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -d dev-nightly 2>/dev/null || true
           git tag dev-nightly ${{ github.sha }}
           git push origin dev-nightly
 
@@ -115,23 +117,23 @@ jobs:
           name: "Windows Release SpaRcle Engine"
           path: artifacts/win
 
-      - name: Download Linux Release artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: "Linux Release gcc NoUnity SpaRcle Engine"
-          path: artifacts/linux
+      #- name: Download Linux Release artifact
+      #  uses: actions/download-artifact@v4
+      #  with:
+      #    name: "Linux Release gcc NoUnity SpaRcle Engine"
+      #    path: artifacts/linux
 
-      - name: Download Android Release artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: "Android Release SpaRcle Engine arm64-v8a"
-          path: artifacts/android/arm64-v8a
+      #- name: Download Android Release artifacts
+      #  uses: actions/download-artifact@v4
+      #  with:
+      #    name: "Android Release SpaRcle Engine arm64-v8a"
+      #    path: artifacts/android/arm64-v8a
 
-      - name: Download Android x86_64 artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: "Android Release SpaRcle Engine x86_64"
-          path: artifacts/android/x86_64
+      #- name: Download Android x86_64 artifact
+      #  uses: actions/download-artifact@v4
+      #  with:
+      #    name: "Android Release SpaRcle Engine x86_64"
+      #    path: artifacts/android/x86_64
 
       - name: Prepare release files
         run: |
@@ -142,12 +144,12 @@ jobs:
           WIN_EXE=$(find artifacts/win -type f -name "*.exe" | head -n 1)
           cp "$WIN_EXE" release/SREngine-Windows-Release-packed.exe
                
-          LINUX_BIN=$(find artifacts/linux -type f -name "*-packed" | head -n 1)
-          cp "$LINUX_BIN" release/SREngine-Linux-Release-packed
-          chmod +x release/SREngine-Linux-Release-packed
+          # LINUX_BIN=$(find artifacts/linux -type f -name "*-packed" | head -n 1)
+          # cp "$LINUX_BIN" release/SREngine-Linux-Release-packed
+          # chmod +x release/SREngine-Linux-Release-packed
           
-          cp artifacts/android/arm64-v8a/*.apk release/SREngine-Android-Release-arm64-v8a.apk
-          cp artifacts/android/x86_64/*.apk release/SREngine-Android-Release-x86_64.apk
+          # cp artifacts/android/arm64-v8a/*.apk release/SREngine-Android-Release-arm64-v8a.apk
+          # cp artifacts/android/x86_64/*.apk release/SREngine-Android-Release-x86_64.apk
           
           ls -la release
 
