@@ -132,5 +132,10 @@ endif()
 target_include_directories(Audio PUBLIC inc)
 target_include_directories(Audio PUBLIC libs)
 
+if (SR_USE_PCH)
+    target_compile_definitions(Audio PUBLIC SR_USE_PCH)
+    target_precompile_headers(Audio PUBLIC ${SR_COMMON_PCH_HEADER_PATH})
+endif()
+
 get_property(SR_UTILS_INCLUDE_DIRECTORIES_CONTENT GLOBAL PROPERTY SR_UTILS_INCLUDE_DIRECTORIES)
 target_include_directories(Audio PUBLIC ${SR_UTILS_INCLUDE_DIRECTORIES_CONTENT})

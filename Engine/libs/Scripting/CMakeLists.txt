@@ -76,5 +76,10 @@ target_include_directories(Scripting PUBLIC libs/EvoScript/Core/inc)
 target_include_directories(Scripting PUBLIC ${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Engine/libs/Utils/libs/tree-sitter/lib/include)
 target_include_directories(Scripting PUBLIC libs)
 
+if (SR_USE_PCH)
+    target_compile_definitions(Scripting PUBLIC SR_USE_PCH)
+    target_precompile_headers(Scripting PUBLIC ${SR_COMMON_PCH_HEADER_PATH})
+endif()
+
 get_property(SR_UTILS_INCLUDE_DIRECTORIES_CONTENT GLOBAL PROPERTY SR_UTILS_INCLUDE_DIRECTORIES)
 target_include_directories(Scripting PUBLIC ${SR_UTILS_INCLUDE_DIRECTORIES_CONTENT})

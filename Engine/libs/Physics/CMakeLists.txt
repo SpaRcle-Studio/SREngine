@@ -183,5 +183,10 @@ target_include_directories(Physics PUBLIC inc)
 target_include_directories(Physics PUBLIC libs)
 target_include_directories(Physics PUBLIC ${BULLET_PHYSICS_SOURCE_DIR}/src)
 
+if (SR_USE_PCH)
+    target_compile_definitions(Physics PUBLIC SR_USE_PCH)
+    target_precompile_headers(Physics PUBLIC ${SR_COMMON_PCH_HEADER_PATH})
+endif()
+
 get_property(SR_UTILS_INCLUDE_DIRECTORIES_CONTENT GLOBAL PROPERTY SR_UTILS_INCLUDE_DIRECTORIES)
 target_include_directories(Physics PUBLIC ${SR_UTILS_INCLUDE_DIRECTORIES_CONTENT})
