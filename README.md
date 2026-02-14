@@ -67,7 +67,6 @@ See documentation
   
 ## Features
   * SpaRcle Shader Language (SRSL)
-  * Chunk system 
   * Render passes
   * Custom framebuffers
   * C++ scripting system
