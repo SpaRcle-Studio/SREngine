@@ -67,7 +67,6 @@ See documentation
   
 ## Features
   * SpaRcle Shader Language (SRSL)
-  * SpaRcle Logical Machine (SRLM) aka Blueprints 
   * Chunk system 
   * Render passes
   * Custom framebuffers
