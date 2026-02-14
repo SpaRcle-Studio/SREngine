@@ -275,6 +275,14 @@ int PackFiles(const std::string& executablePath, const std::vector<std::string>&
 
     outFile.write(archive.data(), static_cast<std::streamsize>(archive.size()));
 
+#if defined(__linux__)
+    /// add chmod +x for packed file on unix systems
+    if (chmod(packedFileName.c_str(), 0755) != 0) {
+        std::cerr << "PackFiles() : failed to set executable permissions for packed file.\n";
+        return -1;
+    }
+#endif
+
     std::cout << "PackFiles() : packed file created successfully.\n";
 
     return 0;

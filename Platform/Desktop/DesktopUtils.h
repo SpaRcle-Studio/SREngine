@@ -13,6 +13,10 @@
 
 #include <zlib.h>
 
+#if defined(__linux__)
+    #include <sys/stat.h>
+#endif
+
 constexpr uint64_t constexpr_strlen(const char* str) {
     return *str ? 1 + constexpr_strlen(str + 1) : 0;
 }

@@ -24,6 +24,10 @@ int main(int argc, char** argv) {
     bool allowToUnpack = true;
 
     for (int i = 1; i < argc; ++i) {
+        std::cout << "Command line argument: " << argv[i] << std::endl;
+    }
+
+    for (int i = 1; i < argc; ++i) {
         if (strcmp(argv[i], "--pack") == 0) {
             return PackFiles(executablePath, GetPackFiles(executablePath), {}, false);
         }
