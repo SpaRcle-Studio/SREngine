@@ -117,38 +117,39 @@ jobs:
           name: "Windows Release SpaRcle Engine"
           path: artifacts/win
 
-      #- name: Download Linux Release artifact
-      #  uses: actions/download-artifact@v4
-      #  with:
-      #    name: "Linux Release gcc NoUnity SpaRcle Engine"
-      #    path: artifacts/linux
+      - name: Download Linux Release artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: "Linux Release gcc NoUnity SpaRcle Engine"
+          path: artifacts/linux
 
-      #- name: Download Android Release artifacts
-      #  uses: actions/download-artifact@v4
-      #  with:
-      #    name: "Android Release SpaRcle Engine arm64-v8a"
-      #    path: artifacts/android/arm64-v8a
+      - name: Download Android Release artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: "Android Release SpaRcle Engine arm64-v8a"
+          path: artifacts/android/arm64-v8a
 
-      #- name: Download Android x86_64 artifact
-      #  uses: actions/download-artifact@v4
-      #  with:
-      #    name: "Android Release SpaRcle Engine x86_64"
-      #    path: artifacts/android/x86_64
-
-      # Linux: packed binary (no -perm check: artifact may lose +x)
-      # LINUX_BIN=$(find artifacts/linux -type f ! -name "*.so*" ! -name "*.so" | head -n 1)
-      # cp "$LINUX_BIN" release/SREngine-Linux-Release-packed
-      # chmod +x release/SREngine-Linux-Release-packed
-      # Android
-      # cp artifacts/android/arm64-v8a/*.apk release/SREngine-Android-Release-arm64-v8a.apk
-      # cp artifacts/android/x86_64/*.apk release/SREngine-Android-Release-x86_64.apk
+      - name: Download Android x86_64 artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: "Android Release SpaRcle Engine x86_64"
+          path: artifacts/android/x86_64
 
       - name: Prepare release files
         run: |
           set -e
+          
           mkdir -p release
+          
           WIN_EXE=$(find artifacts/win -type f -name "*.exe" | head -n 1)
           cp "$WIN_EXE" release/SREngine-Windows-Release-packed.exe
+               
+          LINUX_BIN=$(find artifacts/linux -type f -name "*-packed" | head -n 1)
+          cp "$LINUX_BIN" release/SREngine-Linux-Release-packed
+          chmod +x release/SREngine-Linux-Release-packed
+          
+          cp artifacts/android/arm64-v8a/*.apk release/SREngine-Android-Release-arm64-v8a.apk
+          cp artifacts/android/x86_64/*.apk release/SREngine-Android-Release-x86_64.apk
           
           ls -la release
 
