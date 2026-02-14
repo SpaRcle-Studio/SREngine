@@ -22,14 +22,10 @@
 #include <Audio/Sound.h>
 
 #include <Scripting/Base/Behaviour.h>
-//#include <Scripting/Impl/EvoScriptResourceReloader.h>
-//#include <Scripting/Impl/EvoBehaviour.h>
 
 namespace SR_CORE_NS::Resources {
     bool RegisterResources(const SR_HTYPES_NS::SharedPtr<Engine>& pEngine) {
         auto&& resourcesManager = SR_UTILS_NS::ResourceManager::Instance();
-
-        //resourcesManager.RegisterReloader<SR_SCRIPTING_NS::EvoBehaviour, SR_SCRIPTING_NS::EvoScriptResourceReloader>();
 
         const auto contextGetter = [pEngine]() -> SR_GRAPH_NS::RenderContext::Ptr {
             return pEngine ? pEngine->GetRenderContext() : SR_GRAPH_NS::RenderContext::Ptr();
