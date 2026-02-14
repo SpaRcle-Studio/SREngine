@@ -51,6 +51,7 @@ jobs:
           echo "buildSuccessful=false" >> "$GITHUB_ENV"
           
           cmake -G "Ninja" ../ \
+            -DSR_CI_BUILD=ON \
             -DCMAKE_BUILD_TYPE=${{ matrix.buildType }} \
             -DSR_COMMON_UNITY_BUILD="${{ matrix.buildType == 'Release' && 'ON' || 'OFF' }}" \
             "-DCMAKE_MAKE_PROGRAM=${{ github.workspace }}/ninja-build/ninja.exe"

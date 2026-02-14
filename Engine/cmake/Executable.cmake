@@ -53,7 +53,9 @@ endif()
 
 if (NOT ANDROID_NDK AND NOT SR_EMSCRIPTEN)
     # TODO: implement an easy way to set if a build is 'stable' or 'latest'
-    if (${CMAKE_BUILD_TYPE} STREQUAL "Release")
+    if (SR_CI_BUILD)
+        set(executableType "dev")
+    elseif (${CMAKE_BUILD_TYPE} STREQUAL "Release")
         set(executableType "stable")
     else()
         set(executableType "latest")

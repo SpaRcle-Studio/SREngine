@@ -130,7 +130,7 @@ jobs:
         working-directory: ${{github.workspace}}/build
         run: |
           echo "buildSuccessful=false" >> "$GITHUB_ENV"
-          cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=${{ matrix.buildType }} -DSR_COMMON_UNITY_BUILD=${{ matrix.unity }}
+          cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=${{ matrix.buildType }} -DSR_COMMON_UNITY_BUILD=${{ matrix.unity }} -DSR_CI_BUILD=ON
           cmake --build . -j $(nproc || sysctl -n hw.ncpu)
           echo "buildSuccessful=true" >> "$GITHUB_ENV"
 
