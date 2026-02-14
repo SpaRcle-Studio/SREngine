@@ -84,10 +84,8 @@ jobs:
 
   PublishDevRelease:
     name: Publish Dev Release
-    #if: ${{ github.ref_name == 'dev' && github.event_name == 'push' && needs.TestsWindowsJob.result == 'success' && needs.TestsLinuxJob.result == 'success' && needs.BuildAndroidJob.result == 'success' }}
-    if: ${{ github.ref_name == 'dev' && github.event_name == 'push' && needs.TestsWindowsJob.result == 'success' }}
-    #needs: [PostBuild]
-    needs: [TestsWindowsJob]
+    if: ${{ github.ref_name == 'dev' && github.event_name == 'push' && needs.TestsWindowsJob.result == 'success' && needs.TestsLinuxJob.result == 'success' && needs.BuildAndroidJob.result == 'success' }}
+    needs: [PostBuild]
     runs-on: ubuntu-latest
     permissions:
       contents: write
