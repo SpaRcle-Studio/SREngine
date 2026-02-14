@@ -141,10 +141,10 @@ jobs:
           mkdir -p release
           
           WIN_EXE=$(find artifacts/win -type f -name "*.exe" | head -n 1)
-          cp "$WIN_EXE" release/SREngine-Windows-Release-packed.exe
+          cp "$WIN_EXE" release/SREngine_v1.0.0-dev_windows.x86_64.exe
                
           LINUX_BIN=$(find artifacts/linux -type f -name "*-packed" | head -n 1)
-          cp "$LINUX_BIN" release/SREngine_v1.0.0-dev_windows.x86_64.exe
+          cp "$LINUX_BIN" release/SREngine_v1.0.0-dev_linux.x86_64
           chmod +x release/SREngine_v1.0.0-dev_linux.x86_64
           
           # В каждом артефакте по 2 apk (arch-specific и universal) — берём только arch-specific
