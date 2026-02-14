@@ -144,14 +144,15 @@ jobs:
           cp "$WIN_EXE" release/SREngine-Windows-Release-packed.exe
                
           LINUX_BIN=$(find artifacts/linux -type f -name "*-packed" | head -n 1)
-          cp "$LINUX_BIN" release/SREngine-Linux-Release-packed
-          chmod +x release/SREngine-Linux-Release-packed
+          cp "$LINUX_BIN" release/SREngine_v1.0.0-dev_windows.x86_64.exe
+          chmod +x release/SREngine_v1.0.0-dev_linux.x86_64
           
           # В каждом артефакте по 2 apk (arch-specific и universal) — берём только arch-specific
           ANDROID_ARM64=$(find artifacts/android/arm64-v8a -type f -name "*arm64*v8a*.apk" 2>/dev/null | head -n 1)
           ANDROID_X64=$(find artifacts/android/x86_64 -type f -name "*x86_64*.apk" 2>/dev/null | head -n 1)
-          cp "$ANDROID_ARM64" release/SREngine-Android-Release-arm64-v8a.apk
-          cp "$ANDROID_X64" release/SREngine-Android-Release-x86_64.apk
+          
+          cp "$ANDROID_ARM64" release/SREngine_v1.0.0-dev_android.arm64-v8a.apk
+          cp "$ANDROID_X64" release/SREngine_v1.0.0-dev_android.x86_64.apk
           
           ls -la release
 
@@ -159,7 +160,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: dev-nightly
-          name: "Dev Nightly (${{ github.sha }})"
+          name: "SpaRcle Engine 1.0.0-dev"
           body: |
             Auto-built from branch **dev** at ${{ github.sha }}
             Commit: ${{ github.event.head_commit.message }}
