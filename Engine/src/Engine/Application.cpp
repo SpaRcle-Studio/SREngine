@@ -111,7 +111,7 @@ namespace SR_CORE_NS {
         auto&& pEditor = m_engine->GetEditor();
         if (!pEditor || !pEditor->Enabled()) {
             m_isNeedPlaySound = false;
-            return; 
+            return;
         }
 
         if (auto&& pRenderScene = m_engine->GetRenderScene()) {
