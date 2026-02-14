@@ -30,8 +30,8 @@
 #include <Utils/Platform/Platform.h>
 #include <Utils/ECS/LayerManager.h>
 #include <Utils/SRLM/LogicalMachine.h>
-#include <Utils/Common/StoreUtils.h>
 #include <Utils/Common/CLIManager.h>
+#include <Utils/Common/StoreUtils.h>
 #include <Utils/Types/Time.h>
 #include <Utils/Common/Features.h>
 #include <Utils/Common/SubscriptionMessage.h>
