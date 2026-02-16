@@ -133,3 +133,8 @@ target_include_directories(Engine PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/Utils/libs
 
 target_include_directories(Engine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Utils/libs)
 target_include_directories(Engine PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Utils/libs/assimp/include)
+
+set_target_properties(Engine PROPERTIES
+    BUILD_RPATH "\$ORIGIN"
+    INSTALL_RPATH "\$ORIGIN"
+)
