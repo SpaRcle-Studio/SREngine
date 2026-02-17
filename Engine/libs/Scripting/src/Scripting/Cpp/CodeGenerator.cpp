@@ -355,6 +355,8 @@ namespace SR_SCRIPTING_NS {
             codegenFileStream << "/// " << SR_CODEGEN_HEADER_COMMENT << "\n\n";
 
             //SR_UTILS_NS::Path enumsFile = m_cacheFolder.Concat("Scripts/Modules/{}/Codegen/Codegen/Enums.generated.hpp"_format(module.moduleInfo.moduleName));
+            codegenFileStream << "#define SR_ENGINE_COMMON_PCH_FOR_BASE_CODE\n\n";
+
             codegenFileStream << "#include <Codegen/SpaRcleModule{}Core.generated.hpp>\n\n"_format(module.moduleInfo.moduleName);
             //codegenFileStream << "#include \"{}\""_format(enumsFile.ToStringRef()) << "\n\n";
 

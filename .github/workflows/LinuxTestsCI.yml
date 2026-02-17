@@ -11,10 +11,22 @@ on:
 jobs:
   TestsLinux:
     name: Linux Tests.
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Installing dependencies.
+        run: |
+          sudo apt-get update
+
+          sudo apt-get install -y software-properties-common
+          sudo add-apt-repository -y universe
+
+          sudo apt-get update
+
+          echo "Installing build-essential..."
+          sudo apt-get install -y build-essential
 
       # 1) Скачать Debug
       - name: Download Debug build
