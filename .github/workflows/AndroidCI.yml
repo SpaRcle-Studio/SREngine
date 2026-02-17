@@ -31,6 +31,27 @@ jobs:
       - name: Updating submodules.
         run: git submodule --quiet update --init --recursive --depth 1 --jobs 4
 
+      - name: Setup 7-Zip
+        uses: milliewalky/setup-7-zip@v2
+
+      - name: Restore Android SDK cache
+        id: android-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: Platform/Android/sdk-cache
+          key: android-sdk-windows-ndk29-cmake3303-platform34-v1
+
+      - name: Extract Android SDK from cache
+        if: steps.android-cache.outputs.cache-hit == 'true'
+        shell: powershell
+        working-directory: ${{ github.workspace }}/Platform/Android
+        run: |
+          7z x sdk-cache\android-sdk.7z -o. -y
+          $sdkDir = "${{ github.workspace }}/Platform/Android/android-sdk" -replace '\\', '/'
+          $cmakeDir = "$sdkDir/cmake/3.30.3"
+          "sdk.dir=$sdkDir`ncmake.dir=$cmakeDir" | Out-File -FilePath local.properties -Encoding utf8 -NoNewline
+          Add-Content -Path local.properties -Value ""
+
       - name: Building Release (${{ matrix.arch }})
         shell: powershell
         working-directory: ${{ github.workspace }}
@@ -39,10 +60,12 @@ jobs:
         run: |
           echo "buildSuccessful=false" | Out-File -FilePath $env:GITHUB_ENV -Append
           cd Platform/Android
-          echo "Install android SDK..."
-          dir
-          ./install_android_sdk.bat
-
+          if ("${{ steps.android-cache.outputs.cache-hit }}" -ne "true") {
+            echo "Install android SDK..."
+            ./install_android_sdk.bat
+          } else {
+            echo "Using Android SDK from cache."
+          }
           echo "Run build for architecture: ${{ matrix.arch }}"
           ./build.bat ${{ matrix.arch }}
 
@@ -53,6 +76,23 @@ jobs:
               Write-Error "Build failed with exit code $LASTEXITCODE"
               exit 1
           }
+
+      - name: Compress and save Android SDK cache
+        if: steps.android-cache.outputs.cache-hit != 'true' && success()
+        shell: powershell
+        working-directory: ${{ github.workspace }}/Platform/Android
+        run: |
+          New-Item -ItemType Directory -Force -Path sdk-cache | Out-Null
+          7z a -t7z -mx=5 sdk-cache\android-sdk.7z android-sdk -y
+          $size = (Get-Item sdk-cache\android-sdk.7z).Length / 1GB
+          Write-Host "Android SDK archive size: $([math]::Round($size, 2)) GB"
+
+      - name: Save Android SDK cache
+        if: steps.android-cache.outputs.cache-hit != 'true' && success()
+        uses: actions/cache/save@v4
+        with:
+          path: Platform/Android/sdk-cache
+          key: android-sdk-windows-ndk29-cmake3303-platform34-v1
 
       - if: success()
         name: Prepare APK for upload
