@@ -46,7 +46,7 @@ jobs:
         shell: powershell
         working-directory: ${{ github.workspace }}/Platform/Android
         run: |
-          7z x sdk-cache\android-sdk.7z -o. -y
+          7z x sdk-cache\android-sdk.7z -o"$PWD" -y
           $sdkDir = "${{ github.workspace }}/Platform/Android/android-sdk" -replace '\\', '/'
           $cmakeDir = "$sdkDir/cmake/3.30.3"
           "sdk.dir=$sdkDir`ncmake.dir=$cmakeDir" | Out-File -FilePath local.properties -Encoding utf8 -NoNewline
