@@ -27,6 +27,7 @@ jobs:
         with:
           distribution: "temurin"
           java-version: "17"
+          cache: "gradle"
 
       - name: Updating submodules.
         run: git submodule --quiet update --init --recursive --depth 1 --jobs 4
@@ -57,6 +58,8 @@ jobs:
         working-directory: ${{ github.workspace }}
         env:
           CMAKE_BUILD_PARALLEL_LEVEL: 8
+          ANDROID_HOME: ${{ github.workspace }}/Platform/Android/android-sdk
+          ANDROID_SDK_ROOT: ${{ github.workspace }}/Platform/Android/android-sdk
         run: |
           echo "buildSuccessful=false" | Out-File -FilePath $env:GITHUB_ENV -Append
           cd Platform/Android
