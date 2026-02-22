@@ -54,29 +54,30 @@ use tabs: true
 											11-k:i
 												12-v:d
 													13-s:Opaque
+											11-k:i
+												12-v:d
+													13-s:Transparent
+										10-a:disallowedLayers
+										10-a:shaderDefines
 										10-o:samplers
 										10-o:uniforms
 											11-o:shared
+												12-a:useFromPass
 											11-o:material
 						6-o:data
 							7-a:clearColors
 								8-k:i
 									9-o:d
 										10-v:r
-											11-f:0.519999981
+											11-f:0.52
 										10-v:g
-											11-f:0.680000007
+											11-f:0.68
 										10-v:b
-											11-f:0.75999999
+											11-f:0.76
 										10-v:a
 											11-f:1
 							7-v:frameBufferName
 								8-s:SceneView
-							7-o:depth
-								8-v:has
-									9-b:true
-								8-v:value
-									9-f:1
 				4-a:frameBuffers
 					5-k:i
 						6-o:d
@@ -85,15 +86,6 @@ use tabs: true
 							7-o:ptr
 								8-v:name
 									9-s:SceneView
-								8-o:preScale
-									9-v:x
-										10-f:1
-									9-v:y
-										10-f:1
-								8-a:colorFormats
-									9-k:i
-										10-v:d
-											11-s:RGBA8_UNORM
 								8-o:features
 								8-v:samples
 									9-i:1

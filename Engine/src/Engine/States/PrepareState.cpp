@@ -13,6 +13,7 @@
 
 #include <Graphics/Render/RenderScene.h>
 #include <Graphics/Render/DebugRenderer.h>
+#include <Graphics/Pipeline/Pipeline.h>
 
 #include <Utils/CommandManager/CmdManager.h>
 #include <Utils/Resources/ResourceManager.h>
@@ -60,6 +61,12 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::ResourceManager::Instance().PullWatchers();
 
         if (pEngine->IsNeedReloadResources()) {
+            if (auto&& pRenderContext = pEngine->GetRenderContext()) {
+                if (auto&& pPipeline = pRenderContext->GetPipeline()) {
+                    pPipeline->WaitDeviceIdle();
+                    pPipeline->WaitRenderIdle();
+                }
+            }
             SR_UTILS_NS::ResourceManager::Instance().ReloadResources(dt);
         }
 

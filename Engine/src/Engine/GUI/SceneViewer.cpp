@@ -236,6 +236,7 @@ namespace SR_CORE_GUI_NS {
 
             m_cameraTranslation = m_camera->GetTransform()->GetTranslation();
             m_cameraRotation = m_camera->GetTransform()->GetRotation();
+            m_cameraRotation = SR_MATH_NS::FVector3(m_cameraRotation.x, m_cameraRotation.y, 0.f);
         }
 
         if (isDisabled) {
@@ -278,13 +279,12 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::GameObject::Ptr pCamera;
 
         if (enabled) {
-            /// сцена может быть уже заблокирована до Engine::SetScene
             if (SR_UTILS_NS::Features::Instance().Enabled("EditorCamera", true) && m_scene) {
-                pCamera = m_scene->InstanceGameObject("Editor camera"_atom);
+                pCamera = m_scene->InstanceFromFile("Editor/Prefabs/EditorCamera.prefab").DynamicCast<SR_UTILS_NS::GameObject>();
                 pCamera->AddSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave);
                 pCamera->AddEditorFlags(SR_UTILS_NS::EditorFlags::Hidden);
 
-                if (auto&& pMover = pCamera->AddComponent<SR_UTILS_NS::CameraFlyMover>()) {
+                if (auto&& pMover = pCamera->GetComponent<SR_UTILS_NS::CameraFlyMover>()) {
                     pMover->SetExecuteInEditMode(true);
                     pMover->SetRightMouseButtonToRotate(true);
                 }
@@ -295,15 +295,12 @@ namespace SR_CORE_GUI_NS {
                 return;
             }
 
-            pCamera->AddComponent<SR_AUDIO_NS::AudioListener>();
-
-            EditorCamera::Ptr pCameraComponent = pCamera->AddComponent<EditorCamera>();
-            pCameraComponent->SetSceneViewer(this);
-
-            pCameraComponent->SetCameraType(m_isPrefab ? SR_GTYPES_NS::CameraType::EditorPrefab : SR_GTYPES_NS::CameraType::Editor);
-
-            /// Камера редактора имеет наивысшый закадровый приоритет
-            pCameraComponent->SetPriority(SR_INT32_MIN);
+            if (auto&& pCameraComponent = pCamera->GetComponent<EditorCamera>()) {
+                pCameraComponent->SetSceneViewer(this);
+                pCameraComponent->SetCameraType(m_isPrefab ? SR_GTYPES_NS::CameraType::EditorPrefab : SR_GTYPES_NS::CameraType::Editor);
+                /// Камера редактора имеет наивысшый закадровый приоритет
+                pCameraComponent->SetPriority(SR_INT32_MIN);
+            }
 
             pCamera->GetTransform()->GlobalTranslate(m_cameraTranslation);
             pCamera->GetTransform()->GlobalRotate(m_cameraRotation);
