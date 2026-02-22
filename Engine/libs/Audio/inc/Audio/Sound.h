@@ -43,7 +43,6 @@ namespace SR_AUDIO_NS {
     protected:
         bool Load() override;
         bool Unload() override;
-        bool Reload() override;
 
     private:
         void SetRawSound(const SR_HTYPES_NS::SharedPtr<RawSound>& pRawSound);

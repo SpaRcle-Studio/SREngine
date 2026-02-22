@@ -55,21 +55,6 @@ namespace SR_AUDIO_NS {
         return !hasErrors;
     }
 
-    bool RawSound::Reload() {
-        SR_LOG("RawSound::Reload() : reloading \"{}\" audio...", GetResourceId().ToStringRef());
-
-        m_loadState = LoadState::Reloading;
-
-        Unload();
-        Load();
-
-        m_loadState = LoadState::Loaded;
-
-        UpdateResources();
-
-        return true;
-    }
-
     const uint8_t* RawSound::GetBufferData() const {
         if (m_dataProvider) {
             return m_dataProvider.get()->GetWaveData();

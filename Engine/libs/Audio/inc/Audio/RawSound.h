@@ -33,7 +33,6 @@ namespace SR_AUDIO_NS {
     protected:
         bool Unload() override;
         bool Load() override;
-        bool Reload() override;
 
     private:
         std::shared_ptr<IWaveDataProvider> m_dataProvider;

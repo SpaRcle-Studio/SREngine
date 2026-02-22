@@ -57,21 +57,6 @@ namespace SR_AUDIO_NS {
         return Super::Unload();
     }
 
-    bool Sound::Reload() {
-        SR_LOG("Sound::Reload() : reloading \"" + std::string(GetResourceId()) + "\" sound...");
-
-        m_loadState = LoadState::Reloading;
-
-        Unload();
-        Load();
-
-        m_loadState = LoadState::Loaded;
-
-        UpdateResources();
-
-        return true;
-    }
-
     void Sound::SetRawSound(const RawSound::Ptr& pRawSound) {
         if (m_rawSound && pRawSound) {
             SRHalt0();

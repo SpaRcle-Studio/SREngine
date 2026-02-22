@@ -58,16 +58,17 @@ namespace SR_CORE_NS {
 
         const auto dt = GetContext().GetValue<float_t>("DeltaTime");
 
-        SR_UTILS_NS::ResourceManager::Instance().PullWatchers();
+        auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
+        resourceManager.PullWatchers();
 
-        if (pEngine->IsNeedReloadResources()) {
+        if (pEngine->IsNeedReloadResources() && resourceManager.HasDirtyResources()) {
             if (auto&& pRenderContext = pEngine->GetRenderContext()) {
                 if (auto&& pPipeline = pRenderContext->GetPipeline()) {
                     pPipeline->WaitDeviceIdle();
                     pPipeline->WaitRenderIdle();
                 }
             }
-            SR_UTILS_NS::ResourceManager::Instance().ReloadResources(dt);
+            resourceManager.ReloadResources(dt);
         }
 
         SR_SCRIPTING_NS::ScriptSystem::Instance().ReloadModulesIfNeeded();

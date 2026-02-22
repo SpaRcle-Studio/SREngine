@@ -341,7 +341,7 @@ namespace SR_CORE_NS::GUI {
                 else {
                     void* descriptor = nullptr;
 
-                    if (element.pTexture) {
+                    if (element.pTexture && !element.pTexture->IsAsyncLoading()) {
                         descriptor = element.pTexture->GetDescriptor();
                     }
 
