@@ -10,6 +10,7 @@
 #include <Audio/Sound.h>
 
 #include <Utils/Platform/Platform.h>
+#include <Utils/Resources/ResourceManager.h>
 
 namespace SR_AUDIO_NS {
     void SoundManager::OnSingletonDestroy() {
@@ -467,7 +468,7 @@ namespace SR_AUDIO_NS {
             return nullptr;
         }
 
-        if (auto&& pSound = SR_AUDIO_NS::Sound::Load(path)) {
+        if (auto&& pSound = CoreResLoader::Load<Sound>(SR_UTILS_NS::Path(path))) {
             return pSound->Play(params);
         }
 

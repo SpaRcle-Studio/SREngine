@@ -2,11 +2,11 @@
 // Created by Monika on 06.07.2022.
 //
 
-#include <Utils/Resources/ResourceManager.h>
-#include <Utils/FileSystem/FileSystem.h>
-
 #include <Audio/Decoders/IWaveDataProvider.h>
 #include <Audio/RawSound.h>
+
+#include <Utils/Resources/ResourceManager.h>
+#include <Utils/FileSystem/FileSystem.h>
 
 #include <Codegen/RawSound.generated.hpp>
 
@@ -15,48 +15,16 @@ namespace SR_AUDIO_NS {
 
     RawSound::~RawSound() = default;
 
-    RawSound::Ptr RawSound::Load(const SR_UTILS_NS::Path& rawPath) {
-        SR_TRACY_ZONE;
-        SR_TRACY_ZONE_TEXT(rawPath.ToString());
-
-        auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
-
-        SR_UTILS_NS::Path&& path = rawPath.RemoveSubPath(resourceManager.GetResPath());
-
-        if (auto&& pRawSound = resourceManager.Find<RawSound>(path)) {
-            return pRawSound;
-        }
-
-        auto&& pRawSound = RawSound::MakeShared<RawSound>();
-
-        pRawSound->SetId(path.ToStringRef(), false);
-
-        if (!pRawSound->Reload()) {
-            SR_ERROR("RawSound::Load() : failed to load raw sound resource!\n\tPath: {}", path);
-            pRawSound->DeleteResource();
-            pRawSound = nullptr;
-            return nullptr;
-        }
-
-        resourceManager.RegisterResource(pRawSound->StaticCast<SR_UTILS_NS::IResource>());
-
-        return pRawSound;
-    }
-
-    SR_UTILS_NS::Path RawSound::GetAssociatedPath() const {
-        return SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-    }
-
     bool RawSound::Unload() {
         if (m_dataProvider) {
             m_dataProvider.reset();
         }
 
-        return IResource::Unload();
+        return Super::Unload();
     }
 
     bool RawSound::Load() {
-        bool hasErrors = !IResource::Load();
+        bool hasErrors = !Super::Load();
 
         SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(GetResourceId());
         if (!path.IsAbs()) {

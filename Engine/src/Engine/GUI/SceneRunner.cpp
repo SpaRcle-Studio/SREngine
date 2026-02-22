@@ -112,7 +112,7 @@ namespace SR_CORE_NS::GUI {
                     m_scene->SaveScene();
 
                     auto&& resourcesManager = SR_UTILS_NS::ResourceManager::Instance();
-                    if (auto&& pPrefab = resourcesManager.Find<SR_UTILS_NS::Prefab>(m_scene->GetPath())) {
+                    if (auto&& pPrefab = resourcesManager.Find<SR_UTILS_NS::Prefab>(m_scene->GetPath(), nullptr)) {
                         pPrefab->Reload();
                     }
 

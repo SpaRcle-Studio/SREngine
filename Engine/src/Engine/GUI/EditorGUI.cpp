@@ -290,7 +290,7 @@ namespace SR_CORE_GUI_NS {
                     continue;
                 }
 
-                auto&& pTexture = SR_GTYPES_NS::Texture::Load(iconInfo.path);
+                auto&& pTexture = CoreResLoader::Load<SR_GTYPES_NS::Texture>(iconInfo.path);
                 if (!pTexture) {
                     SR_WARN("EditorGUI::Load() : icon wasn't not found!\n\tPath: {}", iconInfo.path);
                     pTexture = m_context->GetNoneTexture();
@@ -400,7 +400,7 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        if (scenePath.GetExtension() == SR_UTILS_NS::Prefab::EXTENSION) {
+        if (scenePath.GetExtension() == SR_UTILS_NS::Prefab::GetMetaStatic()->GetExtension()) {
             return;
         }
 
@@ -790,7 +790,7 @@ namespace SR_CORE_GUI_NS {
                     if (auto&& pScene = m_engine->GetScene()) {
                         auto&& pGameObject = pScene->InstanceGameObject("Skybox"_atom);
                         auto&& pSkybox = pGameObject->AddComponent<SR_GTYPES_NS::SkyboxComponent>();
-                        pSkybox->SetParams("Engine/Skyboxes/Sun.png", "Engine/Shaders/Skybox.srsl", false);
+                        pSkybox->SetParams("Engine/Skyboxes/Sun.png", "Engine/Shaders/skybox.srsl", false);
                         InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
                     }
                 }

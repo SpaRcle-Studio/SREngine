@@ -8,6 +8,7 @@
 #include <Utils/Common/CLIManager.h>
 #include <Utils/Tests/TestManager.h>
 #include <Utils/Profile/TracyContext.h>
+#include <Utils/Debug.h>
 
 #include <Codegen/SpaRcleModuleApplicationCore.generated.hpp>
 

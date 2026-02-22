@@ -14,6 +14,7 @@ namespace SR_AUDIO_NS {
 
     class RawSound : public SR_UTILS_NS::IResource {
         SR_CLASS()
+        using Super = SR_UTILS_NS::IResource;
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<RawSound>;
 
@@ -22,12 +23,7 @@ namespace SR_AUDIO_NS {
         ~RawSound() override;
 
     public:
-        static RawSound::Ptr Load(const SR_UTILS_NS::Path& rawPath);
-
-    public:
-        SR_NODISCARD uint64_t GetFileHash() const override { return 0; };
         SR_NODISCARD uint64_t GetBufferSize() const;
-        SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
         SR_NODISCARD const uint8_t* GetBufferData() const;
         SR_NODISCARD uint8_t GetChannels() const;
         SR_NODISCARD uint8_t GetBitsPerSample() const;

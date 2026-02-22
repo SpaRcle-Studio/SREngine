@@ -8,6 +8,7 @@
 #include <Engine/Launcher.h>
 
 #include <Utils/Resources/ResourceManager.h>
+#include <Utils/Platform/Platform.h>
 
 using LauncherEntryPointAfterInitCallback = SR_HTYPES_NS::Function<void(SR_CORE_NS::Launcher::Ptr&)>;
 

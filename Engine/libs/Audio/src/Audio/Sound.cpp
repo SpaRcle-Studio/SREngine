@@ -21,43 +21,6 @@ namespace SR_AUDIO_NS {
         SetRawSound(nullptr);
     }
 
-    Sound::Ptr Sound::Load(const SR_UTILS_NS::Path& rawPath) {
-        SR_TRACY_ZONE;
-        SR_TRACY_ZONE_TEXT(rawPath.ToString());
-        SR_GLOBAL_LOCK;
-
-        auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
-
-        SR_UTILS_NS::Path&& path = rawPath.RemoveSubPath(resourceManager.GetResPath());
-
-        if (auto&& pSound = resourceManager.Find<Sound>(path)) {
-            return pSound;
-        }
-
-        auto&& pRawSound = RawSound::Load(path);
-
-        if (!pRawSound) {
-            SR_ERROR("Sound::Load() : failed to load a raw sound!");
-            return nullptr;
-        }
-
-        auto&& pSound = Sound::MakeShared<Sound>();
-
-        pSound->SetRawSound(pRawSound);
-        pSound->SetId(path.ToStringRef(), false);
-
-        if (!pSound->Reload()) {
-            SR_ERROR("Sound::Load() : failed to reload sound!");
-            pSound->DeleteResource();
-            pSound = nullptr;
-            return nullptr;
-        }
-
-        resourceManager.RegisterResource(pSound.StaticCast<SR_UTILS_NS::IResource>());
-
-        return pSound;
-    }
-
     Sound::Handle Sound::Play(const PlayParams& params) {
         return SoundManager::Instance().Play(this, params);
     }
@@ -68,12 +31,20 @@ namespace SR_AUDIO_NS {
     }
 
     bool Sound::Load() {
+        if (auto&& pRawSound = CoreResLoader::Load<RawSound>(GetResourceId())) {
+            SetRawSound(pRawSound);
+        }
+        else {
+            SR_ERROR("Sound::Load() : failed to load raw sound resource!");
+            return false;
+        }
+
         if (!(m_data = SoundManager::Instance().Register(this))) {
             SR_ERROR("Sound::Load() : failed to register sound!");
             return false;
         }
 
-        return IResource::Load();
+        return Super::Load();
     }
 
     bool Sound::Unload() {
@@ -81,7 +52,9 @@ namespace SR_AUDIO_NS {
             SR_ERROR("Sound::Unload() : failed to unregister sound!");
         }
 
-        return IResource::Unload();
+        SetRawSound(nullptr);
+
+        return Super::Unload();
     }
 
     bool Sound::Reload() {
@@ -136,7 +109,7 @@ namespace SR_AUDIO_NS {
         return m_rawSound ? m_rawSound->GetSampleRate() : 0;
     }
 
-    SoundData *Sound::GetData() const {
+    SoundData* Sound::GetData() const {
         return m_data;
     }
 

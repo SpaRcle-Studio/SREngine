@@ -4,6 +4,7 @@
 
 #include <Engine/GUI/PropertyDrawer.h>
 #include <Engine/GUI/PropertyDrawers/EntityRefPropertyDrawer.h>
+#include <Engine/GUI/PropertyDrawers/ResourceRefPropertyDrawer.h>
 
 #include <Graphics/Material/UniqueMaterial.h>
 #include <Graphics/GUI/Utils.h>
@@ -88,6 +89,10 @@ namespace SR_CORE_GUI_NS {
 
         if (value.IsEntityRef()) {
             return SR_CORE_GUI_NS::EntityRefPropertyDrawer::GetClassStaticName();
+        }
+
+        if (value.IsResourceRef()) {
+            return SR_CORE_GUI_NS::ResourceRefPropertyDrawer::GetClassStaticName();
         }
 
         if (value.IsClass()) {

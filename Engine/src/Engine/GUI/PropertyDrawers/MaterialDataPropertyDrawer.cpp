@@ -178,7 +178,7 @@ namespace SR_CORE_GUI_NS {
                         context.onBeforeChangeCallback(false);
                     }
                     wasReset = true;
-                    SR_GTYPES_NS::Texture::Ptr pTexture = SR_GTYPES_NS::Texture::Load(path);
+                    SR_GTYPES_NS::Texture::Ptr pTexture = CoreResLoader::Load<SR_GTYPES_NS::Texture>(path);
                     shaderData.SetData(property.id, pTexture, SR_GRAPH_NS::ShaderVarType::Sampler2D);
                 }
             }
@@ -227,7 +227,7 @@ namespace SR_CORE_GUI_NS {
 
                 feedback = m_pathDrawer->Draw(propertyContext);
                 if (feedback.isChanged) {
-                    SR_GTYPES_NS::Texture::Ptr pTexture = path.empty() ? nullptr : SR_GTYPES_NS::Texture::Load(path);
+                    SR_GTYPES_NS::Texture::Ptr pTexture = path.empty() ? nullptr : CoreResLoader::Load<SR_GTYPES_NS::Texture>(path);
                     shaderData.SetData(property.id, pTexture, SR_GRAPH_NS::ShaderVarType::Sampler2D);
                 }
 

@@ -136,7 +136,7 @@ namespace SR_CORE_NS::GUI {
 
                 if (extension == "png" || extension == "jpg") {
                     if (!current.pTexture) {
-                        if (auto&& pTexture = SR_GTYPES_NS::Texture::Load(path)) {
+                        if (auto&& pTexture = CoreResLoader::Load<SR_GTYPES_NS::Texture>(path)) {
                             pTexture->AddUsePoint();
                             current.pTexture = pTexture;
                         }
@@ -522,16 +522,7 @@ namespace SR_CORE_NS::GUI {
                 initialized = true;
             }
 
-            static std::set<std::string_view> supportedTextures = { "png", "jpg", "jpeg", "tga", "bmp" };
-
-            //if (extension == "animator") {
-            //    if (auto&& pAnimatorEditor = GetManager()->GetWidget<AnimatorEditor>()) {
-            //        pAnimatorEditor->SetGraphPath(path);
-            //    }
-            //    return;
-            //}
-            //else
-            if (supportedTextures.count(extension) != 0) {
+            if (SR_GTYPES_NS::Texture::GetMetaStatic()->HasExtension(extension)) {
                 if (auto&& pTextureInspector = GetManager()->GetWidget<TextureInspector>()) {
                     pTextureInspector->Inspect(path);
                 }
@@ -543,7 +534,7 @@ namespace SR_CORE_NS::GUI {
                 }
                 return;
             }
-            else if (extension == SR_UTILS_NS::Prefab::EXTENSION || extension == "scene") {
+            else if (extension == SR_UTILS_NS::Prefab::GetMetaStatic()->GetExtension() || extension == "scene") {
                 auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
                 if (auto&& pScene = SR_WORLD_NS::Scene::LoadScene(path)) {
                     pEngine->AddSceneToQueue(pScene);

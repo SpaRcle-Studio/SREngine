@@ -416,6 +416,9 @@ def generate_class_meta_clone(f, class_obj: reflection_utils.SpaRcleClass, tabs)
         if prop.virtual and (not prop.setter or not prop.getter):
             continue
 
+        if prop.dontClone:
+            continue
+
         if prop.getter:
             getter_code = f'srcObject.{prop.getter}()'
         else:
@@ -535,15 +538,19 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
         f.write('\t' * tabs + 'SR_NODISCARD std::span<const SpaRcle::Utils::StringAtom> GetCategory() const noexcept final {\n')
         f.write('\t' * (tabs + 1) + f'static std::array<const SpaRcle::Utils::StringAtom, {len(category_split)}> categories {{ ')
         for category in category_split:
-            f.write(f'"{category}", ')
+            f.write(f'"{category.strip()}", ')
         f.write('};\n')
         f.write('\t' * (tabs + 1) + 'return categories;\n')
         f.write('\t' * tabs + '}\n\n')
 
     if class_obj.extension:
-        f.write('\t' * tabs + 'SR_NODISCARD SpaRcle::Utils::StringAtom GetExtension() const noexcept final {\n')
-        f.write('\t' * (tabs + 1) + f'static const SpaRcle::Utils::StringAtom extension = "{class_obj.extension}";' + '\n')
-        f.write('\t' * (tabs + 1) + 'return extension;\n')
+        extensions = class_obj.extension.split(',')
+        f.write('\t' * tabs + 'SR_NODISCARD std::span<const SpaRcle::Utils::StringAtom> GetExtensions() const noexcept final {\n')
+        f.write('\t' * (tabs + 1) + f'static std::array<const SpaRcle::Utils::StringAtom, {len(extensions)}> extensions {{ ')
+        for extension in extensions:
+            f.write(f'"{extension}", ')
+        f.write('};\n')
+        f.write('\t' * (tabs + 1) + 'return extensions;\n')
         f.write('\t' * tabs + '}\n\n')
 
     #######################################

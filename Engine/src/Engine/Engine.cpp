@@ -37,13 +37,6 @@ namespace SR_CORE_NS {
     Engine::~Engine() = default;
 
     bool Engine::Create() {
-        SR_INFO("Engine::Create() : registering all resources...");
-
-        if (!Resources::RegisterResources(GetThis())) {
-            SR_ERROR("Engine::Create() : failed to register engine resources!");
-            return false;
-        }
-
         SR_INFO("Engine::Create() : creating main window...");
 
         if (SR_UTILS_NS::Features::Instance().Enabled("MainWindow", true)) {

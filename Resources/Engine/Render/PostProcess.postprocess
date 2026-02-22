@@ -1,0 +1,7 @@
+sra format
+use tabs: true
+0-r:Root
+	1-o:asset
+		2-v:type
+			3-s:PostProcessSettings
+		2-o:ptr

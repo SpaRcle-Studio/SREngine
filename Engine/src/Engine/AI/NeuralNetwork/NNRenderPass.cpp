@@ -17,7 +17,7 @@ namespace SpaRcle::AI {
         NeuralNetwork::Ptr pTestNetwork = NeuralNetwork::GenerateNetwork(100, 64, { 225, 144, 100 }, 10.0f);
         Register(pTestNetwork);
 
-        m_neuronShader = SR_GTYPES_NS::Shader::Load(m_neuronShaderPath);
+        m_neuronShader = CoreResLoader::Load<SR_GTYPES_NS::Shader>(m_neuronShaderPath);
         if (m_neuronShader) {
             m_neuronShader->AddUsePoint();
         }
@@ -25,7 +25,7 @@ namespace SpaRcle::AI {
             SR_ERROR("NNRenderPass::Init() : failed to load neuron shader: ", m_neuronShaderPath);
         }
 
-        m_synapseShader = SR_GTYPES_NS::Shader::Load(m_synapseShaderPath);
+        m_synapseShader = CoreResLoader::Load<SR_GTYPES_NS::Shader>(m_synapseShaderPath);
         if (m_synapseShader) {
             m_synapseShader->AddUsePoint();
         }

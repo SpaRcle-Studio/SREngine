@@ -13,9 +13,11 @@ namespace SR_AUDIO_NS {
     class RawSound;
     struct SoundData;
 
+    /// @extension(ogg, wav, mp3)
     class Sound : public SR_UTILS_NS::IResource {
         SR_CLASS();
         using Handle = void*;
+        using Super = SR_UTILS_NS::IResource;
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<Sound>;
 
@@ -26,8 +28,6 @@ namespace SR_AUDIO_NS {
         SR_NODISCARD uint64_t GetFileHash() const override { return 0; };
 
     public:
-        static Sound::Ptr Load(const SR_UTILS_NS::Path& path);
-
         Handle Play(const PlayParams& params);
         Handle Play();
 

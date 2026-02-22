@@ -100,7 +100,7 @@ namespace SR_CORE_GUI_NS {
             m_texture.Reset();
         }
 
-        m_texture = SR_GTYPES_NS::Texture::Load(path);
+        m_texture = CoreResLoader::Load<SR_GTYPES_NS::Texture>(path);
         if (!m_texture) {
             SR_ERROR("TextureInspector::Inspect() : texture not found at path: {}", path.ToString());
             return;

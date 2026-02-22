@@ -361,7 +361,7 @@ namespace SR_CORE_GUI_NS {
 
                             pSceneObject->DestroyChildren();
 
-                            if (auto&& pPrefab = SR_UTILS_NS::Prefab::Load(path)) {
+                            if (auto&& pPrefab = CoreResLoader::Load<SR_UTILS_NS::Prefab>(path)) {
                                 pSceneObject->SetPrefab(pPrefab, true);
                             }
                             else {

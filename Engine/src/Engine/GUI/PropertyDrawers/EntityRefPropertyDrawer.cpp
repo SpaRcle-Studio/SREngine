@@ -5,13 +5,13 @@
 #include <Engine/GUI/PropertyDrawers/EntityRefPropertyDrawer.h>
 #include <Engine/GUI/Hierarchy.h>
 #include <Engine/GUI/EditorGUI.h>
+#include <Engine/Engine.h>
 
 #include <Utils/ECS/EntityRef.h>
 #include <Utils/ECS/SceneObject.h>
 #include <Utils/ECS/Component.h>
 
 #include <Codegen/EntityRefPropertyDrawer.generated.hpp>
-#include <Engine/Engine.h>
 
 namespace SR_CORE_GUI_NS {
     PropertyDrawerFeedback EntityRefPropertyDrawer::Draw(const PropertyDrawerContext& context) {

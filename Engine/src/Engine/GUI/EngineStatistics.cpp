@@ -89,28 +89,28 @@ namespace SR_CORE_GUI_NS {
                 }
             };
 
-            SR_UTILS_NS::ResourceManager::Instance().InspectResources([=](auto &groups) {
-                for (auto& [groupHashName, pResourceType] : groups) {
-                    const bool open = SR_GRAPH_GUI_NS::Immediate::TreeNodeEx((void*)(intptr_t)pResourceType, SR_GRAPH_GUI_NS::Immediate::GetNodeFlagsWithChild(), "%s", pResourceType->GetName().data());
+            //SR_UTILS_NS::ResourceManager::Instance().InspectResources([=](auto &groups) {
+            //    for (auto& [groupHashName, pResourceType] : groups) {
+            //        const bool open = SR_GRAPH_GUI_NS::Immediate::TreeNodeEx((void*)(intptr_t)pResourceType, SR_GRAPH_GUI_NS::Immediate::GetNodeFlagsWithChild(), "%s", pResourceType->GetName().data());
 
-                    if (open) {
-                        uint32_t index = 0;
+            //        if (open) {
+            //            uint32_t index = 0;
 
-                        SR_UTILS_NS::ResourceType::CopiesMap& copies = pResourceType->GetCopiesRef();
+            //            SR_UTILS_NS::ResourceType::CopiesMap& copies = pResourceType->GetCopiesRef();
 
-                        for (auto& [resourceName, pResources] : copies) {
-                            if (pResources.size() == 1) {
-                                drawResource(const_cast<SR_UTILS_NS::IResource*>((*pResources.begin()).Get()), index++);
-                            }
-                            else {
-                                drawResources(pResources, index++);
-                            }
-                        }
+            //            for (auto& [resourceName, pResources] : copies) {
+            //                if (pResources.size() == 1) {
+            //                    drawResource(const_cast<SR_UTILS_NS::IResource*>((*pResources.begin()).Get()), index++);
+            //                }
+            //                else {
+            //                    drawResources(pResources, index++);
+            //                }
+            //            }
 
-                        SR_GRAPH_GUI_NS::Immediate::TreePop();
-                    }
-                }
-            });
+            //            SR_GRAPH_GUI_NS::Immediate::TreePop();
+            //        }
+            //    }
+            //});
 
             SR_GRAPH_GUI_NS::Immediate::EndTabItem();
         }

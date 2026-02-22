@@ -311,6 +311,7 @@ def process_property(property_obj: reflection_utils.CPPProperty, clang_child):
 
     property_obj.dontLoad = has_special_tag_comment(clang_child, 'dontLoad')
     property_obj.dontSave = has_special_tag_comment(clang_child, 'dontSave')
+    property_obj.dontClone = has_special_tag_comment(clang_child, 'dontClone')
 
     if property_obj.dontSave:
         property_obj.dontLoad = True
