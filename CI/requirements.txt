@@ -1,5 +1,5 @@
 clang==17.0.6
 libclang==18.1.1
-pyinstaller==6.13.0
+pyinstaller==6.15.0
 numpy==2.2.0
 pylint==3.3.6
