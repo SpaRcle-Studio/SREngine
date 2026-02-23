@@ -11,6 +11,8 @@
 
 namespace SR_CORE_NS {
     LauncherInitStatus Launcher::InitLauncher() {
+        SR_TRACY_ZONE;
+
         if (!PreInit()) {
             SR_PLATFORM_NS::WriteConsoleError("Launcher::Init() : failed to pre-initialize application!\n");
             return LauncherInitStatus::Error;

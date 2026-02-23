@@ -22,6 +22,8 @@ namespace SR_CORE_NS::GUI {
         SR_UTILS_NS::Path path;
         std::string filename;
         std::list<FBFolder> innerFolders;
+        bool childrenLoaded = false;   ///< true = direct children already loaded (lazy tree)
+        bool hasSubfolders = true;      ///< false = no subfolders (show as leaf, no expand arrow)
     };
 
     class FileBrowser : public SR_GRAPH_GUI_NS::Widget {
@@ -51,8 +53,8 @@ namespace SR_CORE_NS::GUI {
         void OpenFileWithApp(const SR_UTILS_NS::Path& path);
 
     private:
-        void DrawFoldersTree(const FBFolder& parentFolder); // Отрисовка созданного дерева
-        void LoadFoldersTree(FBFolder& parentFolder); // Создание дерева файлов и его кеширования
+        void DrawFoldersTree(FBFolder& parentFolder); // Отрисовка созданного дерева (может подгружать детей по требованию)
+        void LoadFolderChildren(FBFolder& parentFolder); // Загрузка только прямых дочерних папок (один уровень)
         void FreeTextures();
 
     private:

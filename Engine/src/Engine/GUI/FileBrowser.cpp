@@ -50,6 +50,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     void FileBrowser::CurrentDirectoryContextMenu(){
+        SR_TRACY_ZONE;
         if(SR_GRAPH_GUI_NS::Immediate::BeginPopupContextWindow()){
             if (SR_GRAPH_GUI_NS::Immediate::Selectable("Paste")) {
                 SR_UTILS_NS::Platform::PasteFilesFromClipboard(m_selectedDir);
@@ -66,6 +67,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     void FileBrowser::CacheElements(const SR_UTILS_NS::Path& root) {
+        SR_TRACY_ZONE;
         FreeTextures();
 
         for (const auto &path : root.GetAll()) {
@@ -74,14 +76,8 @@ namespace SR_CORE_NS::GUI {
             }
             else {
                 FBElement current;
-
-                if (path.IsDir()) {
-                    current.filename = path.GetBaseName();
-                    current.isDir = true;
-                } else {
-                    current.filename = path.GetBaseNameAndExt();
-                    current.isDir = false;
-                }
+                current.filename = path.GetBaseNameAndExt();
+                current.isDir = path.IsDir();
 
                 current.cutName = SR_UTILS_NS::StringUtils::CutName(current.filename, static_cast<uint32_t>(17.f * m_itemsScale));
 
@@ -149,19 +145,21 @@ namespace SR_CORE_NS::GUI {
         m_dirtySelectedDir = false;
     }
 
-    void FileBrowser::DrawFoldersTree(const FBFolder& parentFolder) {
+    void FileBrowser::DrawFoldersTree(FBFolder& parentFolder) {
+        SR_TRACY_ZONE;
         const auto WITH_CHILD = SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::OpenOnArrow | SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::OpenOnDoubleClick;
         const auto SELECTED_WITH_CHILD = SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::OpenOnArrow | SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::OpenOnDoubleClick | SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::Selected;
         const auto WITHOUT_CHILD = SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::NoTreePushOnOpen | SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::Leaf;
         const auto SELECTED_WITHOUT_CHILD = SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::NoTreePushOnOpen | SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::Leaf | SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::Selected;
 
         unsigned short index = 0;
-        for (const auto &folder : parentFolder.innerFolders) {
+        for (auto& folder : parentFolder.innerFolders) {
             const bool selected = m_selectedDir.GetHash() == folder.path.GetHash();
+            const bool isLeaf = !folder.hasSubfolders;
 
-            if (folder.innerFolders.empty()) {
-                SR_GRAPH_GUI_NS::Immediate::TreeNodeEx((void *) (intptr_t) index, selected ? SELECTED_WITHOUT_CHILD : WITHOUT_CHILD, "%s",
-                                  folder.filename.c_str());
+            if (isLeaf) {
+                SR_GRAPH_GUI_NS::Immediate::TreeNodeEx((void*)(intptr_t)index, selected ? SELECTED_WITHOUT_CHILD : WITHOUT_CHILD, "%s",
+                    folder.filename.c_str());
 
                 if (SR_GRAPH_GUI_NS::Immediate::IsItemClicked()) {
                     m_selectedDir = folder.path;
@@ -169,9 +167,8 @@ namespace SR_CORE_NS::GUI {
                     m_dirtyFoldersTree = true;
                 }
             } else {
-                bool open = SR_GRAPH_GUI_NS::Immediate::TreeNodeEx((void *) (intptr_t) index, selected ? SELECTED_WITH_CHILD : WITH_CHILD,
-                                              "%s",
-                                              folder.filename.c_str());
+                bool open = SR_GRAPH_GUI_NS::Immediate::TreeNodeEx((void*)(intptr_t)index, selected ? SELECTED_WITH_CHILD : WITH_CHILD,
+                    "%s", folder.filename.c_str());
 
                 if (SR_GRAPH_GUI_NS::Immediate::IsItemClicked() && !SR_GRAPH_GUI_NS::Immediate::IsItemToggledOpen()) {
                     m_selectedDir = folder.path;
@@ -180,6 +177,7 @@ namespace SR_CORE_NS::GUI {
                 }
 
                 if (open) {
+                    LoadFolderChildren(folder);
                     DrawFoldersTree(folder);
                     SR_GRAPH_GUI_NS::Immediate::TreePop();
                 }
@@ -188,21 +186,29 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void FileBrowser::LoadFoldersTree(FBFolder& parentFolder) {
-        const auto &folders = parentFolder.path.GetFolders();
-        for (const auto &path : folders) 
-        {
-            FBFolder currentfolder;
-            currentfolder.path = path;
-            currentfolder.filename = path.GetBaseName();
-            if (!currentfolder.path.IsEmpty()) {
-                LoadFoldersTree(currentfolder);
-            }
-            parentFolder.innerFolders.emplace_back(currentfolder);
+    void FileBrowser::LoadFolderChildren(FBFolder& parentFolder) {
+        SR_TRACY_ZONE;
+        if (parentFolder.childrenLoaded) {
+            return;
         }
+        const auto& folders = parentFolder.path.GetFolders();
+        parentFolder.innerFolders.clear();
+        for (const auto& path : folders) {
+            if (path.IsEmpty()) {
+                continue;
+            }
+            FBFolder child;
+            child.path = path;
+            child.filename = path.GetBaseNameAndExt();
+            child.childrenLoaded = false;
+            child.hasSubfolders = !path.GetFolders().empty();
+            parentFolder.innerFolders.emplace_back(std::move(child));
+        }
+        parentFolder.childrenLoaded = true;
     }
 
     void FileBrowser::FileContextMenu(const std::string &filename){
+        SR_TRACY_ZONE;
         if (!SR_GRAPH_GUI_NS::Immediate::BeginPopupContextItem()) {
             return;
         }
@@ -252,6 +258,8 @@ namespace SR_CORE_NS::GUI {
     }
 
     void FileBrowser::CurrentDirectoryPanel() {
+        SR_TRACY_ZONE;
+
         const float_t fontSize = SR_UTILS_NS::StoreUtils::User::GetFloat("ImGuiFontSize", 0.f);
         const float_t panelHeight = fontSize * 1.6f;
 
@@ -303,6 +311,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     void FileBrowser::ItemViewPanel() {
+        SR_TRACY_ZONE;
         auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
         auto&& pOverlay = pEngine->GetRenderContext()->GetPipeline()->GetOverlay(SR_GRAPH_NS::OverlayType::ImGui);
         auto&& pSmallFont = pOverlay.DynamicCast<SR_GRAPH_NS::ImGuiOverlay>()->GetSmallFont();
@@ -341,7 +350,7 @@ namespace SR_CORE_NS::GUI {
                 else {
                     void* descriptor = nullptr;
 
-                    if (element.pTexture && !element.pTexture->IsAsyncLoading()) {
+                    if (element.pTexture && element.pTexture->CanBeUsed()) {
                         descriptor = element.pTexture->GetDescriptor();
                     }
 
@@ -442,6 +451,8 @@ namespace SR_CORE_NS::GUI {
     }
 
     void FileBrowser::FileCatalogPanel(const float_t& leftWidth) {
+        SR_TRACY_ZONE;
+
         if (SR_GRAPH_GUI_NS::Immediate::BeginChild("left panel", SR_MATH_NS::FVector2(leftWidth, 0), true))
         {
             SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::IndentSpacing, SR_GRAPH_GUI_NS::Immediate::GetFontSize());
@@ -461,6 +472,7 @@ namespace SR_CORE_NS::GUI {
 
     void FileBrowser::Draw() {
         // left
+        SR_TRACY_ZONE;
 
         m_assetWidth = 0.f;
 
@@ -469,7 +481,9 @@ namespace SR_CORE_NS::GUI {
         if (m_dirtyFoldersTree) {
             m_foldersTree.innerFolders.clear();
             m_foldersTree.path = m_defaultRoot;
-            LoadFoldersTree(m_foldersTree);
+            m_foldersTree.filename = m_defaultRoot.GetBaseNameAndExt();
+            m_foldersTree.childrenLoaded = false;
+            LoadFolderChildren(m_foldersTree);
             m_dirtyFoldersTree = false;
         }
 
@@ -546,6 +560,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     void FileBrowser::FreeTextures() {
+        SR_TRACY_ZONE;
         for (auto&& element : m_elements) {
             if (element.pTexture) {
                 element.pTexture->RemoveUsePoint();

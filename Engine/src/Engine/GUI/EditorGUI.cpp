@@ -380,7 +380,7 @@ namespace SR_CORE_GUI_NS {
 
     void *EditorGUI::GetIconDescriptor(EditorIcon icon) const {
         if (auto&& pIconTexture = const_cast<SR_GTYPES_NS::Texture*>(GetIcon(icon))) {
-            if (pIconTexture->IsAsyncLoading() || !pIconTexture->GetDescriptor()) {
+            if (!pIconTexture->CanBeUsed() || !pIconTexture->GetDescriptor()) {
                 pIconTexture = m_context->GetNoneTexture().Get();
             }
 

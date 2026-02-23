@@ -32,6 +32,11 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
+        if (!m_texture->CanBeUsed()) {
+            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 1.f, 0.f, 1.f), "Texture still loading...");
+            return;
+        }
+
         m_imageMetaInfo = m_texture->GetImageMetaInfo();
 
         auto&& windowsWidth = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x;

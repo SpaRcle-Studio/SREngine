@@ -48,6 +48,8 @@ namespace SR_CORE_NS {
     }
 
     bool Application::PreInit() {
+        SR_TRACY_ZONE;
+
         SR_UTILS_NS::Localization::SetLocale();
         SR_UTILS_NS::Random::Initialize();
 
@@ -65,6 +67,8 @@ namespace SR_CORE_NS {
     }
 
     bool Application::EarlyInit() {
+        SR_TRACY_ZONE;
+
         if (!SR_UTILS_NS::Debug::Instance().IsInitialized()) {
             SR_PLATFORM_NS::WriteConsoleError("Logger is not initialized!\n");
             return false;
@@ -197,8 +201,8 @@ namespace SR_CORE_NS {
                         hooks.getFileTypeHook = [applicationResources, hooks](auto&& path) {
                             return hooks.originalGetPathType(ResolvePath(path, applicationResources.ToStringView(), hooks.originalGetPathType));
                         };
-                        hooks.readFileHook = [applicationResources, hooks](auto&& path) {
-                            return hooks.originalReadFile(ResolvePath(path.ToStringView(), applicationResources.ToStringView(), hooks.originalGetPathType));
+                        hooks.readFileHook = [applicationResources, hooks](auto&& path, auto&& buffer) {
+                            return hooks.originalReadFile(ResolvePath(path.ToStringView(), applicationResources.ToStringView(), hooks.originalGetPathType), buffer);
                         };
                         hooks.pathResolver = [applicationResources, hooks](std::string_view path) {
                             return ResolvePath(path, applicationResources.ToStringView(), hooks.originalGetPathType);
@@ -222,6 +226,8 @@ namespace SR_CORE_NS {
     }
 
     bool Application::Init() {
+        SR_TRACY_ZONE;
+
         SR_SYSTEM_LOG("Application::Init() : initializing application...");
 
         SR_LOG("Application::Init() : loaded {} tags.", SR_UTILS_NS::TagManager::Instance().GetTags().size());

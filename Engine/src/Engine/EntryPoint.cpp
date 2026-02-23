@@ -23,7 +23,10 @@ void ShutdownApplication() {
     SR_HTYPES_NS::Thread::Factory::Instance().PrintThreads();
     SR_HTYPES_NS::Thread::Factory::Instance().DeInitialize();
 
-    Codegen::UnregisterModule_Application();
+    {
+        SR_TRACY_ZONE_N("Unregistering application module");
+        Codegen::UnregisterModule_Application();
+    }
 
     SR_HTYPES_NS::SharedPtrDynamicDataCounter::CheckMemoryLeaks();
     SR_UTILS_NS::ShutdownEngineProfiler();
@@ -33,7 +36,10 @@ int SREngineEntryPoint(int argc, char** argv) {
     SR_UTILS_NS::StartupEngineProfiler();
     SR_PLATFORM_NS::InitializePlatform();
 
-    Codegen::RegisterModule_Application();
+    {
+        SR_TRACY_ZONE_N("Registering application module");
+        Codegen::RegisterModule_Application();
+    }
 
     SR_UTILS_NS::CLIManager::Instance().Init(argc, argv);
 
