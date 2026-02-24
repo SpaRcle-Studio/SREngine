@@ -449,6 +449,14 @@ namespace SR_CORE_GUI_NS {
                 m_onBeforeChangeCallback(false);
                 pParent->MoveComponent(pComponent, 1);
             }
+            if (componentIndex != 0 && SR_GRAPH_GUI_NS::Immediate::MenuItem("Move to start")) {
+                m_onBeforeChangeCallback(false);
+                pParent->MoveComponent(pComponent, -componentIndex);
+            }
+            if ((componentIndex + 1) != componentsCount && SR_GRAPH_GUI_NS::Immediate::MenuItem("Move to end")) {
+                m_onBeforeChangeCallback(false);
+                pParent->MoveComponent(pComponent, componentsCount - (componentIndex + 1));
+            }
 
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Copy")) {
                 SR_UTILS_NS::SRASerializer serializer;

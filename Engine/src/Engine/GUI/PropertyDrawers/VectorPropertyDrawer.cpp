@@ -210,6 +210,33 @@ namespace SR_CORE_GUI_NS {
                         break;
                     }
 
+                    if (index > 0 && SR_GRAPH_GUI_NS::Immediate::MenuItem("Move to start")) {
+                        if (context.onBeforeChangeCallback) {
+                            context.onBeforeChangeCallback(false);
+                        }
+
+                        SR_UTILS_NS::Reflection::Value temp = pIt->Detach();
+                        container.Erase(pIt);
+                        container.PushFront(temp);
+                        pIt = container.begin();
+
+                        feedback.isChanged = true;
+                    }
+
+                    if (index + 1 < container.Size() && SR_GRAPH_GUI_NS::Immediate::MenuItem("Move to end")) {
+                        if (context.onBeforeChangeCallback) {
+                            context.onBeforeChangeCallback(false);
+                        }
+
+                        SR_UTILS_NS::Reflection::Value temp = pIt->Detach();
+                        container.Erase(pIt);
+                        container.PushBack(temp);
+                        pIt = --container.end();
+
+                        feedback.isChanged = true;
+                    }
+
+
                     SR_GRAPH_GUI_NS::Immediate::EndPopup();
                     if (removed) {
                         SR_GRAPH_GUI_NS::Immediate::PopID();

@@ -16,6 +16,11 @@ namespace SR_CORE_GUI_NS {
     public:
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
 
+    private:
+        bool m_isOpened = false;
+        SR_UTILS_NS::StringAtom m_lastTypeName;
+        ObjectPropertyDrawer::Ptr m_objectDrawer = nullptr;
+
     };
 }
 

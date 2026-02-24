@@ -49,11 +49,17 @@ See documentation
 
 ## [Documentation](https://docs.sparcles.dev/) 
 
+## Features
+  * Custom shader language with reflection and cross-compilation.
+  * Modular render graph with fully customizable pipeline.
+  * Vulkan-based renderer optimized for performance.
+  * Multi-camera rendering with support for multiple viewports and render targets.
+  * C++ hot-reload scripting with state preservation.
+  * Compile-time metadata & reflection system.
+  * Single-file ~80 MB executable that deploys only to its own directory and requires no installation.
+
 ## Used libraries
   * [ImGUI](https://github.com/ocornut/imgui)
-  * [tinyobjloader](https://github.com/tinyobjloader/tinyobjloader)
-  * [imgui-node-editor](https://github.com/thedmd/imgui-node-editor)
-  * [EvoScript](https://github.com/Monika0000/EvoScript)
   * [EvoVulkan](https://github.com/Monika0000/EvoVulkan)
   * [Assimp](https://github.com/assimp/assimp)
   * [Vulkan Memory Allocator](https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator)
@@ -64,22 +70,6 @@ See documentation
   * [Box2D](https://github.com/erincatto/box2d)
   * [json](https://github.com/nlohmann/json)
   * and more...
-  
-## Features
-  * SpaRcle Shader Language (SRSL)
-  * Render passes
-  * Custom framebuffers
-  * C++ scripting system
-  * Animations
-  * SSAO
-  * Cascaded shadow mapping
-  * Ray-marching
-  * Physics
-  * Font renderer
-  * Vulkan pipeline
-  * Multi-cameras renderer 
-  * Geometry loader
-  * Texture loader
 
 ## FAQ
  <details>

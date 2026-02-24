@@ -5,3 +5,16 @@ use tabs: true
 		2-v:type
 			3-s:PostProcessSettings
 		2-o:ptr
+			3-a:modules
+				4-k:i
+					5-o:d
+						6-v:type
+							7-s:PostProcessModuleVignette
+						6-o:ptr
+				4-k:i
+					5-o:d
+						6-v:type
+							7-s:PostProcessModuleChromaticAberration
+						6-o:ptr
+							7-v:intensity
+								8-f:3

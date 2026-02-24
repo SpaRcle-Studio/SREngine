@@ -112,7 +112,7 @@ void fragment() {
         mat3 TBN = mat3(normalize(TANGENT), normalize(BITANGENT), normalize(NORMAL));
         vec3 mappedNormal = normalize(TBN * tangentNormal);
 
-        float light = dot(mappedNormal, normalize(vec3(0.5, 0.5, 1.0))); // условный свет сверху
+        float light = dot(mappedNormal, DIRECTIONAL_LIGHT_DIRECTION);
         light = clamp(light, 0.0, 1.0);
         vec3 normalShade = diffuseColor.rgb * (0.2 + 0.8 * light);
         COLOR = vec4(normalShade, alpha);

@@ -125,13 +125,10 @@ use tabs: true
 				4-v:name
 					5-s:Default
 				4-a:shaderDefines
-					5-k:i
-						6-v:d
-							7-s:SR_DEFINE_USE_CASCADED_SHADOW_MAP
 				4-v:mainCameraRenderTechnique
-					5-s:Engine/Render/FullRender.srtech
+					5-s:Engine/Render/Render.srptech
 				4-v:editorCameraRenderTechnique
-					5-s:Editor/Render/FullRender.srtech
+					5-s:Engine/Render/Render.srptech
 			3-a:shadowQualityPresets
 				4-k:item
 					5-v:first

@@ -28,6 +28,43 @@ DepthTest false;
 
 #define USE_COLOR_INDEX_0
 
+float rand(vec2 co) {
+    return fract(sin(dot(co.xy, vec2(12.9898, 78.233))) * 43758.5453);
+}
+
+float noiseGlitch(float x) {
+    return fract(sin(x * 12.9898) * 43758.5453);
+}
+
+vec3 applyGlitch(vec3 color, vec2 originalUV) {
+    vec2 glitchUV = originalUV;
+    float glitchTime = TIME * 3.025;
+
+    // горизонтальные полосы
+    float lineHeight = 0.02; // высота полосы
+    float yOffset = mod(originalUV.y + glitchTime * 0.5, lineHeight * 2.0);
+    if (yOffset < lineHeight) {
+        glitchUV.x += 0.03 * sin(50.0 * originalUV.y + glitchTime * 10.0); // смещение по X
+        color = texture(colorMap, glitchUV).rgb;
+    }
+
+    // случайное смещение отдельных пикселей
+    float glitchStrength = 0.05;
+    if (rand(vec2(originalUV.y, glitchTime)) > 0.9) {
+        glitchUV += vec2(glitchStrength * rand(originalUV.xy*10.0), 0.0);
+        color = texture(colorMap, glitchUV).rgb;
+    }
+
+    // цветовые артефакты (каналы смещаются)
+    vec2 rUV = originalUV + vec2(0.02 * sin(glitchTime * 5.0 + originalUV.y * 20.0),0.0);
+    vec2 gUV = originalUV + vec2(-0.01 * cos(glitchTime * 3.0 + originalUV.y * 15.0),0.0);
+    vec2 bUV = originalUV + vec2(0.015 * sin(glitchTime * 4.0 + originalUV.y * 25.0),0.0);
+    color.r = texture(colorMap, rUV).r;
+    color.g = texture(colorMap, gUV).g;
+    color.b = texture(colorMap, bUV).b;
+    return color;
+}
+
 void fragment() {
 #ifdef SR_LINEARIZE_DEPTH_CASCADES
     if (uv.x < 0.3 && uv.y < 0.3) {
@@ -55,6 +92,8 @@ void fragment() {
         color = texture(colorMap, uv).rgb;
     }
 
+    //color = applyGlitch(color, uv);
+
 #ifdef SR_CLOUDS______
     color = applyClouds(color, uv);
 #endif
@@ -66,7 +105,7 @@ void fragment() {
 
     color *= 1.0 - vignette;
 
-    COLOR_INDEX_0 = vec4(color, 1.0);
+    COLOR_INDEX_0 = vec4(color, texture(colorMap, uv).a);
 }
 
 void vertex() {

@@ -65,11 +65,15 @@ namespace SR_CORE_GUI_NS {
             }
             else if (pEntityRef->GetEntityId() != SR_ID_INVALID) {
                 std::string formatted = " {} ({})"_format(pEntityRef->GetEntityId(), entityType.ToCStr());
-                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(0.f, 1.f, 0.f, 1.f), formatted.c_str());
+                SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
+                SR_GRAPH_GUI_NS::Immediate::ButtonColoredText(formatted.c_str(), SR_MATH_NS::FColor(0.f, 1.f, 0.f, 1.f), SR_MATH_NS::FVector2(context.fieldWidth, 0));
+                SR_GRAPH_GUI_NS::Immediate::EndDisabled();
             }
             else {
                 std::string formatted = " Is not set ({})"_format(entityType.ToCStr());
-                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 1.f, 0.f, 1.f) , formatted.c_str());
+                SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
+                SR_GRAPH_GUI_NS::Immediate::ButtonColoredText(formatted.c_str(), SR_MATH_NS::FColor(1.f, 1.f, 0.f, 1.f) , SR_MATH_NS::FVector2(context.fieldWidth, 0));
+                SR_GRAPH_GUI_NS::Immediate::EndDisabled();
             }
 
             if (SR_GRAPH_GUI_NS::Immediate::BeginDragDropTarget()) {
