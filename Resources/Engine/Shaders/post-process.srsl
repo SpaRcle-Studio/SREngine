@@ -19,8 +19,6 @@ DepthTest false;
     #include <Engine/Shaders/Common/clouds.srsl>
 #endif
 
-/// #define SR_LINEARIZE_DEPTH_CASCADES
-
 #ifdef SR_LINEARIZE_DEPTH_CASCADES
     #include <Engine/Shaders/Common/linearize-depth.srsl>
     [[uniform]] sampler2DArray shadowMap;

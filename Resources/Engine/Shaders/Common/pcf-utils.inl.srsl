@@ -42,8 +42,8 @@ vec3 ACESFilm(vec3 x) {
     0.5, 0.5, 0.0, 1.0
 );
 
-[[const]] float cascadeBias[4] = { 0.00003, 0.0008, 0.0015, 0.003 };
-[[const]] float cascadeScale[4] = { 0.2, 1.5, 2.0, 3.0 };
+[[const]] float cascadeBias[4] = { 0.0, 0.0008, 0.0015, 0.003 };
+[[const]] float cascadeScale[4] = { 0.15, 1.5, 2.0, 3.0 };
 [[const]] int cascadeRange[4] = { 16, 2, 1, 1 };
 [[const]] float cascadeFadePercent[4] = { 0.05, 0.08, 0.12, 0.15 };
 
@@ -71,15 +71,20 @@ vec3 ACESFilm(vec3 x) {
 #endif
 
 float textureProj(vec3 proj, float ndotl, vec2 offset, uint cascadeIndex) {
-    vec2 uv = proj.xy + offset;
-    //uv = clamp(uv, 0.001, 0.999);
+    // Вне объёма каскада — считаем точку освещённой (убирает артефакты на границах)
+    if (proj.x < 0.0 || proj.x > 1.0 || proj.y < 0.0 || proj.y > 1.0 || proj.z < 0.0 || proj.z > 1.0) {
+        return 1.0;
+    }
+    vec2 uv = clamp(proj.xy + offset, 0.001, 0.999);
+    proj.z = clamp(proj.z, 0.0, 1.0);
 
-    float bias = cascadeBias[cascadeIndex] * (1.0 - ndotl);
-    float depth = texture(shadowMap, vec3(uv, cascadeIndex)).r;
-
+    // Slope-based bias + минимум (меньше acne при прямом свете)
+    float slopeBias = cascadeBias[cascadeIndex] * (1.0 - ndotl);
+    float minBias = cascadeBias[cascadeIndex] * 0.25;
+    float bias = max(slopeBias, minBias) + 0.0005;
     proj.z -= bias;
-    proj.z -= 0.0005;// * ndotl; // небольшое смещение по нормали
 
+    float depth = texture(shadowMap, vec3(uv, cascadeIndex)).r;
     return step(proj.z, depth);
 }
 

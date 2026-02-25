@@ -157,6 +157,10 @@ namespace SR_CORE_GUI_NS {
 
                     SR_GRAPH_GUI_NS::Immediate::Separator();
 
+                    optionFn("SR_LINEARIZE_DEPTH_CASCADES", "Linearize depth cascades");
+
+                    SR_GRAPH_GUI_NS::Immediate::Separator();
+
                     const SR_UTILS_NS::StringAtom gizmoId = "SCENE_GIZMO_ENABLED";
                     const bool isGizmoEnabled = SR_UTILS_NS::StoreUtils::Temp::GetBool(gizmoId, true);
                     if (isGizmoEnabled) {

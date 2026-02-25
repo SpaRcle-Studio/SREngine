@@ -142,12 +142,18 @@ use tabs: true
 					5-v:first
 						6-s:Medium
 					5-o:second
+						6-v:shadowMapResolution
+							7-i:2048
 						6-v:cascadesCount
 							7-i:3
+				4-k:item
+					5-v:first
+						6-s:Ultra
+					5-o:second
 				4-k:item
 					5-v:first
 						6-s:Extreme
 					5-o:second
 						6-v:shadowMapResolution
-							7-i:2048
+							7-i:8192
 			3-a:colorBufferQualityPresets

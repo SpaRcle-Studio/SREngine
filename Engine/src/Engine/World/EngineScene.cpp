@@ -175,6 +175,9 @@ namespace SR_CORE_NS {
         pScene->GetLogicBase()->Prepare();
         pScene->Prepare();
 
+        static const SR_UTILS_NS::StringAtom editorModeKey = "EditorMode";
+        pScene->GetDataStorage().SetValue<bool>(editorModeKey, pEngine->GetEditor() && pEngine->GetEditor()->Enabled());
+
         const bool isPaused = pEngine->IsPaused() || !pEngine->IsActive() || pEngine->HasSceneInQueue();
 
         pSceneUpdater->Build(isPaused);
