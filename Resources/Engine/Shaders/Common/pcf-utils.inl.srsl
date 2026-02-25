@@ -42,9 +42,9 @@ vec3 ACESFilm(vec3 x) {
     0.5, 0.5, 0.0, 1.0
 );
 
-[[const]] float cascadeBias[4] = { 0.0003, 0.0008, 0.0015, 0.003 };
-[[const]] float cascadeScale[4] = { 2.0, 1.5, 1.0, 0.7 };
-[[const]] int cascadeRange[4] = { 3, 2, 1, 1 };
+[[const]] float cascadeBias[4] = { 0.00003, 0.0008, 0.0015, 0.003 };
+[[const]] float cascadeScale[4] = { 0.2, 1.5, 2.0, 3.0 };
+[[const]] int cascadeRange[4] = { 16, 2, 1, 1 };
 [[const]] float cascadeFadePercent[4] = { 0.05, 0.08, 0.12, 0.15 };
 
 #ifdef SR_CASCADE_USE_RADII
@@ -231,21 +231,22 @@ vec4 CalculateShadow(
 
     float upFactor = clamp(N.y * 0.5 + 0.5, 0.0, 1.0);
     vec3 ambientColor = mix(GROUND_COLOR, SKY_COLOR, upFactor);
-    vec3 ambient = ambientColor * AMBIENT_INTENSITY * diffuseColor;
+    vec3 ambient = ambientColor * AMBIENT_INTENSITY;
 
     //vec3 sunDiffuse  = SUN_COLOR * SUN_INTENSITY * ndotl; // direct light
     //vec3 skyDiffuse  = mix(GROUND_COLOR, SKY_COLOR, N.y * 0.5 + 0.5) * AMBIENT_INTENSITY; // sky ambient
 
     //vec3 lightingHDR = skyDiffuse + shadowFactor * sunDiffuse + specular + sss + emissionValue;
-    vec3 lightingHDR = ambient
-                     + shadowFactor * (diffuse + specular)
-                     + sss
-                     + emissionValue;
+    vec3 lightingHDR =
+          ambient * diffuseColor
+        + shadowFactor * (diffuse * diffuseColor + specular)
+        + sss
+        + emissionValue;
 
-    vec3 colorHDR = lightingHDR * diffuseColor;
-    vec3 colorLDR = ACESFilm(colorHDR);
+    vec3 colorHDR = lightingHDR;
+    //vec3 colorLDR = ACESFilm(colorHDR);
 
-    vec4 color = vec4(colorLDR, 1);
+    vec4 color = vec4(colorHDR, 1);
 
 #ifdef SR_DEFINE_DEBUG_CASCADED_SHADOW_MAP_PASS
     return DebugColorCascade(color, cascadeIndex);

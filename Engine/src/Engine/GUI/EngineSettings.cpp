@@ -126,15 +126,15 @@ namespace SR_CORE_GUI_NS {
             m_graphicsSettingsDrawer = new ObjectPropertyDrawer();
         }
 
-        SR_GRAPH_NS::ActiveGraphicsSettings& settings = GetContext()->GetActiveGraphicsSettings();
-        auto&& value = SR_UTILS_NS::Reflection::Value::CreateRef(settings);
+        m_cachedGraphicsSettings = GetContext()->GetActiveGraphicsSettings();
+        auto&& value = SR_UTILS_NS::Reflection::Value::CreateRef(m_cachedGraphicsSettings);
 
         const float_t lineHeight = SR_GRAPH_GUI_NS::Immediate::GetFontSize() + SR_GRAPH_GUI_NS::Immediate::GetFramePadding().y * 2.0f;
         float_t windowWidth = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x - m_scrollBarWidth;
 
         if (SR_GRAPH_GUI_NS::Immediate::Button("Save", { windowWidth * 0.2f, lineHeight })) {
             SR_UTILS_NS::SRASerializer serializer;
-            settings.Save(serializer);
+            m_cachedGraphicsSettings.Save(serializer);
             auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(SR_GRAPH_NS::ActiveGraphicsSettings::SETTINGS_PATH);
             if (!serializer.SaveToFile(path)) {
                 SR_ERROR("EngineSettings::DrawGraphicsSettings() : failed to save graphics settings to path: {}", path);
@@ -165,7 +165,7 @@ namespace SR_CORE_GUI_NS {
 
         auto&& feedback = m_graphicsSettingsDrawer->Draw(context);
         if (feedback.isChanged) {
-            GetContext()->ReloadShaders();
+            GetContext()->SetGraphicsSettings(m_cachedGraphicsSettings);
         }
 
         SR_GRAPH_GUI_NS::Immediate::PopID();

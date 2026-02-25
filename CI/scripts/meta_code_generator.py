@@ -548,7 +548,7 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
         f.write('\t' * tabs + 'SR_NODISCARD std::span<const SpaRcle::Utils::StringAtom> GetExtensions() const noexcept final {\n')
         f.write('\t' * (tabs + 1) + f'static std::array<const SpaRcle::Utils::StringAtom, {len(extensions)}> extensions {{ ')
         for extension in extensions:
-            f.write(f'"{extension}", ')
+            f.write(f'"{extension.strip()}", ')
         f.write('};\n')
         f.write('\t' * (tabs + 1) + 'return extensions;\n')
         f.write('\t' * tabs + '}\n\n')
