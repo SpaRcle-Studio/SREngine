@@ -44,7 +44,11 @@ namespace SR_CORE_NS {
         }
         else if (auto&& pPipeline = pRenderContext->GetPipeline()) {
             pPipeline->OnFrameBuildBegin();
-            SR_GRAPH_NS::RenderScene::RenderBlackScreen(pPipeline.Get(), false);
+            pPipeline->BindCmdBuffer(SR_ID_INVALID);
+            if (pPipeline->BeginCmdBuffer()) {
+                SR_GRAPH_NS::RenderScene::RenderBlackScreen(pPipeline.Get(), false);
+                pPipeline->EndCmdBuffer();
+            }
             pPipeline->OnFrameBuildEnd();
         }
 

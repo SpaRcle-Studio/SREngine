@@ -42,9 +42,16 @@ vec3 ACESFilm(vec3 x) {
     0.5, 0.5, 0.0, 1.0
 );
 
-[[const]] float cascadeBias[4] = { 0.0, 0.0008, 0.0015, 0.003 };
-[[const]] float cascadeScale[4] = { 0.15, 1.5, 2.0, 3.0 };
-[[const]] int cascadeRange[4] = { 16, 2, 1, 1 };
+#ifdef SR_SHADOWS_QUALITY_EXTREME
+    [[const]] float cascadeBias[4] = { 0.0, 0.0, 0.0, 0.0 };
+    [[const]] float cascadeScale[4] = { 0.15, 1.0, 2.0, 3.0 };
+    [[const]] int cascadeRange[4] = { 16, 2, 1, 1 };
+#else
+    [[const]] float cascadeBias[4] = { 0.0003, 0.0008, 0.0015, 0.003 };
+    [[const]] float cascadeScale[4] = { 0.5, 1.5, 2.0, 3.0 };
+    [[const]] int cascadeRange[4] = { 4, 2, 1, 1 };
+#endif
+
 [[const]] float cascadeFadePercent[4] = { 0.05, 0.08, 0.12, 0.15 };
 
 #ifdef SR_CASCADE_USE_RADII

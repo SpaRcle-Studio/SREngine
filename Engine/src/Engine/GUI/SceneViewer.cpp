@@ -19,7 +19,6 @@
 #include <Graphics/Types/Geometry/Mesh3D.h>
 #include <Graphics/Render/RenderTechnique.h>
 #include <Graphics/Pass/ColorBufferPass.h>
-#include <Graphics/Pass/FlatColorBufferPass.h>
 #include <Graphics/Lighting/DirectionalLight.h>
 
 #include <Physics/Utils/Utils.h>
