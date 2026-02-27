@@ -1,0 +1,13 @@
+ShaderType Compute;
+
+[[THREADS(1, 1, 1)]]
+void compute() {
+    float a = 1e-6;           // 0.000001
+    uint i = 0u;              // 0
+    float b = 2.5e3;          // 2500.0
+    float c = 1.0e-3;         // 0.001
+    float lum = max(0, 1e-6); // 0.000001
+    int d = 0x10;             // 16
+    uint e = 0x20u;           // 32
+    uint f = max(0u, 0x30u);  // 48
+}

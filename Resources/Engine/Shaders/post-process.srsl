@@ -15,6 +15,10 @@ DepthTest false;
 
 [[shared]] vec2 uv;
 
+#ifdef SR_AUTO_EXPOSURE
+    [[ssbo(exposure)]] float[] exposure;
+#endif
+
 #ifdef SR_CLOUDS
     #include <Engine/Shaders/Common/clouds.srsl>
 #endif
@@ -123,9 +127,11 @@ void fragment() {
     color *= 1.0 - vignette;
 
 #ifdef SR_SRGB
-    // временно фиксированный exposure
-    float exposure = 0.6;
-    color *= exposure;
+    #ifdef SR_AUTO_EXPOSURE
+        color *= exposure[0];
+    #else
+        color *= 0.6; /// fallback exposure if auto-exposure is disabled
+    #endif
 
     color = ACESFilm(color);
     //color = ACES(color);

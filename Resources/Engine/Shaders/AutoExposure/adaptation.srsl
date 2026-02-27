@@ -1,0 +1,27 @@
+// Temporal adaptation: luminance sum -> exposure SSBO.
+// Reads prev from exposureOut[1]; target = keyValue/exp(avgLogLum); adapted = prev + (target-prev)*(1-exp(-dt*speed)).
+ShaderType Compute;
+
+[[uniform]] float keyValue;
+[[uniform]] float speed;
+[[uniform]] float dt;
+[[uniform]] float totalPixelCount;
+
+[[ssbo(luminanceIn)]] float[] luminanceIn;
+[[ssbo(exposureOut)]] float[] exposureOut;
+
+[[THREADS(1, 1, 1)]]
+void compute() {
+    float prevExposure = exposureOut[1];
+    float luminanceSum = luminanceIn[0];
+    float avgLogLum = luminanceSum / max(50000, 1.0);
+    //float avgLogLum = luminanceSum / max(totalPixelCount, 1.0);
+    float avgLum = exp(avgLogLum);
+    float target = (keyValue * 3.0) / max(avgLum, 1e-6);
+    //target = clamp(target, 0.03, 10.0);
+
+    float adapted = target;//prevExposure + (target - prevExposure) * (1.0 - exp(-dt * speed));
+
+    exposureOut[0] = adapted;
+    exposureOut[1] = adapted;
+}

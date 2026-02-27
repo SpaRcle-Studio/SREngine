@@ -1,0 +1,52 @@
+// Subsequent reduction passes: SSBO -> SSBO (sum 256 elements per workgroup).
+// Reads reductionIn, writes one float per workgroup to reductionOut.
+// elementCount = number of valid elements in reductionIn.
+ShaderType Compute;
+
+[[uniform]] uint elementCount;
+[[ssbo(reductionIn)]] float[] reductionIn;
+[[ssbo(reductionOut)]] float[] reductionOut;
+[[shared(workgroup)]] float[256] shData;
+
+[[THREADS(256, 1, 1)]]
+void compute() {
+    uint gid = gl_GlobalInvocationID.x;
+    uint tid = gl_LocalInvocationIndex;
+
+    shData[tid] = (gid < elementCount) ? reductionIn[gid] : 0.0;
+    barrier();
+
+    for (uint s = 128u; s > 0u; s >>= 1u) {
+        if (tid < s) {
+            shData[tid] += shData[tid + s];
+        }
+        barrier();
+    }
+
+    if (tid == 0u) {
+        reductionOut[gl_WorkGroupID.x] = shData[0];
+    }
+}
+
+/*[[THREADS(256, 1, 1)]]
+void compute() {
+    uint gid = gl_GlobalInvocationID.x;
+    uint tid = gl_LocalInvocationIndex;
+
+    uint workGroupOffset = gl_WorkGroupID.x * gl_WorkGroupSize.x;
+    uint countInWorkgroup = min(gl_WorkGroupSize.x, elementCount - workGroupOffset);
+
+    shData[tid] = (gid < countInWorkgroup) ? reductionIn[gid] : 0.0;
+    barrier();
+
+    for (uint s = 128u; s > 0u; s >>= 1u) {
+        if (tid < s && (tid + s) < countInWorkgroup) {
+            shData[tid] += shData[tid + s];
+        }
+        barrier();
+    }
+
+    if (tid == 0u && gl_WorkGroupID.x < elementCount) {
+        reductionOut[gl_WorkGroupID.x] = shData[0];
+    }
+}*/

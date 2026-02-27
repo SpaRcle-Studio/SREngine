@@ -224,3 +224,8 @@ use tabs: true
 																		18-s:Float
 																	17-v:value
 																		18-f:1
+				4-k:i
+					5-o:d
+						6-v:type
+							7-s:RenderTechniquePresetIntegrationAutoExposure
+						6-o:ptr
