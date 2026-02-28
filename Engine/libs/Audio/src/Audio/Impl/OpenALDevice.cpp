@@ -47,7 +47,7 @@ namespace SR_AUDIO_NS {
         return true;
     }
 
-    ALCdevice* OpenALDevice::GetALDevice() const {
+    SROpenALDeviceHandle OpenALDevice::GetALDevice() const {
         return m_openALDevice;
     }
 }

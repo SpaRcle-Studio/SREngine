@@ -21,7 +21,14 @@ if (ANDROID_NDK)
         GLESv1_CM
     )
 elseif(SR_EMSCRIPTEN)
+    add_executable(${SR_EXECUTABLE_NAME} "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Platform/Emscripten/main.cpp")
 
+    target_link_libraries(${SR_EXECUTABLE_NAME} Engine)
+    target_include_directories(${SR_EXECUTABLE_NAME} PUBLIC "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Engine/inc")
+
+    set_target_properties(${SR_EXECUTABLE_NAME} PROPERTIES
+        LINK_FLAGS "-sUSE_SDL=2 -sALLOW_MEMORY_GROWTH=1 -sMODULARIZE=1 -sEXPORT_NAME=SREngine -o ${SR_EXECUTABLE_NAME}.html"
+    )
 else()
     set_property(GLOBAL APPEND PROPERTY SR_EXECUTABLE_ARGS "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Platform/Desktop/main.cpp")
 

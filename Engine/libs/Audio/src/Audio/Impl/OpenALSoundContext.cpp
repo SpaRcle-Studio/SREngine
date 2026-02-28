@@ -7,7 +7,7 @@
 #include <Audio/Impl/OpenALTools.h>
 #include <Audio/Impl/OpenALDevice.h>
 
-#include <alext.h>
+#include <AL/alext.h>
 
 namespace SR_AUDIO_NS {
     OpenALSoundContext::OpenALSoundContext(SoundDevice *pDevice)

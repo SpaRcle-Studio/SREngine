@@ -47,16 +47,16 @@ ninja --version
 rem === Проверка наличия Emscripten ===
 if not exist "%EMSDK_DIR%" (
 	echo emsdk not exists. Clone it...
-	git clone https://github.com/emscripten-core/emsdk.git
-	cd emsdk
-	git checkout win_on_arm64
-	cd ../
-	echo Activate emsdk...
-	cd emsdk
-	call .\emsdk install latest
-	call .\emsdk activate latest
-	cd ../
+	git clone https://github.com/SpaRcle-Studio/emsdk
 )
+
+echo Activate emsdk...
+cd emsdk
+call .\emsdk install latest
+call .\emsdk activate latest
+cd ../
+
+set EMSDK_DIR=%~dp0emsdk
 
 echo:
 echo Activate emsdk environment...
@@ -74,6 +74,7 @@ rem === Генерация сборки через emcmake ===
 echo:
 echo Generating CMake build for Emscripten...
 call emcmake cmake -G Ninja -S "%SR_ENGINE_DIR%" -B "%BUILD_DIR%" -DCMAKE_BUILD_TYPE=%CONFIG% -DSR_PLATFORM=%PLATFORM% -DCMAKE_MAKE_PROGRAM=%NINJA_EXE%
+
 if errorlevel 1 goto :error
 
 echo:
@@ -82,8 +83,17 @@ echo === CMake configuration completed successfully ===
 rem === Сборка проекта ===
 echo:
 echo === Building project for Emscripten ===
-emmake cmake --build "%BUILD_DIR%" --config %CONFIG%
+call emmake cmake --build "%BUILD_DIR%" --config %CONFIG%
 if errorlevel 1 goto :error
+
+echo === Build completed successfully ===
+
+copy /Y "%BUILD_DIR%\Engine\SREngine.js" "%BUILD_DIR%\..\out\SREngine.js"
+copy /Y "%BUILD_DIR%\Engine\SREngine.wasm" "%BUILD_DIR%\..\out\SREngine.wasm"
+
+if errorlevel 1 goto :error
+
+echo === Files copied to out directory ===
 
 echo:
 echo ✅ Emscripten build completed successfully.

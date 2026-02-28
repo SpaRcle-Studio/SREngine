@@ -5,6 +5,13 @@ endif()
 
 set(SR_UTILS_DLL_EXPORTS ON CACHE INTERNAL "" FORCE)
 
+if (EMSCRIPTEN)
+    set(SR_RENDER_USE_VULKAN OFF CACHE INTERNAL "" FORCE)
+else()
+    set(SR_RENDER_USE_VULKAN ON CACHE INTERNAL "" FORCE)
+    add_definitions(-DSR_USE_VULKAN)
+endif()
+
 if (SR_TRACY_ENABLE)
     add_definitions(
         -DSR_TRACY_ENABLE

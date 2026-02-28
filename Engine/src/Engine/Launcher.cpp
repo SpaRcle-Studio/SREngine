@@ -72,7 +72,7 @@ namespace SR_CORE_NS {
         auto&& git2path = GetResourcesPath().Concat("Engine/Utilities/git2.exe");
     #endif
 
-    #ifndef SR_ANDROID
+    #if !defined(SR_ANDROID) && !defined(SR_EMSCRIPTEN)
         auto&& cachePath = GetResourcesPath().Concat("Cache");
         if (!cachePath.Create()) {
             SR_ERROR("Launcher::CloneResources() : failed to create cache directory.");

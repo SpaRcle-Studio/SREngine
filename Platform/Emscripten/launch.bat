@@ -1,0 +1,1 @@
+call "emsdk\upstream\emscripten\emrun.bat" "out\SREngine.html"

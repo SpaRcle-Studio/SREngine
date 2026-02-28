@@ -22,7 +22,7 @@ namespace EvoScript {
 
                   "cmake_minimum_required(VERSION 3.16...3.16.2)\n" +
                   "project(CMakeScripts)\n" +
-                  "\nset(CMAKE_CXX_STANDARD 20)\n\n" +
+                  "\nset(CMAKE_CXX_STANDARD 23)\n\n" +
                   "add_library(Scripts STATIC Scripts.cxx)\n\n" +
                   "target_include_directories(Scripts PUBLIC .)\n" +
                   "target_include_directories(Scripts PUBLIC ../../)\n";

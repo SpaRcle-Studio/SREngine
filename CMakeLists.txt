@@ -25,6 +25,12 @@ else()
     set(SR_EMSCRIPTEN OFF)
 endif()
 
+if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+    message(STATUS "SpaRcle Engine: Architecture is 64-bit")
+elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
+    message(STATUS "SpaRcle Engine: Architecture is 32-bit")
+endif()
+
 message(STATUS "SpaRcle Engine: Host system: ${CMAKE_HOST_SYSTEM_NAME}")
 
 if(CMAKE_HOST_SYSTEM_NAME STREQUAL "Windows")
@@ -93,7 +99,7 @@ message(STATUS "SpaRcle Engine: venv directory is ${SR_CMAKE_VENV_DIRECTORY}")
 set(SR_CMAKE_RESOURCES_DIRECTORY "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Resources")
 message(STATUS "SpaRcle Engine: resources directory is ${SR_CMAKE_RESOURCES_DIRECTORY}")
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 if (ANDROID_NDK)
@@ -111,7 +117,6 @@ set(SR_OUTPUT_LIBRARY_DIR "${SR_CMAKE_ROOT_BUILD_DIRECTORY}/Lib")
 add_definitions(
     -DSR_ICU
     -DSR_USE_IMGUI
-    -DSR_USE_VULKAN
     -DSR_CXX_20
 )
 

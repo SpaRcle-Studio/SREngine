@@ -9,7 +9,8 @@ project(Audio)
 SR_COMMON_GENERATE_BUILD_SOURCES(${PROJECT_SOURCE_DIR})
 SR_COMMON_GET_SOURCES(Audio)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 option(SR_AUDIO_DLL_EXPORTS "" ON)
 option(SR_AUDIO_USE_VORBIS "" ON)
@@ -35,9 +36,10 @@ endif()
 
 set(LIBTYPE STATIC)
 
+add_subdirectory(libs/libmodplug)
+
 if (NOT SR_EMSCRIPTEN)
     add_subdirectory(libs/OpenAL)
-    add_subdirectory(libs/libmodplug)
 
     if(MSVC)
         target_compile_options(modplug PRIVATE "/wd5033;")
@@ -114,10 +116,10 @@ endif()
 if (NOT SR_EMSCRIPTEN)
     target_link_libraries(Audio PUBLIC OpenAL)
     target_include_directories(Audio PUBLIC libs/OpenAL/include)
-
-    target_link_libraries(Audio PUBLIC modplug)
-    target_include_directories(Audio PUBLIC libs/libmodplug/src)
 endif()
+
+target_link_libraries(Audio PUBLIC modplug)
+target_include_directories(Audio PUBLIC libs/libmodplug/src)
 
 if (SR_AUDIO_USE_VORBIS)
     target_link_libraries(Audio PUBLIC vorbis vorbisfile ogg)

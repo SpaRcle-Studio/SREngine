@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SREngine</title>
+</head>
+<body>
+    <script src="SREngine.js"></script>
+    <script>
+        // Ждём, пока модуль загрузится
+        SREngine().then(Module => {
+            console.log("WASM loaded!");
+            if (Module._main) Module._main();
+        });
+    </script>
+</body>
+</html>

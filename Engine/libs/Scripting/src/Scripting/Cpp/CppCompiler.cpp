@@ -155,7 +155,6 @@ namespace SR_SCRIPTING_NS {
         if (m_settings.compilerType == CppCompilerType::MSVC) {
             customArgs += "-nologo /std:c++20 /EHsc ";
             customArgs += "/utf-8 ";
-            customArgs += "/DSR_ENGINE_SCRIPT_API_MODE ";
             customArgs += "/DFMT_HEADER_ONLY ";
 
         #ifdef SR_TRACY_ENABLE
@@ -171,7 +170,6 @@ namespace SR_SCRIPTING_NS {
             customArgs += "-DTRACY_ENABLE ";
         #endif
 
-            customArgs += "-DSR_ENGINE_SCRIPT_API_MODE ";
             customArgs += "-DFMT_HEADER_ONLY ";
             customArgs += "-std=c++20 ";
             customArgs += "-Wno-deprecated -Wno-unused-variable -Wno-parentheses -Wno-deprecated-declarations -Wno-reorder -Wno-unused-function -Wno-attributes -Wno-delete-incomplete -Wno-sign-compare -Wno-unused-function -Wno-overloaded-virtual -Wno-comment -Wno-template-body ";

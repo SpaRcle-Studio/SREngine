@@ -219,12 +219,12 @@ namespace SR_SCRIPTING_NS {
         std::string cmakeContent;
         cmakeContent += "project(SREngineScriptModules)\n";
         cmakeContent += "cmake_minimum_required(VERSION 3.5)\n\n";
-        cmakeContent += "set(CMAKE_CXX_STANDARD 20)\n\n";
+        cmakeContent += "set(CMAKE_CXX_STANDARD 23)\n\n";
 
         cmakeContent += "# Modules \n\n";
 
         for (auto&& module : m_modules) {
-            cmakeContent += "if (ANDROID_NDK)\n";
+            cmakeContent += "if (ANDROID_NDK OR EMSCRIPTEN)\n";
 
             cmakeContent += "\tadd_library(SCRIPT_MODULE_{} STATIC\n"_format(module.moduleInfo.moduleName);
             cmakeContent += "\t\t{}/{}.cxx\n"_format(m_cacheFolder.Concat("Scripts/Codegen"), module.moduleInfo.moduleName);
@@ -355,7 +355,8 @@ namespace SR_SCRIPTING_NS {
             codegenFileStream << "/// " << SR_CODEGEN_HEADER_COMMENT << "\n\n";
 
             //SR_UTILS_NS::Path enumsFile = m_cacheFolder.Concat("Scripts/Modules/{}/Codegen/Codegen/Enums.generated.hpp"_format(module.moduleInfo.moduleName));
-            codegenFileStream << "#define SR_ENGINE_COMMON_PCH_FOR_BASE_CODE\n\n";
+            codegenFileStream << "#define SR_ENGINE_COMMON_PCH_FOR_BASE_CODE\n";
+            codegenFileStream << "#define SR_ENGINE_SCRIPT_API_MODE\n\n";
 
             codegenFileStream << "#include <Codegen/SpaRcleModule{}Core.generated.hpp>\n\n"_format(module.moduleInfo.moduleName);
             //codegenFileStream << "#include \"{}\""_format(enumsFile.ToStringRef()) << "\n\n";

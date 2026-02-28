@@ -7,7 +7,13 @@
 
 #include <Audio/SoundContext.h>
 
-class ALCcontext;
+#ifdef SR_EMSCRIPTEN
+    struct ALCcontext_struct;
+    using SROpenALContextHandle = ALCcontext_struct*;
+#else
+    struct ALCcontext;
+    using SROpenALContextHandle = ALCcontext*;
+#endif
 
 namespace SR_AUDIO_NS {
     class OpenALSoundContext : public SoundContext {
@@ -45,7 +51,7 @@ namespace SR_AUDIO_NS {
         bool FreeSource(SoundSource* pSource) override;
 
     private:
-        ALCcontext* m_openALContext = nullptr;
+        SROpenALContextHandle m_openALContext = nullptr;
 
     };
 }

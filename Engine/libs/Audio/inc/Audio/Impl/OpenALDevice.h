@@ -7,7 +7,13 @@
 
 #include <Audio/SoundDevice.h>
 
-struct ALCdevice;
+#ifdef SR_EMSCRIPTEN
+    struct ALCdevice_struct;
+    using SROpenALDeviceHandle = ALCdevice_struct*;
+#else
+    struct ALCdevice;
+    using SROpenALDeviceHandle = ALCdevice*;
+#endif
 
 namespace SR_AUDIO_NS {
     class OpenALDevice : public SoundDevice {
@@ -18,10 +24,10 @@ namespace SR_AUDIO_NS {
     public:
         bool Init() override;
 
-        SR_NODISCARD ALCdevice* GetALDevice() const;
+        SR_NODISCARD SROpenALDeviceHandle GetALDevice() const;
 
     private:
-        ALCdevice* m_openALDevice = nullptr;
+        SROpenALDeviceHandle m_openALDevice = nullptr;
 
     };
 }
