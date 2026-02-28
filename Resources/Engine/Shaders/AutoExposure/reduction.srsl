@@ -10,32 +10,17 @@ ShaderType Compute;
 
 [[THREADS(16, 16, 1)]]
 void compute() {
-    ivec2 localID = ivec2(gl_LocalInvocationID.xy);        // 0..15 в твоей 16x16 workgroup
-    ivec2 workGroupID = ivec2(gl_WorkGroupID.xy);        // ID текущей группы
-    ivec2 groupOffset = workGroupID * ivec2(16,16);      // смещение группы на экране
-    ivec2 px = groupOffset + localID;                     // глобальные координаты пи
     ivec2 gid = ivec2(gl_GlobalInvocationID.xy);
-
-    //ivec2 px = ivec2(gl_GlobalInvocationID.xy);
-    //if (px.x >= int(resolution.x) || px.y >= int(resolution.y)) {
-    //    return;
-    //}
-
-    //vec2 uv = (vec2(px) + 0.5) / resolution;
-    //vec2 uv = vec2(px) / resolution;
-    vec2 uv = (vec2(gid) - 0.5) / (resolution);
-    vec3 color = texture(hdrTexture, uv).rgb;
-    float lum = max(dot(color, vec3(0.2126, 0.7152, 0.0722)), 1e-6);
-    float logLum = log(lum);
-
-    // Workgroup reduction in shared memory (16*16 = 256 threads)
     uint tid = gl_LocalInvocationIndex;
 
-    //uint pixelsInGroupX = min(16, int(resolution.x) - px.x + localID.x);
-    //uint pixelsInGroupY = min(16, int(resolution.y) - px.y + localID.y);
-    //uint pixelsInGroup = pixelsInGroupX * pixelsInGroupY;
-
-    shSum[tid] = logLum;// / float(pixelsInGroup);
+    if (gid.x >= int(resolution.x) || gid.y >= int(resolution.y)) {
+        shSum[tid] = 0.0;
+    } else {
+        vec2 uv = (vec2(gid) + 0.5) / resolution;
+        vec3 color = texture(hdrTexture, uv).rgb;
+        float lum = max(dot(color, vec3(0.2126, 0.7152, 0.0722)), 1e-6);
+        shSum[tid] = log(lum);
+    }
     barrier();
 
     for (uint s = 128u; s > 0u; s >>= 1u) {
