@@ -88,12 +88,11 @@ if errorlevel 1 goto :error
 
 echo === Build completed successfully ===
 
-copy /Y "%BUILD_DIR%\Engine\SREngine.js" "%BUILD_DIR%\..\out\SREngine.js"
-copy /Y "%BUILD_DIR%\Engine\SREngine.wasm" "%BUILD_DIR%\..\out\SREngine.wasm"
+copy /Y "%BUILD_DIR%\Engine\SREngine.js" "%BUILD_DIR%\..\Bin\SREngine.js"
+copy /Y "%BUILD_DIR%\Engine\SREngine.wasm" "%BUILD_DIR%\..\Bin\SREngine.wasm"
+copy /Y "%BUILD_DIR%\Engine\SREngine.data" "%BUILD_DIR%\..\Bin\SREngine.data"
 
-if errorlevel 1 goto :error
-
-echo === Files copied to out directory ===
+echo === Files copied to Bin directory ===
 
 echo:
 echo ✅ Emscripten build completed successfully.

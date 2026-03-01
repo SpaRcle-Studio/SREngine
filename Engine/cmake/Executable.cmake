@@ -21,13 +21,25 @@ if (ANDROID_NDK)
         GLESv1_CM
     )
 elseif(SR_EMSCRIPTEN)
+    include(cmake/PackResourcesToBuild.cmake)
+    SRPackResourcesToBuild()
+
     add_executable(${SR_EXECUTABLE_NAME} "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Platform/Emscripten/main.cpp")
 
     target_link_libraries(${SR_EXECUTABLE_NAME} Engine)
     target_include_directories(${SR_EXECUTABLE_NAME} PUBLIC "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Engine/inc")
 
     set_target_properties(${SR_EXECUTABLE_NAME} PROPERTIES
-        LINK_FLAGS "-sUSE_SDL=2 -sALLOW_MEMORY_GROWTH=1 -sMODULARIZE=1 -sEXPORT_NAME=SREngine -o ${SR_EXECUTABLE_NAME}.html"
+        LINK_FLAGS "-sUSE_SDL=2 -sALLOW_MEMORY_GROWTH=1 -sUSE_PTHREADS=1 -sMODULARIZE=1 -sINITIAL_MEMORY=134217728 -sEXPORT_NAME=SREngine --preload-file ${SR_CMAKE_ROOT_BUILD_DIRECTORY}/PackedResources@/Resources -o ${SR_EXECUTABLE_NAME}.html"
+    )
+
+    # Скопировать файлы после сборки
+    add_custom_command(TARGET ${SR_EXECUTABLE_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${SR_CMAKE_ROOT_BUILD_DIRECTORY}/Engine/${SR_EXECUTABLE_NAME}.wasm"
+        "${SR_CMAKE_ROOT_BUILD_DIRECTORY}/Engine/${SR_EXECUTABLE_NAME}.js"
+        "${SR_CMAKE_ROOT_BUILD_DIRECTORY}/Engine/${SR_EXECUTABLE_NAME}.data"
+        "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Platform/Emscripten/Bin/"
     )
 else()
     set_property(GLOBAL APPEND PROPERTY SR_EXECUTABLE_ARGS "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Platform/Desktop/main.cpp")

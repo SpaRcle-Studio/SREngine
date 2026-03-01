@@ -10,7 +10,6 @@
         // Ждём, пока модуль загрузится
         SREngine().then(Module => {
             console.log("WASM loaded!");
-            if (Module._main) Module._main();
         });
     </script>
 </body>

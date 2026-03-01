@@ -18,7 +18,7 @@ namespace SR_CORE_NS {
             return LauncherInitStatus::Error;
         }
 
-    #if defined(SR_ENGINE_FLATPAK_BUILD) || defined(SR_ANDROID)
+    #if defined(SR_ENGINE_FLATPAK_BUILD) || defined(SR_ANDROID) || defined(SR_EMSCRIPTEN)
         if (InitializeResourcesFolder()) {
             return LauncherInitStatus::Success;
         }

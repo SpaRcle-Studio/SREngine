@@ -13,7 +13,7 @@ if __name__ == "__main__":
 
     prefix = '[SpaRcle libclang copy script]'
 
-    print(f'{prefix} Platform: {sys.platform}')
+    print(f'{prefix} Host platform: {sys.platform}')
 
     if is_unix:
         lib_file = os.path.join(lib_path, 'libclang.so')

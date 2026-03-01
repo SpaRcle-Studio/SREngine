@@ -75,9 +75,16 @@ if (NOT SR_ENGINE_FLATPAK_BUILD AND NOT ANDROID_NDK)
     set(SR_COMMON_EMBED_RESOURCES ON)
 endif()
 
-set(SR_COMMON_GIT_METADATA ON)
+if (EMSCRIPTEN)
+    set(SR_COMMON_GIT_METADATA OFF CACHE INTERNAL "" FORCE)
+else()
+    set(SR_COMMON_GIT_METADATA ON CACHE INTERNAL "" FORCE)
+endif()
 
-add_compile_definitions(SR_COMMON_GIT_METADATA)
+if (SR_COMMON_GIT_METADATA)
+    add_compile_definitions(SR_COMMON_GIT_METADATA)
+    message(STATUS "SpaRcle Engine: Git metadata will be embedded in the build")
+endif()
 
 message(STATUS "SpaRcle Engine: CONFIGURING Utils")
 add_subdirectory(libs/Utils)

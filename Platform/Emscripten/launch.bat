@@ -1,1 +1,1 @@
-call "emsdk\upstream\emscripten\emrun.bat" "out\SREngine.html"
+call "emsdk\upstream\emscripten\emrun.bat" --port 8080 "Bin\SREngine.html"

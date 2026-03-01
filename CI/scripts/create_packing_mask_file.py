@@ -14,29 +14,55 @@ def wildcard_to_regex(mask: str) -> str:
     regex = ""
     for c in mask:
         if c == '*':
-            regex += '.*'
+            regex += ".*"
         elif c == '?':
-            regex += '.'
+            regex += "."
         elif c == '.':
-            regex += r'\.'
+            regex += r"\."
         elif c == '\\':
-            regex += '/'
+            regex += "/"
         else:
-            regex += re.escape(c)
-    return f"^{regex}$"
+            regex += c
+    return "^" + regex + "$"
 
 
 def is_excluded(rel_path: Path, exclude_patterns: list[re.Pattern]) -> bool:
-    path_str = rel_path.as_posix()  # Normalize
+    path_str = rel_path.as_posix()
     for pattern in exclude_patterns:
-        if pattern.fullmatch(path_str):
+        if pattern.fullmatch(path_str):   # аналог std::regex_match
             return True
-        parts = path_str.split('/')
-        for i in range(1, len(parts)):
-            sub = '/'.join(parts[:i])
-            if pattern.fullmatch(sub):
-                return True
     return False
+    #path_str = rel_path.as_posix()  # Normalize
+    #for pattern in exclude_patterns:
+    #    if pattern.fullmatch(path_str):
+    #        return True
+    #    parts = path_str.split('/')
+    #    for i in range(1, len(parts)):
+    #        sub = '/'.join(parts[:i])
+    #        if pattern.fullmatch(sub):
+    #            return True
+    #return False
+
+
+def get_resources_pack_files(resources_path: Path, exclude_patterns):
+    files = []
+
+    for root, dirs, filenames in os.walk(resources_path):
+        root_path = Path(root)
+        rel_root = root_path.relative_to(resources_path)
+
+        # копия списка, потому что будем модифицировать
+        for d in dirs[:]:
+            rel_dir = (rel_root / d)
+            if is_excluded(rel_dir, exclude_patterns):
+                dirs.remove(d)  # отключаем рекурсию как в C++
+
+        for f in filenames:
+            rel_file = rel_root / f
+            if not is_excluded(rel_file, exclude_patterns):
+                files.append(str((root_path / f).resolve()))
+
+    return files
 
 
 def load_exclude_mask(path_to_file: str):
@@ -58,6 +84,15 @@ def load_exclude_mask(path_to_file: str):
     for platform, masks_by_platform in masks.items():
         result.append([platform, [re.compile(wildcard_to_regex(mask)) for mask in masks_by_platform]])
     return result
+
+
+def load_exclude_mask_by_platform(path_to_file: str, platform: str):
+    masks = load_exclude_mask(path_to_file)
+    masks_for_platform = []
+    for p, m in masks:
+        if p == platform or p == 'All':
+            masks_for_platform.extend(m)
+    return masks_for_platform
 
 
 def create_mask(logger: logger_utils.Logger, context: codegen_context.CodegenContext):

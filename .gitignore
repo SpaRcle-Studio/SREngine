@@ -81,3 +81,10 @@ Resources/**/*.so
 /Resources/Scripts/Libraries/
 /Resources/Cache
 /Resources/CMakeLists.txt
+/Platform/Emscripten/Bin/SREngine.js
+/Platform/Emscripten/Bin/SREngine.wasm
+/Platform/Emscripten/Bin/Resources
+/Platform/Emscripten/Bin/SREngine.data
+/cmake-build-debug-visual-studio
+/cmake-build-debug-emscripten
+/Resources/Engine/Utilities/pack_resources.exe

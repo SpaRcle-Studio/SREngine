@@ -42,7 +42,6 @@ def main(logger: logger_utils.Logger, context: codegen_context.CodegenContext) -
 
     if not context.is_script:
         copy_engine_api.copy_files(logger, context)
-        #create_packing_mask_file.create_mask(logger, context)
 
     return True
 

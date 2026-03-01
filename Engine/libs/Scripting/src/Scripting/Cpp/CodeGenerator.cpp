@@ -217,46 +217,50 @@ namespace SR_SCRIPTING_NS {
         auto&& cmakeListsCachePath = m_cacheFolder.Concat("Scripts/CMakeLists.txt");
 
         std::string cmakeContent;
-        cmakeContent += "project(SREngineScriptModules)\n";
-        cmakeContent += "cmake_minimum_required(VERSION 3.5)\n\n";
-        cmakeContent += "set(CMAKE_CXX_STANDARD 23)\n\n";
+        cmakeContent += "if (NOT EMSCRIPTEN)\n\n";
 
-        cmakeContent += "# Modules \n\n";
+        cmakeContent += "\tproject(SREngineScriptModules)\n";
+        cmakeContent += "\tcmake_minimum_required(VERSION 3.5)\n\n";
+        cmakeContent += "\tset(CMAKE_CXX_STANDARD 23)\n\n";
+
+        cmakeContent += "\t# Modules\n\n";
 
         for (auto&& module : m_modules) {
-            cmakeContent += "if (ANDROID_NDK OR EMSCRIPTEN)\n";
+            cmakeContent += "\tif (ANDROID_NDK)\n";
 
-            cmakeContent += "\tadd_library(SCRIPT_MODULE_{} STATIC\n"_format(module.moduleInfo.moduleName);
-            cmakeContent += "\t\t{}/{}.cxx\n"_format(m_cacheFolder.Concat("Scripts/Codegen"), module.moduleInfo.moduleName);
-            cmakeContent += "\t)\n";
+            cmakeContent += "\t\tadd_library(SCRIPT_MODULE_{} STATIC\n"_format(module.moduleInfo.moduleName);
+            cmakeContent += "\t\t\t{}/{}.cxx\n"_format(m_cacheFolder.Concat("Scripts/Codegen"), module.moduleInfo.moduleName);
+            cmakeContent += "\t\t)\n";
 
-            cmakeContent += "else()\n";
+            cmakeContent += "\telse()\n";
 
-            cmakeContent += "\tadd_library(SCRIPT_MODULE_{} SHARED\n"_format(module.moduleInfo.moduleName);
-            cmakeContent += "\t\t{}/{}.cxx\n"_format(m_cacheFolder.Concat("Scripts/Codegen"), module.moduleInfo.moduleName);
-            cmakeContent += "\t)\n";
+            cmakeContent += "\t\tadd_library(SCRIPT_MODULE_{} SHARED\n"_format(module.moduleInfo.moduleName);
+            cmakeContent += "\t\t\t{}/{}.cxx\n"_format(m_cacheFolder.Concat("Scripts/Codegen"), module.moduleInfo.moduleName);
+            cmakeContent += "\t\t)\n";
 
-            cmakeContent += "endif()\n";
+            cmakeContent += "\tendif()\n";
 
-            cmakeContent += "target_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, module.path.GetFolder());
+            cmakeContent += "\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, module.path.GetFolder());
 
             for (auto&& engineIncludeDir : m_pScriptSystem->GetEngineSourcesIncludePaths()) {
-                cmakeContent += "target_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, engineIncludeDir);
+                cmakeContent += "\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, engineIncludeDir);
             }
 
-            cmakeContent += "target_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, m_cacheFolder.Concat("Scripts/Modules/{}/Codegen"_format(module.moduleInfo.moduleName)));
+            cmakeContent += "\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, m_cacheFolder.Concat("Scripts/Modules/{}/Codegen"_format(module.moduleInfo.moduleName)));
         }
 
-        cmakeContent += "# Dependencies \n\n";
+        cmakeContent += "\t# Dependencies \n\n";
 
         for (auto&& module : m_modules) {
             for (auto&& dependency : GetDependenciesRecursive(module.moduleInfo.moduleName)) {
                 if (auto&& pDependencyModule = GetModule(dependency)) {
-                    cmakeContent += "target_link_libraries(SCRIPT_MODULE_{} SCRIPT_MODULE_{})\n"_format(module.moduleInfo.moduleName, dependency);
-                    cmakeContent += "target_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, pDependencyModule->path.GetFolder());
+                    cmakeContent += "\ttarget_link_libraries(SCRIPT_MODULE_{} SCRIPT_MODULE_{})\n"_format(module.moduleInfo.moduleName, dependency);
+                    cmakeContent += "\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, pDependencyModule->path.GetFolder());
                 }
             }
         }
+
+        cmakeContent += "\nendif()";
 
         if (!cmakeListsCachePath.Create()) {
             SR_ERROR("CppCodeGenerator::RegenerateCmake() : failed to create script cmake folder!\n\tPath: {}", cmakeListsCachePath);

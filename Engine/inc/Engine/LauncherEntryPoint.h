@@ -15,7 +15,11 @@ using LauncherEntryPointAfterInitCallback = SR_HTYPES_NS::Function<void(SR_CORE_
 static int LauncherEntryPoint(const LauncherEntryPointAfterInitCallback& afterInitCallback = LauncherEntryPointAfterInitCallback()) {
     int32_t code = 0;
 
+#ifdef SR_EMSCRIPTEN
+    static SR_HTYPES_NS::SharedPtr pLauncher = new SR_CORE_NS::Launcher();
+#else
     SR_HTYPES_NS::SharedPtr pLauncher = new SR_CORE_NS::Launcher();
+#endif
 
     auto&& launcherInitStatus = pLauncher->InitLauncher();
 

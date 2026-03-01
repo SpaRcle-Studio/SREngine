@@ -260,10 +260,42 @@ namespace SR_CORE_NS {
         return true;
     }
 
+    bool AppMainLoop(void* pApplication) {
+        return static_cast<Application*>(pApplication)->MainLoop();
+    }
+
+    bool Application::MainLoop() {
+        SR_TRACY_ZONE;
+        SR_PLATFORM_NS::Sleep(50);
+
+        if (m_isNeedReload) {
+            Close();
+            m_hasErrors |= !Init();
+            m_isNeedReload = false;
+            if (m_hasErrors) {
+                SR_ERROR("Application::MainLoop() : failed to reload application!");
+                return false;
+            }
+        }
+
+        if (!m_engine) {
+            SR_ERROR("Application::MainLoop() : engine lost!");
+            m_hasErrors = true;
+            return false;
+        }
+
+        if (!m_engine->Execute()) {
+            SR_SYSTEM_LOG("Application::MainLoop() : engine is not alive!");
+            return false;
+        }
+
+        return true;
+    }
+
     bool Application::Execute() {
         SR_INFO("Application::Execute() : waiting for the application to close...");
 
-        volatile bool hasErrors = false;
+        m_hasErrors = false;
 
         auto&& optionPath =  SR_UTILS_NS::CLIManager::Instance().GetOptionValue(SR_UTILS_NS::CLIOptions::RunScene);
         if (m_engine && optionPath.has_value()) {
@@ -273,28 +305,9 @@ namespace SR_CORE_NS {
             m_engine->RunSceneGameMode(path);
         }
 
-        while (!hasErrors) {
-            SR_TRACY_ZONE;
-            SR_PLATFORM_NS::Sleep(50);
+        SR_PLATFORM_NS::SetApplicationMainLoop(AppMainLoop, this);
 
-            if (m_isNeedReload) {
-                Close();
-                hasErrors |= !Init();
-                m_isNeedReload = false;
-            }
-
-            if (!m_engine) {
-                SR_ERROR("Application::Execute() : engine lost!");
-                hasErrors = true;
-            }
-
-            if (!m_engine->Execute()) {
-                SR_SYSTEM_LOG("Application::Execute() : engine is not alive!");
-                break;
-            }
-        }
-
-        return !hasErrors;
+        return !m_hasErrors;
     }
 
     void Application::Close() {

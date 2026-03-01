@@ -22,6 +22,7 @@ namespace SR_CORE_NS {
         bool EarlyInit();
         bool Init();
         bool Execute();
+        bool MainLoop();
         void Close();
 
         void Reload();
@@ -41,7 +42,7 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::Path m_engineResourcesPath;
         SR_UTILS_NS::Path m_resourcesPath;
 
-        /// @property
+        bool m_hasErrors = false;
         std::atomic<bool> m_isNeedReload = false;
 
         SR_HTYPES_NS::SharedPtr<Engine> m_engine;
