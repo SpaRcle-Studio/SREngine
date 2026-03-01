@@ -30,7 +30,7 @@ elseif(SR_EMSCRIPTEN)
     target_include_directories(${SR_EXECUTABLE_NAME} PUBLIC "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Engine/inc")
 
     set_target_properties(${SR_EXECUTABLE_NAME} PROPERTIES
-        LINK_FLAGS "-sUSE_SDL=2 -sALLOW_MEMORY_GROWTH=1 -sUSE_PTHREADS=1 -sMODULARIZE=1 -sINITIAL_MEMORY=134217728 -sEXPORT_NAME=SREngine --preload-file ${SR_CMAKE_ROOT_BUILD_DIRECTORY}/PackedResources@/Resources -o ${SR_EXECUTABLE_NAME}.html"
+        LINK_FLAGS "-sUSE_SDL=2 -sALLOW_MEMORY_GROWTH=1 -sPTHREAD_POOL_SIZE=8 -sFULL_ES3=1 -sUSE_PTHREADS=1 -sMODULARIZE=1 -sINITIAL_MEMORY=134217728 -sEXPORT_NAME=SREngine --preload-file ${SR_CMAKE_ROOT_BUILD_DIRECTORY}/PackedResources@/Resources -o ${SR_EXECUTABLE_NAME}.html"
     )
 
     # Скопировать файлы после сборки

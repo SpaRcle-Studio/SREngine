@@ -67,6 +67,10 @@
             <VulkanGPUAssist Value="false"/>
         </Variant>
 
+        <Variant Name="Emscripten">
+            <Emscripten Value="true"/>
+        </Variant>
+
         <Variant Name="Validation">
             <VulkanValidation Value="true"/>
             <VulkanGPUAssist Value="true"/>

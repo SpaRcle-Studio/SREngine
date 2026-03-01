@@ -22,6 +22,10 @@ if (EMSCRIPTEN)
     add_definitions(-DSR_EMSCRIPTEN)
     add_compile_options(-sUSE_PTHREADS=1)
     add_link_options(-sUSE_PTHREADS=1)
+
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --use-port=emdawnwebgpu")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --use-port=emdawnwebgpu")
+
     message(STATUS "SpaRcle Engine: Emscripten build mode enabled")
 else()
     set(SR_EMSCRIPTEN OFF)

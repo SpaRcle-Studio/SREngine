@@ -98,7 +98,7 @@ namespace SR_CORE_NS {
         auto&& resolutions = SR_PLATFORM_NS::GetScreenResolutions();
 
         if (resolutions.empty()) {
-            SR_ERROR("Engine::CreateMainWindow() : supported resolutions are not found!");
+            SR_ERROR("Engine::CreateMainWindow() : supported resolutions are not found! Window can not be created!");
             return nullptr;
         }
         else {
@@ -474,6 +474,9 @@ namespace SR_CORE_NS {
         if (!m_threadsWorker->IsAlive()) {
             SR_SYSTEM_LOG("Engine::Execute() : threads worker is not alive!");
             isAlive = false;
+        }
+        else {
+            m_threadsWorker->Execute();
         }
 
         if (m_threadsWorker && !isAlive && m_threadsWorker->IsActive()) {

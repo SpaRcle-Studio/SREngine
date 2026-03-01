@@ -266,7 +266,6 @@ namespace SR_CORE_NS {
 
     bool Application::MainLoop() {
         SR_TRACY_ZONE;
-        SR_PLATFORM_NS::Sleep(50);
 
         if (m_isNeedReload) {
             Close();

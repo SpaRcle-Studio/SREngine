@@ -80,7 +80,62 @@ use tabs: true
 				4-k:i
 					5-o:d
 						6-v:description
+							7-s:Emscripten
+						6-a:featuresCondition
+							7-k:i
+								8-v:d
+									9-s:Emscripten
+						6-a:threads
+							7-k:i
+								8-o:d
+									9-v:useThreads
+										10-b:false
+									9-a:states
+										10-k:i
+											11-o:d
+												12-v:name
+													13-s:InitializeState
+										10-k:i
+											11-o:d
+												12-v:name
+													13-s:DeltaTimeState
+										10-k:i
+											11-o:d
+												12-v:name
+													13-s:PrepareState
+										10-k:i
+											11-o:d
+												12-v:name
+													13-s:ChunkSystemState
+										10-k:i
+											11-o:d
+												12-v:name
+													13-s:SceneUpdateState
+										10-k:i
+											11-o:d
+												12-v:name
+													13-s:PollEventsState
+										10-k:i
+											11-o:d
+												12-v:name
+													13-s:DelayedActionsState
+										10-k:i
+											11-o:d
+												12-v:name
+													13-s:DrawState
+										10-k:i
+											11-o:d
+												12-v:name
+													13-s:SubmitState
+						6-a:finalizeStates
+							7-k:i
+								8-v:d
+									9-s:InitializeState
+				4-k:i
+					5-o:d
+						6-v:description
 							7-s:Default engine config
+						6-a:featuresCondition
 						6-a:threads
 							7-k:i
 								8-o:d

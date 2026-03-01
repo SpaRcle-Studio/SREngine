@@ -52,8 +52,8 @@ if not exist "%EMSDK_DIR%" (
 
 echo Activate emsdk...
 cd emsdk
-call .\emsdk install latest
-call .\emsdk activate latest
+call .\emsdk install incoming
+call .\emsdk activate incoming
 cd ../
 
 set EMSDK_DIR=%~dp0emsdk
