@@ -14,9 +14,6 @@ namespace SR_UTILS_NS {
 }
 
 namespace SR_AUDIO_NS {
-    typedef std::vector<uint8_t> RawSoundData;
-    typedef std::shared_ptr<RawSoundData> RawSoundDataPtr;
-
     class WaveDataFormat : public SR_UTILS_NS::NonCopyable
     {
     public:

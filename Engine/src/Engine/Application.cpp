@@ -296,12 +296,30 @@ namespace SR_CORE_NS {
 
         m_hasErrors = false;
 
-        auto&& optionPath =  SR_UTILS_NS::CLIManager::Instance().GetOptionValue(SR_UTILS_NS::CLIOptions::RunScene);
-        if (m_engine && optionPath.has_value()) {
-            SR_LOG("Application::Execute() : command line option to run scene detected: {}", optionPath.value());
+        if (m_engine) {
+            auto&& optionPath =  SR_UTILS_NS::CLIManager::Instance().GetOptionValue(SR_UTILS_NS::CLIOptions::RunScene);
+            if (optionPath.has_value()) {
+                SR_LOG("Application::Execute() : command line option to run scene detected: {}", optionPath.value());
 
-            auto&& path = optionPath.value();
-            m_engine->RunSceneGameMode(path);
+                auto&& path = optionPath.value();
+                m_engine->RunSceneGameMode(path);
+            }
+            else if (SR_UTILS_NS::Features::Instance().Enabled("RunGameModeOnStart", false)) {
+                SR_UTILS_NS::Path startSceneConfigPath = m_resourcesPath.Concat("Engine/Configs/StartupScene.xml");
+                if (SR_XML_NS::Document document = document.Load(startSceneConfigPath)) {
+                    auto&& path = document.Root().GetNode("Configs").GetNode("StartupScene").GetAttribute<SR_UTILS_NS::Path>();
+                    if (!path.IsEmpty()) {
+                        SR_LOG("Application::Execute() : startup scene config file detected, running scene at path \"{}\"...", path);
+                        m_engine->RunSceneGameMode(path);
+                    }
+                    else {
+                        SR_ERROR("Application::Execute() : startup scene config file is invalid! Path: \"{}\"", path);
+                    }
+                }
+                else {
+                    SR_LOG("Application::Execute() : startup scene config file not found at path \"{}\"!", startSceneConfigPath);
+                }
+            }
         }
 
         SR_PLATFORM_NS::SetApplicationMainLoop(AppMainLoop, this);

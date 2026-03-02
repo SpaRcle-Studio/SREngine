@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<Configs>
+    <StartupScene Path="Engine/Scenes/simple.scene"/>
+</Configs>

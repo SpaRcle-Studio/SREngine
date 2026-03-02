@@ -1,0 +1,10 @@
+sra format
+use tabs: true
+0-r:Root
+	1-v:entityId
+		2-i:2778003242721612732
+	1-o:logic
+		2-v:type
+			3-s:SceneAssetLogic
+		2-o:ptr
+	1-a:root

@@ -9,7 +9,7 @@
 #endif
 
 namespace SR_AUDIO_NS {
-    OggCodec DetectOggCodec(const uint8_t* data, size_t size) {
+    OggCodec DetectOggCodec(const char* data, size_t size) {
         if (!data || size < 27) return OggCodec::Unknown; // минимум заголовок страницы
 
         // 1) проверяем "OggS"
@@ -51,7 +51,7 @@ namespace SR_AUDIO_NS {
 
         // 4) начало первого пакета
         if (headerSize >= size) return OggCodec::Unknown; // нет места для первого сегмента
-        const uint8_t* packet = data + headerSize;
+        const char* packet = data + headerSize;
         size_t available = size - headerSize;
 
         // Если packetLen > 0 и у нас есть packetLen байт — проверим сигнатуры на этих данных.
@@ -95,7 +95,7 @@ namespace SR_AUDIO_NS {
         return OggCodec::Unknown;
     }
 
-    std::shared_ptr<std::vector<uint8_t>> UnpackOggData(const std::vector<uint8_t>& oggData) {
+    RawSoundDataPtr UnpackOggData(const std::string& oggData) {
    #ifdef SR_AUDIO_USE_OGG
         if (oggData.empty()) {
             SR_ERROR("UnpackOggData() : input data is empty!");
@@ -110,7 +110,7 @@ namespace SR_AUDIO_NS {
         bool osInitialized = false;
         int serialno = 0;
 
-        auto packets = std::make_shared<std::vector<uint8_t>>();
+        auto packets = std::make_shared<RawSoundData>();
         packets->reserve(oggData.size() * 0.75); // примерный размер после распаковки
 
         while (pos < oggData.size()) {
@@ -156,7 +156,7 @@ namespace SR_AUDIO_NS {
     #endif
     }
 
-    std::vector<std::vector<uint8_t>> UnpackOggDataSeparated(const std::vector<uint8_t>& oggData) {
+    std::vector<RawSoundData> UnpackOggDataSeparated(const std::string& oggData) {
     #ifdef SR_AUDIO_USE_OGG
         if (oggData.empty()) {
             SR_ERROR("UnpackOggDataSeparated() : input data is empty!");
@@ -171,7 +171,7 @@ namespace SR_AUDIO_NS {
         bool osInitialized = false;
         int serialno = 0;
 
-        std::vector<std::vector<uint8_t>> packets;
+        std::vector<RawSoundData> packets;
 
         while (pos < oggData.size()) {
             char* buffer = ogg_sync_buffer(&oy, 4096);
@@ -197,7 +197,8 @@ namespace SR_AUDIO_NS {
 
                 ogg_packet packet;
                 while (ogg_stream_packetout(&os, &packet) == 1) {
-                    std::vector<uint8_t> pkt(packet.bytes);
+                    RawSoundData pkt;
+                    pkt.resize(packet.bytes);
                     memcpy(pkt.data(), packet.packet, packet.bytes);
                     packets.push_back(std::move(pkt));
                 }

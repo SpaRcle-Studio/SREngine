@@ -25,7 +25,7 @@ namespace SR_AUDIO_NS {
         , m_isEndOfStream(false)
         , m_decoderData(new DecoderData())
     {
-        if (mp3dec_ex_open_buf(&m_decoderData->mp3d, data->data(), data->size(), MP3D_SEEK_TO_SAMPLE)) {
+        if (mp3dec_ex_open_buf(&m_decoderData->mp3d, reinterpret_cast<const uint8_t*>(data->data()), data->size(), MP3D_SEEK_TO_SAMPLE)) {
             SR_ERROR("MP3DataProvider::MP3DataProvider() : failed to load a buffer!");
             return;
         }

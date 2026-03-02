@@ -19,6 +19,7 @@ namespace SR_CORE_NS {
 
     private:
         bool m_isInitialized = false;
+        bool m_windowInititalized = false;
 
     };
 }

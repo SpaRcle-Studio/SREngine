@@ -9,6 +9,7 @@
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Window/Window.h>
 #include <Graphics/Window/BasicWindowImpl.h>
+#include <Graphics/Pipeline/Pipeline.h>
 
 #include <Codegen/InitializeState.generated.hpp>
 
@@ -20,11 +21,16 @@ namespace SR_CORE_NS {
 
         auto&& pEngine = GetContext().GetPointer<Engine>();
         auto&& pRenderContext = pEngine->GetRenderContext();
+        if (pRenderContext->GetPipeline() && pRenderContext->GetPipeline()->IsAsyncEarlyInit()) {
+            SR_LOG("InitializeState::Execute() : waiting for async early initialization of the render pipeline...");
+            SR_PLATFORM_NS::Sleep(100);
+            return SR_UTILS_NS::ThreadWorkerResult::Repeat;
+        }
 
         auto&& pWindow = pEngine->GetMainWindow();
         auto&& pWindowImpl = pWindow ? pWindow->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>() : nullptr;
 
-        if (pWindow && pWindowImpl) {
+        if (pWindow && pWindowImpl && !m_windowInititalized) {
             if (!pWindow->Open()) {
                 SR_ERROR("Engine::InitializeRender() : failed to open the main window!");
                 GetThreadsWorker()->StopAsync();
@@ -60,6 +66,8 @@ namespace SR_CORE_NS {
             }
 
             pRenderContext->SwitchWindow(pWindow);
+
+            m_windowInititalized = true;
         }
 
         if (!SR_THIS_THREAD) {

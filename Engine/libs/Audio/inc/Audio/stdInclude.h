@@ -9,4 +9,9 @@
 
 #include <Utils/stdInclude.h>
 
+namespace SR_AUDIO_NS {
+    typedef std::string RawSoundData;
+    typedef std::shared_ptr<RawSoundData> RawSoundDataPtr;
+}
+
 #endif //SR_ENGINE_AUDIO_STD_INCLUDE_H

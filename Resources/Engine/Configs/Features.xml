@@ -52,6 +52,7 @@
         <AccumulateDt Value="true"/>
         <FastModelsLoad Value="true"/>
         <FileWatching Value="true"/>
+        <RunGameModeOnStart Value="false"/>
 
         <!-- Physics -->
         <Physics Value="true"/>
@@ -69,6 +70,13 @@
 
         <Variant Name="Emscripten">
             <Emscripten Value="true"/>
+            <Gizmo Value="false"/>
+            <ImGUI Value="false"/>
+            <Editor Value="false"/>
+            <EditorOnStartup Value="false"/>
+            <FastModelsLoad Value="false"/>
+            <TextureCaching Value="false"/>
+            <RunGameModeOnStart Value="true"/>
         </Variant>
 
         <Variant Name="Validation">

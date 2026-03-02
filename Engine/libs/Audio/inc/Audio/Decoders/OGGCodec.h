@@ -17,9 +17,9 @@ namespace SR_AUDIO_NS {
         Flac
     )
 
-    SR_AUDIO_DLL_API extern OggCodec DetectOggCodec(const uint8_t* data, size_t size);
-    SR_AUDIO_DLL_API extern std::vector<std::vector<uint8_t>> UnpackOggDataSeparated(const std::vector<uint8_t>& oggData);
-    SR_AUDIO_DLL_API extern std::shared_ptr<std::vector<uint8_t>> UnpackOggData(const std::vector<uint8_t>& oggData);
+    SR_AUDIO_DLL_API extern OggCodec DetectOggCodec(const char* data, size_t size);
+    SR_AUDIO_DLL_API extern std::vector<RawSoundData> UnpackOggDataSeparated(const std::string& oggData);
+    SR_AUDIO_DLL_API extern RawSoundDataPtr UnpackOggData(const std::string& oggData);
 }
 
 #endif //SR_ENGINE_AUDIO_OGG_CODEC_H

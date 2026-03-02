@@ -47,6 +47,8 @@ namespace SR_CORE_NS {
 
         m_renderContext = new SR_GRAPH_NS::RenderContext();
 
+        SR_THIS_THREAD->GetContext()->SetValue<SR_GRAPH_NS::RenderContext::Ptr>(m_renderContext);
+
         if (!m_renderContext->PreInit()) {
             SR_ERROR("Engine::Create() : failed to pre-initialize render context!");
             return false;
@@ -359,12 +361,18 @@ namespace SR_CORE_NS {
                 }
                 else {
                     AddSceneToQueue(pScene);
+                    SR_LOG("Engine::LoadStartupScene() : startup scene loaded successfully!");
                 }
             }
 
             if (m_sceneQueue.Empty()) {
                 AddSceneToQueue(SR_WORLD_NS::Scene::NewScene(scenePath, SR_WORLD_NS::SceneLogicType::Asset));
+                SR_LOG("Engine::LoadStartupScene() : new startup scene created successfully!");
             }
+        }
+        else {
+            SR_LOG("Engine::LoadStartupScene() : no startup scene found.");
+            return;
         }
     }
     
