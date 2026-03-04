@@ -119,6 +119,8 @@ namespace SR_CORE_GUI_NS {
         void FixedUpdate();
         void Save();
 
+        void DrawEditorInstanceMenu();
+
         bool Init();
         void DeInit();
 

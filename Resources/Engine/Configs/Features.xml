@@ -47,6 +47,9 @@
         <Undocking Value="true"/>
 
         <!-- Core -->
+        <TextureCompression Value="false"/>
+        <TextureCaching Value="true"/>
+        <ScriptCompilation Value="true"/>
         <AutoReloadResources Value="true"/>
         <LoadDefaultGraphicsResources Value="true"/>
         <AccumulateDt Value="true"/>
@@ -76,7 +79,14 @@
             <EditorOnStartup Value="false"/>
             <FastModelsLoad Value="false"/>
             <TextureCaching Value="false"/>
+            <ScriptCompilation Value="false"/>
             <RunGameModeOnStart Value="true"/>
+        </Variant>
+
+        <Variant Name="Android">
+            <FastModelsLoad Value="false"/>
+            <TextureCaching Value="false"/>
+            <ScriptCompilation Value="false"/>
         </Variant>
 
         <Variant Name="Validation">

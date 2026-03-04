@@ -14,6 +14,8 @@
 
 namespace SR_CORE_NS {
     SR_UTILS_NS::ThreadWorkerResult DrawState::ExecuteImpl() {
+        SR_TRACY_ZONE;
+
         auto&& pEngine = GetContext().GetPointer<Engine>();
         auto&& pRenderContext = pEngine->GetRenderContext();
 
@@ -26,7 +28,9 @@ namespace SR_CORE_NS {
             return SR_UTILS_NS::ThreadWorkerResult::Break;
         }
 
-        if (auto&& pRenderScene = pEngine->GetRenderScene()) {
+        const bool isCollapsed = pWindow->IsWindowCollapsed();
+
+        if (auto&& pRenderScene = pEngine->GetRenderScene(); pRenderScene && !isCollapsed) {
             if (auto&& pWin = pWindow->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()) {
                 const bool isOverlay = pRenderScene->IsOverlayEnabled();
                 const bool isMaximized = pWin->IsMaximized();

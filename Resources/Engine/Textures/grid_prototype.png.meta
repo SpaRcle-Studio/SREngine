@@ -1,5 +1,5 @@
 sra format
 use tabs: true
 0-r:Root
-	1-v:alpha
-		2-s:None
+	1-v:compression
+		2-s:BC7

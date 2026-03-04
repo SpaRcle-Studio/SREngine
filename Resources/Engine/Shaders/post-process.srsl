@@ -15,6 +15,10 @@ DepthTest false;
 
 [[shared]] vec2 uv;
 
+//#ifndef SR_HDR
+//    #undef SR_AUTO_EXPOSURE
+//#endif
+
 #ifdef SR_AUTO_EXPOSURE
     [[ssbo(exposure)]] float[] exposure;
 #endif

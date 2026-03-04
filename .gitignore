@@ -88,3 +88,4 @@ Resources/**/*.so
 /cmake-build-debug-visual-studio
 /cmake-build-debug-emscripten
 /Resources/Engine/Utilities/pack_resources.exe
+/Resources/Packed

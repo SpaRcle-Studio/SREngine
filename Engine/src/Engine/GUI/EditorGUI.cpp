@@ -45,6 +45,7 @@
 
 #include <Utils/Common/Features.h>
 #include <Utils/ECS/Prefab.h>
+#include <Utils/ECS/TransformRect.h>
 #include <Utils/ECS/ComponentManager.h>
 #include <Utils/Platform/Platform.h>
 #include <Utils/FileSystem/FileDialog.h>
@@ -497,6 +498,230 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::LoadIniSettingsFromDisk();
     }
 
+    void EditorGUI::DrawEditorInstanceMenu() {
+        SR_TRACY_ZONE;
+
+        if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Instance from file")) {
+            if (auto&& pScene = m_engine->GetScene()) {
+                auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+                if (auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath.ToString(), { { "Any model", "prefab,pmx,fbx,obj,blend,dae,abc,stl,ply,glb,gltf,x3d,sfg,bvh,3ds,gltf" } }); !path.IsEmpty()) {
+                    InstantiateSO(pScene->InstanceFromFile(path));
+                }
+            }
+            else {
+                SR_WARN("GUISystem::BeginMenuBar() : scene is not valid!");
+            }
+        }
+
+        SR_GRAPH_GUI_NS::Immediate::Separator();
+
+        if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Instantiate")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Empty")) {
+                if (auto&& pScene = m_engine->GetScene()) {
+                    InstantiateSO(pScene->InstanceGameObject("New GameObject"_atom).StaticCast<SR_UTILS_NS::SceneObject>());
+                }
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Cube")) {
+                if (auto&& pScene = m_engine->GetScene()) {
+                    auto&& pGameObject = pScene->InstanceGameObject("Cube"_atom);
+                    if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
+                        pRigidbody->SetMass(1.0f);
+                        pRigidbody->AddCollider(SR_PHYSICS_NS::ShapeType::Box3D);
+                    }
+
+                    auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/cube.obj", SR_GRAPH_NS::MeshType::Static);
+                    for (auto&& pMesh : meshes) {
+                        pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
+                    }
+                    InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                }
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Sphere")) {
+                if (auto&& pScene = m_engine->GetScene()) {
+                    auto&& pGameObject = pScene->InstanceGameObject("Sphere"_atom);
+                    if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
+                        pRigidbody->SetMass(1.0f);
+                        pRigidbody->AddCollider(SR_PHYSICS_NS::ShapeType::Sphere3D);
+                    }
+
+                    auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/sphere.obj", SR_GRAPH_NS::MeshType::Static);
+                    for (auto&& pMesh : meshes) {
+                        pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
+                    }
+                    InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                }
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Capsule")) {
+                if (auto&& pScene = m_engine->GetScene()) {
+                    auto&& pGameObject = pScene->InstanceGameObject("Capsule"_atom);
+                    if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
+                        pRigidbody->SetMass(1.0f);
+                        pRigidbody->AddCollider(SR_PHYSICS_NS::ShapeType::Capsule3D);
+                    }
+
+                    auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/capsule.obj", SR_GRAPH_NS::MeshType::Static);
+                    for (auto&& pMesh : meshes) {
+                        pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
+                    }
+                    InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                }
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Cylinder")) {
+                if (auto&& pScene = m_engine->GetScene()) {
+                    auto&& pGameObject = pScene->InstanceGameObject("Cylinder"_atom);
+                    if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
+                        pRigidbody->SetMass(1.0f);
+                        pRigidbody->AddCollider(SR_PHYSICS_NS::ShapeType::Cylinder3D);
+                    }
+
+                    auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/cylinder.obj", SR_GRAPH_NS::MeshType::Static);
+                    for (auto&& pMesh : meshes) {
+                        pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
+                    }
+                    InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                }
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Plane")) {
+                if (auto&& pScene = m_engine->GetScene()) {
+                    auto&& pGameObject = pScene->InstanceGameObject("Plane"_atom);
+                    if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
+                        pRigidbody->SetMass(1.0f);
+                        pRigidbody->AddCollider(SR_PHYSICS_NS::ShapeType::Plane3D);
+                    }
+
+                    auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/plane.obj", SR_GRAPH_NS::MeshType::Static);
+                    for (auto&& pMesh : meshes) {
+                        pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
+                    }
+                    InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                }
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Statue")) {
+                if (auto&& pScene = m_engine->GetScene()) {
+                    auto&& pGameObject = pScene->InstanceGameObject("Statue"_atom);
+                    pGameObject->GetTransform()->SetScale(10.f, 10.f, 10.f);
+                    if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
+                        pRigidbody->SetMass(1.0f);
+                        auto&& pCollider = pRigidbody->AddCollider(SR_PHYSICS_NS::ShapeType::Convex3D);
+                        pCollider->SetRawMesh("Engine/Models/statue.obj");
+                    }
+
+                    auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/statue.obj", SR_GRAPH_NS::MeshType::Static);
+                    for (auto&& pMesh : meshes) {
+                        pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
+                    }
+                    InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                }
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Monkey")) {
+                if (auto&& pScene = m_engine->GetScene()) {
+                    auto&& pGameObject = pScene->InstanceGameObject("Monkey"_atom);
+                    if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
+                        pRigidbody->SetMass(1.0f);
+                        auto&& pCollider = pRigidbody->AddCollider(SR_PHYSICS_NS::ShapeType::Convex3D);
+                        pCollider->SetRawMesh("Engine/Models/monkey.obj");
+                    }
+
+                    auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/monkey.obj", SR_GRAPH_NS::MeshType::Static);
+                    for (auto&& pMesh : meshes) {
+                        pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
+                    }
+                    InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                }
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::EndMenu();
+        }
+
+        SR_GRAPH_GUI_NS::Immediate::Separator();
+
+        if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Render")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Camera")) {
+                if (auto&& pScene = m_engine->GetScene()) {
+                    auto&& pGameObject = pScene->InstanceGameObject("Camera"_atom);
+                    auto&& pCamera = pGameObject->AddComponent<SR_GTYPES_NS::Camera>();
+                    InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                }
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Skybox")) {
+                if (auto&& pScene = m_engine->GetScene()) {
+                    auto&& pGameObject = pScene->InstanceGameObject("Skybox"_atom);
+                    auto&& pSkybox = pGameObject->AddComponent<SR_GTYPES_NS::SkyboxComponent>();
+                    pSkybox->SetParams("Engine/Skyboxes/Sun.png", "Engine/Shaders/skybox.srsl", false);
+                    InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                }
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::EndMenu();
+        }
+
+        SR_GRAPH_GUI_NS::Immediate::Separator();
+
+        if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Lights")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Directional light")) {
+                if (auto&& pScene = m_engine->GetScene()) {
+                    auto&& pGameObject = pScene->InstanceGameObject("Directional light"_atom);
+                    pGameObject->AddComponent<SR_GRAPH_NS::DirectionalLight>();
+                    pGameObject->GetTransform()->SetRotation(60, -45, 0);
+                    InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                }
+            }
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Point light")) {
+                if (auto&& pScene = m_engine->GetScene()) {
+                    auto&& pGameObject = pScene->InstanceGameObject("Point light"_atom);
+                    auto&& pLight = pGameObject->AddComponent<SR_GRAPH_NS::PointLight>();
+                    InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                }
+            }
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Spot light")) {
+                if (auto&& pScene = m_engine->GetScene()) {
+                    auto&& pGameObject = pScene->InstanceGameObject("Spot light"_atom);
+                    auto&& pLight = pGameObject->AddComponent<SR_GRAPH_NS::SpotLight>();
+                    InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                }
+            }
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Area light")) {
+                if (auto&& pScene = m_engine->GetScene()) {
+                    auto&& pGameObject = pScene->InstanceGameObject("Area light"_atom);
+                    auto&& pLight = pGameObject->AddComponent<SR_GRAPH_NS::AreaLight>();
+                    InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                }
+            }
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Probe light")) {
+                if (auto&& pScene = m_engine->GetScene()) {
+                    auto&& pGameObject = pScene->InstanceGameObject("Probe light"_atom);
+                    auto&& pLight = pGameObject->AddComponent<SR_GRAPH_NS::ProbeLight>();
+                    InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                }
+            }
+            SR_GRAPH_GUI_NS::Immediate::EndMenu();
+        }
+    }
+
     void EditorGUI::DrawMenuBar() {
         SR_TRACY_ZONE;
 
@@ -620,226 +845,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Editor")) {
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Instance from file")) {
-                if (auto&& pScene = m_engine->GetScene()) {
-                    auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                    if (auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath.ToString(), { { "Any model", "prefab,pmx,fbx,obj,blend,dae,abc,stl,ply,glb,gltf,x3d,sfg,bvh,3ds,gltf" } }); !path.IsEmpty()) {
-                        InstantiateSO(pScene->InstanceFromFile(path));
-                    }
-                }
-                else {
-                    SR_WARN("GUISystem::BeginMenuBar() : scene is not valid!");
-                }
-            }
-
-            SR_GRAPH_GUI_NS::Immediate::Separator();
-
-            if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Instantiate")) {
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Empty")) {
-                    if (auto&& pScene = m_engine->GetScene()) {
-                        InstantiateSO(pScene->InstanceGameObject("New GameObject"_atom).StaticCast<SR_UTILS_NS::SceneObject>());
-                    }
-                }
-
-                SR_GRAPH_GUI_NS::Immediate::Separator();
-
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Cube")) {
-                    if (auto&& pScene = m_engine->GetScene()) {
-                        auto&& pGameObject = pScene->InstanceGameObject("Cube"_atom);
-                        if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
-                            pRigidbody->SetMass(1.0f);
-                            pRigidbody->AddCollider(SR_PHYSICS_NS::ShapeType::Box3D);
-                        }
-
-                        auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/cube.obj", SR_GRAPH_NS::MeshType::Static);
-                        for (auto&& pMesh : meshes) {
-                            pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
-                        }
-                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
-                    }
-                }
-
-                SR_GRAPH_GUI_NS::Immediate::Separator();
-
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Sphere")) {
-                    if (auto&& pScene = m_engine->GetScene()) {
-                        auto&& pGameObject = pScene->InstanceGameObject("Sphere"_atom);
-                        if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
-                            pRigidbody->SetMass(1.0f);
-                            pRigidbody->AddCollider(SR_PHYSICS_NS::ShapeType::Sphere3D);
-                        }
-
-                        auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/sphere.obj", SR_GRAPH_NS::MeshType::Static);
-                        for (auto&& pMesh : meshes) {
-                            pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
-                        }
-                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
-                    }
-                }
-
-                SR_GRAPH_GUI_NS::Immediate::Separator();
-
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Capsule")) {
-                    if (auto&& pScene = m_engine->GetScene()) {
-                        auto&& pGameObject = pScene->InstanceGameObject("Capsule"_atom);
-                        if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
-                            pRigidbody->SetMass(1.0f);
-                            pRigidbody->AddCollider(SR_PHYSICS_NS::ShapeType::Capsule3D);
-                        }
-
-                        auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/capsule.obj", SR_GRAPH_NS::MeshType::Static);
-                        for (auto&& pMesh : meshes) {
-                            pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
-                        }
-                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
-                    }
-                }
-
-                SR_GRAPH_GUI_NS::Immediate::Separator();
-
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Cylinder")) {
-                    if (auto&& pScene = m_engine->GetScene()) {
-                        auto&& pGameObject = pScene->InstanceGameObject("Cylinder"_atom);
-                        if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
-                            pRigidbody->SetMass(1.0f);
-                            pRigidbody->AddCollider(SR_PHYSICS_NS::ShapeType::Cylinder3D);
-                        }
-
-                        auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/cylinder.obj", SR_GRAPH_NS::MeshType::Static);
-                        for (auto&& pMesh : meshes) {
-                            pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
-                        }
-                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
-                    }
-                }
-
-                SR_GRAPH_GUI_NS::Immediate::Separator();
-
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Plane")) {
-                    if (auto&& pScene = m_engine->GetScene()) {
-                        auto&& pGameObject = pScene->InstanceGameObject("Plane"_atom);
-                        if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
-                            pRigidbody->SetMass(1.0f);
-                            pRigidbody->AddCollider(SR_PHYSICS_NS::ShapeType::Plane3D);
-                        }
-
-                        auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/plane.obj", SR_GRAPH_NS::MeshType::Static);
-                        for (auto&& pMesh : meshes) {
-                            pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
-                        }
-                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
-                    }
-                }
-
-                SR_GRAPH_GUI_NS::Immediate::Separator();
-
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Statue")) {
-                    if (auto&& pScene = m_engine->GetScene()) {
-                        auto&& pGameObject = pScene->InstanceGameObject("Statue"_atom);
-                        pGameObject->GetTransform()->SetScale(10.f, 10.f, 10.f);
-                        if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
-                            pRigidbody->SetMass(1.0f);
-                            auto&& pCollider = pRigidbody->AddCollider(SR_PHYSICS_NS::ShapeType::Convex3D);
-                            pCollider->SetRawMesh("Engine/Models/statue.obj");
-                        }
-
-                        auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/statue.obj", SR_GRAPH_NS::MeshType::Static);
-                        for (auto&& pMesh : meshes) {
-                            pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
-                        }
-                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
-                    }
-                }
-
-                SR_GRAPH_GUI_NS::Immediate::Separator();
-
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Monkey")) {
-                    if (auto&& pScene = m_engine->GetScene()) {
-                        auto&& pGameObject = pScene->InstanceGameObject("Monkey"_atom);
-                        if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
-                            pRigidbody->SetMass(1.0f);
-                            auto&& pCollider = pRigidbody->AddCollider(SR_PHYSICS_NS::ShapeType::Convex3D);
-                            pCollider->SetRawMesh("Engine/Models/monkey.obj");
-                        }
-
-                        auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/monkey.obj", SR_GRAPH_NS::MeshType::Static);
-                        for (auto&& pMesh : meshes) {
-                            pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
-                        }
-                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
-                    }
-                }
-
-                SR_GRAPH_GUI_NS::Immediate::EndMenu();
-            }
-
-            SR_GRAPH_GUI_NS::Immediate::Separator();
-
-            if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Render")) {
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Camera")) {
-                    if (auto&& pScene = m_engine->GetScene()) {
-                        auto&& pGameObject = pScene->InstanceGameObject("Camera"_atom);
-                        auto&& pCamera = pGameObject->AddComponent<SR_GTYPES_NS::Camera>();
-                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
-                    }
-                }
-
-                SR_GRAPH_GUI_NS::Immediate::Separator();
-
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Skybox")) {
-                    if (auto&& pScene = m_engine->GetScene()) {
-                        auto&& pGameObject = pScene->InstanceGameObject("Skybox"_atom);
-                        auto&& pSkybox = pGameObject->AddComponent<SR_GTYPES_NS::SkyboxComponent>();
-                        pSkybox->SetParams("Engine/Skyboxes/Sun.png", "Engine/Shaders/skybox.srsl", false);
-                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
-                    }
-                }
-
-                SR_GRAPH_GUI_NS::Immediate::EndMenu();
-            }
-
-            SR_GRAPH_GUI_NS::Immediate::Separator();
-
-            if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Lights")) {
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Directional light")) {
-                    if (auto&& pScene = m_engine->GetScene()) {
-                        auto&& pGameObject = pScene->InstanceGameObject("Directional light"_atom);
-                        pGameObject->AddComponent<SR_GRAPH_NS::DirectionalLight>();
-                        pGameObject->GetTransform()->SetRotation(60, -45, 0);
-                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
-                    }
-                }
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Point light")) {
-                    if (auto&& pScene = m_engine->GetScene()) {
-                        auto&& pGameObject = pScene->InstanceGameObject("Point light"_atom);
-                        auto&& pLight = pGameObject->AddComponent<SR_GRAPH_NS::PointLight>();
-                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
-                    }
-                }
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Spot light")) {
-                    if (auto&& pScene = m_engine->GetScene()) {
-                        auto&& pGameObject = pScene->InstanceGameObject("Spot light"_atom);
-                        auto&& pLight = pGameObject->AddComponent<SR_GRAPH_NS::SpotLight>();
-                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
-                    }
-                }
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Area light")) {
-                    if (auto&& pScene = m_engine->GetScene()) {
-                        auto&& pGameObject = pScene->InstanceGameObject("Area light"_atom);
-                        auto&& pLight = pGameObject->AddComponent<SR_GRAPH_NS::AreaLight>();
-                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
-                    }
-                }
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Probe light")) {
-                    if (auto&& pScene = m_engine->GetScene()) {
-                        auto&& pGameObject = pScene->InstanceGameObject("Probe light"_atom);
-                        auto&& pLight = pGameObject->AddComponent<SR_GRAPH_NS::ProbeLight>();
-                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
-                    }
-                }
-                SR_GRAPH_GUI_NS::Immediate::EndMenu();
-            }
-
+            DrawEditorInstanceMenu();
             SR_GRAPH_GUI_NS::Immediate::EndMenu();
         }
 
@@ -996,6 +1002,13 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (pInstantiateTarget) {
+            auto&& pTargetGO = pSO->DynamicCast<SR_UTILS_NS::GameObject>();
+            auto&& pGO = pInstantiateTarget->DynamicCast<SR_UTILS_NS::GameObject>();
+
+            if (pTargetGO && pGO && pTargetGO->GetTransform()->GetMeasurement() == SR_UTILS_NS::Measurement::Space2D && pGO->GetTransform()->GetMeasurement() == SR_UTILS_NS::Measurement::Space3D) {
+                pGO->SetTransform(SRNew<SR_UTILS_NS::TransformRect>());
+            }
+
             pInstantiateTarget->AddChild(pSO);
         }
 

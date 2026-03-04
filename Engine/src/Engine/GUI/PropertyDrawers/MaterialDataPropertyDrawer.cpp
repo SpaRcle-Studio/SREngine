@@ -263,11 +263,10 @@ namespace SR_CORE_GUI_NS {
 
                     SR_GRAPH_GUI_NS::Immediate::BeginGroup();
 
-                    SR_GRAPH_GUI_NS::Immediate::Text("%s", "Compression: {}\nMipLevels: {}\nCpuUsage: {}\nAlpha: {}"_format(
+                    SR_GRAPH_GUI_NS::Immediate::Text("%s", "Compression: {}\nMipLevels: {}\nCpuUsage: {}"_format(
                         imageMeta.GetCompression(),
                         imageMeta.GetMipLevels(),
-                        imageMeta.GetCpuUsage(),
-                        imageMeta.GetAlpha()).c_str()
+                        imageMeta.GetCpuUsage()).c_str()
                     );
 
                     SR_GRAPH_GUI_NS::Immediate::EndGroup();

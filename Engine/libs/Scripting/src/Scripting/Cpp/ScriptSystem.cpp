@@ -42,7 +42,6 @@ namespace SR_SCRIPTING_NS {
         m_cacheFolder = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
 
         m_isCompilationEnabled = SR_UTILS_NS::Features::Instance().Enabled("ScriptCompilation", true);
-        m_isCompilationEnabled &= !SR_PLATFORM_NS::IsMobilePlatform();
         m_apiFolder = m_engineResourcesFolder.Concat("API");
 
         if (m_isCompilationEnabled && !InitEngineSources()) {

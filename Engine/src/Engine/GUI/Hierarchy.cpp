@@ -32,18 +32,7 @@ namespace SR_CORE_GUI_NS {
         : Widget("Hierarchy")
     {
         m_sceneRunnerWidget = new SceneRunner();
-
         SetFlags(SR_GRAPH_GUI_NS::WindowFlags::HorizontalScrollbar);
-
-        auto&& factory = SR_UTILS_NS::Factory::Instance();
-
-        //static const SR_UTILS_NS::StringAtom uiNodeName = SR_GRAPH_UI_NS::UINode::GetClassStaticName();
-        //for (auto&& className : SR_UTILS_NS::Factory::Instance().GetInheritances(uiNodeName)) {
-        //    if (factory.IsAbstract(className)) {
-        //        continue;
-        //    }
-        //    m_availableUINodes.emplace_back(className);
-        //}
     }
 
     Hierarchy::~Hierarchy() {
@@ -139,24 +128,7 @@ namespace SR_CORE_GUI_NS {
         auto&& pSceneLogic = pScene ? pScene->GetLogicBase().DynamicCast<SR_WORLD_NS::ScenePrefabLogic>() : nullptr;
 
         if (!pSceneLogic && SR_GRAPH_GUI_NS::Immediate::BeginPopupContextWindow("HierarchyContextMenu")) {
-            if (SR_GRAPH_GUI_NS::Immediate::Selectable("Add New GameObject")) {
-                auto&& pNewSO = m_engine->GetScene()->InstanceGameObject("New GameObject"_atom).StaticCast<SR_UTILS_NS::SceneObject>();
-                auto&& pCmd = new SR_CORE_NS::Commands::SceneObjectInstance(m_engine, pNewSO);
-                m_engine->GetCmdManager()->Store(pCmd);
-            }
-
-            if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Add New UI Node")) {
-                for (auto&& className : m_availableUINodes) {
-                    if (SR_GRAPH_GUI_NS::Immediate::MenuItem(className.c_str())) {
-                        auto&& pNewSO = SR_UTILS_NS::Factory::Instance().Create<SR_UTILS_NS::SceneObject>(className);
-                        pNewSO->SetName(className);
-                        m_engine->GetScene()->RegisterSceneObject(pNewSO);
-                        auto&& pCmd = new SR_CORE_NS::Commands::SceneObjectInstance(m_engine, pNewSO);
-                        m_engine->GetCmdManager()->Store(pCmd);
-                    }
-                }
-                SR_GRAPH_GUI_NS::Immediate::EndMenu();
-            }
+            static_cast<EditorGUI*>(GetManager())->DrawEditorInstanceMenu();
 
             Paste(nullptr, true);
 
@@ -375,15 +347,10 @@ namespace SR_CORE_GUI_NS {
 
                 if (pSceneObject->GetSceneObjectType() == SR_UTILS_NS::SceneObjectType::GameObject) {
                     SR_GRAPH_GUI_NS::Immediate::Separator();
-                    if (SR_GRAPH_GUI_NS::Immediate::Selectable("Add child game object")) {
-                        auto&& pNewSO = pSceneObject->GetScene()->InstanceGameObject("New GameObject"_atom).StaticCast<SR_UTILS_NS::SceneObject>();
-                        if (pSceneObject->StaticCast<SR_UTILS_NS::GameObject>()->GetTransform()->GetMeasurement() == SR_UTILS_NS::Measurement::Space2D) {
-                            pNewSO->StaticCast<SR_UTILS_NS::GameObject>()->SetTransform(SRNew<SR_UTILS_NS::TransformRect>());
-                        }
 
-                        pSceneObject->AddChild(pNewSO);
-                        auto&& pCmd = new SR_CORE_NS::Commands::SceneObjectInstance(m_engine, pNewSO);
-                        m_engine->GetCmdManager()->Store(pCmd);
+                    if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Add child")) {
+                        static_cast<EditorGUI *>(GetManager())->DrawEditorInstanceMenu();
+                        SR_GRAPH_GUI_NS::Immediate::EndMenu();
                     }
                 }
             }
