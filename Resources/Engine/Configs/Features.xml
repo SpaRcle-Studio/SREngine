@@ -47,7 +47,7 @@
         <Undocking Value="true"/>
 
         <!-- Core -->
-        <TextureCompression Value="false"/>
+        <TextureCompression Value="true"/>
         <TextureCaching Value="true"/>
         <ScriptCompilation Value="true"/>
         <AutoReloadResources Value="true"/>
@@ -72,20 +72,22 @@
         </Variant>
 
         <Variant Name="Emscripten">
+            <TextureCompression Value="false"/>
+            <TextureCaching Value="false"/>
             <Emscripten Value="true"/>
             <Gizmo Value="false"/>
             <ImGUI Value="false"/>
             <Editor Value="false"/>
             <EditorOnStartup Value="false"/>
             <FastModelsLoad Value="false"/>
-            <TextureCaching Value="false"/>
             <ScriptCompilation Value="false"/>
             <RunGameModeOnStart Value="true"/>
         </Variant>
 
         <Variant Name="Android">
-            <FastModelsLoad Value="false"/>
+            <TextureCompression Value="false"/>
             <TextureCaching Value="false"/>
+            <FastModelsLoad Value="false"/>
             <ScriptCompilation Value="false"/>
         </Variant>
 

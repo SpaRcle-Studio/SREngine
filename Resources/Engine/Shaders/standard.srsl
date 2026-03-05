@@ -75,7 +75,7 @@ void fragment() {
 #endif
 
 #ifdef HAS_EMISSION
-    vec3 emissionValue = texture(emission, UV).rgb * emissionIntensity * emissionColor;
+    vec3 emissionValue = vec3(texture(emission, UV).r) * emissionIntensity * emissionColor;
 #else
     vec3 emissionValue = vec3(0.0);
 #endif

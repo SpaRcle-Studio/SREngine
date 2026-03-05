@@ -78,7 +78,7 @@ void fragment() {
     alphaVal = smoothstep(alphaThreshold - 0.02, alphaThreshold + 0.02, alphaVal);
 
     // ---------- TEXTURE FETCH ----------
-    vec3 texAlbedo     = texture(albedo, tiledUV).rgb;
+    vec3 texAlbedo     = vec3(texture(albedo, tiledUV).r);
     vec3 directionVal  = texture(direction, tiledUV).xyz;
     float rootMask     = texture(root, tiledUV).r;
     float depthVal     = texture(depth, tiledUV).r;
@@ -101,7 +101,13 @@ void fragment() {
     vec3 hairDir = normalize(directionVal * 2.0 - 1.0);
 
     vec3 L = DIRECTIONAL_LIGHT_DIRECTION;
+
+#ifdef SR_DEFINE_USE_CASCADED_SHADOW_MAP
     vec3 V = pcf_viewDir;
+#else
+    vec3 V = normalize(-VERTEX);
+#endif
+
     vec3 H = normalize(L + V);
 
     // UE-style dual lobe
@@ -116,11 +122,19 @@ void fragment() {
     vec3 hairSpecular = hairSpec * specMap * specularIntensity * SUN_COLOR * SUN_INTENSITY;
 
 #ifdef HAS_NORMAL
-    vec3 tangentNormal = texture(normal, tiledUV).xyz * 2.0 - 1.0;
+    //vec3 tangentNormal = texture(normal, tiledUV).xyz * 2.0 - 1.0;
+
+    vec2 enc = texture(normal, UV).rg;
+    vec3 tangentNormal;
+    tangentNormal.xy = enc * 2.0 - 1.0;
+    tangentNormal.y *= -1.0;
+    tangentNormal.z = sqrt(max(0.0, 1.0 - dot(tangentNormal.xy, tangentNormal.xy)));
+    tangentNormal = normalize(tangentNormal);
 #else
     vec3 tangentNormal = NORMAL;
 #endif
 
+#ifdef SR_DEFINE_USE_CASCADED_SHADOW_MAP
     // ---------- BASE LIGHTING (КАСКАДЫ, ТЕНИ, SSS) ----------
     vec4 lighting = CalculateShadow(
         tangentNormal,
@@ -133,6 +147,18 @@ void fragment() {
         color,               // sssColor
         vec3(0.0)            // emission
     );
+#else
+    #ifdef HAS_NORMAL
+        mat3 TBN = mat3(normalize(TANGENT), normalize(BITANGENT), normalize(NORMAL));
+        vec3 mappedNormal = normalize(TBN * tangentNormal);
+
+        float light = dot(mappedNormal, DIRECTIONAL_LIGHT_DIRECTION);
+        light = clamp(light, 0.0, 1.0);
+        vec3 lighting = color * occlusion * vec3(0.2 + 0.8 * light);
+    #else
+        vec3 lighting = color * occlusion * (vec3(NORMAL.x + NORMAL.y + NORMAL.z) / 8.0);
+    #endif
+#endif
 
     COLOR = vec4(lighting.rgb + hairSpecular, alphaVal);
 #endif

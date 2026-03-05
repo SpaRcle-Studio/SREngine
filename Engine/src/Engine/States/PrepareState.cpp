@@ -18,12 +18,15 @@
 #include <Utils/CommandManager/CmdManager.h>
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/DebugDraw.h>
+#include <Utils/TaskManager/TaskManager.h>
 
 #include <Codegen/PrepareState.generated.hpp>
 
 namespace SR_CORE_NS {
     SR_UTILS_NS::ThreadWorkerResult PrepareState::ExecuteImpl() {
         SR_TRACY_ZONE;
+
+        SR_UTILS_NS::TaskManager::Instance().Update();
 
         auto&& pEngine = GetContext().GetPointer<Engine>();
 
