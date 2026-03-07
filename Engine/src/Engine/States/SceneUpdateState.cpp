@@ -20,9 +20,7 @@ namespace SR_CORE_NS {
     SR_UTILS_NS::ThreadWorkerResult SceneUpdateState::ExecuteImpl() {
         SR_TRACY_ZONE_N("SceneUpdateState");
 
-        const auto dt = GetContext().GetValue<float_t>("DeltaTime");
-
-        SR_HTYPES_NS::Time::Instance().SetDeltaTime(dt);
+        const float_t dt = SR_HTYPES_NS::Time::Instance().DeltaTime();
 
         auto&& pEngine = GetContext().GetPointer<Engine>();
         if (auto&& pEngineScene = pEngine->GetEngineScene()) {

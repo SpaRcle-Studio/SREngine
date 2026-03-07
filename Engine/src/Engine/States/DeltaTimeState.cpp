@@ -18,12 +18,18 @@ namespace SR_CORE_NS {
             m_timeStart = now;
         }
 
-        const auto deltaTime = now - m_timeStart.value(); /// nanoseconds
-        const auto dt = static_cast<float_t>(deltaTime.count()) / SR_CLOCKS_PER_SEC / SR_CLOCKS_PER_SEC / SR_CLOCKS_PER_SEC; /// Seconds
+        auto delta = now - m_timeStart.value();
+        float_t dt = std::chrono::duration<float_t>(delta).count();
+
+        /// ограничение dt, чтобы не было слишком больших скачков
+        dt = std::min(dt, 0.1f);
+
         m_timeStart = now;
 
-        static const std::string deltaTimeKey = "DeltaTime";
+        static const SR_UTILS_NS::StringAtom deltaTimeKey = "DeltaTime";
         GetContext().SetValue(deltaTimeKey, dt);
+
+        SR_HTYPES_NS::Time::Instance().SetDeltaTime(dt);
 
         return SR_UTILS_NS::ThreadWorkerResult::Success;
     }

@@ -101,6 +101,11 @@ namespace SR_CORE_GUI_NS {
         bool vsync = pPipeline->IsVSyncEnabled();
         if (SR_GRAPH_GUI_NS::Immediate::Checkbox("VSync", &vsync)) {
             pPipeline->SetVSyncEnabled(vsync);
+            SR_UTILS_NS::StoreUtils::User::SetBool("VSync", vsync);
+        }
+
+        if (vsync) {
+            SR_GRAPH_GUI_NS::Immediate::Text("Recommended set up: 1-2 swapchain images, for less latency.");
         }
 
         static const SR_UTILS_NS::StringAtom swapchainImagesKey = "SwapchainImages";

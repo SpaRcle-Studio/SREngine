@@ -80,7 +80,7 @@ namespace SR_CORE_NS {
 
         bool IsNeedReloadResources();
 
-        void ProcessInput();
+        void ProcessInput(float_t dt);
         void FixedUpdate();
         bool FlushScene();
         void LoadStartupScene();

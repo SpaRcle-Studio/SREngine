@@ -19,6 +19,7 @@
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/DebugDraw.h>
 #include <Utils/TaskManager/TaskManager.h>
+#include <Utils/Types/Time.h>
 
 #include <Codegen/PrepareState.generated.hpp>
 
@@ -59,7 +60,7 @@ namespace SR_CORE_NS {
             pEngineScene->UpdateMainCamera();
         }
 
-        const auto dt = GetContext().GetValue<float_t>("DeltaTime");
+        const auto dt = SR_HTYPES_NS::Time::Instance().DeltaTime();
 
         auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
         resourceManager.PullWatchers();
@@ -76,7 +77,7 @@ namespace SR_CORE_NS {
 
         SR_SCRIPTING_NS::ScriptSystem::Instance().ReloadModulesIfNeeded();
 
-        pEngine->ProcessInput();
+        pEngine->ProcessInput(dt);
 
         return SR_UTILS_NS::ThreadWorkerResult::Success;
     }

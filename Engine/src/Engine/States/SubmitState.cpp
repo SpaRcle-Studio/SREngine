@@ -31,7 +31,6 @@ namespace SR_CORE_NS {
 
         if (auto&& pRenderScene = pEngine->GetRenderScene()) {
             static const SR_UTILS_NS::StringAtom deltaTimeKey = "DeltaTime";
-
             const auto dt = GetContext().GetValue<float_t>(deltaTimeKey);
 
             const uint8_t frameIndex = pRenderScene->GetPipeline()->GetCurrentImageIndex();
@@ -41,8 +40,6 @@ namespace SR_CORE_NS {
             SR_TRACY_PLOT("Vertices", static_cast<int64_t>(buildState.vertices));
             SR_TRACY_PLOT("VMem Transfer", static_cast<int64_t>(buildState.transferredMemory));
             SR_TRACY_PLOT("FPS", static_cast<int64_t>(1.0f / dt));
-
-            SR_THIS_THREAD->GetContext()->SetValue(deltaTimeKey, dt);
         }
 
         return SR_UTILS_NS::ThreadWorkerResult::Success;

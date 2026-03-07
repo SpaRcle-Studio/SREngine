@@ -538,7 +538,7 @@ namespace SR_CORE_NS {
         return m_threadsWorker;
     }
 
-    void Engine::ProcessInput() {
+    void Engine::ProcessInput(float_t dt) {
         SR_TRACY_ZONE;
 
         const auto&& pFocusedWindow = GetFocusedWindow();
@@ -551,7 +551,7 @@ namespace SR_CORE_NS {
         }
 
         SR_UTILS_NS::Input::Instance().SetPlayMode(!IsPaused() && IsGameMode());
-        SR_UTILS_NS::Input::Instance().Update();
+        SR_UTILS_NS::Input::Instance().Update(dt);
 
         if (pFocusedWindow) {
             if (m_input) {
