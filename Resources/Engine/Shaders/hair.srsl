@@ -137,6 +137,7 @@ void fragment() {
 #ifdef SR_DEFINE_USE_CASCADED_SHADOW_MAP
     // ---------- BASE LIGHTING (КАСКАДЫ, ТЕНИ, SSS) ----------
     vec4 lighting = CalculateShadow(
+        VERTEX,
         tangentNormal,
         color * occlusion,   // diffuseColor
         0.0,                 // specularSharpness (НЕ ИСПОЛЬЗУЕМ)

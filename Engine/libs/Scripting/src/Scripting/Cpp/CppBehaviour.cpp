@@ -17,7 +17,6 @@ namespace SR_SCRIPTING_NS {
     void CppBehaviour::OnPriorityChanged() { }
     void CppBehaviour::OnTransformSet() { }
 
-    void CppBehaviour::OnLoaded() { }
     void CppBehaviour::OnAttached() { }
     void CppBehaviour::OnDetached() { }
     void CppBehaviour::OnDestroy() { }

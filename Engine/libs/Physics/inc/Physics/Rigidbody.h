@@ -103,7 +103,6 @@ namespace SR_PTYPES_NS {
         }
 
         SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
-        //SR_NODISCARD ShapeType GetType() const noexcept;
         SR_NODISCARD const std::vector<CollisionShape*>& GetShapes() const noexcept { return m_shapes; }
         SR_NODISCARD float_t GetMass() const noexcept;
         SR_NODISCARD bool IsTrigger() const noexcept { return m_isTrigger; }
@@ -155,6 +154,7 @@ namespace SR_PTYPES_NS {
         void OnEnable() override;
         void OnDisable() override;
         void OnAttached() override;
+        void OnDetached() override;
         void OnDestroy() override;
 
         void OnMatrixDirty() override;

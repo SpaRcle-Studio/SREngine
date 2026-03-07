@@ -54,23 +54,24 @@ def collect_files(logger: logger_utils.Logger, context: codegen_context.CodegenC
     includes = [glob_to_regex(sparcle_utils.normalize_path(os.path.join(context.analyze_dir, p.lstrip('/')))) for p in config.get('include', [])]
     excludes = [glob_to_regex(sparcle_utils.normalize_path(os.path.join(context.analyze_dir, p.lstrip('/')))) for p in config.get('exclude', [])]
 
+    include_regex = re.compile("|".join(r.pattern for r in includes))
+    exclude_regex = re.compile("|".join(r.pattern for r in excludes))
+
     collected_files = []
 
-    for dir_path, _, _ in os.walk(context.analyze_dir):
-        for file_path in glob(os.path.join(dir_path, '*.*'), recursive=False):
-            file_path = sparcle_utils.normalize_path(file_path)
+    for dir_path, _, files in os.walk(context.analyze_dir):
+        for name in files:
+            file_path = sparcle_utils.normalize_path(os.path.join(dir_path, name))
 
-            # Проверка на исключение
-            if any(regex.search(file_path) for regex in excludes):
+            if exclude_regex.search(file_path):
                 continue
 
-            # Проверка на включение
-            if any(regex.search(file_path) for regex in includes):
+            if include_regex.search(file_path):
                 collected_files.append([file_path, False])
 
-    for dir_path, _, _ in os.walk(context.build_dir + '/Codegen'):
-        for file_path in glob(os.path.join(dir_path, '*.*'), recursive=False):
-            file_path = sparcle_utils.normalize_path(file_path)
+    for dir_path, _, files in os.walk(context.build_dir + '/Codegen'):
+        for name in files:
+            file_path = sparcle_utils.normalize_path(os.path.join(dir_path, name))
             collected_files.append([file_path, True])
 
     end = perf_counter()

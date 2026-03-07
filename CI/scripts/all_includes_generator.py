@@ -31,32 +31,34 @@ def collect_files(logger: logger_utils.Logger, context: codegen_context.CodegenC
     includes = config.get('scripts-include' if context.is_script else 'engine-include', [])
     excludes = config.get('scripts-exclude' if context.is_script else 'engine-exclude', [])
 
-    includes = [sparcle_utils.normalize_path(p) for p in includes]
-    excludes = [sparcle_utils.normalize_path(p) for p in excludes]
+    includes = tuple(sparcle_utils.normalize_path(p) for p in includes)
+    excludes = tuple(sparcle_utils.normalize_path(p) for p in excludes)
 
     end = perf_counter()
-    logger.log_info(f'Loading config \"{config_path}\" time: {end - start:.2f} sec')
+    logger.log_info(f'Loading config "{config_path}" time: {end - start:.2f} sec')
     logger.log_info(f'Analyze dir: {context.analyze_dir}')
 
-    collected_files = []
+    tokens = TARGET_TOKENS
+    files_for_codegen = []
 
     try:
-        for dir_path, _, _ in os.walk(context.analyze_dir):
-            for file_path in glob(os.path.join(dir_path, '*.*'), recursive=False):
-                file_path = sparcle_utils.normalize_path(file_path)
-                if any((check_dir in file_path) for check_dir in excludes):
+        for dir_path, _, files in os.walk(context.analyze_dir):
+            for name in files:
+                file_path = sparcle_utils.normalize_path(os.path.join(dir_path, name))
+
+                if any(ex in file_path for ex in excludes):
                     continue
-                if any((check_dir in file_path) for check_dir in includes):
-                    collected_files.append(file_path)
 
+                if not any(inc in file_path for inc in includes):
+                    continue
 
-        files_for_codegen = []
-        for file_path in collected_files:
-            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
-                for line in f:
-                    if any(token in line for token in TARGET_TOKENS):
-                        files_for_codegen.append(file_path)
-                        break
+                # читаем файл одним куском (намного быстрее)
+                with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+                    text = f.read()
+
+                if any(token in text for token in tokens):
+                    files_for_codegen.append(file_path)
+
     except Exception as e:
         logger.log_fatal_error(f'Error during file collection: {e}')
         return []

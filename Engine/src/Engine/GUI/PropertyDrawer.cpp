@@ -87,6 +87,11 @@ namespace SR_CORE_GUI_NS {
             return "PathPropertyDrawer";
         }
 
+
+        if (value.IsAABB()) {
+            return "AABBPropertyDrawer";
+        }
+
         if (value.IsEntityRef()) {
             return SR_CORE_GUI_NS::EntityRefPropertyDrawer::GetClassStaticName();
         }
@@ -367,6 +372,70 @@ namespace SR_CORE_GUI_NS {
         }
 
         SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+
+        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+
+        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_GRAPH_GUI_NS::Immediate::PopID();
+
+        SetValue(context, feedback, value);
+
+        return feedback;
+    }
+
+    PropertyDrawerFeedback AABBPropertyDrawer::Draw(const PropertyDrawerContext& context) {
+        PropertyDrawerFeedback feedback;
+
+        SR_UTILS_NS::Reflection::Value value = context.GetValue();
+
+        if (!value.IsAABB()) {
+            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Property is not AABB!");
+            return feedback;
+        }
+
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
+
+        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+
+        const SR_MATH_NS::FVector2 buttonSize = { context.fieldTitleWidth, context.fieldHeight };
+
+        if (!context.pValue && SR_GRAPH_GUI_NS::Immediate::Button(context.GetEditorParams().GetDisplayName().c_str(), buttonSize)) {
+            if (context.onBeforeChangeCallback) {
+                context.onBeforeChangeCallback(false);
+            }
+            feedback.isChanged = true;
+            value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
+            value = value.DetachIfConst();
+        }
+
+        SR_GRAPH_GUI_NS::Immediate::SameLine();
+
+        const float_t drag = context.GetEditorParams().GetDragSpeed();
+
+        if (auto&& pAABB = value.TryCast<SR_MATH_NS::AABB>()) {
+            SR_MATH_NS::FVector3 min = pAABB->Min();
+            SR_MATH_NS::FVector3 max = pAABB->Max();
+
+            if (SR_GRAPH_GUI_NS::Immediate::DragFloat3("Min", &min.x, drag)) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(true);
+                }
+                pAABB->SetMin(min);
+                feedback.isChanged = true;
+            }
+
+            if (SR_GRAPH_GUI_NS::Immediate::DragFloat3("Max", &max.x, drag)) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(true);
+                }
+                pAABB->SetMax(max);
+                feedback.isChanged = true;
+            }
+        }
+        else {
+            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map AABB value!");
+        }
 
         SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
 

@@ -153,6 +153,15 @@ namespace SR_CORE_GUI_NS {
 
     };
 
+    class AABBPropertyDrawer : public PropertyDrawerBase {
+        SR_CLASS()
+    public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<MathVectorPropertyDrawer>;
+    public:
+        PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
+
+    };
+
     class FColorPropertyDrawer : public PropertyDrawerBase {
     SR_CLASS()
     public:

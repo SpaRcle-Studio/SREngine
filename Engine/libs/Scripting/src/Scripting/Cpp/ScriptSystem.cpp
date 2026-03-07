@@ -158,7 +158,7 @@ namespace SR_SCRIPTING_NS {
 
         while (m_threadRunning) {
             SR_TRACY_ZONE_N("ScriptSystem");
-            SR_PLATFORM_NS::Sleep(50);
+            SR_PLATFORM_NS::Sleep(5);
 
             m_thread->Synchronize();
 
@@ -473,6 +473,7 @@ namespace SR_SCRIPTING_NS {
         m_pathToEngineSourcesRoot = m_engineResourcesFolder.Concat("API");
         if (!m_pathToEngineSourcesRoot.IsDir()) {
             SR_ERROR("ScriptSystem::InitEngineSources() : engine sources folder not found!\n\tPath: {}", m_pathToEngineSourcesRoot);
+            m_hasCompileErrors = true;
             return false;
         }
 
@@ -486,7 +487,6 @@ namespace SR_SCRIPTING_NS {
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Utils/inc"));
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Utils/libs"));
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Utils/libs/entt/src"));
-        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Utils/libs/icu"));
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Utils/libs/fmt/include"));
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Utils/libs/tracy/public"));
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Scripting/inc"));

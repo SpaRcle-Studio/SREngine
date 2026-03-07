@@ -361,4 +361,13 @@ namespace SR_PTYPES_NS {
         pCollider->SetRigidbody(this);
         return pCollider;
     }
+
+    void Rigidbody::OnDetached() {
+        for (auto&& pShape : m_shapes) {
+            pShape->OnRigidbodyDetached();
+        }
+        m_isBodyDirty = true;
+        m_shapes.clear();
+        Super::OnDetached();
+    }
 }

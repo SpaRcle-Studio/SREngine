@@ -11,6 +11,7 @@
 #include <Graphics/Types/Geometry/SkinnedMesh.h>
 #include <Graphics/Material/FileMaterial.h>
 #include <Graphics/Types/Texture.h>
+#include <Graphics/Types/Camera.h>
 
 #include <Physics/LibraryImpl.h>
 
@@ -130,5 +131,15 @@ namespace SR_CORE_NS {
 
     World::RenderScenePtr World::GetRenderScene() const {
         return GetDataStorage().GetValue<RenderScenePtr>();
+    }
+
+    World::GameObjectPtr World::GetMainCamera() const {
+        SR_TRACY_ZONE;
+        if (auto&& pRenderScene = GetRenderScene()) {
+            if (auto&& pCamera = pRenderScene->GetMainCamera()) {
+                return pCamera->GetGameObject();
+            }
+        }
+        return nullptr;
     }
 }

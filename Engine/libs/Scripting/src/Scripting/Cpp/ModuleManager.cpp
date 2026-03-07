@@ -20,7 +20,7 @@ namespace SR_SCRIPTING_NS {
             m_pBehaviour->sceneObject = pSceneObject;
 
             if (pSceneObject && pSceneObject->GetSceneObjectType() == SR_UTILS_NS::SceneObjectType::GameObject) {
-                m_pBehaviour->gameObject = pSceneObject.StaticCast<SR_UTILS_NS::GameObject>();
+                m_pBehaviour->gameObject = SR_UTILS_NS::StaticPointerCast<SR_UTILS_NS::GameObject>(pSceneObject);
                 m_pBehaviour->transform = m_pBehaviour->gameObject->GetTransform();
             }
             else {

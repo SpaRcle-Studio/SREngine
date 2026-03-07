@@ -232,7 +232,7 @@ namespace SR_CORE_GUI_NS {
                 }
 
                 auto&& pTexture = std::get<SR_GTYPES_NS::Texture::Ptr>(*property.data);
-                if (void* pDescriptor = pTexture ? pTexture->GetDescriptor() : nullptr) {
+                if (void* pDescriptor = pTexture && pTexture->CanBeUsed() ? pTexture->GetDescriptor() : nullptr) {
                     const float_t imageSize = context.lineHeight * 2.5f;
 
                     if (SR_GRAPH_GUI_NS::Immediate::ImageButton((void*)pDescriptor, SR_MATH_NS::FVector2(imageSize), 0.25f * context.lineHeight)) {

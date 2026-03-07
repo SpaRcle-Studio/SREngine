@@ -28,7 +28,6 @@ namespace SR_SCRIPTING_NS {
         virtual void OnPriorityChanged();
         virtual void OnTransformSet();
 
-        virtual void OnLoaded();
         virtual void OnAttached();
         virtual void OnDetached();
         virtual void OnDestroy();

@@ -133,6 +133,7 @@ float filterPCF(vec3 norm, vec4 shadowCoord, uint cascadeIndex) {
 }
 
 vec4 CalculateShadow(
+    vec3 vertexPos,
     vec3 tangentNormal,
     vec3 diffuseColor, float specularSharpness, float specularIntensity, float shadowIntensity,
     float roughnessValue,
@@ -151,7 +152,7 @@ vec4 CalculateShadow(
 #endif
 
 #ifdef SR_CASCADE_USE_RADII
-    uint cascadeIndex = SelectCascade(VERTEX);
+    uint cascadeIndex = SelectCascade(vertexPos);
 #else
     uint cascadeIndex = 0;
     float depth = -pcf_viewPos.z; // ДЕЛАЕМ ПОЛОЖИТЕЛЬНУЮ ГЛУБИНУ
@@ -165,7 +166,7 @@ vec4 CalculateShadow(
     float shadow = 1.0;
 
     if (cascadeIndex < NUM_CASCADES) {
-        vec4 sc0 = biasMat * CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex] * vec4(VERTEX, 1.0);
+        vec4 sc0 = biasMat * CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex] * vec4(vertexPos, 1.0);
         float s0 = filterPCF(N, sc0, cascadeIndex);
         shadow = s0;
 
@@ -184,7 +185,7 @@ vec4 CalculateShadow(
             float cascadeBlend = smoothstep(splitFar - fade, splitFar, pcf_viewPos.z);
 
             if (cascadeBlend > 0.0 && cascadeIndex + 1 < NUM_CASCADES) {
-                vec4 sc1 = biasMat * CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex + 1] * vec4(VERTEX, 1.0);
+                vec4 sc1 = biasMat * CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex + 1] * vec4(vertexPos, 1.0);
                 float s1 = filterPCF(N, sc1, cascadeIndex + 1);
                 shadow = mix(s0, s1, cascadeBlend);
             }
@@ -270,6 +271,7 @@ vec4 CalculateShadow(
 void PreparePCF(mat4 modelMatrix) {
     mat3 normalMatrix = transpose(inverse(mat3(modelMatrix)));
     NORMAL = normalize(normalMatrix * NORMAL);
+
 #ifdef HAS_NORMAL
     TANGENT = normalize(mat3(modelMatrix) * TANGENT);
     BITANGENT = normalize(cross(NORMAL, TANGENT));
@@ -277,11 +279,6 @@ void PreparePCF(mat4 modelMatrix) {
 
     pcf_viewDir = normalize(VIEW_POSITION - VERTEX);
     pcf_viewPos = (VIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
-
-
-     // TODO: доработать расчет B
-    // vec3 B = normalize(cross(N, T));
-    // vec3 B = cross(N, T) * tangentW; // где tangentW = ±1
 }
 
 vec4 CalculateShadowCustom(vec3 diffuseColor, vec3 lightColor, vec3 vertexPos, float specularSharpness, float specularIntensity, float ambientIntensity, float shadowIntensity, float diffuseMin) {

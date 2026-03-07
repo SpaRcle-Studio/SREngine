@@ -26,6 +26,7 @@ namespace SR_CORE_NS {
 
     public:
         SR_UTILS_NS::SceneObject::Ptr Instance(const SR_HTYPES_NS::RawMesh* rawMesh) override;
+        SR_NODISCARD GameObjectPtr GetMainCamera() const override;
 
     private:
         SR_NODISCARD RenderScenePtr GetRenderScene() const;

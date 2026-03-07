@@ -76,6 +76,10 @@ namespace SR_CORE_UI_NS {
     void UIScrollBar::RefreshHandleLayout() {
         SR_TRACY_ZONE;
 
+        if (!IsAttached()) {
+            return;
+        }
+
         auto&& pHandleTransform = SR_UTILS_NS::ExtractTransformAs<SR_UTILS_NS::TransformRect>(m_handle.Get().Get());
         if (!pHandleTransform) {
             return;

@@ -64,11 +64,11 @@ namespace SR_AUDIO_NS {
         }
 
         if (m_rawSound) {
-            RemoveDependency(m_rawSound.StaticCast<SR_UTILS_NS::ResourceContainer>());
+            RemoveDependency(SR_UTILS_NS::StaticPointerCast<SR_UTILS_NS::ResourceContainer>(m_rawSound));
         }
 
         if (pRawSound) {
-            AddDependency(pRawSound.StaticCast<SR_UTILS_NS::ResourceContainer>());
+            AddDependency(SR_UTILS_NS::StaticPointerCast<SR_UTILS_NS::ResourceContainer>(pRawSound));
         }
 
         m_rawSound = pRawSound;

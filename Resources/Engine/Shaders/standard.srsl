@@ -103,6 +103,7 @@ void fragment() {
 
 #ifdef SR_DEFINE_USE_CASCADED_SHADOW_MAP
     vec3 shadowColor = CalculateShadow(
+        VERTEX,
         tangentNormal,
         diffuseColor.rgb,
         maybe_unused_specularSharpness,

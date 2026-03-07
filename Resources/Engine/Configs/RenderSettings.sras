@@ -138,6 +138,8 @@ use tabs: true
 							7-i:1024
 						6-v:cascadesCount
 							7-i:2
+						6-v:frustumCount
+							7-i:0
 				4-k:item
 					5-v:first
 						6-s:Medium
@@ -146,14 +148,20 @@ use tabs: true
 							7-i:2048
 						6-v:cascadesCount
 							7-i:3
+						6-v:frustumCount
+							7-i:1
 				4-k:item
 					5-v:first
 						6-s:Ultra
 					5-o:second
+						6-v:frustumCount
+							7-i:0
 				4-k:item
 					5-v:first
 						6-s:Extreme
 					5-o:second
 						6-v:shadowMapResolution
 							7-i:8192
+						6-v:frustumCount
+							7-i:0
 			3-a:colorBufferQualityPresets
