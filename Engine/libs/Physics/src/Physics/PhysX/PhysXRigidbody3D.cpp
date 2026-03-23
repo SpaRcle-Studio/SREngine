@@ -211,14 +211,16 @@ namespace SR_PTYPES_NS {
                 return false;
             }
 
-            if (!pShape->GetHandle()) {
-                SRHalt("PhysXRigidbody3D::UpdateShapeInternal() : shape handle is nullptr!");
-                return false;
-            }
-
-            if (!m_rigidActor->attachShape(*(physx::PxShape *) pShape->GetHandle())) {
-                SRHalt("PhysXRigidbody3D::UpdateShapeInternal() : failed to attach shape!");
-                return false;
+            const std::vector<void*>& handles = pShape->GetHandles();
+            for (auto&& pHandle : handles) {
+                if (!pHandle) {
+                    SRHalt("PhysXRigidbody3D::UpdateShapeInternal() : shape handle is nullptr!");
+                    return false;
+                }
+                if (!m_rigidActor->attachShape(*(physx::PxShape *)pHandle)) {
+                    SRHalt("PhysXRigidbody3D::UpdateShapeInternal() : failed to attach shape!");
+                    return false;
+                }
             }
         }
 

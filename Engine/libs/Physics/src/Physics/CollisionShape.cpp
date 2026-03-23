@@ -11,6 +11,8 @@
 #include <Utils/FileSystem/PathDataAccessor.h>
 
 #include <Codegen/CollisionShape.generated.hpp>
+#include "../../../../../Resources/API/Engine/libs/Physics/inc/Physics/CollisionShape.h"
+
 
 namespace SR_PTYPES_NS {
     CollisionShape::~CollisionShape() {
@@ -234,8 +236,9 @@ namespace SR_PTYPES_NS {
         return m_type;
     }
 
-    void* CollisionShape::GetHandle() const noexcept {
-        return m_impl ? m_impl->GetHandle() : nullptr;
+    const std::vector<void*>& CollisionShape::GetHandles() const noexcept {
+        static std::vector<void*> emptyHandles;
+        return m_impl ? m_impl->GetHandles() : emptyHandles;
     }
 
     void CollisionShape::SetCenter(const SR_MATH_NS::FVector3& center) {
@@ -363,5 +366,10 @@ namespace SR_PTYPES_NS {
 
     bool CollisionShape::UpdateMatrix() {
         return m_impl && m_impl->UpdateMatrix();
+    }
+
+    void CollisionShape::SwapBoxes(SR_HTYPES_NS::FastMemoryArray<SR_MATH_NS::AABB>& boxes) {
+        std::swap(m_boxes, boxes);
+        OnShapeDirty();
     }
 }

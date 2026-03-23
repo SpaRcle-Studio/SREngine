@@ -14,6 +14,7 @@
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Types/SafePointer.h>
 #include <Utils/Types/IRawMeshHolder.h>
+#include <Utils/Types/FastMemoryArray.h>
 #include <Utils/Math/Matrix4x4.h>
 #include <Utils/TypeTraits/Properties.h>
 #include <Utils/ECS/Transform.h>
@@ -39,7 +40,11 @@ namespace SR_PTYPES_NS {
             return SR_MATH_NS::FVector3::Zero();
         }
 
-        SR_NODISCARD virtual void* GetHandle() const noexcept { return nullptr; }
+        SR_NODISCARD virtual const std::vector<void*>& GetHandles() const noexcept {
+            static std::vector<void*> emptyHandles;
+            return emptyHandles;
+        }
+
         SR_NODISCARD CollisionShape* GetShape() const noexcept { return m_shape; }
 
     private:
@@ -89,6 +94,9 @@ namespace SR_PTYPES_NS {
         void SetBounds(const SR_MATH_NS::FVector3& bounds);
         void SetPlaneSize(const SR_MATH_NS::FVector2& size);
 
+        void SwapBoxes(SR_HTYPES_NS::FastMemoryArray<SR_MATH_NS::AABB>& boxes);
+        SR_NODISCARD const SR_HTYPES_NS::FastMemoryArray<SR_MATH_NS::AABB>& GetBoxes() const { return m_boxes; }
+
         SR_NODISCARD SR_MATH_NS::FVector3 GetCenter() const noexcept { return m_center; }
         SR_NODISCARD SR_MATH_NS::FVector3 GetCenterDirection() const noexcept;
 
@@ -109,7 +117,7 @@ namespace SR_PTYPES_NS {
         SR_NODISCARD bool HasGeometry() const noexcept;
         SR_NODISCARD bool IsShapeValid() const noexcept;
         SR_NODISCARD ShapeType GetType() const noexcept;
-        SR_NODISCARD void* GetHandle() const noexcept;
+        SR_NODISCARD const std::vector<void*>& GetHandles() const noexcept;
 
         virtual void SetCenter(const SR_MATH_NS::FVector3& center);
 
@@ -128,7 +136,9 @@ namespace SR_PTYPES_NS {
         SR_MATH_NS::FVector3 m_translation;
         SR_MATH_NS::Quaternion m_rotation;
         SR_MATH_NS::FVector3 m_scale = SR_MATH_NS::FVector3::One();
+
         SR_PTYPES_NS::PhysicsMaterial::Ptr m_materialData;
+        SR_HTYPES_NS::FastMemoryArray<SR_MATH_NS::AABB> m_boxes;
 
     protected:
         /// @property @onChanged(ReInitRigidbody)

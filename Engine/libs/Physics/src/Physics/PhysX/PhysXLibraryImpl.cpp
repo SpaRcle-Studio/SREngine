@@ -95,6 +95,7 @@ namespace SR_PHYSICS_NS {
             case ShapeType::Capsule3D:
             case ShapeType::Sphere3D:
             case ShapeType::Convex3D:
+            case ShapeType::Boxes3D:
                 return true;
             default:
                 return false;

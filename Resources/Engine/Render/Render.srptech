@@ -46,12 +46,28 @@ use tabs: true
 							7-a:allowedLayers
 								8-k:i
 									9-v:d
+										10-s:OpaqueNoShadow
+							7-a:disallowedLayers
+							7-v:applyShadows
+								8-b:true
+							7-v:colorBuffer
+								8-b:true
+				4-k:i
+					5-o:d
+						6-v:type
+							7-s:RenderTechniqueLayerMesh
+						6-o:ptr
+							7-a:allowedLayers
+								8-k:i
+									9-v:d
 										10-s:Default
 								8-k:i
 									9-v:d
 										10-s:Opaque
 							7-a:disallowedLayers
 							7-v:castShadows
+								8-b:true
+							7-v:applyShadows
 								8-b:true
 							7-v:colorBuffer
 								8-b:true
@@ -74,6 +90,8 @@ use tabs: true
 										10-s:Transparent
 							7-a:disallowedLayers
 							7-v:castShadows
+								8-b:true
+							7-v:applyShadows
 								8-b:true
 							7-v:colorBuffer
 								8-b:true

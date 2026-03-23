@@ -5,6 +5,7 @@
     <Layers>
         <Default/>
 		<Opaque/>
+		<OpaqueNoShadow/>
         <Debug/>
     	<Transparent/>
     	<TransparentSecond/>

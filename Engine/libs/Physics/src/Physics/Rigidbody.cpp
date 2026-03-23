@@ -112,12 +112,6 @@ namespace SR_PTYPES_NS {
     }
 
     bool Rigidbody::IsStatic() const noexcept {
-        //const ShapeType type = GetCollisionShape()->GetType();
-
-        //if (type == ShapeType::Plane3D || type == ShapeType::TriangleMesh2D || type == ShapeType::TriangleMesh3D) {
-        //    return true;
-        //}
-
         return m_isStatic;
     }
 
@@ -216,10 +210,10 @@ namespace SR_PTYPES_NS {
             const auto result = pShape->UpdateShape();
             changed |= result.has_value() && result.value();
 
-            if (result && !result.value()) {
-                SR_ERROR("Rigidbody::UpdateShape() : failed to update shape!");
-                return RBUpdShapeRes::Error;
-            }
+            //if (result && !result.value()) {
+            //    SR_ERROR("Rigidbody::UpdateShape() : failed to update shape!");
+            //    return RBUpdShapeRes::Error;
+            //}
         }
 
         if (changed && !UpdateShapeInternal()) {

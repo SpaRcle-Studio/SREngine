@@ -38,6 +38,7 @@ namespace SR_PHYSICS_NS {
          Capsule3D,
          Sphere3D,
          TriangleMesh3D,
+         Boxes3D,
          Convex3D,
          Cone3D
     )
@@ -67,6 +68,7 @@ namespace SR_PHYSICS_UTILS_NS {
             case ShapeType::Capsule3D:
             case ShapeType::Sphere3D:
             case ShapeType::TriangleMesh3D:
+            case ShapeType::Boxes3D:
             case ShapeType::Convex3D:
             case ShapeType::Cone3D:
                 return true;
