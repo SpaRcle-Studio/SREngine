@@ -16,12 +16,14 @@
 namespace SR_PHYSICS_NS {
     class LibraryImpl;
     class Raycast3DImpl;
+    class CharacterController;
 
     class PhysicsWorld : public SR_UTILS_NS::NonCopyable {
     public:
         using Super = SR_UTILS_NS::NonCopyable;
         using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
         using RigidbodyPtr = SR_HTYPES_NS::SharedPtr<SR_PTYPES_NS::Rigidbody>;
+        using CharacterControllerPtr = SR_HTYPES_NS::SharedPtr<SR_PHYSICS_NS::CharacterController>;
         using Space = SR_UTILS_NS::Measurement;
     public:
         explicit PhysicsWorld(LibraryPtr pLibrary, Space space);
@@ -37,6 +39,9 @@ namespace SR_PHYSICS_NS {
 
         virtual bool AddRigidbody(RigidbodyPtr pRigidbody) { return false; }
         virtual bool RemoveRigidbody(RigidbodyPtr pRigidbody) { return false; }
+
+        virtual bool AddCharacterController(CharacterControllerPtr pController) { return false; }
+        virtual bool RemoveCharacterController(CharacterControllerPtr pController) { return false; }
 
         virtual void ForEachRigidbody3D(const SR_HTYPES_NS::Function<void(SR_PTYPES_NS::Rigidbody3D *)> &fun) { }
 

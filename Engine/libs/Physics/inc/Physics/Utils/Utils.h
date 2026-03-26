@@ -5,11 +5,20 @@
 #ifndef SR_ENGINE_PHYSICS_UTILS_H
 #define SR_ENGINE_PHYSICS_UTILS_H
 
-#include <Physics/macros.h>
+#include <Physics/stdInclude.h>
 
 #include <Utils/Common/Measurement.h>
 
 namespace SR_PHYSICS_NS {
+    struct RigidActorUserData {
+        void* pUserData = nullptr;
+        enum class Type : uint8_t {
+            Unknown = 0,
+            Rigidbody = 1,
+            CharacterController = 2
+        } type = Type::Unknown;
+    };
+
     SR_ENUM_NS_CLASS(LibraryType,
          Unknown = 0,
          Bullet3 = 1,

@@ -21,6 +21,7 @@ namespace SR_PTYPES_NS {
 
 namespace SR_PHYSICS_NS {
     class PhysicsWorld;
+    class CharacterControllerImpl;
 }
 
 namespace SR_PHYSICS_NS {
@@ -39,6 +40,8 @@ namespace SR_PHYSICS_NS {
 
         SR_NODISCARD virtual bool IsShapeSupported(ShapeType type) const { return false; }
         SR_NODISCARD virtual ShapeType GetDefaultShape() const { return ShapeType::Unknown; }
+
+        SR_NODISCARD virtual CharacterControllerImpl* CreateCharacterControllerImpl() { return nullptr; }
 
         SR_NODISCARD virtual SR_PTYPES_NS::CollisionShapeImpl* CreateCollisionShapeImpl() { return nullptr; }
 

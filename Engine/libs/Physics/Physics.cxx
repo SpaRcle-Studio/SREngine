@@ -11,6 +11,7 @@
     #include "src/Physics/PhysX/PhysXRigidbody3D.cpp"
     #include "src/Physics/PhysX/PhysXRaycast3DImpl.cpp"
     #include "src/Physics/PhysX/PhysXMaterialImpl.cpp"
+    #include "src/Physics/PhysX/PhysXCharacterControllerImpl.cpp"
     #include "src/Physics/PhysX/PhysXCollisionShape.cpp"
     #include "src/Physics/PhysX/PhysXSimulationCallback.cpp"
     #include "src/Physics/PhysX/PhysXVehicle4W3D.cpp"

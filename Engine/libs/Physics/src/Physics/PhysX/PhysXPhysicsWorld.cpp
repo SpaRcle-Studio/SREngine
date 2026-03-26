@@ -35,6 +35,11 @@ namespace SR_PHYSICS_NS {
     }
 
     PhysXPhysicsWorld::~PhysXPhysicsWorld() {
+        if (m_controllerManager) {
+            m_controllerManager->release();
+            m_controllerManager = nullptr;
+        }
+
         if (m_scene) {
             m_scene->release();
             m_scene = nullptr;
@@ -85,6 +90,8 @@ namespace SR_PHYSICS_NS {
 
         m_scene->setGravity(physx::PxVec3(0.f, -SR_EARTH_GRAVITY_CONST, 0.f));
 
+        m_controllerManager = PxCreateControllerManager(*m_scene);
+
         physx::PxPvdSceneClient* pPvdClient = m_scene->getScenePvdClient();
         
         if (pPvdClient) {
@@ -121,6 +128,71 @@ namespace SR_PHYSICS_NS {
         }
 
         return true;
+    }
+
+    bool PhysXPhysicsWorld::AddCharacterController(PhysicsWorld::CharacterControllerPtr pController) {
+        SR_TRACY_ZONE;
+
+        if (!pController) {
+            SRHalt("pController is nullptr!");
+            return false;
+        }
+
+        if (!pController->InitController()) {
+            SR_ERROR("PhysXPhysicsWorld::AddCharacterController() : failed to initialize character controller!");
+            return false;
+        }
+
+        auto&& pMaterialData = pController->GetMaterialData();
+        if (!pMaterialData) {
+            SR_ERROR("PhysXPhysicsWorld::AddCharacterController() : character controller has no material data!");
+            return false;
+        }
+
+        physx::PxCapsuleControllerDesc desc;
+        desc.height = pController->GetConfig().height;
+        desc.radius = pController->GetConfig().radius;
+        desc.position = SR_PHYSICS_UTILS_NS::FV3ToPxV3Extended(pController->GetTransform()->GetTranslation() + pController->GetConfig().offset);
+        desc.upDirection = physx::PxVec3(0, 1, 0);
+        desc.material = static_cast<physx::PxMaterial*>(pMaterialData->GetMaterialImpl(LibraryType::PhysX)->GetHandle());
+        desc.stepOffset = pController->GetConfig().stepOffset;
+        desc.slopeLimit = SR_COS(pController->GetConfig().slopeLimit * SR_PI / 180.0f);
+        desc.contactOffset = pController->GetConfig().contactOffset;
+        desc.invisibleWallHeight = pController->GetConfig().invisibleWallHeight;
+        desc.maxJumpHeight = pController->GetConfig().maxJumpHeight;
+
+        auto&& pControllerImpl = m_controllerManager->createController(desc);
+        if (!pControllerImpl) {
+            SR_ERROR("PhysXPhysicsWorld::AddCharacterController() : failed to create character controller!");
+            return false;
+        }
+
+        pController->GetImpl()->SetHandle(pControllerImpl);
+
+        return true;
+    }
+
+    bool PhysXPhysicsWorld::RemoveCharacterController(PhysicsWorld::CharacterControllerPtr pController) {
+        SR_TRACY_ZONE;
+
+        if (!pController) {
+            SRHalt("pController is nullptr!");
+            return false;
+        }
+
+        CharacterControllerImpl* pImpl = pController->GetImpl();
+        if (!pImpl) {
+            SR_ERROR("PhysXPhysicsWorld::RemoveCharacterController() : character controller has no implementation!");
+            return false;
+        }
+
+        if (auto&& pControllerImpl = (physx::PxController*)pImpl->GetHandle()) {
+            pControllerImpl->release();
+            return true;
+        }
+
+        SR_ERROR("PhysXPhysicsWorld::RemoveCharacterController() : failed to get character controller handle!");
+        return false;
     }
 
     bool PhysXPhysicsWorld::AddRigidbody(PhysicsWorld::RigidbodyPtr pRigidbody) {
@@ -185,23 +257,37 @@ namespace SR_PHYSICS_NS {
                 continue;
             }
 
-            auto&& pRigidbody = (SR_PTYPES_NS::Rigidbody*)pRigidActor->userData;
-            if (!SRVerifyFalse(!pRigidbody)) {
+            auto&& pUserData = static_cast<RigidActorUserData*>(pRigidActor->userData);
+            if (!SRVerifyFalse(!pUserData || !pUserData->pUserData)) {
                 continue;
             }
 
-            if (pRigidbody->IsBodyDirty()) {
-                SRVerifyFalse(!ReAddRigidbody(pRigidbody));
-                continue;
-            }
+            switch (pUserData->type) {
+                case RigidActorUserData::Type::Rigidbody: {
+                    auto&& pRigidbody = (SR_PTYPES_NS::Rigidbody*)pUserData->pUserData;
+                    if (pRigidbody->IsBodyDirty()) {
+                        SRVerifyFalse(!ReAddRigidbody(pRigidbody));
+                        continue;
+                    }
 
-            if (pRigidbody->UpdateShape() == RBUpdShapeRes::Error) {
-                SR_ERROR("PhysXPhysicsWorld::Synchronize() : failed to update shape!");
-                continue;
-            }
+                    if (pRigidbody->UpdateShape() == RBUpdShapeRes::Error) {
+                        SR_ERROR("PhysXPhysicsWorld::Synchronize() : failed to update shape!");
+                        continue;
+                    }
 
-            if (pRigidbody->IsMatrixDirty()) {
-                pRigidbody->UpdateMatrix();
+                    if (pRigidbody->IsMatrixDirty()) {
+                        pRigidbody->UpdateMatrix();
+                    }
+                    break;
+                }
+                case RigidActorUserData::Type::CharacterController: {
+                    SRHalt("Character controllers should not be static actors!");
+                    break;
+                }
+                default: {
+                    SRHalt("Unknown rigid actor user data type!");
+                    break;
+                }
             }
         }
 
@@ -229,22 +315,36 @@ namespace SR_PHYSICS_NS {
                 continue;
             }
 
-            auto&& pRigidbody = (SR_PTYPES_NS::Rigidbody*)pRigidActor->userData;
-            if (!SRVerifyFalse(!pRigidbody)) {
+            auto&& pUserData = static_cast<RigidActorUserData*>(pRigidActor->userData);
+            if (!SRVerifyFalse(!pUserData || !pUserData->pUserData)) {
                 continue;
             }
 
-            if (pRigidbody->IsBodyDirty()) {
-                SRVerifyFalse(!ReAddRigidbody(pRigidbody));
-                continue;
-            }
+            switch (pUserData->type) {
+                case RigidActorUserData::Type::Rigidbody: {
+                    auto&& pRigidbody = (SR_PTYPES_NS::Rigidbody*)pUserData->pUserData;
+                    if (pRigidbody->IsBodyDirty()) {
+                        SRVerifyFalse(!ReAddRigidbody(pRigidbody));
+                        continue;
+                    }
 
-            if (pRigidbody->UpdateShape() == RBUpdShapeRes::Error) {
-                SR_ERROR("PhysXPhysicsWorld::Synchronize() : failed to update shape!");
-                continue;
+                    if (pRigidbody->UpdateShape() == RBUpdShapeRes::Error) {
+                        SR_ERROR("PhysXPhysicsWorld::Synchronize() : failed to update shape!");
+                        continue;
+                    }
+                    pRigidbody->Synchronize();
+                    break;
+                }
+                case RigidActorUserData::Type::CharacterController: {
+                    auto&& pController = (CharacterController*)pUserData->pUserData;
+                    pController->GetImpl()->Synchronize();
+                    break;
+                }
+                default: {
+                    SRHalt("Unknown rigid actor user data type!");
+                    break;
+                }
             }
-
-            pRigidbody->Synchronize();
         }
 
         return true;
@@ -270,6 +370,15 @@ namespace SR_PHYSICS_NS {
         for (uint32_t i = 0; i < count; ++i) {
             auto&& pRigidActor = pActors[i]->is<physx::PxRigidActor>();
             if (!SRVerifyFalse(!pRigidActor)) {
+                continue;
+            }
+
+            auto&& pUserData = static_cast<RigidActorUserData*>(pRigidActor->userData);
+            if (!SRVerifyFalse(!pUserData || !pUserData->pUserData)) {
+                continue;
+            }
+
+            if (pUserData->type != RigidActorUserData::Type::Rigidbody) {
                 continue;
             }
 

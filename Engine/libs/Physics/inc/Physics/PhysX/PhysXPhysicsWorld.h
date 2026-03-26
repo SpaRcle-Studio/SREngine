@@ -30,6 +30,9 @@ namespace SR_PHYSICS_NS {
         bool AddRigidbody(RigidbodyPtr pRigidbody) override;
         bool RemoveRigidbody(RigidbodyPtr pRigidbody) override;
 
+        bool AddCharacterController(CharacterControllerPtr pController) override;
+        bool RemoveCharacterController(CharacterControllerPtr pController) override;
+
         void ForEachRigidbody3D(const SR_HTYPES_NS::Function<void(SR_PTYPES_NS::Rigidbody3D *)> &fun) override;
 
         void Flush() override;
@@ -44,6 +47,7 @@ namespace SR_PHYSICS_NS {
         physx::PxScene* m_scene = nullptr;
         physx::PxDefaultCpuDispatcher* m_cpuDispatcher = nullptr;
         ContactReportCallback* m_contactCallback = nullptr;
+        physx::PxControllerManager* m_controllerManager = nullptr;
 
         std::vector<physx::PxActor*> m_dynamicActors;
         std::vector<physx::PxActor*> m_staticActors;

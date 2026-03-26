@@ -3,20 +3,28 @@
 //
 
 #include <Physics/PhysicsScene.h>
+#include <Physics/PhysicsWorld.h>
+#include <Physics/LibraryImpl.h>
+#include <Physics/CharacterController.h>
 
 #include <Utils/Math/Mathematics.h>
 #include <Utils/World/Scene.h>
-
-#include <Physics/PhysicsWorld.h>
-#include <Physics/LibraryImpl.h>
 
 namespace SR_PHYSICS_NS {
     PhysicsScene::PhysicsScene(const ScenePtr& scene)
         : Super(this)
         , m_scene(scene)
-    { }
+    {
+        SR_TRACY_ZONE;
+        m_rigidbodyToRemove.reserve(128);
+        m_rigidbodyToRegister.reserve(128);
+        m_characterControllersToRemove.reserve(32);
+        m_characterControllersToRegister.reserve(32);
+    }
 
     PhysicsScene::~PhysicsScene() {
+        SR_TRACY_ZONE;
+
         auto&& removeRigidbody = [&](SR_PTYPES_NS::Rigidbody::Ptr pRigidbody) {
             if (!pRigidbody) {
                 return;
@@ -71,6 +79,8 @@ namespace SR_PHYSICS_NS {
     }
 
     bool PhysicsScene::Init() {
+        SR_TRACY_ZONE;
+
         SR_INFO("PhysicsScene::Init() : initializing the physics scene...");
 
         if (!(m_library2D = SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(Space::Space2D))) {
@@ -125,7 +135,22 @@ namespace SR_PHYSICS_NS {
     bool PhysicsScene::Flush() {
         SR_TRACY_ZONE;
 
-        const bool needFlush = !m_rigidbodyToRemove.empty();
+        const bool needFlush = !m_rigidbodyToRemove.empty() || !m_characterControllersToRemove.empty();
+
+        for (auto&& pController : m_characterControllersToRegister) {
+            if (m_3DWorld) {
+                m_3DWorld->AddCharacterController(pController);
+            }
+        }
+
+        for (auto&& pController : m_characterControllersToRemove) {
+            if (m_3DWorld) {
+                m_3DWorld->RemoveCharacterController(pController);
+            }
+            if (!pController->HasParent()) {
+                pController.AutoFree();
+            }
+        }
 
         for (auto&& pRigidbody : m_rigidbodyToRegister) {
             auto&& type = pRigidbody->GetMeasurement();
@@ -169,6 +194,8 @@ namespace SR_PHYSICS_NS {
 
         m_rigidbodyToRemove.clear();
         m_rigidbodyToRegister.clear();
+        m_characterControllersToRemove.clear();
+        m_characterControllersToRegister.clear();
 
         return needFlush;
     }
@@ -238,11 +265,23 @@ namespace SR_PHYSICS_NS {
     }
 
     void PhysicsScene::Register(PhysicsScene::RigidbodyPtr pRigidbody) {
+        SR_TRACY_ZONE;
         m_rigidbodyToRegister.emplace_back(pRigidbody);
     }
 
+    void PhysicsScene::Register(PhysicsScene::CharacterControllerPtr pController) {
+        SR_TRACY_ZONE;
+        m_characterControllersToRegister.emplace_back(pController);
+    }
+
     void PhysicsScene::Remove(PhysicsScene::RigidbodyPtr pRigidbody) {
+        SR_TRACY_ZONE;
         m_rigidbodyToRemove.emplace_back(pRigidbody);
+    }
+
+    void PhysicsScene::Remove(PhysicsScene::CharacterControllerPtr pController) {
+        SR_TRACY_ZONE;
+        m_characterControllersToRemove.emplace_back(pController);
     }
 
     void PhysicsScene::ClearForces() {

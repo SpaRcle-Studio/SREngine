@@ -8,6 +8,7 @@
 #include <Physics/PhysX/PhysXRigidbody3D.h>
 #include <Physics/PhysX/PhysXMaterialImpl.h>
 #include <Physics/PhysX/PhysXVehicle4W3D.h>
+#include <Physics/PhysX/PhysXCharacterControllerImpl.h>
 
 #include <Utils/Common/StringAtomLiterals.h>
 
@@ -100,6 +101,10 @@ namespace SR_PHYSICS_NS {
             default:
                 return false;
         }
+    }
+
+    CharacterControllerImpl* PhysXLibraryImpl::CreateCharacterControllerImpl() {
+        return new SR_PHYSICS_NS::PhysXCharacterControllerImpl();
     }
 
     SR_PTYPES_NS::CollisionShapeImpl* PhysXLibraryImpl::CreateCollisionShapeImpl() {

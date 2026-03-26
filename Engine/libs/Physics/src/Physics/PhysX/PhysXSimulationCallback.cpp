@@ -13,18 +13,18 @@ namespace SR_PHYSICS_NS {
      */
     void ContactReportCallback::onContact(const physx::PxContactPairHeader& pairHeader, const physx::PxContactPair* pairs, physx::PxU32 nbPairs)
     {
+        SR_TRACY_ZONE;
+
         const physx::PxU32 bufferSize = 64;
         physx::PxContactPairPoint contacts[bufferSize];
 
         auto point = physx::PxVec3(0);
-        auto impulse  = physx::PxVec3(0);
+        auto impulse = physx::PxVec3(0);
 
-        for (physx::PxU32 i = 0; i < nbPairs; i++)
-        {
+        for (physx::PxU32 i = 0; i < nbPairs; i++) {
             physx::PxU32 nbContacts = pairs[i].extractContacts(contacts, bufferSize);
 
-            for(physx::PxU32 j=0; j < nbContacts; j++)
-            {
+            for (physx::PxU32 j = 0; j < nbContacts; j++) {
                 point += contacts[j].position;
                 impulse += contacts[j].impulse;
             }
@@ -37,66 +37,54 @@ namespace SR_PHYSICS_NS {
             auto shape1 = reinterpret_cast<SR_PTYPES_NS::CollisionShape*>(cp.shapes[0]->userData);
             auto shape2 = reinterpret_cast<SR_PTYPES_NS::CollisionShape*>(cp.shapes[1]->userData);
 
-            if (!shape1 || !shape2) {
-                SRHalt("ContactReportCallback::onContact() : shape1 or shape2 is nullptr!");
-                continue;
-            }
-
-            SR_PTYPES_NS::Rigidbody* rigidbody1 = shape1->GetRigidbody();
-            SR_PTYPES_NS::Rigidbody* rigidbody2 = shape2->GetRigidbody();
-
             SR_UTILS_NS::CollisionData data = { };
 
-            auto&& gameObject1 = rigidbody1->GetGameObject();
-            auto&& gameObject2 = rigidbody2->GetGameObject();
+            SR_PTYPES_NS::Rigidbody* rigidbody1 = shape1 ? shape1->GetRigidbody() : nullptr;
+            SR_PTYPES_NS::Rigidbody* rigidbody2 = shape2 ? shape2->GetRigidbody() : nullptr;
 
-            if (!gameObject1 || !gameObject2) {
-                SRHalt("ContactReportCallback::onContact() : gameObject1 or gameObject2 is nullptr!");
-                continue;
-            }
+            const SR_UTILS_NS::SceneObject* pSceneObject1 = rigidbody1 ? rigidbody1->GetSceneObject().Get() : nullptr;
+            const SR_UTILS_NS::SceneObject* pSceneObject2 = rigidbody2 ? rigidbody2->GetSceneObject().Get() : nullptr;
 
             data.point = SR_PHYSICS_UTILS_NS::PxV3ToFV3(point);
             data.impulse = SR_PHYSICS_UTILS_NS::PxV3ToFV3(impulse);
             data.pHandler = rigidbody2;
 
-            for (auto&& pComponent : gameObject1->GetComponents()){
-                if (pComponent == rigidbody1){
-                    continue;
-                }
-                else {
-                    if (cp.events & physx::PxPairFlag::eNOTIFY_TOUCH_FOUND)
-                    {
-                        pComponent->OnCollisionEnter(data);
+            if (pSceneObject1) {
+                for (auto&& pComponent : pSceneObject1->GetComponents()) {
+                    if (pComponent == rigidbody1) {
+                        continue;
                     }
-                    if (cp.events & physx::PxPairFlag::eNOTIFY_TOUCH_PERSISTS)
-                    {
-                        pComponent->OnCollisionStay(data);
-                    }
-                    if (cp.events & physx::PxPairFlag::eNOTIFY_TOUCH_LOST)
-                    {
-                        pComponent->OnCollisionExit(data);
+                    else {
+                        if (cp.events & physx::PxPairFlag::eNOTIFY_TOUCH_FOUND) {
+                            pComponent->OnCollisionEnter(data);
+                        }
+                        if (cp.events & physx::PxPairFlag::eNOTIFY_TOUCH_PERSISTS) {
+                            pComponent->OnCollisionStay(data);
+                        }
+                        if (cp.events & physx::PxPairFlag::eNOTIFY_TOUCH_LOST) {
+                            pComponent->OnCollisionExit(data);
+                        }
                     }
                 }
             }
 
             data.pHandler = rigidbody1;
 
-            for (auto&& pComponent : gameObject2->GetComponents()){
-                if (pComponent == rigidbody2){
-                    continue;
-                }
-                else {
-                    if (cp.events & physx::PxPairFlag::eNOTIFY_TOUCH_FOUND)
-                    {
-                        pComponent->OnCollisionEnter(data);
+            if (pSceneObject2) {
+                for (auto&& pComponent : pSceneObject2->GetComponents()){
+                    if (pComponent == rigidbody2){
+                        continue;
                     }
-                    if (cp.events & physx::PxPairFlag::eNOTIFY_TOUCH_PERSISTS)
-                    {
-                        pComponent->OnCollisionStay(data);
-                    }
-                    if (cp.events & physx::PxPairFlag::eNOTIFY_TOUCH_LOST)
-                    {
-                        pComponent->OnCollisionExit(data);
+                    else {
+                        if (cp.events & physx::PxPairFlag::eNOTIFY_TOUCH_FOUND) {
+                            pComponent->OnCollisionEnter(data);
+                        }
+                        if (cp.events & physx::PxPairFlag::eNOTIFY_TOUCH_PERSISTS) {
+                            pComponent->OnCollisionStay(data);
+                        }
+                        if (cp.events & physx::PxPairFlag::eNOTIFY_TOUCH_LOST) {
+                            pComponent->OnCollisionExit(data);
+                        }
                     }
                 }
             }

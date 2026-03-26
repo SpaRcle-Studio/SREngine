@@ -190,7 +190,6 @@ namespace SR_PTYPES_NS {
         SR_MATH_NS::Quaternion m_rotation;
         SR_MATH_NS::FVector3 m_scale = SR_MATH_NS::FVector3::One();
 
-
         bool m_isBodyDirty = true;
         bool m_isMatrixDirty = false;
         bool m_isShapeDirty = false;

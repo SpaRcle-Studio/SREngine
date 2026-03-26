@@ -5,14 +5,12 @@
 #ifndef SR_ENGINE_PHYSICSLIB_H
 #define SR_ENGINE_PHYSICSLIB_H
 
-#include <Physics/macros.h>
+#include <Physics/Utils/Utils.h>
 
 #include <Utils/Common/Measurement.h>
 #include <Utils/Common/Singleton.h>
 #include <Utils/Math/Vector3.h>
 #include <Utils/Types/SharedPtr.h>
-
-#include <Physics/Utils/Utils.h>
 
 namespace SR_PTYPES_NS {
     class PhysicsMaterial;

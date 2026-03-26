@@ -23,6 +23,8 @@ namespace SR_PHYSICS_NS {
         SR_NODISCARD bool IsShapeSupported(ShapeType type) const override;
         SR_NODISCARD ShapeType GetDefaultShape() const override { return ShapeType::Box3D; }
 
+        SR_NODISCARD CharacterControllerImpl* CreateCharacterControllerImpl() override;
+
         SR_NODISCARD SR_PTYPES_NS::CollisionShapeImpl* CreateCollisionShapeImpl() override;
         SR_NODISCARD SR_PTYPES_NS::Rigidbody3DImpl* CreateRigidbody3DImpl() override;
         SR_NODISCARD SR_PHYSICS_NS::PhysicsWorld* CreatePhysicsWorld(Space space) override;

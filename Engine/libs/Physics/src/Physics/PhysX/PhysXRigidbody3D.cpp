@@ -79,7 +79,9 @@ namespace SR_PTYPES_NS {
 
         UpdateLocks();
 
-        m_rigidActor->userData = (void*)m_rigidbody;
+        m_userData.pUserData = (void*)m_rigidbody;
+        m_userData.type = RigidActorUserData::Type::Rigidbody;
+        m_rigidActor->userData = &m_userData;
 
         m_rigidbody->UpdateMatrix(true);
         m_rigidbody->SetShapeDirty(true);
@@ -302,7 +304,6 @@ namespace SR_PTYPES_NS {
         bool changed = false;
 
         if (m_rigidbodyTranslation.IsFinite()) {
-            //deltaTranslation = (rigidbodyTranslation - m_rigidbody->GetCenterDirection()) - m_rigidbodyTranslation;
             deltaTranslation = (rigidbodyTranslation) - m_rigidbodyTranslation;
         }
 

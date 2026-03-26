@@ -47,6 +47,7 @@ namespace SR_PTYPES_NS {
 
     private:
         physx::PxRigidActor* m_rigidActor = nullptr;
+        RigidActorUserData m_userData;
 
     };
 }

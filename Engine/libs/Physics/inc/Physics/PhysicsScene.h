@@ -5,9 +5,8 @@
 #ifndef SR_ENGINE_PHYSICSSCENE_H
 #define SR_ENGINE_PHYSICSSCENE_H
 
-#include <Physics/macros.h>
-
 #include <Physics/PhysicsLib.h>
+
 #include <Utils/Types/SafePointer.h>
 
 namespace SR_WORLD_NS {
@@ -19,6 +18,7 @@ namespace SR_PHYSICS_NS::Types {
 }
 
 namespace SR_PHYSICS_NS {
+    class CharacterController;
     class PhysicsWorld;
 
     class PhysicsScene : public SR_HTYPES_NS::SafePtr<PhysicsScene> {
@@ -27,6 +27,7 @@ namespace SR_PHYSICS_NS {
         using Super = SR_HTYPES_NS::SafePtr<PhysicsScene>;
         using Ptr = Super;
         using RigidbodyPtr = SR_HTYPES_NS::SharedPtr<SR_PTYPES_NS::Rigidbody>;
+        using CharacterControllerPtr = SR_HTYPES_NS::SharedPtr<SR_PHYSICS_NS::CharacterController>;
         using PhysicsWorldPtr = SR_PHYSICS_NS::PhysicsWorld*;
         using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
         using ScenePtr = SR_HTYPES_NS::SharedPtr<SR_WORLD_NS::Scene>;
@@ -40,8 +41,11 @@ namespace SR_PHYSICS_NS {
         virtual void FixedUpdate();
         virtual bool Init();
 
-        virtual void Remove(RigidbodyPtr pRigidbody);
         virtual void Register(RigidbodyPtr pRigidbody);
+        virtual void Register(CharacterControllerPtr pController);
+
+        virtual void Remove(RigidbodyPtr pRigidbody);
+        virtual void Remove(CharacterControllerPtr pController);
 
         virtual void ClearForces();
 
@@ -56,8 +60,11 @@ namespace SR_PHYSICS_NS {
         virtual bool CreateDynamicWorld();
 
     private:
-        std::list<RigidbodyPtr> m_rigidbodyToRemove;
-        std::list<RigidbodyPtr> m_rigidbodyToRegister;
+        std::vector<RigidbodyPtr> m_rigidbodyToRemove;
+        std::vector<RigidbodyPtr> m_rigidbodyToRegister;
+
+        std::vector<CharacterControllerPtr> m_characterControllersToRemove;
+        std::vector<CharacterControllerPtr> m_characterControllersToRegister;
 
         ScenePtr m_scene;
 
