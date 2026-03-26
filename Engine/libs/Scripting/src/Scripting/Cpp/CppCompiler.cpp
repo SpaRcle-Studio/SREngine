@@ -354,6 +354,9 @@ namespace SR_SCRIPTING_NS {
         }
 
         const static std::vector<std::string> libs = {
+        #ifndef SR_ENGINE_STATIC_LIBRARY
+            "Engine",
+        #endif
         #ifndef SR_COMMON_STATIC_LIBRARY
             "Utils",
         #endif
