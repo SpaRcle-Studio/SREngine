@@ -316,6 +316,25 @@ namespace SR_PTYPES_NS {
         UpdateMatrix();
     }
 
+    void CollisionShape::SetCustomTriangleMeshIndices(const SR_HTYPES_NS::FastMemoryArray<uint32_t>& indices) {
+        SR_TRACY_ZONE;
+        m_customTriangleMeshData.indices.resize(indices.size());
+        std::memcpy(m_customTriangleMeshData.indices.data(), indices.data(), indices.size() * sizeof(uint32_t));
+        OnShapeDirty();
+    }
+
+    void CollisionShape::SwapCustomTriangleMeshVertices(SR_HTYPES_NS::FastMemoryArray<SR_MATH_NS::FVector3>& vertices) {
+        SR_TRACY_ZONE;
+        std::swap(m_customTriangleMeshData.vertices, vertices);
+        OnShapeDirty();
+    }
+
+    void CollisionShape::SwapCustomTriangleMeshIndices(SR_HTYPES_NS::FastMemoryArray<uint32_t>& indices) {
+        SR_TRACY_ZONE;
+        std::swap(m_customTriangleMeshData.indices, indices);
+        OnShapeDirty();
+    }
+
     void CollisionShape::Update(float_t dt) {
         if (m_impl) {
             m_impl->Update(dt);

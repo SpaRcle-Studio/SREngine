@@ -57,6 +57,10 @@ namespace SR_PTYPES_NS {
         SR_CLASS()
         friend class SR_PHYSICS_NS::PhysicsScene;
         using Super = SR_UTILS_NS::Component;
+        struct CustomTriangleMeshData {
+            SR_HTYPES_NS::FastMemoryArray<SR_MATH_NS::FVector3> vertices;
+            SR_HTYPES_NS::FastMemoryArray<uint32_t> indices;
+        };
     public:
         using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<PhysicsScene>;
         using Ptr = SR_HTYPES_NS::SharedPtr<CollisionShape>;
@@ -94,6 +98,10 @@ namespace SR_PTYPES_NS {
         void SetBounds(const SR_MATH_NS::FVector3& bounds);
         void SetPlaneSize(const SR_MATH_NS::FVector2& size);
 
+        void SwapCustomTriangleMeshIndices(SR_HTYPES_NS::FastMemoryArray<uint32_t>& indices);
+        void SetCustomTriangleMeshIndices(const SR_HTYPES_NS::FastMemoryArray<uint32_t>& indices);
+        void SwapCustomTriangleMeshVertices(SR_HTYPES_NS::FastMemoryArray<SR_MATH_NS::FVector3>& vertices);
+
         void SwapBoxes(SR_HTYPES_NS::FastMemoryArray<SR_MATH_NS::AABB>& boxes);
         SR_NODISCARD const SR_HTYPES_NS::FastMemoryArray<SR_MATH_NS::AABB>& GetBoxes() const { return m_boxes; }
 
@@ -113,6 +121,7 @@ namespace SR_PTYPES_NS {
         SR_NODISCARD const SR_MATH_NS::Quaternion& GetRotation() const noexcept { return m_rotation; }
         SR_NODISCARD const SR_MATH_NS::FVector3& GetScale() const noexcept { return m_scale; }
         SR_NODISCARD PhysicsMaterial::Ptr GetPhysicsMaterial() const noexcept { return m_materialData; }
+        SR_NODISCARD const CustomTriangleMeshData& GetCustomTriangleMeshData() const noexcept { return m_customTriangleMeshData; }
 
         SR_NODISCARD bool HasGeometry() const noexcept;
         SR_NODISCARD bool IsShapeValid() const noexcept;
@@ -139,6 +148,8 @@ namespace SR_PTYPES_NS {
 
         SR_PTYPES_NS::PhysicsMaterial::Ptr m_materialData;
         SR_HTYPES_NS::FastMemoryArray<SR_MATH_NS::AABB> m_boxes;
+
+        CustomTriangleMeshData m_customTriangleMeshData;
 
     protected:
         /// @property @onChanged(ReInitRigidbody)

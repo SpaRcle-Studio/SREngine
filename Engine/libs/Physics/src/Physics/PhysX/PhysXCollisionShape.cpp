@@ -97,6 +97,20 @@ namespace SR_PTYPES_NS {
                 }
                 case ShapeType::TriangleMesh3D: {
                     m_shapes.resize(1);
+
+                    auto&& customTriangleMesh = GetShape()->GetCustomTriangleMeshData();
+                    if (!customTriangleMesh.vertices.empty() && !customTriangleMesh.indices.empty()) {
+                        physx::PxTriangleMesh* pTriangleMesh = CreateTriangleMesh(customTriangleMesh.vertices, customTriangleMesh.indices);
+
+                        if (!pTriangleMesh) {
+                            SR_ERROR("PhysXCollisionShape::UpdateShape() : failed to create triangle mesh from custom data!");
+                            return false;
+                        }
+
+                        m_shapes[0] = pPhysics->createShape(physx::PxTriangleMeshGeometry(pTriangleMesh), *pMaterial);
+                        break;
+                    }
+
                     SR_HTYPES_NS::RawMesh::Ptr pRawMesh = GetShape()->GetRawMesh();
 
                     if (!pRawMesh) {
@@ -202,7 +216,7 @@ namespace SR_PTYPES_NS {
                 break;
         }
 
-        if (type != ShapeType::Boxes3D) {
+        if (type != ShapeType::Boxes3D && type != ShapeType::TriangleMesh3D) {
             physx::PxTransform localPose(translation, rotation);
             for (auto&& pShape : m_shapes) {
                 if (pShape) {
@@ -258,6 +272,62 @@ namespace SR_PTYPES_NS {
         cooking->release();
 
         return convexMesh;
+    }
+
+    SR_NODISCARD physx::PxTriangleMesh* PhysXCollisionShape::CreateTriangleMesh(
+        const SR_HTYPES_NS::FastMemoryArray<SR_MATH_NS::FVector3>& vertices,
+        const SR_HTYPES_NS::FastMemoryArray<uint32_t>& indices
+    ) {
+        SR_TRACY_ZONE;
+
+        if (vertices.empty() || indices.empty()) {
+            SR_ERROR("PhysXCollisionShape::CreateTriangleMesh() : vertices or indices are empty!");
+            return nullptr;
+        }
+
+        auto&& pPhysics = GetShape()->GetRigidbody()->GetLibrary<PhysXLibraryImpl>()->GetPxPhysics();
+
+        physx::PxTriangleMeshDesc meshDesc = {};
+
+        meshDesc.points.count  = static_cast<physx::PxU32>(vertices.size());
+        meshDesc.points.stride = sizeof(float_t) * 3;
+        meshDesc.points.data   = vertices.data();
+
+        meshDesc.triangles.count  = static_cast<physx::PxU32>(indices.size() / 3);
+        meshDesc.triangles.stride = sizeof(uint32_t) * 3;
+        meshDesc.triangles.data   = indices.data();
+
+        //meshDesc.flags |= physx::PxMeshFlag::eDISABLE_CLEAN_MESH;
+        //meshDesc.flags |= physx::PxMeshFlag::eDISABLE_ACTIVE_EDGES_PRECOMPUTE;
+        //meshDesc.flags |= physx::PxMeshFlag::ePREFER_FAST_COOKING;
+
+        physx::PxCookingParams params(pPhysics->getTolerancesScale());
+        params.meshPreprocessParams =
+                static_cast<physx::PxMeshPreprocessingFlag::Enum>(physx::PxMeshPreprocessingFlag::eDISABLE_CLEAN_MESH |
+                                                                  physx::PxMeshPreprocessingFlag::eDISABLE_ACTIVE_EDGES_PRECOMPUTE);
+
+        //params.meshCookingHint = physx::PxMeshCookingHint::eCOOKING_PERFORMANCE;
+
+        physx::PxTriangleMesh* triangleMesh = nullptr;
+        physx::PxDefaultMemoryOutputStream writeBuffer;
+
+        physx::PxCooking* cooking = PxCreateCooking(0, pPhysics->getFoundation(), params);
+
+        {
+            SR_TRACY_ZONE_N("cookTriangleMesh");
+            if (cooking->cookTriangleMesh(meshDesc, writeBuffer)) {
+                physx::PxDefaultMemoryInputData id(writeBuffer.getData(), writeBuffer.getSize());
+                SR_TRACY_ZONE_N("createTriangleMesh");
+                triangleMesh = pPhysics->createTriangleMesh(id);
+            }
+        }
+
+        {
+            SR_TRACY_ZONE_N("releaseCooking");
+            cooking->release();
+        }
+
+        return triangleMesh;
     }
 
     physx::PxTriangleMesh* PhysXCollisionShape::CreateTriangleMesh(SR_HTYPES_NS::RawMesh* pRawMesh) {

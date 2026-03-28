@@ -24,6 +24,11 @@ namespace SR_PTYPES_NS {
         SR_NODISCARD physx::PxConvexMesh* CreateConvexMesh(SR_HTYPES_NS::RawMesh* pRawMesh);
         SR_NODISCARD physx::PxTriangleMesh* CreateTriangleMesh(SR_HTYPES_NS::RawMesh* pRawMesh);
 
+        SR_NODISCARD physx::PxTriangleMesh* CreateTriangleMesh(
+            const SR_HTYPES_NS::FastMemoryArray<SR_MATH_NS::FVector3>& vertices,
+            const SR_HTYPES_NS::FastMemoryArray<uint32_t>& indices
+        );
+
         SR_NODISCARD const std::vector<void*>& GetHandles() const noexcept override;
 
     private:
