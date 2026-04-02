@@ -35,6 +35,7 @@ namespace SR_SCRIPTING_NS {
         SR_NODISCARD bool ExecuteInEditMode() const override;
 
         template<typename T = CppBehaviour> T* GetBehaviour() {
+            SR_TRACY_ZONE;
             if (!m_cppBehaviour) {
                 return nullptr;
             }
@@ -43,7 +44,11 @@ namespace SR_SCRIPTING_NS {
                 return m_cppBehaviour->GetBehaviour().Get();
             }
             else {
-                return dynamic_cast<T*>(m_cppBehaviour->GetBehaviour().Get());
+                auto&& pBehaviour = m_cppBehaviour->GetBehaviour().Get();
+                if (pBehaviour->GetMeta()->IsSameOrInherited(T::GetClassStaticName())) {
+                    return static_cast<T*>(pBehaviour);
+                }
+                return nullptr;
             }
         }
 

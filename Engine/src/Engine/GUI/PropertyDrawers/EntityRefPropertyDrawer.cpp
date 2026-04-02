@@ -7,6 +7,8 @@
 #include <Engine/GUI/EditorGUI.h>
 #include <Engine/Engine.h>
 
+#include <Scripting/Base/Behaviour.h>
+
 #include <Utils/ECS/EntityRef.h>
 #include <Utils/ECS/SceneObject.h>
 #include <Utils/ECS/Component.h>
@@ -110,12 +112,25 @@ namespace SR_CORE_GUI_NS {
                             }
                         }
                         if (!components.empty() && components.front()) {
+                            static const auto&& behaviourMeta = SR_SCRIPTING_NS::Behaviour::GetMetaStatic();
+
                             if (components.front()->GetMeta()->IsSameOrInherited(entityType)) {
                                 if (context.onBeforeChangeCallback) {
                                     context.onBeforeChangeCallback(false);
                                 }
                                 feedback.isChanged = true;
                                 pEntityRef->SetEntityId(components.front()->GetEntityId());
+                            }
+                            else if (components.front()->GetMeta()->IsSameOrInherited(behaviourMeta->GetFactoryName())) {
+                                if (auto&& pBehaviour = components.front().StaticCast<SR_SCRIPTING_NS::Behaviour>()) {
+                                    if (auto&& pInnerBehaviour = pBehaviour->GetBehaviour(); pInnerBehaviour && pInnerBehaviour->GetMeta()->IsSameOrInherited(entityType)) {
+                                        if (context.onBeforeChangeCallback) {
+                                            context.onBeforeChangeCallback(false);
+                                        }
+                                        feedback.isChanged = true;
+                                        pEntityRef->SetEntityId(components.front()->GetEntityId());
+                                    }
+                                }
                             }
                         }
                     }

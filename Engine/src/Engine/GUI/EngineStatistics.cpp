@@ -641,6 +641,10 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_GUI_NS::Immediate::Separator();
 
+        if (SR_GRAPH_GUI_NS::Immediate::Button("Crash video driver")) {
+            pPipeline->CrashDriver();
+        }
+
         SR_GRAPH_GUI_NS::Immediate::Text("Status:");
         SR_GRAPH_GUI_NS::Immediate::SameLine();
 

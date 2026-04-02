@@ -76,6 +76,8 @@ namespace SR_PHYSICS_NS {
         using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
         using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<PhysicsScene>;
     public:
+        ~CharacterController() override;
+
         void OnDestroy() override;
         void OnEnable() override;
         void OnDisable() override;
@@ -87,6 +89,8 @@ namespace SR_PHYSICS_NS {
         );
 
         bool InitController();
+        void ReleaseController();
+
         bool UpdateMatrix(bool force);
 
         void SetMaterial(const SR_UTILS_NS::Path& path);

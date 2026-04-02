@@ -25,7 +25,12 @@ namespace SR_PHYSICS_NS {
                 return physx::PxQueryHitType::eNONE;
             }
 
-            auto&& pRigidbody = reinterpret_cast<SR_PTYPES_NS::Rigidbody3D*>(pActor->userData);
+            auto&& pUserData = static_cast<RigidActorUserData*>(pActor->userData);
+            if (!pUserData || pUserData->type != RigidActorUserData::Type::Rigidbody) {
+                return physx::PxQueryHitType::eNONE;
+            }
+
+            auto&& pRigidbody = reinterpret_cast<SR_PTYPES_NS::Rigidbody3D*>(pUserData->pUserData);
             if (!pRigidbody) {
                 return physx::PxQueryHitType::eNONE;
             }
@@ -97,7 +102,12 @@ namespace SR_PHYSICS_NS {
                 continue;
             }
 
-            auto* pRigidbody = reinterpret_cast<SR_PTYPES_NS::Rigidbody3D*>(pActor->userData);
+            auto&& pUserData = static_cast<RigidActorUserData*>(pActor->userData);
+            if (!pUserData || pUserData->type != RigidActorUserData::Type::Rigidbody) {
+                continue;
+            }
+
+            auto* pRigidbody = reinterpret_cast<SR_PTYPES_NS::Rigidbody3D*>(pUserData->pUserData);
             if (!pRigidbody) {
                 continue;
             }

@@ -56,7 +56,10 @@ namespace SR_PHYSICS_NS {
         void SetIsGameMode(bool enabled) noexcept { m_isGameMode = enabled; }
 
     private:
-        virtual bool Flush();
+        SR_NODISCARD bool IsSceneEmpty() const noexcept;
+
+        bool Flush();
+
         virtual bool CreateDynamicWorld();
 
     private:

@@ -188,9 +188,11 @@ namespace SR_PHYSICS_NS {
 
         if (auto&& pControllerImpl = (physx::PxController*)pImpl->GetHandle()) {
             pControllerImpl->release();
+            pController->ReleaseController();
             return true;
         }
 
+        pController->ReleaseController();
         SR_ERROR("PhysXPhysicsWorld::RemoveCharacterController() : failed to get character controller handle!");
         return false;
     }
@@ -248,6 +250,9 @@ namespace SR_PHYSICS_NS {
             m_staticActors.resize(count);
         }
 
+        uint32_t cookedCount = 0;
+        constexpr uint32_t maxCookPerFrame = 1;
+
         auto&& pActors = m_staticActors.data();
         m_scene->getActors(physx::PxActorTypeFlag::Enum::eRIGID_STATIC, pActors, count);
 
@@ -270,9 +275,22 @@ namespace SR_PHYSICS_NS {
                         continue;
                     }
 
-                    if (pRigidbody->UpdateShape() == RBUpdShapeRes::Error) {
+                    const RBUpdShapeRes result = pRigidbody->UpdateShape();
+                    if (result == RBUpdShapeRes::Error) {
                         SR_ERROR("PhysXPhysicsWorld::Synchronize() : failed to update shape!");
                         continue;
+                    }
+
+                    if (result == RBUpdShapeRes::Updated) {
+                        for (auto&& pShape : pRigidbody->GetShapes()) {
+                            if (pShape->GetType() == ShapeType::TriangleMesh3D) {
+                                cookedCount++;
+                            }
+                        }
+                    }
+
+                    if (cookedCount > maxCookPerFrame) {
+                        return true;
                     }
 
                     if (pRigidbody->IsMatrixDirty()) {

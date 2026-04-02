@@ -25,50 +25,11 @@ namespace SR_PHYSICS_NS {
     PhysicsScene::~PhysicsScene() {
         SR_TRACY_ZONE;
 
-        auto&& removeRigidbody = [&](SR_PTYPES_NS::Rigidbody::Ptr pRigidbody) {
-            if (!pRigidbody) {
-                return;
+        if (!IsSceneEmpty()) {
+            SR_LOG("PhysicsScene::~PhysicsScene() : physics scene is not empty! Flushing the scene before destruction...");
+            while (!IsSceneEmpty()) {
+                Flush();
             }
-
-            auto&& type = pRigidbody->GetMeasurement();
-
-            if (type == SR_UTILS_NS::Measurement::Space2D) {
-                if (m_2DWorld) {
-                    m_2DWorld->RemoveRigidbody(pRigidbody);
-                }
-            }
-            else if (type == SR_UTILS_NS::Measurement::Space3D) {
-                if (m_3DWorld) {
-                    m_3DWorld->RemoveRigidbody(pRigidbody);
-                }
-            }
-            else {
-                SRHalt("Unknown measurement of rigidbody!");
-            }
-
-            if (!pRigidbody->HasParent()) {
-                pRigidbody.AutoFree();
-            }
-            else {
-                SRHalt("Something went wrong...");
-            }
-        };
-
-        std::set<RigidbodyPtr> rigidbodies;
-
-        for (auto&& pRigidbody : m_rigidbodyToRegister) {
-            rigidbodies.insert(pRigidbody);
-        }
-
-        for (auto&& pRigidbody : m_rigidbodyToRemove) {
-            rigidbodies.insert(pRigidbody);
-        }
-
-        m_rigidbodyToRemove.clear();
-        m_rigidbodyToRegister.clear();
-
-        for (auto&& pRigidbody : rigidbodies) {
-            removeRigidbody(pRigidbody);
         }
 
         SR_SAFE_DELETE_PTR(m_2DWorld);
@@ -286,5 +247,9 @@ namespace SR_PHYSICS_NS {
 
     void PhysicsScene::ClearForces() {
         m_needClearForces = true;
+    }
+
+    bool PhysicsScene::IsSceneEmpty() const noexcept {
+        return m_rigidbodyToRegister.empty() && m_rigidbodyToRemove.empty() && m_characterControllersToRegister.empty() && m_characterControllersToRemove.empty();
     }
 }

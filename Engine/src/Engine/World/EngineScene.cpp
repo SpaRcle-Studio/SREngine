@@ -149,6 +149,7 @@ namespace SR_CORE_NS {
     void EngineScene::UpdateFrequency() {
         const uint32_t framesPerSecond = 60;
         m_updateFrequency = (1.f / (static_cast<float_t>(framesPerSecond) * m_speed));
+        SR_HTYPES_NS::Time::Instance().SetFixedDeltaTime(m_updateFrequency);
     }
 
     void EngineScene::FixedStep(bool isPaused) {

@@ -13,6 +13,10 @@
 #include <Codegen/CharacterController.generated.hpp>
 
 namespace SR_PHYSICS_NS {
+    CharacterController::~CharacterController() {
+        SRAssert2(!m_impl, "CharacterController::~CharacterController() : controller implementation not released!");
+    }
+
     void CharacterController::OnEnable() {
         SR_TRACY_ZONE;
         if (auto&& physicsScene = GetPhysicsScene()) {
@@ -42,6 +46,13 @@ namespace SR_PHYSICS_NS {
         return m_physicsScene;
     }
 
+    void CharacterController::ReleaseController() {
+        if (m_impl) {
+            m_impl->SetCharacterController(nullptr);
+            SR_SAFE_DELETE_PTR(m_impl);
+        }
+    }
+
     bool CharacterController::InitController() {
         if (m_impl) {
             SRHalt("CharacterController::InitController() : controller already initialized!");
@@ -67,10 +78,17 @@ namespace SR_PHYSICS_NS {
 
     void CharacterController::OnDestroy() {
         SR_TRACY_ZONE;
-        if (auto&& physicsScene = GetPhysicsScene()) {
-            physicsScene->Remove(this);
+
+        /// Super::OnDestroy();
+        /// TODO: неправильно. уничтожение компонента делегировано другой сущности (PhysicsScene)
+        SetParent(nullptr);
+
+        if (auto&& pPhysicsScene = GetPhysicsScene()) {
+            pPhysicsScene->Remove(this);
         }
-        Super::OnDestroy();
+        else {
+            GetThis().AutoFree();
+        }
     }
 
     void CharacterController::SetMaterial(const SR_UTILS_NS::Path& path) {
