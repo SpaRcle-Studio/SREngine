@@ -129,6 +129,7 @@ int SREngineEntryPointFromExternalModule(int argc, char** argv, bool notFoundAsE
     namespace fs = std::filesystem;
 
     auto&& currentPath = fs::absolute(argv[0]).parent_path();
+
     for (const auto& entry : fs::directory_iterator(currentPath)) {
         if (!entry.is_regular_file() || entry.path().extension() != DYNAMIC_MODULE_EXTENSION) {
             continue;
@@ -138,7 +139,7 @@ int SREngineEntryPointFromExternalModule(int argc, char** argv, bool notFoundAsE
             std::string modulePath = entry.path().generic_string();
             pModuleHandle = LoadDynamicModule(modulePath.c_str());
             if (!pModuleHandle) {
-                std::cerr << "Failed to load engine library: " << entry.path() << std::endl;
+                std::cerr << "Failed to load engine library: " << modulePath << std::endl;
                 std::cerr << "Enter any key to continue..." << std::endl;
                 std::cin.get();
                 return ERROR_MODULE_LOAD_FAILED;

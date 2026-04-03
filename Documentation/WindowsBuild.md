@@ -7,6 +7,12 @@
     > - 0.4. Install [MS Build Tools](https://download.visualstudio.microsoft.com/download/pr/996d318f-4bd0-4f73-8554-ea3ed556ce9b/9610a60ad452c33dd3f9e8d3b4ce5d88d278f8b063d88717e08e1c0c13c29233/vs_BuildTools.exe) for Visual Studio 16.11.29 or newer (if you are using CLion).
     > - 0.5. Make sure you have Python 3 installed and added to environment variables.
 
+!!! warning "vcpkg"
+    If you use Visual Studio, make sure you don't have vcpkg with zlib installed. 
+    It can cause undefined behavior. 
+    If you have it, uninstall it or remove zlib from vcpkg.
+    Use "vcpkg list | findstr zlib" to check if you have it.
+
 ===  "Working with CMake GUI (Visual Studio)"
 
     - 4.1.1. Open CMake GUI.

@@ -4,6 +4,11 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND NOT MSVC AND NOT ANDROID_NDK)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++ -std=c++20")
 endif()
 
+# Очистим все пути vcpkg, которые CMake может видеть
+set(CMAKE_PREFIX_PATH "" CACHE PATH "Override vcpkg paths")
+set(CMAKE_PROGRAM_PATH "" CACHE PATH "")
+set(CMAKE_FIND_ROOT_PATH "" CACHE PATH "")
+
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 option(SR_CI_BUILD "Build in CI mode" OFF)
