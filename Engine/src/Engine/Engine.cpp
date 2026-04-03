@@ -585,4 +585,38 @@ namespace SR_CORE_NS {
             }
         }
     }
+
+    void Engine::SetFpsLimit(uint32_t fps) {
+        SR_LOCK_GUARD;
+        if (fps == 0) {
+            m_isFpsLimited = false;
+        }
+        else {
+            m_isFpsLimited = true;
+            m_targetFps = fps;
+            m_targetFrameTime = std::chrono::nanoseconds(1'000'000'000 / m_targetFps);
+        }
+    }
+
+    void Engine::EnableFpsLimit(bool enabled) {
+        SR_LOCK_GUARD;
+        m_isFpsLimited = enabled;
+    }
+
+    void Engine::BeginFrame() {
+        SR_TRACY_ZONE;
+        m_frameStartTime = Clock::now();
+    }
+
+    void Engine::EndFrame() {
+        SR_TRACY_ZONE;
+        if (m_isFpsLimited) {
+            const auto& frameEndTime = Clock::now();
+            const auto& frameDuration = frameEndTime - m_frameStartTime;
+
+            if (frameDuration < m_targetFrameTime) {
+                std::this_thread::sleep_for(m_targetFrameTime - frameDuration);
+            }
+        }
+    }
 }

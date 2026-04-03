@@ -78,6 +78,11 @@ namespace SR_CORE_NS {
         void SetGameMode(bool enabled);
         void SetOneFramePauseSkip(bool enabled) { m_oneFramePauseSkip = enabled; }
 
+        void SetFpsLimit(uint32_t fps);
+        void EnableFpsLimit(bool enabled);
+        void BeginFrame();
+        void EndFrame();
+
         bool IsNeedReloadResources();
 
         void ProcessInput(float_t dt);
@@ -154,6 +159,10 @@ namespace SR_CORE_NS {
         std::vector<WindowPtr> m_windows;
         /// std::optional<Utils::CursorLock> m_cursorLockOpt = std::nullopt;
 
+        bool m_isFpsLimited = true;
+        uint32_t m_targetFps = 120;
+        std::chrono::nanoseconds m_targetFrameTime{1'000'000'000 / 120};
+        SR_UTILS_NS::TimePointType m_frameStartTime;
     };
 }
 
