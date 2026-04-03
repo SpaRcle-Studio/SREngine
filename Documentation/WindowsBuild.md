@@ -15,60 +15,60 @@
 
 ===  "Working with CMake GUI (Visual Studio)"
 
-    - 1. Open CMake GUI.
+    1. Open CMake GUI.
   
-    - 2. Choose the path to the SREngine folder (where the source code is located).
+    2. Choose the path to the SREngine folder (where the source code is located).
   
-    - 3. Choose the path where to build the binaries (ex. SREngine/build).
-     
-    - 4. Press "Configure" and choose your VS version.
+    3. Choose the path where to build the binaries (ex. SREngine/build).
     
-    - 5. Press `Generate`.
+    4. Press "Configure" and choose your VS version.
+    
+    5. Press `Generate`.
 
-    - 6. Open Visual Studio solution.
+    6. Open Visual Studio solution.
 
-    - 7. In Visual Studio right-click on SREngine and press `Set as Startup Project`.
+    7. In Visual Studio right-click on SREngine and press `Set as Startup Project`.
 
-    - 8. Run build.
+    8. Run build.
 
 === "Working with CMake in CMD (Visual Studio)"
 
-    - 1. Open CMD in root directory of the repository and run the following commands:
+    1. Open CMD in root directory of the repository and run the following commands:
   
-    - 2. mkdir build
+    2. mkdir build
 
-    - 3. cd build
+    3. cd build
   
-    - 4. ```cmake -G "VISUAL_STUDIO_VERSION" ../ -DCMAKE_BUILD_TYPE=Debug```
+    4. ```cmake -G "VISUAL_STUDIO_VERSION" ../ -DCMAKE_BUILD_TYPE=Debug```
 
-        * Replace `VISUAL_STUDIO_VERSION` with your version ex. `Visual Studio 17 2022` 
-     
-    - 5. Now you have your solution generated and you can open it with Visual Studio
+      * Replace `VISUAL_STUDIO_VERSION` with your version ex. `Visual Studio 17 2022` 
     
-    - 6. In Visual Studio right-click on SREngine and press `Set as Startup Project`
+    5. Now you have your solution generated and you can open it with Visual Studio
+    
+    6. In Visual Studio right-click on SREngine and press `Set as Startup Project`
 
-    - 7. Build and Run the game engine!
+    7. Build and Run the game engine!
 
 === "Working with CLion"
 
-    - 1. Press Ctrl + Alt + S to open Settings window.
+    1. Press Ctrl + Alt + S to open Settings window.
     
-    - 2. Select `Build, Execution, Deployment` on the left.
+    2. Select `Build, Execution, Deployment` on the left.
     
-    - 3. Select `Toolchains`.
+    3. Select `Toolchains`.
     
-    - 4. Add (Alt + Insert) Visual Studio compiler.
+    4. Add (Alt + Insert) Visual Studio compiler.
     
-    - 5. Select `amd64` in `Architecture:`.
+    5. Select `amd64` in `Architecture:`.
     
-    - 6. Repeat "2"
+    6. Repeat "2"
     
-    - 7. Select `CMake`.
+    7. Select `CMake`.
     
-    - 8. Pass `-j n` argument as `Build options`, where `n` is a number of your logical processors minus 2.
+    8. Pass `-j n` argument as `Build options`, where `n` is a number of your logical processors minus 2.
     
-    - 9. In Project window right-click `SREngine` folder and click `Reload CMake Project`.
+    9. In Project window right-click `SREngine` folder and click `Reload CMake Project`.
     
-    - 10. Click `Run 'SREngine'` (Shift + F10).
+    10. Click `Run 'SREngine'` (Shift + F10).
 
 <img width="1920" alt="screenshot" src="https://raw.githubusercontent.com/SpaRcle-Studio/SREngine/dev/Documentation/images/clion%20toolchains.png">
