@@ -71,4 +71,4 @@
     
     - 10. Click `Run 'SREngine'` (Shift + F10).
 
-<img width="1920" alt="screenshot" src="https://github.com/SpaRcle-Studio/SREngine/blob/dev/Documentation/images/clion%20toolchains.png">
+<img width="1920" alt="screenshot" src="https://raw.githubusercontent.com/SpaRcle-Studio/SREngine/dev/Documentation/images/clion%20toolchains.png">
