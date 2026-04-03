@@ -267,30 +267,41 @@ namespace SR_CORE_NS {
     bool Application::MainLoop() {
         SR_TRACY_ZONE;
 
-        if (m_isNeedReload) {
-            Close();
-            m_hasErrors |= !Init();
-            m_isNeedReload = false;
-            if (m_hasErrors) {
-                SR_ERROR("Application::MainLoop() : failed to reload application!");
+        if (m_engine) {
+            m_engine->GetMainFrameLimiter().BeginFrame();
+        }
+
+        bool result = [this]() {
+            if (m_isNeedReload) {
+                Close();
+                m_hasErrors |= !Init();
+                m_isNeedReload = false;
+                if (m_hasErrors) {
+                    SR_ERROR("Application::MainLoop() : failed to reload application!");
+                    return false;
+                }
+            }
+
+            if (!m_engine) {
+                SR_ERROR("Application::MainLoop() : engine lost!");
+                m_hasErrors = true;
                 return false;
             }
+
+            if (!m_engine->Execute()) {
+                SR_SYSTEM_LOG("Application::MainLoop() : engine is not alive!");
+                return false;
+            }
+
+            return true;
+        }();
+
+        if (m_engine) {
+            m_engine->GetMainFrameLimiter().EndFrame();
         }
 
-        if (!m_engine) {
-            SR_ERROR("Application::MainLoop() : engine lost!");
-            m_hasErrors = true;
-            return false;
-        }
-
-        if (!m_engine->Execute()) {
-            SR_SYSTEM_LOG("Application::MainLoop() : engine is not alive!");
-            return false;
-        }
-
-        return true;
+        return result;
     }
-
     bool Application::Execute() {
         SR_INFO("Application::Execute() : waiting for the application to close...");
 

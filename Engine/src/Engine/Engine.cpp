@@ -585,4 +585,21 @@ namespace SR_CORE_NS {
             }
         }
     }
+
+    void Engine::SetFpsLimit(uint32_t fps) {
+        SR_LOCK_GUARD;
+        if (fps == 0) {
+            m_isFpsLimited = false;
+        }
+        else {
+            m_isFpsLimited = true;
+            m_renderFrameLimiter.SetTargetFPS(fps);
+        }
+    }
+
+    void Engine::EnableFpsLimit(bool enabled) {
+        SR_LOCK_GUARD;
+        m_isFpsLimited = enabled;
+    }
+
 }

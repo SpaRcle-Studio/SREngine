@@ -50,6 +50,35 @@ namespace SR_CORE_NS {
     class EngineScene;
     class Application;
 
+    class FrameLimiter {
+        using Clock = std::chrono::high_resolution_clock;
+    public:
+        void SetTargetFPS(uint32_t fps) {
+            SR_LOCK_GUARD;
+            m_targetFrameTime = std::chrono::nanoseconds(1'000'000'000 / fps);
+        }
+
+        void BeginFrame() {
+            SR_TRACY_ZONE;
+            m_frameStartTime = Clock::now();
+        }
+
+        void EndFrame() {
+            SR_TRACY_ZONE;
+            const auto& frameEndTime = Clock::now();
+            const auto& frameDuration = frameEndTime - m_frameStartTime;
+
+            if (frameDuration < m_targetFrameTime) {
+                std::this_thread::sleep_for(m_targetFrameTime - frameDuration);
+            }
+        }
+
+    private:
+        mutable std::recursive_mutex m_mutex;
+        std::chrono::nanoseconds m_targetFrameTime{1'000'000'000 / 120};
+        SR_UTILS_NS::TimePointType m_frameStartTime;
+    };
+
     class Engine : public SR_HTYPES_NS::SharedPtr<Engine> {
         using Super = SR_HTYPES_NS::SharedPtr<Engine>;
         using Ptr = SR_HTYPES_NS::SharedPtr<Engine>;
@@ -78,6 +107,9 @@ namespace SR_CORE_NS {
         void SetGameMode(bool enabled);
         void SetOneFramePauseSkip(bool enabled) { m_oneFramePauseSkip = enabled; }
 
+        void SetFpsLimit(uint32_t fps);
+        void EnableFpsLimit(bool enabled);
+
         bool IsNeedReloadResources();
 
         void ProcessInput(float_t dt);
@@ -105,6 +137,8 @@ namespace SR_CORE_NS {
         SR_NODISCARD EngineScene* GetEngineScene() const { return m_engineScene; }
         SR_NODISCARD bool IsApplicationFocused() const;
         SR_NODISCARD float_t GetFramerate() const;
+        SR_NODISCARD FrameLimiter& GetMainFrameLimiter() { return m_mainFrameLimiter; }
+        SR_NODISCARD FrameLimiter& GetRenderFrameLimiter() { return m_renderFrameLimiter; }
 
         SR_NODISCARD SR_UTILS_NS::Debug& GetDebugger() const;
 
@@ -154,7 +188,11 @@ namespace SR_CORE_NS {
         std::vector<WindowPtr> m_windows;
         /// std::optional<Utils::CursorLock> m_cursorLockOpt = std::nullopt;
 
+        bool m_isFpsLimited = true;
+        FrameLimiter m_mainFrameLimiter;
+        FrameLimiter m_renderFrameLimiter;
     };
 }
 
 #endif //SR_ENGINE_ENGINE_H
+

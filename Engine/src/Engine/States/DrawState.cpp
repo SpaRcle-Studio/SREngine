@@ -17,45 +17,54 @@ namespace SR_CORE_NS {
         SR_TRACY_ZONE;
 
         auto&& pEngine = GetContext().GetPointer<Engine>();
-        auto&& pRenderContext = pEngine->GetRenderContext();
 
-        if (pRenderContext) {
-            pRenderContext->PrepareFrame();
-        }
+        pEngine->GetRenderFrameLimiter().BeginFrame();
 
-        auto&& pWindow = pEngine->GetMainWindow();
-        if (!pWindow || !pWindow->IsVisible()) {
-            return SR_UTILS_NS::ThreadWorkerResult::Break;
-        }
+        auto&& result = [pEngine]() -> SR_UTILS_NS::ThreadWorkerResult {
+            auto&& pRenderContext = pEngine->GetRenderContext();
 
-        const bool isCollapsed = pWindow->IsWindowCollapsed();
+            if (pRenderContext) {
+                pRenderContext->PrepareFrame();
+            }
 
-        if (auto&& pRenderScene = pEngine->GetRenderScene(); pRenderScene && !isCollapsed) {
-            if (auto&& pWin = pWindow->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()) {
-                const bool isOverlay = pRenderScene->IsOverlayEnabled();
-                const bool isMaximized = pWin->IsMaximized();
-                const bool isHeaderEnabled = pWin->IsHeaderEnabled();
+            auto&& pWindow = pEngine->GetMainWindow();
+            if (!pWindow || !pWindow->IsVisible()) {
+                return SR_UTILS_NS::ThreadWorkerResult::Break;
+            }
 
-                if (isHeaderEnabled != !isOverlay) {
-                    pWin->SetHeaderEnabled(!isOverlay);
-                    if (isMaximized) {
-                        pWin->Maximize();
+            const bool isCollapsed = pWindow->IsWindowCollapsed();
+
+            if (auto&& pRenderScene = pEngine->GetRenderScene(); pRenderScene && !isCollapsed) {
+                if (auto&& pWin = pWindow->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()) {
+                    const bool isOverlay = pRenderScene->IsOverlayEnabled();
+                    const bool isMaximized = pWin->IsMaximized();
+                    const bool isHeaderEnabled = pWin->IsHeaderEnabled();
+
+                    if (isHeaderEnabled != !isOverlay) {
+                        pWin->SetHeaderEnabled(!isOverlay);
+                        if (isMaximized) {
+                            pWin->Maximize();
+                        }
                     }
                 }
+
+                pRenderScene->Render();
+            }
+            else if (auto&& pPipeline = pRenderContext->GetPipeline()) {
+                pPipeline->OnFrameBuildBegin();
+                pPipeline->BindCmdBuffer(SR_ID_INVALID);
+                if (pPipeline->BeginCmdBuffer()) {
+                    SR_GRAPH_NS::RenderScene::RenderBlackScreen(pPipeline.Get(), false);
+                    pPipeline->EndCmdBuffer();
+                }
+                pPipeline->OnFrameBuildEnd();
             }
 
-            pRenderScene->Render();
-        }
-        else if (auto&& pPipeline = pRenderContext->GetPipeline()) {
-            pPipeline->OnFrameBuildBegin();
-            pPipeline->BindCmdBuffer(SR_ID_INVALID);
-            if (pPipeline->BeginCmdBuffer()) {
-                SR_GRAPH_NS::RenderScene::RenderBlackScreen(pPipeline.Get(), false);
-                pPipeline->EndCmdBuffer();
-            }
-            pPipeline->OnFrameBuildEnd();
-        }
+            return SR_UTILS_NS::ThreadWorkerResult::Success;
+        }();
 
-        return SR_UTILS_NS::ThreadWorkerResult::Success;
+        pEngine->GetRenderFrameLimiter().EndFrame();
+
+        return result;
     }
 }
