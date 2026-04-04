@@ -601,5 +601,4 @@ namespace SR_CORE_NS {
         SR_LOCK_GUARD;
         m_isFpsLimited = enabled;
     }
-
 }
