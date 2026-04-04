@@ -21,7 +21,7 @@
   
     3. Choose the path where to build the binaries (ex. SREngine/build).
     
-    4. Press "Configure" and choose your VS version.
+    4. Press `Configure` and choose your VS version.
     
     5. Press `Generate`.
 

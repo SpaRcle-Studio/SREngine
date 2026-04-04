@@ -23,13 +23,27 @@
 [[uniform], [public]] vec3 emissionColor = vec3(1.0, 1.0, 1.0);
 [[uniform], [public]] float emissionIntensity = 1.0;
 
+#ifndef STANDARD_SHADER_CUSTOM_FRAGMENT
+vec2 fragment_uv() {
+    return UV;
+}
+
+vec4 fragment_diffuse(vec2 tiledUV) {
+    return texture(diffuse, tiledUV);
+}
+
+vec2 fragment_normal(vec2 uv) {
+    return texture(normal, uv).rg;
+}
+#endif
+
 void fragment() {
     COLOR_INDEX_1 = vec4(gl_FragCoord.z);
     COLOR_INDEX_2 = vec4(VERTEX, 1.0);
 
-    vec2 tiledUV = UV * tiling + offset;
-    vec4 diffuseColorBase = texture(diffuse, tiledUV);
-    vec4 diffuseColor = diffuseColorBase * color;
+    vec2 uv = fragment_uv();
+    vec2 tiledUV = uv * tiling + offset;
+    vec4 diffuseColor = fragment_diffuse(tiledUV) * color;
 
 #ifdef HAS_ALPHA
     #ifdef HAS_ALPHA_MASK
@@ -50,11 +64,11 @@ void fragment() {
     float maybe_unused_shadowIntensity = shadowIntensity;
 
 #ifdef HAS_DETAIL_WEIGHT
-    float detailWeightValue = texture(detailWeight, UV).r;
+    float detailWeightValue = texture(detailWeight, uv).r;
 #endif
 
 #ifdef HAS_ROUGHNESS
-    float roughnessValue = texture(roughness, UV).r;
+    float roughnessValue = texture(roughness, uv).r;
     #ifdef HAS_DETAIL_WEIGHT
         // базовый roughness → более шероховатый в местах detail
         roughnessValue = mix(
@@ -75,7 +89,7 @@ void fragment() {
 #endif
 
 #ifdef HAS_EMISSION
-    vec3 emissionValue = vec3(texture(emission, UV).r) * emissionIntensity * emissionColor;
+    vec3 emissionValue = vec3(texture(emission, uv).r) * emissionIntensity * emissionColor;
 #else
     vec3 emissionValue = vec3(0.0);
 #endif
@@ -83,7 +97,7 @@ void fragment() {
 #ifdef HAS_NORMAL
     //vec3 tangentNormal = normalize(texture(normal, UV).rgb * 2.0 - 1.0);
 
-    vec2 enc = texture(normal, UV).rg;
+    vec2 enc = fragment_normal(uv);
     vec3 tangentNormal;
     tangentNormal.xy = enc * 2.0 - 1.0;
     tangentNormal.y *= -1.0;
