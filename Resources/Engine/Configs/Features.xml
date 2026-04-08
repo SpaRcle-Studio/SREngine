@@ -10,6 +10,7 @@
     </Unused>
     <Common>
         <!-- Debug -->
+        <DebugRendererMeshes Value="true"/>
         <ShowScriptsCodegenResult Value="false"/>
         <SegmentationHandler Value="false"/>
         <ResourceUsePointStackTraceProfiling Value="false"/>

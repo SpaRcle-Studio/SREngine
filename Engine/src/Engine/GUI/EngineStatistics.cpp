@@ -206,12 +206,13 @@ namespace SR_CORE_GUI_NS {
 
                         if (auto&& macros = pShader->GetMacros(); m_showShaderMacros && !macros.empty()) {
                             SR_GRAPH_GUI_NS::Immediate::Text("\tMacros: ");
-                            for (auto&& [key, value] : macros.GetParams()) {
-                                if (value.empty()) {
-                                    SR_GRAPH_GUI_NS::Immediate::Text("\t\t%s ", key.c_str());
+                            for (auto&& entry : macros.GetParams()) {
+                                m_stringCache = entry.GetValue(macros.GetBuffer());
+                                if (m_stringCache.empty()) {
+                                    SR_GRAPH_GUI_NS::Immediate::Text("\t\t%s ", entry.key.c_str());
                                     continue;
                                 }
-                                SR_GRAPH_GUI_NS::Immediate::Text("\t\t%s=%s ", key.c_str(), value.c_str());
+                                SR_GRAPH_GUI_NS::Immediate::Text("\t\t%s=%s ", entry.key.c_str(), m_stringCache.c_str());
                             }
                         }
 
@@ -497,7 +498,8 @@ namespace SR_CORE_GUI_NS {
                     SR_GRAPH_GUI_NS::Immediate::Text("\t\t\t\t* GameObject: %s", pMeshComponent->GetGameObject()->GetName().c_str());
                 }
                 else {
-                    SR_GRAPH_GUI_NS::Immediate::Text("\t\t\t\t* Geometry: %s", meshInfo.pMesh->GetMeshIdentifier().c_str());
+                    SR_GRAPH_GUI_NS::Immediate::Text("\t\t\t\t* Geometry: Unknown");
+                    //SR_GRAPH_GUI_NS::Immediate::Text("\t\t\t\t* Geometry: %s", meshInfo.pMesh->GetMeshIdentifier().c_str());
                 }
 
                 SR_GRAPH_GUI_NS::Immediate::SameLine();
@@ -684,9 +686,9 @@ namespace SR_CORE_GUI_NS {
                     name = pRawMeshHolder->GetMeshPath().ToStringView();
                 }
 
-                if (name.empty()) {
-                    name = pMesh->GetMeshIdentifier();
-                }
+                //if (name.empty()) {
+                //    name = pMesh->GetMeshIdentifier();
+                //}
 
                 if (name.empty()) {
                     name = SR_UTILS_NS::EnumReflector::ToStringAtom(pMesh->GetMeshType());

@@ -32,7 +32,7 @@ namespace SR_CORE_NS::Tests {
 
                 file = file.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
 
-                if (auto&& pShader = SR_SRSL_NS::SRSLShader::Load(file, SR_SRSL_NS::ShaderMacrosParams::GetDefault())) {
+                if (auto&& pShader = SR_SRSL_NS::SRSLShader::Load(file, SR_SRSL_NS::ShaderParams::GetDefault())) {
                     SR_SRSL_NS::ISRSLCodeGenerator::SRSLCodeGenRes result = SR_SRSL_NS::GLSLCodeGenerator::Instance().GenerateStages(pShader.get());
                     if (result.first.HasAny()) {
                         SR_ERROR("SRSLTest::Run() : failed to generate shader stages for SRSL shader: {}\n\tResult: {}", file, result.first.ToString(pShader->GetIncludes()));

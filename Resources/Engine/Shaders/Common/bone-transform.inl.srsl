@@ -1,4 +1,9 @@
 mat4 boneTransform = mat4(0);
-for (int i = 0; i < WEIGHTS_COUNT; i++) {
-    boneTransform += (bones[int(WEIGHTS[i][0])] * boneOffsets[int(WEIGHTS[i][0])]) * WEIGHTS[i][1];
-}
+boneTransform += (bones[BLEND_INDICES.x] * boneOffsets[BLEND_INDICES.x]) * BLEND_WEIGHTS.x;
+boneTransform += (bones[BLEND_INDICES.y] * boneOffsets[BLEND_INDICES.y]) * BLEND_WEIGHTS.y;
+boneTransform += (bones[BLEND_INDICES.z] * boneOffsets[BLEND_INDICES.z]) * BLEND_WEIGHTS.z;
+boneTransform += (bones[BLEND_INDICES.w] * boneOffsets[BLEND_INDICES.w]) * BLEND_WEIGHTS.w;
+boneTransform += (bones[BLEND_INDICES2.x] * boneOffsets[BLEND_INDICES2.x]) * BLEND_WEIGHTS2.x;
+boneTransform += (bones[BLEND_INDICES2.y] * boneOffsets[BLEND_INDICES2.y]) * BLEND_WEIGHTS2.y;
+boneTransform += (bones[BLEND_INDICES2.z] * boneOffsets[BLEND_INDICES2.z]) * BLEND_WEIGHTS2.z;
+boneTransform += (bones[BLEND_INDICES2.w] * boneOffsets[BLEND_INDICES2.w]) * BLEND_WEIGHTS2.w;

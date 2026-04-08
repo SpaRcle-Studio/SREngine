@@ -240,14 +240,18 @@ namespace SR_PTYPES_NS {
             return nullptr;
         }
 
-        auto&& vertices = pRawMesh->GetVertices(meshId);
+        const SR_UTILS_NS::VertexDataBuffer& buffer = pRawMesh->GetVertexBuffer(meshId,
+            SR_UTILS_NS::VertexLayoutDescription().AddAttribute(SR_UTILS_NS::VertexAttribute::Position, SR_UTILS_NS::VertexAttributeFormat::Float32, 3)
+        );
+
         auto&& indices = pRawMesh->GetIndices(meshId);
         std::vector<physx::PxVec3> pxVertices;
         pxVertices.resize(indices.size());
 
         for (uint32_t i = 0; i < indices.size(); ++i) {
             const uint64_t vertexIndex = indices[i];
-            pxVertices[i] = *reinterpret_cast<physx::PxVec3*>(&vertices[vertexIndex].position);
+            const SR_MATH_NS::FVector3* vertices = static_cast<const SR_MATH_NS::FVector3*>(buffer.GetRawData());
+            pxVertices[i] = *reinterpret_cast<const physx::PxVec3*>(&vertices[vertexIndex]);
         }
 
         auto&& pPhysics = GetShape()->GetRigidbody()->GetLibrary<PhysXLibraryImpl>()->GetPxPhysics();
@@ -340,14 +344,18 @@ namespace SR_PTYPES_NS {
             return nullptr;
         }
 
-        auto&& vertices = pRawMesh->GetVertices(meshId);
+        const SR_UTILS_NS::VertexDataBuffer& buffer = pRawMesh->GetVertexBuffer(meshId,
+            SR_UTILS_NS::VertexLayoutDescription().AddAttribute(SR_UTILS_NS::VertexAttribute::Position, SR_UTILS_NS::VertexAttributeFormat::Float32, 3)
+        );
+
         auto&& indices = pRawMesh->GetIndices(meshId);
         std::vector<physx::PxVec3> pxVertices;
         pxVertices.resize(indices.size());
 
         for (uint32_t i = 0; i < indices.size(); ++i) {
             const uint64_t vertexIndex = indices[i];
-            pxVertices[i] = *reinterpret_cast<physx::PxVec3*>(&vertices[vertexIndex].position);
+            const SR_MATH_NS::FVector3* vertices = static_cast<const SR_MATH_NS::FVector3*>(buffer.GetRawData());
+            pxVertices[i] = *reinterpret_cast<const physx::PxVec3*>(&vertices[vertexIndex]);
         }
 
         physx::PxTriangleMeshDesc meshDesc;

@@ -348,7 +348,7 @@ namespace SR_CORE_NS {
         SR_GRAPH_NS::Memory::CameraManager::DestroySingleton();
         SR_GRAPH_GUI_NS::NodeManager::DestroySingleton();
         SR_UTILS_NS::TaskManager::DestroySingleton();
-        SR_GRAPH_NS::Memory::MeshManager::DestroySingleton();
+        SR_GRAPH_NS::MeshManager::DestroySingleton();
 
         SR_UTILS_NS::Debug::Instance().System("Application::Close() : all systems were successfully closed!");
     }

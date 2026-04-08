@@ -130,18 +130,11 @@ void fragment() {
     ).rgb;
     COLOR = vec4(shadowColor, alpha);
 #else
-    #ifdef HAS_NORMAL
-        mat3 TBN = mat3(normalize(TANGENT), normalize(BITANGENT), normalize(NORMAL));
-        vec3 mappedNormal = normalize(TBN * tangentNormal);
-
-        float light = dot(mappedNormal, DIRECTIONAL_LIGHT_DIRECTION);
-        light = clamp(light, 0.0, 1.0);
-        vec3 normalShade = diffuseColor.rgb * (0.2 + 0.8 * light);
-        COLOR = vec4(normalShade, alpha);
-    #else
-        vec3 normalShade = vec3(NORMAL.x + NORMAL.y + NORMAL.z) / 8.0;
-        COLOR = vec4(diffuseColor.rgb + normalShade, alpha);
-    #endif
+    vec3 mappedNormal = normalize(TBN * tangentNormal);
+    float light = dot(mappedNormal, DIRECTIONAL_LIGHT_DIRECTION);
+    light = clamp(light, 0.0, 1.0);
+    vec3 normalShade = diffuseColor.rgb * (0.2 + 0.8 * light);
+    COLOR = vec4(normalShade, alpha);
 #endif
 
 #ifdef SR_DEFINE_DEBUG_NORMALS

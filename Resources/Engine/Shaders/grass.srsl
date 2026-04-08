@@ -1,0 +1,30 @@
+[[uniform], [public]] sampler2D windMask;
+
+void fragment_depth_buffer_discard() {
+    vec4 diffuseColor = texture(diffuse, UV) * color;
+    if (diffuseColor.a <= alphaThreshold) {
+        discard;
+    }
+}
+
+#define SR_STANDARD_VERTEX_OFFSET_FUNC
+#define SR_NO_PCF_FILTER
+
+vec3 CalculateVertexOffset() {
+    vec4 windData = texture(windMask, UV);
+    float time = TIME;
+    float windStrength = 10.0;
+    vec3 offset = vec3(0.0);
+    float windEffect = windStrength * sin(time * 0.001 + (1 - windData.g) * 10.0) * (1 - windData.g) * 0.01;
+    offset.x = windEffect;
+    offset.z = windEffect;
+    return offset;
+}
+
+#include <Engine/Shaders/standard.srsl>
+
+CullMode None;
+
+#ifndef SR_DEFINE_CASCADED_SHADOW_MAP_PASS
+    DepthWrite false;
+#endif

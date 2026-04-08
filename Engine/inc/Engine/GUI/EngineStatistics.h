@@ -42,6 +42,7 @@ namespace SR_CORE_NS::GUI {
         void DrawRenderQueue(const SR_GRAPH_NS::RenderQueue* pRenderQueue);
 
     private:
+        std::string m_stringCache;
         bool m_showShaderMacros = false;
         bool m_showShaderPrograms = false;
         bool m_showUnusedShaders = false;
