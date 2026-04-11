@@ -85,11 +85,8 @@ See documentation
     wtih a system that divides the world into regions and chunks.
  </details>
 
-
- # Contributors 
- <a href="https://github.com/SpaRcle-Studio/SREngine/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=SpaRcle-Studio/SREngine" />
-</a>
+# Projet Activity
+![Alt](https://repobeats.axiom.co/api/embed/24674dc2bf31b829129e321ca033722c57b8ce04.svg "Repobeats analytics image")
 
 ## Star History 📈
 
@@ -99,4 +96,12 @@ See documentation
    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=SpaRcle-Studio/SREngine&type=Date" />
    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=SpaRcle-Studio/SREngine&type=Date" />
  </picture>
+</a>
+
+
+
+
+## Contributors 
+<a href="https://github.com/SpaRcle-Studio/SREngine/graphs/contributors">
+ <img src="https://contrib.rocks/image?repo=SpaRcle-Studio/SREngine" />
 </a>
