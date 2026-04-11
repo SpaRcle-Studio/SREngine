@@ -28,6 +28,7 @@
 
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Types/Camera.h>
+#include <Graphics/Types/Mesh.h>
 #include <Graphics/Types/SkyboxComponent.h>
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Window/BasicWindowImpl.h>
@@ -532,7 +533,7 @@ namespace SR_CORE_GUI_NS {
                         pRigidbody->AddCollider(SR_PHYSICS_NS::ShapeType::Box3D);
                     }
 
-                    auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/cube.obj", SR_GRAPH_NS::MeshType::Static);
+                    auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/cube.obj");
                     for (auto&& pMesh : meshes) {
                         pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
                     }
@@ -550,7 +551,7 @@ namespace SR_CORE_GUI_NS {
                         pRigidbody->AddCollider(SR_PHYSICS_NS::ShapeType::Sphere3D);
                     }
 
-                    auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/sphere.obj", SR_GRAPH_NS::MeshType::Static);
+                    auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/sphere.obj");
                     for (auto&& pMesh : meshes) {
                         pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
                     }
@@ -568,7 +569,7 @@ namespace SR_CORE_GUI_NS {
                         pRigidbody->AddCollider(SR_PHYSICS_NS::ShapeType::Capsule3D);
                     }
 
-                    auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/capsule.obj", SR_GRAPH_NS::MeshType::Static);
+                    auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/capsule.obj");
                     for (auto&& pMesh : meshes) {
                         pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
                     }
@@ -586,7 +587,7 @@ namespace SR_CORE_GUI_NS {
                         pRigidbody->AddCollider(SR_PHYSICS_NS::ShapeType::Cylinder3D);
                     }
 
-                    auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/cylinder.obj", SR_GRAPH_NS::MeshType::Static);
+                    auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/cylinder.obj");
                     for (auto&& pMesh : meshes) {
                         pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
                     }
@@ -604,7 +605,7 @@ namespace SR_CORE_GUI_NS {
                         pRigidbody->AddCollider(SR_PHYSICS_NS::ShapeType::Plane3D);
                     }
 
-                    auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/plane.obj", SR_GRAPH_NS::MeshType::Static);
+                    auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/plane.obj");
                     for (auto&& pMesh : meshes) {
                         pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
                     }
@@ -624,7 +625,7 @@ namespace SR_CORE_GUI_NS {
                         pCollider->SetRawMesh("Engine/Models/statue.obj");
                     }
 
-                    auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/statue.obj", SR_GRAPH_NS::MeshType::Static);
+                    auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/statue.obj");
                     for (auto&& pMesh : meshes) {
                         pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
                     }
@@ -643,7 +644,7 @@ namespace SR_CORE_GUI_NS {
                         pCollider->SetRawMesh("Engine/Models/monkey.obj");
                     }
 
-                    auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/monkey.obj", SR_GRAPH_NS::MeshType::Static);
+                    auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/monkey.obj");
                     for (auto&& pMesh : meshes) {
                         pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
                     }

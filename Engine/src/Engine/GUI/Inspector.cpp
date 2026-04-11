@@ -173,10 +173,6 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_GUI_NS::Immediate::Separator();
 
-        //if (auto&& pGameObject = m_sceneObject.DynamicCast<SR_UTILS_NS::GameObject>()) {
-        //    DrawGameObject(pGameObject);
-        //}
-
         DrawSceneObject(m_sceneObject);
 
         DrawComponents(m_sceneObject.Get());
@@ -533,10 +529,13 @@ namespace SR_CORE_GUI_NS {
         auto&& value = SR_UTILS_NS::Reflection::Value::CreateRef(pSceneObject);
         auto&& context = CreateDrawerContext(&value);
 
+        static const SR_UTILS_NS::StringAtom editorDebugModeId = "EditorDebugMode";
+
         context.fieldWidth += context.fieldTitleWidth;
         context.fieldTitleWidth = 0.f;
         context.noHeader = true;
         context.openedByDefault = true;
+        context.isDebugMode = SR_UTILS_NS::StoreUtils::User::GetBool(editorDebugModeId, false);
         context.editorPropertyParams.SetNotNull();
         m_pPointerDrawer->Draw(context);
 
@@ -549,46 +548,6 @@ namespace SR_CORE_GUI_NS {
 
             auto&& cmd = new SR_CORE_NS::Commands::SceneObjectChangeProperties(pEngine, pSceneObject, std::move(m_pSOSerializer), std::move(pNewSerializer));
             pEngine->GetCmdManager()->Store(cmd);
-        }
-    }
-
-    void Inspector::DrawGameObject(const SR_UTILS_NS::GameObject::Ptr& pGameObject) {
-        SR_UTILS_NS::Transform::Ptr pTransform = pGameObject->GetTransform();
-
-        m_onBeforeChangeCallback = [&](bool drag) {
-            if (!m_pTransformSerializer) {
-                m_isDragMode = drag;
-                m_pTransformSerializer = SR_CORE_NS::Commands::CreateSerializer();
-                SR_UTILS_NS::Serialization::Save(*m_pTransformSerializer, pTransform, SR_UTILS_NS::ICommand::DATA_ID);
-            }
-        };
-
-        auto&& value = SR_UTILS_NS::Reflection::Value::CreateRef(pTransform);
-        auto&& context = CreateDrawerContext(&value);
-
-        context.fieldWidth += context.fieldTitleWidth;
-        context.fieldTitleWidth = 0.f;
-        context.noHeader = false;
-        context.openedByDefault = true;
-        context.editorPropertyParams.SetNotNull();
-        m_pPointerDrawer->Draw(context);
-
-        if (m_isDragMode && pTransform) {
-            pTransform->UpdateTree();
-        }
-
-        if (m_pTransformSerializer && (!m_isDragMode || !SR_GRAPH_GUI_NS::Immediate::IsMouseDown(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left))) {
-            auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
-
-            auto&& pNewSerializer = SR_CORE_NS::Commands::CreateSerializer();
-            SR_UTILS_NS::Serialization::Save(*pNewSerializer, pTransform, SR_UTILS_NS::ICommand::DATA_ID);
-
-            auto&& cmd = new SR_CORE_NS::Commands::GameObjectTransform(pEngine, pGameObject, std::move(m_pTransformSerializer), std::move(pNewSerializer));
-            pEngine->GetCmdManager()->Store(cmd);
-
-            if (pTransform != pGameObject->GetTransform()) {
-                pGameObject->SetTransform(pTransform);
-            }
         }
     }
 
@@ -678,6 +637,10 @@ namespace SR_CORE_GUI_NS {
         context.fieldTitleWidth = windowWidth * 0.3f;
         context.fieldWidth = windowWidth * 0.7f;
         context.noHeader = true;
+
+        static const SR_UTILS_NS::StringAtom editorDebugModeId = "EditorDebugMode";
+        context.isDebugMode = SR_UTILS_NS::StoreUtils::User::GetBool(editorDebugModeId, false);
+
         context.editorPropertyParams.SetDragSpeed(0.1f);
         context.onBeforeChangeCallback = m_onBeforeChangeCallback;
 

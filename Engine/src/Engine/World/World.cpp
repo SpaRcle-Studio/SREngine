@@ -55,9 +55,8 @@ namespace SR_CORE_NS {
             for (uint32_t i = 0; i < node->mNumMeshes; ++i) {
                 const uint64_t meshId = node->mMeshes[i];
                 const int64_t countBones = pScene->mMeshes[meshId]->mNumBones;
-                const SR_GRAPH_NS::MeshType meshType = countBones > 0 ? SR_GRAPH_NS::MeshType::Skinned : SR_GRAPH_NS::MeshType::Static;
 
-                if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load(pRawMesh->GetResourcePath(), meshType, node->mMeshes[i])) {
+                if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load(pRawMesh->GetResourcePath(), node->mMeshes[i])) {
                     pMesh->SetMaterial(SR_GRAPH_NS::FileMaterial::LoadAsUnique(GetRenderScene()->GetContext()->GetSettings().defaultMaterial));
 
                     if (countBones > 0) {
@@ -72,8 +71,8 @@ namespace SR_CORE_NS {
 
                     ptr->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
 
-                    if (pMesh->GetMeshType() == SR_GRAPH_NS::MeshType::Skinned) {
-                        skinnedMeshes.emplace_back(pMesh.StaticCast<SR_GTYPES_NS::SkinnedMesh>());
+                    if (auto&& pSkinnedMesh = pMesh.DynamicCast<SR_GTYPES_NS::SkinnedMesh>()) {
+                        skinnedMeshes.emplace_back(pSkinnedMesh);
                     }
 
                     continue;

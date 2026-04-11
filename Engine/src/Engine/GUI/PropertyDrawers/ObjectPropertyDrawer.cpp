@@ -175,6 +175,10 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
+        if (property.GetEditorParams().IsDebugOnly() && !context.isDebugMode) {
+            return;
+        }
+
         const SR_UTILS_NS::StringAtom propertyGroup = property.GetEditorParams().GetGroup();
         if (group != propertyGroup) {
             if (!propertyGroup.empty() && group.empty() && std::ranges::find(m_groups, propertyGroup) == m_groups.end()) {

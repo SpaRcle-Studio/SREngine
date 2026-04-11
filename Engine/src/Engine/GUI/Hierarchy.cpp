@@ -8,7 +8,6 @@
 #include <Engine/GUI/EditorGUI.h>
 
 #include <Graphics/GUI/Icons.h>
-#include <Graphics/UI/UINode.h>
 #include <Graphics/GUI/Utils.h>
 
 #include <Utils/Input/InputSystem.h>

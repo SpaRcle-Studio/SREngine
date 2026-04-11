@@ -304,6 +304,7 @@ def process_property(property_obj: reflection_utils.CPPProperty, clang_child):
     property_obj.not_null = has_special_tag_comment(clang_child, 'notNull')
     property_obj.hidden = has_special_tag_comment(clang_child, 'hidden')
     property_obj.read_only = has_special_tag_comment(clang_child, 'readOnly')
+    property_obj.debug_only = has_special_tag_comment(clang_child, 'debugOnly')
     property_obj.no_header = has_special_tag_comment(clang_child, 'noHeader')
     property_obj.private = has_special_tag_comment(clang_child, 'private')
 

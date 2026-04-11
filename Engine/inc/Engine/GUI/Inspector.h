@@ -5,7 +5,6 @@
 #ifndef SR_ENGINE_CORE_INSPECTOR_H
 #define SR_ENGINE_CORE_INSPECTOR_H
 
-#include <Engine/GUI/ComponentDrawer.h>
 #include <Engine/GUI/PropertyDrawer.h>
 #include <Engine/GUI/PropertyDrawers/ObjectPropertyDrawer.h>
 #include <Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h>
@@ -58,7 +57,6 @@ namespace SR_CORE_GUI_NS {
         void InitCategories();
 
     private:
-        void DrawGameObject(const SR_UTILS_NS::GameObject::Ptr& pGameObject);
         void DrawSceneObject(const SR_UTILS_NS::SceneObject::Ptr& pSceneObject);
 
         void DrawComponentCategory(SR_UTILS_NS::IComponentable* pComponentable, ComponentCategory& category, SR_UTILS_NS::StringAtom categoryName);

@@ -93,6 +93,7 @@ class CPPProperty:
         self.drag_value = None
         self.editor_width = None
         self.read_only = False
+        self.debug_only = False
         self.not_null = False
         self.no_header = False
         self.group = None

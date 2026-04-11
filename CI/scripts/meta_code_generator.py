@@ -153,6 +153,9 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
         if prop.no_header:
             f.write('\n' + '\t' * (tabs + 4) + f'.SetNoHeader()')
 
+        if prop.debug_only:
+            f.write('\n' + '\t' * (tabs + 4) + f'.SetDebugOnly()')
+
         if prop.not_null:
             f.write('\n' + '\t' * (tabs + 4) + f'.SetNotNull()')
 

@@ -39,6 +39,7 @@ namespace SR_CORE_GUI_NS {
 
         bool noHeader = false;
         bool openedByDefault = false;
+        bool isDebugMode = false;
 
         float_t lineHeight = 1.f;
         float_t spaceWidth = 1.f;

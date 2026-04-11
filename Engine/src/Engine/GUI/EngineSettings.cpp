@@ -180,6 +180,7 @@ namespace SR_CORE_GUI_NS {
         SR_TRACY_ZONE;
 
         static const SR_UTILS_NS::StringAtom showEntityIdKey = "ShowEntityId";
+        static const SR_UTILS_NS::StringAtom editorDebugModeKey = "EditorDebugMode";
         static const SR_UTILS_NS::StringAtom showHiddenEntitiesKey = "ShowHiddenEntities";
         static const SR_UTILS_NS::StringAtom fontSizeKey = "ImGuiFontSize";
         static const SR_UTILS_NS::StringAtom iconFontSizeKey = "ImGuiIconFontSize";
@@ -188,6 +189,7 @@ namespace SR_CORE_GUI_NS {
         float_t iconFontSize = SR_UTILS_NS::StoreUtils::User::GetFloat(iconFontSizeKey, 0.f);
         bool showEntityId = SR_UTILS_NS::StoreUtils::User::GetBool(showEntityIdKey, false);
         bool showHiddenEntities = SR_UTILS_NS::StoreUtils::User::GetBool(showHiddenEntitiesKey, false);
+        bool editorDebugMode = SR_UTILS_NS::StoreUtils::User::GetBool(editorDebugModeKey, false);
 
         if (SR_GRAPH_GUI_NS::Immediate::InputFloat("Font size", &fontSize, 1.0f, 1.0f, "%.1f", SR_GRAPH_GUI_NS::Immediate::InputTextFlags::EnterReturnsTrue)) {
             SR_UTILS_NS::StoreUtils::User::SetFloat(fontSizeKey, fontSize);
@@ -199,6 +201,10 @@ namespace SR_CORE_GUI_NS {
 
         if (SR_GRAPH_GUI_NS::Immediate::Checkbox("Show entity id", &showEntityId)) {
             SR_UTILS_NS::StoreUtils::User::SetBool(showEntityIdKey, showEntityId);
+        }
+
+        if (SR_GRAPH_GUI_NS::Immediate::Checkbox("Editor debug mode", &editorDebugMode)) {
+            SR_UTILS_NS::StoreUtils::User::SetBool(editorDebugModeKey, editorDebugMode);
         }
 
         if (SR_GRAPH_GUI_NS::Immediate::Checkbox("Show hidden entities", &showHiddenEntities)) {

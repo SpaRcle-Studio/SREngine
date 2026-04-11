@@ -691,7 +691,7 @@ namespace SR_CORE_GUI_NS {
                 //}
 
                 if (name.empty()) {
-                    name = SR_UTILS_NS::EnumReflector::ToStringAtom(pMesh->GetMeshType());
+                    name = "Unknown mesh";
                 }
 
                 if (SR_GRAPH_GUI_NS::Immediate::Selectable(name.c_str())) {

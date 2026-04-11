@@ -5,7 +5,6 @@
 #ifndef SR_ENGINE_GUI_ASSET_INSPECTOR_H
 #define SR_ENGINE_GUI_ASSET_INSPECTOR_H
 
-#include <Engine/GUI/ComponentDrawer.h>
 #include <Engine/GUI/PropertyDrawer.h>
 #include <Engine/GUI/PropertyDrawers/ObjectPropertyDrawer.h>
 #include <Engine/GUI/PropertyDrawers/PointerPropertyDrawer.h>
