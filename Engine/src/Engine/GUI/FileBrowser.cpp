@@ -27,6 +27,8 @@
 #include <Utils/Common/VectorUtils.h>
 #include <Utils/TypeTraits/SRClassMeta.h>
 #include <Utils/Resources/ResourceManager.h>
+#include <Utils/Common/StringUtils.h>
+#include <Utils/FileSystem/FileSystem.h>
 
 #include <Enum/TreeNodeFlags.hpp>
 

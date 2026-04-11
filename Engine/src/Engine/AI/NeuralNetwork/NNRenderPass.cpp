@@ -9,6 +9,7 @@
 
 #include <Utils/Math/Vector4.h>
 #include <Utils/FileSystem/PathDataAccessor.h>
+#include <Utils/Resources/ResourceManager.h>
 
 #include <Codegen/NNRenderPass.generated.hpp>
 

@@ -7,12 +7,13 @@
 
 #include <Engine/macros.h>
 
-#include <Utils/Resources/ResourceManager.h>
-#include <Utils/Tests/TestManager.h>
-
 #include <Graphics/SRSL/Shader.h>
 #include <Graphics/SRSL/GLSLCodeGenerator.h>
-#include <Graphics/Pipeline/IShaderProgram.h>
+#include <Graphics/Pipeline/ShaderUtils.h>
+
+#include <Utils/Resources/ResourceManager.h>
+#include <Utils/Tests/TestManager.h>
+#include <Utils/FileSystem/FileSystem.h>
 
 #include <Enum/ShaderStage.hpp>
 

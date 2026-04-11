@@ -7,18 +7,30 @@ void fragment_depth_buffer_discard() {
     }
 }
 
-#define SR_STANDARD_VERTEX_OFFSET_FUNC
+#define SR_STANDARD_VERTEX_POSITION_FUNC
 #define SR_NO_PCF_FILTER
 
-vec3 CalculateVertexOffset() {
-    vec4 windData = texture(windMask, UV);
-    float time = TIME;
-    float windStrength = 10.0;
-    vec3 offset = vec3(0.0);
-    float windEffect = windStrength * sin(time * 0.001 + (1 - windData.g) * 10.0) * (1 - windData.g) * 0.01;
-    offset.x = windEffect;
-    offset.z = windEffect;
-    return offset;
+vec3 CalculateVertexPosition() {
+    float speed = 0.0005;
+    float strength = 0.35;
+    float frequency = 2.0;
+    float weight = COLOR0.g;
+    vec3 windDir = normalize(vec3(1.0, 0.0, 0.3));
+
+    // фаза зависит от позиции, чтобы не вся трава синхронно двигалась
+    float phase = VERTEX.x * 0.5 + VERTEX.z * 0.5;
+    vec3 position = vec3(0);
+
+    float wave = sin(TIME * speed + phase) * strength;
+    float bend = wave * strength * (weight * weight);
+
+    vec3 tangentDir = normalize(windDir - NORMAL * dot(windDir, NORMAL));
+    position += tangentDir * bend;
+
+    //float influence = dot(windDir, TANGENT.xyz);
+    //position += TANGENT.xyz * bend * influence;
+
+    return VERTEX + position;
 }
 
 #include <Engine/Shaders/standard.srsl>

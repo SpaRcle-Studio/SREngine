@@ -8,8 +8,8 @@ void vertex() {
     mat4 modelMatrix = MODEL_MATRIX;
 #endif
 
-#ifdef SR_STANDARD_VERTEX_OFFSET_FUNC
-    VERTEX = (modelMatrix * vec4(VERTEX + CalculateVertexOffset(), 1.0)).xyz;
+#ifdef SR_STANDARD_VERTEX_POSITION_FUNC
+    VERTEX = (modelMatrix * vec4(CalculateVertexPosition(), 1.0)).xyz;
 #else
     VERTEX = (modelMatrix * vec4(VERTEX, 1.0)).xyz;
 #endif
