@@ -65,40 +65,4 @@ rem === Вход в окружение Emscripten ===
 call "%EMSDK_DIR%\emsdk_env.bat"
 if errorlevel 1 goto :error
 
-rem === Создание директории сборки ===
-if not exist "%BUILD_DIR%" (
-    mkdir "%BUILD_DIR%"
-)
-
-rem === Генерация сборки через emcmake ===
-echo:
-echo Generating CMake build for Emscripten...
-call emcmake cmake -G Ninja -S "%SR_ENGINE_DIR%" -B "%BUILD_DIR%" -DCMAKE_BUILD_TYPE=%CONFIG% -DSR_PLATFORM=%PLATFORM% -DCMAKE_MAKE_PROGRAM=%NINJA_EXE%
-
-if errorlevel 1 goto :error
-
-echo:
-echo === CMake configuration completed successfully ===
-
-rem === Сборка проекта ===
-echo:
-echo === Building project for Emscripten ===
-call emmake cmake --build "%BUILD_DIR%" --config %CONFIG%
-if errorlevel 1 goto :error
-
-echo === Build completed successfully ===
-
-copy /Y "%BUILD_DIR%\Engine\SREngine.js" "%BUILD_DIR%\..\Bin\SREngine.js"
-copy /Y "%BUILD_DIR%\Engine\SREngine.wasm" "%BUILD_DIR%\..\Bin\SREngine.wasm"
-copy /Y "%BUILD_DIR%\Engine\SREngine.data" "%BUILD_DIR%\..\Bin\SREngine.data"
-
-echo === Files copied to Bin directory ===
-
-echo:
-echo ✅ Emscripten build completed successfully.
-exit /b 0
-
-:error
-	echo:
-	echo ❌ Failed to build Emscripten project.
-	exit /b 1
+pause

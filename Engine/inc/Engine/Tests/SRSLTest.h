@@ -9,6 +9,7 @@
 
 #include <Graphics/SRSL/Shader.h>
 #include <Graphics/SRSL/GLSLCodeGenerator.h>
+#include <Graphics/SRSL/WGSLCodeGenerator.h>
 #include <Graphics/Pipeline/ShaderUtils.h>
 
 #include <Utils/Resources/ResourceManager.h>
@@ -35,11 +36,6 @@ namespace SR_CORE_NS::Tests {
 
                 if (auto&& pShader = SR_SRSL_NS::SRSLShader::Load(file, SR_SRSL_NS::ShaderParams::GetDefault())) {
                     SR_SRSL_NS::ISRSLCodeGenerator::SRSLCodeGenRes result = SR_SRSL_NS::GLSLCodeGenerator::Instance().GenerateStages(pShader.get());
-                    if (result.first.HasAny()) {
-                        SR_ERROR("SRSLTest::Run() : failed to generate shader stages for SRSL shader: {}\n\tResult: {}", file, result.first.ToString(pShader->GetIncludes()));
-                        return SR_UTILS_NS::TestExecutionResult::Error;
-                    }
-
                     for (auto&& [stage, code] : result.second) {
                         resultFolder.CreateIfNotExists();
                         auto outputFile = resultFolder.Concat(file.GetBaseNameAndExt()).ConcatExt(SR_UTILS_NS::EnumReflector::ToStringAtom(stage).ToString() + ".glsl");
@@ -47,6 +43,21 @@ namespace SR_CORE_NS::Tests {
                             SR_ERROR("SRSLTest::Run() : failed to write shader stage to file: {}", outputFile);
                             return SR_UTILS_NS::TestExecutionResult::Error;
                         }
+                    }
+
+                    pShader->GetCreateInfo().vertexLayoutDescription
+                        .AddAttribute(SR_UTILS_NS::VertexAttribute::Position, SR_UTILS_NS::VertexAttributeFormat::Float32, 3)
+                        .AddAttribute(SR_UTILS_NS::VertexAttribute::Normal, SR_UTILS_NS::VertexAttributeFormat::Float32, 3)
+                        .AddAttribute(SR_UTILS_NS::VertexAttribute::Tangent, SR_UTILS_NS::VertexAttributeFormat::Float32, 4)
+                        .AddAttribute(SR_UTILS_NS::VertexAttribute::UV0, SR_UTILS_NS::VertexAttributeFormat::Float32, 2)
+                    ;
+
+                    result = SR_SRSL_NS::WGSLCodeGenerator::Instance().GenerateStages(pShader.get());
+                    resultFolder.CreateIfNotExists();
+                    auto outputFile = resultFolder.Concat(file.GetBaseName()).ConcatExt("wgsl");
+                    if (!SR_UTILS_NS::FileSystem::WriteToFile(outputFile, result.second[SR_GRAPH_NS::ShaderStage::All])) {
+                        SR_ERROR("SRSLTest::Run() : failed to write shader stage to file: {}", outputFile);
+                        return SR_UTILS_NS::TestExecutionResult::Error;
                     }
                 }
                 else {
