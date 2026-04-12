@@ -22,3 +22,5 @@ var<private> NORMAL : vec3<f32>;
 var<private> TANGENT : vec4<f32>;
 var<private> UV : vec2<f32>;
 
+fn compute() -> stubType {
+}
