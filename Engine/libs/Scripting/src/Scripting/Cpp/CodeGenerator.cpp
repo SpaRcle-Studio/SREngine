@@ -226,27 +226,29 @@ namespace SR_SCRIPTING_NS {
         cmakeContent += "\t# Modules\n\n";
 
         for (auto&& module : m_modules) {
-            cmakeContent += "\tif (ANDROID_NDK)\n";
+            cmakeContent += "\tif(EXISTS {}/{}.cxx) \n"_format(m_cacheFolder.Concat("Scripts/Codegen"), module.moduleInfo.moduleName);
+            cmakeContent += "\t\tif (ANDROID_NDK)\n";
 
-            cmakeContent += "\t\tadd_library(SCRIPT_MODULE_{} STATIC\n"_format(module.moduleInfo.moduleName);
-            cmakeContent += "\t\t\t{}/{}.cxx\n"_format(m_cacheFolder.Concat("Scripts/Codegen"), module.moduleInfo.moduleName);
-            cmakeContent += "\t\t)\n";
+            cmakeContent += "\t\t\tadd_library(SCRIPT_MODULE_{} STATIC\n"_format(module.moduleInfo.moduleName);
+            cmakeContent += "\t\t\t\t{}/{}.cxx\n"_format(m_cacheFolder.Concat("Scripts/Codegen"), module.moduleInfo.moduleName);
+            cmakeContent += "\t\t\t)\n";
 
-            cmakeContent += "\telse()\n";
+            cmakeContent += "\t\telse()\n";
 
-            cmakeContent += "\t\tadd_library(SCRIPT_MODULE_{} SHARED\n"_format(module.moduleInfo.moduleName);
-            cmakeContent += "\t\t\t{}/{}.cxx\n"_format(m_cacheFolder.Concat("Scripts/Codegen"), module.moduleInfo.moduleName);
-            cmakeContent += "\t\t)\n";
+            cmakeContent += "\t\t\tadd_library(SCRIPT_MODULE_{} SHARED\n"_format(module.moduleInfo.moduleName);
+            cmakeContent += "\t\t\t\t{}/{}.cxx\n"_format(m_cacheFolder.Concat("Scripts/Codegen"), module.moduleInfo.moduleName);
+            cmakeContent += "\t\t\t)\n";
 
-            cmakeContent += "\tendif()\n";
+            cmakeContent += "\t\tendif()\n";
 
-            cmakeContent += "\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, module.path.GetFolder());
+            cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, module.path.GetFolder());
 
             for (auto&& engineIncludeDir : m_pScriptSystem->GetEngineSourcesIncludePaths()) {
-                cmakeContent += "\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, engineIncludeDir);
+                cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, engineIncludeDir);
             }
 
-            cmakeContent += "\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, m_cacheFolder.Concat("Scripts/Modules/{}/Codegen"_format(module.moduleInfo.moduleName)));
+            cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, m_cacheFolder.Concat("Scripts/Modules/{}/Codegen"_format(module.moduleInfo.moduleName)));
+            cmakeContent += "\tendif()\n";
         }
 
         cmakeContent += "\t# Dependencies \n\n";
@@ -254,8 +256,10 @@ namespace SR_SCRIPTING_NS {
         for (auto&& module : m_modules) {
             for (auto&& dependency : GetDependenciesRecursive(module.moduleInfo.moduleName)) {
                 if (auto&& pDependencyModule = GetModule(dependency)) {
-                    cmakeContent += "\ttarget_link_libraries(SCRIPT_MODULE_{} SCRIPT_MODULE_{})\n"_format(module.moduleInfo.moduleName, dependency);
-                    cmakeContent += "\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, pDependencyModule->path.GetFolder());
+                    cmakeContent += "\tif(EXISTS {}/{}.cxx) \n"_format(m_cacheFolder.Concat("Scripts/Codegen"), module.moduleInfo.moduleName);
+                    cmakeContent += "\t\ttarget_link_libraries(SCRIPT_MODULE_{} SCRIPT_MODULE_{})\n"_format(module.moduleInfo.moduleName, dependency);
+                    cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, pDependencyModule->path.GetFolder());
+                    cmakeContent += "\tendif()\n";
                 }
             }
         }

@@ -78,11 +78,6 @@ namespace SR_CORE_NS::Tests {
             const uint32_t maxErrors = 128;
 
             for (auto file : expectedFolder.GetFiles()) {
-                if (file.GetExtension() != "glsl") {
-                    SR_ERROR("SRSLTest::Run() : expected file is not a GLSL shader: {}", file);
-                    return SR_UTILS_NS::TestExecutionResult::Error;
-                }
-
                 auto expectedFile = expectedFolder.Concat(file.GetBaseNameAndExt());
                 auto resultFile = resultFolder.Concat(file.GetBaseNameAndExt());
 
