@@ -130,20 +130,45 @@ int SREngineEntryPointFromExternalModule(int argc, char** argv, bool notFoundAsE
 
     auto&& currentPath = fs::absolute(argv[0]).parent_path();
 
+    constexpr bool isDebugBuild =
+        #if defined(_DEBUG) || defined(DEBUG)
+            true;
+        #else
+            false;
+        #endif
+
+    std::string debugEnginePath;
+    std::string releaseEnginePath;
+
     for (const auto& entry : fs::directory_iterator(currentPath)) {
         if (!entry.is_regular_file() || entry.path().extension() != DYNAMIC_MODULE_EXTENSION) {
             continue;
         }
-        
+
         if (entry.path().filename().string().find("Engine") != std::string::npos) {
             std::string modulePath = entry.path().generic_string();
-            pModuleHandle = LoadDynamicModule(modulePath.c_str());
-            if (!pModuleHandle) {
-                std::cerr << "Failed to load engine library: " << modulePath << std::endl;
-                std::cerr << "Enter any key to continue..." << std::endl;
-                std::cin.get();
-                return ERROR_MODULE_LOAD_FAILED;
+            if (modulePath.empty()) {
+                continue;
             }
+            if (modulePath.back() == 'd') {
+                debugEnginePath = modulePath;
+            }
+            else {
+                releaseEnginePath = modulePath;
+            }
+        }
+    }
+
+    std::string preferredModulePath = isDebugBuild ? debugEnginePath : releaseEnginePath;
+    preferredModulePath = !preferredModulePath.empty() ? preferredModulePath : (isDebugBuild ? releaseEnginePath : debugEnginePath);
+
+    if (!preferredModulePath.empty()) {
+        pModuleHandle = LoadDynamicModule(preferredModulePath.c_str());
+        if (!pModuleHandle) {
+            std::cerr << "Failed to load engine library: " << preferredModulePath << std::endl;
+            std::cerr << "Enter any key to continue..." << std::endl;
+            std::cin.get();
+            return ERROR_MODULE_LOAD_FAILED;
         }
     }
 

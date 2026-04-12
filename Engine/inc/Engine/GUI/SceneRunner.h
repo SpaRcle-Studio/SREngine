@@ -24,7 +24,7 @@ namespace SR_CORE_GUI_NS {
         ~SceneRunner() override = default;
 
     public:
-        void SetScene(const SR_WORLD_NS::Scene::Ptr &scene);
+        void SetScene(const SR_WORLD_NS::Scene::Ptr &scene) override;
 
         static bool PlayScene(SR_WORLD_NS::Scene::Ptr pScene, Engine* pEngine);
         bool PlayScene();

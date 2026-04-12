@@ -3,6 +3,7 @@
 //
 
 #include <Physics/PhysicsWorld.h>
+#include <Physics/3D/Raycast3DImpl.h>
 
 namespace SR_PHYSICS_NS {
     PhysicsWorld::PhysicsWorld(LibraryPtr pLibrary, Space space)

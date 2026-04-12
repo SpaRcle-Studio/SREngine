@@ -11,6 +11,9 @@
 #include <Utils/FileSystem/FileSystem.h>
 #include <Utils/Serialization/SRASerialization.h>
 
+#include <Enum/PlatformType.hpp>
+#include <Enum/BuildType.hpp>
+
 namespace SR_SCRIPTING_NS {
     void CppCodeGenerator::ProcessChangedCodeFiles(const std::set<SR_UTILS_NS::Path>& changedFiles) {
         SR_TRACY_ZONE;
@@ -181,12 +184,14 @@ namespace SR_SCRIPTING_NS {
 
         RegenerateCmake();
 
+        SR_UTILS_NS::Path modulesPath = m_cacheFolder.Concat("Scripts/Modules-{}-{}"_format(SR_PLATFORM_NS::GetType(), SR_PLATFORM_NS::GetBuildType()));
+
         for (auto&& module : m_modules) {
             if (module.codeFiles.empty() || !module.isNeedCodegen) {
                 continue;
             }
 
-            const SR_UTILS_NS::Path buildDir = m_cacheFolder.Concat("Scripts/Modules/{}"_format(module.moduleInfo.moduleName));
+            const SR_UTILS_NS::Path buildDir = modulesPath.Concat(module.moduleInfo.moduleName);
             SR_UTILS_NS::Path libclangFolder = m_engineResourcesFolder.Concat("Engine/Utilities");
 
             const std::string command = "{} --codegen_dir \"{}\" --root_build_dir \"{}\" --repo_dir \"{}\" --config_dir \"{}\" --module_name \"{}\" --is_script --help_sources_dir \"{}\""_format(
@@ -215,6 +220,7 @@ namespace SR_SCRIPTING_NS {
     void CppCodeGenerator::RegenerateCmake() {
         auto&& cmakeListsPath = m_resourcesFolder.Concat("CMakeLists.txt");
         auto&& cmakeListsCachePath = m_cacheFolder.Concat("Scripts/CMakeLists.txt");
+        SR_UTILS_NS::Path modulesPath = m_cacheFolder.Concat("Scripts/Modules-{}-{}"_format(SR_PLATFORM_NS::GetType(), SR_PLATFORM_NS::GetBuildType()));
 
         std::string cmakeContent;
         cmakeContent += "if (NOT EMSCRIPTEN)\n\n";
@@ -247,7 +253,7 @@ namespace SR_SCRIPTING_NS {
                 cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, engineIncludeDir);
             }
 
-            cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, m_cacheFolder.Concat("Scripts/Modules/{}/Codegen"_format(module.moduleInfo.moduleName)));
+            cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, modulesPath.Concat("{}/Codegen"_format(module.moduleInfo.moduleName)));
             cmakeContent += "\tendif()\n";
         }
 
@@ -362,12 +368,10 @@ namespace SR_SCRIPTING_NS {
         if (codegenFileStream.is_open()) {
             codegenFileStream << "/// " << SR_CODEGEN_HEADER_COMMENT << "\n\n";
 
-            //SR_UTILS_NS::Path enumsFile = m_cacheFolder.Concat("Scripts/Modules/{}/Codegen/Codegen/Enums.generated.hpp"_format(module.moduleInfo.moduleName));
             codegenFileStream << "#define SR_ENGINE_COMMON_PCH_FOR_BASE_CODE\n";
             codegenFileStream << "#define SR_ENGINE_SCRIPT_API_MODE\n\n";
 
             codegenFileStream << "#include <Codegen/SpaRcleModule{}Core.generated.hpp>\n\n"_format(module.moduleInfo.moduleName);
-            //codegenFileStream << "#include \"{}\""_format(enumsFile.ToStringRef()) << "\n\n";
 
             for (auto&& file : module.codeFiles) {
                 if (file.GetExtensionView() == "cxx" || file.GetExtensionView() == "cpp") {
@@ -439,12 +443,14 @@ namespace SR_SCRIPTING_NS {
     }
 
     uint64_t CppCodegenModule::GetCacheHash(const SR_UTILS_NS::Path& cacheFolder) const {
-        auto&& cache = cacheFolder.Concat("Scripts/Modules/{}"_format(moduleInfo.moduleName)).ConcatExt("hash");
+        SR_UTILS_NS::Path modulesPath = cacheFolder.Concat("Scripts/Modules-{}-{}"_format(SR_PLATFORM_NS::GetType(), SR_PLATFORM_NS::GetBuildType()));
+        auto&& cache = modulesPath.Concat(moduleInfo.moduleName).ConcatExt("hash");
         return SR_UTILS_NS::FileSystem::ReadHashFromFile(cache);
     }
 
     void CppCodegenModule::SaveHash(const SR_UTILS_NS::Path& cacheFolder) {
-        auto&& cache = cacheFolder.Concat("Scripts/Modules/{}"_format(moduleInfo.moduleName)).ConcatExt("hash");
+        SR_UTILS_NS::Path modulesPath = cacheFolder.Concat("Scripts/Modules-{}-{}"_format(SR_PLATFORM_NS::GetType(), SR_PLATFORM_NS::GetBuildType()));
+        auto&& cache = modulesPath.Concat(moduleInfo.moduleName).ConcatExt("hash");
         SR_UTILS_NS::FileSystem::WriteHashToFile(cache, hash);
     }
 }

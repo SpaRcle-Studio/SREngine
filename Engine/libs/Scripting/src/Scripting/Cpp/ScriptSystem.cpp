@@ -10,6 +10,9 @@
 #include <Utils/FileSystem/FileSystem.h>
 #include <Utils/Types/Time.h>
 
+#include <Enum/PlatformType.hpp>
+#include <Enum/BuildType.hpp>
+
 namespace SR_SCRIPTING_NS {
     ScriptSystem::~ScriptSystem() {
         ResetSubscriptions();
@@ -287,6 +290,8 @@ namespace SR_SCRIPTING_NS {
 
         m_hasCompileErrors = false;
 
+        SR_UTILS_NS::Path modulesPath = m_cacheFolder.Concat("Scripts/Modules-{}-{}"_format(SR_PLATFORM_NS::GetType(), SR_PLATFORM_NS::GetBuildType()));
+
         for (auto&& module : m_codeGenerator->GetModules()) {
             if (module.isCompiled || !module.moduleInfo.enabled) {
                 continue;
@@ -294,8 +299,14 @@ namespace SR_SCRIPTING_NS {
 
             CppCompilerContext context;
             context.moduleName = module.moduleInfo.moduleName;
-            context.outFolder = m_cacheFolder.Concat("Scripts/Modules/{}"_format(module.moduleInfo.moduleName));
+            context.outFolder = modulesPath.Concat(module.moduleInfo.moduleName);
+
+        #ifdef SR_RELEASE
+            context.isDebug = false;
+        #else
             context.isDebug = true;
+        #endif
+
             context.isShared = true;
 
             for (auto&& filePath : module.codeFiles) {
@@ -341,10 +352,12 @@ namespace SR_SCRIPTING_NS {
 
         m_hasModuleCopyErrors = false;
 
+        SR_UTILS_NS::Path modulesPath = m_cacheFolder.Concat("Scripts/Modules-{}-{}"_format(SR_PLATFORM_NS::GetType(), SR_PLATFORM_NS::GetBuildType()));
+
         for (auto&& moduleName : m_modulesToCopy) {
             const std::string_view extension = ScriptSystem::GetDynamicLibraryExtension();
-            auto&& sourceModulePath = m_cacheFolder.Concat("Scripts/Modules/{}/{}.{}"_format(moduleName, moduleName, extension));
-            auto&& sourcePdbPath = m_cacheFolder.Concat("Scripts/Modules/{}/{}.pdb.protected"_format(moduleName, moduleName));
+            auto&& sourceModulePath = modulesPath.Concat("{}/{}.{}"_format(moduleName, moduleName, extension));
+            auto&& sourcePdbPath = modulesPath.Concat("{}/{}.pdb.protected"_format(moduleName, moduleName));
 
             if (auto&& pModule = m_codeGenerator->GetModule(moduleName)) {
                 auto&& destinationModulePath = pModule->path.GetFolder().Concat("{}.{}"_format(moduleName, extension));

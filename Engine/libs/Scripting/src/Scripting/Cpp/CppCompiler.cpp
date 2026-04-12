@@ -271,16 +271,26 @@ namespace SR_SCRIPTING_NS {
 
             std::string msvcLibs = m_settings.compilerPath.GetPrevious().GetPrevious().GetPrevious().GetPrevious().Concat("lib/x64").ToString();
 
-            sourceFiles += " \"{}/libconcrtd.lib\" "_format(msvcLibs);
-            sourceFiles += " \"{}/libcpmtd.lib\" "_format(msvcLibs);
-            sourceFiles += " \"{}/LIBCMTD.lib\" "_format(msvcLibs);
             sourceFiles += " \"{}/OLDNAMES.lib\" "_format(msvcLibs);
-            sourceFiles += " \"{}/libvcruntimed.lib\" "_format(msvcLibs);
-
             sourceFiles += " \"{}/kernel32.lib\" "_format(windowsKitsUmLibs);
             sourceFiles += " \"{}/uuid.lib\" "_format(windowsKitsUmLibs);
 
-            sourceFiles += " \"{}/libucrtd.lib\" "_format(windowsKitsUcrtLibs);
+            if (context.isDebug) {
+                sourceFiles += " \"{}/libconcrtd.lib\" "_format(msvcLibs);
+                sourceFiles += " \"{}/libcpmtd.lib\" "_format(msvcLibs);
+                sourceFiles += " \"{}/LIBCMTD.lib\" "_format(msvcLibs);
+                sourceFiles += " \"{}/libvcruntimed.lib\" "_format(msvcLibs);
+
+                sourceFiles += " \"{}/libucrtd.lib\" "_format(windowsKitsUcrtLibs);
+            }
+            else {
+                sourceFiles += " \"{}/libconcrt.lib\" "_format(msvcLibs);
+                sourceFiles += " \"{}/libcpmt.lib\" "_format(msvcLibs);
+                sourceFiles += " \"{}/LIBCMT.lib\" "_format(msvcLibs);
+                sourceFiles += " \"{}/libvcruntime.lib\" "_format(msvcLibs);
+
+                sourceFiles += " \"{}/libucrt.lib\" "_format(windowsKitsUcrtLibs);
+            }
         }
         else {
             outArgs += "-o " + outModulePath + " ";
