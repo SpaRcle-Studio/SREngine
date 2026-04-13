@@ -490,12 +490,12 @@ namespace SR_CORE_GUI_NS {
                 }
 
                 if (first || vbo != meshInfo.vbo) {
-                    vbo = meshInfo.vbo;
+                    vbo = meshInfo.vbo.value_or(-1);
                     SR_GRAPH_GUI_NS::Immediate::Text("\t\t\t* VBO: %i", vbo);
                 }
 
-                if (auto&& pMeshComponent = dynamic_cast<SR_GTYPES_NS::Mesh*>(meshInfo.pMesh); pMeshComponent && pMeshComponent->GetGameObject()) {
-                    SR_GRAPH_GUI_NS::Immediate::Text("\t\t\t\t* GameObject: %s", pMeshComponent->GetGameObject()->GetName().c_str());
+                if (auto&& pObject = meshInfo.pObject) {
+                    SR_GRAPH_GUI_NS::Immediate::Text("\t\t\t\t* Scene object: %s", pObject->GetGameObject()->GetName().c_str());
                 }
                 else {
                     SR_GRAPH_GUI_NS::Immediate::Text("\t\t\t\t* Geometry: Unknown");
@@ -672,14 +672,13 @@ namespace SR_CORE_GUI_NS {
         auto&& pHierarchy = GetManager()->GetWidget<Hierarchy>();
 
         if (SR_GRAPH_GUI_NS::Immediate::BeginListBox("Invalid meshes")) {
-            for (auto&& pMesh : pRenderStrategy->GetProblemMeshes()) {
-                auto&& pRenderComponent = dynamic_cast<SR_GTYPES_NS::IRenderComponent*>(pMesh);
-                auto&& pRawMeshHolder = dynamic_cast<SR_HTYPES_NS::IRawMeshHolder*>(pMesh);
+            for (auto&& pObject : pRenderStrategy->GetProblemObjects()) {
+                auto&& pRawMeshHolder = dynamic_cast<SR_HTYPES_NS::IRawMeshHolder*>(pObject);
 
                 SR_UTILS_NS::StringAtom name;
 
-                if (pRenderComponent && pRenderComponent->GetGameObject()) {
-                    name = pRenderComponent->GetGameObject()->GetName();
+                if (pObject && pObject->GetGameObject()) {
+                    name = pObject->GetGameObject()->GetName();
                 }
 
                 if (name.empty() && pRawMeshHolder) {
@@ -695,8 +694,8 @@ namespace SR_CORE_GUI_NS {
                 }
 
                 if (SR_GRAPH_GUI_NS::Immediate::Selectable(name.c_str())) {
-                    if (pHierarchy && pRenderComponent) {
-                        pHierarchy->SelectGameObject(pRenderComponent->GetSceneObject());
+                    if (pHierarchy && pObject) {
+                        pHierarchy->SelectGameObject(pObject->GetSceneObject());
                     }
                 }
             }
