@@ -28,6 +28,7 @@ void ShutdownApplication() {
         Codegen::UnregisterModule_Application();
     }
 
+    SR_PLATFORM_NS::InitializeHooks([](SR_PLATFORM_NS::PlatformHooks& hooks) { });
     SR_HTYPES_NS::SharedPtrDynamicDataCounter::CheckMemoryLeaks();
     SR_UTILS_NS::ShutdownEngineProfiler();
 }

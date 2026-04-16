@@ -4,13 +4,15 @@
 
 #include <Engine/GUI/CreateNewProject.h>
 #include <Engine/Settings/ProjectSettings.h>
-
-// #include <Graphics/GUI/ImmediateGUI.h>
+#include <Engine/GUI/EditorGUI.h>
+#include <Engine/Engine.h>
 
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/Serialization/SRASerialization.h>
 #include <Utils/FileSystem/FileDialog.h>
 #include <Utils/TypeTraits/SRClassMeta.h>
+#include <Utils/Common/CLIManager.h>
+#include <Utils/Common/StoreUtils.h>
 
 namespace SR_CORE_GUI_NS {
     CreateNewProject::CreateNewProject()
@@ -21,7 +23,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     bool CreateNewProject::CreateProject() {
-        auto&& settingsPath = m_projectFinalPath.ConcatExt(ProjectSettings::GetMetaStatic()->GetExtension());
+        auto&& settingsPath = m_projectFinalPath.Concat(".{}"_format(ProjectSettings::GetMetaStatic()->GetExtension()));
         ProjectSettings::Ptr pSettings = SRNew<ProjectSettings>();
         pSettings->projectName = m_projectName;
 
@@ -106,7 +108,27 @@ namespace SR_CORE_GUI_NS {
                     && m_projectFinalPath.IsAbs()
                     && m_projectFinalPath.IsValidPath();
 
+            bool canOpen = false;
             if (isOk) {
+                SR_GRAPH_GUI_NS::Immediate::Text("Project will be created at: ");
+                SR_GRAPH_GUI_NS::Immediate::SameLine();
+                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Cyan(), m_projectFinalPath.empty() ?  "!! Invalid path !!" : m_projectFinalPath.c_str());
+                SR_GRAPH_GUI_NS::Immediate::SameLine();
+            }
+            else {
+                auto&& settingsPath = m_projectFinalPath.Concat(".{}"_format(ProjectSettings::GetMetaStatic()->GetExtension()));
+                if (settingsPath.IsFile()) {
+                    canOpen = true;
+                    SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Green(), "You can open project at: ");
+                    SR_GRAPH_GUI_NS::Immediate::SameLine();
+                }
+                else {
+                    SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Red(), "Invalid project name or path, or directory is not empty!");
+                    SR_GRAPH_GUI_NS::Immediate::SameLine();
+                }
+            }
+
+            if (isOk || canOpen) {
                 SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Button, SR_MATH_NS::FColor(0.0f, 0.5f, 0.0f, 1.0f));
                 SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::ButtonHovered, SR_MATH_NS::FColor(0.0f, 0.6f, 0.0f, 1.0f));
                 SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::ButtonActive, SR_MATH_NS::FColor(0.0f, 0.7f, 0.0f, 1.0f));
@@ -117,28 +139,25 @@ namespace SR_CORE_GUI_NS {
                 SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::ButtonActive, SR_MATH_NS::FColor(0.7f, 0.0f, 0.0f, 1.0f));
             }
 
-            if (isOk) {
-                SR_GRAPH_GUI_NS::Immediate::Text("Project will be created at: ");
-                SR_GRAPH_GUI_NS::Immediate::SameLine();
-                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Cyan(), m_projectFinalPath.empty() ?  "!! Invalid path !!" : m_projectFinalPath.c_str());
-                SR_GRAPH_GUI_NS::Immediate::SameLine();
-            }
-            else {
-                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Red(), "Invalid project name or path, or directory is not empty!");
-                SR_GRAPH_GUI_NS::Immediate::SameLine();
-            }
-
             SR_GRAPH_GUI_NS::Immediate::SetCursorPosX(size.x - 110);
 
-            if (!isOk) {
+            if (!isOk && !canOpen) {
                 SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
             }
 
-            if (SR_GRAPH_GUI_NS::Immediate::Button("Create", SR_MATH_NS::FVector2(100, 30)) && isOk) {
+            if (canOpen) {
+                if (SR_GRAPH_GUI_NS::Immediate::Button("Open", SR_MATH_NS::FVector2(100, 30))) {
+                    SaveLastProjectPath();
+                    SR_UTILS_NS::CLIManager::Instance().SetProjectPath(m_projectFinalPath);
+                    dynamic_cast<EditorGUI*>(GetManager())->GetEngine()->Reload();
+                }
+            }
+            else if (SR_GRAPH_GUI_NS::Immediate::Button("Create", SR_MATH_NS::FVector2(100, 30)) && isOk) {
                 CreateProject();
+                SaveLastProjectPath();
             }
 
-            if (!isOk) {
+            if (!isOk && !canOpen) {
                 SR_GRAPH_GUI_NS::Immediate::EndDisabled();
             }
 
@@ -150,6 +169,22 @@ namespace SR_CORE_GUI_NS {
 
     void CreateNewProject::OnOpen() {
         ResetSettings();
+
+        m_projectName = SR_UTILS_NS::StoreUtils::User::GetString("LastCreatedProjectName", m_projectName);
+        m_projectPath = SR_UTILS_NS::StoreUtils::User::GetString("LastCreatedProjectPath", m_projectPath);
+        if (m_projectName.empty() || m_projectPath.empty()) {
+            ResetSettings();
+        }
+        else {
+            m_projectFinalPath = m_projectPath.Concat(m_projectName);
+        }
+
         Super::OnOpen();
+    }
+
+    void CreateNewProject::SaveLastProjectPath() {
+        SR_UTILS_NS::StoreUtils::User::SetString("LastCreatedProjectName", m_projectName);
+        SR_UTILS_NS::StoreUtils::User::SetString("LastCreatedProjectPath", m_projectPath);
+        SR_UTILS_NS::StoreUtils::Storage::Instance().Save();
     }
 }

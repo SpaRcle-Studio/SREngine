@@ -54,6 +54,7 @@
 #include <Utils/World/SceneUpdater.h>
 #include <Utils/World/ScenePrefabLogic.h>
 #include <Utils/Common/StringAtomLiterals.h>
+#include <Utils/Common/CLIManager.h>
 
 #include <Enum/EditorIcon.hpp>
 
@@ -730,9 +731,15 @@ namespace SR_CORE_GUI_NS {
 
         if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("File")) {
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem("New project")) {
-                //auto&& projectPath = SR_UTILS_NS::FileDialog::Instance().SaveDialog(SR_UTILS_NS::ResourceManager::Instance().GetResPath(), { { "Project folder", "" } });
-                //SR_LOG("EditorGUI::DrawMenuBar() : new project path: {}", projectPath.ToString());
                 OpenWidget<CreateNewProject>();
+            }
+
+            if (SR_UTILS_NS::CLIManager::Instance().GetProjectPath().has_value()) {
+                SR_GRAPH_GUI_NS::Immediate::Separator();
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Close project")) {
+                    SR_UTILS_NS::CLIManager::Instance().SetProjectPath(std::nullopt);
+                    GetEngine()->Reload();
+                }
             }
 
             SR_GRAPH_GUI_NS::Immediate::Separator();

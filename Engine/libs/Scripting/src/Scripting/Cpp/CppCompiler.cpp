@@ -12,6 +12,7 @@
 #include <Utils/Serialization/SRASerialization.h>
 #include <Utils/FileSystem/PathDataAccessor.h>
 #include <Utils/Common/CLIManager.h>
+#include <Utils/FileSystem/FileSystem.h>
 
 #include <Enum/CppCompilerType.hpp>
 
@@ -39,12 +40,16 @@ namespace SR_SCRIPTING_NS {
         m_engineResourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetEngineResPath();
 
         auto&& settingsPath = m_cachePath.Concat(CPP_COMPILER_SETTINGS_PATH);
-        if (SR_PLATFORM_NS::IsExists(settingsPath)) {
+        if (SR_UTILS_NS::FileSystem::IsFileExists(settingsPath)) {
+            SR_LOG("CppCompiler::Init() : loading settings from file: {}", settingsPath);
             SR_UTILS_NS::SRADeserializer deserializer;
             if (!deserializer.LoadFromFile(settingsPath)) {
                 SR_WARN("CppCompiler::Init() : failed to load settings file: {}", settingsPath);
             }
             m_settings.Load(deserializer);
+        }
+        else {
+            SR_LOG("CppCompiler::Init() : settings file not found at path: {}. Using default settings.", settingsPath);
         }
 
         if (!IsCompilerAvailable()) {
@@ -87,7 +92,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     bool CppCompiler::IsCompilerAvailable() const {
-        return SR_PLATFORM_NS::IsExists(m_settings.compilerPath);
+        return SR_UTILS_NS::FileSystem::IsFileExists(m_settings.compilerPath);
     }
 
     bool CppCompiler::InstallMinGW() {
@@ -97,7 +102,7 @@ namespace SR_SCRIPTING_NS {
         auto&& zipFile = cache.Concat("mingw.zip");
         auto&& installDir = cache.Concat("mingw");
 
-        if (!SR_PLATFORM_NS::IsExists(zipFile)) {
+        if (!SR_UTILS_NS::FileSystem::IsFileExists(zipFile)) {
             if (!SR_PLATFORM_NS::DownloadFile(url, zipFile)) {
                 SR_ERROR("CppCompiler::InstallMinGW() : failed to download file from url: " + url);
                 return false;
@@ -253,6 +258,11 @@ namespace SR_SCRIPTING_NS {
 
         if (m_settings.compilerType == CppCompilerType::MSVC) {
             outArgs += "/Fe\"" + outModulePath + "\" ";
+            outArgs += "/Fo\"" + context.outFolder.Concat(context.moduleName).ToString() + "\" ";
+
+            std::string compilerPdbPath = context.outFolder.Concat(context.moduleName).ToString() + "_compiler.pdb";
+            outArgs += "/Fd\"" + compilerPdbPath + "\" ";
+
             std::string msvcInclude = m_settings.compilerPath.GetPrevious().GetPrevious().GetPrevious().GetPrevious().Concat("include");
             includePaths += "/I\"" + msvcInclude + "\" ";
 
@@ -336,7 +346,7 @@ namespace SR_SCRIPTING_NS {
         }
 
         if (m_settings.compilerType == CppCompilerType::MSVC) {
-            if (SR_PLATFORM_NS::IsExists(outPdbPath)) {
+            if (SR_UTILS_NS::FileSystem::IsFileExists(outPdbPath)) {
                 if (!SR_PLATFORM_NS::Copy(outPdbPath, outPdbPath + ".protected")) {
                     SR_ERROR("CppCompiler::Compile() : failed to copy PDB file!");
                 }
@@ -395,12 +405,12 @@ namespace SR_SCRIPTING_NS {
             auto&& pathRelease = libDir.Concat("lib{}.a"_format(libName));
         #endif
 
-            if (SR_PLATFORM_NS::IsExists(pathRelease)) {
+            if (SR_UTILS_NS::FileSystem::IsFileExists(pathRelease)) {
                 m_engineLibs.emplace_back(pathRelease);
                 continue;
             }
 
-            if (SR_PLATFORM_NS::IsExists(pathDebug)) {
+            if (SR_UTILS_NS::FileSystem::IsFileExists(pathDebug)) {
                 m_engineLibs.emplace_back(pathDebug);
                 continue;
             }
@@ -424,7 +434,7 @@ namespace SR_SCRIPTING_NS {
         const auto builtInCompilerPath = GetBuiltInMSVCCompilerPath();
 
         if (SR_UTILS_NS::CLIManager::Instance().IsHeadlessMode()) {
-            if (SR_PLATFORM_NS::IsExists(builtInCompilerPath)) {
+            if (SR_UTILS_NS::FileSystem::IsFileExists(builtInCompilerPath)) {
                 SR_LOG("CppCompiler::FindWindowsCompiler() : headless mode detected, using built-in MSVC compiler!");
                 m_settings.useBuiltInCompiler = true;
                 m_settings.compilerPath = builtInCompilerPath;
@@ -434,7 +444,7 @@ namespace SR_SCRIPTING_NS {
             return false;
         }
 
-        if (SR_PLATFORM_NS::IsExists(builtInCompilerPath)) {
+        if (SR_UTILS_NS::FileSystem::IsFileExists(builtInCompilerPath)) {
             const auto&& result = SR_PLATFORM_NS::ShowMessageBox(
                 "Choose compiler",
                 "MSVC built-in compiler is available. Do you want to use it? Use only if you are developer.",

@@ -223,6 +223,12 @@ namespace SR_CORE_NS {
 
         SR_INFO("Engine::Close() : closing game engine...");
 
+        if (m_threadsWorker && m_threadsWorker->IsActive()) {
+            SR_LOG("Engine::Close() : stopping threads worker...");
+            m_threadsWorker->Stop();
+            m_threadsWorker.Reset();
+        }
+
         SR_SCRIPTING_NS::ScriptSystem::Instance().WaitForIdle();
 
         SRAssert2(!m_editor, "Engine::Close() : editor is not destroyed! Call DestroyEditor() before closing the engine!");
@@ -252,7 +258,7 @@ namespace SR_CORE_NS {
             pWindow.AutoFree();
         }
 
-        //SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(true);
+        SR_SCRIPTING_NS::ScriptSystem::DestroySingleton();
 
         return true;
     }

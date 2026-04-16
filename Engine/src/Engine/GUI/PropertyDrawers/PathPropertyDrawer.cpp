@@ -65,7 +65,8 @@ namespace SR_CORE_GUI_NS {
                             feedback.isChanged = true;
 
                             if (relativeRes) {
-                                path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
+                                path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPathRef());
+                                path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetEngineResPathRef());
                             }
 
                             *pPath = path;

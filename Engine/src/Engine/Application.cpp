@@ -149,9 +149,21 @@ namespace SR_CORE_NS {
             return original;
         }
 
+        static const std::vector<std::string> cacheExceptions = {
+            "User/UserData.xml",
+            "User/GraphicsSettings.sra",
+            "User/CppCompilerSettings.sra"
+        };
+
         /// если файл в Resources/Cache, то не трогаем
         if (std::strncmp(pos + anchorLen, "Cache/", 6) == 0) {
-            return original;
+            const bool hasException = std::ranges::any_of(cacheExceptions, [original](const std::string& exception) {
+                return original.ends_with(exception);
+            });
+
+            if (!hasException) {
+                return original;
+            }
         }
 
         const char* tail = pos + anchorLen;
@@ -184,7 +196,13 @@ namespace SR_CORE_NS {
     }
 
     bool Application::InitializeResourcesFolder() {
-        m_engineResourcesPath = SR_PLATFORM_NS::GetApplicationResourcesPath();
+        SR_LOG("Application::InitializeResourcesFolder() : initializing resources folder...");
+        SR_PLATFORM_NS::InitializeHooks([](SR_PLATFORM_NS::PlatformHooks& hooks) { });
+
+        if (m_engineResourcesPath.empty()) {
+            m_engineResourcesPath = SR_PLATFORM_NS::GetApplicationResourcesPath();
+        }
+
         if (!m_engineResourcesPath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
             return false;
         }
@@ -193,6 +211,8 @@ namespace SR_CORE_NS {
 
         if (auto&& projectPath = SR_UTILS_NS::CLIManager::Instance().GetProjectPath()) {
             auto&& resourcesPath = projectPath->GetFolder().Concat("Resources");
+            SR_LOG("Application::InitializeResourcesFolder() : checking project resources folder at path \"{}\"...", resourcesPath);
+
             if (resourcesPath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
                 m_resourcesPath = resourcesPath;
 
@@ -269,6 +289,14 @@ namespace SR_CORE_NS {
 
         if (m_isNeedReload) {
             Close();
+            if (!InitializeResourcesFolder()) {
+                SR_ERROR("Application::MainLoop() : failed to initialize resources folder!");
+                m_hasErrors = true;
+                return false;
+            }
+
+            SR_UTILS_NS::ResourceManager::Instance().ChangeResourcesFolder(m_resourcesPath);
+
             m_hasErrors |= !Init();
             m_isNeedReload = false;
             if (m_hasErrors) {
@@ -335,8 +363,6 @@ namespace SR_CORE_NS {
         }
 
         m_engine.AutoFree();
-
-        SR_SCRIPTING_NS::ScriptSystem::DestroySingleton();
 
         SR_SRLM_NS::DataTypeManager::DestroySingleton();
 

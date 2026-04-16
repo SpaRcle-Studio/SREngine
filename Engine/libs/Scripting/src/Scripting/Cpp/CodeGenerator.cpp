@@ -344,7 +344,10 @@ namespace SR_SCRIPTING_NS {
     }
 
     void CppCodeGenerator::InitModuleSources(CppCodegenModule& module) {
-        SR_UTILS_NS::FileSystem::ForEachFileInFolder(module.path.GetFolder(), true, [&module](const SR_UTILS_NS::Path& filePath) {
+        SR_UTILS_NS::FileSystem::ForEachFileInFolder(module.path.GetFolder(), true, [&module, this](const SR_UTILS_NS::Path& filePath) {
+            if (filePath.IsSubPath(m_cacheFolder)) {
+                return;
+            }
             if (filePath.IsFile()) {
                 if (ScriptSystem::ALLOWED_CPP_EXTENSIONS.find(filePath.GetExtensionView()) != ScriptSystem::ALLOWED_CPP_EXTENSIONS.end()) {
                     module.codeFiles.insert(filePath);

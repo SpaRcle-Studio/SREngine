@@ -23,6 +23,7 @@ namespace SR_CORE_GUI_NS {
     private:
         bool CreateProject();
         void ResetSettings();
+        void SaveLastProjectPath();
 
     private:
         std::string m_projectName;

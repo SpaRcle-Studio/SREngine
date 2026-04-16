@@ -11,6 +11,8 @@
 #include <Graphics/Window/BasicWindowImpl.h>
 #include <Graphics/Pipeline/Pipeline.h>
 
+#include <Utils/Common/StoreUtils.h>
+
 #include <Codegen/InitializeState.generated.hpp>
 
 namespace SR_CORE_NS {
@@ -37,25 +39,21 @@ namespace SR_CORE_NS {
                 return SR_UTILS_NS::ThreadWorkerResult::Break;
             }
 
-            auto&& cachePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
-            auto&& windowSettingsPath = cachePath.Concat("User/WindowSettings.xml");
+            const auto resolution = SR_MATH_NS::UVector2(
+                SR_UTILS_NS::StoreUtils::User::GetInt("MainWindowWidth", 0),
+                SR_UTILS_NS::StoreUtils::User::GetInt("MainWindowHeight", 0)
+            );
 
-            const bool windowSettingsExist = windowSettingsPath.Exists();
+            const auto position = SR_MATH_NS::IVector2(
+                SR_UTILS_NS::StoreUtils::User::GetInt("MainWindowPosX", SR_INT32_MAX),
+                SR_UTILS_NS::StoreUtils::User::GetInt("MainWindowPosY", SR_INT32_MAX)
+            );
 
-            if (windowSettingsExist) {
-                auto&& windowSettings = SR_XML_NS::Document::Load(windowSettingsPath);
-
-                auto&& rootNode = windowSettings.Root().TryGetNode("Settings");
-
-                auto&& resolution = rootNode.TryGetNode("Size").TryGetAttribute<SR_MATH_NS::UVector2>(0);
-                auto&& position = rootNode.TryGetNode("Position").TryGetAttribute<SR_MATH_NS::IVector2>(0);
-                const bool isMaximized = rootNode.GetAttribute("IsMaximized").ToBool(false);
+            if (!resolution.HasZero() && position.x != SR_INT32_MAX && position.y != SR_INT32_MAX) {
+                const bool isMaximized = SR_UTILS_NS::StoreUtils::User::GetBool("MainWindowIsMaximized", false);
 
                 pWindowImpl->Move(position.x, position.y);
-
-                if (!resolution.HasZero()) {
-                    pWindowImpl->Resize(resolution.x, resolution.y);
-                }
+                pWindowImpl->Resize(resolution.x, resolution.y);
 
                 if (isMaximized) {
                     pWindowImpl->Maximize();
@@ -106,21 +104,17 @@ namespace SR_CORE_NS {
 
         if (auto&& pWindow = pEngine->GetMainWindow()) {
             auto&& cachePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
-            auto&& windowSettingsPath = cachePath.Concat("User/WindowSettings.xml");
-
-            auto&& windowSettings = SR_XML_NS::Document::New();
-            auto&& rootNode = windowSettings.Root().AppendNode("Settings");
 
             if (!pWindow->GetSize().HasZero()) {
-                rootNode.AppendNode("Size").AppendAttribute(pWindow->GetSize());
+                SR_UTILS_NS::StoreUtils::User::SetInt("MainWindowWidth", pWindow->GetSize().x);
+                SR_UTILS_NS::StoreUtils::User::SetInt("MainWindowHeight", pWindow->GetSize().y);
             }
 
-            rootNode.AppendNode("Position").AppendAttribute(pWindow->GetPosition());
-            rootNode.AppendAttribute("IsMaximized", pWindow->IsMaximized());
+            SR_UTILS_NS::StoreUtils::User::SetInt("MainWindowPosX", pWindow->GetPosition().x);
+            SR_UTILS_NS::StoreUtils::User::SetInt("MainWindowPosY", pWindow->GetPosition().y);
+            SR_UTILS_NS::StoreUtils::User::SetBool("MainWindowIsMaximized", pWindow->IsMaximized());
 
-            if (!windowSettings.Save(windowSettingsPath)) {
-                SR_ERROR("Engine::Finalize() : failed to save window settings!\n\tPath: " + windowSettingsPath.ToString());
-            }
+            SR_UTILS_NS::StoreUtils::Storage::Instance().Save();
         }
 
         if (auto&& pEditor = pEngine->GetEditor(); pEditor && pEditor->IsInitialized()) {

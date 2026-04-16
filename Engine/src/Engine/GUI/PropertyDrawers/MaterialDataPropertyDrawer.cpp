@@ -177,6 +177,10 @@ namespace SR_CORE_GUI_NS {
                     if (context.onBeforeChangeCallback) {
                         context.onBeforeChangeCallback(false);
                     }
+
+                    path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPathRef());
+                    path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetEngineResPathRef());
+
                     wasReset = true;
                     SR_GTYPES_NS::Texture::Ptr pTexture = CoreResLoader::Load<SR_GTYPES_NS::Texture>(path);
                     shaderData.SetData(property.id, pTexture, SR_GRAPH_NS::ShaderVarType::Sampler2D);

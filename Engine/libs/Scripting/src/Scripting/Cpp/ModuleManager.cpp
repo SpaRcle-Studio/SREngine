@@ -9,6 +9,7 @@
 #include <Utils/TypeTraits/SRClassMeta.h>
 #include <Utils/TypeTraits/Factory.h>
 #include <Utils/Common/StringAtomLiterals.h>
+#include <Utils/FileSystem/FileSystem.h>
 
 namespace SR_SCRIPTING_NS {
     void CppBehaviourInstance::OnBehaviourUnloaded(ManagerPasskey) {
@@ -119,7 +120,7 @@ namespace SR_SCRIPTING_NS {
         }
 
         auto&& sourcePdbPath = modulePath.GetFolder().Concat("{}.pdb"_format(moduleName));
-        if (SR_PLATFORM_NS::IsExists(sourcePdbPath)) {
+        if (SR_UTILS_NS::FileSystem::IsFileExists(sourcePdbPath)) {
             if (!SR_PLATFORM_NS::Copy(sourcePdbPath, pdbRuntimePath)) {
                 SR_ERROR("ModuleManager::LoadModule() : failed to copy module pdb!\n\tPath: " + sourcePdbPath.ToString());
                 return nullptr;
@@ -131,7 +132,7 @@ namespace SR_SCRIPTING_NS {
             return nullptr;
         }
 
-        if (!SR_PLATFORM_NS::IsExists(runtimePath)) {
+        if (!SR_UTILS_NS::FileSystem::IsFileExists(runtimePath)) {
             SR_ERROR("ModuleManager::LoadModule() : module not exists!\n\tPath: " + runtimePath.ToString());
             return nullptr;
         }
