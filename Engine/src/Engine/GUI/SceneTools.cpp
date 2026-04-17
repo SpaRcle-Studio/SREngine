@@ -141,6 +141,17 @@ namespace SR_CORE_GUI_NS {
 
                     SR_GRAPH_GUI_NS::Immediate::Separator();
 
+                    SR_GRAPH_GUI_NS::Immediate::Checkbox("Attach to camera", &m_attachToCamera);
+                    if (m_attachToCamera) {
+                        auto&& pRenderScene = GetRenderScene();
+                        int32_t maxCameraIndex = SR_MAX(pRenderScene ? static_cast<int32_t>(pRenderScene->GetCameras().size()) - 1 : 0, 0);
+                        if (SR_GRAPH_GUI_NS::Immediate::SliderInt("Attach camera index", &m_attachCameraIndex, 0, maxCameraIndex)) {
+                            SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
+                        }
+                    }
+
+                    SR_GRAPH_GUI_NS::Immediate::Separator();
+
                     optionFn("DEBUG_RENDER", "Debug draw");
 
                     SR_GRAPH_GUI_NS::Immediate::Separator();

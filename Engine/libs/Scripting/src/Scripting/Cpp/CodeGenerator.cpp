@@ -223,10 +223,10 @@ namespace SR_SCRIPTING_NS {
         SR_UTILS_NS::Path modulesPath = m_cacheFolder.Concat("Scripts/Modules-{}-{}"_format(SR_PLATFORM_NS::GetType(), SR_PLATFORM_NS::GetBuildType()));
 
         std::string cmakeContent;
-        cmakeContent += "if (NOT EMSCRIPTEN)\n\n";
+        cmakeContent += "if (NOT EMSCRIPTEN)\n";
 
+        cmakeContent += "\tcmake_minimum_required(VERSION 3.5)\n";
         cmakeContent += "\tproject(SREngineScriptModules)\n";
-        cmakeContent += "\tcmake_minimum_required(VERSION 3.5)\n\n";
         cmakeContent += "\tset(CMAKE_CXX_STANDARD 23)\n\n";
 
         cmakeContent += "\t# Modules\n\n";

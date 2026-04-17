@@ -35,6 +35,8 @@ namespace SR_CORE_GUI_NS {
         SR_NODISCARD float_t GetCameraVelocityFactor() const noexcept { return m_cameraVelocityFactor; }
         SR_NODISCARD EditorSceneViewMode GetViewMode() const noexcept { return m_viewMode; }
         SR_NODISCARD bool IsGizmo3D() const noexcept { return m_gizmoOperationFlag & SR_GRAPH_UI_NS::GizmoOperation::Z; }
+        SR_NODISCARD bool IsNeedAttachToCamera() const noexcept { return m_attachToCamera; }
+        SR_NODISCARD uint32_t GetAttachCameraIndex() const noexcept { return m_attachCameraIndex; }
 
         void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* pData) override;
 
@@ -49,6 +51,8 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_UI_NS::GizmoMode m_gizmoMode = SR_GRAPH_UI_NS::GizmoMode::Local;
         EditorSceneViewMode m_viewMode = EditorSceneViewMode::FreeAspect;
         float_t m_cameraVelocityFactor = 1.0f;
+        bool m_attachToCamera = false;
+        int32_t m_attachCameraIndex = 0;
 
     };
 }

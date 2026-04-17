@@ -387,8 +387,8 @@ namespace SR_CORE_NS::GUI {
             CheckHovered();
             CheckFocused();
 
-            SR_GRAPH_GUI_NS::Immediate::EndChild();
         }
+        SR_GRAPH_GUI_NS::Immediate::EndChild();
 
         if (SR_GRAPH_GUI_NS::Immediate::BeginChild("create new asset"))
         {
@@ -447,9 +447,8 @@ namespace SR_CORE_NS::GUI {
                     }
                 }
             }
-
-            SR_GRAPH_GUI_NS::Immediate::EndChild();
         }
+        SR_GRAPH_GUI_NS::Immediate::EndChild();
     }
 
     void FileBrowser::FileCatalogPanel(const float_t& leftWidth) {

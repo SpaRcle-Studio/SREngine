@@ -20,6 +20,7 @@
 #include <Graphics/Render/RenderTechnique.h>
 #include <Graphics/Pass/ColorBufferPass.h>
 #include <Graphics/Lighting/DirectionalLight.h>
+#include <Graphics/Render/RenderScene.h>
 
 #include <Physics/Utils/Utils.h>
 #include <Physics/3D/Rigidbody3D.h>
@@ -155,8 +156,8 @@ namespace SR_CORE_GUI_NS {
                 CheckFocused();
                 CheckHovered();
             }
-            SR_GRAPH_GUI_NS::Immediate::EndChild();
         }
+        SR_GRAPH_GUI_NS::Immediate::EndChild();
 
         SR_GRAPH_GUI_NS::Immediate::EndGroup();
     }
@@ -206,6 +207,8 @@ namespace SR_CORE_GUI_NS {
             m_colorRequest = nullptr;
         }
 
+        const bool attachToCamera = GetSceneTools()->IsNeedAttachToCamera();
+
         const float_t velocityFactor = GetSceneTools()->GetCameraVelocityFactor();
         const bool isDisabled = !IsOpen() || (!IsHovered() && !m_updateNonHoveredSceneViewer);
 
@@ -215,12 +218,19 @@ namespace SR_CORE_GUI_NS {
 
         if (auto&& pCamera = m_camera ? m_camera->GetComponent<EditorCamera>() : nullptr) {
             pCamera->SetViewportRect(viewportRect - SR_MATH_NS::FRect(windowPos, SR_MATH_NS::FVector2::Zero()));
+            auto&& pRenderScene = pCamera->GetRenderScene();
+            if (attachToCamera && pRenderScene) {
+                if (auto&& pGameCamera = pRenderScene->GetCameraByIndex(GetSceneTools()->GetAttachCameraIndex())) {
+                    m_camera->GetTransform()->SetGlobalTranslation(pGameCamera->GetTransform()->GetGlobalTranslation());
+                    m_camera->GetTransform()->SetGlobalRotation(pGameCamera->GetTransform()->GetGlobalRotation());
+                }
+            }
         }
 
         const bool isNeedLock = SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseRight) ||
             SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseMiddle);
 
-        if (isNeedLock && !isDisabled) {
+        if (isNeedLock && !isDisabled && !attachToCamera) {
             m_cursorLock = SR_UTILS_NS::CursorLock(SR_UTILS_NS::CursorLockMode::Editor, viewportRect);
         }
         else {
@@ -230,7 +240,7 @@ namespace SR_CORE_GUI_NS {
         if (m_camera) {
             if (auto&& pMover = m_camera->GetComponent<SR_UTILS_NS::CameraFlyMover>()) {
                 pMover->SetVelocityFactor(velocityFactor);
-                pMover->SetActive(!isDisabled);
+                pMover->SetActive(!isDisabled && !attachToCamera);
             }
 
             m_cameraTranslation = m_camera->GetTransform()->GetTranslation();
