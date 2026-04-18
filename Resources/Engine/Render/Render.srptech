@@ -63,6 +63,9 @@ use tabs: true
 										10-s:Default
 								8-k:i
 									9-v:d
+										10-s:Mirror
+								8-k:i
+									9-v:d
 										10-s:Opaque
 							7-a:disallowedLayers
 							7-v:castShadows

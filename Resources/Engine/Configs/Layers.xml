@@ -6,6 +6,8 @@
         <Default/>
 		<Opaque/>
 		<OpaqueNoShadow/>
+		<Pixelize/>
+		<Mirror/>
         <Debug/>
     	<Transparent/>
     	<TransparentSecond/>
