@@ -77,6 +77,18 @@ use tabs: true
 				4-k:i
 					5-o:d
 						6-v:type
+							7-s:RenderTechniqueLayerMesh
+						6-o:ptr
+							7-a:allowedLayers
+								8-k:i
+									9-v:d
+										10-s:Skybox
+							7-a:disallowedLayers
+							7-v:frustumCulling
+								8-b:false
+				4-k:i
+					5-o:d
+						6-v:type
 							7-s:RenderTechniqueLayerSkybox
 						6-o:ptr
 				4-k:i
@@ -250,3 +262,58 @@ use tabs: true
 						6-v:type
 							7-s:RenderTechniquePresetIntegrationAutoExposure
 						6-o:ptr
+			3-a:customLayers
+				4-k:i
+					5-o:d
+						6-v:type
+							7-s:RenderTechniqueLayerCustomPass
+						6-o:ptr
+							7-v:layer
+								8-s:[Debug]
+							7-v:editorOnly
+								8-b:true
+							7-o:pass
+								8-v:type
+									9-s:DebugPass
+								8-o:ptr
+									9-a:shaders
+										10-k:item
+											11-v:first
+												12-s:mesh
+											11-o:second
+												12-v:shaderPath
+													13-s:Engine/Shaders/Gizmo/wire-mesh.srsl
+										10-k:item
+											11-v:first
+												12-s:line
+											11-o:second
+												12-v:shaderPath
+													13-s:Engine/Shaders/line.srsl
+				4-k:i
+					5-o:d
+						6-v:type
+							7-s:RenderTechniqueLayerCustomPass
+						6-o:ptr
+							7-v:layer
+								8-s:[DebugOverlay]
+							7-v:editorOnly
+								8-b:true
+							7-o:pass
+								8-v:type
+									9-s:DebugPass
+								8-o:ptr
+									9-a:shaders
+										10-k:item
+											11-v:first
+												12-s:mesh
+											11-o:second
+												12-v:shaderPath
+													13-s:Engine/Shaders/Gizmo/wire-mesh.srsl
+										10-k:item
+											11-v:first
+												12-s:line
+											11-o:second
+												12-v:shaderPath
+													13-s:Engine/Shaders/line.srsl
+									9-v:isOverlay
+										10-b:true

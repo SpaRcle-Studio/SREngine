@@ -1,0 +1,10 @@
+sra format
+use tabs: true
+0-r:Root
+	1-o:asset
+		2-v:type
+			3-s:FileRenderTechniqueResource
+		2-o:ptr
+			3-o:data
+				4-v:name
+					5-s:Empty

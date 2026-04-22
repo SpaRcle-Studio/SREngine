@@ -42,12 +42,11 @@ void fragment() {
     COLOR_INDEX_2 = vec4(VERTEX, 1.0);
 
     vec2 uv = fragment_uv();
+    vec2 absTiling = abs(tiling);
+    vec2 tiledUV = uv * absTiling + offset;
 
-    vec2 tiledUV = uv * abs(tiling) + offset;
-    tiledUV = fract(tiledUV);
-    vec2 flipMask = step(tiling, vec2(0.0)); // 1 если tiling < 0
-    tiledUV = mix(tiledUV, 1.0 - tiledUV, flipMask);
-
+    vec2 flipMask = step(tiling, vec2(0.0));
+    tiledUV = mix(tiledUV, offset + absTiling - (uv * absTiling), flipMask);
     vec4 diffuseColor = fragment_diffuse(tiledUV) * color;
 
 #ifdef HAS_ALPHA

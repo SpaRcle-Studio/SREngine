@@ -37,10 +37,13 @@ use tabs: true
 					5-o:ptr
 						6-v:entityId
 							7-i:2822180086892147070
-						6-v:priority
-							7-i:-2147483648
 						6-v:type
 							7-s:Editor
+						6-v:priority
+							7-i:-2147483648
+						6-o:renderParameters
+							7-v:colorBuffer
+								8-b:true
 		2-v:name
 			3-s:Editor camera
 		2-o:transform

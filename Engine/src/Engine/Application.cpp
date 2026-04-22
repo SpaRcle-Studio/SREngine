@@ -367,7 +367,7 @@ namespace SR_CORE_NS {
         SR_SRLM_NS::DataTypeManager::DestroySingleton();
 
         SR_UTILS_NS::TagManager::DestroySettings();
-        SR_UTILS_NS::LayerManager::DestroySettings();
+        SR_UTILS_NS::LayerManager::DestroySingleton();
 
         SR_AUDIO_NS::SoundManager::DestroySingleton();
         SR_PHYSICS_NS::PhysicsLibrary::DestroySingleton();

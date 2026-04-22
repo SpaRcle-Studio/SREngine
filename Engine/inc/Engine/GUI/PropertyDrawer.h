@@ -177,7 +177,13 @@ namespace SR_CORE_GUI_NS {
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<OptionalPropertyDrawer>;
     public:
+        ~OptionalPropertyDrawer() override;
+
+    public:
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
+
+    private:
+        PropertyDrawerBase::Ptr m_valueDrawer;
 
     };
 

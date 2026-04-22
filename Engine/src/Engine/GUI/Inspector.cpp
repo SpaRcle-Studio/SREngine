@@ -671,25 +671,27 @@ namespace SR_CORE_GUI_NS {
     }
 
     void Inspector::InspectLayer(const SR_UTILS_NS::StringAtom layer, const SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)>& callback) {
-        SR_UTILS_NS::LayerManager::Instance().Do([&](auto&& pSettings) {
-            auto&& pLayerManager = dynamic_cast<SR_UTILS_NS::LayerManager*>(pSettings);
-            auto&& layers = pLayerManager->GetLayers();
-            auto&& layerIndex = static_cast<int>(pLayerManager->GetLayerIndex(layer));
-            auto&& pLayers = const_cast<std::vector<SR_UTILS_NS::StringAtom>*>(&layers);
+        SR_TRACY_ZONE;
 
-            if (SR_GRAPH_GUI_NS::Immediate::Combo("Layer", &layerIndex, [](void* vec, int idx, const char** out_text){
-                auto&& vector = reinterpret_cast<std::vector<SR_UTILS_NS::StringAtom>*>(vec);
-                if (idx < 0 || idx >= vector->size())
-                    return false;
+        SR_MAYBE_UNUSED auto&& lock = SR_UTILS_NS::LayerManager::Instance().ScopeLockSingleton();
 
-                *out_text = vector->at(idx).c_str();
+        auto&& layers = SR_UTILS_NS::LayerManager::Instance().GetLayers();
+        auto&& layerIndex = static_cast<int>(SR_UTILS_NS::LayerManager::Instance().GetLayerIndex(layer));
+        auto&& pLayers = const_cast<std::vector<SR_UTILS_NS::StringAtom>*>(&layers);
 
-                return true;
-            }, reinterpret_cast<void*>(pLayers), layers.size())) {
-                /// TODO: переделать на комманды
-                callback(layers[layerIndex]);
+        if (SR_GRAPH_GUI_NS::Immediate::Combo("Layer", &layerIndex, [](void* vec, int idx, const char** out_text){
+            auto&& vector = reinterpret_cast<std::vector<SR_UTILS_NS::StringAtom>*>(vec);
+            if (idx < 0 || idx >= vector->size()) {
+                return false;
             }
-        });
+
+            *out_text = vector->at(idx).c_str();
+
+            return true;
+        }, reinterpret_cast<void*>(pLayers), layers.size())) {
+            /// TODO: переделать на комманды
+            callback(layers[layerIndex]);
+        }
     }
 
     void Inspector::InitCategories() {

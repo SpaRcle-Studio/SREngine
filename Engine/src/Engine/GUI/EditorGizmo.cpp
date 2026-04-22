@@ -6,6 +6,7 @@
 #include <Engine/GUI/Hierarchy.h>
 #include <Engine/EngineCommands.h>
 #include <Engine/GUI/EditorGUI.h>
+#include <Engine/GUI/EditorCamera.h>
 
 #include <Physics/3D/Rigidbody3D.h>
 
@@ -129,6 +130,10 @@ namespace SR_CORE_GUI_NS {
             }
 
             if (pGameObject == GetGameObject()) {
+                return false;
+            }
+
+            if (pGameObject->GetComponent<EditorCamera>()) {
                 return false;
             }
 
