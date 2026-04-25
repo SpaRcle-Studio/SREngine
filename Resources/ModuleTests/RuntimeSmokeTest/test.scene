@@ -468,6 +468,9 @@ use tabs: true
 								8-o:ptr
 									9-v:entityId
 										10-i:4136111382530613485
+									9-o:renderParameters
+										10-a:includeLayers
+										10-a:excludeLayers
 					5-v:name
 						6-s:Camera
 					5-o:transform

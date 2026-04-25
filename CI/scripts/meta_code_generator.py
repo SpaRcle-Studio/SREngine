@@ -154,7 +154,7 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
             f.write('\n' + '\t' * (tabs + 4) + f'.SetNoHeader()')
 
         if prop.range:
-            f.write('\n' + '\t' * (tabs + 3) + f'.SetRange(static_cast<float_t>({prop.range[0]}), static_cast<float_t>({prop.range[1]}))')
+            f.write('\n' + '\t' * (tabs + 4) + f'.SetRange(static_cast<float_t>({prop.range[0]}), static_cast<float_t>({prop.range[1]}))')
 
         if prop.enum_filter:
             f.write('\n' + '\t' * (tabs + 4) + f'.SetEnumFilter(&EnumFilter_{prop.serialize_name})')
