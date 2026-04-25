@@ -153,6 +153,12 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
         if prop.no_header:
             f.write('\n' + '\t' * (tabs + 4) + f'.SetNoHeader()')
 
+        if prop.range:
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetRange(static_cast<float_t>({prop.range[0]}), static_cast<float_t>({prop.range[1]}))')
+
+        if prop.enum_filter:
+            f.write('\n' + '\t' * (tabs + 4) + f'.SetEnumFilter(&EnumFilter_{prop.serialize_name})')
+
         if prop.debug_only:
             f.write('\n' + '\t' * (tabs + 4) + f'.SetDebugOnly()')
 
@@ -503,10 +509,19 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
     #f.write('\t' * (tabs + 0) + f'}}\n\n')
 
     for prop in class_obj.variables:
-        if not prop.default_value:
-            continue
-        f.write('\t' * tabs + f'// default value for "{prop}"' + '\n')
-        f.write('\t' * tabs + f'static auto GetDefault_{prop.serialize_name}() {{ return {prop.default_value}; }}' + '\n\n')
+        if prop.default_value:
+            f.write('\t' * tabs + f'// default value for "{prop}"' + '\n')
+            f.write('\t' * tabs + f'static auto GetDefault_{prop.serialize_name}() {{ return {prop.default_value}; }}' + '\n\n')
+
+        if prop.enum_filter:
+            f.write('\t' * (tabs + 0) + f'// enum filter for "{prop}"' + '\n')
+            f.write('\t' * (tabs + 0) + f'static bool EnumFilter_{prop.serialize_name}(SR_UTILS_NS::SRClass* pClass, SR_UTILS_NS::StringAtom enumStringValue) {{\n')
+            f.write('\t' * (tabs + 1) + f'using EnumType = decltype({class_name}::{prop.name});' + '\n')
+            f.write('\t' * (tabs + 1) + f'auto&& classRef = *static_cast<{class_name}*>(pClass);' + '\n')
+            f.write('\t' * (tabs + 1) + f'auto&& enumValue = SR_UTILS_NS::EnumReflector::FromString<EnumType>(enumStringValue);' + '\n')
+            f.write('\t' * (tabs + 1) + f'return {prop.enum_filter}(classRef, enumValue);' + '\n')
+            f.write('\t' * (tabs + 0) + f'}}\n\n')
+                
 
     for prop in class_obj.variables:
         if not prop.property_condition:

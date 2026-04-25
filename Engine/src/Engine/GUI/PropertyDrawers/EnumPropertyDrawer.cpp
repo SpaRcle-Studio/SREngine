@@ -60,6 +60,21 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth);
 
+        auto&& isEnumNameAvailable = [&](SR_UTILS_NS::StringAtom name) -> bool {
+            if (context.isEnumValueAvailableCheckFn && !context.isEnumValueAvailableCheckFn(name)) {
+                return false;
+            }
+
+            if (context.pOwner) {
+                auto&& pEnumFilter = context.GetEditorParams().GetEnumFilter();
+                if (pEnumFilter && !(*pEnumFilter)(context.pOwner, name)) {
+                    return false;
+                }
+            }
+
+            return true;
+        };
+
         const char* pPrevValue = selectedIndex ? names[selectedIndex.value()].c_str() : "";
         if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("##Combo", pPrevValue, SR_GRAPH_GUI_NS::Immediate::ComboFlags::NoArrowButton)) {
             if (!m_comboOpened) {
@@ -72,7 +87,7 @@ namespace SR_CORE_GUI_NS {
             }
 
             for (uint64_t i = 0; i < names.size(); ++i) {
-                if (context.isEnumValueAvailableCheckFn && !context.isEnumValueAvailableCheckFn(names[i])) {
+                if (!isEnumNameAvailable(names[i])) {
                     continue;
                 }
 
@@ -96,6 +111,18 @@ namespace SR_CORE_GUI_NS {
         else {
             m_comboOpened = false;
             m_searchBuffer.clear();
+        }
+
+        if (selectedIndex) { /// check selected availability
+            if (!isEnumNameAvailable(names[*selectedIndex])) {
+                selectedIndex.reset();
+                for (uint64_t i = 0; i < names.size(); ++i) {
+                    if (isEnumNameAvailable(names[i])) {
+                        selectedIndex = i;
+                        break;
+                    }
+                }
+            }
         }
 
         SR_GRAPH_GUI_NS::Immediate::PopItemWidth();

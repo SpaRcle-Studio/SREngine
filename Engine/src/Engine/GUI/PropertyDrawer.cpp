@@ -408,6 +408,7 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth);
 
         const float_t drag = context.GetEditorParams().GetDragSpeed();
+        auto&& range = context.GetEditorParams().GetRange();
         const auto dataType = SR_GRAPH_GUI_NS::Immediate::GetDataType(value.SizeOf(), value.IsSigned(), value.IsIntegral());
         if (dataType == SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::COUNT) {
             SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown data type!");
@@ -416,7 +417,19 @@ namespace SR_CORE_GUI_NS {
 
         if (void* pValue = value.Data()) {
             SR_GRAPH_GUI_NS::Immediate::ImmediateDataTypeUnion dataTypeUnion = SR_GRAPH_GUI_NS::Immediate::ReadDataType(pValue, dataType);
-            if (SR_GRAPH_GUI_NS::Immediate::DragScalar("", dataType, &dataTypeUnion, drag)) {
+            SR_GRAPH_GUI_NS::Immediate::ImmediateDataTypeUnion minValue;
+            SR_GRAPH_GUI_NS::Immediate::ImmediateDataTypeUnion maxValue;
+            void* pMin = nullptr;
+            void* pMax = nullptr;
+
+            if (range) {
+                minValue = SR_GRAPH_GUI_NS::Immediate::FloatToDataType(range.value().first, dataType);
+                maxValue = SR_GRAPH_GUI_NS::Immediate::FloatToDataType(range.value().second, dataType);
+                pMin = &minValue;
+                pMax = &maxValue;
+            }
+
+            if (SR_GRAPH_GUI_NS::Immediate::DragScalar("", dataType, &dataTypeUnion, drag, pMin, pMax)) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(true);
                 }

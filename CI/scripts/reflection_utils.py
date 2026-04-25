@@ -84,9 +84,11 @@ class CPPProperty:
         self.type_name = type_name
         self.default_value = None
         self.change_callback = None
+        self.enum_filter = None
         self.setter = None
         self.getter = None
         self.reset_value = None
+        self.range = None
         self.property_condition = None
         self.load_condition = None
         self.custom_args = {}

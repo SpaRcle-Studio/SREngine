@@ -269,6 +269,17 @@ def process_property(property_obj: reflection_utils.CPPProperty, clang_child):
     property_obj.setter = extract_special_tag_comment_data(clang_child, 'setter')
     property_obj.getter = extract_special_tag_comment_data(clang_child, 'getter')
     property_obj.reset_value = extract_special_tag_comment_data(clang_child, 'resetValue')
+    property_obj.range = extract_special_tag_comment_data(clang_child, 'range')
+    property_obj.enum_filter = extract_special_tag_comment_data(clang_child, 'enumFilter')
+
+    if property_obj.range:
+        range_split = property_obj.range.split(',')
+        if len(range_split) == 2:
+            property_obj.range = (range_split[0].strip(), range_split[1].strip())
+        else:
+            print(f'Error: invalid range for property {property_obj.name}: {property_obj.range}')
+            property_obj.range = None
+
     property_obj.default_value = extract_special_tag_comment_data(clang_child, 'defaultValue')
     property_obj.property_condition = extract_special_tag_comment_data(clang_child, 'propertyCondition')
     property_obj.load_condition = extract_special_tag_comment_data(clang_child, 'loadCondition')
