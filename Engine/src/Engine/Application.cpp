@@ -320,6 +320,8 @@ namespace SR_CORE_NS {
     }
 
     bool Application::Execute() {
+        SR_TRACY_ZONE;
+
         SR_INFO("Application::Execute() : waiting for the application to close...");
 
         m_hasErrors = false;

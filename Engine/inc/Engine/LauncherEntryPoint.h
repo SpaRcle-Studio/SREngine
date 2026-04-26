@@ -13,6 +13,8 @@
 using LauncherEntryPointAfterInitCallback = SR_HTYPES_NS::Function<void(SR_CORE_NS::Launcher::Ptr&)>;
 
 static int LauncherEntryPoint(const LauncherEntryPointAfterInitCallback& afterInitCallback = LauncherEntryPointAfterInitCallback()) {
+    SR_TRACY_ZONE;
+
     int32_t code = 0;
 
 #ifdef SR_EMSCRIPTEN
