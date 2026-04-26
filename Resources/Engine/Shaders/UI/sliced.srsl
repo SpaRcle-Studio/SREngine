@@ -55,11 +55,169 @@ void fragment_color_buffer_discard() {
 }
 
 void fragment() {
-    if (FILL_CENTER == 0 && (UV.x > SLICED_WINDOW_BORDER.x && UV.x < 1.0 - SLICED_WINDOW_BORDER.y) && (UV.y > SLICED_WINDOW_BORDER.z && UV.y < 1.0 - SLICED_WINDOW_BORDER.w)) {
+//fill logic
+    vec2 newUV = calculate_sliced_uv(UV);
+
+    if(SPRITE_MODE == 1){
+        float fill = SPRITE_FILL_AMOUNT;
+        float coord = 0.0;
+        float offset = 0.0;
+
+        //FILL METHOD
+        if(SPRITE_FILL_METHOD == 0){//HORIZONT fill
+            coord = UV.x;
+
+            //ORIGIN
+            if(SPRITE_FILL_ORIGIN == 0){//LEFT
+                offset = 1.0;
+                coord = offset - coord;
+            }
+            else if(SPRITE_FILL_ORIGIN == 1){// RIGHT
+                offset = 0.0;
+            }
+        }
+
+        else if(SPRITE_FILL_METHOD == 1){//VERTICAL fill
+            coord = UV.y;
+
+            //ORIGIN
+            if(SPRITE_FILL_ORIGIN == 2){//BOTTOM
+                offset = 0.0;
+            }
+            else if(SPRITE_FILL_ORIGIN == 3){// TOP
+                offset = 1.0;
+                coord = offset - coord;
+            }
+        }
+
+        else if(SPRITE_FILL_METHOD == 2){//RADIAL 90
+            vec2 center = vec2(0.0, 0.0);
+
+            if (SPRITE_FILL_ORIGIN == 6) {// TopLeft
+                center = vec2(0.0, 1.0);
+            }
+            else if (SPRITE_FILL_ORIGIN == 5) {// TopRight
+                center = vec2(1.0, 1.0);
+            }
+            else if (SPRITE_FILL_ORIGIN == 4) {// BottomRight
+                center = vec2(1.0, 0.0);
+            }
+
+            vec2 dir = UV - center;
+            float angle = atan(dir.y, dir.x);
+            coord = (angle + 3.1415926) / (2.0 * 3.1415926);
+
+            // СДВИГ
+            if (SPRITE_FILL_ORIGIN == 7) {// BottomLeft
+                coord -= 0.5;
+            }
+            else if (SPRITE_FILL_ORIGIN == 6) {// TopLeft
+                coord -= 0.25;
+            }
+            else if (SPRITE_FILL_ORIGIN == 4) {// BottomRight
+                coord -= 0.75;
+            }
+
+            //normalize
+            if (coord < 0.0) {
+               coord += 1.0;
+            }
+        }
+
+        else if(SPRITE_FILL_METHOD == 3){//Radial 180 fill
+
+            vec2 center = vec2(0.5, 0.5);
+
+            if (SPRITE_FILL_ORIGIN == 0) {//Left
+                center = vec2(1.0, 0.5);
+            }
+            else if(SPRITE_FILL_ORIGIN == 1){//right
+                center = vec2(0.0, 0.5);
+            }
+            else if(SPRITE_FILL_ORIGIN == 2){//Bottom
+                center = vec2(0.5, 0.0);
+            }
+            else if(SPRITE_FILL_ORIGIN == 3){//Top
+                center = vec2(0.5, 1.0);
+            }
+
+            vec2 dir = (UV - center);
+            float angle = atan(dir.y, dir.x);
+            if (angle < 0.0){
+                angle += 6.2831853;
+            }
+            coord = angle / 6.2831853;
+
+            //Origin
+            if (SPRITE_FILL_ORIGIN == 0) {//Left
+                coord -= 0.25;
+            }
+            else if(SPRITE_FILL_ORIGIN == 1){//right
+                coord -= 0.5;
+            }
+            else if(SPRITE_FILL_ORIGIN == 2){//Bottom
+                coord -= 0.75;
+            }
+            else if(SPRITE_FILL_ORIGIN == 3){//Top
+                coord -= 0.25;
+            }
+
+            if (coord < 0.0){//normalize
+                coord += 1.0;
+            }
+        }
+
+        else if(SPRITE_FILL_METHOD == 4)
+        {
+            //Radial 360 fill
+            vec2 center = vec2(0.5, 0.5);
+            vec2 dir = (UV - center);
+            float angle = atan(dir.y, dir.x);
+            coord = (angle + 3.1415) / (3.1415 * 2.0);
+
+            if (SPRITE_FILL_ORIGIN == 1) {        // Right
+                // ничего (это базовый 0)
+            }
+            else if (SPRITE_FILL_ORIGIN == 3) {   // Top
+                coord -= 0.25;
+            }
+            else if (SPRITE_FILL_ORIGIN == 0) {   // Left
+                coord -= 0.5;
+            }
+            else if (SPRITE_FILL_ORIGIN == 2) {   // Bottom
+                coord -= 0.75;
+            }
+
+            // нормализация
+            if (coord < 0.0){
+                coord += 1.0;
+            }
+        }
+
+        //FILL slicing by method
+        if (SPRITE_FILL_METHOD == 2) { // Radial90
+            if (coord > 0.25){
+                discard;
+            }
+            coord = coord / 0.25;
+        }
+        else if (SPRITE_FILL_METHOD == 3) { // Radial180
+            if (coord > 0.75){
+            discard;
+            }
+            coord = coord / 0.75;
+        }
+
+        if(coord > fill){
+            discard;
+        }
+
+    }
+
+    else if (FILL_CENTER == 0 && (UV.x > SLICED_WINDOW_BORDER.x && UV.x < 1.0 - SLICED_WINDOW_BORDER.y) && (UV.y > SLICED_WINDOW_BORDER.z && UV.y < 1.0 - SLICED_WINDOW_BORDER.w)) {
         discard;
     }
 
-    vec2 newUV = calculate_sliced_uv(UV);
     COLOR = texture(diffuse, newUV).rgba * color;
 }
 
