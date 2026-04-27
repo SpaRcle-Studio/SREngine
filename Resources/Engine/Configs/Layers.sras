@@ -128,17 +128,21 @@ use tabs: true
 					5-o:d
 						6-v:name
 							7-s:UI
+						6-v:noPostProcess
+							7-b:true
 						6-v:mainRenderer
 							7-b:true
 						6-v:colorBuffer
-							7-b:true
-						6-v:clearDepth
 							7-b:true
 				4-k:i
 					5-o:d
 						6-v:name
 							7-s:Gizmo
+						6-v:noPostProcess
+							7-b:true
 						6-v:mainRenderer
+							7-b:true
+						6-v:clearDepth
 							7-b:true
 				4-k:i
 					5-o:d
@@ -151,6 +155,8 @@ use tabs: true
 						6-v:name
 							7-s:[DebugOverlay]
 						6-v:isCustom
+							7-b:true
+						6-v:noPostProcess
 							7-b:true
 						6-v:editorOnly
 							7-b:true

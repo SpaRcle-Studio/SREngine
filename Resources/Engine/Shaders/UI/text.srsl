@@ -9,10 +9,11 @@ DepthWrite true;
 DepthTest true;
 
 [[shared]] vec2 UV;
-[[uniform]] vec4 NDC_RECT;
+
+[[uniform], [public]] vec3 color = vec3(1.0, 1.0, 1.0);
 
 void fragment() {
-    COLOR = texture(TEXT_ATLAS_TEXTURE, UV);
+    COLOR = texture(TEXT_ATLAS_TEXTURE, UV) + vec4(color, 0.0);
 
     if (COLOR.a == 0) {
         discard;
@@ -31,6 +32,6 @@ void vertex() {
         NDC_RECT.xy + vec2(1.0, 1.0) * size  // правый-верхний
     };
 
-    OUT_POSITION = PIXEL_ORTHOGONAL_MATRIX * vec4(sprite_vertices[VERTEX_INDEX], 0.0, 1.0);
+    OUT_POSITION = PIXEL_ORTHOGONAL_MATRIX * vec4(sprite_vertices[VERTEX_INDEX] * UI_SCALE, 0.0, 1.0);
     UV = uv[VERTEX_INDEX];
 }

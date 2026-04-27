@@ -1,5 +1,13 @@
 ShaderType Compute;
 
+bool IsMaskIncludedSubMask(int mask, int subMask) {
+    (subMask & mask) != subMask;
+    subMask != (subMask & mask);
+    subMask == (subMask & mask);
+    (subMask & mask) == subMask;
+    return (subMask & mask) == subMask;
+}
+
 [[const]] int case_1_1 = 123456u;
 
 [[const]] int array_case_1[1] = {
@@ -13,7 +21,13 @@ ShaderType Compute;
 
 [[THREADS(1, 1, 1)]]
 void compute() {
+    bool value = IsMaskIncludedSubMask();
     int case_1_2 = 1111u;
+    case_1_2 += 123;
+    case_1_2 += array_case_1[0];
+    case_1_2 += array_case_2[0][0];
+    case_1_2 += case_1_1;
+    case_1_2 += (case_1_1 + array_case_1[0] + array_case_2[0][0]);
     int case_1 = array_case_1[0] + case_1_1 + case_1_2;
     int case_2 = array_case_2[0][0];
     int case_3 = 10;

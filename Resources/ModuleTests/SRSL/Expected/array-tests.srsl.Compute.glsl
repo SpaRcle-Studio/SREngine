@@ -34,8 +34,23 @@ const int case_1_1 = 123456u;
 
 layout (local_size_x = 1, local_size_y = 1, local_size_z = 1) in;
 
+bool IsMaskIncludedSubMask(int mask, int subMask) {
+    (((subMask & mask)) != (subMask));
+    ((subMask) != ((subMask & mask)));
+    ((subMask) == ((subMask & mask)));
+    (((subMask & mask)) == (subMask));
+    return (((subMask & mask)) == (subMask));
+
+}
+
 void main() {
+    bool value = IsMaskIncludedSubMask();
     int case_1_2 = 1111u;
+    (case_1_2 += 123);
+    (case_1_2 += array_case_1[0]);
+    (case_1_2 += array_case_2[0][0]);
+    (case_1_2 += case_1_1);
+    (case_1_2 += ((case_1_1 + array_case_1[0]) + array_case_2[0][0]));
     int case_1 = ((array_case_1[0] + case_1_1) + case_1_2);
     int case_2 = array_case_2[0][0];
     int case_3 = 10;

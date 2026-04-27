@@ -25,6 +25,7 @@
 #include <Engine/GUI/CreateNewProject.h>
 #include <Engine/GUI/SceneTools.h>
 #include <Engine/EngineCommands.h>
+#include <Engine/UI/UIButton.h>
 
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Types/RenderTarget.h>
@@ -40,6 +41,8 @@
 #include <Graphics/Lighting/SpotLight.h>
 #include <Graphics/Lighting/AreaLight.h>
 #include <Graphics/Lighting/ProbeLight.h>
+#include <Graphics/Font/Text.h>
+#include <Graphics/Types/Geometry/Sprite.h>
 
 #include <Physics/3D/Rigidbody3D.h>
 
@@ -514,6 +517,51 @@ namespace SR_CORE_GUI_NS {
             else {
                 SR_WARN("GUISystem::BeginMenuBar() : scene is not valid!");
             }
+        }
+
+        SR_GRAPH_GUI_NS::Immediate::Separator();
+
+        if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("UI")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("UI Element")) {
+                if (auto&& pScene = m_engine->GetScene()) {
+                    auto&& pSO = pScene->InstanceGameObject("UI Element"_atom).StaticCast<SR_UTILS_NS::SceneObject>();
+                    InstantiateSO(pSO);
+                }
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Button")) {
+                if (auto&& pScene = m_engine->GetScene()) {
+                    auto&& pSO = pScene->InstanceGameObject("Button"_atom).StaticCast<SR_UTILS_NS::SceneObject>();
+                    auto&& pButton = pSO->AddComponent<SR_CORE_UI_NS::UIButton>();
+                    InstantiateSO(pSO);
+                }
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Text")) {
+                if (auto&& pScene = m_engine->GetScene()) {
+                    auto&& pSO = pScene->InstanceGameObject("Text"_atom).StaticCast<SR_UTILS_NS::SceneObject>();
+                    if (auto&& pText = pSO->AddComponent<SR_GTYPES_NS::Text>()) {
+                        pText->SetText("Text");
+                    }
+                    InstantiateSO(pSO);
+                }
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Sprite")) {
+                if (auto&& pScene = m_engine->GetScene()) {
+                    auto&& pSO = pScene->InstanceGameObject("Sprite"_atom).StaticCast<SR_UTILS_NS::SceneObject>();
+                    auto&& pSprite = pSO->AddComponent<SR_GTYPES_NS::Sprite>();
+                    InstantiateSO(pSO);
+                }
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::EndMenu();
         }
 
         SR_GRAPH_GUI_NS::Immediate::Separator();
@@ -1021,8 +1069,8 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (pInstantiateTarget) {
-            auto&& pTargetGO = pSO->DynamicCast<SR_UTILS_NS::GameObject>();
-            auto&& pGO = pInstantiateTarget->DynamicCast<SR_UTILS_NS::GameObject>();
+            auto&& pTargetGO = pInstantiateTarget->DynamicCast<SR_UTILS_NS::GameObject>();
+            auto&& pGO = pSO->DynamicCast<SR_UTILS_NS::GameObject>();
 
             if (pTargetGO && pGO && pTargetGO->GetTransform()->GetMeasurement() == SR_UTILS_NS::Measurement::Space2D && pGO->GetTransform()->GetMeasurement() == SR_UTILS_NS::Measurement::Space3D) {
                 pGO->SetTransform(SRNew<SR_UTILS_NS::TransformRect>());
