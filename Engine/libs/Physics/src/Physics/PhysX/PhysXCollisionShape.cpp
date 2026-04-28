@@ -145,6 +145,7 @@ namespace SR_PTYPES_NS {
         for (auto&& pShape : m_shapes) {
             if (pShape) {
                 pShape->userData = static_cast<void*>(GetShape());
+                SRAssert(pShape->userData);
                 if (needUpdateTriggerFlag) {
                     pShape->setFlag(physx::PxShapeFlag::eSIMULATION_SHAPE, !m_isTrigger);
                     pShape->setFlag(physx::PxShapeFlag::eTRIGGER_SHAPE, m_isTrigger);
@@ -414,6 +415,7 @@ namespace SR_PTYPES_NS {
     void PhysXCollisionShape::ReleaseShapes() {
         for (auto&& pShape : m_shapes) {
             if (pShape) {
+                SRAssert(pShape->userData);
                 pShape->userData = nullptr;
                 pShape->release();
             }

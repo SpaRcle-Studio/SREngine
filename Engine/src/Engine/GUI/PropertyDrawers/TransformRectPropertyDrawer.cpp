@@ -273,7 +273,7 @@ namespace SR_CORE_GUI_NS {
             return clicked;
         }
 
-        void DrawPresetPopup(SR_UTILS_NS::TransformRect* pTransformRect, PropertyDrawerFeedback& feedback) {
+        void DrawPresetPopup(SR_UTILS_NS::TransformRect* pTransformRect, const PropertyDrawerContext& context, PropertyDrawerFeedback& feedback) {
             const char* popupId = "##AnchorPresetsPopup";
             
             if (SR_GRAPH_GUI_NS::Immediate::BeginPopup(popupId)) {
@@ -319,14 +319,16 @@ namespace SR_CORE_GUI_NS {
                                 char buttonId[32];
                                 snprintf(buttonId, sizeof(buttonId), "##preset_%d", gridIdx);
                                 
-                                if (DrawPresetButton(buttonId, SR_MATH_NS::FVector2(buttonSize, buttonSize), 
-                                                    PRESETS[static_cast<int>(preset)], isSelected)) {
+                                if (DrawPresetButton(buttonId, SR_MATH_NS::FVector2(buttonSize, buttonSize), PRESETS[static_cast<int>(preset)], isSelected)) {
+                                    if (context.onBeforeChangeCallback) {
+                                        context.onBeforeChangeCallback(false);
+                                    }
+                                    feedback.isChanged = true;
                                     SR_UTILS_NS::RectAnchors newAnchors;
                                     newAnchors.min = PRESETS[static_cast<int>(preset)].anchorMin;
                                     newAnchors.max = PRESETS[static_cast<int>(preset)].anchorMax;
                                     pTransformRect->SetAnchors(newAnchors);
                                     pTransformRect->SetPivot(PRESETS[static_cast<int>(preset)].pivot);
-                                    feedback.isChanged = true;
                                     SR_GRAPH_GUI_NS::Immediate::CloseCurrentPopup();
                                 }
                             } else {
@@ -347,7 +349,7 @@ namespace SR_CORE_GUI_NS {
         }
     }
 
-    bool TransformRectEditDragFloat(const char* label, const SR_MATH_NS::FVector2& buttonSize, const SR_MATH_NS::FColor& color, float& value, float dragSpeed, float fieldWidth) {
+    bool TransformRectEditDragFloat(const char* label, const SR_MATH_NS::FVector2& buttonSize, const SR_MATH_NS::FColor& color, float& value, float dragSpeed, float fieldWidth, bool& dragging) {
         SR_GRAPH_GUI_NS::Immediate::PushID(label);
 
         bool changed = false;
@@ -358,14 +360,17 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_GUI_NS::Immediate::SameLine();
         SR_GRAPH_GUI_NS::Immediate::PushItemWidth(fieldWidth);
-        changed |= SR_GRAPH_GUI_NS::Immediate::DragFloat("", &value, dragSpeed);
+        if (SR_GRAPH_GUI_NS::Immediate::DragFloat("", &value, dragSpeed)) {
+            changed = true;
+            dragging = true;
+        }
         SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
 
         SR_GRAPH_GUI_NS::Immediate::PopID();
         return changed;
     }
 
-    bool TransformRectEditDragInt(const char* label, const SR_MATH_NS::FVector2& buttonSize, const SR_MATH_NS::FColor& color, int32_t& value, float fieldWidth) {
+    bool TransformRectEditDragInt(const char* label, const SR_MATH_NS::FVector2& buttonSize, const SR_MATH_NS::FColor& color, int32_t& value, float fieldWidth, bool& dragging) {
         SR_GRAPH_GUI_NS::Immediate::PushID(label);
 
         bool changed = false;
@@ -376,7 +381,10 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_GUI_NS::Immediate::SameLine();
         SR_GRAPH_GUI_NS::Immediate::PushItemWidth(fieldWidth);
-        changed |= SR_GRAPH_GUI_NS::Immediate::DragScalar("", SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::Int32, &value, 1.0f);
+        if (SR_GRAPH_GUI_NS::Immediate::DragScalar("", SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::Int32, &value, 1.0f)) {
+            changed = true;
+            dragging = true;
+        }
         SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
 
         SR_GRAPH_GUI_NS::Immediate::PopID();
@@ -427,7 +435,7 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            DrawPresetPopup(pTransformRect, feedback);
+            DrawPresetPopup(pTransformRect, context, feedback);
         }
 
         const bool anchorsTogetherX = pTransformRect->AreAnchorsTogetherX();
@@ -456,7 +464,11 @@ namespace SR_CORE_GUI_NS {
             auto&& size = pTransformRect->GetSize();
 
             float_t posXLeftValue = anchorsTogetherX ? anchoredPos.x : offsetMin.x;
-            if (TransformRectEditDragFloat(anchorsTogetherX ? "Pos X" : "Left", buttonSize, anchorsTogetherX ? redColor : whiteColor, posXLeftValue, dragSpeed, threeSegmentWidth)) {
+            bool draggingPosX = false;
+            if (TransformRectEditDragFloat(anchorsTogetherX ? "Pos X" : "Left", buttonSize, anchorsTogetherX ? redColor : whiteColor, posXLeftValue, dragSpeed, threeSegmentWidth, draggingPosX)) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(draggingPosX);
+                }
                 feedback.isChanged = true;
                 if (anchorsTogetherX) {
                     anchoredPos.x = posXLeftValue;
@@ -471,7 +483,11 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::SameLine();
 
             float_t posYTopValue = anchorsTogetherY ? anchoredPos.y : offsetMax.y;
-            if (TransformRectEditDragFloat(anchorsTogetherY ? "Pos Y" : "Top", buttonSize, anchorsTogetherY ? greenColor : whiteColor, posYTopValue, dragSpeed, threeSegmentWidth)) {
+            bool draggingPosY = false;
+            if (TransformRectEditDragFloat(anchorsTogetherY ? "Pos Y" : "Top", buttonSize, anchorsTogetherY ? greenColor : whiteColor, posYTopValue, dragSpeed, threeSegmentWidth, draggingPosY)) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(draggingPosY);
+                }
                 feedback.isChanged = true;
                 if (anchorsTogetherY) {
                     anchoredPos.y = posYTopValue;
@@ -486,7 +502,11 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::SameLine();
 
             int32_t order = pTransformRect->GetLocalPriority();
-            if (TransformRectEditDragInt("Order", buttonSize, blueColor, order, threeSegmentWidth)) {
+            bool draggingOrder = false;
+            if (TransformRectEditDragInt("Order", buttonSize, blueColor, order, threeSegmentWidth, draggingOrder)) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(draggingOrder);
+                }
                 feedback.isChanged = true;
                 pTransformRect->SetLocalPriority(order);
             }
@@ -494,7 +514,11 @@ namespace SR_CORE_GUI_NS {
             /// ========================================= Size / Right-Bottom ==========================================
 
             float_t widthRightValue = anchorsTogetherX ? size.x : offsetMax.x;
-            if (TransformRectEditDragFloat(anchorsTogetherX ? "Width" : "Right", buttonSize, anchorsTogetherX ? redColor : whiteColor, widthRightValue, dragSpeed, threeSegmentWidth)) {
+            bool draggingWidth = false;
+            if (TransformRectEditDragFloat(anchorsTogetherX ? "Width" : "Right", buttonSize, anchorsTogetherX ? redColor : whiteColor, widthRightValue, dragSpeed, threeSegmentWidth, draggingWidth)) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(draggingWidth);
+                }
                 feedback.isChanged = true;
                 if (anchorsTogetherX) {
                     size.x = widthRightValue;
@@ -509,7 +533,11 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::SameLine();
 
             float_t heightBottomValue = anchorsTogetherY ? size.y : offsetMin.y;
-            if (TransformRectEditDragFloat(anchorsTogetherY ? "Height" : "Bottom", buttonSize, anchorsTogetherY ? greenColor : whiteColor, heightBottomValue, dragSpeed, threeSegmentWidth)) {
+            bool draggingHeight = false;
+            if (TransformRectEditDragFloat(anchorsTogetherY ? "Height" : "Bottom", buttonSize, anchorsTogetherY ? greenColor : whiteColor, heightBottomValue, dragSpeed, threeSegmentWidth, draggingHeight)) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(draggingHeight);
+                }
                 feedback.isChanged = true;
                 if (anchorsTogetherY) {
                     size.y = heightBottomValue;
@@ -526,6 +554,9 @@ namespace SR_CORE_GUI_NS {
             bool isRelative = pTransformRect->IsRelativePriority();
 
             if (SR_GRAPH_GUI_NS::Immediate::ButtonColored(isRelative ? "Relative" : "Absolute", whiteColor, SR_MATH_NS::FVector2(buttonSize.x + threeSegmentWidth, buttonSize.y))) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(false);
+                }
                 feedback.isChanged = true;
                 isRelative = !isRelative;
                 pTransformRect->SetRelativePriority(isRelative);
@@ -534,53 +565,65 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::EndGroup();
 
         {
+            bool dragging = false;
             SR_GRAPH_GUI_NS::Immediate::PushID("Rotation");
             SR_GRAPH_GUI_NS::Immediate::Button("Rotation", SR_MATH_NS::FVector2(presetButtonWidth, context.fieldHeight));
             SR_GRAPH_GUI_NS::Immediate::SameLine();
             SR_MATH_NS::FVector3 rotation = pTransformRect->GetRotation();
             const SR_MATH_NS::FVector3 oldRotation = rotation;
-            TransformRectEditDragFloat("X", smallButtonSize, redColor, rotation.x, dragSpeed, threeSegmentMainWidth);
+            TransformRectEditDragFloat("X", smallButtonSize, redColor, rotation.x, dragSpeed, threeSegmentMainWidth, dragging);
             SR_GRAPH_GUI_NS::Immediate::SameLine();
-            TransformRectEditDragFloat("Y", smallButtonSize, greenColor, rotation.y, dragSpeed, threeSegmentMainWidth);
+            TransformRectEditDragFloat("Y", smallButtonSize, greenColor, rotation.y, dragSpeed, threeSegmentMainWidth, dragging);
             SR_GRAPH_GUI_NS::Immediate::SameLine();
-            TransformRectEditDragFloat("Z", smallButtonSize, blueColor, rotation.z, dragSpeed, threeSegmentMainWidth);
+            TransformRectEditDragFloat("Z", smallButtonSize, blueColor, rotation.z, dragSpeed, threeSegmentMainWidth, dragging);
             if (rotation != oldRotation) {
-                pTransformRect->SetRotation(rotation);
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(dragging);
+                }
                 feedback.isChanged = true;
+                pTransformRect->SetRotation(rotation);
             }
             SR_GRAPH_GUI_NS::Immediate::PopID();
         }
 
         {
+            bool dragging = false;
             SR_GRAPH_GUI_NS::Immediate::PushID("Scale");
             SR_GRAPH_GUI_NS::Immediate::Button("Scale", SR_MATH_NS::FVector2(presetButtonWidth, context.fieldHeight));
             SR_GRAPH_GUI_NS::Immediate::SameLine();
             SR_MATH_NS::FVector3 scale = pTransformRect->GetScale();
             const SR_MATH_NS::FVector3 oldScale = scale;
-            TransformRectEditDragFloat("X", smallButtonSize, redColor, scale.x, dragSpeed, threeSegmentMainWidth);
+            TransformRectEditDragFloat("X", smallButtonSize, redColor, scale.x, dragSpeed, threeSegmentMainWidth, dragging);
             SR_GRAPH_GUI_NS::Immediate::SameLine();
-            TransformRectEditDragFloat("Y", smallButtonSize, greenColor, scale.y, dragSpeed, threeSegmentMainWidth);
+            TransformRectEditDragFloat("Y", smallButtonSize, greenColor, scale.y, dragSpeed, threeSegmentMainWidth, dragging);
             SR_GRAPH_GUI_NS::Immediate::SameLine();
-            TransformRectEditDragFloat("Z", smallButtonSize, blueColor, scale.z, dragSpeed, threeSegmentMainWidth);
+            TransformRectEditDragFloat("Z", smallButtonSize, blueColor, scale.z, dragSpeed, threeSegmentMainWidth, dragging);
             if (scale != oldScale) {
-                pTransformRect->SetScale(scale);
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(dragging);
+                }
                 feedback.isChanged = true;
+                pTransformRect->SetScale(scale);
             }
             SR_GRAPH_GUI_NS::Immediate::PopID();
         }
 
         {
+            bool dragging = false;
             SR_GRAPH_GUI_NS::Immediate::PushID("Pivot");
             SR_GRAPH_GUI_NS::Immediate::Button("Pivot", SR_MATH_NS::FVector2(presetButtonWidth, context.fieldHeight));
             SR_GRAPH_GUI_NS::Immediate::SameLine();
             SR_MATH_NS::FVector2 pivot = pTransformRect->GetPivot();
             const SR_MATH_NS::FVector2 oldPivot = pivot;
-            TransformRectEditDragFloat("X", smallButtonSize, redColor, pivot.x, dragSpeed, threeSegmentMainWidth);
+            TransformRectEditDragFloat("X", smallButtonSize, redColor, pivot.x, dragSpeed, threeSegmentMainWidth, dragging);
             SR_GRAPH_GUI_NS::Immediate::SameLine();
-            TransformRectEditDragFloat("Y", smallButtonSize, greenColor, pivot.y, dragSpeed, threeSegmentMainWidth);
+            TransformRectEditDragFloat("Y", smallButtonSize, greenColor, pivot.y, dragSpeed, threeSegmentMainWidth, dragging);
             if (pivot != oldPivot) {
-                pTransformRect->SetPivot(pivot);
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(dragging);
+                }
                 feedback.isChanged = true;
+                pTransformRect->SetPivot(pivot);
             }
             SR_GRAPH_GUI_NS::Immediate::PopID();
         }
@@ -600,91 +643,12 @@ namespace SR_CORE_GUI_NS {
         propertyContext.openedByDefault = true;
 
         if (auto&& anchorFeedback = m_anchorsDrawer->Draw(propertyContext); anchorFeedback.isChanged || anchorFeedback.isDrag) {
-            pTransformRect->SetAnchors(*anchorsValue.TryCast<SR_UTILS_NS::RectAnchors>());
+            if (context.onBeforeChangeCallback) {
+                context.onBeforeChangeCallback(anchorFeedback.isDrag);
+            }
             feedback.isChanged = true;
+            pTransformRect->SetAnchors(*anchorsValue.TryCast<SR_UTILS_NS::RectAnchors>());
         }
-
-
-        /*// Rect section
-        {
-            SR_GRAPH_GUI_NS::Immediate::Text("Rect");
-
-            if (anchorsTogetherX && anchorsTogetherY) {
-                // Show Position X, Y and Width, Height
-                SR_MATH_NS::FVector2 anchoredPos = pTransformRect->GetAnchoredPosition();
-                SR_MATH_NS::FVector2 size = pTransformRect->GetSize();
-                const SR_MATH_NS::FVector2 oldAnchoredPos = anchoredPos;
-                const SR_MATH_NS::FVector2 oldSize = size;
-
-                DrawVector2Field("Pos X, Y", anchoredPos, dragSpeed, fieldWidth, axisButtonWidth);
-                DrawVector2Field("Width, Height", size, dragSpeed, fieldWidth, axisButtonWidth);
-
-                if (anchoredPos != oldAnchoredPos) {
-                    SR_MATH_NS::FVector3 newTranslation = pTransformRect->GetTranslation();
-                    newTranslation.x = anchoredPos.x;
-                    newTranslation.y = anchoredPos.y;
-                    pTransformRect->SetTranslation(newTranslation);
-                    feedback.isChanged = true;
-                }
-
-                if (size != oldSize) {
-                    pTransformRect->SetSize(size);
-                    feedback.isChanged = true;
-                }
-            }
-            else {
-                // Show Left, Top, Right, Bottom
-                SR_MATH_NS::FVector2 offsetMin = pTransformRect->GetOffsetMin();
-                SR_MATH_NS::FVector2 offsetMax = pTransformRect->GetOffsetMax();
-
-                constexpr std::array<const char*, 4> labels = { "Left", "Top", "Right", "Bottom" };
-                static const std::array<SR_MATH_NS::FColor, 4> colors = {
-                    SR_MATH_NS::FColor(0.6f, 0.6f, 0.6f, 1.0f),
-                    SR_MATH_NS::FColor(0.6f, 0.6f, 0.6f, 1.0f),
-                    SR_MATH_NS::FColor(0.6f, 0.6f, 0.6f, 1.0f),
-                    SR_MATH_NS::FColor(0.6f, 0.6f, 0.6f, 1.0f),
-                };
-
-                float_t offsets[4] = { offsetMin.x, offsetMax.y, offsetMax.x, offsetMin.y };
-
-                for (uint8_t i = 0; i < 4; ++i) {
-                    SR_GRAPH_GUI_NS::Immediate::PushID(i);
-
-                    if (i > 0) {
-                        SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.fieldTitleWidth, 0.0f));
-                        SR_GRAPH_GUI_NS::Immediate::SameLine();
-                    }
-
-                    SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Button, colors[i]);
-                    SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::ButtonHovered, colors[i] + SR_MATH_NS::FColor(0.1f, 0.1f, 0.1f, 0.0f));
-                    SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::ButtonActive, colors[i] + SR_MATH_NS::FColor(0.2f, 0.2f, 0.2f, 0.0f));
-
-                    const SR_MATH_NS::FVector2 buttonSize = { axisButtonWidth * 2.2f, 0.0f };
-                    if (SR_GRAPH_GUI_NS::Immediate::Button(labels[i], buttonSize)) {
-                        offsets[i] = 0.0f;
-                    }
-
-                    SR_GRAPH_GUI_NS::Immediate::PopStyleColor(3);
-                    SR_GRAPH_GUI_NS::Immediate::SameLine();
-
-                    const float_t partItemWidth = fieldWidth - axisButtonWidth * 2.2f;
-                    SR_GRAPH_GUI_NS::Immediate::PushItemWidth(partItemWidth);
-                    if (SR_GRAPH_GUI_NS::Immediate::DragFloat("", &offsets[i], dragSpeed)) {
-                        if (i == 0) offsetMin.x = offsets[i];
-                        else if (i == 1) offsetMax.y = offsets[i];
-                        else if (i == 2) offsetMax.x = offsets[i];
-                        else if (i == 3) offsetMin.y = offsets[i];
-
-                        pTransformRect->SetOffsetMin(offsetMin);
-                        pTransformRect->SetOffsetMax(offsetMax);
-                        feedback.isChanged = true;
-                    }
-                    SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
-
-                    SR_GRAPH_GUI_NS::Immediate::PopID();
-                }
-            }
-        }*/
 
         SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
 

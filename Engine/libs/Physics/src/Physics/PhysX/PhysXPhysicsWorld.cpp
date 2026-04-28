@@ -12,19 +12,31 @@ namespace SR_PHYSICS_NS {
                                                    physx::PxFilterObjectAttributes attributes1, physx::PxFilterData filterData1,
                                                    physx::PxPairFlags& pairFlags, const void* constantBlock, physx::PxU32 constantBlockSize)
     {
-        PX_UNUSED(attributes0);
-        PX_UNUSED(attributes1);
         PX_UNUSED(filterData0);
         PX_UNUSED(filterData1);
-        PX_UNUSED(constantBlockSize);
         PX_UNUSED(constantBlock);
+        PX_UNUSED(constantBlockSize);
 
+        const bool isTrigger0 = physx::PxFilterObjectIsTrigger(attributes0);
+        const bool isTrigger1 = physx::PxFilterObjectIsTrigger(attributes1);
 
-        pairFlags = physx::PxPairFlag::eSOLVE_CONTACT | physx::PxPairFlag::eDETECT_DISCRETE_CONTACT
+        if (isTrigger0 || isTrigger1) {
+            pairFlags =
+                    physx::PxPairFlag::eTRIGGER_DEFAULT
                     | physx::PxPairFlag::eNOTIFY_TOUCH_FOUND
-                    | physx::PxPairFlag::eNOTIFY_TOUCH_PERSISTS
-                    | physx::PxPairFlag::eNOTIFY_CONTACT_POINTS
                     | physx::PxPairFlag::eNOTIFY_TOUCH_LOST;
+
+            return physx::PxFilterFlag::eDEFAULT;
+        }
+
+        pairFlags =
+                physx::PxPairFlag::eSOLVE_CONTACT
+                | physx::PxPairFlag::eDETECT_DISCRETE_CONTACT
+                | physx::PxPairFlag::eNOTIFY_TOUCH_FOUND
+                | physx::PxPairFlag::eNOTIFY_TOUCH_PERSISTS
+                | physx::PxPairFlag::eNOTIFY_TOUCH_LOST
+                | physx::PxPairFlag::eNOTIFY_CONTACT_POINTS;
+
         return physx::PxFilterFlag::eDEFAULT;
     }
 

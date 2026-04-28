@@ -105,35 +105,59 @@ namespace SR_PHYSICS_NS {
 
             const physx::PxTriggerPair& tp = pairs[i];
 
-            auto triggerShape = reinterpret_cast<SR_PTYPES_NS::CollisionShape*>(tp.triggerShape[0].userData);
-            auto otherShape = reinterpret_cast<SR_PTYPES_NS::CollisionShape*>(tp.otherShape[0].userData);
+            auto triggerShape = reinterpret_cast<SR_PTYPES_NS::CollisionShape*>(tp.triggerShape->userData);
+            if (!triggerShape) {
+                SRHaltOnce0();
+                continue;
+            }
+
+            auto otherShape   = reinterpret_cast<SR_PTYPES_NS::CollisionShape*>(tp.otherShape->userData);
+            if (!otherShape && (!tp.otherShape->getActor() || !tp.otherShape->getActor()->userData)) {
+                SRHaltOnce0();
+                continue;
+            }
 
             SR_PTYPES_NS::Rigidbody* triggerRigidBody = triggerShape->GetRigidbody();
-            SR_PTYPES_NS::Rigidbody* rigidbody = otherShape->GetRigidbody();
+
+            SR_PTYPES_NS::Rigidbody* pRigidbody = nullptr;
+            SR_PHYSICS_NS::CharacterController* pController = nullptr;
+            SR_UTILS_NS::SceneObject::Ptr pSO;
+
+            if (otherShape) {
+                pRigidbody = otherShape->GetRigidbody();
+                pSO = pRigidbody->GetSceneObject();
+            }
+            else if (tp.otherShape->getActor() && tp.otherShape->getActor()->userData) {
+                auto&& pUserData = static_cast<RigidActorUserData*>(tp.otherShape->getActor()->userData);
+                if (!pUserData || pUserData->type != RigidActorUserData::Type::CharacterController) {
+                    SRHaltOnce0();
+                    continue;
+                }
+                pController = reinterpret_cast<SR_PHYSICS_NS::CharacterController*>(pUserData->pUserData);
+                pSO = pController->GetSceneObject();
+            }
 
             SR_UTILS_NS::CollisionData data = { };
 
             auto&& triggerGameObject = triggerRigidBody->GetGameObject();
-            auto&& gameObject = rigidbody->GetGameObject();
 
-            if (!triggerGameObject || !gameObject) {
+            if (!triggerGameObject || !pSO) {
                 SRHalt0();
                 continue;
             }
 
-            data.pHandler = rigidbody;
+            void* pHandler = pController ? (void*)pController : (void*)pRigidbody;
+            data.pHandler = pHandler;
 
-            for (auto&& pComponent : triggerGameObject->GetComponents()){
+            for (auto&& pComponent : triggerGameObject->GetComponents()) {
                 if (pComponent == triggerRigidBody){
                     continue;
                 }
                 else {
-                    if (tp.status & physx::PxPairFlag::eNOTIFY_TOUCH_FOUND)
-                    {
+                    if (tp.status & physx::PxPairFlag::eNOTIFY_TOUCH_FOUND) {
                         pComponent->OnCollisionEnter(data);
                     }
-                    if (tp.status & physx::PxPairFlag::eNOTIFY_TOUCH_LOST)
-                    {
+                    if (tp.status & physx::PxPairFlag::eNOTIFY_TOUCH_LOST) {
                         pComponent->OnCollisionExit(data);
                     }
                 }
@@ -141,17 +165,15 @@ namespace SR_PHYSICS_NS {
 
             data.pHandler = triggerRigidBody;
 
-            for (auto&& pComponent : gameObject->GetComponents()){
-                if (pComponent == rigidbody){
+            for (auto&& pComponent : pSO->GetComponents()) {
+                if (pComponent.Get() == pHandler) {
                     continue;
                 }
                 else {
-                    if (tp.status & physx::PxPairFlag::eNOTIFY_TOUCH_FOUND)
-                    {
+                    if (tp.status & physx::PxPairFlag::eNOTIFY_TOUCH_FOUND) {
                         pComponent->OnTriggerEnter(data);
                     }
-                    if (tp.status & physx::PxPairFlag::eNOTIFY_TOUCH_LOST)
-                    {
+                    if (tp.status & physx::PxPairFlag::eNOTIFY_TOUCH_LOST) {
                         pComponent->OnTriggerExit(data);
                     }
                 }
