@@ -32,6 +32,6 @@ void vertex() {
         NDC_RECT.xy + vec2(1.0, 1.0) * size  // правый-верхний
     };
 
-    OUT_POSITION = PIXEL_ORTHOGONAL_MATRIX * vec4(sprite_vertices[VERTEX_INDEX] * UI_SCALE, 0.0, 1.0);
+    OUT_POSITION = PIXEL_ORTHOGONAL_MATRIX * MODEL_MATRIX * vec4(sprite_vertices[VERTEX_INDEX], 0.0, 1.0);
     UV = uv[VERTEX_INDEX];
 }

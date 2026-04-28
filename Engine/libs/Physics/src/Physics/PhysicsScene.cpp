@@ -132,6 +132,10 @@ namespace SR_PHYSICS_NS {
         }
 
         for (auto&& pRigidbody : m_rigidbodyToRemove) {
+            if (!pRigidbody) {
+                SRHalt("pRigidbody is nullptr!");
+                continue;
+            }
             auto&& type = pRigidbody->GetMeasurement();
 
             if (type == SR_UTILS_NS::Measurement::Space2D) {

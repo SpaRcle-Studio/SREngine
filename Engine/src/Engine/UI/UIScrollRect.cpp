@@ -36,7 +36,8 @@ namespace SR_CORE_UI_NS {
 
         const SR_MATH_NS::FVector2 uiMousePos = pCanvas->ScreenToCanvasSpace(input.GetMousePos());
         if (const int32_t wheel = input.GetMouseWheel()) {
-            if (pVScrollBar && pViewportTransform->GetLayoutRect().Contains(uiMousePos)) {
+            auto&& viewportRect = pCanvas->LayoutToCanvasRect(pViewportTransform->GetLayoutRect());
+            if (pVScrollBar && viewportRect.Contains(uiMousePos)) {
                 float value = pVScrollBar->GetValue();
                 value -= wheel * 0.1f;
                 pVScrollBar->SetValue(std::clamp(value, 0.f, 1.f));

@@ -38,7 +38,7 @@ namespace SR_CORE_UI_NS {
             || m_rightClick && input.GetMouseDown(SR_UTILS_NS::MouseCode::MouseRight)
             || m_middleClick && input.GetMouseDown(SR_UTILS_NS::MouseCode::MouseMiddle);
 
-        if (isDown && m_state != State::Pressed && OnBeginDrag(uiMousePos, pCanvas->GetCamera())) {
+        if (isDown && m_state != State::Pressed && OnBeginDrag(*pCanvas, uiMousePos, pCanvas->GetCamera())) {
             m_state = State::Pressed;
         }
         else if (m_state == State::Pressed) {
@@ -49,7 +49,7 @@ namespace SR_CORE_UI_NS {
                 m_state = State::Hovered;
             }
 
-            OnDrag(uiMousePos, pCanvas->GetCamera());
+            OnDrag(*pCanvas, uiMousePos, pCanvas->GetCamera());
         }
         else {
             m_state = State::Idle;
@@ -120,9 +120,9 @@ namespace SR_CORE_UI_NS {
         return m_value;
     }
 
-    bool UIScrollBar::OnBeginDrag(const SR_MATH_NS::FVector2& screenPosition, SR_GTYPES_NS::Camera* pCamera) {
+    bool UIScrollBar::OnBeginDrag(SR_GRAPH_UI_NS::Canvas& canvas, const SR_MATH_NS::FVector2& screenPosition, SR_GTYPES_NS::Camera* pCamera) {
         if (auto&& pTransform = GetTransformAs<SR_UTILS_NS::TransformRect>()) {
-            if (pTransform->GetLayoutRect().Contains(screenPosition)) {
+            if (canvas.LayoutToCanvasRect(pTransform->GetLayoutRect()).Contains(screenPosition)) {
                 return true;
             }
         }
@@ -130,13 +130,16 @@ namespace SR_CORE_UI_NS {
         return false;
     }
 
-    void UIScrollBar::OnDrag(const SR_MATH_NS::FVector2& screenPosition, SR_GTYPES_NS::Camera* pCamera) {
+    void UIScrollBar::OnDrag(SR_GRAPH_UI_NS::Canvas& canvas, const SR_MATH_NS::FVector2& screenPosition, SR_GTYPES_NS::Camera* pCamera) {
+        auto&& containerRect = canvas.LayoutToCanvasRect(m_containerRect->GetLayoutRect());
+        auto&& handleRect = canvas.LayoutToCanvasRect(m_handleRect->GetLayoutRect());
+
         SR_MATH_NS::FVector2 localCursor = screenPosition;
-        auto&& handleCenterRelativeToContainerCorner = localCursor - m_containerRect->GetLayoutRect().XY();
-        auto&& handleCorner = handleCenterRelativeToContainerCorner - (m_handleRect->GetLayoutRect().Size() - m_handleRect->GetSizeDelta()) * 0.5f;
+        auto&& handleCenterRelativeToContainerCorner = localCursor - containerRect.XY();
+        auto&& handleCorner = handleCenterRelativeToContainerCorner - (handleRect.Size() - m_handleRect->GetSizeDelta()) * 0.5f;
 
         const uint8_t axis = GetAxis();
-        float parentSize = axis == 0 ? m_containerRect->GetLayoutRect().Width() : m_containerRect->GetLayoutRect().Height();
+        float parentSize = axis == 0 ? containerRect.Width() : containerRect.Height();
         float remainingSize = parentSize * (1.f - GetSize());
         if (remainingSize <= 0.f) {
             return;

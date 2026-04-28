@@ -533,8 +533,7 @@ namespace SR_CORE_GUI_NS {
 
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Button")) {
                 if (auto&& pScene = m_engine->GetScene()) {
-                    auto&& pSO = pScene->InstanceGameObject("Button"_atom).StaticCast<SR_UTILS_NS::SceneObject>();
-                    auto&& pButton = pSO->AddComponent<SR_CORE_UI_NS::UIButton>();
+                    auto&& pSO = pScene->InstanceFromFile("Engine/Prefabs/Button.prefab").StaticCast<SR_UTILS_NS::SceneObject>();
                     InstantiateSO(pSO);
                 }
             }

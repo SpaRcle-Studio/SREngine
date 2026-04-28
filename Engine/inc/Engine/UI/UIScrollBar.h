@@ -51,8 +51,8 @@ namespace SR_CORE_UI_NS {
 
     private:
         void RefreshHandleLayout();
-        bool OnBeginDrag(const SR_MATH_NS::FVector2& screenPosition, SR_GTYPES_NS::Camera* pCamera);
-        void OnDrag(const SR_MATH_NS::FVector2& screenPosition, SR_GTYPES_NS::Camera* pCamera);
+        bool OnBeginDrag(SR_GRAPH_UI_NS::Canvas& canvas, const SR_MATH_NS::FVector2& screenPosition, SR_GTYPES_NS::Camera* pCamera);
+        void OnDrag(SR_GRAPH_UI_NS::Canvas& canvas, const SR_MATH_NS::FVector2& screenPosition, SR_GTYPES_NS::Camera* pCamera);
 
     private:
         State m_state = State::Idle;

@@ -44,7 +44,7 @@ namespace SR_GRAPH_NS::UI {
             return false;
         }
 
-        SR_MATH_NS::FRect layoutRect = rect.GetLayoutRect();
+        SR_MATH_NS::FRect layoutRect = rect.GetScaledLayoutRect();
         return layoutRect.Contains(localPoint);
     }
 

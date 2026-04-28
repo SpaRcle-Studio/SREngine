@@ -110,6 +110,8 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::PopStyleColor(2);
     }
 
+    SR_INLINE_STATIC const SR_UTILS_NS::StringAtom editorDebugModeId = "EditorDebugMode";
+
     void Inspector::InspectGameObject() {
         if (!m_sceneObject) {
             return;
@@ -140,7 +142,7 @@ namespace SR_CORE_GUI_NS {
             WarningBox("Changes won't be saved");
         }
 
-        if (m_sceneObject->IsDirty()) {
+        if (m_sceneObject->IsDirty() && SR_UTILS_NS::StoreUtils::User::GetBool(editorDebugModeId, false)) {
             WarningBox("Object is dirty");
         }
 
@@ -526,8 +528,6 @@ namespace SR_CORE_GUI_NS {
 
         auto&& value = SR_UTILS_NS::Reflection::Value::CreateRef(pSceneObject);
         auto&& context = CreateDrawerContext(&value);
-
-        static const SR_UTILS_NS::StringAtom editorDebugModeId = "EditorDebugMode";
 
         context.fieldWidth += context.fieldTitleWidth;
         context.fieldTitleWidth = 0.f;

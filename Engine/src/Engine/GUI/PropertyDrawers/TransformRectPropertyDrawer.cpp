@@ -11,6 +11,7 @@
 #include <Utils/ECS/TransformRect.h>
 #include <Utils/ECS/SceneObject.h>
 #include <Utils/ECS/Component.h>
+#include <Utils/Common/StoreUtils.h>
 
 #include <Codegen/TransformRectPropertyDrawer.generated.hpp>
 
@@ -654,6 +655,14 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_GUI_NS::Immediate::PopID();
         SR_GRAPH_GUI_NS::Immediate::PopID();
+
+        static const SR_UTILS_NS::StringAtom editorDebugModeId = "EditorDebugMode";
+        if (SR_UTILS_NS::StoreUtils::User::GetBool(editorDebugModeId, false)) {
+            auto&& layoutRect = pTransformRect->GetLayoutRect();
+            auto&& scaledLayoutRect = pTransformRect->GetScaledLayoutRect();
+            SR_GRAPH_GUI_NS::Immediate::Text("Layout Rect: (%.1f, %.1f, %.1f, %.1f)", layoutRect.left, layoutRect.top, layoutRect.right, layoutRect.bottom);
+            SR_GRAPH_GUI_NS::Immediate::Text("Scaled Layout Rect: (%.1f, %.1f, %.1f, %.1f)", scaledLayoutRect.left, scaledLayoutRect.top, scaledLayoutRect.right, scaledLayoutRect.bottom);
+        }
 
         return feedback;
     }
