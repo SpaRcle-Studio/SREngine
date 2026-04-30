@@ -1,0 +1,23 @@
+sra format
+use tabs: true
+0-r:Root
+	1-o:asset
+		2-v:type
+			3-s:FontAsset
+		2-o:ptr
+			3-o:font
+				4-v:id
+					5-s:Engine/Fonts/CalibriL.ttf
+			3-a:preloadGlyphRanges
+				4-k:i
+					5-o:d
+						6-v:type
+							7-s:ASCII
+				4-k:i
+					5-o:d
+						6-v:type
+							7-s:Latin1
+				4-k:i
+					5-o:d
+						6-v:type
+							7-s:Cyrilic

@@ -105,7 +105,7 @@ namespace SR_CORE_NS::GUI {
                     current.iconType = Core::EditorIcon::Shader;
                 } else if (extension == "mat") {
                     current.iconType = Core::EditorIcon::Material;
-                } else if (extension == "ttf") {
+                } else if (extension == "ttf" || extension == "font") {
                     current.iconType = Core::EditorIcon::Font;
                 } else if (extension == "prefab") {
                     current.iconType = Core::EditorIcon::Prefab;

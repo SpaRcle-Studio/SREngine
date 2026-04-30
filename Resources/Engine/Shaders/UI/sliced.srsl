@@ -31,7 +31,7 @@ bool IsMaskIncludedSubMask(int mask, int subMask) {
 
 vec2 calculate_sliced_uv(vec2 uv) {
     if (!IsMaskIncludedSubMask(SPRITE_MODE, SLICED_MODE_MASK)) {
-        return uv;
+        return vec2(1.0 - uv.x, 1.0 - uv.y);
     }
 
     if (FILL_CENTER == 0 && (UV.x > SLICED_WINDOW_BORDER.x && UV.x < 1.0 - SLICED_WINDOW_BORDER.y) && (UV.y > SLICED_WINDOW_BORDER.z && UV.y < 1.0 - SLICED_WINDOW_BORDER.w)) {
@@ -57,8 +57,8 @@ vec2 calculate_sliced_uv(vec2 uv) {
 [[const]] float PI = 3.14159265359;
 [[const]] float INV_TWO_PI = 1.0 / (2.0 * PI);
 [[const]] float TWO_PI = 2.0 * PI;
-[[const]] int SLICED_MODE_MASK = 1 << 0;
-[[const]] int FILLED_MODE_MASK = 1 << 1;
+[[const]] int SLICED_MODE_MASK = 1 << 1;
+[[const]] int FILLED_MODE_MASK = 1 << 2;
 
 void discard_fill_mode(vec2 uv) {
     if (!IsMaskIncludedSubMask(SPRITE_MODE, FILLED_MODE_MASK)) {
@@ -217,6 +217,5 @@ void vertex() {
     };
 
     OUT_POSITION = PIXEL_ORTHOGONAL_MATRIX * MODEL_MATRIX * vec4(sprite_vertices[VERTEX_INDEX], 0.0, 1.0);
-    //OUT_POSITION = PIXEL_ORTHOGONAL_MATRIX * vec4(sprite_vertices[VERTEX_INDEX], 0.0, 1.0);
     UV = uv[VERTEX_INDEX];
 }
