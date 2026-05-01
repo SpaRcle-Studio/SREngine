@@ -86,7 +86,6 @@ jobs:
 
       - name: Install LLVM, libc++ and gcc-13.
         run: |
-          sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
           sudo apt update
           sudo apt install -y wget gnupg lsb-release
           wget https://apt.llvm.org/llvm.sh
