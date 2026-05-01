@@ -53,6 +53,12 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::Localization::SetLocale();
         SR_UTILS_NS::Random::Initialize();
 
+        if (SR_UTILS_NS::CLIManager::Instance().IsHeadlessMode()) {
+            /// Эмулируем пустые состояния устройств ввода, так как нет возможности получать реальные данные от устройств в headless режиме.
+            SR_PLATFORM_NS::SetOverriddenMouseState(SR_PLATFORM_NS::MouseState());
+            SR_PLATFORM_NS::SetOverriddenKeyboardState(SR_PLATFORM_NS::KeyboardState());
+        }
+
         SR_UTILS_NS::Path path;
         if (auto&& logPath = SR_PLATFORM_NS::GetApplicationLogPath()) {
             path = logPath.value();
