@@ -198,6 +198,9 @@ namespace SR_CORE_NS::Commands {
         if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::Component>()) {
             auto&& pDeserializer = m_pNew->CreateDeserializer();
             SR_UTILS_NS::Serialization::Load(*pDeserializer, *pObject, DATA_ID);
+            pObject->GetMeta()->ForEachProperty([&](auto&& property, uint64_t index) {
+                property.OnChanged(pObject.Get());
+            });
             return true;
         }
 
@@ -212,6 +215,9 @@ namespace SR_CORE_NS::Commands {
         if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::Component>()) {
             auto&& pDeserializer = m_pOld->CreateDeserializer();
             SR_UTILS_NS::Serialization::Load(*pDeserializer, *pObject, DATA_ID);
+            pObject->GetMeta()->ForEachProperty([&](auto&& property, uint64_t index) {
+                property.OnChanged(pObject.Get());
+            });
             return true;
         }
 

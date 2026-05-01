@@ -43,6 +43,6 @@ void vertex() {
     };
 
     UV = mix(UV1, UV2, sprite_vertices[VERTEX_INDEX]);
-    vec2 pos = POSITION0 + sprite_vertices[VERTEX_INDEX] * (POSITION1 - POSITION0);
+    vec2 pos = NDC_RECT.xy + POSITION0 + sprite_vertices[VERTEX_INDEX] * (POSITION1 - POSITION0);
     OUT_POSITION = PIXEL_ORTHOGONAL_MATRIX * MODEL_MATRIX * vec4(pos, 0.0, 1.0);
 }

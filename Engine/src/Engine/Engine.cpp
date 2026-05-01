@@ -26,6 +26,7 @@
 #include <Utils/Common/Features.h>
 #include <Utils/Common/StringAtomLiterals.h>
 #include <Utils/TaskManager/ThreadWorker.h>
+#include <Utils/TaskManager/TaskManager.h>
 #include <Utils/Localization/LocalizationManager.h>
 
 namespace SR_CORE_NS {
@@ -230,6 +231,9 @@ namespace SR_CORE_NS {
         }
 
         SR_SCRIPTING_NS::ScriptSystem::Instance().WaitForIdle();
+
+        SR_UTILS_NS::TaskManager::Instance().RemoveDiscardable();
+        SR_UTILS_NS::TaskManager::Instance().WaitForIdle();
 
         SRAssert2(!m_editor, "Engine::Close() : editor is not destroyed! Call DestroyEditor() before closing the engine!");
 

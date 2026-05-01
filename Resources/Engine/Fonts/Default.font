@@ -7,7 +7,7 @@ use tabs: true
 		2-o:ptr
 			3-o:font
 				4-v:id
-					5-s:Engine/Fonts/CalibriL.ttf
+					5-s:Engine/Fonts/TsunagiGothic.ttf
 			3-a:preloadGlyphRanges
 				4-k:i
 					5-o:d
