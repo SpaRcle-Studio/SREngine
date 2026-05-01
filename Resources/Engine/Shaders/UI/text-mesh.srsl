@@ -25,23 +25,14 @@ void fragment() {
 
     float w = max(fwidth(msd), 1.0 / 1024.0);
     float alpha = smoothstep(0.5 - w, 0.5 + w, msd);
-    COLOR = vec4(color, alpha + 0.4);
+    COLOR = vec4(color, alpha);
+
+#ifdef SR_DEFINE_WIREFRAME
+    COLOR = vec4(1.0, 0.0, 0.0, 1.0);
+#endif
 }
 
 void vertex() {
-    //vec2 sprite_vertices[6] = {
-    //    vec2(0, 0),
-    //    vec2(1, 1),
-    //    vec2(1, 0),
-    //    vec2(0, 0),
-    //    vec2(0, 1),
-    //    vec2(1, 1)
-    //};
-
-    //vec4 rect = vec4(vec2(200, 200) * sin(TIME / 100900 * gl_InstanceIndex), vec2(200, 200));
-
-    //vec4 rect = vec4(POSITION0, POSITION0 * 2);
-
     vec2 sprite_vertices[6] = {
         vec2(0, 0),
         vec2(1, 1),
@@ -51,28 +42,7 @@ void vertex() {
         vec2(1, 1)
     };
 
-    vec2 uv = mix(UV1, UV2, sprite_vertices[VERTEX_INDEX]);
+    UV = mix(UV1, UV2, sprite_vertices[VERTEX_INDEX]);
     vec2 pos = POSITION0 + sprite_vertices[VERTEX_INDEX] * (POSITION1 - POSITION0);
     OUT_POSITION = PIXEL_ORTHOGONAL_MATRIX * MODEL_MATRIX * vec4(pos, 0.0, 1.0);
-
-    /// Отразить V только внутри ячейки атласа: глобальный `1.0 - uv.y` ломал координаты и давал белые квадраты.
-    float vLo = min(UV1.y, UV2.y);
-    float vHi = max(UV1.y, UV2.y);
-    UV = vec2(uv.x, vLo + vHi - uv.y);
-
-    //vec2 screenPos = (RESOLUTION * 0.5) + (sprite_vertices[VERTEX_INDEX] - 0.5) * RESOLUTION;
-    //vec2 pos = mix(POSITION0, POSITION1, screenPos);
-
-    //vec2 uv = UV1 + sprite_vertices[VERTEX_INDEX] * (UV2 - UV1);
-
-    //vec2 uv = mix(UV1, UV2, sprite_vertices[VERTEX_INDEX]);
-    //OUT_POSITION = PIXEL_ORTHOGONAL_MATRIX * MODEL_MATRIX * vec4(sprite_vertices[VERTEX_INDEX], 0.0, 1.0);
-
-    //vec2 ndc = sprite_vertices[VERTEX_INDEX] * 2.0 - 1.0;
-    //OUT_POSITION = vec4(ndc, 0.0, 1.0);
-    //OUT_POSITION = vec4(pos, 0.0, 1.0);
-    //OUT_POSITION = vec4(POSITION0, 0.0, 1.0);
-    //UV = uv;
-
-    //UV = vec2(ndc.x * 0.5 + 0.5, ndc.y * 0.5 + 0.5);
 }

@@ -42,7 +42,13 @@ namespace SR_CORE_GUI_NS {
         if (value.IsString()) {
             if (auto&& pString = value.TryCast<std::string>()) {
                 std::string copy = *pString;
-                SR_GRAPH_GUI_NS::Immediate::InputText("##Input", &copy);
+
+                if (isTextBox) {
+                    SR_GRAPH_GUI_NS::Immediate::InputTextMultiline("##Input", &copy, SR_MATH_NS::FVector2(context.fieldWidth, 100));
+                }
+                else {
+                    SR_GRAPH_GUI_NS::Immediate::InputText("##Input", &copy);
+                }
 
                 if (SR_GRAPH_GUI_NS::Immediate::IsItemDeactivatedAfterEdit()) {
                     SetPropertyDrawerMappedValue(context, feedback, pString, copy);
