@@ -60,6 +60,8 @@ enum ERROR_CODES {
     constexpr bool SR_IS_WINDOWS = true;
     constexpr bool SR_IS_LINUX = false;
     constexpr bool SR_IS_MACOS = false;
+    constexpr bool SR_IS_EMSCRIPTEN = false;
+
     const char* DYNAMIC_MODULE_EXTENSION = ".dll";
     void* LoadDynamicModule(const char* moduleName) {
         auto&& pLibrary = LoadLibraryA(moduleName);
@@ -79,6 +81,7 @@ enum ERROR_CODES {
     constexpr bool SR_IS_WINDOWS = false;
     constexpr bool SR_IS_LINUX = true;
     constexpr bool SR_IS_MACOS = false;
+    constexpr bool SR_IS_EMSCRIPTEN = false;
     #include <dlfcn.h>
     #include <unistd.h>
     #include <cstring>
@@ -102,6 +105,7 @@ enum ERROR_CODES {
     constexpr bool SR_IS_WINDOWS = false;
     constexpr bool SR_IS_LINUX = false;
     constexpr bool SR_IS_MACOS = true;
+    constexpr bool SR_IS_EMSCRIPTEN = true;
     #include <dlfcn.h>
     #include <unistd.h>
     const char* DYNAMIC_MODULE_EXTENSION = ".dylib";

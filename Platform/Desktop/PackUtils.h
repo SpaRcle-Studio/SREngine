@@ -81,6 +81,10 @@ std::vector<std::regex> LoadExcludeMask(std::filesystem::path resourcesPath) {
                     isAllowedPlatform = SR_IS_MACOS;
                     continue;
                 }
+                if (line == "[Emscripten]") {
+                    isAllowedPlatform = SR_IS_EMSCRIPTEN;
+                    continue;
+                }
                 if (isAllowedPlatform) {
                     excludeMasks.emplace_back(wildcardToRegex(line), std::regex::icase);
                 }
