@@ -132,6 +132,7 @@ namespace SR_CORE_GUI_NS {
         void ResetToDefault();
 
     private:
+        void InstallOrUpdateSamples();
         void InstantiateSO(const SR_UTILS_NS::SceneObject::Ptr& pSO);
 
         void OnMouseMove(const SR_UTILS_NS::MouseInputData* data) override;
@@ -159,6 +160,9 @@ namespace SR_CORE_GUI_NS {
         Icons m_icons;
 
         Click m_click = Click::None;
+
+        bool m_installSamplesAsked = false;
+        float_t m_samplesShowDelay = 2.5f;
 
         std::atomic<bool> m_isInit     = false;
         std::atomic<bool> m_hasErrors  = false;

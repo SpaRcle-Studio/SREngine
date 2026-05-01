@@ -231,7 +231,13 @@ namespace SR_SCRIPTING_NS {
 
         cmakeContent += "\t# Modules\n\n";
 
+        std::set<SR_UTILS_NS::StringAtom> processedModules;
         for (auto&& module : m_modules) {
+            if (processedModules.count(module.moduleInfo.moduleName) != 0) {
+                continue;
+            }
+            processedModules.insert(module.moduleInfo.moduleName);
+
             cmakeContent += "\tif(EXISTS {}/{}.cxx) \n"_format(m_cacheFolder.Concat("Scripts/Codegen"), module.moduleInfo.moduleName);
             cmakeContent += "\t\tif (ANDROID_NDK)\n";
 

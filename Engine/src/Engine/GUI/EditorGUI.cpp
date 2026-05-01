@@ -53,16 +53,20 @@
 #include <Utils/ECS/TransformRect.h>
 #include <Utils/ECS/ComponentManager.h>
 #include <Utils/Platform/Platform.h>
+#include <Utils/Platform/MessageBox.h>
 #include <Utils/FileSystem/FileDialog.h>
 #include <Utils/Profile/TracyContext.h>
 #include <Utils/World/SceneUpdater.h>
 #include <Utils/World/ScenePrefabLogic.h>
 #include <Utils/Common/StringAtomLiterals.h>
 #include <Utils/Common/CLIManager.h>
+#include <Utils/Common/StoreUtils.h>
 
 #include <Enum/EditorIcon.hpp>
 
 namespace SR_CORE_GUI_NS {
+    SR_UTILS_NS::Path SR_SAMPLES_PATH = "Samples";
+
     static SR_UTILS_NS::Path GetNewScenePath() {
         auto&& scenePath = SR_UTILS_NS::Path(SR_WORLD_NS::Scene::NewScenePath).ConcatExt("scene");
 
@@ -203,6 +207,44 @@ namespace SR_CORE_GUI_NS {
         if (m_imGuiDemo) {
             //ImGui::ShowDemoWindow(&m_imGuiDemo);
         }
+
+        if (!m_installSamplesAsked && m_samplesShowDelay <= 0.f) {
+            m_installSamplesAsked = SR_UTILS_NS::StoreUtils::User::GetBool("InstallSamplesAsked", false);
+            m_installSamplesAsked |= SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(SR_SAMPLES_PATH).IsDir();
+            m_installSamplesAsked |= SR_UTILS_NS::CLIManager::Instance().IsHeadlessMode() || SR_UTILS_NS::CLIManager::Instance().IsFlagPresent(SR_UTILS_NS::CLIFlags::UnitTests);
+
+            SR_UTILS_NS::StoreUtils::User::SetBool("InstallSamplesAsked", true);
+
+            if (!m_installSamplesAsked) {
+                SR_LOG("EditorGUI::Draw() : asking user to install samples...");
+                const auto&& result = SR_PLATFORM_NS::ShowMessageBox(
+                    "Samples are not installed",
+                    "Do you want to install samples? It will download ~400mb of data. You can also install them later from the settings.",
+                    SR_PLATFORM_NS::MessageBoxType::YesNo,
+                    SR_PLATFORM_NS::MessageBoxIconType::Question,
+                    SR_PLATFORM_NS::MessageBoxDefaultButtonType::YesOk
+                );
+                if (result == SR_PLATFORM_NS::MessageBoxResultType::YesOk) {
+                    SR_LOG("EditorGUI::Draw() : user accepted to install samples! Installing...");
+                    InstallOrUpdateSamples();
+                    auto&& scenePath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(SR_SAMPLES_PATH).Concat("Female/demo.scene");
+                    if (scenePath.IsFile()) {
+                        if (auto&& pScene = m_engine->GetScene()) {
+                            pScene->SaveScene();
+                        }
+                        if (auto&& pScene = SR_WORLD_NS::Scene::LoadScene(scenePath)) {
+                            m_engine->AddSceneToQueue(pScene);
+                        }
+                    }
+                }
+                else {
+                    SR_LOG("EditorGUI::Draw() : user declined to install samples.");
+                }
+                m_installSamplesAsked = true;
+                SR_UTILS_NS::StoreUtils::Storage::Instance().Save();
+            }
+        }
+        m_samplesShowDelay -= SR_HTYPES_NS::Time::Instance().DeltaTime();
 
         WidgetManager::Draw();
     }
@@ -897,6 +939,12 @@ namespace SR_CORE_GUI_NS {
 
             SR_GRAPH_GUI_NS::Immediate::Separator();
 
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Install/Update samples")) {
+                InstallOrUpdateSamples();
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Reload")) {
                 m_engine->Reload();
             }
@@ -1080,5 +1128,32 @@ namespace SR_CORE_GUI_NS {
 
         auto&& pCmd = new SR_CORE_NS::Commands::SceneObjectInstance(GetEngine(), pSO);
         GetEngine()->GetCmdManager()->Store(pCmd);
+    }
+
+    void EditorGUI::InstallOrUpdateSamples() {
+        auto&& fullPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(SR_SAMPLES_PATH);
+
+        const auto repoUrl = "https://github.com/SpaRcle-Studio/SREngineSampleResources";
+
+        if (fullPath.IsDir()) {
+            /// Если нету гита, то сам виноват.
+        #ifdef SR_WIN32
+            std::string command = "{}: && cd {} && git pull -r --autostash"_format(fullPath[0], fullPath);
+        #else
+            std::string command = "cd {} && git pull -r --autostash"_format(fullPath);
+        #endif
+            SR_SYSTEM_LOG("EditorGUI::InstallOrUpdateSamples() : pulling repository...\n\tCommand: " + command);
+            system(command.c_str());
+        }
+        else {
+        #ifdef SR_WIN32
+            auto&& gitPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Utilities/git2.exe");
+        #else
+            auto&& gitPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Utilities/git2");
+        #endif
+            std::string command = "{} clone {} {} --depth 1"_format(gitPath, repoUrl, fullPath);
+            SR_SYSTEM_LOG("EditorGUI::InstallOrUpdateSamples() : cloning repository...\n\tCommand: " + command);
+            system(command.c_str());
+        }
     }
 }
