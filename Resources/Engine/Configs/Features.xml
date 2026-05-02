@@ -11,7 +11,7 @@
     <Common>
         <!-- Debug -->
         <DebugRendererMeshes Value="true"/>
-        <ShowScriptsCodegenResult Value="false"/>
+        <ShowScriptsCodegenResult Value="true"/>
         <SegmentationHandler Value="false"/>
         <ResourceUsePointStackTraceProfiling Value="false"/>
         <VulkanValidationErrorAsAssert Value="false"/>
