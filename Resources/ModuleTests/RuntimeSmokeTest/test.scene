@@ -547,3 +547,38 @@ use tabs: true
 									9-f:0.894154
 								8-v:w
 									9-f:0.447759
+		2-k:i
+			3-o:d
+				4-v:type
+					5-s:GameObject
+				4-o:ptr
+					5-v:entityId
+						6-i:3948958555812908933
+					5-a:components
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:SkyboxComponent
+								8-o:ptr
+									9-v:entityId
+										10-i:4491780133784761925
+									9-o:material
+										10-v:type
+											11-s:UniqueMaterial
+										10-o:ptr
+											11-o:data
+												12-v:type
+													13-s:MaterialData
+												12-o:ptr
+													13-a:shaderDefines
+													13-o:defaultShader
+														14-v:shaderPath
+															15-s:Engine/Shaders/skybox.srsl
+									9-v:skyboxPath
+										10-s:Engine/Skyboxes/Sun.png
+					5-v:name
+						6-s:Skybox
+					5-o:transform
+						6-v:type
+							7-s:Transform3D
+						6-o:ptr

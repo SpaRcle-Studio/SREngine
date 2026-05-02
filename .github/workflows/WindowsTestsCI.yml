@@ -56,7 +56,7 @@ jobs:
 
       - name: Run Debug tests
         shell: powershell
-        continue-on-error: true
+        continue-on-error: false
         run: |
           $exe = "${{ steps.find_debug.outputs.debug_exe }}"
           Write-Host "Running: $exe"
@@ -106,10 +106,20 @@ jobs:
 
           Write-Host "===== Test Log ====="
           Get-Content $logFile
+          
+          $logContent = Get-Content $logFile -Raw
+  
+          if ($logContent -match "Debugger has been stopped with errors!") {
+            Write-Host "❌ Found error message in log!"
+            exit 1
+          }
+          else {
+            Write-Host "✅ No error message found."
+          }
 
       - name: Run Release tests
         shell: powershell
-        continue-on-error: true
+        continue-on-error: false
         run: |
           $exe = "${{ steps.find_release.outputs.release_exe }}"
           Write-Host "Running: $exe"
@@ -159,4 +169,15 @@ jobs:
 
           Write-Host "===== Test Log ====="
           Get-Content $logFile
+          
+          $logContent = Get-Content $logFile -Raw
+          
+          if ($logContent -match "Debugger has been stopped with errors!") {
+            Write-Host "❌ Found error message in log!"
+            exit 1
+          }
+          else {
+            Write-Host "✅ No error message found."
+          }
+
 
