@@ -109,7 +109,7 @@ jobs:
           
           $logContent = Get-Content $logFile -Raw
   
-          if ($logContent -match "Debugger has been stopped.") {
+          if ($logContent -match "Debugger has been stopped with no errors and warnings!") {
             Write-Host "✅ No error message found."
           }
           else {
@@ -172,7 +172,7 @@ jobs:
           
           $logContent = Get-Content $logFile -Raw
           
-          if ($logContent -match "Debugger has been stopped.") {
+          if ($logContent -match "Debugger has been stopped with no errors and warnings!") {
             Write-Host "✅ No error message found."
           }
           else {
