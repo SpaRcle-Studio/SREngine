@@ -130,15 +130,20 @@ int ParseData(const std::vector<char>& data, const std::string& executablePath) 
         outFile.write(fileData.data(), static_cast<std::streamsize>(fileData.size()));
         outFile.close();
 
-#if defined(__linux__)
-        /// Resource files are created with default mode 0644; the bundled PyInstaller `codegen` must be executable
-        /// so in-process script module generation can run (execvp returns EACCES otherwise).
-        if (path.generic_string() == "Engine/Utilities/codegen") {
-            if (::chmod(outputPath.c_str(), 0755) != 0) {
-                std::cerr << "ParseData() : failed to chmod +x (0755): " << outputPath << "\n";
+    #if defined(__linux__)
+        static std::string_view executableFiles[2] = {
+            "Engine/Utilities/codegen",
+            "Engine/Utilities/git2",
+        };
+        for (const auto& executableFile : executableFiles) {
+             if (path.generic_string() == executableFile) {
+                if (::chmod(outputPath.c_str(), 0755) != 0) {
+                    std::cerr << "ParseData() : failed to chmod +x (0755): " << outputPath << "\n";
+                }
+                break;
             }
         }
-#endif
+    #endif
     }
 
     std::cout << "ParseData() : unpacking completed!\n";
