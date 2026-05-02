@@ -63,14 +63,14 @@ namespace SR_AUDIO_NS {
         return m_bufferUsed;
     }
 
-    int ModPlugDataProvider::DecodeFromFile( size_t Size )
+    int ModPlugDataProvider::DecodeFromFile(size_t size)
     {
         if (m_isEndOfStream)
         {
             return 0;
         }
 
-        return ModPlug_Read(m_ModPlugFile, m_decodingBuffer.data(), Size);
+        return ModPlug_Read(m_ModPlugFile, m_decodingBuffer.data(), static_cast<int>(size));
     }
 
     size_t ModPlugDataProvider::StreamWaveData( size_t Size )

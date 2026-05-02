@@ -51,7 +51,7 @@ namespace SR_CORE_GUI_NS {
             const auto metaPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(path).ConcatExt(".meta");
             if (serializer.SaveToFile(metaPath)) {
                 m_originalImageMetaInfo = m_imageMetaInfo;
-                SR_UTILS_NS::ResourceManager::Instance().ReloadResource(path.ToStringRef(), SR_GTYPES_NS::Texture::GetClassStaticName());
+                SR_UTILS_NS::ResourceManager::Instance().ReloadResource(SR_UTILS_NS::StringAtom(path.View()), SR_GTYPES_NS::Texture::GetClassStaticName());
                 SR_LOG("TextureInspector::Draw() : saved meta info for texture at path: {}", metaPath);
             }
             else {

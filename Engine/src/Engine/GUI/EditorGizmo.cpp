@@ -220,7 +220,7 @@ namespace SR_CORE_GUI_NS {
             }
 
             auto&& pSerializer = SR_CORE_NS::Commands::CreateSerializer();
-            SR_UTILS_NS::Serialization::Save(*pSerializer, pGameObject->GetTransform(), SR_UTILS_NS::ICommand::DATA_ID);
+            SR_UTILS_NS::Serialization::Save(*pSerializer, pGameObject->GetTransform(), SR_UTILS_NS::COMMAND_DATA_ID);
             m_pSerializers.emplace_back(std::make_pair(pGameObject->GetEntityId(), std::move(pSerializer)));
         }
 

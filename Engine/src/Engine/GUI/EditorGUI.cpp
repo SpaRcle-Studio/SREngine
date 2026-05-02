@@ -486,19 +486,19 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (!SR_WORLD_NS::Scene::IsExists(scenePath)) {
-            SR_WARN("EditorGUI::LoadSceneFromCachedPath() : cached path is not usable! \n\tPath: " + scenePath.ToStringRef() + "\n\tUsing default scene.");
+            SR_WARN("EditorGUI::LoadSceneFromCachedPath() : cached path is not usable! \n\tPath: {}\n\tUsing default scene.", scenePath);
             scenePath = SR_UTILS_NS::Path(SR_WORLD_NS::Scene::NewScenePath).ConcatExt("scene");
         }
 
         if (!SR_WORLD_NS::Scene::IsExists(scenePath)) {
-            SR_ERROR("EditorGUI::LoadSceneFromCachedPath() : default scene does not exist! \n\tCreating new one by path: " + scenePath.ToStringRef());
+            SR_ERROR("EditorGUI::LoadSceneFromCachedPath() : default scene does not exist! \n\tCreating new one by path: {}", scenePath);
             m_engine->AddSceneToQueue(SR_WORLD_NS::Scene::NewScene(scenePath, SR_WORLD_NS::SceneLogicType::Asset));
             return true;
         }
 
         auto&& pScene = SR_WORLD_NS::Scene::LoadScene(scenePath);
         if (!pScene) {
-            SR_ERROR("EditorGUI::LoadSceneFromCachedPath() : failed to load scene by path: " + scenePath.ToStringRef());
+            SR_ERROR("EditorGUI::LoadSceneFromCachedPath() : failed to load scene by path: {}", scenePath);
             return false;
         }
 

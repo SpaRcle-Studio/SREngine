@@ -384,7 +384,7 @@ namespace SR_SCRIPTING_NS {
 
             for (auto&& file : module.codeFiles) {
                 if (file.GetExtensionView() == "cxx" || file.GetExtensionView() == "cpp") {
-                    codegenFileStream << "#include \"" << file.ToStringRef() << "\"\n";
+                    codegenFileStream << "#include \"" << file.View() << "\"\n";
                 }
             }
 

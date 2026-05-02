@@ -265,7 +265,7 @@ namespace SR_CORE_GUI_NS {
             m_onBeforeChangeCallback = [&](bool drag) {
                 if (!m_pComponentsSerializer) {
                     m_pComponentsSerializer = SR_CORE_NS::Commands::CreateSerializer();
-                    SR_UTILS_NS::Serialization::Save(*m_pComponentsSerializer, pIComponentable->GetComponents(), SR_UTILS_NS::ICommand::DATA_ID);
+                    SR_UTILS_NS::Serialization::Save(*m_pComponentsSerializer, pIComponentable->GetComponents(), SR_UTILS_NS::COMMAND_DATA_ID);
                 }
             };
 
@@ -399,7 +399,7 @@ namespace SR_CORE_GUI_NS {
                     m_isDragMode = drag;
                     m_editableComponent = pStrongComponent;
                     m_pComponentSerializer = SR_CORE_NS::Commands::CreateSerializer();
-                    SR_UTILS_NS::Serialization::Save(*m_pComponentSerializer, *pStrongComponent, SR_UTILS_NS::ICommand::DATA_ID);
+                    SR_UTILS_NS::Serialization::Save(*m_pComponentSerializer, *pStrongComponent, SR_UTILS_NS::COMMAND_DATA_ID);
                 }
             };
 
@@ -427,7 +427,7 @@ namespace SR_CORE_GUI_NS {
             m_onBeforeChangeCallback = [&](bool drag) {
                 if (!m_pComponentsSerializer) {
                     m_pComponentsSerializer = SR_CORE_NS::Commands::CreateSerializer();
-                    SR_UTILS_NS::Serialization::Save(*m_pComponentsSerializer, pParent->GetComponents(), SR_UTILS_NS::ICommand::DATA_ID);
+                    SR_UTILS_NS::Serialization::Save(*m_pComponentsSerializer, pParent->GetComponents(), SR_UTILS_NS::COMMAND_DATA_ID);
                 }
             };
 
@@ -522,7 +522,7 @@ namespace SR_CORE_GUI_NS {
                 m_isDragMode = drag;
                 m_pSOSerializer = SR_CORE_NS::Commands::CreateSerializer();
                 m_pSOSerializer->AddDontSaveTag("Inspector");
-                SR_UTILS_NS::Serialization::Save(*m_pSOSerializer, *pSceneObject, SR_UTILS_NS::ICommand::DATA_ID);
+                SR_UTILS_NS::Serialization::Save(*m_pSOSerializer, *pSceneObject, SR_UTILS_NS::COMMAND_DATA_ID);
             }
         };
 
@@ -542,7 +542,7 @@ namespace SR_CORE_GUI_NS {
 
             auto&& pNewSerializer = SR_CORE_NS::Commands::CreateSerializer();
             pNewSerializer->AddDontSaveTag("Inspector");
-            SR_UTILS_NS::Serialization::Save(*pNewSerializer, *pSceneObject, SR_UTILS_NS::ICommand::DATA_ID);
+            SR_UTILS_NS::Serialization::Save(*pNewSerializer, *pSceneObject, SR_UTILS_NS::COMMAND_DATA_ID);
 
             auto&& cmd = new SR_CORE_NS::Commands::SceneObjectChangeProperties(pEngine, pSceneObject, std::move(m_pSOSerializer), std::move(pNewSerializer));
             pEngine->GetCmdManager()->Store(cmd);

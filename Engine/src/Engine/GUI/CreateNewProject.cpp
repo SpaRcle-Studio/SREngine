@@ -47,7 +47,7 @@ namespace SR_CORE_GUI_NS {
     void CreateNewProject::ResetSettings() {
         m_projectName = "New Project";
         m_projectPath = SR_UTILS_NS::ResourceManager::Instance().GetResPathRef();
-        m_projectPathInput = m_projectPath;
+        m_projectPathInput = m_projectPath.ToString();
         m_projectFinalPath = m_projectPath.Concat(m_projectName);
     }
 
@@ -83,7 +83,8 @@ namespace SR_CORE_GUI_NS {
             if (SR_GRAPH_GUI_NS::Immediate::Button("...", SR_MATH_NS::FVector2(size.x * 0.1f, 0))) {
                 auto path = SR_UTILS_NS::FileDialog::Instance().PickFolder(SR_UTILS_NS::ResourceManager::Instance().GetResPathRef());
                 if (!path.IsEmpty()) {
-                    m_projectPathInput = m_projectPath = path;
+                    m_projectPath = path;
+                    m_projectPathInput = m_projectPath.ToString();
                     m_projectFinalPath = m_projectPath.Concat(m_projectName);
                 }
             }
@@ -171,7 +172,7 @@ namespace SR_CORE_GUI_NS {
         ResetSettings();
 
         m_projectName = SR_UTILS_NS::StoreUtils::User::GetString("LastCreatedProjectName", m_projectName);
-        m_projectPath = SR_UTILS_NS::StoreUtils::User::GetString("LastCreatedProjectPath", m_projectPath);
+        m_projectPath = SR_UTILS_NS::StoreUtils::User::GetString("LastCreatedProjectPath", m_projectPath.ToString());
         if (m_projectName.empty() || m_projectPath.empty()) {
             ResetSettings();
         }
@@ -184,7 +185,7 @@ namespace SR_CORE_GUI_NS {
 
     void CreateNewProject::SaveLastProjectPath() {
         SR_UTILS_NS::StoreUtils::User::SetString("LastCreatedProjectName", m_projectName);
-        SR_UTILS_NS::StoreUtils::User::SetString("LastCreatedProjectPath", m_projectPath);
+        SR_UTILS_NS::StoreUtils::User::SetString("LastCreatedProjectPath", m_projectPath.ToString());
         SR_UTILS_NS::StoreUtils::Storage::Instance().Save();
     }
 }

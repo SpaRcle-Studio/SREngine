@@ -152,7 +152,7 @@ namespace SR_SCRIPTING_NS {
             return false;
         }
 
-        std::string outModulePath = context.outFolder.Concat(context.moduleName);
+        std::string outModulePath = context.outFolder.Concat(context.moduleName).ToString();
         std::string outPdbPath = context.outFolder.Concat(context.moduleName).ToString() + ".pdb";
 
         std::string customArgs;
@@ -246,12 +246,7 @@ namespace SR_SCRIPTING_NS {
 
         std::string includePaths;
         for (auto&& includePath : context.includePaths) {
-            if (SR_PLATFORM_NS::GetType() == SR_UTILS_NS::PlatformType::Windows) {
-                includePaths += "-I\"" + includePath.ToStringRef() + "\" ";
-            }
-            else {
-                includePaths += "-I" + includePath.ToStringRef() + " ";
-            }
+            includePaths += "-I\"{}\" "_format(includePath);
         }
 
         std::string outArgs;
@@ -263,7 +258,7 @@ namespace SR_SCRIPTING_NS {
             std::string compilerPdbPath = context.outFolder.Concat(context.moduleName).ToString() + "_compiler.pdb";
             outArgs += "/Fd\"" + compilerPdbPath + "\" ";
 
-            std::string msvcInclude = m_settings.compilerPath.GetPrevious().GetPrevious().GetPrevious().GetPrevious().Concat("include");
+            std::string msvcInclude = m_settings.compilerPath.GetPrevious().GetPrevious().GetPrevious().GetPrevious().Concat("include").ToString();
             includePaths += "/I\"" + msvcInclude + "\" ";
 
             std::string windowsKitsUmLibs;
@@ -481,7 +476,7 @@ namespace SR_SCRIPTING_NS {
                 SR_PLATFORM_NS::MessageBoxDefaultButtonType::YesOk
             );
             auto&& pathToVSBuildToolsInstaller = m_engineResourcesPath.Concat("Engine/Utilities/vs_BuildTools.exe");
-            SR_SYSTEM_LOG("CppCompiler::FindWindowsCompiler() : path to VS Build Tools installer: " + pathToVSBuildToolsInstaller.ToStringRef());
+            SR_SYSTEM_LOG("CppCompiler::FindWindowsCompiler() : path to VS Build Tools installer: {}", pathToVSBuildToolsInstaller);
             SR_SYSTEM_LOG("CppCompiler::FindWindowsCompiler() : engine will be terminated after installer launched!");
             SR_PLATFORM_NS::ExecuteCommand(pathToVSBuildToolsInstaller.ToStringRef());
             SR_PLATFORM_NS::Terminate(false);

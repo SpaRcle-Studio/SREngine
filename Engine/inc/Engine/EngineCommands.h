@@ -82,7 +82,7 @@ namespace SR_CORE_NS::Commands {
         {
             if (!m_pNew) {
                 m_pNew = SR_CORE_NS::Commands::CreateSerializer();
-                SR_UTILS_NS::Serialization::Save(*m_pNew, pGameObject->GetTransform(), DATA_ID);
+                SR_UTILS_NS::Serialization::Save(*m_pNew, pGameObject->GetTransform(), SR_UTILS_NS::COMMAND_DATA_ID);
             }
         }
 
@@ -129,7 +129,7 @@ namespace SR_CORE_NS::Commands {
             , m_pOld(std::move(pOld))
         {
             m_pNew = SR_CORE_NS::Commands::CreateSerializer();
-            SR_UTILS_NS::Serialization::Save(*m_pNew, pComponentable->GetComponents(), DATA_ID);
+            SR_UTILS_NS::Serialization::Save(*m_pNew, pComponentable->GetComponents(), SR_UTILS_NS::COMMAND_DATA_ID);
         }
 
         bool Redo() override;
@@ -153,7 +153,7 @@ namespace SR_CORE_NS::Commands {
             , m_pOld(std::move(pOld))
         {
             m_pNew = SR_CORE_NS::Commands::CreateSerializer();
-            SR_UTILS_NS::Serialization::Save(*m_pNew, *pComponent, DATA_ID);
+            SR_UTILS_NS::Serialization::Save(*m_pNew, *pComponent, SR_UTILS_NS::COMMAND_DATA_ID);
         }
 
         bool Redo() override;

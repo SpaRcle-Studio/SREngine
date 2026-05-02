@@ -83,7 +83,7 @@ namespace SR_CORE_GUI_NS {
                             path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetEngineResPathRef());
                         }
 
-                        pRef->SetResource(path.ToStringRef());
+                        pRef->SetResource(SR_UTILS_NS::StringAtom(path.View()));
                     }
                 }
             }

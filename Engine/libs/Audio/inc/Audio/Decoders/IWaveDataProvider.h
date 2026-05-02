@@ -46,7 +46,7 @@ namespace SR_AUDIO_NS {
 
         SR_NODISCARD virtual bool IsStreaming() const { return false; }
         SR_NODISCARD virtual bool IsEndOfStream() const { return false; }
-        virtual void Seek(float_t seconds) { }
+        virtual void Seek(float_t /* seconds */) { }
         virtual size_t StreamWaveData(size_t size) { return 0; }
 
         SR_NODISCARD bool IsValid() const { return GetWaveData() && GetWaveDataSize(); }

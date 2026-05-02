@@ -67,7 +67,7 @@ namespace SR_CORE_NS {
             path = SR_PLATFORM_NS::GetApplicationPath().GetFolder();
         }
 
-        SR_UTILS_NS::Path logDir = SR_UTILS_NS::CLIManager::Instance().GetOptionValue(SR_UTILS_NS::CLIOptions::LogDir).value_or(path);
+        SR_UTILS_NS::Path logDir = SR_UTILS_NS::CLIManager::Instance().GetOptionValue(SR_UTILS_NS::CLIOptions::LogDir).value_or(path.ToString());
 
         return InitLogger(logDir);
     }

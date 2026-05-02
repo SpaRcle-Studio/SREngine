@@ -77,7 +77,7 @@ namespace SR_CORE_NS::Commands {
             auto&& pDeserializer = m_pNew->CreateDeserializer();
 
             SR_UTILS_NS::Transform::Ptr pTransform;
-            SR_UTILS_NS::Serialization::Load(*pDeserializer, pTransform, DATA_ID);
+            SR_UTILS_NS::Serialization::Load(*pDeserializer, pTransform, SR_UTILS_NS::COMMAND_DATA_ID);
             pObject->SetTransform(pTransform);
 
             return true;
@@ -93,7 +93,7 @@ namespace SR_CORE_NS::Commands {
             auto&& pDeserializer = m_pOld->CreateDeserializer();
 
             SR_UTILS_NS::Transform::Ptr pTransform;
-            SR_UTILS_NS::Serialization::Load(*pDeserializer, pTransform, DATA_ID);
+            SR_UTILS_NS::Serialization::Load(*pDeserializer, pTransform, SR_UTILS_NS::COMMAND_DATA_ID);
 
             if (pTransform) {
                 pObject->SetTransform(pTransform);
@@ -113,7 +113,7 @@ namespace SR_CORE_NS::Commands {
         if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>()) {
             auto&& pDeserializer = m_pNew->CreateDeserializer();
 
-            SR_UTILS_NS::Serialization::Load(*pDeserializer, *pObject, DATA_ID);
+            SR_UTILS_NS::Serialization::Load(*pDeserializer, *pObject, SR_UTILS_NS::COMMAND_DATA_ID);
             if (auto&& pGameObject = pObject.DynamicCast<SR_UTILS_NS::GameObject>()) {
                 pGameObject->OnMatrixDirty();
             }
@@ -130,7 +130,7 @@ namespace SR_CORE_NS::Commands {
         if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>()) {
             auto&& pDeserializer = m_pOld->CreateDeserializer();
 
-            SR_UTILS_NS::Serialization::Load(*pDeserializer, *pObject, DATA_ID);
+            SR_UTILS_NS::Serialization::Load(*pDeserializer, *pObject, SR_UTILS_NS::COMMAND_DATA_ID);
             if (auto&& pGameObject =pObject.DynamicCast<SR_UTILS_NS::GameObject>()) {
                 pGameObject->OnMatrixDirty();
             }
@@ -152,7 +152,7 @@ namespace SR_CORE_NS::Commands {
             auto&& pDeserializer = m_pNew->CreateDeserializer();
 
             std::vector<SR_UTILS_NS::Component::Ptr> components;
-            SR_UTILS_NS::Serialization::Load(*pDeserializer, components, DATA_ID);
+            SR_UTILS_NS::Serialization::Load(*pDeserializer, components, SR_UTILS_NS::COMMAND_DATA_ID);
             pObject->RemoveComponents();
 
             for (auto&& pComponent : components) {
@@ -174,7 +174,7 @@ namespace SR_CORE_NS::Commands {
             auto&& pDeserializer = m_pOld->CreateDeserializer();
 
             std::vector<SR_UTILS_NS::Component::Ptr> components;
-            SR_UTILS_NS::Serialization::Load(*pDeserializer, components, DATA_ID);
+            SR_UTILS_NS::Serialization::Load(*pDeserializer, components, SR_UTILS_NS::COMMAND_DATA_ID);
             pObject->RemoveComponents();
 
             for (auto&& pComponent : components) {
@@ -197,7 +197,7 @@ namespace SR_CORE_NS::Commands {
 
         if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::Component>()) {
             auto&& pDeserializer = m_pNew->CreateDeserializer();
-            SR_UTILS_NS::Serialization::Load(*pDeserializer, *pObject, DATA_ID);
+            SR_UTILS_NS::Serialization::Load(*pDeserializer, *pObject, SR_UTILS_NS::COMMAND_DATA_ID);
             pObject->GetMeta()->ForEachProperty([&](auto&& property, uint64_t index) {
                 property.OnChanged(pObject.Get());
             });
@@ -214,7 +214,7 @@ namespace SR_CORE_NS::Commands {
 
         if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::Component>()) {
             auto&& pDeserializer = m_pOld->CreateDeserializer();
-            SR_UTILS_NS::Serialization::Load(*pDeserializer, *pObject, DATA_ID);
+            SR_UTILS_NS::Serialization::Load(*pDeserializer, *pObject, SR_UTILS_NS::COMMAND_DATA_ID);
             pObject->GetMeta()->ForEachProperty([&](auto&& property, uint64_t index) {
                 property.OnChanged(pObject.Get());
             });
@@ -394,7 +394,7 @@ namespace SR_CORE_NS::Commands {
         }
 
         m_pBackup = SR_CORE_NS::Commands::CreateSerializer();
-        SR_UTILS_NS::Serialization::Save(*m_pBackup, pSO, DATA_ID);
+        SR_UTILS_NS::Serialization::Save(*m_pBackup, pSO, SR_UTILS_NS::COMMAND_DATA_ID);
 
         m_reserved = pSO->GetEntityIdList();
         m_reserved->ReserveIds();
@@ -421,7 +421,7 @@ namespace SR_CORE_NS::Commands {
         m_reserved->UnReserveIds();
 
         SR_UTILS_NS::SceneObject::Ptr pObject;
-        SR_UTILS_NS::Serialization::Load(*pDeserializer, pObject, DATA_ID);
+        SR_UTILS_NS::Serialization::Load(*pDeserializer, pObject, SR_UTILS_NS::COMMAND_DATA_ID);
 
         if (!pObject) {
             return false;
@@ -473,7 +473,7 @@ namespace SR_CORE_NS::Commands {
 
         auto&& pDeserializer = m_pBackup->CreateDeserializer();
 
-        SR_UTILS_NS::Serialization::Load(*pDeserializer, pSO, DATA_ID);
+        SR_UTILS_NS::Serialization::Load(*pDeserializer, pSO, SR_UTILS_NS::COMMAND_DATA_ID);
         if (!pSO) {
             return false;
         }
@@ -504,7 +504,7 @@ namespace SR_CORE_NS::Commands {
         m_reserved->ReserveIds();
 
         m_pBackup = SR_CORE_NS::Commands::CreateSerializer();
-        SR_UTILS_NS::Serialization::Save(*m_pBackup, pSO, DATA_ID);
+        SR_UTILS_NS::Serialization::Save(*m_pBackup, pSO, SR_UTILS_NS::COMMAND_DATA_ID);
 
         pSO->Destroy();
 

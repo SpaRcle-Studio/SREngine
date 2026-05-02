@@ -111,7 +111,7 @@ namespace SR_AUDIO_NS {
         int serialno = 0;
 
         auto packets = std::make_shared<RawSoundData>();
-        packets->reserve(oggData.size() * 0.75); // примерный размер после распаковки
+        packets->reserve(static_cast<size_t>(oggData.size() * 0.75)); // примерный размер после распаковки
 
         while (pos < oggData.size()) {
             char* buffer = ogg_sync_buffer(&oy, 4096);
