@@ -21,7 +21,7 @@ namespace SR_AUDIO_NS {
         SR_SOUND_FORMAT_STEREO_16,
     };
 
-    static SoundFormat CalculateSoundFormat(uint8_t channels, uint8_t bitsPerSample) {
+    SR_MAYBE_UNUSED static SoundFormat CalculateSoundFormat(uint8_t channels, uint8_t bitsPerSample) {
         if (channels == 1 && bitsPerSample == 8) {
             return SR_SOUND_FORMAT_MONO_8;
         }

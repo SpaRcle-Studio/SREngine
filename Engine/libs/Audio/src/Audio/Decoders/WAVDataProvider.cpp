@@ -154,7 +154,7 @@ namespace SR_AUDIO_NS::Tools {
         Status->m_iDelta = ( AdaptationTable[ Nibble ] * Status->m_iDelta ) / 256;
         if ( Status->m_iDelta < 16 ) Status->m_iDelta = 16;
 
-        return Predictor;
+        return static_cast<int16_t>(Predictor);
     }
 
 #define GetWord( w ) { \

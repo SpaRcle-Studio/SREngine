@@ -74,7 +74,7 @@ namespace SR_AUDIO_NS {
         return m_bufferUsed;
     }
 
-    void MP3DataProvider::Seek(float_t seconds)
+    void MP3DataProvider::Seek(float_t /* seconds */)
     {
 
     }
