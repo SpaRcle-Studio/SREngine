@@ -147,7 +147,7 @@ namespace SR_AUDIO_NS {
         if (!p || !p->m_data) return 0;
 
         const size_t dataSize = p->m_data->size();
-        if (p->m_rawPosition >= dataSize) return 0;
+        if (static_cast<size_t>(p->m_rawPosition) >= dataSize) return 0;
 
         const size_t req = size * numMemBlocks;
         const size_t avail = dataSize - p->m_rawPosition;
@@ -200,7 +200,7 @@ namespace SR_AUDIO_NS {
         return 0;
     }
 
-    int OGGVorbisDataProvider::OGGCloseFunc(void* pUserData) {
+    int OGGVorbisDataProvider::OGGCloseFunc(void* /* pUserData */) {
         return 0;
     }
 

@@ -178,7 +178,7 @@ namespace SR_AUDIO_NS {
             size_t bytes = std::min<size_t>(4096, oggData.size() - pos);
             memcpy(buffer, oggData.data() + pos, bytes);
             pos += bytes;
-            ogg_sync_wrote(&oy, bytes);
+            ogg_sync_wrote(&oy, static_cast<long>(bytes));
 
             ogg_page page;
             while (ogg_sync_pageout(&oy, &page) == 1) {

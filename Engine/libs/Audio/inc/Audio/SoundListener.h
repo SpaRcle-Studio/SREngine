@@ -25,7 +25,7 @@ namespace SR_AUDIO_NS{
 
     public:
         virtual bool Init() { return true; }
-        virtual bool Update(const SR_MATH_NS::FVector3& position, const SR_MATH_NS::Quaternion& quaternion) { return true; }
+        virtual bool Update(const SR_MATH_NS::FVector3& /* position */, const SR_MATH_NS::Quaternion& /* quaternion */) { return true; }
 
     public:
         SR_NODISCARD const ListenerData& GetData() const noexcept { return m_data; }

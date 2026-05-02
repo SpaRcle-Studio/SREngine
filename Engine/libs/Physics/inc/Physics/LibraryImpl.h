@@ -38,7 +38,7 @@ namespace SR_PHYSICS_NS {
 
         virtual void ConnectPVD() { }
 
-        SR_NODISCARD virtual bool IsShapeSupported(ShapeType type) const { return false; }
+        SR_NODISCARD virtual bool IsShapeSupported(ShapeType /* type */) const { return false; }
         SR_NODISCARD virtual ShapeType GetDefaultShape() const { return ShapeType::Unknown; }
 
         SR_NODISCARD virtual CharacterControllerImpl* CreateCharacterControllerImpl() { return nullptr; }
@@ -50,7 +50,7 @@ namespace SR_PHYSICS_NS {
 
         SR_NODISCARD virtual SR_PTYPES_NS::Vehicle4W3D* CreateVehicle4W3D() { return nullptr; }
 
-        SR_NODISCARD virtual SR_PHYSICS_NS::PhysicsWorld* CreatePhysicsWorld(Space space) { return nullptr; }
+        SR_NODISCARD virtual SR_PHYSICS_NS::PhysicsWorld* CreatePhysicsWorld(Space /* space */) { return nullptr; }
 
         SR_NODISCARD virtual SR_PTYPES_NS::PhysicsMaterialImpl* CreatePhysicsMaterial() { return nullptr; }
 

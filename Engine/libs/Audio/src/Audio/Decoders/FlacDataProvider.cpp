@@ -76,7 +76,7 @@ namespace SR_AUDIO_NS {
             void* client_data)
         {
             auto* pThis = static_cast<FlacDataProvider*>(client_data);
-            return pThis->m_memoryPosition >= pThis->m_data->size();
+            return static_cast<uint64_t>(pThis->m_memoryPosition) >= pThis->m_data->size();
         }
 
         static FLAC__StreamDecoderWriteStatus WriteCallback(
