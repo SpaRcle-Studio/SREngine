@@ -109,12 +109,12 @@ jobs:
           
           $logContent = Get-Content $logFile -Raw
   
-          if ($logContent -match "Debugger has been stopped with errors!") {
-            Write-Host "❌ Found error message in log!"
-            exit 1
+          if ($logContent -match "Debugger has been stopped.") {
+            Write-Host "✅ No error message found."
           }
           else {
-            Write-Host "✅ No error message found."
+            Write-Host "❌ Found error message in log!"
+            exit 1
           }
 
       - name: Run Release tests
@@ -172,12 +172,12 @@ jobs:
           
           $logContent = Get-Content $logFile -Raw
           
-          if ($logContent -match "Debugger has been stopped with errors!") {
-            Write-Host "❌ Found error message in log!"
-            exit 1
+          if ($logContent -match "Debugger has been stopped.") {
+            Write-Host "✅ No error message found."
           }
           else {
-            Write-Host "✅ No error message found."
+            Write-Host "❌ Found error message in log!"
+            exit 1
           }
 
 

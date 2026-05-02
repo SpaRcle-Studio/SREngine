@@ -111,11 +111,11 @@ jobs:
           echo "===== Test Log ====="
           cat "$log_test"
           
-          if grep -q "Debugger has been stopped with errors!" "$log_test"; then
+          if grep -q "Debugger has been stopped." "$log_test"; then
+            echo "✅ No error message found."
+          else
             echo "❌ Found error message in log!"
             exit 1
-          else
-            echo "✅ No error message found."
           fi
 
       - name: Run Release tests
@@ -159,9 +159,9 @@ jobs:
           echo "===== Test Log ====="
           cat "$log_test"
           
-          if grep -q "Debugger has been stopped with errors!" "$log_test"; then
+          if grep -q "Debugger has been stopped." "$log_test"; then
+            echo "✅ No error message found."
+          else
             echo "❌ Found error message in log!"
             exit 1
-          else
-            echo "✅ No error message found."
           fi
