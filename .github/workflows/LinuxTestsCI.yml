@@ -111,10 +111,15 @@ jobs:
           echo "===== Test Log ====="
           cat "$log_test"
           
-          if grep -q "Debugger has been stopped." "$log_test"; then
-            echo "✅ No error message found."
-          else
+          if grep -q "Debugger has been stopped with errors!" "$log_test"; then
             echo "❌ Found error message in log!"
+            exit 1
+          fi
+          
+          if grep -q "^Debugger has been stopped\.$" "$log_test"; then
+            echo "✅ Success message found."
+          else
+            echo "❌ No success message found!"
             exit 1
           fi
 
@@ -159,9 +164,14 @@ jobs:
           echo "===== Test Log ====="
           cat "$log_test"
           
-          if grep -q "Debugger has been stopped." "$log_test"; then
-            echo "✅ No error message found."
-          else
+          if grep -q "Debugger has been stopped with errors!" "$log_test"; then
             echo "❌ Found error message in log!"
+            exit 1
+          fi
+          
+          if grep -q "^Debugger has been stopped\.$" "$log_test"; then
+            echo "✅ Success message found."
+          else
+            echo "❌ No success message found!"
             exit 1
           fi
