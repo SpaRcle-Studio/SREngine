@@ -2,6 +2,10 @@
 // Created by Monika on 13.05.2025.
 //
 
+#if defined(__linux__)
+#include <sys/stat.h>
+#endif
+
 enum UNPACK_RESULT {
     UNPACK_SUCCESS,
     UNPACK_NO_PACKED_DATA,
@@ -124,6 +128,17 @@ int ParseData(const std::vector<char>& data, const std::string& executablePath) 
             return UNPACK_FAILED_TO_CREATE_FILE;
         }
         outFile.write(fileData.data(), static_cast<std::streamsize>(fileData.size()));
+        outFile.close();
+
+#if defined(__linux__)
+        /// Resource files are created with default mode 0644; the bundled PyInstaller `codegen` must be executable
+        /// so in-process script module generation can run (execvp returns EACCES otherwise).
+        if (path.generic_string() == "Engine/Utilities/codegen") {
+            if (::chmod(outputPath.c_str(), 0755) != 0) {
+                std::cerr << "ParseData() : failed to chmod +x (0755): " << outputPath << "\n";
+            }
+        }
+#endif
     }
 
     std::cout << "ParseData() : unpacking completed!\n";
