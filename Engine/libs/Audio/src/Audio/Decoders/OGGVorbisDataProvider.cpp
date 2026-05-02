@@ -114,7 +114,7 @@ namespace SR_AUDIO_NS {
             ov_read(
                 m_vorbisFile.Get(),
                 reinterpret_cast<char*>(m_decodingBuffer.data() + bytesRead),
-                static_cast<int64_t>(size) - static_cast<int64_t>(bytesRead),
+                static_cast<int32_t>(static_cast<int64_t>(size) - static_cast<int64_t>(bytesRead)),
                 0, // LITTLE_ENDIAN
                 m_format.m_bitsPerSample >> 3,
                 1,
