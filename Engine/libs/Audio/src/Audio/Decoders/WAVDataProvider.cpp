@@ -500,52 +500,52 @@ namespace SR_AUDIO_NS {
 
                 if ( IsALaw )
                 {
-                    std::string NewData;
+                    RawSoundData NewData;
                     NewData.resize( m_dataSize * 2 + sizeof(sWAVHeader) );
                     int16_t* Dst = reinterpret_cast< int16_t* >( NewData.data() + sizeof(sWAVHeader) );
                     const uint8_t* Src = reinterpret_cast< const uint8_t* >( m_data.get()->data() + Offset + ChunkHeaderSize );
                     Tools::ConvertClamp_ALawToInt16( Src, Dst, m_dataSize );
-                    m_data = std::make_shared<std::string>(NewData);
+                    m_data = std::make_shared<RawSoundData>(NewData);
                     m_format.m_bitsPerSample = 16;
                     m_dataSize = m_dataSize * 2;
                 }
                 else if ( IsMuLaw )
                 {
-                    std::string NewData;
+                    RawSoundData NewData;
                     NewData.resize( m_dataSize * 2 + sizeof(sWAVHeader) );
                     int16_t* Dst = reinterpret_cast< int16_t* >( NewData.data() + sizeof(sWAVHeader) );
                     const uint8_t* Src = reinterpret_cast< const uint8_t* >( m_data.get()->data() + Offset + ChunkHeaderSize );
                     Tools::ConvertClamp_MuLawToInt16( Src, Dst, m_dataSize );
-                    m_data = std::make_shared<std::string>(NewData);
+                    m_data = std::make_shared<RawSoundData>(NewData);
                     m_format.m_bitsPerSample = 16;
                     m_dataSize = m_dataSize * 2;
                 }
                 else if ( IsADPCM_MS )
                 {
-                    std::string NewData;
+                    RawSoundData NewData;
                     NewData.resize( m_dataSize * 4 + sizeof(sWAVHeader) );
                     int16_t* Dst = reinterpret_cast<int16_t*>( NewData.data() + sizeof(sWAVHeader) );
                     const uint8_t* Src = reinterpret_cast<const uint8_t*>( m_data.get( ) + Offset + ChunkHeaderSize );
                     Tools::ConvertClamp_MSADPCMToInt16( Src, Dst, m_dataSize, Header->nBlockAlign, Header->Channels == 2 );
-                    m_data = std::make_shared<std::string>( NewData );
+                    m_data = std::make_shared<RawSoundData>( NewData );
                     m_format.m_bitsPerSample = 16;
                     m_dataSize = m_dataSize * 4;
                 }
                 else if ( IsADPCM_IMA )
                 {
-                    std::string NewData;
+                    RawSoundData NewData;
                     NewData.resize( m_dataSize * 4 + sizeof(sWAVHeader) );
                     int16_t* Dst = reinterpret_cast< int16_t* >( NewData.data() + sizeof(sWAVHeader) );
                     const uint8_t* Src = reinterpret_cast< const uint8_t* >( m_data.get()->data() + Offset + ChunkHeaderSize );
                     Tools::ConvertClamp_IMAADPCMToInt16( Src, Dst, m_dataSize, Header->nBlockAlign, Header->Channels == 2 );
-                    m_data = std::make_shared<std::string>( NewData );
+                    m_data = std::make_shared<RawSoundData>( NewData );
                     m_format.m_bitsPerSample = 16;
                     m_dataSize = m_dataSize * 4;
                 }
                 else if ( IsFloat )
                 {
                     // replace the blob and convert data to 16-bit
-                    std::string NewData;
+                    RawSoundData NewData;
                     NewData.resize( m_data->size() );
                     int16_t* Dst = reinterpret_cast<int16_t*>( NewData.data() + sizeof(sWAVHeader) );
 
@@ -567,13 +567,13 @@ namespace SR_AUDIO_NS {
                         m_dataSize = 0;
                     }
 
-                    m_data = std::make_shared<std::string>( NewData );
+                    m_data = std::make_shared<RawSoundData>( NewData );
                     m_format.m_bitsPerSample = 16;
                 }
                 else if ( Header->nBitsperSample == 24 )
                 {
                     // replace the blob and convert data to 16-bit
-                    std::string NewData;
+                    RawSoundData NewData;
                     NewData.resize(m_data->size());
                     int16_t* Dst = reinterpret_cast<int16_t*>(NewData.data() + sizeof(sWAVHeader));
 
@@ -581,13 +581,13 @@ namespace SR_AUDIO_NS {
                     Tools::ConvertClamp_Int24ToInt16(Src, Dst, m_dataSize);
                     m_dataSize = m_dataSize / 3 * 2;
 
-                    m_data = std::make_shared<std::string>(NewData);
+                    m_data = std::make_shared<RawSoundData>(NewData);
                     m_format.m_bitsPerSample = 16;
                 }
                 else if ( Header->nBitsperSample == 32 )
                 {
                     // replace the blob and convert data to 16-bit
-                    std::string NewData;
+                    RawSoundData NewData;
                     NewData.resize(m_data->size());
                     int16_t* Dst = reinterpret_cast<int16_t*>(NewData.data() + sizeof(sWAVHeader));
 
@@ -595,7 +595,7 @@ namespace SR_AUDIO_NS {
                     Tools::ConvertClamp_Int32ToInt16(Src, Dst, m_dataSize / 4);
                     m_dataSize = m_dataSize / 2;
 
-                    m_data = std::make_shared<std::string>(NewData);
+                    m_data = std::make_shared<RawSoundData>(NewData);
                     m_format.m_bitsPerSample = 16;
                 }
 

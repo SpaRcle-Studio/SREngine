@@ -10,7 +10,7 @@
 #include <Utils/stdInclude.h>
 
 namespace SR_AUDIO_NS {
-    typedef std::string RawSoundData;
+    typedef SR_UTILS_NS::String RawSoundData;
     typedef std::shared_ptr<RawSoundData> RawSoundDataPtr;
 }
 
