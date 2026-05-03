@@ -244,9 +244,16 @@ namespace SR_SCRIPTING_NS {
             sourceFiles = "\"" + m_cachePath.Concat("Scripts/Codegen/{}.cxx"_format(context.moduleName)).ToString() + "\" ";
         }
 
+        /// MSVC gets a single command line and the OS strips quotes. Linux/Android use fork+exec with
+        /// naive tokenization (whitespace only), so `-I"/path"` must not be used: g++ would see literal quotes in the path.
         std::string includePaths;
         for (auto&& includePath : context.includePaths) {
-            includePaths += "-I\"{}\" "_format(includePath);
+            if (m_settings.compilerType == CppCompilerType::GCC) {
+                includePaths += "-I" + includePath.ToStringRef() + " ";
+            }
+            else {
+                includePaths += "-I\"{}\" "_format(includePath);
+            }
         }
 
         std::string outArgs;
@@ -302,7 +309,12 @@ namespace SR_SCRIPTING_NS {
         }
 
         for (auto&& lib : m_engineLibs) {
-            outArgs += " \"{}\" "_format(lib.ToString());
+            if (m_settings.compilerType == CppCompilerType::GCC) {
+                outArgs += " " + lib.ToString() + " ";
+            }
+            else {
+                outArgs += " \"{}\" "_format(lib.ToString());
+            }
         }
 
         std::string command = "{} {} {} {} {}"_format(
