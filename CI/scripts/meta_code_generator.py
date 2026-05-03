@@ -1064,9 +1064,9 @@ def generate_enums_code(logger: logger_utils.Logger, context: codegen_context.Co
 
 
 def generate_meta_module_core_code(logger: logger_utils.Logger, context: codegen_context.CodegenContext, class_structures):
-    logger.log_info(f'Generating meta module core code to {context.codegen_dir}...')
-
     full_path = os.path.normpath(f'{context.codegen_dir}/SpaRcleModule{context.module_name}Core.generated.hpp')
+    logger.log_info(f'Generating meta module core code to {full_path}...')
+
     f = sparcle_utils.StringStream()
 
     if True:
@@ -1127,35 +1127,6 @@ def generate_meta_module_core_code(logger: logger_utils.Logger, context: codegen
 
         f.write('}\n\n')
 
-#        f.write('#if defined(SR_WIN32) && defined(SR_ENGINE_SCRIPT_API_MODE)')
-#        f.write(f'''
-#    bool __stdcall DllMain(void* hModule, unsigned long ulReasonForCall, void* lpReserved) {{
-#        switch (ulReasonForCall) {{
-#        case 1: /// DLL_PROCESS_ATTACH
-#            Codegen::RegisterModule_{context.module_name}();
-#            break;
-#        case 0: /// DLL_PROCESS_DETACH
-#            Codegen::UnregisterModule_{context.module_name}();
-#            break;
-#        }}
-#        return true;
-#    }}''' + '\n')
-#
-#        f.write('#endif\n\n')
-#
-#        f.write(f'#if defined(SR_LINUX) && defined(SR_ENGINE_SCRIPT_API_MODE)')
-#        f.write(f'''
-#    __attribute__((constructor))
-#    void OnLibraryLoad() {{
-#        Codegen::RegisterModule_{context.module_name}();
-#    }}
-#
-#    __attribute__((destructor))
-#    void OnLibraryUnload() {{
-#        Codegen::UnregisterModule_{context.module_name}();
-#    }}''' + '\n')
-#        f.write('#endif\n\n')
-
         f.write(f'#endif // SR_CODEGEN_SPARCLE_MODULE_{context.module_name.upper()}_CORE_HPP' + '\n')
 
     if os.path.isfile(context.codegen_dir):
@@ -1163,9 +1134,11 @@ def generate_meta_module_core_code(logger: logger_utils.Logger, context: codegen
             if old_f.read() == str(f):
                 logger.log_info(f'Core module is already up to date.')
                 return
+            logger.log_info(f'Core module is outdated, updating...')
 
     with open(full_path, 'w', encoding='utf8') as new_f:
         new_f.write(str(f))
+        logger.log_info(f'Core module generated successfully.')
 
 
 
