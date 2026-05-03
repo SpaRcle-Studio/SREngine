@@ -14,6 +14,7 @@ void fragment() {
     COLOR = LINE_COLOR;
     COLOR_INDEX_1 = vec4(gl_FragCoord.z);
     COLOR_INDEX_2 = vec4(position, 1.0);
+    COLOR_INDEX_3 = vec4(0.0);
 }
 
 void vertex() {

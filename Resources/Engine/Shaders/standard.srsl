@@ -40,6 +40,7 @@ vec2 fragment_normal(vec2 uv) {
 void fragment() {
     COLOR_INDEX_1 = vec4(gl_FragCoord.z);
     COLOR_INDEX_2 = vec4(VERTEX, 1.0);
+    COLOR_INDEX_3 = vec4(NORMAL, 1.0);
 
     vec2 uv = fragment_uv();
     vec2 absTiling = abs(tiling);

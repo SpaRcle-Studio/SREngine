@@ -23,7 +23,7 @@ use tabs: true
 							7-s:RenderTechniquePresetIntegrationMainView
 						6-o:ptr
 							7-v:mainRenderColorLayers
-								8-i:3
+								8-i:4
 							7-o:defaultPostProcessPass
 								8-v:type
 									9-s:PostProcessPass

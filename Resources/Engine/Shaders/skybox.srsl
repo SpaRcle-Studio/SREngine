@@ -12,6 +12,7 @@ void fragment() {
 	COLOR = texture(SKYBOX_DIFFUSE, VERTEX);
     COLOR_INDEX_1 = vec4(0.0);
     COLOR_INDEX_2 = vec4(0.0);
+    COLOR_INDEX_3 = vec4(0.0);
 }
 
 void vertex() {

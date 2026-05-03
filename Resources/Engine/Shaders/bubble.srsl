@@ -1,7 +1,7 @@
 ShaderType Spatial;
 
 PolygonMode Fill;
-CullMode Back;
+CullMode None;
 DepthCompare LessOrEqual;
 PrimitiveTopology TriangleList;
 BlendEnabled true;
