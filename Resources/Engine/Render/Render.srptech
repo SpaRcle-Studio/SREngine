@@ -72,6 +72,11 @@ use tabs: true
 						6-v:type
 							7-s:RenderTechniquePresetIntegrationAutoExposure
 						6-o:ptr
+				4-k:i
+					5-o:d
+						6-v:type
+							7-s:RenderTechniquePresetIntegrationSSAO
+						6-o:ptr
 			3-a:customLayers
 				4-k:i
 					5-o:d
