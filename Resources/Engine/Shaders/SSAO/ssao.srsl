@@ -29,17 +29,22 @@ float LinearEyeDepth(float depth, float near, float far) {
 void fragment() {
 
     vec3 posWS = texture(Position, uv).xyz;
-    vec3 normal = texture(Normal, uv).rgb;
-    //normal = normalize(normal * 2.0 - 1.0);
+    if(length(posWS) < 0.0001)
+    {
+        COLOR_INDEX_0 = vec4(1.0);
+        return;
+    }
+    vec3 normalWS = texture(Normal, uv).rgb;
+    normalWS = normalize(normalWS * 2.0 - 1.0);
 
     vec3 pos = (VIEW_MATRIX * vec4(posWS, 1.0)).xyz;
-    //vec3 normal = normalize((VIEW_MATRIX * vec4(normalWS, 0.0)).xyz);
+    vec3 normal = normalize((VIEW_MATRIX * vec4(normalWS, 0.0)).xyz);
 
     float occlusion = 0.0;
     float radius = 0.5;
     float bias = 0.025;
 
-    vec2 noiseScale = vec2(RESOLUTION.x / 4.0, RESOLUTION.y / 4.0);
+    vec2 noiseScale = RESOLUTION / 4.0;//vec2(RESOLUTION.x / 4.0, RESOLUTION.y / 4.0);
 
     /*vec3 up = abs(normal.z) < 0.999 ? vec3(0.0, 0.0, 1.0) : vec3(1.0, 0.0, 0.0);
     vec3 tangent = normalize(cross(up, normal));
@@ -106,9 +111,12 @@ void fragment() {
 
         // range check & accumulate
         float rangeCheck = smoothstep(0.0, 1.0, radius / abs(pos.z - sampleDepth));
-        occlusion += (sampleDepth >= samplePos.z + bias ? 1.0 : 0.0) * rangeCheck;
+
+        float delta = sampleDepth - samplePos.z;
+        //occlusion += (sampleDepth >= samplePos.z + bias ? 1.0 : 0.0) * rangeCheck;
+        float occ = smoothstep(bias, bias + radius, delta);
+        occlusion += occ * rangeCheck;
     }
-    float depth = texture(Depth, uv).r;
 
     occlusion = 1.0 - (occlusion / 64.0);
     COLOR_INDEX_0 = vec4(vec3(occlusion), 1.0);
