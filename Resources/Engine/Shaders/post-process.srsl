@@ -23,6 +23,10 @@ DepthTest false;
     [[ssbo(exposure)]] float[] exposure;
 #endif
 
+#ifdef SR_SSAO
+    [[uniform]] sampler2D SSAO;
+#endif
+
 #ifdef SR_CLOUDS
     #include <Engine/Shaders/Common/clouds.srsl>
 #endif
@@ -116,6 +120,10 @@ void fragment() {
     else {
         color = texture(colorMap, uv).rgb;
     }
+
+#ifdef SR_SSAO
+    color *= vec3(texture(SSAO, uv).r);
+#endif
 
     //color = applyGlitch(color, uv);
 
