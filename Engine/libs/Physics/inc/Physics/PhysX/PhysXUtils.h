@@ -47,7 +47,7 @@ namespace SR_PHYSICS_UTILS_NS {
         return SR_MATH_NS::Quaternion(quaternion.x, quaternion.y, quaternion.z, quaternion.w);
     }
 
-    static physx::PxCombineMode::Enum CombineToPxCombine(const Combine mode){
+    SR_MAYBE_UNUSED static physx::PxCombineMode::Enum CombineToPxCombine(const Combine mode){
         switch (mode) {
             case Combine::Minimum:
                 return physx::PxCombineMode::Enum::eMIN;

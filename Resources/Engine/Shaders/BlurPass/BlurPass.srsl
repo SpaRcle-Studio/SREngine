@@ -19,9 +19,10 @@ void fragment() {
 
     float result = 0.0;
 
-    for (int x = -2; x < 2; ++x)
+    int radius = 8;
+    for (int x = -radius; x < radius; ++x)
     {
-        for (int y = -2; y < 2; ++y)
+        for (int y = -radius; y < radius; ++y)
         {
             vec2 offset = vec2(float(x), float(y)) * texelSize;
 
@@ -30,7 +31,7 @@ void fragment() {
         }
     }
 
-    result /= 16.0;
+    result /= float((radius * 2) * (radius * 2));
 
     COLOR_INDEX_0 = vec4(vec3(result), 1.0);
 }

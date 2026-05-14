@@ -675,10 +675,10 @@ namespace SR_CORE_GUI_NS {
 
         auto&& layers = SR_UTILS_NS::LayerManager::Instance().GetLayers();
         auto&& layerIndex = static_cast<int>(SR_UTILS_NS::LayerManager::Instance().GetLayerIndex(layer));
-        auto&& pLayers = const_cast<std::vector<SR_UTILS_NS::StringAtom>*>(&layers);
+        auto&& pLayers = const_cast<SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>*>(&layers);
 
         if (SR_GRAPH_GUI_NS::Immediate::Combo("Layer", &layerIndex, [](void* vec, int idx, const char** out_text){
-            auto&& vector = reinterpret_cast<std::vector<SR_UTILS_NS::StringAtom>*>(vec);
+            auto&& vector = reinterpret_cast<SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>*>(vec);
             if (idx < 0 || idx >= vector->size()) {
                 return false;
             }

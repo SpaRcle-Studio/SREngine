@@ -37,7 +37,8 @@ namespace SR_AUDIO_NS {
             m_name = pDeviceNames;
         }
 
-        if (!(m_openALDevice = alcOpenDevice(pDeviceNames))) {
+        m_openALDevice = alcOpenDevice(pDeviceNames);
+        if (!m_openALDevice) {
             SR_ERROR("OpenALDevice::Init() : failed to open \"" + m_name + "\" device!");
             return false;
         }

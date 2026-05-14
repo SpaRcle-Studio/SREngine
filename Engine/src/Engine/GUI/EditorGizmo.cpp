@@ -241,7 +241,7 @@ namespace SR_CORE_GUI_NS {
 
 
         auto&& pEngine = dynamic_cast<EditorGUI*>(m_hierarchy->GetManager())->GetEngine();
-        std::vector<SR_UTILS_NS::ReversibleCommand*> commands;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::ReversibleCommand*> commands;
         commands.reserve(m_hierarchy->GetSelected().size());
 
         for (auto&& pSceneObject : m_hierarchy->GetSelected()) {

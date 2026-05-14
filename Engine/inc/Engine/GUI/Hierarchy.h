@@ -57,7 +57,7 @@ namespace SR_CORE_GUI_NS {
         SR_WORLD_NS::Scene::Ptr m_scene;
         std::vector<uint64_t> m_pointersHolder;
         std::set<SR_UTILS_NS::SceneObject::Ptr> m_selected;
-        std::vector<SR_UTILS_NS::SceneObject::Ptr> m_tree;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::SceneObject::Ptr> m_tree;
 
         std::atomic<bool> m_shiftPressed;
         bool m_showHidden = false;

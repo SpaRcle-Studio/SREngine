@@ -71,7 +71,7 @@ namespace SR_CORE_GUI_NS {
         if (!isPrefabLogic && SR_GRAPH_GUI_NS::Immediate::BeginDragDropTargetWindow("Hierarchy##Payload")) {
             if (auto&& pPayload = SR_GRAPH_GUI_NS::Immediate::AcceptDragDropPayload("Hierarchy##Payload")) {
                 if (m_scene) {
-                    std::vector<SR_UTILS_NS::ReversibleCommand*> commands;
+                    SR_UTILS_NS::Vector<SR_UTILS_NS::ReversibleCommand*> commands;
                     if (auto&& pData = SR_GRAPH_GUI_NS::Immediate::GetDataFromDragDropPayload(pPayload)) {
                         commands.emplace_back(new SR_CORE_NS::Commands::ChangeHierarchySelected(m_engine, this, m_selected, { }));
 
@@ -237,7 +237,7 @@ namespace SR_CORE_GUI_NS {
             if (auto payload = SR_GRAPH_GUI_NS::Immediate::AcceptDragDropPayload("Hierarchy##Payload")) {
                 if (auto&& pData = SR_GRAPH_GUI_NS::Immediate::GetDataFromDragDropPayload(payload)) {
                     if (m_scene) {
-                        std::vector<SR_UTILS_NS::ReversibleCommand*> commands;
+                        SR_UTILS_NS::Vector<SR_UTILS_NS::ReversibleCommand*> commands;
                         commands.emplace_back(new SR_CORE_NS::Commands::ChangeHierarchySelected(m_engine, this, m_selected, {}));
                         SR_GRAPH_GUI_NS::PayloadArrayData payloadData = *(SR_GRAPH_GUI_NS::PayloadArrayData*)(pData);
                         for (size_t i = 0; i < payloadData.size; ++i) {
@@ -450,7 +450,7 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        std::vector<SR_UTILS_NS::ReversibleCommand*> commands;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::ReversibleCommand*> commands;
 
         for (auto&& pSO : toPaste) {
             if (!pSO) {
@@ -486,7 +486,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (!m_selected.empty() && m_scene) {
-            std::vector<SR_UTILS_NS::ReversibleCommand*> commands;
+            SR_UTILS_NS::Vector<SR_UTILS_NS::ReversibleCommand*> commands;
             commands.emplace_back(new SR_CORE_NS::Commands::ChangeHierarchySelected(m_engine, this, m_selected, {}));
             for (auto&& pSelected : m_selected) {
                 if (!pSelected) {

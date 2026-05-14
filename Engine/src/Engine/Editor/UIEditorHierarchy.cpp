@@ -9,7 +9,7 @@
 #include <Codegen/UIEditorHierarchy.generated.hpp>
 
 namespace SpaRcle::Editor::UI {
-    void ProcessHierarchyTree(const std::vector<SR_UTILS_NS::SceneObject::Ptr>& root, const SR_UTILS_NS::SceneObject::Ptr& pTarget, SR_UTILS_NS::SceneObject* pProto, UIEditorHierarchy* pHierarchy) {
+    void ProcessHierarchyTree(const SR_UTILS_NS::Vector<SR_UTILS_NS::SceneObject::Ptr>& root, const SR_UTILS_NS::SceneObject::Ptr& pTarget, SR_UTILS_NS::SceneObject* pProto, UIEditorHierarchy* pHierarchy) {
         uint32_t used = 0;
         uint32_t childCount = pTarget->GetChildrenRef().size();
 

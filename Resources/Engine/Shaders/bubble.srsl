@@ -27,6 +27,7 @@ void fragment() {
     COLOR = vec4(BubbleColor, Fresnel(viewDirectionWorld, normalWorld));
     COLOR_INDEX_1 = vec4(gl_FragCoord.z) * max(0, COLOR.a - 0.8);
     COLOR_INDEX_2 = vec4(VERTEX, 1.0);
+    COLOR_INDEX_3 = vec4(NORMAL, 1.0);
 }
 
 void vertex() {

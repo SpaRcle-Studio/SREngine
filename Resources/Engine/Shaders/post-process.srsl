@@ -122,7 +122,9 @@ void fragment() {
     }
 
 #ifdef SR_SSAO
-    color *= vec3(texture(SSAO, uv).r);
+    float ssaoValue = texture(SSAO, uv).r;
+    //color = mix(color, color * ssaoValue, 0.5);
+    color *= pow(ssaoValue, 1.5);
 #endif
 
     //color = applyGlitch(color, uv);

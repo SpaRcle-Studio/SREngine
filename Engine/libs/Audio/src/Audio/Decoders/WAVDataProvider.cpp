@@ -186,10 +186,10 @@ namespace SR_AUDIO_NS::Tools {
         if ( IsStereo ) GetWord( StatusRight.m_Sample2 );
 
         // output initial samples
-        *Dst++ = StatusLeft.m_Sample1;
-        if ( IsStereo ) *Dst++ = StatusRight.m_Sample1;
-        *Dst++ = StatusLeft.m_Sample2;
-        if ( IsStereo ) *Dst++ = StatusRight.m_Sample2;
+        *Dst++ = static_cast<int16_t>(StatusLeft.m_Sample1);
+        if ( IsStereo ) *Dst++ = static_cast<int16_t>(StatusRight.m_Sample1);
+        *Dst++ = static_cast<int16_t>(StatusLeft.m_Sample2);
+        if ( IsStereo ) *Dst++ = static_cast<int16_t>(StatusRight.m_Sample2);
 
         while ( Src < End )
         {
@@ -325,7 +325,7 @@ namespace SR_AUDIO_NS::Tools {
         if ( N & 0x80 )
         {
             N &= ~( 1 << 7 );
-            Sign = -1;
+            Sign = static_cast<uint8_t>(-1);
         }
         const uint16_t Shift = 33;
         uint8_t Position = ( ( N & 0xF0 ) >> 4 ) + 5;
@@ -377,8 +377,6 @@ namespace SR_AUDIO_NS {
             , m_dataSize(data ? data->size() : 0)
             , m_format()
     {
-        int s = sizeof(sWAVHeader);
-
         if (data && data->size() > sizeof(sWAVHeader))
         {
             const sWAVHeader* Header = reinterpret_cast<const sWAVHeader*>(data.get()->data());
@@ -643,8 +641,7 @@ namespace SR_AUDIO_NS {
         return 0;
     }
 
-    void WAVDataProvider::Seek( float Seconds )
-    {
+    void WAVDataProvider::Seek(float) {
         // TODO:
     }
 
