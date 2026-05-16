@@ -165,3 +165,32 @@ use tabs: true
 						6-v:frustumCount
 							7-i:0
 			3-a:colorBufferQualityPresets
+			3-a:SSAOQualityPresets
+				4-k:item
+					5-v:first
+						6-s:None
+					5-o:second
+						6-v:preScale
+							7-f:0
+						6-v:sampleCount
+							7-i:0
+				4-k:item
+					5-v:first
+						6-s:Low
+					5-o:second
+						6-v:preScale
+							7-f:0.5
+						6-v:sampleCount
+							7-i:32
+				4-k:item
+					5-v:first
+						6-s:Medium
+					5-o:second
+						6-v:preScale
+							7-f:0.7
+						6-v:sampleCount
+							7-i:32
+				4-k:item
+					5-v:first
+						6-s:High
+					5-o:second

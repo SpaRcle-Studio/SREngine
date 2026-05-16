@@ -8,6 +8,12 @@ BlendEnabled false;
 DepthWrite false;
 DepthTest false;
 
+float LinearEyeDepth(float depth, float near, float far) {
+    float z = depth * 2.0 - 1.0;                // обратно в clip space (-1..1)
+    return (2.0 * near * far) / (far + near - z * (far - near));
+}
+
+
 [[shared]] vec2 uv;
 [[uniform]] sampler2D Depth;
 [[uniform]] sampler2D Normal;
@@ -16,15 +22,18 @@ DepthTest false;
 
 [[ssbo(SSAOKernel)]] vec4[] samples;
 
+
+
 #define USE_COLOR_INDEX_0
 
 void fragment() {
+
     vec3 posWS = texture(Position, uv).xyz;
-    if (length(posWS) < 0.0001) {
+    if(length(posWS) < 0.0001)
+    {
         COLOR_INDEX_0 = vec4(1.0);
         return;
     }
-
     vec3 normalWS = texture(Normal, uv).rgb;
     normalWS = normalize(normalWS * 2.0 - 1.0);
 
@@ -43,7 +52,7 @@ void fragment() {
     vec3 bitangent = cross(normal, tangent);
     mat3 TBN = mat3(tangent, bitangent, normal);
 
-    for (int i = 0; i < 64; i++) {
+    for (int i = 0; i < sampleCount; i++) {
         // get sample position
         vec3 samplePos = TBN * samples[i].xyz; // from tangent to view-space
         samplePos = pos + samplePos * radius;
