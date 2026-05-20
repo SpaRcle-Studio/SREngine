@@ -8,6 +8,7 @@
 #include <Audio/macros.h>
 
 #include <Utils/stdInclude.h>
+#include <Utils/Types/String.h>
 
 namespace SR_AUDIO_NS {
     typedef SR_UTILS_NS::String RawSoundData;

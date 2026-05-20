@@ -31,6 +31,7 @@ void ShutdownApplication() {
     SR_PLATFORM_NS::InitializeHooks([](SR_PLATFORM_NS::PlatformHooks& hooks) { });
     SR_HTYPES_NS::SharedPtrDynamicDataCounter::CheckMemoryLeaks();
     SR_UTILS_NS::ShutdownEngineProfiler();
+    SR_PLATFORM_NS::DeInitializePlatform();
 }
 
 int SREngineEntryPoint(int argc, char** argv) {

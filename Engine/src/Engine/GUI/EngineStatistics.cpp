@@ -131,6 +131,9 @@ namespace SR_CORE_GUI_NS {
                 SR_GRAPH_GUI_NS::Immediate::Text("  Last command: %s", lastCmdName.c_str());
             }
 
+            float_t mb = SR_UTILS_NS::GetApplicationHeapSize() / (1024 * 1024);
+            SR_GRAPH_GUI_NS::Immediate::Text("Allocated memory: %.2fMb", mb);
+
             SR_GRAPH_GUI_NS::Immediate::EndTabItem();
         }
     }

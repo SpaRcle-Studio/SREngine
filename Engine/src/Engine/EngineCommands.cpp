@@ -5,11 +5,12 @@
 #include <Engine/EngineCommands.h>
 #include <Engine/Engine.h>
 
+#include <Graphics/Render/RenderScene.h>
+
 #include <Utils/ECS/GameObject.h>
 #include <Utils/World/Scene.h>
 #include <Utils/Types/SafePtrLockGuard.h>
-
-#include <Graphics/Render/RenderScene.h>
+#include <Utils/Reflection/Property.h>
 
 #include <Engine/GUI/Hierarchy.h>
 

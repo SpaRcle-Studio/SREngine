@@ -8,6 +8,7 @@
 #include <Utils/Common/Compression.h>
 #include <Utils/Common/CLIManager.h>
 #include <Utils/Platform/Platform.h>
+#include <Utils/Profile/TracyContext.h>
 
 namespace SR_CORE_NS {
     LauncherInitStatus Launcher::InitLauncher() {
