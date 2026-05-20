@@ -18,6 +18,9 @@
 #include <Utils/World/SceneCubeChunkLogic.h>
 #include <Utils/Events/Broadcaster.h>
 
+#include <Graphics/Particles/ParticleUpdater.h>
+#include <Graphics/Particles/ParticleEmitter.h>
+
 namespace SR_CORE_NS {
     EngineScene::EngineScene(const EngineScene::ScenePtr& pScene, Engine* pEngine)
         : Super()

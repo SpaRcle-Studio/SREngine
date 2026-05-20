@@ -19,6 +19,7 @@ float LinearEyeDepth(float depth, float near, float far) {
 [[uniform]] sampler2D Normal;
 [[uniform]] sampler2D Position;
 [[uniform]] sampler2D Noise;
+[[uniform],[const]] int sampleCount;
 
 [[ssbo(SSAOKernel)]] vec4[] samples;
 
