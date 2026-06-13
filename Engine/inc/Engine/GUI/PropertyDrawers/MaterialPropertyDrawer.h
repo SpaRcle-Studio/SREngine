@@ -13,6 +13,7 @@ namespace SR_CORE_GUI_NS {
         SR_CLASS()
     public:
         void OnObjectReplaced(SRClass* pOld, SRClass* pNew) override;
+        void CustomContextMenu(const PropertyDrawerContext& context, SR_UTILS_NS::SRClass* pClass) override;
 
     };
 }

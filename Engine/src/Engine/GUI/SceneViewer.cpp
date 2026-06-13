@@ -106,7 +106,7 @@ namespace SR_CORE_GUI_NS {
                         pMesh->SetMaterial(GetContext()->GetDefaultMaterial());
                     }
                 }
-                m_platform->GetTransform()->SetScale(5.f, 1.f, 5.f);
+                m_platform->GetTransform()->SetScale(6.f, 1.f, 6.f);
                 m_platform->AddEditorFlags(SR_UTILS_NS::EditorFlags::Hidden);
             }
         }

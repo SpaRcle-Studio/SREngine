@@ -142,9 +142,9 @@ vec4 CalculateShadow(
     vec3 vertexPos,
     vec3 tangentNormal,
     vec3 diffuseColor, float specularSharpness, float specularIntensity, float shadowIntensity,
-    float roughnessValue,
+    float roughnessValue, float aoValue, float metallicValue,
     float sssIntensity, vec3 sssColor,
-    vec3 emissionValue
+    vec3 emissionValue,
 ) {
     vec3 L = -DIRECTIONAL_LIGHT_DIRECTION;
     vec3 V = pcf_viewDir;
@@ -202,6 +202,9 @@ vec4 CalculateShadow(
         shadow = mix(1.0, shadow, shadowIntensity);
     }
 
+    float shadowFactor = mix(1.0 - SHADOW_STRENGTH, 1.0, smoothstep(0.2, 1.0, shadow));
+    //float shadowFactor = mix(1.0 - SHADOW_STRENGTH, 1.0, shadow);
+
     //float wrap = 0.5;
     //ndotl = (ndotl + wrap) / (1.0 + wrap);
     //ndotl = max(ndotl, 0.0);
@@ -211,6 +214,9 @@ vec4 CalculateShadow(
     float ndotL = max(dot(N, L), 0.0);
 
     vec3 diffuse = ndotL * SUN_COLOR * SUN_INTENSITY;
+
+    // metallic убивает diffuse
+    diffuse *= (1.0 - metallicValue);
 
     vec3 specLightColor = mix(SKY_COLOR, SUN_COLOR, 0.3);
 
@@ -235,12 +241,21 @@ vec4 CalculateShadow(
     float Gl = ndotL / (ndotL * (1.0 - k) + k);
     float G = Gv * Gl;
 
-    // F (можешь упростить)
+#ifdef HAS_ORM
+    vec3 F0 = mix(
+        vec3(0.04) * specularIntensity,
+        diffuseColor,
+        metallicValue
+    );
+#else
     vec3 F0 = vec3(0.04) * specularIntensity;
+#endif
+
     vec3 F = F0 + (1.0 - F0) * pow(1.0 - dot(H, V), 5.0);
 
     vec3 specular = (D * G * F) / max(4.0 * ndotV * ndotL, 0.001);
     specular *= SUN_COLOR * specLightColor * SUN_INTENSITY;
+    specular *= mix(1.0, shadowFactor, 0.5);
 
 //#ifdef HAS_ROUGHNESS
 //    roughnessValue = clamp(roughnessValue, 0.04, 1.0);
@@ -281,17 +296,18 @@ vec4 CalculateShadow(
     vec3 sss = vec3(0.0);
 #endif
 
-    float shadowFactor = mix(1.0 - SHADOW_STRENGTH, 1.0, smoothstep(0.2, 1.0, shadow));
-    //float shadowFactor = mix(1.0 - SHADOW_STRENGTH, 1.0, shadow);
-
     float upFactor = clamp(N.y * 0.5 + 0.5, 0.0, 1.0);
     vec3 ambientColor = mix(GROUND_COLOR, SKY_COLOR, upFactor);
     vec3 ambient = ambientColor * AMBIENT_INTENSITY;
+
+    // AO влияет ТОЛЬКО на ambient
+    ambient *= max(aoValue, 0.35);
 
     //vec3 sunDiffuse  = SUN_COLOR * SUN_INTENSITY * ndotl; // direct light
     //vec3 skyDiffuse  = mix(GROUND_COLOR, SKY_COLOR, N.y * 0.5 + 0.5) * AMBIENT_INTENSITY; // sky ambient
 
     //vec3 lightingHDR = skyDiffuse + shadowFactor * sunDiffuse + specular + sss + emissionValue;
+
     vec3 lightingHDR =
           ambient * diffuseColor
         + shadowFactor * (diffuse * diffuseColor + specular)

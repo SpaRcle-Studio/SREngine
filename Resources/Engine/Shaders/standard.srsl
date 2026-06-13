@@ -11,10 +11,15 @@
 [[uniform], [public]] sampler2D sss;
 [[uniform], [public]] sampler2D emission;
 [[uniform], [public]] sampler2D alphaMask;
+[[uniform], [public]] sampler2D ORM;
 
+[[uniform], [public]] float normalStrength = 1.0;
 [[uniform], [public]] float specularSharpness = 1.0;
 [[uniform], [public]] float specularIntensity = 1.0;
 [[uniform], [public]] float shadowIntensity = 1.0;
+[[uniform], [public]] float metallicIntensity = 1.0;
+[[uniform], [public]] float roughnessIntensity = 1.0;
+[[uniform], [public]] float ambientIntensity = 1.0;
 [[uniform], [public]] vec2 tiling = vec2(1.0, 1.0);
 [[uniform], [public]] vec2 offset = vec2(0.0, 0.0);
 [[uniform], [public]] vec3 sssColor = vec3(1.0, 0.35, 0.25);
@@ -68,21 +73,29 @@ void fragment() {
     float maybe_unused_specularIntensity = specularIntensity;
     float maybe_unused_shadowIntensity = shadowIntensity;
 
-#ifdef HAS_DETAIL_WEIGHT
-    float detailWeightValue = texture(detailWeight, uv).r;
+#ifdef HAS_ORM
+    vec3 orm = texture(ORM, uv).rgb;
+    float aoValue = mix(1.0, orm.r, ambientIntensity);
+    float roughnessValue = mix(1.0, orm.g, roughnessIntensity);
+    float metallicValue = mix(0.0, orm.b, metallicIntensity);
+#else
+    #ifdef HAS_ROUGHNESS
+        float roughnessValue = texture(roughness, uv).r;
+        roughnessValue = mix(1.0, roughnessValue, roughnessIntensity);
+    #else
+        float roughnessValue = 1.0;
+    #endif
+    float aoValue = 1.0;
+    float metallicValue = 0.0;
 #endif
 
-#ifdef HAS_ROUGHNESS
-    float roughnessValue = texture(roughness, uv).r;
-    #ifdef HAS_DETAIL_WEIGHT
-        // базовый roughness → более шероховатый в местах detail
-        roughnessValue = mix(
-            roughnessValue,
-            clamp(roughnessValue + detailRoughnessStrength, 0.04, 1.0), detailWeightValue
-        );
-    #endif
-#else
-    float roughnessValue = 1.0;
+#ifdef HAS_DETAIL_WEIGHT
+    float detailWeightValue = texture(detailWeight, uv).r;
+    // базовый roughness → более шероховатый в местах detail
+    roughnessValue = mix(
+        roughnessValue,
+        clamp(roughnessValue + detailRoughnessStrength, 0.04, 1.0), detailWeightValue
+    );
 #endif
 
 #ifdef HAS_SSS
@@ -104,9 +117,10 @@ void fragment() {
 
     vec2 enc = fragment_normal(uv);
     vec3 tangentNormal;
-    tangentNormal.xy = enc * 2.0 - 1.0;
+    tangentNormal.xy = (enc * 2.0 - 1.0) * normalStrength;
     tangentNormal.y *= -1.0;
-    tangentNormal.z = sqrt(max(0.0, 1.0 - dot(tangentNormal.xy, tangentNormal.xy)));
+    float xyLen = dot(tangentNormal.xy, tangentNormal.xy);
+    tangentNormal.z = sqrt(max(0.0, 1.0 - min(xyLen, 1.0)));
     tangentNormal = normalize(tangentNormal);
 #else
     vec3 tangentNormal = NORMAL;
@@ -128,7 +142,7 @@ void fragment() {
         maybe_unused_specularSharpness,
         maybe_unused_specularIntensity,
         maybe_unused_shadowIntensity,
-        roughnessValue,
+        roughnessValue, aoValue, metallicValue,
         maybe_unused_sssIntensity,
         maybe_unused_sssColor,
         emissionValue
@@ -138,7 +152,11 @@ void fragment() {
     vec3 mappedNormal = normalize(TBN * tangentNormal);
     float light = dot(mappedNormal, DIRECTIONAL_LIGHT_DIRECTION);
     light = clamp(light, 0.0, 1.0);
-    vec3 normalShade = diffuseColor.rgb * (0.2 + 0.8 * light);
+
+    float ambient = 0.2 * aoValue;
+    float direct = 0.8 * light;
+    vec3 normalShade = diffuseColor.rgb * (ambient + direct);
+
     COLOR = vec4(normalShade, alpha);
 #endif
 

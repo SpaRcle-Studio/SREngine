@@ -19,6 +19,7 @@ namespace SR_CORE_GUI_NS {
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
 
         virtual void OnObjectReplaced(SRClass* pOld, SRClass* pNew) { }
+        virtual void CustomContextMenu(const PropertyDrawerContext& context, SRClass* pClass) { }
 
     private:
         SR_UTILS_NS::StringAtom m_lastTypeName;

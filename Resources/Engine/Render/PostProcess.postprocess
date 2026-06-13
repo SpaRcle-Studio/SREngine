@@ -16,5 +16,3 @@ use tabs: true
 						6-v:type
 							7-s:PostProcessModuleChromaticAberration
 						6-o:ptr
-							7-v:intensity
-								8-f:3

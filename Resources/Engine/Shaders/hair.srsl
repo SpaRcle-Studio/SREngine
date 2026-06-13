@@ -136,6 +136,8 @@ void fragment() {
 #endif
 
 #ifdef SR_DEFINE_USE_CASCADED_SHADOW_MAP
+    float aoValue = 1.0;
+    float metallicValue = 0.0;
     // ---------- BASE LIGHTING (КАСКАДЫ, ТЕНИ, SSS) ----------
     vec4 lighting = CalculateShadow(
         VERTEX,
@@ -145,6 +147,8 @@ void fragment() {
         0.0,                 // specularIntensity (ОТКЛЮЧЕНО)
         1.0,                 // shadowIntensity
         1.0,                 // roughnessValue (НЕ ВАЖЕН)
+        aoValue,
+        metallicValue,
         transVal,            // sssIntensity
         color,               // sssColor
         vec3(0.0)            // emission

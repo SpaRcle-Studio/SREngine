@@ -27,7 +27,10 @@ void vertex() {
     NORMAL = normalize(normalMatrix * NORMAL);
 
     vec3 N = NORMAL;
+
     vec3 T = normalize(normalMatrix * TANGENT.xyz);
+    //vec3 T = normalize(mat3(modelMatrix) * TANGENT.xyz);
+    //vec3 B = normalize(cross(N, T)) * TANGENT.w;
     T = normalize(T - N * dot(N, T)); /// orthogonalize tangent
 
     vec3 B = cross(N, T) * TANGENT.w;

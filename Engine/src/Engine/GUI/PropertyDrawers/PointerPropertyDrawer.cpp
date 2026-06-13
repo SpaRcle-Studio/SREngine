@@ -165,6 +165,8 @@ namespace SR_CORE_GUI_NS {
 
                 static const SR_UTILS_NS::SerializationId serializeId = SR_UTILS_NS::SerializationId::Create("PointerPropertyDrawerClipboard");
 
+                CustomContextMenu(context, pClassValue);
+
                 if (pSerializable && SR_GRAPH_GUI_NS::Immediate::MenuItem("Copy")) {
                     SR_UTILS_NS::SRASerializer serializer;
 
