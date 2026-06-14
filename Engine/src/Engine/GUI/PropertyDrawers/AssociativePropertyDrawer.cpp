@@ -38,7 +38,7 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
         auto&& container = value.AsAssociativeContainer();
-        SR_UTILS_NS::StringAtom displayName = context.GetProperty().GetEditorParams().GetDisplayName();
+        SR_UTILS_NS::StringAtom displayName = context.GetProperty().GetDisplayName();
 
         const SR_MATH_NS::FVector2 counterButtonWidth = { 40, context.fieldHeight };
 

@@ -166,28 +166,28 @@ namespace SR_PTYPES_NS {
         SR_MATH_NS::FVector3 m_bounds = SR_MATH_NS::FVector3::One();
 
         /// @virtualProperty(size) @setter(SetSize) @getter(GetSize) @dontSave @drag(0.01f) @resetValue(SR_MATH_NS::FVector3::One())
-        /// @propertyCondition(SR_PHYSICS_UTILS_NS::IsShapeHasSize(This.GetType())) @dontClone
+        /// @condition(SR_PHYSICS_UTILS_NS::IsShapeHasSize(This.GetType())) @dontClone
         SR_VIRTUAL_PROPERTY
         /// @virtualProperty(height) @setter(SetHeight) @getter(GetHeight) @dontSave @drag(0.01f) @resetValue(1.f)
-        /// @propertyCondition(SR_PHYSICS_UTILS_NS::IsShapeHasHeight(This.GetType())) @dontClone
+        /// @condition(SR_PHYSICS_UTILS_NS::IsShapeHasHeight(This.GetType())) @dontClone
         SR_VIRTUAL_PROPERTY
         /// @virtualProperty(radius) @setter(SetRadius) @getter(GetRadius) @dontSave @drag(0.01f) @resetValue(1.f)
-        /// @propertyCondition(SR_PHYSICS_UTILS_NS::IsShapeHasRadius(This.GetType())) @dontClone
+        /// @condition(SR_PHYSICS_UTILS_NS::IsShapeHasRadius(This.GetType())) @dontClone
         SR_VIRTUAL_PROPERTY
         /// @virtualProperty(plane) @setter(SetPlaneSize) @getter(GetPlaneSize) @dontSave @drag(0.01f) @resetValue(1.f)
-        /// @propertyCondition(SR_PHYSICS_UTILS_NS::IsPlane(This.GetType())) @dontClone
+        /// @condition(SR_PHYSICS_UTILS_NS::IsPlane(This.GetType())) @dontClone
         SR_VIRTUAL_PROPERTY
 
         /// @virtualProperty(geometryName) @getter(GetGeometryName) @dontSave @readOnly
-        /// @propertyCondition(This.HasGeometry())
+        /// @condition(This.HasGeometry())
         SR_VIRTUAL_PROPERTY
         /// @virtualProperty(meshPath) @getter(GetMeshPath) @setter(SetRawMesh)
         /// @customArgs(pick: enabled, filter name: Meshes, relative: resources)
         /// @customArg(filter value: fbx,blend,obj,pmx,stl,dae)
-        /// @propertyCondition(This.HasGeometry())
+        /// @condition(This.HasGeometry())
         SR_VIRTUAL_PROPERTY
         /// @virtualProperty(meshId) @getter(GetMeshId) @setter(SetMeshId)
-        /// @propertyCondition(This.HasGeometry())
+        /// @condition(This.HasGeometry())
         SR_VIRTUAL_PROPERTY
 
     };

@@ -29,6 +29,15 @@ namespace SR_CORE_GUI_NS {
             PropertyDrawerFeedback& feedback
         );
 
+        void DrawMethod(
+            SR_UTILS_NS::SRClass* pClassValue,
+            uint64_t index,
+            const SR_UTILS_NS::Reflection::Method& method,
+            const PropertyDrawerContext& context,
+            PropertyDrawerContext& propertyContext,
+            PropertyDrawerFeedback& feedback
+        );
+
     private:
         bool m_openedByDefault = false;
         bool m_isOpened = false;

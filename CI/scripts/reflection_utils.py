@@ -79,7 +79,7 @@ class CPPConstructor:
 class CPPProperty:
     def __init__(self, name, type_name):
         self.name = name
-        self.display_name = name
+        self.display_name = None
         self.serialize_name = name
         self.type_name = type_name
         self.default_value = None
@@ -129,6 +129,8 @@ class CPPMethod:
         self.return_type: CPPType = CPPType(return_type)
         self.parameters: list[CPPParameter] = []
         self.is_const = False
+        self.condition = None
+        self.editor_button = False
 
     def add_parameter(self, parameter: CPPParameter):
         self.parameters.append(parameter)

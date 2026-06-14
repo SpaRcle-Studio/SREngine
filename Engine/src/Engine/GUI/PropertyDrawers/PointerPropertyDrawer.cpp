@@ -70,7 +70,7 @@ namespace SR_CORE_GUI_NS {
             //const SR_MATH_NS::FVector2 mainButtonSize = { SR_MAX(context.fieldTitleWidth - arrowWidth, 0), context.fieldHeight };
             const SR_MATH_NS::FVector2 mainButtonSize = { SR_MAX(context.fieldTitleWidth, 0), context.fieldHeight };
 
-            SR_UTILS_NS::StringAtom displayName = editorParams.GetDisplayName();
+            SR_UTILS_NS::StringAtom displayName = context.GetPropertyDisplayName();
             auto&& stackSize = SR_GRAPH_GUI_NS::Immediate::BeginForceEnabled();
             if (SR_GRAPH_GUI_NS::Immediate::Button(displayName.c_str(), mainButtonSize)) {
                 m_isOpened = !m_isOpened;

@@ -66,13 +66,21 @@ namespace SR_CORE_GUI_NS {
                 auto&& filterName = context.GetEditorParams().GetCustomArg("filter name");
                 auto&& filterValue = context.GetEditorParams().GetCustomArg("filter value");
 
-                const bool relativeRes = context.GetEditorParams().GetCustomArg("relative") == "resources";
+                const bool relativeRes = context.GetEditorParams().GetCustomArg("relative") != "resources" || (filterName.empty() && filterValue.empty());
 
-                if (!filterName.empty() && !filterValue.empty()) {
-                    auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                    auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath, { { filterName, filterValue } });
+                if (auto&& pRef = dynamic_cast<SR_UTILS_NS::ResourceRefBase*>(value.GetSRClass())) {
+                    if (filterName.empty()) {
+                        filterName = SR_UTILS_NS::Reflection::MakeDisplayName(pRef->GetResourceType());
+                    }
 
-                    if (auto&& pRef = dynamic_cast<SR_UTILS_NS::ResourceRefBase*>(value.GetSRClass())) {
+                    if (!filterName.empty() && filterValue.empty()) {
+                        filterValue = SR_UTILS_NS::Factory::Instance().GetType(pRef->GetResourceType())->GetExtension();
+                    }
+
+                    if (!filterName.empty() && !filterValue.empty()) {
+                        auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+                        auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath, { { filterName, filterValue } });
+
                         if (context.onBeforeChangeCallback) {
                             context.onBeforeChangeCallback(false);
                         }

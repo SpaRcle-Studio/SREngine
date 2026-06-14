@@ -38,73 +38,158 @@ namespace SR_CORE_NS {
 
             aiString diffuseTexturePath;
             if (pMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &diffuseTexturePath) == aiReturn_SUCCESS) {
-                if (auto&& pTexture = CoreResLoader::Load<SR_GTYPES_NS::Texture>(std::string_view(diffuseTexturePath.C_Str()))) {
-                    pMesh->GetMaterial()->SetTexture("diffuse", pTexture);
-                    pTexture->CheckResourceUsage();
+                if (SR_UTILS_NS::Path(diffuseTexturePath.C_Str()).IsFile()) {
+                    if (auto&& pTexture = CoreResLoader::Load<SR_GTYPES_NS::Texture>(std::string_view(diffuseTexturePath.C_Str()))) {
+                        pMesh->GetMaterial()->SetTexture("diffuse", pTexture);
+                        pTexture->CheckResourceUsage();
+                    }
+                }
+                else {
+                    SR_LOG("World::Instance() : diffuse texture path is not a file: {}", diffuseTexturePath.C_Str());
                 }
             }
         };
 
         std::list<SR_GTYPES_NS::SkinnedMesh::Ptr> skinnedMeshes;
 
-        const std::function<SR_UTILS_NS::GameObject::Ptr(aiNode*)> processNode = [&processNode, &skinnedMeshes, this, pRawMesh](aiNode* node) -> SR_UTILS_NS::GameObject::Ptr {
-            SR_UTILS_NS::GameObject::Ptr ptr = Scene::InstanceGameObject(node->mName.C_Str());
+        static const auto isAssimpFbxHelperSuffix = [](std::string_view suffix) -> bool {
+            return
+                    suffix == "Translation" ||
+                    suffix == "PreRotation" ||
+                    suffix == "Rotation" ||
+                    suffix == "PostRotation" ||
+                    suffix == "Scaling" ||
+                    suffix == "RotationPivot" ||
+                    suffix == "RotationOffset" ||
+                    suffix == "ScalingPivot" ||
+                    suffix == "ScalingOffset" ||
+                    suffix == "GeometricTranslation" ||
+                    suffix == "GeometricRotation" ||
+                    suffix == "GeometricScaling";
+        };
 
-            const aiScene* pScene = static_cast<const aiScene*>(pRawMesh->GetAssimpScene());
+        static const auto isAssimpFbxHelperNode = [](std::string_view name) -> bool {
+            constexpr std::string_view tag = "_$AssimpFbx$_";
+            const auto pos = name.find(tag);
+            if (pos == std::string_view::npos)
+                return false;
+
+            const auto suffix = name.substr(pos + tag.size());
+            std::string_view baseOut = name.substr(0, pos);
+
+            if (!isAssimpFbxHelperSuffix(suffix))
+                return false;
+
+            // ограничиваем только Mixamo (осторожный scope)
+            return baseOut.find("mixamorig") != std::string_view::npos ||
+                   baseOut.find("Mixamo") != std::string_view::npos;
+        };
+
+        static  const std::function<void(aiNode*&, aiMatrix4x4&)> extractPreTransforms = [](aiNode*& node, aiMatrix4x4& parent) {
+            aiMatrix4x4 local = node->mTransformation;
+            parent = parent * local;
+
+            if (isAssimpFbxHelperNode(node->mName.C_Str())) {
+                if (node->mNumChildren > 0) {
+                    node = node->mChildren[0];
+                    extractPreTransforms(node, parent);
+                }
+                else {
+                    node = nullptr;
+                }
+            }
+        };
+
+        const std::function<SR_UTILS_NS::GameObject::Ptr(aiNode*)> processNode = [&](aiNode* node) -> SR_UTILS_NS::GameObject::Ptr {
+            aiMatrix4x4 global;
+            extractPreTransforms(node, global);
+            if (!node) {
+                return {};
+            }
+
+            const std::string_view nodeName = node->mName.C_Str();
+
+            // создаём объект (но НЕ применяем transform пока)
+            auto obj = Scene::InstanceGameObject(nodeName);
+
+            // =========================
+            // CHILDREN FIRST (важно для корректного bake)
+            // =========================
+            for (uint32_t i = 0; i < node->mNumChildren; ++i) {
+                auto child = processNode(node->mChildren[i]);
+
+                obj->AddChild(
+                    child.StaticCast<SR_UTILS_NS::SceneObject>()
+                );
+            }
+
+            // =========================
+            // MESHES
+            // =========================
+            const aiScene* scene =
+                static_cast<const aiScene*>(pRawMesh->GetAssimpScene());
 
             for (uint32_t i = 0; i < node->mNumMeshes; ++i) {
+
                 const uint64_t meshId = node->mMeshes[i];
-                const int64_t countBones = pScene->mMeshes[meshId]->mNumBones;
+                const aiMesh* mesh = scene->mMeshes[meshId];
 
-                if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load(pRawMesh->GetResourcePath(), node->mMeshes[i])) {
-                    pMesh->SetMaterial(SR_GRAPH_NS::FileMaterial::LoadAsUnique(GetRenderScene()->GetContext()->GetSettings().defaultMaterial));
+                if (auto pMesh = SR_GTYPES_NS::Mesh::Load(pRawMesh->GetResourcePath(), meshId)) {
 
-                    if (countBones > 0) {
-                        if (auto&& pMaterial = pMesh->GetMaterial()) {
-                            if (auto&& pData = pMaterial->GetMaterialData()) {
-                                pData->AddShaderDefine("HAS_SKELETON");
+                    pMesh->SetMaterial(
+                        SR_GRAPH_NS::FileMaterial::LoadAsUnique(
+                            GetRenderScene()->GetContext()->GetSettings().defaultMaterial
+                        )
+                    );
+
+                    if (mesh->mNumBones > 0) {
+                        if (auto mat = pMesh->GetMaterial()) {
+                            if (auto data = mat->GetMaterialData()) {
+                                data->AddShaderDefine("HAS_SKELETON");
                             }
                         }
                     }
 
-                    processMaterial(pRawMesh, meshId, pMesh.Get(), pScene->mMeshes[meshId]->mMaterialIndex);
+                    processMaterial(pRawMesh, meshId, pMesh.Get(), mesh->mMaterialIndex);
 
-                    ptr->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
+                    obj->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
 
-                    if (auto&& pSkinnedMesh = pMesh.DynamicCast<SR_GTYPES_NS::SkinnedMesh>()) {
-                        skinnedMeshes.emplace_back(pSkinnedMesh);
+                    if (auto skinned = pMesh.DynamicCast<SR_GTYPES_NS::SkinnedMesh>()) {
+                        skinnedMeshes.emplace_back(skinned);
                     }
-
-                    continue;
                 }
-
-                SRHalt("failed to load mesh!");
+                else {
+                    SRHalt("failed to load mesh!");
+                }
             }
 
-            for (uint32_t i = 0; i < node->mNumChildren; ++i) {
-                ptr->AddChild(processNode(node->mChildren[i]).StaticCast<SR_UTILS_NS::SceneObject>());
-            }
+            // =========================
+            // APPLY TRANSFORM (НО ТОЛЬКО ЕСЛИ НЕ FBX HELPER)
+            // =========================
+            aiVector3D scale, rot, trans;
+            global.Decompose(scale, rot, trans);
 
-            aiVector3D scaling, rotation, translation;
-            node->mTransformation.Decompose(scaling, rotation, translation);
-
-            rotation = {
-                    (float_t)SR_DEG(rotation.x),
-                    (float_t)SR_DEG(rotation.y),
-                    (float_t)SR_DEG(rotation.z)
+            rot = {
+                SR_DEG(rot.x),
+                SR_DEG(rot.y),
+                SR_DEG(rot.z)
             };
 
-            ptr->GetTransform()->Translate(translation.x, translation.y, translation.z);
-            ptr->GetTransform()->Rotate(rotation.x, rotation.y, rotation.z);
-            ptr->GetTransform()->Scale(scaling.x, scaling.y, scaling.z);
+            obj->GetTransform()->Translate(trans.x, trans.y, trans.z);
+            obj->GetTransform()->Rotate(rot.x, rot.y, rot.z);
+            obj->GetTransform()->Scale(scale.x, scale.y, scale.z);
 
-            return ptr;
+            return { obj };
         };
 
         SR_ANIMATIONS_NS::Skeleton::Ptr pSkeleton = nullptr;
 
         pRawMesh->Execute([&]() -> bool {
-            SRVerifyFalse(!(root = processNode(static_cast<const aiScene*>(pRawMesh->GetAssimpScene())->mRootNode)).Valid());
+            auto&& result = processNode(static_cast<const aiScene*>(pRawMesh->GetAssimpScene())->mRootNode);
+            if (SRVerifyFalse(!result)) {
+                root = result;
+            }
+
             if (!skinnedMeshes.empty() && root) {
                 pSkeleton = Importers::ImportSkeletonFromRawMesh(pRawMesh);
             }

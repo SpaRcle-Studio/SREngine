@@ -62,7 +62,7 @@ namespace SR_CORE_GUI_NS {
             const float_t titleTotalWidth = context.fieldTitleWidth;
             buttonSize = { (context.fieldWidth + context.fieldTitleWidth) - titleTotalWidth, context.fieldHeight };
 
-            SR_UTILS_NS::StringAtom displayName = context.GetEditorParams().GetDisplayName();
+            SR_UTILS_NS::StringAtom displayName = context.GetPropertyDisplayName();
             auto&& stackSize = SR_GRAPH_GUI_NS::Immediate::BeginForceEnabled();
             if (SR_GRAPH_GUI_NS::Immediate::Button(displayName.c_str(), mainButtonSize)) {
                 m_isOpened = !m_isOpened;
@@ -96,6 +96,12 @@ namespace SR_CORE_GUI_NS {
                 pMeta->ForEachProperty([&](auto&& property, uint64_t index) {
                     SR_GRAPH_GUI_NS::Immediate::PushID(index);
                     DrawPropertyGroup(SR_UTILS_NS::StringAtom(), pClassValue, index, property, context, propertyContext, feedback);
+                    SR_GRAPH_GUI_NS::Immediate::PopID();
+                });
+
+                pMeta->ForEachMethod([&](auto&& method, uint64_t index) {
+                    SR_GRAPH_GUI_NS::Immediate::PushID(index);
+                    DrawMethod(pClassValue, index, method, context, propertyContext, feedback);
                     SR_GRAPH_GUI_NS::Immediate::PopID();
                 });
 
@@ -160,6 +166,38 @@ namespace SR_CORE_GUI_NS {
         return feedback;
     }
 
+    void ObjectPropertyDrawer::DrawMethod(
+        SR_UTILS_NS::SRClass* pClassValue,
+        uint64_t index,
+        const SR_UTILS_NS::Reflection::Method& method,
+        const PropertyDrawerContext& context,
+        PropertyDrawerContext& propertyContext,
+        PropertyDrawerFeedback& feedback
+    ) {
+        SR_TRACY_ZONE;
+
+        if (!method.IsEditorButton()) {
+            return;
+        }
+
+        if (!method.IsActive(*pClassValue)) {
+            return;
+        }
+
+        const SR_MATH_NS::FVector2 buttonSize = { context.fieldWidth + context.fieldTitleWidth, context.fieldHeight };
+        const bool hasParameters = method.GetParamsCount() > 0;
+        if (hasParameters) {
+            SR_THREAD_LOCAL static SR_UTILS_NS::String message;
+            SR_UTILS_NS::FormatTo(message, "Method {} has parameters and cannot be invoked from the editor!", method.GetDisplayName());
+            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), message.c_str());
+            return;
+        }
+
+        if (SR_GRAPH_GUI_NS::Immediate::Button(method.GetDisplayName().c_str(), buttonSize)) {
+            method.InvokeVoid(*context.pOwner);
+        }
+    }
+
     void ObjectPropertyDrawer::DrawPropertyGroup(
         SR_UTILS_NS::StringAtom group,
         SR_UTILS_NS::SRClass* pClassValue,
@@ -171,7 +209,7 @@ namespace SR_CORE_GUI_NS {
     ) {
         SR_TRACY_ZONE;
 
-        if (property.IsHidden(pClassValue)) {
+        if (property.IsHidden(*pClassValue)) {
             return;
         }
 

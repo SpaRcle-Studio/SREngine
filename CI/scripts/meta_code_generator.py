@@ -63,6 +63,12 @@ def generate_class_meta_methods(f, class_structures, class_obj, tabs):
         f.write('\n' + '\t' * (tabs + 3) + f'.SetHasReturn({"true" if is_method_has_return else "false"})')
         f.write('\n' + '\t' * (tabs + 3) + f'.SetParamsCount({len(method.parameters)})')
 
+        if method.condition:
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetCondition(&SRClassMetaTemplate::IsMethodActive_{method.name})')
+
+        if method.editor_button:
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetEditorButton()')
+
         if not is_method_has_return and not is_method_has_params:
             f.write('\n' + '\t' * (tabs + 3) + f'.SetNoReturnNoParams([](SpaRcle::Utils::SRClass& obj) {{ ')
             f.write(f'static_cast<{class_obj.name}&>(obj).{method.name}(); ')
@@ -143,6 +149,9 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
         if prop.reset_value:
             f.write('\n' + '\t' * (tabs + 3) + f'.SetResetValue(SpaRcle::Utils::Reflection::Value::Create({prop.reset_value}))')
 
+        if prop.display_name:
+            f.write('\n' + '\t' * (tabs + 4) + f'.SetDisplayName("{prop.display_name}")')
+
         # editor params
 
         f.write('\n' + '\t' * (tabs + 3) + f'.SetEditorParams(SpaRcle::Utils::Reflection::EditorPropertyParams()')
@@ -167,8 +176,6 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
 
         if prop.group:
             f.write('\n' + '\t' * (tabs + 4) + f'.SetGroup("{prop.group}")')
-
-        f.write('\n' + '\t' * (tabs + 4) + f'.SetDisplayName("{prop.display_name}")')
 
         if prop.inspector:
             f.write('\n' + '\t' * (tabs + 4) + f'.SetInspector("{prop.inspector}")')
@@ -522,6 +529,13 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
             f.write('\t' * (tabs + 1) + f'return {prop.enum_filter}(classRef, enumValue);' + '\n')
             f.write('\t' * (tabs + 0) + f'}}\n\n')
                 
+
+    for method in class_obj.methods:
+        if method.condition:
+            f.write('\t' * tabs + f'static auto IsMethodActive_{method.name}(SpaRcle::Utils::SRClass* pClass) {{' + '\n')
+            f.write('\t' * (tabs + 1) + f'{class_name}& This = *dynamic_cast<{class_name}*>(pClass);' + '\n')
+            f.write('\t' * (tabs + 1) + f'return {method.condition};' + '\n')
+            f.write('\t' * tabs + '}\n\n')
 
     for prop in class_obj.variables:
         if not prop.property_condition:

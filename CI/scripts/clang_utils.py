@@ -281,7 +281,7 @@ def process_property(property_obj: reflection_utils.CPPProperty, clang_child):
             property_obj.range = None
 
     property_obj.default_value = extract_special_tag_comment_data(clang_child, 'defaultValue')
-    property_obj.property_condition = extract_special_tag_comment_data(clang_child, 'propertyCondition')
+    property_obj.property_condition = extract_special_tag_comment_data(clang_child, 'condition')
     property_obj.load_condition = extract_special_tag_comment_data(clang_child, 'loadCondition')
     property_obj.drag_value = extract_special_tag_comment_data(clang_child, 'drag')
     property_obj.editor_width = extract_special_tag_comment_data(clang_child, 'editorWidth')
@@ -329,7 +329,7 @@ def process_property(property_obj: reflection_utils.CPPProperty, clang_child):
         property_obj.dontLoad = True
 
     # remove m_ and _ prefix from name
-    property_obj.display_name = sparcle_utils.make_display_name(property_obj.name)
+    #property_obj.display_name = sparcle_utils.make_display_name(property_obj.name)
     property_obj.serialize_name = sparcle_utils.make_serialize_property_name(property_obj.name)
 
     if not property_obj.default_value:
@@ -499,6 +499,9 @@ def parse_sparcle_class(logger, context: codegen_context.CodegenContext, parent_
                 method_name = child.spelling
                 method_return_type = child.result_type.spelling
                 method_obj = reflection_utils.CPPMethod(method_name, method_return_type)
+                method_obj.is_const = child.is_const_method()
+                method_obj.condition = extract_special_tag_comment_data(child, 'condition')
+                method_obj.editor_button = has_special_tag_comment(child, 'editorButton')
                 for param in child.get_children():
                     if param.kind == clang.cindex.CursorKind.PARM_DECL:
                         param_name = param.spelling
@@ -508,116 +511,6 @@ def parse_sparcle_class(logger, context: codegen_context.CodegenContext, parent_
                 class_obj.add_method(method_obj)
 
         code_structure.sparcle_classes.append(class_obj)
-
-
-def parse_scriptable_class(logger: logger_utils.Logger, parent_node, code_structure, namespaces):
-    is_class_or_struct = parent_node.kind == clang.cindex.CursorKind.CLASS_DECL or parent_node.kind == clang.cindex.CursorKind.STRUCT_DECL
-    is_template_class_or_struct = parent_node.kind == clang.cindex.CursorKind.CLASS_TEMPLATE or parent_node.kind == clang.cindex.CursorKind.CLASS_TEMPLATE_PARTIAL_SPECIALIZATION
-
-    if (is_class_or_struct or is_template_class_or_struct) and parent_node.is_definition():
-        is_scriptable_class = has_special_tag_comment(parent_node, 'scriptableClass')
-        if not is_scriptable_class:
-            return
-
-        class_name = '::'.join(namespaces) + f'::{parent_node.spelling}'
-        logger.log_debug(f'Found scriptable class: {class_name}')
-        class_obj = reflection_utils.ScriptableClass(parent_node.spelling, namespaces)
-        class_obj.path = parent_node.location.file.name
-        class_obj.has_default_constructor = has_default_constructor(parent_node)
-        class_obj.has_copy_constructor = has_copy_constructor(parent_node)
-
-        template_variants = []
-
-        if is_template_class_or_struct:
-            '''
-            Example:
-            /// @templateImpl(FVector3, T = float_t)
-            /// @templateImpl(IVector3, T = int32_t)
-            /// @templateImpl(UVector3, T = uint32_t)
-            /// @templateImpl(BVector3, T = bool)
-            '''
-            template_impls = extract_all_special_tags_comment_data(parent_node, 'templateImpl')
-            if not template_impls:
-                logger.log_fatal_error(f'Error: template class {class_name} has no templateImpl!')
-            for template_impl in template_impls:
-                logger.log_debug(f'Found scriptable class template implementation: {template_impl}')
-                args = template_impl.split(',')
-
-                code_structure.add_class_name_correction(args[0].strip(), '::'.join(namespaces) + f'::{args[0].strip()}')
-
-                template_replacements = []
-                for arg in args[1:]:
-                    template_typename = arg.split('=')[0].strip()
-                    template_type = arg.split('=')[1].strip()
-                    template_replacements.append((template_typename, template_type))
-                    logger.log_debug(f'Found scriptable class template argument: {template_typename}, Type: {template_type}')
-                template_variants.append((args[0].strip(), template_replacements))
-        else:
-            code_structure.add_class_name_correction(parent_node.spelling, class_name)
-
-
-        for child in parent_node.get_children():
-            # find all constructors with special tag @constructor
-            if child.kind == clang.cindex.CursorKind.CONSTRUCTOR:
-                if has_special_tag_comment(child, 'constructor'):
-                    logger.log_debug(f'Found scriptable constructor: {child.spelling}')
-                    constructor = reflection_utils.CPPConstructor()
-
-                    # find all parameters
-                    for param in child.get_children():
-                        if param.kind == clang.cindex.CursorKind.PARM_DECL:
-                            param_name = param.spelling
-                            param_type = param.type.spelling
-                            logger.log_debug(f'Found scriptable constructor parameter: {param_name}, Type: {param_type}')
-                            constructor.add_parameter(reflection_utils.CPPParameter(param_name, param_type))
-
-                    class_obj.add_constructor(constructor)
-
-            # find all operators with special tag @operator
-            elif child.kind == clang.cindex.CursorKind.CXX_METHOD and child.spelling.startswith('operator'):
-                if has_special_tag_comment(child, 'operator'):
-                    logger.log_debug(f'Found scriptable operator: {child.spelling}, return type {child.result_type.spelling}')
-                    operator = reflection_utils.CPPOperator(cpp_operator.OperatorType.from_string(child.spelling), child.result_type.spelling)
-                    operator.is_const = child.is_const_method()
-
-                    # find all parameters
-                    for param in child.get_children():
-                        if param.kind == clang.cindex.CursorKind.PARM_DECL:
-                            logger.log_debug(f'Found scriptable operator parameter: {param.spelling}, Type: {param.type.spelling}')
-                            operator.add_parameter(reflection_utils.CPPParameter(param.spelling, param.type.spelling))
-
-                    class_obj.add_operator(operator)
-
-            # find all method with special tag @method
-            elif child.kind == clang.cindex.CursorKind.CXX_METHOD:
-                if has_special_tag_comment(child, 'method'):
-                    logger.log_debug(f'Found scriptable method: {child.spelling}, return type {child.result_type.spelling}')
-                    method = reflection_utils.CPPMethod(child.spelling, child.result_type.spelling)
-                    method.is_const = child.is_const_method()
-
-                    # find all parameters
-                    for param in child.get_children():
-                        if param.kind == clang.cindex.CursorKind.PARM_DECL:
-                            logger.log_debug(f'Found scriptable method parameter: {param.spelling}, Type: {param.type.spelling}')
-                            method.add_parameter(reflection_utils.CPPParameter(param.spelling, param.type.spelling))
-
-                    class_obj.add_method(method)
-
-        if len(template_variants) > 0:
-            for template_variant in template_variants:
-                class_obj_template = copy.deepcopy(class_obj)
-                class_obj_template.alias = template_variant[0]
-
-                full_template_name = f'{parent_node.spelling}<' + f', '.join([template_replacement[0] for template_replacement in template_variant[1]]) + '>'
-
-                for template_replacement in template_variant[1]:
-                    full_template_name = sparcle_utils.replace_type_templated_name(full_template_name, template_replacement[0], template_replacement[1])
-                    class_obj_template.replace_type(template_replacement[0], template_replacement[1])
-                code_structure.add_scriptable_class(class_obj_template)
-
-                code_structure.add_class_name_correction(full_template_name, '::'.join(namespaces) + f'::{class_obj_template.alias}')
-        else:
-            code_structure.add_scriptable_class(class_obj)
 
 
 NOT_ALLOWED_NAMESPACES = { 'std', 'stdext', 'ax' }
