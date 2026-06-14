@@ -41,6 +41,7 @@
 #include <Graphics/Lighting/SpotLight.h>
 #include <Graphics/Lighting/AreaLight.h>
 #include <Graphics/Lighting/ProbeLight.h>
+#include <Graphics/Particles/ParticleEmitter.h>
 #include <Graphics/Font/Text.h>
 #include <Graphics/Types/Geometry/Sprite.h>
 
@@ -774,6 +775,16 @@ namespace SR_CORE_GUI_NS {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pGameObject = pScene->InstanceGameObject("Render Target"_atom);
                     auto&& pRenderTarget = pGameObject->AddComponent<SR_GTYPES_NS::RenderTarget>();
+                    InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                }
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Particle Emitter")) {
+                if (auto&& pScene = m_engine->GetScene()) {
+                    auto&& pGameObject = pScene->InstanceGameObject("Particle Emitter"_atom);
+                    auto&& pEmitter = pGameObject->AddComponent<SR_GRAPH_NS::ParticleEmitter>();
                     InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
                 }
             }
