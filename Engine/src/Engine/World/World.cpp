@@ -85,7 +85,7 @@ namespace SR_CORE_NS {
                    baseOut.find("Mixamo") != std::string_view::npos;
         };
 
-        static  const std::function<void(aiNode*&, aiMatrix4x4&)> extractPreTransforms = [](aiNode*& node, aiMatrix4x4& parent) {
+        static const std::function<void(aiNode*&, aiMatrix4x4&)> extractPreTransforms = [](aiNode*& node, aiMatrix4x4& parent) {
             aiMatrix4x4 local = node->mTransformation;
             parent = parent * local;
 

@@ -127,10 +127,11 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::SameLine();
 
         SR_GRAPH_GUI_NS::Immediate::PushItemWidth(SR_GRAPH_GUI_NS::Immediate::GetContentRegionAvail().x + 2.f);
-        std::string name = m_sceneObject->GetName();
-        SR_GRAPH_GUI_NS::Immediate::InputText("##Name", &name);
+        SR_THREAD_LOCAL static std::string buffer;
+        buffer = m_sceneObject->GetName().ToStringView();
+        SR_GRAPH_GUI_NS::Immediate::InputText("##Name", &buffer);
         if (SR_GRAPH_GUI_NS::Immediate::IsItemDeactivatedAfterEdit()) {
-            pEngine->GetCmdManager()->Execute<SR_CORE_NS::Commands::SceneObjectRename>(SR_UTILS_NS::SyncType::Async, pEngine, m_sceneObject, name);
+            pEngine->GetCmdManager()->Execute<SR_CORE_NS::Commands::SceneObjectRename>(SR_UTILS_NS::SyncType::Async, pEngine, m_sceneObject, buffer);
         }
         SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
 
