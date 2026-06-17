@@ -19,13 +19,17 @@
 
 namespace SR_CORE_NS {
     bool Importers::ImportSkeletonFromRawMesh(const SR_HTYPES_NS::RawMesh* pRawMesh, SR_ANIMATIONS_NS::Skeleton::Ptr pSkeleton) {
-        pSkeleton->GetSkeletonRawMesh().SetRawMesh(pRawMesh);
+        SR_HTYPES_NS::RawMeshHolder skeletonHolder;
+
+        skeletonHolder.SetRawMesh(pRawMesh);
         for (uint32_t meshId = 0; meshId < pRawMesh->GetMeshesCount(); ++meshId) {
             if (pRawMesh->HasBones(meshId)) {
-                pSkeleton->GetSkeletonRawMesh().SetMeshId(meshId);
+                skeletonHolder.SetMeshId(meshId);
                 break;
             }
         }
+
+        pSkeleton->SetRawMesh(skeletonHolder);
 
         /// если нет сцены, значит загружаем сырой компонент
         if (!pSkeleton->HasScene()) {

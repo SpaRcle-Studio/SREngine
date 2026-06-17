@@ -5,6 +5,9 @@ use tabs: true
 		2-v:type
 			3-s:SkeletonRig
 		2-o:ptr
+			3-o:skeleton
+				4-v:meshPath
+					5-s:Samples/MechanicGirl/SK_MechanicGirl_03.FBX
 			3-v:skeletonType
 				4-s:Humanoid
 			3-a:mapping
@@ -830,6 +833,40 @@ use tabs: true
 											11-f:1
 				4-k:item
 					5-v:first
+						6-s:RightShoulder
+					5-o:second
+						6-a:bones
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:clavicle_r
+									9-v:index
+										10-i:31
+									9-o:bindTranslation
+										10-v:x
+											11-f:0.0757819
+										10-v:y
+											11-f:-0.023246
+										10-v:z
+											11-f:-0.0175953
+									9-o:bindRotation
+										10-v:x
+											11-f:0.685412
+										10-v:y
+											11-f:-0.173813
+										10-v:z
+											11-f:0.694732
+										10-v:w
+											11-f:-0.13171
+									9-o:bindScale
+										10-v:x
+											11-f:1
+										10-v:y
+											11-f:1
+										10-v:z
+											11-f:1
+				4-k:item
+					5-v:first
 						6-s:RightUpperLeg
 					5-o:second
 						6-a:bones
@@ -1609,6 +1646,40 @@ use tabs: true
 											11-f:-0.00396873
 										10-v:w
 											11-f:0.996944
+									9-o:bindScale
+										10-v:x
+											11-f:1
+										10-v:y
+											11-f:1
+										10-v:z
+											11-f:1
+				4-k:item
+					5-v:first
+						6-s:LeftShoulder
+					5-o:second
+						6-a:bones
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:clavicle_l
+									9-v:index
+										10-i:58
+									9-o:bindTranslation
+										10-v:x
+											11-f:0.0757834
+										10-v:y
+											11-f:-0.0232464
+										10-v:z
+											11-f:0.0175953
+									9-o:bindRotation
+										10-v:x
+											11-f:-0.173811
+										10-v:y
+											11-f:-0.685412
+										10-v:z
+											11-f:0.131709
+										10-v:w
+											11-f:0.694732
 									9-o:bindScale
 										10-v:x
 											11-f:1
