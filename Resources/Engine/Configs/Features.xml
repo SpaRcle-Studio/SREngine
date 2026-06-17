@@ -14,7 +14,7 @@
         <ShowScriptsCodegenResult Value="true"/>
         <SegmentationHandler Value="false"/>
         <ResourceUsePointStackTraceProfiling Value="false"/>
-        <VulkanValidationErrorAsAssert Value="false"/>
+        <VulkanValidationErrorAsAssert Value="true"/>
         <VulkanValidation Value="false"/>
         <VulkanGPUAssist Value="false"/>
 

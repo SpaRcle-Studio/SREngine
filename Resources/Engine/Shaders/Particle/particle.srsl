@@ -1,7 +1,7 @@
 ShaderType Spatial;
 
 PolygonMode Fill;
-CullMode Back;
+CullMode None;
 DepthCompare LessOrEqual;
 PrimitiveTopology TriangleList;
 DepthWrite true;
@@ -9,9 +9,31 @@ BlendEnabled false;
 DepthTest true;
 
 void fragment() {
-    COLOR = vec4(1.0, 0.0, 0.0, 1.0);
+    COLOR = COLOR0;
 }
 
-void vertex() {
-    OUT_POSITION = vec4(0.0, 0.0, 0.0, 1.0);
+void vertex()
+{
+    vec3 right = vec3(
+            VIEW_NO_TRANSLATE_MATRIX[0][0],
+            VIEW_NO_TRANSLATE_MATRIX[1][0],
+            VIEW_NO_TRANSLATE_MATRIX[2][0]);
+
+    vec3 up = vec3(
+            VIEW_NO_TRANSLATE_MATRIX[0][1],
+            VIEW_NO_TRANSLATE_MATRIX[1][1],
+            VIEW_NO_TRANSLATE_MATRIX[2][1]);
+
+    vec2 quad[6] = {
+            vec2(-0.5, -0.5),
+            vec2( 0.5,  0.5),
+            vec2( 0.5, -0.5),
+            vec2(-0.5, -0.5),
+            vec2(-0.5,  0.5),
+            vec2( 0.5,  0.5)
+        };
+
+    vec3 worldPos = POSITION1 + right * quad[VERTEX_INDEX].x * CUSTOM0 + up * quad[VERTEX_INDEX].y * CUSTOM0;
+
+    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(worldPos, 1.0);
 }
