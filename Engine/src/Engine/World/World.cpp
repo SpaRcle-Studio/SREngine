@@ -56,10 +56,7 @@ namespace SR_CORE_NS {
         nodesPool.resize(pRawMesh->GetSceneStructure().GetNodesCount());
         pRawMesh->GetSceneStructure().ForEachNode(true, [&](const SR_HTYPES_NS::MeshSceneStructure::SceneNode& node) {
             auto&& pGameObject = nodesPool.emplace_back(SRNew<SR_UTILS_NS::GameObject>(node.name));
-            SR_MATH_NS::FVector3 translation, scale;
-            SR_MATH_NS::Quaternion rotation;
-            node.transform.Decompose(translation, rotation, scale);
-            pGameObject->GetTransform()->SetMatrix(translation, rotation, scale);
+            pGameObject->GetTransform()->SetMatrix(node.transform.translation, node.transform.rotation, node.transform.scale);
 
             nodesPool[node.index] = pGameObject;
 

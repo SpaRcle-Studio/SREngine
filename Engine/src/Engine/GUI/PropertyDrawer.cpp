@@ -59,7 +59,7 @@ namespace SR_CORE_GUI_NS {
             return "MathSizePropertyDrawer";
         }
 
-        if (value.IsMathVector()) {
+        if (value.IsMathVector() || value.IsQuaternion()) {
             return "MathVectorPropertyDrawer";
         }
 
@@ -86,7 +86,6 @@ namespace SR_CORE_GUI_NS {
         if (value.IsPath()) {
             return "PathPropertyDrawer";
         }
-
 
         if (value.IsAABB()) {
             return "AABBPropertyDrawer";
@@ -526,8 +525,9 @@ namespace SR_CORE_GUI_NS {
         if (size_t pos = vectorType.rfind(':'); pos != std::string_view::npos) {
             vectorType.remove_prefix(pos + 1);
         }
-        std::string_view vectorPartType = SR_UTILS_NS::StringUtils::GetBetween(vectorType, '<', '>');
-        const uint8_t dimension = SR_UTILS_NS::CharToInt(vectorType[sizeof("Vector") - 1]);
+        const bool isQuaternion = value.IsQuaternion();
+        std::string_view vectorPartType = isQuaternion ? "float" : SR_UTILS_NS::StringUtils::GetBetween(vectorType, '<', '>');
+        const uint8_t dimension = isQuaternion ? 4 : SR_UTILS_NS::CharToInt(vectorType[sizeof("Vector") - 1]);
 
         SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
         SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
