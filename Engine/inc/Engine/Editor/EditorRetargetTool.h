@@ -15,7 +15,8 @@
 namespace SR_CORE_NS {
     SR_ENUM_NS_CLASS_T(EditorRetargetToolTestMode, uint8_t,
         V1,
-        V2
+        V2,
+        V3
     );
 
     class EditorRetargetTool : public SR_UTILS_NS::Component {
@@ -26,10 +27,11 @@ namespace SR_CORE_NS {
 
         void TestV1(SR_ANIMATIONS_NS::Skeleton* pSkeleton);
         void TestV2(SR_ANIMATIONS_NS::Skeleton* pSkeleton);
+        void TestV3(SR_ANIMATIONS_NS::Skeleton* pSkeleton);
 
     private:
         /// @property
-        EditorRetargetToolTestMode m_testMode = EditorRetargetToolTestMode::V2;
+        EditorRetargetToolTestMode m_testMode = EditorRetargetToolTestMode::V3;
         /// @property
         SR_UTILS_NS::EntityRef<SR_ANIMATIONS_NS::Skeleton> m_sourceSkeleton;
         /// @property
