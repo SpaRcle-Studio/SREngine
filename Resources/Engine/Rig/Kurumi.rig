@@ -7,7 +7,7 @@ use tabs: true
 		2-o:ptr
 			3-o:skeleton
 				4-v:meshPath
-					5-s:Samples/Nemesis/Nemesis.fbx
+					5-s:Samples/Kurumi/Kurumi.fbx
 			3-v:skeletonType
 				4-s:Humanoid
 			3-a:mapping
@@ -19,19 +19,19 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:Bip001-Neck
+										10-s:Bip001 Neck
 									9-v:index
-										10-i:38
+										10-i:32
 									9-o:bindTranslation
 										10-v:x
-											11-f:-0.00533889
+											11-f:0.00221723
 										10-v:y
-											11-f:0.205115
+											11-f:-0.000140036
 									9-o:bindRotation
 										10-v:z
-											11-f:0.0934587
+											11-f:0.044235
 										10-v:w
-											11-f:0.995623
+											11-f:0.999021
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -47,21 +47,17 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:Bip001-R-Foot
+										10-s:Bip001 R Foot
 									9-v:index
-										10-i:13
+										10-i:9
 									9-o:bindTranslation
-										10-v:y
-											11-f:0.506565
-									9-o:bindRotation
 										10-v:x
-											11-f:0.00607999
-										10-v:y
-											11-f:-0.00417975
+											11-f:0.00384613
+									9-o:bindRotation
 										10-v:z
-											11-f:0.415132
+											11-f:0.065523
 										10-v:w
-											11-f:0.909731
+											11-f:0.997851
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -77,21 +73,17 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:Bip001-Head
+										10-s:Bip001 Head
 									9-v:index
-										10-i:39
+										10-i:33
 									9-o:bindTranslation
-										10-v:y
-											11-f:0.0787471
-									9-o:bindRotation
 										10-v:x
-											11-f:0.120238
-										10-v:y
-											11-f:-0.129072
+											11-f:0.000664247
+									9-o:bindRotation
 										10-v:z
-											11-f:0.192384
+											11-f:-0.0446334
 										10-v:w
-											11-f:0.965335
+											11-f:0.999003
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -107,25 +99,25 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:Bip001-L-Clavicle
+										10-s:Bip001 L Clavicle
 									9-v:index
-										10-i:18
+										10-i:13
 									9-o:bindTranslation
 										10-v:x
-											11-f:0.00266943
+											11-f:0.00186351
 										10-v:y
-											11-f:0.172635
+											11-f:-7.49706e-05
 										10-v:z
-											11-f:-0.0354655
+											11-f:-4.72837e-05
 									9-o:bindRotation
 										10-v:x
-											11-f:0.0322015
+											11-f:-0.707032
 										10-v:y
-											11-f:-0.591994
+											11-f:0.0102866
 										10-v:z
-											11-f:0.80411
+											11-f:0.707032
 										10-v:w
-											11-f:-0.043746
+											11-f:0.0102846
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -141,17 +133,12 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:Bip001-Spine1
+										10-s:Bip001 Spine1
 									9-v:index
-										10-i:16
+										10-i:12
 									9-o:bindTranslation
-										10-v:y
-											11-f:0.094075
-									9-o:bindRotation
-										10-v:z
-											11-f:-0.0007175
-										10-v:w
-											11-f:1
+										10-v:x
+											11-f:0.00125402
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -167,21 +154,17 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:Bip001-L-Thigh
+										10-s:Bip001 L Thigh
 									9-v:index
-										10-i:44
+										10-i:3
 									9-o:bindTranslation
 										10-v:z
-											11-f:-0.09041
+											11-f:-0.000638815
 									9-o:bindRotation
 										10-v:x
-											11-f:0.992434
+											11-f:0.0265057
 										10-v:y
-											11-f:0.121441
-										10-v:z
-											11-f:-0.00159197
-										10-v:w
-											11-f:-0.0180295
+											11-f:0.999649
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -197,17 +180,17 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:Bip001-Spine
+										10-s:Bip001 Spine
 									9-v:index
-										10-i:15
+										10-i:11
 									9-o:bindTranslation
-										10-v:y
-											11-f:0.0618329
+										10-v:x
+											11-f:0.000756487
 									9-o:bindRotation
 										10-v:z
-											11-f:0.106707
+											11-f:0.000398071
 										10-v:w
-											11-f:0.994291
+											11-f:1
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -223,21 +206,17 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:Bip001-R-Calf
+										10-s:Bip001 R Calf
 									9-v:index
-										10-i:9
+										10-i:8
 									9-o:bindTranslation
-										10-v:y
-											11-f:0.450068
-									9-o:bindRotation
 										10-v:x
-											11-f:2.84176e-05
-										10-v:y
-											11-f:-0.000313924
+											11-f:0.00384613
+									9-o:bindRotation
 										10-v:z
-											11-f:-0.0556214
+											11-f:-0.0919488
 										10-v:w
-											11-f:0.998452
+											11-f:0.995764
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -253,21 +232,21 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:Bip001-R-Hand
+										10-s:Bip001 R Hand
 									9-v:index
-										10-i:88
+										10-i:43
 									9-o:bindTranslation
-										10-v:y
-											11-f:0.247265
+										10-v:x
+											11-f:0.00210219
 									9-o:bindRotation
 										10-v:x
-											11-f:-0.0441792
+											11-f:-0.70666
 										10-v:y
-											11-f:-0.704882
+											11-f:-0.0153054
 										10-v:z
-											11-f:0.0171844
+											11-f:0.0153173
 										10-v:w
-											11-f:0.707739
+											11-f:0.707222
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -283,21 +262,71 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:Bip001-R-Toe0
+										10-s:Bip001 R Toe0
 									9-v:index
-										10-i:14
+										10-i:10
 									9-o:bindTranslation
-										10-v:y
-											11-f:0.157355
-									9-o:bindRotation
 										10-v:x
-											11-f:-0.00619134
+											11-f:0.000802162
 										10-v:y
-											11-f:-0.0155319
+											11-f:0.00113811
+									9-o:bindRotation
 										10-v:z
-											11-f:0.414707
+											11-f:0.707107
 										10-v:w
-											11-f:0.909802
+											11-f:0.707107
+									9-o:bindScale
+										10-v:x
+											11-f:1
+										10-v:y
+											11-f:1
+										10-v:z
+											11-f:1
+				4-k:item
+					5-v:first
+						6-s:RightLowerArm
+					5-o:second
+						6-a:bones
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:Bip001 R Forearm
+									9-v:index
+										10-i:42
+									9-o:bindTranslation
+										10-v:x
+											11-f:0.00216734
+									9-o:bindRotation
+										10-v:z
+											11-f:-0.000863264
+										10-v:w
+											11-f:1
+									9-o:bindScale
+										10-v:x
+											11-f:1
+										10-v:y
+											11-f:1
+										10-v:z
+											11-f:1
+				4-k:item
+					5-v:first
+						6-s:LeftLowerArm
+					5-o:second
+						6-a:bones
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:Bip001 L Forearm
+									9-v:index
+										10-i:15
+									9-o:bindTranslation
+										10-v:x
+											11-f:0.00216734
+									9-o:bindRotation
+										10-v:z
+											11-f:-0.00086305
+										10-v:w
+											11-f:1
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -313,21 +342,17 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:Bip001-L-Foot
+										10-s:Bip001 L Foot
 									9-v:index
-										10-i:66
+										10-i:5
 									9-o:bindTranslation
-										10-v:y
-											11-f:0.506565
-									9-o:bindRotation
 										10-v:x
-											11-f:-0.00619638
-										10-v:y
-											11-f:0.003939
+											11-f:0.00384613
+									9-o:bindRotation
 										10-v:z
-											11-f:0.415131
+											11-f:0.0655228
 										10-v:w
-											11-f:0.909732
+											11-f:0.997851
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -343,14 +368,18 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:Bip001-Pelvis
+										10-s:Bip001 Pelvis
 									9-v:index
-										10-i:34
+										10-i:2
 									9-o:bindRotation
 										10-v:x
-											11-f:0.192758
+											11-f:0.5
 										10-v:y
-											11-f:0.981246
+											11-f:0.5
+										10-v:z
+											11-f:-0.499999
+										10-v:w
+											11-f:0.500001
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -366,21 +395,21 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:Bip001-L-Hand
+										10-s:Bip001 L Hand
 									9-v:index
-										10-i:19
+										10-i:16
 									9-o:bindTranslation
-										10-v:y
-											11-f:0.247264
+										10-v:x
+											11-f:0.00210219
 									9-o:bindRotation
 										10-v:x
-											11-f:0.0441789
+											11-f:0.706659
 										10-v:y
-											11-f:0.704877
+											11-f:0.0153052
 										10-v:z
-											11-f:0.0171746
+											11-f:0.0153175
 										10-v:w
-											11-f:0.707744
+											11-f:0.707223
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -396,21 +425,77 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:Bip001-L-Calf
+										10-s:Bip001 L Calf
 									9-v:index
-										10-i:55
+										10-i:4
 									9-o:bindTranslation
+										10-v:x
+											11-f:0.00384613
+									9-o:bindRotation
+										10-v:z
+											11-f:-0.0919487
+										10-v:w
+											11-f:0.995764
+									9-o:bindScale
+										10-v:x
+											11-f:1
 										10-v:y
-											11-f:0.450069
+											11-f:1
+										10-v:z
+											11-f:1
+				4-k:item
+					5-v:first
+						6-s:LeftUpperArm
+					5-o:second
+						6-a:bones
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:Bip001 L UpperArm
+									9-v:index
+										10-i:14
+									9-o:bindTranslation
+										10-v:x
+											11-f:0.000999689
 									9-o:bindRotation
 										10-v:x
-											11-f:5.85747e-05
+											11-f:-0.0252127
 										10-v:y
-											11-f:-0.000689372
+											11-f:-0.478024
 										10-v:z
-											11-f:-0.0556235
+											11-f:-0.00774818
 										10-v:w
-											11-f:0.998452
+											11-f:0.87795
+									9-o:bindScale
+										10-v:x
+											11-f:1
+										10-v:y
+											11-f:1
+										10-v:z
+											11-f:1
+				4-k:item
+					5-v:first
+						6-s:RightUpperArm
+					5-o:second
+						6-a:bones
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:Bip001 R UpperArm
+									9-v:index
+										10-i:41
+									9-o:bindTranslation
+										10-v:x
+											11-f:0.000999689
+									9-o:bindRotation
+										10-v:x
+											11-f:0.0252128
+										10-v:y
+											11-f:0.478025
+										10-v:z
+											11-f:-0.00774801
+										10-v:w
+											11-f:0.87795
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -426,47 +511,19 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:Bip001-L-Toe0
+										10-s:Bip001 L Toe0
 									9-v:index
-										10-i:77
+										10-i:6
 									9-o:bindTranslation
-										10-v:y
-											11-f:0.157356
-									9-o:bindRotation
 										10-v:x
-											11-f:0.0065606
+											11-f:0.000802162
 										10-v:y
-											11-f:0.0157575
-										10-v:z
-											11-f:0.414702
-										10-v:w
-											11-f:0.909797
-									9-o:bindScale
-										10-v:x
-											11-f:1
-										10-v:y
-											11-f:1
-										10-v:z
-											11-f:1
-				4-k:item
-					5-v:first
-						6-s:UpperChest
-					5-o:second
-						6-a:bones
-							7-k:i
-								8-o:d
-									9-v:name
-										10-s:Bip001-Spine2
-									9-v:index
-										10-i:17
-									9-o:bindTranslation
-										10-v:y
-											11-f:0.0812511
+											11-f:0.00113811
 									9-o:bindRotation
 										10-v:z
-											11-f:-0.0536823
+											11-f:0.707107
 										10-v:w
-											11-f:0.998558
+											11-f:0.707107
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -482,25 +539,25 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:Bip001-R-Clavicle
+										10-s:Bip001 R Clavicle
 									9-v:index
-										10-i:85
+										10-i:40
 									9-o:bindTranslation
 										10-v:x
-											11-f:0.0026695
+											11-f:0.00186351
 										10-v:y
-											11-f:0.172636
+											11-f:-7.49703e-05
 										10-v:z
-											11-f:0.0354655
+											11-f:4.72843e-05
 									9-o:bindRotation
 										10-v:x
-											11-f:-0.0322227
+											11-f:0.70704
 										10-v:y
-											11-f:0.591996
+											11-f:0.00973008
 										10-v:z
-											11-f:0.804107
+											11-f:0.70704
 										10-v:w
-											11-f:-0.0437632
+											11-f:-0.00972811
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -516,21 +573,17 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:Bip001-R-Thigh
+										10-s:Bip001 R Thigh
 									9-v:index
-										10-i:1
+										10-i:7
 									9-o:bindTranslation
 										10-v:z
-											11-f:0.09041
+											11-f:0.000638815
 									9-o:bindRotation
 										10-v:x
-											11-f:0.992431
+											11-f:0.0265057
 										10-v:y
-											11-f:0.121465
-										10-v:z
-											11-f:0.0028596
-										10-v:w
-											11-f:0.0178724
+											11-f:0.999649
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -542,8 +595,8 @@ use tabs: true
 				4-a:ignoreBonesContains
 					5-k:i
 						6-v:d
-							7-s:Twist
+							7-s:collision
 				4-a:removePrefixes
 					5-k:i
 						6-v:d
-							7-s:Bip001-
+							7-s:Bip001 

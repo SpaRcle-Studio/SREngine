@@ -14,6 +14,7 @@
 
 namespace SR_CORE_NS {
     SR_ENUM_NS_CLASS_T(EditorRetargetToolTestMode, uint8_t,
+        None,
         V1,
         V2,
         V3
@@ -29,7 +30,11 @@ namespace SR_CORE_NS {
         void TestV2(SR_ANIMATIONS_NS::Skeleton* pSkeleton);
         void TestV3(SR_ANIMATIONS_NS::Skeleton* pSkeleton);
 
+        void TwoBoneIK(SR_ANIMATIONS_NS::Skeleton* pSkeleton);
+
     private:
+        /// @property
+        bool m_twoBoneIKEnabled = true;
         /// @property
         EditorRetargetToolTestMode m_testMode = EditorRetargetToolTestMode::V3;
         /// @property

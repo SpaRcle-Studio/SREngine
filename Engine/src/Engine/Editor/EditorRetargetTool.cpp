@@ -6,6 +6,7 @@
 
 #include <Utils/Common/LookAtAxis.h>
 #include <Utils/Types/RawMesh.h>
+#include <Utils/Types/Time.h>
 
 #include <Codegen/EditorRetargetTool.generated.hpp>
 
@@ -26,6 +27,261 @@ namespace SR_CORE_NS {
         static std::unordered_map<const EditorRetargetTool*,
             std::unordered_map<const SR_ANIMATIONS_NS::Skeleton*, std::map<SR_UTILS_NS::StringAtom, HipsRotationFollowState>>
         > g_RotationFollowState;
+
+        struct TwoBoneIKState {
+            bool initialized = false;
+
+            float upperLen = 0.f;
+            float lowerLen = 0.f;
+            float totalLen = 0.f;
+
+            SR_MATH_NS::FVector3 rootToMidLocal = SR_MATH_NS::FVector3::Forward();
+            SR_MATH_NS::FVector3 midToTipLocal = SR_MATH_NS::FVector3::Forward();
+
+            SR_MATH_NS::Quaternion rootInitialWorld = SR_MATH_NS::Quaternion::Identity();
+            SR_MATH_NS::Quaternion midInitialWorld  = SR_MATH_NS::Quaternion::Identity();
+
+            SR_MATH_NS::Quaternion lastRootWorld = SR_MATH_NS::Quaternion::Identity();
+            SR_MATH_NS::Quaternion lastMidWorld  = SR_MATH_NS::Quaternion::Identity();
+
+            SR_MATH_NS::FVector3 lastBendNormal = SR_MATH_NS::FVector3::Up();
+            bool hasLastBendNormal = false;
+
+            SR_MATH_NS::Quaternion lastTipWorld = SR_MATH_NS::Quaternion::Identity();
+            bool hasLastTipWorld = false;
+        };
+
+        static std::unordered_map<const EditorRetargetTool*,
+            std::unordered_map<const SR_ANIMATIONS_NS::Skeleton*, std::unordered_map<SR_UTILS_NS::StringAtom, TwoBoneIKState>>
+        > g_TwoBoneIKState;
+
+        struct TwoBoneIKParams {
+            float weight = 1.f;
+            float smoothing = 12.f;
+            bool preventTwist = true;
+            float maxTwistChangePerFrame = 60.f;
+            bool tipRotationFromTarget = true;
+        };
+
+        static SR_FORCE_INLINE SR_MATH_NS::FVector3 SafePerpendicular(const SR_MATH_NS::FVector3& v) {
+            SR_MATH_NS::FVector3 perp = SR_MATH_NS::GetPerpendicularVector(v);
+            const float mag = perp.Magnitude();
+            if (mag > 0.0001f) {
+                return perp / mag;
+            }
+            return SR_MATH_NS::FVector3::Up();
+        }
+
+        static SR_FORCE_INLINE SR_MATH_NS::FVector3 ProjectOnPlane(
+            const SR_MATH_NS::FVector3& v,
+            const SR_MATH_NS::FVector3& planeNormal /* must be normalized */
+        ) {
+            return v - SR_MATH_NS::FVector3::Project(v, planeNormal);
+        }
+
+        static SR_MATH_NS::FVector3 CalculateBendNormal(
+            const SR_MATH_NS::FVector3& rootPos,
+            const SR_MATH_NS::FVector3& targetPos,
+            const SR_MATH_NS::FVector3* pHintPos,
+            TwoBoneIKState& state,
+            const TwoBoneIKParams& params
+        ) {
+            const SR_MATH_NS::FVector3 rootToTarget = targetPos - rootPos;
+            const float dist = rootToTarget.Magnitude();
+            if (dist < 0.0001f) {
+                return state.hasLastBendNormal ? state.lastBendNormal : SR_MATH_NS::FVector3::Up();
+            }
+
+            const SR_MATH_NS::FVector3 dir = rootToTarget / dist;
+
+            SR_MATH_NS::FVector3 bendNormal;
+            if (pHintPos) {
+                const SR_MATH_NS::FVector3 rootToHint = (*pHintPos) - rootPos;
+                SR_MATH_NS::FVector3 projected = ProjectOnPlane(rootToHint, dir);
+                const float mag = projected.Magnitude();
+                bendNormal = mag > 0.0001f ? (projected / mag) : SafePerpendicular(dir);
+            }
+            else {
+                bendNormal = SafePerpendicular(dir);
+            }
+
+            if (params.preventTwist && state.hasLastBendNormal) {
+                const float angle = SR_MATH_NS::FVector3::Angle(bendNormal, state.lastBendNormal);
+                if (angle > params.maxTwistChangePerFrame) {
+                    SR_MATH_NS::FVector3 axis = SR_MATH_NS::FVector3::Cross(state.lastBendNormal, bendNormal);
+                    const float axisMag = axis.Magnitude();
+                    if (axisMag > 0.0001f) {
+                        axis /= axisMag;
+                        const SR_MATH_NS::Quaternion correction = SR_MATH_NS::Quaternion::AngleAxis(params.maxTwistChangePerFrame, axis);
+                        bendNormal = correction * state.lastBendNormal;
+                    }
+                }
+            }
+
+            return bendNormal;
+        }
+
+        static void SolveTwoBoneLocalTarget(
+            SR_UTILS_NS::Transform& root,
+            SR_UTILS_NS::Transform& mid,
+            SR_UTILS_NS::Transform& tip,
+            const SR_MATH_NS::FVector3& targetWorldPos,
+            const SR_MATH_NS::Quaternion& targetWorldRot,
+            const SR_MATH_NS::FVector3* pHintWorldPos,
+            TwoBoneIKState& state,
+            const TwoBoneIKParams& params,
+            float dt
+        ) {
+            if (params.weight <= 0.f) {
+                return;
+            }
+
+            const SR_MATH_NS::FVector3 rootPos = root.GetGlobalTranslation();
+            const SR_MATH_NS::FVector3 midPos  = mid.GetGlobalTranslation();
+            const SR_MATH_NS::FVector3 tipPos  = tip.GetGlobalTranslation();
+
+            if (!state.initialized) {
+                state.upperLen = SR_MATH_NS::FVector3::Distance(rootPos, midPos);
+                state.lowerLen = SR_MATH_NS::FVector3::Distance(midPos, tipPos);
+                state.totalLen = state.upperLen + state.lowerLen;
+
+                state.lastTipWorld = tip.GetGlobalRotation().NormalizeSafe();
+                state.hasLastTipWorld = true;
+
+                state.initialized = true;
+            }
+
+            /// Update IK reference axes from current (already retargeted) animated pose.
+            /// This avoids using a "frozen" basis from the very first frame, which can make IK look ignored.
+            {
+                const SR_MATH_NS::FVector3 rootToMid = (midPos - rootPos);
+                const SR_MATH_NS::FVector3 midToTip  = (tipPos - midPos);
+
+                const float rmMag = rootToMid.Magnitude();
+                const float mtMag = midToTip.Magnitude();
+
+                if (rmMag > 0.0001f) {
+                    state.rootToMidLocal = root.InverseTransformDirection(rootToMid / rmMag).Normalized();
+                }
+                if (mtMag > 0.0001f) {
+                    state.midToTipLocal  = mid.InverseTransformDirection(midToTip / mtMag).Normalized();
+                }
+
+                state.rootInitialWorld = root.GetGlobalRotation().NormalizeSafe();
+                state.midInitialWorld  = mid.GetGlobalRotation().NormalizeSafe();
+
+                if (state.lastRootWorld.IsIdentity() && state.lastMidWorld.IsIdentity()) {
+                    state.lastRootWorld = state.rootInitialWorld;
+                    state.lastMidWorld  = state.midInitialWorld;
+                }
+            }
+
+            const SR_MATH_NS::Quaternion rootOriginal = root.GetGlobalRotation().NormalizeSafe();
+            const SR_MATH_NS::Quaternion midOriginal  = mid.GetGlobalRotation().NormalizeSafe();
+            const SR_MATH_NS::Quaternion tipOriginal  = tip.GetGlobalRotation().NormalizeSafe();
+
+            const SR_MATH_NS::FVector3 rootToTarget = targetWorldPos - rootPos;
+            const float distToTarget = rootToTarget.Magnitude();
+
+            if (distToTarget > 0.0001f) {
+                const SR_MATH_NS::FVector3 dirToTarget = rootToTarget / distToTarget;
+
+                if (distToTarget >= state.totalLen - 0.0001f) {
+                    /// fully extend
+                    const SR_MATH_NS::FVector3 rootForward = state.rootInitialWorld * state.rootToMidLocal;
+                    const SR_MATH_NS::Quaternion rootRot = (SR_MATH_NS::Quaternion::FromToRotation(rootForward, dirToTarget) * state.rootInitialWorld).NormalizeSafe();
+
+                    const SR_MATH_NS::FVector3 newMidPos = rootPos + rootRot * state.rootToMidLocal * state.upperLen;
+                    const SR_MATH_NS::FVector3 midToTargetDir = (targetWorldPos - newMidPos).Normalized();
+                    const SR_MATH_NS::FVector3 midForward = rootRot * state.midToTipLocal;
+                    const SR_MATH_NS::Quaternion midRot = (SR_MATH_NS::Quaternion::FromToRotation(midForward, midToTargetDir) * rootRot).NormalizeSafe();
+
+                    root.SetGlobalRotation(rootRot);
+                    mid.SetGlobalRotation(midRot);
+                }
+                else if (distToTarget <= SR_MATH_NS::Abs(state.upperLen - state.lowerLen) + 0.0001f) {
+                    /// retract (fold) toward target direction
+                    const SR_MATH_NS::FVector3 rootForward = state.rootInitialWorld * state.rootToMidLocal;
+                    const SR_MATH_NS::Quaternion rootRot = (SR_MATH_NS::Quaternion::FromToRotation(rootForward, dirToTarget) * state.rootInitialWorld).NormalizeSafe();
+
+                    const SR_MATH_NS::FVector3 newMidPos = rootPos + rootRot * state.rootToMidLocal * state.upperLen;
+                    const SR_MATH_NS::FVector3 midToTargetDir = (targetWorldPos - newMidPos).Normalized();
+                    const SR_MATH_NS::FVector3 midForward = rootRot * state.midToTipLocal;
+                    const SR_MATH_NS::Quaternion midRot = (SR_MATH_NS::Quaternion::FromToRotation(midForward, midToTargetDir) * rootRot).NormalizeSafe();
+
+                    root.SetGlobalRotation(rootRot);
+                    mid.SetGlobalRotation(midRot);
+                }
+                else {
+                    /// reachable: solve triangle in bend plane
+                    const SR_MATH_NS::FVector3 bendNormal = CalculateBendNormal(rootPos, targetWorldPos, pHintWorldPos, state, params);
+
+                    float cosRootAngle =
+                        ((state.upperLen * state.upperLen) + (distToTarget * distToTarget) - (state.lowerLen * state.lowerLen)) /
+                        (2.f * state.upperLen * distToTarget);
+                    cosRootAngle = SR_MATH_NS::Clamp(cosRootAngle, -1.f, 1.f);
+                    const float rootAngle = SR_ACOS(cosRootAngle);
+
+                    const float along = state.upperLen * SR_COS(rootAngle);
+                    const float perp  = state.upperLen * SR_SIN(rootAngle);
+
+                    SR_MATH_NS::FVector3 desiredMid = rootPos + dirToTarget * along + bendNormal * perp;
+                    const SR_MATH_NS::FVector3 rootToMidDir = (desiredMid - rootPos).Normalized();
+
+                    const SR_MATH_NS::FVector3 rootForward = state.rootInitialWorld * state.rootToMidLocal;
+                    const SR_MATH_NS::Quaternion rootRot = (SR_MATH_NS::Quaternion::FromToRotation(rootForward, rootToMidDir) * state.rootInitialWorld).NormalizeSafe();
+
+                    /// recompute mid position after root rotation for consistency
+                    const SR_MATH_NS::FVector3 midPosSolved = rootPos + rootRot * state.rootToMidLocal * state.upperLen;
+                    const SR_MATH_NS::FVector3 midToTargetDir = (targetWorldPos - midPosSolved).Normalized();
+                    const SR_MATH_NS::FVector3 midForward = rootRot * state.midToTipLocal;
+                    const SR_MATH_NS::Quaternion midRot = (SR_MATH_NS::Quaternion::FromToRotation(midForward, midToTargetDir) * rootRot).NormalizeSafe();
+
+                    root.SetGlobalRotation(rootRot);
+                    mid.SetGlobalRotation(midRot);
+
+                    state.lastBendNormal = bendNormal;
+                    state.hasLastBendNormal = true;
+                }
+            }
+
+            /// Apply weight first
+            if (params.weight < 1.f) {
+                root.SetGlobalRotation(SR_MATH_NS::Quaternion::Slerp(rootOriginal, root.GetGlobalRotation().NormalizeSafe(), params.weight));
+                mid.SetGlobalRotation(SR_MATH_NS::Quaternion::Slerp(midOriginal,  mid.GetGlobalRotation().NormalizeSafe(),  params.weight));
+            }
+
+            /// Apply smoothing (continuous, frame-rate independent)
+            if (params.smoothing > 0.f) {
+                const float smoothFactor = SR_MATH_NS::Clamp(dt * params.smoothing, 0.f, 1.f);
+                root.SetGlobalRotation(SR_MATH_NS::Quaternion::Slerp(state.lastRootWorld, root.GetGlobalRotation().NormalizeSafe(), smoothFactor));
+                mid.SetGlobalRotation(SR_MATH_NS::Quaternion::Slerp(state.lastMidWorld,  mid.GetGlobalRotation().NormalizeSafe(),  smoothFactor));
+            }
+
+            state.lastRootWorld = root.GetGlobalRotation().NormalizeSafe();
+            state.lastMidWorld  = mid.GetGlobalRotation().NormalizeSafe();
+
+            if (params.tipRotationFromTarget) {
+                SR_MATH_NS::Quaternion desiredTip = targetWorldRot.NormalizeSafe();
+                if (state.hasLastTipWorld && SR_MATH_NS::Quaternion::Dot(desiredTip, state.lastTipWorld) < 0.f) {
+                    desiredTip = -desiredTip;
+                }
+
+                SR_MATH_NS::Quaternion blended = desiredTip;
+                if (params.weight < 1.f) {
+                    blended = SR_MATH_NS::Quaternion::Slerp(tipOriginal, desiredTip, params.weight).NormalizeSafe();
+                }
+
+                if (params.smoothing > 0.f) {
+                    const float smoothFactor = SR_MATH_NS::Clamp(dt * params.smoothing, 0.f, 1.f);
+                    blended = SR_MATH_NS::Quaternion::Slerp(state.lastTipWorld, blended, smoothFactor).NormalizeSafe();
+                }
+
+                tip.SetGlobalRotation(blended);
+                state.lastTipWorld = blended;
+                state.hasLastTipWorld = true;
+            }
+        }
     }
 
     void EditorRetargetTool::Update(float_t dt) {
@@ -43,8 +299,232 @@ namespace SR_CORE_NS {
                 default:
                     break;
             }
+
+            if (m_twoBoneIKEnabled) {
+                TwoBoneIK(pTargetSkeleton.Get().Get());
+            }
         }
         Super::Update(dt);
+    }
+
+    void EditorRetargetTool::TwoBoneIK(SR_ANIMATIONS_NS::Skeleton* pTargetSkeleton) {
+        auto&& pSourceSkeleton = m_sourceSkeleton.Get();
+
+        if (!pSourceSkeleton || !pTargetSkeleton) {
+            return;
+        }
+
+        auto&& pSourceRig = pSourceSkeleton->GetRig();
+        auto&& pTargetRig = pTargetSkeleton->GetRig();
+        if (!pSourceRig || !pTargetRig) {
+            return;
+        }
+
+        auto&& pSourceGO = pSourceSkeleton->GetGameObject();
+        auto&& pTargetGO = pTargetSkeleton->GetGameObject();
+        if (!pSourceGO || !pTargetGO) {
+            return;
+        }
+
+        auto&& pSourceTr = pSourceGO->GetTransform();
+        auto&& pTargetTr = pTargetGO->GetTransform();
+        if (!pSourceTr || !pTargetTr) {
+            return;
+        }
+
+        const float dt = SR_HTYPES_NS::Time::Instance().DeltaTime();
+
+        TwoBoneIKParams ikParams;
+        ikParams.weight = 1.f;
+        /// For retarget post-pass we want the limb to match the source immediately.
+        /// Smoothing here makes it look like IK "doesn't follow the target".
+        ikParams.smoothing = 0.f;
+        ikParams.preventTwist = true;
+        ikParams.maxTwistChangePerFrame = 75.f;
+        ikParams.tipRotationFromTarget = false;
+
+        auto&& pSourceRawMesh = pSourceRig->GetSkeleton().GetRawMesh();
+        auto&& pTargetRawMesh = pTargetRig->GetSkeleton().GetRawMesh();
+        const auto srcMeshId = pSourceRig->GetSkeleton().GetMeshId();
+        const auto tgtMeshId = pTargetRig->GetSkeleton().GetMeshId();
+
+        if (!pSourceRawMesh || !pTargetRawMesh || srcMeshId == SR_ID_INVALID || tgtMeshId == SR_ID_INVALID) {
+            return;
+        }
+
+        const auto& srcScene = pSourceRawMesh->GetSceneStructure();
+        const auto& tgtScene = pTargetRawMesh->GetSceneStructure();
+
+        auto buildNodeDepth = [](const SR_HTYPES_NS::MeshSceneStructure& scene) -> SR_UTILS_NS::Vector<uint32_t> {
+            const uint16_t n = scene.GetNodesCount();
+            SR_UTILS_NS::Vector<uint32_t> depth;
+            depth.resize(n);
+            for (uint16_t i = 0; i < n; ++i) {
+                const auto& node = scene.GetNodeByIndex(i);
+                if (node.parent.has_value()) {
+                    const uint16_t parent = node.parent.value();
+                    depth[i] = parent < i ? (depth[parent] + 1u) : 0u;
+                }
+                else {
+                    depth[i] = 0u;
+                }
+            }
+            return depth;
+        };
+
+        const auto srcNodeDepth = buildNodeDepth(srcScene);
+        const auto tgtNodeDepth = buildNodeDepth(tgtScene);
+
+        auto pickMappedBoneName = [](
+            const SR_ANIMATIONS_NS::SkeletonRig& rig,
+            const SR_HTYPES_NS::RawMesh& rawMesh,
+            uint32_t meshId,
+            const SR_UTILS_NS::Vector<uint32_t>& nodeDepth,
+            SR_UTILS_NS::StringAtom humanoidKey
+        ) -> SR_UTILS_NS::StringAtom {
+            if (auto&& pChain = rig.GetBoneChain(humanoidKey)) {
+                uint32_t bestDepth = SR_UINT32_MAX;
+                SR_UTILS_NS::StringAtom bestName;
+
+                for (const auto& boneInfo : pChain->bones) {
+                    if (boneInfo.name.empty()) {
+                        continue;
+                    }
+                    const auto& info = rawMesh.GetBoneInfo(meshId, boneInfo.name);
+                    if (!info.nodeIndex.has_value()) {
+                        continue;
+                    }
+                    const uint16_t node = info.nodeIndex.value();
+                    if (node >= nodeDepth.size()) {
+                        continue;
+                    }
+                    const uint32_t d = nodeDepth[node];
+                    if (d < bestDepth) {
+                        bestDepth = d;
+                        bestName = boneInfo.name;
+                    }
+                }
+
+                if (!bestName.empty()) {
+                    return bestName;
+                }
+            }
+
+            return rig.GetBoneName(humanoidKey);
+        };
+
+        auto solveHumanoidChain = [&](
+            SR_UTILS_NS::StringAtom stateKey,
+            SR_ANIMATIONS_NS::HumanoidBoneType rootType,
+            SR_ANIMATIONS_NS::HumanoidBoneType midType,
+            SR_ANIMATIONS_NS::HumanoidBoneType tipType
+        ) {
+            const SR_UTILS_NS::StringAtom rootKey = SR_UTILS_NS::EnumReflector::ToStringAtom(rootType);
+            const SR_UTILS_NS::StringAtom midKey  = SR_UTILS_NS::EnumReflector::ToStringAtom(midType);
+            const SR_UTILS_NS::StringAtom tipKey  = SR_UTILS_NS::EnumReflector::ToStringAtom(tipType);
+
+            const auto srcRootName = pickMappedBoneName(*pSourceRig, *pSourceRawMesh, srcMeshId, srcNodeDepth, rootKey);
+            const auto srcMidName  = pickMappedBoneName(*pSourceRig, *pSourceRawMesh, srcMeshId, srcNodeDepth, midKey);
+            const auto srcTipName  = pickMappedBoneName(*pSourceRig, *pSourceRawMesh, srcMeshId, srcNodeDepth, tipKey);
+
+            const auto tgtRootName = pickMappedBoneName(*pTargetRig, *pTargetRawMesh, tgtMeshId, tgtNodeDepth, rootKey);
+            const auto tgtMidName  = pickMappedBoneName(*pTargetRig, *pTargetRawMesh, tgtMeshId, tgtNodeDepth, midKey);
+            const auto tgtTipName  = pickMappedBoneName(*pTargetRig, *pTargetRawMesh, tgtMeshId, tgtNodeDepth, tipKey);
+
+            auto&& pSrcRootBone = pSourceSkeleton->GetBone(srcRootName);
+            auto&& pSrcMidBone  = pSourceSkeleton->GetBone(srcMidName);
+            auto&& pSrcTipBone  = pSourceSkeleton->GetBone(srcTipName);
+
+            auto&& pTgtRootBone = pTargetSkeleton->GetBone(tgtRootName);
+            auto&& pTgtMidBone  = pTargetSkeleton->GetBone(tgtMidName);
+            auto&& pTgtTipBone  = pTargetSkeleton->GetBone(tgtTipName);
+
+            if (!pSrcRootBone || !pSrcMidBone || !pSrcTipBone || !pTgtRootBone || !pTgtMidBone || !pTgtTipBone) {
+                return;
+            }
+
+            auto&& pSrcRootT = pSrcRootBone->GetGameObject()->GetTransform();
+            auto&& pSrcMidT  = pSrcMidBone->GetGameObject()->GetTransform();
+            auto&& pSrcTipT  = pSrcTipBone->GetGameObject()->GetTransform();
+
+            auto&& pTgtRootT = pTgtRootBone->GetGameObject()->GetTransform();
+            auto&& pTgtMidT  = pTgtMidBone->GetGameObject()->GetTransform();
+            auto&& pTgtTipT  = pTgtTipBone->GetGameObject()->GetTransform();
+
+            if (!pSrcRootT || !pSrcMidT || !pSrcTipT || !pTgtRootT || !pTgtMidT || !pTgtTipT) {
+                return;
+            }
+
+            const SR_MATH_NS::FVector3 srcRootWorldPos = pSrcRootT->GetGlobalTranslation();
+            const SR_MATH_NS::FVector3 srcMidWorldPos = pSrcMidT->GetGlobalTranslation();
+
+            const SR_MATH_NS::FVector3 srcTipWorldPos = pSrcTipT->GetGlobalTranslation();
+            const SR_MATH_NS::Quaternion srcTipWorldRot = pSrcTipT->GetGlobalRotation().NormalizeSafe();
+
+            const SR_MATH_NS::FVector3 tgtRootWorldPos = pTgtRootT->GetGlobalTranslation();
+
+            /// Target is defined in SOURCE skeleton global space, then mapped into TARGET skeleton global space.
+            /// This keeps the goal consistent even if skeleton GameObjects are placed differently in the scene.
+            const SR_MATH_NS::Matrix4x4 srcSkelWorldM = pSourceTr->GetMatrix();
+            const SR_MATH_NS::Matrix4x4 tgtSkelWorldM = pTargetTr->GetMatrix();
+            const SR_MATH_NS::Matrix4x4 srcSkelWorldInv = srcSkelWorldM.Inverse();
+
+            const SR_MATH_NS::Quaternion srcSkelWorldR = pSourceTr->GetGlobalRotation().NormalizeSafe();
+            const SR_MATH_NS::Quaternion tgtSkelWorldR = pTargetTr->GetGlobalRotation().NormalizeSafe();
+
+            const SR_MATH_NS::FVector3 srcTipSkelLocal = srcSkelWorldInv.TransformPoint(srcTipWorldPos).XYZ();
+            const SR_MATH_NS::FVector3 desiredTipWorldPos = tgtSkelWorldM.TransformPoint(srcTipSkelLocal).XYZ();
+
+            const SR_MATH_NS::Quaternion srcTipSkelLocalRot = (srcSkelWorldR.Inverse() * srcTipWorldRot).NormalizeSafe();
+            const SR_MATH_NS::Quaternion desiredTipWorldRot = (tgtSkelWorldR * srcTipSkelLocalRot).NormalizeSafe();
+
+            /// Pole vector: use SOURCE bend direction (deviation of mid from root->tip axis), mapped into target root space.
+            const SR_MATH_NS::FVector3 srcRootToTip = srcTipWorldPos - srcRootWorldPos;
+            const float rtMag = srcRootToTip.Magnitude();
+            SR_MATH_NS::FVector3 srcRootToTipDir = rtMag > 0.0001f ? (srcRootToTip / rtMag) : SR_MATH_NS::FVector3::Forward();
+
+            SR_MATH_NS::FVector3 srcRootToMid = srcMidWorldPos - srcRootWorldPos;
+            SR_MATH_NS::FVector3 srcBendDir = ProjectOnPlane(srcRootToMid, srcRootToTipDir);
+            const float bendDirMag = srcBendDir.Magnitude();
+            if (bendDirMag > 0.0001f) {
+                srcBendDir /= bendDirMag;
+            }
+            else {
+                srcBendDir = SafePerpendicular(srcRootToTipDir);
+            }
+
+            /// Convert bend direction through skeleton space, not limb root space.
+            const SR_MATH_NS::FVector3 bendDirSkelLocal = (srcSkelWorldR.Inverse() * srcBendDir).Normalized();
+            const SR_MATH_NS::FVector3 bendDirWorldForTarget = (tgtSkelWorldR * bendDirSkelLocal).Normalized();
+
+            auto& state = g_TwoBoneIKState[this][pTargetSkeleton][stateKey];
+
+            const float upperLen = state.initialized
+                ? state.upperLen
+                : SR_MATH_NS::FVector3::Distance(pTgtRootT->GetGlobalTranslation(), pTgtMidT->GetGlobalTranslation());
+
+            const SR_MATH_NS::FVector3 hintWorldPos = tgtRootWorldPos + bendDirWorldForTarget * SR_MAX(upperLen, 0.01f);
+
+            SolveTwoBoneLocalTarget(
+                *pTgtRootT,
+                *pTgtMidT,
+                *pTgtTipT,
+                desiredTipWorldPos,
+                desiredTipWorldRot,
+                &hintWorldPos,
+                state,
+                ikParams,
+                dt
+            );
+        };
+
+        /// Arms: UpperArm -> LowerArm -> Hand
+        solveHumanoidChain("IK_LeftArm",  SR_ANIMATIONS_NS::HumanoidBoneType::LeftUpperArm,  SR_ANIMATIONS_NS::HumanoidBoneType::LeftLowerArm,  SR_ANIMATIONS_NS::HumanoidBoneType::LeftHand);
+        solveHumanoidChain("IK_RightArm", SR_ANIMATIONS_NS::HumanoidBoneType::RightUpperArm, SR_ANIMATIONS_NS::HumanoidBoneType::RightLowerArm, SR_ANIMATIONS_NS::HumanoidBoneType::RightHand);
+
+        /// Legs: UpperLeg -> LowerLeg -> Foot
+        solveHumanoidChain("IK_LeftLeg",  SR_ANIMATIONS_NS::HumanoidBoneType::LeftUpperLeg,  SR_ANIMATIONS_NS::HumanoidBoneType::LeftLowerLeg,  SR_ANIMATIONS_NS::HumanoidBoneType::LeftFoot);
+        solveHumanoidChain("IK_RightLeg", SR_ANIMATIONS_NS::HumanoidBoneType::RightUpperLeg, SR_ANIMATIONS_NS::HumanoidBoneType::RightLowerLeg, SR_ANIMATIONS_NS::HumanoidBoneType::RightFoot);
     }
 
     void EditorRetargetTool::TestV3(SR_ANIMATIONS_NS::Skeleton* pTargetSkeleton) {
@@ -105,7 +585,7 @@ namespace SR_CORE_NS {
 
                 refLocalR[i] = node.localTransform.rotation;
 
-                SR_ANIMATIONS_NS::SkeletonRigPoseBone poseOverride;
+                SR_MATH_NS::DecomposedMatrix poseOverride;
                 if (rig.TryGetRetargetPoseLocal(node.name, poseOverride)) {
                     refLocalR[i] = poseOverride.rotation;
                 }
@@ -332,7 +812,7 @@ namespace SR_CORE_NS {
 
                 refLocalR[i] = node.localTransform.rotation;
 
-                SR_ANIMATIONS_NS::SkeletonRigPoseBone poseOverride;
+                SR_MATH_NS::DecomposedMatrix poseOverride;
                 if (rig.TryGetRetargetPoseLocal(node.name, poseOverride)) {
                     refLocalR[i] = poseOverride.rotation;
                 }
