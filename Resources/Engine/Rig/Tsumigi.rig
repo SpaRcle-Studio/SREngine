@@ -13,6 +13,36 @@ use tabs: true
 			3-a:mapping
 				4-k:item
 					5-v:first
+						6-s:LeftIndexIntermediate
+					5-o:second
+						6-a:bones
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:LeftHandIndex2
+									9-v:index
+										10-i:76
+									9-o:bindTranslation
+										10-v:y
+											11-f:0.0281898
+									9-o:bindRotation
+										10-v:x
+											11-f:0.0782694
+										10-v:y
+											11-f:0.102357
+										10-v:z
+											11-f:-0.0236882
+										10-v:w
+											11-f:0.991381
+									9-o:bindScale
+										10-v:x
+											11-f:1
+										10-v:y
+											11-f:1
+										10-v:z
+											11-f:1
+				4-k:item
+					5-v:first
 						6-s:Neck
 					5-o:second
 						6-a:bones
@@ -110,31 +140,6 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightHandThumb3
-									9-v:index
-										10-i:98
-									9-o:bindTranslation
-										10-v:y
-											11-f:0.0232982
-									9-o:bindRotation
-										10-v:x
-											11-f:-0.144346
-										10-v:y
-											11-f:-0.158493
-										10-v:z
-											11-f:-0.00297419
-										10-v:w
-											11-f:0.976747
-									9-o:bindScale
-										10-v:x
-											11-f:1
-										10-v:y
-											11-f:1
-										10-v:z
-											11-f:1
-							7-k:i
-								8-o:d
-									9-v:name
 										10-s:RightHandThumb1
 									9-v:index
 										10-i:96
@@ -161,6 +166,11 @@ use tabs: true
 											11-f:1
 										10-v:z
 											11-f:1
+				4-k:item
+					5-v:first
+						6-s:RightThumbIntermediate
+					5-o:second
+						6-a:bones
 							7-k:i
 								8-o:d
 									9-v:name
@@ -248,49 +258,29 @@ use tabs: true
 											11-f:1
 										10-v:z
 											11-f:1
+				4-k:item
+					5-v:first
+						6-s:LeftThumbDistal
+					5-o:second
+						6-a:bones
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightHandRing2
+										10-s:LeftHandThumb3
 									9-v:index
-										10-i:107
+										10-i:74
 									9-o:bindTranslation
 										10-v:y
-											11-f:0.0281889
+											11-f:0.0228931
 									9-o:bindRotation
 										10-v:x
-											11-f:0.106298
+											11-f:0.0529546
 										10-v:y
-											11-f:0.00221505
+											11-f:0.996901
 										10-v:z
-											11-f:-0.148704
+											11-f:-0.0476895
 										10-v:w
-											11-f:0.983149
-									9-o:bindScale
-										10-v:x
-											11-f:1
-										10-v:y
-											11-f:1
-										10-v:z
-											11-f:1
-							7-k:i
-								8-o:d
-									9-v:name
-										10-s:RightHandRing3
-									9-v:index
-										10-i:108
-									9-o:bindTranslation
-										10-v:y
-											11-f:0.0190958
-									9-o:bindRotation
-										10-v:x
-											11-f:0.171131
-										10-v:y
-											11-f:0.903886
-										10-v:z
-											11-f:0.0966996
-										10-v:w
-											11-f:0.379938
+											11-f:-0.0333088
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -546,111 +536,11 @@ use tabs: true
 											11-f:1
 										10-v:z
 											11-f:1
-							7-k:i
-								8-o:d
-									9-v:name
-										10-s:LeftHandPinky2
-									9-v:index
-										10-i:86
-									9-o:bindTranslation
-										10-v:y
-											11-f:0.0227583
-									9-o:bindRotation
-										10-v:x
-											11-f:0.18462
-										10-v:y
-											11-f:0.0658998
-										10-v:z
-											11-f:0.00749583
-										10-v:w
-											11-f:0.98057
-									9-o:bindScale
-										10-v:x
-											11-f:1
-										10-v:y
-											11-f:1
-										10-v:z
-											11-f:1
-							7-k:i
-								8-o:d
-									9-v:name
-										10-s:LeftHandPinky3
-									9-v:index
-										10-i:87
-									9-o:bindTranslation
-										10-v:y
-											11-f:0.0145654
-									9-o:bindRotation
-										10-v:x
-											11-f:0.036698
-										10-v:y
-											11-f:-0.559487
-										10-v:z
-											11-f:-0.0214076
-										10-v:w
-											11-f:0.82775
-									9-o:bindScale
-										10-v:x
-											11-f:1
-										10-v:y
-											11-f:1
-										10-v:z
-											11-f:1
 				4-k:item
 					5-v:first
 						6-s:LeftThumbProximal
 					5-o:second
 						6-a:bones
-							7-k:i
-								8-o:d
-									9-v:name
-										10-s:LeftHandThumb3
-									9-v:index
-										10-i:74
-									9-o:bindTranslation
-										10-v:y
-											11-f:0.0228931
-									9-o:bindRotation
-										10-v:x
-											11-f:0.0529546
-										10-v:y
-											11-f:0.996901
-										10-v:z
-											11-f:-0.0476895
-										10-v:w
-											11-f:-0.0333088
-									9-o:bindScale
-										10-v:x
-											11-f:1
-										10-v:y
-											11-f:1
-										10-v:z
-											11-f:1
-							7-k:i
-								8-o:d
-									9-v:name
-										10-s:LeftHandThumb2
-									9-v:index
-										10-i:73
-									9-o:bindTranslation
-										10-v:y
-											11-f:0.0283875
-									9-o:bindRotation
-										10-v:x
-											11-f:-0.172936
-										10-v:y
-											11-f:0.104311
-										10-v:z
-											11-f:-0.0333737
-										10-v:w
-											11-f:0.978825
-									9-o:bindScale
-										10-v:x
-											11-f:1
-										10-v:y
-											11-f:1
-										10-v:z
-											11-f:1
 							7-k:i
 								8-o:d
 									9-v:name
@@ -682,81 +572,27 @@ use tabs: true
 											11-f:1
 				4-k:item
 					5-v:first
-						6-s:LeftMiddleProximal
+						6-s:RightLittleDistal
 					5-o:second
 						6-a:bones
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:LeftHandMiddle1
+										10-s:RightHandPinky3
 									9-v:index
-										10-i:78
-									9-o:bindTranslation
-										10-v:x
-											11-f:-0.00485788
-										10-v:y
-											11-f:0.0755591
-										10-v:z
-											11-f:0.0125679
-									9-o:bindRotation
-										10-v:x
-											11-f:0.202437
-										10-v:y
-											11-f:-0.416045
-										10-v:z
-											11-f:0.0328496
-										10-v:w
-											11-f:0.885916
-									9-o:bindScale
-										10-v:x
-											11-f:1
-										10-v:y
-											11-f:1
-										10-v:z
-											11-f:1
-							7-k:i
-								8-o:d
-									9-v:name
-										10-s:LeftHandMiddle2
-									9-v:index
-										10-i:79
+										10-i:111
 									9-o:bindTranslation
 										10-v:y
-											11-f:0.0318171
+											11-f:0.0145654
 									9-o:bindRotation
 										10-v:x
-											11-f:0.119028
+											11-f:0.171174
 										10-v:y
-											11-f:0.0913747
+											11-f:0.912174
 										10-v:z
-											11-f:-0.0321801
+											11-f:0.1119
 										10-v:w
-											11-f:0.988154
-									9-o:bindScale
-										10-v:x
-											11-f:1
-										10-v:y
-											11-f:1
-										10-v:z
-											11-f:1
-							7-k:i
-								8-o:d
-									9-v:name
-										10-s:LeftHandMiddle3
-									9-v:index
-										10-i:80
-									9-o:bindTranslation
-										10-v:y
-											11-f:0.0199993
-									9-o:bindRotation
-										10-v:x
-											11-f:0.055779
-										10-v:y
-											11-f:-0.673593
-										10-v:z
-											11-f:-0.110118
-										10-v:w
-											11-f:0.728722
+											11-f:0.355128
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -766,31 +602,27 @@ use tabs: true
 											11-f:1
 				4-k:item
 					5-v:first
-						6-s:RightMiddleProximal
+						6-s:LeftLittleDistal
 					5-o:second
 						6-a:bones
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightHandMiddle1
+										10-s:LeftHandPinky3
 									9-v:index
-										10-i:102
+										10-i:87
 									9-o:bindTranslation
-										10-v:x
-											11-f:-0.00683232
 										10-v:y
-											11-f:0.0687929
-										10-v:z
-											11-f:-0.00318958
+											11-f:0.0145654
 									9-o:bindRotation
 										10-v:x
-											11-f:0.173888
+											11-f:0.036698
 										10-v:y
-											11-f:0.152389
+											11-f:-0.559487
 										10-v:z
-											11-f:-0.115321
+											11-f:-0.0214076
 										10-v:w
-											11-f:0.966044
+											11-f:0.82775
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -798,22 +630,29 @@ use tabs: true
 											11-f:1
 										10-v:z
 											11-f:1
+				4-k:item
+					5-v:first
+						6-s:RightLittleIntermediate
+					5-o:second
+						6-a:bones
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:IKTargetMiddle
+										10-s:RightHandPinky2
 									9-v:index
-										10-i:128
+										10-i:110
 									9-o:bindTranslation
-										10-v:x
-											11-f:-0.00215718
 										10-v:y
-											11-f:-0.0502557
-										10-v:z
-											11-f:-0.389396
+											11-f:0.0227584
 									9-o:bindRotation
 										10-v:x
-											11-f:1
+											11-f:0.0556058
+										10-v:y
+											11-f:0.00226368
+										10-v:z
+											11-f:-0.0524281
+										10-v:w
+											11-f:0.997073
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -821,49 +660,29 @@ use tabs: true
 											11-f:1
 										10-v:z
 											11-f:1
+				4-k:item
+					5-v:first
+						6-s:LeftRingDistal
+					5-o:second
+						6-a:bones
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightHandMiddle3
+										10-s:LeftHandRing3
 									9-v:index
-										10-i:104
+										10-i:84
 									9-o:bindTranslation
 										10-v:y
-											11-f:0.0199993
+											11-f:0.0190956
 									9-o:bindRotation
 										10-v:x
-											11-f:0.24214
+											11-f:0.0884402
 										10-v:y
-											11-f:0.922254
+											11-f:-0.55112
 										10-v:z
-											11-f:0.118039
+											11-f:-0.0360547
 										10-v:w
-											11-f:0.277278
-									9-o:bindScale
-										10-v:x
-											11-f:1
-										10-v:y
-											11-f:1
-										10-v:z
-											11-f:1
-							7-k:i
-								8-o:d
-									9-v:name
-										10-s:RightHandMiddle2
-									9-v:index
-										10-i:103
-									9-o:bindTranslation
-										10-v:y
-											11-f:0.031817
-									9-o:bindRotation
-										10-v:x
-											11-f:0.0888741
-										10-v:y
-											11-f:-0.141079
-										10-v:z
-											11-f:-0.114098
-										10-v:w
-											11-f:0.979377
+											11-f:0.828942
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -984,56 +803,6 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:LeftHandIndex3
-									9-v:index
-										10-i:77
-									9-o:bindTranslation
-										10-v:y
-											11-f:0.018187
-									9-o:bindRotation
-										10-v:x
-											11-f:0.0753032
-										10-v:y
-											11-f:-0.71629
-										10-v:z
-											11-f:-0.126896
-										10-v:w
-											11-f:0.682023
-									9-o:bindScale
-										10-v:x
-											11-f:1
-										10-v:y
-											11-f:1
-										10-v:z
-											11-f:1
-							7-k:i
-								8-o:d
-									9-v:name
-										10-s:LeftHandIndex2
-									9-v:index
-										10-i:76
-									9-o:bindTranslation
-										10-v:y
-											11-f:0.0281898
-									9-o:bindRotation
-										10-v:x
-											11-f:0.0782694
-										10-v:y
-											11-f:0.102357
-										10-v:z
-											11-f:-0.0236882
-										10-v:w
-											11-f:0.991381
-									9-o:bindScale
-										10-v:x
-											11-f:1
-										10-v:y
-											11-f:1
-										10-v:z
-											11-f:1
-							7-k:i
-								8-o:d
-									9-v:name
 										10-s:LeftHandIndex1
 									9-v:index
 										10-i:75
@@ -1119,61 +888,36 @@ use tabs: true
 											11-f:1
 										10-v:z
 											11-f:1
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:RightForeArm
+									9-v:index
+										10-i:93
+									9-o:bindTranslation
+										10-v:y
+											11-f:0.23231
+									9-o:bindRotation
+										10-v:x
+											11-f:0.000236975
+										10-v:y
+											11-f:-0.698163
+										10-v:z
+											11-f:-0.00013673
+										10-v:w
+											11-f:0.715939
+									9-o:bindScale
+										10-v:x
+											11-f:1
+										10-v:y
+											11-f:1
+										10-v:z
+											11-f:1
 				4-k:item
 					5-v:first
 						6-s:RightLittleProximal
 					5-o:second
 						6-a:bones
-							7-k:i
-								8-o:d
-									9-v:name
-										10-s:RightHandPinky3
-									9-v:index
-										10-i:111
-									9-o:bindTranslation
-										10-v:y
-											11-f:0.0145654
-									9-o:bindRotation
-										10-v:x
-											11-f:0.171174
-										10-v:y
-											11-f:0.912174
-										10-v:z
-											11-f:0.1119
-										10-v:w
-											11-f:0.355128
-									9-o:bindScale
-										10-v:x
-											11-f:1
-										10-v:y
-											11-f:1
-										10-v:z
-											11-f:1
-							7-k:i
-								8-o:d
-									9-v:name
-										10-s:RightHandPinky2
-									9-v:index
-										10-i:110
-									9-o:bindTranslation
-										10-v:y
-											11-f:0.0227584
-									9-o:bindRotation
-										10-v:x
-											11-f:0.0556058
-										10-v:y
-											11-f:0.00226368
-										10-v:z
-											11-f:-0.0524281
-										10-v:w
-											11-f:0.997073
-									9-o:bindScale
-										10-v:x
-											11-f:1
-										10-v:y
-											11-f:1
-										10-v:z
-											11-f:1
 							7-k:i
 								8-o:d
 									9-v:name
@@ -1205,9 +949,94 @@ use tabs: true
 											11-f:1
 				4-k:item
 					5-v:first
+						6-s:RightIndexDistal
+					5-o:second
+						6-a:bones
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:RightHandIndex3
+									9-v:index
+										10-i:101
+									9-o:bindTranslation
+										10-v:y
+											11-f:0.018187
+									9-o:bindRotation
+										10-v:x
+											11-f:0.229782
+										10-v:y
+											11-f:0.868516
+										10-v:z
+											11-f:-0.0107302
+										10-v:w
+											11-f:0.439051
+									9-o:bindScale
+										10-v:x
+											11-f:1
+										10-v:y
+											11-f:1
+										10-v:z
+											11-f:1
+				4-k:item
+					5-v:first
+						6-s:RightRingIntermediate
+					5-o:second
+						6-a:bones
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:RightHandRing2
+									9-v:index
+										10-i:107
+									9-o:bindTranslation
+										10-v:y
+											11-f:0.0281889
+									9-o:bindRotation
+										10-v:x
+											11-f:0.106298
+										10-v:y
+											11-f:0.00221505
+										10-v:z
+											11-f:-0.148704
+										10-v:w
+											11-f:0.983149
+									9-o:bindScale
+										10-v:x
+											11-f:1
+										10-v:y
+											11-f:1
+										10-v:z
+											11-f:1
+				4-k:item
+					5-v:first
 						6-s:LeftLowerArm
 					5-o:second
 						6-a:bones
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:LeftForeArm
+									9-v:index
+										10-i:69
+									9-o:bindTranslation
+										10-v:y
+											11-f:0.232202
+									9-o:bindRotation
+										10-v:x
+											11-f:-0.000347197
+										10-v:y
+											11-f:-0.721767
+										10-v:z
+											11-f:-5.16823e-05
+										10-v:w
+											11-f:0.692136
+									9-o:bindScale
+										10-v:x
+											11-f:1
+										10-v:y
+											11-f:1
+										10-v:z
+											11-f:1
 							7-k:i
 								8-o:d
 									9-v:name
@@ -1226,6 +1055,66 @@ use tabs: true
 											11-f:0.543013
 										10-v:w
 											11-f:-0.279374
+									9-o:bindScale
+										10-v:x
+											11-f:1
+										10-v:y
+											11-f:1
+										10-v:z
+											11-f:1
+				4-k:item
+					5-v:first
+						6-s:LeftThumbIntermediate
+					5-o:second
+						6-a:bones
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:LeftHandThumb2
+									9-v:index
+										10-i:73
+									9-o:bindTranslation
+										10-v:y
+											11-f:0.0283875
+									9-o:bindRotation
+										10-v:x
+											11-f:-0.172936
+										10-v:y
+											11-f:0.104311
+										10-v:z
+											11-f:-0.0333737
+										10-v:w
+											11-f:0.978825
+									9-o:bindScale
+										10-v:x
+											11-f:1
+										10-v:y
+											11-f:1
+										10-v:z
+											11-f:1
+				4-k:item
+					5-v:first
+						6-s:RightThumbDistal
+					5-o:second
+						6-a:bones
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:RightHandThumb3
+									9-v:index
+										10-i:98
+									9-o:bindTranslation
+										10-v:y
+											11-f:0.0232982
+									9-o:bindRotation
+										10-v:x
+											11-f:-0.144346
+										10-v:y
+											11-f:-0.158493
+										10-v:z
+											11-f:-0.00297419
+										10-v:w
+											11-f:0.976747
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -1294,6 +1183,36 @@ use tabs: true
 											11-f:1
 				4-k:item
 					5-v:first
+						6-s:LeftIndexDistal
+					5-o:second
+						6-a:bones
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:LeftHandIndex3
+									9-v:index
+										10-i:77
+									9-o:bindTranslation
+										10-v:y
+											11-f:0.018187
+									9-o:bindRotation
+										10-v:x
+											11-f:0.0753032
+										10-v:y
+											11-f:-0.71629
+										10-v:z
+											11-f:-0.126896
+										10-v:w
+											11-f:0.682023
+									9-o:bindScale
+										10-v:x
+											11-f:1
+										10-v:y
+											11-f:1
+										10-v:z
+											11-f:1
+				4-k:item
+					5-v:first
 						6-s:LeftRingProximal
 					5-o:second
 						6-a:bones
@@ -1326,49 +1245,29 @@ use tabs: true
 											11-f:1
 										10-v:z
 											11-f:1
+				4-k:item
+					5-v:first
+						6-s:RightMiddleDistal
+					5-o:second
+						6-a:bones
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:LeftHandRing3
+										10-s:RightHandMiddle3
 									9-v:index
-										10-i:84
+										10-i:104
 									9-o:bindTranslation
 										10-v:y
-											11-f:0.0190956
+											11-f:0.0199993
 									9-o:bindRotation
 										10-v:x
-											11-f:0.0884402
+											11-f:0.24214
 										10-v:y
-											11-f:-0.55112
+											11-f:0.922254
 										10-v:z
-											11-f:-0.0360547
+											11-f:0.118039
 										10-v:w
-											11-f:0.828942
-									9-o:bindScale
-										10-v:x
-											11-f:1
-										10-v:y
-											11-f:1
-										10-v:z
-											11-f:1
-							7-k:i
-								8-o:d
-									9-v:name
-										10-s:LeftHandRing2
-									9-v:index
-										10-i:83
-									9-o:bindTranslation
-										10-v:y
-											11-f:0.0281889
-									9-o:bindRotation
-										10-v:x
-											11-f:0.147194
-										10-v:y
-											11-f:0.0747646
-										10-v:z
-											11-f:-0.0248035
-										10-v:w
-											11-f:0.985966
+											11-f:0.277278
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -1399,6 +1298,36 @@ use tabs: true
 											11-f:-0.00240831
 										10-v:w
 											11-f:0.999949
+									9-o:bindScale
+										10-v:x
+											11-f:1
+										10-v:y
+											11-f:1
+										10-v:z
+											11-f:1
+				4-k:item
+					5-v:first
+						6-s:RightRingDistal
+					5-o:second
+						6-a:bones
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:RightHandRing3
+									9-v:index
+										10-i:108
+									9-o:bindTranslation
+										10-v:y
+											11-f:0.0190958
+									9-o:bindRotation
+										10-v:x
+											11-f:0.171131
+										10-v:y
+											11-f:0.903886
+										10-v:z
+											11-f:0.0966996
+										10-v:w
+											11-f:0.379938
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -1487,6 +1416,36 @@ use tabs: true
 											11-f:1
 				4-k:item
 					5-v:first
+						6-s:LeftMiddleDistal
+					5-o:second
+						6-a:bones
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:LeftHandMiddle3
+									9-v:index
+										10-i:80
+									9-o:bindTranslation
+										10-v:y
+											11-f:0.0199993
+									9-o:bindRotation
+										10-v:x
+											11-f:0.055779
+										10-v:y
+											11-f:-0.673593
+										10-v:z
+											11-f:-0.110118
+										10-v:w
+											11-f:0.728722
+									9-o:bindScale
+										10-v:x
+											11-f:1
+										10-v:y
+											11-f:1
+										10-v:z
+											11-f:1
+				4-k:item
+					5-v:first
 						6-s:RightIndexProximal
 					5-o:second
 						6-a:bones
@@ -1519,24 +1478,33 @@ use tabs: true
 											11-f:1
 										10-v:z
 											11-f:1
+				4-k:item
+					5-v:first
+						6-s:RightMiddleIntermediate
+					5-o:second
+						6-a:bones
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightHandIndex2
+										10-s:RightHandMiddle1
 									9-v:index
-										10-i:100
+										10-i:102
 									9-o:bindTranslation
+										10-v:x
+											11-f:-0.00683232
 										10-v:y
-											11-f:0.0281898
+											11-f:0.0687929
+										10-v:z
+											11-f:-0.00318958
 									9-o:bindRotation
 										10-v:x
-											11-f:0.141952
+											11-f:0.173888
 										10-v:y
-											11-f:-0.00640192
+											11-f:0.152389
 										10-v:z
-											11-f:-0.182261
+											11-f:-0.115321
 										10-v:w
-											11-f:0.972928
+											11-f:0.966044
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -1547,21 +1515,44 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightHandIndex3
+										10-s:IKTargetMiddle
 									9-v:index
-										10-i:101
+										10-i:128
 									9-o:bindTranslation
+										10-v:x
+											11-f:-0.00215718
 										10-v:y
-											11-f:0.018187
+											11-f:-0.0502557
+										10-v:z
+											11-f:-0.389396
 									9-o:bindRotation
 										10-v:x
-											11-f:0.229782
+											11-f:1
+									9-o:bindScale
+										10-v:x
+											11-f:1
 										10-v:y
-											11-f:0.868516
+											11-f:1
 										10-v:z
-											11-f:-0.0107302
+											11-f:1
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:RightHandMiddle2
+									9-v:index
+										10-i:103
+									9-o:bindTranslation
+										10-v:y
+											11-f:0.031817
+									9-o:bindRotation
+										10-v:x
+											11-f:0.0888741
+										10-v:y
+											11-f:-0.141079
+										10-v:z
+											11-f:-0.114098
 										10-v:w
-											11-f:0.439051
+											11-f:0.979377
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -1657,66 +1648,6 @@ use tabs: true
 											11-f:1
 				4-k:item
 					5-v:first
-						6-s:LeftUpperArm
-					5-o:second
-						6-a:bones
-							7-k:i
-								8-o:d
-									9-v:name
-										10-s:LeftForeArm
-									9-v:index
-										10-i:69
-									9-o:bindTranslation
-										10-v:y
-											11-f:0.232202
-									9-o:bindRotation
-										10-v:x
-											11-f:-0.000347197
-										10-v:y
-											11-f:-0.721767
-										10-v:z
-											11-f:-5.16823e-05
-										10-v:w
-											11-f:0.692136
-									9-o:bindScale
-										10-v:x
-											11-f:1
-										10-v:y
-											11-f:1
-										10-v:z
-											11-f:1
-				4-k:item
-					5-v:first
-						6-s:RightUpperArm
-					5-o:second
-						6-a:bones
-							7-k:i
-								8-o:d
-									9-v:name
-										10-s:RightForeArm
-									9-v:index
-										10-i:93
-									9-o:bindTranslation
-										10-v:y
-											11-f:0.23231
-									9-o:bindRotation
-										10-v:x
-											11-f:0.000236975
-										10-v:y
-											11-f:-0.698163
-										10-v:z
-											11-f:-0.00013673
-										10-v:w
-											11-f:0.715939
-									9-o:bindScale
-										10-v:x
-											11-f:1
-										10-v:y
-											11-f:1
-										10-v:z
-											11-f:1
-				4-k:item
-					5-v:first
 						6-s:LeftToes
 					5-o:second
 						6-a:bones
@@ -1738,6 +1669,96 @@ use tabs: true
 											11-f:0.0409942
 										10-v:w
 											11-f:0.923429
+									9-o:bindScale
+										10-v:x
+											11-f:1
+										10-v:y
+											11-f:1
+										10-v:z
+											11-f:1
+				4-k:item
+					5-v:first
+						6-s:RightIndexIntermediate
+					5-o:second
+						6-a:bones
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:RightHandIndex2
+									9-v:index
+										10-i:100
+									9-o:bindTranslation
+										10-v:y
+											11-f:0.0281898
+									9-o:bindRotation
+										10-v:x
+											11-f:0.141952
+										10-v:y
+											11-f:-0.00640192
+										10-v:z
+											11-f:-0.182261
+										10-v:w
+											11-f:0.972928
+									9-o:bindScale
+										10-v:x
+											11-f:1
+										10-v:y
+											11-f:1
+										10-v:z
+											11-f:1
+				4-k:item
+					5-v:first
+						6-s:LeftLittleIntermediate
+					5-o:second
+						6-a:bones
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:LeftHandPinky2
+									9-v:index
+										10-i:86
+									9-o:bindTranslation
+										10-v:y
+											11-f:0.0227583
+									9-o:bindRotation
+										10-v:x
+											11-f:0.18462
+										10-v:y
+											11-f:0.0658998
+										10-v:z
+											11-f:0.00749583
+										10-v:w
+											11-f:0.98057
+									9-o:bindScale
+										10-v:x
+											11-f:1
+										10-v:y
+											11-f:1
+										10-v:z
+											11-f:1
+				4-k:item
+					5-v:first
+						6-s:LeftRingIntermediate
+					5-o:second
+						6-a:bones
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:LeftHandRing2
+									9-v:index
+										10-i:83
+									9-o:bindTranslation
+										10-v:y
+											11-f:0.0281889
+									9-o:bindRotation
+										10-v:x
+											11-f:0.147194
+										10-v:y
+											11-f:0.0747646
+										10-v:z
+											11-f:-0.0248035
+										10-v:w
+											11-f:0.985966
 									9-o:bindScale
 										10-v:x
 											11-f:1
@@ -1772,6 +1793,65 @@ use tabs: true
 											11-f:0.496182
 										10-v:w
 											11-f:0.438328
+									9-o:bindScale
+										10-v:x
+											11-f:1
+										10-v:y
+											11-f:1
+										10-v:z
+											11-f:1
+				4-k:item
+					5-v:first
+						6-s:LeftMiddleIntermediate
+					5-o:second
+						6-a:bones
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:LeftHandMiddle1
+									9-v:index
+										10-i:78
+									9-o:bindTranslation
+										10-v:x
+											11-f:-0.00485788
+										10-v:y
+											11-f:0.0755591
+										10-v:z
+											11-f:0.0125679
+									9-o:bindRotation
+										10-v:x
+											11-f:0.202437
+										10-v:y
+											11-f:-0.416045
+										10-v:z
+											11-f:0.0328496
+										10-v:w
+											11-f:0.885916
+									9-o:bindScale
+										10-v:x
+											11-f:1
+										10-v:y
+											11-f:1
+										10-v:z
+											11-f:1
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:LeftHandMiddle2
+									9-v:index
+										10-i:79
+									9-o:bindTranslation
+										10-v:y
+											11-f:0.0318171
+									9-o:bindRotation
+										10-v:x
+											11-f:0.119028
+										10-v:y
+											11-f:0.0913747
+										10-v:z
+											11-f:-0.0321801
+										10-v:w
+											11-f:0.988154
 									9-o:bindScale
 										10-v:x
 											11-f:1
