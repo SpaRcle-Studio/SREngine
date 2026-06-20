@@ -11,6 +11,10 @@ DepthTest true;
 [[const]] float SUN_HALO_SIZE = 0.018;
 [[const]] float SUN_HALO_SOFTNESS = 0.018;
 
+void fragment_color_buffer_discard() {
+    discard;
+}
+
 void fragment() {
     // Направление взгляда из камеры в мир
     vec3 eyeDir = normalize(VERTEX);

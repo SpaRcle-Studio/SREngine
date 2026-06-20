@@ -350,38 +350,9 @@ namespace SR_CORE_NS {
         }
 
 
-        const auto& sourceWorldSettings = pSourceRig->GetWorldSettings();
-        const auto& targetWorldSettings = pTargetRig->GetWorldSettings();
-
-        const SR_MATH_NS::Matrix4x4 srcSkelWorldMOffset = SR_MATH_NS::Matrix4x4(
-                sourceWorldSettings.translationOffset,
-                SR_MATH_NS::FVector3(),
-                sourceWorldSettings.scaleFactor
-        );
-        const SR_MATH_NS::Matrix4x4 tgtSkelWorldMOffset = SR_MATH_NS::Matrix4x4(
-                targetWorldSettings.translationOffset,
-                SR_MATH_NS::FVector3(),
-                targetWorldSettings.scaleFactor
-        );
-        //const SR_MATH_NS::Matrix4x4 srcSkelWorldMOffset = SR_MATH_NS::Matrix4x4::Identity();
-        //const SR_MATH_NS::Matrix4x4 tgtSkelWorldMOffset = SR_MATH_NS::Matrix4x4::Identity();
-
-        /*
-
-        const SR_MATH_NS::Matrix4x4 srcSkelWorldInv = srcSkelWorldM.Inverse();
-
-        const SR_MATH_NS::Quaternion srcSkelWorldR = SR_MATH_NS::Quaternion(sourceWorldSettings.rotationOffset.Radians()).NormalizeSafe();
-        const SR_MATH_NS::Quaternion tgtSkelWorldR = SR_MATH_NS::Quaternion(targetWorldSettings.rotationOffset.Radians()).NormalizeSafe();*/
-
-
-        /// Target is defined in SOURCE skeleton global space, then mapped into TARGET skeleton global space.
-        /// This keeps the goal consistent even if skeleton GameObjects are placed differently in the scene.
-        const SR_MATH_NS::Matrix4x4 srcSkelWorldM = pSourceTr->GetMatrix() * srcSkelWorldMOffset;
-        const SR_MATH_NS::Matrix4x4 tgtSkelWorldM = pTargetTr->GetMatrix() * tgtSkelWorldMOffset;
-        const SR_MATH_NS::Matrix4x4 srcSkelWorldInv = srcSkelWorldM.Inverse();
-
-        const SR_MATH_NS::Quaternion srcSkelWorldR = pSourceTr->GetGlobalRotation().NormalizeSafe();
-        const SR_MATH_NS::Quaternion tgtSkelWorldR = pTargetTr->GetGlobalRotation().NormalizeSafe();
+        /// IK is solved strictly in WORLD space.
+        /// The desired target for limbs/spine is the real global transform of the source skeleton,
+        /// because in the editor the models are already placed/scaled correctly relative to each other.
 
         auto&& pSourceRawMesh = pSourceRig->GetSkeleton().GetRawMesh();
         auto&& pTargetRawMesh = pTargetRig->GetSkeleton().GetRawMesh();
@@ -500,16 +471,27 @@ namespace SR_CORE_NS {
             const SR_MATH_NS::FVector3 srcRootWorldPos = pSrcRootT->GetGlobalTranslation();
             const SR_MATH_NS::FVector3 srcMidWorldPos = pSrcMidT->GetGlobalTranslation();
 
-            const SR_MATH_NS::FVector3 srcTipWorldPos = pSrcTipT->GetGlobalTranslation();
+            SR_MATH_NS::FVector3 tipOffset;
+            if (stateKey == "IK_LeftArm") {
+                tipOffset = m_IKLeftHandOffset / m_scaleFactor;
+            }
+            else if (stateKey == "IK_RightArm") {
+                tipOffset = m_IKRightHandOffset / m_scaleFactor;
+            }
+            else if (stateKey == "IK_LeftLeg") {
+                tipOffset = m_IKLeftFootOffset / m_scaleFactor;
+            }
+            else if (stateKey == "IK_RightLeg") {
+                tipOffset = m_IKRightFootOffset / m_scaleFactor;
+            }
+
+            const SR_MATH_NS::FVector3 srcTipWorldPos = pSrcTipT->GetGlobalTranslation() + tipOffset;
             const SR_MATH_NS::Quaternion srcTipWorldRot = pSrcTipT->GetGlobalRotation().NormalizeSafe();
 
             const SR_MATH_NS::FVector3 tgtRootWorldPos = pTgtRootT->GetGlobalTranslation();
 
-            const SR_MATH_NS::FVector3 srcTipSkelLocal = srcSkelWorldInv.TransformPoint(srcTipWorldPos).XYZ();
-            const SR_MATH_NS::FVector3 desiredTipWorldPos = tgtSkelWorldM.TransformPoint(srcTipSkelLocal).XYZ();
-
-            const SR_MATH_NS::Quaternion srcTipSkelLocalRot = (srcSkelWorldR.Inverse() * srcTipWorldRot).NormalizeSafe();
-            const SR_MATH_NS::Quaternion desiredTipWorldRot = (tgtSkelWorldR * srcTipSkelLocalRot).NormalizeSafe();
+            const SR_MATH_NS::FVector3 desiredTipWorldPos = srcTipWorldPos;
+            const SR_MATH_NS::Quaternion desiredTipWorldRot = srcTipWorldRot;
 
             /// Pole vector: use SOURCE bend direction (deviation of mid from root->tip axis), mapped into target root space.
             const SR_MATH_NS::FVector3 srcRootToTip = srcTipWorldPos - srcRootWorldPos;
@@ -526,9 +508,8 @@ namespace SR_CORE_NS {
                 srcBendDir = SafePerpendicular(srcRootToTipDir);
             }
 
-            /// Convert bend direction through skeleton space, not limb root space.
-            const SR_MATH_NS::FVector3 bendDirSkelLocal = (srcSkelWorldR.Inverse() * srcBendDir).Normalized();
-            const SR_MATH_NS::FVector3 bendDirWorldForTarget = (tgtSkelWorldR * bendDirSkelLocal).Normalized();
+            /// Pole vector is also taken in WORLD space (same "apple on the table" logic).
+            const SR_MATH_NS::FVector3 bendDirWorldForTarget = srcBendDir;
 
             auto& state = g_TwoBoneIKState[this][pTargetSkeleton][stateKey];
 
@@ -551,8 +532,7 @@ namespace SR_CORE_NS {
             );
         };
 
-        /// Spine IK (CCD) to improve torso alignment.
-        /// End-effector: Head position from source, mapped through skeleton world settings (including scale).
+        /// Spine IK (CCD) to improve torso alignment (WORLD space goal).
         {
             const SR_UTILS_NS::StringAtom srcHeadName = pickMappedBoneName(*pSourceRig, *pSourceRawMesh, srcMeshId, srcNodeDepth, "Head");
             const SR_UTILS_NS::StringAtom tgtHeadName = pickMappedBoneName(*pTargetRig, *pTargetRawMesh, tgtMeshId, tgtNodeDepth, "Head");
@@ -566,8 +546,7 @@ namespace SR_CORE_NS {
 
                 if (pSrcHeadT && pTgtHeadT) {
                     const SR_MATH_NS::FVector3 srcHeadWorldPos = pSrcHeadT->GetGlobalTranslation();
-                    const SR_MATH_NS::FVector3 srcHeadSkelLocal = srcSkelWorldInv.TransformPoint(srcHeadWorldPos).XYZ();
-                    const SR_MATH_NS::FVector3 desiredHeadWorldPos = tgtSkelWorldM.TransformPoint(srcHeadSkelLocal).XYZ();
+                    const SR_MATH_NS::FVector3 desiredHeadWorldPos = srcHeadWorldPos;
 
                     SR_UTILS_NS::Vector<SR_UTILS_NS::Transform*> spineChain;
                     spineChain.reserve(4);
@@ -609,10 +588,9 @@ namespace SR_CORE_NS {
                             joint.SetGlobalRotation(SR_MATH_NS::Quaternion::Slerp(current, next, weight).NormalizeSafe());
                         };
 
-                        const float weight = 0.35f; /// conservative to not break the current good retarget+limb IK
-                        for (uint32_t iter = 0; iter < 6; ++iter) {
+                        for (uint32_t iter = 0; iter < m_ccdIterations; ++iter) {
                             for (int32_t i = static_cast<int32_t>(spineChain.size()) - 1; i >= 0; --i) {
-                                ccdStep(*spineChain[i], desiredHeadWorldPos, weight);
+                                ccdStep(*spineChain[i], desiredHeadWorldPos, m_ccdWeight);
                             }
                         }
                     }
@@ -850,7 +828,7 @@ namespace SR_CORE_NS {
                 SR_MATH_NS::FVector3 sourceGlobalTranslation = sourceGlobalMatrix.GetTranslation();
                 SR_MATH_NS::Matrix4x4 targetGlobalParentMatrix = pTargetBone->GetGameObject()->GetParentTransform()->GetMatrix();
                 SR_MATH_NS::Matrix4x4 targetLocalMatrix = targetGlobalParentMatrix.Inverse() * SR_MATH_NS::Matrix4x4(sourceGlobalTranslation, SR_MATH_NS::Quaternion::Identity(), SR_MATH_NS::FVector3::One());
-                pTargetBone->GetGameObject()->GetTransform()->SetTranslation(targetLocalMatrix.GetTranslation());
+                pTargetBone->GetGameObject()->GetTransform()->SetTranslation(targetLocalMatrix.GetTranslation() + m_targetHipsOffset / m_scaleFactor);
             }
 
             if (srcNode >= srcRefCSRot.size() || tgtNode >= tgtRefCSRot.size()) {
@@ -979,7 +957,7 @@ namespace SR_CORE_NS {
                 SR_MATH_NS::FVector3 sourceGlobalTranslation = sourceGlobalMatrix.GetTranslation();
                 SR_MATH_NS::Matrix4x4 targetGlobalParentMatrix = pTargetBone->GetGameObject()->GetParentTransform()->GetMatrix();
                 SR_MATH_NS::Matrix4x4 targetLocalMatrix = targetGlobalParentMatrix.Inverse() * SR_MATH_NS::Matrix4x4(sourceGlobalTranslation, SR_MATH_NS::Quaternion::Identity(), SR_MATH_NS::FVector3::One());
-                pTargetBone->GetGameObject()->GetTransform()->SetTranslation(targetLocalMatrix.GetTranslation());
+                pTargetBone->GetGameObject()->GetTransform()->SetTranslation(targetLocalMatrix.GetTranslation() + m_targetHipsOffset);
             }
 
             /// Rotation retarget in component-space (hierarchy-aware), with rest pose compensation (T/A).

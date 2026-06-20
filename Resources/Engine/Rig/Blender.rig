@@ -19,6 +19,16 @@ use tabs: true
 					5-v:z
 						6-f:2.5
 			3-o:autoRigRules
+				4-a:ignoreBonesContains
+					5-k:i
+						6-v:d
+							7-s:_ik
+					5-k:i
+						6-v:d
+							7-s:02.
+					5-k:i
+						6-v:d
+							7-s:clavicle.
 			3-a:mapping
 				4-k:item
 					5-v:first
@@ -31,12 +41,6 @@ use tabs: true
 										10-s:foot.R
 									9-v:index
 										10-i:27
-							7-k:i
-								8-o:d
-									9-v:name
-										10-s:right_foot_ik
-									9-v:index
-										10-i:185
 				4-k:item
 					5-v:first
 						6-s:Head
@@ -56,21 +60,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:clavicle.L
-									9-v:index
-										10-i:49
-							7-k:i
-								8-o:d
-									9-v:name
 										10-s:shoulder01.L
 									9-v:index
 										10-i:50
-							7-k:i
-								8-o:d
-									9-v:name
-										10-s:left_shoulder_ik
-									9-v:index
-										10-i:179
 				4-k:item
 					5-v:first
 						6-s:Chest
@@ -105,12 +97,6 @@ use tabs: true
 										10-s:upperleg01.L
 									9-v:index
 										10-i:3
-							7-k:i
-								8-o:d
-									9-v:name
-										10-s:upperleg02.L
-									9-v:index
-										10-i:4
 				4-k:item
 					5-v:first
 						6-s:Spine
@@ -133,12 +119,6 @@ use tabs: true
 										10-s:lowerleg01.R
 									9-v:index
 										10-i:25
-							7-k:i
-								8-o:d
-									9-v:name
-										10-s:lowerleg02.R
-									9-v:index
-										10-i:26
 				4-k:item
 					5-v:first
 						6-s:RightHand
@@ -147,9 +127,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:right_hand_ik
+										10-s:wrist.R
 									9-v:index
-										10-i:180
+										10-i:86
 				4-k:item
 					5-v:first
 						6-s:RightToes
@@ -247,9 +227,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:upperarm02.R
+										10-s:lowerarm01.R
 									9-v:index
-										10-i:83
+										10-i:84
 				4-k:item
 					5-v:first
 						6-s:LeftLowerArm
@@ -258,9 +238,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:upperarm02.L
+										10-s:lowerarm01.L
 									9-v:index
-										10-i:52
+										10-i:53
 				4-k:item
 					5-v:first
 						6-s:LeftFoot
@@ -272,12 +252,6 @@ use tabs: true
 										10-s:foot.L
 									9-v:index
 										10-i:7
-							7-k:i
-								8-o:d
-									9-v:name
-										10-s:left_foot_ik
-									9-v:index
-										10-i:183
 				4-k:item
 					5-v:first
 						6-s:Hips
@@ -297,9 +271,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:left_hand_ik
+										10-s:wrist.L
 									9-v:index
-										10-i:177
+										10-i:55
 				4-k:item
 					5-v:first
 						6-s:LeftLowerLeg
@@ -311,12 +285,6 @@ use tabs: true
 										10-s:lowerleg01.L
 									9-v:index
 										10-i:5
-							7-k:i
-								8-o:d
-									9-v:name
-										10-s:lowerleg02.L
-									9-v:index
-										10-i:6
 				4-k:item
 					5-v:first
 						6-s:LeftUpperArm
@@ -447,21 +415,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:clavicle.R
-									9-v:index
-										10-i:80
-							7-k:i
-								8-o:d
-									9-v:name
 										10-s:shoulder01.R
 									9-v:index
 										10-i:81
-							7-k:i
-								8-o:d
-									9-v:name
-										10-s:right_shoulder_ik
-									9-v:index
-										10-i:182
 				4-k:item
 					5-v:first
 						6-s:RightUpperLeg
@@ -473,9 +429,3 @@ use tabs: true
 										10-s:upperleg01.R
 									9-v:index
 										10-i:23
-							7-k:i
-								8-o:d
-									9-v:name
-										10-s:upperleg02.R
-									9-v:index
-										10-i:24

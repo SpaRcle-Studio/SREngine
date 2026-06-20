@@ -33,12 +33,29 @@ namespace SR_CORE_NS {
         void TwoBoneIK(SR_ANIMATIONS_NS::Skeleton* pSkeleton);
 
     private:
+        /// @property @group(Offsets)
+        float_t m_scaleFactor = 1.f;
+        /// @property @group(Offsets)
+        SR_MATH_NS::FVector3 m_targetHipsOffset;
+        /// @property @group(Offsets)
+        SR_MATH_NS::FVector3 m_IKLeftHandOffset;
+        /// @property @group(Offsets)
+        SR_MATH_NS::FVector3 m_IKRightHandOffset;
+        /// @property @group(Offsets)
+        SR_MATH_NS::FVector3 m_IKLeftFootOffset;
+        /// @property @group(Offsets)
+        SR_MATH_NS::FVector3 m_IKRightFootOffset;
+
         /// @property
         float m_smoothing = 10.f;
         /// @property
         float m_twoBoneWeight = 1.f;
         /// @property
         uint8_t m_twoBoneIterations = 32;
+        /// @property
+        float m_ccdWeight = 0.35f;
+        /// @property
+        uint8_t m_ccdIterations = 6;
         /// @property
         bool m_twoBoneIKEnabled = true;
         /// @property

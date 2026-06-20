@@ -9,22 +9,9 @@ use tabs: true
 				4-s:Humanoid
 			3-o:skeleton
 				4-v:meshPath
-					5-s:Samples/Tsumugi/Tsumugi.fbx
+					5-s:Samples/Liza/Liza.fbx
 			3-o:worldSettings
 			3-o:autoRigRules
-				4-a:ignoreBonesContains
-					5-k:i
-						6-v:d
-							7-s:Katashina_arm
-					5-k:i
-						6-v:d
-							7-s:IKTarget
-					5-k:i
-						6-v:d
-							7-s:HandWrist
-					5-k:i
-						6-v:d
-							7-s:PoleTargrt
 			3-a:mapping
 				4-k:item
 					5-v:first
@@ -34,9 +21,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:LeftHandIndex2
+										10-s:mixamorig:LeftHandIndex2
 									9-v:index
-										10-i:76
+										10-i:17
 				4-k:item
 					5-v:first
 						6-s:Neck
@@ -45,9 +32,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:Neck
+										10-s:mixamorig:Neck
 									9-v:index
-										10-i:19
+										10-i:5
 				4-k:item
 					5-v:first
 						6-s:RightFoot
@@ -56,9 +43,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightFoot
+										10-s:mixamorig:RightFoot
 									9-v:index
-										10-i:12
+										10-i:63
 				4-k:item
 					5-v:first
 						6-s:RightThumbProximal
@@ -67,9 +54,15 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightHandThumb1
+										10-s:mixamorig:RightHandThumb1
 									9-v:index
-										10-i:96
+										10-i:36
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:mixamorig:RightHandThumb4
+									9-v:index
+										10-i:39
 				4-k:item
 					5-v:first
 						6-s:RightThumbIntermediate
@@ -78,9 +71,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightHandThumb2
+										10-s:mixamorig:RightHandThumb2
 									9-v:index
-										10-i:97
+										10-i:37
 				4-k:item
 					5-v:first
 						6-s:Head
@@ -89,9 +82,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:Head
+										10-s:mixamorig:Head
 									9-v:index
-										10-i:20
+										10-i:6
 				4-k:item
 					5-v:first
 						6-s:RightRingProximal
@@ -100,9 +93,15 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightHandRing1
+										10-s:mixamorig:RightHandRing1
 									9-v:index
-										10-i:106
+										10-i:48
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:mixamorig:RightHandRing4
+									9-v:index
+										10-i:51
 				4-k:item
 					5-v:first
 						6-s:LeftThumbDistal
@@ -111,9 +110,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:LeftHandThumb3
+										10-s:mixamorig:LeftHandThumb3
 									9-v:index
-										10-i:74
+										10-i:14
 				4-k:item
 					5-v:first
 						6-s:LeftShoulder
@@ -122,9 +121,20 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:LeftShoulderArm
+										10-s:mixamorig:LeftShoulder
 									9-v:index
-										10-i:65
+										10-i:8
+				4-k:item
+					5-v:first
+						6-s:Chest
+					5-o:second
+						6-a:bones
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:mixamorig:Spine1
+									9-v:index
+										10-i:3
 				4-k:item
 					5-v:first
 						6-s:LeftUpperLeg
@@ -133,9 +143,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:LeftUpLeg
+										10-s:mixamorig:LeftUpLeg
 									9-v:index
-										10-i:3
+										10-i:56
 				4-k:item
 					5-v:first
 						6-s:Spine
@@ -144,9 +154,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:Spine
+										10-s:mixamorig:Spine
 									9-v:index
-										10-i:17
+										10-i:2
 				4-k:item
 					5-v:first
 						6-s:RightLowerLeg
@@ -155,9 +165,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightLeg
+										10-s:mixamorig:RightLeg
 									9-v:index
-										10-i:11
+										10-i:62
 				4-k:item
 					5-v:first
 						6-s:LeftLittleProximal
@@ -166,9 +176,15 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:LeftHandPinky1
+										10-s:mixamorig:LeftHandPinky1
 									9-v:index
-										10-i:85
+										10-i:28
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:mixamorig:LeftHandPinky4
+									9-v:index
+										10-i:31
 				4-k:item
 					5-v:first
 						6-s:LeftThumbProximal
@@ -177,9 +193,15 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:LeftHandThumb1
+										10-s:mixamorig:LeftHandThumb1
 									9-v:index
-										10-i:72
+										10-i:12
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:mixamorig:LeftHandThumb4
+									9-v:index
+										10-i:15
 				4-k:item
 					5-v:first
 						6-s:RightLittleDistal
@@ -188,9 +210,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightHandPinky3
+										10-s:mixamorig:RightHandPinky3
 									9-v:index
-										10-i:111
+										10-i:54
 				4-k:item
 					5-v:first
 						6-s:LeftLittleDistal
@@ -199,9 +221,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:LeftHandPinky3
+										10-s:mixamorig:LeftHandPinky3
 									9-v:index
-										10-i:87
+										10-i:30
 				4-k:item
 					5-v:first
 						6-s:RightLittleIntermediate
@@ -210,9 +232,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightHandPinky2
+										10-s:mixamorig:RightHandPinky2
 									9-v:index
-										10-i:110
+										10-i:53
 				4-k:item
 					5-v:first
 						6-s:LeftRingDistal
@@ -221,9 +243,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:LeftHandRing3
+										10-s:mixamorig:LeftHandRing3
 									9-v:index
-										10-i:84
+										10-i:26
 				4-k:item
 					5-v:first
 						6-s:RightHand
@@ -232,9 +254,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightHand
+										10-s:mixamorig:RightHand
 									9-v:index
-										10-i:94
+										10-i:35
 				4-k:item
 					5-v:first
 						6-s:RightToes
@@ -243,9 +265,15 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightToeBase
+										10-s:mixamorig:RightToeBase
 									9-v:index
-										10-i:13
+										10-i:64
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:mixamorig:RightToe_End
+									9-v:index
+										10-i:65
 				4-k:item
 					5-v:first
 						6-s:LeftIndexProximal
@@ -254,9 +282,15 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:LeftHandIndex1
+										10-s:mixamorig:LeftHandIndex1
 									9-v:index
-										10-i:75
+										10-i:16
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:mixamorig:LeftHandIndex4
+									9-v:index
+										10-i:19
 				4-k:item
 					5-v:first
 						6-s:RightLowerArm
@@ -265,9 +299,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightForeArm
+										10-s:mixamorig:RightForeArm
 									9-v:index
-										10-i:93
+										10-i:34
 				4-k:item
 					5-v:first
 						6-s:RightLittleProximal
@@ -276,9 +310,15 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightHandPinky1
+										10-s:mixamorig:RightHandPinky1
 									9-v:index
-										10-i:109
+										10-i:52
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:mixamorig:RightHandPinky4
+									9-v:index
+										10-i:55
 				4-k:item
 					5-v:first
 						6-s:RightIndexDistal
@@ -287,9 +327,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightHandIndex3
+										10-s:mixamorig:RightHandIndex3
 									9-v:index
-										10-i:101
+										10-i:42
 				4-k:item
 					5-v:first
 						6-s:RightRingIntermediate
@@ -298,9 +338,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightHandRing2
+										10-s:mixamorig:RightHandRing2
 									9-v:index
-										10-i:107
+										10-i:49
 				4-k:item
 					5-v:first
 						6-s:LeftLowerArm
@@ -309,9 +349,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:LeftForeArm
+										10-s:mixamorig:LeftForeArm
 									9-v:index
-										10-i:69
+										10-i:10
 				4-k:item
 					5-v:first
 						6-s:LeftThumbIntermediate
@@ -320,9 +360,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:LeftHandThumb2
+										10-s:mixamorig:LeftHandThumb2
 									9-v:index
-										10-i:73
+										10-i:13
 				4-k:item
 					5-v:first
 						6-s:RightThumbDistal
@@ -331,9 +371,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightHandThumb3
+										10-s:mixamorig:RightHandThumb3
 									9-v:index
-										10-i:98
+										10-i:38
 				4-k:item
 					5-v:first
 						6-s:LeftFoot
@@ -342,9 +382,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:LeftFoot
+										10-s:mixamorig:LeftFoot
 									9-v:index
-										10-i:6
+										10-i:58
 				4-k:item
 					5-v:first
 						6-s:LeftIndexDistal
@@ -353,9 +393,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:LeftHandIndex3
+										10-s:mixamorig:LeftHandIndex3
 									9-v:index
-										10-i:77
+										10-i:18
 				4-k:item
 					5-v:first
 						6-s:LeftRingProximal
@@ -364,9 +404,15 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:LeftHandRing1
+										10-s:mixamorig:LeftHandRing1
 									9-v:index
-										10-i:82
+										10-i:24
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:mixamorig:LeftHandRing4
+									9-v:index
+										10-i:27
 				4-k:item
 					5-v:first
 						6-s:RightMiddleDistal
@@ -375,9 +421,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightHandMiddle3
+										10-s:mixamorig:RightHandMiddle3
 									9-v:index
-										10-i:104
+										10-i:46
 				4-k:item
 					5-v:first
 						6-s:Hips
@@ -386,9 +432,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:Hips
+										10-s:mixamorig:Hips
 									9-v:index
-										10-i:2
+										10-i:1
 				4-k:item
 					5-v:first
 						6-s:RightRingDistal
@@ -397,9 +443,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightHandRing3
+										10-s:mixamorig:RightHandRing3
 									9-v:index
-										10-i:108
+										10-i:50
 				4-k:item
 					5-v:first
 						6-s:LeftHand
@@ -408,9 +454,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:LeftHand
+										10-s:mixamorig:LeftHand
 									9-v:index
-										10-i:70
+										10-i:11
 				4-k:item
 					5-v:first
 						6-s:LeftMiddleDistal
@@ -419,9 +465,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:LeftHandMiddle3
+										10-s:mixamorig:LeftHandMiddle3
 									9-v:index
-										10-i:80
+										10-i:22
 				4-k:item
 					5-v:first
 						6-s:RightIndexProximal
@@ -430,9 +476,15 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightHandIndex1
+										10-s:mixamorig:RightHandIndex1
 									9-v:index
-										10-i:99
+										10-i:40
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:mixamorig:RightHandIndex4
+									9-v:index
+										10-i:43
 				4-k:item
 					5-v:first
 						6-s:RightMiddleIntermediate
@@ -441,15 +493,21 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightHandMiddle1
+										10-s:mixamorig:RightHandMiddle1
 									9-v:index
-										10-i:102
+										10-i:44
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightHandMiddle2
+										10-s:mixamorig:RightHandMiddle2
 									9-v:index
-										10-i:103
+										10-i:45
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:mixamorig:RightHandMiddle4
+									9-v:index
+										10-i:47
 				4-k:item
 					5-v:first
 						6-s:LeftLowerLeg
@@ -458,9 +516,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:LeftLeg
+										10-s:mixamorig:LeftLeg
 									9-v:index
-										10-i:4
+										10-i:57
 				4-k:item
 					5-v:first
 						6-s:LeftUpperArm
@@ -469,9 +527,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:LeftArm
+										10-s:mixamorig:LeftArm
 									9-v:index
-										10-i:66
+										10-i:9
 				4-k:item
 					5-v:first
 						6-s:RightUpperArm
@@ -480,9 +538,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightArm
+										10-s:mixamorig:RightArm
 									9-v:index
-										10-i:92
+										10-i:33
 				4-k:item
 					5-v:first
 						6-s:LeftToes
@@ -491,9 +549,15 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:LeftToeBase
+										10-s:mixamorig:LeftToeBase
 									9-v:index
-										10-i:7
+										10-i:59
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:mixamorig:LeftToe_End
+									9-v:index
+										10-i:60
 				4-k:item
 					5-v:first
 						6-s:RightIndexIntermediate
@@ -502,9 +566,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightHandIndex2
+										10-s:mixamorig:RightHandIndex2
 									9-v:index
-										10-i:100
+										10-i:41
 				4-k:item
 					5-v:first
 						6-s:LeftLittleIntermediate
@@ -513,9 +577,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:LeftHandPinky2
+										10-s:mixamorig:LeftHandPinky2
 									9-v:index
-										10-i:86
+										10-i:29
 				4-k:item
 					5-v:first
 						6-s:LeftRingIntermediate
@@ -524,9 +588,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:LeftHandRing2
+										10-s:mixamorig:LeftHandRing2
 									9-v:index
-										10-i:83
+										10-i:25
 				4-k:item
 					5-v:first
 						6-s:UpperChest
@@ -535,9 +599,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:Spine1
+										10-s:mixamorig:Spine2
 									9-v:index
-										10-i:18
+										10-i:4
 				4-k:item
 					5-v:first
 						6-s:RightShoulder
@@ -546,9 +610,9 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightShoulderArm
+										10-s:mixamorig:RightShoulder
 									9-v:index
-										10-i:91
+										10-i:32
 				4-k:item
 					5-v:first
 						6-s:LeftMiddleIntermediate
@@ -557,15 +621,21 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:LeftHandMiddle1
+										10-s:mixamorig:LeftHandMiddle1
 									9-v:index
-										10-i:78
+										10-i:20
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:LeftHandMiddle2
+										10-s:mixamorig:LeftHandMiddle2
 									9-v:index
-										10-i:79
+										10-i:21
+							7-k:i
+								8-o:d
+									9-v:name
+										10-s:mixamorig:LeftHandMiddle4
+									9-v:index
+										10-i:23
 				4-k:item
 					5-v:first
 						6-s:RightUpperLeg
@@ -574,6 +644,6 @@ use tabs: true
 							7-k:i
 								8-o:d
 									9-v:name
-										10-s:RightUpLeg
+										10-s:mixamorig:RightUpLeg
 									9-v:index
-										10-i:10
+										10-i:61
