@@ -34,7 +34,17 @@ namespace SR_CORE_NS {
 
     private:
         /// @property
+        float m_smoothing = 10.f;
+        /// @property
+        float m_twoBoneWeight = 1.f;
+        /// @property
+        uint8_t m_twoBoneIterations = 32;
+        /// @property
         bool m_twoBoneIKEnabled = true;
+        /// @property
+        bool m_handTipRotationFromTarget = false;
+        /// @property
+        bool m_footTipRotationFromTarget = true;
         /// @property
         EditorRetargetToolTestMode m_testMode = EditorRetargetToolTestMode::V3;
         /// @property

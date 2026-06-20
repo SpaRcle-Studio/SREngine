@@ -49,6 +49,11 @@ namespace SR_CORE_NS {
 
             SR_MATH_NS::Quaternion lastTipWorld = SR_MATH_NS::Quaternion::Identity();
             bool hasLastTipWorld = false;
+
+            /// When applying tip rotation from target, we need a stable offset between
+            /// "desired target rotation space" and actual tip bone space (axes differ between skeletons).
+            bool tipOffsetInitialized = false;
+            SR_MATH_NS::Quaternion tipRotationOffset = SR_MATH_NS::Quaternion::Identity();
         };
 
         static std::unordered_map<const EditorRetargetTool*,
@@ -263,6 +268,15 @@ namespace SR_CORE_NS {
 
             if (params.tipRotationFromTarget) {
                 SR_MATH_NS::Quaternion desiredTip = targetWorldRot.NormalizeSafe();
+
+                /// Calibrate a constant offset so the first application doesn't flip the bone.
+                /// This fixes the common "hand/foot rotates to the wrong side" issue caused by different bone axes.
+                if (!state.tipOffsetInitialized) {
+                    state.tipRotationOffset = (SR_MATH_NS::Quaternion::Inverse(desiredTip) * tipOriginal).NormalizeSafe();
+                    state.tipOffsetInitialized = true;
+                }
+
+                desiredTip = (desiredTip * state.tipRotationOffset).NormalizeSafe();
                 if (state.hasLastTipWorld && SR_MATH_NS::Quaternion::Dot(desiredTip, state.lastTipWorld) < 0.f) {
                     desiredTip = -desiredTip;
                 }
@@ -285,23 +299,26 @@ namespace SR_CORE_NS {
     }
 
     void EditorRetargetTool::Update(float_t dt) {
-        for (auto&& pTargetSkeleton : m_targetSkeletons) {
+        for (auto&& targetSkeleton : m_targetSkeletons) {
+            if (!targetSkeleton || !targetSkeleton.Get()->IsActive()) {
+                continue;
+            }
             switch (m_testMode) {
                 case EditorRetargetToolTestMode::V1:
-                    TestV1(pTargetSkeleton.Get().Get());
+                    TestV1(targetSkeleton.Get().Get());
                     break;
                 case EditorRetargetToolTestMode::V2:
-                    TestV2(pTargetSkeleton.Get().Get());
+                    TestV2(targetSkeleton.Get().Get());
                     break;
                 case EditorRetargetToolTestMode::V3:
-                    TestV3(pTargetSkeleton.Get().Get());
+                    TestV3(targetSkeleton.Get().Get());
                     break;
                 default:
                     break;
             }
 
             if (m_twoBoneIKEnabled) {
-                TwoBoneIK(pTargetSkeleton.Get().Get());
+                TwoBoneIK(targetSkeleton.Get().Get());
             }
         }
         Super::Update(dt);
@@ -332,16 +349,39 @@ namespace SR_CORE_NS {
             return;
         }
 
-        const float dt = SR_HTYPES_NS::Time::Instance().DeltaTime();
 
-        TwoBoneIKParams ikParams;
-        ikParams.weight = 1.f;
-        /// For retarget post-pass we want the limb to match the source immediately.
-        /// Smoothing here makes it look like IK "doesn't follow the target".
-        ikParams.smoothing = 0.f;
-        ikParams.preventTwist = true;
-        ikParams.maxTwistChangePerFrame = 75.f;
-        ikParams.tipRotationFromTarget = false;
+        const auto& sourceWorldSettings = pSourceRig->GetWorldSettings();
+        const auto& targetWorldSettings = pTargetRig->GetWorldSettings();
+
+        const SR_MATH_NS::Matrix4x4 srcSkelWorldMOffset = SR_MATH_NS::Matrix4x4(
+                sourceWorldSettings.translationOffset,
+                SR_MATH_NS::FVector3(),
+                sourceWorldSettings.scaleFactor
+        );
+        const SR_MATH_NS::Matrix4x4 tgtSkelWorldMOffset = SR_MATH_NS::Matrix4x4(
+                targetWorldSettings.translationOffset,
+                SR_MATH_NS::FVector3(),
+                targetWorldSettings.scaleFactor
+        );
+        //const SR_MATH_NS::Matrix4x4 srcSkelWorldMOffset = SR_MATH_NS::Matrix4x4::Identity();
+        //const SR_MATH_NS::Matrix4x4 tgtSkelWorldMOffset = SR_MATH_NS::Matrix4x4::Identity();
+
+        /*
+
+        const SR_MATH_NS::Matrix4x4 srcSkelWorldInv = srcSkelWorldM.Inverse();
+
+        const SR_MATH_NS::Quaternion srcSkelWorldR = SR_MATH_NS::Quaternion(sourceWorldSettings.rotationOffset.Radians()).NormalizeSafe();
+        const SR_MATH_NS::Quaternion tgtSkelWorldR = SR_MATH_NS::Quaternion(targetWorldSettings.rotationOffset.Radians()).NormalizeSafe();*/
+
+
+        /// Target is defined in SOURCE skeleton global space, then mapped into TARGET skeleton global space.
+        /// This keeps the goal consistent even if skeleton GameObjects are placed differently in the scene.
+        const SR_MATH_NS::Matrix4x4 srcSkelWorldM = pSourceTr->GetMatrix() * srcSkelWorldMOffset;
+        const SR_MATH_NS::Matrix4x4 tgtSkelWorldM = pTargetTr->GetMatrix() * tgtSkelWorldMOffset;
+        const SR_MATH_NS::Matrix4x4 srcSkelWorldInv = srcSkelWorldM.Inverse();
+
+        const SR_MATH_NS::Quaternion srcSkelWorldR = pSourceTr->GetGlobalRotation().NormalizeSafe();
+        const SR_MATH_NS::Quaternion tgtSkelWorldR = pTargetTr->GetGlobalRotation().NormalizeSafe();
 
         auto&& pSourceRawMesh = pSourceRig->GetSkeleton().GetRawMesh();
         auto&& pTargetRawMesh = pTargetRig->GetSkeleton().GetRawMesh();
@@ -417,7 +457,9 @@ namespace SR_CORE_NS {
             SR_UTILS_NS::StringAtom stateKey,
             SR_ANIMATIONS_NS::HumanoidBoneType rootType,
             SR_ANIMATIONS_NS::HumanoidBoneType midType,
-            SR_ANIMATIONS_NS::HumanoidBoneType tipType
+            SR_ANIMATIONS_NS::HumanoidBoneType tipType,
+            float dt,
+            const TwoBoneIKParams& ikParams
         ) {
             const SR_UTILS_NS::StringAtom rootKey = SR_UTILS_NS::EnumReflector::ToStringAtom(rootType);
             const SR_UTILS_NS::StringAtom midKey  = SR_UTILS_NS::EnumReflector::ToStringAtom(midType);
@@ -462,15 +504,6 @@ namespace SR_CORE_NS {
             const SR_MATH_NS::Quaternion srcTipWorldRot = pSrcTipT->GetGlobalRotation().NormalizeSafe();
 
             const SR_MATH_NS::FVector3 tgtRootWorldPos = pTgtRootT->GetGlobalTranslation();
-
-            /// Target is defined in SOURCE skeleton global space, then mapped into TARGET skeleton global space.
-            /// This keeps the goal consistent even if skeleton GameObjects are placed differently in the scene.
-            const SR_MATH_NS::Matrix4x4 srcSkelWorldM = pSourceTr->GetMatrix();
-            const SR_MATH_NS::Matrix4x4 tgtSkelWorldM = pTargetTr->GetMatrix();
-            const SR_MATH_NS::Matrix4x4 srcSkelWorldInv = srcSkelWorldM.Inverse();
-
-            const SR_MATH_NS::Quaternion srcSkelWorldR = pSourceTr->GetGlobalRotation().NormalizeSafe();
-            const SR_MATH_NS::Quaternion tgtSkelWorldR = pTargetTr->GetGlobalRotation().NormalizeSafe();
 
             const SR_MATH_NS::FVector3 srcTipSkelLocal = srcSkelWorldInv.TransformPoint(srcTipWorldPos).XYZ();
             const SR_MATH_NS::FVector3 desiredTipWorldPos = tgtSkelWorldM.TransformPoint(srcTipSkelLocal).XYZ();
@@ -518,13 +551,95 @@ namespace SR_CORE_NS {
             );
         };
 
-        /// Arms: UpperArm -> LowerArm -> Hand
-        solveHumanoidChain("IK_LeftArm",  SR_ANIMATIONS_NS::HumanoidBoneType::LeftUpperArm,  SR_ANIMATIONS_NS::HumanoidBoneType::LeftLowerArm,  SR_ANIMATIONS_NS::HumanoidBoneType::LeftHand);
-        solveHumanoidChain("IK_RightArm", SR_ANIMATIONS_NS::HumanoidBoneType::RightUpperArm, SR_ANIMATIONS_NS::HumanoidBoneType::RightLowerArm, SR_ANIMATIONS_NS::HumanoidBoneType::RightHand);
+        /// Spine IK (CCD) to improve torso alignment.
+        /// End-effector: Head position from source, mapped through skeleton world settings (including scale).
+        {
+            const SR_UTILS_NS::StringAtom srcHeadName = pickMappedBoneName(*pSourceRig, *pSourceRawMesh, srcMeshId, srcNodeDepth, "Head");
+            const SR_UTILS_NS::StringAtom tgtHeadName = pickMappedBoneName(*pTargetRig, *pTargetRawMesh, tgtMeshId, tgtNodeDepth, "Head");
 
-        /// Legs: UpperLeg -> LowerLeg -> Foot
-        solveHumanoidChain("IK_LeftLeg",  SR_ANIMATIONS_NS::HumanoidBoneType::LeftUpperLeg,  SR_ANIMATIONS_NS::HumanoidBoneType::LeftLowerLeg,  SR_ANIMATIONS_NS::HumanoidBoneType::LeftFoot);
-        solveHumanoidChain("IK_RightLeg", SR_ANIMATIONS_NS::HumanoidBoneType::RightUpperLeg, SR_ANIMATIONS_NS::HumanoidBoneType::RightLowerLeg, SR_ANIMATIONS_NS::HumanoidBoneType::RightFoot);
+            auto&& pSrcHead = pSourceSkeleton->GetBone(srcHeadName);
+            auto&& pTgtHead = pTargetSkeleton->GetBone(tgtHeadName);
+
+            if (pSrcHead && pTgtHead) {
+                auto&& pSrcHeadT = pSrcHead->GetGameObject()->GetTransform();
+                auto&& pTgtHeadT = pTgtHead->GetGameObject()->GetTransform();
+
+                if (pSrcHeadT && pTgtHeadT) {
+                    const SR_MATH_NS::FVector3 srcHeadWorldPos = pSrcHeadT->GetGlobalTranslation();
+                    const SR_MATH_NS::FVector3 srcHeadSkelLocal = srcSkelWorldInv.TransformPoint(srcHeadWorldPos).XYZ();
+                    const SR_MATH_NS::FVector3 desiredHeadWorldPos = tgtSkelWorldM.TransformPoint(srcHeadSkelLocal).XYZ();
+
+                    SR_UTILS_NS::Vector<SR_UTILS_NS::Transform*> spineChain;
+                    spineChain.reserve(4);
+
+                    auto pushIf = [&](SR_UTILS_NS::StringAtom humanoidKey) {
+                        const SR_UTILS_NS::StringAtom tgtName = pickMappedBoneName(*pTargetRig, *pTargetRawMesh, tgtMeshId, tgtNodeDepth, humanoidKey);
+                        if (auto&& pBone = pTargetSkeleton->GetBone(tgtName)) {
+                            if (auto&& pT = pBone->GetGameObject()->GetTransform()) {
+                                spineChain.emplace_back(const_cast<SR_UTILS_NS::Transform*>(pT.Get()));
+                            }
+                        }
+                    };
+
+                    /// From upper to lower will be handled by CCD loop; we store in order root->... (Spine is root-most in chain list).
+                    pushIf("Spine");
+                    pushIf("Chest");
+                    pushIf("UpperChest");
+                    pushIf("Neck");
+
+                    if (!spineChain.empty()) {
+                        auto ccdStep = [&](SR_UTILS_NS::Transform& joint, const SR_MATH_NS::FVector3& targetPos, float weight) {
+                            const SR_MATH_NS::FVector3 jointPos = joint.GetGlobalTranslation();
+                            const SR_MATH_NS::FVector3 endPos = pTgtHeadT->GetGlobalTranslation();
+                            SR_MATH_NS::FVector3 toEnd = endPos - jointPos;
+                            SR_MATH_NS::FVector3 toTarget = targetPos - jointPos;
+
+                            const float a = toEnd.Magnitude();
+                            const float b = toTarget.Magnitude();
+                            if (a < 0.0001f || b < 0.0001f) {
+                                return;
+                            }
+
+                            toEnd /= a;
+                            toTarget /= b;
+
+                            SR_MATH_NS::Quaternion delta = SR_MATH_NS::Quaternion::FromToRotation(toEnd, toTarget).NormalizeSafe();
+                            const SR_MATH_NS::Quaternion current = joint.GetGlobalRotation().NormalizeSafe();
+                            const SR_MATH_NS::Quaternion next = (delta * current).NormalizeSafe();
+                            joint.SetGlobalRotation(SR_MATH_NS::Quaternion::Slerp(current, next, weight).NormalizeSafe());
+                        };
+
+                        const float weight = 0.35f; /// conservative to not break the current good retarget+limb IK
+                        for (uint32_t iter = 0; iter < 6; ++iter) {
+                            for (int32_t i = static_cast<int32_t>(spineChain.size()) - 1; i >= 0; --i) {
+                                ccdStep(*spineChain[i], desiredHeadWorldPos, weight);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        TwoBoneIKParams ikParams;
+        ikParams.weight = m_twoBoneWeight;
+        /// For retarget post-pass we want the limb to match the source immediately.
+        /// Smoothing here makes it look like IK "doesn't follow the target".
+        ikParams.smoothing = m_smoothing;
+        ikParams.preventTwist = true;
+        ikParams.maxTwistChangePerFrame = 75.f;
+
+        for (uint8_t iter = 0; iter < m_twoBoneIterations; ++iter) {
+            float dt = 1.f / static_cast<float>(m_twoBoneIterations);
+            /// Arms: UpperArm -> LowerArm -> Hand
+            ikParams.tipRotationFromTarget = m_handTipRotationFromTarget;
+            solveHumanoidChain("IK_LeftArm",  SR_ANIMATIONS_NS::HumanoidBoneType::LeftUpperArm,  SR_ANIMATIONS_NS::HumanoidBoneType::LeftLowerArm,  SR_ANIMATIONS_NS::HumanoidBoneType::LeftHand, dt, ikParams);
+            solveHumanoidChain("IK_RightArm", SR_ANIMATIONS_NS::HumanoidBoneType::RightUpperArm, SR_ANIMATIONS_NS::HumanoidBoneType::RightLowerArm, SR_ANIMATIONS_NS::HumanoidBoneType::RightHand, dt, ikParams);
+
+            /// Legs: UpperLeg -> LowerLeg -> Foot
+            ikParams.tipRotationFromTarget = m_footTipRotationFromTarget;
+            solveHumanoidChain("IK_LeftLeg",  SR_ANIMATIONS_NS::HumanoidBoneType::LeftUpperLeg,  SR_ANIMATIONS_NS::HumanoidBoneType::LeftLowerLeg,  SR_ANIMATIONS_NS::HumanoidBoneType::LeftFoot, dt, ikParams);
+            solveHumanoidChain("IK_RightLeg", SR_ANIMATIONS_NS::HumanoidBoneType::RightUpperLeg, SR_ANIMATIONS_NS::HumanoidBoneType::RightLowerLeg, SR_ANIMATIONS_NS::HumanoidBoneType::RightFoot, dt, ikParams);
+        }
     }
 
     void EditorRetargetTool::TestV3(SR_ANIMATIONS_NS::Skeleton* pTargetSkeleton) {
@@ -565,8 +680,11 @@ namespace SR_CORE_NS {
             return;
         }
 
-        const SR_MATH_NS::Quaternion sourceRigSkeletonRot = SR_MATH_NS::Quaternion(pSourceRig->GetSkeletonRotation().Radians()).NormalizeSafe();
-        const SR_MATH_NS::Quaternion targetRigSkeletonRot = SR_MATH_NS::Quaternion(pTargetRig->GetSkeletonRotation().Radians()).NormalizeSafe();
+        auto&& sourceSkeletonWorldSettings = pSourceRig->GetWorldSettings();
+        auto&& targetSkeletonWorldSettings = pTargetRig->GetWorldSettings();
+
+        const SR_MATH_NS::Quaternion sourceRigSkeletonRot = SR_MATH_NS::Quaternion(sourceSkeletonWorldSettings.rotationOffset.Radians()).NormalizeSafe();
+        const SR_MATH_NS::Quaternion targetRigSkeletonRot = SR_MATH_NS::Quaternion(targetSkeletonWorldSettings.rotationOffset.Radians()).NormalizeSafe();
 
         auto buildRefCSRot = [](
             const SR_ANIMATIONS_NS::SkeletonRig& rig,
@@ -788,8 +906,11 @@ namespace SR_CORE_NS {
             return;
         }
 
-        const SR_MATH_NS::Quaternion sourceRigSkeletonRot = SR_MATH_NS::Quaternion(pSourceRig->GetSkeletonRotation().Radians()).NormalizeSafe();
-        const SR_MATH_NS::Quaternion targetRigSkeletonRot = SR_MATH_NS::Quaternion(pTargetRig->GetSkeletonRotation().Radians()).NormalizeSafe();
+        auto&& sourceSkeletonWorldSettings = pSourceRig->GetWorldSettings();
+        auto&& targetSkeletonWorldSettings = pTargetRig->GetWorldSettings();
+
+        const SR_MATH_NS::Quaternion sourceRigSkeletonRot = SR_MATH_NS::Quaternion(sourceSkeletonWorldSettings.rotationOffset.Radians()).NormalizeSafe();
+        const SR_MATH_NS::Quaternion targetRigSkeletonRot = SR_MATH_NS::Quaternion(targetSkeletonWorldSettings.rotationOffset.Radians()).NormalizeSafe();
 
         /// Build reference component-space rotations (bind/rest or overridden by rig retarget pose),
         /// including rig-level skeleton transform (GetSkeletonRotation).
@@ -916,8 +1037,9 @@ namespace SR_CORE_NS {
         /// recalculate global transforms
         for (auto&& node : scenePool) {
             if (!node.parent.has_value()) {
+                auto&& skeletonWorldSettings = pTargetRig->GetWorldSettings();
                 auto&& localMatrix = SR_MATH_NS::Matrix4x4(node.localTransform.translation, node.localTransform.rotation, node.localTransform.scale);
-                auto&& skeletonMatrix = SR_MATH_NS::Matrix4x4(pTargetRig->GetSkeletonTranslation(), pTargetRig->GetSkeletonRotation(), pTargetRig->GetSkeletonScale());
+                auto&& skeletonMatrix = SR_MATH_NS::Matrix4x4(skeletonWorldSettings.translationOffset, skeletonWorldSettings.rotationOffset, SR_MATH_NS::FVector3::One());
                 auto&& globalMatrix = skeletonMatrix * localMatrix;
                 globalMatrix.Decompose(node.globalTransform.translation, node.globalTransform.rotation, node.globalTransform.scale);
             }
