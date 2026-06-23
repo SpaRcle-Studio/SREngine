@@ -38,7 +38,16 @@ void vertex()
                  vec2( 0.5,  0.5)
              };
 
-         VERTEX = POSITION1 + right * quad[VERTEX_INDEX].x * CUSTOM0 + up * quad[VERTEX_INDEX].y * CUSTOM0;
+         float angle = CUSTOM1.z * 0.0174532925;
+         float c = cos(angle);
+         float s = sin(angle);
+
+         vec2 p = quad[VERTEX_INDEX];
+         vec2 rotated;
+         rotated.x = p.x * c - p.y * s;
+         rotated.y = p.x * s + p.y * c;
+
+         VERTEX = POSITION1 + right * rotated.x * CUSTOM0 + up * rotated.y * CUSTOM0;
          VERTEX = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
     }
 
