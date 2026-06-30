@@ -784,6 +784,7 @@ namespace SR_CORE_GUI_NS {
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Particle Emitter")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pGameObject = pScene->InstanceGameObject("Particle Emitter"_atom);
+                    pGameObject->SetLayer("Particles");
                     auto&& pEmitter = pGameObject->AddComponent<SR_GRAPH_NS::ParticleEmitter>();
                     InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
                 }

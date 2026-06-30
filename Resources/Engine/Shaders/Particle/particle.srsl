@@ -12,55 +12,53 @@ DepthTest true;
 
 void fragment() {
     COLOR = COLOR0;
+    COLOR_INDEX_1 = vec4(0.0);
+    COLOR_INDEX_2 = vec4(0.0);
+    COLOR_INDEX_3 = vec4(0.0);
 }
 
-void vertex()
-{
-    vec3 VERTEX;
-
+void vertex() {
     if (ISQuad == 1) {
         vec3 right = vec3(
-                 VIEW_NO_TRANSLATE_MATRIX[0][0],
-                 VIEW_NO_TRANSLATE_MATRIX[1][0],
-                 VIEW_NO_TRANSLATE_MATRIX[2][0]);
+            VIEW_NO_TRANSLATE_MATRIX[0][0],
+            VIEW_NO_TRANSLATE_MATRIX[1][0],
+            VIEW_NO_TRANSLATE_MATRIX[2][0]
+        );
 
-         vec3 up = vec3(
-                 VIEW_NO_TRANSLATE_MATRIX[0][1],
-                 VIEW_NO_TRANSLATE_MATRIX[1][1],
-                 VIEW_NO_TRANSLATE_MATRIX[2][1]);
+        vec3 up = vec3(
+            VIEW_NO_TRANSLATE_MATRIX[0][1],
+            VIEW_NO_TRANSLATE_MATRIX[1][1],
+            VIEW_NO_TRANSLATE_MATRIX[2][1]
+        );
 
-         vec2 quad[6] = {
-                 vec2(-0.5, -0.5),
-                 vec2( 0.5,  0.5),
-                 vec2( 0.5, -0.5),
-                 vec2(-0.5, -0.5),
-                 vec2(-0.5,  0.5),
-                 vec2( 0.5,  0.5)
-             };
+        vec2 quad[6] = {
+            vec2(-0.5, -0.5),
+            vec2( 0.5,  0.5),
+            vec2( 0.5, -0.5),
+            vec2(-0.5, -0.5),
+            vec2(-0.5,  0.5),
+            vec2( 0.5,  0.5)
+        };
 
-         float angle = CUSTOM1.z * 0.0174532925;
-         float c = cos(angle);
-         float s = sin(angle);
+        float angle = CUSTOM1.z * 0.0174532925;
+        float c = cos(angle);
+        float s = sin(angle);
 
-         vec2 p = quad[VERTEX_INDEX];
-         vec2 rotated;
-         rotated.x = p.x * c - p.y * s;
-         rotated.y = p.x * s + p.y * c;
+        vec2 p = quad[VERTEX_INDEX];
+        vec2 rotated;
+        rotated.x = p.x * c - p.y * s;
+        rotated.y = p.x * s + p.y * c;
 
-         VERTEX = POSITION1 + right * rotated.x * CUSTOM0 + up * rotated.y * CUSTOM0;
-         VERTEX = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+        VERTEX = POSITION1 + right * rotated.x * CUSTOM0 + up * rotated.y * CUSTOM0;
+        VERTEX = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+    }
+    else {
+        VERTEX = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
     }
 
     #ifdef SR_DEFINE_CASCADED_SHADOW_MAP_PASS
-    #include <Engine/Shaders/Common/apply-cascades-transform.inl.srsl>
+        #include <Engine/Shaders/Common/apply-cascades-transform.inl.srsl>
     #else
         OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * vec4(VERTEX, 1.0);
     #endif
-    //else {
-      //  VERTEX = POSITION; // mesh vertex
-
-      //  VERTEX = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
-
-      //  OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * vec4(VERTEX, 1.0);
-    //}
 }

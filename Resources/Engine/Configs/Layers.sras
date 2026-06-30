@@ -91,6 +91,14 @@ use tabs: true
 				4-k:i
 					5-o:d
 						6-v:name
+							7-s:Particles
+						6-v:mainRenderer
+							7-b:true
+						6-v:colorBuffer
+							7-b:true
+				4-k:i
+					5-o:d
+						6-v:name
 							7-s:Transparent
 						6-v:mainRenderer
 							7-b:true
