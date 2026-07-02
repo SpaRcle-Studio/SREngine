@@ -11,6 +11,13 @@ use tabs: true
 				4-v:meshPath
 					5-s:Samples/Animations/Grabbing Ammo.fbx
 			3-o:worldSettings
+				4-o:scaleFactor
+					5-v:x
+						6-f:2
+					5-v:y
+						6-f:2
+					5-v:z
+						6-f:2
 			3-o:autoRigRules
 			3-a:mapping
 				4-k:item

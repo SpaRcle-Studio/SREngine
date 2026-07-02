@@ -11,6 +11,13 @@ use tabs: true
 				4-v:meshPath
 					5-s:Samples/Tsumugi/Tsumugi.fbx
 			3-o:worldSettings
+				4-o:scaleFactor
+					5-v:x
+						6-f:0.024
+					5-v:y
+						6-f:0.024
+					5-v:z
+						6-f:0.024
 			3-o:autoRigRules
 				4-a:ignoreBonesContains
 					5-k:i

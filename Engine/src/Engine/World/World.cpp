@@ -89,7 +89,7 @@ namespace SR_CORE_NS {
         RegisterSceneObject(nodesPool.front().StaticCast<SR_UTILS_NS::SceneObject>());
 
         if (!skinnedMeshes.empty()) {
-            if (auto&& pSkeleton = Importers::ImportSkeletonFromRawMesh(pRawMesh)) {
+            if (auto&& pSkeleton = SR_ANIMATIONS_NS::Skeleton::ImportSkeletonFromRawMesh(*pRawMesh)) {
                 nodesPool.front()->AddComponent(pSkeleton.StaticCast<SR_UTILS_NS::Component>());
                 for (auto &&pSkinnedMesh: skinnedMeshes) {
                     pSkinnedMesh->GetSkeletonRef().SetEntityId(pSkeleton->GetEntityId());

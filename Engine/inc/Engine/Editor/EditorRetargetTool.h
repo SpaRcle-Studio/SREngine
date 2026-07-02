@@ -8,29 +8,22 @@
 #include <Engine/stdInclude.h>
 
 #include <Graphics/Animations/Skeleton.h>
+#include <Graphics/Animations/Retarget/RetargetReferencePoseDeltaAlgorithm.h>
 
 #include <Utils/ECS/Component.h>
 #include <Utils/ECS/EntityRef.h>
 
 namespace SR_CORE_NS {
-    SR_ENUM_NS_CLASS_T(EditorRetargetToolTestMode, uint8_t,
-        None,
-        V1,
-        V2,
-        V3
-    );
-
     class EditorRetargetTool : public SR_UTILS_NS::Component {
         SR_CLASS()
         using Super = SR_UTILS_NS::Component;
     public:
         void Update(float_t dt) override;
 
-        void TestV1(SR_ANIMATIONS_NS::Skeleton* pSkeleton);
-        void TestV2(SR_ANIMATIONS_NS::Skeleton* pSkeleton);
-        void TestV3(SR_ANIMATIONS_NS::Skeleton* pSkeleton);
-
         void TwoBoneIK(SR_ANIMATIONS_NS::Skeleton* pSkeleton);
+
+    private:
+        SR_ANIMATIONS_NS::RetargetReferencePoseDeltaAlgorithmState::RotationFollowStateMap m_retargetState;
 
     private:
         /// @property @group(Offsets)
@@ -62,8 +55,6 @@ namespace SR_CORE_NS {
         bool m_handTipRotationFromTarget = false;
         /// @property
         bool m_footTipRotationFromTarget = true;
-        /// @property
-        EditorRetargetToolTestMode m_testMode = EditorRetargetToolTestMode::V3;
         /// @property
         SR_UTILS_NS::EntityRef<SR_ANIMATIONS_NS::Skeleton> m_sourceSkeleton;
         /// @property
