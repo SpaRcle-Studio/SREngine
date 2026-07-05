@@ -134,10 +134,14 @@ namespace SR_CORE_GUI_NS {
 
         m_windowPageWidgets.clear();
         for (auto&& [name, pWidget] : GetWidgets()) {
+            if (name.empty() || !pWidget || pWidget->GetName().empty()) {
+                SRHalt("EditorGUI::Init() : invalid widget name or pointer!");
+                continue;
+            }
             m_windowPageWidgets.emplace_back(name, pWidget->GetName());
         }
         std::ranges::stable_sort(m_windowPageWidgets, [](const auto& lhs, const auto& rhs) {
-            return lhs.second < rhs.second;
+            return lhs.second.ToStringView() < rhs.second.ToStringView();
         });
 
         m_isInit = true;

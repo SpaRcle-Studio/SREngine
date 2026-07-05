@@ -542,14 +542,20 @@ namespace SR_CORE_NS::GUI {
             }
 
             if (SR_GTYPES_NS::Texture::GetMetaStatic()->HasExtension(extension)) {
-                if (auto&& pTextureInspector = GetManager()->GetWidget<TextureInspector>()) {
-                    pTextureInspector->Inspect(path);
+                if (auto&& pInspector = GetManager()->GetWidget<TextureInspector>()) {
+                    pInspector->Inspect(path);
+                }
+                return;
+            }
+            else if (SR_ANIMATIONS_NS::AnimationGraphAsset::GetMetaStatic()->HasExtension(extension)) {
+                if (auto&& pInspector = GetManager()->GetWidget<AnimatorEditor>()) {
+                    pInspector->Inspect(path);
                 }
                 return;
             }
             else if (supportedAssets.count(extension) != 0) {
-                if (auto&& pAssetInspector = GetManager()->GetWidget<AssetInspector>()) {
-                    pAssetInspector->Inspect(path);
+                if (auto&& pInspector = GetManager()->GetWidget<AssetInspector>()) {
+                    pInspector->Inspect(path);
                 }
                 return;
             }
