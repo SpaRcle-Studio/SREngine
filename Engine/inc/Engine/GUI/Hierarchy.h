@@ -5,12 +5,14 @@
 #ifndef SR_ENGINE_HIERARCHY_H
 #define SR_ENGINE_HIERARCHY_H
 
+#include <Engine/stdInclude.h>
+
+#include <Graphics/GUI/Widget.h>
+
 #include <Utils/Types/SafePointer.h>
 #include <Utils/World/Scene.h>
 #include <Utils/Input/InputEvents.h>
 #include <Utils/ECS/GameObject.h>
-
-#include <Graphics/GUI/Widget.h>
 
 namespace SR_CORE_NS {
     class Engine;
@@ -18,6 +20,7 @@ namespace SR_CORE_NS {
 
 namespace SR_CORE_GUI_NS {
     class Hierarchy : public SR_GRAPH_NS::GUI::Widget {
+        SR_CLASS()
         using Super = SR_GRAPH_NS::GUI::Widget;
     public:
         Hierarchy();

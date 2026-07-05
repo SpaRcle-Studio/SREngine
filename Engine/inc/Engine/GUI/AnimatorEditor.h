@@ -19,6 +19,7 @@ namespace SR_ANIMATIONS_NS {
 
 namespace SR_CORE_GUI_NS {
     class AnimatorEditor : public SR_GRAPH_GUI_NS::NodeWidget {
+        SR_CLASS()
         using Super = SR_GRAPH_GUI_NS::NodeWidget;
         using AnimatorPtr = SR_HTYPES_NS::SharedPtr<SR_ANIMATIONS_NS::Animator>;
         using GraphPtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::Animations::AnimationGraph>;

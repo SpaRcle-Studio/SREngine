@@ -5,14 +5,14 @@
 #ifndef SR_ENGINE_EDITOR_GUI_H
 #define SR_ENGINE_EDITOR_GUI_H
 
-#include <Utils/Common/Enumerations.h>
-#include <Utils/Types/SafePointer.h>
-#include <Utils/ECS/SceneObject.h>
+#include <Engine/Settings/EditorSettings.h>
 
 #include <Graphics/GUI/WidgetManager.h>
 #include <Graphics/Types/Texture.h>
 
-#include <Engine/Settings/EditorSettings.h>
+#include <Utils/Common/Enumerations.h>
+#include <Utils/Types/SafePointer.h>
+#include <Utils/ECS/SceneObject.h>
 
 namespace SR_WORLD_NS {
     class Scene;
@@ -32,13 +32,10 @@ namespace SR_CORE_NS {
 }
 
 namespace SR_CORE_GUI_NS {
-    class VisualScriptEditor;
     class Inspector;
-    class WorldEdit;
 
     class EditorGUI : public SR_GRAPH_GUI_NS::WidgetManager {
         using Super = SR_GRAPH_GUI_NS::WidgetManager;
-        using Widgets = std::unordered_map<size_t, SR_GRAPH_NS::GUI::Widget*>;
         using Icons = std::map<EditorIcon, SR_GTYPES_NS::Texture::Ptr>;
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext>;
         using WindowPtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::Window>;
@@ -53,56 +50,6 @@ namespace SR_CORE_GUI_NS {
 
     public:
         void Enable(bool value);
-
-        template<typename T> SR_DEPRECATED void AddWindow(T* widget) {
-            m_widgets.insert(std::make_pair(typeid(T).hash_code(), widget));
-        }
-
-        template<typename T> T& AddWidget(T* pWidget) {
-            if (m_widgets.count(typeid(T).hash_code()) == 1) {
-                SRHalt("Widget already was added!");
-                static T empty;
-                return empty;
-            }
-
-            m_widgets.insert(std::make_pair(typeid(T).hash_code(), pWidget));
-            return *pWidget;
-        }
-
-        template<typename T> SR_DEPRECATED T* GetWindow() {
-            return GetWidget<T>();
-        }
-
-        SR_NODISCARD SR_GRAPH_GUI_NS::Widget* GetWidget(const SR_UTILS_NS::StringAtom& name) const;
-
-        template<typename T> T* GetWidget() {
-            if (auto&& pIt = m_widgets.find(typeid(T).hash_code()); pIt != m_widgets.end()) {
-                if (auto&& pWidget = dynamic_cast<T*>(pIt->second))
-                    return pWidget;
-            }
-
-            SRHalt("EditorGUI::GetWidget() : widget not found!\n\tName: " + std::string(typeid(T).name()));
-
-            return nullptr;
-        }
-
-        template<typename T> T* TryGetWidget() {
-            if (auto&& pIt = m_widgets.find(typeid(T).hash_code()); pIt != m_widgets.end()) {
-                if (auto&& pWidget = dynamic_cast<T*>(pIt->second))
-                    return pWidget;
-            }
-            return nullptr;
-        }
-
-        template<typename T> T* OpenWidget() {
-            if (auto&& pWidget = TryGetWidget<T>()) {
-                pWidget->Open();
-                return pWidget;
-            }
-            return nullptr;
-        }
-
-        void CloseAllWidgets();
 
         SR_NODISCARD bool Enabled() const { return m_enabled; }
         SR_NODISCARD bool IsDockingEnabled() const { return m_useDocking; }
@@ -121,8 +68,8 @@ namespace SR_CORE_GUI_NS {
 
         void DrawEditorInstanceMenu();
 
-        bool Init();
-        void DeInit();
+        bool Init() override;
+        void DeInit() override;
 
         void CacheScenePath(const SR_UTILS_NS::Path& scenePath);
         bool LoadSceneFromCachedPath();
@@ -149,6 +96,7 @@ namespace SR_CORE_GUI_NS {
         void DrawWindowPage();
 
     private:
+        SR_UTILS_NS::Vector<std::pair<SR_UTILS_NS::StringAtom, SR_UTILS_NS::StringAtom>> m_windowPageWidgets;
         EditorSettings::Ptr m_pSettings;
 
         SR_UTILS_NS::Path m_cachedScenePath;
@@ -156,7 +104,6 @@ namespace SR_CORE_GUI_NS {
         RenderContextPtr m_context;
         EnginePtr m_engine;
 
-        Widgets m_widgets;
         Icons m_icons;
 
         Click m_click = Click::None;

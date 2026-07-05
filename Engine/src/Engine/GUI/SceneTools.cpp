@@ -20,6 +20,8 @@
 
 #include <Enum/GizmoOperation.hpp>
 
+#include <Codegen/SceneTools.generated.hpp>
+
 namespace SR_CORE_GUI_NS {
     void SceneTools::Init() {
         m_gizmoOperationFlag = SR_GRAPH_UI_NS::GizmoOperation::TranslateAll;

@@ -5,6 +5,8 @@
 #ifndef SR_ENGINE_SCENE_VIEWER_H
 #define SR_ENGINE_SCENE_VIEWER_H
 
+#include <Engine/stdInclude.h>
+
 #include <Graphics/GUI/Widget.h>
 #include <Graphics/Pass/ColorBufferPass.h>
 
@@ -26,24 +28,24 @@ namespace SR_CORE_NS {
 
 namespace SR_CORE_GUI_NS {
     class Hierarchy;
-    class Guizmo;
     class SceneTools;
 
     class SR_CORE_DLL_API SceneViewer : public SR_GRAPH_GUI_NS::Widget {
+        SR_CLASS()
         using Super = SR_GRAPH_GUI_NS::Widget;
         using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;
         using WindowPtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::Window>;
         using EnginePtr = SR_HTYPES_NS::SharedPtr<Engine>;
         SR_INLINE_STATIC const std::string CAMERA_XML = "Editor/Camera.xml";
     public:
-        SceneViewer() = default;
-        SceneViewer(const SR_HTYPES_NS::SharedPtr<Engine>& pEngine, Hierarchy* hierarchy);
+        SceneViewer();
         ~SceneViewer() override;
 
     public:
         void SetScene(const ScenePtr& scene) override;
         void Enable(bool value);
         void FixedUpdate() override;
+        void Init() override;
 
         void OnMouseDown(const SR_UTILS_NS::MouseInputData* data) override;
         void OnMouseUp(const SR_UTILS_NS::MouseInputData* data) override;
@@ -56,8 +58,6 @@ namespace SR_CORE_GUI_NS {
         SR_NODISCARD GameObjectPtr GetGizmo() const { return m_gizmo; }
 
     private:
-        SR_NODISCARD SR_CORE_GUI_NS::SceneTools* GetSceneTools() const;
-
         void SelectMesh(SR_GTYPES_NS::IRenderComponent* pMesh);
 
         void LoadCameraSettings();

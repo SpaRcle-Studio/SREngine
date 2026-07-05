@@ -1,8 +1,0 @@
-//
-// Created by Monika on 15.04.2023.
-//
-
-#ifndef SR_ENGINE_DRAGNDROPHELPER_H
-#define SR_ENGINE_DRAGNDROPHELPER_H
-
-#endif //SR_ENGINE_DRAGNDROPHELPER_H

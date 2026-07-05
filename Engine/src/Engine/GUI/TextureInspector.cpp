@@ -11,6 +11,8 @@
 #include <Utils/Serialization/SRASerialization.h>
 #include <Utils/Reflection/Value.h>
 
+#include <Codegen/TextureInspector.generated.hpp>
+
 namespace SR_CORE_GUI_NS {
     TextureInspector::TextureInspector()
         : SR_GRAPH_GUI_NS::Widget("Texture inspector")

@@ -8,7 +8,7 @@
 #include <Engine/GUI/Hierarchy.h>
 #include <Engine/GUI/EditorCamera.h>
 #include <Engine/GUI/EditorGizmo.h>
-#include <Engine/GUI/Guizmo.h>
+#include <Engine/GUI/EditorGUI.h>
 
 #include <Graphics/Material/UniqueMaterial.h>
 #include <Graphics/Types/Camera.h>
@@ -33,21 +33,15 @@
 #include <Utils/Common/StoreUtils.h>
 #include <Utils/Common/Features.h>
 #include <Utils/Common/StringAtomLiterals.h>
-#include <Utils/ECS/Transform3D.h>
 #include <Utils/World/SceneLogic.h>
 #include <Utils/Serialization/SerializationFlags.h>
 
+#include <Codegen/SceneViewer.generated.hpp>
+
 namespace SR_CORE_GUI_NS {
-    SceneViewer::SceneViewer(const EnginePtr& pEngine, Hierarchy* hierarchy)
+    SceneViewer::SceneViewer()
         : Widget("Scene")
-        , m_engine(pEngine)
-        , m_window(pEngine->GetMainWindow())
-        , m_hierarchy(hierarchy)
-        , m_id(SR_ID_INVALID)
-    {
-        LoadCameraSettings();
-        AddSubWidget(new SceneTools());
-    }
+    { }
 
     SceneViewer::~SceneViewer() {
         Enable(false);
@@ -146,7 +140,7 @@ namespace SR_CORE_GUI_NS {
 
             if (!UpdateViewSize() && pCamera && m_id != SR_ID_INVALID && pCamera->IsActive())
             {
-                if (GetSceneTools()->GetViewMode() == EditorSceneViewMode::WindowSize) {
+                if (GetSubWidget<SceneTools>()->GetViewMode() == EditorSceneViewMode::WindowSize) {
                     DrawTexture(m_windowSize, m_window->GetSize().Cast<int32_t>(), m_id, true);
                 }
                 else {
@@ -207,9 +201,9 @@ namespace SR_CORE_GUI_NS {
             m_colorRequest = nullptr;
         }
 
-        const bool attachToCamera = GetSceneTools()->IsNeedAttachToCamera();
+        const bool attachToCamera = GetSubWidget<SceneTools>()->IsNeedAttachToCamera();
 
-        const float_t velocityFactor = GetSceneTools()->GetCameraVelocityFactor();
+        const float_t velocityFactor = GetSubWidget<SceneTools>()->GetCameraVelocityFactor();
         const bool isDisabled = !IsOpen() || (!IsHovered() && !m_updateNonHoveredSceneViewer);
 
         auto&& pFocusedWindow = m_engine->GetFocusedWindow();
@@ -220,7 +214,7 @@ namespace SR_CORE_GUI_NS {
             pCamera->SetViewportRect(viewportRect - SR_MATH_NS::FRect(windowPos, SR_MATH_NS::FVector2::Zero()));
             auto&& pRenderScene = pCamera->GetRenderScene();
             if (attachToCamera && pRenderScene) {
-                if (auto&& pGameCamera = pRenderScene->GetCameraByIndex(GetSceneTools()->GetAttachCameraIndex())) {
+                if (auto&& pGameCamera = pRenderScene->GetCameraByIndex(GetSubWidget<SceneTools>()->GetAttachCameraIndex())) {
                     m_camera->GetTransform()->SetGlobalTranslation(pGameCamera->GetTransform()->GetGlobalTranslation());
                     m_camera->GetTransform()->SetGlobalRotation(pGameCamera->GetTransform()->GetGlobalRotation());
                 }
@@ -419,7 +413,7 @@ namespace SR_CORE_GUI_NS {
             return false;
         }
 
-        EditorSceneViewMode viewMode = GetSceneTools()->GetViewMode();
+        EditorSceneViewMode viewMode = GetSubWidget<SceneTools>()->GetViewMode();
 
         if (viewMode == EditorSceneViewMode::WindowSize) {
             if (pCamera->GetSize() == GetContext()->GetWindowSize()) {
@@ -486,8 +480,8 @@ namespace SR_CORE_GUI_NS {
             }
 
             auto&& pComponent = SR_UTILS_NS::Factory::Instance().Create<EditorGizmo>();
-            pComponent->SetOperation(GetSceneTools()->GetGizmoOperation());
-            pComponent->SetMode(GetSceneTools()->GetGizmoMode());
+            pComponent->SetOperation(GetSubWidget<SceneTools>()->GetGizmoOperation());
+            pComponent->SetMode(GetSubWidget<SceneTools>()->GetGizmoMode());
             pComponent->SetHierarchy(m_hierarchy);
             pGizmo->AddComponent(pComponent.StaticCast<SR_UTILS_NS::Component>());
         }
@@ -499,13 +493,14 @@ namespace SR_CORE_GUI_NS {
         m_gizmo = pGizmo;
     }
 
-    SR_CORE_GUI_NS::SceneTools* SceneViewer::GetSceneTools() const {
-        for (auto&& pSubWidget : m_subWidgets) {
-            if (auto&& pSceneTools = dynamic_cast<SceneTools*>(pSubWidget)) {
-                return pSceneTools;
-            }
-        }
+    void SceneViewer::Init() {
+        m_engine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+        m_window = m_engine->GetMainWindow();
+        m_hierarchy = dynamic_cast<EditorGUI*>(GetManager())->GetWidget<Hierarchy>().Get();
 
-        return nullptr;
+        LoadCameraSettings();
+        AddSubWidget(SRNew<SceneTools>());
+
+        Super::Init();
     }
 }

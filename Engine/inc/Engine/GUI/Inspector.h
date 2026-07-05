@@ -23,6 +23,7 @@ namespace SR_CORE_GUI_NS {
     class Hierarchy;
 
     class Inspector : public SR_GRAPH_GUI_NS::Widget {
+        SR_CLASS()
         struct ComponentCategory {
             struct ComponentInfo {
                 SR_UTILS_NS::StringAtom name;
@@ -33,17 +34,15 @@ namespace SR_CORE_GUI_NS {
             std::map<SR_UTILS_NS::StringAtom, ComponentCategory> categories;
         };
     public:
-        Inspector() = default;
-        explicit Inspector(Hierarchy* hierarchy);
-        ~Inspector() override = default;
+        Inspector();
 
-    public:
         void Update(float_t dt) override;
 
         void SetScene(const SR_WORLD_NS::Scene::Ptr& scene) override;
 
     protected:
         void Draw() override;
+        void Init() override;
 
         void InspectGameObject();
         void InspectScene();

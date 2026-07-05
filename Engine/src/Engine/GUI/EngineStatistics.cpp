@@ -25,6 +25,8 @@
 #include <Utils/DebugDraw.h>
 #include <Utils/CommandManager/CmdManager.h>
 
+#include <Codegen/EngineStatistics.generated.hpp>
+
 namespace SR_CORE_GUI_NS {
     EngineStatistics::EngineStatistics()
         : SR_GRAPH_GUI_NS::Widget("Engine statistics")

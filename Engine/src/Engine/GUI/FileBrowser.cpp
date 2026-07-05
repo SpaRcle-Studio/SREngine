@@ -32,10 +32,14 @@
 
 #include <Enum/TreeNodeFlags.hpp>
 
+#include <Codegen/FileBrowser.generated.hpp>
+
 namespace SR_CORE_NS::GUI {
     FileBrowser::FileBrowser()
         : Widget("Assets")
-    { }
+    {
+        SetFolder(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
+    }
 
     FileBrowser::~FileBrowser() {
         FreeTextures();

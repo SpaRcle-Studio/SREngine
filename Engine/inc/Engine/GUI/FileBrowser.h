@@ -5,9 +5,11 @@
 #ifndef SR_ENGINE_FILEBROWSER_H
 #define SR_ENGINE_FILEBROWSER_H
 
-#include <Utils/FileSystem/Path.h>
+#include <Engine/stdInclude.h>
 
 #include <Graphics/GUI/Widget.h>
+
+#include <Utils/FileSystem/Path.h>
 
 namespace SR_CORE_NS::GUI {
     struct FBElement {
@@ -27,6 +29,7 @@ namespace SR_CORE_NS::GUI {
     };
 
     class FileBrowser : public SR_GRAPH_GUI_NS::Widget {
+        SR_CLASS()
         using Hash = std::size_t;
         using Super = SR_GRAPH_GUI_NS::Widget;
         using CallbackFn = std::function<void(const SR_UTILS_NS::Path& path)>;

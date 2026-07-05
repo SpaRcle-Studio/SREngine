@@ -17,7 +17,9 @@ namespace SR_GTYPES_NS {
 }
 
 namespace SR_CORE_GUI_NS {
+    /// @inspector(TextureInspector)
     class TextureInspector : public SR_GRAPH_GUI_NS::Widget {
+        SR_CLASS()
         using Super = SR_GRAPH_GUI_NS::Widget;
     public:
         TextureInspector();

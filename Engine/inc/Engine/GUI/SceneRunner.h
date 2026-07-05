@@ -18,7 +18,9 @@ namespace SR_CORE_NS {
 namespace SR_CORE_GUI_NS {
     class EditorGUI;
 
+    /// @hidden
     class SceneRunner : public SR_GRAPH_NS::GUI::Widget {
+        SR_CLASS()
     public:
         SceneRunner();
         ~SceneRunner() override = default;

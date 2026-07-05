@@ -14,6 +14,8 @@
 #include <Utils/Common/CLIManager.h>
 #include <Utils/Common/StoreUtils.h>
 
+#include <Codegen/CreateNewProject.generated.hpp>
+
 namespace SR_CORE_GUI_NS {
     CreateNewProject::CreateNewProject()
         : Super("Create New Project")

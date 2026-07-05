@@ -5,10 +5,13 @@
 #ifndef SR_ENGINE_CORE_GUI_SOUND_DEBUG_H
 #define SR_ENGINE_CORE_GUI_SOUND_DEBUG_H
 
+#include <Engine/stdInclude.h>
+
 #include <Graphics/GUI/Widget.h>
 
 namespace SR_CORE_GUI_NS {
     class SoundDebug : public SR_GRAPH_GUI_NS::Widget {
+        SR_CLASS()
         using Super = SR_GRAPH_GUI_NS::Widget;
     public:
         SoundDebug();

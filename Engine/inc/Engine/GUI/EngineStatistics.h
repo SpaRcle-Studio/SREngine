@@ -5,6 +5,8 @@
 #ifndef SR_ENGINE_ENGINESTATISTICS_H
 #define SR_ENGINE_ENGINESTATISTICS_H
 
+#include <Engine/stdInclude.h>
+
 #include <Graphics/GUI/Widget.h>
 
 namespace SR_GRAPH_NS {
@@ -19,6 +21,7 @@ namespace EvoVulkan {
 
 namespace SR_CORE_NS::GUI {
     class EngineStatistics : public SR_GRAPH_GUI_NS::Widget {
+        SR_CLASS()
     public:
         EngineStatistics();
         ~EngineStatistics() override = default;

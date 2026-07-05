@@ -20,6 +20,8 @@
 #include <Utils/TypeTraits/SRClassMeta.h>
 #include <Utils/SRLM/DataType.h>
 
+#include <Codegen/AnimatorEditor.generated.hpp>
+
 namespace SR_CORE_GUI_NS {
     AnimatorEditor::AnimatorEditor()
         : Super("Animator")

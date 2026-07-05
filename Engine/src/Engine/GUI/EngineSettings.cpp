@@ -13,6 +13,8 @@
 #include <Utils/Reflection/Value.h>
 #include <Utils/Serialization/SRASerialization.h>
 
+#include <Codegen/EngineSettings.generated.hpp>
+
 namespace SR_CORE_GUI_NS {
     EngineSettings::EngineSettings()
         : SR_GRAPH_NS::GUI::Widget("Settings")

@@ -8,6 +8,8 @@
 #include <Utils/TypeTraits/SRClassMeta.h>
 #include <Utils/Reflection/Value.h>
 
+#include <Codegen/AssetInspector.generated.hpp>
+
 namespace SR_CORE_GUI_NS {
     AssetInspector::AssetInspector()
         : SR_GRAPH_GUI_NS::Widget("Asset inspector")

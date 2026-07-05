@@ -5,6 +5,8 @@
 #ifndef SR_ENGINE_EDITOR_GIZMO_H
 #define SR_ENGINE_EDITOR_GIZMO_H
 
+#include <Engine/stdInclude.h>
+
 #include <Graphics/UI/Gizmo.h>
 
 namespace SR_CORE_GUI_NS {

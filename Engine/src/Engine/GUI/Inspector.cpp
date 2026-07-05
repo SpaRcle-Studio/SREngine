@@ -34,10 +34,11 @@
 
 #include <Enum/TreeNodeFlags.hpp>
 
+#include <Codegen/Inspector.generated.hpp>
+
 namespace SR_CORE_GUI_NS {
-    Inspector::Inspector(Hierarchy* hierarchy)
+    Inspector::Inspector()
         : SR_GRAPH_GUI_NS::Widget("Inspector")
-        , m_hierarchy(hierarchy)
     {
         m_pPointerDrawer = SR_CORE_GUI_NS::PropertyDrawerBase::MakeShared<PointerPropertyDrawer>();
         InitCategories();
@@ -743,5 +744,10 @@ namespace SR_CORE_GUI_NS {
         for (auto&& name : m_availableCppBehaviours) {
             processComponent(name, true);
         }
+    }
+
+    void Inspector::Init() {
+        m_hierarchy = GetManager()->GetWidget<Hierarchy>().Get();
+        Widget::Init();
     }
 }

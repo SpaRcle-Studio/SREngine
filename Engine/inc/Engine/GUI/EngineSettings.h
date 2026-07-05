@@ -14,6 +14,7 @@
 
 namespace SR_CORE_GUI_NS {
     class EngineSettings : public SR_GRAPH_GUI_NS::Widget {
+        SR_CLASS()
         using Super = SR_GRAPH_GUI_NS::Widget;
     public:
         EngineSettings();

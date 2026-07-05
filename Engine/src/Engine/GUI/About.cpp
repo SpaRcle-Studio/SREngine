@@ -7,6 +7,8 @@
 #include <Utils/Common/ToString.h>
 #include <Utils/FileSystem/FileSystem.h>
 
+#include <Codegen/About.generated.hpp>
+
 #ifdef SR_COMMON_GIT_METADATA
     #include <git.h>
 #endif
@@ -37,7 +39,7 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::Separator();
             SR_GRAPH_GUI_NS::Immediate::Text("Build Version: 0.0.7");
 
-    #ifdef SR_COMMON_GIT_METADATA
+        #ifdef SR_COMMON_GIT_METADATA
             static std::string metadata;
             if (metadata.empty()) {
                 std::time_t timestamp = std::stoll(git_CommitDate());
@@ -48,7 +50,7 @@ namespace SR_CORE_GUI_NS {
             }
 
             SR_GRAPH_GUI_NS::Immediate::Text(metadata.c_str());
-    #endif
+        #endif
 
             const std::string executableAndModulesHash = SR_UTILS_NS::ToString(SR_UTILS_NS::FileSystem::GetExecutableAndModulesHash());
             SR_GRAPH_GUI_NS::Immediate::Text("Executable and modules hash: %s", executableAndModulesHash.c_str());

@@ -16,6 +16,8 @@
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Pipeline/Pipeline.h>
 
+#include <Codegen/SceneRunner.generated.hpp>
+
 namespace SR_CORE_NS::GUI {
     SceneRunner::SceneRunner()
         : SR_GRAPH_NS::GUI::Widget("Scene runner", SR_MATH_NS::IVector2(0, 60))

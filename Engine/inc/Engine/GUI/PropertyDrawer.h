@@ -5,7 +5,7 @@
 #ifndef SR_ENGINE_CORE_PROPERTY_DRAWER_H
 #define SR_ENGINE_CORE_PROPERTY_DRAWER_H
 
-#include <Engine/macros.h>
+#include <Engine/stdInclude.h>
 
 #include <Utils/Types/SafePointer.h>
 #include <Utils/TypeTraits/SRClass.h>

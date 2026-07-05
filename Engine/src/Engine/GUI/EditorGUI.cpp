@@ -10,16 +10,12 @@
 #include <Engine/GUI/SoundDebug.h>
 #include <Engine/GUI/AnimatorEditor.h>
 #include <Engine/GUI/Inspector.h>
-#include <Engine/GUI/VisualScriptEditor.h>
-#include <Engine/GUI/WorldEdit.h>
 #include <Engine/GUI/EngineSettings.h>
-#include <Engine/GUI/PhysicsMaterialEditor.h>
 #include <Engine/GUI/EngineStatistics.h>
 #include <Engine/GUI/Hierarchy.h>
 #include <Engine/GUI/AssetInspector.h>
 #include <Engine/GUI/TextureInspector.h>
 #include <Engine/GUI/SceneViewer.h>
-#include <Engine/GUI/RenderTechniqueEditor.h>
 #include <Engine/GUI/FileBrowser.h>
 #include <Engine/GUI/About.h>
 #include <Engine/GUI/CreateNewProject.h>
@@ -94,6 +90,7 @@ namespace SR_CORE_GUI_NS {
 
     EditorGUI::EditorGUI(const EnginePtr& pEngine)
         : Super()
+        , m_engine(pEngine)
     {
         m_pSettings = SR_UTILS_NS::Asset::Load<EditorSettings>("Editor/Configs/EditorSettings.sras");
         if (m_pSettings) {
@@ -101,44 +98,12 @@ namespace SR_CORE_GUI_NS {
         }
 
         m_cachedScenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("User/PreviousScenePath.cache");
-
-        m_engine = pEngine;
-
-        AddWidget(new AssetInspector());
-        AddWidget(new TextureInspector());
-        AddWidget(new FileBrowser());
-        AddWidget(new Hierarchy());
-        AddWidget(new VisualScriptEditor());
-        AddWidget(new Inspector(TryGetWidget<Hierarchy>()));
-        AddWidget(new WorldEdit());
-        AddWidget(new EngineSettings());
-        AddWidget(new AnimatorEditor());
-        AddWidget(new EngineStatistics());
-		AddWidget(new About());
-		AddWidget(new SoundDebug());
-        AddWidget(new RenderTechniqueEditor());
-        AddWidget(new CreateNewProject());
-        AddWidget(new SceneViewer(m_engine, GetWidget<Hierarchy>()));
-
-        for (auto& [id, widget] : m_widgets) {
-            Register(widget);
-        }
-
-        if (auto&& pWidget = TryGetWidget<FileBrowser>()) {
-            pWidget->SetFolder(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
-        }
     }
 
     EditorGUI::~EditorGUI() {
         if (IsInitialized()) {
             DeInit();
         }
-
-        for (auto& [id, widget] : m_widgets) {
-            Remove(widget);
-            SR_SAFE_DELETE_PTR(widget);
-        }
-        m_widgets.clear();
 
         if (m_pSettings) {
             m_pSettings->RemoveUsePoint();
@@ -148,6 +113,10 @@ namespace SR_CORE_GUI_NS {
 
     bool EditorGUI::Init() {
         SR_TRACY_ZONE;
+
+        if (!Super::Init()) {
+            return false;
+        }
 
         if (m_isInit) {
             SR_ERROR("EditorGUI::Init() : editor gui is already initialized!");
@@ -162,6 +131,14 @@ namespace SR_CORE_GUI_NS {
         }
 
         Load();
+
+        m_windowPageWidgets.clear();
+        for (auto&& [name, pWidget] : GetWidgets()) {
+            m_windowPageWidgets.emplace_back(name, pWidget->GetName());
+        }
+        std::ranges::stable_sort(m_windowPageWidgets, [](const auto& lhs, const auto& rhs) {
+            return lhs.second < rhs.second;
+        });
 
         m_isInit = true;
 
@@ -184,6 +161,8 @@ namespace SR_CORE_GUI_NS {
         m_icons.clear();
 
         m_isInit = false;
+
+        Super::DeInit();
     }
 
     void EditorGUI::Draw() {
@@ -359,7 +338,7 @@ namespace SR_CORE_GUI_NS {
 
     void EditorGUI::Enable(bool value) {
         if (m_enabled != value) {
-            if (auto&& pViewer = TryGetWidget<SceneViewer>()) {
+            if (auto&& pViewer = GetWidget<SceneViewer>()) {
                 pViewer->Enable(value);
             }
             m_enabled = value;
@@ -370,7 +349,7 @@ namespace SR_CORE_GUI_NS {
         SR_TRACY_ZONE;
         SR_LOCK_GUARD;
 
-        if (auto&& pViewer = TryGetWidget<SceneViewer>()) {
+        if (auto&& pViewer = GetWidget<SceneViewer>()) {
             pViewer->FixedUpdate();
         }
     }
@@ -380,10 +359,10 @@ namespace SR_CORE_GUI_NS {
         SR_LOCK_GUARD;
 
         if (Enabled()) {
-            if (auto&& pWidget = TryGetWidget<Hierarchy>()) {
+            if (auto&& pWidget = GetWidget<Hierarchy>()) {
                 pWidget->Update(dt);
             }
-            if (auto&& pWidget = TryGetWidget<Inspector>()) {
+            if (auto&& pWidget = GetWidget<Inspector>()) {
                 pWidget->Update(dt);
             }
         }
@@ -412,12 +391,6 @@ namespace SR_CORE_GUI_NS {
 
     void EditorGUI::OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) {
         WidgetManager::OnKeyUp(data);
-    }
-
-    void EditorGUI::CloseAllWidgets() {
-        for (auto& [id, widget] : m_widgets) {
-            widget->Close();
-        }
     }
 
     const SR_GTYPES_NS::Texture* EditorGUI::GetIcon(EditorIcon icon) const {
@@ -1007,44 +980,15 @@ namespace SR_CORE_GUI_NS {
         SR_TRACY_ZONE;
 
         if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Window")) {
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Assets")) {
-                OpenWidget<FileBrowser>();
+            for (auto&& [name, displayName] : m_windowPageWidgets) {
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem(displayName.c_str())) {
+                    GetWidget(name)->Open();
+                }
+                SR_GRAPH_GUI_NS::Immediate::Separator();
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
-
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Hierarchy")) {
-                OpenWidget<Hierarchy>();
-            }
-
-            SR_GRAPH_GUI_NS::Immediate::Separator();
-
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Inspector")) {
-                OpenWidget<Inspector>();
-            }
-
-            SR_GRAPH_GUI_NS::Immediate::Separator();
-
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Scene")) {
-                OpenWidget<SceneViewer>();
-            }
-
-            SR_GRAPH_GUI_NS::Immediate::Separator();
-
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Sound debug")) {
-                OpenWidget<SoundDebug>();
-            }
-
-            SR_GRAPH_GUI_NS::Immediate::Separator();
-
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Render Technique")) {
-                OpenWidget<RenderTechniqueEditor>();
-            }
-
-            SR_GRAPH_GUI_NS::Immediate::Separator();
-
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Animator")) {
-                OpenWidget<AnimatorEditor>();
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Reset to default")) {
+                ResetToDefault();
             }
 
             SR_GRAPH_GUI_NS::Immediate::Separator();
@@ -1053,53 +997,12 @@ namespace SR_CORE_GUI_NS {
                 m_imGuiDemo = true;
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
-
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Animator")) {
-               OpenWidget<AnimatorEditor>();
-            }
-
-            SR_GRAPH_GUI_NS::Immediate::Separator();
-
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("World edit")) {
-               OpenWidget<WorldEdit>();
-            }
-
-            SR_GRAPH_GUI_NS::Immediate::Separator();
-
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Settings")) {
-                OpenWidget<EngineSettings>();
-            }
-
-            SR_GRAPH_GUI_NS::Immediate::Separator();
-
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Statistics")) {
-                OpenWidget<EngineStatistics>();
-            }
-
-            SR_GRAPH_GUI_NS::Immediate::Separator();
-
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Reset to default")) {
-                ResetToDefault();
-            }
-
-            SR_GRAPH_GUI_NS::Immediate::Separator();
-
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Close all")) {
                 CloseAllWidgets();
             }
 
             SR_GRAPH_GUI_NS::Immediate::EndMenu();
         }
-    }
-
-    SR_GRAPH_GUI_NS::Widget* EditorGUI::GetWidget(const SR_UTILS_NS::StringAtom& name) const {
-        for (auto&& [hashCode, pWidget] : m_widgets) {
-            if (pWidget->GetName() == name) {
-                return pWidget;
-            }
-        }
-        return nullptr;
     }
 
     void EditorGUI::InstantiateSO(const SR_UTILS_NS::SceneObject::Ptr& pSO) {

@@ -11,6 +11,8 @@
 
 #include <Graphics/GUI/ImmediateGUI.h>
 
+#include <Codegen/SoundDebug.generated.hpp>
+
 namespace SR_CORE_GUI_NS {
     SoundDebug::SoundDebug()
         : Super("Sound Debug")
