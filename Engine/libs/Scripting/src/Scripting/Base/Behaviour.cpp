@@ -141,7 +141,7 @@ namespace SR_SCRIPTING_NS {
             }
             else {
                 auto&& impl = dynamic_cast<SR_UTILS_NS::IBaseSerialization&>(deserializer);
-                m_serializationNode = impl.GetWalkNode();
+                m_serializationNode = impl.GetWalkNode().DetachAllocator();
             }
             deserializer.EndObject();
         }
