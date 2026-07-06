@@ -5,6 +5,10 @@
 
 #version 450
 
+layout (location = 0) out vec3 VERTEX; /// added by builtin
+layout (location = 1) out vec3 NORMAL; /// added by builtin
+vec2 UV; /// added by builtin
+
 layout (std140, binding = 0) uniform SHARED {
 	// (64 bytes) private
 	mat4 PROJECTION_MATRIX;
