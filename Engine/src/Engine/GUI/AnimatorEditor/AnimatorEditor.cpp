@@ -11,10 +11,6 @@
 
 #include <Graphics/Animations/Animator.h>
 #include <Graphics/Animations/AnimationGraphNode.h>
-#include <Graphics/Animations/AnimationState.h>
-#include <Graphics/Animations/AnimationStateMachine.h>
-#include <Graphics/Animations/AnimationStateCondition.h>
-#include <Graphics/GUI/WidgetManager.h>
 #include <Graphics/GUI/Node.h>
 #include <Graphics/GUI/Link.h>
 #include <Graphics/GUI/Pin.h>
@@ -24,8 +20,6 @@
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/FileSystem/FileDialog.h>
 #include <Utils/TypeTraits/Factory.h>
-#include <Utils/TypeTraits/SRClassMeta.h>
-#include <Utils/SRLM/DataType.h>
 #include <Utils/Events/Broadcaster.h>
 #include <Utils/Common/SubscriptionMessage.h>
 #include <Utils/Reflection/Value.h>
@@ -193,7 +187,9 @@ namespace SR_CORE_GUI_NS {
         const bool editable = !(m_context.isLive && m_context.liveReadOnly);
 
         SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(m_editor);
-        SR_GRAPH_GUI_NS::Immediate::Begin("Animation Graph Editor", SR_MATH_NS::FVector2());
+        if (!SR_GRAPH_GUI_NS::Immediate::Begin("Animation Graph Editor", SR_MATH_NS::FVector2())) {
+            return;
+        }
 
         // Создаем NodeBuilder (без текстуры для заголовка пока)
         SR_GRAPH_GUI_NS::NodeBuilder builder(nullptr);
@@ -270,14 +266,8 @@ namespace SR_CORE_GUI_NS {
                     continue;
                 }
 
-                auto&& startIt = m_visualToGraphNode.find(pStartNode);
-                auto&& endIt = m_visualToGraphNode.find(pEndNode);
-                if (startIt == m_visualToGraphNode.end() || endIt == m_visualToGraphNode.end()) {
-                    continue;
-                }
-
-                const uint64_t startIndex = startIt->second->GetIndex();
-                const uint64_t endIndex = endIt->second->GetIndex();
+                const uint64_t startIndex = pStartNode->GetUserData<SR_ANIMATIONS_NS::AnimationGraphNode>()->GetIndex();
+                const uint64_t endIndex = pEndNode->GetUserData<SR_ANIMATIONS_NS::AnimationGraphNode>()->GetIndex();
 
                 if (m_activeGraphNodes.count(startIndex) == 0 || m_activeGraphNodes.count(endIndex) == 0) {
                     continue;
@@ -318,32 +308,30 @@ namespace SR_CORE_GUI_NS {
                 continue;
             }
 
-            const bool activeNode =
-                m_context.isLive &&
-                (m_visualToGraphNode.count(pNode) == 1) &&
-                (m_activeGraphNodes.count(m_visualToGraphNode.at(pNode)->GetIndex()) == 1);
+            auto&& pGraphNode = pNode->GetUserData<SR_ANIMATIONS_NS::AnimationGraphNode>();
+
+            const bool activeNode = m_context.isLive && m_activeGraphNodes.count(pGraphNode->GetIndex()) == 1;
 
             // Получаем цвет заголовка на основе типа ноды
             SR_MATH_NS::FColor headerColor = SR_MATH_NS::FColor(0.2f, 0.6f, 0.84f, 1.0f); // Синий по умолчанию
-            if (auto&& graphNodeIt = m_visualToGraphNode.find(pNode); graphNodeIt != m_visualToGraphNode.end()) {
-                if (auto&& pMeta = graphNodeIt->second->GetMeta()) {
-                    auto&& category = pMeta->GetCategory();
-                    // Определяем цвет на основе категории
-                    if (!category.empty()) {
-                        // Хешируем первую категорию для получения цвета
-                        uint32_t hash = 0;
-                        for (char c : category[0].ToStringRef()) {
-                            hash = hash * 31 + c;
-                        }
-                        headerColor = SR_MATH_NS::FColor(
-                            std::max(0.3f, std::min(0.9f, ((hash & 0xFF) / 255.0f))),
-                            std::max(0.3f, std::min(0.9f, (((hash >> 8) & 0xFF) / 255.0f))),
-                            std::max(0.3f, std::min(0.9f, (((hash >> 16) & 0xFF) / 255.0f))),
-                            1.0f
-                        );
+
+            if (auto&& pMeta = pGraphNode->GetMeta()) {
+                auto&& category = pMeta->GetCategory();
+                // Определяем цвет на основе категории
+                if (!category.empty()) {
+                    // Хешируем первую категорию для получения цвета
+                    uint32_t hash = 0;
+                    for (char c : category[0].ToStringRef()) {
+                        hash = hash * 31 + c;
                     }
-                    // Active nodes will be highlighted by border (below), not by header tint.
+                    headerColor = SR_MATH_NS::FColor(
+                        std::max(0.3f, std::min(0.9f, ((hash & 0xFF) / 255.0f))),
+                        std::max(0.3f, std::min(0.9f, (((hash >> 8) & 0xFF) / 255.0f))),
+                        std::max(0.3f, std::min(0.9f, (((hash >> 16) & 0xFF) / 255.0f))),
+                        1.0f
+                    );
                 }
+                // Active nodes will be highlighted by border (below), not by header tint.
             }
 
             builder.Begin(pNode);
@@ -421,20 +409,20 @@ namespace SR_CORE_GUI_NS {
             builder.End();
 
             // Active highlight: рисуем рамку вручную (node-editor стиль глобальный и не работает per-node)
-            if (activeNode) {
-                if (void* dl = SR_GRAPH_GUI_NS::Immediate::GetNodeBackgroundDrawList(pNode->GetId())) {
-                    const auto min = SR_GRAPH_GUI_NS::Immediate::GetItemRectMin();
-                    const auto max = SR_GRAPH_GUI_NS::Immediate::GetItemRectMax();
-                    SR_GRAPH_GUI_NS::Immediate::DrawListAddRect(
-                        dl,
-                        min - SR_MATH_NS::FVector2(2.f, 2.f),
-                        max + SR_MATH_NS::FVector2(2.f, 2.f),
-                        SR_COL32(255, 170, 50, 255),
-                        6.0f,
-                        3.0f
-                    );
-                }
-            }
+            //if (activeNode) {
+            //    if (void* dl = SR_GRAPH_GUI_NS::Immediate::GetNodeBackgroundDrawList(pNode->GetId())) {
+            //        const auto min = SR_GRAPH_GUI_NS::Immediate::GetItemRectMin();
+            //        const auto max = SR_GRAPH_GUI_NS::Immediate::GetItemRectMax();
+            //        SR_GRAPH_GUI_NS::Immediate::DrawListAddRect(
+            //            dl,
+            //            min - SR_MATH_NS::FVector2(2.f, 2.f),
+            //            max + SR_MATH_NS::FVector2(2.f, 2.f),
+            //            SR_COL32(255, 170, 50, 255),
+            //            6.0f,
+            //            3.0f
+            //        );
+            //    }
+            //}
         }
 
         // Отрисовываем все связи
@@ -444,12 +432,12 @@ namespace SR_CORE_GUI_NS {
                     SR_GRAPH_GUI_NS::Immediate::PushNodeEditorStyleColor(SR_GRAPH_GUI_NS::Immediate::NodeEditorStyleColor::HighlightLinkBorder, SR_MATH_NS::FColor(0.25f, 1.0f, 0.35f, 1.0f));
                     SR_GRAPH_GUI_NS::Immediate::PushNodeEditorStyleColor(SR_GRAPH_GUI_NS::Immediate::NodeEditorStyleColor::SelLinkBorder, SR_MATH_NS::FColor(0.25f, 1.0f, 0.35f, 1.0f));
                     SR_GRAPH_GUI_NS::Immediate::PushNodeEditorStyleVar(SR_GRAPH_GUI_NS::Immediate::NodeEditorStyleVar::LinkStrength, 3.0f);
-                    pLink->Draw();
+                    pLink->DrawBezier();
                     SR_GRAPH_GUI_NS::Immediate::PopNodeEditorStyleVar(1);
                     SR_GRAPH_GUI_NS::Immediate::PopNodeEditorStyleColor(2);
                 }
                 else {
-                    pLink->Draw();
+                    pLink->DrawBezier();
                 }
             }
         }
@@ -516,11 +504,8 @@ namespace SR_CORE_GUI_NS {
                         for (auto&& [id, pNode] : m_nodes) {
                             if (pNode->GetId() == nodeId) {
                                 if (m_context.pGraph) {
-                                    if (auto&& graphNodeIt = m_visualToGraphNode.find(pNode); graphNodeIt != m_visualToGraphNode.end()) {
-                                        m_context.pGraph->RemoveNode(graphNodeIt->second);
-                                        m_graphNodeToVisual.erase(graphNodeIt->second);
-                                        m_visualToGraphNode.erase(graphNodeIt);
-                                    }
+                                    auto&& pGraphNode = pNode->GetUserData<SR_ANIMATIONS_NS::AnimationGraphNode>();
+                                    m_context.pGraph->RemoveNode(pGraphNode);
                                 }
                                 RemoveNode(pNode);
                                 needsSync = true;
@@ -542,12 +527,11 @@ namespace SR_CORE_GUI_NS {
 
                 if (!nodeIds.empty()) {
                     if (auto&& it = m_nodes.find(nodeIds[0]); it != m_nodes.end()) {
-                        if (auto&& graphNodeIt = m_visualToGraphNode.find(it->second); graphNodeIt != m_visualToGraphNode.end()) {
-                            if (auto&& pSMNode = dynamic_cast<SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine*>(graphNodeIt->second)) {
-                                m_context.openedStateMachineNodeIndex = pSMNode->GetIndex();
-                                m_tab = Tab::StateMachine;
-                                m_context.openStateMachineRequested = true; // синхронизацию делаем уже в DrawStateMachineEditor()
-                            }
+                        auto&& pGraphNode = it->second->GetUserData<SR_ANIMATIONS_NS::AnimationGraphNode>();
+                        if (auto&& pSMNode = dynamic_cast<SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine*>(pGraphNode)) {
+                            m_context.openedStateMachineNodeIndex = pSMNode->GetIndex();
+                            m_tab = Tab::StateMachine;
+                            m_context.openStateMachineRequested = true; // синхронизацию делаем уже в DrawStateMachineEditor()
                         }
                     }
                 }
@@ -601,24 +585,25 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(pEditor);
 
             const int selectedNodes = SR_GRAPH_GUI_NS::Immediate::GetSelectedNodes(nullptr, 0);
+
             if (selectedNodes > 0) {
+                m_editorStateMachine.ResetSelectedLink();
                 std::vector<uintptr_t> nodeIds(selectedNodes);
                 SR_GRAPH_GUI_NS::Immediate::GetSelectedNodes(nodeIds.data(), selectedNodes);
-
-                if (!nodeIds.empty()) {
+                if (nodeIds.size() == 1) {
                     const uintptr_t nodeId = nodeIds[0];
-
                     if (m_tab == Tab::Graph) {
                         if (auto&& it = m_nodes.find(nodeId); it != m_nodes.end()) {
-                            if (auto&& graphNodeIt = m_visualToGraphNode.find(it->second); graphNodeIt != m_visualToGraphNode.end()) {
-                                pSelectedObject = graphNodeIt->second;
-                            }
+                            pSelectedObject = it->second->GetUserData<SR_ANIMATIONS_NS::AnimationGraphNode>();
                         }
                     }
                     else {
-                        pSelectedObject = m_editorStateMachine.GetSelectedObject(nodeId);
+                        pSelectedObject = m_editorStateMachine.GetSelectedNode(nodeId);
                     }
                 }
+            }
+            else if (m_tab == Tab::StateMachine) {
+                pSelectedObject = m_editorStateMachine.GetSelectedLink();
             }
 
             SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(nullptr);
@@ -627,7 +612,7 @@ namespace SR_CORE_GUI_NS {
 
         if (!pSelectedObject) {
             if (m_tab == Tab::Graph) {
-                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(0.7f, 0.7f, 0.7f, 1.0f), "Select a graph node to edit its properties.");
+                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(0.7f, 0.7f, 0.7f, 1.0f), "Select a graph node or transition to edit its properties.");
             }
             else {
                 SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(0.7f, 0.7f, 0.7f, 1.0f), "Select a state node to edit its properties (including transitions/conditions).");
@@ -751,14 +736,9 @@ namespace SR_CORE_GUI_NS {
                     if (auto&& pNode = SR_UTILS_NS::Factory::Instance().Create<SR_ANIMATIONS_NS::AnimationGraphNode>(nodeTypeName)) {
                         auto&& pGraphNode = m_context.pGraph->AddNode(pNode.Get());
                         auto&& pVisualNode = CreateVisualNode(pGraphNode);
-                        AddNode(pVisualNode);
-                        
+
                         auto&& pos = SR_GRAPH_GUI_NS::Immediate::ScreenToCanvas(m_popupMousePos);
                         SR_GRAPH_GUI_NS::Immediate::SetNodePosition(pVisualNode->GetId(), pos);
-                        
-                        // Обновляем маппинг
-                        m_graphNodeToVisual[pGraphNode] = pVisualNode;
-                        m_visualToGraphNode[pVisualNode] = pGraphNode;
                     }
                 }
             }
@@ -796,18 +776,11 @@ namespace SR_CORE_GUI_NS {
 
         // Очищаем существующие визуальные ноды
         Clear();
-        m_graphNodeToVisual.clear();
-        m_visualToGraphNode.clear();
 
         // Создаем визуальные ноды для каждой граф-ноды
         for (auto&& pGraphNode : m_context.pGraph->GetNodes()) {
             if (pGraphNode) {
                 auto&& pVisualNode = CreateVisualNode(pGraphNode.Get());
-                AddNode(pVisualNode);
-                
-                m_graphNodeToVisual[pGraphNode.Get()] = pVisualNode;
-                m_visualToGraphNode[pVisualNode] = pGraphNode.Get();
-
             #ifdef SR_USE_IMGUI_NODE_EDITOR
                 if (m_editor) {
                     SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(m_editor);
@@ -825,12 +798,8 @@ namespace SR_CORE_GUI_NS {
             }
 
             auto&& destIndex = pGraphNode->GetIndex();
-            auto&& destVisualIt = m_graphNodeToVisual.find(m_context.pGraph->GetNode(destIndex));
-            if (destVisualIt == m_graphNodeToVisual.end()) {
-                continue;
-            }
+            auto&& pDestVisual = m_context.pGraph->GetNode(destIndex)->GetUserData<SR_GRAPH_GUI_NS::Node>();
 
-            auto&& pDestVisual = destVisualIt->second;
             auto&& inputs = pGraphNode->GetInputLinks();
             for (uint32_t inputIndex = 0; inputIndex < inputs.size(); ++inputIndex) {
                 auto&& link = inputs[inputIndex];
@@ -839,12 +808,7 @@ namespace SR_CORE_GUI_NS {
                 }
 
                 auto&& srcIndex = static_cast<uint64_t>(link.m_targetNodeIndex);
-                auto&& srcVisualIt = m_graphNodeToVisual.find(m_context.pGraph->GetNode(srcIndex));
-                if (srcVisualIt == m_graphNodeToVisual.end()) {
-                    continue;
-                }
-
-                auto&& pSrcVisual = srcVisualIt->second;
+                auto&& pSrcVisual = m_context.pGraph->GetNode(srcIndex)->GetUserData<SR_GRAPH_GUI_NS::Node>();
 
                 if (link.m_targetPinIndex >= pSrcVisual->GetOutputs().size()) {
                     continue;
@@ -874,12 +838,10 @@ namespace SR_CORE_GUI_NS {
     #endif
 
         // Сохраняем позиции визуальных нод в данные графа
-        for (auto&& [pGraphNode, pVisualNode] : m_graphNodeToVisual) {
-            if (!pVisualNode) {
-                continue;
-            }
+        for (auto&& [nodeId, pVisualNode] : m_nodes) {
         #ifdef SR_USE_IMGUI_NODE_EDITOR
             if (m_editor) {
+                auto&& pGraphNode = pVisualNode->GetUserData<SR_ANIMATIONS_NS::AnimationGraphNode>();
                 pGraphNode->SetEditorPosition(SR_GRAPH_GUI_NS::Immediate::GetNodePosition(pVisualNode->GetId()));
             }
         #endif
@@ -921,15 +883,8 @@ namespace SR_CORE_GUI_NS {
             auto&& pStartNode = pStartPin->GetNode();
             auto&& pEndNode = pEndPin->GetNode();
 
-            auto&& startGraphIt = m_visualToGraphNode.find(pStartNode);
-            auto&& endGraphIt = m_visualToGraphNode.find(pEndNode);
-
-            if (startGraphIt == m_visualToGraphNode.end() || endGraphIt == m_visualToGraphNode.end()) {
-                continue;
-            }
-
-            auto&& pStartGraphNode = startGraphIt->second;
-            auto&& pEndGraphNode = endGraphIt->second;
+            auto&& pStartGraphNode = pStartNode->GetUserData<SR_ANIMATIONS_NS::AnimationGraphNode>();
+            auto&& pEndGraphNode = pEndNode->GetUserData<SR_ANIMATIONS_NS::AnimationGraphNode>();
 
             if (!pStartGraphNode || !pEndGraphNode) {
                 continue;
@@ -986,6 +941,9 @@ namespace SR_CORE_GUI_NS {
 
         auto&& pNode = new SR_GRAPH_GUI_NS::Node();
         pNode->SetName(nodeName);
+        pNode->SetUserData(pGraphNode);
+
+        pGraphNode->SetUserData(pNode);
 
         // Создаем входные пины
         for (uint32_t i = 0; i < pGraphNode->GetInputCount(); ++i) {
@@ -999,12 +957,8 @@ namespace SR_CORE_GUI_NS {
             pNode->AddOutput(pPin);
         }
 
+        AddNode(pNode);
         return pNode;
-    }
-
-    void AnimatorEditor::UpdateVisualNode(SR_GRAPH_GUI_NS::Node* pVisualNode, SR_ANIMATIONS_NS::AnimationGraphNode* pGraphNode) {
-        // Обновляем визуальную ноду на основе данных граф-ноды
-        // Пока базовая реализация, можно расширить позже
     }
 
     void AnimatorEditor::TopPanelSave() {

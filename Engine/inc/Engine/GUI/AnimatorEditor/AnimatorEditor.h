@@ -50,7 +50,6 @@ namespace SR_CORE_GUI_NS {
         void DrawGraphEditor();
         
         SR_GRAPH_GUI_NS::Node* CreateVisualNode(SR_ANIMATIONS_NS::AnimationGraphNode* pGraphNode);
-        void UpdateVisualNode(SR_GRAPH_GUI_NS::Node* pVisualNode, SR_ANIMATIONS_NS::AnimationGraphNode* pGraphNode);
 
     protected:
         void InitNodeTypes();
@@ -76,10 +75,6 @@ namespace SR_CORE_GUI_NS {
 
         Tab m_tab = Tab::Graph;
 
-        // Маппинг между граф-нодами и визуальными нодами
-        std::map<SR_ANIMATIONS_NS::AnimationGraphNode*, SR_GRAPH_GUI_NS::Node*> m_graphNodeToVisual;
-        std::map<SR_GRAPH_GUI_NS::Node*, SR_ANIMATIONS_NS::AnimationGraphNode*> m_visualToGraphNode;
-        
         // Кэш доступных типов нод
         std::vector<SR_UTILS_NS::StringAtom> m_availableNodeTypes;
 
