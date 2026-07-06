@@ -8,7 +8,6 @@
 
 #include <Engine/GUI/EditorGUI.h>
 #include <Engine/GUI/SoundDebug.h>
-#include <Engine/GUI/AnimatorEditor.h>
 #include <Engine/GUI/Inspector.h>
 #include <Engine/GUI/EngineSettings.h>
 #include <Engine/GUI/EngineStatistics.h>

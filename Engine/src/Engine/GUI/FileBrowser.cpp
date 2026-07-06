@@ -7,9 +7,9 @@
 #include <Engine/Settings/ProjectSettings.h>
 #include <Engine/GUI/EditorGUI.h>
 #include <Engine/GUI/FileBrowser.h>
+#include <Engine/GUI/AnimatorEditor/AnimatorEditor.h>
 #include <Engine/GUI/TextureInspector.h>
 #include <Engine/GUI/AssetInspector.h>
-#include <Engine/GUI/AnimatorEditor.h>
 
 #include <Graphics/GUI/Icons.h>
 #include <Graphics/GUI/Utils.h>
