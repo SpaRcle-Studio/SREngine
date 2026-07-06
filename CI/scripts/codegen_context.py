@@ -1,6 +1,10 @@
 import json
 from pathlib import Path
 
+CODEGEN_SAVE_ENABLED = True
+CODEGEN_LOAD_ENABLED = True
+CODEGEN_CLONE_ENABLED = True
+
 class CodegenContext:
     def __init__(self):
         self.resources_dir = ''

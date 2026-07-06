@@ -401,12 +401,12 @@ namespace SR_CORE_GUI_NS {
     }
 
     void EngineStatistics::DrawRenderTechnique(SR_GRAPH_NS::IRenderTechnique* pRenderTechnique) {
-        pRenderTechnique->ForEachPass([this](SR_GRAPH_NS::BasePass& pass) -> bool {
+        pRenderTechnique->ForEachPass([this](SR_GRAPH_NS::BasePass& pass) {
             auto&& pMeshDrawerPass = dynamic_cast<SR_GRAPH_NS::MeshDrawerPass*>(&pass);
             auto&& pFramebufferPass = dynamic_cast<SR_GRAPH_NS::FrameBufferPass*>(&pass);
 
             if (!pMeshDrawerPass && !pFramebufferPass) {
-                return false;
+                return;
             }
 
             SR_GRAPH_GUI_NS::Immediate::PushID((void*)&pass);
@@ -418,7 +418,7 @@ namespace SR_CORE_GUI_NS {
             if (!SR_GRAPH_GUI_NS::Immediate::CollapsingHeader(pass.GetPassName())) {
                 SR_GRAPH_GUI_NS::Immediate::PopID();
                 SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
-                return true;
+                return;
             }
             SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
 
@@ -429,14 +429,14 @@ namespace SR_CORE_GUI_NS {
             auto&& pFramebuffer = pFramebufferPass ? pFramebufferPass->GetFrameBuffer() : nullptr;
             if (!pFramebuffer) {
                 SR_GRAPH_GUI_NS::Immediate::PopID();
-                return true;
+                return;
             }
 
             if (pFramebuffer->GetArrayLayersCount() > 1) {
                 SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Yellow(), "Cannot display framebuffer with multiple layers!");
                 SR_GRAPH_GUI_NS::Immediate::Text("Array layers: %i", pFramebuffer->GetArrayLayersCount());
                 SR_GRAPH_GUI_NS::Immediate::PopID();
-                return true;
+                return;
             }
 
             for (uint32_t i = 0; i < pFramebuffer->GetColorLayersCount(); ++i) {
@@ -456,7 +456,7 @@ namespace SR_CORE_GUI_NS {
             }
 
             SR_GRAPH_GUI_NS::Immediate::PopID();
-            return true;
+            return;
         });
     }
 

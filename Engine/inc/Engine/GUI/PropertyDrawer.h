@@ -15,6 +15,10 @@ namespace SR_UTILS_NS {
     class Component;
 }
 
+namespace SR_UTILS_NS::Reflection {
+    class Value;
+}
+
 namespace SR_GRAPH_NS {
     class RenderContext;
 }

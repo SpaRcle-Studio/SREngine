@@ -112,8 +112,6 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
             f.write('\n' + '\t' * (tabs + 3) + f'.SetPublicity(SpaRcle::Utils::PropertyPublicity::Hidden)')
         elif prop.read_only:
             f.write('\n' + '\t' * (tabs + 3) + f'.SetPublicity(SpaRcle::Utils::PropertyPublicity::ReadOnly)')
-        # else:
-        #     f.write('\n' + '\t' * (tabs + 3) + f'.SetPublicity(SpaRcle::Utils::PropertyPublicity::Public)')
 
         if prop.setter:
             f.write('\n' + '\t' * (tabs + 3) + f'.SetHasExplicitSetter({"true" if prop.setter else "false"})')
@@ -123,11 +121,6 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
 
         if prop.change_callback:
             f.write('\n' + '\t' * (tabs + 3) + f'.SetChangeCallback(&SRClassMetaTemplate::OnChange_{prop.name})')
-
-        if prop.virtual:
-            f.write('\n' + '\t' * (tabs + 3) + f'.CheckSRClass<decltype(DefaultTypeInstance()->{prop.getter}())>()')
-        else:
-            f.write('\n' + '\t' * (tabs + 3) + f'.CheckSRClass<decltype({class_obj.name}::{prop.name})>()')
 
         if prop.property_condition:
             f.write('\n' + '\t' * (tabs + 3) + f'.SetPropertyCondition(&SRClassMetaTemplate::IsPropertyActive_{prop.serialize_name})')
@@ -247,62 +240,63 @@ def generate_class_meta_save(f, class_obj: reflection_utils.SpaRcleClass, tabs):
     f.write('\t' * tabs + f'void Save(SpaRcle::Utils::ISerializer& serializer, const SpaRcle::Utils::Serializable& obj) const final {{\n')
     tabs += 1
 
-    f.write('\t' * tabs + f'SpaRcle::Utils::SRClassMeta::Save(serializer, obj);\n\n')
-    f.write('\t' * tabs + f'auto&& value = static_cast<{class_name}&>(const_cast<SpaRcle::Utils::Serializable&>(obj));\n\n')
+    if codegen_context.CODEGEN_SAVE_ENABLED:
+        f.write('\t' * tabs + f'SpaRcle::Utils::SRClassMeta::Save(serializer, obj);\n\n')
+        f.write('\t' * tabs + f'auto&& value = static_cast<{class_name}&>(const_cast<SpaRcle::Utils::Serializable&>(obj));\n\n')
 
-    for prop in class_obj.variables:
-        if prop.dontSave:
-            continue
+        for prop in class_obj.variables:
+            if prop.dontSave:
+                continue
 
-        if not prop.getter and prop.virtual:
-            continue
+            if not prop.getter and prop.virtual:
+                continue
 
-        base_condition_str = 'serializer.IsWriteDefaults()'
-        can_save_conditions = []
+            base_condition_str = 'serializer.IsWriteDefaults()'
+            can_save_conditions = []
 
-        if len(prop.dont_save_tags) > 0:
-            f.write('\t' * tabs + f'const static std::set<SpaRcle::Utils::StringAtom> {prop.serialize_name}_dontSaveTags = {{')
-            for tag in prop.dont_save_tags:
-                f.write(f'"{tag}", ')
-            f.write('};\n')
-            can_save_conditions.append(f'serializer.CanSaveByTags({prop.serialize_name}_dontSaveTags)')
+            if len(prop.dont_save_tags) > 0:
+                f.write('\t' * tabs + f'const static std::set<SpaRcle::Utils::StringAtom> {prop.serialize_name}_dontSaveTags = {{')
+                for tag in prop.dont_save_tags:
+                    f.write(f'"{tag}", ')
+                f.write('};\n')
+                can_save_conditions.append(f'serializer.CanSaveByTags({prop.serialize_name}_dontSaveTags)')
 
-        if prop.property_condition:
-            can_save_conditions.append(f'IsPropertyActive_{prop.serialize_name}(&value)')
+            if prop.property_condition:
+                can_save_conditions.append(f'IsPropertyActive_{prop.serialize_name}(&value)')
 
-        if len(can_save_conditions) == 0:
-            f.write('\t' * tabs + f'{{\n')
-        else:
-            cond_str = " && ".join(can_save_conditions)
-            f.write('\t' * tabs + f'if ({cond_str}) {{\n')
-
-        if prop.getter:
-            f.write('\t' * (tabs + 1) + f'auto&& propValue = value.{prop.getter}();\n')
-
-            if prop.default_value:
-                f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || propValue != GetDefault_{prop.serialize_name}())) {{\n')
-            elif prop.virtual:
-                f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || !SpaRcle::Utils::IsDefault(propValue))) {{\n')
+            if len(can_save_conditions) == 0:
+                f.write('\t' * tabs + f'{{\n')
             else:
-                f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || !(DefaultTypeInstance() ? SpaRcle::Utils::IsDefault(propValue, &DefaultTypeInstance()->{prop.name}) : SpaRcle::Utils::IsDefault(propValue)))) {{\n')
+                cond_str = " && ".join(can_save_conditions)
+                f.write('\t' * tabs + f'if ({cond_str}) {{\n')
 
-            f.write('\t' * (tabs + 2) + f'static const SpaRcle::Utils::SerializationId keyName_{prop.serialize_name} = SpaRcle::Utils::SerializationId::CreateFromString("{prop.serialize_name}");\n')
-            f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Serialization::Save(serializer, propValue, keyName_{prop.serialize_name});\n')
+            if prop.getter:
+                f.write('\t' * (tabs + 1) + f'auto&& propValue = value.{prop.getter}();\n')
 
-            f.write('\t' * (tabs + 1) + f'}}\n')
-        else:
-            if prop.default_value:
-                f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || value.{prop.name} != GetDefault_{prop.serialize_name}())) {{\n')
-            elif prop.virtual:
-                f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || !SpaRcle::Utils::IsDefault(value.{prop.name}))) {{\n')
+                if prop.default_value:
+                    f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || propValue != GetDefault_{prop.serialize_name}())) {{\n')
+                elif prop.virtual:
+                    f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || !SpaRcle::Utils::IsDefault(propValue))) {{\n')
+                else:
+                    f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || !(DefaultTypeInstance() ? SpaRcle::Utils::IsDefault(propValue, &DefaultTypeInstance()->{prop.name}) : SpaRcle::Utils::IsDefault(propValue)))) {{\n')
+
+                f.write('\t' * (tabs + 2) + f'static const SpaRcle::Utils::SerializationId keyName_{prop.serialize_name} = SpaRcle::Utils::SerializationId::CreateFromString("{prop.serialize_name}");\n')
+                f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Serialization::Save(serializer, propValue, keyName_{prop.serialize_name});\n')
+
+                f.write('\t' * (tabs + 1) + f'}}\n')
             else:
-                f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || !(DefaultTypeInstance() ? SpaRcle::Utils::IsDefault(value.{prop.name}, &DefaultTypeInstance()->{prop.name}) : SpaRcle::Utils::IsDefault(value.{prop.name})))) {{\n')
+                if prop.default_value:
+                    f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || value.{prop.name} != GetDefault_{prop.serialize_name}())) {{\n')
+                elif prop.virtual:
+                    f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || !SpaRcle::Utils::IsDefault(value.{prop.name}))) {{\n')
+                else:
+                    f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || !(DefaultTypeInstance() ? SpaRcle::Utils::IsDefault(value.{prop.name}, &DefaultTypeInstance()->{prop.name}) : SpaRcle::Utils::IsDefault(value.{prop.name})))) {{\n')
 
-            f.write('\t' * (tabs + 2) + f'static const SpaRcle::Utils::SerializationId keyName_{prop.serialize_name} = SpaRcle::Utils::SerializationId::CreateFromString("{prop.serialize_name}");\n')
-            f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Serialization::Save(serializer, value.{prop.name}, keyName_{prop.serialize_name});\n')
-            f.write('\t' * (tabs + 1) + f'}}\n')
+                f.write('\t' * (tabs + 2) + f'static const SpaRcle::Utils::SerializationId keyName_{prop.serialize_name} = SpaRcle::Utils::SerializationId::CreateFromString("{prop.serialize_name}");\n')
+                f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Serialization::Save(serializer, value.{prop.name}, keyName_{prop.serialize_name});\n')
+                f.write('\t' * (tabs + 1) + f'}}\n')
 
-        f.write('\t' * tabs + f'}}\n')
+            f.write('\t' * tabs + f'}}\n')
 
     tabs -= 1
     f.write('\t' * tabs + '}\n\n')
@@ -336,79 +330,80 @@ def generate_class_meta_load(f, class_obj, tabs):
     f.write('\t' * tabs + 'bool Load(SpaRcle::Utils::IDeserializer& deserializer, SpaRcle::Utils::Serializable& obj) const final {\n')
     tabs += 1
 
-    f.write('\t' * tabs + 'if (!SpaRcle::Utils::SRClassMeta::Load(deserializer, obj)) {\n')
-    f.write('\t' * (tabs + 1) + 'return false;\n')
-    f.write('\t' * tabs + '}\n\n')
-    f.write('\t' * tabs + f'auto&& value = static_cast<{class_name}&>(obj);' + '\n\n')
+    if codegen_context.CODEGEN_LOAD_ENABLED:
+        f.write('\t' * tabs + 'if (!SpaRcle::Utils::SRClassMeta::Load(deserializer, obj)) {\n')
+        f.write('\t' * (tabs + 1) + 'return false;\n')
+        f.write('\t' * tabs + '}\n\n')
+        f.write('\t' * tabs + f'auto&& value = static_cast<{class_name}&>(obj);' + '\n\n')
 
-    for prop in class_obj.variables:
-        if prop.dontLoad:
-            continue
+        for prop in class_obj.variables:
+            if prop.dontLoad:
+                continue
 
-        if (not prop.setter or not prop.getter) and prop.virtual:
-            continue
+            if (not prop.setter or not prop.getter) and prop.virtual:
+                continue
 
-        can_load_conditions = []
+            can_load_conditions = []
 
-        if len(prop.dont_save_tags) > 0:
-            f.write('\t' * tabs + f'const static std::set<SpaRcle::Utils::StringAtom> {prop.serialize_name}_dontLoadTags = {{')
-            for tag in prop.dont_save_tags:
-                f.write(f'"{tag}", ')
-            f.write('};\n')
-            can_load_conditions.append(f'deserializer.CanLoadByTags({prop.serialize_name}_dontLoadTags)')
+            if len(prop.dont_save_tags) > 0:
+                f.write('\t' * tabs + f'const static std::set<SpaRcle::Utils::StringAtom> {prop.serialize_name}_dontLoadTags = {{')
+                for tag in prop.dont_save_tags:
+                    f.write(f'"{tag}", ')
+                f.write('};\n')
+                can_load_conditions.append(f'deserializer.CanLoadByTags({prop.serialize_name}_dontLoadTags)')
 
-        if prop.load_condition:
-            can_load_conditions.append(f'IsPropertyLoadAllowed_{prop.serialize_name}(&value)')
+            if prop.load_condition:
+                can_load_conditions.append(f'IsPropertyLoadAllowed_{prop.serialize_name}(&value)')
 
-        if len(can_load_conditions) == 0:
-            f.write('\t' * tabs + f'{{\n')
-        else:
-            cond_str = " && ".join(can_load_conditions)
-            f.write('\t' * tabs + f'if ({cond_str}) {{\n')
-
-        f.write('\t' * (tabs + 1) + f'static const SpaRcle::Utils::SerializationId keyName_{prop.serialize_name} = SpaRcle::Utils::SerializationId::CreateFromString("{prop.serialize_name}");' + '\n')
-
-        if prop.setter:
-            if prop.getter:
-                f.write('\t' * (tabs + 1) + f'using Type = SpaRcle::Utils::RemoveQualifiersT<decltype(value.{prop.getter}())>;' + '\n')
-            elif prop.virtual:
-                raise Exception(f'Virtual property {prop.name} must have getter!')
+            if len(can_load_conditions) == 0:
+                f.write('\t' * tabs + f'{{\n')
             else:
-                f.write('\t' * (tabs + 1) + f'using Type = SpaRcle::Utils::RemoveQualifiersT<decltype(value.{prop.name})>;' + '\n')
+                cond_str = " && ".join(can_load_conditions)
+                f.write('\t' * tabs + f'if ({cond_str}) {{\n')
 
-            load_fn = f'SpaRcle::Utils::Serialization::Load(deserializer, propValue, keyName_{prop.serialize_name})'
+            f.write('\t' * (tabs + 1) + f'static const SpaRcle::Utils::SerializationId keyName_{prop.serialize_name} = SpaRcle::Utils::SerializationId::CreateFromString("{prop.serialize_name}");' + '\n')
 
-            f.write('\t' * (tabs + 1) + 'Type propValue {};\n')
+            if prop.setter:
+                if prop.getter:
+                    f.write('\t' * (tabs + 1) + f'using Type = SpaRcle::Utils::RemoveQualifiersT<decltype(value.{prop.getter}())>;' + '\n')
+                elif prop.virtual:
+                    raise Exception(f'Virtual property {prop.name} must have getter!')
+                else:
+                    f.write('\t' * (tabs + 1) + f'using Type = SpaRcle::Utils::RemoveQualifiersT<decltype(value.{prop.name})>;' + '\n')
 
-            if prop.default_value:
-                f.write('\t' * (tabs + 1) + f'if (!{load_fn}) {{' + '\n')
-                f.write('\t' * (tabs + 2) + f'propValue = GetDefault_{prop.serialize_name}();' + '\n')
-                f.write('\t' * (tabs + 1) + '}\n')
-            elif not prop.virtual:
-                f.write('\t' * (tabs + 1) + f'if (!{load_fn} && DefaultTypeInstance()) {{' + '\n')
-                #f.write('\t' * (tabs + 2) + f'propValue = DefaultTypeInstance()->{prop.name};\n')
-                f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Reflection::CloneTo(DefaultTypeInstance()->{prop.name}, propValue);' + '\n')
-                f.write('\t' * (tabs + 1) + '}\n')
+                load_fn = f'SpaRcle::Utils::Serialization::Load(deserializer, propValue, keyName_{prop.serialize_name})'
+
+                f.write('\t' * (tabs + 1) + 'Type propValue {};\n')
+
+                if prop.default_value:
+                    f.write('\t' * (tabs + 1) + f'if (!{load_fn}) {{' + '\n')
+                    f.write('\t' * (tabs + 2) + f'propValue = GetDefault_{prop.serialize_name}();' + '\n')
+                    f.write('\t' * (tabs + 1) + '}\n')
+                elif not prop.virtual:
+                    f.write('\t' * (tabs + 1) + f'if (!{load_fn} && DefaultTypeInstance()) {{' + '\n')
+                    #f.write('\t' * (tabs + 2) + f'propValue = DefaultTypeInstance()->{prop.name};\n')
+                    f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Reflection::CloneTo(DefaultTypeInstance()->{prop.name}, propValue);' + '\n')
+                    f.write('\t' * (tabs + 1) + '}\n')
+                else:
+                    f.write('\t' * (tabs + 1) + f'{load_fn};' + '\n')
+
+                f.write('\t' * (tabs + 1) + f'value.{prop.setter}(propValue);' + '\n')
+
             else:
-                f.write('\t' * (tabs + 1) + f'{load_fn};' + '\n')
+                load_fn = f'SpaRcle::Utils::Serialization::Load(deserializer, value.{prop.name}, keyName_{prop.serialize_name})'
+                if prop.default_value:
+                    f.write('\t' * (tabs + 1) + f'if (!{load_fn}) {{' + '\n')
+                    f.write('\t' * (tabs + 2) + f'value.{prop.name} = GetDefault_{prop.serialize_name}();' + '\n')
+                    f.write('\t' * (tabs + 1) + '}\n')
+                elif not prop.virtual:
+                    f.write('\t' * (tabs + 1) + f'if (!{load_fn} && DefaultTypeInstance()) {{' + '\n')
+                    #f.write('\t' * (tabs + 2) + f'value.{prop.name} = DefaultTypeInstance()->{prop.name};\n')
+                    f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Reflection::CloneTo(DefaultTypeInstance()->{prop.name}, value.{prop.name});' + '\n')
+                    f.write('\t' * (tabs + 1) + '}\n')
+                else:
+                    f.write('\t' * (tabs + 1) + f'{load_fn};' + '\n')
 
-            f.write('\t' * (tabs + 1) + f'value.{prop.setter}(propValue);' + '\n')
-
-        else:
-            load_fn = f'SpaRcle::Utils::Serialization::Load(deserializer, value.{prop.name}, keyName_{prop.serialize_name})'
-            if prop.default_value:
-                f.write('\t' * (tabs + 1) + f'if (!{load_fn}) {{' + '\n')
-                f.write('\t' * (tabs + 2) + f'value.{prop.name} = GetDefault_{prop.serialize_name}();' + '\n')
-                f.write('\t' * (tabs + 1) + '}\n')
-            elif not prop.virtual:
-                f.write('\t' * (tabs + 1) + f'if (!{load_fn} && DefaultTypeInstance()) {{' + '\n')
-                #f.write('\t' * (tabs + 2) + f'value.{prop.name} = DefaultTypeInstance()->{prop.name};\n')
-                f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Reflection::CloneTo(DefaultTypeInstance()->{prop.name}, value.{prop.name});' + '\n')
-                f.write('\t' * (tabs + 1) + '}\n')
-            else:
-                f.write('\t' * (tabs + 1) + f'{load_fn};' + '\n')
-
-        f.write('\t' * tabs + '}\n')
+            f.write('\t' * tabs + '}\n')
 
     f.write('\t' * tabs + 'return true;\n')
 
@@ -423,31 +418,32 @@ def generate_class_meta_clone(f, class_obj: reflection_utils.SpaRcleClass, tabs)
     f.write('\t' * tabs + f'void CloneTo(const SpaRcle::Utils::SRClass& src, SpaRcle::Utils::SRClass& dest) const noexcept final {{\n')
     tabs += 1
 
-    f.write('\t' * tabs + f'SpaRcle::Utils::SRClassMeta::CloneTo(src, dest);\n\n')
+    if codegen_context.CODEGEN_CLONE_ENABLED:
+        f.write('\t' * tabs + f'SpaRcle::Utils::SRClassMeta::CloneTo(src, dest);\n\n')
 
-    f.write('\t' * tabs + f'SR_MAYBE_UNUSED auto&& srcObject = const_cast<{class_name}&>(static_cast<const {class_name}&>(src));\n')
-    f.write('\t' * tabs + f'SR_MAYBE_UNUSED auto&& destObject = static_cast<{class_name}&>(dest);\n\n')
+        f.write('\t' * tabs + f'SR_MAYBE_UNUSED auto&& srcObject = const_cast<{class_name}&>(static_cast<const {class_name}&>(src));\n')
+        f.write('\t' * tabs + f'SR_MAYBE_UNUSED auto&& destObject = static_cast<{class_name}&>(dest);\n\n')
 
-    for prop in class_obj.variables:
-        if prop.virtual and (not prop.setter or not prop.getter):
-            continue
+        for prop in class_obj.variables:
+            if prop.virtual and (not prop.setter or not prop.getter):
+                continue
 
-        if prop.dontClone:
-            continue
+            if prop.dontClone:
+                continue
 
-        if prop.getter:
-            getter_code = f'srcObject.{prop.getter}()'
-        else:
-            getter_code = f'srcObject.{prop.name}'
+            if prop.getter:
+                getter_code = f'srcObject.{prop.getter}()'
+            else:
+                getter_code = f'srcObject.{prop.name}'
 
-        f.write('\t' * (tabs) + f'/// Clone property "{prop.name}"' + '\n')
+            f.write('\t' * (tabs) + f'/// Clone property "{prop.name}"' + '\n')
 
-        if prop.setter:
-            f.write('\t' * (tabs) + f'SpaRcle::Utils::RemoveQualifiersT<decltype({getter_code})> clone_{prop.name};\n')
-            f.write('\t' * (tabs) + f'SpaRcle::Utils::Reflection::CloneTo({getter_code}, clone_{prop.name});\n')
-            f.write('\t' * (tabs) + f'destObject.{prop.setter}(std::move(clone_{prop.name}));\n')
-        else:
-            f.write('\t' * (tabs) + f'SpaRcle::Utils::Reflection::CloneTo({getter_code}, destObject.{prop.name});\n')
+            if prop.setter:
+                f.write('\t' * (tabs) + f'SpaRcle::Utils::RemoveQualifiersT<decltype({getter_code})> clone_{prop.name};\n')
+                f.write('\t' * (tabs) + f'SpaRcle::Utils::Reflection::CloneTo({getter_code}, clone_{prop.name});\n')
+                f.write('\t' * (tabs) + f'destObject.{prop.setter}(std::move(clone_{prop.name}));\n')
+            else:
+                f.write('\t' * (tabs) + f'SpaRcle::Utils::Reflection::CloneTo({getter_code}, destObject.{prop.name});\n')
 
     tabs -= 1
     f.write('\t' * tabs + '}\n\n')

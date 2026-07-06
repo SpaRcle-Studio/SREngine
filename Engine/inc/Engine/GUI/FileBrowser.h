@@ -32,7 +32,7 @@ namespace SR_CORE_NS::GUI {
         SR_CLASS()
         using Hash = std::size_t;
         using Super = SR_GRAPH_GUI_NS::Widget;
-        using CallbackFn = std::function<void(const SR_UTILS_NS::Path& path)>;
+        using CallbackFn = SR_HTYPES_NS::Function<void(const SR_UTILS_NS::Path& path)>;
     public:
         FileBrowser();
         ~FileBrowser() override;
