@@ -6,6 +6,7 @@ LIBRARIES = [
     "Graphics",
     "Audio",
     "Scripting",
+    "ImmediateGUI",
     "Utils",
     "Physics",
 ]

@@ -5,7 +5,8 @@
 #include <Engine/GUI/PropertyDrawers/MaterialPropertyDrawer.h>
 
 #include <Graphics/Material/UniqueMaterial.h>
-#include <Graphics/GUI/ImmediateGUI.h>
+
+#include <ImmediateGUI/GUI/ImmediateGUI.h>
 
 #include <Utils/FileSystem/FileDialog.h>
 #include <Utils/Resources/ResourceManager.h>

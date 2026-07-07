@@ -6,7 +6,7 @@
 #include <Engine/GUI/Hierarchy.h>
 #include <Engine/GUI/EditorGUI.h>
 
-#include <Graphics/GUI/ImmediateGUI.h>
+#include <ImmediateGUI/GUI/ImmediateGUI.h>
 
 #include <Utils/ECS/TransformRect.h>
 #include <Utils/ECS/SceneObject.h>

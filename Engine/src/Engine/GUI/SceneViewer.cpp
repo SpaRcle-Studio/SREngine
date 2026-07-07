@@ -21,6 +21,7 @@
 #include <Graphics/Pass/ColorBufferPass.h>
 #include <Graphics/Lighting/DirectionalLight.h>
 #include <Graphics/Render/RenderScene.h>
+#include <Graphics/Overlay/Overlay.h>
 
 #include <Physics/Utils/Utils.h>
 #include <Physics/3D/Rigidbody3D.h>
@@ -275,7 +276,8 @@ namespace SR_CORE_GUI_NS {
         }
 
         auto&& pPipeline = GetContext()->GetPipeline();
-        m_imagePosition = SR_GRAPH_GUI_NS::Immediate::DrawTexture(pPipeline.Get(), id, m_textureSize, false);
+        auto&& pDescriptor = pPipeline->GetOverlay(SR_GRAPH_NS::OverlayType::ImGui)->GetTextureDescriptorSet(id);
+        m_imagePosition = SR_GRAPH_GUI_NS::Immediate::DrawTexture(pDescriptor, m_textureSize, false);
     }
 
     void SceneViewer::SetCameraEnabled(bool enabled) {

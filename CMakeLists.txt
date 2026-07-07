@@ -129,7 +129,6 @@ set(SR_OUTPUT_LIBRARY_DIR "${SR_CMAKE_ROOT_BUILD_DIRECTORY}/Lib")
 
 add_definitions(
     -DSR_ICU
-    -DSR_USE_IMGUI
     -DSR_CXX_20
 )
 

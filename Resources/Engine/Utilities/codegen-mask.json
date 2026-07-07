@@ -1,6 +1,7 @@
 {
   "engine-include": [
     "Engine/libs/Utils/inc/Utils/",
+    "Engine/libs/ImmediateGUI/inc/ImmediateGUI/",
     "Engine/libs/Graphics/inc/Graphics/",
     "Engine/libs/Scripting/inc/Scripting/",
     "Engine/libs/Physics/inc/Physics/",

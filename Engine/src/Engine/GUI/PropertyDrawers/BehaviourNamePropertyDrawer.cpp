@@ -5,7 +5,7 @@
 #include <Engine/GUI/PropertyDrawers/BehaviourNamePropertyDrawer.h>
 #include <Engine/GUI/PropertyDrawers/PropertyDrawerUtils.h>
 
-#include <Graphics/GUI/ImmediateGUI.h>
+#include <ImmediateGUI/GUI/ImmediateGUI.h>
 
 #include <Scripting/Base/Behaviour.h>
 

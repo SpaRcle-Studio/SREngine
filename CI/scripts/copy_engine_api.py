@@ -51,6 +51,8 @@ def collect_files(logger: logger_utils.Logger, context: codegen_context.CodegenC
     config_path = Path(context.config_dir) / 'PackSourcesConfig.json'
     config = load_config(config_path)
 
+    logger.log_info(f'Loaded config from \"{config_path}\": {config}')
+
     includes = [glob_to_regex(sparcle_utils.normalize_path(os.path.join(context.analyze_dir, p.lstrip('/')))) for p in config.get('include', [])]
     excludes = [glob_to_regex(sparcle_utils.normalize_path(os.path.join(context.analyze_dir, p.lstrip('/')))) for p in config.get('exclude', [])]
 

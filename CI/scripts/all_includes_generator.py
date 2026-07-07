@@ -76,6 +76,7 @@ def get_engine_include_args(context: codegen_context.CodegenContext):
     includes = [
         f'{engine_root}/inc',
         f'{engine_root}/libs/Utils/inc',
+        f'{engine_root}/libs/ImmediateGUI/inc',
         f'{engine_root}/libs/Scripting/inc',
         f'{engine_root}/libs/Audio/inc',
         f'{engine_root}/libs/Physics/inc',

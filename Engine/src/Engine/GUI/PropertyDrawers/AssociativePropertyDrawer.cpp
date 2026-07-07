@@ -4,7 +4,7 @@
 
 #include <Engine/GUI/PropertyDrawers/AssociativePropertyDrawer.h>
 
-#include <Graphics/GUI/ImmediateGUI.h>
+#include <ImmediateGUI/GUI/ImmediateGUI.h>
 
 #include <Codegen/AssociativePropertyDrawer.generated.hpp>
 

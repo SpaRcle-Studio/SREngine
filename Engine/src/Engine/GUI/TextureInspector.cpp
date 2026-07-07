@@ -6,6 +6,8 @@
 #include <Engine/GUI/EditorGUI.h>
 
 #include <Graphics/Render/RenderContext.h>
+#include <Graphics/Overlay/Overlay.h>
+#include <Graphics/Pipeline/Pipeline.h>
 
 #include <Utils/TypeTraits/SRClassMeta.h>
 #include <Utils/Serialization/SRASerialization.h>
@@ -72,7 +74,8 @@ namespace SR_CORE_GUI_NS {
 
         const float_t windowWidth = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x - m_scrollBarWidth - 10.f;
         if (const int32_t textureId = m_texture->GetId(); textureId != SR_ID_INVALID) {
-            SR_GRAPH_GUI_NS::Immediate::DrawTexture(GetManager()->GetContext()->GetPipeline().Get(), textureId, windowWidth, false);
+            auto&& pDescriptor = GetManager()->GetContext()->GetPipeline()->GetOverlay(SR_GRAPH_NS::OverlayType::ImGui)->GetTextureDescriptorSet(textureId);
+            SR_GRAPH_GUI_NS::Immediate::DrawTexture(pDescriptor, windowWidth, false);
         }
 
         SR_GRAPH_GUI_NS::Immediate::Separator();

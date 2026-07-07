@@ -4,8 +4,9 @@
 
 #include <Engine/GUI/PropertyDrawers/ObjectPropertyDrawer.h>
 
+#include <ImmediateGUI/GUI/ImmediateGUI.h>
+
 #include <Graphics/GUI/Utils.h>
-#include <Graphics/GUI/ImmediateGUI.h>
 
 #include <Codegen/ObjectPropertyDrawer.generated.hpp>
 

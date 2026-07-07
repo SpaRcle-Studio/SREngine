@@ -4,7 +4,7 @@
 
 #include <Engine/GUI/PropertyDrawers/RectPropertyDrawer.h>
 
-#include <Graphics/GUI/ImmediateGUI.h>
+#include <ImmediateGUI/GUI/ImmediateGUI.h>
 
 #include <Utils/Common/StringUtils.h>
 

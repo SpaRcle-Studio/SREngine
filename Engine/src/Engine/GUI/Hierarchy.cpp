@@ -175,7 +175,7 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, prefabIndex % 2 == 0 ? SR_PREFAB_COLOR_FIRST : SR_PREFAB_COLOR_SECOND);
         }
 
-        if (SR_GRAPH_GUI_NS::RadioButton("##", pRoot->IsEnabled(), 0.75f)) {
+        if (SR_GRAPH_GUI_NS::Immediate::RadioButton("##", pRoot->IsEnabled(), 0.75f)) {
             auto&& pCmd = new SR_CORE_NS::Commands::EntityEnable(m_engine, pRoot.StaticCast<SR_UTILS_NS::Entity>(), !pRoot->IsEnabled());
             m_engine->GetCmdManager()->Execute(pCmd, SR_UTILS_NS::SyncType::Async);
         }

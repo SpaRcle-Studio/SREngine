@@ -19,6 +19,7 @@
 #include <Graphics/Render/DebugRenderer.h>
 #include <Graphics/Render/RenderScene.h>
 #include <Graphics/Render/RenderQueue.h>
+#include <Graphics/Overlay/Overlay.h>
 
 #include <Utils/Types/IRawMeshHolder.h>
 #include <Utils/Resources/ResourceManager.h>
@@ -442,7 +443,8 @@ namespace SR_CORE_GUI_NS {
             for (uint32_t i = 0; i < pFramebuffer->GetColorLayersCount(); ++i) {
                 if (auto&& textureId = pFramebuffer->GetColorTexture(i, pFramebuffer->GetPipeline()->GetCurrentImageIndex()); textureId != SR_ID_INVALID) {
                     auto&& pPipeline = GetContext()->GetPipeline();
-                    SR_GRAPH_GUI_NS::Immediate::DrawTexture(pPipeline.Get(), textureId, 256, false);
+                    auto&& pDescriptor = pPipeline->GetOverlay(SR_GRAPH_NS::OverlayType::ImGui)->GetTextureDescriptorSet(textureId);
+                    SR_GRAPH_GUI_NS::Immediate::DrawTexture(pDescriptor, 256, false);
                 }
             }
 
@@ -450,7 +452,8 @@ namespace SR_CORE_GUI_NS {
                 for (uint32_t i = 0; i < pFramebuffer->GetLayersCount(); ++i) {
                     if (auto&& textureId = pFramebuffer->GetDepthTexture(i, pFramebuffer->GetPipeline()->GetCurrentImageIndex()); textureId != SR_ID_INVALID) {
                         auto&& pPipeline = GetContext()->GetPipeline();
-                        SR_GRAPH_GUI_NS::Immediate::DrawTexture(pPipeline.Get(), textureId, 256, false);
+                        auto&& pDescriptor = pPipeline->GetOverlay(SR_GRAPH_NS::OverlayType::ImGui)->GetTextureDescriptorSet(textureId);
+                        SR_GRAPH_GUI_NS::Immediate::DrawTexture(pDescriptor, 256, false);
                     }
                 }
             }

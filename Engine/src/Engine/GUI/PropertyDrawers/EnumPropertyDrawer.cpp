@@ -4,7 +4,7 @@
 
 #include <Engine/GUI/PropertyDrawers/EnumPropertyDrawer.h>
 
-#include <Graphics/GUI/ImmediateGUI.h>
+#include <ImmediateGUI/GUI/ImmediateGUI.h>
 
 #include <Codegen/EnumPropertyDrawer.generated.hpp>
 

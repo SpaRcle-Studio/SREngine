@@ -5,7 +5,7 @@
 #include <Engine/GUI/PropertyDrawers/StringPropertyDrawer.h>
 #include <Engine/GUI/PropertyDrawers/PropertyDrawerUtils.h>
 
-#include <Graphics/GUI/ImmediateGUI.h>
+#include <ImmediateGUI/GUI/ImmediateGUI.h>
 
 #include <Utils/Localization/LocalizationManager.h>
 #include <Utils/Localization/Encoding.h>

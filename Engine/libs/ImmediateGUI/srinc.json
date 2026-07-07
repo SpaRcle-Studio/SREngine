@@ -1,0 +1,7 @@
+{
+    "module_name": "ImmediateGUI",
+    "include": [
+        "src/"
+    ],
+    "exclude": []
+}

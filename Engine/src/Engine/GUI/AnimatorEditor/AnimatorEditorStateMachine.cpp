@@ -12,7 +12,8 @@
 #include <Graphics/GUI/Link.h>
 #include <Graphics/GUI/Pin.h>
 #include <Graphics/GUI/NodeBuilder.h>
-#include <Graphics/GUI/ImmediateGUI.h>
+
+#include <ImmediateGUI/GUI/ImmediateGUI.h>
 
 #include <Utils/TypeTraits/Factory.h>
 
@@ -39,11 +40,9 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-    #ifdef SR_USE_IMGUI_NODE_EDITOR
         if (m_context.pStateMachineEditor) {
             SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(m_context.pStateMachineEditor);
         }
-    #endif
 
         // States -> visual nodes (без пинов)
         auto&& states = pMachine->GetStatesMutable();
@@ -61,11 +60,9 @@ namespace SR_CORE_GUI_NS {
             pNode->AddOutput(new SR_GRAPH_GUI_NS::Pin("Out", SR_GRAPH_GUI_NS::PinKind::Output));
             AddNode(pNode);
 
-        #ifdef SR_USE_IMGUI_NODE_EDITOR
             if (m_context.pStateMachineEditor) {
                 SR_GRAPH_GUI_NS::Immediate::SetNodePosition(pNode->GetId(), pState->GetEditorPosition());
             }
-        #endif
         }
 
         for (auto&& pState : states) {
@@ -96,11 +93,9 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-    #ifdef SR_USE_IMGUI_NODE_EDITOR
         if (m_context.pStateMachineEditor) {
             SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(nullptr);
         }
-    #endif
     }
 
     void AnimatorEditorStateMachine::SyncVisualToStateMachine() {
@@ -114,31 +109,24 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-    #ifdef SR_USE_IMGUI_NODE_EDITOR
         if (m_context.pStateMachineEditor) {
             SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(m_context.pStateMachineEditor);
         }
-    #endif
 
         for (auto&& [nodeId, pVisualNode] : m_nodes) {
             if (auto&& pState = pVisualNode->GetUserData<SR_ANIMATIONS_NS::AnimationState>()) {
-            #ifdef SR_USE_IMGUI_NODE_EDITOR
                 if (m_context.pStateMachineEditor) {
                     pState->SetEditorPosition(SR_GRAPH_GUI_NS::Immediate::GetNodePosition(pVisualNode->GetId()));
                 }
-            #endif
             }
         }
 
-    #ifdef SR_USE_IMGUI_NODE_EDITOR
         if (m_context.pStateMachineEditor) {
             SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(nullptr);
         }
-    #endif
     }
 
     void AnimatorEditorStateMachine::DrawStateMachineEditor() {
-    #ifdef SR_USE_IMGUI_NODE_EDITOR
         if (!m_context.pStateMachineEditor) {
             SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Red(), "State machine editor is not initialized!");
             return;
@@ -218,7 +206,7 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::Separator();
 
         SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(m_context.pStateMachineEditor);
-        SR_GRAPH_GUI_NS::Immediate::Begin("Animation State Machine", SR_MATH_NS::FVector2());
+        SR_GRAPH_GUI_NS::Immediate::BeginNodeEditor("Animation State Machine", SR_MATH_NS::FVector2());
 
         m_nodeEditorRegion = SR_MATH_NS::FRect(
             SR_GRAPH_GUI_NS::Immediate::GetItemRectMin(),
@@ -355,9 +343,6 @@ namespace SR_CORE_GUI_NS {
             SyncVisualToStateMachine();
             SyncStateMachineToVisual();
         }
-    #else
-        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Red(), "Node editor is disabled!");
-    #endif
     }
 
     void AnimatorEditorStateMachine::InitStateTypes() {

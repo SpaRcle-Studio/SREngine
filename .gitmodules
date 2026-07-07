@@ -28,3 +28,9 @@
 [submodule "Engine/libs/Audio/libs/flac"]
 	path = Engine/libs/Audio/libs/flac
 	url = https://github.com/SpaRcle-Studio/flac
+[submodule "Engine/libs/ImmediateGUI/libs/imgui-node-editor"]
+	path = Engine/libs/ImmediateGUI/libs/imgui-node-editor
+	url = https://github.com/SpaRcle-Studio/imgui-node-editor
+[submodule "Engine/libs/ImmediateGUI/libs/imgui"]
+	path = Engine/libs/ImmediateGUI/libs/imgui
+	url = https://github.com/SpaRcle-Studio/imgui

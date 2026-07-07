@@ -2,6 +2,7 @@
 	"include": [
 		"/Engine/libs/Graphics/inc/Graphics/",
 		"/Engine/libs/Audio/inc/Audio/",
+		"/Engine/libs/ImmediateGUI/inc/ImmediateGUI/",
 		"/Engine/libs/Physics/inc/Physics/",
 		"/Engine/libs/Scripting/inc/Scripting/",
 		"/Engine/libs/Utils/inc/Utils/",

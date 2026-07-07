@@ -61,7 +61,6 @@ if (NOT SR_ENGINE_FLATPAK_BUILD AND NOT ANDROID_NDK)
     include(libs/Utils/cmake/ResourceEmbedder.cmake)
 
     AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Threads.sras")
-    #AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Features.xml")
 
     if (WIN32)
         AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Utilities/git2.exe")
@@ -98,6 +97,8 @@ else()
     message(STATUS "SpaRcle Engine: PhysX is disabled because Clang emulation is used or Emscripten build")
 endif()
 
+message(STATUS "SpaRcle Engine: CONFIGURING ImmediateGUI")
+add_subdirectory(libs/ImmediateGUI)
 message(STATUS "SpaRcle Engine: CONFIGURING Audio")
 add_subdirectory(libs/Audio)
 message(STATUS "SpaRcle Engine: CONFIGURING Physics")
@@ -106,7 +107,6 @@ message(STATUS "SpaRcle Engine: CONFIGURING Graphics")
 add_subdirectory(libs/Graphics)
 message(STATUS "SpaRcle Engine: CONFIGURING Scripting")
 add_subdirectory(libs/Scripting)
-
 
 SR_COMMON_GENERATE_BUILD_SOURCES(${PROJECT_SOURCE_DIR})
 SR_COMMON_GET_SOURCES(Engine)
@@ -135,6 +135,7 @@ list(APPEND SR_CORE_LINK_LIBRARIES Physics)
 list(APPEND SR_CORE_LINK_LIBRARIES Graphics)
 list(APPEND SR_CORE_LINK_LIBRARIES Audio)
 list(APPEND SR_CORE_LINK_LIBRARIES Scripting)
+list(APPEND SR_CORE_LINK_LIBRARIES ImmediateGUI)
 
 target_link_libraries(Engine ${SR_CORE_LINK_LIBRARIES})
 

@@ -9,7 +9,7 @@
 
 #include <Engine/GUI/SoundDebug.h>
 
-#include <Graphics/GUI/ImmediateGUI.h>
+#include <ImmediateGUI/GUI/ImmediateGUI.h>
 
 #include <Codegen/SoundDebug.generated.hpp>
 

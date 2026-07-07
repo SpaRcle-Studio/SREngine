@@ -393,6 +393,9 @@ namespace SR_SCRIPTING_NS {
         #ifndef SR_SCRIPTING_STATIC_LIBRARY
             "Scripting",
         #endif
+        #ifndef SR_IMMEDIATE_GUI_STATIC_LIBRARY
+            "ImmediateGUI",
+        #endif
         #ifndef SR_AUDIO_STATIC_LIBRARY
             "Audio",
         #endif

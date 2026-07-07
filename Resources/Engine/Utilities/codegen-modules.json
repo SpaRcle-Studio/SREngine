@@ -5,6 +5,7 @@
     "Audio": "Engine/libs/Audio/inc",
     "Physics": "Engine/libs/Physics/inc",
     "Scripting": "Engine/libs/Scripting/inc",
+    "ImmediateGUI": "Engine/libs/ImmediateGUI/inc",
     "Utils": "Engine/libs/Utils/inc"
   }
 }

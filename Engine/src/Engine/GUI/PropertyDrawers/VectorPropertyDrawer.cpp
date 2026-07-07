@@ -4,7 +4,7 @@
 
 #include <Engine/GUI/PropertyDrawers/VectorPropertyDrawer.h>
 
-#include <Graphics/GUI/ImmediateGUI.h>
+#include <ImmediateGUI/GUI/ImmediateGUI.h>
 
 #include <Codegen/VectorPropertyDrawer.generated.hpp>
 

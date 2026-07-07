@@ -15,7 +15,8 @@
 #include <Graphics/GUI/Link.h>
 #include <Graphics/GUI/Pin.h>
 #include <Graphics/GUI/NodeBuilder.h>
-#include <Graphics/GUI/ImmediateGUI.h>
+
+#include <ImmediateGUI/GUI/ImmediateGUI.h>
 
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/FileSystem/FileDialog.h>
@@ -73,7 +74,6 @@ namespace SR_CORE_GUI_NS {
     }
 
     void AnimatorEditor::OnClose() {
-    #ifdef SR_USE_IMGUI_NODE_EDITOR
         if (m_editor) {
             SR_GRAPH_GUI_NS::Immediate::DestroyEditor(m_editor);
             m_editor = nullptr;
@@ -82,7 +82,6 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::DestroyEditor(m_context.pStateMachineEditor);
             m_context.pStateMachineEditor = nullptr;
         }
-    #endif
         m_editorStateMachine.ClearStateMachineVisual();
 
         Super::OnClose();
@@ -179,7 +178,6 @@ namespace SR_CORE_GUI_NS {
     void AnimatorEditor::DrawGraphEditor() {
         bool needsSync = false;
 
-    #ifdef SR_USE_IMGUI_NODE_EDITOR
         if (!m_editor) {
             return;
         }
@@ -187,7 +185,7 @@ namespace SR_CORE_GUI_NS {
         const bool editable = !(m_context.isLive && m_context.liveReadOnly);
 
         SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(m_editor);
-        if (!SR_GRAPH_GUI_NS::Immediate::Begin("Animation Graph Editor", SR_MATH_NS::FVector2())) {
+        if (!SR_GRAPH_GUI_NS::Immediate::BeginNodeEditor("Animation Graph Editor", SR_MATH_NS::FVector2())) {
             return;
         }
 
@@ -562,7 +560,6 @@ namespace SR_CORE_GUI_NS {
         if (needsSync) {
             SyncVisualNodesToGraph();
         }
-    #endif
     }
 
     void AnimatorEditor::DrawLeftPanel() {
@@ -579,7 +576,6 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::SRClass* pSelectedObject = nullptr;
 
-    #ifdef SR_USE_IMGUI_NODE_EDITOR
         void* pEditor = (m_tab == Tab::Graph) ? m_editor : m_context.pStateMachineEditor;
         if (pEditor) {
             SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(pEditor);
@@ -608,7 +604,6 @@ namespace SR_CORE_GUI_NS {
 
             SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(nullptr);
         }
-    #endif
 
         if (!pSelectedObject) {
             if (m_tab == Tab::Graph) {
@@ -764,9 +759,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     void AnimatorEditor::DrawPopupMenu() {
-    #ifdef SR_USE_IMGUI_NODE_EDITOR
-        // Deprecated: context menu is handled via BeginPopupContextWindow inside DrawGraphEditor/DrawStateMachineEditor.
-    #endif
+
     }
 
     void AnimatorEditor::SyncGraphToVisualNodes() {
@@ -781,13 +774,11 @@ namespace SR_CORE_GUI_NS {
         for (auto&& pGraphNode : m_context.pGraph->GetNodes()) {
             if (pGraphNode) {
                 auto&& pVisualNode = CreateVisualNode(pGraphNode.Get());
-            #ifdef SR_USE_IMGUI_NODE_EDITOR
                 if (m_editor) {
                     SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(m_editor);
                     SR_GRAPH_GUI_NS::Immediate::SetNodePosition(pVisualNode->GetId(), pGraphNode->GetEditorPosition());
                     SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(nullptr);
                 }
-            #endif
             }
         }
 
@@ -831,20 +822,16 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-    #ifdef SR_USE_IMGUI_NODE_EDITOR
         if (m_editor) {
             SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(m_editor);
         }
-    #endif
 
         // Сохраняем позиции визуальных нод в данные графа
         for (auto&& [nodeId, pVisualNode] : m_nodes) {
-        #ifdef SR_USE_IMGUI_NODE_EDITOR
             if (m_editor) {
                 auto&& pGraphNode = pVisualNode->GetUserData<SR_ANIMATIONS_NS::AnimationGraphNode>();
                 pGraphNode->SetEditorPosition(SR_GRAPH_GUI_NS::Immediate::GetNodePosition(pVisualNode->GetId()));
             }
-        #endif
         }
 
         // Сбрасываем старые подключения (полный ребилд по визуальным links)
@@ -912,11 +899,9 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-    #ifdef SR_USE_IMGUI_NODE_EDITOR
         if (m_editor) {
             SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(nullptr);
         }
-    #endif
     }
 
     SR_GRAPH_GUI_NS::Node* AnimatorEditor::CreateVisualNode(SR_ANIMATIONS_NS::AnimationGraphNode* pGraphNode) {
@@ -1039,7 +1024,6 @@ namespace SR_CORE_GUI_NS {
     }
 
     void AnimatorEditor::OnOpen() {
-#ifdef SR_USE_IMGUI_NODE_EDITOR
         if (!m_editor) {
             static auto&& settingsPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/AnimatorEditor.json");
             m_editor = SR_GRAPH_GUI_NS::Immediate::CreateEditor(settingsPath.CStr());
@@ -1048,7 +1032,6 @@ namespace SR_CORE_GUI_NS {
             static auto&& smSettingsPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/AnimatorStateMachineEditor.json");
             m_context.pStateMachineEditor = SR_GRAPH_GUI_NS::Immediate::CreateEditor(smSettingsPath.CStr());
         }
-#endif
         if (m_context.pGraph) {
             SyncGraphToVisualNodes();
         }

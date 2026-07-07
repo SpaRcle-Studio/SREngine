@@ -7,8 +7,9 @@
 #include <Engine/GUI/TextureInspector.h>
 #include <Engine/GUI/EditorGUI.h>
 
-#include <Graphics/GUI/ImmediateGUI.h>
 #include <Graphics/Material/MaterialData.h>
+
+#include <ImmediateGUI/GUI/ImmediateGUI.h>
 
 #include <Utils/FileSystem/FileDialog.h>
 
