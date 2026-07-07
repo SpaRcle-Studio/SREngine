@@ -136,11 +136,12 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
         else:
             default_value = 'DefaultTypeInstance() ? DefaultTypeInstance()->' + prop.name + ' : ' + f'decltype({class_obj.name}::{prop.name})()'
 
-        if default_value:
-            f.write('\n' + '\t' * (tabs + 3) + f'.SetDefaultValue(SpaRcle::Utils::Reflection::Value::Create({default_value}))')
+        if codegen_context.CODEGEN_ENTT_ENABLED:
+            if default_value:
+                f.write('\n' + '\t' * (tabs + 3) + f'.SetDefaultValue(SpaRcle::Utils::Reflection::Value::Create({default_value}))')
 
-        if prop.reset_value:
-            f.write('\n' + '\t' * (tabs + 3) + f'.SetResetValue(SpaRcle::Utils::Reflection::Value::Create({prop.reset_value}))')
+            if prop.reset_value:
+                f.write('\n' + '\t' * (tabs + 3) + f'.SetResetValue(SpaRcle::Utils::Reflection::Value::Create({prop.reset_value}))')
 
         if prop.display_name:
             f.write('\n' + '\t' * (tabs + 4) + f'.SetDisplayName("{prop.display_name}")')
@@ -625,14 +626,7 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
 
     for property in class_obj.variables:
         f.write('\t' * tabs + f'static void Set_{property.name}(SpaRcle::Utils::SRClass* pClass, const SpaRcle::Utils::Reflection::Value& value) {{' + '\n')
-        #f.write('\t' * (tabs + 1) + f'{class_name}* pClassImpl = dynamic_cast<{class_name}*>(pClass);' + '\n')
         get_class_impl_code = f'dynamic_cast<{class_name}*>(pClass)'
-
-        #f.write('\t' * (tabs + 1) + f'const decltype({class_name}::{property.name})* pData;\n')
-        #f.write('\t' * (tabs + 1) + f'if (!value.Map(pData)) {{\n')
-        #f.write('\t' * (tabs + 2) + f'return;\n')
-        #f.write('\t' * (tabs + 1) + f'}}\n')
-
         bool_do_gen_setter = True
         if property.virtual:
             if not property.setter or not property.getter:
@@ -645,35 +639,10 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
             f.write('\t' * (tabs + 1) + f'using Type = decltype({class_name}::{property.name});' + '\n')
 
         if bool_do_gen_setter:
-            #f.write('\t' * (tabs + 1) + f'if constexpr (SpaRcle::Utils::IsSharedPointerV<Type>) {{\n')
-            #f.write('\t' * (tabs + 2) + f'auto&& pSRClassRef = value.TryCast<SpaRcle::Utils::SRClass*>();\n')
-            #f.write('\t' * (tabs + 2) + f'if (!pSRClassRef) {{\n')
-            #f.write('\t' * (tabs + 3) + f'SRHalt("Failed to cast value!");\n')
-            #f.write('\t' * (tabs + 3) + f'return;\n')
-            #f.write('\t' * (tabs + 2) + f'}}\n')
-            #f.write('\t' * (tabs + 2) + f'auto&& pSRClass = const_cast<SpaRcle::Utils::SRClass*>(*pSRClassRef);\n')
-            #if property.setter:
-            #    f.write('\t' * (tabs + 2) + f'pClassImpl->{property.setter}(SetterSharedSRClassConvert<Type>(pSRClass));\n')
-            #else:
-            #    f.write('\t' * (tabs + 2) + f'pClassImpl->{property.name} = SetterSharedSRClassConvert<Type>(pSRClass);\n')
-            #f.write('\t' * (tabs + 1) + f'}} else {{\n')
-
+            f.write('\t' * (tabs + 1) + 'auto&& pData = static_cast<const Type*>(value.Data());\n')
             if property.virtual:
-                f.write('\t' * (tabs + 1) + 'auto&& pData = value.TryCast<Type>();\n')
-                f.write('\t' * (tabs + 1) + 'if (!pData) {\n')
-                f.write('\t' * (tabs + 2) + 'SRHalt("Failed to cast value!");\n')
-                f.write('\t' * (tabs + 2) + 'return;\n')
-                f.write('\t' * (tabs + 1) + '}\n')
-
                 f.write('\t' * (tabs + 1) + f'{get_class_impl_code}->{property.setter}(*pData);' + '\n')
             else:
-                f.write('\t' * (tabs + 1) + 'auto&& pData = value.TryCast<Type>();\n')
-                f.write('\t' * (tabs + 1) + 'if (!pData) {\n')
-                f.write('\t' * (tabs + 2) + 'SRHalt("Failed to cast value!");\n')
-
-                f.write('\t' * (tabs + 2) + 'return;\n')
-                f.write('\t' * (tabs + 1) + '}\n')
-
                 if property.setter:
                     f.write('\t' * (tabs + 1) + f'{get_class_impl_code}->{property.setter}(*pData);' + '\n')
                 else:
@@ -686,33 +655,30 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
         # =================================== getter ===================================
 
         f.write('\t' * tabs + f'static SpaRcle::Utils::Reflection::Value Get_{property.name}(SpaRcle::Utils::SRClass* pClass) {{\n')
-        #f.write('\t' * (tabs + 1) + f'{class_name}* pClassImpl = dynamic_cast<{class_name}*>(pClass);\n')
-        if property.getter:
-            f.write('\t' * (tabs + 1) + f'auto&& value = {get_class_impl_code}->{property.getter}();\n')
+        if codegen_context.CODEGEN_ENTT_ENABLED:
+            if property.getter:
+                f.write('\t' * (tabs + 1) + f'auto&& value = {get_class_impl_code}->{property.getter}();\n')
 
-            #f.write('\t' * (tabs + 1) + f'if constexpr (SpaRcle::Utils::IsSharedPointerV<decltype(value)>) {{\n')
-            #f.write('\t' * (tabs + 2) + f'return SpaRcle::Utils::Reflection::Value::TryCreateSRClass(value);\n')
-            #f.write('\t' * (tabs + 1) + f'}} else ')
-
-            f.write('\t' * (tabs + 1) + 'if constexpr (std::is_lvalue_reference_v<decltype(value)>) {\n')
-            f.write('\t' * (tabs + 2) + 'if constexpr (std::is_const_v<std::remove_reference_t<decltype(value)>>) {\n')
-            f.write('\t' * (tabs + 3) + 'return SpaRcle::Utils::Reflection::Value::CreateCRef(value);\n')
-            f.write('\t' * (tabs + 2) + '} else {\n')
-            f.write('\t' * (tabs + 3) + 'return SpaRcle::Utils::Reflection::Value::CreateRef(value);\n')
-            f.write('\t' * (tabs + 2) + '}\n')
-            f.write('\t' * (tabs + 1) + '} else {\n')
-            f.write('\t' * (tabs + 2) + 'return SpaRcle::Utils::Reflection::Value::Create(std::move(value));\n')
-            f.write('\t' * (tabs + 1) + '}\n')
-        else:
-            #f.write('\t' * (tabs + 1) + f'if constexpr (SpaRcle::Utils::IsSharedPointerV<decltype(pClassImpl->{property.name})>) {{\n')
-            #f.write('\t' * (tabs + 2) + f'return SpaRcle::Utils::Reflection::Value::TryCreateSRClass(pClassImpl->{property.name});\n')
-            #f.write('\t' * (tabs + 1) + f'}}\n')
-
-            if property.read_only:
-                f.write('\t' * (tabs + 1) + f'return SpaRcle::Utils::Reflection::Value::CreateCRef({get_class_impl_code}->{property.name});' + '\n')
+                f.write('\t' * (tabs + 1) + 'if constexpr (std::is_lvalue_reference_v<decltype(value)>) {\n')
+                f.write('\t' * (tabs + 2) + 'if constexpr (std::is_const_v<std::remove_reference_t<decltype(value)>>) {\n')
+                f.write('\t' * (tabs + 3) + 'return SpaRcle::Utils::Reflection::Value::CreateCRef(value);\n')
+                f.write('\t' * (tabs + 2) + '} else {\n')
+                f.write('\t' * (tabs + 3) + 'return SpaRcle::Utils::Reflection::Value::CreateRef(value);\n')
+                f.write('\t' * (tabs + 2) + '}\n')
+                f.write('\t' * (tabs + 1) + '} else {\n')
+                f.write('\t' * (tabs + 2) + 'return SpaRcle::Utils::Reflection::Value::Create(std::move(value));\n')
+                f.write('\t' * (tabs + 1) + '}\n')
             else:
-                f.write('\t' * (tabs + 1) + f'return SpaRcle::Utils::Reflection::Value::CreateRef({get_class_impl_code}->{property.name});' + '\n')
+                #f.write('\t' * (tabs + 1) + f'if constexpr (SpaRcle::Utils::IsSharedPointerV<decltype(pClassImpl->{property.name})>) {{\n')
+                #f.write('\t' * (tabs + 2) + f'return SpaRcle::Utils::Reflection::Value::TryCreateSRClass(pClassImpl->{property.name});\n')
+                #f.write('\t' * (tabs + 1) + f'}}\n')
 
+                if property.read_only:
+                    f.write('\t' * (tabs + 1) + f'return SpaRcle::Utils::Reflection::Value::CreateCRef({get_class_impl_code}->{property.name});' + '\n')
+                else:
+                    f.write('\t' * (tabs + 1) + f'return SpaRcle::Utils::Reflection::Value::CreateRef({get_class_impl_code}->{property.name});' + '\n')
+        else:
+            f.write('\t' * (tabs + 1) + f'return SpaRcle::Utils::Reflection::Value();\n')
 
         f.write('\t' * tabs + '}\n')
 

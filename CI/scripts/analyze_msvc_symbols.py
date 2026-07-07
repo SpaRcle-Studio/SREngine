@@ -1,80 +1,136 @@
-import json
-import gzip
+import subprocess
 from pathlib import Path
-import argparse
 
-def load_trace(path):
+LIBRARIES = [
+    "Engine",
+    "Graphics",
+    "Audio",
+    "Scripting",
+    "Utils",
+    "Physics",
+]
+
+LIMIT = 65535
+
+
+def find_build_dirs(root: Path):
+    return sorted(
+        p for p in root.iterdir()
+        if p.is_dir() and "build" in p.name.lower()
+    )
+
+
+def choose_build(builds):
+    if not builds:
+        print("Не найдено ни одной build-папки.")
+        exit(1)
+
+    print("Найденные build-папки:\n")
+
+    for i, build in enumerate(builds):
+        print(f"[{i}] {build}")
+
+    while True:
+        try:
+            index = int(input("\nВыберите build: "))
+            if 0 <= index < len(builds):
+                return builds[index]
+        except ValueError:
+            pass
+
+        print("Некорректный ввод.")
+
+
+def find_objects(build_dir: Path, library: str):
+    if library == "Engine":
+        return list((build_dir / "Engine" / "CMakeFiles" / "Engine.dir").rglob("*.obj"))
+
+    root = (build_dir / "Engine" / "libs" / library / "CMakeFiles" / f"{library}.dir")
+
+    if not root.exists():
+        return []
+
+    return list(root.rglob("*.obj"))
+
+
+def analyze_obj(obj: Path):
     try:
-        with open(path, "r", encoding="utf8") as f:
-            first_line = f.readline() # skip first line
-            return json.load(f)
-    except Exception:
-        pass
+        result = subprocess.run(
+            ["dumpbin", "/symbols", str(obj)],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            encoding="utf-8",
+            errors="ignore",
+            check=True,
+        )
+    except FileNotFoundError:
+        print("Не найден dumpbin.exe")
+        exit(1)
 
-    try:
-        with gzip.open(path, "rt", encoding="utf8") as f:
-            return json.load(f)
-    except Exception:
-        pass
+    count = 0
 
-    raise RuntimeError("Файл не читается как JSON или gzip JSON")
+    for line in result.stdout.splitlines():
+        if " External " in line:
+            count += 1
 
-def extract_longest_events(trace, top, nolib=False):
-    # если trace — объект с traceEvents
-    if isinstance(trace, dict) and "traceEvents" in trace:
-        events = trace["traceEvents"]
-    # если это просто список
-    elif isinstance(trace, list):
-        events = trace
-    else:
-        raise RuntimeError("Формат trace непонятен")
+    return count
 
-    result = []
 
-    for e in events:
-        if not isinstance(e, dict):
+def main():
+    root = Path(__file__).resolve().parent.parent.parent
+
+    build = choose_build(find_build_dirs(root))
+
+    print(f"\nИспользуется build: {build}\n")
+
+    print(f"{'Library':<15}{'Objects':>10}{'Symbols':>12}")
+    print("-" * 40)
+
+    total_symbols = 0
+    total_objects = 0
+
+    heavy_objects = []
+
+    messages = []
+
+    for library in LIBRARIES:
+        print(f"Loading {library}...")
+        objects = find_objects(build, library)
+
+        if not objects:
+            print(f"Library {library} not found or has no object files.")
             continue
 
-        if e.get("ph") != "X":  # duration event
-            continue
+        lib_symbols = 0
 
-        dur = e.get("dur", 0)
-        if dur <= 0:
-            continue
+        print(f"Analyzing {len(objects)} object files in {library}...")
+        for obj in objects:
+            symbols = analyze_obj(obj)
+            lib_symbols += symbols
 
-        name = e.get("name", "<unknown>")
+            heavy_objects.append((symbols, obj))
 
-        if nolib:
-            modules = ['Utils', 'Physics', 'Audio', 'Scripting', 'Graphics']
-            skip = False
-            for module in modules:
-                if module + "/libs" in name:
-                    skip = True
-                    break
-            if skip:
-                continue
+        total_symbols += lib_symbols
+        total_objects += len(objects)
 
-        args = e.get("args", {}).get("command", "")
+        messages.append(f"{library:<15}" f"{len(objects):>10}" f"{lib_symbols:>12}")
 
-        result.append((dur, name, args))
+    print("-" * 40)
 
-    result.sort(reverse=True, key=lambda x: x[0])
-    return [sum(dur for dur, _, _ in result), result[:top]]
+    for message in messages:
+        print(message)
 
-parser = argparse.ArgumentParser()
-parser.add_argument('--top', type=int, default=50, help='Number of top longest events to display')
-parser.add_argument('--nolib', action='store_true', help='Exclude library commands from the output')
+    print("-" * 40)
+    print(f"{'Total':<15}" f"{total_objects:>10}" f"{total_symbols:>12}")
 
-trace = load_trace("trace.json")
-arguments = parser.parse_args()
-[total_time, longest] = extract_longest_events(trace, top=arguments.top, nolib=arguments.nolib)
+    heavy_objects.sort(reverse=True, key=lambda x: x[0])
 
-total_time_top = sum(dur for dur, _, _ in longest)
+    print("\nTop 20 heaviest object files:\n")
 
-for dur, name, cmd in longest:
-    print(f"{dur/1e6:8.3f}s  |  {name}")
-    if cmd:
-        print("   ", cmd)
+    for symbols, obj in heavy_objects[:20]:
+        print(f"{symbols:>8}  {obj.relative_to(build)}")
 
-print(f"\nTotal time of all events: {total_time/1e6:.3f}s")
-print(f"\nTotal time of top events: {total_time_top/1e6:.3f}s")
+
+if __name__ == "__main__":
+    main()
