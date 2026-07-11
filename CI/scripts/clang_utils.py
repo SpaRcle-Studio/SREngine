@@ -338,7 +338,7 @@ def process_property(property_obj: reflection_utils.CPPProperty, clang_child):
         #    print(f'Found default value: {property_obj.default_value}')
 
 
-def parse_sparcle_enum(logger, parent_node, code_structure, namespaces):
+def parse_sparcle_enum(logger, context, parent_node, code_structure, namespaces):
     if parent_node.kind != clang.cindex.CursorKind.STRUCT_DECL or not parent_node.is_definition():
         return
 
@@ -418,6 +418,10 @@ def parse_sparcle_enum(logger, parent_node, code_structure, namespaces):
 
     if all_found == 6:
         enum_object = reflection_utils.CPPEnum(name, variant, count, enum_type, enum_class, namespaces, parent_node.location.file.name, va_args)
+        for module_mask in context.modules_mask:
+            if module_mask[1] in enum_object.source_path:
+                enum_object.code_module_name = module_mask[0]
+                break
         code_structure.enums.append(enum_object)
     else:
         logger.log_fatal_error(f'Error: enum {parent_node.spelling} not found all fields! Found {all_found} of 6! Name: {name}, Variant: {variant}, Count: {count}, Type: {enum_type}, Class: {enum_class}, VA Args: {va_args}')
@@ -441,11 +445,6 @@ def parse_sparcle_class(logger, context: codegen_context.CodegenContext, parent_
                 if module_mask[1] in class_path:
                     class_obj.code_module_name = module_mask[0]
                     break
-
-        #if is_help_source:
-        #    class_obj.is_help_source = True
-        #    code_structure.sparcle_classes.append(class_obj)
-        #    return
 
         class_obj.inspector = extract_special_tag_comment_data(parent_node, 'inspector')
 
@@ -544,7 +543,7 @@ def parse_header_tree(logger, deep, parent_node, code_structure, namespaces, con
             parse_header_tree(logger, deep + 1, child, code_structure, namespaces, context)
         return
 
-    parse_sparcle_enum(logger, parent_node, code_structure, namespaces)
+    parse_sparcle_enum(logger, context, parent_node, code_structure, namespaces)
     parse_sparcle_class(logger, context, parent_node, code_structure, namespaces)
 
     # Проверяем, является ли текущий узел пространством имен

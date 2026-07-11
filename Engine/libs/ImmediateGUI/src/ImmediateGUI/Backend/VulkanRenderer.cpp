@@ -3,14 +3,60 @@
 //
 
 #include <ImmediateGUI/Backend/VulkanRenderer.h>
-#include <ImmediateGUI/Impl/Internal.h>
-#include <ImmediateGUI/Impl/WindowsImpl.h>
+#include <ImmediateGUI/Impl/ImGUI.h>
 
 #include <Utils/Debug.h>
 
 #if defined(SR_USE_VULKAN) && defined(SR_USE_IMGUI)
 
 namespace SR_GRAPH_GUI_NS::Immediate {
+    struct ImGui_ImplVulkanH_FrameRenderBuffers
+    {
+        VkDeviceMemory      VertexBufferMemory;
+        VkDeviceMemory      IndexBufferMemory;
+        VkDeviceSize        VertexBufferSize;
+        VkDeviceSize        IndexBufferSize;
+        VkBuffer            VertexBuffer;
+        VkBuffer            IndexBuffer;
+    };
+
+    struct ImGui_ImplVulkanH_WindowRenderBuffers
+    {
+        uint32_t            Index;
+        uint32_t            Count;
+        ImGui_ImplVulkanH_FrameRenderBuffers*   FrameRenderBuffers;
+    };
+
+    struct ImGui_ImplVulkan_Data
+    {
+        ImGui_ImplVulkan_InitInfo   VulkanInitInfo;
+        VkDeviceSize                BufferMemoryAlignment;
+        VkPipelineCreateFlags       PipelineCreateFlags;
+        VkDescriptorSetLayout       DescriptorSetLayout;
+        VkPipelineLayout            PipelineLayout;
+        VkPipeline                  Pipeline;
+        VkShaderModule              ShaderModuleVert;
+        VkShaderModule              ShaderModuleFrag;
+
+        // Font data
+        VkSampler                   FontSampler;
+        VkDeviceMemory              FontMemory;
+        VkImage                     FontImage;
+        VkImageView                 FontView;
+        VkDescriptorSet             FontDescriptorSet;
+        VkCommandPool               FontCommandPool;
+        VkCommandBuffer             FontCommandBuffer;
+
+        /// Render buffers for main window
+        ImGui_ImplVulkanH_WindowRenderBuffers MainWindowRenderBuffers;
+
+        ImGui_ImplVulkan_Data()
+        {
+            memset(this, 0, sizeof(*this));
+            BufferMemoryAlignment = 256;
+        }
+    };
+
     namespace {
         struct VulkanRenderer {
             VulkanRendererCreateInfo info;
@@ -52,102 +98,49 @@ namespace SR_GRAPH_GUI_NS::Immediate {
             { VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT,       1000 }
         };
 
+        static std::string_view GetVulkanResultString(VkResult result) {
+            switch (result) {
+                case VK_SUCCESS: return "VK_SUCCESS";
+                case VK_NOT_READY: return "VK_NOT_READY";
+                case VK_TIMEOUT: return "VK_TIMEOUT";
+                case VK_EVENT_SET: return "VK_EVENT_SET";
+                case VK_EVENT_RESET: return "VK_EVENT_RESET";
+                case VK_INCOMPLETE: return "VK_INCOMPLETE";
+                case VK_SUBOPTIMAL_KHR: return "VK_SUBOPTIMAL_KHR";
+                case VK_ERROR_OUT_OF_HOST_MEMORY: return "VK_ERROR_OUT_OF_HOST_MEMORY";
+                case VK_ERROR_OUT_OF_DEVICE_MEMORY: return "VK_ERROR_OUT_OF_DEVICE_MEMORY";
+                case VK_ERROR_INITIALIZATION_FAILED: return "VK_ERROR_INITIALIZATION_FAILED";
+                case VK_ERROR_DEVICE_LOST: return "VK_ERROR_DEVICE_LOST";
+                case VK_ERROR_MEMORY_MAP_FAILED: return "VK_ERROR_MEMORY_MAP_FAILED";
+                case VK_ERROR_LAYER_NOT_PRESENT: return "VK_ERROR_LAYER_NOT_PRESENT";
+                case VK_ERROR_EXTENSION_NOT_PRESENT: return "VK_ERROR_EXTENSION_NOT_PRESENT";
+                case VK_ERROR_FEATURE_NOT_PRESENT: return "VK_ERROR_FEATURE_NOT_PRESENT";
+                case VK_ERROR_INCOMPATIBLE_DRIVER: return "VK_ERROR_INCOMPATIBLE_DRIVER";
+                case VK_ERROR_TOO_MANY_OBJECTS: return "VK_ERROR_TOO_MANY_OBJECTS";
+                case VK_ERROR_FORMAT_NOT_SUPPORTED: return "VK_ERROR_FORMAT_NOT_SUPPORTED";
+                case VK_ERROR_FRAGMENTED_POOL: return "VK_ERROR_FRAGMENTED_POOL";
+                case VK_ERROR_SURFACE_LOST_KHR: return "VK_ERROR_SURFACE_LOST_KHR";
+                case VK_ERROR_NATIVE_WINDOW_IN_USE_KHR: return "VK_ERROR_NATIVE_WINDOW_IN_USE_KHR";
+                case VK_ERROR_OUT_OF_DATE_KHR: return "VK_ERROR_OUT_OF_DATE_KHR";
+                case VK_ERROR_INCOMPATIBLE_DISPLAY_KHR: return "VK_ERROR_INCOMPATIBLE_DISPLAY_KHR";
+                case VK_ERROR_INVALID_SHADER_NV: return "VK_ERROR_INVALID_SHADER_NV";
+                case VK_ERROR_OUT_OF_POOL_MEMORY: return "VK_ERROR_OUT_OF_POOL_MEMORY";
+                case VK_ERROR_INVALID_EXTERNAL_HANDLE: return "VK_ERROR_INVALID_EXTERNAL_HANDLE";
+                case VK_ERROR_FRAGMENTATION: return "VK_ERROR_FRAGMENTATION";
+                case VK_ERROR_INVALID_DEVICE_ADDRESS_EXT: return "VK_ERROR_INVALID_DEVICE_ADDRESS_EXT";
+                case VK_ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT: return "VK_ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT";
+                case VK_ERROR_UNKNOWN: return "VK_ERROR_UNKNOWN";
+                default: break;
+            }
+
+            return "Unknown";
+        }
+
         void CheckVulkanResult(VkResult result) {
             if (result != VK_SUCCESS) {
-                SR_ERROR("Immediate::VulkanRenderer : vulkan error! Code: {}", static_cast<int>(result));
+                SR_ERROR("Immediate::VulkanRenderer : vulkan error! Result: {}", GetVulkanResultString(result));
             }
         }
-
-    #if defined(SR_WIN32)
-        static LRESULT CustomWindowProcPlatform(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)  {
-            if (ImmediateGUI_WndProcHandler(hwnd, msg, wParam, lParam)) {
-                return true;
-            }
-
-            switch (msg) {
-                case WM_CREATE:
-                case WM_DESTROY:
-                    return DefWindowProc(hwnd, msg, wParam, lParam);
-                case WM_CLOSE: {
-                    /// We keep default behaviour. Higher-level code may close widgets itself via ImGui docking logic.
-                    return DefWindowProc(hwnd, msg, wParam, lParam);
-                }
-                case WM_SETCURSOR: {
-                    /// Fix cursor for secondary viewport windows.
-                    SetClassLongPtr(hwnd, GCLP_HCURSOR, reinterpret_cast<LONG_PTR>(LoadCursor(NULL, IDC_ARROW)));
-                    return DefWindowProc(hwnd, msg, wParam, lParam);
-                }
-                default:
-                    return DefWindowProc(hwnd, msg, wParam, lParam);
-            }
-        }
-
-        struct ImGui_ImplWin32_ViewportData {
-            HWND    Hwnd;
-            bool    HwndOwned;
-            DWORD   DwStyle;
-            DWORD   DwExStyle;
-
-            ImGui_ImplWin32_ViewportData() { Hwnd = NULL; HwndOwned = false; DwStyle = DwExStyle = 0; }
-            ~ImGui_ImplWin32_ViewportData() { IM_ASSERT(Hwnd == NULL); }
-        };
-
-        static void ImGui_ImplWin32_GetWin32StyleFromViewportFlags(ImGuiViewportFlags flags, DWORD* out_style, DWORD* out_ex_style) {
-            if (flags & ImGuiViewportFlags_NoDecoration)
-                *out_style = WS_POPUP;
-            else
-                *out_style = WS_OVERLAPPEDWINDOW;
-
-            if (flags & ImGuiViewportFlags_NoTaskBarIcon)
-                *out_ex_style = WS_EX_TOOLWINDOW;
-            else
-                *out_ex_style = WS_EX_APPWINDOW;
-
-            if (flags & ImGuiViewportFlags_TopMost)
-                *out_ex_style |= WS_EX_TOPMOST;
-        }
-
-        static void ImGui_ImplWin32_CreateWindow(ImGuiViewport* viewport) {
-            ImGui_ImplWin32_ViewportData* vd = IM_NEW(ImGui_ImplWin32_ViewportData)();
-            viewport->PlatformUserData = vd;
-
-            ImGui_ImplWin32_GetWin32StyleFromViewportFlags(viewport->Flags, &vd->DwStyle, &vd->DwExStyle);
-            HWND parent_window = NULL;
-            if (viewport->ParentViewportId != 0)
-                if (ImGuiViewport* parent_viewport = ImGui::FindViewportByID(viewport->ParentViewportId))
-                    parent_window = (HWND)parent_viewport->PlatformHandle;
-
-            RECT rect = { (LONG)viewport->Pos.x, (LONG)viewport->Pos.y, (LONG)(viewport->Pos.x + viewport->Size.x), (LONG)(viewport->Pos.y + viewport->Size.y) };
-            ::AdjustWindowRectEx(&rect, vd->DwStyle, FALSE, vd->DwExStyle);
-            vd->Hwnd = ::CreateWindowEx(
-                vd->DwExStyle, "ImGui Platform", "Untitled", vd->DwStyle,
-                rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top,
-                parent_window, NULL, ::GetModuleHandle(NULL), NULL);
-
-            vd->HwndOwned = true;
-            viewport->PlatformRequestResize = false;
-            viewport->PlatformHandle = viewport->PlatformHandleRaw = vd->Hwnd;
-
-            vd->DwExStyle &= ~WS_CAPTION;
-            vd->DwExStyle &= ~WS_SIZEBOX;
-            vd->DwExStyle &= ~WS_SYSMENU;
-
-            SetWindowLong(vd->Hwnd, GWL_STYLE, vd->DwExStyle);
-            UpdateWindow(vd->Hwnd);
-        }
-
-        static void (*g_platformCreateWindow)(ImGuiViewport* vp) = nullptr;
-
-        static void Replacement_Platform_CreateWindow(ImGuiViewport* vp) {
-            if (g_platformCreateWindow) {
-                g_platformCreateWindow(vp);
-            }
-
-            if (vp->PlatformHandle != nullptr) {
-                SetWindowLongPtr((HWND)vp->PlatformHandle, GWLP_WNDPROC, (LONG_PTR)CustomWindowProcPlatform);
-            }
-        }
-    #endif
 
         static int CreatePlatformSurface(ImGuiViewport* pv, ImU64 vk_inst, const void* vk_allocators, ImU64* out_vk_surface) {
         #if defined(SR_WIN32)
@@ -373,9 +366,6 @@ namespace SR_GRAPH_GUI_NS::Immediate {
                 }
 
                 platform_io.Platform_CreateVkSurface = CreatePlatformSurface;
-
-                g_platformCreateWindow = ImGui_ImplWin32_CreateWindow;
-                platform_io.Platform_CreateWindow = Replacement_Platform_CreateWindow;
             }
         #endif
 
@@ -386,21 +376,21 @@ namespace SR_GRAPH_GUI_NS::Immediate {
             init_info.QueueFamily = r.info.graphicsQueueFamily;
             init_info.Queue = r.info.graphicsQueue;
             init_info.DescriptorPool = r.descriptorPool;
-            init_info.RenderPass = r.renderPass;
+            init_info.PipelineInfoMain.RenderPass = r.renderPass;
             init_info.MinImageCount = r.imageCount;
             init_info.ImageCount = r.imageCount;
-            init_info.MSAASamples = r.info.msaaSamples;
+            init_info.PipelineInfoMain.MSAASamples = r.info.msaaSamples;
             init_info.PipelineCache = r.info.pipelineCache;
-            init_info.Subpass = 0;
+            init_info.PipelineInfoMain.Subpass = 0;
             init_info.UseDynamicRendering = false;
-            init_info.PipelineRenderingCreateInfo = {};
+            init_info.PipelineInfoMain.PipelineRenderingCreateInfo = {};
             init_info.Allocator = nullptr;
             init_info.CheckVkResultFn = CheckVulkanResult;
             init_info.MinAllocationSize = 0;
 
             if (r.info.enableDynamicRendering) {
                 init_info.UseDynamicRendering = true;
-                init_info.PipelineRenderingCreateInfo = {
+                init_info.PipelineInfoMain.PipelineRenderingCreateInfo = {
                     .sType                   = VK_STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO,
                     .pNext                   = nullptr,
                     .colorAttachmentCount    = 1,
@@ -694,13 +684,42 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         return static_cast<VulkanRenderer*>(renderer)->textureSetLayout;
     }
 
+    VkDescriptorSet VulkanAddTexture(VulkanRendererHandle renderer, VkImageView imageView, VkImageLayout imageLayout) {
+        if (!renderer || imageView == VK_NULL_HANDLE) {
+            return VK_NULL_HANDLE;
+        }
+
+        if (!ImGui::GetCurrentContext() || !ImGui::GetIO().BackendRendererUserData) {
+            return VK_NULL_HANDLE;
+        }
+
+        return ImGui_ImplVulkan_AddTexture(imageView, imageLayout);
+    }
+
+    void VulkanRemoveTexture(VulkanRendererHandle renderer, VkDescriptorSet descriptorSet) {
+        (void)renderer;
+
+        if (descriptorSet == VK_NULL_HANDLE) {
+            return;
+        }
+
+        if (!ImGui::GetCurrentContext() || !ImGui::GetIO().BackendRendererUserData) {
+            return;
+        }
+
+        ImGui_ImplVulkan_RemoveTexture(descriptorSet);
+    }
+
     void VulkanReloadFonts(VulkanRendererHandle renderer) {
         if (!renderer) {
             return;
         }
 
-        if (ImGui::GetIO().BackendRendererUserData) {
-            ImGui_ImplVulkan_CreateFontsTexture();
+        // On ImGui 1.92+ with RendererHasTextures, the Vulkan backend will honor this request
+        // during ImGui_ImplVulkan_RenderDrawData() (via draw_data->Textures updates).
+        ImGuiIO& io = ImGui::GetIO();
+        if (io.Fonts && io.Fonts->TexData) {
+            io.Fonts->TexData->SetStatus(ImTextureStatus_WantCreate);
         }
     }
 }

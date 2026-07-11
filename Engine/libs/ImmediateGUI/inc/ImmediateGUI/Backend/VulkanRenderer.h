@@ -57,6 +57,11 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     SR_IMMEDIATE_GUI_DLL_API extern VkSemaphore VulkanGetRenderSemaphore(VulkanRendererHandle renderer);
     SR_IMMEDIATE_GUI_DLL_API extern VkDescriptorSetLayout VulkanGetTextureDescriptorSetLayout(VulkanRendererHandle renderer);
 
+    /// Registers a Vulkan image view as ImGui texture and returns VkDescriptorSet usable as ImTextureID.
+    /// Internally uses imgui vulkan backend (ImGui_ImplVulkan_AddTexture/RemoveTexture).
+    SR_IMMEDIATE_GUI_DLL_API extern VkDescriptorSet VulkanAddTexture(VulkanRendererHandle renderer, VkImageView imageView, VkImageLayout imageLayout);
+    SR_IMMEDIATE_GUI_DLL_API extern void VulkanRemoveTexture(VulkanRendererHandle renderer, VkDescriptorSet descriptorSet);
+
     SR_IMMEDIATE_GUI_DLL_API extern void VulkanReloadFonts(VulkanRendererHandle renderer);
 }
 

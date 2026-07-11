@@ -29,10 +29,10 @@ namespace SR_GRAPH_NS::GUI {
             { "LogSliderDeadzone", &ImGuiStyle::LogSliderDeadzone },
             { "TabRounding", &ImGuiStyle::TabRounding },
             { "TabBorderSize", &ImGuiStyle::TabBorderSize },
-            { "TabMinWidthForCloseButton", &ImGuiStyle::TabMinWidthForCloseButton },
+            // { "TabMinWidthForCloseButton", &ImGuiStyle::TabMinWidthForCloseButton },
             { "MouseCursorScale", &ImGuiStyle::MouseCursorScale },
             { "CurveTessellationTol", &ImGuiStyle::CurveTessellationTol },
-            //{ "CircleSegmentMaxError", &ImGuiStyle::CircleSegmentMaxError },
+            // { "CircleSegmentMaxError", &ImGuiStyle::CircleSegmentMaxError },
     };
 
     inline static const std::unordered_map<std::string, bool ImGuiStyle::*> STYLE_BOOL_VALUES = {
@@ -220,7 +220,7 @@ namespace SR_GRAPH_NS::GUI {
 
         for (const auto& [name, value] : m_colors) {
             if (STYLE_COLORS.count(name) == 0) {
-                SRAssert2(false, "Unknown id: " + name);
+                SR_ERROR("Theme::Apply() : unknown id: {}", name);
             }
             else
                 colors[STYLE_COLORS.at(name)] = ImVec4(value.r, value.g, value.b, value.a);
@@ -228,7 +228,7 @@ namespace SR_GRAPH_NS::GUI {
 
         for (const auto& [name, value] : m_sizes) {
             if (STYLE_SIZE_VALUES.count(name) == 0) {
-                SRAssert2(false, "Unknown id: " + name);
+                SR_ERROR("Theme::Apply() : unknown id: {}", name);
             }
             else
                 style.*(STYLE_SIZE_VALUES.at(name)) = ImVec2(value.x, value.y);
@@ -236,7 +236,7 @@ namespace SR_GRAPH_NS::GUI {
 
         for (const auto& [name, value] : m_floats) {
             if (STYLE_FLOAT_VALUES.count(name) == 0) {
-                SRAssert2(false, "Unknown id: " + name);
+                SR_ERROR("Theme::Apply() : unknown id: {}", name);
             }
             else
                 style.*(STYLE_FLOAT_VALUES.at(name)) = value;
@@ -244,7 +244,7 @@ namespace SR_GRAPH_NS::GUI {
 
         for (const auto& [name, value] : m_booleans) {
             if (STYLE_BOOL_VALUES.count(name) == 0) {
-                SRAssert2(false, "Unknown id: " + name);
+                SR_ERROR("Theme::Apply() : unknown id: {}", name);
             }
             else
                 style.*(STYLE_BOOL_VALUES.at(name)) = value;

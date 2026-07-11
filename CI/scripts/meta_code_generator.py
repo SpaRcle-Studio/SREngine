@@ -967,7 +967,56 @@ def generate_enums_header(logger: logger_utils.Logger, context: codegen_context.
         new_f.write(str(f))
 
 
-def generate_enums_code(logger: logger_utils.Logger, context: codegen_context.CodegenContext, enums):
+def generate_enums_registerer_code(logger: logger_utils.Logger, context: codegen_context.CodegenContext, enums: list[reflection_utils.CPPEnum]):
+    f = sparcle_utils.StringStream()
+
+    f.write(sparcle_utils.codegen_cpp_header_comment)
+    f.write(f'#ifndef SR_CODEGEN_ENUM_MODULE_{context.module_name}_REGISTERER_HPP' + '\n')
+    f.write(f'#define SR_CODEGEN_ENUM_MODULE_{context.module_name}_REGISTERER_HPP' + '\n\n')
+
+    f.write(f'#include <Utils/Common/EnumReflector.h>\n\n')
+
+    module_enums = [enum_obj for enum_obj in enums if not enum_obj.is_help_source]
+
+    for enum_obj in module_enums:
+        f.write(f'const char* EnumBodyString_{enum_obj.name} = \"({enum_obj.va_args})\";\n')
+
+    if len(module_enums) > 0:
+        f.write('\n')
+
+    for enum_obj in module_enums:
+        enum_type = enum_obj.type
+        f.write(f'void RegisterEnumReflector_{enum_obj.name}() {{ static {enum_type} _detail_sval; _detail_sval = 0; \n'
+                 '  struct _detail_val_t {'
+                 '      _detail_val_t(const _detail_val_t &rhs) : _val(rhs) { _detail_sval = _val + 1; }'
+                f'      _detail_val_t({enum_type} val) : _val(val) {{ _detail_sval = _val + 1; }}'
+                 '      _detail_val_t() : _val(_detail_sval) { _detail_sval = _val + 1; }'
+                 '      _detail_val_t &operator=(const _detail_val_t &) { return *this; }'
+                f'      _detail_val_t &operator=({enum_type}) {{ return *this; }}'
+                f'      operator {enum_type}() const {{ return _val; }}'
+                f'      {enum_type} _val; '
+                f'  }} {enum_obj.va_args};\n')
+        f.write(f'\tconst {enum_type} _detail_vals[] = {{' + enum_obj.va_args + f'}};\n')
+        f.write(f'\tSpaRcle::Utils::EnumReflectorManager::Instance().RegisterReflector(SpaRcle::Utils::EnumVariant::{enum_obj.variant}, &_detail_vals, sizeof({enum_obj.type}), {enum_obj.count}, \"{enum_obj.name}\", EnumBodyString_{enum_obj.name});\n')
+        f.write(f'}}\n\n')
+
+    f.write(f'void RegisterModuleEnums_{context.module_name}() {{' + '\n')
+    for enum_obj in module_enums:
+        f.write(f'\tRegisterEnumReflector_{enum_obj.name}();\n')
+    f.write(f'}}\n\n')
+
+    f.write(f'void UnregisterModuleEnums_{context.module_name}() {{' + '\n')
+    for enum_obj in module_enums:
+        f.write(f'\tSpaRcle::Utils::EnumReflectorManager::Instance().UnregisterReflector(\"{enum_obj.name}\");\n')
+    f.write(f'}}\n\n')
+
+    f.write(f'#endif // SR_CODEGEN_ENUM_MODULE_{context.module_name}_REGISTERER_HPP' + '\n')
+
+    codegen_file = os.path.normpath(f'{context.codegen_dir}/../Enum/EnumModuleRegisterer_{context.module_name}.hpp')
+    with open(codegen_file, 'w', encoding='utf8') as new_f:
+        new_f.write(str(f))
+
+def generate_enums_code(logger: logger_utils.Logger, context: codegen_context.CodegenContext, enums: list[reflection_utils.CPPEnum]):
     logger.log_info(f'Generating enums utility code...')
 
     generate_enums_fwd_header(logger, context, enums)
@@ -985,39 +1034,34 @@ def generate_enums_code(logger: logger_utils.Logger, context: codegen_context.Co
         generated_files.add(f'{enum_obj.name}.hpp')
         f = sparcle_utils.StringStream()
 
-        if True:
-            caps_enum_name = enum_obj.name.upper()
+        caps_enum_name = enum_obj.name.upper()
 
-            f.write(sparcle_utils.codegen_cpp_header_comment)
-            f.write(f'#ifndef SR_CODEGEN_ENUM_{caps_enum_name}_HPP' + '\n')
-            f.write(f'#define SR_CODEGEN_ENUM_{caps_enum_name}_HPP' + '\n\n')
+        f.write(sparcle_utils.codegen_cpp_header_comment)
+        f.write(f'#ifndef SR_CODEGEN_ENUM_{caps_enum_name}_HPP' + '\n')
+        f.write(f'#define SR_CODEGEN_ENUM_{caps_enum_name}_HPP' + '\n\n')
 
-            #f.write(f'#include \"{enum_obj.source_path}\"' + '\n\n')
-            f.write(f'#include <Utils/Common/EnumOperators.h>\n\n')
+        f.write(f'#include <Utils/Common/EnumOperators.h>\n\n')
 
-            #f.write('#include <Codegen/Enums.generated.hpp>\n\n')
+        namespace_str = ''
+        if len(enum_obj.namespaces) > 0:
+            namespace_str = '::'.join(enum_obj.namespaces)
 
-            namespace_str = ''
-            if len(enum_obj.namespaces) > 0:
-                namespace_str = '::'.join(enum_obj.namespaces)
+        if len(namespace_str) > 0:
+            namespace_str += '::'
 
-            if len(namespace_str) > 0:
-                namespace_str += '::'
+        class_full_name = namespace_str + enum_obj.name
+        f.write(f'SR_CODEGEN_ENUM_OPERATORS(inline, inline, {class_full_name})' + '\n\n')
 
-            class_full_name = namespace_str + enum_obj.name
-            f.write(f'SR_CODEGEN_ENUM_OPERATORS(inline, inline, {class_full_name})' + '\n\n')
+        f.write(f'template<> struct fmt::formatter<{namespace_str}{enum_obj.name}> {{' + '\n')
+        f.write('\tconstexpr auto parse(format_parse_context& ctx) { return ctx.begin(); }\n')
+        f.write(f'\tauto format(const {namespace_str}{enum_obj.name}& val, format_context& ctx) const {{' + '\n')
 
-            f.write(f'template<> struct fmt::formatter<{namespace_str}{enum_obj.name}> {{' + '\n')
-            f.write('\tconstexpr auto parse(format_parse_context& ctx) { return ctx.begin(); }\n')
-            f.write(f'\tauto format(const {namespace_str}{enum_obj.name}& val, format_context& ctx) const {{' + '\n')
+        f.write('\t\treturn fmt::format_to(ctx.out(), "{}", SpaRcle::Utils::EnumReflector::ToStringAtom(val).ToStringView());' + '\n')
 
-            #f.write(f'\t\tstatic_assert(SpaRcle::Utils::IsCompleteTypeV<{namespace_str}CodegenEnumIncludedChecked_{enum_obj.name}>, "Formatted enum is not included, please include it!");' + '\n')
-            f.write('\t\treturn fmt::format_to(ctx.out(), "{}", SpaRcle::Utils::EnumReflector::ToStringAtom(val).ToStringView());' + '\n')
+        f.write('\t}\n')
+        f.write('};\n')
 
-            f.write('\t}\n')
-            f.write('};\n')
-
-            f.write('\n' + f'#endif // SR_CODEGEN_ENUM_{caps_enum_name}_HPP' + '\n')
+        f.write('\n' + f'#endif // SR_CODEGEN_ENUM_{caps_enum_name}_HPP' + '\n')
 
         enum_gen_path = os.path.normpath(f'{context.codegen_dir}/../Enum/{enum_obj.name}.hpp')
         if os.path.isfile(enum_gen_path):
@@ -1037,6 +1081,8 @@ def generate_enums_code(logger: logger_utils.Logger, context: codegen_context.Co
             os.remove(file)
 
     logger.log_info(f'Enum files generated: {generated}, skipped: {skipped}')
+
+    generate_enums_registerer_code(logger, context, enums)
 
 
 def generate_meta_module_core_code(logger: logger_utils.Logger, context: codegen_context.CodegenContext, class_structures):
@@ -1062,6 +1108,9 @@ def generate_meta_module_core_code(logger: logger_utils.Logger, context: codegen
                     f.write(f'#include <{class_obj.code_module_name}/stdInclude.h>\n')
         if len(already_included) > 1:
             f.write(f'\n')
+        context.module_std_includes = already_included
+
+        f.write('#include <Enum/EnumModuleRegisterer_' + context.module_name + '.hpp>\n\n')
 
         f.write('namespace Codegen {\n')
 
@@ -1080,6 +1129,8 @@ def generate_meta_module_core_code(logger: logger_utils.Logger, context: codegen
 
         tabs += 1
 
+        f.write(tabs * "\t" + f'RegisterModuleEnums_{context.module_name}();' + '\n')
+
         for class_obj in class_structures:
             if not class_obj.is_help_source:
                 f.write(tabs * "\t" + f'RegisterClassMeta_{class_obj.name}();' + '\n')
@@ -1092,6 +1143,8 @@ def generate_meta_module_core_code(logger: logger_utils.Logger, context: codegen
         f.write('\n' + tabs * "\t" + f'extern "C" SR_MAYBE_UNUSED SR_DLL_API_EXPORT void SR_DLL_CDECL UnregisterModule_{context.module_name}() {{' + '\n')
 
         tabs += 1
+
+        f.write(tabs * "\t" + f'UnregisterModuleEnums_{context.module_name}();' + '\n')
 
         for class_obj in class_structures:
             if not class_obj.is_help_source:

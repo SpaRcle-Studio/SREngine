@@ -143,12 +143,14 @@ class CPPEnum:
     def __init__(self, name, variant, count, type, enum_class, namespaces, source_path, va_args):
         self.name = name
         self.variant = variant
+        self.code_module_name = None
         self.count = count
         self.namespaces = namespaces
         self.type = type
         self.enum_class = enum_class
         self.source_path = sparcle_utils.normalize_path(source_path)
         self.va_args = va_args
+        self.is_help_source = False
 
 
 class SpaRcleClass:
@@ -269,3 +271,5 @@ class CPPCodeStructure:
     def set_sources_as_help(self):
         for sparcle_class in self.sparcle_classes:
             sparcle_class.is_help_source = True
+        for enum in self.enums:
+            enum.is_help_source = True

@@ -115,6 +115,8 @@ namespace SR_CORE_NS::GUI {
                     current.iconType = Core::EditorIcon::Prefab;
                 } else if (extension == "srtech") {
                     current.iconType = Core::EditorIcon::RenderTechnique;
+                } else if (extension == "theme") {
+                    current.iconType = Core::EditorIcon::Theme;
                 } else if (extension == "animation") {
                     current.iconType = Core::EditorIcon::Animation;
                 } else if (extension == "animator") {
@@ -272,7 +274,7 @@ namespace SR_CORE_NS::GUI {
         SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::FrameRounding, 0.0f);
         SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::FramePadding, SR_MATH_NS::FVector2(1.f, 1.f) * fontSize * 0.25f);
 
-        if (SR_GRAPH_GUI_NS::Immediate::BeginChild("current directory panel", SR_MATH_NS::FVector2(0.f, panelHeight), false))
+        if (SR_GRAPH_GUI_NS::Immediate::BeginChild("current directory panel", SR_MATH_NS::FVector2(0.f, panelHeight)))
         {
             SR_GRAPH_GUI_NS::Immediate::PushItemWidth(fontSize * 6.f);
             if (SR_GRAPH_GUI_NS::Immediate::SliderFloat("##assets-scale", &m_itemsScale, 0.0, 4.0)) {
@@ -458,7 +460,7 @@ namespace SR_CORE_NS::GUI {
     void FileBrowser::FileCatalogPanel(const float_t& leftWidth) {
         SR_TRACY_ZONE;
 
-        if (SR_GRAPH_GUI_NS::Immediate::BeginChild("left panel", SR_MATH_NS::FVector2(leftWidth, 0), true))
+        if (SR_GRAPH_GUI_NS::Immediate::BeginChild("left panel", SR_MATH_NS::FVector2(leftWidth, 0)))
         {
             SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::IndentSpacing, SR_GRAPH_GUI_NS::Immediate::GetFontSize());
 

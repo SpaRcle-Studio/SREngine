@@ -48,8 +48,11 @@
 #endif
 
 #ifdef SR_USE_IMGUI_NODE_EDITOR
+    #define __IMGUI_EXTRA_MATH_INL__
     #include <imgui-node-editor/imgui_node_editor.cpp>
     #include <imgui-node-editor/imgui_node_editor_api.cpp>
     #include <imgui-node-editor/imgui_canvas.cpp>
     #include <imgui-node-editor/crude_json.cpp>
+
+    #include <ImmediateGUI/Impl/NodeEditorDeprecatedMath.h>
 #endif

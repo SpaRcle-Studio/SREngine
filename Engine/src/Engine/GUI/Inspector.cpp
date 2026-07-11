@@ -33,6 +33,7 @@
 #include <Utils/Serialization/SerializationFlags.h>
 
 #include <Enum/TreeNodeFlags.hpp>
+#include <Enum/ChildWindowFlags.hpp>
 
 #include <Codegen/Inspector.generated.hpp>
 
@@ -95,8 +96,7 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::BeginChild(
             "##warning",
             SR_MATH_NS::FVector2(0, 40),
-            true,
-            SR_GRAPH_GUI_NS::WindowFlags::AlwaysAutoResize
+            SR_GRAPH_GUI_NS::ChildWindowFlags::AlwaysAutoResize | SR_GRAPH_GUI_NS::ChildWindowFlags::AutoResizeX
         );
 
         SR_GRAPH_GUI_NS::Immediate::TextColored(
@@ -647,49 +647,38 @@ namespace SR_CORE_GUI_NS {
         return context;
     }
 
-    void Inspector::InspectTag(const SR_UTILS_NS::StringAtom tag, const SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)>& callback) {
-        /// вызываем в потокобезопасном контексте, так как теги могут быть изменены извне
-        SR_UTILS_NS::TagManager::Instance().Do([&](auto&& pSettings) {
-            auto&& pTagManager = dynamic_cast<SR_UTILS_NS::TagManager*>(pSettings);
-            auto&& tags = pTagManager->GetTags();
-            auto&& tagIndex = static_cast<int>(pTagManager->GetTagIndex(tag));
-            auto&& pTags = const_cast<std::vector<SR_UTILS_NS::StringAtom>*>(&tags);
+    void Inspector::InspectTag(const SR_UTILS_NS::StringAtom currentTag, const SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)>& callback) {
+        SR_TRACY_ZONE;
+        SR_MAYBE_UNUSED auto&& lock = SR_UTILS_NS::TagManager::Instance().ScopeLockSingleton();
 
-            if (SR_GRAPH_GUI_NS::Immediate::Combo("Tag", &tagIndex, [](void* vec, int idx, const char** out_text){
-                auto&& vector = reinterpret_cast<std::vector<SR_UTILS_NS::StringAtom>*>(vec);
-                if (idx < 0 || idx >= vector->size())
-                    return false;
+        auto&& tags = SR_UTILS_NS::TagManager::Instance().GetTags();
+        auto&& tagIndex = static_cast<int>(SR_UTILS_NS::TagManager::Instance().GetTagIndex(currentTag));
 
-                *out_text = vector->at(idx).c_str();
+        m_comboBoxBuffer.clear();
+        for (auto&& tag : tags) {
+            m_comboBoxBuffer += tag.ToStringView();
+            m_comboBoxBuffer += '\0';
+        }
 
-                return true;
-            }, reinterpret_cast<void*>(pTags), tags.size())) {
-                /// TODO: переделать на комманды
-                callback(pTagManager->GetTagByIndex(tagIndex));
-            }
-        });
+        if (SR_GRAPH_GUI_NS::Immediate::Combo("Tag", &tagIndex, m_comboBoxBuffer.c_str())) {
+            callback(tags[tagIndex]);
+        }
     }
 
-    void Inspector::InspectLayer(const SR_UTILS_NS::StringAtom layer, const SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)>& callback) {
+    void Inspector::InspectLayer(const SR_UTILS_NS::StringAtom currentLayer, const SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)>& callback) {
         SR_TRACY_ZONE;
-
         SR_MAYBE_UNUSED auto&& lock = SR_UTILS_NS::LayerManager::Instance().ScopeLockSingleton();
 
         auto&& layers = SR_UTILS_NS::LayerManager::Instance().GetLayers();
-        auto&& layerIndex = static_cast<int>(SR_UTILS_NS::LayerManager::Instance().GetLayerIndex(layer));
-        auto&& pLayers = const_cast<SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>*>(&layers);
+        auto&& layerIndex = static_cast<int>(SR_UTILS_NS::LayerManager::Instance().GetLayerIndex(currentLayer));
 
-        if (SR_GRAPH_GUI_NS::Immediate::Combo("Layer", &layerIndex, [](void* vec, int idx, const char** out_text){
-            auto&& vector = reinterpret_cast<SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>*>(vec);
-            if (idx < 0 || idx >= vector->size()) {
-                return false;
-            }
+        m_comboBoxBuffer.clear();
+        for (auto&& layer : layers) {
+            m_comboBoxBuffer += layer.ToStringView();
+            m_comboBoxBuffer += '\0';
+        }
 
-            *out_text = vector->at(idx).c_str();
-
-            return true;
-        }, reinterpret_cast<void*>(pLayers), layers.size())) {
-            /// TODO: переделать на комманды
+        if (SR_GRAPH_GUI_NS::Immediate::Combo("Layer", &layerIndex, m_comboBoxBuffer.c_str())) {
             callback(layers[layerIndex]);
         }
     }

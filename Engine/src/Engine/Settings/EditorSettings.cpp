@@ -9,5 +9,9 @@
 #include <Codegen/EditorSettings.generated.hpp>
 
 namespace SR_CORE_NS {
-
+    void EditorSettings::OnThemeChanged() {
+        if (auto&& pTheme = GetTheme().GetResource()) {
+            pTheme->Apply();
+        }
+    }
 }

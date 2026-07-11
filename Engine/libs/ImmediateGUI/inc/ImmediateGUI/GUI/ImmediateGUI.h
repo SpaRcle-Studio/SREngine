@@ -38,41 +38,52 @@ namespace SR_GRAPH_GUI_NS {
         uint64_t size = 0;
     };
 
+    SR_ENUM_NS_STRUCT_T(ChildWindowFlags, uint32_t,
+        None                    = 0,
+        Borders                 = 1 << 0,   // Show an outer border and enable WindowPadding. (IMPORTANT: this is always == 1 == true for legacy reason)
+        AlwaysUseWindowPadding  = 1 << 1,   // Pad with style.WindowPadding even if no border are drawn (no padding by default for non-bordered child windows because it makes more sense)
+        ResizeX                 = 1 << 2,   // Allow resize from right border (layout direction). Enable .ini saving (unless ImGuiWindowFlags_NoSavedSettings passed to window flags)
+        ResizeY                 = 1 << 3,   // Allow resize from bottom border (layout direction). "
+        AutoResizeX             = 1 << 4,   // Enable auto-resizing width. Read "IMPORTANT: Size measurement" details above.
+        AutoResizeY             = 1 << 5,   // Enable auto-resizing height. Read "IMPORTANT: Size measurement" details above.
+        AlwaysAutoResize        = 1 << 6,   // Combined with AutoResizeX/AutoResizeY. Always measure size even when child is hidden, always return true, always disable clipping optimization! NOT RECOMMENDED.
+        FrameStyle              = 1 << 7,   // Style the child window like a framed item: use FrameBg, FrameRounding, FrameBorderSize, FramePadding instead of ChildBg, ChildRounding, ChildBorderSize, WindowPadding.
+        NavFlattened            = 1 << 8   // [BETA] Share focus scope, allow keyboard/gamepad navigation to cross over parent border to this child or between sibling child windows.
+    )
+
     SR_ENUM_NS_STRUCT_T(WindowFlags, uint32_t,
-        None                      = 0,
-        NoTitleBar                = 1 << 0,
-        NoResize                  = 1 << 1,
-        NoMove                    = 1 << 2,
-        NoScrollbar               = 1 << 3,
-        NoScrollWithMouse         = 1 << 4,
-        NoCollapse                = 1 << 5,
-        AlwaysAutoResize          = 1 << 6,
-        NoBackground              = 1 << 7,
-        NoSavedSettings           = 1 << 8,
-        NoMouseInputs             = 1 << 9,
-        MenuBar                   = 1 << 10,
-        HorizontalScrollbar       = 1 << 11,
-        NoFocusOnAppearing        = 1 << 12,
-        NoBringToFrontOnFocus     = 1 << 13,
-        AlwaysVerticalScrollbar   = 1 << 14,
-        AlwaysHorizontalScrollbar = 1 << 15,
-        AlwaysUseWindowPadding    = 1 << 16,
-        NoNavInputs               = 1 << 18,
-        NoNavFocus                = 1 << 19,
-        UnsavedDocument           = 1 << 20,
-        NoDocking                 = 1 << 21,
+        None                   = 0,
+        NoTitleBar             = 1 << 0,   // Disable title-bar
+        NoResize               = 1 << 1,   // Disable user resizing with the lower-right grip
+        NoMove                 = 1 << 2,   // Disable user moving the window
+        NoScrollbar            = 1 << 3,   // Disable scrollbars (window can still scroll with mouse or programmatically)
+        NoScrollWithMouse      = 1 << 4,   // Disable user vertically scrolling with mouse wheel. On child window, mouse wheel will be forwarded to the parent unless NoScrollbar is also set.
+        NoCollapse             = 1 << 5,   // Disable user collapsing window by double-clicking on it. Also referred to as Window Menu Button (e.g. within a docking node).
+        AlwaysAutoResize       = 1 << 6,   // Resize every window to its content every frame
+        NoBackground           = 1 << 7,   // Disable drawing background color (WindowBg, etc.) and outside border. Similar as using SetNextWindowBgAlpha(0.0f).
+        NoSavedSettings        = 1 << 8,   // Never load/save settings in .ini file
+        NoMouseInputs          = 1 << 9,   // Disable catching mouse, hovering test with pass through.
+        MenuBar                = 1 << 10,  // Has a menu-bar
+        HorizontalScrollbar    = 1 << 11,  // Allow horizontal scrollbar to appear (off by default). You may use SetNextWindowContentSize(ImVec2(width,0.0f)); prior to calling Begin() to specify width. Read code in imgui_demo in the "Horizontal Scrolling" section.
+        NoFocusOnAppearing     = 1 << 12,  // Disable taking focus when transitioning from hidden to visible state
+        NoBringToFrontOnFocus  = 1 << 13,  // Disable bringing window to front when taking focus (e.g. clicking on it or programmatically giving it focus)
+        AlwaysVerticalScrollbar= 1 << 14,  // Always show vertical scrollbar (even if ContentSize.y < Size.y)
+        AlwaysHorizontalScrollbar=1<< 15,  // Always show horizontal scrollbar (even if ContentSize.x < Size.x)
+        NoNavInputs            = 1 << 16,  // No keyboard/gamepad navigation within the window
+        NoNavFocus             = 1 << 17,  // No focusing toward this window with keyboard/gamepad navigation (e.g. skipped by Ctrl+Tab)
+        UnsavedDocument        = 1 << 18,  // Display a dot next to the title. When used in a tab/docking context, tab is selected when clicking the X + closure is not assumed (will wait for user to stop submitting the tab). Otherwise closure is assumed when pressing the X, so if you keep submitting the tab may reappear at end of tab bar.
+        NoDocking              = 1 << 19,  // Disable docking of this window
+        NoNav                  = NoNavInputs   | NoNavFocus,
+        NoDecoration           = NoTitleBar    | NoResize    | NoScrollbar | NoCollapse,
+        NoInputs               = NoMouseInputs | NoNavInputs | NoNavFocus,
 
-        NoNav                     = NoNavInputs | NoNavFocus,
-        NoDecoration              = NoTitleBar | NoResize | NoScrollbar | NoCollapse,
-        NoInputs                  = NoMouseInputs | NoNavInputs | NoNavFocus,
-
-        NavFlattened              = 1 << 23,
-        ChildWindow               = 1 << 24,
-        Tooltip                   = 1 << 25,
-        Popup                     = 1 << 26,
-        Modal                     = 1 << 27,
-        ChildMenu                 = 1 << 28,
-        DockNodeHost              = 1 << 29
+        // [Internal]
+        DockNodeHost           = 1 << 23,  // Don't use! For internal use by Begin()/NewFrame()
+        ChildWindow            = 1 << 24,  // Don't use! For internal use by BeginChild()
+        Tooltip                = 1 << 25,  // Don't use! For internal use by BeginTooltip()
+        Popup                  = 1 << 26,  // Don't use! For internal use by BeginPopup()
+        Modal                  = 1 << 27,  // Don't use! For internal use by BeginPopupModal()
+        ChildMenu              = 1 << 28  // Don't use! For internal use by BeginMenu()
     )
 
     namespace Immediate {
@@ -95,7 +106,7 @@ namespace SR_GRAPH_GUI_NS {
             COUNT
         };
 
-        enum class StyleColor {
+        SR_ENUM_NS_CLASS_T(StyleColor, uint32_t,
             Text,
             TextDisabled,
             WindowBg,              // Background of normal windows
@@ -106,15 +117,16 @@ namespace SR_GRAPH_GUI_NS {
             FrameBg,               // Background of checkbox, radio button, plot, slider, text input
             FrameBgHovered,
             FrameBgActive,
-            TitleBg,
-            TitleBgActive,
-            TitleBgCollapsed,
+            TitleBg,               // Title bar
+            TitleBgActive,         // Title bar when focused
+            TitleBgCollapsed,      // Title bar when collapsed
             MenuBarBg,
             ScrollbarBg,
             ScrollbarGrab,
             ScrollbarGrabHovered,
             ScrollbarGrabActive,
-            CheckMark,
+            CheckMark,             // Checkbox tick and RadioButton circle
+            CheckboxSelectedBg,    // Checkbox background when Selected, otherwise use FrameBg
             SliderGrab,
             SliderGrabActive,
             Button,
@@ -129,11 +141,14 @@ namespace SR_GRAPH_GUI_NS {
             ResizeGrip,            // Resize grip in lower-right and lower-left corners of windows.
             ResizeGripHovered,
             ResizeGripActive,
-            Tab,                   // TabItem in a TabBar
-            TabHovered,
-            TabActive,
-            TabUnfocused,
-            TabUnfocusedActive,
+            InputTextCursor,       // InputText cursor/caret
+            TabHovered,            // Tab background, when hovered
+            Tab,                   // Tab background, when tab-bar is focused & tab is unselected
+            TabSelected,           // Tab background, when tab-bar is focused & tab is selected
+            TabSelectedOverline,   // Tab horizontal overline, when tab-bar is focused & tab is selected
+            TabDimmed,             // Tab background, when tab-bar is unfocused & tab is unselected
+            TabDimmedSelected,     // Tab background, when tab-bar is unfocused & tab is selected
+            TabDimmedSelectedOverline,//..horizontal overline, when tab-bar is unfocused & tab is selected
             DockingPreview,        // Preview overlay color when about to docking something
             DockingEmptyBg,        // Background color for empty node (e.g. CentralNode with no window docked into it)
             PlotLines,
@@ -145,14 +160,17 @@ namespace SR_GRAPH_GUI_NS {
             TableBorderLight,      // Table inner borders (prefer using Alpha=1.0 here)
             TableRowBg,            // Table row background (even rows)
             TableRowBgAlt,         // Table row background (odd rows)
-            TextSelectedBg,
-            DragDropTarget,        // Rectangle highlighting a drop target
-            NavHighlight,          // Gamepad/keyboard: current highlighted item
-            NavWindowingHighlight, // Highlight window when using CTRL+TAB
-            NavWindowingDimBg,     // Darken/colorize entire screen behind the CTRL+TAB window list, when active
-            ModalWindowDimBg,      // Darken/colorize entire screen behind a modal window, when one is active
-            COUNT
-        };
+            TextLink,              // Hyperlink color
+            TextSelectedBg,        // Selected text inside an InputText
+            TreeLines,             // Tree node hierarchy outlines when using ImGuiTreeNodeFlags_DrawLines
+            DragDropTarget,        // Rectangle border highlighting a drop target
+            DragDropTargetBg,      // Rectangle background highlighting a drop target
+            UnsavedMarker,         // Unsaved Document marker (in window title and tabs)
+            NavCursor,             // Color of keyboard/gamepad navigation cursor/rectangle, when visible
+            NavWindowingHighlight, // Highlight window when using Ctrl+Tab
+            NavWindowingDimBg,     // Darken/colorize entire screen behind the Ctrl+Tab window list, when active
+            ModalWindowDimBg       // Darken/colorize entire screen behind a modal window, when one is active
+        )
 
         enum class Direction {
             None    = -1,
@@ -163,35 +181,53 @@ namespace SR_GRAPH_GUI_NS {
             COUNT
         };
 
-        enum class StyleVar {
-            Alpha,               // float     Alpha
-            DisabledAlpha,       // float     DisabledAlpha
-            WindowPadding,       // FVector2  WindowPadding
-            WindowRounding,      // float     WindowRounding
-            WindowBorderSize,    // float     WindowBorderSize
-            WindowMinSize,       // FVector2  WindowMinSize
-            WindowTitleAlign,    // FVector2  WindowTitleAlign
-            ChildRounding,       // float     ChildRounding
-            ChildBorderSize,     // float     ChildBorderSize
-            PopupRounding,       // float     PopupRounding
-            PopupBorderSize,     // float     PopupBorderSize
-            FramePadding,        // FVector2  FramePadding
-            FrameRounding,       // float     FrameRounding
-            FrameBorderSize,     // float     FrameBorderSize
-            ItemSpacing,         // FVector2  ItemSpacing
-            ItemInnerSpacing,    // FVector2  ItemInnerSpacing
-            IndentSpacing,       // float     IndentSpacing
-            CellPadding,         // FVector2  CellPadding
-            ScrollbarSize,       // float     ScrollbarSize
-            ScrollbarRounding,   // float     ScrollbarRounding
-            GrabMinSize,         // float     GrabMinSize
-            GrabRounding,        // float     GrabRounding
-            TabRounding,         // float     TabRounding
-            ButtonTextAlign,     // FVector2  ButtonTextAlign
-            SelectableTextAlign, // FVector2  SelectableTextAlign
-            LayoutAlign,         // float     LayoutAlign
-            COUNT
-        };
+        SR_ENUM_NS_CLASS_T(StyleVar, uint32_t,
+            Alpha,                      // float     Alpha
+            DisabledAlpha,              // float     DisabledAlpha
+            WindowPadding,              // ImVec2    WindowPadding
+            WindowRounding,             // float     WindowRounding
+            WindowBorderSize,           // float     WindowBorderSize
+            WindowMinSize,              // ImVec2    WindowMinSize
+            WindowTitleAlign,           // ImVec2    WindowTitleAlign
+            ChildRounding,              // float     ChildRounding
+            ChildBorderSize,            // float     ChildBorderSize
+            PopupRounding,              // float     PopupRounding
+            PopupBorderSize,            // float     PopupBorderSize
+            FramePadding,               // ImVec2    FramePadding
+            FrameRounding,              // float     FrameRounding
+            FrameBorderSize,            // float     FrameBorderSize
+            ItemSpacing,                // ImVec2    ItemSpacing
+            ItemInnerSpacing,           // ImVec2    ItemInnerSpacing
+            IndentSpacing,              // float     IndentSpacing
+            CellPadding,                // ImVec2    CellPadding
+            ScrollbarSize,              // float     ScrollbarSize
+            ScrollbarRounding,          // float     ScrollbarRounding
+            ScrollbarPadding,           // float     ScrollbarPadding
+            GrabMinSize,                // float     GrabMinSize
+            GrabRounding,               // float     GrabRounding
+            ImageRounding,              // float     ImageRounding
+            ImageBorderSize,            // float     ImageBorderSize
+            TabRounding,                // float     TabRounding
+            TabBorderSize,              // float     TabBorderSize
+            TabMinWidthBase,            // float     TabMinWidthBase
+            TabMinWidthShrink,          // float     TabMinWidthShrink
+            TabBarBorderSize,           // float     TabBarBorderSize
+            TabBarOverlineSize,         // float     TabBarOverlineSize
+            TableAngledHeadersAngle,    // float     TableAngledHeadersAngle
+            TableAngledHeadersTextAlign,// ImVec2  TableAngledHeadersTextAlign
+            TreeLinesSize,              // float     TreeLinesSize
+            TreeLinesRounding,          // float     TreeLinesRounding
+            MenuItemRounding,           // float     MenuItemRounding
+            SelectableRounding,         // float     SelectableRounding
+            DragDropTargetRounding,     // float     DragDropTargetRounding
+            ButtonTextAlign,            // ImVec2    ButtonTextAlign
+            SelectableTextAlign,        // ImVec2    SelectableTextAlign
+            SeparatorSize,              // float     SeparatorSize
+            SeparatorTextBorderSize,    // float     SeparatorTextBorderSize
+            SeparatorTextAlign,         // ImVec2    SeparatorTextAlign
+            SeparatorTextPadding,       // ImVec2    SeparatorTextPadding
+            DockingSeparatorSize        // float     DockingSeparatorSize
+        )
 
         SR_ENUM_NS_STRUCT_T(InputTextFlags, uint32_t,
             None                = 0,
@@ -220,16 +256,19 @@ namespace SR_GRAPH_GUI_NS {
         SR_ENUM_NS_STRUCT_T(DragDropFlags, uint32_t,
             None                         = 0,
             // BeginDragDropSource() flags
-            SourceNoPreviewTooltip       = 1 << 0,   // By default, a successful call to BeginDragDropSource opens a tooltip so you can display a preview or description of the source contents. This flag disable this behavior.
-            SourceNoDisableHover         = 1 << 1,   // By default, when dragging we clear data so that IsItemHovered() will return false, to avoid subsequent user code submitting tooltips. This flag disable this behavior so you can still call IsItemHovered() on the source item.
+            SourceNoPreviewTooltip       = 1 << 0,   // Disable preview tooltip. By default, a successful call to BeginDragDropSource opens a tooltip so you can display a preview or description of the source contents. This flag disables this behavior.
+            SourceNoDisableHover         = 1 << 1,   // By default, when dragging we clear data so that IsItemHovered() will return false, to avoid subsequent user code submitting tooltips. This flag disables this behavior so you can still call IsItemHovered() on the source item.
             SourceNoHoldToOpenOthers     = 1 << 2,   // Disable the behavior that allows to open tree nodes and collapsing header by holding over them while dragging a source item.
             SourceAllowNullID            = 1 << 3,   // Allow items such as Text(), Image() that have no unique identifier to be used as drag source, by manufacturing a temporary identifier based on their window-relative position. This is extremely unusual within the dear imgui ecosystem and so we made it explicit.
             SourceExtern                 = 1 << 4,   // External source (from outside of dear imgui), won't attempt to read current item/window info. Will always return true. Only one Extern source can be active simultaneously.
-            SourceAutoExpirePayload      = 1 << 5,   // Automatically expire the payload if the source cease to be submitted (otherwise payloads are persisting while being dragged)
+            PayloadAutoExpire            = 1 << 5,   // Automatically expire the payload if the source cease to be submitted (otherwise payloads are persisting while being dragged)
+            PayloadNoCrossContext        = 1 << 6,   // Hint to specify that the payload may not be copied outside current dear imgui context.
+            PayloadNoCrossProcess        = 1 << 7,   // Hint to specify that the payload may not be copied outside current process.
             // AcceptDragDropPayload() flags
             AcceptBeforeDelivery         = 1 << 10,  // AcceptDragDropPayload() will returns true even before the mouse button is released. You can then call IsDelivery() to test if the payload needs to be delivered.
             AcceptNoDrawDefaultRect      = 1 << 11,  // Do not draw the default highlight rectangle when hovering over target.
             AcceptNoPreviewTooltip       = 1 << 12,  // Request hiding the BeginDragDropSource tooltip from the BeginDragDropTarget site.
+            AcceptDrawAsHovered          = 1 << 13,  // Accepting item will render as if hovered. Useful for e.g. a Button() used as a drop target.
             AcceptPeekOnly               = AcceptBeforeDelivery | AcceptNoDrawDefaultRect // For peeking ahead and inspecting the payload before delivery.
         )
 
@@ -293,21 +332,29 @@ namespace SR_GRAPH_GUI_NS {
             Appearing     = 1 << 3    // Set the variable if the object/window is appearing after being hidden/inactive (or the first time)
         )
 
-        SR_ENUM_NS_STRUCT_T(DrawFlags, uint32_t,
+        SR_ENUM_NS_STRUCT_T(DrawFlags, int64_t,
             None                        = 0,
-            Closed                      = 1 << 0, // PathStroke(), AddPolyline(): specify that shape should be closed (Important: this is always == 1 for legacy reason)
-            RoundCornersTopLeft         = 1 << 4, // AddRect(), AddRectFilled(), PathRect(): enable rounding top-left corner only (when rounding > 0.0f, we default to all corners). Was 0x01.
-            RoundCornersTopRight        = 1 << 5, // AddRect(), AddRectFilled(), PathRect(): enable rounding top-right corner only (when rounding > 0.0f, we default to all corners). Was 0x02.
-            RoundCornersBottomLeft      = 1 << 6, // AddRect(), AddRectFilled(), PathRect(): enable rounding bottom-left corner only (when rounding > 0.0f, we default to all corners). Was 0x04.
-            RoundCornersBottomRight     = 1 << 7, // AddRect(), AddRectFilled(), PathRect(): enable rounding bottom-right corner only (when rounding > 0.0f, we default to all corners). Wax 0x08.
-            RoundCornersNone            = 1 << 8, // AddRect(), AddRectFilled(), PathRect(): disable rounding on all corners (when rounding > 0.0f). This is NOT zero, NOT an implicit flag!
-            RoundCornersTop             = RoundCornersTopLeft | RoundCornersTopRight,
-            RoundCornersBottom          = RoundCornersBottomLeft | RoundCornersBottomRight,
-            RoundCornersLeft            = RoundCornersBottomLeft | RoundCornersTopLeft,
+
+            // Rounding for AddRect(), AddRectFilled(), PathRect()
+            // - When not specified, we defaults to ImDrawFlags_RoundCornersAll! So you only need to use those flags if you want another configuration.
+            RoundCornersTopLeft         = 1 << 4, // Round top-left corner only (when rounding > 0.0f, we default to all corners).
+            RoundCornersTopRight        = 1 << 5, // Round top-right corner only (when rounding > 0.0f, we default to all corners).
+            RoundCornersBottomLeft      = 1 << 6, // Round bottom-left corner only (when rounding > 0.0f, we default to all corners).
+            RoundCornersBottomRight     = 1 << 7, // Round bottom-right corner only (when rounding > 0.0f, we default to all corners).
+            RoundCornersNone            = 1 << 8, // Disable rounding even if `float rounding > 0.0f`. This is NOT zero, NOT an implicit flag!
+            RoundCornersAll             = RoundCornersTopLeft     | RoundCornersTopRight | RoundCornersBottomLeft | RoundCornersBottomRight, // (Default!!)
+            RoundCornersDefault_        = RoundCornersAll, // Default to ALL corners if none of the _RoundCornersXX flags are specified!
+            RoundCornersTop             = RoundCornersTopLeft     | RoundCornersTopRight,
+            RoundCornersBottom          = RoundCornersBottomLeft  | RoundCornersBottomRight,
+            RoundCornersLeft            = RoundCornersBottomLeft  | RoundCornersTopLeft,
             RoundCornersRight           = RoundCornersBottomRight | RoundCornersTopRight,
-            RoundCornersAll             = RoundCornersTopLeft | RoundCornersTopRight | RoundCornersBottomLeft | RoundCornersBottomRight,
-            RoundCornersDefault_        = RoundCornersAll, // Default to ALL corners if none of the _RoundCornersXX flags are specified.
-            RoundCornersMask_           = RoundCornersAll | RoundCornersNone
+            RoundCornersMask_           = RoundCornersAll         | RoundCornersNone,
+
+            // Stroke options
+            Closed                      = 1 << 9, // PathStroke(), AddPolyline(): specify that shape should be closed.
+            //ImDrawFlags_Closed        = 1 << 0, // Prior to 1.92.8 (May 2026), ImDrawFlags_Closed was guaranteed to be == 1<<0 == 1 for legacy compatibility reason. Hardcoded use of 1 or true should be replaced.
+
+            InvalidMask_                = ~0x7FFFFFF0 // == 0x8000000F,
         )
 
         // Note: windows with the ImGuiWindowFlags_NoInputs flag are ignored by IsWindowHovered() calls.
@@ -351,7 +398,6 @@ namespace SR_GRAPH_GUI_NS {
 
         struct SR_IMMEDIATE_GUI_DLL_API ImmediateGUICreateContext {
             bool viewportsEnabled = false;
-            SR_UTILS_NS::Path themePath;
             SR_UTILS_NS::Path iniPath;
         };
 
@@ -366,6 +412,7 @@ namespace SR_GRAPH_GUI_NS {
 
         SR_IMMEDIATE_GUI_DLL_API extern bool WindowsWndProcHandler(void* hWnd, uint32_t message, uint64_t wParam, uint64_t lParam);
 
+        SR_IMMEDIATE_GUI_DLL_API extern void SetTheme(const SR_UTILS_NS::Path& path);
         SR_IMMEDIATE_GUI_DLL_API extern uint32_t GetViewportCount(void* pContext);
         SR_IMMEDIATE_GUI_DLL_API extern void GetViewports(SR_UTILS_NS::Vector<void*>& viewports);
         SR_IMMEDIATE_GUI_DLL_API extern void ClearFonts();
@@ -443,7 +490,6 @@ namespace SR_GRAPH_GUI_NS {
         SR_IMMEDIATE_GUI_DLL_API extern bool InputFloat(const char* label, float_t* v, float_t step = 0.0f, float_t stepFast = 0.0f, const char* format = "%.3f", InputTextFlags flags = InputTextFlags::None);
         SR_IMMEDIATE_GUI_DLL_API extern bool InputInt(const char* label, int* v, int step = 1, int step_fast = 100, InputTextFlags flags = InputTextFlags::None);
         SR_IMMEDIATE_GUI_DLL_API extern bool Combo(const char* label, int* current_item, const char* items_separated_by_zeros);
-        SR_IMMEDIATE_GUI_DLL_API extern bool Combo(const char* label, int* current_item, bool(*items_getter)(void* data, int idx, const char** out_text), void* data, int items_count, int popup_max_height_in_items = -1);
 
         SR_IMMEDIATE_GUI_DLL_API extern bool Begin(const char* name, bool* p_open = nullptr, WindowFlags flags = WindowFlags::None);
         SR_IMMEDIATE_GUI_DLL_API extern bool Splitter(bool split_vertically, float thickness, float* size1, float* size2, float min_size1, float min_size2, float splitter_long_axis_size = -1.0f);
@@ -468,10 +514,7 @@ namespace SR_GRAPH_GUI_NS {
         SR_IMMEDIATE_GUI_DLL_API extern void PushFont(void* pFont);
         SR_IMMEDIATE_GUI_DLL_API extern void PopFont();
         SR_IMMEDIATE_GUI_DLL_API extern void SetWindowFocus(const char* str_id);
-        SR_IMMEDIATE_GUI_DLL_API extern bool BeginChild(const char* str_id);
-        SR_IMMEDIATE_GUI_DLL_API extern bool BeginChild(const char* str_id, const SR_MATH_NS::FVector2& size);
-        SR_IMMEDIATE_GUI_DLL_API extern bool BeginChild(const char* str_id, const SR_MATH_NS::FVector2& size, bool border);
-        SR_IMMEDIATE_GUI_DLL_API extern bool BeginChild(const char* str_id, const SR_MATH_NS::FVector2& size, bool border, WindowFlags flags);
+        SR_IMMEDIATE_GUI_DLL_API extern bool BeginChild(const char* name, const SR_MATH_NS::FVector2& size = SR_MATH_NS::FVector2(), ChildWindowFlags childFlags = ChildWindowFlags::None, WindowFlags flags = WindowFlags::None);
         SR_IMMEDIATE_GUI_DLL_API extern void EndChild();
         SR_IMMEDIATE_GUI_DLL_API extern const void* GetDragDropPayload();
         SR_IMMEDIATE_GUI_DLL_API extern float_t GetScrollMaxY();

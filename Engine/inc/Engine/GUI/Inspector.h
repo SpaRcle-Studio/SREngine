@@ -94,6 +94,7 @@ namespace SR_CORE_GUI_NS {
         std::unique_ptr<SR_UTILS_NS::ISerializer> m_pComponentSerializer;
         SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::Component> m_editableComponent;
         SR_UTILS_NS::Subscription m_moduleReloadSubscription;
+        SR_UTILS_NS::String m_comboBoxBuffer;
 
     };
 }

@@ -94,6 +94,7 @@ namespace SR_CORE_GUI_NS {
         m_pSettings = SR_UTILS_NS::Asset::Load<EditorSettings>("Editor/Configs/EditorSettings.sras");
         if (m_pSettings) {
             m_pSettings->AddUsePoint();
+            SR_GRAPH_GUI_NS::Immediate::SetTheme(m_pSettings->GetTheme().GetId());
         }
 
         m_cachedScenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("User/PreviousScenePath.cache");

@@ -3,9 +3,12 @@
 //
 
 #include <ImmediateGUI/GUI/ImmediateGUI.h>
+#include <ImmediateGUI/GUI/ImGUITheme.h>
 #include <ImmediateGUI/Impl/ImGUI.h>
 #include <ImmediateGUI/Impl/Theme.h>
 #include <ImmediateGUI/Impl/WindowsImpl.h>
+
+#include <Utils/Resources/ResourceRef.h>
 
 #include <Enum/TreeNodeFlags.hpp>
 
@@ -15,7 +18,30 @@
 
 namespace SR_GRAPH_GUI_NS::Immediate {
 #ifdef SR_USE_IMGUI
+    namespace {
+        bool g_fontsRebuildPending = false;
+        SR_UTILS_NS::Path g_themePath;
+    }
+
     void NewFrame() {
+        if (g_fontsRebuildPending) {
+            ImGuiIO& io = ImGui::GetIO();
+
+            // With new backends (1.92+) supporting RendererHasTextures: do NOT call Fonts->Build() manually.
+            // Just request (re)upload of the atlas texture.
+            if (io.Fonts && (io.BackendFlags & ImGuiBackendFlags_RendererHasTextures) != 0) {
+                if (io.Fonts->TexData) {
+                    io.Fonts->TexData->SetStatus(ImTextureStatus_WantCreate);
+                }
+            }
+            // Fallback for older backends: build atlas on CPU here.
+            else if (io.Fonts) {
+                io.Fonts->Build();
+            }
+
+            g_fontsRebuildPending = false;
+        }
+
         ImGui::NewFrame();
     }
 
@@ -369,6 +395,10 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         }
     }
 
+    void SetTheme(const SR_UTILS_NS::Path& path) {
+        g_themePath = path;
+    }
+
     uint32_t GetViewportCount(void* pContext) {
         return static_cast<ImGuiContext*>(pContext)->Viewports.Size;
     }
@@ -515,7 +545,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
 
         ImGuiID id = pWindow->GetID(label.c_str());
         flags |= ImGuiTreeNodeFlags_CollapsingHeader;
-        flags |= ImGuiTreeNodeFlags_AllowItemOverlap | static_cast<ImGuiTreeNodeFlags>(ImGuiTreeNodeFlags_ClipLabelForTrailingButton);
+        flags |= ImGuiTreeNodeFlags_AllowOverlap | static_cast<ImGuiTreeNodeFlags>(ImGuiTreeNodeFlags_ClipLabelForTrailingButton);
 
         return ImGui::TreeNodeBehavior(id, flags, label.c_str());
     }
@@ -531,11 +561,6 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     }
 
     bool ImageButtonInternal(std::string_view &&imageId, void* pDescriptor, const SR_MATH_NS::FVector2& size, float_t framePadding, ButtonFlags flags) {
-        if (!pDescriptor) {
-            SRHalt("ImmediateGUI::ImageButtonInternal() : pDescriptor is null!");
-            return false; /// NOLINT
-        }
-
         ImGuiContext& g = *GImGui;
         ImGuiWindow* window = g.CurrentWindow;
         if (window->SkipItems)
@@ -575,7 +600,9 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         ImGui::RenderFrame(bb.Min, bb.Max, col, true, SR_CLAMP((float)SR_MIN(padding.x, padding.y), 0.0f, g.Style.FrameRounding));
         if (bg_col.w > 0.0f)
             window->DrawList->AddRectFilled(bb.Min + padding, bb.Max - padding, ImGui::GetColorU32(bg_col));
-        window->DrawList->AddImage((ImTextureID)pDescriptor, bb.Min + padding, bb.Max - padding, uv0, uv1, ImGui::GetColorU32(tint_col));
+        if (pDescriptor) {
+            window->DrawList->AddImage((ImTextureID) pDescriptor, bb.Min + padding, bb.Max - padding, uv0, uv1, ImGui::GetColorU32(tint_col));
+        }
 
         return pressed;
     }
@@ -589,7 +616,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         return DrawImage(const_cast<void*>(pDescriptor), SR_MATH_NS::FVector2(fSize.x, fSize.y), SR_MATH_NS::FVector2(0, 0), SR_MATH_NS::FVector2(1, 1), { 1, 1, 1, 1 }, { 0, 0, 0, 0 }, imposition);
     }
 
-    SR_MATH_NS::FVector2 DrawImage(ImTextureID user_texture_id, const SR_MATH_NS::FVector2& size, const SR_MATH_NS::FVector2& uv0, const SR_MATH_NS::FVector2& uv1, const SR_MATH_NS::FColor& tint_col, const SR_MATH_NS::FColor& border_col, bool imposition) {
+    SR_MATH_NS::FVector2 DrawImage(void* user_texture_id, const SR_MATH_NS::FVector2& size, const SR_MATH_NS::FVector2& uv0, const SR_MATH_NS::FVector2& uv1, const SR_MATH_NS::FColor& tint_col, const SR_MATH_NS::FColor& border_col, bool imposition) {
         ImGuiWindow* pWindow = ImGui::GetCurrentWindow();
         if (pWindow->SkipItems) {
             return SR_MATH_NS::FVector2(); /// NOLINT
@@ -621,25 +648,21 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     bool BeginDragDropTargetWindow(const char* payloadType) {
         ImRect inner_rect = ImGui::GetCurrentWindow()->InnerRect;
 
-        if (ImGui::BeginDragDropTargetCustom(inner_rect, ImGui::GetID("##WindowBgArea")))
-        {
-            auto&& pPayload = ImGui::AcceptDragDropPayload(payloadType, ImGuiDragDropFlags_AcceptBeforeDelivery | ImGuiDragDropFlags_AcceptNoDrawDefaultRect);
-            if (pPayload) {
-                if (pPayload->IsPreview()) {
+        if (!ImGui::BeginDragDropTargetCustom(inner_rect, ImGui::GetID("##WindowBgArea"))) {
+            return false;
+        }
+
+        if (payloadType) {
+            if (const ImGuiPayload* payload = ImGui::GetDragDropPayload()) {
+                if (strcmp(payload->DataType, payloadType) == 0) {
                     ImDrawList* draw_list = ImGui::GetForegroundDrawList();
                     draw_list->AddRectFilled(inner_rect.Min, inner_rect.Max, ImGui::GetColorU32(ImGuiCol_DragDropTarget, 0.05f));
                     draw_list->AddRect(inner_rect.Min, inner_rect.Max, ImGui::GetColorU32(ImGuiCol_DragDropTarget), 0.0f, 0, 2.0f);
                 }
-
-                if (pPayload->IsDelivery()) {
-                    return true;
-                }
-
-                ImGui::EndDragDropTarget();
             }
         }
 
-        return false;
+        return true;
     }
 
     bool ImageButton(void* pDescriptor, const SR_MATH_NS::FVector2& size) {
@@ -730,7 +753,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     }
 
     float_t GetFontSize() {
-        return GImGui->Font->FontSize;
+        return ImGui::GetFontSize();
     }
 
     SR_MATH_NS::FVector2 GetFramePadding() {
@@ -824,7 +847,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         SR_TRACY_ZONE;
         ImGuiContext& g = *GImGui;
         if (g.CurrentWindow == g.NavWindow && g.NavLayer == ImGuiNavLayer_Main && !g.NavAnyRequest) {
-            ImGui::FocusTopMostWindowUnderOne(g.NavWindow, nullptr);
+            ImGui::FocusTopMostWindowUnderOne(g.NavWindow, nullptr, nullptr, ImGuiFocusRequestFlags_None);
         }
     }
 
@@ -902,22 +925,21 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         return IRToFR(ImGui::GetCurrentWindow()->Rect());
     }
 
-    bool Combo(const char *label, int *current_item, bool (*items_getter)(void *, int, const char **), void *data, int items_count, int popup_max_height_in_items) {
-        return ImGui::Combo(label, current_item, items_getter, data, items_count, popup_max_height_in_items);
-    }
-
     bool IsItemFocused() {
         return ImGui::IsItemFocused();
     }
 
     void ClearFonts() {
         ImGui::GetIO().Fonts->Clear();
+        g_fontsRebuildPending = true;
     }
 
     bool BuildFonts(void* pDefaultFont) {
         auto&& io = ImGui::GetIO();
         io.FontDefault = static_cast<ImFont*>(pDefaultFont);
-        return ImGui::GetIO().Fonts->Build();
+        // Defer actual build/upload until NewFrame(), after backends had a chance to set BackendFlags.
+        g_fontsRebuildPending = true;
+        return true;
     }
 
     void* AddFontFromMemoryTTF(const void* fontData, int fontDataSize, float size, const ImmediateGUIFontConfig& config, const uint32_t* glyphRanges) {
@@ -934,10 +956,15 @@ namespace SR_GRAPH_GUI_NS::Immediate {
 
     static SR_UTILS_NS::Path INI_FILE_PATH;
 
+    static void* ImGuiMallocWrapper(size_t size, void* user_data) { SR_TRACY_ZONE; IM_UNUSED(user_data); return SRMalloc(size); }
+    static void  ImGuiFreeWrapper(void* ptr, void* user_data)     { SR_TRACY_ZONE; IM_UNUSED(user_data); SRFree(ptr); }
+
     void* CreateContext(const ImmediateGUICreateContext& context) {
         if (!ImGui::CreateContext()) {
             SRHalt("Failed to create ImGui context!");
         }
+
+        ImGui::SetAllocatorFunctions(ImGuiMallocWrapper, ImGuiFreeWrapper, nullptr);
 
         INI_FILE_PATH = context.iniPath;
 
@@ -955,12 +982,19 @@ namespace SR_GRAPH_GUI_NS::Immediate {
             io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
         }
 
-        if (auto&& pTheme = SR_GRAPH_GUI_NS::Theme::Load(context.themePath)) {
-            pTheme->Apply();
-            delete pTheme;
-        }
-        else {
-            SR_ERROR("Immediate::CreateContext() : failed to load theme!");
+        //if (auto&& pTheme = SR_GRAPH_GUI_NS::Theme::Load("Engine/Configs/Themes/Dark.xml")) {
+        //    pTheme->Apply();
+        //    delete pTheme;
+        //}
+        //else {
+        //    SR_ERROR("Immediate::CreateContext() : failed to load theme!");
+        //}
+
+        if (!g_themePath.empty()) {
+            SR_UTILS_NS::ResourceRef<SR_GRAPH_GUI_NS::Immediate::ImGUITheme> theme(g_themePath);
+            if (auto&& pTheme = theme.GetResource()) {
+                pTheme->Apply();
+            }
         }
 
         return ImGui::GetCurrentContext();
@@ -1050,7 +1084,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
                                           ImGui::GetColorU32(frame_col), num_segments);
 
         if (active) {
-            const float pad = ImMax(1.0f, IM_FLOOR(square_sz / 6.0f));
+            const float pad = ImMax(1.0f, ((float)(int)(square_sz / 6.0f)));
             window->DrawList->AddCircleFilled(center, radiusInternal - pad,
                                               ImGui::GetColorU32(ImGuiCol_CheckMark), num_segments);
         }
@@ -1106,20 +1140,8 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         return ImGui::IsWindowFocused();
     }
 
-    bool BeginChild(const char* str_id) {
-        return BeginChild(str_id, SR_MATH_NS::FVector2(0, 0), false, WindowFlags::None);
-    }
-
-    bool BeginChild(const char* str_id, const SR_MATH_NS::FVector2& size) {
-        return BeginChild(str_id, size, false, WindowFlags::None);
-    }
-
-    bool BeginChild(const char* str_id, const SR_MATH_NS::FVector2& size, bool border) {
-        return BeginChild(str_id, size, border, WindowFlags::None);
-    }
-
-    bool BeginChild(const char* str_id, const SR_MATH_NS::FVector2& size, bool border, WindowFlags flags) {
-        return ImGui::BeginChild(str_id, F2ToImV2(size), border, static_cast<ImGuiWindowFlags>(flags));
+    bool BeginChild(const char* name, const SR_MATH_NS::FVector2& size, ChildWindowFlags childFlags, WindowFlags flags) {
+        return ImGui::BeginChild(name, F2ToImV2(size), static_cast<ImGuiChildFlags>(childFlags), static_cast<ImGuiWindowFlags>(flags));
     }
 
     bool BeginTable(const char* str_id, int columns) {
@@ -1306,18 +1328,19 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     void TextVertical(const char* text, SR_MATH_NS::FVector2 pos, SR_MATH_NS::FColor color) {
         ImDrawList* draw_list = ImGui::GetWindowDrawList();
         ImFont* font = ImGui::GetFont();
+        const float fontSize = GetFontSize();
         float yOffset = 0.0f;
 
         for (const char* c = text; *c; c++) {
             char buf[2] = { *c, '\0' };
             draw_list->AddText(
-                    font,
-                    font->FontSize,
-                    ImVec2(pos.x, pos.y + yOffset),
-                    ImGui::GetColorU32(FCToImV4(color)),
-                    buf
+                font,
+                fontSize,
+                ImVec2(pos.x, pos.y + yOffset),
+                ImGui::GetColorU32(FCToImV4(color)),
+                buf
             );
-            yOffset += font->FontSize; // шаг вниз
+            yOffset += fontSize; // шаг вниз
         }
 
         // Чтобы layout ImGui знал, что занято место
@@ -1329,13 +1352,12 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     }
 
     void BeginVertical(const char* str_id, const SR_MATH_NS::FVector2& size, float align) {
-        ImGui::BeginVertical(str_id, F2ToImV2(size), align);
+        //ImGui::BeginVertical(str_id, F2ToImV2(size), align);
     }
 
     void BeginVertical(const void* ptr_id, const SR_MATH_NS::FVector2& size, float align) {
-        ImGui::BeginVertical(ptr_id, F2ToImV2(size), align);
+        //ImGui::BeginVertical(ptr_id, F2ToImV2(size), align);
     }
-
 
     SR_MATH_NS::FVector2 GetItemRectMax() {
         return ImV2ToF2(ImGui::GetItemRectMax());
@@ -1386,23 +1408,23 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     }
 
     void EndVertical() {
-        ImGui::EndVertical();
+        // ImGui::EndVertical();
     }
 
     void BeginHorizontal(const char* str_id, const SR_MATH_NS::FVector2& size, float align) {
-        ImGui::BeginHorizontal(str_id, F2ToImV2(size), align);
+        // ImGui::BeginHorizontal(str_id, F2ToImV2(size), align);
     }
 
     void BeginHorizontal(const void* ptr_id, const SR_MATH_NS::FVector2& size, float align) {
-        ImGui::BeginHorizontal(ptr_id, F2ToImV2(size), align);
+        // ImGui::BeginHorizontal(ptr_id, F2ToImV2(size), align);
     }
 
     void EndHorizontal() {
-        ImGui::EndHorizontal();
+        // ImGui::EndHorizontal();
     }
 
     void Spring(float weight, float spacing) {
-        ImGui::Spring(weight, spacing);
+        //ImGui::Spring(weight, spacing);
     }
 
     void DrawPinIcon(const SR_MATH_NS::FVector2& size, SR_GRAPH_NS::GUI::IconType iconType, bool filled, const SR_MATH_NS::FColor& color, const SR_MATH_NS::FColor& innerColor) {
@@ -1533,7 +1555,8 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     }
 
     bool BeginNodeEditor(const char* id, const SR_MATH_NS::FVector2& size) {
-        return ax::NodeEditor::Begin(id, F2ToImV2(size));
+        ax::NodeEditor::Begin(id, F2ToImV2(size));
+        return true;
     }
 
     void EndNodeEditor() {

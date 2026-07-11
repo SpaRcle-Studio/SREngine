@@ -139,14 +139,14 @@ namespace SR_CORE_GUI_NS {
         auto&& availableSize = SR_GRAPH_GUI_NS::Immediate::GetContentRegionAvail();
         
         // Левая панель для свойств
-        SR_GRAPH_GUI_NS::Immediate::BeginChild("LeftPanel", SR_MATH_NS::FVector2(m_leftPaneWidth, availableSize.y), false);
+        SR_GRAPH_GUI_NS::Immediate::BeginChild("LeftPanel", SR_MATH_NS::FVector2(m_leftPaneWidth, availableSize.y));
         DrawLeftPanel();
         SR_GRAPH_GUI_NS::Immediate::EndChild();
         
         SR_GRAPH_GUI_NS::Immediate::SameLine();
         
         // Редактор графа
-        SR_GRAPH_GUI_NS::Immediate::BeginChild("NodeEditor", SR_MATH_NS::FVector2(availableSize.x - m_leftPaneWidth - 10, availableSize.y), false);
+        SR_GRAPH_GUI_NS::Immediate::BeginChild("NodeEditor", SR_MATH_NS::FVector2(availableSize.x - m_leftPaneWidth - 10, availableSize.y));
         DrawNodeEditor();
         SR_GRAPH_GUI_NS::Immediate::EndChild();
     }

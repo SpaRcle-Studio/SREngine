@@ -20,6 +20,7 @@ class CodegenContext:
         self.valid_files_for_codegen = set()
         self.codegen_stack_trace = []
         self.modules_mask = []
+        self.module_std_includes = set()
 
     def initialize(self):
         config_path = Path(self.config_dir) / 'codegen-modules.json'

@@ -7,7 +7,10 @@
 
 #include <Engine/macros.h>
 
+#include <ImmediateGUI/GUI/ImGUITheme.h>
+
 #include <Utils/Resources/Asset.h>
+#include <Utils/Resources/ResourceRef.h>
 
 namespace SR_CORE_NS {
     ///Здесь хранятся названия иконок, движок получает иконку по пути, указанному для названия в файле SREngine/Resources/Editor/Configs/EditorSettings.xml
@@ -15,7 +18,7 @@ namespace SR_CORE_NS {
           Unknown,
           Material, Prefab, Asset,
           File, Shader, Scene,
-          Back, RenderTechnique,
+          Back, RenderTechnique, Theme,
           Play, Animation, Animator,
           Stop,
           PauseActive,
@@ -52,12 +55,18 @@ namespace SR_CORE_NS {
         SR_CLASS()
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<EditorSettings>;
+        using Theme = SR_UTILS_NS::ResourceRef<SR_GRAPH_GUI_NS::Immediate::ImGUITheme>;
 
     public:
         SR_NODISCARD const std::map<EditorIcon, EditorSettingsIconInfo>& GetIcons() const noexcept { return m_icons; }
         SR_NODISCARD bool IsNeedDebugChunks() const noexcept { return m_debugChunks; }
+        SR_NODISCARD const Theme& GetTheme() const noexcept { return m_theme; }
+
+        void OnThemeChanged();
 
     private:
+        /// @property @onChanged(OnThemeChanged)
+        Theme m_theme;
         /// @property
         std::map<EditorIcon, EditorSettingsIconInfo> m_icons;
 

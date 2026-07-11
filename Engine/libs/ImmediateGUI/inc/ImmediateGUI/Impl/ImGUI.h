@@ -28,6 +28,14 @@ namespace SR_GRAPH_GUI_NS {
         #define IM_ASSERT(_EXP) SRAssert1Once(SR_GRAPH_GUI_NS::gIgnoreImGuiAsserts || (_EXP))
     #endif
 
+    #ifndef IM_ASSERT_USER_ERROR_RET
+        #define IM_ASSERT_USER_ERROR_RET(_EXP, _MSG) if (!SRVerify2(SR_GRAPH_GUI_NS::gIgnoreImGuiAsserts || (_EXP), _MSG)) { return; }
+    #endif
+
+    #ifndef IM_ASSERT_USER_ERROR_RETV
+        #define IM_ASSERT_USER_ERROR_RETV(_EXP, _RET, _MSG) if (!SRVerify2(SR_GRAPH_GUI_NS::gIgnoreImGuiAsserts || (_EXP), _MSG)) { return _RET; }
+    #endif
+
     #ifndef IM_ASSERT_USER_ERROR
         #define IM_ASSERT_USER_ERROR(_EXP, _MSG) SRAssert2Once(_EXP, _MSG)
     #endif
