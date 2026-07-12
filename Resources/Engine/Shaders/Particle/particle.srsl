@@ -10,6 +10,40 @@ DepthTest true;
 
 [[uniform]] int ISQuad;
 
+mat3 GetRotationMatrix(vec3 rotation)
+{
+    rotation *= 0.0174532925; // градусы -> радианы
+
+    float cx = cos(rotation.x);
+    float sx = sin(rotation.x);
+
+    float cy = cos(rotation.y);
+    float sy = sin(rotation.y);
+
+    float cz = cos(rotation.z);
+    float sz = sin(rotation.z);
+
+    mat3 rotX = mat3(
+        1.0, 0.0, 0.0,
+        0.0, cx, -sx,
+        0.0, sx, cx
+    );
+
+    mat3 rotY = mat3(
+        cy, 0.0, sy,
+        0.0, 1.0, 0.0,
+        -sy, 0.0, cy
+    );
+
+    mat3 rotZ = mat3(
+        cz, -sz, 0.0,
+        sz,  cz, 0.0,
+        0.0, 0.0, 1.0
+    );
+
+    return rotZ * rotY * rotX;
+}
+
 void fragment() {
     COLOR = COLOR0;
     COLOR_INDEX_1 = vec4(0.0);
@@ -53,6 +87,9 @@ void vertex() {
         VERTEX = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
     }
     else {
+        VERTEX = VERTEX * CUSTOM0;
+        mat3 rotation = GetRotationMatrix(CUSTOM1);
+        VERTEX = rotation * VERTEX;
         VERTEX = VERTEX + POSITION1;
         VERTEX = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
     }
