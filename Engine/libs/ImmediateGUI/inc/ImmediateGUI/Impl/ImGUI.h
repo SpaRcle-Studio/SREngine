@@ -79,4 +79,15 @@ namespace SR_GRAPH_GUI_NS {
     #endif
 #endif
 
+
+namespace SR_GRAPH_GUI_NS::Immediate {
+    ImColor FCToImC(const SR_MATH_NS::FColor& color);
+    ImVec2 F2ToImV2(const SR_MATH_NS::FVector2& vec);
+    ImVec4 F4ToImV4(const SR_MATH_NS::FVector4& vec);
+    ImVec4 FCToImV4(const SR_MATH_NS::FColor& vec);
+    SR_MATH_NS::FVector2 ImV2ToF2(const ImVec2& vec);
+    SR_MATH_NS::FVector4 ImV4ToF4(const ImVec4& vec);
+    SR_MATH_NS::FRect IRToFR(const ImRect& rect);
+}
+
 #endif //SR_ENGINE_UTILS_GUI_H

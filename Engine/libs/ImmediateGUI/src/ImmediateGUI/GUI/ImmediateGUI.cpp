@@ -5,16 +5,14 @@
 #include <ImmediateGUI/GUI/ImmediateGUI.h>
 #include <ImmediateGUI/GUI/ImGUITheme.h>
 #include <ImmediateGUI/Impl/ImGUI.h>
+#include <ImmediateGUI/Impl/ImGUIExperimental.h>
 #include <ImmediateGUI/Impl/Theme.h>
 #include <ImmediateGUI/Impl/WindowsImpl.h>
 
 #include <Utils/Resources/ResourceRef.h>
+#include <Utils/Common/StoreUtils.h>
 
 #include <Enum/TreeNodeFlags.hpp>
-
-#if defined(SR_USE_IMGUI_NODE_EDITOR) && defined(SR_USE_IMGUI)
-    #include <imgui-node-editor/imgui_node_editor.h>
-#endif
 
 namespace SR_GRAPH_GUI_NS::Immediate {
 #ifdef SR_USE_IMGUI
@@ -46,6 +44,8 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     }
 
     void Render() {
+        const float_t fontScale = SR_UTILS_NS::StoreUtils::User::GetFloat("EditorFontSize", SR_IMMEDIATE_GUI_NS::DEFAULT_FONT_SIZE);
+        ImGui::GetStyle().FontScaleMain = (fontScale / SR_IMMEDIATE_GUI_NS::DEFAULT_FONT_SIZE) * 1.1f;
         ImGui::Render();
     }
 
@@ -55,39 +55,6 @@ namespace SR_GRAPH_GUI_NS::Immediate {
 
     void RenderPlatformWindowsDefault() {
         ImGui::RenderPlatformWindowsDefault();
-    }
-
-    ImColor FCToImC(const SR_MATH_NS::FColor& color) {
-        return ImColor(color.r, color.g, color.b, color.a);
-    }
-
-    ImVec2 F2ToImV2(const SR_MATH_NS::FVector2& vec) {
-        return ImVec2(vec.x, vec.y);
-    }
-
-    ImVec4 F4ToImV4(const SR_MATH_NS::FVector4& vec) {
-        return ImVec4(vec.x, vec.y, vec.z, vec.w);
-    }
-
-    ImVec4 FCToImV4(const SR_MATH_NS::FColor& vec) {
-        return ImVec4(vec.r, vec.g, vec.b, vec.a);
-    }
-
-    SR_MATH_NS::FVector2 ImV2ToF2(const ImVec2& vec) {
-        return SR_MATH_NS::FVector2(vec.x, vec.y);
-    }
-
-    SR_MATH_NS::FVector4 ImV4ToF4(const ImVec4& vec) {
-        return SR_MATH_NS::FVector4(vec.x, vec.y, vec.z, vec.w);
-    }
-
-    SR_MATH_NS::FRect IRToFR(const ImRect& rect) {
-        return SR_MATH_NS::FRect(
-            rect.Min.x,
-            rect.Min.y,
-            rect.Max.x,
-            rect.Max.y
-        );
     }
 
     void Separator() {
@@ -1352,11 +1319,11 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     }
 
     void BeginVertical(const char* str_id, const SR_MATH_NS::FVector2& size, float align) {
-        //ImGui::BeginVertical(str_id, F2ToImV2(size), align);
+        Experimental::BeginVertical(str_id, F2ToImV2(size), align);
     }
 
     void BeginVertical(const void* ptr_id, const SR_MATH_NS::FVector2& size, float align) {
-        //ImGui::BeginVertical(ptr_id, F2ToImV2(size), align);
+        Experimental::BeginVertical(ptr_id, F2ToImV2(size), align);
     }
 
     SR_MATH_NS::FVector2 GetItemRectMax() {
@@ -1408,23 +1375,23 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     }
 
     void EndVertical() {
-        // ImGui::EndVertical();
+        Experimental::EndVertical();
     }
 
     void BeginHorizontal(const char* str_id, const SR_MATH_NS::FVector2& size, float align) {
-        // ImGui::BeginHorizontal(str_id, F2ToImV2(size), align);
+        Experimental::BeginHorizontal(str_id, F2ToImV2(size), align);
     }
 
     void BeginHorizontal(const void* ptr_id, const SR_MATH_NS::FVector2& size, float align) {
-        // ImGui::BeginHorizontal(ptr_id, F2ToImV2(size), align);
+        Experimental::BeginHorizontal(ptr_id, F2ToImV2(size), align);
     }
 
     void EndHorizontal() {
-        // ImGui::EndHorizontal();
+        Experimental::EndHorizontal();
     }
 
     void Spring(float weight, float spacing) {
-        //ImGui::Spring(weight, spacing);
+        Experimental::Spring(weight, spacing);
     }
 
     void DrawPinIcon(const SR_MATH_NS::FVector2& size, SR_GRAPH_NS::GUI::IconType iconType, bool filled, const SR_MATH_NS::FColor& color, const SR_MATH_NS::FColor& innerColor) {
@@ -1529,250 +1496,6 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         
         ImGui::Dummy(F2ToImV2(size));
     }
-#endif
-
-#if defined(SR_USE_IMGUI_NODE_EDITOR) && defined(SR_USE_IMGUI)
-    void* CreateEditor(const char* settingsFile) {
-        ax::NodeEditor::Config config;
-        if (settingsFile) {
-            config.SettingsFile = settingsFile;
-        }
-        return ax::NodeEditor::CreateEditor(&config);
-    }
-
-    void DestroyEditor(void* editor) {
-        if (editor) {
-            ax::NodeEditor::DestroyEditor(reinterpret_cast<ax::NodeEditor::EditorContext*>(editor));
-        }
-    }
-
-    void SetCurrentEditor(void* editor) {
-        ax::NodeEditor::SetCurrentEditor(reinterpret_cast<ax::NodeEditor::EditorContext*>(editor));
-    }
-
-    void NavigateToContent() {
-        ax::NodeEditor::NavigateToContent();
-    }
-
-    bool BeginNodeEditor(const char* id, const SR_MATH_NS::FVector2& size) {
-        ax::NodeEditor::Begin(id, F2ToImV2(size));
-        return true;
-    }
-
-    void EndNodeEditor() {
-        ax::NodeEditor::End();
-    }
-
-    void ResumeNodeEditor() {
-        ax::NodeEditor::Resume();
-    }
-
-    void SuspendNodeEditor() {
-        ax::NodeEditor::Suspend();
-    }
-
-    void BeginNode(uintptr_t nodeId) {
-        ax::NodeEditor::BeginNode(ax::NodeEditor::NodeId(nodeId));
-    }
-
-    void EndNode() {
-        ax::NodeEditor::EndNode();
-    }
-
-    void BeginPin(uintptr_t pinId, bool isInput) {
-        ax::NodeEditor::BeginPin(
-            ax::NodeEditor::PinId(pinId),
-            isInput ? ax::NodeEditor::PinKind::Input : ax::NodeEditor::PinKind::Output
-        );
-    }
-
-    void PinPivotAlignment(const SR_MATH_NS::FVector2& alignment) {
-        ax::NodeEditor::PinPivotAlignment(F2ToImV2(alignment));
-    }
-
-    void PinPivotSize(const SR_MATH_NS::FVector2& size) {
-        ax::NodeEditor::PinPivotSize(F2ToImV2(size));
-    }
-
-    void EndPin() {
-        ax::NodeEditor::EndPin();
-    }
-
-    void Link(uintptr_t linkId, uintptr_t startPinId, uintptr_t endPinId) {
-        ax::NodeEditor::Link(
-            ax::NodeEditor::LinkId(linkId),
-            ax::NodeEditor::PinId(startPinId),
-            ax::NodeEditor::PinId(endPinId)
-        );
-    }
-
-    bool BeginCreate() {
-        return ax::NodeEditor::BeginCreate();
-    }
-
-    bool QueryNewLink(uintptr_t* startPinId, uintptr_t* endPinId) {
-        ax::NodeEditor::PinId startId, endId;
-        if (ax::NodeEditor::QueryNewLink(&startId, &endId)) {
-            if (startPinId) *startPinId = startId.Get();
-            if (endPinId) *endPinId = endId.Get();
-            return true;
-        }
-        return false;
-    }
-
-    bool AcceptNewItem() {
-        return ax::NodeEditor::AcceptNewItem();
-    }
-
-    void EndCreate() {
-        ax::NodeEditor::EndCreate();
-    }
-
-    bool BeginDelete() {
-        return ax::NodeEditor::BeginDelete();
-    }
-
-    bool QueryDeletedLink(uintptr_t* linkId, uintptr_t* startPinId, uintptr_t* endPinId) {
-        ax::NodeEditor::LinkId linkIdObj;
-        ax::NodeEditor::PinId startId, endId;
-        if (ax::NodeEditor::QueryDeletedLink(&linkIdObj, startPinId ? &startId : nullptr, endPinId ? &endId : nullptr)) {
-            if (linkId) *linkId = linkIdObj.Get();
-            if (startPinId && startId) *startPinId = startId.Get();
-            if (endPinId && endId) *endPinId = endId.Get();
-            return true;
-        }
-        return false;
-    }
-
-    bool QueryDeletedNode(uintptr_t* nodeId) {
-        ax::NodeEditor::NodeId nodeIdObj;
-        if (ax::NodeEditor::QueryDeletedNode(&nodeIdObj)) {
-            if (nodeId) *nodeId = nodeIdObj.Get();
-            return true;
-        }
-        return false;
-    }
-
-    void EndDelete() {
-        ax::NodeEditor::EndDelete();
-    }
-
-    bool ShowBackgroundContextMenu() {
-        return ax::NodeEditor::ShowBackgroundContextMenu();
-    }
-
-    bool ShowNodeContextMenu(uintptr_t* nodeId) {
-        ax::NodeEditor::NodeId nodeIdObj;
-        if (ax::NodeEditor::ShowNodeContextMenu(&nodeIdObj)) {
-            if (nodeId) *nodeId = nodeIdObj.Get();
-            return true;
-        }
-        return false;
-    }
-
-    int GetSelectedNodes(uintptr_t* nodeIds, int maxCount) {
-        if (!nodeIds || maxCount <= 0) {
-            return ax::NodeEditor::GetSelectedNodes(nullptr, 0);
-        }
-        std::vector<ax::NodeEditor::NodeId> ids(maxCount);
-        int count = ax::NodeEditor::GetSelectedNodes(ids.data(), maxCount);
-        for (int i = 0; i < count; ++i) {
-            nodeIds[i] = ids[i].Get();
-        }
-        return count;
-    }
-
-    int GetSelectedLinks(uintptr_t* linkIds, int maxCount) {
-        if (!linkIds || maxCount <= 0) {
-            return ax::NodeEditor::GetSelectedLinks(nullptr, 0);
-        }
-        std::vector<ax::NodeEditor::LinkId> ids(maxCount);
-        int count = ax::NodeEditor::GetSelectedLinks(ids.data(), maxCount);
-        for (int i = 0; i < count; ++i) {
-            linkIds[i] = ids[i].Get();
-        }
-        return count;
-    }
-
-    SR_MATH_NS::FVector2 ScreenToCanvas(const SR_MATH_NS::FVector2& screenPos) {
-        auto&& result = ax::NodeEditor::ScreenToCanvas(F2ToImV2(screenPos));
-        return ImV2ToF2(result);
-    }
-
-    void SetNodePosition(uintptr_t nodeId, const SR_MATH_NS::FVector2& position) {
-        ax::NodeEditor::SetNodePosition(ax::NodeEditor::NodeId(nodeId), F2ToImV2(position));
-    }
-
-    SR_MATH_NS::FVector2 GetNodePosition(uintptr_t nodeId) {
-        auto&& result = ax::NodeEditor::GetNodePosition(ax::NodeEditor::NodeId(nodeId));
-        return ImV2ToF2(result);
-    }
-
-    void PushNodeEditorStyleColor(NodeEditorStyleColor colorIndex, const SR_MATH_NS::FColor& color) {
-        ax::NodeEditor::PushStyleColor(static_cast<ax::NodeEditor::StyleColor>(colorIndex), FCToImV4(color));
-    }
-
-    void PopNodeEditorStyleColor(int count) {
-        ax::NodeEditor::PopStyleColor(count);
-    }
-
-    void PushNodeEditorStyleVar(NodeEditorStyleVar varIndex, float value) {
-        ax::NodeEditor::PushStyleVar(static_cast<ax::NodeEditor::StyleVar>(varIndex), value);
-    }
-
-    void PushNodeEditorStyleVar(NodeEditorStyleVar varIndex, const SR_MATH_NS::FVector2& value) {
-        ax::NodeEditor::PushStyleVar(static_cast<ax::NodeEditor::StyleVar>(varIndex), F2ToImV2(value));
-    }
-
-    void PushNodeEditorStyleVar(NodeEditorStyleVar varIndex, const SR_MATH_NS::FVector4& value) {
-        ax::NodeEditor::PushStyleVar(static_cast<ax::NodeEditor::StyleVar>(varIndex), F4ToImV4(value));
-    }
-
-    void PopNodeEditorStyleVar(int count) {
-        ax::NodeEditor::PopStyleVar(count);
-    }
-
-    void* GetNodeBackgroundDrawList(uintptr_t nodeId) {
-        return ax::NodeEditor::GetNodeBackgroundDrawList(ax::NodeEditor::NodeId(nodeId));
-    }
-#else
-    void* CreateEditor(const char* settingsFile) { return nullptr; }
-    void DestroyEditor(void* editor) { }
-    void SetCurrentEditor(void* editor) { }
-    bool BeginNodeEditor(const char* id, const SR_MATH_NS::FVector2& size) { return false; }
-    void EndNodeEditor() { }
-    void ResumeNodeEditor() { }
-    void SuspendNodeEditor() { }
-    void BeginNode(uintptr_t nodeId) { }
-    void EndNode() { }
-    void BeginPin(uintptr_t pinId, bool isInput) { }
-    void PinPivotAlignment(const SR_MATH_NS::FVector2& alignment) { }
-    void PinPivotSize(const SR_MATH_NS::FVector2& size) { }
-    void EndPin() { }
-    void Link(uintptr_t linkId, uintptr_t startPinId, uintptr_t endPinId) { }
-    bool BeginCreate() { return false; }
-    bool QueryNewLink(uintptr_t* startPinId, uintptr_t* endPinId) { return false; }
-    bool AcceptNewItem() { return false; }
-    void EndCreate() { }
-    bool BeginDelete() { return false; }
-    bool QueryDeletedLink(uintptr_t* linkId, uintptr_t* startPinId, uintptr_t* endPinId) { return false; }
-    bool QueryDeletedNode(uintptr_t* nodeId) { return false; }
-    void EndDelete() { }
-    bool ShowBackgroundContextMenu() { return false; }
-    bool ShowNodeContextMenu(uintptr_t* nodeId) { return false; }
-    int GetSelectedNodes(uintptr_t* nodeIds, int maxCount) { return 0; }
-    int GetSelectedLinks(uintptr_t* linkIds, int maxCount) { return 0; }
-    SR_MATH_NS::FVector2 ScreenToCanvas(const SR_MATH_NS::FVector2& screenPos) { return screenPos; }
-    void SetNodePosition(uintptr_t nodeId, const SR_MATH_NS::FVector2& position) { }
-    SR_MATH_NS::FVector2 GetNodePosition(uintptr_t nodeId) { return SR_MATH_NS::FVector2(0.0f, 0.0f); }
-    void PushNodeEditorStyleColor(NodeEditorStyleColor colorIndex, const SR_MATH_NS::FColor& color) { }
-    void PopNodeEditorStyleColor(int count) { }
-    void PushNodeEditorStyleVar(NodeEditorStyleVar varIndex, float value) { }
-    void PushNodeEditorStyleVar(NodeEditorStyleVar varIndex, const SR_MATH_NS::FVector2& value) { }
-    void PushNodeEditorStyleVar(NodeEditorStyleVar varIndex, const SR_MATH_NS::FVector4& value) { }
-    void PopNodeEditorStyleVar(int count) { }
-    void* GetNodeBackgroundDrawList(uintptr_t nodeId) { return nullptr; }
-    void NavigateToContent() { }
 #endif
 
 #ifndef SR_USE_IMGUI

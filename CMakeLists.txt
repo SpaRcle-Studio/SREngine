@@ -78,6 +78,11 @@ if (MSVC)
     find_windows_sdk(SR_WINDOWS_SDK_DIR)
     find_latest_windows_sdk_version(SR_WINDOWS_SDK_VERSION)
 
+    if (SR_WINDOWS_SDK_VERSION_FORCE)
+        set(SR_WINDOWS_SDK_VERSION ${SR_WINDOWS_SDK_VERSION_FORCE})
+        message(STATUS "SpaRcle Engine: Windows SDK version forced to ${SR_WINDOWS_SDK_VERSION}")
+    endif()
+
     message(STATUS "SpaRcle Engine: Windows SDK path is ${SR_WINDOWS_SDK_DIR}")
     message(STATUS "SpaRcle Engine: Windows SDK version is ${SR_WINDOWS_SDK_VERSION}")
 

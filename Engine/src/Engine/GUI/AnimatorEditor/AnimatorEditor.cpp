@@ -17,6 +17,7 @@
 #include <Graphics/GUI/NodeBuilder.h>
 
 #include <ImmediateGUI/GUI/ImmediateGUI.h>
+#include <ImmediateGUI/GUI/NodeEditor.h>
 
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/FileSystem/FileDialog.h>
@@ -75,11 +76,11 @@ namespace SR_CORE_GUI_NS {
 
     void AnimatorEditor::OnClose() {
         if (m_editor) {
-            SR_GRAPH_GUI_NS::Immediate::DestroyEditor(m_editor);
+            SR_IMMEDIATE_GUI_NS::NodeEditor::DestroyEditor(m_editor);
             m_editor = nullptr;
         }
         if (m_context.pStateMachineEditor) {
-            SR_GRAPH_GUI_NS::Immediate::DestroyEditor(m_context.pStateMachineEditor);
+            SR_IMMEDIATE_GUI_NS::NodeEditor::DestroyEditor(m_context.pStateMachineEditor);
             m_context.pStateMachineEditor = nullptr;
         }
         m_editorStateMachine.ClearStateMachineVisual();
@@ -184,8 +185,8 @@ namespace SR_CORE_GUI_NS {
 
         const bool editable = !(m_context.isLive && m_context.liveReadOnly);
 
-        SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(m_editor);
-        if (!SR_GRAPH_GUI_NS::Immediate::BeginNodeEditor("Animation Graph Editor", SR_MATH_NS::FVector2())) {
+        SR_IMMEDIATE_GUI_NS::NodeEditor::SetCurrentEditor(m_editor);
+        if (!SR_IMMEDIATE_GUI_NS::NodeEditor::BeginNodeEditor("Animation Graph Editor", SR_MATH_NS::FVector2())) {
             return;
         }
 
@@ -193,9 +194,9 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::NodeBuilder builder(nullptr);
 
         // link style: более “ровные” направления и без странных изгибов
-        SR_GRAPH_GUI_NS::Immediate::PushNodeEditorStyleVar(SR_GRAPH_GUI_NS::Immediate::NodeEditorStyleVar::SourceDirection, SR_MATH_NS::FVector2(1.0f, 0.0f));
-        SR_GRAPH_GUI_NS::Immediate::PushNodeEditorStyleVar(SR_GRAPH_GUI_NS::Immediate::NodeEditorStyleVar::TargetDirection, SR_MATH_NS::FVector2(-1.0f, 0.0f));
-        SR_GRAPH_GUI_NS::Immediate::PushNodeEditorStyleVar(SR_GRAPH_GUI_NS::Immediate::NodeEditorStyleVar::SnapLinkToPinDir, 1.0f);
+        SR_IMMEDIATE_GUI_NS::NodeEditor::PushNodeEditorStyleVar(SR_IMMEDIATE_GUI_NS::NodeEditor::NodeEditorStyleVar::SourceDirection, SR_MATH_NS::FVector2(1.0f, 0.0f));
+        SR_IMMEDIATE_GUI_NS::NodeEditor::PushNodeEditorStyleVar(SR_IMMEDIATE_GUI_NS::NodeEditor::NodeEditorStyleVar::TargetDirection, SR_MATH_NS::FVector2(-1.0f, 0.0f));
+        SR_IMMEDIATE_GUI_NS::NodeEditor::PushNodeEditorStyleVar(SR_IMMEDIATE_GUI_NS::NodeEditor::NodeEditorStyleVar::SnapLinkToPinDir, 1.0f);
 
         if (!m_graphPath.IsEmpty()) {
             SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(0.6f, 0.6f, 0.6f, 1.0f), "Live: %s", m_graphPath.CStr());
@@ -427,12 +428,12 @@ namespace SR_CORE_GUI_NS {
         for (auto&& [id, pLink] : m_links) {
             if (pLink && pLink->IsLinked()) {
                 if (m_activeGraphLinks.count(pLink->GetId()) == 1) {
-                    SR_GRAPH_GUI_NS::Immediate::PushNodeEditorStyleColor(SR_GRAPH_GUI_NS::Immediate::NodeEditorStyleColor::HighlightLinkBorder, SR_MATH_NS::FColor(0.25f, 1.0f, 0.35f, 1.0f));
-                    SR_GRAPH_GUI_NS::Immediate::PushNodeEditorStyleColor(SR_GRAPH_GUI_NS::Immediate::NodeEditorStyleColor::SelLinkBorder, SR_MATH_NS::FColor(0.25f, 1.0f, 0.35f, 1.0f));
-                    SR_GRAPH_GUI_NS::Immediate::PushNodeEditorStyleVar(SR_GRAPH_GUI_NS::Immediate::NodeEditorStyleVar::LinkStrength, 3.0f);
+                    SR_IMMEDIATE_GUI_NS::NodeEditor::PushNodeEditorStyleColor(SR_IMMEDIATE_GUI_NS::NodeEditor::NodeEditorStyleColor::HighlightLinkBorder, SR_MATH_NS::FColor(0.25f, 1.0f, 0.35f, 1.0f));
+                    SR_IMMEDIATE_GUI_NS::NodeEditor::PushNodeEditorStyleColor(SR_IMMEDIATE_GUI_NS::NodeEditor::NodeEditorStyleColor::SelLinkBorder, SR_MATH_NS::FColor(0.25f, 1.0f, 0.35f, 1.0f));
+                    SR_IMMEDIATE_GUI_NS::NodeEditor::PushNodeEditorStyleVar(SR_IMMEDIATE_GUI_NS::NodeEditor::NodeEditorStyleVar::LinkStrength, 3.0f);
                     pLink->DrawBezier();
-                    SR_GRAPH_GUI_NS::Immediate::PopNodeEditorStyleVar(1);
-                    SR_GRAPH_GUI_NS::Immediate::PopNodeEditorStyleColor(2);
+                    SR_IMMEDIATE_GUI_NS::NodeEditor::PopNodeEditorStyleVar(1);
+                    SR_IMMEDIATE_GUI_NS::NodeEditor::PopNodeEditorStyleColor(2);
                 }
                 else {
                     pLink->DrawBezier();
@@ -442,9 +443,9 @@ namespace SR_CORE_GUI_NS {
 
         if (editable) {
             // Обработка создания новых связей
-            if (SR_GRAPH_GUI_NS::Immediate::BeginCreate()) {
+            if (SR_IMMEDIATE_GUI_NS::NodeEditor::BeginCreate()) {
                 uintptr_t startPinId = 0, endPinId = 0;
-                if (SR_GRAPH_GUI_NS::Immediate::QueryNewLink(&startPinId, &endPinId)) {
+                if (SR_IMMEDIATE_GUI_NS::NodeEditor::QueryNewLink(&startPinId, &endPinId)) {
                     if (startPinId && endPinId) {
                         // Находим пины по ID
                         SR_GRAPH_GUI_NS::Pin* pStartPin = nullptr;
@@ -471,7 +472,7 @@ namespace SR_CORE_GUI_NS {
                         if (pStartPin && pEndPin &&
                             pStartPin->GetKind() == SR_GRAPH_GUI_NS::PinKind::Output &&
                             pEndPin->GetKind() == SR_GRAPH_GUI_NS::PinKind::Input &&
-                            SR_GRAPH_GUI_NS::Immediate::AcceptNewItem()) {
+                            SR_IMMEDIATE_GUI_NS::NodeEditor::AcceptNewItem()) {
                             auto&& pLink = new SR_GRAPH_GUI_NS::Link(pStartPin, pEndPin);
                             AddLink(pLink);
                             needsSync = true;
@@ -479,12 +480,12 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
             }
-            SR_GRAPH_GUI_NS::Immediate::EndCreate();
+            SR_IMMEDIATE_GUI_NS::NodeEditor::EndCreate();
 
             // Обработка удаления
-            if (SR_GRAPH_GUI_NS::Immediate::BeginDelete()) {
+            if (SR_IMMEDIATE_GUI_NS::NodeEditor::BeginDelete()) {
                 uintptr_t linkId = 0;
-                while (SR_GRAPH_GUI_NS::Immediate::QueryDeletedLink(&linkId, nullptr, nullptr)) {
+                while (SR_IMMEDIATE_GUI_NS::NodeEditor::QueryDeletedLink(&linkId, nullptr, nullptr)) {
                     if (linkId) {
                         for (auto&& [id, pLink] : m_links) {
                             if (pLink->GetId() == linkId) {
@@ -497,7 +498,7 @@ namespace SR_CORE_GUI_NS {
                 }
 
                 uintptr_t nodeId = 0;
-                while (SR_GRAPH_GUI_NS::Immediate::QueryDeletedNode(&nodeId)) {
+                while (SR_IMMEDIATE_GUI_NS::NodeEditor::QueryDeletedNode(&nodeId)) {
                     if (nodeId) {
                         for (auto&& [id, pNode] : m_nodes) {
                             if (pNode->GetId() == nodeId) {
@@ -513,15 +514,15 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
             }
-            SR_GRAPH_GUI_NS::Immediate::EndDelete();
+            SR_IMMEDIATE_GUI_NS::NodeEditor::EndDelete();
         }
 
         // Даблклик по ноде стейт-машины открывает вкладку State Machine
         if (SR_GRAPH_GUI_NS::Immediate::IsMouseDoubleClicked(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left)) {
-            const int selected = SR_GRAPH_GUI_NS::Immediate::GetSelectedNodes(nullptr, 0);
+            const int selected = SR_IMMEDIATE_GUI_NS::NodeEditor::GetSelectedNodes(nullptr, 0);
             if (selected > 0) {
                 std::vector<uintptr_t> nodeIds(selected);
-                SR_GRAPH_GUI_NS::Immediate::GetSelectedNodes(nodeIds.data(), selected);
+                SR_IMMEDIATE_GUI_NS::NodeEditor::GetSelectedNodes(nodeIds.data(), selected);
 
                 if (!nodeIds.empty()) {
                     if (auto&& it = m_nodes.find(nodeIds[0]); it != m_nodes.end()) {
@@ -538,8 +539,8 @@ namespace SR_CORE_GUI_NS {
 
         // Контекстное меню (dock-safe)
         if (editable) {
-            SR_GRAPH_GUI_NS::Immediate::SuspendNodeEditor();
-            if (SR_GRAPH_GUI_NS::Immediate::ShowBackgroundContextMenu()) {
+            SR_IMMEDIATE_GUI_NS::NodeEditor::SuspendNodeEditor();
+            if (SR_IMMEDIATE_GUI_NS::NodeEditor::ShowBackgroundContextMenu()) {
                 SR_GRAPH_GUI_NS::Immediate::OpenPopup("AnimatorEditor_Graph_Context");
                 m_popupMousePos = SR_GRAPH_GUI_NS::Immediate::GetMousePos();
             }
@@ -551,12 +552,12 @@ namespace SR_CORE_GUI_NS {
                 DrawNodeMenuRecursive(categories, "");
                 SR_GRAPH_GUI_NS::Immediate::EndPopup();
             }
-            SR_GRAPH_GUI_NS::Immediate::ResumeNodeEditor();
+            SR_IMMEDIATE_GUI_NS::NodeEditor::ResumeNodeEditor();
         }
 
-        SR_GRAPH_GUI_NS::Immediate::EndNodeEditor();
-        SR_GRAPH_GUI_NS::Immediate::PopNodeEditorStyleVar(3);
-        SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(nullptr);
+        SR_IMMEDIATE_GUI_NS::NodeEditor::EndNodeEditor();
+        SR_IMMEDIATE_GUI_NS::NodeEditor::PopNodeEditorStyleVar(3);
+        SR_IMMEDIATE_GUI_NS::NodeEditor::SetCurrentEditor(nullptr);
         if (needsSync) {
             SyncVisualNodesToGraph();
         }
@@ -578,14 +579,14 @@ namespace SR_CORE_GUI_NS {
 
         void* pEditor = (m_tab == Tab::Graph) ? m_editor : m_context.pStateMachineEditor;
         if (pEditor) {
-            SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(pEditor);
+            SR_IMMEDIATE_GUI_NS::NodeEditor::SetCurrentEditor(pEditor);
 
-            const int selectedNodes = SR_GRAPH_GUI_NS::Immediate::GetSelectedNodes(nullptr, 0);
+            const int selectedNodes = SR_IMMEDIATE_GUI_NS::NodeEditor::GetSelectedNodes(nullptr, 0);
 
             if (selectedNodes > 0) {
                 m_editorStateMachine.ResetSelectedLink();
                 std::vector<uintptr_t> nodeIds(selectedNodes);
-                SR_GRAPH_GUI_NS::Immediate::GetSelectedNodes(nodeIds.data(), selectedNodes);
+                SR_IMMEDIATE_GUI_NS::NodeEditor::GetSelectedNodes(nodeIds.data(), selectedNodes);
                 if (nodeIds.size() == 1) {
                     const uintptr_t nodeId = nodeIds[0];
                     if (m_tab == Tab::Graph) {
@@ -602,7 +603,7 @@ namespace SR_CORE_GUI_NS {
                 pSelectedObject = m_editorStateMachine.GetSelectedLink();
             }
 
-            SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(nullptr);
+            SR_IMMEDIATE_GUI_NS::NodeEditor::SetCurrentEditor(nullptr);
         }
 
         if (!pSelectedObject) {
@@ -732,8 +733,8 @@ namespace SR_CORE_GUI_NS {
                         auto&& pGraphNode = m_context.pGraph->AddNode(pNode.Get());
                         auto&& pVisualNode = CreateVisualNode(pGraphNode);
 
-                        auto&& pos = SR_GRAPH_GUI_NS::Immediate::ScreenToCanvas(m_popupMousePos);
-                        SR_GRAPH_GUI_NS::Immediate::SetNodePosition(pVisualNode->GetId(), pos);
+                        auto&& pos = SR_IMMEDIATE_GUI_NS::NodeEditor::ScreenToCanvas(m_popupMousePos);
+                        SR_IMMEDIATE_GUI_NS::NodeEditor::SetNodePosition(pVisualNode->GetId(), pos);
                     }
                 }
             }
@@ -775,9 +776,9 @@ namespace SR_CORE_GUI_NS {
             if (pGraphNode) {
                 auto&& pVisualNode = CreateVisualNode(pGraphNode.Get());
                 if (m_editor) {
-                    SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(m_editor);
-                    SR_GRAPH_GUI_NS::Immediate::SetNodePosition(pVisualNode->GetId(), pGraphNode->GetEditorPosition());
-                    SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(nullptr);
+                    SR_IMMEDIATE_GUI_NS::NodeEditor::SetCurrentEditor(m_editor);
+                    SR_IMMEDIATE_GUI_NS::NodeEditor::SetNodePosition(pVisualNode->GetId(), pGraphNode->GetEditorPosition());
+                    SR_IMMEDIATE_GUI_NS::NodeEditor::SetCurrentEditor(nullptr);
                 }
             }
         }
@@ -823,14 +824,14 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (m_editor) {
-            SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(m_editor);
+            SR_IMMEDIATE_GUI_NS::NodeEditor::SetCurrentEditor(m_editor);
         }
 
         // Сохраняем позиции визуальных нод в данные графа
         for (auto&& [nodeId, pVisualNode] : m_nodes) {
             if (m_editor) {
                 auto&& pGraphNode = pVisualNode->GetUserData<SR_ANIMATIONS_NS::AnimationGraphNode>();
-                pGraphNode->SetEditorPosition(SR_GRAPH_GUI_NS::Immediate::GetNodePosition(pVisualNode->GetId()));
+                pGraphNode->SetEditorPosition(SR_IMMEDIATE_GUI_NS::NodeEditor::GetNodePosition(pVisualNode->GetId()));
             }
         }
 
@@ -900,7 +901,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (m_editor) {
-            SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(nullptr);
+            SR_IMMEDIATE_GUI_NS::NodeEditor::SetCurrentEditor(nullptr);
         }
     }
 
@@ -1026,11 +1027,11 @@ namespace SR_CORE_GUI_NS {
     void AnimatorEditor::OnOpen() {
         if (!m_editor) {
             static auto&& settingsPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/AnimatorEditor.json");
-            m_editor = SR_GRAPH_GUI_NS::Immediate::CreateEditor(settingsPath.CStr());
+            m_editor = SR_IMMEDIATE_GUI_NS::NodeEditor::CreateEditor(settingsPath.CStr());
         }
         if (!m_context.pStateMachineEditor) {
             static auto&& smSettingsPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/AnimatorStateMachineEditor.json");
-            m_context.pStateMachineEditor = SR_GRAPH_GUI_NS::Immediate::CreateEditor(smSettingsPath.CStr());
+            m_context.pStateMachineEditor = SR_IMMEDIATE_GUI_NS::NodeEditor::CreateEditor(smSettingsPath.CStr());
         }
         if (m_context.pGraph) {
             SyncGraphToVisualNodes();
@@ -1041,16 +1042,16 @@ namespace SR_CORE_GUI_NS {
     void AnimatorEditor::Zoom() {
         if (m_tab == Tab::StateMachine) {
             if (m_context.pStateMachineEditor) {
-                SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(m_context.pStateMachineEditor);
-                SR_GRAPH_GUI_NS::Immediate::NavigateToContent();
-                SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(nullptr);
+                SR_IMMEDIATE_GUI_NS::NodeEditor::SetCurrentEditor(m_context.pStateMachineEditor);
+                SR_IMMEDIATE_GUI_NS::NodeEditor::NavigateToContent();
+                SR_IMMEDIATE_GUI_NS::NodeEditor::SetCurrentEditor(nullptr);
             }
         }
         else {
             if (m_editor) {
-                SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(m_editor);
-                SR_GRAPH_GUI_NS::Immediate::NavigateToContent();
-                SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(nullptr);
+                SR_IMMEDIATE_GUI_NS::NodeEditor::SetCurrentEditor(m_editor);
+                SR_IMMEDIATE_GUI_NS::NodeEditor::NavigateToContent();
+                SR_IMMEDIATE_GUI_NS::NodeEditor::SetCurrentEditor(nullptr);
             }
         }
         Super::Zoom();

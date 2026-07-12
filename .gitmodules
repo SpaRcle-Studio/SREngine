@@ -34,3 +34,6 @@
 [submodule "Engine/libs/ImmediateGUI/libs/imgui"]
 	path = Engine/libs/ImmediateGUI/libs/imgui
 	url = https://github.com/SpaRcle-Studio/imgui
+[submodule "Engine/libs/ImmediateGUI/libs/ImNodeFlow"]
+	path = Engine/libs/ImmediateGUI/libs/ImNodeFlow
+	url = https://github.com/SpaRcle-Studio/ImNodeFlow

@@ -268,7 +268,7 @@ namespace SR_CORE_NS::GUI {
     void FileBrowser::CurrentDirectoryPanel() {
         SR_TRACY_ZONE;
 
-        const float_t fontSize = SR_UTILS_NS::StoreUtils::User::GetFloat("ImGuiFontSize", 0.f);
+        const float_t fontSize = SR_UTILS_NS::StoreUtils::User::GetFloat("EditorFontSize", SR_IMMEDIATE_GUI_NS::DEFAULT_FONT_SIZE);
         const float_t panelHeight = fontSize * 1.6f;
 
         SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::FrameRounding, 0.0f);
@@ -322,7 +322,7 @@ namespace SR_CORE_NS::GUI {
         SR_TRACY_ZONE;
         auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
         auto&& pOverlay = pEngine->GetRenderContext()->GetPipeline()->GetOverlay(SR_GRAPH_NS::OverlayType::ImGui);
-        auto&& pSmallFont = pOverlay.DynamicCast<SR_GRAPH_NS::ImGuiOverlay>()->GetSmallFont();
+        auto&& pSmallFont = pOverlay.DynamicCast<SR_GRAPH_NS::ImGuiOverlay>()->GetMainFont();
 
         const float frameHeight = SR_GRAPH_GUI_NS::Immediate::GetFrameHeightWithSpacing();
 
@@ -336,8 +336,8 @@ namespace SR_CORE_NS::GUI {
 
             uint32_t index = 1;
 
-            const float_t fontSize = SR_UTILS_NS::StoreUtils::User::GetFloat("ImGuiFontSize", 0.f);
-            const float_t iconSize = fontSize * 3.5f * m_itemsScale;
+            const float_t fontSize = SR_UTILS_NS::StoreUtils::User::GetFloat("EditorFontSize", SR_IMMEDIATE_GUI_NS::DEFAULT_FONT_SIZE);
+            const float_t iconSize = fontSize * 6.0f * m_itemsScale;
 
             for (const auto &element : m_elements) {
                 ++index;

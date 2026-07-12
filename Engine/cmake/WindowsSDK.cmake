@@ -18,6 +18,9 @@ endfunction()
 
 function(find_latest_windows_sdk_version SR_WINDOWS_SDK_VERSION)
     file(GLOB SDK_VERSIONS LIST_DIRECTORIES true "${SR_WINDOWS_SDK_DIR}/Include/*")
+    foreach (version ${SDK_VERSIONS})
+        message(STATUS "SpaRcle Engine: Found Windows SDK version: ${version}")
+    endforeach()
 
     list(SORT SDK_VERSIONS)
     list(GET SDK_VERSIONS -1 LATEST_SDK_DIR)

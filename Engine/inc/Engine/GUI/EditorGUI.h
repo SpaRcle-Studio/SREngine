@@ -39,8 +39,8 @@ namespace SR_CORE_GUI_NS {
         using Icons = std::map<EditorIcon, SR_GTYPES_NS::Texture::Ptr>;
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext>;
         using WindowPtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::Window>;
-        using ScenePtr = SR_HTYPES_NS::SharedPtr<SR_WORLD_NS::Scene>;
         using EnginePtr = SR_HTYPES_NS::SharedPtr<SR_CORE_NS::Engine>;
+        using ScenePtr = SR_HTYPES_NS::SharedPtr<SR_WORLD_NS::Scene>;
         enum class Click {
             None, Drag, Miss
         };

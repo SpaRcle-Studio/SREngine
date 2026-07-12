@@ -56,3 +56,38 @@
 
     #include <ImmediateGUI/Impl/NodeEditorDeprecatedMath.h>
 #endif
+
+namespace SR_IMMEDIATE_GUI_NS {
+    ImColor FCToImC(const SR_MATH_NS::FColor& color) {
+        return ImColor(color.r, color.g, color.b, color.a);
+    }
+
+    ImVec2 F2ToImV2(const SR_MATH_NS::FVector2& vec) {
+        return ImVec2(vec.x, vec.y);
+    }
+
+    ImVec4 F4ToImV4(const SR_MATH_NS::FVector4& vec) {
+        return ImVec4(vec.x, vec.y, vec.z, vec.w);
+    }
+
+    ImVec4 FCToImV4(const SR_MATH_NS::FColor& vec) {
+        return ImVec4(vec.r, vec.g, vec.b, vec.a);
+    }
+
+    SR_MATH_NS::FVector2 ImV2ToF2(const ImVec2& vec) {
+        return SR_MATH_NS::FVector2(vec.x, vec.y);
+    }
+
+    SR_MATH_NS::FVector4 ImV4ToF4(const ImVec4& vec) {
+        return SR_MATH_NS::FVector4(vec.x, vec.y, vec.z, vec.w);
+    }
+
+    SR_MATH_NS::FRect IRToFR(const ImRect& rect) {
+        return SR_MATH_NS::FRect(
+            rect.Min.x,
+            rect.Min.y,
+            rect.Max.x,
+            rect.Max.y
+        );
+    }
+}

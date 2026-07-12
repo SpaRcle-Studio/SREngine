@@ -14,6 +14,7 @@
 #include <Graphics/GUI/NodeBuilder.h>
 
 #include <ImmediateGUI/GUI/ImmediateGUI.h>
+#include <ImmediateGUI/GUI/NodeEditor.h>
 
 #include <Utils/TypeTraits/Factory.h>
 
@@ -41,7 +42,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (m_context.pStateMachineEditor) {
-            SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(m_context.pStateMachineEditor);
+            SR_IMMEDIATE_GUI_NS::NodeEditor::SetCurrentEditor(m_context.pStateMachineEditor);
         }
 
         // States -> visual nodes (без пинов)
@@ -61,7 +62,7 @@ namespace SR_CORE_GUI_NS {
             AddNode(pNode);
 
             if (m_context.pStateMachineEditor) {
-                SR_GRAPH_GUI_NS::Immediate::SetNodePosition(pNode->GetId(), pState->GetEditorPosition());
+                SR_IMMEDIATE_GUI_NS::NodeEditor::SetNodePosition(pNode->GetId(), pState->GetEditorPosition());
             }
         }
 
@@ -94,7 +95,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (m_context.pStateMachineEditor) {
-            SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(nullptr);
+            SR_IMMEDIATE_GUI_NS::NodeEditor::SetCurrentEditor(nullptr);
         }
     }
 
@@ -110,19 +111,19 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (m_context.pStateMachineEditor) {
-            SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(m_context.pStateMachineEditor);
+            SR_IMMEDIATE_GUI_NS::NodeEditor::SetCurrentEditor(m_context.pStateMachineEditor);
         }
 
         for (auto&& [nodeId, pVisualNode] : m_nodes) {
             if (auto&& pState = pVisualNode->GetUserData<SR_ANIMATIONS_NS::AnimationState>()) {
                 if (m_context.pStateMachineEditor) {
-                    pState->SetEditorPosition(SR_GRAPH_GUI_NS::Immediate::GetNodePosition(pVisualNode->GetId()));
+                    pState->SetEditorPosition(SR_IMMEDIATE_GUI_NS::NodeEditor::GetNodePosition(pVisualNode->GetId()));
                 }
             }
         }
 
         if (m_context.pStateMachineEditor) {
-            SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(nullptr);
+            SR_IMMEDIATE_GUI_NS::NodeEditor::SetCurrentEditor(nullptr);
         }
     }
 
@@ -205,17 +206,17 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_GUI_NS::Immediate::Separator();
 
-        SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(m_context.pStateMachineEditor);
-        SR_GRAPH_GUI_NS::Immediate::BeginNodeEditor("Animation State Machine", SR_MATH_NS::FVector2());
+        SR_IMMEDIATE_GUI_NS::NodeEditor::SetCurrentEditor(m_context.pStateMachineEditor);
+        SR_IMMEDIATE_GUI_NS::NodeEditor::BeginNodeEditor("Animation State Machine", SR_MATH_NS::FVector2());
 
         m_nodeEditorRegion = SR_MATH_NS::FRect(
             SR_GRAPH_GUI_NS::Immediate::GetItemRectMin(),
             SR_GRAPH_GUI_NS::Immediate::GetItemRectMax()
         );
 
-        SR_GRAPH_GUI_NS::Immediate::PushNodeEditorStyleVar(SR_GRAPH_GUI_NS::Immediate::NodeEditorStyleVar::SourceDirection, SR_MATH_NS::FVector2(1.0f, 0.0f));
-        SR_GRAPH_GUI_NS::Immediate::PushNodeEditorStyleVar(SR_GRAPH_GUI_NS::Immediate::NodeEditorStyleVar::TargetDirection, SR_MATH_NS::FVector2(-1.0f, 0.0f));
-        SR_GRAPH_GUI_NS::Immediate::PushNodeEditorStyleVar(SR_GRAPH_GUI_NS::Immediate::NodeEditorStyleVar::SnapLinkToPinDir, 1.0f);
+        SR_IMMEDIATE_GUI_NS::NodeEditor::PushNodeEditorStyleVar(SR_IMMEDIATE_GUI_NS::NodeEditor::NodeEditorStyleVar::SourceDirection, SR_MATH_NS::FVector2(1.0f, 0.0f));
+        SR_IMMEDIATE_GUI_NS::NodeEditor::PushNodeEditorStyleVar(SR_IMMEDIATE_GUI_NS::NodeEditor::NodeEditorStyleVar::TargetDirection, SR_MATH_NS::FVector2(-1.0f, 0.0f));
+        SR_IMMEDIATE_GUI_NS::NodeEditor::PushNodeEditorStyleVar(SR_IMMEDIATE_GUI_NS::NodeEditor::NodeEditorStyleVar::SnapLinkToPinDir, 1.0f);
 
         bool needResync = false;
 
@@ -296,9 +297,9 @@ namespace SR_CORE_GUI_NS {
             */
 
             // delete transition/state
-            if (SR_GRAPH_GUI_NS::Immediate::BeginDelete()) {
+            if (SR_IMMEDIATE_GUI_NS::NodeEditor::BeginDelete()) {
                 uintptr_t nodeId = 0;
-                while (SR_GRAPH_GUI_NS::Immediate::QueryDeletedNode(&nodeId)) {
+                while (SR_IMMEDIATE_GUI_NS::NodeEditor::QueryDeletedNode(&nodeId)) {
                     if (!nodeId) {
                         continue;
                     }
@@ -316,11 +317,11 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
             }
-            SR_GRAPH_GUI_NS::Immediate::EndDelete();
+            SR_IMMEDIATE_GUI_NS::NodeEditor::EndDelete();
 
-            SR_GRAPH_GUI_NS::Immediate::SuspendNodeEditor();
+            SR_IMMEDIATE_GUI_NS::NodeEditor::SuspendNodeEditor();
             // context menu: create state (dock-safe, anchored to node-editor background)
-            if (SR_GRAPH_GUI_NS::Immediate::ShowBackgroundContextMenu()) {
+            if (SR_IMMEDIATE_GUI_NS::NodeEditor::ShowBackgroundContextMenu()) {
                 SR_GRAPH_GUI_NS::Immediate::OpenPopup("AnimatorEditor_SM_Context");
                 m_popupMousePos = SR_GRAPH_GUI_NS::Immediate::GetMousePos();
             }
@@ -332,12 +333,12 @@ namespace SR_CORE_GUI_NS {
                 DrawStateMenuRecursive(needResync, categories, "");
                 SR_GRAPH_GUI_NS::Immediate::EndPopup();
             }
-            SR_GRAPH_GUI_NS::Immediate::ResumeNodeEditor();
+            SR_IMMEDIATE_GUI_NS::NodeEditor::ResumeNodeEditor();
         }
 
-        SR_GRAPH_GUI_NS::Immediate::EndNodeEditor();
-        SR_GRAPH_GUI_NS::Immediate::PopNodeEditorStyleVar(3);
-        SR_GRAPH_GUI_NS::Immediate::SetCurrentEditor(nullptr);
+        SR_IMMEDIATE_GUI_NS::NodeEditor::EndNodeEditor();
+        SR_IMMEDIATE_GUI_NS::NodeEditor::PopNodeEditorStyleVar(3);
+        SR_IMMEDIATE_GUI_NS::NodeEditor::SetCurrentEditor(nullptr);
 
         if (needResync) {
             SyncVisualToStateMachine();
@@ -433,7 +434,7 @@ namespace SR_CORE_GUI_NS {
                 auto&& pMachine = pSMNode->GetMachine();
 
                 if (auto&& pState = SR_UTILS_NS::Factory::Instance().Create<SR_ANIMATIONS_NS::AnimationState>(stateTypeName)) {
-                    auto&& pos = SR_GRAPH_GUI_NS::Immediate::ScreenToCanvas(m_popupMousePos);
+                    auto&& pos = SR_IMMEDIATE_GUI_NS::NodeEditor::ScreenToCanvas(m_popupMousePos);
                     pState->SetEditorPosition(pos);
                     pMachine->AddState(pState.Get());
 
@@ -624,12 +625,12 @@ namespace SR_CORE_GUI_NS {
             builder.End();
 
             if (editable) {
-                SR_GRAPH_GUI_NS::Immediate::SuspendNodeEditor();
+                SR_IMMEDIATE_GUI_NS::NodeEditor::SuspendNodeEditor();
 
                 SR_GRAPH_GUI_NS::Immediate::PushID(pNode->GetId());
 
                 uintptr_t nodeId = 0;
-                if (SR_GRAPH_GUI_NS::Immediate::ShowNodeContextMenu(&nodeId)) {
+                if (SR_IMMEDIATE_GUI_NS::NodeEditor::ShowNodeContextMenu(&nodeId)) {
                     SR_GRAPH_GUI_NS::Immediate::OpenPopup("AnimatorEditor_SM_NodeContext");
                     m_popupMousePos = SR_GRAPH_GUI_NS::Immediate::GetMousePos();
                     m_popupNode = m_nodes.at(nodeId);
@@ -663,7 +664,7 @@ namespace SR_CORE_GUI_NS {
                     SR_GRAPH_GUI_NS::Immediate::EndPopup();
                 }
                 SR_GRAPH_GUI_NS::Immediate::PopID();
-                SR_GRAPH_GUI_NS::Immediate::ResumeNodeEditor();
+                SR_IMMEDIATE_GUI_NS::NodeEditor::ResumeNodeEditor();
             }
 
             // кэшируем прямоугольник ноды (для рисования переходов от границы к границе)

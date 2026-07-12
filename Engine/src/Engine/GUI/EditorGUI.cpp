@@ -249,36 +249,46 @@ namespace SR_CORE_GUI_NS {
 
             m_dragWindow = m_click == Click::Drag;
 
+            SR_IMMEDIATE_GUI_NS::BeginHorizontal("EditorGUI::MainMenuBar");
+
             SR_GRAPH_GUI_NS::Immediate::Text(" | ");
             SR_GRAPH_GUI_NS::Immediate::Text("%s", "SpaRcle Engine");
             SR_GRAPH_GUI_NS::Immediate::Text(" | ");
 
             DrawMenuBar();
 
-            SR_GRAPH_GUI_NS::Immediate::SetCursorPosX(SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x - 20);
-            SR_GRAPH_GUI_NS::Immediate::SetCursorPosY(0);
+            SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::FrameRounding, 0.f);
+            SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, { 0.f, 0.f });
+            SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::FrameBorderSize, 1.f);
+
+            SR_IMMEDIATE_GUI_NS::Spring();
 
             auto&& pWindow = m_engine->GetMainWindow()->GetBaseWindow();
 
-            if (SR_GRAPH_GUI_NS::Immediate::SmallButton("×")) {
+            SR_MATH_NS::FVector2 buttonSize = { SR_IMMEDIATE_GUI_NS::GetFontSize() * 3.0f, 0.f };
+
+            if (SR_GRAPH_GUI_NS::Immediate::Button("_", buttonSize)) {
+                pWindow->Collapse();
+            }
+
+            if (pWindow->GetState() == Graphics::WindowState::Default && SR_GRAPH_GUI_NS::Immediate::Button("[ ]", buttonSize)) {
+                pWindow->Maximize();
+            }
+            else if (pWindow->GetState() == Graphics::WindowState::Maximized && SR_GRAPH_GUI_NS::Immediate::Button("[=]", buttonSize)) {
+                pWindow->Restore();
+            }
+
+            SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::Button, { 0.8f, 0.1f, 0.1f, 1.f });
+            SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::ButtonHovered, { 0.9f, 0.1f, 0.1f, 1.f });
+            SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::ButtonActive, { 1.f, 0.1f, 0.1f, 1.f });
+            if (SR_GRAPH_GUI_NS::Immediate::Button("×", buttonSize)) {
                 SR_LOG("EditorGUI::DrawDockingSpace() : close button was clicked!");
                 m_engine->StopEngine();
             }
+            SR_IMMEDIATE_GUI_NS::PopStyleColor(3);
 
-            SR_GRAPH_GUI_NS::Immediate::SetCursorPosX(SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x - 45);
-            SR_GRAPH_GUI_NS::Immediate::SetCursorPosY(0);
-            if (pWindow->GetState() == Graphics::WindowState::Default && SR_GRAPH_GUI_NS::Immediate::SmallButton("[ ]")) {
-                pWindow->Maximize();
-            }
-
-            if (pWindow->GetState() == Graphics::WindowState::Maximized && SR_GRAPH_GUI_NS::Immediate::SmallButton("[=]")) {
-                pWindow->Restore();
-            }
-            SR_GRAPH_GUI_NS::Immediate::SetCursorPosX(SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x - 70);
-            SR_GRAPH_GUI_NS::Immediate::SetCursorPosY(0);
-            if (SR_GRAPH_GUI_NS::Immediate::SmallButton("_")) {
-                pWindow->Collapse();
-            }
+            SR_IMMEDIATE_GUI_NS::PopStyleVar(3);
+            SR_IMMEDIATE_GUI_NS::EndHorizontal();
 
             SR_GRAPH_GUI_NS::Immediate::EndMenuBar();
             SR_GRAPH_GUI_NS::Immediate::FocusTopMostWindowUnderOne();
@@ -960,24 +970,24 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
 
-        SR_GRAPH_GUI_NS::Immediate::PushItemWidth(115);
+        SR_GRAPH_GUI_NS::Immediate::PushItemWidth(200);
 
         const float_t framerate = SR_GRAPH_GUI_NS::Immediate::GetFramerate();
         SR_GRAPH_GUI_NS::Immediate::LabelText("##FPSLable", "|   FPS: %.2f (%.2gms)", framerate, framerate > 0.f ? 1000.0f / framerate : 0.0f);
 
         SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
 
-        auto&& pBuilder = m_engine->GetSceneBuilder();
-        if (pBuilder) {
-            auto&& now = SR_HTYPES_NS::Time::Instance().Now();
-            auto&& time = now - pBuilder->GetLastBuildTime();
+        //auto&& pBuilder = m_engine->GetSceneBuilder();
+        //if (pBuilder) {
+        //    auto&& now = SR_HTYPES_NS::Time::Instance().Now();
+        //    auto&& time = now - pBuilder->GetLastBuildTime();
 
-            using ms = std::chrono::duration<double_t, std::milli>;
+        //    using ms = std::chrono::duration<double_t, std::milli>;
 
-            const float_t timeLeft = (float_t)std::chrono::duration_cast<ms>(time).count() / (float_t)SR_CLOCKS_PER_SEC;
+        //    const float_t timeLeft = (float_t)std::chrono::duration_cast<ms>(time).count() / (float_t)SR_CLOCKS_PER_SEC;
 
-            SR_GRAPH_GUI_NS::Immediate::Text("|   Last scene build: %.2f sec", timeLeft);
-        }
+        //    SR_GRAPH_GUI_NS::Immediate::Text("|   Last scene build: %.2f sec", timeLeft);
+        //}
     }
 
     void EditorGUI::DrawWindowPage() {

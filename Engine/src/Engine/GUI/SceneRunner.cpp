@@ -34,7 +34,7 @@ namespace SR_CORE_NS::GUI {
         auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
         auto&& pOverlay = pEngine->GetRenderContext()->GetPipeline()->GetOverlay(SR_GRAPH_NS::OverlayType::ImGui);
         auto&& pFont = pOverlay.DynamicCast<SR_GRAPH_NS::ImGuiOverlay>()->GetIconFont();
-        float_t iconSize = SR_UTILS_NS::StoreUtils::User::GetFloat("ImGuiIconFontSize", 32.f);
+        float_t iconSize = SR_UTILS_NS::StoreUtils::User::GetFloat("EditorFontSize", SR_IMMEDIATE_GUI_NS::DEFAULT_FONT_SIZE) * 4.0f;
         int32_t framePadding = 3;
 
         if (!pFont) {
