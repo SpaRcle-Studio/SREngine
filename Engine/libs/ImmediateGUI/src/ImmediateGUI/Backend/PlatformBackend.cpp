@@ -13,6 +13,10 @@
     #include <imgui/backends/imgui_impl_android.h>
 #endif
 
+#ifdef SR_EMSCRIPTEN
+    #include <emscripten/html5.h>
+#endif
+
 #ifdef SR_USE_IMGUI
 namespace SR_GRAPH_GUI_NS::Immediate {
     namespace {
@@ -161,6 +165,187 @@ namespace SR_GRAPH_GUI_NS::Immediate {
             g_prevMouseState = mouseState;
             g_waylandInputInitialized = true;
         }
+
+    #if defined(SR_EMSCRIPTEN)
+        bool g_emscriptenInputInitialized = false;
+        double g_emscriptenPrevTime = 0.0;
+
+        ImGuiKey DomKeyCodeToImGuiKey(int keyCode) {
+            // DOM keyCode values (deprecated but stable enough in Emscripten HTML5 events).
+            // We map the most common keys needed by the editor.
+            switch (keyCode) {
+                case 8:   return ImGuiKey_Backspace;
+                case 9:   return ImGuiKey_Tab;
+                case 13:  return ImGuiKey_Enter;
+                case 16:  return ImGuiKey_LeftShift;
+                case 17:  return ImGuiKey_LeftCtrl;
+                case 18:  return ImGuiKey_LeftAlt;
+                case 27:  return ImGuiKey_Escape;
+                case 32:  return ImGuiKey_Space;
+
+                case 37:  return ImGuiKey_LeftArrow;
+                case 38:  return ImGuiKey_UpArrow;
+                case 39:  return ImGuiKey_RightArrow;
+                case 40:  return ImGuiKey_DownArrow;
+
+                case 46:  return ImGuiKey_Delete;
+                case 45:  return ImGuiKey_Insert;
+                case 36:  return ImGuiKey_Home;
+                case 35:  return ImGuiKey_End;
+                case 33:  return ImGuiKey_PageUp;
+                case 34:  return ImGuiKey_PageDown;
+
+                // Digits
+                case 48: return ImGuiKey_0;
+                case 49: return ImGuiKey_1;
+                case 50: return ImGuiKey_2;
+                case 51: return ImGuiKey_3;
+                case 52: return ImGuiKey_4;
+                case 53: return ImGuiKey_5;
+                case 54: return ImGuiKey_6;
+                case 55: return ImGuiKey_7;
+                case 56: return ImGuiKey_8;
+                case 57: return ImGuiKey_9;
+
+                // Letters
+                case 65: return ImGuiKey_A;
+                case 66: return ImGuiKey_B;
+                case 67: return ImGuiKey_C;
+                case 68: return ImGuiKey_D;
+                case 69: return ImGuiKey_E;
+                case 70: return ImGuiKey_F;
+                case 71: return ImGuiKey_G;
+                case 72: return ImGuiKey_H;
+                case 73: return ImGuiKey_I;
+                case 74: return ImGuiKey_J;
+                case 75: return ImGuiKey_K;
+                case 76: return ImGuiKey_L;
+                case 77: return ImGuiKey_M;
+                case 78: return ImGuiKey_N;
+                case 79: return ImGuiKey_O;
+                case 80: return ImGuiKey_P;
+                case 81: return ImGuiKey_Q;
+                case 82: return ImGuiKey_R;
+                case 83: return ImGuiKey_S;
+                case 84: return ImGuiKey_T;
+                case 85: return ImGuiKey_U;
+                case 86: return ImGuiKey_V;
+                case 87: return ImGuiKey_W;
+                case 88: return ImGuiKey_X;
+                case 89: return ImGuiKey_Y;
+                case 90: return ImGuiKey_Z;
+
+                // Function keys
+                case 112: return ImGuiKey_F1;
+                case 113: return ImGuiKey_F2;
+                case 114: return ImGuiKey_F3;
+                case 115: return ImGuiKey_F4;
+                case 116: return ImGuiKey_F5;
+                case 117: return ImGuiKey_F6;
+                case 118: return ImGuiKey_F7;
+                case 119: return ImGuiKey_F8;
+                case 120: return ImGuiKey_F9;
+                case 121: return ImGuiKey_F10;
+                case 122: return ImGuiKey_F11;
+                case 123: return ImGuiKey_F12;
+
+                // Punctuation (US keyboard common)
+                case 187: return ImGuiKey_Equal;
+                case 189: return ImGuiKey_Minus;
+                case 190: return ImGuiKey_Period;
+                case 191: return ImGuiKey_Slash;
+                case 220: return ImGuiKey_Backslash;
+                case 192: return ImGuiKey_GraveAccent;
+                case 20:  return ImGuiKey_CapsLock;
+
+                default: break;
+            }
+            return ImGuiKey_None;
+        }
+
+        void EmscriptenUpdateModifiers(const EmscriptenKeyboardEvent* e) {
+            ImGuiIO& io = ImGui::GetIO();
+            io.AddKeyEvent(ImGuiMod_Ctrl, e->ctrlKey);
+            io.AddKeyEvent(ImGuiMod_Shift, e->shiftKey);
+            io.AddKeyEvent(ImGuiMod_Alt, e->altKey);
+            io.AddKeyEvent(ImGuiMod_Super, e->metaKey);
+        }
+
+        EM_BOOL EmscriptenKeyCallback(int eventType, const EmscriptenKeyboardEvent* e, void* userData) {
+            (void)userData;
+            ImGuiIO& io = ImGui::GetIO();
+
+            EmscriptenUpdateModifiers(e);
+
+            const ImGuiKey key = DomKeyCodeToImGuiKey(e->keyCode);
+            if (key != ImGuiKey_None) {
+                const bool down = (eventType == EMSCRIPTEN_EVENT_KEYDOWN);
+                io.AddKeyEvent(key, down);
+            }
+
+            // Keypress provides text input (UTF-8).
+            if (eventType == EMSCRIPTEN_EVENT_KEYPRESS) {
+                if (e->key[0] != '\0') {
+                    io.AddInputCharactersUTF8(e->key);
+                }
+            }
+
+            return EM_TRUE;
+        }
+
+        EM_BOOL EmscriptenMouseCallback(int eventType, const EmscriptenMouseEvent* e, void* userData) {
+            (void)userData;
+            ImGuiIO& io = ImGui::GetIO();
+
+            if (eventType == EMSCRIPTEN_EVENT_MOUSEMOVE) {
+                io.AddMousePosEvent(static_cast<float>(e->canvasX), static_cast<float>(e->canvasY));
+            }
+            else if (eventType == EMSCRIPTEN_EVENT_MOUSEDOWN || eventType == EMSCRIPTEN_EVENT_MOUSEUP) {
+                const bool down = (eventType == EMSCRIPTEN_EVENT_MOUSEDOWN);
+                // 0: left, 1: middle, 2: right
+                if (e->button >= 0 && e->button < 5) {
+                    io.AddMouseButtonEvent(e->button, down);
+                }
+            }
+
+            return EM_TRUE;
+        }
+
+        EM_BOOL EmscriptenWheelCallback(int eventType, const EmscriptenWheelEvent* e, void* userData) {
+            (void)eventType;
+            (void)userData;
+            ImGuiIO& io = ImGui::GetIO();
+
+            // Emscripten wheel delta is in pixels (depending on browser), scale to ImGui "lines".
+            const float wheelX = static_cast<float>(-e->deltaX) * 0.01f;
+            const float wheelY = static_cast<float>(-e->deltaY) * 0.01f;
+            io.AddMouseWheelEvent(wheelX, wheelY);
+            return EM_TRUE;
+        }
+
+        bool EnsureEmscriptenCallbacksInstalled() {
+            if (g_emscriptenInputInitialized) {
+                return true;
+            }
+
+            // Keyboard
+            emscripten_set_keydown_callback(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_TRUE, EmscriptenKeyCallback);
+            emscripten_set_keyup_callback(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_TRUE, EmscriptenKeyCallback);
+            emscripten_set_keypress_callback(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_TRUE, EmscriptenKeyCallback);
+
+            // Mouse (canvas)
+            emscripten_set_mousedown_callback("#canvas", nullptr, EM_TRUE, EmscriptenMouseCallback);
+            emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_TRUE, EmscriptenMouseCallback);
+            emscripten_set_mousemove_callback("#canvas", nullptr, EM_TRUE, EmscriptenMouseCallback);
+
+            // Wheel
+            emscripten_set_wheel_callback("#canvas", nullptr, EM_TRUE, EmscriptenWheelCallback);
+
+            g_emscriptenPrevTime = emscripten_get_now();
+            g_emscriptenInputInitialized = true;
+            return true;
+        }
+    #endif
     }
 
     bool PlatformInit(const PlatformInitInfo& info) {
@@ -179,6 +364,13 @@ namespace SR_GRAPH_GUI_NS::Immediate {
                 EnsureWaylandInputSubscribed();
                 ImGuiIO& io = ImGui::GetIO();
                 io.BackendPlatformName = "imgui_impl_wayland_custom";
+                return true;
+            }
+        #elif defined(SR_EMSCRIPTEN)
+            case PlatformBackend::Emscripten: {
+                EnsureEmscriptenCallbacksInstalled();
+                ImGuiIO& io = ImGui::GetIO();
+                io.BackendPlatformName = "sr_imgui_impl_emscripten_custom";
                 return true;
             }
         #endif
@@ -209,6 +401,10 @@ namespace SR_GRAPH_GUI_NS::Immediate {
                 g_inputTextEvents.clear();
                 g_waylandInputInitialized = false;
                 break;
+        #elif defined(SR_EMSCRIPTEN)
+            case PlatformBackend::Emscripten:
+                g_emscriptenInputInitialized = false;
+                break;
         #endif
             default:
                 break;
@@ -238,6 +434,22 @@ namespace SR_GRAPH_GUI_NS::Immediate {
 
                 EnsureWaylandInputSubscribed();
                 WaylandProcessInput();
+                break;
+            }
+        #elif defined(SR_EMSCRIPTEN)
+            case PlatformBackend::Emscripten: {
+                EnsureEmscriptenCallbacksInstalled();
+                double cssW = 0.0, cssH = 0.0;
+                if (emscripten_get_element_css_size("#canvas", &cssW, &cssH) == EMSCRIPTEN_RESULT_SUCCESS) {
+                    ImGuiIO& io = ImGui::GetIO();
+                    io.DisplaySize = ImVec2(static_cast<float>(cssW), static_cast<float>(cssH));
+                    io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
+
+                    const double now = emscripten_get_now();
+                    const double dt = (now - g_emscriptenPrevTime) / 1000.0;
+                    g_emscriptenPrevTime = now;
+                    io.DeltaTime = static_cast<float>(std::max(0.0, dt));
+                }
                 break;
             }
         #endif

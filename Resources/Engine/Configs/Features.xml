@@ -78,9 +78,6 @@
             <TextureCaching Value="false"/>
             <Emscripten Value="true"/>
             <Gizmo Value="false"/>
-            <ImGUI Value="false"/>
-            <Editor Value="false"/>
-            <EditorOnStartup Value="false"/>
             <FastModelsLoad Value="false"/>
             <ScriptCompilation Value="false"/>
             <RunGameModeOnStart Value="true"/>

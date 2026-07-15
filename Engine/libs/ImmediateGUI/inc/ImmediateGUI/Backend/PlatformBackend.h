@@ -15,7 +15,8 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         Win32,
         GLFW,
         Android,
-        WaylandCustom
+        WaylandCustom,
+        Emscripten
     };
 
     struct SR_IMMEDIATE_GUI_DLL_API PlatformInitInfo {

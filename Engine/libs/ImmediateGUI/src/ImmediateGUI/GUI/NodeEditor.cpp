@@ -9,6 +9,8 @@
     #include <imgui-node-editor/imgui_node_editor.h>
 #endif
 
+#include <ImNodeFlow.h>
+
 namespace SR_GRAPH_GUI_NS::Immediate::NodeEditor {
 #if defined(SR_USE_IMGUI_NODE_EDITOR) && defined(SR_USE_IMGUI)
     void* CreateEditor(const char* settingsFile) {

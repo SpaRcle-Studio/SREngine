@@ -64,6 +64,10 @@ namespace SR_GRAPH_GUI_NS {
         #endif
     #endif
 
+    #ifdef SR_EMSCRIPTEN
+        #include <imgui/backends/imgui_impl_wgpu.h>
+    #endif
+
     #ifdef SR_USE_OPENGL
         #define GL_GLEXT_PROTOTYPES
         //#include <GL/glew.h>

@@ -7,6 +7,17 @@
 
 #include <ImmediateGUI/GUI/ImmediateGUI.h>
 
+namespace SR_GRAPH_GUI_NS::Immediate {
+    class NodeEditorInstance {
+    public:
+
+    };
+
+    class NodeInstance {
+
+    };
+}
+
 namespace SR_GRAPH_GUI_NS::Immediate::NodeEditor {
     // NodeEditor wrappers
     enum class NodeEditorStyleColor : uint8_t {

@@ -47,6 +47,15 @@
     #include <imgui/backends/imgui_impl_vulkan.cpp>
 #endif
 
+#ifdef SR_EMSCRIPTEN
+    // The WebGPU backend requires exactly one backend macro to be defined.
+    // Emscripten provides "wgpu.h" C API.
+    //#ifndef IMGUI_IMPL_WEBGPU_BACKEND_WGPU
+    //    #define IMGUI_IMPL_WEBGPU_BACKEND_WGPU
+    //#endif
+    #include <imgui/backends/imgui_impl_wgpu.cpp>
+#endif
+
 #ifdef SR_USE_IMGUI_NODE_EDITOR
     #define __IMGUI_EXTRA_MATH_INL__
     #include <imgui-node-editor/imgui_node_editor.cpp>
@@ -55,6 +64,10 @@
     #include <imgui-node-editor/crude_json.cpp>
 
     #include <ImmediateGUI/Impl/NodeEditorDeprecatedMath.h>
+#endif
+
+#ifdef SR_USE_IMGUI_NODE_FLOW
+    #include <ImNodeFlow/src/ImNodeFlow.cpp>
 #endif
 
 namespace SR_IMMEDIATE_GUI_NS {
