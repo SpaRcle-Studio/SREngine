@@ -1,0 +1,74 @@
+name: SpaRcle Engine Emscripten CI
+
+on:
+  workflow_call:
+
+jobs:
+  Build:
+    name: Emscripten.
+    runs-on: windows-latest
+    steps:
+      - name: Fetching repository.
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Updating submodules.
+        run: git submodule --quiet update --init --recursive --depth 1 --jobs 4
+
+      - name: Build for Emscripten
+        shell: powershell
+        working-directory: ${{ github.workspace }}/Platform/Emscripten
+        run: |
+          .\build.bat
+          if ($LASTEXITCODE -ne 0) {
+            Write-Error "Emscripten build failed with exit code $LASTEXITCODE"
+            exit 1
+          }
+
+      - name: Validate Emscripten output files
+        shell: powershell
+        run: |
+          $binDir = Join-Path $env:GITHUB_WORKSPACE "Platform\Emscripten\Bin"
+          if (-not (Test-Path $binDir)) {
+            Write-Error "Bin directory not found: $binDir"
+            exit 1
+          }
+
+          $required = @("SREngine.html", "SREngine.js", "SREngine.wasm", "SREngine.data")
+          foreach ($f in $required) {
+            $p = Join-Path $binDir $f
+            if (-not (Test-Path $p)) {
+              Write-Error "Required file not found: $p"
+              exit 1
+            }
+            $len = (Get-Item $p).Length
+            if ($len -le 0) {
+              Write-Error "Required file is empty: $p"
+              exit 1
+            }
+          }
+
+          Write-Host "Emscripten output validated successfully."
+
+      - name: Pack Bin to zip
+        shell: powershell
+        run: |
+          $binDir = Join-Path $env:GITHUB_WORKSPACE "Platform\Emscripten\Bin"
+          $outDir = Join-Path $env:GITHUB_WORKSPACE "artifacts\emscripten"
+          New-Item -ItemType Directory -Force -Path $outDir | Out-Null
+
+          Copy-Item -Path (Join-Path $binDir "*") -Destination $outDir -Recurse -Force
+
+          $zipPath = Join-Path $outDir "SpaRcleEngine_Emscripten_Bin.zip"
+          if (Test-Path $zipPath) { Remove-Item $zipPath -Force }
+          Compress-Archive -Path (Join-Path $binDir "*") -DestinationPath $zipPath -Force
+
+          Write-Host "Created zip: $zipPath"
+          Get-ChildItem -Path $outDir
+
+      - name: Upload Emscripten build (files + zip)
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Emscripten Release SpaRcle Engine"
+          path: "${{ github.workspace }}/artifacts/emscripten"

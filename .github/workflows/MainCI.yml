@@ -66,9 +66,14 @@ jobs:
     needs: [Main]
     uses: ./.github/workflows/FlatpakCI.yml
 
+  BuildEmscriptenJob:
+    name: Emscripten.
+    needs: [Main]
+    uses: ./.github/workflows/EmscriptenCI.yml
+
   PostBuild:
     name: PostBuild.
-    needs: [TestsWindowsJob, TestsLinuxJob, BuildAndroidJob, BuildFlatpakJob]
+    needs: [TestsWindowsJob, TestsLinuxJob, BuildAndroidJob, BuildFlatpakJob, BuildEmscriptenJob]
     if: ${{ always() }}
     uses: ./.github/workflows/PostBuild.yml
     with:
@@ -84,8 +89,8 @@ jobs:
 
   PublishDevRelease:
     name: Publish Dev Release.
-    if: ${{ github.ref_name == 'dev' && github.event_name == 'push' && needs.TestsWindowsJob.result == 'success' && needs.TestsLinuxJob.result == 'success' && needs.BuildAndroidJob.result == 'success' }}
-    needs: [PostBuild]
+    if: ${{ github.ref_name == 'dev' && github.event_name == 'push' && needs.TestsWindowsJob.result == 'success' && needs.TestsLinuxJob.result == 'success' && needs.BuildAndroidJob.result == 'success' && needs.BuildEmscriptenJob.result == 'success' }}
+    needs: [PostBuild, TestsWindowsJob, TestsLinuxJob, BuildAndroidJob, BuildEmscriptenJob]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -134,6 +139,12 @@ jobs:
           name: "Android Release SpaRcle Engine x86_64"
           path: artifacts/android/x86_64
 
+      - name: Download Emscripten Release artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: "Emscripten Release SpaRcle Engine"
+          path: artifacts/emscripten
+
       - name: Prepare release files
         run: |
           set -e
@@ -153,6 +164,13 @@ jobs:
           
           cp "$ANDROID_ARM64" release/SREngine_v1.0.0-dev_android.arm64-v8a.apk
           cp "$ANDROID_X64" release/SREngine_v1.0.0-dev_android.x86_64.apk
+
+          EMSCRIPTEN_ZIP=$(find artifacts/emscripten -type f -name "*.zip" | head -n 1)
+          if [ -z "$EMSCRIPTEN_ZIP" ]; then
+            echo "Emscripten zip not found in artifacts/emscripten"
+            exit 1
+          fi
+          cp "$EMSCRIPTEN_ZIP" release/SREngine_v1.0.0-dev_emscripten.zip
           
           ls -la release
 

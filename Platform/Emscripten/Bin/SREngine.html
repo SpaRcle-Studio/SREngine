@@ -3,11 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>SREngine</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #111;
+        }
+        #canvas {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+            outline: none;
+            touch-action: none;
+        }
+    </style>
 </head>
 <body>
-    <canvas id="canvas" width="800" height="600"></canvas>
+    <canvas id="canvas" width="800" height="600" tabindex="0"></canvas>
     <script src="SREngine.js"></script>
     <script>
+        // Keep focus on canvas so it can receive input.
+        const canvas = document.getElementById('canvas');
+        canvas.addEventListener('click', () => canvas.focus());
+        canvas.addEventListener('contextmenu', (e) => e.preventDefault());
+
         // Ждём, пока модуль загрузится
         SREngine().then(Module => {
             console.log("WASM loaded!");

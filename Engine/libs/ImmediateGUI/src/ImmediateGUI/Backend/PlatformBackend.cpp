@@ -15,6 +15,9 @@
 
 #ifdef SR_EMSCRIPTEN
     #include <emscripten/html5.h>
+    #if defined(__EMSCRIPTEN_PTHREADS__)
+        #include <pthread.h>
+    #endif
 #endif
 
 #ifdef SR_USE_IMGUI
@@ -298,16 +301,43 @@ namespace SR_GRAPH_GUI_NS::Immediate {
             ImGuiIO& io = ImGui::GetIO();
 
             if (eventType == EMSCRIPTEN_EVENT_MOUSEMOVE) {
-                io.AddMousePosEvent(static_cast<float>(e->canvasX), static_cast<float>(e->canvasY));
+                // canvasX/canvasY are deprecated and may not be reported reliably.
+                // targetX/targetY are relative to the event target element ("#canvas").
+                io.AddMousePosEvent(static_cast<float>(e->targetX), static_cast<float>(e->targetY));
             }
             else if (eventType == EMSCRIPTEN_EVENT_MOUSEDOWN || eventType == EMSCRIPTEN_EVENT_MOUSEUP) {
                 const bool down = (eventType == EMSCRIPTEN_EVENT_MOUSEDOWN);
-                // 0: left, 1: middle, 2: right
-                if (e->button >= 0 && e->button < 5) {
-                    io.AddMouseButtonEvent(e->button, down);
+                io.AddMousePosEvent(static_cast<float>(e->targetX), static_cast<float>(e->targetY));
+                // Emscripten: 0 left, 1 middle, 2 right. ImGui: 0 left, 1 right, 2 middle.
+                int button = e->button;
+                if (button == 1) button = 2;
+                else if (button == 2) button = 1;
+
+                if (button >= 0 && button < 5) {
+                    io.AddMouseButtonEvent(button, down);
                 }
             }
 
+            return EM_TRUE;
+        }
+
+        EM_BOOL EmscriptenMouseEnterLeaveCallback(int eventType, const EmscriptenMouseEvent* e, void* userData) {
+            (void)userData;
+            ImGuiIO& io = ImGui::GetIO();
+            if (eventType == EMSCRIPTEN_EVENT_MOUSEENTER) {
+                io.AddMousePosEvent(static_cast<float>(e->targetX), static_cast<float>(e->targetY));
+            }
+            else if (eventType == EMSCRIPTEN_EVENT_MOUSELEAVE) {
+                io.AddMousePosEvent(-FLT_MAX, -FLT_MAX);
+            }
+            return EM_TRUE;
+        }
+
+        EM_BOOL EmscriptenContextMenuCallback(int eventType, const EmscriptenMouseEvent* e, void* userData) {
+            (void)eventType;
+            (void)e;
+            (void)userData;
+            // Prevent browser context menu so RMB works in ImGui.
             return EM_TRUE;
         }
 
@@ -328,18 +358,39 @@ namespace SR_GRAPH_GUI_NS::Immediate {
                 return true;
             }
 
+            // With pthreads enabled (-sUSE_PTHREADS=1) we must proxy DOM events to the main runtime thread.
+            // Emscripten default emscripten_set_*_callback uses EM_CALLBACK_THREAD_CONTEXT_CALLING_THREAD, which is unreliable.
+        #if defined(__EMSCRIPTEN_PTHREADS__)
+            constexpr pthread_t targetThread = EM_CALLBACK_THREAD_CONTEXT_MAIN_RUNTIME_THREAD;
+
             // Keyboard
-            emscripten_set_keydown_callback(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_TRUE, EmscriptenKeyCallback);
-            emscripten_set_keyup_callback(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_TRUE, EmscriptenKeyCallback);
-            emscripten_set_keypress_callback(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_TRUE, EmscriptenKeyCallback);
+            emscripten_set_keydown_callback_on_thread(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_FALSE, EmscriptenKeyCallback, targetThread);
+            emscripten_set_keyup_callback_on_thread(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_FALSE, EmscriptenKeyCallback, targetThread);
+            emscripten_set_keypress_callback_on_thread(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_FALSE, EmscriptenKeyCallback, targetThread);
 
             // Mouse (canvas)
-            emscripten_set_mousedown_callback("#canvas", nullptr, EM_TRUE, EmscriptenMouseCallback);
-            emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_TRUE, EmscriptenMouseCallback);
-            emscripten_set_mousemove_callback("#canvas", nullptr, EM_TRUE, EmscriptenMouseCallback);
+            emscripten_set_mousedown_callback_on_thread("#canvas", nullptr, EM_FALSE, EmscriptenMouseCallback, targetThread);
+            emscripten_set_mouseup_callback_on_thread(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_FALSE, EmscriptenMouseCallback, targetThread);
+            emscripten_set_mousemove_callback_on_thread("#canvas", nullptr, EM_FALSE, EmscriptenMouseCallback, targetThread);
+            emscripten_set_mouseenter_callback_on_thread("#canvas", nullptr, EM_FALSE, EmscriptenMouseEnterLeaveCallback, targetThread);
+            emscripten_set_mouseleave_callback_on_thread("#canvas", nullptr, EM_FALSE, EmscriptenMouseEnterLeaveCallback, targetThread);
 
             // Wheel
-            emscripten_set_wheel_callback("#canvas", nullptr, EM_TRUE, EmscriptenWheelCallback);
+            emscripten_set_wheel_callback_on_thread("#canvas", nullptr, EM_FALSE, EmscriptenWheelCallback, targetThread);
+        #else
+            // Single-threaded builds.
+            emscripten_set_keydown_callback(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_FALSE, EmscriptenKeyCallback);
+            emscripten_set_keyup_callback(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_FALSE, EmscriptenKeyCallback);
+            emscripten_set_keypress_callback(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_FALSE, EmscriptenKeyCallback);
+
+            emscripten_set_mousedown_callback("#canvas", nullptr, EM_FALSE, EmscriptenMouseCallback);
+            emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_FALSE, EmscriptenMouseCallback);
+            emscripten_set_mousemove_callback("#canvas", nullptr, EM_FALSE, EmscriptenMouseCallback);
+            emscripten_set_mouseenter_callback("#canvas", nullptr, EM_FALSE, EmscriptenMouseEnterLeaveCallback);
+            emscripten_set_mouseleave_callback("#canvas", nullptr, EM_FALSE, EmscriptenMouseEnterLeaveCallback);
+
+            emscripten_set_wheel_callback("#canvas", nullptr, EM_FALSE, EmscriptenWheelCallback);
+        #endif
 
             g_emscriptenPrevTime = emscripten_get_now();
             g_emscriptenInputInitialized = true;
