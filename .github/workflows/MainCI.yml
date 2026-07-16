@@ -70,6 +70,7 @@ jobs:
     name: Emscripten.
     needs: [Main]
     uses: ./.github/workflows/EmscriptenCI.yml
+    secrets: inherit
 
   PostBuild:
     name: PostBuild.

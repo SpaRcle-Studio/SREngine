@@ -2,6 +2,9 @@ name: SpaRcle Engine Emscripten CI
 
 on:
   workflow_call:
+    secrets:
+      CITOKEN:
+        required: true
 
 jobs:
   Build:
@@ -50,6 +53,56 @@ jobs:
           }
 
           Write-Host "Emscripten output validated successfully."
+
+      - name: Publish web demo binaries (rewrite history)
+        if: ${{ github.event_name == 'push' && (github.ref_name == 'dev' || github.ref_name == 'master') }}
+        shell: bash
+        env:
+          CITOKEN: ${{ secrets.CITOKEN }}
+        run: |
+          set -euo pipefail
+
+          BIN_DIR="$GITHUB_WORKSPACE/Platform/Emscripten/Bin"
+
+          for f in SREngine.js SREngine.wasm SREngine.data; do
+            if [ ! -s "$BIN_DIR/$f" ]; then
+              echo "Required file missing or empty: $BIN_DIR/$f"
+              exit 1
+            fi
+          done
+
+          rm -rf webdemo_push
+          mkdir -p webdemo_push
+          cd webdemo_push
+
+          git init
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git checkout --orphan master
+
+          cp "$BIN_DIR/SREngine.js" .
+          cp "$BIN_DIR/SREngine.wasm" .
+          cp "$BIN_DIR/SREngine.data" .
+
+          git add SREngine.js SREngine.wasm SREngine.data
+          git commit -m "Update web demo artifacts from SREngine ${GITHUB_SHA}"
+
+          git remote add origin "https://x-access-token:${CITOKEN}@github.com/SpaRcle-Studio/SREngineWebDemo.git"
+          git push --force origin master
+
+      - name: Trigger sparcles deploy
+        if: ${{ github.event_name == 'push' && (github.ref_name == 'dev' || github.ref_name == 'master') }}
+        shell: bash
+        env:
+          CITOKEN: ${{ secrets.CITOKEN }}
+        run: |
+          set -euo pipefail
+          curl -sSf -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: token ${CITOKEN}" \
+            https://api.github.com/repos/SpaRcle-Studio/sparcles/dispatches \
+            -d "{\"event_type\":\"webhook\",\"client_payload\":{\"source_repo\":\"SpaRcle-Studio/SREngine\",\"source_sha\":\"${GITHUB_SHA}\",\"demo_repo\":\"SpaRcle-Studio/SREngineWebDemo\"}}"
 
       - name: Pack Bin to zip
         shell: powershell
