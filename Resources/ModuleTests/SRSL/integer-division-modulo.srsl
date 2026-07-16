@@ -1,0 +1,21 @@
+ShaderType Compute;
+
+[[ssbo(outv)]] int[] outv;
+
+[[THREADS(1, 1, 1)]]
+void compute() {
+    int a = 123;
+    int b = 10;
+
+    int q = a / b;
+    int r = a % b;
+
+    int c = -123;
+    int q2 = c / b;
+    int r2 = c % b;
+
+    outv[0] = q;
+    outv[1] = r;
+    outv[2] = q2;
+    outv[3] = r2;
+}

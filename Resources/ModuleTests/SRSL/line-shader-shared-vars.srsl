@@ -1,0 +1,23 @@
+ShaderType Line;
+
+PolygonMode Line;
+CullMode None;
+DepthCompare LessOrEqual;
+PrimitiveTopology LineList;
+BlendEnabled false;
+DepthWrite true;
+DepthTest true;
+
+[[ssbo(lines)]] vec3[] points;
+[[shared]] vec4 lineColor;
+
+void fragment() {
+    COLOR = lineColor;
+}
+
+void vertex() {
+    uint idx = gl_InstanceIndex * 2u + uint(VERTEX_INDEX);
+    vec3 p = points[idx];
+    lineColor = vec4(abs(p), 1.0);
+    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * vec4(p, 1.0);
+}

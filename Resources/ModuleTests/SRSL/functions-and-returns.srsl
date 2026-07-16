@@ -1,0 +1,33 @@
+ShaderType Compute;
+
+[[ssbo(outv)]] int[] outv;
+
+int ClampInt(int v, int lo, int hi) {
+    if (v < lo) {
+        return lo;
+    }
+    if (v > hi) {
+        return hi;
+    }
+    return v;
+}
+
+int Fib(int n) {
+    if (n <= 1) {
+        return n;
+    }
+    return Fib(n - 1) + Fib(n - 2);
+}
+
+[[THREADS(1, 1, 1)]]
+void compute() {
+    int a = ClampInt(-10, 0, 5);
+    int b = ClampInt(123, 0, 5);
+    int c = ClampInt(3, 0, 5);
+    int f = Fib(7);
+
+    outv[0] = a;
+    outv[1] = b;
+    outv[2] = c;
+    outv[3] = f;
+}

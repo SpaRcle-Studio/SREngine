@@ -1,0 +1,23 @@
+ShaderType Compute;
+
+[[ssbo(dst)]] uint[] dst;
+
+[[THREADS(1, 1, 1)]]
+void compute() {
+    uint sum = 0u;
+    uint prod = 1u;
+
+    for (uint i = 0u; i < 16u; i += 1u) {
+        if ((i & 1u) == 0u) {
+            continue;
+        }
+        sum += i;
+        prod *= (i + 1u);
+        if (i > 11u) {
+            break;
+        }
+    }
+
+    dst[0] = sum;
+    dst[1] = prod;
+}

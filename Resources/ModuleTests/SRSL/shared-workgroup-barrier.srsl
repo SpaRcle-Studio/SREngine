@@ -1,0 +1,26 @@
+ShaderType Compute;
+
+[[uniform]] uint elementCount;
+[[ssbo(src)]] float[] src;
+[[ssbo(dst)]] float[] dst;
+[[shared(workgroup)]] float[64] shData;
+
+[[THREADS(64, 1, 1)]]
+void compute() {
+    uint gid = gl_GlobalInvocationID.x;
+    uint tid = gl_LocalInvocationIndex;
+
+    shData[tid] = (gid < elementCount) ? src[gid] : 0.0;
+    barrier();
+
+    for (uint s = 32u; s > 0u; s >>= 1u) {
+        if (tid < s) {
+            shData[tid] += shData[tid + s];
+        }
+        barrier();
+    }
+
+    if (tid == 0u) {
+        dst[gl_WorkGroupID.x] = shData[0];
+    }
+}

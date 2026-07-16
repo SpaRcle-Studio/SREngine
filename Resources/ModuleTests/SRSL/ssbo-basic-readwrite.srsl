@@ -1,0 +1,16 @@
+ShaderType Compute;
+
+[[ssbo(src)]] float[] src;
+[[ssbo(dst)]] float[] dst;
+
+[[THREADS(1, 1, 1)]]
+void compute() {
+    float a = src[0];
+    float b = src[1];
+    float c = src[2];
+
+    dst[0] = a + b;
+    dst[1] = b * c;
+    dst[2] = max(a, c);
+    dst[3] = min(a, c);
+}

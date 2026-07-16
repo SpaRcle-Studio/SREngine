@@ -1,0 +1,23 @@
+ShaderType Compute;
+
+[[ssbo(outv)]] float[] outv;
+
+[[THREADS(1, 1, 1)]]
+void compute() {
+    float a = 0.0;
+    float b = 1.0;
+    float c = -1.0;
+
+    float s0 = sign(c);
+    float s1 = sign(b);
+    float p = pow(2.0, 10.0);
+    float e = exp2(5.0);
+    float l = log2(32.0);
+
+    outv[0] = s0;
+    outv[1] = s1;
+    outv[2] = p;
+    outv[3] = e;
+    outv[4] = l;
+    outv[5] = mix(a, b, 0.25);
+}

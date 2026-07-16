@@ -1,0 +1,27 @@
+ShaderType Spatial;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled true;
+DepthTest true;
+DepthWrite true;
+
+[[uniform], [public]] vec4 TintColor;
+[[uniform], [public]] sampler2D Albedo;
+[[shared]] vec2 vUv;
+
+void fragment() {
+    vec3 albedo = texture(Albedo, vUv).rgb;
+    COLOR = vec4(albedo, 1.0) * TintColor;
+    COLOR_INDEX_1 = vec4(gl_FragCoord.z);
+}
+
+void vertex() {
+    vUv = UV;
+    vec3 p = VERTEX;
+    p += NORMAL * 0.01;
+    VERTEX = (MODEL_MATRIX * vec4(p, 1.0)).xyz;
+    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * vec4(VERTEX, 1.0);
+}

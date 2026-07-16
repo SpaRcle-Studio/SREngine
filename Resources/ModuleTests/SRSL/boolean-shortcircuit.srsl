@@ -1,0 +1,25 @@
+ShaderType Compute;
+
+[[ssbo(outv)]] int[] outv;
+
+bool IsPositive(int x) {
+    return x > 0;
+}
+
+bool IsEven(int x) {
+    return (x & 1) == 0;
+}
+
+[[THREADS(1, 1, 1)]]
+void compute() {
+    int a = 2;
+    int b = -3;
+
+    bool p = IsPositive(a) && IsEven(a);
+    bool q = IsPositive(b) && IsEven(b);
+    bool r = IsPositive(b) || IsEven(a);
+
+    outv[0] = int(p);
+    outv[1] = int(q);
+    outv[2] = int(r);
+}

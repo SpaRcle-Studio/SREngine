@@ -1,0 +1,21 @@
+ShaderType Compute;
+
+[[uniform]] int threshold;
+[[ssbo(outBuf)]] int[] outBuf;
+
+int SelectValue(int x, int y) {
+    return (x > y) ? x : y;
+}
+
+[[THREADS(1, 1, 1)]]
+void compute() {
+    int x = 5;
+    int y = 7;
+    int m = SelectValue(x, y);
+
+    int r0 = (m >= threshold) ? (m + 1) : (m - 1);
+    int r1 = ((x + y) > 0) ? (x + y) : -(x + y);
+
+    outBuf[0] = r0;
+    outBuf[1] = r1;
+}

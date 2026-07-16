@@ -1,0 +1,24 @@
+ShaderType Compute;
+
+[[ssbo(bits)]] uint[] bits;
+
+[[THREADS(1, 1, 1)]]
+void compute() {
+    uint a = 0x0Fu;
+    uint b = 0xF0u;
+
+    uint andv = a & b;
+    uint orv = a | b;
+    uint xorv = a ^ b;
+    uint notv = ~a;
+
+    uint shl = (a << 4u);
+    uint shr = (b >> 2u);
+
+    bits[0] = andv;
+    bits[1] = orv;
+    bits[2] = xorv;
+    bits[3] = notv;
+    bits[4] = shl;
+    bits[5] = shr;
+}

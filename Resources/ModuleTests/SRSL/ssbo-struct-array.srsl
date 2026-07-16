@@ -1,0 +1,30 @@
+ShaderType Compute;
+
+struct Item {
+    vec4 color;
+    vec3 pos;
+    float weight;
+};
+
+[[ssbo(items)]] uint itemsCount;
+[[ssbo(items)]] Item[] items;
+[[ssbo(outv)]] vec4[] outv;
+
+vec4 Accumulate(uint idx) {
+    Item it = items[idx];
+    float w = max(0.0, it.weight);
+    return it.color * w + vec4(it.pos, 1.0) * (1.0 - w);
+}
+
+[[THREADS(1, 1, 1)]]
+void compute() {
+    uint idx0 = 0u;
+    uint idx1 = min(1u, itemsCount);
+
+    vec4 a = Accumulate(idx0);
+    vec4 b = Accumulate(idx1);
+
+    outv[0] = a;
+    outv[1] = b;
+    outv[2] = mix(a, b, 0.5);
+}

@@ -1,0 +1,23 @@
+ShaderType Spatial;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled false;
+DepthTest true;
+DepthWrite true;
+
+[[uniform], [public]] float Scale;
+
+void fragment() {
+    COLOR = vec4(NORMAL * 0.5 + 0.5, 1.0);
+}
+
+void vertex() {
+    vec3 p = VERTEX * Scale;
+    vec4 world = MODEL_MATRIX * vec4(p, 1.0);
+    vec4 view = VIEW_MATRIX * world;
+    OUT_POSITION = PROJECTION_MATRIX * view;
+    VERTEX = world.xyz;
+}

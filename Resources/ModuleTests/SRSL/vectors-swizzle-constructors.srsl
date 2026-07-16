@@ -1,0 +1,19 @@
+ShaderType Compute;
+
+[[ssbo(vout)]] vec4[] vout;
+
+[[THREADS(1, 1, 1)]]
+void compute() {
+    vec2 a = vec2(1.0, 2.0);
+    vec3 b = vec3(a, 3.0);
+    vec4 c = vec4(b, 4.0);
+
+    vec3 xyz = c.xyz;
+    vec2 yx = a.yx;
+    vec4 zzzz = vec4(c.z);
+
+    vout[0] = c;
+    vout[1] = vec4(xyz, 1.0);
+    vout[2] = vec4(yx, yx);
+    vout[3] = zzzz;
+}
