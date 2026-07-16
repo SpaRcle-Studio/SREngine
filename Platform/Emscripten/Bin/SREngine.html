@@ -12,7 +12,7 @@
             overflow: hidden;
             background: #111;
         }
-        #canvas {
+        #srengine-canvas {
             display: block;
             width: 100vw;
             height: 100vh;
@@ -22,11 +22,11 @@
     </style>
 </head>
 <body>
-    <canvas id="canvas" width="800" height="600" tabindex="0"></canvas>
+    <canvas id="srengine-canvas" width="800" height="600" tabindex="0"></canvas>
     <script src="SREngine.js"></script>
     <script>
         // Keep focus on canvas so it can receive input.
-        const canvas = document.getElementById('canvas');
+        const canvas = document.getElementById('srengine-canvas');
         canvas.addEventListener('click', () => canvas.focus());
         canvas.addEventListener('contextmenu', (e) => e.preventDefault());
 

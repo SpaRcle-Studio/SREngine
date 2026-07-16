@@ -156,72 +156,76 @@ namespace SR_SCRIPTING_NS {
         }
     }
 
-    void ScriptSystem::ThreadFunc() {
-        SR_INFO("ScriptSystem::ThreadFunc() : script system thread started!");
+    bool ScriptSystem::ThreadFunc() {
+        SR_TRACY_ZONE_N("ScriptSystem");
 
-        while (m_threadRunning) {
-            SR_TRACY_ZONE_N("ScriptSystem");
-            SR_PLATFORM_NS::Sleep(5);
+        if (!m_threadRunning) {
+            SR_INFO("ScriptSystem::ThreadFunc() : script system thread stopped!");
+            return false;
+        }
 
-            m_thread->Synchronize();
+    #ifdef SR_THREADS_ALLOWED
+        SR_PLATFORM_NS::Sleep(5);
+    #endif
 
-            {
-                SR_LOCK_GUARD;
-                if (m_lastFileSystemEvent + std::chrono::milliseconds(200) > SR_HTYPES_NS::Time::Instance().Now()) {
-                    m_hasModuleReloadRequest = false;
-                    continue;
-                }
-            }
+        m_thread->Synchronize();
 
-            switch (m_state) {
-                case ScriptSystemState::InitialAnalyse:
-                    InitialAnalyse();
-                    m_state = ScriptSystemState::Idle;
-                    break;
-                case ScriptSystemState::Idle:
-                    ThreadIdle();
-                    break;
-                case ScriptSystemState::CheckModules: {
-                    std::set<SR_UTILS_NS::Path> changedModules;
-                    {
-                        SR_LOCK_GUARD;
-                        changedModules = SR_EXCHANGE(m_changedModules, {});
-                    }
-                    m_codeGenerator->ProcessChangedModules(changedModules);
-                    m_state = ScriptSystemState::Codegen;
-                    break;
-                }
-                case ScriptSystemState::Codegen: {
-                    std::set<SR_UTILS_NS::Path> changedCppFiles;
-                    {
-                        SR_LOCK_GUARD;
-                        changedCppFiles = SR_EXCHANGE(m_changedCppFiles, {});
-                    }
-                    m_codeGenerator->ProcessChangedCodeFiles(changedCppFiles);
-                    if (m_codeGenerator->IsNeedRecompile()) {
-                        m_codeGenerator->RegenerateChangedModules();
-                        m_isCompiled = false;
-                    }
-                    m_state = ScriptSystemState::Idle;
-                    break;
-                }
-                case ScriptSystemState::Compiling:
-                    CompileModules();
-                    if (!m_hasCompileErrors) {
-                        CopyModules();
-                    }
-                    m_state = ScriptSystemState::Idle;
-                    m_isCompiled = true;
-                    break;
-                case ScriptSystemState::Reloading:
-                    ReloadModules();
-                    m_state = ScriptSystemState::Idle;
-                    m_hasModuleReloadRequest = false;
-                    break;
+        {
+            SR_LOCK_GUARD;
+            if (m_lastFileSystemEvent + std::chrono::milliseconds(200) > SR_HTYPES_NS::Time::Instance().Now()) {
+                m_hasModuleReloadRequest = false;
+                return true;
             }
         }
 
-        SR_INFO("ScriptSystem::ThreadFunc() : script system thread stopped!");
+        switch (m_state) {
+            case ScriptSystemState::InitialAnalyse:
+                InitialAnalyse();
+                m_state = ScriptSystemState::Idle;
+                break;
+            case ScriptSystemState::Idle:
+                ThreadIdle();
+                break;
+            case ScriptSystemState::CheckModules: {
+                std::set<SR_UTILS_NS::Path> changedModules;
+                {
+                    SR_LOCK_GUARD;
+                    changedModules = SR_EXCHANGE(m_changedModules, {});
+                }
+                m_codeGenerator->ProcessChangedModules(changedModules);
+                m_state = ScriptSystemState::Codegen;
+                break;
+            }
+            case ScriptSystemState::Codegen: {
+                std::set<SR_UTILS_NS::Path> changedCppFiles;
+                {
+                    SR_LOCK_GUARD;
+                    changedCppFiles = SR_EXCHANGE(m_changedCppFiles, {});
+                }
+                m_codeGenerator->ProcessChangedCodeFiles(changedCppFiles);
+                if (m_codeGenerator->IsNeedRecompile()) {
+                    m_codeGenerator->RegenerateChangedModules();
+                    m_isCompiled = false;
+                }
+                m_state = ScriptSystemState::Idle;
+                break;
+            }
+            case ScriptSystemState::Compiling:
+                CompileModules();
+                if (!m_hasCompileErrors) {
+                    CopyModules();
+                }
+                m_state = ScriptSystemState::Idle;
+                m_isCompiled = true;
+                break;
+            case ScriptSystemState::Reloading:
+                ReloadModules();
+                m_state = ScriptSystemState::Idle;
+                m_hasModuleReloadRequest = false;
+                break;
+        }
+
+        return true;
     }
 
     void ScriptSystem::InitialAnalyse() {

@@ -5,6 +5,8 @@ define_property(GLOBAL PROPERTY SR_EXECUTABLE_ARGS
 
 set_property(GLOBAL PROPERTY SR_EXECUTABLE_ARGS "")
 
+option(SR_EMSCRIPTEN_USE_PTHREADS "Use pthreads in Emscripten build" OFF)
+
 if (ANDROID_NDK)
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -u ANativeActivity_onCreate")
 
@@ -29,9 +31,15 @@ elseif(SR_EMSCRIPTEN)
     target_link_libraries(${SR_EXECUTABLE_NAME} Engine)
     target_include_directories(${SR_EXECUTABLE_NAME} PUBLIC "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Engine/inc")
 
-    set_target_properties(${SR_EXECUTABLE_NAME} PROPERTIES
-        LINK_FLAGS "-sUSE_SDL=2 -sALLOW_MEMORY_GROWTH=1 -sPTHREAD_POOL_SIZE=8 -sFULL_ES3=1 -sUSE_PTHREADS=1 -sMODULARIZE=1 -sINITIAL_MEMORY=134217728 -sEXPORT_NAME=SREngine --preload-file ${SR_CMAKE_ROOT_BUILD_DIRECTORY}/PackedResources@/Resources -o ${SR_EXECUTABLE_NAME}.html"
-    )
+    if (SR_EMSCRIPTEN_USE_PTHREADS)
+        set_target_properties(${SR_EXECUTABLE_NAME} PROPERTIES
+            LINK_FLAGS "-sUSE_SDL=2 -sALLOW_MEMORY_GROWTH=1 -sPTHREAD_POOL_SIZE=8 -sFULL_ES3=1 -sUSE_PTHREADS=1 -sMODULARIZE=1 -sINITIAL_MEMORY=134217728 -sEXPORT_NAME=SREngine --preload-file ${SR_CMAKE_ROOT_BUILD_DIRECTORY}/PackedResources@/Resources -o ${SR_EXECUTABLE_NAME}.html"
+        )
+    else()
+        set_target_properties(${SR_EXECUTABLE_NAME} PROPERTIES
+                LINK_FLAGS "-sUSE_SDL=2 -sALLOW_MEMORY_GROWTH=1 -sFULL_ES3=1 -sMODULARIZE=1 -sINITIAL_MEMORY=134217728 -sEXPORT_NAME=SREngine --preload-file ${SR_CMAKE_ROOT_BUILD_DIRECTORY}/PackedResources@/Resources -o ${SR_EXECUTABLE_NAME}.html"
+        )
+    endif()
 
     # Скопировать файлы после сборки
     add_custom_command(TARGET ${SR_EXECUTABLE_NAME} POST_BUILD

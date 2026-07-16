@@ -22,6 +22,7 @@
 
 #ifdef SR_USE_IMGUI
 namespace SR_GRAPH_GUI_NS::Immediate {
+    const char* EMSCRIPTEN_CANVAS_ID = "#srengine-canvas";
     namespace {
         SR_UTILS_NS::Subscription g_inputTextSubscription;
         std::vector<SR_UTILS_NS::InputTextEvent> g_inputTextEvents;
@@ -302,7 +303,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
 
             if (eventType == EMSCRIPTEN_EVENT_MOUSEMOVE) {
                 // canvasX/canvasY are deprecated and may not be reported reliably.
-                // targetX/targetY are relative to the event target element ("#canvas").
+                // targetX/targetY are relative to the event target element (EMSCRIPTEN_CANVAS_ID).
                 io.AddMousePosEvent(static_cast<float>(e->targetX), static_cast<float>(e->targetY));
             }
             else if (eventType == EMSCRIPTEN_EVENT_MOUSEDOWN || eventType == EMSCRIPTEN_EVENT_MOUSEUP) {
@@ -369,27 +370,27 @@ namespace SR_GRAPH_GUI_NS::Immediate {
             emscripten_set_keypress_callback_on_thread(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_FALSE, EmscriptenKeyCallback, targetThread);
 
             // Mouse (canvas)
-            emscripten_set_mousedown_callback_on_thread("#canvas", nullptr, EM_FALSE, EmscriptenMouseCallback, targetThread);
+            emscripten_set_mousedown_callback_on_thread(EMSCRIPTEN_CANVAS_ID, nullptr, EM_FALSE, EmscriptenMouseCallback, targetThread);
             emscripten_set_mouseup_callback_on_thread(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_FALSE, EmscriptenMouseCallback, targetThread);
-            emscripten_set_mousemove_callback_on_thread("#canvas", nullptr, EM_FALSE, EmscriptenMouseCallback, targetThread);
-            emscripten_set_mouseenter_callback_on_thread("#canvas", nullptr, EM_FALSE, EmscriptenMouseEnterLeaveCallback, targetThread);
-            emscripten_set_mouseleave_callback_on_thread("#canvas", nullptr, EM_FALSE, EmscriptenMouseEnterLeaveCallback, targetThread);
+            emscripten_set_mousemove_callback_on_thread(EMSCRIPTEN_CANVAS_ID, nullptr, EM_FALSE, EmscriptenMouseCallback, targetThread);
+            emscripten_set_mouseenter_callback_on_thread(EMSCRIPTEN_CANVAS_ID, nullptr, EM_FALSE, EmscriptenMouseEnterLeaveCallback, targetThread);
+            emscripten_set_mouseleave_callback_on_thread(EMSCRIPTEN_CANVAS_ID, nullptr, EM_FALSE, EmscriptenMouseEnterLeaveCallback, targetThread);
 
             // Wheel
-            emscripten_set_wheel_callback_on_thread("#canvas", nullptr, EM_FALSE, EmscriptenWheelCallback, targetThread);
+            emscripten_set_wheel_callback_on_thread(EMSCRIPTEN_CANVAS_ID, nullptr, EM_FALSE, EmscriptenWheelCallback, targetThread);
         #else
             // Single-threaded builds.
             emscripten_set_keydown_callback(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_FALSE, EmscriptenKeyCallback);
             emscripten_set_keyup_callback(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_FALSE, EmscriptenKeyCallback);
             emscripten_set_keypress_callback(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_FALSE, EmscriptenKeyCallback);
 
-            emscripten_set_mousedown_callback("#canvas", nullptr, EM_FALSE, EmscriptenMouseCallback);
+            emscripten_set_mousedown_callback(EMSCRIPTEN_CANVAS_ID, nullptr, EM_FALSE, EmscriptenMouseCallback);
             emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_FALSE, EmscriptenMouseCallback);
-            emscripten_set_mousemove_callback("#canvas", nullptr, EM_FALSE, EmscriptenMouseCallback);
-            emscripten_set_mouseenter_callback("#canvas", nullptr, EM_FALSE, EmscriptenMouseEnterLeaveCallback);
-            emscripten_set_mouseleave_callback("#canvas", nullptr, EM_FALSE, EmscriptenMouseEnterLeaveCallback);
+            emscripten_set_mousemove_callback(EMSCRIPTEN_CANVAS_ID, nullptr, EM_FALSE, EmscriptenMouseCallback);
+            emscripten_set_mouseenter_callback(EMSCRIPTEN_CANVAS_ID, nullptr, EM_FALSE, EmscriptenMouseEnterLeaveCallback);
+            emscripten_set_mouseleave_callback(EMSCRIPTEN_CANVAS_ID, nullptr, EM_FALSE, EmscriptenMouseEnterLeaveCallback);
 
-            emscripten_set_wheel_callback("#canvas", nullptr, EM_FALSE, EmscriptenWheelCallback);
+            emscripten_set_wheel_callback(EMSCRIPTEN_CANVAS_ID, nullptr, EM_FALSE, EmscriptenWheelCallback);
         #endif
 
             g_emscriptenPrevTime = emscripten_get_now();
@@ -491,7 +492,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
             case PlatformBackend::Emscripten: {
                 EnsureEmscriptenCallbacksInstalled();
                 double cssW = 0.0, cssH = 0.0;
-                if (emscripten_get_element_css_size("#canvas", &cssW, &cssH) == EMSCRIPTEN_RESULT_SUCCESS) {
+                if (emscripten_get_element_css_size(EMSCRIPTEN_CANVAS_ID, &cssW, &cssH) == EMSCRIPTEN_RESULT_SUCCESS) {
                     ImGuiIO& io = ImGui::GetIO();
                     io.DisplaySize = ImVec2(static_cast<float>(cssW), static_cast<float>(cssH));
                     io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);

@@ -34,7 +34,7 @@ namespace SR_AUDIO_NS {
         SR_REGISTER_SINGLETON(SoundManager)
     public:
         enum class State : uint8_t {
-            Stopped, Active, Paused
+            Stopped, Active
         };
         using Handle = void*;
     private:

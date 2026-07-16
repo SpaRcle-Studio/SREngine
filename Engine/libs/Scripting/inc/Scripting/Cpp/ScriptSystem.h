@@ -52,7 +52,7 @@ namespace SR_SCRIPTING_NS {
 
     private:
         void HandleFileSystemEvent(const SR_UTILS_NS::SubscriptionMessage& message, SR_UTILS_NS::FileSystemWatcher::EventType eventType);
-        void ThreadFunc();
+        bool ThreadFunc();
         bool InitEngineSources();
 
         void InitialAnalyse();

@@ -30,15 +30,18 @@ namespace SR_AUDIO_NS {
 
         m_state = State::Active;
 
-        SR_HTYPES_NS::Thread::Factory::Instance().Create(m_thread, [this]() {
-            m_threadId = m_thread->GetId();
-            while (m_state != State::Stopped) {
-                while (m_state == State::Paused) {
-                    SR_NOOP;
-                }
-                Update();
+        SR_HTYPES_NS::Thread::Factory::Instance().Create(m_thread, [this]() -> bool {
+            if (m_threadId == SR_HTYPES_NS::Thread::EmptyThreadId()) {
+                m_threadId = m_thread->GetId();
             }
-            Destroy();
+
+            Update();
+
+            if (m_state == State::Stopped) {
+                Destroy();
+                return false;
+            }
+            return true;
         });
         m_thread->SetName("Sound manager");
 
