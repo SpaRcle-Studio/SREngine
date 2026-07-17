@@ -23,6 +23,8 @@ namespace SR_CORE_NS::Tests {
         SR_CLASS()
     public:
         SR_UTILS_NS::TestExecutionResult Run() override {
+            SR_SRSL_NS::SRSLShader::ClearShadersCache();
+
             const SR_UTILS_NS::Path path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("ModuleTests/SRSL");
             auto&& expectedFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("ModuleTests/SRSL/Expected");
             auto&& resultFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("ModuleTests/SRSL/Result");

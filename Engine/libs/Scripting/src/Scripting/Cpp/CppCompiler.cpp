@@ -162,6 +162,9 @@ namespace SR_SCRIPTING_NS {
             customArgs += "/utf-8 ";
             customArgs += "/DFMT_HEADER_ONLY ";
 
+        #ifdef SR_THREADS_ALLOWED
+            customArgs += "/DSR_THREADS_ALLOWED ";
+        #endif
         #ifdef SR_TRACY_ENABLE
             customArgs += "/DSR_TRACY_ENABLE ";
             customArgs += "/DTRACY_ON_DEMAND ";
@@ -169,6 +172,9 @@ namespace SR_SCRIPTING_NS {
         #endif
         }
         else {
+        #ifdef SR_THREADS_ALLOWED
+            customArgs += "-DSR_THREADS_ALLOWED ";
+        #endif
         #ifdef SR_TRACY_ENABLE
             customArgs += "-DSR_TRACY_ENABLE ";
             customArgs += "-DTRACY_ON_DEMAND ";

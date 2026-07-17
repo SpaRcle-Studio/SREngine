@@ -35,12 +35,12 @@ namespace SR_AUDIO_NS {
                 m_threadId = m_thread->GetId();
             }
 
-            Update();
-
             if (m_state == State::Stopped) {
                 Destroy();
                 return false;
             }
+
+            Update();
             return true;
         });
         m_thread->SetName("Sound manager");

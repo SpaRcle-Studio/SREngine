@@ -181,7 +181,10 @@ namespace SR_SCRIPTING_NS {
         switch (m_state) {
             case ScriptSystemState::InitialAnalyse:
                 InitialAnalyse();
-                m_state = ScriptSystemState::Idle;
+                ThreadIdle();
+                if (m_state == ScriptSystemState::InitialAnalyse) {
+                    m_state = ScriptSystemState::Idle;
+                }
                 break;
             case ScriptSystemState::Idle:
                 ThreadIdle();
@@ -207,7 +210,10 @@ namespace SR_SCRIPTING_NS {
                     m_codeGenerator->RegenerateChangedModules();
                     m_isCompiled = false;
                 }
-                m_state = ScriptSystemState::Idle;
+                ThreadIdle();
+                if (m_state == ScriptSystemState::Codegen) {
+                    m_state = ScriptSystemState::Idle;
+                }
                 break;
             }
             case ScriptSystemState::Compiling:
@@ -215,8 +221,11 @@ namespace SR_SCRIPTING_NS {
                 if (!m_hasCompileErrors) {
                     CopyModules();
                 }
-                m_state = ScriptSystemState::Idle;
                 m_isCompiled = true;
+                ThreadIdle();
+                if (m_state == ScriptSystemState::Compiling) {
+                    m_state = ScriptSystemState::Idle;
+                }
                 break;
             case ScriptSystemState::Reloading:
                 ReloadModules();
