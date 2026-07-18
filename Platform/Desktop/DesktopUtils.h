@@ -167,7 +167,10 @@ int SREngineEntryPointFromExternalModule(int argc, char** argv, bool notFoundAsE
     preferredModulePath = !preferredModulePath.empty() ? preferredModulePath : (isDebugBuild ? releaseEnginePath : debugEnginePath);
 
     if (!preferredModulePath.empty()) {
+        const uint64_t startTime = std::chrono::high_resolution_clock::now().time_since_epoch().count();
         pModuleHandle = LoadDynamicModule(preferredModulePath.c_str());
+        const uint64_t endTime = std::chrono::high_resolution_clock::now().time_since_epoch().count();
+        std::cout << "Engine library loaded in " << static_cast<double_t>(endTime - startTime) / 1e6 << " ms." << std::endl;
         if (!pModuleHandle) {
             std::cerr << "Failed to load engine library: " << preferredModulePath << std::endl;
             std::cerr << "Enter any key to continue..." << std::endl;

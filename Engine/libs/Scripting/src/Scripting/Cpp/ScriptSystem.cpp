@@ -163,6 +163,7 @@ namespace SR_SCRIPTING_NS {
 
         if (!m_threadRunning) {
             SR_INFO("ScriptSystem::ThreadFunc() : script system thread stopped!");
+            m_state = ScriptSystemState::Idle;
             return false;
         }
 
@@ -249,6 +250,11 @@ namespace SR_SCRIPTING_NS {
 
     void ScriptSystem::ThreadIdle() {
         SR_LOCK_GUARD;
+
+        if (!m_threadRunning) {
+            m_state = ScriptSystemState::Idle;
+            return;
+        }
 
         /// first, check if we have any changes in the modules
         if (!m_changedModules.empty()) {
@@ -463,6 +469,7 @@ namespace SR_SCRIPTING_NS {
         SR_INFO("ScriptSystem::WaitForIdle() : waiting for script system idle...");
 
         while (m_state != ScriptSystemState::Idle) {
+            SR_HTYPES_NS::Time::Instance().Update();
             SR_PLATFORM_NS::Sleep(10);
         }
     }
