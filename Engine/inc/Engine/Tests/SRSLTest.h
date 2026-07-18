@@ -15,6 +15,8 @@
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/Tests/TestManager.h>
 #include <Utils/FileSystem/FileSystem.h>
+#include <Utils/Memory/Allocator.h>
+#include <Utils/Memory/MemoryLiterals.h>
 
 #include <Enum/ShaderStage.hpp>
 
@@ -23,6 +25,8 @@ namespace SR_CORE_NS::Tests {
         SR_CLASS()
     public:
         SR_UTILS_NS::TestExecutionResult Run() override {
+            SR_TRACY_ZONE;
+
             SR_SRSL_NS::SRSLShader::ClearShadersCache();
 
             const SR_UTILS_NS::Path path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("ModuleTests/SRSL");
@@ -37,9 +41,11 @@ namespace SR_CORE_NS::Tests {
                 }
 
                 file = file.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
+                SR_TRACY_ZONE_TEXT_VIEW(file.View());
 
-                if (auto&& pShader = SR_SRSL_NS::SRSLShader::Load(file, SR_SRSL_NS::ShaderParams::GetDefault())) {
-                    SR_SRSL_NS::ISRSLCodeGenerator::SRSLCodeGenRes result = SR_SRSL_NS::GLSLCodeGenerator::Instance().GenerateStages(pShader.get());
+                m_allocator.ResetMemory();
+                if (auto&& pShader = SR_SRSL_NS::SRSLShader::Load(&m_allocator, file, SR_SRSL_NS::ShaderParams::GetDefault())) {
+                    SR_SRSL_NS::ISRSLCodeGenerator::SRSLCodeGenRes result = SR_SRSL_NS::GLSLCodeGenerator::Instance().GenerateStages(pShader->GetAllocator(), pShader.Get());
                     for (auto&& [stage, code] : result.second) {
                         resultFolder.CreateIfNotExists();
                         auto outputFile = resultFolder.Concat(file.GetBaseNameAndExt()).ConcatExt(SR_UTILS_NS::EnumReflector::ToStringAtom(stage).ToString() + ".glsl");
@@ -56,7 +62,7 @@ namespace SR_CORE_NS::Tests {
                         .AddAttribute(SR_UTILS_NS::VertexAttribute::UV0, SR_UTILS_NS::VertexAttributeFormat::Float32, 2)
                     ;
 
-                    result = SR_SRSL_NS::WGSLCodeGenerator::Instance().GenerateStages(pShader.get());
+                    result = SR_SRSL_NS::WGSLCodeGenerator::Instance().GenerateStages(pShader->GetAllocator(), pShader.Get());
                     resultFolder.CreateIfNotExists();
                     auto outputFile = resultFolder.Concat(file.GetBaseName()).ConcatExt("wgsl");
                     if (!SR_UTILS_NS::FileSystem::WriteToFile(outputFile, result.second[SR_GRAPH_NS::ShaderStage::All])) {
@@ -119,6 +125,10 @@ namespace SR_CORE_NS::Tests {
             }
             return SR_UTILS_NS::TestExecutionResult::Success;
         }
+
+    private:
+        SR_UTILS_NS::MonotonicAllocator m_allocator { 1_MB };
+
     };
 }
 
