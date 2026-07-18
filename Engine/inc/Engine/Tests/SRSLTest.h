@@ -29,7 +29,9 @@ namespace SR_CORE_NS::Tests {
             auto&& expectedFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("ModuleTests/SRSL/Expected");
             auto&& resultFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("ModuleTests/SRSL/Result");
 
-            for (auto file : path.GetFiles()) {
+            SR_UTILS_NS::Vector<SR_UTILS_NS::Path> files;
+            path.GetFiles(files);
+            for (auto file : files) {
                 if (file.GetExtension() != "srsl") {
                     continue;
                 }
@@ -68,8 +70,11 @@ namespace SR_CORE_NS::Tests {
                 }
             }
 
-            const uint32_t expectedCount = expectedFolder.GetFiles().size();
-            const uint32_t resultCount = resultFolder.GetFiles().size();
+            resultFolder.GetFiles(files);
+            const uint32_t resultCount = files.size();
+
+            expectedFolder.GetFiles(files);
+            const uint32_t expectedCount = files.size();
 
             if (expectedCount != resultCount) {
                 SR_ERROR("SRSLTest::Run() : expected {} shader files, but found {} in result folder!", expectedCount, resultCount);
@@ -79,7 +84,7 @@ namespace SR_CORE_NS::Tests {
             uint32_t errors = 0;
             const uint32_t maxErrors = 128;
 
-            for (auto file : expectedFolder.GetFiles()) {
+            for (auto file : files) {
                 auto expectedFile = expectedFolder.Concat(file.GetBaseNameAndExt());
                 auto resultFile = resultFolder.Concat(file.GetBaseNameAndExt());
 

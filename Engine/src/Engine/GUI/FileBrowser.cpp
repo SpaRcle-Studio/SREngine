@@ -76,7 +76,8 @@ namespace SR_CORE_NS::GUI {
         SR_TRACY_ZONE;
         FreeTextures();
 
-        for (const auto &path : root.GetAll()) {
+        root.GetAll(m_currentDirElements);
+        for (const auto& path : m_currentDirElements) {
             if (path.GetBaseName().empty()) {
                 continue;
             }
@@ -199,7 +200,8 @@ namespace SR_CORE_NS::GUI {
         if (parentFolder.childrenLoaded) {
             return;
         }
-        const auto& folders = parentFolder.path.GetFolders();
+        SR_UTILS_NS::Vector<SR_UTILS_NS::Path> folders;
+        parentFolder.path.GetFolders(folders);
         parentFolder.innerFolders.clear();
         for (const auto& path : folders) {
             if (path.IsEmpty()) {
@@ -209,7 +211,8 @@ namespace SR_CORE_NS::GUI {
             child.path = path;
             child.filename = path.GetBaseNameAndExt();
             child.childrenLoaded = false;
-            child.hasSubfolders = !path.GetFolders().empty();
+            path.GetFolders(m_tmp);
+            child.hasSubfolders = !m_tmp.empty();
             parentFolder.innerFolders.emplace_back(std::move(child));
         }
         parentFolder.childrenLoaded = true;

@@ -63,6 +63,8 @@ namespace SR_CORE_NS::GUI {
     private:
         float_t m_itemsScale = 1.0f;
 
+        SR_UTILS_NS::Vector<SR_UTILS_NS::Path> m_currentDirElements;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::Path> m_tmp;
         SR_UTILS_NS::Path m_defaultRoot;
         SR_UTILS_NS::Path m_selectedDir;
 

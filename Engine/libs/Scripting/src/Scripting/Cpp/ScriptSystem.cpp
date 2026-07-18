@@ -109,6 +109,8 @@ namespace SR_SCRIPTING_NS {
     }
 
     void ScriptSystem::HandleFileSystemEvent(const SR_UTILS_NS::SubscriptionMessage& message, SR_UTILS_NS::FileSystemWatcher::EventType eventType) {
+        SR_TRACY_ZONE;
+
         auto&& path = message.GetPathRef(SR_UTILS_NS::FileSystemWatcher::FILE_MSG_ID);
         if (path.IsSubPath(m_cacheFolder) || path.IsSubPath(m_apiFolder)) {
             return;
@@ -238,8 +240,8 @@ namespace SR_SCRIPTING_NS {
     }
 
     void ScriptSystem::InitialAnalyse() {
-        SR_UTILS_NS::FileSystem::ForEachFileInFolder(m_resourcesFolder, true, [this](const SR_UTILS_NS::Path& path) {
-            SR_UTILS_NS::SubscriptionMessage message;
+        SR_UTILS_NS::SubscriptionMessage message;
+        SR_UTILS_NS::FileSystem::ForEachFileInFolder(m_resourcesFolder, true, [this, &message](const SR_UTILS_NS::Path& path) {
             message.SetPath(SR_UTILS_NS::FileSystemWatcher::FILE_MSG_ID, path);
             HandleFileSystemEvent(message, SR_UTILS_NS::FileSystemWatcher::EventType::Add);
         });

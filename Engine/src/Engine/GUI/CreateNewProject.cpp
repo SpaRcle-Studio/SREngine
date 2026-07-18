@@ -106,8 +106,8 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::SetCursorPosY(size.y - 40);
 
             const bool isOk = !m_projectFinalPath.IsEmpty() && !m_projectName.empty()
-                    && !m_projectFinalPath.IsFile() && m_projectFinalPath.GetFiles().empty()
-                    && m_projectFinalPath.GetFolders().empty()
+                    && !m_projectFinalPath.IsFile()
+                    && m_projectFinalPath.IsDirectoryEmpty()
                     && m_projectFinalPath.IsAbs()
                     && m_projectFinalPath.IsValidPath();
 
