@@ -31,6 +31,7 @@ if (EMSCRIPTEN)
         add_link_options(-sUSE_PTHREADS=1)
         add_definitions(-DSR_THREADS_ALLOWED)
     endif()
+    add_link_options(-sASSERTIONS=1)
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --use-port=emdawnwebgpu")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --use-port=emdawnwebgpu")
