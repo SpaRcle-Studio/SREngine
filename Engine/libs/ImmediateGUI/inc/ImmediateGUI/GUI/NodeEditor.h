@@ -7,14 +7,171 @@
 
 #include <ImmediateGUI/GUI/ImmediateGUI.h>
 
+#include <Utils/Reflection/Value.h>
+
 namespace SR_GRAPH_GUI_NS::Immediate {
-    class NodeEditorInstance {
+    class NodeInstance;
+    class PinInstance;
+    class InputPinInstance;
+    class OutputPinInstance;
+
+    struct PinData {
+        SR_UTILS_NS::Reflection::Value value;
+    };
+
+    struct PinTypeInfo {
+        SR_UTILS_NS::Reflection::TypeInfo type;
+        bool isFlow = false;
+        bool operator==(const PinTypeInfo& other) const {
+            return type == other.type && isFlow == other.isFlow;
+        }
+        bool operator!=(const PinTypeInfo& other) const { return !(*this == other); }
+    };
+
+    class LinkInstance {
     public:
+        LinkInstance() = default;
+
+        SR_NODISCARD InputPinInstance* GetInputPin() const { return m_pInputPin; }
+        SR_NODISCARD OutputPinInstance* GetOutputPin() const { return m_pOutputPin; }
+
+        void Link(InputPinInstance* pInputPin, OutputPinInstance* pOutputPin) {
+            m_pInputPin = pInputPin;
+            m_pOutputPin = pOutputPin;
+        }
+
+        virtual void Draw() = 0;
+
+    private:
+        InputPinInstance* m_pInputPin = nullptr;
+        OutputPinInstance* m_pOutputPin = nullptr;
+
+    };
+
+    class NodeEditorInstance {
+        using OnNodeDeletedCallback = SR_HTYPES_NS::Function<void(NodeInstance&)>;
+        using OnLinkDeletedCallback = SR_HTYPES_NS::Function<void(LinkInstance&)>;
+        using OnLinkCreatedCallback = SR_HTYPES_NS::Function<void(LinkInstance&)>;
+        using OnSomethingChangedCallback = SR_HTYPES_NS::Function<void()>;
+        using OnBackgroundPopupCallback = SR_HTYPES_NS::Function<void(SR_MATH_NS::FVector2)>;
+    public:
+        static NodeEditorInstance* Create();
+
+    public:
+        virtual ~NodeEditorInstance();
+        virtual void Draw() = 0;
+        virtual void Zoom() { }
+        virtual NodeInstance* CreateNode() = 0;
+        virtual void CreateLink(InputPinInstance* pInputPin, OutputPinInstance* pOutputPin) = 0;
+        virtual void SetSize(const SR_MATH_NS::FVector2& size) = 0;
+        virtual void SetBackgroundText(SR_UTILS_NS::StringView text) { m_backgroundText = text; }
+        virtual void ResetEditor() = 0;
+
+        SR_NODISCARD virtual InputPinInstance* CreateInputPin(SR_UTILS_NS::StringView name, PinTypeInfo type) = 0;
+        SR_NODISCARD virtual OutputPinInstance* CreateOutputPin(SR_UTILS_NS::StringView name, PinTypeInfo type) = 0;
+
+        virtual void OnInputPinRemoved(PinInstance* pPin);
+        virtual void OnOutputPinRemoved(PinInstance* pPin);
+
+        void SetNodeDeletedCallback(OnNodeDeletedCallback callback) { m_onNodeDeletedCallback = std::move(callback); }
+        void SetLinkDeletedCallback(OnLinkDeletedCallback callback) { m_onLinkDeletedCallback = std::move(callback); }
+        void SetSomethingChangedCallback(OnSomethingChangedCallback callback) { m_onSomethingChangedCallback = std::move(callback); }
+        void SetLinkCreatedCallback(OnLinkCreatedCallback callback) { m_onLinkCreatedCallback = std::move(callback); }
+        void SetBackgroundPopupCallback(OnBackgroundPopupCallback callback) { m_onBackgroundPopupCallback = std::move(callback); }
+
+        SR_NODISCARD const OnSomethingChangedCallback& GetSomethingChangedCallback() const { return m_onSomethingChangedCallback; }
+
+    protected:
+        OnSomethingChangedCallback m_onSomethingChangedCallback;
+        OnNodeDeletedCallback m_onNodeDeletedCallback;
+        OnLinkDeletedCallback m_onLinkDeletedCallback;
+        OnLinkCreatedCallback m_onLinkCreatedCallback;
+        OnBackgroundPopupCallback m_onBackgroundPopupCallback;
+        SR_UTILS_NS::Vector<LinkInstance*> m_links;
+        SR_UTILS_NS::Vector<LinkInstance*> m_freeLinks;
+        SR_UTILS_NS::Vector<NodeInstance*> m_nodes;
+        SR_UTILS_NS::Vector<NodeInstance*> m_freeNodes;
+        SR_UTILS_NS::Vector<PinInstance*> m_freeInputPins;
+        SR_UTILS_NS::Vector<PinInstance*> m_freeOutputPins;
+        SR_MATH_NS::FVector2 m_popupMousePos;
+        SR_UTILS_NS::String m_backgroundText;
 
     };
 
     class NodeInstance {
+        using InputPin = PinInstance*;
+        using OutputPin = PinInstance*;
+    public:
+        explicit NodeInstance(NodeEditorInstance* pEditor)
+            : m_pEditor(pEditor)
+        { }
 
+        virtual ~NodeInstance();
+
+        virtual void Draw() = 0;
+        virtual InputPinInstance* AddInputPin(SR_UTILS_NS::StringView name, PinTypeInfo type) { return nullptr; }
+        virtual OutputPinInstance* AddOutputPin(SR_UTILS_NS::StringView name, PinTypeInfo type) { return nullptr; }
+        virtual void SetPosition(const SR_MATH_NS::FVector2& position) { }
+        virtual void SetTitle(SR_UTILS_NS::StringView title) { }
+        virtual void RemovePins() { }
+        virtual void LinkTo(NodeInstance* pTargetNode, uint32_t sourcePin, uint32_t targetPin) { }
+        virtual void SetUserData(void* pUserData) { m_pUserData = pUserData; }
+
+        SR_NODISCARD uint32_t GetPinIndex(PinInstance* pPin) const;
+        SR_NODISCARD virtual SR_MATH_NS::FVector2 GetPosition() const { return SR_MATH_NS::FVector2(); }
+        SR_NODISCARD NodeEditorInstance* GetEditor() const { return m_pEditor; }
+        SR_NODISCARD void* GetUserData() const { return m_pUserData; }
+
+        SR_NODISCARD const SR_UTILS_NS::Vector<InputPin>& GetInputs() const { return m_inputPins; }
+        SR_NODISCARD const SR_UTILS_NS::Vector<OutputPin>& GetOutputs() const { return m_outputPins; }
+
+    protected:
+        void* m_pUserData = nullptr;
+        NodeEditorInstance* m_pEditor = nullptr;
+        SR_UTILS_NS::Vector<InputPin> m_inputPins;
+        SR_UTILS_NS::Vector<OutputPin> m_outputPins;
+
+    };
+
+    class PinInstance {
+    public:
+        virtual void Draw() = 0;
+        virtual ~PinInstance() = default;
+
+        SR_NODISCARD PinTypeInfo GetType() const { return m_type; }
+        void SetType(PinTypeInfo type) { m_type = type; }
+
+        SR_NODISCARD SR_UTILS_NS::StringView GetName() const { return m_name; }
+        void SetName(SR_UTILS_NS::StringView name);
+
+        SR_NODISCARD NodeInstance* GetNode() const { return m_pNode; }
+        void SetNode(NodeInstance* pNode) { m_pNode = pNode; }
+
+        SR_NODISCARD bool IsLinked() const { return !m_links.empty(); }
+        SR_NODISCARD virtual bool IsInput() const = 0;
+        SR_NODISCARD bool IsConnectedTo(PinInstance* pPin) const;
+
+        void ClearLinks() { m_links.clear(); }
+        void AddLink(LinkInstance* pLink) { m_links.emplace_back(pLink); }
+        void RemoveLink(LinkInstance* pLink) {
+            m_links.erase(std::remove(m_links.begin(), m_links.end(), pLink), m_links.end());
+        }
+
+    private:
+        NodeInstance* m_pNode = nullptr;
+        SR_UTILS_NS::Vector<LinkInstance*> m_links;
+        PinTypeInfo m_type;
+        SR_UTILS_NS::String m_name;
+
+    };
+
+    class InputPinInstance : public PinInstance {
+    public:
+        bool IsInput() const override { return true; }
+    };
+    class OutputPinInstance : public PinInstance {
+    public:
+        bool IsInput() const override { return false; }
     };
 }
 

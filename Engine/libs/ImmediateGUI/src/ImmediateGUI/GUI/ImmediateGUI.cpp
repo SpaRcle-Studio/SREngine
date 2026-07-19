@@ -44,16 +44,19 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     }
 
     void Render() {
+        SR_TRACY_ZONE;
         const float_t fontScale = SR_UTILS_NS::StoreUtils::User::GetFloat("EditorFontSize", SR_IMMEDIATE_GUI_NS::DEFAULT_FONT_SIZE);
         ImGui::GetStyle().FontScaleMain = (fontScale / SR_IMMEDIATE_GUI_NS::DEFAULT_FONT_SIZE) * 1.1f;
         ImGui::Render();
     }
 
     void UpdatePlatformWindows() {
+        SR_TRACY_ZONE;
         ImGui::UpdatePlatformWindows();
     }
 
     void RenderPlatformWindowsDefault() {
+        SR_TRACY_ZONE;
         ImGui::RenderPlatformWindowsDefault();
     }
 
@@ -1478,7 +1481,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
                         if (innerColorU32 & 0xFF000000) {
                             drawList->AddConvexPolyFilled(drawList->_Path.Data, drawList->_Path.Size, innerColorU32);
                         }
-                        drawList->PathStroke(colorU32, true, 2.0f * outline_scale);
+                        drawList->PathStroke(colorU32, ImDrawFlags_Closed, 2.0f * outline_scale);
                     } else {
                         drawList->PathFillConvex(colorU32);
                     }

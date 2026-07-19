@@ -440,6 +440,55 @@ namespace SR_CORE_NS::Commands {
 
     //! ----------------------------------------------------------------------------------------------------------------
 
+    bool AssetChange::Redo() {
+        if (m_asset && !m_asset->IsDestroyed()) {
+            auto&& pDeserializer = m_pNew->CreateDeserializer();
+            SR_UTILS_NS::Serialization::Load(*pDeserializer, *m_asset, SR_UTILS_NS::COMMAND_DATA_ID);
+            m_asset->GetMeta()->ForEachProperty([&](auto&& property, uint64_t index) {
+                property.OnChanged(m_asset.Get());
+            });
+        }
+        return true;
+    }
+
+    bool AssetChange::Undo() {
+        if (m_asset && !m_asset->IsDestroyed()) {
+            auto&& pDeserializer = m_pOld->CreateDeserializer();
+            SR_UTILS_NS::Serialization::Load(*pDeserializer, *m_asset, SR_UTILS_NS::COMMAND_DATA_ID);
+            m_asset->GetMeta()->ForEachProperty([&](auto&& property, uint64_t index) {
+                property.OnChanged(m_asset.Get());
+            });
+        }
+        return true;
+    }
+    //! ----------------------------------------------------------------------------------------------------------------
+
+    bool SerializableChange::Redo() {
+        if (auto&& pSRClass = m_pSerializable.GetSRClass()) {
+            auto&& pDeserializer = m_pNew->CreateDeserializer();
+            auto&& pSerializable = dynamic_cast<SR_UTILS_NS::Serializable*>(pSRClass);
+            SR_UTILS_NS::Serialization::Load(*pDeserializer, *pSerializable, SR_UTILS_NS::COMMAND_DATA_ID);
+            pSRClass->GetMeta()->ForEachProperty([&](auto&& property, uint64_t index) {
+                property.OnChanged(pSRClass);
+            });
+        }
+        return true;
+    }
+
+    bool SerializableChange::Undo() {
+        if (auto&& pSRClass = m_pSerializable.GetSRClass()) {
+            auto&& pDeserializer = m_pOld->CreateDeserializer();
+            auto&& pSerializable = dynamic_cast<SR_UTILS_NS::Serializable*>(pSRClass);
+            SR_UTILS_NS::Serialization::Load(*pDeserializer, *pSerializable, SR_UTILS_NS::COMMAND_DATA_ID);
+            pSRClass->GetMeta()->ForEachProperty([&](auto&& property, uint64_t index) {
+                property.OnChanged(pSRClass);
+            });
+        }
+        return true;
+    }
+
+    //! ----------------------------------------------------------------------------------------------------------------
+
     SceneObjectInstance::SceneObjectInstance(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& pSO)
         : Super(pEngine)
         , m_entityId(pSO->GetEntityId())

@@ -87,6 +87,9 @@ namespace SR_GRAPH_GUI_NS {
     )
 
     namespace Immediate {
+        using WindowFlags = SR_GRAPH_GUI_NS::WindowFlags;
+        using ChildWindowFlags = SR_GRAPH_GUI_NS::ChildWindowFlags;
+
         inline constexpr float_t DEFAULT_FONT_SIZE = 14.0f;
 
         SR_IMMEDIATE_GUI_DLL_API extern void NewFrame();

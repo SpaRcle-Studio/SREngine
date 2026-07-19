@@ -5,12 +5,6 @@
 #include <ImmediateGUI/GUI/NodeEditor.h>
 #include <ImmediateGUI/Impl/ImGUI.h>
 
-#if defined(SR_USE_IMGUI_NODE_EDITOR) && defined(SR_USE_IMGUI)
-    #include <imgui-node-editor/imgui_node_editor.h>
-#endif
-
-#include <ImNodeFlow.h>
-
 namespace SR_GRAPH_GUI_NS::Immediate::NodeEditor {
 #if defined(SR_USE_IMGUI_NODE_EDITOR) && defined(SR_USE_IMGUI)
     void* CreateEditor(const char* settingsFile) {
@@ -255,4 +249,60 @@ namespace SR_GRAPH_GUI_NS::Immediate::NodeEditor {
     void* GetNodeBackgroundDrawList(uintptr_t nodeId) { return nullptr; }
     void NavigateToContent() { }
 #endif
+}
+
+namespace SR_IMMEDIATE_GUI_NS {
+    NodeInstance::~NodeInstance() {
+        m_inputPins.delete_contents();
+        m_outputPins.delete_contents();
+    }
+
+    uint32_t NodeInstance::GetPinIndex(PinInstance *pPin) const {
+        for (uint32_t i = 0; i < m_inputPins.size(); ++i) {
+            if (m_inputPins[i] == pPin) {
+                return i;
+            }
+        }
+        for (uint32_t i = 0; i < m_outputPins.size(); ++i) {
+            if (m_outputPins[i] == pPin) {
+                return i;
+            }
+        }
+        return SR_ID_INVALID;
+    }
+
+    NodeEditorInstance::~NodeEditorInstance() {
+        m_nodes.delete_contents();
+        m_freeNodes.delete_contents();
+        m_freeInputPins.delete_contents();
+        m_freeOutputPins.delete_contents();
+        m_links.delete_contents();
+        m_freeLinks.delete_contents();
+    }
+
+    void NodeEditorInstance::OnInputPinRemoved(PinInstance* pPin) {
+        m_freeInputPins.emplace_back(pPin);
+    }
+
+    void NodeEditorInstance::OnOutputPinRemoved(PinInstance* pPin) {
+        m_freeOutputPins.emplace_back(pPin);
+    }
+
+    void PinInstance::SetName(SR_UTILS_NS::StringView name) {
+        if (name.empty()) {
+            m_name = "Pin";
+        }
+        else {
+            m_name = name;
+        }
+    }
+
+    bool PinInstance::IsConnectedTo(PinInstance* pPin) const {
+        for (auto&& pLink : m_links) {
+            if (pLink->GetInputPin() == pPin || pLink->GetOutputPin() == pPin) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

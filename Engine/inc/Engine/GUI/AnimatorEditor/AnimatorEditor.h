@@ -9,6 +9,8 @@
 
 #include <Graphics/GUI/NodeWidget.h>
 
+#include <ImmediateGUI/GUI/NodeEditor.h>
+
 #include <Utils/Resources/Asset.h>
 
 namespace SR_CORE_GUI_NS {
@@ -17,7 +19,6 @@ namespace SR_CORE_GUI_NS {
     class AnimatorEditor : public SR_GRAPH_GUI_NS::NodeWidget {
         SR_CLASS()
         using Super = SR_GRAPH_GUI_NS::NodeWidget;
-        using AnimatorPtr = SR_HTYPES_NS::SharedPtr<SR_ANIMATIONS_NS::Animator>;
         enum class Tab : uint8_t {
             Graph,
             StateMachine
@@ -39,52 +40,43 @@ namespace SR_CORE_GUI_NS {
     protected:
         void DrawNodeEditor() override;
         void DrawLeftPanel() override;
-        void DrawPopupMenu() override;
-        
+
         void TopPanelSave() override;
         void TopPanelOpen() override;
-        
-        void SyncGraphToVisualNodes();
-        void SyncVisualNodesToGraph();
+
+        void SyncLogicToVisual();
+        void SyncVisualToLogic();
 
         void DrawGraphEditor();
         
-        SR_GRAPH_GUI_NS::Node* CreateVisualNode(SR_ANIMATIONS_NS::AnimationGraphNode* pGraphNode);
-
     protected:
         void InitNodeTypes();
         void BuildNodeMenu(std::map<std::string, std::vector<SR_UTILS_NS::StringAtom>>& categories);
-        void DrawNodeMenuRecursive(const std::map<std::string, std::vector<SR_UTILS_NS::StringAtom>>& categories, const std::string& prefix);
+        void DrawNodeMenuRecursive(const std::map<std::string, std::vector<SR_UTILS_NS::StringAtom>>& categories, const std::string& prefix, SR_MATH_NS::FVector2 popupPos);
 
         SR_MATH_NS::FColor GetPinColor(SR_SRLM_NS::DataTypeClass pinType);
         
     protected:
-        AnimatorEditorContext m_context;
-        AnimatorEditorStateMachine m_editorStateMachine;
+        SR_HTYPES_NS::RawPointerHolder<SR_IMMEDIATE_GUI_NS::NodeEditorInstance> m_nodeGraphEditor;
+        std::unique_ptr<SR_UTILS_NS::ISerializer> m_serializer;
 
-        SR_UTILS_NS::Subscription m_doInspectEntitySubscription;
-        SR_UTILS_NS::Asset::Ptr m_asset;
-        SR_GRAPH_NS::Animations::AnimationGraphAsset::Ptr m_graphAsset;
-        SR_UTILS_NS::Path m_graphPath;
+        SR_ANIMATIONS_NS::AnimationGraph::Ptr m_pActiveGraph;
+        SR_HTYPES_NS::SharedPtr<SR_ANIMATIONS_NS::Animator> m_animator;
 
         SR_HTYPES_NS::SharedPtr<ObjectPropertyDrawer> m_propertyDrawer;
-
-        AnimatorPtr m_animator;
+        SR_UTILS_NS::Subscription m_doInspectEntitySubscription;
+        SR_UTILS_NS::String m_backgroundText;
 
         bool m_keepLiveContext = false;
+        bool m_live = false;
 
         Tab m_tab = Tab::Graph;
 
-        // Кэш доступных типов нод
         std::vector<SR_UTILS_NS::StringAtom> m_availableNodeTypes;
-
         std::string m_createNodeSearch;
+        std::map<std::string, std::vector<SR_UTILS_NS::StringAtom>> m_categories;
 
-        SR_MATH_NS::FVector2 m_popupMousePos;
 
-        // Live overlay cache (graph)
-        std::unordered_set<uint64_t> m_activeGraphNodes;
-        std::unordered_set<uintptr_t> m_activeGraphLinks;
     };
 }
 

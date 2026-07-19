@@ -84,6 +84,14 @@ namespace SR_GRAPH_GUI_NS {
 #endif
 
 
+#if defined(SR_USE_IMGUI_NODE_FLOW) && defined(SR_USE_IMGUI)
+    #include <ImNodeFlow.h>
+#endif
+
+#if defined(SR_USE_IMGUI_NODE_EDITOR) && defined(SR_USE_IMGUI)
+    #include <imgui-node-editor/imgui_node_editor.h>
+#endif
+
 namespace SR_GRAPH_GUI_NS::Immediate {
     ImColor FCToImC(const SR_MATH_NS::FColor& color);
     ImVec2 F2ToImV2(const SR_MATH_NS::FVector2& vec);

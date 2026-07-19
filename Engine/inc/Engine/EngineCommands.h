@@ -8,6 +8,7 @@
 #include <Engine/Engine.h>
 
 #include <Utils/Types/SafePointer.h>
+#include <Utils/Types/SharedPtrBaseHolder.h>
 #include <Utils/CommandManager/CmdManager.h>
 #include <Utils/ECS/EntityController.h>
 #include <Utils/ECS/GameObject.h>
@@ -15,6 +16,8 @@
 #include <Utils/World/Scene.h>
 #include <Utils/Serialization/SRASerialization.h>
 #include <Utils/Serialization/SerializableDataAccessor.h>
+
+#include <utility>
 
 namespace SR_UTILS_NS {
     class GameObject;
@@ -137,6 +140,56 @@ namespace SR_CORE_NS::Commands {
 
     private:
         SR_UTILS_NS::EntityId m_entityId = SR_ID_INVALID;
+        SR_UTILS_NS::ISerializer::UniquePtr m_pNew;
+        SR_UTILS_NS::ISerializer::UniquePtr m_pOld;
+
+    };
+
+    //! ----------------------------------------------------------------------------------------------------------------
+
+    class AssetChange : public IEngineReversibleCommand {
+        using Super = IEngineReversibleCommand;
+    public:
+        AssetChange(const EnginePtr& pEngine, const SR_UTILS_NS::Asset::Ptr& pAsset, SR_UTILS_NS::ISerializer::UniquePtr pOld)
+            : Super(pEngine)
+            , m_asset(pAsset)
+            , m_pOld(std::move(pOld))
+        {
+            m_pNew = SR_CORE_NS::Commands::CreateSerializer();
+            SR_UTILS_NS::Serialization::Save(*m_pNew, *pAsset, SR_UTILS_NS::COMMAND_DATA_ID);
+        }
+
+        bool Redo() override;
+        bool Undo() override;
+
+    private:
+        SR_UTILS_NS::Asset::Ptr m_asset;
+        SR_UTILS_NS::ISerializer::UniquePtr m_pNew;
+        SR_UTILS_NS::ISerializer::UniquePtr m_pOld;
+
+    };
+
+    //! ----------------------------------------------------------------------------------------------------------------
+
+    class SerializableChange : public IEngineReversibleCommand {
+        using Super = IEngineReversibleCommand;
+        using SerializablePtr = SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::SRClass>;
+    public:
+        SerializableChange(const EnginePtr& pEngine, SR_UTILS_NS::SharedPtrBaseHolder pSerializable, SR_UTILS_NS::ISerializer::UniquePtr pOld)
+            : Super(pEngine)
+            , m_pSerializable(std::move(pSerializable))
+            , m_pOld(std::move(pOld))
+        {
+            m_pNew = SR_CORE_NS::Commands::CreateSerializer();
+            auto&& pData = dynamic_cast<SR_UTILS_NS::Serializable*>(m_pSerializable.GetSRClass());
+            SR_UTILS_NS::Serialization::Save(*m_pNew, *pData, SR_UTILS_NS::COMMAND_DATA_ID);
+        }
+
+        bool Redo() override;
+        bool Undo() override;
+
+    private:
+        SR_UTILS_NS::SharedPtrBaseHolder m_pSerializable;
         SR_UTILS_NS::ISerializer::UniquePtr m_pNew;
         SR_UTILS_NS::ISerializer::UniquePtr m_pOld;
 
