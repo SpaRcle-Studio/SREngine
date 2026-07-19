@@ -411,7 +411,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         #elif defined(SR_ANDROID)
             case PlatformBackend::Android:
                 return ImGui_ImplAndroid_Init((ANativeWindow*)info.window);
-        #elif defined(SR_LINUX) && defined(SR_RENDER_USE_NATIVE_WAYLAND)
+        #elif defined(SR_LINUX) && defined(SR_COMMON_USE_NATIVE_WAYLAND)
             case PlatformBackend::WaylandCustom: {
                 EnsureWaylandInputSubscribed();
                 ImGuiIO& io = ImGui::GetIO();
@@ -447,7 +447,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
             case PlatformBackend::Android:
                 ImGui_ImplAndroid_Shutdown();
                 break;
-        #elif defined(SR_LINUX) && defined(SR_RENDER_USE_NATIVE_WAYLAND)
+        #elif defined(SR_LINUX) && defined(SR_COMMON_USE_NATIVE_WAYLAND)
             case PlatformBackend::WaylandCustom:
                 g_inputTextSubscription = SR_UTILS_NS::Subscription();
                 g_inputTextEvents.clear();
@@ -477,7 +477,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
             case PlatformBackend::Android:
                 ImGui_ImplAndroid_NewFrame();
                 break;
-        #elif defined(SR_LINUX) && defined(SR_RENDER_USE_NATIVE_WAYLAND)
+        #elif defined(SR_LINUX) && defined(SR_COMMON_USE_NATIVE_WAYLAND)
             case PlatformBackend::WaylandCustom: {
                 ImGuiIO& io = ImGui::GetIO();
                 io.DisplayFramebufferScale = ImVec2(info.framebufferScale.x, info.framebufferScale.y);
