@@ -8,10 +8,13 @@
 #include <Engine/GUI/AnimatorEditor/AnimatorEditorStateMachine.h>
 
 #include <Graphics/GUI/NodeWidget.h>
+#include <Graphics/Animations/AnimationGraphNode.h>
 
 #include <ImmediateGUI/GUI/NodeEditor.h>
 
 #include <Utils/Resources/Asset.h>
+#include <Utils/Serialization/Serializer.h>
+#include <Utils/Types/WeakPtr.h>
 
 namespace SR_CORE_GUI_NS {
     class ObjectPropertyDrawer;
@@ -39,7 +42,7 @@ namespace SR_CORE_GUI_NS {
 
     protected:
         void DrawNodeEditor() override;
-        void DrawLeftPanel() override;
+        void DrawInspectPanel();
 
         void TopPanelSave() override;
         void TopPanelOpen() override;
@@ -47,30 +50,31 @@ namespace SR_CORE_GUI_NS {
         void SyncLogicToVisual();
         void SyncVisualToLogic();
 
-        void DrawGraphEditor();
-        
-    protected:
-        void InitNodeTypes();
         void BuildNodeMenu(std::map<std::string, std::vector<SR_UTILS_NS::StringAtom>>& categories);
         void DrawNodeMenuRecursive(const std::map<std::string, std::vector<SR_UTILS_NS::StringAtom>>& categories, const std::string& prefix, SR_MATH_NS::FVector2 popupPos);
 
-        SR_MATH_NS::FColor GetPinColor(SR_SRLM_NS::DataTypeClass pinType);
-        
+        SR_NODISCARD bool IsStateMachineActive() const { return m_tab == Tab::StateMachine && m_pActiveStateMachine; }
+
     protected:
         SR_HTYPES_NS::RawPointerHolder<SR_IMMEDIATE_GUI_NS::NodeEditorInstance> m_nodeGraphEditor;
         std::unique_ptr<SR_UTILS_NS::ISerializer> m_serializer;
 
         SR_ANIMATIONS_NS::AnimationGraph::Ptr m_pActiveGraph;
         SR_HTYPES_NS::SharedPtr<SR_ANIMATIONS_NS::Animator> m_animator;
+        SR_HTYPES_NS::WeakPtr<SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine> m_pActiveStateMachine;
 
         SR_HTYPES_NS::SharedPtr<ObjectPropertyDrawer> m_propertyDrawer;
         SR_UTILS_NS::Subscription m_doInspectEntitySubscription;
+        SR_UTILS_NS::Subscription m_onCommandUndoSubscription;
+        SR_UTILS_NS::Subscription m_onCommandRedoSubscription;
         SR_UTILS_NS::String m_backgroundText;
 
+        bool m_skipInspect = false;
         bool m_keepLiveContext = false;
         bool m_live = false;
 
         Tab m_tab = Tab::Graph;
+        Tab m_nodeSearchTabCached = Tab::Graph;
 
         std::vector<SR_UTILS_NS::StringAtom> m_availableNodeTypes;
         std::string m_createNodeSearch;

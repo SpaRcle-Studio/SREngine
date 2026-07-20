@@ -271,6 +271,28 @@ namespace SR_IMMEDIATE_GUI_NS {
         return SR_ID_INVALID;
     }
 
+    LinkInstance* NodeInstance::GetInputLink(NodeInstance* pNode) const {
+        for (auto&& pPin : m_inputPins) {
+            for (auto&& pLink : pPin->GetLinks()) {
+                if (pLink->GetOutputPin()->GetNode() == pNode) {
+                    return pLink;
+                }
+            }
+        }
+        return nullptr;
+    }
+
+    LinkInstance* NodeInstance::GetOutputLink(NodeInstance* pNode) const {
+        for (auto&& pPin : m_outputPins) {
+            for (auto&& pLink : pPin->GetLinks()) {
+                if (pLink->GetInputPin()->GetNode() == pNode) {
+                    return pLink;
+                }
+            }
+        }
+        return nullptr;
+    }
+
     NodeEditorInstance::~NodeEditorInstance() {
         m_nodes.delete_contents();
         m_freeNodes.delete_contents();
@@ -297,12 +319,37 @@ namespace SR_IMMEDIATE_GUI_NS {
         }
     }
 
-    bool PinInstance::IsConnectedTo(PinInstance* pPin) const {
+    bool PinInstance::IsConnectedTo(PinInstance* pPin, std::optional<bool> isInput) const {
         for (auto&& pLink : m_links) {
+            if (isInput) {
+                if (pLink->GetInputPin() == pPin && *isInput) {
+                    return true;
+                }
+                if (pLink->GetOutputPin() == pPin && !*isInput) {
+                    return true;
+                }
+            }
             if (pLink->GetInputPin() == pPin || pLink->GetOutputPin() == pPin) {
                 return true;
             }
         }
         return false;
+    }
+
+    LinkInstance* PinInstance::FindLink(PinInstance* pPin, std::optional<bool> isInput) const {
+        for (auto&& pLink : m_links) {
+            if (isInput) {
+                if (pLink->GetInputPin() == pPin && *isInput) {
+                    return pLink;
+                }
+                if (pLink->GetOutputPin() == pPin && !*isInput) {
+                    return pLink;
+                }
+            }
+            if (pLink->GetInputPin() == pPin || pLink->GetOutputPin() == pPin) {
+                return pLink;
+            }
+        }
+        return nullptr;
     }
 }

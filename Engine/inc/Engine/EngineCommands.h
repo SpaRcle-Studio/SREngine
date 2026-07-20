@@ -17,8 +17,6 @@
 #include <Utils/Serialization/SRASerialization.h>
 #include <Utils/Serialization/SerializableDataAccessor.h>
 
-#include <utility>
-
 namespace SR_UTILS_NS {
     class GameObject;
     class SceneObject;

@@ -302,13 +302,73 @@ namespace SR_IMMEDIATE_GUI_NS::NodeFlowImpl {
 #if defined(SR_USE_IMGUI_NODE_EDITOR) && defined(SR_USE_IMGUI)
 
 namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
+    class PushNodeEditorContext {
+    public:
+        explicit PushNodeEditorContext(ax::NodeEditor::EditorContext* pContext) {
+            m_pPreviousContext = ax::NodeEditor::GetCurrentEditor();
+            ax::NodeEditor::SetCurrentEditor(pContext);
+        }
+        ~PushNodeEditorContext() {
+            ax::NodeEditor::SetCurrentEditor(m_pPreviousContext);
+        }
+    private:
+        ax::NodeEditor::EditorContext* m_pPreviousContext = nullptr;
+    };
+
     class LinkInstanceNEImpl : public LinkInstance {
     public:
         void Draw() override {
             auto&& pInputPin = GetInputPin();
             auto&& pOutputPin = GetOutputPin();
-            const ax::NodeEditor::LinkId linkId((uintptr_t)(this));
-            ax::NodeEditor::Link(linkId, ax::NodeEditor::PinId((uintptr_t)(pInputPin)), ax::NodeEditor::PinId((uintptr_t)(pOutputPin)));
+
+            auto&& pEditor = pInputPin->GetNode()->GetEditor();
+            if (pEditor->GetStyleType() == NodeEditorStyleType::StateMachine) {
+                auto&& pSrcNode = pOutputPin->GetNode();
+                auto&& pDstNode = pInputPin->GetNode();
+
+                const bool isDoubleWay = pSrcNode->GetInputLink(pDstNode) && pDstNode->GetInputLink(pSrcNode);
+                const bool isNeedOffset = isDoubleWay && pSrcNode->GetInputLink(pDstNode) > pDstNode->GetInputLink(pSrcNode);
+
+                auto&& pDrawList = ImGui::GetWindowDrawList();
+
+                auto&& srcRect = pSrcNode->GetNodeRect();
+                auto&& dstRect = pDstNode->GetNodeRect();
+
+                const SR_MATH_NS::FVector2 srcOffset = isDoubleWay ? (isNeedOffset ? SR_MATH_NS::FVector2(0.0f, 30.0f) : SR_MATH_NS::FVector2(0.0f, -30.f)) : SR_MATH_NS::FVector2();
+                const SR_MATH_NS::FVector2 dstOffset = isDoubleWay ? (isNeedOffset ? SR_MATH_NS::FVector2(0.0f, -30.0f) : SR_MATH_NS::FVector2(0.0f, 30.f)) : SR_MATH_NS::FVector2();
+
+                const SR_MATH_NS::FVector2 srcPoint = SR_MATH_NS::ClipToRectEdge(srcRect, srcRect.Center(), dstRect.Center() + srcOffset);
+                const SR_MATH_NS::FVector2 dstPoint = SR_MATH_NS::ClipToRectEdge(dstRect, dstRect.Center() + dstOffset, srcRect.Center());
+
+                const auto defaultColor = SR_COL32(200, 200, 200, 220); /// white
+                const auto activeColor = SR_COL32(60, 220, 110, 255); /// green
+                const auto selectedColor = SR_COL32(255, 165, 0, 255); /// orange
+
+                const bool isActive = false;
+                const bool isSelected = false;
+                const uint32_t col = isSelected ? selectedColor : (isActive ? activeColor : defaultColor);
+                const float thickness = isSelected || isActive ? 3.0f : 2.0f;
+
+                const SR_MATH_NS::FVector2 dir = dstPoint - srcPoint;
+                const float len = std::sqrt(dir.x * dir.x + dir.y * dir.y);
+                const SR_MATH_NS::FVector2 nd = len > 0.001f ? (dir / len) : SR_MATH_NS::FVector2(1.0f, 0.0f);
+                const SR_MATH_NS::FVector2 perp(-nd.y, nd.x);
+
+                const float arrowLen = 10.0f;
+                const float arrowWidth = 6.0f;
+                const SR_MATH_NS::FVector2 tip = dstPoint;
+                const SR_MATH_NS::FVector2 base = tip - nd * arrowLen;
+                const SR_MATH_NS::FVector2 left = base + perp * arrowWidth;
+                const SR_MATH_NS::FVector2 right = base - perp * arrowWidth;
+                SR_GRAPH_GUI_NS::Immediate::DrawListAddTriangleFilled(pDrawList, tip, left, right, col);
+
+                SR_MATH_NS::FVector2 lineDstArrowOffset = nd * arrowLen;
+                SR_GRAPH_GUI_NS::Immediate::DrawListAddLine(pDrawList, srcPoint, dstPoint - lineDstArrowOffset, col, thickness);
+            }
+            else {
+                const ax::NodeEditor::LinkId linkId((uintptr_t)(this));
+                ax::NodeEditor::Link(linkId, ax::NodeEditor::PinId((uintptr_t)(pInputPin)), ax::NodeEditor::PinId((uintptr_t)(pOutputPin)));
+            }
         }
     };
 
@@ -419,15 +479,19 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         void ResetEditor() override;
         void Zoom() override;
         void Draw() override;
+        void ClearSelection() override;
 
         SR_NODISCARD ax::NodeEditor::EditorContext* GetEditorContext() const { return m_editorContext; }
 
+        const SR_UTILS_NS::Vector<NodeInstance*>& GetSelectedNodes() const override;
         NodeInstance* CreateNode() override;
         void CreateLink(InputPinInstance* pInputPin, OutputPinInstance* pOutputPin) override;
         SR_NODISCARD InputPinInstance* CreateInputPin(SR_UTILS_NS::StringView name, PinTypeInfo type) override;
         SR_NODISCARD OutputPinInstance* CreateOutputPin(SR_UTILS_NS::StringView name,PinTypeInfo type) override;
 
     private:
+        mutable SR_UTILS_NS::Vector<NodeInstance*> m_selectedNodes;
+        mutable SR_UTILS_NS::Vector<ax::NodeEditor::NodeId> m_selectedNodeIds;
         ax::NodeEditor::EditorContext* m_editorContext = nullptr;
 
     };
@@ -437,7 +501,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
     void NodeEditorInstanceNEImpl::Draw() {
         SR_TRACY_ZONE;
 
-        ax::NodeEditor::SetCurrentEditor(m_editorContext);
+        PushNodeEditorContext pushContext(m_editorContext);
         ax::NodeEditor::Begin("Node Editor");
 
         SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(0.6f, 0.6f, 0.6f, 1.0f), "%s", m_backgroundText.c_str());
@@ -514,6 +578,14 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         }
         SR_IMMEDIATE_GUI_NS::NodeEditor::EndCreate();
 
+        if (SR_GRAPH_GUI_NS::Immediate::IsMouseDoubleClicked(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left)) {
+            if (auto&& selectedNodes = GetSelectedNodes(); selectedNodes.size() == 1) {
+                if (m_onNodeDoubleClickedCallback) {
+                    m_onNodeDoubleClickedCallback(*selectedNodes.front());
+                }
+            }
+        }
+
         if (m_onBackgroundPopupCallback) {
             SR_IMMEDIATE_GUI_NS::NodeEditor::SuspendNodeEditor();
             if (SR_IMMEDIATE_GUI_NS::NodeEditor::ShowBackgroundContextMenu()) {
@@ -527,13 +599,26 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
             SR_IMMEDIATE_GUI_NS::NodeEditor::ResumeNodeEditor();
         }
 
+        if (m_onNodePopupCallback) {
+            SR_IMMEDIATE_GUI_NS::NodeEditor::SuspendNodeEditor();
+            uintptr_t nodeId = 0;
+            if (SR_IMMEDIATE_GUI_NS::NodeEditor::ShowNodeContextMenu(&nodeId)) {
+                SR_GRAPH_GUI_NS::Immediate::OpenPopup("AnimatorEditor_SM_NodeContext");
+                m_popupMousePos = SR_GRAPH_GUI_NS::Immediate::GetMousePos();
+                m_pPopupNode = reinterpret_cast<NodeInstance*>(nodeId);
+            }
+            if (SR_GRAPH_GUI_NS::Immediate::BeginPopup("AnimatorEditor_SM_NodeContext")) {
+                m_onNodePopupCallback(*m_pPopupNode, m_popupMousePos);
+                SR_GRAPH_GUI_NS::Immediate::EndPopup();
+            }
+            SR_IMMEDIATE_GUI_NS::NodeEditor::ResumeNodeEditor();
+        }
+
         ax::NodeEditor::End();
 
         for (auto&& pNode : m_nodes) {
             static_cast<NodeInstanceNEImpl*>(pNode)->FetchPosition();
         }
-
-        ax::NodeEditor::SetCurrentEditor(nullptr);
     }
 
     void NodeEditorInstanceNEImpl::SetSize(const SR_MATH_NS::FVector2& size) {
@@ -541,9 +626,8 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
     }
 
     void NodeEditorInstanceNEImpl::Zoom() {
-        ax::NodeEditor::SetCurrentEditor(m_editorContext);
+        PushNodeEditorContext pushContext(m_editorContext);
         ax::NodeEditor::NavigateToContent();
-        ax::NodeEditor::SetCurrentEditor(nullptr);
     }
 
     NodeInstance* NodeEditorInstanceNEImpl::CreateNode() {
@@ -558,6 +642,11 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
             m_nodes.emplace_back(pNode);
         }
         return pNode;
+    }
+
+    void NodeEditorInstanceNEImpl::ClearSelection() {
+        PushNodeEditorContext pushContext(m_editorContext);
+        ax::NodeEditor::ClearSelection();
     }
 
     void NodeEditorInstanceNEImpl::ResetEditor() {
@@ -623,14 +712,30 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         pOutputPin->AddLink(m_links.back());
     }
 
+    const SR_UTILS_NS::Vector<NodeInstance*>& NodeEditorInstanceNEImpl::GetSelectedNodes() const {
+        SR_TRACY_ZONE;
+        PushNodeEditorContext pushContext(m_editorContext);
+        m_selectedNodes.clear();
+        m_selectedNodeIds.clear();
+        m_selectedNodeIds.resize(ax::NodeEditor::GetSelectedObjectCount());
+        int nodeCount = ax::NodeEditor::GetSelectedNodes(m_selectedNodeIds.data(), static_cast<int>(m_selectedNodeIds.size()));
+        m_selectedNodeIds.resize(nodeCount);
+        for (auto&& nodeId : m_selectedNodeIds) {
+            m_selectedNodes.emplace_back(reinterpret_cast<NodeInstance*>(nodeId.Get()));
+        }
+        return m_selectedNodes;
+    }
+
     /// ================================================================================================================
 
     float_t NodeInstanceNEImpl::DrawHeader() {
         ImDrawList* drawList = ImGui::GetWindowDrawList();
-        ImVec2 padding = ImVec2(6.8, 6.8);
-        ImVec2 pos = ImGui::GetCursorScreenPos() - padding;
-        ImVec2 textSize = ImGui::CalcTextSize(m_title.c_str());
-        float_t width = std::max(textSize.x + Padding * 2.f, MinWidth);
+
+        float fontSize = ImGui::GetFontSize();
+        const float_t referenceFontSize = 12.f;
+        const float_t scale = fontSize / referenceFontSize;
+        ImFont* font = ImGui::GetFont();
+        ImVec2 textSize = font->CalcTextSizeA(fontSize, FLT_MAX, 0.0f, m_title.c_str());
 
         SR_MATH_NS::FColor color = SR_MATH_NS::FColor::PrettyRGBFromString(m_title);
 
@@ -638,12 +743,43 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         const float_t whiteContrast = (1.05f) / (l + 0.05f);
         const float_t blackContrast = (l + 0.05f) / 0.05f;
         const bool useBlack = blackContrast > whiteContrast;
+        constexpr float_t paddingY = 6.8f;
 
         ImColor imColor = ImColor(color.r, color.g, color.b, color.a);
-        ImGui::Dummy(ImVec2(width, Height)); /// резервируем место
-        drawList->AddRectFilled(pos, ImVec2(pos.x + width + padding.x * 2.f, pos.y + Height), ImGui::ColorConvertFloat4ToU32(imColor), HeaderRounding, ImDrawFlags_RoundCornersTop);
-        drawList->AddText(ImVec2(pos.x + Padding + padding.x, pos.y + (Height - textSize.y) * 0.5f), useBlack ? IM_COL32_BLACK : IM_COL32_WHITE, m_title.c_str());
+        const float_t width = std::max(textSize.x + Padding * 2.f * scale, MinWidth);
 
+        if (GetEditor()->GetStyleType() == NodeEditorStyleType::StateMachine) {
+            auto&& pos = ImGui::GetCursorScreenPos() - ImVec2(0.f, paddingY);
+            ImGui::Dummy(ImVec2(width, MinContentHeight)); /// резервируем место
+            const float_t height = MinContentHeight + paddingY * 2.f;
+            const float_t rectPadding = 12.f;
+            drawList->AddRectFilled(
+                pos + ImVec2(rectPadding, 0.f),
+                ImVec2(pos.x + width - rectPadding, pos.y + height),
+                ImGui::ColorConvertFloat4ToU32(imColor), 0.f, ImDrawFlags_RoundCornersAll
+            );
+            drawList->AddText(ImVec2(pos.x + (width - textSize.x) * 0.5f, pos.y + (Height - textSize.y) * 0.5f), useBlack ? IM_COL32_BLACK : IM_COL32_WHITE, m_title.c_str());
+
+            /// progress bar
+            const float_t progressBarHeight = 12.f;
+            const ImVec2 progressBarPos = pos + ImVec2(rectPadding, 0.f) + ImVec2(0.f, height / 2.f - progressBarHeight / 2.f);
+            const ImVec2 progressBarSize = ImVec2(pos.x + width - rectPadding, pos.y + height / 2.f + progressBarHeight / 2.f);
+            const float_t progress = m_progress ? std::clamp(*m_progress, 0.f, 1.f) : 0.f;
+
+            drawList->AddRectFilled(progressBarPos, progressBarSize,
+                ImGui::ColorConvertFloat4ToU32(ImColor(0.1f, 0.1f, 0.1f, 0.4f)), 0.f, ImDrawFlags_RoundCornersAll
+            );
+            drawList->AddRectFilled(progressBarPos, progressBarSize - ImVec2((1.f - progress) * (progressBarSize.x - progressBarPos.x), 0.f),
+                ImGui::ColorConvertFloat4ToU32(ImColor(0.3f, 0.8f, 0.3f, 0.8f)), 0.f, ImDrawFlags_RoundCornersAll
+            );
+        }
+        else {
+            ImVec2 padding = ImVec2(6.8, paddingY);
+            ImVec2 pos = ImGui::GetCursorScreenPos() - padding;
+            ImGui::Dummy(ImVec2(width, Height)); /// резервируем место
+            drawList->AddRectFilled(pos, ImVec2(pos.x + width + padding.x * 2.f, pos.y + Height), ImGui::ColorConvertFloat4ToU32(imColor), HeaderRounding, ImDrawFlags_RoundCornersTop);
+            drawList->AddText(ImVec2(pos.x + (width - textSize.x) * 0.5f, pos.y + (Height - textSize.y) * 0.5f), useBlack ? IM_COL32_BLACK : IM_COL32_WHITE, m_title.c_str());
+        }
         return width;
     }
 
@@ -668,40 +804,59 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
     void NodeInstanceNEImpl::Draw() {
         SR_TRACY_ZONE;
 
-        ax::NodeEditor::BeginNode(ax::NodeEditor::NodeId(this));
-
-        const float_t width = DrawHeader();
-        const float_t outputPinMaxWidth = CalculatePinMaxWidth(false);
-        const float_t maxPins = std::max(m_inputPins.size(), m_outputPins.size());
-        const float_t height = std::max(MinContentHeight, maxPins * ImGui::GetFrameHeightWithSpacing() + Padding * 2.f);
-
-        ImGui::Spacing();
-
-        ImGui::BeginTable("pins", 2, ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_NoSavedSettings, ImVec2(width, height));
-
-        ImGui::TableNextRow();
-
-        ImGui::TableSetColumnIndex(0);
-        for (auto&& pPin : m_inputPins) {
-            pPin->Draw();
+        if (GetEditor()->GetStyleType() == NodeEditorStyleType::StateMachine) {
+            ax::NodeEditor::PushStyleVar(ax::NodeEditor::StyleVar_NodeRounding, 2.f);
+            ax::NodeEditor::BeginNode(ax::NodeEditor::NodeId(this));
+            DrawHeader();
+            ax::NodeEditor::EndNode();
+            ax::NodeEditor::PopStyleVar();
         }
+        else if (GetEditor()->GetStyleType() == NodeEditorStyleType::Graph) {
+            ax::NodeEditor::BeginNode(ax::NodeEditor::NodeId(this));
 
-        if (auto&& dummySize = ImVec2(width - PinIconWidth - outputPinMaxWidth - Padding * 2.f, 0); dummySize.x > 0.f) {
-            ImGui::Dummy(dummySize);
-        }
+            const float_t width = DrawHeader();
+            const float_t outputPinMaxWidth = CalculatePinMaxWidth(false);
+            const float_t maxPins = std::max(m_inputPins.size(), m_outputPins.size());
+            const float_t height = std::max(MinContentHeight, maxPins * ImGui::GetFrameHeightWithSpacing() + Padding * 2.f);
 
-        ImGui::TableSetColumnIndex(1);
+            ImGui::Spacing();
 
-        if (!m_outputPins.empty()) {
-            for (auto&& pPin : m_outputPins) {
+            ImGui::BeginTable("pins", 2, ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_NoSavedSettings, ImVec2(width, height));
+
+            ImGui::TableNextRow();
+
+            ImGui::TableSetColumnIndex(0);
+            for (auto&& pPin : m_inputPins) {
                 pPin->Draw();
             }
+
+            if (auto&& dummySize = ImVec2(width - PinIconWidth - outputPinMaxWidth - Padding * 2.f, 0); dummySize.x > 0.f) {
+                ImGui::Dummy(dummySize);
+            }
+
+            ImGui::TableSetColumnIndex(1);
+
+            if (!m_outputPins.empty()) {
+                for (auto&& pPin : m_outputPins) {
+                    pPin->Draw();
+                }
+            }
+
+            ImGui::EndTable();
+            ax::NodeEditor::EndNode();
         }
 
-        ImGui::EndTable();
-
-        ax::NodeEditor::EndNode();
         ax::NodeEditor::SetNodePosition(ax::NodeEditor::NodeId(this), F2ToImV2(m_position));
+
+        const auto nodeMin = SR_GRAPH_GUI_NS::Immediate::GetItemRectMin();
+        const auto nodeMax = SR_GRAPH_GUI_NS::Immediate::GetItemRectMax();
+
+        m_nodeRect = SR_MATH_NS::FRect(
+            nodeMin.x,
+            nodeMin.y,
+            nodeMax.x - nodeMin.x,
+            nodeMax.y - nodeMin.y
+        );
     }
 
     void NodeInstanceNEImpl::RemovePins() {

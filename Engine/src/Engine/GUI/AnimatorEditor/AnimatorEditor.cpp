@@ -3,19 +3,13 @@
 //
 
 #include <Engine/GUI/AnimatorEditor/AnimatorEditor.h>
-#include <Engine/GUI/Hierarchy.h>
 #include <Engine/GUI/EditorGUI.h>
-#include <Engine/Engine.h>
 #include <Engine/GUI/PropertyDrawers/ObjectPropertyDrawer.h>
 #include <Engine/GUI/PropertyDrawer.h>
 #include <Engine/EngineCommands.h>
 
 #include <Graphics/Animations/Animator.h>
 #include <Graphics/Animations/AnimationGraphNode.h>
-#include <Graphics/GUI/Node.h>
-#include <Graphics/GUI/Link.h>
-#include <Graphics/GUI/Pin.h>
-#include <Graphics/GUI/NodeBuilder.h>
 
 #include <ImmediateGUI/GUI/ImmediateGUI.h>
 #include <ImmediateGUI/GUI/NodeEditor.h>
@@ -37,13 +31,17 @@ namespace SR_CORE_GUI_NS {
 
     void AnimatorEditor::Init() {
         Super::Init();
-        InitNodeTypes();
 
         if (!m_propertyDrawer) {
             m_propertyDrawer = SRNew<SR_CORE_GUI_NS::ObjectPropertyDrawer>();
         }
 
-        m_doInspectEntitySubscription.Reset();
+        m_onCommandRedoSubscription = SR_UTILS_NS::Broadcaster::Instance().Subscribe(SR_UTILS_NS::Events::EVENT_ON_COMMAND_REDO_ID, [this](const SR_UTILS_NS::SubscriptionMessage& msg) {
+            m_skipInspect = true;
+        });
+        m_onCommandUndoSubscription = SR_UTILS_NS::Broadcaster::Instance().Subscribe(SR_UTILS_NS::Events::EVENT_ON_COMMAND_UNDO_ID, [this](const SR_UTILS_NS::SubscriptionMessage& msg) {
+            m_skipInspect = true;
+        });
         m_doInspectEntitySubscription = SR_UTILS_NS::Broadcaster::Instance().Subscribe(SR_UTILS_NS::Events::EVENT_DO_INSPECT_ENTITY_ID, [this](const SR_UTILS_NS::SubscriptionMessage& msg) {
             if (msg.GetStringAtom("ClassName") != SR_ANIMATIONS_NS::Animator::GetClassStaticName()) {
                 return;
@@ -94,6 +92,11 @@ namespace SR_CORE_GUI_NS {
         Open();
         Focus();
 
+        if (m_live && m_animator) {
+            m_pActiveGraph = m_animator->GetGraph();
+            return;
+        }
+
         auto&& loadPath = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
         if (auto&& pAsset = SR_UTILS_NS::Asset::Load<SR_GRAPH_NS::Animations::AnimationGraphAsset>(loadPath)) {
             m_pActiveGraph = new SR_GRAPH_NS::Animations::AnimationGraph();
@@ -110,17 +113,14 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_GUI_NS::Immediate::Separator();
         
-        // Разделяем окно на левую панель и редактор
         auto&& availableSize = SR_GRAPH_GUI_NS::Immediate::GetContentRegionAvail();
         
-        // Левая панель для свойств
-        SR_GRAPH_GUI_NS::Immediate::BeginChild("LeftPanel", SR_MATH_NS::FVector2(m_leftPaneWidth, availableSize.y));
-        DrawLeftPanel();
+        SR_GRAPH_GUI_NS::Immediate::BeginChild("InspectPanel", SR_MATH_NS::FVector2(m_leftPaneWidth, availableSize.y));
+        DrawInspectPanel();
         SR_GRAPH_GUI_NS::Immediate::EndChild();
         
         SR_GRAPH_GUI_NS::Immediate::SameLine();
         
-        // Редактор графа
         SR_GRAPH_GUI_NS::Immediate::BeginChild("NodeEditor", SR_MATH_NS::FVector2(availableSize.x - m_leftPaneWidth - 10, availableSize.y));
         DrawNodeEditor();
         SR_GRAPH_GUI_NS::Immediate::EndChild();
@@ -134,10 +134,14 @@ namespace SR_CORE_GUI_NS {
 
         if (SR_GRAPH_GUI_NS::Immediate::ButtonColoredText("Graph", isGraph ? SR_MATH_NS::FColor(0.25f, 0.7f, 1.0f, 1.0f) : SR_MATH_NS::FColor(0.35f, 0.35f, 0.35f, 1.0f), SR_MATH_NS::FVector2(lineHeight * 4.f, 0.f))) {
             m_tab = Tab::Graph;
+            m_nodeGraphEditor->ClearSelection();
+            m_nodeGraphEditor->ResetEditor();
         }
         SR_GRAPH_GUI_NS::Immediate::SameLine();
         if (SR_GRAPH_GUI_NS::Immediate::ButtonColoredText("State Machine", isStateMachine ? SR_MATH_NS::FColor(0.25f, 0.7f, 1.0f, 1.0f) : SR_MATH_NS::FColor(0.35f, 0.35f, 0.35f, 1.0f), SR_MATH_NS::FVector2(lineHeight * 7.f, 0.f))) {
             m_tab = Tab::StateMachine;
+            m_nodeGraphEditor->ClearSelection();
+            m_nodeGraphEditor->ResetEditor();
         }
 
         if (m_pActiveGraph && m_live) {
@@ -162,11 +166,20 @@ namespace SR_CORE_GUI_NS {
                 m_backgroundText = "Animator: ";
                 m_backgroundText += pAsset->GetResourcePath().View();
             }
-            SyncLogicToVisual();
-            m_nodeGraphEditor->SetBackgroundText(m_backgroundText);
-            m_nodeGraphEditor->SetSize(size);
-            m_nodeGraphEditor->Draw();
-            SyncVisualToLogic();
+            if (!IsStateMachineActive() && m_tab == Tab::StateMachine) {
+                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.0f, 0.25f, 0.25f, 1.0f), "State machine is not active!");
+            }
+            else {
+                SyncLogicToVisual();
+                m_nodeGraphEditor->SetStyleType(m_tab == Tab::Graph ?
+                    SR_IMMEDIATE_GUI_NS::NodeEditorStyleType::Graph :
+                    SR_IMMEDIATE_GUI_NS::NodeEditorStyleType::StateMachine
+                );
+                m_nodeGraphEditor->SetBackgroundText(m_backgroundText);
+                m_nodeGraphEditor->SetSize(size);
+                m_nodeGraphEditor->Draw();
+                SyncVisualToLogic();
+            }
             SR_IMMEDIATE_GUI_NS::EndChild();
         }
 
@@ -186,6 +199,14 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
+        m_nodeGraphEditor->SetNodePopupCallback([this](SR_IMMEDIATE_GUI_NS::NodeInstance& node, const SR_MATH_NS::FVector2& pos) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Fast forward")) {
+                if (auto&& pState = static_cast<SR_ANIMATIONS_NS::AnimationState*>(node.GetUserData())) {
+                    m_pActiveStateMachine.Lock()->GetMachine()->FastForwardState(pState);
+                }
+            }
+        });
+
         m_nodeGraphEditor->SetSomethingChangedCallback([this]() {
             if (!m_serializer) {
                 m_serializer = SR_CORE_NS::Commands::CreateSerializer();
@@ -193,9 +214,28 @@ namespace SR_CORE_GUI_NS {
             }
         });
 
+        m_nodeGraphEditor->SetNodeDoubleClickedCallback([this](SR_IMMEDIATE_GUI_NS::NodeInstance& node) {
+            if (!IsStateMachineActive()) {
+                auto&& pGraphNode = static_cast<SR_ANIMATIONS_NS::AnimationGraphNode*>(node.GetUserData());
+                if (auto&& pSMNode = dynamic_cast<SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine*>(pGraphNode)) {
+                    m_tab = Tab::StateMachine;
+                    m_pActiveStateMachine = pSMNode;
+                    m_nodeGraphEditor->ResetEditor();
+                    m_nodeGraphEditor->ClearSelection();
+                }
+            }
+        });
+
         m_nodeGraphEditor->SetNodeDeletedCallback([this](SR_IMMEDIATE_GUI_NS::NodeInstance& node) {
-            if (auto&& pNodeData = (SR_ANIMATIONS_NS::AnimationGraphNode*)node.GetUserData()) {
-                m_pActiveGraph->RemoveNode(pNodeData->GetIndex());
+            if (IsStateMachineActive()) {
+                if (auto&& pState = static_cast<SR_ANIMATIONS_NS::AnimationState*>(node.GetUserData())) {
+                    m_pActiveStateMachine.Lock()->GetMachine()->RemoveState(pState);
+                }
+            }
+            else {
+                if (auto&& pNodeData = (SR_ANIMATIONS_NS::AnimationGraphNode*)node.GetUserData()) {
+                    m_pActiveGraph->RemoveNode(pNodeData->GetIndex());
+                }
             }
         });
 
@@ -227,35 +267,60 @@ namespace SR_CORE_GUI_NS {
             }
         });
 
-        m_pActiveGraph->ForEachNode([this](SR_ANIMATIONS_NS::AnimationGraphNode& node) {
-            if (auto&& pNode = m_nodeGraphEditor->CreateNode()) {
-                node.SetUserData(pNode);
-                pNode->SetUserData(&node);
-                pNode->SetPosition(node->GetEditorPosition());
-                pNode->SetTitle(node.GetMeta()->GetDisplayName());
-                for (auto&& inputLink : node->GetInputLinks()) {
-                    pNode->AddInputPin(inputLink.name, SR_IMMEDIATE_GUI_NS::PinTypeInfo{SR_UTILS_NS::Reflection::TypeInfo(), true});
+        if (IsStateMachineActive()) {
+            m_pActiveStateMachine.Lock()->GetMachine()->ForEachState([this](SR_ANIMATIONS_NS::AnimationState& state) {
+                if (auto&& pNode = m_nodeGraphEditor->CreateNode()) {
+                    state.SetUserData(pNode);
+                    pNode->SetUserData(&state);
+                    pNode->SetPosition(state.GetEditorPosition());
+                    pNode->SetTitle(state.GetStateName());
+                    pNode->SetProgress(state.GetProgress());
+                    pNode->AddInputPin("In", SR_IMMEDIATE_GUI_NS::PinTypeInfo{SR_UTILS_NS::Reflection::TypeInfo(), true});
+                    pNode->AddOutputPin("Out", SR_IMMEDIATE_GUI_NS::PinTypeInfo{SR_UTILS_NS::Reflection::TypeInfo(), true});
                 }
-                for (auto&& outputLink : node->GetOutputLinks()) {
-                    pNode->AddOutputPin(outputLink.name, SR_IMMEDIATE_GUI_NS::PinTypeInfo{SR_UTILS_NS::Reflection::TypeInfo(), true});
-                }
-            }
-        });
-
-        m_pActiveGraph->ForEachNode([this](SR_ANIMATIONS_NS::AnimationGraphNode& node) {
-            if (auto&& pNode = node->GetUserData<SR_IMMEDIATE_GUI_NS::NodeInstance>()) {
-                uint32_t inputIndex = 0;
-                for (auto&& inputLink : node->GetInputLinks()) {
-                    inputIndex++;
-                    if (inputLink.IsConnected()) {
-                        auto&& pTargetNode = m_pActiveGraph->GetNode(inputLink.GetTargetNodeIndex());
-                        if (auto&& pTargetNodeInstance = pTargetNode->GetUserData<SR_IMMEDIATE_GUI_NS::NodeInstance>()) {
-                            pTargetNodeInstance->LinkTo(pNode, inputLink.GetTargetPinIndex(), inputIndex - 1);
+            });
+            m_pActiveStateMachine.Lock()->GetMachine()->ForEachState([this](SR_ANIMATIONS_NS::AnimationState& state) {
+                if (auto&& pNode = state.GetUserData<SR_IMMEDIATE_GUI_NS::NodeInstance>()) {
+                    for (auto&& pTransition : state.GetTransitions()) {
+                        auto&& pTargetState = m_pActiveStateMachine.Lock()->GetMachine()->GetState(pTransition->GetTargetIndex());
+                        if (auto&& pTargetNodeInstance = pTargetState->GetUserData<SR_IMMEDIATE_GUI_NS::NodeInstance>()) {
+                            pNode->LinkTo(pTargetNodeInstance, 0, 0);
                         }
                     }
                 }
-            }
-        });
+            });
+        }
+        else {
+            m_pActiveGraph->ForEachNode([this](SR_ANIMATIONS_NS::AnimationGraphNode& node) {
+                if (auto&& pNode = m_nodeGraphEditor->CreateNode()) {
+                    node.SetUserData(pNode);
+                    pNode->SetUserData(&node);
+                    pNode->SetPosition(node->GetEditorPosition());
+                    pNode->SetTitle(node.GetMeta()->GetDisplayName());
+                    for (auto&& inputLink : node->GetInputLinks()) {
+                        pNode->AddInputPin(inputLink.name, SR_IMMEDIATE_GUI_NS::PinTypeInfo{SR_UTILS_NS::Reflection::TypeInfo(), true});
+                    }
+                    for (auto&& outputLink : node->GetOutputLinks()) {
+                        pNode->AddOutputPin(outputLink.name, SR_IMMEDIATE_GUI_NS::PinTypeInfo{SR_UTILS_NS::Reflection::TypeInfo(), true});
+                    }
+                }
+            });
+
+            m_pActiveGraph->ForEachNode([this](SR_ANIMATIONS_NS::AnimationGraphNode& node) {
+                if (auto&& pNode = node->GetUserData<SR_IMMEDIATE_GUI_NS::NodeInstance>()) {
+                    uint32_t inputIndex = 0;
+                    for (auto&& inputLink : node->GetInputLinks()) {
+                        inputIndex++;
+                        if (inputLink.IsConnected()) {
+                            auto&& pTargetNode = m_pActiveGraph->GetNode(inputLink.GetTargetNodeIndex());
+                            if (auto&& pTargetNodeInstance = pTargetNode->GetUserData<SR_IMMEDIATE_GUI_NS::NodeInstance>()) {
+                                pTargetNodeInstance->LinkTo(pNode, inputLink.GetTargetPinIndex(), inputIndex - 1);
+                            }
+                        }
+                    }
+                }
+            });
+        }
     }
 
     void AnimatorEditor::SyncVisualToLogic() {
@@ -265,37 +330,29 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        m_pActiveGraph->ForEachNode([](SR_ANIMATIONS_NS::AnimationGraphNode& node) {
-            if (auto&& pNode = node->GetUserData<SR_IMMEDIATE_GUI_NS::NodeInstance>()) {
-                node->SetEditorPosition(pNode->GetPosition());
-            }
-        });
+        if (IsStateMachineActive()) {
+            m_pActiveStateMachine.Lock()->GetMachine()->ForEachState([](SR_ANIMATIONS_NS::AnimationState& state) {
+                if (auto&& pNode = state->GetUserData<SR_IMMEDIATE_GUI_NS::NodeInstance>()) {
+                    state->SetEditorPosition(pNode->GetPosition());
+                }
+            });
+        }
+        else {
+            m_pActiveGraph->ForEachNode([](SR_ANIMATIONS_NS::AnimationGraphNode& node) {
+                if (auto&& pNode = node->GetUserData<SR_IMMEDIATE_GUI_NS::NodeInstance>()) {
+                    node->SetEditorPosition(pNode->GetPosition());
+                }
+            });
+        }
     }
 
-    void AnimatorEditor::DrawGraphEditor() {
-        //// Даблклик по ноде стейт-машины открывает вкладку State Machine
-        //if (SR_GRAPH_GUI_NS::Immediate::IsMouseDoubleClicked(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left)) {
-        //    const int selected = SR_IMMEDIATE_GUI_NS::NodeEditor::GetSelectedNodes(nullptr, 0);
-        //    if (selected > 0) {
-        //        std::vector<uintptr_t> nodeIds(selected);
-        //        SR_IMMEDIATE_GUI_NS::NodeEditor::GetSelectedNodes(nodeIds.data(), selected);
-//
-        //        if (!nodeIds.empty()) {
-        //            if (auto&& it = m_nodes.find(nodeIds[0]); it != m_nodes.end()) {
-        //                auto&& pGraphNode = it->second->GetUserData<SR_ANIMATIONS_NS::AnimationGraphNode>();
-        //                if (auto&& pSMNode = dynamic_cast<SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine*>(pGraphNode)) {
-        //                    m_context.openedStateMachineNodeIndex = pSMNode->GetIndex();
-        //                    m_tab = Tab::StateMachine;
-        //                    m_context.openStateMachineRequested = true; // синхронизацию делаем уже в DrawStateMachineEditor()
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
-    }
-
-    void AnimatorEditor::DrawLeftPanel() {
+    void AnimatorEditor::DrawInspectPanel() {
         if (!m_pActiveGraph) {
+            return;
+        }
+
+        if (m_skipInspect) {
+            m_skipInspect = false;
             return;
         }
 
@@ -308,34 +365,15 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::SRClass* pSelectedObject = nullptr;
 
-        //void* pEditor = (m_tab == Tab::Graph) ? m_editor : m_context.pStateMachineEditor;
-        //if (pEditor) {
-        //    SR_IMMEDIATE_GUI_NS::NodeEditor::SetCurrentEditor(pEditor);
-
-        //    const int selectedNodes = SR_IMMEDIATE_GUI_NS::NodeEditor::GetSelectedNodes(nullptr, 0);
-
-        //    if (selectedNodes > 0) {
-        //        m_editorStateMachine.ResetSelectedLink();
-        //        std::vector<uintptr_t> nodeIds(selectedNodes);
-        //        SR_IMMEDIATE_GUI_NS::NodeEditor::GetSelectedNodes(nodeIds.data(), selectedNodes);
-        //        if (nodeIds.size() == 1) {
-        //            const uintptr_t nodeId = nodeIds[0];
-        //            if (m_tab == Tab::Graph) {
-        //                if (auto&& it = m_nodes.find(nodeId); it != m_nodes.end()) {
-        //                    pSelectedObject = it->second->GetUserData<SR_ANIMATIONS_NS::AnimationGraphNode>();
-        //                }
-        //            }
-        //            else {
-        //                pSelectedObject = m_editorStateMachine.GetSelectedNode(nodeId);
-        //            }
-        //        }
-        //    }
-        //    else if (m_tab == Tab::StateMachine) {
-        //        pSelectedObject = m_editorStateMachine.GetSelectedLink();
-        //    }
-
-        //    SR_IMMEDIATE_GUI_NS::NodeEditor::SetCurrentEditor(nullptr);
-        //}
+        auto&& selectedNodes = m_nodeGraphEditor->GetSelectedNodes();
+        if (selectedNodes.size() == 1) {
+            if (IsStateMachineActive()) {
+                pSelectedObject = static_cast<SR_ANIMATIONS_NS::AnimationState*>(selectedNodes.front()->GetUserData());
+            }
+            else {
+                pSelectedObject = static_cast<SR_ANIMATIONS_NS::AnimationGraphNode*>(selectedNodes.front()->GetUserData());
+            }
+        }
 
         if (!pSelectedObject) {
             if (m_tab == Tab::Graph) {
@@ -364,27 +402,41 @@ namespace SR_CORE_GUI_NS {
         context.openedByDefault = true;
         context.pOwner = pSelectedObject;
         context.pUID = pSelectedObject;
+        context.onBeforeChangeCallback = [this](bool drag) {
+            if (!m_serializer) {
+                m_serializer = SR_CORE_NS::Commands::CreateSerializer();
+                SR_UTILS_NS::Serialization::Save(*m_serializer, *m_pActiveGraph, SR_UTILS_NS::COMMAND_DATA_ID);
+            }
+        };
         m_propertyDrawer->Draw(context);
     }
 
-    void AnimatorEditor::InitNodeTypes() {
-        // Получаем все классы, наследующиеся от AnimationGraphNode
-        m_availableNodeTypes = SR_UTILS_NS::Factory::Instance().GetInheritances(
-            SR_ANIMATIONS_NS::AnimationGraphNode::GetClassStaticName()
-        );
-
-        // Фильтруем абстрактные и скрытые классы
-        std::erase_if(m_availableNodeTypes, [](auto&& name) {
-            auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(name);
-            if (!pMeta) {
-                return true;
-            }
-            return pMeta->IsAbstract() || pMeta->IsHidden();
-        });
-    }
-
     void AnimatorEditor::BuildNodeMenu(std::map<std::string, std::vector<SR_UTILS_NS::StringAtom>>& categories) {
+        SR_TRACY_ZONE;
         categories.clear();
+
+        if (m_nodeSearchTabCached != m_tab) {
+            m_nodeSearchTabCached = m_tab;
+            m_createNodeSearch.clear();
+            m_availableNodeTypes.clear();
+        }
+
+        if (m_availableNodeTypes.empty()) {
+            m_availableNodeTypes = SR_UTILS_NS::Factory::Instance().GetInheritances(
+                m_tab == Tab::Graph ?
+                SR_ANIMATIONS_NS::AnimationGraphNode::GetClassStaticName() :
+                SR_ANIMATIONS_NS::AnimationState::GetClassStaticName()
+            );
+
+            /// Фильтруем абстрактные и скрытые классы
+            std::erase_if(m_availableNodeTypes, [](auto&& name) {
+                auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(name);
+                if (!pMeta) {
+                    return true;
+                }
+                return pMeta->IsAbstract() || pMeta->IsHidden();
+            });
+        }
 
         for (auto&& nodeTypeName : m_availableNodeTypes) {
             auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(nodeTypeName);
@@ -450,9 +502,18 @@ namespace SR_CORE_GUI_NS {
             }
 
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem(menuName.c_str())) {
-                if (auto&& pNode = SR_UTILS_NS::Factory::Instance().Create<SR_ANIMATIONS_NS::AnimationGraphNode>(nodeTypeName)) {
-                    auto&& pGraphNode = m_pActiveGraph->AddNode(pNode.Get());
-                    pGraphNode->SetEditorPosition(SR_IMMEDIATE_GUI_NS::NodeEditor::ScreenToCanvas(popupPos));
+                if (IsStateMachineActive()) {
+                    auto&& pSM = m_pActiveStateMachine.Lock();
+                    if (auto&& pState = SR_UTILS_NS::Factory::Instance().Create<SR_ANIMATIONS_NS::AnimationState>(nodeTypeName)) {
+                        pSM->GetMachine()->AddState(pState.Get());
+                        pState->SetEditorPosition(SR_IMMEDIATE_GUI_NS::NodeEditor::ScreenToCanvas(popupPos));
+                    }
+                }
+                else {
+                    if (auto&& pNode = SR_UTILS_NS::Factory::Instance().Create<SR_ANIMATIONS_NS::AnimationGraphNode>(nodeTypeName)) {
+                        auto&& pGraphNode = m_pActiveGraph->AddNode(pNode.Get());
+                        pGraphNode->SetEditorPosition(SR_IMMEDIATE_GUI_NS::NodeEditor::ScreenToCanvas(popupPos));
+                    }
                 }
             }
         }
@@ -500,37 +561,6 @@ namespace SR_CORE_GUI_NS {
         }
 
         Inspect(path);
-    }
-
-    SR_MATH_NS::FColor AnimatorEditor::GetPinColor(SR_SRLM_NS::DataTypeClass pinType) {
-        // Цвета пинов на основе типа (аналогично примеру)
-        switch (pinType) {
-            case SR_SRLM_NS::DataTypeClass::Flow:
-                return SR_MATH_NS::FColor(1.0f, 1.0f, 1.0f, 1.0f); // Белый
-            case SR_SRLM_NS::DataTypeClass::Bool:
-                return SR_MATH_NS::FColor(0.86f, 0.19f, 0.19f, 1.0f); // Красный
-            case SR_SRLM_NS::DataTypeClass::Int8:
-            case SR_SRLM_NS::DataTypeClass::Int16:
-            case SR_SRLM_NS::DataTypeClass::Int32:
-            case SR_SRLM_NS::DataTypeClass::Int64:
-            case SR_SRLM_NS::DataTypeClass::UInt8:
-            case SR_SRLM_NS::DataTypeClass::UInt16:
-            case SR_SRLM_NS::DataTypeClass::UInt32:
-            case SR_SRLM_NS::DataTypeClass::UInt64:
-                return SR_MATH_NS::FColor(0.27f, 0.79f, 0.61f, 1.0f); // Зеленый
-            case SR_SRLM_NS::DataTypeClass::Float:
-                return SR_MATH_NS::FColor(0.58f, 0.89f, 0.29f, 1.0f); // Светло-зеленый
-            case SR_SRLM_NS::DataTypeClass::String:
-                return SR_MATH_NS::FColor(0.49f, 0.08f, 0.60f, 1.0f); // Фиолетовый
-            case SR_SRLM_NS::DataTypeClass::Struct:
-                return SR_MATH_NS::FColor(0.20f, 0.59f, 0.84f, 1.0f); // Синий
-            case SR_SRLM_NS::DataTypeClass::Enum:
-                return SR_MATH_NS::FColor(1.0f, 0.19f, 0.19f, 1.0f); // Красный
-            case SR_SRLM_NS::DataTypeClass::Array:
-                return SR_MATH_NS::FColor(0.85f, 0.0f, 0.72f, 1.0f); // Розовый
-            default:
-                return SR_MATH_NS::FColor(0.4f, 0.7f, 1.0f, 1.0f); // Голубой по умолчанию
-        }
     }
 
     void AnimatorEditor::OnOpen() {

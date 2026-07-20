@@ -48,12 +48,19 @@ namespace SR_GRAPH_GUI_NS::Immediate {
 
     };
 
+    enum class NodeEditorStyleType : uint8_t {
+        Graph,
+        StateMachine
+    };
+
     class NodeEditorInstance {
         using OnNodeDeletedCallback = SR_HTYPES_NS::Function<void(NodeInstance&)>;
         using OnLinkDeletedCallback = SR_HTYPES_NS::Function<void(LinkInstance&)>;
         using OnLinkCreatedCallback = SR_HTYPES_NS::Function<void(LinkInstance&)>;
         using OnSomethingChangedCallback = SR_HTYPES_NS::Function<void()>;
         using OnBackgroundPopupCallback = SR_HTYPES_NS::Function<void(SR_MATH_NS::FVector2)>;
+        using OnNodeDoubleClickedCallback = SR_HTYPES_NS::Function<void(NodeInstance&)>;
+        using OnNodePopupCallback = SR_HTYPES_NS::Function<void(NodeInstance&, SR_MATH_NS::FVector2)>;
     public:
         static NodeEditorInstance* Create();
 
@@ -66,9 +73,11 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         virtual void SetSize(const SR_MATH_NS::FVector2& size) = 0;
         virtual void SetBackgroundText(SR_UTILS_NS::StringView text) { m_backgroundText = text; }
         virtual void ResetEditor() = 0;
+        virtual void ClearSelection() = 0;
 
         SR_NODISCARD virtual InputPinInstance* CreateInputPin(SR_UTILS_NS::StringView name, PinTypeInfo type) = 0;
         SR_NODISCARD virtual OutputPinInstance* CreateOutputPin(SR_UTILS_NS::StringView name, PinTypeInfo type) = 0;
+        SR_NODISCARD virtual const SR_UTILS_NS::Vector<NodeInstance*>& GetSelectedNodes() const = 0;
 
         virtual void OnInputPinRemoved(PinInstance* pPin);
         virtual void OnOutputPinRemoved(PinInstance* pPin);
@@ -78,10 +87,16 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         void SetSomethingChangedCallback(OnSomethingChangedCallback callback) { m_onSomethingChangedCallback = std::move(callback); }
         void SetLinkCreatedCallback(OnLinkCreatedCallback callback) { m_onLinkCreatedCallback = std::move(callback); }
         void SetBackgroundPopupCallback(OnBackgroundPopupCallback callback) { m_onBackgroundPopupCallback = std::move(callback); }
+        void SetNodeDoubleClickedCallback(OnNodeDoubleClickedCallback callback) { m_onNodeDoubleClickedCallback = std::move(callback); }
+        void SetNodePopupCallback(OnNodePopupCallback callback) { m_onNodePopupCallback = std::move(callback); }
+        void SetStyleType(NodeEditorStyleType styleType) { m_styleType = styleType; }
 
         SR_NODISCARD const OnSomethingChangedCallback& GetSomethingChangedCallback() const { return m_onSomethingChangedCallback; }
+        SR_NODISCARD NodeEditorStyleType GetStyleType() const { return m_styleType; }
 
     protected:
+        OnNodePopupCallback m_onNodePopupCallback;
+        OnNodeDoubleClickedCallback m_onNodeDoubleClickedCallback;
         OnSomethingChangedCallback m_onSomethingChangedCallback;
         OnNodeDeletedCallback m_onNodeDeletedCallback;
         OnLinkDeletedCallback m_onLinkDeletedCallback;
@@ -95,6 +110,8 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         SR_UTILS_NS::Vector<PinInstance*> m_freeOutputPins;
         SR_MATH_NS::FVector2 m_popupMousePos;
         SR_UTILS_NS::String m_backgroundText;
+        NodeEditorStyleType m_styleType = NodeEditorStyleType::Graph;
+        NodeInstance* m_pPopupNode = nullptr;
 
     };
 
@@ -117,19 +134,26 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         virtual void LinkTo(NodeInstance* pTargetNode, uint32_t sourcePin, uint32_t targetPin) { }
         virtual void SetUserData(void* pUserData) { m_pUserData = pUserData; }
 
+        void SetProgress(std::optional<float_t> progress) { m_progress = progress; }
+
         SR_NODISCARD uint32_t GetPinIndex(PinInstance* pPin) const;
         SR_NODISCARD virtual SR_MATH_NS::FVector2 GetPosition() const { return SR_MATH_NS::FVector2(); }
         SR_NODISCARD NodeEditorInstance* GetEditor() const { return m_pEditor; }
         SR_NODISCARD void* GetUserData() const { return m_pUserData; }
+        SR_NODISCARD const SR_MATH_NS::FRect& GetNodeRect() const { return m_nodeRect; }
+        SR_NODISCARD LinkInstance* GetInputLink(NodeInstance* pNode) const;
+        SR_NODISCARD LinkInstance* GetOutputLink(NodeInstance* pNode) const;
 
         SR_NODISCARD const SR_UTILS_NS::Vector<InputPin>& GetInputs() const { return m_inputPins; }
         SR_NODISCARD const SR_UTILS_NS::Vector<OutputPin>& GetOutputs() const { return m_outputPins; }
 
     protected:
         void* m_pUserData = nullptr;
+        std::optional<float_t> m_progress;
         NodeEditorInstance* m_pEditor = nullptr;
         SR_UTILS_NS::Vector<InputPin> m_inputPins;
         SR_UTILS_NS::Vector<OutputPin> m_outputPins;
+        SR_MATH_NS::FRect m_nodeRect;
 
     };
 
@@ -149,7 +173,9 @@ namespace SR_GRAPH_GUI_NS::Immediate {
 
         SR_NODISCARD bool IsLinked() const { return !m_links.empty(); }
         SR_NODISCARD virtual bool IsInput() const = 0;
-        SR_NODISCARD bool IsConnectedTo(PinInstance* pPin) const;
+        SR_NODISCARD bool IsConnectedTo(PinInstance* pPin, std::optional<bool> isInput = std::nullopt) const;
+        SR_NODISCARD LinkInstance* FindLink(PinInstance* pPin, std::optional<bool> isInput = std::nullopt) const;
+        SR_NODISCARD const SR_UTILS_NS::Vector<LinkInstance*>& GetLinks() const { return m_links; }
 
         void ClearLinks() { m_links.clear(); }
         void AddLink(LinkInstance* pLink) { m_links.emplace_back(pLink); }
