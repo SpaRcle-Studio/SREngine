@@ -1510,7 +1510,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     }
 
     bool BeginPlot(const char* title_id, const SR_MATH_NS::FVector2& size, PlotFlags flags) {
-        ImPlot::BeginPlot(title_id, F2ToImV2(SR_MATH_NS::FVector2(size)), static_cast<ImPlotFlags>(flags));
+        return ImPlot::BeginPlot(title_id, F2ToImV2(SR_MATH_NS::FVector2(size)), static_cast<ImPlotFlags>(flags));
     }
 
     void EndPlot() {
