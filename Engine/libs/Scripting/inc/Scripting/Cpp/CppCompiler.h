@@ -65,6 +65,7 @@ namespace SR_SCRIPTING_NS {
         bool InstallMinGW();
         bool FindEngineLibs();
         bool FindWindowsCompiler();
+        bool FindWindowsSDK();
 
         bool ValidateCompilerAndOS();
         void SaveSettings();
@@ -72,6 +73,9 @@ namespace SR_SCRIPTING_NS {
         SR_NODISCARD SR_UTILS_NS::Path GetBuiltInMSVCCompilerPath() const;
 
     private:
+        SR_UTILS_NS::Path m_windowsSDKPath;
+        SR_UTILS_NS::Path m_windowsSDKLibPath;
+        SR_UTILS_NS::String m_windowsSDKVersion;
         CppCompilerSettings m_settings;
         std::vector<SR_UTILS_NS::Path> m_engineLibs;
         SR_UTILS_NS::Path m_cachePath;

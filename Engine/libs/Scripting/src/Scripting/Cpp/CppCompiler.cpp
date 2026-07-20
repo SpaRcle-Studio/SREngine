@@ -34,10 +34,62 @@ namespace SR_SCRIPTING_NS {
         }
     }
 
+    bool CppCompiler::FindWindowsSDK() {
+        if (SR_PLATFORM_NS::GetType() != SR_UTILS_NS::PlatformType::Windows) {
+            return true;
+        }
+
+    #ifdef SR_WINDOWS_SDK_DIR
+        m_windowsSDKPath = SR_WINDOWS_SDK_DIR;
+        m_windowsSDKVersion = SR_WINDOWS_SDK_VERSION;
+    #endif
+
+        SR_LOG("CppCompiler::Init() : builtin windows sdk version: {}", m_windowsSDKPath);
+        SR_LOG("CppCompiler::Init() : builtin windows sdk dir: {}", m_windowsSDKVersion);
+
+        if (!m_windowsSDKPath.IsDir()) {
+            SR_ERROR("CppCompiler::Init() : builtin windows sdk dir is not a directory: {}", m_windowsSDKPath);
+            return false;
+        }
+
+        SR_UTILS_NS::Vector<SR_UTILS_NS::Path> folders;
+        m_windowsSDKPath.Concat("Lib").GetFolders(folders);
+        if (folders.empty()) {
+            SR_ERROR("CppCompiler::Init() : builtin windows sdk dir is empty: {}", m_windowsSDKPath);
+            return false;
+        }
+
+        m_windowsSDKLibPath = m_windowsSDKPath.Concat("Lib").Concat(m_windowsSDKVersion);
+
+        /// проверяем есть ли в папке um/x64 файл synchronization.lib
+        bool isChanged = false;
+        while (!SR_UTILS_NS::FileSystem::IsFileExists(m_windowsSDKLibPath.Concat("um/x64/synchronization.lib"))) {
+            if (folders.empty()) {
+                SR_ERROR("CppCompiler::Init() : you have no valid windows sdk installed! It's not contains synchronization.lib file!");
+                return false;
+            }
+            m_windowsSDKLibPath = folders.back();
+            folders.pop_back();
+            isChanged = true;
+        }
+
+        if (isChanged) {
+            m_windowsSDKVersion = m_windowsSDKLibPath.GetBaseNameView();
+            SR_LOG("CppCompiler::Init() : windows sdk version changed to: {}", m_windowsSDKVersion);
+        }
+
+        return true;
+    }
+
     bool CppCompiler::Init() {
         m_cachePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
         m_resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
         m_engineResourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetEngineResPath();
+
+        if (!FindWindowsSDK()) {
+            SR_ERROR("CppCompiler::Init() : failed to find windows sdk!");
+            return false;
+        }
 
         auto&& settingsPath = m_cachePath.Concat(CPP_COMPILER_SETTINGS_PATH);
         if (SR_UTILS_NS::FileSystem::IsFileExists(settingsPath)) {
@@ -277,15 +329,13 @@ namespace SR_SCRIPTING_NS {
             std::string windowsKitsUmLibs;
             std::string windowsKitsUcrtLibs;
 
-        #if defined(SR_WINDOWS_SDK_DIR) && defined(SR_WINDOWS_SDK_VERSION)
-            includePaths += "/I\"" + SR_UTILS_NS::Path(SR_WINDOWS_SDK_DIR).Concat("Include").Concat(SR_WINDOWS_SDK_VERSION).Concat("ucrt").ToString() + "\" ";
-            includePaths += "/I\"" + SR_UTILS_NS::Path(SR_WINDOWS_SDK_DIR).Concat("Include").Concat(SR_WINDOWS_SDK_VERSION).Concat("shared").ToString() + "\" ";
+            if (!m_windowsSDKVersion.empty()) {
+                includePaths += "/I\"" + m_windowsSDKPath.Concat("Include").Concat(m_windowsSDKVersion).Concat("ucrt").ToString() + "\" ";
+                includePaths += "/I\"" + m_windowsSDKPath.Concat("Include").Concat(m_windowsSDKVersion).Concat("shared").ToString() + "\" ";
 
-            windowsKitsUmLibs = SR_UTILS_NS::Path(SR_WINDOWS_SDK_DIR).Concat("Lib").Concat(SR_WINDOWS_SDK_VERSION).Concat("um/x64").ToString();
-            windowsKitsUcrtLibs = SR_UTILS_NS::Path(SR_WINDOWS_SDK_DIR).Concat("Lib").Concat(SR_WINDOWS_SDK_VERSION).Concat("ucrt/x64").ToString();
-        #else
-            SRHalt("CppCompiler::Compile() : windows latest SDK dir is not defined!");
-        #endif
+                windowsKitsUmLibs = m_windowsSDKLibPath.Concat("um/x64").ToString();
+                windowsKitsUcrtLibs = m_windowsSDKLibPath.Concat("ucrt/x64").ToString();
+            }
 
             std::string msvcLibs = m_settings.compilerPath.GetPrevious().GetPrevious().GetPrevious().GetPrevious().Concat("lib/x64").ToString();
 
@@ -328,10 +378,12 @@ namespace SR_SCRIPTING_NS {
         );
 
         if (m_settings.compilerType == CppCompilerType::MSVC) {
-            //command += " /LIBPATH:\"C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.42.34433/lib/x64\"";
+            command += " /link ";
             if (context.isDebug) {
-                command += " /link /DEBUG /PDB:\"" + outPdbPath + "\"";
+                command += " /DEBUG /PDB:\"" + outPdbPath + "\"";
             }
+            command += " /LIBPATH:\"" + SR_UTILS_NS::StringUtils::ReplaceAll(m_windowsSDKLibPath.Concat("ucrt/x64").ToString(), "/"sv, "\\"sv) + "\" ";
+            command += " /LIBPATH:\"" + SR_UTILS_NS::StringUtils::ReplaceAll(m_windowsSDKLibPath.Concat("um/x64").ToString(), "/"sv, "\\"sv) + "\" ";
         }
 
         SR_LOG("CppCompiler::Compile() : command: " + command);

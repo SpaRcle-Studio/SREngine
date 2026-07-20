@@ -456,7 +456,7 @@ namespace SR_SCRIPTING_NS {
             case SR_UTILS_NS::PlatformType::Android:
                 return "so";
             default:
-                SRHalt("CppCompiler::Compile() : unknown platform!");
+                SRHalt("ScriptSystem::Compile() : unknown platform!");
                 return "";
         }
     }
