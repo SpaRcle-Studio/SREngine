@@ -20,7 +20,6 @@
 
 namespace SR_CORE_GUI_NS {
     void AnimatorEditorStateMachine::ClearStateMachineVisual() {
-        ClearContainer();
     }
 
     void AnimatorEditorStateMachine::SyncStateMachineToVisual() {
@@ -59,7 +58,6 @@ namespace SR_CORE_GUI_NS {
             pState->SetUserData(pNode);
             pNode->AddInput(new SR_GRAPH_GUI_NS::Pin("In", SR_GRAPH_GUI_NS::PinKind::Input));
             pNode->AddOutput(new SR_GRAPH_GUI_NS::Pin("Out", SR_GRAPH_GUI_NS::PinKind::Output));
-            AddNode(pNode);
 
             if (m_context.pStateMachineEditor) {
                 SR_IMMEDIATE_GUI_NS::NodeEditor::SetNodePosition(pNode->GetId(), pState->GetEditorPosition());
@@ -90,7 +88,6 @@ namespace SR_CORE_GUI_NS {
 
                 auto&& pLink = new SR_GRAPH_GUI_NS::Link(pStartPin, pEndPin);
                 pLink->SetUserData(pTransition.Get());
-                AddLink(pLink);
             }
         }
 
@@ -114,13 +111,6 @@ namespace SR_CORE_GUI_NS {
             SR_IMMEDIATE_GUI_NS::NodeEditor::SetCurrentEditor(m_context.pStateMachineEditor);
         }
 
-        for (auto&& [nodeId, pVisualNode] : m_nodes) {
-            if (auto&& pState = pVisualNode->GetUserData<SR_ANIMATIONS_NS::AnimationState>()) {
-                if (m_context.pStateMachineEditor) {
-                    pState->SetEditorPosition(SR_IMMEDIATE_GUI_NS::NodeEditor::GetNodePosition(pVisualNode->GetId()));
-                }
-            }
-        }
 
         if (m_context.pStateMachineEditor) {
             SR_IMMEDIATE_GUI_NS::NodeEditor::SetCurrentEditor(nullptr);
@@ -304,17 +294,6 @@ namespace SR_CORE_GUI_NS {
                         continue;
                     }
 
-                    auto&& it = m_nodes.find(nodeId);
-                    if (it == m_nodes.end() || !it->second) {
-                        continue;
-                    }
-
-                    auto&& pState = it->second->GetUserData<SR_ANIMATIONS_NS::AnimationState>();
-                    if (pMachine->RemoveState(pState)) {
-                        m_context.pGraph->InvalidateCompile();
-                        needResync = true;
-                        break;
-                    }
                 }
             }
             SR_IMMEDIATE_GUI_NS::NodeEditor::EndDelete();
@@ -416,10 +395,6 @@ namespace SR_CORE_GUI_NS {
             auto&& displayName = pMeta->GetDisplayName();
             SR_UTILS_NS::StringAtom menuName = displayName.empty() ? stateTypeName : displayName;
 
-            if (!m_createStateSearch.empty() && !SR_CORE_GUI_NS::PropertyDrawerBase::CheckSearchMatch(m_createStateSearch, menuName.ToStringView())) {
-                continue;
-            }
-
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem(menuName.c_str())) {
                 if (!m_context.pGraph || m_context.openedStateMachineNodeIndex == SR_ID_INVALID) {
                     continue;
@@ -462,9 +437,6 @@ namespace SR_CORE_GUI_NS {
     }
 
     SR_UTILS_NS::SRClass* AnimatorEditorStateMachine::GetSelectedNode(uintptr_t nodeId) const {
-        if (auto&& it = m_nodes.find(nodeId); it != m_nodes.end()) {
-            return it->second ? it->second->GetUserData<SR_ANIMATIONS_NS::AnimationState>() : nullptr;
-        }
         return nullptr;
     }
 
@@ -479,7 +451,7 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        for (auto&& [linkId, pLink] : m_links) {
+      /*  for (auto&& [linkId, pLink] : m_links) {
             if (!pLink) {
                 continue;
             }
@@ -563,12 +535,6 @@ namespace SR_CORE_GUI_NS {
             if (SR_GRAPH_GUI_NS::Immediate::IsMouseReleased(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left)) {
                 // find target node under mouse
                 uint32_t dstIndex = SR_ID_INVALID;
-                for (auto&& [nodeId, pNode] : m_nodes) {
-                    if (!pNode->GetRect().Contains(mouse) || pNode == m_fromStateNode) {
-                        continue;
-                    }
-                    dstIndex = pNode->GetUserData<SR_ANIMATIONS_NS::AnimationState>()->GetStateIndex();
-                }
 
                 if (dstIndex != SR_ID_INVALID) {
                     if (auto&& pSrcState = m_fromStateNode->GetUserData<SR_ANIMATIONS_NS::AnimationState>()) {
@@ -592,7 +558,7 @@ namespace SR_CORE_GUI_NS {
                     m_fromStateNode = nullptr;
                 }
             }
-        }
+        }*/
     }
 
     void AnimatorEditorStateMachine::DrawNodes(bool& needResync, SR_ANIMATIONS_NS::AnimationStateMachine& machine) {
@@ -600,7 +566,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_GUI_NS::NodeBuilder builder(nullptr);
 
-        for (auto&& [id, pNode] : m_nodes) {
+        /*for (auto&& [id, pNode] : m_nodes) {
             auto&& pState = pNode->GetUserData<SR_ANIMATIONS_NS::AnimationState>();
             SR_MATH_NS::FColor headerColor = SR_MATH_NS::FColor(0.55f, 0.35f, 0.85f, 1.0f);
             if (machine.IsStateActive(pState->GetStateName())) {
@@ -633,7 +599,6 @@ namespace SR_CORE_GUI_NS {
                 if (SR_IMMEDIATE_GUI_NS::NodeEditor::ShowNodeContextMenu(&nodeId)) {
                     SR_GRAPH_GUI_NS::Immediate::OpenPopup("AnimatorEditor_SM_NodeContext");
                     m_popupMousePos = SR_GRAPH_GUI_NS::Immediate::GetMousePos();
-                    m_popupNode = m_nodes.at(nodeId);
                 }
                 if (SR_GRAPH_GUI_NS::Immediate::BeginPopup("AnimatorEditor_SM_NodeContext")) {
                     if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Create transition (click target)")) {
@@ -677,7 +642,7 @@ namespace SR_CORE_GUI_NS {
                 nodeMax.x - nodeMin.x,
                 nodeMax.y - nodeMin.y
             ));
-        }
+        }*/
     }
 
     void AnimatorEditorStateMachine::ResetSelectedLink() {

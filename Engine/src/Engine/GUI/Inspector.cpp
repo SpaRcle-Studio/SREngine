@@ -585,7 +585,7 @@ namespace SR_CORE_GUI_NS {
 
         checkMatch = [&checkMatch](const ComponentCategory& checkCategory, std::string_view search) -> bool {
             const bool hasComponents = std::ranges::any_of(checkCategory.components, [&](auto&& info) {
-                return PropertyDrawerBase::CheckSearchMatch(search, info.name) || PropertyDrawerBase::CheckSearchMatch(search, info.displayName);
+                return SR_UTILS_NS::StringUtils::CheckSearchMatch(search, info.name) || SR_UTILS_NS::StringUtils::CheckSearchMatch(search, info.displayName);
             });
             return hasComponents || std::ranges::any_of(checkCategory.categories, [&](auto&& pair) {
                 return checkMatch(pair.second, search);
@@ -600,7 +600,7 @@ namespace SR_CORE_GUI_NS {
 
                 for (auto&& info : category.components) {
                     if (!m_componentSearchBuffer.empty()) {
-                        if (!PropertyDrawerBase::CheckSearchMatch(m_componentSearchBuffer, info.name) && !PropertyDrawerBase::CheckSearchMatch(m_componentSearchBuffer, info.displayName)) {
+                        if (!SR_UTILS_NS::StringUtils::CheckSearchMatch(m_componentSearchBuffer, info.name) && !SR_UTILS_NS::StringUtils::CheckSearchMatch(m_componentSearchBuffer, info.displayName)) {
                             continue;
                         }
                     }

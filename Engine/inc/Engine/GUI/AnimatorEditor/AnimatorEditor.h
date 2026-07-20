@@ -10,10 +10,7 @@
 #include <Graphics/GUI/NodeWidget.h>
 #include <Graphics/Animations/AnimationGraphNode.h>
 
-#include <ImmediateGUI/GUI/NodeEditor.h>
-
 #include <Utils/Resources/Asset.h>
-#include <Utils/Serialization/Serializer.h>
 #include <Utils/Types/WeakPtr.h>
 
 namespace SR_CORE_GUI_NS {
@@ -32,17 +29,11 @@ namespace SR_CORE_GUI_NS {
 
     public:
         void Inspect(const SR_UTILS_NS::Path& path);
-
         void Init() override;
-        void Draw() override;
-        void OnOpen() override;
-        void OnClose() override;
-
-        void Zoom() override;
 
     protected:
         void DrawNodeEditor() override;
-        void DrawInspectPanel();
+        void DrawInspectPanel() override;
 
         void TopPanelSave() override;
         void TopPanelOpen() override;
@@ -50,15 +41,11 @@ namespace SR_CORE_GUI_NS {
         void SyncLogicToVisual();
         void SyncVisualToLogic();
 
-        void BuildNodeMenu(std::map<std::string, std::vector<SR_UTILS_NS::StringAtom>>& categories);
-        void DrawNodeMenuRecursive(const std::map<std::string, std::vector<SR_UTILS_NS::StringAtom>>& categories, const std::string& prefix, SR_MATH_NS::FVector2 popupPos);
+        void OnNodeTypeSelected(SR_UTILS_NS::StringAtom type, SR_MATH_NS::FVector2 pos) override;
 
         SR_NODISCARD bool IsStateMachineActive() const { return m_tab == Tab::StateMachine && m_pActiveStateMachine; }
 
     protected:
-        SR_HTYPES_NS::RawPointerHolder<SR_IMMEDIATE_GUI_NS::NodeEditorInstance> m_nodeGraphEditor;
-        std::unique_ptr<SR_UTILS_NS::ISerializer> m_serializer;
-
         SR_ANIMATIONS_NS::AnimationGraph::Ptr m_pActiveGraph;
         SR_HTYPES_NS::SharedPtr<SR_ANIMATIONS_NS::Animator> m_animator;
         SR_HTYPES_NS::WeakPtr<SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine> m_pActiveStateMachine;
@@ -70,16 +57,12 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::String m_backgroundText;
 
         bool m_skipInspect = false;
+        bool m_skipSync = false;
         bool m_keepLiveContext = false;
         bool m_live = false;
 
         Tab m_tab = Tab::Graph;
         Tab m_nodeSearchTabCached = Tab::Graph;
-
-        std::vector<SR_UTILS_NS::StringAtom> m_availableNodeTypes;
-        std::string m_createNodeSearch;
-        std::map<std::string, std::vector<SR_UTILS_NS::StringAtom>> m_categories;
-
 
     };
 }

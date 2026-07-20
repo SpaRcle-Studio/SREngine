@@ -6,6 +6,8 @@
 
 #include <ImmediateGUI/GUI/ImmediateGUI.h>
 
+#include <Utils/Common/StringUtils.h>
+
 #include <Codegen/EnumPropertyDrawer.generated.hpp>
 
 namespace SR_CORE_GUI_NS {
@@ -91,7 +93,7 @@ namespace SR_CORE_GUI_NS {
                     continue;
                 }
 
-                if (!m_searchBuffer.empty() && !CheckSearchMatch(m_searchBuffer, names[i])) {
+                if (!m_searchBuffer.empty() && !SR_UTILS_NS::StringUtils::CheckSearchMatch(m_searchBuffer, names[i])) {
                     continue;
                 }
 

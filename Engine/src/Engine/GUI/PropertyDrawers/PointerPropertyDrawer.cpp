@@ -133,7 +133,7 @@ namespace SR_CORE_GUI_NS {
                 }
 
                 for (uint64_t i = 0; i < m_typeNames.size(); ++i) {
-                    if (!m_searchBuffer.empty() && !CheckSearchMatch(m_searchBuffer, m_typeNames[i])) {
+                    if (!m_searchBuffer.empty() && !SR_UTILS_NS::StringUtils::CheckSearchMatch(m_searchBuffer, m_typeNames[i])) {
                         continue;
                     }
 

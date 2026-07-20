@@ -10,6 +10,7 @@
 #include <Scripting/Base/Behaviour.h>
 
 #include <Utils/Events/Broadcaster.h>
+#include <Utils/Common/StringUtils.h>
 
 #include <Codegen/BehaviourNamePropertyDrawer.generated.hpp>
 
@@ -73,7 +74,7 @@ namespace SR_CORE_GUI_NS {
                     }
 
                     for (uint64_t i = 0; i < m_existingNames.size(); ++i) {
-                        if (!m_searchBuffer.empty() && !CheckSearchMatch(m_searchBuffer, m_existingNames[i])) {
+                        if (!m_searchBuffer.empty() && !SR_UTILS_NS::StringUtils::CheckSearchMatch(m_searchBuffer, m_existingNames[i])) {
                             continue;
                         }
 

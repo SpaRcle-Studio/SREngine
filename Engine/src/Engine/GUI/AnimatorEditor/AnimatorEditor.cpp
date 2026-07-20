@@ -26,7 +26,6 @@
 namespace SR_CORE_GUI_NS {
     AnimatorEditor::AnimatorEditor()
         : Super("Animator")
-        , m_nodeGraphEditor(SR_IMMEDIATE_GUI_NS::NodeEditorInstance::Create())
     { }
 
     void AnimatorEditor::Init() {
@@ -70,10 +69,6 @@ namespace SR_CORE_GUI_NS {
         });
     }
 
-    void AnimatorEditor::OnClose() {
-        Super::OnClose();
-    }
-
     void AnimatorEditor::Inspect(const SR_UTILS_NS::Path& path) {
         if (!m_keepLiveContext) {
             m_animator.Reset();
@@ -106,24 +101,6 @@ namespace SR_CORE_GUI_NS {
         else {
             SR_ERROR("AnimatorEditor::SetGraphPath() : failed to load animation graph asset: {}", loadPath);
         }
-    }
-
-    void AnimatorEditor::Draw() {
-        DrawTopPanel();
-
-        SR_GRAPH_GUI_NS::Immediate::Separator();
-        
-        auto&& availableSize = SR_GRAPH_GUI_NS::Immediate::GetContentRegionAvail();
-        
-        SR_GRAPH_GUI_NS::Immediate::BeginChild("InspectPanel", SR_MATH_NS::FVector2(m_leftPaneWidth, availableSize.y));
-        DrawInspectPanel();
-        SR_GRAPH_GUI_NS::Immediate::EndChild();
-        
-        SR_GRAPH_GUI_NS::Immediate::SameLine();
-        
-        SR_GRAPH_GUI_NS::Immediate::BeginChild("NodeEditor", SR_MATH_NS::FVector2(availableSize.x - m_leftPaneWidth - 10, availableSize.y));
-        DrawNodeEditor();
-        SR_GRAPH_GUI_NS::Immediate::EndChild();
     }
 
     void AnimatorEditor::DrawNodeEditor() {
@@ -190,6 +167,22 @@ namespace SR_CORE_GUI_NS {
         }
     }
 
+    void AnimatorEditor::OnNodeTypeSelected(SR_UTILS_NS::StringAtom type, SR_MATH_NS::FVector2 pos) {
+        if (IsStateMachineActive()) {
+            auto&& pSM = m_pActiveStateMachine.Lock();
+            if (auto&& pState = SR_UTILS_NS::Factory::Instance().Create<SR_ANIMATIONS_NS::AnimationState>(type)) {
+                pSM->GetMachine()->AddState(pState.Get());
+                pState->SetEditorPosition(SR_IMMEDIATE_GUI_NS::NodeEditor::ScreenToCanvas(pos));
+            }
+        }
+        else {
+            if (auto&& pNode = SR_UTILS_NS::Factory::Instance().Create<SR_ANIMATIONS_NS::AnimationGraphNode>(type)) {
+                auto&& pGraphNode = m_pActiveGraph->AddNode(pNode.Get());
+                pGraphNode->SetEditorPosition(SR_IMMEDIATE_GUI_NS::NodeEditor::ScreenToCanvas(pos));
+            }
+        }
+    }
+
     void AnimatorEditor::SyncLogicToVisual() {
         SR_TRACY_ZONE;
 
@@ -200,9 +193,11 @@ namespace SR_CORE_GUI_NS {
         }
 
         m_nodeGraphEditor->SetNodePopupCallback([this](SR_IMMEDIATE_GUI_NS::NodeInstance& node, const SR_MATH_NS::FVector2& pos) {
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Fast forward")) {
-                if (auto&& pState = static_cast<SR_ANIMATIONS_NS::AnimationState*>(node.GetUserData())) {
-                    m_pActiveStateMachine.Lock()->GetMachine()->FastForwardState(pState);
+            if (IsStateMachineActive()) {
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Fast forward")) {
+                    if (auto&& pState = static_cast<SR_ANIMATIONS_NS::AnimationState*>(node.GetUserData())) {
+                        m_pActiveStateMachine.Lock()->GetMachine()->FastForwardState(pState);
+                    }
                 }
             }
         });
@@ -219,6 +214,7 @@ namespace SR_CORE_GUI_NS {
                 auto&& pGraphNode = static_cast<SR_ANIMATIONS_NS::AnimationGraphNode*>(node.GetUserData());
                 if (auto&& pSMNode = dynamic_cast<SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine*>(pGraphNode)) {
                     m_tab = Tab::StateMachine;
+                    m_skipSync = true;
                     m_pActiveStateMachine = pSMNode;
                     m_nodeGraphEditor->ResetEditor();
                     m_nodeGraphEditor->ClearSelection();
@@ -260,7 +256,16 @@ namespace SR_CORE_GUI_NS {
 
         m_nodeGraphEditor->SetBackgroundPopupCallback([this](const SR_MATH_NS::FVector2& pos) {
             if (m_pActiveGraph) {
-                BuildNodeMenu(m_categories);
+                if (m_nodeSearchTabCached != m_tab) {
+                    m_nodeSearchTabCached = m_tab;
+                    m_createNodeSearch.clear();
+                    m_availableNodeTypes.clear();
+                }
+
+                BuildNodeMenu(m_categories, m_tab == Tab::Graph ?
+                    SR_ANIMATIONS_NS::AnimationGraphNode::GetClassStaticName() :
+                    SR_ANIMATIONS_NS::AnimationState::GetClassStaticName()
+                );
                 SR_GRAPH_GUI_NS::Immediate::InputText("##NodeSearch", &m_createNodeSearch);
                 SR_GRAPH_GUI_NS::Immediate::Separator();
                 DrawNodeMenuRecursive(m_categories, "", pos);
@@ -325,6 +330,11 @@ namespace SR_CORE_GUI_NS {
 
     void AnimatorEditor::SyncVisualToLogic() {
         SR_TRACY_ZONE;
+
+        if (m_skipSync) {
+            m_skipSync = false;
+            return;
+        }
 
         if (!m_pActiveGraph) {
             return;
@@ -411,132 +421,6 @@ namespace SR_CORE_GUI_NS {
         m_propertyDrawer->Draw(context);
     }
 
-    void AnimatorEditor::BuildNodeMenu(std::map<std::string, std::vector<SR_UTILS_NS::StringAtom>>& categories) {
-        SR_TRACY_ZONE;
-        categories.clear();
-
-        if (m_nodeSearchTabCached != m_tab) {
-            m_nodeSearchTabCached = m_tab;
-            m_createNodeSearch.clear();
-            m_availableNodeTypes.clear();
-        }
-
-        if (m_availableNodeTypes.empty()) {
-            m_availableNodeTypes = SR_UTILS_NS::Factory::Instance().GetInheritances(
-                m_tab == Tab::Graph ?
-                SR_ANIMATIONS_NS::AnimationGraphNode::GetClassStaticName() :
-                SR_ANIMATIONS_NS::AnimationState::GetClassStaticName()
-            );
-
-            /// Фильтруем абстрактные и скрытые классы
-            std::erase_if(m_availableNodeTypes, [](auto&& name) {
-                auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(name);
-                if (!pMeta) {
-                    return true;
-                }
-                return pMeta->IsAbstract() || pMeta->IsHidden();
-            });
-        }
-
-        for (auto&& nodeTypeName : m_availableNodeTypes) {
-            auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(nodeTypeName);
-            if (!pMeta) {
-                continue;
-            }
-
-            auto&& category = pMeta->GetCategory();
-            std::string categoryPath = "Nodes";
-            if (!category.empty()) {
-                categoryPath.clear();
-                for (size_t i = 0; i < category.size(); ++i) {
-                    if (i > 0) {
-                        categoryPath += "/";
-                    }
-                    categoryPath += category[i].ToStringRef();
-                }
-            }
-
-            categories[categoryPath].emplace_back(nodeTypeName);
-        }
-    }
-    
-    void AnimatorEditor::DrawNodeMenuRecursive(const std::map<std::string, std::vector<SR_UTILS_NS::StringAtom>>& categories, const std::string& prefix, SR_MATH_NS::FVector2 popupPos) {
-        /// Группируем ноды по следующему уровню категорий
-        std::map<std::string, std::vector<SR_UTILS_NS::StringAtom>> subCategories;
-        std::vector<SR_UTILS_NS::StringAtom> directNodes;
-
-        for (auto&& [categoryPath, nodeTypes] : categories) {
-            if (categoryPath == prefix) {
-                /// Ноды напрямую в этой категории
-                directNodes.insert(directNodes.end(), nodeTypes.begin(), nodeTypes.end());
-            }
-            else if (prefix.empty() || (categoryPath.size() >= prefix.size() + 1 && categoryPath.substr(0, prefix.size() + 1) == prefix + "/")) {
-                /// Определяем следующий уровень
-                std::string remaining = prefix.empty() ? categoryPath : categoryPath.substr(prefix.size() + 1);
-                auto&& nextSlash = remaining.find('/');
-
-                if (nextSlash == std::string::npos) {
-                    /// Это конечный уровень для этой категории
-                    directNodes.insert(directNodes.end(), nodeTypes.begin(), nodeTypes.end());
-                }
-                else {
-                    /// Есть подкатегория
-                    std::string nextLevel = prefix.empty() ? remaining.substr(0, nextSlash) : prefix + "/" + remaining.substr(0, nextSlash);
-                    subCategories[nextLevel].insert(subCategories[nextLevel].end(), nodeTypes.begin(), nodeTypes.end());
-                }
-            }
-        }
-
-        // Рисуем прямые элементы
-        for (auto&& nodeTypeName : directNodes) {
-            auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(nodeTypeName);
-            if (!pMeta) {
-                continue;
-            }
-
-            auto&& displayName = pMeta->GetDisplayName();
-            SR_UTILS_NS::StringAtom menuName = displayName.empty() ? nodeTypeName : displayName;
-
-            if (!m_createNodeSearch.empty() && !SR_CORE_GUI_NS::PropertyDrawerBase::CheckSearchMatch(m_createNodeSearch, menuName.ToStringView())) {
-                continue;
-            }
-
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem(menuName.c_str())) {
-                if (IsStateMachineActive()) {
-                    auto&& pSM = m_pActiveStateMachine.Lock();
-                    if (auto&& pState = SR_UTILS_NS::Factory::Instance().Create<SR_ANIMATIONS_NS::AnimationState>(nodeTypeName)) {
-                        pSM->GetMachine()->AddState(pState.Get());
-                        pState->SetEditorPosition(SR_IMMEDIATE_GUI_NS::NodeEditor::ScreenToCanvas(popupPos));
-                    }
-                }
-                else {
-                    if (auto&& pNode = SR_UTILS_NS::Factory::Instance().Create<SR_ANIMATIONS_NS::AnimationGraphNode>(nodeTypeName)) {
-                        auto&& pGraphNode = m_pActiveGraph->AddNode(pNode.Get());
-                        pGraphNode->SetEditorPosition(SR_IMMEDIATE_GUI_NS::NodeEditor::ScreenToCanvas(popupPos));
-                    }
-                }
-            }
-        }
-
-        // Рисуем подменю
-        for (auto&& [nextLevel, nodeTypes] : subCategories) {
-            // Извлекаем имя следующего уровня
-            std::string levelName = nextLevel;
-            if (!prefix.empty()) {
-                levelName = nextLevel.substr(prefix.size() + 1);
-            }
-            auto&& nextSlash = levelName.find('/');
-            if (nextSlash != std::string::npos) {
-                levelName = levelName.substr(0, nextSlash);
-            }
-
-            if (SR_GRAPH_GUI_NS::Immediate::BeginMenu(levelName.c_str())) {
-                DrawNodeMenuRecursive(categories, nextLevel, popupPos);
-                SR_GRAPH_GUI_NS::Immediate::EndMenu();
-            }
-        }
-    }
-
     void AnimatorEditor::TopPanelSave() {
         if (!m_pActiveGraph) {
             return;
@@ -561,17 +445,6 @@ namespace SR_CORE_GUI_NS {
         }
 
         Inspect(path);
-    }
-
-    void AnimatorEditor::OnOpen() {
-        Super::OnOpen();
-    }
-
-    void AnimatorEditor::Zoom() {
-        if (m_nodeGraphEditor) {
-            m_nodeGraphEditor->Zoom();
-        }
-        Super::Zoom();
     }
 }
 
