@@ -43,6 +43,7 @@ set_property(GLOBAL PROPERTY SR_IMMEDIATE_GUI_INCLUDE_DIRECTORIES "${CMAKE_CURRE
 target_include_directories(ImmediateGUI PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/inc)
 target_include_directories(ImmediateGUI PRIVATE libs)
 target_include_directories(ImmediateGUI PRIVATE libs/imgui)
+target_include_directories(ImmediateGUI PRIVATE libs/implot)
 target_include_directories(ImmediateGUI PRIVATE libs/ImNodeFlow/include)
 
 target_compile_definitions(ImmediateGUI PRIVATE SR_IMGUI_INCLUDE_CHECK)

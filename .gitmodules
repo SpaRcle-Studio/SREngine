@@ -37,3 +37,6 @@
 [submodule "Engine/libs/ImmediateGUI/libs/ImNodeFlow"]
 	path = Engine/libs/ImmediateGUI/libs/ImNodeFlow
 	url = https://github.com/SpaRcle-Studio/ImNodeFlow
+[submodule "Engine/libs/ImmediateGUI/libs/implot"]
+	path = Engine/libs/ImmediateGUI/libs/implot
+	url = https://github.com/SpaRcle-Studio/implot.git

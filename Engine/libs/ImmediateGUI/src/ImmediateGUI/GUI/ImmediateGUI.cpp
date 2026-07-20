@@ -934,6 +934,10 @@ namespace SR_GRAPH_GUI_NS::Immediate {
             SRHalt("Failed to create ImGui context!");
         }
 
+        if (!ImPlot::CreateContext()) {
+            SRHalt("Failed to create ImPlot context!");
+        }
+
         ImGui::SetAllocatorFunctions(ImGuiMallocWrapper, ImGuiFreeWrapper, nullptr);
 
         INI_FILE_PATH = context.iniPath;
@@ -971,6 +975,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     }
 
     void DestroyContext(void* pContext) {
+        ImPlot::DestroyContext();
         ImGui::DestroyContext(static_cast<ImGuiContext*>(pContext));
     }
 
@@ -1499,6 +1504,18 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         
         ImGui::Dummy(F2ToImV2(size));
     }
+
+    void ShowMetricsWindow(bool* pOpen) {
+        ImGui::ShowMetricsWindow(pOpen);
+    }
+
+    bool BeginPlot(const char* title_id, const SR_MATH_NS::FVector2& size, PlotFlags flags) {
+        ImPlot::BeginPlot(title_id, F2ToImV2(SR_MATH_NS::FVector2(size)), static_cast<ImPlotFlags>(flags));
+    }
+
+    void EndPlot() {
+        ImPlot::EndPlot();
+    }
 #endif
 
 #ifndef SR_USE_IMGUI
@@ -1699,5 +1716,9 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     bool IsItemVisible() { return false; }
     SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags GetNodeFlagsWithChild() { return SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::OpenOnArrow | SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::OpenOnDoubleClick; }
     SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags GetNodeFlagsWithoutChild() { return SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::NoTreePushOnOpen | SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::Leaf; }
+    void ShowMetricsWindow(bool* pOpen = nullptr) { }
+
+    bool BeginPlot(const char* title_id, const SR_MATH_NS::IVector2& size, PlotFlags flags) { return false; }
+    void EndPlot() { }
 #endif
 }

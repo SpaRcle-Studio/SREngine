@@ -174,6 +174,11 @@ namespace SR_CORE_GUI_NS {
                 SR_GRAPH_GUI_NS::Immediate::EndTable();
             }
 
+            if (SR_GRAPH_GUI_NS::Immediate::Button("Show/Close GUI metrics window")) {
+                auto&& pEditor = dynamic_cast<EditorGUI*>(GetManager());
+                pEditor->ShowMetricsWindow(!pEditor->IsMetricsWindowShown());
+            }
+
             SR_GRAPH_GUI_NS::Immediate::EndTabItem();
         }
     }

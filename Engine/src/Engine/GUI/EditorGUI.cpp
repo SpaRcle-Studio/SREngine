@@ -192,6 +192,10 @@ namespace SR_CORE_GUI_NS {
             //ImGui::ShowDemoWindow(&m_imGuiDemo);
         }
 
+        if (m_showMetricsWindow) {
+            SR_GRAPH_GUI_NS::Immediate::ShowMetricsWindow(&m_showMetricsWindow);
+        }
+
         if (!m_installSamplesAsked && m_samplesShowDelay <= 0.f) {
             m_installSamplesAsked = SR_UTILS_NS::StoreUtils::User::GetBool("InstallSamplesAsked", false);
             m_installSamplesAsked |= SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(SR_SAMPLES_PATH).IsDir();

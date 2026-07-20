@@ -16,6 +16,9 @@
 #include <imgui/imgui_widgets.cpp>
 #include <imgui/imgui_demo.cpp>
 
+#include <implot/implot.cpp>
+#include <implot/implot_items.cpp>
+
 #ifdef IMGUI_HAS_STACK_LAYOUT
     #include <imgui/imgui_stacklayout.cpp>
 #endif

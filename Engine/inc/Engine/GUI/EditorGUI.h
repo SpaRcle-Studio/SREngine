@@ -58,6 +58,9 @@ namespace SR_CORE_GUI_NS {
         SR_NODISCARD const EnginePtr& GetEngine() const { return m_engine; }
         SR_NODISCARD bool IsInitialized() const { return m_isInit; }
         SR_NODISCARD const EditorSettings::Ptr& GetSettings() const { return m_pSettings; }
+        SR_NODISCARD const bool IsMetricsWindowShown() const { return m_showMetricsWindow; }
+
+        void ShowMetricsWindow(bool isShown) { m_showMetricsWindow = isShown; }
 
         void SetDockingEnabled(bool value) { m_useDocking = value; }
 
@@ -118,6 +121,8 @@ namespace SR_CORE_GUI_NS {
 
         std::atomic<bool> m_useDocking = true;
         std::atomic<bool> m_dragWindow = false;
+
+        bool m_showMetricsWindow = false;
 
         bool m_imGuiDemo = false;
 

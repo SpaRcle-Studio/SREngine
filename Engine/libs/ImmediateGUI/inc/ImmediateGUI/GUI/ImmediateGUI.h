@@ -380,6 +380,21 @@ namespace SR_GRAPH_GUI_NS {
             RootAndChildWindows           = RootWindow | ChildWindows
         )
 
+
+        enum PlotFlags {
+            None          = 0,       // default
+            NoTitle       = 1 << 0,  // the plot title will not be displayed (titles are also hidden if preceded by double hashes, e.g. "##MyPlot")
+            NoLegend      = 1 << 1,  // the legend will not be displayed
+            NoMouseText   = 1 << 2,  // the mouse position, in plot coordinates, will not be displayed inside of the plot
+            NoInputs      = 1 << 3,  // the user will not be able to interact with the plot
+            NoMenus       = 1 << 4,  // the user will not be able to open context menus
+            NoBoxSelect   = 1 << 5,  // the user will not be able to box-select
+            NoFrame       = 1 << 6,  // the ImGui frame will not be rendered
+            Equal         = 1 << 7,  // x and y axes pairs will be constrained to have the same units/pixel
+            Crosshairs    = 1 << 8,  // the default mouse cursor will be replaced with a crosshair when hovered
+            CanvasOnly    = NoTitle | NoLegend | NoMenus | NoBoxSelect | NoMouseText
+        };
+
         enum class MouseButton
         {
             Left = 0,
@@ -607,8 +622,33 @@ namespace SR_GRAPH_GUI_NS {
         SR_IMMEDIATE_GUI_DLL_API extern void EndHorizontal();
         SR_IMMEDIATE_GUI_DLL_API extern void Spring(float weight = 1.0f, float spacing = -1.0f);
 
+        // Debug
+
+        SR_IMMEDIATE_GUI_DLL_API extern void ShowMetricsWindow(bool* pOpen = nullptr);
+
         // Icon drawing
         SR_IMMEDIATE_GUI_DLL_API extern void DrawPinIcon(const SR_MATH_NS::FVector2& size, SR_GRAPH_NS::GUI::IconType iconType, bool filled, const SR_MATH_NS::FColor& color, const SR_MATH_NS::FColor& innerColor = SR_MATH_NS::FColor(0, 0, 0, 0));
+
+
+        // Plots
+        SR_IMMEDIATE_GUI_DLL_API extern bool BeginPlot(const char* title_id, const SR_MATH_NS::FVector2& size = SR_MATH_NS::FVector2(-1,0), PlotFlags flags = PlotFlags::None);
+        SR_IMMEDIATE_GUI_DLL_API extern void EndPlot();
+
+        // ----- Line Plot
+
+    #ifdef SR_USE_IMGUI
+        // template<typename T> SR_IMMEDIATE_GUI_DLL_API extern void PlotLine(const char* label_id, const T* values, int count, double xscale = 1, double xstart = 0) {
+        //     ImPlot::PlotLine(label_id, values, count, xscale, xstart);
+        // }
+
+        // template<typename T> SR_IMMEDIATE_GUI_DLL_API extern void PlotLine(const char* label_id, const T* values, int count, double xscale = 1, double xstart = 0, const PlotSpec& spec = PlotSpec());
+        // template<typename T> SR_IMMEDIATE_GUI_DLL_API extern void PlotLine(const char* label_id, const T* xs, const T* ys, int count, const PlotSpec& spec = PlotSpec());
+        // SR_IMMEDIATE_GUI_DLL_API extern void PlotLineG(const char* label_id, ImPlotGetter getter, void* data, int count, const ImPlotSpec& spec=ImPlotSpec());
+    #endif
+
+    #ifndef SR_USE_IMGUI
+        template<typename T> SR_IMMEDIATE_GUI_DLL_API extern void PlotLine(const char* label_id, const T* values, int count, double xscale = 1, double xstart = 0) { }
+    #endif
     }
 }
 
