@@ -90,9 +90,9 @@ namespace SR_CORE_NS::AI {
         /// @property @onChanged(Punish)
         bool m_punish = false;
         /// @property
-        std::string m_text;
+        SR_UTILS_NS::String m_text;
         /// @property
-        std::string m_output;
+        SR_UTILS_NS::String m_output;
 
         //Details::Network m_network;
 

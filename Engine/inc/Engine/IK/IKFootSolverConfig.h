@@ -53,7 +53,7 @@ namespace SR_CORE_NS {
         /// @property
         /// @customArgs(pick: enabled, filter name: Audio, relative: resources)
         /// @customArg(filter value: mp3,wav,ogg)
-        std::vector<SR_UTILS_NS::Path> stepSounds;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::Path> stepSounds;
 
     };
 }

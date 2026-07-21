@@ -152,7 +152,7 @@ namespace SR_CORE_NS::Commands {
         if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::IComponentable>()) {
             auto&& pDeserializer = m_pNew->CreateDeserializer();
 
-            std::vector<SR_UTILS_NS::Component::Ptr> components;
+            SR_UTILS_NS::Vector<SR_UTILS_NS::Component::Ptr> components;
             SR_UTILS_NS::Serialization::Load(*pDeserializer, components, SR_UTILS_NS::COMMAND_DATA_ID);
             pObject->RemoveComponents();
 
@@ -174,7 +174,7 @@ namespace SR_CORE_NS::Commands {
         if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::IComponentable>()) {
             auto&& pDeserializer = m_pOld->CreateDeserializer();
 
-            std::vector<SR_UTILS_NS::Component::Ptr> components;
+            SR_UTILS_NS::Vector<SR_UTILS_NS::Component::Ptr> components;
             SR_UTILS_NS::Serialization::Load(*pDeserializer, components, SR_UTILS_NS::COMMAND_DATA_ID);
             pObject->RemoveComponents();
 

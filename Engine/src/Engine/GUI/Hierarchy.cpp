@@ -409,7 +409,7 @@ namespace SR_CORE_GUI_NS {
     void Hierarchy::Copy() const {
         static const auto&& serializeId = SR_UTILS_NS::SerializationId::Create("SREngineSceneObjectsClipboard");
 
-        std::vector<SR_UTILS_NS::SceneObject::Ptr> toCopy;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::SceneObject::Ptr> toCopy;
         for (auto&& pSO : m_selected) {
             if (pSO) {
                 toCopy.emplace_back(pSO);
@@ -446,7 +446,7 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        std::vector<SR_UTILS_NS::SceneObject::Ptr> toPaste;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::SceneObject::Ptr> toPaste;
         SR_UTILS_NS::Serialization::Load(deserializer, toPaste, serializeId);
         if (toPaste.empty()) {
             return;

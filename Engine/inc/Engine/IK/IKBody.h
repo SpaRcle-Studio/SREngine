@@ -28,7 +28,7 @@ namespace SR_CORE_NS {
         /// @property
         SR_UTILS_NS::EntityRef<SR_UTILS_NS::GameObject> m_bodyShakeTarget;
         /// @property
-        std::vector<SR_UTILS_NS::EntityRef<IKFootSolver>> m_footSolvers;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::EntityRef<IKFootSolver>> m_footSolvers;
 
 
         // FOR DEBUGGING

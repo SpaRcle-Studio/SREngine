@@ -45,7 +45,7 @@ namespace SR_CORE_UI_NS {
         /// @property
         SR_UTILS_NS::EntityRef<SR_UTILS_NS::SceneObject> m_pressed;
         /// @property
-        std::vector<UIButtonEvent> m_onClickEvents;
+        SR_UTILS_NS::Vector<UIButtonEvent> m_onClickEvents;
 
         /// @property @group(Mouse Events)
         bool m_leftClick = true;

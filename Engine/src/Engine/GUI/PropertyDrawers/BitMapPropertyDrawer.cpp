@@ -102,7 +102,7 @@ namespace SR_CORE_GUI_NS {
         if (m_isOpened) {
             constexpr uint64_t maxPartsInLine = 8;
 
-            if (std::vector<bool>* pBitMap = value.TryCast<std::vector<bool>>()) {
+            if (auto&& pBitMap = value.TryCast<SR_UTILS_NS::Vector<bool>>()) {
                 for (uint64_t i = 0; i < pBitMap->size(); ++i) {
                     SR_GRAPH_GUI_NS::Immediate::PushID(i);
 

@@ -8,6 +8,7 @@
 #include <ImmediateGUI/GUI/ImmediateGUI.h>
 
 #include <Utils/Reflection/Value.h>
+#include <Utils/Reflection/ReflectedType.h>
 
 namespace SR_GRAPH_GUI_NS::Immediate {
     class NodeInstance;

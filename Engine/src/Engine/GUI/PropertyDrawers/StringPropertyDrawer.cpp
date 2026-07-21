@@ -40,7 +40,7 @@ namespace SR_CORE_GUI_NS {
         const bool isTextBox = context.pProperty && context.pProperty->GetEditorParams().GetCustomArg("text-box") == "enabled";
 
         if (value.IsString()) {
-            if (auto&& pString = value.TryCast<std::string>()) {
+            if (auto&& pString = value.TryCast<SR_UTILS_NS::String>()) {
                 std::string copy = *pString;
 
                 if (isTextBox) {
@@ -51,7 +51,7 @@ namespace SR_CORE_GUI_NS {
                 }
 
                 if (SR_GRAPH_GUI_NS::Immediate::IsItemDeactivatedAfterEdit()) {
-                    SetPropertyDrawerMappedValue(context, feedback, pString, copy);
+                    SetPropertyDrawerMappedValue(context, feedback, pString, SR_UTILS_NS::String(copy));
                 }
             }
             else {

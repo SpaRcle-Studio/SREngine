@@ -112,11 +112,11 @@ namespace SR_CORE_NS {
 
     private:
         /// @property
-        std::string m_address = "0.0.0.0";
+        SR_UTILS_NS::String m_address = "0.0.0.0";
         /// @property
         uint16_t m_port = 27015;
         /// @property
-        std::string m_remoteAddress;
+        SR_UTILS_NS::String m_remoteAddress;
         /// @property
         uint16_t m_remotePort = 27015;
         /// @property

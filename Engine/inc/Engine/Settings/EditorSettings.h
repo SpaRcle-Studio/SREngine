@@ -48,7 +48,7 @@ namespace SR_CORE_NS {
         /// @customArg(filter value: png,jpg,jpeg)
         SR_UTILS_NS::Path path;
         /// @property
-        std::string extensions;
+        SR_UTILS_NS::String extensions;
     };
 
     class EditorSettings : public SR_UTILS_NS::Asset {
