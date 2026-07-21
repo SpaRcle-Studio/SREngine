@@ -44,6 +44,7 @@ namespace SR_GRAPH_GUI_NS {
     #include <imgui/misc/cpp/imgui_stdlib.h>
     #include <imgui/imgui_internal.h>
     #include <implot/implot.h>
+    #include <implot/implot_internal.h>
 
     #ifdef SR_WIN32
         #include <imgui/backends/imgui_impl_win32.h>

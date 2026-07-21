@@ -45,6 +45,9 @@ namespace SR_CORE_NS::GUI {
         void DrawRenderQueue(const SR_GRAPH_NS::RenderQueue* pRenderQueue);
 
     private:
+        SR_HTYPES_NS::FastMemoryArray<float_t> m_framerateHistory;
+        static constexpr uint32_t m_framerateHistorySize = 1001;
+
         std::string m_stringCache;
         bool m_showShaderMacros = false;
         bool m_showShaderPrograms = false;

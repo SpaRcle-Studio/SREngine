@@ -5,6 +5,7 @@
 #ifndef SR_ENGINE_RENDERER_IMMEDIATE_GUI_H
 #define SR_ENGINE_RENDERER_IMMEDIATE_GUI_H
 
+#include "ImmediateGUI/macros.h"
 #include <ImmediateGUI/stdInclude.h>
 
 #include <Utils/Math/Rect.h>
@@ -326,6 +327,56 @@ namespace SR_GRAPH_GUI_NS {
             CollapsingHeader     = Framed | NoTreePushOnOpen | NoAutoOpenOnLog
         )
 
+        SR_ENUM_NS_STRUCT_T(ColorEditFlags, uint32_t, // TODO: rename to ColorPickerFlags?
+            None            = 0,
+            NoAlpha         = 1 << 1,   //              // ColorEdit, ColorPicker, ColorButton: ignore Alpha component (will only read 3 components from the input pointer).
+            NoPicker        = 1 << 2,   //              // ColorEdit: disable picker when clicking on color square.
+            NoOptions       = 1 << 3,   //              // ColorEdit: disable toggling options menu when right-clicking on inputs/small preview.
+            NoSmallPreview  = 1 << 4,   //              // ColorEdit, ColorPicker: disable color square preview next to the inputs. (e.g. to show only the inputs)
+            NoInputs        = 1 << 5,   //              // ColorEdit, ColorPicker: disable inputs sliders/text widgets (e.g. to show only the small preview color square).
+            NoTooltip       = 1 << 6,   //              // ColorEdit, ColorPicker, ColorButton: disable tooltip when hovering the preview.
+            NoLabel         = 1 << 7,   //              // ColorEdit, ColorPicker: disable display of inline text label (the label is still forwarded to the tooltip and picker).
+            NoSidePreview   = 1 << 8,   //              // ColorPicker: disable bigger color preview on right side of the picker, use small color square preview instead.
+            NoDragDrop      = 1 << 9,   //              // ColorEdit: disable drag and drop target/source. ColorButton: disable drag and drop source.
+            NoBorder        = 1 << 10,  //              // ColorButton: disable border (which is enforced by default)
+            NoColorMarkers  = 1 << 11,  //              // ColorEdit: disable rendering R/G/B/A color marker. May also be disabled globally by setting style.ColorMarkerSize = 0.
+
+            // Alpha preview
+            // - Prior to 1.91.8 (2025/01/21): alpha was made opaque in the preview by default using old name ImGuiColorEditFlags_AlphaPreview.
+            // - We now display the preview as transparent by default. You can use ImGuiColorEditFlags_AlphaOpaque to use old behavior.
+            // - The new flags may be combined better and allow finer controls.
+            AlphaOpaque     = 1 << 12,  //              // ColorEdit, ColorPicker, ColorButton: disable alpha in the preview,. Contrary to _NoAlpha it may still be edited when calling ColorEdit4()/ColorPicker4(). For ColorButton() this does the same as _NoAlpha.
+            AlphaNoBg       = 1 << 13,  //              // ColorEdit, ColorPicker, ColorButton: disable rendering a checkerboard background behind transparent color.
+            AlphaPreviewHalf= 1 << 14,  //              // ColorEdit, ColorPicker, ColorButton: display half opaque / half transparent preview.
+
+            // User Options (right-click on widget to change some of them)
+            // Current settings are stored in style.ColorEditFlags.
+            AlphaBar        = 1 << 18,  //              // ColorEdit, ColorPicker: show vertical alpha bar/gradient in picker.
+            HDR             = 1 << 19,  //              // (WIP) ColorEdit: Currently only disable 0.0f..1.0f limits in RGBA edition (note: you probably want to use ImGuiColorEditFlags_Float flag as well).
+            DisplayRGB      = 1 << 20,  // [Display]    // ColorEdit: override _display_ type among RGB/HSV/Hex. ColorPicker: select any combination using one or more of RGB/HSV/Hex.
+            DisplayHSV      = 1 << 21,  // [Display]    // "
+            DisplayHex      = 1 << 22,  // [Display]    // "
+            Uint8           = 1 << 23,  // [DataType]   // ColorEdit, ColorPicker, ColorButton: _display_ values formatted as 0..255.
+            Float           = 1 << 24,  // [DataType]   // ColorEdit, ColorPicker, ColorButton: _display_ values formatted as 0.0f..1.0f floats instead of 0..255 integers. No round-trip of value via integers.
+            PickerHueBar    = 1 << 25,  // [Picker]     // ColorPicker: bar for Hue, rectangle for Sat/Value.
+            PickerHueWheel  = 1 << 26,  // [Picker]     // ColorPicker: wheel for Hue, triangle for Sat/Value.
+            PickerNoRotate  = 1 << 27,  // [Picker]     // ColorPicker: disable rotating Sat/Value triangle. Best set in io.ConfigColorEditFlags once.
+            InputRGB        = 1 << 28,  // [Input]      // ColorEdit, ColorPicker: input and output data in RGB format.
+            InputHSV        = 1 << 29,  // [Input]      // ColorEdit, ColorPicker: input and output data in HSV format.
+
+            // Defaults Options copied to io.ConfigColorEditFlags during initialization.
+            // The intent is that you probably don't want to override them in most of your calls.
+            // Let the user choose via the option menu and/or modify io.ConfigColorEditFlags directly during startup if you want.
+            DefaultOptions = Uint8 | DisplayRGB | InputRGB | PickerHueBar,
+
+            // [Internal] Masks
+            AlphaMask      = NoAlpha | AlphaOpaque | AlphaNoBg | AlphaPreviewHalf,
+            DisplayMask    = DisplayRGB | DisplayHSV | DisplayHex,
+            DataTypeMask   = Uint8 | Float,
+            PickerMask     = PickerHueWheel | PickerHueBar,
+            InputMask      = InputRGB | InputHSV
+        )
+
         SR_IMMEDIATE_GUI_DLL_API extern SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags GetNodeFlagsWithChild();
         SR_IMMEDIATE_GUI_DLL_API extern SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags GetNodeFlagsWithoutChild();
 
@@ -622,8 +673,14 @@ namespace SR_GRAPH_GUI_NS {
         SR_IMMEDIATE_GUI_DLL_API extern void EndHorizontal();
         SR_IMMEDIATE_GUI_DLL_API extern void Spring(float weight = 1.0f, float spacing = -1.0f);
 
-        // Debug
+        // Color Editor / Picker
+        SR_IMMEDIATE_GUI_DLL_API extern bool ColorEdit(const char* label, SR_MATH_NS::FColor& color, ColorEditFlags flags = ColorEditFlags::None);
+        SR_IMMEDIATE_GUI_DLL_API extern bool ColorEditAlpha(const char* label, SR_MATH_NS::FColor& color, ColorEditFlags flags = ColorEditFlags::None);
+        SR_IMMEDIATE_GUI_DLL_API extern bool ColorPicker(const char* label, SR_MATH_NS::FColor& color, ColorEditFlags flags = ColorEditFlags::None);
+        SR_IMMEDIATE_GUI_DLL_API extern bool ColorPickerAlpha(const char* label, SR_MATH_NS::FColor& color, ColorEditFlags flags = ColorEditFlags::None, const float* ref_col = NULL);
+        SR_IMMEDIATE_GUI_DLL_API extern bool ColorButton(const char* desc_id, SR_MATH_NS::FColor& color, ColorEditFlags flags = ColorEditFlags::None, const SR_MATH_NS::FVector2& size = SR_MATH_NS::FVector2(0, 0)); // display a color square/button, hover for details, return true when pressed.
 
+        // Debug
         SR_IMMEDIATE_GUI_DLL_API extern void ShowMetricsWindow(bool* pOpen = nullptr);
 
         // Icon drawing
@@ -635,20 +692,8 @@ namespace SR_GRAPH_GUI_NS {
         SR_IMMEDIATE_GUI_DLL_API extern void EndPlot();
 
         // ----- Line Plot
-
-    #ifdef SR_USE_IMGUI
-        // template<typename T> SR_IMMEDIATE_GUI_DLL_API extern void PlotLine(const char* label_id, const T* values, int count, double xscale = 1, double xstart = 0) {
-        //     ImPlot::PlotLine(label_id, values, count, xscale, xstart);
-        // }
-
-        // template<typename T> SR_IMMEDIATE_GUI_DLL_API extern void PlotLine(const char* label_id, const T* values, int count, double xscale = 1, double xstart = 0, const PlotSpec& spec = PlotSpec());
-        // template<typename T> SR_IMMEDIATE_GUI_DLL_API extern void PlotLine(const char* label_id, const T* xs, const T* ys, int count, const PlotSpec& spec = PlotSpec());
-        // SR_IMMEDIATE_GUI_DLL_API extern void PlotLineG(const char* label_id, ImPlotGetter getter, void* data, int count, const ImPlotSpec& spec=ImPlotSpec());
-    #endif
-
-    #ifndef SR_USE_IMGUI
-        template<typename T> SR_IMMEDIATE_GUI_DLL_API extern void PlotLine(const char* label_id, const T* values, int count, double xscale = 1, double xstart = 0) { }
-    #endif
+        SR_IMMEDIATE_GUI_DLL_API extern void PlotLine(const char* label_id, const void* values, int count, ImmediateDataType type, double xscale = 1, double xstart = 0);
+        SR_IMMEDIATE_GUI_DLL_API extern void PlotLine(const char* label_id, const void* xs, const void* ys, int count, ImmediateDataType type);
     }
 }
 

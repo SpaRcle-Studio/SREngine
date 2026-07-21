@@ -1516,6 +1516,99 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     void EndPlot() {
         ImPlot::EndPlot();
     }
+
+    void PlotLine(const char* label_id, const void* values, int count, ImmediateDataType type, double xscale, double xstart) {
+        switch (type) {
+            case ImmediateDataType::Float:
+                ImPlot::PlotLine(label_id, static_cast<const float_t*>(values), count, xscale, xstart);
+                break;
+            case ImmediateDataType::Double:
+                ImPlot::PlotLine(label_id, static_cast<const double_t*>(values), count, xscale, xstart);
+                break;
+            case ImmediateDataType::UInt8:
+                ImPlot::PlotLine(label_id, static_cast<const uint8_t*>(values), count, xscale, xstart);
+                break;
+            case ImmediateDataType::Int8:
+                ImPlot::PlotLine(label_id, static_cast<const int8_t*>(values), count, xscale, xstart);
+                break;
+            case ImmediateDataType::UInt16:
+                ImPlot::PlotLine(label_id, static_cast<const uint16_t*>(values), count, xscale, xstart);
+                break;
+            case ImmediateDataType::Int16:
+                ImPlot::PlotLine(label_id, static_cast<const int16_t*>(values), count, xscale, xstart);
+                break;
+            case ImmediateDataType::UInt32:
+                ImPlot::PlotLine(label_id, static_cast<const uint32_t*>(values), count, xscale, xstart);
+                break;
+            case ImmediateDataType::Int32:
+                ImPlot::PlotLine(label_id, static_cast<const int32_t*>(values), count, xscale, xstart);
+                break;
+            case ImmediateDataType::UInt64:
+            case ImmediateDataType::Int64:
+            default: {
+                SRHalt("ImmediateGUI::PlotLine() : unsupported ImmediateDataType!");
+                break;
+            }
+        }
+    }
+
+    void PlotLine(const char* label_id, const void* xs, const void* ys, int count, ImmediateDataType type) {
+        switch (type) {
+            case ImmediateDataType::Float:
+                ImPlot::PlotLine(label_id, static_cast<const float_t*>(xs), static_cast<const float_t*>(ys), count);
+                break;
+            case ImmediateDataType::Double:
+                ImPlot::PlotLine(label_id, static_cast<const double_t*>(xs), static_cast<const double_t*>(ys), count);
+                break;
+            case ImmediateDataType::UInt8:
+                ImPlot::PlotLine(label_id, static_cast<const uint8_t*>(xs), static_cast<const uint8_t*>(ys), count);
+                break;
+            case ImmediateDataType::Int8:
+                ImPlot::PlotLine(label_id, static_cast<const int8_t*>(xs), static_cast<const int8_t*>(ys), count);
+                break;
+            case ImmediateDataType::UInt16:
+                ImPlot::PlotLine(label_id, static_cast<const uint16_t*>(xs), static_cast<const uint16_t*>(ys), count);
+                break;
+            case ImmediateDataType::Int16:
+                ImPlot::PlotLine(label_id, static_cast<const int16_t*>(xs), static_cast<const int16_t*>(ys), count);
+                break;
+            case ImmediateDataType::UInt32:
+                ImPlot::PlotLine(label_id, static_cast<const uint32_t*>(xs), static_cast<const uint32_t*>(ys), count);
+                break;
+            case ImmediateDataType::Int32:
+                ImPlot::PlotLine(label_id, static_cast<const int32_t*>(xs), static_cast<const int32_t*>(ys), count);
+                break;
+            case ImmediateDataType::UInt64:
+            case ImmediateDataType::Int64:
+            default: {
+                SRHalt("ImmediateGUI::PlotLine() : unsupported ImmediateDataType!");
+                break;
+            }
+        }
+    }
+
+
+    bool ColorEdit(const char* label, SR_MATH_NS::FColor& color, ColorEditFlags flags) {
+        return ImGui::ColorEdit3(label, color.coord, static_cast<ImGuiColorEditFlags>(flags));
+    }
+
+    bool ColorEditAlpha(const char* label, SR_MATH_NS::FColor& color, ColorEditFlags flags) {
+        return ImGui::ColorEdit4(label, color.coord, static_cast<ImGuiColorEditFlags>(flags));
+    }
+
+    bool ColorPicker(const char* label, SR_MATH_NS::FColor& color, ColorEditFlags flags) {
+        return ImGui::ColorPicker3(label, color.coord, static_cast<ImGuiColorEditFlags>(flags));
+    }
+
+    bool ColorPickerAlpha(const char* label, SR_MATH_NS::FColor& color, ColorEditFlags flags, const float* ref_col) {
+        return ImGui::ColorPicker4(label, color.coord, static_cast<ImGuiColorEditFlags>(flags), ref_col);
+    }
+
+    bool ColorButton(const char* desc_id, SR_MATH_NS::FColor& color, ColorEditFlags flags, const SR_MATH_NS::FVector2& size) {
+        return ImGui::ColorButton(desc_id, FCToImV4(color), static_cast<ImGuiColorEditFlags>(flags), F2ToImV2(size));
+    }
+
+
 #endif
 
 #ifndef SR_USE_IMGUI
@@ -1720,5 +1813,14 @@ namespace SR_GRAPH_GUI_NS::Immediate {
 
     bool BeginPlot(const char* title_id, const SR_MATH_NS::IVector2& size, PlotFlags flags) { return false; }
     void EndPlot() { }
+
+    void PlotLine(const char* label_id, const void* values, int count, ImmediateDataType type, double xscale = 1, double xstart = 0) { }
+    void PlotLine(const char* label_id, const void* xs, const void* ys, int count, ImmediateDataType type) { } 
+
+    bool ColorEdit(const char* label, SR_MATH_NS::FColor& color, ColorEditFlags flags) { return false; }
+    bool ColorEditAlpha(const char* label, SR_MATH_NS::FColor& color, ColorEditFlags flags) { return false; }
+    bool ColorPicker(const char* label, SR_MATH_NS::FColor& color, ColorEditFlags flags) { return false; }
+    bool ColorPickerAlpha(const char* label, SR_MATH_NS::FColor& color, ColorEditFlags flags, const float* ref_col) { return false; }
+    bool ColorButton(const char* desc_id, SR_MATH_NS::FColor& color, ColorEditFlags flags, const SR_MATH_NS::FVector2& size) { return false; }
 #endif
 }

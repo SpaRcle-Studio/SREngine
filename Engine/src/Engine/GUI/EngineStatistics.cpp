@@ -31,11 +31,20 @@
 namespace SR_CORE_GUI_NS {
     EngineStatistics::EngineStatistics()
         : SR_GRAPH_GUI_NS::Widget("Engine statistics")
-    { }
+    {
+        m_framerateHistory.reserve(m_framerateHistorySize);
+    }
 
     void EngineStatistics::Draw() {
         if (SR_GRAPH_GUI_NS::Immediate::BeginTabBar("EngineStatsTabBar")) {
             SR_GRAPH_GUI_NS::Immediate::Separator();
+
+            float_t framerate = SR_GRAPH_GUI_NS::Immediate::GetFramerate();
+            m_framerateHistory.push_back(framerate);
+
+            if (m_framerateHistory.size() > m_framerateHistorySize) {
+                m_framerateHistory.erase(m_framerateHistory.begin());
+            }
 
             CommonPage();
             ResourcesPage();
@@ -136,6 +145,11 @@ namespace SR_CORE_GUI_NS {
 
             float_t mb = SR_UTILS_NS::GetApplicationHeapSize() / (1024 * 1024);
             SR_GRAPH_GUI_NS::Immediate::Text("Allocated memory: %.2fMb", mb);
+
+            if (SR_GRAPH_GUI_NS::Immediate::BeginPlot("Framerate History")) {
+                SR_GRAPH_GUI_NS::Immediate::PlotLine("Framerate", m_framerateHistory.data(), m_framerateHistory.size(), SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::Float);
+                SR_GRAPH_GUI_NS::Immediate::EndPlot();
+            }
 
             SR_GRAPH_GUI_NS::Immediate::EndTabItem();
         }

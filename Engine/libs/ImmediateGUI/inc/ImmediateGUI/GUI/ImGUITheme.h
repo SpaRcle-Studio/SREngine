@@ -98,6 +98,8 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         void Apply();
         /// @method @editorButton
         void StoreCurrentTheme();
+        /// @method @editorButton
+        void ImportHardcodedTheme();
 
     private:
         /// @property @onChanged(Apply)
