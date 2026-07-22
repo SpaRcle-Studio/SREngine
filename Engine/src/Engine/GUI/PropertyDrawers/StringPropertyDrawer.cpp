@@ -87,7 +87,7 @@ namespace SR_CORE_GUI_NS {
             }
         }
         else if (value.IsUnicodeString()) {
-            if (auto&& pUnicodeString = value.TryCast<SR_HTYPES_NS::UnicodeString>()) {
+            if (auto&& pUnicodeString = value.TryCast<SR_UTILS_NS::UnicodeString>()) {
                 std::string text;
                 SR_UTILS_NS::Localization::UtfToUtf<char, char32_t>(text, pUnicodeString->View());
 
@@ -101,7 +101,7 @@ namespace SR_CORE_GUI_NS {
                 if (SR_GRAPH_GUI_NS::Immediate::IsItemDeactivatedAfterEdit()) {
                     std::u32string unicodeText;
                     SR_UTILS_NS::Localization::UtfToUtf<char32_t, char>(unicodeText, text);
-                    SetPropertyDrawerMappedValue(context, feedback, pUnicodeString, SR_HTYPES_NS::UnicodeString(unicodeText));
+                    SetPropertyDrawerMappedValue(context, feedback, pUnicodeString, SR_UTILS_NS::UnicodeString(unicodeText));
                 }
             }
             else {

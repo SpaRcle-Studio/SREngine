@@ -16,7 +16,6 @@
 #include <Utils/Types/IRawMeshHolder.h>
 #include <Utils/Types/FastMemoryArray.h>
 #include <Utils/Math/Matrix4x4.h>
-#include <Utils/TypeTraits/Properties.h>
 #include <Utils/ECS/Transform.h>
 
 namespace SR_PHYSICS_NS {
