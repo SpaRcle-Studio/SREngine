@@ -20,6 +20,13 @@ namespace SR_CORE_UI_NS {
         /// @property
         SR_UTILS_NS::StringAtom method;
 
+        bool operator==(const UIButtonEvent& other) const noexcept {
+            return object == other.object && method == other.method;
+        }
+
+        bool operator!=(const UIButtonEvent& other) const noexcept {
+            return !(*this == other);
+        }
     };
 
     /// @category(UI)

@@ -5,6 +5,7 @@
 #include <Scripting/Cpp/CodeGenerator.h>
 #include <Scripting/Cpp/ScriptSystem.h>
 
+#include <Utils/Types/Vector.h>
 #include <Utils/Types/Time.h>
 #include <Utils/Common/Features.h>
 #include <Utils/Common/StringAtomLiterals.h>
@@ -325,8 +326,8 @@ namespace SR_SCRIPTING_NS {
         return true;
     }
 
-    std::vector<SR_UTILS_NS::StringAtom> CppCodeGenerator::GetDependenciesRecursive(SR_UTILS_NS::StringAtom moduleName) const {
-        std::vector<SR_UTILS_NS::StringAtom> dependencies;
+    SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> CppCodeGenerator::GetDependenciesRecursive(SR_UTILS_NS::StringAtom moduleName) const {
+        SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> dependencies;
         for (auto&& module : m_modules) {
             if (module.moduleInfo.moduleName == moduleName) {
                 dependencies.insert(dependencies.end(), module.moduleInfo.dependencies.begin(), module.moduleInfo.dependencies.end());

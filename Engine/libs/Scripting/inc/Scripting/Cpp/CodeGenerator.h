@@ -85,7 +85,7 @@ namespace SR_SCRIPTING_NS {
         void OnModuleChanged(SR_UTILS_NS::StringAtom moduleName);
         void InitModuleSources(CppCodegenModule& module);
 
-        SR_NODISCARD std::vector<SR_UTILS_NS::StringAtom> GetDependenciesRecursive(SR_UTILS_NS::StringAtom moduleName) const;
+        SR_NODISCARD SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> GetDependenciesRecursive(SR_UTILS_NS::StringAtom moduleName) const;
 
     private:
         ScriptSystem* m_pScriptSystem = nullptr;

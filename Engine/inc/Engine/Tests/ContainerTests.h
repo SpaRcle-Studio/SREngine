@@ -470,6 +470,7 @@ namespace SR_CORE_NS::Tests {
             if (!TestDetachAllocator())    { return SR_UTILS_NS::TestExecutionResult::Error; }
             if (!TestEmplace())            { return SR_UTILS_NS::TestExecutionResult::Error; }
             if (!TestLargeInsert())        { return SR_UTILS_NS::TestExecutionResult::Error; }
+            if (!TestEqualityOperator())        { return SR_UTILS_NS::TestExecutionResult::Error; }
 
             return SR_UTILS_NS::TestExecutionResult::Success;
         }
@@ -801,6 +802,22 @@ namespace SR_CORE_NS::Tests {
                     return false;
                 }
                 prevVal = v;
+            }
+            return true;
+        }
+
+        bool TestEqualityOperator() {
+            SR_UTILS_NS::Set<int> set1 = { 1, 2, 3 };
+            SR_UTILS_NS::Set<int> set2 = { 1, 2, 3 };
+            SR_UTILS_NS::Set<int> set3 = { 1, 2, 4 };
+
+            if (!(set1 == set2) || (set1 != set2)) {
+                SR_ERROR("SetTest::TestEqualOperator() : equality operator failed for equal sets!");
+                return false;
+            }
+            if (set1 == set3 || !(set1 != set3)) {
+                SR_ERROR("SetTest::TestEqualOperator() : equality operator failed for different sets!");
+                return false;
             }
             return true;
         }
