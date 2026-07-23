@@ -34,7 +34,7 @@ jobs:
       - name: Run uncrustify
         run: |
           git ls-files -z -- '*.cpp' '*.h' '*.hpp' '*.c' | \
-            xargs -0 uncrustify --replace --config .uncrustify.cfg
+            xargs -0 uncrustify --replace --no-backup --config .uncrustify.cfg
 
       - name: Create PR with formatting changes
         uses: peter-evans/create-pull-request@v7
