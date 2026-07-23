@@ -103,13 +103,13 @@ namespace SR_GRAPH_GUI_NS::Immediate {
 
     private:
         /// @property @onChanged(Apply)
-        std::map<SR_GRAPH_GUI_NS::Immediate::ImGUIThemeBoolVar, bool> m_boolSettings;
+        SR_UTILS_NS::Map<SR_GRAPH_GUI_NS::Immediate::ImGUIThemeBoolVar, bool> m_boolSettings;
         /// @property @onChanged(Apply)
-        std::map<SR_GRAPH_GUI_NS::Immediate::ImGUIThemeFloatVar, float_t> m_floatSettings;
+        SR_UTILS_NS::Map<SR_GRAPH_GUI_NS::Immediate::ImGUIThemeFloatVar, float_t> m_floatSettings;
         /// @property @onChanged(Apply)
-        std::map<SR_GRAPH_GUI_NS::Immediate::ImGUIThemeVec2Var, SR_MATH_NS::FVector2> m_vec2Settings;
+        SR_UTILS_NS::Map<SR_GRAPH_GUI_NS::Immediate::ImGUIThemeVec2Var, SR_MATH_NS::FVector2> m_vec2Settings;
         /// @property @onChanged(Apply)
-        std::map<SR_GRAPH_GUI_NS::Immediate::StyleColor, SR_MATH_NS::FColor> m_colorSettings;
+        SR_UTILS_NS::Map<SR_GRAPH_GUI_NS::Immediate::StyleColor, SR_MATH_NS::FColor> m_colorSettings;
 
     };
 }

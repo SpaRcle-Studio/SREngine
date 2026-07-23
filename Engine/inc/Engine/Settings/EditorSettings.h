@@ -58,7 +58,7 @@ namespace SR_CORE_NS {
         using Theme = SR_UTILS_NS::ResourceRef<SR_GRAPH_GUI_NS::Immediate::ImGUITheme>;
 
     public:
-        SR_NODISCARD const std::map<EditorIcon, EditorSettingsIconInfo>& GetIcons() const noexcept { return m_icons; }
+        SR_NODISCARD const SR_UTILS_NS::Map<EditorIcon, EditorSettingsIconInfo>& GetIcons() const noexcept { return m_icons; }
         SR_NODISCARD bool IsNeedDebugChunks() const noexcept { return m_debugChunks; }
         SR_NODISCARD const Theme& GetTheme() const noexcept { return m_theme; }
 
@@ -68,7 +68,7 @@ namespace SR_CORE_NS {
         /// @property @onChanged(OnThemeChanged)
         Theme m_theme;
         /// @property
-        std::map<EditorIcon, EditorSettingsIconInfo> m_icons;
+        SR_UTILS_NS::Map<EditorIcon, EditorSettingsIconInfo> m_icons;
 
         /// @property
         bool m_debugChunks = false;

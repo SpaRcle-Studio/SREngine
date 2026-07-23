@@ -9,12 +9,22 @@ use tabs: true
 				4-k:i
 					5-o:d
 						6-v:type
-							7-s:SRSLTest
+							7-s:SharedPtrTest
 						6-o:ptr
 				4-k:i
 					5-o:d
 						6-v:type
-							7-s:SharedPtrTest
+							7-s:MapTest
+						6-o:ptr
+				4-k:i
+					5-o:d
+						6-v:type
+							7-s:SetTest
+						6-o:ptr
+				4-k:i
+					5-o:d
+						6-v:type
+							7-s:SRSLTest
 						6-o:ptr
 				4-k:i
 					5-o:d

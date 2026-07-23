@@ -22,7 +22,7 @@ namespace SR_SCRIPTING_NS {
         /// @property
         ScriptLinkMode linkMode = ScriptLinkMode::Unknown;
         /// @property
-        std::set<SR_UTILS_NS::StringAtom> dependencies;
+        SR_UTILS_NS::Set<SR_UTILS_NS::StringAtom> dependencies;
         /// @property
         bool enabled = true;
 
