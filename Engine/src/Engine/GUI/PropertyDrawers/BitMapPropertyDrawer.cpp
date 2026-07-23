@@ -64,7 +64,7 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::SameLine();
 
         SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
-        SR_GRAPH_GUI_NS::Immediate::Button("{}"_format(container.Size()).c_str(), counterButtonWidth);
+        SR_GRAPH_GUI_NS::Immediate::Button("{}"_format (container.Size()).c_str(), counterButtonWidth);
         SR_GRAPH_GUI_NS::Immediate::EndDisabled();
 
         SR_GRAPH_GUI_NS::Immediate::SameLine();
@@ -109,7 +109,7 @@ namespace SR_CORE_GUI_NS {
                     if (i % maxPartsInLine == 0) {
                         SR_MATH_NS::FVector2 itemButtonSize = { 40, context.fieldHeight };
                         SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
-                        SR_GRAPH_GUI_NS::Immediate::Button("[{}] "_format(static_cast<uint64_t>(i / maxPartsInLine)).c_str(), itemButtonSize);
+                        SR_GRAPH_GUI_NS::Immediate::Button("[{}] "_format (static_cast<uint64_t>(i / maxPartsInLine)).c_str(), itemButtonSize);
                         SR_GRAPH_GUI_NS::Immediate::EndDisabled();
                         SR_GRAPH_GUI_NS::Immediate::SameLine();
                     }

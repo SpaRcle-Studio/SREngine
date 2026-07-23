@@ -74,7 +74,7 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::SameLine();
 
         SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
-        SR_GRAPH_GUI_NS::Immediate::Button("{}"_format(container.Size()).c_str(), counterButtonWidth);
+        SR_GRAPH_GUI_NS::Immediate::Button("{}"_format (container.Size()).c_str(), counterButtonWidth);
         SR_GRAPH_GUI_NS::Immediate::EndDisabled();
 
         if (!m_keyDrawer) {
@@ -100,27 +100,27 @@ namespace SR_CORE_GUI_NS {
         PropertyDrawerContext keyCtx = context;
 
         keyCtx.isEnumValueAvailableCheckFn = [&](SR_UTILS_NS::StringAtom enumValue) {
-            if (!m_keyValue->IsEnum()) {
-                SRHalt("AssociativePropertyDrawer::Draw() : key value is not an enum type!");
-                return true;
-            }
+                                                 if (!m_keyValue->IsEnum()) {
+                                                     SRHalt("AssociativePropertyDrawer::Draw() : key value is not an enum type!");
+                                                     return true;
+                                                 }
 
-            SR_UTILS_NS::EnumReflector* pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().GetReflector(m_keyValue->GetEnumType());
-            if (!pReflector) {
-                SRHalt("AssociativePropertyDrawer::Draw() : key value enum reflector is not found!");
-                return true;
-            }
+                                                 SR_UTILS_NS::EnumReflector* pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().GetReflector(m_keyValue->GetEnumType());
+                                                 if (!pReflector) {
+                                                     SRHalt("AssociativePropertyDrawer::Draw() : key value enum reflector is not found!");
+                                                     return true;
+                                                 }
 
-            const int64_t enumValueInt = pReflector->FromStringInternal(enumValue).value();
+                                                 const int64_t enumValueInt = pReflector->FromStringInternal(enumValue).value();
 
-            for (auto&& pIt = container.begin(); pIt != container.end(); ++pIt) {
-                void* pMappedRaw = pIt.First().Detach().Data();
-                if (pReflector->ReadEnumValueFromPointerInternal(pMappedRaw) == enumValueInt) {
-                    return false;
-                }
-            }
-            return true;
-        };
+                                                 for (auto&& pIt = container.begin(); pIt != container.end(); ++pIt) {
+                                                     void* pMappedRaw = pIt.First().Detach().Data();
+                                                     if (pReflector->ReadEnumValueFromPointerInternal(pMappedRaw) == enumValueInt) {
+                                                         return false;
+                                                     }
+                                                 }
+                                                 return true;
+                                             };
 
         keyCtx.pValue = m_keyValue;
         keyCtx.fieldTitleWidth = 0.f;

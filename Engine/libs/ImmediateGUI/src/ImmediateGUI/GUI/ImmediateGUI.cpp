@@ -123,10 +123,10 @@ namespace SR_GRAPH_GUI_NS::Immediate {
 
     ImmediateDataType GetDataType(std::string_view type) {
         static const std::map<std::string_view, ImmediateDataType> table = {
-                { "int", ImmediateDataType::Int32 },
-                { "unsigned int", ImmediateDataType::UInt32 },
-                { "float", ImmediateDataType::Float },
-                { "double", ImmediateDataType::Double }
+            { "int", ImmediateDataType::Int32 },
+            { "unsigned int", ImmediateDataType::UInt32 },
+            { "float", ImmediateDataType::Float },
+            { "double", ImmediateDataType::Double }
         };
         if (auto it = table.find(type); it != table.end()) {
             return it->second;
@@ -136,17 +136,17 @@ namespace SR_GRAPH_GUI_NS::Immediate {
 
     ImmediateDataType GetDataType(uint64_t size, bool isSigned, bool isIntegral) {
         static const std::map<uint64_t, ImmediateDataType> signedTable = {
-                { 1, ImmediateDataType::Int8  },
-                { 2, ImmediateDataType::Int16 },
-                { 4, ImmediateDataType::Int32 },
-                { 8, ImmediateDataType::Int64 }
+            { 1, ImmediateDataType::Int8  },
+            { 2, ImmediateDataType::Int16 },
+            { 4, ImmediateDataType::Int32 },
+            { 8, ImmediateDataType::Int64 }
         };
 
         static const std::map<uint64_t, ImmediateDataType> unsignedTable = {
-                { 1, ImmediateDataType::UInt8  },
-                { 2, ImmediateDataType::UInt16 },
-                { 4, ImmediateDataType::UInt32 },
-                { 8, ImmediateDataType::UInt64 }
+            { 1, ImmediateDataType::UInt8  },
+            { 2, ImmediateDataType::UInt16 },
+            { 4, ImmediateDataType::UInt32 },
+            { 8, ImmediateDataType::UInt64 }
         };
 
         if (!isIntegral) {
@@ -173,16 +173,16 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     }
 
     ImmediateDataTypeUnion ReadDataType(void* pData, ImmediateDataType type) {
-        ImmediateDataTypeUnion result = {};
+        ImmediateDataTypeUnion result = { };
         switch (type) {
-            case ImmediateDataType::Int8:  result.s8   = *(int8_t*)pData; break;
-            case ImmediateDataType::UInt8:  result.u8   = *(uint8_t*)pData; break;
-            case ImmediateDataType::Int16: result.s16  = *(int16_t*)pData; break;
-            case ImmediateDataType::UInt16: result.u16  = *(uint16_t*)pData; break;
-            case ImmediateDataType::Int32: result.s32  = *(int32_t*)pData; break;
-            case ImmediateDataType::UInt32: result.u32  = *(uint32_t*)pData; break;
-            case ImmediateDataType::Int64: result.s64  = *(int64_t*)pData; break;
-            case ImmediateDataType::UInt64: result.u64  = *(uint64_t*)pData; break;
+            case ImmediateDataType::Int8:  result.s8 = *(int8_t*)pData; break;
+            case ImmediateDataType::UInt8:  result.u8 = *(uint8_t*)pData; break;
+            case ImmediateDataType::Int16: result.s16 = *(int16_t*)pData; break;
+            case ImmediateDataType::UInt16: result.u16 = *(uint16_t*)pData; break;
+            case ImmediateDataType::Int32: result.s32 = *(int32_t*)pData; break;
+            case ImmediateDataType::UInt32: result.u32 = *(uint32_t*)pData; break;
+            case ImmediateDataType::Int64: result.s64 = *(int64_t*)pData; break;
+            case ImmediateDataType::UInt64: result.u64 = *(uint64_t*)pData; break;
             case ImmediateDataType::Float: result.f32 = *(float*)pData; break;
             case ImmediateDataType::Double: result.f64 = *(double*)pData; break;
             default: SRHalt("Unknown ImGuiDataType!"); break;
@@ -191,16 +191,16 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     }
 
     ImmediateDataTypeUnion FloatToDataType(float_t value, ImmediateDataType type) {
-        ImmediateDataTypeUnion result = {};
+        ImmediateDataTypeUnion result = { };
         switch (type) {
-            case ImmediateDataType::Int8:  result.s8   = static_cast<int8_t>(value); break;
-            case ImmediateDataType::UInt8:  result.u8   = static_cast<uint8_t>(value); break;
-            case ImmediateDataType::Int16: result.s16  = static_cast<int16_t>(value); break;
-            case ImmediateDataType::UInt16: result.u16  = static_cast<uint16_t>(value); break;
-            case ImmediateDataType::Int32: result.s32  = static_cast<int32_t>(value); break;
-            case ImmediateDataType::UInt32: result.u32  = static_cast<uint32_t>(value); break;
-            case ImmediateDataType::Int64: result.s64  = static_cast<int64_t>(value); break;
-            case ImmediateDataType::UInt64: result.u64  = static_cast<uint64_t>(value); break;
+            case ImmediateDataType::Int8:  result.s8 = static_cast<int8_t>(value); break;
+            case ImmediateDataType::UInt8:  result.u8 = static_cast<uint8_t>(value); break;
+            case ImmediateDataType::Int16: result.s16 = static_cast<int16_t>(value); break;
+            case ImmediateDataType::UInt16: result.u16 = static_cast<uint16_t>(value); break;
+            case ImmediateDataType::Int32: result.s32 = static_cast<int32_t>(value); break;
+            case ImmediateDataType::UInt32: result.u32 = static_cast<uint32_t>(value); break;
+            case ImmediateDataType::Int64: result.s64 = static_cast<int64_t>(value); break;
+            case ImmediateDataType::UInt64: result.u64 = static_cast<uint64_t>(value); break;
             case ImmediateDataType::Float: result.f32 = value; break;
             case ImmediateDataType::Double: result.f64 = value; break;
             default: SRHalt("Unknown ImGuiDataType!"); break;
@@ -210,16 +210,16 @@ namespace SR_GRAPH_GUI_NS::Immediate {
 
     void WriteDataType(void* pData, ImmediateDataType type, ImmediateDataTypeUnion value) {
         switch (type) {
-            case ImmediateDataType::Int8:   *(int8_t*)pData   = value.s8; break;
-            case ImmediateDataType::UInt8:  *(uint8_t*)pData  = value.u8; break;
-            case ImmediateDataType::Int16:  *(int16_t*)pData  = value.s16; break;
+            case ImmediateDataType::Int8:   *(int8_t*)pData = value.s8; break;
+            case ImmediateDataType::UInt8:  *(uint8_t*)pData = value.u8; break;
+            case ImmediateDataType::Int16:  *(int16_t*)pData = value.s16; break;
             case ImmediateDataType::UInt16: *(uint16_t*)pData = value.u16; break;
-            case ImmediateDataType::Int32:  *(int32_t*)pData  = value.s32; break;
+            case ImmediateDataType::Int32:  *(int32_t*)pData = value.s32; break;
             case ImmediateDataType::UInt32: *(uint32_t*)pData = value.u32; break;
-            case ImmediateDataType::Int64:  *(int64_t*)pData  = value.s64; break;
+            case ImmediateDataType::Int64:  *(int64_t*)pData = value.s64; break;
             case ImmediateDataType::UInt64: *(uint64_t*)pData = value.u64; break;
-            case ImmediateDataType::Float:  *(float*)pData    = value.f32; break;
-            case ImmediateDataType::Double: *(double*)pData   = value.f64; break;
+            case ImmediateDataType::Float:  *(float*)pData = value.f32; break;
+            case ImmediateDataType::Double: *(double*)pData = value.f64; break;
             default: SRHalt("Unknown ImmediateDataType!"); break;
         }
     }
@@ -273,12 +273,12 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         ImGui::PopItemWidth();
     }
 
-    bool Checkbox(const char *label, bool *v) {
+    bool Checkbox(const char* label, bool* v) {
         SR_TRACY_ZONE;
         return ImGui::Checkbox(label, v);
     }
 
-    bool DragScalar(const char* label, ImmediateDataType type, void* pData, float_t vSpeed, const void* pMin, const void *pMax, const char* format) {
+    bool DragScalar(const char* label, ImmediateDataType type, void* pData, float_t vSpeed, const void* pMin, const void* pMax, const char* format) {
         SR_TRACY_ZONE;
         return ImGui::DragScalar(label, static_cast<ImGuiDataType_>(type), pData, vSpeed, pMin, pMax, format);
     }
@@ -325,7 +325,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         ImGui::Dummy(F2ToImV2(size));
     }
 
-    bool BeginCombo(const char *label, const char *previewValue, ComboFlags flags) {
+    bool BeginCombo(const char* label, const char* previewValue, ComboFlags flags) {
         return ImGui::BeginCombo(label, previewValue, static_cast<ImGuiComboFlags>(flags));
     }
 
@@ -402,7 +402,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         return ImV2ToF2(ImGui::GetCursorScreenPos());
     }
 
-    void* GetWindowDrawList(void *pWindow) {
+    void* GetWindowDrawList(void* pWindow) {
         if (auto&& pImGuiWindow = static_cast<ImGuiWindow*>(pWindow)) {
             return pImGuiWindow->DrawList;
         }
@@ -479,7 +479,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         ImGui::PopTextWrapPos();
     }
 
-    void DrawMultiLineTextOnCenter(const std::string &text, ImVec4 color) {
+    void DrawMultiLineTextOnCenter(const std::string& text, ImVec4 color) {
         const float_t winWidth = ImGui::GetWindowSize().x;
         const float_t textWidth = ImGui::CalcTextSize(text.c_str()).x;
 
@@ -530,14 +530,14 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         return result;
     }
 
-    bool ImageButtonInternal(std::string_view &&imageId, void* pDescriptor, const SR_MATH_NS::FVector2& size, float_t framePadding, ButtonFlags flags) {
+    bool ImageButtonInternal(std::string_view&& imageId, void* pDescriptor, const SR_MATH_NS::FVector2& size, float_t framePadding, ButtonFlags flags) {
         ImGuiContext& g = *GImGui;
         ImGuiWindow* window = g.CurrentWindow;
         if (window->SkipItems)
             return false;
 
-        ImVec4 bg_col = ImVec4(0,0,0,0);
-        ImVec4 tint_col = ImVec4(1,1,1,1);
+        ImVec4 bg_col = ImVec4(0, 0, 0, 0);
+        ImVec4 tint_col = ImVec4(1, 1, 1, 1);
         ImVec2 uv0, uv1;
 
         /// if (m_pipeLine == Graphics::PipelineType::OpenGL) {
@@ -669,7 +669,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
             if (bufSize < 3) return 0;
             pBuffer[0] = (char)(0xe0 + (c >> 12));
             pBuffer[1] = (char)(0x80 + ((c >> 6) & 0x3f));
-            pBuffer[2] = (char)(0x80 + ((c ) & 0x3f));
+            pBuffer[2] = (char)(0x80 + ((c) & 0x3f));
             return 3;
         }
         if (c <= 0x10FFFF)
@@ -678,7 +678,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
             pBuffer[0] = (char)(0xf0 + (c >> 18));
             pBuffer[1] = (char)(0x80 + ((c >> 12) & 0x3f));
             pBuffer[2] = (char)(0x80 + ((c >> 6) & 0x3f));
-            pBuffer[3] = (char)(0x80 + ((c ) & 0x3f));
+            pBuffer[3] = (char)(0x80 + ((c) & 0x3f));
             return 4;
         }
         /// Invalid code point, the max unicode is 0x10FFFF
@@ -695,7 +695,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         return ImGui::SplitterBehavior(bb, id, split_vertically ? ImGuiAxis_X : ImGuiAxis_Y, size1, size2, min_size1, min_size2, 0.0f);
     }
 
-    bool BeginTabBar(const char *str_id) {
+    bool BeginTabBar(const char* str_id) {
         return ImGui::BeginTabBar(str_id);
     }
 
@@ -743,7 +743,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         return ImGui::InputText(label, str, static_cast<ImGuiInputTextFlags>(flags));
     }
 
-    bool MenuItem(const char *label) {
+    bool MenuItem(const char* label) {
         SR_TRACY_ZONE;
         return ImGui::MenuItem(label);
     }
@@ -760,12 +760,12 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         ImGui::EndListBox();
     }
 
-    bool BeginMenu(const char *label) {
+    bool BeginMenu(const char* label) {
         SR_TRACY_ZONE;
         return ImGui::BeginMenu(label);
     }
 
-    void LabelText(const char* label, const char *text, ...) {
+    void LabelText(const char* label, const char* text, ...) {
         SR_TRACY_ZONE;
         va_list args;
         va_start(args, text);
@@ -793,11 +793,11 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         ImGui::SetNextWindowViewport(pViewport->ID);
 
         static constexpr ImGuiWindowFlags windowFlags = 0
-            | ImGuiWindowFlags_NoCollapse
-            | ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking
-            | ImGuiWindowFlags_NoTitleBar
-            | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove
-            | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
+                                                        | ImGuiWindowFlags_NoCollapse
+                                                        | ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking
+                                                        | ImGuiWindowFlags_NoTitleBar
+                                                        | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove
+                                                        | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
 
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
         ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
@@ -836,7 +836,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         ImGui::End();
     }
 
-    bool SmallButton(const char *label) {
+    bool SmallButton(const char* label) {
         SR_TRACY_ZONE;
         return ImGui::SmallButton(label);
     }
@@ -1091,7 +1091,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         ImGui::EndPopup();
     }
 
-    bool BeginPopup(const char *name) {
+    bool BeginPopup(const char* name) {
         return ImGui::BeginPopup(name);
     }
 
@@ -1153,7 +1153,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         return static_cast<const ImGuiPayload*>(pPayload)->Data;
     }
 
-    bool BeginTabItem(const char *str_id) {
+    bool BeginTabItem(const char* str_id) {
         return ImGui::BeginTabItem(str_id);
     }
 
@@ -1169,7 +1169,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         return ImV2ToF2(ImGui::GetContentRegionAvail());
     }
 
-    SR_MATH_NS::FVector2 CalcTextSize(const char *text) {
+    SR_MATH_NS::FVector2 CalcTextSize(const char* text) {
         return ImV2ToF2(ImGui::CalcTextSize(text));
     }
 
@@ -1181,7 +1181,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         return ImV2ToF2(ImGui::GetItemRectMin());
     }
 
-    void OpenPopup(const char *str_id) {
+    void OpenPopup(const char* str_id) {
         ImGui::OpenPopup(str_id);
     }
 
@@ -1208,7 +1208,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         return ImGui::BeginDragDropSource(static_cast<ImGuiDragDropFlags>(flags));
     }
 
-    void SetDragDropPayload(const char *type, const void *data, size_t size, Condition cond) {
+    void SetDragDropPayload(const char* type, const void* data, size_t size, Condition cond) {
         ImGui::SetDragDropPayload(type, data, size, static_cast<ImGuiCond>(cond));
     }
 
@@ -1230,11 +1230,11 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         return ImGui::IsMouseDoubleClicked(static_cast<ImGuiMouseButton>(button));
     }
 
-    bool BeginPopupContextWindow(const char *str_id) {
+    bool BeginPopupContextWindow(const char* str_id) {
         return ImGui::BeginPopupContextWindow(str_id);
     }
 
-    bool BeginPopupContextItem(const char *str_id) {
+    bool BeginPopupContextItem(const char* str_id) {
         return ImGui::BeginPopupContextItem(str_id);
     }
 
@@ -1242,7 +1242,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         return ImGui::IsItemHovered();
     }
 
-    bool TreeNodeEx(const void *ptr_id, TreeNodeFlags flags, const char *fmt, ...) {
+    bool TreeNodeEx(const void* ptr_id, TreeNodeFlags flags, const char* fmt, ...) {
         SR_TRACY_ZONE;
         va_list args;
         va_start(args, fmt);
@@ -1256,7 +1256,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         ImGui::TreePop();
     }
 
-    const char* GetPayloadType(const void *pPayload) {
+    const char* GetPayloadType(const void* pPayload) {
         return static_cast<const ImGuiPayload*>(pPayload)->DataType;
     }
 
@@ -1268,35 +1268,35 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         return ImGui::IsItemToggledOpen();
     }
 
-    bool DragFloat(const char *label, float_t *v, float_t vSpeed, const float_t min, const float_t max, const char *format) {
+    bool DragFloat(const char* label, float_t* v, float_t vSpeed, const float_t min, const float_t max, const char* format) {
         return ImGui::DragFloat(label, v, vSpeed, min, max, format);
     }
 
-    bool DragFloat2(const char *label, float_t v[2], float_t vSpeed, const float_t min, const float_t max, const char *format) {
+    bool DragFloat2(const char* label, float_t v[2], float_t vSpeed, const float_t min, const float_t max, const char* format) {
         return ImGui::DragFloat2(label, v, vSpeed, min, max, format);
     }
 
-    bool DragFloat3(const char *label, float_t v[3], float_t vSpeed, const float_t min, const float_t max, const char *format) {
+    bool DragFloat3(const char* label, float_t v[3], float_t vSpeed, const float_t min, const float_t max, const char* format) {
         return ImGui::DragFloat3(label, v, vSpeed, min, max, format);
     }
 
-    bool SliderFloat(const char *label, float_t *v, float_t min, float_t max, const char *format) {
+    bool SliderFloat(const char* label, float_t* v, float_t min, float_t max, const char* format) {
         return ImGui::SliderFloat(label, v, min, max, format);
     }
 
-    bool SliderInt(const char *label, int *v, int min, int max, const char *format) {
+    bool SliderInt(const char* label, int* v, int min, int max, const char* format) {
         return ImGui::SliderInt(label, v, min, max, format);
     }
 
-    bool InputText(const char *label, char *str, size_t strSize, InputTextFlags flags) {
+    bool InputText(const char* label, char* str, size_t strSize, InputTextFlags flags) {
         return ImGui::InputText(label, str, strSize, static_cast<ImGuiInputTextFlags>(flags));
     }
 
-    bool InputTextMultiline(const char *label, std::string *str, const SR_MATH_NS::FVector2 &size, InputTextFlags flags) {
+    bool InputTextMultiline(const char* label, std::string* str, const SR_MATH_NS::FVector2& size, InputTextFlags flags) {
         return ImGui::InputTextMultiline(label, str, F2ToImV2(size), static_cast<ImGuiInputTextFlags>(flags));
     }
 
-    void* FindWindowByName(const char *name) {
+    void* FindWindowByName(const char* name) {
         return ImGui::FindWindowByName(name);
     }
 
@@ -1360,8 +1360,8 @@ namespace SR_GRAPH_GUI_NS::Immediate {
             case StyleVar::GrabRounding: return style.GrabRounding;
             case StyleVar::TabRounding: return style.TabRounding;
             default:
-                SRHalt("Unsupported StyleVar!");
-                return 0.0f;
+            SRHalt("Unsupported StyleVar!");
+            return 0.0f;
         }
     }
 
@@ -1377,8 +1377,8 @@ namespace SR_GRAPH_GUI_NS::Immediate {
             case StyleVar::ButtonTextAlign: return ImV2ToF2(style.ButtonTextAlign);
             case StyleVar::SelectableTextAlign: return ImV2ToF2(style.SelectableTextAlign);
             default:
-                SRHalt("Unsupported StyleVar!");
-                return SR_MATH_NS::FVector2(0.0f, 0.0f);
+            SRHalt("Unsupported StyleVar!");
+            return SR_MATH_NS::FVector2(0.0f, 0.0f);
         }
     }
 
@@ -1406,102 +1406,102 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         if (ImGui::IsRectVisible(F2ToImV2(size))) {
             auto cursorPos = ImGui::GetCursorScreenPos();
             auto drawList = ImGui::GetWindowDrawList();
-            
+
             auto rect = ImRect(cursorPos, cursorPos + F2ToImV2(size));
             auto rect_center = rect.GetCenter();
             auto rect_w = rect.Max.x - rect.Min.x;
             auto rect_h = rect.Max.y - rect.Min.y;
-            
+
             ImU32 colorU32 = ImColor(FCToImV4(color));
             ImU32 innerColorU32 = ImColor(FCToImV4(innerColor));
             const auto outline_scale = rect_w / 24.0f;
             const auto extra_segments = static_cast<int>(2 * outline_scale);
-            
+
             switch (iconType) {
                 case SR_GRAPH_NS::GUI::IconType::Circle: {
-                    const auto c = rect_center;
-                    if (!filled) {
-                        const auto r = 0.5f * rect_w / 2.0f - 0.5f;
-                        if (innerColorU32 & 0xFF000000) {
-                            drawList->AddCircleFilled(c, r, innerColorU32, 12 + extra_segments);
-                        }
-                        drawList->AddCircle(c, r, colorU32, 12 + extra_segments, 2.0f * outline_scale);
-                    } else {
-                        drawList->AddCircleFilled(c, 0.5f * rect_w / 2.0f, colorU32, 12 + extra_segments);
+                const auto c = rect_center;
+                if (!filled) {
+                    const auto r = 0.5f * rect_w / 2.0f - 0.5f;
+                    if (innerColorU32 & 0xFF000000) {
+                        drawList->AddCircleFilled(c, r, innerColorU32, 12 + extra_segments);
                     }
-                    break;
+                    drawList->AddCircle(c, r, colorU32, 12 + extra_segments, 2.0f * outline_scale);
+                } else {
+                    drawList->AddCircleFilled(c, 0.5f * rect_w / 2.0f, colorU32, 12 + extra_segments);
                 }
+                break;
+            }
                 case SR_GRAPH_NS::GUI::IconType::Square: {
-                    if (filled) {
-                        const auto r = 0.5f * rect_w / 2.0f;
-                        const auto p0 = rect_center - ImVec2(r, r);
-                        const auto p1 = rect_center + ImVec2(r, r);
-                        drawList->AddRectFilled(p0, p1, colorU32, 0.0f);
-                    } else {
-                        const auto r = 0.5f * rect_w / 2.0f - 0.5f;
-                        const auto p0 = rect_center - ImVec2(r, r);
-                        const auto p1 = rect_center + ImVec2(r, r);
-                        if (innerColorU32 & 0xFF000000) {
-                            drawList->AddRectFilled(p0, p1, innerColorU32, 0.0f);
-                        }
-                        drawList->AddRect(p0, p1, colorU32, 0.0f, 0, 2.0f * outline_scale);
+                if (filled) {
+                    const auto r = 0.5f * rect_w / 2.0f;
+                    const auto p0 = rect_center - ImVec2(r, r);
+                    const auto p1 = rect_center + ImVec2(r, r);
+                    drawList->AddRectFilled(p0, p1, colorU32, 0.0f);
+                } else {
+                    const auto r = 0.5f * rect_w / 2.0f - 0.5f;
+                    const auto p0 = rect_center - ImVec2(r, r);
+                    const auto p1 = rect_center + ImVec2(r, r);
+                    if (innerColorU32 & 0xFF000000) {
+                        drawList->AddRectFilled(p0, p1, innerColorU32, 0.0f);
                     }
-                    break;
+                    drawList->AddRect(p0, p1, colorU32, 0.0f, 0, 2.0f * outline_scale);
                 }
+                break;
+            }
                 case SR_GRAPH_NS::GUI::IconType::Flow: {
-                    const auto origin_scale = rect_w / 24.0f;
-                    const auto offset_x = 1.0f * origin_scale;
-                    const auto offset_y = 0.0f * origin_scale;
-                    const auto margin = 2.0f * origin_scale;
-                    const auto rounding = 0.1f * origin_scale;
-                    const auto tip_round = 0.7f;
-                    const auto canvas = ImRect(
-                        rect.Min.x + margin + offset_x,
-                        rect.Min.y + margin + offset_y,
-                        rect.Max.x - margin + offset_x,
-                        rect.Max.y - margin + offset_y);
-                    const auto canvas_x = canvas.Min.x;
-                    const auto canvas_y = canvas.Min.y;
-                    const auto canvas_w = canvas.Max.x - canvas.Min.x;
-                    const auto canvas_h = canvas.Max.y - canvas.Min.y;
-                    const auto left = canvas_x + canvas_w * 0.5f * 0.3f;
-                    const auto right = canvas_x + canvas_w - canvas_w * 0.5f * 0.3f;
-                    const auto top = canvas_y + canvas_h * 0.5f * 0.2f;
-                    const auto bottom = canvas_y + canvas_h - canvas_h * 0.5f * 0.2f;
-                    const auto center_y = (top + bottom) * 0.5f;
-                    const auto tip_top = ImVec2(canvas_x + canvas_w * 0.5f, top);
-                    const auto tip_right = ImVec2(right, center_y);
-                    const auto tip_bottom = ImVec2(canvas_x + canvas_w * 0.5f, bottom);
-                    
-                    drawList->PathLineTo(ImVec2(left, top) + ImVec2(0, rounding));
-                    drawList->PathBezierCubicCurveTo(ImVec2(left, top), ImVec2(left, top), ImVec2(left, top) + ImVec2(rounding, 0));
-                    drawList->PathLineTo(tip_top);
-                    drawList->PathLineTo(tip_top + (tip_right - tip_top) * tip_round);
-                    drawList->PathBezierCubicCurveTo(tip_right, tip_right, tip_bottom + (tip_right - tip_bottom) * tip_round);
-                    drawList->PathLineTo(tip_bottom);
-                    drawList->PathLineTo(ImVec2(left, bottom) + ImVec2(rounding, 0));
-                    drawList->PathBezierCubicCurveTo(ImVec2(left, bottom), ImVec2(left, bottom), ImVec2(left, bottom) - ImVec2(0, rounding));
-                    
-                    if (!filled) {
-                        if (innerColorU32 & 0xFF000000) {
-                            drawList->AddConvexPolyFilled(drawList->_Path.Data, drawList->_Path.Size, innerColorU32);
-                        }
-                        drawList->PathStroke(colorU32, ImDrawFlags_Closed, 2.0f * outline_scale);
-                    } else {
-                        drawList->PathFillConvex(colorU32);
+                const auto origin_scale = rect_w / 24.0f;
+                const auto offset_x = 1.0f * origin_scale;
+                const auto offset_y = 0.0f * origin_scale;
+                const auto margin = 2.0f * origin_scale;
+                const auto rounding = 0.1f * origin_scale;
+                const auto tip_round = 0.7f;
+                const auto canvas = ImRect(
+                    rect.Min.x + margin + offset_x,
+                    rect.Min.y + margin + offset_y,
+                    rect.Max.x - margin + offset_x,
+                    rect.Max.y - margin + offset_y);
+                const auto canvas_x = canvas.Min.x;
+                const auto canvas_y = canvas.Min.y;
+                const auto canvas_w = canvas.Max.x - canvas.Min.x;
+                const auto canvas_h = canvas.Max.y - canvas.Min.y;
+                const auto left = canvas_x + canvas_w * 0.5f * 0.3f;
+                const auto right = canvas_x + canvas_w - canvas_w * 0.5f * 0.3f;
+                const auto top = canvas_y + canvas_h * 0.5f * 0.2f;
+                const auto bottom = canvas_y + canvas_h - canvas_h * 0.5f * 0.2f;
+                const auto center_y = (top + bottom) * 0.5f;
+                const auto tip_top = ImVec2(canvas_x + canvas_w * 0.5f, top);
+                const auto tip_right = ImVec2(right, center_y);
+                const auto tip_bottom = ImVec2(canvas_x + canvas_w * 0.5f, bottom);
+
+                drawList->PathLineTo(ImVec2(left, top) + ImVec2(0, rounding));
+                drawList->PathBezierCubicCurveTo(ImVec2(left, top), ImVec2(left, top), ImVec2(left, top) + ImVec2(rounding, 0));
+                drawList->PathLineTo(tip_top);
+                drawList->PathLineTo(tip_top + (tip_right - tip_top) * tip_round);
+                drawList->PathBezierCubicCurveTo(tip_right, tip_right, tip_bottom + (tip_right - tip_bottom) * tip_round);
+                drawList->PathLineTo(tip_bottom);
+                drawList->PathLineTo(ImVec2(left, bottom) + ImVec2(rounding, 0));
+                drawList->PathBezierCubicCurveTo(ImVec2(left, bottom), ImVec2(left, bottom), ImVec2(left, bottom) - ImVec2(0, rounding));
+
+                if (!filled) {
+                    if (innerColorU32 & 0xFF000000) {
+                        drawList->AddConvexPolyFilled(drawList->_Path.Data, drawList->_Path.Size, innerColorU32);
                     }
-                    break;
+                    drawList->PathStroke(colorU32, ImDrawFlags_Closed, 2.0f * outline_scale);
+                } else {
+                    drawList->PathFillConvex(colorU32);
                 }
+                break;
+            }
                 default:
                     // По умолчанию круг
-                    {
-                        const auto c = rect_center;
-                        drawList->AddCircleFilled(c, 0.5f * rect_w / 2.0f, colorU32, 12 + extra_segments);
-                    }
-                    break;
+            {
+                const auto c = rect_center;
+                drawList->AddCircleFilled(c, 0.5f * rect_w / 2.0f, colorU32, 12 + extra_segments);
+            }
+            break;
             }
         }
-        
+
         ImGui::Dummy(F2ToImV2(size));
     }
 
@@ -1520,73 +1520,72 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     void PlotLine(const char* label_id, const void* values, int count, ImmediateDataType type, double xscale, double xstart) {
         switch (type) {
             case ImmediateDataType::Float:
-                ImPlot::PlotLine(label_id, static_cast<const float_t*>(values), count, xscale, xstart);
-                break;
+            ImPlot::PlotLine(label_id, static_cast<const float_t*>(values), count, xscale, xstart);
+            break;
             case ImmediateDataType::Double:
-                ImPlot::PlotLine(label_id, static_cast<const double_t*>(values), count, xscale, xstart);
-                break;
+            ImPlot::PlotLine(label_id, static_cast<const double_t*>(values), count, xscale, xstart);
+            break;
             case ImmediateDataType::UInt8:
-                ImPlot::PlotLine(label_id, static_cast<const uint8_t*>(values), count, xscale, xstart);
-                break;
+            ImPlot::PlotLine(label_id, static_cast<const uint8_t*>(values), count, xscale, xstart);
+            break;
             case ImmediateDataType::Int8:
-                ImPlot::PlotLine(label_id, static_cast<const int8_t*>(values), count, xscale, xstart);
-                break;
+            ImPlot::PlotLine(label_id, static_cast<const int8_t*>(values), count, xscale, xstart);
+            break;
             case ImmediateDataType::UInt16:
-                ImPlot::PlotLine(label_id, static_cast<const uint16_t*>(values), count, xscale, xstart);
-                break;
+            ImPlot::PlotLine(label_id, static_cast<const uint16_t*>(values), count, xscale, xstart);
+            break;
             case ImmediateDataType::Int16:
-                ImPlot::PlotLine(label_id, static_cast<const int16_t*>(values), count, xscale, xstart);
-                break;
+            ImPlot::PlotLine(label_id, static_cast<const int16_t*>(values), count, xscale, xstart);
+            break;
             case ImmediateDataType::UInt32:
-                ImPlot::PlotLine(label_id, static_cast<const uint32_t*>(values), count, xscale, xstart);
-                break;
+            ImPlot::PlotLine(label_id, static_cast<const uint32_t*>(values), count, xscale, xstart);
+            break;
             case ImmediateDataType::Int32:
-                ImPlot::PlotLine(label_id, static_cast<const int32_t*>(values), count, xscale, xstart);
-                break;
+            ImPlot::PlotLine(label_id, static_cast<const int32_t*>(values), count, xscale, xstart);
+            break;
             case ImmediateDataType::UInt64:
             case ImmediateDataType::Int64:
             default: {
-                SRHalt("ImmediateGUI::PlotLine() : unsupported ImmediateDataType!");
-                break;
-            }
+            SRHalt("ImmediateGUI::PlotLine() : unsupported ImmediateDataType!");
+            break;
+        }
         }
     }
 
     void PlotLine(const char* label_id, const void* xs, const void* ys, int count, ImmediateDataType type) {
         switch (type) {
             case ImmediateDataType::Float:
-                ImPlot::PlotLine(label_id, static_cast<const float_t*>(xs), static_cast<const float_t*>(ys), count);
-                break;
+            ImPlot::PlotLine(label_id, static_cast<const float_t*>(xs), static_cast<const float_t*>(ys), count);
+            break;
             case ImmediateDataType::Double:
-                ImPlot::PlotLine(label_id, static_cast<const double_t*>(xs), static_cast<const double_t*>(ys), count);
-                break;
+            ImPlot::PlotLine(label_id, static_cast<const double_t*>(xs), static_cast<const double_t*>(ys), count);
+            break;
             case ImmediateDataType::UInt8:
-                ImPlot::PlotLine(label_id, static_cast<const uint8_t*>(xs), static_cast<const uint8_t*>(ys), count);
-                break;
+            ImPlot::PlotLine(label_id, static_cast<const uint8_t*>(xs), static_cast<const uint8_t*>(ys), count);
+            break;
             case ImmediateDataType::Int8:
-                ImPlot::PlotLine(label_id, static_cast<const int8_t*>(xs), static_cast<const int8_t*>(ys), count);
-                break;
+            ImPlot::PlotLine(label_id, static_cast<const int8_t*>(xs), static_cast<const int8_t*>(ys), count);
+            break;
             case ImmediateDataType::UInt16:
-                ImPlot::PlotLine(label_id, static_cast<const uint16_t*>(xs), static_cast<const uint16_t*>(ys), count);
-                break;
+            ImPlot::PlotLine(label_id, static_cast<const uint16_t*>(xs), static_cast<const uint16_t*>(ys), count);
+            break;
             case ImmediateDataType::Int16:
-                ImPlot::PlotLine(label_id, static_cast<const int16_t*>(xs), static_cast<const int16_t*>(ys), count);
-                break;
+            ImPlot::PlotLine(label_id, static_cast<const int16_t*>(xs), static_cast<const int16_t*>(ys), count);
+            break;
             case ImmediateDataType::UInt32:
-                ImPlot::PlotLine(label_id, static_cast<const uint32_t*>(xs), static_cast<const uint32_t*>(ys), count);
-                break;
+            ImPlot::PlotLine(label_id, static_cast<const uint32_t*>(xs), static_cast<const uint32_t*>(ys), count);
+            break;
             case ImmediateDataType::Int32:
-                ImPlot::PlotLine(label_id, static_cast<const int32_t*>(xs), static_cast<const int32_t*>(ys), count);
-                break;
+            ImPlot::PlotLine(label_id, static_cast<const int32_t*>(xs), static_cast<const int32_t*>(ys), count);
+            break;
             case ImmediateDataType::UInt64:
             case ImmediateDataType::Int64:
             default: {
-                SRHalt("ImmediateGUI::PlotLine() : unsupported ImmediateDataType!");
-                break;
-            }
+            SRHalt("ImmediateGUI::PlotLine() : unsupported ImmediateDataType!");
+            break;
+        }
         }
     }
-
 
     bool ColorEdit(const char* label, SR_MATH_NS::FColor& color, ColorEditFlags flags) {
         return ImGui::ColorEdit3(label, color.coord, static_cast<ImGuiColorEditFlags>(flags));
@@ -1607,7 +1606,6 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     bool ColorButton(const char* desc_id, SR_MATH_NS::FColor& color, ColorEditFlags flags, const SR_MATH_NS::FVector2& size) {
         return ImGui::ColorButton(desc_id, FCToImV4(color), static_cast<ImGuiColorEditFlags>(flags), F2ToImV2(size));
     }
-
 
 #endif
 
@@ -1703,7 +1701,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     bool ImageButton(void* pDescriptor, const SR_MATH_NS::FVector2& size, float_t framePadding) { return false; }
     bool ImageButton(void* pDescriptor, const SR_MATH_NS::FVector2& size) { return false; }
     bool BeginDragDropTargetWindow(const char* payloadType) { return false; }
-    bool ImageButtonInternal(std::string_view&& imageId, void* pDescriptor, const SR_MATH_NS::FVector2 &size, float_t framePadding, ButtonFlags flags) { return false; }
+    bool ImageButtonInternal(std::string_view&& imageId, void* pDescriptor, const SR_MATH_NS::FVector2& size, float_t framePadding, ButtonFlags flags) { return false; }
     bool ImageButton(std::string_view&& imageId, void* pDescriptor, const SR_MATH_NS::FVector2& size, float_t framePadding, ButtonFlags flags) { return false; }
     bool CollapsingHeader(const std::string& label, TreeNodeFlags flags) { return false; }
     void DrawMultiLineTextOnCenter(const std::string& text) { }
@@ -1815,7 +1813,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     void EndPlot() { }
 
     void PlotLine(const char* label_id, const void* values, int count, ImmediateDataType type, double xscale = 1, double xstart = 0) { }
-    void PlotLine(const char* label_id, const void* xs, const void* ys, int count, ImmediateDataType type) { } 
+    void PlotLine(const char* label_id, const void* xs, const void* ys, int count, ImmediateDataType type) { }
 
     bool ColorEdit(const char* label, SR_MATH_NS::FColor& color, ColorEditFlags flags) { return false; }
     bool ColorEditAlpha(const char* label, SR_MATH_NS::FColor& color, ColorEditFlags flags) { return false; }

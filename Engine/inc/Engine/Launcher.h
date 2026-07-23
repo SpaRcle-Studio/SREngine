@@ -10,8 +10,8 @@
 
 namespace SR_CORE_NS {
     SR_ENUM_NS_CLASS_T(LauncherInitStatus, uint8_t,
-        Success,
-        Error
+                       Success,
+                       Error
     )
 
     class Launcher : public SR_CORE_NS::Application {

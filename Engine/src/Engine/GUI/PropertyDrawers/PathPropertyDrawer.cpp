@@ -58,7 +58,7 @@ namespace SR_CORE_GUI_NS {
                         auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                         auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath, { { filterName, filterValue } });
 
-                        if (auto&& pPath = value.TryCast<SR_UTILS_NS::Path>(); pPath && !path.empty()) {
+                        if (auto&& pPath = value.TryCast<SR_UTILS_NS::Path>(); pPath&& !path.empty()) {
                             if (context.onBeforeChangeCallback) {
                                 context.onBeforeChangeCallback(false);
                             }

@@ -14,7 +14,7 @@
 struct OggVorbis_File;
 
 namespace SR_AUDIO_NS {
-    class OGGVorbisDataProvider: public IWaveDataProvider {
+    class OGGVorbisDataProvider : public IWaveDataProvider {
         using Super = IWaveDataProvider;
     public:
         explicit OGGVorbisDataProvider(const RawSoundDataPtr& pData);

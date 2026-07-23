@@ -29,8 +29,8 @@ namespace SR_AUDIO_NS {
 
             m_params.position = position;
             m_params.orientation = {
-                quaternion * SR_MATH_NS::FVector3::Forward(),
-                quaternion * SR_MATH_NS::FVector3::Up()
+                quaternion* SR_MATH_NS::FVector3::Forward(),
+                quaternion* SR_MATH_NS::FVector3::Up()
             };
 
             UpdateParams();

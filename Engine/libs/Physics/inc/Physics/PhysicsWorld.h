@@ -43,7 +43,7 @@ namespace SR_PHYSICS_NS {
         virtual bool AddCharacterController(CharacterControllerPtr pController) { return false; }
         virtual bool RemoveCharacterController(CharacterControllerPtr pController) { return false; }
 
-        virtual void ForEachRigidbody3D(const SR_HTYPES_NS::Function<void(SR_PTYPES_NS::Rigidbody3D *)> &fun) { }
+        virtual void ForEachRigidbody3D(const SR_HTYPES_NS::Function<void(SR_PTYPES_NS::Rigidbody3D*)>& fun) { }
 
         bool ReAddRigidbody(RigidbodyPtr pRigidbody) {
             return RemoveRigidbody(pRigidbody) && AddRigidbody(pRigidbody);

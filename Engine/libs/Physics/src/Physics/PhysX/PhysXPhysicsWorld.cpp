@@ -22,20 +22,20 @@ namespace SR_PHYSICS_NS {
 
         if (isTrigger0 || isTrigger1) {
             pairFlags =
-                    physx::PxPairFlag::eTRIGGER_DEFAULT
-                    | physx::PxPairFlag::eNOTIFY_TOUCH_FOUND
-                    | physx::PxPairFlag::eNOTIFY_TOUCH_LOST;
+                physx::PxPairFlag::eTRIGGER_DEFAULT
+                | physx::PxPairFlag::eNOTIFY_TOUCH_FOUND
+                | physx::PxPairFlag::eNOTIFY_TOUCH_LOST;
 
             return physx::PxFilterFlag::eDEFAULT;
         }
 
         pairFlags =
-                physx::PxPairFlag::eSOLVE_CONTACT
-                | physx::PxPairFlag::eDETECT_DISCRETE_CONTACT
-                | physx::PxPairFlag::eNOTIFY_TOUCH_FOUND
-                | physx::PxPairFlag::eNOTIFY_TOUCH_PERSISTS
-                | physx::PxPairFlag::eNOTIFY_TOUCH_LOST
-                | physx::PxPairFlag::eNOTIFY_CONTACT_POINTS;
+            physx::PxPairFlag::eSOLVE_CONTACT
+            | physx::PxPairFlag::eDETECT_DISCRETE_CONTACT
+            | physx::PxPairFlag::eNOTIFY_TOUCH_FOUND
+            | physx::PxPairFlag::eNOTIFY_TOUCH_PERSISTS
+            | physx::PxPairFlag::eNOTIFY_TOUCH_LOST
+            | physx::PxPairFlag::eNOTIFY_CONTACT_POINTS;
 
         return physx::PxFilterFlag::eDEFAULT;
     }
@@ -79,7 +79,7 @@ namespace SR_PHYSICS_NS {
         sceneDesc.kineKineFilteringMode = physx::PxPairFilteringMode::eKEEP;
         sceneDesc.staticKineFilteringMode = physx::PxPairFilteringMode::eKEEP;
 
-        sceneDesc.filterShader	= contactReportFilterShader;
+        sceneDesc.filterShader = contactReportFilterShader;
         sceneDesc.simulationEventCallback = m_contactCallback;
 
         if (!sceneDesc.cpuDispatcher) {
@@ -87,7 +87,7 @@ namespace SR_PHYSICS_NS {
             sceneDesc.cpuDispatcher = m_cpuDispatcher;
         }
 
-        if(!sceneDesc.filterShader) {
+        if (!sceneDesc.filterShader) {
             sceneDesc.filterShader = physx::PxDefaultSimulationFilterShader;
         }
 
@@ -105,7 +105,7 @@ namespace SR_PHYSICS_NS {
         m_controllerManager = PxCreateControllerManager(*m_scene);
 
         physx::PxPvdSceneClient* pPvdClient = m_scene->getScenePvdClient();
-        
+
         if (pPvdClient) {
             pPvdClient->setScenePvdFlag(physx::PxPvdSceneFlag::eTRANSMIT_CONSTRAINTS, true);
             pPvdClient->setScenePvdFlag(physx::PxPvdSceneFlag::eTRANSMIT_CONTACTS, true);
@@ -281,43 +281,43 @@ namespace SR_PHYSICS_NS {
 
             switch (pUserData->type) {
                 case RigidActorUserData::Type::Rigidbody: {
-                    auto&& pRigidbody = (SR_PTYPES_NS::Rigidbody*)pUserData->pUserData;
-                    if (pRigidbody->IsBodyDirty()) {
-                        SRVerifyFalse(!ReAddRigidbody(pRigidbody));
-                        continue;
-                    }
+                auto&& pRigidbody = (SR_PTYPES_NS::Rigidbody*)pUserData->pUserData;
+                if (pRigidbody->IsBodyDirty()) {
+                    SRVerifyFalse(!ReAddRigidbody(pRigidbody));
+                    continue;
+                }
 
-                    const RBUpdShapeRes result = pRigidbody->UpdateShape();
-                    if (result == RBUpdShapeRes::Error) {
-                        SR_ERROR("PhysXPhysicsWorld::Synchronize() : failed to update shape!");
-                        continue;
-                    }
+                const RBUpdShapeRes result = pRigidbody->UpdateShape();
+                if (result == RBUpdShapeRes::Error) {
+                    SR_ERROR("PhysXPhysicsWorld::Synchronize() : failed to update shape!");
+                    continue;
+                }
 
-                    if (result == RBUpdShapeRes::Updated) {
-                        for (auto&& pShape : pRigidbody->GetShapes()) {
-                            if (pShape->GetType() == ShapeType::TriangleMesh3D) {
-                                cookedCount++;
-                            }
+                if (result == RBUpdShapeRes::Updated) {
+                    for (auto&& pShape : pRigidbody->GetShapes()) {
+                        if (pShape->GetType() == ShapeType::TriangleMesh3D) {
+                            cookedCount++;
                         }
                     }
-
-                    if (cookedCount > maxCookPerFrame) {
-                        return true;
-                    }
-
-                    if (pRigidbody->IsMatrixDirty()) {
-                        pRigidbody->UpdateMatrix();
-                    }
-                    break;
                 }
+
+                if (cookedCount > maxCookPerFrame) {
+                    return true;
+                }
+
+                if (pRigidbody->IsMatrixDirty()) {
+                    pRigidbody->UpdateMatrix();
+                }
+                break;
+            }
                 case RigidActorUserData::Type::CharacterController: {
-                    SRHalt("Character controllers should not be static actors!");
-                    break;
-                }
+                SRHalt("Character controllers should not be static actors!");
+                break;
+            }
                 default: {
-                    SRHalt("Unknown rigid actor user data type!");
-                    break;
-                }
+                SRHalt("Unknown rigid actor user data type!");
+                break;
+            }
             }
         }
 
@@ -352,38 +352,38 @@ namespace SR_PHYSICS_NS {
 
             switch (pUserData->type) {
                 case RigidActorUserData::Type::Rigidbody: {
-                    auto&& pRigidbody = (SR_PTYPES_NS::Rigidbody*)pUserData->pUserData;
-                    if (pRigidbody->IsBodyDirty()) {
-                        SRVerifyFalse(!ReAddRigidbody(pRigidbody));
-                        continue;
-                    }
+                auto&& pRigidbody = (SR_PTYPES_NS::Rigidbody*)pUserData->pUserData;
+                if (pRigidbody->IsBodyDirty()) {
+                    SRVerifyFalse(!ReAddRigidbody(pRigidbody));
+                    continue;
+                }
 
-                    if (pRigidbody->UpdateShape() == RBUpdShapeRes::Error) {
-                        SR_ERROR("PhysXPhysicsWorld::Synchronize() : failed to update shape!");
-                        continue;
-                    }
-                    pRigidbody->Synchronize();
-                    break;
+                if (pRigidbody->UpdateShape() == RBUpdShapeRes::Error) {
+                    SR_ERROR("PhysXPhysicsWorld::Synchronize() : failed to update shape!");
+                    continue;
                 }
+                pRigidbody->Synchronize();
+                break;
+            }
                 case RigidActorUserData::Type::CharacterController: {
-                    auto&& pController = (CharacterController*)pUserData->pUserData;
-                    pController->GetImpl()->Synchronize();
-                    break;
-                }
+                auto&& pController = (CharacterController*)pUserData->pUserData;
+                pController->GetImpl()->Synchronize();
+                break;
+            }
                 default: {
-                    SRHalt("Unknown rigid actor user data type!");
-                    break;
-                }
+                SRHalt("Unknown rigid actor user data type!");
+                break;
+            }
             }
         }
 
         return true;
     }
 
-    void PhysXPhysicsWorld::ForEachRigidbody3D(const SR_HTYPES_NS::Function<void(SR_PTYPES_NS::Rigidbody3D *)> &fun) {
+    void PhysXPhysicsWorld::ForEachRigidbody3D(const SR_HTYPES_NS::Function<void(SR_PTYPES_NS::Rigidbody3D*)>& fun) {
         static const physx::PxActorTypeFlags flags =
-                physx::PxActorTypeFlag::Enum::eRIGID_DYNAMIC |
-                physx::PxActorTypeFlag::Enum::eRIGID_STATIC;
+            physx::PxActorTypeFlag::Enum::eRIGID_DYNAMIC |
+            physx::PxActorTypeFlag::Enum::eRIGID_STATIC;
 
         const uint32_t count = m_scene->getNbActors(flags);
         if (count == 0) {

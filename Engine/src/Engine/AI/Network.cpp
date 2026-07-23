@@ -55,34 +55,34 @@ namespace SpaRcle::AI {
         std::vector<NeuronId> previousLayer;
 
         auto placeLayerAsCenteredGrid = [&](uint32_t count, float_t layerY, std::vector<NeuronId>& outIds) {
-            outIds.clear();
-            if (count == 0) return;
+                                            outIds.clear();
+                                            if (count == 0) return;
 
             // вычисляем количество столбцов/строк для "квадратной" раскладки
-            uint32_t cols = static_cast<uint32_t>(std::ceil(std::sqrt(static_cast<float>(count))));
-            uint32_t rows = static_cast<uint32_t>(std::ceil(static_cast<float>(count) / static_cast<float>(cols)));
+                                            uint32_t cols = static_cast<uint32_t>(std::ceil(std::sqrt(static_cast<float>(count))));
+                                            uint32_t rows = static_cast<uint32_t>(std::ceil(static_cast<float>(count) / static_cast<float>(cols)));
 
             // смещения для центрирования
-            float_t totalWidth  = (cols > 1) ? static_cast<float_t>(cols - 1) * distance : 0.0f;
-            float_t totalDepth  = (rows > 1) ? static_cast<float_t>(rows - 1) * distance : 0.0f;
-            float_t startX = - totalWidth * 0.5f;
-            float_t startZ = - totalDepth * 0.5f;
+                                            float_t totalWidth = (cols > 1) ? static_cast<float_t>(cols - 1) * distance : 0.0f;
+                                            float_t totalDepth = (rows > 1) ? static_cast<float_t>(rows - 1) * distance : 0.0f;
+                                            float_t startX = -totalWidth * 0.5f;
+                                            float_t startZ = -totalDepth * 0.5f;
 
-            for (uint32_t i = 0; i < count; ++i) {
-                uint32_t col = i % cols;
-                uint32_t row = i / cols; // integer division
+                                            for (uint32_t i = 0; i < count; ++i) {
+                                                uint32_t col = i % cols;
+                                                uint32_t row = i / cols; // integer division
 
-                float_t x = startX + static_cast<float_t>(col) * distance;
-                float_t y = layerY;
-                float_t z = startZ + static_cast<float_t>(row) * distance;
+                                                float_t x = startX + static_cast<float_t>(col) * distance;
+                                                float_t y = layerY;
+                                                float_t z = startZ + static_cast<float_t>(row) * distance;
 
-                NeuronId neuronId = pNetwork->AddNeuron();
-                auto& neuron = pNetwork->GetNeuron(neuronId);
-                neuron.position = SR_MATH_NS::FVector3(x, y, z);
+                                                NeuronId neuronId = pNetwork->AddNeuron();
+                                                auto& neuron = pNetwork->GetNeuron(neuronId);
+                                                neuron.position = SR_MATH_NS::FVector3(x, y, z);
 
-                outIds.push_back(neuronId);
-            }
-        };
+                                                outIds.push_back(neuronId);
+                                            }
+                                        };
 
         // входной слой — индекс слоя 0 (ниже всех)
         placeLayerAsCenteredGrid(inputCount, 0.0f, previousLayer);
@@ -135,12 +135,12 @@ namespace SpaRcle::AI {
             refractoryTime -= dt;
             potential = rest;
             activation = 0.0f;
-            inputCurrent = 0.0f;  // пока отдыхает, ничего не интегрирует
+            inputCurrent = 0.0f; // пока отдыхает, ничего не интегрирует
             return;
         }
 
         // Утечка и интеграция
-        potential += ((- (potential - rest)) / tau + input) * dt;
+        potential += ((-(potential - rest)) / tau + input) * dt;
         inputCurrent = 0.0f;
 
         if (potential >= threshold) {

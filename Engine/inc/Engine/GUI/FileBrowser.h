@@ -24,8 +24,8 @@ namespace SR_CORE_NS::GUI {
         SR_UTILS_NS::Path path;
         std::string filename;
         std::list<FBFolder> innerFolders;
-        bool childrenLoaded = false;   ///< true = direct children already loaded (lazy tree)
-        bool hasSubfolders = true;      ///< false = no subfolders (show as leaf, no expand arrow)
+        bool childrenLoaded = false; ///< true = direct children already loaded (lazy tree)
+        bool hasSubfolders = true; ///< false = no subfolders (show as leaf, no expand arrow)
     };
 
     class FileBrowser : public SR_GRAPH_GUI_NS::Widget {
@@ -47,7 +47,7 @@ namespace SR_CORE_NS::GUI {
     private:
         void OnOpen() override;
         void OnClose() override;
-        void FileContextMenu(const std::string &element);
+        void FileContextMenu(const std::string& element);
         void CurrentDirectoryContextMenu();
         void CurrentDirectoryPanel();
         void ItemViewPanel();

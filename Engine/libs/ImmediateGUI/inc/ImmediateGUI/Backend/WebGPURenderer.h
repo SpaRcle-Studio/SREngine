@@ -38,4 +38,3 @@ namespace SR_GRAPH_GUI_NS::Immediate {
 #endif // SR_USE_IMGUI && SR_EMSCRIPTEN
 
 #endif // SR_ENGINE_IMMEDIATE_GUI_WEBGPU_RENDERER_H
-

@@ -11,7 +11,7 @@ namespace SR_AUDIO_NS {
 
     static void LoadModPlug()
     {
-        if ( g_ModPlugLoaded ) return;
+        if (g_ModPlugLoaded) return;
 
         ModPlug_Settings Settings;
         ModPlug_GetSettings( &Settings );
@@ -31,17 +31,17 @@ namespace SR_AUDIO_NS {
     }
 
     ModPlugDataProvider::ModPlugDataProvider(const RawSoundDataPtr& data)
-            : m_data(data)
-            , m_format()
-            , m_decodingBuffer()
-            , m_bufferUsed(0)
-            , m_isEndOfStream(false)
+        : m_data(data)
+        , m_format()
+        , m_decodingBuffer()
+        , m_bufferUsed(0)
+        , m_isEndOfStream(false)
     {
         LoadModPlug();
 
-        m_format.m_numChannels      = 2;
+        m_format.m_numChannels = 2;
         m_format.m_samplesPerSecond = 44100;
-        m_format.m_bitsPerSample    = 16;
+        m_format.m_bitsPerSample = 16;
 
         m_ModPlugFile = ModPlug_Load(data->data(), static_cast<int>(data->size()));
     }
@@ -75,21 +75,21 @@ namespace SR_AUDIO_NS {
 
     size_t ModPlugDataProvider::StreamWaveData( size_t Size )
     {
-        if ( m_isEndOfStream )
+        if (m_isEndOfStream)
         {
             return 0;
         }
 
         size_t OldSize = m_decodingBuffer.size();
 
-        if ( Size > OldSize )
+        if (Size > OldSize)
         {
             m_decodingBuffer.resize( Size, 0 );
         }
 
         m_bufferUsed = DecodeFromFile( Size );
 
-        if ( m_bufferUsed <= 0 ) m_isEndOfStream = true;
+        if (m_bufferUsed <= 0) m_isEndOfStream = true;
 
         return m_bufferUsed;
     }
@@ -98,6 +98,6 @@ namespace SR_AUDIO_NS {
     {
         m_isEndOfStream = false;
 
-        ModPlug_Seek( m_ModPlugFile, static_cast<int>( Seconds * 1000.0f ) );
+        ModPlug_Seek( m_ModPlugFile, static_cast<int>(Seconds * 1000.0f));
     }
 }

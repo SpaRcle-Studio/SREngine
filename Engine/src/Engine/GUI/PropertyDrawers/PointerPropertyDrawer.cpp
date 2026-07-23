@@ -85,7 +85,7 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::SameLine();
 
             if (m_default.empty()) {
-                m_default = "{} (nullptr)"_format(typeName);
+                m_default = "{} (nullptr)"_format (typeName);
             }
 
             if (m_typeNames.empty()) {

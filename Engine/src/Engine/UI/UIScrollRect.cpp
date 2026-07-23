@@ -24,7 +24,7 @@ namespace SR_CORE_UI_NS {
         UIScrollBar* pHScrollBar = m_horizontalScrollBar.GetRaw();
         UIScrollBar* pVScrollBar = m_verticalScrollBar.GetRaw();
 
-        const auto contentSize  = pContentTransform->GetLayoutRect().Size();
+        const auto contentSize = pContentTransform->GetLayoutRect().Size();
         const auto viewportSize = pViewportTransform->GetLayoutRect().Size();
 
         const SR_MATH_NS::FVector2 scrollableSize = {

@@ -27,28 +27,28 @@ namespace SR_CORE_NS {
     SR_UTILS_NS::SceneObject::Ptr World::Instance(const SR_HTYPES_NS::RawMesh* pRawMesh) {
         static std::function processMaterial = [](const SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t meshId, SR_GTYPES_NS::Mesh* pMesh) {
         #ifdef SR_UTILS_ASSIMP
-            const aiScene* pScene = static_cast<const aiScene*>(pRawMesh->GetAssimpScene());
+                                                   const aiScene* pScene = static_cast<const aiScene*>(pRawMesh->GetAssimpScene());
 
-            if (pScene->mMeshes[meshId]->mMaterialIndex >= pScene->mNumMaterials) {
-                return;
-            }
+                                                   if (pScene->mMeshes[meshId]->mMaterialIndex >= pScene->mNumMaterials) {
+                                                       return;
+                                                   }
 
-            aiMaterial* pMaterial = pScene->mMaterials[pScene->mMeshes[meshId]->mMaterialIndex];
+                                                   aiMaterial* pMaterial = pScene->mMaterials[pScene->mMeshes[meshId]->mMaterialIndex];
 
-            aiString diffuseTexturePath;
-            if (pMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &diffuseTexturePath) == aiReturn_SUCCESS) {
-                if (SR_UTILS_NS::Path(diffuseTexturePath.C_Str()).IsFile()) {
-                    if (auto&& pTexture = CoreResLoader::Load<SR_GTYPES_NS::Texture>(std::string_view(diffuseTexturePath.C_Str()))) {
-                        pMesh->GetMaterial()->SetTexture("diffuse", pTexture);
-                        pTexture->CheckResourceUsage();
-                    }
-                }
-                else {
-                    SR_LOG("World::Instance() : diffuse texture path is not a file: {}", diffuseTexturePath.C_Str());
-                }
-            }
+                                                   aiString diffuseTexturePath;
+                                                   if (pMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &diffuseTexturePath) == aiReturn_SUCCESS) {
+                                                       if (SR_UTILS_NS::Path(diffuseTexturePath.C_Str()).IsFile()) {
+                                                           if (auto&& pTexture = CoreResLoader::Load<SR_GTYPES_NS::Texture>(std::string_view(diffuseTexturePath.C_Str()))) {
+                                                               pMesh->GetMaterial()->SetTexture("diffuse", pTexture);
+                                                               pTexture->CheckResourceUsage();
+                                                           }
+                                                       }
+                                                       else {
+                                                           SR_LOG("World::Instance() : diffuse texture path is not a file: {}", diffuseTexturePath.C_Str());
+                                                       }
+                                                   }
         #endif
-        };
+                                               };
 
         std::list<SR_GTYPES_NS::SkinnedMesh::Ptr> skinnedMeshes;
 
@@ -91,7 +91,7 @@ namespace SR_CORE_NS {
         if (!skinnedMeshes.empty()) {
             if (auto&& pSkeleton = SR_ANIMATIONS_NS::Skeleton::ImportSkeletonFromRawMesh(*pRawMesh)) {
                 nodesPool.front()->AddComponent(pSkeleton.StaticCast<SR_UTILS_NS::Component>());
-                for (auto &&pSkinnedMesh: skinnedMeshes) {
+                for (auto&& pSkinnedMesh : skinnedMeshes) {
                     pSkinnedMesh->GetSkeletonRef().SetEntityId(pSkeleton->GetEntityId());
                 }
             }

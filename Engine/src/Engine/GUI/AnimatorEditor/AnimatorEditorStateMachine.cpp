@@ -19,8 +19,7 @@
 #include <Utils/TypeTraits/Factory.h>
 
 namespace SR_CORE_GUI_NS {
-    void AnimatorEditorStateMachine::ClearStateMachineVisual() {
-    }
+    void AnimatorEditorStateMachine::ClearStateMachineVisual() { }
 
     void AnimatorEditorStateMachine::SyncStateMachineToVisual() {
         ClearStateMachineVisual();
@@ -110,7 +109,6 @@ namespace SR_CORE_GUI_NS {
         if (m_context.pStateMachineEditor) {
             SR_IMMEDIATE_GUI_NS::NodeEditor::SetCurrentEditor(m_context.pStateMachineEditor);
         }
-
 
         if (m_context.pStateMachineEditor) {
             SR_IMMEDIATE_GUI_NS::NodeEditor::SetCurrentEditor(nullptr);
@@ -282,9 +280,9 @@ namespace SR_CORE_GUI_NS {
                         }
                     }
                 }
-            }
-            SR_GRAPH_GUI_NS::Immediate::EndCreate();
-            */
+               }
+               SR_GRAPH_GUI_NS::Immediate::EndCreate();
+             */
 
             // delete transition/state
             if (SR_IMMEDIATE_GUI_NS::NodeEditor::BeginDelete()) {
@@ -518,10 +516,10 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
             }
-        }
+         }
 
-        // transition creation mode: click source (context menu) -> click target
-        if (editable && m_fromStateNode) {
+         // transition creation mode: click source (context menu) -> click target
+         if (editable && m_fromStateNode) {
             // cancel on right click
             if (SR_GRAPH_GUI_NS::Immediate::IsMouseReleased(SR_GRAPH_GUI_NS::Immediate::MouseButton::Right)) {
                 m_fromStateNode = nullptr;
@@ -558,7 +556,7 @@ namespace SR_CORE_GUI_NS {
                     m_fromStateNode = nullptr;
                 }
             }
-        }*/
+         }*/
     }
 
     void AnimatorEditorStateMachine::DrawNodes(bool& needResync, SR_ANIMATIONS_NS::AnimationStateMachine& machine) {
@@ -642,7 +640,7 @@ namespace SR_CORE_GUI_NS {
                 nodeMax.x - nodeMin.x,
                 nodeMax.y - nodeMin.y
             ));
-        }*/
+           }*/
     }
 
     void AnimatorEditorStateMachine::ResetSelectedLink() {

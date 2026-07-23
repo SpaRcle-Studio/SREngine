@@ -75,9 +75,7 @@ namespace SR_AUDIO_NS {
     }
 
     void MP3DataProvider::Seek(float_t /* seconds */)
-    {
-
-    }
+    { }
 
     size_t MP3DataProvider::StreamWaveData(size_t size) {
         return IWaveDataProvider::StreamWaveData(size);

@@ -52,7 +52,7 @@ namespace SR_CORE_NS {
 
         if (auto&& hit = SR_PHYSICS_NS::Raycast3D::Instance().CastSingle(origin, -SR_MATH_NS::FVector3::Up(), config.maxRayDistance, layerMask)) {
             m_debugHitId = SR_UTILS_NS::DebugOverlayDraw::Instance().DrawLine(m_debugHitId,
-                hit->position, hit->GetRayEndPoint(), SR_MATH_NS::FColor::Green(), SR_FLOAT_MAX
+                                                                              hit->position, hit->GetRayEndPoint(), SR_MATH_NS::FColor::Green(), SR_FLOAT_MAX
             );
 
             m_hitYPosition = hit->position.y;
@@ -89,8 +89,8 @@ namespace SR_CORE_NS {
 
             if (!m_initialized || distance > SR_MIN(config.forceStepDistance, distanceToStep)) {
                 //if (!m_initialized) {
-                    m_footCurrentPosition = target.GetGlobalTranslation();
-                    m_footCurrentRotation = target.GetGlobalRotation();
+                m_footCurrentPosition = target.GetGlobalTranslation();
+                m_footCurrentRotation = target.GetGlobalRotation();
                 //}
                 //else {
                 //    m_footCurrentPosition = m_footTargetPosition;
@@ -111,7 +111,6 @@ namespace SR_CORE_NS {
                 m_stepProgress = forceStepped ? 1.f : (m_stepProgress > config.uncompletedStepResetProgress ? 0.f : m_stepProgress);
             }
 
-
             const float_t ease = SR_MATH_NS::Curve::SmoothStep(0.f, 1.f, SR_MIN(m_stepProgress, 1.f));
             const float_t hor = SR_MATH_NS::Curve::CubicEaseInOut(SR_MIN(m_stepProgress, 1.f));
             //SR_MATH_NS::FVector3 footPos = SR_MATH_NS::FVector3::Lerp(m_footCurrentPosition, m_footTargetPosition, ease);
@@ -121,7 +120,7 @@ namespace SR_CORE_NS {
                 //const float_t lift = SR_MATH_NS::Curve::SinusoidalEaseInOut(m_stepProgress) * m_stepHeight;
                 //footPos.y += lift;
 
-                const float_t ver = SR_MATH_NS::Sin(SR_PI * SR_MIN(ease, 1.f));  // чистая синусоида
+                const float_t ver = SR_MATH_NS::Sin(SR_PI * SR_MIN(ease, 1.f)); // чистая синусоида
                 footPos.y += ver * config.stepHeight;
 
                 const float_t sideways = hor;

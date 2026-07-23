@@ -26,12 +26,12 @@ int RunUnpackedApplication(const std::string& mainExecutablePath) {
 
 #ifdef WIN32
     STARTUPINFOA si = { sizeof(si) };
-    PROCESS_INFORMATION pi = {};
+    PROCESS_INFORMATION pi = { };
 
     if (CreateProcessA(
-        nullptr, const_cast<char*>(command.c_str()), nullptr, nullptr, FALSE,
-        CREATE_NO_WINDOW | DETACHED_PROCESS, nullptr, nullptr, &si, &pi
-    )) {
+            nullptr, const_cast<char*>(command.c_str()), nullptr, nullptr, FALSE,
+            CREATE_NO_WINDOW | DETACHED_PROCESS, nullptr, nullptr, &si, &pi
+        )) {
         CloseHandle(pi.hProcess);
         CloseHandle(pi.hThread);
     }

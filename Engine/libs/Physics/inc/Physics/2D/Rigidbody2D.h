@@ -8,9 +8,7 @@
 #include <Physics/Rigidbody.h>
 
 namespace SR_PTYPES_NS {
-    class Rigidbody2DImpl : public RigidbodyImpl {
-
-    };
+    class Rigidbody2DImpl : public RigidbodyImpl { };
 
     /// @category(Physics)
     class Rigidbody2D : public Rigidbody {

@@ -9,7 +9,7 @@
 
 namespace SR_PHYSICS_NS {
     /**
-    This method handles only RigidBody-RigidBody collisions and calls the OnCollisionEnter/OnCollisionStay/OnCollisionExit method as appropriate.
+       This method handles only RigidBody-RigidBody collisions and calls the OnCollisionEnter/OnCollisionStay/OnCollisionExit method as appropriate.
      */
     void ContactReportCallback::onContact(const physx::PxContactPairHeader& pairHeader, const physx::PxContactPair* pairs, physx::PxU32 nbPairs)
     {
@@ -71,8 +71,8 @@ namespace SR_PHYSICS_NS {
             data.pHandler = rigidbody1;
 
             if (pSceneObject2) {
-                for (auto&& pComponent : pSceneObject2->GetComponents()){
-                    if (pComponent == rigidbody2){
+                for (auto&& pComponent : pSceneObject2->GetComponents()) {
+                    if (pComponent == rigidbody2) {
                         continue;
                     }
                     else {
@@ -91,11 +91,11 @@ namespace SR_PHYSICS_NS {
         }
     }
     /**
-    This method handles only RigidBody-Trigger collisions and calls the OnTriggerEnter/OnTriggerExit method as appropriate.
+       This method handles only RigidBody-Trigger collisions and calls the OnTriggerEnter/OnTriggerExit method as appropriate.
      */
-    void ContactReportCallback::onTrigger(physx::PxTriggerPair *pairs, physx::PxU32 count)
+    void ContactReportCallback::onTrigger(physx::PxTriggerPair* pairs, physx::PxU32 count)
     {
-        for(physx::PxU32 i=0; i < count; i++)
+        for (physx::PxU32 i = 0; i < count; i++)
         {
             // ignore pairs when shapes have been deleted
             if (pairs[i].flags & (physx::PxTriggerPairFlag::eREMOVED_SHAPE_TRIGGER |
@@ -111,7 +111,7 @@ namespace SR_PHYSICS_NS {
                 continue;
             }
 
-            auto otherShape   = reinterpret_cast<SR_PTYPES_NS::CollisionShape*>(tp.otherShape->userData);
+            auto otherShape = reinterpret_cast<SR_PTYPES_NS::CollisionShape*>(tp.otherShape->userData);
             if (!otherShape && (!tp.otherShape->getActor() || !tp.otherShape->getActor()->userData)) {
                 SRHaltOnce0();
                 continue;
@@ -150,7 +150,7 @@ namespace SR_PHYSICS_NS {
             data.pHandler = pHandler;
 
             for (auto&& pComponent : triggerGameObject->GetComponents()) {
-                if (pComponent == triggerRigidBody){
+                if (pComponent == triggerRigidBody) {
                     continue;
                 }
                 else {

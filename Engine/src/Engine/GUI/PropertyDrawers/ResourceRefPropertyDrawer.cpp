@@ -105,25 +105,25 @@ namespace SR_CORE_GUI_NS {
             SR_UTILS_NS::StringAtom type = pRef->GetResourceType();
 
             if (pRef->GetId().empty()) {
-                std::string formatted = " Is not set ({})"_format(type.ToCStr());
+                std::string formatted = " Is not set ({})"_format (type.ToCStr());
                 SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
                 SR_GRAPH_GUI_NS::Immediate::ButtonColoredText(formatted.c_str(), SR_MATH_NS::FColor(1.f, 1.f, 0.f, 1.f), SR_MATH_NS::FVector2(context.fieldWidth, 0));
                 SR_GRAPH_GUI_NS::Immediate::EndDisabled();
             }
             else if (!pRef->GetResourceBase()) {
-                std::string formatted = " {} ({} is missing)"_format(pRef->GetId().ToCStr(), type.ToCStr());
+                std::string formatted = " {} ({} is missing)"_format (pRef->GetId().ToCStr(), type.ToCStr());
                 SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
                 SR_GRAPH_GUI_NS::Immediate::ButtonColoredText(formatted.c_str(), SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), SR_MATH_NS::FVector2(context.fieldWidth, 0));
                 SR_GRAPH_GUI_NS::Immediate::EndDisabled();
             }
             else {
-                std::string formatted = " {} ({})"_format(pRef->GetId().ToCStr(), type.ToCStr());
+                std::string formatted = " {} ({})"_format (pRef->GetId().ToCStr(), type.ToCStr());
                 SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
                 SR_GRAPH_GUI_NS::Immediate::ButtonColoredText(formatted.c_str(), SR_MATH_NS::FColor(1.f, 1.f, 1.f, 1.f), SR_MATH_NS::FVector2(context.fieldWidth, 0));
                 SR_GRAPH_GUI_NS::Immediate::EndDisabled();
             }
 
-            if (auto&& pResource = pRef->GetResourceBase(); pResource && m_isOpened) {
+            if (auto&& pResource = pRef->GetResourceBase(); pResource&& m_isOpened) {
                 const SR_UTILS_NS::StringAtom factoryName = pResource->GetMeta()->GetFactoryName();
                 if (m_lastTypeName != factoryName) {
                     m_lastTypeName = factoryName;

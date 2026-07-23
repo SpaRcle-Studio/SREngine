@@ -46,7 +46,7 @@ namespace SR_CORE_GUI_NS {
                 std::tm* timeUTC = std::gmtime(&timestamp);
 
                 metadata += "build '" + std::string(git_CommitSHA1()).substr(0, 7) + "' in '" + git_Branch() + "by '" +
-                    + git_AuthorName() + "' on\n\t" + std::asctime(timeUTC);
+                            +git_AuthorName() + "' on\n\t" + std::asctime(timeUTC);
             }
 
             SR_GRAPH_GUI_NS::Immediate::Text(metadata.c_str());

@@ -265,7 +265,7 @@ namespace SR_AUDIO_NS {
         });
     }
 
-    SoundData* SoundManager::Register(Sound *pSound) {
+    SoundData* SoundManager::Register(Sound* pSound) {
         SR_TRACY_ZONE;
         SR_LOCK_GUARD;
 
@@ -350,7 +350,7 @@ namespace SR_AUDIO_NS {
         SR_TRACY_ZONE;
 
         return m_thread->Execute([this, pHandle]() {
-            for (auto&& pPlayData: m_playStack) {
+            for (auto&& pPlayData : m_playStack) {
                 if (pHandle == pPlayData) {
                     return pPlayData->pData->initialized;
                 }
@@ -380,7 +380,7 @@ namespace SR_AUDIO_NS {
         SR_TRACY_ZONE;
 
         return m_thread->Execute([this, pHandle]() {
-            for (auto&& pPlayData: m_playStack) {
+            for (auto&& pPlayData : m_playStack) {
                 if (pHandle == pPlayData) {
                     return pPlayData->isFailed;
                 }
@@ -391,7 +391,6 @@ namespace SR_AUDIO_NS {
             return false;
         });
     }
-
 
     SoundContext* SoundManager::GetSoundContext(const PlayParams& params) noexcept {
         SR_TRACY_ZONE;

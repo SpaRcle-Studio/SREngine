@@ -33,7 +33,7 @@ namespace SR_PHYSICS_NS {
         bool AddCharacterController(CharacterControllerPtr pController) override;
         bool RemoveCharacterController(CharacterControllerPtr pController) override;
 
-        void ForEachRigidbody3D(const SR_HTYPES_NS::Function<void(SR_PTYPES_NS::Rigidbody3D *)> &fun) override;
+        void ForEachRigidbody3D(const SR_HTYPES_NS::Function<void(SR_PTYPES_NS::Rigidbody3D*)>& fun) override;
 
         void Flush() override;
 

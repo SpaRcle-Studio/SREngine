@@ -12,7 +12,7 @@
 
 #include <Audio/ListenerData.h>
 
-namespace SR_AUDIO_NS{
+namespace SR_AUDIO_NS {
     class SoundDevice;
 
     class SoundListener : public SR_UTILS_NS::NonCopyable {

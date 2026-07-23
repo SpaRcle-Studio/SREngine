@@ -122,7 +122,7 @@ namespace SR_CORE_NS {
     private:
         mutable std::recursive_mutex m_mutex;
 
-        std::atomic<bool> m_isCreate  = false;
+        std::atomic<bool> m_isCreate = false;
         std::atomic<bool> m_isInit = false;
         std::atomic<bool> m_isRun = false;
 
@@ -137,7 +137,7 @@ namespace SR_CORE_NS {
 
         SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::ThreadsWorker> m_threadsWorker;
 
-        SR_UTILS_NS::CmdManager* m_cmdManager  = nullptr;
+        SR_UTILS_NS::CmdManager* m_cmdManager = nullptr;
         SR_UTILS_NS::InputDispatcher* m_input = nullptr;
 
         SR_HTYPES_NS::SafeQueue<ScenePtr> m_sceneQueue;

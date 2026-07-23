@@ -149,10 +149,10 @@ namespace SR_SCRIPTING_NS {
         return m_getProperties();
     }
 
-    std::any EvoBehaviour::GetProperty(const std::string &id) const {
+    std::any EvoBehaviour::GetProperty(const std::string& id) const {
         SR_EVO_SCRIPT_MANAGER_LOCK_CONTEXT
 
-        SwitchContext();
+            SwitchContext();
 
         if (!m_getProperty) {
             SR_ERROR("EvoBehaviour::GetProperty() : property getter invalid!");
@@ -169,10 +169,10 @@ namespace SR_SCRIPTING_NS {
         return copy;
     }
 
-    void EvoBehaviour::SetProperty(const std::string &id, const std::any &val) {
+    void EvoBehaviour::SetProperty(const std::string& id, const std::any& val) {
         SR_EVO_SCRIPT_MANAGER_LOCK_CONTEXT
 
-        SwitchContext();
+            SwitchContext();
 
         if (!m_setProperty) {
             return;
@@ -202,7 +202,9 @@ namespace SR_SCRIPTING_NS {
     }
 
     void EvoBehaviour::OnAttached() {
-        SR_HTYPES_NS::Function<void()> fn = [this]() { SetGameObject(); };
+        SR_HTYPES_NS::Function<void()> fn = [this]() {
+                                                SetGameObject();
+                                            };
         CallFunction(fn, false);
     }
 
@@ -277,16 +279,18 @@ namespace SR_SCRIPTING_NS {
     }
 
     void EvoBehaviour::OnTransformSet() {
-        SR_HTYPES_NS::Function<void()> fn = [this]() { SetGameObject(); };
+        SR_HTYPES_NS::Function<void()> fn = [this]() {
+                                                SetGameObject();
+                                            };
         CallFunction(fn, false);
     }
 
     void EvoBehaviour::OnDestroy() {
-        SR_HTYPES_NS::Function<void()> fn = [this]() { DestroyScript(); };
+        SR_HTYPES_NS::Function<void()> fn = [this]() {
+                                                DestroyScript();
+                                            };
         CallFunction(fn, false);
     }
 
-    void EvoBehaviour::OnDetached() {
-
-    }
+    void EvoBehaviour::OnDetached() { }
 }

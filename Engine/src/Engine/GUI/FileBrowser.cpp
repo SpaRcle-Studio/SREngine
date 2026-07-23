@@ -45,7 +45,7 @@ namespace SR_CORE_NS::GUI {
         FreeTextures();
     }
 
-    void FileBrowser::SetFolder(const SR_UTILS_NS::Path &path) {
+    void FileBrowser::SetFolder(const SR_UTILS_NS::Path& path) {
         m_selectedDir = m_defaultRoot = path;
         m_dirtySelectedDir = true;
         m_dirtyFoldersTree = true;
@@ -57,7 +57,7 @@ namespace SR_CORE_NS::GUI {
 
     void FileBrowser::CurrentDirectoryContextMenu(){
         SR_TRACY_ZONE;
-        if(SR_GRAPH_GUI_NS::Immediate::BeginPopupContextWindow()){
+        if (SR_GRAPH_GUI_NS::Immediate::BeginPopupContextWindow()) {
             if (SR_GRAPH_GUI_NS::Immediate::Selectable("Paste")) {
                 SR_UTILS_NS::Platform::PasteFilesFromClipboard(m_selectedDir);
                 m_dirtySelectedDir = true;
@@ -147,7 +147,7 @@ namespace SR_CORE_NS::GUI {
                         }
                     }
                 }
-                
+
                 m_elements.emplace_back(current);
             }
         }
@@ -168,7 +168,7 @@ namespace SR_CORE_NS::GUI {
 
             if (isLeaf) {
                 SR_GRAPH_GUI_NS::Immediate::TreeNodeEx((void*)(intptr_t)index, selected ? SELECTED_WITHOUT_CHILD : WITHOUT_CHILD, "%s",
-                    folder.filename.c_str());
+                                                       folder.filename.c_str());
 
                 if (SR_GRAPH_GUI_NS::Immediate::IsItemClicked()) {
                     m_selectedDir = folder.path;
@@ -177,7 +177,7 @@ namespace SR_CORE_NS::GUI {
                 }
             } else {
                 bool open = SR_GRAPH_GUI_NS::Immediate::TreeNodeEx((void*)(intptr_t)index, selected ? SELECTED_WITH_CHILD : WITH_CHILD,
-                    "%s", folder.filename.c_str());
+                                                                   "%s", folder.filename.c_str());
 
                 if (SR_GRAPH_GUI_NS::Immediate::IsItemClicked() && !SR_GRAPH_GUI_NS::Immediate::IsItemToggledOpen()) {
                     m_selectedDir = folder.path;
@@ -218,7 +218,7 @@ namespace SR_CORE_NS::GUI {
         parentFolder.childrenLoaded = true;
     }
 
-    void FileBrowser::FileContextMenu(const std::string &filename){
+    void FileBrowser::FileContextMenu(const std::string& filename){
         SR_TRACY_ZONE;
         if (!SR_GRAPH_GUI_NS::Immediate::BeginPopupContextItem()) {
             return;
@@ -310,7 +310,7 @@ namespace SR_CORE_NS::GUI {
             SR_GRAPH_GUI_NS::Immediate::SameLine();
             SR_GRAPH_GUI_NS::Immediate::SetCursorPosX(SR_GRAPH_GUI_NS::Immediate::GetCursorPos().x + SR_GRAPH_GUI_NS::Immediate::GetContentRegionAvail().x - panelHeight);
 
-            if (SR_GRAPH_GUI_NS::Immediate::ImageButton(dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::Reset), panelHeight - 10.f)){
+            if (SR_GRAPH_GUI_NS::Immediate::ImageButton(dynamic_cast<EditorGUI*>(GetManager())->GetIconDescriptor(Core::EditorIcon::Reset), panelHeight - 10.f)) {
                 m_dirtySelectedDir = true;
                 m_dirtyFoldersTree = true;
             }
@@ -342,14 +342,14 @@ namespace SR_CORE_NS::GUI {
             const float_t fontSize = SR_UTILS_NS::StoreUtils::User::GetFloat("EditorFontSize", SR_IMMEDIATE_GUI_NS::DEFAULT_FONT_SIZE);
             const float_t iconSize = fontSize * 6.0f * m_itemsScale;
 
-            for (const auto &element : m_elements) {
+            for (const auto& element : m_elements) {
                 ++index;
 
                 SR_GRAPH_GUI_NS::Immediate::BeginGroup();
 
                 SR_GRAPH_GUI_NS::Immediate::PushID(element.filename.c_str());
                 if (element.isDir) {
-                    void* descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(element.iconType);
+                    void* descriptor = dynamic_cast<EditorGUI*>(GetManager())->GetIconDescriptor(element.iconType);
 
                     if (SR_GRAPH_GUI_NS::Immediate::ImageButtonDouble("", descriptor, SR_MATH_NS::FVector2(iconSize), iconSize / 3.f)) {
                         m_selectedDir = m_selectedDir.Concat(element.filename);
@@ -366,7 +366,7 @@ namespace SR_CORE_NS::GUI {
                     }
 
                     if (!descriptor) {
-                        descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(element.iconType);
+                        descriptor = dynamic_cast<EditorGUI*>(GetManager())->GetIconDescriptor(element.iconType);
                     }
 
                     if (SR_GRAPH_GUI_NS::Immediate::ImageButtonDouble("", descriptor, SR_MATH_NS::FVector2(iconSize), iconSize / 3.f)) {
@@ -499,9 +499,9 @@ namespace SR_CORE_NS::GUI {
 
         FileCatalogPanel(leftWidth); //Отрисовка панели файлового древа
 
-        float_t windowWidth = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x;          //код для исключения ошибок ImGui
-        if (leftWidth > windowWidth - 40)                       //проверяет ширину панели каталога файлов
-            return;                                             //для прекращения отрисовки
+        float_t windowWidth = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x; //код для исключения ошибок ImGui
+        if (leftWidth > windowWidth - 40) //проверяет ширину панели каталога файлов
+            return; //для прекращения отрисовки
 
         SR_GRAPH_GUI_NS::Immediate::SameLine();
 
@@ -512,8 +512,8 @@ namespace SR_CORE_NS::GUI {
         CurrentDirectoryPanel(); //Отрисовка панели нынешней директории
 
         auto&& DirectoryPanelHeight = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().y; //код для исключения ошибок ImGui
-        if (DirectoryPanelHeight < 50) {                        //проверяет высоту панели нынешней директории
-            SR_GRAPH_GUI_NS::Immediate::EndGroup();                                  //для прекращения отрисовки
+        if (DirectoryPanelHeight < 50) { //проверяет высоту панели нынешней директории
+            SR_GRAPH_GUI_NS::Immediate::EndGroup(); //для прекращения отрисовки
             return;
         }
 

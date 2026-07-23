@@ -14,18 +14,18 @@
 
 namespace SR_CORE_NS {
     SR_ENUM_NS_CLASS_T(NetworkRole, uint8_t,
-        None,
-        Host,
-        Client
+                       None,
+                       Host,
+                       Client
     )
 
     SR_ENUM_NS_CLASS_T(NetworkState, uint8_t,
-        Disconnected,
-        Starting,
-        Running,
-        Connecting,
-        Connected,
-        Error
+                       Disconnected,
+                       Starting,
+                       Running,
+                       Connecting,
+                       Connected,
+                       Error
     )
 
     /// Represents a received network message.

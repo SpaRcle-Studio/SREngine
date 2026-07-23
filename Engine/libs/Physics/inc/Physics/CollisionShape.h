@@ -187,10 +187,9 @@ namespace SR_PTYPES_NS {
         SR_VIRTUAL_PROPERTY
         /// @virtualProperty(meshId) @getter(GetMeshId) @setter(SetMeshId)
         /// @condition(This.HasGeometry())
-        SR_VIRTUAL_PROPERTY
+            SR_VIRTUAL_PROPERTY
 
     };
 }
-
 
 #endif //SR_ENGINE_PHYSICS_COLLISION_SHAPE_H

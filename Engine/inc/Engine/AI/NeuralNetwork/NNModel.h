@@ -71,8 +71,6 @@ namespace SR_CORE_NS::AI {
         void Awake() override;
         void Update(float_t dt) override;
 
-
-
         SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
         bool IsUpdatable() const noexcept override { return true; }
 

@@ -24,14 +24,14 @@ namespace SR_WORLD_NS {
 namespace SR_CORE_NS {
     /*class VisualRegion : public SR_WORLD_NS::Region {
         using RenderScenePtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::RenderScene>;
-    public:
+       public:
         explicit VisualRegion(SRRegionAllocArgs) : SR_UTILS_NS::World::Region(SRRegionAllocVArgs) { }
         ~VisualRegion() override = default;
 
-    private:
+       private:
         Graphics::Types::DebugWireframeMesh* m_mesh = nullptr;
 
-    private:
+       private:
         void SetVisible(bool value);
         void UpdateFacesPos();
 
@@ -41,7 +41,7 @@ namespace SR_CORE_NS {
         bool Unload(bool force) override;
         bool Load() override;
 
-    };*/
+       };*/
 }
 
 #endif //SR_ENGINE_VISUALREGION_H

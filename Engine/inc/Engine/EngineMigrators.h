@@ -5,8 +5,6 @@
 #ifndef SR_ENGINE_ENGINE_MIGRATORS_H
 #define SR_ENGINE_ENGINE_MIGRATORS_H
 
-namespace SR_CORE_NS {
-
-}
+namespace SR_CORE_NS { }
 
 #endif //SR_ENGINE_ENGINE_MIGRATORS_H

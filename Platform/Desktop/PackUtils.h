@@ -45,7 +45,7 @@ std::string wildcardToRegex(const std::string& mask) {
 }
 
 bool IsExcluded(const std::filesystem::path& relPath, const std::vector<std::regex>& excludePatterns) {
-    std::string pathStr = relPath.generic_string();  // always forward slashes
+    std::string pathStr = relPath.generic_string(); // always forward slashes
     for (const auto& pattern : excludePatterns) {
         if (std::regex_match(pathStr, pattern)) {
             return true;
@@ -57,7 +57,7 @@ bool IsExcluded(const std::filesystem::path& relPath, const std::vector<std::reg
 std::vector<std::regex> LoadExcludeMask(std::filesystem::path resourcesPath) {
     std::vector<std::regex> excludeMasks;
 
-    auto&& filePath = resourcesPath  / "Engine/Configs/PackExcludeSettings.conf";
+    auto&& filePath = resourcesPath / "Engine/Configs/PackExcludeSettings.conf";
 
     if (std::filesystem::exists(filePath)) {
         std::ifstream file(filePath);
@@ -128,7 +128,7 @@ std::vector<std::string> GetResourcesPackFiles() {
 
 std::vector<char> CompressData(const std::vector<char>& data) {
     if (data.empty()) {
-        return {};
+        return { };
     }
 
     uLongf compressedSize = compressBound(data.size());
@@ -165,7 +165,7 @@ bool PackFile(std::vector<char>& archive, const std::string& path, bool isResour
     if (isResource) {
         std::filesystem::path resourcesPath = absolute(std::filesystem::current_path() / "../../Resources");
         std::filesystem::path relPath = std::filesystem::relative(path, resourcesPath);
-        name = relPath.generic_string();  // always forward slashes
+        name = relPath.generic_string(); // always forward slashes
     }
     else {
         name = std::filesystem::path(path).filename().string();

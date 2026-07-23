@@ -74,7 +74,7 @@ namespace SR_AUDIO_NS {
         m_rawSound = pRawSound;
     }
 
-    const uint8_t *Sound::GetBufferData() const {
+    const uint8_t*Sound::GetBufferData() const {
         return m_rawSound ? m_rawSound->GetBufferData() : nullptr;
     }
 

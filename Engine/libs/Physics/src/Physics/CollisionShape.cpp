@@ -13,7 +13,6 @@
 #include <Codegen/CollisionShape.generated.hpp>
 #include "../../../../../Resources/API/Engine/libs/Physics/inc/Physics/CollisionShape.h"
 
-
 namespace SR_PTYPES_NS {
     CollisionShape::~CollisionShape() {
         RemoveDebugShape();
@@ -58,55 +57,55 @@ namespace SR_PTYPES_NS {
 
         if (SR_PHYSICS_UTILS_NS::IsBox(type)) {
             m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawCube(
-                    m_debugId,
-                    m_translation + GetCenterDirection(),
-                    m_rotation,
-                    m_scale * GetSize(),
-                    SR_MATH_NS::FColor(0, 255, 200, 255),
-                    SR_FLOAT_MAX
+                m_debugId,
+                m_translation + GetCenterDirection(),
+                m_rotation,
+                m_scale * GetSize(),
+                SR_MATH_NS::FColor(0, 255, 200, 255),
+                SR_FLOAT_MAX
             );
         }
         else if (SR_PHYSICS_UTILS_NS::IsPlane(type)) {
             m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawPlane(
-                    m_debugId,
-                    m_translation + GetCenterDirection(),
-                    m_rotation,
-                    m_scale * SR_MATH_NS::FVector3(GetPlaneSize().x, 0.f, GetPlaneSize().y),
-                    SR_MATH_NS::FColor(0, 255, 200, 255),
-                    SR_FLOAT_MAX
+                m_debugId,
+                m_translation + GetCenterDirection(),
+                m_rotation,
+                m_scale * SR_MATH_NS::FVector3(GetPlaneSize().x, 0.f, GetPlaneSize().y),
+                SR_MATH_NS::FColor(0, 255, 200, 255),
+                SR_FLOAT_MAX
             );
         }
         else if (SR_PHYSICS_UTILS_NS::IsSphere(type)) {
-                    m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawSphere(
-                    m_debugId,
-                    m_translation + GetCenterDirection(),
-                    m_rotation,
-                    (m_scale * GetRadius()).Max3(),
-                    SR_MATH_NS::FColor(0, 255, 200, 255),
-                    SR_FLOAT_MAX
+            m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawSphere(
+                m_debugId,
+                m_translation + GetCenterDirection(),
+                m_rotation,
+                (m_scale * GetRadius()).Max3(),
+                SR_MATH_NS::FColor(0, 255, 200, 255),
+                SR_FLOAT_MAX
             );
         }
         else if (SR_PHYSICS_UTILS_NS::IsCapsule(type)) {
             SR_MATH_NS::Unit width = (m_scale * GetRadius()).ZeroAxis(SR_MATH_NS::Axis::Y).Max();
             SR_MATH_NS::FVector3 size = SR_MATH_NS::FVector3(width, GetHeight() * m_scale.y, width);
             m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawCapsule(
-                    m_debugId,
-                    m_translation + GetCenterDirection(),
-                    m_rotation,
-                    size,
-                    SR_MATH_NS::FColor(0, 255, 200, 255),
-                    SR_FLOAT_MAX
+                m_debugId,
+                m_translation + GetCenterDirection(),
+                m_rotation,
+                size,
+                SR_MATH_NS::FColor(0, 255, 200, 255),
+                SR_FLOAT_MAX
             );
         }
         else if (HasGeometry()) {
             m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawMesh(
-                    const_cast<SR_HTYPES_NS::RawMesh*>(GetRawMesh().Get()), GetMeshId(),
-                    m_debugId,
-                    m_translation + GetCenterDirection(),
-                    m_rotation,
-                    m_scale * GetSize(),
-                    SR_MATH_NS::FColor(0, 255, 200, 255),
-                    SR_FLOAT_MAX
+                const_cast<SR_HTYPES_NS::RawMesh*>(GetRawMesh().Get()), GetMeshId(),
+                m_debugId,
+                m_translation + GetCenterDirection(),
+                m_rotation,
+                m_scale * GetSize(),
+                SR_MATH_NS::FColor(0, 255, 200, 255),
+                SR_FLOAT_MAX
             );
         }
     }
@@ -262,7 +261,7 @@ namespace SR_PTYPES_NS {
         GetCollisionShape()->SetType(type);
 
         SetShapeDirty(true);
-    }*/
+       }*/
 
     SR_MATH_NS::FVector3 CollisionShape::CalculateLocalInertia(float_t mass) const {
         if (m_impl) {

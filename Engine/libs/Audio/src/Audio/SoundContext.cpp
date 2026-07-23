@@ -10,7 +10,7 @@
 #include <Utils/Debug.h>
 
 namespace SR_AUDIO_NS {
-    SoundContext::SoundContext(SoundDevice *pDevice)
+    SoundContext::SoundContext(SoundDevice* pDevice)
         : m_device(pDevice)
     { }
 
@@ -48,24 +48,24 @@ namespace SR_AUDIO_NS {
         return playParams;
     }
 
-    void SoundContext::ApplyParams(SoundSource pSource, const PlayParams &params)
+    void SoundContext::ApplyParams(SoundSource pSource, const PlayParams& params)
     {
         SR_TRACY_ZONE;
         /*ApplyParam(pSource, params.device, m_params.device, PlayParamType::Device);
-        ApplyParam(pSource, params.coneInnerAngle, m_params.coneInnerAngle, PlayParamType::ConeInnerAngle);
-        ApplyParam(pSource, params.async, m_params.async, PlayParamType::Async);
-        ApplyParam(pSource, params.direction, m_params.direction, PlayParamType::Direction);
-        ApplyParam(pSource, params.gain, m_params.gain, PlayParamType::Gain);
-        ApplyParam(pSource, params.library, m_params.library, PlayParamType::Library);
-        ApplyParam(pSource, params.loop, m_params.loop, PlayParamType::Loop);
-        ApplyParam(pSource, params.maxGain, m_params.maxGain, PlayParamType::MaxGain);
-        ApplyParam(pSource, params.minGain, m_params.minGain, PlayParamType::MinGain);
-        ApplyParam(pSource, params.orientation, m_params.orientation, PlayParamType::Orientation);
-        ApplyParam(pSource, params.pitch, m_params.pitch, PlayParamType::Pitch);
-        ApplyParam(pSource, params.position, m_params.position, PlayParamType::Position);
-        ApplyParam(pSource, params.relative, m_params.relative, PlayParamType::Relative);
-        ApplyParam(pSource, params.uniqueId, m_params.uniqueId, PlayParamType::UniqueId);
-        ApplyParam(pSource, params.velocity, m_params.velocity, PlayParamType::Velocity);*/
+           ApplyParam(pSource, params.coneInnerAngle, m_params.coneInnerAngle, PlayParamType::ConeInnerAngle);
+           ApplyParam(pSource, params.async, m_params.async, PlayParamType::Async);
+           ApplyParam(pSource, params.direction, m_params.direction, PlayParamType::Direction);
+           ApplyParam(pSource, params.gain, m_params.gain, PlayParamType::Gain);
+           ApplyParam(pSource, params.library, m_params.library, PlayParamType::Library);
+           ApplyParam(pSource, params.loop, m_params.loop, PlayParamType::Loop);
+           ApplyParam(pSource, params.maxGain, m_params.maxGain, PlayParamType::MaxGain);
+           ApplyParam(pSource, params.minGain, m_params.minGain, PlayParamType::MinGain);
+           ApplyParam(pSource, params.orientation, m_params.orientation, PlayParamType::Orientation);
+           ApplyParam(pSource, params.pitch, m_params.pitch, PlayParamType::Pitch);
+           ApplyParam(pSource, params.position, m_params.position, PlayParamType::Position);
+           ApplyParam(pSource, params.relative, m_params.relative, PlayParamType::Relative);
+           ApplyParam(pSource, params.uniqueId, m_params.uniqueId, PlayParamType::UniqueId);
+           ApplyParam(pSource, params.velocity, m_params.velocity, PlayParamType::Velocity);*/
 
         ApplyParam(pSource, params.device, PlayParamType::Device);
         //ApplyParam(pSource, params.coneInnerAngle, PlayParamType::ConeInnerAngle);
@@ -96,14 +96,14 @@ namespace SR_AUDIO_NS {
 
         switch (pDevice->GetLibrary()) {
             case AudioLibrary::OpenAL:
-                return new OpenALSoundContext(pDevice);
+            return new OpenALSoundContext(pDevice);
             case AudioLibrary::FMOD:
             case AudioLibrary::Wwise:
             case AudioLibrary::Allegro:
             case AudioLibrary::SoLoud:
             case AudioLibrary::Unknown:
-                SR_ERROR("SoundContext::Allocate() : unsupported library!");
-                break;
+            SR_ERROR("SoundContext::Allocate() : unsupported library!");
+            break;
         }
 
         return nullptr;
@@ -116,26 +116,26 @@ namespace SR_AUDIO_NS {
         }
 
         switch (m_device->GetLibrary()) {
-            case AudioLibrary::OpenAL:{
-                auto&& pListener = new OpenALSoundListener(m_device);
-                pListener->SetData(ListenerData());
-                m_listeners.emplace_back(pListener);
-                return pListener;
-            }
+            case AudioLibrary::OpenAL: {
+            auto&& pListener = new OpenALSoundListener(m_device);
+            pListener->SetData(ListenerData());
+            m_listeners.emplace_back(pListener);
+            return pListener;
+        }
             case AudioLibrary::FMOD:
             case AudioLibrary::Wwise:
             case AudioLibrary::Allegro:
             case AudioLibrary::SoLoud:
             case AudioLibrary::Unknown:
             default:
-                SR_ERROR("SoundContext::Allocate() : unsupported library!");
+            SR_ERROR("SoundContext::Allocate() : unsupported library!");
         }
 
         return nullptr;
     }
 
     bool SoundContext::FreeListener(SoundListener* pListener) {
-        for (auto pIt = m_listeners.begin(); pIt != m_listeners.end(); ++pIt ) {
+        for (auto pIt = m_listeners.begin(); pIt != m_listeners.end(); ++pIt) {
             if (*pIt == pListener) {
                 m_listeners.erase(pIt);
                 return true;

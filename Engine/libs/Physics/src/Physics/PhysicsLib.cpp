@@ -70,7 +70,7 @@ namespace SR_PHYSICS_NS {
         }
     }
 
-    LibraryImpl *PhysicsLibrary::GetLibrary(LibraryType type) {
+    LibraryImpl*PhysicsLibrary::GetLibrary(LibraryType type) {
         SR_TRACY_ZONE;
 
         const auto index = static_cast<int32_t>(type);
@@ -90,28 +90,28 @@ namespace SR_PHYSICS_NS {
         switch (type) {
         #ifdef SR_PHYSICS_USE_PHYSX
             case LibraryType::PhysX:
-                m_libraries[index] = new PhysXLibraryImpl();
-                break;
+            m_libraries[index] = new PhysXLibraryImpl();
+            break;
         #endif
         #ifdef SR_PHYSICS_USE_BULLET3
             case LibraryType::Bullet3:
-                m_libraries[index] = new Bullet3LibraryImpl();
-                break;
+            m_libraries[index] = new Bullet3LibraryImpl();
+            break;
         #endif
         #ifdef SR_PHYSICS_USE_BOX2D
             case LibraryType::Box2D:
-                m_libraries[index] = new Box2DLibraryImpl();
-                break;
+            m_libraries[index] = new Box2DLibraryImpl();
+            break;
         #endif
             default:
-                SR_ERROR("PhysicsLibrary::GetLibrary() : unsupported physics library type! \n\tType: "
+            SR_ERROR("PhysicsLibrary::GetLibrary() : unsupported physics library type! \n\tType: "
                      + SR_UTILS_NS::EnumReflector::ToStringAtom(type).ToStringRef());
-                return nullptr;
+            return nullptr;
         }
 
         if (!m_libraries[index]->Initialize()) {
             SR_ERROR("PhysicsLibrary::GetLibrary() : failed to initialize physics library!\n\tType: "
-                 + SR_UTILS_NS::EnumReflector::ToStringAtom(type).ToStringRef()
+                     + SR_UTILS_NS::EnumReflector::ToStringAtom(type).ToStringRef()
             );
             delete m_libraries[index];
             m_libraries[index] = nullptr;
@@ -129,14 +129,14 @@ namespace SR_PHYSICS_NS {
         }
 
         SR_WARN("PhysicsLibrary::GetActiveLibrary() : not found active library for \"" +
-            SR_UTILS_NS::EnumReflector::ToStringAtom(space).ToStringRef() + "\", use default...");
+                SR_UTILS_NS::EnumReflector::ToStringAtom(space).ToStringRef() + "\", use default...");
 
         switch (space) {
             case Space::Space2D:
             case Space::Space3D:
-                return GetLibrary(LibraryType::Bullet3);
+            return GetLibrary(LibraryType::Bullet3);
             default:
-                break;
+            break;
         }
 
         SRHalt("PhysicsLibrary::GetActiveLibrary() : unsupported measurement!");
@@ -148,17 +148,17 @@ namespace SR_PHYSICS_NS {
         LibraryTypes types;
 
     #ifdef SR_PHYSICS_USE_PHYSX
-        if (m_supportedLibs.count(LibraryType::PhysX)){
+        if (m_supportedLibs.count(LibraryType::PhysX)) {
             types.emplace_back(LibraryType::PhysX);
         }
     #endif
     #ifdef SR_PHYSICS_USE_BULLET3
-        if (m_supportedLibs.count(LibraryType::Bullet3)){
+        if (m_supportedLibs.count(LibraryType::Bullet3)) {
             types.emplace_back(LibraryType::Bullet3);
         }
     #endif
     #ifdef SR_PHYSICS_USE_BOX2D
-        if (m_supportedLibs.count(LibraryType::Box2D)){
+        if (m_supportedLibs.count(LibraryType::Box2D)) {
             types.emplace_back(LibraryType::Box2D);
         }
     #endif

@@ -11,9 +11,9 @@ namespace SR_PTYPES_NS {
 
     /*PhysXVehicle4W3D::PhysXVehicle4W3D(Super::LibraryPtr pLibrary)
         : Super(pLibrary)
-    { }
+       { }
 
-    PhysXVehicle4W3D::~PhysXVehicle4W3D() {
+       PhysXVehicle4W3D::~PhysXVehicle4W3D() {
         if (m_wheelsSimData) {
             delete m_wheelsSimData;
             m_wheelsSimData = nullptr;
@@ -23,9 +23,9 @@ namespace SR_PTYPES_NS {
             m_vehActor->release();
             m_vehActor = nullptr;
         }
-    }
+       }
 
-    physx::PxVehicleWheelsSimData* PhysXVehicle4W3D::SetupWheelsSimulationData() {
+       physx::PxVehicleWheelsSimData* PhysXVehicle4W3D::SetupWheelsSimulationData() {
         physx::PxVehicleWheelsSimData* wheelsSimData = physx::PxVehicleWheelsSimData::allocate(Vehicle4WWheelOrder::Size);
         auto&& wheelsData = GetWheelsData();
         auto&& vehicleData = GetVehicleData();
@@ -150,9 +150,9 @@ namespace SR_PTYPES_NS {
         }
 
         return wheelsSimData;
-    }
+       }
 
-    physx::PxVehicleDriveSimData4W* PhysXVehicle4W3D::SetupDriveSimData4W() {
+       physx::PxVehicleDriveSimData4W* PhysXVehicle4W3D::SetupDriveSimData4W() {
         if (!m_wheelsSimData){
             SRHalt("m_wheelsSimData is nullptr!");
             return nullptr;
@@ -201,9 +201,9 @@ namespace SR_PTYPES_NS {
         driveSimData->setAckermannGeometryData(ackermann);
 
         return driveSimData;
-    }
+       }
 
-    physx::PxRigidDynamic* PhysXVehicle4W3D::SetupVehicleActor(
+       physx::PxRigidDynamic* PhysXVehicle4W3D::SetupVehicleActor(
             const physx::PxVehicleChassisData &chassisData,
             physx::PxMaterial **wheelMaterials,
             physx::PxConvexMesh **wheelConvexMeshes,
@@ -213,7 +213,7 @@ namespace SR_PTYPES_NS {
             uint32_t numChassisMeshes,
             const physx::PxFilterData &chassisSimFilterData,
             physx::PxPhysics &physics
-    ) {
+       ) {
         //We need a rigid body actor for the vehicle.
         //Don't forget to add the actor to the scene after setting up the associated vehicle.
         physx::PxRigidDynamic* vehActor = physics.createRigidDynamic(physx::PxTransform(physx::PxIdentity));
@@ -253,9 +253,9 @@ namespace SR_PTYPES_NS {
         vehActor->setCMassLocalPose(physx::PxTransform(chassisData.mCMOffset,physx::PxQuat(physx::PxIdentity)));
 
         return vehActor;
-    }
+       }
 
-    bool PhysXVehicle4W3D::InitVehicle() {
+       bool PhysXVehicle4W3D::InitVehicle() {
         if (!Super::InitVehicle()) {
             SRHalt("failed to init base vehicle!");
             return false;
@@ -263,9 +263,9 @@ namespace SR_PTYPES_NS {
 
 
         return true;
-    }
+       }
 
-    void* PhysXVehicle4W3D::GetHandle() const noexcept {
+       void* PhysXVehicle4W3D::GetHandle() const noexcept {
         return nullptr;
-    }*/
+       }*/
 }

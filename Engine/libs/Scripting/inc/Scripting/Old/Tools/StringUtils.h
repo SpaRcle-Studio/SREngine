@@ -48,9 +48,9 @@ namespace EvoScript::Tools {
 
         size_t pos = 0;
 
-        ret:
+ret:
         size_t start_pos = str.find('\n', pos);
-        if(start_pos == std::string::npos)
+        if (start_pos == std::string::npos)
             return str;
         pos += start_pos - pos;
         str.insert(str.begin() + pos + 1, '\t');
@@ -59,9 +59,9 @@ namespace EvoScript::Tools {
     }
 
     static std::string Replace(std::string str, const std::string& from, const std::string& to) {
-    ret:
+ret:
         size_t start_pos = str.find(from);
-        if(start_pos == std::string::npos)
+        if (start_pos == std::string::npos)
             return str;
         str.replace(start_pos, from.length(), to);
         goto ret;
@@ -79,7 +79,7 @@ namespace EvoScript::Tools {
 
     static std::string DeleteSymbolsInStr(std::string str, const std::string& symbols) {
         for (const auto& symbol : symbols)
-            str.erase(remove(str.begin(),str.end(), symbol),str.end());
+            str.erase(remove(str.begin(), str.end(), symbol), str.end());
         return str;
     }
 
@@ -109,7 +109,7 @@ namespace EvoScript::Tools {
 
     static std::vector<std::string> GetArgs(const std::string& str) {
         if (str.size() <= 2) {
-            return {};
+            return { };
         }
 
         auto left = str.find('(');

@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
 
     for (int i = 1; i < argc; ++i) {
         if (strcmp(argv[i], "--pack") == 0) {
-            return PackFiles(executablePath, GetPackFiles(executablePath), {}, false);
+            return PackFiles(executablePath, GetPackFiles(executablePath), { }, false);
         }
         if (strcmp(argv[i], "--unpack") == 0) {
             return TryUnpackFiles(executablePath);

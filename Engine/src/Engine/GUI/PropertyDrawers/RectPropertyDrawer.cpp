@@ -143,7 +143,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-        const float_t partItemWidth =   context.fieldWidth - context.axisButtonWidth * 2.2f;
+        const float_t partItemWidth = context.fieldWidth - context.axisButtonWidth * 2.2f;
 
         const SR_MATH_NS::FVector2 buttonSize = { context.axisButtonWidth * 2.2f, context.fieldHeight };
         const float_t drag = context.GetEditorParams().GetDragSpeed();
@@ -173,7 +173,6 @@ namespace SR_CORE_GUI_NS {
 
             const uint64_t partSize = value.SizeOf() / 4;
             const uint64_t offset = partSize * i;
-
 
             if (SR_GRAPH_GUI_NS::Immediate::Button(labels[i], buttonSize)) {
                 if (context.pProperty && context.GetProperty().GetResetValue().SizeOf() == value.SizeOf()) {

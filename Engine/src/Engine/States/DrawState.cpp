@@ -30,7 +30,7 @@ namespace SR_CORE_NS {
 
         const bool isCollapsed = pWindow->IsWindowCollapsed();
 
-        if (auto&& pRenderScene = pEngine->GetRenderScene(); pRenderScene && !isCollapsed) {
+        if (auto&& pRenderScene = pEngine->GetRenderScene(); pRenderScene&& !isCollapsed) {
             if (auto&& pWin = pWindow->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()) {
                 const bool isOverlay = pRenderScene->IsOverlayEnabled();
                 const bool isMaximized = pWin->IsMaximized();

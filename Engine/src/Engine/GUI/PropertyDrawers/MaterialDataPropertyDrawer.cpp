@@ -191,100 +191,100 @@ namespace SR_CORE_GUI_NS {
 
         switch (property.type) {
             case SR_GRAPH_NS::ShaderVarType::Vec2:
-                value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<SR_MATH_NS::FVector2>(*property.data));
-                feedback = m_vectorDrawer->Draw(propertyContext);
-                break;
+            value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<SR_MATH_NS::FVector2>(*property.data));
+            feedback = m_vectorDrawer->Draw(propertyContext);
+            break;
             case SR_GRAPH_NS::ShaderVarType::Vec3:
-                value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<SR_MATH_NS::FVector3>(*property.data));
-                feedback = m_vectorDrawer->Draw(propertyContext);
-                break;
+            value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<SR_MATH_NS::FVector3>(*property.data));
+            feedback = m_vectorDrawer->Draw(propertyContext);
+            break;
             case SR_GRAPH_NS::ShaderVarType::IVec3:
-                value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<SR_MATH_NS::IVector3>(*property.data));
-                feedback = m_vectorDrawer->Draw(propertyContext);
-                break;
+            value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<SR_MATH_NS::IVector3>(*property.data));
+            feedback = m_vectorDrawer->Draw(propertyContext);
+            break;
             case SR_GRAPH_NS::ShaderVarType::Vec4:
-                value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<SR_MATH_NS::FVector4>(*property.data));
-                feedback = m_vectorDrawer->Draw(propertyContext);
-                break;
+            value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<SR_MATH_NS::FVector4>(*property.data));
+            feedback = m_vectorDrawer->Draw(propertyContext);
+            break;
             case SR_GRAPH_NS::ShaderVarType::Int:
-                value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<int32_t>(*property.data));
-                feedback = m_numericDrawer->Draw(propertyContext);
-                break;
+            value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<int32_t>(*property.data));
+            feedback = m_numericDrawer->Draw(propertyContext);
+            break;
             case SR_GRAPH_NS::ShaderVarType::Float:
-                value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<float_t>(*property.data));
-                feedback = m_numericDrawer->Draw(propertyContext);
-                break;
+            value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<float_t>(*property.data));
+            feedback = m_numericDrawer->Draw(propertyContext);
+            break;
             case SR_GRAPH_NS::ShaderVarType::Bool: {
-                SR_GRAPH_GUI_NS::Immediate::SameLine();
-                bool boolean = std::get<int32_t>(*property.data) != 0;
-                value = SR_UTILS_NS::Reflection::Value::CreateRef(boolean);
-                feedback = m_boolDrawer->Draw(propertyContext);
-                std::get<int32_t>(*property.data) = boolean ? 1 : 0;
-                break;
-            }
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            bool boolean = std::get<int32_t>(*property.data) != 0;
+            value = SR_UTILS_NS::Reflection::Value::CreateRef(boolean);
+            feedback = m_boolDrawer->Draw(propertyContext);
+            std::get<int32_t>(*property.data) = boolean ? 1 : 0;
+            break;
+        }
             case SR_GRAPH_NS::ShaderVarType::Sampler2D: {
-                SR_GRAPH_GUI_NS::Immediate::SameLine();
-                SR_UTILS_NS::Path path;
-                if (auto&& pTexture = std::get<SR_GTYPES_NS::Texture::Ptr>(*property.data)) {
-                    path = pTexture->GetResourcePath();
-                }
-                value = SR_UTILS_NS::Reflection::Value::CreateRef(path);
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_UTILS_NS::Path path;
+            if (auto&& pTexture = std::get<SR_GTYPES_NS::Texture::Ptr>(*property.data)) {
+                path = pTexture->GetResourcePath();
+            }
+            value = SR_UTILS_NS::Reflection::Value::CreateRef(path);
 
-                feedback = m_pathDrawer->Draw(propertyContext);
-                if (feedback.isChanged) {
-                    SR_GTYPES_NS::Texture::Ptr pTexture = path.empty() ? nullptr : CoreResLoader::Load<SR_GTYPES_NS::Texture>(path);
-                    shaderData.SetData(property.id, pTexture, SR_GRAPH_NS::ShaderVarType::Sampler2D);
-                }
+            feedback = m_pathDrawer->Draw(propertyContext);
+            if (feedback.isChanged) {
+                SR_GTYPES_NS::Texture::Ptr pTexture = path.empty() ? nullptr : CoreResLoader::Load<SR_GTYPES_NS::Texture>(path);
+                shaderData.SetData(property.id, pTexture, SR_GRAPH_NS::ShaderVarType::Sampler2D);
+            }
 
-                auto&& pTexture = std::get<SR_GTYPES_NS::Texture::Ptr>(*property.data);
-                if (void* pDescriptor = pTexture && pTexture->CanBeUsed() ? pTexture->GetDescriptor() : nullptr) {
-                    const float_t imageSize = context.lineHeight * 2.5f;
+            auto&& pTexture = std::get<SR_GTYPES_NS::Texture::Ptr>(*property.data);
+            if (void* pDescriptor = pTexture && pTexture->CanBeUsed() ? pTexture->GetDescriptor() : nullptr) {
+                const float_t imageSize = context.lineHeight * 2.5f;
 
-                    if (SR_GRAPH_GUI_NS::Immediate::ImageButton((void*)pDescriptor, SR_MATH_NS::FVector2(imageSize), 0.25f * context.lineHeight)) {
-                        if (auto&& pInspector = context.pEditor->GetWidget<SR_CORE_GUI_NS::TextureInspector>()) {
-                            pInspector->Inspect(pTexture->GetResourcePath());
-                        }
+                if (SR_GRAPH_GUI_NS::Immediate::ImageButton((void*)pDescriptor, SR_MATH_NS::FVector2(imageSize), 0.25f * context.lineHeight)) {
+                    if (auto&& pInspector = context.pEditor->GetWidget<SR_CORE_GUI_NS::TextureInspector>()) {
+                        pInspector->Inspect(pTexture->GetResourcePath());
                     }
-
-                    SR_GRAPH_GUI_NS::Immediate::SameLine();
-
-                    const auto& imageMeta = pTexture->GetImageMetaInfo();
-
-                    SR_GRAPH_GUI_NS::Immediate::BeginGroup();
-
-                    SR_GRAPH_GUI_NS::Immediate::Text("%s", "Size: {}x{}\nChannels: {}\nFormat: {}\nFilter: {}"_format(
-                        pTexture->GetWidth(),
-                        pTexture->GetHeight(),
-                        pTexture->GetChannels(),
-                        imageMeta.GetFormat(),
-                        imageMeta.GetFilter()).c_str()
-                    );
-
-                    SR_GRAPH_GUI_NS::Immediate::EndGroup();
-
-                    SR_GRAPH_GUI_NS::Immediate::SameLine();
-                    SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.lineHeight, 0));
-                    SR_GRAPH_GUI_NS::Immediate::SameLine();
-
-                    SR_GRAPH_GUI_NS::Immediate::BeginGroup();
-
-                    SR_GRAPH_GUI_NS::Immediate::Text("%s", "Compression: {}\nMipLevels: {}\nCpuUsage: {}"_format(
-                        imageMeta.GetCompression(),
-                        imageMeta.GetMipLevels(),
-                        imageMeta.GetCpuUsage()).c_str()
-                    );
-
-                    SR_GRAPH_GUI_NS::Immediate::EndGroup();
                 }
 
-                break;
-            }
-            default: {
                 SR_GRAPH_GUI_NS::Immediate::SameLine();
-                auto&& msg = "Unsupported type! Type: {}"_format(property.type);
-                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), msg.c_str());
-                return false;
+
+                const auto& imageMeta = pTexture->GetImageMetaInfo();
+
+                SR_GRAPH_GUI_NS::Immediate::BeginGroup();
+
+                SR_GRAPH_GUI_NS::Immediate::Text("%s", "Size: {}x{}\nChannels: {}\nFormat: {}\nFilter: {}"_format (
+                                                     pTexture->GetWidth(),
+                                                     pTexture->GetHeight(),
+                                                     pTexture->GetChannels(),
+                                                     imageMeta.GetFormat(),
+                                                     imageMeta.GetFilter()).c_str()
+                );
+
+                SR_GRAPH_GUI_NS::Immediate::EndGroup();
+
+                SR_GRAPH_GUI_NS::Immediate::SameLine();
+                SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.lineHeight, 0));
+                SR_GRAPH_GUI_NS::Immediate::SameLine();
+
+                SR_GRAPH_GUI_NS::Immediate::BeginGroup();
+
+                SR_GRAPH_GUI_NS::Immediate::Text("%s", "Compression: {}\nMipLevels: {}\nCpuUsage: {}"_format (
+                                                     imageMeta.GetCompression(),
+                                                     imageMeta.GetMipLevels(),
+                                                     imageMeta.GetCpuUsage()).c_str()
+                );
+
+                SR_GRAPH_GUI_NS::Immediate::EndGroup();
             }
+
+            break;
+        }
+            default: {
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            auto&& msg = "Unsupported type! Type: {}"_format (property.type);
+            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), msg.c_str());
+            return false;
+        }
         }
 
         if (feedback.isChanged || wasReset) {

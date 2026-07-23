@@ -19,30 +19,30 @@
 namespace SR_AUDIO_NS::Tools {
     bool IsModule( const char* Ext )
     {
-        return (
-                ( SR_STRCMPI( Ext, "mod" ) == 0 ) ||
-                ( SR_STRCMPI( Ext, "s3m" ) == 0 ) ||
-                ( SR_STRCMPI( Ext, "xm" ) == 0 ) ||
-                ( SR_STRCMPI( Ext, "it" ) == 0 ) ||
-                ( SR_STRCMPI( Ext, "669" ) == 0 ) ||
-                ( SR_STRCMPI( Ext, "amf" ) == 0 ) ||
-                ( SR_STRCMPI( Ext, "ams" ) == 0 ) ||
-                ( SR_STRCMPI( Ext, "dbm" ) == 0 ) ||
-                ( SR_STRCMPI( Ext, "dmf" ) == 0 ) ||
-                ( SR_STRCMPI( Ext, "dsm" ) == 0 ) ||
-                ( SR_STRCMPI( Ext, "far" ) == 0 ) ||
-                ( SR_STRCMPI( Ext, "mdl" ) == 0 ) ||
-                ( SR_STRCMPI( Ext, "med" ) == 0 ) ||
-                ( SR_STRCMPI( Ext, "mtm" ) == 0 ) ||
-                ( SR_STRCMPI( Ext, "okt" ) == 0 ) ||
-                ( SR_STRCMPI( Ext, "ptm" ) == 0 ) ||
-                ( SR_STRCMPI( Ext, "stm" ) == 0 ) ||
-                ( SR_STRCMPI( Ext, "ult" ) == 0 ) ||
-                ( SR_STRCMPI( Ext, "umx" ) == 0 ) ||
-                ( SR_STRCMPI( Ext, "mt2" ) == 0 ) ||
-                ( SR_STRCMPI( Ext, "psm" ) == 0 ) ||
+        return(
+            (SR_STRCMPI( Ext, "mod" ) == 0) ||
+            (SR_STRCMPI( Ext, "s3m" ) == 0) ||
+            (SR_STRCMPI( Ext, "xm" ) == 0) ||
+            (SR_STRCMPI( Ext, "it" ) == 0) ||
+            (SR_STRCMPI( Ext, "669" ) == 0) ||
+            (SR_STRCMPI( Ext, "amf" ) == 0) ||
+            (SR_STRCMPI( Ext, "ams" ) == 0) ||
+            (SR_STRCMPI( Ext, "dbm" ) == 0) ||
+            (SR_STRCMPI( Ext, "dmf" ) == 0) ||
+            (SR_STRCMPI( Ext, "dsm" ) == 0) ||
+            (SR_STRCMPI( Ext, "far" ) == 0) ||
+            (SR_STRCMPI( Ext, "mdl" ) == 0) ||
+            (SR_STRCMPI( Ext, "med" ) == 0) ||
+            (SR_STRCMPI( Ext, "mtm" ) == 0) ||
+            (SR_STRCMPI( Ext, "okt" ) == 0) ||
+            (SR_STRCMPI( Ext, "ptm" ) == 0) ||
+            (SR_STRCMPI( Ext, "stm" ) == 0) ||
+            (SR_STRCMPI( Ext, "ult" ) == 0) ||
+            (SR_STRCMPI( Ext, "umx" ) == 0) ||
+            (SR_STRCMPI( Ext, "mt2" ) == 0) ||
+            (SR_STRCMPI( Ext, "psm" ) == 0) ||
                 // MIDI
-                ( SR_STRCMPI( Ext, "mid" ) == 0 )
+            (SR_STRCMPI( Ext, "mid" ) == 0)
                 // compressed modules
         /*		||
                 ( strcmpi( Ext, "mdz" ) == 0 ) ||
@@ -57,13 +57,13 @@ namespace SR_AUDIO_NS::Tools {
                 ( strcmpi( Ext, "s3gz" ) == 0 ) ||
                 ( strcmpi( Ext, "xmgz" ) == 0 ) ||
                 ( strcmpi( Ext, "itgz" ) == 0 )
-        */
+         */
         );
     }
 }
 
 namespace SR_AUDIO_NS {
-    IWaveDataProvider::Ptr CreateWaveDataProvider(const SR_UTILS_NS::Path& path, const RawSoundDataPtr &data) {
+    IWaveDataProvider::Ptr CreateWaveDataProvider(const SR_UTILS_NS::Path& path, const RawSoundDataPtr& data) {
         SR_TRACY_ZONE;
 
         if (!data || data->empty()) {
@@ -81,22 +81,22 @@ namespace SR_AUDIO_NS {
             switch (oggCodec) {
             #ifdef SR_AUDIO_USE_VORBIS
                 case OggCodec::Vorbis:
-                    return std::make_shared<OGGVorbisDataProvider>(data);
+                return std::make_shared<OGGVorbisDataProvider>(data);
             #endif
             #ifdef SR_AUDIO_USE_FLAC
                 case OggCodec::Flac: {
-                    auto&& pUnpacked = UnpackOggData(*data);
-                    if (!pUnpacked) {
-                        SR_ERROR("CreateWaveDataProvider() : failed to unpack OGG-FLAC data!");
-                        return nullptr;
-                    }
-
-                    return std::make_shared<FlacDataProvider>(pUnpacked);
+                auto&& pUnpacked = UnpackOggData(*data);
+                if (!pUnpacked) {
+                    SR_ERROR("CreateWaveDataProvider() : failed to unpack OGG-FLAC data!");
+                    return nullptr;
                 }
+
+                return std::make_shared<FlacDataProvider>(pUnpacked);
+            }
             #endif
                 default:
-                    SR_ERROR("CreateWaveDataProvider() : unsupported OGG codec! Codec: {}", oggCodec);
-                    return nullptr;
+                SR_ERROR("CreateWaveDataProvider() : unsupported OGG codec! Codec: {}", oggCodec);
+                return nullptr;
             }
         }
         //

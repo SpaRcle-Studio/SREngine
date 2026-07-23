@@ -2,7 +2,6 @@
 // Created by Monika on 09.12.2025.
 //
 
-
 #ifndef SR_ENGINE_CORE_IK_FOOT_SOLVER_CONFIG_H
 #define SR_ENGINE_CORE_IK_FOOT_SOLVER_CONFIG_H
 

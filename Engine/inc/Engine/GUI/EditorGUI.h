@@ -114,10 +114,10 @@ namespace SR_CORE_GUI_NS {
         bool m_installSamplesAsked = false;
         float_t m_samplesShowDelay = 2.5f;
 
-        std::atomic<bool> m_isInit     = false;
-        std::atomic<bool> m_hasErrors  = false;
-        std::atomic<bool> m_enabled    = false;
-        std::atomic<bool> m_loaded     = false;
+        std::atomic<bool> m_isInit = false;
+        std::atomic<bool> m_hasErrors = false;
+        std::atomic<bool> m_enabled = false;
+        std::atomic<bool> m_loaded = false;
 
         std::atomic<bool> m_useDocking = true;
         std::atomic<bool> m_dragWindow = false;
@@ -130,4 +130,3 @@ namespace SR_CORE_GUI_NS {
 }
 
 #endif //SR_ENGINE_EDITOR_GUI_H
-

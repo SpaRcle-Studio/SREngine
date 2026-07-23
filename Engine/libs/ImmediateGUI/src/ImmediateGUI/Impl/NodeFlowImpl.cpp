@@ -32,9 +32,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeFlowImpl {
 
     class InputPinInstanceNFImpl : public InputPinInstance {
     public:
-        void Draw() override {
-
-        }
+        void Draw() override { }
 
         void SetPin(std::shared_ptr<ImFlow::InPin<PinData*>> pPin) {
             m_pPin = std::move(pPin);
@@ -48,9 +46,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeFlowImpl {
 
     class OutputPinInstanceNFImpl : public OutputPinInstance {
     public:
-        void Draw() override {
-
-        }
+        void Draw() override { }
 
         void SetPin(std::shared_ptr<ImFlow::OutPin<PinData*>> pPin) {
             m_pPin = std::move(pPin);
@@ -78,8 +74,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeFlowImpl {
     public:
         explicit NodeInstanceNFImpl(NodeEditorInstance* pEditor)
             : NodeInstance(pEditor)
-        {
-        }
+        { }
 
         void Draw() override {
             SR_IMMEDIATE_GUI_NS::Dummy(SR_MATH_NS::FVector2(0.f, 40.f));
@@ -119,7 +114,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeFlowImpl {
             }
             if (!pPin) {
                 pPin = new InputPinInstanceNFImpl();
-                ImFlow::PinUID h = std::hash<void*>{}(pPin);
+                ImFlow::PinUID h = std::hash<void*>{ }(pPin);
                 m_pHandler = getHandler();
                 auto pRawPin = std::make_shared<ImFlow::InPin<PinData*>>(h, gBufferTmp, nullptr, ImFlow::ConnectionFilter::SameType(), nullptr, this, &m_pHandler);
                 pPin->SetPin(pRawPin);
@@ -147,7 +142,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeFlowImpl {
             }
             if (!pPin) {
                 pPin = new OutputPinInstanceNFImpl();
-                ImFlow::PinUID h = std::hash<void*>{}(pPin);
+                ImFlow::PinUID h = std::hash<void*>{ }(pPin);
                 m_pHandler = getHandler();
                 auto pRawPin = std::make_shared<ImFlow::OutPin<PinData*>>(h, gBufferTmp, nullptr, this, &m_pHandler);
                 pPin->SetPin(pRawPin);
@@ -196,9 +191,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeFlowImpl {
             m_nodeFlow.setSize(ImVec2(size.x, size.y));
         }
 
-        void Zoom() override {
-
-        }
+        void Zoom() override { }
 
         void RemoveAllNodes() override {
             SR_TRACY_ZONE;
@@ -487,7 +480,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         NodeInstance* CreateNode() override;
         void CreateLink(InputPinInstance* pInputPin, OutputPinInstance* pOutputPin) override;
         SR_NODISCARD InputPinInstance* CreateInputPin(SR_UTILS_NS::StringView name, PinTypeInfo type) override;
-        SR_NODISCARD OutputPinInstance* CreateOutputPin(SR_UTILS_NS::StringView name,PinTypeInfo type) override;
+        SR_NODISCARD OutputPinInstance* CreateOutputPin(SR_UTILS_NS::StringView name, PinTypeInfo type) override;
 
     private:
         mutable SR_UTILS_NS::Vector<NodeInstance*> m_selectedNodes;
@@ -661,10 +654,18 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         for (auto&& pLink : m_freeLinks) {
             pLink->Link(nullptr, nullptr);
         }
-        std::ranges::stable_sort(m_freeLinks, [](const LinkInstance* a, const LinkInstance* b) { return a < b; });
-        std::ranges::stable_sort(m_freeNodes, [](const NodeInstance* a, const NodeInstance* b) { return a < b; });
-        std::ranges::stable_sort(m_freeInputPins, [](const PinInstance* a, const PinInstance* b) { return a < b; });
-        std::ranges::stable_sort(m_freeOutputPins, [](const PinInstance* a, const PinInstance* b) { return a < b; });
+        std::ranges::stable_sort(m_freeLinks, [](const LinkInstance* a, const LinkInstance* b) {
+            return a < b;
+        });
+        std::ranges::stable_sort(m_freeNodes, [](const NodeInstance* a, const NodeInstance* b) {
+            return a < b;
+        });
+        std::ranges::stable_sort(m_freeInputPins, [](const PinInstance* a, const PinInstance* b) {
+            return a < b;
+        });
+        std::ranges::stable_sort(m_freeOutputPins, [](const PinInstance* a, const PinInstance* b) {
+            return a < b;
+        });
     }
 
     InputPinInstance* NodeEditorInstanceNEImpl::CreateInputPin(SR_UTILS_NS::StringView name, PinTypeInfo type) {
@@ -681,7 +682,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         return pPin;
     }
 
-    OutputPinInstance* NodeEditorInstanceNEImpl::CreateOutputPin(SR_UTILS_NS::StringView name,PinTypeInfo type) {
+    OutputPinInstance* NodeEditorInstanceNEImpl::CreateOutputPin(SR_UTILS_NS::StringView name, PinTypeInfo type) {
         OutputPinInstance* pPin = nullptr;
         if (m_freeOutputPins.empty()) {
             pPin = new OutputPinInstanceNEImpl();
@@ -767,10 +768,10 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
             const float_t progress = m_progress ? std::clamp(*m_progress, 0.f, 1.f) : 0.f;
 
             drawList->AddRectFilled(progressBarPos, progressBarSize,
-                ImGui::ColorConvertFloat4ToU32(ImColor(0.1f, 0.1f, 0.1f, 0.4f)), 0.f, ImDrawFlags_RoundCornersAll
+                                    ImGui::ColorConvertFloat4ToU32(ImColor(0.1f, 0.1f, 0.1f, 0.4f)), 0.f, ImDrawFlags_RoundCornersAll
             );
             drawList->AddRectFilled(progressBarPos, progressBarSize - ImVec2((1.f - progress) * (progressBarSize.x - progressBarPos.x), 0.f),
-                ImGui::ColorConvertFloat4ToU32(ImColor(0.3f, 0.8f, 0.3f, 0.8f)), 0.f, ImDrawFlags_RoundCornersAll
+                                    ImGui::ColorConvertFloat4ToU32(ImColor(0.3f, 0.8f, 0.3f, 0.8f)), 0.f, ImDrawFlags_RoundCornersAll
             );
         }
         else {

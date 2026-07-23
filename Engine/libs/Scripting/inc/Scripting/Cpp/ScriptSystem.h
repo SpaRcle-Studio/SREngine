@@ -16,7 +16,7 @@
 
 namespace SR_SCRIPTING_NS {
     SR_ENUM_NS_CLASS_T(ScriptSystemState, uint8_t,
-        InitialAnalyse, Idle, CheckModules, Codegen, Compiling, Reloading
+                       InitialAnalyse, Idle, CheckModules, Codegen, Compiling, Reloading
     );
 
     class ScriptSystem : public SR_UTILS_NS::Singleton<ScriptSystem> {

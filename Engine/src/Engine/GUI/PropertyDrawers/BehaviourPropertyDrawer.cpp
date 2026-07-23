@@ -22,7 +22,7 @@ namespace SR_CORE_GUI_NS {
     PropertyDrawerFeedback BehaviourPropertyDrawer::DrawCustomProperties(const PropertyDrawerContext& context) {
         auto&& pCppBehaviour = dynamic_cast<SR_SCRIPTING_NS::Behaviour*>(context.pOwner)->GetBehaviour();
         if (!pCppBehaviour) {
-            return {};
+            return { };
         }
 
         if (!m_pObjectPropertyDrawer) {

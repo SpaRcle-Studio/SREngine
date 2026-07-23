@@ -23,28 +23,28 @@ namespace SR_PTYPES_NS {
 
         switch (m_type) {
             case ShapeType::Plane3D: {
-                m_shape = new btStaticPlaneShape(btVector3(0, 1, 0), 0.f);
-                break;
-            }
+            m_shape = new btStaticPlaneShape(btVector3(0, 1, 0), 0.f);
+            break;
+        }
             case ShapeType::Box3D: {
-                m_shape = new btBoxShape(btVector3(1, 1, 1));
-                break;
-            }
+            m_shape = new btBoxShape(btVector3(1, 1, 1));
+            break;
+        }
             case ShapeType::Capsule3D: {
-                m_shape = new btCapsuleShape(1.f, 1.f);
-                break;
-            }
+            m_shape = new btCapsuleShape(1.f, 1.f);
+            break;
+        }
             case ShapeType::Sphere3D: {
-                m_shape = new btSphereShape(1.f);
-                break;
-            }
+            m_shape = new btSphereShape(1.f);
+            break;
+        }
             case ShapeType::Cylinder3D: {
-                m_shape = new btCylinderShape(btVector3(1.f, 1.f, 1.f));
-                break;
-            }
+            m_shape = new btCylinderShape(btVector3(1.f, 1.f, 1.f));
+            break;
+        }
             default:
-                SR_ERROR("Bullet3CollisionShape::Update() : unsupported shape! Type: " + SR_UTILS_NS::EnumReflector::ToString(m_type));
-                return false;
+            SR_ERROR("Bullet3CollisionShape::Update() : unsupported shape! Type: " + SR_UTILS_NS::EnumReflector::ToString(m_type));
+            return false;
         }
 
         return true;
@@ -68,17 +68,17 @@ namespace SR_PTYPES_NS {
         switch (m_type) {
             case ShapeType::Plane3D:
             case ShapeType::Box3D:
-                m_shape->setLocalScaling(SR_PHYSICS_UTILS_NS::FV3ToBtV3(GetSize() * GetScale()));
-                break;
+            m_shape->setLocalScaling(SR_PHYSICS_UTILS_NS::FV3ToBtV3(GetSize() * GetScale()));
+            break;
             case ShapeType::Capsule3D:
             case ShapeType::Cylinder3D:
-                m_shape->setLocalScaling(btVector3(GetRadius(), GetHeight(), GetRadius()));
-                break;
+            m_shape->setLocalScaling(btVector3(GetRadius(), GetHeight(), GetRadius()));
+            break;
             case ShapeType::Sphere3D:
-                m_shape->setLocalScaling(btVector3(GetRadius(), GetRadius(), GetRadius()));
-                break;
+            m_shape->setLocalScaling(btVector3(GetRadius(), GetRadius(), GetRadius()));
+            break;
             default:
-                break;
+            break;
         }
 
         return true;

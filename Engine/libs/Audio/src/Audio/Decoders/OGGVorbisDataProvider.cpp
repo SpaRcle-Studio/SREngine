@@ -20,10 +20,10 @@ namespace SR_AUDIO_NS {
         ov_callbacks callbacks;
         std::memset(&callbacks, 0, sizeof(callbacks));
 
-        callbacks.read_func  = OGGReadFunc;
-        callbacks.seek_func  = OGGSeekFunc;
+        callbacks.read_func = OGGReadFunc;
+        callbacks.seek_func = OGGSeekFunc;
         callbacks.close_func = OGGCloseFunc;
-        callbacks.tell_func  = OGGTellFunc;
+        callbacks.tell_func = OGGTellFunc;
 
         const auto ret = ov_open_callbacks(this, m_vorbisFile.Get(), nullptr, 0, callbacks);
         switch (ret) {
@@ -40,14 +40,14 @@ namespace SR_AUDIO_NS {
             case OV_EBADLINK: SR_ERROR("OGGDataProvider::OGGDataProvider() : invalid stream section supplied to libvorbisfile."); return;
             case OV_ENOSEEK: SR_ERROR("OGGDataProvider::OGGDataProvider() : bitstream is not seekable."); return;
             default:
-                SR_ERROR("OGGDataProvider::OGGDataProvider() : unknown error code {}.", ret);
-                return;
+            SR_ERROR("OGGDataProvider::OGGDataProvider() : unknown error code {}.", ret);
+            return;
         }
 
         if (vorbis_info* pVorbisInfo = ov_info(m_vorbisFile.Get(), -1)) {
-            m_format.m_numChannels      = pVorbisInfo->channels;
+            m_format.m_numChannels = pVorbisInfo->channels;
             m_format.m_samplesPerSecond = pVorbisInfo->rate;
-            m_format.m_bitsPerSample    = 16;
+            m_format.m_bitsPerSample = 16;
         }
         else {
             SR_ERROR("OGGDataProvider::OGGDataProvider() : failed to get vorbis info!");
@@ -126,22 +126,22 @@ namespace SR_AUDIO_NS {
     size_t OGGVorbisDataProvider::OGGReadFunc(void* ptr, const size_t size, const size_t numMemBlocks, void* pUserData) {
         /*auto&& pProvider = static_cast<OGGVorbisDataProvider*>(pUserData);
 
-        const size_t dataSize = pProvider->m_data ? pProvider->m_data->size() : 0;
-        const size_t bytesSize = size * numMemBlocks;
+           const size_t dataSize = pProvider->m_data ? pProvider->m_data->size() : 0;
+           const size_t bytesSize = size * numMemBlocks;
 
-        size_t bytesRead = dataSize - pProvider->m_rawPosition;
+           size_t bytesRead = dataSize - pProvider->m_rawPosition;
 
-        if (bytesSize < bytesRead) {
+           if (bytesSize < bytesRead) {
             bytesRead = bytesSize;
-        }
+           }
 
-        if (pProvider->m_data) {
+           if (pProvider->m_data) {
             memcpy(ptr, pProvider->m_data->data() + pProvider->m_rawPosition, bytesRead);
-        }
+           }
 
-        pProvider->m_rawPosition += bytesRead;
+           pProvider->m_rawPosition += bytesRead;
 
-        return bytesRead;*/
+           return bytesRead;*/
 
         auto* p = static_cast<OGGVorbisDataProvider*>(pUserData);
         if (!p || !p->m_data) return 0;
@@ -163,23 +163,23 @@ namespace SR_AUDIO_NS {
     int32_t OGGVorbisDataProvider::OGGSeekFunc(void* pUserData, const int64_t offset, const int32_t whence) {
         /*auto&& pProvider = static_cast<OGGVorbisDataProvider*>(pUserData);
 
-        uint64_t dataSize = pProvider->m_data ? pProvider->m_data->size() : 0;
+           uint64_t dataSize = pProvider->m_data ? pProvider->m_data->size() : 0;
 
-        if (whence == SEEK_SET) {
+           if (whence == SEEK_SET) {
             pProvider->m_rawPosition = offset;
-        }
-        else if (whence == SEEK_CUR) {
+           }
+           else if (whence == SEEK_CUR) {
             pProvider->m_rawPosition += offset;
-        }
-        else if (whence == SEEK_END) {
+           }
+           else if (whence == SEEK_END) {
             pProvider->m_rawPosition = dataSize + offset;
-        }
+           }
 
-        if (pProvider->m_rawPosition > dataSize) {
+           if (pProvider->m_rawPosition > dataSize) {
             pProvider->m_rawPosition = dataSize;
-        }
+           }
 
-        return static_cast<int32_t>(pProvider->m_rawPosition);*/
+           return static_cast<int32_t>(pProvider->m_rawPosition);*/
 
         auto* p = static_cast<OGGVorbisDataProvider*>(pUserData);
         if (!p || !p->m_data) return -1;

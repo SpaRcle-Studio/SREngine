@@ -7,7 +7,7 @@
 
 #ifdef SR_USE_IMGUI
 #ifdef SR_WIN32
-    extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 #endif
 
 namespace SR_GRAPH_GUI_NS::Immediate {
@@ -20,13 +20,13 @@ namespace SR_GRAPH_GUI_NS::Immediate {
 
         switch (msg) {
             case WM_CHAR: {
-                wchar_t wch;
-                MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, (char*)&wParam, 1, &wch, 1);
-                io.AddInputCharacter(wch);
-                return 1;
-            }
+            wchar_t wch;
+            MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, (char*)&wParam, 1, &wch, 1);
+            io.AddInputCharacter(wch);
+            return 1;
+        }
             default:
-                break;
+            break;
         }
 
         return 0;

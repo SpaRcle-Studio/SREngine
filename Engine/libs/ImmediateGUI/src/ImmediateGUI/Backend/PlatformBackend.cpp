@@ -404,30 +404,30 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         switch (info.backend) {
         #if defined(SR_WIN32)
             case PlatformBackend::Win32:
-                return ImGui_ImplWin32_Init((HWND)info.window);
+            return ImGui_ImplWin32_Init((HWND)info.window);
         #elif defined(SR_LINUX) && defined(SR_RENDER_GLFW)
             case PlatformBackend::GLFW:
-                return ImGui_ImplGlfw_InitForVulkan((GLFWwindow*)info.window, true);
+            return ImGui_ImplGlfw_InitForVulkan((GLFWwindow*)info.window, true);
         #elif defined(SR_ANDROID)
             case PlatformBackend::Android:
-                return ImGui_ImplAndroid_Init((ANativeWindow*)info.window);
+            return ImGui_ImplAndroid_Init((ANativeWindow*)info.window);
         #elif defined(SR_LINUX) && defined(SR_COMMON_USE_NATIVE_WAYLAND)
             case PlatformBackend::WaylandCustom: {
-                EnsureWaylandInputSubscribed();
-                ImGuiIO& io = ImGui::GetIO();
-                io.BackendPlatformName = "imgui_impl_wayland_custom";
-                return true;
-            }
+            EnsureWaylandInputSubscribed();
+            ImGuiIO& io = ImGui::GetIO();
+            io.BackendPlatformName = "imgui_impl_wayland_custom";
+            return true;
+        }
         #elif defined(SR_EMSCRIPTEN)
             case PlatformBackend::Emscripten: {
-                EnsureEmscriptenCallbacksInstalled();
-                ImGuiIO& io = ImGui::GetIO();
-                io.BackendPlatformName = "sr_imgui_impl_emscripten_custom";
-                return true;
-            }
+            EnsureEmscriptenCallbacksInstalled();
+            ImGuiIO& io = ImGui::GetIO();
+            io.BackendPlatformName = "sr_imgui_impl_emscripten_custom";
+            return true;
+        }
         #endif
             default:
-                break;
+            break;
         }
 
         return false;
@@ -437,29 +437,29 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         switch (backend) {
         #if defined(SR_WIN32)
             case PlatformBackend::Win32:
-                ImGui_ImplWin32_Shutdown();
-                break;
+            ImGui_ImplWin32_Shutdown();
+            break;
         #elif defined(SR_LINUX) && defined(SR_RENDER_GLFW)
             case PlatformBackend::GLFW:
-                ImGui_ImplGlfw_Shutdown();
-                break;
+            ImGui_ImplGlfw_Shutdown();
+            break;
         #elif defined(SR_ANDROID)
             case PlatformBackend::Android:
-                ImGui_ImplAndroid_Shutdown();
-                break;
+            ImGui_ImplAndroid_Shutdown();
+            break;
         #elif defined(SR_LINUX) && defined(SR_COMMON_USE_NATIVE_WAYLAND)
             case PlatformBackend::WaylandCustom:
-                g_inputTextSubscription = SR_UTILS_NS::Subscription();
-                g_inputTextEvents.clear();
-                g_waylandInputInitialized = false;
-                break;
+            g_inputTextSubscription = SR_UTILS_NS::Subscription();
+            g_inputTextEvents.clear();
+            g_waylandInputInitialized = false;
+            break;
         #elif defined(SR_EMSCRIPTEN)
             case PlatformBackend::Emscripten:
-                g_emscriptenInputInitialized = false;
-                break;
+            g_emscriptenInputInitialized = false;
+            break;
         #endif
             default:
-                break;
+            break;
         }
     }
 
@@ -467,46 +467,46 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         switch (backend) {
         #if defined(SR_WIN32)
             case PlatformBackend::Win32:
-                ImGui_ImplWin32_NewFrame();
-                break;
+            ImGui_ImplWin32_NewFrame();
+            break;
         #elif defined(SR_LINUX) && defined(SR_RENDER_GLFW)
             case PlatformBackend::GLFW:
-                ImGui_ImplGlfw_NewFrame();
-                break;
+            ImGui_ImplGlfw_NewFrame();
+            break;
         #elif defined(SR_ANDROID)
             case PlatformBackend::Android:
-                ImGui_ImplAndroid_NewFrame();
-                break;
+            ImGui_ImplAndroid_NewFrame();
+            break;
         #elif defined(SR_LINUX) && defined(SR_COMMON_USE_NATIVE_WAYLAND)
             case PlatformBackend::WaylandCustom: {
-                ImGuiIO& io = ImGui::GetIO();
-                io.DisplayFramebufferScale = ImVec2(info.framebufferScale.x, info.framebufferScale.y);
-                io.DisplaySize = ImVec2(info.displaySize.x, info.displaySize.y);
-                io.DeltaTime = info.deltaTime == 0.0f ? (1.0f / 60.0f) : info.deltaTime;
+            ImGuiIO& io = ImGui::GetIO();
+            io.DisplayFramebufferScale = ImVec2(info.framebufferScale.x, info.framebufferScale.y);
+            io.DisplaySize = ImVec2(info.displaySize.x, info.displaySize.y);
+            io.DeltaTime = info.deltaTime == 0.0f ? (1.0f / 60.0f) : info.deltaTime;
 
-                EnsureWaylandInputSubscribed();
-                WaylandProcessInput();
-                break;
-            }
+            EnsureWaylandInputSubscribed();
+            WaylandProcessInput();
+            break;
+        }
         #elif defined(SR_EMSCRIPTEN)
             case PlatformBackend::Emscripten: {
-                EnsureEmscriptenCallbacksInstalled();
-                double cssW = 0.0, cssH = 0.0;
-                if (emscripten_get_element_css_size(EMSCRIPTEN_CANVAS_ID, &cssW, &cssH) == EMSCRIPTEN_RESULT_SUCCESS) {
-                    ImGuiIO& io = ImGui::GetIO();
-                    io.DisplaySize = ImVec2(static_cast<float>(cssW), static_cast<float>(cssH));
-                    io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
+            EnsureEmscriptenCallbacksInstalled();
+            double cssW = 0.0, cssH = 0.0;
+            if (emscripten_get_element_css_size(EMSCRIPTEN_CANVAS_ID, &cssW, &cssH) == EMSCRIPTEN_RESULT_SUCCESS) {
+                ImGuiIO& io = ImGui::GetIO();
+                io.DisplaySize = ImVec2(static_cast<float>(cssW), static_cast<float>(cssH));
+                io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
 
-                    const double now = emscripten_get_now();
-                    const double dt = (now - g_emscriptenPrevTime) / 1000.0;
-                    g_emscriptenPrevTime = now;
-                    io.DeltaTime = static_cast<float>(std::max(0.0, dt));
-                }
-                break;
+                const double now = emscripten_get_now();
+                const double dt = (now - g_emscriptenPrevTime) / 1000.0;
+                g_emscriptenPrevTime = now;
+                io.DeltaTime = static_cast<float>(std::max(0.0, dt));
             }
+            break;
+        }
         #endif
             default:
-                break;
+            break;
         }
     }
 }

@@ -117,7 +117,7 @@ namespace SR_PTYPES_NS {
         }
     }
 
-    void PhysXRigidbody3DImpl::SetLinearVelocity(const SR_MATH_NS::FVector3 &velocity) {
+    void PhysXRigidbody3DImpl::SetLinearVelocity(const SR_MATH_NS::FVector3& velocity) {
         if (!m_rigidActor) {
             return;
         }
@@ -127,7 +127,7 @@ namespace SR_PTYPES_NS {
         }
     }
 
-    void PhysXRigidbody3DImpl::SetAngularVelocity(const SR_MATH_NS::FVector3 &velocity) {
+    void PhysXRigidbody3DImpl::SetAngularVelocity(const SR_MATH_NS::FVector3& velocity) {
         if (!m_rigidActor) {
             return;
         }
@@ -176,7 +176,7 @@ namespace SR_PTYPES_NS {
         //    q = m_rigidbody->GetRotation().RotateZ(90);
         //}
         //else {
-            q = m_rigidbody->GetRotation();
+        q = m_rigidbody->GetRotation();
         //}
 
         transform.p = physx::PxVec3(translation.x, translation.y, translation.z);
@@ -219,7 +219,7 @@ namespace SR_PTYPES_NS {
                     SRHalt("PhysXRigidbody3D::UpdateShapeInternal() : shape handle is nullptr!");
                     return false;
                 }
-                if (!m_rigidActor->attachShape(*(physx::PxShape *)pHandle)) {
+                if (!m_rigidActor->attachShape(*(physx::PxShape*)pHandle)) {
                     SRHalt("PhysXRigidbody3D::UpdateShapeInternal() : failed to attach shape!");
                     return false;
                 }

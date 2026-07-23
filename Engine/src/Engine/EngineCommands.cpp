@@ -31,7 +31,7 @@ namespace SR_CORE_NS::Commands {
 
     bool ChangeHierarchySelected::Redo() {
         Selection changeSelected;
-        for (SR_UTILS_NS::EntityId gmId:m_newSelected) {
+        for (SR_UTILS_NS::EntityId gmId : m_newSelected) {
             auto entity = m_scene->GetEntityController()->FindById(gmId);
             auto pObject = entity.DynamicCast<SR_UTILS_NS::SceneObject>();
 
@@ -54,7 +54,7 @@ namespace SR_CORE_NS::Commands {
 
     bool ChangeHierarchySelected::Undo() {
         Selection changeSelected;
-        for (SR_UTILS_NS::EntityId gmId:m_oldSelected) {
+        for (SR_UTILS_NS::EntityId gmId : m_oldSelected) {
             auto entity = m_scene->GetEntityController()->FindById(gmId);
             auto pObject = entity.DynamicCast<SR_UTILS_NS::SceneObject>();
 
@@ -132,7 +132,7 @@ namespace SR_CORE_NS::Commands {
             auto&& pDeserializer = m_pOld->CreateDeserializer();
 
             SR_UTILS_NS::Serialization::Load(*pDeserializer, *pObject, SR_UTILS_NS::COMMAND_DATA_ID);
-            if (auto&& pGameObject =pObject.DynamicCast<SR_UTILS_NS::GameObject>()) {
+            if (auto&& pGameObject = pObject.DynamicCast<SR_UTILS_NS::GameObject>()) {
                 pGameObject->OnMatrixDirty();
             }
 
@@ -187,7 +187,6 @@ namespace SR_CORE_NS::Commands {
 
         return false;
     }
-
 
     //! ----------------------------------------------------------------------------------------------------------------
 
@@ -325,7 +324,7 @@ namespace SR_CORE_NS::Commands {
         , m_entityId(pEntity->GetEntityId())
         , m_newEnabled(newEnabled)
     {
-        if (auto&& pSO = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>())  {
+        if (auto&& pSO = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>()) {
             m_previousEnabled = pSO->IsEnabled();
         }
         else if (auto&& pComponent = pEntity.DynamicCast<SR_UTILS_NS::Component>()) {

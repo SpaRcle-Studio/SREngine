@@ -4,6 +4,4 @@
 
 #include <Physics/Raycast.h>
 
-namespace SR_PHYSICS_NS {
-
-}
+namespace SR_PHYSICS_NS { }

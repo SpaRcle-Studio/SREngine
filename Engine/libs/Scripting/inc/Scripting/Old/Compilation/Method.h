@@ -24,13 +24,13 @@ namespace EvoScript {
     static std::string PublicityToString(Publicity publicity, bool colon = true) {
         switch (publicity) {
             case Unknown:
-                return colon ? "unknown:" : "unknown";
+            return colon ? "unknown:" : "unknown";
             case Public:
-                return colon ? "public:" : "public";
+            return colon ? "public:" : "public";
             case Private:
-                return colon ? "private:" : "private";
+            return colon ? "private:" : "private";
             case Protected:
-                return colon ? "protected:" : "protected";
+            return colon ? "protected:" : "protected";
         }
         return "";
     }

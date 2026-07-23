@@ -83,4 +83,3 @@ namespace SR_GRAPH_GUI_NS::Immediate {
 }
 
 #endif // SR_USE_IMGUI && SR_EMSCRIPTEN
-

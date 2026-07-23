@@ -11,10 +11,10 @@
 
 namespace SR_AUDIO_NS {
     SR_ENUM_NS_CLASS_T(OggCodec, uint8_t,
-        Unknown,
-        Vorbis,
-        Opus,
-        Flac
+                       Unknown,
+                       Vorbis,
+                       Opus,
+                       Flac
     )
 
     SR_AUDIO_DLL_API extern OggCodec DetectOggCodec(const char* data, size_t size);

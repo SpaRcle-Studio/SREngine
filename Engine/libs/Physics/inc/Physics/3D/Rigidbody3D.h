@@ -66,7 +66,7 @@ namespace SR_PTYPES_NS {
         /// @virtualProperty(linearVelocity) @getter(GetLinearVelocity) @readOnly @dontSave
         SR_VIRTUAL_PROPERTY
         /// @virtualProperty(angularVelocity) @getter(GetAngularVelocity) @readOnly @dontSave
-        SR_VIRTUAL_PROPERTY
+            SR_VIRTUAL_PROPERTY
 
     };
 }

@@ -10,7 +10,7 @@
 #include <AL/alext.h>
 
 namespace SR_AUDIO_NS {
-    OpenALSoundContext::OpenALSoundContext(SoundDevice *pDevice)
+    OpenALSoundContext::OpenALSoundContext(SoundDevice* pDevice)
         : SoundContext(pDevice)
     { }
 
@@ -33,7 +33,7 @@ namespace SR_AUDIO_NS {
             return false;
         }
 
-        if(!SR_ALC_CALL(alcCreateContext, m_openALContext, openALDevice, openALDevice, nullptr) || !m_openALContext) {
+        if (!SR_ALC_CALL(alcCreateContext, m_openALContext, openALDevice, openALDevice, nullptr) || !m_openALContext) {
             SR_ERROR("OpenALContext::Init() : failed to create audio context!");
             return false;
         }
@@ -87,7 +87,7 @@ namespace SR_AUDIO_NS {
         return params;
     }
 
-    SoundBuffer OpenALSoundContext::AllocateBuffer(void *data, uint64_t dataSize, int32_t sampleRate, SoundFormat format) {
+    SoundBuffer OpenALSoundContext::AllocateBuffer(void* data, uint64_t dataSize, int32_t sampleRate, SoundFormat format) {
         ALuint* alBuffer = new ALuint();
 
         SR_AL_CALL(alGenBuffers, 1, alBuffer);
@@ -100,8 +100,8 @@ namespace SR_AUDIO_NS {
             case SR_SOUND_FORMAT_STEREO_8: alFormat = AL_FORMAT_STEREO8; break;
             case SR_SOUND_FORMAT_STEREO_16: alFormat = AL_FORMAT_STEREO16; break;
             default:
-                SR_ERROR("OpenALContext::AllocateBuffer() : unsupported audio format!");
-                return nullptr;
+            SR_ERROR("OpenALContext::AllocateBuffer() : unsupported audio format!");
+            return nullptr;
         }
 
         SR_AL_CALL(alBufferData, *alBuffer, alFormat, data, dataSize, sampleRate);
@@ -135,7 +135,7 @@ namespace SR_AUDIO_NS {
         }
 
         ALCboolean contextMadeCurrent = ALC_FALSE;
-        if(!SR_ALC_CALL(alcMakeContextCurrent, contextMadeCurrent, openALDevice, m_openALContext) || contextMadeCurrent != ALC_TRUE) {
+        if (!SR_ALC_CALL(alcMakeContextCurrent, contextMadeCurrent, openALDevice, m_openALContext) || contextMadeCurrent != ALC_TRUE) {
             SR_ALC_CALL(alcMakeContextCurrent, contextMadeCurrent, openALDevice, nullptr);
             SR_ALC_CALL(alcDestroyContext, openALDevice, m_openALContext);
             m_openALContext = nullptr;
@@ -158,29 +158,29 @@ namespace SR_AUDIO_NS {
 
         switch (paramType) {
             case PlayParamType::Pitch:
-                SR_AL_CALL(alSourcef, *alSource, AL_PITCH, *(float_t*)pValue);
-                break;
+            SR_AL_CALL(alSourcef, *alSource, AL_PITCH, *(float_t*)pValue);
+            break;
             case PlayParamType::Gain:
-                SR_AL_CALL(alSourcef, *alSource, AL_GAIN, *(float_t*)pValue);
-                break;
+            SR_AL_CALL(alSourcef, *alSource, AL_GAIN, *(float_t*)pValue);
+            break;
             case PlayParamType::Loop:
-                SR_AL_CALL(alSourcei, *alSource, AL_LOOPING, *(bool*)pValue ? AL_TRUE : AL_FALSE);
-                break;
+            SR_AL_CALL(alSourcei, *alSource, AL_LOOPING, *(bool*)pValue ? AL_TRUE : AL_FALSE);
+            break;
             case PlayParamType::Position:
-                SR_AL_CALL(alSource3f, *alSource, AL_POSITION, ((SR_MATH_NS::FVector3*)pValue)->x, ((SR_MATH_NS::FVector3*)pValue)->y, ((SR_MATH_NS::FVector3*)pValue)->z);
-                break;
+            SR_AL_CALL(alSource3f, *alSource, AL_POSITION, ((SR_MATH_NS::FVector3*)pValue)->x, ((SR_MATH_NS::FVector3*)pValue)->y, ((SR_MATH_NS::FVector3*)pValue)->z);
+            break;
             case PlayParamType::Velocity:
-                SR_AL_CALL(alSource3f, *alSource, AL_VELOCITY, ((SR_MATH_NS::FVector3*)pValue)->x, ((SR_MATH_NS::FVector3*)pValue)->y, ((SR_MATH_NS::FVector3*)pValue)->z);
-                break;
+            SR_AL_CALL(alSource3f, *alSource, AL_VELOCITY, ((SR_MATH_NS::FVector3*)pValue)->x, ((SR_MATH_NS::FVector3*)pValue)->y, ((SR_MATH_NS::FVector3*)pValue)->z);
+            break;
             case PlayParamType::Direction:
-                SR_AL_CALL(alSource3f, *alSource, AL_DIRECTION, ((SR_MATH_NS::FVector3*)pValue)->x, ((SR_MATH_NS::FVector3*)pValue)->y, ((SR_MATH_NS::FVector3*)pValue)->z);
-                break;
+            SR_AL_CALL(alSource3f, *alSource, AL_DIRECTION, ((SR_MATH_NS::FVector3*)pValue)->x, ((SR_MATH_NS::FVector3*)pValue)->y, ((SR_MATH_NS::FVector3*)pValue)->z);
+            break;
             case PlayParamType::ConeInnerAngle:
-                SR_AL_CALL(alSourcef, *alSource, AL_CONE_INNER_ANGLE, *(float_t*)pValue);
-                break;
+            SR_AL_CALL(alSourcef, *alSource, AL_CONE_INNER_ANGLE, *(float_t*)pValue);
+            break;
             case PlayParamType::MaxDistance:
-                SR_AL_CALL(alSourcef, *alSource, AL_MAX_DISTANCE, *(float_t*)pValue);
-                break;
+            SR_AL_CALL(alSourcef, *alSource, AL_MAX_DISTANCE, *(float_t*)pValue);
+            break;
             //case PlayParamType::ConeOuterAngle:
             //    SR_AL_CALL(alSourcef, *alSource, AL_CONE_OUTER_ANGLE, *(float_t*)pValue);
             //    break;
@@ -188,40 +188,40 @@ namespace SR_AUDIO_NS {
             //    SR_AL_CALL(alSourcef, *alSource, AL_CONE_OUTER_GAIN, *(float_t*)pValue);
             //    break;
             case PlayParamType::MinGain:
-                SR_AL_CALL(alSourcef, *alSource, AL_MIN_GAIN, *(float_t*)pValue);
-                break;
+            SR_AL_CALL(alSourcef, *alSource, AL_MIN_GAIN, *(float_t*)pValue);
+            break;
             case PlayParamType::MaxGain:
-                SR_AL_CALL(alSourcef, *alSource, AL_MAX_GAIN, *(float_t*)pValue);
-                break;
+            SR_AL_CALL(alSourcef, *alSource, AL_MAX_GAIN, *(float_t*)pValue);
+            break;
             case PlayParamType::Orientation:
-                SR_AL_CALL(alSourcefv, *alSource, AL_ORIENTATION, (float_t*)pValue);
-                break;
+            SR_AL_CALL(alSourcefv, *alSource, AL_ORIENTATION, (float_t*)pValue);
+            break;
             case PlayParamType::ReferenceDistance:
-                SR_AL_CALL(alSourcef, *alSource, AL_REFERENCE_DISTANCE, *(float_t*)pValue);
-                break;
+            SR_AL_CALL(alSourcef, *alSource, AL_REFERENCE_DISTANCE, *(float_t*)pValue);
+            break;
             case PlayParamType::RolloffFactor:
-                SR_AL_CALL(alSourcef, *alSource, AL_ROLLOFF_FACTOR, *(float_t*)pValue);
-                break;
+            SR_AL_CALL(alSourcef, *alSource, AL_ROLLOFF_FACTOR, *(float_t*)pValue);
+            break;
             case PlayParamType::Spatialize: {
-                switch (*(SpatializeMode*)pValue) {
-                    case SpatializeMode::Off:
-                        SR_AL_CALL(alSourcei, *alSource, AL_SOURCE_SPATIALIZE_SOFT, AL_FALSE);
-                        break;
-                    case SpatializeMode::On:
-                        SR_AL_CALL(alSourcei, *alSource, AL_SOURCE_SPATIALIZE_SOFT, AL_TRUE);
-                        break;
-                    case SpatializeMode::Auto:
-                        SR_AL_CALL(alSourcei, *alSource, AL_SOURCE_SPATIALIZE_SOFT, AL_AUTO_SOFT);
-                        break;
-                    default:
-                        SR_ERROR("OpenALContext::ApplyParamImpl() : unsupported spatialize mode \"{}\"!", SR_UTILS_NS::EnumReflector::ToStringAtom(*(SpatializeMode*)pValue).c_str());
-                        break; // (кирпич)
-                }
+            switch (*(SpatializeMode*)pValue) {
+                case SpatializeMode::Off:
+                SR_AL_CALL(alSourcei, *alSource, AL_SOURCE_SPATIALIZE_SOFT, AL_FALSE);
                 break;
+                case SpatializeMode::On:
+                SR_AL_CALL(alSourcei, *alSource, AL_SOURCE_SPATIALIZE_SOFT, AL_TRUE);
+                break;
+                case SpatializeMode::Auto:
+                SR_AL_CALL(alSourcei, *alSource, AL_SOURCE_SPATIALIZE_SOFT, AL_AUTO_SOFT);
+                break;
+                default:
+                SR_ERROR("OpenALContext::ApplyParamImpl() : unsupported spatialize mode \"{}\"!", SR_UTILS_NS::EnumReflector::ToStringAtom(*(SpatializeMode*)pValue).c_str());
+                break;         // (кирпич)
             }
+            break;
+        }
             default:
                 //SR_ERROR("OpenALContext::ApplyParamImpl() : unsupported param type \"{}\"!", SR_UTILS_NS::EnumReflector::ToStringAtom(paramType).c_str());
-                break; // (кирпич)
+            break;     // (кирпич)
 
         }
 

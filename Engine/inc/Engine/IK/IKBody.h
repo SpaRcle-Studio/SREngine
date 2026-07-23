@@ -17,7 +17,7 @@ namespace SR_CORE_NS {
     /// @category(Animations)
     class IKBody : public SR_UTILS_NS::Component {
         using Super = Component;
-    SR_CLASS()
+        SR_CLASS()
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<IKBody>;
 
@@ -29,7 +29,6 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::EntityRef<SR_UTILS_NS::GameObject> m_bodyShakeTarget;
         /// @property
         SR_UTILS_NS::Vector<SR_UTILS_NS::EntityRef<IKFootSolver>> m_footSolvers;
-
 
         // FOR DEBUGGING
 
@@ -47,7 +46,6 @@ namespace SR_CORE_NS {
         SR_MATH_NS::FVector3 m_walkResetPos;
         /// @property
         float_t m_walkResetDistance = 5.f;
-
 
         /// @property
         float_t m_colliderCenterYOffset = 0.f;

@@ -25,7 +25,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     bool CreateNewProject::CreateProject() {
-        auto&& settingsPath = m_projectFinalPath.Concat(".{}"_format(ProjectSettings::GetMetaStatic()->GetExtension()));
+        auto&& settingsPath = m_projectFinalPath.Concat(".{}"_format (ProjectSettings::GetMetaStatic()->GetExtension()));
         ProjectSettings::Ptr pSettings = SRNew<ProjectSettings>();
         pSettings->projectName = m_projectName;
 
@@ -106,20 +106,20 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::SetCursorPosY(size.y - 40);
 
             const bool isOk = !m_projectFinalPath.IsEmpty() && !m_projectName.empty()
-                    && !m_projectFinalPath.IsFile()
-                    && m_projectFinalPath.IsDirectoryEmpty()
-                    && m_projectFinalPath.IsAbs()
-                    && m_projectFinalPath.IsValidPath();
+                              && !m_projectFinalPath.IsFile()
+                              && m_projectFinalPath.IsDirectoryEmpty()
+                              && m_projectFinalPath.IsAbs()
+                              && m_projectFinalPath.IsValidPath();
 
             bool canOpen = false;
             if (isOk) {
                 SR_GRAPH_GUI_NS::Immediate::Text("Project will be created at: ");
                 SR_GRAPH_GUI_NS::Immediate::SameLine();
-                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Cyan(), m_projectFinalPath.empty() ?  "!! Invalid path !!" : m_projectFinalPath.c_str());
+                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Cyan(), m_projectFinalPath.empty() ? "!! Invalid path !!" : m_projectFinalPath.c_str());
                 SR_GRAPH_GUI_NS::Immediate::SameLine();
             }
             else {
-                auto&& settingsPath = m_projectFinalPath.Concat(".{}"_format(ProjectSettings::GetMetaStatic()->GetExtension()));
+                auto&& settingsPath = m_projectFinalPath.Concat(".{}"_format (ProjectSettings::GetMetaStatic()->GetExtension()));
                 if (settingsPath.IsFile()) {
                     canOpen = true;
                     SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Green(), "You can open project at: ");

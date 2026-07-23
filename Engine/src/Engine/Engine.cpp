@@ -108,7 +108,7 @@ namespace SR_CORE_NS {
             std::string logResolutions;
             uint32_t index = 0;
             for (auto&& resolution : resolutions) {
-                logResolutions += "\n\t{}: {}x{}"_format(++index, resolution.x, resolution.y);
+                logResolutions += "\n\t{}: {}x{}"_format (++index, resolution.x, resolution.y);
             }
             SR_LOG("Engine::CreateMainWindow() : found {} resolutions:{}", resolutions.size(), logResolutions);
         }
@@ -253,7 +253,9 @@ namespace SR_CORE_NS {
 
         SR_SAFE_DELETE_PTR(m_cmdManager);
 
-        m_renderContext.AutoFree([](auto&& pContext) { delete pContext; });
+        m_renderContext.AutoFree([](auto&& pContext) {
+            delete pContext;
+        });
 
         for (auto&& pWindow : m_windows) {
             if (pWindow) {
@@ -385,7 +387,7 @@ namespace SR_CORE_NS {
             return;
         }
     }
-    
+
     void Engine::RunSceneGameMode(const SR_UTILS_NS::Path& path) {
         if (auto&& pScene = SR_WORLD_NS::Scene::LoadScene(path)) {
             RunSceneGameMode(pScene);
@@ -404,7 +406,7 @@ namespace SR_CORE_NS {
             if (auto&& pHierarchy = pEditor->GetWidget<SR_CORE_GUI_NS::Hierarchy>()) {
                 if (auto&& pSceneRunner = dynamic_cast<SR_CORE_GUI_NS::SceneRunner*>(pHierarchy->GetSceneRunnerWidget())) {
                     pSceneRunner->SetScene(scene);
-                    
+
                     pSceneRunner->PlayScene();
                     SetGameMode(true);
                     SetActive(true);

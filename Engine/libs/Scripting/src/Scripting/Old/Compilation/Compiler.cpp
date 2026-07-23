@@ -7,11 +7,11 @@
 
 namespace EvoScript {
     Compiler::Compiler(std::string cachePath)
-            : m_cachePath(std::move(cachePath)) {
+        : m_cachePath(std::move(cachePath)) {
         ClearModulesCache(m_cachePath + "/Modules");
     }
 
-    bool Compiler::ClearModulesCache(const std::string &path) {
+    bool Compiler::ClearModulesCache(const std::string& path) {
         if (!Tools::ESFileSystem::GetAllFoldersInDir) {
             SR_ERROR("Compiler::ClearModulesCache() : \"GetAllFoldersInDir\" is nullptr!");
             return false;
@@ -21,7 +21,7 @@ namespace EvoScript {
 
         /// предполагается, что dll файлы лежат в конкретной директории, и там кроме них нет ничего больше
         if (!dirs.empty()) {
-            for (const auto &dir : dirs) {
+            for (const auto& dir : dirs) {
                 if (!ClearModulesCache(dir))
                     return false;
 
@@ -33,7 +33,7 @@ namespace EvoScript {
             return true;
         }
 
-        for (const auto &file : Tools::GetAllFilesInDirWithExt(path, IState::Extension)) {
+        for (const auto& file : Tools::GetAllFilesInDirWithExt(path, IState::Extension)) {
             /// проверка, на случай, если попали в иную директорию, чтобы не удалить пол системы
             if (file.find("Module-") == std::string::npos) {
                 ES_WARN("Compiler::ClearModulesCache() : a suspicious file has been detected! I can't perform automatic cache cleanup! \n\tFile: " +
@@ -46,7 +46,7 @@ namespace EvoScript {
         return true;
     }
 
-    bool Compiler::CheckApiHash(const std::string &pathToScript, bool debug) {
+    bool Compiler::CheckApiHash(const std::string& pathToScript, bool debug) {
         const std::string fullPath = pathToScript + "/api.hash";
 
         auto currHash = std::pair(debug, std::vector<std::string>{m_apiVersion});
@@ -67,7 +67,7 @@ namespace EvoScript {
         return false;
     }
 
-    bool Compiler::CheckSourceHash(const std::string &source, const std::string &pathToScript, bool debug) {
+    bool Compiler::CheckSourceHash(const std::string& source, const std::string& pathToScript, bool debug) {
         const std::string fullPath = pathToScript + "/source.hash";
 
         auto currHash = std::pair(debug, std::vector {
@@ -92,7 +92,7 @@ namespace EvoScript {
         return false;
     }
 
-    bool Compiler::Compile(Script *script) {
+    bool Compiler::Compile(Script* script) {
         std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
         if (m_apiVersion == "None" || m_apiVersion.empty()) {
@@ -130,7 +130,7 @@ namespace EvoScript {
             }
 
             ///auto&& build  = path + "/Build/" + std::to_string(Tools::RandomUInt32()) + "/";
-            auto &&build = path + "/Build/";
+            auto&& build = path + "/Build/";
 
             /// Чистим папку сборки, чтобы не возникло конфликтов
             if (Tools::ESFileSystem::IsExists(build) && !Tools::ESFileSystem::Delete(build)) {
@@ -139,8 +139,8 @@ namespace EvoScript {
             Tools::CreatePath(build);
 
             ES_LOG("Compiler::Compile() : compile \"" + script->GetName() + "\" " +
-                std::string(script->IsDebug() ? "[Debug]" : "[Release]")
-                + " script..."
+                   std::string(script->IsDebug() ? "[Debug]" : "[Release]")
+                   + " script..."
             );
 
     #ifdef ES_MSVC
@@ -169,13 +169,13 @@ namespace EvoScript {
             }
 
             auto&& command = ES_FORMAT("cd \"%s\" && call \"%s\" && \"%s\" %s %s /std:c++17 /nologo /O1 %s /Os /GF /GS- \"%s.cpp\"",
-                build.c_str(),
-                vars.c_str(),
-                m_compilerPath.c_str(),
-                includes.c_str(),
-                script->IsDebug() ? "/LDd" : "/LD",
-                m_compilePDB ? " /ZI " : " ",
-                source.c_str()
+                                       build.c_str(),
+                                       vars.c_str(),
+                                       m_compilerPath.c_str(),
+                                       includes.c_str(),
+                                       script->IsDebug() ? "/LDd" : "/LD",
+                                       m_compilePDB ? " /ZI " : " ",
+                                       source.c_str()
             );
 
             system(command.c_str());
@@ -205,11 +205,11 @@ namespace EvoScript {
                 script->IsDebug() ? "/LDd" : "/LD",
                 m_compilePDB ? " /ZI " : " ",
                 source.c_str()
-            );
-            */
+               );
+             */
 
             std::string debug = script->IsDebug() ? "-g " : "-O3 ";
-            auto&& command = "cd " + build + " && " + m_compilerPath + " -shared -fPIC " + includes + " -std=c++17 -ldl " + debug + "-rdynamic "+ source + ".cpp -o " + module;
+            auto&& command = "cd " + build + " && " + m_compilerPath + " -shared -fPIC " + includes + " -std=c++17 -ldl " + debug + "-rdynamic " + source + ".cpp -o " + module;
 
             system(command.c_str());
     #else
@@ -227,22 +227,22 @@ namespace EvoScript {
         return success;
     }
 
-    IState* Compiler::AllocateState(const std::string &name) {
+    IState* Compiler::AllocateState(const std::string& name) {
         if (!m_multiInstances) {
             const std::string module = m_cachePath + "/Scripts/" + name + "/Module" + IState::Extension;
             return IState::Allocate(module);
         }
 
-        ret:
+ret:
         if (auto find = m_moduleCopies.find(name); find == m_moduleCopies.end()) {
             m_moduleCopies[name] = std::vector<uint32_t>();
             goto ret;
         } else {
-            auto &&id = FindFreeID(name);
+            auto&& id = FindFreeID(name);
 
             const std::string module = m_cachePath + "/Scripts/" + name + "/Module" + IState::Extension;
             const std::string copy =
-                    m_cachePath + "/Modules/" + name + "/Module-" + std::to_string(id) + IState::Extension;
+                m_cachePath + "/Modules/" + name + "/Module-" + std::to_string(id) + IState::Extension;
 
             if (Tools::ESFileSystem::IsExists(copy)) {
                 goto ret;
@@ -261,17 +261,17 @@ namespace EvoScript {
         }
     }
 
-    uint32_t Compiler::FindFreeID(const std::string &pathToModule) {
+    uint32_t Compiler::FindFreeID(const std::string& pathToModule) {
         if (auto find = m_moduleCopies.find(pathToModule); find == m_moduleCopies.end()) {
             SR_ERROR("Compiler::FindFreeID() : module not found! Something went wrong...");
             return UINT32_MAX;
         } else {
-            ret:
+ret:
             uint32_t id = SR_UTILS_NS::Random::Instance().UInt32();
 
             auto[key, value] = *find;
 
-            for (const auto &copy : value)
+            for (const auto& copy : value)
                 if (id == copy)
                     goto ret;
 
@@ -285,7 +285,7 @@ namespace EvoScript {
         m_apiVersion = std::move(version);
     }
 
-    bool Compiler::Load(Script *script) {
+    bool Compiler::Load(Script* script) {
         if (!TryLoad(script)) {
             ES_ERROR("Compiler::Load() : failed to load the \"" + script->GetName() + "\" script!");
             return false;
@@ -294,7 +294,7 @@ namespace EvoScript {
         return true;
     }
 
-    bool Compiler::TryLoad(Script *script) {
+    bool Compiler::TryLoad(Script* script) {
         std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
         const auto path = m_cachePath + "/Scripts/" + Tools::FixPath(script->GetName());
@@ -309,13 +309,13 @@ namespace EvoScript {
         return false;
     }
 
-    bool Compiler::LoadState(IState *state) {
+    bool Compiler::LoadState(IState* state) {
         std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
         return state->Load();
     }
 
-    void Compiler::AddIncludePath(const std::string &path) {
+    void Compiler::AddIncludePath(const std::string& path) {
         std::lock_guard<std::recursive_mutex> lock(m_mutex);
 
         m_includes.emplace_back(path);

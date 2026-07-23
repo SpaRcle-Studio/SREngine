@@ -24,7 +24,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     {
         uint32_t            Index;
         uint32_t            Count;
-        ImGui_ImplVulkanH_FrameRenderBuffers*   FrameRenderBuffers;
+        ImGui_ImplVulkanH_FrameRenderBuffers* FrameRenderBuffers;
     };
 
     struct ImGui_ImplVulkan_Data
@@ -85,17 +85,17 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         };
 
         static const std::vector<VkDescriptorPoolSize> POOL_SIZES = {
-            { VK_DESCRIPTOR_TYPE_SAMPLER,                1000 },
+            { VK_DESCRIPTOR_TYPE_SAMPLER, 1000 },
             { VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1000 },
-            { VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,          1000 },
-            { VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,          1000 },
-            { VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER,   1000 },
-            { VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER,   1000 },
-            { VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,         1000 },
-            { VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,         1000 },
+            { VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, 1000 },
+            { VK_DESCRIPTOR_TYPE_STORAGE_IMAGE, 1000 },
+            { VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER, 1000 },
+            { VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER, 1000 },
+            { VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, 1000 },
+            { VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1000 },
             { VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC, 1000 },
             { VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC, 1000 },
-            { VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT,       1000 }
+            { VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT, 1000 }
         };
 
         static std::string_view GetVulkanResultString(VkResult result) {
@@ -171,7 +171,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
                 return true;
             }
 
-            VkDescriptorPoolCreateInfo pool_info = {};
+            VkDescriptorPoolCreateInfo pool_info = { };
             pool_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
             pool_info.flags = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT;
             pool_info.maxSets = 1000 * (uint32_t)POOL_SIZES.size();
@@ -190,7 +190,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
                 return true;
             }
 
-            VkAttachmentDescription attachment = {};
+            VkAttachmentDescription attachment = { };
             attachment.format = r.info.swapchainColorFormat;
             attachment.samples = r.info.msaaSamples;
             attachment.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
@@ -200,16 +200,16 @@ namespace SR_GRAPH_GUI_NS::Immediate {
             attachment.initialLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
             attachment.finalLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
 
-            VkAttachmentReference color_attachment = {};
+            VkAttachmentReference color_attachment = { };
             color_attachment.attachment = 0;
             color_attachment.layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
 
-            VkSubpassDescription subpass = {};
+            VkSubpassDescription subpass = { };
             subpass.pipelineBindPoint = VK_PIPELINE_BIND_POINT_GRAPHICS;
             subpass.colorAttachmentCount = 1;
             subpass.pColorAttachments = &color_attachment;
 
-            VkSubpassDependency dependency = {};
+            VkSubpassDependency dependency = { };
             dependency.srcSubpass = VK_SUBPASS_EXTERNAL;
             dependency.dstSubpass = 0;
             dependency.srcStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
@@ -217,7 +217,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
             dependency.srcAccessMask = 0;
             dependency.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
 
-            VkRenderPassCreateInfo rp_info = {};
+            VkRenderPassCreateInfo rp_info = { };
             rp_info.sType = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
             rp_info.attachmentCount = 1;
             rp_info.pAttachments = &attachment;
@@ -251,7 +251,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
             for (uint32_t i = 0; i < r.imageCount; ++i) {
                 VkImageView attachments[1] = { r.frames[i].imageView };
 
-                VkFramebufferCreateInfo fb_info = {};
+                VkFramebufferCreateInfo fb_info = { };
                 fb_info.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
                 fb_info.renderPass = r.renderPass;
                 fb_info.attachmentCount = 1;
@@ -276,7 +276,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
             r.cmdBuffers.resize(r.imageCount, VK_NULL_HANDLE);
 
             for (uint32_t i = 0; i < r.imageCount; ++i) {
-                VkCommandPoolCreateInfo pool_info = {};
+                VkCommandPoolCreateInfo pool_info = { };
                 pool_info.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
                 pool_info.flags = VK_COMMAND_POOL_CREATE_TRANSIENT_BIT;
                 pool_info.queueFamilyIndex = r.info.graphicsQueueFamily;
@@ -285,7 +285,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
                     return false;
                 }
 
-                VkCommandBufferAllocateInfo alloc_info = {};
+                VkCommandBufferAllocateInfo alloc_info = { };
                 alloc_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
                 alloc_info.commandPool = r.cmdPools[i];
                 alloc_info.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
@@ -324,7 +324,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
                 r.semaphore = VK_NULL_HANDLE;
             }
 
-            VkSemaphoreCreateInfo semaphoreCI = {};
+            VkSemaphoreCreateInfo semaphoreCI = { };
             semaphoreCI.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
 
             return vkCreateSemaphore(r.info.device, &semaphoreCI, nullptr, &r.semaphore) == VK_SUCCESS;
@@ -338,7 +338,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
             }
 
             r.pBeginRendering = (PFN_vkCmdBeginRendering)vkGetDeviceProcAddr(r.info.device, "vkCmdBeginRendering");
-            r.pEndRendering   = (PFN_vkCmdEndRendering)vkGetDeviceProcAddr(r.info.device, "vkCmdEndRendering");
+            r.pEndRendering = (PFN_vkCmdEndRendering)vkGetDeviceProcAddr(r.info.device, "vkCmdEndRendering");
 
             if (!r.pBeginRendering) {
                 r.pBeginRendering = (PFN_vkCmdBeginRendering)vkGetDeviceProcAddr(r.info.device, "vkCmdBeginRenderingKHR");
@@ -369,7 +369,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
             }
         #endif
 
-            ImGui_ImplVulkan_InitInfo init_info = {};
+            ImGui_ImplVulkan_InitInfo init_info = { };
             init_info.Instance = r.info.instance;
             init_info.PhysicalDevice = r.info.physicalDevice;
             init_info.Device = r.info.device;
@@ -383,7 +383,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
             init_info.PipelineCache = r.info.pipelineCache;
             init_info.PipelineInfoMain.Subpass = 0;
             init_info.UseDynamicRendering = false;
-            init_info.PipelineInfoMain.PipelineRenderingCreateInfo = {};
+            init_info.PipelineInfoMain.PipelineRenderingCreateInfo = { };
             init_info.Allocator = nullptr;
             init_info.CheckVkResultFn = CheckVulkanResult;
             init_info.MinAllocationSize = 0;
@@ -391,11 +391,11 @@ namespace SR_GRAPH_GUI_NS::Immediate {
             if (r.info.enableDynamicRendering) {
                 init_info.UseDynamicRendering = true;
                 init_info.PipelineInfoMain.PipelineRenderingCreateInfo = {
-                    .sType                   = VK_STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO,
-                    .pNext                   = nullptr,
-                    .colorAttachmentCount    = 1,
+                    .sType = VK_STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO,
+                    .pNext = nullptr,
+                    .colorAttachmentCount = 1,
                     .pColorAttachmentFormats = &r.info.swapchainColorFormat,
-                    .depthAttachmentFormat   = VK_FORMAT_UNDEFINED,
+                    .depthAttachmentFormat = VK_FORMAT_UNDEFINED,
                     .stencilAttachmentFormat = VK_FORMAT_UNDEFINED
                 };
             }
@@ -576,33 +576,33 @@ namespace SR_GRAPH_GUI_NS::Immediate {
 
         if (r->info.enableDynamicRendering) {
             VkRenderingAttachmentInfoKHR colorAttachmentInfo = {
-                .sType       = VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO_KHR,
-                .pNext       = nullptr,
-                .imageView   = r->frames[frameIndex].imageView,
+                .sType = VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO_KHR,
+                .pNext = nullptr,
+                .imageView = r->frames[frameIndex].imageView,
                 .imageLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,
                 .resolveMode = VK_RESOLVE_MODE_NONE,
                 .resolveImageView = VK_NULL_HANDLE,
                 .resolveImageLayout = VK_IMAGE_LAYOUT_UNDEFINED,
-                .loadOp      = VK_ATTACHMENT_LOAD_OP_CLEAR,
-                .storeOp     = VK_ATTACHMENT_STORE_OP_STORE,
-                .clearValue  = { .color = {{0.f, 0.f, 0.f, 1.f}} }
+                .loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR,
+                .storeOp = VK_ATTACHMENT_STORE_OP_STORE,
+                .clearValue = { .color = {{0.f, 0.f, 0.f, 1.f}} }
             };
 
             VkRenderingInfoKHR renderingInfo = {
-                .sType                = VK_STRUCTURE_TYPE_RENDERING_INFO_KHR,
-                .pNext                = nullptr,
-                .flags                = 0,
-                .renderArea           = { {0, 0}, {extent.width, extent.height} },
-                .layerCount           = 1,
-                .viewMask             = 0,
+                .sType = VK_STRUCTURE_TYPE_RENDERING_INFO_KHR,
+                .pNext = nullptr,
+                .flags = 0,
+                .renderArea = { {0, 0}, {extent.width, extent.height} },
+                .layerCount = 1,
+                .viewMask = 0,
                 .colorAttachmentCount = 1,
-                .pColorAttachments    = &colorAttachmentInfo,
-                .pDepthAttachment     = nullptr,
-                .pStencilAttachment   = nullptr
+                .pColorAttachments = &colorAttachmentInfo,
+                .pDepthAttachment = nullptr,
+                .pStencilAttachment = nullptr
             };
 
             /// Transition swapchain image from PRESENT_SRC_KHR to COLOR_ATTACHMENT_OPTIMAL
-            VkImageMemoryBarrier barrier = {};
+            VkImageMemoryBarrier barrier = { };
             barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
             barrier.srcAccessMask = 0;
             barrier.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
@@ -642,7 +642,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
             r->pEndRendering(cmd);
 
             /// Transition swapchain image from COLOR_ATTACHMENT_OPTIMAL back to PRESENT_SRC_KHR
-            VkImageMemoryBarrier barrier = {};
+            VkImageMemoryBarrier barrier = { };
             barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
             barrier.srcAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
             barrier.dstAccessMask = 0;
@@ -738,4 +738,3 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     void VulkanReloadFonts(VulkanRendererHandle renderer) { }
 }
 #endif
-

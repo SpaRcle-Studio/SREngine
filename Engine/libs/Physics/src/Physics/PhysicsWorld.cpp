@@ -15,7 +15,7 @@ namespace SR_PHYSICS_NS {
     }
 
     PhysicsWorld::~PhysicsWorld() {
-        if (m_raycast3dImpl){
+        if (m_raycast3dImpl) {
             delete m_raycast3dImpl;
             m_raycast3dImpl = nullptr;
         }

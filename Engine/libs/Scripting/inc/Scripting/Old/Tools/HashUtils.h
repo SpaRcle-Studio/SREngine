@@ -37,7 +37,7 @@ namespace EvoScript::Tools {
         auto files = SR_UTILS_NS::Path(dir).GetFiles();
         MD5 md5;
         for (const auto& file : files) {
-            result.emplace_back(md5.TryDigestFile(const_cast<char *>(file.c_str())));
+            result.emplace_back(md5.TryDigestFile(const_cast<char*>(file.c_str())));
         }
 
         return result;
@@ -72,7 +72,7 @@ namespace EvoScript::Tools {
         }
 
         std::string line;
-        while(std::getline(file, line)) {
+        while (std::getline(file, line)) {
             if (line.empty())
                 continue;
 

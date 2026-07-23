@@ -20,14 +20,14 @@ namespace EvoScript::Tools {
     };
 
     static const std::vector<std::string> VS_YEARS = {
-            "2015", "2016", "2017", "2018",
-            "2019", "2020", "2021", "2022",
-            "2023", "2024", "2025", "2026",
-            "2027", "2028", "2029", "2030",
+        "2015", "2016", "2017", "2018",
+        "2019", "2020", "2021", "2022",
+        "2023", "2024", "2025", "2026",
+        "2027", "2028", "2029", "2030",
     };
 
     static const std::vector<std::string> VS_TYPES = {
-            "Professional", "Community", "Enterprise", "BuildTools"
+        "Professional", "Community", "Enterprise", "BuildTools"
     };
 
     static std::string FindMSVCVars64(const std::string& compilerPath) {
@@ -49,7 +49,7 @@ namespace EvoScript::Tools {
     static std::string FindMSVCVars64() {
         for (auto&& vsPath : VS_PATHS) {
             for (auto&& yearFolder : SR_UTILS_NS::Path(vsPath).GetFolders()) {
-                auto&& pIt = std::find_if(VS_YEARS.begin(), VS_YEARS.end(), [&yearFolder](auto &&element) -> bool {
+                auto&& pIt = std::find_if(VS_YEARS.begin(), VS_YEARS.end(), [&yearFolder](auto&& element) -> bool {
                     return yearFolder.ToStringView().find(element) != std::string::npos;
                 });
 
@@ -58,7 +58,7 @@ namespace EvoScript::Tools {
                 }
 
                 for (auto&& typeFolder : SR_UTILS_NS::Path(yearFolder).GetFolders()) {
-                    pIt = std::find_if(VS_TYPES.begin(), VS_TYPES.end(), [&typeFolder](auto &&element) -> bool {
+                    pIt = std::find_if(VS_TYPES.begin(), VS_TYPES.end(), [&typeFolder](auto&& element) -> bool {
                         return typeFolder.ToStringView().find(element) != std::string::npos;
                     });
 
@@ -77,7 +77,7 @@ namespace EvoScript::Tools {
     static std::string FindMSVC() {
         for (auto&& vsPath : VS_PATHS) {
             for (auto&& yearFolder : SR_UTILS_NS::Path(vsPath).GetFolders()) {
-                auto&& pIt = std::find_if(VS_YEARS.begin(), VS_YEARS.end(), [&yearFolder](auto &&element) -> bool {
+                auto&& pIt = std::find_if(VS_YEARS.begin(), VS_YEARS.end(), [&yearFolder](auto&& element) -> bool {
                     return yearFolder.ToStringView().find(element) != std::string::npos;
                 });
 
@@ -86,7 +86,7 @@ namespace EvoScript::Tools {
                 }
 
                 for (auto&& typeFolder : SR_UTILS_NS::Path(yearFolder).GetFolders()) {
-                    pIt = std::find_if(VS_TYPES.begin(), VS_TYPES.end(), [&typeFolder](auto &&element) -> bool {
+                    pIt = std::find_if(VS_TYPES.begin(), VS_TYPES.end(), [&typeFolder](auto&& element) -> bool {
                         return typeFolder.ToStringView().find(element) != std::string::npos;
                     });
 

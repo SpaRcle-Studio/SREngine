@@ -101,8 +101,8 @@ namespace SR_SCRIPTING_NS {
         SR_TRACY_ZONE;
 
         const SR_UTILS_NS::StringAtom moduleName = modulePath.GetBaseName();
-        auto&& runtimePath = m_cachePath.Concat("Scripts/Runtime/Modules/{}.{}"_format(moduleName, ScriptSystem::GetDynamicLibraryExtension()));
-        auto&& pdbRuntimePath = m_cachePath.Concat("Scripts/Runtime/Modules/{}.pdb"_format(moduleName));
+        auto&& runtimePath = m_cachePath.Concat("Scripts/Runtime/Modules/{}.{}"_format (moduleName, ScriptSystem::GetDynamicLibraryExtension()));
+        auto&& pdbRuntimePath = m_cachePath.Concat("Scripts/Runtime/Modules/{}.pdb"_format (moduleName));
 
         if (runtimePath.IsFile() && !SR_PLATFORM_NS::Delete(runtimePath)) {
             SR_ERROR("ModuleManager::LoadModule() : failed to delete module!\n\tPath: " + runtimePath.ToString());
@@ -119,7 +119,7 @@ namespace SR_SCRIPTING_NS {
             return nullptr;
         }
 
-        auto&& sourcePdbPath = modulePath.GetFolder().Concat("{}.pdb"_format(moduleName));
+        auto&& sourcePdbPath = modulePath.GetFolder().Concat("{}.pdb"_format (moduleName));
         if (SR_UTILS_NS::FileSystem::IsFileExists(sourcePdbPath)) {
             if (!SR_PLATFORM_NS::Copy(sourcePdbPath, pdbRuntimePath)) {
                 SR_ERROR("ModuleManager::LoadModule() : failed to copy module pdb!\n\tPath: " + sourcePdbPath.ToString());

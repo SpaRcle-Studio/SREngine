@@ -239,7 +239,6 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-
         auto&& pEngine = dynamic_cast<EditorGUI*>(m_hierarchy->GetManager())->GetEngine();
         SR_UTILS_NS::Vector<SR_UTILS_NS::ReversibleCommand*> commands;
         commands.reserve(m_hierarchy->GetSelected().size());
@@ -257,7 +256,7 @@ namespace SR_CORE_GUI_NS {
             for (auto&& [entityId, pSerializer] : m_pSerializers) {
                 if (entityId == pGameObject->GetEntityId()) {
                     commands.push_back(new SR_CORE_NS::Commands::GameObjectTransform(
-                        pEngine, pGameObject, std::move(pSerializer)
+                                           pEngine, pGameObject, std::move(pSerializer)
                     ));
                     break;
                 }
@@ -304,10 +303,10 @@ namespace SR_CORE_GUI_NS {
         if (pGameObject->GetTransform()->GetMeasurement() == SR_UTILS_NS::Measurement::Space2D) {
             if (SR_MATH_NS::IsMaskIncludedSubMask(GetOperation(), SR_GRAPH_UI_NS::GizmoOperation::Rotate)) {
                 SetOperation(GetOperation()
-                    & ~SR_GRAPH_UI_NS::GizmoOperation::X
-                    & ~SR_GRAPH_UI_NS::GizmoOperation::Y
-                    & ~SR_GRAPH_UI_NS::GizmoOperation::Center
-                    | SR_GRAPH_UI_NS::GizmoOperation::Rotate2D
+                             & ~SR_GRAPH_UI_NS::GizmoOperation::X
+                             & ~SR_GRAPH_UI_NS::GizmoOperation::Y
+                             & ~SR_GRAPH_UI_NS::GizmoOperation::Center
+                             | SR_GRAPH_UI_NS::GizmoOperation::Rotate2D
                 );
 
                 SRAssert2(SR_MATH_NS::IsMaskIncludedSubMask(GetOperation(), SR_GRAPH_UI_NS::GizmoOperation::Rotate), "Rotate operation is not set");
@@ -320,11 +319,11 @@ namespace SR_CORE_GUI_NS {
         }
         else {
             SetOperation(GetOperation()
-                & ~SR_GRAPH_UI_NS::GizmoOperation::Space2D
-                | SR_GRAPH_UI_NS::GizmoOperation::Z
-                | SR_GRAPH_UI_NS::GizmoOperation::X
-                | SR_GRAPH_UI_NS::GizmoOperation::Y
-                | SR_GRAPH_UI_NS::GizmoOperation::Center
+                         & ~SR_GRAPH_UI_NS::GizmoOperation::Space2D
+                         | SR_GRAPH_UI_NS::GizmoOperation::Z
+                         | SR_GRAPH_UI_NS::GizmoOperation::X
+                         | SR_GRAPH_UI_NS::GizmoOperation::Y
+                         | SR_GRAPH_UI_NS::GizmoOperation::Center
             );
         }
 

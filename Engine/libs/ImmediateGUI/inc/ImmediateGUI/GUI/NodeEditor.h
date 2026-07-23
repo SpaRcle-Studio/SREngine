@@ -23,10 +23,10 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     struct PinTypeInfo {
         SR_UTILS_NS::Reflection::TypeInfo type;
         bool isFlow = false;
-        bool operator==(const PinTypeInfo& other) const {
+        bool operator ==(const PinTypeInfo& other) const {
             return type == other.type && isFlow == other.isFlow;
         }
-        bool operator!=(const PinTypeInfo& other) const { return !(*this == other); }
+        bool operator !=(const PinTypeInfo& other) const { return !(*this == other); }
     };
 
     class LinkInstance {

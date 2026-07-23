@@ -20,7 +20,7 @@ namespace SR_CORE_NS {
         }
 
         if (m_walkSpeed > 0.f) {
-            if (auto&& pRigidbody = GetSceneObject()->GetComponent<SR_PTYPES_NS::Rigidbody3D>(); pRigidbody && pRigidbody->IsActive()) {
+            if (auto&& pRigidbody = GetSceneObject()->GetComponent<SR_PTYPES_NS::Rigidbody3D>(); pRigidbody&& pRigidbody->IsActive()) {
                 auto&& velocity = pRigidbody->GetLinearVelocity();
                 const SR_MATH_NS::FVector3 dir = GetTransform()->GetQuaternion() * m_walkDirection;
                 velocity.x = SR_CLAMP(velocity.x + dir.x * m_walkSpeed, -m_velocityLimit.x, m_velocityLimit.x);

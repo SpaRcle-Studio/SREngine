@@ -49,4 +49,3 @@ namespace SR_CORE_GUI_NS {
 }
 
 #endif //SR_ENGINE_GUI_OBJECT_PROPERTY_DRAWER_H
-

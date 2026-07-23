@@ -257,7 +257,7 @@ namespace SR_IMMEDIATE_GUI_NS {
         m_outputPins.delete_contents();
     }
 
-    uint32_t NodeInstance::GetPinIndex(PinInstance *pPin) const {
+    uint32_t NodeInstance::GetPinIndex(PinInstance* pPin) const {
         for (uint32_t i = 0; i < m_inputPins.size(); ++i) {
             if (m_inputPins[i] == pPin) {
                 return i;

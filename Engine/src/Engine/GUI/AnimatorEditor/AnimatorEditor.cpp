@@ -149,8 +149,8 @@ namespace SR_CORE_GUI_NS {
             else {
                 SyncLogicToVisual();
                 m_nodeGraphEditor->SetStyleType(m_tab == Tab::Graph ?
-                    SR_IMMEDIATE_GUI_NS::NodeEditorStyleType::Graph :
-                    SR_IMMEDIATE_GUI_NS::NodeEditorStyleType::StateMachine
+                                                SR_IMMEDIATE_GUI_NS::NodeEditorStyleType::Graph :
+                                                SR_IMMEDIATE_GUI_NS::NodeEditorStyleType::StateMachine
                 );
                 m_nodeGraphEditor->SetBackgroundText(m_backgroundText);
                 m_nodeGraphEditor->SetSize(size);
@@ -263,8 +263,8 @@ namespace SR_CORE_GUI_NS {
                 }
 
                 BuildNodeMenu(m_categories, m_tab == Tab::Graph ?
-                    SR_ANIMATIONS_NS::AnimationGraphNode::GetClassStaticName() :
-                    SR_ANIMATIONS_NS::AnimationState::GetClassStaticName()
+                              SR_ANIMATIONS_NS::AnimationGraphNode::GetClassStaticName() :
+                              SR_ANIMATIONS_NS::AnimationState::GetClassStaticName()
                 );
                 SR_GRAPH_GUI_NS::Immediate::InputText("##NodeSearch", &m_createNodeSearch);
                 SR_GRAPH_GUI_NS::Immediate::Separator();
@@ -413,11 +413,11 @@ namespace SR_CORE_GUI_NS {
         context.pOwner = pSelectedObject;
         context.pUID = pSelectedObject;
         context.onBeforeChangeCallback = [this](bool drag) {
-            if (!m_serializer) {
-                m_serializer = SR_CORE_NS::Commands::CreateSerializer();
-                SR_UTILS_NS::Serialization::Save(*m_serializer, *m_pActiveGraph, SR_UTILS_NS::COMMAND_DATA_ID);
-            }
-        };
+                                             if (!m_serializer) {
+                                                 m_serializer = SR_CORE_NS::Commands::CreateSerializer();
+                                                 SR_UTILS_NS::Serialization::Save(*m_serializer, *m_pActiveGraph, SR_UTILS_NS::COMMAND_DATA_ID);
+                                             }
+                                         };
         m_propertyDrawer->Draw(context);
     }
 
@@ -436,10 +436,10 @@ namespace SR_CORE_GUI_NS {
 
     void AnimatorEditor::TopPanelOpen() {
         auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(
-            SR_UTILS_NS::ResourceManager::Instance().GetResPath(), 
+            SR_UTILS_NS::ResourceManager::Instance().GetResPath(),
             { { "Animator", "animator" } }
         );
-        
+
         if (path.empty()) {
             return;
         }
@@ -447,4 +447,3 @@ namespace SR_CORE_GUI_NS {
         Inspect(path);
     }
 }
-
