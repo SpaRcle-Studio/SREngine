@@ -33,7 +33,7 @@ jobs:
 
       - name: Run uncrustify
         run: |
-          git ls-files -z -- '*.cpp' '*.h' '*.hpp' '*.c' | \
+          git ls-files -z -- '*.cpp' '*.h' '*.hpp' '*.c' ':!CI' ':!Resources' | \
             xargs -0 uncrustify --replace --no-backup --config .uncrustify.cfg
 
       - name: Create PR with formatting changes
