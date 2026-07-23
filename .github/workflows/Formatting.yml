@@ -39,6 +39,7 @@ jobs:
       - name: Create PR with formatting changes
         uses: peter-evans/create-pull-request@v7
         with:
+          token: ${{ secrets.CITOKEN }}
           commit-message: "style: apply uncrustify formatting"
           title: "style: apply uncrustify formatting"
           body: |
