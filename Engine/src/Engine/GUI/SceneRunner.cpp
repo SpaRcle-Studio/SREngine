@@ -23,7 +23,7 @@ namespace SR_CORE_NS::GUI {
         : SR_GRAPH_NS::GUI::Widget("Scene runner", SR_MATH_NS::IVector2(0, 60))
     { }
 
-    void SceneRunner::SetScene(const SR_WORLD_NS::Scene::Ptr &scene) {
+    void SceneRunner::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {
         SR_LOCK_GUARD;
         m_scene = scene;
     }
@@ -169,7 +169,7 @@ namespace SR_CORE_NS::GUI {
 
         if (!pScene->GetAbsPath().Copy(runtimePath)) {
             SR_ERROR("SceneRunner::PlayScene() : failed to copy scene!\n\tSource: "
-                + pScene->GetPath().ToString() + "\n\tDestination: " + runtimePath.ToString());
+                     + pScene->GetPath().ToString() + "\n\tDestination: " + runtimePath.ToString());
             return false;
         }
 

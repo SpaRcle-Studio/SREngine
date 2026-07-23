@@ -184,7 +184,7 @@ namespace SR_SCRIPTING_NS {
 
         RegenerateCmake();
 
-        SR_UTILS_NS::Path modulesPath = m_cacheFolder.Concat("Scripts/Modules-{}-{}"_format(SR_PLATFORM_NS::GetType(), SR_PLATFORM_NS::GetBuildType()));
+        SR_UTILS_NS::Path modulesPath = m_cacheFolder.Concat("Scripts/Modules-{}-{}"_format (SR_PLATFORM_NS::GetType(), SR_PLATFORM_NS::GetBuildType()));
 
         for (auto&& module : m_modules) {
             if (module.codeFiles.empty() || !module.isNeedCodegen) {
@@ -194,7 +194,7 @@ namespace SR_SCRIPTING_NS {
             const SR_UTILS_NS::Path buildDir = modulesPath.Concat(module.moduleInfo.moduleName);
             SR_UTILS_NS::Path libclangFolder = m_engineResourcesFolder.Concat("Engine/Utilities");
 
-            const std::string command = "{} --codegen_dir \"{}\" --root_build_dir \"{}\" --repo_dir \"{}\" --config_dir \"{}\" --module_name \"{}\" --is_script --help_sources_dir \"{}\""_format(
+            const std::string command = "{} --codegen_dir \"{}\" --root_build_dir \"{}\" --repo_dir \"{}\" --config_dir \"{}\" --module_name \"{}\" --is_script --help_sources_dir \"{}\""_format (
                 m_codegenExecutablePath, buildDir, buildDir, module.path.GetFolder(), libclangFolder, module.moduleInfo.moduleName, m_pScriptSystem->GetEngineSourcesPath().Concat("Engine")
             );
 
@@ -220,7 +220,7 @@ namespace SR_SCRIPTING_NS {
     void CppCodeGenerator::RegenerateCmake() {
         auto&& cmakeListsPath = m_resourcesFolder.Concat("CMakeLists.txt");
         auto&& cmakeListsCachePath = m_cacheFolder.Concat("Scripts/CMakeLists.txt");
-        SR_UTILS_NS::Path modulesPath = m_cacheFolder.Concat("Scripts/Modules-{}-{}"_format(SR_PLATFORM_NS::GetType(), SR_PLATFORM_NS::GetBuildType()));
+        SR_UTILS_NS::Path modulesPath = m_cacheFolder.Concat("Scripts/Modules-{}-{}"_format (SR_PLATFORM_NS::GetType(), SR_PLATFORM_NS::GetBuildType()));
 
         std::string cmakeContent;
         cmakeContent += "if (NOT EMSCRIPTEN)\n";
@@ -238,28 +238,28 @@ namespace SR_SCRIPTING_NS {
             }
             processedModules.insert(module.moduleInfo.moduleName);
 
-            cmakeContent += "\tif(EXISTS {}/{}.cxx) \n"_format(m_cacheFolder.Concat("Scripts/Codegen"), module.moduleInfo.moduleName);
+            cmakeContent += "\tif(EXISTS {}/{}.cxx) \n"_format (m_cacheFolder.Concat("Scripts/Codegen"), module.moduleInfo.moduleName);
             cmakeContent += "\t\tif (ANDROID_NDK)\n";
 
-            cmakeContent += "\t\t\tadd_library(SCRIPT_MODULE_{} STATIC\n"_format(module.moduleInfo.moduleName);
-            cmakeContent += "\t\t\t\t{}/{}.cxx\n"_format(m_cacheFolder.Concat("Scripts/Codegen"), module.moduleInfo.moduleName);
+            cmakeContent += "\t\t\tadd_library(SCRIPT_MODULE_{} STATIC\n"_format (module.moduleInfo.moduleName);
+            cmakeContent += "\t\t\t\t{}/{}.cxx\n"_format (m_cacheFolder.Concat("Scripts/Codegen"), module.moduleInfo.moduleName);
             cmakeContent += "\t\t\t)\n";
 
             cmakeContent += "\t\telse()\n";
 
-            cmakeContent += "\t\t\tadd_library(SCRIPT_MODULE_{} SHARED\n"_format(module.moduleInfo.moduleName);
-            cmakeContent += "\t\t\t\t{}/{}.cxx\n"_format(m_cacheFolder.Concat("Scripts/Codegen"), module.moduleInfo.moduleName);
+            cmakeContent += "\t\t\tadd_library(SCRIPT_MODULE_{} SHARED\n"_format (module.moduleInfo.moduleName);
+            cmakeContent += "\t\t\t\t{}/{}.cxx\n"_format (m_cacheFolder.Concat("Scripts/Codegen"), module.moduleInfo.moduleName);
             cmakeContent += "\t\t\t)\n";
 
             cmakeContent += "\t\tendif()\n";
 
-            cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, module.path.GetFolder());
+            cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format (module.moduleInfo.moduleName, module.path.GetFolder());
 
             for (auto&& engineIncludeDir : m_pScriptSystem->GetEngineSourcesIncludePaths()) {
-                cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, engineIncludeDir);
+                cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format (module.moduleInfo.moduleName, engineIncludeDir);
             }
 
-            cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, modulesPath.Concat("{}/Codegen"_format(module.moduleInfo.moduleName)));
+            cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format (module.moduleInfo.moduleName, modulesPath.Concat("{}/Codegen"_format (module.moduleInfo.moduleName)));
             cmakeContent += "\tendif()\n";
         }
 
@@ -268,9 +268,9 @@ namespace SR_SCRIPTING_NS {
         for (auto&& module : m_modules) {
             for (auto&& dependency : GetDependenciesRecursive(module.moduleInfo.moduleName)) {
                 if (auto&& pDependencyModule = GetModule(dependency)) {
-                    cmakeContent += "\tif(EXISTS {}/{}.cxx) \n"_format(m_cacheFolder.Concat("Scripts/Codegen"), module.moduleInfo.moduleName);
-                    cmakeContent += "\t\ttarget_link_libraries(SCRIPT_MODULE_{} SCRIPT_MODULE_{})\n"_format(module.moduleInfo.moduleName, dependency);
-                    cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, pDependencyModule->path.GetFolder());
+                    cmakeContent += "\tif(EXISTS {}/{}.cxx) \n"_format (m_cacheFolder.Concat("Scripts/Codegen"), module.moduleInfo.moduleName);
+                    cmakeContent += "\t\ttarget_link_libraries(SCRIPT_MODULE_{} SCRIPT_MODULE_{})\n"_format (module.moduleInfo.moduleName, dependency);
+                    cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format (module.moduleInfo.moduleName, pDependencyModule->path.GetFolder());
                     cmakeContent += "\tendif()\n";
                 }
             }
@@ -363,7 +363,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     void CppCodeGenerator::GenerateModule(const CppCodegenModule& module) {
-        auto&& codegenFile = m_cacheFolder.Concat("Scripts/Codegen/{}.cxx"_format(module.moduleInfo.moduleName));
+        auto&& codegenFile = m_cacheFolder.Concat("Scripts/Codegen/{}.cxx"_format (module.moduleInfo.moduleName));
         if (!codegenFile.Create()) {
             SR_ERROR("CppCodeGenerator::GenerateModule() : failed to create codegen path!\n\tPath: {}", codegenFile);
             return;
@@ -380,7 +380,7 @@ namespace SR_SCRIPTING_NS {
             codegenFileStream << "#define SR_ENGINE_COMMON_PCH_FOR_BASE_CODE\n";
             codegenFileStream << "#define SR_ENGINE_SCRIPT_API_MODE\n\n";
 
-            codegenFileStream << "#include <Codegen/SpaRcleModule{}Core.generated.hpp>\n\n"_format(module.moduleInfo.moduleName);
+            codegenFileStream << "#include <Codegen/SpaRcleModule{}Core.generated.hpp>\n\n"_format (module.moduleInfo.moduleName);
 
             for (auto&& file : module.codeFiles) {
                 if (file.GetExtensionView() == "cxx" || file.GetExtensionView() == "cpp") {
@@ -393,17 +393,17 @@ namespace SR_SCRIPTING_NS {
             }
 
             /*bool hasBehaviours = false;
-            for (auto&& [filePath, fileMetadata] : module.codeFiles) {
+               for (auto&& [filePath, fileMetadata] : module.codeFiles) {
                 for (auto&& behaviour : fileMetadata.behaviours) {
                     codegenFileStream << "void* CodegenAllocateScriptBehaviour_{}() "_format(behaviour.name);
                     codegenFileStream << "{ "<< "return new {}(); "_format(behaviour.MakeNameWithNamespace()) << "}\n";
                 }
                 hasBehaviours = !fileMetadata.behaviours.empty();
-            }
+               }
 
-            if (hasBehaviours) {
+               if (hasBehaviours) {
                 codegenFileStream << "\n";
-            }*/
+               }*/
 
             /*if (!m_pScriptSystem->IsUseEngineSourcesAPI()) {
                 std::string compilerVersion = m_compiler->GetCompilerVersion();
@@ -428,7 +428,7 @@ namespace SR_SCRIPTING_NS {
                 codegenFileStream << "}\n\n";
 
                 codegenFileStream << "const bool CodegenRegisterModule_{}_Result = CodegenRegisterModule_{}_Module();"_format(module.moduleInfo.moduleName, module.moduleInfo.moduleName);
-            }*/
+               }*/
 
             codegenFileStream.close();
         }
@@ -452,13 +452,13 @@ namespace SR_SCRIPTING_NS {
     }
 
     uint64_t CppCodegenModule::GetCacheHash(const SR_UTILS_NS::Path& cacheFolder) const {
-        SR_UTILS_NS::Path modulesPath = cacheFolder.Concat("Scripts/Modules-{}-{}"_format(SR_PLATFORM_NS::GetType(), SR_PLATFORM_NS::GetBuildType()));
+        SR_UTILS_NS::Path modulesPath = cacheFolder.Concat("Scripts/Modules-{}-{}"_format (SR_PLATFORM_NS::GetType(), SR_PLATFORM_NS::GetBuildType()));
         auto&& cache = modulesPath.Concat(moduleInfo.moduleName).ConcatExt("hash");
         return SR_UTILS_NS::FileSystem::ReadHashFromFile(cache);
     }
 
     void CppCodegenModule::SaveHash(const SR_UTILS_NS::Path& cacheFolder) {
-        SR_UTILS_NS::Path modulesPath = cacheFolder.Concat("Scripts/Modules-{}-{}"_format(SR_PLATFORM_NS::GetType(), SR_PLATFORM_NS::GetBuildType()));
+        SR_UTILS_NS::Path modulesPath = cacheFolder.Concat("Scripts/Modules-{}-{}"_format (SR_PLATFORM_NS::GetType(), SR_PLATFORM_NS::GetBuildType()));
         auto&& cache = modulesPath.Concat(moduleInfo.moduleName).ConcatExt("hash");
         SR_UTILS_NS::FileSystem::WriteHashToFile(cache, hash);
     }

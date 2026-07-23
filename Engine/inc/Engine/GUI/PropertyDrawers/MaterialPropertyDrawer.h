@@ -18,5 +18,4 @@ namespace SR_CORE_GUI_NS {
     };
 }
 
-
 #endif //SR_ENGINE_GUI_MATERIAL_PROPERTY_DRAWER_H

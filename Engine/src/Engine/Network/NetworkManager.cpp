@@ -316,8 +316,8 @@ namespace SR_CORE_NS {
 
         /// Capture peerId by value, and `this` for the callback.
         pSocket->SetReceiveCallback([this, peerId](const SocketPtr& pSock,
-                                                    const SR_NETWORK_NS::DataPackage::Ptr& pData,
-                                                    uint64_t size) {
+                                                   const SR_NETWORK_NS::DataPackage::Ptr& pData,
+                                                   uint64_t size) {
             if (pData && size > 0) {
                 OnMessageReceived(peerId, pData->GetData(), static_cast<size_t>(size));
             }

@@ -14,10 +14,10 @@
 
 namespace SR_PHYSICS_NS {
     SR_ENUM_NS_CLASS_T(Combine, uint8_t,
-        Minimum,
-        Average,
-        Maximum,
-        Multiply
+                       Minimum,
+                       Average,
+                       Maximum,
+                       Multiply
     )
 }
 

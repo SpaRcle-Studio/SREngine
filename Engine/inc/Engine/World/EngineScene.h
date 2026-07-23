@@ -26,7 +26,7 @@ namespace SR_CORE_NS {
         using CameraPtr = SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Camera>;
 
     public:
-        EngineScene(const ScenePtr& scene, Engine* pEngine);
+        EngineScene(const ScenePtr& scene, Engine * pEngine);
         ~EngineScene() override;
 
     public:

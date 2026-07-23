@@ -82,14 +82,14 @@ namespace SR_CORE_GUI_NS {
 
         int GetPresetGridIndex(AnchorPreset preset) {
             if (preset == AnchorPreset::Custom) return 0;
-            
+
             // Map presets to grid: row * 5 + col
             // Row 0: custom row (empty)
             // Row 1: top (0-3)
             // Row 2: middle (4-7)
             // Row 3: bottom (8-11)
             // Row 4: stretch (12-15)
-            
+
             int presetIdx = static_cast<int>(preset);
             int row = (presetIdx / 4) + 1;
             int col = (presetIdx % 4) + 1;
@@ -99,9 +99,9 @@ namespace SR_CORE_GUI_NS {
         AnchorPreset GetPresetFromGridIndex(int gridIdx) {
             int row = gridIdx / 5;
             int col = gridIdx % 5;
-            
+
             if (row == 0 || col == 0) return AnchorPreset::Custom;
-            
+
             int presetIdx = (row - 1) * 4 + (col - 1);
             if (presetIdx >= 0 && presetIdx < 16) {
                 return static_cast<AnchorPreset>(presetIdx);
@@ -110,16 +110,16 @@ namespace SR_CORE_GUI_NS {
         }
 
         uint32_t ColorToU32(uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
-            return (static_cast<uint32_t>(a) << 24) | (static_cast<uint32_t>(b) << 16) | 
+            return (static_cast<uint32_t>(a) << 24) | (static_cast<uint32_t>(b) << 16) |
                    (static_cast<uint32_t>(g) << 8) | static_cast<uint32_t>(r);
         }
 
-        void DrawPresetIcon(void* pDrawList, const SR_MATH_NS::FVector2& pos, const SR_MATH_NS::FVector2& size, 
-                           const PresetData& preset, bool isSelected, bool isHovered) {
+        void DrawPresetIcon(void* pDrawList, const SR_MATH_NS::FVector2& pos, const SR_MATH_NS::FVector2& size,
+                            const PresetData& preset, bool isSelected, bool isHovered) {
             const float padding = 4.0f;
             const SR_MATH_NS::FVector2 innerSize = size - SR_MATH_NS::FVector2(padding * 2, padding * 2);
             const SR_MATH_NS::FVector2 innerPos = pos + SR_MATH_NS::FVector2(padding, padding);
-            
+
             // Outer rect (parent)
             const uint32_t outerColor = isSelected ? ColorToU32(255, 255, 255, 255) : ColorToU32(125, 125, 125, 255);
             SR_GRAPH_GUI_NS::Immediate::DrawListAddRect(
@@ -128,7 +128,7 @@ namespace SR_CORE_GUI_NS {
                 pos + size,
                 outerColor, 0.0f, 1.5f
             );
-            
+
             // Calculate inner rect position based on anchors
             const SR_MATH_NS::FVector2 anchorMinPos = innerPos + SR_MATH_NS::FVector2(
                 preset.anchorMin.x * innerSize.x,
@@ -138,7 +138,7 @@ namespace SR_CORE_GUI_NS {
                 preset.anchorMax.x * innerSize.x,
                 (1.0f - preset.anchorMin.y) * innerSize.y
             );
-            
+
             // Inner rect (element)
             const uint32_t innerColor = isHovered ? ColorToU32(100, 150, 255, 200) : ColorToU32(100, 150, 255, 150);
             SR_GRAPH_GUI_NS::Immediate::DrawListAddRectFilled(
@@ -147,11 +147,11 @@ namespace SR_CORE_GUI_NS {
                 anchorMaxPos,
                 innerColor
             );
-            
+
             // Draw anchor lines (red)
             const uint32_t anchorColor = ColorToU32(255, 0, 0, 255);
             const float lineThickness = 1.5f;
-            
+
             // Vertical lines
             if (preset.anchorMin.x == preset.anchorMax.x) {
                 float x = innerPos.x + preset.anchorMin.x * innerSize.x;
@@ -176,7 +176,7 @@ namespace SR_CORE_GUI_NS {
                     anchorColor, lineThickness
                 );
             }
-            
+
             // Horizontal lines
             if (preset.anchorMin.y == preset.anchorMax.y) {
                 float y = innerPos.y + (1.0f - preset.anchorMin.y) * innerSize.y;
@@ -201,7 +201,7 @@ namespace SR_CORE_GUI_NS {
                     anchorColor, lineThickness
                 );
             }
-            
+
             // Draw pivot (yellow square)
             const SR_MATH_NS::FVector2 pivotPos = anchorMinPos + SR_MATH_NS::FVector2(
                 preset.pivot.x * (anchorMaxPos.x - anchorMinPos.x),
@@ -214,7 +214,7 @@ namespace SR_CORE_GUI_NS {
                 pivotPos + SR_MATH_NS::FVector2(pivotSize, pivotSize),
                 ColorToU32(255, 255, 0, 255)
             );
-            
+
             // Draw stretch arrows if needed
             if (preset.anchorMin.x != preset.anchorMax.x) {
                 // Horizontal stretch arrow
@@ -256,47 +256,47 @@ namespace SR_CORE_GUI_NS {
             void* pWindow = SR_GRAPH_GUI_NS::Immediate::GetCurrentWindow();
             void* pDrawList = SR_GRAPH_GUI_NS::Immediate::GetWindowDrawList(pWindow);
             SR_MATH_NS::FVector2 cursorPos = SR_GRAPH_GUI_NS::Immediate::GetCursorScreenPos();
-            
+
             // Draw icon
             DrawPresetIcon(pDrawList, cursorPos, size, preset, isSelected, false);
-            
+
             // Invisible button for interaction
             SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::FramePadding, SR_MATH_NS::FVector2(0, 0));
             //SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Button, SR_MATH_NS::FColor(0, 0, 0, 0));
             //SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::ButtonHovered, SR_MATH_NS::FColor(0, 0, 0, 0));
             //SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::ButtonActive, SR_MATH_NS::FColor(0, 0, 0, 0));
-            
+
             bool clicked = SR_GRAPH_GUI_NS::Immediate::Button(id, size);
-            
+
             //SR_GRAPH_GUI_NS::Immediate::PopStyleColor(3);
             SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
-            
+
             return clicked;
         }
 
         void DrawPresetPopup(SR_UTILS_NS::TransformRect* pTransformRect, const PropertyDrawerContext& context, PropertyDrawerFeedback& feedback) {
             const char* popupId = "##AnchorPresetsPopup";
-            
+
             if (SR_GRAPH_GUI_NS::Immediate::BeginPopup(popupId)) {
                 // SR_GRAPH_GUI_NS::Immediate::Text("Anchor Presets");
                 // SR_GRAPH_GUI_NS::Immediate::Separator();
                 // SR_GRAPH_GUI_NS::Immediate::Text("Shift: Also set pivot");
                 // SR_GRAPH_GUI_NS::Immediate::Text("Alt: Also set position");
-                
+
                 AnchorPreset currentPreset = GetCurrentPreset(pTransformRect->GetAnchors(), pTransformRect->GetPivot());
                 int currentGridIdx = GetPresetGridIndex(currentPreset);
-                
+
                 const float buttonSize = 80.0f;
                 const float spacing = 2.0f;
-                
+
                 // Draw grid
                 for (int row = 0; row < 5; ++row) {
                     for (int col = 0; col < 5; ++col) {
                         SR_GRAPH_GUI_NS::Immediate::PushID(row * 5 + col);
-                        
+
                         int gridIdx = row * 5 + col;
                         bool isSelected = (gridIdx == currentGridIdx);
-                        
+
                         if (row == 0 || col == 0) {
                             // Header cells
 
@@ -319,7 +319,7 @@ namespace SR_CORE_GUI_NS {
                             if (preset != AnchorPreset::Custom) {
                                 char buttonId[32];
                                 snprintf(buttonId, sizeof(buttonId), "##preset_%d", gridIdx);
-                                
+
                                 if (DrawPresetButton(buttonId, SR_MATH_NS::FVector2(buttonSize, buttonSize), PRESETS[static_cast<int>(preset)], isSelected)) {
                                     if (context.onBeforeChangeCallback) {
                                         context.onBeforeChangeCallback(false);
@@ -336,15 +336,15 @@ namespace SR_CORE_GUI_NS {
                                 SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(buttonSize, buttonSize));
                             }
                         }
-                        
+
                         if (col < 4) {
                             SR_GRAPH_GUI_NS::Immediate::SameLine(0, spacing);
                         }
-                        
+
                         SR_GRAPH_GUI_NS::Immediate::PopID();
                     }
                 }
-                
+
                 SR_GRAPH_GUI_NS::Immediate::EndPopup();
             }
         }
@@ -403,7 +403,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        auto&& pTransformRect = dynamic_cast<SR_UTILS_NS::TransformRect *>(value.GetSRClass());
+        auto&& pTransformRect = dynamic_cast<SR_UTILS_NS::TransformRect*>(value.GetSRClass());
         if (!pTransformRect) {
             SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map value!");
             return feedback;

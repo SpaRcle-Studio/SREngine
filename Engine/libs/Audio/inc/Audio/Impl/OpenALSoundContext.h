@@ -8,11 +8,11 @@
 #include <Audio/SoundContext.h>
 
 #ifdef SR_EMSCRIPTEN
-    struct ALCcontext_struct;
-    using SROpenALContextHandle = ALCcontext_struct*;
+struct ALCcontext_struct;
+using SROpenALContextHandle = ALCcontext_struct*;
 #else
-    struct ALCcontext;
-    using SROpenALContextHandle = ALCcontext*;
+struct ALCcontext;
+using SROpenALContextHandle = ALCcontext*;
 #endif
 
 namespace SR_AUDIO_NS {
@@ -41,10 +41,10 @@ namespace SR_AUDIO_NS {
         SR_NODISCARD PlayParams GetSourceParams(SoundSource pSource) const override;
 
         SR_NODISCARD SoundBuffer AllocateBuffer(
-                void* data,
-                uint64_t dataSize,
-                int32_t sampleRate,
-                SoundFormat format) override;
+            void* data,
+            uint64_t dataSize,
+            int32_t sampleRate,
+            SoundFormat format) override;
 
     public:
         bool FreeBuffer(SoundBuffer* buffer) override;

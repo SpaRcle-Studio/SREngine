@@ -20,36 +20,36 @@ namespace SR_PHYSICS_NS {
     };
 
     SR_ENUM_NS_CLASS(LibraryType,
-         Unknown = 0,
-         Bullet3 = 1,
-         Newton = 2,
-         PhysX = 3,
-         Havok = 4,
-         Volt = 5,
-         Shark = 6,
-         Box2D = 7
+                     Unknown = 0,
+                     Bullet3 = 1,
+                     Newton = 2,
+                     PhysX = 3,
+                     Havok = 4,
+                     Volt = 5,
+                     Shark = 6,
+                     Box2D = 7
     );
 
     SR_ENUM_NS_CLASS(ShapeType,
-         Unknown,
+                     Unknown,
 
-         Box2D,
-         Cylinder2D,
-         Capsule2D,
-         Circle2D,
-         TriangleMesh2D,
-         Cone2D,
-         Edge2D,
+                     Box2D,
+                     Cylinder2D,
+                     Capsule2D,
+                     Circle2D,
+                     TriangleMesh2D,
+                     Cone2D,
+                     Edge2D,
 
-         Plane3D,
-         Box3D,
-         Cylinder3D,
-         Capsule3D,
-         Sphere3D,
-         TriangleMesh3D,
-         Boxes3D,
-         Convex3D,
-         Cone3D
+                     Plane3D,
+                     Box3D,
+                     Cylinder3D,
+                     Capsule3D,
+                     Sphere3D,
+                     TriangleMesh3D,
+                     Boxes3D,
+                     Convex3D,
+                     Cone3D
     )
 }
 
@@ -63,9 +63,9 @@ namespace SR_PHYSICS_UTILS_NS {
             case ShapeType::TriangleMesh2D:
             case ShapeType::Edge2D:
             case ShapeType::Cone2D:
-                return true;
+            return true;
             default:
-                return false;
+            return false;
         }
     }
 
@@ -80,9 +80,9 @@ namespace SR_PHYSICS_UTILS_NS {
             case ShapeType::Boxes3D:
             case ShapeType::Convex3D:
             case ShapeType::Cone3D:
-                return true;
+            return true;
             default:
-                return false;
+            return false;
         }
     }
 
@@ -90,9 +90,9 @@ namespace SR_PHYSICS_UTILS_NS {
         switch (type) {
             case ShapeType::Circle2D:
             case ShapeType::Sphere3D:
-                return true;
+            return true;
             default:
-                return false;
+            return false;
         }
     }
 
@@ -100,18 +100,18 @@ namespace SR_PHYSICS_UTILS_NS {
         switch (type) {
             case ShapeType::Box2D:
             case ShapeType::Box3D:
-                return true;
+            return true;
             default:
-                return false;
+            return false;
         }
     }
 
     SR_MAYBE_UNUSED static constexpr bool IsPlane(ShapeType type) {
         switch (type) {
             case ShapeType::Plane3D:
-                return true;
+            return true;
             default:
-                return false;
+            return false;
         }
     }
 
@@ -119,27 +119,27 @@ namespace SR_PHYSICS_UTILS_NS {
         switch (type) {
             case ShapeType::Capsule2D:
             case ShapeType::Capsule3D:
-                return true;
+            return true;
             default:
-                return false;
+            return false;
         }
     }
 
     SR_MAYBE_UNUSED static constexpr bool IsConvex(ShapeType type) {
         switch (type) {
             case ShapeType::Convex3D:
-                return true;
+            return true;
             default:
-                return false;
+            return false;
         }
     }
 
     SR_MAYBE_UNUSED static constexpr bool IsTriangleMesh(ShapeType type) {
         switch (type) {
             case ShapeType::TriangleMesh3D:
-                return true;
+            return true;
             default:
-                return false;
+            return false;
         }
     }
 
@@ -147,9 +147,9 @@ namespace SR_PHYSICS_UTILS_NS {
         switch (type) {
             case ShapeType::Cylinder2D:
             case ShapeType::Cylinder3D:
-                return true;
+            return true;
             default:
-                return false;
+            return false;
         }
     }
 

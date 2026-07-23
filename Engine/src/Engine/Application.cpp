@@ -139,7 +139,7 @@ namespace SR_CORE_NS {
 
             m_isNeedPlaySound = false;
         }
-    }*/
+       }*/
 
     static std::string_view ResolvePath(const std::string_view& original, const std::string_view& engineRoot, decltype(&SR_PLATFORM_NS::GetPathType) getFileType) {
         SR_TRACY_ZONE;
@@ -182,9 +182,9 @@ namespace SR_CORE_NS {
         size_t need = lenRoot + 1 + lenTail + 1;
 
         if (need > sizeof(buf)) SR_UNLIKELY_ATTRIBUTE {
-            SR_PLATFORM_NS::WriteConsoleError(SR_FORMAT("Resolved path is too long! Path: {}\n", original));
-            return original;
-        }
+                SR_PLATFORM_NS::WriteConsoleError(SR_FORMAT("Resolved path is too long! Path: {}\n", original));
+                return original;
+            }
 
         std::memcpy(p, engineRoot.data(), lenRoot);
         p += lenRoot;
@@ -225,14 +225,14 @@ namespace SR_CORE_NS {
                 SR_PLATFORM_NS::InitializeHooks([applicationResources = m_engineResourcesPath](SR_PLATFORM_NS::PlatformHooks& hooks) {
                     if (hooks.originalReadFile && hooks.originalGetPathType) {
                         hooks.getFileTypeHook = [applicationResources, hooks](auto&& path) {
-                            return hooks.originalGetPathType(ResolvePath(path, applicationResources.ToStringView(), hooks.originalGetPathType));
-                        };
+                                                    return hooks.originalGetPathType(ResolvePath(path, applicationResources.ToStringView(), hooks.originalGetPathType));
+                                                };
                         hooks.readFileHook = [applicationResources, hooks](auto&& path, auto&& buffer) {
-                            return hooks.originalReadFile(ResolvePath(path.ToStringView(), applicationResources.ToStringView(), hooks.originalGetPathType), buffer);
-                        };
+                                                 return hooks.originalReadFile(ResolvePath(path.ToStringView(), applicationResources.ToStringView(), hooks.originalGetPathType), buffer);
+                                             };
                         hooks.pathResolver = [applicationResources, hooks](std::string_view path) {
-                            return ResolvePath(path, applicationResources.ToStringView(), hooks.originalGetPathType);
-                        };
+                                                 return ResolvePath(path, applicationResources.ToStringView(), hooks.originalGetPathType);
+                                             };
                     }
                 });
             }
@@ -333,7 +333,7 @@ namespace SR_CORE_NS {
         m_hasErrors = false;
 
         if (m_engine) {
-            auto&& optionPath =  SR_UTILS_NS::CLIManager::Instance().GetOptionValue(SR_UTILS_NS::CLIOptions::RunScene);
+            auto&& optionPath = SR_UTILS_NS::CLIManager::Instance().GetOptionValue(SR_UTILS_NS::CLIOptions::RunScene);
             if (optionPath.has_value()) {
                 SR_LOG("Application::Execute() : command line option to run scene detected: {}", optionPath.value());
 

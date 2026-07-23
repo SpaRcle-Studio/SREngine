@@ -15,21 +15,21 @@ namespace SR_PHYSICS_NS {
             case ShapeType::Circle2D:
             case ShapeType::Edge2D:
             case ShapeType::TriangleMesh2D:
-                return true;
+            return true;
             default:
-                return false;
+            return false;
         }
     }
 
-    SR_PTYPES_NS::CollisionShape *Box2DLibraryImpl::CreateCollisionShape() {
+    SR_PTYPES_NS::CollisionShape*Box2DLibraryImpl::CreateCollisionShape() {
         return LibraryImpl::CreateCollisionShape();
     }
 
-    SR_PTYPES_NS::Rigidbody2D *Box2DLibraryImpl::CreateRigidbody2D() {
+    SR_PTYPES_NS::Rigidbody2D*Box2DLibraryImpl::CreateRigidbody2D() {
         return LibraryImpl::CreateRigidbody2D();
     }
 
-    SR_PHYSICS_NS::PhysicsWorld *Box2DLibraryImpl::CreatePhysicsWorld(LibraryImpl::Space space) {
+    SR_PHYSICS_NS::PhysicsWorld*Box2DLibraryImpl::CreatePhysicsWorld(LibraryImpl::Space space) {
         return LibraryImpl::CreatePhysicsWorld(space);
     }
 }

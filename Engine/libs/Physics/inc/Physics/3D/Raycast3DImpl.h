@@ -15,7 +15,7 @@ namespace SR_PHYSICS_NS {
             : Super(world)
         { }
 
-        virtual RaycastHits Cast(const SR_MATH_NS::FVector3 &origin, const SR_MATH_NS::FVector3 &direction, float_t maxDistance, uint32_t maxHits, const SR_UTILS_NS::LayerMask& layerMask) = 0;
+        virtual RaycastHits Cast(const SR_MATH_NS::FVector3& origin, const SR_MATH_NS::FVector3& direction, float_t maxDistance, uint32_t maxHits, const SR_UTILS_NS::LayerMask& layerMask) = 0;
     };
 }
 

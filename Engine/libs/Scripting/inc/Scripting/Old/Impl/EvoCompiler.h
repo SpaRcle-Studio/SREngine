@@ -31,7 +31,7 @@ namespace SR_SCRIPTING_NS {
 
     private:
         EvoScript::AddressTableGen* m_generator = nullptr;
-        EvoScript::CastingGen*      m_casting   = nullptr;
+        EvoScript::CastingGen* m_casting = nullptr;
 
     };
 

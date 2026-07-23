@@ -11,6 +11,4 @@
 #include <Utils/ECS/ComponentManager.h>
 #include <Utils/TypeTraits/Factory.h>
 
-namespace SR_CORE_NS {
-
-}
+namespace SR_CORE_NS { }

@@ -16,10 +16,10 @@ namespace SR_UTILS_NS {
 
 namespace SR_CORE_UI_NS {
     SR_ENUM_NS_CLASS_T(ScrollBarDirection, uint8_t,
-        LeftToRight,
-        RightToLeft,
-        BottomToTop,
-        TopToBottom
+                       LeftToRight,
+                       RightToLeft,
+                       BottomToTop,
+                       TopToBottom
     );
 
     /// @category(UI) @displayName(Scroll Bar)
@@ -84,4 +84,3 @@ namespace SR_CORE_UI_NS {
 }
 
 #endif //SR_ENGINE_UI_SCROLL_BAR_H
-

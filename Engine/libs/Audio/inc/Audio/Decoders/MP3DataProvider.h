@@ -9,7 +9,7 @@
 
 namespace SR_AUDIO_NS {
     /// MPEG Layer-III decoder
-    class MP3DataProvider: public IWaveDataProvider
+    class MP3DataProvider : public IWaveDataProvider
     {
     public:
         explicit MP3DataProvider(const RawSoundDataPtr& data);

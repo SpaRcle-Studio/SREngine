@@ -278,7 +278,7 @@ namespace SR_CORE_GUI_NS {
                     context.onBeforeChangeCallback(false);
                 }
                 if (hasValue) {
-                    *pValue = float();
+         * pValue = float();
                 }
                 else {
                     pValue->reset();
@@ -295,20 +295,20 @@ namespace SR_CORE_GUI_NS {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(true);
                 }
-                *pValue = dataValue;
+         * pValue = dataValue;
                 feedback.isChanged = true;
             }
 
             SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
-        }
-        else if (auto&& pValue = value.TryCast<std::optional<bool>>()) {
+           }
+           else if (auto&& pValue = value.TryCast<std::optional<bool>>()) {
             bool hasValue = pValue->has_value();
             if (SR_GRAPH_GUI_NS::Immediate::Checkbox("##Checkbox", &hasValue)) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(false);
                 }
                 if (hasValue) {
-                    *pValue = false;
+         * pValue = false;
                 }
                 else {
                     pValue->reset();
@@ -325,20 +325,20 @@ namespace SR_CORE_GUI_NS {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(false);
                 }
-                *pValue = dataValue;
+         * pValue = dataValue;
                 feedback.isChanged = true;
             }
 
             SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
-        }
-        else if (auto&& pValue = value.TryCast<std::optional<SR_UTILS_NS::StringAtom>>()) {
+           }
+           else if (auto&& pValue = value.TryCast<std::optional<SR_UTILS_NS::StringAtom>>()) {
             bool hasValue = pValue->has_value();
             if (SR_GRAPH_GUI_NS::Immediate::Checkbox("##Checkbox", &hasValue)) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(false);
                 }
                 if (hasValue) {
-                    *pValue = SR_UTILS_NS::StringAtom();
+         * pValue = SR_UTILS_NS::StringAtom();
                 }
                 else {
                     pValue->reset();
@@ -357,15 +357,15 @@ namespace SR_CORE_GUI_NS {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(false);
                 }
-                *pValue = SR_UTILS_NS::StringAtom(buffer);
+         * pValue = SR_UTILS_NS::StringAtom(buffer);
                 feedback.isChanged = true;
             }
 
             SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
-        }
-        else {
+           }
+           else {
             SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unsupported optional type!");
-        }*/
+           }*/
 
         SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
 
@@ -749,8 +749,8 @@ namespace SR_CORE_GUI_NS {
                             case SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::Int32: pISize->v = reinterpret_cast<SR_MATH_NS::ISize*>(&((char*)(pMapped))[i * sizeof(SR_MATH_NS::ISize)])->v; break;
                             case SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::UInt32: pUSize->v = reinterpret_cast<SR_MATH_NS::USize*>(&((char*)(pMapped))[i * sizeof(SR_MATH_NS::USize)])->v; break;
                             default:
-                                SRHalt("Unknown part type!");
-                                break;
+                            SRHalt("Unknown part type!");
+                            break;
                         }
                     }
                     else {
@@ -759,8 +759,8 @@ namespace SR_CORE_GUI_NS {
                             case SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::Int32:  pISize->v = 0; break;
                             case SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::UInt32: pUSize->v = 0; break;
                             default:
-                                SRHalt("Unknown part type!");
-                                break;
+                            SRHalt("Unknown part type!");
+                            break;
                         }
                     }
                 }
@@ -772,35 +772,35 @@ namespace SR_CORE_GUI_NS {
 
                 switch (partType) {
                     case SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::Float: {
-                        float_t temp = pFSize->v;
-                        if (SR_GRAPH_GUI_NS::Immediate::DragScalar("", partType, &temp, drag)) {
-                            pFSize->v = temp;
-                            feedback.isChanged = true;
-                            feedback.isDrag = true;
-                        }
-                        break;
+                    float_t temp = pFSize->v;
+                    if (SR_GRAPH_GUI_NS::Immediate::DragScalar("", partType, &temp, drag)) {
+                        pFSize->v = temp;
+                        feedback.isChanged = true;
+                        feedback.isDrag = true;
                     }
+                    break;
+                }
                     case SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::Int32: {
-                        int32_t temp = pISize->v;
-                        if (SR_GRAPH_GUI_NS::Immediate::DragScalar("", partType, &temp, drag)) {
-                            pISize->v = temp;
-                            feedback.isChanged = true;
-                            feedback.isDrag = true;
-                        }
-                        break;
+                    int32_t temp = pISize->v;
+                    if (SR_GRAPH_GUI_NS::Immediate::DragScalar("", partType, &temp, drag)) {
+                        pISize->v = temp;
+                        feedback.isChanged = true;
+                        feedback.isDrag = true;
                     }
+                    break;
+                }
                     case SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::UInt32: {
-                        uint32_t temp = pUSize->v;
-                        if (SR_GRAPH_GUI_NS::Immediate::DragScalar("", partType, &temp, drag)) {
-                            pUSize->v = temp;
-                            feedback.isChanged = true;
-                            feedback.isDrag = true;
-                        }
-                        break;
+                    uint32_t temp = pUSize->v;
+                    if (SR_GRAPH_GUI_NS::Immediate::DragScalar("", partType, &temp, drag)) {
+                        pUSize->v = temp;
+                        feedback.isChanged = true;
+                        feedback.isDrag = true;
                     }
+                    break;
+                }
                     default:
-                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown part type!");
-                        break;
+                    SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown part type!");
+                    break;
                 }
 
                 SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
@@ -829,8 +829,8 @@ namespace SR_CORE_GUI_NS {
                     case SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::Int32: pSize = &pISize->metric; break;
                     case SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::UInt32: pSize = &pUSize->metric; break;
                     default:
-                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown part type!");
-                        break;
+                    SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown part type!");
+                    break;
                 }
 
                 if (pSize && SR_GRAPH_GUI_NS::Immediate::BeginCombo("", SR_UTILS_NS::EnumReflector::ToStringAtom(*pSize).c_str())) {

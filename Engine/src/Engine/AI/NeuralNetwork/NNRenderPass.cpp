@@ -92,7 +92,7 @@ namespace SpaRcle::AI {
         auto&& pShader = isNeurons ? m_neuronShader : m_synapseShader;
 
         if (pShader && pShader->Use() != SR_GRAPH_NS::ShaderBindResult::Failed) {
-            for (auto&& pInstance: m_instances) {
+            for (auto&& pInstance : m_instances) {
                 int32_t& descriptor = isNeurons ? pInstance->neuronsDescriptorSet : pInstance->synapsesDescriptorSet;
                 (isNeurons ? pInstance->pNeuronsSSBO : pInstance->pSynapsesSSBO)->Bind();
 

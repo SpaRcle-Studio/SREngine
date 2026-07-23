@@ -53,7 +53,7 @@ namespace EvoScript {
         bool m_multiInstances = true;
 
         std::string m_apiVersion = "None";
-        std::string m_cachePath  = "None";
+        std::string m_cachePath = "None";
 
         std::recursive_mutex m_mutex;
         ModuleCopies m_moduleCopies;

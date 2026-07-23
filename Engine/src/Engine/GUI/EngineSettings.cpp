@@ -55,27 +55,27 @@ namespace SR_CORE_GUI_NS {
     void EngineSettings::DrawMultiSampling() {
         SR_TRACY_ZONE;
         static const char* SR_SAMPLE_COUNT_NAME_LIST = {
-                "Sample 1\0"
-                "Sample 2\0"
-                "Sample 4\0"
-                "Sample 8\0"
-                "Sample 16\0"
-                "Sample 32\0"
-                "Sample 64\0"
+            "Sample 1\0"
+            "Sample 2\0"
+            "Sample 4\0"
+            "Sample 8\0"
+            "Sample 16\0"
+            "Sample 32\0"
+            "Sample 64\0"
         };
 
         static std::map<uint8_t, int32_t> SR_SAMPLE_COUNT_KEY_LIST = {
-                { 1, 0 },
-                { 2, 1 },
-                { 4, 2 },
-                { 8, 3 },
-                { 16, 4 },
-                { 32, 5 },
-                { 64, 6 },
+            { 1, 0 },
+            { 2, 1 },
+            { 4, 2 },
+            { 8, 3 },
+            { 16, 4 },
+            { 32, 5 },
+            { 64, 6 },
         };
 
         static std::vector<uint8_t> SR_SAMPLE_COUNT_VALUE_LIST = {
-                1, 2, 4, 8, 16, 32, 64
+            1, 2, 4, 8, 16, 32, 64
         };
 
         auto&& pContext = GetContext();
@@ -139,7 +139,7 @@ namespace SR_CORE_GUI_NS {
         const float_t lineHeight = SR_GRAPH_GUI_NS::Immediate::GetFontSize() + SR_GRAPH_GUI_NS::Immediate::GetFramePadding().y * 2.0f;
         float_t windowWidth = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x - m_scrollBarWidth;
 
-        if (SR_GRAPH_GUI_NS::Immediate::Button("Save", { windowWidth * 0.2f, lineHeight })) {
+        if (SR_GRAPH_GUI_NS::Immediate::Button("Save", { windowWidth* 0.2f, lineHeight })) {
             SR_UTILS_NS::SRASerializer serializer;
             m_cachedGraphicsSettings.Save(serializer);
             auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(SR_GRAPH_NS::ActiveGraphicsSettings::SETTINGS_PATH);
@@ -151,12 +151,12 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::SameLine();
 
         SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
-        SR_GRAPH_GUI_NS::Immediate::Button("Graphics settings", { windowWidth * 0.6f, lineHeight });
+        SR_GRAPH_GUI_NS::Immediate::Button("Graphics settings", { windowWidth* 0.6f, lineHeight });
         SR_GRAPH_GUI_NS::Immediate::EndDisabled();
 
         SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-        if (SR_GRAPH_GUI_NS::Immediate::Button("Reset", { windowWidth * 0.2f, lineHeight })) {
+        if (SR_GRAPH_GUI_NS::Immediate::Button("Reset", { windowWidth* 0.2f, lineHeight })) {
             GetContext()->ReloadGraphicsSettings();
         }
 

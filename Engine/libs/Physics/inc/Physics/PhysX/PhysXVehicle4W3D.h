@@ -10,14 +10,14 @@
 namespace SR_PTYPES_NS {
     /*class PhysXVehicle4W3D : public Vehicle4W3D {
         using Super = Vehicle4W3D;
-    public:
+       public:
         explicit PhysXVehicle4W3D(LibraryPtr pLibrary);
         ~PhysXVehicle4W3D() override;
 
-    public:
+       public:
         SR_NODISCARD void* GetHandle() const noexcept override;
 
-    public:
+       public:
         bool InitVehicle() override;
 
         SR_NODISCARD physx::PxVehicleWheelsSimData* SetupWheelsSimulationData();
@@ -35,10 +35,10 @@ namespace SR_PTYPES_NS {
                 const physx::PxFilterData& chassisSimFilterData,
                 physx::PxPhysics& physics);
 
-    private:
+       private:
         physx::PxVehicleWheelsSimData* m_wheelsSimData = nullptr;
         physx::PxRigidDynamic* m_vehActor = nullptr;
-    };*/
+       };*/
 }
 
 #endif //SR_ENGINE_PHYSXVEHICLE4W3D_H

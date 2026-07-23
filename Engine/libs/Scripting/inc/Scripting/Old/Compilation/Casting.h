@@ -21,7 +21,7 @@ namespace EvoScript {
             case CastingType::Reinterpret: return "Reinterpret";
             case CastingType::Unknown:
             default:
-                return "Unknown";
+            return "Unknown";
         }
     }
 
@@ -36,10 +36,10 @@ namespace EvoScript {
         std::string Generate();
     public:
         bool RegisterCast(
-                const std::function<void(EvoScript::IState*)>& setter,
-                const std::string& from,
-                const std::string& to,
-                CastingType type);
+            const std::function<void(EvoScript::IState*)>& setter,
+            const std::string& from,
+            const std::string& to,
+            CastingType type);
 
         bool Save(const std::string& folder);
     };

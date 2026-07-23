@@ -76,7 +76,7 @@ namespace EvoScript {
             result += "#include <functional>\n\n";
 
             if (std::string inc = GetIncludes(); !inc.empty())
-                result +=  inc + "\n";
+                result += inc + "\n";
 
             for (const auto& _enum : m_enums)
                 result += _enum.ToString() + "\n\n";
@@ -96,7 +96,7 @@ namespace EvoScript {
                 result += "\n";
 
             for (const auto& _class : m_classes) {
-                for (const auto &_method : _class.m_methods) {
+                for (const auto& _method : _class.m_methods) {
                     if (_method.m_type == Virtual) {
                         continue;
                     }
@@ -154,44 +154,44 @@ namespace EvoScript {
 
     public:
         bool RegisterMethod(
-                const SetterFn& setter,
-                const std::string& className,
-                const std::string& methodName,
-                const std::string& returnType,
-                const std::vector<std::string>& argTypes,
-                MethodType type,
-                const std::string& _overrideClass = "",
-                Publicity publicity = Publicity::Public);
+            const SetterFn& setter,
+            const std::string& className,
+            const std::string& methodName,
+            const std::string& returnType,
+            const std::vector<std::string>& argTypes,
+            MethodType type,
+            const std::string& _overrideClass = "",
+            Publicity publicity = Publicity::Public);
 
         bool RegisterFunction(
-                const SetterFn& setter,
-                const std::string& methodName,
-                const std::string& returnType,
-                const std::vector<std::string>& argTypes,
-                const std::string& header);
+            const SetterFn& setter,
+            const std::string& methodName,
+            const std::string& returnType,
+            const std::vector<std::string>& argTypes,
+            const std::string& header);
 
         bool RegisterMethod(
-                const std::string& className,
-                const std::string& methodName,
-                const std::string& returnType,
-                const std::vector<std::string>& argTypes,
-                MethodType type,
-                const std::string& _overrideClass = "",
-                Publicity publicity = Publicity::Public);
+            const std::string& className,
+            const std::string& methodName,
+            const std::string& returnType,
+            const std::vector<std::string>& argTypes,
+            MethodType type,
+            const std::string& _overrideClass = "",
+            Publicity publicity = Publicity::Public);
 
-        bool RegisterHeader(const std::string& name, const std::set<std::string>& includes = {});
+        bool RegisterHeader(const std::string& name, const std::set<std::string>& includes = { });
 
         bool RegisterNewClass(
-                const std::string& name,
-                const std::string& header,
-                const std::set<std::string>& includes = {},
-                const std::vector<InheritClass>& inherit = {});
+            const std::string& name,
+            const std::string& header,
+            const std::set<std::string>& includes = { },
+            const std::vector<InheritClass>& inherit = { });
 
         bool RegisterEnum(
-                const std::string& name,
-                const std::string& header,
-                bool asClass,
-                const std::vector<std::pair<std::string, int32_t>>& values);
+            const std::string& name,
+            const std::string& header,
+            bool asClass,
+            const std::vector<std::pair<std::string, int32_t>>& values);
 
         bool RegisterTypedef(const std::string& name, const std::string& header, const std::string& value);
         bool RegisterUsing(const std::string& name, const std::string& header, const std::string& value);

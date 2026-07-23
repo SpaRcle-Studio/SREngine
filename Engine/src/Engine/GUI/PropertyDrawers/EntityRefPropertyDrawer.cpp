@@ -52,7 +52,7 @@ namespace SR_CORE_GUI_NS {
                 if (pEntityRef->GetEntity()->GetMeta()->IsSameOrInherited(SR_UTILS_NS::SceneObject::GetMetaStatic()->GetFactoryName())) {
                     pSceneObject = pEntityRef->GetEntity().DynamicCast<SR_UTILS_NS::SceneObject>();
                 }
-                std::string formatted = pSceneObject ? pSceneObject->GetName().ToStringRef() : " {} ({})"_format(pEntityRef->GetEntity()->GetEntityId(), entityType.ToCStr());
+                std::string formatted = pSceneObject ? pSceneObject->GetName().ToStringRef() : " {} ({})"_format (pEntityRef->GetEntity()->GetEntityId(), entityType.ToCStr());
                 SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor(1.f, 1.f, 1.f, 1.f));
                 SR_GRAPH_GUI_NS::Immediate::PushID((void*)pEntityRef);
                 if (SR_GRAPH_GUI_NS::Immediate::Button(formatted.c_str(), SR_MATH_NS::FVector2(context.fieldWidth, 0))) {
@@ -66,15 +66,15 @@ namespace SR_CORE_GUI_NS {
                 SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
             }
             else if (pEntityRef->GetEntityId() != SR_ID_INVALID) {
-                std::string formatted = " {} ({})"_format(pEntityRef->GetEntityId(), entityType.ToCStr());
+                std::string formatted = " {} ({})"_format (pEntityRef->GetEntityId(), entityType.ToCStr());
                 SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
                 SR_GRAPH_GUI_NS::Immediate::ButtonColoredText(formatted.c_str(), SR_MATH_NS::FColor(0.f, 1.f, 0.f, 1.f), SR_MATH_NS::FVector2(context.fieldWidth, 0));
                 SR_GRAPH_GUI_NS::Immediate::EndDisabled();
             }
             else {
-                std::string formatted = " Is not set ({})"_format(entityType.ToCStr());
+                std::string formatted = " Is not set ({})"_format (entityType.ToCStr());
                 SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
-                SR_GRAPH_GUI_NS::Immediate::ButtonColoredText(formatted.c_str(), SR_MATH_NS::FColor(1.f, 1.f, 0.f, 1.f) , SR_MATH_NS::FVector2(context.fieldWidth, 0));
+                SR_GRAPH_GUI_NS::Immediate::ButtonColoredText(formatted.c_str(), SR_MATH_NS::FColor(1.f, 1.f, 0.f, 1.f), SR_MATH_NS::FVector2(context.fieldWidth, 0));
                 SR_GRAPH_GUI_NS::Immediate::EndDisabled();
             }
 
@@ -123,7 +123,7 @@ namespace SR_CORE_GUI_NS {
                             }
                             else if (components.front()->GetMeta()->IsSameOrInherited(behaviourMeta->GetFactoryName())) {
                                 if (auto&& pBehaviour = components.front().StaticCast<SR_SCRIPTING_NS::Behaviour>()) {
-                                    if (auto&& pInnerBehaviour = pBehaviour->GetBehaviour(); pInnerBehaviour && pInnerBehaviour->GetMeta()->IsSameOrInherited(entityType)) {
+                                    if (auto&& pInnerBehaviour = pBehaviour->GetBehaviour(); pInnerBehaviour&& pInnerBehaviour->GetMeta()->IsSameOrInherited(entityType)) {
                                         if (context.onBeforeChangeCallback) {
                                             context.onBeforeChangeCallback(false);
                                         }

@@ -62,7 +62,7 @@ namespace SR_SCRIPTING_NS {
 
             SR_EVO_SCRIPT_MANAGER_LOCK_CONTEXT
 
-            SwitchContext();
+                SwitchContext();
 
             if (function) {
                 function(std::forward<Args>(args)...);

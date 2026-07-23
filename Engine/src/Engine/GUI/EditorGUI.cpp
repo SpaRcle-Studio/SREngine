@@ -390,7 +390,7 @@ namespace SR_CORE_GUI_NS {
         if (m_dragWindow) {
             if (auto&& pWin = m_engine->GetMainWindow()->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()) {
                 auto&& drag = data->GetDrag();
-                auto &&pos = pWin->GetPosition();
+                auto&& pos = pWin->GetPosition();
                 pos += drag;
                 pWin->Move(pos.x, pos.y);
             }
@@ -419,7 +419,7 @@ namespace SR_CORE_GUI_NS {
         return m_context->GetNoneTexture().Get();
     }
 
-    void *EditorGUI::GetIconDescriptor(EditorIcon icon) const {
+    void*EditorGUI::GetIconDescriptor(EditorIcon icon) const {
         if (auto&& pIconTexture = const_cast<SR_GTYPES_NS::Texture*>(GetIcon(icon))) {
             if (!pIconTexture->CanBeUsed() || !pIconTexture->GetDescriptor()) {
                 pIconTexture = m_context->GetNoneTexture().Get();
@@ -529,7 +529,7 @@ namespace SR_CORE_GUI_NS {
         const auto&& defaultConfigPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/ImGuiEditor.config");
         const auto&& defaultWidgetsPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/EditorWidgets.xml");
 
-        SR_UTILS_NS::Platform::Copy(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/ImGuiEditor.config"),defaultConfigPath);
+        SR_UTILS_NS::Platform::Copy(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/ImGuiEditor.config"), defaultConfigPath);
         SR_UTILS_NS::Platform::Copy(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/EditorWidgets.xml"), defaultWidgetsPath);
 
         ReloadWindows();
@@ -1035,7 +1035,7 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-        if (auto&& pScene = GetEngine()->GetScene(); pScene && !pInstantiateTarget) {
+        if (auto&& pScene = GetEngine()->GetScene(); pScene&& !pInstantiateTarget) {
             if (auto&& pLogic = pScene->GetLogicBase().DynamicCast<SR_WORLD_NS::ScenePrefabLogic>()) {
                 if (auto&& pPrefabRoot = pLogic->GetPrefabRoot()) {
                     pInstantiateTarget = pPrefabRoot;
@@ -1071,9 +1071,9 @@ namespace SR_CORE_GUI_NS {
         if (fullPath.IsDir()) {
             /// Если нету гита, то сам виноват.
         #ifdef SR_WIN32
-            std::string command = "{}: && cd {} && git pull -r --autostash"_format(fullPath[0], fullPath);
+            std::string command = "{}: && cd {} && git pull -r --autostash"_format (fullPath[0], fullPath);
         #else
-            std::string command = "cd {} && git pull -r --autostash"_format(fullPath);
+            std::string command = "cd {} && git pull -r --autostash"_format (fullPath);
         #endif
             SR_SYSTEM_LOG("EditorGUI::InstallOrUpdateSamples() : pulling repository...\n\tCommand: " + command);
             system(command.c_str());
@@ -1084,7 +1084,7 @@ namespace SR_CORE_GUI_NS {
         #else
             auto&& gitPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Utilities/git2");
         #endif
-            std::string command = "{} clone {} {} --depth 1"_format(gitPath, repoUrl, fullPath);
+            std::string command = "{} clone {} {} --depth 1"_format (gitPath, repoUrl, fullPath);
             SR_SYSTEM_LOG("EditorGUI::InstallOrUpdateSamples() : cloning repository...\n\tCommand: " + command);
             system(command.c_str());
         }

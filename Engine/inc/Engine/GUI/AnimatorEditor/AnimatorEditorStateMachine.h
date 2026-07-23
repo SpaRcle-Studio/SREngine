@@ -51,7 +51,6 @@ namespace SR_CORE_GUI_NS {
 
         std::vector<SR_UTILS_NS::StringAtom> m_availableStateTypes;
 
-
     };
 }
 

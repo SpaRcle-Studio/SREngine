@@ -6,6 +6,4 @@
 
 #include <Codegen/ProjectSettings.generated.hpp>
 
-namespace SR_CORE_NS {
-
-}
+namespace SR_CORE_NS { }

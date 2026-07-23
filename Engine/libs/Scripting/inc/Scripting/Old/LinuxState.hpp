@@ -12,8 +12,8 @@
 #include <EvoScript/IState.h>
 
 namespace EvoScript {
-        static std::string GetLastErrorAsString() {
-        if(errno == 0) {
+    static std::string GetLastErrorAsString() {
+        if (errno == 0) {
             return std::string();
         }
 

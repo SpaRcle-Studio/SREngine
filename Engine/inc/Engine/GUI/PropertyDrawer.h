@@ -37,7 +37,7 @@ namespace SR_CORE_GUI_NS {
             : pProperty(&property)
         { }
 
-        explicit PropertyDrawerContext(SR_UTILS_NS::Reflection::Value* pValue)
+        explicit PropertyDrawerContext(SR_UTILS_NS::Reflection::Value * pValue)
             : pValue(pValue)
         { }
 
@@ -97,7 +97,7 @@ namespace SR_CORE_GUI_NS {
             : Ptr(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
         { }
 
-        virtual PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) { return {}; }
+        virtual PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) { return { }; }
 
     protected:
         static void SetValue(const PropertyDrawerContext& context, const PropertyDrawerFeedback& feedback, const SR_UTILS_NS::Reflection::Value& value);
@@ -146,7 +146,7 @@ namespace SR_CORE_GUI_NS {
     };
 
     class FColorPropertyDrawer : public PropertyDrawerBase {
-    SR_CLASS()
+        SR_CLASS()
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<FColorPropertyDrawer>;
     public:

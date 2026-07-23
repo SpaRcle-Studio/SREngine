@@ -19,7 +19,7 @@ namespace EvoScript::Typedefs {
     typedef void(*SetPropertyFnPtr)(const std::string& id, const std::any& val);
     typedef void(*SwitchContextFnPtr)(void* pContext);
     typedef std::any(*GetPropertyFnPtr)(const std::string& id);
-    typedef std::vector<std::string>(*GetPropertiesFnPtr)();
+    typedef std::vector<std::string> (*GetPropertiesFnPtr)();
 
     typedef void*(*AllocateMemoryFnPtr)(size_t sz);
     typedef void(*FreeMemoryFnPtr)(void* ptr);

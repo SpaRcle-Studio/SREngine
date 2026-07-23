@@ -387,4 +387,3 @@ namespace SR_GRAPH_GUI_NS::Immediate::Experimental {
 }
 
 #endif // SR_USE_IMGUI
-

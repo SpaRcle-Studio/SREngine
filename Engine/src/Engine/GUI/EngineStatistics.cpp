@@ -61,45 +61,45 @@ namespace SR_CORE_GUI_NS {
 
     void EngineStatistics::ResourcesPage() {
         if (SR_GRAPH_GUI_NS::Immediate::BeginTabItem("Resources manager")) {
-            auto&& drawResource = [=](SR_UTILS_NS::IResource* pRes, uint32_t index) {
-                const bool isDestroyed = pRes->IsDestroyed();
+            auto&& drawResource = [ = ](SR_UTILS_NS::IResource* pRes, uint32_t index) {
+                                      const bool isDestroyed = pRes->IsDestroyed();
 
-                std::string node = SR_FORMAT("[{}] {} = {}", index, pRes->GetResourceId().data(), pRes->GetCountUses());
+                                      std::string node = SR_FORMAT("[{}] {} = {}", index, pRes->GetResourceId().data(), pRes->GetCountUses());
 
-                if (isDestroyed) {
-                    SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor(1.f, 0.f, 0.f));
+                                      if (isDestroyed) {
+                                          SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor(1.f, 0.f, 0.f));
 
-                    std::stringstream stream;
-                    stream << std::fixed << std::setprecision(3) << static_cast<float>(SR_MAX(pRes->GetLifetime(), 0) / SR_CLOCKS_PER_SEC);
+                                          std::stringstream stream;
+                                          stream << std::fixed << std::setprecision(3) << static_cast<float>(SR_MAX(pRes->GetLifetime(), 0) / SR_CLOCKS_PER_SEC);
 
-                    node.append(" (").append(stream.str()).append(")");
-                }
+                                          node.append(" (").append(stream.str()).append(")");
+                                      }
 
-                SR_GRAPH_GUI_NS::Immediate::TreeNodeEx(pRes, SR_GRAPH_GUI_NS::Immediate::GetNodeFlagsWithoutChild(), "%s", node.c_str());
+                                      SR_GRAPH_GUI_NS::Immediate::TreeNodeEx(pRes, SR_GRAPH_GUI_NS::Immediate::GetNodeFlagsWithoutChild(), "%s", node.c_str());
 
-                if (isDestroyed) {
-                    if (SR_GRAPH_GUI_NS::Immediate::IsMouseDoubleClicked(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left) && SR_GRAPH_GUI_NS::Immediate::IsItemHovered()) {
-                        pRes->Kill();
-                    }
+                                      if (isDestroyed) {
+                                          if (SR_GRAPH_GUI_NS::Immediate::IsMouseDoubleClicked(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left) && SR_GRAPH_GUI_NS::Immediate::IsItemHovered()) {
+                                              pRes->Kill();
+                                          }
 
-                    SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
-                }
-            };
+                                          SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
+                                      }
+                                  };
 
-            auto&& drawResources = [=](std::unordered_set<SR_UTILS_NS::IResource::Ptr>& resources, uint32_t index) {
-                uint32_t subIndex = 0;
+            auto&& drawResources = [ = ](std::unordered_set<SR_UTILS_NS::IResource::Ptr>& resources, uint32_t index) {
+                                       uint32_t subIndex = 0;
 
-                const auto node = SR_FORMAT("[{}] {} ({})", index, (*resources.begin())->GetResourceId().data(), resources.size());
+                                       const auto node = SR_FORMAT("[{}] {} ({})", index, (*resources.begin())->GetResourceId().data(), resources.size());
 
-                const bool open = SR_GRAPH_GUI_NS::Immediate::TreeNodeEx((void*)(intptr_t)index, SR_GRAPH_GUI_NS::Immediate::GetNodeFlagsWithChild(), "%s", node.c_str());
+                                       const bool open = SR_GRAPH_GUI_NS::Immediate::TreeNodeEx((void*)(intptr_t)index, SR_GRAPH_GUI_NS::Immediate::GetNodeFlagsWithChild(), "%s", node.c_str());
 
-                if (open) {
-                    for (const SR_UTILS_NS::IResource::Ptr& pRes : resources) {
-                        drawResource(const_cast<SR_UTILS_NS::IResource*>(pRes.Get()), subIndex++);
-                    }
-                    SR_GRAPH_GUI_NS::Immediate::TreePop();
-                }
-            };
+                                       if (open) {
+                                           for (const SR_UTILS_NS::IResource::Ptr& pRes : resources) {
+                                               drawResource(const_cast<SR_UTILS_NS::IResource*>(pRes.Get()), subIndex++);
+                                           }
+                                           SR_GRAPH_GUI_NS::Immediate::TreePop();
+                                       }
+                                   };
 
             //SR_UTILS_NS::ResourceManager::Instance().InspectResources([=](auto &groups) {
             //    for (auto& [groupHashName, pResourceType] : groups) {
@@ -196,7 +196,7 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::EndTabItem();
         }
     }
- 
+
     void EngineStatistics::VideoMemoryPage() {
         if (SR_GRAPH_GUI_NS::Immediate::BeginTabItem("Video memory")) {
             auto&& pContext = GetContext();
@@ -258,9 +258,9 @@ namespace SR_CORE_GUI_NS {
             }
 
         #define __SR_DRAW_COLUMN_DATA(index, ...) \
-            SR_GRAPH_GUI_NS::Immediate::TableSetColumnIndex(index); \
-            SR_GRAPH_GUI_NS::Immediate::Text(__VA_ARGS__); \
-            SR_GRAPH_GUI_NS::Immediate::Separator(); \
+                SR_GRAPH_GUI_NS::Immediate::TableSetColumnIndex(index); \
+                SR_GRAPH_GUI_NS::Immediate::Text(__VA_ARGS__); \
+                SR_GRAPH_GUI_NS::Immediate::Separator(); \
 
             if (SR_GRAPH_GUI_NS::Immediate::CollapsingHeader("Framebuffers")) {
                 if (SR_GRAPH_GUI_NS::Immediate::BeginTable("##FramebuffersTable", 7)) {
@@ -313,7 +313,7 @@ namespace SR_CORE_GUI_NS {
 
                         SR_GRAPH_GUI_NS::Immediate::Text("Technique: %s", pRenderTechnique->GetName().data());
 
-                        DrawRenderTechnique(const_cast<Graphics::IRenderTechnique *>(pRenderTechnique.Get()));
+                        DrawRenderTechnique(const_cast<Graphics::IRenderTechnique*>(pRenderTechnique.Get()));
 
                         SR_GRAPH_GUI_NS::Immediate::Separator();
                     }
@@ -326,12 +326,12 @@ namespace SR_CORE_GUI_NS {
             //    if (ImGui::BeginTable("##MaterialsTable", 1)) {
             //        for (auto&& pMaterial : materials) {
             //            ImGui::TableNextRow();
-//
+            //
             //            ImGui::TableSetColumnIndex(0);
             //            ImGui::Text("%s", pMaterial->GetResourceId().c_str());
             //            ImGui::Separator();
             //        }
-//
+            //
             //        ImGui::EndTable();
             //    }
             //}
@@ -379,7 +379,7 @@ namespace SR_CORE_GUI_NS {
                 if (SR_GRAPH_GUI_NS::Immediate::CollapsingHeader(SR_FORMAT_C("Queue {}", index))) {
                     DrawSubmitInfo(submitInfo);
                 }
-                ++index;
+         ++index;
             }
 
             if (SR_GRAPH_GUI_NS::Immediate::CollapsingHeader("Graphics queue")) {
@@ -389,35 +389,35 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::CollapsingHeader(SR_FORMAT_C("Render complete semaphore [{}]", (void*)pKernel->GetRenderCompleteSemaphore()));
 
             SR_GRAPH_GUI_NS::Immediate::EndTabItem();
-        }*/
+           }*/
     }
 
     void EngineStatistics::DrawSubmitInfo(const EvoVulkan::SubmitInfo& submitInfo) {
         /*SR_GRAPH_GUI_NS::Immediate::Separator();
 
-        uint32_t waitIndex = 0;
-        for (auto&& pSemaphore : submitInfo.waitSemaphores) {
+           uint32_t waitIndex = 0;
+           for (auto&& pSemaphore : submitInfo.waitSemaphores) {
             SR_GRAPH_GUI_NS::Immediate::Text("Wait semaphore %i [%p]", waitIndex, pSemaphore);
-            ++waitIndex;
-        }
+        ++waitIndex;
+           }
 
-        SR_GRAPH_GUI_NS::Immediate::Separator();
+           SR_GRAPH_GUI_NS::Immediate::Separator();
 
-        uint32_t cmdIndex = 0;
-        for (auto&& pCmd : submitInfo.commandBuffers) {
+           uint32_t cmdIndex = 0;
+           for (auto&& pCmd : submitInfo.commandBuffers) {
             SR_GRAPH_GUI_NS::Immediate::Text("Cmd buffer %i [%p]", cmdIndex, pCmd);
-            ++cmdIndex;
-        }
+        ++cmdIndex;
+           }
 
-        SR_GRAPH_GUI_NS::Immediate::Separator();
+           SR_GRAPH_GUI_NS::Immediate::Separator();
 
-        uint32_t signalIndex = 0;
-        for (auto&& pSemaphore : submitInfo.signalSemaphores) {
+           uint32_t signalIndex = 0;
+           for (auto&& pSemaphore : submitInfo.signalSemaphores) {
             SR_GRAPH_GUI_NS::Immediate::Text("Signal semaphore %i [%p]", signalIndex, pSemaphore);
-            ++signalIndex;
-        }
+        ++signalIndex;
+           }
 
-        SR_GRAPH_GUI_NS::Immediate::Separator();*/
+           SR_GRAPH_GUI_NS::Immediate::Separator();*/
     }
 
     void EngineStatistics::DrawRenderTechnique(SR_GRAPH_NS::IRenderTechnique* pRenderTechnique) {

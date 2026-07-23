@@ -8,11 +8,11 @@
 #include <Audio/SoundDevice.h>
 
 #ifdef SR_EMSCRIPTEN
-    struct ALCdevice_struct;
-    using SROpenALDeviceHandle = ALCdevice_struct*;
+struct ALCdevice_struct;
+using SROpenALDeviceHandle = ALCdevice_struct*;
 #else
-    struct ALCdevice;
-    using SROpenALDeviceHandle = ALCdevice*;
+struct ALCdevice;
+using SROpenALDeviceHandle = ALCdevice*;
 #endif
 
 namespace SR_AUDIO_NS {

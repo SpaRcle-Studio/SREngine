@@ -40,7 +40,7 @@ namespace SR_SCRIPTING_NS {
                 return nullptr;
             }
 
-            if constexpr (std::is_same_v<T, CppBehaviour>) {
+            if constexpr (std::is_same_v<T, CppBehaviour> ) {
                 return m_cppBehaviour->GetBehaviour().Get();
             }
             else {

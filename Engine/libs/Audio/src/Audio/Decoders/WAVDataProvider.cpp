@@ -8,70 +8,70 @@
 
 #pragma pack(push, 1)
     #if !defined(_MSC_VER)
-        #define PACKED_STRUCT(n) __attribute__((packed,aligned(n)))
+        #define PACKED_STRUCT(n) __attribute__((packed, aligned(n)))
     #else
         #define PACKED_STRUCT(n) __declspec(align(n))
     #endif
-    struct PACKED_STRUCT(1) sWAVHeader
-    {
+struct PACKED_STRUCT(1) sWAVHeader
+{
         // RIFF header
-        uint8_t  RIFF[4];
-        uint32_t FileSize;
-        uint8_t  WAVE[4];
-        uint8_t  FMT[4];
-        uint32_t SizeFmt;
+    uint8_t  RIFF[4];
+    uint32_t FileSize;
+    uint8_t  WAVE[4];
+    uint8_t  FMT[4];
+    uint32_t SizeFmt;
         // WAVEFORMATEX structure
-        uint16_t FormatTag;
-        uint16_t Channels;
-        uint32_t SampleRate;
-        uint32_t AvgBytesPerSec;
-        uint16_t nBlockAlign;
-        uint16_t nBitsperSample;
-        uint16_t cbSize;
-    };
+    uint16_t FormatTag;
+    uint16_t Channels;
+    uint32_t SampleRate;
+    uint32_t AvgBytesPerSec;
+    uint16_t nBlockAlign;
+    uint16_t nBitsperSample;
+    uint16_t cbSize;
+};
 
-    struct PACKED_STRUCT(1) CanonicalWAVHeader
-    {
+struct PACKED_STRUCT(1) CanonicalWAVHeader
+{
         // RIFF header
-        uint8_t  RIFF[4];           /// 1 - 4
-        uint32_t FileSize;          /// 5 - 8
-        uint8_t  WAVE[4];           /// 9 -12
-        uint8_t  FMT[4];            /// 13-16
-        uint32_t SizeFmt;           /// 17-20
+    uint8_t  RIFF[4];               /// 1 - 4
+    uint32_t FileSize;              /// 5 - 8
+    uint8_t  WAVE[4];               /// 9 -12
+    uint8_t  FMT[4];                /// 13-16
+    uint32_t SizeFmt;               /// 17-20
         // WAVEFORMATEX structure
-        uint16_t FormatTag;         /// 21-22
-        uint16_t Channels;          /// 23-24
-        uint32_t SampleRate;        /// 25-28
-        uint32_t AvgBytesPerSec;    /// 29-32
-        uint16_t nBlockAlign;       /// 33-34
-        uint16_t nBitsperSample;    /// 35-36
+    uint16_t FormatTag;             /// 21-22
+    uint16_t Channels;              /// 23-24
+    uint32_t SampleRate;            /// 25-28
+    uint32_t AvgBytesPerSec;        /// 29-32
+    uint16_t nBlockAlign;           /// 33-34
+    uint16_t nBitsperSample;        /// 35-36
         // data chunk header
-        uint8_t data[4];            /// 37-40
-        uint32_t DataSize;          /// 41-44
-    };
+    uint8_t data[4];                /// 37-40
+    uint32_t DataSize;              /// 41-44
+};
 
-    struct PACKED_STRUCT(1) sWAVChunkHeader
-    {
-        uint8_t  ID[4];	// "data"
-        uint32_t Size;
-    };
+struct PACKED_STRUCT(1) sWAVChunkHeader
+{
+    uint8_t  ID[4];     // "data"
+    uint32_t Size;
+};
 
-    struct PACKED_STRUCT(1) WAVJUNKHeader {
-        uint8_t FMT[40];
-    };
+struct PACKED_STRUCT(1) WAVJUNKHeader {
+    uint8_t FMT[40];
+};
 
 #pragma pack(pop)
 
 namespace SR_AUDIO_NS::Tools {
-    template <typename T> void ConvertClamp_IEEEToInt16( const T* Src, int16_t* Dst, size_t NumFloats )
+    template<typename T> void ConvertClamp_IEEEToInt16( const T* Src, int16_t* Dst, size_t NumFloats )
     {
         const T* End = Src + NumFloats;
 
-        while ( Src < End )
+        while (Src < End)
         {
             T f = *Src++;
-            int32_t v = int( f * 32167.0 );
-            *Dst++ = ( v > 32167 ) ? 32167 : ( v < -32167 ) ? -32167 : v;
+            int32_t v = int(f * 32167.0);
+            *Dst++ = (v > 32167) ? 32167 : (v < -32167) ? -32167 : v;
         }
     }
 
@@ -105,13 +105,13 @@ namespace SR_AUDIO_NS::Tools {
     struct sADPCMDecoderStatus_MS
     {
         sADPCMDecoderStatus_MS()
-                : m_Predictor( 0 )
-                , m_Sample1( 0 )
-                , m_Sample2( 0 )
-                , m_Coeff1( 0 )
-                , m_Coeff2( 0 )
-                , m_iDelta( 0 )
-        {}
+            : m_Predictor( 0 )
+            , m_Sample1( 0 )
+            , m_Sample2( 0 )
+            , m_Coeff1( 0 )
+            , m_Coeff2( 0 )
+            , m_iDelta( 0 )
+        { }
 
         int m_Predictor;
         int m_Sample1;
@@ -122,45 +122,45 @@ namespace SR_AUDIO_NS::Tools {
     };
 
     static const int AdaptationTable[] = {
-            230, 230, 230, 230, 307, 409, 512, 614,
-            768, 614, 512, 409, 307, 230, 230, 230
+        230, 230, 230, 230, 307, 409, 512, 614,
+        768, 614, 512, 409, 307, 230, 230, 230
     };
 
     static const int AdaptCoeff1[] = {
-            256, 512, 0, 192, 240, 460, 392
+        256, 512, 0, 192, 240, 460, 392
     };
 
     static const int AdaptCoeff2[] = {
-            0, -256, 0, 64, 0, -208, -232
+        0, -256, 0, 64, 0, -208, -232
     };
 
     int Clamp( int i, int a, int b )
     {
-        if ( i < a ) return a;
-        if ( i > b ) return b;
+        if (i < a) return a;
+        if (i > b) return b;
         return i;
     }
 
     static int16_t ConvertNibble_MSADPCM( sADPCMDecoderStatus_MS* Status, int Nibble )
     {
-        const int SignedNibble = Nibble - ( Nibble & 0x08 ? 0x10 : 0 );
+        const int SignedNibble = Nibble - (Nibble & 0x08 ? 0x10 : 0);
 
-        int Predictor = ( Status->m_Sample1 * Status->m_Coeff1 + Status->m_Sample2 * Status->m_Coeff2 ) / 256 + 	SignedNibble * Status->m_iDelta;
+        int Predictor = (Status->m_Sample1 * Status->m_Coeff1 + Status->m_Sample2 * Status->m_Coeff2) / 256 + SignedNibble * Status->m_iDelta;
         Predictor = Clamp( Predictor, -32768, 32767 );
 
         Status->m_Sample2 = Status->m_Sample1;
         Status->m_Sample1 = Predictor;
 
-        Status->m_iDelta = ( AdaptationTable[ Nibble ] * Status->m_iDelta ) / 256;
-        if ( Status->m_iDelta < 16 ) Status->m_iDelta = 16;
+        Status->m_iDelta = (AdaptationTable[ Nibble ] * Status->m_iDelta) / 256;
+        if (Status->m_iDelta < 16) Status->m_iDelta = 16;
 
         return static_cast<int16_t>(Predictor);
     }
 
 #define GetWord( w ) { \
-	w = Src[0] | Src[1] << 8; \
-	if ( w & 0x8000 ) w -= 0x010000; \
-	Src += 2; }
+            w = Src[0] | Src[1] << 8; \
+            if (w & 0x8000) w -= 0x010000; \
+            Src += 2; }
 
     int16_t* Decode_MSADPCM_Block( const uint8_t* Src, int16_t* Dst, size_t NumBytes, bool IsStereo )
     {
@@ -173,7 +173,7 @@ namespace SR_AUDIO_NS::Tools {
         const int PredictorL = Clamp( *Src++, 0, 6 );
         const int PredictorR = IsStereo ? Clamp( *Src++, 0, 6 ) : 0;
         GetWord( StatusLeft.m_iDelta );
-        if ( IsStereo ) GetWord( StatusRight.m_iDelta );
+        if (IsStereo) GetWord( StatusRight.m_iDelta );
         StatusLeft.m_Coeff1 = AdaptCoeff1[ PredictorL ];
         StatusLeft.m_Coeff2 = AdaptCoeff2[ PredictorL ];
         StatusRight.m_Coeff1 = AdaptCoeff1[ PredictorR ];
@@ -181,19 +181,19 @@ namespace SR_AUDIO_NS::Tools {
 
         // read initial samples
         GetWord( StatusLeft.m_Sample1 );
-        if ( IsStereo ) GetWord( StatusRight.m_Sample1 );
+        if (IsStereo) GetWord( StatusRight.m_Sample1 );
         GetWord( StatusLeft.m_Sample2 );
-        if ( IsStereo ) GetWord( StatusRight.m_Sample2 );
+        if (IsStereo) GetWord( StatusRight.m_Sample2 );
 
         // output initial samples
         *Dst++ = static_cast<int16_t>(StatusLeft.m_Sample1);
-        if ( IsStereo ) *Dst++ = static_cast<int16_t>(StatusRight.m_Sample1);
+        if (IsStereo) *Dst++ = static_cast<int16_t>(StatusRight.m_Sample1);
         *Dst++ = static_cast<int16_t>(StatusLeft.m_Sample2);
-        if ( IsStereo ) *Dst++ = static_cast<int16_t>(StatusRight.m_Sample2);
+        if (IsStereo) *Dst++ = static_cast<int16_t>(StatusRight.m_Sample2);
 
-        while ( Src < End )
+        while (Src < End)
         {
-            *Dst++ = ConvertNibble_MSADPCM( &StatusLeft, ( Src[0] >> 4 ) & 0x0F );
+            *Dst++ = ConvertNibble_MSADPCM( &StatusLeft, (Src[0] >> 4) & 0x0F );
             *Dst++ = ConvertNibble_MSADPCM( IsStereo ? &StatusRight : &StatusLeft, Src[0] & 0x0F );
             Src++;
         }
@@ -205,7 +205,7 @@ namespace SR_AUDIO_NS::Tools {
     {
         const size_t NumBlocks = NumBytes / BlockAlign;
 
-        for ( size_t i = 0; i != NumBlocks; i++ )
+        for (size_t i = 0; i != NumBlocks; i++)
         {
             Dst = Decode_MSADPCM_Block( Src, Dst, BlockAlign, IsStereo );
             Src += BlockAlign;
@@ -215,42 +215,42 @@ namespace SR_AUDIO_NS::Tools {
     struct sADPCMDecoderStatus_IMA
     {
         sADPCMDecoderStatus_IMA()
-                : m_Predictor( 0 )
-                , m_StepIndex( 0 )
-        {}
+            : m_Predictor( 0 )
+            , m_StepIndex( 0 )
+        { }
 
         int m_Predictor;
         int m_StepIndex;
     };
 
-// http://wiki.multimedia.cx/index.php?title=IMA_ADPCM
+    // http://wiki.multimedia.cx/index.php?title=IMA_ADPCM
     static int adpcm_index_table[16] =
-            {
-                    -1, -1, -1, -1, 2, 4, 6, 8,
-                    -1, -1, -1, -1, 2, 4, 6, 8
-            };
+    {
+        -1, -1, -1, -1, 2, 4, 6, 8,
+        -1, -1, -1, -1, 2, 4, 6, 8
+    };
 
-// http://wiki.multimedia.cx/index.php?title=IMA_ADPCM
+    // http://wiki.multimedia.cx/index.php?title=IMA_ADPCM
     int adpcm_step_table[89] =
-            {
-                    7, 8, 9, 10, 11, 12, 13, 14, 16, 17,
-                    19, 21, 23, 25, 28, 31, 34, 37, 41, 45,
-                    50, 55, 60, 66, 73, 80, 88, 97, 107, 118,
-                    130, 143, 157, 173, 190, 209, 230, 253, 279, 307,
-                    337, 371, 408, 449, 494, 544, 598, 658, 724, 796,
-                    876, 963, 1060, 1166, 1282, 1411, 1552, 1707, 1878, 2066,
-                    2272, 2499, 2749, 3024, 3327, 3660, 4026, 4428, 4871, 5358,
-                    5894, 6484, 7132, 7845, 8630, 9493, 10442, 11487, 12635, 13899,
-                    15289, 16818, 18500, 20350, 22385, 24623, 27086, 29794, 32767
-            };
+    {
+        7, 8, 9, 10, 11, 12, 13, 14, 16, 17,
+        19, 21, 23, 25, 28, 31, 34, 37, 41, 45,
+        50, 55, 60, 66, 73, 80, 88, 97, 107, 118,
+        130, 143, 157, 173, 190, 209, 230, 253, 279, 307,
+        337, 371, 408, 449, 494, 544, 598, 658, 724, 796,
+        876, 963, 1060, 1166, 1282, 1411, 1552, 1707, 1878, 2066,
+        2272, 2499, 2749, 3024, 3327, 3660, 4026, 4428, 4871, 5358,
+        5894, 6484, 7132, 7845, 8630, 9493, 10442, 11487, 12635, 13899,
+        15289, 16818, 18500, 20350, 22385, 24623, 27086, 29794, 32767
+    };
 
     uint16_t ConvertNibble_IMAADPCM( sADPCMDecoderStatus_IMA* Status, int Nibble )
     {
         int Diff = adpcm_step_table[ Status->m_StepIndex ] >> 3;
-        if ( Nibble & 0x04 ) Diff += adpcm_step_table[ Status->m_StepIndex ];
-        if ( Nibble & 0x02 ) Diff += adpcm_step_table[ Status->m_StepIndex ] >> 1;
-        if ( Nibble & 0x01 ) Diff += adpcm_step_table[ Status->m_StepIndex ] >> 2;
-        if ( Nibble & 0x08 ) Status->m_Predictor -= Diff; else Status->m_Predictor += Diff;
+        if (Nibble & 0x04) Diff += adpcm_step_table[ Status->m_StepIndex ];
+        if (Nibble & 0x02) Diff += adpcm_step_table[ Status->m_StepIndex ] >> 1;
+        if (Nibble & 0x01) Diff += adpcm_step_table[ Status->m_StepIndex ] >> 2;
+        if (Nibble & 0x08) Status->m_Predictor -= Diff; else Status->m_Predictor += Diff;
         Status->m_Predictor = Clamp( Status->m_Predictor, -32768, 32767 );
         Status->m_StepIndex = Clamp( Status->m_StepIndex + adpcm_index_table[Nibble], 0, 88 );
 
@@ -267,25 +267,25 @@ namespace SR_AUDIO_NS::Tools {
         GetWord( StatusLeft.m_Predictor );
         StatusLeft.m_StepIndex = Clamp( *Src++, 0, 88 );
         Src++; // skip 1 byte
-        if ( IsStereo )
+        if (IsStereo)
         {
             GetWord( StatusRight.m_Predictor );
             StatusRight.m_StepIndex = Clamp( *Src++, 0, 88 );
             Src++; // skip 1 byte
         }
 
-        if ( IsStereo )
+        if (IsStereo)
         {
-            while ( Src < End )
+            while (Src < End)
             {
-                for ( int i = 0; i < 4; i++ )
+                for (int i = 0; i < 4; i++)
                 {
                     Dst[i * 4 + 0] = ConvertNibble_IMAADPCM( &StatusLeft, Src[i] & 0x0f );
                     Dst[i * 4 + 2] = ConvertNibble_IMAADPCM( &StatusLeft, Src[i] >> 4 );
                 }
                 Src += 4;
 
-                for ( int i = 0; i < 4; i++ )
+                for (int i = 0; i < 4; i++)
                 {
                     Dst[i * 4 + 1] = ConvertNibble_IMAADPCM( &StatusRight, Src[i] & 0x0f );
                     Dst[i * 4 + 3] = ConvertNibble_IMAADPCM( &StatusRight, Src[i] >> 4 );
@@ -296,7 +296,7 @@ namespace SR_AUDIO_NS::Tools {
         }
         else
         {
-            while ( Src < End )
+            while (Src < End)
             {
                 *Dst++ = ConvertNibble_IMAADPCM( &StatusLeft, *Src & 0x0f );
                 *Dst++ = ConvertNibble_IMAADPCM( &StatusLeft, *Src >> 4 );
@@ -311,7 +311,7 @@ namespace SR_AUDIO_NS::Tools {
     {
         const size_t NumBlocks = NumBytes / BlockAlign;
 
-        for ( size_t i = 0; i != NumBlocks; i++ )
+        for (size_t i = 0; i != NumBlocks; i++)
         {
             Dst = Decode_IMAADPCM_Block( Src, Dst, BlockAlign, IsStereo );
             Src += BlockAlign;
@@ -322,14 +322,14 @@ namespace SR_AUDIO_NS::Tools {
     {
         uint8_t Sign = 0;
         N = ~N;
-        if ( N & 0x80 )
+        if (N & 0x80)
         {
-            N &= ~( 1 << 7 );
+            N &= ~(1 << 7);
             Sign = static_cast<uint8_t>(-1);
         }
         const uint16_t Shift = 33;
-        uint8_t Position = ( ( N & 0xF0 ) >> 4 ) + 5;
-        int16_t Decoded = ( ( 1 << Position ) | ( ( N & 0x0F ) << ( Position - 4 ) ) | ( 1 << ( Position - 5 ) ) ) - Shift;
+        uint8_t Position = ((N & 0xF0) >> 4) + 5;
+        int16_t Decoded = ((1 << Position) | ((N & 0x0F) << (Position - 4)) | (1 << (Position - 5))) - Shift;
         return Sign ? -Decoded : Decoded;
     }
 
@@ -337,7 +337,7 @@ namespace SR_AUDIO_NS::Tools {
     {
         const uint8_t* End = Src + NumBytes;
 
-        while ( Src < End )
+        while (Src < End)
         {
             *Dst++ = MuLaw_Decode( *Src++ );
         }
@@ -347,15 +347,15 @@ namespace SR_AUDIO_NS::Tools {
     {
         uint8_t Sign = 0;
         N ^= 0x55;
-        if ( N & 0x80 )
+        if (N & 0x80)
         {
-            N &= ~( 1 << 7 );
+            N &= ~(1 << 7);
             Sign = -1;
         }
-        uint8_t Position = ( ( N & 0xF0 ) >> 4 ) + 4;
-        int16_t Decoded = 	( Position != 4 ) ?
-                             ( ( 1 << Position ) | ( ( N & 0x0F ) << ( Position - 4 ) ) | ( 1 << ( Position - 5 ) ) ) :
-                             ( N << 1 ) | 1;
+        uint8_t Position = ((N & 0xF0) >> 4) + 4;
+        int16_t Decoded = (Position != 4) ?
+                          ((1 << Position) | ((N & 0x0F) << (Position - 4)) | (1 << (Position - 5))) :
+                          (N << 1) | 1;
 
         return !Sign ? -Decoded : Decoded;
     }
@@ -364,7 +364,7 @@ namespace SR_AUDIO_NS::Tools {
     {
         const uint8_t* End = Src + NumBytes;
 
-        while ( Src < End )
+        while (Src < End)
         {
             *Dst++ = ALaw_Decode( *Src++ );
         }
@@ -373,9 +373,9 @@ namespace SR_AUDIO_NS::Tools {
 
 namespace SR_AUDIO_NS {
     WAVDataProvider::WAVDataProvider(const RawSoundDataPtr& data)
-            : m_data(data)
-            , m_dataSize(data ? data->size() : 0)
-            , m_format()
+        : m_data(data)
+        , m_dataSize(data ? data->size() : 0)
+        , m_format()
     {
         if (data && data->size() > sizeof(sWAVHeader))
         {
@@ -392,17 +392,17 @@ namespace SR_AUDIO_NS {
 
             const uint16_t FORMAT_UNKNOWN = 0x000;
             const uint16_t WAVE_FORMAT_OLIGSM = 0x1000;
-            const uint16_t FORMAT_PCM   = 0x0001;
+            const uint16_t FORMAT_PCM = 0x0001;
             const uint16_t FORMAT_FLOAT = 0x0003;
-            const uint16_t FORMAT_EXT   = 0xFFFE;
-            const uint16_t FORMAT_ADPCM_MS  = 0x0002;
+            const uint16_t FORMAT_EXT = 0xFFFE;
+            const uint16_t FORMAT_ADPCM_MS = 0x0002;
             const uint16_t FORMAT_ADPCM_IMA = 0x0011;
-            const uint16_t FORMAT_ALAW  = 0x0006;
+            const uint16_t FORMAT_ALAW = 0x0006;
             const uint16_t FORMAT_MULAW = 0x0007;
 
-            const bool IsUnknown   = Header->FormatTag == FORMAT_UNKNOWN;
-            const bool IsOLIGSM   = Header->FormatTag == WAVE_FORMAT_OLIGSM;
-            const bool IsPCM   = Header->FormatTag == FORMAT_PCM;
+            const bool IsUnknown = Header->FormatTag == FORMAT_UNKNOWN;
+            const bool IsOLIGSM = Header->FormatTag == WAVE_FORMAT_OLIGSM;
+            const bool IsPCM = Header->FormatTag == FORMAT_PCM;
             const bool IsExtFormat = Header->FormatTag == FORMAT_EXT;
             bool IsFloat = Header->FormatTag == FORMAT_FLOAT;
             const bool IsADPCM_MS = Header->FormatTag == FORMAT_ADPCM_MS;
@@ -422,23 +422,23 @@ namespace SR_AUDIO_NS {
 
             if (IsRIFF && IsWAVE && IsSupportedCodec)
             {
-                m_format.m_numChannels      = Header->Channels;
+                m_format.m_numChannels = Header->Channels;
                 m_format.m_samplesPerSecond = Header->SampleRate;
-                m_format.m_bitsPerSample    = Header->nBitsperSample;
+                m_format.m_bitsPerSample = Header->nBitsperSample;
 
                 const size_t HeaderSize = sizeof(sWAVHeader);
                 const size_t ExtraParamSize = IsPCM ? 0 : Header->cbSize;
                 const size_t ChunkHeaderSize = sizeof(sWAVChunkHeader);
 
-                if ( IsExtFormat )
+                if (IsExtFormat)
                 {
                     // http://www-mmsp.ece.mcgill.ca/documents/audioformats/wave/wave.html
                     const uint16_t SubFormatTag = *reinterpret_cast<const uint16_t*>(data.get()->data() + HeaderSize + 6);
 
-                    if ( SubFormatTag == FORMAT_PCM ) IsFloat = false;
-                    if ( SubFormatTag == FORMAT_FLOAT ) IsFloat = true;
-                    if ( SubFormatTag == FORMAT_ALAW ) IsALaw = true;
-                    if ( SubFormatTag == FORMAT_MULAW ) IsMuLaw = true;
+                    if (SubFormatTag == FORMAT_PCM) IsFloat = false;
+                    if (SubFormatTag == FORMAT_FLOAT) IsFloat = true;
+                    if (SubFormatTag == FORMAT_ALAW) IsALaw = true;
+                    if (SubFormatTag == FORMAT_MULAW) IsMuLaw = true;
                 }
 
                 size_t Offset = HeaderSize + ExtraParamSize;
@@ -450,7 +450,7 @@ namespace SR_AUDIO_NS {
                 {
                     // http://soundfile.sapp.org/doc/WaveFormat/
                     const int Subchunk1Size = 16;
-                    Offset += int( Header->SizeFmt ) - Subchunk1Size - sizeof( Header->cbSize );
+                    Offset += int(Header->SizeFmt) - Subchunk1Size - sizeof(Header->cbSize);
                 }
 
                 const sWAVChunkHeader* ChunkHeader = nullptr;
@@ -459,20 +459,20 @@ namespace SR_AUDIO_NS {
                 {
                     const sWAVChunkHeader* LocalChunkHeader = reinterpret_cast<const sWAVChunkHeader*>(data.get()->data() + Offset);
 
-                    if ( memcmp( LocalChunkHeader->ID, "data", 4 ) == 0 )
+                    if (memcmp( LocalChunkHeader->ID, "data", 4 ) == 0)
                     {
                         ChunkHeader = LocalChunkHeader;
                         break;
                     }
                     else if (
-                            memcmp( LocalChunkHeader->ID, "fact", 4 ) == 0 ||
-                            memcmp( LocalChunkHeader->ID, "LIST", 4 ) == 0 ||
-                            memcmp( LocalChunkHeader->ID, "PAD ", 4 ) == 0 ||
-                            memcmp( LocalChunkHeader->ID, "JUNK", 4 ) == 0 ||
-                            memcmp( LocalChunkHeader->ID, "junk", 4 ) == 0 ||
-                            memcmp( LocalChunkHeader->ID, "INFO", 4 ) == 0 ||
-                            memcmp( LocalChunkHeader->ID, "CSET", 4 ) == 0
-                            )
+                        memcmp( LocalChunkHeader->ID, "fact", 4 ) == 0 ||
+                        memcmp( LocalChunkHeader->ID, "LIST", 4 ) == 0 ||
+                        memcmp( LocalChunkHeader->ID, "PAD ", 4 ) == 0 ||
+                        memcmp( LocalChunkHeader->ID, "JUNK", 4 ) == 0 ||
+                        memcmp( LocalChunkHeader->ID, "junk", 4 ) == 0 ||
+                        memcmp( LocalChunkHeader->ID, "INFO", 4 ) == 0 ||
+                        memcmp( LocalChunkHeader->ID, "CSET", 4 ) == 0
+                    )
                     {
                         Offset += ChunkHeaderSize;
                         Offset += LocalChunkHeader->Size;
@@ -496,68 +496,68 @@ namespace SR_AUDIO_NS {
                     return;
                 }
 
-                if ( IsALaw )
+                if (IsALaw)
                 {
                     RawSoundData NewData;
-                    NewData.resize( m_dataSize * 2 + sizeof(sWAVHeader) );
-                    int16_t* Dst = reinterpret_cast< int16_t* >( NewData.data() + sizeof(sWAVHeader) );
-                    const uint8_t* Src = reinterpret_cast< const uint8_t* >( m_data.get()->data() + Offset + ChunkHeaderSize );
+                    NewData.resize( m_dataSize * 2 + sizeof(sWAVHeader));
+                    int16_t* Dst = reinterpret_cast<int16_t*>(NewData.data() + sizeof(sWAVHeader));
+                    const uint8_t* Src = reinterpret_cast<const uint8_t*>(m_data.get()->data() + Offset + ChunkHeaderSize);
                     Tools::ConvertClamp_ALawToInt16( Src, Dst, m_dataSize );
                     m_data = std::make_shared<RawSoundData>(NewData);
                     m_format.m_bitsPerSample = 16;
                     m_dataSize = m_dataSize * 2;
                 }
-                else if ( IsMuLaw )
+                else if (IsMuLaw)
                 {
                     RawSoundData NewData;
-                    NewData.resize( m_dataSize * 2 + sizeof(sWAVHeader) );
-                    int16_t* Dst = reinterpret_cast< int16_t* >( NewData.data() + sizeof(sWAVHeader) );
-                    const uint8_t* Src = reinterpret_cast< const uint8_t* >( m_data.get()->data() + Offset + ChunkHeaderSize );
+                    NewData.resize( m_dataSize * 2 + sizeof(sWAVHeader));
+                    int16_t* Dst = reinterpret_cast<int16_t*>(NewData.data() + sizeof(sWAVHeader));
+                    const uint8_t* Src = reinterpret_cast<const uint8_t*>(m_data.get()->data() + Offset + ChunkHeaderSize);
                     Tools::ConvertClamp_MuLawToInt16( Src, Dst, m_dataSize );
                     m_data = std::make_shared<RawSoundData>(NewData);
                     m_format.m_bitsPerSample = 16;
                     m_dataSize = m_dataSize * 2;
                 }
-                else if ( IsADPCM_MS )
+                else if (IsADPCM_MS)
                 {
                     RawSoundData NewData;
-                    NewData.resize( m_dataSize * 4 + sizeof(sWAVHeader) );
-                    int16_t* Dst = reinterpret_cast<int16_t*>( NewData.data() + sizeof(sWAVHeader) );
-                    const uint8_t* Src = reinterpret_cast<const uint8_t*>( m_data.get( ) + Offset + ChunkHeaderSize );
+                    NewData.resize( m_dataSize * 4 + sizeof(sWAVHeader));
+                    int16_t* Dst = reinterpret_cast<int16_t*>(NewData.data() + sizeof(sWAVHeader));
+                    const uint8_t* Src = reinterpret_cast<const uint8_t*>(m_data.get( ) + Offset + ChunkHeaderSize);
                     Tools::ConvertClamp_MSADPCMToInt16( Src, Dst, m_dataSize, Header->nBlockAlign, Header->Channels == 2 );
                     m_data = std::make_shared<RawSoundData>( NewData );
                     m_format.m_bitsPerSample = 16;
                     m_dataSize = m_dataSize * 4;
                 }
-                else if ( IsADPCM_IMA )
+                else if (IsADPCM_IMA)
                 {
                     RawSoundData NewData;
-                    NewData.resize( m_dataSize * 4 + sizeof(sWAVHeader) );
-                    int16_t* Dst = reinterpret_cast< int16_t* >( NewData.data() + sizeof(sWAVHeader) );
-                    const uint8_t* Src = reinterpret_cast< const uint8_t* >( m_data.get()->data() + Offset + ChunkHeaderSize );
+                    NewData.resize( m_dataSize * 4 + sizeof(sWAVHeader));
+                    int16_t* Dst = reinterpret_cast<int16_t*>(NewData.data() + sizeof(sWAVHeader));
+                    const uint8_t* Src = reinterpret_cast<const uint8_t*>(m_data.get()->data() + Offset + ChunkHeaderSize);
                     Tools::ConvertClamp_IMAADPCMToInt16( Src, Dst, m_dataSize, Header->nBlockAlign, Header->Channels == 2 );
                     m_data = std::make_shared<RawSoundData>( NewData );
                     m_format.m_bitsPerSample = 16;
                     m_dataSize = m_dataSize * 4;
                 }
-                else if ( IsFloat )
+                else if (IsFloat)
                 {
                     // replace the blob and convert data to 16-bit
                     RawSoundData NewData;
-                    NewData.resize( m_data->size() );
-                    int16_t* Dst = reinterpret_cast<int16_t*>( NewData.data() + sizeof(sWAVHeader) );
+                    NewData.resize( m_data->size());
+                    int16_t* Dst = reinterpret_cast<int16_t*>(NewData.data() + sizeof(sWAVHeader));
 
-                    if ( Header->nBitsperSample == 32 )
+                    if (Header->nBitsperSample == 32)
                     {
-                        const float* Src = reinterpret_cast<const float*>( m_data.get()->data() + Offset + ChunkHeaderSize );
+                        const float* Src = reinterpret_cast<const float*>(m_data.get()->data() + Offset + ChunkHeaderSize);
                         Tools::ConvertClamp_IEEEToInt16<float>( Src, Dst, m_dataSize / 4 );
-                        m_dataSize = m_dataSize/2;
+                        m_dataSize = m_dataSize / 2;
                     }
-                    else if ( Header->nBitsperSample == 64 )
+                    else if (Header->nBitsperSample == 64)
                     {
-                        const double* Src = reinterpret_cast<const double*>( m_data.get()->data() + Offset + ChunkHeaderSize );
+                        const double* Src = reinterpret_cast<const double*>(m_data.get()->data() + Offset + ChunkHeaderSize);
                         Tools::ConvertClamp_IEEEToInt16<double>( Src, Dst, m_dataSize / 8 );
-                        m_dataSize = m_dataSize/4;
+                        m_dataSize = m_dataSize / 4;
                     }
                     else
                     {
@@ -568,7 +568,7 @@ namespace SR_AUDIO_NS {
                     m_data = std::make_shared<RawSoundData>( NewData );
                     m_format.m_bitsPerSample = 16;
                 }
-                else if ( Header->nBitsperSample == 24 )
+                else if (Header->nBitsperSample == 24)
                 {
                     // replace the blob and convert data to 16-bit
                     RawSoundData NewData;
@@ -582,7 +582,7 @@ namespace SR_AUDIO_NS {
                     m_data = std::make_shared<RawSoundData>(NewData);
                     m_format.m_bitsPerSample = 16;
                 }
-                else if ( Header->nBitsperSample == 32 )
+                else if (Header->nBitsperSample == 32)
                 {
                     // replace the blob and convert data to 16-bit
                     RawSoundData NewData;
@@ -624,10 +624,10 @@ namespace SR_AUDIO_NS {
         const bool IsJUNK = memcmp(&Header->FMT, "JUNK", 4) == 0;
 
         if (IsJUNK) {
-            return reinterpret_cast<const uint8_t *>(m_data ? m_data.get()->data() + 80 : nullptr);
+            return reinterpret_cast<const uint8_t*>(m_data ? m_data.get()->data() + 80 : nullptr);
         }
         else {
-            return reinterpret_cast<const uint8_t *>(m_data ? m_data.get()->data() + 44 /** standard wav header size */: nullptr);
+            return reinterpret_cast<const uint8_t*>(m_data ? m_data.get()->data() + 44 /** standard wav header size */ : nullptr);
         }
     }
 
@@ -645,7 +645,7 @@ namespace SR_AUDIO_NS {
         // TODO:
     }
 
-    RawSoundDataPtr TryMP3InsideWAV(const RawSoundDataPtr &data) {
+    RawSoundDataPtr TryMP3InsideWAV(const RawSoundDataPtr& data) {
         if (!data || data->size() < sizeof(sWAVHeader))
             return RawSoundDataPtr();
 
@@ -653,7 +653,7 @@ namespace SR_AUDIO_NS {
 
         const uint16_t FORMAT_MP3 = 0x0055;
 
-        const bool IsMP3  = Header->FormatTag == FORMAT_MP3;
+        const bool IsMP3 = Header->FormatTag == FORMAT_MP3;
         const bool IsRIFF = memcmp(&Header->RIFF, "RIFF", 4) == 0;
         const bool IsWAVE = memcmp(&Header->WAVE, "WAVE", 4) == 0;
 

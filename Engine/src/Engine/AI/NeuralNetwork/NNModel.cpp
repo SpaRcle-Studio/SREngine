@@ -91,7 +91,6 @@ namespace SR_CORE_NS::AI {
             FeedLetter(net, c, activePath, assocActivation, inputNeurons);
         }
 
-
         void FeedText(Network& net, const std::string& text, const std::vector<int>& inputNeurons) {
             std::string output;
             std::vector<int> activePath; // нейроны для reward/punish

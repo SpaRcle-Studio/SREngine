@@ -43,7 +43,7 @@ namespace SR_PTYPES_NS {
             physicsScene->Remove(this);
         }
         else {
-           GetThis().AutoFree();
+            GetThis().AutoFree();
         }
     }
 
@@ -244,13 +244,13 @@ namespace SR_PTYPES_NS {
             }
 
             switch (GetMeasurement()) {
-            case SR_UTILS_NS::Measurement::Space2D:
+                case SR_UTILS_NS::Measurement::Space2D:
                 m_impl = m_library->CreateRigidbody2DImpl();
                 break;
-            case SR_UTILS_NS::Measurement::Space3D:
+                case SR_UTILS_NS::Measurement::Space3D:
                 m_impl = m_library->CreateRigidbody3DImpl();
                 break;
-            default:
+                default:
                 SR_ERROR("Rigidbody::InitBody() : unknown space type!");
                 return false;
             }

@@ -25,9 +25,9 @@ namespace SR_AUDIO_NS {
 
     bool OpenALSoundListener::Init() {
         /*SetDistanceModel(ListenerDistanceModel::InverseClamped);
-        SetRolloffFactor(1.0f);
-        SetReferenceDistance(1.0f);
-        SetMaxDistance(SR_FLOAT_MAX);*/
+           SetRolloffFactor(1.0f);
+           SetReferenceDistance(1.0f);
+           SetMaxDistance(SR_FLOAT_MAX);*/
 
         return true;
     }

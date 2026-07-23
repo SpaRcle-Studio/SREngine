@@ -167,7 +167,7 @@ namespace SR_CORE_GUI_NS {
 
         auto&& pLogic = m_scene ? m_scene->GetLogicBase() : SR_WORLD_NS::SceneLogic::Ptr();
 
-        /// если сцена сломана, или это "пустышка", то не создаем камеру, т.к. рендерить нет смыла 
+        /// если сцена сломана, или это "пустышка", то не создаем камеру, т.к. рендерить нет смыла
         if (!pLogic || !m_enabled) {
             SetCameraEnabled(false);
             SetGizmoEnabled(false);
@@ -223,7 +223,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         const bool isNeedLock = SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseRight) ||
-            SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseMiddle);
+                                SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseMiddle);
 
         if (isNeedLock && !isDisabled && !attachToCamera) {
             m_cursorLock = SR_UTILS_NS::CursorLock(SR_UTILS_NS::CursorLockMode::Editor, viewportRect);
@@ -338,10 +338,9 @@ namespace SR_CORE_GUI_NS {
         Super::OnKeyPress(data);
     }
 
-    void SceneViewer::OnMouseDown(const SR_UTILS_NS::MouseInputData* data) {
-    }
+    void SceneViewer::OnMouseDown(const SR_UTILS_NS::MouseInputData* data) { }
 
-    void SceneViewer::OnMouseUp(const SR_UTILS_NS::MouseInputData *data) {
+    void SceneViewer::OnMouseUp(const SR_UTILS_NS::MouseInputData* data) {
         if (!SR_UTILS_NS::Features::Instance().Enabled("ColorBufferPick", false)) {
             Super::OnMouseUp(data);
             return;

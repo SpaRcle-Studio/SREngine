@@ -47,19 +47,19 @@ namespace SR_CORE_NS::Tests {
         std::atomic<bool> isStateReady = false;
 
         std::thread thread([this, &pState, &pLauncher, &isStateReady]() {
-            auto&& callback = [this, &pState, &pLauncher, &isStateReady](SR_CORE_NS::Launcher::Ptr& pLauncherArg) {
-                SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : launcher initialized successfully.");
-                pState = GetDelayedActionState(pLauncherArg.Get()).Get();
-                pLauncher = pLauncherArg.Get();
-                isStateReady = true;
-            };
+                           auto&& callback = [this, &pState, &pLauncher, &isStateReady](SR_CORE_NS::Launcher::Ptr& pLauncherArg) {
+                                             SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : launcher initialized successfully.");
+                                             pState = GetDelayedActionState(pLauncherArg.Get()).Get();
+                                             pLauncher = pLauncherArg.Get();
+                                             isStateReady = true;
+                };
 
-            const int code = LauncherEntryPoint(callback);
-            if (code != 0) {
-                SR_ERROR("EngineRuntimeSmokeTest::Run() : launcherEntryPoint in thread returned non-zero code: {}", code);
-                m_hasErrors = true;
-            }
-        });
+                           const int code = LauncherEntryPoint(callback);
+                           if (code != 0) {
+                               SR_ERROR("EngineRuntimeSmokeTest::Run() : launcherEntryPoint in thread returned non-zero code: {}", code);
+                               m_hasErrors = true;
+                           }
+            });
 
         while (!isStateReady) {
             SR_PLATFORM_NS::Sleep(100);

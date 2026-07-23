@@ -63,19 +63,19 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth);
 
         auto&& isEnumNameAvailable = [&](SR_UTILS_NS::StringAtom name) -> bool {
-            if (context.isEnumValueAvailableCheckFn && !context.isEnumValueAvailableCheckFn(name)) {
-                return false;
-            }
+                                         if (context.isEnumValueAvailableCheckFn && !context.isEnumValueAvailableCheckFn(name)) {
+                                             return false;
+                                         }
 
-            if (context.pOwner) {
-                auto&& pEnumFilter = context.GetEditorParams().GetEnumFilter();
-                if (pEnumFilter && !(*pEnumFilter)(context.pOwner, name)) {
-                    return false;
-                }
-            }
+                                         if (context.pOwner) {
+                                             auto&& pEnumFilter = context.GetEditorParams().GetEnumFilter();
+                                             if (pEnumFilter && !(*pEnumFilter)(context.pOwner, name)) {
+                                                 return false;
+                                             }
+                                         }
 
-            return true;
-        };
+                                         return true;
+                                     };
 
         const char* pPrevValue = selectedIndex ? names[selectedIndex.value()].c_str() : "";
         if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("##Combo", pPrevValue, SR_GRAPH_GUI_NS::Immediate::ComboFlags::NoArrowButton)) {

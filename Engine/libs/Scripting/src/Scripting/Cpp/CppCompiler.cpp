@@ -242,30 +242,30 @@ namespace SR_SCRIPTING_NS {
 
         switch (platform) {
             case SR_UTILS_NS::PlatformType::Windows:
-                outModulePath += context.isShared ? ".dll" : ".lib";
+            outModulePath += context.isShared ? ".dll" : ".lib";
 
-                if (m_settings.compilerType == CppCompilerType::MSVC) {
-                    customArgs += "/DWIN32 ";
-                    if (context.isShared) {
-                        customArgs += context.isDebug ? "/LDd " : "/LD ";
-                    }
-                    else {
-                        customArgs += context.isDebug ? "/MTd " : "/LD ";
-                    }
+            if (m_settings.compilerType == CppCompilerType::MSVC) {
+                customArgs += "/DWIN32 ";
+                if (context.isShared) {
+                    customArgs += context.isDebug ? "/LDd " : "/LD ";
                 }
                 else {
-                    customArgs += "-DWIN32 ";
-                    customArgs += "-shared ";
+                    customArgs += context.isDebug ? "/MTd " : "/LD ";
                 }
-                break;
+            }
+            else {
+                customArgs += "-DWIN32 ";
+                customArgs += "-shared ";
+            }
+            break;
             case SR_UTILS_NS::PlatformType::Linux:
             case SR_UTILS_NS::PlatformType::Android:
-                outModulePath += context.isShared ? ".so" : ".a";
-                customArgs += context.isShared ? "-shared -fPIC " : "";
-                break;
+            outModulePath += context.isShared ? ".so" : ".a";
+            customArgs += context.isShared ? "-shared -fPIC " : "";
+            break;
             default:
-                SRHalt("CppCompiler::Compile() : unknown platform!");
-                return false;
+            SRHalt("CppCompiler::Compile() : unknown platform!");
+            return false;
         }
 
         if (context.isDebug) {
@@ -296,10 +296,10 @@ namespace SR_SCRIPTING_NS {
 
         std::string sourceFiles;
         if (m_settings.compilerType == CppCompilerType::GCC) {
-            sourceFiles = m_cachePath.Concat("Scripts/Codegen/{}.cxx"_format(context.moduleName)).ToString() + " ";
+            sourceFiles = m_cachePath.Concat("Scripts/Codegen/{}.cxx"_format (context.moduleName)).ToString() + " ";
         }
         else {
-            sourceFiles = "\"" + m_cachePath.Concat("Scripts/Codegen/{}.cxx"_format(context.moduleName)).ToString() + "\" ";
+            sourceFiles = "\"" + m_cachePath.Concat("Scripts/Codegen/{}.cxx"_format (context.moduleName)).ToString() + "\" ";
         }
 
         /// MSVC gets a single command line and the OS strips quotes. Linux/Android use fork+exec with
@@ -310,7 +310,7 @@ namespace SR_SCRIPTING_NS {
                 includePaths += "-I" + includePath.ToStringRef() + " ";
             }
             else {
-                includePaths += "-I\"{}\" "_format(includePath);
+                includePaths += "-I\"{}\" "_format (includePath);
             }
         }
 
@@ -339,25 +339,25 @@ namespace SR_SCRIPTING_NS {
 
             std::string msvcLibs = m_settings.compilerPath.GetPrevious().GetPrevious().GetPrevious().GetPrevious().Concat("lib/x64").ToString();
 
-            sourceFiles += " \"{}/OLDNAMES.lib\" "_format(msvcLibs);
-            sourceFiles += " \"{}/kernel32.lib\" "_format(windowsKitsUmLibs);
-            sourceFiles += " \"{}/uuid.lib\" "_format(windowsKitsUmLibs);
+            sourceFiles += " \"{}/OLDNAMES.lib\" "_format (msvcLibs);
+            sourceFiles += " \"{}/kernel32.lib\" "_format (windowsKitsUmLibs);
+            sourceFiles += " \"{}/uuid.lib\" "_format (windowsKitsUmLibs);
 
             if (context.isDebug) {
-                sourceFiles += " \"{}/libconcrtd.lib\" "_format(msvcLibs);
-                sourceFiles += " \"{}/libcpmtd.lib\" "_format(msvcLibs);
-                sourceFiles += " \"{}/LIBCMTD.lib\" "_format(msvcLibs);
-                sourceFiles += " \"{}/libvcruntimed.lib\" "_format(msvcLibs);
+                sourceFiles += " \"{}/libconcrtd.lib\" "_format (msvcLibs);
+                sourceFiles += " \"{}/libcpmtd.lib\" "_format (msvcLibs);
+                sourceFiles += " \"{}/LIBCMTD.lib\" "_format (msvcLibs);
+                sourceFiles += " \"{}/libvcruntimed.lib\" "_format (msvcLibs);
 
-                sourceFiles += " \"{}/libucrtd.lib\" "_format(windowsKitsUcrtLibs);
+                sourceFiles += " \"{}/libucrtd.lib\" "_format (windowsKitsUcrtLibs);
             }
             else {
-                sourceFiles += " \"{}/libconcrt.lib\" "_format(msvcLibs);
-                sourceFiles += " \"{}/libcpmt.lib\" "_format(msvcLibs);
-                sourceFiles += " \"{}/LIBCMT.lib\" "_format(msvcLibs);
-                sourceFiles += " \"{}/libvcruntime.lib\" "_format(msvcLibs);
+                sourceFiles += " \"{}/libconcrt.lib\" "_format (msvcLibs);
+                sourceFiles += " \"{}/libcpmt.lib\" "_format (msvcLibs);
+                sourceFiles += " \"{}/LIBCMT.lib\" "_format (msvcLibs);
+                sourceFiles += " \"{}/libvcruntime.lib\" "_format (msvcLibs);
 
-                sourceFiles += " \"{}/libucrt.lib\" "_format(windowsKitsUcrtLibs);
+                sourceFiles += " \"{}/libucrt.lib\" "_format (windowsKitsUcrtLibs);
             }
         }
         else {
@@ -369,11 +369,11 @@ namespace SR_SCRIPTING_NS {
                 outArgs += " " + lib.ToString() + " ";
             }
             else {
-                outArgs += " \"{}\" "_format(lib.ToString());
+                outArgs += " \"{}\" "_format (lib.ToString());
             }
         }
 
-        std::string command = "{} {} {} {} {}"_format(
+        std::string command = "{} {} {} {} {}"_format (
             m_settings.compilerPath, customArgs, outArgs, sourceFiles, includePaths
         );
 
@@ -392,9 +392,9 @@ namespace SR_SCRIPTING_NS {
 
         const std::string result = SR_PLATFORM_NS::ExecuteCommand(command);
         const bool hasErrors =
-                result.find("compilation terminated") != std::string::npos ||
-                result.find("fatal error") != std::string::npos ||
-                result.find("error") != std::string::npos;
+            result.find("compilation terminated") != std::string::npos ||
+            result.find("fatal error") != std::string::npos ||
+            result.find("error") != std::string::npos;
 
         const SR_UTILS_NS::TimePointType endTime = SR_HTYPES_NS::Time::Instance().Now();
         const auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
@@ -466,11 +466,11 @@ namespace SR_SCRIPTING_NS {
 
         for (auto&& libName : libs) {
         #ifdef SR_WIN32
-            auto&& pathDebug = libDir.Concat("{}d.lib"_format(libName));
-            auto&& pathRelease = libDir.Concat("{}.lib"_format(libName));
+            auto&& pathDebug = libDir.Concat("{}d.lib"_format (libName));
+            auto&& pathRelease = libDir.Concat("{}.lib"_format (libName));
         #else
-            auto&& pathDebug = libDir.Concat("lib{}d.a"_format(libName));
-            auto&& pathRelease = libDir.Concat("lib{}.a"_format(libName));
+            auto&& pathDebug = libDir.Concat("lib{}d.a"_format (libName));
+            auto&& pathRelease = libDir.Concat("lib{}.a"_format (libName));
         #endif
 
             if (SR_UTILS_NS::FileSystem::IsFileExists(pathRelease)) {
@@ -596,12 +596,12 @@ namespace SR_SCRIPTING_NS {
 
             if (buildInCompilerVersion != currentCompilerVersion) {
                 const std::string mismatchCompilerLogMessage = "CppCompiler::ValidateCompilerAndOS() : built-in compiler version is not equal to current compiler version! "
-                                                               "Undefined behaviour possible!\n\tBuilt-in: {}\n\tCurrent: {}"_format(buildInCompilerVersion, currentCompilerVersion);
+                                                               "Undefined behaviour possible!\n\tBuilt-in: {}\n\tCurrent: {}"_format (buildInCompilerVersion, currentCompilerVersion);
 
                 if (!m_settings.ignoreCompilerVersion) {
                     SR_WARN(mismatchCompilerLogMessage);
 
-                    const std::string message = "Do you want to continue? Continuing may cause undefined behaviour. Use on your own risk. Built-in version: {}, current version: {}"_format(
+                    const std::string message = "Do you want to continue? Continuing may cause undefined behaviour. Use on your own risk. Built-in version: {}, current version: {}"_format (
                         buildInCompilerVersion, currentCompilerVersion
                     );
 

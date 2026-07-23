@@ -5,7 +5,7 @@
 #include <EvoScript/Script.h>
 #include <EvoScript/Compilation/Compiler.h>
 
-bool EvoScript::Script::Load(const std::string &path, Compiler& compiler, bool compile) {
+bool EvoScript::Script::Load(const std::string& path, Compiler& compiler, bool compile) {
     /// ES_LOG("Script::Load() : loading script " + path);
 
     if (m_path = path; compile ? !compiler.Compile(this) : !compiler.Load(this)) {
@@ -66,7 +66,7 @@ bool EvoScript::Script::HookFunctions() {
     return true;
 }
 
-EvoScript::Script *EvoScript::Script::Allocate(const std::string &name, Compiler* pCompiler, MethodPointers methodPointers) {
+EvoScript::Script*EvoScript::Script::Allocate(const std::string& name, Compiler* pCompiler, MethodPointers methodPointers) {
     return new Script(name, pCompiler, std::move(methodPointers));
 }
 
@@ -90,8 +90,8 @@ bool EvoScript::Script::IsDirty() const {
     const std::string fullPath = path + "/source.hash";
 
     auto currHash = std::pair(isDebug, std::vector {
-            EvoScript::Tools::GetFileHash(source + ".cpp"),
-            EvoScript::Tools::GetFileHash(source + ".h")
+        EvoScript::Tools::GetFileHash(source + ".cpp"),
+        EvoScript::Tools::GetFileHash(source + ".h")
     });
 
     if (EvoScript::Tools::ESFileSystem::IsExists(fullPath)) {

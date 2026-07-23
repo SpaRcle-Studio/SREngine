@@ -17,15 +17,15 @@ namespace SR_AUDIO_NS {
 
         switch (pDevice->GetLibrary()) {
             case AudioLibrary::OpenAL:
-                return new OpenALSoundListener(pDevice);
+            return new OpenALSoundListener(pDevice);
             case AudioLibrary::FMOD:
             case AudioLibrary::Wwise:
             case AudioLibrary::Allegro:
             case AudioLibrary::SoLoud:
             case AudioLibrary::Unknown:
             default:
-                SR_ERROR("SoundContext::Allocate() : unsupported library!");
-                break;
+            SR_ERROR("SoundContext::Allocate() : unsupported library!");
+            break;
         }
 
         return nullptr;

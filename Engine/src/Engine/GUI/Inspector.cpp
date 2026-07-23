@@ -265,11 +265,11 @@ namespace SR_CORE_GUI_NS {
 
         if (SR_GRAPH_GUI_NS::Immediate::BeginPopup("InspectorAddComponentPopup")) {
             m_onBeforeChangeCallback = [&](bool drag) {
-                if (!m_pComponentsSerializer) {
-                    m_pComponentsSerializer = SR_CORE_NS::Commands::CreateSerializer();
-                    SR_UTILS_NS::Serialization::Save(*m_pComponentsSerializer, pIComponentable->GetComponents(), SR_UTILS_NS::COMMAND_DATA_ID);
-                }
-            };
+                                           if (!m_pComponentsSerializer) {
+                                               m_pComponentsSerializer = SR_CORE_NS::Commands::CreateSerializer();
+                                               SR_UTILS_NS::Serialization::Save(*m_pComponentsSerializer, pIComponentable->GetComponents(), SR_UTILS_NS::COMMAND_DATA_ID);
+                                           }
+                                       };
 
             const float_t lineHeight = SR_GRAPH_GUI_NS::Immediate::GetFontSize() + SR_GRAPH_GUI_NS::Immediate::GetFramePadding().y * 2.0f;
 
@@ -313,7 +313,7 @@ namespace SR_CORE_GUI_NS {
         }
     }
 
-    void Inspector::DrawComponent(SR_UTILS_NS::Component* pComponent, uint32_t &index) {
+    void Inspector::DrawComponent(SR_UTILS_NS::Component* pComponent, uint32_t& index) {
         auto&& pContext = dynamic_cast<EditorGUI*>(GetManager());
         auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
 
@@ -327,7 +327,7 @@ namespace SR_CORE_GUI_NS {
 
         ++index;
 
-        const std::string headerName = "[{}] {}"_format(index, pComponent->GetMeta()->GetDisplayName());
+        const std::string headerName = "[{}] {}"_format (index, pComponent->GetMeta()->GetDisplayName());
 
         bool enabled = pComponent->IsEnabled();
         if (SR_GRAPH_GUI_NS::Immediate::Checkbox("##componentEnabled", &enabled)) {
@@ -397,13 +397,13 @@ namespace SR_CORE_GUI_NS {
             auto&& value = SR_UTILS_NS::Reflection::Value::CreateRef(*pComponent);
 
             m_onBeforeChangeCallback = [this, pStrongComponent = SR_HTYPES_NS::SharedPtr(pComponent)](bool drag) {
-                if (!m_pComponentSerializer) {
-                    m_isDragMode = drag;
-                    m_editableComponent = pStrongComponent;
-                    m_pComponentSerializer = SR_CORE_NS::Commands::CreateSerializer();
-                    SR_UTILS_NS::Serialization::Save(*m_pComponentSerializer, *pStrongComponent, SR_UTILS_NS::COMMAND_DATA_ID);
-                }
-            };
+                                           if (!m_pComponentSerializer) {
+                                               m_isDragMode = drag;
+                                               m_editableComponent = pStrongComponent;
+                                               m_pComponentSerializer = SR_CORE_NS::Commands::CreateSerializer();
+                                               SR_UTILS_NS::Serialization::Save(*m_pComponentSerializer, *pStrongComponent, SR_UTILS_NS::COMMAND_DATA_ID);
+                                           }
+                                       };
 
             auto&& context = CreateDrawerContext(&value);
             context.pUID = context.pOwner = pComponent;
@@ -427,11 +427,11 @@ namespace SR_CORE_GUI_NS {
             const auto componentsCount = static_cast<int32_t>(pParent->GetComponentsCount());
 
             m_onBeforeChangeCallback = [&](bool drag) {
-                if (!m_pComponentsSerializer) {
-                    m_pComponentsSerializer = SR_CORE_NS::Commands::CreateSerializer();
-                    SR_UTILS_NS::Serialization::Save(*m_pComponentsSerializer, pParent->GetComponents(), SR_UTILS_NS::COMMAND_DATA_ID);
-                }
-            };
+                                           if (!m_pComponentsSerializer) {
+                                               m_pComponentsSerializer = SR_CORE_NS::Commands::CreateSerializer();
+                                               SR_UTILS_NS::Serialization::Save(*m_pComponentsSerializer, pParent->GetComponents(), SR_UTILS_NS::COMMAND_DATA_ID);
+                                           }
+                                       };
 
             static const auto&& serializeId = SR_UTILS_NS::SerializationId::Create("SREngineComponentClipboard");
 
@@ -520,13 +520,13 @@ namespace SR_CORE_GUI_NS {
 
     void Inspector::DrawSceneObject(const SR_UTILS_NS::SceneObject::Ptr& pSceneObject) {
         m_onBeforeChangeCallback = [&](bool drag) {
-            if (!m_pSOSerializer) {
-                m_isDragMode = drag;
-                m_pSOSerializer = SR_CORE_NS::Commands::CreateSerializer();
-                m_pSOSerializer->AddDontSaveTag("Inspector");
-                SR_UTILS_NS::Serialization::Save(*m_pSOSerializer, *pSceneObject, SR_UTILS_NS::COMMAND_DATA_ID);
-            }
-        };
+                                       if (!m_pSOSerializer) {
+                                           m_isDragMode = drag;
+                                           m_pSOSerializer = SR_CORE_NS::Commands::CreateSerializer();
+                                           m_pSOSerializer->AddDontSaveTag("Inspector");
+                                           SR_UTILS_NS::Serialization::Save(*m_pSOSerializer, *pSceneObject, SR_UTILS_NS::COMMAND_DATA_ID);
+                                       }
+                                   };
 
         auto&& value = SR_UTILS_NS::Reflection::Value::CreateRef(pSceneObject);
         auto&& context = CreateDrawerContext(&value);
@@ -552,45 +552,45 @@ namespace SR_CORE_GUI_NS {
     }
 
     void Inspector::DrawComponentCategory(SR_UTILS_NS::IComponentable* pComponentable, ComponentCategory& category, SR_UTILS_NS::StringAtom categoryName) {
-        static auto&& addComponentFn = [](Inspector* pInspector, SR_UTILS_NS::IComponentable* pComponentable, SR_UTILS_NS::StringAtom name, SR_UTILS_NS::StringAtom displayName)-> SR_UTILS_NS::Component::Ptr {
-            SR_UTILS_NS::Component::Ptr pComponent;
-            if (SR_GRAPH_GUI_NS::Immediate::Selectable(displayName.c_str(), false)) {
-                pComponent = SR_UTILS_NS::Factory::Instance().Create<SR_UTILS_NS::Component>(name);
-                if (pComponent) {
-                    pInspector->m_onBeforeChangeCallback(false);
-                    pComponentable->AddComponent(pComponent);
-                }
-                else {
-                    SRHalt("Inspector::DrawComponentCategory() : failed to create component! Name: {}", name);
-                }
-            }
-            if (SR_GRAPH_GUI_NS::Immediate::IsItemFocused()) {
-                if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Enter)) {
-                    pComponent = SR_UTILS_NS::Factory::Instance().Create<SR_UTILS_NS::Component>(name);
-                    if (pComponent) {
-                        pInspector->m_onBeforeChangeCallback(false);
-                        pComponentable->AddComponent(pComponent);
-                    }
-                    else {
-                        SRHalt("Inspector::DrawComponentCategory() : failed to create component! Name: {}", name);
-                    }
-                    SR_GRAPH_GUI_NS::Immediate::CloseCurrentPopup();
-                }
-            }
-            SR_GRAPH_GUI_NS::Immediate::Separator();
-            return pComponent;
-        };
+        static auto&& addComponentFn = [](Inspector* pInspector, SR_UTILS_NS::IComponentable* pComponentable, SR_UTILS_NS::StringAtom name, SR_UTILS_NS::StringAtom displayName) -> SR_UTILS_NS::Component::Ptr {
+                                           SR_UTILS_NS::Component::Ptr pComponent;
+                                           if (SR_GRAPH_GUI_NS::Immediate::Selectable(displayName.c_str(), false)) {
+                                               pComponent = SR_UTILS_NS::Factory::Instance().Create<SR_UTILS_NS::Component>(name);
+                                               if (pComponent) {
+                                                   pInspector->m_onBeforeChangeCallback(false);
+                                                   pComponentable->AddComponent(pComponent);
+                                               }
+                                               else {
+                                                   SRHalt("Inspector::DrawComponentCategory() : failed to create component! Name: {}", name);
+                                               }
+                                           }
+                                           if (SR_GRAPH_GUI_NS::Immediate::IsItemFocused()) {
+                                               if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Enter)) {
+                                                   pComponent = SR_UTILS_NS::Factory::Instance().Create<SR_UTILS_NS::Component>(name);
+                                                   if (pComponent) {
+                                                       pInspector->m_onBeforeChangeCallback(false);
+                                                       pComponentable->AddComponent(pComponent);
+                                                   }
+                                                   else {
+                                                       SRHalt("Inspector::DrawComponentCategory() : failed to create component! Name: {}", name);
+                                                   }
+                                                   SR_GRAPH_GUI_NS::Immediate::CloseCurrentPopup();
+                                               }
+                                           }
+                                           SR_GRAPH_GUI_NS::Immediate::Separator();
+                                           return pComponent;
+                                       };
 
         std::function<bool(const ComponentCategory&, std::string_view)> checkMatch;
 
         checkMatch = [&checkMatch](const ComponentCategory& checkCategory, std::string_view search) -> bool {
-            const bool hasComponents = std::ranges::any_of(checkCategory.components, [&](auto&& info) {
+                         const bool hasComponents = std::ranges::any_of(checkCategory.components, [&](auto&& info) {
                 return SR_UTILS_NS::StringUtils::CheckSearchMatch(search, info.name) || SR_UTILS_NS::StringUtils::CheckSearchMatch(search, info.displayName);
             });
-            return hasComponents || std::ranges::any_of(checkCategory.categories, [&](auto&& pair) {
+                         return hasComponents || std::ranges::any_of(checkCategory.categories, [&](auto&& pair) {
                 return checkMatch(pair.second, search);
             });
-        };
+                     };
 
         if (m_componentSearchBuffer.empty() || checkMatch(category, m_componentSearchBuffer)) {
             if (category.components.empty() || SR_GRAPH_GUI_NS::Immediate::BeginMenu(categoryName.c_str())) {
@@ -700,31 +700,31 @@ namespace SR_CORE_GUI_NS {
         m_componentsCategories = ComponentCategory();
 
         auto&& processComponent = [this](const SR_UTILS_NS::StringAtom& name, bool isBehaviour) {
-            ComponentCategory::ComponentInfo componentInfo;
-            componentInfo.name = name;
-            componentInfo.displayName = SR_UTILS_NS::Factory::Instance().GetType(name)->GetDisplayName();
-            componentInfo.isBehaviour = isBehaviour;
+                                      ComponentCategory::ComponentInfo componentInfo;
+                                      componentInfo.name = name;
+                                      componentInfo.displayName = SR_UTILS_NS::Factory::Instance().GetType(name)->GetDisplayName();
+                                      componentInfo.isBehaviour = isBehaviour;
 
-            auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(name);
-            if (pMeta->GetCategory().empty()) {
-                m_componentsCategories.categories["Misc"].components.emplace_back(componentInfo);
-            }
-            else {
-                ComponentCategory* pCategory = nullptr;
-                for (auto&& cat : pMeta->GetCategory()) {
-                    if (pCategory) {
-                        pCategory = &pCategory->categories[cat];
-                    }
-                    else {
-                        pCategory = &m_componentsCategories.categories[cat];
-                    }
-                }
+                                      auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(name);
+                                      if (pMeta->GetCategory().empty()) {
+                                          m_componentsCategories.categories["Misc"].components.emplace_back(componentInfo);
+                                      }
+                                      else {
+                                          ComponentCategory* pCategory = nullptr;
+                                          for (auto&& cat : pMeta->GetCategory()) {
+                                              if (pCategory) {
+                                                  pCategory = &pCategory->categories[cat];
+                                              }
+                                              else {
+                                                  pCategory = &m_componentsCategories.categories[cat];
+                                              }
+                                          }
 
-                if (SRVerify(pCategory)) {
-                    pCategory->components.emplace_back(componentInfo);
-                }
-            }
-        };
+                                          if (SRVerify(pCategory)) {
+                                              pCategory->components.emplace_back(componentInfo);
+                                          }
+                                      }
+                                  };
 
         for (auto&& name : m_availableComponents) {
             processComponent(name, false);

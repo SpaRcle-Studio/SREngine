@@ -85,7 +85,6 @@ namespace SR_GRAPH_GUI_NS {
     #endif
 #endif
 
-
 #if defined(SR_USE_IMGUI_NODE_FLOW) && defined(SR_USE_IMGUI)
     #include <ImNodeFlow.h>
 #endif

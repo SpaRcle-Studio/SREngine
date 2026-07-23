@@ -75,7 +75,7 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::SameLine();
 
             SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
-            SR_GRAPH_GUI_NS::Immediate::Button("{}"_format(pClassValue->GetMeta()->GetFactoryName()).c_str(), buttonSize);
+            SR_GRAPH_GUI_NS::Immediate::Button("{}"_format (pClassValue->GetMeta()->GetFactoryName()).c_str(), buttonSize);
             SR_GRAPH_GUI_NS::Immediate::EndDisabled();
         }
 

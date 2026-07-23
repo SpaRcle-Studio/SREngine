@@ -12,7 +12,7 @@ namespace EvoScript {
         std::string m_name;
         Publicity   m_pub;
 
-        bool operator<(const InheritClass& rhs) const {
+        bool operator <(const InheritClass& rhs) const {
             return m_name < rhs.m_name && m_pub < rhs.m_pub;
         }
     };

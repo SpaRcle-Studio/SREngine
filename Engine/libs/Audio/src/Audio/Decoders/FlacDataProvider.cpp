@@ -117,9 +117,9 @@ namespace SR_AUDIO_NS {
 
             if (metadata->type == FLAC__METADATA_TYPE_STREAMINFO) {
                 // Берём количество каналов и частоту
-                pThis->m_format.m_numChannels      = metadata->data.stream_info.channels;
+                pThis->m_format.m_numChannels = metadata->data.stream_info.channels;
                 pThis->m_format.m_samplesPerSecond = metadata->data.stream_info.sample_rate;
-                pThis->m_format.m_bitsPerSample    = metadata->data.stream_info.bits_per_sample;
+                pThis->m_format.m_bitsPerSample = metadata->data.stream_info.bits_per_sample;
             }
         }
 
@@ -143,8 +143,8 @@ namespace SR_AUDIO_NS {
                 case FLAC__STREAM_DECODER_ERROR_STATUS_OUT_OF_BOUNDS: msg = "Out of bounds"; break;
                 case FLAC__STREAM_DECODER_ERROR_STATUS_MISSING_FRAME: msg = "Missing frame"; break;
                 default:
-                    msg = "Unknown error";
-                    break;
+                msg = "Unknown error";
+                break;
             }
             SR_ERROR("FLACDecoderCallbacks::ErrorCallback() : decoder error occurred! Status: {}", msg);
         }

@@ -32,7 +32,7 @@ namespace SR_SCRIPTING_NS {
                     });
                     pIt = m_scripts.erase(pIt);
                     continue;
-                }*/
+                   }*/
 
                 ++pIt;
             }
@@ -60,9 +60,9 @@ namespace SR_SCRIPTING_NS {
             });
             m_checkIterator = m_scripts.erase(m_checkIterator.value());
             return;
-        }*/
+           }*/
 
-        ++(m_checkIterator.value()); 
+        ++(m_checkIterator.value());
     }
 
     bool EvoScriptManager::ReloadScript(const SR_UTILS_NS::Path& localPath) {

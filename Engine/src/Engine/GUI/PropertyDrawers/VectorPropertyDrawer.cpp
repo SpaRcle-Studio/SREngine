@@ -74,7 +74,7 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::SameLine();
 
         SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
-        SR_GRAPH_GUI_NS::Immediate::Button("{}"_format(container.Size()).c_str(), counterButtonWidth);
+        SR_GRAPH_GUI_NS::Immediate::Button("{}"_format (container.Size()).c_str(), counterButtonWidth);
         SR_GRAPH_GUI_NS::Immediate::EndDisabled();
 
         SR_GRAPH_GUI_NS::Immediate::SameLine();
@@ -157,7 +157,7 @@ namespace SR_CORE_GUI_NS {
 
                 SR_MATH_NS::FVector2 itemButtonSize = { 40, context.fieldHeight };
 
-                SR_GRAPH_GUI_NS::Immediate::Button("{}"_format(index).c_str(), itemButtonSize);
+                SR_GRAPH_GUI_NS::Immediate::Button("{}"_format (index).c_str(), itemButtonSize);
 
                 if (SR_GRAPH_GUI_NS::Immediate::BeginPopupContextItem("ElementContextMenu")) {
                     bool copy = false; //SR_GRAPH_GUI_NS::Immediate::MenuItem("Copy");
@@ -235,7 +235,6 @@ namespace SR_CORE_GUI_NS {
 
                         feedback.isChanged = true;
                     }
-
 
                     SR_GRAPH_GUI_NS::Immediate::EndPopup();
                     if (removed) {

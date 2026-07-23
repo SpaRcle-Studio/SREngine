@@ -65,18 +65,18 @@ void HandleCmd(struct android_app* app, int32_t cmd) {
         case APP_CMD_START:
         case APP_CMD_STOP:
         case APP_CMD_DESTROY:
-            evt.type = SR_UTILS_NS::AndroidEvent::Lifecycle;
-            evt.lifecycle.command = cmd;
-            SR_UTILS_NS::AndroidEventQueue::Instance().PushEvent(evt);
-            break;
+        evt.type = SR_UTILS_NS::AndroidEvent::Lifecycle;
+        evt.lifecycle.command = cmd;
+        SR_UTILS_NS::AndroidEventQueue::Instance().PushEvent(evt);
+        break;
         default:
-            break;
+        break;
     }
 }
 
 // ----------------- Sensor Handling -----------------
 void ProcessSensorEvents(ASensorEventQueue* sensorQueue, struct android_app* app) {
-    if (!sensorQueue){
+    if (!sensorQueue) {
         return;
     }
 
@@ -118,33 +118,33 @@ void WaitApplicationWindowShow(struct android_app* state) {
 
 void SetImmersiveMode(ANativeActivity* activity) {
     /*JNIEnv* env = nullptr;
-    activity->vm->AttachCurrentThread(&env, nullptr);
+       activity->vm->AttachCurrentThread(&env, nullptr);
 
-    jclass cls = env->GetObjectClass(activity->clazz);
+       jclass cls = env->GetObjectClass(activity->clazz);
 
-    jmethodID getWindow = env->GetMethodID(cls, "getWindow", "()Landroid/view/Window;");
-    jobject window = env->CallObjectMethod(activity->clazz, getWindow);
+       jmethodID getWindow = env->GetMethodID(cls, "getWindow", "()Landroid/view/Window;");
+       jobject window = env->CallObjectMethod(activity->clazz, getWindow);
 
-    jclass windowClass = env->GetObjectClass(window);
-    jmethodID getDecorView = env->GetMethodID(windowClass, "getDecorView", "()Landroid/view/View;");
-    jobject decorView = env->CallObjectMethod(window, getDecorView);
+       jclass windowClass = env->GetObjectClass(window);
+       jmethodID getDecorView = env->GetMethodID(windowClass, "getDecorView", "()Landroid/view/View;");
+       jobject decorView = env->CallObjectMethod(window, getDecorView);
 
-    jclass viewClass = env->GetObjectClass(decorView);
-    const int flags =
+       jclass viewClass = env->GetObjectClass(decorView);
+       const int flags =
             0x00000400 | // View.SYSTEM_UI_FLAG_FULLSCREEN
             0x00000200 | // View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
             0x00001000 | // View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
             0x00000100;  // View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-    jmethodID setSystemUiVisibility = env->GetMethodID(viewClass, "setSystemUiVisibility", "(I)V");
-    env->CallVoidMethod(decorView, setSystemUiVisibility, flags);
+       jmethodID setSystemUiVisibility = env->GetMethodID(viewClass, "setSystemUiVisibility", "(I)V");
+       env->CallVoidMethod(decorView, setSystemUiVisibility, flags);
 
-    activity->vm->DetachCurrentThread();*/
+       activity->vm->DetachCurrentThread();*/
 
     /*typedef ASensorManager *(*PF_GETINSTANCEFORPACKAGE)(const char *name);
-    void* androidHandle = dlopen("libandroid.so", RTLD_NOW);
-    auto getInstanceForPackageFunc = (PF_GETINSTANCEFORPACKAGE)
+       void* androidHandle = dlopen("libandroid.so", RTLD_NOW);
+       auto getInstanceForPackageFunc = (PF_GETINSTANCEFORPACKAGE)
             dlsym(androidHandle, "ASensorManager_getInstanceForPackage");
-    if (getInstanceForPackageFunc) {
+       if (getInstanceForPackageFunc) {
         JNIEnv* env = nullptr;
         activity->vm->AttachCurrentThread(&env, nullptr);
 
@@ -163,14 +163,14 @@ void SetImmersiveMode(ANativeActivity* activity) {
             dlclose(androidHandle);
             return mgr;
         }
-    }
+       }
 
-    typedef ASensorManager *(*PF_GETINSTANCE)();
-    auto getInstanceFunc = (PF_GETINSTANCE)
+       typedef ASensorManager *(*PF_GETINSTANCE)();
+       auto getInstanceFunc = (PF_GETINSTANCE)
             dlsym(androidHandle, "ASensorManager_getInstance");
-    // by all means at this point, ASensorManager_getInstance should be available
-    assert(getInstanceFunc);
-    dlclose(androidHandle);*/
+       // by all means at this point, ASensorManager_getInstance should be available
+       assert(getInstanceFunc);
+       dlclose(androidHandle);*/
 }
 
 void android_main(struct android_app* state) {
@@ -194,16 +194,16 @@ void android_main(struct android_app* state) {
     SR_PLATFORM_NS::WriteConsoleLog("android_main() : running engine entry point...");
 
     std::thread engineThread([]() {
-        char** argv = nullptr;
-        int argc = 1;
+                             char** argv = nullptr;
+                             int argc = 1;
 
-        if (const int code = SREngineEntryPoint(argc, argv); code == 0) {
-            SR_PLATFORM_NS::WriteConsoleLog("android_main() : engine successfully closed!");
-        }
-        else {
-            SR_PLATFORM_NS::WriteConsoleError("android_main() : engine closed with errors!");
-        }
-    });
+                             if (const int code = SREngineEntryPoint(argc, argv); code == 0) {
+                                 SR_PLATFORM_NS::WriteConsoleLog("android_main() : engine successfully closed!");
+                             }
+                             else {
+                                 SR_PLATFORM_NS::WriteConsoleError("android_main() : engine closed with errors!");
+                             }
+        });
 
     SR_PLATFORM_NS::WriteConsoleLog("android_main() : entering main loop...");
 

@@ -19,7 +19,7 @@ enum UNPACK_RESULT {
 
 std::vector<char> DecompressData(uint64_t decompressedSize, const std::vector<char>& data) {
     if (data.empty()) {
-        return {};
+        return { };
     }
 
     std::vector<char> decompressedData(decompressedSize);
@@ -97,7 +97,6 @@ int ParseData(const std::vector<char>& data, const std::string& executablePath) 
         std::cout << "ParseData() : unpacked file: " << outputPath << "\n";
     }
 
-
     uint16_t resourceCount = 0;
     stream.read(reinterpret_cast<char*>(&resourceCount), sizeof(resourceCount));
 
@@ -136,7 +135,7 @@ int ParseData(const std::vector<char>& data, const std::string& executablePath) 
             "Engine/Utilities/git2",
         };
         for (const auto& executableFile : executableFiles) {
-             if (path.generic_string() == executableFile) {
+            if (path.generic_string() == executableFile) {
                 if (::chmod(outputPath.c_str(), 0755) != 0) {
                     std::cerr << "ParseData() : failed to chmod +x (0755): " << outputPath << "\n";
                 }
@@ -223,4 +222,3 @@ void DeletePackedFile(const std::string& executablePath) {
         }
     }
 }
-

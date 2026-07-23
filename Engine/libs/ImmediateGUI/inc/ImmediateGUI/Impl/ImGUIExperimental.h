@@ -19,4 +19,3 @@ namespace SR_GRAPH_GUI_NS::Immediate::Experimental {
     void Spring(float weight = 1.0f, float spacing = -1.0f);
 #endif
 }
-

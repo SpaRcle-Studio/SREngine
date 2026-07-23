@@ -81,7 +81,7 @@ namespace SR_AUDIO_NS
         /// @virtualProperty(direction) @getter(GetDirection) @setter(SetDirection)
         SR_VIRTUAL_PROPERTY
         /// @virtualProperty(coneInnerAngle) @getter(GetConeInnerAngle) @setter(SetConeInnerAngle)
-        SR_VIRTUAL_PROPERTY
+            SR_VIRTUAL_PROPERTY
     };
 }
 

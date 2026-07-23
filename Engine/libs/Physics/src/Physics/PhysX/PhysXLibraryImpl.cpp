@@ -14,15 +14,15 @@
 
 namespace SR_PHYSICS_NS {
     class PhysXAssertHandler : public physx::PxAssertHandler {
-        void operator()(const char* exp, const char* file, int line, bool& ignore) override {
-            SRAssert2(false, "PhysX assertion failed. \n\tFile: file:///{}:{}:1\n\tExpression: {}"_format(file, line, exp));
+        void operator ()(const char* exp, const char* file, int line, bool& ignore) override {
+            SRAssert2(false, "PhysX assertion failed. \n\tFile: file:///{}:{}:1\n\tExpression: {}"_format (file, line, exp));
         }
     };
 
     bool PhysXLibraryImpl::Initialize() {
         SR_TRACY_ZONE;
 
-        if (!Super::Initialize()){
+        if (!Super::Initialize()) {
             SR_ERROR("PhysXLibraryImpl::Initialize() : failed to initialize basic library!");
         }
 
@@ -49,11 +49,11 @@ namespace SR_PHYSICS_NS {
         if (IsVehicleSupported()) {
             SR_TRACY_ZONE_N("Init vechicle");
 
-            if (!physx::PxInitVehicleSDK(*m_physics)){
+            if (!physx::PxInitVehicleSDK(*m_physics)) {
                 SR_ERROR("PhysXLibraryImpl::Initialize() : failed to initialize Vehicle SDK!");
                 return false;
             }
-            physx::PxVehicleSetBasisVectors(physx::PxVec3(0,1,0), physx::PxVec3(0,0,1));
+            physx::PxVehicleSetBasisVectors(physx::PxVec3(0, 1, 0), physx::PxVec3(0, 0, 1));
             physx::PxVehicleSetUpdateMode(physx::PxVehicleUpdateMode::eACCELERATION);
         }
 
@@ -61,7 +61,7 @@ namespace SR_PHYSICS_NS {
     }
 
     PhysXLibraryImpl::~PhysXLibraryImpl() {
-        if (IsVehicleSupported()){
+        if (IsVehicleSupported()) {
             physx::PxCloseVehicleSDK();
         }
 
@@ -97,9 +97,9 @@ namespace SR_PHYSICS_NS {
             case ShapeType::Sphere3D:
             case ShapeType::Convex3D:
             case ShapeType::Boxes3D:
-                return true;
+            return true;
             default:
-                return false;
+            return false;
         }
     }
 
@@ -123,7 +123,7 @@ namespace SR_PHYSICS_NS {
         return new SR_PTYPES_NS::PhysXMaterialImpl(this);
     }
 
-    SR_PTYPES_NS::Vehicle4W3D *PhysXLibraryImpl::CreateVehicle4W3D() {
+    SR_PTYPES_NS::Vehicle4W3D*PhysXLibraryImpl::CreateVehicle4W3D() {
         //return new SR_PTYPES_NS::PhysXVehicle4W3D(this);
         return nullptr;
     }

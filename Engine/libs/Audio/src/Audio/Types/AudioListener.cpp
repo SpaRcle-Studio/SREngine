@@ -12,7 +12,7 @@
 
 #include <Codegen/AudioListener.generated.hpp>
 
-namespace SR_AUDIO_NS{
+namespace SR_AUDIO_NS {
     void AudioListener::OnEnable() {
         SR_TRACY_ZONE;
 

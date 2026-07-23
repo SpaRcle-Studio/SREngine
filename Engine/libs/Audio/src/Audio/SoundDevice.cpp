@@ -23,15 +23,15 @@ namespace SR_AUDIO_NS {
 
         switch (audioLibrary) {
             case AudioLibrary::OpenAL:
-                return new OpenALDevice(audioLibrary, name);
+            return new OpenALDevice(audioLibrary, name);
             case AudioLibrary::FMOD:
             case AudioLibrary::Wwise:
             case AudioLibrary::Allegro:
             case AudioLibrary::SoLoud:
             case AudioLibrary::Unknown:
             default:
-                SR_ERROR("SoundDevice::Allocate() : the audio library is not supported!");
-                break;
+            SR_ERROR("SoundDevice::Allocate() : the audio library is not supported!");
+            break;
         }
 
         return nullptr;

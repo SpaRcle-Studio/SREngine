@@ -99,7 +99,7 @@ namespace SR_AUDIO_NS {
    #ifdef SR_AUDIO_USE_OGG
         if (oggData.empty()) {
             SR_ERROR("UnpackOggData() : input data is empty!");
-            return {};
+            return { };
         }
 
         ogg_sync_state oy;
@@ -160,7 +160,7 @@ namespace SR_AUDIO_NS {
     #ifdef SR_AUDIO_USE_OGG
         if (oggData.empty()) {
             SR_ERROR("UnpackOggDataSeparated() : input data is empty!");
-            return {};
+            return { };
         }
 
         ogg_sync_state oy;

@@ -37,10 +37,10 @@ namespace SR_PTYPES_NS {
         m_motionState = new btDefaultMotionState(startTransform);
 
         btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(
-                m_mass,        /// mass, in kg. 0 -> Static object, will never move.
-                m_motionState,
-                (btCollisionShape*)m_shape->GetHandle(), /// collision shape of body
-                btVector3()   /// local inertia
+            m_mass,            /// mass, in kg. 0 -> Static object, will never move.
+            m_motionState,
+            (btCollisionShape*)m_shape->GetHandle(),     /// collision shape of body
+            btVector3()       /// local inertia
         );
         m_rigidbody = new btRigidBody(rigidBodyCI);
 

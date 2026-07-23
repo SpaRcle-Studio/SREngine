@@ -162,7 +162,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         const SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags flags = (hasChild ? SR_GRAPH_GUI_NS::Immediate::GetNodeFlagsWithChild() : SR_GRAPH_GUI_NS::Immediate::GetNodeFlagsWithoutChild()) |
-                                         ((m_selected.count(pRoot) == 1) ? SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::Selected : SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::None);
+                                                                ((m_selected.count(pRoot) == 1) ? SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::Selected : SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::None);
 
         if (pRoot->IsPrefabOwner()) {
             ++prefabIndex;
@@ -240,7 +240,7 @@ namespace SR_CORE_GUI_NS {
                 if (auto&& pData = SR_GRAPH_GUI_NS::Immediate::GetDataFromDragDropPayload(payload)) {
                     if (m_scene) {
                         SR_UTILS_NS::Vector<SR_UTILS_NS::ReversibleCommand*> commands;
-                        commands.emplace_back(new SR_CORE_NS::Commands::ChangeHierarchySelected(m_engine, this, m_selected, {}));
+                        commands.emplace_back(new SR_CORE_NS::Commands::ChangeHierarchySelected(m_engine, this, m_selected, { }));
                         SR_GRAPH_GUI_NS::PayloadArrayData payloadData = *(SR_GRAPH_GUI_NS::PayloadArrayData*)(pData);
                         for (size_t i = 0; i < payloadData.size; ++i) {
                             uint64_t entityId = static_cast<uint64_t*>(payloadData.data)[i];
@@ -259,7 +259,7 @@ namespace SR_CORE_GUI_NS {
 
         if (open && hasChild) {
             if (pRoot) {
-                pRoot->ForEachChild([&](const SR_UTILS_NS::SceneObject::Ptr &child) {
+                pRoot->ForEachChild([&](const SR_UTILS_NS::SceneObject::Ptr& child) {
                     DrawChild(child, prefabIndex);
                 });
             }
@@ -350,7 +350,7 @@ namespace SR_CORE_GUI_NS {
                     SR_GRAPH_GUI_NS::Immediate::Separator();
 
                     if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Add child")) {
-                        static_cast<EditorGUI *>(GetManager())->DrawEditorInstanceMenu();
+                        static_cast<EditorGUI*>(GetManager())->DrawEditorInstanceMenu();
                         SR_GRAPH_GUI_NS::Immediate::EndMenu();
                     }
                 }
@@ -371,21 +371,21 @@ namespace SR_CORE_GUI_NS {
     void Hierarchy::OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) {
         switch (data->GetKeyCode()) {
             case SR_UTILS_NS::KeyCode::C: {
-                if (IsKeyPressed(SR_UTILS_NS::KeyCode::LCtrl))
-                    Copy();
-                break;
-            }
+            if (IsKeyPressed(SR_UTILS_NS::KeyCode::LCtrl))
+                Copy();
+            break;
+        }
             case SR_UTILS_NS::KeyCode::V: {
-                if (IsKeyPressed(SR_UTILS_NS::KeyCode::LCtrl))
-                    Paste((m_selected.size() == 1) ? m_selected.begin()->Get() : nullptr, false);
-                break;
-            }
+            if (IsKeyPressed(SR_UTILS_NS::KeyCode::LCtrl))
+                Paste((m_selected.size() == 1) ? m_selected.begin()->Get() : nullptr, false);
+            break;
+        }
             case SR_UTILS_NS::KeyCode::Delete: {
-                Delete();
-                break;
-            }
+            Delete();
+            break;
+        }
             default:
-                break;
+            break;
         }
 
         InputHandler::OnKeyDown(data);
@@ -394,13 +394,13 @@ namespace SR_CORE_GUI_NS {
     void Hierarchy::OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) {
         switch (data->GetKeyCode()) {
             case SR_UTILS_NS::KeyCode::LShift: {
-                if (m_pointersHolder.size() > 1) {
-                    m_pointersHolder.clear();
-                }
-                break;
+            if (m_pointersHolder.size() > 1) {
+                m_pointersHolder.clear();
             }
+            break;
+        }
             default:
-                break;
+            break;
         }
 
         InputHandler::OnKeyUp(data);
@@ -489,7 +489,7 @@ namespace SR_CORE_GUI_NS {
 
         if (!m_selected.empty() && m_scene) {
             SR_UTILS_NS::Vector<SR_UTILS_NS::ReversibleCommand*> commands;
-            commands.emplace_back(new SR_CORE_NS::Commands::ChangeHierarchySelected(m_engine, this, m_selected, {}));
+            commands.emplace_back(new SR_CORE_NS::Commands::ChangeHierarchySelected(m_engine, this, m_selected, { }));
             for (auto&& pSelected : m_selected) {
                 if (!pSelected) {
                     continue;

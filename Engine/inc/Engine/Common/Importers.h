@@ -7,7 +7,6 @@
 
 #include <Utils/Types/SharedPtr.h>
 
-namespace SR_CORE_NS::Importers {
-}
+namespace SR_CORE_NS::Importers { }
 
 #endif //SR_ENGINE_IMPORTERS_H

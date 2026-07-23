@@ -13,13 +13,13 @@
 
 namespace SR_AUDIO_NS {
     SR_ENUM_NS_CLASS_T(ListenerDistanceModel, uint8_t,
-       None,
-       Inverse,
-       InverseClamped,
-       Linear,
-       LinearClamped,
-       Exponent,
-       ExponentClamped
+                       None,
+                       Inverse,
+                       InverseClamped,
+                       Linear,
+                       LinearClamped,
+                       Exponent,
+                       ExponentClamped
     );
 
     struct ListenerData {

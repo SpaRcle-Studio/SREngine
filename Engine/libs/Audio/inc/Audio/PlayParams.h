@@ -13,11 +13,11 @@
 
 namespace SR_AUDIO_NS {
     SR_ENUM_NS_CLASS_T(PlayParamType, uint8_t,
-        Async, Loop, Library,
-        Relative, Gain, MinGain,
-        Pitch, ConeInnerAngle, ConeOuterAngle, UniqueId,
-        Position, Direction, Velocity, ConeOuterGain,
-        Orientation, Device, MaxGain, MaxDistance, RolloffFactor, ReferenceDistance, Spatialize
+                       Async, Loop, Library,
+                       Relative, Gain, MinGain,
+                       Pitch, ConeInnerAngle, ConeOuterAngle, UniqueId,
+                       Position, Direction, Velocity, ConeOuterGain,
+                       Orientation, Device, MaxGain, MaxDistance, RolloffFactor, ReferenceDistance, Spatialize
     );
 
     template<typename T> class PlayParamChangeChecker {
@@ -34,7 +34,7 @@ namespace SR_AUDIO_NS {
         SR_NODISCARD SR_FORCE_INLINE const T& value() const noexcept { return m_value; }
         SR_NODISCARD SR_FORCE_INLINE T& value() noexcept { return m_value; }
 
-        PlayParamChangeChecker& operator=(const T& value) {
+        PlayParamChangeChecker& operator =(const T& value) {
             m_value = value;
             m_changed = true;
             m_hasValue = true;
@@ -57,7 +57,7 @@ namespace SR_AUDIO_NS {
     };
 
     SR_ENUM_NS_CLASS_T(SpatializeMode, uint8_t,
-        Off, On, Auto
+                       Off, On, Auto
     );
 
     struct PlayParams {

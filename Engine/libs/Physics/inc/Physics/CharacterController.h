@@ -17,10 +17,10 @@ namespace SR_PHYSICS_NS {
     class CharacterController;
 
     SR_ENUM_NS_STRUCT_T(CharacterControllerCollisionFlags, uint8_t,
-        None = 0,
-        Sides = 1 << 0,
-        Up = 1 << 1,
-        Down = 1 << 2
+                        None = 0,
+                        Sides = 1 << 0,
+                        Up = 1 << 1,
+                        Down = 1 << 2
     )
 
     class CharacterControllerImpl : public SR_UTILS_NS::NonCopyable {
@@ -39,8 +39,8 @@ namespace SR_PHYSICS_NS {
         virtual bool UpdateMatrix(bool force) { return true; }
 
         virtual CharacterControllerCollisionFlags Move(const SR_MATH_NS::FVector3& displacement,
-            float_t skinWidth,
-            float_t deltaTime
+                                                       float_t skinWidth,
+                                                       float_t deltaTime
         ) { return CharacterControllerCollisionFlags::None; }
 
     protected:
@@ -84,8 +84,8 @@ namespace SR_PHYSICS_NS {
         void OnMatrixDirty() override;
 
         CharacterControllerCollisionFlags Move(const SR_MATH_NS::FVector3& displacement,
-            float_t skinWidth,
-            float_t deltaTime
+                                               float_t skinWidth,
+                                               float_t deltaTime
         );
 
         bool InitController();

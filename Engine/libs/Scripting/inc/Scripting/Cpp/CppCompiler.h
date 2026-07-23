@@ -24,7 +24,7 @@ namespace SR_SCRIPTING_NS {
     };
 
     SR_ENUM_NS_CLASS_T(CppCompilerType, uint8_t,
-        Unknown, MinGW, GCC, Clang, MSVC
+                       Unknown, MinGW, GCC, Clang, MSVC
     )
 
     struct CppCompilerSettings : public SR_UTILS_NS::Serializable {

@@ -15,7 +15,7 @@ namespace SR_AUDIO_NS {
 
         SR_NODISCARD const WaveDataFormat &GetWaveDataFormat() const override { return m_format; }
 
-        SR_NODISCARD const uint8_t *GetWaveData() const override;
+        SR_NODISCARD const uint8_t*GetWaveData() const override;
         SR_NODISCARD size_t GetWaveDataSize() const override;
         SR_NODISCARD size_t StreamWaveData(size_t Size) override;
 

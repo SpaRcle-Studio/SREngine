@@ -27,39 +27,39 @@ namespace SR_PHYSICS_NS {
 }
 
 namespace SR_PHYSICS_UTILS_NS {
-    SR_MAYBE_UNUSED static physx::PxVec3 FV3ToPxV3(const SR_MATH_NS::FVector3 &vector3) {
+    SR_MAYBE_UNUSED static physx::PxVec3 FV3ToPxV3(const SR_MATH_NS::FVector3& vector3) {
         return physx::PxVec3(vector3.x, vector3.y, vector3.z);
     }
 
-    SR_MAYBE_UNUSED static physx::PxExtendedVec3 FV3ToPxV3Extended(const SR_MATH_NS::FVector3 &vector3) {
+    SR_MAYBE_UNUSED static physx::PxExtendedVec3 FV3ToPxV3Extended(const SR_MATH_NS::FVector3& vector3) {
         return physx::PxExtendedVec3(vector3.x, vector3.y, vector3.z);
     }
 
-    SR_MAYBE_UNUSED static SR_MATH_NS::FVector3 PxV3ToFV3(const physx::PxVec3 &vector3) {
+    SR_MAYBE_UNUSED static SR_MATH_NS::FVector3 PxV3ToFV3(const physx::PxVec3& vector3) {
         return SR_MATH_NS::FVector3(vector3.x, vector3.y, vector3.z);
     }
 
-    SR_MAYBE_UNUSED static physx::PxQuat QuatToPxQuat(const SR_MATH_NS::Quaternion &quaternion) {
+    SR_MAYBE_UNUSED static physx::PxQuat QuatToPxQuat(const SR_MATH_NS::Quaternion& quaternion) {
         return physx::PxQuat(quaternion.x, quaternion.y, quaternion.z, quaternion.w);
     }
 
-    SR_MAYBE_UNUSED static SR_MATH_NS::Quaternion PxQuatToQuat(const physx::PxQuat &quaternion) {
+    SR_MAYBE_UNUSED static SR_MATH_NS::Quaternion PxQuatToQuat(const physx::PxQuat& quaternion) {
         return SR_MATH_NS::Quaternion(quaternion.x, quaternion.y, quaternion.z, quaternion.w);
     }
 
     SR_MAYBE_UNUSED static physx::PxCombineMode::Enum CombineToPxCombine(const Combine mode){
         switch (mode) {
             case Combine::Minimum:
-                return physx::PxCombineMode::Enum::eMIN;
+            return physx::PxCombineMode::Enum::eMIN;
             case Combine::Average:
-                return physx::PxCombineMode::Enum::eAVERAGE;
+            return physx::PxCombineMode::Enum::eAVERAGE;
             case Combine::Maximum:
-                return physx::PxCombineMode::Enum::eMAX;
+            return physx::PxCombineMode::Enum::eMAX;
             case Combine::Multiply:
-                return physx::PxCombineMode::Enum::eMULTIPLY;
+            return physx::PxCombineMode::Enum::eMULTIPLY;
             default:
-                SRHalt("CombineToPxCombine() : unsolved situation.");
-                return physx::PxCombineMode::Enum::eAVERAGE;
+            SRHalt("CombineToPxCombine() : unsolved situation.");
+            return physx::PxCombineMode::Enum::eAVERAGE;
         }
     }
 

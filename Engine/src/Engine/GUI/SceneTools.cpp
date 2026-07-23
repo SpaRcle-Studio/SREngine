@@ -27,203 +27,214 @@ namespace SR_CORE_GUI_NS {
         m_gizmoOperationFlag = SR_GRAPH_UI_NS::GizmoOperation::TranslateAll;
 
         AddElement("L")
-            .SetIsActive([this]() { return m_gizmoMode == SR_GRAPH_UI_NS::GizmoMode::Local; })
-            .SetOnClick([this](bool isActive) {
-                if (isActive) { SetGizmoMode(SR_GRAPH_UI_NS::GizmoMode::Global); }
-                else { SetGizmoMode(SR_GRAPH_UI_NS::GizmoMode::Local); }
-            });
+        .SetIsActive([this]() {
+            return m_gizmoMode == SR_GRAPH_UI_NS::GizmoMode::Local;
+        })
+        .SetOnClick([this](bool isActive) {
+            if (isActive) { SetGizmoMode(SR_GRAPH_UI_NS::GizmoMode::Global); }
+            else { SetGizmoMode(SR_GRAPH_UI_NS::GizmoMode::Local); }
+        });
 
         AddElement("T")
-            .SetIsActive([this]() { return m_gizmoOperationFlag & SR_GRAPH_UI_NS::GizmoOperation::Translate; })
-            .SetOnClick([this](bool isActive) {
-                if (isActive) { SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperation::None); }
-                else { SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperation::Translate); }
-            });
+        .SetIsActive([this]() {
+            return m_gizmoOperationFlag & SR_GRAPH_UI_NS::GizmoOperation::Translate;
+        })
+        .SetOnClick([this](bool isActive) {
+            if (isActive) { SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperation::None); }
+            else { SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperation::Translate); }
+        });
 
         AddElement("R")
-            .SetIsActive([this]() { return m_gizmoOperationFlag & SR_GRAPH_UI_NS::GizmoOperation::Rotate; })
-            .SetOnClick([this](bool isActive) {
-                if (isActive) { SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperation::None); }
-                else { SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperation::Rotate); }
-            });
+        .SetIsActive([this]() {
+            return m_gizmoOperationFlag & SR_GRAPH_UI_NS::GizmoOperation::Rotate;
+        })
+        .SetOnClick([this](bool isActive) {
+            if (isActive) { SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperation::None); }
+            else { SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperation::Rotate); }
+        });
 
         AddElement("S")
-            .SetIsActive([this]() { return m_gizmoOperationFlag & SR_GRAPH_UI_NS::GizmoOperation::Scale; })
-            .SetOnClick([this](bool isActive) {
-                if (isActive) { SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperation::None); }
-                else { SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperation::Scale); }
-            });
+        .SetIsActive([this]() {
+            return m_gizmoOperationFlag & SR_GRAPH_UI_NS::GizmoOperation::Scale;
+        })
+        .SetOnClick([this](bool isActive) {
+            if (isActive) { SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperation::None); }
+            else { SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperation::Scale); }
+        });
 
         AddElement("Connect PVD")
-            .SetIsActive([]() { return false; })
-            .SetOnClick([](bool isActive) {
-                auto&& pLibrary = SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space3D);
-                if (pLibrary) {
-                    pLibrary->ConnectPVD();
-                }
-            })
-            .SetWidth(120.f)
-            .SetItemSpacing(SR_MATH_NS::FVector2(10.f, 0.f));
+        .SetIsActive([]() {
+            return false;
+        })
+        .SetOnClick([](bool isActive) {
+            auto&& pLibrary = SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space3D);
+            if (pLibrary) {
+                pLibrary->ConnectPVD();
+            }
+        })
+        .SetWidth(120.f)
+        .SetItemSpacing(SR_MATH_NS::FVector2(10.f, 0.f));
 
         AddElement()
-            .SetCustomDraw([this](auto&& pElement) {
-                SR_GRAPH_GUI_NS::Immediate::PushItemWidth(150.f);
+        .SetCustomDraw([this](auto&& pElement) {
+            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(150.f);
 
-                if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("View Mode", SR_UTILS_NS::EnumReflector::ToStringAtom(m_viewMode).c_str())) {
-                    auto&& names = SR_UTILS_NS::EnumReflector::GetNames<EditorSceneViewMode>();
-                    for (auto&& name : names) {
-                        if (SR_GRAPH_GUI_NS::Immediate::Selectable(name.c_str())) {
-                            SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
-                            m_viewMode = SR_UTILS_NS::EnumReflector::FromString<EditorSceneViewMode>(name);
-                        }
+            if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("View Mode", SR_UTILS_NS::EnumReflector::ToStringAtom(m_viewMode).c_str())) {
+                auto&& names = SR_UTILS_NS::EnumReflector::GetNames<EditorSceneViewMode>();
+                for (auto&& name : names) {
+                    if (SR_GRAPH_GUI_NS::Immediate::Selectable(name.c_str())) {
+                        SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
+                        m_viewMode = SR_UTILS_NS::EnumReflector::FromString<EditorSceneViewMode>(name);
                     }
-
-                    SR_GRAPH_GUI_NS::Immediate::EndCombo();
                 }
-            })
-            .SetItemSpacing(SR_MATH_NS::FVector2(10.f, 0.f));
+
+                SR_GRAPH_GUI_NS::Immediate::EndCombo();
+            }
+        })
+        .SetItemSpacing(SR_MATH_NS::FVector2(10.f, 0.f));
 
         AddElement("Re-Draw")
-            .SetIsActive([]() { return false; })
-            .SetOnClick([&](bool isActive) {
-                GetRenderScene()->GetPipeline()->SetDirty(true);
-            })
-            .SetWidth(80.f)
-            .SetItemSpacing(SR_MATH_NS::FVector2(10.f, 0.f));
+        .SetIsActive([]() {
+            return false;
+        })
+        .SetOnClick([&](bool isActive) {
+            GetRenderScene()->GetPipeline()->SetDirty(true);
+        })
+        .SetWidth(80.f)
+        .SetItemSpacing(SR_MATH_NS::FVector2(10.f, 0.f));
 
         AddElement()
-            .SetCustomDraw([this](auto&& pElement) {
-                SR_GRAPH_GUI_NS::Immediate::PushItemWidth(150.f);
+        .SetCustomDraw([this](auto&& pElement) {
+            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(150.f);
 
-                auto optionFn = [this](SR_UTILS_NS::StringAtom macro, const char* label) {
-                    auto&& pContext = GetRenderScene()->GetContext();
-                    bool value = pContext->IsMacroDefined(macro);
-                    if (value) {
-                        SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor::Green());
-                    }
-                    if (SR_GRAPH_GUI_NS::Immediate::Selectable(label)) {
-                        pContext->SwitchMacro(macro, !value);
-                        pContext->ReloadShaders();
-                    }
-                    if (value) {
-                        SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
-                    }
-                };
+            auto optionFn = [this](SR_UTILS_NS::StringAtom macro, const char* label) {
+                                auto&& pContext = GetRenderScene()->GetContext();
+                                bool value = pContext->IsMacroDefined(macro);
+                                if (value) {
+                                    SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor::Green());
+                                }
+                                if (SR_GRAPH_GUI_NS::Immediate::Selectable(label)) {
+                                    pContext->SwitchMacro(macro, !value);
+                                    pContext->ReloadShaders();
+                                }
+                                if (value) {
+                                    SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
+                                }
+                            };
 
-                if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("##Options", "Options")) {
-                    {
-                        if (SR_GRAPH_GUI_NS::Immediate::Button("Camera Speed", SR_MATH_NS::FVector2(6.f * SR_GRAPH_GUI_NS::Immediate::GetFontSize(), 0))) {
-                            m_cameraVelocityFactor = 1.f;
-                        }
-
-                        SR_GRAPH_GUI_NS::Immediate::SameLine();
-
-                        if (SR_GRAPH_GUI_NS::Immediate::SliderFloat("##Camera Speed", &m_cameraVelocityFactor, 0.01f, 10.f)) {
-                            SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
-                        }
+            if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("##Options", "Options")) {
+                {
+                    if (SR_GRAPH_GUI_NS::Immediate::Button("Camera Speed", SR_MATH_NS::FVector2(6.f * SR_GRAPH_GUI_NS::Immediate::GetFontSize(), 0))) {
+                        m_cameraVelocityFactor = 1.f;
                     }
 
-                    SR_GRAPH_GUI_NS::Immediate::Separator();
+                    SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-                    {
-                        float_t gameSpeed = static_cast<EditorGUI*>(GetManager())->GetEngine()->GetEngineScene()->GetSpeed();
-
-                        if (SR_GRAPH_GUI_NS::Immediate::Button("Game Speed", SR_MATH_NS::FVector2(6.f * SR_GRAPH_GUI_NS::Immediate::GetFontSize(), 0))) {
-                            gameSpeed = 1.f;
-                            static_cast<EditorGUI*>(GetManager())->GetEngine()->GetEngineScene()->SetSpeed(1.f);
-                        }
-
-                        SR_GRAPH_GUI_NS::Immediate::SameLine();
-
-                        if (SR_GRAPH_GUI_NS::Immediate::SliderFloat("##Game Speed", &gameSpeed, 0.0f, 5.f)) {
-                            SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
-                            static_cast<EditorGUI*>(GetManager())->GetEngine()->GetEngineScene()->SetSpeed(gameSpeed);
-                        }
+                    if (SR_GRAPH_GUI_NS::Immediate::SliderFloat("##Camera Speed", &m_cameraVelocityFactor, 0.01f, 10.f)) {
+                        SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
                     }
-
-                    SR_GRAPH_GUI_NS::Immediate::Separator();
-
-                    SR_GRAPH_GUI_NS::Immediate::Checkbox("Attach to camera", &m_attachToCamera);
-                    if (m_attachToCamera) {
-                        auto&& pRenderScene = GetRenderScene();
-                        int32_t maxCameraIndex = SR_MAX(pRenderScene ? static_cast<int32_t>(pRenderScene->GetCameras().size()) - 1 : 0, 0);
-                        if (SR_GRAPH_GUI_NS::Immediate::SliderInt("Attach camera index", &m_attachCameraIndex, 0, maxCameraIndex)) {
-                            SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
-                        }
-                    }
-
-                    SR_GRAPH_GUI_NS::Immediate::Separator();
-
-                    optionFn("DEBUG_RENDER", "Debug draw");
-
-                    SR_GRAPH_GUI_NS::Immediate::Separator();
-
-                    optionFn("SR_DEFINE_DEBUG_CASCADED_SHADOW_MAP_PASS", "Debug shadow cascades");
-
-                    SR_GRAPH_GUI_NS::Immediate::Separator();
-
-                    optionFn("SR_DEFINE_DEBUG_NORMALS", "Normals");
-
-                    SR_GRAPH_GUI_NS::Immediate::Separator();
-
-                    optionFn("SR_DEFINE_WIREFRAME", "Wireframe");
-
-                    SR_GRAPH_GUI_NS::Immediate::Separator();
-
-                    optionFn("SR_LINEARIZE_DEPTH_CASCADES", "Linearize depth cascades");
-
-                    SR_GRAPH_GUI_NS::Immediate::Separator();
-
-                    const SR_UTILS_NS::StringAtom gizmoId = "SCENE_GIZMO_ENABLED";
-                    const bool isGizmoEnabled = SR_UTILS_NS::StoreUtils::Temp::GetBool(gizmoId, true);
-                    if (isGizmoEnabled) {
-                        SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor::Green());
-                    }
-                    if (SR_GRAPH_GUI_NS::Immediate::Selectable("Gizmo")) {
-                        SR_UTILS_NS::StoreUtils::Temp::SetBool(gizmoId, !isGizmoEnabled);
-                    }
-                    if (isGizmoEnabled) {
-                        SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
-                    }
-
-
-                    SR_GRAPH_GUI_NS::Immediate::EndCombo();
                 }
-            })
-            .SetItemSpacing(SR_MATH_NS::FVector2(10.f, 0.f));
+
+                SR_GRAPH_GUI_NS::Immediate::Separator();
+
+                {
+                    float_t gameSpeed = static_cast<EditorGUI*>(GetManager())->GetEngine()->GetEngineScene()->GetSpeed();
+
+                    if (SR_GRAPH_GUI_NS::Immediate::Button("Game Speed", SR_MATH_NS::FVector2(6.f * SR_GRAPH_GUI_NS::Immediate::GetFontSize(), 0))) {
+                        gameSpeed = 1.f;
+                        static_cast<EditorGUI*>(GetManager())->GetEngine()->GetEngineScene()->SetSpeed(1.f);
+                    }
+
+                    SR_GRAPH_GUI_NS::Immediate::SameLine();
+
+                    if (SR_GRAPH_GUI_NS::Immediate::SliderFloat("##Game Speed", &gameSpeed, 0.0f, 5.f)) {
+                        SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
+                        static_cast<EditorGUI*>(GetManager())->GetEngine()->GetEngineScene()->SetSpeed(gameSpeed);
+                    }
+                }
+
+                SR_GRAPH_GUI_NS::Immediate::Separator();
+
+                SR_GRAPH_GUI_NS::Immediate::Checkbox("Attach to camera", &m_attachToCamera);
+                if (m_attachToCamera) {
+                    auto&& pRenderScene = GetRenderScene();
+                    int32_t maxCameraIndex = SR_MAX(pRenderScene ? static_cast<int32_t>(pRenderScene->GetCameras().size()) - 1 : 0, 0);
+                    if (SR_GRAPH_GUI_NS::Immediate::SliderInt("Attach camera index", &m_attachCameraIndex, 0, maxCameraIndex)) {
+                        SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
+                    }
+                }
+
+                SR_GRAPH_GUI_NS::Immediate::Separator();
+
+                optionFn("DEBUG_RENDER", "Debug draw");
+
+                SR_GRAPH_GUI_NS::Immediate::Separator();
+
+                optionFn("SR_DEFINE_DEBUG_CASCADED_SHADOW_MAP_PASS", "Debug shadow cascades");
+
+                SR_GRAPH_GUI_NS::Immediate::Separator();
+
+                optionFn("SR_DEFINE_DEBUG_NORMALS", "Normals");
+
+                SR_GRAPH_GUI_NS::Immediate::Separator();
+
+                optionFn("SR_DEFINE_WIREFRAME", "Wireframe");
+
+                SR_GRAPH_GUI_NS::Immediate::Separator();
+
+                optionFn("SR_LINEARIZE_DEPTH_CASCADES", "Linearize depth cascades");
+
+                SR_GRAPH_GUI_NS::Immediate::Separator();
+
+                const SR_UTILS_NS::StringAtom gizmoId = "SCENE_GIZMO_ENABLED";
+                const bool isGizmoEnabled = SR_UTILS_NS::StoreUtils::Temp::GetBool(gizmoId, true);
+                if (isGizmoEnabled) {
+                    SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor::Green());
+                }
+                if (SR_GRAPH_GUI_NS::Immediate::Selectable("Gizmo")) {
+                    SR_UTILS_NS::StoreUtils::Temp::SetBool(gizmoId, !isGizmoEnabled);
+                }
+                if (isGizmoEnabled) {
+                    SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
+                }
+
+                SR_GRAPH_GUI_NS::Immediate::EndCombo();
+            }
+        })
+        .SetItemSpacing(SR_MATH_NS::FVector2(10.f, 0.f));
 
         AddElement()
-            .SetCustomDraw([](auto&& pElement) {
-                const auto scriptsState = SR_SCRIPTING_NS::ScriptSystem::Instance().GetState();
-                const bool hasErrors = SR_SCRIPTING_NS::ScriptSystem::Instance().HasErrors();
+        .SetCustomDraw([](auto&& pElement) {
+            const auto scriptsState = SR_SCRIPTING_NS::ScriptSystem::Instance().GetState();
+            const bool hasErrors = SR_SCRIPTING_NS::ScriptSystem::Instance().HasErrors();
 
-                switch (scriptsState) {
-                    case Scripting::ScriptSystemState::InitialAnalyse:
-                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Yellow(), "Scripts: Initial analysis...");
-                        break;
-                    case Scripting::ScriptSystemState::CheckModules:
-                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Yellow(), "Scripts: Checking modules...");
-                        break;
-                    case Scripting::ScriptSystemState::Codegen:
-                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Yellow(), "Scripts: Generating code...");
-                        break;
-                    case Scripting::ScriptSystemState::Compiling:
-                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Yellow(), "Scripts: Compiling...");
-                        break;
-                    case Scripting::ScriptSystemState::Reloading:
-                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Yellow(), "Scripts: Reloading...");
-                        break;
-                    default: {
-                        if (hasErrors) {
-                            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Red(), "Scripts: Errors");
-                        } else {
-                            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Green(), "Scripts: OK");
-                        }
-                        break;
-                    }
+            switch (scriptsState) {
+                case Scripting::ScriptSystemState::InitialAnalyse:
+                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Yellow(), "Scripts: Initial analysis...");
+                break;
+                case Scripting::ScriptSystemState::CheckModules:
+                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Yellow(), "Scripts: Checking modules...");
+                break;
+                case Scripting::ScriptSystemState::Codegen:
+                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Yellow(), "Scripts: Generating code...");
+                break;
+                case Scripting::ScriptSystemState::Compiling:
+                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Yellow(), "Scripts: Compiling...");
+                break;
+                case Scripting::ScriptSystemState::Reloading:
+                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Yellow(), "Scripts: Reloading...");
+                break;
+                default: {
+                if (hasErrors) {
+                    SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Red(), "Scripts: Errors");
+                } else {
+                    SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Green(), "Scripts: OK");
                 }
-            })
-            .SetItemSpacing(SR_MATH_NS::FVector2(10.f, 0.f));
+                break;
+            }
+            }
+        })
+        .SetItemSpacing(SR_MATH_NS::FVector2(10.f, 0.f));
 
         Super::Init();
     }
@@ -277,7 +288,7 @@ namespace SR_CORE_GUI_NS {
             case SR_UTILS_NS::KeyCode::_3: SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperation::Rotate); break;
             case SR_UTILS_NS::KeyCode::_4: SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperation::Scale); break;
             default:
-                break;
+            break;
         }
         Super::OnKeyDown(pData);
     }

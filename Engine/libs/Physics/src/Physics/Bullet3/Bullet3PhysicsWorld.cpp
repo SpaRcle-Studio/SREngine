@@ -43,7 +43,7 @@ namespace SR_PHYSICS_NS {
 
         // m_dynamicsWorld->getDispatchInfo().m_enableSPU = true;
 
-        m_dynamicsWorld->setInternalTickCallback([](btDynamicsWorld *pWorld, btScalar timeStep) {
+        m_dynamicsWorld->setInternalTickCallback([](btDynamicsWorld* pWorld, btScalar timeStep) {
             //std::cout << pWorld->getDispatcher()->getNumManifolds() << std::endl;
         });
 
@@ -124,7 +124,7 @@ namespace SR_PHYSICS_NS {
 
     bool Bullet3PhysicsWorld::RemoveRigidbody(PhysicsWorld::RigidbodyPtr pRigidbody) {
         if (auto&& pHandle = pRigidbody->GetHandle()) {
-            m_dynamicsWorld->removeRigidBody((btRigidBody *)pHandle);
+            m_dynamicsWorld->removeRigidBody((btRigidBody*)pHandle);
             return true;
         }
 

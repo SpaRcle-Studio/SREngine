@@ -35,8 +35,8 @@ namespace SR_CORE_UI_NS {
         const SR_MATH_NS::FVector2 uiMousePos = pCanvas->ScreenToCanvasSpace(input.GetMousePos());
 
         const bool isDown = m_leftClick && input.GetMouseDown(SR_UTILS_NS::MouseCode::MouseLeft)
-            || m_rightClick && input.GetMouseDown(SR_UTILS_NS::MouseCode::MouseRight)
-            || m_middleClick && input.GetMouseDown(SR_UTILS_NS::MouseCode::MouseMiddle);
+                            || m_rightClick && input.GetMouseDown(SR_UTILS_NS::MouseCode::MouseRight)
+                            || m_middleClick && input.GetMouseDown(SR_UTILS_NS::MouseCode::MouseMiddle);
 
         if (isDown && m_state != State::Pressed && OnBeginDrag(*pCanvas, uiMousePos, pCanvas->GetCamera())) {
             m_state = State::Pressed;
@@ -147,20 +147,20 @@ namespace SR_CORE_UI_NS {
 
         switch (m_direction) {
             case ScrollBarDirection::LeftToRight:
-                SetValue(SR_CLAMP01(handleCorner.x / remainingSize));
-                break;
+            SetValue(SR_CLAMP01(handleCorner.x / remainingSize));
+            break;
             case ScrollBarDirection::RightToLeft:
-                SetValue(SR_CLAMP01(1.f - (handleCorner.x / remainingSize)));
-                break;
+            SetValue(SR_CLAMP01(1.f - (handleCorner.x / remainingSize)));
+            break;
             case ScrollBarDirection::BottomToTop:
-                SetValue(SR_CLAMP01(handleCorner.y / remainingSize));
-                break;
+            SetValue(SR_CLAMP01(handleCorner.y / remainingSize));
+            break;
             case ScrollBarDirection::TopToBottom:
-                SetValue(SR_CLAMP01(1.f - (handleCorner.y / remainingSize)));
-                break;
+            SetValue(SR_CLAMP01(1.f - (handleCorner.y / remainingSize)));
+            break;
             default:
-                SRHalt("Unexpected scrollbar direction!");
-                break;
+            SRHalt("Unexpected scrollbar direction!");
+            break;
         }
     }
 }
