@@ -17,6 +17,9 @@ jobs:
     name: Uncrustify Formatting
     runs-on: ubuntu-latest
     continue-on-error: true
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
