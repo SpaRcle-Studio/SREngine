@@ -40,9 +40,9 @@ namespace SR_PHYSICS_NS {
         void OnSingletonDestroy() override;
 
     private:
-        std::vector<LibraryImpl*> m_libraries;
-        std::map<Space, LibraryType> m_activeLibs;
-        std::set<LibraryType> m_supportedLibs;
+        SR_UTILS_NS::Vector<LibraryImpl*> m_libraries;
+        SR_UTILS_NS::Map<Space, LibraryType> m_activeLibs;
+        SR_UTILS_NS::Set<LibraryType> m_supportedLibs;
 
         SR_HTYPES_NS::SharedPtr<SR_PTYPES_NS::PhysicsMaterial> m_defaultMaterial;
     };

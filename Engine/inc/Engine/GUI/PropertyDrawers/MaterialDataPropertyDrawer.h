@@ -29,7 +29,7 @@ namespace SR_CORE_GUI_NS {
         bool DrawShaderProperty(SR_GRAPH_NS::MaterialShaderData& shaderData, SR_GRAPH_NS::MaterialShaderProperty& property, const PropertyDrawerContext& context);
 
     private:
-        std::map<SR_UTILS_NS::StringAtom, bool> m_shaderDataOpened;
+        SR_UTILS_NS::Map<SR_UTILS_NS::StringAtom, bool> m_shaderDataOpened;
         bool m_isNeedArrow = false;
 
         MathVectorPropertyDrawer::Ptr m_vectorDrawer;

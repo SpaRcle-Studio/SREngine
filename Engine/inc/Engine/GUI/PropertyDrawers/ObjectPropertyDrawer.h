@@ -41,9 +41,9 @@ namespace SR_CORE_GUI_NS {
     private:
         bool m_openedByDefault = false;
         bool m_isOpened = false;
-        std::set<SR_UTILS_NS::StringAtom> m_openedGroups;
-        std::vector<SR_UTILS_NS::StringAtom> m_groups;
-        std::vector<PropertyDrawerBase::Ptr> m_drawers;
+        SR_UTILS_NS::Set<SR_UTILS_NS::StringAtom> m_openedGroups;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> m_groups;
+        SR_UTILS_NS::Vector<PropertyDrawerBase::Ptr> m_drawers;
 
     };
 }

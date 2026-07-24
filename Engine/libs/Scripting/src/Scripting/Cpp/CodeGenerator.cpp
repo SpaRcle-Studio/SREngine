@@ -16,13 +16,13 @@
 #include <Enum/BuildType.hpp>
 
 namespace SR_SCRIPTING_NS {
-    void CppCodeGenerator::ProcessChangedCodeFiles(const std::set<SR_UTILS_NS::Path>& changedFiles) {
+    void CppCodeGenerator::ProcessChangedCodeFiles(const SR_UTILS_NS::Set<SR_UTILS_NS::Path>& changedFiles) {
         SR_TRACY_ZONE;
 
-        std::set<SR_UTILS_NS::Path> deletedFiles;
-        std::set<SR_UTILS_NS::Path> updatedCppFiles;
+        SR_UTILS_NS::Set<SR_UTILS_NS::Path> deletedFiles;
+        SR_UTILS_NS::Set<SR_UTILS_NS::Path> updatedCppFiles;
 
-        std::set<SR_UTILS_NS::StringAtom> changedModuleNames;
+        SR_UTILS_NS::Set<SR_UTILS_NS::StringAtom> changedModuleNames;
 
         for (auto&& file : changedFiles) {
             if (file.IsFile()) {
@@ -96,9 +96,9 @@ namespace SR_SCRIPTING_NS {
         });
     }
 
-    void CppCodeGenerator::ProcessChangedModules(const std::set<SR_UTILS_NS::Path>& changedModules) {
-        std::set<SR_UTILS_NS::Path> deletedModules;
-        std::set<SR_UTILS_NS::Path> updatedModules;
+    void CppCodeGenerator::ProcessChangedModules(const SR_UTILS_NS::Set<SR_UTILS_NS::Path>& changedModules) {
+        SR_UTILS_NS::Set<SR_UTILS_NS::Path> deletedModules;
+        SR_UTILS_NS::Set<SR_UTILS_NS::Path> updatedModules;
 
         for (auto&& module : changedModules) {
             if (module.IsFile()) {

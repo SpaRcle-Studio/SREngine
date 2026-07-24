@@ -256,7 +256,7 @@ def generate_class_meta_save(f, class_obj: reflection_utils.SpaRcleClass, tabs):
             can_save_conditions = []
 
             if len(prop.dont_save_tags) > 0:
-                f.write('\t' * tabs + f'const static std::set<SpaRcle::Utils::StringAtom> {prop.serialize_name}_dontSaveTags = {{')
+                f.write('\t' * tabs + f'const static SR_UTILS_NS::Set<SpaRcle::Utils::StringAtom> {prop.serialize_name}_dontSaveTags = {{')
                 for tag in prop.dont_save_tags:
                     f.write(f'"{tag}", ')
                 f.write('};\n')
@@ -347,7 +347,7 @@ def generate_class_meta_load(f, class_obj, tabs):
             can_load_conditions = []
 
             if len(prop.dont_save_tags) > 0:
-                f.write('\t' * tabs + f'const static std::set<SpaRcle::Utils::StringAtom> {prop.serialize_name}_dontLoadTags = {{')
+                f.write('\t' * tabs + f'const static SR_UTILS_NS::Set<SpaRcle::Utils::StringAtom> {prop.serialize_name}_dontLoadTags = {{')
                 for tag in prop.dont_save_tags:
                     f.write(f'"{tag}", ')
                 f.write('};\n')

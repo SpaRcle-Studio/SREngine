@@ -69,7 +69,7 @@ namespace SR_AUDIO_NS {
 
         void SetGlobalGain(float_t gain) noexcept;
 
-        SR_NODISCARD const std::set<SoundListener*>& GetListeners() const noexcept { return m_listeners; }
+        SR_NODISCARD const SR_UTILS_NS::Set<SoundListener*>& GetListeners() const noexcept { return m_listeners; }
         SR_NODISCARD const std::list<PlayData*>& GetPlayStack() const noexcept { return m_playStack; }
 
         SR_NODISCARD float_t GetGlobalGain() const noexcept { return m_globalGain.load(); }
@@ -99,12 +99,12 @@ namespace SR_AUDIO_NS {
     private:
         std::atomic<float_t> m_globalGain = 1.f;
         std::atomic<SR_HTYPES_NS::Thread::ThreadId> m_threadId = SR_HTYPES_NS::Thread::EmptyThreadId();
-        std::set<SoundListener*> m_listeners;
+        SR_UTILS_NS::Set<SoundListener*> m_listeners;
         SR_HTYPES_NS::Thread::Ptr m_thread = nullptr;
         std::atomic<State> m_state = State::Stopped;
         std::list<PlayData*> m_playStack;
-        std::set<PlayData*> m_playing;
-        std::map<AudioLibrary, std::map<AudioDeviceName, SoundContext*>> m_contexts;
+        SR_UTILS_NS::Set<PlayData*> m_playing;
+        SR_UTILS_NS::Map<AudioLibrary, SR_UTILS_NS::Map<AudioDeviceName, SoundContext*>> m_contexts;
 
     };
 }

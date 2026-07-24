@@ -38,7 +38,7 @@ namespace SR_CORE_GUI_NS {
             SR_UTILS_NS::TimePointType lastUsage;
             ObjectPropertyDrawer::Ptr pObjectDrawer;
         };
-        std::map<void*, Context> m_contexts;
+        SR_UTILS_NS::Map<void*, Context> m_contexts;
         uint64_t m_maxContexts = 100;
 
         SR_CORE_GUI_NS::PointerPropertyDrawer::Ptr m_pPointerDrawer;

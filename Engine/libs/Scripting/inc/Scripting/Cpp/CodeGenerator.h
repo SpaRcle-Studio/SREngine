@@ -37,7 +37,7 @@ namespace SR_SCRIPTING_NS {
         bool isNeedCodegen = false;
         SR_UTILS_NS::Path path;
         CppScriptModuleInfo moduleInfo;
-        std::set<SR_UTILS_NS::Path> codeFiles;
+        SR_UTILS_NS::Set<SR_UTILS_NS::Path> codeFiles;
         uint64_t hash = 0;
 
         bool IsCacheExpired(const SR_UTILS_NS::Path& cacheFolder) const {
@@ -66,13 +66,13 @@ namespace SR_SCRIPTING_NS {
         bool Init();
 
         SR_NODISCARD bool IsNeedRecompile() const;
-        SR_NODISCARD const std::vector<CppCodegenModule>& GetModules() const { return m_modules; }
+        SR_NODISCARD const SR_UTILS_NS::Vector<CppCodegenModule>& GetModules() const { return m_modules; }
         SR_NODISCARD CppCodegenModule* GetModule(SR_UTILS_NS::StringAtom moduleName);
 
         void SetCompiler(CppCompiler* compiler) { m_compiler = compiler; }
 
-        void ProcessChangedModules(const std::set<SR_UTILS_NS::Path>& changedModules);
-        void ProcessChangedCodeFiles(const std::set<SR_UTILS_NS::Path>& changedFiles);
+        void ProcessChangedModules(const SR_UTILS_NS::Set<SR_UTILS_NS::Path>& changedModules);
+        void ProcessChangedCodeFiles(const SR_UTILS_NS::Set<SR_UTILS_NS::Path>& changedFiles);
 
         void RegenerateChangedModules();
 
@@ -90,7 +90,7 @@ namespace SR_SCRIPTING_NS {
     private:
         ScriptSystem* m_pScriptSystem = nullptr;
         CppCompiler* m_compiler = nullptr;
-        std::vector<CppCodegenModule> m_modules;
+        SR_UTILS_NS::Vector<CppCodegenModule> m_modules;
         SR_UTILS_NS::Path m_resourcesFolder;
         SR_UTILS_NS::Path m_engineResourcesFolder;
         SR_UTILS_NS::Path m_cacheFolder;

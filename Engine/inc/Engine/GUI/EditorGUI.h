@@ -36,7 +36,7 @@ namespace SR_CORE_GUI_NS {
 
     class EditorGUI : public SR_GRAPH_GUI_NS::WidgetManager {
         using Super = SR_GRAPH_GUI_NS::WidgetManager;
-        using Icons = std::map<EditorIcon, SR_GTYPES_NS::Texture::Ptr>;
+        using Icons = SR_UTILS_NS::Map<EditorIcon, SR_GTYPES_NS::Texture::Ptr>;
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext>;
         using WindowPtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::Window>;
         using EnginePtr = SR_HTYPES_NS::SharedPtr<SR_CORE_NS::Engine>;

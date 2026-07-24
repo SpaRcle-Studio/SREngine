@@ -71,8 +71,8 @@ namespace SR_PTYPES_NS {
         /// @property
         Combine m_bounceCombine = Combine::Average;
 
-        std::set<SR_PTYPES_NS::Rigidbody*> m_rigidbodies;
-        std::map<LibraryType, PhysicsMaterialImpl*> m_implementations;
+        SR_UTILS_NS::Set<SR_PTYPES_NS::Rigidbody*> m_rigidbodies;
+        SR_UTILS_NS::Map<LibraryType, PhysicsMaterialImpl*> m_implementations;
     };
 }
 #endif //SR_ENGINE_PHYSICSMATERIAL_H

@@ -193,7 +193,7 @@ namespace SR_SCRIPTING_NS {
                 ThreadIdle();
                 break;
             case ScriptSystemState::CheckModules: {
-                std::set<SR_UTILS_NS::Path> changedModules;
+                SR_UTILS_NS::Set<SR_UTILS_NS::Path> changedModules;
                 {
                     SR_LOCK_GUARD;
                     changedModules = SR_EXCHANGE(m_changedModules, {});
@@ -203,7 +203,7 @@ namespace SR_SCRIPTING_NS {
                 break;
             }
             case ScriptSystemState::Codegen: {
-                std::set<SR_UTILS_NS::Path> changedCppFiles;
+                SR_UTILS_NS::Set<SR_UTILS_NS::Path> changedCppFiles;
                 {
                     SR_LOCK_GUARD;
                     changedCppFiles = SR_EXCHANGE(m_changedCppFiles, {});
@@ -435,7 +435,7 @@ namespace SR_SCRIPTING_NS {
                 m_changedCppModules.insert(modulePath);
             }
         }
-        std::set<SR_UTILS_NS::Path> changedCppModules = SR_EXCHANGE(m_changedCppModules, {});
+        SR_UTILS_NS::Set<SR_UTILS_NS::Path> changedCppModules = SR_EXCHANGE(m_changedCppModules, {});
 
         for (auto&& modulePath : changedCppModules) {
             if (m_moduleManager->ReloadModule(modulePath)) {

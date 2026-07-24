@@ -65,7 +65,7 @@ namespace SpaRcle::Editor::UI {
         /// @property
         SR_UTILS_NS::EntityRef<SR_UTILS_NS::SceneObject> m_itemProto;
 
-        std::set<SR_UTILS_NS::EntityId> m_openedItems;
+        SR_UTILS_NS::Set<SR_UTILS_NS::EntityId> m_openedItems;
 
     };
 }

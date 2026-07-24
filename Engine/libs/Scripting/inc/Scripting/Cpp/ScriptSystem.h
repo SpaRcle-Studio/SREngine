@@ -39,7 +39,7 @@ namespace SR_SCRIPTING_NS {
 
         SR_NODISCARD const ModuleManager* GetModuleManager() const { return m_moduleManager.Get(); }
         SR_NODISCARD ModuleManager* GetModuleManager() { return m_moduleManager.Get(); }
-        SR_NODISCARD const std::vector<SR_UTILS_NS::Path>& GetEngineSourcesIncludePaths() const { return m_engineSourcesIncludePaths; }
+        SR_NODISCARD const SR_UTILS_NS::Vector<SR_UTILS_NS::Path>& GetEngineSourcesIncludePaths() const { return m_engineSourcesIncludePaths; }
         SR_NODISCARD const SR_UTILS_NS::Path& GetEngineSourcesPath() const { return m_pathToEngineSourcesRoot; }
         SR_NODISCARD ScriptSystemState GetState() const { return m_state; }
         SR_NODISCARD bool HasErrors() const { return m_hasCompileErrors || m_hasModuleCopyErrors; }
@@ -84,7 +84,7 @@ namespace SR_SCRIPTING_NS {
 
         /// thread owned parameters
 
-        std::vector<SR_UTILS_NS::Path> m_engineSourcesIncludePaths;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::Path> m_engineSourcesIncludePaths;
         SR_UTILS_NS::TimePointType m_lastFileSystemEvent;
 
         CppCompiler::Ptr m_compiler;
@@ -99,11 +99,11 @@ namespace SR_SCRIPTING_NS {
         std::atomic<bool> m_forceReloadModules = false;
         std::atomic<ScriptSystemState> m_state = ScriptSystemState::InitialAnalyse;
 
-        std::set<SR_UTILS_NS::Path> m_changedCppFiles;
-        std::set<SR_UTILS_NS::Path> m_changedCppModules;
-        std::set<SR_UTILS_NS::Path> m_changedModules;
+        SR_UTILS_NS::Set<SR_UTILS_NS::Path> m_changedCppFiles;
+        SR_UTILS_NS::Set<SR_UTILS_NS::Path> m_changedCppModules;
+        SR_UTILS_NS::Set<SR_UTILS_NS::Path> m_changedModules;
 
-        std::set<SR_UTILS_NS::StringAtom> m_modulesToCopy;
+        SR_UTILS_NS::Set<SR_UTILS_NS::StringAtom> m_modulesToCopy;
 
     };
 }

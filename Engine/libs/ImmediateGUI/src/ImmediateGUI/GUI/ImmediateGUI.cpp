@@ -122,7 +122,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     }
 
     ImmediateDataType GetDataType(std::string_view type) {
-        static const std::map<std::string_view, ImmediateDataType> table = {
+        static const SR_UTILS_NS::Map<std::string_view, ImmediateDataType> table = {
                 { "int", ImmediateDataType::Int32 },
                 { "unsigned int", ImmediateDataType::UInt32 },
                 { "float", ImmediateDataType::Float },
@@ -135,14 +135,14 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     }
 
     ImmediateDataType GetDataType(uint64_t size, bool isSigned, bool isIntegral) {
-        static const std::map<uint64_t, ImmediateDataType> signedTable = {
+        static const SR_UTILS_NS::Map<uint64_t, ImmediateDataType> signedTable = {
                 { 1, ImmediateDataType::Int8  },
                 { 2, ImmediateDataType::Int16 },
                 { 4, ImmediateDataType::Int32 },
                 { 8, ImmediateDataType::Int64 }
         };
 
-        static const std::map<uint64_t, ImmediateDataType> unsignedTable = {
+        static const SR_UTILS_NS::Map<uint64_t, ImmediateDataType> unsignedTable = {
                 { 1, ImmediateDataType::UInt8  },
                 { 2, ImmediateDataType::UInt16 },
                 { 4, ImmediateDataType::UInt32 },
