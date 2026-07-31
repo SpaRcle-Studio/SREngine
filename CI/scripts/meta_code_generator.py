@@ -281,8 +281,7 @@ def generate_class_meta_save(f, class_obj: reflection_utils.SpaRcleClass, tabs):
                 else:
                     f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || !(DefaultTypeInstance() ? SpaRcle::Utils::IsDefault(propValue, &DefaultTypeInstance()->{prop.name}) : SpaRcle::Utils::IsDefault(propValue)))) {{\n')
 
-                f.write('\t' * (tabs + 2) + f'static const SpaRcle::Utils::SerializationId keyName_{prop.serialize_name} = SpaRcle::Utils::SerializationId::CreateFromString("{prop.serialize_name}");\n')
-                f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Serialization::Save(serializer, propValue, keyName_{prop.serialize_name});\n')
+                f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Serialization::Save(serializer, propValue, PropertyKeyName_{prop.serialize_name});\n')
 
                 f.write('\t' * (tabs + 1) + f'}}\n')
             else:
@@ -293,8 +292,7 @@ def generate_class_meta_save(f, class_obj: reflection_utils.SpaRcleClass, tabs):
                 else:
                     f.write('\t' * (tabs + 1) + f'if (({base_condition_str} || !(DefaultTypeInstance() ? SpaRcle::Utils::IsDefault(value.{prop.name}, &DefaultTypeInstance()->{prop.name}) : SpaRcle::Utils::IsDefault(value.{prop.name})))) {{\n')
 
-                f.write('\t' * (tabs + 2) + f'static const SpaRcle::Utils::SerializationId keyName_{prop.serialize_name} = SpaRcle::Utils::SerializationId::CreateFromString("{prop.serialize_name}");\n')
-                f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Serialization::Save(serializer, value.{prop.name}, keyName_{prop.serialize_name});\n')
+                f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Serialization::Save(serializer, value.{prop.name}, PropertyKeyName_{prop.serialize_name});\n')
                 f.write('\t' * (tabs + 1) + f'}}\n')
 
             f.write('\t' * tabs + f'}}\n')
@@ -362,8 +360,6 @@ def generate_class_meta_load(f, class_obj, tabs):
                 cond_str = " && ".join(can_load_conditions)
                 f.write('\t' * tabs + f'if ({cond_str}) {{\n')
 
-            f.write('\t' * (tabs + 1) + f'static const SpaRcle::Utils::SerializationId keyName_{prop.serialize_name} = SpaRcle::Utils::SerializationId::CreateFromString("{prop.serialize_name}");' + '\n')
-
             if prop.setter:
                 if prop.getter:
                     f.write('\t' * (tabs + 1) + f'using Type = SpaRcle::Utils::RemoveQualifiersT<decltype(value.{prop.getter}())>;' + '\n')
@@ -372,7 +368,7 @@ def generate_class_meta_load(f, class_obj, tabs):
                 else:
                     f.write('\t' * (tabs + 1) + f'using Type = SpaRcle::Utils::RemoveQualifiersT<decltype(value.{prop.name})>;' + '\n')
 
-                load_fn = f'SpaRcle::Utils::Serialization::Load(deserializer, propValue, keyName_{prop.serialize_name})'
+                load_fn = f'SpaRcle::Utils::Serialization::Load(deserializer, propValue, PropertyKeyName_{prop.serialize_name})'
 
                 f.write('\t' * (tabs + 1) + 'Type propValue {};\n')
 
@@ -391,7 +387,7 @@ def generate_class_meta_load(f, class_obj, tabs):
                 f.write('\t' * (tabs + 1) + f'value.{prop.setter}(propValue);' + '\n')
 
             else:
-                load_fn = f'SpaRcle::Utils::Serialization::Load(deserializer, value.{prop.name}, keyName_{prop.serialize_name})'
+                load_fn = f'SpaRcle::Utils::Serialization::Load(deserializer, value.{prop.name}, PropertyKeyName_{prop.serialize_name})'
                 if prop.default_value:
                     f.write('\t' * (tabs + 1) + f'if (!{load_fn}) {{' + '\n')
                     f.write('\t' * (tabs + 2) + f'value.{prop.name} = GetDefault_{prop.serialize_name}();' + '\n')
@@ -604,6 +600,11 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
     #f.write('\t' * (tabs + 1) + f'}}\n')
     #f.write('\t' * (tabs + 1) + f'return { "true" if has_serializable_fields else "false" };\n')
     #f.write('\t' * tabs + '}\n\n')
+
+    for prop in class_obj.variables:
+        f.write('\t' * (tabs) + f'static inline const SpaRcle::Utils::SerializationId PropertyKeyName_{prop.serialize_name} = SpaRcle::Utils::SerializationId::CreateFromString(SpaRcle::Utils::StringView("{prop.serialize_name}", {len(prop.serialize_name)}));\n')
+    if len(class_obj.variables) > 0:
+        f.write('\n')
 
     generate_class_meta_save(f, class_obj, tabs)
     generate_class_meta_load(f, class_obj, tabs)
