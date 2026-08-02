@@ -655,13 +655,13 @@ use tabs: true
 						6-s:ButtonHovered
 					5-o:second
 						6-v:r
-							7-f:0.18
+							7-f:0.5
 						6-v:g
-							7-f:0.18
+							7-f:0.3
 						6-v:b
-							7-f:0.19
+							7-f:0.65
 						6-v:a
-							7-f:0.22
+							7-f:0.3
 				4-k:item
 					5-v:first
 						6-s:ButtonActive
