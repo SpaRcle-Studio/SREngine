@@ -35,13 +35,13 @@ namespace SR_CORE_GUI_NS {
         void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) override;
         void OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) override;
 
-        SR_NODISCARD const std::set<SR_UTILS_NS::SceneObject::Ptr>& GetSelected() const;
+        SR_NODISCARD const SR_UTILS_NS::Set<SR_UTILS_NS::SceneObject::Ptr>& GetSelected() const;
         SR_NODISCARD SR_GRAPH_NS::GUI::Widget* GetSceneRunnerWidget() const noexcept;
 
         void ClearSelected();
         void SelectGameObject(const SR_UTILS_NS::SceneObject::Ptr& ptr);
 
-        void SetSelectedImpl(const std::set<SR_UTILS_NS::SceneObject::Ptr>& changeSelected);
+        void SetSelectedImpl(const SR_UTILS_NS::Set<SR_UTILS_NS::SceneObject::Ptr>& changeSelected);
 
     private:
         void ExpandPath(const SR_UTILS_NS::SceneObject::Ptr& gm);
@@ -56,10 +56,10 @@ namespace SR_CORE_GUI_NS {
 
     private:
         Engine* m_engine = nullptr;
-        std::vector<SR_UTILS_NS::StringAtom> m_availableUINodes;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> m_availableUINodes;
         SR_WORLD_NS::Scene::Ptr m_scene;
-        std::vector<uint64_t> m_pointersHolder;
-        std::set<SR_UTILS_NS::SceneObject::Ptr> m_selected;
+        SR_UTILS_NS::Vector<uint64_t> m_pointersHolder;
+        SR_UTILS_NS::Set<SR_UTILS_NS::SceneObject::Ptr> m_selected;
         SR_UTILS_NS::Vector<SR_UTILS_NS::SceneObject::Ptr> m_tree;
 
         std::atomic<bool> m_shiftPressed;

@@ -321,13 +321,16 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(std::to_string(pComponent->GetEntityId()).c_str());
+        m_tmpBuffer.clear();
+        SR_UTILS_NS::FormatTo(m_tmpBuffer, "{}", pComponent->GetEntityId());
+        SR_GRAPH_GUI_NS::Immediate::PushID(m_tmpBuffer.c_str());
 
         SRAssert1Once(pComponent->Valid());
 
         ++index;
 
-        const std::string headerName = "[{}] {}"_format(index, pComponent->GetMeta()->GetDisplayName());
+        m_tmpBuffer.clear();
+        SR_UTILS_NS::FormatTo(m_tmpBuffer, "[{}] {}", index, pComponent->GetMeta()->GetDisplayName());
 
         bool enabled = pComponent->IsEnabled();
         if (SR_GRAPH_GUI_NS::Immediate::Checkbox("##componentEnabled", &enabled)) {
@@ -350,7 +353,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (SR_GRAPH_GUI_NS::Immediate::IsItemClicked(SR_GRAPH_GUI_NS::Immediate::MouseButton::Right)) {
-            SR_GRAPH_GUI_NS::Immediate::OpenPopup(headerName.c_str());
+            SR_GRAPH_GUI_NS::Immediate::OpenPopup(m_tmpBuffer.c_str());
         }
 
         if (!SR_GRAPH_GUI_NS::Immediate::GetDragDropPayload() && SR_GRAPH_GUI_NS::Immediate::BeginDragDropSource(SR_GRAPH_GUI_NS::Immediate::DragDropFlags::SourceAllowNullID)) {
@@ -421,7 +424,7 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-        if (SR_GRAPH_GUI_NS::Immediate::BeginPopup(headerName.c_str())) {
+        if (SR_GRAPH_GUI_NS::Immediate::BeginPopup(m_tmpBuffer.c_str())) {
             auto&& pParent = pComponent->GetParent();
             const int32_t componentIndex = pParent->GetComponentIndex(pComponent);
             const auto componentsCount = static_cast<int32_t>(pParent->GetComponentsCount());
@@ -528,7 +531,8 @@ namespace SR_CORE_GUI_NS {
             }
         };
 
-        auto&& value = SR_UTILS_NS::Reflection::Value::CreateRef(pSceneObject);
+        SR_UTILS_NS::SceneObject::Ptr pStrongSceneObject = pSceneObject;
+        auto&& value = SR_UTILS_NS::Reflection::Value::CreateRef(pStrongSceneObject);
         auto&& context = CreateDrawerContext(&value);
 
         context.fieldWidth += context.fieldTitleWidth;
@@ -587,7 +591,7 @@ namespace SR_CORE_GUI_NS {
             const bool hasComponents = std::ranges::any_of(checkCategory.components, [&](auto&& info) {
                 return SR_UTILS_NS::StringUtils::CheckSearchMatch(search, info.name) || SR_UTILS_NS::StringUtils::CheckSearchMatch(search, info.displayName);
             });
-            return hasComponents || std::ranges::any_of(checkCategory.categories, [&](auto&& pair) {
+            return hasComponents || checkCategory.categories.any_of([&](auto&& pair) {
                 return checkMatch(pair.second, search);
             });
         };

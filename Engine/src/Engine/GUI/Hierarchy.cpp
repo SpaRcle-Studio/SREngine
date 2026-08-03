@@ -506,7 +506,7 @@ namespace SR_CORE_GUI_NS {
         }
     }
 
-    const std::set<SR_UTILS_NS::SceneObject::Ptr>& Hierarchy::GetSelected() const {
+    const SR_UTILS_NS::Set<SR_UTILS_NS::SceneObject::Ptr>& Hierarchy::GetSelected() const {
         return m_selected;
     }
 
@@ -536,7 +536,7 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-        std::set<SR_UTILS_NS::SceneObject::Ptr> newSelected;
+        SR_UTILS_NS::Set<SR_UTILS_NS::SceneObject::Ptr> newSelected;
         if (m_shiftPressed) {
             newSelected = m_selected;
         }
@@ -546,7 +546,7 @@ namespace SR_CORE_GUI_NS {
         m_engine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Sync);
     }
 
-    void Hierarchy::SetSelectedImpl(const std::set<SR_UTILS_NS::SceneObject::Ptr>& changeSelected){
+    void Hierarchy::SetSelectedImpl(const SR_UTILS_NS::Set<SR_UTILS_NS::SceneObject::Ptr>& changeSelected){
         SR_TRACY_ZONE;
         m_selected = changeSelected;
 #ifdef SR_DEBUG

@@ -20,91 +20,76 @@
 namespace SR_CORE_GUI_NS {
     SR_UTILS_NS::Reflection::Value PropertyDrawerContext::GetValue() const {
         if (pValue) {
-            if (pValue->IsEmbedded() || pValue->IsDynamic()) {
-                return pValue->Ref();
-            }
-            return *pValue;
+            return pValue->Ref();
         }
-
-        return pProperty->Get(pOwner).DetachIfConst();
+        return pProperty->Get(pOwner);
     }
 
     SR_UTILS_NS::StringAtom GetValueInspector(const SR_UTILS_NS::Reflection::Value& value) {
         SR_TRACY_ZONE;
 
-        if (value.IsBitMap()) {
-            return "BitMapPropertyDrawer";
+        auto&& typeInfo = value.GetTypeInfo();
+        switch (typeInfo.category) {
+            case SR_UTILS_NS::Reflection::ReflectedCategoryType::Object:
+                return "ObjectPropertyDrawer"_atom;
+            case SR_UTILS_NS::Reflection::ReflectedCategoryType::String:
+                if (typeInfo.detailedType == "Path") {
+                    return "PathPropertyDrawer"_atom;
+                }
+                return "StringPropertyDrawer"_atom;
+            case SR_UTILS_NS::Reflection::ReflectedCategoryType::Arithmetic:
+                if (typeInfo.detailedType == "bool") {
+                    return "BoolPropertyDrawer"_atom;
+                }
+                return "NumericPropertyDrawer"_atom;
+            case SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum:
+                return "EnumPropertyDrawer"_atom;
+            case SR_UTILS_NS::Reflection::ReflectedCategoryType::MathObject:
+                if (typeInfo.detailedType == "Quaternion") {
+                    return "MathVectorPropertyDrawer"_atom;
+                }
+                if (typeInfo.detailedType == "Color") {
+                    return "FColorPropertyDrawer"_atom;
+                }
+                if (typeInfo.detailedType == "AABB") {
+                    return "AABBPropertyDrawer"_atom;
+                }
+                return SR_UTILS_NS::StringAtom();
+            case SR_UTILS_NS::Reflection::ReflectedCategoryType::MathSize:
+                return "MathSizePropertyDrawer"_atom;
+            case SR_UTILS_NS::Reflection::ReflectedCategoryType::MathVector:
+                return "MathVectorPropertyDrawer"_atom;
+            case SR_UTILS_NS::Reflection::ReflectedCategoryType::MathRect:
+                return "RectPropertyDrawer"_atom;
+            case SR_UTILS_NS::Reflection::ReflectedCategoryType::Container:
+                if (typeInfo.detailedType == "Optional") {
+                    return "OptionalPropertyDrawer"_atom;
+                }
+                if (typeInfo.detailedType == "SharedPtr") {
+                    return "PointerPropertyDrawer"_atom;
+                }
+                if (typeInfo.detailedType == "Pair") {
+                    return "PairPropertyDrawer"_atom;
+                }
+                if (typeInfo.detailedType == "EntityRef") {
+                    return "EntityRefPropertyDrawer"_atom;
+                }
+                if (typeInfo.detailedType == "ResourceRef") {
+                    return "ResourceRefPropertyDrawer"_atom;
+                }
+                if (typeInfo.detailedType == "Vector") {
+                    if (typeInfo.pNext[0]->detailedType == "bool") {
+                        return "BitMapPropertyDrawer"_atom;
+                    }
+                    return "VectorPropertyDrawer"_atom;
+                }
+                if (typeInfo.detailedType == "FlatHashMap" || typeInfo.detailedType == "FlatHashSet" || typeInfo.detailedType == "Map" || typeInfo.detailedType == "Set") {
+                    return "AssociativePropertyDrawer"_atom;
+                }
+                return SR_UTILS_NS::StringAtom();
+            default:
+                return SR_UTILS_NS::StringAtom();
         }
-
-        if (value.IsBool()) {
-            return "BoolPropertyDrawer";
-        }
-
-        if (value.IsOptional()) {
-            return "OptionalPropertyDrawer";
-        }
-
-        if (value.IsArithmetic()) {
-            return "NumericPropertyDrawer";
-        }
-
-        if (value.IsSequenceContainer()) {
-            return "VectorPropertyDrawer";
-        }
-
-        if (value.IsAssociativeContainer()) {
-            return "AssociativePropertyDrawer";
-        }
-
-        if (value.IsMathSize()) {
-            return "MathSizePropertyDrawer";
-        }
-
-        if (value.IsMathVector() || value.IsQuaternion()) {
-            return "MathVectorPropertyDrawer";
-        }
-
-        if (value.IsFColor()) {
-            return "FColorPropertyDrawer";
-        }
-
-        if (value.IsRect()) {
-            return "RectPropertyDrawer";
-        }
-
-        if (value.IsEnum()) {
-            return "EnumPropertyDrawer";
-        }
-
-        if (value.IsSmartPtr()) {
-            return "PointerPropertyDrawer";
-        }
-
-        if (value.IsString() || value.IsStringView() || value.IsStringAtom() || value.IsUnicodeString()) {
-            return "StringPropertyDrawer";
-        }
-
-        if (value.IsPath()) {
-            return "PathPropertyDrawer";
-        }
-
-        if (value.IsAABB()) {
-            return "AABBPropertyDrawer";
-        }
-
-        if (value.IsEntityRef()) {
-            return SR_CORE_GUI_NS::EntityRefPropertyDrawer::GetClassStaticName();
-        }
-
-        if (value.IsResourceRef()) {
-            return SR_CORE_GUI_NS::ResourceRefPropertyDrawer::GetClassStaticName();
-        }
-
-        if (value.IsClass()) {
-            return "ObjectPropertyDrawer";
-        }
-
-        return SR_UTILS_NS::StringAtom();
     }
 
     SR_GRAPH_NS::RenderContext::Ptr PropertyDrawerBase::GetRenderContext() const {
@@ -157,13 +142,13 @@ namespace SR_CORE_GUI_NS {
                 }
                 feedback.isChanged = true;
                 value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
-                value = value.DetachIfConst();
+                value = value.Copy();
             }
 
             SR_GRAPH_GUI_NS::Immediate::SameLine();
         }
 
-        if (auto&& bValue = value.TryCast<bool>()) {
+        if (auto&& bValue = value.Cast<bool>()) {
             bool isChecked = *bValue;
             if (SR_GRAPH_GUI_NS::Immediate::Checkbox("##Checkbox", &isChecked)) {
                 if (context.onBeforeChangeCallback) {
@@ -208,7 +193,7 @@ namespace SR_CORE_GUI_NS {
                 }
                 feedback.isChanged = true;
                 value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
-                value = value.DetachIfConst();
+                value = value.Copy();
             }
 
             SR_GRAPH_GUI_NS::Immediate::SameLine();
@@ -240,7 +225,7 @@ namespace SR_CORE_GUI_NS {
                 SR_GRAPH_GUI_NS::Immediate::SameLine();
                 SR_GRAPH_GUI_NS::Immediate::PushID("Value");
 
-                SR_UTILS_NS::Reflection::Value optionalValue = pOptionalBase->GetReflectionValue().Detach();
+                SR_UTILS_NS::Reflection::Value optionalValue = pOptionalBase->GetReflectionValue().Copy();
 
                 SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard lock(!hasValue);
                 PropertyDrawerContext valueContext = context;
@@ -382,7 +367,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        if (!value.IsArithmetic()) {
+        if (value.GetTypeInfo().category != SR_UTILS_NS::Reflection::ReflectedCategoryType::Arithmetic) {
             SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Property is not numeric!");
             return feedback;
         }
@@ -400,7 +385,7 @@ namespace SR_CORE_GUI_NS {
             }
             feedback.isChanged = true;
             value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
-            value = value.DetachIfConst();
+            value = value.Copy();
         }
 
         SR_GRAPH_GUI_NS::Immediate::SameLine();
@@ -411,7 +396,11 @@ namespace SR_CORE_GUI_NS {
         auto&& range = context.GetEditorParams().GetRange();
         const auto dataType = SR_GRAPH_GUI_NS::Immediate::GetDataType(value.SizeOf(), value.IsSigned(), value.IsIntegral());
         if (dataType == SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::COUNT) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown data type!");
+            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown data type! Value detailed type: %s", value.GetTypeInfo().detailedType.c_str());
+            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+            SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+            SR_GRAPH_GUI_NS::Immediate::PopID();
+            SR_GRAPH_GUI_NS::Immediate::PopID();
             return feedback;
         }
 
@@ -458,7 +447,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        if (!value.IsAABB()) {
+        if (value.GetTypeInfo().detailedType != "AABB") {
             SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Property is not AABB!");
             return feedback;
         }
@@ -476,14 +465,14 @@ namespace SR_CORE_GUI_NS {
             }
             feedback.isChanged = true;
             value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
-            value = value.DetachIfConst();
+            value = value.Copy();
         }
 
         SR_GRAPH_GUI_NS::Immediate::SameLine();
 
         const float_t drag = context.GetEditorParams().GetDragSpeed();
 
-        if (auto&& pAABB = value.TryCast<SR_MATH_NS::AABB>()) {
+        if (auto&& pAABB = value.Cast<SR_MATH_NS::AABB>()) {
             SR_MATH_NS::FVector3 min = pAABB->Min();
             SR_MATH_NS::FVector3 max = pAABB->Max();
 
@@ -522,13 +511,9 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        std::string_view vectorType = value.GetTypeName();
-        if (size_t pos = vectorType.rfind(':'); pos != std::string_view::npos) {
-            vectorType.remove_prefix(pos + 1);
-        }
-        const bool isQuaternion = value.IsQuaternion();
-        std::string_view vectorPartType = isQuaternion ? "float" : SR_UTILS_NS::StringUtils::GetBetween(vectorType, '<', '>');
-        const uint8_t dimension = isQuaternion ? 4 : SR_UTILS_NS::CharToInt(vectorType[sizeof("Vector") - 1]);
+        const bool isQuaternion = value.GetTypeInfo().detailedType == "Quaternion";
+        SR_UTILS_NS::StringView vectorPartType = isQuaternion ? "float" : value.GetTypeInfo().detailedType;
+        const uint8_t dimension = isQuaternion ? 4 : value.GetTypeInfo().detailedSize;
 
         SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
         SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
@@ -540,7 +525,7 @@ namespace SR_CORE_GUI_NS {
 
             if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetPropertyDisplayName().c_str(), mainButtonSize)) {
                 value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
-                value = value.DetachIfConst();
+                value = value.Copy();
                 SetReflectedValue(context, feedback, value);
             }
         }
@@ -577,7 +562,7 @@ namespace SR_CORE_GUI_NS {
             const uint64_t offset = partSize * i;
 
             if (SR_GRAPH_GUI_NS::Immediate::Button(labels[i], buttonSize)) {
-                SR_UTILS_NS::Reflection::Value copy = value.Detach();
+                SR_UTILS_NS::Reflection::Value copy = value.Copy();
                 if (context.pProperty && context.GetProperty().GetResetValue().SizeOf() == value.SizeOf()) {
                     if (auto&& pResetData = (char*)context.GetProperty().GetResetValue().Data()) {
                         std::memcpy((char*)copy.Data() + offset, pResetData + offset, partSize);
@@ -598,7 +583,7 @@ namespace SR_CORE_GUI_NS {
 
             if (partSize == 1) {
                 SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
-                SR_UTILS_NS::Reflection::Value copy = value.Detach();
+                SR_UTILS_NS::Reflection::Value copy = value.Copy();
                 bool* pTemp = reinterpret_cast<bool*>(&((char*)(copy.Data()))[offset]);
                 if (SR_GRAPH_GUI_NS::Immediate::Checkbox("", pTemp)) {
                     SetReflectedValue(context, feedback, copy, false);
@@ -611,7 +596,7 @@ namespace SR_CORE_GUI_NS {
                 SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown part type!");
             }
             else {
-                SR_UTILS_NS::Reflection::Value copy = value.Detach();
+                SR_UTILS_NS::Reflection::Value copy = value.Copy();
                 if (SR_GRAPH_GUI_NS::Immediate::DragScalar("", partType, (char*)copy.Data() + offset, drag)) {
                     SetReflectedValue(context, feedback, copy, true);
                 }
@@ -652,14 +637,14 @@ namespace SR_CORE_GUI_NS {
 
             if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetPropertyDisplayName().c_str(), mainButtonSize)) {
                 value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
-                value = value.DetachIfConst();
+                value = value.Copy();
                 SetReflectedValue(context, feedback, value);
             }
         }
 
         SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-        if (SR_MATH_NS::FColor* pColor = value.TryCast<SR_MATH_NS::FColor>()) {
+        if (SR_MATH_NS::FColor* pColor = value.Cast<SR_MATH_NS::FColor>()) {
             if (SR_GRAPH_GUI_NS::Immediate::ColorEditAlpha("##ColorPicker", *pColor, SR_GRAPH_GUI_NS::Immediate::ColorEditFlags::DefaultOptions)) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(true);
@@ -682,12 +667,8 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        std::string_view vectorType = value.GetTypeName();
-        if (size_t pos = vectorType.rfind(':'); pos != std::string_view::npos) {
-            vectorType.remove_prefix(pos + 1);
-        }
-        std::string_view vectorPartType = SR_UTILS_NS::StringUtils::GetBetween(vectorType, '<', '>');
-        const uint8_t dimension = vectorType.find("Size2") != std::string_view::npos ? 2 : 1;
+        SR_UTILS_NS::StringView vectorPartType = value.GetTypeInfo().detailedType;
+        const uint8_t dimension = value.GetTypeInfo().detailedSize;
 
         const auto partType = SR_GRAPH_GUI_NS::Immediate::GetDataType(vectorPartType);
         if (partType == SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::COUNT) {
@@ -702,7 +683,7 @@ namespace SR_CORE_GUI_NS {
             const SR_MATH_NS::FVector2 mainButtonSize = { context.fieldTitleWidth, context.fieldHeight * 2.f };
             if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetProperty().GetDisplayName().c_str(), mainButtonSize)) {
                 value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
-                value = value.DetachIfConst();
+                value = value.Copy();
                 SetReflectedValue(context, feedback, value);
             }
         }
@@ -727,7 +708,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_GUI_NS::Immediate::BeginGroup();
         {
-            SR_UTILS_NS::Reflection::Value copy = value.Detach();
+            SR_UTILS_NS::Reflection::Value copy = value.Copy();
 
             for (uint8_t i = 0; i < dimension; ++i) {
                 SR_GRAPH_GUI_NS::Immediate::PushID(i);

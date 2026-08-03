@@ -55,27 +55,27 @@ namespace SR_CORE_GUI_NS {
     void EngineSettings::DrawMultiSampling() {
         SR_TRACY_ZONE;
         static const char* SR_SAMPLE_COUNT_NAME_LIST = {
-                "Sample 1\0"
-                "Sample 2\0"
-                "Sample 4\0"
-                "Sample 8\0"
-                "Sample 16\0"
-                "Sample 32\0"
-                "Sample 64\0"
+            "Sample 1\0"
+            "Sample 2\0"
+            "Sample 4\0"
+            "Sample 8\0"
+            "Sample 16\0"
+            "Sample 32\0"
+            "Sample 64\0"
         };
 
-        static std::map<uint8_t, int32_t> SR_SAMPLE_COUNT_KEY_LIST = {
-                { 1, 0 },
-                { 2, 1 },
-                { 4, 2 },
-                { 8, 3 },
-                { 16, 4 },
-                { 32, 5 },
-                { 64, 6 },
+        static SR_UTILS_NS::Map<uint8_t, int32_t> SR_SAMPLE_COUNT_KEY_LIST = {
+            { 1, 0 },
+            { 2, 1 },
+            { 4, 2 },
+            { 8, 3 },
+            { 16, 4 },
+            { 32, 5 },
+            { 64, 6 },
         };
 
-        static std::vector<uint8_t> SR_SAMPLE_COUNT_VALUE_LIST = {
-                1, 2, 4, 8, 16, 32, 64
+        static SR_UTILS_NS::Vector<uint8_t> SR_SAMPLE_COUNT_VALUE_LIST = {
+            1, 2, 4, 8, 16, 32, 64
         };
 
         auto&& pContext = GetContext();

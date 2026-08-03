@@ -13,8 +13,7 @@ namespace SR_CORE_GUI_NS {
         : Super()
     { }
 
-    AssociativePropertyDrawer::~AssociativePropertyDrawer()
-    {
+    AssociativePropertyDrawer::~AssociativePropertyDrawer() {
         SR_SAFE_DELETE_PTR(m_keyValue);
     }
 
@@ -28,16 +27,14 @@ namespace SR_CORE_GUI_NS {
         PropertyDrawerFeedback feedback;
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
-        if (!value.IsAssociativeContainer()) {
-            SRHalt("AssociativePropertyDrawer can only be used with associative containers!");
-            return feedback;
-        }
+        SR_UTILS_NS::Reflection::AssociativeContainerValueRef container = value.AsAssociativeContainer();
+
+        const bool isSetLike = value.GetTypeInfo().detailedType == "Set" || value.GetTypeInfo().detailedType == "FlatHashSet";
 
         SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
         SR_GRAPH_GUI_NS::Immediate::PushID(context.GetProperty().GetName().ToCStr());
         SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
-        auto&& container = value.AsAssociativeContainer();
         SR_UTILS_NS::StringAtom displayName = context.GetProperty().GetDisplayName();
 
         const SR_MATH_NS::FVector2 counterButtonWidth = { 40, context.fieldHeight };
@@ -78,7 +75,12 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::EndDisabled();
 
         if (!m_keyDrawer) {
-            *m_keyValue = container.GetKeyType();
+            if (isSetLike) {
+                *m_keyValue = SR_UTILS_NS::Reflection::Value::CreateDefault(value.GetTypeInfo().pNext[0]);
+            }
+            else {
+                *m_keyValue = SR_UTILS_NS::Reflection::Value::CreateDefault(value.GetTypeInfo().pNext[0]->pNext[0]);
+            }
             SR_UTILS_NS::StringAtom inspectorName = GetValueInspector(*m_keyValue);
             m_keyDrawer = SR_UTILS_NS::Factory::Instance().Create<PropertyDrawerBase>(inspectorName);
         }
@@ -92,7 +94,12 @@ namespace SR_CORE_GUI_NS {
                 context.onBeforeChangeCallback(false);
             }
             feedback.isChanged = true;
-            container.Insert(*m_keyValue, container.GetMappedType());
+            if (isSetLike) {
+                container.Insert(m_keyValue->Copy(), SR_UTILS_NS::Reflection::Value());
+            }
+            else {
+                container.Insert(m_keyValue->Copy(), SR_UTILS_NS::Reflection::Value::CreateDefault(value.GetTypeInfo().pNext[1]));
+            }
         }
 
         SR_GRAPH_GUI_NS::Immediate::SameLine();
@@ -100,7 +107,7 @@ namespace SR_CORE_GUI_NS {
         PropertyDrawerContext keyCtx = context;
 
         keyCtx.isEnumValueAvailableCheckFn = [&](SR_UTILS_NS::StringAtom enumValue) {
-            if (!m_keyValue->IsEnum()) {
+            if (m_keyValue->GetTypeInfo().category != SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum) {
                 SRHalt("AssociativePropertyDrawer::Draw() : key value is not an enum type!");
                 return true;
             }
@@ -113,8 +120,8 @@ namespace SR_CORE_GUI_NS {
 
             const int64_t enumValueInt = pReflector->FromStringInternal(enumValue).value();
 
-            for (auto&& pIt = container.begin(); pIt != container.end(); ++pIt) {
-                void* pMappedRaw = pIt.First().Detach().Data();
+            for (auto&& pIt = container.Begin(); pIt != container.End(); ++pIt) {
+                void* pMappedRaw = pIt.First().Data();
                 if (pReflector->ReadEnumValueFromPointerInternal(pMappedRaw) == enumValueInt) {
                     return false;
                 }
@@ -129,13 +136,11 @@ namespace SR_CORE_GUI_NS {
         m_keyDrawer->Draw(keyCtx);
 
         if (m_isOpened) {
-            for (auto&& pIt = container.begin(); pIt != container.end(); ++pIt) {
-                const uint64_t index = SR_UTILS_NS::Distance(container.begin(), pIt);
-                SR_GRAPH_GUI_NS::Immediate::PushID(index);
+            for (auto&& pIt = container.Begin(); pIt != container.End(); ++pIt) {
+                const uint64_t index = SR_UTILS_NS::Distance(container.Begin(), pIt);
+                SR_GRAPH_GUI_NS::Immediate::PushID(static_cast<int32_t>(index));
 
-                SR_UTILS_NS::Reflection::Value firstValue = pIt.First().Detach();
-                SR_UTILS_NS::Reflection::Value secondValue = pIt.Second();
-                const bool isSetLike = secondValue.SizeOf() == 0;
+                SR_UTILS_NS::Reflection::Value firstValue = pIt.First().Copy();
 
                 SR_MATH_NS::FVector2 spaceSize = { 40, context.fieldHeight };
                 if (isSetLike) {
@@ -174,7 +179,7 @@ namespace SR_CORE_GUI_NS {
                             context.onBeforeChangeCallback(false);
                         }
                         feedback.isChanged = true;
-                        container.Erase(firstValue);
+                        container.Erase(pIt);
                         SR_GRAPH_GUI_NS::Immediate::EndPopup();
                         SR_GRAPH_GUI_NS::Immediate::PopID();
                         break;
@@ -183,6 +188,8 @@ namespace SR_CORE_GUI_NS {
                 }
 
                 if (!isSetLike) {
+                    SR_UTILS_NS::Reflection::Value secondValue = pIt.Second();
+
                     SR_GRAPH_GUI_NS::Immediate::SameLine();
 
                     SR_GRAPH_GUI_NS::Immediate::PushID("Value");
@@ -219,6 +226,7 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::PopID();
 
         SetValue(context, feedback, value);
+
         return feedback;
     }
 }

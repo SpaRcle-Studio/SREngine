@@ -205,7 +205,7 @@ namespace SR_SCRIPTING_NS {
         if (IsInstanceValid()) {
             SR_UTILS_NS::SRASerializer serializer;
             m_cppBehaviour->GetBehaviour()->Save(serializer);
-            m_serializationNode = serializer.GetWalkNode();
+            m_serializationNode = serializer.GetWalkNode().DetachAllocator();
         }
     }
 }

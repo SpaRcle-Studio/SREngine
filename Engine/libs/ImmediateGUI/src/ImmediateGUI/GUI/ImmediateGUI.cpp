@@ -123,10 +123,12 @@ namespace SR_GRAPH_GUI_NS::Immediate {
 
     ImmediateDataType GetDataType(std::string_view type) {
         static const SR_UTILS_NS::Map<std::string_view, ImmediateDataType> table = {
-                { "int", ImmediateDataType::Int32 },
-                { "unsigned int", ImmediateDataType::UInt32 },
-                { "float", ImmediateDataType::Float },
-                { "double", ImmediateDataType::Double }
+            { "int", ImmediateDataType::Int32 },
+            { "int32", ImmediateDataType::Int32 },
+            { "uint32", ImmediateDataType::UInt32 },
+            { "unsigned int", ImmediateDataType::UInt32 },
+            { "float", ImmediateDataType::Float },
+            { "double", ImmediateDataType::Double }
         };
         if (auto it = table.find(type); it != table.end()) {
             return it->second;
@@ -505,7 +507,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         ImGui::PopStyleColor();
     }
 
-    bool CollapsingHeader(const std::string& label, TreeNodeFlags _flags) {
+    bool CollapsingHeader(SR_UTILS_NS::StringView label, TreeNodeFlags _flags) {
         ImGuiWindow* pWindow = ImGui::GetCurrentWindow();
         if (pWindow->SkipItems) {
             return false;
@@ -1705,7 +1707,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     bool BeginDragDropTargetWindow(const char* payloadType) { return false; }
     bool ImageButtonInternal(std::string_view&& imageId, void* pDescriptor, const SR_MATH_NS::FVector2 &size, float_t framePadding, ButtonFlags flags) { return false; }
     bool ImageButton(std::string_view&& imageId, void* pDescriptor, const SR_MATH_NS::FVector2& size, float_t framePadding, ButtonFlags flags) { return false; }
-    bool CollapsingHeader(const std::string& label, TreeNodeFlags flags) { return false; }
+    bool CollapsingHeader(SR_UTILS_NS::StringView label, TreeNodeFlags flags) { return false; }
     void DrawMultiLineTextOnCenter(const std::string& text) { }
     void DrawMultiLineTextOnCenter(const std::string& text, const SR_MATH_NS::FColor& color) { }
     void DrawTextOnCenter(const std::string& text, const SR_MATH_NS::FColor& color) { }

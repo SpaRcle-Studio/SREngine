@@ -14,11 +14,6 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        if (!value.IsSequenceContainer()) {
-            SRHalt("VectorPropertyDrawer can only be used with sequence containers!");
-            return feedback;
-        }
-
         SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
         SR_GRAPH_GUI_NS::Immediate::PushID(context.GetProperty().GetName().ToCStr());
 
@@ -74,7 +69,9 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::SameLine();
 
         SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
-        SR_GRAPH_GUI_NS::Immediate::Button("{}"_format(container.Size()).c_str(), counterButtonWidth);
+        m_tmpBuffer.clear();
+        SR_UTILS_NS::FormatTo(m_tmpBuffer, "{}", container.Size());
+        SR_GRAPH_GUI_NS::Immediate::Button(m_tmpBuffer.c_str(), counterButtonWidth);
         SR_GRAPH_GUI_NS::Immediate::EndDisabled();
 
         SR_GRAPH_GUI_NS::Immediate::SameLine();
@@ -85,14 +82,9 @@ namespace SR_CORE_GUI_NS {
             }
             container.Resize(container.Size() + 1);
             if (context.GetEditorParams().IsNotNull()) {
-                auto&& newElement = container.Back();
-                if (auto&& newElementValue = newElement->Ref(); newElementValue.IsSmartPtr()) {
+                if (auto&& newElementValue = container.Back(); newElementValue.IsSharedPtr()) {
                     if (auto&& pSharedPtrBase = newElementValue.GetSharedPtrBase()) {
-                        std::string_view typeName = newElementValue.GetSharedPtrType();
-                        if (size_t pos = typeName.rfind(':'); pos != std::string_view::npos) {
-                            typeName.remove_prefix(pos + 1);
-                        }
-
+                        SR_UTILS_NS::StringAtom typeName = value.GetTypeInfo().detailedType;
                         if (SR_UTILS_NS::Factory::Instance().IsAbstract(typeName)) {
                             auto&& inheritances = SR_UTILS_NS::Factory::Instance().GetInheritances(typeName);
                             for (auto&& inheritance : inheritances) {
@@ -150,10 +142,10 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (m_isOpened) {
-            for (auto pIt = container.begin(); pIt != container.end();) {
+            for (auto pIt = container.Begin(); pIt != container.End();) {
+                uint64_t index = SR_UTILS_NS::Distance(container.Begin(), pIt);
+                SR_GRAPH_GUI_NS::Immediate::PushID(static_cast<int32_t>(index));
                 SR_UTILS_NS::Reflection::Value element = *pIt;
-                uint64_t index = SR_UTILS_NS::Distance(container.begin(), pIt);
-                SR_GRAPH_GUI_NS::Immediate::PushID(index);
 
                 SR_MATH_NS::FVector2 itemButtonSize = { 40, context.fieldHeight };
 
@@ -185,9 +177,9 @@ namespace SR_CORE_GUI_NS {
                             context.onBeforeChangeCallback(false);
                         }
 
-                        SR_UTILS_NS::Reflection::Value temp = pIt->Detach();
+                        SR_UTILS_NS::Reflection::Value temp = (*pIt).Copy();
                         pIt = container.Erase(pIt);
-                        container.Insert(--SR_UTILS_NS::Reflection::ValueSequenceContainerIterator(pIt), temp);
+                        container.Insert(--pIt, temp);
 
                         feedback.isChanged = true;
                         SR_GRAPH_GUI_NS::Immediate::EndPopup();
@@ -200,9 +192,9 @@ namespace SR_CORE_GUI_NS {
                             context.onBeforeChangeCallback(false);
                         }
 
-                        SR_UTILS_NS::Reflection::Value temp = pIt->Detach();
+                        SR_UTILS_NS::Reflection::Value temp = (*pIt).Copy();
                         pIt = container.Erase(pIt);
-                        container.Insert(++SR_UTILS_NS::Reflection::ValueSequenceContainerIterator(pIt), temp);
+                        container.Insert(++pIt, temp);
 
                         feedback.isChanged = true;
                         SR_GRAPH_GUI_NS::Immediate::EndPopup();
@@ -215,10 +207,10 @@ namespace SR_CORE_GUI_NS {
                             context.onBeforeChangeCallback(false);
                         }
 
-                        SR_UTILS_NS::Reflection::Value temp = pIt->Detach();
+                        SR_UTILS_NS::Reflection::Value temp = (*pIt).Copy();
                         container.Erase(pIt);
                         container.PushFront(temp);
-                        pIt = container.begin();
+                        pIt = container.Begin();
 
                         feedback.isChanged = true;
                     }
@@ -228,10 +220,10 @@ namespace SR_CORE_GUI_NS {
                             context.onBeforeChangeCallback(false);
                         }
 
-                        SR_UTILS_NS::Reflection::Value temp = pIt->Detach();
+                        SR_UTILS_NS::Reflection::Value temp = (*pIt).Copy();
                         container.Erase(pIt);
                         container.PushBack(temp);
-                        pIt = --container.end();
+                        pIt = --container.End();
 
                         feedback.isChanged = true;
                     }

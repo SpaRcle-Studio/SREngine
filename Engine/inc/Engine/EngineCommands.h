@@ -55,7 +55,7 @@ namespace SR_CORE_NS::Commands {
     //! ----------------------------------------------------------------------------------------------------------------
 
     class ChangeHierarchySelected : public IEngineReversibleCommand {
-        using Selection = std::set<SR_UTILS_NS::SceneObject::Ptr>;
+        using Selection = SR_UTILS_NS::Set<SR_UTILS_NS::SceneObject::Ptr>;
         using Super = IEngineReversibleCommand;
     public:
         ChangeHierarchySelected(const EnginePtr& pEngine, SR_CORE_GUI_NS::Hierarchy* pHierarchy, const Selection& oldSelected, const Selection& newSelected);
@@ -65,8 +65,8 @@ namespace SR_CORE_NS::Commands {
 
     private:
         SR_CORE_NS::GUI::Hierarchy* m_hierarchy = nullptr;
-        std::set<SR_UTILS_NS::EntityId> m_newSelected;
-        std::set<SR_UTILS_NS::EntityId> m_oldSelected;
+        SR_UTILS_NS::Set<SR_UTILS_NS::EntityId> m_newSelected;
+        SR_UTILS_NS::Set<SR_UTILS_NS::EntityId> m_oldSelected;
 
     };
 

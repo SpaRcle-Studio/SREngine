@@ -36,8 +36,8 @@ namespace SR_CORE_GUI_NS {
     private:
         void DrawNodes(bool& needResync, SR_ANIMATIONS_NS::AnimationStateMachine& machine);
         void DrawLinks(bool& needResync, SR_ANIMATIONS_NS::AnimationStateMachine& machine);
-        void BuildStateMenu(std::map<std::string, std::vector<SR_UTILS_NS::StringAtom>>& categories);
-        void DrawStateMenuRecursive(bool& needResync, const std::map<std::string, std::vector<SR_UTILS_NS::StringAtom>>& categories, const std::string& prefix);
+        //void BuildStateMenu(SR_UTILS_NS::Map<SR_UTILS_NS::String, SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>>& categories);
+        //void DrawStateMenuRecursive(bool& needResync, const SR_UTILS_NS::Map<SR_UTILS_NS::String, SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>>& categories, const std::string& prefix);
 
     private:
         AnimatorEditorContext& m_context;
@@ -49,7 +49,7 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Link* m_selectedLink = nullptr;
         std::string m_createStateSearch;
 
-        std::vector<SR_UTILS_NS::StringAtom> m_availableStateTypes;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> m_availableStateTypes;
 
 
     };

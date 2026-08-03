@@ -75,7 +75,7 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::SameLine();
 
             SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
-            SR_GRAPH_GUI_NS::Immediate::Button("{}"_format(pClassValue->GetMeta()->GetFactoryName()).c_str(), buttonSize);
+            SR_GRAPH_GUI_NS::Immediate::Button(pClassValue->GetMeta()->GetFactoryName().c_str(), buttonSize);
             SR_GRAPH_GUI_NS::Immediate::EndDisabled();
         }
 
@@ -239,7 +239,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (inspector.Empty()) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Missing inspector for element!");
+            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Missing inspector for \"%s\"!", property.GetName().c_str());
             return;
         }
 
@@ -252,7 +252,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (!m_drawers[index]) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Missing inspector for element!");
+            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Missing inspector for \"%s\"!", property.GetName().c_str());
             return;
         }
 

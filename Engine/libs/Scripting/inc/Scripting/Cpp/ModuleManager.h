@@ -114,11 +114,11 @@ namespace SR_SCRIPTING_NS {
         SR_UTILS_NS::Path m_resourcesPath;
         SR_UTILS_NS::Path m_cachePath;
 
-        std::string m_lastCompilerVersion;
+        SR_UTILS_NS::String m_lastCompilerVersion;
 
-        std::set<CppBehaviourInstance*> m_behaviourInstances;
+        SR_UTILS_NS::Set<CppBehaviourInstance*> m_behaviourInstances;
 
-        std::vector<ScriptModule> m_modules;
+        SR_UTILS_NS::Vector<ScriptModule> m_modules;
         std::recursive_mutex m_mutex;
         ScriptSystem* m_pScriptSystem = nullptr;
 

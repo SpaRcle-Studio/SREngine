@@ -18,7 +18,9 @@ namespace SR_CORE_GUI_NS {
     PropertyDrawerFeedback PointerPropertyDrawer::Draw(const PropertyDrawerContext& context) {
         PropertyDrawerFeedback feedback;
 
-        SR_UTILS_NS::Reflection::Value value = context.HasExplicitSetter() ? context.GetValue().Detach() : context.GetValue();
+        SR_UTILS_NS::Reflection::Value value = context.HasExplicitSetter() ? context.GetValue().Copy() : context.GetValue();
+        SRAssert(value.GetTypeInfo().pNext[0]->category != SR_UTILS_NS::Reflection::ReflectedCategoryType::Unknown);
+
         SR_UTILS_NS::SRClass* pClassValue = value.GetSRClass();
 
         auto&& editorParams = context.GetEditorParams();
@@ -34,10 +36,7 @@ namespace SR_CORE_GUI_NS {
 
         const auto dir = m_isOpened ? SR_GRAPH_GUI_NS::Immediate::Direction::Down : SR_GRAPH_GUI_NS::Immediate::Direction::Right;
 
-        std::string_view typeName = value.GetSharedPtrType();
-        if (size_t pos = typeName.rfind(':'); pos != std::string_view::npos) {
-            typeName.remove_prefix(pos + 1);
-        }
+        const SR_UTILS_NS::StringView typeName = value.GetTypeInfo().pNext[0]->detailedType;
 
         if (!m_openedByDefault) {
             m_isOpened |= context.openedByDefault;
@@ -275,7 +274,9 @@ namespace SR_CORE_GUI_NS {
             }
 
             PropertyDrawerContext propertyContext = context;
-            auto&& valueRef = SR_UTILS_NS::Reflection::Value::CreateRef(*pClassValue);
+            SR_UTILS_NS::Reflection::TypeInfo* pTypeInfo = SR_UTILS_NS::Reflection::CopyTypeInfo(value.GetTypeInfo().pNext[0]);
+            SRAssert(pTypeInfo->category != SR_UTILS_NS::Reflection::ReflectedCategoryType::Unknown);
+            auto&& valueRef = SR_UTILS_NS::Reflection::Value::CreateRef(*pClassValue, pTypeInfo);
             propertyContext.pValue = &valueRef;
             float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth);
             totalWidth -= ((!context.pValue && !context.noHeader) ? context.GetArrowWidth() : 0.f);
@@ -283,7 +284,6 @@ namespace SR_CORE_GUI_NS {
             propertyContext.fieldTitleWidth = totalWidth * 0.3f;
             propertyContext.pProperty = nullptr;
             propertyContext.pOwner = pClassValue;
-            //propertyContext.pUID = value.IsRef() ? pClassValue : (static_cast<void*>(static_cast<uint64_t*>(propertyContext.pUID) + 1));
             propertyContext.noHeader = true;
 
             SR_GRAPH_GUI_NS::Immediate::BeginGroup();

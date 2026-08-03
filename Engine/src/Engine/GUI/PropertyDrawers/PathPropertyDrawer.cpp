@@ -40,7 +40,7 @@ namespace SR_CORE_GUI_NS {
                         }
                         feedback.isChanged = true;
                         value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
-                        value = value.DetachIfConst();
+                        value = value.Copy();
                     }
                 }
             }
@@ -58,7 +58,7 @@ namespace SR_CORE_GUI_NS {
                         auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                         auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath, { { filterName, filterValue } });
 
-                        if (auto&& pPath = value.TryCast<SR_UTILS_NS::Path>(); pPath && !path.empty()) {
+                        if (auto&& pPath = value.Cast<SR_UTILS_NS::Path>(); pPath && !path.empty()) {
                             if (context.onBeforeChangeCallback) {
                                 context.onBeforeChangeCallback(false);
                             }
@@ -80,7 +80,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth);
 
-        if (auto&& pPath = value.TryCast<SR_UTILS_NS::Path>()) {
+        if (auto&& pPath = value.Cast<SR_UTILS_NS::Path>()) {
             std::string path = pPath->ToStringRef();
             if (SR_GRAPH_GUI_NS::Immediate::InputText("##Input", &path, SR_GRAPH_GUI_NS::Immediate::InputTextFlags::EnterReturnsTrue)) {
                 if (context.onBeforeChangeCallback) {

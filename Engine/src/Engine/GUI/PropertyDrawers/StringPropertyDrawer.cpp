@@ -28,7 +28,7 @@ namespace SR_CORE_GUI_NS {
 
             if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetProperty().GetDisplayName().c_str(), buttonSize)) {
                 value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
-                value = value.DetachIfConst();
+                value = value.Copy();
                 SetReflectedValue(context, feedback, value);
             }
 
@@ -39,8 +39,8 @@ namespace SR_CORE_GUI_NS {
 
         const bool isTextBox = context.pProperty && context.pProperty->GetEditorParams().GetCustomArg("text-box") == "enabled";
 
-        if (value.IsString()) {
-            if (auto&& pString = value.TryCast<SR_UTILS_NS::String>()) {
+        if (value.GetTypeInfo().detailedType == "String") {
+            if (auto&& pString = value.Cast<SR_UTILS_NS::String>()) {
                 std::string copy = *pString;
 
                 if (isTextBox) {
@@ -58,8 +58,8 @@ namespace SR_CORE_GUI_NS {
                 SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map string value!");
             }
         }
-        else if (value.IsStringView()) {
-            if (auto&& pStringView = value.TryCast<std::string_view>()) {
+        else if (value.GetTypeInfo().detailedType == "StringView") {
+            if (auto&& pStringView = value.Cast<SR_UTILS_NS::StringView>()) {
                 /// read only
                 if (pStringView->empty()) {
                     static std::string emptyString = " "; /// imgui will assert if empty string is passed
@@ -73,8 +73,8 @@ namespace SR_CORE_GUI_NS {
                 SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map string view value!");
             }
         }
-        else if (value.IsStringAtom()) {
-            if (auto&& pStringAtom = value.TryCast<SR_UTILS_NS::StringAtom>()) {
+        else if (value.GetTypeInfo().detailedType == "StringAtom") {
+            if (auto&& pStringAtom = value.Cast<SR_UTILS_NS::StringAtom>()) {
                 std::string str = pStringAtom->ToString();
                 SR_GRAPH_GUI_NS::Immediate::InputText("##Input", &str);
 
@@ -86,8 +86,8 @@ namespace SR_CORE_GUI_NS {
                 SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map string atom value!");
             }
         }
-        else if (value.IsUnicodeString()) {
-            if (auto&& pUnicodeString = value.TryCast<SR_UTILS_NS::UnicodeString>()) {
+        else if (value.GetTypeInfo().detailedType == "UnicodeString") {
+            if (auto&& pUnicodeString = value.Cast<SR_UTILS_NS::UnicodeString>()) {
                 std::string text;
                 SR_UTILS_NS::Localization::UtfToUtf<char, char32_t>(text, pUnicodeString->View());
 

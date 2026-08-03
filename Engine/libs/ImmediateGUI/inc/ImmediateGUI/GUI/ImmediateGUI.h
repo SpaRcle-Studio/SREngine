@@ -571,7 +571,7 @@ namespace SR_GRAPH_GUI_NS {
         SR_IMMEDIATE_GUI_DLL_API extern bool BeginDragDropTargetWindow(const char* payloadType);
         SR_IMMEDIATE_GUI_DLL_API extern bool ImageButtonInternal(std::string_view&& imageId, void* pDescriptor, const SR_MATH_NS::FVector2 &size, float_t framePadding, ButtonFlags flags);
         SR_IMMEDIATE_GUI_DLL_API extern bool ImageButton(std::string_view&& imageId, void* pDescriptor, const SR_MATH_NS::FVector2& size, float_t framePadding, ButtonFlags flags);
-        SR_IMMEDIATE_GUI_DLL_API extern bool CollapsingHeader(const std::string& label, TreeNodeFlags flags = TreeNodeFlags::CollapsingHeader);
+        SR_IMMEDIATE_GUI_DLL_API extern bool CollapsingHeader(SR_UTILS_NS::StringView label, TreeNodeFlags flags = TreeNodeFlags::CollapsingHeader);
         SR_IMMEDIATE_GUI_DLL_API extern void DrawMultiLineTextOnCenter(const std::string& text);
         SR_IMMEDIATE_GUI_DLL_API extern void DrawMultiLineTextOnCenter(const std::string& text, const SR_MATH_NS::FColor& color);
         SR_IMMEDIATE_GUI_DLL_API extern void DrawTextOnCenter(const std::string& text, const SR_MATH_NS::FColor& color = SR_MATH_NS::FColor(1.f, 1.f, 1.f, 1.f));

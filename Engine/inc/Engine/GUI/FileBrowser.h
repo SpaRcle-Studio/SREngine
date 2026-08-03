@@ -79,7 +79,7 @@ namespace SR_CORE_NS::GUI {
 
         std::list<FBElement> m_elements;
 
-        std::vector<SR_UTILS_NS::StringAtom> m_availableAssets;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> m_availableAssets;
         std::vector<char> m_comboBoxBuffer;
         int32_t m_newAssetIndex = -1;
         SR_UTILS_NS::Path m_newAssetPath;

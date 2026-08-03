@@ -648,7 +648,7 @@ namespace SR_CORE_GUI_NS {
                 context.onBeforeChangeCallback(anchorFeedback.isDrag);
             }
             feedback.isChanged = true;
-            pTransformRect->SetAnchors(*anchorsValue.TryCast<SR_UTILS_NS::RectAnchors>());
+            pTransformRect->SetAnchors(*anchorsValue.Cast<SR_UTILS_NS::RectAnchors>());
         }
 
         SR_GRAPH_GUI_NS::Immediate::PopStyleVar();

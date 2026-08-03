@@ -14,6 +14,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
+    #ifdef SR_COMMON_USE_ENTT
         SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
         SR_GRAPH_GUI_NS::Immediate::PushID(context.GetProperty().GetName().ToCStr());
 
@@ -141,6 +142,7 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::PopID();
 
         SetValue(context, feedback, value);
+    #endif
 
         return feedback;
     }

@@ -25,7 +25,7 @@ namespace SR_CORE_GUI_NS {
 
     private:
         SR_UTILS_NS::Subscription m_moduleReloadSubscription;
-        std::vector<SR_UTILS_NS::StringAtom> m_existingNames;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> m_existingNames;
         std::string m_searchBuffer;
         bool m_comboOpened = false;
 

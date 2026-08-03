@@ -37,7 +37,7 @@ namespace SR_CORE_GUI_NS {
 
             if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetProperty().GetDisplayName().c_str(), buttonSize)) {
                 value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
-                value = value.DetachIfConst();
+                value = value.Copy();
                 SetReflectedValue(context, feedback, value);
             }
 
@@ -49,8 +49,8 @@ namespace SR_CORE_GUI_NS {
         auto&& pBehaviour = dynamic_cast<SR_SCRIPTING_NS::Behaviour*>(context.pOwner);
         SRAssert2(pBehaviour, "pOwner is not a Behaviour!");
 
-        if (value.IsStringAtom()) {
-            if (auto&& pStringAtom = value.TryCast<SR_UTILS_NS::StringAtom>()) {
+        if (value.GetTypeInfo().detailedType == "StringAtom") {
+            if (auto&& pStringAtom = value.Cast<SR_UTILS_NS::StringAtom>()) {
                 const bool markAsInvalid = !pBehaviour->IsInstanceValid();
                 if (markAsInvalid) {
                     SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f));

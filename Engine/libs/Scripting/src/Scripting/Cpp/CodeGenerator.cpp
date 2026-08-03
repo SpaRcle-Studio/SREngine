@@ -232,7 +232,7 @@ namespace SR_SCRIPTING_NS {
 
         cmakeContent += "\t# Modules\n\n";
 
-        std::set<SR_UTILS_NS::StringAtom> processedModules;
+        SR_UTILS_NS::Set<SR_UTILS_NS::StringAtom> processedModules;
         for (auto&& module : m_modules) {
             if (processedModules.count(module.moduleInfo.moduleName) != 0) {
                 continue;

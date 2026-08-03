@@ -305,11 +305,11 @@ namespace SR_CORE_GUI_NS {
                 m_popupMousePos = SR_GRAPH_GUI_NS::Immediate::GetMousePos();
             }
             if (SR_GRAPH_GUI_NS::Immediate::BeginPopup("AnimatorEditor_SM_Context")) {
-                std::map<std::string, std::vector<SR_UTILS_NS::StringAtom>> categories;
-                BuildStateMenu(categories);
-                SR_GRAPH_GUI_NS::Immediate::InputText("##StateSearch", &m_createStateSearch);
-                SR_GRAPH_GUI_NS::Immediate::Separator();
-                DrawStateMenuRecursive(needResync, categories, "");
+                //std::map<std::string, std::vector<SR_UTILS_NS::StringAtom>> categories;
+                //BuildStateMenu(categories);
+                //SR_GRAPH_GUI_NS::Immediate::InputText("##StateSearch", &m_createStateSearch);
+                //SR_GRAPH_GUI_NS::Immediate::Separator();
+                //DrawStateMenuRecursive(needResync, categories, "");
                 SR_GRAPH_GUI_NS::Immediate::EndPopup();
             }
             SR_IMMEDIATE_GUI_NS::NodeEditor::ResumeNodeEditor();
@@ -339,102 +339,102 @@ namespace SR_CORE_GUI_NS {
         });
     }
 
-    void AnimatorEditorStateMachine::BuildStateMenu(std::map<std::string, std::vector<SR_UTILS_NS::StringAtom>>& categories) {
-        categories.clear();
-
-        for (auto&& stateTypeName : m_availableStateTypes) {
-            auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(stateTypeName);
-            if (!pMeta) {
-                continue;
-            }
-
-            auto&& category = pMeta->GetCategory();
-            std::string categoryPath = "States";
-            if (!category.empty()) {
-                categoryPath.clear();
-                for (size_t i = 0; i < category.size(); ++i) {
-                    if (i > 0) {
-                        categoryPath += "/";
-                    }
-                    categoryPath += category[i].ToStringRef();
-                }
-            }
-
-            categories[categoryPath].emplace_back(stateTypeName);
-        }
-    }
-
-    void AnimatorEditorStateMachine::DrawStateMenuRecursive(bool& needResync, const std::map<std::string, std::vector<SR_UTILS_NS::StringAtom>>& categories, const std::string& prefix) {
-        std::map<std::string, std::vector<SR_UTILS_NS::StringAtom>> subCategories;
-        std::vector<SR_UTILS_NS::StringAtom> directStates;
-
-        for (auto&& [categoryPath, stateTypes] : categories) {
-            if (categoryPath == prefix) {
-                directStates.insert(directStates.end(), stateTypes.begin(), stateTypes.end());
-            }
-            else if (prefix.empty() || (categoryPath.size() >= prefix.size() + 1 && categoryPath.substr(0, prefix.size() + 1) == prefix + "/")) {
-                std::string remaining = prefix.empty() ? categoryPath : categoryPath.substr(prefix.size() + 1);
-                auto&& nextSlash = remaining.find('/');
-
-                if (nextSlash == std::string::npos) {
-                    directStates.insert(directStates.end(), stateTypes.begin(), stateTypes.end());
-                }
-                else {
-                    std::string nextLevel = prefix.empty() ? remaining.substr(0, nextSlash) : prefix + "/" + remaining.substr(0, nextSlash);
-                    subCategories[nextLevel].insert(subCategories[nextLevel].end(), stateTypes.begin(), stateTypes.end());
-                }
-            }
-        }
-
-        for (auto&& stateTypeName : directStates) {
-            auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(stateTypeName);
-            if (!pMeta) {
-                continue;
-            }
-
-            auto&& displayName = pMeta->GetDisplayName();
-            SR_UTILS_NS::StringAtom menuName = displayName.empty() ? stateTypeName : displayName;
-
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem(menuName.c_str())) {
-                if (!m_context.pGraph || m_context.openedStateMachineNodeIndex == SR_ID_INVALID) {
-                    continue;
-                }
-
-                auto&& pGraphNode = m_context.pGraph->GetNode(m_context.openedStateMachineNodeIndex);
-                auto&& pSMNode = pGraphNode ? dynamic_cast<SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine*>(pGraphNode) : nullptr;
-                if (!pSMNode || !pSMNode->GetMachine()) {
-                    continue;
-                }
-
-                auto&& pMachine = pSMNode->GetMachine();
-
-                if (auto&& pState = SR_UTILS_NS::Factory::Instance().Create<SR_ANIMATIONS_NS::AnimationState>(stateTypeName)) {
-                    auto&& pos = SR_IMMEDIATE_GUI_NS::NodeEditor::ScreenToCanvas(m_popupMousePos);
-                    pState->SetEditorPosition(pos);
-                    pMachine->AddState(pState.Get());
-
-                    m_context.pGraph->InvalidateCompile();
-                    needResync = true;
-                }
-            }
-        }
-
-        for (auto&& [nextLevel, stateTypes] : subCategories) {
-            std::string levelName = nextLevel;
-            if (!prefix.empty()) {
-                levelName = nextLevel.substr(prefix.size() + 1);
-            }
-            auto&& nextSlash = levelName.find('/');
-            if (nextSlash != std::string::npos) {
-                levelName = levelName.substr(0, nextSlash);
-            }
-
-            if (SR_GRAPH_GUI_NS::Immediate::BeginMenu(levelName.c_str())) {
-                DrawStateMenuRecursive(needResync, categories, nextLevel);
-                SR_GRAPH_GUI_NS::Immediate::EndMenu();
-            }
-        }
-    }
+//    void AnimatorEditorStateMachine::BuildStateMenu(std::map<std::string, std::vector<SR_UTILS_NS::StringAtom>>& categories) {
+//        categories.clear();
+//
+//        for (auto&& stateTypeName : m_availableStateTypes) {
+//            auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(stateTypeName);
+//            if (!pMeta) {
+//                continue;
+//            }
+//
+//            auto&& category = pMeta->GetCategory();
+//            std::string categoryPath = "States";
+//            if (!category.empty()) {
+//                categoryPath.clear();
+//                for (size_t i = 0; i < category.size(); ++i) {
+//                    if (i > 0) {
+//                        categoryPath += "/";
+//                    }
+//                    categoryPath += category[i].ToStringRef();
+//                }
+//            }
+//
+//            categories[categoryPath].emplace_back(stateTypeName);
+//        }
+//    }
+//
+//    void AnimatorEditorStateMachine::DrawStateMenuRecursive(bool& needResync, const std::map<std::string, std::vector<SR_UTILS_NS::StringAtom>>& categories, const std::string& prefix) {
+//        std::map<std::string, std::vector<SR_UTILS_NS::StringAtom>> subCategories;
+//        std::vector<SR_UTILS_NS::StringAtom> directStates;
+//
+//        for (auto&& [categoryPath, stateTypes] : categories) {
+//            if (categoryPath == prefix) {
+//                directStates.insert(directStates.end(), stateTypes.begin(), stateTypes.end());
+//            }
+//            else if (prefix.empty() || (categoryPath.size() >= prefix.size() + 1 && categoryPath.substr(0, prefix.size() + 1) == prefix + "/")) {
+//                std::string remaining = prefix.empty() ? categoryPath : categoryPath.substr(prefix.size() + 1);
+//                auto&& nextSlash = remaining.find('/');
+//
+//                if (nextSlash == std::string::npos) {
+//                    directStates.insert(directStates.end(), stateTypes.begin(), stateTypes.end());
+//                }
+//                else {
+//                    std::string nextLevel = prefix.empty() ? remaining.substr(0, nextSlash) : prefix + "/" + remaining.substr(0, nextSlash);
+//                    subCategories[nextLevel].insert(subCategories[nextLevel].end(), stateTypes.begin(), stateTypes.end());
+//                }
+//            }
+//        }
+//
+//        for (auto&& stateTypeName : directStates) {
+//            auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(stateTypeName);
+//            if (!pMeta) {
+//                continue;
+//            }
+//
+//            auto&& displayName = pMeta->GetDisplayName();
+//            SR_UTILS_NS::StringAtom menuName = displayName.empty() ? stateTypeName : displayName;
+//
+//            if (SR_GRAPH_GUI_NS::Immediate::MenuItem(menuName.c_str())) {
+//                if (!m_context.pGraph || m_context.openedStateMachineNodeIndex == SR_ID_INVALID) {
+//                    continue;
+//                }
+//
+//                auto&& pGraphNode = m_context.pGraph->GetNode(m_context.openedStateMachineNodeIndex);
+//                auto&& pSMNode = pGraphNode ? dynamic_cast<SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine*>(pGraphNode) : nullptr;
+//                if (!pSMNode || !pSMNode->GetMachine()) {
+//                    continue;
+//                }
+//
+//                auto&& pMachine = pSMNode->GetMachine();
+//
+//                if (auto&& pState = SR_UTILS_NS::Factory::Instance().Create<SR_ANIMATIONS_NS::AnimationState>(stateTypeName)) {
+//                    auto&& pos = SR_IMMEDIATE_GUI_NS::NodeEditor::ScreenToCanvas(m_popupMousePos);
+//                    pState->SetEditorPosition(pos);
+//                    pMachine->AddState(pState.Get());
+//
+//                    m_context.pGraph->InvalidateCompile();
+//                    needResync = true;
+//                }
+//            }
+//        }
+//
+//        for (auto&& [nextLevel, stateTypes] : subCategories) {
+//            std::string levelName = nextLevel;
+//            if (!prefix.empty()) {
+//                levelName = nextLevel.substr(prefix.size() + 1);
+//            }
+//            auto&& nextSlash = levelName.find('/');
+//            if (nextSlash != std::string::npos) {
+//                levelName = levelName.substr(0, nextSlash);
+//            }
+//
+//            if (SR_GRAPH_GUI_NS::Immediate::BeginMenu(levelName.c_str())) {
+//                DrawStateMenuRecursive(needResync, categories, nextLevel);
+//                SR_GRAPH_GUI_NS::Immediate::EndMenu();
+//            }
+//        }
+//    }
 
     SR_UTILS_NS::SRClass* AnimatorEditorStateMachine::GetSelectedNode(uintptr_t nodeId) const {
         return nullptr;

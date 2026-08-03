@@ -36,7 +36,7 @@ namespace SR_CORE_GUI_NS {
                     }
                     feedback.isChanged = true;
                     value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
-                    value = value.DetachIfConst();
+                    value = value.Copy();
                 }
             }
 

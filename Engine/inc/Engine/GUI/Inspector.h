@@ -30,8 +30,8 @@ namespace SR_CORE_GUI_NS {
                 SR_UTILS_NS::StringAtom displayName;
                 bool isBehaviour = false;
             };
-            std::vector<ComponentInfo> components;
-            std::map<SR_UTILS_NS::StringAtom, ComponentCategory> categories;
+            SR_UTILS_NS::Vector<ComponentInfo> components;
+            SR_UTILS_NS::Map<SR_UTILS_NS::StringAtom, ComponentCategory> categories;
         };
     public:
         Inspector();
@@ -66,11 +66,11 @@ namespace SR_CORE_GUI_NS {
         std::string m_componentSearchBuffer;
         bool m_componentSearchOpened = false;
 
-        std::vector<SR_UTILS_NS::StringAtom> m_availableComponents;
-        std::vector<SR_UTILS_NS::StringAtom> m_availableCppBehaviours;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> m_availableComponents;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> m_availableCppBehaviours;
         ComponentCategory m_componentsCategories;
 
-        std::vector<SR_UTILS_NS::EntityId> m_pointersHolder;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::EntityId> m_pointersHolder;
         SR_UTILS_NS::SceneObject::Ptr m_sceneObject;
         Hierarchy* m_hierarchy = nullptr;
         SR_WORLD_NS::Scene::Ptr m_scene;
@@ -79,7 +79,7 @@ namespace SR_CORE_GUI_NS {
             SR_UTILS_NS::TimePointType lastUsage;
             ObjectPropertyDrawer::Ptr pObjectDrawer;
         };
-        std::map<SR_UTILS_NS::EntityId, ComponentContext> m_componentContexts;
+        SR_UTILS_NS::Map<SR_UTILS_NS::EntityId, ComponentContext> m_componentContexts;
         uint64_t m_maxComponentContexts = 100;
 
         SR_CORE_GUI_NS::PointerPropertyDrawer::Ptr m_pPointerDrawer;
@@ -95,6 +95,7 @@ namespace SR_CORE_GUI_NS {
         SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::Component> m_editableComponent;
         SR_UTILS_NS::Subscription m_moduleReloadSubscription;
         SR_UTILS_NS::String m_comboBoxBuffer;
+        SR_UTILS_NS::String m_tmpBuffer;
 
     };
 }

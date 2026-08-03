@@ -16,11 +16,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        std::string_view rectType = value.GetTypeName();
-        if (size_t pos = rectType.rfind(':'); pos != std::string_view::npos) {
-            rectType.remove_prefix(pos + 1);
-        }
-        std::string_view rectPartType = SR_UTILS_NS::StringUtils::GetBetween(rectType, '<', '>');
+        SR_UTILS_NS::StringView rectPartType = value.GetTypeInfo().detailedType;
 
         SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
         SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
@@ -32,7 +28,7 @@ namespace SR_CORE_GUI_NS {
 
             if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetPropertyDisplayName().c_str(), mainButtonSize)) {
                 value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
-                value = value.DetachIfConst();
+                value = value.Copy();
                 SetReflectedValue(context, feedback, value);
             }
         }
@@ -64,7 +60,7 @@ namespace SR_CORE_GUI_NS {
             const uint64_t offset = partSize * i;
 
             if (SR_GRAPH_GUI_NS::Immediate::Button(labels[i], buttonSize)) {
-                SR_UTILS_NS::Reflection::Value copy = value.Detach();
+                SR_UTILS_NS::Reflection::Value copy = value.Copy();
                 if (context.pProperty && context.GetProperty().GetResetValue().SizeOf() == value.SizeOf()) {
                     if (auto&& pResetData = (char*)context.GetProperty().GetResetValue().Data()) {
                         std::memcpy((char*)copy.Data() + offset, pResetData + offset, partSize);
@@ -87,7 +83,7 @@ namespace SR_CORE_GUI_NS {
                 SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown part type!");
             }
             else {
-                SR_UTILS_NS::Reflection::Value copy = value.Detach();
+                SR_UTILS_NS::Reflection::Value copy = value.Copy();
                 if (SR_GRAPH_GUI_NS::Immediate::DragScalar("", partType, (char*)copy.Data() + offset, drag)) {
                     SetReflectedValue(context, feedback, copy, true);
                 }
@@ -120,12 +116,6 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        static const auto meta = entt::meta_any(SR_MATH_NS::FRect());
-        if (value.GetTypeName() != meta.base().type().name()) {
-            SRHalt("MarginPropertyDrawer::Draw() : value is not a rect!");
-            return feedback;
-        }
-
         SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
         SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
 
@@ -136,7 +126,7 @@ namespace SR_CORE_GUI_NS {
 
             if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetPropertyDisplayName().c_str(), mainButtonSize)) {
                 value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
-                value = value.DetachIfConst();
+                value = value.Copy();
                 SetReflectedValue(context, feedback, value);
             }
         }
@@ -156,7 +146,7 @@ namespace SR_CORE_GUI_NS {
             /** light gray */ SR_MATH_NS::FColor(0.6f, 0.6f, 0.6f, 1.0f),
         };
 
-        SR_UTILS_NS::Reflection::Value copy = value.Detach();
+        SR_UTILS_NS::Reflection::Value copy = value.Copy();
         auto&& pRect = reinterpret_cast<SR_MATH_NS::FRect*>(copy.Data());
 
         for (uint8_t i = 0; i < 4; ++i) {

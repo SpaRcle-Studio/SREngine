@@ -14,6 +14,7 @@ namespace SR_CORE_GUI_NS {
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
 
     private:
+        SR_UTILS_NS::String m_tmpBuffer;
         bool m_isOpened = false;
         std::vector<PropertyDrawerBase::Ptr> m_drawers;
 

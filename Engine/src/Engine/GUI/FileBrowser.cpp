@@ -535,7 +535,7 @@ namespace SR_CORE_NS::GUI {
             std::string extension = SR_UTILS_NS::StringUtils::ToLower(path.GetExtension());
 
             static bool initialized = false;
-            static std::set<std::string_view> supportedAssets;
+            static SR_UTILS_NS::Set<SR_UTILS_NS::StringView> supportedAssets;
             if (!initialized) {
                 for (const auto& name : SR_UTILS_NS::Factory::Instance().GetInheritances(SR_UTILS_NS::Asset::GetClassStaticName())) {
                     auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(name);

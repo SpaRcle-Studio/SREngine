@@ -25,8 +25,8 @@ namespace SR_SCRIPTING_NS {
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<ScriptSystem>;
 
-        const static inline std::set<std::string_view> ALLOWED_CPP_EXTENSIONS = { "cpp", "h", "hpp", "cxx" };
-        const static inline std::set<std::string_view> ALLOWED_CPP_MODULE_EXTENSIONS = { "dll", "so" };
+        const static inline SR_UTILS_NS::Set<SR_UTILS_NS::StringView> ALLOWED_CPP_EXTENSIONS = { "cpp", "h", "hpp", "cxx" };
+        const static inline SR_UTILS_NS::Set<SR_UTILS_NS::StringView> ALLOWED_CPP_MODULE_EXTENSIONS = { "dll", "so" };
         const static inline SR_UTILS_NS::StringAtom ENGINE_MODULE_FILE_NAME = ".module";
 
     private:
