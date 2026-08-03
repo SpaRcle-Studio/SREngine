@@ -21,6 +21,7 @@ namespace SR_CORE_GUI_NS {
     private:
         SR_UTILS_NS::Reflection::Value* m_keyValue = nullptr;
         bool m_isOpened = false;
+        SR_UTILS_NS::String m_tmpBuffer;
         PropertyDrawerBase::Ptr m_keyDrawer;
         std::vector<PropertyDrawerBase::Ptr> m_keyDrawers;
         std::vector<PropertyDrawerBase::Ptr> m_valueDrawers;

@@ -13,6 +13,9 @@ namespace SR_CORE_GUI_NS {
     public:
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
 
+    private:
+        std::string m_buffer;
+
     };
 }
 

@@ -41,17 +41,17 @@ namespace SR_CORE_GUI_NS {
 
         if (value.GetTypeInfo().detailedType == "String") {
             if (auto&& pString = value.Cast<SR_UTILS_NS::String>()) {
-                std::string copy = *pString;
+                m_buffer = *pString;
 
                 if (isTextBox) {
-                    SR_GRAPH_GUI_NS::Immediate::InputTextMultiline("##Input", &copy, SR_MATH_NS::FVector2(context.fieldWidth, 100));
+                    SR_GRAPH_GUI_NS::Immediate::InputTextMultiline("##Input", &m_buffer, SR_MATH_NS::FVector2(context.fieldWidth, 100));
                 }
                 else {
-                    SR_GRAPH_GUI_NS::Immediate::InputText("##Input", &copy);
+                    SR_GRAPH_GUI_NS::Immediate::InputText("##Input", &m_buffer);
                 }
 
                 if (SR_GRAPH_GUI_NS::Immediate::IsItemDeactivatedAfterEdit()) {
-                    SetPropertyDrawerMappedValue(context, feedback, pString, SR_UTILS_NS::String(copy));
+                    SetPropertyDrawerMappedValue(context, feedback, pString, SR_UTILS_NS::String(m_buffer));
                 }
             }
             else {
@@ -75,11 +75,11 @@ namespace SR_CORE_GUI_NS {
         }
         else if (value.GetTypeInfo().detailedType == "StringAtom") {
             if (auto&& pStringAtom = value.Cast<SR_UTILS_NS::StringAtom>()) {
-                std::string str = pStringAtom->ToString();
-                SR_GRAPH_GUI_NS::Immediate::InputText("##Input", &str);
+                m_buffer = pStringAtom->ToStringRef();
+                SR_GRAPH_GUI_NS::Immediate::InputText("##Input", &m_buffer);
 
                 if (SR_GRAPH_GUI_NS::Immediate::IsItemDeactivatedAfterEdit()) {
-                    SetPropertyDrawerMappedValue(context, feedback, pStringAtom, SR_UTILS_NS::StringAtom(str));
+                    SetPropertyDrawerMappedValue(context, feedback, pStringAtom, SR_UTILS_NS::StringAtom(m_buffer));
                 }
             }
             else {
@@ -88,19 +88,19 @@ namespace SR_CORE_GUI_NS {
         }
         else if (value.GetTypeInfo().detailedType == "UnicodeString") {
             if (auto&& pUnicodeString = value.Cast<SR_UTILS_NS::UnicodeString>()) {
-                std::string text;
-                SR_UTILS_NS::Localization::UtfToUtf<char, char32_t>(text, pUnicodeString->View());
+                m_buffer.clear();
+                SR_UTILS_NS::Localization::UtfToUtf<char, char32_t>(m_buffer, pUnicodeString->View());
 
                 if (isTextBox) {
-                    SR_GRAPH_GUI_NS::Immediate::InputTextMultiline("##Input", &text, SR_MATH_NS::FVector2(context.fieldWidth, 100));
+                    SR_GRAPH_GUI_NS::Immediate::InputTextMultiline("##Input", &m_buffer, SR_MATH_NS::FVector2(context.fieldWidth, 100));
                 }
                 else {
-                    SR_GRAPH_GUI_NS::Immediate::InputText("##Input", &text);
+                    SR_GRAPH_GUI_NS::Immediate::InputText("##Input", &m_buffer);
                 }
 
                 if (SR_GRAPH_GUI_NS::Immediate::IsItemDeactivatedAfterEdit()) {
                     std::u32string unicodeText;
-                    SR_UTILS_NS::Localization::UtfToUtf<char32_t, char>(unicodeText, text);
+                    SR_UTILS_NS::Localization::UtfToUtf<char32_t, char>(unicodeText, m_buffer);
                     SetPropertyDrawerMappedValue(context, feedback, pUnicodeString, SR_UTILS_NS::UnicodeString(unicodeText));
                 }
             }
