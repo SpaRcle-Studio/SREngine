@@ -640,7 +640,7 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
             f.write('\t' * (tabs + 1) + f'using Type = decltype({class_name}::{property.name});' + '\n')
 
         if bool_do_gen_setter:
-            f.write('\t' * (tabs + 1) + 'auto&& pData = value.Cast<const Type>();\n')
+            f.write('\t' * (tabs + 1) + 'auto&& pData = value.Cast<Type>();\n')
             if property.virtual:
                 f.write('\t' * (tabs + 1) + f'{get_class_impl_code}->{property.setter}(*pData);' + '\n')
             else:
