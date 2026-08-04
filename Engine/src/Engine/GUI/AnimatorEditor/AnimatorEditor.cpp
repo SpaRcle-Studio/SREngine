@@ -199,6 +199,9 @@ namespace SR_CORE_GUI_NS {
                         m_pActiveStateMachine.Lock()->GetMachine()->FastForwardState(pState);
                     }
                 }
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("New transition")) {
+
+                }
             }
         });
 
@@ -235,11 +238,20 @@ namespace SR_CORE_GUI_NS {
             }
         });
 
-        m_nodeGraphEditor->SetLinkDeletedCallback([](SR_IMMEDIATE_GUI_NS::LinkInstance& link) {
-            auto&& pInputPin = link.GetInputPin();
-            auto&& pInputNode = pInputPin->GetNode();
-            const uint32_t inputIndex = pInputNode->GetPinIndex(pInputPin);
-            static_cast<SR_ANIMATIONS_NS::AnimationGraphNode*>(pInputNode->GetUserData())->BreakLink(inputIndex);
+        m_nodeGraphEditor->SetLinkDeletedCallback([this](SR_IMMEDIATE_GUI_NS::LinkInstance& link) {
+            if (IsStateMachineActive()) {
+                if (auto&& pTransition = static_cast<SR_ANIMATIONS_NS::AnimationStateTransition*>(link.GetUserData())) {
+                    if (auto&& pState = static_cast<SR_ANIMATIONS_NS::AnimationState*>(link.GetOutputPin()->GetNode()->GetUserData())) {
+                        pState->RemoveTransition(pTransition);
+                    }
+                }
+            }
+            else {
+                auto&& pInputPin = link.GetInputPin();
+                auto&& pInputNode = pInputPin->GetNode();
+                const uint32_t inputIndex = pInputNode->GetPinIndex(pInputPin);
+                static_cast<SR_ANIMATIONS_NS::AnimationGraphNode*>(pInputNode->GetUserData())->BreakLink(inputIndex);
+            }
         });
 
         m_nodeGraphEditor->SetLinkCreatedCallback([](SR_IMMEDIATE_GUI_NS::LinkInstance& link) {
@@ -289,7 +301,8 @@ namespace SR_CORE_GUI_NS {
                     for (auto&& pTransition : state.GetTransitions()) {
                         auto&& pTargetState = m_pActiveStateMachine.Lock()->GetMachine()->GetState(pTransition->GetTargetIndex());
                         if (auto&& pTargetNodeInstance = pTargetState->GetUserData<SR_IMMEDIATE_GUI_NS::NodeInstance>()) {
-                            pNode->LinkTo(pTargetNodeInstance, 0, 0);
+                            auto&& pLink = pNode->LinkTo(pTargetNodeInstance, 0, 0);
+                            pLink->SetUserData(pTransition.Get());
                         }
                     }
                 }
@@ -376,12 +389,19 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::SRClass* pSelectedObject = nullptr;
 
         auto&& selectedNodes = m_nodeGraphEditor->GetSelectedNodes();
+        auto&& selectedLinks = m_nodeGraphEditor->GetSelectedLinks();
         if (selectedNodes.size() == 1) {
             if (IsStateMachineActive()) {
                 pSelectedObject = static_cast<SR_ANIMATIONS_NS::AnimationState*>(selectedNodes.front()->GetUserData());
             }
             else {
                 pSelectedObject = static_cast<SR_ANIMATIONS_NS::AnimationGraphNode*>(selectedNodes.front()->GetUserData());
+            }
+        }
+        else if (selectedLinks.size() == 1) {
+            if (IsStateMachineActive()) {
+                auto&& pUserData = selectedLinks.front()->GetUserData();
+                pSelectedObject = pUserData ? static_cast<SR_ANIMATIONS_NS::AnimationStateTransition*>(pUserData) : nullptr;
             }
         }
 

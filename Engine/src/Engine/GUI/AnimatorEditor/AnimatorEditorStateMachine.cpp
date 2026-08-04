@@ -143,56 +143,6 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(0.6f, 0.6f, 0.6f, 1.0f), "Graph > State Machine");
 
-        // Live: progress bar for active animation state (привязан к текущему ImGui окну)
-        //if (m_context.isLive && m_context.pRuntimeGraph) {
-        //    if (auto&& pRuntimeNode = m_context.pRuntimeGraph->GetNode(m_context.openedStateMachineNodeIndex)) {
-        //        if (auto&& pRuntimeSM = dynamic_cast<SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine*>(pRuntimeNode)) {
-        //            if (auto&& pRuntimeMachine = pRuntimeSM->GetMachine()) {
-        //                float progress = -1.f;
-        //                for (uint32_t i = 0; i < pRuntimeMachine->GetStates().size(); ++i) {
-        //                    if (auto&& pState = pRuntimeMachine->GetStateOrNull(i)) {
-        //                        if (!pRuntimeMachine->IsStateActive(pState->GetStateName())) {
-        //                            continue;
-        //                        }
-        //                        progress = pState->GetProgress();
-        //                        if (progress < 0.f || progress > 1.f) {
-        //                            const float dur = pState->GetDuration();
-        //                            const float t = pState->GetTime();
-        //                            progress = dur > 0.f ? (t / dur) : 0.f;
-        //                        }
-        //                        progress = std::clamp(progress, 0.f, 1.f);
-        //                        break;
-        //                    }
-        //                }
-
-        //                if (progress >= 0.f) {
-        //                    const SR_MATH_NS::FVector2 pos = SR_GRAPH_GUI_NS::Immediate::GetCursorScreenPos();
-        //                    const SR_MATH_NS::FVector2 avail = SR_GRAPH_GUI_NS::Immediate::GetContentRegionAvail();
-        //                    const float h = 6.0f;
-
-        //                    if (void* dl = SR_GRAPH_GUI_NS::Immediate::GetWindowDrawList()) {
-        //                        SR_GRAPH_GUI_NS::Immediate::DrawListAddRectFilled(
-        //                            dl,
-        //                            pos,
-        //                            pos + SR_MATH_NS::FVector2(avail.x, h),
-        //                            SR_COL32(70, 70, 70, 200),
-        //                            2.0f
-        //                        );
-        //                        SR_GRAPH_GUI_NS::Immediate::DrawListAddRectFilled(
-        //                            dl,
-        //                            pos,
-        //                            pos + SR_MATH_NS::FVector2(avail.x * progress, h),
-        //                            SR_COL32(60, 220, 110, 240),
-        //                            2.0f
-        //                        );
-        //                    }
-
-        //                    SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(avail.x, h + 6.0f));
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
 
         SR_GRAPH_GUI_NS::Immediate::Separator();
 

@@ -274,9 +274,13 @@ namespace SR_CORE_GUI_NS {
             }
 
             PropertyDrawerContext propertyContext = context;
-            SR_UTILS_NS::Reflection::TypeInfo* pTypeInfo = SR_UTILS_NS::Reflection::CopyTypeInfo(value.GetTypeInfo().pNext[0]);
+
+            SR_UTILS_NS::Reflection::TypeInfo* pTypeInfo = SR_UTILS_NS::Reflection::DetermineTypeInfoAlloc(*SR_UTILS_NS::IAllocator::GetDefaultAllocator(), *pClassValue);
+            pTypeInfo->detailedType = value.GetTypeInfo().pNext[0]->detailedType;
             SRAssert(pTypeInfo->category != SR_UTILS_NS::Reflection::ReflectedCategoryType::Unknown);
+
             auto&& valueRef = SR_UTILS_NS::Reflection::Value::CreateRef(*pClassValue, pTypeInfo);
+
             propertyContext.pValue = &valueRef;
             float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth);
             totalWidth -= ((!context.pValue && !context.noHeader) ? context.GetArrowWidth() : 0.f);

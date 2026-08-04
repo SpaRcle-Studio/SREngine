@@ -863,6 +863,11 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         return ImV2ToF2(ImGui::GetWindowSize());
     }
 
+    SR_MATH_NS::FVector2 GetWindowPos() {
+        SR_TRACY_ZONE;
+        return ImV2ToF2(ImGui::GetWindowPos());
+    }
+
     bool IsMouseDragging(MouseButton button) {
         SR_TRACY_ZONE;
         return ImGui::IsMouseDragging(static_cast<ImGuiMouseButton>(button));
@@ -1780,6 +1785,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     void SetCursorPosX(float_t x) { }
     void SetCursorPosY(float_t y) { }
     SR_MATH_NS::FVector2 GetWindowSize() { return SR_MATH_NS::FVector2(); }
+    SR_MATH_NS::FVector2 GetWindowPos() { return SR_MATH_NS::FVector2(); }
     SR_MATH_NS::FVector2 GetCursorPos() { return SR_MATH_NS::FVector2(); }
     SR_MATH_NS::FRect GetWindowRect(void* pWindow) { return SR_MATH_NS::FRect(); }
     bool SmallButton(const char* label) { return false; }

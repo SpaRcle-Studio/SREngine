@@ -1,0 +1,14 @@
+sra format
+use tabs: true
+0-r:Root
+	1-o:asset
+		2-v:type
+			3-s:AnimationClip
+		2-o:ptr
+			3-v:clipName
+				4-s:mixamo.com
+			3-v:clipPath
+				4-s:Engine/Animations/Source/Rifle Aiming Idle.fbx
+			3-o:rig
+				4-v:id
+					5-s:Engine/Rig/Mixamo.rig

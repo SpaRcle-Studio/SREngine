@@ -5,6 +5,8 @@
 #include <ImmediateGUI/GUI/NodeEditor.h>
 #include <ImmediateGUI/Impl/ImGUI.h>
 
+#include <Utils/Input/InputSystem.h>
+
 #if defined(SR_USE_IMGUI_NODE_FLOW) && defined(SR_USE_IMGUI)
 
 namespace SR_IMMEDIATE_GUI_NS::NodeFlowImpl {
@@ -344,8 +346,11 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
                 const auto activeColor = SR_COL32(60, 220, 110, 255); /// green
                 const auto selectedColor = SR_COL32(255, 165, 0, 255); /// orange
 
+                auto&& selectedLinks = pEditor->GetSelectedLinks();
+                auto&& pSelectedLink = selectedLinks.empty() ? nullptr : selectedLinks.front();
+
                 const bool isActive = false;
-                const bool isSelected = false;
+                const bool isSelected = pSelectedLink == this;
                 const uint32_t col = isSelected ? selectedColor : (isActive ? activeColor : defaultColor);
                 const float thickness = isSelected || isActive ? 3.0f : 2.0f;
 
@@ -364,6 +369,19 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
 
                 SR_MATH_NS::FVector2 lineDstArrowOffset = nd * arrowLen;
                 SR_GRAPH_GUI_NS::Immediate::DrawListAddLine(pDrawList, srcPoint, dstPoint - lineDstArrowOffset, col, thickness);
+
+                if (ax::NodeEditor::IsActive()) {
+                    if (SR_GRAPH_GUI_NS::Immediate::IsMouseReleased(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left)) {
+                        const SR_MATH_NS::FVector2 mousePos = SR_GRAPH_GUI_NS::Immediate::GetMousePos();
+                        const float distToLine = SR_MATH_NS::DistanceToLineSegment(mousePos, srcPoint, dstPoint);
+                        if (distToLine < 5.0f) {
+                            pEditor->ForceSelectLink(this);
+                        }
+                        else if (pSelectedLink == this) {
+                            pEditor->ForceSelectLink(nullptr);
+                        }
+                    }
+                }
             }
             else {
                 const ax::NodeEditor::LinkId linkId((uintptr_t)(this));
@@ -427,7 +445,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         float_t DrawHeader();
         float_t CalculatePinMaxWidth(bool input);
 
-        void LinkTo(NodeInstance* pTargetNode, uint32_t sourcePin, uint32_t targetPin) override;
+        LinkInstance* LinkTo(NodeInstance* pTargetNode, uint32_t sourcePin, uint32_t targetPin) override;
 
         void Draw() override;
 
@@ -481,18 +499,25 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         void Draw() override;
         void ClearSelection() override;
 
+        void ForceSelectLink(LinkInstance* pLink) override {
+            m_selectedLink = pLink;
+        }
+
         SR_NODISCARD ax::NodeEditor::EditorContext* GetEditorContext() const { return m_editorContext; }
 
         const SR_UTILS_NS::Vector<NodeInstance*>& GetSelectedNodes() const override;
+        const SR_UTILS_NS::Vector<LinkInstance*>& GetSelectedLinks() const override;
         NodeInstance* CreateNode() override;
-        void CreateLink(InputPinInstance* pInputPin, OutputPinInstance* pOutputPin) override;
+        LinkInstance* CreateLink(InputPinInstance* pInputPin, OutputPinInstance* pOutputPin) override;
         SR_NODISCARD InputPinInstance* CreateInputPin(SR_UTILS_NS::StringView name, PinTypeInfo type) override;
         SR_NODISCARD OutputPinInstance* CreateOutputPin(SR_UTILS_NS::StringView name,PinTypeInfo type) override;
 
     private:
         mutable SR_UTILS_NS::Vector<NodeInstance*> m_selectedNodes;
+        mutable SR_UTILS_NS::Vector<LinkInstance*> m_selectedLinks;
         mutable SR_UTILS_NS::Vector<ax::NodeEditor::NodeId> m_selectedNodeIds;
         ax::NodeEditor::EditorContext* m_editorContext = nullptr;
+        mutable LinkInstance* m_selectedLink = nullptr;
 
     };
 }
@@ -503,6 +528,11 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
 
         PushNodeEditorContext pushContext(m_editorContext);
         ax::NodeEditor::Begin("Node Editor");
+
+        m_nodeEditorRegion = SR_MATH_NS::FRect(
+            SR_GRAPH_GUI_NS::Immediate::GetItemRectMin(),
+            SR_GRAPH_GUI_NS::Immediate::GetItemRectMax()
+        );
 
         SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(0.6f, 0.6f, 0.6f, 1.0f), "%s", m_backgroundText.c_str());
 
@@ -522,6 +552,17 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
 
         SR_IMMEDIATE_GUI_NS::NodeEditor::PopNodeEditorStyleVar(1);
         SR_IMMEDIATE_GUI_NS::NodeEditor::PopNodeEditorStyleColor(2);
+
+        if (ax::NodeEditor::IsActive() && m_selectedLink && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Delete)) {
+            if (m_onSomethingChangedCallback) {
+                m_onSomethingChangedCallback();
+            }
+            if (m_onLinkDeletedCallback) {
+                m_onLinkDeletedCallback(*m_selectedLink);
+            }
+            m_selectedLink = nullptr;
+            ax::NodeEditor::ClearSelection();
+        }
 
         if (SR_IMMEDIATE_GUI_NS::NodeEditor::BeginDelete()) {
             uintptr_t linkId = 0;
@@ -695,7 +736,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         return pPin;
     }
 
-    void NodeEditorInstanceNEImpl::CreateLink(InputPinInstance* pInputPin, OutputPinInstance* pOutputPin) {
+    LinkInstance* NodeEditorInstanceNEImpl::CreateLink(InputPinInstance* pInputPin, OutputPinInstance* pOutputPin) {
         SR_TRACY_ZONE;
         if (m_freeLinks.empty()) {
             auto&& pLink = new LinkInstanceNEImpl();
@@ -710,6 +751,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         }
         pInputPin->AddLink(m_links.back());
         pOutputPin->AddLink(m_links.back());
+        return m_links.back();
     }
 
     const SR_UTILS_NS::Vector<NodeInstance*>& NodeEditorInstanceNEImpl::GetSelectedNodes() const {
@@ -723,7 +765,21 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         for (auto&& nodeId : m_selectedNodeIds) {
             m_selectedNodes.emplace_back(reinterpret_cast<NodeInstance*>(nodeId.Get()));
         }
+        if (!m_selectedNodes.empty()) {
+            m_selectedLink = nullptr;
+        }
         return m_selectedNodes;
+    }
+
+    const SR_UTILS_NS::Vector<LinkInstance*>& NodeEditorInstanceNEImpl::GetSelectedLinks() const {
+        SR_TRACY_ZONE;
+        PushNodeEditorContext pushContext(m_editorContext);
+        m_selectedLinks.clear();
+        if (m_selectedLink) {
+            m_selectedLinks.emplace_back(m_selectedLink);
+            ax::NodeEditor::ClearSelection();
+        }
+        return m_selectedLinks;
     }
 
     /// ================================================================================================================
@@ -795,10 +851,10 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         return maxWidth;
     }
 
-    void NodeInstanceNEImpl::LinkTo(NodeInstance* pTargetNode, uint32_t sourcePin, uint32_t targetPin) {
+    LinkInstance* NodeInstanceNEImpl::LinkTo(NodeInstance* pTargetNode, uint32_t sourcePin, uint32_t targetPin) {
         auto&& pPinTarget = static_cast<InputPinInstance*>(pTargetNode->GetInputs()[targetPin]);
         auto&& pPinSource = static_cast<OutputPinInstance*>(m_outputPins[sourcePin]);
-        GetEditor()->CreateLink(pPinTarget, pPinSource);
+        return GetEditor()->CreateLink(pPinTarget, pPinSource);
     }
 
     void NodeInstanceNEImpl::Draw() {

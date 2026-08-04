@@ -641,6 +641,7 @@ namespace SR_GRAPH_GUI_NS {
         SR_IMMEDIATE_GUI_DLL_API extern void SetCursorPosX(float_t x);
         SR_IMMEDIATE_GUI_DLL_API extern void SetCursorPosY(float_t y);
         SR_IMMEDIATE_GUI_DLL_API extern SR_MATH_NS::FVector2 GetWindowSize();
+        SR_IMMEDIATE_GUI_DLL_API extern SR_MATH_NS::FVector2 GetWindowPos();
         SR_IMMEDIATE_GUI_DLL_API extern SR_MATH_NS::FVector2 GetCursorPos();
         SR_IMMEDIATE_GUI_DLL_API extern SR_MATH_NS::FRect GetWindowRect(void* pWindow = nullptr);
         SR_IMMEDIATE_GUI_DLL_API extern bool SmallButton(const char* label);
