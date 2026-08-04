@@ -38,6 +38,7 @@ namespace SR_CORE_NS::GUI {
         int32_t framePadding = 3;
 
         if (!pFont) {
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.0f, 0.25f, 0.25f, 1.0f), "Failed to get icon font!");
             return;
         }
 

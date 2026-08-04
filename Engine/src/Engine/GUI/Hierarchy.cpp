@@ -44,6 +44,7 @@ namespace SR_CORE_GUI_NS {
         SR_TRACY_ZONE;
 
         if (!m_engine) {
+            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Missing engine!");
             return;
         }
 
@@ -56,6 +57,7 @@ namespace SR_CORE_GUI_NS {
             isPrefabLogic = m_scene->GetLogicBase().DynamicCast<SR_WORLD_NS::ScenePrefabLogic>() != nullptr;
         }
         else {
+            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Missing scene!");
             m_tree.clear();
         }
 

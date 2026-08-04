@@ -171,6 +171,6 @@ void fragment() {
 }
 
 void vertex() {
-    uv = vec2((VERTEX_INDEX << 1) & 2, VERTEX_INDEX & 2);
+    uv = vec2(float((VERTEX_INDEX << 1) & 2), float(VERTEX_INDEX & 2));
     OUT_POSITION = vec4(uv * 2.0 - 1.0, 0.0, 1.0);
 }

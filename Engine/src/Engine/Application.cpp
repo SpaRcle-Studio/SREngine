@@ -293,6 +293,10 @@ namespace SR_CORE_NS {
     bool Application::MainLoop() {
         SR_TRACY_ZONE;
 
+        if (!SR_PLATFORM_NS::IsSupportThreads()) {
+            SR_HTYPES_NS::Thread::Factory::Instance().ManuallyUpdateThreads();
+        }
+
         if (m_isNeedReload) {
             Close();
             if (!InitializeResourcesFolder()) {

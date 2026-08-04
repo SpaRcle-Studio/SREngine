@@ -23,6 +23,7 @@
 
 #include <Utils/Types/IRawMeshHolder.h>
 #include <Utils/Resources/ResourceManager.h>
+#include <Utils/Resources/ResourceInfo.h>
 #include <Utils/DebugDraw.h>
 #include <Utils/CommandManager/CmdManager.h>
 
@@ -61,68 +62,44 @@ namespace SR_CORE_GUI_NS {
 
     void EngineStatistics::ResourcesPage() {
         if (SR_GRAPH_GUI_NS::Immediate::BeginTabItem("Resources manager")) {
-            auto&& drawResource = [=](SR_UTILS_NS::IResource* pRes, uint32_t index) {
-                const bool isDestroyed = pRes->IsDestroyed();
+            auto&& drawResource = [=](SR_UTILS_NS::IResource& resource, uint32_t index) {
+                const bool isDestroyed = resource.IsDestroyed();
 
-                std::string node = SR_FORMAT("[{}] {} = {}", index, pRes->GetResourceId().data(), pRes->GetCountUses());
+                std::string node = SR_FORMAT("[{}] {} = {}", index, resource.GetResourceId().data(), resource.GetCountUses());
 
                 if (isDestroyed) {
                     SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor(1.f, 0.f, 0.f));
 
                     std::stringstream stream;
-                    stream << std::fixed << std::setprecision(3) << static_cast<float>(SR_MAX(pRes->GetLifetime(), 0) / SR_CLOCKS_PER_SEC);
+                    stream << std::fixed << std::setprecision(3) << static_cast<float>(SR_MAX(resource.GetLifetime(), 0) / SR_CLOCKS_PER_SEC);
 
                     node.append(" (").append(stream.str()).append(")");
                 }
 
-                SR_GRAPH_GUI_NS::Immediate::TreeNodeEx(pRes, SR_GRAPH_GUI_NS::Immediate::GetNodeFlagsWithoutChild(), "%s", node.c_str());
+                SR_GRAPH_GUI_NS::Immediate::TreeNodeEx(&resource, SR_GRAPH_GUI_NS::Immediate::GetNodeFlagsWithoutChild(), "%s", node.c_str());
 
                 if (isDestroyed) {
                     if (SR_GRAPH_GUI_NS::Immediate::IsMouseDoubleClicked(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left) && SR_GRAPH_GUI_NS::Immediate::IsItemHovered()) {
-                        pRes->Kill();
+                        resource.Kill();
                     }
 
                     SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
                 }
             };
 
-            auto&& drawResources = [=](std::unordered_set<SR_UTILS_NS::IResource::Ptr>& resources, uint32_t index) {
-                uint32_t subIndex = 0;
+            SR_UTILS_NS::ResourceManager::Instance().InspectResources([=](SR_UTILS_NS::ResourceManager::ResourcesTypes& groups) {
+                for (auto& [groupHashName, pResourceType] : groups) {
+                    const bool open = SR_GRAPH_GUI_NS::Immediate::TreeNodeEx((void*)(intptr_t)pResourceType, SR_GRAPH_GUI_NS::Immediate::GetNodeFlagsWithChild(), "%s", pResourceType->GetName().data());
 
-                const auto node = SR_FORMAT("[{}] {} ({})", index, (*resources.begin())->GetResourceId().data(), resources.size());
-
-                const bool open = SR_GRAPH_GUI_NS::Immediate::TreeNodeEx((void*)(intptr_t)index, SR_GRAPH_GUI_NS::Immediate::GetNodeFlagsWithChild(), "%s", node.c_str());
-
-                if (open) {
-                    for (const SR_UTILS_NS::IResource::Ptr& pRes : resources) {
-                        drawResource(const_cast<SR_UTILS_NS::IResource*>(pRes.Get()), subIndex++);
+                    if (open) {
+                        uint32_t index = 0;
+                        pResourceType->ForEach([&](SR_UTILS_NS::IResource& resource) {
+                            drawResource(resource, index++);
+                        });
+                        SR_GRAPH_GUI_NS::Immediate::TreePop();
                     }
-                    SR_GRAPH_GUI_NS::Immediate::TreePop();
                 }
-            };
-
-            //SR_UTILS_NS::ResourceManager::Instance().InspectResources([=](auto &groups) {
-            //    for (auto& [groupHashName, pResourceType] : groups) {
-            //        const bool open = SR_GRAPH_GUI_NS::Immediate::TreeNodeEx((void*)(intptr_t)pResourceType, SR_GRAPH_GUI_NS::Immediate::GetNodeFlagsWithChild(), "%s", pResourceType->GetName().data());
-
-            //        if (open) {
-            //            uint32_t index = 0;
-
-            //            SR_UTILS_NS::ResourceType::CopiesMap& copies = pResourceType->GetCopiesRef();
-
-            //            for (auto& [resourceName, pResources] : copies) {
-            //                if (pResources.size() == 1) {
-            //                    drawResource(const_cast<SR_UTILS_NS::IResource*>((*pResources.begin()).Get()), index++);
-            //                }
-            //                else {
-            //                    drawResources(pResources, index++);
-            //                }
-            //            }
-
-            //            SR_GRAPH_GUI_NS::Immediate::TreePop();
-            //        }
-            //    }
-            //});
+            });
 
             SR_GRAPH_GUI_NS::Immediate::EndTabItem();
         }

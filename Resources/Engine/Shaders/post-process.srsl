@@ -75,24 +75,7 @@ vec3 applyGlitch(vec3 color, vec2 originalUV) {
     return color;
 }
 
-vec3 ACES(vec3 x)
-{
-    float a = 2.51;
-    float b = 0.03;
-    float c = 2.43;
-    float d = 0.59;
-    float e = 0.14;
-    return clamp((x * (a * x + b)) / (x * (c * x + d) + e), 0.0, 1.0);
-}
-
-vec3 ACESFilm(vec3 x) {
-    float a = 2.51;
-    float b = 0.03;
-    float c = 2.43;
-    float d = 0.59;
-    float e = 0.14;
-    return clamp((x * (a * x + b)) / (x * (c * x + d) + e), 0.0, 1.0);
-}
+#include <Engine/Shaders/Common/color-correction.inl.srsl>
 
 void fragment() {
 #ifdef SR_LINEARIZE_DEPTH_CASCADES
@@ -156,6 +139,6 @@ void fragment() {
 }
 
 void vertex() {
-    uv = vec2((VERTEX_INDEX << 1) & 2, VERTEX_INDEX & 2);
+    uv = vec2(float((VERTEX_INDEX << 1) & 2), float(VERTEX_INDEX & 2));
     OUT_POSITION = vec4(uv * 2.0 - 1.0, 0.0, 1.0);
 }
