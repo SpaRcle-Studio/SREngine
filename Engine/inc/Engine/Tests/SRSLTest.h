@@ -63,11 +63,15 @@ namespace SR_CORE_NS::Tests {
                     ;
 
                     result = SR_SRSL_NS::WGSLCodeGenerator::Instance().GenerateStages(pShader->GetAllocator(), pShader.Get());
-                    resultFolder.CreateIfNotExists();
-                    auto outputFile = resultFolder.Concat(file.GetBaseName()).ConcatExt("wgsl");
-                    if (!SR_UTILS_NS::FileSystem::WriteToFile(outputFile, result.second[SR_GRAPH_NS::ShaderStage::All])) {
-                        SR_ERROR("SRSLTest::Run() : failed to write shader stage to file: {}", outputFile);
-                        return SR_UTILS_NS::TestExecutionResult::Error;
+
+                    for (auto&& [stage, code] : result.second) {
+                        resultFolder.CreateIfNotExists();
+                        auto outputFile = resultFolder.Concat(file.GetBaseNameView()).ConcatExt("wgsl");
+                        if (!SR_UTILS_NS::FileSystem::WriteToFile(outputFile, code)) {
+                            SR_ERROR("SRSLTest::Run() : failed to write shader stage to file: {}", outputFile);
+                            return SR_UTILS_NS::TestExecutionResult::Error;
+                        }
+                        break;
                     }
                 }
                 else {
