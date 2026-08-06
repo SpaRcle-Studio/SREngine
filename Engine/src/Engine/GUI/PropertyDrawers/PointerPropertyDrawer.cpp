@@ -78,7 +78,13 @@ namespace SR_CORE_GUI_NS {
         }
 
         SR_HTYPES_NS::SharedPtrBase* pSharedPtrBase = value.GetSharedPtrBase();
-        SRAssert(pSharedPtrBase);
+        if (!pSharedPtrBase) {
+            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "PointerPropertyDrawer::Draw() : value is not a smart pointer!");
+            SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+            SR_GRAPH_GUI_NS::Immediate::PopID();
+            SR_GRAPH_GUI_NS::Immediate::PopID();
+            return feedback;
+        }
 
         if (!context.noHeader) {
             SR_GRAPH_GUI_NS::Immediate::SameLine();
@@ -255,7 +261,10 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-        if (m_isOpened && pClassValue) {
+        if (!pClassValue && context.noHeader) {
+            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "PointerPropertyDrawer::Draw() : value is nullptr!");
+        }
+        else if (m_isOpened && pClassValue) {
             const SR_UTILS_NS::StringAtom factoryName = pClassValue->GetMeta()->GetFactoryName();
             if (m_lastTypeName != factoryName) {
                 m_lastTypeName = factoryName;
@@ -305,10 +314,6 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::PopID();
 
         SetValue(context, feedback, value);
-
-        //if (!context.noHeader && m_isOpened) {
-        //    SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(0, context.fieldHeight / 2.f));
-        //}
 
         return feedback;
     }

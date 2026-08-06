@@ -2,11 +2,23 @@
 setlocal
 cls
 
+set CONFIG=Release
+
+if /I "%~1"=="debug" (
+    set CONFIG=Debug
+)
+
+set EMSCRIPTEN_FLAGS=
+
+if /I "%~1"=="debug" (
+    set CONFIG=Debug
+    set EMSCRIPTEN_FLAGS=-g3 -O0
+)
+
 rem === Настройки ===
 set EMSDK_DIR=%~dp0emsdk
 for %%I in ("%~dp0..\..") do set SR_ENGINE_DIR=%%~fI
 set BUILD_DIR=%~dp0build
-set CONFIG=Release
 set PLATFORM=Emscripten
 set NINJA_URL=https://github.com/ninja-build/ninja/releases/latest/download/ninja-win.zip
 set NINJA_ZIP=%~dp0ninja-win.zip
@@ -73,7 +85,7 @@ if not exist "%BUILD_DIR%" (
 rem === Генерация сборки через emcmake ===
 echo:
 echo Generating CMake build for Emscripten...
-call emcmake cmake -G Ninja -S "%SR_ENGINE_DIR%" -B "%BUILD_DIR%" -DCMAKE_BUILD_TYPE=%CONFIG% -DSR_PLATFORM=%PLATFORM% -DCMAKE_MAKE_PROGRAM=%NINJA_EXE%
+call emcmake cmake -G Ninja -S "%SR_ENGINE_DIR%" -B "%BUILD_DIR%" -DCMAKE_BUILD_TYPE=%CONFIG% -DSR_PLATFORM=%PLATFORM% -DCMAKE_MAKE_PROGRAM=%NINJA_EXE% -DCMAKE_CXX_FLAGS="%EMSCRIPTEN_FLAGS%" -DCMAKE_C_FLAGS="%EMSCRIPTEN_FLAGS%"
 
 if errorlevel 1 goto :error
 

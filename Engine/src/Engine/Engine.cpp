@@ -413,6 +413,12 @@ namespace SR_CORE_NS {
 
                     return;
                 }
+                else {
+                    SR_ERROR("Engine::RunSceneGameMode() : scene runner widget is not found!");
+                }
+            }
+            else {
+                SR_ERROR("Engine::RunSceneGameMode() : hierarchy widget is not found!");
             }
             SR_ERROR("Engine::RunSceneGameMode() : failed to run scene: \n\t{}", scene->GetPath());
         }

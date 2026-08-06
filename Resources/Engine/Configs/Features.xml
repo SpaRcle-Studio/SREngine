@@ -78,6 +78,7 @@
             <TextureCaching Value="false"/>
             <Emscripten Value="true"/>
             <Gizmo Value="false"/>
+            <Undocking Value="false"/>
             <FastModelsLoad Value="false"/>
             <ScriptCompilation Value="false"/>
             <RunGameModeOnStart Value="true"/>
