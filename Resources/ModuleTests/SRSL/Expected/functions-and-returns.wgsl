@@ -2,7 +2,10 @@
 
 /// Shader type: Compute
 
-@group(0) @binding(0) var<storage, read_write> outv : array<i32>;
+struct StorageBuffer_outv {
+	outv : array<i32>,
+};
+@group(0) @binding(0) var<storage, read_write> outv : StorageBuffer_outv;
 
 
 struct VertexInput {
@@ -53,8 +56,8 @@ fn compute(@builtin(global_invocation_id) global_id : vec3<u32>, @builtin(workgr
     var b : i32 = ClampInt(123, 0, 5);
     var c : i32 = ClampInt(3, 0, 5);
     var f : i32 = Fib(7);
-    outv[0] = a;
-    outv[1] = b;
-    outv[2] = c;
-    outv[3] = f;
+    outv.outv[0] = a;
+    outv.outv[1] = b;
+    outv.outv[2] = c;
+    outv.outv[3] = f;
 }

@@ -8,7 +8,10 @@ struct BLOCK_t {
 };
 @group(0) @binding(0) var<uniform> BLOCK : BLOCK_t;
 
-@group(0) @binding(1) var<storage, read_write> outBuf : array<i32>;
+struct StorageBuffer_outBuf {
+	outBuf : array<i32>,
+};
+@group(0) @binding(1) var<storage, read_write> outBuf : StorageBuffer_outBuf;
 
 
 struct VertexInput {
@@ -44,6 +47,6 @@ fn compute(@builtin(global_invocation_id) global_id : vec3<u32>, @builtin(workgr
     var m : i32 = SelectValue(x, y);
     var r0 : i32 = select((m + 1), (m + 1), (m >= threshold));
     var r1 : i32 = select((x + y), (x + y), ((x + y) > 0));
-    outBuf[0] = r0;
-    outBuf[1] = r1;
+    outBuf.outBuf[0] = r0;
+    outBuf.outBuf[1] = r1;
 }

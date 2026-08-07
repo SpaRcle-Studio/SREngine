@@ -14,6 +14,9 @@ def main(logger: logger_utils.Logger, resources_dir: str, build_dir: str, config
     resources_path = Path(resources_dir).resolve()
     files = create_packing_mask_file.get_resources_pack_files(resources_path, masks)
 
+    # remove files from cache folder
+    files = [f for f in files if not re.search(r'[/\\]Cache[/\\]', f)]
+
     resources_to_pack_build_path = os.path.join(build_dir, 'PackedResources')
 
     if os.path.exists(resources_to_pack_build_path):

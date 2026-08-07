@@ -1,11 +1,15 @@
 <?xml version="1.0"?>
 <Widgets>
-	<Widget Name="Settings" Open="false" />
-	<Widget Name="Hierarchy" Open="true" />
-	<Widget Name="Assets" Open="false" />
-	<Widget Name="Evo Script Editor" Open="false" />
-	<Widget Name="World edit" Open="false" />
-	<Widget Name="Scene" Open="true" />
-	<Widget Name="Engine statistics" Open="false" />
-	<Widget Name="Inspector" Open="true" />
+    <Widget Name="EngineStatistics" Open="true" />
+    <Widget Name="About" Open="false" />
+    <Widget Name="Hierarchy" Open="true" />
+    <Widget Name="CreateNewProject" Open="false" />
+    <Widget Name="FileBrowser" Open="true" />
+    <Widget Name="Inspector" Open="true" />
+    <Widget Name="SoundDebug" Open="false" />
+    <Widget Name="AnimatorEditor" Open="false" />
+    <Widget Name="AssetInspector" Open="true" />
+    <Widget Name="SceneViewer" Open="true" />
+    <Widget Name="TextureInspector" Open="false" />
+    <Widget Name="EngineSettings" Open="false" />
 </Widgets>

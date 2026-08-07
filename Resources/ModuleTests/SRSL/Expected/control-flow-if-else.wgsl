@@ -34,13 +34,13 @@ fn compute(@builtin(global_invocation_id) global_id : vec3<u32>, @builtin(workgr
         c = 2;
     }
     if (((((a) == (10)) && ((b) == (20))) && ((c) == (1)))) {
-        c += 100;
+        c = (c + 100);
     }
     else if ((((a) != (10)) || ((b) != (20)))) {
-        c += 200;
+        c = (c + 200);
     }
     else {
-        c += 300;
+        c = (c + 300);
     }
     var ok : bool = ((c > 0) && (!(c < 0)));
     ok = (ok || ((a) == (b)));

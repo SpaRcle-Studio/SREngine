@@ -2,7 +2,10 @@
 
 /// Shader type: Compute
 
-@group(0) @binding(0) var<storage, read_write> dst : array<u32>;
+struct StorageBuffer_dst {
+	dst : array<u32>,
+};
+@group(0) @binding(0) var<storage, read_write> dst : StorageBuffer_dst;
 
 
 struct VertexInput {
@@ -29,16 +32,16 @@ var<private> UV : vec2<f32>;
 fn compute(@builtin(global_invocation_id) global_id : vec3<u32>, @builtin(workgroup_id) workgroup_id : vec3<u32>, @builtin(num_workgroups) num_workgroups : vec3<u32>, @builtin(local_invocation_id) local_id : vec3<u32>, @builtin(local_invocation_index) local_index : u32)  {
     var sum : u32 = 0u;
     var prod : u32 = 1u;
-    for (var i : u32 = 0u; (i < 16u); i += 1u) {
+    for (var i : u32 = 0u; (i < 16u); i = (i + 1u)) {
         if ((((i & 1u)) == (0u))) {
             continue;
         }
-        sum += i;
-        prod *= (i + 1u);
+        sum = (sum + i);
+        prod = (prod * (i + 1u));
         if ((i > 11u)) {
             break;
         }
     }
-    dst[0] = sum;
-    dst[1] = prod;
+    dst.dst[0] = sum;
+    dst.dst[1] = prod;
 }

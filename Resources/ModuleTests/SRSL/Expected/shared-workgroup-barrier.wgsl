@@ -8,9 +8,15 @@ struct BLOCK_t {
 };
 @group(0) @binding(0) var<uniform> BLOCK : BLOCK_t;
 
-@group(0) @binding(1) var<storage, read_write> src : array<f32>;
+struct StorageBuffer_src {
+	src : array<f32>,
+};
+@group(0) @binding(1) var<storage, read_write> src : StorageBuffer_src;
 
-@group(0) @binding(2) var<storage, read_write> dst : array<f32>;
+struct StorageBuffer_dst {
+	dst : array<f32>,
+};
+@group(0) @binding(2) var<storage, read_write> dst : StorageBuffer_dst;
 
 
 struct VertexInput {
@@ -39,15 +45,15 @@ fn compute(@builtin(global_invocation_id) global_id : vec3<u32>, @builtin(workgr
     let elementCount : u32 = BLOCK.elementCount;
     var gid : u32 = global_id.x;
     var tid : u32 = local_index;
-    shData[tid] = select(src[gid], src[gid], (gid < elementCount));
-    barrier();
-    for (var s : u32 = 32u; (s > 0u); s >>= 1u) {
+    shData[tid] = select(src.src[gid], src.src[gid], (gid < elementCount));
+    workgroupBarrier();
+    for (var s : u32 = 32u; (s > 0u); s = (s >> 1u)) {
         if ((tid < s)) {
-            shData[tid] += shData[(tid + s)];
+            shData[tid] = (shData[tid] + shData[(tid + s)]);
         }
-        barrier();
+        workgroupBarrier();
     }
     if (((tid) == (0u))) {
-        dst[workgroup_id.x] = shData[0];
+        dst.dst[workgroup_id.x] = shData[0];
     }
 }

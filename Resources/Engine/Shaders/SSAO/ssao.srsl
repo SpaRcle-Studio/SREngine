@@ -26,12 +26,12 @@ float LinearEyeDepth(float depth, float near, float far) {
 #define USE_COLOR_INDEX_0
 
 void fragment() {
-    vec3 posWS = texture(Position, uv).xyz;
+    vec3 posWS = textureLod(Position, uv, 0.0).xyz;
     if (length(posWS) < 0.0001) {
         COLOR_INDEX_0 = vec4(1.0);
     }
     else {
-        vec3 normalWS = texture(Normal, uv).rgb;
+        vec3 normalWS = textureLod(Normal, uv, 0.0).rgb;
         normalWS = normalize(normalWS * 2.0 - 1.0);
 
         vec3 pos = (VIEW_MATRIX * vec4(posWS, 1.0)).xyz;
@@ -43,7 +43,7 @@ void fragment() {
 
         vec2 noiseScale = RESOLUTION / 4.0;
 
-        vec3 noiseV = vec3(texture(Noise, uv * noiseScale).xy, 0.0);
+        vec3 noiseV = vec3(textureLod(Noise, uv * noiseScale, 0.0).xy, 0.0);
         vec3 randomVec = normalize(noiseV * 2.0 - 1.0);
         vec3 tangent = normalize(randomVec - normal * dot(randomVec, normal));
         vec3 bitangent = cross(normal, tangent);
@@ -57,11 +57,11 @@ void fragment() {
             // project sample position (to sample texture) (to get position on screen/texture)
             vec4 offset = vec4(samplePos, 1.0);
             offset = PROJECTION_MATRIX * offset; // from view to clip-space
-            offset.xyz /= offset.w; // perspective divide
-            offset.xyz = offset.xyz * 0.5 + 0.5; // transform to range 0.0 - 1.0
+            offset = vec4(offset.xyz / offset.w, offset.w); // perspective divide
+            offset = vec4(offset.xyz * 0.5 + vec3(0.5), offset.w); // transform to range 0.0 - 1.0
 
             // get sample depth
-            float sampleDepth = (VIEW_MATRIX * vec4(texture(Position, offset.xy).xyz, 1.0)).z; // get depth value of kernel sample
+            float sampleDepth = (VIEW_MATRIX * vec4(textureLod(Position, offset.xy, 0.0).xyz, 1.0)).z; // get depth value of kernel sample
 
             // range check & accumulate
             float rangeCheck = smoothstep(0.0, 1.0, radius / abs(pos.z - sampleDepth));

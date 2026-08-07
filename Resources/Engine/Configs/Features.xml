@@ -81,7 +81,7 @@
             <Undocking Value="false"/>
             <FastModelsLoad Value="false"/>
             <ScriptCompilation Value="false"/>
-            <RunGameModeOnStart Value="true"/>
+            <RunGameModeOnStart Value="false"/>
         </Variant>
 
         <Variant Name="Android">

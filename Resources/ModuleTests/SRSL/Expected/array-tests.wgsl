@@ -2,6 +2,10 @@
 
 /// Shader type: Compute
 
+const array_case_1 : i32 = array(10);
+const array_case_2 : i32 = array(array(1, 2, 10, (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1)));
+const case_1_1 : i32 = 123456u;
+
 struct VertexInput {
 	@location(0) VERTEX_INPUT : vec3<f32>,
 	@location(1) NORMAL_INPUT : vec3<f32>,
@@ -35,11 +39,11 @@ fn IsMaskIncludedSubMask(mask : i32, subMask : i32) -> bool {
 fn compute(@builtin(global_invocation_id) global_id : vec3<u32>, @builtin(workgroup_id) workgroup_id : vec3<u32>, @builtin(num_workgroups) num_workgroups : vec3<u32>, @builtin(local_invocation_id) local_id : vec3<u32>, @builtin(local_invocation_index) local_index : u32)  {
     var value : bool = IsMaskIncludedSubMask();
     var case_1_2 : i32 = 1111u;
-    case_1_2 += 123;
-    case_1_2 += array_case_1[0];
-    case_1_2 += array_case_2[0][0];
-    case_1_2 += case_1_1;
-    case_1_2 += ((case_1_1 + array_case_1[0]) + array_case_2[0][0]);
+    case_1_2 = (case_1_2 + 123);
+    case_1_2 = (case_1_2 + array_case_1[0]);
+    case_1_2 = (case_1_2 + array_case_2[0][0]);
+    case_1_2 = (case_1_2 + case_1_1);
+    case_1_2 = (case_1_2 + ((case_1_1 + array_case_1[0]) + array_case_2[0][0]));
     var case_1 : i32 = ((array_case_1[0] + case_1_1) + case_1_2);
     var case_2 : i32 = array_case_2[0][0];
     var case_3 : i32 = 10;

@@ -72,8 +72,8 @@ fn vertex(input : VertexInput) -> VertexOutput {
     NORMAL = input.NORMAL_INPUT;
     TANGENT = input.TANGENT_INPUT;
     UV = input.UV_INPUT;
-    var height : f32 = textureSample(NoiseTex, ((VERTEX.xz * (NoiseSampleSize / 100.0)) + (vec2<f32>(TIME) * (AnimationSpeed / 1000.0)))).r;
-    VERTEX += ((VERTEX * height) * HeightMultiplier);
+    var height : f32 = textureSample(NoiseTex, NoiseTex_sampler, ((VERTEX.xz * (NoiseSampleSize / 100.0)) + (vec2<f32>(TIME) * (AnimationSpeed / 1000.0)))).r;
+    VERTEX = (VERTEX + ((VERTEX * height) * HeightMultiplier));
     VERTEX = (MODEL_MATRIX * vec4<f32>(VERTEX, 1.0)).xyz;
     OUT_POSITION = ((PROJECTION_MATRIX * VIEW_MATRIX) * vec4<f32>(VERTEX, 1.0));
     vsOut.position = OUT_POSITION;
@@ -85,7 +85,7 @@ fn vertex(input : VertexInput) -> VertexOutput {
 }
 
 @fragment
-fn fragment(fsIn : VertexOutput)  {
+fn fragment(fsIn : VertexOutput) -> FragmentOutput {
     let VIEW_MATRIX : mat4x4<f32> = SHARED.VIEW_MATRIX;
     let VIEW_DIRECTION : vec3<f32> = SHARED.VIEW_DIRECTION;
     let BubbleColor : vec3<f32> = BLOCK.BubbleColor;

@@ -8,7 +8,10 @@ struct BLOCK_t {
 };
 @group(0) @binding(0) var<uniform> BLOCK : BLOCK_t;
 
-@group(0) @binding(1) var<storage, read_write> outv : array<vec4<f32>>;
+struct StorageBuffer_outv {
+	outv : array<vec4<f32>>,
+};
+@group(0) @binding(1) var<storage, read_write> outv : StorageBuffer_outv;
 
 @group(1) @binding(0) var inputTex : texture_2d<f32>;
 @group(1) @binding(1) var inputTex_sampler : sampler;
@@ -39,8 +42,8 @@ fn compute(@builtin(global_invocation_id) global_id : vec3<u32>, @builtin(workgr
     let resolution : vec2<f32> = BLOCK.resolution;
     var gid : vec2<i32> = vec2<i32>(global_id.xy);
     var uv : vec2<f32> = ((vec2<f32>(gid) + 0.5) / max(vec2<f32>(1.0), resolution));
-    var rgb : vec3<f32> = textureSample(inputTex, uv).rgb;
+    var rgb : vec3<f32> = textureSample(inputTex, inputTex_sampler, uv).rgb;
     var lum : f32 = max(dot(rgb, vec3<f32>(0.2126, 0.7152, 0.0722)), 1e-6);
-    outv[0] = vec4<f32>(rgb, 1.0);
-    outv[1] = vec4<f32>(lum, lum, lum, 1.0);
+    outv.outv[0] = vec4<f32>(rgb, 1.0);
+    outv.outv[1] = vec4<f32>(lum, lum, lum, 1.0);
 }

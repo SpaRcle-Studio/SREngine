@@ -194,3 +194,30 @@ use tabs: true
 					5-v:first
 						6-s:High
 					5-o:second
+			3-a:defaultPlatformGraphicsSettings
+				4-k:i
+					5-o:d
+						6-o:platform
+							7-v:has
+								8-b:true
+							7-v:value
+								8-s:Emscripten
+						6-o:graphics
+							7-v:instancing
+								8-b:false
+							7-v:shadowsInstancing
+								8-b:false
+							7-v:postProcess
+								8-b:false
+							7-v:hdr
+								8-b:false
+							7-v:autoExposure
+								8-b:false
+							7-v:SSAO
+								8-s:None
+							7-v:shadowsQuality
+								8-s:None
+							7-v:colorBufferQuality
+								8-s:None
+				4-k:i
+					5-o:d

@@ -8,7 +8,10 @@ struct BLOCK_t {
 };
 @group(0) @binding(0) var<uniform> BLOCK : BLOCK_t;
 
-@group(0) @binding(1) var<storage, read_write> outv : array<vec4<f32>>;
+struct StorageBuffer_outv {
+	outv : array<vec4<f32>>,
+};
+@group(0) @binding(1) var<storage, read_write> outv : StorageBuffer_outv;
 
 
 struct VertexInput {
@@ -39,6 +42,6 @@ fn compute(@builtin(global_invocation_id) global_id : vec3<u32>, @builtin(workgr
     var m00 : f32 = M[0][0];
     var m13 : f32 = M[1][3];
     var m30 : f32 = M[3][0];
-    outv[0] = r;
-    outv[1] = vec4<f32>(m00, m13, m30, 1.0);
+    outv.outv[0] = r;
+    outv.outv[1] = vec4<f32>(m00, m13, m30, 1.0);
 }

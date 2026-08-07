@@ -2,7 +2,10 @@
 
 /// Shader type: Compute
 
-@group(0) @binding(0) var<storage, read_write> bits : array<u32>;
+struct StorageBuffer_bits {
+	bits : array<u32>,
+};
+@group(0) @binding(0) var<storage, read_write> bits : StorageBuffer_bits;
 
 
 struct VertexInput {
@@ -35,10 +38,10 @@ fn compute(@builtin(global_invocation_id) global_id : vec3<u32>, @builtin(workgr
     var notv : u32 = (~a);
     var shl : u32 = (a << 4u);
     var shr : u32 = (b >> 2u);
-    bits[0] = andv;
-    bits[1] = orv;
-    bits[2] = xorv;
-    bits[3] = notv;
-    bits[4] = shl;
-    bits[5] = shr;
+    bits.bits[0] = andv;
+    bits.bits[1] = orv;
+    bits.bits[2] = xorv;
+    bits.bits[3] = notv;
+    bits.bits[4] = shl;
+    bits.bits[5] = shr;
 }

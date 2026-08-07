@@ -10,7 +10,10 @@ struct SHARED_t {
 };
 @group(0) @binding(0) var<uniform> SHARED : SHARED_t;
 
-@group(0) @binding(1) var<storage, read_write> lines : array<vec3<f32>>;
+struct StorageBuffer_lines {
+	points : array<vec3<f32>>,
+};
+@group(0) @binding(1) var<storage, read_write> lines : StorageBuffer_lines;
 
 
 struct VertexInput {
@@ -53,7 +56,7 @@ fn vertex(input : VertexInput, @builtin(vertex_index) vertexIndex : u32) -> Vert
     UV = input.UV_INPUT;
     var VERTEX_INDEX : u32 = vertexIndex;
     var idx : u32 = ((gl_InstanceIndex * 2u) + u32(VERTEX_INDEX));
-    var p : vec3<f32> = points[idx];
+    var p : vec3<f32> = lines.points[idx];
     lineColor = vec4<f32>(abs(p), 1.0);
     OUT_POSITION = ((PROJECTION_MATRIX * VIEW_MATRIX) * vec4<f32>(p, 1.0));
     vsOut.position = OUT_POSITION;
@@ -66,7 +69,7 @@ fn vertex(input : VertexInput, @builtin(vertex_index) vertexIndex : u32) -> Vert
 }
 
 @fragment
-fn fragment(fsIn : VertexOutput)  {
+fn fragment(fsIn : VertexOutput) -> FragmentOutput {
     VERTEX = fsIn.VERTEX;
     NORMAL = fsIn.NORMAL;
     TANGENT = fsIn.TANGENT;

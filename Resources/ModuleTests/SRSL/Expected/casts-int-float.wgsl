@@ -8,7 +8,10 @@ struct BLOCK_t {
 };
 @group(0) @binding(0) var<uniform> BLOCK : BLOCK_t;
 
-@group(0) @binding(1) var<storage, read_write> outData : array<f32>;
+struct StorageBuffer_outData {
+	outData : array<f32>,
+};
+@group(0) @binding(1) var<storage, read_write> outData : StorageBuffer_outData;
 
 
 struct VertexInput {
@@ -38,7 +41,7 @@ fn compute(@builtin(global_invocation_id) global_id : vec3<u32>, @builtin(workgr
     var ry : i32 = i32(resolution.y);
     var fx : f32 = f32(rx);
     var fy : f32 = f32(ry);
-    outData[0] = (fx / max(1.0, resolution.x));
-    outData[1] = (fy / max(1.0, resolution.y));
-    outData[2] = f32(i32((fx + fy)));
+    outData.outData[0] = (fx / max(1.0, resolution.x));
+    outData.outData[1] = (fy / max(1.0, resolution.y));
+    outData.outData[2] = f32(i32((fx + fy)));
 }

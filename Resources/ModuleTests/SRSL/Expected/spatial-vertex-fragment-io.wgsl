@@ -63,7 +63,7 @@ fn vertex(input : VertexInput) -> VertexOutput {
     UV = input.UV_INPUT;
     vUv = UV;
     var p : vec3<f32> = VERTEX;
-    p += (NORMAL * 0.01);
+    p = (p + (NORMAL * 0.01));
     VERTEX = (MODEL_MATRIX * vec4<f32>(p, 1.0)).xyz;
     OUT_POSITION = ((PROJECTION_MATRIX * VIEW_MATRIX) * vec4<f32>(VERTEX, 1.0));
     vsOut.position = OUT_POSITION;
@@ -76,7 +76,7 @@ fn vertex(input : VertexInput) -> VertexOutput {
 }
 
 @fragment
-fn fragment(fsIn : VertexOutput)  {
+fn fragment(fsIn : VertexOutput) -> FragmentOutput {
     let TintColor : vec4<f32> = BLOCK.TintColor;
     VERTEX = fsIn.VERTEX;
     NORMAL = fsIn.NORMAL;
@@ -86,7 +86,7 @@ fn fragment(fsIn : VertexOutput)  {
     var COLOR_INDEX_0 : vec4<f32>; /// location 0
     var COLOR_INDEX_1 : vec4<f32>; /// location 1
     var fsOut : FragmentOutput;
-    var albedo : vec3<f32> = textureSample(Albedo, vUv).rgb;
+    var albedo : vec3<f32> = textureSample(Albedo, Albedo_sampler, vUv).rgb;
     COLOR = (vec4<f32>(albedo, 1.0) * TintColor);
     COLOR_INDEX_1 = vec4<f32>(fsIn.position.z);
     COLOR_INDEX_0 = COLOR;

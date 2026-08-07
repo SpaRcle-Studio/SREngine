@@ -70,7 +70,7 @@ fn vertex(input : VertexInput) -> VertexOutput {
 }
 
 @fragment
-fn fragment(fsIn : VertexOutput)  {
+fn fragment(fsIn : VertexOutput) -> FragmentOutput {
     VERTEX = fsIn.VERTEX;
     NORMAL = fsIn.NORMAL;
     TANGENT = fsIn.TANGENT;

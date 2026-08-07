@@ -37,7 +37,7 @@ elseif(SR_EMSCRIPTEN)
         )
     else()
         set_target_properties(${SR_EXECUTABLE_NAME} PROPERTIES
-                LINK_FLAGS "-sUSE_SDL=2 -sALLOW_MEMORY_GROWTH=1 -sFULL_ES3=1 -sMODULARIZE=1 -sINITIAL_MEMORY=134217728 -sEXPORT_NAME=SREngine --preload-file ${SR_CMAKE_ROOT_BUILD_DIRECTORY}/PackedResources@/Resources -o ${SR_EXECUTABLE_NAME}.html"
+            LINK_FLAGS "-sUSE_SDL=2 -sALLOW_MEMORY_GROWTH=1 -sFULL_ES3=1 -sMODULARIZE=1 -sINITIAL_MEMORY=134217728 -sEXPORT_NAME=SREngine --preload-file ${SR_CMAKE_ROOT_BUILD_DIRECTORY}/PackedResources@/Resources -o ${SR_EXECUTABLE_NAME}.html"
         )
     endif()
 
