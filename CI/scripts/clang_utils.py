@@ -187,6 +187,69 @@ def debug_extract_property_default_value(cursor, deep=0):
         debug_extract_property_default_value(child, deep + 1)
 
 
+def _extract_default_value_from_source(cursor):
+    """
+    Fallback: read the raw source line(s) for a FIELD_DECL and extract the initializer
+    after '='. Handles cases where libclang drops the CALL_EXPR node for template typedef
+    fields (e.g. FVector3, FVector2) when macro expansions are involved.
+
+    Note: cursor.extent may NOT include the initializer for template typedef fields —
+    it ends right after the field name. So we read from extent.start.line to the first ';'
+    that ends the declaration.
+    """
+    try:
+        loc = cursor.location
+        if not loc.file:
+            return None
+        src_path = loc.file.name
+
+        with open(src_path, 'r', encoding='utf-8', errors='replace') as f:
+            lines = f.readlines()
+
+        # Start from the line where the field is declared
+        start_line = cursor.extent.start.line - 1  # 0-based
+
+        # Collect text from start_line onward until we hit a ';'
+        # (handles rare multi-line cases, but stops at next ';')
+        field_text = ''
+        for i in range(start_line, min(start_line + 5, len(lines))):
+            field_text += lines[i]
+            if ';' in lines[i]:
+                break
+
+        # Truncate at the first ';' to avoid spilling into the next declaration
+        semi = field_text.find(';')
+        if semi != -1:
+            field_text = field_text[:semi]
+
+        field_text = field_text.strip()
+
+        # Find '=' that introduces the initializer (skip '==', '!=', '<=', '>=')
+        eq_idx = -1
+        for i, ch in enumerate(field_text):
+            if ch == '=' and i > 0 \
+                    and field_text[i - 1] not in ('!', '<', '>', '=') \
+                    and (i + 1 >= len(field_text) or field_text[i + 1] != '='):
+                eq_idx = i
+                break
+        if eq_idx == -1:
+            return None
+
+        initializer = field_text[eq_idx + 1:].strip()
+        if not initializer:
+            return None
+
+        # Brace-list initializers like { 1024, 1024 } or { 1, 2, 3 } cannot be used
+        # in a `return` statement without an explicit type, so skip them.
+        if initializer.startswith('{'):
+            return None
+
+        return initializer
+
+    except Exception:
+        return None
+
+
 def extract_property_default_value(cursor):
     #debug_extract_property_default_value(cursor)
 
@@ -226,20 +289,69 @@ def extract_property_default_value(cursor):
         #    namespace_stack.append(child.spelling)
         #    continue
         if child.kind == clang.cindex.CursorKind.CALL_EXPR:
-            if len(token_strs) == 0:
-                namespace = '::'.join(namespace_stack)
-                #print(f'Extract default value for {child.kind} \"{child.spelling}\" \"{child.type.spelling}\", {token_strs}')
-                if len(namespace):
-                    return f'{namespace}::{child.type.spelling}::{child.spelling}()'
-                return f'{child.type.spelling}::{child.spelling}()'
-            else:
-                expression = ''
-                for token in tokens:
-                    expression += token.spelling
-                return expression
+            # Collect literal arguments directly from CALL_EXPR children.
+            # We cannot rely on child.get_tokens() because libclang returns
+            # macro-expanded context tokens that contain surrounding code noise.
+            # Instead we walk the direct children of CALL_EXPR and pick literals.
+            arg_literal_kinds = {
+                clang.cindex.CursorKind.FLOATING_LITERAL,
+                clang.cindex.CursorKind.INTEGER_LITERAL,
+                clang.cindex.CursorKind.STRING_LITERAL,
+                clang.cindex.CursorKind.CHARACTER_LITERAL,
+                clang.cindex.CursorKind.CXX_BOOL_LITERAL_EXPR,
+                clang.cindex.CursorKind.UNARY_OPERATOR,
+            }
+            call_args = []
+            is_static_method_call = False  # e.g. Quaternion::Identity(), FVector3::Zero()
+            static_method_owner = None     # fully-qualified owner class (e.g. SpaRcle::Utils::TagManager)
+            for call_child in child.get_children():
+                if call_child.kind in arg_literal_kinds:
+                    arg_tokens = list(call_child.get_tokens())
+                    if arg_tokens:
+                        call_args.append(''.join(t.spelling for t in arg_tokens))
+                elif call_child.kind == clang.cindex.CursorKind.UNEXPOSED_EXPR:
+                    # Either wraps a literal (constructor arg) or a DECL_REF_EXPR (static method ref)
+                    inner_children = list(call_child.get_children())
+                    if inner_children and inner_children[0].kind == clang.cindex.CursorKind.DECL_REF_EXPR:
+                        # DECL_REF_EXPR with a function type → static method reference, not an arg
+                        decl_ref = inner_children[0]
+                        if '()' in decl_ref.type.spelling or decl_ref.type.kind == clang.cindex.TypeKind.FUNCTIONPROTO:
+                            is_static_method_call = True
+                            # Find the owner class from TYPE_REF inside DECL_REF_EXPR
+                            for decl_child in decl_ref.get_children():
+                                if decl_child.kind == clang.cindex.CursorKind.TYPE_REF:
+                                    static_method_owner = decl_child.type.get_canonical().spelling \
+                                        or decl_child.type.spelling
+                                    break
+                            continue
+                    # Otherwise it wraps a literal — unwrap one level
+                    for inner in inner_children:
+                        if inner.kind in arg_literal_kinds:
+                            arg_tokens = list(inner.get_tokens())
+                            if arg_tokens:
+                                call_args.append(''.join(t.spelling for t in arg_tokens))
+                            break
 
-    #print(f'Default value not found for {cursor.spelling}')
-    return None
+            # Use canonical type to get fully qualified name (e.g. SpaRcle::Utils::Math::Quaternion)
+            # child.type.spelling may return a short name (e.g. 'Quaternion') when macros are involved
+            canonical_type = child.type.get_canonical()
+            type_name = canonical_type.spelling if canonical_type.spelling else child.type.spelling
+            method_name = child.spelling     # e.g. 'FColor', 'Identity', 'Zero', 'GetDefaultTag'
+            if call_args:
+                # Constructor call with arguments: FColor(0.06f, 0.0f, 0.0f)
+                return f'{type_name}({", ".join(call_args)})'
+            elif is_static_method_call:
+                # Static factory method: Quaternion::Identity(), TagManager::GetDefaultTag()
+                # Use the owner class (where the method is declared), not the return type.
+                owner = static_method_owner or type_name
+                return f'{owner}::{method_name}()'
+            else:
+                # Default constructor: FColor()
+                return f'{type_name}()'
+
+    # AST-based extraction failed (e.g. libclang drops CALL_EXPR for template typedef fields
+    # when macro expansions are involved). Fall back to reading the raw source text from the file.
+    return _extract_default_value_from_source(cursor)
 
 
 def has_static_function(class_node, function_name):
@@ -262,6 +374,36 @@ def is_class_inherited_from(class_node, class_name):
             if node.spelling == class_name:
                 return True
     return False
+
+
+def fix_cpp_ctor_name(name: str) -> str:
+    # Отделяем сигнатуру конструктора
+    paren = name.find('(')
+    if paren == -1:
+        return name
+
+    prefix = name[:paren]
+    suffix = name[paren:]
+
+    parts = prefix.split("::")
+
+    # Ищем дублирование namespace.
+    # Например:
+    # A B C A B C D D
+    #       ^
+
+    n = len(parts)
+
+    for start in range(1, n):
+        if parts[:start] == parts[start:start * 2]:
+            parts = parts[start:]
+            break
+
+    # Убираем FColor::FColor
+    if len(parts) >= 2 and parts[-1] == parts[-2]:
+        parts.pop()
+
+    return "::".join(parts) + suffix
 
 
 def process_property(property_obj: reflection_utils.CPPProperty, clang_child):
@@ -335,7 +477,10 @@ def process_property(property_obj: reflection_utils.CPPProperty, clang_child):
     if not property_obj.default_value:
         property_obj.default_value = extract_property_default_value(clang_child)
         #if property_obj.default_value:
-        #    print(f'Found default value: {property_obj.default_value}')
+        #    #print(f'Found default value: {property_obj.default_value}')
+        #    # необходимо удалить повторение неймспейса, так как иногда получается вот такое
+        #    # SpaRcle::Utils::Math::SpaRcle::Utils::Math::FColor::FColor()
+        #    property_obj.default_value = fix_cpp_ctor_name(property_obj.default_value)
 
 
 def parse_sparcle_enum(logger, context, parent_node, code_structure, namespaces):

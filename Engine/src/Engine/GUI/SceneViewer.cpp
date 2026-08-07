@@ -261,6 +261,7 @@ namespace SR_CORE_GUI_NS {
 
     void SceneViewer::DrawTexture(SR_MATH_NS::IVector2 winSize, SR_MATH_NS::IVector2 texSize, uint32_t id, bool centralize) {
         if (texSize.HasNegative() || winSize.HasNegative()) {
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Invalid texture or window size!");
             return;
         }
 
