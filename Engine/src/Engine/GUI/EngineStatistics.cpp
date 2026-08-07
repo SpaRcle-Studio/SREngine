@@ -234,10 +234,10 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-        #define __SR_DRAW_COLUMN_DATA(index, ...) \
-            SR_GRAPH_GUI_NS::Immediate::TableSetColumnIndex(index); \
-            SR_GRAPH_GUI_NS::Immediate::Text(__VA_ARGS__); \
-            SR_GRAPH_GUI_NS::Immediate::Separator(); \
+            #define __SR_DRAW_COLUMN_DATA(index, ...)                   \
+                SR_GRAPH_GUI_NS::Immediate::TableSetColumnIndex(index); \
+                SR_GRAPH_GUI_NS::Immediate::Text(__VA_ARGS__);          \
+                SR_GRAPH_GUI_NS::Immediate::Separator();                \
 
             if (SR_GRAPH_GUI_NS::Immediate::CollapsingHeader("Framebuffers")) {
                 if (SR_GRAPH_GUI_NS::Immediate::BeginTable("##FramebuffersTable", 7)) {
@@ -425,6 +425,7 @@ namespace SR_CORE_GUI_NS {
 
             auto&& pFramebuffer = pFramebufferPass ? pFramebufferPass->GetFrameBuffer() : nullptr;
             if (!pFramebuffer) {
+                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Yellow(), "Framebuffer is nullptr!");
                 SR_GRAPH_GUI_NS::Immediate::PopID();
                 return;
             }
@@ -442,6 +443,9 @@ namespace SR_CORE_GUI_NS {
                     auto&& pDescriptor = pPipeline->GetOverlay(SR_GRAPH_NS::OverlayType::ImGui)->GetTextureDescriptorSet(textureId);
                     SR_GRAPH_GUI_NS::Immediate::DrawTexture(pDescriptor, 256, false);
                 }
+                else {
+                    SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Yellow(), "Color texture %i is invalid!", i);
+                }
             }
 
             if (pFramebuffer->GetDepthAspect() == SR_GRAPH_NS::ImageAspect::Depth) {
@@ -450,6 +454,9 @@ namespace SR_CORE_GUI_NS {
                         auto&& pPipeline = GetContext()->GetPipeline();
                         auto&& pDescriptor = pPipeline->GetOverlay(SR_GRAPH_NS::OverlayType::ImGui)->GetTextureDescriptorSet(textureId);
                         SR_GRAPH_GUI_NS::Immediate::DrawTexture(pDescriptor, 256, false);
+                    }
+                    else {
+                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Yellow(), "Depth texture %i is invalid!", i);
                     }
                 }
             }

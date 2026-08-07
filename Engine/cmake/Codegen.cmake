@@ -20,6 +20,12 @@ macro(SRCodegen)
 
     # compile codegen script
 
+    set(CODEGEN_LOCK "${SR_CMAKE_RESOURCES_DIRECTORY}/Engine/Utilities/codegen.lock")
+
+    message(STATUS "Waiting for codegen compilation lock...")
+
+    file(LOCK "${CODEGEN_LOCK}" TIMEOUT 30)
+
     message(STATUS "Compiling codegen script: ${SR_CODEGEN_SCRIPT_PATH}")
 
     execute_process(
@@ -70,6 +76,8 @@ macro(SRCodegen)
         OUTPUT_VARIABLE output
         ERROR_VARIABLE error_output
     )
+
+    file(LOCK "${CODEGEN_LOCK}" RELEASE)
 
     if (result EQUAL "0")
         message(STATUS "Codegen script executed successfully:\n${output}")

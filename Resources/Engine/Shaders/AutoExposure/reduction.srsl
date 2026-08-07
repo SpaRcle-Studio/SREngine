@@ -17,7 +17,7 @@ void compute() {
         shSum[tid] = 0.0;
     } else {
         vec2 uv = (vec2(gid) + 0.5) / resolution;
-        vec3 color = texture(hdrTexture, uv).rgb;
+        vec3 color = textureLod(hdrTexture, uv, 0.0).rgb;
         float lum = max(dot(color, vec3(0.2126, 0.7152, 0.0722)), 1e-6);
         shSum[tid] = log(lum);
     }

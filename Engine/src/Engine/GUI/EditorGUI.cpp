@@ -762,6 +762,17 @@ namespace SR_CORE_GUI_NS {
 
             SR_GRAPH_GUI_NS::Immediate::Separator();
 
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Skybox procedural")) {
+                if (auto&& pScene = m_engine->GetScene()) {
+                    auto&& pGameObject = pScene->InstanceGameObject("Skybox"_atom);
+                    auto&& pSkybox = pGameObject->AddComponent<SR_GTYPES_NS::SkyboxComponent>();
+                    pSkybox->SetParams(SR_UTILS_NS::Path(), "Engine/Shaders/skybox-procedural.srsl", false);
+                    InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                }
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Render Target")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pGameObject = pScene->InstanceGameObject("Render Target"_atom);

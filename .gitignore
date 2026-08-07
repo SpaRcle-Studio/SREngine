@@ -92,3 +92,4 @@ Resources/**/*.so
 /cmake-build-release-visual-studio
 /CI/link.exe
 /CI/dumpbin.exe
+/Resources/Engine/Utilities/codegen.lock

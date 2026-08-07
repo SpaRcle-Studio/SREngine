@@ -581,6 +581,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
 
     SR_MATH_NS::FVector2 DrawTexture(const void* pDescriptor, const SR_MATH_NS::FVector2& size, bool imposition) {
         if (!pDescriptor) {
+            SR_IMMEDIATE_GUI_NS::TextColored({ 1, 0, 0, 1 }, "Invalid texture descriptor!");
             return SR_MATH_NS::FVector2(); /// NOLINT
         }
 

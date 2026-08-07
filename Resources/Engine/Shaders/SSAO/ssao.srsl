@@ -23,60 +23,57 @@ float LinearEyeDepth(float depth, float near, float far) {
 
 [[ssbo(SSAOKernel)]] vec4[] samples;
 
-
-
 #define USE_COLOR_INDEX_0
 
 void fragment() {
-
     vec3 posWS = texture(Position, uv).xyz;
-    if(length(posWS) < 0.0001)
-    {
+    if (length(posWS) < 0.0001) {
         COLOR_INDEX_0 = vec4(1.0);
-        return;
     }
-    vec3 normalWS = texture(Normal, uv).rgb;
-    normalWS = normalize(normalWS * 2.0 - 1.0);
+    else {
+        vec3 normalWS = texture(Normal, uv).rgb;
+        normalWS = normalize(normalWS * 2.0 - 1.0);
 
-    vec3 pos = (VIEW_MATRIX * vec4(posWS, 1.0)).xyz;
-    vec3 normal = normalize((VIEW_MATRIX * vec4(normalWS, 0.0)).xyz);
+        vec3 pos = (VIEW_MATRIX * vec4(posWS, 1.0)).xyz;
+        vec3 normal = normalize((VIEW_MATRIX * vec4(normalWS, 0.0)).xyz);
 
-    float occlusion = 0.0;
-    float radius = 0.5;
-    float bias = 0.025;
+        float occlusion = 0.0;
+        float radius = 0.5;
+        float bias = 0.025;
 
-    vec2 noiseScale = RESOLUTION / 4.0;
+        vec2 noiseScale = RESOLUTION / 4.0;
 
-    vec3 noiseV = vec3(texture(Noise, uv * noiseScale).xy, 0.0);
-    vec3 randomVec = normalize(noiseV * 2.0 - 1.0);
-    vec3 tangent = normalize(randomVec - normal * dot(randomVec, normal));
-    vec3 bitangent = cross(normal, tangent);
-    mat3 TBN = mat3(tangent, bitangent, normal);
+        vec3 noiseV = vec3(texture(Noise, uv * noiseScale).xy, 0.0);
+        vec3 randomVec = normalize(noiseV * 2.0 - 1.0);
+        vec3 tangent = normalize(randomVec - normal * dot(randomVec, normal));
+        vec3 bitangent = cross(normal, tangent);
+        mat3 TBN = mat3(tangent, bitangent, normal);
 
-    for (int i = 0; i < sampleCount; i++) {
-        // get sample position
-        vec3 samplePos = TBN * samples[i].xyz; // from tangent to view-space
-        samplePos = pos + samplePos * radius;
+        for (int i = 0; i < sampleCount; i++) {
+            // get sample position
+            vec3 samplePos = TBN * samples[i].xyz; // from tangent to view-space
+            samplePos = pos + samplePos * radius;
 
-        // project sample position (to sample texture) (to get position on screen/texture)
-        vec4 offset = vec4(samplePos, 1.0);
-        offset = PROJECTION_MATRIX * offset; // from view to clip-space
-        offset.xyz /= offset.w; // perspective divide
-        offset.xyz = offset.xyz * 0.5 + 0.5; // transform to range 0.0 - 1.0
+            // project sample position (to sample texture) (to get position on screen/texture)
+            vec4 offset = vec4(samplePos, 1.0);
+            offset = PROJECTION_MATRIX * offset; // from view to clip-space
+            offset.xyz /= offset.w; // perspective divide
+            offset.xyz = offset.xyz * 0.5 + 0.5; // transform to range 0.0 - 1.0
 
-        // get sample depth
-        float sampleDepth = (VIEW_MATRIX * vec4(texture(Position, offset.xy).xyz, 1.0)).z; // get depth value of kernel sample
+            // get sample depth
+            float sampleDepth = (VIEW_MATRIX * vec4(texture(Position, offset.xy).xyz, 1.0)).z; // get depth value of kernel sample
 
-        // range check & accumulate
-        float rangeCheck = smoothstep(0.0, 1.0, radius / abs(pos.z - sampleDepth));
+            // range check & accumulate
+            float rangeCheck = smoothstep(0.0, 1.0, radius / abs(pos.z - sampleDepth));
 
-        float delta = sampleDepth - samplePos.z;
-        float occ = smoothstep(bias, bias + radius, delta);
-        occlusion += occ * rangeCheck;
+            float delta = sampleDepth - samplePos.z;
+            float occ = smoothstep(bias, bias + radius, delta);
+            occlusion += occ * rangeCheck;
+        }
+
+        occlusion = 1.0 - (occlusion / 64.0);
+        COLOR_INDEX_0 = vec4(vec3(occlusion), 1.0);
     }
-
-    occlusion = 1.0 - (occlusion / 64.0);
-    COLOR_INDEX_0 = vec4(vec3(occlusion), 1.0);
 }
 
 void vertex() {

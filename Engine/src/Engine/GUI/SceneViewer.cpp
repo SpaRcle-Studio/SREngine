@@ -132,6 +132,7 @@ namespace SR_CORE_GUI_NS {
             m_id = pFrameBuffer->GetColorTexture(0, pFrameBuffer->GetPipeline()->GetCurrentImageIndex());
         }
         else {
+            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Framebuffer not found!");
             m_id = SR_ID_INVALID;
         }
 
@@ -150,6 +151,9 @@ namespace SR_CORE_GUI_NS {
 
                 CheckFocused();
                 CheckHovered();
+            }
+            else {
+                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Invalid framebuffer or camera is not active!");
             }
         }
         SR_GRAPH_GUI_NS::Immediate::EndChild();
