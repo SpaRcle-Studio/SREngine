@@ -90,11 +90,11 @@ add_subdirectory(libs/Utils)
 
 SRUseAssimpIfPossible(Engine)
 
-if (NOT SR_EMSCRIPTEN AND NOT SR_COMMON_USE_CLANG_EMULATION)
+if (NOT SR_COMMON_USE_CLANG_EMULATION)
     set(SR_PHYSICS_USE_PHYSX ON)
 else()
     set(SR_PHYSICS_USE_PHYSX OFF)
-    message(STATUS "SpaRcle Engine: PhysX is disabled because Clang emulation is used or Emscripten build")
+    message(STATUS "SpaRcle Engine: PhysX is disabled because Clang emulation is used")
 endif()
 
 message(STATUS "SpaRcle Engine: CONFIGURING ImmediateGUI")

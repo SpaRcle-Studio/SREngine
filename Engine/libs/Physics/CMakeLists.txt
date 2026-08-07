@@ -63,6 +63,11 @@ endif()
 if (SR_PHYSICS_USE_PHYSX)
     add_compile_definitions(SR_PHYSICS_USE_PHYSX)
 
+    if (SR_EMSCRIPTEN)
+        add_compile_definitions(PX_SIMD_DISABLED)
+        set(PX_SCALAR_MATH ON CACHE BOOL "" FORCE)
+    endif()
+
     set(PHYSX_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/libs/PhysX/physx)
     set(PHYSX_INCLUDE_DIRS ${PHYSX_ROOT_DIR}/include/ ${PHYSX_ROOT_DIR}/../pxshared/include/)
     set(CMAKEMODULES_PATH ${PHYSX_ROOT_DIR}/../externals/cmakemodules)

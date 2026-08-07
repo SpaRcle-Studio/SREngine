@@ -26,6 +26,8 @@ namespace SR_PHYSICS_NS {
             SR_ERROR("PhysXLibraryImpl::Initialize() : failed to initialize basic library!");
         }
 
+        SR_LOG("PhysXLibraryImpl::Initialize() : initializing PhysX library...");
+
         m_allocatorCallback = new physx::PxDefaultAllocator();
         m_errorCallback = new physx::PxDefaultErrorCallback();
 
@@ -48,6 +50,7 @@ namespace SR_PHYSICS_NS {
 
         if (IsVehicleSupported()) {
             SR_TRACY_ZONE_N("Init vechicle");
+            SR_LOG("PhysXLibraryImpl::Initialize() : initializing Vehicle SDK...");
 
             if (!physx::PxInitVehicleSDK(*m_physics)){
                 SR_ERROR("PhysXLibraryImpl::Initialize() : failed to initialize Vehicle SDK!");
@@ -56,6 +59,8 @@ namespace SR_PHYSICS_NS {
             physx::PxVehicleSetBasisVectors(physx::PxVec3(0,1,0), physx::PxVec3(0,0,1));
             physx::PxVehicleSetUpdateMode(physx::PxVehicleUpdateMode::eACCELERATION);
         }
+
+        SR_LOG("PhysXLibraryImpl::Initialize() : PhysX library initialized successfully.");
 
         return true;
     }

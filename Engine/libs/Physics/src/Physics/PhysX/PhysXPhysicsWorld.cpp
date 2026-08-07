@@ -83,7 +83,11 @@ namespace SR_PHYSICS_NS {
         sceneDesc.simulationEventCallback = m_contactCallback;
 
         if (!sceneDesc.cpuDispatcher) {
+        #ifdef SR_THREADS_ALLOWED
             m_cpuDispatcher = physx::PxDefaultCpuDispatcherCreate(1);
+        #else
+            m_cpuDispatcher = physx::PxDefaultCpuDispatcherCreate(0);
+        #endif
             sceneDesc.cpuDispatcher = m_cpuDispatcher;
         }
 

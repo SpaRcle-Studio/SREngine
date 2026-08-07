@@ -83,6 +83,8 @@ namespace SR_PHYSICS_NS {
             return false;
         }
 
+        SR_LOG("PhysicsScene::Init() : physics scene initialized successfully!");
+
         m_2DWorld->StepSimulation(1.f / 60.f);
         m_3DWorld->StepSimulation(1.f / 60.f);
 
@@ -166,6 +168,8 @@ namespace SR_PHYSICS_NS {
     }
 
     bool PhysicsScene::CreateDynamicWorld() {
+        SR_LOG("PhysicsScene::Initialize() : creating dynamic world...");
+
         if (m_2DWorld) {
             if (!m_2DWorld->Initialize()) {
                 SR_ERROR("PhysicsScene::Initialize() : failed to create dynamic world for 2d world!");

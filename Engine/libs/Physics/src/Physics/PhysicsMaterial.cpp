@@ -45,6 +45,8 @@ namespace SR_PTYPES_NS {
             pRigidbody->SetShapeDirty(true);
         }
 
+        SR_LOG("PhysicsMaterial::OnAssetLoaded() : loaded physics material \"{}\" with {} implementations.", GetResourcePath(), m_implementations.size());
+
         Super::OnAssetLoaded();
     }
 
