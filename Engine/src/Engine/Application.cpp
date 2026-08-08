@@ -24,12 +24,9 @@
 #include <Utils/TaskManager/TaskManager.h>
 #include <Utils/World/SceneAllocator.h>
 #include <Utils/Resources/ResourceManager.h>
-#include <Utils/SRLM/LogicalNodeManager.h>
-#include <Utils/SRLM/DataTypeManager.h>
 #include <Utils/Localization/Encoding.h>
 #include <Utils/Platform/Platform.h>
 #include <Utils/ECS/LayerManager.h>
-#include <Utils/SRLM/LogicalMachine.h>
 #include <Utils/Common/CLIManager.h>
 #include <Utils/Common/StoreUtils.h>
 #include <Utils/Types/Time.h>
@@ -258,8 +255,6 @@ namespace SR_CORE_NS {
 
         SR_LOG("Application::Init() : loaded {} tags.", SR_UTILS_NS::TagManager::Instance().GetTags().size());
 
-        SR_SRLM_NS::LogicalNodeManager::Instance().InitializeTypes();
-
         SR_WORLD_NS::SceneAllocator::Instance().Init([]() -> SR_WORLD_NS::Scene* {
             return new SR_CORE_NS::World();
         });
@@ -375,8 +370,6 @@ namespace SR_CORE_NS {
         }
 
         m_engine.AutoFree();
-
-        SR_SRLM_NS::DataTypeManager::DestroySingleton();
 
         SR_UTILS_NS::TagManager::DestroySettings();
         SR_UTILS_NS::LayerManager::DestroySingleton();
