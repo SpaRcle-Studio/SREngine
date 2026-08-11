@@ -29,7 +29,7 @@ void ShutdownApplication() {
         Codegen::UnregisterModule_Application();
     }
 
-    SR_UTILS_NS::Reflection::DestroyTypeInfoPool();
+    SR_UTILS_NS::Reflection::DeInitReflection();
     SR_PLATFORM_NS::InitializeHooks([](SR_PLATFORM_NS::PlatformHooks& hooks) { });
     SR_HTYPES_NS::SharedPtrDynamicDataCounter::CheckMemoryLeaks();
     SR_UTILS_NS::ShutdownEngineProfiler();
@@ -40,6 +40,7 @@ int SREngineEntryPoint(int argc, char** argv) {
     SR_UTILS_NS::StartupEngineProfiler();
     SR_PLATFORM_NS::InitializePlatform();
 
+    SR_UTILS_NS::Reflection::InitReflection();
     {
         SR_TRACY_ZONE_N("Registering application module");
         Codegen::RegisterModule_Application();

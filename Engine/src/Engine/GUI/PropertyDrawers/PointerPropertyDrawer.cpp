@@ -284,7 +284,7 @@ namespace SR_CORE_GUI_NS {
 
             PropertyDrawerContext propertyContext = context;
 
-            SR_UTILS_NS::Reflection::TypeInfo* pTypeInfo = SR_UTILS_NS::Reflection::DetermineTypeInfoAlloc(*SR_UTILS_NS::IAllocator::GetDefaultAllocator(), *pClassValue);
+            SR_UTILS_NS::Reflection::TypeInfo* pTypeInfo = SR_UTILS_NS::Reflection::DetermineTypeInfoAlloc(*pClassValue);
             pTypeInfo->detailedType = value.GetTypeInfo().pNext[0]->detailedType;
             SRAssert(pTypeInfo->category != SR_UTILS_NS::Reflection::ReflectedCategoryType::Unknown);
 
