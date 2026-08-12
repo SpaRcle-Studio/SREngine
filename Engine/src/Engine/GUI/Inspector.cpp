@@ -281,7 +281,9 @@ namespace SR_CORE_GUI_NS {
                 if (SR_GRAPH_GUI_NS::Immediate::Button("Paste", SR_MATH_NS::FVector2(lineHeight * 5.f, 0))) {
                     clipboard.erase(0, strlen(serializeId.GetName()));
                     SR_UTILS_NS::SRADeserializer deserializer;
-                    if (deserializer.LoadFromString(SR_UTILS_NS::StringUtils::Base64Decode(clipboard))) {
+                    SR_UTILS_NS::String decodedData;
+                    SR_UTILS_NS::StringUtils::Instance().Base64Decode(clipboard, decodedData);
+                    if (deserializer.LoadFromString(decodedData)) {
                         SR_UTILS_NS::Component::Ptr pPastedComponent;
                         SR_UTILS_NS::Serialization::Load(deserializer, pPastedComponent, serializeId);
                         if (pPastedComponent) {
@@ -462,14 +464,16 @@ namespace SR_CORE_GUI_NS {
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Copy")) {
                 SR_UTILS_NS::SRASerializer serializer;
                 SR_UTILS_NS::Serialization::Save(serializer, SR_HTYPES_NS::SharedPtr(pComponent), serializeId);
-                std::string encoded = SR_UTILS_NS::StringUtils::Base64Encode(serializer.ToString());
+                SR_UTILS_NS::String encoded;
+                SR_UTILS_NS::StringUtils::Instance().Base64Encode(serializer.ToString(), encoded);
                 SR_PLATFORM_NS::TextToClipboard(serializeId.GetName() + encoded);
             }
 
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Cut")) {
                 SR_UTILS_NS::SRASerializer serializer;
                 SR_UTILS_NS::Serialization::Save(serializer, SR_HTYPES_NS::SharedPtr(pComponent), serializeId);
-                std::string encoded = SR_UTILS_NS::StringUtils::Base64Encode(serializer.ToString());
+                SR_UTILS_NS::String encoded;
+                SR_UTILS_NS::StringUtils::Instance().Base64Encode(serializer.ToString(), encoded);
                 SR_PLATFORM_NS::TextToClipboard(serializeId.GetName() + encoded);
 
                 m_onBeforeChangeCallback(false);
@@ -480,7 +484,9 @@ namespace SR_CORE_GUI_NS {
                 if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Paste (replace)")) {
                     clipboard.erase(0, strlen(serializeId.GetName()));
                     SR_UTILS_NS::SRADeserializer deserializer;
-                    if (deserializer.LoadFromString(SR_UTILS_NS::StringUtils::Base64Decode(clipboard))) {
+                    SR_UTILS_NS::String decodedData;
+                    SR_UTILS_NS::StringUtils::Instance().Base64Decode(clipboard, decodedData);
+                    if (deserializer.LoadFromString(decodedData)) {
                         SR_UTILS_NS::Component::Ptr pPastedComponent;
                         SR_UTILS_NS::Serialization::Load(deserializer, pPastedComponent, serializeId);
                         if (pPastedComponent) {

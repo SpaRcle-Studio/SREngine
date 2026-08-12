@@ -77,6 +77,7 @@ namespace SR_CORE_NS::GUI {
         FreeTextures();
 
         root.GetAll(m_currentDirElements);
+        SR_UTILS_NS::String extension;
         for (const auto& path : m_currentDirElements) {
             if (path.GetBaseName().empty()) {
                 continue;
@@ -88,7 +89,8 @@ namespace SR_CORE_NS::GUI {
 
                 current.cutName = SR_UTILS_NS::StringUtils::CutName(current.filename, static_cast<uint32_t>(17.f * m_itemsScale));
 
-                auto&& extension = SR_UTILS_NS::StringUtils::ToLower(path.GetExtensionView());
+                extension = path.GetExtensionView();
+                SR_UTILS_NS::StringUtils::Instance().ToLower(extension);
                 if (extension == "meta") {
                     continue;
                 }
@@ -532,7 +534,8 @@ namespace SR_CORE_NS::GUI {
             m_callbackFunction = CallbackFn();
         }
         else {
-            std::string extension = SR_UTILS_NS::StringUtils::ToLower(path.GetExtension());
+            SR_UTILS_NS::String extension = path.GetExtension();
+            SR_UTILS_NS::StringUtils::Instance().ToLower(extension);
 
             static bool initialized = false;
             static SR_UTILS_NS::Set<SR_UTILS_NS::StringView> supportedAssets;

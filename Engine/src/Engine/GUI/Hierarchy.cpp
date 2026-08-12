@@ -424,7 +424,9 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::SRASerializer serializer;
         SR_UTILS_NS::Serialization::Save(serializer, toCopy, serializeId);
-        const std::string clipboardData = serializeId.GetName() + SR_UTILS_NS::StringUtils::Base64Encode(serializer.ToString());
+        SR_UTILS_NS::String encodedData;
+        SR_UTILS_NS::StringUtils::Instance().Base64Encode(serializer.ToString(), encodedData);
+        SR_UTILS_NS::String clipboardData = serializeId.GetName() + encodedData;
         SR_PLATFORM_NS::TextToClipboard(clipboardData);
     }
 
@@ -444,7 +446,9 @@ namespace SR_CORE_GUI_NS {
 
         clipboard.erase(0, strlen(serializeId.GetName()));
         SR_UTILS_NS::SRADeserializer deserializer;
-        if (!deserializer.LoadFromString(SR_UTILS_NS::StringUtils::Base64Decode(clipboard))) {
+        SR_UTILS_NS::String decodedData;
+        SR_UTILS_NS::StringUtils::Instance().Base64Decode(clipboard, decodedData);
+        if (!deserializer.LoadFromString(decodedData)) {
             return;
         }
 
