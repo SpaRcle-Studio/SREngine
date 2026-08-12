@@ -51,6 +51,13 @@ def generate_class_meta_methods(f, class_structures, class_obj, tabs):
     f.write('\t' * (tabs + 2) + f'return methods;\n')
     f.write('\t' * (tabs + 1) + f'}}\n\n')
 
+    for method in class_obj.methods:
+        if len(method.parameters) == 0:
+            continue
+        f.write('\t' * (tabs + 1) + f'using Traits_{method.name} = MemberFunctionTraits<decltype(&{class_obj.name}::{method.name})>;\n')
+    if len(class_obj.methods) > 0:
+        f.write('\n')
+
     f.write('\t' * (tabs + 1) + f'isMethodsInited = true;\n\n')
     f.write('\t' * (tabs + 1) + f'methods = {{ \n')
 
@@ -69,12 +76,38 @@ def generate_class_meta_methods(f, class_structures, class_obj, tabs):
         if method.editor_button:
             f.write('\n' + '\t' * (tabs + 3) + f'.SetEditorButton()')
 
-        if not is_method_has_return and not is_method_has_params:
-            f.write('\n' + '\t' * (tabs + 3) + f'.SetNoReturnNoParams([](SpaRcle::Utils::SRClass& obj) {{ ')
-            f.write(f'static_cast<{class_obj.name}&>(obj).{method.name}(); ')
-            f.write('})')
-        else:
-            f.write('\n' + '\t' * (tabs + 3) + f'.TODO()')  # Further implementation needed for methods with return values or parameters
+        if not is_method_has_params:
+            if is_method_has_return:
+                f.write('\n' + '\t' * (tabs + 3) + f'.SetReturnNoParams([](SpaRcle::Utils::SRClass& obj) {{ ')
+                f.write(f'return SpaRcle::Utils::Reflection::Value::Create(static_cast<{class_obj.name}&>(obj).{method.name}()); ')
+                f.write('})')
+            else:
+                f.write('\n' + '\t' * (tabs + 3) + f'.SetNoReturnNoParams([](SpaRcle::Utils::SRClass& obj) {{ ')
+                f.write(f'static_cast<{class_obj.name}&>(obj).{method.name}(); ')
+                f.write('})')
+        elif is_method_has_params:
+            if is_method_has_return:
+                f.write('\n' + '\t' * (tabs + 3) + f'.SetReturnWithParams([](SpaRcle::Utils::SRClass& obj, const SpaRcle::Utils::Reflection::Method::Params& params) {{\n')
+            else:
+                f.write('\n' + '\t' * (tabs + 3) + f'.SetNoReturnWithParams([](SpaRcle::Utils::SRClass& obj, const SpaRcle::Utils::Reflection::Method::Params& params) {{\n')
+
+            for i, param in enumerate(method.parameters):
+                f.write('\t' * (tabs + 4) + f'auto&& arg{i} = params[{i}]->Cast<std::remove_reference_t<Traits_{method.name}::Arg<{i}>>>();\n')
+
+            if is_method_has_return:
+                f.write('\t' * (tabs + 4) + f'return SpaRcle::Utils::Reflection::Value::Create(static_cast<{class_obj.name}&>(obj).{method.name}(')
+            else:
+                f.write('\t' * (tabs + 4) + f'static_cast<{class_obj.name}&>(obj).{method.name}(')
+
+            for i, param in enumerate(method.parameters):
+                if i > 0:
+                    f.write(', ')
+                f.write(f'*arg{i}')
+            if is_method_has_return:
+                f.write('));\n')
+            else:
+                f.write(');\n')
+            f.write('\t' * (tabs + 3) + f'}})')
 
         f.write(',\n')
 
