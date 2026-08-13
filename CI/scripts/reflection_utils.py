@@ -170,6 +170,8 @@ class SpaRcleClass:
         self.inherited_classes = []
         self.is_help_source = False
         self.abstract = False
+        self.no_copyable = False
+        self.no_movable = False
 
     def add_variable(self, variable):
         self.variables.append(variable)
@@ -249,9 +251,12 @@ class CPPCodeStructure:
         # example class name StringAtom and full name is SpaRcle::Utils::StringAtom
         self.class_names_table: dict[str, str] = {}
 
-    def add_scriptable_class(self, scriptable_class: ScriptableClass):
-        #self.logger.log_debug(f'Add scriptable class: {scriptable_class.name}, alias: {scriptable_class.alias}')
-        self.scriptable_classes.append(scriptable_class)
+    def find_class_by_name(self, class_name: str) -> SpaRcleClass | None:
+        for sparcle_class in self.sparcle_classes:
+            if sparcle_class.name == class_name:
+                return sparcle_class
+
+        return None
 
     def add_class_name_correction(self, class_name: str, full_class_name: str):
         # add class name to class_namespaces_table

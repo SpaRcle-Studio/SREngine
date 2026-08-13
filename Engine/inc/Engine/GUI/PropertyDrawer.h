@@ -87,7 +87,7 @@ namespace SR_CORE_GUI_NS {
         bool isDrag = false;
     };
 
-    /// @abstract
+    /// @abstract @noCopyable @noMovable
     class PropertyDrawerBase : public SR_UTILS_NS::SRClass, public SR_HTYPES_NS::SharedPtr<PropertyDrawerBase> {
         SR_CLASS()
     public:

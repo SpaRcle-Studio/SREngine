@@ -609,6 +609,8 @@ def parse_sparcle_class(logger, context: codegen_context.CodegenContext, parent_
 
         class_obj.hidden = has_special_tag_comment(parent_node, 'hidden')
         class_obj.abstract = has_special_tag_comment(parent_node, 'abstract')
+        class_obj.no_copyable = has_special_tag_comment(parent_node, 'noCopyable')
+        class_obj.no_movable = has_special_tag_comment(parent_node, 'noMovable')
 
         if class_obj.inspector:
             #print(f'Found class inspector: {class_obj.inspector}')
@@ -733,6 +735,18 @@ def parse_header_file(logger: logger_utils.Logger, file_path, include_args, cont
     for node in translation_unit.cursor.get_children():
         parse_header_tree(logger, 0, node, code_structure, [], context)
 
+    # pass noCopyable, noMovable to inherited classes
+    for i in range(8):
+        for cls in code_structure.sparcle_classes:
+            for inherited_class_name in cls.inherited_classes:
+                inherited_class_name = inherited_class_name.split('::')[-1]
+                inherited_class = code_structure.find_class_by_name(inherited_class_name)
+                if inherited_class:
+                    if inherited_class.no_copyable:
+                        cls.no_copyable = True
+                    if inherited_class.no_movable:
+                        cls.no_movable = True
+
     end = perf_counter()
     logger.log_info(f'Analyze AST tree time: {end - start:.2f} sec')
 
@@ -741,4 +755,3 @@ def parse_header_file(logger: logger_utils.Logger, file_path, include_args, cont
             pickle.dump(code_structure, f)
 
     return code_structure
-

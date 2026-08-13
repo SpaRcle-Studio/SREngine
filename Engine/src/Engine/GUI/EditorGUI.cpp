@@ -134,7 +134,7 @@ namespace SR_CORE_GUI_NS {
 
         m_windowPageWidgets.clear();
         for (auto&& [name, pWidget] : GetWidgets()) {
-            if (name.empty() || !pWidget || pWidget->GetName().empty()) {
+            if (name.empty() || !pWidget) {
                 SRHalt("EditorGUI::Init() : invalid widget name or pointer!");
                 continue;
             }

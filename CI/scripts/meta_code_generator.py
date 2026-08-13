@@ -78,7 +78,7 @@ def generate_class_meta_methods(f, class_structures, class_obj, tabs):
 
         if not is_method_has_params:
             if is_method_has_return:
-                f.write('\n' + '\t' * (tabs + 3) + f'.SetReturnNoParams([](SpaRcle::Utils::SRClass& obj) {{ ')
+                f.write('\n' + '\t' * (tabs + 3) + f'.SetWithReturnNoParams([](SpaRcle::Utils::SRClass& obj) {{ ')
                 f.write(f'return SpaRcle::Utils::Reflection::Value::Create(static_cast<{class_obj.name}&>(obj).{method.name}()); ')
                 f.write('})')
             else:
@@ -87,7 +87,7 @@ def generate_class_meta_methods(f, class_structures, class_obj, tabs):
                 f.write('})')
         elif is_method_has_params:
             if is_method_has_return:
-                f.write('\n' + '\t' * (tabs + 3) + f'.SetReturnWithParams([](SpaRcle::Utils::SRClass& obj, const SpaRcle::Utils::Reflection::Method::Params& params) {{\n')
+                f.write('\n' + '\t' * (tabs + 3) + f'.SetWithReturnWithParams([](SpaRcle::Utils::SRClass& obj, const SpaRcle::Utils::Reflection::Method::Params& params) {{\n')
             else:
                 f.write('\n' + '\t' * (tabs + 3) + f'.SetNoReturnWithParams([](SpaRcle::Utils::SRClass& obj, const SpaRcle::Utils::Reflection::Method::Params& params) {{\n')
 
@@ -590,6 +590,26 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
 
     if class_obj.version:
         f.write('\t' * tabs + f'SR_NODISCARD uint64_t GetVersionImpl() const noexcept final {{ return {class_obj.version}; }}' + '\n\n')
+
+    f.write('\t' * tabs + f'SR_NODISCARD SpaRcle::Utils::Reflection::TypeInfoVTable GetVTable() const noexcept final {{\n')
+    f.write('\t' * (tabs + 1) + f'SpaRcle::Utils::Reflection::TypeInfoVTable vtable;\n')
+    f.write('\t' * (tabs + 1) + f'vtable.pSizeOfAlign = &SpaRcle::Utils::Reflection::ReflectedTypeTemplateSizeOfAlign<{class_name}>;\n')
+    f.write('\t' * (tabs + 1) + f'vtable.pConstructor = &SpaRcle::Utils::Reflection::ReflectedTypeTemplateConstructor<{class_name}>;\n')
+    f.write('\t' * (tabs + 1) + f'vtable.pDestructor = &SpaRcle::Utils::Reflection::ReflectedTypeTemplateDestructor<{class_name}>;\n')
+    f.write('\t' * (tabs + 1) + f'vtable.pGetTypeController = &SpaRcle::Utils::Reflection::ReflectedTypeGetControllerSRClass<{class_name}>;\n')
+
+    if class_obj.no_copyable:
+        f.write('\t' * (tabs + 1) + f'vtable.pCopy = nullptr;\n')
+    else:
+        f.write('\t' * (tabs + 1) + f'vtable.pCopy = &SpaRcle::Utils::Reflection::ReflectedTypeTemplateCopy<{class_name}>;\n')
+
+    if class_obj.no_movable:
+        f.write('\t' * (tabs + 1) + f'vtable.pMove = nullptr;\n')
+    else:
+        f.write('\t' * (tabs + 1) + f'vtable.pMove = &SpaRcle::Utils::Reflection::ReflectedTypeTemplateMove<{class_name}>;\n')
+
+    f.write('\t' * (tabs + 1) + f'return vtable;\n')
+    f.write('\t' * tabs + '}\n\n')
 
     if class_obj.category:
         category_split = class_obj.category.split('.')
