@@ -521,7 +521,6 @@ namespace SR_SCRIPTING_NS {
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Physics/inc"));
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Utils/inc"));
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Utils/libs"));
-        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Utils/libs/entt/src"));
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Utils/libs/fmt/include"));
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Utils/libs/tracy/public"));
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Scripting/inc"));

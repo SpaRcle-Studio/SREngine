@@ -6,7 +6,6 @@
 		"/Engine/libs/Physics/inc/Physics/",
 		"/Engine/libs/Scripting/inc/Scripting/",
 		"/Engine/libs/Utils/inc/Utils/",
-		"/Engine/libs/Utils/libs/entt/src/",
 		"/Engine/libs/Utils/libs/glm/",
 		"/Engine/libs/Utils/libs/xxHash/",
 		"/Engine/libs/Utils/libs/sparsehash/",

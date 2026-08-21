@@ -41,7 +41,11 @@ def main(logger: logger_utils.Logger, context: codegen_context.CodegenContext) -
     logger.log_info(f'Enums code generation time: {end - start:.2f} sec')
 
     if not context.is_script:
-        copy_engine_api.copy_files(logger, context)
+        try:
+            copy_engine_api.copy_files(logger, context)
+        except Exception as e:
+            logger.log_fatal_error(f'Error while copying engine API: {e}')
+            return False
 
     return True
 

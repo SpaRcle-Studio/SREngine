@@ -46,7 +46,7 @@ namespace SR_AUDIO_NS {
         bool m_isEndOfStream = false;
 
         // Vorbis stuff
-        SR_HTYPES_NS::RawPointerHolder<OggVorbis_File> m_vorbisFile;
+        SR_UTILS_NS::RawPointerHolder<OggVorbis_File> m_vorbisFile;
         int64_t m_rawPosition = 0;
         int m_currentSection = 0;
     };

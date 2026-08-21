@@ -14,8 +14,8 @@ namespace SR_CORE_GUI_NS {
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
 
     private:
-        SR_HTYPES_NS::RawPointerHolder<SR_UTILS_NS::Reflection::Value> m_firstValue;
-        SR_HTYPES_NS::RawPointerHolder<SR_UTILS_NS::Reflection::Value> m_secondValue;
+        SR_UTILS_NS::RawPointerHolder<SR_UTILS_NS::Reflection::Value> m_firstValue;
+        SR_UTILS_NS::RawPointerHolder<SR_UTILS_NS::Reflection::Value> m_secondValue;
         PropertyDrawerBase::Ptr m_firstDrawer;
         PropertyDrawerBase::Ptr m_secondDrawer;
 

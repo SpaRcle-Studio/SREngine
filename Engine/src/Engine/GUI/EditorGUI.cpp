@@ -1010,6 +1010,9 @@ namespace SR_CORE_GUI_NS {
 
         if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Window")) {
             for (auto&& [name, displayName] : m_windowPageWidgets) {
+                if (name == SR_GRAPH_GUI_NS::WidgetContainer::GetClassStaticName()) {
+                    continue;
+                }
                 if (SR_GRAPH_GUI_NS::Immediate::MenuItem(displayName.c_str())) {
                     GetWidget(name)->Open();
                 }
