@@ -93,3 +93,4 @@ Resources/**/*.so
 /CI/link.exe
 /CI/dumpbin.exe
 /Resources/Engine/Utilities/codegen.lock
+/.vscode

@@ -9,7 +9,7 @@
 
 #include <Graphics/GUI/NodeWidget.h>
 
-#include <Utils/Flux/Graph/FluxGraph.h>
+#include <Utils/Flux/Graph/FluxGraphAsset.h>
 
 namespace SR_CORE_GUI_NS {
     class ObjectPropertyDrawer;
@@ -38,6 +38,7 @@ namespace SR_CORE_GUI_NS {
         void OnNodeTypeSelected(SR_UTILS_NS::StringAtom type, SR_MATH_NS::FVector2 pos) override;
 
     protected:
+        SR_FLUX_NS::FluxGraphAsset::Ptr m_graphAsset;
         SR_HTYPES_NS::SharedPtr<ObjectPropertyDrawer> m_propertyDrawer;
         SR_UTILS_NS::Subscription m_doInspectEntitySubscription;
         SR_UTILS_NS::Subscription m_onCommandUndoSubscription;

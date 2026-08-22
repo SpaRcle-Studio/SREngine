@@ -7,7 +7,11 @@
 #include <Engine/GUI/EditorGUI.h>
 #include <Engine/EngineCommands.h>
 
-#include <Utils/Flux/IR/FluxProgram.h>
+#include <Utils/Flux/Runtime/FluxComponent.h>
+#include <Utils/TypeTraits/Factory.h>
+#include <Utils/Events/Broadcaster.h>
+#include <Utils/Common/SubscriptionMessage.h>
+#include <Utils/Reflection/Value.h>
 
 #include <Codegen/FluxEditor.generated.hpp>
 
@@ -17,10 +21,26 @@ namespace SR_CORE_GUI_NS {
     { }
 
     void FluxEditor::Inspect(const SR_UTILS_NS::Path& path) {
-
+        m_graphAsset = CoreResLoader::Load<SR_FLUX_NS::FluxGraphAsset>(path);
     }
 
     void FluxEditor::Init() {
+        m_doInspectEntitySubscription = SR_UTILS_NS::Broadcaster::Instance().Subscribe(SR_UTILS_NS::Events::EVENT_DO_INSPECT_ENTITY_ID, [this](const SR_UTILS_NS::SubscriptionMessage& msg) {
+            if (msg.GetStringAtom("ClassName") != SR_FLUX_NS::FluxComponent::GetClassStaticName()) {
+                return;
+            }
+            const auto entityId = msg.GetInt("EntityId");
+            auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+            auto&& pEntity = pEngine->GetScene()->GetEntityController()->FindById(entityId);
+            if (!pEntity) {
+                SR_ERROR("AnimatorEditor::Init() : failed to find entity with id: {}", entityId);
+                return;
+            }
+            if (auto&& pFlux = pEntity.DynamicCast<SR_FLUX_NS::FluxComponent>()) {
+                Inspect(pFlux->GetGraphPath());
+            }
+        });
+
         SR_FLUX_NS::FluxGraph graph;
 
         SR_FLUX_NS::FluxGraphNode entryNode;
