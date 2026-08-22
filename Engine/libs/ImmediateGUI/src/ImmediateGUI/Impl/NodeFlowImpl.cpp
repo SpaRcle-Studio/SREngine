@@ -416,8 +416,8 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
             const ax::NodeEditor::PinId pinId((uintptr_t)(static_cast<PinInstance*>(this)));
             if (auto&& name = GetName(); !name.empty()) {
                 ImGui::Text("%s", name.c_str());
+                ImGui::SameLine();
             }
-            ImGui::SameLine();
             ax::NodeEditor::BeginPin(pinId, ax::NodeEditor::PinKind::Output);
             SR_GRAPH_GUI_NS::Immediate::DrawPinIcon(
                 SR_MATH_NS::FVector2(24.0f, 24.0f),
@@ -455,7 +455,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
 
         void FetchPosition() {
             auto&& newPosition = ImV2ToF2(ax::NodeEditor::GetNodePosition(ax::NodeEditor::NodeId(this)));
-            if (m_position != newPosition) {
+            if (m_position.Distance(newPosition) > 1.0f) {
                 m_position = newPosition;
                 if (auto&& callback = GetEditor()->GetSomethingChangedCallback()) {
                     callback();
@@ -893,7 +893,17 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
             ImGui::TableSetColumnIndex(1);
 
             if (!m_outputPins.empty()) {
+                /// выравниваем выходные пины по правому краю: текст прижимаем вправо,
+                /// чтобы иконки всех пинов оказались на одной вертикали
+                const float_t columnStartX = ImGui::GetCursorPosX();
                 for (auto&& pPin : m_outputPins) {
+                    float_t textWidth = 0.f;
+                    if (auto&& name = pPin->GetName(); !name.empty()) {
+                        textWidth = ImGui::CalcTextSize(name.c_str()).x;
+                    }
+                    if (const float_t offset = outputPinMaxWidth - textWidth; offset > 0.f) {
+                        ImGui::SetCursorPosX(columnStartX + offset);
+                    }
                     pPin->Draw();
                 }
             }

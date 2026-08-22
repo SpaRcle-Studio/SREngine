@@ -8,6 +8,7 @@
 #include <Engine/GUI/EditorGUI.h>
 #include <Engine/GUI/FileBrowser.h>
 #include <Engine/GUI/AnimatorEditor/AnimatorEditor.h>
+#include <Engine/GUI/FluxEditor/FluxEditor.h>
 #include <Engine/GUI/TextureInspector.h>
 #include <Engine/GUI/AssetInspector.h>
 
@@ -557,6 +558,12 @@ namespace SR_CORE_NS::GUI {
             }
             else if (SR_ANIMATIONS_NS::AnimationGraphAsset::GetMetaStatic()->HasExtension(extension)) {
                 if (auto&& pInspector = GetManager()->GetWidget<AnimatorEditor>()) {
+                    pInspector->Inspect(path);
+                }
+                return;
+            }
+            else if (SR_FLUX_NS::FluxGraphAsset::GetMetaStatic()->HasExtension(extension)) {
+                if (auto&& pInspector = GetManager()->GetWidget<FluxEditor>()) {
                     pInspector->Inspect(path);
                 }
                 return;
