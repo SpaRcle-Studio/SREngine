@@ -36,9 +36,6 @@ namespace SR_CORE_GUI_NS {
 
     SR_NODISCARD FluxNodeLayout BuildFluxNodeLayout(const SR_FLUX_NS::FluxGraph& graph, uint32_t nodeIndex);
 
-    /// Ищет метод вызываемого объекта. Объект разрешается как зарегистрированный в фабрике класс
-    SR_NODISCARD const SR_UTILS_NS::Reflection::Method* FindFluxMethod(const SR_FLUX_NS::FluxCallable& callable);
-
     /// Короткое представление значения для заголовка узла и списка переменных
     SR_NODISCARD SR_UTILS_NS::String GetFluxValuePreview(const SR_UTILS_NS::Reflection::Value& value);
 

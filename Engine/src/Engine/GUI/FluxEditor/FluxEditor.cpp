@@ -480,7 +480,7 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::EndCombo();
         }
 
-        if (auto&& pMethod = FindFluxMethod(node.GetCallable())) {
+        if (auto&& pMethod = node.GetCallable().FindMethodMeta()) {
             SR_GRAPH_GUI_NS::Immediate::TextColored(SR_FLUX_HINT_COLOR, "Arguments: %u, returns: %s",
                 pMethod->GetParamsCount(), pMethod->HasReturn() ? "yes" : "no"
             );
