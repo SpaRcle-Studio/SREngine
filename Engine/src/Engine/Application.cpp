@@ -5,7 +5,6 @@
 #include <Engine/Application.h>
 #include <Engine/World/World.h>
 
-#include <Graphics/GUI/NodeManager.h>
 #include <Graphics/Types/Shader.h>
 #include <Graphics/Memory/CameraManager.h>
 #include <Graphics/Memory/MeshManager.h>
@@ -377,7 +376,6 @@ namespace SR_CORE_NS {
         SR_AUDIO_NS::SoundManager::DestroySingleton();
         SR_PHYSICS_NS::PhysicsLibrary::DestroySingleton();
         SR_GRAPH_NS::Memory::CameraManager::DestroySingleton();
-        SR_GRAPH_GUI_NS::NodeManager::DestroySingleton();
         SR_UTILS_NS::TaskManager::DestroySingleton();
         SR_GRAPH_NS::MeshManager::DestroySingleton();
 

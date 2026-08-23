@@ -71,6 +71,8 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Vector<SR_FLUX_NS::FluxGraphLink> m_brokenLinks;
         SR_UTILS_NS::Vector<SR_IMMEDIATE_GUI_NS::NodeInstance*> m_nodes;
+        SR_UTILS_NS::Vector<FluxNodeLayout> m_layouts;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::Reflection::TypeInfo*> m_tmpTypeInfos;
         SR_UTILS_NS::Vector<uint32_t> m_pendingNodeRemoves;
         SR_UTILS_NS::Vector<SR_FLUX_NS::FluxGraphLink> m_pendingLinkRemoves;
 

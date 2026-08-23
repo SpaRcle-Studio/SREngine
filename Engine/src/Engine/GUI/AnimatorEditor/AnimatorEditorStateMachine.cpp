@@ -8,10 +8,6 @@
 #include <Graphics/Animations/AnimationState.h>
 #include <Graphics/Animations/AnimationStateMachine.h>
 #include <Graphics/Animations/AnimationStateCondition.h>
-#include <Graphics/GUI/Node.h>
-#include <Graphics/GUI/Link.h>
-#include <Graphics/GUI/Pin.h>
-#include <Graphics/GUI/NodeBuilder.h>
 
 #include <ImmediateGUI/GUI/ImmediateGUI.h>
 #include <ImmediateGUI/GUI/NodeEditor.h>
@@ -52,16 +48,16 @@ namespace SR_CORE_GUI_NS {
                 continue;
             }
 
-            auto&& pNode = new SR_GRAPH_GUI_NS::Node();
-            pNode->SetName(pState->GetStateName().c_str());
-            pNode->SetUserData(pState.Get());
-            pState->SetUserData(pNode);
-            pNode->AddInput(new SR_GRAPH_GUI_NS::Pin("In", SR_GRAPH_GUI_NS::PinKind::Input));
-            pNode->AddOutput(new SR_GRAPH_GUI_NS::Pin("Out", SR_GRAPH_GUI_NS::PinKind::Output));
+            //auto&& pNode = new SR_GRAPH_GUI_NS::Node();
+            //pNode->SetName(pState->GetStateName().c_str());
+            //pNode->SetUserData(pState.Get());
+            //pState->SetUserData(pNode);
+            //pNode->AddInput(new SR_GRAPH_GUI_NS::Pin("In", SR_GRAPH_GUI_NS::PinKind::Input));
+            //pNode->AddOutput(new SR_GRAPH_GUI_NS::Pin("Out", SR_GRAPH_GUI_NS::PinKind::Output));
 
-            if (m_context.pStateMachineEditor) {
-                SR_IMMEDIATE_GUI_NS::NodeEditor::SetNodePosition(pNode->GetId(), pState->GetEditorPosition());
-            }
+            //if (m_context.pStateMachineEditor) {
+            //    SR_IMMEDIATE_GUI_NS::NodeEditor::SetNodePosition(pNode->GetId(), pState->GetEditorPosition());
+            //}
         }
 
         for (auto&& pState : states) {
@@ -80,14 +76,14 @@ namespace SR_CORE_GUI_NS {
                     continue;
                 }
 
-                auto&& pSourceNode = pState->GetUserData<SR_GRAPH_GUI_NS::Node>();
-                auto&& pTargetNode = pTargetState->GetUserData<SR_GRAPH_GUI_NS::Node>();
+                //auto&& pSourceNode = pState->GetUserData<SR_GRAPH_GUI_NS::Node>();
+                //auto&& pTargetNode = pTargetState->GetUserData<SR_GRAPH_GUI_NS::Node>();
 
-                auto&& pStartPin = pSourceNode->GetOutputs().front();
-                auto&& pEndPin = pTargetNode->GetInputs().front();
+                //auto&& pStartPin = pSourceNode->GetOutputs().front();
+                //auto&& pEndPin = pTargetNode->GetInputs().front();
 
-                auto&& pLink = new SR_GRAPH_GUI_NS::Link(pStartPin, pEndPin);
-                pLink->SetUserData(pTransition.Get());
+                //auto&& pLink = new SR_GRAPH_GUI_NS::Link(pStartPin, pEndPin);
+                //pLink->SetUserData(pTransition.Get());
             }
         }
 
@@ -391,7 +387,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     SR_UTILS_NS::SRClass* AnimatorEditorStateMachine::GetSelectedLink() const {
-        return m_selectedLink ? m_selectedLink->GetUserData<SR_ANIMATIONS_NS::AnimationStateTransition>() : nullptr;
+        return nullptr;//m_selectedLink ? m_selectedLink->GetUserData<SR_ANIMATIONS_NS::AnimationStateTransition>() : nullptr;
     }
 
     void AnimatorEditorStateMachine::DrawLinks(bool& needResync, SR_ANIMATIONS_NS::AnimationStateMachine& machine) {
@@ -514,8 +510,6 @@ namespace SR_CORE_GUI_NS {
     void AnimatorEditorStateMachine::DrawNodes(bool& needResync, SR_ANIMATIONS_NS::AnimationStateMachine& machine) {
         const bool editable = !(m_context.isLive && m_context.liveReadOnly);
 
-        SR_GRAPH_GUI_NS::NodeBuilder builder(nullptr);
-
         /*for (auto&& [id, pNode] : m_nodes) {
             auto&& pState = pNode->GetUserData<SR_ANIMATIONS_NS::AnimationState>();
             SR_MATH_NS::FColor headerColor = SR_MATH_NS::FColor(0.55f, 0.35f, 0.85f, 1.0f);
@@ -596,6 +590,6 @@ namespace SR_CORE_GUI_NS {
     }
 
     void AnimatorEditorStateMachine::ResetSelectedLink() {
-        m_selectedLink = nullptr;
+        //m_selectedLink = nullptr;
     }
 }

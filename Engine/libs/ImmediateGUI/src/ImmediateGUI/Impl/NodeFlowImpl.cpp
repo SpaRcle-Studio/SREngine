@@ -397,7 +397,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
             ax::NodeEditor::BeginPin(pinId, ax::NodeEditor::PinKind::Input);
             SR_GRAPH_GUI_NS::Immediate::DrawPinIcon(
                 SR_MATH_NS::FVector2(24.0f, 24.0f),
-                IconType::Flow,
+                GetIconType(),
                 IsLinked(),
                 SR_MATH_NS::FColor(1.0f, 1.0f, 1.0f, 1.0f),
                 SR_MATH_NS::FColor(0.125f, 0.125f, 0.125f, 1.0f)
@@ -421,7 +421,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
             ax::NodeEditor::BeginPin(pinId, ax::NodeEditor::PinKind::Output);
             SR_GRAPH_GUI_NS::Immediate::DrawPinIcon(
                 SR_MATH_NS::FVector2(24.0f, 24.0f),
-                IconType::Flow,
+                GetIconType(),
                 IsLinked(),
                 SR_MATH_NS::FColor(1.0f, 1.0f, 1.0f, 1.0f),
                 SR_MATH_NS::FColor(0.125f, 0.125f, 0.125f, 1.0f)
@@ -523,6 +523,28 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
 }
 
 namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
+    bool CanCreateLink(const SR_UTILS_NS::Reflection::TypeInfo* pFrom, const SR_UTILS_NS::Reflection::TypeInfo* pTo) {
+        if (bool(pFrom) != bool(pTo)) {
+            return false;
+        }
+        if (!pFrom || !pTo) {
+            return true;
+        }
+
+        if (*pFrom != *pTo) {
+            if (pFrom->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Container && pFrom->detailedType == "SharedPtr") {
+                if (pTo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Object) {
+                    return pFrom->pNext[0]->detailedType == pTo->detailedType;
+                }
+            }
+            if (pFrom->category == pTo->category && pFrom->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::String) {
+                return pFrom->detailedType == "String" && pTo->detailedType == "StringView";
+            }
+            return false;
+        }
+        return true;
+    }
+
     void NodeEditorInstanceNEImpl::Draw() {
         SR_TRACY_ZONE;
 
@@ -602,7 +624,8 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
                 const bool isNotAvailable =
                     (pPinEnd == pPinStart || pPinEnd->IsInput() == pPinStart->IsInput()) ||
                     (pPinEnd->GetNode() == pPinStart->GetNode()) ||
-                    (pPinEnd->GetType() != pPinStart->GetType()) ||
+                    (pPinEnd->GetType().isFlow != pPinStart->GetType().isFlow) ||
+                    (!CanCreateLink(pPinEnd->GetType().pType, pPinStart->GetType().pType)) ||
                     (pPinStart->IsConnectedTo(pPinEnd));
 
                 if (!isNotAvailable && SR_IMMEDIATE_GUI_NS::NodeEditor::AcceptNewItem()) {

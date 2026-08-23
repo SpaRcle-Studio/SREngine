@@ -292,8 +292,8 @@ namespace SR_CORE_GUI_NS {
                     pNode->SetPosition(state.GetEditorPosition());
                     pNode->SetTitle(state.GetStateName());
                     pNode->SetProgress(state.GetProgress());
-                    pNode->AddInputPin("In", SR_IMMEDIATE_GUI_NS::PinTypeInfo{SR_UTILS_NS::Reflection::TypeInfo(), true});
-                    pNode->AddOutputPin("Out", SR_IMMEDIATE_GUI_NS::PinTypeInfo{SR_UTILS_NS::Reflection::TypeInfo(), true});
+                    pNode->AddInputPin("In", SR_IMMEDIATE_GUI_NS::PinTypeInfo(nullptr, true));
+                    pNode->AddOutputPin("Out", SR_IMMEDIATE_GUI_NS::PinTypeInfo(nullptr, true));
                 }
             });
             m_pActiveStateMachine.Lock()->GetMachine()->ForEachState([this](SR_ANIMATIONS_NS::AnimationState& state) {
@@ -316,10 +316,10 @@ namespace SR_CORE_GUI_NS {
                     pNode->SetPosition(node->GetEditorPosition());
                     pNode->SetTitle(node.GetMeta()->GetDisplayName());
                     for (auto&& inputLink : node->GetInputLinks()) {
-                        pNode->AddInputPin(inputLink.name, SR_IMMEDIATE_GUI_NS::PinTypeInfo{SR_UTILS_NS::Reflection::TypeInfo(), true});
+                        pNode->AddInputPin(inputLink.name, SR_IMMEDIATE_GUI_NS::PinTypeInfo(nullptr, true));
                     }
                     for (auto&& outputLink : node->GetOutputLinks()) {
-                        pNode->AddOutputPin(outputLink.name, SR_IMMEDIATE_GUI_NS::PinTypeInfo{SR_UTILS_NS::Reflection::TypeInfo(), true});
+                        pNode->AddOutputPin(outputLink.name, SR_IMMEDIATE_GUI_NS::PinTypeInfo(nullptr, true));
                     }
                 }
             });

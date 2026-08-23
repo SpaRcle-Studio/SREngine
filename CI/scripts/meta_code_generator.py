@@ -52,9 +52,14 @@ def generate_class_meta_methods(f, class_structures, class_obj, tabs):
     f.write('\t' * (tabs + 1) + f'}}\n\n')
 
     for method in class_obj.methods:
-        if len(method.parameters) == 0:
+        if method.return_type.get_full_type() == 'void':
             continue
-        f.write('\t' * (tabs + 1) + f'using Traits_{method.name} = MemberFunctionTraits<decltype(&{class_obj.name}::{method.name})>;\n')
+        #f.write('\t' * (tabs + 1) + f'using ReturnType_{method.name} = decltype(static_cast<{class_obj.name}&>(std::declval<SpaRcle::Utils::SRClass&>()).{method.name}());\n')
+        f.write('\t' * (tabs + 1) + f'using ReturnType_{method.name} = {method.return_type.get_full_type()};\n')
+
+        #if len(method.parameters) == 0:
+        #    continue
+        #f.write('\t' * (tabs + 1) + f'using Traits_{method.name} = MemberFunctionTraits<decltype(&{class_obj.name}::{method.name})>;\n')
     if len(class_obj.methods) > 0:
         f.write('\n')
 
@@ -67,14 +72,20 @@ def generate_class_meta_methods(f, class_structures, class_obj, tabs):
 
         f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Reflection::Method()')
         f.write('\n' + '\t' * (tabs + 3) + f'.SetName("{method.name}")')
-        f.write('\n' + '\t' * (tabs + 3) + f'.SetHasReturn({"true" if is_method_has_return else "false"})')
-        f.write('\n' + '\t' * (tabs + 3) + f'.SetParamsCount({len(method.parameters)})')
+        if is_method_has_return:
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetReturnType(SpaRcle::Utils::Reflection::DetermineTypeInfoAlloc<ReturnType_{method.name}>())')
+
+        for i, param in enumerate(method.parameters):
+            f.write('\n' + '\t' * (tabs + 3) + f'.AddParam("{param.name}", SpaRcle::Utils::Reflection::DetermineTypeInfoAlloc<{param.type.get_full_type()}>())')
 
         if method.condition:
             f.write('\n' + '\t' * (tabs + 3) + f'.SetCondition(&SRClassMetaTemplate::IsMethodActive_{method.name})')
 
         if method.editor_button:
             f.write('\n' + '\t' * (tabs + 3) + f'.SetEditorButton()')
+
+        if method.evaluate:
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetEvaluate()')
 
         if not is_method_has_params:
             if is_method_has_return:
@@ -92,7 +103,8 @@ def generate_class_meta_methods(f, class_structures, class_obj, tabs):
                 f.write('\n' + '\t' * (tabs + 3) + f'.SetNoReturnWithParams([](SpaRcle::Utils::SRClass& obj, const SpaRcle::Utils::Reflection::Method::Params& params) {{\n')
 
             for i, param in enumerate(method.parameters):
-                f.write('\t' * (tabs + 4) + f'auto&& arg{i} = params[{i}]->Cast<std::remove_reference_t<Traits_{method.name}::Arg<{i}>>>();\n')
+                #f.write('\t' * (tabs + 4) + f'auto&& arg{i} = params[{i}]->Cast<std::remove_reference_t<Traits_{method.name}::Arg<{i}>>>();\n')
+                f.write('\t' * (tabs + 4) + f'auto&& arg{i} = params[{i}]->Cast<std::remove_reference_t<{param.type.get_full_type()}>>();\n')
 
             if is_method_has_return:
                 f.write('\t' * (tabs + 4) + f'return SpaRcle::Utils::Reflection::Value::Create(static_cast<{class_obj.name}&>(obj).{method.name}(')

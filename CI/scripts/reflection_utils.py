@@ -40,40 +40,15 @@ class CPPType:
 class CPPParameter:
     def __init__(self, name: str, type_name: str):
         self.name: str = name
-        self.cpp_type: CPPType = CPPType(type_name)
+        self.type: CPPType = CPPType(type_name)
 
 
     def set_type(self, new_type: str):
-        self.cpp_type = CPPType(new_type)
+        self.type = CPPType(new_type)
 
 
     def __str__(self):
-        return f'Parameter: {self.name}, Type: {self.cpp_type}'
-
-
-class CPPOperator:
-    def __init__(self, op_type: cpp_operator.OperatorType, return_type: str):
-        self.type: cpp_operator.OperatorType = op_type
-        self.return_type: CPPType = CPPType(return_type)
-        self.parameters: list[CPPParameter] = []
-        self.is_const = False
-
-    def add_parameter(self, parameter: CPPParameter):
-        self.parameters.append(parameter)
-
-    def __str__(self):
-        return f'Operator: {self.type}, Return type: {self.return_type}, Parameters: {self.parameters}'
-
-
-class CPPConstructor:
-    def __init__(self):
-        self.parameters: list[CPPParameter] = []
-
-    def __str__(self):
-        return f'Constructor: {", ".join([str(param) for param in self.parameters])}'
-
-    def add_parameter(self, parameter: CPPParameter):
-        self.parameters.append(parameter)
+        return f'Parameter: {self.name}, Type: {self.type}'
 
 
 class CPPProperty:
@@ -131,6 +106,7 @@ class CPPMethod:
         self.is_const = False
         self.condition = None
         self.editor_button = False
+        self.evaluate = False
 
     def add_parameter(self, parameter: CPPParameter):
         self.parameters.append(parameter)
@@ -195,58 +171,9 @@ class SpaRcleClass:
         return str
 
 
-class ScriptableClass:
-    def __init__(self, name: str, namespaces: list[str], alias: str = ''):
-        self.name = name
-        self.namespaces = namespaces
-
-        # alias example: name is "Vector3<float_t>" and alias is "FVector3"
-        # by default alias is equal to name
-        if alias == '':
-            self.alias = name
-        else:
-            self.alias = alias
-
-        self.constructors: list[CPPConstructor] = []
-        self.methods: list[CPPMethod] = []
-        self.operators: list[CPPOperator] = []
-        self.path = None
-        self.has_default_constructor = False
-        self.has_copy_constructor = False
-
-
-    def replace_type(self, old_type: str, new_type: str):
-        for constructor in self.constructors:
-            for parameter in constructor.parameters:
-                parameter.set_type(sparcle_utils.replace_type_templated_name(parameter.cpp_type.get_full_type(), old_type, new_type))
-
-        for method in self.methods:
-            for parameter in method.parameters:
-                parameter.set_type(sparcle_utils.replace_type_templated_name(parameter.cpp_type.get_full_type(), old_type, new_type))
-            method.return_type = CPPType(sparcle_utils.replace_type_templated_name(method.return_type.get_full_type(), old_type, new_type))
-
-        for operator in self.operators:
-            for parameter in operator.parameters:
-                parameter.set_type(sparcle_utils.replace_type_templated_name(parameter.cpp_type.get_full_type(), old_type, new_type))
-            operator.return_type = CPPType(sparcle_utils.replace_type_templated_name(operator.return_type.get_full_type(), old_type, new_type))
-
-
-    def add_constructor(self, constructor: CPPConstructor):
-        self.constructors.append(constructor)
-
-
-    def add_method(self, method: CPPMethod):
-        self.methods.append(method)
-
-
-    def add_operator(self, operator: CPPOperator):
-        self.operators.append(operator)
-
-
 class CPPCodeStructure:
     def __init__(self):
         self.sparcle_classes: list[SpaRcleClass] = []
-        self.scriptable_classes: list[ScriptableClass] = []
         self.enums: list[CPPEnum] = []
         # example class name StringAtom and full name is SpaRcle::Utils::StringAtom
         self.class_names_table: dict[str, str] = {}

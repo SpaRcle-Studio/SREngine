@@ -352,4 +352,60 @@ namespace SR_IMMEDIATE_GUI_NS {
         }
         return nullptr;
     }
+
+    IconType PinInstance::GetIconType() const {
+        if (m_type.isFlow || !m_type.pType) {
+            return IconType::Flow;
+        }
+        switch (m_type.pType->category) {
+            case Utils::Reflection::ReflectedCategoryType::Value:
+            case Utils::Reflection::ReflectedCategoryType::Object:
+                return IconType::Diamond;
+            case Utils::Reflection::ReflectedCategoryType::Arithmetic:
+                if (m_type.pType->detailedType == "bool") {
+                    return IconType::Square;
+                }
+            case Utils::Reflection::ReflectedCategoryType::String:
+            case Utils::Reflection::ReflectedCategoryType::Enum:
+                return IconType::Circle;
+            case Utils::Reflection::ReflectedCategoryType::MathObject:
+            case Utils::Reflection::ReflectedCategoryType::MathSize:
+            case Utils::Reflection::ReflectedCategoryType::MathVector:
+            case Utils::Reflection::ReflectedCategoryType::MathRect:
+                return IconType::RoundSquare;
+            case Utils::Reflection::ReflectedCategoryType::Container:
+                return IconType::Grid;
+            default:
+                break;
+        }
+        return IconType::Flow;
+    }
+
+    bool PinTypeInfo::operator==(const PinTypeInfo& other) const {
+        if (isFlow != other.isFlow) {
+            return false;
+        }
+        if (bool(pType) != bool(other.pType)) {
+            return false;
+        }
+        if (pType && other.pType) {
+            return *pType == *other.pType;
+        }
+        return true;
+    }
+
+    PinTypeInfo::PinTypeInfo(const PinTypeInfo& other) {
+        isFlow = other.isFlow;
+        pType = other.pType;
+    }
+
+    PinTypeInfo& PinTypeInfo::operator=(const PinTypeInfo& other) {
+        if (this != &other) {
+            isFlow = other.isFlow;
+            pType = other.pType;
+        }
+        return *this;
+    }
+
+    PinTypeInfo::~PinTypeInfo() = default;
 }

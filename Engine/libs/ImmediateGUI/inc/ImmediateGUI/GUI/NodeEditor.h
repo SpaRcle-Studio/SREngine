@@ -21,12 +21,22 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     };
 
     struct PinTypeInfo {
-        SR_UTILS_NS::Reflection::TypeInfo type;
-        bool isFlow = false;
-        bool operator==(const PinTypeInfo& other) const {
-            return type == other.type && isFlow == other.isFlow;
-        }
+        PinTypeInfo() = default;
+        PinTypeInfo(const SR_UTILS_NS::Reflection::TypeInfo* pType, bool isFlow)
+            : pType(pType)
+            , isFlow(isFlow)
+        { }
+        PinTypeInfo(const PinTypeInfo& other);
+        PinTypeInfo& operator=(const PinTypeInfo& other);
+        PinTypeInfo(PinTypeInfo&& other) noexcept = default;
+        PinTypeInfo& operator=(PinTypeInfo&& other) noexcept = default;
+        ~PinTypeInfo();
+
+        bool operator==(const PinTypeInfo& other) const;
         bool operator!=(const PinTypeInfo& other) const { return !(*this == other); }
+
+        const SR_UTILS_NS::Reflection::TypeInfo* pType = nullptr;
+        bool isFlow = false;
     };
 
     class LinkInstance {
@@ -192,6 +202,8 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         void RemoveLink(LinkInstance* pLink) {
             m_links.erase(std::remove(m_links.begin(), m_links.end(), pLink), m_links.end());
         }
+
+        SR_NODISCARD IconType GetIconType() const;
 
     private:
         NodeInstance* m_pNode = nullptr;

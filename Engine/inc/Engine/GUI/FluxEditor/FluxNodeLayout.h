@@ -17,6 +17,7 @@ namespace SR_CORE_GUI_NS {
     struct FluxPinLayout {
         SR_UTILS_NS::String name;
         bool isFlow = false;
+        const SR_UTILS_NS::Reflection::TypeInfo* pTypeInfo = nullptr;
     };
 
     /// Раскладка узла для редактора. Порядок пинов обязан совпадать с описанием в FluxGraph.h,
@@ -34,7 +35,7 @@ namespace SR_CORE_GUI_NS {
         }
     };
 
-    SR_NODISCARD FluxNodeLayout BuildFluxNodeLayout(const SR_FLUX_NS::FluxGraph& graph, uint32_t nodeIndex);
+    void BuildFluxNodeLayout(SR_FLUX_NS::FluxGraph& graph, uint32_t nodeIndex, FluxNodeLayout& layout, SR_UTILS_NS::Vector<SR_UTILS_NS::Reflection::TypeInfo*>& tmpTypeInfos);
 
     /// Короткое представление значения для заголовка узла и списка переменных
     SR_NODISCARD SR_UTILS_NS::String GetFluxValuePreview(const SR_UTILS_NS::Reflection::Value& value);

@@ -182,6 +182,7 @@ namespace SR_CORE_GUI_NS {
         });
 
         m_nodes.resize(pGraph->GetNodeCount());
+        m_layouts.resize(pGraph->GetNodeCount());
 
         for (uint32_t nodeIndex = 0; nodeIndex < pGraph->GetNodeCount(); ++nodeIndex) {
             auto&& pNodeInstance = m_nodeGraphEditor->CreateNode();
@@ -191,7 +192,8 @@ namespace SR_CORE_GUI_NS {
                 continue;
             }
 
-            const FluxNodeLayout layout = BuildFluxNodeLayout(*pGraph, nodeIndex);
+            auto&& layout = m_layouts[nodeIndex];
+            BuildFluxNodeLayout(*pGraph, nodeIndex, layout, m_tmpTypeInfos);
 
             pNodeInstance->SetUserData(IndexToUserData(nodeIndex));
             pNodeInstance->SetPosition(pGraph->GetNode(nodeIndex)->GetPosition());
@@ -200,10 +202,10 @@ namespace SR_CORE_GUI_NS {
             pGraph->GetNode(nodeIndex)->SetUserData(pNodeInstance);
 
             for (auto&& pin : layout.inputs) {
-                pNodeInstance->AddInputPin(pin.name, SR_IMMEDIATE_GUI_NS::PinTypeInfo{ SR_UTILS_NS::Reflection::TypeInfo(), pin.isFlow });
+                pNodeInstance->AddInputPin(pin.name, SR_IMMEDIATE_GUI_NS::PinTypeInfo(pin.pTypeInfo, pin.isFlow));
             }
             for (auto&& pin : layout.outputs) {
-                pNodeInstance->AddOutputPin(pin.name, SR_IMMEDIATE_GUI_NS::PinTypeInfo{ SR_UTILS_NS::Reflection::TypeInfo(), pin.isFlow });
+                pNodeInstance->AddOutputPin(pin.name, SR_IMMEDIATE_GUI_NS::PinTypeInfo(pin.pTypeInfo, pin.isFlow));
             }
         }
 
@@ -252,6 +254,11 @@ namespace SR_CORE_GUI_NS {
         for (auto&& link : m_brokenLinks) {
             pGraph->RemoveLink(link.GetSourceNode(), link.GetSourcePin(), link.GetTargetNode(), link.GetTargetPin());
         }
+
+        for (auto&& pTmpTypeInfo : m_tmpTypeInfos) {
+            SR_UTILS_NS::Reflection::FreeTypeInfo(pTmpTypeInfo);
+        }
+        m_tmpTypeInfos.clear();
     }
 
     void FluxEditor::OnNodeTypeSelected(const SR_UTILS_NS::StringAtom type, const SR_MATH_NS::FVector2 pos) {

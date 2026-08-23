@@ -9,8 +9,6 @@
 
 #include <Graphics/GUI/NodeWidget.h>
 
-#include <Graphics/GUI/Node.h>
-
 namespace SR_ANIMATIONS_NS {
     class AnimationStateMachine;
 }
@@ -44,9 +42,9 @@ namespace SR_CORE_GUI_NS {
 
         SR_MATH_NS::FRect m_nodeEditorRegion;
         SR_MATH_NS::FVector2 m_popupMousePos;
-        SR_GRAPH_GUI_NS::Node* m_fromStateNode = nullptr;
-        SR_GRAPH_GUI_NS::Node* m_popupNode = nullptr;
-        SR_GRAPH_GUI_NS::Link* m_selectedLink = nullptr;
+        //SR_GRAPH_GUI_NS::Node* m_fromStateNode = nullptr;
+        //SR_GRAPH_GUI_NS::Node* m_popupNode = nullptr;
+        //SR_GRAPH_GUI_NS::Link* m_selectedLink = nullptr;
         std::string m_createStateSearch;
 
         SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> m_availableStateTypes;
