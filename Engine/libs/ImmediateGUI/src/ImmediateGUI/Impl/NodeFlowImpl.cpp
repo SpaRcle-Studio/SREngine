@@ -831,7 +831,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         constexpr float_t paddingY = 6.8f;
 
         ImColor imColor = ImColor(color.r, color.g, color.b, color.a);
-        const float_t width = std::max(textSize.x + Padding * 2.f * scale, MinWidth);
+        const float_t width = std::max(textSize.x + Padding * 2.f * scale, MinWidth + PinIconWidth);
 
         if (GetEditor()->GetStyleType() == NodeEditorStyleType::StateMachine) {
             auto&& pos = ImGui::GetCursorScreenPos() - ImVec2(0.f, paddingY);

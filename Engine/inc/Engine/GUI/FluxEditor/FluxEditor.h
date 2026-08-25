@@ -45,6 +45,7 @@ namespace SR_CORE_GUI_NS {
         void DrawCastInspector(SR_FLUX_NS::FluxGraphNode& node);
         void DrawVariableSelector(SR_FLUX_NS::FluxGraphNode& node);
         void DrawGraphInspector();
+        void DrawGraphPreviewCode();
 
         void OnLinkCreated(SR_IMMEDIATE_GUI_NS::LinkInstance& link);
         void OnLinkDeleted(SR_IMMEDIATE_GUI_NS::LinkInstance& link);
@@ -69,6 +70,10 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::Subscription m_doInspectEntitySubscription;
         SR_UTILS_NS::String m_backgroundText;
         bool m_skipInspect = false;
+        bool m_previewCompiled = false;
+        SR_UTILS_NS::String m_previewCode;
+        SR_UTILS_NS::String m_previewLine;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::StringView> m_previewCodeLines;
 
         SR_UTILS_NS::Vector<SR_FLUX_NS::FluxGraphLink> m_brokenLinks;
         SR_UTILS_NS::Vector<SR_IMMEDIATE_GUI_NS::NodeInstance*> m_nodes;

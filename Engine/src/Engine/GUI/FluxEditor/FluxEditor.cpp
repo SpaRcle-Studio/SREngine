@@ -57,9 +57,11 @@ namespace SR_CORE_GUI_NS {
 
         m_onCommandRedoSubscription = SR_UTILS_NS::Broadcaster::Instance().Subscribe(SR_UTILS_NS::Events::EVENT_ON_COMMAND_REDO_ID, [this](const SR_UTILS_NS::SubscriptionMessage& msg) {
             m_skipInspect = true;
+            m_previewCompiled = false;
         });
         m_onCommandUndoSubscription = SR_UTILS_NS::Broadcaster::Instance().Subscribe(SR_UTILS_NS::Events::EVENT_ON_COMMAND_UNDO_ID, [this](const SR_UTILS_NS::SubscriptionMessage& msg) {
             m_skipInspect = true;
+            m_previewCompiled = false;
         });
         m_doInspectEntitySubscription = SR_UTILS_NS::Broadcaster::Instance().Subscribe(SR_UTILS_NS::Events::EVENT_DO_INSPECT_ENTITY_ID, [this](const SR_UTILS_NS::SubscriptionMessage& msg) {
             if (msg.GetStringAtom("ClassName") != SR_FLUX_NS::FluxComponent::GetClassStaticName()) {
@@ -81,6 +83,7 @@ namespace SR_CORE_GUI_NS {
     void FluxEditor::Inspect(const SR_UTILS_NS::Path& path) {
         m_graphAsset.Reset();
         m_currentFile = path;
+        m_previewCompiled = false;
 
         if (path.IsEmpty()) {
             return;
@@ -160,6 +163,7 @@ namespace SR_CORE_GUI_NS {
 
         m_nodeGraphEditor->SetSomethingChangedCallback([this]() {
             if (!m_serializer && m_graphAsset) {
+                m_previewCompiled = false;
                 m_serializer = SR_CORE_NS::Commands::CreateSerializer();
                 SR_UTILS_NS::Serialization::Save(*m_serializer, *m_graphAsset, SR_UTILS_NS::COMMAND_DATA_ID);
             }
@@ -270,6 +274,7 @@ namespace SR_CORE_GUI_NS {
         if (!m_serializer && m_graphAsset) {
             m_serializer = SR_CORE_NS::Commands::CreateSerializer();
             SR_UTILS_NS::Serialization::Save(*m_serializer, *m_graphAsset, SR_UTILS_NS::COMMAND_DATA_ID);
+            m_previewCompiled = false;
         }
 
         SR_FLUX_NS::FluxGraphNode node;
@@ -381,9 +386,13 @@ namespace SR_CORE_GUI_NS {
         const uint32_t targetPin = pTargetNodeInstance->GetPinIndex(pInputPin);
         const uint32_t sourcePin = pSourceNodeInstance->GetPinIndex(pOutputPin);
 
-        /// входной пин принимает только одно значение, а поток исполнения может уходить
-        /// из выходного пина только в один узел
-        pGraph->RemoveInputLink(targetNode, targetPin);
+        /// входной пин данных принимает только одно значение, а вот входной flow-пин принимает
+        /// сколько угодно связей - это и есть точка слияния ветвей исполнения
+        if (!pInputPin->GetType().isFlow) {
+            pGraph->RemoveInputLink(targetNode, targetPin);
+        }
+
+        /// поток исполнения может уходить из выходного пина только в один узел
         if (pOutputPin->GetType().isFlow) {
             pGraph->RemoveOutputLink(sourceNode, sourcePin);
         }
@@ -413,6 +422,24 @@ namespace SR_CORE_GUI_NS {
         return pGraph->GetNode(UserDataToIndex(selectedNodes.front()->GetUserData()));
     }
 
+    void FluxEditor::DrawGraphPreviewCode() {
+        auto&& pGraph = GetGraph();
+        if (!pGraph) {
+            return;
+        }
+
+        if (!m_previewCompiled) {
+            m_previewCompiled = true;
+            pGraph->Compile().SaveToString(m_previewCode);
+            SR_UTILS_NS::StringUtils::Instance().SplitView(m_previewCode, "\n", m_previewCodeLines);
+        }
+
+        for (auto&& line : m_previewCodeLines) {
+            m_previewLine = line;
+            SR_GRAPH_GUI_NS::Immediate::Text("%s", m_previewLine.c_str());
+        }
+    }
+
     void FluxEditor::DrawInspectPanel() {
         if (!m_graphAsset) {
             SR_GRAPH_GUI_NS::Immediate::TextColored(SR_FLUX_HINT_COLOR, "Open a flux graph to start editing.");
@@ -424,11 +451,21 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        if (auto&& pNode = GetSelectedNode()) {
-            DrawNodeInspector(*pNode);
-        }
-        else {
-            DrawGraphInspector();
+        if (SR_GRAPH_GUI_NS::Immediate::BeginTabBar("InspectorTabs")) {
+            if (SR_GRAPH_GUI_NS::Immediate::BeginTabItem("Inspector")) {
+                if (auto&& pNode = GetSelectedNode()) {
+                    DrawNodeInspector(*pNode);
+                }
+                else {
+                    DrawGraphInspector();
+                }
+                SR_GRAPH_GUI_NS::Immediate::EndTabItem();
+            }
+            if (SR_GRAPH_GUI_NS::Immediate::BeginTabItem("Preview code")) {
+                DrawGraphPreviewCode();
+                SR_GRAPH_GUI_NS::Immediate::EndTabItem();
+            }
+            SR_GRAPH_GUI_NS::Immediate::EndTabBar();
         }
     }
 
