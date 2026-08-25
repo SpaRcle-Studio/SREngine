@@ -395,12 +395,13 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         void Draw() override {
             const ax::NodeEditor::PinId pinId((uintptr_t)(static_cast<PinInstance*>(this)));
             ax::NodeEditor::BeginPin(pinId, ax::NodeEditor::PinKind::Input);
+            auto&& color = GetIconColor() / SR_MATH_NS::FColor(255, 255, 255, 1);
             SR_GRAPH_GUI_NS::Immediate::DrawPinIcon(
                 SR_MATH_NS::FVector2(24.0f, 24.0f),
                 GetIconType(),
                 IsLinked(),
-                SR_MATH_NS::FColor(1.0f, 1.0f, 1.0f, 1.0f),
-                SR_MATH_NS::FColor(0.125f, 0.125f, 0.125f, 1.0f)
+                color,
+                color * SR_MATH_NS::FColor(0.125f, 0.125f, 0.125f, 1.0f)
             );
             ax::NodeEditor::EndPin();
             ImGui::SameLine();
@@ -419,12 +420,13 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
                 ImGui::SameLine();
             }
             ax::NodeEditor::BeginPin(pinId, ax::NodeEditor::PinKind::Output);
+            auto&& color = GetIconColor() / SR_MATH_NS::FColor(255, 255, 255, 1);
             SR_GRAPH_GUI_NS::Immediate::DrawPinIcon(
                 SR_MATH_NS::FVector2(24.0f, 24.0f),
                 GetIconType(),
                 IsLinked(),
-                SR_MATH_NS::FColor(1.0f, 1.0f, 1.0f, 1.0f),
-                SR_MATH_NS::FColor(0.125f, 0.125f, 0.125f, 1.0f)
+                color,
+                color * SR_MATH_NS::FColor(0.125f, 0.125f, 0.125f, 1.0f)
             );
             ax::NodeEditor::EndPin();
         }
@@ -524,6 +526,10 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
 
 namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
     bool CanCreateLink(const SR_UTILS_NS::Reflection::TypeInfo* pFrom, const SR_UTILS_NS::Reflection::TypeInfo* pTo) {
+        if (!pTo) {
+            return true;
+        }
+
         if (bool(pFrom) != bool(pTo)) {
             return false;
         }

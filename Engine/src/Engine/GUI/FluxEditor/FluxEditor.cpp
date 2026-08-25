@@ -458,6 +458,30 @@ namespace SR_CORE_GUI_NS {
         if (type == SR_FLUX_NS::FluxGraphNodeType::Constant) {
             DrawConstantInspector(node);
         }
+
+        if (type == SR_FLUX_NS::FluxGraphNodeType::Cast) {
+            DrawCastInspector(node);
+        }
+    }
+
+    void FluxEditor::DrawCastInspector(SR_FLUX_NS::FluxGraphNode& node) {
+        /// целевой тип каста хранится в имени узла
+        m_castTypeBuffer = node.GetName().ToStringRef();
+        if (SR_GRAPH_GUI_NS::Immediate::InputText("Target type", &m_castTypeBuffer)) {
+            node.SetName(SR_UTILS_NS::StringAtom(m_castTypeBuffer));
+        }
+
+        if (node.GetName().empty()) {
+            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_FLUX_ERROR_COLOR, "Target type is not specified!");
+            return;
+        }
+
+        if (!SR_UTILS_NS::Factory::Instance().GetType(node.GetName())) {
+            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_FLUX_ERROR_COLOR, "Unknown class \"%s\"!", node.GetName().c_str());
+            return;
+        }
+
+        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_FLUX_HINT_COLOR, "On success the flow goes to \"Exec\", otherwise to \"Cast Failed\".");
     }
 
     void FluxEditor::DrawCallableInspector(SR_FLUX_NS::FluxGraphNode& node) {

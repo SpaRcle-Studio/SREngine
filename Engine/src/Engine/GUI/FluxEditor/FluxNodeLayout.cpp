@@ -33,6 +33,20 @@ namespace SR_CORE_GUI_NS {
             return maxPin >= firstArgumentPin ? (maxPin - firstArgumentPin) + 2 : 1;
         }
 
+        /// Временная информация о типе класса, зарегистрированного в фабрике. Нужна редактору,
+        /// чтобы подсветить совместимость пинов
+        SR_NODISCARD SR_UTILS_NS::Reflection::TypeInfo* MakeClassTypeInfo(const SR_UTILS_NS::StringAtom className, SR_UTILS_NS::Vector<SR_UTILS_NS::Reflection::TypeInfo*>& tmpTypeInfos) {
+            auto&& pType = SR_UTILS_NS::Factory::Instance().GetType(className);
+            if (!pType) {
+                return nullptr;
+            }
+            auto&& pTypeInfo = tmpTypeInfos.emplace_back(SR_UTILS_NS::Reflection::AllocateTypeInfo());
+            pTypeInfo->category = SR_UTILS_NS::Reflection::ReflectedCategoryType::Object;
+            pTypeInfo->detailedType = className;
+            pTypeInfo->vtable = pType->GetVTable();
+            return pTypeInfo;
+        }
+
         void AddArgumentPins(SR_UTILS_NS::Vector<FluxPinLayout>& pins, const SR_UTILS_NS::Reflection::Method* pMethod) {
             if (!pMethod) {
                 return;
@@ -88,14 +102,7 @@ namespace SR_CORE_GUI_NS {
                     SR_UTILS_NS::FormatTo(layout.title, "= {}.{}", callable.object, callable.function);
                 }
                 if (!SR_UTILS_NS::GetSingletonManager()->GetSingletonMeta(callable.object.GetHash())) {
-                    SR_UTILS_NS::Reflection::TypeInfo* pTypeInfo = nullptr;
-                    if (auto&& pType = SR_UTILS_NS::Factory::Instance().GetType(callable.object)) {
-                        pTypeInfo = tmpTypeInfos.emplace_back(SR_UTILS_NS::Reflection::AllocateTypeInfo());
-                        pTypeInfo->category = SR_UTILS_NS::Reflection::ReflectedCategoryType::Object;
-                        pTypeInfo->detailedType = callable.object;
-                        pTypeInfo->vtable = pType->GetVTable();
-                    }
-                    AddPin(layout.inputs, "Object").pTypeInfo = pTypeInfo;
+                    AddPin(layout.inputs, "Object").pTypeInfo = MakeClassTypeInfo(callable.object, tmpTypeInfos);
                 }
                 AddArgumentPins(layout.inputs, pMethod);
 
@@ -153,6 +160,22 @@ namespace SR_CORE_GUI_NS {
                 AddPin(layout.outputs, "Body", true);
                 AddPin(layout.outputs, "Completed", true);
                 AddPin(layout.outputs, "Index").pTypeInfo = pIntTypeInfo;
+                break;
+            }
+            case SR_FLUX_NS::FluxGraphNodeType::Cast: {
+                if (name.empty()) {
+                    layout.title = "Cast To (no type)";
+                }
+                else {
+                    SR_UTILS_NS::FormatTo(layout.title, "Cast To {}", name);
+                }
+                AddPin(layout.inputs, "Exec", true);
+                /// исходный объект может быть любого типа, поэтому пин не типизирован
+                AddPin(layout.inputs, "Object");
+                AddPin(layout.outputs, "Exec", true);
+                AddPin(layout.outputs, "Cast Failed", true);
+                const std::string resultPinName = name.empty() ? std::string("As Object") : SR_FORMAT("As {}", name);
+                AddPin(layout.outputs, resultPinName).pTypeInfo = MakeClassTypeInfo(name, tmpTypeInfos);
                 break;
             }
             default:

@@ -354,9 +354,14 @@ namespace SR_IMMEDIATE_GUI_NS {
     }
 
     IconType PinInstance::GetIconType() const {
-        if (m_type.isFlow || !m_type.pType) {
+        if (m_type.isFlow) {
             return IconType::Flow;
         }
+
+        if (!m_type.pType) {
+            return IconType::Diamond;
+        }
+
         switch (m_type.pType->category) {
             case Utils::Reflection::ReflectedCategoryType::Value:
             case Utils::Reflection::ReflectedCategoryType::Object:
@@ -379,6 +384,41 @@ namespace SR_IMMEDIATE_GUI_NS {
                 break;
         }
         return IconType::Flow;
+    }
+
+    SR_MATH_NS::FColor PinInstance::GetIconColor() const {
+        if (m_type.isFlow) {
+            return SR_MATH_NS::FColor(255, 255, 255, 255);
+        }
+
+        if (!m_type.pType) {
+            return SR_MATH_NS::FColor(100, 100, 255, 255);
+        }
+
+        switch (m_type.pType->category) {
+            case Utils::Reflection::ReflectedCategoryType::Value:
+            case Utils::Reflection::ReflectedCategoryType::Object:
+                return SR_MATH_NS::FColor(100, 100, 255, 255);
+            case Utils::Reflection::ReflectedCategoryType::Arithmetic:
+                if (m_type.pType->detailedType == "bool") {
+                    return SR_MATH_NS::FColor(200, 0, 0, 255);
+                }
+                return SR_MATH_NS::FColor(87, 155, 185, 255);
+            case Utils::Reflection::ReflectedCategoryType::String:
+                return SR_MATH_NS::FColor(200, 0, 200, 255);
+            case Utils::Reflection::ReflectedCategoryType::Enum:
+                return SR_MATH_NS::FColor(87, 155, 185, 255);
+            case Utils::Reflection::ReflectedCategoryType::MathObject:
+            case Utils::Reflection::ReflectedCategoryType::MathSize:
+            case Utils::Reflection::ReflectedCategoryType::MathVector:
+            case Utils::Reflection::ReflectedCategoryType::MathRect:
+                return SR_MATH_NS::FColor(87, 155, 185, 255);
+            case Utils::Reflection::ReflectedCategoryType::Container:
+                return SR_MATH_NS::FColor(87, 155, 185, 255);
+            default:
+                break;
+        }
+        return SR_MATH_NS::FColor(255, 255, 255, 255);
     }
 
     bool PinTypeInfo::operator==(const PinTypeInfo& other) const {

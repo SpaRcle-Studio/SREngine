@@ -42,6 +42,7 @@ namespace SR_CORE_GUI_NS {
         void DrawNodeInspector(SR_FLUX_NS::FluxGraphNode& node);
         void DrawConstantInspector(SR_FLUX_NS::FluxGraphNode& node);
         void DrawCallableInspector(SR_FLUX_NS::FluxGraphNode& node);
+        void DrawCastInspector(SR_FLUX_NS::FluxGraphNode& node);
         void DrawVariableSelector(SR_FLUX_NS::FluxGraphNode& node);
         void DrawGraphInspector();
 
@@ -79,6 +80,7 @@ namespace SR_CORE_GUI_NS {
         std::string m_nameBuffer;
         std::string m_objectBuffer;
         std::string m_functionBuffer;
+        std::string m_castTypeBuffer;
         std::string m_newVariableName;
 
     };

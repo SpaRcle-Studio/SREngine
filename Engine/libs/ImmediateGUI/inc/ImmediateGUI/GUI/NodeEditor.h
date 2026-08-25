@@ -204,6 +204,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         }
 
         SR_NODISCARD IconType GetIconType() const;
+        SR_NODISCARD SR_MATH_NS::FColor GetIconColor() const;
 
     private:
         NodeInstance* m_pNode = nullptr;

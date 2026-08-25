@@ -623,6 +623,10 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
     f.write('\t' * (tabs + 1) + f'return vtable;\n')
     f.write('\t' * tabs + '}\n\n')
 
+    f.write('\t' * tabs + f'SR_NODISCARD SpaRcle::Utils::Reflection::Value Cast(const SpaRcle::Utils::Reflection::Value& value) const noexcept final {{\n')
+    f.write('\t' * (tabs + 1) + f'return value.CastSRClass<{class_name}>();\n')
+    f.write('\t' * (tabs) + f'}}\n\n')
+
     if class_obj.category:
         category_split = class_obj.category.split('.')
         f.write('\t' * tabs + 'SR_NODISCARD std::span<const SpaRcle::Utils::StringAtom> GetCategory() const noexcept final {\n')
@@ -769,6 +773,14 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
         f.write(f'\t' * (tabs + 2) + f'meta.isPropertiesInited = false;' + '\n')
         f.write(f'\t' * (tabs + 2) + f'for (auto& property : meta.properties) {{' + '\n')
         f.write(f'\t' * (tabs + 3) + f'property = SpaRcle::Utils::Reflection::Property();' + '\n')
+        f.write(f'\t' * (tabs + 2) + f'}}\n')
+        f.write(f'\t' * (tabs + 1) + f'}}\n\n')
+
+    if len(class_obj.methods) > 0:
+        f.write(f'\t' * (tabs + 1) + f'if (meta.isMethodsInited) {{' + '\n')
+        f.write(f'\t' * (tabs + 2) + f'meta.isMethodsInited = false;' + '\n')
+        f.write(f'\t' * (tabs + 2) + f'for (auto& method : meta.methods) {{' + '\n')
+        f.write(f'\t' * (tabs + 3) + f'method = SpaRcle::Utils::Reflection::Method();' + '\n')
         f.write(f'\t' * (tabs + 2) + f'}}\n')
         f.write(f'\t' * (tabs + 1) + f'}}\n\n')
 
