@@ -208,10 +208,12 @@ namespace SR_CORE_GUI_NS {
                 break;
             case SR_GRAPH_NS::ShaderVarType::Int:
                 value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<int32_t>(*property.data));
+                SR_GRAPH_GUI_NS::Immediate::SameLine();
                 feedback = m_numericDrawer->Draw(propertyContext);
                 break;
             case SR_GRAPH_NS::ShaderVarType::Float:
                 value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<float_t>(*property.data));
+                SR_GRAPH_GUI_NS::Immediate::SameLine();
                 feedback = m_numericDrawer->Draw(propertyContext);
                 break;
             case SR_GRAPH_NS::ShaderVarType::Bool: {
