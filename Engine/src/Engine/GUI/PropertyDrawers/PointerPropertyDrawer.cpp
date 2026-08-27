@@ -19,8 +19,6 @@ namespace SR_CORE_GUI_NS {
         PropertyDrawerFeedback feedback;
 
         SR_UTILS_NS::Reflection::Value value = context.HasExplicitSetter() ? context.GetValue().Copy() : context.GetValue();
-        SRAssert(value.GetTypeInfo().pNext[0]->category != SR_UTILS_NS::Reflection::ReflectedCategoryType::Unknown);
-
         SR_UTILS_NS::SRClass* pClassValue = value.GetSRClass();
 
         auto&& editorParams = context.GetEditorParams();
@@ -36,7 +34,7 @@ namespace SR_CORE_GUI_NS {
 
         const auto dir = m_isOpened ? SR_GRAPH_GUI_NS::Immediate::Direction::Down : SR_GRAPH_GUI_NS::Immediate::Direction::Right;
 
-        const SR_UTILS_NS::StringView typeName = value.GetTypeInfo().pNext[0]->detailedType;
+        const SR_UTILS_NS::StringView typeName = value.GetTypeInfo().pNext[0] ? SR_UTILS_NS::StringView(value.GetTypeInfo().pNext[0]->detailedType.ToStringView()) : SR_UTILS_NS::StringView();
 
         if (!m_openedByDefault) {
             m_isOpened |= context.openedByDefault;

@@ -7,6 +7,7 @@
 
 #include <Engine/GUI/PropertyDrawer.h>
 #include <Engine/GUI/FluxEditor/FluxNodeLayout.h>
+#include <Engine/GUI/PropertyDrawers/ValuePropertyDrawer.h>
 
 #include <Graphics/GUI/NodeWidget.h>
 
@@ -36,6 +37,7 @@ namespace SR_CORE_GUI_NS {
         void SyncVisualToLogic();
 
         void OnNodeTypeSelected(SR_UTILS_NS::StringAtom type, SR_MATH_NS::FVector2 pos) override;
+        void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) override;
 
     private:
         void DrawCreateNodeMenu(const SR_MATH_NS::FVector2& popupPos);
@@ -45,6 +47,8 @@ namespace SR_CORE_GUI_NS {
         void DrawCastInspector(SR_FLUX_NS::FluxGraphNode& node);
         void DrawVariableSelector(SR_FLUX_NS::FluxGraphNode& node);
         void DrawGraphInspector();
+        void CopySelectedNodes();
+        void PasteNodes();
         void DrawGraphPreviewCode();
 
         void OnLinkCreated(SR_IMMEDIATE_GUI_NS::LinkInstance& link);
@@ -63,6 +67,9 @@ namespace SR_CORE_GUI_NS {
         SR_NODISCARD static void* IndexToUserData(uint32_t index);
         SR_NODISCARD static uint32_t UserDataToIndex(const void* pUserData);
 
+        SR_NODISCARD bool IsHoveredImpl() const override;
+        SR_NODISCARD bool IsFocusedImpl() const override;
+
     protected:
         SR_FLUX_NS::FluxGraphAsset::Ptr m_graphAsset;
         SR_UTILS_NS::Subscription m_onCommandUndoSubscription;
@@ -74,6 +81,7 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::String m_previewCode;
         SR_UTILS_NS::String m_previewLine;
         SR_UTILS_NS::Vector<SR_UTILS_NS::StringView> m_previewCodeLines;
+        ValuePropertyDrawer::Ptr m_valueDrawer;
 
         SR_UTILS_NS::Vector<SR_FLUX_NS::FluxGraphLink> m_brokenLinks;
         SR_UTILS_NS::Vector<SR_IMMEDIATE_GUI_NS::NodeInstance*> m_nodes;

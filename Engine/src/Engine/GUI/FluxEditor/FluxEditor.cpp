@@ -14,6 +14,7 @@
 #include <Utils/Common/SubscriptionMessage.h>
 #include <Utils/Events/Broadcaster.h>
 #include <Utils/FileSystem/FileDialog.h>
+#include <Utils/Flux/Graph/FluxGraphClipboard.h>
 #include <Utils/Flux/Runtime/FluxComponent.h>
 #include <Utils/Flux/Runtime/FluxRuntime.h>
 #include <Utils/Reflection/Method.h>
@@ -54,6 +55,8 @@ namespace SR_CORE_GUI_NS {
 
     void FluxEditor::Init() {
         Super::Init();
+
+        m_valueDrawer = new ValuePropertyDrawer();
 
         m_onCommandRedoSubscription = SR_UTILS_NS::Broadcaster::Instance().Subscribe(SR_UTILS_NS::Events::EVENT_ON_COMMAND_REDO_ID, [this](const SR_UTILS_NS::SubscriptionMessage& msg) {
             m_skipInspect = true;
@@ -115,6 +118,14 @@ namespace SR_CORE_GUI_NS {
 
     uint32_t FluxEditor::UserDataToIndex(const void* pUserData) {
         return pUserData ? static_cast<uint32_t>(reinterpret_cast<uintptr_t>(pUserData) - 1) : SR_UINT32_MAX;
+    }
+
+    bool FluxEditor::IsHoveredImpl() const {
+        return Super::IsHoveredImpl() || (m_nodeGraphEditor && m_nodeGraphEditor->IsHovered());
+    }
+
+    bool FluxEditor::IsFocusedImpl() const {
+        return Super::IsFocusedImpl() || (m_nodeGraphEditor && m_nodeGraphEditor->IsFocused());
     }
 
     void FluxEditor::DrawNodeEditor() {
@@ -280,11 +291,6 @@ namespace SR_CORE_GUI_NS {
         SR_FLUX_NS::FluxGraphNode node;
         node.SetType(SR_UTILS_NS::EnumReflector::FromString<SR_FLUX_NS::FluxGraphNodeType>(type));
         node.SetPosition(SR_IMMEDIATE_GUI_NS::NodeEditor::ScreenToCanvas(pos));
-
-        if (node.GetType() == SR_FLUX_NS::FluxGraphNodeType::Constant) {
-            node.SetConstant(CreateFluxValue(SR_UTILS_NS::StringAtom("int32_t")));
-        }
-
         pGraph->AddNode(node);
     }
 
@@ -495,8 +501,7 @@ namespace SR_CORE_GUI_NS {
         if (type == SR_FLUX_NS::FluxGraphNodeType::Constant) {
             DrawConstantInspector(node);
         }
-
-        if (type == SR_FLUX_NS::FluxGraphNodeType::Cast) {
+        else if (type == SR_FLUX_NS::FluxGraphNodeType::Cast) {
             DrawCastInspector(node);
         }
     }
@@ -579,55 +584,103 @@ namespace SR_CORE_GUI_NS {
     }
 
     void FluxEditor::DrawConstantInspector(SR_FLUX_NS::FluxGraphNode& node) {
-        const SR_UTILS_NS::StringAtom typeName = GetFluxValueTypeName(node.GetConstant());
-
-        if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("Value type", typeName.c_str())) {
-            for (auto&& availableType : GetFluxValueTypeNames()) {
-                if (SR_GRAPH_GUI_NS::Immediate::Selectable(availableType.c_str(), availableType == typeName)) {
-                    if (availableType != typeName) {
-                        node.SetConstant(CreateFluxValue(availableType));
-                    }
-                }
-            }
-            SR_GRAPH_GUI_NS::Immediate::EndCombo();
-        }
-
         auto&& constant = node.GetConstantMutable();
         if (!constant.IsValid()) {
             return;
         }
 
-        if (typeName == "bool") {
-            SR_GRAPH_GUI_NS::Immediate::Checkbox("Value", constant.Cast<bool>());
+        const float_t lineHeight = SR_GRAPH_GUI_NS::Immediate::GetFontSize() + SR_GRAPH_GUI_NS::Immediate::GetFramePadding().y * 2.0f;
+        const float_t windowWidth = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x;
+
+        PropertyDrawerContext context(&constant);
+        context.openedByDefault = true;
+        context.lineHeight = lineHeight;
+        context.axisButtonWidth = context.lineHeight;
+        context.spaceWidth = windowWidth;
+        context.fieldHeight = lineHeight;
+        context.fieldTitleWidth = windowWidth * 0.3f;
+        context.fieldWidth = windowWidth * 0.7f;
+        context.noHeader = true;
+
+        context.onBeforeChangeCallback = [this](bool) {
+            if (!m_serializer && m_graphAsset) {
+                m_serializer = SR_CORE_NS::Commands::CreateSerializer();
+                SR_UTILS_NS::Serialization::Save(*m_serializer, *m_graphAsset, SR_UTILS_NS::COMMAND_DATA_ID);
+                m_previewCompiled = false;
+            }
+        };
+        m_valueDrawer->Draw(context);
+    }
+
+    void FluxEditor::OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) {
+        auto&& pGraph = GetGraph();
+        if (!pGraph) {
+            return;
         }
-        else if (typeName == "float") {
-            SR_GRAPH_GUI_NS::Immediate::InputFloat("Value", constant.Cast<float_t>());
+
+        switch (data->GetKeyCode()) {
+            case SR_UTILS_NS::KeyCode::C: {
+                if (IsKeyPressed(SR_UTILS_NS::KeyCode::LCtrl)) {
+                    CopySelectedNodes();
+                }
+                break;
+            }
+            case SR_UTILS_NS::KeyCode::V: {
+                if (IsKeyPressed(SR_UTILS_NS::KeyCode::LCtrl)) {
+                    PasteNodes();
+                }
+                break;
+            }
+            default:
+                break;
         }
-        else if (typeName == "double") {
-            auto value = static_cast<float_t>(*constant.Cast<double_t>());
-            if (SR_GRAPH_GUI_NS::Immediate::InputFloat("Value", &value)) {
-                *constant.Cast<double_t>() = static_cast<double_t>(value);
+
+        Super::OnKeyDown(data);
+    }
+
+    void FluxEditor::CopySelectedNodes() {
+        auto&& pGraph = GetGraph();
+        if (!pGraph || !m_nodeGraphEditor) {
+            return;
+        }
+
+        SR_UTILS_NS::Vector<const SR_FLUX_NS::FluxGraphNode*> selectedNodes;
+
+        for (auto&& pNodeInstance : m_nodeGraphEditor->GetSelectedNodes()) {
+            const uint32_t nodeIndex = UserDataToIndex(pNodeInstance->GetUserData());
+            if (nodeIndex < pGraph->GetNodeCount()) {
+                selectedNodes.emplace_back(pGraph->GetNode(nodeIndex));
             }
         }
-        else if (typeName == "String") {
-            m_nameBuffer = *constant.Cast<SR_UTILS_NS::String>();
-            if (SR_GRAPH_GUI_NS::Immediate::InputText("Value", &m_nameBuffer)) {
-                *constant.Cast<SR_UTILS_NS::String>() = SR_UTILS_NS::String(m_nameBuffer);
+
+        SR_FLUX_NS::FluxGraphClipboard::Copy(*pGraph, selectedNodes);
+    }
+
+    void FluxEditor::PasteNodes() {
+        auto&& pGraph = GetGraph();
+        if (!pGraph || !m_nodeGraphEditor || !SR_FLUX_NS::FluxGraphClipboard::HasData()) {
+            return;
+        }
+
+        const bool hadSerializer = m_serializer != nullptr;
+        if (!m_serializer && m_graphAsset) {
+            m_serializer = SR_CORE_NS::Commands::CreateSerializer();
+            SR_UTILS_NS::Serialization::Save(*m_serializer, *m_graphAsset, SR_UTILS_NS::COMMAND_DATA_ID);
+        }
+
+        /// центр вставляемой группы попадает под курсор
+        const auto pastePosition = m_nodeGraphEditor->ScreenToCanvas(SR_GRAPH_GUI_NS::Immediate::GetMousePos());
+
+        if (SR_FLUX_NS::FluxGraphClipboard::Paste(*pGraph, pastePosition).empty()) {
+            if (!hadSerializer) {
+                m_serializer.reset();
             }
+            return;
         }
-        else if (typeName == "int32_t") {
-            SR_GRAPH_GUI_NS::Immediate::InputInt("Value", constant.Cast<int32_t>());
-        }
-        else if (typeName == "int64_t" || typeName == "uint32_t" || typeName == "uint64_t") {
-            auto value = static_cast<int32_t>(typeName == "int64_t" ? *constant.Cast<int64_t>() :
-                (typeName == "uint32_t" ? static_cast<int64_t>(*constant.Cast<uint32_t>()) : static_cast<int64_t>(*constant.Cast<uint64_t>()))
-            );
-            if (SR_GRAPH_GUI_NS::Immediate::InputInt("Value", &value)) {
-                if (typeName == "int64_t") { *constant.Cast<int64_t>() = value; }
-                else if (typeName == "uint32_t") { *constant.Cast<uint32_t>() = static_cast<uint32_t>(SR_MAX(value, 0)); }
-                else { *constant.Cast<uint64_t>() = static_cast<uint64_t>(SR_MAX(value, 0)); }
-            }
-        }
+
+        /// выделение указывает на узлы, существовавшие до вставки, поэтому сбрасывается
+        m_nodeGraphEditor->ClearSelection();
+        m_previewCompiled = false;
     }
 
     void FluxEditor::DrawGraphInspector() {
@@ -644,11 +697,33 @@ namespace SR_CORE_GUI_NS {
         for (auto&& [name, value] : pGraph->GetVariables()) {
             SR_GRAPH_GUI_NS::Immediate::PushID(name.c_str());
 
-            SR_GRAPH_GUI_NS::Immediate::Text("%s : %s", name.c_str(), GetFluxValuePreview(value).c_str());
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
             if (SR_GRAPH_GUI_NS::Immediate::Button("X")) {
                 variableToRemove = name;
             }
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+
+            const float_t lineHeight = SR_GRAPH_GUI_NS::Immediate::GetFontSize() + SR_GRAPH_GUI_NS::Immediate::GetFramePadding().y * 2.0f;
+            const float_t windowWidth = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x;
+
+            PropertyDrawerContext context(&value);
+            context.openedByDefault = true;
+            context.lineHeight = lineHeight;
+            context.customDisplayName = name;
+            context.axisButtonWidth = context.lineHeight;
+            context.spaceWidth = windowWidth;
+            context.fieldHeight = lineHeight;
+            context.fieldTitleWidth = windowWidth * 0.3f;
+            context.fieldWidth = windowWidth * 0.7f;
+            context.noHeader = true;
+
+            context.onBeforeChangeCallback = [this](bool) {
+                if (!m_serializer && m_graphAsset) {
+                    m_serializer = SR_CORE_NS::Commands::CreateSerializer();
+                    SR_UTILS_NS::Serialization::Save(*m_serializer, *m_graphAsset, SR_UTILS_NS::COMMAND_DATA_ID);
+                    m_previewCompiled = false;
+                }
+            };
+            m_valueDrawer->Draw(context);
 
             SR_GRAPH_GUI_NS::Immediate::PopID();
         }
@@ -660,19 +735,12 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::Separator();
 
         SR_GRAPH_GUI_NS::Immediate::InputText("##NewVariable", &m_newVariableName);
-
-        for (auto&& typeName : GetFluxValueTypeNames()) {
-            SR_GRAPH_GUI_NS::Immediate::PushID(typeName.c_str());
-            if (SR_GRAPH_GUI_NS::Immediate::Button(typeName.c_str())) {
-                if (m_newVariableName.empty()) {
-                    SR_WARN("FluxEditor::DrawGraphInspector() : variable name is empty!");
-                }
-                else {
-                    pGraph->GetVariables()[SR_UTILS_NS::StringAtom(m_newVariableName)] = CreateFluxValue(typeName);
-                    m_newVariableName.clear();
-                }
+        SR_GRAPH_GUI_NS::Immediate::SameLine();
+        if (SR_GRAPH_GUI_NS::Immediate::Button("Add Variable")) {
+            if (!m_newVariableName.empty()) {
+                pGraph->GetVariables().emplace(SR_UTILS_NS::StringAtom(m_newVariableName), SR_UTILS_NS::Reflection::Value());
+                m_newVariableName.clear();
             }
-            SR_GRAPH_GUI_NS::Immediate::PopID();
         }
 
         SR_GRAPH_GUI_NS::Immediate::Separator();

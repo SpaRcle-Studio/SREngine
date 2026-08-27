@@ -480,6 +480,8 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         void RemovePins() override;
 
     private:
+        float_t m_inputPinMaxWidth = 0.f;
+        float_t m_outputPinMaxWidth = 0.f;
         SR_UTILS_NS::String m_title;
         SR_MATH_NS::FVector2 m_position;
 
@@ -513,6 +515,9 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         LinkInstance* CreateLink(InputPinInstance* pInputPin, OutputPinInstance* pOutputPin) override;
         SR_NODISCARD InputPinInstance* CreateInputPin(SR_UTILS_NS::StringView name, PinTypeInfo type) override;
         SR_NODISCARD OutputPinInstance* CreateOutputPin(SR_UTILS_NS::StringView name,PinTypeInfo type) override;
+        SR_NODISCARD bool IsHovered() const override;
+        SR_NODISCARD bool IsFocused() const override;
+        SR_NODISCARD SR_MATH_NS::FVector2 ScreenToCanvas(const SR_MATH_NS::FVector2& screenPos) const override;
 
     private:
         mutable SR_UTILS_NS::Vector<NodeInstance*> m_selectedNodes;
@@ -520,6 +525,8 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         mutable SR_UTILS_NS::Vector<ax::NodeEditor::NodeId> m_selectedNodeIds;
         ax::NodeEditor::EditorContext* m_editorContext = nullptr;
         mutable LinkInstance* m_selectedLink = nullptr;
+        bool m_hovered = false;
+        bool m_focused = false;
 
     };
 }
@@ -545,6 +552,9 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
             }
             if (pFrom->category == pTo->category && pFrom->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::String) {
                 return pFrom->detailedType == "String" && pTo->detailedType == "StringView";
+            }
+            if (pFrom->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Arithmetic && pTo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum) {
+                return true;
             }
             return false;
         }
@@ -684,6 +694,9 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
             SR_IMMEDIATE_GUI_NS::NodeEditor::ResumeNodeEditor();
         }
 
+        m_focused = ax::NodeEditor::IsActive();
+        m_hovered = m_focused;
+
         ax::NodeEditor::End();
 
         for (auto&& pNode : m_nodes) {
@@ -735,6 +748,19 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         std::ranges::stable_sort(m_freeNodes, [](const NodeInstance* a, const NodeInstance* b) { return a < b; });
         std::ranges::stable_sort(m_freeInputPins, [](const PinInstance* a, const PinInstance* b) { return a < b; });
         std::ranges::stable_sort(m_freeOutputPins, [](const PinInstance* a, const PinInstance* b) { return a < b; });
+    }
+
+    bool NodeEditorInstanceNEImpl::IsHovered() const {
+        return m_hovered;
+    }
+
+    bool NodeEditorInstanceNEImpl::IsFocused() const {
+        return m_focused;
+    }
+
+    SR_MATH_NS::FVector2 NodeEditorInstanceNEImpl::ScreenToCanvas(const SR_MATH_NS::FVector2& screenPos) const {
+        PushNodeEditorContext pushContext(m_editorContext);
+        return SR_IMMEDIATE_GUI_NS::NodeEditor::ScreenToCanvas(screenPos);
     }
 
     InputPinInstance* NodeEditorInstanceNEImpl::CreateInputPin(SR_UTILS_NS::StringView name, PinTypeInfo type) {
@@ -814,12 +840,15 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
     /// ================================================================================================================
 
     float_t NodeInstanceNEImpl::DrawHeader() {
+        SR_TRACY_ZONE;
+
         ImDrawList* drawList = ImGui::GetWindowDrawList();
 
         float fontSize = ImGui::GetFontSize();
         const float_t referenceFontSize = 12.f;
         const float_t scale = fontSize / referenceFontSize;
         ImFont* font = ImGui::GetFont();
+
         ImVec2 textSize = font->CalcTextSizeA(fontSize, FLT_MAX, 0.0f, m_title.c_str());
 
         SR_MATH_NS::FColor color = SR_MATH_NS::FColor::PrettyRGBFromString(m_title);
@@ -831,7 +860,8 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         constexpr float_t paddingY = 6.8f;
 
         ImColor imColor = ImColor(color.r, color.g, color.b, color.a);
-        const float_t width = std::max(textSize.x + Padding * 2.f * scale, MinWidth + PinIconWidth);
+        const float_t pinsMaxWidth = std::max(m_inputPinMaxWidth + Padding, m_outputPinMaxWidth + Padding) + PinIconWidth * 4.f;
+        const float_t width = std::max(textSize.x + Padding * 2.f * scale, std::max(pinsMaxWidth, MinWidth));
 
         if (GetEditor()->GetStyleType() == NodeEditorStyleType::StateMachine) {
             auto&& pos = ImGui::GetCursorScreenPos() - ImVec2(0.f, paddingY);
@@ -911,7 +941,14 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
             ImGui::TableNextRow();
 
             ImGui::TableSetColumnIndex(0);
+
+            m_inputPinMaxWidth = 0.f;
             for (auto&& pPin : m_inputPins) {
+                float_t textWidth = 0.f;
+                if (auto&& name = pPin->GetName(); !name.empty()) {
+                    textWidth = ImGui::CalcTextSize(name.c_str()).x;
+                    m_inputPinMaxWidth = std::max(m_inputPinMaxWidth, textWidth);
+                }
                 pPin->Draw();
             }
 
@@ -925,10 +962,12 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
                 /// выравниваем выходные пины по правому краю: текст прижимаем вправо,
                 /// чтобы иконки всех пинов оказались на одной вертикали
                 const float_t columnStartX = ImGui::GetCursorPosX();
+                m_outputPinMaxWidth = 0.f;
                 for (auto&& pPin : m_outputPins) {
                     float_t textWidth = 0.f;
                     if (auto&& name = pPin->GetName(); !name.empty()) {
                         textWidth = ImGui::CalcTextSize(name.c_str()).x;
+                        m_outputPinMaxWidth = std::max(m_outputPinMaxWidth, textWidth);
                     }
                     if (const float_t offset = outputPinMaxWidth - textWidth; offset > 0.f) {
                         ImGui::SetCursorPosX(columnStartX + offset);

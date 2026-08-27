@@ -83,6 +83,7 @@ namespace SR_PHYSICS_NS {
         void OnDisable() override;
         void OnMatrixDirty() override;
 
+        /// @method
         CharacterControllerCollisionFlags Move(const SR_MATH_NS::FVector3& displacement,
             float_t skinWidth,
             float_t deltaTime

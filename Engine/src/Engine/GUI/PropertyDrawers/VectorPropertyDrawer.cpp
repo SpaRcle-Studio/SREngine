@@ -15,11 +15,11 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
         SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetProperty().GetName().ToCStr());
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
 
         SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
-        SR_UTILS_NS::StringAtom displayName = context.GetProperty().GetDisplayName();
+        SR_UTILS_NS::StringAtom displayName = context.GetPropertyDisplayName();
 
         auto&& container = value.AsSequenceContainer();
 

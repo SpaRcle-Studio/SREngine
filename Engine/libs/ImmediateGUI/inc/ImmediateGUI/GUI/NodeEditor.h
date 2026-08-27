@@ -90,6 +90,13 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         virtual void ResetEditor() = 0;
         virtual void ClearSelection() = 0;
 
+        SR_NODISCARD virtual bool IsHovered() const { return false; }
+        SR_NODISCARD virtual bool IsFocused() const { return false; }
+
+        /// перевод экранных координат в координаты канваса. В отличие от NodeEditor::ScreenToCanvas
+        /// не требует активного контекста редактора, поэтому вызывается и вне отрисовки
+        SR_NODISCARD virtual SR_MATH_NS::FVector2 ScreenToCanvas(const SR_MATH_NS::FVector2& screenPos) const { return screenPos; }
+
         SR_NODISCARD virtual InputPinInstance* CreateInputPin(SR_UTILS_NS::StringView name, PinTypeInfo type) = 0;
         SR_NODISCARD virtual OutputPinInstance* CreateOutputPin(SR_UTILS_NS::StringView name, PinTypeInfo type) = 0;
         SR_NODISCARD virtual const SR_UTILS_NS::Vector<NodeInstance*>& GetSelectedNodes() const = 0;

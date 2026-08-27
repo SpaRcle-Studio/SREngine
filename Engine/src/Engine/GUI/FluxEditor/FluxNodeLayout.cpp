@@ -238,32 +238,4 @@ namespace SR_CORE_GUI_NS {
     SR_UTILS_NS::StringAtom GetFluxValueTypeName(const SR_UTILS_NS::Reflection::Value& value) {
         return value.IsValid() ? value.GetTypeInfo().detailedType : SR_UTILS_NS::StringAtom();
     }
-
-    const SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>& GetFluxValueTypeNames() {
-        static const SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> types = {
-            SR_UTILS_NS::StringAtom("bool"),
-            SR_UTILS_NS::StringAtom("int32_t"),
-            SR_UTILS_NS::StringAtom("int64_t"),
-            SR_UTILS_NS::StringAtom("uint32_t"),
-            SR_UTILS_NS::StringAtom("uint64_t"),
-            SR_UTILS_NS::StringAtom("float"),
-            SR_UTILS_NS::StringAtom("double"),
-            SR_UTILS_NS::StringAtom("String")
-        };
-        return types;
-    }
-
-    SR_UTILS_NS::Reflection::Value CreateFluxValue(const SR_UTILS_NS::StringAtom typeName) {
-        if (typeName == "bool") { return SR_UTILS_NS::Reflection::Value::Create<bool>(false); }
-        if (typeName == "int32_t") { return SR_UTILS_NS::Reflection::Value::Create<int32_t>(0); }
-        if (typeName == "int64_t") { return SR_UTILS_NS::Reflection::Value::Create<int64_t>(0); }
-        if (typeName == "uint32_t") { return SR_UTILS_NS::Reflection::Value::Create<uint32_t>(0); }
-        if (typeName == "uint64_t") { return SR_UTILS_NS::Reflection::Value::Create<uint64_t>(0); }
-        if (typeName == "float") { return SR_UTILS_NS::Reflection::Value::Create<float_t>(0.f); }
-        if (typeName == "double") { return SR_UTILS_NS::Reflection::Value::Create<double_t>(0.0); }
-        if (typeName == "String") { return SR_UTILS_NS::Reflection::Value::Create(SR_UTILS_NS::String()); }
-
-        SRHalt("CreateFluxValue() : unsupported value type \"{}\"!", typeName);
-        return {};
-    }
 }

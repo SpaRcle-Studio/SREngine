@@ -41,11 +41,6 @@ namespace SR_CORE_GUI_NS {
     SR_NODISCARD SR_UTILS_NS::String GetFluxValuePreview(const SR_UTILS_NS::Reflection::Value& value);
 
     SR_NODISCARD SR_UTILS_NS::StringAtom GetFluxValueTypeName(const SR_UTILS_NS::Reflection::Value& value);
-
-    /// Список типов значений, доступных для констант и переменных графа
-    SR_NODISCARD const SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>& GetFluxValueTypeNames();
-
-    SR_NODISCARD SR_UTILS_NS::Reflection::Value CreateFluxValue(SR_UTILS_NS::StringAtom typeName);
 }
 
 #endif //SR_ENGINE_CORE_GUI_FLUX_NODE_LAYOUT_H

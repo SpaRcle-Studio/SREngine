@@ -35,6 +35,13 @@ namespace SR_CORE_GUI_NS {
         const auto dir = m_isOpened ? SR_GRAPH_GUI_NS::Immediate::Direction::Down : SR_GRAPH_GUI_NS::Immediate::Direction::Right;
 
         SR_UTILS_NS::SRClass* pClassValue = value.GetSRClass();
+        if (!pClassValue) {
+            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Value is not a class!");
+            SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+            SR_GRAPH_GUI_NS::Immediate::PopID();
+            SR_GRAPH_GUI_NS::Immediate::PopID();
+            return feedback;
+        }
 
         SR_MATH_NS::FVector2 buttonSize;
 

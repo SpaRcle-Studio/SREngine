@@ -30,6 +30,8 @@ namespace SR_CORE_GUI_NS {
 
         auto&& typeInfo = value.GetTypeInfo();
         switch (typeInfo.category) {
+            case SR_UTILS_NS::Reflection::ReflectedCategoryType::Value:
+                return "ValuePropertyDrawer"_atom;
             case SR_UTILS_NS::Reflection::ReflectedCategoryType::Object:
                 return "ObjectPropertyDrawer"_atom;
             case SR_UTILS_NS::Reflection::ReflectedCategoryType::String:
@@ -78,7 +80,7 @@ namespace SR_CORE_GUI_NS {
                     return "ResourceRefPropertyDrawer"_atom;
                 }
                 if (typeInfo.detailedType == "Vector") {
-                    if (typeInfo.pNext[0]->detailedType == "bool") {
+                    if (typeInfo.pNext[0] && typeInfo.pNext[0]->detailedType == "bool") {
                         return "BitMapPropertyDrawer"_atom;
                     }
                     return "VectorPropertyDrawer"_atom;
@@ -379,16 +381,17 @@ namespace SR_CORE_GUI_NS {
 
         const SR_MATH_NS::FVector2 buttonSize = { context.fieldTitleWidth, context.fieldHeight };
 
-        if (!context.pValue && SR_GRAPH_GUI_NS::Immediate::Button(context.GetPropertyDisplayName().c_str(), buttonSize)) {
-            if (context.onBeforeChangeCallback) {
-                context.onBeforeChangeCallback(false);
+        if (!context.pValue) {
+            if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetPropertyDisplayName().c_str(), buttonSize)) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(false);
+                }
+                feedback.isChanged = true;
+                value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
+                value = value.Copy();
             }
-            feedback.isChanged = true;
-            value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
-            value = value.Copy();
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
         }
-
-        SR_GRAPH_GUI_NS::Immediate::SameLine();
 
         SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth);
 
