@@ -5,7 +5,7 @@
 #ifndef SR_ENGINE_WORLD_H
 #define SR_ENGINE_WORLD_H
 
-#include <Engine/Engine.h>
+#include <Engine/stdInclude.h>
 
 #include <Utils/World/Scene.h>
 #include <Utils/ECS/SceneObject.h>
@@ -16,14 +16,7 @@ namespace SR_GRAPH_NS {
 
 namespace SR_CORE_NS {
     class SR_CORE_DLL_API World : public SR_WORLD_NS::Scene {
-        using CameraPtr = SR_GTYPES_NS::Camera*;
         using RenderScenePtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::RenderScene>;
-    public:
-        World() = default;
-
-    private:
-        ~World() override = default;
-
     public:
         SR_UTILS_NS::SceneObject::Ptr Instance(const SR_HTYPES_NS::RawMesh* rawMesh) override;
         SR_NODISCARD GameObjectPtr GetMainCamera() const override;

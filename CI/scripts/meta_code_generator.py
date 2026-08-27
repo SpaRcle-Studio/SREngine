@@ -76,7 +76,9 @@ def generate_class_meta_methods(f, class_structures, class_obj, tabs):
             f.write('\n' + '\t' * (tabs + 3) + f'.SetReturnType(SpaRcle::Utils::Reflection::DetermineTypeInfoAlloc<ReturnType_{method.name}>())')
 
         for i, param in enumerate(method.parameters):
-            f.write('\n' + '\t' * (tabs + 3) + f'.AddParam("{param.name}", SpaRcle::Utils::Reflection::DetermineTypeInfoAlloc<{param.type.get_full_type()}>())')
+            is_ref = 'true' if param.type.is_ref else 'false'
+            is_const = 'true' if param.type.is_const else 'false'
+            f.write('\n' + '\t' * (tabs + 3) + f'.AddParam("{param.name}", SpaRcle::Utils::Reflection::DetermineTypeInfoAlloc<{param.type.get_full_type()}>(), {is_ref}, {is_const})')
 
         if method.condition:
             f.write('\n' + '\t' * (tabs + 3) + f'.SetCondition(&SRClassMetaTemplate::IsMethodActive_{method.name})')

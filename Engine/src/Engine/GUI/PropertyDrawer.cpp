@@ -531,9 +531,8 @@ namespace SR_CORE_GUI_NS {
                 value = value.Copy();
                 SetReflectedValue(context, feedback, value);
             }
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
         }
-
-        SR_GRAPH_GUI_NS::Immediate::SameLine();
 
         const float_t partItemWidth = (context.fieldWidth / static_cast<float_t>(context.maxPartsInLine)) - context.axisButtonWidth;
 

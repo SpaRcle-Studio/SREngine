@@ -55,6 +55,21 @@ namespace SR_CORE_GUI_NS {
                 AddPin(pins, pMethod->GetParam(i).name.ToStringView()).pTypeInfo = pMethod->GetParam(i).pTypeInfo;
             }
         }
+
+        /// Аргумент, принимаемый по неконстантной ссылке, вызов может изменить, поэтому узел
+        /// публикует его новое значение отдельным выходным пином. Порядок обязан совпадать
+        /// с GetFluxOutArgumentPin, иначе редактор и компилятор разойдутся в нумерации
+        void AddOutArgumentPins(SR_UTILS_NS::Vector<FluxPinLayout>& pins, const SR_UTILS_NS::Reflection::Method* pMethod) {
+            if (!pMethod) {
+                return;
+            }
+            for (uint32_t i = 0; i < pMethod->GetParamsCount(); ++i) {
+                if (!pMethod->IsOutputParam(i)) {
+                    continue;
+                }
+                AddPin(pins, pMethod->GetParam(i).name.ToStringView()).pTypeInfo = pMethod->GetParam(i).pTypeInfo;
+            }
+        }
     }
 
     void BuildFluxNodeLayout(SR_FLUX_NS::FluxGraph& graph, const uint32_t nodeIndex, FluxNodeLayout& layout, SR_UTILS_NS::Vector<SR_UTILS_NS::Reflection::TypeInfo*>& tmpTypeInfos) {
@@ -108,13 +123,14 @@ namespace SR_CORE_GUI_NS {
 
                 if (pNode->GetType() == SR_FLUX_NS::FluxGraphNodeType::Invoke) {
                     AddPin(layout.outputs, "Exec", true);
-                    if (pMethod && pMethod->HasReturn()) {
-                        AddPin(layout.outputs, "Return").pTypeInfo = pMethod->GetReturnType();
+                    if (!pMethod || pMethod->HasReturn()) {
+                        AddPin(layout.outputs, "Return").pTypeInfo = pMethod ? pMethod->GetReturnType() : nullptr;
                     }
                 }
-                else if (pMethod && pMethod->HasReturn()) {
-                    AddPin(layout.outputs, "Result").pTypeInfo = pMethod->GetReturnType();
+                else if (!pMethod || pMethod->HasReturn()) {
+                    AddPin(layout.outputs, "Result").pTypeInfo = pMethod ? pMethod->GetReturnType() : nullptr;
                 }
+                AddOutArgumentPins(layout.outputs, pMethod);
                 break;
             }
             case SR_FLUX_NS::FluxGraphNodeType::Constant: {
@@ -124,13 +140,15 @@ namespace SR_CORE_GUI_NS {
             }
             case SR_FLUX_NS::FluxGraphNodeType::ReadVariable: {
                 SR_UTILS_NS::FormatTo(layout.title, "Get: {}", name);
-                AddPin(layout.outputs, "Value").pTypeInfo = &pNode->GetConstant().GetTypeInfo();
+                auto&& pVariable = graph.FindVariable(name);
+                AddPin(layout.outputs, "Value").pTypeInfo = pVariable ? &pVariable->GetTypeInfo() : nullptr;
                 break;
             }
             case SR_FLUX_NS::FluxGraphNodeType::WriteVariable: {
                 SR_UTILS_NS::FormatTo(layout.title, "Set: {}", name);
                 AddPin(layout.inputs, "Exec", true);
-                AddPin(layout.inputs, "Value").pTypeInfo = &pNode->GetConstant().GetTypeInfo();
+                auto&& pVariable = graph.FindVariable(name);
+                AddPin(layout.inputs, "Value").pTypeInfo = pVariable ? &pVariable->GetTypeInfo() : nullptr;
                 AddPin(layout.outputs, "Exec", true);
                 break;
             }

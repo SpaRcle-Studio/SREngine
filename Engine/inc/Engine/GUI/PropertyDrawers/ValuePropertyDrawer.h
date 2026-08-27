@@ -7,6 +7,8 @@
 
 #include <Engine/GUI/PropertyDrawer.h>
 
+#include <Utils/Reflection/ReflectedType.h>
+
 namespace SR_CORE_GUI_NS {
     class ObjectPropertyDrawer;
     class EnumPropertyDrawer;
@@ -25,12 +27,17 @@ namespace SR_CORE_GUI_NS {
     private:
         SR_UTILS_NS::String m_default;
         std::string m_searchBuffer;
-        bool m_comboOpened = false;
+        bool m_comboTypeOpened = false;
+        bool m_comboSizeOpened = false;
         bool m_isOpened = false;
         bool m_openedByDefault = false;
         SR_HTYPES_NS::SharedPtr<EnumPropertyDrawer> m_enumDrawer;
         SR_HTYPES_NS::SharedPtr<PropertyDrawerBase> m_drawer;
         SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> m_typeNames;
+        SR_UTILS_NS::Vector<uint8_t> m_detailedSizes;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::String> m_detailedSizesStr;
+        SR_UTILS_NS::Reflection::ReflectedCategoryType m_lastCategoryType = SR_UTILS_NS::Reflection::ReflectedCategoryType::Unknown;
+        SR_UTILS_NS::StringAtom m_lastDetailedType;
 
     };
 }

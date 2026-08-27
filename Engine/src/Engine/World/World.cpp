@@ -17,7 +17,6 @@
 
 #include <Utils/Types/RawMesh.h>
 #include <Utils/ECS/GameObject.h>
-#include <Utils/World/Scene.h>
 
 #ifdef SR_UTILS_ASSIMP
     #include <assimp/scene.h>

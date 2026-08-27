@@ -436,8 +436,14 @@ namespace SR_CORE_GUI_NS {
 
         if (!m_previewCompiled) {
             m_previewCompiled = true;
-            pGraph->Compile().SaveToString(m_previewCode);
-            SR_UTILS_NS::StringUtils::Instance().SplitView(m_previewCode, "\n", m_previewCodeLines);
+            if (auto&& program = pGraph->Compile()) {
+                program->SaveToString(m_previewCode);
+                SR_UTILS_NS::StringUtils::Instance().SplitView(m_previewCode, "\n", m_previewCodeLines);
+            }
+            else {
+                m_previewCodeLines.clear();
+                m_previewCodeLines.emplace_back("Compilation failed!");
+            }
         }
 
         for (auto&& line : m_previewCodeLines) {
@@ -585,9 +591,9 @@ namespace SR_CORE_GUI_NS {
 
     void FluxEditor::DrawConstantInspector(SR_FLUX_NS::FluxGraphNode& node) {
         auto&& constant = node.GetConstantMutable();
-        if (!constant.IsValid()) {
-            return;
-        }
+        //if (!constant.IsValid()) {
+        //    constant = SR_UTILS_NS::Reflection::Value::Create(SR_UTILS_NS::Reflection::Value());
+        //}
 
         const float_t lineHeight = SR_GRAPH_GUI_NS::Immediate::GetFontSize() + SR_GRAPH_GUI_NS::Immediate::GetFramePadding().y * 2.0f;
         const float_t windowWidth = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x;

@@ -20,6 +20,10 @@ namespace SR_CORE_GUI_NS {
         PropertyDrawerFeedback feedback;
 
         SR_UTILS_NS::Reflection::Value value = context.HasExplicitSetter() ? context.GetValue().Copy() : context.GetValue();
+        //if (value.GetTypeInfo().category != SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
+        //    SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map value property!");
+        //    return feedback;
+        //}
 
         SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
         SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
@@ -65,7 +69,10 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::EndForceEnabled(stackSize);
         }
 
-        SR_UTILS_NS::Reflection::Value* pValue = context.GetValue().Cast<SR_UTILS_NS::Reflection::Value>();
+        SR_UTILS_NS::Reflection::Value* pValue = value.Cast<SR_UTILS_NS::Reflection::Value>();
+        if (value.GetTypeInfo().category != SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
+            pValue = &value;
+        }
         SR_UTILS_NS::Reflection::ReflectedCategoryType category = pValue->GetTypeInfo().category;
 
         if (m_isOpened) {
@@ -84,6 +91,7 @@ namespace SR_CORE_GUI_NS {
             if (m_enumDrawer->Draw(enumContext).isChanged) {
                 m_drawer = nullptr;
                 m_typeNames.clear();
+                m_detailedSizes.clear();
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(false);
                 }
@@ -96,10 +104,23 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
+        if (m_lastCategoryType != category) {
+            m_lastCategoryType = category;
+            m_drawer = nullptr;
+            m_typeNames.clear();
+            m_detailedSizes.clear();
+        }
+
         if (m_typeNames.empty()) {
             SR_UTILS_NS::Reflection::GetTypeNamesByCategory(category, m_typeNames);
         }
 
+        if (m_lastDetailedType != pValue->GetTypeInfo().detailedType) {
+            m_lastDetailedType = pValue->GetTypeInfo().detailedType;
+            m_drawer = nullptr;
+        }
+
+        /// select detailed type
         if (m_isOpened && !m_typeNames.empty()) {
             SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>::iterator pTypeNameIt = m_typeNames.end();
 
@@ -111,10 +132,10 @@ namespace SR_CORE_GUI_NS {
 
             SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth + context.fieldTitleWidth);
 
-            if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("##Combo", pPrevValue, SR_GRAPH_GUI_NS::Immediate::ComboFlags::NoArrowButton)) {
-                if (!m_comboOpened) {
+            if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("Type##Combo", pPrevValue, SR_GRAPH_GUI_NS::Immediate::ComboFlags::NoArrowButton)) {
+                if (!m_comboTypeOpened) {
                     SR_GRAPH_GUI_NS::Immediate::SetKeyboardFocusHere();
-                    m_comboOpened = true;
+                    m_comboTypeOpened = true;
                 }
 
                 if (SR_GRAPH_GUI_NS::Immediate::InputText("##Search", &m_searchBuffer)) {
@@ -127,8 +148,7 @@ namespace SR_CORE_GUI_NS {
                     }
 
                     bool isSelected = (selectedIndex == i);
-                    if (SR_GRAPH_GUI_NS::Immediate::Selectable(m_typeNames[i].data(), isSelected))
-                    {
+                    if (SR_GRAPH_GUI_NS::Immediate::Selectable(m_typeNames[i].data(), isSelected)) {
                         selectedIndex = i;
                         m_searchBuffer = m_typeNames[i];
                         SR_GRAPH_GUI_NS::Immediate::CloseCurrentPopup();
@@ -141,7 +161,7 @@ namespace SR_CORE_GUI_NS {
                 SR_GRAPH_GUI_NS::Immediate::EndCombo();
             }
             else {
-                m_comboOpened = false;
+                m_comboTypeOpened = false;
                 m_searchBuffer.clear();
             }
 
@@ -154,6 +174,78 @@ namespace SR_CORE_GUI_NS {
                 auto&& pTypeInfo = SR_UTILS_NS::Reflection::AllocateTypeInfo();
                 pTypeInfo->category = category;
                 pTypeInfo->detailedType = m_typeNames[*selectedIndex];
+                SR_UTILS_NS::Reflection::FindVTable(*pTypeInfo);
+                *pValue = SR_UTILS_NS::Reflection::Value::CreateDefault(pTypeInfo);
+                SR_UTILS_NS::Reflection::FreeTypeInfo(pTypeInfo);
+                feedback.isChanged = true;
+                m_drawer = nullptr;
+                m_detailedSizes.clear();
+            }
+        }
+
+        if (m_detailedSizes.empty()) {
+            SR_UTILS_NS::Reflection::GetTypeDetailedSizes(category, m_lastDetailedType, m_detailedSizes);
+            m_detailedSizesStr.clear();
+            for (auto&& size : m_detailedSizes) {
+                m_detailedSizesStr.emplace_back(SR_FORMAT("{}", size));
+            }
+        }
+
+        /// select detailed size
+        if (m_isOpened && !m_detailedSizes.empty()) {
+            SR_UTILS_NS::Vector<uint8_t>::iterator pSizeIt = m_detailedSizes.end();
+
+            auto&& size = pValue->GetTypeInfo().detailedSize;
+            pSizeIt = std::find(m_detailedSizes.begin(), m_detailedSizes.end(), size);
+
+            std::optional<uint64_t> selectedIndex = pSizeIt != m_detailedSizes.end() ? std::make_optional(m_detailedSizes.distance(pSizeIt)) : std::nullopt;
+            const char* pPrevValue = selectedIndex.has_value() ? m_detailedSizesStr[selectedIndex.value()].c_str() : m_default.c_str();
+
+            SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth + context.fieldTitleWidth);
+
+            if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("Size##SizeCombo", pPrevValue, SR_GRAPH_GUI_NS::Immediate::ComboFlags::NoArrowButton)) {
+                if (!m_comboSizeOpened) {
+                    SR_GRAPH_GUI_NS::Immediate::SetKeyboardFocusHere();
+                    m_comboSizeOpened = true;
+                }
+
+                if (SR_GRAPH_GUI_NS::Immediate::InputText("##SizeSearch", &m_searchBuffer)) {
+                    SR_NOOP;
+                }
+
+                for (uint64_t i = 0; i < m_detailedSizes.size(); ++i) {
+                    if (!m_searchBuffer.empty() && !SR_UTILS_NS::StringUtils::CheckSearchMatch(m_searchBuffer, m_detailedSizesStr[i])) {
+                        continue;
+                    }
+
+                    bool isSelected = (selectedIndex == i);
+                    if (SR_GRAPH_GUI_NS::Immediate::Selectable(m_detailedSizesStr[i].c_str(), isSelected)) {
+                        selectedIndex = i;
+                        m_searchBuffer = m_detailedSizesStr[i];
+                        SR_GRAPH_GUI_NS::Immediate::CloseCurrentPopup();
+                    }
+
+                    if (isSelected) {
+                        SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
+                    }
+                }
+                SR_GRAPH_GUI_NS::Immediate::EndCombo();
+            }
+            else {
+                m_comboSizeOpened = false;
+                m_searchBuffer.clear();
+            }
+
+            SR_IMMEDIATE_GUI_NS::PopItemWidth();
+
+            if (selectedIndex && m_detailedSizes[*selectedIndex] != size) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(false);
+                }
+                auto&& pTypeInfo = SR_UTILS_NS::Reflection::AllocateTypeInfo();
+                pTypeInfo->category = category;
+                pTypeInfo->detailedType = m_lastDetailedType;
+                pTypeInfo->detailedSize = m_detailedSizes[*selectedIndex];
                 SR_UTILS_NS::Reflection::FindVTable(*pTypeInfo);
                 *pValue = SR_UTILS_NS::Reflection::Value::CreateDefault(pTypeInfo);
                 SR_UTILS_NS::Reflection::FreeTypeInfo(pTypeInfo);
@@ -200,7 +292,13 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::PopID();
         SR_GRAPH_GUI_NS::Immediate::PopID();
 
-        SetValue(context, feedback, value);
+        const bool needForceSet = context.pValue && feedback.isChanged && value.GetTypeInfo().category != SR_UTILS_NS::Reflection::ReflectedCategoryType::Value;
+        if (needForceSet) {
+            *context.pValue = value.Copy();
+        }
+        else {
+            SetValue(context, feedback, value);
+        }
 
         return feedback;
     }

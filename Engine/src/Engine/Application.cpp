@@ -4,6 +4,7 @@
 
 #include <Engine/Application.h>
 #include <Engine/World/World.h>
+#include <Engine/Engine.h>
 
 #include <Graphics/Types/Shader.h>
 #include <Graphics/Memory/CameraManager.h>
