@@ -59,6 +59,7 @@ namespace SR_CORE_NS {
         float_t m_speed = 1.f;
         float_t m_updateFrequency = 1.f;
         float_t m_accumulator = 1.f;
+        SR_MATH_NS::FVector2 m_mouseDragAccumulator;
         bool m_accumulateDt = false;
 
     };

@@ -107,6 +107,7 @@ class CPPMethod:
         self.condition = None
         self.editor_button = False
         self.evaluate = False
+        self.dontPack = False
 
     def add_parameter(self, parameter: CPPParameter):
         self.parameters.append(parameter)

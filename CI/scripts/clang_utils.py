@@ -649,6 +649,7 @@ def parse_sparcle_class(logger, context: codegen_context.CodegenContext, parent_
                 method_obj.condition = extract_special_tag_comment_data(child, 'condition')
                 method_obj.editor_button = has_special_tag_comment(child, 'editorButton')
                 method_obj.evaluate = has_special_tag_comment(child, 'evaluate')
+                method_obj.dontPack = has_special_tag_comment(child, 'dontPack')
                 for param in child.get_children():
                     if param.kind == clang.cindex.CursorKind.PARM_DECL:
                         param_name = param.spelling

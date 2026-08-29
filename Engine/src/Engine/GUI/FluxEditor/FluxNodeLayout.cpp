@@ -111,11 +111,8 @@ namespace SR_CORE_GUI_NS {
 
                 if (pNode->GetType() == SR_FLUX_NS::FluxGraphNodeType::Invoke) {
                     AddPin(layout.inputs, "Exec", true);
-                    SR_UTILS_NS::FormatTo(layout.title, "{}.{}", callable.object, callable.function);
                 }
-                else {
-                    SR_UTILS_NS::FormatTo(layout.title, "= {}.{}", callable.object, callable.function);
-                }
+                SR_UTILS_NS::FormatTo(layout.title, "{}.{}", callable.object, callable.function);
                 if (!SR_UTILS_NS::GetSingletonManager()->GetSingletonMeta(callable.object.GetHash())) {
                     AddPin(layout.inputs, "Object").pTypeInfo = MakeClassTypeInfo(callable.object, tmpTypeInfos);
                 }
@@ -134,7 +131,7 @@ namespace SR_CORE_GUI_NS {
                 break;
             }
             case SR_FLUX_NS::FluxGraphNodeType::Constant: {
-                SR_UTILS_NS::FormatTo(layout.title, "Const: {} ({})", GetFluxValueTypeName(pNode->GetConstant()), GetFluxValuePreview(pNode->GetConstant()));
+                SR_UTILS_NS::FormatTo(layout.title, "Const: {}", GetFluxValueTypeName(pNode->GetConstant()));
                 AddPin(layout.outputs, "Value").pTypeInfo = &pNode->GetConstant().GetTypeInfo();
                 break;
             }
@@ -194,6 +191,19 @@ namespace SR_CORE_GUI_NS {
                 AddPin(layout.outputs, "Cast Failed", true);
                 const std::string resultPinName = name.empty() ? std::string("As Object") : SR_FORMAT("As {}", name);
                 AddPin(layout.outputs, resultPinName).pTypeInfo = MakeClassTypeInfo(name, tmpTypeInfos);
+                break;
+            }
+            case SR_FLUX_NS::FluxGraphNodeType::Sequence:
+            case SR_FLUX_NS::FluxGraphNodeType::ParallelSequence: {
+                const bool isParallel = pNode->GetType() == SR_FLUX_NS::FluxGraphNodeType::ParallelSequence;
+                layout.title = isParallel ? "Parallel Sequence" : "Sequence";
+                AddPin(layout.inputs, "Exec", true);
+                /// количество шагов не ограничено, поэтому показываем занятые пины плюс один
+                /// свободный, чтобы можно было подключить следующий шаг
+                const uint32_t maxPin = graph.GetMaxOutputPin(nodeIndex);
+                for (uint32_t i = 0; i <= maxPin + 1; ++i) {
+                    AddPin(layout.outputs, isParallel ? SR_FORMAT("Branch {}", i) : SR_FORMAT("Then {}", i), true);
+                }
                 break;
             }
             default:

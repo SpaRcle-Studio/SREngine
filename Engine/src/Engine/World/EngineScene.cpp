@@ -206,14 +206,26 @@ namespace SR_CORE_NS {
             m_accumulator = 0.f;
         }
 
-        /// fixed update
-        if (m_accumulator >= m_updateFrequency)
-        {
-            while (m_accumulator >= m_updateFrequency)
+        const auto steps = static_cast<uint32_t>(m_accumulator / m_updateFrequency);
+        auto&& mouseDeltaOriginal = SR_UTILS_NS::Input::Instance().GetMouseDrag();
+        if (steps > 0) {
+            SR_MATH_NS::FVector2 mouseDelta = (m_mouseDragAccumulator + mouseDeltaOriginal) / static_cast<float_t>(steps);
+            SR_UTILS_NS::Input::Instance().SetMouseDrag(mouseDelta);
+
+            /// fixed update
+            if (m_accumulator >= m_updateFrequency)
             {
-                FixedStep(isPaused);
-                m_accumulator -= m_updateFrequency;
+                while (m_accumulator >= m_updateFrequency)
+                {
+                    FixedStep(isPaused);
+                    m_accumulator -= m_updateFrequency;
+                }
             }
+            SR_UTILS_NS::Input::Instance().SetMouseDrag(mouseDeltaOriginal);
+            m_mouseDragAccumulator = {};
+        }
+        else {
+            m_mouseDragAccumulator += mouseDeltaOriginal;
         }
 
         pSceneUpdater->LateUpdate(isPaused);

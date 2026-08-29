@@ -106,8 +106,15 @@ namespace SR_CORE_GUI_NS {
 
         SR_NODISCARD SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext> GetRenderContext() const;
 
+        std::optional<uint64_t> SearchComboBox(const PropertyDrawerContext& context,
+                            const SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>& types,
+                            bool& comboOpened,
+                            std::optional<SR_UTILS_NS::StringAtom> activeType,
+                            SR_UTILS_NS::StringView defaultValue);
+
     private:
         mutable SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext> m_context;
+        std::string m_searchBuffer;
 
     };
 

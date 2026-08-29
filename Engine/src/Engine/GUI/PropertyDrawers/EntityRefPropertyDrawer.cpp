@@ -45,6 +45,24 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth);
 
+        if (auto&& pEntityRefDynamic = dynamic_cast<SR_UTILS_NS::EntityRefDynamic*>(value.GetSRClass())) {
+            const auto currentType = pEntityRefDynamic->GetTypeName();
+            if (m_typeNames.empty()) {
+                m_typeNames.emplace_back(SR_UTILS_NS::Factory::Instance().GetType(SR_UTILS_NS::Entity::GetClassStaticName())->GetFactoryName());
+                for (auto&& type : SR_UTILS_NS::Factory::Instance().GetInheritances(SR_UTILS_NS::Entity::GetClassStaticName())) {
+                    m_typeNames.emplace_back(type);
+                }
+            }
+            auto&& selected = SearchComboBox(context, m_typeNames, m_comboOpened, currentType, SR_UTILS_NS::StringView());
+            if (selected && m_typeNames[*selected] != currentType) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(false);
+                }
+                feedback.isChanged = true;
+                pEntityRefDynamic->SetTypeName(m_typeNames[*selected]);
+            }
+        }
+
         if (auto&& pEntityRef = dynamic_cast<SR_UTILS_NS::EntityRefBase*>(value.GetSRClass())) {
             SR_UTILS_NS::StringAtom entityType = pEntityRef->GetTypeName();
             if (pEntityRef->GetEntity()) {

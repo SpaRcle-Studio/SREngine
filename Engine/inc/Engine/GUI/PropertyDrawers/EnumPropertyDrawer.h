@@ -14,6 +14,12 @@ namespace SR_CORE_GUI_NS {
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
 
     private:
+        void DrawSelectable(const PropertyDrawerContext& context, PropertyDrawerFeedback& feedback,
+                                SR_UTILS_NS::EnumReflector* pReflector, void* pMappedRaw);
+        void DrawFlags(const PropertyDrawerContext& context, PropertyDrawerFeedback& feedback,
+                                SR_UTILS_NS::EnumReflector* pReflector, void* pMappedRaw);
+
+    private:
         std::string m_searchBuffer;
         bool m_comboOpened = false;
 

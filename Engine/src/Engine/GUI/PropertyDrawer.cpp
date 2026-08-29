@@ -25,7 +25,7 @@ namespace SR_CORE_GUI_NS {
         return pProperty->Get(pOwner);
     }
 
-    SR_UTILS_NS::StringAtom GetValueInspector(const SR_UTILS_NS::Reflection::Value& value) {
+    SR_UTILS_NS::StringAtom GetValueInspectorInternal(const SR_UTILS_NS::Reflection::Value& value) {
         SR_TRACY_ZONE;
 
         auto&& typeInfo = value.GetTypeInfo();
@@ -94,6 +94,18 @@ namespace SR_CORE_GUI_NS {
         }
     }
 
+    SR_UTILS_NS::StringAtom GetValueInspector(const SR_UTILS_NS::Reflection::Value& value) {
+        SR_TRACY_ZONE;
+        SR_UTILS_NS::StringAtom inspector = GetValueInspectorInternal(value);
+        if (inspector == ObjectPropertyDrawer::GetClassStaticName()) {
+            /// возможно, это не безопасно, и может привести к UB
+            if (SR_UTILS_NS::SRClass* pValueClass = value.GetSRClass()) {
+                inspector = pValueClass->GetMeta()->GetInspectorName();
+            }
+        }
+        return inspector;
+    }
+
     SR_GRAPH_NS::RenderContext::Ptr PropertyDrawerBase::GetRenderContext() const {
         if (m_context) {
             return m_context;
@@ -123,6 +135,65 @@ namespace SR_CORE_GUI_NS {
             SRAssert2(value.SizeOf() == context.pValue->SizeOf(), "PropertyDrawerBase::SetReflectedValue() : size mismatch!");
             std::memcpy(context.pValue->Data(), value.Data(), value.SizeOf());
         }
+    }
+
+    std::optional<uint64_t> PropertyDrawerBase::SearchComboBox(const PropertyDrawerContext& context, const SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>& types, bool& comboOpened,
+                                            std::optional<SR_UTILS_NS::StringAtom> activeType, SR_UTILS_NS::StringView defaultValue
+    ) {
+        SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>::const_iterator pTypeIt = types.end();
+
+        if (activeType) {
+            pTypeIt = std::find(types.begin(), types.end(), activeType);
+        }
+
+        std::optional<uint64_t> selectedIndex = pTypeIt != types.end() ? std::make_optional(std::distance(types.begin(), pTypeIt)) : std::nullopt;
+        const char* pPrevValue = selectedIndex.has_value() ? types[selectedIndex.value()].data() : defaultValue.c_str();
+
+        SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth);
+
+        if (types.size() < 1) {
+            SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
+        }
+
+        if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("##Combo", pPrevValue, SR_GRAPH_GUI_NS::Immediate::ComboFlags::NoArrowButton)) {
+            if (!comboOpened) {
+                SR_GRAPH_GUI_NS::Immediate::SetKeyboardFocusHere();
+                comboOpened = true;
+            }
+
+            if (SR_GRAPH_GUI_NS::Immediate::InputText("##Search", &m_searchBuffer)) {
+                SR_NOOP;
+            }
+
+            for (uint64_t i = 0; i < types.size(); ++i) {
+                if (!m_searchBuffer.empty() && !SR_UTILS_NS::StringUtils::CheckSearchMatch(m_searchBuffer, types[i])) {
+                    continue;
+                }
+
+                bool isSelected = (selectedIndex == i);
+                if (SR_GRAPH_GUI_NS::Immediate::Selectable(types[i].data(), isSelected))
+                {
+                    selectedIndex = i;
+                    m_searchBuffer = types[i];
+                    SR_GRAPH_GUI_NS::Immediate::CloseCurrentPopup();
+                }
+
+                if (isSelected) {
+                    SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
+                }
+            }
+            SR_GRAPH_GUI_NS::Immediate::EndCombo();
+        }
+        else {
+            comboOpened = false;
+            m_searchBuffer.clear();
+        }
+
+        if (types.size() < 1) {
+            SR_GRAPH_GUI_NS::Immediate::EndDisabled();
+        }
+
+        return selectedIndex;
     }
 
     PropertyDrawerFeedback BoolPropertyDrawer::Draw(const PropertyDrawerContext& context) {

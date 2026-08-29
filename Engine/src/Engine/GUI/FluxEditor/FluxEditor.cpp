@@ -56,7 +56,7 @@ namespace SR_CORE_GUI_NS {
     void FluxEditor::Init() {
         Super::Init();
 
-        m_valueDrawer = new ValuePropertyDrawer();
+        m_valueDrawers.emplace_back(new ValuePropertyDrawer());
 
         m_onCommandRedoSubscription = SR_UTILS_NS::Broadcaster::Instance().Subscribe(SR_UTILS_NS::Events::EVENT_ON_COMMAND_REDO_ID, [this](const SR_UTILS_NS::SubscriptionMessage& msg) {
             m_skipInspect = true;
@@ -463,6 +463,9 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::FrameRounding, 0.0f);
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+
         if (SR_GRAPH_GUI_NS::Immediate::BeginTabBar("InspectorTabs")) {
             if (SR_GRAPH_GUI_NS::Immediate::BeginTabItem("Inspector")) {
                 if (auto&& pNode = GetSelectedNode()) {
@@ -479,6 +482,8 @@ namespace SR_CORE_GUI_NS {
             }
             SR_GRAPH_GUI_NS::Immediate::EndTabBar();
         }
+
+        SR_IMMEDIATE_GUI_NS::PopStyleVar(2);
     }
 
     void FluxEditor::DrawNodeInspector(SR_FLUX_NS::FluxGraphNode& node) {
@@ -591,9 +596,6 @@ namespace SR_CORE_GUI_NS {
 
     void FluxEditor::DrawConstantInspector(SR_FLUX_NS::FluxGraphNode& node) {
         auto&& constant = node.GetConstantMutable();
-        //if (!constant.IsValid()) {
-        //    constant = SR_UTILS_NS::Reflection::Value::Create(SR_UTILS_NS::Reflection::Value());
-        //}
 
         const float_t lineHeight = SR_GRAPH_GUI_NS::Immediate::GetFontSize() + SR_GRAPH_GUI_NS::Immediate::GetFramePadding().y * 2.0f;
         const float_t windowWidth = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x;
@@ -615,7 +617,7 @@ namespace SR_CORE_GUI_NS {
                 m_previewCompiled = false;
             }
         };
-        m_valueDrawer->Draw(context);
+        m_valueDrawers.back()->Draw(context);
     }
 
     void FluxEditor::OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) {
@@ -700,38 +702,54 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::StringAtom variableToRemove;
 
+        uint32_t index = 0;
         for (auto&& [name, value] : pGraph->GetVariables()) {
             SR_GRAPH_GUI_NS::Immediate::PushID(name.c_str());
 
             if (SR_GRAPH_GUI_NS::Immediate::Button("X")) {
                 variableToRemove = name;
             }
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::SameLine();
 
-            const float_t lineHeight = SR_GRAPH_GUI_NS::Immediate::GetFontSize() + SR_GRAPH_GUI_NS::Immediate::GetFramePadding().y * 2.0f;
-            const float_t windowWidth = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x;
+            const float_t windowWidth = SR_IMMEDIATE_GUI_NS::GetWindowSize().x;
 
-            PropertyDrawerContext context(&value);
-            context.openedByDefault = true;
-            context.lineHeight = lineHeight;
-            context.customDisplayName = name;
-            context.axisButtonWidth = context.lineHeight;
-            context.spaceWidth = windowWidth;
-            context.fieldHeight = lineHeight;
-            context.fieldTitleWidth = windowWidth * 0.3f;
-            context.fieldWidth = windowWidth * 0.7f;
-            context.noHeader = true;
+            if (SR_IMMEDIATE_GUI_NS::CollapsingHeader(name.c_str(), SR_IMMEDIATE_GUI_NS::TreeNodeFlags::None)) {
+                const float_t lineHeight = SR_IMMEDIATE_GUI_NS::GetFontSize() + SR_IMMEDIATE_GUI_NS::GetFramePadding().y * 2.0f;
+                SR_IMMEDIATE_GUI_NS::Dummy(SR_MATH_NS::FVector2(windowWidth * 0.1f, 0.0f));
+                SR_IMMEDIATE_GUI_NS::SameLine();
+                SR_IMMEDIATE_GUI_NS::BeginGroup();
+                const float_t groupWidth = windowWidth * 0.9f;
 
-            context.onBeforeChangeCallback = [this](bool) {
-                if (!m_serializer && m_graphAsset) {
-                    m_serializer = SR_CORE_NS::Commands::CreateSerializer();
-                    SR_UTILS_NS::Serialization::Save(*m_serializer, *m_graphAsset, SR_UTILS_NS::COMMAND_DATA_ID);
-                    m_previewCompiled = false;
+                PropertyDrawerContext context(&value);
+                context.openedByDefault = true;
+                context.lineHeight = lineHeight;
+                context.customDisplayName = name;
+                context.axisButtonWidth = context.lineHeight;
+                context.spaceWidth = groupWidth;
+                context.fieldHeight = lineHeight;
+                context.fieldTitleWidth = groupWidth * 0.3f;
+                context.fieldWidth = groupWidth * 0.7f;
+                context.noHeader = true;
+
+                context.onBeforeChangeCallback = [this](bool) {
+                    if (!m_serializer && m_graphAsset) {
+                        m_serializer = SR_CORE_NS::Commands::CreateSerializer();
+                        SR_UTILS_NS::Serialization::Save(*m_serializer, *m_graphAsset, SR_UTILS_NS::COMMAND_DATA_ID);
+                        m_previewCompiled = false;
+                    }
+                };
+                if (m_valueDrawers.size() <= index) {
+                    m_valueDrawers.resize(index + 1);
                 }
-            };
-            m_valueDrawer->Draw(context);
-
+                if (!m_valueDrawers[index]) {
+                    m_valueDrawers[index] = new ValuePropertyDrawer();
+                    continue;
+                }
+                m_valueDrawers[index]->Draw(context);
+                SR_GRAPH_GUI_NS::Immediate::EndGroup();
+            }
             SR_GRAPH_GUI_NS::Immediate::PopID();
+            index++;
         }
 
         if (!variableToRemove.empty()) {
@@ -809,11 +827,12 @@ namespace SR_CORE_GUI_NS {
         const SR_UTILS_NS::String& labelName = pProgram->labels.front().name;
         SR_LOG("FluxEditor::Execute() : emitting event \"{}\"...", labelName);
 
-        runtime.Emit(labelName, {}, false);
+        runtime.Emit(labelName, {}, Utils::Flux::UpdateMode::Any);
 
         /// программа исполняется по тикам, поэтому крутим её до завершения всех точек входа
         for (uint32_t tick = 0; tick < 16 && !runtime.m_executions.empty(); ++tick) {
-            runtime.Update(runtime.m_tickDuration);
+            runtime.Update(runtime.m_tickDuration, Utils::Flux::UpdateMode::Update);
+            runtime.Update(runtime.m_tickDuration, Utils::Flux::UpdateMode::FixedUpdate);
         }
     }
 }

@@ -81,7 +81,7 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::String m_previewCode;
         SR_UTILS_NS::String m_previewLine;
         SR_UTILS_NS::Vector<SR_UTILS_NS::StringView> m_previewCodeLines;
-        ValuePropertyDrawer::Ptr m_valueDrawer;
+        SR_UTILS_NS::Vector<ValuePropertyDrawer::Ptr> m_valueDrawers;
 
         SR_UTILS_NS::Vector<SR_FLUX_NS::FluxGraphLink> m_brokenLinks;
         SR_UTILS_NS::Vector<SR_IMMEDIATE_GUI_NS::NodeInstance*> m_nodes;

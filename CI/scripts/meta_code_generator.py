@@ -92,7 +92,10 @@ def generate_class_meta_methods(f, class_structures, class_obj, tabs):
         if not is_method_has_params:
             if is_method_has_return:
                 f.write('\n' + '\t' * (tabs + 3) + f'.SetWithReturnNoParams([](SpaRcle::Utils::SRClass& obj) {{ ')
-                f.write(f'return SpaRcle::Utils::Reflection::Value::Create(static_cast<{class_obj.name}&>(obj).{method.name}()); ')
+                if method.dontPack:
+                    f.write(f'return static_cast<{class_obj.name}&>(obj).{method.name}(); ')
+                else:
+                    f.write(f'return SpaRcle::Utils::Reflection::Value::Create(static_cast<{class_obj.name}&>(obj).{method.name}()); ')
                 f.write('})')
             else:
                 f.write('\n' + '\t' * (tabs + 3) + f'.SetNoReturnNoParams([](SpaRcle::Utils::SRClass& obj) {{ ')
@@ -109,7 +112,10 @@ def generate_class_meta_methods(f, class_structures, class_obj, tabs):
                 f.write('\t' * (tabs + 4) + f'auto&& arg{i} = params[{i}]->Cast<std::remove_reference_t<{param.type.get_full_type()}>>();\n')
 
             if is_method_has_return:
-                f.write('\t' * (tabs + 4) + f'return SpaRcle::Utils::Reflection::Value::Create(static_cast<{class_obj.name}&>(obj).{method.name}(')
+                if method.dontPack:
+                    f.write('\t' * (tabs + 4) + f'return static_cast<{class_obj.name}&>(obj).{method.name}(')
+                else:
+                    f.write('\t' * (tabs + 4) + f'return SpaRcle::Utils::Reflection::Value::Create(static_cast<{class_obj.name}&>(obj).{method.name}(')
             else:
                 f.write('\t' * (tabs + 4) + f'static_cast<{class_obj.name}&>(obj).{method.name}(')
 
@@ -117,7 +123,7 @@ def generate_class_meta_methods(f, class_structures, class_obj, tabs):
                 if i > 0:
                     f.write(', ')
                 f.write(f'*arg{i}')
-            if is_method_has_return:
+            if is_method_has_return and not method.dontPack:
                 f.write('));\n')
             else:
                 f.write(');\n')

@@ -437,6 +437,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         static constexpr float Padding = 8.f;
         static constexpr float PinIconWidth = 24.f;
         static constexpr float HeaderRounding = 11.f;
+        static constexpr float HeaderSuperRounding = 20.f;
         static constexpr float MinWidth = 200.f;
         static constexpr float MinContentHeight = 50.f;
     public:
@@ -444,7 +445,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
             : NodeInstance(pEditor)
         { }
 
-        float_t DrawHeader();
+        float_t DrawHeader(bool rounded);
         float_t CalculatePinMaxWidth(bool input);
 
         LinkInstance* LinkTo(NodeInstance* pTargetNode, uint32_t sourcePin, uint32_t targetPin) override;
@@ -545,6 +546,9 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         }
 
         if (*pFrom != *pTo) {
+            if (pFrom->category == Utils::Reflection::ReflectedCategoryType::Value) {
+                return true;
+            }
             if (pFrom->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Container && pFrom->detailedType == "SharedPtr") {
                 if (pTo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Object) {
                     return pFrom->pNext[0]->detailedType == pTo->detailedType;
@@ -554,6 +558,9 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
                 return pFrom->detailedType == "String" && pTo->detailedType == "StringView";
             }
             if (pFrom->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Arithmetic && pTo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum) {
+                return true;
+            }
+            if (pFrom->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum && pTo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Arithmetic) {
                 return true;
             }
             return false;
@@ -697,7 +704,10 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         m_focused = ax::NodeEditor::IsActive();
         m_hovered = m_focused;
 
-        ax::NodeEditor::End();
+        {
+            SR_TRACY_ZONE_N("NodeEditorInstanceNEImpl::Draw::End");
+            ax::NodeEditor::End();
+        }
 
         for (auto&& pNode : m_nodes) {
             static_cast<NodeInstanceNEImpl*>(pNode)->FetchPosition();
@@ -839,7 +849,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
 
     /// ================================================================================================================
 
-    float_t NodeInstanceNEImpl::DrawHeader() {
+    float_t NodeInstanceNEImpl::DrawHeader(bool rounded) {
         SR_TRACY_ZONE;
 
         ImDrawList* drawList = ImGui::GetWindowDrawList();
@@ -892,7 +902,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
             ImVec2 padding = ImVec2(6.8, paddingY);
             ImVec2 pos = ImGui::GetCursorScreenPos() - padding;
             ImGui::Dummy(ImVec2(width, Height)); /// резервируем место
-            drawList->AddRectFilled(pos, ImVec2(pos.x + width + padding.x * 2.f, pos.y + Height), ImGui::ColorConvertFloat4ToU32(imColor), HeaderRounding, ImDrawFlags_RoundCornersTop);
+            drawList->AddRectFilled(pos, ImVec2(pos.x + width + padding.x * 2.f, pos.y + Height), ImGui::ColorConvertFloat4ToU32(imColor), rounded ? HeaderSuperRounding : HeaderRounding, ImDrawFlags_RoundCornersTop);
             drawList->AddText(ImVec2(pos.x + (width - textSize.x) * 0.5f, pos.y + (Height - textSize.y) * 0.5f), useBlack ? IM_COL32_BLACK : IM_COL32_WHITE, m_title.c_str());
         }
         return width;
@@ -922,17 +932,25 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         if (GetEditor()->GetStyleType() == NodeEditorStyleType::StateMachine) {
             ax::NodeEditor::PushStyleVar(ax::NodeEditor::StyleVar_NodeRounding, 2.f);
             ax::NodeEditor::BeginNode(ax::NodeEditor::NodeId(this));
-            DrawHeader();
+            DrawHeader(false);
             ax::NodeEditor::EndNode();
             ax::NodeEditor::PopStyleVar();
         }
         else if (GetEditor()->GetStyleType() == NodeEditorStyleType::Graph) {
+            const bool hasFlow =
+                std::ranges::any_of(m_inputPins, [](auto&& pPin) { return pPin->GetType().isFlow; }) ||
+                std::ranges::any_of(m_outputPins, [](auto&& pPin) { return pPin->GetType().isFlow; });
+
+            ax::NodeEditor::PushStyleVar(ax::NodeEditor::StyleVar_NodeRounding, hasFlow ? HeaderRounding : HeaderSuperRounding);
+
             ax::NodeEditor::BeginNode(ax::NodeEditor::NodeId(this));
 
-            const float_t width = DrawHeader();
+            const float_t minHeight = MinContentHeight / 2.f;
+
+            const float_t width = DrawHeader(!hasFlow);
             const float_t outputPinMaxWidth = CalculatePinMaxWidth(false);
             const float_t maxPins = std::max(m_inputPins.size(), m_outputPins.size());
-            const float_t height = std::max(MinContentHeight, maxPins * ImGui::GetFrameHeightWithSpacing() + Padding * 2.f);
+            const float_t height = std::max(minHeight, maxPins * (ImGui::GetFrameHeightWithSpacing() / 2.5f) + Padding * 2.f);
 
             ImGui::Spacing();
 
@@ -976,11 +994,13 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
                 }
             }
 
+            ax::NodeEditor::PopStyleVar();
+
             ImGui::EndTable();
             ax::NodeEditor::EndNode();
         }
 
-        ax::NodeEditor::SetNodePosition(ax::NodeEditor::NodeId(this), F2ToImV2(m_position));
+        ax::NodeEditor::SetNodePosition(ax::NodeEditor::NodeId(this), F2ToImV2(m_position.Round()));
 
         const auto nodeMin = SR_GRAPH_GUI_NS::Immediate::GetItemRectMin();
         const auto nodeMax = SR_GRAPH_GUI_NS::Immediate::GetItemRectMax();

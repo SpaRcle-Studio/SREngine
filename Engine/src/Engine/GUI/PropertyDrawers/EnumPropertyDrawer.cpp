@@ -29,11 +29,6 @@ namespace SR_CORE_GUI_NS {
             return feedback;
         }
 
-        if (pReflector->GetEnumVariantInternal() == SR_UTILS_NS::EnumVariant::Flags) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Flags are not supported!");
-            return feedback;
-        }
-
         SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
         SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
 
@@ -54,13 +49,54 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::SameLine();
         }
 
-        void* pMappedRaw = value.Data();
+        SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth);
+        if (pReflector->GetEnumVariantInternal() == SR_UTILS_NS::EnumVariant::Flags) {
+            DrawFlags(context, feedback, pReflector, value.Data());
+        }
+        else {
+            DrawSelectable(context, feedback, pReflector, value.Data());
+        }
+        SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+
+        SetValue(context, feedback, value);
+
+        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+
+        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_GRAPH_GUI_NS::Immediate::PopID();
+
+        return feedback;
+    }
+
+    void EnumPropertyDrawer::DrawFlags(const PropertyDrawerContext& context, PropertyDrawerFeedback& feedback, SR_UTILS_NS::EnumReflector* pReflector, void* pMappedRaw) {
         int64_t enumValue = pReflector->ReadEnumValueFromPointerInternal(pMappedRaw);
         auto&& names = pReflector->GetNamesInternal();
 
-        std::optional<uint64_t> selectedIndex = pReflector->GetIndexInternal(enumValue);
+        for (uint64_t i = 0; i < names.size(); ++i) {
+            const auto value = pReflector->AtInternal(i).value();
+            if (value == 0) {
+                continue;
+            }
+            bool isSelected = (enumValue & value) != 0;
+            if (SR_GRAPH_GUI_NS::Immediate::Checkbox(names[i].c_str(), &isSelected)) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(false);
+                }
+                if (isSelected) {
+                    enumValue |= value;
+                }
+                else {
+                    enumValue &= ~value;
+                }
+                pReflector->WriteEnumValueToPointerInternal(pMappedRaw, enumValue);
+                feedback.isChanged = true;
+            }
+        }
+    }
 
-        SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth);
+    void EnumPropertyDrawer::DrawSelectable(const PropertyDrawerContext& context, PropertyDrawerFeedback& feedback, SR_UTILS_NS::EnumReflector* pReflector, void* pMappedRaw) {
+        int64_t enumValue = pReflector->ReadEnumValueFromPointerInternal(pMappedRaw);
+        auto&& names = pReflector->GetNamesInternal();
 
         auto&& isEnumNameAvailable = [&](SR_UTILS_NS::StringAtom name) -> bool {
             if (context.isEnumValueAvailableCheckFn && !context.isEnumValueAvailableCheckFn(name)) {
@@ -77,6 +113,7 @@ namespace SR_CORE_GUI_NS {
             return true;
         };
 
+        std::optional<uint64_t> selectedIndex = pReflector->GetIndexInternal(enumValue);
         const char* pPrevValue = selectedIndex ? names[selectedIndex.value()].c_str() : "";
         if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("##Combo", pPrevValue, SR_GRAPH_GUI_NS::Immediate::ComboFlags::NoArrowButton)) {
             if (!m_comboOpened) {
@@ -127,8 +164,6 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
-
         if (selectedIndex) {
             int64_t newEnumValue = pReflector->AtInternal(selectedIndex.value()).value();
             if (newEnumValue != enumValue) {
@@ -139,14 +174,5 @@ namespace SR_CORE_GUI_NS {
                 feedback.isChanged = true;
             }
         }
-
-        SetValue(context, feedback, value);
-
-        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
-
-        SR_GRAPH_GUI_NS::Immediate::PopID();
-        SR_GRAPH_GUI_NS::Immediate::PopID();
-
-        return feedback;
     }
 }

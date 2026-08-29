@@ -16,6 +16,10 @@ namespace SR_CORE_GUI_NS {
     public:
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
 
+    private:
+        bool m_comboOpened = false;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> m_typeNames;
+
     };
 }
 
