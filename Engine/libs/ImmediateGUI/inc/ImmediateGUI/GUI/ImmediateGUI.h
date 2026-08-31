@@ -483,6 +483,8 @@ namespace SR_GRAPH_GUI_NS {
 
         SR_IMMEDIATE_GUI_DLL_API extern bool WindowsWndProcHandler(void* hWnd, uint32_t message, uint64_t wParam, uint64_t lParam);
 
+        SR_IMMEDIATE_GUI_DLL_API extern void SetEnabled(bool enabled);
+        SR_IMMEDIATE_GUI_DLL_API extern bool IsEnabled();
         SR_IMMEDIATE_GUI_DLL_API extern void SetTheme(const SR_UTILS_NS::Path& path);
         SR_IMMEDIATE_GUI_DLL_API extern uint32_t GetViewportCount(void* pContext);
         SR_IMMEDIATE_GUI_DLL_API extern void GetViewports(SR_UTILS_NS::Vector<void*>& viewports);

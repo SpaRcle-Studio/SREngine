@@ -319,75 +319,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
 
     class LinkInstanceNEImpl : public LinkInstance {
     public:
-        void Draw() override {
-            auto&& pInputPin = GetInputPin();
-            auto&& pOutputPin = GetOutputPin();
-
-            auto&& pEditor = pInputPin->GetNode()->GetEditor();
-            if (pEditor->GetStyleType() == NodeEditorStyleType::StateMachine) {
-                auto&& pSrcNode = pOutputPin->GetNode();
-                auto&& pDstNode = pInputPin->GetNode();
-
-                const bool isDoubleWay = pSrcNode->GetInputLink(pDstNode) && pDstNode->GetInputLink(pSrcNode);
-                const bool isNeedOffset = isDoubleWay && pSrcNode->GetInputLink(pDstNode) > pDstNode->GetInputLink(pSrcNode);
-
-                auto&& pDrawList = ImGui::GetWindowDrawList();
-
-                auto&& srcRect = pSrcNode->GetNodeRect();
-                auto&& dstRect = pDstNode->GetNodeRect();
-
-                const SR_MATH_NS::FVector2 srcOffset = isDoubleWay ? (isNeedOffset ? SR_MATH_NS::FVector2(0.0f, 30.0f) : SR_MATH_NS::FVector2(0.0f, -30.f)) : SR_MATH_NS::FVector2();
-                const SR_MATH_NS::FVector2 dstOffset = isDoubleWay ? (isNeedOffset ? SR_MATH_NS::FVector2(0.0f, -30.0f) : SR_MATH_NS::FVector2(0.0f, 30.f)) : SR_MATH_NS::FVector2();
-
-                const SR_MATH_NS::FVector2 srcPoint = SR_MATH_NS::ClipToRectEdge(srcRect, srcRect.Center(), dstRect.Center() + srcOffset);
-                const SR_MATH_NS::FVector2 dstPoint = SR_MATH_NS::ClipToRectEdge(dstRect, dstRect.Center() + dstOffset, srcRect.Center());
-
-                const auto defaultColor = SR_COL32(200, 200, 200, 220); /// white
-                const auto activeColor = SR_COL32(60, 220, 110, 255); /// green
-                const auto selectedColor = SR_COL32(255, 165, 0, 255); /// orange
-
-                auto&& selectedLinks = pEditor->GetSelectedLinks();
-                auto&& pSelectedLink = selectedLinks.empty() ? nullptr : selectedLinks.front();
-
-                const bool isActive = false;
-                const bool isSelected = pSelectedLink == this;
-                const uint32_t col = isSelected ? selectedColor : (isActive ? activeColor : defaultColor);
-                const float thickness = isSelected || isActive ? 3.0f : 2.0f;
-
-                const SR_MATH_NS::FVector2 dir = dstPoint - srcPoint;
-                const float len = std::sqrt(dir.x * dir.x + dir.y * dir.y);
-                const SR_MATH_NS::FVector2 nd = len > 0.001f ? (dir / len) : SR_MATH_NS::FVector2(1.0f, 0.0f);
-                const SR_MATH_NS::FVector2 perp(-nd.y, nd.x);
-
-                const float arrowLen = 10.0f;
-                const float arrowWidth = 6.0f;
-                const SR_MATH_NS::FVector2 tip = dstPoint;
-                const SR_MATH_NS::FVector2 base = tip - nd * arrowLen;
-                const SR_MATH_NS::FVector2 left = base + perp * arrowWidth;
-                const SR_MATH_NS::FVector2 right = base - perp * arrowWidth;
-                SR_GRAPH_GUI_NS::Immediate::DrawListAddTriangleFilled(pDrawList, tip, left, right, col);
-
-                SR_MATH_NS::FVector2 lineDstArrowOffset = nd * arrowLen;
-                SR_GRAPH_GUI_NS::Immediate::DrawListAddLine(pDrawList, srcPoint, dstPoint - lineDstArrowOffset, col, thickness);
-
-                if (ax::NodeEditor::IsActive()) {
-                    if (SR_GRAPH_GUI_NS::Immediate::IsMouseReleased(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left)) {
-                        const SR_MATH_NS::FVector2 mousePos = SR_GRAPH_GUI_NS::Immediate::GetMousePos();
-                        const float distToLine = SR_MATH_NS::DistanceToLineSegment(mousePos, srcPoint, dstPoint);
-                        if (distToLine < 5.0f) {
-                            pEditor->ForceSelectLink(this);
-                        }
-                        else if (pSelectedLink == this) {
-                            pEditor->ForceSelectLink(nullptr);
-                        }
-                    }
-                }
-            }
-            else {
-                const ax::NodeEditor::LinkId linkId((uintptr_t)(this));
-                ax::NodeEditor::Link(linkId, ax::NodeEditor::PinId((uintptr_t)(pInputPin)), ax::NodeEditor::PinId((uintptr_t)(pOutputPin)));
-            }
-        }
+        void Draw() override;
     };
 
     class InputPinInstanceNEImpl : public InputPinInstance {
@@ -1024,6 +956,86 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         }
         m_inputPins.clear();
         m_outputPins.clear();
+    }
+
+    void LinkInstanceNEImpl::Draw() {
+        auto&& pInputPin = GetInputPin();
+        auto&& pOutputPin = GetOutputPin();
+
+        auto&& pEditor = pInputPin->GetNode()->GetEditor();
+        if (pEditor->GetStyleType() == NodeEditorStyleType::StateMachine) {
+            auto&& pSrcNode = pOutputPin->GetNode();
+            auto&& pDstNode = pInputPin->GetNode();
+
+            const bool isDoubleWay = pSrcNode->GetInputLink(pDstNode) && pDstNode->GetInputLink(pSrcNode);
+            const bool isNeedOffset = isDoubleWay && pSrcNode->GetInputLink(pDstNode) > pDstNode->GetInputLink(pSrcNode);
+
+            auto&& pDrawList = ImGui::GetWindowDrawList();
+
+            auto&& srcRect = pSrcNode->GetNodeRect();
+            auto&& dstRect = pDstNode->GetNodeRect();
+
+            const float_t linkSpacing = 50.0f;
+            const SR_MATH_NS::FVector2 srcOffset = isDoubleWay ? (isNeedOffset ? SR_MATH_NS::FVector2(0.0f, linkSpacing) : SR_MATH_NS::FVector2(0.0f, -linkSpacing)) : SR_MATH_NS::FVector2();
+            const SR_MATH_NS::FVector2 dstOffset = isDoubleWay ? (isNeedOffset ? SR_MATH_NS::FVector2(0.0f, -linkSpacing) : SR_MATH_NS::FVector2(0.0f, linkSpacing)) : SR_MATH_NS::FVector2();
+
+            const SR_MATH_NS::FVector2 srcPoint = SR_MATH_NS::ClipToRectEdge(srcRect, srcRect.Center(), dstRect.Center() + srcOffset);
+            const SR_MATH_NS::FVector2 dstPoint = SR_MATH_NS::ClipToRectEdge(dstRect, dstRect.Center() + dstOffset, srcRect.Center());
+
+            const auto defaultColor = SR_COL32(200, 200, 200, 220); /// white
+            const auto progressColor = SR_COL32(60, 220, 110, 255); /// green
+            const auto selectedColor = SR_COL32(255, 165, 0, 255); /// orange
+            const auto activeColor = SR_COL32(255, 255, 0, 255); /// yellow
+
+            auto&& selectedLinks = pEditor->GetSelectedLinks();
+            auto&& pSelectedLink = selectedLinks.empty() ? nullptr : selectedLinks.front();
+
+            const float_t progress = GetProgress();
+            const bool isActive = IsActive();
+
+            const bool isSelected = pSelectedLink == this;
+            const uint32_t col = isSelected ? selectedColor : (isActive ? activeColor : defaultColor);
+            const float thickness = isSelected ? 6.0f : 4.0f;
+
+            const SR_MATH_NS::FVector2 dir = dstPoint - srcPoint;
+            const float len = std::sqrt(dir.x * dir.x + dir.y * dir.y);
+            const SR_MATH_NS::FVector2 nd = len > 0.001f ? (dir / len) : SR_MATH_NS::FVector2(1.0f, 0.0f);
+            const SR_MATH_NS::FVector2 perp(-nd.y, nd.x);
+
+            const float arrowWidth = 6.0f;
+            const float arrowLen = 10.0f;
+
+            SR_MATH_NS::FVector2 lineDstArrowOffset = nd * arrowLen;
+            SR_GRAPH_GUI_NS::Immediate::DrawListAddLine(pDrawList, srcPoint, dstPoint - lineDstArrowOffset, col, thickness);
+
+            if (progress > 0.f && progress < 1.f) {
+                const SR_MATH_NS::FVector2 progressPoint = srcPoint + dir * progress;
+                SR_GRAPH_GUI_NS::Immediate::DrawListAddLine(pDrawList, srcPoint, progressPoint, progressColor, thickness);
+            }
+
+            const SR_MATH_NS::FVector2 tip = dstPoint;
+            const SR_MATH_NS::FVector2 base = tip - nd * arrowLen;
+            const SR_MATH_NS::FVector2 left = base + perp * arrowWidth;
+            const SR_MATH_NS::FVector2 right = base - perp * arrowWidth;
+            SR_GRAPH_GUI_NS::Immediate::DrawListAddTriangleFilled(pDrawList, tip, left, right, col);
+
+            if (ax::NodeEditor::IsActive()) {
+                if (SR_GRAPH_GUI_NS::Immediate::IsMouseReleased(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left)) {
+                    const SR_MATH_NS::FVector2 mousePos = SR_GRAPH_GUI_NS::Immediate::GetMousePos();
+                    const float distToLine = SR_MATH_NS::DistanceToLineSegment(mousePos, srcPoint, dstPoint);
+                    if (distToLine < 5.0f) {
+                        pEditor->ForceSelectLink(this);
+                    }
+                    else if (pSelectedLink == this) {
+                        pEditor->ForceSelectLink(nullptr);
+                    }
+                }
+            }
+        }
+        else {
+            const ax::NodeEditor::LinkId linkId((uintptr_t)(this));
+            ax::NodeEditor::Link(linkId, ax::NodeEditor::PinId((uintptr_t)(pInputPin)), ax::NodeEditor::PinId((uintptr_t)(pOutputPin)));
+        }
     }
 }
 

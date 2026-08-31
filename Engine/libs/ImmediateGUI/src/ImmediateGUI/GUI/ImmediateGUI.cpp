@@ -352,6 +352,9 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     }
 
     bool WindowsWndProcHandler(void* hWnd, uint32_t message, uint64_t wParam, uint64_t lParam) {
+        if (!IsEnabled()) {
+            return false;
+        }
     #ifdef SR_WIN32
         return ImmediateGUI_WndProcHandler((HWND)hWnd, message, (WPARAM)wParam, (LPARAM)lParam);
     #else
@@ -1615,8 +1618,6 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     bool ColorButton(const char* desc_id, SR_MATH_NS::FColor& color, ColorEditFlags flags, const SR_MATH_NS::FVector2& size) {
         return ImGui::ColorButton(desc_id, FCToImV4(color), static_cast<ImGuiColorEditFlags>(flags), F2ToImV2(size));
     }
-
-
 #endif
 
 #ifndef SR_USE_IMGUI
@@ -1832,4 +1833,14 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     bool ColorPickerAlpha(const char* label, SR_MATH_NS::FColor& color, ColorEditFlags flags, const float* ref_col) { return false; }
     bool ColorButton(const char* desc_id, SR_MATH_NS::FColor& color, ColorEditFlags flags, const SR_MATH_NS::FVector2& size) { return false; }
 #endif
+
+    bool gIsImGuiEnabled = true;
+
+    void SetEnabled(bool enabled) {
+        gIsImGuiEnabled = enabled;
+    }
+
+    bool IsEnabled() {
+        return gIsImGuiEnabled;
+    }
 }

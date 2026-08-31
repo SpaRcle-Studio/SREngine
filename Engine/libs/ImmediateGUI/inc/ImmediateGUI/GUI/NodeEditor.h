@@ -53,10 +53,18 @@ namespace SR_GRAPH_GUI_NS::Immediate {
 
         virtual void Draw() = 0;
 
+        void SetProgress(float_t progress) { m_progress = progress; }
+        SR_NODISCARD float_t GetProgress() const { return m_progress; }
+
+        void SetActive(bool active) { m_isActive = active; }
+        SR_NODISCARD bool IsActive() const { return m_isActive; }
+
         void SetUserData(void* pUserData) { m_pUserData = pUserData; }
         SR_NODISCARD void* GetUserData() const { return m_pUserData; }
 
     private:
+        bool m_isActive = false;
+        float_t m_progress = 0.f;
         InputPinInstance* m_pInputPin = nullptr;
         OutputPinInstance* m_pOutputPin = nullptr;
         void* m_pUserData = nullptr;
@@ -114,7 +122,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         void SetBackgroundPopupCallback(OnBackgroundPopupCallback callback) { m_onBackgroundPopupCallback = std::move(callback); }
         void SetNodeDoubleClickedCallback(OnNodeDoubleClickedCallback callback) { m_onNodeDoubleClickedCallback = std::move(callback); }
         void SetNodePopupCallback(OnNodePopupCallback callback) { m_onNodePopupCallback = std::move(callback); }
-        void SetStyleType(NodeEditorStyleType styleType) { m_styleType = styleType; }
+        void SetStyleType(NodeEditorStyleType styleType);
 
         SR_NODISCARD const OnSomethingChangedCallback& GetSomethingChangedCallback() const { return m_onSomethingChangedCallback; }
         SR_NODISCARD NodeEditorStyleType GetStyleType() const { return m_styleType; }

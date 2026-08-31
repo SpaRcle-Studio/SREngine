@@ -310,6 +310,13 @@ namespace SR_IMMEDIATE_GUI_NS {
         m_freeOutputPins.emplace_back(pPin);
     }
 
+    void NodeEditorInstance::SetStyleType(NodeEditorStyleType styleType) {
+        if (m_styleType != styleType) {
+            m_styleType = styleType;
+            ClearSelection();
+        }
+    }
+
     void PinInstance::SetName(SR_UTILS_NS::StringView name) {
         if (name.empty()) {
             m_name = "Pin";

@@ -144,6 +144,7 @@ namespace SR_CORE_GUI_NS {
                 m_backgroundText += pAsset->GetResourcePath().View();
             }
             if (!IsStateMachineActive() && m_tab == Tab::StateMachine) {
+                m_nodeGraphEditor->ClearSelection();
                 SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.0f, 0.25f, 0.25f, 1.0f), "State machine is not active!");
             }
             else {
@@ -302,6 +303,8 @@ namespace SR_CORE_GUI_NS {
                         auto&& pTargetState = m_pActiveStateMachine.Lock()->GetMachine()->GetState(pTransition->GetTargetIndex());
                         if (auto&& pTargetNodeInstance = pTargetState->GetUserData<SR_IMMEDIATE_GUI_NS::NodeInstance>()) {
                             auto&& pLink = pNode->LinkTo(pTargetNodeInstance, 0, 0);
+                            pLink->SetProgress(pTransition->GetProgress());
+                            pLink->SetActive(pTransition->IsActive());
                             pLink->SetUserData(pTransition.Get());
                         }
                     }

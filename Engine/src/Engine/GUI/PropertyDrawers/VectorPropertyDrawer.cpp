@@ -84,7 +84,7 @@ namespace SR_CORE_GUI_NS {
             if (context.GetEditorParams().IsNotNull()) {
                 if (auto&& newElementValue = container.Back(); newElementValue.IsSharedPtr()) {
                     if (auto&& pSharedPtrBase = newElementValue.GetSharedPtrBase()) {
-                        SR_UTILS_NS::StringAtom typeName = value.GetTypeInfo().detailedType;
+                        SR_UTILS_NS::StringAtom typeName = newElementValue.GetTypeInfo().pNext[0]->detailedType;
                         if (SR_UTILS_NS::Factory::Instance().IsAbstract(typeName)) {
                             auto&& inheritances = SR_UTILS_NS::Factory::Instance().GetInheritances(typeName);
                             for (auto&& inheritance : inheritances) {
