@@ -12,6 +12,12 @@
 #include <Graphics/GUI/NodeWidget.h>
 
 #include <Utils/Flux/Graph/FluxGraphAsset.h>
+#include <Utils/Types/WeakPtr.h>
+#include <Utils/Types/SortedVector.h>
+
+namespace SR_FLUX_NS {
+    class FluxRuntime;
+}
 
 namespace SR_CORE_GUI_NS {
     class FluxEditor : public SR_GRAPH_GUI_NS::NodeWidget {
@@ -89,6 +95,9 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::Vector<SR_UTILS_NS::Reflection::TypeInfo*> m_tmpTypeInfos;
         SR_UTILS_NS::Vector<uint32_t> m_pendingNodeRemoves;
         SR_UTILS_NS::Vector<SR_FLUX_NS::FluxGraphLink> m_pendingLinkRemoves;
+        SR_HTYPES_NS::WeakPtr<SR_FLUX_NS::FluxRuntime> m_runtime;
+
+        SR_HTYPES_NS::SortedVector<uint32_t> m_executedNodes;
 
         std::string m_nameBuffer;
         std::string m_objectBuffer;

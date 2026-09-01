@@ -506,6 +506,8 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         PushNodeEditorContext pushContext(m_editorContext);
         ax::NodeEditor::Begin("Node Editor");
 
+        ax::NodeEditor::SetSavingEnabled(false);
+
         m_nodeEditorRegion = SR_MATH_NS::FRect(
             SR_GRAPH_GUI_NS::Immediate::GetItemRectMin(),
             SR_GRAPH_GUI_NS::Immediate::GetItemRectMax()
@@ -875,6 +877,10 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
 
             ax::NodeEditor::PushStyleVar(ax::NodeEditor::StyleVar_NodeRounding, hasFlow ? HeaderRounding : HeaderSuperRounding);
 
+            if (m_isActive) {
+                ax::NodeEditor::PushStyleColor(ax::NodeEditor::StyleColor_NodeBorder, ImColor(0.3f, 1.0f, 0.3f, 1.0f));
+            }
+
             ax::NodeEditor::BeginNode(ax::NodeEditor::NodeId(this));
 
             const float_t minHeight = MinContentHeight / 2.f;
@@ -930,6 +936,10 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
 
             ImGui::EndTable();
             ax::NodeEditor::EndNode();
+
+            if (m_isActive) {
+                ax::NodeEditor::PopStyleColor();
+            }
         }
 
         ax::NodeEditor::SetNodePosition(ax::NodeEditor::NodeId(this), F2ToImV2(m_position.Round()));

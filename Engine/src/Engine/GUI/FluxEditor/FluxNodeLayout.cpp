@@ -100,7 +100,7 @@ namespace SR_CORE_GUI_NS {
                 /// сигнатура события неизвестна, поэтому показываем занятые пины плюс один свободный
                 const uint32_t maxPin = graph.GetMaxOutputPin(nodeIndex);
                 for (uint32_t i = 1; i <= maxPin + 1; ++i) {
-                    AddPin(layout.outputs, SR_FORMAT("Arg {}", i - 1));
+                    AddPin(layout.outputs, "Arg");
                 }
                 break;
             }
@@ -189,8 +189,7 @@ namespace SR_CORE_GUI_NS {
                 AddPin(layout.inputs, "Object");
                 AddPin(layout.outputs, "Exec", true);
                 AddPin(layout.outputs, "Cast Failed", true);
-                const std::string resultPinName = name.empty() ? std::string("As Object") : SR_FORMAT("As {}", name);
-                AddPin(layout.outputs, resultPinName).pTypeInfo = MakeClassTypeInfo(name, tmpTypeInfos);
+                AddPin(layout.outputs, "As Object").pTypeInfo = MakeClassTypeInfo(name, tmpTypeInfos);
                 break;
             }
             case SR_FLUX_NS::FluxGraphNodeType::Sequence:
@@ -202,7 +201,7 @@ namespace SR_CORE_GUI_NS {
                 /// свободный, чтобы можно было подключить следующий шаг
                 const uint32_t maxPin = graph.GetMaxOutputPin(nodeIndex);
                 for (uint32_t i = 0; i <= maxPin + 1; ++i) {
-                    AddPin(layout.outputs, isParallel ? SR_FORMAT("Branch {}", i) : SR_FORMAT("Then {}", i), true);
+                    AddPin(layout.outputs, isParallel ? "Branch" : "Then", true);
                 }
                 break;
             }

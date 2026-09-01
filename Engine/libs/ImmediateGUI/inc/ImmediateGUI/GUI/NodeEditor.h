@@ -168,6 +168,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         virtual void RemovePins() { }
         virtual LinkInstance* LinkTo(NodeInstance* pTargetNode, uint32_t sourcePin, uint32_t targetPin) { return nullptr; }
         virtual void SetUserData(void* pUserData) { m_pUserData = pUserData; }
+        void SetActive(bool active) { m_isActive = active; }
 
         void SetProgress(std::optional<float_t> progress) { m_progress = progress; }
 
@@ -178,11 +179,13 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         SR_NODISCARD const SR_MATH_NS::FRect& GetNodeRect() const { return m_nodeRect; }
         SR_NODISCARD LinkInstance* GetInputLink(NodeInstance* pNode) const;
         SR_NODISCARD LinkInstance* GetOutputLink(NodeInstance* pNode) const;
+        SR_NODISCARD bool IsActive() const { return m_isActive; }
 
         SR_NODISCARD const SR_UTILS_NS::Vector<InputPin>& GetInputs() const { return m_inputPins; }
         SR_NODISCARD const SR_UTILS_NS::Vector<OutputPin>& GetOutputs() const { return m_outputPins; }
 
     protected:
+        bool m_isActive = false;
         void* m_pUserData = nullptr;
         std::optional<float_t> m_progress;
         NodeEditorInstance* m_pEditor = nullptr;

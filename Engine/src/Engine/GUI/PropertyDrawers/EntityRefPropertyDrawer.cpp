@@ -70,7 +70,16 @@ namespace SR_CORE_GUI_NS {
                 if (pEntityRef->GetEntity()->GetMeta()->IsSameOrInherited(SR_UTILS_NS::SceneObject::GetMetaStatic()->GetFactoryName())) {
                     pSceneObject = pEntityRef->GetEntity().DynamicCast<SR_UTILS_NS::SceneObject>();
                 }
-                std::string formatted = pSceneObject ? pSceneObject->GetName().ToStringRef() : " {} ({})"_format(pEntityRef->GetEntity()->GetEntityId(), entityType.ToCStr());
+
+                static SR_UTILS_NS::String formatted;
+                formatted.clear();
+                if (pSceneObject) {
+                    formatted = pSceneObject->GetName().ToStringView();
+                }
+                else {
+                    SR_UTILS_NS::FormatTo(formatted, " {} ({})", pEntityRef->GetEntity()->GetEntityId(), entityType.ToCStr());
+                }
+
                 SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor(1.f, 1.f, 1.f, 1.f));
                 SR_GRAPH_GUI_NS::Immediate::PushID((void*)pEntityRef);
                 if (SR_GRAPH_GUI_NS::Immediate::Button(formatted.c_str(), SR_MATH_NS::FVector2(context.fieldWidth, 0))) {

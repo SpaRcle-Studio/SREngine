@@ -79,11 +79,19 @@ namespace SR_CORE_GUI_NS {
             }
             if (auto&& pFlux = pEntity.DynamicCast<SR_FLUX_NS::FluxComponent>()) {
                 Inspect(pFlux->GetGraphPath());
+                m_runtime = pFlux->GetRuntime();
+                if (m_runtime) {
+                    m_runtime.Lock()->SetOnInstructionExecutedCallback([this](auto&&, auto&& instruction) {
+                        m_executedNodes.insert(instruction.debugId);
+                    });
+                }
             }
         });
     }
 
     void FluxEditor::Inspect(const SR_UTILS_NS::Path& path) {
+        m_runtime = {};
+        m_executedNodes.clear();
         m_graphAsset.Reset();
         m_currentFile = path;
         m_previewCompiled = false;
@@ -210,11 +218,14 @@ namespace SR_CORE_GUI_NS {
             auto&& layout = m_layouts[nodeIndex];
             BuildFluxNodeLayout(*pGraph, nodeIndex, layout, m_tmpTypeInfos);
 
-            pNodeInstance->SetUserData(IndexToUserData(nodeIndex));
-            pNodeInstance->SetPosition(pGraph->GetNode(nodeIndex)->GetPosition());
-            pNodeInstance->SetTitle(layout.title);
+            auto&& pNode = pGraph->GetNode(nodeIndex);
 
-            pGraph->GetNode(nodeIndex)->SetUserData(pNodeInstance);
+            pNodeInstance->SetUserData(IndexToUserData(nodeIndex));
+            pNodeInstance->SetPosition(pNode->GetPosition());
+            pNodeInstance->SetTitle(layout.title);
+            pNodeInstance->SetActive(m_executedNodes.exists(nodeIndex));
+
+            pNode->SetUserData(pNodeInstance);
 
             for (auto&& pin : layout.inputs) {
                 pNodeInstance->AddInputPin(pin.name, SR_IMMEDIATE_GUI_NS::PinTypeInfo(pin.pTypeInfo, pin.isFlow));

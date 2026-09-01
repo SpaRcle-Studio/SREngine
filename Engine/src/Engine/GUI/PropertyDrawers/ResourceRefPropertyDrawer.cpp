@@ -106,20 +106,23 @@ namespace SR_CORE_GUI_NS {
         if (auto&& pRef = dynamic_cast<SR_UTILS_NS::ResourceRefBase*>(value.GetSRClass())) {
             SR_UTILS_NS::StringAtom type = pRef->GetResourceType();
 
+            static SR_UTILS_NS::String formatted;
+            formatted.clear();
+
             if (pRef->GetId().empty()) {
-                std::string formatted = " Is not set ({})"_format(type.ToCStr());
+                SR_UTILS_NS::FormatTo(formatted, " Is not set ({})", type);
                 SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
                 SR_GRAPH_GUI_NS::Immediate::ButtonColoredText(formatted.c_str(), SR_MATH_NS::FColor(1.f, 1.f, 0.f, 1.f), SR_MATH_NS::FVector2(context.fieldWidth, 0));
                 SR_GRAPH_GUI_NS::Immediate::EndDisabled();
             }
             else if (!pRef->GetResourceBase()) {
-                std::string formatted = " {} ({} is missing)"_format(pRef->GetId().ToCStr(), type.ToCStr());
+                SR_UTILS_NS::FormatTo(formatted, " {} ({} is missing)", pRef->GetId(), type);
                 SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
                 SR_GRAPH_GUI_NS::Immediate::ButtonColoredText(formatted.c_str(), SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), SR_MATH_NS::FVector2(context.fieldWidth, 0));
                 SR_GRAPH_GUI_NS::Immediate::EndDisabled();
             }
             else {
-                std::string formatted = " {} ({})"_format(pRef->GetId().ToCStr(), type.ToCStr());
+                SR_UTILS_NS::FormatTo(formatted, " {} ({})", pRef->GetId(), type);
                 SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
                 SR_GRAPH_GUI_NS::Immediate::ButtonColoredText(formatted.c_str(), SR_MATH_NS::FColor(1.f, 1.f, 1.f, 1.f), SR_MATH_NS::FVector2(context.fieldWidth, 0));
                 SR_GRAPH_GUI_NS::Immediate::EndDisabled();

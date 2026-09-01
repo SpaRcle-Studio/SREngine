@@ -15,7 +15,7 @@ namespace SR_UTILS_NS::Reflection {
 
 namespace SR_CORE_GUI_NS {
     struct FluxPinLayout {
-        SR_UTILS_NS::String name;
+        SR_UTILS_NS::StringView name;
         bool isFlow = false;
         const SR_UTILS_NS::Reflection::TypeInfo* pTypeInfo = nullptr;
     };
