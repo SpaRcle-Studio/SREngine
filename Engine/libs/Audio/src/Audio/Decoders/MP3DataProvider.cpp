@@ -53,7 +53,9 @@ namespace SR_AUDIO_NS {
 
         m_format.m_numChannels = m_decoderData->mp3d.info.channels;
         m_format.m_samplesPerSecond = m_decoderData->mp3d.info.hz;
-        m_format.m_bitsPerSample = 16;
+
+        static_assert(sizeof(mp3d_sample_t) == sizeof(int16_t));
+        m_format.m_bitsPerSample = sizeof(mp3d_sample_t) * 8;
     }
 
     MP3DataProvider::~MP3DataProvider() {

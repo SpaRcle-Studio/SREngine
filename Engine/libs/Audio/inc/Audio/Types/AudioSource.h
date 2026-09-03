@@ -63,6 +63,8 @@ namespace SR_AUDIO_NS
         Handle m_handle = nullptr;
 
         /// @virtualProperty(sound) @getter(GetPath) @setter(SetPath)
+        /// @customArgs(pick: enabled, filter name: Sound, relative: resources)
+        /// @customArg(filter value: ogg,mp3,wav)
         SR_VIRTUAL_PROPERTY
         /// @virtualProperty(volume) @getter(GetVolume) @setter(SetVolume)
         SR_VIRTUAL_PROPERTY

@@ -51,7 +51,57 @@ namespace SR_AUDIO_NS {
         }
         else {
             SR_ERROR("OGGDataProvider::OGGDataProvider() : failed to get vorbis info!");
+            return;
         }
+
+        // Размер PCM заранее известен.
+        const ogg_int64_t totalSamples = ov_pcm_total(m_vorbisFile.Get(), -1);
+
+        if (totalSamples <= 0) {
+            SR_ERROR("OGGVorbisDataProvider : invalid PCM sample count.");
+            return;
+        }
+
+        const size_t bytesPerSample = static_cast<size_t>(m_format.m_bitsPerSample / 8);
+        const size_t totalBytes = static_cast<size_t>(totalSamples) * static_cast<size_t>(m_format.m_numChannels) * bytesPerSample;
+
+        m_decodingBuffer.resize(totalBytes);
+
+        size_t bytesRead = 0;
+
+        while (bytesRead < totalBytes) {
+            const long ret = ov_read(
+                m_vorbisFile.Get(),
+                reinterpret_cast<char*>(m_decodingBuffer.data() + bytesRead),
+                static_cast<int>(std::min(
+                        totalBytes - bytesRead,
+                        static_cast<size_t>(std::numeric_limits<int>::max())
+                )),
+                0, // little endian
+                2, // 16-bit
+                1, // signed
+                &m_currentSection
+            );
+
+            if (ret > 0) {
+                bytesRead += static_cast<size_t>(ret);
+                continue;
+            }
+
+            if (ret == 0) {
+                break;
+            }
+
+            if (ret == OV_HOLE) {
+                continue;
+            }
+
+            SR_ERROR("OGGVorbisDataProvider : ov_read() failed: {}.", ret);
+            break;
+        }
+
+        m_bufferUsed = bytesRead;
+        m_decodingBuffer.resize(bytesRead);
     }
 
     OGGVorbisDataProvider::~OGGVorbisDataProvider() {
