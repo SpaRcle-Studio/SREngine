@@ -217,6 +217,7 @@ namespace SR_CORE_NS {
                 {
                     FixedStep(isPaused);
                     m_accumulator -= m_updateFrequency;
+                    m_inputAccumulator.ResetKeyboard();
                 }
             }
             m_inputAccumulator.Reset();

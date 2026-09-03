@@ -317,6 +317,10 @@ namespace SR_IMMEDIATE_GUI_NS {
         }
     }
 
+    void NodeEditorInstance::CreateStateMachineTransition(NodeInstance &node) {
+        m_stateMachineTransitionSourceNode = &node;
+    }
+
     void PinInstance::SetName(SR_UTILS_NS::StringView name) {
         if (name.empty()) {
             m_name = "Pin";

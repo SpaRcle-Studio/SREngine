@@ -141,4 +141,8 @@ namespace SR_PHYSICS_NS {
         }
         return CharacterControllerCollisionFlags::None;
     }
+
+    bool CharacterController::IsGrounded() const {
+        return m_impl && m_impl->IsGrounded();
+    }
 }

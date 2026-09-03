@@ -201,7 +201,7 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
                 if (SR_GRAPH_GUI_NS::Immediate::MenuItem("New transition")) {
-
+                    m_nodeGraphEditor->CreateStateMachineTransition(node);
                 }
             }
         });
@@ -255,16 +255,23 @@ namespace SR_CORE_GUI_NS {
             }
         });
 
-        m_nodeGraphEditor->SetLinkCreatedCallback([](SR_IMMEDIATE_GUI_NS::LinkInstance& link) {
+        m_nodeGraphEditor->SetLinkCreatedCallback([this](SR_IMMEDIATE_GUI_NS::LinkInstance& link) {
             auto&& pInputPin = link.GetInputPin();
             auto&& pOutputPin = link.GetOutputPin();
             auto&& pInputNode = pInputPin->GetNode();
             auto&& pOutputNode = pOutputPin->GetNode();
-            const uint32_t inputIndex = pInputNode->GetPinIndex(pInputPin);
-            const uint32_t outputIndex = pOutputNode->GetPinIndex(pOutputPin);
-            static_cast<SR_ANIMATIONS_NS::AnimationGraphNode*>(pOutputNode->GetUserData())->ConnectTo(
-                static_cast<SR_ANIMATIONS_NS::AnimationGraphNode*>(pInputNode->GetUserData()), outputIndex, inputIndex
-            );
+            if (m_tab == Tab::StateMachine) {
+                auto&& pSourceState = static_cast<SR_ANIMATIONS_NS::AnimationState*>(pOutputNode->GetUserData());
+                auto&& pTargetState = static_cast<SR_ANIMATIONS_NS::AnimationState*>(pInputNode->GetUserData());
+                pSourceState->GetMachine()->AddTransition(pSourceState, pTargetState);
+            }
+            else {
+                const uint32_t inputIndex = pInputNode->GetPinIndex(pInputPin);
+                const uint32_t outputIndex = pOutputNode->GetPinIndex(pOutputPin);
+                static_cast<SR_ANIMATIONS_NS::AnimationGraphNode*>(pOutputNode->GetUserData())->ConnectTo(
+                    static_cast<SR_ANIMATIONS_NS::AnimationGraphNode*>(pInputNode->GetUserData()), outputIndex, inputIndex
+                );
+            }
         });
 
         m_nodeGraphEditor->SetBackgroundPopupCallback([this](const SR_MATH_NS::FVector2& pos) {

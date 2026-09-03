@@ -35,6 +35,10 @@ namespace SR_PHYSICS_UTILS_NS {
         return physx::PxExtendedVec3(vector3.x, vector3.y, vector3.z);
     }
 
+    SR_MAYBE_UNUSED static physx::PxVec3 PxExtendedV3ToPxV3(const physx::PxExtendedVec3& vector3) {
+        return physx::PxVec3(static_cast<float>(vector3.x), static_cast<float>(vector3.y), static_cast<float>(vector3.z));
+    }
+
     SR_MAYBE_UNUSED static SR_MATH_NS::FVector3 PxV3ToFV3(const physx::PxVec3 &vector3) {
         return SR_MATH_NS::FVector3(vector3.x, vector3.y, vector3.z);
     }

@@ -123,6 +123,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         void SetNodeDoubleClickedCallback(OnNodeDoubleClickedCallback callback) { m_onNodeDoubleClickedCallback = std::move(callback); }
         void SetNodePopupCallback(OnNodePopupCallback callback) { m_onNodePopupCallback = std::move(callback); }
         void SetStyleType(NodeEditorStyleType styleType);
+        void CreateStateMachineTransition(NodeInstance& node);
 
         SR_NODISCARD const OnSomethingChangedCallback& GetSomethingChangedCallback() const { return m_onSomethingChangedCallback; }
         SR_NODISCARD NodeEditorStyleType GetStyleType() const { return m_styleType; }
@@ -146,6 +147,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         SR_UTILS_NS::String m_backgroundText;
         NodeEditorStyleType m_styleType = NodeEditorStyleType::Graph;
         NodeInstance* m_pPopupNode = nullptr;
+        NodeInstance* m_stateMachineTransitionSourceNode = nullptr;
         SR_MATH_NS::FRect m_nodeEditorRegion;
 
     };

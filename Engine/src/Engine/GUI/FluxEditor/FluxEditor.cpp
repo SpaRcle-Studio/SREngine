@@ -457,6 +457,10 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
+        if (SR_IMMEDIATE_GUI_NS::Button("Copy to clipboard")) {
+            SR_PLATFORM_NS::TextToClipboard(m_previewCode);
+        }
+
         for (auto&& line : m_previewCodeLines) {
             m_previewLine = line;
             SR_GRAPH_GUI_NS::Immediate::Text("%s", m_previewLine.c_str());

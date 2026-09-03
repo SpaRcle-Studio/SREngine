@@ -43,6 +43,8 @@ namespace SR_PHYSICS_NS {
             float_t deltaTime
         ) { return CharacterControllerCollisionFlags::None; }
 
+        SR_NODISCARD virtual bool IsGrounded() const { return false; }
+
     protected:
         CharacterController* m_controller = nullptr;
 
@@ -67,6 +69,10 @@ namespace SR_PHYSICS_NS {
         float_t invisibleWallHeight = 0.0f;
         /// @property
         float_t maxJumpHeight = 0.0f;
+        /// @property
+        float_t groundProbeDistance = 0.05f;
+        /// @property
+        float_t groundProbeOffset = 0.f;
     };
 
     /// @category(Physics)
@@ -88,6 +94,9 @@ namespace SR_PHYSICS_NS {
             float_t skinWidth,
             float_t deltaTime
         );
+
+        /// @method @evaluate
+        SR_NODISCARD bool IsGrounded() const;
 
         bool InitController();
         void ReleaseController();

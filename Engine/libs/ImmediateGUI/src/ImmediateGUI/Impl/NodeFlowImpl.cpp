@@ -568,36 +568,70 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         }
         SR_IMMEDIATE_GUI_NS::NodeEditor::EndDelete();
 
-        if (SR_IMMEDIATE_GUI_NS::NodeEditor::BeginCreate()) {
-            uintptr_t startPinId = 0, endPinId = 0;
-            if (SR_IMMEDIATE_GUI_NS::NodeEditor::QueryNewLink(&startPinId, &endPinId)) {
-                auto&& pPinStart = reinterpret_cast<PinInstance*>(startPinId);
-                auto&& pPinEnd = reinterpret_cast<PinInstance*>(endPinId);
+        if (m_stateMachineTransitionSourceNode) {
+            const auto& srcRect = m_stateMachineTransitionSourceNode->GetNodeRect();
+            const SR_MATH_NS::FVector2 mouse = SR_GRAPH_GUI_NS::Immediate::GetMousePos();
+            const SR_MATH_NS::FVector2 srcPoint = SR_MATH_NS::ClipToRectEdge(srcRect, srcRect.Center(), mouse);
 
-                if (!pPinStart->IsInput() && pPinEnd->IsInput()) {
-                    std::swap(pPinStart, pPinEnd);
-                }
+            SR_GRAPH_GUI_NS::Immediate::DrawListAddLine(ImGui::GetWindowDrawList(), srcPoint, mouse, SR_COL32(255, 255, 255, 180), 2.0f);
 
-                const bool isNotAvailable =
-                    (pPinEnd == pPinStart || pPinEnd->IsInput() == pPinStart->IsInput()) ||
-                    (pPinEnd->GetNode() == pPinStart->GetNode()) ||
-                    (pPinEnd->GetType().isFlow != pPinStart->GetType().isFlow) ||
-                    (!CanCreateLink(pPinEnd->GetType().pType, pPinStart->GetType().pType)) ||
-                    (pPinStart->IsConnectedTo(pPinEnd));
-
-                if (!isNotAvailable && SR_IMMEDIATE_GUI_NS::NodeEditor::AcceptNewItem()) {
-                    static LinkInstanceNEImpl link;
-                    link.Link((InputPinInstance*)pPinStart, (OutputPinInstance*)pPinEnd);
-                    if (m_onSomethingChangedCallback) {
-                        m_onSomethingChangedCallback();
+            if (SR_GRAPH_GUI_NS::Immediate::IsMouseReleased(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left)) {
+                for (auto&& pNode : m_nodes) {
+                    if (pNode == m_stateMachineTransitionSourceNode) {
+                        continue;
                     }
-                    if (m_onLinkCreatedCallback) {
-                        m_onLinkCreatedCallback(link);
+                    const auto& dstRect = pNode->GetNodeRect();
+                    if (dstRect.Contains(mouse)) {
+                        if (m_onSomethingChangedCallback) {
+                            m_onSomethingChangedCallback();
+                        }
+                        if (m_onLinkCreatedCallback && !m_stateMachineTransitionSourceNode->GetOutputs().empty() && !pNode->GetInputs().empty()) {
+                            static LinkInstanceNEImpl link;
+                            auto&& pSourcePin = m_stateMachineTransitionSourceNode->GetOutputs().front();
+                            auto&& pTargetPin = pNode->GetInputs().front();
+                            link.Link((InputPinInstance*)pTargetPin, (OutputPinInstance*)pSourcePin);
+                            m_onLinkCreatedCallback(link);
+                        }
+                        m_stateMachineTransitionSourceNode = nullptr;
                     }
                 }
             }
+            else if (SR_GRAPH_GUI_NS::Immediate::IsMouseReleased(SR_GRAPH_GUI_NS::Immediate::MouseButton::Right)) {
+                m_stateMachineTransitionSourceNode = nullptr;
+            }
         }
-        SR_IMMEDIATE_GUI_NS::NodeEditor::EndCreate();
+        else {
+            if (SR_IMMEDIATE_GUI_NS::NodeEditor::BeginCreate()) {
+                uintptr_t startPinId = 0, endPinId = 0;
+                if (SR_IMMEDIATE_GUI_NS::NodeEditor::QueryNewLink(&startPinId, &endPinId)) {
+                    auto&& pPinStart = reinterpret_cast<PinInstance*>(startPinId);
+                    auto&& pPinEnd = reinterpret_cast<PinInstance*>(endPinId);
+
+                    if (!pPinStart->IsInput() && pPinEnd->IsInput()) {
+                        std::swap(pPinStart, pPinEnd);
+                    }
+
+                    const bool isNotAvailable =
+                        (pPinEnd == pPinStart || pPinEnd->IsInput() == pPinStart->IsInput()) ||
+                        (pPinEnd->GetNode() == pPinStart->GetNode()) ||
+                        (pPinEnd->GetType().isFlow != pPinStart->GetType().isFlow) ||
+                        (!CanCreateLink(pPinEnd->GetType().pType, pPinStart->GetType().pType)) ||
+                        (pPinStart->IsConnectedTo(pPinEnd));
+
+                    if (!isNotAvailable && SR_IMMEDIATE_GUI_NS::NodeEditor::AcceptNewItem()) {
+                        static LinkInstanceNEImpl link;
+                        link.Link((InputPinInstance*)pPinStart, (OutputPinInstance*)pPinEnd);
+                        if (m_onSomethingChangedCallback) {
+                            m_onSomethingChangedCallback();
+                        }
+                        if (m_onLinkCreatedCallback) {
+                            m_onLinkCreatedCallback(link);
+                        }
+                    }
+                }
+            }
+            SR_IMMEDIATE_GUI_NS::NodeEditor::EndCreate();
+        }
 
         if (SR_GRAPH_GUI_NS::Immediate::IsMouseDoubleClicked(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left)) {
             if (auto&& selectedNodes = GetSelectedNodes(); selectedNodes.size() == 1) {

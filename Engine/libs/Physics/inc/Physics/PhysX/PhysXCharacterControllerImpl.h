@@ -25,6 +25,8 @@ namespace SR_PHYSICS_NS {
         CharacterControllerCollisionFlags Move(const SR_MATH_NS::FVector3& displacement,
             float_t skinWidth, float_t deltaTime) override;
 
+        SR_NODISCARD bool IsGrounded() const override;
+
         void Synchronize() override;
 
     private:
