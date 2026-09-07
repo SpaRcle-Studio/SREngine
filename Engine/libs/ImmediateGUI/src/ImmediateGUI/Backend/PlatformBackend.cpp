@@ -15,6 +15,7 @@
 
 #ifdef SR_EMSCRIPTEN
     #include <emscripten/html5.h>
+    #include <cstring>
     #if defined(__EMSCRIPTEN_PTHREADS__)
         #include <pthread.h>
     #endif
@@ -275,77 +276,146 @@ namespace SR_GRAPH_GUI_NS::Immediate {
             io.AddKeyEvent(ImGuiMod_Super, e->metaKey);
         }
 
+        /// The browser reports named keys ("Enter", "ArrowUp", "Shift") in KeyboardEvent.key, so a
+        /// value that is exactly one printable code point means the key produced actual text.
+        /// The deprecated "keypress" event cannot be used for this: preventing the default action
+        /// of "keydown" (needed to stop the page from scrolling) suppresses it entirely.
+        bool IsEmscriptenTextInput(const char* pKey) {
+            if (!pKey || pKey[0] == 0) {
+                return false;
+            }
+
+            const auto lead = static_cast<unsigned char>(pKey[0]);
+
+            size_t expectedLength = 1;
+            if (lead >= 0xF0) {
+                expectedLength = 4;
+            }
+            else if (lead >= 0xE0) {
+                expectedLength = 3;
+            }
+            else if (lead >= 0xC0) {
+                expectedLength = 2;
+            }
+            else if (lead >= 0x80) {
+                return false; /// stray continuation byte
+            }
+            else if (lead < 0x20 || lead == 0x7F) {
+                return false; /// control character
+            }
+
+            return std::strlen(pKey) == expectedLength;
+        }
+
+        /// Keys that would otherwise scroll the page or navigate back while the engine is used.
+        /// Browser-level keys (F5, F12, Escape) are deliberately left alone.
+        bool EmscriptenShouldPreventDefault(ImGuiKey key) {
+            switch (key) {
+                case ImGuiKey_LeftArrow:
+                case ImGuiKey_RightArrow:
+                case ImGuiKey_UpArrow:
+                case ImGuiKey_DownArrow:
+                case ImGuiKey_PageUp:
+                case ImGuiKey_PageDown:
+                case ImGuiKey_Home:
+                case ImGuiKey_End:
+                case ImGuiKey_Space:
+                case ImGuiKey_Tab:
+                case ImGuiKey_Backspace:
+                case ImGuiKey_Enter:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
         EM_BOOL EmscriptenKeyCallback(int eventType, const EmscriptenKeyboardEvent* e, void* userData) {
             (void)userData;
             ImGuiIO& io = ImGui::GetIO();
 
+            /// The canvas may be embedded into a regular page, so its input fields keep priority.
+            if (SR_PLATFORM_NS::IsWebEditableElementFocused()) {
+                return EM_FALSE;
+            }
+
             EmscriptenUpdateModifiers(e);
+
+            const bool isDown = eventType == EMSCRIPTEN_EVENT_KEYDOWN;
 
             const ImGuiKey key = DomKeyCodeToImGuiKey(e->keyCode);
             if (key != ImGuiKey_None) {
-                const bool down = (eventType == EMSCRIPTEN_EVENT_KEYDOWN);
-                io.AddKeyEvent(key, down);
+                io.AddKeyEvent(key, isDown);
             }
 
-            // Keypress provides text input (UTF-8).
-            if (eventType == EMSCRIPTEN_EVENT_KEYPRESS) {
-                if (e->key[0] != '\0') {
-                    io.AddInputCharactersUTF8(e->key);
-                }
+            const bool isShortcut = e->ctrlKey || e->metaKey || e->altKey;
+            const bool isTextInput = isDown && !isShortcut && IsEmscriptenTextInput(e->key);
+            if (isTextInput) {
+                io.AddInputCharactersUTF8(e->key);
             }
 
-            return EM_TRUE;
+            /// Browser shortcuts (copy, paste, reload, tab switching) must keep working.
+            if (isShortcut) {
+                return EM_FALSE;
+            }
+
+            return (isTextInput || EmscriptenShouldPreventDefault(key)) ? EM_TRUE : EM_FALSE;
+        }
+
+        /// Browser events carry viewport coordinates and the canvas is not necessarily placed at
+        /// the top-left corner of the page, so they have to be mapped into canvas space.
+        void EmscriptenAddMousePos(const EmscriptenMouseEvent* e, bool keepOutsidePos = false) {
+            ImGuiIO& io = ImGui::GetIO();
+
+            const SR_MATH_NS::FVector2 pos = SR_PLATFORM_NS::WebClientToCanvasPos(
+                static_cast<float_t>(e->clientX), static_cast<float_t>(e->clientY));
+
+            const bool isInside = pos.x >= 0.f && pos.y >= 0.f && pos.x < io.DisplaySize.x && pos.y < io.DisplaySize.y;
+
+            /// While a button is held the drag must keep going even outside of the canvas,
+            /// otherwise ImGui would lose the active item mid-interaction.
+            if (isInside || keepOutsidePos || e->buttons != 0) {
+                io.AddMousePosEvent(pos.x, pos.y);
+            }
+            else {
+                io.AddMousePosEvent(-FLT_MAX, -FLT_MAX);
+            }
         }
 
         EM_BOOL EmscriptenMouseCallback(int eventType, const EmscriptenMouseEvent* e, void* userData) {
             (void)userData;
             ImGuiIO& io = ImGui::GetIO();
 
-            if (eventType == EMSCRIPTEN_EVENT_MOUSEMOVE) {
-                // canvasX/canvasY are deprecated and may not be reported reliably.
-                // targetX/targetY are relative to the event target element (EMSCRIPTEN_CANVAS_ID).
-                io.AddMousePosEvent(static_cast<float>(e->targetX), static_cast<float>(e->targetY));
-            }
-            else if (eventType == EMSCRIPTEN_EVENT_MOUSEDOWN || eventType == EMSCRIPTEN_EVENT_MOUSEUP) {
-                const bool down = (eventType == EMSCRIPTEN_EVENT_MOUSEDOWN);
-                io.AddMousePosEvent(static_cast<float>(e->targetX), static_cast<float>(e->targetY));
+            const bool isButtonEvent = eventType == EMSCRIPTEN_EVENT_MOUSEDOWN || eventType == EMSCRIPTEN_EVENT_MOUSEUP;
+
+            /// "buttons" no longer contains the released button, so a release that happens outside
+            /// of the canvas must still report where it actually happened.
+            EmscriptenAddMousePos(e, isButtonEvent);
+
+            if (isButtonEvent) {
+                const bool isDown = eventType == EMSCRIPTEN_EVENT_MOUSEDOWN;
+
                 // Emscripten: 0 left, 1 middle, 2 right. ImGui: 0 left, 1 right, 2 middle.
                 int button = e->button;
                 if (button == 1) button = 2;
                 else if (button == 2) button = 1;
 
                 if (button >= 0 && button < 5) {
-                    io.AddMouseButtonEvent(button, down);
+                    io.AddMouseButtonEvent(button, isDown);
                 }
+
+                /// Suppress text selection and the browser drag start on the canvas itself.
+                return isDown ? EM_TRUE : EM_FALSE;
             }
 
-            return EM_TRUE;
-        }
-
-        EM_BOOL EmscriptenMouseEnterLeaveCallback(int eventType, const EmscriptenMouseEvent* e, void* userData) {
-            (void)userData;
-            ImGuiIO& io = ImGui::GetIO();
-            if (eventType == EMSCRIPTEN_EVENT_MOUSEENTER) {
-                io.AddMousePosEvent(static_cast<float>(e->targetX), static_cast<float>(e->targetY));
-            }
-            else if (eventType == EMSCRIPTEN_EVENT_MOUSELEAVE) {
-                io.AddMousePosEvent(-FLT_MAX, -FLT_MAX);
-            }
-            return EM_TRUE;
-        }
-
-        EM_BOOL EmscriptenContextMenuCallback(int eventType, const EmscriptenMouseEvent* e, void* userData) {
-            (void)eventType;
-            (void)e;
-            (void)userData;
-            // Prevent browser context menu so RMB works in ImGui.
-            return EM_TRUE;
+            return EM_FALSE;
         }
 
         EM_BOOL EmscriptenWheelCallback(int eventType, const EmscriptenWheelEvent* e, void* userData) {
             (void)eventType;
             (void)userData;
             ImGuiIO& io = ImGui::GetIO();
+
+            EmscriptenAddMousePos(&e->mouse);
 
             // Emscripten wheel delta is in pixels (depending on browser), scale to ImGui "lines".
             const float wheelX = static_cast<float>(-e->deltaX) * 0.01f;
@@ -361,20 +431,20 @@ namespace SR_GRAPH_GUI_NS::Immediate {
 
             // With pthreads enabled (-sUSE_PTHREADS=1) we must proxy DOM events to the main runtime thread.
             // Emscripten default emscripten_set_*_callback uses EM_CALLBACK_THREAD_CONTEXT_CALLING_THREAD, which is unreliable.
+            //
+            // Buttons and wheel are only accepted over the canvas, while movement and release are
+            // tracked on the whole document so that drags leaving the canvas still behave correctly.
         #if defined(__EMSCRIPTEN_PTHREADS__)
             constexpr pthread_t targetThread = EM_CALLBACK_THREAD_CONTEXT_MAIN_RUNTIME_THREAD;
 
             // Keyboard
             emscripten_set_keydown_callback_on_thread(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_FALSE, EmscriptenKeyCallback, targetThread);
             emscripten_set_keyup_callback_on_thread(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_FALSE, EmscriptenKeyCallback, targetThread);
-            emscripten_set_keypress_callback_on_thread(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_FALSE, EmscriptenKeyCallback, targetThread);
 
-            // Mouse (canvas)
+            // Mouse
             emscripten_set_mousedown_callback_on_thread(EMSCRIPTEN_CANVAS_ID, nullptr, EM_FALSE, EmscriptenMouseCallback, targetThread);
             emscripten_set_mouseup_callback_on_thread(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_FALSE, EmscriptenMouseCallback, targetThread);
-            emscripten_set_mousemove_callback_on_thread(EMSCRIPTEN_CANVAS_ID, nullptr, EM_FALSE, EmscriptenMouseCallback, targetThread);
-            emscripten_set_mouseenter_callback_on_thread(EMSCRIPTEN_CANVAS_ID, nullptr, EM_FALSE, EmscriptenMouseEnterLeaveCallback, targetThread);
-            emscripten_set_mouseleave_callback_on_thread(EMSCRIPTEN_CANVAS_ID, nullptr, EM_FALSE, EmscriptenMouseEnterLeaveCallback, targetThread);
+            emscripten_set_mousemove_callback_on_thread(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_FALSE, EmscriptenMouseCallback, targetThread);
 
             // Wheel
             emscripten_set_wheel_callback_on_thread(EMSCRIPTEN_CANVAS_ID, nullptr, EM_FALSE, EmscriptenWheelCallback, targetThread);
@@ -382,13 +452,10 @@ namespace SR_GRAPH_GUI_NS::Immediate {
             // Single-threaded builds.
             emscripten_set_keydown_callback(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_FALSE, EmscriptenKeyCallback);
             emscripten_set_keyup_callback(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_FALSE, EmscriptenKeyCallback);
-            emscripten_set_keypress_callback(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_FALSE, EmscriptenKeyCallback);
 
             emscripten_set_mousedown_callback(EMSCRIPTEN_CANVAS_ID, nullptr, EM_FALSE, EmscriptenMouseCallback);
             emscripten_set_mouseup_callback(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_FALSE, EmscriptenMouseCallback);
-            emscripten_set_mousemove_callback(EMSCRIPTEN_CANVAS_ID, nullptr, EM_FALSE, EmscriptenMouseCallback);
-            emscripten_set_mouseenter_callback(EMSCRIPTEN_CANVAS_ID, nullptr, EM_FALSE, EmscriptenMouseEnterLeaveCallback);
-            emscripten_set_mouseleave_callback(EMSCRIPTEN_CANVAS_ID, nullptr, EM_FALSE, EmscriptenMouseEnterLeaveCallback);
+            emscripten_set_mousemove_callback(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EM_FALSE, EmscriptenMouseCallback);
 
             emscripten_set_wheel_callback(EMSCRIPTEN_CANVAS_ID, nullptr, EM_FALSE, EmscriptenWheelCallback);
         #endif
