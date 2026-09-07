@@ -33,6 +33,7 @@
 #include <Utils/Common/Features.h>
 #include <Utils/Common/SubscriptionMessage.h>
 #include <Utils/Platform/Stacktrace.h>
+#include <Utils/Network/GitHubDownloader.h>
 
 namespace SR_CORE_NS {
     Application::Application()
@@ -113,30 +114,6 @@ namespace SR_CORE_NS {
 
         return true;
     }
-
-    /*void Application::TryPlayStartSound() {
-        auto&& pEditor = m_engine->GetEditor();
-        if (!pEditor || !pEditor->Enabled()) {
-            m_isNeedPlaySound = false;
-            return;
-        }
-
-        if (auto&& pRenderScene = m_engine->GetRenderScene()) {
-            if (!pRenderScene->GetPipeline()) {
-                return;
-            }
-
-            if (pRenderScene->GetPipeline()->IsDirty()) {
-                return;
-            }
-
-            if (auto&& pSound = SR_AUDIO_NS::Sound::Load("Editor/Audio/Success.mp3")) {
-                pSound->Play();
-            }
-
-            m_isNeedPlaySound = false;
-        }
-    }*/
 
     static std::string_view ResolvePath(const std::string_view& original, const std::string_view& engineRoot, decltype(&SR_PLATFORM_NS::GetPathType) getFileType) {
         SR_TRACY_ZONE;
@@ -227,12 +204,26 @@ namespace SR_CORE_NS {
                         hooks.readFileHook = [applicationResources, hooks](auto&& path, auto&& buffer) {
                             return hooks.originalReadFile(ResolvePath(path.ToStringView(), applicationResources.ToStringView(), hooks.originalGetPathType), buffer);
                         };
-                        hooks.pathResolver = [applicationResources, hooks](std::string_view path) {
+                        hooks.pathResolver = [applicationResources, hooks](auto&& path) {
                             return ResolvePath(path, applicationResources.ToStringView(), hooks.originalGetPathType);
                         };
                     }
                 });
             }
+        }
+
+        if (auto&& gameLink = SR_UTILS_NS::CLIManager::Instance().GetOptionValue(SR_UTILS_NS::CLIOptions::GameLink)) {
+            SR_INFO("Application::InitializeResourcesFolder() : game link detected: \"{}\".", gameLink.value());
+
+            SR_NETWORK_NS::GitHubDownloader downloader(gameLink.value());
+            SR_LOG("Application::InitializeResourcesFolder() : default branch: {}", downloader.GetDefaultBranch());
+
+            auto&& tree = downloader.GetTree();
+            for (auto&& [path, entry] : tree) {
+                SR_LOG("Application::InitializeResourcesFolder() : path: {} (sha: {})", path, entry.sha);
+            }
+
+            return false;
         }
 
         return true;

@@ -25,6 +25,10 @@ namespace SR_SCRIPTING_NS {
 
     void CppCompiler::SaveSettings() {
         const SR_UTILS_NS::Path settingsPath = m_cachePath.Concat(CPP_COMPILER_SETTINGS_PATH);
+        if (!settingsPath.Create()) {
+            SR_ERROR("CppCompiler::SaveSettings() : failed to create folder for settings file: {}", settingsPath);
+            return;
+        }
         SR_LOG("CppCompiler::SaveSettings() : save settings to file: {}", settingsPath);
         SR_UTILS_NS::SRASerializer serializer;
         serializer.SetUseTabs(true);
