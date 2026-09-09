@@ -102,8 +102,9 @@ namespace SR_CORE_NS::Tests {
                     return SR_UTILS_NS::TestExecutionResult::Error;
                 }
 
-                std::vector<std::string> expectedCode = SR_UTILS_NS::FileSystem::ReadAllLines(expectedFile);
-                std::vector<std::string> resultCode = SR_UTILS_NS::FileSystem::ReadAllLines(resultFile);
+                SR_UTILS_NS::String expectedBuffer, resultBuffer;
+                auto&& expectedCode = SR_UTILS_NS::FileSystem::ReadAllLines(expectedFile, expectedBuffer);
+                auto&& resultCode = SR_UTILS_NS::FileSystem::ReadAllLines(resultFile, resultBuffer);
 
                 if (expectedCode.size() != resultCode.size()) {
                     SR_ERROR("SRSLTest::Run() : expected and result shader files have different number of lines: {} vs {}", expectedFile, resultFile);
