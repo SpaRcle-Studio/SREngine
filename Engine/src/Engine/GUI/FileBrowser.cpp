@@ -30,6 +30,7 @@
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/Common/StringUtils.h>
 #include <Utils/FileSystem/FileSystem.h>
+#include <Utils/FileSystem/VFS.h>
 
 #include <Enum/TreeNodeFlags.hpp>
 
@@ -411,7 +412,7 @@ namespace SR_CORE_NS::GUI {
             bool isAvailable = true;
 
             isAvailable &= m_newAssetIndex >= 0 && m_newAssetIndex < (int32_t)m_availableAssets.size();
-            isAvailable &= m_newAssetPath.IsValidPath() && m_newAssetPath.GetType() == SR_UTILS_NS::Path::Type::Undefined;
+            isAvailable &= m_newAssetPath.IsValidPath() && !SR_UTILS_NS::VFS::Instance().IsExists(m_newAssetPath);
 
             {
                 SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard lock(!isAvailable);

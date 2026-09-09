@@ -31,7 +31,7 @@ namespace SR_AUDIO_NS {
             path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(path);
         }
 
-        if (!path.Exists(SR_UTILS_NS::Path::Type::File)) {
+        if (!path.IsFile()) {
             SR_ERROR("RawSound::Load() : file not found!\n\tPath: {}", path.ToString());
             return false;
         }

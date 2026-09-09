@@ -1391,6 +1391,7 @@ def generate_classes_code(logger: logger_utils.Logger, context: codegen_context.
             generated += 1
 
     # delete not used files
+    logger.log_info('Generated files: ' + str(generated_files))
     for file in glob(f'{context.codegen_dir}/*.generated.hpp', recursive=False):
         if os.path.basename(file) not in generated_files:
             logger.log_info(f'Remove old codegen file: {file}')

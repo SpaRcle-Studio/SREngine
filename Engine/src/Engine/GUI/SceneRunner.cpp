@@ -6,15 +6,16 @@
 #include <Engine/GUI/EditorGUI.h>
 #include <Engine/Engine.h>
 
-#include <Utils/TaskManager/TaskManager.h>
-#include <Utils/Common/StoreUtils.h>
-#include <Utils/ECS/Prefab.h>
-
 #include <Audio/SoundManager.h>
 
 #include <Graphics/Overlay/ImGuiOverlay.h>
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Pipeline/Pipeline.h>
+
+#include <Utils/TaskManager/TaskManager.h>
+#include <Utils/Common/StoreUtils.h>
+#include <Utils/ECS/Prefab.h>
+#include <Utils/FileSystem/VFS.h>
 
 #include <Codegen/SceneRunner.generated.hpp>
 
@@ -154,23 +155,14 @@ namespace SR_CORE_NS::GUI {
 
         auto&& runtimePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(SR_UTILS_NS::Path(SR_WORLD_NS::Scene::RuntimeScenePath).ConcatExt(extension));
 
-        if (runtimePath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
-            if (!SR_PLATFORM_NS::Delete(runtimePath)) {
-                SR_ERROR("SceneRunner::PlayScene() : failed to delete cached scene!");
-                return false;
-            }
+        if (runtimePath.IsDir()) {
+            SR_UTILS_NS::VFS::Instance().Delete(runtimePath);
         }
 
-        SR_LOG("SceneRunner::PlayScene() : copying scene: \n\tFrom: " + pScene->GetAbsPath().ToString() + "\n\tTo: " + runtimePath.ToString());
-
-        if (!runtimePath.Create()) {
-            SR_ERROR("SceneRunner::PlayScene() : failed to create runtime scene folder!");
-            return false;
-        }
+        SR_LOG("SceneRunner::PlayScene() : copying scene: \n\tFrom: {}\n\tTo: {}", pScene->GetAbsPath(), runtimePath);
 
         if (!pScene->GetAbsPath().Copy(runtimePath)) {
-            SR_ERROR("SceneRunner::PlayScene() : failed to copy scene!\n\tSource: "
-                + pScene->GetPath().ToString() + "\n\tDestination: " + runtimePath.ToString());
+            SR_ERROR("SceneRunner::PlayScene() : failed to copy scene!\n\tSource: {}\n\tDestination: {}", pScene->GetPath(), runtimePath);
             return false;
         }
 

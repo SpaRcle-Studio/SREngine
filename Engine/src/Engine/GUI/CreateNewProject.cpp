@@ -24,6 +24,12 @@ namespace SR_CORE_GUI_NS {
         ResetSettings();
     }
 
+    CreateNewProject::~CreateNewProject() {
+        if (m_pVFSBackend) {
+            SR_UTILS_NS::VFS::Instance().Unmount(m_pVFSBackend);
+        }
+    }
+
     bool CreateNewProject::CreateProject() {
         auto&& settingsPath = m_projectFinalPath.Concat(".{}"_format(ProjectSettings::GetMetaStatic()->GetExtension()));
         ProjectSettings::Ptr pSettings = SRNew<ProjectSettings>();
@@ -39,7 +45,7 @@ namespace SR_CORE_GUI_NS {
         }
         pSettings->DeleteResource();
 
-        m_projectFinalPath.Concat("Resources").CreateIfNotExists();
+        m_projectFinalPath.Concat("Resources").CreateDirectories();
 
         SR_INFO("CreateNewProject::Draw() : project created successfully!\n\tPath: ", m_projectFinalPath);
 
@@ -48,7 +54,7 @@ namespace SR_CORE_GUI_NS {
 
     void CreateNewProject::ResetSettings() {
         m_projectName = "New Project";
-        m_projectPath = SR_UTILS_NS::ResourceManager::Instance().GetResPathRef();
+        SetProjectPath(SR_UTILS_NS::ResourceManager::Instance().GetResPathRef());
         m_projectPathInput = m_projectPath.ToString();
         m_projectFinalPath = m_projectPath.Concat(m_projectName);
     }
@@ -85,7 +91,7 @@ namespace SR_CORE_GUI_NS {
             if (SR_GRAPH_GUI_NS::Immediate::Button("...", SR_MATH_NS::FVector2(size.x * 0.1f, 0))) {
                 auto path = SR_UTILS_NS::FileDialog::Instance().PickFolder(SR_UTILS_NS::ResourceManager::Instance().GetResPathRef());
                 if (!path.IsEmpty()) {
-                    m_projectPath = path;
+                    SetProjectPath(path);
                     m_projectPathInput = m_projectPath.ToString();
                     m_projectFinalPath = m_projectPath.Concat(m_projectName);
                 }
@@ -95,7 +101,7 @@ namespace SR_CORE_GUI_NS {
 
             SR_GRAPH_GUI_NS::Immediate::PushItemWidth(size.x * 0.7f);
             if (SR_GRAPH_GUI_NS::Immediate::InputText("##path", &m_projectPathInput)) {
-                m_projectPath = m_projectPathInput;
+                SetProjectPath(m_projectPathInput);
                 m_projectFinalPath = m_projectPath.Concat(m_projectName);
             }
             SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
@@ -123,6 +129,8 @@ namespace SR_CORE_GUI_NS {
                 if (settingsPath.IsFile()) {
                     canOpen = true;
                     SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Green(), "You can open project at: ");
+                    SR_GRAPH_GUI_NS::Immediate::SameLine();
+                    SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Cyan(), m_projectFinalPath.empty() ?  "!! Invalid path !!" : m_projectFinalPath.c_str());
                     SR_GRAPH_GUI_NS::Immediate::SameLine();
                 }
                 else {
@@ -174,7 +182,7 @@ namespace SR_CORE_GUI_NS {
         ResetSettings();
 
         m_projectName = SR_UTILS_NS::StoreUtils::User::GetString("LastCreatedProjectName", m_projectName);
-        m_projectPath = SR_UTILS_NS::StoreUtils::User::GetString("LastCreatedProjectPath", m_projectPath.ToString());
+        SetProjectPath(SR_UTILS_NS::StoreUtils::User::GetString("LastCreatedProjectPath", m_projectPath.ToString()));
         if (m_projectName.empty() || m_projectPath.empty()) {
             ResetSettings();
         }
@@ -189,5 +197,18 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::StoreUtils::User::SetString("LastCreatedProjectName", m_projectName);
         SR_UTILS_NS::StoreUtils::User::SetString("LastCreatedProjectPath", m_projectPath.ToString());
         SR_UTILS_NS::StoreUtils::Storage::Instance().Save();
+    }
+
+    void CreateNewProject::SetProjectPath(const SR_UTILS_NS::Path& path) {
+        if (m_lastProjectPath != path) {
+            m_lastProjectPath = path;
+            m_projectPathInput = path.ToStringView();
+            m_projectPath = path;
+            if (m_pVFSBackend) {
+                SR_UTILS_NS::VFS::Instance().Unmount(m_pVFSBackend);
+            }
+            m_pVFSBackend = new SR_UTILS_NS::DirectoryVFSBackend(m_projectPath);
+            SR_UTILS_NS::VFS::Instance().Mount(m_projectPath, m_pVFSBackend, -10000);
+        }
     }
 }

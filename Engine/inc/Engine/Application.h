@@ -27,8 +27,6 @@ namespace SR_CORE_NS {
 
         void Reload();
 
-        SR_NODISCARD const SR_UTILS_NS::Path& GetResourcesPath() const { return m_resourcesPath; }
-        SR_NODISCARD const SR_UTILS_NS::Path& GetEngineResourcesPath() const { return m_engineResourcesPath; }
         SR_NODISCARD const SR_HTYPES_NS::SharedPtr<Engine>& GetEngine() const { return m_engine; }
         SR_NODISCARD SR_HTYPES_NS::SharedPtr<Engine>& GetEngine() { return m_engine; }
 
@@ -39,9 +37,6 @@ namespace SR_CORE_NS {
         bool InitLogger(const SR_UTILS_NS::Path& logDir);
 
     private:
-        SR_UTILS_NS::Path m_engineResourcesPath;
-        SR_UTILS_NS::Path m_resourcesPath;
-
         bool m_hasErrors = false;
         std::atomic<bool> m_isNeedReload = false;
 

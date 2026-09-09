@@ -13,6 +13,7 @@
 #include <Utils/FileSystem/PathDataAccessor.h>
 #include <Utils/Common/CLIManager.h>
 #include <Utils/FileSystem/FileSystem.h>
+#include <Utils/FileSystem/VFS.h>
 
 #include <Enum/CppCompilerType.hpp>
 
@@ -25,10 +26,6 @@ namespace SR_SCRIPTING_NS {
 
     void CppCompiler::SaveSettings() {
         const SR_UTILS_NS::Path settingsPath = m_cachePath.Concat(CPP_COMPILER_SETTINGS_PATH);
-        if (!settingsPath.Create()) {
-            SR_ERROR("CppCompiler::SaveSettings() : failed to create folder for settings file: {}", settingsPath);
-            return;
-        }
         SR_LOG("CppCompiler::SaveSettings() : save settings to file: {}", settingsPath);
         SR_UTILS_NS::SRASerializer serializer;
         serializer.SetUseTabs(true);
@@ -51,6 +48,10 @@ namespace SR_SCRIPTING_NS {
         SR_LOG("CppCompiler::Init() : builtin windows sdk version: {}", m_windowsSDKPath);
         SR_LOG("CppCompiler::Init() : builtin windows sdk dir: {}", m_windowsSDKVersion);
 
+        if (!SR_UTILS_NS::VFS::Instance().HaveMount(m_windowsSDKPath)) {
+            SR_UTILS_NS::VFS::Instance().Mount(m_windowsSDKPath, new SR_UTILS_NS::ReadOnlyDirectoryVFSBackend(m_windowsSDKPath), 0, true);
+        }
+
         if (!m_windowsSDKPath.IsDir()) {
             SR_ERROR("CppCompiler::Init() : builtin windows sdk dir is not a directory: {}", m_windowsSDKPath);
             return false;
@@ -67,7 +68,7 @@ namespace SR_SCRIPTING_NS {
 
         /// проверяем есть ли в папке um/x64 файл synchronization.lib
         bool isChanged = false;
-        while (!SR_UTILS_NS::FileSystem::IsFileExists(m_windowsSDKLibPath.Concat("um/x64/synchronization.lib"))) {
+        while (!SR_PLATFORM_NS::IsFileExists(m_windowsSDKLibPath.Concat("um/x64/synchronization.lib"))) {
             if (folders.empty()) {
                 SR_ERROR("CppCompiler::Init() : you have no valid windows sdk installed! It's not contains synchronization.lib file!");
                 return false;
@@ -88,7 +89,9 @@ namespace SR_SCRIPTING_NS {
     bool CppCompiler::Init() {
         m_cachePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
         m_resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-        m_engineResourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetEngineResPath();
+
+        SR_UTILS_NS::VFS::Instance().ResolvePath(m_cachePath);
+        SR_UTILS_NS::VFS::Instance().ResolvePath(m_resourcesPath);
 
         if (!FindWindowsSDK()) {
             SR_ERROR("CppCompiler::Init() : failed to find windows sdk!");
@@ -96,7 +99,7 @@ namespace SR_SCRIPTING_NS {
         }
 
         auto&& settingsPath = m_cachePath.Concat(CPP_COMPILER_SETTINGS_PATH);
-        if (SR_UTILS_NS::FileSystem::IsFileExists(settingsPath)) {
+        if (SR_UTILS_NS::VFS::Instance().IsFileExists(settingsPath)) {
             SR_LOG("CppCompiler::Init() : loading settings from file: {}", settingsPath);
             SR_UTILS_NS::SRADeserializer deserializer;
             if (!deserializer.LoadFromFile(settingsPath)) {
@@ -148,7 +151,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     bool CppCompiler::IsCompilerAvailable() const {
-        return SR_UTILS_NS::FileSystem::IsFileExists(m_settings.compilerPath);
+        return SR_PLATFORM_NS::IsFileExists(m_settings.compilerPath);
     }
 
     bool CppCompiler::InstallMinGW() {
@@ -158,7 +161,7 @@ namespace SR_SCRIPTING_NS {
         auto&& zipFile = cache.Concat("mingw.zip");
         auto&& installDir = cache.Concat("mingw");
 
-        if (!SR_UTILS_NS::FileSystem::IsFileExists(zipFile)) {
+        if (!SR_PLATFORM_NS::IsFileExists(zipFile)) {
             if (!SR_PLATFORM_NS::DownloadFile(url, zipFile)) {
                 SR_ERROR("CppCompiler::InstallMinGW() : failed to download file from url: " + url);
                 return false;
@@ -173,7 +176,7 @@ namespace SR_SCRIPTING_NS {
         }
 
         if (zipFile.IsFile()) {
-            SR_PLATFORM_NS::Delete(zipFile);
+            SR_UTILS_NS::VFS::Instance().Delete(zipFile);
         }
         else {
             SRHalt("Zip file is not a file!");
@@ -293,12 +296,12 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
-        if (!SR_UTILS_NS::Path(outModulePath).Create()) {
-            SR_ERROR("CppCompiler::Compile() : failed to create output folder: " + outModulePath);
+        if (!SR_UTILS_NS::Path(outModulePath).CreateDirectories()) {
+            SR_ERROR("CppCompiler::Compile() : failed to create output folder: {}", outModulePath);
             return false;
         }
 
-        std::string sourceFiles;
+        SR_UTILS_NS::String sourceFiles;
         if (m_settings.compilerType == CppCompilerType::GCC) {
             sourceFiles = m_cachePath.Concat("Scripts/Codegen/{}.cxx"_format(context.moduleName)).ToString() + " ";
         }
@@ -308,7 +311,7 @@ namespace SR_SCRIPTING_NS {
 
         /// MSVC gets a single command line and the OS strips quotes. Linux/Android use fork+exec with
         /// naive tokenization (whitespace only), so `-I"/path"` must not be used: g++ would see literal quotes in the path.
-        std::string includePaths;
+        SR_UTILS_NS::String includePaths;
         for (auto&& includePath : context.includePaths) {
             if (m_settings.compilerType == CppCompilerType::GCC) {
                 includePaths += "-I" + includePath.ToStringRef() + " ";
@@ -415,11 +418,11 @@ namespace SR_SCRIPTING_NS {
         }
 
         if (m_settings.compilerType == CppCompilerType::MSVC) {
-            if (SR_UTILS_NS::FileSystem::IsFileExists(outPdbPath)) {
-                if (!SR_PLATFORM_NS::Copy(outPdbPath, outPdbPath + ".protected")) {
+            if (SR_PLATFORM_NS::IsFileExists(outPdbPath)) {
+                if (!SR_UTILS_NS::VFS::Instance().Copy(outPdbPath, outPdbPath + ".protected")) {
                     SR_ERROR("CppCompiler::Compile() : failed to copy PDB file!");
                 }
-                SR_PLATFORM_NS::Delete(outPdbPath);
+                SR_UTILS_NS::VFS::Instance().Delete(outPdbPath);
             }
         }
 
@@ -477,12 +480,12 @@ namespace SR_SCRIPTING_NS {
             auto&& pathRelease = libDir.Concat("lib{}.a"_format(libName));
         #endif
 
-            if (SR_UTILS_NS::FileSystem::IsFileExists(pathRelease)) {
+            if (SR_PLATFORM_NS::IsFileExists(pathRelease)) {
                 m_engineLibs.emplace_back(pathRelease);
                 continue;
             }
 
-            if (SR_UTILS_NS::FileSystem::IsFileExists(pathDebug)) {
+            if (SR_PLATFORM_NS::IsFileExists(pathDebug)) {
                 m_engineLibs.emplace_back(pathDebug);
                 continue;
             }
@@ -506,7 +509,7 @@ namespace SR_SCRIPTING_NS {
         const auto builtInCompilerPath = GetBuiltInMSVCCompilerPath();
 
         if (SR_UTILS_NS::CLIManager::Instance().IsHeadlessMode()) {
-            if (SR_UTILS_NS::FileSystem::IsFileExists(builtInCompilerPath)) {
+            if (SR_PLATFORM_NS::IsFileExists(builtInCompilerPath)) {
                 SR_LOG("CppCompiler::FindWindowsCompiler() : headless mode detected, using built-in MSVC compiler!");
                 m_settings.useBuiltInCompiler = true;
                 m_settings.compilerPath = builtInCompilerPath;
@@ -516,7 +519,7 @@ namespace SR_SCRIPTING_NS {
             return false;
         }
 
-        if (SR_UTILS_NS::FileSystem::IsFileExists(builtInCompilerPath)) {
+        if (SR_PLATFORM_NS::IsFileExists(builtInCompilerPath)) {
             const auto&& result = SR_PLATFORM_NS::ShowMessageBox(
                 "Choose compiler",
                 "MSVC built-in compiler is available. Do you want to use it? Use only if you are developer.",
@@ -552,7 +555,7 @@ namespace SR_SCRIPTING_NS {
                 SR_PLATFORM_NS::MessageBoxIconType::Info,
                 SR_PLATFORM_NS::MessageBoxDefaultButtonType::YesOk
             );
-            auto&& pathToVSBuildToolsInstaller = m_engineResourcesPath.Concat("Engine/Utilities/vs_BuildTools.exe");
+            auto&& pathToVSBuildToolsInstaller = m_resourcesPath.Concat("Engine/Utilities/vs_BuildTools.exe");
             SR_SYSTEM_LOG("CppCompiler::FindWindowsCompiler() : path to VS Build Tools installer: {}", pathToVSBuildToolsInstaller);
             SR_SYSTEM_LOG("CppCompiler::FindWindowsCompiler() : engine will be terminated after installer launched!");
             SR_PLATFORM_NS::ExecuteCommand(pathToVSBuildToolsInstaller.ToStringRef());

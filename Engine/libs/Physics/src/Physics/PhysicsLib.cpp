@@ -37,10 +37,10 @@ namespace SR_PHYSICS_NS {
     }
 
     void PhysicsLibrary::InitSingleton() {
-        auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Configs/Physics.xml");
+        auto&& path = CoreResLoader::GetResPath().Concat("Engine/Configs/Physics.xml");
         auto&& document = SR_XML_NS::Document::Load(path);
         if (!document.Valid()) {
-            SR_ERROR("PhysicsLibrary::InitSingleton() : failed to load xml document! \n\tPath: " + path.ToString());
+            SR_ERROR("PhysicsLibrary::InitSingleton() : failed to load xml document! \n\tPath: {}", path);
             return Super::InitSingleton();
         }
 
@@ -59,7 +59,7 @@ namespace SR_PHYSICS_NS {
             m_supportedLibs.insert(library);
         }
 
-        const auto&& defaultMaterialPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/PhysicsMaterials/DefaultMaterial.sras");
+        const auto defaultMaterialPath = "Engine/PhysicsMaterials/DefaultMaterial.sras";
         m_defaultMaterial = SR_UTILS_NS::Asset::Load<SR_PTYPES_NS::PhysicsMaterial>(defaultMaterialPath);
 
         if (m_defaultMaterial) {

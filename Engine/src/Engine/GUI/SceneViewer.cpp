@@ -383,7 +383,7 @@ namespace SR_CORE_GUI_NS {
         m_updateNonHoveredSceneViewer = SR_UTILS_NS::Features::Instance().Enabled("UpdateNonHoveredSceneViewer", true);
 
         auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(CAMERA_XML);
-        if (!path.Exists()) {
+        if (!path.IsFile()) {
             return;
         }
 

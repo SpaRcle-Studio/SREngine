@@ -10,6 +10,7 @@
 #include <Utils/TypeTraits/Factory.h>
 #include <Utils/Common/StringAtomLiterals.h>
 #include <Utils/FileSystem/FileSystem.h>
+#include <Utils/FileSystem/VFS.h>
 
 namespace SR_SCRIPTING_NS {
     void CppBehaviourInstance::OnBehaviourUnloaded(ManagerPasskey) {
@@ -50,7 +51,7 @@ namespace SR_SCRIPTING_NS {
         SR_TRACY_ZONE;
         SR_LOCK_GUARD;
 
-        SR_LOG("ModuleManager::ReloadModule() : reloading module \"" + path.ToString() + "\"");
+        SR_LOG("ModuleManager::ReloadModule() : reloading module \"{}\"...", path);
 
         const SR_UTILS_NS::StringAtom moduleName = path.GetBaseName();
 
@@ -104,42 +105,36 @@ namespace SR_SCRIPTING_NS {
         auto&& runtimePath = m_cachePath.Concat("Scripts/Runtime/Modules/{}.{}"_format(moduleName, ScriptSystem::GetDynamicLibraryExtension()));
         auto&& pdbRuntimePath = m_cachePath.Concat("Scripts/Runtime/Modules/{}.pdb"_format(moduleName));
 
-        if (runtimePath.IsFile() && !SR_PLATFORM_NS::Delete(runtimePath)) {
-            SR_ERROR("ModuleManager::LoadModule() : failed to delete module!\n\tPath: " + runtimePath.ToString());
-            return nullptr;
+        if (runtimePath.IsFile()) {
+            SR_UTILS_NS::VFS::Instance().Delete(runtimePath);
         }
 
-        if (pdbRuntimePath.IsFile() && !SR_PLATFORM_NS::Delete(pdbRuntimePath)) {
-            SR_ERROR("ModuleManager::LoadModule() : failed to delete module pdb!\n\tPath: " + pdbRuntimePath.ToString());
-            return nullptr;
-        }
-
-        if (!runtimePath.Create()) {
-            SR_ERROR("ModuleManager::LoadModule() : failed to create module path!\n\tPath: " + modulePath.ToString());
-            return nullptr;
+        if (pdbRuntimePath.IsFile()) {
+            SR_UTILS_NS::VFS::Instance().Delete(pdbRuntimePath);
         }
 
         auto&& sourcePdbPath = modulePath.GetFolder().Concat("{}.pdb"_format(moduleName));
-        if (SR_UTILS_NS::FileSystem::IsFileExists(sourcePdbPath)) {
-            if (!SR_PLATFORM_NS::Copy(sourcePdbPath, pdbRuntimePath)) {
+        if (SR_PLATFORM_NS::IsFileExists(sourcePdbPath)) {
+            if (!SR_UTILS_NS::VFS::Instance().Copy(sourcePdbPath, pdbRuntimePath)) {
                 SR_ERROR("ModuleManager::LoadModule() : failed to copy module pdb!\n\tPath: " + sourcePdbPath.ToString());
                 return nullptr;
             }
         }
 
-        if (!SR_PLATFORM_NS::Copy(modulePath, runtimePath)) {
-            SR_ERROR("ModuleManager::LoadModule() : failed to copy module!\n\tPath: " + modulePath.ToString());
+        if (!SR_UTILS_NS::VFS::Instance().Copy(modulePath, runtimePath)) {
+            SR_ERROR("ModuleManager::LoadModule() : failed to copy module!\n\tPath: {}", modulePath);
             return nullptr;
         }
 
-        if (!SR_UTILS_NS::FileSystem::IsFileExists(runtimePath)) {
-            SR_ERROR("ModuleManager::LoadModule() : module not exists!\n\tPath: " + runtimePath.ToString());
+        if (!runtimePath.IsExists()) {
+            SR_ERROR("ModuleManager::LoadModule() : module not exists!\n\tPath: {}", runtimePath);
             return nullptr;
         }
 
+        SR_UTILS_NS::VFS::Instance().ResolvePath(runtimePath);
         auto&& pLibraryHandle = SR_PLATFORM_NS::LoadLibraryModule(runtimePath);
         if (!pLibraryHandle) {
-            SR_ERROR("ModuleManager::LoadModule() : failed to load module!\n\tPath: " + runtimePath.ToString());
+            SR_ERROR("ModuleManager::LoadModule() : failed to load module!\n\tPath: {}", runtimePath);
             return nullptr;
         }
 
@@ -147,7 +142,7 @@ namespace SR_SCRIPTING_NS {
         using LoadFunctionType = void(*)();
         auto pRegisterFunction = (LoadFunctionType)(SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, registerFunctionName.c_str()));
         if (!pRegisterFunction) {
-            SR_ERROR("ModuleManager::LoadModule() : failed to find register function in module!\n\tPath: " + runtimePath.ToString() + "\n\tFunction name: " + registerFunctionName);
+            SR_ERROR("ModuleManager::LoadModule() : failed to find register function in module!\n\tPath: {}\n\tFunction name: {}", runtimePath, registerFunctionName);
             SR_PLATFORM_NS::UnloadLibraryModule(pLibraryHandle);
             return nullptr;
         }

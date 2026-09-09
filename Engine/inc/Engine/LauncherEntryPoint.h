@@ -25,11 +25,9 @@ static int LauncherEntryPoint(const LauncherEntryPointAfterInitCallback& afterIn
 
     auto&& launcherInitStatus = pLauncher->InitLauncher();
 
-    if (!SR_UTILS_NS::ResourceManager::Instance().IsInitialized()) {
-        if (!SR_UTILS_NS::ResourceManager::Instance().Initialize(pLauncher->GetResourcesPath(), pLauncher->GetEngineResourcesPath())) {
-            SR_PLATFORM_NS::WriteConsoleError("Failed to initialize resources manager!");
-            code = 1;
-        }
+    if (!SR_UTILS_NS::ResourceManager::Instance().IsInitialized() && !SR_UTILS_NS::ResourceManager::Instance().Initialize()) {
+        SR_PLATFORM_NS::WriteConsoleError("Failed to initialize resources manager!");
+        code = 1;
     }
 
     if (launcherInitStatus == SR_CORE_NS::LauncherInitStatus::Error) {

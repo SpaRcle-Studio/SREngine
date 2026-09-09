@@ -57,6 +57,7 @@
 #include <Utils/Common/StringAtomLiterals.h>
 #include <Utils/Common/CLIManager.h>
 #include <Utils/Common/StoreUtils.h>
+#include <Utils/FileSystem/VFS.h>
 
 #include <Enum/EditorIcon.hpp>
 
@@ -458,7 +459,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     bool EditorGUI::LoadSceneFromCachedPath() {
-        if (!m_cachedScenePath.Exists()) {
+        if (!m_cachedScenePath.IsFile()) {
             if (SR_UTILS_NS::Debug::Instance().GetLevel() == SR_UTILS_NS::Debug::Level::High) {
                 SR_LOG("EditorGUI::LoadSceneFromCachedPath() : cached file of scene path wasn't found!");
             }
@@ -466,6 +467,10 @@ namespace SR_CORE_GUI_NS {
         }
 
         auto&& marshal = SR_HTYPES_NS::Marshal::Load(m_cachedScenePath);
+        if (!marshal) {
+            SR_ERROR("EditorGUI::LoadSceneFromCachedPath() : failed to load cached scene path!");
+            return false;
+        }
         SR_UTILS_NS::Path scenePath = marshal.Read<std::string>();
 
         if (scenePath.IsEmpty()) {
@@ -501,15 +506,14 @@ namespace SR_CORE_GUI_NS {
     void EditorGUI::ReloadWindows() {
         const auto path = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/EditorWidgets.xml");
 
-        if (!path.Exists()) {
-            path.Create();
+        if (!path.IsFile()) {
             auto document = SR_XML_NS::Document::New();
             auto widgets = document.Root().AppendChild("Widgets");
 
             for (auto&& [name, widget] : GetWidgets())
                 widgets.AppendChild("Widget").NAppendAttribute("Name", name).NAppendAttribute("Open", true);
 
-            document.Save(path.ToString());
+            document.Save(path);
         }
 
         auto document = SR_XML_NS::Document::Load(path);
@@ -529,8 +533,8 @@ namespace SR_CORE_GUI_NS {
         const auto&& defaultConfigPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/ImGuiEditor.config");
         const auto&& defaultWidgetsPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/EditorWidgets.xml");
 
-        SR_UTILS_NS::Platform::Copy(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/ImGuiEditor.config"),defaultConfigPath);
-        SR_UTILS_NS::Platform::Copy(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/EditorWidgets.xml"), defaultWidgetsPath);
+        SR_UTILS_NS::VFS::Instance().Copy(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/ImGuiEditor.config"), defaultConfigPath);
+        SR_UTILS_NS::VFS::Instance().Copy(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/EditorWidgets.xml"), defaultWidgetsPath);
 
         ReloadWindows();
         ShowAll();

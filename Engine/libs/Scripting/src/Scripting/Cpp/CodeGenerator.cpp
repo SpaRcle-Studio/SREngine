@@ -10,6 +10,7 @@
 #include <Utils/Common/Features.h>
 #include <Utils/Common/StringAtomLiterals.h>
 #include <Utils/FileSystem/FileSystem.h>
+#include <Utils/FileSystem/VFS.h>
 #include <Utils/Serialization/SRASerialization.h>
 
 #include <Enum/PlatformType.hpp>
@@ -101,15 +102,17 @@ namespace SR_SCRIPTING_NS {
         SR_UTILS_NS::Set<SR_UTILS_NS::Path> updatedModules;
 
         for (auto&& module : changedModules) {
-            if (module.IsFile()) {
+            SR_UTILS_NS::Path modulePath = module;
+            SR_UTILS_NS::VFS::Instance().UnResolvePath(modulePath);
+            if (modulePath.IsFile()) {
                 if (ScriptSystem::ENGINE_MODULE_FILE_NAME != module.GetBaseNameAndExt()) {
-                    SRHalt("CppCodeGenerator::ProcessChangedModules() : file is not a engine module!\n\tPath: {}", module);
+                    SRHalt("CppCodeGenerator::ProcessChangedModules() : file is not a engine module!\n\tPath: {}", modulePath);
                     continue;
                 }
-                updatedModules.insert(module);
+                updatedModules.insert(modulePath);
             }
             else {
-                deletedModules.insert(module);
+                deletedModules.insert(modulePath);
             }
         }
 
@@ -193,10 +196,18 @@ namespace SR_SCRIPTING_NS {
             }
 
             const SR_UTILS_NS::Path buildDir = modulesPath.Concat(module.moduleInfo.moduleName);
-            SR_UTILS_NS::Path libclangFolder = m_engineResourcesFolder.Concat("Engine/Utilities");
+            SR_UTILS_NS::Path libclangFolder = CoreResLoader::GetResPath().Concat("Engine/Utilities/codegen-modules.json");
+            SR_UTILS_NS::VFS::Instance().ResolvePath(libclangFolder);
 
-            const std::string command = "{} --codegen_dir \"{}\" --root_build_dir \"{}\" --repo_dir \"{}\" --config_dir \"{}\" --module_name \"{}\" --is_script --help_sources_dir \"{}\""_format(
-                m_codegenExecutablePath, buildDir, buildDir, module.path.GetFolder(), libclangFolder, module.moduleInfo.moduleName, m_pScriptSystem->GetEngineSourcesPath().Concat("Engine")
+            SR_UTILS_NS::Path apiFolder = m_pScriptSystem->GetAPIFolder().Concat("Engine");
+            SR_UTILS_NS::VFS::Instance().ResolvePath(apiFolder);
+
+            SR_UTILS_NS::Path moduleFolder = module.path;
+            SR_UTILS_NS::VFS::Instance().ResolvePath(moduleFolder);
+            moduleFolder = moduleFolder.GetFolder();
+
+            const SR_UTILS_NS::String command = "{} --codegen_dir \"{}\" --root_build_dir \"{}\" --repo_dir \"{}\" --config_dir \"{}\" --module_name \"{}\" --is_script --help_sources_dir \"{}\""_format(
+                m_codegenExecutablePath, buildDir, buildDir, moduleFolder, libclangFolder.GetFolder(), module.moduleInfo.moduleName, apiFolder
             );
 
             SR_LOG("CppCodeGenerator::RegenerateChangedModules() : generating module...\n\tModule: {}\n\tCommand: {}", module.moduleInfo.moduleName, command);
@@ -254,10 +265,14 @@ namespace SR_SCRIPTING_NS {
 
             cmakeContent += "\t\tendif()\n";
 
-            cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, module.path.GetFolder());
+            SR_UTILS_NS::Path moduleFolder = module.path.GetFolder();
+            SR_UTILS_NS::VFS::Instance().ResolvePath(moduleFolder);
+            cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, moduleFolder);
 
             for (auto&& engineIncludeDir : m_pScriptSystem->GetEngineSourcesIncludePaths()) {
-                cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, engineIncludeDir);
+                SR_UTILS_NS::Path includeDir = engineIncludeDir;
+                SR_UTILS_NS::VFS::Instance().ResolvePath(includeDir);
+                cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, includeDir);
             }
 
             cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, modulesPath.Concat("{}/Codegen"_format(module.moduleInfo.moduleName)));
@@ -271,7 +286,10 @@ namespace SR_SCRIPTING_NS {
                 if (auto&& pDependencyModule = GetModule(dependency)) {
                     cmakeContent += "\tif(EXISTS {}/{}.cxx) \n"_format(m_cacheFolder.Concat("Scripts/Codegen"), module.moduleInfo.moduleName);
                     cmakeContent += "\t\ttarget_link_libraries(SCRIPT_MODULE_{} SCRIPT_MODULE_{})\n"_format(module.moduleInfo.moduleName, dependency);
-                    cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, pDependencyModule->path.GetFolder());
+
+                    SR_UTILS_NS::Path moduleFolder = pDependencyModule->path.GetFolder();
+                    SR_UTILS_NS::VFS::Instance().ResolvePath(moduleFolder);
+                    cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, moduleFolder);
                     cmakeContent += "\tendif()\n";
                 }
             }
@@ -279,19 +297,8 @@ namespace SR_SCRIPTING_NS {
 
         cmakeContent += "\nendif()";
 
-        if (!cmakeListsCachePath.Create()) {
-            SR_ERROR("CppCodeGenerator::RegenerateCmake() : failed to create script cmake folder!\n\tPath: {}", cmakeListsCachePath);
-            return;
-        }
-
-        if (cmakeListsCachePath.IsFile()) {
-            SR_PLATFORM_NS::Delete(cmakeListsCachePath);
-        }
-
-        std::ofstream cmakeFile(cmakeListsCachePath.ToString());
-        if (cmakeFile.is_open()) {
-            cmakeFile << cmakeContent;
-            cmakeFile.close();
+        if (auto&& file = SR_UTILS_NS::VFS::Instance().OpenFile(cmakeListsCachePath, SR_UTILS_NS::FileMode::Write)) {
+            file.Write(cmakeContent.data(), cmakeContent.size());
         }
         else {
             SR_ERROR("CppCodeGenerator::RegenerateCmake() : failed to open file!\n\tPath: {}", cmakeListsCachePath);
@@ -303,26 +310,28 @@ namespace SR_SCRIPTING_NS {
             }
 
             SR_LOG("CppCodeGenerator::RegenerateCmake() : CMakeLists.txt is outdated! Rewrite...\n\tPath: {}", cmakeListsPath);
-            SR_PLATFORM_NS::Delete(cmakeListsPath);
+            SR_UTILS_NS::VFS::Instance().Delete(cmakeListsPath);
         }
 
-        if (!SR_PLATFORM_NS::Copy(cmakeListsCachePath, cmakeListsPath)) {
+        if (!SR_UTILS_NS::VFS::Instance().Copy(cmakeListsCachePath, cmakeListsPath)) {
             SR_ERROR("CppCodeGenerator::RegenerateCmake() : failed to copy file!\n\tPath: {}", cmakeListsCachePath);
         }
     }
 
     bool CppCodeGenerator::Init() {
         m_resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-        m_engineResourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetEngineResPath();
         m_cacheFolder = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
+        SR_UTILS_NS::VFS::Instance().ResolvePath(m_resourcesFolder);
+        SR_UTILS_NS::VFS::Instance().ResolvePath(m_cacheFolder);
 
         if (SR_PLATFORM_NS::GetType() == SR_UTILS_NS::PlatformType::Windows) {
-            m_codegenExecutablePath = m_engineResourcesFolder.Concat("Engine/Utilities/codegen.exe");
+            m_codegenExecutablePath = "Engine/Utilities/codegen.exe";
         }
         else {
-            m_codegenExecutablePath = m_engineResourcesFolder.Concat("Engine/Utilities/codegen");
+            m_codegenExecutablePath = "Engine/Utilities/codegen";
         }
-
+        m_codegenExecutablePath = CoreResLoader::GetResPath().Concat(m_codegenExecutablePath);
+        SR_UTILS_NS::VFS::Instance().ResolvePath(m_codegenExecutablePath);
         return true;
     }
 
@@ -351,90 +360,39 @@ namespace SR_SCRIPTING_NS {
     }
 
     void CppCodeGenerator::InitModuleSources(CppCodegenModule& module) {
-        SR_UTILS_NS::FileSystem::ForEachFileInFolder(module.path.GetFolder(), true, [&module, this](const SR_UTILS_NS::Path& filePath) {
-            if (filePath.IsSubPath(m_cacheFolder)) {
+        SR_TRACY_ZONE;
+        SR_UTILS_NS::VFS::Instance().Enumerate(module.path.GetFolder(), [&module, this](const SR_UTILS_NS::VFSEntry& entry) {
+            if (entry.type != SR_UTILS_NS::FSItemType::File || entry.fullPath.starts_with(m_cacheFolder)) {
                 return;
             }
-            if (filePath.IsFile()) {
-                if (ScriptSystem::ALLOWED_CPP_EXTENSIONS.find(filePath.GetExtensionView()) != ScriptSystem::ALLOWED_CPP_EXTENSIONS.end()) {
-                    module.codeFiles.insert(filePath);
-                }
+            if (ScriptSystem::ALLOWED_CPP_EXTENSIONS.find(entry.extension) != ScriptSystem::ALLOWED_CPP_EXTENSIONS.end()) {
+                module.codeFiles.insert(entry.fullPath);
             }
-        });
+        }, true);
     }
 
     void CppCodeGenerator::GenerateModule(const CppCodegenModule& module) {
-        auto&& codegenFile = m_cacheFolder.Concat("Scripts/Codegen/{}.cxx"_format(module.moduleInfo.moduleName));
-        if (!codegenFile.Create()) {
-            SR_ERROR("CppCodeGenerator::GenerateModule() : failed to create codegen path!\n\tPath: {}", codegenFile);
-            return;
-        }
+        auto&& codegenPath = m_cacheFolder.Concat("Scripts/Codegen/{}.cxx"_format(module.moduleInfo.moduleName));
+        if (auto&& file = SR_UTILS_NS::VFS::Instance().OpenFile(codegenPath, SR_UTILS_NS::FileMode::Write)) {
+            file << "/// " << SR_CODEGEN_HEADER_COMMENT << "\n\n";
 
-        if (codegenFile.IsFile()) {
-            SR_PLATFORM_NS::Delete(codegenFile);
-        }
+            file << "#define SR_ENGINE_COMMON_PCH_FOR_BASE_CODE\n";
+            file << "#define SR_ENGINE_SCRIPT_API_MODE\n\n";
 
-        std::ofstream codegenFileStream(codegenFile.ToString());
-        if (codegenFileStream.is_open()) {
-            codegenFileStream << "/// " << SR_CODEGEN_HEADER_COMMENT << "\n\n";
+            file << "#include <Codegen/SpaRcleModule{}Core.generated.hpp>\n\n"_format(module.moduleInfo.moduleName);
 
-            codegenFileStream << "#define SR_ENGINE_COMMON_PCH_FOR_BASE_CODE\n";
-            codegenFileStream << "#define SR_ENGINE_SCRIPT_API_MODE\n\n";
-
-            codegenFileStream << "#include <Codegen/SpaRcleModule{}Core.generated.hpp>\n\n"_format(module.moduleInfo.moduleName);
-
-            for (auto&& file : module.codeFiles) {
-                if (file.GetExtensionView() == "cxx" || file.GetExtensionView() == "cpp") {
-                    codegenFileStream << "#include \"" << file.View() << "\"\n";
+            for (auto&& codeFilePath : module.codeFiles) {
+                if (codeFilePath.GetExtensionView() == "cxx" || codeFilePath.GetExtensionView() == "cpp") {
+                    file << "#include \"" << codeFilePath.View() << "\"\n";
                 }
             }
 
             if (!module.codeFiles.empty()) {
-                codegenFileStream << "\n";
+                file << "\n";
             }
-
-            /*bool hasBehaviours = false;
-            for (auto&& [filePath, fileMetadata] : module.codeFiles) {
-                for (auto&& behaviour : fileMetadata.behaviours) {
-                    codegenFileStream << "void* CodegenAllocateScriptBehaviour_{}() "_format(behaviour.name);
-                    codegenFileStream << "{ "<< "return new {}(); "_format(behaviour.MakeNameWithNamespace()) << "}\n";
-                }
-                hasBehaviours = !fileMetadata.behaviours.empty();
-            }
-
-            if (hasBehaviours) {
-                codegenFileStream << "\n";
-            }*/
-
-            /*if (!m_pScriptSystem->IsUseEngineSourcesAPI()) {
-                std::string compilerVersion = m_compiler->GetCompilerVersion();
-                compilerVersion = SR_UTILS_NS::StringUtils::ReplaceAll<std::string>(compilerVersion, "\r", "");
-                compilerVersion = SR_UTILS_NS::StringUtils::ReplaceAll<std::string>(compilerVersion, "\n", "\\n");
-
-                codegenFileStream << "bool CodegenRegisterModule_{}_Module() "_format(module.moduleInfo.moduleName) << "{\n";
-                codegenFileStream << "\tSpaRcleAPI::CoreAPI::Instance()";
-                codegenFileStream << "\n\t\t.SetCompilerVersion(\"{}\")"_format(compilerVersion);
-                codegenFileStream << "\n\t\t.AddModule(\"{}\")"_format(module.moduleInfo.moduleName);
-                codegenFileStream << ";\n";
-
-                for (auto&& [filePath, fileMetadata] : module.codeFiles) {
-                    for (auto&& behaviour : fileMetadata.behaviours) {
-                        codegenFileStream << "\tSpaRcleAPI::CoreAPI::Instance().GetLastModule()\n";
-                        codegenFileStream << "\t\t.AddBehaviour(\"{}\", &CodegenAllocateScriptBehaviour_{})"_format(behaviour.name, behaviour.name);
-                        codegenFileStream << ";\n";
-                    }
-                }
-
-                codegenFileStream << "\treturn true;\n";
-                codegenFileStream << "}\n\n";
-
-                codegenFileStream << "const bool CodegenRegisterModule_{}_Result = CodegenRegisterModule_{}_Module();"_format(module.moduleInfo.moduleName, module.moduleInfo.moduleName);
-            }*/
-
-            codegenFileStream.close();
         }
         else {
-            SR_ERROR("CppCodeGenerator::GenerateModule() : failed to open file!\n\tPath: {}", codegenFile);
+            SR_ERROR("CppCodeGenerator::GenerateModule() : failed to open file!\n\tPath: {}", codegenPath);
         }
     }
 

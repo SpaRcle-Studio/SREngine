@@ -9,6 +9,7 @@
 #include <Utils/Tests/TestManager.h>
 #include <Utils/Profile/TracyContext.h>
 #include <Utils/Reflection/ReflectedType.h>
+#include <Utils/FileSystem/VFS.h>
 #include <Utils/Debug.h>
 
 #include <Codegen/SpaRcleModuleApplicationCore.generated.hpp>
@@ -30,7 +31,7 @@ void ShutdownApplication() {
     }
 
     SR_UTILS_NS::Reflection::DeInitReflection();
-    SR_PLATFORM_NS::InitializeHooks([](SR_PLATFORM_NS::PlatformHooks& hooks) { });
+    SR_UTILS_NS::VFS::Instance().DeInitialize();
     SR_HTYPES_NS::SharedPtrDynamicDataCounter::CheckMemoryLeaks();
     SR_UTILS_NS::ShutdownEngineProfiler();
     SR_PLATFORM_NS::DeInitializePlatform();

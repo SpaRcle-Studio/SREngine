@@ -8,6 +8,7 @@
 #include <Utils/Common/StringAtomLiterals.h>
 #include <Utils/Common/SubscriptionMessage.h>
 #include <Utils/FileSystem/FileSystem.h>
+#include <Utils/FileSystem/VFS.h>
 #include <Utils/Types/Time.h>
 
 #include <Enum/PlatformType.hpp>
@@ -40,12 +41,11 @@ namespace SR_SCRIPTING_NS {
 
         SR_LOG("ScriptSystem::Init() : initializing script system...");
 
-        m_resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-        m_engineResourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetEngineResPath();
         m_cacheFolder = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
+        SR_UTILS_NS::VFS::Instance().ResolvePath(m_cacheFolder);
 
         m_isCompilationEnabled = SR_UTILS_NS::Features::Instance().Enabled("ScriptCompilation", true);
-        m_apiFolder = m_engineResourcesFolder.Concat("API");
+        m_apiFolder = CoreResLoader::GetResPath().Concat("API");
 
         if (m_isCompilationEnabled && !InitEngineSources()) {
             SR_ERROR("ScriptSystem::Init() : failed to initialize engine sources!");
@@ -133,7 +133,7 @@ namespace SR_SCRIPTING_NS {
         }
 
         if (m_isCompilationEnabled) {
-            if (path.GetBaseNameAndExt() == ENGINE_MODULE_FILE_NAME) {
+            if (path.GetBaseNameAndExtView() == ENGINE_MODULE_FILE_NAME) {
                 if (m_state != ScriptSystemState::InitialAnalyse) {
                     SR_DEBUG_LOG("ScriptSystem::HandleFileSystemEvent() : engine module change detected!\n\tPath: {}", path);
                 }
@@ -241,11 +241,15 @@ namespace SR_SCRIPTING_NS {
     }
 
     void ScriptSystem::InitialAnalyse() {
+        SR_TRACY_ZONE;
         SR_UTILS_NS::SubscriptionMessage message;
-        SR_UTILS_NS::FileSystem::ForEachFileInFolder(m_resourcesFolder, true, [this, &message](const SR_UTILS_NS::Path& path) {
-            message.SetPath(SR_UTILS_NS::FileSystemWatcher::FILE_MSG_ID, path);
+        SR_UTILS_NS::VFS::Instance().Enumerate(CoreResLoader::GetResPath(), [&](const SR_UTILS_NS::VFSEntry& entry) {
+            if (entry.type != SR_UTILS_NS::FSItemType::File) {
+                return;
+            }
+            message.SetPath(SR_UTILS_NS::FileSystemWatcher::FILE_MSG_ID, entry.fullPath);
             HandleFileSystemEvent(message, SR_UTILS_NS::FileSystemWatcher::EventType::Add);
-        });
+        }, true);
     }
 
     void ScriptSystem::ThreadIdle() {
@@ -338,8 +342,22 @@ namespace SR_SCRIPTING_NS {
                 context.includePaths.emplace_back(path);
             }
 
-            context.includePaths.emplace_back(module.path.GetFolder());
-            context.includePaths.emplace_back(context.outFolder.Concat("Codegen"));
+            auto&& codegenFolder = context.outFolder.Concat("Codegen");
+            if (!codegenFolder.CreateDirectories()) {
+                SR_ERROR("ScriptSystem::CompileModules() : failed to create codegen folder! \n\tPath: {}", codegenFolder);
+                m_hasCompileErrors = true;
+                return;
+            }
+
+            context.includePaths.emplace_back(codegenFolder);
+
+            for (auto&& path : context.includePaths) {
+                SR_UTILS_NS::VFS::Instance().ResolvePath(path);
+            }
+
+            SR_UTILS_NS::Path moduleFolder = module.path;
+            SR_UTILS_NS::VFS::Instance().ResolvePath(moduleFolder);
+            context.includePaths.emplace_back(moduleFolder.GetFolder());
 
             if (!m_compiler->Compile(context)) {
                 SR_ERROR("ScriptSystem::CompileModules() : failed to compile modules!");
@@ -385,15 +403,15 @@ namespace SR_SCRIPTING_NS {
                 auto&& destinationPdbPath = pModule->path.GetFolder().Concat("{}.pdb"_format(moduleName));
 
                 if (destinationModulePath.IsFile()) {
-                    SR_PLATFORM_NS::Delete(destinationModulePath);
+                    SR_UTILS_NS::VFS::Instance().Delete(destinationModulePath);
                 }
 
                 if (destinationPdbPath.IsFile()) {
-                    SR_PLATFORM_NS::Delete(destinationPdbPath);
+                    SR_UTILS_NS::VFS::Instance().Delete(destinationPdbPath);
                 }
 
                 if (sourcePdbPath.IsFile()) {
-                    if (SR_PLATFORM_NS::Copy(sourcePdbPath, destinationPdbPath)) {
+                    if (SR_UTILS_NS::VFS::Instance().Copy(sourcePdbPath, destinationPdbPath)) {
                         SR_LOG("ScriptSystem::CopyModules() : pdb copied successfully!\n\tSource: {}\n\tDestination: {}", sourcePdbPath, destinationPdbPath);
                     }
                     else {
@@ -403,7 +421,7 @@ namespace SR_SCRIPTING_NS {
                     }
                 }
 
-                if (SR_PLATFORM_NS::Copy(sourceModulePath, destinationModulePath)) {
+                if (SR_UTILS_NS::VFS::Instance().Copy(sourceModulePath, destinationModulePath)) {
                     SR_LOG("ScriptSystem::CopyModules() : module copied successfully!\n\tSource: {}\n\tDestination: {}", sourceModulePath, destinationModulePath);
                 }
                 else {
@@ -505,26 +523,25 @@ namespace SR_SCRIPTING_NS {
     }
 
     bool ScriptSystem::InitEngineSources() {
-        m_pathToEngineSourcesRoot = m_engineResourcesFolder.Concat("API");
-        if (!m_pathToEngineSourcesRoot.IsDir()) {
-            SR_ERROR("ScriptSystem::InitEngineSources() : engine sources folder not found!\n\tPath: {}", m_pathToEngineSourcesRoot);
+        if (!m_apiFolder.IsDir()) {
+            SR_ERROR("ScriptSystem::InitEngineSources() : engine sources folder not found!\n\tPath: {}", m_apiFolder);
             m_hasCompileErrors = true;
             return false;
         }
 
-        SR_LOG("ScriptSystem::InitEngineSources() : engine sources root: {}", m_pathToEngineSourcesRoot);
+        SR_LOG("ScriptSystem::InitEngineSources() : engine sources root: {}", m_apiFolder);
 
-        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Codegen"));
-        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/inc"));
-        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Audio/inc"));
-        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Graphics/inc"));
-        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Physics/inc"));
-        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Utils/inc"));
-        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Utils/libs"));
-        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Utils/libs/fmt/include"));
-        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Utils/libs/tracy/public"));
-        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/Scripting/inc"));
-        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/libs/ImmediateGUI/inc"));
+        m_engineSourcesIncludePaths.emplace_back(m_apiFolder.Concat("Codegen"));
+        m_engineSourcesIncludePaths.emplace_back(m_apiFolder.Concat("Engine/inc"));
+        m_engineSourcesIncludePaths.emplace_back(m_apiFolder.Concat("Engine/libs/Audio/inc"));
+        m_engineSourcesIncludePaths.emplace_back(m_apiFolder.Concat("Engine/libs/Graphics/inc"));
+        m_engineSourcesIncludePaths.emplace_back(m_apiFolder.Concat("Engine/libs/Physics/inc"));
+        m_engineSourcesIncludePaths.emplace_back(m_apiFolder.Concat("Engine/libs/Utils/inc"));
+        m_engineSourcesIncludePaths.emplace_back(m_apiFolder.Concat("Engine/libs/Utils/libs"));
+        m_engineSourcesIncludePaths.emplace_back(m_apiFolder.Concat("Engine/libs/Utils/libs/fmt/include"));
+        m_engineSourcesIncludePaths.emplace_back(m_apiFolder.Concat("Engine/libs/Utils/libs/tracy/public"));
+        m_engineSourcesIncludePaths.emplace_back(m_apiFolder.Concat("Engine/libs/Scripting/inc"));
+        m_engineSourcesIncludePaths.emplace_back(m_apiFolder.Concat("Engine/libs/ImmediateGUI/inc"));
 
         for (auto&& path : m_engineSourcesIncludePaths) {
             if (!path.IsDir()) {

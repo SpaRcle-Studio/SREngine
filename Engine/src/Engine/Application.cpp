@@ -21,6 +21,7 @@
 #include <Physics/PhysicsLib.h>
 
 #include <Utils/Common/Numeric.h>
+#include <Utils/Common/StringUtils.h>
 #include <Utils/TaskManager/TaskManager.h>
 #include <Utils/World/SceneAllocator.h>
 #include <Utils/Resources/ResourceManager.h>
@@ -34,6 +35,7 @@
 #include <Utils/Common/SubscriptionMessage.h>
 #include <Utils/Platform/Stacktrace.h>
 #include <Utils/Network/GitHubDownloader.h>
+#include <Utils/FileSystem/VFS.h>
 
 namespace SR_CORE_NS {
     Application::Application()
@@ -62,7 +64,8 @@ namespace SR_CORE_NS {
             path = logPath.value();
         }
         else {
-            path = SR_PLATFORM_NS::GetApplicationPath().GetFolder();
+            auto&& appPath = SR_PLATFORM_NS::GetApplicationPath();
+            path = SR_UTILS_NS::StringUtils::GetDirToFileFromFullPath(appPath);
         }
 
         SR_UTILS_NS::Path logDir = SR_UTILS_NS::CLIManager::Instance().GetOptionValue(SR_UTILS_NS::CLIOptions::LogDir).value_or(path.ToString());
@@ -87,15 +90,10 @@ namespace SR_CORE_NS {
             SR_SYSTEM_LOG("Application::EarlyInit() : SSE4.1 is NOT supported.");
         }
 
-        if (m_resourcesPath.IsEmpty()) {
-            SR_ERROR("Application::EarlyInit() : resources path is empty!");
-            return false;
-        }
-
         SR_HTYPES_NS::Thread::Factory::Instance().SetMainThread();
         SR_HTYPES_NS::Time::Instance().Update();
 
-        SR_UTILS_NS::Features::Instance().SetPath(m_resourcesPath.Concat("Engine/Configs/Features.xml"));
+        SR_UTILS_NS::Features::Instance().SetPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Configs/Features.xml"));
         SR_UTILS_NS::Features::Instance().Reload();
 
         if (SR_UTILS_NS::Features::Instance().Enabled("SegmentationHandler", false)) {
@@ -115,7 +113,7 @@ namespace SR_CORE_NS {
         return true;
     }
 
-    static std::string_view ResolvePath(const std::string_view& original, const std::string_view& engineRoot, decltype(&SR_PLATFORM_NS::GetPathType) getFileType) {
+    std::string_view ResolvePath(const std::string_view& original, const std::string_view& engineRoot, decltype(&SR_PLATFORM_NS::GetPathType) getFileType) {
         SR_TRACY_ZONE;
 
         if (getFileType(original) != SR_UTILS_NS::Path::Type::Undefined) {
@@ -177,39 +175,41 @@ namespace SR_CORE_NS {
 
     bool Application::InitializeResourcesFolder() {
         SR_LOG("Application::InitializeResourcesFolder() : initializing resources folder...");
-        SR_PLATFORM_NS::InitializeHooks([](SR_PLATFORM_NS::PlatformHooks& hooks) { });
 
-        if (m_engineResourcesPath.empty()) {
-            m_engineResourcesPath = SR_PLATFORM_NS::GetApplicationResourcesPath();
+        auto&& engineResourcesPath = SR_PLATFORM_NS::GetApplicationResourcesPath();
+        auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+
+        SR_UTILS_NS::VFS::Instance().UnmountAll();
+
+        if (SR_PLATFORM_NS::GetType() == SR_UTILS_NS::PlatformType::Android) {
+            SR_UTILS_NS::VFS::Instance().Mount(resourcesPath, new SR_UTILS_NS::AndroidVFSBackend(), -100);
         }
 
-        if (!m_engineResourcesPath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
-            return false;
+        if (auto&& appFolder = SR_PLATFORM_NS::GetApplicationDirectory(); !appFolder.empty()) {
+            SR_UTILS_NS::VFS::Instance().Mount("", new SR_UTILS_NS::ReadOnlyDirectoryVFSBackend(appFolder), -50);
         }
 
-        m_resourcesPath = m_engineResourcesPath;
-
+        bool projectPathMounted = false;
         if (auto&& projectPath = SR_UTILS_NS::CLIManager::Instance().GetProjectPath()) {
-            auto&& resourcesPath = projectPath->GetFolder().Concat("Resources");
-            SR_LOG("Application::InitializeResourcesFolder() : checking project resources folder at path \"{}\"...", resourcesPath);
+            auto&& projectResourcesPath = SR_PLATFORM_NS::GetPathType(*projectPath) == SR_UTILS_NS::FSItemType::File
+                ? projectPath->GetFolder().Concat("Resources")
+                : projectPath->Concat("Resources");
 
-            if (resourcesPath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
-                m_resourcesPath = resourcesPath;
+            if (SR_PLATFORM_NS::IsDirectoryExists(projectResourcesPath) && projectResourcesPath != engineResourcesPath) {
+                auto&& pEngineReadOnlyBackend = new SR_UTILS_NS::ReadOnlyDirectoryVFSBackend(engineResourcesPath);
 
-                SR_PLATFORM_NS::InitializeHooks([applicationResources = m_engineResourcesPath](SR_PLATFORM_NS::PlatformHooks& hooks) {
-                    if (hooks.originalReadFile && hooks.originalGetPathType) {
-                        hooks.getFileTypeHook = [applicationResources, hooks](auto&& path) {
-                            return hooks.originalGetPathType(ResolvePath(path, applicationResources.ToStringView(), hooks.originalGetPathType));
-                        };
-                        hooks.readFileHook = [applicationResources, hooks](auto&& path, auto&& buffer) {
-                            return hooks.originalReadFile(ResolvePath(path.ToStringView(), applicationResources.ToStringView(), hooks.originalGetPathType), buffer);
-                        };
-                        hooks.pathResolver = [applicationResources, hooks](auto&& path) {
-                            return ResolvePath(path, applicationResources.ToStringView(), hooks.originalGetPathType);
-                        };
-                    }
-                });
+                pEngineReadOnlyBackend->AddIgnoredExtension("so");
+                pEngineReadOnlyBackend->AddIgnoredExtension("pdb");
+                pEngineReadOnlyBackend->AddIgnoredExtension("dll");
+
+                SR_UTILS_NS::VFS::Instance().Mount(resourcesPath, pEngineReadOnlyBackend, 0);
+                SR_UTILS_NS::VFS::Instance().Mount(resourcesPath, new SR_UTILS_NS::DirectoryVFSBackend(projectResourcesPath), 100);
+                projectPathMounted = true;
             }
+        }
+
+        if (!projectPathMounted) {
+            SR_UTILS_NS::VFS::Instance().Mount(resourcesPath, new SR_UTILS_NS::DirectoryVFSBackend(engineResourcesPath), 0);
         }
 
         if (auto&& gameLink = SR_UTILS_NS::CLIManager::Instance().GetOptionValue(SR_UTILS_NS::CLIOptions::GameLink)) {
@@ -223,6 +223,11 @@ namespace SR_CORE_NS {
                 SR_LOG("Application::InitializeResourcesFolder() : path: {} (sha: {})", path, entry.sha);
             }
 
+            return false;
+        }
+
+        if (!SR_UTILS_NS::VFS::Instance().CreateDirectories(CoreResLoader::GetCachePath())) {
+            SR_ERROR("Application::InitializeResourcesFolder() : failed to create cache folder!");
             return false;
         }
 
@@ -291,8 +296,6 @@ namespace SR_CORE_NS {
                 return false;
             }
 
-            SR_UTILS_NS::ResourceManager::Instance().ChangeResourcesFolder(m_resourcesPath);
-
             m_hasErrors |= !Init();
             m_isNeedReload = false;
             if (m_hasErrors) {
@@ -331,7 +334,7 @@ namespace SR_CORE_NS {
                 m_engine->RunSceneGameMode(path);
             }
             else if (SR_UTILS_NS::Features::Instance().Enabled("RunGameModeOnStart", false)) {
-                SR_UTILS_NS::Path startSceneConfigPath = m_resourcesPath.Concat("Engine/Configs/StartupScene.xml");
+                SR_UTILS_NS::Path startSceneConfigPath = CoreResLoader::GetResPath().Concat("Engine/Configs/StartupScene.xml");
                 if (SR_XML_NS::Document document = document.Load(startSceneConfigPath)) {
                     auto&& path = document.Root().GetNode("Configs").GetNode("StartupScene").GetAttribute<SR_UTILS_NS::Path>();
                     if (!path.IsEmpty()) {

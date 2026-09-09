@@ -27,6 +27,7 @@
 #include <Utils/Common/StringAtomLiterals.h>
 #include <Utils/TaskManager/ThreadWorker.h>
 #include <Utils/TaskManager/TaskManager.h>
+#include <Utils/FileSystem/VFS.h>
 #include <Utils/Localization/LocalizationManager.h>
 
 namespace SR_CORE_NS {
@@ -366,8 +367,8 @@ namespace SR_CORE_NS {
             if (SR_WORLD_NS::Scene::IsExists(scenePath)) {
                 auto&& pScene = SR_WORLD_NS::Scene::LoadScene(scenePath);
                 if (!pScene) {
-                    SR_ERROR("Engine::Create() : failed to load scene! Delete broken new scene\n\tPath: " + scenePath.ToString());
-                    SR_PLATFORM_NS::Delete(SR_WORLD_NS::Scene::GetAbsPath(scenePath));
+                    SR_ERROR("Engine::Create() : failed to load scene! Delete broken new scene\n\tPath: {}", scenePath);
+                    SR_UTILS_NS::VFS::Instance().Delete(SR_WORLD_NS::Scene::GetAbsPath(scenePath));
                 }
                 else {
                     AddSceneToQueue(pScene);

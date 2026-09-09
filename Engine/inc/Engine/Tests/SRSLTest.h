@@ -41,13 +41,13 @@ namespace SR_CORE_NS::Tests {
                 }
 
                 file = file.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
+                file = CoreResLoader::GetResPath().Concat(file);
                 SR_TRACY_ZONE_TEXT_VIEW(file.View());
 
                 m_allocator.ResetMemory();
                 if (auto&& pShader = SR_SRSL_NS::SRSLShader::Load(&m_allocator, file, SR_SRSL_NS::ShaderParams::GetDefault())) {
                     SR_SRSL_NS::ISRSLCodeGenerator::SRSLCodeGenRes result = SR_SRSL_NS::GLSLCodeGenerator::Instance().GenerateStages(pShader->GetAllocator(), pShader.Get());
                     for (auto&& [stage, code] : result.second) {
-                        resultFolder.CreateIfNotExists();
                         auto outputFile = resultFolder.Concat(file.GetBaseNameAndExt()).ConcatExt(SR_UTILS_NS::EnumReflector::ToStringAtom(stage).ToString() + ".glsl");
                         if (!SR_UTILS_NS::FileSystem::WriteToFile(outputFile, code)) {
                             SR_ERROR("SRSLTest::Run() : failed to write shader stage to file: {}", outputFile);
@@ -65,7 +65,6 @@ namespace SR_CORE_NS::Tests {
                     result = SR_SRSL_NS::WGSLCodeGenerator::Instance().GenerateStages(pShader->GetAllocator(), pShader.Get());
 
                     for (auto&& [stage, code] : result.second) {
-                        resultFolder.CreateIfNotExists();
                         auto outputFile = resultFolder.Concat(file.GetBaseNameView()).ConcatExt("wgsl");
                         if (!SR_UTILS_NS::FileSystem::WriteToFile(outputFile, code)) {
                             SR_ERROR("SRSLTest::Run() : failed to write shader stage to file: {}", outputFile);
@@ -98,7 +97,7 @@ namespace SR_CORE_NS::Tests {
                 auto expectedFile = expectedFolder.Concat(file.GetBaseNameAndExt());
                 auto resultFile = resultFolder.Concat(file.GetBaseNameAndExt());
 
-                if (!resultFile.Exists()) {
+                if (!resultFile.IsFile()) {
                     SR_ERROR("SRSLTest::Run() : result file does not exist: {}", resultFile);
                     return SR_UTILS_NS::TestExecutionResult::Error;
                 }

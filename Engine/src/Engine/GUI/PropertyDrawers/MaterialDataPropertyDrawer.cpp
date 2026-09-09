@@ -180,7 +180,6 @@ namespace SR_CORE_GUI_NS {
                     }
 
                     path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPathRef());
-                    path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetEngineResPathRef());
 
                     wasReset = true;
                     SR_GTYPES_NS::Texture::Ptr pTexture = CoreResLoader::Load<SR_GTYPES_NS::Texture>(path);

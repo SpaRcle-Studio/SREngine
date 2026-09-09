@@ -5,9 +5,11 @@
 #include <Engine/Launcher.h>
 
 #include <Utils/Resources/ResourceEmbedder.h>
+#include <Utils/Resources/ResourceManager.h>
 #include <Utils/Common/Compression.h>
 #include <Utils/Common/CLIManager.h>
 #include <Utils/Platform/Platform.h>
+#include <Utils/FileSystem/VFS.h>
 #include <Utils/Profile/TracyContext.h>
 
 namespace SR_CORE_NS {
@@ -67,30 +69,33 @@ namespace SR_CORE_NS {
     }
 
     bool Launcher::CloneResources() {
+        auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
     #ifdef SR_LINUX
-        auto&& git2path = GetResourcesPath().Concat("Engine/Utilities/git2");
+        auto&& git2path = resourcesPath.Concat("Engine/Utilities/git2");
     #elif defined(SR_WIN32)
-        auto&& git2path = GetResourcesPath().Concat("Engine/Utilities/git2.exe");
+        auto&& git2path = resourcesPath.Concat("Engine/Utilities/git2.exe");
     #endif
 
     #if !defined(SR_ANDROID) && !defined(SR_EMSCRIPTEN)
-        auto&& cachePath = GetResourcesPath().Concat("Cache");
-        if (!cachePath.Create()) {
-            SR_ERROR("Launcher::CloneResources() : failed to create cache directory.");
+        auto&& cachePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
+        if (!cachePath.CreateDirectories()) {
+            SR_ERROR("Launcher::CloneResources() : failed to create cache directory!");
             return false;
         }
 
-        std::string command =
-                git2path.ToStringRef() + " clone https://github.com/SpaRcle-Studio/SRE2R " +
-                cachePath.Concat("SRE2R").ToStringRef() +
-                " -b release/0.0.7 --depth 1";
+        SR_UTILS_NS::String command =
+            git2path.ToStringRef() + " clone https://github.com/SpaRcle-Studio/SRE2R " +
+            cachePath.Concat("SRE2R").ToStringRef() +
+            " -b release/0.0.7 --depth 1";
 
         SR_SYSTEM_LOG("Launcher::CloneResources() : cloning repository...\n" + command);
 
         system(command.c_str());
 
         SR_UTILS_NS::Path zipPath = cachePath.Concat("SRE2R/Resources.zip");
-        SR_PLATFORM_NS::Unzip(zipPath, GetResourcesPath());
+
+        SR_UTILS_NS::VFS::Instance().ResolvePath(zipPath);
+        SR_PLATFORM_NS::Unzip(zipPath, resourcesPath);
     #endif
 
         return true;

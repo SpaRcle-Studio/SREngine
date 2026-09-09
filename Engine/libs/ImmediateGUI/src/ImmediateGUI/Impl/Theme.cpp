@@ -120,9 +120,9 @@ namespace SR_GRAPH_NS::GUI {
     Theme *Theme::Load(const SR_UTILS_NS::Path &path) {
         const auto&& absPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(path);
 
-        if (!absPath.Exists()) {
+        if (!absPath.IsFile()) {
+            SR_ERROR("Theme::Load() : file not found! \n\tPath: {}", absPath);
             return nullptr;
-            SR_ERROR("Theme::Load() : file not found! \n\tPath: " + absPath.ToString());
         }
 
         auto&& theme = new Theme();

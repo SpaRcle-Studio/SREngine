@@ -40,9 +40,9 @@ namespace SR_SCRIPTING_NS {
         SR_NODISCARD const ModuleManager* GetModuleManager() const { return m_moduleManager.Get(); }
         SR_NODISCARD ModuleManager* GetModuleManager() { return m_moduleManager.Get(); }
         SR_NODISCARD const SR_UTILS_NS::Vector<SR_UTILS_NS::Path>& GetEngineSourcesIncludePaths() const { return m_engineSourcesIncludePaths; }
-        SR_NODISCARD const SR_UTILS_NS::Path& GetEngineSourcesPath() const { return m_pathToEngineSourcesRoot; }
         SR_NODISCARD ScriptSystemState GetState() const { return m_state; }
         SR_NODISCARD bool HasErrors() const { return m_hasCompileErrors || m_hasModuleCopyErrors; }
+        SR_NODISCARD const SR_UTILS_NS::Path& GetAPIFolder() const { return m_apiFolder; }
 
         void WaitForIdle();
         void ReloadModulesIfNeeded();
@@ -76,9 +76,6 @@ namespace SR_SCRIPTING_NS {
 
         /// shared parameters (read only)
 
-        SR_UTILS_NS::Path m_pathToEngineSourcesRoot;
-        SR_UTILS_NS::Path m_engineResourcesFolder;
-        SR_UTILS_NS::Path m_resourcesFolder;
         SR_UTILS_NS::Path m_cacheFolder;
         SR_UTILS_NS::Path m_apiFolder;
 
