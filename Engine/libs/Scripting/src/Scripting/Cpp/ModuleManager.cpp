@@ -55,8 +55,8 @@ namespace SR_SCRIPTING_NS {
 
         const SR_UTILS_NS::StringAtom moduleName = path.GetBaseName();
 
-        auto&& pIt = std::ranges::find_if(m_modules, [&path](const auto& module) {
-            return module.GetPath() == path;
+        auto&& pIt = std::ranges::find_if(m_modules, [&moduleName](const auto& module) {
+            return module.GetModuleName() == moduleName;
         });
 
         if (pIt == m_modules.end()) {
@@ -66,11 +66,15 @@ namespace SR_SCRIPTING_NS {
             m_modules.emplace_back(module);
             pIt = std::prev(m_modules.end());
         }
+        else if (pIt->GetPath() != path) {
+            SR_LOG("ModuleManager::ReloadModule() : module with same name already loaded, but with different path! Ignoring it...\n\tOld path: {}\n\tNew path: {}", pIt->GetPath(), path);
+            return false;
+        }
 
         ScriptModule& module = *pIt;
 
         if (!UnloadModule(module, true)) {
-            SR_ERROR("ModuleManager::ReloadModule() : failed to unload module!\n\tPath: " + path.ToString());
+            SR_ERROR("ModuleManager::ReloadModule() : failed to unload module!\n\tPath: {}", path);
             return false;
         }
 

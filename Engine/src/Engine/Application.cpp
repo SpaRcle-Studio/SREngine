@@ -113,66 +113,6 @@ namespace SR_CORE_NS {
         return true;
     }
 
-    std::string_view ResolvePath(const std::string_view& original, const std::string_view& engineRoot, decltype(&SR_PLATFORM_NS::GetPathType) getFileType) {
-        SR_TRACY_ZONE;
-
-        if (getFileType(original) != SR_UTILS_NS::Path::Type::Undefined) {
-            return original;
-        }
-
-        constexpr const char* anchor = "Resources/";
-        constexpr size_t anchorLen = 10;
-        const char* pos = std::strstr(original.data(), anchor);
-        if (!pos) {
-            return original;
-        }
-
-        static const std::vector<std::string> cacheExceptions = {
-            "User/UserData.xml",
-            "User/GraphicsSettings.sra",
-            "User/CppCompilerSettings.sra"
-        };
-
-        /// если файл в Resources/Cache, то не трогаем
-        if (std::strncmp(pos + anchorLen, "Cache/", 6) == 0) {
-            const bool hasException = std::ranges::any_of(cacheExceptions, [original](const std::string& exception) {
-                return original.ends_with(exception);
-            });
-
-            if (!hasException) {
-                return original;
-            }
-        }
-
-        const char* tail = pos + anchorLen;
-
-        thread_local char buf[4096];
-        char* p = buf;
-
-        size_t lenRoot = engineRoot.size();
-        size_t lenTail = std::strlen(tail);
-        size_t need = lenRoot + 1 + lenTail + 1;
-
-        if (need > sizeof(buf)) SR_UNLIKELY_ATTRIBUTE {
-            SR_PLATFORM_NS::WriteConsoleError(SR_FORMAT("Resolved path is too long! Path: {}\n", original));
-            return original;
-        }
-
-        std::memcpy(p, engineRoot.data(), lenRoot);
-        p += lenRoot;
-        *p++ = '/';
-
-        std::memcpy(p, tail, lenTail);
-        p += lenTail;
-        *p = '\0';
-
-        if (getFileType(buf) != SR_UTILS_NS::Path::Type::Undefined) {
-            return std::string_view(buf, need - 1); // минус '\0'
-        }
-
-        return original;
-    }
-
     bool Application::InitializeResourcesFolder() {
         SR_LOG("Application::InitializeResourcesFolder() : initializing resources folder...");
 
