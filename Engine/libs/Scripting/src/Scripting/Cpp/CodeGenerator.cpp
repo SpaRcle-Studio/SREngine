@@ -11,6 +11,7 @@
 #include <Utils/Common/StringAtomLiterals.h>
 #include <Utils/FileSystem/FileSystem.h>
 #include <Utils/FileSystem/VFS.h>
+#include <Utils/FileSystem/IVFSBackend.h>
 #include <Utils/Serialization/SRASerialization.h>
 
 #include <Enum/PlatformType.hpp>

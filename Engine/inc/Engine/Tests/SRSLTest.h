@@ -93,7 +93,7 @@ namespace SR_CORE_NS::Tests {
             uint32_t errors = 0;
             const uint32_t maxErrors = 128;
 
-            for (auto file : files) {
+            for (auto&& file : files) {
                 auto expectedFile = expectedFolder.Concat(file.GetBaseNameAndExt());
                 auto resultFile = resultFolder.Concat(file.GetBaseNameAndExt());
 

@@ -8,6 +8,7 @@
 #include <Utils/Common/StringAtomLiterals.h>
 #include <Utils/Common/SubscriptionMessage.h>
 #include <Utils/FileSystem/FileSystem.h>
+#include <Utils/FileSystem/IVFSBackend.h>
 #include <Utils/FileSystem/VFS.h>
 #include <Utils/Types/Time.h>
 

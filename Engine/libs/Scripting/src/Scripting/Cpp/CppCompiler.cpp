@@ -14,6 +14,7 @@
 #include <Utils/Common/CLIManager.h>
 #include <Utils/FileSystem/FileSystem.h>
 #include <Utils/FileSystem/VFS.h>
+#include <Utils/FileSystem/DirectoryVFSBackend.h>
 
 #include <Enum/CppCompilerType.hpp>
 

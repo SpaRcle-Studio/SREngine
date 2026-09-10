@@ -10,6 +10,7 @@
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/Serialization/SRASerialization.h>
 #include <Utils/FileSystem/FileDialog.h>
+#include <Utils/FileSystem/DirectoryVFSBackend.h>
 #include <Utils/TypeTraits/SRClassMeta.h>
 #include <Utils/Common/CLIManager.h>
 #include <Utils/Common/StoreUtils.h>

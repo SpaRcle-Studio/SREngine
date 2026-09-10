@@ -36,6 +36,9 @@
 #include <Utils/Platform/Stacktrace.h>
 #include <Utils/Network/GitHubDownloader.h>
 #include <Utils/FileSystem/VFS.h>
+#include <Utils/FileSystem/DirectoryVFSBackend.h>
+#include <Utils/FileSystem/AndroidVFSBackend.h>
+#include <Utils/FileSystem/GitHubVFSBackend.h>
 
 namespace SR_CORE_NS {
     Application::Application()
@@ -148,22 +151,15 @@ namespace SR_CORE_NS {
             }
         }
 
-        if (!projectPathMounted) {
-            SR_UTILS_NS::VFS::Instance().Mount(resourcesPath, new SR_UTILS_NS::DirectoryVFSBackend(engineResourcesPath), 0);
-        }
-
         if (auto&& gameLink = SR_UTILS_NS::CLIManager::Instance().GetOptionValue(SR_UTILS_NS::CLIOptions::GameLink)) {
             SR_INFO("Application::InitializeResourcesFolder() : game link detected: \"{}\".", gameLink.value());
+            SR_UTILS_NS::VFS::Instance().Mount(resourcesPath, new SR_UTILS_NS::DirectoryVFSBackend(engineResourcesPath), 0);
+            SR_UTILS_NS::VFS::Instance().Mount("", new SR_UTILS_NS::GitHubVFSBackend(gameLink.value()), 50);
+            projectPathMounted = true;
+        }
 
-            SR_NETWORK_NS::GitHubDownloader downloader(gameLink.value());
-            SR_LOG("Application::InitializeResourcesFolder() : default branch: {}", downloader.GetDefaultBranch());
-
-            auto&& tree = downloader.GetTree();
-            for (auto&& [path, entry] : tree) {
-                SR_LOG("Application::InitializeResourcesFolder() : path: {} (sha: {})", path, entry.sha);
-            }
-
-            return false;
+        if (!projectPathMounted) {
+            SR_UTILS_NS::VFS::Instance().Mount(resourcesPath, new SR_UTILS_NS::DirectoryVFSBackend(engineResourcesPath), 0);
         }
 
         if (!SR_UTILS_NS::VFS::Instance().CreateDirectories(CoreResLoader::GetCachePath())) {
