@@ -243,7 +243,12 @@ namespace SR_SCRIPTING_NS {
 
             customArgs += "-DFMT_HEADER_ONLY ";
             customArgs += "-std=c++20 ";
-            customArgs += "-Wno-deprecated -Wno-unused-variable -Wno-parentheses -Wno-deprecated-declarations -Wno-reorder -Wno-unused-function -Wno-attributes -Wno-delete-incomplete -Wno-sign-compare -Wno-unused-function -Wno-overloaded-virtual -Wno-comment -Wno-template-body ";
+            customArgs += "-Wno-deprecated -Wno-unused-variable -Wno-parentheses -Wno-deprecated-declarations -Wno-reorder -Wno-unused-function -Wno-attributes -Wno-delete-incomplete -Wno-sign-compare -Wno-unused-function -Wno-overloaded-virtual -Wno-comment ";
+
+            /// -Wno-template-body существует только в clang, gcc о нем предупреждает
+            if (m_settings.compilerType == CppCompilerType::Clang) {
+                customArgs += "-Wno-template-body ";
+            }
         }
 
         const SR_UTILS_NS::PlatformType platform = SR_PLATFORM_NS::GetType();

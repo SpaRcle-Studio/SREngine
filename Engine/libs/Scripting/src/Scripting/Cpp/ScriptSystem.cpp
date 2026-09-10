@@ -113,7 +113,10 @@ namespace SR_SCRIPTING_NS {
         SR_TRACY_ZONE;
 
         auto&& path = message.GetPathRef(SR_UTILS_NS::FileSystemWatcher::FILE_MSG_ID);
-        if (path.IsSubPath(m_cacheFolder) || path.IsSubPath(m_apiFolder)) {
+        SR_UTILS_NS::Path unresolvedPath = path; 
+        SR_UTILS_NS::VFS::Instance().UnResolvePath(unresolvedPath);
+
+        if (unresolvedPath.IsSubPath(CoreResLoader::GetCachePath()) || unresolvedPath.IsSubPath(m_apiFolder)) {
             return;
         }
 

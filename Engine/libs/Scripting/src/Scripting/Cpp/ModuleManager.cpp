@@ -78,11 +78,14 @@ namespace SR_SCRIPTING_NS {
             return false;
         }
 
-        if (auto&& pLibraryHandle = LoadModule(path)) {
+        SR_UTILS_NS::Path modulePath = path;
+        SR_UTILS_NS::VFS::Instance().UnResolvePath(modulePath);
+
+        if (auto&& pLibraryHandle = LoadModule(modulePath)) {
             module.SetModuleHandle(pLibraryHandle);
         }
         else {
-            SR_ERROR("ModuleManager::ReloadModule() : failed to load module!\n\tPath: " + path.ToString());
+            SR_ERROR("ModuleManager::ReloadModule() : failed to load module!\n\tPath: {}", modulePath);
             return false;
         }
 
