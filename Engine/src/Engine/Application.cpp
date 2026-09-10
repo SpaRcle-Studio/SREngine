@@ -5,6 +5,7 @@
 #include <Engine/Application.h>
 #include <Engine/World/World.h>
 #include <Engine/Engine.h>
+#include <Engine/Settings/ProjectSettings.h>
 
 #include <Graphics/Types/Shader.h>
 #include <Graphics/Memory/CameraManager.h>
@@ -22,6 +23,7 @@
 
 #include <Utils/Common/Numeric.h>
 #include <Utils/Common/StringUtils.h>
+#include <Utils/Serialization/SRASerialization.h>
 #include <Utils/TaskManager/TaskManager.h>
 #include <Utils/World/SceneAllocator.h>
 #include <Utils/Resources/ResourceManager.h>
@@ -96,7 +98,7 @@ namespace SR_CORE_NS {
         SR_HTYPES_NS::Thread::Factory::Instance().SetMainThread();
         SR_HTYPES_NS::Time::Instance().Update();
 
-        SR_UTILS_NS::Features::Instance().SetPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Configs/Features.xml"));
+        SR_UTILS_NS::Features::Instance().SetPath(CoreResLoader::GetResPath().Concat("Engine/Configs/Features.xml"));
         SR_UTILS_NS::Features::Instance().Reload();
 
         if (SR_UTILS_NS::Features::Instance().Enabled("SegmentationHandler", false)) {
@@ -120,7 +122,7 @@ namespace SR_CORE_NS {
         SR_LOG("Application::InitializeResourcesFolder() : initializing resources folder...");
 
         auto&& engineResourcesPath = SR_PLATFORM_NS::GetApplicationResourcesPath();
-        auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+        auto&& resourcesPath = CoreResLoader::GetResPath();
 
         SR_UTILS_NS::VFS::Instance().UnmountAll();
 
@@ -140,7 +142,7 @@ namespace SR_CORE_NS {
         }
 
         if (auto&& appFolder = SR_PLATFORM_NS::GetApplicationDirectory(); !appFolder.empty()) {
-            SR_UTILS_NS::VFS::Instance().Mount("", new SR_UTILS_NS::ReadOnlyDirectoryVFSBackend(appFolder), -50);
+            SR_UTILS_NS::VFS::Instance().Mount("Bin", new SR_UTILS_NS::ReadOnlyDirectoryVFSBackend(appFolder), -50);
         }
 
         if (auto&& projectPath = SR_UTILS_NS::CLIManager::Instance().GetProjectPath()) {
@@ -157,6 +159,7 @@ namespace SR_CORE_NS {
 
                 SR_UTILS_NS::VFS::Instance().Mount(resourcesPath, pEngineReadOnlyBackend, 0);
                 SR_UTILS_NS::VFS::Instance().Mount(resourcesPath, new SR_UTILS_NS::DirectoryVFSBackend(projectResourcesPath), 100);
+                SR_UTILS_NS::Features::Instance().Reload();
                 projectPathMounted = true;
             }
         }
@@ -165,10 +168,16 @@ namespace SR_CORE_NS {
             SR_INFO("Application::InitializeResourcesFolder() : game link detected: \"{}\".", gameLink.value());
             SR_UTILS_NS::VFS::Instance().Mount(resourcesPath, new SR_UTILS_NS::DirectoryVFSBackend(engineResourcesPath), 0);
             SR_UTILS_NS::VFS::Instance().Mount("", new SR_UTILS_NS::GitHubVFSBackend(gameLink.value()), 50);
+            SR_UTILS_NS::Features::Instance().Reload();
             projectPathMounted = true;
         }
 
-        if (!projectPathMounted) {
+        if (projectPathMounted) {
+            SR_UTILS_NS::Path homePath = CoreResLoader::GetResPath();
+            SR_UTILS_NS::VFS::Instance().ResolvePath(homePath, SR_UTILS_NS::FileMode::Write);
+            SR_UTILS_NS::VFS::Instance().Mount(".srproject", new SR_UTILS_NS::SingleFileDirectoryVFSBackend(homePath.GetFolder().Concat(".srproject")), 150);
+        }
+        else {
             SR_UTILS_NS::VFS::Instance().Mount(resourcesPath, new SR_UTILS_NS::DirectoryVFSBackend(engineResourcesPath), 0);
         }
 
@@ -235,6 +244,7 @@ namespace SR_CORE_NS {
         }
 
         if (m_isNeedReload) {
+            SR_SCRIPTING_NS::ScriptSystem::Instance().WaitForIdle();
             Close();
             if (!InitializeResourcesFolder()) {
                 SR_ERROR("Application::MainLoop() : failed to initialize resources folder!");
@@ -278,6 +288,12 @@ namespace SR_CORE_NS {
 
                 auto&& path = optionPath.value();
                 m_engine->RunSceneGameMode(path);
+            }
+            else if (SR_UTILS_NS::VFS::Instance().IsExists(".srproject")) {
+                auto&& pSettings = CoreResLoader::Load<ProjectSettings>(".srproject");
+                if (pSettings && pSettings->mainScene.IsFile()) {
+                    m_engine->RunSceneGameMode(pSettings->mainScene);
+                }
             }
             else if (SR_UTILS_NS::Features::Instance().Enabled("RunGameModeOnStart", false)) {
                 SR_UTILS_NS::Path startSceneConfigPath = CoreResLoader::GetResPath().Concat("Engine/Configs/StartupScene.xml");

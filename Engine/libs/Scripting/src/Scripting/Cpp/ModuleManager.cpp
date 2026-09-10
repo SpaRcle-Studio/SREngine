@@ -138,7 +138,7 @@ namespace SR_SCRIPTING_NS {
             return nullptr;
         }
 
-        SR_UTILS_NS::VFS::Instance().ResolvePath(runtimePath);
+        SR_UTILS_NS::VFS::Instance().ResolvePath(runtimePath, SR_UTILS_NS::FileMode::Read);
         auto&& pLibraryHandle = SR_PLATFORM_NS::LoadLibraryModule(runtimePath);
         if (!pLibraryHandle) {
             SR_ERROR("ModuleManager::LoadModule() : failed to load module!\n\tPath: {}", runtimePath);

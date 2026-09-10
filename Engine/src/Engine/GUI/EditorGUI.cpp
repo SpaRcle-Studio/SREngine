@@ -5,6 +5,7 @@
 #include <Engine/Engine.h>
 
 #include <Engine/Settings/EditorSettings.h>
+#include <Engine/Settings/ProjectSettings.h>
 
 #include <Engine/GUI/EditorGUI.h>
 #include <Engine/GUI/SoundDebug.h>
@@ -857,6 +858,13 @@ namespace SR_CORE_GUI_NS {
                 if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Close project")) {
                     SR_UTILS_NS::CLIManager::Instance().SetProjectPath(std::nullopt);
                     GetEngine()->Reload();
+                }
+            }
+
+            if (SR_UTILS_NS::VFS::Instance().IsFileExists(".srproject")) {
+                SR_GRAPH_GUI_NS::Immediate::Separator();
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Project settings")) {
+                    OpenWidget<AssetInspector>()->Inspect(".srproject");
                 }
             }
 

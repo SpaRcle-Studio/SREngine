@@ -8,6 +8,7 @@
 #include <Engine/macros.h>
 
 #include <Utils/Resources/Asset.h>
+#include <Utils/FileSystem/PathDataAccessor.h>
 
 namespace SR_CORE_NS {
     /// @extension(srproject)
@@ -19,6 +20,10 @@ namespace SR_CORE_NS {
     public:
         /// @property
         SR_UTILS_NS::StringAtom projectName = "New Project";
+        /// @property
+        /// @customArgs(pick: enabled, filter name: Scene, relative: resources)
+        /// @customArg(filter value: scene)
+        SR_UTILS_NS::Path mainScene;
 
     };
 }

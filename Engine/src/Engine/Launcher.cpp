@@ -94,7 +94,7 @@ namespace SR_CORE_NS {
 
         SR_UTILS_NS::Path zipPath = cachePath.Concat("SRE2R/Resources.zip");
 
-        SR_UTILS_NS::VFS::Instance().ResolvePath(zipPath);
+        SR_UTILS_NS::VFS::Instance().ResolvePath(zipPath, SR_UTILS_NS::FileMode::Read);
         SR_PLATFORM_NS::Unzip(zipPath, resourcesPath);
     #endif
 

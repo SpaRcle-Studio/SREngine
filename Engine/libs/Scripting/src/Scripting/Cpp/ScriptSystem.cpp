@@ -43,7 +43,7 @@ namespace SR_SCRIPTING_NS {
         SR_LOG("ScriptSystem::Init() : initializing script system...");
 
         m_cacheFolder = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
-        SR_UTILS_NS::VFS::Instance().ResolvePath(m_cacheFolder);
+        SR_UTILS_NS::VFS::Instance().ResolvePath(m_cacheFolder, SR_UTILS_NS::FileMode::Write);
 
         m_isCompilationEnabled = SR_UTILS_NS::Features::Instance().Enabled("ScriptCompilation", true);
         m_apiFolder = CoreResLoader::GetResPath().Concat("API");
@@ -356,11 +356,11 @@ namespace SR_SCRIPTING_NS {
             context.includePaths.emplace_back(codegenFolder);
 
             for (auto&& path : context.includePaths) {
-                SR_UTILS_NS::VFS::Instance().ResolvePath(path);
+                SR_UTILS_NS::VFS::Instance().ResolvePath(path, SR_UTILS_NS::FileMode::Read);
             }
 
             SR_UTILS_NS::Path moduleFolder = module.path;
-            SR_UTILS_NS::VFS::Instance().ResolvePath(moduleFolder);
+            SR_UTILS_NS::VFS::Instance().ResolvePath(moduleFolder, SR_UTILS_NS::FileMode::Read);
             context.includePaths.emplace_back(moduleFolder.GetFolder());
 
             if (!m_compiler->Compile(context)) {

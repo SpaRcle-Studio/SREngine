@@ -91,8 +91,8 @@ namespace SR_SCRIPTING_NS {
         m_cachePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
         m_resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
 
-        SR_UTILS_NS::VFS::Instance().ResolvePath(m_cachePath);
-        SR_UTILS_NS::VFS::Instance().ResolvePath(m_resourcesPath);
+        SR_UTILS_NS::VFS::Instance().ResolvePath(m_cachePath, SR_UTILS_NS::FileMode::Write);
+        SR_UTILS_NS::VFS::Instance().ResolvePath(m_resourcesPath, SR_UTILS_NS::FileMode::Read);
 
         if (!FindWindowsSDK()) {
             SR_ERROR("CppCompiler::Init() : failed to find windows sdk!");

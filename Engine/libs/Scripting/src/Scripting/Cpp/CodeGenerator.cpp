@@ -198,13 +198,13 @@ namespace SR_SCRIPTING_NS {
 
             const SR_UTILS_NS::Path buildDir = modulesPath.Concat(module.moduleInfo.moduleName);
             SR_UTILS_NS::Path libclangFolder = CoreResLoader::GetResPath().Concat("Engine/Utilities/codegen-modules.json");
-            SR_UTILS_NS::VFS::Instance().ResolvePath(libclangFolder);
+            SR_UTILS_NS::VFS::Instance().ResolvePath(libclangFolder, SR_UTILS_NS::FileMode::Read);
 
             SR_UTILS_NS::Path apiFolder = m_pScriptSystem->GetAPIFolder().Concat("Engine");
-            SR_UTILS_NS::VFS::Instance().ResolvePath(apiFolder);
+            SR_UTILS_NS::VFS::Instance().ResolvePath(apiFolder, SR_UTILS_NS::FileMode::Read);
 
             SR_UTILS_NS::Path moduleFolder = module.path;
-            SR_UTILS_NS::VFS::Instance().ResolvePath(moduleFolder);
+            SR_UTILS_NS::VFS::Instance().ResolvePath(moduleFolder, SR_UTILS_NS::FileMode::Read);
             moduleFolder = moduleFolder.GetFolder();
 
             const SR_UTILS_NS::String command = "{} --codegen_dir \"{}\" --root_build_dir \"{}\" --repo_dir \"{}\" --config_dir \"{}\" --module_name \"{}\" --is_script --help_sources_dir \"{}\""_format(
@@ -267,12 +267,12 @@ namespace SR_SCRIPTING_NS {
             cmakeContent += "\t\tendif()\n";
 
             SR_UTILS_NS::Path moduleFolder = module.path.GetFolder();
-            SR_UTILS_NS::VFS::Instance().ResolvePath(moduleFolder);
+            SR_UTILS_NS::VFS::Instance().ResolvePath(moduleFolder, SR_UTILS_NS::FileMode::Read);
             cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, moduleFolder);
 
             for (auto&& engineIncludeDir : m_pScriptSystem->GetEngineSourcesIncludePaths()) {
                 SR_UTILS_NS::Path includeDir = engineIncludeDir;
-                SR_UTILS_NS::VFS::Instance().ResolvePath(includeDir);
+                SR_UTILS_NS::VFS::Instance().ResolvePath(includeDir, SR_UTILS_NS::FileMode::Read);
                 cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, includeDir);
             }
 
@@ -289,7 +289,7 @@ namespace SR_SCRIPTING_NS {
                     cmakeContent += "\t\ttarget_link_libraries(SCRIPT_MODULE_{} SCRIPT_MODULE_{})\n"_format(module.moduleInfo.moduleName, dependency);
 
                     SR_UTILS_NS::Path moduleFolder = pDependencyModule->path.GetFolder();
-                    SR_UTILS_NS::VFS::Instance().ResolvePath(moduleFolder);
+                    SR_UTILS_NS::VFS::Instance().ResolvePath(moduleFolder, SR_UTILS_NS::FileMode::Read);
                     cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, moduleFolder);
                     cmakeContent += "\tendif()\n";
                 }
@@ -322,8 +322,8 @@ namespace SR_SCRIPTING_NS {
     bool CppCodeGenerator::Init() {
         m_resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
         m_cacheFolder = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
-        SR_UTILS_NS::VFS::Instance().ResolvePath(m_resourcesFolder);
-        SR_UTILS_NS::VFS::Instance().ResolvePath(m_cacheFolder);
+        SR_UTILS_NS::VFS::Instance().ResolvePath(m_resourcesFolder, SR_UTILS_NS::FileMode::Write);
+        SR_UTILS_NS::VFS::Instance().ResolvePath(m_cacheFolder, SR_UTILS_NS::FileMode::Write);
 
         if (SR_PLATFORM_NS::GetType() == SR_UTILS_NS::PlatformType::Windows) {
             m_codegenExecutablePath = "Engine/Utilities/codegen.exe";
@@ -332,7 +332,7 @@ namespace SR_SCRIPTING_NS {
             m_codegenExecutablePath = "Engine/Utilities/codegen";
         }
         m_codegenExecutablePath = CoreResLoader::GetResPath().Concat(m_codegenExecutablePath);
-        SR_UTILS_NS::VFS::Instance().ResolvePath(m_codegenExecutablePath);
+        SR_UTILS_NS::VFS::Instance().ResolvePath(m_codegenExecutablePath, SR_UTILS_NS::FileMode::Read);
         return true;
     }
 
