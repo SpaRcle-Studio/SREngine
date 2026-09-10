@@ -2,10 +2,14 @@
 setlocal
 
 set "SOURCE_RESOURCES_FOLDER=..\..\Resources"
-set "DESTINATION_RESOURCES_FOLDER=app\src\main\assets"
+set "DESTINATION_ASSETS_FOLDER=app\src\main\assets"
+
+:: ресурсы кладутся в assets вместе с папкой "Resources", чтобы пути внутри apk
+:: совпадали с виртуальными путями движка на остальных платформах
+set "DESTINATION_RESOURCES_FOLDER=%DESTINATION_ASSETS_FOLDER%\Resources"
 
 :: удаляем папку assets целиком
-if exist "%DESTINATION_RESOURCES_FOLDER%" rmdir /s /q "%DESTINATION_RESOURCES_FOLDER%"
+if exist "%DESTINATION_ASSETS_FOLDER%" rmdir /s /q "%DESTINATION_ASSETS_FOLDER%"
 
 :: пересоздаём
 mkdir "%DESTINATION_RESOURCES_FOLDER%"

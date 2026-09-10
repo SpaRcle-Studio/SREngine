@@ -40,7 +40,7 @@ namespace SR_CORE_NS::GUI {
     FileBrowser::FileBrowser()
         : Widget("Assets")
     {
-        SetFolder(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
+        SetFolder(CoreResLoader::GetResPath());
     }
 
     FileBrowser::~FileBrowser() {
@@ -293,23 +293,19 @@ namespace SR_CORE_NS::GUI {
 
             if (SR_GRAPH_GUI_NS::Immediate::Button("Back", SR_MATH_NS::FVector2(fontSize * 4.f, 0.f))) {
                 auto&& prevPath = m_selectedDir.GetPrevious();
-                auto&& resPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-
-                if (prevPath == resPath || prevPath.IsSubPath(resPath)) {
-                    m_selectedDir = prevPath;
-                    m_dirtySelectedDir = true;
-                }
+                m_selectedDir = prevPath;
+                m_dirtySelectedDir = true;
             }
 
             SR_GRAPH_GUI_NS::Immediate::SameLine();
 
             if (SR_GRAPH_GUI_NS::Immediate::Button("Home", SR_MATH_NS::FVector2(fontSize * 4.f, 0.f))) {
-                m_selectedDir = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+                m_selectedDir = "";
                 m_dirtySelectedDir = true;
             }
             /// Current Directory Text
             SR_GRAPH_GUI_NS::Immediate::SameLine();
-            SR_GRAPH_GUI_NS::Immediate::Text("%s", m_selectedDir.CStr());
+            SR_GRAPH_GUI_NS::Immediate::Text("%s", m_selectedDir.empty() ? "Home" : m_selectedDir.c_str());
             /// Refresh Button
             SR_GRAPH_GUI_NS::Immediate::SameLine();
             SR_GRAPH_GUI_NS::Immediate::SetCursorPosX(SR_GRAPH_GUI_NS::Immediate::GetCursorPos().x + SR_GRAPH_GUI_NS::Immediate::GetContentRegionAvail().x - panelHeight);

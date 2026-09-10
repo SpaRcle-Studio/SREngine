@@ -124,15 +124,25 @@ namespace SR_CORE_NS {
 
         SR_UTILS_NS::VFS::Instance().UnmountAll();
 
+        bool projectPathMounted = false;
+
         if (SR_PLATFORM_NS::GetType() == SR_UTILS_NS::PlatformType::Android) {
-            SR_UTILS_NS::VFS::Instance().Mount(resourcesPath, new SR_UTILS_NS::AndroidVFSBackend(), -100);
+            /// ресурсы упакованы в assets вместе с папкой "Resources", поэтому бекенд монтируется
+            /// в корень и виртуальные пути совпадают с путями внутри apk
+            SR_UTILS_NS::VFS::Instance().Mount("", new SR_UTILS_NS::AndroidVFSBackend(), -100);
+            projectPathMounted = true;
+        }
+
+        /// в assets писать нельзя, поэтому всё изменяемое (кеш, конфиги) уходит в папку данных
+        /// приложения. Она монтируется поверх ресурсов, чтобы изменённые файлы имели приоритет
+        if (auto&& dataPath = SR_PLATFORM_NS::GetApplicationDataPath(); dataPath && !dataPath->empty()) {
+            SR_UTILS_NS::VFS::Instance().Mount("", new SR_UTILS_NS::DirectoryVFSBackend(*dataPath), -75);
         }
 
         if (auto&& appFolder = SR_PLATFORM_NS::GetApplicationDirectory(); !appFolder.empty()) {
             SR_UTILS_NS::VFS::Instance().Mount("", new SR_UTILS_NS::ReadOnlyDirectoryVFSBackend(appFolder), -50);
         }
 
-        bool projectPathMounted = false;
         if (auto&& projectPath = SR_UTILS_NS::CLIManager::Instance().GetProjectPath()) {
             auto&& projectResourcesPath = SR_PLATFORM_NS::GetPathType(*projectPath) == SR_UTILS_NS::FSItemType::File
                 ? projectPath->GetFolder().Concat("Resources")
