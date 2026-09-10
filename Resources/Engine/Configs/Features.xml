@@ -11,6 +11,7 @@
     <Common>
         <!-- Debug -->
         <DebugRendererMeshes Value="true"/>
+        <AliveEntityDebugger Value="false"/>
         <ShowScriptsCodegenResult Value="true"/>
         <SegmentationHandler Value="false"/>
         <ResourceUsePointStackTraceProfiling Value="false"/>
@@ -57,7 +58,6 @@
         <AccumulateDt Value="true"/>
         <FastModelsLoad Value="true"/>
         <FileWatching Value="true"/>
-        <RunGameModeOnStart Value="false"/>
 
         <!-- Physics -->
         <Physics Value="true"/>
@@ -81,7 +81,6 @@
             <Undocking Value="false"/>
             <FastModelsLoad Value="false"/>
             <ScriptCompilation Value="false"/>
-            <RunGameModeOnStart Value="false"/>
         </Variant>
 
         <Variant Name="Android">

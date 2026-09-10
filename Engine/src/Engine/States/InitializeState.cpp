@@ -75,6 +75,7 @@ namespace SR_CORE_NS {
         }
 
         SR_THIS_THREAD->GetContext()->SetValue<SR_GRAPH_NS::RenderContext::Ptr>(pRenderContext);
+        SR_THIS_THREAD->GetContext()->SetPointer(GetContext().GetPointer<Engine>());
 
         if (!pRenderContext) {
             SR_ERROR("Engine::InitializeRender() : failed to get render context!");
@@ -103,8 +104,6 @@ namespace SR_CORE_NS {
         auto&& pEngine = GetContext().GetPointer<Engine>();
 
         if (auto&& pWindow = pEngine->GetMainWindow()) {
-            auto&& cachePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
-
             if (!pWindow->GetSize().HasZero()) {
                 SR_UTILS_NS::StoreUtils::User::SetInt("MainWindowWidth", pWindow->GetSize().x);
                 SR_UTILS_NS::StoreUtils::User::SetInt("MainWindowHeight", pWindow->GetSize().y);

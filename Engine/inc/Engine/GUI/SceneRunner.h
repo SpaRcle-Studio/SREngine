@@ -26,9 +26,6 @@ namespace SR_CORE_GUI_NS {
         ~SceneRunner() override = default;
 
     public:
-        void SetScene(const SR_WORLD_NS::Scene::Ptr &scene) override;
-
-        static bool PlayScene(SR_WORLD_NS::Scene::Ptr pScene, Engine* pEngine);
         bool PlayScene();
         void ReturnScene();
 
@@ -41,7 +38,6 @@ namespace SR_CORE_GUI_NS {
         bool m_isActive = false;
         bool m_isPaused = false;
 
-        SR_WORLD_NS::Scene::Ptr m_scene;
         SR_UTILS_NS::Path m_lastPath;
         SR_UTILS_NS::Path m_scenePath;
 

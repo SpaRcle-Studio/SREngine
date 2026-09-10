@@ -52,7 +52,6 @@ namespace SR_CORE_NS {
 
     class Engine : public SR_HTYPES_NS::SharedPtr<Engine> {
         using Super = SR_HTYPES_NS::SharedPtr<Engine>;
-        using Ptr = SR_HTYPES_NS::SharedPtr<Engine>;
         using WindowPtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::Window>;
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext>;
         using CameraPtr = SR_GTYPES_NS::Camera*;
@@ -61,6 +60,9 @@ namespace SR_CORE_NS {
         using ScenePtr = SR_HTYPES_NS::SharedPtr<SR_WORLD_NS::Scene>;
         using RenderScenePtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::RenderScene>;
     public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<Engine>;
+
+    public:
         explicit Engine(Application* pApplication);
         ~Engine() override;
 
@@ -68,8 +70,7 @@ namespace SR_CORE_NS {
 
         void Reload();
 
-        void RunSceneGameMode(const SR_UTILS_NS::Path& path);
-        void RunSceneGameMode(const ScenePtr& scene);
+        void RunSceneGameMode(const SR_UTILS_NS::Path& path, bool gameMode);
 
         void AddSceneToQueue(const ScenePtr& scene);
         void SetActive(bool isActive);

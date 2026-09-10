@@ -4,6 +4,7 @@
 
 #include <Engine/Common/Importers.h>
 #include <Engine/World/World.h>
+#include <Engine/Engine.h>
 
 #include <Graphics/Render/RenderScene.h>
 #include <Graphics/Render/RenderContext.h>

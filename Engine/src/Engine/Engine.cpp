@@ -9,6 +9,7 @@
 #include <Engine/GUI/SceneRunner.h>
 #include <Engine/GUI/Hierarchy.h>
 #include <Engine/World/EngineScene.h>
+#include <Engine/Settings/ProjectSettings.h>
 
 #include <Graphics/GUI/WidgetManager.h>
 #include <Graphics/Render/RenderContext.h>
@@ -29,6 +30,8 @@
 #include <Utils/TaskManager/TaskManager.h>
 #include <Utils/FileSystem/VFS.h>
 #include <Utils/Localization/LocalizationManager.h>
+#include <Utils/Common/CLIManager.h>
+#include <Utils/Common/StoreUtils.h>
 
 namespace SR_CORE_NS {
     Engine::Engine(Application* pApplication)
@@ -50,6 +53,7 @@ namespace SR_CORE_NS {
         m_renderContext = new SR_GRAPH_NS::RenderContext();
 
         SR_THIS_THREAD->GetContext()->SetValue<SR_GRAPH_NS::RenderContext::Ptr>(m_renderContext);
+        SR_THIS_THREAD->GetContext()->SetPointer(this);
 
         if (!m_renderContext->PreInit()) {
             SR_ERROR("Engine::Create() : failed to pre-initialize render context!");
@@ -270,6 +274,9 @@ namespace SR_CORE_NS {
 
     void Engine::AddSceneToQueue(const SR_HTYPES_NS::SharedPtr<SR_WORLD_NS::Scene>& pScene)  {
         SR_TRACY_ZONE;
+        if (m_sceneQueue.Contains(pScene)) {
+            return;
+        }
         m_sceneQueue.Push(pScene);
     }
 
@@ -361,74 +368,61 @@ namespace SR_CORE_NS {
 
         SR_LOG("Engine::LoadStartupScene() : loading startup scene...");
 
-        if (!m_engineScene && (m_editor && !m_editor->LoadSceneFromCachedPath())) {
-            auto&& scenePath = SR_UTILS_NS::Path(SR_WORLD_NS::Scene::NewScenePath).ConcatExt("scene");
-
-            if (SR_WORLD_NS::Scene::IsExists(scenePath)) {
-                auto&& pScene = SR_WORLD_NS::Scene::LoadScene(scenePath);
-                if (!pScene) {
-                    SR_ERROR("Engine::Create() : failed to load scene! Delete broken new scene\n\tPath: {}", scenePath);
-                    SR_UTILS_NS::VFS::Instance().Delete(SR_WORLD_NS::Scene::GetAbsPath(scenePath));
-                }
-                else {
-                    AddSceneToQueue(pScene);
-                    SR_LOG("Engine::LoadStartupScene() : startup scene loaded successfully!");
+        if (!SR_UTILS_NS::StoreUtils::Temp::GetBool("ApplicationIsNotAGame", false)) {
+            SR_UTILS_NS::StoreUtils::Temp::SetBool("ApplicationIsNotAGame", true);
+            const bool isAppOpenedByProjectFile = SR_UTILS_NS::CLIManager::Instance().GetProjectPath().has_value();
+            auto&& optionPath =  SR_UTILS_NS::CLIManager::Instance().GetOptionValue(SR_UTILS_NS::CLIOptions::RunScene);
+            if (optionPath.has_value()) {
+                SR_LOG("Engine::LoadStartupScene() : command line option to run scene detected: {}", optionPath.value());
+                RunSceneGameMode(optionPath.value(), true);
+                SR_UTILS_NS::StoreUtils::Temp::SetBool("ApplicationIsNotAGame", false);
+            }
+            else if (!isAppOpenedByProjectFile && SR_UTILS_NS::VFS::Instance().IsExists(".srproject")) {
+                if (auto&& pSettings = CoreResLoader::Load<ProjectSettings>(".srproject")) {
+                    if (auto&& scenePath = CoreResLoader::GetResPath().Concat(pSettings->mainScene); scenePath.IsFile()) {
+                        RunSceneGameMode(pSettings->mainScene, true);
+                        SR_UTILS_NS::StoreUtils::Temp::SetBool("ApplicationIsNotAGame", false);
+                    }
                 }
             }
-
-            if (m_sceneQueue.Empty()) {
-                AddSceneToQueue(SR_WORLD_NS::Scene::NewScene(scenePath, SR_WORLD_NS::SceneLogicType::Asset));
-                SR_LOG("Engine::LoadStartupScene() : new startup scene created successfully!");
-            }
-        }
-        else {
-            SR_LOG("Engine::LoadStartupScene() : no startup scene found.");
-            return;
-        }
-    }
-    
-    void Engine::RunSceneGameMode(const SR_UTILS_NS::Path& path) {
-        if (auto&& pScene = SR_WORLD_NS::Scene::LoadScene(path)) {
-            RunSceneGameMode(pScene);
-        }
-        else {
-            SR_ERROR("Engine::RunSceneGameMode() : failed to load scene from path: \n\t{}", path);
-        }
-    }
-
-    void Engine::RunSceneGameMode(const ScenePtr& scene) {
-        if (GetScene() != scene) {
-            AddSceneToQueue(scene);
         }
 
-        if (auto&& pEditor = GetEditor()) {
-            if (auto&& pHierarchy = pEditor->GetWidget<SR_CORE_GUI_NS::Hierarchy>()) {
-                if (auto&& pSceneRunner = dynamic_cast<SR_CORE_GUI_NS::SceneRunner*>(pHierarchy->GetSceneRunnerWidget())) {
-                    pSceneRunner->SetScene(scene);
-                    
-                    pSceneRunner->PlayScene();
-                    SetGameMode(true);
-                    SetActive(true);
+        if (m_sceneQueue.Empty()) {
+            if (!m_engineScene && (m_editor && !m_editor->LoadSceneFromCachedPath())) {
+                auto&& scenePath = SR_UTILS_NS::Path(SR_WORLD_NS::Scene::NewScenePath).ConcatExt("scene");
 
-                    SR_LOG("Engine::RunSceneGameMode() : running scene from command line option: \n\t{}", scene->GetPath());
-
-                    return;
+                if (SR_WORLD_NS::Scene::IsExists(scenePath)) {
+                    auto&& pScene = SR_WORLD_NS::Scene::LoadScene(scenePath);
+                    if (!pScene) {
+                        SR_ERROR("Engine::Create() : failed to load scene! Delete broken new scene\n\tPath: {}", scenePath);
+                        SR_UTILS_NS::VFS::Instance().Delete(SR_WORLD_NS::Scene::GetAbsPath(scenePath));
+                    }
+                    else {
+                        AddSceneToQueue(pScene);
+                        SR_LOG("Engine::LoadStartupScene() : startup scene loaded successfully!");
+                    }
                 }
-                else {
-                    SR_ERROR("Engine::RunSceneGameMode() : scene runner widget is not found!");
+
+                if (m_sceneQueue.Empty()) {
+                    AddSceneToQueue(SR_WORLD_NS::Scene::NewScene(scenePath, SR_WORLD_NS::SceneLogicType::Asset));
+                    SR_LOG("Engine::LoadStartupScene() : new startup scene created successfully!");
                 }
             }
             else {
-                SR_ERROR("Engine::RunSceneGameMode() : hierarchy widget is not found!");
+                SR_LOG("Engine::LoadStartupScene() : no startup scene found.");
+                return;
             }
-            SR_ERROR("Engine::RunSceneGameMode() : failed to run scene: \n\t{}", scene->GetPath());
         }
-        else {
-            SR_CORE_GUI_NS::SceneRunner::PlayScene(scene, this);
+    }
+
+    void Engine::RunSceneGameMode(const SR_UTILS_NS::Path& path, bool gameMode) {
+        SR_TRACY_ZONE;
+        SR_WORLD_NS::Scene::PlayScene(path);
+        if (gameMode) {
             SetGameMode(true);
-            SetActive(true);
-            SR_LOG("Engine::RunSceneGameMode() : running scene from command line option: \n\t{}", scene->GetPath());
         }
+        SetActive(true);
+        SR_LOG("Engine::RunSceneGameMode() : running scene \"{}\"...", path);
     }
 
     void Engine::SetGameMode(bool enabled) {

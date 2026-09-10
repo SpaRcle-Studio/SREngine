@@ -24,11 +24,6 @@ namespace SR_CORE_NS::GUI {
         : SR_GRAPH_NS::GUI::Widget("Scene runner", SR_MATH_NS::IVector2(0, 60))
     { }
 
-    void SceneRunner::SetScene(const SR_WORLD_NS::Scene::Ptr &scene) {
-        SR_LOCK_GUARD;
-        m_scene = scene;
-    }
-
     void SceneRunner::Draw() {
         SR_TRACY_ZONE;
 
@@ -38,6 +33,8 @@ namespace SR_CORE_NS::GUI {
         float_t iconSize = SR_UTILS_NS::StoreUtils::User::GetFloat("EditorFontSize", SR_IMMEDIATE_GUI_NS::DEFAULT_FONT_SIZE) * 4.0f;
         int32_t framePadding = 3;
 
+        auto&& pScene = pEngine->GetScene();
+
         if (!pFont) {
             SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.0f, 0.25f, 0.25f, 1.0f), "Failed to get icon font!");
             return;
@@ -45,10 +42,10 @@ namespace SR_CORE_NS::GUI {
 
         bool locked = false;
 
-        if (m_scene) {
+        if (pScene) {
             m_isActive = pEngine->IsActive();
             m_isPaused = pEngine->IsPaused();
-            m_lastPath = m_scene->GetPath();
+            m_lastPath = pScene->GetPath();
             locked = true;
         }
 
@@ -94,7 +91,7 @@ namespace SR_CORE_NS::GUI {
             }
         }
 
-        if (!m_scene->IsPrefab()) {
+        if (!pScene->IsPrefab()) {
             SR_GRAPH_GUI_NS::Immediate::SameLine();
 
             if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(EditorIcon::Game)) {
@@ -108,15 +105,15 @@ namespace SR_CORE_NS::GUI {
             }
         }
 
-        if (m_scene->IsPrefab()) {
+        if (pScene->IsPrefab()) {
             SR_GRAPH_GUI_NS::Immediate::SameLine();
 
             if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(EditorIcon::Back)) {
                 if (SR_GRAPH_GUI_NS::Immediate::ImageButton("##imgSceneBackBtn", pDescriptor, SR_MATH_NS::FVector2(iconSize), framePadding)) {
-                    m_scene->SaveScene();
+                    pScene->SaveScene();
 
                     auto&& resourcesManager = SR_UTILS_NS::ResourceManager::Instance();
-                    if (auto&& pPrefab = resourcesManager.Find<SR_UTILS_NS::Prefab>(m_scene->GetPath(), nullptr)) {
+                    if (auto&& pPrefab = resourcesManager.Find<SR_UTILS_NS::Prefab>(pScene->GetPath(), nullptr)) {
                         pPrefab->Reload();
                     }
 
@@ -145,42 +142,23 @@ namespace SR_CORE_NS::GUI {
         SetSize(SR_MATH_NS::IVector2(0, widgetSize));
     }
 
-    bool SceneRunner::PlayScene(SR_WORLD_NS::Scene::Ptr pScene, Engine* pEngine) {
+    bool SceneRunner::PlayScene() {
+        SR_TRACY_ZONE;
+        SR_LOCK_GUARD;
+
+        auto pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+        auto&& pScene = pEngine->GetScene();
+        if (!pScene) {
+            return false;
+        }
+
         if (!pScene->SaveScene()) {
             SR_ERROR("SceneRunner::PlayScene() : failed to save scene!");
             return false;
         }
 
-        const std::string extension = pScene->GetPath().GetExtension();
-
-        auto&& runtimePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(SR_UTILS_NS::Path(SR_WORLD_NS::Scene::RuntimeScenePath).ConcatExt(extension));
-
-        if (runtimePath.IsDir()) {
-            SR_UTILS_NS::VFS::Instance().Delete(runtimePath);
-        }
-
-        SR_LOG("SceneRunner::PlayScene() : copying scene: \n\tFrom: {}\n\tTo: {}", pScene->GetAbsPath(), runtimePath);
-
-        if (!pScene->GetAbsPath().Copy(runtimePath)) {
-            SR_ERROR("SceneRunner::PlayScene() : failed to copy scene!\n\tSource: {}\n\tDestination: {}", pScene->GetPath(), runtimePath);
-            return false;
-        }
-
-        if (auto&& runtimeScene = SR_WORLD_NS::Scene::LoadScene(SR_UTILS_NS::Path(SR_WORLD_NS::Scene::RuntimeScenePath).ConcatExt(extension))) {
-            pEngine->AddSceneToQueue(runtimeScene);
-            return true;
-        }
-        return false;
-    }
-
-    bool SceneRunner::PlayScene() {
-        SR_TRACY_ZONE;
-        SR_LOCK_GUARD;
-
-        // TODO: Refactor to use Engine::RunSceneGameMode instead.
-
-        if (m_lastPath.IsEmpty() && m_scene) {
-            m_lastPath = std::move(m_scene->GetPath());
+        if (m_lastPath.IsEmpty() && pScene) {
+            m_lastPath = pScene->GetPath();
         }
 
         if (m_lastPath.IsEmpty()) {
@@ -190,18 +168,9 @@ namespace SR_CORE_NS::GUI {
 
         SR_LOG("SceneRunner::PlayScene() : playing scene \"" + m_lastPath.ToString() + "\"");
 
-        auto&& pEditor = dynamic_cast<EditorGUI*>(GetManager());
-        if (!pEditor) {
-            SRHalt("SceneRunner::PlayScene() : failed to get editor!");
-            return false;
-        }
-        auto pEngine = pEditor->GetEngine();
-
-        if (PlayScene(m_scene, pEngine.Get())) {
-            m_scenePath = m_lastPath;
-            return true;
-        }
-        return false;
+        pEngine->RunSceneGameMode(m_lastPath, false);
+        m_scenePath = m_lastPath;
+        return true;
     }
 
     void SceneRunner::ReturnScene() {
