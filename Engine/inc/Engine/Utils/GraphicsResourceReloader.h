@@ -6,7 +6,6 @@
 #define SR_ENGINE_GRAPHICSRESOURCERELOADER_H
 
 #include <Utils/Resources/IResourceReloader.h>
-#include <Utils/Types/SafePointer.h>
 
 namespace SR_GRAPH_NS {
     class RenderContext;

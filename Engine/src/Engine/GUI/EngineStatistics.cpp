@@ -25,6 +25,7 @@
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/Resources/ResourceInfo.h>
 #include <Utils/DebugDraw.h>
+#include <Utils/Common/HashManager.h>
 #include <Utils/CommandManager/CmdManager.h>
 
 #include <Codegen/EngineStatistics.generated.hpp>

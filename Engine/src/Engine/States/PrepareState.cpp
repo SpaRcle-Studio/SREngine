@@ -20,6 +20,7 @@
 #include <Utils/DebugDraw.h>
 #include <Utils/TaskManager/TaskManager.h>
 #include <Utils/Types/Time.h>
+#include <Utils/Common/StoreUtils.h>
 
 #include <Codegen/PrepareState.generated.hpp>
 
@@ -29,11 +30,9 @@ namespace SR_CORE_NS {
 
         SR_UTILS_NS::TaskManager::Instance().Update();
 
-        auto&& pEngine = GetContext().GetPointer<Engine>();
+        Engine::Ptr pEngine = (Engine*)SR_UTILS_NS::StoreUtils::Temp::GetPointer("Engine");
 
         pEngine->FlushScene();
-
-        //SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(false);
 
         if (auto&& pRenderContext = pEngine->GetRenderContext()) {
             pRenderContext->Update();

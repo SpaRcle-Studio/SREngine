@@ -8,7 +8,6 @@
 #include <Engine/stdInclude.h>
 
 #include <Utils/Types/SharedPtr.h>
-#include <Utils/Types/SafePointer.h>
 #include <Utils/Types/SafeQueue.h>
 
 namespace SR_GRAPH_NS {
@@ -53,10 +52,10 @@ namespace SR_CORE_NS {
     class Engine : public SR_HTYPES_NS::SharedPtr<Engine> {
         using Super = SR_HTYPES_NS::SharedPtr<Engine>;
         using WindowPtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::Window>;
-        using RenderContextPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext>;
+        using RenderContextPtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::RenderContext>;
         using CameraPtr = SR_GTYPES_NS::Camera*;
         using Clock = std::chrono::high_resolution_clock;
-        using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<SR_PHYSICS_NS::PhysicsScene>;
+        using PhysicsScenePtr = SR_HTYPES_NS::SharedPtr<SR_PHYSICS_NS::PhysicsScene>;
         using ScenePtr = SR_HTYPES_NS::SharedPtr<SR_WORLD_NS::Scene>;
         using RenderScenePtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::RenderScene>;
     public:

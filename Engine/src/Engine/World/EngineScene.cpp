@@ -34,11 +34,7 @@ namespace SR_CORE_NS {
         if (pScene) {
             pScene->Destroy();
         }
-
-        pPhysicsScene.AutoFree([](SR_PHYSICS_NS::PhysicsScene* pData) {
-            delete pData;
-        });
-
+        pPhysicsScene.AutoFree();
         pScene.AutoFree();
     }
 
@@ -76,16 +72,12 @@ namespace SR_CORE_NS {
 
         if (SR_UTILS_NS::Features::Instance().Enabled("Physics", true)) {
             pPhysicsScene = new SR_PHYSICS_NS::PhysicsScene(pScene);
-
             if (!pPhysicsScene->Init()) {
                 SR_ERROR("InitializeScene() : failed to initialize physics scene!");
                 SR_ERROR("InitializeScene() : will work without physics!");
             }
+            pScene->SetModule("Physics", pPhysicsScene.Get());
         }
-
-        pScene->GetDataStorage().SetValue(pRenderScene);
-        pScene->GetDataStorage().SetPointer(pRenderScene.Get());
-        pScene->GetDataStorage().SetValue(pPhysicsScene);
 
         pSceneUpdater = pScene->GetSceneUpdater();
 
@@ -176,8 +168,7 @@ namespace SR_CORE_NS {
         pScene->GetLogicBase()->Prepare();
         pScene->Prepare();
 
-        static const SR_UTILS_NS::StringAtom editorModeKey = "EditorMode";
-        pScene->GetDataStorage().SetValue<bool>(editorModeKey, pEngine->GetEditor() && pEngine->GetEditor()->Enabled());
+        pScene->SetEditorMode(pEngine->GetEditor() && pEngine->GetEditor()->Enabled());
 
         const bool isPaused = pEngine->IsPaused() || !pEngine->IsActive() || pEngine->HasSceneInQueue();
 

@@ -58,8 +58,7 @@ namespace SR_PTYPES_NS {
                 static Rigidbody::PhysicsScenePtr empty;
                 return empty;
             }
-
-            m_physicsScene = pScene->GetDataStorage().GetValue<PhysicsScenePtr>();
+            m_physicsScene = dynamic_cast<PhysicsScene*>(pScene->GetModule("Physics"));
         }
 
         return m_physicsScene;

@@ -3,19 +3,20 @@
 //
 
 #include <Engine/States/SubmitState.h>
+#include <Engine/World/EngineScene.h>
+#include <Engine/Engine.h>
 
 #include <Graphics/Window/Window.h>
 #include <Graphics/Render/RenderScene.h>
 #include <Graphics/Pipeline/Pipeline.h>
 
-#include <Engine/Engine.h>
-#include <Engine/World/EngineScene.h>
+#include <Utils/Common/StoreUtils.h>
 
 #include <Codegen/SubmitState.generated.hpp>
 
 namespace SR_CORE_NS {
     SR_UTILS_NS::ThreadWorkerResult SubmitState::ExecuteImpl() {
-        auto&& pEngine = GetContext().GetPointer<Engine>();
+        Engine::Ptr pEngine = (Engine*)SR_UTILS_NS::StoreUtils::Temp::GetPointer("Engine");
 
         auto&& pWindow = pEngine->GetMainWindow();
         if (!pWindow || !pWindow->IsVisible()) {
@@ -31,7 +32,7 @@ namespace SR_CORE_NS {
 
         if (auto&& pRenderScene = pEngine->GetRenderScene()) {
             static const SR_UTILS_NS::StringAtom deltaTimeKey = "DeltaTime";
-            const auto dt = GetContext().GetValue<float_t>(deltaTimeKey);
+            const auto dt = SR_UTILS_NS::StoreUtils::Temp::GetFloat(deltaTimeKey);
 
             const uint8_t frameIndex = pRenderScene->GetPipeline()->GetCurrentImageIndex();
             auto&& buildState = pRenderScene->GetPipeline()->GetBuildState(frameIndex);

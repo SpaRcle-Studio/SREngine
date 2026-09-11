@@ -129,7 +129,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
                 if (g_inputTextEvents.size() > 64) {
                     g_inputTextEvents.erase(g_inputTextEvents.begin());
                 }
-                g_inputTextEvents.push_back(std::any_cast<SR_UTILS_NS::InputTextEvent>(msg.GetAny(SR_UTILS_NS::INPUT_TEXT_EVENT_DATA_ID)));
+                g_inputTextEvents.push_back(*(SR_UTILS_NS::InputTextEvent*)(msg.GetPointer(SR_UTILS_NS::INPUT_TEXT_EVENT_DATA_ID)));
             });
         }
 

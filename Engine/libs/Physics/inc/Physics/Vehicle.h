@@ -13,7 +13,6 @@
 
 #include <Utils/ECS/Component.h>
 #include <Utils/Common/Measurement.h>
-#include <Utils/Types/SafePointer.h>
 
 namespace SR_PTYPES_NS {
     /// @category(Physics) @abstract
@@ -22,7 +21,7 @@ namespace SR_PTYPES_NS {
     protected:
         using Super = SR_UTILS_NS::Component;
         using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
-        using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<PhysicsScene>;
+        using PhysicsScenePtr = SR_HTYPES_NS::SharedPtr<PhysicsScene>;
 
     public:
         SR_NODISCARD virtual SR_UTILS_NS::Measurement GetMeasurement() const;

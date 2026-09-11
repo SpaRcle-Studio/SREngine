@@ -7,7 +7,6 @@
 
 #include <Engine/stdInclude.h>
 
-#include <Utils/Types/SafePointer.h>
 #include <Utils/TypeTraits/SRClass.h>
 #include <Utils/Reflection/Property.h>
 
@@ -104,7 +103,7 @@ namespace SR_CORE_GUI_NS {
 
         static void SetReflectedValue(const PropertyDrawerContext& context, PropertyDrawerFeedback& feedback, const SR_UTILS_NS::Reflection::Value& value, bool drag = false);
 
-        SR_NODISCARD SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext> GetRenderContext() const;
+        SR_NODISCARD const SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::RenderContext>& GetRenderContext() const;
 
         std::optional<uint64_t> SearchComboBox(const PropertyDrawerContext& context,
                             const SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>& types,
@@ -113,7 +112,7 @@ namespace SR_CORE_GUI_NS {
                             SR_UTILS_NS::StringView defaultValue);
 
     private:
-        mutable SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext> m_context;
+        mutable SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::RenderContext> m_context;
         std::string m_searchBuffer;
 
     };

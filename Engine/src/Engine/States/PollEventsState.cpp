@@ -7,13 +7,13 @@
 
 #include <Graphics/Window/Window.h>
 
-#include <Utils/Types/DataStorage.h>
+#include <Utils/Common/StoreUtils.h>
 
 #include <Codegen/PollEventsState.generated.hpp>
 
 namespace SR_CORE_NS {
     SR_UTILS_NS::ThreadWorkerResult PollEventsState::ExecuteImpl() {
-        auto&& pEngine = GetContext().GetPointer<Engine>();
+        Engine::Ptr pEngine = (Engine*)SR_UTILS_NS::StoreUtils::Temp::GetPointer("Engine");
 
         if (auto&& pWindow = pEngine->GetMainWindow()) {
             if (!pWindow->IsValid()) {

@@ -101,7 +101,7 @@ namespace SR_CORE_NS {
     }
 
     World::RenderScenePtr World::GetRenderScene() const {
-        return GetDataStorage().GetValue<RenderScenePtr>();
+        return dynamic_cast<SR_GRAPH_NS::RenderScene*>(GetModule("Render"));
     }
 
     World::GameObjectPtr World::GetMainCamera() const {

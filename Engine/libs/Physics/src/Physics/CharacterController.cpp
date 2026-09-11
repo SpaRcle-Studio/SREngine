@@ -40,8 +40,7 @@ namespace SR_PHYSICS_NS {
                 static PhysicsScenePtr empty;
                 return empty;
             }
-
-            m_physicsScene = pScene->GetDataStorage().GetValue<PhysicsScenePtr>();
+            m_physicsScene = dynamic_cast<PhysicsScene*>(pScene->GetModule("Physics"));
         }
         return m_physicsScene;
     }

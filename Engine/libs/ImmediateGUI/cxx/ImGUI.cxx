@@ -17,7 +17,6 @@
 #include <imgui/imgui_tables.cpp>
 #include <imgui/imgui_draw.cpp>
 #include <imgui/imgui_widgets.cpp>
-#include <imgui/imgui_demo.cpp>
 
 #ifdef IMGUI_HAS_STACK_LAYOUT
     #include <imgui/imgui_stacklayout.cpp>

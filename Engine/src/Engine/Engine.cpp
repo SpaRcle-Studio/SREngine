@@ -52,8 +52,8 @@ namespace SR_CORE_NS {
 
         m_renderContext = new SR_GRAPH_NS::RenderContext();
 
-        SR_THIS_THREAD->GetContext()->SetValue<SR_GRAPH_NS::RenderContext::Ptr>(m_renderContext);
-        SR_THIS_THREAD->GetContext()->SetPointer(this);
+        SR_UTILS_NS::StoreUtils::Temp::SetPointer("Engine", this);
+        SR_UTILS_NS::StoreUtils::Temp::SetPointer("RenderContext", m_renderContext.Get());
 
         if (!m_renderContext->PreInit()) {
             SR_ERROR("Engine::Create() : failed to pre-initialize render context!");
@@ -90,8 +90,6 @@ namespace SR_CORE_NS {
             SR_ERROR("Engine::Create() : failed to load threads worker!");
             return false;
         }
-
-        m_threadsWorker->GetContext().SetPointer(this);
 
         m_timeStart = Clock::now();
 
@@ -258,7 +256,7 @@ namespace SR_CORE_NS {
 
         SR_SAFE_DELETE_PTR(m_cmdManager);
 
-        m_renderContext.AutoFree([](auto&& pContext) { delete pContext; });
+        m_renderContext.AutoFree();
 
         for (auto&& pWindow : m_windows) {
             if (pWindow) {
@@ -522,9 +520,8 @@ namespace SR_CORE_NS {
 
     float_t Engine::GetFramerate() const {
         if (m_threadsWorker) {
-            auto&& context = m_threadsWorker->GetContext();
             static const SR_UTILS_NS::StringAtom deltaTimeKey = "DeltaTime";
-            if (const auto dt = context.GetValueDef<float_t>(deltaTimeKey, 0.f); dt > 0.f) {
+            if (const float_t dt = SR_UTILS_NS::StoreUtils::Temp::GetFloat(deltaTimeKey, 0.f); dt > 0.f) {
                 return 1.f / dt;
             }
         }

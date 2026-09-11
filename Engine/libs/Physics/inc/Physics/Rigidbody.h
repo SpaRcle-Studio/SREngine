@@ -14,7 +14,6 @@
 #include <Utils/Common/Measurement.h>
 #include <Utils/ECS/ComponentManager.h>
 #include <Utils/ECS/Component.h>
-#include <Utils/Types/SafePointer.h>
 #include <Utils/Math/Matrix4x4.h>
 
 namespace SR_HTYPES_NS {
@@ -40,7 +39,7 @@ namespace SR_PTYPES_NS {
     protected:
         using Super = SR_UTILS_NS::NonCopyable;
         using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
-        using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<PhysicsScene>;
+        using PhysicsScenePtr = SR_HTYPES_NS::SharedPtr<PhysicsScene>;
     public:
         SR_NODISCARD virtual void* GetHandle() const noexcept = 0;
 
@@ -81,7 +80,7 @@ namespace SR_PTYPES_NS {
     protected:
         using Super = SR_UTILS_NS::Component;
         using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
-        using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<PhysicsScene>;
+        using PhysicsScenePtr = SR_HTYPES_NS::SharedPtr<PhysicsScene>;
 
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<Rigidbody>;

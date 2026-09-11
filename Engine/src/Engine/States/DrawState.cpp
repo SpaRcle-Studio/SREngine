@@ -10,13 +10,15 @@
 #include <Graphics/Pipeline/Pipeline.h>
 #include <Graphics/Window/BasicWindowImpl.h>
 
+#include <Utils/Common/StoreUtils.h>
+
 #include <Codegen/DrawState.generated.hpp>
 
 namespace SR_CORE_NS {
     SR_UTILS_NS::ThreadWorkerResult DrawState::ExecuteImpl() {
         SR_TRACY_ZONE;
 
-        auto&& pEngine = GetContext().GetPointer<Engine>();
+        Engine::Ptr pEngine = (Engine*)SR_UTILS_NS::StoreUtils::Temp::GetPointer("Engine");
         auto&& pRenderContext = pEngine->GetRenderContext();
 
         if (pRenderContext) {

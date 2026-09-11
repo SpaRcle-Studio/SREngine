@@ -12,7 +12,7 @@
 
 namespace SR_PHYSICS_NS {
     PhysicsScene::PhysicsScene(const ScenePtr& scene)
-        : Super(this)
+        : Super(this, SR_UTILS_NS::SharedPtrPolicy::Manually)
         , m_scene(scene)
     {
         SR_TRACY_ZONE;
@@ -62,20 +62,6 @@ namespace SR_PHYSICS_NS {
         if (!(m_3DWorld = m_library3D->CreatePhysicsWorld(Space::Space3D))) {
             SR_ERROR("PhysicsScene::Init() : failed to create 3d world!");
             return false;
-        }
-
-        if (m_scene) {
-            auto&& dataStorage = m_scene->GetDataStorage();
-
-            if (dataStorage.GetValueDef<Ptr>(Ptr())) {
-                SR_ERROR("PhysicsScene::Init() : render scene is already exists!");
-                return false;
-            }
-
-            dataStorage.SetValue<Ptr>(GetThis());
-        }
-        else {
-            SRHalt("PhysicsScene::Init() : scene is invalid!");
         }
 
         if (!CreateDynamicWorld()) {

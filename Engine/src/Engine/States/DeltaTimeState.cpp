@@ -4,7 +4,7 @@
 
 #include <Engine/States/DeltaTimeState.h>
 
-#include <Utils/Types/DataStorage.h>
+#include <Utils/Common/StoreUtils.h>
 
 #include <Codegen/DeltaTimeState.generated.hpp>
 
@@ -27,7 +27,7 @@ namespace SR_CORE_NS {
         m_timeStart = now;
 
         static const SR_UTILS_NS::StringAtom deltaTimeKey = "DeltaTime";
-        GetContext().SetValue(deltaTimeKey, dt);
+        SR_UTILS_NS::StoreUtils::Temp::SetFloat(deltaTimeKey, dt);
 
         SR_HTYPES_NS::Time::Instance().SetDeltaTime(dt);
 

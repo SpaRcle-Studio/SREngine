@@ -7,7 +7,8 @@
 
 #include <Physics/PhysicsLib.h>
 
-#include <Utils/Types/SafePointer.h>
+#include <Utils/Types/SharedPtr.h>
+#include <Utils/World/ISceneModule.h>
 
 namespace SR_WORLD_NS {
     class Scene;
@@ -21,10 +22,10 @@ namespace SR_PHYSICS_NS {
     class CharacterController;
     class PhysicsWorld;
 
-    class PhysicsScene : public SR_HTYPES_NS::SafePtr<PhysicsScene> {
-        friend class SR_HTYPES_NS::SafePtr<PhysicsScene>;
+    class PhysicsScene : public SR_HTYPES_NS::SharedPtr<PhysicsScene>, public SR_UTILS_NS::ISceneModule {
+        friend class SR_HTYPES_NS::SharedPtr<PhysicsScene>;
     public:
-        using Super = SR_HTYPES_NS::SafePtr<PhysicsScene>;
+        using Super = SR_HTYPES_NS::SharedPtr<PhysicsScene>;
         using Ptr = Super;
         using RigidbodyPtr = SR_HTYPES_NS::SharedPtr<SR_PTYPES_NS::Rigidbody>;
         using CharacterControllerPtr = SR_HTYPES_NS::SharedPtr<SR_PHYSICS_NS::CharacterController>;

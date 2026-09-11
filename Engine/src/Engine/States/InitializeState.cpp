@@ -21,7 +21,7 @@ namespace SR_CORE_NS {
             return SR_UTILS_NS::ThreadWorkerResult::Success;
         }
 
-        auto&& pEngine = GetContext().GetPointer<Engine>();
+        Engine::Ptr pEngine = (Engine*)SR_UTILS_NS::StoreUtils::Temp::GetPointer("Engine");
         auto&& pRenderContext = pEngine->GetRenderContext();
         if (pRenderContext->GetPipeline() && pRenderContext->GetPipeline()->IsAsyncEarlyInit()) {
             SR_LOG("InitializeState::Execute() : waiting for async early initialization of the render pipeline...");
@@ -74,9 +74,6 @@ namespace SR_CORE_NS {
             return SR_UTILS_NS::ThreadWorkerResult::Break;
         }
 
-        SR_THIS_THREAD->GetContext()->SetValue<SR_GRAPH_NS::RenderContext::Ptr>(pRenderContext);
-        SR_THIS_THREAD->GetContext()->SetPointer(GetContext().GetPointer<Engine>());
-
         if (!pRenderContext) {
             SR_ERROR("Engine::InitializeRender() : failed to get render context!");
             GetThreadsWorker()->StopAsync();
@@ -101,7 +98,7 @@ namespace SR_CORE_NS {
     }
 
     void InitializeState::FinalizeImpl() {
-        auto&& pEngine = GetContext().GetPointer<Engine>();
+        Engine::Ptr pEngine = (Engine*)SR_UTILS_NS::StoreUtils::Temp::GetPointer("Engine");
 
         if (auto&& pWindow = pEngine->GetMainWindow()) {
             if (!pWindow->GetSize().HasZero()) {

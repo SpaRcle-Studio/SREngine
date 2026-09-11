@@ -127,7 +127,9 @@ namespace SR_CORE_GUI_NS {
 
         SR_INFO("EditorGUI::Init() : initializing editor gui...");
 
-        if (!SRVerifyFalse2(!(m_context = SR_THIS_THREAD->GetContext()->GetValue<RenderContextPtr>()), "Is not render context!")) {
+        m_context = (SR_GRAPH_NS::RenderContext*)SR_UTILS_NS::StoreUtils::Temp::GetPointer("RenderContext");
+        if (!m_context) {
+            SRHalt("EditorGUI::Init() : failed to get render context!");
             m_hasErrors = true;
             return false;
         }

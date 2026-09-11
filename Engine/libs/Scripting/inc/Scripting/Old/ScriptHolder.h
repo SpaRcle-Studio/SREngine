@@ -5,7 +5,6 @@
 #ifndef SR_ENGINE_SCRIPTING_SCRIPT_HOLDER_H
 #define SR_ENGINE_SCRIPTING_SCRIPT_HOLDER_H
 
-#include <Utils/Types/SafePointer.h>
 #include <Utils/Common/NonCopyable.h>
 
 namespace SR_SCRIPTING_NS {

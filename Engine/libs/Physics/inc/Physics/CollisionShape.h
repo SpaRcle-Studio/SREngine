@@ -12,7 +12,6 @@
 #include <Utils/ECS/Component.h>
 #include <Utils/ECS/EntityRef.h>
 #include <Utils/Common/NonCopyable.h>
-#include <Utils/Types/SafePointer.h>
 #include <Utils/Types/IRawMeshHolder.h>
 #include <Utils/Types/FastMemoryArray.h>
 #include <Utils/Math/Matrix4x4.h>
@@ -61,7 +60,7 @@ namespace SR_PTYPES_NS {
             SR_HTYPES_NS::FastMemoryArray<uint32_t> indices;
         };
     public:
-        using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<PhysicsScene>;
+        using PhysicsScenePtr = SR_HTYPES_NS::SharedPtr<PhysicsScene>;
         using Ptr = SR_HTYPES_NS::SharedPtr<CollisionShape>;
         using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
 

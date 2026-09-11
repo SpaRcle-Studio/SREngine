@@ -13,6 +13,7 @@
 #include <Utils/World/SceneLogic.h>
 #include <Utils/DebugDraw.h>
 #include <Utils/Types/Time.h>
+#include <Utils/Common/StoreUtils.h>
 
 #include <Codegen/SceneUpdateState.generated.hpp>
 
@@ -22,7 +23,7 @@ namespace SR_CORE_NS {
 
         const float_t dt = SR_HTYPES_NS::Time::Instance().DeltaTime();
 
-        auto&& pEngine = GetContext().GetPointer<Engine>();
+        Engine::Ptr pEngine = (Engine*)SR_UTILS_NS::StoreUtils::Temp::GetPointer("Engine");
         if (auto&& pEngineScene = pEngine->GetEngineScene()) {
             pEngineScene->Update(dt);
         }

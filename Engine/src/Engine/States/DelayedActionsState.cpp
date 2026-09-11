@@ -5,7 +5,7 @@
 #include <Engine/States/DelayedActionsState.h>
 #include <Engine/Engine.h>
 
-#include <Utils/Types/DataStorage.h>
+#include <Utils/Common/StoreUtils.h>
 
 #include <Codegen/DelayedActionsState.generated.hpp>
 
@@ -14,7 +14,7 @@ namespace SR_CORE_NS {
         SR_TRACY_ZONE;
         SR_LOCK_GUARD;
 
-        auto&& pEngine = GetContext().GetPointer<Engine>();
+        Engine::Ptr pEngine = (Engine*)SR_UTILS_NS::StoreUtils::Temp::GetPointer("Engine", nullptr);
         if (!pEngine) {
             return SR_UTILS_NS::ThreadWorkerResult::Break;
         }

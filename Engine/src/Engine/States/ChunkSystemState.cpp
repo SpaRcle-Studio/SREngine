@@ -20,18 +20,18 @@ namespace SR_CORE_NS {
             return SR_UTILS_NS::ThreadWorkerResult::Success;
         }
 
-        auto&& pEngine = GetContext().GetPointer<Engine>();
-        auto&& pScene = pEngine->GetScene();
-        auto&& pEngineScene = pEngine->GetEngineScene();
+        //auto&& pEngine = GetContext().GetPointer<Engine>();
+        //auto&& pScene = pEngine->GetScene();
+        //auto&& pEngineScene = pEngine->GetEngineScene();
 
-        if (!pEngineScene || !pScene) {
-            return SR_UTILS_NS::ThreadWorkerResult::Success;
-        }
+        //if (!pEngineScene || !pScene) {
+        //    return SR_UTILS_NS::ThreadWorkerResult::Success;
+        //}
 
-        auto&& pMainCamera = pEngineScene->GetMainCamera();
-        if (!pMainCamera) {
-            return SR_UTILS_NS::ThreadWorkerResult::Success;
-        }
+        //auto&& pMainCamera = pEngineScene->GetMainCamera();
+        //if (!pMainCamera) {
+        //    return SR_UTILS_NS::ThreadWorkerResult::Success;
+        //}
 
         //if (auto&& gameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(pMainCamera->GetParent())) {
         //    auto&& pLogic = pScene->GetLogicBase().DynamicCast<SR_WORLD_NS::SceneCubeChunkLogic>();
@@ -40,9 +40,9 @@ namespace SR_CORE_NS {
         //    }
         //}
 
-        pScene->GetLogicBase()->Update(m_worldTimer.GetDeltaTime());
+        //pScene->GetLogicBase()->Update(m_worldTimer.GetDeltaTime());
 
-        pEngineScene->UpdateChunkDebug();
+        //pEngineScene->UpdateChunkDebug();
 
         return SR_UTILS_NS::ThreadWorkerResult::Success;
     }

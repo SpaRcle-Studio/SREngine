@@ -13,6 +13,7 @@
 #include <ImmediateGUI/GUI/ImmediateGUI.h>
 
 #include <Utils/Common/LexicalCast.h>
+#include <Utils/Common/StoreUtils.h>
 #include <Utils/Reflection/Value.h>
 
 #include <Codegen/PropertyDrawer.generated.hpp>
@@ -106,11 +107,11 @@ namespace SR_CORE_GUI_NS {
         return inspector;
     }
 
-    SR_GRAPH_NS::RenderContext::Ptr PropertyDrawerBase::GetRenderContext() const {
+    const SR_GRAPH_NS::RenderContext::Ptr& PropertyDrawerBase::GetRenderContext() const {
         if (m_context) {
             return m_context;
         }
-        m_context = SR_THIS_THREAD->GetContext()->GetValue<SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext>>();
+        m_context = (SR_GRAPH_NS::RenderContext*)SR_UTILS_NS::StoreUtils::Temp::GetPointer("RenderContext");
         SRAssert2(m_context, "Failed to get render context!");
         return m_context;
     }

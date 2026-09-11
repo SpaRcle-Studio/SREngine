@@ -211,7 +211,8 @@ namespace SR_CORE_NS {
                 return new SR_CORE_NS::World();
             },
             [](const SR_WORLD_NS::Scene::Ptr& pScene) {
-                SR_THIS_THREAD->GetContext()->GetPointer<Engine>()->AddSceneToQueue(pScene);
+                Engine::Ptr pEngine = (Engine*)SR_UTILS_NS::StoreUtils::Temp::GetPointer("Engine");
+                pEngine->AddSceneToQueue(pScene);
             }
         );
 

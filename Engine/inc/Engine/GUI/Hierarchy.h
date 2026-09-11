@@ -9,7 +9,6 @@
 
 #include <Graphics/GUI/Widget.h>
 
-#include <Utils/Types/SafePointer.h>
 #include <Utils/World/Scene.h>
 #include <Utils/Input/InputEvents.h>
 #include <Utils/ECS/GameObject.h>

@@ -7,7 +7,6 @@
 
 #include <Engine/Engine.h>
 
-#include <Utils/Types/SafePointer.h>
 #include <Utils/Types/SharedPtrBaseHolder.h>
 #include <Utils/CommandManager/CmdManager.h>
 #include <Utils/ECS/EntityController.h>
