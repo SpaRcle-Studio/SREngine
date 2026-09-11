@@ -6,6 +6,7 @@
 #include <Scripting/Cpp/ScriptSystem.h>
 #include <Scripting/Cpp/ModuleManager.h>
 
+#include <Utils/Common/Bind.h>
 #include <Utils/ECS/GameObject.h>
 #include <Utils/ECS/ComponentManager.h>
 #include <Utils/Resources/ResourceManager.h>
@@ -160,8 +161,8 @@ namespace SR_SCRIPTING_NS {
 
             if (!name.empty()) {
                 m_cppBehaviour = scriptSystem.GetModuleManager()->AllocateBehaviourInstance(name);
-                m_cppBehaviour->SetPreReloadCallback(std::bind(&Behaviour::OnBehaviourPreReload, this));
-                m_cppBehaviour->SetLoadedCallback(std::bind(&Behaviour::OnBehaviourLoaded, this));
+                m_cppBehaviour->SetPreReloadCallback(SR_UTILS_NS::Bind(&Behaviour::OnBehaviourPreReload, this));
+                m_cppBehaviour->SetLoadedCallback(SR_UTILS_NS::Bind(&Behaviour::OnBehaviourLoaded, this));
             }
         }
         m_behaviourName = name;

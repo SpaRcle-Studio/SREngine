@@ -4,6 +4,7 @@
 
 #include <Scripting/Cpp/ScriptSystem.h>
 
+#include <Utils/Common/Bind.h>
 #include <Utils/Common/Features.h>
 #include <Utils/Common/StringAtomLiterals.h>
 #include <Utils/Common/SubscriptionMessage.h>
@@ -81,13 +82,13 @@ namespace SR_SCRIPTING_NS {
             auto&& pFileSystemWatcher = SR_UTILS_NS::ResourceManager::Instance().GetFileSystemWatcher();
 
             m_fileChangedSubscription = pFileSystemWatcher->Subscribe(SR_UTILS_NS::FileSystemWatcher::MODIFIED_EVENT_ID,
-                std::bind(&ScriptSystem::HandleFileSystemEvent, this, std::placeholders::_1, SR_UTILS_NS::FileSystemWatcher::EventType::Modified));
+                SR_UTILS_NS::Bind(&ScriptSystem::HandleFileSystemEvent, this, SR_UTILS_NS::Placeholders::_1, SR_UTILS_NS::FileSystemWatcher::EventType::Modified));
 
             m_fileCreatedSubscription = pFileSystemWatcher->Subscribe(SR_UTILS_NS::FileSystemWatcher::ADDED_EVENT_ID,
-                std::bind(&ScriptSystem::HandleFileSystemEvent, this, std::placeholders::_1, SR_UTILS_NS::FileSystemWatcher::EventType::Add));
+                SR_UTILS_NS::Bind(&ScriptSystem::HandleFileSystemEvent, this, SR_UTILS_NS::Placeholders::_1, SR_UTILS_NS::FileSystemWatcher::EventType::Add));
 
             m_fileDeletedSubscription = pFileSystemWatcher->Subscribe(SR_UTILS_NS::FileSystemWatcher::DELETED_EVENT_ID,
-                std::bind(&ScriptSystem::HandleFileSystemEvent, this, std::placeholders::_1, SR_UTILS_NS::FileSystemWatcher::EventType::Delete));
+                SR_UTILS_NS::Bind(&ScriptSystem::HandleFileSystemEvent, this, SR_UTILS_NS::Placeholders::_1, SR_UTILS_NS::FileSystemWatcher::EventType::Delete));
 
             SR_LOG("ScriptSystem::Init() : creating script system thread...");
 

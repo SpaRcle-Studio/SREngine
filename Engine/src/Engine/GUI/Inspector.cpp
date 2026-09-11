@@ -588,7 +588,7 @@ namespace SR_CORE_GUI_NS {
             return pComponent;
         };
 
-        std::function<bool(const ComponentCategory&, std::string_view)> checkMatch;
+        SR_HTYPES_NS::Function<bool(const ComponentCategory&, std::string_view)> checkMatch;
 
         checkMatch = [&checkMatch](const ComponentCategory& checkCategory, std::string_view search) -> bool {
             const bool hasComponents = std::ranges::any_of(checkCategory.components, [&](auto&& info) {

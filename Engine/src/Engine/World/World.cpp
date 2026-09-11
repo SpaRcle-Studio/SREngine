@@ -25,7 +25,7 @@
 
 namespace SR_CORE_NS {
     SR_UTILS_NS::SceneObject::Ptr World::Instance(const SR_HTYPES_NS::RawMesh* pRawMesh) {
-        static std::function processMaterial = [](const SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t meshId, SR_GTYPES_NS::Mesh* pMesh) {
+        static SR_HTYPES_NS::Function processMaterial = [](const SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t meshId, SR_GTYPES_NS::Mesh* pMesh) {
         #ifdef SR_UTILS_ASSIMP
             const aiScene* pScene = static_cast<const aiScene*>(pRawMesh->GetAssimpScene());
 

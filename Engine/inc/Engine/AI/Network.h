@@ -59,7 +59,7 @@ namespace SpaRcle::AI {
 
         void ConnectNeurons(NeuronId from, NeuronId to);
 
-        void ForEachNeuron(const std::function<void(NeuronId, Neuron&)>& func) {
+        void ForEachNeuron(const SR_HTYPES_NS::Function<void(NeuronId, Neuron&)>& func) {
             SR_TRACY_ZONE;
             m_neurons.ForEach(func);
         }
