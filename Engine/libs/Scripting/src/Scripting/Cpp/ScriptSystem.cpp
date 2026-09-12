@@ -61,6 +61,11 @@ namespace SR_SCRIPTING_NS {
             return false;
         }
 
+        SR_LOG("ScriptSystem::Init() : creating script system thread...");
+        m_threadRunning = true;
+        SR_HTYPES_NS::Thread::Factory::Instance().Create(m_thread, &ScriptSystem::ThreadFunc, this);
+        m_thread->SetName("Script system");
+
         if (m_isCompilationEnabled) {
             SR_LOG("ScriptSystem::Init() : script compilation is enabled!");
 
@@ -90,15 +95,10 @@ namespace SR_SCRIPTING_NS {
             m_fileDeletedSubscription = pFileSystemWatcher->Subscribe(SR_UTILS_NS::FileSystemWatcher::DELETED_EVENT_ID,
                 SR_UTILS_NS::Bind(&ScriptSystem::HandleFileSystemEvent, this, SR_UTILS_NS::Placeholders::_1, SR_UTILS_NS::FileSystemWatcher::EventType::Delete));
 
-            SR_LOG("ScriptSystem::Init() : creating script system thread...");
-
-            m_threadRunning = true;
-
-            SR_HTYPES_NS::Thread::Factory::Instance().Create(m_thread, &ScriptSystem::ThreadFunc, this);
-
-            m_thread->SetName("Script system");
+            m_threadReady = true;
         }
         else {
+            m_threadReady = true;
             SR_LOG("ScriptSystem::Init() : script compilation is disabled!");
             return true;
         }
@@ -165,6 +165,10 @@ namespace SR_SCRIPTING_NS {
 
     bool ScriptSystem::ThreadFunc() {
         SR_TRACY_ZONE_N("ScriptSystem");
+
+        if (!m_threadReady) {
+            return true;
+        }
 
         if (!m_threadRunning) {
             SR_INFO("ScriptSystem::ThreadFunc() : script system thread stopped!");
@@ -477,6 +481,7 @@ namespace SR_SCRIPTING_NS {
                 return "dll";
             case SR_UTILS_NS::PlatformType::Linux:
             case SR_UTILS_NS::PlatformType::Android:
+            case SR_UTILS_NS::PlatformType::Emscripten:
                 return "so";
             default:
                 SRHalt("ScriptSystem::Compile() : unknown platform!");

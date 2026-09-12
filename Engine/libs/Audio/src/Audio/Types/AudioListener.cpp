@@ -19,7 +19,10 @@ namespace SR_AUDIO_NS{
         if (!m_listenerContext) {
             m_listenerContext = SR_AUDIO_NS::SoundManager::Instance().CreateListener();
             if (!m_listenerContext) {
-                SR_ERROR("AudioListener::OnEnable() : failed to create listener!");
+                if (SR_AUDIO_NS::SoundManager::Instance().IsEnabled()) {
+                    SR_ERROR("AudioListener::OnEnable() : failed to create listener!");
+                }
+                Super::OnEnable();
                 return;
             }
 

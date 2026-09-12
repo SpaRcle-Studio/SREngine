@@ -71,6 +71,7 @@ namespace SR_AUDIO_NS {
 
         SR_NODISCARD const SR_UTILS_NS::Set<SoundListener*>& GetListeners() const noexcept { return m_listeners; }
         SR_NODISCARD const std::list<PlayData*>& GetPlayStack() const noexcept { return m_playStack; }
+        SR_NODISCARD bool IsEnabled() const noexcept { return m_isEnabled; }
 
         SR_NODISCARD float_t GetGlobalGain() const noexcept { return m_globalGain.load(); }
         SR_NODISCARD SR_HTYPES_NS::Thread::ThreadId GetThreadId() const noexcept { return m_threadId; }
@@ -97,6 +98,7 @@ namespace SR_AUDIO_NS {
         void Sleep();
 
     private:
+        bool m_isEnabled = false;
         std::atomic<float_t> m_globalGain = 1.f;
         std::atomic<SR_HTYPES_NS::Thread::ThreadId> m_threadId = SR_HTYPES_NS::Thread::EmptyThreadId();
         SR_UTILS_NS::Set<SoundListener*> m_listeners;

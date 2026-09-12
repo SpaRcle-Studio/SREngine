@@ -10,6 +10,7 @@
 #include <Audio/Sound.h>
 
 #include <Utils/Platform/Platform.h>
+#include <Utils/Common/Features.h>
 #include <Utils/Resources/ResourceManager.h>
 
 namespace SR_AUDIO_NS {
@@ -28,6 +29,13 @@ namespace SR_AUDIO_NS {
     void SoundManager::InitSingleton() {
         SRAssert(!m_thread);
 
+        if (!SR_UTILS_NS::Features::Instance().Enabled("Audio", true)) {
+            SR_INFO("SoundManager::InitSingleton() : audio feature is disabled!");
+            m_isEnabled = false;
+            return;
+        }
+
+        m_isEnabled = true;
         m_state = State::Active;
 
         SR_HTYPES_NS::Thread::Factory::Instance().Create(m_thread, [this]() -> bool {
@@ -51,6 +59,10 @@ namespace SR_AUDIO_NS {
     void SoundManager::StopAll() {
         SR_TRACY_ZONE;
 
+        if (!m_thread) {
+            return;
+        }
+
         m_thread->Execute([this]() {
             for (auto&& pPlayData : m_playStack) {
                 DestroyPlayData(pPlayData);
@@ -65,6 +77,10 @@ namespace SR_AUDIO_NS {
         SR_TRACY_ZONE;
 
         std::optional<PlayParams> result;
+
+        if (!m_thread) {
+            return result;
+        }
 
         m_thread->Execute([this, &result, pPlayData]() {
             if (m_playing.count(const_cast<PlayData*>(pPlayData)) == 0) {
@@ -92,6 +108,10 @@ namespace SR_AUDIO_NS {
         SR_TRACY_ZONE;
 
         std::optional<ListenerData> result;
+
+        if (!m_thread) {
+            return result;
+        }
 
         m_thread->Execute([this, &result, pListener]() {
             if (m_listeners.count(const_cast<SoundListener*>(pListener)) == 0) {
@@ -189,6 +209,10 @@ namespace SR_AUDIO_NS {
     SoundManager::Handle SoundManager::Play(Sound* pSound, const PlayParams& params) {
         SR_TRACY_ZONE;
 
+        if (!m_thread) {
+            return nullptr;
+        }
+
         if (!pSound) {
             SR_ERROR("SoundManager::Play() : sound is nullptr!");
             return nullptr;
@@ -251,6 +275,10 @@ namespace SR_AUDIO_NS {
     bool SoundManager::IsPlaying(Handle pHandle) const {
         SR_TRACY_ZONE;
 
+        if (!m_thread) {
+            return false;
+        }
+
         return m_thread->Execute([this, pHandle]() {
             for (auto&& pPlayData : m_playStack) {
                 if (pHandle == pPlayData) {
@@ -283,6 +311,10 @@ namespace SR_AUDIO_NS {
 
     bool SoundManager::Unregister(SoundData** pSoundData) {
         SR_TRACY_ZONE;
+
+        if (!m_thread) {
+            return true;
+        }
 
         return m_thread->Execute([this, pSoundData]() {
             if (!pSoundData || !(*pSoundData) || !(*pSoundData)->pSound) {
@@ -348,6 +380,10 @@ namespace SR_AUDIO_NS {
 
     bool SoundManager::IsInitialized(SoundManager::Handle pHandle) const {
         SR_TRACY_ZONE;
+
+        if (!m_thread) {
+            return false;
+        }
 
         return m_thread->Execute([this, pHandle]() {
             for (auto&& pPlayData: m_playStack) {
@@ -540,6 +576,10 @@ namespace SR_AUDIO_NS {
 
     SoundListener* SoundManager::CreateListener(AudioLibrary audioLibrary) {
         SR_TRACY_ZONE;
+
+        if (!m_thread) {
+            return nullptr;
+        }
 
         SoundListener* pListener = nullptr;
         m_thread->Execute([&]() {

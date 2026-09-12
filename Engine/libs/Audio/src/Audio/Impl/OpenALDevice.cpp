@@ -19,12 +19,17 @@ namespace SR_AUDIO_NS {
     }
 
     bool OpenALDevice::Init() {
-        const ALchar* pDeviceNames = NULL;
+        const ALchar* pDeviceNames = nullptr;
 
-        pDeviceNames = alcGetString(NULL, ALC_ALL_DEVICES_SPECIFIER);
-        while (pDeviceNames && *pDeviceNames)
-        {
-            if (std::string(pDeviceNames) == m_name || m_name.empty()) {
+        if (alcIsExtensionPresent(nullptr, "ALC_ENUMERATE_ALL_EXT")) {
+            pDeviceNames = alcGetString(nullptr, ALC_ALL_DEVICES_SPECIFIER);
+        }
+        else {
+            pDeviceNames = alcGetString(nullptr, ALC_DEVICE_SPECIFIER);
+        }
+
+        while (pDeviceNames && *pDeviceNames) {
+            if (m_name.empty() || SR_UTILS_NS::StringView(pDeviceNames) == m_name) {
                 break;
             }
             pDeviceNames += strlen(pDeviceNames) + 1;

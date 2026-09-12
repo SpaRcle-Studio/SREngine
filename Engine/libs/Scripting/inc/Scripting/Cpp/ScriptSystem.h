@@ -89,6 +89,7 @@ namespace SR_SCRIPTING_NS {
         ModuleManager::Ptr m_moduleManager;
 
         std::atomic<bool> m_threadRunning = false;
+        std::atomic<bool> m_threadReady = false;
         std::atomic<bool> m_isCompiled = false;
         std::atomic<bool> m_hasCompileErrors = false;
         std::atomic<bool> m_hasModuleCopyErrors = false;

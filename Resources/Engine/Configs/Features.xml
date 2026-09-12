@@ -58,6 +58,7 @@
         <AccumulateDt Value="true"/>
         <FastModelsLoad Value="true"/>
         <FileWatching Value="true"/>
+        <Audio Value="true"/>
 
         <!-- Physics -->
         <Physics Value="true"/>
