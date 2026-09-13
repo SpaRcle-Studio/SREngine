@@ -65,7 +65,9 @@ namespace SR_CORE_NS::GUI {
                 m_dirtySelectedDir = true;
             }
             if (SR_GRAPH_GUI_NS::Immediate::Selectable("Open in native Explorer")) {
-                SR_UTILS_NS::Platform::OpenWithAssociatedApp(m_selectedDir);
+                SR_UTILS_NS::Path path = m_selectedDir;
+                SR_UTILS_NS::VFS::Instance().ResolvePath(path, SR_UTILS_NS::FileMode::None);
+                SR_UTILS_NS::Platform::OpenWithAssociatedApp(path);
             }
             if (SR_GRAPH_GUI_NS::Immediate::Selectable("Refresh")) {
                 m_dirtySelectedDir = true;
@@ -88,6 +90,7 @@ namespace SR_CORE_NS::GUI {
                 FBElement current;
                 current.filename = path.GetBaseNameAndExt();
                 current.isDir = path.IsDir();
+                current.isReadonly = !SR_UTILS_NS::VFS::Instance().IsWritable(path);
 
                 current.cutName = SR_UTILS_NS::StringUtils::CutName(current.filename, static_cast<uint32_t>(17.f * m_itemsScale));
 
@@ -170,6 +173,10 @@ namespace SR_CORE_NS::GUI {
             const bool selected = m_selectedDir.GetHash() == folder.path.GetHash();
             const bool isLeaf = !folder.hasSubfolders;
 
+            if (folder.isReadonly) {
+                SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::Text, SR_MATH_NS::FColor(0.7f, 0.5f, 0.5f, 1.0f));
+            }
+
             if (isLeaf) {
                 SR_GRAPH_GUI_NS::Immediate::TreeNodeEx((void*)(intptr_t)index, selected ? SELECTED_WITHOUT_CHILD : WITHOUT_CHILD, "%s",
                     folder.filename.c_str());
@@ -195,6 +202,11 @@ namespace SR_CORE_NS::GUI {
                     SR_GRAPH_GUI_NS::Immediate::TreePop();
                 }
             }
+
+            if (folder.isReadonly) {
+                SR_IMMEDIATE_GUI_NS::PopStyleColor();
+            }
+
             index++;
         }
     }
@@ -217,6 +229,7 @@ namespace SR_CORE_NS::GUI {
             child.childrenLoaded = false;
             path.GetFolders(m_tmp);
             child.hasSubfolders = !m_tmp.empty();
+            child.isReadonly = !SR_UTILS_NS::VFS::Instance().IsWritable(path);
             parentFolder.innerFolders.emplace_back(std::move(child));
         }
         parentFolder.childrenLoaded = true;
@@ -347,6 +360,10 @@ namespace SR_CORE_NS::GUI {
 
                 SR_GRAPH_GUI_NS::Immediate::BeginGroup();
 
+                if (element.isReadonly) {
+                    SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor(0.7f, 0.5f, 0.5f, 1.0f));
+                }
+
                 SR_GRAPH_GUI_NS::Immediate::PushID(element.filename.c_str());
                 if (element.isDir) {
                     void* descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(element.iconType);
@@ -384,13 +401,16 @@ namespace SR_CORE_NS::GUI {
 
                 SR_GRAPH_GUI_NS::Immediate::EndGroup();
 
+                if (element.isReadonly) {
+                    SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
+                }
+
                 if ((SR_GRAPH_GUI_NS::Immediate::GetItemRectSize().x * index) + m_assetWidth < wndSize.x) {
                     SR_GRAPH_GUI_NS::Immediate::SameLine();
                 }
-                else
+                else {
                     index = 1;
-
-                //ImGui::PopStyleVar();
+                }
             }
 
             CheckHovered();

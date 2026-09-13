@@ -37,6 +37,7 @@ namespace SR_AUDIO_NS
         void SetReferenceDistance(float_t referenceDistance);
         void SetDirection(const SR_MATH_NS::FVector3& direction);
         void SetSpatialize(SpatializeMode spatialize);
+        void SetContinueOnDisable(bool continueOnDisable);
 
         SR_NODISCARD bool GetLoop() const;
         SR_NODISCARD float_t GetConeInnerAngle() const;
@@ -48,6 +49,7 @@ namespace SR_AUDIO_NS
         SR_NODISCARD float_t GetReferenceDistance() const;
         SR_NODISCARD SR_MATH_NS::FVector3 GetDirection() const;
         SR_NODISCARD SpatializeMode GetSpatialize() const;
+        SR_NODISCARD bool GetContinueOnDisable() const;
 
     protected:
         void OnDisable() override;
@@ -66,24 +68,28 @@ namespace SR_AUDIO_NS
         /// @customArgs(pick: enabled, filter name: Sound, relative: resources)
         /// @customArg(filter value: ogg,mp3,wav)
         SR_VIRTUAL_PROPERTY
-        /// @virtualProperty(volume) @getter(GetVolume) @setter(SetVolume)
+        /// @virtualProperty(volume) @getter(GetVolume) @setter(SetVolume) @group(Audio params)
         SR_VIRTUAL_PROPERTY
-        /// @virtualProperty(pitch) @getter(GetPitch) @setter(SetPitch)
+        /// @virtualProperty(pitch) @getter(GetPitch) @setter(SetPitch) @group(Audio params)
         SR_VIRTUAL_PROPERTY
-        /// @virtualProperty(loop) @getter(GetLoop) @setter(SetLoop)
+        /// @virtualProperty(loop) @getter(GetLoop) @setter(SetLoop) @group(Audio params)
         SR_VIRTUAL_PROPERTY
-        /// @virtualProperty(maxDistance) @getter(GetMaxDistance) @setter(SetMaxDistance)
+        /// @virtualProperty(maxDistance) @getter(GetMaxDistance) @setter(SetMaxDistance) @group(Audio params)
         SR_VIRTUAL_PROPERTY
-        /// @virtualProperty(rolloffFactor) @getter(GetRolloffFactor) @setter(SetRolloffFactor)
+        /// @virtualProperty(rolloffFactor) @getter(GetRolloffFactor) @setter(SetRolloffFactor) @group(Audio params)
         SR_VIRTUAL_PROPERTY
-        /// @virtualProperty(referenceDistance) @getter(GetReferenceDistance) @setter(SetReferenceDistance)
+        /// @virtualProperty(referenceDistance) @getter(GetReferenceDistance) @setter(SetReferenceDistance) @group(Audio params)
         SR_VIRTUAL_PROPERTY
-        /// @virtualProperty(spatialize) @getter(GetSpatialize) @setter(SetSpatialize)
+        /// @virtualProperty(spatialize) @getter(GetSpatialize) @setter(SetSpatialize) @group(Audio params)
         SR_VIRTUAL_PROPERTY
-        /// @virtualProperty(direction) @getter(GetDirection) @setter(SetDirection)
+        /// @virtualProperty(direction) @getter(GetDirection) @setter(SetDirection) @group(Audio params)
         SR_VIRTUAL_PROPERTY
-        /// @virtualProperty(coneInnerAngle) @getter(GetConeInnerAngle) @setter(SetConeInnerAngle)
+        /// @virtualProperty(coneInnerAngle) @getter(GetConeInnerAngle) @setter(SetConeInnerAngle) @group(Audio params)
         SR_VIRTUAL_PROPERTY
+
+        /// @property
+        bool m_continueOnDisable = false;
+
     };
 }
 

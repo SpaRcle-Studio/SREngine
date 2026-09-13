@@ -557,7 +557,7 @@ namespace SR_GRAPH_GUI_NS {
         SR_IMMEDIATE_GUI_DLL_API extern void* GetWindowDrawList(void* pWindow = nullptr);
         SR_IMMEDIATE_GUI_DLL_API extern uint32_t GetColorU32(StyleColor idx, float alpha_mul = 1.0f);
         SR_IMMEDIATE_GUI_DLL_API extern void RenderArrow(void* pDrawList, const SR_MATH_NS::FVector2& pos, uint32_t color, Direction dir, float_t scale = 1.0f);
-        SR_IMMEDIATE_GUI_DLL_API extern void DrawListAddRect(void* pDrawList, const SR_MATH_NS::FVector2& min, const SR_MATH_NS::FVector2& max, uint32_t color, float rounding = 0.0f, float thickness = 1.0f);
+        SR_IMMEDIATE_GUI_DLL_API extern void DrawListAddRect(void* pDrawList, const SR_MATH_NS::FVector2& min, const SR_MATH_NS::FVector2& max, uint32_t color, float rounding = 0.0f, DrawFlags flags = DrawFlags(), float thickness = 1.0f);
         SR_IMMEDIATE_GUI_DLL_API extern void DrawListAddRectFilled(void* pDrawList, const SR_MATH_NS::FVector2& min, const SR_MATH_NS::FVector2& max, uint32_t color, float rounding = 0.0f, DrawFlags flags = DrawFlags::None);
         SR_IMMEDIATE_GUI_DLL_API extern void DrawListAddLine(void* pDrawList, const SR_MATH_NS::FVector2& p1, const SR_MATH_NS::FVector2& p2, uint32_t color, float thickness = 1.0f);
         SR_IMMEDIATE_GUI_DLL_API extern bool InputFloat(const char* label, float_t* v, float_t step = 0.0f, float_t stepFast = 0.0f, const char* format = "%.3f", InputTextFlags flags = InputTextFlags::None);

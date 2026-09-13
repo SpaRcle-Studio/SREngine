@@ -10,19 +10,36 @@ DepthTest true;
 
 [[uniform], [public]] vec4 color = vec4(1.0, 1.0, 1.0, 1.0);
 [[uniform], [public]] sampler2D diffuse;
+[[uniform], [public]] float alphaCutoff = 0.0;
+[[uniform], [public]] float alphaMultiplier = 1.0;
+[[uniform], [public]] float alphaThreshold = 0.0;
 [[shared]] vec2 UV;
 
+/// coord - координата вдоль оси спрайта в [0..1], где 0 - начало оси.
+/// texMin/texMax - границы текстуры (доли от размера текстуры) со стороны начала/конца оси.
+/// winMin/winMax - границы окна (доли от размера спрайта) со стороны начала/конца оси.
 float sliced_processAxis(float coord, float texMin, float texMax, float winMin, float winMax) {
-    if (coord < winMin) {
-        return coord / winMin * texMin;
-   }
-
-    if (coord > 1.0 - winMax) {
-        return 1.0 - (1.0 - coord) / winMax * texMax;
+    if (coord <= winMin) {
+        return winMin > 0.0
+            ? coord / winMin * texMin
+            : texMin;
     }
 
-    float centerCoord = (coord - winMin) / (1.0 - winMin - winMax);
-    return texMin + centerCoord * (1.0 - texMin - texMax);
+    if (coord >= 1.0 - winMax) {
+        return winMax > 0.0
+            ? 1.0 - (1.0 - coord) / winMax * texMax
+            : 1.0 - texMax;
+    }
+
+    float centerSize = 1.0 - winMin - winMax;
+    if (centerSize <= 0.0) {
+        /// Центра не осталось - углы уже сомкнулись.
+        return mix(texMin, 1.0 - texMax, 0.5);
+    }
+
+    float centerCoord = (coord - winMin) / centerSize;
+
+    return mix(texMin, 1.0 - texMax, centerCoord);
 }
 
 bool IsMaskIncludedSubMask(int mask, int subMask) {
@@ -30,28 +47,35 @@ bool IsMaskIncludedSubMask(int mask, int subMask) {
 }
 
 vec2 calculate_sliced_uv(vec2 uv) {
+    /// Переводим координаты в систему texture UV: (0, 0) - левый верхний угол текстуры.
+    vec2 coord = 1.0 - uv;
+
     if (!IsMaskIncludedSubMask(SPRITE_MODE, SLICED_MODE_MASK)) {
-        return vec2(1.0 - uv.x, 1.0 - uv.y);
+        return coord;
     }
 
-    if (FILL_CENTER == 0 && (UV.x > SLICED_WINDOW_BORDER.x && UV.x < 1.0 - SLICED_WINDOW_BORDER.y) && (UV.y > SLICED_WINDOW_BORDER.z && UV.y < 1.0 - SLICED_WINDOW_BORDER.w)) {
+    float winLeft   = SLICED_WINDOW_BORDER.x;
+    float winRight  = SLICED_WINDOW_BORDER.y;
+    float winBottom = SLICED_WINDOW_BORDER.z;
+    float winTop    = SLICED_WINDOW_BORDER.w;
+
+    float texLeft   = SLICED_TEXTURE_BORDER.x;
+    float texRight  = SLICED_TEXTURE_BORDER.y;
+    float texBottom = SLICED_TEXTURE_BORDER.z;
+    float texTop    = SLICED_TEXTURE_BORDER.w;
+
+    /// coord.y растёт сверху вниз, поэтому по оси Y начало - это top, а конец - bottom.
+    if (FILL_CENTER == 0 &&
+        coord.x > winLeft && coord.x < 1.0 - winRight &&
+        coord.y > winTop  && coord.y < 1.0 - winBottom)
+    {
         discard;
     }
 
-    vec2 newUV = vec2(
-        sliced_processAxis(uv.x,
-            SLICED_TEXTURE_BORDER.x, // left
-            SLICED_TEXTURE_BORDER.y, // right
-            SLICED_WINDOW_BORDER.x,
-            SLICED_WINDOW_BORDER.y),
-
-        sliced_processAxis(uv.y,
-            SLICED_TEXTURE_BORDER.z, // bottom
-            SLICED_TEXTURE_BORDER.w, // top
-            SLICED_WINDOW_BORDER.z,
-            SLICED_WINDOW_BORDER.w)
+    return vec2(
+        sliced_processAxis(coord.x, texLeft, texRight, winLeft, winRight),
+        sliced_processAxis(coord.y, texTop, texBottom, winTop, winBottom)
     );
-    return vec2(1.0 - newUV.x, 1.0 - newUV.y);
 }
 
 [[const]] float PI = 3.14159265359;
@@ -202,6 +226,12 @@ void fragment() {
     discard_fill_mode(UV);
 
     COLOR = texture(diffuse, newUV).rgba * color;
+    if (COLOR.a <= alphaCutoff) {
+        discard;
+    }
+    if (COLOR.a < alphaThreshold) {
+        COLOR.a *= alphaMultiplier;
+    }
     COLOR_INDEX_1 = vec4(0.0);
     COLOR_INDEX_2 = vec4(0.0);
 }

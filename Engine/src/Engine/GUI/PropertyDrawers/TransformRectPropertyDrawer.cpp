@@ -126,7 +126,7 @@ namespace SR_CORE_GUI_NS {
                 pDrawList,
                 pos,
                 pos + size,
-                outerColor, 0.0f, 1.5f
+                outerColor, 0.0f, SR_IMMEDIATE_GUI_NS::DrawFlags(), 1.5f
             );
             
             // Calculate inner rect position based on anchors

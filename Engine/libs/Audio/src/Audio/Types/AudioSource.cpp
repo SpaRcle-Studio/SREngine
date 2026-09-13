@@ -164,9 +164,19 @@ namespace SR_AUDIO_NS {
 
     void AudioSource::OnDisable() {
         if (m_handle) {
-            SoundManager::Instance().Stop(m_handle);
+            if (!m_continueOnDisable) {
+                SoundManager::Instance().Stop(m_handle);
+            }
             m_handle = nullptr;
         }
         Super::OnDisable();
+    }
+
+    void AudioSource::SetContinueOnDisable(bool continueOnDisable) {
+        m_continueOnDisable = continueOnDisable;
+    }
+
+    bool AudioSource::GetContinueOnDisable() const {
+        return m_continueOnDisable;
     }
 }

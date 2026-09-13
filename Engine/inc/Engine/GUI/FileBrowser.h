@@ -17,7 +17,8 @@ namespace SR_CORE_NS::GUI {
         std::string filename;
         std::string cutName;
         EditorIcon iconType;
-        bool isDir;
+        bool isDir = false;
+        bool isReadonly = false;
     };
 
     struct FBFolder {
@@ -26,6 +27,7 @@ namespace SR_CORE_NS::GUI {
         std::list<FBFolder> innerFolders;
         bool childrenLoaded = false;   ///< true = direct children already loaded (lazy tree)
         bool hasSubfolders = true;      ///< false = no subfolders (show as leaf, no expand arrow)
+        bool isReadonly = false;
     };
 
     class FileBrowser : public SR_GRAPH_GUI_NS::Widget {

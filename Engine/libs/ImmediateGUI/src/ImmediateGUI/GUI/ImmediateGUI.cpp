@@ -424,7 +424,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         }
     }
 
-    void DrawListAddRect(void* pDrawList, const SR_MATH_NS::FVector2& min, const SR_MATH_NS::FVector2& max, uint32_t color, float rounding, float thickness) {
+    void DrawListAddRect(void* pDrawList, const SR_MATH_NS::FVector2& min, const SR_MATH_NS::FVector2& max, uint32_t color, float rounding, DrawFlags flags, float thickness) {
         if (auto&& pImGuiDrawList = static_cast<ImDrawList*>(pDrawList)) {
             pImGuiDrawList->AddRect(F2ToImV2(min), F2ToImV2(max), color, rounding, 0, thickness);
         }

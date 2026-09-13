@@ -75,7 +75,47 @@ namespace SR_CORE_GUI_NS {
         const float_t windowWidth = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x - m_scrollBarWidth - 10.f;
         if (const int32_t textureId = m_texture->GetId(); textureId != SR_ID_INVALID) {
             auto&& pDescriptor = GetManager()->GetContext()->GetPipeline()->GetOverlay(SR_GRAPH_NS::OverlayType::ImGui)->GetTextureDescriptorSet(textureId);
-            SR_GRAPH_GUI_NS::Immediate::DrawTexture(pDescriptor, windowWidth, false);
+            const auto imageWidth = static_cast<float_t>(m_texture->GetWidth());
+            const auto imageHeight = static_cast<float_t>(m_texture->GetHeight());
+            if (imageWidth > 0.f && imageHeight > 0.f && windowWidth > 0.f) {
+                const float_t aspectRatio = imageWidth / imageHeight;
+                const float_t displayWidth = std::max(windowWidth, std::min(windowWidth, imageHeight));
+                const float_t displayHeight = displayWidth / aspectRatio;
+
+                SR_IMMEDIATE_GUI_NS::DrawTexture(pDescriptor, SR_MATH_NS::FVector2(displayWidth, displayHeight), false);
+
+                auto&& pDrawList = SR_IMMEDIATE_GUI_NS::GetWindowDrawList();
+                auto&& borders = m_texture->GetImageMetaInfo().GetBorder();
+
+                SR_MATH_NS::FVector2 imageMin  = SR_GRAPH_GUI_NS::Immediate::GetItemRectMin();
+                SR_MATH_NS::FVector2 imageMax = SR_GRAPH_GUI_NS::Immediate::GetItemRectMax();
+
+                const float_t width  = imageMax.x - imageMin.x;
+                const float_t height = imageMax.y - imageMin.y;
+
+                const float_t scaleX = width  / imageWidth;
+                const float_t scaleY = height / imageHeight;
+
+                const float_t left   = borders.left   * scaleX;
+                const float_t top    = borders.top    * scaleY;
+                const float_t right  = borders.right  * scaleX;
+                const float_t bottom = borders.bottom * scaleY;
+
+                const auto color = SR_COL32(255, 255, 0, 255);
+                const float_t thickness = 2.f;
+
+                /// Левая граница
+                SR_IMMEDIATE_GUI_NS::DrawListAddLine(pDrawList, SR_MATH_NS::FVector2(imageMin.x + left, imageMin.y), SR_MATH_NS::FVector2(imageMin.x + left, imageMax.y), color, thickness);
+
+                /// Верхняя граница
+                SR_IMMEDIATE_GUI_NS::DrawListAddLine(pDrawList, SR_MATH_NS::FVector2(imageMin.x, imageMin.y + top), SR_MATH_NS::FVector2(imageMax.x, imageMin.y + top), color, thickness);
+
+                /// Правая граница
+                SR_IMMEDIATE_GUI_NS::DrawListAddLine(pDrawList, SR_MATH_NS::FVector2(imageMax.x - right, imageMin.y), SR_MATH_NS::FVector2(imageMax.x - right, imageMax.y), color, thickness);
+
+                /// Нижняя граница
+                SR_IMMEDIATE_GUI_NS::DrawListAddLine(pDrawList, SR_MATH_NS::FVector2(imageMin.x, imageMax.y - bottom), SR_MATH_NS::FVector2(imageMax.x, imageMax.y - bottom), color, thickness);
+            }
         }
 
         SR_GRAPH_GUI_NS::Immediate::Separator();
