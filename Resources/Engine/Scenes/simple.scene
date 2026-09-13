@@ -14,7 +14,7 @@ use tabs: true
 					5-s:GameObject
 				4-o:ptr
 					5-v:entityId
-						6-i:4323103520533124449
+						6-i:2939139169960858165
 					5-a:components
 						6-k:i
 							7-o:d
@@ -22,9 +22,19 @@ use tabs: true
 									9-s:SkyboxComponent
 								8-o:ptr
 									9-v:entityId
-										10-i:3186272707754296045
-									9-v:shaderPath
-										10-s:Engine/Shaders/skybox-procedural.srsl
+										10-i:3897067682072179110
+									9-o:material
+										10-v:type
+											11-s:UniqueMaterial
+										10-o:ptr
+											11-o:data
+												12-v:type
+													13-s:MaterialData
+												12-o:ptr
+													13-a:shaderDefines
+													13-o:defaultShader
+														14-v:shaderPath
+															15-s:Engine/Shaders/skybox-procedural.srsl
 					5-v:name
 						6-s:Skybox
 					5-o:transform
@@ -54,6 +64,17 @@ use tabs: true
 												12-s:Engine/Materials/default.mat
 									9-v:meshPath
 										10-s:Engine/Models/cube.obj
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:FluxComponent
+								8-o:ptr
+									9-v:entityId
+										10-i:3838908285871792642
+									9-o:graph
+										10-v:id
+											11-s:Engine/Scenes/CubeRotate.flux
+									9-a:variables
 					5-v:name
 						6-s:Cube
 					5-o:transform
@@ -75,6 +96,9 @@ use tabs: true
 								8-o:ptr
 									9-v:entityId
 										10-i:3080589062641922675
+									9-o:renderParameters
+										10-a:includeLayers
+										10-a:excludeLayers
 					5-v:name
 						6-s:Camera
 					5-o:transform
@@ -82,8 +106,15 @@ use tabs: true
 							7-s:Transform3D
 						6-o:ptr
 							7-o:translation
+								8-v:y
+									9-f:2
 								8-v:z
-									9-f:-4.87754
+									9-f:-5
+							7-o:quaternion
+								8-v:x
+									9-f:0.21644
+								8-v:w
+									9-f:0.976296
 		2-k:i
 			3-o:d
 				4-v:type

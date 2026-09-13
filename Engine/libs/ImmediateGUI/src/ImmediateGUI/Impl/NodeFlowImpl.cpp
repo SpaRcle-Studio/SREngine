@@ -477,7 +477,25 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
             return true;
         }
 
+        static SR_UTILS_NS::StringAtom integerTypes[] = {
+            "int8",
+            "uint8",
+            "int16",
+            "uint16",
+            "int32",
+            "uint32",
+            "int64",
+            "uint64"
+        };
+
         if (*pFrom != *pTo) {
+            if (pFrom->category == Utils::Reflection::ReflectedCategoryType::Arithmetic) {
+                const bool isFromInteger = std::find(std::begin(integerTypes), std::end(integerTypes), pFrom->detailedType) != std::end(integerTypes);
+                const bool isToInteger = std::find(std::begin(integerTypes), std::end(integerTypes), pTo->detailedType) != std::end(integerTypes);
+                if (isFromInteger && isToInteger) {
+                    return true;
+                }
+            }
             if (pFrom->category == Utils::Reflection::ReflectedCategoryType::Value) {
                 return true;
             }
