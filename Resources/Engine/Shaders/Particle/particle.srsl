@@ -1,3 +1,4 @@
+
 ShaderType Spatial;
 
 PolygonMode Fill;
@@ -7,8 +8,21 @@ PrimitiveTopology TriangleList;
 DepthWrite true;
 BlendEnabled false;
 DepthTest true;
+AlphaCoverage true;
 
 [[uniform]] int ISQuad;
+
+[[shared]] vec3 TBN_T;
+[[shared]] vec3 TBN_B;
+[[shared]] vec3 TBN_N;
+[[shared]] float HAS_VALID_TANGENT;
+[[uniform], [public]] sampler2D diffuse;
+[[uniform], [public]] sampler2D normalMap;
+[[uniform], [public]] sampler2D roughness;
+[[uniform], [public]] sampler2D opacity;
+[[uniform], [public]] float roughnessIntensity;
+[[uniform], [public]] float opacityThreshold = 0.5;
+[[uniform], [public]] float opacityMaskEnabled = 0.0;
 
 mat3 GetRotationMatrix(vec3 rotation)
 {
@@ -45,7 +59,119 @@ mat3 GetRotationMatrix(vec3 rotation)
 }
 
 void fragment() {
-    COLOR = COLOR0;
+    float opacityValue = 1.0;
+
+    if (opacityMaskEnabled > 0.5) {
+        float opacityMask = texture(opacity, UV).r;
+        opacityValue = step(opacityThreshold, opacityMask);
+    }
+
+    if(ISQuad == 1){
+        COLOR = vec4(COLOR0.rgb, COLOR0.a * opacityValue);
+    } else {
+
+        vec4 diffuseColor = texture(diffuse, UV);
+
+        vec3 N = normalize(TBN_N);
+
+        /*if (HAS_VALID_TANGENT > 0.5) {
+            vec2 enc = texture(normalMap, UV).rg;
+
+            vec3 tangentNormal;
+            tangentNormal.xy = enc * 2.0 - 1.0;
+            tangentNormal.y *= -1.0;
+
+            float xyLen = dot(tangentNormal.xy, tangentNormal.xy);
+
+            tangentNormal.z = sqrt(
+                max(0.0, 1.0 - min(xyLen, 1.0))
+            );
+
+            tangentNormal = normalize(tangentNormal);
+
+            N = normalize(
+                TBN_T * tangentNormal.x +
+                TBN_B * tangentNormal.y +
+                TBN_N * tangentNormal.z
+            );
+        } */
+
+        float roughnessValue = texture(roughness, UV).r;
+        roughnessValue = mix(
+            1.0,
+            roughnessValue,
+            roughnessIntensity);
+
+        vec3 L = normalize(-DIRECTIONAL_LIGHT_DIRECTION);
+        vec3 V = normalize(VIEW_POSITION - VERTEX);
+        vec3 H = normalize(L + V);
+
+        float ndotH = max(dot(N, H), 0.0);
+        float ndotV = max(dot(N, V), 0.0);
+        float ndotL = max(dot(N, L), 0.0);
+
+        // GGX D
+        float a = roughnessValue * roughnessValue;
+        float a2 = a * a;
+
+        float denom =
+            ndotH * ndotH * (a2 - 1.0) + 1.0;
+
+        float D =
+            a2 / (3.14159 * denom * denom);
+
+        // Schlick-GGX G
+        float k = roughnessValue + 1.0;
+        k = (k * k) / 8.0;
+
+        float Gv =
+            ndotV /
+            (ndotV * (1.0 - k) + k);
+
+        float Gl =
+            ndotL /
+            (ndotL * (1.0 - k) + k);
+
+        float G = Gv * Gl;
+
+        // Fresnel
+        vec3 F0 = vec3(0.04);
+
+        vec3 F =
+            F0 +
+            (1.0 - F0) *
+            pow(
+                1.0 - max(dot(H, V), 0.0),
+                5.0
+            );
+
+        // Specular
+        vec3 specular =
+            (D * G * F) /
+            max(4.0 * ndotV * ndotL, 0.001);
+
+        specular *= SUN_COLOR * SUN_INTENSITY;
+
+        // Diffuse
+        vec3 diffuseLight =
+            ndotL * SUN_COLOR * SUN_INTENSITY;
+
+        vec3 ambient =
+            vec3(0.2);
+
+        vec3 diffuseLighting =
+            diffuseColor.rgb *
+            (ambient + diffuseLight);
+
+        // Final
+        vec3 finalColor =
+            diffuseLighting +
+            specular;
+
+        // DEBUG: show the response of the mapped normal to directional light.
+        COLOR = vec4(finalColor, opacityValue);
+    }
+
     COLOR_INDEX_1 = vec4(0.0);
     COLOR_INDEX_2 = vec4(0.0);
     COLOR_INDEX_3 = vec4(0.0);
@@ -53,6 +179,9 @@ void fragment() {
 
 void vertex() {
     if (ISQuad == 1) {
+
+        HAS_VALID_TANGENT = 0.0;
+
         vec3 right = vec3(
             VIEW_NO_TRANSLATE_MATRIX[0][0],
             VIEW_NO_TRANSLATE_MATRIX[1][0],
@@ -89,7 +218,50 @@ void vertex() {
     else {
         VERTEX = VERTEX * CUSTOM0;
         mat3 rotation = GetRotationMatrix(CUSTOM1);
+
         VERTEX = rotation * VERTEX;
+
+        mat3 normalMatrix = transpose(inverse(mat3(MODEL_MATRIX)));
+
+        vec3 N = normalize(
+            normalMatrix * (rotation * NORMAL)
+        );
+
+        float tangentLengthSq = dot(TANGENT.xyz, TANGENT.xyz);
+
+        vec3 T = vec3(0.0);
+
+        /*if (tangentLengthSq > 0.000001 &&
+            abs(TANGENT.w) > 0.000001)
+        {
+            T = normalMatrix * (rotation * TANGENT.xyz);
+            T = T - N * dot(N, T);
+        }*/
+
+        vec3 B;
+
+        if (dot(T, T) > 0.000001) {
+            T = normalize(T);
+            B = cross(N, T) * TANGENT.w;
+            HAS_VALID_TANGENT = 1.0;
+        }
+        else {
+            vec3 reference = vec3(0.0, 1.0, 0.0);
+
+            if (abs(dot(N, reference)) > 0.999) {
+                reference = vec3(1.0, 0.0, 0.0);
+            }
+
+            T = normalize(reference - N * dot(reference, N));
+            B = normalize(cross(N, T));
+            HAS_VALID_TANGENT = 0.0;
+        }
+
+        TBN_T = T;
+        TBN_B = B;
+        TBN_N = N;
+
+
         VERTEX = VERTEX + POSITION1;
         VERTEX = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
     }
