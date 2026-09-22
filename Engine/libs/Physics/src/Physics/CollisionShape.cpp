@@ -11,8 +11,6 @@
 #include <Utils/FileSystem/PathDataAccessor.h>
 
 #include <Codegen/CollisionShape.generated.hpp>
-#include "../../../../../Resources/API/Engine/libs/Physics/inc/Physics/CollisionShape.h"
-
 
 namespace SR_PTYPES_NS {
     CollisionShape::~CollisionShape() {

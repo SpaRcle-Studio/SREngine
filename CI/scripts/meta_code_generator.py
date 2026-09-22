@@ -155,7 +155,9 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
     for prop in class_obj.variables:
         f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Reflection::Property()')
         f.write('\n' + '\t' * (tabs + 3) + f'.SetName("{prop.name}")')
-        f.write('\n' + '\t' * (tabs + 3) + f'.SetSerializeName("{prop.serialize_name}")')
+
+        if prop.serialize_name != prop.name:
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetSerializeName("{prop.serialize_name}")')
 
         if prop.private:
             f.write('\n' + '\t' * (tabs + 3) + f'.SetPublicity(SpaRcle::Utils::PropertyPublicity::Private)')

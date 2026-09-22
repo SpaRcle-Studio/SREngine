@@ -41,6 +41,7 @@
 #include <Utils/FileSystem/DirectoryVFSBackend.h>
 #include <Utils/FileSystem/AndroidVFSBackend.h>
 #include <Utils/FileSystem/GitHubVFSBackend.h>
+#include <Utils/FileSystem/Archive.h>
 
 namespace SR_CORE_NS {
     Application::Application()
