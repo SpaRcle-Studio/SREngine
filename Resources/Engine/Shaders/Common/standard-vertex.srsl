@@ -23,17 +23,19 @@ void vertex() {
 
     OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * vec4(VERTEX, 1.0);
 
-    mat3 normalMatrix = transpose(inverse(mat3(modelMatrix)));
-    NORMAL = normalize(normalMatrix * NORMAL);
+    #ifndef SR_DEFINE_COLOR_PASS
+        mat3 normalMatrix = transpose(inverse(mat3(modelMatrix)));
+        NORMAL = normalize(normalMatrix * NORMAL);
 
-    vec3 N = NORMAL;
+        vec3 N = NORMAL;
 
-    vec3 T = normalize(normalMatrix * TANGENT.xyz);
-    //vec3 T = normalize(mat3(modelMatrix) * TANGENT.xyz);
-    //vec3 B = normalize(cross(N, T)) * TANGENT.w;
-    T = normalize(T - N * dot(N, T)); /// orthogonalize tangent
+        vec3 T = normalize(normalMatrix * TANGENT.xyz);
+        //vec3 T = normalize(mat3(modelMatrix) * TANGENT.xyz);
+        //vec3 B = normalize(cross(N, T)) * TANGENT.w;
+        T = normalize(T - N * dot(N, T)); /// orthogonalize tangent
 
-    vec3 B = cross(N, T) * TANGENT.w;
-    TBN = mat3(T, B, N);
+        vec3 B = cross(N, T) * TANGENT.w;
+        TBN = mat3(T, B, N);
+    #endif
 #endif
 }

@@ -44,8 +44,8 @@ namespace SR_AUDIO_NS {
     void CheckThreadId(const char* filename, std::uint_fast32_t line);
 
     //this is here thanks to https://indiegamedev.net/2020/02/15/the-complete-guide-to-openal-with-c-part-1-playing-a-sound/
-    bool check_alc_errors(const std::string& filename, std::uint_fast32_t line, ALCdevice* device);
-    bool check_al_errors(const std::string& filename, std::uint_fast32_t line);
+    bool check_alc_errors(const char* filename, std::uint_fast32_t line, ALCdevice* device);
+    bool check_al_errors(const char* filename, std::uint_fast32_t line);
 
     template<typename alFunction, typename... Params> auto alCallImpl(const char* filename,
         const std::uint_fast32_t line,

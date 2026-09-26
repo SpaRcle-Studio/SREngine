@@ -455,6 +455,7 @@ def process_property(property_obj: reflection_utils.CPPProperty, clang_child):
         raise Exception(f'Virtual property {property_obj.name} must have getter!')
 
     property_obj.not_null = has_special_tag_comment(clang_child, 'notNull')
+    property_obj.dontInitNull = has_special_tag_comment(clang_child, 'dontInitNull')
     property_obj.hidden = has_special_tag_comment(clang_child, 'hidden')
     property_obj.read_only = has_special_tag_comment(clang_child, 'readOnly')
     property_obj.debug_only = has_special_tag_comment(clang_child, 'debugOnly')

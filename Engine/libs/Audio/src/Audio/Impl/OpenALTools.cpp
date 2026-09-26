@@ -70,13 +70,11 @@ namespace SR_AUDIO_NS {
     }
 
     //this is here thanks to https://indiegamedev.net/2020/02/15/the-complete-guide-to-openal-with-c-part-1-playing-a-sound/
-    bool check_alc_errors(const std::string& filename, const std::uint_fast32_t line, ALCdevice* device) {
+    bool check_alc_errors(const char* filename, const std::uint_fast32_t line, ALCdevice* device) {
         ALCenum error = alcGetError(device);
         if(error != ALC_NO_ERROR) {
-            std::string message = "OpenAL context error " + filename + ": " + std::to_string(line) + "\n\tMessage: ";
-
-            switch(error)
-            {
+            auto&& message = "OpenAL context error {}:{}\n\tMessage: "_format(filename, line);
+            switch(error) {
                 case ALC_INVALID_VALUE:
                     message += "ALC_INVALID_VALUE: an invalid value was passed to an OpenAL function";
                     break;
@@ -103,12 +101,11 @@ namespace SR_AUDIO_NS {
         return true;
     }
 
-    bool check_al_errors(const std::string& filename, const std::uint_fast32_t line) {
+    bool check_al_errors(const char* filename, const std::uint_fast32_t line) {
         ALenum error = alGetError();
         if(error != AL_NO_ERROR) {
-            std::string message = "OpenAL error " + filename + ": " + std::to_string(line) + "\n\tMessage: ";
-            switch(error)
-            {
+            auto&& message = "OpenAL error {}:{}\n\tMessage: "_format(filename, line);
+            switch(error) {
                 case AL_INVALID_NAME:
                     message += "AL_INVALID_NAME: a bad name (ID) was passed to an OpenAL function";
                     break;

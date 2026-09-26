@@ -2,12 +2,14 @@
 
 /// Shader stage: Vertex
 /// Shader type: Skybox
+/// Shader macros:
 
 #version 450
 
 layout (location = 0) out vec3 VERTEX; /// added by builtin
 vec3 NORMAL; /// added by builtin
 vec2 UV; /// added by builtin
+vec4 TANGENT; /// added by builtin
 
 layout (std140, binding = 0) uniform SHARED {
 	// (64 bytes) private

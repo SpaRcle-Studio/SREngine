@@ -77,6 +77,7 @@ class CPPProperty:
         self.hidden = False
         self.private = False
         self.dontLoad = False
+        self.dontInitNull = False
         self.dont_save_tags = []
         self.virtual = False
 

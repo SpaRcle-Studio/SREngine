@@ -35,6 +35,7 @@ namespace SR_CORE_GUI_NS {
         std::string m_projectName;
         std::string m_projectPathInput;
         SR_UTILS_NS::Path m_projectFinalPath;
+        SR_UTILS_NS::Path m_settingsPath;
         SR_UTILS_NS::Path m_projectPath;
         SR_UTILS_NS::Path m_lastProjectPath;
 

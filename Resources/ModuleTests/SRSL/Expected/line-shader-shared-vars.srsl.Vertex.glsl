@@ -2,12 +2,14 @@
 
 /// Shader stage: Vertex
 /// Shader type: Line
+/// Shader macros:
 
 #version 450
 
 vec3 VERTEX; /// added by builtin
 vec3 NORMAL; /// added by builtin
 vec2 UV; /// added by builtin
+vec4 TANGENT; /// added by builtin
 layout (location = 0) out vec4 lineColor; /// added by shared
 
 layout (std140, binding = 0) uniform SHARED {

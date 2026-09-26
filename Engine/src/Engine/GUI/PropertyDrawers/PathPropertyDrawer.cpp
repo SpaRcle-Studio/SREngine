@@ -16,7 +16,12 @@ namespace SR_CORE_GUI_NS {
     PropertyDrawerFeedback PathPropertyDrawer::Draw(const PropertyDrawerContext& context) {
         PropertyDrawerFeedback feedback;
 
-        SR_UTILS_NS::Reflection::Value value = context.GetValue();
+        const SR_UTILS_NS::Reflection::Value value = context.GetValue();
+
+        /// Геттер может вернуть ссылку на чужие данные (например, на путь разделяемого RawMesh),
+        /// поэтому само значение только читаем. Новый путь накапливаем отдельно и применяем в конце,
+        /// так что копия Path создаётся только на кадре с реальным изменением.
+        std::optional<SR_UTILS_NS::Path> newPath;
 
         SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
         SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().c_str());
@@ -39,8 +44,9 @@ namespace SR_CORE_GUI_NS {
                             context.onBeforeChangeCallback(false);
                         }
                         feedback.isChanged = true;
-                        value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
-                        value = value.Copy();
+                        const SR_UTILS_NS::Reflection::Value& resetValue = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
+                        auto&& pResetPath = resetValue.IsValid() ? resetValue.Cast<SR_UTILS_NS::Path>() : nullptr;
+                        newPath = pResetPath ? *pResetPath : SR_UTILS_NS::Path();
                     }
                 }
             }
@@ -58,7 +64,7 @@ namespace SR_CORE_GUI_NS {
                         auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                         auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath, { { filterName, filterValue } });
 
-                        if (auto&& pPath = value.Cast<SR_UTILS_NS::Path>(); pPath && !path.empty()) {
+                        if (!path.empty()) {
                             if (context.onBeforeChangeCallback) {
                                 context.onBeforeChangeCallback(false);
                             }
@@ -68,7 +74,7 @@ namespace SR_CORE_GUI_NS {
                                 path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPathRef());
                             }
 
-                            *pPath = path;
+                            newPath = std::move(path);
                         }
                     }
                 }
@@ -80,15 +86,16 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth);
 
         if (auto&& pPath = value.Cast<SR_UTILS_NS::Path>()) {
-            std::string path = pPath->ToStringRef();
-            if (SR_GRAPH_GUI_NS::Immediate::InputText("##Input", &path, SR_GRAPH_GUI_NS::Immediate::InputTextFlags::EnterReturnsTrue)) {
+            static std::string gPathTmp;
+            gPathTmp = newPath.has_value() ? newPath->ToStringRef() : pPath->ToStringRef();
+            if (SR_GRAPH_GUI_NS::Immediate::InputText("##Input", &gPathTmp, SR_GRAPH_GUI_NS::Immediate::InputTextFlags::EnterReturnsTrue)) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(false);
                 }
                 feedback.isChanged = true;
                 /// If you copy path in Windows in Explorer, then it will be in quotes, so we need to remove them
-                path = SR_UTILS_NS::StringUtils::RemoveCharsFromString(path, "\"");
-                *pPath = path;
+                gPathTmp = SR_UTILS_NS::StringUtils::RemoveCharsFromString(gPathTmp, "\"");
+                newPath = gPathTmp;
             }
         }
         else {
@@ -97,7 +104,17 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
 
-        SetValue(context, feedback, value);
+        if (newPath.has_value()) {
+            if (context.pValue) {
+                /// вложенное значение - пишем на месте, сеттера у него нет
+                if (auto&& pPath = context.pValue->Cast<SR_UTILS_NS::Path>()) {
+                    *pPath = newPath.value();
+                }
+            }
+            else {
+                context.GetProperty().Set(context.pOwner, SR_UTILS_NS::Reflection::Value::CreateCRef(newPath.value()));
+            }
+        }
 
         SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
 

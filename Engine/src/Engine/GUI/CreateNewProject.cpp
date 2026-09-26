@@ -58,6 +58,7 @@ namespace SR_CORE_GUI_NS {
         SetProjectPath(SR_UTILS_NS::ResourceManager::Instance().GetResPathRef());
         m_projectPathInput = m_projectPath.ToString();
         m_projectFinalPath = m_projectPath.Concat(m_projectName);
+        m_settingsPath = m_projectFinalPath.Concat(".{}"_format(ProjectSettings::GetMetaStatic()->GetExtension()));
     }
 
     void CreateNewProject::Draw() {
@@ -77,6 +78,7 @@ namespace SR_CORE_GUI_NS {
             {
                 if (SR_GRAPH_GUI_NS::Immediate::InputText("##name", &m_projectName)) {
                     m_projectFinalPath = m_projectPath.Concat(m_projectName);
+                    m_settingsPath = m_projectFinalPath.Concat(".{}"_format(ProjectSettings::GetMetaStatic()->GetExtension()));
                 }
             }
             SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
@@ -95,6 +97,7 @@ namespace SR_CORE_GUI_NS {
                     SetProjectPath(path);
                     m_projectPathInput = m_projectPath.ToString();
                     m_projectFinalPath = m_projectPath.Concat(m_projectName);
+                    m_settingsPath = m_projectFinalPath.Concat(".{}"_format(ProjectSettings::GetMetaStatic()->GetExtension()));
                 }
             }
 
@@ -104,6 +107,7 @@ namespace SR_CORE_GUI_NS {
             if (SR_GRAPH_GUI_NS::Immediate::InputText("##path", &m_projectPathInput)) {
                 SetProjectPath(m_projectPathInput);
                 m_projectFinalPath = m_projectPath.Concat(m_projectName);
+                m_settingsPath = m_projectFinalPath.Concat(".{}"_format(ProjectSettings::GetMetaStatic()->GetExtension()));
             }
             SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
         }
@@ -126,8 +130,7 @@ namespace SR_CORE_GUI_NS {
                 SR_GRAPH_GUI_NS::Immediate::SameLine();
             }
             else {
-                auto&& settingsPath = m_projectFinalPath.Concat(".{}"_format(ProjectSettings::GetMetaStatic()->GetExtension()));
-                if (settingsPath.IsFile()) {
+                if (m_settingsPath.IsFile()) {
                     canOpen = true;
                     SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Green(), "You can open project at: ");
                     SR_GRAPH_GUI_NS::Immediate::SameLine();
@@ -189,6 +192,7 @@ namespace SR_CORE_GUI_NS {
         }
         else {
             m_projectFinalPath = m_projectPath.Concat(m_projectName);
+            m_settingsPath = m_projectFinalPath.Concat(".{}"_format(ProjectSettings::GetMetaStatic()->GetExtension()));
         }
 
         Super::OnOpen();

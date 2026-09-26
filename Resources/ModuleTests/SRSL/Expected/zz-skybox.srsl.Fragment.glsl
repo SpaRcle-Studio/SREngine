@@ -2,8 +2,14 @@
 
 /// Shader stage: Fragment
 /// Shader type: Skybox
+/// Shader macros:
 
 #version 450
+
+vec3 VERTEX; /// added by builtin
+vec3 NORMAL; /// added by builtin
+vec2 UV; /// added by builtin
+vec4 TANGENT; /// added by builtin
 
 layout (binding = 1) uniform samplerCube SKYBOX_DIFFUSE; // (sampler) private
 
