@@ -8,6 +8,7 @@
 #include <Engine/World/TerrainGrassRenderer.h>
 
 #include <Utils/FileSystem/Path.h>
+#include <Utils/Math/AABB.h>
 
 namespace SR_CORE_NS {
     class Terrain;
@@ -21,6 +22,11 @@ namespace SR_CORE_NS {
         std::vector<uint32_t> materials; /// опционально, по вершине
         std::vector<uint32_t> indices;
         SR_MATH_NS::FVector3 origin;     /// мировая позиция объекта чанка (для детерминированного шума)
+        /// Треугольники marching cubes лежат внутри одного вокселя, поэтому ребро длиннее этого значения
+        /// означает мусорную вершину (на стыках чанков). Такие треугольники пропускаются. 0 - без проверки.
+        float_t maxEdgeLength = 0.f;
+        /// Травинки вне этих границ (в тех же осях, что и positions) отбрасываются. Пустые границы - без проверки.
+        SR_MATH_NS::AABB bounds = SR_MATH_NS::AABB(SR_MATH_NS::FVector3(0.f), SR_MATH_NS::FVector3(0.f));
     };
 
     /// Опциональная система травы террейна.
@@ -142,6 +148,8 @@ namespace SR_CORE_NS {
         bool m_castShadows = false;
         /// @property @group(Render) @tooltip(Отсекать ячейки по фрустуму камеры. Пересобирает командные буферы при повороте камеры)
         bool m_frustumCulling = true;
+        /// @property @group(Render) @tooltip(Запас угла отсечения в градусах. Больше - реже пересборка командных буферов при повороте камеры)
+        float_t m_cullMarginDegrees = 20.f;
 
         /// @property @group(Stats) @readOnly @dontSave
         uint32_t m_totalInstances = 0;
@@ -163,6 +171,7 @@ namespace SR_CORE_NS {
         SR_MATH_NS::FVector3 m_lastObserverPosition = SR_MATH_NS::FVector3(SR_FLOAT_MAX);
         SR_MATH_NS::FVector3 m_lastObserverDirection;
         TerrainGrassLodParams m_lastLodParams;
+        bool m_lastCanCull = false;
         bool m_forceLodUpdate = true;
 
     };

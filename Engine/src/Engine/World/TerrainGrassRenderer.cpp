@@ -16,11 +16,11 @@
 
 namespace SR_CORE_NS {
     /// Раскладка инстанс-буфера должна совпадать с TerrainGrassInstance байт в байт.
+    /// VertexLayoutDescription выравнивает каждый атрибут по 16 байт, поэтому инстанс упакован в два vec4:
+    /// CUSTOM0 = (position.xyz, rank), CUSTOM1 = (normal.xyz, random) - смещения 0 и 16, шаг 32.
     static const auto TerrainGrassInstanceLayout = SR_UTILS_NS::VertexLayoutDescription()
-        .AddAttribute(SR_UTILS_NS::VertexAttribute::Position1, SR_UTILS_NS::VertexAttributeFormat::Float32, 3) /// position
-        .AddAttribute(SR_UTILS_NS::VertexAttribute::Custom0, SR_UTILS_NS::VertexAttributeFormat::Float32, 1)   /// rank
-        .AddAttribute(SR_UTILS_NS::VertexAttribute::Custom1, SR_UTILS_NS::VertexAttributeFormat::Float32, 3)   /// normal
-        .AddAttribute(SR_UTILS_NS::VertexAttribute::Custom2, SR_UTILS_NS::VertexAttributeFormat::Float32, 1)   /// random
+        .AddAttribute(SR_UTILS_NS::VertexAttribute::Custom0, SR_UTILS_NS::VertexAttributeFormat::Float32, 4)
+        .AddAttribute(SR_UTILS_NS::VertexAttribute::Custom1, SR_UTILS_NS::VertexAttributeFormat::Float32, 4)
         .SetInstanced(true);
 
     static const SR_UTILS_NS::StringAtom SHADER_GRASS_ORIGIN = "grassOrigin";
@@ -31,6 +31,9 @@ namespace SR_CORE_NS {
     static const SR_UTILS_NS::StringAtom SHADER_GRASS_SEGMENTS_LOD_DISTANCE = "grassSegmentsLodDistance";
     static const SR_UTILS_NS::StringAtom SHADER_GRASS_SEGMENTS = "grassSegments";
     static const SR_UTILS_NS::StringAtom SHADER_GRASS_LOW_SEGMENTS = "grassLowSegments";
+
+    static_assert(offsetof(TerrainGrassInstance, rank) == 12 && offsetof(TerrainGrassInstance, normal) == 16 && offsetof(TerrainGrassInstance, random) == 28,
+        "TerrainGrassInstance layout must match TerrainGrassInstanceLayout!");
 
     float_t TerrainGrassLodParams::GetKeepFraction(float_t distance) const noexcept {
         if (distance <= fullDensityDistance) {
@@ -75,7 +78,25 @@ namespace SR_CORE_NS {
         MarkRenderDirty();
     }
 
-    bool TerrainGrassRenderer::UpdateLod(const SR_MATH_NS::FVector3& observer, const TerrainGrassLodParams& params, const SR_GRAPH_NS::Frustum* pFrustum) {
+    bool TerrainGrassCullCone::IsVisible(const SR_MATH_NS::AABB& bounds) const noexcept {
+        const SR_MATH_NS::FVector3 center = bounds.GetCenter();
+        const float_t radius = bounds.GetExtends().Length();
+
+        const SR_MATH_NS::FVector3 toCenter = center - position;
+        const float_t distance = toCenter.Length();
+
+        if (distance <= radius) {
+            return true; /// камера внутри (или вплотную к) ячейке
+        }
+
+        const float_t cosTheta = std::clamp(toCenter.Dot(direction) / distance, -1.f, 1.f);
+        const float_t theta = std::acos(cosTheta);
+        const float_t sphereAngle = std::asin(std::clamp(radius / distance, 0.f, 1.f));
+
+        return theta <= halfAngle + sphereAngle;
+    }
+
+    bool TerrainGrassRenderer::UpdateLod(const SR_MATH_NS::FVector3& observer, const TerrainGrassLodParams& params, const TerrainGrassCullCone* pCone) {
         SR_TRACY_ZONE;
 
         bool changed = false;
@@ -115,7 +136,7 @@ namespace SR_CORE_NS {
                     buckets = oldBuckets;
                 }
 
-                if (buckets != 0 && pFrustum && !pFrustum->IsAABBVisible(bounds)) {
+                if (buckets != 0 && pCone && !pCone->IsVisible(bounds)) {
                     buckets = 0;
                 }
 
@@ -216,6 +237,7 @@ namespace SR_CORE_NS {
             return;
         }
 
+        SRAssert(TerrainGrassInstanceLayout.GetStride() == sizeof(TerrainGrassInstance));
         const uint64_t size = m_pendingInstances.size() * sizeof(TerrainGrassInstance);
         m_VBO = pPipeline->AllocateVBO(m_VBO, size, m_pendingInstances.data());
 

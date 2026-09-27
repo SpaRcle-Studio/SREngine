@@ -305,27 +305,42 @@ namespace SR_CORE_NS {
         const auto observer = terrain.GetObserver();
         const auto lodParams = GetLodParams();
 
+        /// Конус видимости с запасом m_cullMarginDegrees: пока камера поворачивается в его пределах,
+        /// отсечение не пересчитывается (и командные буферы не пересобираются).
+        TerrainGrassCullCone cone;
+        const bool canCull = m_frustumCulling && observer.fovY > 0.f && observer.aspect > 0.f && observer.direction.Length() > 0.5f;
+        if (canCull) {
+            const float_t tanHalfY = std::tan(observer.fovY * 0.5f);
+            const float_t tanHalfX = tanHalfY * observer.aspect;
+            const float_t diagonalHalfAngle = std::atan(std::sqrt(tanHalfX * tanHalfX + tanHalfY * tanHalfY));
+            cone.position = observer.position;
+            cone.direction = observer.direction.Normalized();
+            cone.halfAngle = std::min(diagonalHalfAngle + SR_RAD(std::max(0.f, m_cullMarginDegrees)), SR_RAD(179.f));
+        }
+
+        const float_t margin = SR_RAD(std::max(0.f, m_cullMarginDegrees));
         const bool moved = (observer.position - m_lastObserverPosition).Length() > 0.5f;
-        const bool rotated = m_frustumCulling && observer.direction.Dot(m_lastObserverDirection) < 0.995f;
-        const bool paramsChanged = !(lodParams == m_lastLodParams);
+        const bool rotated = canCull && std::acos(std::clamp(cone.direction.Dot(m_lastObserverDirection), -1.f, 1.f)) > margin * 0.5f;
+        const bool paramsChanged = !(lodParams == m_lastLodParams) || canCull != m_lastCanCull;
 
         if (!moved && !rotated && !paramsChanged && !m_forceLodUpdate) {
             return;
         }
 
         m_lastObserverPosition = observer.position;
-        m_lastObserverDirection = observer.direction;
+        m_lastObserverDirection = cone.direction;
         m_lastLodParams = lodParams;
+        m_lastCanCull = canCull;
         m_forceLodUpdate = false;
 
-        const SR_GRAPH_NS::Frustum* pFrustum = (m_frustumCulling && observer.frustum.has_value()) ? &observer.frustum.value() : nullptr;
+        const TerrainGrassCullCone* pCone = canCull ? &cone : nullptr;
 
         uint32_t total = 0;
         uint32_t drawn = 0;
 
         for (auto&& pRenderer : m_renderers) {
             pRenderer->SetCastShadows(m_castShadows);
-            pRenderer->UpdateLod(observer.position, lodParams, pFrustum);
+            pRenderer->UpdateLod(observer.position, lodParams, pCone);
             total += pRenderer->GetInstancesCount();
             drawn += pRenderer->GetDrawnInstancesCount();
         }
@@ -346,6 +361,8 @@ namespace SR_CORE_NS {
         const auto& normals = mesh.normals;
         const auto& indices = mesh.indices;
         const bool hasNormals = normals.size() == positions.size();
+        const bool hasMaxEdge = mesh.maxEdgeLength > 0.f;
+        const bool hasBounds = mesh.bounds.max.x > mesh.bounds.min.x && mesh.bounds.max.z > mesh.bounds.min.z;
         const bool hasMaterials = mesh.materials.size() == positions.size() && !settings.allowedMaterials.empty();
 
         if (positions.empty() || indices.size() < 3 || settings.density <= 0.f) {
@@ -425,6 +442,16 @@ namespace SR_CORE_NS {
             const auto& b = positions[ib];
             const auto& c = positions[ic];
 
+            if (hasMaxEdge) {
+                const float_t maxEdgeSq = mesh.maxEdgeLength * mesh.maxEdgeLength;
+                const SR_MATH_NS::FVector3 ab = b - a;
+                const SR_MATH_NS::FVector3 bc = c - b;
+                const SR_MATH_NS::FVector3 ca = a - c;
+                if (ab.Dot(ab) > maxEdgeSq || bc.Dot(bc) > maxEdgeSq || ca.Dot(ca) > maxEdgeSq) {
+                    continue;
+                }
+            }
+
             const SR_MATH_NS::FVector3 cross = (b - a).Cross(c - a);
             const float_t crossLength = cross.Length();
             if (crossLength <= 1e-8f) {
@@ -434,13 +461,9 @@ namespace SR_CORE_NS {
             const float_t area = crossLength * 0.5f;
             SR_MATH_NS::FVector3 faceNormal = cross / crossLength;
 
-            /// ориентация треугольника может быть любой - ориентируем по сглаженным нормалям
-            if (hasNormals) {
-                const SR_MATH_NS::FVector3 smooth = normals[ia] + normals[ib] + normals[ic];
-                if (faceNormal.Dot(smooth) < 0.f) {
-                    faceNormal = -faceNormal;
-                }
-            }
+            /// Нормаль берётся строго по обходу треугольника - так же её считает ComputeSmoothNormals для рендера.
+            /// Разворачивать её по сглаженным нормалям нельзя: на стыках чанков они считаются только по своей
+            /// половине треугольников, и трава вырастала бы с нижней стороны поверхности.
 
             /// быстрый отказ для крутых и перевёрнутых треугольников
             if (faceNormal.y < settings.slopeMin - 0.1f) {
@@ -481,15 +504,26 @@ namespace SR_CORE_NS {
                 const SR_MATH_NS::FVector3 position = a * w + b * u + c * v;
                 const SR_MATH_NS::FVector3 worldPos = position + mesh.origin;
 
+                if (hasBounds && (
+                    position.x < mesh.bounds.min.x || position.x > mesh.bounds.max.x ||
+                    position.y < mesh.bounds.min.y || position.y > mesh.bounds.max.y ||
+                    position.z < mesh.bounds.min.z || position.z > mesh.bounds.max.z))
+                {
+                    continue;
+                }
+
                 SR_MATH_NS::FVector3 normal = faceNormal;
                 if (hasNormals) {
                     normal = normals[ia] * w + normals[ib] * u + normals[ic] * v;
                     const float_t len = normal.Length();
-                    normal = len > 1e-6f ? normal / len : faceNormal;
+                    /// На границе чанка сглаженная нормаль считается только по треугольникам своего чанка
+                    /// и может сильно расходиться с реальной поверхностью - тогда доверяем нормали грани.
+                    normal = (len > 1e-3f && (normal / len).Dot(faceNormal) > 0.5f) ? normal / len : faceNormal;
                 }
 
-                /// отбор по маске плотности - на склонах и проплешинах травинки исчезают плавно, а не порогом
-                if (GrassToFloat(h2) >= densityMask(worldPos, normal.y)) {
+                /// отбор по маске плотности - на склонах и проплешинах травинки исчезают плавно, а не порогом.
+                /// Для наклона берётся худшая из нормалей, чтобы трава не лезла на стены через сглаживание.
+                if (GrassToFloat(h2) >= densityMask(worldPos, std::min(normal.y, faceNormal.y + 0.1f))) {
                     continue;
                 }
 

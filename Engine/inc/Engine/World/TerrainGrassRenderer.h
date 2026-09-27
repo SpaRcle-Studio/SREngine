@@ -8,7 +8,6 @@
 #include <Engine/stdInclude.h>
 
 #include <Graphics/Types/IRenderComponent.h>
-#include <Graphics/Utils/Frustum.h>
 
 #include <Utils/Math/Vector3.h>
 #include <Utils/Math/AABB.h>
@@ -54,6 +53,17 @@ namespace SR_CORE_NS {
         SR_NODISCARD bool operator==(const TerrainGrassLodParams& other) const noexcept = default;
     };
 
+    /// Конус видимости камеры для отсечения ячеек травы. Конус описывает фрустум целиком
+    /// (по диагонали экрана) с запасом, поэтому отсечение консервативное: лучше нарисовать лишнюю
+    /// ячейку, чем потерять видимую. Запас позволяет не пересчитывать отсечение на каждый поворот камеры.
+    struct TerrainGrassCullCone {
+        SR_MATH_NS::FVector3 position;
+        SR_MATH_NS::FVector3 direction;
+        float_t halfAngle = 0.f; /// радианы
+
+        SR_NODISCARD bool IsVisible(const SR_MATH_NS::AABB& bounds) const noexcept;
+    };
+
     /// Рендерер травы одного чанка террейна. Добавляется на объект чанка системой TerrainGrass автоматически.
     /// Геометрии нет вообще: травинка строится в шейдере по VERTEX_INDEX (triangle strip), а инстанс-буфер
     /// статичен и перезаливается только при перегенерации травы чанка. Командные буферы пересобираются
@@ -68,7 +78,8 @@ namespace SR_CORE_NS {
         void ClearInstances();
 
         /// Поток сцены. Пересчитывает LOD и видимость ячеек. Возвращает true, если набор отрисовки изменился.
-        bool UpdateLod(const SR_MATH_NS::FVector3& observer, const TerrainGrassLodParams& params, const SR_GRAPH_NS::Frustum* pFrustum);
+        /// pCone == nullptr отключает отсечение.
+        bool UpdateLod(const SR_MATH_NS::FVector3& observer, const TerrainGrassLodParams& params, const TerrainGrassCullCone* pCone);
 
         void SetCastShadows(bool castShadows) { m_castShadows = castShadows; }
 

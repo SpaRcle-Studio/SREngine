@@ -100,8 +100,13 @@ namespace SR_CORE_NS {
 
         if (pCamera) {
             data.position = pCamera->GetPosition();
-            data.direction = pCamera->GetViewDirection();
-            data.frustum = pCamera->GetFrustum();
+            /// Направление берётся из тех же матриц, с которыми рисуется кадр: строка w матрицы PROJECTION * VIEW -
+            /// это градиент глубины, т.е. направление "вперёд" независимо от соглашений осей камеры.
+            const SR_MATH_NS::Matrix4x4 viewProjection = pCamera->GetProjection() * pCamera->GetViewTranslate();
+            const SR_MATH_NS::FVector3 forward(viewProjection[0][3], viewProjection[1][3], viewProjection[2][3]);
+            data.direction = forward.Length() > 1e-6f ? forward.Normalized() : pCamera->GetViewDirection();
+            data.fovY = SR_RAD(pCamera->GetFOV());
+            data.aspect = pCamera->GetAspect();
         }
 
         return data;

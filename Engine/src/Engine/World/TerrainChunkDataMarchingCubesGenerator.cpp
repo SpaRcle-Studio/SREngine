@@ -247,6 +247,16 @@ namespace SR_CORE_NS {
 
                 TerrainGrassSourceMesh grassMesh;
                 grassMesh.origin = chunkOrigin;
+                /// Воксель в локальных осях меша имеет размер 1, диагональ куба - sqrt(3)
+                const float_t maxScale = std::max({ std::abs(scale.x), std::abs(scale.y), std::abs(scale.z) });
+                grassMesh.maxEdgeLength = 1.8f * maxScale;
+                /// Полезная область вокселей чанка: координаты [1, densityCountAxis - 1] -> локальные [0.5, densityCountAxis - 1.5]
+                const float_t innerMin = 0.5f;
+                const float_t innerMax = static_cast<float_t>(m_densityCountAxis) - 1.5f;
+                grassMesh.bounds = SR_MATH_NS::AABB(
+                    SR_MATH_NS::FVector3(innerMin) * scale - SR_MATH_NS::FVector3(0.01f),
+                    SR_MATH_NS::FVector3(innerMax) * scale + SR_MATH_NS::FVector3(0.01f)
+                );
                 grassMesh.positions.resize(vertexCount);
                 grassMesh.normals.resize(vertexCount);
                 grassMesh.materials.resize(vertexCount);

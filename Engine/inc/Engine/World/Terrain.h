@@ -9,7 +9,6 @@
 #include <Engine/World/TerrainGrass.h>
 
 #include <Graphics/Types/Camera.h>
-#include <Graphics/Utils/Frustum.h>
 
 #include <Utils/ECS/Component.h>
 #include <Utils/ECS/SceneObject.h>
@@ -103,7 +102,8 @@ namespace SR_CORE_NS {
     struct TerrainObserverData {
         SR_MATH_NS::FVector3 position;
         SR_MATH_NS::FVector3 direction = SR_MATH_NS::FVector3(0.f, 0.f, 1.f);
-        std::optional<SR_GRAPH_NS::Frustum> frustum;
+        float_t fovY = 0.f;   /// вертикальный угол обзора в радианах, 0 - камеры нет
+        float_t aspect = 0.f; /// ширина / высота
     };
 
     class TerrainLODManager : public SR_UTILS_NS::Serializable {

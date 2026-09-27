@@ -1,6 +1,6 @@
 /// Процедурная трава террейна (TerrainGrass / TerrainGrassRenderer).
 /// Геометрии нет: травинка строится по VERTEX_INDEX как triangle strip из 2 * segments + 1 вершин.
-/// Инстанс: POSITION1 - корень (относительно grassOrigin), CUSTOM0 - rank, CUSTOM1 - нормаль террейна, CUSTOM2 - random.
+/// Инстанс: CUSTOM0 = (корень относительно grassOrigin, rank), CUSTOM1 = (нормаль террейна, random).
 
 ShaderType Spatial;
 
@@ -119,9 +119,10 @@ float grassKeepFraction(float distance) {
 /// ------------------------------------------ вершинный шейдер ------------------------------------------
 
 void vertex() {
-    vec3 root = POSITION1 + grassOrigin;
-    float rank = CUSTOM0;
-    float rnd = CUSTOM2;
+    vec3 root = CUSTOM0.xyz + grassOrigin;
+    float rank = CUSTOM0.w;
+    float rnd = CUSTOM1.w;
+    vec3 terrainNormal = CUSTOM1.xyz;
 
     float r0 = grassHash11(rnd * 1000.0 + 1.0);
     float r1 = grassHash11(rnd * 1000.0 + 2.0);
@@ -158,7 +159,7 @@ void vertex() {
     width *= fade;
 
     /// ---- базис травинки
-    vec3 up = normalize(mix(vec3(0.0, 1.0, 0.0), normalize(CUSTOM1), normalInfluence));
+    vec3 up = normalize(mix(vec3(0.0, 1.0, 0.0), normalize(terrainNormal), normalInfluence));
 
     float angle = r2 * 6.2831853;
     vec3 forward = vec3(cos(angle), 0.0, sin(angle));
@@ -174,7 +175,9 @@ void vertex() {
         if (facing < 0.0) {
             target = -viewH;
         }
-        forward = normalize(mix(forward, target, viewAlign * (1.0 - abs(facing))));
+        /// вблизи не разворачиваем: направление на камеру там быстро меняется и травинки "крутятся" при движении
+        float alignFade = smoothstep(4.0, 12.0, distance);
+        forward = normalize(mix(forward, target, viewAlign * alignFade * (1.0 - abs(facing))));
     }
 
     vec3 side = normalize(cross(up, forward));
@@ -197,7 +200,13 @@ void vertex() {
     float tipOffsetLen = min(length(tipOffset), 1.2);
 
     /// ---- вершина strip'а
-    int segments = distance < grassSegmentsLodDistance - 2.0 ? grassSegments : grassLowSegments;
+    /// Число сегментов определяет CPU для всей ячейки (оно зашито в количество вершин draw call'а).
+    /// Здесь его нельзя выбирать по дистанции травинки: иначе при низком LOD ячейки вершины 2*low+1..
+    /// образовывали бы вырожденные "столбы", а при высоком - обрезалась бы верхушка.
+    int segments = grassSegments;
+    if (grassSegmentsLodDistance > 0.0 && distance >= grassSegmentsLodDistance) {
+        segments = grassLowSegments;
+    }
     int maxIndex = segments * 2;
     int index = min(VERTEX_INDEX, maxIndex);
 
