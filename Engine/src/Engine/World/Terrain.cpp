@@ -25,15 +25,18 @@ namespace SR_CORE_NS {
             pool.AddChild(m_object);
         }
 
-        m_object->SetEnabled(true);
-
         if (auto&& pGameObject = m_object.DynamicCast<SR_UTILS_NS::GameObject>()) {
             pGameObject->GetTransform()->SetTranslation(position);
         }
+
+        m_object->SetEnabled(true);
     }
 
     void ITerrainChunk::Deactivate() {
         SR_TRACY_ZONE;
+        if (m_data) {
+            m_data->Deactivate();
+        }
         if (m_object) {
             m_object->SetEnabled(false);
         }
@@ -51,13 +54,13 @@ namespace SR_CORE_NS {
         Super::Update(dt);
 
         if (m_chunkGenerator) {
-            m_chunkGenerator->Update(*this, dt);
             m_chunkGenerator->LoadNextChunk([this](ITerrainChunk& chunk) {
                 if (m_chunkDataGenerator) {
-                    m_chunkDataGenerator->GenerateChunkData(*this, chunk);
+                    m_chunkDataGenerator->GenerateChunkData(*this, chunk, 0.f);
                 }
                 chunk.SetStatus(ITerrainChunk::Status::Loaded);
             });
+            m_chunkGenerator->Update(*this, dt);
         }
     }
 

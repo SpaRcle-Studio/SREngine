@@ -21,8 +21,8 @@ namespace SR_CORE_NS {
         std::memset(localSums.data(), 0, localSums.size() * sizeof(SR_MATH_NS::FVector3));
 
         // вычисляем нормали по треугольникам
-        auto range1 = std::views::iota(size_t(0), indices.size() / 3);
-        SR_UTILS_NS::ForEach<SR_UTILS_NS::ExecutionPolicy::Seq>(range1.begin(), range1.end(), [&](size_t t){
+        auto range1 = std::views::iota(SR_UTILS_NS::SizeType(0), SR_UTILS_NS::SizeType(indices.size() / 3));
+        SR_UTILS_NS::ForEach<SR_UTILS_NS::ExecutionPolicy::Seq>(range1.begin(), range1.end(), [&](SR_UTILS_NS::SizeType t){
             uint32_t ia = indices[t * 3 + 0];
             uint32_t ib = indices[t * 3 + 1];
             uint32_t ic = indices[t * 3 + 2];
@@ -39,8 +39,8 @@ namespace SR_CORE_NS {
         });
 
         // объединяем локальные суммы
-        auto range2 = std::views::iota(size_t(0), vertices.GetVertexCount());
-        SR_UTILS_NS::ForEach<SR_UTILS_NS::ExecutionPolicy::ParUnSeq>(range2.begin(), range2.end(), [&](size_t index){
+        auto range2 = std::views::iota(SR_UTILS_NS::SizeType(0), SR_UTILS_NS::SizeType(vertices.GetVertexCount()));
+        SR_UTILS_NS::ForEach<SR_UTILS_NS::ExecutionPolicy::ParUnSeq>(range2.begin(), range2.end(), [&](SR_UTILS_NS::SizeType index){
             SR_MATH_NS::FVector3 normal = localSums[index].Normalized();
             SR_MATH_NS::FVector3 tangent = SR_MATH_NS::FVector3::Cross(normal, SR_MATH_NS::FVector3(0, 1, 0)).Normalized();
             vertices.SetVertex(index, SR_UTILS_NS::VertexAttribute::Normal, &normal);
@@ -48,7 +48,7 @@ namespace SR_CORE_NS {
         });
     }
 
-    void TerrainChunkDataMarchingCubesGenerator::GenerateChunkData(Terrain& terrain, ITerrainChunk& chunk) {
+    void TerrainChunkDataMarchingCubesGenerator::GenerateChunkData(Terrain& terrain, ITerrainChunk& chunk, float_t distance) {
         SR_TRACY_ZONE;
 
         if (!Init()) {
@@ -63,12 +63,18 @@ namespace SR_CORE_NS {
 
         if (!chunk.GetData()) {
             chunk.SetData(new TerrainMarchingCubesChunkData());
+            chunk.GetData()->SetChunk(&chunk);
         }
 
         auto&& pChunkData = chunk.GetData().DynamicCast<TerrainMarchingCubesChunkData>();
         auto&& pChunkObject = chunk.GetObject();
         auto&& voxels = pChunkData->GetVoxels();
         auto&& position = pCubeChunk->GetPosition();
+
+        static SR_UTILS_NS::String positionText;
+        positionText.clear();
+        SR_UTILS_NS::FormatTo(positionText, "{}, {}, {}", position.x, position.y, position.z);
+        SR_TRACY_ZONE_TEXT(positionText);
 
         if (voxels.empty()) {
             SR_TRACY_ZONE_N("Compute density");
@@ -256,5 +262,32 @@ namespace SR_CORE_NS {
 
         m_isInitialized = true;
         return true;
+    }
+
+    void TerrainMarchingCubesChunkData::SwitchPhysics(bool enable) {
+        if (auto&& pChunkObject = m_chunk->GetObject()) {
+            if (auto&& pCollisionShape = pChunkObject->GetComponent<SR_PTYPES_NS::CollisionShape>()) {
+                pCollisionShape->SetEnabled(enable);
+            }
+            if (auto&& pRigidBody = pChunkObject->GetComponent<SR_PTYPES_NS::Rigidbody>()) {
+                pRigidBody->SetEnabled(enable);
+            }
+        }
+    }
+
+    void TerrainMarchingCubesChunkData::Deactivate() {
+        Super::Deactivate();
+        m_voxels.clear();
+        if (auto&& pChunkObject = m_chunk->GetObject()) {
+            if (auto&& pCollisionShape = pChunkObject->GetComponent<SR_PTYPES_NS::CollisionShape>()) {
+                pCollisionShape->SetEnabled(false);
+            }
+            if (auto&& pProceduralMesh = pChunkObject->GetComponent<SR_GTYPES_NS::ProceduralMesh>()) {
+                pProceduralMesh->SetEnabled(false);
+            }
+            if (auto&& pRigidBody = pChunkObject->GetComponent<SR_PTYPES_NS::Rigidbody>()) {
+                pRigidBody->SetEnabled(false);
+            }
+        }
     }
 }

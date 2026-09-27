@@ -18,6 +18,8 @@ namespace SR_CORE_NS {
         SR_NODISCARD const SR_MATH_NS::IVector3& GetPosition() const noexcept;
         void SetPosition(const SR_MATH_NS::IVector3& position) noexcept { m_position = position; }
 
+        SR_NODISCARD float_t GetDistanceTo(const ITerrainChunk& other) const override;
+
     private:
         SR_MATH_NS::IVector3 m_position;
 
@@ -32,21 +34,21 @@ namespace SR_CORE_NS {
         SR_CLASS()
     public:
         void Update(Terrain& terrain, float_t dt) override;
-        void LoadNextChunk(SR_HTYPES_NS::Function<void(ITerrainChunk&)> loaderFn);
+        void LoadNextChunk(const SR_HTYPES_NS::Function<void(ITerrainChunk&)>& loaderFn) override;
 
     private:
         /// @property @notNull
         TerrainChunkCube::Ptr m_chunkProto;
         /// @property @range(1, 512)
-        SR_MATH_NS::IVector3 m_minLoadDistance = SR_MATH_NS::IVector3(16, 1, 16);
+        SR_MATH_NS::IVector3 m_minLoadDistance = SR_MATH_NS::IVector3(4, 1, 4);
         /// @property @range(1, 512)
-        SR_MATH_NS::IVector3 m_maxLoadDistance = SR_MATH_NS::IVector3(16, 1, 16);
+        SR_MATH_NS::IVector3 m_maxLoadDistance = SR_MATH_NS::IVector3(4, 1, 4);
         /// @property @range(1, 512)
-        SR_MATH_NS::IVector3 m_unloadDistance = SR_MATH_NS::IVector3(2, 1, 2);
+        SR_MATH_NS::IVector3 m_unloadDistance = SR_MATH_NS::IVector3(4, 1, 4);
         /// @property
-        SR_MATH_NS::FVector3 m_chunkSize = SR_MATH_NS::FVector3(32.0f, 64.0f, 32.0f);
+        SR_MATH_NS::FVector3 m_chunkSize = SR_MATH_NS::FVector3(124.0f, 124.0f, 124.0f);
         /// @property
-        SR_MATH_NS::FVector3 m_chunkScale = SR_MATH_NS::FVector3(1.0f, 1.0f, 1.0f);
+        SR_MATH_NS::FVector3 m_chunkScale = SR_MATH_NS::FVector3(2.0f, 2.0f, 2.0f);
 
         /// @property @readOnly @dontSave
         SR_MATH_NS::IVector3 m_observerChunkPosition = SR_MATH_NS::IVector3MAX;

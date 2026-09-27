@@ -15,6 +15,7 @@
 
 namespace SR_CORE_NS {
     class Terrain;
+    class ITerrainChunk;
 
     /// @abstract
     class ITerrainChunkData : public SR_HTYPES_NS::SharedPtr<ITerrainChunkData>, public SR_UTILS_NS::Serializable {
@@ -22,6 +23,14 @@ namespace SR_CORE_NS {
         SR_CLASS()
     public:
         ITerrainChunkData();
+
+    public:
+        virtual void Deactivate() { }
+        void SetChunk(ITerrainChunk* chunk) { m_chunk = chunk; }
+        virtual void SwitchPhysics(bool enable) { }
+
+    protected:
+        ITerrainChunk* m_chunk = nullptr;
 
     };
 
@@ -44,6 +53,7 @@ namespace SR_CORE_NS {
         SR_NODISCARD Status GetStatus() const { return m_status; }
         SR_NODISCARD const SR_UTILS_NS::SceneObject::Ptr& GetObject() const { return m_object; }
 
+        SR_NODISCARD virtual float_t GetDistanceTo(const ITerrainChunk& other) const { return 0.f; }
         virtual void Activate(SR_UTILS_NS::SceneObject& pool, const SR_UTILS_NS::SceneObject& proto, SR_MATH_NS::FVector3 position);
         void Deactivate();
 
@@ -62,7 +72,7 @@ namespace SR_CORE_NS {
         ITerrainChunkDataGenerator();
 
     public:
-        virtual void GenerateChunkData(Terrain& terrain, ITerrainChunk& chunk) { }
+        virtual void GenerateChunkData(Terrain& terrain, ITerrainChunk& chunk, float_t distance) { }
 
     };
 
@@ -75,7 +85,7 @@ namespace SR_CORE_NS {
 
     public:
         virtual void Update(Terrain& terrain, float_t dt) { }
-        virtual void LoadNextChunk(SR_HTYPES_NS::Function<void(ITerrainChunk&)> loaderFn) { }
+        virtual void LoadNextChunk(const SR_HTYPES_NS::Function<void(ITerrainChunk&)>& loaderFn) { }
 
     protected:
         /// @property
@@ -87,6 +97,13 @@ namespace SR_CORE_NS {
 
     struct TerrainObserverData {
         SR_MATH_NS::FVector3 position;
+    };
+
+    class TerrainLODManager : public SR_UTILS_NS::Serializable {
+        using Super = SR_UTILS_NS::Serializable;
+        SR_CLASS()
+    public:
+        virtual void Update(Terrain& terrain, float_t dt) { }
     };
 
     class Terrain : public SR_UTILS_NS::Component {
@@ -104,6 +121,8 @@ namespace SR_CORE_NS {
         ITerrainChunkDataGenerator::Ptr m_chunkDataGenerator;
         /// @property @notNull
         ITerrainChunkGenerator::Ptr m_chunkGenerator;
+        /// @property
+        TerrainLODManager m_lodManager;
 
     };
 }

@@ -35,10 +35,12 @@ namespace SR_CORE_NS {
         SR_CLASS()
 
     public:
-        SR_NODISCARD SR_HTYPES_NS::FastMemoryArray<TerrainMarchingCubesVoxel>& GetVoxels() { return voxels; }
+        SR_NODISCARD SR_HTYPES_NS::FastMemoryArray<TerrainMarchingCubesVoxel>& GetVoxels() { return m_voxels; }
+        void Deactivate() override;
+        void SwitchPhysics(bool enable) override;
 
     private:
-        SR_HTYPES_NS::FastMemoryArray<TerrainMarchingCubesVoxel> voxels;
+        SR_HTYPES_NS::FastMemoryArray<TerrainMarchingCubesVoxel> m_voxels;
 
     };
 
@@ -47,7 +49,7 @@ namespace SR_CORE_NS {
         using Super = ITerrainChunkDataGenerator;
         SR_CLASS()
     public:
-        void GenerateChunkData(Terrain& terrain, ITerrainChunk& chunk) override;
+        void GenerateChunkData(Terrain& terrain, ITerrainChunk& chunk, float_t distance) override;
 
     private:
         bool Init();

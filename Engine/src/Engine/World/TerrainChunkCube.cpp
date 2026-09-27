@@ -14,16 +14,25 @@ namespace SR_CORE_NS {
         return m_position;
     }
 
+    float_t TerrainChunkCube::GetDistanceTo(const ITerrainChunk& other) const {
+        auto&& pOther = dynamic_cast<const TerrainChunkCube*>(&other);
+        if (!pOther) {
+            SRHalt("TerrainChunkCube::GetDistanceTo() : other chunk is not a TerrainChunkCube!");
+            return 0.f;
+        }
+        return static_cast<float_t>(m_position.Distance(pOther->GetPosition()));
+    }
+
     bool TerrainChunkCubeLessPredicate::operator()(const TerrainChunkCube::Ptr& pLeft, const TerrainChunkCube::Ptr& pRight) const noexcept {
         return pLeft->GetPosition() < pRight->GetPosition();
     }
 
-    void TerrainChunkCubeGenerator::LoadNextChunk(SR_HTYPES_NS::Function<void(ITerrainChunk&)> loaderFn) {
+    void TerrainChunkCubeGenerator::LoadNextChunk(const SR_HTYPES_NS::Function<void(ITerrainChunk&)>& loaderFn) {
         SR_TRACY_ZONE;
 
         {
             SR_TRACY_ZONE_N("Erase invalid chunks");
-            m_chunksToLoad.erase_if([&](const TerrainChunkCube::Ptr &pChunk) {
+            m_chunksToLoad.erase_if([&](const TerrainChunkCube::Ptr& pChunk) {
                 return pChunk->GetStatus() != ITerrainChunk::Status::Created;
             });
         }
@@ -34,13 +43,14 @@ namespace SR_CORE_NS {
 
         uint32_t index = 0;
         TerrainChunkCube::Ptr pNearestChunk;
-        for (auto&& pChunk : m_chunksToLoad) {
+        for (uint32_t i = 0; i < m_chunksToLoad.size(); ++i) {
+            auto&& pChunk = m_chunksToLoad[i];
             if (!pNearestChunk || pChunk->GetPosition().Distance(m_observerChunkPosition) < pNearestChunk->GetPosition().Distance(m_observerChunkPosition)) {
                 pNearestChunk = pChunk;
+                index = i;
             }
-            index++;
         }
-        m_chunksToLoad.erase(m_chunksToLoad.begin() + index - 1);
+        m_chunksToLoad.erase(m_chunksToLoad.begin() + index);
 
         if (!pNearestChunk) {
             SRHalt("TerrainChunkCubeGenerator::LoadNextChunk() : chunk is null!");
@@ -84,26 +94,26 @@ namespace SR_CORE_NS {
 
         m_observerChunkPosition = observerChunkPosition;
 
-        //{
-        //    SR_TRACY_ZONE_N("Unload chunks");
-        //    /// unload chunks that are outside of the unload distance
-        //    for (auto pIt = m_chunks.begin(); pIt != m_chunks.end();) {
-        //        auto&& pChunk = *pIt;
-        //        const auto chunkPosition = pChunk->GetPosition();
-        //        if (std::abs(chunkPosition.x - observerChunkPosition.x) > m_unloadDistance.x ||
-        //            std::abs(chunkPosition.y - observerChunkPosition.y) > m_unloadDistance.y ||
-        //            std::abs(chunkPosition.z - observerChunkPosition.z) > m_unloadDistance.z)
-        //        {
-        //            pChunk->Deactivate();
-        //            pChunk->SetStatus(ITerrainChunk::Status::Pool);
-        //            m_freeChunks.emplace_back(pChunk);
-        //            pIt = m_chunks.erase(pIt);
-        //        }
-        //        else {
-        //            ++pIt;
-        //        }
-        //    }
-        //}
+        {
+            SR_TRACY_ZONE_N("Unload chunks");
+            /// unload chunks that are outside of the unload distance
+            for (auto pIt = m_chunks.begin(); pIt != m_chunks.end();) {
+                auto&& pChunk = *pIt;
+                const auto chunkPosition = pChunk->GetPosition();
+                if (std::abs(chunkPosition.x - observerChunkPosition.x) > m_unloadDistance.x ||
+                    std::abs(chunkPosition.y - observerChunkPosition.y) > m_unloadDistance.y ||
+                    std::abs(chunkPosition.z - observerChunkPosition.z) > m_unloadDistance.z)
+                {
+                    pChunk->Deactivate();
+                    pChunk->SetStatus(ITerrainChunk::Status::Pool);
+                    m_freeChunks.emplace_back(pChunk);
+                    pIt = m_chunks.erase(pIt);
+                }
+                else {
+                    ++pIt;
+                }
+            }
+        }
 
         {
             SR_TRACY_ZONE_N("Load chunks");
