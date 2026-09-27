@@ -34,6 +34,9 @@ namespace SR_CORE_NS {
 
     void ITerrainChunk::Deactivate() {
         SR_TRACY_ZONE;
+        if (m_grass) {
+            m_grass->OnChunkDeactivated(*this);
+        }
         if (m_data) {
             m_data->Deactivate();
         }
@@ -62,6 +65,24 @@ namespace SR_CORE_NS {
             });
             m_chunkGenerator->Update(*this, dt);
         }
+
+        if (m_grass) {
+            m_grass->Update(*this, dt);
+        }
+    }
+
+    void Terrain::OnDestroy() {
+        if (m_grass) {
+            m_grass->Shutdown();
+        }
+        Super::OnDestroy();
+    }
+
+    TerrainGrass* Terrain::GetGrass() const noexcept {
+        if (m_grass && m_grass->IsEnabled()) {
+            return const_cast<TerrainGrass*>(m_grass.Get());
+        }
+        return nullptr;
     }
 
     TerrainObserverData Terrain::GetObserver() const {
@@ -79,6 +100,8 @@ namespace SR_CORE_NS {
 
         if (pCamera) {
             data.position = pCamera->GetPosition();
+            data.direction = pCamera->GetViewDirection();
+            data.frustum = pCamera->GetFrustum();
         }
 
         return data;

@@ -6,8 +6,10 @@
 #define SR_ENGINE_CORE_WORLD_TERRAIN_H
 
 #include <Engine/stdInclude.h>
+#include <Engine/World/TerrainGrass.h>
 
 #include <Graphics/Types/Camera.h>
+#include <Graphics/Utils/Frustum.h>
 
 #include <Utils/ECS/Component.h>
 #include <Utils/ECS/SceneObject.h>
@@ -52,6 +54,8 @@ namespace SR_CORE_NS {
         void SetStatus(Status status) { m_status = status; }
         SR_NODISCARD Status GetStatus() const { return m_status; }
         SR_NODISCARD const SR_UTILS_NS::SceneObject::Ptr& GetObject() const { return m_object; }
+        /// Система травы, которой чанк сообщит о своей деактивации
+        void SetGrass(TerrainGrass* pGrass) noexcept { m_grass = pGrass; }
 
         SR_NODISCARD virtual float_t GetDistanceTo(const ITerrainChunk& other) const { return 0.f; }
         virtual void Activate(SR_UTILS_NS::SceneObject& pool, const SR_UTILS_NS::SceneObject& proto, SR_MATH_NS::FVector3 position);
@@ -61,6 +65,7 @@ namespace SR_CORE_NS {
         Status m_status = Status::Pool;
         ITerrainChunkData::Ptr m_data;
         SR_UTILS_NS::SceneObject::Ptr m_object;
+        TerrainGrass::Ptr m_grass;
 
     };
 
@@ -97,6 +102,8 @@ namespace SR_CORE_NS {
 
     struct TerrainObserverData {
         SR_MATH_NS::FVector3 position;
+        SR_MATH_NS::FVector3 direction = SR_MATH_NS::FVector3(0.f, 0.f, 1.f);
+        std::optional<SR_GRAPH_NS::Frustum> frustum;
     };
 
     class TerrainLODManager : public SR_UTILS_NS::Serializable {
@@ -112,7 +119,12 @@ namespace SR_CORE_NS {
     public:
         void Update(float_t dt) override;
 
+        void OnDestroy() override;
+
         SR_NODISCARD TerrainObserverData GetObserver() const;
+
+        /// nullptr, если система травы отключена
+        SR_NODISCARD TerrainGrass* GetGrass() const noexcept;
 
     private:
         /// @property @tooltip(If not present, will be used main camera of the scene)
@@ -123,6 +135,8 @@ namespace SR_CORE_NS {
         ITerrainChunkGenerator::Ptr m_chunkGenerator;
         /// @property
         TerrainLODManager m_lodManager;
+        /// @property @tooltip(Опциональная система травы. Можно оставить пустым)
+        TerrainGrass::Ptr m_grass;
 
     };
 }

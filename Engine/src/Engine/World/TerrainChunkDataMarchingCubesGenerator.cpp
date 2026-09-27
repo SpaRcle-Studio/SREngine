@@ -4,6 +4,9 @@
 
 #include <Engine/World/TerrainChunkDataMarchingCubesGenerator.h>
 #include <Engine/World/TerrainChunkCube.h>
+#include <Engine/World/TerrainGrass.h>
+
+#include <Utils/ECS/GameObject.h>
 
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
 
@@ -209,6 +212,9 @@ namespace SR_CORE_NS {
             SR_UTILS_NS::OptimizeVertices(m_verticesPositions, m_indices, m_indices.size() / 4, 1e-2f, m_optimizedIndices);
 
             if (m_verticesPositions.empty() || m_optimizedIndices.empty()) {
+                if (auto&& pGrass = terrain.GetGrass()) {
+                    pGrass->OnChunkGenerated(terrain, chunk, TerrainGrassSourceMesh());
+                }
                 pProceduralMesh->SetEnabled(false);
                 pCollisionShape->SetEnabled(false);
                 pRigidBody->SetEnabled(false);
@@ -221,6 +227,43 @@ namespace SR_CORE_NS {
 
             pCollisionShape->SwapCustomTriangleMeshVertices(m_verticesPositions);
             pCollisionShape->SwapCustomTriangleMeshIndices(m_optimizedIndices);
+
+            if (auto&& pGrass = terrain.GetGrass()) {
+                SR_TRACY_ZONE_N("Prepare grass source");
+
+                /// Трава генерируется по тому же мешу, что рисуется ProceduralMesh (m_geometryScale относится только к физике),
+                /// в мировых осях относительно объекта чанка. Поворот объекта чанка не поддерживается.
+                SR_MATH_NS::FVector3 chunkScale(1.f);
+                SR_MATH_NS::FVector3 chunkOrigin;
+                if (auto&& pGameObject = pChunkObject.DynamicCast<SR_UTILS_NS::GameObject>()) {
+                    if (auto&& pTransform = pGameObject->GetTransform()) {
+                        chunkScale = pTransform->GetScale();
+                        chunkOrigin = pTransform->GetTranslation();
+                    }
+                }
+
+                const SR_MATH_NS::FVector3 scale = chunkScale;
+                const uint64_t vertexCount = m_vertices.GetVertexCount();
+
+                TerrainGrassSourceMesh grassMesh;
+                grassMesh.origin = chunkOrigin;
+                grassMesh.positions.resize(vertexCount);
+                grassMesh.normals.resize(vertexCount);
+                grassMesh.materials.resize(vertexCount);
+
+                for (uint64_t i = 0; i < vertexCount; ++i) {
+                    const auto position = *static_cast<SR_MATH_NS::FVector3*>(m_vertices.GetVertex(i, SR_UTILS_NS::VertexAttribute::Position));
+                    const auto normal = *static_cast<SR_MATH_NS::FVector3*>(m_vertices.GetVertex(i, SR_UTILS_NS::VertexAttribute::Normal));
+                    grassMesh.positions[i] = position * scale;
+                    /// неравномерный масштаб: нормаль преобразуется обратным масштабом
+                    grassMesh.normals[i] = (normal / scale).Normalized();
+                    grassMesh.materials[i] = *static_cast<uint32_t*>(m_vertices.GetVertex(i, SR_UTILS_NS::VertexAttribute::MaterialID0));
+                }
+
+                grassMesh.indices.assign(m_indices.begin(), m_indices.end());
+
+                pGrass->OnChunkGenerated(terrain, chunk, std::move(grassMesh));
+            }
 
             pProceduralMesh->SwapIndices(m_indices);
             pProceduralMesh->SetIndexedVertices(m_vertices);
