@@ -9,6 +9,7 @@
 
 #include <Utils/FileSystem/Path.h>
 #include <Utils/Math/AABB.h>
+#include <Utils/Types/FlatHashMap.h>
 
 namespace SR_CORE_NS {
     class Terrain;
@@ -99,6 +100,8 @@ namespace SR_CORE_NS {
         SR_NODISCARD Settings MakeSettings() const;
         SR_NODISCARD static Result Generate(const Settings& settings, Task&& task);
 
+        void UpdateBenders(float_t dt);
+
         SR_NODISCARD SR_HTYPES_NS::SharedPtr<TerrainGrassRenderer> GetOrCreateRenderer(ITerrainChunk& chunk);
         SR_NODISCARD uint64_t NextGeneration(TerrainGrassRenderer* pRenderer);
 
@@ -111,7 +114,7 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::Path m_material = "Engine/Materials/terrain-grass.mat";
 
         /// @property @group(Placement) @tooltip(Травинок на квадратный метр горизонтальной поверхности)
-        float_t m_density = 60.f;
+        float_t m_density = 80.f;
         /// @property @group(Placement) @tooltip(Размер ячейки LOD/отсечения в метрах)
         float_t m_cellSize = 8.f;
         /// @property @group(Placement) @tooltip(Ниже этого значения dot(normal, up) травы нет)
@@ -140,7 +143,7 @@ namespace SR_CORE_NS {
         /// @property @group(LOD)
         float_t m_fullDensityDistance = 12.f;
         /// @property @group(LOD)
-        float_t m_maxDistance = 80.f;
+        float_t m_maxDistance = 140.f;
         /// @property @group(LOD)
         float_t m_falloff = 1.6f;
         /// @property @group(LOD)
@@ -158,6 +161,11 @@ namespace SR_CORE_NS {
         bool m_frustumCulling = true;
         /// @property @group(Render) @tooltip(Запас угла отсечения в градусах. Больше - реже пересборка командных буферов при повороте камеры)
         float_t m_cullMarginDegrees = 20.f;
+
+        /// @property @group(Bending) @tooltip(Шаг между точками следа в метрах)
+        float_t m_trailSpacing = 0.3f;
+        /// @property @group(Bending) @tooltip(Максимальная дистанция от камеры, на которой учитываются приминающие объекты)
+        float_t m_bendMaxDistance = 40.f;
 
         /// @property @group(Stats) @readOnly @dontSave
         uint32_t m_totalInstances = 0;
@@ -181,6 +189,27 @@ namespace SR_CORE_NS {
         TerrainGrassLodParams m_lastLodParams;
         bool m_lastCanCull = false;
         bool m_forceLodUpdate = true;
+
+        struct TrailPoint {
+            SR_MATH_NS::FVector3 position;
+            SR_MATH_NS::FVector3 direction;
+            float_t radius = 0.f;
+            float_t strength = 0.f;
+            float_t age = 0.f;
+        };
+
+        /// След одного объекта - полилиния от старых точек к новым. Живёт и после отключения объекта, пока не угаснет.
+        struct Trail {
+            SR_UTILS_NS::Vector<TrailPoint> points;
+            float_t duration = 1.f;
+            float_t maxLength = 0.f;
+            bool isOwnerAlive = false;
+        };
+
+        SR_HTYPES_NS::FlatHashMap<const void*, Trail> m_trails;
+        TerrainGrassBenders::Ptr m_pBenders;
+        SR_UTILS_NS::Vector<TerrainGrassBenderGPU> m_benderData;
+        uint32_t m_lastBendersCount = 0;
 
     };
 }

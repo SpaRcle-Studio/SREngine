@@ -4,6 +4,7 @@
 
 #include <Engine/World/TerrainGrass.h>
 #include <Engine/World/Terrain.h>
+#include <Engine/World/TerrainGrassBender.h>
 
 #include <Utils/ECS/GameObject.h>
 #include <Utils/FileSystem/PathDataAccessor.h>
@@ -150,10 +151,17 @@ namespace SR_CORE_NS {
 
         m_renderers.clear();
         m_generations.clear();
+        m_trails.clear();
+        m_benderData.clear();
+        if (m_pBenders) {
+            m_pBenders->SetBenders(m_benderData);
+        }
     }
 
     void TerrainGrass::WorkerLoop() {
         while (true) {
+            SR_TRACY_ZONE;
+
             Task task;
             Settings settings;
             {
@@ -225,6 +233,11 @@ namespace SR_CORE_NS {
         }
 
         pRenderer->SetCastShadows(m_castShadows);
+
+        if (!m_pBenders) {
+            m_pBenders = new TerrainGrassBenders();
+        }
+        pRenderer->SetBenders(m_pBenders);
 
         const uint64_t generation = NextGeneration(pRenderer.Get());
 
@@ -303,6 +316,8 @@ namespace SR_CORE_NS {
             results.clear();
         }
 
+        UpdateBenders(dt);
+
         /// ---- LOD / отсечение по ячейкам
         const auto observer = terrain.GetObserver();
         const auto lodParams = GetLodParams();
@@ -349,6 +364,165 @@ namespace SR_CORE_NS {
 
         m_totalInstances = total;
         m_drawnInstances = drawn;
+    }
+
+    void TerrainGrass::UpdateBenders(float_t dt) {
+        SR_TRACY_ZONE;
+
+        struct Candidate {
+            TerrainGrassBenderGPU data;
+            float_t priority = 0.f;
+        };
+
+        static SR_THREAD_LOCAL SR_UTILS_NS::Vector<Candidate> candidates;
+        candidates.clear();
+
+        const SR_MATH_NS::FVector3 observer = m_lastObserverPosition;
+        const float_t maxDistanceSq = m_bendMaxDistance * m_bendMaxDistance;
+        const float_t spacing = std::max(0.05f, m_trailSpacing);
+
+        const auto distanceSqToObserver = [&](const SR_MATH_NS::FVector3& point) {
+            const SR_MATH_NS::FVector3 delta = point - observer;
+            return delta.Dot(delta);
+        };
+
+        const auto flatDirection = [](const SR_MATH_NS::FVector3& from, const SR_MATH_NS::FVector3& to) {
+            SR_MATH_NS::FVector3 direction = to - from;
+            direction.y = 0.f;
+            const float_t length = direction.Length();
+            return length > 1e-4f ? direction / length : SR_MATH_NS::FVector3(0.f);
+        };
+
+        for (auto&& [pOwner, trail] : m_trails) {
+            trail.isOwnerAlive = false;
+        }
+
+        /// ---- живые объекты
+        for (auto&& pBender : TerrainGrassBender::GetActiveBenders()) {
+            const SR_MATH_NS::FVector3 position = pBender->GetBendPosition();
+            const float_t radius = pBender->GetRadius();
+            const float_t strength = pBender->GetStrength();
+
+            if (radius <= 0.f || strength <= 0.f) {
+                continue;
+            }
+
+            SR_MATH_NS::FVector3 direction(0.f);
+
+            if (pBender->IsTrailEnabled()) {
+                auto&& trail = m_trails[pBender];
+                trail.isOwnerAlive = true;
+                trail.duration = std::max(0.1f, pBender->GetTrailDuration());
+                trail.maxLength = std::max(0.f, pBender->GetTrailLength());
+
+                /// точки следа неподвижны: новая добавляется только когда объект отошёл на spacing
+                if (trail.points.empty() || (position - trail.points.back().position).Length() >= spacing) {
+                    trail.points.emplace_back(TrailPoint {
+                        .position = position,
+                        .direction = trail.points.empty() ? SR_MATH_NS::FVector3(0.f) : flatDirection(trail.points.back().position, position),
+                        .radius = radius,
+                        .strength = strength,
+                        .age = 0.f
+                    });
+                }
+
+                if (trail.points.size() > 1) {
+                    direction = trail.points.back().direction;
+                }
+            }
+
+            const float_t distanceSq = distanceSqToObserver(position);
+            if (distanceSq <= maxDistanceSq) {
+                /// живые объекты всегда важнее следов
+                candidates.emplace_back(Candidate {
+                    .data = TerrainGrassBenderGPU { .position = position, .radius = radius, .direction = direction, .strength = strength },
+                    .priority = 1000000.f - distanceSq
+                });
+            }
+        }
+
+        /// ---- следы: старение, обрезка по длине
+        for (auto pIt = m_trails.begin(); pIt != m_trails.end(); ) {
+            auto&& trail = pIt->second;
+            auto&& points = trail.points;
+
+            for (auto&& point : points) {
+                point.age += dt;
+            }
+
+            /// угасшие точки в начале следа
+            size_t firstAlive = 0;
+            while (firstAlive < points.size() && points[firstAlive].age >= trail.duration) {
+                ++firstAlive;
+            }
+
+            /// обрезка по длине, считая от самой новой точки
+            if (trail.maxLength > 0.f && points.size() > 1) {
+                float_t length = 0.f;
+                for (size_t i = points.size() - 1; i > firstAlive; --i) {
+                    length += (points[i].position - points[i - 1].position).Length();
+                    if (length > trail.maxLength) {
+                        firstAlive = std::max(firstAlive, i);
+                        break;
+                    }
+                }
+            }
+
+            if (firstAlive > 0) {
+                points.erase(points.begin(), points.begin() + static_cast<std::ptrdiff_t>(firstAlive));
+            }
+
+            if (points.empty() && !trail.isOwnerAlive) {
+                pIt = m_trails.erase(pIt);
+                continue;
+            }
+
+            for (auto&& point : points) {
+                /// трава распрямляется быстро в начале и медленно в конце
+                const float_t life = 1.f - point.age / trail.duration;
+                const float_t strength = point.strength * life * life * 0.85f;
+                if (strength <= 0.01f) {
+                    continue;
+                }
+
+                const float_t distanceSq = distanceSqToObserver(point.position);
+                if (distanceSq > maxDistanceSq) {
+                    continue;
+                }
+
+                candidates.emplace_back(Candidate {
+                    .data = TerrainGrassBenderGPU { .position = point.position, .radius = point.radius, .direction = point.direction, .strength = strength },
+                    .priority = strength * 1000.f - std::sqrt(distanceSq)
+                });
+            }
+
+            ++pIt;
+        }
+
+        const size_t count = std::min<size_t>(candidates.size(), SR_TERRAIN_GRASS_MAX_BENDERS);
+        if (count < candidates.size()) {
+            std::partial_sort(candidates.begin(), candidates.begin() + static_cast<std::ptrdiff_t>(count), candidates.end(), [](const Candidate& left, const Candidate& right) {
+                return left.priority > right.priority;
+            });
+        }
+
+        m_benderData.clear();
+        for (size_t i = 0; i < count; ++i) {
+            m_benderData.emplace_back(candidates[i].data);
+        }
+
+        if (m_pBenders) {
+            m_pBenders->SetBenders(m_benderData);
+        }
+
+        /// SSBO текущего кадра заливается при обновлении uniform'ов рендерера, там же выставляется количество точек
+        const uint32_t count32 = static_cast<uint32_t>(count);
+        if (count32 > 0 || count32 != m_lastBendersCount) {
+            for (auto&& pRenderer : m_renderers) {
+                pRenderer->MarkUniformsDirty();
+            }
+        }
+        m_lastBendersCount = count32;
     }
 
     TerrainGrass::Result TerrainGrass::Generate(const Settings& settings, Task&& task) {

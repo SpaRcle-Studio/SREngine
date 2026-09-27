@@ -331,7 +331,9 @@ namespace SR_CORE_GUI_NS {
                         SR_WORLD_NS::ScenePrefabLogic::SaveSOAsPrefab(serializer, pSceneObject);
 
                         if (auto&& pPrefabScene = SR_WORLD_NS::Scene::NewScene(path, SR_WORLD_NS::SceneLogicType::Prefab)) {
-                            pPrefabScene->GetLogicBase().DynamicCast<SR_WORLD_NS::ScenePrefabLogic>()->SetCustomSOData(serializer.CreateDeserializer());
+                            auto&& pDeserializer = serializer.CreateDeserializer();
+                            pDeserializer->Detach();
+                            pPrefabScene->GetLogicBase().DynamicCast<SR_WORLD_NS::ScenePrefabLogic>()->SetCustomSOData(std::move(pDeserializer));
                             pPrefabScene->SaveScene();
 
                             pSceneObject->DestroyChildren();

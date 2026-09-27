@@ -843,6 +843,18 @@ namespace SR_CORE_GUI_NS {
             }
             SR_GRAPH_GUI_NS::Immediate::EndMenu();
         }
+
+        SR_GRAPH_GUI_NS::Immediate::Separator();
+
+        if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("World")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Terrain")) {
+                if (auto&& pScene = m_engine->GetScene()) {
+                    auto&& pSO = pScene->InstanceFromFile("Engine/Prefabs/Terrain.prefab").StaticCast<SR_UTILS_NS::SceneObject>();
+                    InstantiateSO(pSO);
+                }
+            }
+            SR_GRAPH_GUI_NS::Immediate::EndMenu();
+        }
     }
 
     void EditorGUI::DrawMenuBar() {

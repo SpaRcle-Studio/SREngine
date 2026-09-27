@@ -8,6 +8,7 @@
 #include <Engine/stdInclude.h>
 
 #include <Graphics/Types/IRenderComponent.h>
+#include <Graphics/Memory/SSBO.h>
 
 #include <Utils/Math/Vector3.h>
 #include <Utils/Math/AABB.h>
@@ -64,6 +65,50 @@ namespace SR_CORE_NS {
         SR_NODISCARD bool IsVisible(const SR_MATH_NS::AABB& bounds) const noexcept;
     };
 
+    /// Максимум одновременно учитываемых приминающих точек (объекты + точки их следов).
+    static constexpr uint32_t SR_TERRAIN_GRASS_MAX_BENDERS = 256;
+
+    /// Одна приминающая точка. Раскладка совпадает с SSBO "grassBenders" в шейдере (std430, 32 байта).
+    struct TerrainGrassBenderGPU {
+        SR_MATH_NS::FVector3 position;
+        float_t radius = 0.f;
+        SR_MATH_NS::FVector3 direction; /// направление движения в плоскости XZ (нулевое - трава расходится от центра)
+        float_t strength = 0.f;
+    };
+
+    static_assert(sizeof(TerrainGrassBenderGPU) == 32, "TerrainGrassBenderGPU must be 32 bytes!");
+
+    /// Общий для всех чанков набор приминающих точек. Хранит свой SSBO на каждый кадр в полёте:
+    /// командные буферы кешируются, поэтому писать в буфер кадра, который ещё читает GPU, нельзя.
+    /// @noCopyable
+    class TerrainGrassBenders : public SR_HTYPES_NS::SharedPtr<TerrainGrassBenders> {
+        using Super = SR_HTYPES_NS::SharedPtr<TerrainGrassBenders>;
+    public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<TerrainGrassBenders>;
+
+    public:
+        TerrainGrassBenders();
+
+    public:
+        /// Поток сцены.
+        void SetBenders(const SR_UTILS_NS::Vector<TerrainGrassBenderGPU>& benders);
+
+        /// Поток рендера. Заливает актуальные данные в SSBO текущего кадра и возвращает его.
+        SR_NODISCARD int32_t PrepareFrame(SR_GRAPH_NS::Pipeline* pPipeline, uint32_t& count);
+
+        void FreeVideoMemory();
+
+    private:
+        std::mutex m_mutex;
+        std::array<TerrainGrassBenderGPU, SR_TERRAIN_GRASS_MAX_BENDERS> m_data = { };
+        uint32_t m_count = 0;
+        uint64_t m_version = 0;
+
+        std::array<SR_GRAPH_NS::SSBOInstance::Ptr, SR_MAX_FRAMES_IN_FLIGHT> m_SSBOs;
+        std::array<uint64_t, SR_MAX_FRAMES_IN_FLIGHT> m_uploadedVersions = { };
+
+    };
+
     /// Рендерер травы одного чанка террейна. Добавляется на объект чанка системой TerrainGrass автоматически.
     /// Геометрии нет вообще: травинка строится в шейдере по VERTEX_INDEX (triangle strip), а инстанс-буфер
     /// статичен и перезаливается только при перегенерации травы чанка. Командные буферы пересобираются
@@ -82,6 +127,8 @@ namespace SR_CORE_NS {
         bool UpdateLod(const SR_MATH_NS::FVector3& observer, const TerrainGrassLodParams& params, const TerrainGrassCullCone* pCone);
 
         void SetCastShadows(bool castShadows) { m_castShadows = castShadows; }
+        /// Поток сцены. Общий набор приминающих точек.
+        void SetBenders(const TerrainGrassBenders::Ptr& pBenders);
 
         SR_NODISCARD uint32_t GetInstancesCount() const noexcept { return m_instancesCount; }
         SR_NODISCARD uint32_t GetDrawnInstancesCount() const noexcept { return m_drawnCount; }
@@ -95,6 +142,7 @@ namespace SR_CORE_NS {
 
         void UseMaterial(SR_GTYPES_NS::Shader& shader) override;
         void UseModelMatrix(SR_GTYPES_NS::Shader& shader) override;
+        void UseSSBO() override;
 
         SR_NODISCARD int32_t GetVirtualUBO() const override { return m_virtualUBO; }
         /// Отсечение выполняется самим рендерером по ячейкам (см. UpdateLod), AABB объекта чанка для травы не подходит.
@@ -124,6 +172,7 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::Vector<uint8_t> m_cellLevels;
         SR_UTILS_NS::Vector<DrawRange> m_ranges;
         TerrainGrassLodParams m_lodParams;
+        TerrainGrassBenders::Ptr m_pBenders;
         bool m_isDataDirty = false;
 
         std::atomic<bool> m_castShadows = false;

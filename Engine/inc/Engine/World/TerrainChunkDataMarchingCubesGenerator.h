@@ -81,7 +81,7 @@ namespace SR_CORE_NS {
         uint32_t m_vertexHashTableSize = 800000;
 
         /// @property
-        SR_MATH_NS::FVector3 m_geometryScale = SR_MATH_NS::FVector3(1.0f, 1.0f, 1.0f);
+        SR_MATH_NS::FVector3 m_geometryScale = SR_MATH_NS::FVector3(2.f);
 
     private:
         bool m_isInitialized = false;

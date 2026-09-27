@@ -160,8 +160,8 @@
 - `SR_UTILS_NS::Set` - аналог `std::set`.
 - `SR_UTILS_NS::String` - аналог `std::string`.
 - `SR_UTILS_NS::StringView` - аналог `std::string_view`.
-- `SR_UTILS_NS::UnorderedMap` - аналог `std::unordered_map`.
-- `SR_UTILS_NS::UnorderedSet` - аналог `std::unordered_set`.
+- `SR_HTYPES_NS::FlatHashMap` - аналог `std::unordered_map`.
+- `SR_HTYPES_NS::FlatHashSet` - аналог `std::unordered_set`.
 - `SR_UTILS_NS::SharedPtr` - аналог `std::shared_ptr`. Но более мощный, больше похож на Intrusive Pointer, с возможностью кастования и без необходимости использования `std::enable_shared_from_this`.
 - `SR_HTYPES_NS::Function` - аналог `std::function`, но оптимизированный для избежания лишних аллокаций и с возможностью использования в качестве callback без необходимости создания отдельного объекта.
 - `SR_HTYPES_NS::SortedVector` - аналог `std::vector`, но с возможностью хранения элементов в отсортированном виде и поиска по ключу.
