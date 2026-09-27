@@ -74,7 +74,7 @@ namespace SR_CORE_NS {
         using Super = SR_GTYPES_NS::IRenderComponent;
     public:
         /// Поток сцены. Данные будут залиты на GPU при ближайшей сборке командного буфера.
-        void SetInstances(std::vector<TerrainGrassInstance>&& instances, std::vector<TerrainGrassCell>&& cells);
+        void SetInstances(SR_UTILS_NS::Vector<TerrainGrassInstance>&& instances, SR_UTILS_NS::Vector<TerrainGrassCell>&& cells);
         void ClearInstances();
 
         /// Поток сцены. Пересчитывает LOD и видимость ячеек. Возвращает true, если набор отрисовки изменился.
@@ -118,11 +118,11 @@ namespace SR_CORE_NS {
     private:
         mutable std::mutex m_mutex;
 
-        std::vector<TerrainGrassInstance> m_pendingInstances;
-        std::vector<TerrainGrassCell> m_cells;
+        SR_UTILS_NS::Vector<TerrainGrassInstance> m_pendingInstances;
+        SR_UTILS_NS::Vector<TerrainGrassCell> m_cells;
         /// Упакованный уровень ячейки: биты 0..5 - число корзин rank, бит 7 - полная детализация травинки.
-        std::vector<uint8_t> m_cellLevels;
-        std::vector<DrawRange> m_ranges;
+        SR_UTILS_NS::Vector<uint8_t> m_cellLevels;
+        SR_UTILS_NS::Vector<DrawRange> m_ranges;
         TerrainGrassLodParams m_lodParams;
         bool m_isDataDirty = false;
 

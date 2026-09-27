@@ -58,6 +58,7 @@ namespace SR_PTYPES_NS {
         struct CustomTriangleMeshData {
             SR_HTYPES_NS::FastMemoryArray<SR_MATH_NS::FVector3> vertices;
             SR_HTYPES_NS::FastMemoryArray<uint32_t> indices;
+            bool isDirty = true;
         };
     public:
         using PhysicsScenePtr = SR_HTYPES_NS::SharedPtr<PhysicsScene>;
@@ -120,6 +121,7 @@ namespace SR_PTYPES_NS {
         SR_NODISCARD const SR_MATH_NS::FVector3& GetScale() const noexcept { return m_scale; }
         SR_NODISCARD PhysicsMaterial::Ptr GetPhysicsMaterial() const noexcept { return m_materialData; }
         SR_NODISCARD const CustomTriangleMeshData& GetCustomTriangleMeshData() const noexcept { return m_customTriangleMeshData; }
+        SR_NODISCARD CustomTriangleMeshData& GetCustomTriangleMeshData() noexcept { return m_customTriangleMeshData; }
 
         SR_NODISCARD bool HasGeometry() const noexcept;
         SR_NODISCARD bool IsShapeValid() const noexcept;

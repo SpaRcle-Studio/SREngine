@@ -326,6 +326,7 @@ namespace SR_PTYPES_NS {
         SR_TRACY_ZONE;
         std::swap(m_customTriangleMeshData.vertices, vertices);
         SRAssert(!m_customTriangleMeshData.vertices.empty());
+        m_customTriangleMeshData.isDirty = true;
         OnShapeDirty();
     }
 
@@ -333,6 +334,7 @@ namespace SR_PTYPES_NS {
         SR_TRACY_ZONE;
         std::swap(m_customTriangleMeshData.indices, indices);
         SRAssert(!m_customTriangleMeshData.indices.empty());
+        m_customTriangleMeshData.isDirty = true;
         OnShapeDirty();
     }
 

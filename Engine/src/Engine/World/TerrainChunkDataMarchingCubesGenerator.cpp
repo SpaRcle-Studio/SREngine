@@ -51,7 +51,7 @@ namespace SR_CORE_NS {
         });
     }
 
-    void TerrainChunkDataMarchingCubesGenerator::GenerateChunkData(Terrain& terrain, ITerrainChunk& chunk, float_t distance) {
+    void TerrainChunkDataMarchingCubesGenerator::GenerateChunkData(Terrain& terrain, ITerrainChunk& chunk, const TerrainObserverData& observer, float_t distance) {
         SR_TRACY_ZONE;
 
         if (!Init()) {
@@ -222,8 +222,11 @@ namespace SR_CORE_NS {
             }
 
             pProceduralMesh->SetEnabled(true);
-            pCollisionShape->SetEnabled(true);
-            pRigidBody->SetEnabled(true);
+
+            if (terrain.GetChunkGenerator()->IsCollisionEnabledAt(chunk)) {
+                pCollisionShape->SetEnabled(true);
+                pRigidBody->SetEnabled(true);
+            }
 
             pCollisionShape->SwapCustomTriangleMeshVertices(m_verticesPositions);
             pCollisionShape->SwapCustomTriangleMeshIndices(m_optimizedIndices);
@@ -260,6 +263,8 @@ namespace SR_CORE_NS {
                 grassMesh.positions.resize(vertexCount);
                 grassMesh.normals.resize(vertexCount);
                 grassMesh.materials.resize(vertexCount);
+                grassMesh.materials2.resize(vertexCount);
+                grassMesh.blends.resize(vertexCount);
 
                 for (uint64_t i = 0; i < vertexCount; ++i) {
                     const auto position = *static_cast<SR_MATH_NS::FVector3*>(m_vertices.GetVertex(i, SR_UTILS_NS::VertexAttribute::Position));
@@ -268,6 +273,8 @@ namespace SR_CORE_NS {
                     /// неравномерный масштаб: нормаль преобразуется обратным масштабом
                     grassMesh.normals[i] = (normal / scale).Normalized();
                     grassMesh.materials[i] = *static_cast<uint32_t*>(m_vertices.GetVertex(i, SR_UTILS_NS::VertexAttribute::MaterialID0));
+                    grassMesh.materials2[i] = *static_cast<uint32_t*>(m_vertices.GetVertex(i, SR_UTILS_NS::VertexAttribute::MaterialID1));
+                    grassMesh.blends[i] = *static_cast<float_t*>(m_vertices.GetVertex(i, SR_UTILS_NS::VertexAttribute::BlendFactor));
                 }
 
                 grassMesh.indices.assign(m_indices.begin(), m_indices.end());
@@ -320,6 +327,9 @@ namespace SR_CORE_NS {
     void TerrainMarchingCubesChunkData::SwitchPhysics(bool enable) {
         if (auto&& pChunkObject = m_chunk->GetObject()) {
             if (auto&& pCollisionShape = pChunkObject->GetComponent<SR_PTYPES_NS::CollisionShape>()) {
+                if (enable && pCollisionShape->GetCustomTriangleMeshData().indices.empty()) {
+                    return;
+                }
                 pCollisionShape->SetEnabled(enable);
             }
             if (auto&& pRigidBody = pChunkObject->GetComponent<SR_PTYPES_NS::Rigidbody>()) {

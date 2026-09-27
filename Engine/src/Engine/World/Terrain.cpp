@@ -57,13 +57,14 @@ namespace SR_CORE_NS {
         Super::Update(dt);
 
         if (m_chunkGenerator) {
-            m_chunkGenerator->LoadNextChunk([this](ITerrainChunk& chunk) {
+            auto&& observer = GetObserver();
+            m_chunkGenerator->LoadNextChunk([this, &observer](ITerrainChunk& chunk) {
                 if (m_chunkDataGenerator) {
-                    m_chunkDataGenerator->GenerateChunkData(*this, chunk, 0.f);
+                    m_chunkDataGenerator->GenerateChunkData(*this, chunk, observer, 0.f);
                 }
                 chunk.SetStatus(ITerrainChunk::Status::Loaded);
             });
-            m_chunkGenerator->Update(*this, dt);
+            m_chunkGenerator->Update(*this, observer, dt);
         }
 
         if (m_grass) {
@@ -83,6 +84,10 @@ namespace SR_CORE_NS {
             return const_cast<TerrainGrass*>(m_grass.Get());
         }
         return nullptr;
+    }
+
+    ITerrainChunkGenerator* Terrain::GetChunkGenerator() const noexcept {
+        return const_cast<ITerrainChunkGenerator*>(m_chunkGenerator.Get());
     }
 
     TerrainObserverData Terrain::GetObserver() const {

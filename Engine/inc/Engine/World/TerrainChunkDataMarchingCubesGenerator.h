@@ -49,7 +49,7 @@ namespace SR_CORE_NS {
         using Super = ITerrainChunkDataGenerator;
         SR_CLASS()
     public:
-        void GenerateChunkData(Terrain& terrain, ITerrainChunk& chunk, float_t distance) override;
+        void GenerateChunkData(Terrain& terrain, ITerrainChunk& chunk, const TerrainObserverData& observer, float_t distance) override;
 
     private:
         bool Init();

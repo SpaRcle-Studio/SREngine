@@ -110,6 +110,8 @@ namespace SR_CORE_NS {
         settings.maxInstancesPerChunk = m_maxInstancesPerChunk;
         settings.seed = m_seed;
         settings.allowedMaterials.assign(m_allowedMaterials.begin(), m_allowedMaterials.end());
+        settings.materialWeightDensity = m_materialWeightDensity;
+        settings.materialWeightThreshold = std::clamp(m_materialWeightThreshold, 0.f, 1.f);
         return settings;
     }
 
@@ -391,12 +393,24 @@ namespace SR_CORE_NS {
         std::vector<RawInstance> raw;
         raw.reserve(std::min<size_t>(indices.size() / 3 * 8, settings.maxInstancesPerChunk));
 
-        const auto isMaterialAllowed = [&](uint32_t vertex) {
-            if (!hasMaterials) {
-                return true;
-            }
-            const uint32_t material = mesh.materials[vertex];
+        const bool hasBlend = hasMaterials && mesh.materials2.size() == positions.size() && mesh.blends.size() == positions.size();
+
+        const auto isAllowed = [&](uint32_t material) {
             return std::find(settings.allowedMaterials.begin(), settings.allowedMaterials.end(), material) != settings.allowedMaterials.end();
+        };
+
+        /// Доля разрешённых материалов в вершине [0, 1] с учётом смешивания основного и второго материала
+        const auto materialWeight = [&](uint32_t vertex) -> float_t {
+            if (!hasMaterials) {
+                return 1.f;
+            }
+            const float_t weight1 = isAllowed(mesh.materials[vertex]) ? 1.f : 0.f;
+            if (!hasBlend) {
+                return weight1;
+            }
+            const float_t weight2 = isAllowed(mesh.materials2[vertex]) ? 1.f : 0.f;
+            const float_t blend = std::clamp(mesh.blends[vertex], 0.f, 1.f);
+            return weight1 * (1.f - blend) + weight2 * blend;
         };
 
         const auto densityMask = [&](const SR_MATH_NS::FVector3& worldPos, float_t up) -> float_t {
@@ -434,7 +448,13 @@ namespace SR_CORE_NS {
                 continue;
             }
 
-            if (!isMaterialAllowed(ia) && !isMaterialAllowed(ib) && !isMaterialAllowed(ic)) {
+            const float_t weightA = materialWeight(ia);
+            const float_t weightB = materialWeight(ib);
+            const float_t weightC = materialWeight(ic);
+
+            /// Без плотности по весу материала точка либо годится целиком, либо нет
+            const float_t weightCutoff = settings.materialWeightDensity ? settings.materialWeightThreshold : std::max(settings.materialWeightThreshold, 0.5f);
+            if (std::max({ weightA, weightB, weightC }) < weightCutoff || std::max({ weightA, weightB, weightC }) <= 0.f) {
                 continue;
             }
 
@@ -521,9 +541,19 @@ namespace SR_CORE_NS {
                     normal = (len > 1e-3f && (normal / len).Dot(faceNormal) > 0.5f) ? normal / len : faceNormal;
                 }
 
+                /// вес материала в точке травинки
+                float_t materialFactor = 1.f;
+                if (hasMaterials) {
+                    const float_t weight = weightA * w + weightB * u + weightC * v;
+                    if (weight < weightCutoff || weight <= 0.f) {
+                        continue;
+                    }
+                    materialFactor = settings.materialWeightDensity ? weight : 1.f;
+                }
+
                 /// отбор по маске плотности - на склонах и проплешинах травинки исчезают плавно, а не порогом.
                 /// Для наклона берётся худшая из нормалей, чтобы трава не лезла на стены через сглаживание.
-                if (GrassToFloat(h2) >= densityMask(worldPos, std::min(normal.y, faceNormal.y + 0.1f))) {
+                if (GrassToFloat(h2) >= materialFactor * densityMask(worldPos, std::min(normal.y, faceNormal.y + 0.1f))) {
                     continue;
                 }
 

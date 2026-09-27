@@ -23,10 +23,11 @@ namespace SR_PTYPES_NS {
 
         auto&& pPhysics = GetShape()->GetRigidbody()->GetLibrary<PhysXLibraryImpl>()->GetPxPhysics();
 
+        auto&& customTriangleMesh = GetShape()->GetCustomTriangleMeshData();
         const bool isNeedReCreate = m_shapes.empty()
                 || GetShape()->GetType() != m_currentShapeType
                 || GetShape()->GetBounds() != m_currentBounds
-                || GetShape()->GetType() == ShapeType::Convex3D || GetShape()->GetType() == ShapeType::TriangleMesh3D;
+                || ((GetShape()->GetType() == ShapeType::Convex3D || GetShape()->GetType() == ShapeType::TriangleMesh3D) && customTriangleMesh.isDirty);
 
         m_currentShapeType = GetShape()->GetType();
         m_currentBounds = GetShape()->GetBounds();
@@ -98,7 +99,6 @@ namespace SR_PTYPES_NS {
                 case ShapeType::TriangleMesh3D: {
                     m_shapes.resize(1);
 
-                    auto&& customTriangleMesh = GetShape()->GetCustomTriangleMeshData();
                     if (!customTriangleMesh.vertices.empty() && !customTriangleMesh.indices.empty()) {
                         physx::PxTriangleMesh* pTriangleMesh = CreateTriangleMesh(customTriangleMesh.vertices, customTriangleMesh.indices);
 
@@ -106,7 +106,7 @@ namespace SR_PTYPES_NS {
                             SR_ERROR("PhysXCollisionShape::UpdateShape() : failed to create triangle mesh from custom data!");
                             return false;
                         }
-
+                        customTriangleMesh.isDirty = false;
                         m_shapes[0] = pPhysics->createShape(physx::PxTriangleMeshGeometry(pTriangleMesh), *pMaterial);
                         break;
                     }

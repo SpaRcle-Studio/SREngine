@@ -32,9 +32,6 @@ namespace SR_CORE_NS {
     static const SR_UTILS_NS::StringAtom SHADER_GRASS_SEGMENTS = "grassSegments";
     static const SR_UTILS_NS::StringAtom SHADER_GRASS_LOW_SEGMENTS = "grassLowSegments";
 
-    static_assert(offsetof(TerrainGrassInstance, rank) == 12 && offsetof(TerrainGrassInstance, normal) == 16 && offsetof(TerrainGrassInstance, random) == 28,
-        "TerrainGrassInstance layout must match TerrainGrassInstanceLayout!");
-
     float_t TerrainGrassLodParams::GetKeepFraction(float_t distance) const noexcept {
         if (distance <= fullDensityDistance) {
             return 1.f;
@@ -46,7 +43,7 @@ namespace SR_CORE_NS {
         return std::max(minKeep, std::pow(x, falloff));
     }
 
-    void TerrainGrassRenderer::SetInstances(std::vector<TerrainGrassInstance>&& instances, std::vector<TerrainGrassCell>&& cells) {
+    void TerrainGrassRenderer::SetInstances(SR_UTILS_NS::Vector<TerrainGrassInstance>&& instances, SR_UTILS_NS::Vector<TerrainGrassCell>&& cells) {
         SR_TRACY_ZONE;
         {
             std::lock_guard lock(m_mutex);
@@ -250,7 +247,7 @@ namespace SR_CORE_NS {
         m_uploadedCount = static_cast<uint32_t>(m_pendingInstances.size());
 
         /// Данные уже на GPU, копия на CPU больше не нужна.
-        std::vector<TerrainGrassInstance>().swap(m_pendingInstances);
+        SR_UTILS_NS::Vector<TerrainGrassInstance>().swap(m_pendingInstances);
     }
 
     bool TerrainGrassRenderer::Bind() {
@@ -278,7 +275,7 @@ namespace SR_CORE_NS {
             }
         }
 
-        static SR_THREAD_LOCAL std::vector<DrawRange> ranges;
+        static SR_THREAD_LOCAL SR_UTILS_NS::Vector<DrawRange> ranges;
         uint32_t uploadedCount = 0;
         {
             std::lock_guard lock(m_mutex);

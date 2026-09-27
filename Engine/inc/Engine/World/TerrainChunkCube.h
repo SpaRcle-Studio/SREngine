@@ -33,8 +33,14 @@ namespace SR_CORE_NS {
         using Super = ITerrainChunkGenerator;
         SR_CLASS()
     public:
-        void Update(Terrain& terrain, float_t dt) override;
+        void Update(Terrain& terrain, const TerrainObserverData& observer, float_t dt) override;
         void LoadNextChunk(const SR_HTYPES_NS::Function<void(ITerrainChunk&)>& loaderFn) override;
+
+        SR_NODISCARD bool IsCollisionEnabledAt(const ITerrainChunk& chunk) const override;
+
+    private:
+        void LoadChunks();
+        void UpdatePhysics();
 
     private:
         /// @property @notNull
@@ -45,6 +51,8 @@ namespace SR_CORE_NS {
         SR_MATH_NS::IVector3 m_maxLoadDistance = SR_MATH_NS::IVector3(4, 1, 4);
         /// @property @range(1, 512)
         SR_MATH_NS::IVector3 m_unloadDistance = SR_MATH_NS::IVector3(4, 1, 4);
+        /// @property @range(1, 512)
+        uint32_t m_physicsDistance = 1;
         /// @property
         SR_MATH_NS::FVector3 m_chunkSize = SR_MATH_NS::FVector3(124.0f, 124.0f, 124.0f);
         /// @property

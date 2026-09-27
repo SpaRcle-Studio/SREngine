@@ -16,6 +16,7 @@
 
 namespace SR_CORE_NS {
     class Terrain;
+    class TerrainObserverData;
     class ITerrainChunk;
 
     /// @abstract
@@ -76,7 +77,7 @@ namespace SR_CORE_NS {
         ITerrainChunkDataGenerator();
 
     public:
-        virtual void GenerateChunkData(Terrain& terrain, ITerrainChunk& chunk, float_t distance) { }
+        virtual void GenerateChunkData(Terrain& terrain, ITerrainChunk& chunk, const TerrainObserverData& observer, float_t distance) { }
 
     };
 
@@ -88,8 +89,10 @@ namespace SR_CORE_NS {
         ITerrainChunkGenerator();
 
     public:
-        virtual void Update(Terrain& terrain, float_t dt) { }
+        virtual void Update(Terrain& terrain, const TerrainObserverData& observer, float_t dt) { }
         virtual void LoadNextChunk(const SR_HTYPES_NS::Function<void(ITerrainChunk&)>& loaderFn) { }
+
+        SR_NODISCARD virtual bool IsCollisionEnabledAt(const ITerrainChunk& chunk) const { return false; }
 
     protected:
         /// @property
@@ -123,8 +126,8 @@ namespace SR_CORE_NS {
 
         SR_NODISCARD TerrainObserverData GetObserver() const;
 
-        /// nullptr, если система травы отключена
         SR_NODISCARD TerrainGrass* GetGrass() const noexcept;
+        SR_NODISCARD ITerrainChunkGenerator* GetChunkGenerator() const noexcept;
 
     private:
         /// @property @tooltip(If not present, will be used main camera of the scene)

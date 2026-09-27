@@ -19,7 +19,9 @@ namespace SR_CORE_NS {
     struct TerrainGrassSourceMesh {
         std::vector<SR_MATH_NS::FVector3> positions;
         std::vector<SR_MATH_NS::FVector3> normals;
-        std::vector<uint32_t> materials; /// опционально, по вершине
+        std::vector<uint32_t> materials;  /// опционально, по вершине: основной материал
+        std::vector<uint32_t> materials2; /// опционально, по вершине: второй материал
+        std::vector<float_t> blends;      /// опционально, по вершине: доля второго материала [0, 1]
         std::vector<uint32_t> indices;
         SR_MATH_NS::FVector3 origin;     /// мировая позиция объекта чанка (для детерминированного шума)
         /// Треугольники marching cubes лежат внутри одного вокселя, поэтому ребро длиннее этого значения
@@ -70,8 +72,8 @@ namespace SR_CORE_NS {
         struct Result {
             uint64_t generation = 0;
             SR_HTYPES_NS::SharedPtr<TerrainGrassRenderer> pRenderer;
-            std::vector<TerrainGrassInstance> instances;
-            std::vector<TerrainGrassCell> cells;
+            SR_UTILS_NS::Vector<TerrainGrassInstance> instances;
+            SR_UTILS_NS::Vector<TerrainGrassCell> cells;
         };
 
         struct Settings {
@@ -86,6 +88,8 @@ namespace SR_CORE_NS {
             uint32_t maxInstancesPerChunk = 0;
             int64_t seed = 0;
             std::vector<uint32_t> allowedMaterials;
+            bool materialWeightDensity = true;
+            float_t materialWeightThreshold = 0.f;
         };
 
         void StartWorker();
@@ -128,6 +132,10 @@ namespace SR_CORE_NS {
         int64_t m_seed = 1337;
         /// @property @group(Placement) @tooltip(Пустой список - трава на любом материале)
         SR_UTILS_NS::Vector<uint32_t> m_allowedMaterials = { 0 };
+        /// @property @group(Placement) @tooltip(Плотность травы пропорциональна доле разрешённых материалов в точке (с учётом смешивания))
+        bool m_materialWeightDensity = true;
+        /// @property @group(Placement) @tooltip(Если доля разрешённых материалов меньше этого значения - травы нет)
+        float_t m_materialWeightThreshold = 0.1f;
 
         /// @property @group(LOD)
         float_t m_fullDensityDistance = 12.f;
