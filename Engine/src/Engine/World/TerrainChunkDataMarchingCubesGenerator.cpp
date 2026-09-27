@@ -21,8 +21,8 @@ namespace SR_CORE_NS {
         std::memset(localSums.data(), 0, localSums.size() * sizeof(SR_MATH_NS::FVector3));
 
         // вычисляем нормали по треугольникам
-        auto range = std::views::iota(size_t(0), indices.size() / 3);
-        SR_UTILS_NS::ForEach<SR_UTILS_NS::ExecutionPolicy::Seq>(range.begin(), range.end(), [&](size_t t){
+        auto range1 = std::views::iota(size_t(0), indices.size() / 3);
+        SR_UTILS_NS::ForEach<SR_UTILS_NS::ExecutionPolicy::Seq>(range1.begin(), range1.end(), [&](size_t t){
             uint32_t ia = indices[t * 3 + 0];
             uint32_t ib = indices[t * 3 + 1];
             uint32_t ic = indices[t * 3 + 2];
@@ -39,8 +39,8 @@ namespace SR_CORE_NS {
         });
 
         // объединяем локальные суммы
-        range = std::views::iota(size_t(0), vertices.GetVertexCount());
-        SR_UTILS_NS::ForEach<SR_UTILS_NS::ExecutionPolicy::ParUnSeq>(range.begin(), range.end(), [&](size_t index){
+        auto range2 = std::views::iota(size_t(0), vertices.GetVertexCount());
+        SR_UTILS_NS::ForEach<SR_UTILS_NS::ExecutionPolicy::ParUnSeq>(range2.begin(), range2.end(), [&](size_t index){
             SR_MATH_NS::FVector3 normal = localSums[index].Normalized();
             SR_MATH_NS::FVector3 tangent = SR_MATH_NS::FVector3::Cross(normal, SR_MATH_NS::FVector3(0, 1, 0)).Normalized();
             vertices.SetVertex(index, SR_UTILS_NS::VertexAttribute::Normal, &normal);
