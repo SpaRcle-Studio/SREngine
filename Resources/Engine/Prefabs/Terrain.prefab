@@ -1,6 +1,8 @@
 sra format
 use tabs: true
 0-r:Root
+	1-v:entityId
+		2-i:4415717882751573241
 	1-o:logic
 		2-v:type
 			3-s:ScenePrefabLogic
@@ -23,13 +25,6 @@ use tabs: true
 							7-v:type
 								8-s:TerrainChunkDataMarchingCubesGenerator
 							7-o:ptr
-								8-o:geometryScale
-									9-v:x
-										10-f:2
-									9-v:y
-										10-f:2
-									9-v:z
-										10-f:2
 						6-o:chunkGenerator
 							7-v:type
 								8-s:TerrainChunkCubeGenerator
@@ -85,7 +80,7 @@ use tabs: true
 																	17-s:
 														14-o:defaultShader
 															15-v:shaderPath
-																16-s:Samples/MarchingCubes/triplanar.srsl
+																16-s:Engine/Shaders/MarchingCubes/triplanar.srsl
 															15-a:uniforms
 																16-k:i
 																	17-o:d

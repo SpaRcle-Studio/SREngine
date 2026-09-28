@@ -1,0 +1,105 @@
+[[uniform], [public]] float textureScale = 0.5; // масштаб текстуры
+[[uniform], [public]] sampler2D soilTex;
+[[uniform], [public]] sampler2D stoneTex;
+[[uniform], [public]] sampler2D sandTex;
+
+float hash(vec2 p) {
+    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+}
+
+vec2 getTileOffset(vec2 pos) {
+    vec2 tile = floor(pos * 0.25); // размер тайла
+
+    float h = hash(tile);
+    float angle = h * 6.2831;
+
+    float s = sin(angle);
+    float c = cos(angle);
+
+    // небольшой сдвиг
+    vec2 offset = vec2(c, s) * 4.0; // амплитуда
+
+    return offset;
+}
+
+vec4 sampleTriplanar(sampler2D tex) {
+    vec3 n = normalize(NORMAL);
+
+    // веса для смешивания по осям
+    vec3 blend = abs(n);
+    blend = pow(blend, vec3(4.0));          // резкость перехода
+    blend /= (blend.x + blend.y + blend.z); // нормализация
+
+    // проекции координат для каждой плоскости
+    vec2 offX = getTileOffset(VERTEX.zy);
+    vec2 offY = getTileOffset(VERTEX.xz);
+    vec2 offZ = getTileOffset(VERTEX.xy);
+
+    vec2 uvX = VERTEX.zy * textureScale + offX;
+    vec2 uvY = VERTEX.xz * textureScale + offY;
+    vec2 uvZ = VERTEX.xy * textureScale + offZ;
+
+    // сэмплинг текстуры
+    vec4 x = texture(tex, uvX);
+    vec4 y = texture(tex, uvY);
+    vec4 z = texture(tex, uvZ);
+
+    // смешиваем по нормали
+    return x * blend.x + y * blend.y + z * blend.z;
+}
+
+vec4 getMaterialColor(uint matId) {
+    if (matId == 0) { return sampleTriplanar(soilTex); }
+    if (matId == 1) { return sampleTriplanar(stoneTex); }
+    if (matId == 2) { return sampleTriplanar(sandTex); }
+    return vec4(1.0);
+}
+
+vec4 triplanarMaterial() {
+    vec4 cA = getMaterialColor(MATERIAL_ID0);
+    vec4 cB = getMaterialColor(MATERIAL_ID1);
+    return mix(cA, cB, BLEND_FACTOR);
+}
+
+//vec4 sampleTriplanar(vec3 worldPos, vec3 normal) {
+//    vec3 n = normalize(normal);
+//
+//    vec3 blend = abs(n);
+//    blend = pow(blend, vec3(4.0));
+//    blend /= (blend.x + blend.y + blend.z);
+//
+//    // ----- offsets по крупным тайлам -----
+//    vec2 offX = getTileOffset(worldPos.zy);
+//    vec2 offY = getTileOffset(worldPos.xz);
+//    vec2 offZ = getTileOffset(worldPos.xy);
+//
+//    vec2 uvX = worldPos.zy * textureScale + offX;
+//    vec2 uvY = worldPos.xz * textureScale + offY;
+//    vec2 uvZ = worldPos.xy * textureScale + offZ;
+//
+//    vec4 x = texture(diffuse, uvX);
+//    vec4 y = texture(diffuse, uvY);
+//    vec4 z = texture(diffuse, uvZ);
+//
+//    return x * blend.x + y * blend.y + z * blend.z;
+//}
+
+vec2 fragment_uv() {
+    // uv не подходит для трипланарного текстурирования
+    return vec2(0.0);
+}
+
+vec4 fragment_diffuse(vec2 tiledUV) {
+    vec4 color = triplanarMaterial();
+    return color;
+}
+
+vec2 fragment_normal(vec2 uv) {
+    //return texture(normal, uv).rg;
+    return vec2(0.5, 0.5); // плоская нормаль, т.к. нормали в трипланаре не нужны
+}
+
+#define STANDARD_SHADER_CUSTOM_FRAGMENT
+#include <Engine/Shaders/standard.srsl>
+
+VertexType TriplanarMeshVertex;

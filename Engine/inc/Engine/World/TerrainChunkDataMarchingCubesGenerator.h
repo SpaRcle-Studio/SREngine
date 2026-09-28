@@ -58,11 +58,11 @@ namespace SR_CORE_NS {
         /// @property
         /// @customArgs(pick: enabled, filter name: Shader, relative: resources)
         /// @customArg(filter value: srsl)
-        SR_UTILS_NS::Path m_marchingCubesShader = "Samples/MarchingCubes/MarchingCubes.srsl";
+        SR_UTILS_NS::Path m_marchingCubesShader = "Engine/Shaders/MarchingCubes/MarchingCubes.srsl";
         /// @property
         /// @customArgs(pick: enabled, filter name: Shader, relative: resources)
         /// @customArg(filter value: srsl)
-        SR_UTILS_NS::Path m_densityShader = "Samples/MarchingCubes/Density.srsl";
+        SR_UTILS_NS::Path m_densityShader = "Engine/Shaders/MarchingCubes/Density.srsl";
 
         /// @property @group(Density)
         uint32_t m_densityCountAxis = 64;

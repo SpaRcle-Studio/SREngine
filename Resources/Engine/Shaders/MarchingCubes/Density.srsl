@@ -1,0 +1,282 @@
+ShaderType Compute;
+
+struct Voxel {
+    float density;     // текущая плотность
+    uint materialID;   // основной материал
+    uint materialID2;  // дополнительный материал
+    float blend; // смешивание между материалами
+};
+
+[[ssbo(voxels)]] Voxel[] voxels;
+
+[[const], [uniform]] int densityCountAxis = 0;
+[[const], [uniform]] float isoLevel = 0.2;
+[[const], [uniform]] ivec3 chunkCoord = ivec3(0, 0, 0);
+[[const], [uniform]] float noiseScale = 0.05;
+[[const], [uniform]] int seed = 42;
+
+float fade(float t) {
+    return t * t * t * (t * (t * 6.0 - 15.0) + 10.0);
+}
+
+float grad(int hash, vec3 p) {
+    int h = hash & 15;
+    float u = h < 8 ? p.x : p.y;
+    float v = h < 4 ? p.y : (h == 12 || h == 14 ? p.x : p.z);
+    return ((h & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v);
+}
+
+int permute(int x) {
+    return int(mod(float((x * 34 + 1) * x + seed), 289.0));
+}
+
+float perlinNoise(vec3 p) {
+    ivec3 pi = ivec3(floor(p));
+    vec3 pf = fract(p);
+
+    int A = permute(pi.x) + pi.y;
+    int AA = permute(A) + pi.z;
+    int AB = permute(A + 1) + pi.z;
+    int B = permute(pi.x + 1) + pi.y;
+    int BA = permute(B) + pi.z;
+    int BB = permute(B + 1) + pi.z;
+
+    vec3 f = vec3(fade(pf.x), fade(pf.y), fade(pf.z));
+
+    float res = mix(
+        mix(
+            mix(grad(permute(AA), pf),
+                grad(permute(BA), pf - vec3(1.0, 0.0, 0.0)),
+                f.x),
+            mix(grad(permute(AB), pf - vec3(0.0, 1.0, 0.0)),
+                grad(permute(BB), pf - vec3(1.0, 1.0, 0.0)),
+                f.x),
+            f.y),
+        mix(
+            mix(grad(permute(AA + 1), pf - vec3(0.0, 0.0, 1.0)),
+                grad(permute(BA + 1), pf - vec3(1.0, 0.0, 1.0)),
+                f.x),
+            mix(grad(permute(AB + 1), pf - vec3(0.0, 1.0, 1.0)),
+                grad(permute(BB + 1), pf - vec3(1.0, 1.0, 1.0)),
+                f.x),
+            f.y),
+        f.z);
+
+    return res * 0.5 + 0.5; // normalize to [0..1]
+}
+
+float fbm(vec3 p) {
+    float v = 0.0;
+    float a = 0.5;
+
+    for (int i = 0; i < 5; i++)
+    {
+        v += perlinNoise(p) * a;
+        p *= 2.0;
+        a *= 0.5;
+    }
+
+    return v;
+}
+
+float fbm2(vec2 p) {
+    return fbm(vec3(p.x, p.y, 0.0));
+}
+
+float ridged(vec3 p)
+{
+    float n = perlinNoise(p);
+    n = 1.0 - abs(n * 2.0 - 1.0);
+    return n * n;
+}
+
+/// ivec3 chunkCoord - координаты чанка в мире (могут быть отрицательными)
+Voxel CalculateVoxel(float density, vec3 worldPos, vec3 noisePos) {
+    Voxel voxel;
+    voxel.density = density;
+
+    float height = worldPos.y - 16.0;
+
+    // === БИОМ ===
+    float biome = fbm2(noisePos.xz * 0.02) * 0.5 + 0.5;
+
+    // 0 → пустыня
+    // 1 → нормальный/горный регион
+
+    // === ДОП. ВАРИАЦИЯ ===
+    float variation = fbm(noisePos * 0.1);
+
+    // === ВЫСОТНЫЕ ФАКТОРЫ ===
+    float sandLevel = 18.0 + biome * 10.0 + variation * 2.0;
+    float rockLevel = 35.0 + variation * 5.0;
+
+    // === ГЛУБИНА (ВАЖНО) ===
+    float underground = clamp(density / 10.0, 0.0, 1.0);
+
+    // === ВЕСА МАТЕРИАЛОВ ===
+    float sand = 0.0;
+    float grass = 0.0;
+    float rock = 0.0;
+
+    // --- песок ---
+    sand = 1.0 - smoothstep(sandLevel - 3.0, sandLevel + 3.0, height);
+    sand *= (1.0 - biome); // песок только в "пустынных" регионах
+
+    // --- трава ---
+    float grassZone = smoothstep(sandLevel - 2.0, sandLevel + 4.0, height) *
+                      (1.0 - smoothstep(rockLevel - 5.0, rockLevel + 5.0, height));
+
+    grass = grassZone * (1.0 - underground);
+
+    // --- камень ---
+    rock = underground; // под землей всегда камень
+
+    // плюс горы
+    float mountainFactor = smoothstep(30.0, 60.0, height);
+    rock = max(rock, mountainFactor);
+
+    // === НОРМАЛИЗАЦИЯ ===
+    vec3 weights = vec3(grass, rock, sand);
+    weights /= max(dot(weights, vec3(1.0)), 0.0001);
+
+    // === ПЕРЕГОН В ТВОЮ СХЕМУ (костыль, но ок) ===
+    if (weights.x > weights.y && weights.x > weights.z)
+    {
+        voxel.materialID = 0;
+        voxel.materialID2 = (weights.y > weights.z) ? 1 : 2;
+        voxel.blend = max(weights.y, weights.z);
+    }
+    else if (weights.y > weights.z)
+    {
+        voxel.materialID = 1;
+        voxel.materialID2 = (weights.x > weights.z) ? 0 : 2;
+        voxel.blend = max(weights.x, weights.z);
+    }
+    else
+    {
+        voxel.materialID = 2;
+        voxel.materialID2 = (weights.x > weights.y) ? 0 : 1;
+        voxel.blend = max(weights.x, weights.y);
+    }
+
+    return voxel;
+}
+
+Voxel CalculateVoxelMaterial(float density, vec3 noisePos) {
+    Voxel voxel;
+    voxel.density = density;
+
+    float matSoil   = smoothstep(0.0, 8.0, density) * fbm(noisePos * 0.2); // земля ближе к поверхности
+    float matStone  = smoothstep(-10.0, 5.0, -density) * ridged(noisePos * 0.1); // камень под землёй
+    float matSand   = smoothstep(5.0, 12.0, density) * fbm(noisePos * 0.3); // песок на поверхности
+
+    [[const]] int soil = 0;
+    [[const]] int stone = 1;
+    [[const]] int sand = 2;
+
+    // нормируем веса
+    vec3 weights = vec3(matSoil, matStone, matSand);
+    float sum = weights.x + weights.y + weights.z + 1e-6;
+    weights /= sum;
+
+    // выбираем два главных материала
+    int matA = 0;
+    int matB = 0;
+    float wA = 0.0;
+    float wB = 0.0;
+
+    if (weights.x > weights.y && weights.x > weights.z) { matA = soil; wA = weights.x; }
+    else if (weights.y > weights.z) { matA = stone; wA = weights.y; }
+    else { matA = sand; wA = weights.z; }
+
+    if (weights.x != wA) { matB = soil; wB = weights.x; }
+    else if (weights.y != wA) { matB = stone; wB = weights.y; }
+    else { matB = sand; wB = weights.z; }
+
+    // пересчёт blend относительно первого материала
+    float blend = wB / (wA + wB + 1e-6);
+
+    voxel.materialID   = uint(matA);
+    voxel.materialID2  = uint(matB);
+    voxel.blend        = blend;
+
+    return voxel;
+}
+
+[[THREADS(8, 8, 8)]]
+void compute() {
+    ivec3 voxelPos = ivec3(GLOBAL_INVOCATION_ID.xyz);
+
+    if (any(greaterThanEqual(voxelPos, ivec3(densityCountAxis)))) {
+       return;
+    }
+
+    int index = voxelPos.x
+             + voxelPos.y * densityCountAxis
+             + voxelPos.z * densityCountAxis * densityCountAxis;
+
+    // Глобальная мировая позиция
+    vec3 world = vec3(voxelPos + chunkCoord * (densityCountAxis - 2));
+    world.y += 32.0; // смещение, чтобы не было артефактов на границах чанков
+
+    vec3 noisePos = world * (max((noiseScale - isoLevel), 0.0) / 100.0);
+
+    float continents = fbm(noisePos * 0.01);
+    float hills = fbm(noisePos * 0.1) * 20.0;
+    float mountains = ridged(noisePos * 0.05) * 60.0;
+
+    float terrainHeight = 20.0 + hills + mountains * continents;
+    float density = terrainHeight - world.y;
+
+    voxels[index] = CalculateVoxel(density, world, noisePos);
+
+    // ----------------------
+    // Сглаживание материалов по соседям
+    // ----------------------
+    /*vec3 matWeights = vec3(0.0);
+
+    // координаты 6 соседей + текущий
+    ivec3 offsets[7] = { ivec3(0,0,0), ivec3(1,0,0), ivec3(-1,0,0), ivec3(0,1,0), ivec3(0,-1,0), ivec3(0,0,1), ivec3(0,0,-1) };
+
+    for (int i = 0; i < 7; i++) {
+        ivec3 nPos = voxelPos + offsets[i];
+        if (any(lessThan(nPos, ivec3(0))) || any(greaterThanEqual(nPos, ivec3(densityCountAxis)))) {
+            continue;
+        }
+
+        int nIndex = nPos.x + nPos.y*densityCountAxis + nPos.z*densityCountAxis*densityCountAxis;
+        float d = voxels[nIndex].density;
+
+        vec3 w = vec3(
+            smoothstep(0.0, 8.0, d) * fbm(noisePos * 0.2),  // земля
+            smoothstep(-10.0, 5.0, -d) * ridged(noisePos * 0.1), // камень
+            smoothstep(5.0, 12.0, d) * fbm(noisePos * 0.3)  // песок
+        );
+
+        matWeights += w;
+    }
+
+    // нормируем
+    matWeights /= 7.0;
+
+    // выбираем два самых больших материала
+    int matA = 0;
+    int matB = 0;
+    float wA = 0.0;
+    float wB = 0.0;
+
+    for (int i=0; i<3; i++) {
+        if (matWeights[i] > wA) {
+            wB = wA; matB = matA;
+            wA = matWeights[i]; matA = i;
+        } else if (matWeights[i] > wB) {
+            wB = matWeights[i]; matB = i;
+        }
+    }
+
+    float blend = wB / (wA + wB + 1e-6);
+
+    voxels[index].materialID  = uint(matA);
+    voxels[index].materialID2 = uint(matB);
+    voxels[index].blend       = blend;*/
+}
