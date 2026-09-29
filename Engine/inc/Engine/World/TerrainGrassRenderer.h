@@ -159,6 +159,8 @@ namespace SR_CORE_NS {
 
         /// Заливка отложенных данных на GPU. Только поток рендера, под m_mutex.
         void Calculate();
+        /// Под m_mutex, во время записи командного буфера текущего кадра.
+        void FreeRetiredVBOs(SR_GRAPH_NS::Pipeline* pPipeline);
         /// Под m_mutex.
         void RebuildRanges();
         void MarkRenderDirty();
@@ -180,6 +182,14 @@ namespace SR_CORE_NS {
         std::atomic<uint32_t> m_drawnCount = 0;
 
         uint32_t m_uploadedCount = 0;
+
+        /// Буфер, заменённый при перегенерации травы. Живёт, пока все кадры свапчейна не перезапишут
+        /// свои командные буферы - до этого GPU ещё может читать его из закешированных командных буферов.
+        struct RetiredVBO {
+            int32_t VBO = SR_ID_INVALID;
+            std::bitset<SR_MAX_FRAMES_IN_FLIGHT> rebuiltFrames;
+        };
+        SR_UTILS_NS::Vector<RetiredVBO> m_retiredVBOs;
 
         int32_t m_VBO = SR_ID_INVALID;
         int32_t m_virtualUBO = SR_ID_INVALID;

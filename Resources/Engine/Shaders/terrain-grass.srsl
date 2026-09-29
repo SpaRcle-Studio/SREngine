@@ -38,6 +38,8 @@ struct GrassBender {
 };
 
 [[ssbo(grassBenders)]] GrassBender[] grassBenders;
+/// Совпадает с SR_TERRAIN_GRASS_MAX_BENDERS
+[[const]] int GRASS_MAX_BENDERS = 256;
 [[uniform]] int grassBendersCount = 0;
 
 /// ------------------------------------------ параметры материала ------------------------------------------
@@ -313,7 +315,10 @@ void vertex() {
 
     /// ---- приминание
     vec3 bendPush = vec3(0.0);
-    for (int i = 0; i < grassBendersCount; ++i) {
+    /// Количество приходит из UBO. Если он не заполнен (сразу после пересоздания ресурсов при ресайзе), там может
+    /// оказаться мусор, а выход за размер SSBO или бесконечный цикл роняют устройство - поэтому жёсткий предел.
+    int bendersCount = clamp(grassBendersCount, 0, GRASS_MAX_BENDERS);
+    for (int i = 0; i < bendersCount; ++i) {
         bendPush += grassBendPush(grassBenders[i], root, height, forward);
     }
     float pressed = min(length(bendPush), 1.0);

@@ -229,8 +229,14 @@ namespace SR_CORE_NS {
 
         m_isDataDirty = false;
 
+        /// Старый буфер нельзя ни перезаписывать, ни удалять сразу: на него ссылаются закешированные командные
+        /// буферы других кадров свапчейна. Он освобождается в FreeRetiredVBOs(), когда все кадры перезаписаны.
+        if (m_VBO != SR_ID_INVALID) {
+            m_retiredVBOs.emplace_back(RetiredVBO { .VBO = m_VBO });
+            m_VBO = SR_ID_INVALID;
+        }
+
         if (m_pendingInstances.empty()) {
-            /// Буфер не освобождается: FreeVBO ждёт простоя GPU, а диапазоны отрисовки и так пусты.
             m_uploadedCount = 0;
             return;
         }
@@ -243,7 +249,7 @@ namespace SR_CORE_NS {
 
         SRAssert(TerrainGrassInstanceLayout.GetStride() == sizeof(TerrainGrassInstance));
         const uint64_t size = m_pendingInstances.size() * sizeof(TerrainGrassInstance);
-        m_VBO = pPipeline->AllocateVBO(m_VBO, size, m_pendingInstances.data());
+        m_VBO = pPipeline->AllocateVBO(SR_ID_INVALID, size, m_pendingInstances.data());
 
         if (m_VBO == SR_ID_INVALID) SR_UNLIKELY_ATTRIBUTE {
             SR_ERROR("TerrainGrassRenderer::Calculate() : failed to allocate grass instance buffer! Instances: {}", m_pendingInstances.size());
@@ -272,29 +278,34 @@ namespace SR_CORE_NS {
 
         auto&& pPipeline = GetPipeline();
 
-        if (auto&& pShader = pPipeline->GetCurrentShader()) {
-            auto&& macros = pShader->GetMacros();
-            if (macros.IsDefined("SR_DEFINE_CASCADED_SHADOW_MAP_PASS")) {
-                /// При инстансинге каскадов gl_InstanceIndex занят под индекс каскада, совместить с травой нельзя.
-                if (!m_castShadows || macros.IsDefined("CASCADES_INSTANCING")) {
-                    return;
-                }
-            }
-        }
-
         static SR_THREAD_LOCAL SR_UTILS_NS::Vector<DrawRange> ranges;
         uint32_t uploadedCount = 0;
+        int32_t VBO = SR_ID_INVALID;
         {
             std::lock_guard lock(m_mutex);
             Calculate();
+            /// Текущий кадр перезаписывается и больше не будет ссылаться на старые буферы
+            FreeRetiredVBOs(pPipeline);
+
+            if (auto&& pShader = pPipeline->GetCurrentShader()) {
+                auto&& macros = pShader->GetMacros();
+                if (macros.IsDefined("SR_DEFINE_CASCADED_SHADOW_MAP_PASS")) {
+                    /// При инстансинге каскадов gl_InstanceIndex занят под индекс каскада, совместить с травой нельзя.
+                    if (!m_castShadows || macros.IsDefined("CASCADES_INSTANCING")) {
+                        return;
+                    }
+                }
+            }
+
             if (m_VBO == SR_ID_INVALID || m_uploadedCount == 0 || m_ranges.empty()) {
                 return;
             }
             ranges = m_ranges;
             uploadedCount = m_uploadedCount;
+            VBO = m_VBO;
         }
 
-        pPipeline->BindVBO(m_VBO, 0, SR_GRAPH_NS::VertexInputRate::Instance);
+        pPipeline->BindVBO(VBO, 0, SR_GRAPH_NS::VertexInputRate::Instance);
 
         bool isFirst = true;
 
@@ -453,15 +464,50 @@ namespace SR_CORE_NS {
         return SR_UTILS_NS::VertexLayoutDescriptionsRef(TerrainGrassInstanceLayout);
     }
 
+    void TerrainGrassRenderer::FreeRetiredVBOs(SR_GRAPH_NS::Pipeline* pPipeline) {
+        if (m_retiredVBOs.empty() || !pPipeline) {
+            return;
+        }
+
+        const uint32_t framesCount = SR_MATH_NS::Clamp<uint32_t>(pPipeline->GetSwapchainImagesCount(), 1, SR_MAX_FRAMES_IN_FLIGHT);
+        const uint32_t frame = std::min<uint32_t>(pPipeline->GetCurrentImageIndex(), framesCount - 1);
+
+        for (auto pIt = m_retiredVBOs.begin(); pIt != m_retiredVBOs.end(); ) {
+            pIt->rebuiltFrames.set(frame);
+
+            bool isFree = true;
+            for (uint32_t i = 0; i < framesCount; ++i) {
+                if (!pIt->rebuiltFrames.test(i)) {
+                    isFree = false;
+                    break;
+                }
+            }
+
+            if (isFree) {
+                pPipeline->FreeVBO(&pIt->VBO);
+                pIt = m_retiredVBOs.erase(pIt);
+            }
+            else {
+                ++pIt;
+            }
+        }
+    }
+
     void TerrainGrassRenderer::FreeVideoMemory() {
         Super::FreeVideoMemory();
 
-        if (m_VBO != SR_ID_INVALID) {
-            GetPipeline()->FreeVBO(&m_VBO);
-        }
-
         {
             std::lock_guard lock(m_mutex);
+
+            if (m_VBO != SR_ID_INVALID) {
+                GetPipeline()->FreeVBO(&m_VBO);
+            }
+
+            for (auto&& retired : m_retiredVBOs) {
+                GetPipeline()->FreeVBO(&retired.VBO);
+            }
+            m_retiredVBOs.clear();
+
             m_uploadedCount = 0;
             /// Если данные ещё не были залиты, они останутся в m_pendingInstances. Иначе их нужно сгенерировать заново.
             m_isDataDirty = !m_pendingInstances.empty();
