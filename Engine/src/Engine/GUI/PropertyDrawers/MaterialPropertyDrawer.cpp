@@ -41,7 +41,7 @@ namespace SR_CORE_GUI_NS {
         /// copy data from old to new material
 
         auto&& defaultData = pOldMaterialData->GetDefaultShaderData();
-        if (auto&& pDefaultShader = defaultData.pShader) {
+        if (auto&& pDefaultShader = defaultData.GetShader()) {
             pNewMaterialData->GetDefaultShaderData().SetShader(pDefaultShader);
             defaultData.ForEachProperty([&](const SR_GRAPH_NS::MaterialShaderProperty& property) {
                 pNewMaterialData->GetDefaultShaderData().SetData(property.id, *property.data, property.type);

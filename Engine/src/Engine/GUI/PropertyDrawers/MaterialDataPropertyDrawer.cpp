@@ -183,50 +183,50 @@ namespace SR_CORE_GUI_NS {
 
                     wasReset = true;
                     SR_GTYPES_NS::Texture::Ptr pTexture = CoreResLoader::Load<SR_GTYPES_NS::Texture>(path);
-                    shaderData.SetData(property.id, pTexture, SR_GRAPH_NS::ShaderVarType::Sampler2D);
+                    shaderData.SetData(property.id, SR_UTILS_NS::ResourceRef<SR_GTYPES_NS::Texture>(pTexture), SR_GRAPH_NS::ShaderVarType::Sampler2D);
                 }
             }
         }
 
         switch (property.type) {
             case SR_GRAPH_NS::ShaderVarType::Vec2:
-                value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<SR_MATH_NS::FVector2>(*property.data));
+                value = SR_UTILS_NS::Reflection::Value::CreateRef(property.data->GetVec2());
                 feedback = m_vectorDrawer->Draw(propertyContext);
                 break;
             case SR_GRAPH_NS::ShaderVarType::Vec3:
-                value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<SR_MATH_NS::FVector3>(*property.data));
+                value = SR_UTILS_NS::Reflection::Value::CreateRef(property.data->GetVec3());
                 feedback = m_vectorDrawer->Draw(propertyContext);
                 break;
             case SR_GRAPH_NS::ShaderVarType::IVec3:
-                value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<SR_MATH_NS::IVector3>(*property.data));
+                value = SR_UTILS_NS::Reflection::Value::CreateRef(property.data->GetIVec3());
                 feedback = m_vectorDrawer->Draw(propertyContext);
                 break;
             case SR_GRAPH_NS::ShaderVarType::Vec4:
-                value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<SR_MATH_NS::FVector4>(*property.data));
+                value = SR_UTILS_NS::Reflection::Value::CreateRef(property.data->GetVec4());
                 feedback = m_vectorDrawer->Draw(propertyContext);
                 break;
             case SR_GRAPH_NS::ShaderVarType::Int:
-                value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<int32_t>(*property.data));
+                value = SR_UTILS_NS::Reflection::Value::CreateRef(property.data->GetInt());
                 SR_GRAPH_GUI_NS::Immediate::SameLine();
                 feedback = m_numericDrawer->Draw(propertyContext);
                 break;
             case SR_GRAPH_NS::ShaderVarType::Float:
-                value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<float_t>(*property.data));
+                value = SR_UTILS_NS::Reflection::Value::CreateRef(property.data->GetFloat());
                 SR_GRAPH_GUI_NS::Immediate::SameLine();
                 feedback = m_numericDrawer->Draw(propertyContext);
                 break;
             case SR_GRAPH_NS::ShaderVarType::Bool: {
                 SR_GRAPH_GUI_NS::Immediate::SameLine();
-                bool boolean = std::get<int32_t>(*property.data) != 0;
+                bool boolean = property.data->GetInt() != 0;
                 value = SR_UTILS_NS::Reflection::Value::CreateRef(boolean);
                 feedback = m_boolDrawer->Draw(propertyContext);
-                std::get<int32_t>(*property.data) = boolean ? 1 : 0;
+                property.data->GetInt() = boolean ? 1 : 0;
                 break;
             }
             case SR_GRAPH_NS::ShaderVarType::Sampler2D: {
                 SR_GRAPH_GUI_NS::Immediate::SameLine();
                 SR_UTILS_NS::Path path;
-                if (auto&& pTexture = std::get<SR_GTYPES_NS::Texture::Ptr>(*property.data)) {
+                if (auto&& pTexture = property.data->GetSampler()) {
                     path = pTexture->GetResourcePath();
                 }
                 value = SR_UTILS_NS::Reflection::Value::CreateRef(path);
@@ -234,10 +234,10 @@ namespace SR_CORE_GUI_NS {
                 feedback = m_pathDrawer->Draw(propertyContext);
                 if (feedback.isChanged) {
                     SR_GTYPES_NS::Texture::Ptr pTexture = path.empty() ? nullptr : CoreResLoader::Load<SR_GTYPES_NS::Texture>(path);
-                    shaderData.SetData(property.id, pTexture, SR_GRAPH_NS::ShaderVarType::Sampler2D);
+                    shaderData.SetData(property.id, SR_UTILS_NS::ResourceRef<SR_GTYPES_NS::Texture>(pTexture), SR_GRAPH_NS::ShaderVarType::Sampler2D);
                 }
 
-                auto&& pTexture = std::get<SR_GTYPES_NS::Texture::Ptr>(*property.data);
+                auto&& pTexture = property.data->GetSampler();
                 if (void* pDescriptor = pTexture && pTexture->CanBeUsed() ? pTexture->GetDescriptor() : nullptr) {
                     const float_t imageSize = context.lineHeight * 2.5f;
 
@@ -321,7 +321,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     bool MaterialDataPropertyDrawer::DrawShaderPath(SR_UTILS_NS::StringAtom name, SR_GRAPH_NS::MaterialShaderData& shaderData, const PropertyDrawerContext& context) {
-        SR_UTILS_NS::Path shaderPath = shaderData.pShader ? shaderData.pShader->GetResourcePath() : SR_UTILS_NS::Path();
+        SR_UTILS_NS::Path shaderPath = shaderData.pShader ? shaderData.GetShader()->GetResourcePath() : SR_UTILS_NS::Path();
 
         SR_UTILS_NS::Reflection::Value value = SR_UTILS_NS::Reflection::Value::CreateRef(shaderPath);
 
