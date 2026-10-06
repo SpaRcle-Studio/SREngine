@@ -830,7 +830,8 @@ namespace SR_CORE_GUI_NS {
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Directional light")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pGameObject = pScene->InstanceGameObject("Directional light"_atom);
-                    pGameObject->AddComponent<SR_GRAPH_NS::DirectionalLight>();
+                    auto&& pSun = pGameObject->AddComponent<SR_GRAPH_NS::DirectionalLight>();
+                    pSun->SetDiskIntensity(25.f);
                     pGameObject->GetTransform()->SetRotation(60, -45, 0);
 
                     /// луна - второй directional light внутри солнца, повернутый в противоположную сторону

@@ -8,12 +8,14 @@ BlendEnabled false;
 DepthWrite true;
 DepthTest true;
 
-[[const]] float starsBrightness = 1.0;
+[[const]] float starsBrightness = 5.0;
 [[const]] float starsDensity = 0.5;
 [[const]] float milkyWayIntensity = 0.35;
 [[const]] float horizonFog = 0.35;
 [[const]] float SUN_VISUAL_SCALE = 3.0;
-[[const]] float MOON_BRIGHTNESS = 0.35;
+[[const]] float MOON_BRIGHTNESS = 2.5;
+
+[[public], [uniform]] sampler2D moonTexture = "Engine/Textures/moon.png";
 
 #include <Engine/Shaders/Common/atmosphere.srsl>
 
@@ -133,28 +135,33 @@ vec3 skyCelestialDisk(vec3 viewDir, vec3 toBody, vec3 color, vec4 params, vec3 o
     // глоу вокруг луны рисуем всегда, диск - только внутри радиуса
     float halo = exp(-angle / (radius * 5.0)) * 0.004;
 
-    if (angle > radius) {
+    mat3 basis = skyBasis(toBody);
+    vec2 local = vec2(dot(viewDir, basis[0]), dot(viewDir, basis[1])) / sin(radius);
+    float r = length(local);
+
+    // сглаживание края шириной ~1.5 пикселя экрана, независимо от размера луны
+    float aa = max(fwidth(r), 1e-4) * 1.5;
+    float edge = 1.0 - smoothstep(1.0 - aa, 1.0, r);
+    // проекция на базис дает "вторую" луну с обратной стороны неба
+    edge *= step(0.0, cosAngle);
+
+    // выборка до ветвления - выбор мипа по производным должен быть стабилен на краю диска
+    vec2 diskLocal = local / max(r, 1.0);
+    vec2 moonUV = vec2(diskLocal.x, -diskLocal.y) * 0.5 + 0.5;
+    vec3 albedo = texture(moonTexture, moonUV).rgb;
+
+    if (edge <= 0.0) {
         return color * params.y * halo;
     }
 
-    mat3 basis = skyBasis(toBody);
-    vec2 local = vec2(dot(viewDir, basis[0]), dot(viewDir, basis[1])) / sin(radius);
-    float r2 = dot(local, local);
     // нормаль сферы луны, z смотрит на наблюдателя
-    vec3 n = vec3(local, sqrt(max(1.0 - r2, 0.0)));
+    vec3 n = vec3(diskLocal, sqrt(max(1.0 - dot(diskLocal, diskLocal), 0.0)));
     vec3 worldNormal = normalize(basis[0] * n.x + basis[1] * n.y - toBody * n.z);
 
     float lit = clamp(dot(worldNormal, otherToLight), 0.0, 1.0);
     // пепельный свет (earthshine)
     lit = max(lit, 0.02);
 
-    // моря и кратеры
-    vec3 surfP = n * 3.0;
-    float maria = smoothstep(0.45, 0.7, skyValueNoise(surfP * 1.3 + 11.0));
-    float craters = skyValueNoise(surfP * 6.0) * 0.5 + skyValueNoise(surfP * 14.0) * 0.25;
-    float albedo = mix(0.95, 0.55, maria) * (0.8 + craters * 0.4);
-
-    float edge = smoothstep(1.0, 0.9, sqrt(r2));
     return color * params.y * (albedo * lit * edge * MOON_BRIGHTNESS + halo);
 }
 
@@ -181,11 +188,10 @@ void fragment() {
     // ------------------------------------------------------------
     // Диски светил. Луна освещается другим светилом (фазы)
     // ------------------------------------------------------------
-    if (viewDir.y > -0.05) {
-        vec3 disks = skyCelestialDisk(viewDir, toPrimary, PRIMARY_DISK_COLOR, PRIMARY_DISK_PARAMS, toSecondary);
-        disks += skyCelestialDisk(viewDir, toSecondary, SECONDARY_DISK_COLOR, SECONDARY_DISK_PARAMS, toPrimary);
-        color += disks * viewTransmittance * smoothstep(-0.05, 0.0, viewDir.y);
-    }
+    // без ветвления по пикселю: внутри используется fwidth, производные должны быть определены
+    vec3 disks = skyCelestialDisk(viewDir, toPrimary, PRIMARY_DISK_COLOR, PRIMARY_DISK_PARAMS, toSecondary);
+    disks += skyCelestialDisk(viewDir, toSecondary, SECONDARY_DISK_COLOR, SECONDARY_DISK_PARAMS, toPrimary);
+    color += disks * viewTransmittance * smoothstep(-0.05, 0.0, viewDir.y);
 
     // ------------------------------------------------------------
     // Земля ниже горизонта: отражение неба + дымка

@@ -154,7 +154,20 @@ namespace SR_CORE_GUI_NS {
 
                     SR_GRAPH_GUI_NS::Immediate::Separator();
 
-                    optionFn("DEBUG_RENDER", "Debug draw");
+                    {
+                        const bool debugDrawEnabled = SR_UTILS_NS::StoreUtils::User::GetBool("DebugDraw", true);
+                        if (debugDrawEnabled) {
+                            SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor::Green());
+                        }
+                        if (SR_GRAPH_GUI_NS::Immediate::Selectable("Debug draw")) {
+                            SR_UTILS_NS::StoreUtils::User::SetBool("DebugDraw", !debugDrawEnabled);
+                            SR_UTILS_NS::StoreUtils::Storage::Instance().Save();
+                            GetRenderScene()->SetDirty();
+                        }
+                        if (debugDrawEnabled) {
+                            SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
+                        }
+                    }
 
                     SR_GRAPH_GUI_NS::Immediate::Separator();
 
