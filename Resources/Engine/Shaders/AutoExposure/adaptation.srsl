@@ -17,7 +17,8 @@ void compute() {
     float avgLogLum = luminanceSum / max(totalPixelCount, 1.0);
     float avgLum = exp(avgLogLum);
     float target = (keyValue) / max(avgLum, 1e-6);
-    target = clamp(target, 0.01, 3.0);
+    // верхний предел не дает экспозиции превращать ночь в день
+    target = clamp(target, 0.01, 1.2);
 
     float adapted = prevExposure + (target - prevExposure) * (1.0 - exp(-dt * speed));
 

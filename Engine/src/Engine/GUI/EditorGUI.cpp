@@ -28,6 +28,7 @@
 #include <Graphics/Types/Camera.h>
 #include <Graphics/Types/Mesh.h>
 #include <Graphics/Types/SkyboxComponent.h>
+#include <Graphics/Clouds/VolumetricClouds.h>
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Window/BasicWindowImpl.h>
 #include <Graphics/Window/Window.h>
@@ -780,6 +781,16 @@ namespace SR_CORE_GUI_NS {
 
             SR_GRAPH_GUI_NS::Immediate::Separator();
 
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Volumetric Clouds")) {
+                if (auto&& pScene = m_engine->GetScene()) {
+                    auto&& pGameObject = pScene->InstanceGameObject("Volumetric Clouds"_atom);
+                    pGameObject->AddComponent<SR_GRAPH_NS::VolumetricClouds>();
+                    InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                }
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Render Target")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pGameObject = pScene->InstanceGameObject("Render Target"_atom);
@@ -810,6 +821,22 @@ namespace SR_CORE_GUI_NS {
                     auto&& pGameObject = pScene->InstanceGameObject("Directional light"_atom);
                     pGameObject->AddComponent<SR_GRAPH_NS::DirectionalLight>();
                     pGameObject->GetTransform()->SetRotation(60, -45, 0);
+
+                    /// луна - второй directional light внутри солнца, повернутый в противоположную сторону
+                    auto&& pMoon = pScene->InstanceGameObject("Moon"_atom);
+                    pGameObject->AddChild(pMoon.StaticCast<SR_UTILS_NS::SceneObject>());
+                    pMoon->GetTransform()->SetRotation(180, 15, 0);
+                    if (auto&& pMoonLight = pMoon->AddComponent<SR_GRAPH_NS::DirectionalLight>()) {
+                        pMoonLight->SetTemperature(8000.f);
+                        pMoonLight->SetIntensity(0.08f);
+                        pMoonLight->SetSkyColors(
+                            SR_MATH_NS::FColor(0.002f, 0.003f, 0.008f),
+                            SR_MATH_NS::FColor(0.02f, 0.035f, 0.08f),
+                            SR_MATH_NS::FColor(0.4f, 0.4f, 0.45f)
+                        );
+                        pMoonLight->SetCelestialBody(SR_GRAPH_NS::CelestialBodyShading::ReflectLight, 2.f, 1.f, SR_MATH_NS::FColor(0.9f, 0.92f, 1.f));
+                    }
+
                     InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
                 }
             }

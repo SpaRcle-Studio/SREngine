@@ -1,0 +1,79 @@
+// Дешевая аналитическая модель атмосферы (Rayleigh + Mie, single scattering, Kasten-Young air mass).
+// Используется скайбоксом и объемными облаками, чтобы освещение облаков совпадало с небом.
+//
+// Направление света в шейдере: DIRECTIONAL_LIGHT_DIRECTION / SECONDARY_LIGHT_DIRECTION указывают ОТ источника,
+// поэтому направление НА источник = -direction.
+
+[[const]] vec3 ATMO_BETA_R = vec3(5.802e-6, 13.558e-6, 33.1e-6);
+[[const]] float ATMO_BETA_M = 3.996e-6;
+[[const]] float ATMO_BETA_M_EXT = 4.44e-6;
+[[const]] float ATMO_HR = 8000.0;
+[[const]] float ATMO_HM = 1200.0;
+[[const]] float ATMO_MIE_G = 0.76;
+[[const]] float ATMO_ILLUMINANCE_SCALE = 3.0;
+[[const]] vec3 ATMO_NIGHT_GLOW = vec3(0.00004, 0.00006, 0.00014);
+// отраженный свет (луна) рассеивается в атмосфере гораздо слабее - ночное небо должно быть темным
+[[const]] float ATMO_REFLECTED_SKY_SCALE = 0.15;
+
+float atmoAirMass(float mu) {
+    float zenith = min(degrees(acos(clamp(mu, 0.0, 1.0))), 90.0);
+    return 1.0 / (cos(radians(zenith)) + 0.50572 * pow(96.07995 - zenith, -1.6364));
+}
+
+vec3 atmoOpticalDepth(float mu) {
+    float m = atmoAirMass(mu);
+    return (ATMO_BETA_R * ATMO_HR + vec3(ATMO_BETA_M_EXT * ATMO_HM)) * m;
+}
+
+// пропускание атмосферы для света, приходящего с высоты mu (косинус зенитного угла)
+// плюс плавное угасание в сумерках, когда источник под горизонтом
+vec3 atmoLightTransmittance(float mu) {
+    float twilight = smoothstep(-0.18, 0.02, mu);
+    return exp(-atmoOpticalDepth(mu)) * twilight;
+}
+
+float atmoPhaseRayleigh(float cosTheta) {
+    return 0.75 * (1.0 + cosTheta * cosTheta);
+}
+
+// Henyey-Greenstein, нормирован так, что среднее по сфере = 1
+float atmoPhaseHG(float cosTheta, float g) {
+    float g2 = g * g;
+    return (1.0 - g2) / pow(max(1.0 + g2 - 2.0 * g * cosTheta, 1e-4), 1.5);
+}
+
+// рассеянный свет неба в направлении viewDir от одного источника
+// toLight - направление на источник, illuminance - освещенность источника (цвет * интенсивность)
+vec3 atmoInscatter(vec3 viewDir, vec3 toLight, vec3 illuminance) {
+    float viewMu = max(viewDir.y, 0.0);
+
+    vec3 tauView = atmoOpticalDepth(viewMu);
+    float cosTheta = dot(viewDir, toLight);
+
+    vec3 scatterR = ATMO_BETA_R * ATMO_HR * atmoPhaseRayleigh(cosTheta);
+    vec3 scatterM = vec3(ATMO_BETA_M * ATMO_HM * atmoPhaseHG(cosTheta, ATMO_MIE_G));
+    vec3 extinction = ATMO_BETA_R * ATMO_HR + vec3(ATMO_BETA_M_EXT * ATMO_HM);
+
+    vec3 inscatter = (scatterR + scatterM) / extinction * (1.0 - exp(-tauView));
+
+    return inscatter * illuminance * atmoLightTransmittance(toLight.y) * ATMO_ILLUMINANCE_SCALE;
+}
+
+// пропускание атмосферы вдоль луча взгляда (для звезд и дисков светил)
+vec3 atmoViewTransmittance(vec3 viewDir) {
+    return exp(-atmoOpticalDepth(max(viewDir.y, 0.0)));
+}
+
+// полное небо от двух источников (солнце + луна)
+vec3 atmoSky(vec3 viewDir) {
+    float primaryScale = PRIMARY_DISK_PARAMS.z > 0.5 ? ATMO_REFLECTED_SKY_SCALE : 1.0;
+    float secondaryScale = SECONDARY_DISK_PARAMS.z > 0.5 ? ATMO_REFLECTED_SKY_SCALE : 1.0;
+    vec3 sky = atmoInscatter(viewDir, -DIRECTIONAL_LIGHT_DIRECTION, PRIMARY_SKY_ILLUMINANCE) * primaryScale;
+    sky += atmoInscatter(viewDir, -SECONDARY_LIGHT_DIRECTION, SECONDARY_SKY_ILLUMINANCE) * secondaryScale;
+    return sky + ATMO_NIGHT_GLOW;
+}
+
+// радиация, приходящая от источника к точке в атмосфере
+vec3 atmoLightRadiance(vec3 toLight, vec3 illuminance) {
+    return illuminance * atmoLightTransmittance(toLight.y) * ATMO_ILLUMINANCE_SCALE;
+}

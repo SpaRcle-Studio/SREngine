@@ -8,56 +8,201 @@ BlendEnabled false;
 DepthWrite true;
 DepthTest true;
 
-[[const]] float SUN_HALO_SIZE = 0.018;
-[[const]] float SUN_HALO_SOFTNESS = 0.018;
+[[const]] float starsBrightness = 1.0;
+[[const]] float starsDensity = 0.5;
+[[const]] float milkyWayIntensity = 0.35;
+[[const]] float horizonFog = 0.35;
+[[const]] float SUN_VISUAL_SCALE = 3.0;
+[[const]] float MOON_BRIGHTNESS = 0.35;
+
+#include <Engine/Shaders/Common/atmosphere.srsl>
 
 void fragment_color_buffer_discard() {
     discard;
 }
 
+float skyHash12(vec2 p) {
+    vec3 p3 = fract(vec3(p.xyx) * 0.1031);
+    p3 += dot(p3, p3.yzx + 33.33);
+    return fract((p3.x + p3.y) * p3.z);
+}
+
+vec3 skyHash33(vec3 p) {
+    p = fract(p * vec3(0.1031, 0.1030, 0.0973));
+    p += dot(p, p.yxz + 33.33);
+    return fract((p.xxy + p.yxx) * p.zyx);
+}
+
+float skyValueNoise(vec3 p) {
+    vec3 i = floor(p);
+    vec3 f = fract(p);
+    vec3 u = f * f * (3.0 - 2.0 * f);
+
+    float n000 = skyHash33(i).x;
+    float n100 = skyHash33(i + vec3(1.0, 0.0, 0.0)).x;
+    float n010 = skyHash33(i + vec3(0.0, 1.0, 0.0)).x;
+    float n110 = skyHash33(i + vec3(1.0, 1.0, 0.0)).x;
+    float n001 = skyHash33(i + vec3(0.0, 0.0, 1.0)).x;
+    float n101 = skyHash33(i + vec3(1.0, 0.0, 1.0)).x;
+    float n011 = skyHash33(i + vec3(0.0, 1.0, 1.0)).x;
+    float n111 = skyHash33(i + vec3(1.0, 1.0, 1.0)).x;
+
+    return mix(
+        mix(mix(n000, n100, u.x), mix(n010, n110, u.x), u.y),
+        mix(mix(n001, n101, u.x), mix(n011, n111, u.x), u.y),
+        u.z);
+}
+
+// базис, в котором "ось" направлена на светило - нужен для текстуры луны
+mat3 skyBasis(vec3 axis) {
+    vec3 up = abs(axis.y) < 0.999 ? vec3(0.0, 1.0, 0.0) : vec3(1.0, 0.0, 0.0);
+    vec3 right = normalize(cross(up, axis));
+    vec3 upOrtho = cross(axis, right);
+    return mat3(right, upOrtho, axis);
+}
+
+// Звезды: одна звезда на ячейку кубической сетки, размер и цвет случайны, мерцание у горизонта сильнее
+vec3 skyStars(vec3 dir) {
+    float scale = 220.0;
+    vec3 p = dir * scale;
+    vec3 cell = floor(p);
+    vec3 rnd = skyHash33(cell);
+
+    if (rnd.x > starsDensity * 0.35) {
+        return vec3(0.0);
+    }
+
+    vec3 starPos = cell + 0.25 + rnd * 0.5;
+    float dist = length(p - starPos);
+
+    float magnitude = pow(max(rnd.y, 1e-4), 6.0);
+    float size = mix(0.06, 0.16, magnitude);
+    float star = smoothstep(size, 0.0, dist);
+
+    float twinkleSpeed = mix(1.5, 4.0, rnd.z);
+    float twinkle = 0.75 + 0.25 * sin(TIME * 0.001 * twinkleSpeed + rnd.z * 40.0);
+    twinkle = mix(1.0, twinkle, 1.0 - clamp(dir.y * 2.0, 0.0, 1.0) * 0.6);
+
+    vec3 temperature = mix(vec3(1.0, 0.75, 0.55), vec3(0.65, 0.8, 1.0), rnd.z);
+    return temperature * star * twinkle * mix(0.4, 6.0, magnitude);
+}
+
+// Млечный путь - полоса шума вдоль наклонной большой окружности
+vec3 skyMilkyWay(vec3 dir) {
+    vec3 bandNormal = normalize(vec3(0.35, 0.55, 0.75));
+    float band = 1.0 - abs(dot(dir, bandNormal));
+    band = pow(clamp(band, 1e-4, 1.0), 10.0);
+
+    float n = skyValueNoise(dir * 6.0) * 0.6 + skyValueNoise(dir * 14.0) * 0.3 + skyValueNoise(dir * 32.0) * 0.1;
+    float dust = smoothstep(0.35, 0.75, skyValueNoise(dir * 9.0 + 3.7));
+
+    float glow = band * n * (1.0 - dust * 0.65);
+    return vec3(0.55, 0.6, 0.85) * glow;
+}
+
+// Диск светила. emission - солнце, reflect - луна, освещенная другим светилом (дает фазы)
+vec3 skyCelestialDisk(vec3 viewDir, vec3 toBody, vec3 color, vec4 params, vec3 otherToLight) {
+    float cosAngle = dot(viewDir, toBody);
+    float cosRadius = params.x;
+
+    if (params.y <= 0.0) {
+        return vec3(0.0);
+    }
+
+    float radius = max(acos(clamp(cosRadius, -1.0, 1.0)), 1e-4);
+    float angle = acos(clamp(cosAngle, -1.0, 1.0));
+
+    if (params.z < 0.5) {
+        // ---------------- Emission (солнце) ----------------
+        // реальные 0.53 градуса на экране выглядят слишком мелко, как и в большинстве игр диск увеличен
+        float sunRadius = radius * SUN_VISUAL_SCALE;
+        float disk = smoothstep(sunRadius, sunRadius * 0.9, angle);
+
+        // потемнение к краю (limb darkening)
+        float r = clamp(angle / sunRadius, 0.0, 1.0);
+        float mu = sqrt(max(1.0 - r * r, 1e-4));
+        vec3 limb = pow(vec3(mu), vec3(0.397, 0.503, 0.652));
+
+        // корона: узкая яркая + широкая мягкая
+        float corona = exp(-max(angle - sunRadius, 0.0) / (sunRadius * 0.6)) * 0.6
+            + exp(-angle / (sunRadius * 6.0)) * 0.06;
+        return color * params.y * (disk * limb * 30.0 + corona);
+    }
+
+    // ---------------- Reflect (луна) ----------------
+    // глоу вокруг луны рисуем всегда, диск - только внутри радиуса
+    float halo = exp(-angle / (radius * 5.0)) * 0.004;
+
+    if (angle > radius) {
+        return color * params.y * halo;
+    }
+
+    mat3 basis = skyBasis(toBody);
+    vec2 local = vec2(dot(viewDir, basis[0]), dot(viewDir, basis[1])) / sin(radius);
+    float r2 = dot(local, local);
+    // нормаль сферы луны, z смотрит на наблюдателя
+    vec3 n = vec3(local, sqrt(max(1.0 - r2, 0.0)));
+    vec3 worldNormal = normalize(basis[0] * n.x + basis[1] * n.y - toBody * n.z);
+
+    float lit = clamp(dot(worldNormal, otherToLight), 0.0, 1.0);
+    // пепельный свет (earthshine)
+    lit = max(lit, 0.02);
+
+    // моря и кратеры
+    vec3 surfP = n * 3.0;
+    float maria = smoothstep(0.45, 0.7, skyValueNoise(surfP * 1.3 + 11.0));
+    float craters = skyValueNoise(surfP * 6.0) * 0.5 + skyValueNoise(surfP * 14.0) * 0.25;
+    float albedo = mix(0.95, 0.55, maria) * (0.8 + craters * 0.4);
+
+    float edge = smoothstep(1.0, 0.9, sqrt(r2));
+    return color * params.y * (albedo * lit * edge * MOON_BRIGHTNESS + halo);
+}
+
 void fragment() {
-    // Направление взгляда из камеры в мир
-    vec3 eyeDir = normalize(VERTEX);
+    vec3 viewDir = normalize(VERTEX);
+    vec3 toPrimary = normalize(-DIRECTIONAL_LIGHT_DIRECTION);
+    vec3 toSecondary = normalize(-SECONDARY_LIGHT_DIRECTION);
+
+    vec3 skyDir = vec3(viewDir.x, max(viewDir.y, 0.0), viewDir.z);
+    vec3 color = atmoSky(normalize(skyDir + vec3(0.0, 0.0001, 0.0)));
+
+    vec3 viewTransmittance = atmoViewTransmittance(skyDir);
 
     // ------------------------------------------------------------
-    // Основной градиент неба/земли
+    // Ночное небо: звезды + млечный путь, гаснут днем и у горизонта
     // ------------------------------------------------------------
-    float col = clamp((eyeDir.y + 0.035) / 0.05, 0.0, 1.0);
-    vec3 color = mix(GROUND_COLOR, SKY_COLOR, col);
-
-    // ------------------------------------------------------------
-    // Горизонтальный тон (закат/теплота у горизонта)
-    // ------------------------------------------------------------
-    //vec3 horizonTint = vec3(1.05, 0.55, 0.65); // пастельный розово-оранжевый
-    //float horizonFactor = pow(clamp(1.0 - eyeDir.y, 0.0, 1.0), 2.0);
-    //color = mix(color, horizonTint, horizonFactor * 0.15);
+    float night = PRIMARY_DISK_PARAMS.w;
+    if (night > 0.001 && viewDir.y > -0.02) {
+        float horizonFade = smoothstep(-0.02, 0.15, viewDir.y);
+        vec3 night_sky = skyStars(viewDir) * starsBrightness + skyMilkyWay(viewDir) * milkyWayIntensity;
+        color += night_sky * viewTransmittance * night * horizonFade * 0.02;
+    }
 
     // ------------------------------------------------------------
-    // Солнце
+    // Диски светил. Луна освещается другим светилом (фазы)
     // ------------------------------------------------------------
-    vec3 sunDir = normalize(-DIRECTIONAL_LIGHT_DIRECTION);
-    float angle = acos(clamp(dot(eyeDir, sunDir), -1.0, 1.0));
-
-    // Основной halo
-    float sunGlow = smoothstep(SUN_HALO_SIZE + SUN_HALO_SOFTNESS, SUN_HALO_SIZE, angle);
-
-    // Мягкое рассеяние вокруг солнца
-    float halo = exp(-angle * 100.0);
-
-    // Центральный яркий пик
-    float sunPeak = pow(clamp(1.0 - angle / (SUN_HALO_SIZE * 32.0), 0.0, 1.0), 3.0);
-
-    vec3 sun = SUN_COLOR * SUN_INTENSITY * (sunGlow + 0.15 * halo + 0.5 * sunPeak);
-
-    // Добавляем солнце к небу
-    color += sun;
+    if (viewDir.y > -0.05) {
+        vec3 disks = skyCelestialDisk(viewDir, toPrimary, PRIMARY_DISK_COLOR, PRIMARY_DISK_PARAMS, toSecondary);
+        disks += skyCelestialDisk(viewDir, toSecondary, SECONDARY_DISK_COLOR, SECONDARY_DISK_PARAMS, toPrimary);
+        color += disks * viewTransmittance * smoothstep(-0.05, 0.0, viewDir.y);
+    }
 
     // ------------------------------------------------------------
-    // Верхнее небо чуть холоднее для глубины
+    // Земля ниже горизонта: отражение неба + дымка
     // ------------------------------------------------------------
-    color = mix(color, color * vec3(0.9, 0.95, 1.0), pow(eyeDir.y, 2.0));
+    if (viewDir.y < 0.0) {
+        vec3 horizon = atmoSky(normalize(vec3(viewDir.x, 0.02, viewDir.z)));
+        vec3 ground = GROUND_COLOR * (PRIMARY_SKY_ILLUMINANCE * atmoLightTransmittance(toPrimary.y) * max(toPrimary.y, 0.0)
+            + SECONDARY_SKY_ILLUMINANCE * atmoLightTransmittance(toSecondary.y) * max(toSecondary.y, 0.0)) * 0.05;
+        float t = smoothstep(0.0, -0.25, viewDir.y);
+        color = mix(horizon, ground + horizon * 0.25, t);
+    }
 
-    COLOR = vec4(color, 1.0);
+    // дымка у горизонта
+    float haze = exp(-abs(viewDir.y) * 12.0) * horizonFog;
+    color = mix(color, atmoSky(normalize(vec3(viewDir.x, 0.05, viewDir.z))), haze * 0.5);
+
+    COLOR = vec4(max(color, vec3(0.0)), 1.0);
 
     COLOR_INDEX_1 = vec4(0.0);
     COLOR_INDEX_2 = vec4(0.0);

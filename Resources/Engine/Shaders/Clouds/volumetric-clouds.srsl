@@ -1,0 +1,42 @@
+ShaderType PostProcessing;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled false;
+DepthWrite false;
+DepthTest false;
+
+[[uniform]] sampler2D positionMap;
+
+[[shared]] vec2 uv;
+
+#define USE_COLOR_INDEX_0
+
+#include <Engine/Shaders/Common/utils.srsl>
+#include <Engine/Shaders/Common/clouds.srsl>
+
+// interleaved gradient noise - дешевый джиттер начала луча, убирает бандинг
+float cloudsIGN(vec2 pixel) {
+    return fract(52.9829189 * fract(dot(pixel, vec2(0.06711056, 0.00583715))));
+}
+
+void fragment() {
+    vec3 rayDir = getRayDir(uv);
+
+    float sceneDistance = 1e9;
+    vec4 worldPos = textureLod(positionMap, uv, 0.0);
+    if (worldPos.a > 0.5) {
+        sceneDistance = length(worldPos.xyz - VIEW_POSITION);
+    }
+
+    float jitter = cloudsIGN(FRAG_COORD.xy);
+
+    COLOR_INDEX_0 = renderClouds(VIEW_POSITION, rayDir, sceneDistance, jitter);
+}
+
+void vertex() {
+    uv = vec2(float((VERTEX_INDEX << 1) & 2), float(VERTEX_INDEX & 2));
+    OUT_POSITION = vec4(uv * 2.0 - 1.0, 0.0, 1.0);
+}

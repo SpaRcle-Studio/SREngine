@@ -1,118 +1,333 @@
-[[uniform]] sampler2D depthMap;
-[[uniform]] sampler2D positionMap;
+// Объемные облака. Настройки приходят из компонента VolumetricClouds (см. VolumetricClouds::UseUniforms).
+// Рендерятся в отдельный буфер пониженного разрешения: rgb - рассеянный свет, a - пропускание.
 
-[[public], [uniform(SHARED)]] vec3 boundsMin;
-[[public], [uniform(SHARED)]] vec3 boundsMax;
-[[public], [uniform(SHARED)]] float cloudsSpeed = 1.0;
-[[public], [uniform(SHARED)]] float cloudsFrequency = 2.0;
-[[public], [uniform(SHARED)]] float cloudsAmplitude = 0.5;
-[[public], [uniform(SHARED)]] float stepSize = 0.5;
-[[public], [uniform(SHARED)]] int fbmOctaves = 5;
+[[uniform(SHARED)]] vec4 cloudsShapeParams;   // coverage, density, cloudType, shapeScale
+[[uniform(SHARED)]] vec4 cloudsLayerParams;   // bottomHeight, thickness, maxDistance, -
+[[uniform(SHARED)]] vec4 cloudsWindParams;    // windDir.xy, windSpeed, -
+[[uniform(SHARED)]] vec4 cloudsLightParams;   // absorption, ambient, silverLining, powder
+[[uniform(SHARED)]] vec4 cloudsDetailParams;  // detailScale, detailStrength, primarySteps, lightSteps
 
-[[const], [uniform]] int seed = 42;
+[[const]] float CLOUDS_PLANET_RADIUS = 6360000.0;
 
-#include <Engine/Shaders/Common/noise.srsl>
-#include <Engine/Shaders/Common/utils.srsl>
 
-float fbm(vec3 p) {
-    float value = 0.0;
-    float amplitude = 0.5;
-    float frequency = 1.0;
+#include <Engine/Shaders/Common/atmosphere.srsl>
 
-    for (int i = 0; i < fbmOctaves; i++) {
-        value += amplitude * valueNoise3D(p * frequency);
-        frequency *= cloudsFrequency;
-        amplitude *= cloudsAmplitude;
-    }
-    return value;
+[[const]] float CLOUDS_NOISE_PERIOD = 256.0;
+
+float cloudsHash13(vec3 p) {
+    // ячейка по модулю периода - шум бесшовно тайлится, поэтому координаты можно держать маленькими
+    p = mod(p, CLOUDS_NOISE_PERIOD);
+    p = fract(p * 0.1031);
+    p += dot(p, p.zyx + 31.32);
+    return fract((p.x + p.y) * p.z);
 }
 
-vec3 applyClouds(vec3 color, vec2 inUV) {
-    vec3 rayOrigin = VIEW_POSITION;
-    vec3 rayDir = getRayDir(inUV);
+float cloudsNoise3D(vec3 p) {
+    vec3 i = floor(p);
+    vec3 f = fract(p);
+    vec3 u = f * f * (3.0 - 2.0 * f);
 
-    vec3 boundsMinV = boundsMin + vec3(VIEW_POSITION.x, 0.0, VIEW_POSITION.z);
-    vec3 boundsMaxV = boundsMax + vec3(VIEW_POSITION.x, 0.0, VIEW_POSITION.z);
+    return mix(
+        mix(mix(cloudsHash13(i), cloudsHash13(i + vec3(1.0, 0.0, 0.0)), u.x),
+            mix(cloudsHash13(i + vec3(0.0, 1.0, 0.0)), cloudsHash13(i + vec3(1.0, 1.0, 0.0)), u.x), u.y),
+        mix(mix(cloudsHash13(i + vec3(0.0, 0.0, 1.0)), cloudsHash13(i + vec3(1.0, 0.0, 1.0)), u.x),
+            mix(cloudsHash13(i + vec3(0.0, 1.0, 1.0)), cloudsHash13(i + vec3(1.0, 1.0, 1.0)), u.x), u.y),
+        u.z);
+}
 
-    vec3 info = intersectBox(rayOrigin, rayDir, boundsMinV, boundsMaxV);
+float cloudsNoise2D(vec2 p) {
+    return cloudsNoise3D(vec3(p, 0.5));
+}
 
-    if (info.z > 0.6) { // если есть пересечение
-        float depthValue = texture(depthMap, inUV).r;
-        vec4 worldPos = texture(positionMap, inUV);
+float cloudsRemap(float v, float lo, float hi, float newLo, float newHi) {
+    return newLo + (v - lo) / max(hi - lo, 1e-5) * (newHi - newLo);
+}
 
-        float distToSurface = dot(worldPos.xyz - rayOrigin, rayDir);
+// Высота над поверхностью с учетом кривизны планеты, без чисел порядка радиуса планеты (float32 их не тянет).
+// offset - смещение точки относительно камеры, cameraHeight - высота камеры (VIEW_POSITION.y)
+float cloudsHeight(vec3 offset, float cameraHeight) {
+    float horizontal2 = dot(offset.xz, offset.xz);
+    return cameraHeight + offset.y - horizontal2 / (2.0 * CLOUDS_PLANET_RADIUS);
+}
 
-        float tNear = max(info.x, 0.0);
-        float tFar;
+float cloudsHeightFraction(float height) {
+    return clamp((height - cloudsLayerParams.x) / cloudsLayerParams.y, 0.0, 1.0);
+}
 
-        if (depthValue > 0.0) {
-            // расстояние до поверхности сцены вдоль луча
-            tFar = min(info.y, distToSurface);
+// пересечение луча с "искривленной" плоскостью height = const.
+// height(t) = h0 + t*dy - t^2 * k, k = |rd.xz|^2 / 2R. Возвращает ближайшее t > 0 или -1
+float cloudsRayLayer(float h0, vec3 rd, float targetHeight) {
+    float k = dot(rd.xz, rd.xz) / (2.0 * CLOUDS_PLANET_RADIUS);
+    float a = k;
+    float b = -rd.y;
+    float c = targetHeight - h0;
+    // a t^2 + b t + c = 0
+    if (a < 1e-12) {
+        if (abs(b) < 1e-6) {
+            return -1.0;
         }
-        else {
-            // глубины нет, значит ограничивать нечем
-            tFar = info.y;
-        }
-
-        float lightAmount = clamp(dot(normalize(rayDir), normalize(DIRECTIONAL_LIGHT_DIRECTION)), 0.0, 1.0);
-        lightAmount = pow(lightAmount, 2.0); // контрастней
-
-        vec3 transmittance = vec3(1.0);
-        vec3 cloudAccum = vec3(0.0);
-        vec3 shadowColor = vec3(0.6, 0.65, 0.7);  // холодный серый-низ
-        vec3 lightColor  = vec3(1.0, 0.95, 0.9);  // теплый верх
-
-        // jitter для смещения луча (разные пиксели берут чуть разные выборки)
-        float rand = fract(sin(dot(floor(inUV), vec2(12.9898,78.233))) * 43758.5453);
-        float t = tNear + rand * stepSize;
-
-        for (int i = 0; t < tFar; i++) {
-            vec3 p = rayOrigin + rayDir * t;
-
-            float d = fbm(p * 0.025 + TIME * 0.000025 * cloudsSpeed);
-
-            if (d > 0.4) {
-                // внутри облака — мелкий шаг
-                float density = smoothstep(0.45, 0.55, d);
-                density = pow(density, 1.5);
-
-                vec3 local = (p - boundsMinV) / (boundsMaxV - boundsMinV);
-                float edgeFade = smoothstep(
-                    0.0, 0.5,
-                    min(min(min(local.x, 1.0 - local.x),
-                            min(local.y, 1.0 - local.y)),
-                        min(local.z, 1.0 - local.z))
-                );
-
-                density *= edgeFade;
-
-                vec3 cloudColor = mix(shadowColor, lightColor, density);
-
-                float h = clamp((p.y - boundsMinV.y) / (boundsMaxV.y - boundsMinV.y), 0.0, 1.0);
-                cloudColor = mix(cloudColor * 0.8, cloudColor * 1.2, h);
-
-                // направленное рассеяние
-                float lightIntensity = 1.1;
-                cloudColor *= mix(0.8 * lightIntensity, 1.1 * lightIntensity, lightAmount);
-
-                vec3 scat = cloudColor * density;
-                cloudAccum += transmittance * scat * stepSize;
-                transmittance *= exp(-density * stepSize);
-
-                if (transmittance.r < 0.01) {
-                    break; // ранний выход
-                }
-
-                t += stepSize; // внутри облака двигаемся мелко
-            }
-            else {
-                // пустота — шаг крупнее
-                t += stepSize * 3.0;
-            }
-        }
-
-        // композитинг: облака поверх сцены с учётом остаточной прозрачности
-        return color * transmittance + cloudAccum;
+        float t = -c / b;
+        return t > 0.0 ? t : -1.0;
     }
-    return color;
+    float d = b * b - 4.0 * a * c;
+    if (d < 0.0) {
+        return -1.0;
+    }
+    d = sqrt(d);
+    // устойчивая форма корней
+    float q = -0.5 * (b + (b >= 0.0 ? d : -d));
+    float t0 = q / a;
+    float t1 = abs(q) > 1e-9 ? c / q : -1.0;
+    float tMin = min(t0, t1);
+    float tMax = max(t0, t1);
+    if (tMin > 0.0) {
+        return tMin;
+    }
+    return tMax > 0.0 ? tMax : -1.0;
+}
+
+// профиль по высоте: от слоистых (0) до кучевых (1)
+float cloudsHeightGradient(float h) {
+    float type = cloudsShapeParams.z;
+    float top = mix(0.3, 1.0, type);
+    float bottom = mix(0.12, 0.04, type);
+    return smoothstep(0.0, bottom, h) * (1.0 - smoothstep(top * 0.55, top, h));
+}
+
+vec3 cloudsWindOffset() {
+    float t = TIME * 0.001 * cloudsWindParams.z;
+    return vec3(cloudsWindParams.x, 0.0, cloudsWindParams.y) * t;
+}
+
+// шум периодичен по ячейкам, поэтому координаты можно сдвигать на целые периоды без видимой разницы.
+// Держим координаты маленькими - иначе хэш теряет точность и мерцает.
+vec3 cloudsWrap(vec3 p, float period) {
+    return p - floor(p / period) * period;
+}
+
+// дешевая плотность: погодная карта + базовая форма, без эрозии
+float cloudsBaseDensity(vec3 worldPos, float h) {
+    vec3 wind = cloudsWindOffset();
+    vec3 p = worldPos + wind;
+
+    float scale = cloudsShapeParams.w;
+
+    vec2 weatherUV = cloudsWrap(vec3(p.xz * 0.000035 * scale, 0.0), CLOUDS_NOISE_PERIOD).xy;
+    float weather = cloudsNoise2D(weatherUV) * 0.65 + cloudsNoise2D(weatherUV * 3.0 + 7.0) * 0.35;
+
+    // верх облака сдвигается по ветру сильнее - наклон кучевых облаков
+    vec3 shapeP = cloudsWrap((p + wind * h * 0.5) * 0.00045 * scale, CLOUDS_NOISE_PERIOD);
+    float shape = cloudsNoise3D(shapeP) * 0.625 + cloudsNoise3D(shapeP * 2.0 + 17.0) * 0.25 + cloudsNoise3D(shapeP * 4.0 + 41.0) * 0.125;
+
+    float coverage = clamp(cloudsShapeParams.x, 0.0, 1.0);
+    float base = shape * cloudsHeightGradient(h);
+    base = cloudsRemap(base, 1.0 - coverage * mix(0.6, 1.25, weather), 1.0, 0.0, 1.0);
+
+    return clamp(base, 0.0, 1.0);
+}
+
+// lod 0..1 - вдали детализация гаснет, иначе на крупных шагах она превращается в шум
+float cloudsDetailDensity(vec3 worldPos, float base, float h, float lod) {
+    if (lod >= 0.99) {
+        return base;
+    }
+    vec3 p = cloudsWrap((worldPos + cloudsWindOffset() * 1.6) * 0.0035 * cloudsDetailParams.x, CLOUDS_NOISE_PERIOD);
+    float detail = cloudsNoise3D(p) * 0.6 + cloudsNoise3D(p * 2.0 + 23.0) * 0.4;
+    // снизу облака клочковатые, сверху - округлые
+    detail = mix(detail, 1.0 - detail, clamp(h * 4.0, 0.0, 1.0));
+    float strength = cloudsDetailParams.y * (1.0 - lod);
+    return clamp(cloudsRemap(base, detail * strength, 1.0, 0.0, 1.0), 0.0, 1.0);
+}
+
+float cloudsPhase(float cosTheta) {
+    float forward = atmoPhaseHG(cosTheta, 0.8);
+    float backward = atmoPhaseHG(cosTheta, -0.3);
+    return mix(backward, forward, clamp(cloudsLightParams.z, 0.0, 1.0) * 0.6 + 0.2);
+}
+
+// оптическая толщина до источника света (короткий марш с растущим шагом)
+// offset - позиция относительно камеры, worldPos - для шума
+float cloudsLightMarch(vec3 offset, vec3 worldPos, float cameraHeight, vec3 toLight) {
+    int steps = int(cloudsDetailParams.w);
+    float stepSize = cloudsLayerParams.y * 0.06;
+    float od = 0.0;
+
+    for (int i = 0; i < 10; i++) {
+        if (i >= steps) {
+            break;
+        }
+        offset += toLight * stepSize;
+        worldPos += toLight * stepSize;
+        float h = cloudsHeightFraction(cloudsHeight(offset, cameraHeight));
+        if (h >= 1.0) {
+            break;
+        }
+        od += cloudsBaseDensity(worldPos, h) * stepSize;
+        stepSize *= 1.6;
+    }
+
+    return od * cloudsShapeParams.y;
+}
+
+// approximate multiple scattering (Wrenninge et al.)
+float cloudsLightEnergy(float od, float cosTheta, float density) {
+    float absorption = cloudsLightParams.x;
+    float energy = 0.0;
+    float a = 1.0;
+    float b = 1.0;
+    float c = 1.0;
+
+    for (int i = 0; i < 3; i++) {
+        energy += a * exp(-od * absorption * b) * cloudsPhase(cosTheta * c);
+        a *= 0.5;
+        b *= 0.4;
+        c *= 0.5;
+    }
+
+    // powder - темные края у плотных облаков, смотрящих на источник
+    float powder = 1.0 - exp(-density * cloudsLayerParams.y * 0.04);
+    return energy * mix(1.0, powder, cloudsLightParams.w);
+}
+
+// rgb - рассеянный свет, a - пропускание
+vec4 renderClouds(vec3 rayOrigin, vec3 rayDir, float sceneDistance, float jitter) {
+    float cameraHeight = rayOrigin.y;
+    float bottom = cloudsLayerParams.x;
+    float top = bottom + cloudsLayerParams.y;
+
+    float tBottom = cloudsRayLayer(cameraHeight, rayDir, bottom);
+    float tTop = cloudsRayLayer(cameraHeight, rayDir, top);
+
+    float tStart;
+    float tEnd;
+
+    if (cameraHeight < bottom) {
+        // под облаками
+        if (tBottom < 0.0) {
+            return vec4(0.0, 0.0, 0.0, 1.0);
+        }
+        tStart = tBottom;
+        tEnd = tTop > 0.0 ? tTop : tBottom + cloudsLayerParams.z;
+    }
+    else if (cameraHeight < top) {
+        // внутри слоя
+        tStart = 0.0;
+        float tExit = tTop > 0.0 ? tTop : 1e9;
+        if (tBottom > 0.0) {
+            tExit = min(tExit, tBottom);
+        }
+        tEnd = tExit;
+    }
+    else {
+        // над облаками
+        if (tTop < 0.0) {
+            return vec4(0.0, 0.0, 0.0, 1.0);
+        }
+        tStart = tTop;
+        tEnd = tBottom > 0.0 ? tBottom : tTop + cloudsLayerParams.z;
+    }
+
+    float maxDistance = cloudsLayerParams.z;
+    tEnd = min(tEnd, min(sceneDistance, maxDistance));
+
+    if (tEnd <= tStart) {
+        return vec4(0.0, 0.0, 0.0, 1.0);
+    }
+
+    // у горизонта луч длиннее - больше шагов, но с ограничением длины шага
+    float baseSteps = cloudsDetailParams.z;
+    float horizonFactor = 1.0 - clamp(abs(rayDir.y) * 3.0, 0.0, 1.0);
+    int steps = int(baseSteps * mix(1.0, 1.75, horizonFactor));
+    float rayLength = tEnd - tStart;
+    float stepSize = max(rayLength / float(steps), cloudsLayerParams.y / baseSteps * 0.5);
+
+    vec3 toPrimary = normalize(-DIRECTIONAL_LIGHT_DIRECTION);
+    vec3 toSecondary = normalize(-SECONDARY_LIGHT_DIRECTION);
+    float cosPrimary = dot(rayDir, toPrimary);
+    float cosSecondary = dot(rayDir, toSecondary);
+
+    // облака под луной заметно тусклее, чем под солнцем той же "интенсивности"
+    float primaryScale = PRIMARY_DISK_PARAMS.z > 0.5 ? 0.35 : 1.0;
+    float secondaryScale = SECONDARY_DISK_PARAMS.z > 0.5 ? 0.35 : 1.0;
+    vec3 primaryRadiance = atmoLightRadiance(toPrimary, PRIMARY_SKY_ILLUMINANCE) * primaryScale;
+    vec3 secondaryRadiance = atmoLightRadiance(toSecondary, SECONDARY_SKY_ILLUMINANCE) * secondaryScale;
+
+    // ambient сверху - небо, снизу - отраженный от земли свет
+    vec3 ambientTop = atmoSky(vec3(0.0, 1.0, 0.0)) * cloudsLightParams.y;
+    vec3 ambientBottom = (primaryRadiance * max(toPrimary.y, 0.0) + secondaryRadiance * max(toSecondary.y, 0.0))
+        * GROUND_COLOR * 0.1 * cloudsLightParams.y;
+
+    float transmittance = 1.0;
+    vec3 scattering = vec3(0.0);
+    float weightedDistance = 0.0;
+    float weightSum = 0.0;
+
+    float t = tStart + stepSize * jitter;
+    int emptySteps = 0;
+
+    for (int i = 0; i < 256; i++) {
+        if (i >= steps * 2 || t >= tEnd) {
+            break;
+        }
+
+        vec3 offset = rayDir * t;
+        vec3 p = rayOrigin + offset;
+        float h = cloudsHeightFraction(cloudsHeight(offset, cameraHeight));
+        float base = cloudsBaseDensity(p, h);
+
+        if (base <= 0.001) {
+            // пустота - шагаем крупно
+            emptySteps++;
+            t += stepSize * (emptySteps > 3 ? 2.0 : 1.0);
+            continue;
+        }
+
+        emptySteps = 0;
+
+        float lod = smoothstep(maxDistance * 0.15, maxDistance * 0.6, t);
+        float density = cloudsDetailDensity(p, base, h, lod) * cloudsShapeParams.y;
+        // плавно растворяем облака к краю дальности, без резкого обреза
+        density *= 1.0 - smoothstep(maxDistance * 0.6, maxDistance, t);
+
+        if (density > 0.0001) {
+            float od = cloudsLightMarch(offset, p, cameraHeight, toPrimary);
+
+            vec3 light = primaryRadiance * cloudsLightEnergy(od, cosPrimary, density);
+
+            // второй источник (луна) - без отдельного марша, затухание по высоте внутри слоя
+            float odSecondary = (1.0 - h) * cloudsLayerParams.y * density * 0.25;
+            light += secondaryRadiance * cloudsLightEnergy(odSecondary, cosSecondary, density);
+
+            light += mix(ambientBottom, ambientTop, h) * mix(0.5, 1.0, h);
+
+            float sampleTransmittance = exp(-density * stepSize);
+            // energy-conserving интегрирование (Hillaire 2015)
+            vec3 integrated = light * (1.0 - sampleTransmittance);
+            scattering += transmittance * integrated;
+
+            float alpha = transmittance * (1.0 - sampleTransmittance);
+            weightedDistance += t * alpha;
+            weightSum += alpha;
+
+            transmittance *= sampleTransmittance;
+
+            if (transmittance < 0.01) {
+                transmittance = 0.0;
+                break;
+            }
+        }
+
+        t += stepSize;
+    }
+
+    if (weightSum > 0.0) {
+        // воздушная перспектива: далекие облака растворяются в небе
+        float distance = weightedDistance / weightSum;
+        float fade = exp(-distance / (maxDistance * 0.45));
+        vec3 sky = atmoSky(normalize(vec3(rayDir.x, max(rayDir.y, 0.0), rayDir.z) + vec3(0.0, 0.0001, 0.0)));
+        scattering = mix(sky * (1.0 - transmittance), scattering, fade);
+
+    }
+
+    return vec4(scattering, transmittance);
 }

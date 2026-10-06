@@ -27,8 +27,8 @@ DepthTest false;
     [[uniform]] sampler2D SSAO;
 #endif
 
-#ifdef SR_CLOUDS
-    #include <Engine/Shaders/Common/clouds.srsl>
+#ifdef SR_VOLUMETRIC_CLOUDS
+    [[uniform]] sampler2D cloudsMap;
 #endif
 
 #ifdef SR_LINEARIZE_DEPTH_CASCADES
@@ -112,8 +112,21 @@ void fragment() {
 
     //color = applyGlitch(color, uv);
 
-#ifdef SR_CLOUDS______
-    color = applyClouds(color, uv);
+#ifdef SR_VOLUMETRIC_CLOUDS
+    // облака посчитаны в пониженном разрешении: rgb - рассеянный свет, a - пропускание
+    // апсемпл: 9 билинейных выборок (тент-фильтр) убирают пикселизацию и шум от джиттера
+    vec2 cloudsTexel = 1.0 / vec2(textureSize(cloudsMap, 0));
+    vec4 clouds = texture(cloudsMap, uv) * 4.0;
+    clouds += texture(cloudsMap, uv + vec2( cloudsTexel.x, 0.0)) * 2.0;
+    clouds += texture(cloudsMap, uv + vec2(-cloudsTexel.x, 0.0)) * 2.0;
+    clouds += texture(cloudsMap, uv + vec2(0.0,  cloudsTexel.y)) * 2.0;
+    clouds += texture(cloudsMap, uv + vec2(0.0, -cloudsTexel.y)) * 2.0;
+    clouds += texture(cloudsMap, uv + cloudsTexel);
+    clouds += texture(cloudsMap, uv - cloudsTexel);
+    clouds += texture(cloudsMap, uv + vec2(cloudsTexel.x, -cloudsTexel.y));
+    clouds += texture(cloudsMap, uv + vec2(-cloudsTexel.x, cloudsTexel.y));
+    clouds /= 16.0;
+    color = color * clouds.a + max(clouds.rgb, vec3(0.0));
 #endif
 
     float r = length(uv - 0.5);
