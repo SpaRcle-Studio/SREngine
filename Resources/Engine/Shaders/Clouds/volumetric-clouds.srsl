@@ -26,7 +26,9 @@ void fragment() {
     vec3 rayDir = getRayDir(uv);
 
     float sceneDistance = 1e9;
-    vec4 worldPos = textureLod(positionMap, uv, 0.0);
+    vec2 positionSize = vec2(textureSize(positionMap, 0));
+    vec2 positionUV = (floor(uv * positionSize) + 0.5) / positionSize;
+    vec4 worldPos = textureLod(positionMap, positionUV, 0.0);
     if (worldPos.a > 0.5) {
         sceneDistance = length(worldPos.xyz - VIEW_POSITION);
     }

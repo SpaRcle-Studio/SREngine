@@ -82,6 +82,11 @@ use tabs: true
 						6-v:type
 							7-s:RenderTechniquePresetIntegrationVolumetricClouds
 						6-o:ptr
+				4-k:i
+					5-o:d
+						6-v:type
+							7-s:RenderTechniquePresetIntegrationVolumetricFog
+						6-o:ptr
 			3-a:customLayers
 				4-k:i
 					5-o:d

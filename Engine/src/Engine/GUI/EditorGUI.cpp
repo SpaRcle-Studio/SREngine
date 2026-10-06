@@ -29,6 +29,7 @@
 #include <Graphics/Types/Mesh.h>
 #include <Graphics/Types/SkyboxComponent.h>
 #include <Graphics/Clouds/VolumetricClouds.h>
+#include <Graphics/Fog/VolumetricFog.h>
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Window/BasicWindowImpl.h>
 #include <Graphics/Window/Window.h>
@@ -785,6 +786,16 @@ namespace SR_CORE_GUI_NS {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pGameObject = pScene->InstanceGameObject("Volumetric Clouds"_atom);
                     pGameObject->AddComponent<SR_GRAPH_NS::VolumetricClouds>();
+                    InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                }
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Volumetric Fog")) {
+                if (auto&& pScene = m_engine->GetScene()) {
+                    auto&& pGameObject = pScene->InstanceGameObject("Volumetric Fog"_atom);
+                    pGameObject->AddComponent<SR_GRAPH_NS::VolumetricFog>();
                     InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
                 }
             }

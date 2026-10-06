@@ -1,0 +1,224 @@
+ShaderType PostProcessing;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled false;
+DepthWrite false;
+DepthTest false;
+
+// Объемный туман. Настройки приходят из компонента VolumetricFog (см. VolumetricFog::UseUniforms).
+// Результат: rgb - рассеянный свет, a - пропускание.
+
+[[uniform(SHARED)]] vec4 fogDensityParams;  // density, baseHeight, heightFalloff, maxDistance
+[[uniform(SHARED)]] vec4 fogColorParams;    // albedo.rgb, ambientStrength
+[[uniform(SHARED)]] vec4 fogLightParams;    // anisotropy, lightShaftsIntensity, shadows, skyColorInfluence
+[[uniform(SHARED)]] vec4 fogNoiseParams;    // noiseStrength, noiseScale, windSpeed, startDistance
+[[uniform(SHARED)]] vec4 fogWindParams;     // windDir.xy, steps, -
+
+[[uniform]] sampler2D positionMap;
+
+#ifdef SR_FOG_SHADOWS
+    [[uniform]] sampler2DArray shadowMap;
+
+    [[const]] mat4 fogBiasMat = mat4(
+        0.5, 0.0, 0.0, 0.0,
+        0.0, 0.5, 0.0, 0.0,
+        0.0, 0.0, 1.0, 0.0,
+        0.5, 0.5, 0.0, 1.0
+    );
+#endif
+
+[[shared]] vec2 uv;
+
+#define USE_COLOR_INDEX_0
+
+#include <Engine/Shaders/Common/utils.srsl>
+#include <Engine/Shaders/Common/atmosphere.srsl>
+
+[[const]] float FOG_NOISE_PERIOD = 256.0;
+
+float fogHash13(vec3 p) {
+    p = mod(p, FOG_NOISE_PERIOD);
+    p = fract(p * 0.1031);
+    p += dot(p, p.zyx + 31.32);
+    return fract((p.x + p.y) * p.z);
+}
+
+float fogNoise3D(vec3 p) {
+    vec3 i = floor(p);
+    vec3 f = fract(p);
+    vec3 u = f * f * (3.0 - 2.0 * f);
+
+    return mix(
+        mix(mix(fogHash13(i), fogHash13(i + vec3(1.0, 0.0, 0.0)), u.x),
+            mix(fogHash13(i + vec3(0.0, 1.0, 0.0)), fogHash13(i + vec3(1.0, 1.0, 0.0)), u.x), u.y),
+        mix(mix(fogHash13(i + vec3(0.0, 0.0, 1.0)), fogHash13(i + vec3(1.0, 0.0, 1.0)), u.x),
+            mix(fogHash13(i + vec3(0.0, 1.0, 1.0)), fogHash13(i + vec3(1.0, 1.0, 1.0)), u.x), u.y),
+        u.z);
+}
+
+float fogIGN(vec2 pixel) {
+    return fract(52.9829189 * fract(dot(pixel, vec2(0.06711056, 0.00583715))));
+}
+
+// экспоненциальная высотная плотность
+float fogDensityAt(vec3 p) {
+    float h = p.y - fogDensityParams.y;
+    return fogDensityParams.x * exp(-max(h, -50.0) * fogDensityParams.z);
+}
+
+// аналитический интеграл плотности вдоль отрезка луча [0, dist] - гладкий туман без шагов марша
+float fogOpticalDepth(vec3 ro, vec3 rd, float dist) {
+    float k = fogDensityParams.z;
+    float h0 = ro.y - fogDensityParams.y;
+    float base = fogDensityParams.x * exp(-max(h0, -50.0) * k);
+    float slope = rd.y * k;
+
+    if (abs(slope * dist) < 1e-4) {
+        return base * dist;
+    }
+
+    return base * (1.0 - exp(-slope * dist)) / slope;
+}
+
+#ifdef SR_FOG_SHADOWS
+// видимость основного источника в точке (1 - освещено, 0 - в тени)
+float fogShadow(vec3 worldPos, float viewDepth) {
+    int cascadeIndex = 0;
+    for (int i = 0; i < 3; ++i) {
+        if (viewDepth > CASCADE_SPLITS[i]) {
+            cascadeIndex = i + 1;
+        }
+    }
+
+    if (viewDepth > CASCADE_SPLITS[3]) {
+        return 1.0;
+    }
+
+    vec4 shadowCoord = fogBiasMat * CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex] * vec4(worldPos, 1.0);
+    shadowCoord /= shadowCoord.w;
+
+    if (shadowCoord.x < 0.0 || shadowCoord.x > 1.0 || shadowCoord.y < 0.0 || shadowCoord.y > 1.0 || shadowCoord.z > 1.0) {
+        return 1.0;
+    }
+
+    float depth = textureLod(shadowMap, vec3(shadowCoord.xy, float(cascadeIndex)), 0.0).r;
+    return shadowCoord.z - 0.002 > depth ? 0.0 : 1.0;
+}
+#endif
+
+void fragment() {
+    vec3 rayOrigin = VIEW_POSITION;
+    vec3 rayDir = getRayDir(uv);
+
+    float maxDistance = fogDensityParams.w;
+    float startDistance = fogNoiseParams.w;
+
+    float sceneDistance = maxDistance;
+    vec2 positionSize = vec2(textureSize(positionMap, 0));
+    vec2 positionUV = (floor(uv * positionSize) + 0.5) / positionSize;
+    vec4 worldPos = textureLod(positionMap, positionUV, 0.0);
+    bool hasGeometry = worldPos.a > 0.5;
+    if (hasGeometry) {
+        sceneDistance = min(length(worldPos.xyz - rayOrigin), maxDistance);
+    }
+
+    if (sceneDistance <= startDistance || fogDensityParams.x <= 0.0) {
+        COLOR_INDEX_0 = vec4(0.0, 0.0, 0.0, 1.0);
+        return;
+    }
+
+    vec3 albedo = fogColorParams.rgb;
+    float g = fogLightParams.x;
+
+    vec3 toPrimary = normalize(-DIRECTIONAL_LIGHT_DIRECTION);
+    vec3 toSecondary = normalize(-SECONDARY_LIGHT_DIRECTION);
+
+    // отраженный свет (луна) в тумане так же приглушен, как в небе и облаках
+    float primaryScale = PRIMARY_DISK_PARAMS.z > 0.5 ? 0.35 : 1.0;
+    float secondaryScale = SECONDARY_DISK_PARAMS.z > 0.5 ? 0.35 : 1.0;
+    vec3 primaryRadiance = atmoLightRadiance(toPrimary, PRIMARY_SKY_ILLUMINANCE) * primaryScale;
+    vec3 secondaryRadiance = atmoLightRadiance(toSecondary, SECONDARY_SKY_ILLUMINANCE) * secondaryScale;
+
+    float phasePrimary = atmoPhaseHG(dot(rayDir, toPrimary), g);
+    float phaseSecondary = atmoPhaseHG(dot(rayDir, toSecondary), g);
+
+    // ambient: свет неба у горизонта в направлении взгляда - туман сливается с небом
+    vec3 horizonSky = atmoSky(normalize(vec3(rayDir.x, 0.05, rayDir.z)));
+    vec3 zenithSky = atmoSky(vec3(0.0, 1.0, 0.0));
+    vec3 ambient = mix(zenithSky, horizonSky, fogLightParams.w) * fogColorParams.a;
+
+    float jitter = fogIGN(FRAG_COORD.xy);
+
+    int steps = int(fogWindParams.z);
+    float marchLength = sceneDistance - startDistance;
+    float stepSize = marchLength / float(steps);
+
+    vec3 windOffset = vec3(fogWindParams.x, 0.0, fogWindParams.y) * TIME * 0.001 * fogNoiseParams.z;
+    float noiseStrength = clamp(fogNoiseParams.x, 0.0, 1.0);
+
+    float viewDirDot = dot(rayDir, VIEW_DIRECTION);
+
+    vec3 scattering = vec3(0.0);
+    float transmittance = 1.0;
+
+    for (int i = 0; i < 64; i++) {
+        if (i >= steps) {
+            break;
+        }
+
+        float t = startDistance + (float(i) + jitter) * stepSize;
+        vec3 p = rayOrigin + rayDir * t;
+
+        float density = fogDensityAt(p);
+
+        if (noiseStrength > 0.0) {
+            vec3 np = mod((p + windOffset) * fogNoiseParams.y, FOG_NOISE_PERIOD);
+            float n = fogNoise3D(np) * 0.65 + fogNoise3D(np * 2.0 + 13.0) * 0.35;
+            density *= mix(1.0, n * 2.0, noiseStrength);
+        }
+
+        if (density <= 1e-6) {
+            continue;
+        }
+
+        float visibility = 1.0;
+    #ifdef SR_FOG_SHADOWS
+        if (fogLightParams.z > 0.5) {
+            visibility = fogShadow(p, t * viewDirDot);
+        }
+    #endif
+
+        vec3 light = primaryRadiance * phasePrimary * visibility * fogLightParams.y;
+        light += secondaryRadiance * phaseSecondary;
+        light += ambient;
+
+        float sampleTransmittance = exp(-density * stepSize);
+        scattering += transmittance * light * albedo * (1.0 - sampleTransmittance);
+        transmittance *= sampleTransmittance;
+
+        if (transmittance < 0.005) {
+            transmittance = 0.0;
+            break;
+        }
+    }
+
+    // хвост: от конца марша до неба (если геометрии нет) - аналитически, только ambient + свет без теней
+    if (!hasGeometry && transmittance > 0.005) {
+        vec3 tailOrigin = rayOrigin + rayDir * sceneDistance;
+        float tailDepth = fogOpticalDepth(tailOrigin, rayDir, maxDistance * 4.0);
+        float tailTransmittance = exp(-tailDepth);
+        vec3 tailLight = (primaryRadiance * phasePrimary * fogLightParams.y + secondaryRadiance * phaseSecondary + ambient) * albedo;
+        scattering += transmittance * tailLight * (1.0 - tailTransmittance);
+        transmittance *= tailTransmittance;
+    }
+
+    COLOR_INDEX_0 = vec4(max(scattering, vec3(0.0)), transmittance);
+}
+
+void vertex() {
+    uv = vec2(float((VERTEX_INDEX << 1) & 2), float(VERTEX_INDEX & 2));
+    OUT_POSITION = vec4(uv * 2.0 - 1.0, 0.0, 1.0);
+}

@@ -31,6 +31,70 @@ DepthTest false;
     [[uniform]] sampler2D cloudsMap;
 #endif
 
+#ifdef SR_VOLUMETRIC_FOG
+    [[uniform]] sampler2D fogMap;
+#endif
+
+#if defined(SR_VOLUMETRIC_CLOUDS) || defined(SR_VOLUMETRIC_FOG)
+    [[uniform]] sampler2D positionMap;
+
+    // выборка ровно в центр ближайшего пикселя - без билинейного смешивания позиций объекта и неба
+    float sceneDistanceAt(vec2 coord) {
+        vec2 size = vec2(textureSize(positionMap, 0));
+        vec2 snapped = (floor(coord * size) + 0.5) / size;
+        vec4 p = textureLod(positionMap, snapped, 0.0);
+        return p.a > 0.5 ? length(p.xyz - VIEW_POSITION) : 1e6;
+    }
+
+    // Апсемпл буфера пониженного разрешения с учетом глубины (joint bilateral).
+    // Выборки с другой глубиной (объект против неба/фона) не смешиваются - граница остается резкой.
+    vec4 sampleLowRes(sampler2D tex, vec2 coord, float centerDistance) {
+        vec2 lowResSize = vec2(textureSize(tex, 0));
+        vec2 texel = 1.0 / lowResSize;
+
+        vec2 pixel = coord * lowResSize - 0.5;
+        vec2 base = floor(pixel);
+        vec2 f = pixel - base;
+
+        vec4 result = vec4(0.0);
+        float weightSum = 0.0;
+
+        vec4 nearestSample = vec4(0.0, 0.0, 0.0, 1.0);
+        float nearestDiff = 1e9;
+
+        for (int y = 0; y < 2; y++) {
+            for (int x = 0; x < 2; x++) {
+                vec2 offset = vec2(float(x), float(y));
+                vec2 sampleUV = (base + offset + 0.5) * texel;
+
+                float sampleDistance = sceneDistanceAt(sampleUV);
+                float relDiff = abs(sampleDistance - centerDistance) / max(min(sampleDistance, centerDistance), 1.0);
+
+                vec2 bw = mix(1.0 - f, f, offset);
+                float bilinear = bw.x * bw.y;
+                float depthWeight = 1.0 / (1e-3 + relDiff * relDiff * 400.0);
+                float w = bilinear * depthWeight;
+
+                vec4 value = textureLod(tex, sampleUV, 0.0);
+                result += value * w;
+                weightSum += w;
+
+                if (relDiff < nearestDiff) {
+                    nearestDiff = relDiff;
+                    nearestSample = value;
+                }
+            }
+        }
+
+        // ни одна выборка не совпала по глубине (тонкий объект) - берем ближайшую по глубине
+        if (nearestDiff > 0.1) {
+            return nearestSample;
+        }
+
+        return result / max(weightSum, 1e-6);
+    }
+#endif
+
 #ifdef SR_LINEARIZE_DEPTH_CASCADES
     #include <Engine/Shaders/Common/linearize-depth.srsl>
     [[uniform]] sampler2DArray shadowMap;
@@ -112,21 +176,20 @@ void fragment() {
 
     //color = applyGlitch(color, uv);
 
+#if defined(SR_VOLUMETRIC_CLOUDS) || defined(SR_VOLUMETRIC_FOG)
+    float centerDistance = sceneDistanceAt(uv);
+#endif
+
 #ifdef SR_VOLUMETRIC_CLOUDS
     // облака посчитаны в пониженном разрешении: rgb - рассеянный свет, a - пропускание
-    // апсемпл: 9 билинейных выборок (тент-фильтр) убирают пикселизацию и шум от джиттера
-    vec2 cloudsTexel = 1.0 / vec2(textureSize(cloudsMap, 0));
-    vec4 clouds = texture(cloudsMap, uv) * 4.0;
-    clouds += texture(cloudsMap, uv + vec2( cloudsTexel.x, 0.0)) * 2.0;
-    clouds += texture(cloudsMap, uv + vec2(-cloudsTexel.x, 0.0)) * 2.0;
-    clouds += texture(cloudsMap, uv + vec2(0.0,  cloudsTexel.y)) * 2.0;
-    clouds += texture(cloudsMap, uv + vec2(0.0, -cloudsTexel.y)) * 2.0;
-    clouds += texture(cloudsMap, uv + cloudsTexel);
-    clouds += texture(cloudsMap, uv - cloudsTexel);
-    clouds += texture(cloudsMap, uv + vec2(cloudsTexel.x, -cloudsTexel.y));
-    clouds += texture(cloudsMap, uv + vec2(-cloudsTexel.x, cloudsTexel.y));
-    clouds /= 16.0;
+    vec4 clouds = sampleLowRes(cloudsMap, uv, centerDistance);
     color = color * clouds.a + max(clouds.rgb, vec3(0.0));
+#endif
+
+#ifdef SR_VOLUMETRIC_FOG
+    // туман ближе облаков - накладывается поверх: rgb - рассеянный свет, a - пропускание
+    vec4 fog = sampleLowRes(fogMap, uv, centerDistance);
+    color = color * fog.a + max(fog.rgb, vec3(0.0));
 #endif
 
     float r = length(uv - 0.5);
