@@ -72,7 +72,7 @@ namespace SR_PHYSICS_NS {
 
         auto&& pPhysics = GetLibrary<PhysXLibraryImpl>()->GetPxPhysics();
 
-        m_raycast3dImpl = new PhysXRaycast3DImpl(this);
+        m_raycast3dImpl = new PhysXRayCast3DImpl(this);
 
         physx::PxSceneDesc sceneDesc(pPhysics->getTolerancesScale());
 

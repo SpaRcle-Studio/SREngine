@@ -50,7 +50,7 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::LayerMask layerMask;
         layerMask.mask &= ~SR_UTILS_NS::TagManager::Instance().TagToMask("Player");
 
-        if (auto&& hit = SR_PHYSICS_NS::Raycast3D::Instance().CastSingle(origin, -SR_MATH_NS::FVector3::Up(), config.maxRayDistance, layerMask)) {
+        if (auto&& hit = SR_PHYSICS_NS::RayCast3D::Instance().CastSingle(origin, -SR_MATH_NS::FVector3::Up(), config.maxRayDistance, layerMask)) {
             m_debugHitId = SR_UTILS_NS::DebugOverlayDraw::Instance().DrawLine(m_debugHitId,
                 hit->position, hit->GetRayEndPoint(), SR_MATH_NS::FColor::Green(), SR_FLOAT_MAX
             );

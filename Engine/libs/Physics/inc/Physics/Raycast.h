@@ -8,16 +8,15 @@
 #include <Physics/stdInclude.h>
 
 #include <Utils/Common/RaycastHit.h>
+#include <Utils/Types/Vector.h>
 
 namespace SR_PHYSICS_NS {
     class PhysicsWorld;
 
-    class Raycast {
+    class RayCast {
     public:
-        using RaycastHits = std::vector<SR_UTILS_NS::RaycastHit>;
-
     public:
-        virtual ~Raycast() = default;
+        virtual ~RayCast() = default;
 
         void SwitchPhysics(SR_PHYSICS_NS::PhysicsWorld* pWorld) { m_world = pWorld; }
 

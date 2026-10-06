@@ -55,14 +55,14 @@ namespace SR_PHYSICS_NS {
         }
     };
 
-    PhysXRaycast3DImpl::RaycastHits PhysXRaycast3DImpl::Cast(const SR_MATH_NS::FVector3& origin, const SR_MATH_NS::FVector3& direction, float_t maxDistance, uint32_t maxHits, const SR_UTILS_NS::LayerMask& layerMask) {
+    PhysXRayCast3DImpl::RayCastHits PhysXRayCast3DImpl::Cast(const SR_MATH_NS::FVector3& origin, const SR_MATH_NS::FVector3& direction, float_t maxDistance, uint32_t maxHits, const SR_UTILS_NS::LayerMask& layerMask) {
         SR_TRACY_ZONE;
 
-        RaycastHits hits;
+        RayCastHits hits;
 
         auto&& pPxScene = static_cast<PhysXPhysicsWorld*>(m_world)->GetPxScene();
         if (!pPxScene) {
-            SRHalt("PhysXRaycast3DImpl::Cast() : PxScene is null!");
+            SRHalt("PhysXRayCast3DImpl::Cast() : PxScene is null!");
             return hits;
         }
 
@@ -112,7 +112,7 @@ namespace SR_PHYSICS_NS {
                 continue;
             }
 
-            SR_UTILS_NS::RaycastHit outHit;
+            SR_UTILS_NS::RayCastHit outHit;
             outHit.pHandler = static_cast<SR_PTYPES_NS::Rigidbody*>(pRigidbody);
             outHit.distance = pxHit.distance;
             outHit.normal = SR_PHYSICS_UTILS_NS::PxV3ToFV3(pxHit.normal);

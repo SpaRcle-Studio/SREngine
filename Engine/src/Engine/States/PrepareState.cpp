@@ -48,7 +48,7 @@ namespace SR_CORE_NS {
         }
 
         if (auto&& pPhysicsScene = pEngine->GetPhysicsScene()) {
-            SR_PHYSICS_NS::Raycast3D::Instance().SwitchPhysics(pPhysicsScene->Get3DWorld());
+            SR_PHYSICS_NS::RayCast3D::Instance().SwitchPhysics(pPhysicsScene->Get3DWorld());
         }
 
         if (auto&& pCommandManager = pEngine->GetCmdManager()) {

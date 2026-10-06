@@ -9,14 +9,19 @@
 
 #include <Utils/Math/Vector3.h>
 #include <Utils/Common/Singleton.h>
+#include <Utils/TypeTraits/SRClass.h>
 
 namespace SR_PHYSICS_NS {
-    class Raycast3D final : public SR_UTILS_NS::Singleton<Raycast3D>, public Raycast {
-        SR_REGISTER_SINGLETON(Raycast3D)
+    /// @noCopyable @noMovable
+    class RayCast3D final : public SR_UTILS_NS::Singleton<RayCast3D>, public RayCast, public SR_UTILS_NS::SRClass {
+        SR_REGISTER_SINGLETON(RayCast3D)
+        SR_CLASS()
     public:
-        SR_NODISCARD RaycastHits Cast(const SR_MATH_NS::FVector3 &origin, const SR_MATH_NS::FVector3 &direction, float_t maxDistance, uint32_t maxHits, const SR_UTILS_NS::LayerMask& layerMask = SR_UTILS_NS::LayerMask::Any());
-        SR_NODISCARD RaycastHits Cast(const SR_MATH_NS::FVector3 &origin, const SR_MATH_NS::FVector3 &direction, float_t maxDistance, const SR_UTILS_NS::LayerMask& layerMask = SR_UTILS_NS::LayerMask::Any());
-        SR_NODISCARD std::optional<SR_UTILS_NS::RaycastHit> CastSingle(const SR_MATH_NS::FVector3& origin, const SR_MATH_NS::FVector3& direction, float_t maxDistance, const SR_UTILS_NS::LayerMask& layerMask = SR_UTILS_NS::LayerMask::Any());
+        /// @method
+        SR_NODISCARD SR_UTILS_NS::RayCastHits Cast(const SR_MATH_NS::FVector3 &origin, const SR_MATH_NS::FVector3 &direction, float_t maxDistance, uint32_t maxHits, const SR_UTILS_NS::LayerMask& layerMask = SR_UTILS_NS::LayerMask::Any());
+        SR_NODISCARD SR_UTILS_NS::RayCastHits Cast(const SR_MATH_NS::FVector3 &origin, const SR_MATH_NS::FVector3 &direction, float_t maxDistance, const SR_UTILS_NS::LayerMask& layerMask = SR_UTILS_NS::LayerMask::Any());
+        /// @method
+        SR_NODISCARD SR_UTILS_NS::Optional<SR_UTILS_NS::RayCastHit> CastSingle(const SR_MATH_NS::FVector3& origin, const SR_MATH_NS::FVector3& direction, float_t maxDistance, const SR_UTILS_NS::LayerMask& layerMask = SR_UTILS_NS::LayerMask::Any());
 
     };
 }

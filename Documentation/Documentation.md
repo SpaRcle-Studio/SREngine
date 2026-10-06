@@ -1,5 +1,5 @@
 === "SRSL"
-    --8<-- "Documentation/SRSLHandbook.md"
+    --8<-- "Documentation/SRSL.md"
 
 === "Scripting API"
     In progress...

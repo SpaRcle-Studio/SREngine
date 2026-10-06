@@ -13,16 +13,16 @@
 namespace SR_PHYSICS_NS {
     class PhysicsWorld;
 
-    class RaycastImpl : public SR_UTILS_NS::NonCopyable {
+    class RayCastImpl : public SR_UTILS_NS::NonCopyable {
     public:
-        using RaycastHits = std::vector<SR_UTILS_NS::RaycastHit>;
+        using RayCastHits = SR_UTILS_NS::Vector<SR_UTILS_NS::RayCastHit>;
 
     public:
-        explicit RaycastImpl(SR_PHYSICS_NS::PhysicsWorld* world)
+        explicit RayCastImpl(SR_PHYSICS_NS::PhysicsWorld* world)
             : m_world(world)
         { }
 
-        ~RaycastImpl() override = default;
+        ~RayCastImpl() override = default;
 
     protected:
         SR_PHYSICS_NS::PhysicsWorld* m_world = nullptr;
