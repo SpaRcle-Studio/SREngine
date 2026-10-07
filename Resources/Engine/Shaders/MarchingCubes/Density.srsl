@@ -1,10 +1,10 @@
 ShaderType Compute;
 
 struct Voxel {
-    float density;     // текущая плотность
-    uint materialID;   // основной материал
-    uint materialID2;  // дополнительный материал
-    float blend; // смешивание между материалами
+    float density; // текущая плотность
+    float w0;      // вес почвы (трава)
+    float w1;      // вес камня
+    float w2;      // вес песка
 };
 
 [[ssbo(voxels)]] Voxel[] voxels;
@@ -14,6 +14,7 @@ struct Voxel {
 [[const], [uniform]] ivec3 chunkCoord = ivec3(0, 0, 0);
 [[const], [uniform]] float noiseScale = 0.05;
 [[const], [uniform]] int seed = 42;
+[[const], [uniform]] int lodScale = 1;
 
 float fade(float t) {
     return t * t * t * (t * (t * 6.0 - 15.0) + 10.0);
@@ -139,66 +140,11 @@ Voxel CalculateVoxel(float density, vec3 worldPos, vec3 noisePos) {
     vec3 weights = vec3(grass, rock, sand);
     weights /= max(dot(weights, vec3(1.0)), 0.0001);
 
-    // === ПЕРЕГОН В ТВОЮ СХЕМУ (костыль, но ок) ===
-    if (weights.x > weights.y && weights.x > weights.z)
-    {
-        voxel.materialID = 0;
-        voxel.materialID2 = (weights.y > weights.z) ? 1 : 2;
-        voxel.blend = max(weights.y, weights.z);
-    }
-    else if (weights.y > weights.z)
-    {
-        voxel.materialID = 1;
-        voxel.materialID2 = (weights.x > weights.z) ? 0 : 2;
-        voxel.blend = max(weights.x, weights.z);
-    }
-    else
-    {
-        voxel.materialID = 2;
-        voxel.materialID2 = (weights.x > weights.y) ? 0 : 1;
-        voxel.blend = max(weights.x, weights.y);
-    }
-
-    return voxel;
-}
-
-Voxel CalculateVoxelMaterial(float density, vec3 noisePos) {
-    Voxel voxel;
-    voxel.density = density;
-
-    float matSoil   = smoothstep(0.0, 8.0, density) * fbm(noisePos * 0.2); // земля ближе к поверхности
-    float matStone  = smoothstep(-10.0, 5.0, -density) * ridged(noisePos * 0.1); // камень под землёй
-    float matSand   = smoothstep(5.0, 12.0, density) * fbm(noisePos * 0.3); // песок на поверхности
-
-    [[const]] int soil = 0;
-    [[const]] int stone = 1;
-    [[const]] int sand = 2;
-
-    // нормируем веса
-    vec3 weights = vec3(matSoil, matStone, matSand);
-    float sum = weights.x + weights.y + weights.z + 1e-6;
-    weights /= sum;
-
-    // выбираем два главных материала
-    int matA = 0;
-    int matB = 0;
-    float wA = 0.0;
-    float wB = 0.0;
-
-    if (weights.x > weights.y && weights.x > weights.z) { matA = soil; wA = weights.x; }
-    else if (weights.y > weights.z) { matA = stone; wA = weights.y; }
-    else { matA = sand; wA = weights.z; }
-
-    if (weights.x != wA) { matB = soil; wB = weights.x; }
-    else if (weights.y != wA) { matB = stone; wB = weights.y; }
-    else { matB = sand; wB = weights.z; }
-
-    // пересчёт blend относительно первого материала
-    float blend = wB / (wA + wB + 1e-6);
-
-    voxel.materialID   = uint(matA);
-    voxel.materialID2  = uint(matB);
-    voxel.blend        = blend;
+    /// Веса всех трёх материалов сохраняются целиком и плавно интерполируются по треугольнику,
+    /// поэтому на стыке трёх материалов нет скачков
+    voxel.w0 = weights.x;
+    voxel.w1 = weights.y;
+    voxel.w2 = weights.z;
 
     return voxel;
 }
@@ -215,8 +161,8 @@ void compute() {
              + voxelPos.y * densityCountAxis
              + voxelPos.z * densityCountAxis * densityCountAxis;
 
-    // Глобальная мировая позиция
-    vec3 world = vec3(voxelPos + chunkCoord * (densityCountAxis - 2));
+    // Глобальная мировая позиция. Чанк LOD покрывает lodScale чанков нулевого уровня, воксель 1 совпадает с LOD0
+    vec3 world = vec3(chunkCoord * (densityCountAxis - 2) + ivec3(1) + (voxelPos - ivec3(1)) * ivec3(lodScale));
     world.y += 32.0; // смещение, чтобы не было артефактов на границах чанков
 
     vec3 noisePos = world * (max((noiseScale - isoLevel), 0.0) / 100.0);
@@ -229,54 +175,4 @@ void compute() {
     float density = terrainHeight - world.y;
 
     voxels[index] = CalculateVoxel(density, world, noisePos);
-
-    // ----------------------
-    // Сглаживание материалов по соседям
-    // ----------------------
-    /*vec3 matWeights = vec3(0.0);
-
-    // координаты 6 соседей + текущий
-    ivec3 offsets[7] = { ivec3(0,0,0), ivec3(1,0,0), ivec3(-1,0,0), ivec3(0,1,0), ivec3(0,-1,0), ivec3(0,0,1), ivec3(0,0,-1) };
-
-    for (int i = 0; i < 7; i++) {
-        ivec3 nPos = voxelPos + offsets[i];
-        if (any(lessThan(nPos, ivec3(0))) || any(greaterThanEqual(nPos, ivec3(densityCountAxis)))) {
-            continue;
-        }
-
-        int nIndex = nPos.x + nPos.y*densityCountAxis + nPos.z*densityCountAxis*densityCountAxis;
-        float d = voxels[nIndex].density;
-
-        vec3 w = vec3(
-            smoothstep(0.0, 8.0, d) * fbm(noisePos * 0.2),  // земля
-            smoothstep(-10.0, 5.0, -d) * ridged(noisePos * 0.1), // камень
-            smoothstep(5.0, 12.0, d) * fbm(noisePos * 0.3)  // песок
-        );
-
-        matWeights += w;
-    }
-
-    // нормируем
-    matWeights /= 7.0;
-
-    // выбираем два самых больших материала
-    int matA = 0;
-    int matB = 0;
-    float wA = 0.0;
-    float wB = 0.0;
-
-    for (int i=0; i<3; i++) {
-        if (matWeights[i] > wA) {
-            wB = wA; matB = matA;
-            wA = matWeights[i]; matA = i;
-        } else if (matWeights[i] > wB) {
-            wB = matWeights[i]; matB = i;
-        }
-    }
-
-    float blend = wB / (wA + wB + 1e-6);
-
-    voxels[index].materialID  = uint(matA);
-    voxels[index].materialID2 = uint(matB);
-    voxels[index].blend       = blend;*/
 }

@@ -69,11 +69,14 @@ namespace SR_CORE_NS {
             }
             m_instancesCount = 0;
             m_drawnCount = 0;
-            m_pendingInstances.clear();
-            m_cells.clear();
+            SR_UTILS_NS::Vector<TerrainGrassInstance>().swap(m_pendingInstances);
+            SR_UTILS_NS::Vector<TerrainGrassCell>().swap(m_cells);
             m_cellLevels.clear();
             m_ranges.clear();
             m_isDataDirty = true;
+            /// Пустой рендерер больше не рисуется, и Draw() не вызовется - буфер уходит в retired здесь,
+            /// а освобождается в UpdateLod(), когда все кадры свапчейна пересоберутся
+            Calculate();
         }
         MarkRenderDirty();
     }
@@ -104,6 +107,12 @@ namespace SR_CORE_NS {
 
         {
             std::lock_guard lock(m_mutex);
+
+            /// Draw() не вызывается у пустых и выключенных рендереров, поэтому старые буферы досвобождаются и здесь.
+            /// Каждый кадр свапчейна после SetDirty() пересобирает командный буфер, так что смена индекса кадра безопасна.
+            if (!m_retiredVBOs.empty() && (m_ranges.empty() || !IsActive())) {
+                FreeRetiredVBOs(TryGetPipeline());
+            }
 
             if (!(m_lodParams == params)) {
                 m_lodParams = params;
@@ -462,6 +471,12 @@ namespace SR_CORE_NS {
 
     SR_UTILS_NS::VertexLayoutDescriptionsRef TerrainGrassRenderer::GetShaderVertexLayoutDescriptions() const noexcept {
         return SR_UTILS_NS::VertexLayoutDescriptionsRef(TerrainGrassInstanceLayout);
+    }
+
+    bool TerrainGrassRenderer::FreeRetired() {
+        std::lock_guard lock(m_mutex);
+        FreeRetiredVBOs(TryGetPipeline());
+        return m_retiredVBOs.empty();
     }
 
     void TerrainGrassRenderer::FreeRetiredVBOs(SR_GRAPH_NS::Pipeline* pPipeline) {

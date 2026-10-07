@@ -18,18 +18,8 @@ namespace SR_CORE_NS {
         : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
     { }
 
-    void ITerrainChunk::Activate(SR_UTILS_NS::SceneObject& pool, const SR_UTILS_NS::SceneObject& proto, SR_MATH_NS::FVector3 position) {
-        SR_TRACY_ZONE;
-        if (!m_object) {
-            m_object = proto.CloneSceneObject();
-            pool.AddChild(m_object);
-        }
-
-        if (auto&& pGameObject = m_object.DynamicCast<SR_UTILS_NS::GameObject>()) {
-            pGameObject->GetTransform()->SetTranslation(position);
-        }
-
-        m_object->SetEnabled(true);
+    bool ITerrainChunk::IsGrassReady() const {
+        return !m_grass || m_grass->IsChunkReady(*this);
     }
 
     void ITerrainChunk::Deactivate() {
@@ -40,8 +30,64 @@ namespace SR_CORE_NS {
         if (m_data) {
             m_data->Deactivate();
         }
-        if (m_object) {
-            m_object->SetEnabled(false);
+    }
+
+    SR_UTILS_NS::SceneObject::Ptr ITerrainChunkGenerator::AcquireChunkObject(ITerrainChunk& chunk) {
+        SR_TRACY_ZONE;
+
+        if (auto&& pObject = chunk.GetObject()) {
+            return pObject;
+        }
+
+        SR_UTILS_NS::SceneObject::Ptr pObject;
+        if (!m_freeObjects.empty()) {
+            pObject = m_freeObjects.back();
+            m_freeObjects.pop_back();
+        }
+        else {
+            auto&& pProto = m_chunkObjectProto.Get();
+            auto&& pPool = m_poolObject.Get();
+            if (!pProto || !pPool) {
+                SR_ERROR("ITerrainChunkGenerator::AcquireChunkObject() : chunk object proto or pool object is null!");
+                return nullptr;
+            }
+            pObject = pProto->CloneSceneObject();
+            pPool->AddChild(pObject);
+        }
+
+        chunk.SetObject(pObject);
+        SetupChunkObject(chunk, *pObject);
+        pObject->SetEnabled(true);
+
+        return pObject;
+    }
+
+    void ITerrainChunkGenerator::ReleaseChunkObject(ITerrainChunk& chunk) {
+        SR_TRACY_ZONE;
+
+        chunk.Deactivate();
+
+        SR_UTILS_NS::SceneObject::Ptr pObject = chunk.GetObject();
+        if (!pObject) {
+            return;
+        }
+
+        /// Трава рисуется относительно текущей позиции объекта. Если объект уйдёт в пул с инстансами,
+        /// следующий чанк нарисует их на своём месте поверх своей травы. Чистим независимо от того,
+        /// успел ли чанк получить траву (SetGrass вызывается только после генерации травы).
+        if (auto&& pGrassRenderer = pObject->GetComponent<TerrainGrassRenderer>()) {
+            pGrassRenderer->ClearInstances();
+        }
+
+        chunk.SetObject(nullptr);
+        chunk.SetGrass(nullptr);
+
+        if (m_freeObjects.size() < m_maxFreeObjects) {
+            pObject->SetEnabled(false);
+            m_freeObjects.emplace_back(pObject);
+        }
+        else {
+            pObject->Destroy();
         }
     }
 
@@ -112,6 +158,7 @@ namespace SR_CORE_NS {
             data.direction = forward.Length() > 1e-6f ? forward.Normalized() : pCamera->GetViewDirection();
             data.fovY = SR_RAD(pCamera->GetFOV());
             data.aspect = pCamera->GetAspect();
+            data.farPlane = pCamera->GetFar();
         }
 
         return data;

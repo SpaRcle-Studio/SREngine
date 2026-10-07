@@ -310,29 +310,31 @@ namespace SR_PTYPES_NS {
         params.meshPreprocessParams =
                 static_cast<physx::PxMeshPreprocessingFlag::Enum>(physx::PxMeshPreprocessingFlag::eDISABLE_CLEAN_MESH |
                                                                   physx::PxMeshPreprocessingFlag::eDISABLE_ACTIVE_EDGES_PRECOMPUTE);
+        params.suppressTriangleMeshRemapTable = true;
+    #if PX_SSE2
+        params.midphaseDesc.setToDefault(physx::PxMeshMidPhase::eBVH34);
+        params.midphaseDesc.mBVH34Desc.numPrimsPerLeaf = 8;
+    #else
+        params.midphaseDesc.setToDefault(physx::PxMeshMidPhase::eBVH33);
+        params.midphaseDesc.mBVH33Desc.meshCookingHint = physx::PxMeshCookingHint::eCOOKING_PERFORMANCE;
+    #endif
 
-        //params.meshCookingHint = physx::PxMeshCookingHint::eCOOKING_PERFORMANCE;
-
-        physx::PxTriangleMesh* triangleMesh = nullptr;
-        physx::PxDefaultMemoryOutputStream writeBuffer;
-
-        physx::PxCooking* cooking = PxCreateCooking(0, pPhysics->getFoundation(), params);
-
-        {
-            SR_TRACY_ZONE_N("cookTriangleMesh");
-            if (cooking->cookTriangleMesh(meshDesc, writeBuffer)) {
-                physx::PxDefaultMemoryInputData id(writeBuffer.getData(), writeBuffer.getSize());
-                SR_TRACY_ZONE_N("createTriangleMesh");
-                triangleMesh = pPhysics->createTriangleMesh(id);
-            }
+        physx::PxCooking* pCooking = PxCreateCooking(0, pPhysics->getFoundation(), params);
+        if (!pCooking) {
+            SR_ERROR("PhysXCollisionShape::CreateTriangleMesh() : failed to create cooking!");
+            return nullptr;
         }
 
+        physx::PxTriangleMesh* pTriangleMesh = nullptr;
         {
-            SR_TRACY_ZONE_N("releaseCooking");
-            cooking->release();
+            SR_TRACY_ZONE_N("createTriangleMesh");
+            /// Без промежуточной сериализации в поток - меш вставляется в PxPhysics напрямую
+            pTriangleMesh = pCooking->createTriangleMesh(meshDesc, pPhysics->getPhysicsInsertionCallback());
         }
 
-        return triangleMesh;
+        pCooking->release();
+
+        return pTriangleMesh;
     }
 
     physx::PxTriangleMesh* PhysXCollisionShape::CreateTriangleMesh(SR_HTYPES_NS::RawMesh* pRawMesh) {

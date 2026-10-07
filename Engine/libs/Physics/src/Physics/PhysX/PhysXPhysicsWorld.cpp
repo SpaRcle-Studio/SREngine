@@ -226,7 +226,10 @@ namespace SR_PHYSICS_NS {
         }
 
         if (auto&& pActor = (physx::PxActor*)(pRigidbody->GetHandle())) {
-            m_scene->addActor(*pActor);
+            /// Тело могли включить повторно, пока оно ещё в сцене
+            if (pActor->getScene() != m_scene) {
+                m_scene->addActor(*pActor);
+            }
         }
 
         return true;
@@ -241,7 +244,10 @@ namespace SR_PHYSICS_NS {
         }
 
         if (auto&& pActor = (physx::PxActor*)(pRigidbody->GetHandle())) {
-            m_scene->removeActor(*pActor);
+            /// Тело могло быть уже убрано из сцены (OnDisable, затем OnDestroy)
+            if (pActor->getScene() == m_scene) {
+                m_scene->removeActor(*pActor);
+            }
         }
 
         return true;
@@ -291,6 +297,17 @@ namespace SR_PHYSICS_NS {
                         continue;
                     }
 
+                    /// Позиция обновляется всегда, независимо от лимита кукинга: иначе тело, переехавшее (например, из пула),
+                    /// остаётся в старом месте, пока кукаются формы других тел
+                    if (pRigidbody->IsMatrixDirty()) {
+                        pRigidbody->UpdateMatrix();
+                    }
+
+                    /// Лимит кукинга: остальные грязные формы докукаются в следующих кадрах
+                    if (cookedCount >= maxCookPerFrame && pRigidbody->IsShapeDirty()) {
+                        break;
+                    }
+
                     const RBUpdShapeRes result = pRigidbody->UpdateShape();
                     if (result == RBUpdShapeRes::Error) {
                         SR_ERROR("PhysXPhysicsWorld::Synchronize() : failed to update shape!");
@@ -303,14 +320,8 @@ namespace SR_PHYSICS_NS {
                                 cookedCount++;
                             }
                         }
-                    }
-
-                    if (cookedCount > maxCookPerFrame) {
-                        return true;
-                    }
-
-                    if (pRigidbody->IsMatrixDirty()) {
-                        pRigidbody->UpdateMatrix();
+                        /// Форма пересоздана - позиция шейпов выставляется заново
+                        pRigidbody->UpdateMatrix(true);
                     }
                     break;
                 }

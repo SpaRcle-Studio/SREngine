@@ -3,17 +3,14 @@ ShaderType Compute;
 struct Vertex {
     vec3 position;
     float pad0;
-    uint materialID;
-    uint materialID2;
-    float blend;
-    float pad1;
+    vec4 weights; // веса материалов (почва, камень, песок, -)
 };
 
 struct Voxel {
-    float density;    // текущая плотность
-    uint materialID;  // основной материал
-    uint materialID2; // дополнительный материал
-    float blend;      // смешивание между материалами
+    float density; // текущая плотность
+    float w0;      // вес почвы
+    float w1;      // вес камня
+    float w2;      // вес песка
 };
 
 [[ssbo(vertices)]] uint vertexCount;
@@ -98,14 +95,9 @@ Vertex createVertex(ivec3 coordA, ivec3 coordB) {
     Vertex vertex;
     vertex.position = mix(posA, posB, densityT);
 
-    // выбираем доминирующий воксель по позиции
-    Voxel v = (densityT < 0.5) ? voxelA : voxelB;
-
-    vertex.materialID = v.materialID;
-    vertex.materialID2 = v.materialID2;
-
-    // blend интерполируем отдельно
-    vertex.blend = mix(voxelA.blend, voxelB.blend, densityT);
+    vec3 weightsA = vec3(voxelA.w0, voxelA.w1, voxelA.w2);
+    vec3 weightsB = vec3(voxelB.w0, voxelB.w1, voxelB.w2);
+    vertex.weights = vec4(mix(weightsA, weightsB, densityT), 0.0);
 
     return vertex;
 }

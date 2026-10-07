@@ -30,6 +30,7 @@ namespace SR_CORE_NS {
         virtual void Deactivate() { }
         void SetChunk(ITerrainChunk* chunk) { m_chunk = chunk; }
         virtual void SwitchPhysics(bool enable) { }
+        SR_NODISCARD virtual bool IsPhysicsEnabled() const { return false; }
 
     protected:
         ITerrainChunk* m_chunk = nullptr;
@@ -54,11 +55,13 @@ namespace SR_CORE_NS {
         void SetStatus(Status status) { m_status = status; }
         SR_NODISCARD Status GetStatus() const { return m_status; }
         SR_NODISCARD const SR_UTILS_NS::SceneObject::Ptr& GetObject() const { return m_object; }
+        void SetObject(const SR_UTILS_NS::SceneObject::Ptr& pObject) { m_object = pObject; }
         /// Система травы, которой чанк сообщит о своей деактивации
         void SetGrass(TerrainGrass* pGrass) noexcept { m_grass = pGrass; }
+        /// Трава чанка сгенерирована (или её нет). Пока нет - заменяемый чанк держит свою траву, иначе место останется голым
+        SR_NODISCARD bool IsGrassReady() const;
 
         SR_NODISCARD virtual float_t GetDistanceTo(const ITerrainChunk& other) const { return 0.f; }
-        virtual void Activate(SR_UTILS_NS::SceneObject& pool, const SR_UTILS_NS::SceneObject& proto, SR_MATH_NS::FVector3 position);
         void Deactivate();
 
     protected:
@@ -94,11 +97,23 @@ namespace SR_CORE_NS {
 
         SR_NODISCARD virtual bool IsCollisionEnabledAt(const ITerrainChunk& chunk) const { return false; }
 
+        /// Объект сцены выдаётся только чанкам с непустой геометрией. Объекты переиспользуются через пул.
+        SR_UTILS_NS::SceneObject::Ptr AcquireChunkObject(ITerrainChunk& chunk);
+        void ReleaseChunkObject(ITerrainChunk& chunk);
+
+    protected:
+        virtual void SetupChunkObject(ITerrainChunk& chunk, SR_UTILS_NS::SceneObject& object) { }
+
     protected:
         /// @property
         SR_UTILS_NS::EntityRef<SR_UTILS_NS::SceneObject> m_chunkObjectProto;
         /// @property
         SR_UTILS_NS::EntityRef<SR_UTILS_NS::SceneObject> m_poolObject;
+        /// @property @range(0, 4096) @tooltip(Сколько свободных объектов чанков держать в пуле, остальные уничтожаются)
+        uint32_t m_maxFreeObjects = 32;
+
+    private:
+        SR_UTILS_NS::Vector<SR_UTILS_NS::SceneObject::Ptr> m_freeObjects;
 
     };
 
@@ -107,6 +122,7 @@ namespace SR_CORE_NS {
         SR_MATH_NS::FVector3 direction = SR_MATH_NS::FVector3(0.f, 0.f, 1.f);
         float_t fovY = 0.f;   /// вертикальный угол обзора в радианах, 0 - камеры нет
         float_t aspect = 0.f; /// ширина / высота
+        float_t farPlane = 0.f; /// дальность прорисовки камеры, 0 - камеры нет
     };
 
     class TerrainLODManager : public SR_UTILS_NS::Serializable {

@@ -133,6 +133,8 @@ namespace SR_CORE_NS {
         SR_NODISCARD uint32_t GetInstancesCount() const noexcept { return m_instancesCount; }
         SR_NODISCARD uint32_t GetDrawnInstancesCount() const noexcept { return m_drawnCount; }
         SR_NODISCARD bool HasInstances() const noexcept { return m_instancesCount > 0; }
+        /// Досвобождает заменённые буферы инстансов. true - буферов больше нет
+        bool FreeRetired();
 
         void FreeVideoMemory() override;
         bool Bind() override;

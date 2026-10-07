@@ -10,6 +10,8 @@
 #include <Utils/FileSystem/Path.h>
 #include <Utils/Math/AABB.h>
 #include <Utils/Types/FlatHashMap.h>
+#include <Utils/Types/Thread.h>
+#include <Utils/Types/SharedPtr.h>
 
 namespace SR_CORE_NS {
     class Terrain;
@@ -56,6 +58,8 @@ namespace SR_CORE_NS {
         /// Поток сцены. Забирает копию меша, генерация пойдёт в фоне.
         void OnChunkGenerated(Terrain& terrain, ITerrainChunk& chunk, TerrainGrassSourceMesh&& mesh);
         void OnChunkDeactivated(ITerrainChunk& chunk);
+        /// Первичная генерация травы чанка завершена (результат применён) или травы у чанка нет
+        SR_NODISCARD bool IsChunkReady(const ITerrainChunk& chunk) const;
 
         void Update(Terrain& terrain, float_t dt);
         /// Останавливает фоновый поток и снимает траву со всех чанков.
@@ -64,10 +68,35 @@ namespace SR_CORE_NS {
         SR_NODISCARD TerrainGrassLodParams GetLodParams() const;
 
     private:
+        /// Исходный меш чанка, общий для задачи генерации и для последующих перегенераций
+        class SourceMesh : public SR_HTYPES_NS::SharedPtr<SourceMesh> {
+            using Super = SR_HTYPES_NS::SharedPtr<SourceMesh>;
+        public:
+            explicit SourceMesh(TerrainGrassSourceMesh&& mesh)
+                : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
+                , data(std::move(mesh))
+            { }
+
+            TerrainGrassSourceMesh data;
+        };
+        using SourceMeshPtr = SR_HTYPES_NS::SharedPtr<SourceMesh>;
+
         struct Task {
             uint64_t generation = 0;
             SR_HTYPES_NS::SharedPtr<TerrainGrassRenderer> pRenderer;
-            TerrainGrassSourceMesh mesh;
+            SourceMeshPtr pMesh;
+            /// Позиция наблюдателя, от которой отбираются травинки по LOD (дальние не генерируются)
+            SR_MATH_NS::FVector3 observer;
+        };
+
+        struct Source {
+            SourceMeshPtr pMesh;
+            SR_MATH_NS::FVector3 observer; /// позиция наблюдателя при последней генерации
+            /// Задача уже в очереди или в работе. Новая не ставится, иначе при движении результат постоянно
+            /// устаревает (поколение растёт) и чанк так и не получает траву
+            bool isPending = false;
+            /// Результат хотя бы одной генерации уже применён к рендереру
+            bool isApplied = false;
         };
 
         struct Result {
@@ -91,16 +120,22 @@ namespace SR_CORE_NS {
             std::vector<uint32_t> allowedMaterials;
             bool materialWeightDensity = true;
             float_t materialWeightThreshold = 0.f;
+            TerrainGrassLodParams lod;
+            float_t generationMargin = 0.f;
         };
 
         void StartWorker();
         void StopWorker();
-        void WorkerLoop();
+        /// Тело потока движка: одна задача за вызов. false - поток завершается.
+        /// Без SR_THREADS_ALLOWED (веб) вызывается из главного цикла через Thread::Factory::ManuallyUpdateThreads
+        bool WorkerStep();
 
         SR_NODISCARD Settings MakeSettings() const;
         SR_NODISCARD static Result Generate(const Settings& settings, Task&& task);
 
         void UpdateBenders(float_t dt);
+        void QueueGeneration(const SR_HTYPES_NS::SharedPtr<TerrainGrassRenderer>& pRenderer, Source& source);
+        void UpdateRegeneration(const SR_MATH_NS::FVector3& observer);
 
         SR_NODISCARD SR_HTYPES_NS::SharedPtr<TerrainGrassRenderer> GetOrCreateRenderer(ITerrainChunk& chunk);
         SR_NODISCARD uint64_t NextGeneration(TerrainGrassRenderer* pRenderer);
@@ -131,6 +166,10 @@ namespace SR_CORE_NS {
         float_t m_detailNoiseScale = 0.15f;
         /// @property @group(Placement)
         uint32_t m_maxInstancesPerChunk = 2000000;
+        /// @property @group(Placement) @tooltip(Запас дистанции в метрах: травинки генерируются с плотностью LOD на (дистанция - запас). Больше - реже перегенерация, больше памяти)
+        float_t m_generationMargin = 24.f;
+        /// @property @group(Placement) @tooltip(Перегенерировать траву чанка, когда наблюдатель сместился от точки генерации дальше этого (метры). Должно быть меньше generationMargin)
+        float_t m_regenerateDistance = 16.f;
         /// @property @group(Placement)
         int64_t m_seed = 1337;
         /// @property @group(Placement) @tooltip(Пустой список - трава на любом материале)
@@ -174,14 +213,17 @@ namespace SR_CORE_NS {
 
     private:
         std::vector<SR_HTYPES_NS::SharedPtr<TerrainGrassRenderer>> m_renderers;
+        /// Отключённые рендереры, у которых ещё живы старые буферы инстансов (ждут смены кадров свапчейна)
+        std::vector<SR_HTYPES_NS::SharedPtr<TerrainGrassRenderer>> m_retiredRenderers;
         std::unordered_map<TerrainGrassRenderer*, uint64_t> m_generations;
+        /// Исходный меш чанка - для перегенерации при смещении наблюдателя
+        std::unordered_map<TerrainGrassRenderer*, Source> m_sources;
         uint64_t m_generationCounter = 0;
 
         std::mutex m_queueMutex;
-        std::condition_variable m_queueCondition;
         std::deque<Task> m_tasks;
         std::vector<Result> m_results;
-        std::thread m_worker;
+        SR_HTYPES_NS::Thread::Ptr m_worker = nullptr;
         std::atomic<bool> m_stopWorker = false;
 
         SR_MATH_NS::FVector3 m_lastObserverPosition = SR_MATH_NS::FVector3(SR_FLOAT_MAX);

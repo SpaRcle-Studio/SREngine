@@ -8,6 +8,7 @@
 
 #include <Utils/ECS/GameObject.h>
 #include <Utils/FileSystem/PathDataAccessor.h>
+#include <Utils/Platform/Platform.h>
 
 #include <Codegen/TerrainGrass.generated.hpp>
 
@@ -113,15 +114,25 @@ namespace SR_CORE_NS {
         settings.allowedMaterials.assign(m_allowedMaterials.begin(), m_allowedMaterials.end());
         settings.materialWeightDensity = m_materialWeightDensity;
         settings.materialWeightThreshold = std::clamp(m_materialWeightThreshold, 0.f, 1.f);
+        settings.lod = GetLodParams();
+        settings.generationMargin = std::max(0.f, m_generationMargin);
         return settings;
     }
 
     void TerrainGrass::StartWorker() {
-        if (m_worker.joinable()) {
+        if (m_worker) {
             return;
         }
+
         m_stopWorker = false;
-        m_worker = std::thread([this]() { WorkerLoop(); });
+
+        if (!SR_HTYPES_NS::Thread::Factory::Instance().Create(m_worker, &TerrainGrass::WorkerStep, this)) {
+            SR_ERROR("TerrainGrass::StartWorker() : failed to create thread!");
+            m_worker = nullptr;
+            return;
+        }
+
+        m_worker->SetName("Terrain grass");
     }
 
     void TerrainGrass::StopWorker() {
@@ -130,10 +141,13 @@ namespace SR_CORE_NS {
             m_stopWorker = true;
             m_tasks.clear();
         }
-        m_queueCondition.notify_all();
-        if (m_worker.joinable()) {
-            m_worker.join();
+
+        if (m_worker) {
+            m_worker->TryJoin();
+            m_worker->Free();
+            m_worker = nullptr;
         }
+
         std::lock_guard lock(m_queueMutex);
         m_results.clear();
     }
@@ -151,6 +165,8 @@ namespace SR_CORE_NS {
 
         m_renderers.clear();
         m_generations.clear();
+        m_sources.clear();
+        m_retiredRenderers.clear();
         m_trails.clear();
         m_benderData.clear();
         if (m_pBenders) {
@@ -158,31 +174,42 @@ namespace SR_CORE_NS {
         }
     }
 
-    void TerrainGrass::WorkerLoop() {
-        while (true) {
-            SR_TRACY_ZONE;
+    bool TerrainGrass::WorkerStep() {
+        if (m_stopWorker) {
+            return false;
+        }
 
-            Task task;
-            Settings settings;
-            {
-                std::unique_lock lock(m_queueMutex);
-                m_queueCondition.wait(lock, [this]() { return m_stopWorker || !m_tasks.empty(); });
-                if (m_stopWorker) {
-                    return;
-                }
+        Task task;
+        Settings settings;
+        bool hasTask = false;
+        {
+            std::lock_guard lock(m_queueMutex);
+            if (!m_tasks.empty()) {
                 task = std::move(m_tasks.front());
                 m_tasks.pop_front();
                 settings = MakeSettings();
+                hasTask = true;
             }
-
-            Result result = Generate(settings, std::move(task));
-
-            std::lock_guard lock(m_queueMutex);
-            if (m_stopWorker) {
-                return;
-            }
-            m_results.emplace_back(std::move(result));
         }
+
+        if (!hasTask) {
+        #ifdef SR_THREADS_ALLOWED
+            SR_PLATFORM_NS::Sleep(5);
+        #endif
+            return true;
+        }
+
+        SR_TRACY_ZONE;
+
+        Result result = Generate(settings, std::move(task));
+
+        std::lock_guard lock(m_queueMutex);
+        if (m_stopWorker) {
+            return false;
+        }
+        m_results.emplace_back(std::move(result));
+
+        return true;
     }
 
     uint64_t TerrainGrass::NextGeneration(TerrainGrassRenderer* pRenderer) {
@@ -223,6 +250,12 @@ namespace SR_CORE_NS {
 
         chunk.SetGrass(this);
 
+        if (mesh.indices.empty()) {
+            /// Травы у чанка нет. Рендерер не создаём, а оставшийся от прошлого владельца объекта - сбрасываем
+            OnChunkDeactivated(chunk);
+            return;
+        }
+
         auto&& pRenderer = GetOrCreateRenderer(chunk);
         if (!pRenderer) {
             return;
@@ -231,6 +264,8 @@ namespace SR_CORE_NS {
         if (std::find(m_renderers.begin(), m_renderers.end(), pRenderer) == m_renderers.end()) {
             m_renderers.emplace_back(pRenderer);
         }
+        /// Активный рендерер сам досвобождает старые буферы в UpdateLod
+        std::erase(m_retiredRenderers, pRenderer);
 
         pRenderer->SetCastShadows(m_castShadows);
 
@@ -239,27 +274,64 @@ namespace SR_CORE_NS {
         }
         pRenderer->SetBenders(m_pBenders);
 
-        const uint64_t generation = NextGeneration(pRenderer.Get());
+        Source& source = m_sources[pRenderer.Get()];
+        source.isApplied = false;
+        source.pMesh = SourceMeshPtr::MakeShared(std::move(mesh));
+        source.observer = terrain.GetObserver().position;
 
-        if (mesh.indices.empty()) {
-            pRenderer->ClearInstances();
-            return;
-        }
+        QueueGeneration(pRenderer, source);
+    }
+
+    void TerrainGrass::QueueGeneration(const SR_HTYPES_NS::SharedPtr<TerrainGrassRenderer>& pRenderer, Source& source) {
+        source.isPending = true;
+        const uint64_t generation = NextGeneration(const_cast<TerrainGrassRenderer*>(pRenderer.Get()));
 
         StartWorker();
 
-        {
-            std::lock_guard lock(m_queueMutex);
-            /// Если по этому чанку уже стоит задача - она устарела
-            std::erase_if(m_tasks, [&](const Task& task) { return task.pRenderer == pRenderer; });
-            m_tasks.emplace_back(Task {
-                .generation = generation,
-                .pRenderer = pRenderer,
-                .mesh = std::move(mesh)
-            });
+        std::lock_guard lock(m_queueMutex);
+        /// Если по этому чанку уже стоит задача - она устарела
+        std::erase_if(m_tasks, [&](const Task& task) { return task.pRenderer == pRenderer; });
+        m_tasks.emplace_back(Task {
+            .generation = generation,
+            .pRenderer = pRenderer,
+            .pMesh = source.pMesh,
+            .observer = source.observer
+        });
+    }
+
+    void TerrainGrass::UpdateRegeneration(const SR_MATH_NS::FVector3& observer) {
+        SR_TRACY_ZONE;
+
+        /// Травинки сгенерированы с плотностью LOD относительно точки генерации с запасом generationMargin.
+        /// Пока наблюдатель в пределах regenerateDistance от неё - запаса хватает, иначе вблизи станет редко.
+        const float_t threshold = std::max(1.f, std::min(m_regenerateDistance, m_generationMargin));
+        for (auto&& pRenderer : m_renderers) {
+            auto&& pIt = m_sources.find(pRenderer.Get());
+            if (pIt == m_sources.end() || pIt->second.isPending) {
+                continue;
+            }
+            if (pIt->second.observer.Distance(observer) < threshold) {
+                continue;
+            }
+            pIt->second.observer = observer;
+            QueueGeneration(pRenderer, pIt->second);
+        }
+    }
+
+    bool TerrainGrass::IsChunkReady(const ITerrainChunk& chunk) const {
+        auto&& pObject = chunk.GetObject();
+        if (!pObject || !m_enabled) {
+            return true;
         }
 
-        m_queueCondition.notify_one();
+        auto&& pRenderer = pObject->GetComponent<TerrainGrassRenderer>();
+        if (!pRenderer) {
+            return true;
+        }
+
+        auto&& pIt = m_sources.find(pRenderer.Get());
+        /// Нет источника - травы у чанка нет (пустой меш или LOD без травы)
+        return pIt == m_sources.end() || pIt->second.isApplied;
     }
 
     void TerrainGrass::OnChunkDeactivated(ITerrainChunk& chunk) {
@@ -275,15 +347,22 @@ namespace SR_CORE_NS {
             return;
         }
 
-        /// Инвалидируем результаты генерации, которые ещё в полёте
-        SR_MAYBE_UNUSED_VAR NextGeneration(pRenderer.Get());
-
         {
             std::lock_guard lock(m_queueMutex);
             std::erase_if(m_tasks, [&](const Task& task) { return task.pRenderer == pRenderer; });
         }
 
         pRenderer->ClearInstances();
+
+        /// Объект чанка может быть уничтожен пулом, поэтому рендерер больше не отслеживается.
+        /// Результаты генерации, которые ещё в полёте, отбросятся: поколения для рендерера больше нет.
+        m_generations.erase(pRenderer.Get());
+        m_sources.erase(pRenderer.Get());
+        std::erase(m_renderers, pRenderer);
+
+        if (!pRenderer->FreeRetired()) {
+            m_retiredRenderers.emplace_back(pRenderer);
+        }
     }
 
     void TerrainGrass::Update(Terrain& terrain, float_t dt) {
@@ -309,6 +388,10 @@ namespace SR_CORE_NS {
                 if (pIt == m_generations.end() || pIt->second != result.generation) {
                     continue; /// чанк успели перегенерировать или выгрузить
                 }
+                if (auto&& pSource = m_sources.find(result.pRenderer.Get()); pSource != m_sources.end()) {
+                    pSource->second.isPending = false;
+                    pSource->second.isApplied = true;
+                }
                 result.pRenderer->SetInstances(std::move(result.instances), std::move(result.cells));
                 m_forceLodUpdate = true;
             }
@@ -318,8 +401,15 @@ namespace SR_CORE_NS {
 
         UpdateBenders(dt);
 
+        std::erase_if(m_retiredRenderers, [](const SR_HTYPES_NS::SharedPtr<TerrainGrassRenderer>& pRenderer) {
+            return !pRenderer || pRenderer->FreeRetired();
+        });
+
         /// ---- LOD / отсечение по ячейкам
         const auto observer = terrain.GetObserver();
+
+        UpdateRegeneration(observer.position);
+
         const auto lodParams = GetLodParams();
 
         /// Конус видимости с запасом m_cullMarginDegrees: пока камера поворачивается в его пределах,
@@ -532,7 +622,11 @@ namespace SR_CORE_NS {
         result.generation = task.generation;
         result.pRenderer = task.pRenderer;
 
-        const auto& mesh = task.mesh;
+        if (!task.pMesh) {
+            return result;
+        }
+
+        const auto& mesh = task.pMesh->data;
         const auto& positions = mesh.positions;
         const auto& normals = mesh.normals;
         const auto& indices = mesh.indices;
@@ -565,7 +659,7 @@ namespace SR_CORE_NS {
         };
 
         std::vector<RawInstance> raw;
-        raw.reserve(std::min<size_t>(indices.size() / 3 * 8, settings.maxInstancesPerChunk));
+        raw.reserve(std::min<size_t>(indices.size() / 3 * 8, static_cast<size_t>(settings.maxInstancesPerChunk) * 2));
 
         const bool hasBlend = hasMaterials && mesh.materials2.size() == positions.size() && mesh.blends.size() == positions.size();
 
@@ -610,10 +704,6 @@ namespace SR_CORE_NS {
         };
 
         for (size_t t = 0; t + 2 < indices.size(); t += 3) {
-            if (raw.size() >= settings.maxInstancesPerChunk) {
-                break;
-            }
-
             const uint32_t ia = indices[t + 0];
             const uint32_t ib = indices[t + 1];
             const uint32_t ic = indices[t + 2];
@@ -668,6 +758,11 @@ namespace SR_CORE_NS {
 
             /// детерминированный сид треугольника по его мировому центру (не зависит от порядка индексов и от чанка)
             const SR_MATH_NS::FVector3 center = (a + b + c) / 3.f + mesh.origin;
+
+            /// Треугольник целиком дальше дальности травы - пропускаем. Треугольники marching cubes не больше вокселя (maxEdgeLength).
+            if (center.Distance(task.observer) - mesh.maxEdgeLength - settings.generationMargin >= settings.lod.maxDistance) {
+                continue;
+            }
             const uint32_t triangleSeed = GrassHash(
                 static_cast<int32_t>(std::floor(center.x * 64.f)),
                 static_cast<int32_t>(std::floor(center.y * 64.f)),
@@ -697,6 +792,7 @@ namespace SR_CORE_NS {
 
                 const SR_MATH_NS::FVector3 position = a * w + b * u + c * v;
                 const SR_MATH_NS::FVector3 worldPos = position + mesh.origin;
+                const float_t rank = GrassToFloat(h3);
 
                 if (hasBounds && (
                     position.x < mesh.bounds.min.x || position.x > mesh.bounds.max.x ||
@@ -731,24 +827,38 @@ namespace SR_CORE_NS {
                     continue;
                 }
 
+                /// Дальше дальности травы (с запасом generationMargin на движение) травинка никогда не будет видна.
+                /// Отбор по LOD-кривой здесь не делается: при движении наблюдателя вблизи становилось бы редко,
+                /// плотность по дистанции применяет рендерер при отрисовке.
+                if (worldPos.Distance(task.observer) - settings.generationMargin >= settings.lod.maxDistance) {
+                    continue;
+                }
+
                 const auto cellX = std::min(cellsX - 1, static_cast<uint32_t>(std::max(0.f, (position.x - boundsMin.x) / cellSize)));
                 const auto cellZ = std::min(cellsZ - 1, static_cast<uint32_t>(std::max(0.f, (position.z - boundsMin.z) / cellSize)));
 
                 RawInstance& instance = raw.emplace_back();
                 instance.instance.position = position;
                 instance.instance.normal = normal;
-                instance.instance.rank = GrassToFloat(h3);
+                instance.instance.rank = rank;
                 instance.instance.random = GrassToFloat(GrassHash(h3 ^ 0x2C1B3C6DU));
                 instance.cell = cellZ * cellsX + cellX;
-
-                if (raw.size() >= settings.maxInstancesPerChunk) {
-                    break;
-                }
             }
         }
 
         if (raw.empty()) {
             return result;
+        }
+
+        /// Лимит отбрасывает самые дальние от наблюдателя травинки. Срезать по rank нельзя: плотность вблизи
+        /// падала бы и скакала при каждой перегенерации (выглядит как задвоение). Порядок обхода треугольников
+        /// тоже не подходит - часть чанка оставалась бы без травы.
+        if (settings.maxInstancesPerChunk > 0 && raw.size() > settings.maxInstancesPerChunk) {
+            const SR_MATH_NS::FVector3 observer = task.observer - mesh.origin;
+            std::nth_element(raw.begin(), raw.begin() + settings.maxInstancesPerChunk, raw.end(), [&observer](const RawInstance& left, const RawInstance& right) {
+                return (left.instance.position - observer).LengthSq() < (right.instance.position - observer).LengthSq();
+            });
+            raw.resize(settings.maxInstancesPerChunk);
         }
 
         /// ---- сортировка: ячейка -> корзина rank. Так любой LOD ячейки становится одним непрерывным диапазоном.

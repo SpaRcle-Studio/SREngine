@@ -221,7 +221,14 @@ namespace SR_PHYSICS_NS {
 
     void PhysicsScene::Register(PhysicsScene::RigidbodyPtr pRigidbody) {
         SR_TRACY_ZONE;
-        m_rigidbodyToRegister.emplace_back(pRigidbody);
+        /// Flush сначала добавляет, потом удаляет. Если тело выключили и снова включили в одном кадре,
+        /// без этого оно останется вне сцены. Уничтожаемые тела (без родителя) должны дойти до удаления.
+        if (pRigidbody->HasParent()) {
+            m_rigidbodyToRemove.erase(std::remove(m_rigidbodyToRemove.begin(), m_rigidbodyToRemove.end(), pRigidbody), m_rigidbodyToRemove.end());
+        }
+        if (std::find(m_rigidbodyToRegister.begin(), m_rigidbodyToRegister.end(), pRigidbody) == m_rigidbodyToRegister.end()) {
+            m_rigidbodyToRegister.emplace_back(pRigidbody);
+        }
     }
 
     void PhysicsScene::Register(PhysicsScene::CharacterControllerPtr pController) {

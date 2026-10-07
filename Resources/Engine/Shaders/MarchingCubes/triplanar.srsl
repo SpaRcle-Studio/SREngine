@@ -2,6 +2,7 @@
 [[uniform], [public]] sampler2D soilTex;
 [[uniform], [public]] sampler2D stoneTex;
 [[uniform], [public]] sampler2D sandTex;
+[[uniform], [public]] float blendSharpness = 0.25; // ширина перехода между материалами с учётом рельефа текстур
 
 float hash(vec2 p) {
     return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
@@ -22,7 +23,14 @@ vec2 getTileOffset(vec2 pos) {
     return offset;
 }
 
-vec4 sampleTriplanar(sampler2D tex) {
+vec4 sampleTriplanar(sampler2D tex, vec2 uvX, vec2 uvY, vec2 uvZ, vec3 blend) {
+    vec4 x = texture(tex, uvX);
+    vec4 y = texture(tex, uvY);
+    vec4 z = texture(tex, uvZ);
+    return x * blend.x + y * blend.y + z * blend.z;
+}
+
+vec4 triplanarMaterial() {
     vec3 n = normalize(NORMAL);
 
     // веса для смешивания по осям
@@ -30,59 +38,34 @@ vec4 sampleTriplanar(sampler2D tex) {
     blend = pow(blend, vec3(4.0));          // резкость перехода
     blend /= (blend.x + blend.y + blend.z); // нормализация
 
-    // проекции координат для каждой плоскости
-    vec2 offX = getTileOffset(VERTEX.zy);
-    vec2 offY = getTileOffset(VERTEX.xz);
-    vec2 offZ = getTileOffset(VERTEX.xy);
+    // проекции координат считаются один раз для всех материалов
+    vec2 uvX = VERTEX.zy * textureScale + getTileOffset(VERTEX.zy);
+    vec2 uvY = VERTEX.xz * textureScale + getTileOffset(VERTEX.xz);
+    vec2 uvZ = VERTEX.xy * textureScale + getTileOffset(VERTEX.xy);
 
-    vec2 uvX = VERTEX.zy * textureScale + offX;
-    vec2 uvY = VERTEX.xz * textureScale + offY;
-    vec2 uvZ = VERTEX.xy * textureScale + offZ;
+    vec4 soil = sampleTriplanar(soilTex, uvX, uvY, uvZ, blend);
+    vec4 stone = sampleTriplanar(stoneTex, uvX, uvY, uvZ, blend);
+    vec4 sand = sampleTriplanar(sandTex, uvX, uvY, uvZ, blend);
 
-    // сэмплинг текстуры
-    vec4 x = texture(tex, uvX);
-    vec4 y = texture(tex, uvY);
-    vec4 z = texture(tex, uvZ);
+    // Веса всех трёх материалов интерполируются по треугольнику (раньше id материала был flat и
+    // на стыке трёх материалов менялся скачком по границе треугольника)
+    vec3 weights = max(MATERIAL_WEIGHTS.xyz, vec3(0.0));
+    weights /= max(weights.x + weights.y + weights.z, 0.0001);
 
-    // смешиваем по нормали
-    return x * blend.x + y * blend.y + z * blend.z;
+    // Height blend: в зоне перехода материал с более "высоким" рельефом проступает раньше,
+    // переход получается естественным, без мыльного полупрозрачного смешивания
+    vec3 heights = vec3(
+        dot(soil.rgb, vec3(0.333)),
+        dot(stone.rgb, vec3(0.333)),
+        dot(sand.rgb, vec3(0.333))
+    );
+    vec3 h = weights + heights * weights;
+    float hMax = max(max(h.x, h.y), h.z) - max(blendSharpness, 0.001);
+    vec3 b = max(h - vec3(hMax), vec3(0.0));
+    b /= max(b.x + b.y + b.z, 0.0001);
+
+    return soil * b.x + stone * b.y + sand * b.z;
 }
-
-vec4 getMaterialColor(uint matId) {
-    if (matId == 0) { return sampleTriplanar(soilTex); }
-    if (matId == 1) { return sampleTriplanar(stoneTex); }
-    if (matId == 2) { return sampleTriplanar(sandTex); }
-    return vec4(1.0);
-}
-
-vec4 triplanarMaterial() {
-    vec4 cA = getMaterialColor(MATERIAL_ID0);
-    vec4 cB = getMaterialColor(MATERIAL_ID1);
-    return mix(cA, cB, BLEND_FACTOR);
-}
-
-//vec4 sampleTriplanar(vec3 worldPos, vec3 normal) {
-//    vec3 n = normalize(normal);
-//
-//    vec3 blend = abs(n);
-//    blend = pow(blend, vec3(4.0));
-//    blend /= (blend.x + blend.y + blend.z);
-//
-//    // ----- offsets по крупным тайлам -----
-//    vec2 offX = getTileOffset(worldPos.zy);
-//    vec2 offY = getTileOffset(worldPos.xz);
-//    vec2 offZ = getTileOffset(worldPos.xy);
-//
-//    vec2 uvX = worldPos.zy * textureScale + offX;
-//    vec2 uvY = worldPos.xz * textureScale + offY;
-//    vec2 uvZ = worldPos.xy * textureScale + offZ;
-//
-//    vec4 x = texture(diffuse, uvX);
-//    vec4 y = texture(diffuse, uvY);
-//    vec4 z = texture(diffuse, uvZ);
-//
-//    return x * blend.x + y * blend.y + z * blend.z;
-//}
 
 vec2 fragment_uv() {
     // uv не подходит для трипланарного текстурирования
