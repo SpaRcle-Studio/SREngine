@@ -84,6 +84,10 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         using OnBackgroundPopupCallback = SR_HTYPES_NS::Function<void(SR_MATH_NS::FVector2)>;
         using OnNodeDoubleClickedCallback = SR_HTYPES_NS::Function<void(NodeInstance&)>;
         using OnNodePopupCallback = SR_HTYPES_NS::Function<void(NodeInstance&, SR_MATH_NS::FVector2)>;
+        /// линк, протянутый от пина, отпущен не над пином. Вызывается один раз, сразу после чего
+        /// открывается попап. Пин действителен только внутри вызова
+        using OnLinkDroppedCallback = SR_HTYPES_NS::Function<void(PinInstance&)>;
+        using OnLinkDroppedPopupCallback = SR_HTYPES_NS::Function<void(SR_MATH_NS::FVector2)>;
     public:
         static NodeEditorInstance* Create();
 
@@ -122,6 +126,8 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         void SetBackgroundPopupCallback(OnBackgroundPopupCallback callback) { m_onBackgroundPopupCallback = std::move(callback); }
         void SetNodeDoubleClickedCallback(OnNodeDoubleClickedCallback callback) { m_onNodeDoubleClickedCallback = std::move(callback); }
         void SetNodePopupCallback(OnNodePopupCallback callback) { m_onNodePopupCallback = std::move(callback); }
+        void SetLinkDroppedCallback(OnLinkDroppedCallback callback) { m_onLinkDroppedCallback = std::move(callback); }
+        void SetLinkDroppedPopupCallback(OnLinkDroppedPopupCallback callback) { m_onLinkDroppedPopupCallback = std::move(callback); }
         void SetStyleType(NodeEditorStyleType styleType);
         void CreateStateMachineTransition(NodeInstance& node);
 
@@ -131,6 +137,8 @@ namespace SR_GRAPH_GUI_NS::Immediate {
 
     protected:
         OnNodePopupCallback m_onNodePopupCallback;
+        OnLinkDroppedCallback m_onLinkDroppedCallback;
+        OnLinkDroppedPopupCallback m_onLinkDroppedPopupCallback;
         OnNodeDoubleClickedCallback m_onNodeDoubleClickedCallback;
         OnSomethingChangedCallback m_onSomethingChangedCallback;
         OnNodeDeletedCallback m_onNodeDeletedCallback;
@@ -147,6 +155,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         SR_UTILS_NS::String m_backgroundText;
         NodeEditorStyleType m_styleType = NodeEditorStyleType::Graph;
         NodeInstance* m_pPopupNode = nullptr;
+        bool m_openLinkDroppedPopup = false;
         NodeInstance* m_stateMachineTransitionSourceNode = nullptr;
         SR_MATH_NS::FRect m_nodeEditorRegion;
 
@@ -300,6 +309,7 @@ namespace SR_GRAPH_GUI_NS::Immediate::NodeEditor {
     SR_IMMEDIATE_GUI_DLL_API extern void Link(uintptr_t linkId, uintptr_t startPinId, uintptr_t endPinId);
     SR_IMMEDIATE_GUI_DLL_API extern bool BeginCreate();
     SR_IMMEDIATE_GUI_DLL_API extern bool QueryNewLink(uintptr_t* startPinId, uintptr_t* endPinId);
+    SR_IMMEDIATE_GUI_DLL_API extern bool QueryNewNode(uintptr_t* pinId);
     SR_IMMEDIATE_GUI_DLL_API extern bool AcceptNewItem();
     SR_IMMEDIATE_GUI_DLL_API extern void EndCreate();
     SR_IMMEDIATE_GUI_DLL_API extern bool BeginDelete();

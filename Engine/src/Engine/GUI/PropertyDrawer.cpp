@@ -299,7 +299,7 @@ namespace SR_CORE_GUI_NS {
                 SR_GRAPH_GUI_NS::Immediate::SameLine();
                 SR_GRAPH_GUI_NS::Immediate::PushID("Value");
 
-                SR_UTILS_NS::Reflection::Value optionalValue = pOptionalBase->GetReflectionValue().Copy();
+                SR_UTILS_NS::Reflection::Value optionalValue = pOptionalBase->GetReflectionValue();
 
                 SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard lock(!hasValue);
                 PropertyDrawerContext valueContext = context;
@@ -714,9 +714,8 @@ namespace SR_CORE_GUI_NS {
                 value = value.Copy();
                 SetReflectedValue(context, feedback, value);
             }
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
         }
-
-        SR_GRAPH_GUI_NS::Immediate::SameLine();
 
         if (SR_MATH_NS::FColor* pColor = value.Cast<SR_MATH_NS::FColor>()) {
             if (SR_GRAPH_GUI_NS::Immediate::ColorEditAlpha("##ColorPicker", *pColor, SR_GRAPH_GUI_NS::Immediate::ColorEditFlags::DefaultOptions)) {

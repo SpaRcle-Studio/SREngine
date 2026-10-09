@@ -47,10 +47,15 @@ namespace SR_CORE_GUI_NS {
 
     private:
         void DrawCreateNodeMenu(const SR_MATH_NS::FVector2& popupPos);
+        void DrawLinkDroppedMenu(const SR_MATH_NS::FVector2& popupPos);
+        void OnLinkDropped(SR_IMMEDIATE_GUI_NS::PinInstance& pin);
+        /// создаёт узел и подключает его первый подходящий пин к пину, от которого тянули связь
+        void CreateNodeFromDroppedLink(const SR_FLUX_NS::FluxGraphNode& node, SR_MATH_NS::FVector2 pos);
         void DrawNodeInspector(SR_FLUX_NS::FluxGraphNode& node);
         void DrawConstantInspector(SR_FLUX_NS::FluxGraphNode& node);
         void DrawCallableInspector(SR_FLUX_NS::FluxGraphNode& node);
         void DrawCastInspector(SR_FLUX_NS::FluxGraphNode& node);
+        void DrawPropertyInspector(SR_FLUX_NS::FluxGraphNode& node);
         void DrawVariableSelector(SR_FLUX_NS::FluxGraphNode& node);
         void DrawGraphInspector();
         void CopySelectedNodes();
@@ -98,6 +103,17 @@ namespace SR_CORE_GUI_NS {
         SR_HTYPES_NS::WeakPtr<SR_FLUX_NS::FluxRuntime> m_runtime;
 
         SR_HTYPES_NS::SortedVector<uint32_t> m_executedNodes;
+
+        /// пин, от которого протянули связь в пустое место. Пины редактора пересоздаются каждый
+        /// кадр, поэтому хранится не указатель, а индексы
+        struct DroppedLinkPin {
+            uint32_t nodeIndex = SR_UINT32_MAX;
+            uint32_t pinIndex = SR_UINT32_MAX;
+            bool isInput = false;
+            bool isFlow = false;
+            /// класс объекта, который выдаёт выходной пин - для него предлагаются свойства и методы
+            SR_UTILS_NS::StringAtom className;
+        } m_droppedLinkPin;
 
         std::string m_nameBuffer;
         std::string m_objectBuffer;

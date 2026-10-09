@@ -496,7 +496,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
                     return true;
                 }
             }
-            if (pFrom->category == Utils::Reflection::ReflectedCategoryType::Value) {
+            if (pFrom->category == Utils::Reflection::ReflectedCategoryType::Value || pTo->category == Utils::Reflection::ReflectedCategoryType::Value) {
                 return true;
             }
             if (pFrom->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Container && pFrom->detailedType == "SharedPtr") {
@@ -647,6 +647,16 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
                         }
                     }
                 }
+
+                /// линк отпущен над пустым местом - предлагаем создать узел, подключенный к пину
+                uintptr_t pinId = 0;
+                if (m_onLinkDroppedCallback && SR_IMMEDIATE_GUI_NS::NodeEditor::QueryNewNode(&pinId)) {
+                    if (SR_IMMEDIATE_GUI_NS::NodeEditor::AcceptNewItem()) {
+                        m_onLinkDroppedCallback(*reinterpret_cast<PinInstance*>(pinId));
+                        m_popupMousePos = SR_GRAPH_GUI_NS::Immediate::GetMousePos();
+                        m_openLinkDroppedPopup = true;
+                    }
+                }
             }
             SR_IMMEDIATE_GUI_NS::NodeEditor::EndCreate();
         }
@@ -667,6 +677,19 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
             }
             if (SR_GRAPH_GUI_NS::Immediate::BeginPopup("NodeEditorGraphContext")) {
                 m_onBackgroundPopupCallback(m_popupMousePos);
+                SR_GRAPH_GUI_NS::Immediate::EndPopup();
+            }
+            SR_IMMEDIATE_GUI_NS::NodeEditor::ResumeNodeEditor();
+        }
+
+        if (m_onLinkDroppedPopupCallback) {
+            SR_IMMEDIATE_GUI_NS::NodeEditor::SuspendNodeEditor();
+            if (m_openLinkDroppedPopup) {
+                SR_GRAPH_GUI_NS::Immediate::OpenPopup("NodeEditorLinkDroppedContext");
+                m_openLinkDroppedPopup = false;
+            }
+            if (SR_GRAPH_GUI_NS::Immediate::BeginPopup("NodeEditorLinkDroppedContext")) {
+                m_onLinkDroppedPopupCallback(m_popupMousePos);
                 SR_GRAPH_GUI_NS::Immediate::EndPopup();
             }
             SR_IMMEDIATE_GUI_NS::NodeEditor::ResumeNodeEditor();

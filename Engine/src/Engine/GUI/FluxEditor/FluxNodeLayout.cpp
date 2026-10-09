@@ -7,6 +7,7 @@
 #include <Utils/Common/EnumReflector.h>
 #include <Utils/FileSystem/Path.h>
 #include <Utils/Reflection/Method.h>
+#include <Utils/Reflection/Property.h>
 #include <Utils/Reflection/Value.h>
 #include <Utils/TypeTraits/SRClassMeta.h>
 #include <Utils/TypeTraits/Factory.h>
@@ -190,6 +191,18 @@ namespace SR_CORE_GUI_NS {
                 AddPin(layout.outputs, "Exec", true);
                 AddPin(layout.outputs, "Cast Failed", true);
                 AddPin(layout.outputs, "As Object").pTypeInfo = MakeClassTypeInfo(name, tmpTypeInfos);
+                break;
+            }
+            case SR_FLUX_NS::FluxGraphNodeType::ReadProperty: {
+                SR_UTILS_NS::FormatTo(layout.title, "{}.{}", callable.object, callable.function);
+                AddPin(layout.inputs, "Object").pTypeInfo = MakeClassTypeInfo(callable.object, tmpTypeInfos);
+
+                const SR_UTILS_NS::Reflection::Property* pProperty = nullptr;
+                if (auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(callable.object)) {
+                    pProperty = pMeta->FindProperty(callable.function);
+                }
+                auto&& pDefaultValue = pProperty ? &pProperty->GetDefaultValue() : nullptr;
+                AddPin(layout.outputs, "Value").pTypeInfo = pDefaultValue && pDefaultValue->IsValid() ? &pDefaultValue->GetTypeInfo() : nullptr;
                 break;
             }
             case SR_FLUX_NS::FluxGraphNodeType::Sequence:

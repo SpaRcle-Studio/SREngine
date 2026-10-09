@@ -149,7 +149,7 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::Path m_material = "Engine/Materials/terrain-grass.mat";
 
         /// @property @group(Placement) @tooltip(Травинок на квадратный метр горизонтальной поверхности)
-        float_t m_density = 80.f;
+        float_t m_density = 60.f;
         /// @property @group(Placement) @tooltip(Размер ячейки LOD/отсечения в метрах)
         float_t m_cellSize = 8.f;
         /// @property @group(Placement) @tooltip(Ниже этого значения dot(normal, up) травы нет)

@@ -95,6 +95,15 @@ namespace SR_GRAPH_GUI_NS::Immediate::NodeEditor {
         return false;
     }
 
+    bool QueryNewNode(uintptr_t* pinId) {
+        ax::NodeEditor::PinId id;
+        if (ax::NodeEditor::QueryNewNode(&id)) {
+            if (pinId) *pinId = id.Get();
+            return true;
+        }
+        return false;
+    }
+
     bool AcceptNewItem() {
         return ax::NodeEditor::AcceptNewItem();
     }
@@ -227,6 +236,7 @@ namespace SR_GRAPH_GUI_NS::Immediate::NodeEditor {
     void Link(uintptr_t linkId, uintptr_t startPinId, uintptr_t endPinId) { }
     bool BeginCreate() { return false; }
     bool QueryNewLink(uintptr_t* startPinId, uintptr_t* endPinId) { return false; }
+    bool QueryNewNode(uintptr_t* pinId) { return false; }
     bool AcceptNewItem() { return false; }
     void EndCreate() { }
     bool BeginDelete() { return false; }

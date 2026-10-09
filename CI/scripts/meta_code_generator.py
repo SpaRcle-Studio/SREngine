@@ -109,7 +109,10 @@ def generate_class_meta_methods(f, class_structures, class_obj, tabs):
 
             for i, param in enumerate(method.parameters):
                 #f.write('\t' * (tabs + 4) + f'auto&& arg{i} = params[{i}]->Cast<std::remove_reference_t<Traits_{method.name}::Arg<{i}>>>();\n')
-                f.write('\t' * (tabs + 4) + f'auto&& arg{i} = params[{i}]->Cast<std::remove_reference_t<{param.type.get_full_type()}>>();\n')
+                if param.type.get_full_type() == 'const Reflection::Value &':
+                    f.write('\t' * (tabs + 4) + f'auto&& arg{i} = params[{i}];\n')
+                else:
+                    f.write('\t' * (tabs + 4) + f'auto&& arg{i} = params[{i}]->Cast<std::remove_reference_t<{param.type.get_full_type()}>>();\n')
 
             if is_method_has_return:
                 if method.dontPack:
