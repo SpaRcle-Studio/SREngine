@@ -33,6 +33,7 @@ namespace SR_CORE_NS {
     static const SR_UTILS_NS::StringAtom SHADER_GRASS_LOW_SEGMENTS = "grassLowSegments";
     static const SR_UTILS_NS::StringAtom SHADER_GRASS_BENDERS_COUNT = "grassBendersCount";
     static const SR_UTILS_NS::StringAtom SHADER_GRASS_BENDERS_SSBO = "grassBenders";
+    static const SR_UTILS_NS::StringAtom SHADER_GRASS_BENDERS_BOUNDS = "grassBendersBounds";
 
     float_t TerrainGrassLodParams::GetKeepFraction(float_t distance) const noexcept {
         if (distance <= fullDensityDistance) {
@@ -296,16 +297,6 @@ namespace SR_CORE_NS {
             /// Текущий кадр перезаписывается и больше не будет ссылаться на старые буферы
             FreeRetiredVBOs(pPipeline);
 
-            if (auto&& pShader = pPipeline->GetCurrentShader()) {
-                auto&& macros = pShader->GetMacros();
-                if (macros.IsDefined("SR_DEFINE_CASCADED_SHADOW_MAP_PASS")) {
-                    /// При инстансинге каскадов gl_InstanceIndex занят под индекс каскада, совместить с травой нельзя.
-                    if (!m_castShadows || macros.IsDefined("CASCADES_INSTANCING")) {
-                        return;
-                    }
-                }
-            }
-
             if (m_VBO == SR_ID_INVALID || m_uploadedCount == 0 || m_ranges.empty()) {
                 return;
             }
@@ -380,10 +371,13 @@ namespace SR_CORE_NS {
         }
 
         uint32_t bendersCount = 0;
+        SR_MATH_NS::FVector4 bendersBounds;
         if (pBenders) {
             SR_MAYBE_UNUSED_VAR pBenders->PrepareFrame(GetPipeline(), bendersCount);
+            bendersBounds = pBenders->GetBounds();
         }
         shader.SetInt(SHADER_GRASS_BENDERS_COUNT, static_cast<int32_t>(bendersCount));
+        shader.SetVec4(SHADER_GRASS_BENDERS_BOUNDS, bendersBounds);
     }
 
     void TerrainGrassRenderer::UseSSBO() {
@@ -428,6 +422,24 @@ namespace SR_CORE_NS {
 
         if (count > 0) {
             std::memcpy(m_data.data(), benders.data(), count * sizeof(TerrainGrassBenderGPU));
+
+            SR_MATH_NS::FVector3 boundsMin(SR_FLOAT_MAX);
+            SR_MATH_NS::FVector3 boundsMax(-SR_FLOAT_MAX);
+            for (uint32_t i = 0; i < count; ++i) {
+                const auto& bender = m_data[i];
+                /// По вертикали точка влияет на травинку дальше своего радиуса (см. grassBendPush в шейдере)
+                const SR_MATH_NS::FVector3 extent(bender.radius * 2.5f + 0.3f);
+                const SR_MATH_NS::FVector3 min = bender.position - extent;
+                const SR_MATH_NS::FVector3 max = bender.position + extent;
+                boundsMin = SR_MATH_NS::FVector3(std::min(boundsMin.x, min.x), std::min(boundsMin.y, min.y), std::min(boundsMin.z, min.z));
+                boundsMax = SR_MATH_NS::FVector3(std::max(boundsMax.x, max.x), std::max(boundsMax.y, max.y), std::max(boundsMax.z, max.z));
+            }
+
+            const SR_MATH_NS::FVector3 center = (boundsMin + boundsMax) * 0.5f;
+            m_bounds = SR_MATH_NS::FVector4(center, (boundsMax - center).Length());
+        }
+        else {
+            m_bounds = SR_MATH_NS::FVector4();
         }
         m_count = count;
         ++m_version;
@@ -460,6 +472,11 @@ namespace SR_CORE_NS {
         }
 
         return pSSBO->GetSSBO();
+    }
+
+    SR_MATH_NS::FVector4 TerrainGrassBenders::GetBounds() {
+        std::lock_guard lock(m_mutex);
+        return m_bounds;
     }
 
     void TerrainGrassBenders::FreeVideoMemory() {
@@ -509,6 +526,8 @@ namespace SR_CORE_NS {
     }
 
     void TerrainGrassRenderer::FreeVideoMemory() {
+        SR_TRACY_ZONE;
+
         Super::FreeVideoMemory();
 
         {

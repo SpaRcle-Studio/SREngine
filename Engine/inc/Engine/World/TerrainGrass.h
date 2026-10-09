@@ -20,12 +20,12 @@ namespace SR_CORE_NS {
     /// Входные данные для генерации травы чанка. Позиции и нормали - в мировых осях относительно
     /// позиции объекта чанка (т.е. уже с учётом масштаба чанка, но без переноса).
     struct TerrainGrassSourceMesh {
-        std::vector<SR_MATH_NS::FVector3> positions;
-        std::vector<SR_MATH_NS::FVector3> normals;
-        std::vector<uint32_t> materials;  /// опционально, по вершине: основной материал
-        std::vector<uint32_t> materials2; /// опционально, по вершине: второй материал
-        std::vector<float_t> blends;      /// опционально, по вершине: доля второго материала [0, 1]
-        std::vector<uint32_t> indices;
+        SR_UTILS_NS::Vector<SR_MATH_NS::FVector3> positions;
+        SR_UTILS_NS::Vector<SR_MATH_NS::FVector3> normals;
+        SR_UTILS_NS::Vector<uint32_t> materials;  /// опционально, по вершине: основной материал
+        SR_UTILS_NS::Vector<uint32_t> materials2; /// опционально, по вершине: второй материал
+        SR_UTILS_NS::Vector<float_t> blends;      /// опционально, по вершине: доля второго материала [0, 1]
+        SR_UTILS_NS::Vector<uint32_t> indices;
         SR_MATH_NS::FVector3 origin;     /// мировая позиция объекта чанка (для детерминированного шума)
         /// Треугольники marching cubes лежат внутри одного вокселя, поэтому ребро длиннее этого значения
         /// означает мусорную вершину (на стыках чанков). Такие треугольники пропускаются. 0 - без проверки.
@@ -117,7 +117,7 @@ namespace SR_CORE_NS {
             float_t detailNoiseScale = 0.f;
             uint32_t maxInstancesPerChunk = 0;
             int64_t seed = 0;
-            std::vector<uint32_t> allowedMaterials;
+            SR_UTILS_NS::Vector<uint32_t> allowedMaterials;
             bool materialWeightDensity = true;
             float_t materialWeightThreshold = 0.f;
             TerrainGrassLodParams lod;
@@ -212,17 +212,17 @@ namespace SR_CORE_NS {
         uint32_t m_drawnInstances = 0;
 
     private:
-        std::vector<SR_HTYPES_NS::SharedPtr<TerrainGrassRenderer>> m_renderers;
+        SR_UTILS_NS::Vector<SR_HTYPES_NS::SharedPtr<TerrainGrassRenderer>> m_renderers;
         /// Отключённые рендереры, у которых ещё живы старые буферы инстансов (ждут смены кадров свапчейна)
-        std::vector<SR_HTYPES_NS::SharedPtr<TerrainGrassRenderer>> m_retiredRenderers;
-        std::unordered_map<TerrainGrassRenderer*, uint64_t> m_generations;
+        SR_UTILS_NS::Vector<SR_HTYPES_NS::SharedPtr<TerrainGrassRenderer>> m_retiredRenderers;
+        SR_HTYPES_NS::FlatHashMap<TerrainGrassRenderer*, uint64_t> m_generations;
         /// Исходный меш чанка - для перегенерации при смещении наблюдателя
-        std::unordered_map<TerrainGrassRenderer*, Source> m_sources;
+        SR_HTYPES_NS::FlatHashMap<TerrainGrassRenderer*, Source> m_sources;
         uint64_t m_generationCounter = 0;
 
         std::mutex m_queueMutex;
-        std::deque<Task> m_tasks;
-        std::vector<Result> m_results;
+        SR_UTILS_NS::Vector<Task> m_tasks;
+        SR_UTILS_NS::Vector<Result> m_results;
         SR_HTYPES_NS::Thread::Ptr m_worker = nullptr;
         std::atomic<bool> m_stopWorker = false;
 

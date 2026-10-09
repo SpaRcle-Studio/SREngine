@@ -41,6 +41,8 @@ struct GrassBender {
 /// Совпадает с SR_TERRAIN_GRASS_MAX_BENDERS
 [[const]] int GRASS_MAX_BENDERS = 256;
 [[uniform]] int grassBendersCount = 0;
+/// Сфера, в которую попадают все точки с их радиусами (xyz - центр, w - радиус). Травинки вне неё пропускают цикл
+[[uniform]] vec4 grassBendersBounds;
 
 /// ------------------------------------------ параметры материала ------------------------------------------
 
@@ -87,6 +89,10 @@ struct GrassBender {
 [[uniform], [public]] float specularIntensity = 0.6;
 [[uniform], [public]] float specularPower = 18.0;
 [[uniform], [public]] float wrapLighting = 0.35;
+/// Дальше этой дистанции тени на траве не считаются (выборка карты теней на каждый фрагмент дорогая,
+/// а вдали травинки меньше текселя карты теней). Перед ней тень плавно гаснет на shadowFadeLength.
+[[uniform], [public]] float shadowDistance = 40.0;
+[[uniform], [public]] float shadowFadeLength = 10.0;
 
 /// ветер. TIME приходит в миллисекундах, отсюда timeScale.
 [[uniform], [public]] vec2 windDirection = vec2(1.0, 0.35);
@@ -199,14 +205,6 @@ void vertex() {
     float rnd = CUSTOM1.w;
     vec3 terrainNormal = CUSTOM1.xyz;
 
-    float r0 = grassHash11(rnd * 1000.0 + 1.0);
-    float r1 = grassHash11(rnd * 1000.0 + 2.0);
-    float r2 = grassHash11(rnd * 1000.0 + 3.0);
-    float r3 = grassHash11(rnd * 1000.0 + 4.0);
-    float r4 = grassHash11(rnd * 1000.0 + 5.0);
-    float r5 = grassHash11(rnd * 1000.0 + 6.0);
-    float r6 = grassHash11(rnd * 1000.0 + 7.0);
-
     vec3 toCamera = VIEW_POSITION - root;
     float distance = length(toCamera);
 
@@ -214,227 +212,248 @@ void vertex() {
     float keep = grassKeepFraction(distance);
     float fade = clamp((keep - rank) / 0.06, 0.0, 1.0);
 
-    /// ---- кланпы: соседние травинки получают общую высоту и оттенок
-    vec2 clumpCell = floor(root.xz / max(clumpSize, 0.01));
-    float clumpA = grassHash21(clumpCell);
-    float clumpB = grassHash21(clumpCell + vec2(17.31, 5.17));
+    /// Значения для погашенной LOD травинки: все вершины в одной точке, вырожденные треугольники растеризатор отбросит
+    VERTEX = root;
+    grassWorldPos = root;
+    grassNormal = vec3(0.0, 1.0, 0.0);
+    grassT = 0.0;
+    grassWind = 0.0;
+    grassAlbedo = vec3(0.0);
+    grassDry = 0.0;
 
-    /// ---- сухость: пятна по шуму + отдельные сухие травинки
-    float dryNoise = grassNoise(root.xz * dryNoiseScale + vec2(31.7, 11.3));
-    float dry = smoothstep(0.5, 0.85, dryNoise) * dryAmount;
-    dry = clamp(dry + (clumpB - 0.5) * 0.3 * dryAmount, 0.0, 1.0);
-    float dryBlade = 0.0;
-    if (r5 < dryBladeChance) {
-        dryBlade = 1.0;
-    }
-    dry = max(dry, dryBlade);
+    /// Травинку, погашенную по дистанции, дальше не считаем - вершинный шейдер для неё сводится к нескольким инструкциям
+    if (fade > 0.0) {
+        float r0 = grassHash11(rnd * 1000.0 + 1.0);
+        float r1 = grassHash11(rnd * 1000.0 + 2.0);
+        float r2 = grassHash11(rnd * 1000.0 + 3.0);
+        float r3 = grassHash11(rnd * 1000.0 + 4.0);
+        float r4 = grassHash11(rnd * 1000.0 + 5.0);
+        float r5 = grassHash11(rnd * 1000.0 + 6.0);
+        float r6 = grassHash11(rnd * 1000.0 + 7.0);
 
-    /// ---- форма: типы травинок
-    float height = mix(bladeHeightMin, bladeHeightMax, pow(r0, 1.3));
-    height *= 1.0 + (clumpA - 0.5) * 2.0 * clumpHeightVariation;
-    float width = mix(bladeWidthMin, bladeWidthMax, r1);
-    float bendAmount = bladeBend * mix(0.3, 1.0, r3);
-    float stiffness = 1.0;
+        /// ---- кланпы: соседние травинки получают общую высоту и оттенок
+        vec2 clumpCell = floor(root.xz / max(clumpSize, 0.01));
+        float clumpA = grassHash21(clumpCell);
+        float clumpB = grassHash21(clumpCell + vec2(17.31, 5.17));
 
-    if (r4 < shortGrassChance) {
-        /// низкий подшёрсток
-        height *= mix(0.25, 0.45, r0);
-        width *= 0.75;
-        bendAmount *= 1.4;
-        stiffness = 0.6;
-    }
-    else if (r4 < shortGrassChance + wideGrassChance) {
-        /// короткая широкая травинка
-        height *= 0.6;
-        width *= 1.7;
-        bendAmount *= 1.3;
-    }
-    else if (r4 > 1.0 - tallGrassChance) {
-        /// высокая тонкая травинка
-        height *= 1.45;
-        width *= 0.7;
-        stiffness = 1.3;
-    }
-
-    /// сухие травинки жёстче, но сильнее полегают
-    bendAmount *= mix(1.0, 1.7, dryBlade);
-    stiffness *= mix(1.0, 0.7, dryBlade);
-
-    /// вдали травинок меньше, поэтому оставшиеся делаются шире, чтобы поле не "лысело"
-    width *= mix(1.0, farWidthBoost, 1.0 - keep);
-
-    height *= fade;
-    width *= fade;
-
-    /// ---- базис травинки
-    vec3 up = normalize(mix(vec3(0.0, 1.0, 0.0), normalize(terrainNormal), normalInfluence));
-
-    float angle = r2 * 6.2831853;
-    vec3 forward = vec3(cos(angle), 0.0, sin(angle));
-
-    /// разворачиваем травинку к камере, когда она видна ребром - иначе поле "мерцает" и выглядит редким
-    vec3 viewH = toCamera - up * dot(toCamera, up);
-    float viewHLen = length(viewH);
-    if (viewHLen > 0.0001) {
-        viewH /= viewHLen;
-        float facing = dot(forward, viewH);
-        /// тернарный оператор со сравнением SRSL разбирает неправильно, поэтому через if
-        vec3 target = viewH;
-        if (facing < 0.0) {
-            target = -viewH;
+        /// ---- сухость: пятна по шуму + отдельные сухие травинки
+        float dryNoise = grassNoise(root.xz * dryNoiseScale + vec2(31.7, 11.3));
+        float dry = smoothstep(0.5, 0.85, dryNoise) * dryAmount;
+        dry = clamp(dry + (clumpB - 0.5) * 0.3 * dryAmount, 0.0, 1.0);
+        float dryBlade = 0.0;
+        if (r5 < dryBladeChance) {
+            dryBlade = 1.0;
         }
-        /// вблизи не разворачиваем: направление на камеру там быстро меняется и травинки "крутятся" при движении
-        float alignFade = smoothstep(4.0, 12.0, distance);
-        forward = normalize(mix(forward, target, viewAlign * alignFade * (1.0 - abs(facing))));
-    }
+        dry = max(dry, dryBlade);
 
-    vec3 side = normalize(cross(up, forward));
-    forward = normalize(cross(side, up));
+        /// ---- форма: типы травинок
+        float height = mix(bladeHeightMin, bladeHeightMax, pow(r0, 1.3));
+        height *= 1.0 + (clumpA - 0.5) * 2.0 * clumpHeightVariation;
+        float width = mix(bladeWidthMin, bladeWidthMax, r1);
+        float bendAmount = bladeBend * mix(0.3, 1.0, r3);
+        float stiffness = 1.0;
 
-    /// ---- ветер
-    /// Крупное поле порывов бежит по траве вдоль направления ветра (волны), травинки раскачиваются
-    /// вокруг наклона с фазой, зависящей от позиции (волна переходит от травинки к травинке),
-    /// и мелко дрожат поперёк ветра. Сила раскачки растёт в порывах.
-    vec2 windDir2 = normalize(windDirection);
-    vec3 windDir = vec3(windDir2.x, 0.0, windDir2.y);
-    windDir = normalize(windDir - up * dot(windDir, up) + vec3(0.00001));
-    vec3 windSide = normalize(cross(up, windDir));
-
-    float time = TIME * timeScale;
-    vec2 windUV = root.xz * windScale - windDir2 * (time * windSpeed * windScale);
-    float gust = smoothstep(0.3, 0.8, grassFbm2(windUV));
-
-    float lean = windStrength * (0.2 + 0.8 * gust);
-    float swayPhase = dot(root.xz, windDir2) * windWaveFrequency - time * windSwaySpeed + rnd * 1.7;
-    float sway = sin(swayPhase) * windSwayStrength * (0.35 + gust);
-    float flutter = sin(time * windFlutterSpeed + rnd * 6.2831853 + root.x * 1.7 + root.z * 1.3) * windFlutterStrength * (0.3 + gust);
-
-    /// высокие травинки гнутся сильнее, короткие жёстче
-    float flex = clamp(height / max(bladeHeightMax, 0.01), 0.3, 1.3) / stiffness;
-    vec3 windOffset = (windDir * (lean + sway) + windSide * flutter) * flex;
-
-    /// ---- приминание
-    vec3 bendPush = vec3(0.0);
-    /// Количество приходит из UBO. Если он не заполнен (сразу после пересоздания ресурсов при ресайзе), там может
-    /// оказаться мусор, а выход за размер SSBO или бесконечный цикл роняют устройство - поэтому жёсткий предел.
-    int bendersCount = clamp(grassBendersCount, 0, GRASS_MAX_BENDERS);
-    for (int i = 0; i < bendersCount; ++i) {
-        bendPush += grassBendPush(grassBenders[i], root, height, forward);
-    }
-    float pressed = min(length(bendPush), 1.0);
-    vec3 pushDir = forward;
-    if (pressed > 0.001) {
-        pushDir = normalize(bendPush - up * dot(bendPush, up) + vec3(0.00001));
-    }
-
-    /// примятая трава почти не качается
-    windOffset *= 1.0 - pressed * 0.85;
-
-    /// смещение верхушки относительно прямого стебля (в долях высоты)
-    vec3 tipOffset = forward * bendAmount + windOffset + pushDir * (pressed * 1.3);
-    float tipOffsetLen = min(length(tipOffset), 1.4);
-
-    /// ---- вершина
-    /// Число сегментов определяет CPU для всей ячейки (оно зашито в количество вершин draw call'а).
-    int segments = grassSegments;
-    if (grassSegmentsLodDistance > 0.0 && distance >= grassSegmentsLodDistance) {
-        segments = grassLowSegments;
-    }
-
-    /// половина травинки: strip из пар (край, жилка) + верхушка; половины склеены двумя вырожденными вершинами
-    int halfCount = segments * 2 + 1;
-    int vertexIndex = min(VERTEX_INDEX, halfCount * 2 + 1);
-
-    int halfIndex = 0;
-    int local = vertexIndex;
-    if (vertexIndex == halfCount) {
-        local = halfCount - 1;
-    }
-    if (vertexIndex == halfCount + 1) {
-        halfIndex = 1;
-        local = 0;
-    }
-    if (vertexIndex > halfCount + 1) {
-        halfIndex = 1;
-        local = vertexIndex - halfCount - 2;
-    }
-
-    float halfSign = -1.0;
-    if (halfIndex == 1) {
-        halfSign = 1.0;
-    }
-
-    float t = float(local / 2) / float(segments);
-    float edge = 0.0; /// -1 левый край, 0 жилка, 1 правый край
-    if (local == halfCount - 1) {
-        t = 1.0;
-    }
-    else {
-        int isFirst = 0;
-        if (local % 2 == 0) {
-            isFirst = 1;
+        if (r4 < shortGrassChance) {
+            /// низкий подшёрсток
+            height *= mix(0.25, 0.45, r0);
+            width *= 0.75;
+            bendAmount *= 1.4;
+            stiffness = 0.6;
         }
-        if (halfIndex == 0 && isFirst == 1) {
-            edge = -1.0;
+        else if (r4 < shortGrassChance + wideGrassChance) {
+            /// короткая широкая травинка
+            height *= 0.6;
+            width *= 1.7;
+            bendAmount *= 1.3;
         }
-        if (halfIndex == 1 && isFirst == 0) {
-            edge = 1.0;
+        else if (r4 > 1.0 - tallGrassChance) {
+            /// высокая тонкая травинка
+            height *= 1.45;
+            width *= 0.7;
+            stiffness = 1.3;
         }
+
+        /// сухие травинки жёстче, но сильнее полегают
+        bendAmount *= mix(1.0, 1.7, dryBlade);
+        stiffness *= mix(1.0, 0.7, dryBlade);
+
+        /// вдали травинок меньше, поэтому оставшиеся делаются шире, чтобы поле не "лысело"
+        width *= mix(1.0, farWidthBoost, 1.0 - keep);
+
+        height *= fade;
+        width *= fade;
+
+        /// ---- базис травинки
+        vec3 up = normalize(mix(vec3(0.0, 1.0, 0.0), normalize(terrainNormal), normalInfluence));
+
+        float angle = r2 * 6.2831853;
+        vec3 forward = vec3(cos(angle), 0.0, sin(angle));
+
+        /// разворачиваем травинку к камере, когда она видна ребром - иначе поле "мерцает" и выглядит редким
+        vec3 viewH = toCamera - up * dot(toCamera, up);
+        float viewHLen = length(viewH);
+        if (viewHLen > 0.0001) {
+            viewH /= viewHLen;
+            float facing = dot(forward, viewH);
+            /// тернарный оператор со сравнением SRSL разбирает неправильно, поэтому через if
+            vec3 target = viewH;
+            if (facing < 0.0) {
+                target = -viewH;
+            }
+            /// вблизи не разворачиваем: направление на камеру там быстро меняется и травинки "крутятся" при движении
+            float alignFade = smoothstep(4.0, 12.0, distance);
+            forward = normalize(mix(forward, target, viewAlign * alignFade * (1.0 - abs(facing))));
+        }
+
+        vec3 side = normalize(cross(up, forward));
+        forward = normalize(cross(side, up));
+
+        /// ---- ветер
+        /// Крупное поле порывов бежит по траве вдоль направления ветра (волны), травинки раскачиваются
+        /// вокруг наклона с фазой, зависящей от позиции (волна переходит от травинки к травинке),
+        /// и мелко дрожат поперёк ветра. Сила раскачки растёт в порывах.
+        vec2 windDir2 = normalize(windDirection);
+        vec3 windDir = vec3(windDir2.x, 0.0, windDir2.y);
+        windDir = normalize(windDir - up * dot(windDir, up) + vec3(0.00001));
+        vec3 windSide = normalize(cross(up, windDir));
+
+        float time = TIME * timeScale;
+        vec2 windUV = root.xz * windScale - windDir2 * (time * windSpeed * windScale);
+        float gust = smoothstep(0.3, 0.8, grassFbm2(windUV));
+
+        float lean = windStrength * (0.2 + 0.8 * gust);
+        float swayPhase = dot(root.xz, windDir2) * windWaveFrequency - time * windSwaySpeed + rnd * 1.7;
+        float sway = sin(swayPhase) * windSwayStrength * (0.35 + gust);
+        float flutter = sin(time * windFlutterSpeed + rnd * 6.2831853 + root.x * 1.7 + root.z * 1.3) * windFlutterStrength * (0.3 + gust);
+
+        /// высокие травинки гнутся сильнее, короткие жёстче
+        float flex = clamp(height / max(bladeHeightMax, 0.01), 0.3, 1.3) / stiffness;
+        vec3 windOffset = (windDir * (lean + sway) + windSide * flutter) * flex;
+
+        /// ---- приминание
+        vec3 bendPush = vec3(0.0);
+        /// Количество приходит из UBO. Если он не заполнен (сразу после пересоздания ресурсов при ресайзе), там может
+        /// оказаться мусор, а выход за размер SSBO или бесконечный цикл роняют устройство - поэтому жёсткий предел.
+        int bendersCount = clamp(grassBendersCount, 0, GRASS_MAX_BENDERS);
+        /// Травинка вне сферы всех точек (с запасом на высоту травинки) примята быть не может
+        vec3 toBenders = root - grassBendersBounds.xyz;
+        float bendersReach = grassBendersBounds.w + height + 0.5;
+        if (dot(toBenders, toBenders) > bendersReach * bendersReach) {
+            bendersCount = 0;
+        }
+        for (int i = 0; i < bendersCount; ++i) {
+            bendPush += grassBendPush(grassBenders[i], root, height, forward);
+        }
+        float pressed = min(length(bendPush), 1.0);
+        vec3 pushDir = forward;
+        if (pressed > 0.001) {
+            pushDir = normalize(bendPush - up * dot(bendPush, up) + vec3(0.00001));
+        }
+
+        /// примятая трава почти не качается
+        windOffset *= 1.0 - pressed * 0.85;
+
+        /// смещение верхушки относительно прямого стебля (в долях высоты)
+        vec3 tipOffset = forward * bendAmount + windOffset + pushDir * (pressed * 1.3);
+        float tipOffsetLen = min(length(tipOffset), 1.4);
+
+        /// ---- вершина
+        /// Число сегментов определяет CPU для всей ячейки (оно зашито в количество вершин draw call'а).
+        int segments = grassSegments;
+        if (grassSegmentsLodDistance > 0.0 && distance >= grassSegmentsLodDistance) {
+            segments = grassLowSegments;
+        }
+
+        /// половина травинки: strip из пар (край, жилка) + верхушка; половины склеены двумя вырожденными вершинами
+        int halfCount = segments * 2 + 1;
+        int vertexIndex = min(VERTEX_INDEX, halfCount * 2 + 1);
+
+        int halfIndex = 0;
+        int local = vertexIndex;
+        if (vertexIndex == halfCount) {
+            local = halfCount - 1;
+        }
+        if (vertexIndex == halfCount + 1) {
+            halfIndex = 1;
+            local = 0;
+        }
+        if (vertexIndex > halfCount + 1) {
+            halfIndex = 1;
+            local = vertexIndex - halfCount - 2;
+        }
+
+        float halfSign = -1.0;
+        if (halfIndex == 1) {
+            halfSign = 1.0;
+        }
+
+        float t = float(local / 2) / float(segments);
+        float edge = 0.0; /// -1 левый край, 0 жилка, 1 правый край
+        if (local == halfCount - 1) {
+            t = 1.0;
+        }
+        else {
+            int isFirst = 0;
+            if (local % 2 == 0) {
+                isFirst = 1;
+            }
+            if (halfIndex == 0 && isFirst == 1) {
+                edge = -1.0;
+            }
+            if (halfIndex == 1 && isFirst == 0) {
+                edge = 1.0;
+            }
+        }
+
+        float taper = width * pow(1.0 - t, 0.75);
+
+        /// сгиб по жилке: края травинки отогнуты вперёд относительно жилки (V-профиль), вдали сгиб убирается
+        float fold = bladeFold * mix(1.0, 0.4, t) * (1.0 - smoothstep(20.0, 40.0, distance));
+
+        /// изгиб по параболе t^2 - корень неподвижен, верхушка смещается сильнее всего;
+        /// стебель укорачивается по вертикали, чтобы сохранять примерно постоянную длину
+        vec3 bend = tipOffset * (t * t) * height;
+        float shrink = (1.0 - 0.35 * tipOffsetLen * tipOffsetLen * t) * (1.0 - bendFlatten * pressed * t);
+
+        vec3 position = root + up * (height * t * shrink) + bend
+            + side * (edge * taper)
+            + forward * (abs(edge) * fold * taper);
+
+        /// нормаль половины травинки: перпендикуляр к касательной стебля, развёрнутый по сгибу
+        vec3 tangent = normalize(up * height * shrink + tipOffset * (2.0 * t * height) + vec3(0.0, 0.00001, 0.0));
+        vec3 baseNormal = normalize(cross(side, tangent));
+        vec3 normal = normalize(baseNormal - side * (halfSign * (fold + 0.25)));
+
+        /// вдали нормали сводятся к нормали поверхности - поле освещается как сплошной массив, без шума
+        normal = normalize(mix(normal, up, smoothstep(15.0, 50.0, distance) * farNormalFlatten));
+
+        VERTEX = position;
+        grassWorldPos = position;
+        grassNormal = normal;
+        grassT = t;
+        grassWind = gust * (1.0 - pressed);
+
+        /// ---- цвет
+        float colorNoise = grassNoise(root.xz * colorNoiseScale + vec2(5.3, 71.9));
+        float hue = clamp(r1 * 0.45 + clumpB * 0.35 + (colorNoise - 0.5) * 0.8 + 0.1, 0.0, 1.0) * hueVariation;
+        vec3 fresh = mix(baseColor, baseColorWarm, hue);
+
+        vec3 color = mix(rootColor, fresh, smoothstep(0.0, 0.3, t));
+        color = mix(color, mix(fresh, tipColor, 0.6 + 0.4 * r6), smoothstep(0.35, 1.0, t));
+
+        /// подсохшие кончики у части травинок
+        float dryTip = 0.0;
+        if (r6 < dryTipChance) {
+            dryTip = smoothstep(0.65, 1.0, t) * mix(0.4, 0.9, r3);
+        }
+
+        vec3 dryTone = mix(dryColorDark, dryColor, mix(0.35, 1.0, t) * mix(0.7, 1.0, r0));
+        color = mix(color, dryTone, max(dry, dryTip));
+        color *= 1.0 + (r1 - 0.5) * 2.0 * brightnessVariation;
+
+        grassAlbedo = color;
+        grassDry = max(dry, dryTip);
     }
-
-    float taper = width * pow(1.0 - t, 0.75);
-
-    /// сгиб по жилке: края травинки отогнуты вперёд относительно жилки (V-профиль), вдали сгиб убирается
-    float fold = bladeFold * mix(1.0, 0.4, t) * (1.0 - smoothstep(20.0, 40.0, distance));
-
-    /// изгиб по параболе t^2 - корень неподвижен, верхушка смещается сильнее всего;
-    /// стебель укорачивается по вертикали, чтобы сохранять примерно постоянную длину
-    vec3 bend = tipOffset * (t * t) * height;
-    float shrink = (1.0 - 0.35 * tipOffsetLen * tipOffsetLen * t) * (1.0 - bendFlatten * pressed * t);
-
-    vec3 position = root + up * (height * t * shrink) + bend
-        + side * (edge * taper)
-        + forward * (abs(edge) * fold * taper);
-
-    /// нормаль половины травинки: перпендикуляр к касательной стебля, развёрнутый по сгибу
-    vec3 tangent = normalize(up * height * shrink + tipOffset * (2.0 * t * height) + vec3(0.0, 0.00001, 0.0));
-    vec3 baseNormal = normalize(cross(side, tangent));
-    vec3 normal = normalize(baseNormal - side * (halfSign * (fold + 0.25)));
-
-    /// вдали нормали сводятся к нормали поверхности - поле освещается как сплошной массив, без шума
-    normal = normalize(mix(normal, up, smoothstep(15.0, 50.0, distance) * farNormalFlatten));
-
-    if (fade <= 0.0) {
-        /// все вершины в одну точку - вырожденные треугольники растеризатор отбросит
-        position = root;
-    }
-
-    VERTEX = position;
-    grassWorldPos = position;
-    grassNormal = normal;
-    grassT = t;
-    grassWind = gust * (1.0 - pressed);
-
-    /// ---- цвет
-    float colorNoise = grassNoise(root.xz * colorNoiseScale + vec2(5.3, 71.9));
-    float hue = clamp(r1 * 0.45 + clumpB * 0.35 + (colorNoise - 0.5) * 0.8 + 0.1, 0.0, 1.0) * hueVariation;
-    vec3 fresh = mix(baseColor, baseColorWarm, hue);
-
-    vec3 color = mix(rootColor, fresh, smoothstep(0.0, 0.3, t));
-    color = mix(color, mix(fresh, tipColor, 0.6 + 0.4 * r6), smoothstep(0.35, 1.0, t));
-
-    /// подсохшие кончики у части травинок
-    float dryTip = 0.0;
-    if (r6 < dryTipChance) {
-        dryTip = smoothstep(0.65, 1.0, t) * mix(0.4, 0.9, r3);
-    }
-
-    vec3 dryTone = mix(dryColorDark, dryColor, mix(0.35, 1.0, t) * mix(0.7, 1.0, r0));
-    color = mix(color, dryTone, max(dry, dryTip));
-    color *= 1.0 + (r1 - 0.5) * 2.0 * brightnessVariation;
-
-    grassAlbedo = color;
-    grassDry = max(dry, dryTip);
 
 #ifdef SR_DEFINE_CASCADED_SHADOW_MAP_PASS
     #include <Engine/Shaders/Common/apply-cascades-transform.inl.srsl>
@@ -452,7 +471,9 @@ void fragment() {
 #ifdef SR_DEFINE_CASCADED_SHADOW_MAP_PASS
     COLOR = vec4(1.0);
 #else
-    vec3 V = normalize(VIEW_POSITION - grassWorldPos);
+    vec3 toView = VIEW_POSITION - grassWorldPos;
+    float viewDistance = length(toView);
+    vec3 V = toView / max(viewDistance, 0.0001);
     vec3 N = normalize(grassNormal);
 
     /// травинка двусторонняя: освещаем сторону, обращённую к камере
@@ -466,11 +487,14 @@ void fragment() {
     float shadowFactor = 1.0;
 
 #ifdef SR_DEFINE_USE_CASCADED_SHADOW_MAP
-    uint cascadeIndex = SelectCascade(grassWorldPos);
-    if (cascadeIndex < NUM_CASCADES) {
-        vec4 shadowCoord = biasMat * CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex] * vec4(grassWorldPos, 1.0);
-        float shadow = filterPCF(N, shadowCoord, cascadeIndex);
-        shadowFactor = mix(1.0 - SHADOW_STRENGTH, 1.0, shadow);
+    if (viewDistance < shadowDistance) {
+        uint cascadeIndex = SelectCascade(grassWorldPos);
+        if (cascadeIndex < NUM_CASCADES) {
+            vec4 shadowCoord = biasMat * CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex] * vec4(grassWorldPos, 1.0);
+            float shadow = filterPCF(N, shadowCoord, cascadeIndex);
+            float shadowFade = 1.0 - smoothstep(shadowDistance - max(shadowFadeLength, 0.001), shadowDistance, viewDistance);
+            shadowFactor = mix(1.0, mix(1.0 - SHADOW_STRENGTH, 1.0, shadow), shadowFade);
+        }
     }
 #endif
 

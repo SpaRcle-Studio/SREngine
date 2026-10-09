@@ -60,7 +60,7 @@ namespace SR_PTYPES_NS {
                     m_translation + GetCenterDirection(),
                     m_rotation,
                     m_scale * GetSize(),
-                    SR_MATH_NS::FColor(0, 255, 200, 255),
+                    SR_MATH_NS::FColor(0, 255, 200, 255) / 255.f,
                     SR_FLOAT_MAX
             );
         }
@@ -70,7 +70,7 @@ namespace SR_PTYPES_NS {
                     m_translation + GetCenterDirection(),
                     m_rotation,
                     m_scale * SR_MATH_NS::FVector3(GetPlaneSize().x, 0.f, GetPlaneSize().y),
-                    SR_MATH_NS::FColor(0, 255, 200, 255),
+                    SR_MATH_NS::FColor(0, 255, 200, 255) / 255.f,
                     SR_FLOAT_MAX
             );
         }
@@ -80,7 +80,7 @@ namespace SR_PTYPES_NS {
                     m_translation + GetCenterDirection(),
                     m_rotation,
                     (m_scale * GetRadius()).Max3(),
-                    SR_MATH_NS::FColor(0, 255, 200, 255),
+                    SR_MATH_NS::FColor(0, 255, 200, 255) / 255.f,
                     SR_FLOAT_MAX
             );
         }
@@ -92,7 +92,7 @@ namespace SR_PTYPES_NS {
                     m_translation + GetCenterDirection(),
                     m_rotation,
                     size,
-                    SR_MATH_NS::FColor(0, 255, 200, 255),
+                    SR_MATH_NS::FColor(0, 255, 200, 255) / 255.f,
                     SR_FLOAT_MAX
             );
         }
@@ -103,7 +103,7 @@ namespace SR_PTYPES_NS {
                     m_translation + GetCenterDirection(),
                     m_rotation,
                     m_scale * GetSize(),
-                    SR_MATH_NS::FColor(0, 255, 200, 255),
+                    SR_MATH_NS::FColor(0, 255, 200, 255) / 255.f,
                     SR_FLOAT_MAX
             );
         }

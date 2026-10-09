@@ -11,6 +11,7 @@
 #include <Graphics/Memory/SSBO.h>
 
 #include <Utils/Math/Vector3.h>
+#include <Utils/Math/Vector4.h>
 #include <Utils/Math/AABB.h>
 
 namespace SR_CORE_NS {
@@ -95,6 +96,8 @@ namespace SR_CORE_NS {
 
         /// Поток рендера. Заливает актуальные данные в SSBO текущего кадра и возвращает его.
         SR_NODISCARD int32_t PrepareFrame(SR_GRAPH_NS::Pipeline* pPipeline, uint32_t& count);
+        /// Поток рендера. Сфера (xyz - центр, w - радиус), в которую попадают все точки вместе с их радиусами.
+        SR_NODISCARD SR_MATH_NS::FVector4 GetBounds();
 
         void FreeVideoMemory();
 
@@ -103,6 +106,7 @@ namespace SR_CORE_NS {
         std::array<TerrainGrassBenderGPU, SR_TERRAIN_GRASS_MAX_BENDERS> m_data = { };
         uint32_t m_count = 0;
         uint64_t m_version = 0;
+        SR_MATH_NS::FVector4 m_bounds;
 
         std::array<SR_GRAPH_NS::SSBOInstance::Ptr, SR_MAX_FRAMES_IN_FLIGHT> m_SSBOs;
         std::array<uint64_t, SR_MAX_FRAMES_IN_FLIGHT> m_uploadedVersions = { };
@@ -126,7 +130,6 @@ namespace SR_CORE_NS {
         /// pCone == nullptr отключает отсечение.
         bool UpdateLod(const SR_MATH_NS::FVector3& observer, const TerrainGrassLodParams& params, const TerrainGrassCullCone* pCone);
 
-        void SetCastShadows(bool castShadows) { m_castShadows = castShadows; }
         /// Поток сцены. Общий набор приминающих точек.
         void SetBenders(const TerrainGrassBenders::Ptr& pBenders);
 
@@ -179,7 +182,6 @@ namespace SR_CORE_NS {
         TerrainGrassBenders::Ptr m_pBenders;
         bool m_isDataDirty = false;
 
-        std::atomic<bool> m_castShadows = false;
         std::atomic<uint32_t> m_instancesCount = 0;
         std::atomic<uint32_t> m_drawnCount = 0;
 

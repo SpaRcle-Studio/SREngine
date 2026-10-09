@@ -35,8 +35,20 @@ namespace SR_CORE_NS {
             return static_cast<float_t>(h >> 8) * (1.f / 16777216.f);
         }
 
+        /// Значения шума в углах последней ячейки решётки. Соседние травинки почти всегда попадают в ту же ячейку.
+        struct GrassNoiseCell {
+            int32_t ix = INT32_MIN;
+            int32_t iz = INT32_MIN;
+            float_t a = 0.f;
+            float_t b = 0.f;
+            float_t c = 0.f;
+            float_t d = 0.f;
+        };
+
+        static constexpr uint32_t SR_GRASS_FBM_OCTAVES = 3;
+
         /// Value noise [0, 1] по мировым XZ
-        SR_NODISCARD float_t GrassValueNoise(float_t x, float_t z, uint32_t seed) noexcept {
+        SR_NODISCARD float_t GrassValueNoise(float_t x, float_t z, uint32_t seed, GrassNoiseCell& cell) noexcept {
             const float_t fx = std::floor(x);
             const float_t fz = std::floor(z);
             const auto ix = static_cast<int32_t>(fx);
@@ -46,22 +58,26 @@ namespace SR_CORE_NS {
             tx = tx * tx * (3.f - 2.f * tx);
             tz = tz * tz * (3.f - 2.f * tz);
 
-            const float_t a = GrassToFloat(GrassHash(ix, 0, iz, seed));
-            const float_t b = GrassToFloat(GrassHash(ix + 1, 0, iz, seed));
-            const float_t c = GrassToFloat(GrassHash(ix, 0, iz + 1, seed));
-            const float_t d = GrassToFloat(GrassHash(ix + 1, 0, iz + 1, seed));
+            if (cell.ix != ix || cell.iz != iz) {
+                cell.ix = ix;
+                cell.iz = iz;
+                cell.a = GrassToFloat(GrassHash(ix, 0, iz, seed));
+                cell.b = GrassToFloat(GrassHash(ix + 1, 0, iz, seed));
+                cell.c = GrassToFloat(GrassHash(ix, 0, iz + 1, seed));
+                cell.d = GrassToFloat(GrassHash(ix + 1, 0, iz + 1, seed));
+            }
 
-            const float_t ab = a + (b - a) * tx;
-            const float_t cd = c + (d - c) * tx;
+            const float_t ab = cell.a + (cell.b - cell.a) * tx;
+            const float_t cd = cell.c + (cell.d - cell.c) * tx;
             return ab + (cd - ab) * tz;
         }
 
-        SR_NODISCARD float_t GrassFbm(float_t x, float_t z, uint32_t seed) noexcept {
+        SR_NODISCARD float_t GrassFbm(float_t x, float_t z, uint32_t seed, std::array<GrassNoiseCell, SR_GRASS_FBM_OCTAVES>& cells) noexcept {
             float_t sum = 0.f;
             float_t amplitude = 0.5f;
             float_t norm = 0.f;
-            for (uint32_t octave = 0; octave < 3; ++octave) {
-                sum += GrassValueNoise(x, z, seed + octave * 7919U) * amplitude;
+            for (uint32_t octave = 0; octave < SR_GRASS_FBM_OCTAVES; ++octave) {
+                sum += GrassValueNoise(x, z, seed + octave * 7919U, cells[octave]) * amplitude;
                 norm += amplitude;
                 x *= 2.03f;
                 z *= 2.03f;
@@ -186,7 +202,7 @@ namespace SR_CORE_NS {
             std::lock_guard lock(m_queueMutex);
             if (!m_tasks.empty()) {
                 task = std::move(m_tasks.front());
-                m_tasks.pop_front();
+                m_tasks.erase(m_tasks.begin());
                 settings = MakeSettings();
                 hasTask = true;
             }
@@ -261,13 +277,14 @@ namespace SR_CORE_NS {
             return;
         }
 
-        if (std::find(m_renderers.begin(), m_renderers.end(), pRenderer) == m_renderers.end()) {
+        if (m_renderers.find(pRenderer) == m_renderers.end()) {
             m_renderers.emplace_back(pRenderer);
         }
         /// Активный рендерер сам досвобождает старые буферы в UpdateLod
-        std::erase(m_retiredRenderers, pRenderer);
+        m_retiredRenderers.erase_if([&](const SR_HTYPES_NS::SharedPtr<TerrainGrassRenderer>& pItem) { return pItem == pRenderer; });
 
         pRenderer->SetCastShadows(m_castShadows);
+        pRenderer->SetUseColorBuffer(false);
 
         if (!m_pBenders) {
             m_pBenders = new TerrainGrassBenders();
@@ -290,7 +307,7 @@ namespace SR_CORE_NS {
 
         std::lock_guard lock(m_queueMutex);
         /// Если по этому чанку уже стоит задача - она устарела
-        std::erase_if(m_tasks, [&](const Task& task) { return task.pRenderer == pRenderer; });
+        m_tasks.erase_if([&](const Task& task) { return task.pRenderer == pRenderer; });
         m_tasks.emplace_back(Task {
             .generation = generation,
             .pRenderer = pRenderer,
@@ -349,7 +366,7 @@ namespace SR_CORE_NS {
 
         {
             std::lock_guard lock(m_queueMutex);
-            std::erase_if(m_tasks, [&](const Task& task) { return task.pRenderer == pRenderer; });
+            m_tasks.erase_if([&](const Task& task) { return task.pRenderer == pRenderer; });
         }
 
         pRenderer->ClearInstances();
@@ -358,7 +375,7 @@ namespace SR_CORE_NS {
         /// Результаты генерации, которые ещё в полёте, отбросятся: поколения для рендерера больше нет.
         m_generations.erase(pRenderer.Get());
         m_sources.erase(pRenderer.Get());
-        std::erase(m_renderers, pRenderer);
+        m_renderers.erase_if([&](const SR_HTYPES_NS::SharedPtr<TerrainGrassRenderer>& pItem) { return pItem == pRenderer; });
 
         if (!pRenderer->FreeRetired()) {
             m_retiredRenderers.emplace_back(pRenderer);
@@ -377,10 +394,10 @@ namespace SR_CORE_NS {
 
         /// ---- применяем готовые результаты генерации
         {
-            static SR_THREAD_LOCAL std::vector<Result> results;
+            static SR_THREAD_LOCAL SR_UTILS_NS::Vector<Result> results;
             {
                 std::lock_guard lock(m_queueMutex);
-                std::swap(results, m_results);
+                results.swap(m_results);
             }
 
             for (auto&& result : results) {
@@ -401,7 +418,7 @@ namespace SR_CORE_NS {
 
         UpdateBenders(dt);
 
-        std::erase_if(m_retiredRenderers, [](const SR_HTYPES_NS::SharedPtr<TerrainGrassRenderer>& pRenderer) {
+        m_retiredRenderers.erase_if([](const SR_HTYPES_NS::SharedPtr<TerrainGrassRenderer>& pRenderer) {
             return !pRenderer || pRenderer->FreeRetired();
         });
 
@@ -447,6 +464,7 @@ namespace SR_CORE_NS {
 
         for (auto&& pRenderer : m_renderers) {
             pRenderer->SetCastShadows(m_castShadows);
+            pRenderer->SetUseColorBuffer(false);
             pRenderer->UpdateLod(observer.position, lodParams, pCone);
             total += pRenderer->GetInstancesCount();
             drawn += pRenderer->GetDrawnInstancesCount();
@@ -658,191 +676,251 @@ namespace SR_CORE_NS {
             uint32_t cell;
         };
 
-        std::vector<RawInstance> raw;
+        /// Временные буферы переиспользуются между вызовами (генерация идёт в одном потоке), чтобы не аллоцировать на каждый чанк
+        static SR_THREAD_LOCAL SR_UTILS_NS::Vector<RawInstance> raw;
+        raw.clear();
         raw.reserve(std::min<size_t>(indices.size() / 3 * 8, static_cast<size_t>(settings.maxInstancesPerChunk) * 2));
 
         const bool hasBlend = hasMaterials && mesh.materials2.size() == positions.size() && mesh.blends.size() == positions.size();
 
         const auto isAllowed = [&](uint32_t material) {
-            return std::find(settings.allowedMaterials.begin(), settings.allowedMaterials.end(), material) != settings.allowedMaterials.end();
+            return settings.allowedMaterials.find(material) != settings.allowedMaterials.end();
         };
 
-        /// Доля разрешённых материалов в вершине [0, 1] с учётом смешивания основного и второго материала
-        const auto materialWeight = [&](uint32_t vertex) -> float_t {
-            if (!hasMaterials) {
-                return 1.f;
-            }
-            const float_t weight1 = isAllowed(mesh.materials[vertex]) ? 1.f : 0.f;
-            if (!hasBlend) {
-                return weight1;
-            }
-            const float_t weight2 = isAllowed(mesh.materials2[vertex]) ? 1.f : 0.f;
-            const float_t blend = std::clamp(mesh.blends[vertex], 0.f, 1.f);
-            return weight1 * (1.f - blend) + weight2 * blend;
-        };
+        static SR_THREAD_LOCAL SR_UTILS_NS::Vector<float_t> materialWeights;
+        materialWeights.assign(positions.size(), 1.f);
+        if (hasMaterials) {
+            for (size_t i = 0; i < positions.size(); ++i) {
+                const float_t weight1 = isAllowed(mesh.materials[i]) ? 1.f : 0.f;
 
-        const auto densityMask = [&](const SR_MATH_NS::FVector3& worldPos, float_t up) -> float_t {
-            const float_t slope = GrassSmoothStep(settings.slopeMin, settings.slopeMax, up);
-            if (slope <= 0.f) {
-                return 0.f;
-            }
+                if (!hasBlend) {
+                    materialWeights[i] = weight1;
+                    continue;
+                }
 
+                const float_t weight2 = isAllowed(mesh.materials2[i]) ? 1.f : 0.f;
+                const float_t blend = std::clamp(mesh.blends[i], 0.f, 1.f);
+
+                materialWeights[i] = weight1 * (1.f - blend) + weight2 * blend;
+            }
+        }
+
+        std::array<GrassNoiseCell, SR_GRASS_FBM_OCTAVES> fbmCells;
+        GrassNoiseCell detailCell;
+
+        /// Маска шума [0, 1]. Наклон и вес материала проверяются до неё - шум самая дорогая часть.
+        const auto noiseMask = [&](const SR_MATH_NS::FVector3& worldPos) -> float_t {
             /// крупные поляны и проплешины
             float_t mask = 1.f;
             if (settings.noiseScale > 0.f) {
-                const float_t n = GrassFbm(worldPos.x * settings.noiseScale, worldPos.z * settings.noiseScale, seed + 101U);
+                const float_t n = GrassFbm(worldPos.x * settings.noiseScale, worldPos.z * settings.noiseScale, seed + 101U, fbmCells);
                 mask = std::clamp((n - settings.noiseThreshold) * settings.noiseContrast + 0.5f, 0.f, 1.f);
             }
 
             /// мелкая неоднородность густоты внутри поляны
-            if (settings.detailNoiseScale > 0.f) {
-                const float_t d = GrassValueNoise(worldPos.x * settings.detailNoiseScale, worldPos.z * settings.detailNoiseScale, seed + 202U);
+            if (settings.detailNoiseScale > 0.f && mask > 0.f) {
+                const float_t d = GrassValueNoise(worldPos.x * settings.detailNoiseScale, worldPos.z * settings.detailNoiseScale, seed + 202U, detailCell);
                 mask *= 0.55f + 0.45f * d;
             }
 
-            return slope * mask;
+            return mask;
         };
 
-        for (size_t t = 0; t + 2 < indices.size(); t += 3) {
-            const uint32_t ia = indices[t + 0];
-            const uint32_t ib = indices[t + 1];
-            const uint32_t ic = indices[t + 2];
-
-            if (ia >= positions.size() || ib >= positions.size() || ic >= positions.size()) SR_UNLIKELY_ATTRIBUTE {
-                continue;
+        /// Шум крупнее треугольников (ячейка 1 / scale против maxEdgeLength), поэтому считается в вершинах
+        /// и интерполируется по треугольнику, а не для каждой травинки.
+        const bool hasNoise = settings.noiseScale > 0.f || settings.detailNoiseScale > 0.f;
+        static SR_THREAD_LOCAL SR_UTILS_NS::Vector<float_t> vertexNoise;
+        if (hasNoise) {
+            SR_TRACY_ZONE_N("Grass vertex noise");
+            vertexNoise.resize(positions.size());
+            for (size_t i = 0; i < positions.size(); ++i) {
+                vertexNoise[i] = noiseMask(positions[i] + mesh.origin);
             }
+        }
 
-            const float_t weightA = materialWeight(ia);
-            const float_t weightB = materialWeight(ib);
-            const float_t weightC = materialWeight(ic);
+        {
+            SR_TRACY_ZONE_N("Generate grass instances");
+            SR_TRACY_ZONE_VALUE(static_cast<uint32_t>(indices.size() / 3));
 
-            /// Без плотности по весу материала точка либо годится целиком, либо нет
             const float_t weightCutoff = settings.materialWeightDensity ? settings.materialWeightThreshold : std::max(settings.materialWeightThreshold, 0.5f);
-            if (std::max({ weightA, weightB, weightC }) < weightCutoff || std::max({ weightA, weightB, weightC }) <= 0.f) {
-                continue;
-            }
+            const float_t maxEdgeSq = mesh.maxEdgeLength * mesh.maxEdgeLength;
 
-            const auto& a = positions[ia];
-            const auto& b = positions[ib];
-            const auto& c = positions[ic];
+            const float_t instanceMaxDistance = settings.lod.maxDistance + settings.generationMargin;
+            const float_t instanceMaxDistanceSq = instanceMaxDistance * instanceMaxDistance;
+            const float_t triangleMaxDistance = instanceMaxDistance + std::max(0.f, mesh.maxEdgeLength);
+            const float_t triangleMaxDistanceSq = triangleMaxDistance * triangleMaxDistance;
+            const float_t triangleInsideDistance = std::max(0.f, instanceMaxDistance - std::max(0.f, mesh.maxEdgeLength));
+            const float_t triangleInsideDistanceSq = triangleInsideDistance * triangleInsideDistance;
+            const SR_MATH_NS::FVector3 localObserver = task.observer - mesh.origin;
 
-            if (hasMaxEdge) {
-                const float_t maxEdgeSq = mesh.maxEdgeLength * mesh.maxEdgeLength;
-                const SR_MATH_NS::FVector3 ab = b - a;
-                const SR_MATH_NS::FVector3 bc = c - b;
-                const SR_MATH_NS::FVector3 ca = a - c;
-                if (ab.Dot(ab) > maxEdgeSq || bc.Dot(bc) > maxEdgeSq || ca.Dot(ca) > maxEdgeSq) {
-                    continue;
-                }
-            }
+            for (size_t t = 0; t + 2 < indices.size(); t += 3) {
+                const uint32_t ia = indices[t + 0];
+                const uint32_t ib = indices[t + 1];
+                const uint32_t ic = indices[t + 2];
 
-            const SR_MATH_NS::FVector3 cross = (b - a).Cross(c - a);
-            const float_t crossLength = cross.Length();
-            if (crossLength <= 1e-8f) {
-                continue;
-            }
-
-            const float_t area = crossLength * 0.5f;
-            SR_MATH_NS::FVector3 faceNormal = cross / crossLength;
-
-            /// Нормаль берётся строго по обходу треугольника - так же её считает ComputeSmoothNormals для рендера.
-            /// Разворачивать её по сглаженным нормалям нельзя: на стыках чанков они считаются только по своей
-            /// половине треугольников, и трава вырастала бы с нижней стороны поверхности.
-
-            /// быстрый отказ для крутых и перевёрнутых треугольников
-            if (faceNormal.y < settings.slopeMin - 0.1f) {
-                continue;
-            }
-
-            const float_t expected = area * settings.density;
-
-            /// детерминированный сид треугольника по его мировому центру (не зависит от порядка индексов и от чанка)
-            const SR_MATH_NS::FVector3 center = (a + b + c) / 3.f + mesh.origin;
-
-            /// Треугольник целиком дальше дальности травы - пропускаем. Треугольники marching cubes не больше вокселя (maxEdgeLength).
-            if (center.Distance(task.observer) - mesh.maxEdgeLength - settings.generationMargin >= settings.lod.maxDistance) {
-                continue;
-            }
-            const uint32_t triangleSeed = GrassHash(
-                static_cast<int32_t>(std::floor(center.x * 64.f)),
-                static_cast<int32_t>(std::floor(center.y * 64.f)),
-                static_cast<int32_t>(std::floor(center.z * 64.f)),
-                seed
-            );
-
-            auto count = static_cast<uint32_t>(expected);
-            if (GrassToFloat(GrassHash(triangleSeed ^ 0xA511E9B3U)) < expected - static_cast<float_t>(count)) {
-                ++count;
-            }
-
-            for (uint32_t i = 0; i < count; ++i) {
-                const uint32_t h0 = GrassHash(triangleSeed + i * 0x9E3779B9U);
-                const uint32_t h1 = GrassHash(h0 ^ 0x68E31DA4U);
-                const uint32_t h2 = GrassHash(h1 ^ 0xB5297A4DU);
-                const uint32_t h3 = GrassHash(h2 ^ 0x1B56C4E9U);
-
-                /// равномерная точка в треугольнике
-                float_t u = GrassToFloat(h0);
-                float_t v = GrassToFloat(h1);
-                if (u + v > 1.f) {
-                    u = 1.f - u;
-                    v = 1.f - v;
-                }
-                const float_t w = 1.f - u - v;
-
-                const SR_MATH_NS::FVector3 position = a * w + b * u + c * v;
-                const SR_MATH_NS::FVector3 worldPos = position + mesh.origin;
-                const float_t rank = GrassToFloat(h3);
-
-                if (hasBounds && (
-                    position.x < mesh.bounds.min.x || position.x > mesh.bounds.max.x ||
-                    position.y < mesh.bounds.min.y || position.y > mesh.bounds.max.y ||
-                    position.z < mesh.bounds.min.z || position.z > mesh.bounds.max.z))
-                {
+                if (ia >= positions.size() || ib >= positions.size() || ic >= positions.size()) SR_UNLIKELY_ATTRIBUTE {
                     continue;
                 }
 
-                SR_MATH_NS::FVector3 normal = faceNormal;
-                if (hasNormals) {
-                    normal = normals[ia] * w + normals[ib] * u + normals[ic] * v;
-                    const float_t len = normal.Length();
-                    /// На границе чанка сглаженная нормаль считается только по треугольникам своего чанка
-                    /// и может сильно расходиться с реальной поверхностью - тогда доверяем нормали грани.
-                    normal = (len > 1e-3f && (normal / len).Dot(faceNormal) > 0.5f) ? normal / len : faceNormal;
+                const float_t weightA = materialWeights[ia];
+                const float_t weightB = materialWeights[ib];
+                const float_t weightC = materialWeights[ic];
+
+                /// Без плотности по весу материала точка либо годится целиком, либо нет
+                const float_t maxWeight = std::max(weightA, std::max(weightB, weightC));
+                if (maxWeight < weightCutoff || maxWeight <= 0.f) {
+                    continue;
                 }
 
-                /// вес материала в точке травинки
-                float_t materialFactor = 1.f;
-                if (hasMaterials) {
-                    const float_t weight = weightA * w + weightB * u + weightC * v;
-                    if (weight < weightCutoff || weight <= 0.f) {
+                const auto& a = positions[ia];
+                const auto& b = positions[ib];
+                const auto& c = positions[ic];
+
+                if (hasMaxEdge) {
+                    const SR_MATH_NS::FVector3 ab = b - a;
+                    const SR_MATH_NS::FVector3 bc = c - b;
+                    const SR_MATH_NS::FVector3 ca = a - c;
+                    if (ab.Dot(ab) > maxEdgeSq || bc.Dot(bc) > maxEdgeSq || ca.Dot(ca) > maxEdgeSq) {
                         continue;
                     }
-                    materialFactor = settings.materialWeightDensity ? weight : 1.f;
                 }
 
-                /// отбор по маске плотности - на склонах и проплешинах травинки исчезают плавно, а не порогом.
-                /// Для наклона берётся худшая из нормалей, чтобы трава не лезла на стены через сглаживание.
-                if (GrassToFloat(h2) >= materialFactor * densityMask(worldPos, std::min(normal.y, faceNormal.y + 0.1f))) {
+                const SR_MATH_NS::FVector3 cross = (b - a).Cross(c - a);
+                const float_t crossLength = cross.Length();
+                if (crossLength <= 1e-8f) {
                     continue;
                 }
 
-                /// Дальше дальности травы (с запасом generationMargin на движение) травинка никогда не будет видна.
-                /// Отбор по LOD-кривой здесь не делается: при движении наблюдателя вблизи становилось бы редко,
-                /// плотность по дистанции применяет рендерер при отрисовке.
-                if (worldPos.Distance(task.observer) - settings.generationMargin >= settings.lod.maxDistance) {
+                const float_t area = crossLength * 0.5f;
+                SR_MATH_NS::FVector3 faceNormal = cross / crossLength;
+
+                /// Нормаль берётся строго по обходу треугольника - так же её считает ComputeSmoothNormals для рендера.
+                /// Разворачивать её по сглаженным нормалям нельзя: на стыках чанков они считаются только по своей
+                /// половине треугольников, и трава вырастала бы с нижней стороны поверхности.
+
+                /// быстрый отказ для крутых и перевёрнутых треугольников
+                if (faceNormal.y < settings.slopeMin - 0.1f) {
                     continue;
                 }
 
-                const auto cellX = std::min(cellsX - 1, static_cast<uint32_t>(std::max(0.f, (position.x - boundsMin.x) / cellSize)));
-                const auto cellZ = std::min(cellsZ - 1, static_cast<uint32_t>(std::max(0.f, (position.z - boundsMin.z) / cellSize)));
+                const float_t noiseA = hasNoise ? vertexNoise[ia] : 1.f;
+                const float_t noiseB = hasNoise ? vertexNoise[ib] : 1.f;
+                const float_t noiseC = hasNoise ? vertexNoise[ic] : 1.f;
 
-                RawInstance& instance = raw.emplace_back();
-                instance.instance.position = position;
-                instance.instance.normal = normal;
-                instance.instance.rank = rank;
-                instance.instance.random = GrassToFloat(GrassHash(h3 ^ 0x2C1B3C6DU));
-                instance.cell = cellZ * cellsX + cellX;
+                /// Верхняя оценка вероятности травинки на треугольнике: все множители маски плотности
+                /// интерполируются или монотонны, поэтому в любой точке не больше значения по максимумам.
+                const float_t maxAccept = (hasMaterials && settings.materialWeightDensity ? maxWeight : 1.f)
+                    * GrassSmoothStep(settings.slopeMin, settings.slopeMax, faceNormal.y + 0.1f)
+                    * std::max(noiseA, std::max(noiseB, noiseC));
+                if (maxAccept <= 0.f) {
+                    continue;
+                }
+
+                const float_t expected = area * settings.density;
+
+                /// детерминированный сид треугольника по его мировому центру (не зависит от порядка индексов и от чанка)
+                const SR_MATH_NS::FVector3 center = (a + b + c) / 3.f + mesh.origin;
+
+                /// Треугольник целиком дальше дальности травы - пропускаем. Треугольники marching cubes не больше вокселя (maxEdgeLength).
+                const float_t centerDistanceSq = (center - task.observer).LengthSq();
+                if (centerDistanceSq >= triangleMaxDistanceSq) {
+                    continue;
+                }
+                /// Треугольник целиком ближе дальности травы - проверять каждую травинку не нужно
+                const bool checkInstanceDistance = !hasMaxEdge || centerDistanceSq >= triangleInsideDistanceSq;
+                const uint32_t triangleSeed = GrassHash(
+                    static_cast<int32_t>(std::floor(center.x * 64.f)),
+                    static_cast<int32_t>(std::floor(center.y * 64.f)),
+                    static_cast<int32_t>(std::floor(center.z * 64.f)),
+                    seed
+                );
+
+                auto count = static_cast<uint32_t>(expected);
+                if (GrassToFloat(GrassHash(triangleSeed ^ 0xA511E9B3U)) < expected - static_cast<float_t>(count)) {
+                    ++count;
+                }
+
+                for (uint32_t i = 0; i < count; ++i) {
+                    const uint32_t h0 = GrassHash(triangleSeed + i * 0x9E3779B9U);
+                    const uint32_t h1 = GrassHash(h0 ^ 0x68E31DA4U);
+                    const uint32_t h2 = GrassHash(h1 ^ 0xB5297A4DU);
+
+                    const float_t threshold = GrassToFloat(h2);
+                    if (threshold >= maxAccept) {
+                        continue;
+                    }
+
+                    /// равномерная точка в треугольнике
+                    float_t u = GrassToFloat(h0);
+                    float_t v = GrassToFloat(h1);
+                    if (u + v > 1.f) {
+                        u = 1.f - u;
+                        v = 1.f - v;
+                    }
+                    const float_t w = 1.f - u - v;
+
+                    const SR_MATH_NS::FVector3 position = a * w + b * u + c * v;
+
+                    if (hasBounds && (
+                        position.x < mesh.bounds.min.x || position.x > mesh.bounds.max.x ||
+                        position.y < mesh.bounds.min.y || position.y > mesh.bounds.max.y ||
+                        position.z < mesh.bounds.min.z || position.z > mesh.bounds.max.z))
+                    {
+                        continue;
+                    }
+
+                    /// Дальше дальности травы (с запасом generationMargin на движение) травинка никогда не будет видна.
+                    /// Отбор по LOD-кривой здесь не делается: при движении наблюдателя вблизи становилось бы редко,
+                    /// плотность по дистанции применяет рендерер при отрисовке.
+                    if (checkInstanceDistance && (position - localObserver).LengthSq() >= instanceMaxDistanceSq) {
+                        continue;
+                    }
+
+                    /// вес материала в точке травинки
+                    float_t materialFactor = 1.f;
+                    if (hasMaterials) {
+                        const float_t weight = weightA * w + weightB * u + weightC * v;
+                        if (weight < weightCutoff || weight <= 0.f) {
+                            continue;
+                        }
+                        materialFactor = settings.materialWeightDensity ? weight : 1.f;
+                    }
+
+                    SR_MATH_NS::FVector3 normal = faceNormal;
+                    if (hasNormals) {
+                        normal = normals[ia] * w + normals[ib] * u + normals[ic] * v;
+                        const float_t lenSq = normal.Dot(normal);
+
+                        if (lenSq > 1e-6f) {
+                            const float_t invLen = 1.f / SR_SQRT(lenSq);
+                            const auto normalized = normal * invLen;
+                            normal = normalized.Dot(faceNormal) > 0.5f ? normalized : faceNormal;
+                        }
+                        else {
+                            normal = faceNormal;
+                        }
+                    }
+
+                    /// отбор по маске плотности - на склонах и проплешинах травинки исчезают плавно, а не порогом.
+                    /// Для наклона берётся худшая из нормалей, чтобы трава не лезла на стены через сглаживание.
+                    const float_t noise = noiseA * w + noiseB * u + noiseC * v;
+                    if (threshold >= materialFactor * noise * GrassSmoothStep(settings.slopeMin, settings.slopeMax, std::min(normal.y, faceNormal.y + 0.1f))) {
+                        continue;
+                    }
+
+                    const uint32_t h3 = GrassHash(h2 ^ 0x1B56C4E9U);
+                    const float_t rank = GrassToFloat(h3);
+
+                    const auto cellX = std::min(cellsX - 1, static_cast<uint32_t>(std::max(0.f, (position.x - boundsMin.x) / cellSize)));
+                    const auto cellZ = std::min(cellsZ - 1, static_cast<uint32_t>(std::max(0.f, (position.z - boundsMin.z) / cellSize)));
+
+                    RawInstance& instance = raw.emplace_back();
+                    instance.instance.position = position;
+                    instance.instance.normal = normal;
+                    instance.instance.rank = rank;
+                    instance.instance.random = GrassToFloat(GrassHash(h3 ^ 0x2C1B3C6DU));
+                    instance.cell = cellZ * cellsX + cellX;
+                }
             }
         }
 
@@ -854,6 +932,7 @@ namespace SR_CORE_NS {
         /// падала бы и скакала при каждой перегенерации (выглядит как задвоение). Порядок обхода треугольников
         /// тоже не подходит - часть чанка оставалась бы без травы.
         if (settings.maxInstancesPerChunk > 0 && raw.size() > settings.maxInstancesPerChunk) {
+            SR_TRACY_ZONE_N("Cull grass instances by distance");
             const SR_MATH_NS::FVector3 observer = task.observer - mesh.origin;
             std::nth_element(raw.begin(), raw.begin() + settings.maxInstancesPerChunk, raw.end(), [&observer](const RawInstance& left, const RawInstance& right) {
                 return (left.instance.position - observer).LengthSq() < (right.instance.position - observer).LengthSq();
@@ -866,49 +945,69 @@ namespace SR_CORE_NS {
             return std::min(SR_TERRAIN_GRASS_RANK_BUCKETS - 1, static_cast<uint32_t>(rank * static_cast<float_t>(SR_TERRAIN_GRASS_RANK_BUCKETS)));
         };
 
-        std::sort(raw.begin(), raw.end(), [&](const RawInstance& left, const RawInstance& right) {
-            if (left.cell != right.cell) {
-                return left.cell < right.cell;
-            }
-            return left.instance.rank < right.instance.rank;
-        });
+        /// Рендерер рисует префикс ячейки с точностью до корзины, порядок внутри корзины не важен -
+        /// поэтому вместо сортировки сравнением раскладываем подсчётом по ключу (ячейка, корзина).
+        const uint32_t cellsCount = cellsX * cellsZ;
+        static SR_THREAD_LOCAL SR_UTILS_NS::Vector<uint32_t> offsets;
+        offsets.assign(static_cast<size_t>(cellsCount) * SR_TERRAIN_GRASS_RANK_BUCKETS + 1, 0U);
 
-        result.instances.resize(raw.size());
+        {
+            SR_TRACY_ZONE_N("Sort grass instances by cell and rank");
 
-        size_t begin = 0;
-        while (begin < raw.size()) {
-            const uint32_t cellIndex = raw[begin].cell;
-            size_t end = begin;
-
-            TerrainGrassCell cell;
-            cell.start = static_cast<uint32_t>(begin);
-            cell.bounds = SR_MATH_NS::AABB(SR_MATH_NS::FVector3(SR_FLOAT_MAX), SR_MATH_NS::FVector3(-SR_FLOAT_MAX));
-
-            std::array<uint32_t, SR_TERRAIN_GRASS_RANK_BUCKETS> histogram = { };
-
-            while (end < raw.size() && raw[end].cell == cellIndex) {
-                const auto& instance = raw[end].instance;
-                result.instances[end] = instance;
-                ++histogram[bucketOf(instance.rank)];
-
-                const SR_MATH_NS::FVector3 worldPos = instance.position + mesh.origin;
-                cell.bounds.min = SR_MATH_NS::FVector3(std::min(cell.bounds.min.x, worldPos.x), std::min(cell.bounds.min.y, worldPos.y), std::min(cell.bounds.min.z, worldPos.z));
-                cell.bounds.max = SR_MATH_NS::FVector3(std::max(cell.bounds.max.x, worldPos.x), std::max(cell.bounds.max.y, worldPos.y), std::max(cell.bounds.max.z, worldPos.z));
-                ++end;
+            for (auto&& instance : raw) {
+                instance.cell = instance.cell * SR_TERRAIN_GRASS_RANK_BUCKETS + bucketOf(instance.instance.rank);
+                ++offsets[instance.cell + 1];
             }
 
-            uint32_t accumulated = 0;
-            for (uint32_t i = 0; i < SR_TERRAIN_GRASS_RANK_BUCKETS; ++i) {
-                accumulated += histogram[i];
-                cell.cumulative[i] = accumulated;
+            for (size_t i = 1; i < offsets.size(); ++i) {
+                offsets[i] += offsets[i - 1];
             }
 
-            /// запас на высоту травинок и изгиб ветром, иначе верхушки отсекались бы фрустумом
-            cell.bounds.min -= SR_MATH_NS::FVector3(1.5f, 0.5f, 1.5f);
-            cell.bounds.max += SR_MATH_NS::FVector3(1.5f, 2.f, 1.5f);
+            result.instances.resize(raw.size());
 
-            result.cells.emplace_back(cell);
-            begin = end;
+            static SR_THREAD_LOCAL SR_UTILS_NS::Vector<uint32_t> cursors;
+            cursors.assign(offsets.begin(), offsets.end() - 1);
+            for (auto&& instance : raw) {
+                result.instances[cursors[instance.cell]++] = instance.instance;
+            }
+        }
+
+        {
+            SR_TRACY_ZONE_N("Fill grass cells");
+
+            uint32_t usedCells = 0;
+            for (uint32_t cellIndex = 0; cellIndex < cellsCount; ++cellIndex) {
+                usedCells += offsets[cellIndex * SR_TERRAIN_GRASS_RANK_BUCKETS] != offsets[(cellIndex + 1) * SR_TERRAIN_GRASS_RANK_BUCKETS] ? 1 : 0;
+            }
+            result.cells.reserve(usedCells);
+
+            for (uint32_t cellIndex = 0; cellIndex < cellsCount; ++cellIndex) {
+                const uint32_t begin = offsets[cellIndex * SR_TERRAIN_GRASS_RANK_BUCKETS];
+                const uint32_t end = offsets[(cellIndex + 1) * SR_TERRAIN_GRASS_RANK_BUCKETS];
+                if (begin == end) {
+                    continue;
+                }
+
+                TerrainGrassCell cell;
+                cell.start = begin;
+                cell.bounds = SR_MATH_NS::AABB(SR_MATH_NS::FVector3(SR_FLOAT_MAX), SR_MATH_NS::FVector3(-SR_FLOAT_MAX));
+
+                for (uint32_t i = 0; i < SR_TERRAIN_GRASS_RANK_BUCKETS; ++i) {
+                    cell.cumulative[i] = offsets[cellIndex * SR_TERRAIN_GRASS_RANK_BUCKETS + i + 1] - begin;
+                }
+
+                for (uint32_t i = begin; i < end; ++i) {
+                    const SR_MATH_NS::FVector3 worldPos = result.instances[i].position + mesh.origin;
+                    cell.bounds.min = SR_MATH_NS::FVector3(std::min(cell.bounds.min.x, worldPos.x), std::min(cell.bounds.min.y, worldPos.y), std::min(cell.bounds.min.z, worldPos.z));
+                    cell.bounds.max = SR_MATH_NS::FVector3(std::max(cell.bounds.max.x, worldPos.x), std::max(cell.bounds.max.y, worldPos.y), std::max(cell.bounds.max.z, worldPos.z));
+                }
+
+                /// запас на высоту травинок и изгиб ветром, иначе верхушки отсекались бы фрустумом
+                cell.bounds.min -= SR_MATH_NS::FVector3(1.5f, 0.5f, 1.5f);
+                cell.bounds.max += SR_MATH_NS::FVector3(1.5f, 2.f, 1.5f);
+
+                result.cells.emplace_back(cell);
+            }
         }
 
         return result;
