@@ -30,6 +30,9 @@ namespace SR_CORE_NS {
         /// Сколько кадров заменённый чанк ещё показывается после готовности замены
         SR_NODISCARD uint32_t GetReplaceFrames() const noexcept { return m_replaceFrames; }
         void SetReplaceFrames(uint32_t frames) noexcept { m_replaceFrames = frames; }
+        /// Данные чанка устарели (деформация), но перегенерировать сейчас нельзя: его место ещё закрыто заменяемым чанком
+        SR_NODISCARD bool IsDirty() const noexcept { return m_isDirty; }
+        void SetDirty(bool dirty) noexcept { m_isDirty = dirty; }
 
         SR_NODISCARD float_t GetDistanceTo(const ITerrainChunk& other) const override;
 
@@ -37,6 +40,7 @@ namespace SR_CORE_NS {
         SR_MATH_NS::OctreeNodeId m_node;
         uint8_t m_lodBorders = 0;
         uint32_t m_replaceFrames = 0;
+        bool m_isDirty = false;
 
     };
 
@@ -63,6 +67,8 @@ namespace SR_CORE_NS {
         void RebuildTree();
         void UpdatePhysics();
         void ReleaseReplacedChunks();
+        void RegenerateChunk(TerrainChunkCube::Ptr& pChunk);
+        SR_NODISCARD bool IsCoveredByReplaced(const SR_MATH_NS::OctreeNodeId& node) const;
         void ReleaseChunk(const TerrainChunkCube::Ptr& pChunk);
         SR_NODISCARD TerrainChunkCube::Ptr CreateChunk(const SR_MATH_NS::OctreeNodeId& node);
 

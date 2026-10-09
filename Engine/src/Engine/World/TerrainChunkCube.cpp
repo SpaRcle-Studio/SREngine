@@ -256,31 +256,40 @@ namespace SR_CORE_NS {
                 continue;
             }
 
-            /// Перегенерация в отдельный чанк: старый остаётся видимым до загрузки нового (без моргания).
-            /// Если место уже закрыто более старым чанком (деформации идут подряд), текущий не нужен:
-            /// иначе на одном месте были бы видны два старых меша и две травы
-            const uint8_t lodBorders = pChunk->GetLodBorders();
-            bool isCovered = false;
-            for (auto&& pReplaced : m_replacedChunks) {
-                /// Заменённый узел должен накрывать текущий целиком, иначе после освобождения останется дыра
-                auto&& replacedNode = pReplaced->GetNode();
-                if (replacedNode.level >= node.level && replacedNode.Intersects(node)) {
-                    isCovered = true;
-                    break;
-                }
+            /// Место ещё закрыто заменяемым чанком (деформации идут каждый кадр). Выбросить текущий нельзя:
+            /// он уже загружен и вот-вот заменит старый - иначе новая геометрия моргает, а старая висит до конца деформации.
+            /// Перегенерируем его, как только он покажется (см. ReleaseReplacedChunks)
+            if (IsCoveredByReplaced(node)) {
+                pChunk->SetDirty(true);
+                continue;
             }
 
-            if (isCovered) {
-                ReleaseChunk(pChunk);
-            }
-            else {
-                pChunk->SetReplaceFrames(m_replaceDelayFrames);
-                m_replacedChunks.emplace_back(pChunk);
-            }
-
-            pChunk = CreateChunk(node);
-            pChunk->SetLodBorders(lodBorders);
+            RegenerateChunk(pChunk);
         }
+    }
+
+    void TerrainChunkCubeGenerator::RegenerateChunk(TerrainChunkCube::Ptr& pChunk) {
+        /// Перегенерация в отдельный чанк: старый остаётся видимым до загрузки нового (без моргания)
+        const SR_MATH_NS::OctreeNodeId node = pChunk->GetNode();
+        const uint8_t lodBorders = pChunk->GetLodBorders();
+
+        pChunk->SetDirty(false);
+        pChunk->SetReplaceFrames(m_replaceDelayFrames);
+        m_replacedChunks.emplace_back(pChunk);
+
+        pChunk = CreateChunk(node);
+        pChunk->SetLodBorders(lodBorders);
+    }
+
+    bool TerrainChunkCubeGenerator::IsCoveredByReplaced(const SR_MATH_NS::OctreeNodeId& node) const {
+        for (auto&& pReplaced : m_replacedChunks) {
+            /// Заменённый узел должен накрывать текущий целиком
+            auto&& replacedNode = pReplaced->GetNode();
+            if (replacedNode.level >= node.level && replacedNode.Intersects(node)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     TerrainChunkCube::Ptr TerrainChunkCubeGenerator::CreateChunk(const SR_MATH_NS::OctreeNodeId& node) {
@@ -296,6 +305,7 @@ namespace SR_CORE_NS {
 
         pChunk->SetNode(node);
         pChunk->SetLodBorders(0);
+        pChunk->SetDirty(false);
         pChunk->SetStatus(ITerrainChunk::Status::Created);
         m_chunksToLoad.emplace_back(pChunk);
 
@@ -373,6 +383,22 @@ namespace SR_CORE_NS {
             else {
                 ++i;
             }
+        }
+
+        /// Чанки, получившие деформацию, пока их место было закрыто: теперь они видны и перегенерируются по последним правкам
+        for (auto&& [node, pChunk] : m_chunks) {
+            if (!pChunk->IsDirty() || pChunk->GetStatus() != ITerrainChunk::Status::Loaded || IsCoveredByReplaced(node)) {
+                continue;
+            }
+
+            if (!pChunk->GetObject()) {
+                pChunk->SetDirty(false);
+                pChunk->SetStatus(ITerrainChunk::Status::Created);
+                m_chunksToLoad.emplace_back(pChunk);
+                continue;
+            }
+
+            RegenerateChunk(pChunk);
         }
 
         uint32_t withObject = 0;
