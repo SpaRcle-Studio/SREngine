@@ -55,9 +55,14 @@ namespace SR_CORE_NS {
             LoadNearestChunk(loaderFn);
         }
 
-        /// Отсчёт начинается только когда замена готова: новый объект активируется и регистрируется в рендере не в тот же кадр
+        /// Отсчёт идёт только пока замена готова и начинается заново, если готовность пропала.
+        /// При редактировании замена пересоздаётся каждый кадр - без сброса счётчик успевал дойти до нуля
+        /// на предыдущей замене, и старый чанк освобождался в кадр загрузки новой (моргание).
         for (auto&& pReplaced : m_replacedChunks) {
-            if (pReplaced->GetReplaceFrames() > 0 && IsReady(pReplaced->GetNode())) {
+            if (!IsReady(pReplaced->GetNode())) {
+                pReplaced->SetReplaceFrames(m_replaceDelayFrames);
+            }
+            else if (pReplaced->GetReplaceFrames() > 0) {
                 pReplaced->SetReplaceFrames(pReplaced->GetReplaceFrames() - 1);
             }
         }
@@ -221,6 +226,63 @@ namespace SR_CORE_NS {
         ReleaseReplacedChunks();
     }
 
+    void TerrainChunkCubeGenerator::InvalidateRegion(const SR_MATH_NS::AABB& bounds) {
+        SR_TRACY_ZONE;
+
+        /// Запас в 2 вокселя: вершины на гранях чанка зависят от соседних вокселей
+        const SR_MATH_NS::FVector3 margin = m_chunkScale * 2.f;
+        const SR_MATH_NS::FVector3 regionMin = bounds.min - margin;
+        const SR_MATH_NS::FVector3 regionMax = bounds.max + margin;
+
+        for (auto&& [node, pChunk] : m_chunks) {
+            const SR_MATH_NS::FVector3 nodeMin = node.GetMin() * m_chunkSize;
+            const SR_MATH_NS::FVector3 nodeMax = node.GetMax() * m_chunkSize;
+            if (nodeMax.x < regionMin.x || nodeMin.x > regionMax.x ||
+                nodeMax.y < regionMin.y || nodeMin.y > regionMax.y ||
+                nodeMax.z < regionMin.z || nodeMin.z > regionMax.z)
+            {
+                continue;
+            }
+
+            /// Ещё не сгенерирован - деформации прочитаются при генерации
+            if (pChunk->GetStatus() != ITerrainChunk::Status::Loaded) {
+                continue;
+            }
+
+            /// Пустой чанк не виден, его можно перегенерировать на месте: после выкапывания у него может появиться геометрия
+            if (!pChunk->GetObject()) {
+                pChunk->SetStatus(ITerrainChunk::Status::Created);
+                m_chunksToLoad.emplace_back(pChunk);
+                continue;
+            }
+
+            /// Перегенерация в отдельный чанк: старый остаётся видимым до загрузки нового (без моргания).
+            /// Если место уже закрыто более старым чанком (деформации идут подряд), текущий не нужен:
+            /// иначе на одном месте были бы видны два старых меша и две травы
+            const uint8_t lodBorders = pChunk->GetLodBorders();
+            bool isCovered = false;
+            for (auto&& pReplaced : m_replacedChunks) {
+                /// Заменённый узел должен накрывать текущий целиком, иначе после освобождения останется дыра
+                auto&& replacedNode = pReplaced->GetNode();
+                if (replacedNode.level >= node.level && replacedNode.Intersects(node)) {
+                    isCovered = true;
+                    break;
+                }
+            }
+
+            if (isCovered) {
+                ReleaseChunk(pChunk);
+            }
+            else {
+                pChunk->SetReplaceFrames(m_replaceDelayFrames);
+                m_replacedChunks.emplace_back(pChunk);
+            }
+
+            pChunk = CreateChunk(node);
+            pChunk->SetLodBorders(lodBorders);
+        }
+    }
+
     TerrainChunkCube::Ptr TerrainChunkCubeGenerator::CreateChunk(const SR_MATH_NS::OctreeNodeId& node) {
         TerrainChunkCube::Ptr pChunk;
         if (!m_freeChunks.empty()) {
@@ -289,6 +351,9 @@ namespace SR_CORE_NS {
             }
             /// Трава замены тоже должна быть готова: иначе либо место голое, либо (если держать обе) травы вдвое больше
             if (pChunk->GetStatus() != ITerrainChunk::Status::Loaded || !pChunk->IsGrassReady()) {
+                return false;
+            }
+            if (pChunk->GetObject() && pChunk->GetData() && !pChunk->GetData()->IsRenderReady()) {
                 return false;
             }
         }

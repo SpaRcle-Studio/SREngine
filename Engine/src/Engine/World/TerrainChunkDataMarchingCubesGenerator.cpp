@@ -216,12 +216,45 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::FormatTo(positionText, "{}, {}, {} lod {}", position.x, position.y, position.z, pCubeChunk->GetLod());
         SR_TRACY_ZONE_TEXT(positionText);
 
+        /// Правки плотности от деформаций террейна (см. Terrain::LateUpdate) для сетки этого чанка.
+        /// Точка плотности вокселя v по оси: chunkCoord * (N - 2) + 1 + (v - 1) * lodScale - так же, как в Density.srsl
+        bool hasDensityOffsets = false;
+        {
+            SR_TRACY_ZONE_N("Collect density offsets");
+
+            const int32_t axis = static_cast<int32_t>(m_densityCountAxis);
+            const SR_MATH_NS::IVector3 origin = position * (axis - 2) + SR_MATH_NS::IVector3(1) - SR_MATH_NS::IVector3(lodScale);
+            const SR_MATH_NS::IVector3 last = origin + SR_MATH_NS::IVector3((axis - 1) * lodScale);
+
+            if (terrain.HasDensityOffsets(origin, last)) {
+                const uint64_t count = static_cast<uint64_t>(axis) * axis * axis;
+                m_densityOffsets.resize(count);
+
+                for (int32_t z = 0; z < axis; ++z) {
+                    for (int32_t y = 0; y < axis; ++y) {
+                        for (int32_t x = 0; x < axis; ++x) {
+                            const SR_MATH_NS::IVector3 point = origin + SR_MATH_NS::IVector3(x, y, z) * lodScale;
+                            const float_t offset = terrain.GetDensityOffset(point);
+                            m_densityOffsets[(static_cast<uint64_t>(z) * axis + y) * axis + x] = offset;
+                            hasDensityOffsets |= offset != 0.f;
+                        }
+                    }
+                }
+
+                if (hasDensityOffsets) {
+                    m_pDensityOffsetsSSBO->UpdateSSBO(m_densityOffsets.data(), count * sizeof(float_t));
+                }
+            }
+        }
+
         /// Плотность живёт только на GPU: на CPU она не нужна, а хранение кеша стоило по 4 МБ на чанк
         {
             SR_TRACY_ZONE_N("Compute density");
 
             if (m_pDensityComputeShader->BeginCompute()) {
                 m_pDensitySSBO->Bind();
+                m_pDensityOffsetsSSBO->Bind();
+                m_pDensityComputeShader->GetShader()->SetConstInt("hasDensityOffsets"_atom, hasDensityOffsets ? 1 : 0);
                 m_pDensityComputeShader->GetShader()->SetConstInt("densityCountAxis"_atom, static_cast<int>(m_densityCountAxis));
                 m_pDensityComputeShader->GetShader()->SetConstInt("seed"_atom, static_cast<int>(m_seed));
                 m_pDensityComputeShader->GetShader()->SetConstInt("lodScale"_atom, lodScale);
@@ -448,6 +481,7 @@ namespace SR_CORE_NS {
         m_pIndicesSSBO.reset();
 
         m_pDensitySSBO = SR_GRAPH_NS::SSBOInstance::Create<TerrainMarchingCubesVoxel>(densitiesCount, SR_GRAPH_NS::SSBOUsage::AutoPreferDevice, "voxels");
+        m_pDensityOffsetsSSBO = SR_GRAPH_NS::SSBOInstance::Create<float_t>(densitiesCount, SR_GRAPH_NS::SSBOUsage::CPUToGPU, "densityOffsets");
         m_pHashTableSSBO = SR_GRAPH_NS::SSBOInstance::Create<uint32_t>(m_vertexHashTableSize, SR_GRAPH_NS::SSBOUsage::CPUToGPU, "hashTable");
         m_pVerticesSSBO = SR_GRAPH_NS::SSBOInstance::Create<TerrainMarchingCubesVertex>(maxVertexCount, SR_GRAPH_NS::SSBOUsage::GPUToCPU, "vertices", SR_GRAPH_NS::SSBOFlags::StructuredCounter);
         m_pIndicesSSBO = SR_GRAPH_NS::SSBOInstance::Create<uint32_t>(maxVertexCount, SR_GRAPH_NS::SSBOUsage::GPUToCPU, "indices", SR_GRAPH_NS::SSBOFlags::Counter);
@@ -579,6 +613,21 @@ namespace SR_CORE_NS {
         }
 
         m_isPhysicsEnabled = enable;
+    }
+
+    bool TerrainMarchingCubesChunkData::IsRenderReady() const {
+        auto&& pChunkObject = m_chunk->GetObject();
+        if (!pChunkObject) {
+            return true;
+        }
+
+        auto&& pProceduralMesh = pChunkObject->GetComponent<SR_GTYPES_NS::ProceduralMesh>();
+        if (!pProceduralMesh) {
+            return true;
+        }
+
+        /// Включение объекта применяется отложенно (CheckActivity), а изменение меша ставит его в очередь перерегистрации
+        return pProceduralMesh->IsActive() && pProceduralMesh->IsRenderObjectRegistered() && !pProceduralMesh->IsWaitReRegister();
     }
 
     void TerrainMarchingCubesChunkData::Deactivate() {

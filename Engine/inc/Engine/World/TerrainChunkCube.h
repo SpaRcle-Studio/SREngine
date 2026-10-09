@@ -48,6 +48,8 @@ namespace SR_CORE_NS {
         void LoadNextChunk(const SR_HTYPES_NS::Function<void(ITerrainChunk&)>& loaderFn) override;
 
         SR_NODISCARD bool IsCollisionEnabledAt(const ITerrainChunk& chunk) const override;
+        void InvalidateRegion(const SR_MATH_NS::AABB& bounds) override;
+        SR_NODISCARD SR_MATH_NS::FVector3 GetVoxelSize() const override { return m_chunkScale; }
 
         SR_NODISCARD const SR_MATH_NS::FVector3& GetChunkSize() const noexcept { return m_chunkSize; }
         SR_NODISCARD const SR_MATH_NS::FVector3& GetChunkScale() const noexcept { return m_chunkScale; }

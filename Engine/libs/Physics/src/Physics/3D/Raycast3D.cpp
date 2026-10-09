@@ -11,19 +11,20 @@
 namespace SR_PHYSICS_NS {
     SR_MAYBE_UNUSED_VAR RayCast3D::Instance();
 
-    SR_UTILS_NS::RayCastHits RayCast3D::Cast(const SR_MATH_NS::FVector3 &origin, const SR_MATH_NS::FVector3 &direction, float_t maxDistance, uint32_t maxHits, const SR_UTILS_NS::LayerMask& layerMask) {
+    void RayCast3D::Cast(SR_UTILS_NS::RayCastHits& hits, const SR_MATH_NS::FVector3 &origin, const SR_MATH_NS::FVector3 &direction, float_t maxDistance, uint32_t maxHits, const SR_UTILS_NS::LayerMask& layerMask) {
         SR_TRACY_ZONE;
-        return m_world->GetRayCast3DImpl()->Cast(origin, direction, maxDistance, maxHits, layerMask);
+        m_world->GetRayCast3DImpl()->Cast(hits, origin, direction, maxDistance, maxHits, layerMask);
     }
 
-    SR_UTILS_NS::RayCastHits RayCast3D::Cast(const SR_MATH_NS::FVector3 &origin, const SR_MATH_NS::FVector3 &direction, float_t maxDistance, const SR_UTILS_NS::LayerMask& layerMask) {
+    void RayCast3D::Cast(SR_UTILS_NS::RayCastHits& hits, const SR_MATH_NS::FVector3 &origin, const SR_MATH_NS::FVector3 &direction, float_t maxDistance, const SR_UTILS_NS::LayerMask& layerMask) {
         SR_TRACY_ZONE;
-        return m_world->GetRayCast3DImpl()->Cast(origin, direction, maxDistance, 1, layerMask);
+        m_world->GetRayCast3DImpl()->Cast(hits, origin, direction, maxDistance, 1, layerMask);
     }
 
     SR_UTILS_NS::Optional<SR_UTILS_NS::RayCastHit> RayCast3D::CastSingle(const SR_MATH_NS::FVector3& origin, const SR_MATH_NS::FVector3& direction, float_t maxDistance, const SR_UTILS_NS::LayerMask& layerMask) {
         SR_TRACY_ZONE;
-        auto hits = Cast(origin, direction, maxDistance, 1, layerMask);
+        static SR_THREAD_LOCAL SR_UTILS_NS::RayCastHits hits;
+        Cast(hits, origin, direction, maxDistance, 1, layerMask);
         if (hits.empty()) {
             return {};
         }

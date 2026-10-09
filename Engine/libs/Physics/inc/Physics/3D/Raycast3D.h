@@ -17,9 +17,8 @@ namespace SR_PHYSICS_NS {
         SR_REGISTER_SINGLETON(RayCast3D)
         SR_CLASS()
     public:
-        /// @method
-        SR_NODISCARD SR_UTILS_NS::RayCastHits Cast(const SR_MATH_NS::FVector3 &origin, const SR_MATH_NS::FVector3 &direction, float_t maxDistance, uint32_t maxHits, const SR_UTILS_NS::LayerMask& layerMask = SR_UTILS_NS::LayerMask::Any());
-        SR_NODISCARD SR_UTILS_NS::RayCastHits Cast(const SR_MATH_NS::FVector3 &origin, const SR_MATH_NS::FVector3 &direction, float_t maxDistance, const SR_UTILS_NS::LayerMask& layerMask = SR_UTILS_NS::LayerMask::Any());
+        SR_NODISCARD void Cast(SR_UTILS_NS::RayCastHits& hits, const SR_MATH_NS::FVector3 &origin, const SR_MATH_NS::FVector3 &direction, float_t maxDistance, uint32_t maxHits, const SR_UTILS_NS::LayerMask& layerMask = SR_UTILS_NS::LayerMask::Any());
+        SR_NODISCARD void Cast(SR_UTILS_NS::RayCastHits& hits, const SR_MATH_NS::FVector3 &origin, const SR_MATH_NS::FVector3 &direction, float_t maxDistance, const SR_UTILS_NS::LayerMask& layerMask = SR_UTILS_NS::LayerMask::Any());
         /// @method
         SR_NODISCARD SR_UTILS_NS::Optional<SR_UTILS_NS::RayCastHit> CastSingle(const SR_MATH_NS::FVector3& origin, const SR_MATH_NS::FVector3& direction, float_t maxDistance, const SR_UTILS_NS::LayerMask& layerMask = SR_UTILS_NS::LayerMask::Any());
 

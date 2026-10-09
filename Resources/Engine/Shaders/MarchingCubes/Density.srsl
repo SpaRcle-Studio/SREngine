@@ -9,12 +9,16 @@ struct Voxel {
 
 [[ssbo(voxels)]] Voxel[] voxels;
 
+/// Правки плотности от деформаций террейна, по одной на воксель чанка (тот же индекс, что у voxels)
+[[ssbo(densityOffsets)]] float[] densityOffsets;
+
 [[const], [uniform]] int densityCountAxis = 0;
 [[const], [uniform]] float isoLevel = 0.2;
 [[const], [uniform]] ivec3 chunkCoord = ivec3(0, 0, 0);
 [[const], [uniform]] float noiseScale = 0.05;
 [[const], [uniform]] int seed = 42;
 [[const], [uniform]] int lodScale = 1;
+[[const], [uniform]] int hasDensityOffsets = 0;
 
 float fade(float t) {
     return t * t * t * (t * (t * 6.0 - 15.0) + 10.0);
@@ -173,6 +177,10 @@ void compute() {
 
     float terrainHeight = 20.0 + hills + mountains * continents;
     float density = terrainHeight - world.y;
+
+    if (hasDensityOffsets != 0) {
+        density += densityOffsets[index];
+    }
 
     voxels[index] = CalculateVoxel(density, world, noisePos);
 }

@@ -13,6 +13,9 @@
 #include <Utils/ECS/Component.h>
 #include <Utils/ECS/SceneObject.h>
 #include <Utils/ECS/EntityRef.h>
+#include <Utils/Math/AABB.h>
+#include <Utils/Types/FlatHashMap.h>
+#include <Utils/Types/RawPointerHolder.h>
 
 namespace SR_CORE_NS {
     class Terrain;
@@ -31,6 +34,8 @@ namespace SR_CORE_NS {
         void SetChunk(ITerrainChunk* chunk) { m_chunk = chunk; }
         virtual void SwitchPhysics(bool enable) { }
         SR_NODISCARD virtual bool IsPhysicsEnabled() const { return false; }
+        /// Меш чанка уже попал в рендер. Пока нет - заменяемый чанк должен оставаться видимым, иначе моргание
+        SR_NODISCARD virtual bool IsRenderReady() const { return true; }
 
     protected:
         ITerrainChunk* m_chunk = nullptr;
@@ -96,6 +101,10 @@ namespace SR_CORE_NS {
         virtual void LoadNextChunk(const SR_HTYPES_NS::Function<void(ITerrainChunk&)>& loaderFn) { }
 
         SR_NODISCARD virtual bool IsCollisionEnabledAt(const ITerrainChunk& chunk) const { return false; }
+        /// Перегенерировать чанки, пересекающие область (мировые координаты)
+        virtual void InvalidateRegion(const SR_MATH_NS::AABB& bounds) { }
+        /// Размер вокселя самого детального уровня в метрах - шаг сетки правок плотности
+        SR_NODISCARD virtual SR_MATH_NS::FVector3 GetVoxelSize() const { return SR_MATH_NS::FVector3(1.f); }
 
         /// Объект сцены выдаётся только чанкам с непустой геометрией. Объекты переиспользуются через пул.
         SR_UTILS_NS::SceneObject::Ptr AcquireChunkObject(ITerrainChunk& chunk);
@@ -132,6 +141,31 @@ namespace SR_CORE_NS {
         virtual void Update(Terrain& terrain, float_t dt) { }
     };
 
+    /// Сторона блока правок плотности в точках сетки
+    static constexpr int32_t SR_TERRAIN_EDIT_BLOCK_SIZE = 16;
+
+    SR_ENUM_NS_CLASS_T(TerrainDeformationShape, uint8_t,
+        Sphere,
+        Box
+    )
+
+    struct TerrainDeformation : public SR_UTILS_NS::Serializable {
+        SR_STRUCT()
+
+        /// @property
+        SR_MATH_NS::FVector3 position;
+        /// @property @tooltip(Насколько сильно меняется плотность в центре формы (в единицах плотности, ~метрах). Повторные деформации накапливаются)
+        float_t strength = 0.f;
+        /// @property
+        TerrainDeformationShape shape = TerrainDeformationShape::Sphere;
+        /// @property @tooltip(Радиусы сферы или половины сторон коробки, в метрах)
+        SR_MATH_NS::FVector3 size = SR_MATH_NS::FVector3(1.f);
+        /// @property @tooltip(true - добавить грунт, false - вырезать)
+        bool isAdditive = true;
+
+        SR_NODISCARD SR_MATH_NS::AABB GetBounds() const noexcept;
+    };
+
     class Terrain : public SR_UTILS_NS::Component {
         using Super = SR_UTILS_NS::Component;
         SR_CLASS()
@@ -145,6 +179,17 @@ namespace SR_CORE_NS {
         SR_NODISCARD TerrainGrass* GetGrass() const noexcept;
         SR_NODISCARD ITerrainChunkGenerator* GetChunkGenerator() const noexcept;
 
+        void LateUpdate() override;
+
+        /// Деформация копится до LateUpdate, там впекается в правки плотности и затронутые чанки перегенерируются
+        /// @method
+        void AddDeformation(const TerrainDeformation& deformation);
+
+        /// Добавка к плотности в точке сетки самого детального уровня (координаты точки плотности, см. Density.srsl)
+        SR_NODISCARD float_t GetDensityOffset(const SR_MATH_NS::IVector3& point) const;
+        /// Есть ли правки плотности в области точек сетки [min, max]
+        SR_NODISCARD bool HasDensityOffsets(const SR_MATH_NS::IVector3& min, const SR_MATH_NS::IVector3& max) const;
+
     private:
         /// @property @tooltip(If not present, will be used main camera of the scene)
         SR_UTILS_NS::EntityRef<SR_GTYPES_NS::Camera> m_camera;
@@ -156,6 +201,20 @@ namespace SR_CORE_NS {
         TerrainLODManager m_lodManager;
         /// @property @tooltip(Опциональная система травы. Можно оставить пустым)
         TerrainGrass::Ptr m_grass;
+
+    private:
+        void ApplyDeformation(const TerrainDeformation& deformation);
+
+    private:
+        /// Блок правок плотности: SR_TERRAIN_EDIT_BLOCK_SIZE^3 точек сетки самого детального уровня
+        struct DensityEditBlock {
+            std::array<float_t, SR_TERRAIN_EDIT_BLOCK_SIZE * SR_TERRAIN_EDIT_BLOCK_SIZE * SR_TERRAIN_EDIT_BLOCK_SIZE> values = { };
+        };
+
+        /// Накопленные за кадр деформации, применяются в LateUpdate
+        SR_UTILS_NS::Vector<TerrainDeformation> m_pendingDeformations;
+        /// Правки плотности хранятся только там, где была деформация. Ключ - координата блока
+        SR_HTYPES_NS::FlatHashMap<SR_MATH_NS::IVector3, SR_UTILS_NS::RawPointerHolder<DensityEditBlock>> m_editBlocks;
 
     };
 }

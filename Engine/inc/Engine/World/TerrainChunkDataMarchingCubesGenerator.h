@@ -34,6 +34,7 @@ namespace SR_CORE_NS {
         void Deactivate() override;
         void SwitchPhysics(bool enable) override;
         SR_NODISCARD bool IsPhysicsEnabled() const override { return m_isPhysicsEnabled; }
+        SR_NODISCARD bool IsRenderReady() const override;
 
         /// Коллизия строится лениво из меша ProceduralMesh при первом включении физики
         void SetCollisionSettings(bool allowed, const SR_MATH_NS::FVector3& scale, float_t simplifyRatio, float_t simplifyError, uint64_t indicesCount);
@@ -100,11 +101,13 @@ namespace SR_CORE_NS {
 
         SR_UTILS_NS::VertexDataBuffer m_vertices;
         SR_HTYPES_NS::FastMemoryArray<uint32_t> m_indices;
+        SR_HTYPES_NS::FastMemoryArray<float_t> m_densityOffsets;
 
         SR_GTYPES_NS::ComputeShader::Ptr m_pMarchingComputeShader = nullptr;
         SR_GTYPES_NS::ComputeShader::Ptr m_pDensityComputeShader = nullptr;
 
         SR_GRAPH_NS::SSBOInstance::Ptr m_pDensitySSBO = nullptr;
+        SR_GRAPH_NS::SSBOInstance::Ptr m_pDensityOffsetsSSBO = nullptr;
         SR_GRAPH_NS::SSBOInstance::Ptr m_pHashTableSSBO = nullptr;
         SR_GRAPH_NS::SSBOInstance::Ptr m_pVerticesSSBO = nullptr;
         SR_GRAPH_NS::SSBOInstance::Ptr m_pIndicesSSBO = nullptr;

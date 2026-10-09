@@ -163,4 +163,160 @@ namespace SR_CORE_NS {
 
         return data;
     }
+
+    SR_MATH_NS::AABB TerrainDeformation::GetBounds() const noexcept {
+        const SR_MATH_NS::FVector3 extents = size.Abs();
+        return SR_MATH_NS::AABB(position - extents, position + extents);
+    }
+
+    void Terrain::AddDeformation(const TerrainDeformation& deformation) {
+        if (deformation.strength <= 0.f) {
+            return;
+        }
+        m_pendingDeformations.emplace_back(deformation);
+    }
+
+    void Terrain::LateUpdate() {
+        Super::LateUpdate();
+
+        if (m_pendingDeformations.empty()) {
+            return;
+        }
+
+        SR_TRACY_ZONE;
+
+        /// Область всех деформаций кадра: чанки перегенерируются один раз, а не на каждую деформацию
+        SR_MATH_NS::AABB region = m_pendingDeformations[0].GetBounds();
+        for (auto&& deformation : m_pendingDeformations) {
+            ApplyDeformation(deformation);
+
+            const SR_MATH_NS::AABB bounds = deformation.GetBounds();
+            region.min = SR_MATH_NS::FVector3(std::min(region.min.x, bounds.min.x), std::min(region.min.y, bounds.min.y), std::min(region.min.z, bounds.min.z));
+            region.max = SR_MATH_NS::FVector3(std::max(region.max.x, bounds.max.x), std::max(region.max.y, bounds.max.y), std::max(region.max.z, bounds.max.z));
+        }
+
+        m_pendingDeformations.clear();
+
+        if (m_chunkGenerator) {
+            m_chunkGenerator->InvalidateRegion(region);
+        }
+    }
+
+    void Terrain::ApplyDeformation(const TerrainDeformation& deformation) {
+        SR_TRACY_ZONE;
+
+        if (!m_chunkGenerator) {
+            return;
+        }
+
+        /// Точка плотности d лежит в мире на (d - 0.5) * voxelSize (см. Density.srsl).
+        /// Плотность измеряется в вокселях, поэтому strength (метры) делится на размер вокселя.
+        const SR_MATH_NS::FVector3 voxelSize = m_chunkGenerator->GetVoxelSize();
+        const SR_MATH_NS::FVector3 size = SR_MATH_NS::FVector3(
+            std::max(std::abs(deformation.size.x), 0.001f),
+            std::max(std::abs(deformation.size.y), 0.001f),
+            std::max(std::abs(deformation.size.z), 0.001f)
+        );
+        const float_t strength = (deformation.isAdditive ? deformation.strength : -deformation.strength) / voxelSize.y;
+
+        const SR_MATH_NS::AABB bounds = deformation.GetBounds();
+        const SR_MATH_NS::IVector3 minPoint(
+            static_cast<int32_t>(std::floor(bounds.min.x / voxelSize.x + 0.5f)),
+            static_cast<int32_t>(std::floor(bounds.min.y / voxelSize.y + 0.5f)),
+            static_cast<int32_t>(std::floor(bounds.min.z / voxelSize.z + 0.5f))
+        );
+        const SR_MATH_NS::IVector3 maxPoint(
+            static_cast<int32_t>(std::ceil(bounds.max.x / voxelSize.x + 0.5f)),
+            static_cast<int32_t>(std::ceil(bounds.max.y / voxelSize.y + 0.5f)),
+            static_cast<int32_t>(std::ceil(bounds.max.z / voxelSize.z + 0.5f))
+        );
+
+        constexpr int32_t blockSize = SR_TERRAIN_EDIT_BLOCK_SIZE;
+
+        for (int32_t z = minPoint.z; z <= maxPoint.z; ++z) {
+            for (int32_t y = minPoint.y; y <= maxPoint.y; ++y) {
+                for (int32_t x = minPoint.x; x <= maxPoint.x; ++x) {
+                    const SR_MATH_NS::FVector3 worldPos(
+                        (static_cast<float_t>(x) - 0.5f) * voxelSize.x,
+                        (static_cast<float_t>(y) - 0.5f) * voxelSize.y,
+                        (static_cast<float_t>(z) - 0.5f) * voxelSize.z
+                    );
+                    const SR_MATH_NS::FVector3 local = (worldPos - deformation.position) / size;
+
+                    /// Нормированное расстояние до границы формы: 0 в центре, 1 на границе
+                    float_t distance = 0.f;
+                    if (deformation.shape == TerrainDeformationShape::Box) {
+                        distance = std::max({ std::abs(local.x), std::abs(local.y), std::abs(local.z) });
+                    }
+                    else {
+                        distance = local.Length();
+                    }
+
+                    if (distance >= 1.f) {
+                        continue;
+                    }
+
+                    const SR_MATH_NS::IVector3 blockCoord(
+                        static_cast<int32_t>(std::floor(static_cast<float_t>(x) / blockSize)),
+                        static_cast<int32_t>(std::floor(static_cast<float_t>(y) / blockSize)),
+                        static_cast<int32_t>(std::floor(static_cast<float_t>(z) / blockSize))
+                    );
+
+                    auto&& pBlock = m_editBlocks[blockCoord];
+                    if (!pBlock) {
+                        pBlock = SR_UTILS_NS::RawPointerHolder<DensityEditBlock>(new DensityEditBlock());
+                    }
+
+                    const int32_t lx = x - blockCoord.x * blockSize;
+                    const int32_t ly = y - blockCoord.y * blockSize;
+                    const int32_t lz = z - blockCoord.z * blockSize;
+                    pBlock->values[(lz * blockSize + ly) * blockSize + lx] += strength * (1.f - distance);
+                }
+            }
+        }
+    }
+
+    float_t Terrain::GetDensityOffset(const SR_MATH_NS::IVector3& point) const {
+        constexpr int32_t blockSize = SR_TERRAIN_EDIT_BLOCK_SIZE;
+
+        const SR_MATH_NS::IVector3 blockCoord(
+            static_cast<int32_t>(std::floor(static_cast<float_t>(point.x) / blockSize)),
+            static_cast<int32_t>(std::floor(static_cast<float_t>(point.y) / blockSize)),
+            static_cast<int32_t>(std::floor(static_cast<float_t>(point.z) / blockSize))
+        );
+
+        auto&& pIt = m_editBlocks.find(blockCoord);
+        if (pIt == m_editBlocks.end()) {
+            return 0.f;
+        }
+
+        const int32_t lx = point.x - blockCoord.x * blockSize;
+        const int32_t ly = point.y - blockCoord.y * blockSize;
+        const int32_t lz = point.z - blockCoord.z * blockSize;
+        return pIt->second->values[(lz * blockSize + ly) * blockSize + lx];
+    }
+
+    bool Terrain::HasDensityOffsets(const SR_MATH_NS::IVector3& min, const SR_MATH_NS::IVector3& max) const {
+        if (m_editBlocks.empty()) {
+            return false;
+        }
+
+        constexpr int32_t blockSize = SR_TERRAIN_EDIT_BLOCK_SIZE;
+
+        const auto toBlock = [](int32_t v) {
+            return static_cast<int32_t>(std::floor(static_cast<float_t>(v) / blockSize));
+        };
+
+        for (int32_t z = toBlock(min.z); z <= toBlock(max.z); ++z) {
+            for (int32_t y = toBlock(min.y); y <= toBlock(max.y); ++y) {
+                for (int32_t x = toBlock(min.x); x <= toBlock(max.x); ++x) {
+                    if (m_editBlocks.find(SR_MATH_NS::IVector3(x, y, z)) != m_editBlocks.end()) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
 }

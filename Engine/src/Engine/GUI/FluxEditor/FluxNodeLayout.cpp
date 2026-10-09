@@ -193,16 +193,30 @@ namespace SR_CORE_GUI_NS {
                 AddPin(layout.outputs, "As Object").pTypeInfo = MakeClassTypeInfo(name, tmpTypeInfos);
                 break;
             }
-            case SR_FLUX_NS::FluxGraphNodeType::ReadProperty: {
-                SR_UTILS_NS::FormatTo(layout.title, "{}.{}", callable.object, callable.function);
-                AddPin(layout.inputs, "Object").pTypeInfo = MakeClassTypeInfo(callable.object, tmpTypeInfos);
+            case SR_FLUX_NS::FluxGraphNodeType::ReadProperty:
+            case SR_FLUX_NS::FluxGraphNodeType::WriteProperty: {
+                const bool isWrite = pNode->GetType() == SR_FLUX_NS::FluxGraphNodeType::WriteProperty;
+                SR_UTILS_NS::FormatTo(layout.title, "{} {}.{}", isWrite ? "Set" : "Get", callable.object, callable.function);
 
                 const SR_UTILS_NS::Reflection::Property* pProperty = nullptr;
                 if (auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(callable.object)) {
                     pProperty = pMeta->FindProperty(callable.function);
                 }
                 auto&& pDefaultValue = pProperty ? &pProperty->GetDefaultValue() : nullptr;
-                AddPin(layout.outputs, "Value").pTypeInfo = pDefaultValue && pDefaultValue->IsValid() ? &pDefaultValue->GetTypeInfo() : nullptr;
+                auto&& pValueType = pDefaultValue && pDefaultValue->IsValid() ? &pDefaultValue->GetTypeInfo() : nullptr;
+
+                if (isWrite) {
+                    AddPin(layout.inputs, "Exec", true);
+                }
+                AddPin(layout.inputs, "Object").pTypeInfo = MakeClassTypeInfo(callable.object, tmpTypeInfos);
+                if (isWrite) {
+                    AddPin(layout.inputs, "Value").pTypeInfo = pValueType;
+                    AddPin(layout.outputs, "Exec", true);
+                    AddPin(layout.outputs, "Object").pTypeInfo = MakeClassTypeInfo(callable.object, tmpTypeInfos);
+                }
+                else {
+                    AddPin(layout.outputs, "Value").pTypeInfo = pValueType;
+                }
                 break;
             }
             case SR_FLUX_NS::FluxGraphNodeType::Sequence:

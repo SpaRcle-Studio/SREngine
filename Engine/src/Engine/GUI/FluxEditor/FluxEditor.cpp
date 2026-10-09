@@ -387,6 +387,15 @@ namespace SR_CORE_GUI_NS {
                     node.SetCallable({ m_droppedLinkPin.className, property.GetName() });
                     CreateNodeFromDroppedLink(node, popupPos);
                 }
+                if (property.IsReadOnly()) {
+                    return;
+                }
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem(SR_FORMAT("Set {}", property.GetName()).c_str())) {
+                    SR_FLUX_NS::FluxGraphNode node;
+                    node.SetType(SR_FLUX_NS::FluxGraphNodeType::WriteProperty);
+                    node.SetCallable({ m_droppedLinkPin.className, property.GetName() });
+                    CreateNodeFromDroppedLink(node, popupPos);
+                }
             });
 
             pMeta->ForEachMethod([&](const SR_UTILS_NS::Reflection::Method& method, uint64_t) {
@@ -679,7 +688,7 @@ namespace SR_CORE_GUI_NS {
         else if (type == SR_FLUX_NS::FluxGraphNodeType::Cast) {
             DrawCastInspector(node);
         }
-        else if (type == SR_FLUX_NS::FluxGraphNodeType::ReadProperty) {
+        else if (type == SR_FLUX_NS::FluxGraphNodeType::ReadProperty || type == SR_FLUX_NS::FluxGraphNodeType::WriteProperty) {
             DrawPropertyInspector(node);
         }
     }
