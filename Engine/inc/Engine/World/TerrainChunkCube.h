@@ -103,9 +103,9 @@ namespace SR_CORE_NS {
         /// @property @range(0.01f, 64.f) @tooltip(Перестраивать дерево, когда наблюдатель сместился на эту долю чанка)
         float_t m_rebuildThreshold = 0.25f;
         /// @property
-        SR_MATH_NS::FVector3 m_chunkSize = SR_MATH_NS::FVector3(124.0f, 124.0f, 124.0f);
+        SR_MATH_NS::FVector3 m_chunkSize = SR_MATH_NS::FVector3(30.0f, 30.0f, 30.0f);
         /// @property
-        SR_MATH_NS::FVector3 m_chunkScale = SR_MATH_NS::FVector3(2.0f, 2.0f, 2.0f);
+        SR_MATH_NS::FVector3 m_chunkScale = SR_MATH_NS::FVector3(1.0f, 1.0f, 1.0f);
         /// @property @range(0, 16) @tooltip(Сколько кадров старый чанк ещё виден после загрузки замены. Новый объект попадает в рендер не в тот же кадр)
         uint32_t m_replaceDelayFrames = 2;
         /// @property @range(0, 4096) @tooltip(Сколько свободных объектов чанков держать в памяти)

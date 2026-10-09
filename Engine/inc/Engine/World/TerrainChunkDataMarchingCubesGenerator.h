@@ -74,7 +74,7 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::Path m_densityShader = "Engine/Shaders/MarchingCubes/Density.srsl";
 
         /// @property @group(Density)
-        uint32_t m_densityCountAxis = 64;
+        uint32_t m_densityCountAxis = 32;
         /// @property @group(Density)
         float_t m_noiseScale = 13.0f;
         /// @property @group(Density)
@@ -88,7 +88,7 @@ namespace SR_CORE_NS {
         uint32_t m_vertexHashTableSize = 800000;
 
         /// @property
-        SR_MATH_NS::FVector3 m_geometryScale = SR_MATH_NS::FVector3(2.f);
+        SR_MATH_NS::FVector3 m_geometryScale = SR_MATH_NS::FVector3(1.f);
         /// @property @group(Physics) @range(0.01f, 1.f) @tooltip(Доля треугольников, остающаяся в меше коллизии)
         float_t m_collisionSimplifyRatio = 0.25f;
         /// @property @group(Physics) @range(0.f, 1.f)
