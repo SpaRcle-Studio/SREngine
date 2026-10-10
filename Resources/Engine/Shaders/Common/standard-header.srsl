@@ -21,6 +21,12 @@ PrimitiveTopology TriangleList;
 
 DepthWrite true;
 
+#ifdef DISABLE_DEPTH_WRITE
+    #ifndef SR_DEFINE_CASCADED_SHADOW_MAP_PASS
+        DepthWrite false;
+    #endif
+#endif
+
 #ifdef HAS_ALPHA
     #ifndef SR_DEFINE_CASCADED_SHADOW_MAP_PASS
         #ifndef DISABLE_BLENDING
