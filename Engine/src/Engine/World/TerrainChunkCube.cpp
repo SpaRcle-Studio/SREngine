@@ -38,12 +38,19 @@ namespace SR_CORE_NS {
             return;
         }
 
+        auto&& aabb = SR_MATH_NS::AABB(SR_MATH_NS::FVector3(-1.f), m_chunkSize / m_chunkScale + SR_MATH_NS::FVector3(2.f));
+        pGameObject->ForEachComponent([&aabb](SR_UTILS_NS::Component& component) {
+            if (auto&& pRenderComponent = dynamic_cast<SR_GTYPES_NS::IRenderComponent*>(&component)) {
+                pRenderComponent->SetAABB(aabb);
+            }
+            return true;
+        });
+
         auto&& pTransform = pGameObject->GetTransform().DynamicCast<SR_UTILS_NS::Transform3D>();
         if (!pTransform) {
             return;
         }
 
-        pTransform->SetAABB(SR_MATH_NS::AABB(SR_MATH_NS::FVector3(-1.f), m_chunkSize / m_chunkScale + SR_MATH_NS::FVector3(2.f)));
         pTransform->SetScale(m_chunkScale * static_cast<float_t>(pCubeChunk->GetLodScale()));
         pTransform->SetTranslation(GetChunkWorldPosition(*pCubeChunk));
     }
