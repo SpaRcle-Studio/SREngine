@@ -531,7 +531,7 @@ void fragment() {
     COLOR = vec4(lighting, 1.0);
 #endif
 
-    COLOR_INDEX_1 = vec4(gl_FragCoord.z);
+    COLOR_INDEX_1 = vec4(1.0, 0.0, 0.0, 1.0);
     COLOR_INDEX_2 = vec4(grassWorldPos, 1.0);
-    COLOR_INDEX_3 = vec4(grassNormal, 1.0);
+    COLOR_INDEX_3 = vec4(grassNormal * 0.5 + 0.5, 1.0);
 }

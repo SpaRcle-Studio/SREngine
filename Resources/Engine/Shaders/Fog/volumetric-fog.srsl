@@ -18,6 +18,7 @@ DepthTest false;
 [[uniform(SHARED)]] vec4 fogWindParams;     // windDir.xy, steps, -
 
 [[uniform]] sampler2D positionMap;
+[[uniform]] sampler2D coverageMap;
 
 #ifdef SR_FOG_SHADOWS
     [[uniform]] sampler2DArray shadowMap;
@@ -33,9 +34,11 @@ DepthTest false;
 [[shared]] vec2 uv;
 
 #define USE_COLOR_INDEX_0
+#define USE_COLOR_INDEX_1
 
 #include <Engine/Shaders/Common/utils.srsl>
 #include <Engine/Shaders/Common/atmosphere.srsl>
+#include <Engine/Shaders/Common/gbuffer.srsl>
 
 [[const]] float FOG_NOISE_PERIOD = 256.0;
 
@@ -85,22 +88,30 @@ float fogOpticalDepth(vec3 ro, vec3 rd, float dist) {
 
 #ifdef SR_FOG_SHADOWS
 // видимость основного источника в точке (1 - освещено, 0 - в тени)
+// Каскад выбирается по самой карте (первый, в который попадает точка), а не по глубине вдоль текущего
+// взгляда: матрицы каскадов отстают от камеры на кадр, и при резком повороте выбор по взгляду давал щели.
 float fogShadow(vec3 worldPos, float viewDepth) {
-    int cascadeIndex = 0;
-    for (int i = 0; i < 3; ++i) {
-        if (viewDepth > CASCADE_SPLITS[i]) {
-            cascadeIndex = i + 1;
-        }
-    }
-
     if (viewDepth > CASCADE_SPLITS[3]) {
         return 1.0;
     }
 
-    vec4 shadowCoord = fogBiasMat * CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex] * vec4(worldPos, 1.0);
-    shadowCoord /= shadowCoord.w;
+    int cascadeIndex = -1;
+    vec4 shadowCoord = vec4(0.0);
+    for (int i = 0; i < 4; ++i) {
+        vec4 lightSpace = CASCADE_LIGHT_SPACE_MATRICES[i] * vec4(worldPos, 1.0);
+        vec3 ndc = lightSpace.xyz / lightSpace.w;
+        if (cascadeIndex < 0 && abs(ndc.x) < 0.99 && abs(ndc.y) < 0.99) {
+            cascadeIndex = i;
+            shadowCoord = fogBiasMat * lightSpace;
+        }
+    }
 
-    if (shadowCoord.x < 0.0 || shadowCoord.x > 1.0 || shadowCoord.y < 0.0 || shadowCoord.y > 1.0 || shadowCoord.z > 1.0) {
+    if (cascadeIndex < 0) {
+        return 1.0;
+    }
+
+    shadowCoord /= shadowCoord.w;
+    if (shadowCoord.z > 1.0) {
         return 1.0;
     }
 
@@ -116,14 +127,11 @@ void fragment() {
     float maxDistance = fogDensityParams.w;
     float startDistance = fogNoiseParams.w;
 
-    float sceneDistance = maxDistance;
-    vec2 positionSize = vec2(textureSize(positionMap, 0));
-    vec2 positionUV = (floor(uv * positionSize) + 0.5) / positionSize;
-    vec4 worldPos = textureLod(positionMap, positionUV, 0.0);
-    bool hasGeometry = worldPos.a > 0.5;
-    if (hasGeometry) {
-        sceneDistance = min(length(worldPos.xyz - rayOrigin), maxDistance);
-    }
+    float geometryDistance = gbufferLowResDistance(positionMap, coverageMap, uv, TARGET_RESOLUTION);
+    bool hasGeometry = (geometryDistance < 999999.0);
+    float sceneDistance = hasGeometry ? min(geometryDistance, maxDistance) : maxDistance;
+    // дистанция, для которой посчитан пиксель - по ней апсемпл в post-process подбирает соседей
+    COLOR_INDEX_1 = vec4(geometryDistance, 0.0, 0.0, 1.0);
 
     if (sceneDistance <= startDistance || fogDensityParams.x <= 0.0) {
         COLOR_INDEX_0 = vec4(0.0, 0.0, 0.0, 1.0);

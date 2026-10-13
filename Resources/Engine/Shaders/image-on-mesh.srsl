@@ -17,6 +17,9 @@ DepthTest true;
 
 void fragment() {
     COLOR = texture(colorBufferTest, UV);
+    COLOR_INDEX_1 = vec4(1.0, 0.0, 0.0, COLOR.a);
+    COLOR_INDEX_2 = vec4(VERTEX, COLOR.a);
+    COLOR_INDEX_3 = vec4(NORMAL * 0.5 + 0.5, COLOR.a);
 }
 
 void vertex() {

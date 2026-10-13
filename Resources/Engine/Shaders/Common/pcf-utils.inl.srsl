@@ -24,7 +24,6 @@ vec4 DebugColorCascade(vec4 color, uint cascadeIndex) {
 
 #define SR_CASCADE_USE_RADII
 //#define SR_CASCADE_BLEND_ZONES
-#define SR_CASCADE_ACCENT_CAMERA_DIR
 
 [[const]] int NUM_CASCADES = 4;
 
@@ -35,39 +34,40 @@ vec4 DebugColorCascade(vec4 color, uint cascadeIndex) {
     0.5, 0.5, 0.0, 1.0
 );
 
+// cascadeRange - радиус фильтра в шагах cascadeScale (тот же размах, что у прежней сетки (2r+1)^2),
+// cascadeSamples - число выборок диска внутри этого радиуса.
 #ifdef SR_SIMPLE_SHADOWS
     [[const]] float cascadeBias[4] = { 0.0003, 0.0008, 0.0015, 0.003 };
     [[const]] float cascadeScale[4] = { 0.5, 1.5, 2.0, 3.0 };
     [[const]] int cascadeRange[4] = { 1, 1, 1, 1 };
+    [[const]] int cascadeSamples[4] = { 8, 6, 4, 4 };
 #else
     #ifdef SR_SHADOWS_QUALITY_EXTREME
         [[const]] float cascadeBias[4] = { 0.0, 0.0, 0.0, 0.0 };
         [[const]] float cascadeScale[4] = { 0.15, 1.0, 2.0, 3.0 };
         [[const]] int cascadeRange[4] = { 16, 2, 1, 1 };
+        [[const]] int cascadeSamples[4] = { 32, 16, 8, 8 };
     #else
         [[const]] float cascadeBias[4] = { 0.0003, 0.0008, 0.0015, 0.003 };
         [[const]] float cascadeScale[4] = { 0.5, 1.5, 2.0, 3.0 };
         [[const]] int cascadeRange[4] = { 4, 2, 1, 1 };
+        [[const]] int cascadeSamples[4] = { 16, 12, 8, 4 };
     #endif
 #endif
 
 [[const]] float cascadeFadePercent[4] = { 0.05, 0.08, 0.12, 0.15 };
 
 #ifdef SR_CASCADE_USE_RADII
+    // Выбор каскада по самой карте теней: первый каскад, в проекцию которого точка попадает с запасом
+    // под радиус фильтра. Матрицы каскадов считаются на CPU в конце кадра по камере прошлого кадра,
+    // поэтому выбор по текущей камере (сфера вокруг VIEW_POSITION) при резком повороте указывал
+    // на каскад, карта которого еще не покрывает точку, и между каскадами появлялась щель без теней.
     uint SelectCascade(vec3 worldPos) {
-        float lastSplit = 0.0;
-
         for (uint i = 0; i < NUM_CASCADES; ++i) {
-        #ifdef SR_CASCADE_ACCENT_CAMERA_DIR
-            float currentSplit = CASCADE_SPLITS[i];
-            float forwardOffset = 0.65 * (lastSplit + currentSplit);
-            vec3 cascadeCenter = VIEW_POSITION + VIEW_DIRECTION * forwardOffset;
-            lastSplit = currentSplit;
-        #else
-            vec3 cascadeCenter = VIEW_POSITION;
-        #endif
-
-            if (length(worldPos - cascadeCenter) <= CASCADE_RADII[i]) {
+            vec4 lightSpace = CASCADE_LIGHT_SPACE_MATRICES[i] * vec4(worldPos, 1.0);
+            vec3 proj = lightSpace.xyz / lightSpace.w;
+            // ndc xy в [-1, 1]; запас 3% - фильтр PCF не должен выходить за край карты
+            if (abs(proj.x) < 0.97 && abs(proj.y) < 0.97) {
                 return i;
             }
         }
@@ -102,39 +102,62 @@ float filterPCF(vec3 norm, vec4 shadowCoord, uint cascadeIndex) {
 #ifdef SR_NO_PCF_FILTER
     return textureProj(proj, ndotl, vec2(0.0), cascadeIndex);
 #else
-	ivec2 texelSize = textureSize(shadowMap, 0).xy;
+    // Вне объема каскада точка освещена - фильтр не нужен
+    if (proj.x < 0.0 || proj.x > 1.0 || proj.y < 0.0 || proj.y > 1.0) {
+        return 1.0;
+    }
 
-	// Улучшенное масштабирование для разных каскадов
-	// Ближние каскады получают больше фильтрации для качества
-	// Дальние каскады получают меньше фильтрации для производительности
-    
-    // Увеличиваем range для первого каскада (ближайшего к камере) для лучшего качества
-    int range = cascadeRange[cascadeIndex];
-    float scale = cascadeScale[cascadeIndex];
+    vec2 texelSize = vec2(textureSize(shadowMap, 0).xy);
 
-    float dx = scale * 1.0 / float(texelSize.x);
-    float dy = scale * 1.0 / float(texelSize.y);
+    // радиус фильтра в uv - тот же размах, что у прежней сетки (2 * range + 1)^2
+    float radiusTexels = float(cascadeRange[cascadeIndex]) * cascadeScale[cascadeIndex];
+    vec2 radius = vec2(max(radiusTexels, 0.5)) / texelSize;
 
-	float shadowFactor = 0.0;
-	int count = 0;
+    // Ранний выход: 4 выборки по краям фильтра. Если все совпадают - точка целиком в тени или на свету
+    // (почти весь экран), полный фильтр нужен только на границах теней.
+    float s0 = textureProj(proj, ndotl, vec2( radius.x,  radius.y) * 0.7071, cascadeIndex);
+    float s1 = textureProj(proj, ndotl, vec2(-radius.x,  radius.y) * 0.7071, cascadeIndex);
+    float s2 = textureProj(proj, ndotl, vec2( radius.x, -radius.y) * 0.7071, cascadeIndex);
+    float s3 = textureProj(proj, ndotl, vec2(-radius.x, -radius.y) * 0.7071, cascadeIndex);
+    float earlySum = s0 + s1 + s2 + s3;
+    if (earlySum < 0.001 || earlySum > 3.999) {
+        return earlySum * 0.25;
+    }
 
-	for (int x = -range; x <= range; x++)
-	{
-		for (int y = -range; y <= range; y++)
-		{
-			shadowFactor += textureProj(proj, ndotl, vec2(dx * x, dy * y), cascadeIndex);
-			count++;
-		}
-	}
+    // Диск по спирали Фогеля (золотой угол) со случайным поворотом на пиксель: равномерное покрытие
+    // малым числом выборок, остаточный шум выглядит как мягкая полутень, а не как ступеньки сетки.
+    int sampleCount = cascadeSamples[cascadeIndex];
+    float rotation = fract(52.9829189 * fract(dot(FRAG_COORD.xy, vec2(0.06711056, 0.00583715)))) * 6.2831853;
 
-	return shadowFactor / float(count);
+    float shadowFactor = earlySum;
+    for (int i = 0; i < sampleCount; i++) {
+        float r = sqrt((float(i) + 0.5) / float(sampleCount));
+        float angle = rotation + float(i) * 2.3999632;
+        vec2 offset = vec2(cos(angle), sin(angle)) * r * radius;
+        shadowFactor += textureProj(proj, ndotl, offset, cascadeIndex);
+    }
+
+    return shadowFactor / float(sampleCount + 4);
 #endif
 }
 
+// Аналитическая аппроксимация DFG для окружения (Karis, "Physically Based Shading on Mobile").
+// Возвращает scale/bias к F0: specularColor = F0 * x + y.
+vec2 EnvBRDFApprox(float brdfRoughness, float NdotV) {
+    vec4 c0 = vec4(-1.0, -0.0275, -0.572, 0.022);
+    vec4 c1 = vec4(1.0, 0.0425, 1.04, -0.04);
+    vec4 r = c0 * brdfRoughness + c1;
+    float a004 = min(r.x * r.x, pow(2.0, -9.28 * NdotV)) * r.x + r.y;
+    return vec2(-1.04, 1.04) * a004 + r.zw;
+}
+
+// Освещение по модели metallic-roughness (glTF 2.0 / UE4):
+// baseColor - альбедо (для металла - цвет отражения), specularLevel - отражательная способность диэлектрика
+// (0.5 = F0 0.04, 0 - без бликов), roughness - перцептивная шероховатость.
 vec4 CalculateShadow(
     vec3 vertexPos,
     vec3 tangentNormal,
-    vec3 diffuseColor, float specularSharpness, float specularIntensity, float shadowIntensity,
+    vec3 baseColor, float specularLevel, float shadowIntensity,
     float roughnessValue, float aoValue, float metallicValue,
     float sssIntensity, vec3 sssColor,
     vec3 emissionValue,
@@ -196,121 +219,68 @@ vec4 CalculateShadow(
     }
 
     float shadowFactor = mix(1.0 - SHADOW_STRENGTH, 1.0, smoothstep(0.2, 1.0, shadow));
-    //float shadowFactor = mix(1.0 - SHADOW_STRENGTH, 1.0, shadow);
 
-    //float wrap = 0.5;
-    //ndotl = (ndotl + wrap) / (1.0 + wrap);
-    //ndotl = max(ndotl, 0.0);
-
-    float ndotH = max(dot(N, H), 0.0);
-    float ndotV = max(dot(N, V), 0.0);
-    float ndotL = max(dot(N, L), 0.0);
-
-    vec3 diffuse = ndotL * SUN_COLOR * SUN_INTENSITY;
-
-    // metallic убивает diffuse
-    diffuse *= (1.0 - metallicValue);
-
-    vec3 specLightColor = mix(SKY_COLOR, SUN_COLOR, 0.3);
-
-    #ifdef HAS_ROUGHNESS
-        roughnessValue = clamp(roughnessValue, 0.04, 1.0);
-    #else
-        roughnessValue = clamp(1.0 - specularSharpness, 0.04, 1.0);
-    #endif
-
-    float a = roughnessValue * roughnessValue;
+    // 0.045 - минимум, при котором блик GGX не превращается в субпиксельную точку (Filament)
+    float pbrRoughness = clamp(roughnessValue, 0.045, 1.0);
+    float pbrMetallic = clamp(metallicValue, 0.0, 1.0);
+    float a = pbrRoughness * pbrRoughness;
     float a2 = a * a;
 
-    // D
-    float denom = ndotH * ndotH * (a2 - 1.0) + 1.0;
-    float D = a2 / (3.14159 * denom * denom);
+    float NdotL = max(dot(N, L), 0.0);
+    float NdotV = max(dot(N, V), 1e-4);
+    float NdotH = max(dot(N, H), 0.0);
+    float VdotH = max(dot(V, H), 0.0);
 
-    // G (Schlick-GGX)
-    float k = (roughnessValue + 1.0);
-    k = (k * k) / 8.0;
+    // диэлектрик: F0 = 0.08 * specular (0.5 -> 0.04), металл: F0 = baseColor, диффуза нет
+    vec3 F0 = mix(vec3(0.08 * specularLevel), baseColor, pbrMetallic);
+    vec3 diffuseColor = baseColor * (1.0 - pbrMetallic);
 
-    float Gv = ndotV / (ndotV * (1.0 - k) + k);
-    float Gl = ndotL / (ndotL * (1.0 - k) + k);
-    float G = Gv * Gl;
+    // ---------- прямой свет (солнце) ----------
+    float denom = NdotH * NdotH * (a2 - 1.0) + 1.0;
+    float D = a2 / (3.14159265 * denom * denom);
 
-#ifdef HAS_ORM
-    vec3 F0 = mix(
-        vec3(0.04) * specularIntensity,
-        diffuseColor,
-        metallicValue
-    );
-#else
-    vec3 F0 = vec3(0.04) * specularIntensity;
-#endif
+    // Smith-GGX height-correlated (уже включает 1 / (4 * NdotL * NdotV))
+    float visV = NdotL * sqrt(NdotV * NdotV * (1.0 - a2) + a2);
+    float visL = NdotV * sqrt(NdotL * NdotL * (1.0 - a2) + a2);
+    float Vis = 0.5 / max(visV + visL, 1e-5);
 
-    vec3 F = F0 + (1.0 - F0) * pow(1.0 - dot(H, V), 5.0);
+    vec3 F = F0 + (1.0 - F0) * pow(1.0 - VdotH, 5.0);
 
-    vec3 specular = (D * G * F) / max(4.0 * ndotV * ndotL, 0.001);
-    specular *= SUN_COLOR * specLightColor * SUN_INTENSITY;
-    specular *= mix(1.0, shadowFactor, 0.5);
-
-//#ifdef HAS_ROUGHNESS
-//    roughnessValue = clamp(roughnessValue, 0.04, 1.0);
-//
-//    float roughnessAlpha = roughnessValue * roughnessValue;
-//    float specPow = max(2.0 / (roughnessAlpha * roughnessAlpha) - 2.0, 1.0);
-//    float spec = pow(ndotH, specPow);
-//
-//    float specEnergy = (specPow + 2.0) / 8.0;
-//    vec3 specular = spec * specEnergy * specularIntensity * SUN_COLOR * specLightColor * SUN_INTENSITY;
-//#else
-//    roughnessValue = clamp(1.0 - specularSharpness, 0.04, 1.0);
-//
-//    float a = roughnessValue * roughnessValue;
-//    float a2 = a * a;
-//
-//    float denom = ndotH * ndotH * (a2 - 1.0) + 1.0;
-//    float D = a2 / (3.14159 * denom * denom);
-//
-//    vec3 specular = D * specularIntensity * SUN_COLOR * specLightColor * SUN_INTENSITY;
-//#endif
+    // Интенсивность солнца задана так, что ламбертовский альбедо дает baseColor * NdotL * SUN.
+    // Это эквивалентно яркости источника pi * SUN, поэтому зеркальная часть домножается на pi.
+    vec3 radiance = SUN_COLOR * SUN_INTENSITY;
+    vec3 directDiffuse = diffuseColor * (1.0 - F);
+    vec3 directSpecular = D * Vis * F * 3.14159265;
+    vec3 direct = (directDiffuse + directSpecular) * radiance * NdotL;
 
 #ifdef HAS_SSS
-    //float backNDotL = max(dot(-N, L), 0.0); // свет с обратной стороны
-    //float sssTerm = backNDotL * sssIntensity; // простая аппроксимация рассеивания
-    //vec3 sss = sssTerm * sssColor * SUN_COLOR * SUN_INTENSITY;
-
-    //float NdotL = max(dot(N,L),0.0);
-    //float NdotV = max(dot(N,V),0.0);
-    //float sssFactor = pow(1.0 - NdotV, 2.0) * sssIntensity; // rim-like SSS
-    //vec3 sss = sssFactor * sssColor * SUN_COLOR * SUN_INTENSITY;
-
     float wrap = 0.5;
-    float ndotlWrapped = (ndotL + wrap) / (1.0 + wrap);
-    vec3 diffuseWrapped = ndotlWrapped * SUN_COLOR * SUN_INTENSITY;
-    vec3 sss = diffuseWrapped * sssColor * sssIntensity;
+    float ndotlWrapped = (dot(N, L) + wrap) / (1.0 + wrap);
+    vec3 sss = max(ndotlWrapped, 0.0) * radiance * sssColor * sssIntensity;
 #else
     vec3 sss = vec3(0.0);
 #endif
 
-    float upFactor = clamp(N.y * 0.5 + 0.5, 0.0, 1.0);
-    vec3 ambientColor = mix(GROUND_COLOR, SKY_COLOR, upFactor);
-    vec3 ambient = ambientColor * AMBIENT_INTENSITY;
+    // ---------- окружение (полусфера небо/земля) ----------
+    vec2 envBRDF = EnvBRDFApprox(pbrRoughness, NdotV);
+    vec3 envSpecularColor = F0 * envBRDF.x + envBRDF.y;
 
-    // AO влияет ТОЛЬКО на ambient
-    ambient *= max(aoValue, 0.35);
+    vec3 R = reflect(-V, N);
+    // чем шероховатее поверхность, тем ближе выборка окружения к нормали
+    vec3 envDir = normalize(mix(R, N, a));
 
-    //vec3 sunDiffuse  = SUN_COLOR * SUN_INTENSITY * ndotl; // direct light
-    //vec3 skyDiffuse  = mix(GROUND_COLOR, SKY_COLOR, N.y * 0.5 + 0.5) * AMBIENT_INTENSITY; // sky ambient
+    vec3 skyAmbient = mix(GROUND_COLOR, SKY_COLOR, clamp(N.y * 0.5 + 0.5, 0.0, 1.0)) * AMBIENT_INTENSITY;
+    vec3 skyReflection = mix(GROUND_COLOR, SKY_COLOR, clamp(envDir.y * 0.5 + 0.5, 0.0, 1.0)) * AMBIENT_INTENSITY;
 
-    //vec3 lightingHDR = skyDiffuse + shadowFactor * sunDiffuse + specular + sss + emissionValue;
+    // specular occlusion по AO: дешевая аппроксимация Lagarde (без вложенных pow)
+    float specularAO = mix(aoValue, 1.0, NdotV * (1.0 - a));
 
-    vec3 lightingHDR =
-          ambient * diffuseColor
-        + shadowFactor * (diffuse * diffuseColor + specular)
-        + sss
-        + emissionValue;
+    vec3 ambientDiffuse = skyAmbient * diffuseColor * (1.0 - envSpecularColor) * aoValue;
+    vec3 ambientSpecular = skyReflection * envSpecularColor * specularAO;
 
-    vec3 colorHDR = lightingHDR;
-    //vec3 colorLDR = ACESFilm(colorHDR);
+    vec3 lightingHDR = ambientDiffuse + ambientSpecular + shadowFactor * direct + sss + emissionValue;
 
-    vec4 color = vec4(colorHDR, 1);
+    vec4 color = vec4(lightingHDR, 1.0);
 
 #ifdef SR_DEFINE_DEBUG_CASCADED_SHADOW_MAP_PASS
     return DebugColorCascade(color, cascadeIndex);

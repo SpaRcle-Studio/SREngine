@@ -80,6 +80,11 @@ use tabs: true
 				4-k:i
 					5-o:d
 						6-v:type
+							7-s:RenderTechniquePresetIntegrationSSR
+						6-o:ptr
+				4-k:i
+					5-o:d
+						6-v:type
 							7-s:RenderTechniquePresetIntegrationSSAO
 						6-o:ptr
 				4-k:i

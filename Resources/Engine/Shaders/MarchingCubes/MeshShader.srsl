@@ -1,8 +1,7 @@
 #include <Engine/Shaders/Common/standard-header.srsl>
 
 [[uniform], [public]] vec4 color = vec4(1, 1, 1, 1);
-[[uniform], [public]] float specularSharpness = 1.0;
-[[uniform], [public]] float specularIntensity = 1.0;
+[[uniform], [public]] float specular = 0.5;
 [[uniform], [public]] float shadowIntensity = 1.0;
 
 [[uniform], [public]] sampler2D diffuse;
@@ -15,8 +14,6 @@ void fragment() {
     float alpha = 1.0;
 
     vec3 tangentNormal = NORMAL;
-    float maybe_unused_specularSharpness = specularSharpness;
-    float maybe_unused_specularIntensity = specularIntensity;
     float maybe_unused_shadowIntensity = shadowIntensity;
     float maybe_unused_sssIntensity = 0.0;
     vec3 maybe_unused_sssColor = vec3(0.0);
@@ -25,13 +22,16 @@ void fragment() {
     float aoValue = 1.0;
     float metallicValue = 0.0;
 
+    COLOR_INDEX_1 = vec4(1.0, metallicValue, roughnessValue, alpha);
+    COLOR_INDEX_2 = vec4(VERTEX, alpha);
+    COLOR_INDEX_3 = vec4(normalize(NORMAL) * 0.5 + 0.5, alpha);
+
 #ifdef SR_DEFINE_USE_CASCADED_SHADOW_MAP
     vec3 shadowColor = CalculateShadow(
         VERTEX,
         tangentNormal,
         diffuseColor.rgb,
-        maybe_unused_specularSharpness,
-        maybe_unused_specularIntensity,
+        specular,
         maybe_unused_shadowIntensity,
         roughnessValue, aoValue, metallicValue,
         maybe_unused_sssIntensity,

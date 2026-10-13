@@ -9,13 +9,16 @@ DepthWrite false;
 DepthTest false;
 
 [[uniform]] sampler2D positionMap;
+[[uniform]] sampler2D coverageMap;
 
 [[shared]] vec2 uv;
 
 #define USE_COLOR_INDEX_0
+#define USE_COLOR_INDEX_1
 
 #include <Engine/Shaders/Common/utils.srsl>
 #include <Engine/Shaders/Common/clouds.srsl>
+#include <Engine/Shaders/Common/gbuffer.srsl>
 
 // interleaved gradient noise - дешевый джиттер начала луча, убирает бандинг
 float cloudsIGN(vec2 pixel) {
@@ -25,13 +28,10 @@ float cloudsIGN(vec2 pixel) {
 void fragment() {
     vec3 rayDir = getRayDir(uv);
 
-    float sceneDistance = 1e9;
-    vec2 positionSize = vec2(textureSize(positionMap, 0));
-    vec2 positionUV = (floor(uv * positionSize) + 0.5) / positionSize;
-    vec4 worldPos = textureLod(positionMap, positionUV, 0.0);
-    if (worldPos.a > 0.5) {
-        sceneDistance = length(worldPos.xyz - VIEW_POSITION);
-    }
+    float geometryDistance = gbufferLowResDistance(positionMap, coverageMap, uv, TARGET_RESOLUTION);
+    // дистанция, для которой посчитан пиксель - по ней апсемпл в post-process подбирает соседей
+    COLOR_INDEX_1 = vec4(geometryDistance, 0.0, 0.0, 1.0);
+    float sceneDistance = (geometryDistance > 999999.0) ? 1e9 : geometryDistance;
 
     float jitter = cloudsIGN(FRAG_COORD.xy);
 

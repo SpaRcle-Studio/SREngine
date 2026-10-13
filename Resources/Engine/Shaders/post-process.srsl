@@ -29,10 +29,12 @@ DepthTest false;
 
 #ifdef SR_VOLUMETRIC_CLOUDS
     [[uniform]] sampler2D cloudsMap;
+    [[uniform]] sampler2D cloudsDepthMap;
 #endif
 
 #ifdef SR_VOLUMETRIC_FOG
     [[uniform]] sampler2D fogMap;
+    [[uniform]] sampler2D fogDepthMap;
 #endif
 
 #ifdef SR_BLOOM
@@ -53,20 +55,37 @@ DepthTest false;
     }
 #endif
 
-#if defined(SR_VOLUMETRIC_CLOUDS) || defined(SR_VOLUMETRIC_FOG)
-    [[uniform]] sampler2D positionMap;
+#ifdef SR_SSR
+    [[public], [uniform(SHARED)]] float ssrIntensity = 1.0;
+    [[uniform]] sampler2D ssrMap;
+    [[uniform]] sampler2D ssrDepthMap;
+    [[uniform]] sampler2D normalMap;
+#endif
 
-    // выборка ровно в центр ближайшего пикселя - без билинейного смешивания позиций объекта и неба
-    float sceneDistanceAt(vec2 coord) {
-        vec2 size = vec2(textureSize(positionMap, 0));
-        vec2 snapped = (floor(coord * size) + 0.5) / size;
-        vec4 p = textureLod(positionMap, snapped, 0.0);
-        return p.a > 0.5 ? length(p.xyz - VIEW_POSITION) : 1e6;
+#if defined(SR_VOLUMETRIC_CLOUDS) || defined(SR_VOLUMETRIC_FOG) || defined(SR_SSR)
+    [[uniform]] sampler2D positionMap;
+    [[uniform]] sampler2D coverageMap;
+
+    #include <Engine/Shaders/Common/gbuffer.srsl>
+
+    // вес выборки низкого разрешения по совпадению ее дистанции с нужной поверхностью
+    float lowResDepthWeight(float sampleDistance, float targetDistance) {
+        bool targetSky = (targetDistance > 999999.0);
+        bool sampleSky = (sampleDistance > 999999.0);
+        if (targetSky || sampleSky) {
+            return (targetSky == sampleSky) ? 1.0 : 0.0;
+        }
+        float relDiff = abs(sampleDistance - targetDistance) / max(min(sampleDistance, targetDistance), 0.5);
+        return exp(-relDiff * relDiff * 200.0);
     }
 
     // Апсемпл буфера пониженного разрешения с учетом глубины (joint bilateral).
-    // Выборки с другой глубиной (объект против неба/фона) не смешиваются - граница остается резкой.
-    vec4 sampleLowRes(sampler2D tex, vec2 coord, float centerDistance) {
+    // depthTex - дистанция, которую видел проход пониженного разрешения (его слой 1, см. gbufferLowResDistance).
+    // targetDistance - дистанция поверхности, для которой нужен результат (1e6 - небо).
+    // Быстрый путь: все 4 ближайшие выборки той же глубины (почти весь экран) - обычная билинейка.
+    // Медленный путь только у силуэтов: окно 4x4, внутренние 2x2 с билинейными весами, внешнее кольцо
+    // с малым весом - запас для тонких объектов. Внутри окна веса совпадают с быстрым путем, шва нет.
+    vec4 sampleLowResAt(sampler2D tex, sampler2D depthTex, vec2 coord, float targetDistance) {
         vec2 lowResSize = vec2(textureSize(tex, 0));
         vec2 texel = 1.0 / lowResSize;
 
@@ -74,42 +93,79 @@ DepthTest false;
         vec2 base = floor(pixel);
         vec2 f = pixel - base;
 
+        vec2 uv00 = (base + vec2(0.5, 0.5)) * texel;
+        vec2 uv10 = (base + vec2(1.5, 0.5)) * texel;
+        vec2 uv01 = (base + vec2(0.5, 1.5)) * texel;
+        vec2 uv11 = (base + vec2(1.5, 1.5)) * texel;
+
+        float d00 = lowResDepthWeight(textureLod(depthTex, uv00, 0.0).r, targetDistance);
+        float d10 = lowResDepthWeight(textureLod(depthTex, uv10, 0.0).r, targetDistance);
+        float d01 = lowResDepthWeight(textureLod(depthTex, uv01, 0.0).r, targetDistance);
+        float d11 = lowResDepthWeight(textureLod(depthTex, uv11, 0.0).r, targetDistance);
+
+        if (min(min(d00, d10), min(d01, d11)) > 0.6) {
+            vec4 c00 = textureLod(tex, uv00, 0.0);
+            vec4 c10 = textureLod(tex, uv10, 0.0);
+            vec4 c01 = textureLod(tex, uv01, 0.0);
+            vec4 c11 = textureLod(tex, uv11, 0.0);
+            return mix(mix(c00, c10, f.x), mix(c01, c11, f.x), f.y);
+        }
+
+        vec2 w0 = (1.0 - f) * 0.1;
+        vec2 w1 = 1.0 - f;
+        vec2 w2 = f;
+        vec2 w3 = f * 0.1;
+
         vec4 result = vec4(0.0);
         float weightSum = 0.0;
+        vec4 bestSample = vec4(0.0, 0.0, 0.0, 1.0);
+        float bestWeight = -1.0;
 
-        vec4 nearestSample = vec4(0.0, 0.0, 0.0, 1.0);
-        float nearestDiff = 1e9;
+        for (int y = 0; y < 4; y++) {
+            float wy = w0.y;
+            if (y == 1) { wy = w1.y; }
+            if (y == 2) { wy = w2.y; }
+            if (y == 3) { wy = w3.y; }
+            for (int x = 0; x < 4; x++) {
+                float wx = w0.x;
+                if (x == 1) { wx = w1.x; }
+                if (x == 2) { wx = w2.x; }
+                if (x == 3) { wx = w3.x; }
 
-        for (int y = 0; y < 2; y++) {
-            for (int x = 0; x < 2; x++) {
-                vec2 offset = vec2(float(x), float(y));
-                vec2 sampleUV = (base + offset + 0.5) * texel;
+                vec2 sampleUV = (base + vec2(float(x) - 1.0, float(y) - 1.0) + 0.5) * texel;
+                float depthWeight = lowResDepthWeight(textureLod(depthTex, sampleUV, 0.0).r, targetDistance);
 
-                float sampleDistance = sceneDistanceAt(sampleUV);
-                float relDiff = abs(sampleDistance - centerDistance) / max(min(sampleDistance, centerDistance), 1.0);
-
-                vec2 bw = mix(1.0 - f, f, offset);
-                float bilinear = bw.x * bw.y;
-                float depthWeight = 1.0 / (1e-3 + relDiff * relDiff * 400.0);
-                float w = bilinear * depthWeight;
-
+                float w = wx * wy * (depthWeight + 1e-4);
                 vec4 value = textureLod(tex, sampleUV, 0.0);
                 result += value * w;
                 weightSum += w;
 
-                if (relDiff < nearestDiff) {
-                    nearestDiff = relDiff;
-                    nearestSample = value;
+                // запасной вариант для тонких объектов, у которых нет ни одной выборки своей глубины
+                if (depthWeight > bestWeight) {
+                    bestWeight = depthWeight;
+                    bestSample = value;
                 }
             }
         }
 
-        // ни одна выборка не совпала по глубине (тонкий объект) - берем ближайшую по глубине
-        if (nearestDiff > 0.1) {
-            return nearestSample;
+        if (bestWeight < 0.05) {
+            return bestSample;
         }
-
         return result / max(weightSum, 1e-6);
+    }
+
+    // Апсемпл с учетом покрытия пикселя геометрией: на силуэте (MSAA, полупрозрачные объекты)
+    // результат для объекта и для фона смешиваются в той же пропорции, что и цвет сцены.
+    vec4 sampleLowRes(sampler2D tex, sampler2D depthTex, vec2 coord, float coverage, float surfaceDistance) {
+        if (coverage <= GBUFFER_MIN_COVERAGE) {
+            return sampleLowResAt(tex, depthTex, coord, 1e6);
+        }
+        vec4 surface = sampleLowResAt(tex, depthTex, coord, surfaceDistance);
+        if (coverage >= 0.98) {
+            return surface;
+        }
+        vec4 background = sampleLowResAt(tex, depthTex, coord, 1e6);
+        return mix(background, surface, coverage);
     }
 #endif
 
@@ -194,19 +250,45 @@ void fragment() {
 
     //color = applyGlitch(color, uv);
 
-#if defined(SR_VOLUMETRIC_CLOUDS) || defined(SR_VOLUMETRIC_FOG)
-    float centerDistance = sceneDistanceAt(uv);
+#if defined(SR_VOLUMETRIC_CLOUDS) || defined(SR_VOLUMETRIC_FOG) || defined(SR_SSR)
+    // покрытие пикселя геометрией (MSAA и полупрозрачные объекты дают значения между 0 и 1)
+    vec4 gCoverage = textureLod(coverageMap, uv, 0.0);
+    vec4 gPosition = textureLod(positionMap, uv, 0.0);
+    float coverage = clamp(gCoverage.r, 0.0, 1.0);
+    float centerDistance = gbufferDistance(gPosition, coverage);
+#endif
+
+#ifdef SR_SSR
+    // отражения до облаков и тумана - они лежат на поверхности
+    if (gbufferHasGeometry(coverage)) {
+        vec3 N = gbufferNormal(textureLod(normalMap, uv, 0.0), coverage);
+        vec3 V = normalize(VIEW_POSITION - gbufferPosition(gPosition, coverage));
+        float metallic = gbufferMetallic(gCoverage);
+        float roughness = gbufferRoughness(gCoverage);
+
+        // Френель Шлика с поправкой на шероховатость; F0 диэлектрика 0.04
+        float F0 = mix(0.04, 1.0, metallic);
+        float NdotV = clamp(dot(N, V), 0.0, 1.0);
+        float F = F0 + (max(1.0 - roughness, F0) - F0) * pow(1.0 - NdotV, 5.0);
+        // отражение принадлежит только геометрии - на силуэте ослабляется по покрытию
+        F *= ssrIntensity * coverage;
+
+        // ssr хранится premultiplied: rgb = цвет * достоверность, a = достоверность
+        vec4 ssr = sampleLowResAt(ssrMap, ssrDepthMap, uv, centerDistance);
+        vec3 tint = mix(vec3(1.0), color / max(max(color.r, max(color.g, color.b)), 1e-4), metallic);
+        color = color * (1.0 - F * ssr.a) + ssr.rgb * tint * F;
+    }
 #endif
 
 #ifdef SR_VOLUMETRIC_CLOUDS
     // облака посчитаны в пониженном разрешении: rgb - рассеянный свет, a - пропускание
-    vec4 clouds = sampleLowRes(cloudsMap, uv, centerDistance);
+    vec4 clouds = sampleLowRes(cloudsMap, cloudsDepthMap, uv, coverage, centerDistance);
     color = color * clouds.a + max(clouds.rgb, vec3(0.0));
 #endif
 
 #ifdef SR_VOLUMETRIC_FOG
     // туман ближе облаков - накладывается поверх: rgb - рассеянный свет, a - пропускание
-    vec4 fog = sampleLowRes(fogMap, uv, centerDistance);
+    vec4 fog = sampleLowRes(fogMap, fogDepthMap, uv, coverage, centerDistance);
     color = color * fog.a + max(fog.rgb, vec3(0.0));
 #endif
 

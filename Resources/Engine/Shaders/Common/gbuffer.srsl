@@ -1,0 +1,66 @@
+// G-buffer (слои Offscreen, см. RenderTechniquePresetIntegrationMainView).
+//
+// Каждый слой пишется "предумноженным" на alpha объекта, а покрытие хранится отдельно в rgb-канале,
+// потому что блендинг SRC_ALPHA / ONE_MINUS_SRC_ALPHA применяется ко всем выходам, а alpha-канал при этом
+// смешивается сам с собой (a * a). MSAA resolve и блендинг прозрачных усредняют слои линейно -
+// деление на покрытие восстанавливает значения взвешенной ближайшей поверхности.
+//
+// слой 1 (coverageMap): r - покрытие (0 - небо), g - metallic, b - roughness (0 - поверхность не задала)
+// слой 2 (positionMap): xyz - мировая позиция
+// слой 3 (normalMap):   rgb - нормаль в [0, 1]
+// Значения g, b, xyz, rgb делятся на покрытие при чтении.
+//
+// Запись (для BlendEnabled false alpha = 1):
+//     COLOR_INDEX_1 = vec4(1.0, metallic, roughness, alpha);
+//     COLOR_INDEX_2 = vec4(position, alpha);
+//     COLOR_INDEX_3 = vec4(normal * 0.5 + 0.5, alpha);
+
+[[const]] float GBUFFER_MIN_COVERAGE = 0.02;
+
+bool gbufferHasGeometry(float coverage) {
+    return coverage > GBUFFER_MIN_COVERAGE;
+}
+
+vec3 gbufferPosition(vec4 p, float coverage) {
+    return p.xyz / max(coverage, GBUFFER_MIN_COVERAGE);
+}
+
+vec3 gbufferNormal(vec4 n, float coverage) {
+    vec3 encoded = n.rgb / max(coverage, GBUFFER_MIN_COVERAGE);
+    return normalize(encoded * 2.0 - 1.0);
+}
+
+float gbufferMetallic(vec4 c) {
+    return clamp(c.g / max(c.r, GBUFFER_MIN_COVERAGE), 0.0, 1.0);
+}
+
+// 0 - поверхность не задала roughness (не участвует в SSR)
+float gbufferRoughness(vec4 c) {
+    return clamp(c.b / max(c.r, GBUFFER_MIN_COVERAGE), 0.0, 1.0);
+}
+
+// расстояние от камеры, 1e6 - небо
+float gbufferDistance(vec4 p, float coverage) {
+    return gbufferHasGeometry(coverage) ? length(gbufferPosition(p, coverage) - VIEW_POSITION) : 1e6;
+}
+
+// Дистанция для прохода пониженного разрешения: ближайшая поверхность среди пикселей полного разрешения,
+// которые покрывает пиксель низкого разрешения. Луч не проходит сквозь объект, а результат для объекта
+// никогда не берется с неба - на силуэте не появляется ореол.
+// lowResSize - размер буфера текущего прохода (TARGET_RESOLUTION).
+float gbufferLowResDistance(sampler2D positionTex, sampler2D coverageTex, vec2 coord, vec2 lowResSize) {
+    vec2 fullSize = vec2(textureSize(positionTex, 0));
+    vec2 ratio = max(fullSize / lowResSize, vec2(1.0));
+    vec2 origin = coord * fullSize - ratio * 0.5;
+
+    float nearest = 1e6;
+    for (int y = 0; y < 2; y++) {
+        for (int x = 0; x < 2; x++) {
+            vec2 texel = floor(origin + (vec2(float(x), float(y)) + 0.5) * ratio * 0.5) + 0.5;
+            vec2 sampleUV = texel / fullSize;
+            float coverage = textureLod(coverageTex, sampleUV, 0.0).r;
+            nearest = min(nearest, gbufferDistance(textureLod(positionTex, sampleUV, 0.0), coverage));
+        }
+    }
+    return nearest;
+}

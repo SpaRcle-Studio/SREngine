@@ -1,0 +1,258 @@
+ShaderType PostProcessing;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled false;
+DepthWrite false;
+DepthTest false;
+
+// Screen space reflections (см. RenderTechniquePresetIntegrationSSR).
+// G-buffer декодируется через Common/gbuffer.srsl.
+// Результат: слой 0 - rgb отраженный цвет, умноженный на достоверность, a - достоверность (premultiplied);
+//            слой 1 - дистанция поверхности, для которой посчитан пиксель (для апсемпла в post-process).
+
+[[uniform(SHARED)]] vec4 ssrTraceParams; // maxSteps, refineSteps, maxDistance, thickness
+[[uniform(SHARED)]] vec4 ssrFadeParams;  // maxRoughness, edgeFade, blurRadius, -
+
+[[uniform]] sampler2D positionMap;
+[[uniform]] sampler2D coverageMap;
+[[uniform]] sampler2D normalMap;
+
+#ifdef SR_SSR_TRACE
+    [[uniform]] sampler2D sceneColor;
+#endif
+
+#ifdef SR_SSR_RESOLVE
+    [[uniform]] sampler2D ssrTrace;
+    [[uniform]] sampler2D ssrTraceDepth;
+#endif
+
+[[shared]] vec2 uv;
+
+#define USE_COLOR_INDEX_0
+#define USE_COLOR_INDEX_1
+
+#include <Engine/Shaders/Common/gbuffer.srsl>
+
+// G-buffer полного разрешения в точке экрана
+float sceneCoverageAt(vec2 coord) {
+    return textureLod(coverageMap, coord, 0.0).r;
+}
+
+float ssrIGN(vec2 pixel) {
+    return fract(52.9829189 * fract(dot(pixel, vec2(0.06711056, 0.00583715))));
+}
+
+#ifdef SR_SSR_TRACE
+    vec2 ndcToUV(vec2 ndc) {
+        return ndc * 0.5 + 0.5;
+    }
+
+    // расстояние от камеры до геометрии в точке экрана, 1e9 - небо
+    float sceneDistanceAt(vec2 coord) {
+        float coverage = sceneCoverageAt(coord);
+        return gbufferHasGeometry(coverage) ? length(gbufferPosition(textureLod(positionMap, coord, 0.0), coverage) - VIEW_POSITION) : 1e9;
+    }
+
+    vec4 traceFragment() {
+        vec4 coverageData = textureLod(coverageMap, uv, 0.0);
+        float coverage = coverageData.r;
+
+        float maxRoughness = ssrFadeParams.x;
+        float roughness = gbufferRoughness(coverageData);
+
+        if (!gbufferHasGeometry(coverage) || roughness <= 0.0 || roughness >= maxRoughness) {
+            return vec4(0.0);
+        }
+
+        vec3 surfacePosition = gbufferPosition(textureLod(positionMap, uv, 0.0), coverage);
+        vec3 N = gbufferNormal(textureLod(normalMap, uv, 0.0), coverage);
+        vec3 V = normalize(surfacePosition - VIEW_POSITION);
+        vec3 R = reflect(V, N);
+
+        float cameraDistance = length(surfacePosition - VIEW_POSITION);
+        float maxDistance = ssrTraceParams.z;
+        float thickness = ssrTraceParams.w;
+
+        // смещение начала вдоль нормали - без самопересечений
+        vec3 origin = surfacePosition + N * (0.002 * cameraDistance + 0.01);
+
+        vec4 v0 = VIEW_MATRIX * vec4(origin, 1.0);
+        vec3 Rv = (VIEW_MATRIX * vec4(R, 0.0)).xyz;
+
+        vec4 h0 = PROJECTION_MATRIX * v0;
+        vec4 h1 = PROJECTION_MATRIX * vec4(v0.xyz + Rv * maxDistance, 1.0);
+
+        // отсечение по ближней плоскости (clip w > 0 - перед камерой)
+        float rayLength = maxDistance;
+        if (h1.w < 0.05) {
+            float s = (h0.w - 0.05) / max(h0.w - h1.w, 1e-6);
+            rayLength = maxDistance * clamp(s, 0.0, 1.0);
+            h1 = PROJECTION_MATRIX * vec4(v0.xyz + Rv * rayLength, 1.0);
+        }
+
+        if (h0.w < 0.05 || rayLength < 0.01) {
+            return vec4(0.0);
+        }
+
+        // перспективно-корректная интерполяция: линейно в экране идут ndc, 1/w и view/w
+        float k0 = 1.0 / h0.w;
+        float k1 = 1.0 / h1.w;
+        vec3 q0 = v0.xyz * k0;
+        vec3 q1 = (v0.xyz + Rv * rayLength) * k1;
+        vec2 s0 = h0.xy * k0;
+        vec2 s1 = h1.xy * k1;
+
+        // обрезаем отрезок по границе экрана, чтобы шаги не тратились за его пределами
+        vec2 dir = s1 - s0;
+        float tMax = 1.0;
+        if (abs(dir.x) > 1e-6) {
+            float edgeX = dir.x > 0.0 ? 1.0 : -1.0;
+            tMax = min(tMax, (edgeX - s0.x) / dir.x);
+        }
+        if (abs(dir.y) > 1e-6) {
+            float edgeY = dir.y > 0.0 ? 1.0 : -1.0;
+            tMax = min(tMax, (edgeY - s0.y) / dir.y);
+        }
+        tMax = clamp(tMax, 0.0, 1.0);
+
+        int maxSteps = int(ssrTraceParams.x);
+        int refineSteps = int(ssrTraceParams.y);
+        float jitter = ssrIGN(FRAG_COORD.xy);
+
+        float prevT = 0.0;
+        float hitT = -1.0;
+
+        for (int i = 0; i < maxSteps; i++) {
+            float t = ((float(i) + jitter) / float(maxSteps)) * tMax;
+            // распределение шагов гуще у начала луча - там отражения заметнее всего
+            t = t * t / max(tMax, 1e-4);
+
+            vec2 s = mix(s0, s1, t);
+            float k = mix(k0, k1, t);
+            vec3 q = mix(q0, q1, t);
+
+            float rayDistance = length(q / k);
+            float sceneDistance = sceneDistanceAt(ndcToUV(s));
+            float delta = rayDistance - sceneDistance;
+            float thick = thickness * max(1.0, sceneDistance * 0.02);
+
+            if (delta > 0.0 && delta < thick) {
+                hitT = t;
+                break;
+            }
+
+            prevT = t;
+        }
+
+        if (hitT < 0.0) {
+            return vec4(0.0);
+        }
+
+        // бинарное уточнение между последним промахом и попаданием
+        float lo = prevT;
+        float hi = hitT;
+        for (int j = 0; j < refineSteps; j++) {
+            float mid = (lo + hi) * 0.5;
+            vec2 s = mix(s0, s1, mid);
+            float k = mix(k0, k1, mid);
+            vec3 q = mix(q0, q1, mid);
+            if (length(q / k) > sceneDistanceAt(ndcToUV(s))) {
+                hi = mid;
+            }
+            else {
+                lo = mid;
+            }
+        }
+
+        vec2 hitUV = ndcToUV(mix(s0, s1, hi));
+
+        // попадание в обратную сторону поверхности - отражения нет
+        vec3 hitNormal = gbufferNormal(textureLod(normalMap, hitUV, 0.0), sceneCoverageAt(hitUV));
+        if (dot(hitNormal, R) > 0.2) {
+            return vec4(0.0);
+        }
+
+        vec3 hitView = mix(q0, q1, hi) / mix(k0, k1, hi);
+        float travelled = length(hitView - v0.xyz) / maxDistance;
+
+        vec2 edge = min(hitUV, 1.0 - hitUV);
+        float edgeFade = smoothstep(0.0, ssrFadeParams.y, min(edge.x, edge.y));
+        float distanceFade = 1.0 - smoothstep(0.6, 1.0, travelled);
+        float roughnessFade = 1.0 - smoothstep(maxRoughness * 0.6, maxRoughness, roughness);
+        // лучи в камеру почти не имеют данных на экране
+        float facingFade = 1.0 - smoothstep(0.4, 0.9, dot(R, -V));
+
+        float confidence = edgeFade * distanceFade * roughnessFade * facingFade;
+
+        vec3 color = clamp(textureLod(sceneColor, hitUV, 0.0).rgb, vec3(0.0), vec3(65000.0));
+        return vec4(color * confidence, confidence);
+    }
+#endif
+
+#ifdef SR_SSR_RESOLVE
+    // Размытие по конусу отражения: радиус растет с шероховатостью.
+    // Bilateral по расстоянию и нормали - отражения не протекают через границы объектов.
+    vec4 resolveFragment(float centerDistance) {
+        vec4 center = textureLod(ssrTrace, uv, 0.0);
+        vec4 coverageData = textureLod(coverageMap, uv, 0.0);
+        float coverage = coverageData.r;
+
+        if (centerDistance >= 1e6 || !gbufferHasGeometry(coverage)) {
+            return vec4(0.0);
+        }
+
+        vec2 texel = 1.0 / vec2(textureSize(ssrTrace, 0));
+        vec3 centerNormal = gbufferNormal(textureLod(normalMap, uv, 0.0), coverage);
+
+        float roughness = clamp(gbufferRoughness(coverageData) / ssrFadeParams.x, 0.0, 1.0);
+        float radius = mix(1.0, ssrFadeParams.z, roughness);
+
+        vec4 result = center;
+        float weightSum = 1.0;
+
+        float angle = ssrIGN(FRAG_COORD.xy) * 6.2831853;
+        for (int i = 0; i < 12; i++) {
+            // спираль с золотым углом - равномерное покрытие диска
+            float r = sqrt((float(i) + 0.5) / 12.0) * radius;
+            float a = angle + float(i) * 2.3999632;
+            vec2 sampleUV = uv + vec2(cos(a), sin(a)) * r * texel;
+
+            float sampleDistance = textureLod(ssrTraceDepth, sampleUV, 0.0).r;
+            float sampleCoverage = sceneCoverageAt(sampleUV);
+            if (sampleDistance >= 1e6 || !gbufferHasGeometry(sampleCoverage)) {
+                continue;
+            }
+
+            float relDiff = abs(sampleDistance - centerDistance) / max(centerDistance, 1.0);
+            vec3 sampleNormal = gbufferNormal(textureLod(normalMap, sampleUV, 0.0), sampleCoverage);
+
+            float w = exp(-relDiff * relDiff * 800.0) * pow(max(dot(sampleNormal, centerNormal), 0.0), 8.0);
+            result += textureLod(ssrTrace, sampleUV, 0.0) * w;
+            weightSum += w;
+        }
+
+        return result / weightSum;
+    }
+#endif
+
+void fragment() {
+#ifdef SR_SSR_TRACE
+    // ближайшая поверхность в блоке полного разрешения - та же, по которой post-process апсемплит результат
+    COLOR_INDEX_1 = vec4(gbufferLowResDistance(positionMap, coverageMap, uv, TARGET_RESOLUTION), 0.0, 0.0, 1.0);
+    COLOR_INDEX_0 = traceFragment();
+#endif
+
+#ifdef SR_SSR_RESOLVE
+    float centerDistance = textureLod(ssrTraceDepth, uv, 0.0).r;
+    COLOR_INDEX_1 = vec4(centerDistance, 0.0, 0.0, 1.0);
+    COLOR_INDEX_0 = resolveFragment(centerDistance);
+#endif
+}
+
+void vertex() {
+    uv = vec2(float((VERTEX_INDEX << 1) & 2), float(VERTEX_INDEX & 2));
+    OUT_POSITION = vec4(uv * 2.0 - 1.0, 0.0, 1.0);
+}
