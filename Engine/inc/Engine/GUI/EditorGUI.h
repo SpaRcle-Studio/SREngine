@@ -12,6 +12,7 @@
 
 #include <Utils/Common/Enumerations.h>
 #include <Utils/ECS/SceneObject.h>
+#include <Utils/Reflection/Value.h>
 
 namespace SR_WORLD_NS {
     class Scene;
@@ -60,6 +61,8 @@ namespace SR_CORE_GUI_NS {
         SR_NODISCARD const bool IsMetricsWindowShown() const { return m_showMetricsWindow; }
 
         void ShowMetricsWindow(bool isShown) { m_showMetricsWindow = isShown; }
+
+        SR_NODISCARD SR_UTILS_NS::Reflection::Value& GetPropertyClipboard() { return m_propertyClipboard; }
 
         void SetDockingEnabled(bool value) { m_useDocking = value; }
 
@@ -122,6 +125,8 @@ namespace SR_CORE_GUI_NS {
         std::atomic<bool> m_dragWindow = false;
 
         bool m_showMetricsWindow = false;
+
+        SR_UTILS_NS::Reflection::Value m_propertyClipboard;
 
         bool m_imGuiDemo = false;
 

@@ -103,6 +103,10 @@ namespace SR_CORE_GUI_NS {
 
         static void SetReflectedValue(const PropertyDrawerContext& context, PropertyDrawerFeedback& feedback, const SR_UTILS_NS::Reflection::Value& value, bool drag = false);
 
+        /// контекстное меню (Copy/Paste) по ПКМ на заголовке свойства, вызывать сразу после кнопки с именем
+        void DrawTitleContextMenu(const PropertyDrawerContext& context, PropertyDrawerFeedback& feedback);
+        virtual void CustomTitleContextMenu(const PropertyDrawerContext& context, PropertyDrawerFeedback& feedback) { }
+
         SR_NODISCARD const SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::RenderContext>& GetRenderContext() const;
 
         std::optional<uint64_t> SearchComboBox(const PropertyDrawerContext& context,
@@ -148,6 +152,9 @@ namespace SR_CORE_GUI_NS {
         using Ptr = SR_HTYPES_NS::SharedPtr<MathVectorPropertyDrawer>;
     public:
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
+
+    private:
+        void DrawEditBoundsButton(const PropertyDrawerContext& context);
 
     };
 

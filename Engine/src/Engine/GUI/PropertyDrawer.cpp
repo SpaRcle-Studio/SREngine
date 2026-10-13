@@ -5,6 +5,9 @@
 #include <Engine/GUI/PropertyDrawer.h>
 #include <Engine/GUI/PropertyDrawers/EntityRefPropertyDrawer.h>
 #include <Engine/GUI/PropertyDrawers/ResourceRefPropertyDrawer.h>
+#include <Engine/GUI/EditorGUI.h>
+#include <Engine/GUI/EditorGizmo.h>
+#include <Engine/GUI/SceneViewer.h>
 
 #include <Graphics/Material/UniqueMaterial.h>
 #include <Graphics/GUI/Utils.h>
@@ -122,6 +125,60 @@ namespace SR_CORE_GUI_NS {
         }
     }
 
+    static bool IsClipboardSupported(const SR_UTILS_NS::Reflection::TypeInfo& typeInfo) {
+        if (typeInfo.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Container && typeInfo.detailedType == "SharedPtr") {
+            return false;
+        }
+        for (auto&& pNext : typeInfo.pNext) {
+            if (pNext && !IsClipboardSupported(*pNext)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    void PropertyDrawerBase::DrawTitleContextMenu(const PropertyDrawerContext& context, PropertyDrawerFeedback& feedback) {
+        if (context.pValue || !context.pProperty || !context.pOwner || !context.pEditor) {
+            return;
+        }
+
+        if (!SR_GRAPH_GUI_NS::Immediate::BeginPopupContextItem("PropertyTitleContextMenu")) {
+            return;
+        }
+
+        CustomTitleContextMenu(context, feedback);
+
+        const SR_UTILS_NS::Reflection::Value value = context.GetValue();
+        const bool isSupported = value.IsValid() && IsClipboardSupported(value.GetTypeInfo());
+
+        SR_UTILS_NS::Reflection::Value& clipboard = context.pEditor->GetPropertyClipboard();
+
+        const bool canPaste = isSupported && clipboard.IsValid()
+            && clipboard.GetTypeInfo() == value.GetTypeInfo()
+            && !context.GetProperty().IsReadOnly();
+
+        bool isCopyClicked = false;
+        bool isPasteClicked = false;
+        {
+            SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard guard(!isSupported);
+            isCopyClicked = SR_GRAPH_GUI_NS::Immediate::MenuItem("Copy");
+        }
+        {
+            SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard guard(!canPaste);
+            isPasteClicked = SR_GRAPH_GUI_NS::Immediate::MenuItem("Paste");
+        }
+
+        if (isCopyClicked && isSupported) {
+            clipboard = value.Copy();
+        }
+
+        if (isPasteClicked && canPaste) {
+            SetReflectedValue(context, feedback, clipboard.Copy());
+        }
+
+        SR_GRAPH_GUI_NS::Immediate::EndPopup();
+    }
+
     void PropertyDrawerBase::SetReflectedValue(const PropertyDrawerContext& context, PropertyDrawerFeedback& feedback, const SR_UTILS_NS::Reflection::Value& value, bool drag) {
         if (context.onBeforeChangeCallback) {
             context.onBeforeChangeCallback(drag);
@@ -218,6 +275,7 @@ namespace SR_CORE_GUI_NS {
                 value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
                 value = value.Copy();
             }
+            DrawTitleContextMenu(context, feedback);
 
             SR_GRAPH_GUI_NS::Immediate::SameLine();
         }
@@ -269,6 +327,7 @@ namespace SR_CORE_GUI_NS {
                 value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
                 value = value.Copy();
             }
+            DrawTitleContextMenu(context, feedback);
 
             SR_GRAPH_GUI_NS::Immediate::SameLine();
         }
@@ -462,6 +521,7 @@ namespace SR_CORE_GUI_NS {
                 value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
                 value = value.Copy();
             }
+            DrawTitleContextMenu(context, feedback);
             SR_GRAPH_GUI_NS::Immediate::SameLine();
         }
 
@@ -542,14 +602,19 @@ namespace SR_CORE_GUI_NS {
             value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
             value = value.Copy();
         }
-
-        SR_GRAPH_GUI_NS::Immediate::SameLine();
+        DrawTitleContextMenu(context, feedback);
 
         const float_t drag = context.GetEditorParams().GetDragSpeed();
 
         if (auto&& pAABB = value.Cast<SR_MATH_NS::AABB>()) {
             SR_MATH_NS::FVector3 min = pAABB->Min();
             SR_MATH_NS::FVector3 max = pAABB->Max();
+
+            const float_t labelWidth = SR_GRAPH_GUI_NS::Immediate::CalcTextSize("Max").x;
+            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(SR_MAX(context.fieldWidth - labelWidth, 1.f));
+
+            SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.fieldTitleWidth, 0.0f));
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
 
             if (SR_GRAPH_GUI_NS::Immediate::DragFloat3("Min", &min.x, drag)) {
                 if (context.onBeforeChangeCallback) {
@@ -559,6 +624,9 @@ namespace SR_CORE_GUI_NS {
                 feedback.isChanged = true;
             }
 
+            SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.fieldTitleWidth, 0.0f));
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+
             if (SR_GRAPH_GUI_NS::Immediate::DragFloat3("Max", &max.x, drag)) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(true);
@@ -566,10 +634,14 @@ namespace SR_CORE_GUI_NS {
                 pAABB->SetMax(max);
                 feedback.isChanged = true;
             }
+
+            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
         }
         else {
             SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map AABB value!");
         }
+
+        DrawEditBoundsButton(context);
 
         SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
 
@@ -579,6 +651,38 @@ namespace SR_CORE_GUI_NS {
         SetValue(context, feedback, value);
 
         return feedback;
+    }
+
+    void AABBPropertyDrawer::DrawEditBoundsButton(const PropertyDrawerContext& context) {
+        if (context.pValue || !context.pProperty || !context.pEditor || !context.pComponent) {
+            return;
+        }
+
+        if (context.pOwner != context.pComponent.Get() || context.GetProperty().IsReadOnly()) {
+            return;
+        }
+
+        auto&& pViewer = context.pEditor->GetWidget<SceneViewer>();
+        auto&& pGizmoObject = pViewer ? pViewer->GetGizmo() : SR_UTILS_NS::GameObject::Ptr();
+        auto&& pGizmo = pGizmoObject ? pGizmoObject->GetComponent<EditorGizmo>() : SR_HTYPES_NS::SharedPtr<EditorGizmo>();
+        if (!pGizmo) {
+            return;
+        }
+
+        const bool isEditing = pGizmo->IsBoundsEdit(context.pComponent.Get(), context.pProperty);
+
+        SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.fieldTitleWidth, 0.0f));
+        SR_GRAPH_GUI_NS::Immediate::SameLine();
+
+        const SR_MATH_NS::FColor color = isEditing ? SR_MATH_NS::FColor(0.2f, 0.6f, 0.2f, 1.f) : SR_MATH_NS::FColor(0.3f, 0.3f, 0.3f, 1.f);
+        if (SR_GRAPH_GUI_NS::Immediate::ButtonColored("Edit Bounds", color, SR_MATH_NS::FVector2(context.fieldWidth, context.fieldHeight))) {
+            if (isEditing) {
+                pGizmo->StopBoundsEdit();
+            }
+            else {
+                pGizmo->BeginBoundsEdit(context.pComponent, context.pProperty);
+            }
+        }
     }
 
     PropertyDrawerFeedback MathVectorPropertyDrawer::Draw(const PropertyDrawerContext& context) {
@@ -603,6 +707,7 @@ namespace SR_CORE_GUI_NS {
                 value = value.Copy();
                 SetReflectedValue(context, feedback, value);
             }
+            DrawTitleContextMenu(context, feedback);
             SR_GRAPH_GUI_NS::Immediate::SameLine();
         }
 
@@ -714,6 +819,7 @@ namespace SR_CORE_GUI_NS {
                 value = value.Copy();
                 SetReflectedValue(context, feedback, value);
             }
+            DrawTitleContextMenu(context, feedback);
             SR_GRAPH_GUI_NS::Immediate::SameLine();
         }
 
@@ -759,6 +865,7 @@ namespace SR_CORE_GUI_NS {
                 value = value.Copy();
                 SetReflectedValue(context, feedback, value);
             }
+            DrawTitleContextMenu(context, feedback);
         }
 
         SRAssert(value);

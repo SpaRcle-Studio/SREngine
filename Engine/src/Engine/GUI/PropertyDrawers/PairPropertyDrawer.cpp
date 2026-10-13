@@ -35,6 +35,7 @@ namespace SR_CORE_GUI_NS {
                 value = value.Copy();
                 SetReflectedValue(context, feedback, value);
             }
+            DrawTitleContextMenu(context, feedback);
 
             SR_GRAPH_GUI_NS::Immediate::SameLine();
         }

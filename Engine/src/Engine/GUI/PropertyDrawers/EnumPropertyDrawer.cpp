@@ -45,6 +45,7 @@ namespace SR_CORE_GUI_NS {
                 value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
                 value = value.Copy();
             }
+            DrawTitleContextMenu(context, feedback);
 
             SR_GRAPH_GUI_NS::Immediate::SameLine();
         }

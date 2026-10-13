@@ -60,6 +60,7 @@ namespace SR_CORE_GUI_NS {
             if (SR_GRAPH_GUI_NS::Immediate::Button(displayName.c_str(), mainButtonSize)) {
                 m_isOpened = !m_isOpened;
             }
+            DrawTitleContextMenu(context, feedback);
         }
 
         SR_GRAPH_GUI_NS::Immediate::SameLine();

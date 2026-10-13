@@ -11,12 +11,15 @@
 #include <Physics/3D/Rigidbody3D.h>
 
 #include <Utils/ECS/GameObject.h>
+#include <Utils/Reflection/Value.h>
 
 #include <Enum/GizmoOperation.hpp>
 
 #include <Codegen/EditorGizmo.generated.hpp>
 
 namespace SR_CORE_GUI_NS {
+    static const SR_MATH_NS::AABB OBJECT_BOUNDS = SR_MATH_NS::AABB::UnitCube();
+
     SR_MATH_NS::Matrix4x4 EditorGizmo::GetGizmoMatrix() const {
         if (!m_hierarchy || m_hierarchy->GetSelected().empty()) {
             return SR_MATH_NS::Matrix4x4::Identity();
@@ -117,6 +120,13 @@ namespace SR_CORE_GUI_NS {
             return false;
         }
 
+        if (IsBoundsMode()) {
+            if (IsObjectBoundsEdit()) {
+                return GetObjectBoundsTarget().Valid();
+            }
+            return IsBoundsEditValid();
+        }
+
         std::optional<bool> is2D;
 
         for (auto pSceneObject : m_hierarchy->GetSelected()) {
@@ -198,6 +208,24 @@ namespace SR_CORE_GUI_NS {
     }
 
     void EditorGizmo::BeginGizmo() {
+        if (IsBoundsMode() && IsObjectBoundsEdit()) {
+            auto&& pGameObject = GetObjectBoundsTarget();
+            if (!pGameObject) {
+                return;
+            }
+
+            m_objectTranslationStart = pGameObject->GetTransform()->GetTranslation();
+            m_objectScaleStart = pGameObject->GetTransform()->GetScale();
+        }
+        else if (IsBoundsMode()) {
+            if (IsBoundsEditValid()) {
+                m_boundsSerializer = SR_CORE_NS::Commands::CreateSerializer();
+                SR_UTILS_NS::Serialization::Save(*m_boundsSerializer, *m_boundsComponent, SR_UTILS_NS::COMMAND_DATA_ID);
+            }
+            Super::BeginGizmo();
+            return;
+        }
+
         if (!m_hierarchy || m_hierarchy->GetSelected().empty()) {
             return;
         }
@@ -230,6 +258,17 @@ namespace SR_CORE_GUI_NS {
 
     void EditorGizmo::EndGizmo() {
         m_holding = false;
+
+        if (m_boundsSerializer) {
+            if (m_hierarchy && IsBoundsEditValid()) {
+                auto&& pEngine = dynamic_cast<EditorGUI*>(m_hierarchy->GetManager())->GetEngine();
+                auto&& pCmd = new SR_CORE_NS::Commands::ComponentChange(pEngine, m_boundsComponent, std::move(m_boundsSerializer));
+                pEngine->GetCmdManager()->Store(pCmd);
+            }
+            m_boundsSerializer.reset();
+            Super::EndGizmo();
+            return;
+        }
 
         if (!m_hierarchy || m_hierarchy->GetSelected().empty()) {
             return;
@@ -273,6 +312,10 @@ namespace SR_CORE_GUI_NS {
     }
 
     void EditorGizmo::Update(float_t dt) {
+        if (m_boundsComponent && (!IsBoundsMode() || !IsBoundsEditValid())) {
+            StopBoundsEdit();
+        }
+
         Super::Update(dt);
 
         if (!m_holding) {
@@ -291,6 +334,11 @@ namespace SR_CORE_GUI_NS {
     }
 
     void EditorGizmo::PrepareGizmo() {
+        if (IsBoundsMode()) {
+            Super::PrepareGizmo();
+            return;
+        }
+
         auto&& pSceneObject = *m_hierarchy->GetSelected().begin();
         if (!pSceneObject) {
             return;
@@ -329,6 +377,143 @@ namespace SR_CORE_GUI_NS {
         }
 
         Super::PrepareGizmo();
+    }
+
+    void EditorGizmo::BeginBoundsEdit(const SR_UTILS_NS::Component::Ptr& pComponent, const SR_UTILS_NS::Reflection::Property* pProperty) {
+        if (!pComponent || !pProperty) {
+            return;
+        }
+
+        if (!m_boundsComponent) {
+            m_operationBeforeBounds = GetOperation();
+        }
+
+        m_boundsComponent = pComponent;
+        m_boundsProperty = pProperty;
+        m_boundsSerializer.reset();
+
+        SetOperation(SR_GRAPH_UI_NS::GizmoOperation::Bounds);
+    }
+
+    void EditorGizmo::StopBoundsEdit() {
+        const bool wasBoundsMode = IsBoundsMode() && m_boundsComponent;
+
+        m_boundsComponent = nullptr;
+        m_boundsProperty = nullptr;
+        m_boundsSerializer.reset();
+
+        if (wasBoundsMode) {
+            SetOperation(m_operationBeforeBounds);
+        }
+    }
+
+    bool EditorGizmo::IsBoundsEdit(const SR_UTILS_NS::Component* pComponent, const SR_UTILS_NS::Reflection::Property* pProperty) const {
+        return IsBoundsMode() && m_boundsComponent.Get() == pComponent && m_boundsProperty == pProperty;
+    }
+
+    bool EditorGizmo::IsBoundsEditValid() const {
+        if (!m_boundsComponent || !m_boundsProperty || !m_hierarchy) {
+            return false;
+        }
+
+        if (!m_boundsComponent->IsAttached()) {
+            return false;
+        }
+
+        auto&& pSceneObject = m_boundsComponent->GetSceneObject();
+        return pSceneObject && m_hierarchy->GetSelected().contains(pSceneObject);
+    }
+
+    bool EditorGizmo::GetBounds(SR_MATH_NS::AABB& bounds, SR_MATH_NS::Matrix4x4& matrix) const {
+        if (IsObjectBoundsEdit()) {
+            auto&& pGameObject = GetObjectBoundsTarget();
+            if (!pGameObject) {
+                return false;
+            }
+            bounds = OBJECT_BOUNDS;
+            matrix = pGameObject->GetTransform()->GetMatrix();
+            return true;
+        }
+
+        if (!IsBoundsEditValid()) {
+            return false;
+        }
+
+        auto&& pTransform = m_boundsComponent->GetTransform();
+        if (!pTransform) {
+            return false;
+        }
+
+        const SR_UTILS_NS::Reflection::Value value = m_boundsProperty->Get(const_cast<SR_UTILS_NS::Component*>(m_boundsComponent.Get()));
+        auto&& pBounds = value.Cast<SR_MATH_NS::AABB>();
+        if (!pBounds) {
+            return false;
+        }
+
+        bounds = *pBounds;
+        matrix = pTransform->GetMatrix();
+
+        return true;
+    }
+
+    void EditorGizmo::OnBoundsChanged(const SR_MATH_NS::AABB& bounds) {
+        if (IsObjectBoundsEdit()) {
+            auto&& pGameObject = GetObjectBoundsTarget();
+            if (!pGameObject) {
+                return;
+            }
+
+            auto&& pTransform = pGameObject->GetTransform();
+
+            /// bounds - локальный куб OBJECT_BOUNDS в матрице на момент начала перетаскивания
+            const SR_MATH_NS::FVector3 startSize = OBJECT_BOUNDS.GetSize();
+            const SR_MATH_NS::FVector3 newSize = bounds.GetSize();
+
+            SR_MATH_NS::FVector3 ratio = SR_MATH_NS::FVector3::One();
+            for (uint8_t i = 0; i < 3; ++i) {
+                if (startSize[i] > SR_BIG_EPSILON) {
+                    ratio[i] = SR_MAX(newSize[i] / startSize[i], static_cast<float_t>(SR_BIG_EPSILON));
+                }
+            }
+
+            /// противоположная грань остается на месте за счет смещения объекта (в пространстве родителя)
+            const SR_MATH_NS::FVector3 centerDelta = bounds.GetCenter() - OBJECT_BOUNDS.GetCenter() * ratio;
+
+            const SR_MATH_NS::FVector3 offset = pTransform->GetQuaternion() * (centerDelta * m_objectScaleStart);
+
+            pTransform->SetScale(m_objectScaleStart * ratio);
+            pTransform->SetTranslation(m_objectTranslationStart + offset);
+            return;
+        }
+
+        if (!IsBoundsEditValid()) {
+            return;
+        }
+
+        m_boundsProperty->Set(m_boundsComponent.Get(), SR_UTILS_NS::Reflection::Value::Create(SR_MATH_NS::AABB(bounds)));
+        m_boundsProperty->OnChanged(m_boundsComponent.Get());
+    }
+
+    SR_UTILS_NS::GameObject::Ptr EditorGizmo::GetObjectBoundsTarget() const {
+        if (!m_hierarchy || m_hierarchy->GetSelected().size() != 1) {
+            return nullptr;
+        }
+
+        auto&& pSceneObject = *m_hierarchy->GetSelected().begin();
+        if (!pSceneObject) {
+            return nullptr;
+        }
+
+        auto&& pGameObject = pSceneObject.DynamicCast<SR_UTILS_NS::GameObject>();
+        if (!pGameObject || pGameObject == GetGameObject() || pGameObject->GetComponent<EditorCamera>()) {
+            return nullptr;
+        }
+
+        if (pGameObject->GetTransform()->GetMeasurement() == SR_UTILS_NS::Measurement::Space2D) {
+            return nullptr;
+        }
+
+        return pGameObject;
     }
 
     EditorGizmo::~EditorGizmo() = default;

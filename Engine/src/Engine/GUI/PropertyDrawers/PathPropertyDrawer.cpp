@@ -49,6 +49,7 @@ namespace SR_CORE_GUI_NS {
                         newPath = pResetPath ? *pResetPath : SR_UTILS_NS::Path();
                     }
                 }
+                DrawTitleContextMenu(context, feedback);
             }
 
             if (isPickingEnabled) {

@@ -9,6 +9,9 @@
 
 #include <Graphics/UI/Gizmo.h>
 
+#include <Utils/Reflection/Property.h>
+#include <Utils/Serialization/Serializer.h>
+
 namespace SR_CORE_GUI_NS {
     class Hierarchy;
 
@@ -39,7 +42,27 @@ namespace SR_CORE_GUI_NS {
         void BeginGizmo() override;
         void EndGizmo() override;
 
+        void BeginBoundsEdit(const SR_UTILS_NS::Component::Ptr& pComponent, const SR_UTILS_NS::Reflection::Property* pProperty);
+        void StopBoundsEdit();
+        SR_NODISCARD bool IsBoundsEdit(const SR_UTILS_NS::Component* pComponent, const SR_UTILS_NS::Reflection::Property* pProperty) const;
+
+    protected:
+        SR_NODISCARD bool GetBounds(SR_MATH_NS::AABB& bounds, SR_MATH_NS::Matrix4x4& matrix) const override;
+        void OnBoundsChanged(const SR_MATH_NS::AABB& bounds) override;
+
     private:
+        SR_NODISCARD bool IsBoundsEditValid() const;
+        SR_NODISCARD bool IsObjectBoundsEdit() const { return !m_boundsComponent; }
+        SR_NODISCARD SR_UTILS_NS::GameObject::Ptr GetObjectBoundsTarget() const;
+
+    private:
+        SR_UTILS_NS::Component::Ptr m_boundsComponent;
+        const SR_UTILS_NS::Reflection::Property* m_boundsProperty = nullptr;
+        SR_UTILS_NS::ISerializer::UniquePtr m_boundsSerializer;
+        SR_MATH_NS::FVector3 m_objectTranslationStart;
+        SR_MATH_NS::FVector3 m_objectScaleStart;
+        SR_GRAPH_UI_NS::GizmoOperation m_operationBeforeBounds = SR_GRAPH_UI_NS::GizmoOperation::TranslateAll;
+
         bool m_holding = false;
         Hierarchy* m_hierarchy = nullptr;
         std::vector<std::pair<uint64_t, std::unique_ptr<SR_UTILS_NS::ISerializer>>> m_pSerializers;

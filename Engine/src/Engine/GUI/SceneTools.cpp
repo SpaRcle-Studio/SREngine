@@ -54,6 +54,13 @@ namespace SR_CORE_GUI_NS {
                 else { SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperation::Scale); }
             });
 
+        AddElement("B")
+            .SetIsActive([this]() { return m_gizmoOperationFlag & SR_GRAPH_UI_NS::GizmoOperation::Bounds; })
+            .SetOnClick([this](bool isActive) {
+                if (isActive) { SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperation::None); }
+                else { SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperation::Bounds); }
+            });
+
         AddElement("Connect PVD")
             .SetIsActive([]() { return false; })
             .SetOnClick([](bool isActive) {
@@ -252,6 +259,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (auto&& pGizmo = FindGizmo()) {
+            pGizmo->StopBoundsEdit();
             pGizmo->SetOperation(m_gizmoOperationFlag);
         }
     }
