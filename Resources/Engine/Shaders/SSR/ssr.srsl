@@ -22,6 +22,7 @@ DepthTest false;
 
 #ifdef SR_SSR_TRACE
     [[uniform]] sampler2D sceneColor;
+    [[uniform]] sampler2D sceneDistanceMap;
 #endif
 
 #ifdef SR_SSR_RESOLVE
@@ -241,7 +242,7 @@ float ssrIGN(vec2 pixel) {
 void fragment() {
 #ifdef SR_SSR_TRACE
     // ближайшая поверхность в блоке полного разрешения - та же, по которой post-process апсемплит результат
-    COLOR_INDEX_1 = vec4(gbufferLowResDistance(positionMap, coverageMap, uv, TARGET_RESOLUTION), 0.0, 0.0, 1.0);
+    COLOR_INDEX_1 = vec4(gbufferSceneDistance(sceneDistanceMap, uv, TARGET_RESOLUTION), 0.0, 0.0, 1.0);
     COLOR_INDEX_0 = traceFragment();
 #endif
 

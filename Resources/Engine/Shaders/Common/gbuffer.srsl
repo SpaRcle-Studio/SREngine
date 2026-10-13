@@ -44,6 +44,27 @@ float gbufferDistance(vec4 p, float coverage) {
     return gbufferHasGeometry(coverage) ? length(gbufferPosition(p, coverage) - VIEW_POSITION) : 1e6;
 }
 
+// Дистанция для прохода пониженного разрешения из готового буфера SceneDistance (половинное разрешение,
+// минимум по блокам 2x2): минимум по выборкам этого буфера, которые покрывает пиксель прохода.
+// Для проходов в половинном разрешении и выше это одна выборка, для 1/4 - четыре.
+float gbufferSceneDistance(sampler2D sceneDistanceTex, vec2 coord, vec2 lowResSize) {
+    vec2 distanceSize = vec2(textureSize(sceneDistanceTex, 0));
+    vec2 ratio = distanceSize / lowResSize;
+    if (ratio.x <= 1.01 && ratio.y <= 1.01) {
+        return textureLod(sceneDistanceTex, coord, 0.0).r;
+    }
+
+    vec2 origin = coord * distanceSize - ratio * 0.5;
+    float nearest = 1e6;
+    for (int y = 0; y < 2; y++) {
+        for (int x = 0; x < 2; x++) {
+            vec2 texel = floor(origin + (vec2(float(x), float(y)) + 0.5) * ratio * 0.5) + 0.5;
+            nearest = min(nearest, textureLod(sceneDistanceTex, texel / distanceSize, 0.0).r);
+        }
+    }
+    return nearest;
+}
+
 // Дистанция для прохода пониженного разрешения: ближайшая поверхность среди пикселей полного разрешения,
 // которые покрывает пиксель низкого разрешения. Луч не проходит сквозь объект, а результат для объекта
 // никогда не берется с неба - на силуэте не появляется ореол.

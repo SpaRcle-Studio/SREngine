@@ -8,8 +8,7 @@ BlendEnabled false;
 DepthWrite false;
 DepthTest false;
 
-[[uniform]] sampler2D positionMap;
-[[uniform]] sampler2D coverageMap;
+[[uniform]] sampler2D sceneDistanceMap;
 
 [[shared]] vec2 uv;
 
@@ -28,7 +27,7 @@ float cloudsIGN(vec2 pixel) {
 void fragment() {
     vec3 rayDir = getRayDir(uv);
 
-    float geometryDistance = gbufferLowResDistance(positionMap, coverageMap, uv, TARGET_RESOLUTION);
+    float geometryDistance = gbufferSceneDistance(sceneDistanceMap, uv, TARGET_RESOLUTION);
     // дистанция, для которой посчитан пиксель - по ней апсемпл в post-process подбирает соседей
     COLOR_INDEX_1 = vec4(geometryDistance, 0.0, 0.0, 1.0);
     float sceneDistance = (geometryDistance > 999999.0) ? 1e9 : geometryDistance;
