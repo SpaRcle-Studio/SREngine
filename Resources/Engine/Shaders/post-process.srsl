@@ -35,6 +35,24 @@ DepthTest false;
     [[uniform]] sampler2D fogMap;
 #endif
 
+#ifdef SR_BLOOM
+    [[public], [uniform(SHARED)]] float bloomIntensity = 0.6;
+    [[uniform]] sampler2D bloomMap;
+
+    // bloom в пониженном разрешении, а сэмплеры кадровых буферов NEAREST - билинейка вручную
+    vec3 sampleBloom(vec2 coord) {
+        vec2 size = vec2(textureSize(bloomMap, 0));
+        vec2 pixel = coord * size - 0.5;
+        vec2 base = floor(pixel);
+        vec2 f = pixel - base;
+        vec3 c00 = textureLod(bloomMap, (base + vec2(0.5, 0.5)) / size, 0.0).rgb;
+        vec3 c10 = textureLod(bloomMap, (base + vec2(1.5, 0.5)) / size, 0.0).rgb;
+        vec3 c01 = textureLod(bloomMap, (base + vec2(0.5, 1.5)) / size, 0.0).rgb;
+        vec3 c11 = textureLod(bloomMap, (base + vec2(1.5, 1.5)) / size, 0.0).rgb;
+        return mix(mix(c00, c10, f.x), mix(c01, c11, f.x), f.y);
+    }
+#endif
+
 #if defined(SR_VOLUMETRIC_CLOUDS) || defined(SR_VOLUMETRIC_FOG)
     [[uniform]] sampler2D positionMap;
 
@@ -190,6 +208,10 @@ void fragment() {
     // туман ближе облаков - накладывается поверх: rgb - рассеянный свет, a - пропускание
     vec4 fog = sampleLowRes(fogMap, uv, centerDistance);
     color = color * fog.a + max(fog.rgb, vec3(0.0));
+#endif
+
+#ifdef SR_BLOOM
+    color += sampleBloom(uv) * bloomIntensity;
 #endif
 
     float r = length(uv - 0.5);

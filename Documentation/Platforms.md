@@ -6,7 +6,8 @@
     * [ ] Flatpak (planned)
 - [x] Android
     * [ ] VR Meta Quest (planned)
-- [ ] Web (planned)
+- [X] Web 
+    * [X] WebGPU
 - [ ] iOS (not planned in near future)
 - [ ] MacOS (not planned in near future)
 - [ ] Consoles (not planned in near future)

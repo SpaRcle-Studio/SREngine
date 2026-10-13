@@ -26,20 +26,21 @@
     
     ??? scripting "Scripting"
         * [X] Serialization
+        * [X] Flux Blueprints 
         * [X] C++ Engine API
         * [X] C++ Dynamic linking
         * [ ] C++ Static linking (in progress)
         * [ ] C++ Plugins
         * [ ] C++ Scripts compiler standardization (have problems with abi compatibility)
-        * [ ] Blueprints or own scripting language (not planned in near future)
     
     ??? renderer "Render"
         - [X] Graphics API
             * [X] Vulkan
-            * [ ] OpenGL
-            * [ ] WebGL (planned)
+            * [X] WebGPU
             * [ ] DirectX (not planned in near future)
             * [ ] Metal (not planned in near future)
+            * [ ] OpenGL (deprecated API)
+            * [ ] WebGL (deprecated API)
         
         - [X] Animations
             * [X] Skeletal animations
@@ -58,15 +59,16 @@
         - [X] UI
             * [X] Text rendering
                 * [X] TTF fonts and colored emojis  
+                * [X] SDF / MSDF / MSTDF support
                 * [ ] Advanced text rendering (formatting)
             * [X] Sprite slicing
-            * [ ] Windows/Widgets
-                * [ ] Layout system
-                * [ ] Buttons
+            * [X] Windows/Widgets
+                * [X] Layout system
+                * [X] Buttons
+                * [X] Sliders
+                * [X] Scroll areas
                 * [ ] Input fields
-                * [ ] Sliders
                 * [ ] Checkboxes
-                * [ ] Scroll areas
                 * [ ] Docking
     
         - [X] Features
@@ -77,13 +79,15 @@
             * [X] Multi-cameras rendering
             * [X] Bufferization
             * [X] Frustum culling
-            * [ ] Particle system (planned)
-            * [ ] Bloom
-            * [ ] SSAO
+            * [X] Bloom
+            * [X] SSAO
+            * [X] Graphics settings
+            * [X] Volumetric fog
+            * [X] Volumetric clouds
+            * [ ] Particle system (in progress)
             * [ ] SSR
             * [ ] PBR
             * [ ] Batched rendering
-            * [ ] Graphics settings
             * [ ] Multithreading rendering
             * [X] Light system
                 * [X] Cascaded shadow maps
@@ -99,11 +103,11 @@
         - [X] Rigid bodies
         - [X] Physics materials
         - [X] Physics debugging visualization
+        - [X] Raycasting
         - [ ] Soft bodies
         - [ ] Vehicles
         - [ ] Joints
         - [ ] Cloth simulation
-        - [ ] Raycasting
         - [ ] Multithreading support
     
     

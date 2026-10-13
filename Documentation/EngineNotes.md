@@ -49,6 +49,17 @@ AI агентам разрешено дополнять в ходе выполн
   - `AllocateVBO` с существующим VBO того же размера по-прежнему пишет прямо в живой буфер (так работают `ParticleEmitter` и `TextMesh`, у частиц свой буфер на каждый кадр).
 - `VertexDataBuffer::GetVertex` определён внутри `#ifdef SR_UTILS_ASSIMP` (`Vertices.cpp`) и в сборках без assimp отсутствует. Надёжнее работать с `data` напрямую по `layout`.
 
+### Пост-эффекты и графический пайплайн (srptech)
+
+- Основная техника — `Resources/Engine/Render/Render.srptech` (`FileRenderTechniquePresetResource`). Пайплайн собирается кодом из списка интеграций `RenderTechniquePresetIntegration*` в `RenderTechniquePreset.cpp`. Интеграции выполняются по порядку из файла. `MainView` создаёт `Offscreen` FBO и `PostProcessPass`. Остальные (AutoExposure, Bloom, SSAO, облака, туман) вставляют свои `FrameBufferPass` через `pMainGroup->InsertPass(..., IndexOfPass(offscreenControllerName) + 1)` и добавляют сэмплер в `PostProcessPass`. Новый эффект — это новая интеграция плюс запись в `Render.srptech`.
+- Слои `Offscreen`: 0 — HDR-цвет (`B10G11R11_UFLOAT` при `hdr`), 1 — depth (R32F), 2 — позиция (RGBA16F, `a > 0.5` у геометрии), 3 — нормаль. Их количество задаёт `mainRenderColorLayers`.
+- Пресеты качества: `Quality` (None..Extreme) лежит в `ActiveGraphicsSettings`, пользовательский файл — `User/GraphicsSettings.sra`. Пресеты лежат в `RenderSettings` (`Resources/Engine/Configs/RenderSettings.sras`), выбираются через `FindSuitableQuality`. Шейдерные макросы `SR_SSAO`, `SR_BLOOM` и т.п. включаются в `RenderContext::SetGraphicsSettings` (`SwitchMacro`). Переопределения для камеры — `CameraRenderParameters`.
+- Все сэмплеры кадровых буферов используют **NEAREST** и clamp (и в Vulkan, и в WebGPU). Билинейной фильтрации «бесплатно» нет: апсемпл и размытие пишутся вручную выборками в центры текселей, см. `sampleLowRes` в `post-process.srsl` и `Bloom/bloom.srsl`.
+- `PostProcessPass` с `SetShader(path)` — базовый класс для полноэкранных проходов. Свои uniform'ы передаются в `UseSharedUniforms` (в шейдере `[[uniform(SHARED)]]`), дефайны добавляются через `GetMaterial()->GetMaterialData()->AddShaderDefine` в `Init()` до `Super::Init()`. SSBO экспозиции подключается через `AddSSBOUsageFromPass(AutoExposurePass::GetClassStaticName())` и `[[ssbo(exposure)]] float[] exposure;`.
+- Техника клонируется через рефлексию (`CloneTo`). Параметры прохода, которые задаёт интеграция, должны быть `@property`, иначе они потеряются.
+- `FrameBufferController`: размер равен размеру окна/камеры, умноженному на `preScale`, и ограничен снизу 1 пикселем. Для FBO без глубины: `SetDepthEnabled(false)` у контроллера и `SetClearDepth(Optional<float_t>())` у `FrameBufferPassData`, Глубина по умолчанию включена. Если она включена, а clear depth не задан, `FrameBufferPassData::RenderFrameBuffer` падает с ошибкой «depth is not set».
+- Bloom (`RenderTechniquePresetIntegrationBloom` + `BloomPass`): prefilter (мягкий порог по экспонированной яркости, Karis average, tent 4x4) → цепочка downsample → upsample (`mix(mip, up, scatter)`) → `bloomMap` в `post-process.srsl`, добавляется до тонмаппинга. Качество задаётся `BloomPreset` (preScale, mipCount, HQ-фильтр, RGBA16F). Если `bloomQualityPresets` пуст, используются значения по умолчанию из `RenderSettings::GetBloomPreset`. Нужен `hdr`.
+
 ## ECS
 
 - `SceneObject::SetEnabled` только помечает объект грязным. Активность применяется позже, в `CheckActivity`, поэтому компоненты получают `OnEnable` не сразу.
