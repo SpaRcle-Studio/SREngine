@@ -10,6 +10,7 @@
 #include <Engine/GUI/AnimatorEditor/AnimatorEditor.h>
 #include <Engine/GUI/FluxEditor/FluxEditor.h>
 #include <Engine/GUI/TextureInspector.h>
+#include <Engine/GUI/RawMeshInspector.h>
 #include <Engine/GUI/AssetInspector.h>
 
 #include <Graphics/GUI/Icons.h>
@@ -22,6 +23,7 @@
 #include <Graphics/Render/RenderContext.h>
 
 #include <Utils/ECS/Prefab.h>
+#include <Utils/Types/RawMesh.h>
 #include <Utils/TypeTraits/Factory.h>
 #include <Utils/Common/StoreUtils.h>
 #include <Utils/FileSystem/Path.h>
@@ -569,6 +571,12 @@ namespace SR_CORE_NS::GUI {
 
             if (SR_GTYPES_NS::Texture::GetMetaStatic()->HasExtension(extension)) {
                 if (auto&& pInspector = GetManager()->GetWidget<TextureInspector>()) {
+                    pInspector->Inspect(path);
+                }
+                return;
+            }
+            else if (SR_HTYPES_NS::RawMesh::GetMetaStatic()->HasExtension(extension)) {
+                if (auto&& pInspector = GetManager()->GetWidget<RawMeshInspector>()) {
                     pInspector->Inspect(path);
                 }
                 return;

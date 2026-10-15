@@ -7,6 +7,7 @@
 [[uniform], [public]] sampler2D diffuse;
 [[uniform], [public]] sampler2D normal;
 [[uniform], [public]] sampler2D roughnessMap;
+[[uniform], [public]] sampler2D metalicMap;
 [[uniform], [public]] sampler2D detailWeight;
 [[uniform], [public]] sampler2D sss;
 [[uniform], [public]] sampler2D emission;
@@ -83,6 +84,9 @@ void fragment() {
 #else
     #ifdef HAS_ROUGHNESS
         roughnessValue = roughnessValue * texture(roughnessMap, tiledUV).r;
+    #endif
+    #ifdef HAS_METALIC
+        metallicValue = metallicValue * texture(metalicMap, tiledUV).r;
     #endif
 #endif
 
