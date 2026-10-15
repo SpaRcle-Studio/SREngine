@@ -119,12 +119,27 @@ namespace SR_CORE_GUI_NS {
                             }
                         }
 
-                        if (!sceneObjects.empty() && sceneObjects.front() && sceneObjects.front()->GetMeta()->IsSameOrInherited(entityType)) {
-                            if (context.onBeforeChangeCallback) {
-                                context.onBeforeChangeCallback(false);
+                        if (!sceneObjects.empty() && sceneObjects.front()) {
+                            if (sceneObjects.front()->GetMeta()->IsSameOrInherited(entityType)) {
+                                if (context.onBeforeChangeCallback) {
+                                    context.onBeforeChangeCallback(false);
+                                }
+                                feedback.isChanged = true;
+                                pEntityRef->SetEntityId(sceneObjects.front()->GetEntityId());
                             }
-                            feedback.isChanged = true;
-                            pEntityRef->SetEntityId(sceneObjects.front()->GetEntityId());
+                            else {
+                                sceneObjects.front()->ForEachComponent([&](SR_UTILS_NS::Component& component) {
+                                    if (component.GetMeta()->IsSameOrInherited(entityType)) {
+                                        if (context.onBeforeChangeCallback) {
+                                            context.onBeforeChangeCallback(false);
+                                        }
+                                        feedback.isChanged = true;
+                                        pEntityRef->SetEntityId(component.GetEntityId());
+                                        return false;
+                                    }
+                                    return true;
+                                });
+                            }
                         }
                     }
                 }
