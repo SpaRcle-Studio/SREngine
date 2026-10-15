@@ -56,12 +56,48 @@ namespace SR_PHYSICS_NS {
         return static_cast<float_t>(index) / static_cast<float_t>(count - 1);
     }
 
+    void BoneDynamicsSystem::BuildJiggle() {
+        /// Каждая кость - одна свободная частица, привязанная пружиной к анимированной позиции.
+        /// Виртуального кончика нет, поэтому ориентация осей кости в риге не важна
+        for (auto&& rootRef : m_roots) {
+            auto&& pRoot = rootRef.Get();
+            if (!pRoot) {
+                continue;
+            }
+
+            Chain chain;
+
+            Bone bone;
+            bone.pGameObject = pRoot;
+            bone.restRotation = pRoot->GetTransform()->GetQuaternion();
+            bone.restTranslation = pRoot->GetTransform()->GetTranslation();
+
+            XPBDParticle particle;
+            particle.invMass = 1.f;
+
+            bone.particle = m_solver.AddParticle(particle);
+            chain.endParticle = bone.particle;
+            m_solver.AddAttachConstraint(bone.particle);
+
+            chain.bones.push_back(bone);
+            m_chains.push_back(chain);
+        }
+    }
+
     void BoneDynamicsSystem::BuildChains() {
         SR_TRACY_ZONE;
 
         m_solver.Clear();
         m_chains.clear();
         m_isBuilt = true;
+
+        if (m_mode == BoneDynamicsMode::Jiggle) {
+            BuildJiggle();
+            UpdateConstraintParams();
+            ReadAnimatedPose();
+            m_needReset = true;
+            return;
+        }
 
         for (auto&& rootRef : m_roots) {
             auto&& pRoot = rootRef.Get();
@@ -157,6 +193,14 @@ namespace SR_PHYSICS_NS {
                 }
 
                 auto&& pTransform = bone.pGameObject->GetTransform();
+
+                if (m_mode == BoneDynamicsMode::Jiggle) {
+                    if (pTransform->GetTranslation() == bone.writtenTranslation) {
+                        pTransform->SetTranslation(bone.restTranslation);
+                    }
+                    continue;
+                }
+
                 if (pTransform->GetQuaternion() == bone.writtenRotation) {
                     pTransform->SetRotation(bone.restRotation);
                 }
@@ -176,6 +220,10 @@ namespace SR_PHYSICS_NS {
                 if (bone.pGameObject) {
                     particles[bone.particle].animPosition = bone.pGameObject->GetTransform()->GetGlobalTranslation();
                 }
+            }
+
+            if (m_mode == BoneDynamicsMode::Jiggle) {
+                continue;
             }
 
             /// Направление виртуальной частицы берётся из последней кости
@@ -211,17 +259,31 @@ namespace SR_PHYSICS_NS {
         auto&& bendConstraints = m_solver.GetBendConstraints();
         auto&& lateralConstraints = m_solver.GetLateralConstraints();
 
-        for (auto&& chain : m_chains) {
-            const uint32_t count = static_cast<uint32_t>(chain.bones.size()) + 1;
-            const uint32_t first = chain.bones.empty() ? chain.endParticle : chain.bones[0].particle;
+        if (m_mode == BoneDynamicsMode::Jiggle) {
+            for (auto&& particle : particles) {
+                particle.radius = m_radiusRoot;
+            }
+            for (auto&& constraint : attachConstraints) {
+                constraint.compliance = m_stiffnessComplianceRoot / STIFFNESS_EDITOR_SCALE;
+            }
+        }
+        else {
+            for (auto&& chain : m_chains) {
+                const uint32_t count = static_cast<uint32_t>(chain.bones.size()) + 1;
+                const uint32_t first = chain.bones.empty() ? chain.endParticle : chain.bones[0].particle;
 
-            for (uint32_t i = 0; i < count; ++i) {
-                const float_t t = GetChainFactor(i, count);
-                particles[first + i].radius = SR_MATH_NS::Mix(m_radiusRoot, m_radiusTip, t);
+                for (uint32_t i = 0; i < count; ++i) {
+                    const float_t t = GetChainFactor(i, count);
+                    particles[first + i].radius = SR_MATH_NS::Mix(m_radiusRoot, m_radiusTip, t);
+                }
             }
         }
 
         for (auto&& constraint : attachConstraints) {
+            if (m_mode == BoneDynamicsMode::Jiggle) {
+                break;
+            }
+
             float_t t = 0.f;
             for (auto&& chain : m_chains) {
                 const uint32_t first = chain.bones.empty() ? chain.endParticle : chain.bones[0].particle;
@@ -230,7 +292,7 @@ namespace SR_PHYSICS_NS {
                     break;
                 }
             }
-            constraint.compliance = SR_MATH_NS::Mix(m_stiffnessComplianceRoot, m_stiffnessComplianceTip, t);
+            constraint.compliance = SR_MATH_NS::Mix(m_stiffnessComplianceRoot, m_stiffnessComplianceTip, t) / STIFFNESS_EDITOR_SCALE;
         }
 
         for (auto&& constraint : bendConstraints) {
@@ -253,15 +315,17 @@ namespace SR_PHYSICS_NS {
         params.gravity = m_gravity;
         params.force = m_wind;
         params.damping = m_damping;
-        params.maxAngle = m_maxAngle;
+        params.contactDamping = m_contactDamping;
+        params.maxAngle = m_mode == BoneDynamicsMode::Chain ? m_maxAngle : 0.f;
+        params.maxDistance = m_maxDistance;
         params.subSteps = m_subSteps;
-        params.collideEdges = m_collideEdges;
+        params.collideEdges = m_mode == BoneDynamicsMode::Chain && m_collideEdges;
         m_solver.SetParams(params);
     }
 
     void BoneDynamicsSystem::UpdateCollisionShapes() {
+        /// m_prevCollisionShapes - набор прошлого кадра, его prevA/prevB хранят положение на конце последнего шага
         auto&& shapes = m_solver.GetCollisionShapes();
-        m_prevCollisionShapes = shapes;
         shapes.clear();
 
         for (auto&& colliderRef : m_colliders) {
@@ -315,15 +379,15 @@ namespace SR_PHYSICS_NS {
             shapes.push_back(shape);
         }
 
-        /// Коллайдер интерполируется по подшагам от прошлого кадра, иначе быстрая нога за кадр
-        /// перепрыгивает через ткань. Если набор коллайдеров поменялся, интерполяции нет
+        /// Коллайдер интерполируется по подшагам от положения на конце последнего шага, иначе быстрая нога
+        /// за кадр перепрыгивает через ткань. Если набор коллайдеров поменялся, интерполяции нет
         const bool canInterpolate = !m_needReset && m_prevCollisionShapes.size() == shapes.size();
 
         for (uint32_t i = 0; i < shapes.size(); ++i) {
             auto&& shape = shapes[i];
             if (canInterpolate && m_prevCollisionShapes[i].type == shape.type) {
-                shape.prevA = m_prevCollisionShapes[i].a;
-                shape.prevB = m_prevCollisionShapes[i].b;
+                shape.prevA = m_prevCollisionShapes[i].prevA;
+                shape.prevB = m_prevCollisionShapes[i].prevB;
             }
             else {
                 shape.prevA = shape.a;
@@ -342,6 +406,14 @@ namespace SR_PHYSICS_NS {
         if (m_chains.empty()) {
             return;
         }
+
+        SR_MATH_NS::FVector3 rootPosition;
+        if (auto&& pRootObject = GetRootObject()) {
+            rootPosition = pRootObject->GetTransform()->GetGlobalTranslation();
+        }
+
+        const bool isTeleport = (rootPosition - m_frameRootPosition).Length() > m_teleportDistance;
+        m_frameRootPosition = rootPosition;
 
         RestoreUnanimatedBones();
         ReadAnimatedPose();
@@ -362,50 +434,102 @@ namespace SR_PHYSICS_NS {
             return;
         }
 
-        SR_MATH_NS::FVector3 rootPosition;
-        if (auto&& pRootObject = GetRootObject()) {
-            rootPosition = pRootObject->GetTransform()->GetGlobalTranslation();
-        }
-
-        const SR_MATH_NS::FVector3 rootDelta = rootPosition - m_lastRootPosition;
-        m_lastRootPosition = rootPosition;
-
-        if (m_needReset || rootDelta.Length() > m_teleportDistance) {
+        if (m_needReset || isTeleport) {
             m_solver.Reset();
+            m_solver.SyncTargetToFrame();
+            m_stepRootPosition = rootPosition;
             m_accumulator = 0.f;
             m_needReset = false;
         }
-        else if (m_inertia < 1.f) {
-            m_solver.Translate(rootDelta * (1.f - SR_CLAMP01(m_inertia)));
-        }
 
         const float_t fixedDt = 1.f / SR_MAX(1.f, m_fixedRate);
-        m_accumulator += dt;
+        const float_t follow = 1.f - SR_CLAMP01(m_inertia);
 
-        /// Сколько шагов будет в этом кадре, нужно чтобы распределить движение коллайдеров между ними
-        const uint32_t stepsCount = SR_MIN(static_cast<uint32_t>(m_accumulator / fixedDt), m_maxStepsPerFrame);
+        /// m_accumulator - время от конца последнего шага до текущего кадра. Шаг заканчивается не в момент кадра,
+        /// поэтому цель шага (анимированная поза, коллайдеры, корень) берётся интерполяцией на момент его конца:
+        /// от состояния на конце прошлого шага к состоянию кадра. Иначе ошибка цели зависит от того,
+        /// где кадр попал между шагами, и при частоте кадров выше частоты шагов частицы дребезжат
+        m_accumulator += dt;
 
         uint32_t steps = 0;
         while (m_accumulator >= fixedDt && steps < m_maxStepsPerFrame) {
-            const float_t from = static_cast<float_t>(steps) / static_cast<float_t>(SR_MAX(1u, stepsCount));
-            const float_t to = static_cast<float_t>(steps + 1) / static_cast<float_t>(SR_MAX(1u, stepsCount));
-            m_solver.Step(fixedDt, from, SR_MIN(to, 1.f));
+            const float_t t = fixedDt / m_accumulator;
+
+            const SR_MATH_NS::FVector3 stepRoot = m_stepRootPosition + (rootPosition - m_stepRootPosition) * t;
+            m_solver.Translate((stepRoot - m_stepRootPosition) * follow);
+            m_stepRootPosition = stepRoot;
+
+            m_solver.Step(fixedDt, t);
             m_accumulator -= fixedDt;
             ++steps;
         }
 
         /// Не даём копиться отставанию, если кадр был слишком долгим
-        if (steps == m_maxStepsPerFrame) {
+        if (steps == m_maxStepsPerFrame && m_accumulator >= fixedDt) {
             m_accumulator = 0.f;
+            m_stepRootPosition = rootPosition;
+            m_solver.SyncTargetToFrame();
         }
 
-        ApplyToBones();
+        m_prevCollisionShapes = m_solver.GetCollisionShapes();
+
+        /// Доля пути до следующего шага, вывод интерполируется между двумя последними шагами
+        m_outputAlpha = m_accumulator / fixedDt;
+
+        if (m_mode == BoneDynamicsMode::Jiggle) {
+            ApplyJiggle();
+        }
+        else {
+            ApplyToBones();
+        }
 
         if (m_debug) {
             UpdateDebug();
         }
         else if (!m_debugIds.empty()) {
             ClearDebug();
+        }
+    }
+
+    void BoneDynamicsSystem::ApplyJiggle() {
+        auto&& particles = m_solver.GetParticles();
+        const float_t weight = SR_CLAMP01(m_weight);
+
+        for (auto&& chain : m_chains) {
+            for (auto&& bone : chain.bones) {
+                if (!bone.pGameObject) {
+                    continue;
+                }
+
+                auto&& pTransform = bone.pGameObject->GetTransform();
+                auto&& particle = particles[bone.particle];
+
+                /// Здесь в кости либо свежая поза аниматора, либо восстановленная поза покоя
+                bone.restTranslation = pTransform->GetTranslation();
+
+                const SR_MATH_NS::FVector3 globalOffset = m_solver.GetInterpolatedOffset(bone.particle, m_outputAlpha) * weight;
+
+                /// Смещение переводим в пространство родителя с учётом его масштаба
+                SR_MATH_NS::FVector3 localOffset = globalOffset;
+                if (auto&& pParent = pTransform->GetParentTransform()) {
+                    SR_MATH_NS::FVector3 parentTranslation;
+                    SR_MATH_NS::Quaternion parentRotation;
+                    SR_MATH_NS::FVector3 parentScale;
+                    pParent->GetMatrix().Decompose(parentTranslation, parentRotation, parentScale);
+
+                    localOffset = parentRotation.Inverse() * globalOffset;
+                    localOffset = SR_MATH_NS::FVector3(
+                        parentScale.x != 0.f ? localOffset.x / parentScale.x : 0.f,
+                        parentScale.y != 0.f ? localOffset.y / parentScale.y : 0.f,
+                        parentScale.z != 0.f ? localOffset.z / parentScale.z : 0.f
+                    );
+                }
+
+                pTransform->SetTranslation(bone.restTranslation + localOffset);
+
+                bone.writtenTranslation = pTransform->GetTranslation();
+                bone.hasWritten = true;
+            }
         }
     }
 
@@ -427,8 +551,12 @@ namespace SR_PHYSICS_NS {
                 const SR_MATH_NS::Quaternion globalRotation = pTransform->GetGlobalRotation();
                 const SR_MATH_NS::FVector3 bonePosition = pTransform->GetGlobalTranslation();
 
+                /// Частица шага привязана к позе, интерполированной от прошлого кадра, поэтому переносим её смещение
+                /// на позу текущего кадра, иначе цепочка дёргается в кадрах с разным числом шагов
+                const SR_MATH_NS::FVector3 childPosition = particles[childParticle].animPosition + m_solver.GetInterpolatedOffset(childParticle, m_outputAlpha);
+
                 const SR_MATH_NS::FVector3 currentDir = globalRotation * bone.localDirection;
-                const SR_MATH_NS::FVector3 simDir = particles[childParticle].position - bonePosition;
+                const SR_MATH_NS::FVector3 simDir = childPosition - bonePosition;
 
                 if (currentDir.LengthSq() < SR_EPSILON || simDir.LengthSq() < SR_EPSILON) {
                     continue;
@@ -464,16 +592,31 @@ namespace SR_PHYSICS_NS {
         const SR_MATH_NS::FColor particleColor = SR_MATH_NS::FColor(0, 200, 255, 255) / 255.f;
         const SR_MATH_NS::FColor lineColor = SR_MATH_NS::FColor(255, 255, 255, 255) / 255.f;
 
-        for (auto&& particle : particles) {
+        /// Позиция, которую получила кость: поза кадра плюс интерполированное смещение, в мировых координатах
+        auto&& worldPosition = [this, &particles](uint32_t index) {
+            return particles[index].animPosition + m_solver.GetInterpolatedOffset(index, m_outputAlpha);
+        };
+
+        for (uint32_t i = 0; i < particles.size(); ++i) {
+            auto&& particle = particles[i];
+            const SR_MATH_NS::FVector3 position = worldPosition(i);
+
             auto&& id = nextId();
-            id = SR_UTILS_NS::DebugOverlayDraw::Instance().DrawSphere(id, particle.position, SR_MATH_NS::Quaternion(),
+            id = SR_UTILS_NS::DebugOverlayDraw::Instance().DrawSphere(id, position, SR_MATH_NS::Quaternion(),
                 SR_MATH_NS::FVector3(SR_MAX(particle.radius, 0.005f)), particleColor, SR_FLOAT_MAX
             );
 
             if (particle.parent != SR_ID_INVALID) {
                 auto&& lineId = nextId();
-                lineId = SR_UTILS_NS::DebugOverlayDraw::Instance().DrawLine(lineId, particles[particle.parent].position,
-                    particle.position, lineColor, SR_FLOAT_MAX
+                lineId = SR_UTILS_NS::DebugOverlayDraw::Instance().DrawLine(lineId, worldPosition(static_cast<uint32_t>(particle.parent)),
+                    position, lineColor, SR_FLOAT_MAX
+                );
+            }
+            else if (m_mode == BoneDynamicsMode::Jiggle) {
+                /// Отклонение от анимированной позиции
+                auto&& lineId = nextId();
+                lineId = SR_UTILS_NS::DebugOverlayDraw::Instance().DrawLine(lineId, particle.animPosition,
+                    position, lineColor, SR_FLOAT_MAX
                 );
             }
         }
@@ -482,8 +625,8 @@ namespace SR_PHYSICS_NS {
 
         for (auto&& constraint : m_solver.GetLateralConstraints()) {
             auto&& lineId = nextId();
-            lineId = SR_UTILS_NS::DebugOverlayDraw::Instance().DrawLine(lineId, particles[constraint.a].position,
-                particles[constraint.b].position, lateralColor, SR_FLOAT_MAX
+            lineId = SR_UTILS_NS::DebugOverlayDraw::Instance().DrawLine(lineId, worldPosition(constraint.a),
+                worldPosition(constraint.b), lateralColor, SR_FLOAT_MAX
             );
         }
 

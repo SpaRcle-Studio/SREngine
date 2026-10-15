@@ -179,6 +179,18 @@ namespace SR_PHYSICS_NS {
         Update(1.f / 60.f);
     }
 
+    void PhysicsScene::Interpolate(const float_t alpha) {
+        SR_TRACY_ZONE;
+
+        if (m_2DWorld) {
+            m_2DWorld->Interpolate(alpha);
+        }
+
+        if (m_3DWorld) {
+            m_3DWorld->Interpolate(alpha);
+        }
+    }
+
     void PhysicsScene::Update(float_t dt) {
         SR_TRACY_ZONE;
 

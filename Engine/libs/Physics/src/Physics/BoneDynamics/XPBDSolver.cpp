@@ -64,7 +64,28 @@ namespace SR_PHYSICS_NS {
         for (auto&& particle : m_particles) {
             particle.position = particle.animPosition;
             particle.prevPosition = particle.animPosition;
+            particle.prevAnimPosition = particle.animPosition;
+            particle.stepAnimPosition = particle.animPosition;
+            particle.lastStepPosition = particle.animPosition;
+            particle.lastStepAnimPosition = particle.animPosition;
             particle.velocity = SR_MATH_NS::FVector3::Zero();
+        }
+    }
+
+    SR_MATH_NS::FVector3 XPBDSolver::GetInterpolatedOffset(const uint32_t index, const float_t alpha) const {
+        auto&& particle = m_particles[index];
+        const SR_MATH_NS::FVector3 lastOffset = particle.lastStepPosition - particle.lastStepAnimPosition;
+        const SR_MATH_NS::FVector3 offset = particle.position - particle.stepAnimPosition;
+        return lastOffset + (offset - lastOffset) * SR_CLAMP01(alpha);
+    }
+
+    void XPBDSolver::SyncTargetToFrame() {
+        for (auto&& particle : m_particles) {
+            particle.prevAnimPosition = particle.animPosition;
+        }
+        for (auto&& shape : m_collisionShapes) {
+            shape.prevA = shape.a;
+            shape.prevB = shape.b;
         }
     }
 
@@ -78,7 +99,7 @@ namespace SR_PHYSICS_NS {
         }
     }
 
-    void XPBDSolver::Step(const float_t dt, const float_t from, const float_t to) {
+    void XPBDSolver::Step(const float_t dt, const float_t t) {
         SR_TRACY_ZONE;
 
         if (dt <= 0.f || m_particles.empty()) {
@@ -87,16 +108,35 @@ namespace SR_PHYSICS_NS {
 
         const uint32_t subSteps = SR_MAX(1u, m_params.subSteps);
         const float_t h = dt / static_cast<float_t>(subSteps);
+        const float_t stepT = SR_CLAMP01(t);
+
+        for (auto&& particle : m_particles) {
+            particle.lastStepPosition = particle.position;
+            particle.lastStepAnimPosition = particle.stepAnimPosition;
+        }
 
         for (uint32_t i = 0; i < subSteps; ++i) {
-            const float_t subFrom = SR_MATH_NS::Mix(from, to, static_cast<float_t>(i) / static_cast<float_t>(subSteps));
-            const float_t subTo = SR_MATH_NS::Mix(from, to, static_cast<float_t>(i + 1) / static_cast<float_t>(subSteps));
-            UpdateStepShapes(subFrom, subTo);
+            const float_t subFrom = stepT * static_cast<float_t>(i) / static_cast<float_t>(subSteps);
+            const float_t subTo = stepT * static_cast<float_t>(i + 1) / static_cast<float_t>(subSteps);
+            UpdateStepTarget(subFrom, subTo);
             SubStep(h);
+        }
+
+        /// Цель на конце этого шага - начало интерполяции следующего, так цель непрерывна во времени
+        for (auto&& particle : m_particles) {
+            particle.prevAnimPosition = particle.stepAnimPosition;
+        }
+        for (auto&& shape : m_collisionShapes) {
+            shape.prevA = shape.stepA;
+            shape.prevB = shape.stepB;
         }
     }
 
-    void XPBDSolver::UpdateStepShapes(const float_t from, const float_t to) {
+    void XPBDSolver::UpdateStepTarget(const float_t from, const float_t to) {
+        for (auto&& particle : m_particles) {
+            particle.stepAnimPosition = particle.prevAnimPosition + (particle.animPosition - particle.prevAnimPosition) * to;
+        }
+
         for (auto&& shape : m_collisionShapes) {
             shape.stepPrevA = shape.prevA + (shape.a - shape.prevA) * from;
             shape.stepPrevB = shape.prevB + (shape.b - shape.prevB) * from;
@@ -115,13 +155,14 @@ namespace SR_PHYSICS_NS {
         for (auto&& particle : m_particles) {
             if (particle.invMass == 0.f) {
                 particle.prevPosition = particle.position;
-                particle.position = particle.animPosition;
+                particle.position = particle.stepAnimPosition;
                 continue;
             }
 
             particle.velocity += acceleration * h;
             particle.prevPosition = particle.position;
             particle.position += particle.velocity * h;
+            particle.inContact = false;
         }
 
         for (auto&& constraint : m_distanceConstraints) { constraint.lambda = 0.f; }
@@ -134,21 +175,36 @@ namespace SR_PHYSICS_NS {
         SolveDistanceConstraints(m_lateralConstraints, h);
         SolveAngleLimits();
         SolveDistanceConstraints(m_distanceConstraints, h);
+        SolveMaxDistance();
         /// Коллизии решаются последними, иначе остальные ограничения возвращают частицы обратно в коллайдер
         if (m_params.collideEdges) {
-            SolveEdgeCollisions(m_lateralConstraints);
-            SolveEdgeCollisions(m_distanceConstraints);
+            SolveEdgeCollisions(m_lateralConstraints, h);
+            SolveEdgeCollisions(m_distanceConstraints, h);
         }
-        SolveCollisions();
+        SolveCollisions(h);
 
-        const float_t damping = SR_CLAMP(m_params.damping, 0.f, 1.f);
+        /// damping задан как потеря скорости за 1/60 секунды, пересчитываем под длину подшага,
+        /// иначе результат зависит от частоты и числа подшагов и быстро становится вязким
+        const float_t damping = SR_CLAMP(m_params.damping, 0.f, 0.999f);
+        const float_t keep = SR_MATH_NS::Pow(1.f - damping, h * 60.f);
+
+        const float_t contactDamping = SR_CLAMP(m_params.contactDamping, 0.f, 1.f);
+        const float_t contactKeep = SR_MATH_NS::Pow(1.f - SR_MIN(contactDamping, 0.999f), h * 60.f);
 
         for (auto&& particle : m_particles) {
             if (particle.invMass == 0.f) {
                 particle.velocity = SR_MATH_NS::FVector3::Zero();
                 continue;
             }
-            particle.velocity = (particle.position - particle.prevPosition) / h * (1.f - damping);
+
+            particle.velocity = (particle.position - particle.prevPosition) / h * keep;
+
+            /// Толчок коллайдера превращается в скорость частицы, и ткань отлетает от ноги рывком.
+            /// Гасим скорость относительно коллайдера только у частиц, которых он касается
+            if (particle.inContact && contactDamping > 0.f) {
+                const SR_MATH_NS::FVector3 relative = particle.velocity - particle.contactVelocity;
+                particle.velocity = particle.contactVelocity + relative * (contactDamping >= 1.f ? 0.f : contactKeep);
+            }
         }
     }
 
@@ -195,7 +251,7 @@ namespace SR_PHYSICS_NS {
                 continue;
             }
 
-            const SR_MATH_NS::FVector3 delta = particle.position - particle.animPosition;
+            const SR_MATH_NS::FVector3 delta = particle.position - particle.stepAnimPosition;
             const float_t length = delta.Length();
             if (length < SR_EPSILON) {
                 continue;
@@ -226,7 +282,7 @@ namespace SR_PHYSICS_NS {
 
             auto&& parent = m_particles[particle.parent];
 
-            const SR_MATH_NS::FVector3 animDir = (particle.animPosition - parent.animPosition).NormalizeSafe();
+            const SR_MATH_NS::FVector3 animDir = (particle.stepAnimPosition - parent.stepAnimPosition).NormalizeSafe();
             const SR_MATH_NS::FVector3 delta = particle.position - parent.position;
             const float_t length = delta.Length();
 
@@ -248,10 +304,34 @@ namespace SR_PHYSICS_NS {
         }
     }
 
-    void XPBDSolver::SolveCollisions() {
+    void XPBDSolver::SolveMaxDistance() {
+        if (m_params.maxDistance <= 0.f) {
+            return;
+        }
+
+        const float_t maxDistanceSq = m_params.maxDistance * m_params.maxDistance;
+
+        for (auto&& particle : m_particles) {
+            if (particle.invMass == 0.f) {
+                continue;
+            }
+
+            const SR_MATH_NS::FVector3 delta = particle.position - particle.stepAnimPosition;
+            const float_t distanceSq = delta.LengthSq();
+            if (distanceSq <= maxDistanceSq) {
+                continue;
+            }
+
+            particle.position = particle.stepAnimPosition + delta * (m_params.maxDistance / SR_SQRT(distanceSq));
+        }
+    }
+
+    void XPBDSolver::SolveCollisions(const float_t h) {
         if (m_collisionShapes.empty()) {
             return;
         }
+
+        const float_t invH = 1.f / h;
 
         for (auto&& particle : m_particles) {
             if (particle.invMass == 0.f) {
@@ -263,12 +343,13 @@ namespace SR_PHYSICS_NS {
                     case XPBDCollisionShapeType::Sphere:
                     case XPBDCollisionShapeType::Capsule: {
                         SR_MATH_NS::FVector3 closest = shape.stepA;
+                        float_t t = 0.f;
 
                         if (shape.type == XPBDCollisionShapeType::Capsule) {
                             const SR_MATH_NS::FVector3 segment = shape.stepB - shape.stepA;
                             const float_t segmentLengthSq = segment.LengthSq();
                             if (segmentLengthSq > SR_EPSILON) {
-                                const float_t t = SR_CLAMP((particle.position - shape.stepA).Dot(segment) / segmentLengthSq, 0.f, 1.f);
+                                t = SR_CLAMP((particle.position - shape.stepA).Dot(segment) / segmentLengthSq, 0.f, 1.f);
                                 closest = shape.stepA + segment * t;
                             }
                         }
@@ -287,12 +368,18 @@ namespace SR_PHYSICS_NS {
                         }
 
                         particle.position = closest + delta * (minDistance / distance);
+
+                        const SR_MATH_NS::FVector3 prevClosest = shape.stepPrevA + ((shape.type == XPBDCollisionShapeType::Capsule ? shape.stepPrevB : shape.stepPrevA) - shape.stepPrevA) * t;
+                        particle.contactVelocity = (closest - prevClosest) * invH;
+                        particle.inContact = true;
                         break;
                     }
                     case XPBDCollisionShapeType::Plane: {
                         const float_t distance = (particle.position - shape.stepA).Dot(shape.stepB) - particle.radius;
                         if (distance < 0.f) {
                             particle.position -= shape.stepB * distance;
+                            particle.contactVelocity = (shape.stepA - shape.stepPrevA) * invH;
+                            particle.inContact = true;
                         }
                         break;
                     }
@@ -353,10 +440,12 @@ namespace SR_PHYSICS_NS {
         }
     }
 
-    void XPBDSolver::SolveEdgeCollisions(const SR_UTILS_NS::Vector<XPBDDistanceConstraint>& edges) {
+    void XPBDSolver::SolveEdgeCollisions(const SR_UTILS_NS::Vector<XPBDDistanceConstraint>& edges, const float_t h) {
         if (m_collisionShapes.empty()) {
             return;
         }
+
+        const float_t invH = 1.f / h;
 
         for (auto&& shape : m_collisionShapes) {
             /// Плоскость отдельно не проверяется: если оба конца отрезка над ней, то и весь отрезок над ней
@@ -433,6 +522,16 @@ namespace SR_PHYSICS_NS {
 
                 p0.position += n * (lambda * w0 * b0);
                 p1.position += n * (lambda * w1 * b1);
+
+                const SR_MATH_NS::FVector3 shapeVelocity = (shapePoint - prevShapePoint) * invH;
+                if (w0 > 0.f) {
+                    p0.contactVelocity = shapeVelocity;
+                    p0.inContact = true;
+                }
+                if (w1 > 0.f) {
+                    p1.contactVelocity = shapeVelocity;
+                    p1.inContact = true;
+                }
             }
         }
     }

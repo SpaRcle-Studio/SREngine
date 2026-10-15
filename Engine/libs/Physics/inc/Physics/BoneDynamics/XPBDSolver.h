@@ -15,12 +15,23 @@ namespace SR_PHYSICS_NS {
         SR_MATH_NS::FVector3 position;
         SR_MATH_NS::FVector3 prevPosition;
         SR_MATH_NS::FVector3 velocity;
-        /// Позиция, в которую частицу ставит анимация
+        /// Позиция, в которую частицу ставит анимация в текущем кадре
         SR_MATH_NS::FVector3 animPosition;
+        /// Анимированная позиция на момент окончания последнего шага. Цель шага интерполируется от неё к animPosition
+        SR_MATH_NS::FVector3 prevAnimPosition;
+        /// Анимированная позиция на текущем подшаге
+        SR_MATH_NS::FVector3 stepAnimPosition;
+        /// Позиция после предыдущего фиксированного шага, для интерполяции вывода между шагами
+        SR_MATH_NS::FVector3 lastStepPosition;
+        /// stepAnimPosition после предыдущего фиксированного шага
+        SR_MATH_NS::FVector3 lastStepAnimPosition;
         /// 0 - частица закреплена и всегда стоит в animPosition
         float_t invMass = 1.f;
         float_t radius = 0.f;
         int32_t parent = SR_ID_INVALID;
+        /// Скорость коллайдера в точке контакта на текущем подшаге
+        SR_MATH_NS::FVector3 contactVelocity;
+        bool inContact = false;
     };
 
     /// Ограничение расстояния, используется для костей, изгиба и связей между цепочками
@@ -50,7 +61,7 @@ namespace SR_PHYSICS_NS {
         SR_MATH_NS::FVector3 a;
         /// Capsule - конец отрезка, Plane - нормаль
         SR_MATH_NS::FVector3 b;
-        /// Положение в прошлом кадре, коллайдер интерполируется между ним и текущим по подшагам
+        /// Положение на конце последнего шага, коллайдер интерполируется от него к текущему по подшагам
         SR_MATH_NS::FVector3 prevA;
         SR_MATH_NS::FVector3 prevB;
         float_t radius = 0.f;
@@ -65,9 +76,14 @@ namespace SR_PHYSICS_NS {
     struct XPBDSolverParams {
         SR_MATH_NS::FVector3 gravity = SR_MATH_NS::FVector3(0.f, -9.81f, 0.f);
         SR_MATH_NS::FVector3 force;
+        /// Доля скорости, теряемая за 1/60 секунды, не зависит от частоты и подшагов
         float_t damping = 0.f;
+        /// Гашение скорости относительно коллайдера у частиц в контакте, 1 - частица движется вместе с коллайдером
+        float_t contactDamping = 0.f;
         /// Максимальный угол отклонения от анимированного направления в градусах, 0 - без ограничения
         float_t maxAngle = 0.f;
+        /// Максимальное расстояние частицы от анимированной позиции, 0 - без ограничения
+        float_t maxDistance = 0.f;
         uint32_t subSteps = 4;
         /// Сталкивать с коллайдерами не только частицы, но и отрезки костей и связей между цепочками
         bool collideEdges = false;
@@ -89,9 +105,16 @@ namespace SR_PHYSICS_NS {
         void Reset();
         /// Сдвигает незакреплённые частицы вместе с их историей, скорость не меняется
         void Translate(const SR_MATH_NS::FVector3& delta);
+        /// Считает цель текущего кадра (анимированную позу и коллайдеры) состоянием на конце последнего шага.
+        /// Нужно, когда симуляция пропустила время и интерполировать от старой цели нельзя
+        void SyncTargetToFrame();
+        /// Смещение частицы от анимированной позы, к которой она была привязана на шаге, между двумя последними шагами.
+        /// Нельзя брать разницу с animPosition текущего кадра: шаг считался по позе на момент своего окончания
+        SR_NODISCARD SR_MATH_NS::FVector3 GetInterpolatedOffset(uint32_t index, float_t alpha) const;
 
-        /// from и to - доля пути коллайдеров от прошлого кадра к текущему в начале и в конце шага
-        void Step(float_t dt, float_t from = 1.f, float_t to = 1.f);
+        /// Цель (анимированная поза и коллайдеры) интерполируется от состояния на конце прошлого шага к состоянию кадра.
+        /// t - доля пути, на которой заканчивается этот шаг. После шага цель на его конце становится началом следующего
+        void Step(float_t dt, float_t t);
 
         void SetParams(const XPBDSolverParams& params) noexcept { m_params = params; }
 
@@ -104,12 +127,13 @@ namespace SR_PHYSICS_NS {
 
     private:
         void SubStep(float_t h);
-        void UpdateStepShapes(float_t from, float_t to);
+        void UpdateStepTarget(float_t from, float_t to);
         void SolveDistanceConstraints(SR_UTILS_NS::Vector<XPBDDistanceConstraint>& constraints, float_t h);
         void SolveAttachConstraints(float_t h);
         void SolveAngleLimits();
-        void SolveCollisions();
-        void SolveEdgeCollisions(const SR_UTILS_NS::Vector<XPBDDistanceConstraint>& edges);
+        void SolveMaxDistance();
+        void SolveCollisions(float_t h);
+        void SolveEdgeCollisions(const SR_UTILS_NS::Vector<XPBDDistanceConstraint>& edges, float_t h);
 
     private:
         XPBDSolverParams m_params;

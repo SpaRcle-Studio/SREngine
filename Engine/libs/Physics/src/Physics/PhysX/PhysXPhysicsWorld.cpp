@@ -129,6 +129,28 @@ namespace SR_PHYSICS_NS {
         return SynchronizeDynamic() && SynchronizeStatic();
     }
 
+    void PhysXPhysicsWorld::Interpolate(const float_t alpha) {
+        SR_TRACY_ZONE;
+
+        if (!m_controllerManager) {
+            return;
+        }
+
+        const uint32_t count = m_controllerManager->getNbControllers();
+        for (uint32_t i = 0; i < count; ++i) {
+            auto&& pPxController = m_controllerManager->getController(i);
+            auto&& pUserData = pPxController ? static_cast<RigidActorUserData*>(pPxController->getUserData()) : nullptr;
+            if (!pUserData || !pUserData->pUserData || pUserData->type != RigidActorUserData::Type::CharacterController) {
+                continue;
+            }
+
+            auto&& pController = static_cast<CharacterController*>(pUserData->pUserData);
+            if (auto&& pImpl = pController->GetImpl()) {
+                pImpl->Interpolate(alpha);
+            }
+        }
+    }
+
     bool PhysXPhysicsWorld::StepSimulation(float_t step) {
         SR_TRACY_ZONE;
 

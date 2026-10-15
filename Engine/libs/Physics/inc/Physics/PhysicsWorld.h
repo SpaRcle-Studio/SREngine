@@ -34,6 +34,8 @@ namespace SR_PHYSICS_NS {
         virtual bool Initialize() { return false; }
         virtual bool ClearForces() { return false; }
         virtual bool Synchronize() { return false; }
+        /// Ставит визуальное положение тел между двумя последними шагами, alpha - доля до следующего шага
+        virtual void Interpolate(float_t alpha) { }
 
         virtual void Flush() { }
 

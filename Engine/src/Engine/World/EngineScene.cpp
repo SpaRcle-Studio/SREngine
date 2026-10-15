@@ -217,6 +217,16 @@ namespace SR_CORE_NS {
             m_inputAccumulator.Accumulate();
         }
 
+        /// Физика шагает с фиксированной частотой, а кадры идут чаще или реже. Доля до следующего шага
+        /// нужна для интерполяции визуального положения физических объектов между шагами
+        const float_t fixedAlpha = m_updateFrequency > 0.f ? SR_CLAMP01(m_accumulator / m_updateFrequency) : 1.f;
+        SR_HTYPES_NS::Time::Instance().SetFixedAlpha(fixedAlpha);
+
+        /// До LateUpdate, чтобы зависящие от позиции компоненты (кости, камера) видели уже плавную позицию
+        if (!isPaused && pPhysicsScene) {
+            pPhysicsScene->Interpolate(fixedAlpha);
+        }
+
         pSceneUpdater->LateUpdate(isPaused);
 
         pEngine->SetOneFramePauseSkip(false);

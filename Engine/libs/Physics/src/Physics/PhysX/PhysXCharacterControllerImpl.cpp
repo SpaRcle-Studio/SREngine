@@ -107,8 +107,18 @@ namespace SR_PHYSICS_NS {
         //SR_MATH_NS::Quaternion physxRotation(globalPose.q.x, globalPose.q.y, globalPose.q.z, globalPose.q.w);
 
         // --------------------------------------------------
-        // Синхронизируем позицию напрямую
-        pTransform->SetGlobalTranslation(physxPosition - m_controller->GetConfig().offset);
+        // Синхронизируем позицию напрямую, логика в FixedUpdate должна видеть настоящую физическую позицию
+        const SR_MATH_NS::FVector3 position = physxPosition - m_controller->GetConfig().offset;
+
+        /// Если трансформ поменяли извне (телепорт, редактор), интерполировать от старой позиции нельзя
+        const bool isMovedOutside = m_hasPhysicsPosition && pTransform->GetGlobalTranslation() != m_writtenPosition;
+
+        m_prevPhysicsPosition = (m_hasPhysicsPosition && !isMovedOutside) ? m_physicsPosition : position;
+        m_physicsPosition = position;
+        m_hasPhysicsPosition = true;
+
+        pTransform->SetGlobalTranslation(position);
+        m_writtenPosition = pTransform->GetGlobalTranslation();
 
         // --------------------------------------------------
         // Визуальный поворот: добавляем фиксированный оффсет
@@ -129,6 +139,29 @@ namespace SR_PHYSICS_NS {
         m_rotation = m_controller->GetRotation();
 
         Super::Synchronize();
+    }
+
+    void PhysXCharacterControllerImpl::Interpolate(const float_t alpha) {
+        SR_TRACY_ZONE;
+
+        if (!m_hasPhysicsPosition || !m_controller->GetConfig().interpolate) {
+            return;
+        }
+
+        auto&& pTransform = m_controller->GetTransform();
+        if (!pTransform) {
+            return;
+        }
+
+        /// Трансформ поменяли извне после шага - не перетираем его, следующий Synchronize начнёт с новой позиции
+        if (pTransform->GetGlobalTranslation() != m_writtenPosition) {
+            return;
+        }
+
+        const SR_MATH_NS::FVector3 position = m_prevPhysicsPosition + (m_physicsPosition - m_prevPhysicsPosition) * SR_CLAMP01(alpha);
+
+        pTransform->SetGlobalTranslation(position);
+        m_writtenPosition = pTransform->GetGlobalTranslation();
     }
 
     bool PhysXCharacterControllerImpl::IsGrounded() const {

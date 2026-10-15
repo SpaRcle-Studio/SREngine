@@ -40,6 +40,8 @@ namespace SR_PHYSICS_NS {
     public:
         virtual void Update(float_t dt);
         virtual void FixedUpdate();
+        /// Вызывается раз в кадр после всех шагов физики. alpha - доля времени до следующего шага
+        void Interpolate(float_t alpha);
         virtual bool Init();
 
         virtual void Register(RigidbodyPtr pRigidbody);

@@ -28,6 +28,7 @@ namespace SR_PHYSICS_NS {
         SR_NODISCARD bool IsGrounded() const override;
 
         void Synchronize() override;
+        void Interpolate(float_t alpha) override;
 
     private:
         physx::PxController* m_pxController = nullptr;
@@ -35,6 +36,13 @@ namespace SR_PHYSICS_NS {
 
         SR_MATH_NS::FVector3 m_translation;
         SR_MATH_NS::Quaternion m_rotation;
+
+        /// Позиция трансформа после двух последних физических шагов
+        SR_MATH_NS::FVector3 m_prevPhysicsPosition;
+        SR_MATH_NS::FVector3 m_physicsPosition;
+        /// Последняя позиция, которую контроллер записал в трансформ. Если трансформ поменяли извне - это телепорт
+        SR_MATH_NS::FVector3 m_writtenPosition;
+        bool m_hasPhysicsPosition = false;
 
     };
 }

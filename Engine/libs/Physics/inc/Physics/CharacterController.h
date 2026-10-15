@@ -36,6 +36,8 @@ namespace SR_PHYSICS_NS {
         void SetCharacterController(CharacterController* pController) { m_controller = pController; }
 
         virtual void Synchronize() { }
+        /// Ставит трансформ между двумя последними физическими позициями, alpha - доля до следующего шага
+        virtual void Interpolate(float_t alpha) { }
         virtual bool UpdateMatrix(bool force) { return true; }
 
         virtual CharacterControllerCollisionFlags Move(const SR_MATH_NS::FVector3& displacement,
@@ -73,6 +75,8 @@ namespace SR_PHYSICS_NS {
         float_t groundProbeDistance = 0.05f;
         /// @property
         float_t groundProbeOffset = 0.f;
+        /// @property @tooltip(Плавно двигать объект между шагами физики. Физика шагает с фиксированной частотой и без интерполяции объект двигается ступеньками)
+        bool interpolate = true;
     };
 
     /// @category(Physics)
