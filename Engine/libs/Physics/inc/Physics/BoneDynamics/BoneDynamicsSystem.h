@@ -103,12 +103,8 @@ namespace SR_PHYSICS_NS {
         SR_UTILS_NS::Vector<uint64_t> m_debugIds;
         SR_UTILS_NS::Vector<XPBDCollisionShape> m_prevCollisionShapes;
 
-        float_t m_accumulator = 0.f;
-        float_t m_outputAlpha = 1.f;
-
-        /// Позиция корня персонажа в текущем кадре и на конце последнего шага симуляции
-        SR_MATH_NS::FVector3 m_frameRootPosition;
-        SR_MATH_NS::FVector3 m_stepRootPosition;
+        /// Позиция корня персонажа в прошлом кадре
+        SR_MATH_NS::FVector3 m_lastRootPosition;
         bool m_isBuilt = false;
         bool m_needReset = true;
 
@@ -126,18 +122,14 @@ namespace SR_PHYSICS_NS {
 
         /// @property @range(0.f, 1.f) @drag(0.01f)
         float_t m_weight = 1.f;
-        /// @property @range(10.f, 240.f)
-        float_t m_fixedRate = 60.f;
-        /// @property @range(1, 32)
-        uint32_t m_subSteps = 4;
-        /// @property @range(1, 8)
-        uint32_t m_maxStepsPerFrame = 4;
+        /// @property @range(30.f, 1000.f) @tooltip(Минимальная частота подшагов симуляции в секунду. Каждый кадр делится на подшаги не длиннее 1/Sub Step Rate. Больше - точнее и жёстче но дороже)
+        float_t m_subStepRate = 240.f;
 
         /// @property @drag(0.01f)
         SR_MATH_NS::FVector3 m_gravity = SR_MATH_NS::FVector3(0.f, -9.81f, 0.f);
         /// @property @drag(0.01f)
         SR_MATH_NS::FVector3 m_wind;
-        /// @property @range(0.f, 1.f) @drag(0.001f) @tooltip(Доля скорости которая теряется за 1/60 секунды. Не зависит от Fixed Rate и Sub Steps)
+        /// @property @range(0.f, 1.f) @drag(0.001f) @tooltip(Доля скорости которая теряется за 1/60 секунды. Не зависит от частоты кадров и подшагов)
         float_t m_damping = 0.02f;
         /// @property @range(0.f, 1.f) @drag(0.01f) @tooltip(Гашение скорости ткани относительно коллайдера в момент касания. Убирает рывки от ног не делая всю симуляцию вязкой)
         float_t m_contactDamping = 0.f;

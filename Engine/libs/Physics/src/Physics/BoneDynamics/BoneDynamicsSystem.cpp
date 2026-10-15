@@ -186,6 +186,12 @@ namespace SR_PHYSICS_NS {
     void BoneDynamicsSystem::RestoreUnanimatedBones() {
         /// Если аниматор не писал в кость, в ней осталось наше значение с прошлого кадра.
         /// Тогда возвращаем позу покоя, иначе симуляция будет накапливаться сама на себя.
+        /// Сравнение с машинной точностью тут не годится: трансформ при записи пересчитывает значение
+        /// (кватернион нормализуется), и из-за погрешности поза покоя то восстанавливалась, то нет.
+        /// Поэтому допуск заметно больше погрешности записи, но намного меньше любого движения аниматора
+        constexpr float_t translationTolerance = 1e-5f;
+        constexpr float_t rotationTolerance = 1e-6f;
+
         for (auto&& chain : m_chains) {
             for (auto&& bone : chain.bones) {
                 if (!bone.pGameObject || !bone.hasWritten) {
@@ -195,13 +201,15 @@ namespace SR_PHYSICS_NS {
                 auto&& pTransform = bone.pGameObject->GetTransform();
 
                 if (m_mode == BoneDynamicsMode::Jiggle) {
-                    if (pTransform->GetTranslation() == bone.writtenTranslation) {
+                    if ((pTransform->GetTranslation() - bone.writtenTranslation).LengthSq() < translationTolerance * translationTolerance) {
                         pTransform->SetTranslation(bone.restTranslation);
                     }
                     continue;
                 }
 
-                if (pTransform->GetQuaternion() == bone.writtenRotation) {
+                /// 1 - |dot| примерно равно угол^2 / 8, 1e-6 соответствует примерно 0.16 градуса
+                const float_t dot = SR_ABS(SR_MATH_NS::Quaternion::Dot(pTransform->GetQuaternion(), bone.writtenRotation));
+                if (1.f - dot < rotationTolerance) {
                     pTransform->SetRotation(bone.restRotation);
                 }
             }
@@ -318,13 +326,13 @@ namespace SR_PHYSICS_NS {
         params.contactDamping = m_contactDamping;
         params.maxAngle = m_mode == BoneDynamicsMode::Chain ? m_maxAngle : 0.f;
         params.maxDistance = m_maxDistance;
-        params.subSteps = m_subSteps;
+        params.maxSubStepTime = 1.f / SR_MAX(m_subStepRate, 1.f);
         params.collideEdges = m_mode == BoneDynamicsMode::Chain && m_collideEdges;
         m_solver.SetParams(params);
     }
 
     void BoneDynamicsSystem::UpdateCollisionShapes() {
-        /// m_prevCollisionShapes - набор прошлого кадра, его prevA/prevB хранят положение на конце последнего шага
+        /// m_prevCollisionShapes - набор прошлого кадра, коллайдеры интерполируются от его положения
         auto&& shapes = m_solver.GetCollisionShapes();
         shapes.clear();
 
@@ -386,8 +394,8 @@ namespace SR_PHYSICS_NS {
         for (uint32_t i = 0; i < shapes.size(); ++i) {
             auto&& shape = shapes[i];
             if (canInterpolate && m_prevCollisionShapes[i].type == shape.type) {
-                shape.prevA = m_prevCollisionShapes[i].prevA;
-                shape.prevB = m_prevCollisionShapes[i].prevB;
+                shape.prevA = m_prevCollisionShapes[i].a;
+                shape.prevB = m_prevCollisionShapes[i].b;
             }
             else {
                 shape.prevA = shape.a;
@@ -412,8 +420,9 @@ namespace SR_PHYSICS_NS {
             rootPosition = pRootObject->GetTransform()->GetGlobalTranslation();
         }
 
-        const bool isTeleport = (rootPosition - m_frameRootPosition).Length() > m_teleportDistance;
-        m_frameRootPosition = rootPosition;
+        const SR_MATH_NS::FVector3 rootDelta = rootPosition - m_lastRootPosition;
+        const bool isTeleport = rootDelta.Length() > m_teleportDistance;
+        m_lastRootPosition = rootPosition;
 
         RestoreUnanimatedBones();
         ReadAnimatedPose();
@@ -437,44 +446,16 @@ namespace SR_PHYSICS_NS {
         if (m_needReset || isTeleport) {
             m_solver.Reset();
             m_solver.SyncTargetToFrame();
-            m_stepRootPosition = rootPosition;
-            m_accumulator = 0.f;
             m_needReset = false;
         }
-
-        const float_t fixedDt = 1.f / SR_MAX(1.f, m_fixedRate);
-        const float_t follow = 1.f - SR_CLAMP01(m_inertia);
-
-        /// m_accumulator - время от конца последнего шага до текущего кадра. Шаг заканчивается не в момент кадра,
-        /// поэтому цель шага (анимированная поза, коллайдеры, корень) берётся интерполяцией на момент его конца:
-        /// от состояния на конце прошлого шага к состоянию кадра. Иначе ошибка цели зависит от того,
-        /// где кадр попал между шагами, и при частоте кадров выше частоты шагов частицы дребезжат
-        m_accumulator += dt;
-
-        uint32_t steps = 0;
-        while (m_accumulator >= fixedDt && steps < m_maxStepsPerFrame) {
-            const float_t t = fixedDt / m_accumulator;
-
-            const SR_MATH_NS::FVector3 stepRoot = m_stepRootPosition + (rootPosition - m_stepRootPosition) * t;
-            m_solver.Translate((stepRoot - m_stepRootPosition) * follow);
-            m_stepRootPosition = stepRoot;
-
-            m_solver.Step(fixedDt, t);
-            m_accumulator -= fixedDt;
-            ++steps;
-        }
-
-        /// Не даём копиться отставанию, если кадр был слишком долгим
-        if (steps == m_maxStepsPerFrame && m_accumulator >= fixedDt) {
-            m_accumulator = 0.f;
-            m_stepRootPosition = rootPosition;
-            m_solver.SyncTargetToFrame();
+        else {
+            /// Шаг привязан к кадру: симулируется ровно dt, и частицы оказываются в том же моменте, что и поза кадра.
+            /// С фиксированным шагом частица и поза относились к разным моментам, и при частоте кадров выше
+            /// частоты шагов это давало дребезг, который ни интерполяция, ни экстраполяция не убирали
+            m_solver.Step(dt, rootDelta * (1.f - SR_CLAMP01(m_inertia)));
         }
 
         m_prevCollisionShapes = m_solver.GetCollisionShapes();
-
-        /// Доля пути до следующего шага, вывод интерполируется между двумя последними шагами
-        m_outputAlpha = m_accumulator / fixedDt;
 
         if (m_mode == BoneDynamicsMode::Jiggle) {
             ApplyJiggle();
@@ -507,7 +488,7 @@ namespace SR_PHYSICS_NS {
                 /// Здесь в кости либо свежая поза аниматора, либо восстановленная поза покоя
                 bone.restTranslation = pTransform->GetTranslation();
 
-                const SR_MATH_NS::FVector3 globalOffset = m_solver.GetInterpolatedOffset(bone.particle, m_outputAlpha) * weight;
+                const SR_MATH_NS::FVector3 globalOffset = (particle.position - particle.animPosition) * weight;
 
                 /// Смещение переводим в пространство родителя с учётом его масштаба
                 SR_MATH_NS::FVector3 localOffset = globalOffset;
@@ -551,12 +532,8 @@ namespace SR_PHYSICS_NS {
                 const SR_MATH_NS::Quaternion globalRotation = pTransform->GetGlobalRotation();
                 const SR_MATH_NS::FVector3 bonePosition = pTransform->GetGlobalTranslation();
 
-                /// Частица шага привязана к позе, интерполированной от прошлого кадра, поэтому переносим её смещение
-                /// на позу текущего кадра, иначе цепочка дёргается в кадрах с разным числом шагов
-                const SR_MATH_NS::FVector3 childPosition = particles[childParticle].animPosition + m_solver.GetInterpolatedOffset(childParticle, m_outputAlpha);
-
                 const SR_MATH_NS::FVector3 currentDir = globalRotation * bone.localDirection;
-                const SR_MATH_NS::FVector3 simDir = childPosition - bonePosition;
+                const SR_MATH_NS::FVector3 simDir = particles[childParticle].position - bonePosition;
 
                 if (currentDir.LengthSq() < SR_EPSILON || simDir.LengthSq() < SR_EPSILON) {
                     continue;
@@ -592,9 +569,8 @@ namespace SR_PHYSICS_NS {
         const SR_MATH_NS::FColor particleColor = SR_MATH_NS::FColor(0, 200, 255, 255) / 255.f;
         const SR_MATH_NS::FColor lineColor = SR_MATH_NS::FColor(255, 255, 255, 255) / 255.f;
 
-        /// Позиция, которую получила кость: поза кадра плюс интерполированное смещение, в мировых координатах
-        auto&& worldPosition = [this, &particles](uint32_t index) {
-            return particles[index].animPosition + m_solver.GetInterpolatedOffset(index, m_outputAlpha);
+        auto&& worldPosition = [&particles](uint32_t index) {
+            return particles[index].position;
         };
 
         for (uint32_t i = 0; i < particles.size(); ++i) {

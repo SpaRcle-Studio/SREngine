@@ -66,17 +66,8 @@ namespace SR_PHYSICS_NS {
             particle.prevPosition = particle.animPosition;
             particle.prevAnimPosition = particle.animPosition;
             particle.stepAnimPosition = particle.animPosition;
-            particle.lastStepPosition = particle.animPosition;
-            particle.lastStepAnimPosition = particle.animPosition;
             particle.velocity = SR_MATH_NS::FVector3::Zero();
         }
-    }
-
-    SR_MATH_NS::FVector3 XPBDSolver::GetInterpolatedOffset(const uint32_t index, const float_t alpha) const {
-        auto&& particle = m_particles[index];
-        const SR_MATH_NS::FVector3 lastOffset = particle.lastStepPosition - particle.lastStepAnimPosition;
-        const SR_MATH_NS::FVector3 offset = particle.position - particle.stepAnimPosition;
-        return lastOffset + (offset - lastOffset) * SR_CLAMP01(alpha);
     }
 
     void XPBDSolver::SyncTargetToFrame() {
@@ -89,47 +80,43 @@ namespace SR_PHYSICS_NS {
         }
     }
 
-    void XPBDSolver::Translate(const SR_MATH_NS::FVector3& delta) {
-        for (auto&& particle : m_particles) {
-            if (particle.invMass == 0.f) {
-                continue;
-            }
-            particle.position += delta;
-            particle.prevPosition += delta;
-        }
-    }
-
-    void XPBDSolver::Step(const float_t dt, const float_t t) {
+    void XPBDSolver::Step(const float_t dt, const SR_MATH_NS::FVector3& follow) {
         SR_TRACY_ZONE;
 
         if (dt <= 0.f || m_particles.empty()) {
             return;
         }
 
-        const uint32_t subSteps = SR_MAX(1u, m_params.subSteps);
-        const float_t h = dt / static_cast<float_t>(subSteps);
-        const float_t stepT = SR_CLAMP01(t);
-
-        for (auto&& particle : m_particles) {
-            particle.lastStepPosition = particle.position;
-            particle.lastStepAnimPosition = particle.stepAnimPosition;
+        /// Шаг привязан к кадру: симулируется ровно его время, поэтому частицы всегда в том же моменте,
+        /// что и анимированная поза. Число подшагов зависит от длины кадра, длина подшага ограничена сверху
+        const float_t maxSubStepTime = SR_MAX(m_params.maxSubStepTime, 0.0001f);
+        const float_t subStepsExact = dt / maxSubStepTime;
+        uint32_t subSteps = static_cast<uint32_t>(subStepsExact);
+        if (static_cast<float_t>(subSteps) < subStepsExact) {
+            ++subSteps;
         }
+        subSteps = SR_CLAMP(subSteps, 1u, SR_MAX(1u, m_params.maxSubSteps));
+        const float_t h = dt / static_cast<float_t>(subSteps);
+        const SR_MATH_NS::FVector3 followStep = follow / static_cast<float_t>(subSteps);
 
         for (uint32_t i = 0; i < subSteps; ++i) {
-            const float_t subFrom = stepT * static_cast<float_t>(i) / static_cast<float_t>(subSteps);
-            const float_t subTo = stepT * static_cast<float_t>(i + 1) / static_cast<float_t>(subSteps);
-            UpdateStepTarget(subFrom, subTo);
+            const float_t from = static_cast<float_t>(i) / static_cast<float_t>(subSteps);
+            const float_t to = static_cast<float_t>(i + 1) / static_cast<float_t>(subSteps);
+            UpdateStepTarget(from, to);
+
+            /// Сдвиг вместе с историей: частица переносится, но её скорость не меняется
+            for (auto&& particle : m_particles) {
+                if (particle.invMass != 0.f) {
+                    particle.position += followStep;
+                    particle.prevPosition += followStep;
+                }
+            }
+
             SubStep(h);
         }
 
-        /// Цель на конце этого шага - начало интерполяции следующего, так цель непрерывна во времени
-        for (auto&& particle : m_particles) {
-            particle.prevAnimPosition = particle.stepAnimPosition;
-        }
-        for (auto&& shape : m_collisionShapes) {
-            shape.prevA = shape.stepA;
-            shape.prevB = shape.stepB;
-        }
+        /// Цель этого кадра - начало интерполяции следующего
+        SyncTargetToFrame();
     }
 
     void XPBDSolver::UpdateStepTarget(const float_t from, const float_t to) {
