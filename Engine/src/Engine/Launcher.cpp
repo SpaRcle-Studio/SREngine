@@ -86,7 +86,7 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::String command =
             git2path.ToStringRef() + " clone https://github.com/SpaRcle-Studio/SRE2R " +
             cachePath.Concat("SRE2R").ToStringRef() +
-            " -b release/0.0.7 --depth 1";
+            " -b release/{} --depth 1"_format(SR_ENGINE_VERSION);
 
         SR_SYSTEM_LOG("Launcher::CloneResources() : cloning repository...\n" + command);
 

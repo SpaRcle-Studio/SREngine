@@ -1144,15 +1144,16 @@ namespace SR_CORE_GUI_NS {
 
     void EditorGUI::InstallOrUpdateSamples() {
         auto&& fullPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(SR_SAMPLES_PATH);
+        SR_UTILS_NS::VFS::Instance().ResolvePath(fullPath, SR_UTILS_NS::FileMode::Write);
 
         const auto repoUrl = "https://github.com/SpaRcle-Studio/SREngineSampleResources";
 
         if (fullPath.IsDir()) {
             /// Если нету гита, то сам виноват.
         #ifdef SR_WIN32
-            std::string command = "{}: && cd {} && git pull -r --autostash"_format(fullPath[0], fullPath);
+            auto&& command = "{}: && cd {} && git pull -r --autostash"_format(fullPath[0], fullPath);
         #else
-            std::string command = "cd {} && git pull -r --autostash"_format(fullPath);
+            auto&& command = "cd {} && git pull -r --autostash"_format(fullPath);
         #endif
             SR_SYSTEM_LOG("EditorGUI::InstallOrUpdateSamples() : pulling repository...\n\tCommand: " + command);
             system(command.c_str());
@@ -1163,7 +1164,9 @@ namespace SR_CORE_GUI_NS {
         #else
             auto&& gitPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Utilities/git2");
         #endif
-            std::string command = "{} clone {} {} --depth 1"_format(gitPath, repoUrl, fullPath);
+            SR_UTILS_NS::VFS::Instance().ResolvePath(gitPath, SR_UTILS_NS::FileMode::Read);
+
+            auto&& command = "{} clone {} {} --depth 1"_format(gitPath, repoUrl, fullPath);
             SR_SYSTEM_LOG("EditorGUI::InstallOrUpdateSamples() : cloning repository...\n\tCommand: " + command);
             system(command.c_str());
         }

@@ -10,6 +10,7 @@ on:
       - master
       - dev
       - features/*
+      - release/*
 
   pull_request:
     paths-ignore:
@@ -19,6 +20,7 @@ on:
       - master
       - dev
       - features/*
+      - release/*
 
 jobs:
   Main:
@@ -101,20 +103,44 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Delete existing dev-nightly release and tag
+      - name: Get engine version
+        shell: bash
         run: |
-          gh release delete dev-nightly --yes 2>/dev/null || true
-          git push origin :refs/tags/dev-nightly 2>/dev/null || true
+          VERSION=$(python3 - <<'PY'
+          import re
+          from pathlib import Path
+
+          text = Path("CMakeLists.txt").read_text(encoding="utf-8")
+          match = re.search(
+              r'\bproject\s*\(\s*SREngine\b[\s\S]*?\bVERSION\s+(\d+\.\d+\.\d+)',
+              text,
+              re.IGNORECASE
+          )
+
+          if not match:
+              raise SystemExit("Cannot find SREngine version in CMakeLists.txt")
+
+          print(match.group(1))
+          PY
+          )
+
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+          echo "RELEASE_TAG=v$VERSION" >> "$GITHUB_ENV"
+
+      - name: Delete existing dev release and tag
+        run: |
+          gh release delete dev --yes 2>/dev/null || true
+          git push origin :refs/tags/dev 2>/dev/null || true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create tag dev-nightly
+      - name: Create tag dev
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git tag -d dev-nightly 2>/dev/null || true
-          git tag dev-nightly ${{ github.sha }}
-          git push origin dev-nightly
+          git tag -d dev 2>/dev/null || true
+          git tag dev ${{ github.sha }}
+          git push origin dev
 
       - name: Download Windows Release artifact
         uses: actions/download-artifact@v4
@@ -153,37 +179,169 @@ jobs:
           mkdir -p release
           
           WIN_EXE=$(find artifacts/win -type f -name "*.exe" | head -n 1)
-          cp "$WIN_EXE" release/SREngine_v1.0.0-dev_windows.x86_64.exe
+          cp "$WIN_EXE" release/SREngine_v${VERSION}-dev_windows.x86_64.exe
                
           LINUX_BIN=$(find artifacts/linux -type f -name "*-packed" | head -n 1)
-          cp "$LINUX_BIN" release/SREngine_v1.0.0-dev_linux.x86_64
-          chmod +x release/SREngine_v1.0.0-dev_linux.x86_64
+          cp "$LINUX_BIN" release/SREngine_v${VERSION}-dev_linux.x86_64
+          chmod +x release/SREngine_v${VERSION}-dev_linux.x86_64
           
           # В каждом артефакте по 2 apk (arch-specific и universal) — берём только arch-specific
           ANDROID_ARM64=$(find artifacts/android/arm64-v8a -type f -name "*arm64*v8a*.apk" 2>/dev/null | head -n 1)
           ANDROID_X64=$(find artifacts/android/x86_64 -type f -name "*x86_64*.apk" 2>/dev/null | head -n 1)
           
-          cp "$ANDROID_ARM64" release/SREngine_v1.0.0-dev_android.arm64-v8a.apk
-          cp "$ANDROID_X64" release/SREngine_v1.0.0-dev_android.x86_64.apk
+          cp "$ANDROID_ARM64" release/SREngine_v${VERSION}-dev_android.arm64-v8a.apk
+          cp "$ANDROID_X64" release/SREngine_v${VERSION}-dev_android.x86_64.apk
 
           EMSCRIPTEN_ZIP=$(find artifacts/emscripten -type f -name "*.zip" | head -n 1)
           if [ -z "$EMSCRIPTEN_ZIP" ]; then
             echo "Emscripten zip not found in artifacts/emscripten"
             exit 1
           fi
-          cp "$EMSCRIPTEN_ZIP" release/SREngine_v1.0.0-dev_emscripten.zip
+          cp "$EMSCRIPTEN_ZIP" release/SREngine_v${VERSION}-dev_emscripten.zip
           
           ls -la release
 
       - name: Create or update release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: dev-nightly
-          name: "SpaRcle Engine 1.0.0-dev"
+          tag_name: dev
+          name: "SpaRcle Engine ${{ env.VERSION }}"
           body: |
             Auto-built from branch **dev** at ${{ github.sha }}
             Commit: ${{ github.event.head_commit.message }}
           files: release/*
           overwrite: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  PublishStableRelease:
+    name: Publish Stable Release.
+    if: >-
+      ${{
+        startsWith(github.ref_name, 'release/') &&
+        github.event_name == 'push' &&
+        needs.TestsWindowsJob.result == 'success' &&
+        needs.TestsLinuxJob.result == 'success' &&
+        needs.BuildAndroidJob.result == 'success' &&
+        needs.BuildEmscriptenJob.result == 'success'
+      }}
+    needs:
+      - PostBuild
+      - TestsWindowsJob
+      - TestsLinuxJob
+      - BuildAndroidJob
+      - BuildEmscriptenJob
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get engine version
+        shell: bash
+        run: |
+          VERSION=$(python3 - <<'PY'
+          import re
+          from pathlib import Path
+
+          text = Path("CMakeLists.txt").read_text(encoding="utf-8")
+          match = re.search(
+              r'\bproject\s*\(\s*SREngine\b[\s\S]*?\bVERSION\s+(\d+\.\d+\.\d+)',
+              text,
+              re.IGNORECASE
+          )
+
+          if not match:
+              raise SystemExit("Cannot find SREngine version in CMakeLists.txt")
+
+          print(match.group(1))
+          PY
+          )
+
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+          echo "RELEASE_TAG=v$VERSION" >> "$GITHUB_ENV"
+
+      - name: Download Windows Release artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: "Windows Release SpaRcle Engine"
+          path: artifacts/win
+
+      - name: Download Linux Release artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: "Linux Release gcc NoUnity SpaRcle Engine"
+          path: artifacts/linux
+
+      - name: Download Android Release artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: "Android Release SpaRcle Engine arm64-v8a"
+          path: artifacts/android/arm64-v8a
+
+      - name: Download Android x86_64 artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: "Android Release SpaRcle Engine x86_64"
+          path: artifacts/android/x86_64
+
+      - name: Download Emscripten Release artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: "Emscripten Release SpaRcle Engine"
+          path: artifacts/emscripten
+
+      - name: Prepare release files
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p release
+
+          WIN_EXE=$(find artifacts/win -type f -name "*.exe" -print -quit)
+          LINUX_BIN=$(find artifacts/linux -type f -name "*-packed" -print -quit)
+          ANDROID_ARM64=$(find artifacts/android/arm64-v8a -type f -name "*arm64*v8a*.apk" -print -quit)
+          ANDROID_X64=$(find artifacts/android/x86_64 -type f -name "*x86_64*.apk" -print -quit)
+          EMSCRIPTEN_ZIP=$(find artifacts/emscripten -type f -name "*.zip" -print -quit)
+
+          test -n "$WIN_EXE"
+          test -n "$LINUX_BIN"
+          test -n "$ANDROID_ARM64"
+          test -n "$ANDROID_X64"
+          test -n "$EMSCRIPTEN_ZIP"
+
+          cp "$WIN_EXE" "release/SREngine_v${VERSION}_windows.x86_64.exe"
+          cp "$LINUX_BIN" "release/SREngine_v${VERSION}_linux.x86_64"
+          chmod +x "release/SREngine_v${VERSION}_linux.x86_64"
+          cp "$ANDROID_ARM64" "release/SREngine_v${VERSION}_android.arm64-v8a.apk"
+          cp "$ANDROID_X64" "release/SREngine_v${VERSION}_android.x86_64.apk"
+          cp "$EMSCRIPTEN_ZIP" "release/SREngine_v${VERSION}_emscripten.zip"
+
+      - name: Update release tag
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git tag -f "$RELEASE_TAG" "${{ github.sha }}"
+          git push origin "refs/tags/$RELEASE_TAG" --force
+
+      - name: Create or update stable release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.RELEASE_TAG }}
+          name: "SpaRcle Engine ${{ env.VERSION }}"
+          target_commitish: ${{ github.sha }}
+          body: |
+            SpaRcle Engine ${{ env.VERSION }}
+            Commit: ${{ github.sha }}
+          files: release/*
+          overwrite: true
+          prerelease: false
+          make_latest: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

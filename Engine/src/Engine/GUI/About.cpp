@@ -20,7 +20,7 @@ namespace SR_CORE_GUI_NS {
 
     void About::Draw() {
         if (SR_GRAPH_GUI_NS::Immediate::BeginTabBar("About")) {
-            SR_GRAPH_GUI_NS::Immediate::Text("SpaRcle Engine v0.0.7");
+            SR_GRAPH_GUI_NS::Immediate::Text("SpaRcle Engine v%s", SR_ENGINE_VERSION);
 
             SR_GRAPH_GUI_NS::Immediate::Separator();
             SR_GRAPH_GUI_NS::Immediate::Separator();
@@ -37,7 +37,7 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::Text("Made thanks to the following libraries: ");
             SR_GRAPH_GUI_NS::Immediate::TextWrapped("    glm, GLFW, GLEW, glad, Bullet3, PhysX, Box2D, Dear ImGui, tinyobjloader, stbi, json, Assimp");
             SR_GRAPH_GUI_NS::Immediate::Separator();
-            SR_GRAPH_GUI_NS::Immediate::Text("Build Version: 0.0.7");
+            SR_GRAPH_GUI_NS::Immediate::Text("Build Version: %s", SR_ENGINE_VERSION);
 
         #ifdef SR_COMMON_GIT_METADATA
             static std::string metadata;
