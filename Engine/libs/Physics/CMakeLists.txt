@@ -175,15 +175,16 @@ else()
     target_link_libraries(Physics PUBLIC Utils)
 
     SR_COPY_SHARED_MODULE_TO_EXECUTABLE_FOLDER(Physics)
-    SR_COPY_STATIC_LIBRARY_TO_LIBRARY_FOLDER(Physics)
 endif()
+
+SR_COPY_STATIC_LIBRARY_TO_LIBRARY_FOLDER(Physics)
 
 if (SR_PHYSICS_DLL_EXPORTS)
     message("Physics will be using DLL exports")
     target_compile_definitions(Physics PUBLIC SR_PHYSICS_DLL_EXPORTS)
 endif()
 
-target_link_libraries(Physics PUBLIC ${SR_PHYSICS_LINK_LIBRARIES})
+target_link_libraries(Physics PRIVATE ${SR_PHYSICS_LINK_LIBRARIES})
 
 target_include_directories(Physics PUBLIC inc)
 target_include_directories(Physics PUBLIC libs)

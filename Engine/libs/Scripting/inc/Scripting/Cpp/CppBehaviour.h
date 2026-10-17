@@ -14,7 +14,7 @@
 
 namespace SR_SCRIPTING_NS {
     /// @noCopyable @noMovable
-    class CppBehaviour : public SR_UTILS_NS::Serializable, public SR_HTYPES_NS::SharedPtr<CppBehaviour>, public SR_UTILS_NS::NonCopyable {
+    class SR_SCRIPTING_DLL_API CppBehaviour : public SR_UTILS_NS::Serializable, public SR_HTYPES_NS::SharedPtr<CppBehaviour>, public SR_UTILS_NS::NonCopyable {
         SR_CLASS()
         using Super = SR_HTYPES_NS::SharedPtr<CppBehaviour>;
     public:

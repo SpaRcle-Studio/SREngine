@@ -127,20 +127,20 @@ jobs:
           echo "VERSION=$VERSION" >> "$GITHUB_ENV"
           echo "RELEASE_TAG=v$VERSION" >> "$GITHUB_ENV"
 
-      - name: Delete existing dev release and tag
+      - name: Delete existing dev-latest release and tag
         run: |
-          gh release delete dev --yes 2>/dev/null || true
-          git push origin :refs/tags/dev 2>/dev/null || true
+          gh release delete dev-latest --yes 2>/dev/null || true
+          git push origin :refs/tags/dev-latest 2>/dev/null || true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create tag dev
+      - name: Create tag dev-latest
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git tag -d dev 2>/dev/null || true
-          git tag dev ${{ github.sha }}
-          git push origin dev
+          git tag -d dev-latest 2>/dev/null || true
+          git tag dev-latest ${{ github.sha }}
+          git push origin dev-latest
 
       - name: Download Windows Release artifact
         uses: actions/download-artifact@v4
@@ -204,7 +204,7 @@ jobs:
       - name: Create or update release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: dev
+          tag_name: dev-latest
           name: "SpaRcle Engine ${{ env.VERSION }}"
           body: |
             Auto-built from branch **dev** at ${{ github.sha }}

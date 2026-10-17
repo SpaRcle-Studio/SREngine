@@ -24,15 +24,16 @@ else()
         target_compile_options(ImmediateGUI PRIVATE -fPIC)
 
         if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-            target_link_libraries(ImmediateGUI atomic)
+            target_link_libraries(ImmediateGUI PRIVATE atomic)
         endif()
     endif()
 
-    target_link_libraries(ImmediateGUI Utils)
+    target_link_libraries(ImmediateGUI PRIVATE Utils)
 
     SR_COPY_SHARED_MODULE_TO_EXECUTABLE_FOLDER(ImmediateGUI)
-    SR_COPY_STATIC_LIBRARY_TO_LIBRARY_FOLDER(ImmediateGUI)
 endif()
+
+SR_COPY_STATIC_LIBRARY_TO_LIBRARY_FOLDER(ImmediateGUI)
 
 define_property(GLOBAL PROPERTY SR_IMMEDIATE_GUI_INCLUDE_DIRECTORIES
     BRIEF_DOCS "Contains linkable libraries"
@@ -66,7 +67,7 @@ if (SR_RENDER_USE_VULKAN)
     find_package(Vulkan REQUIRED)
     target_include_directories(ImmediateGUI PRIVATE ${Vulkan_INCLUDE_DIRS})
     if (NOT SR_IMMEDIATE_GUI_STATIC_LIBRARY)
-        target_link_libraries(ImmediateGUI ${Vulkan_LIBRARIES})
+        target_link_libraries(ImmediateGUI PRIVATE ${Vulkan_LIBRARIES})
     endif()
 endif()
 

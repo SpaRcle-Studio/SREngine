@@ -230,6 +230,27 @@ namespace SR_SCRIPTING_NS {
             customArgs += "/DTRACY_ON_DEMAND ";
             customArgs += "/DTRACY_ENABLE ";
         #endif
+        #ifdef SR_COMMON_STATIC_LIBRARY
+            customArgs += "/DSR_COMMON_STATIC_LIBRARY ";
+        #endif
+        #ifdef SR_ENGINE_STATIC_LIBRARY
+            customArgs += "/DSR_ENGINE_STATIC_LIBRARY ";
+        #endif
+        #ifdef SR_SCRIPTING_STATIC_LIBRARY
+            customArgs += "/DSR_SCRIPTING_STATIC_LIBRARY ";
+        #endif
+        #ifdef SR_PHYSICS_STATIC_LIBRARY
+            customArgs += "/DSR_PHYSICS_STATIC_LIBRARY ";
+        #endif
+        #ifdef SR_GRAPHICS_STATIC_LIBRARY
+            customArgs += "/DSR_GRAPHICS_STATIC_LIBRARY ";
+        #endif
+        #ifdef SR_IMMEDIATE_GUI_STATIC_LIBRARY
+            customArgs += "/DSR_IMMEDIATE_GUI_STATIC_LIBRARY ";
+        #endif
+        #ifdef SR_ENGINE_USE_MODULAR_BUILD
+            customArgs += "/DSR_ENGINE_USE_MODULAR_BUILD ";
+        #endif
         }
         else {
         #ifdef SR_THREADS_ALLOWED
@@ -239,6 +260,27 @@ namespace SR_SCRIPTING_NS {
             customArgs += "-DSR_TRACY_ENABLE ";
             customArgs += "-DTRACY_ON_DEMAND ";
             customArgs += "-DTRACY_ENABLE ";
+        #endif
+        #ifdef SR_COMMON_STATIC_LIBRARY
+            customArgs += "-DSR_COMMON_STATIC_LIBRARY ";
+        #endif
+        #ifdef SR_ENGINE_STATIC_LIBRARY
+            customArgs += "-DSR_ENGINE_STATIC_LIBRARY ";
+        #endif
+        #ifdef SR_SCRIPTING_STATIC_LIBRARY
+            customArgs += "-DSR_SCRIPTING_STATIC_LIBRARY ";
+        #endif
+        #ifdef SR_PHYSICS_STATIC_LIBRARY
+            customArgs += "-DSR_PHYSICS_STATIC_LIBRARY ";
+        #endif
+        #ifdef SR_GRAPHICS_STATIC_LIBRARY
+            customArgs += "-DSR_GRAPHICS_STATIC_LIBRARY ";
+        #endif
+        #ifdef SR_IMMEDIATE_GUI_STATIC_LIBRARY
+            customArgs += "-DSR_IMMEDIATE_GUI_STATIC_LIBRARY ";
+        #endif
+        #ifdef SR_ENGINE_USE_MODULAR_BUILD
+            customArgs += "-DSR_ENGINE_USE_MODULAR_BUILD ";
         #endif
 
             customArgs += "-DFMT_HEADER_ONLY ";
@@ -262,9 +304,11 @@ namespace SR_SCRIPTING_NS {
                     if (context.isShared) {
                         customArgs += context.isDebug ? "/LDd " : "/LD ";
                     }
-                    else {
-                        customArgs += context.isDebug ? "/MTd " : "/LD ";
-                    }
+                #ifdef SR_ENGINE_USE_MODULAR_BUILD
+                    customArgs += context.isDebug ? "/MTd " : "/MT ";
+                #else
+                    customArgs += context.isDebug ? "/MDd " : "/MD ";
+                #endif
                 }
                 else {
                     customArgs += "-DWIN32 ";
@@ -357,20 +401,37 @@ namespace SR_SCRIPTING_NS {
             sourceFiles += " \"{}/uuid.lib\" "_format(windowsKitsUmLibs);
 
             if (context.isDebug) {
-                sourceFiles += " \"{}/libconcrtd.lib\" "_format(msvcLibs);
+            #ifdef SR_ENGINE_USE_MODULAR_BUILD
                 sourceFiles += " \"{}/libcpmtd.lib\" "_format(msvcLibs);
+
+                sourceFiles += " \"{}/libucrtd.lib\" "_format(windowsKitsUcrtLibs);
+            #else
+                sourceFiles += " \"{}/VCOMPD.lib\" "_format(msvcLibs);
+                sourceFiles += " \"{}/msvcprtd.lib\" "_format(msvcLibs);
+                sourceFiles += " \"{}/MSVCRTD.lib\" "_format(msvcLibs);
+                sourceFiles += " \"{}/vcruntimed.lib\" "_format(msvcLibs);
+            #endif
+
+                sourceFiles += " \"{}/libconcrtd.lib\" "_format(msvcLibs);
                 sourceFiles += " \"{}/LIBCMTD.lib\" "_format(msvcLibs);
                 sourceFiles += " \"{}/libvcruntimed.lib\" "_format(msvcLibs);
 
-                sourceFiles += " \"{}/libucrtd.lib\" "_format(windowsKitsUcrtLibs);
             }
             else {
-                sourceFiles += " \"{}/libconcrt.lib\" "_format(msvcLibs);
+            #ifdef SR_ENGINE_USE_MODULAR_BUILD
                 sourceFiles += " \"{}/libcpmt.lib\" "_format(msvcLibs);
-                sourceFiles += " \"{}/LIBCMT.lib\" "_format(msvcLibs);
-                sourceFiles += " \"{}/libvcruntime.lib\" "_format(msvcLibs);
 
                 sourceFiles += " \"{}/libucrt.lib\" "_format(windowsKitsUcrtLibs);
+            #else
+                sourceFiles += " \"{}/VCOMP.lib\" "_format(msvcLibs);
+                sourceFiles += " \"{}/msvcprt.lib\" "_format(msvcLibs);
+                sourceFiles += " \"{}/MSVCRT.lib\" "_format(msvcLibs);
+                sourceFiles += " \"{}/vcruntime.lib\" "_format(msvcLibs);
+            #endif
+
+                sourceFiles += " \"{}/libconcrt.lib\" "_format(msvcLibs);
+                sourceFiles += " \"{}/LIBCMT.lib\" "_format(msvcLibs);
+                sourceFiles += " \"{}/libvcruntime.lib\" "_format(msvcLibs);
             }
         }
         else {
@@ -451,28 +512,14 @@ namespace SR_SCRIPTING_NS {
             return true;
         }
 
-        const static std::vector<std::string> libs = {
-        #ifndef SR_ENGINE_STATIC_LIBRARY
+        const static SR_UTILS_NS::Vector<SR_UTILS_NS::StringView> libs = {
             "Engine",
-        #endif
-        #ifndef SR_COMMON_STATIC_LIBRARY
             "Utils",
-        #endif
-        #ifndef SR_GRAPHICS_STATIC_LIBRARY
             "Graphics",
-        #endif
-        #ifndef SR_SCRIPTING_STATIC_LIBRARY
             "Scripting",
-        #endif
-        #ifndef SR_IMMEDIATE_GUI_STATIC_LIBRARY
             "ImmediateGUI",
-        #endif
-        #ifndef SR_AUDIO_STATIC_LIBRARY
             "Audio",
-        #endif
-        #ifndef SR_PHYSICS_STATIC_LIBRARY
             "Physics",
-        #endif
         };
 
         auto&& libDir = SR_PLATFORM_NS::GetApplicationDirectory().GetPrevious().Concat("Lib");

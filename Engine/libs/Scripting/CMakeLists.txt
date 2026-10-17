@@ -31,8 +31,9 @@ else()
     target_link_libraries(Scripting Utils)
 
     SR_COPY_SHARED_MODULE_TO_EXECUTABLE_FOLDER(Scripting)
-    SR_COPY_STATIC_LIBRARY_TO_LIBRARY_FOLDER(Scripting)
 endif()
+
+SR_COPY_STATIC_LIBRARY_TO_LIBRARY_FOLDER(Scripting)
 
 if (SR_SCRIPTING_DLL_EXPORTS)
     message("Scripting will be using DLL exports")

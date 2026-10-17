@@ -122,8 +122,9 @@ else()
     endif()
 
     SR_COPY_SHARED_MODULE_TO_EXECUTABLE_FOLDER(Engine)
-    SR_COPY_STATIC_LIBRARY_TO_LIBRARY_FOLDER(Engine)
 endif()
+
+SR_COPY_STATIC_LIBRARY_TO_LIBRARY_FOLDER(Engine)
 
 if (SR_ENGINE_DLL_EXPORTS)
     message("Engine will be using DLL exports")

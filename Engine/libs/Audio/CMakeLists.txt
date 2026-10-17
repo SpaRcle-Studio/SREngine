@@ -105,8 +105,9 @@ else()
     target_link_libraries(Audio PUBLIC Utils)
 
     SR_COPY_SHARED_MODULE_TO_EXECUTABLE_FOLDER(Audio)
-    SR_COPY_STATIC_LIBRARY_TO_LIBRARY_FOLDER(Audio)
 endif()
+
+SR_COPY_STATIC_LIBRARY_TO_LIBRARY_FOLDER(Audio)
 
 if (SR_AUDIO_DLL_EXPORTS)
     message("Audio will be using DLL exports")
