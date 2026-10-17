@@ -205,7 +205,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: dev-latest
-          name: "SpaRcle Engine ${{ env.VERSION }}"
+          name: "SpaRcle Engine ${{ env.VERSION }}-dev"
           body: |
             Auto-built from branch **dev** at ${{ github.sha }}
             Commit: ${{ github.event.head_commit.message }}
