@@ -14,4 +14,11 @@ namespace SR_CORE_NS {
             pTheme->Apply();
         }
     }
+
+    bool EditorPackage::operator==(const EditorPackage& other) const noexcept {
+        return name == other.name
+            && description == other.description
+            && url == other.url
+            && dependencies == other.dependencies;
+    }
 }

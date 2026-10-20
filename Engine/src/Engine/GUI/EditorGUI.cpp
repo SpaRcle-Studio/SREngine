@@ -67,24 +67,12 @@
 namespace SR_CORE_GUI_NS {
     SR_UTILS_NS::Path SR_SAMPLES_PATH = "Samples";
 
-    static SR_UTILS_NS::Path GetNewScenePath() {
-        auto&& scenePath = SR_UTILS_NS::Path(SR_WORLD_NS::Scene::NewScenePath).ConcatExt("scene");
-
-        uint64_t index = 0;
-        while (SR_WORLD_NS::Scene::IsExists(scenePath)) {
-            scenePath = SR_FORMAT("{}-{}.scene", SR_WORLD_NS::Scene::NewScenePath, index);
-            ++index;
-        }
-
-        return scenePath;
-    }
-
     static SR_UTILS_NS::Path GetNewPrefabPath() {
-        auto&& scenePath = SR_UTILS_NS::Path(SR_WORLD_NS::Scene::NewPrefabPath).ConcatExt("prefab");
+        auto&& scenePath = CoreResLoader::GetCachePath().Concat(SR_WORLD_NS::Scene::NewPrefabPath).ConcatExt("prefab");
 
         uint64_t index = 0;
-        while (SR_WORLD_NS::Scene::IsExists(scenePath)) {
-            scenePath = SR_FORMAT("{}-{}.prefab", SR_WORLD_NS::Scene::NewPrefabPath, index);
+        while (scenePath.IsExists()) {
+            scenePath = SR_FORMAT("{}-{}.prefab", CoreResLoader::GetCachePath().Concat(SR_WORLD_NS::Scene::NewPrefabPath), index);
             ++index;
         }
 
@@ -487,15 +475,9 @@ namespace SR_CORE_GUI_NS {
             return false;
         }
 
-        if (!SR_WORLD_NS::Scene::IsExists(scenePath)) {
-            SR_WARN("EditorGUI::LoadSceneFromCachedPath() : cached path is not usable! \n\tPath: {}\n\tUsing default scene.", scenePath);
-            scenePath = SR_UTILS_NS::Path(SR_WORLD_NS::Scene::NewScenePath).ConcatExt("scene");
-        }
-
-        if (!SR_WORLD_NS::Scene::IsExists(scenePath)) {
-            SR_ERROR("EditorGUI::LoadSceneFromCachedPath() : default scene does not exist! \n\tCreating new one by path: {}", scenePath);
-            m_engine->AddSceneToQueue(SR_WORLD_NS::Scene::NewScene(scenePath, SR_WORLD_NS::SceneLogicType::Asset));
-            return true;
+        if (!SR_UTILS_NS::VFS::Instance().IsExists(scenePath)) {
+            SR_WARN("EditorGUI::LoadSceneFromCachedPath() : cached path is not usable! \n\tPath: {}", scenePath);
+            return false;
         }
 
         auto&& pScene = SR_WORLD_NS::Scene::LoadScene(scenePath);
@@ -924,7 +906,7 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::Separator();
 
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem("New scene")) {
-                m_engine->AddSceneToQueue(SR_WORLD_NS::Scene::NewScene(GetNewScenePath(), SR_WORLD_NS::SceneLogicType::Asset));
+                m_engine->AddSceneToQueue(SR_WORLD_NS::Scene::NewScene(SR_WORLD_NS::SceneLogicType::Asset));
                 CacheScenePath(m_engine->GetScene()->GetPath());
             }
 
@@ -946,9 +928,7 @@ namespace SR_CORE_GUI_NS {
                 auto&& scenesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
 
                 if (auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(scenesPath.ToString(), { { "Scene", "scene,prefab" } }); !path.IsEmpty()) {
-                    path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetCachePath());
-                    path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
-
+                    SR_UTILS_NS::VFS::Instance().UnResolvePath(path);
                     if (auto&& pScene = SR_WORLD_NS::Scene::LoadScene(path)) {
                         m_engine->AddSceneToQueue(pScene);
                         CacheScenePath(path);
@@ -1143,30 +1123,31 @@ namespace SR_CORE_GUI_NS {
     }
 
     void EditorGUI::InstallOrUpdateSamples() {
-        auto&& fullPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(SR_SAMPLES_PATH);
-        SR_UTILS_NS::VFS::Instance().ResolvePath(fullPath, SR_UTILS_NS::FileMode::Write);
+        SR_UTILS_NS::Path samplesFolder = CoreResLoader::GetResPath();
+        SR_UTILS_NS::VFS::Instance().ResolvePath(samplesFolder, SR_UTILS_NS::FileMode::Write);
+        samplesFolder = samplesFolder.Concat(SR_SAMPLES_PATH);
 
         const auto repoUrl = "https://github.com/SpaRcle-Studio/SREngineSampleResources";
 
-        if (fullPath.IsDir()) {
+        if (samplesFolder.IsDir()) {
             /// Если нету гита, то сам виноват.
         #ifdef SR_WIN32
-            auto&& command = "{}: && cd {} && git pull -r --autostash"_format(fullPath[0], fullPath);
+            auto&& command = "{}: && cd {} && git pull -r --autostash"_format(samplesFolder[0], samplesFolder);
         #else
-            auto&& command = "cd {} && git pull -r --autostash"_format(fullPath);
+            auto&& command = "cd {} && git pull -r --autostash"_format(samplesFolder);
         #endif
             SR_SYSTEM_LOG("EditorGUI::InstallOrUpdateSamples() : pulling repository...\n\tCommand: " + command);
             system(command.c_str());
         }
         else {
         #ifdef SR_WIN32
-            auto&& gitPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Utilities/git2.exe");
+            auto&& gitPath = CoreResLoader::GetResPath().Concat("Engine/Utilities/git2.exe");
         #else
-            auto&& gitPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Utilities/git2");
+            auto&& gitPath = CoreResLoader::GetResPath().Concat("Engine/Utilities/git2");
         #endif
             SR_UTILS_NS::VFS::Instance().ResolvePath(gitPath, SR_UTILS_NS::FileMode::Read);
 
-            auto&& command = "{} clone {} {} --depth 1"_format(gitPath, repoUrl, fullPath);
+            auto&& command = "\"{}\" clone {} {} --depth 1"_format(gitPath, repoUrl, samplesFolder);
             SR_SYSTEM_LOG("EditorGUI::InstallOrUpdateSamples() : cloning repository...\n\tCommand: " + command);
             system(command.c_str());
         }

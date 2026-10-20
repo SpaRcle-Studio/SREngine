@@ -603,6 +603,7 @@ namespace SR_CORE_NS::GUI {
                 auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
                 if (auto&& pScene = SR_WORLD_NS::Scene::LoadScene(path)) {
                     pEngine->AddSceneToQueue(pScene);
+                    pEngine->GetEditor()->CacheScenePath(pScene->GetPath());
                 }
                 return;
             }

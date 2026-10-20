@@ -387,23 +387,12 @@ namespace SR_CORE_NS {
 
         if (m_sceneQueue.Empty()) {
             if (!m_engineScene && (m_editor && !m_editor->LoadSceneFromCachedPath())) {
-                auto&& scenePath = SR_UTILS_NS::Path(SR_WORLD_NS::Scene::NewScenePath).ConcatExt("scene");
-
-                if (SR_WORLD_NS::Scene::IsExists(scenePath)) {
-                    auto&& pScene = SR_WORLD_NS::Scene::LoadScene(scenePath);
-                    if (!pScene) {
-                        SR_ERROR("Engine::Create() : failed to load scene! Delete broken new scene\n\tPath: {}", scenePath);
-                        SR_UTILS_NS::VFS::Instance().Delete(SR_WORLD_NS::Scene::GetAbsPath(scenePath));
-                    }
-                    else {
-                        AddSceneToQueue(pScene);
-                        SR_LOG("Engine::LoadStartupScene() : startup scene loaded successfully!");
-                    }
-                }
-
-                if (m_sceneQueue.Empty()) {
-                    AddSceneToQueue(SR_WORLD_NS::Scene::NewScene(scenePath, SR_WORLD_NS::SceneLogicType::Asset));
+                if (auto&& pScene = SR_WORLD_NS::Scene::NewScene(SR_WORLD_NS::SceneLogicType::Asset)) {
+                    AddSceneToQueue(pScene);
                     SR_LOG("Engine::LoadStartupScene() : new startup scene created successfully!");
+                }
+                else {
+                    SR_ERROR("Engine::Create() : failed to create new scene!");
                 }
             }
             else {

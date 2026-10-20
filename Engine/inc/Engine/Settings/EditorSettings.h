@@ -51,6 +51,22 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::String extensions;
     };
 
+    struct EditorPackage : public SR_UTILS_NS::Serializable {
+        SR_STRUCT()
+
+        /// @property
+        SR_UTILS_NS::String name;
+        /// @property
+        SR_UTILS_NS::String description;
+        /// @property
+        SR_UTILS_NS::String url;
+        /// @property @tooltip(Names of dependencies)
+        SR_UTILS_NS::Set<SR_UTILS_NS::String> dependencies;
+
+        SR_NODISCARD bool operator==(const EditorPackage& other) const noexcept;
+
+    };
+
     class EditorSettings : public SR_UTILS_NS::Asset {
         SR_CLASS()
     public:
@@ -69,6 +85,8 @@ namespace SR_CORE_NS {
         Theme m_theme;
         /// @property
         SR_UTILS_NS::Map<EditorIcon, EditorSettingsIconInfo> m_icons;
+        /// @property
+        SR_UTILS_NS::Vector<EditorPackage> m_packages;
 
         /// @property
         bool m_debugChunks = false;
