@@ -195,3 +195,41 @@ use tabs: true
 					5-o:second
 						6-v:path
 							7-s:Editor/Textures/sound.png
+			3-a:packages
+				4-k:i
+					5-o:d
+						6-v:name
+							7-s:Mina
+						6-v:description
+							7-s:Pretty gothic 3D character model from IdaFaber. Game ready asset.
+						6-v:url
+							7-s:https://github.com
+						6-a:dependencies
+				4-k:i
+					5-o:d
+						6-v:name
+							7-s:Mechanic Girl
+						6-v:description
+							7-s:Mechanic girl 3D model from IdaFaber.
+						6-a:dependencies
+				4-k:i
+					5-o:d
+						6-v:name
+							7-s:Trees
+						6-v:description
+							7-s:Pack of many trees and flora
+						6-a:dependencies
+				4-k:i
+					5-o:d
+						6-v:name
+							7-s:Weapons
+						6-v:description
+							7-s:Pack of weapons models
+						6-a:dependencies
+				4-k:i
+					5-o:d
+						6-v:name
+							7-s:Animations Collection
+						6-v:description
+							7-s:Pack of many character animations
+						6-a:dependencies

@@ -5,7 +5,7 @@
 #ifndef SR_ENGINE_EDITORSETTINGS_H
 #define SR_ENGINE_EDITORSETTINGS_H
 
-#include <Engine/macros.h>
+#include <Engine/stdInclude.h>
 
 #include <ImmediateGUI/GUI/ImGUITheme.h>
 
@@ -77,6 +77,7 @@ namespace SR_CORE_NS {
         SR_NODISCARD const SR_UTILS_NS::Map<EditorIcon, EditorSettingsIconInfo>& GetIcons() const noexcept { return m_icons; }
         SR_NODISCARD bool IsNeedDebugChunks() const noexcept { return m_debugChunks; }
         SR_NODISCARD const Theme& GetTheme() const noexcept { return m_theme; }
+        SR_NODISCARD const SR_UTILS_NS::Vector<EditorPackage>& GetPackages() const { return m_packages; }
 
         void OnThemeChanged();
 

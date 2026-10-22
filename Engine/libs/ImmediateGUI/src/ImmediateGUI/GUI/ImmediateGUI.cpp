@@ -12,6 +12,7 @@
 #include <Utils/Resources/ResourceRef.h>
 #include <Utils/Common/StoreUtils.h>
 
+#include <Enum/ChildWindowFlags.hpp>
 #include <Enum/TreeNodeFlags.hpp>
 
 namespace SR_GRAPH_GUI_NS::Immediate {
@@ -749,6 +750,15 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         return ImGui::InputText(label, str, static_cast<ImGuiInputTextFlags>(flags));
     }
 
+    bool InputText(const char* label, SR_UTILS_NS::String* str, InputTextFlags flags) {
+        SR_TRACY_ZONE;
+        static std::string temp;
+        temp = *str;
+        const bool changed = ImGui::InputText(label, &temp, static_cast<ImGuiInputTextFlags>(flags));
+        *str = temp;
+        return changed;
+    }
+
     bool MenuItem(const char *label) {
         SR_TRACY_ZONE;
         return ImGui::MenuItem(label);
@@ -889,6 +899,14 @@ namespace SR_GRAPH_GUI_NS::Immediate {
 
     void SetMousePos(const SR_MATH_NS::FVector2& pos) {
         ImGui::GetIO().MousePos = F2ToImV2(pos);
+    }
+
+    void SetCursorScreenPos(const SR_MATH_NS::FVector2& pos) {
+        ImGui::SetCursorScreenPos(F2ToImV2(pos));
+    }
+
+    uint32_t ColorConvertFloat4ToU32(const SR_MATH_NS::FVector4& col) {
+        return ImGui::ColorConvertFloat4ToU32(F4ToImV4(col));
     }
 
     bool* GetMouseDown() {
@@ -1202,6 +1220,12 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         }
     }
 
+    void AddImage(void* pDrawList, void* pDescriptor, const SR_MATH_NS::FVector2& min, const SR_MATH_NS::FVector2& max) {
+        if (auto&& pImGuiDrawList = static_cast<ImDrawList*>(pDrawList)) {
+            pImGuiDrawList->AddImage(pDescriptor, F2ToImV2(min), F2ToImV2(max));
+        }
+    }
+
     bool IsItemClicked(MouseButton button) {
         return ImGui::IsItemClicked(static_cast<ImGuiMouseButton>(button));
     }
@@ -1213,6 +1237,10 @@ namespace SR_GRAPH_GUI_NS::Immediate {
 
     void EndDragDropSource() {
         ImGui::EndDragDropSource();
+    }
+
+    bool InvisibleButton(const char* text, const SR_MATH_NS::FVector2& size, ButtonFlags flags) {
+        return ImGui::InvisibleButton(text, F2ToImV2(size), static_cast<ImGuiButtonFlags>(flags));
     }
 
     bool BeginDragDropSource(DragDropFlags flags) {
@@ -1842,5 +1870,55 @@ namespace SR_GRAPH_GUI_NS::Immediate {
 
     bool IsEnabled() {
         return gIsImGuiEnabled;
+    }
+
+    void WarningBox(const char* text) {
+        SR_IMMEDIATE_GUI_NS::PushStyleColor(
+            SR_IMMEDIATE_GUI_NS::StyleColor::ChildBg,
+            SR_MATH_NS::FColor(40, 40, 40, 255) / 255.0f
+        );
+
+        SR_IMMEDIATE_GUI_NS::PushStyleColor(
+            SR_IMMEDIATE_GUI_NS::StyleColor::Border,
+            SR_MATH_NS::FColor(255, 180, 0, 255) / 255.0f
+        );
+
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(
+            SR_IMMEDIATE_GUI_NS::StyleVar::ChildBorderSize,
+            1.0f
+        );
+
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(
+            SR_IMMEDIATE_GUI_NS::StyleVar::WindowPadding,
+            SR_MATH_NS::FVector2(8, 6)
+        );
+
+        SR_IMMEDIATE_GUI_NS::BeginChild(
+            "##warning",
+            SR_MATH_NS::FVector2(0, 60),
+            SR_IMMEDIATE_GUI_NS::ChildWindowFlags::Borders
+        );
+
+        static SR_UTILS_NS::String warningText;
+        warningText = SR_FORMAT("⚠ {}", text);
+        const auto textSize = SR_IMMEDIATE_GUI_NS::CalcTextSize(warningText.c_str());
+        const auto avail = SR_IMMEDIATE_GUI_NS::GetContentRegionAvail();
+        const auto cursor = SR_IMMEDIATE_GUI_NS::GetCursorPos();
+
+        SR_IMMEDIATE_GUI_NS::SetCursorPos(SR_MATH_NS::FVector2(
+            cursor.x + (avail.x - textSize.x) * 0.5f,
+            cursor.y + (avail.y - textSize.y) * 0.5f
+        ));
+
+        SR_IMMEDIATE_GUI_NS::TextColored(
+            SR_MATH_NS::FColor(255, 200, 0, 255) / 255.0f,
+            "%s",
+            warningText.c_str()
+        );
+
+        SR_IMMEDIATE_GUI_NS::EndChild();
+
+        SR_IMMEDIATE_GUI_NS::PopStyleVar(2);
+        SR_IMMEDIATE_GUI_NS::PopStyleColor(2);
     }
 }

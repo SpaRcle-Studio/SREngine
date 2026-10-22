@@ -61,6 +61,7 @@
 #include <Utils/Common/CLIManager.h>
 #include <Utils/Common/StoreUtils.h>
 #include <Utils/FileSystem/VFS.h>
+#include <Utils/Network/GitHubDownloader.h>
 
 #include <Enum/EditorIcon.hpp>
 
@@ -1127,29 +1128,8 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::VFS::Instance().ResolvePath(samplesFolder, SR_UTILS_NS::FileMode::Write);
         samplesFolder = samplesFolder.Concat(SR_SAMPLES_PATH);
 
-        const auto repoUrl = "https://github.com/SpaRcle-Studio/SREngineSampleResources";
-
-        if (samplesFolder.IsDir()) {
-            /// Если нету гита, то сам виноват.
-        #ifdef SR_WIN32
-            auto&& command = "{}: && cd {} && git pull -r --autostash"_format(samplesFolder[0], samplesFolder);
-        #else
-            auto&& command = "cd {} && git pull -r --autostash"_format(samplesFolder);
-        #endif
-            SR_SYSTEM_LOG("EditorGUI::InstallOrUpdateSamples() : pulling repository...\n\tCommand: " + command);
-            system(command.c_str());
-        }
-        else {
-        #ifdef SR_WIN32
-            auto&& gitPath = CoreResLoader::GetResPath().Concat("Engine/Utilities/git2.exe");
-        #else
-            auto&& gitPath = CoreResLoader::GetResPath().Concat("Engine/Utilities/git2");
-        #endif
-            SR_UTILS_NS::VFS::Instance().ResolvePath(gitPath, SR_UTILS_NS::FileMode::Read);
-
-            auto&& command = "\"{}\" clone {} {} --depth 1"_format(gitPath, repoUrl, samplesFolder);
-            SR_SYSTEM_LOG("EditorGUI::InstallOrUpdateSamples() : cloning repository...\n\tCommand: " + command);
-            system(command.c_str());
-        }
+        SR_NETWORK_NS::GitHubCloneContext context;
+        context.url = "https://github.com/SpaRcle-Studio/SREngineSampleResources";
+        SR_NETWORK_NS::GitHubDownloader::CloneOrPullRepo(context, samplesFolder);
     }
 }

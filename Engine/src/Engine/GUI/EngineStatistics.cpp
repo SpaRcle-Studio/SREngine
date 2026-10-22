@@ -27,6 +27,7 @@
 #include <Utils/DebugDraw.h>
 #include <Utils/Common/HashManager.h>
 #include <Utils/CommandManager/CmdManager.h>
+#include <Utils/TaskManager/TaskManager.h>
 
 #include <Codegen/EngineStatistics.generated.hpp>
 
@@ -135,6 +136,32 @@ namespace SR_CORE_GUI_NS {
 
     void EngineStatistics::ThreadsPage() {
         if (SR_GRAPH_GUI_NS::Immediate::BeginTabItem("Threads")) {
+            if (SR_GRAPH_GUI_NS::Immediate::BeginTable("##ThreadsTable", 4)) {
+                SR_UTILS_NS::TaskManager::Instance().ForEachTask([](SR_UTILS_NS::Task& task) {
+                    SR_IMMEDIATE_GUI_NS::PushID(task.GetId());
+
+                    SR_GRAPH_GUI_NS::Immediate::TableNextRow();
+
+                    SR_GRAPH_GUI_NS::Immediate::TableSetColumnIndex(0);
+                    SR_GRAPH_GUI_NS::Immediate::Text("%i", task.GetId());
+                    SR_GRAPH_GUI_NS::Immediate::Separator();
+
+                    SR_GRAPH_GUI_NS::Immediate::TableSetColumnIndex(1);
+                    SR_GRAPH_GUI_NS::Immediate::Text("%s", task.GetDescription().c_str());
+                    SR_GRAPH_GUI_NS::Immediate::Separator();
+
+                    SR_GRAPH_GUI_NS::Immediate::TableSetColumnIndex(2);
+                    SR_GRAPH_GUI_NS::Immediate::Text("%s", SR_UTILS_NS::EnumReflector::ToStringAtom(task.GetPriority()).c_str());
+                    SR_GRAPH_GUI_NS::Immediate::Separator();
+
+                    SR_GRAPH_GUI_NS::Immediate::TableSetColumnIndex(3);
+                    SR_GRAPH_GUI_NS::Immediate::Text("%s", SR_UTILS_NS::EnumReflector::ToStringAtom(task.GetState()).c_str());
+                    SR_GRAPH_GUI_NS::Immediate::Separator();
+
+                    SR_IMMEDIATE_GUI_NS::PopID();
+                });
+                SR_GRAPH_GUI_NS::Immediate::EndTable();
+            }
             SR_GRAPH_GUI_NS::Immediate::EndTabItem();
         }
     }

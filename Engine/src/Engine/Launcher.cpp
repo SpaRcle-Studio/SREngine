@@ -11,6 +11,7 @@
 #include <Utils/Platform/Platform.h>
 #include <Utils/FileSystem/VFS.h>
 #include <Utils/Profile/TracyContext.h>
+#include <Utils/Network/GitHubDownloader.h>
 
 namespace SR_CORE_NS {
     LauncherInitStatus Launcher::InitLauncher() {
@@ -70,32 +71,19 @@ namespace SR_CORE_NS {
 
     bool Launcher::CloneResources() {
         auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-    #ifdef SR_LINUX
-        auto&& git2path = resourcesPath.Concat("Engine/Utilities/git2");
-    #elif defined(SR_WIN32)
-        auto&& git2path = resourcesPath.Concat("Engine/Utilities/git2.exe");
-    #endif
-
     #if !defined(SR_ANDROID) && !defined(SR_EMSCRIPTEN)
         auto&& cachePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
         if (!cachePath.CreateDirectories()) {
             SR_ERROR("Launcher::CloneResources() : failed to create cache directory!");
             return false;
         }
-
-        SR_UTILS_NS::String command =
-            git2path.ToStringRef() + " clone https://github.com/SpaRcle-Studio/SRE2R " +
-            cachePath.Concat("SRE2R").ToStringRef() +
-            " -b release/{} --depth 1"_format(SR_ENGINE_VERSION);
-
-        SR_SYSTEM_LOG("Launcher::CloneResources() : cloning repository...\n" + command);
-
-        system(command.c_str());
-
-        SR_UTILS_NS::Path zipPath = cachePath.Concat("SRE2R/Resources.zip");
-
-        SR_UTILS_NS::VFS::Instance().ResolvePath(zipPath, SR_UTILS_NS::FileMode::Read);
-        SR_PLATFORM_NS::Unzip(zipPath, resourcesPath);
+        SR_UTILS_NS::VFS::Instance().ResolvePath(cachePath, SR_UTILS_NS::FileMode::Write);
+        SR_NETWORK_NS::GitHubCloneContext context;
+        SR_UTILS_NS::String branch = "release/{}"_format(SR_ENGINE_VERSION);
+        context.branch = branch;
+        context.url = "https://github.com/SpaRcle-Studio/SRE2R";
+        SR_NETWORK_NS::GitHubDownloader::CloneRepo(context, cachePath.Concat("SRE2R"));
+        SR_PLATFORM_NS::Unzip(cachePath.Concat("SRE2R/Resources.zip"), resourcesPath);
     #endif
 
         return true;

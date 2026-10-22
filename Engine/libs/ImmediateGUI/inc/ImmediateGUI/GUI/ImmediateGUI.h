@@ -551,6 +551,7 @@ namespace SR_GRAPH_GUI_NS {
         SR_IMMEDIATE_GUI_DLL_API extern void BeginDisabled(bool disabled = true);
         SR_IMMEDIATE_GUI_DLL_API extern void EndDisabled();
         SR_IMMEDIATE_GUI_DLL_API extern void EndDragDropSource();
+        SR_IMMEDIATE_GUI_DLL_API extern bool InvisibleButton(const char* text, const SR_MATH_NS::FVector2& size, ButtonFlags flags = ButtonFlags());
         SR_IMMEDIATE_GUI_DLL_API extern void* GetCurrentWindow();
         SR_IMMEDIATE_GUI_DLL_API extern SR_MATH_NS::FVector2 GetWindowCursorPos(void* pWindow = nullptr);
         SR_IMMEDIATE_GUI_DLL_API extern SR_MATH_NS::FVector2 GetCursorScreenPos();
@@ -600,6 +601,8 @@ namespace SR_GRAPH_GUI_NS {
         SR_IMMEDIATE_GUI_DLL_API extern float_t GetScrollbarSize();
         SR_IMMEDIATE_GUI_DLL_API extern bool* GetMouseDown();
         SR_IMMEDIATE_GUI_DLL_API extern void SetMousePos(const SR_MATH_NS::FVector2& pos);
+        SR_IMMEDIATE_GUI_DLL_API extern void SetCursorScreenPos(const SR_MATH_NS::FVector2& pos);
+        SR_IMMEDIATE_GUI_DLL_API extern uint32_t ColorConvertFloat4ToU32(const SR_MATH_NS::FVector4& col);
         SR_IMMEDIATE_GUI_DLL_API extern SR_MATH_NS::FVector2 GetMousePos();
         SR_IMMEDIATE_GUI_DLL_API extern SR_MATH_NS::FVector2 GetContentRegionAvail();
         SR_IMMEDIATE_GUI_DLL_API extern SR_MATH_NS::FVector2 GetFramePadding();
@@ -609,8 +612,10 @@ namespace SR_GRAPH_GUI_NS {
         SR_IMMEDIATE_GUI_DLL_API extern void SetKeyboardFocusHere();
         SR_IMMEDIATE_GUI_DLL_API extern void OpenPopup(const char* str_id);
         SR_IMMEDIATE_GUI_DLL_API extern void AddText(void* pDrawList, const SR_MATH_NS::FVector2& pos, uint32_t color, const char* text);
+        SR_IMMEDIATE_GUI_DLL_API extern void AddImage(void* pDrawList, void* pDescriptor, const SR_MATH_NS::FVector2& min, const SR_MATH_NS::FVector2& max);
         SR_IMMEDIATE_GUI_DLL_API extern void CloseCurrentPopup();
         SR_IMMEDIATE_GUI_DLL_API extern bool InputText(const char* label, std::string* str, InputTextFlags flags = InputTextFlags::None);
+        SR_IMMEDIATE_GUI_DLL_API extern bool InputText(const char* label, SR_UTILS_NS::String* str, InputTextFlags flags = InputTextFlags::None);
         SR_IMMEDIATE_GUI_DLL_API extern bool InputText(const char* label, char* str, size_t strSize, InputTextFlags flags = InputTextFlags::None);
         SR_IMMEDIATE_GUI_DLL_API extern bool InputTextMultiline(const char* label, std::string* str, const SR_MATH_NS::FVector2& size, InputTextFlags flags = InputTextFlags::None);
         SR_IMMEDIATE_GUI_DLL_API extern bool BeginMenu(const char* label);
@@ -630,6 +635,7 @@ namespace SR_GRAPH_GUI_NS {
         SR_IMMEDIATE_GUI_DLL_API extern void EndListBox();
         SR_IMMEDIATE_GUI_DLL_API extern bool BeginTable(const char* str_id, int columns);
         SR_IMMEDIATE_GUI_DLL_API extern void EndTable();
+        SR_IMMEDIATE_GUI_DLL_API extern void WarningBox(const char* text);
         SR_IMMEDIATE_GUI_DLL_API extern void TableSetColumnIndex(int column_n);
         SR_IMMEDIATE_GUI_DLL_API extern bool IsMouseDragging(MouseButton button);
         SR_IMMEDIATE_GUI_DLL_API extern bool IsMouseDown(MouseButton button);

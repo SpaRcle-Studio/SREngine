@@ -28,6 +28,7 @@ namespace SR_CORE_GUI_NS {
     CreateNewProject::~CreateNewProject() {
         if (m_pVFSBackend) {
             SR_UTILS_NS::VFS::Instance().Unmount(m_pVFSBackend);
+            delete m_pVFSBackend;
         }
     }
 
@@ -211,6 +212,7 @@ namespace SR_CORE_GUI_NS {
             m_projectPath = path;
             if (m_pVFSBackend) {
                 SR_UTILS_NS::VFS::Instance().Unmount(m_pVFSBackend);
+                delete m_pVFSBackend;
             }
             m_pVFSBackend = new SR_UTILS_NS::DirectoryVFSBackend(m_projectPath);
             SR_UTILS_NS::VFS::Instance().Mount(m_projectPath, m_pVFSBackend, -10000);

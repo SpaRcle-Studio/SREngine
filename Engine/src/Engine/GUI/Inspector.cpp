@@ -86,31 +86,6 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
     }
 
-    void WarningBox(const char* text)
-    {
-        SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::ChildBg, SR_MATH_NS::FColor(40, 40, 40, 255) / 255.0f);
-        SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Border, SR_MATH_NS::FColor(255, 180, 0, 255) / 255.0f);
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ChildBorderSize, 1.0f);
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::WindowPadding, SR_MATH_NS::FVector2(8, 6));
-
-        SR_GRAPH_GUI_NS::Immediate::BeginChild(
-            "##warning",
-            SR_MATH_NS::FVector2(0, 40),
-            SR_GRAPH_GUI_NS::ChildWindowFlags::AlwaysAutoResize | SR_GRAPH_GUI_NS::ChildWindowFlags::AutoResizeX
-        );
-
-        SR_GRAPH_GUI_NS::Immediate::TextColored(
-            SR_MATH_NS::FColor(255, 200, 0, 255) / 255.0f,
-            "⚠ %s",
-            text
-        );
-
-        SR_GRAPH_GUI_NS::Immediate::EndChild();
-
-        SR_GRAPH_GUI_NS::Immediate::PopStyleVar(2);
-        SR_GRAPH_GUI_NS::Immediate::PopStyleColor(2);
-    }
-
     SR_INLINE_STATIC const SR_UTILS_NS::StringAtom editorDebugModeId = "EditorDebugMode";
 
     void Inspector::InspectGameObject() {
@@ -141,15 +116,15 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (m_sceneObject->IsPrefab()) {
-            WarningBox("Changes won't be saved");
+            SR_IMMEDIATE_GUI_NS::WarningBox("Changes won't be saved");
         }
 
         if (m_sceneObject->IsDirty() && SR_UTILS_NS::StoreUtils::User::GetBool(editorDebugModeId, false)) {
-            WarningBox("Object is dirty");
+            SR_IMMEDIATE_GUI_NS::WarningBox("Object is dirty");
         }
 
         if (m_sceneObject->HasSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave)) {
-            WarningBox("Saving is disabled for this object");
+            SR_IMMEDIATE_GUI_NS::WarningBox("Saving is disabled for this object");
         }
 
         /// --------------------------------------------------------------------------------------------------------

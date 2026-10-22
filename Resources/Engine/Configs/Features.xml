@@ -52,6 +52,7 @@
         <TextureCompression Value="true"/>
         <TextureCaching Value="true"/>
         <TextureAsyncLoad Value="true"/>
+        <ModelsAsyncLoad Value="true"/>
         <ScriptCompilation Value="true"/>
         <AutoReloadResources Value="true"/>
         <LoadDefaultGraphicsResources Value="true"/>
