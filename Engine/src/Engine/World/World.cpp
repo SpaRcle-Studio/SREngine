@@ -24,7 +24,7 @@
 #endif
 
 namespace SR_CORE_NS {
-    SR_UTILS_NS::SceneObject::Ptr World::Instance(const SR_HTYPES_NS::RawMesh* pRawMesh) {
+    SR_UTILS_NS::SceneObject::Ptr World::Instance(SR_HTYPES_NS::RawMesh* pRawMesh) {
         static SR_HTYPES_NS::Function processMaterial = [](const SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t meshId, SR_GTYPES_NS::Mesh* pMesh) {
         #ifdef SR_UTILS_ASSIMP
             const aiScene* pScene = static_cast<const aiScene*>(pRawMesh->GetAssimpScene());
@@ -51,6 +51,8 @@ namespace SR_CORE_NS {
         };
 
         std::list<SR_GTYPES_NS::SkinnedMesh::Ptr> skinnedMeshes;
+
+        pRawMesh->ForceLoad();
 
         SR_UTILS_NS::Vector<SR_UTILS_NS::GameObject::Ptr> nodesPool;
         nodesPool.resize(pRawMesh->GetSceneStructure().GetNodesCount());

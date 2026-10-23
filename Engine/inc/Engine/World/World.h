@@ -18,7 +18,7 @@ namespace SR_CORE_NS {
     class SR_CORE_DLL_API World : public SR_WORLD_NS::Scene {
         using RenderScenePtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::RenderScene>;
     public:
-        SR_UTILS_NS::SceneObject::Ptr Instance(const SR_HTYPES_NS::RawMesh* rawMesh) override;
+        SR_UTILS_NS::SceneObject::Ptr Instance(SR_HTYPES_NS::RawMesh* rawMesh) override;
         SR_NODISCARD GameObjectPtr GetMainCamera() const override;
 
     private:

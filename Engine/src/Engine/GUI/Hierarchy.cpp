@@ -313,10 +313,10 @@ namespace SR_CORE_GUI_NS {
 
                     if (SR_GRAPH_GUI_NS::Immediate::Selectable("Edit")) {
                         auto&& prefabPath = pSceneObject->GetPrefab()->GetResourcePath();
-                        if (auto&& pScene = SR_WORLD_NS::Scene::LoadScene(prefabPath)) {
+                        if (auto&& pScene = SR_WORLD_NS::Scene::LoadScene(CoreResLoader::GetResPath().Concat(prefabPath))) {
                             m_engine->SetActive(false);
                             m_engine->AddSceneToQueue(pScene);
-                            m_engine->GetEditor()->CacheScenePath(prefabPath);
+                            m_engine->GetEditor()->CacheScenePath(pScene->GetPath());
                         }
                     }
                 }
@@ -330,7 +330,7 @@ namespace SR_CORE_GUI_NS {
                         SR_UTILS_NS::SRASerializer serializer;
                         SR_WORLD_NS::ScenePrefabLogic::SaveSOAsPrefab(serializer, pSceneObject);
 
-                        if (auto&& pPrefabScene = SR_WORLD_NS::Scene::NewScene(path, SR_WORLD_NS::SceneLogicType::Prefab)) {
+                        if (auto&& pPrefabScene = SR_WORLD_NS::Scene::NewScene(CoreResLoader::GetResPath().Concat(path), SR_WORLD_NS::SceneLogicType::Prefab)) {
                             auto&& pDeserializer = serializer.CreateDeserializer();
                             pDeserializer->Detach();
                             pPrefabScene->GetLogicBase().DynamicCast<SR_WORLD_NS::ScenePrefabLogic>()->SetCustomSOData(std::move(pDeserializer));
@@ -342,7 +342,7 @@ namespace SR_CORE_GUI_NS {
                                 pSceneObject->SetPrefab(pPrefab, true);
                             }
                             else {
-                                SR_ERROR("Hierarchy::ChildContextMenu() : failed to load prefab from path: {}", path.ToString());
+                                SR_ERROR("Hierarchy::ChildContextMenu() : failed to load prefab from path: {}", path);
                             }
 
                             m_engine->AddSceneToQueue(pPrefabScene);

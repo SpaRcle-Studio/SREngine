@@ -157,9 +157,13 @@ namespace SR_PTYPES_NS {
     }
 
     void Rigidbody::AttachShape(CollisionShape* pShape) {
+        SR_TRACY_ZONE;
         if (std::ranges::find(m_shapes, pShape) != m_shapes.end()) {
             SRHalt("Rigidbody::AttachShape() : shape already attached!");
             return;
+        }
+        if (auto&& pRawMesh = pShape->GetRawMesh()) {
+            pRawMesh->ForceLoad();
         }
         m_shapes.emplace_back(pShape);
         m_isBodyDirty = true;
