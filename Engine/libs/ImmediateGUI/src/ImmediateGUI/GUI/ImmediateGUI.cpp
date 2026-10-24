@@ -1239,6 +1239,10 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         ImGui::EndDragDropSource();
     }
 
+    void SetNextItemAllowOverlap() {
+        ImGui::SetNextItemAllowOverlap();
+    }
+
     bool InvisibleButton(const char* text, const SR_MATH_NS::FVector2& size, ButtonFlags flags) {
         return ImGui::InvisibleButton(text, F2ToImV2(size), static_cast<ImGuiButtonFlags>(flags));
     }

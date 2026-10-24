@@ -14,11 +14,18 @@
 #include <Utils/Common/StringUtils.h>
 #include <Utils/FileSystem/FileDialog.h>
 #include <Utils/FileSystem/VFS.h>
+#include <Utils/FileSystem/DirectoryVFSBackend.h>
+#include <Utils/TaskManager/TaskManager.h>
+#include <Utils/Network/GitHubDownloader.h>
 
 #include <Codegen/AssetsStore.generated.hpp>
-#include <Utils/FileSystem/DirectoryVFSBackend.h>
 
 namespace SR_CORE_GUI_NS {
+    const static SR_UTILS_NS::StringAtom PackagesPathKey = "PackagesPath";
+
+    std::recursive_mutex AssetsStore::g_packagesMountMutex = {};
+    SR_UTILS_NS::Vector<AssetsStore::MountInfo> AssetsStore::g_mounts = {};
+
     AssetsStore::AssetsStore()
         : Super("Assets store")
     {
@@ -26,11 +33,28 @@ namespace SR_CORE_GUI_NS {
         m_noIconTexture = "Editor/Textures/missing.png";
     }
 
+    AssetsStore::~AssetsStore() {
+        SR_TRACY_ZONE;
+        std::atomic<bool> empty = false;
+        while (!empty) {
+            std::optional<uint64_t> taskId;
+            {
+                SR_LOCK_GUARD;
+                empty = m_installQueue.empty();
+                if (!empty) {
+                    taskId = m_installQueue.front().taskId;
+                }
+            }
+            if (taskId) {
+                SR_UTILS_NS::TaskManager::Instance().Wait(*taskId);
+            }
+        }
+    }
+
     void AssetsStore::Draw() {
-        const static SR_UTILS_NS::StringAtom packagesPathKey = "PackagesPath";
         if (SR_IMMEDIATE_GUI_NS::BeginChild("AssetList", SR_MATH_NS::FVector2(0, 0), SR_IMMEDIATE_GUI_NS::ChildWindowFlags::Borders)) {
-            bool pathIsPresent = SR_UTILS_NS::StoreUtils::User::HasString(packagesPathKey);
-            m_packagesPathTmp = pathIsPresent ? SR_UTILS_NS::StoreUtils::User::GetString(packagesPathKey) : SR_UTILS_NS::String();
+            bool pathIsPresent = SR_UTILS_NS::StoreUtils::User::HasString(PackagesPathKey);
+            m_packagesPathTmp = pathIsPresent ? SR_UTILS_NS::StoreUtils::User::GetString(PackagesPathKey) : SR_UTILS_NS::String();
 
             const float_t availX = SR_IMMEDIATE_GUI_NS::GetContentRegionAvail().x;
             const float_t buttonSize = SR_MIN(50.f, availX * 0.2f);
@@ -51,7 +75,7 @@ namespace SR_CORE_GUI_NS {
                 SR_IMMEDIATE_GUI_NS::BeginDisabled(true);
             }
 
-            if (pathIsPresent && m_packagesPathTmp != m_packagesPath) {
+            if (pathIsPresent && m_packagesPathTmp != m_packagesPath.ToStringRef()) {
                 m_packagesPath = m_packagesPathTmp;
                 m_pVFSBackend = new SR_UTILS_NS::DirectoryVFSBackend(m_packagesPath);
                 m_pVFSBackend.SetDeleter([](SR_UTILS_NS::IVFSBackend* pVFS) {
@@ -60,7 +84,7 @@ namespace SR_CORE_GUI_NS {
                 });
                 SR_UTILS_NS::VFS::Instance().Mount(m_packagesPath, m_pVFSBackend.Get(), -10000);
 
-                SR_UTILS_NS::StoreUtils::User::SetString(packagesPathKey, m_packagesPath);
+                SR_UTILS_NS::StoreUtils::User::SetString(PackagesPathKey, m_packagesPath);
                 SR_UTILS_NS::StoreUtils::Storage::Instance().Save();
             }
 
@@ -86,6 +110,8 @@ namespace SR_CORE_GUI_NS {
 
     bool AssetsStore::DrawPackage(const EditorPackage& package, bool selected, const SR_MATH_NS::FVector2& size) {
         const bool isNotAvailable = package.url.empty();
+        const bool isInstalling = IsPackageInstalling(package.name);
+        const bool isInstalled = m_packagesPath.Concat(package.name).IsDir();
 
         if (isNotAvailable) {
             SR_IMMEDIATE_GUI_NS::BeginDisabled(true);
@@ -94,6 +120,7 @@ namespace SR_CORE_GUI_NS {
         const SR_MATH_NS::FVector2 pos = SR_IMMEDIATE_GUI_NS::GetCursorScreenPos();
         const SR_MATH_NS::FVector2 end = SR_MATH_NS::FVector2(pos.x + size.x, pos.y + size.y);
 
+        SR_IMMEDIATE_GUI_NS::SetNextItemAllowOverlap();
         SR_IMMEDIATE_GUI_NS::InvisibleButton("##asset", size);
 
         const bool hovered = SR_IMMEDIATE_GUI_NS::IsItemHovered();
@@ -138,7 +165,16 @@ namespace SR_CORE_GUI_NS {
         const auto cursorPos = SR_IMMEDIATE_GUI_NS::GetCursorScreenPos();
         SR_IMMEDIATE_GUI_NS::SetCursorScreenPos(buttonMin);
 
+        if (!isNotAvailable && (isInstalled || isInstalling)) {
+            SR_IMMEDIATE_GUI_NS::BeginDisabled(true);
+        }
+
         const bool installPressed = SR_IMMEDIATE_GUI_NS::InvisibleButton("##Install", buttonSize);
+
+        if (!isNotAvailable && (isInstalled || isInstalling)) {
+            SR_IMMEDIATE_GUI_NS::EndDisabled();
+        }
+
         const bool installHovered = SR_IMMEDIATE_GUI_NS::IsItemHovered();
 
         static const auto green = SR_IMMEDIATE_GUI_NS::ColorConvertFloat4ToU32(SR_MATH_NS::FVector4(0.20f, 0.75f, 0.35f, 1.0f));
@@ -158,7 +194,7 @@ namespace SR_CORE_GUI_NS {
         SR_IMMEDIATE_GUI_NS::DrawListAddRectFilled(pDrawList, buttonMin, buttonMax, buttonBg, 5.0f);
         SR_IMMEDIATE_GUI_NS::DrawListAddRect(pDrawList, buttonMin, buttonMax, installHovered ? hoveredColor : defaultColor, 5.0f, SR_IMMEDIATE_GUI_NS::DrawFlags(), 1.5f);
 
-        const char* installText = isNotAvailable ? "Coming soon..." : "Install";
+        const char* installText = isNotAvailable ? "Coming soon..." : (isInstalled ? "Installed" : (isInstalling ? "Installing..." : "Install"));
         const auto textSize = SR_IMMEDIATE_GUI_NS::CalcTextSize(installText);
 
         SR_IMMEDIATE_GUI_NS::AddText(pDrawList,
@@ -186,6 +222,124 @@ namespace SR_CORE_GUI_NS {
             SR_IMMEDIATE_GUI_NS::EndDisabled();
         }
 
+        if (installPressed && !isInstalling) {
+            SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> order;
+            CollectPackageInstallOrder(package.name, order);
+            for (auto&& name : order) {
+                InstallPackage(name);
+            }
+        }
+
         return clicked || installPressed;
+    }
+
+    bool AssetsStore::IsPackageInstalling(SR_UTILS_NS::StringAtom name) const {
+        SR_LOCK_GUARD;
+        return m_installQueue.find_if([name](auto&& info) { return name == info.name; }) != m_installQueue.end();
+    }
+
+    const EditorPackage* AssetsStore::FindPackage(SR_UTILS_NS::StringAtom name) const {
+        SR_LOCK_GUARD;
+        auto&& pSettings = dynamic_cast<EditorGUI*>(GetManager())->GetSettings();
+        auto&& pIt = pSettings->GetPackages().find_if([name](EditorPackage& package) {
+            return package.name == name;
+        });
+        if (pIt == pSettings->GetPackages().end()) {
+            return nullptr;
+        }
+        return &(*pIt);
+    }
+
+    void AssetsStore::InstallPackage(SR_UTILS_NS::StringAtom name) {
+        SR_TRACY_ZONE;
+        SR_LOCK_GUARD;
+
+        SR_LOG("AssetsStore::InstallPackage() : installing \"{}\" package...", name);
+
+        if (IsPackageInstalling(name)) {
+            SR_WARN("AssetsStore::InstallPackage() : package \"{}\" already in install queue!", name);
+            return;
+        }
+
+        auto&& pPackage = FindPackage(name);
+        if (!pPackage) {
+            SR_ERROR("AssetsStore::InstallPackage() : package \"{}\" is not exists!", name);
+            return;
+        }
+
+        SR_UTILS_NS::Path packagesFolder = m_packagesPath;
+        SR_UTILS_NS::VFS::Instance().ResolvePath(packagesFolder, SR_UTILS_NS::FileMode::Write);
+
+        InstallInfo& info = m_installQueue.emplace_back();
+
+        info.name = name;
+        info.taskId = SR_UTILS_NS::TaskManager::Instance().ExecuteAsync([this, name, packagesFolder, url = pPackage->url, branch = pPackage->branch](auto&& state) {
+            SR_TRACY_ZONE_N("Async package install");
+            SR_NETWORK_NS::GitHubCloneContext context;
+            context.url = url;
+            context.branch = branch;
+            OnPackageInstalled(name, SR_NETWORK_NS::GitHubDownloader::CloneRepo(context, packagesFolder.Concat(name)));
+        }, SR_UTILS_NS::TaskPriority::Low);
+        SR_UTILS_NS::TaskManager::Instance().SetDescription(info.taskId, name);
+    }
+
+    void AssetsStore::OnPackageInstalled(SR_UTILS_NS::StringAtom name, bool success) {
+        SR_LOCK_GUARD;
+        if (success) {
+            SR_LOG("AssetsStore::OnPackageInstalled() : package \"{}\" successfully installed!", name);
+        }
+        else {
+            SR_ERROR("AssetsStore::OnPackageInstalled() : failed to install package \"{}\"!", name);
+        }
+        m_installQueue.remove_if([name](auto&& info) { return info.name == name; });
+        ReMountPackages(dynamic_cast<EditorGUI*>(GetManager()));
+    }
+
+    void AssetsStore::CollectPackageInstallOrder(SR_UTILS_NS::StringAtom name, SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>& order) {
+        if (auto&& pPackage = FindPackage(name)) {
+            for (auto&& dependency: pPackage->dependencies) {
+                CollectPackageInstallOrder(dependency, order);
+            }
+            order.emplace_back(name);
+        }
+    }
+
+    void AssetsStore::ReMountPackages(EditorGUI* pEditor) {
+        std::lock_guard<std::recursive_mutex> lock(g_packagesMountMutex);
+
+        SR_UTILS_NS::VFS::Instance().LockSingleton();
+
+        UnMountPackages(pEditor);
+
+        if (SR_UTILS_NS::StoreUtils::User::HasString(PackagesPathKey)) {
+            if (SR_UTILS_NS::Path path = SR_UTILS_NS::StoreUtils::User::GetString(PackagesPathKey); !path.empty()) {
+                auto&& pSettings = pEditor->GetSettings();
+                for (auto&& package : pSettings->GetPackages()) {
+                    auto&& mountPath = path.Concat(package.name).Concat("Resources");
+                    if (SR_PLATFORM_NS::GetPathType(mountPath) != SR_UTILS_NS::Path::Type::Folder) {
+                        continue;
+                    }
+                    SR_LOG("AssetsStore::ReMountPackages() : mounting package \"{}\"...", package.name);
+                    MountInfo& info = g_mounts.emplace_back();
+                    info.pMount = new SR_UTILS_NS::DirectoryVFSBackend(mountPath);
+                    info.name = package.name;
+                    SR_UTILS_NS::VFS::Instance().Mount(CoreResLoader::GetResPath(), info.pMount, -100);
+                }
+            }
+        }
+
+        SR_UTILS_NS::VFS::Instance().UnlockSingleton();
+    }
+
+    void AssetsStore::UnMountPackages(EditorGUI* pEditor) {
+        std::lock_guard<std::recursive_mutex> lock(g_packagesMountMutex);
+        SR_UTILS_NS::VFS::Instance().LockSingleton();
+        for (auto&& mount : g_mounts) {
+            SR_LOG("AssetsStore::UnMountPackages() : unmounting package \"{}\"...", mount.name);
+            SR_UTILS_NS::VFS::Instance().Unmount(mount.pMount);
+            delete mount.pMount;
+        }
+        g_mounts.clear();
+        SR_UTILS_NS::VFS::Instance().UnlockSingleton();
     }
 }

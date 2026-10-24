@@ -14,6 +14,7 @@
 #include <Engine/GUI/EngineStatistics.h>
 #include <Engine/GUI/Hierarchy.h>
 #include <Engine/GUI/AssetInspector.h>
+#include <Engine/GUI/AssetsStore.h>
 #include <Engine/GUI/TextureInspector.h>
 #include <Engine/GUI/SceneViewer.h>
 #include <Engine/GUI/FileBrowser.h>
@@ -141,6 +142,8 @@ namespace SR_CORE_GUI_NS {
 
         m_isInit = true;
 
+        AssetsStore::ReMountPackages(this);
+
         return true;
     }
 
@@ -160,6 +163,8 @@ namespace SR_CORE_GUI_NS {
         m_icons.clear();
 
         m_isInit = false;
+
+        AssetsStore::UnMountPackages(this);
 
         Super::DeInit();
     }

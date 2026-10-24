@@ -551,6 +551,7 @@ namespace SR_GRAPH_GUI_NS {
         SR_IMMEDIATE_GUI_DLL_API extern void BeginDisabled(bool disabled = true);
         SR_IMMEDIATE_GUI_DLL_API extern void EndDisabled();
         SR_IMMEDIATE_GUI_DLL_API extern void EndDragDropSource();
+        SR_IMMEDIATE_GUI_DLL_API extern void SetNextItemAllowOverlap();
         SR_IMMEDIATE_GUI_DLL_API extern bool InvisibleButton(const char* text, const SR_MATH_NS::FVector2& size, ButtonFlags flags = ButtonFlags());
         SR_IMMEDIATE_GUI_DLL_API extern void* GetCurrentWindow();
         SR_IMMEDIATE_GUI_DLL_API extern SR_MATH_NS::FVector2 GetWindowCursorPos(void* pWindow = nullptr);

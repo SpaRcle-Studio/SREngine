@@ -60,6 +60,8 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::String description;
         /// @property
         SR_UTILS_NS::String url;
+        /// @property
+        SR_UTILS_NS::String branch;
         /// @property @tooltip(Names of dependencies)
         SR_UTILS_NS::Set<SR_UTILS_NS::String> dependencies;
 

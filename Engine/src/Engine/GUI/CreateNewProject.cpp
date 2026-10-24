@@ -210,6 +210,7 @@ namespace SR_CORE_GUI_NS {
             m_lastProjectPath = path;
             m_projectPathInput = path.ToStringView();
             m_projectPath = path;
+            SR_LOG("CreateNewProject::SetProjectPath() : new project path \"{}\"", path);
             if (m_pVFSBackend) {
                 SR_UTILS_NS::VFS::Instance().Unmount(m_pVFSBackend);
                 delete m_pVFSBackend;
