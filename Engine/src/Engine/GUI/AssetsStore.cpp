@@ -62,11 +62,13 @@ namespace SR_CORE_GUI_NS {
 
             if (SR_IMMEDIATE_GUI_NS::Button("...", SR_MATH_NS::FVector2(buttonSize, 0.f))) {
                 m_packagesPathTmp = SR_UTILS_NS::FileDialog::Instance().PickFolder(CoreResLoader::GetResPath()).ToStringRef();
+                pathIsPresent = true;
             }
             SR_IMMEDIATE_GUI_NS::SameLine();
             SR_IMMEDIATE_GUI_NS::PushItemWidth(inputSize);
             if (SR_IMMEDIATE_GUI_NS::InputText("##InputPath", &m_packagesPathTmp, SR_GRAPH_GUI_NS::Immediate::InputTextFlags::EnterReturnsTrue)) {
                 m_packagesPathTmp = SR_UTILS_NS::StringUtils::RemoveCharsFromString(m_packagesPathTmp, "\"");
+                pathIsPresent = true;
             }
             SR_IMMEDIATE_GUI_NS::PopItemWidth();
             pathIsPresent &= !m_packagesPathTmp.empty();
@@ -111,7 +113,7 @@ namespace SR_CORE_GUI_NS {
     bool AssetsStore::DrawPackage(const EditorPackage& package, bool selected, const SR_MATH_NS::FVector2& size) {
         const bool isNotAvailable = package.url.empty();
         const bool isInstalling = IsPackageInstalling(package.name);
-        const bool isInstalled = m_packagesPath.Concat(package.name).IsDir();
+        const bool isInstalled = m_packagesPath.Concat(package.name).Concat("Resources").IsDir();
 
         if (isNotAvailable) {
             SR_IMMEDIATE_GUI_NS::BeginDisabled(true);
