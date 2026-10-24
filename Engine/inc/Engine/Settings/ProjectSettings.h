@@ -24,6 +24,8 @@ namespace SR_CORE_NS {
         /// @customArgs(pick: enabled, filter name: Scene, relative: resources)
         /// @customArg(filter value: scene)
         SR_UTILS_NS::Path mainScene;
+        /// @property
+        SR_UTILS_NS::Vector<SR_UTILS_NS::String> packageFolders;
 
     };
 }

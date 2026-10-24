@@ -37,10 +37,7 @@ namespace SR_CORE_GUI_NS {
         ProjectSettings::Ptr pSettings = SRNew<ProjectSettings>();
         pSettings->projectName = m_projectName;
 
-        SR_UTILS_NS::SRASerializer serializer;
-        serializer.SetUseTabs(true);
-        pSettings->Save(serializer);
-        if (!serializer.SaveToFile(settingsPath)) {
+        if (!pSettings->SaveAsset(settingsPath)) {
             SR_ERROR("CreateNewProject::Draw() : failed to save project settings!\n\tPath: ", settingsPath);
             pSettings->DeleteResource();
             return false;

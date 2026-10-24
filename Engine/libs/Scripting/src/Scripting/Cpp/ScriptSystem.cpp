@@ -76,11 +76,17 @@ namespace SR_SCRIPTING_NS {
 
             if (!m_compiler->Init()) {
                 SR_ERROR("ScriptSystem::Init() : failed to initialize c++ compiler!");
+                m_state = ScriptSystemState::Idle;
+                m_threadRunning = false;
+                m_threadReady = true;
                 return false;
             }
 
             if (!m_codeGenerator->Init()) {
                 SR_ERROR("ScriptSystem::Init() : failed to initialize code generator!");
+                m_state = ScriptSystemState::Idle;
+                m_threadRunning = false;
+                m_threadReady = true;
                 return false;
             }
 
