@@ -99,6 +99,8 @@ namespace SR_CORE_GUI_NS {
             DeInit();
         }
 
+        AssetsStore::UnMountPackages(this);
+
         if (m_pSettings) {
             m_pSettings->RemoveUsePoint();
             m_pSettings = nullptr;
@@ -163,8 +165,6 @@ namespace SR_CORE_GUI_NS {
         m_icons.clear();
 
         m_isInit = false;
-
-        AssetsStore::UnMountPackages(this);
 
         Super::DeInit();
     }
