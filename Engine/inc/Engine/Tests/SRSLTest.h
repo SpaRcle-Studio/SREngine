@@ -40,7 +40,7 @@ namespace SR_CORE_NS::Tests {
                     continue;
                 }
 
-                file = file.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
+                file = file.RemoveSubPath(CoreResLoader::GetResPath());
                 file = CoreResLoader::GetResPath().Concat(file);
                 SR_TRACY_ZONE_TEXT_VIEW(file.View());
 
