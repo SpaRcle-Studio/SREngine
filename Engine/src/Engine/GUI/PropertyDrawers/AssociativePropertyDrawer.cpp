@@ -32,10 +32,10 @@ namespace SR_CORE_GUI_NS {
         const bool isSetLike = value.GetTypeInfo().detailedType == "Set" || value.GetTypeInfo().detailedType == "FlatHashSet";
 
         SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetProperty().GetName().ToCStr());
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyDisplayName().ToCStr());
         SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
-        SR_UTILS_NS::StringAtom displayName = context.GetProperty().GetDisplayName();
+        SR_UTILS_NS::StringAtom displayName = context.GetPropertyDisplayName();
 
         const SR_MATH_NS::FVector2 counterButtonWidth = { 40, context.fieldHeight };
 
@@ -77,7 +77,7 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::Button(m_tmpBuffer.c_str(), counterButtonWidth);
         SR_GRAPH_GUI_NS::Immediate::EndDisabled();
 
-        if (!m_keyDrawer) {
+        if (!m_keyDrawer && value.GetTypeInfo().pNext[0]) {
             if (isSetLike) {
                 *m_keyValue = SR_UTILS_NS::Reflection::Value::CreateDefault(value.GetTypeInfo().pNext[0]);
             }
@@ -85,7 +85,9 @@ namespace SR_CORE_GUI_NS {
                 *m_keyValue = SR_UTILS_NS::Reflection::Value::CreateDefault(value.GetTypeInfo().pNext[0]->pNext[0]);
             }
             SR_UTILS_NS::StringAtom inspectorName = GetValueInspector(*m_keyValue);
-            m_keyDrawer = SR_UTILS_NS::Factory::Instance().Create<PropertyDrawerBase>(inspectorName);
+            if (!inspectorName.empty()) {
+                m_keyDrawer = SR_UTILS_NS::Factory::Instance().Create<PropertyDrawerBase>(inspectorName);
+            }
         }
 
         SR_GRAPH_GUI_NS::Immediate::SameLine();
@@ -136,7 +138,9 @@ namespace SR_CORE_GUI_NS {
         keyCtx.fieldTitleWidth = 0.f;
         keyCtx.noHeader = true;
         keyCtx.fieldWidth = context.fieldWidth - counterButtonWidth.x - buttonSize.x;
-        m_keyDrawer->Draw(keyCtx);
+        if (m_keyDrawer) {
+            m_keyDrawer->Draw(keyCtx);
+        }
 
         if (m_isOpened) {
             for (auto&& pIt = container.Begin(); pIt != container.End(); ++pIt) {
@@ -211,7 +215,7 @@ namespace SR_CORE_GUI_NS {
 
                     SR_GRAPH_GUI_NS::Immediate::BeginGroup();
                     PropertyDrawerFeedback elementFeedback = m_valueDrawers[index]->Draw(valueContext);
-                    SR_GRAPH_GUI_NS::Immediate::EndGroup();
+                     SR_GRAPH_GUI_NS::Immediate::EndGroup();
 
                     if (elementFeedback.isChanged) {
                         feedback.isChanged = true;

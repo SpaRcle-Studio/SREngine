@@ -8,6 +8,7 @@
 #include <Utils/Common/Features.h>
 #include <Utils/Common/StringAtomLiterals.h>
 #include <Utils/Common/SubscriptionMessage.h>
+#include <Utils/Common/StoreUtils.h>
 #include <Utils/FileSystem/FileSystem.h>
 #include <Utils/FileSystem/IVFSBackend.h>
 #include <Utils/FileSystem/VFS.h>
@@ -75,7 +76,9 @@ namespace SR_SCRIPTING_NS {
             m_codeGenerator->SetCompiler(m_compiler.Get());
 
             if (!m_compiler->Init()) {
-                SR_ERROR("ScriptSystem::Init() : failed to initialize c++ compiler!");
+                if (!SR_UTILS_NS::StoreUtils::User::GetBool("CompilerUserCanceled", false)) {
+                    SR_ERROR("ScriptSystem::Init() : failed to initialize c++ compiler!");
+                }
                 m_state = ScriptSystemState::Idle;
                 m_threadRunning = false;
                 m_threadReady = true;

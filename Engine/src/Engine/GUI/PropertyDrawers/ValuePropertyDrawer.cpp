@@ -74,185 +74,22 @@ namespace SR_CORE_GUI_NS {
         if (value.GetTypeInfo().category != SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
             pValue = &value;
         }
-        SR_UTILS_NS::Reflection::ReflectedCategoryType category = pValue->GetTypeInfo().category;
 
         if (m_isOpened) {
-            if (!m_enumDrawer) {
-                m_enumDrawer = MakeShared<EnumPropertyDrawer>();
-            }
-
-            PropertyDrawerContext enumContext = context;
-            auto&& enumValue = SR_UTILS_NS::Reflection::Value::Create(category);
-            enumContext.pValue = &enumValue;
-            enumContext.pProperty = nullptr;
-            enumContext.noHeader = false;
-            enumContext.maxPartsInLine = 4;
-            enumContext.fieldWidth += context.fieldTitleWidth;
-            enumContext.fieldTitleWidth = 0.f;
-            if (m_enumDrawer->Draw(enumContext).isChanged) {
-                m_drawer = nullptr;
-                m_typeNames.clear();
-                m_detailedSizes.clear();
+            uint32_t index = 0;
+            if (auto&& pTypeInfo = DrawTypeInfo(index, pValue->GetTypeInfo(), context)) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(false);
                 }
-                auto&& pTypeInfo = SR_UTILS_NS::Reflection::AllocateTypeInfo();
-                pTypeInfo->category = category;
-                SR_UTILS_NS::Reflection::FindVTable(*pTypeInfo);
                 *pValue = SR_UTILS_NS::Reflection::Value::CreateDefault(pTypeInfo);
                 SR_UTILS_NS::Reflection::FreeTypeInfo(pTypeInfo);
                 feedback.isChanged = true;
             }
         }
 
-        if (m_lastCategoryType != category) {
-            m_lastCategoryType = category;
+        if (m_lastTypeInfoHash != pValue->GetTypeInfo().GetHash()) {
             m_drawer = nullptr;
-            m_typeNames.clear();
-            m_detailedSizes.clear();
-        }
-
-        if (m_typeNames.empty()) {
-            SR_UTILS_NS::Reflection::GetTypeNamesByCategory(category, m_typeNames);
-        }
-
-        if (m_lastDetailedType != pValue->GetTypeInfo().detailedType) {
-            m_lastDetailedType = pValue->GetTypeInfo().detailedType;
-            m_drawer = nullptr;
-        }
-
-        /// select detailed type
-        if (m_isOpened && !m_typeNames.empty()) {
-            SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>::iterator pTypeNameIt = m_typeNames.end();
-
-            auto&& detailedType = pValue->GetTypeInfo().detailedType;
-            pTypeNameIt = std::find(m_typeNames.begin(), m_typeNames.end(), detailedType);
-
-            std::optional<uint64_t> selectedIndex = pTypeNameIt != m_typeNames.end() ? std::make_optional(m_typeNames.distance(pTypeNameIt)) : std::nullopt;
-            const char* pPrevValue = selectedIndex.has_value() ? m_typeNames[selectedIndex.value()].data() : m_default.c_str();
-
-            SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth + context.fieldTitleWidth);
-
-            if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("Type##Combo", pPrevValue, SR_GRAPH_GUI_NS::Immediate::ComboFlags::NoArrowButton)) {
-                if (!m_comboTypeOpened) {
-                    SR_GRAPH_GUI_NS::Immediate::SetKeyboardFocusHere();
-                    m_comboTypeOpened = true;
-                }
-
-                if (SR_GRAPH_GUI_NS::Immediate::InputText("##Search", &m_searchBuffer)) {
-                    SR_NOOP;
-                }
-
-                for (uint64_t i = 0; i < m_typeNames.size(); ++i) {
-                    if (!m_searchBuffer.empty() && !SR_UTILS_NS::StringUtils::CheckSearchMatch(m_searchBuffer, m_typeNames[i])) {
-                        continue;
-                    }
-
-                    bool isSelected = (selectedIndex == i);
-                    if (SR_GRAPH_GUI_NS::Immediate::Selectable(m_typeNames[i].data(), isSelected)) {
-                        selectedIndex = i;
-                        m_searchBuffer = m_typeNames[i];
-                        SR_GRAPH_GUI_NS::Immediate::CloseCurrentPopup();
-                    }
-
-                    if (isSelected) {
-                        SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
-                    }
-                }
-                SR_GRAPH_GUI_NS::Immediate::EndCombo();
-            }
-            else {
-                m_comboTypeOpened = false;
-                m_searchBuffer.clear();
-            }
-
-            SR_IMMEDIATE_GUI_NS::PopItemWidth();
-
-            if (selectedIndex && m_typeNames[*selectedIndex] != detailedType) {
-                if (context.onBeforeChangeCallback) {
-                    context.onBeforeChangeCallback(false);
-                }
-                auto&& pTypeInfo = SR_UTILS_NS::Reflection::AllocateTypeInfo();
-                pTypeInfo->category = category;
-                pTypeInfo->detailedType = m_typeNames[*selectedIndex];
-                SR_UTILS_NS::Reflection::FindVTable(*pTypeInfo);
-                *pValue = SR_UTILS_NS::Reflection::Value::CreateDefault(pTypeInfo);
-                SR_UTILS_NS::Reflection::FreeTypeInfo(pTypeInfo);
-                feedback.isChanged = true;
-                m_drawer = nullptr;
-                m_detailedSizes.clear();
-            }
-        }
-
-        if (m_detailedSizes.empty()) {
-            SR_UTILS_NS::Reflection::GetTypeDetailedSizes(category, m_lastDetailedType, m_detailedSizes);
-            m_detailedSizesStr.clear();
-            for (auto&& size : m_detailedSizes) {
-                m_detailedSizesStr.emplace_back(SR_FORMAT("{}", size));
-            }
-        }
-
-        /// select detailed size
-        if (m_isOpened && !m_detailedSizes.empty()) {
-            SR_UTILS_NS::Vector<uint8_t>::iterator pSizeIt = m_detailedSizes.end();
-
-            auto&& size = pValue->GetTypeInfo().detailedSize;
-            pSizeIt = std::find(m_detailedSizes.begin(), m_detailedSizes.end(), size);
-
-            std::optional<uint64_t> selectedIndex = pSizeIt != m_detailedSizes.end() ? std::make_optional(m_detailedSizes.distance(pSizeIt)) : std::nullopt;
-            const char* pPrevValue = selectedIndex.has_value() ? m_detailedSizesStr[selectedIndex.value()].c_str() : m_default.c_str();
-
-            SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth + context.fieldTitleWidth);
-
-            if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("Size##SizeCombo", pPrevValue, SR_GRAPH_GUI_NS::Immediate::ComboFlags::NoArrowButton)) {
-                if (!m_comboSizeOpened) {
-                    SR_GRAPH_GUI_NS::Immediate::SetKeyboardFocusHere();
-                    m_comboSizeOpened = true;
-                }
-
-                if (SR_GRAPH_GUI_NS::Immediate::InputText("##SizeSearch", &m_searchBuffer)) {
-                    SR_NOOP;
-                }
-
-                for (uint64_t i = 0; i < m_detailedSizes.size(); ++i) {
-                    if (!m_searchBuffer.empty() && !SR_UTILS_NS::StringUtils::CheckSearchMatch(m_searchBuffer, m_detailedSizesStr[i])) {
-                        continue;
-                    }
-
-                    bool isSelected = (selectedIndex == i);
-                    if (SR_GRAPH_GUI_NS::Immediate::Selectable(m_detailedSizesStr[i].c_str(), isSelected)) {
-                        selectedIndex = i;
-                        m_searchBuffer = m_detailedSizesStr[i];
-                        SR_GRAPH_GUI_NS::Immediate::CloseCurrentPopup();
-                    }
-
-                    if (isSelected) {
-                        SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
-                    }
-                }
-                SR_GRAPH_GUI_NS::Immediate::EndCombo();
-            }
-            else {
-                m_comboSizeOpened = false;
-                m_searchBuffer.clear();
-            }
-
-            SR_IMMEDIATE_GUI_NS::PopItemWidth();
-
-            if (selectedIndex && m_detailedSizes[*selectedIndex] != size) {
-                if (context.onBeforeChangeCallback) {
-                    context.onBeforeChangeCallback(false);
-                }
-                auto&& pTypeInfo = SR_UTILS_NS::Reflection::AllocateTypeInfo();
-                pTypeInfo->category = category;
-                pTypeInfo->detailedType = m_lastDetailedType;
-                pTypeInfo->detailedSize = m_detailedSizes[*selectedIndex];
-                SR_UTILS_NS::Reflection::FindVTable(*pTypeInfo);
-                *pValue = SR_UTILS_NS::Reflection::Value::CreateDefault(pTypeInfo);
-                SR_UTILS_NS::Reflection::FreeTypeInfo(pTypeInfo);
-                feedback.isChanged = true;
-                m_drawer = nullptr;
-            }
+            m_lastTypeInfoHash = pValue->GetTypeInfo().GetHash();
         }
 
         if (m_isOpened && !m_drawer) {
@@ -264,7 +101,7 @@ namespace SR_CORE_GUI_NS {
 
         if (m_isOpened && m_drawer) {
             PropertyDrawerContext elementContext = context;
-            if (category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
+            if (pValue->GetTypeInfo().category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
                 elementContext.pValue = pValue->Cast<SR_UTILS_NS::Reflection::Value>();
             }
             else {
@@ -302,5 +139,201 @@ namespace SR_CORE_GUI_NS {
         }
 
         return feedback;
+    }
+
+    SR_UTILS_NS::Reflection::TypeInfo* ValuePropertyDrawer::DrawTypeInfo(uint32_t& index, const SR_UTILS_NS::Reflection::TypeInfo& typeInfo, const PropertyDrawerContext& context) {
+        SR_TRACY_ZONE;
+
+        ++index;
+        m_comboTypeOpenedStack.resize(SR_MAX(m_comboTypeOpenedStack.size(), index));
+        m_comboSizeOpenedStack.resize(SR_MAX(m_comboSizeOpenedStack.size(), index));
+        m_enumDrawers.resize(SR_MAX(m_enumDrawers.size(), index));
+
+        SR_IMMEDIATE_GUI_NS::PushID(index);
+
+        auto&& pEnumDrawer = m_enumDrawers[index - 1];
+
+        if (!pEnumDrawer) {
+            pEnumDrawer = MakeShared<EnumPropertyDrawer>();
+        }
+
+        PropertyDrawerContext enumContext = context;
+        auto&& enumValue = SR_UTILS_NS::Reflection::Value::Create(typeInfo.category);
+        enumContext.pValue = &enumValue;
+        enumContext.pProperty = nullptr;
+        enumContext.noHeader = false;
+        enumContext.maxPartsInLine = 4;
+        enumContext.fieldWidth += context.fieldTitleWidth;
+        enumContext.fieldTitleWidth = 0.f;
+
+        if (pEnumDrawer->Draw(enumContext).isChanged) {
+            auto&& pTypeInfo = SR_UTILS_NS::Reflection::AllocateTypeInfo();
+            pTypeInfo->category = typeInfo.category;
+            SR_UTILS_NS::Reflection::FindVTable(*pTypeInfo);
+            SR_IMMEDIATE_GUI_NS::PopID();
+            return pTypeInfo;
+        }
+
+        auto&& typeNames = m_typeNames;
+        auto&& detailedSizes = m_detailedSizes;
+        auto&& detailedSizesStr = m_detailedSizesStr;
+
+        SR_UTILS_NS::Reflection::GetTypeNamesByCategory(typeInfo.category, typeNames);
+
+        SR_UTILS_NS::Reflection::GetTypeDetailedSizes(typeInfo.category, typeInfo.detailedType, detailedSizes);
+        detailedSizesStr.resize(SR_MAX(detailedSizesStr.size(), detailedSizes.size()));
+        for (uint64_t i = 0; i < detailedSizes.size(); i++) {
+            detailedSizesStr[i].clear();
+            SR_UTILS_NS::FormatTo(detailedSizesStr[i], "{}", detailedSizes[i]);
+        }
+
+         /// select category type
+        if (!typeNames.empty()) {
+            auto&& detailedType = typeInfo.detailedType;
+            auto pTypeNameIt = std::find(typeNames.begin(), typeNames.end(), detailedType);
+
+            std::optional<uint64_t> selectedIndex = pTypeNameIt != typeNames.end() ? std::make_optional(typeNames.distance(pTypeNameIt)) : std::nullopt;
+            const char* pPrevValue = selectedIndex.has_value() ? typeNames[selectedIndex.value()].data() : m_default.c_str();
+
+            SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth + context.fieldTitleWidth);
+
+            bool& comboTypeOpened = m_comboTypeOpenedStack.at(index - 1);
+            if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("Type##Combo", pPrevValue, SR_GRAPH_GUI_NS::Immediate::ComboFlags::NoArrowButton)) {
+                if (!comboTypeOpened) {
+                    SR_GRAPH_GUI_NS::Immediate::SetKeyboardFocusHere();
+                    comboTypeOpened = true;
+                }
+
+                if (SR_GRAPH_GUI_NS::Immediate::InputText("##Search", &m_searchBuffer)) {
+                    SR_NOOP;
+                }
+
+                for (uint64_t i = 0; i < typeNames.size(); ++i) {
+                    if (!m_searchBuffer.empty() && !SR_UTILS_NS::StringUtils::CheckSearchMatch(m_searchBuffer, typeNames[i])) {
+                        continue;
+                    }
+
+                    bool isSelected = (selectedIndex == i);
+                    if (SR_GRAPH_GUI_NS::Immediate::Selectable(typeNames[i].data(), isSelected)) {
+                        selectedIndex = i;
+                        m_searchBuffer = typeNames[i];
+                        SR_GRAPH_GUI_NS::Immediate::CloseCurrentPopup();
+                    }
+
+                    if (isSelected) {
+                        SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
+                    }
+                }
+                SR_GRAPH_GUI_NS::Immediate::EndCombo();
+            }
+            else {
+                comboTypeOpened = false;
+                m_searchBuffer.clear();
+            }
+
+            SR_IMMEDIATE_GUI_NS::PopItemWidth();
+
+            if (selectedIndex && typeNames[*selectedIndex] != detailedType) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(false);
+                }
+                auto&& pTypeInfo = SR_UTILS_NS::Reflection::AllocateTypeInfo();
+                pTypeInfo->category = typeInfo.category;
+                pTypeInfo->detailedType = typeNames[*selectedIndex];
+                uint8_t nextInfosCount = SR_UTILS_NS::Reflection::GetReflectedTypeNextCount(typeInfo.category, pTypeInfo->detailedType);
+                for (uint8_t i = 0; i < nextInfosCount; ++i) {
+                    pTypeInfo->pNext[i] = SR_UTILS_NS::Reflection::AllocateTypeInfo();
+                }
+                SR_UTILS_NS::Reflection::FindVTable(*pTypeInfo);
+                SR_IMMEDIATE_GUI_NS::PopID();
+                return pTypeInfo;
+            }
+        }
+
+        /// select detailed size
+        if (!detailedSizes.empty()) {
+            auto&& size = typeInfo.detailedSize;
+            auto pSizeIt = std::find(detailedSizes.begin(), detailedSizes.end(), size);
+
+            std::optional<uint64_t> selectedIndex = pSizeIt != detailedSizes.end() ? std::make_optional(detailedSizes.distance(pSizeIt)) : std::nullopt;
+            const char* pPrevValue = selectedIndex.has_value() ? detailedSizesStr[selectedIndex.value()].c_str() : m_default.c_str();
+
+            SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth + context.fieldTitleWidth);
+
+            bool& comboSizeOpened = m_comboSizeOpenedStack.at(index - 1);
+            if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("Size##SizeCombo", pPrevValue, SR_GRAPH_GUI_NS::Immediate::ComboFlags::NoArrowButton)) {
+                if (!comboSizeOpened) {
+                    SR_GRAPH_GUI_NS::Immediate::SetKeyboardFocusHere();
+                    comboSizeOpened = true;
+                }
+
+                if (SR_GRAPH_GUI_NS::Immediate::InputText("##SizeSearch", &m_searchBuffer)) {
+                    SR_NOOP;
+                }
+
+                for (uint64_t i = 0; i < detailedSizes.size(); ++i) {
+                    if (!m_searchBuffer.empty() && !SR_UTILS_NS::StringUtils::CheckSearchMatch(m_searchBuffer, detailedSizesStr[i])) {
+                        continue;
+                    }
+
+                    bool isSelected = (selectedIndex == i);
+                    if (SR_GRAPH_GUI_NS::Immediate::Selectable(detailedSizesStr[i].c_str(), isSelected)) {
+                        selectedIndex = i;
+                        m_searchBuffer = detailedSizesStr[i];
+                        SR_GRAPH_GUI_NS::Immediate::CloseCurrentPopup();
+                    }
+
+                    if (isSelected) {
+                        SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
+                    }
+                }
+                SR_GRAPH_GUI_NS::Immediate::EndCombo();
+            }
+            else {
+                comboSizeOpened = false;
+                m_searchBuffer.clear();
+            }
+
+            SR_IMMEDIATE_GUI_NS::PopItemWidth();
+
+            if (selectedIndex && detailedSizes[*selectedIndex] != size) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(false);
+                }
+                auto&& pTypeInfo = SR_UTILS_NS::Reflection::AllocateTypeInfo();
+                pTypeInfo->category = typeInfo.category;
+                pTypeInfo->detailedType = typeInfo.detailedType;
+                pTypeInfo->detailedSize = detailedSizes[*selectedIndex];
+                SR_UTILS_NS::Reflection::FindVTable(*pTypeInfo);
+                SR_IMMEDIATE_GUI_NS::PopID();
+                return pTypeInfo;
+            }
+        }
+
+        uint8_t nextInfosCount = SR_UTILS_NS::Reflection::GetReflectedTypeNextCount(typeInfo.category, typeInfo.detailedType);
+        for (uint8_t i = 0; i < nextInfosCount; i++) {
+            if (!typeInfo.pNext[i]) {
+                continue;
+            }
+            if (auto&& pNext = DrawTypeInfo(index, *typeInfo.pNext[i], context)) {
+                auto&& pTypeInfo = SR_UTILS_NS::Reflection::AllocateTypeInfo();
+                *pTypeInfo = typeInfo;
+                pTypeInfo->vtable = {};
+                for (uint8_t j = 0; j < nextInfosCount; j++) {
+                    if (j != i) {
+                        pTypeInfo->pNext[j] = SR_UTILS_NS::Reflection::CopyTypeInfo(typeInfo.pNext[j]);
+                    }
+                    else {
+                        pTypeInfo->pNext[j] = pNext;
+                    }
+                }
+                SR_UTILS_NS::Reflection::FindVTable(*pTypeInfo);
+                SR_IMMEDIATE_GUI_NS::PopID();
+                return pTypeInfo;
+            }
+        }
+
+        SR_IMMEDIATE_GUI_NS::PopID();
+        return nullptr;
     }
 }

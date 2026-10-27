@@ -205,6 +205,9 @@ use tabs: true
 						6-v:url
 							7-s:https://github.com/SpaRcle-Studio/SRPackage-Mina
 						6-a:dependencies
+							7-k:i
+								8-v:d
+									9-s:Animations Collection
 				4-k:i
 					5-o:d
 						6-v:name
@@ -232,4 +235,6 @@ use tabs: true
 							7-s:Animations Collection
 						6-v:description
 							7-s:Pack of many character animations
+						6-v:url
+							7-s:https://github.com/SpaRcle-Studio/SRPackage-AnimationsCollection
 						6-a:dependencies

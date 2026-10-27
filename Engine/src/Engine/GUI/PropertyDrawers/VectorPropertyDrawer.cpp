@@ -13,6 +13,10 @@ namespace SR_CORE_GUI_NS {
         PropertyDrawerFeedback feedback;
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
+        auto&& container = value.AsSequenceContainer();
+        if (!value.GetTypeInfo().vtable.containerVTable.pSize) {
+            return feedback;
+        }
 
         SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
         SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
@@ -20,8 +24,6 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
         SR_UTILS_NS::StringAtom displayName = context.GetPropertyDisplayName();
-
-        auto&& container = value.AsSequenceContainer();
 
         const SR_MATH_NS::FVector2 counterButtonWidth = { 40, context.fieldHeight };
         SR_MATH_NS::FVector2 buttonSize;

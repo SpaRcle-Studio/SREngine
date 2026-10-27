@@ -168,7 +168,12 @@ namespace SR_CORE_NS {
 
         if (!SR_SCRIPTING_NS::ScriptSystem::Instance().IsInitialized()) {
             if (!SR_SCRIPTING_NS::ScriptSystem::Instance().Init()) {
-                SR_ERROR("Engine::Init() : failed to initialize script system!");
+                if (SR_UTILS_NS::StoreUtils::User::GetBool("CompilerUserCanceled", false)) {
+                    SR_INFO("Engine::Init() : user canceled scripts usage!");
+                }
+                else {
+                    SR_ERROR("Engine::Init() : failed to initialize script system!");
+                }
             }
         }
 

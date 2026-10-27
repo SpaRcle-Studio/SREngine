@@ -953,17 +953,12 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::Separator();
 
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Save at")) {
-                if (auto&& pScene = m_engine->GetScene())
-                {
+                if (auto&& pScene = m_engine->GetScene()) {
                     const auto scenesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-
-                    if (auto&& path = SR_UTILS_NS::FileDialog::Instance().SaveDialog(scenesPath.ToString(), { { "Scene", "scene,prefab" } }); !path.IsEmpty())
-                    {
-                        path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetCachePath());
-                        path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
-
+                    if (auto&& path = SR_UTILS_NS::FileDialog::Instance().SaveDialog(scenesPath.ToString(), { { "Scene", "scene,prefab" } }); !path.IsEmpty()) {
+                        SR_UTILS_NS::VFS::Instance().UnResolvePath(path);
                         if (pScene->SaveSceneAt(path)) {
-                            SR_SYSTEM_LOG("GUISystem::BeginMenuBar() : scene is saved as \"" + path.ToString() + "\"");
+                            SR_SYSTEM_LOG("GUISystem::BeginMenuBar() : scene is saved as \"{}\"", path);
 
                             if (auto&& pSavedScene = SR_WORLD_NS::Scene::LoadScene(path)) {
                                 m_engine->AddSceneToQueue(pSavedScene);

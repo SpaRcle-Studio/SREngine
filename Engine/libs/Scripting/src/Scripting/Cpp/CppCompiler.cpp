@@ -12,6 +12,7 @@
 #include <Utils/Serialization/SRASerialization.h>
 #include <Utils/FileSystem/PathDataAccessor.h>
 #include <Utils/Common/CLIManager.h>
+#include <Utils/Common/StoreUtils.h>
 #include <Utils/FileSystem/FileSystem.h>
 #include <Utils/FileSystem/VFS.h>
 #include <Utils/FileSystem/DirectoryVFSBackend.h>
@@ -115,6 +116,9 @@ namespace SR_SCRIPTING_NS {
         if (!IsCompilerAvailable()) {
             if (SR_PLATFORM_NS::GetType() == SR_UTILS_NS::PlatformType::Windows) {
                 if (!FindWindowsCompiler()) {
+                    if (SR_UTILS_NS::StoreUtils::User::GetBool("CompilerUserCanceled", false)) {
+                        return false;
+                    }
                     SR_ERROR("CppCompiler::Init() : failed to find windows compiler!");
                     return false;
                 }
@@ -572,6 +576,11 @@ namespace SR_SCRIPTING_NS {
             return false;
         }
 
+        if (SR_UTILS_NS::StoreUtils::User::GetBool("CompilerUserCanceled", false)) {
+            SR_INFO("CppCompiler::FindWindowsCompiler() : cancel compiler asking by previous user answer.");
+            return false;
+        }
+
         if (SR_PLATFORM_NS::IsFileExists(builtInCompilerPath)) {
             const auto&& result = SR_PLATFORM_NS::ShowMessageBox(
                 "Choose compiler",
@@ -596,7 +605,9 @@ namespace SR_SCRIPTING_NS {
         );
 
         if (result == SR_PLATFORM_NS::MessageBoxResultType::Cancel) {
-            SR_ERROR("CppCompiler::FindWindowsCompiler() : user canceled compiler selection!");
+            SR_UTILS_NS::StoreUtils::User::SetBool("CompilerUserCanceled", true);
+            SR_UTILS_NS::StoreUtils::Storage::Instance().Save();
+            SR_INFO("CppCompiler::FindWindowsCompiler() : user canceled compiler selection!");
             return false;
         }
 

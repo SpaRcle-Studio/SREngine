@@ -324,6 +324,7 @@ namespace SR_CORE_GUI_NS {
                     SR_LOG("AssetsStore::ReMountPackages() : mounting package \"{}\"...", package.name);
                     MountInfo& info = g_mounts.emplace_back();
                     info.pMount = new SR_UTILS_NS::DirectoryVFSBackend(mountPath);
+                    info.pMount->AddIgnoredPath(CoreResLoader::GetCachePath());
                     info.name = package.name;
                     SR_UTILS_NS::VFS::Instance().Mount(CoreResLoader::GetResPath(), info.pMount, -100);
                 }
