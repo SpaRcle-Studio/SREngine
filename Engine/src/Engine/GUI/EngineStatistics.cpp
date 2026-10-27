@@ -13,6 +13,7 @@
 #include <Graphics/Types/Mesh.h>
 #include <Graphics/Memory/ShaderProgramManager.h>
 #include <Graphics/Pass/FrameBufferPass.h>
+#include <Graphics/Pass/AutoExposurePass.h>
 #include <Graphics/Pass/MeshDrawerPass.h>
 #include <Graphics/Render/RenderTechnique.h>
 #include <Graphics/Render/RenderContext.h>
@@ -36,6 +37,7 @@ namespace SR_CORE_GUI_NS {
         : SR_GRAPH_GUI_NS::Widget("Engine statistics")
     {
         m_framerateHistory.reserve(m_framerateHistorySize);
+        m_exposureHistory.reserve(m_exposureHistorySize);
     }
 
     void EngineStatistics::Draw() {
@@ -430,11 +432,34 @@ namespace SR_CORE_GUI_NS {
             auto&& pMeshDrawerPass = dynamic_cast<SR_GRAPH_NS::MeshDrawerPass*>(&pass);
             auto&& pFramebufferPass = dynamic_cast<SR_GRAPH_NS::FrameBufferPass*>(&pass);
 
+            SR_GRAPH_GUI_NS::Immediate::PushID((void*)&pass);
+
             if (!pMeshDrawerPass && !pFramebufferPass) {
+                SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor::Yellow());
+                SR_GRAPH_GUI_NS::Immediate::Dummy(10.f);
+                SR_GRAPH_GUI_NS::Immediate::SameLine();
+                if (SR_GRAPH_GUI_NS::Immediate::CollapsingHeader(pass.GetPassName())) {
+                    SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
+                    if (auto&& pAutoExposure = dynamic_cast<SR_GRAPH_NS::AutoExposurePass*>(&pass)) {
+                        auto&& exposure = pAutoExposure->GetExposure();
+                        SR_IMMEDIATE_GUI_NS::Text("Previous: %f | Current: %f", exposure.first, exposure.second);
+                        m_exposureHistory.push_back(exposure.first);
+                        if (m_exposureHistory.size() > m_exposureHistorySize) {
+                            m_exposureHistory.erase(m_exposureHistory.begin());
+                        }
+                        if (SR_GRAPH_GUI_NS::Immediate::BeginPlot("History")) {
+                            SR_GRAPH_GUI_NS::Immediate::PlotLine("Exposure", m_exposureHistory.data(), m_exposureHistory.size(), SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::Float);
+                            SR_GRAPH_GUI_NS::Immediate::EndPlot();
+                        }
+                    }
+                }
+                else {
+                    SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
+                }
+                SR_GRAPH_GUI_NS::Immediate::PopID();
                 return;
             }
 
-            SR_GRAPH_GUI_NS::Immediate::PushID((void*)&pass);
             SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, pFramebufferPass ? SR_MATH_NS::FColor::Cyan() : SR_MATH_NS::FColor::White());
 
             SR_GRAPH_GUI_NS::Immediate::Dummy(10.f);

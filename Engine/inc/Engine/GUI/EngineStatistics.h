@@ -46,7 +46,9 @@ namespace SR_CORE_NS::GUI {
 
     private:
         SR_HTYPES_NS::FastMemoryArray<float_t> m_framerateHistory;
+        SR_HTYPES_NS::FastMemoryArray<float_t> m_exposureHistory;
         static constexpr uint32_t m_framerateHistorySize = 1001;
+        static constexpr uint32_t m_exposureHistorySize = 1001;
 
         std::string m_stringCache;
         bool m_showShaderMacros = false;
