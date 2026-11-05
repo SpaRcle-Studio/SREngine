@@ -30,9 +30,9 @@ float skyHash12(vec2 p) {
 }
 
 vec3 skyHash33(vec3 p) {
-    p = fract(p * vec3(0.1031, 0.1030, 0.0973));
-    p += dot(p, p.yxz + 33.33);
-    return fract((p.xxy + p.yxx) * p.zyx);
+    vec3 p3 = fract(p * vec3(0.1031, 0.1030, 0.0973));
+    p3 += dot(p3, p3.yxz + 33.33);
+    return fract((p3.xxy + p3.yxx) * p3.zyx);
 }
 
 float skyValueNoise(vec3 p) {
@@ -64,7 +64,7 @@ mat3 skyBasis(vec3 axis) {
 }
 
 // Звезды: одна звезда на ячейку кубической сетки, размер и цвет случайны, мерцание у горизонта сильнее
-vec3 skyStars(vec3 dir) {
+vec3 skyStars(vec3 dir, float time) {
     float scale = 220.0;
     vec3 p = dir * scale;
     vec3 cell = floor(p);
@@ -82,7 +82,7 @@ vec3 skyStars(vec3 dir) {
     float star = smoothstep(size, 0.0, dist);
 
     float twinkleSpeed = mix(1.5, 4.0, rnd.z);
-    float twinkle = 0.75 + 0.25 * sin(TIME * 0.001 * twinkleSpeed + rnd.z * 40.0);
+    float twinkle = 0.75 + 0.25 * sin(time * 0.001 * twinkleSpeed + rnd.z * 40.0);
     twinkle = mix(1.0, twinkle, 1.0 - clamp(dir.y * 2.0, 0.0, 1.0) * 0.6);
 
     vec3 temperature = mix(vec3(1.0, 0.75, 0.55), vec3(0.65, 0.8, 1.0), rnd.z);
@@ -181,7 +181,7 @@ void fragment() {
     float night = PRIMARY_DISK_PARAMS.w;
     if (night > 0.001 && viewDir.y > -0.02) {
         float horizonFade = smoothstep(-0.02, 0.15, viewDir.y);
-        vec3 night_sky = skyStars(viewDir) * starsBrightness + skyMilkyWay(viewDir) * milkyWayIntensity;
+        vec3 night_sky = skyStars(viewDir, TIME) * starsBrightness + skyMilkyWay(viewDir) * milkyWayIntensity;
         color += night_sky * viewTransmittance * night * horizonFade * 0.02;
     }
 
