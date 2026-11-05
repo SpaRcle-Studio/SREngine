@@ -153,8 +153,8 @@ void fragment() {
     float phaseSecondary = atmoPhaseHG(dot(rayDir, toSecondary), g);
 
     // ambient: свет неба у горизонта в направлении взгляда - туман сливается с небом
-    vec3 horizonSky = atmoSky(normalize(vec3(rayDir.x, 0.05, rayDir.z)));
-    vec3 zenithSky = atmoSky(vec3(0.0, 1.0, 0.0));
+    vec3 horizonSky = atmoSky(normalize(vec3(rayDir.x, 0.05, rayDir.z)), PRIMARY_DISK_PARAMS, SECONDARY_DISK_PARAMS, DIRECTIONAL_LIGHT_DIRECTION, PRIMARY_SKY_ILLUMINANCE, SECONDARY_LIGHT_DIRECTION, SECONDARY_SKY_ILLUMINANCE);
+    vec3 zenithSky = atmoSky(vec3(0.0, 1.0, 0.0), PRIMARY_DISK_PARAMS, SECONDARY_DISK_PARAMS, DIRECTIONAL_LIGHT_DIRECTION, PRIMARY_SKY_ILLUMINANCE, SECONDARY_LIGHT_DIRECTION, SECONDARY_SKY_ILLUMINANCE);
     vec3 ambient = mix(zenithSky, horizonSky, fogLightParams.w) * fogColorParams.a;
 
     float jitter = fogIGN(FRAG_COORD.xy);

@@ -14,6 +14,11 @@
 [[uniform], [public]] sampler2D alphaMask;
 [[uniform], [public]] sampler2D ORM;
 
+[[uniform], [public]] sampler2D heightMap;
+
+[[uniform], [public]] float heightScale = 0.05;
+[[uniform], [public]] float heightBias = 0.0;
+
 // Модель metallic-roughness (glTF 2.0). Скаляры - множители соответствующих текстур,
 // без текстуры работают как значения: metallic 0..1, roughness 0..1 (0 - зеркало).
 [[uniform], [public]] float metallic = 0.0;
@@ -30,6 +35,18 @@
 [[uniform], [public]] float detailRoughnessStrength = 0.5;
 [[uniform], [public]] vec3 emissionColor = vec3(0.0, 0.0, 0.0);
 [[uniform], [public]] float emissionIntensity = 1.0;
+
+vec2 ParallaxMapping(vec2 uv, vec3 viewDirTS) {
+    float height = texture(heightMap, uv).r;
+
+    // Не допускаем деления на слишком маленькое значение.
+    float vz = max(abs(viewDirTS.z), 0.05);
+
+    // Смещение UV в tangent space.
+    vec2 parallaxOffset = (viewDirTS.xy / vz) * heightScale;
+
+    return uv - parallaxOffset * (height - heightBias);
+}
 
 #ifndef STANDARD_SHADER_CUSTOM_FRAGMENT
 vec2 fragment_uv() {
@@ -52,6 +69,13 @@ void fragment() {
 
     vec2 flipMask = step(tiling, vec2(0.0));
     tiledUV = mix(tiledUV, offset + absTiling - (uv * absTiling), flipMask);
+
+#ifdef HAS_HEIGHT
+    vec3 viewDirWS = normalize(VIEW_POSITION - VERTEX);
+    vec3 viewDirTS = normalize(transpose(TBN) * viewDirWS);
+    tiledUV = ParallaxMapping(tiledUV, viewDirTS);
+#endif
+
     vec4 diffuseColor = fragment_diffuse(tiledUV) * color;
 
 #ifdef HAS_ALPHA

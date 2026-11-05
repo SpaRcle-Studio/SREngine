@@ -36,6 +36,28 @@ void vertex() {
 
         vec3 B = cross(N, T) * TANGENT.w;
         TBN = mat3(T, B, N);
+
+        /*
+            mat3 model3x3 = mat3(modelMatrix);
+            mat3 normalMatrix = transpose(inverse(model3x3));
+
+            NORMAL = normalize(normalMatrix * NORMAL);
+
+            vec3 N = NORMAL;
+
+            // Tangent преобразуем обычной Model Matrix.
+            vec3 T = normalize(model3x3 * TANGENT.xyz);
+
+            // Ортогонализация относительно нормали.
+            T = normalize(T - N * dot(N, T));
+
+            // Учитываем отражение системы координат при отрицательном масштабе.
+            float handedness = TANGENT.w * sign(determinant(model3x3));
+
+            vec3 B = normalize(cross(N, T)) * handedness;
+
+            TBN = mat3(T, B, N);
+        */
     #endif
 #endif
 }

@@ -253,7 +253,7 @@ vec4 renderClouds(vec3 rayOrigin, vec3 rayDir, float sceneDistance, float jitter
     vec3 secondaryRadiance = atmoLightRadiance(toSecondary, SECONDARY_SKY_ILLUMINANCE) * secondaryScale;
 
     // ambient сверху - небо, снизу - отраженный от земли свет
-    vec3 ambientTop = atmoSky(vec3(0.0, 1.0, 0.0)) * cloudsLightParams.y;
+    vec3 ambientTop = atmoSky(vec3(0.0, 1.0, 0.0), PRIMARY_DISK_PARAMS, SECONDARY_DISK_PARAMS, DIRECTIONAL_LIGHT_DIRECTION, PRIMARY_SKY_ILLUMINANCE, SECONDARY_LIGHT_DIRECTION, SECONDARY_SKY_ILLUMINANCE) * cloudsLightParams.y;
     vec3 ambientBottom = (primaryRadiance * max(toPrimary.y, 0.0) + secondaryRadiance * max(toSecondary.y, 0.0))
         * GROUND_COLOR * 0.1 * cloudsLightParams.y;
 
@@ -324,7 +324,7 @@ vec4 renderClouds(vec3 rayOrigin, vec3 rayDir, float sceneDistance, float jitter
         // воздушная перспектива: далекие облака растворяются в небе
         float distance = weightedDistance / weightSum;
         float fade = exp(-distance / (maxDistance * 0.45));
-        vec3 sky = atmoSky(normalize(vec3(rayDir.x, max(rayDir.y, 0.0), rayDir.z) + vec3(0.0, 0.0001, 0.0)));
+        vec3 sky = atmoSky(normalize(vec3(rayDir.x, max(rayDir.y, 0.0), rayDir.z) + vec3(0.0, 0.0001, 0.0)), PRIMARY_DISK_PARAMS, SECONDARY_DISK_PARAMS, DIRECTIONAL_LIGHT_DIRECTION, PRIMARY_SKY_ILLUMINANCE, SECONDARY_LIGHT_DIRECTION, SECONDARY_SKY_ILLUMINANCE);
         scattering = mix(sky * (1.0 - transmittance), scattering, fade);
 
     }

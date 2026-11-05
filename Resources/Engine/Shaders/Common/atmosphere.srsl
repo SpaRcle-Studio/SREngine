@@ -65,11 +65,11 @@ vec3 atmoViewTransmittance(vec3 viewDir) {
 }
 
 // полное небо от двух источников (солнце + луна)
-vec3 atmoSky(vec3 viewDir) {
-    float primaryScale = PRIMARY_DISK_PARAMS.z > 0.5 ? ATMO_REFLECTED_SKY_SCALE : 1.0;
-    float secondaryScale = SECONDARY_DISK_PARAMS.z > 0.5 ? ATMO_REFLECTED_SKY_SCALE : 1.0;
-    vec3 sky = atmoInscatter(viewDir, -DIRECTIONAL_LIGHT_DIRECTION, PRIMARY_SKY_ILLUMINANCE) * primaryScale;
-    sky += atmoInscatter(viewDir, -SECONDARY_LIGHT_DIRECTION, SECONDARY_SKY_ILLUMINANCE) * secondaryScale;
+vec3 atmoSky(vec3 viewDir, vec4 primaryDiskParams, vec4 secondaryDiskParams, vec3 primaryLightDirection, vec3 primaryIlluminance, vec3 secondaryLightDirection, vec3 secondaryIlluminance) {
+    float primaryScale = primaryDiskParams.z > 0.5 ? ATMO_REFLECTED_SKY_SCALE : 1.0;
+    float secondaryScale = secondaryDiskParams.z > 0.5 ? ATMO_REFLECTED_SKY_SCALE : 1.0;
+    vec3 sky = atmoInscatter(viewDir, -primaryLightDirection, primaryIlluminance) * primaryScale;
+    sky += atmoInscatter(viewDir, -secondaryLightDirection, secondaryIlluminance) * secondaryScale;
     return sky + ATMO_NIGHT_GLOW;
 }
 

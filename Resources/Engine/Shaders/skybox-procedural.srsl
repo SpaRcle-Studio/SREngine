@@ -171,7 +171,7 @@ void fragment() {
     vec3 toSecondary = normalize(-SECONDARY_LIGHT_DIRECTION);
 
     vec3 skyDir = vec3(viewDir.x, max(viewDir.y, 0.0), viewDir.z);
-    vec3 color = atmoSky(normalize(skyDir + vec3(0.0, 0.0001, 0.0)));
+    vec3 color = atmoSky(normalize(skyDir + vec3(0.0, 0.0001, 0.0)), PRIMARY_DISK_PARAMS, SECONDARY_DISK_PARAMS, DIRECTIONAL_LIGHT_DIRECTION, PRIMARY_SKY_ILLUMINANCE, SECONDARY_LIGHT_DIRECTION, SECONDARY_SKY_ILLUMINANCE);
 
     vec3 viewTransmittance = atmoViewTransmittance(skyDir);
 
@@ -197,7 +197,7 @@ void fragment() {
     // Земля ниже горизонта: отражение неба + дымка
     // ------------------------------------------------------------
     if (viewDir.y < 0.0) {
-        vec3 horizon = atmoSky(normalize(vec3(viewDir.x, 0.02, viewDir.z)));
+        vec3 horizon = atmoSky(normalize(vec3(viewDir.x, 0.02, viewDir.z)), PRIMARY_DISK_PARAMS, SECONDARY_DISK_PARAMS, DIRECTIONAL_LIGHT_DIRECTION, PRIMARY_SKY_ILLUMINANCE, SECONDARY_LIGHT_DIRECTION, SECONDARY_SKY_ILLUMINANCE);
         vec3 ground = GROUND_COLOR * (PRIMARY_SKY_ILLUMINANCE * atmoLightTransmittance(toPrimary.y) * max(toPrimary.y, 0.0)
             + SECONDARY_SKY_ILLUMINANCE * atmoLightTransmittance(toSecondary.y) * max(toSecondary.y, 0.0)) * 0.05;
         float t = smoothstep(0.0, -0.25, viewDir.y);
@@ -206,7 +206,7 @@ void fragment() {
 
     // дымка у горизонта
     float haze = exp(-abs(viewDir.y) * 12.0) * horizonFog;
-    color = mix(color, atmoSky(normalize(vec3(viewDir.x, 0.05, viewDir.z))), haze * 0.5);
+    color = mix(color, atmoSky(normalize(vec3(viewDir.x, 0.05, viewDir.z)), PRIMARY_DISK_PARAMS, SECONDARY_DISK_PARAMS, DIRECTIONAL_LIGHT_DIRECTION, PRIMARY_SKY_ILLUMINANCE, SECONDARY_LIGHT_DIRECTION, SECONDARY_SKY_ILLUMINANCE), haze * 0.5);
 
     COLOR = vec4(max(color, vec3(0.0)), 1.0);
 
