@@ -1,4 +1,4 @@
-[[uniform]] sampler2DArray shadowMap;
+[[uniform]] sampler2DArrayDepth shadowMap;
 
 [[shared]] vec3 pcf_viewPos;
 [[shared]] vec3 pcf_viewDir;
@@ -25,7 +25,7 @@ vec4 DebugColorCascade(vec4 color, uint cascadeIndex) {
 #define SR_CASCADE_USE_RADII
 //#define SR_CASCADE_BLEND_ZONES
 
-[[const]] int NUM_CASCADES = 4;
+[[const]] uint NUM_CASCADES = 4;
 
 [[const]] mat4 biasMat = mat4(
     0.5, 0.0, 0.0, 0.0,
@@ -81,17 +81,17 @@ float textureProj(vec3 proj, float ndotl, vec2 offset, uint cascadeIndex) {
     if (proj.x < 0.0 || proj.x > 1.0 || proj.y < 0.0 || proj.y > 1.0 || proj.z < 0.0 || proj.z > 1.0) {
         return 1.0;
     }
-    vec2 uv = clamp(proj.xy + offset, 0.001, 0.999);
-    proj.z = clamp(proj.z, 0.0, 1.0);
+    vec2 uv = clamp(proj.xy + offset, vec2(0.001), vec2(0.999));
+    vec3 newProj = vec3(proj.x, proj.y, clamp(proj.z, 0.0, 1.0));
 
     // Slope-based bias + минимум (меньше acne при прямом свете)
     float slopeBias = cascadeBias[cascadeIndex] * (1.0 - ndotl);
     float minBias = cascadeBias[cascadeIndex] * 0.25;
     float bias = max(slopeBias, minBias) + 0.0005;
-    proj.z -= bias;
+    newProj.z -= bias;
 
-    float depth = texture(shadowMap, vec3(uv, cascadeIndex)).r;
-    return step(proj.z, depth);
+    float depth = textureLod(shadowMap, vec3(uv.x, uv.y, float(cascadeIndex)), 0.0).r;
+    return step(newProj.z, depth);
 }
 
 float filterPCF(vec3 norm, vec4 shadowCoord, uint cascadeIndex) {

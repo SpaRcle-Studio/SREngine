@@ -8,8 +8,8 @@ struct StorageBuffer_outv {
 @group(0) @binding(0) var<storage, read_write> outv : StorageBuffer_outv;
 
 
-const LUT2 : f32 = array(array(0.25, 0.5, 0.75), array(1.25, 1.5, 1.75));
-const LUT1 : i32 = array(0, 1, 1, 2, 3, 5, 8, 13);
+const LUT2 : array<array<f32, 3>, 2> = array<array<f32, 3>, 2>(array<f32, 3>(0.25, 0.5, 0.75), array<f32, 3>(1.25, 1.5, 1.75));
+const LUT1 : array<i32, 8> = array<i32, 8>(0, 1, 1, 2, 3, 5, 8, 13);
 
 struct VertexInput {
 	@location(0) VERTEX_INPUT : vec3<f32>,

@@ -2,8 +2,8 @@
 
 /// Shader type: Compute
 
-const array_case_1 : i32 = array(10);
-const array_case_2 : i32 = array(array(1, 2, 10, (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1)));
+const array_case_1 : array<i32, 1> = array<i32, 1>(10);
+const array_case_2 : array<array<i32, 16>, 1> = array<array<i32, 16>, 1>(array<i32, 16>(1, 2, 10, (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1), (-1)));
 const case_1_1 : i32 = 123456u;
 
 struct VertexInput {

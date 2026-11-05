@@ -8,7 +8,7 @@ BlendEnabled false;
 DepthWrite false;
 DepthTest false;
 
-[[uniform]] sampler2DArray cascadedDepthMap;
+[[uniform]] sampler2DArrayDepth cascadedDepthMap;
 [[shared]] vec2 uv;
 
 #include <Engine/Shaders/Common/linearize-depth.srsl>
@@ -20,11 +20,11 @@ void fragment() {
     int quadY = int(uv.y * 2.0);                // 0 или 1
     int cascadeIndex = quadX + quadY * 2;       // 0..3
 
-    float depth = LinearizeDepth(texture(cascadedDepthMap, vec3(quadrantUV, cascadeIndex)).r, 1.0, 100.0);
+    float depth = LinearizeDepth(texture(cascadedDepthMap, vec3(quadrantUV.x, quadrantUV.y, float(cascadeIndex))).r, 1.0, 100.0);
     COLOR_INDEX_0 = vec4(vec3(depth), 1.0);
 }
 
 void vertex() {
-    uv = vec2((VERTEX_INDEX << 1) & 2, VERTEX_INDEX & 2);
+    uv = vec2((int(VERTEX_INDEX) << 1) & 2, int(VERTEX_INDEX) & 2);
     OUT_POSITION = vec4(uv * 2.0 - 1.0, 0.0, 1.0);
 }

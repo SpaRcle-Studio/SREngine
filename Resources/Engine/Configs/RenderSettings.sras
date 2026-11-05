@@ -209,8 +209,6 @@ use tabs: true
 								8-b:false
 							7-v:shadowsInstancing
 								8-b:false
-							7-v:postProcess
-								8-b:false
 							7-v:hdr
 								8-b:false
 							7-v:autoExposure
@@ -218,9 +216,7 @@ use tabs: true
 							7-v:SSAO
 								8-s:None
 							7-v:shadowsQuality
-								8-s:None
-							7-v:colorBufferQuality
-								8-s:None
+								8-s:Medium
 							7-v:volumetricClouds
 								8-s:None
 							7-v:volumetricFog

@@ -171,7 +171,7 @@ DepthTest false;
 
 #ifdef SR_LINEARIZE_DEPTH_CASCADES
     #include <Engine/Shaders/Common/linearize-depth.srsl>
-    [[uniform]] sampler2DArray shadowMap;
+    [[uniform]] sampler2DArrayDepth shadowMap;
 #endif
 
 #define USE_COLOR_INDEX_0
@@ -222,7 +222,7 @@ void fragment() {
         ivec2 quad = ivec2(localUV * 2.0); // 2x2 квадранта
         int cascadeIndex = quad.x + quad.y * 2; // 0..3
         vec2 quadUV = fract(localUV * 2.0); // uv внутри квадранта
-        float depth = LinearizeDepth(texture(shadowMap, vec3(quadUV, cascadeIndex)).r, 10, 100);
+        float depth = LinearizeDepth(texture(shadowMap, vec3(quadUV.x, quadUV.y, float(cascadeIndex))).r, 10, 100);
         COLOR_INDEX_0 = vec4(vec3(depth), 1.0);
         return;
     }
@@ -315,10 +315,10 @@ void fragment() {
     color = pow(color, vec3(1.0 / 2.2));
 #endif
 
-    COLOR_INDEX_0 = vec4(color, texture(colorMap, uv).a);
+    COLOR_INDEX_0 = vec4(color, textureLod(colorMap, uv, 0.0).a);
 }
 
 void vertex() {
-    uv = vec2(float((VERTEX_INDEX << 1) & 2), float(VERTEX_INDEX & 2));
+    uv = vec2(float((int(VERTEX_INDEX) << 1) & 2), float(int(VERTEX_INDEX) & 2));
     OUT_POSITION = vec4(uv * 2.0 - 1.0, 0.0, 1.0);
 }
