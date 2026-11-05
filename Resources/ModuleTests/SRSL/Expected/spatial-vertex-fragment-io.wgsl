@@ -45,9 +45,6 @@ var<private> UV : vec2<f32>;
 
 var<private> vUv : vec2<f32>;
 
-struct FragmentOutput {
-};
-
 var<private> COLOR : vec4<f32>;
 
 @vertex
@@ -76,7 +73,7 @@ fn vertex(input : VertexInput) -> VertexOutput {
 }
 
 @fragment
-fn fragment(fsIn : VertexOutput) -> FragmentOutput {
+fn fragment(fsIn : VertexOutput)  {
     let TintColor : vec4<f32> = BLOCK.TintColor;
     VERTEX = fsIn.VERTEX;
     NORMAL = fsIn.NORMAL;
@@ -85,11 +82,9 @@ fn fragment(fsIn : VertexOutput) -> FragmentOutput {
     vUv = fsIn._s_vUv;
     var COLOR_INDEX_0 : vec4<f32>; /// location 0
     var COLOR_INDEX_1 : vec4<f32>; /// location 1
-    var fsOut : FragmentOutput;
     var albedo : vec3<f32> = textureSample(Albedo, Albedo_sampler, vUv).rgb;
     COLOR = (vec4<f32>(albedo, 1.0) * TintColor);
     COLOR_INDEX_1 = vec4<f32>(fsIn.position.z);
     COLOR_INDEX_0 = COLOR;
-    return fsOut;
 }
 

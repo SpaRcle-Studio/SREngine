@@ -44,9 +44,6 @@ var<private> NORMAL : vec3<f32>;
 var<private> TANGENT : vec4<f32>;
 var<private> UV : vec2<f32>;
 
-struct FragmentOutput {
-};
-
 var<private> COLOR : vec4<f32>;
 
 @vertex
@@ -69,7 +66,7 @@ fn vertex(input : VertexInput) -> VertexOutput {
 }
 
 @fragment
-fn fragment(fsIn : VertexOutput) -> FragmentOutput {
+fn fragment(fsIn : VertexOutput)  {
     let DIRECTIONAL_LIGHT_DIRECTION : vec3<f32> = SHARED.DIRECTIONAL_LIGHT_DIRECTION;
     let GROUND_COLOR : vec3<f32> = SHARED.GROUND_COLOR;
     let SKY_COLOR : vec3<f32> = SHARED.SKY_COLOR;
@@ -83,7 +80,6 @@ fn fragment(fsIn : VertexOutput) -> FragmentOutput {
     var COLOR_INDEX_1 : vec4<f32>; /// location 1
     var COLOR_INDEX_2 : vec4<f32>; /// location 2
     var COLOR_INDEX_3 : vec4<f32>; /// location 3
-    var fsOut : FragmentOutput;
     var eyeDir : vec3<f32> = normalize(VERTEX);
     var col : f32 = clamp(((eyeDir.y + 0.035) / 0.05), 0.0, 1.0);
     var color : vec3<f32> = mix(GROUND_COLOR, SKY_COLOR, col);
@@ -100,6 +96,5 @@ fn fragment(fsIn : VertexOutput) -> FragmentOutput {
     COLOR_INDEX_2 = vec4<f32>(0.0);
     COLOR_INDEX_3 = vec4<f32>(0.0);
     COLOR_INDEX_0 = COLOR;
-    return fsOut;
 }
 

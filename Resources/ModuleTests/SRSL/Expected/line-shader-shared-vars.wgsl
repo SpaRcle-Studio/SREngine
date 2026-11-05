@@ -39,9 +39,6 @@ var<private> UV : vec2<f32>;
 
 var<private> lineColor : vec4<f32>;
 
-struct FragmentOutput {
-};
-
 var<private> COLOR : vec4<f32>;
 
 @vertex
@@ -69,16 +66,14 @@ fn vertex(input : VertexInput, @builtin(vertex_index) vertexIndex : u32) -> Vert
 }
 
 @fragment
-fn fragment(fsIn : VertexOutput) -> FragmentOutput {
+fn fragment(fsIn : VertexOutput)  {
     VERTEX = fsIn.VERTEX;
     NORMAL = fsIn.NORMAL;
     TANGENT = fsIn.TANGENT;
     UV = fsIn.UV;
     lineColor = fsIn._s_lineColor;
     var COLOR_INDEX_0 : vec4<f32>; /// location 0
-    var fsOut : FragmentOutput;
     COLOR = lineColor;
     COLOR_INDEX_0 = COLOR;
-    return fsOut;
 }
 

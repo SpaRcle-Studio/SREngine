@@ -52,9 +52,6 @@ var<private> NORMAL : vec3<f32>;
 var<private> TANGENT : vec4<f32>;
 var<private> UV : vec2<f32>;
 
-struct FragmentOutput {
-};
-
 var<private> COLOR : vec4<f32>;
 
 @vertex
@@ -85,7 +82,7 @@ fn vertex(input : VertexInput) -> VertexOutput {
 }
 
 @fragment
-fn fragment(fsIn : VertexOutput) -> FragmentOutput {
+fn fragment(fsIn : VertexOutput)  {
     let VIEW_MATRIX : mat4x4<f32> = SHARED.VIEW_MATRIX;
     let VIEW_DIRECTION : vec3<f32> = SHARED.VIEW_DIRECTION;
     let BubbleColor : vec3<f32> = BLOCK.BubbleColor;
@@ -96,13 +93,11 @@ fn fragment(fsIn : VertexOutput) -> FragmentOutput {
     var COLOR_INDEX_0 : vec4<f32>; /// location 0
     var COLOR_INDEX_1 : vec4<f32>; /// location 1
     var COLOR_INDEX_2 : vec4<f32>; /// location 2
-    var fsOut : FragmentOutput;
     var viewDirectionWorld : vec3<f32> = (VIEW_MATRIX * vec4<f32>(VIEW_DIRECTION, 0)).xyz;
     var normalWorld : vec3<f32> = (VIEW_MATRIX * vec4<f32>(NORMAL, 0.0)).xyz;
     COLOR = vec4<f32>(BubbleColor, Fresnel(viewDirectionWorld, normalWorld));
     COLOR_INDEX_1 = (vec4<f32>(fsIn.position.z) * max(0, (COLOR.a - 0.8)));
     COLOR_INDEX_2 = vec4<f32>(VERTEX, 1.0);
     COLOR_INDEX_0 = COLOR;
-    return fsOut;
 }
 
