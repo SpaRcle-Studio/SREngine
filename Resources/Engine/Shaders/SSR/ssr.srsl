@@ -22,7 +22,7 @@ DepthTest false;
 
 #ifdef SR_SSR_TRACE
     [[uniform]] sampler2D sceneColor;
-    [[uniform]] sampler2D sceneDistanceMap;
+    [[uniform], [unfilterable]] sampler2D sceneDistanceMap;
 #endif
 
 #ifdef SR_SSR_RESOLVE

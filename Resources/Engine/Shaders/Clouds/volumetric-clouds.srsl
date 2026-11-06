@@ -8,7 +8,7 @@ BlendEnabled false;
 DepthWrite false;
 DepthTest false;
 
-[[uniform]] sampler2D sceneDistanceMap;
+[[uniform], [unfilterable]] sampler2D sceneDistanceMap;
 
 [[shared]] vec2 uv;
 
@@ -25,7 +25,12 @@ float cloudsIGN(vec2 pixel) {
 }
 
 void fragment() {
-    vec3 rayDir = getRayDir(uv);
+    #ifdef SR_WEBGPU
+        vec2 rayUV = vec2(uv.x, 1.0 - uv.y);
+    #else
+        vec2 rayUV = uv;
+    #endif
+    vec3 rayDir = getRayDir(rayUV);
 
     float geometryDistance = gbufferSceneDistance(sceneDistanceMap, uv, TARGET_RESOLUTION);
     // дистанция, для которой посчитан пиксель - по ней апсемпл в post-process подбирает соседей

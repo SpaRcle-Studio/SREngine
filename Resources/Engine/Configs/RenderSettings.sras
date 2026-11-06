@@ -217,10 +217,6 @@ use tabs: true
 								8-s:None
 							7-v:shadowsQuality
 								8-s:Medium
-							7-v:volumetricClouds
-								8-s:None
-							7-v:volumetricFog
-								8-s:None
 							7-v:bloom
 								8-s:None
 				4-k:i

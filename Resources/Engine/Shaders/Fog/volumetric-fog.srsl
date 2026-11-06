@@ -17,7 +17,7 @@ DepthTest false;
 [[uniform(SHARED)]] vec4 fogNoiseParams;    // noiseStrength, noiseScale, windSpeed, startDistance
 [[uniform(SHARED)]] vec4 fogWindParams;     // windDir.xy, steps, -
 
-[[uniform]] sampler2D sceneDistanceMap;
+[[uniform], [unfilterable]] sampler2D sceneDistanceMap;
 
 #ifdef SR_FOG_SHADOWS
     [[uniform]] sampler2DArrayDepth shadowMap;
@@ -121,7 +121,12 @@ float fogShadow(vec3 worldPos, float viewDepth) {
 
 void fragment() {
     vec3 rayOrigin = VIEW_POSITION;
-    vec3 rayDir = getRayDir(uv);
+    #ifdef SR_WEBGPU
+        vec2 rayUV = vec2(uv.x, 1.0 - uv.y);
+    #else
+        vec2 rayUV = uv;
+    #endif
+    vec3 rayDir = getRayDir(rayUV);
 
     float maxDistance = fogDensityParams.w;
     float startDistance = fogNoiseParams.w;

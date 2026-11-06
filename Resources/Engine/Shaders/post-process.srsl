@@ -29,12 +29,12 @@ DepthTest false;
 
 #ifdef SR_VOLUMETRIC_CLOUDS
     [[uniform]] sampler2D cloudsMap;
-    [[uniform]] sampler2D cloudsDepthMap;
+    [[uniform], [unfilterable]] sampler2D cloudsDepthMap;
 #endif
 
 #ifdef SR_VOLUMETRIC_FOG
     [[uniform]] sampler2D fogMap;
-    [[uniform]] sampler2D fogDepthMap;
+    [[uniform], [unfilterable]] sampler2D fogDepthMap;
 #endif
 
 #ifdef SR_BLOOM
@@ -58,7 +58,7 @@ DepthTest false;
 #ifdef SR_SSR
     [[public], [uniform(SHARED)]] float ssrIntensity = 1.0;
     [[uniform]] sampler2D ssrMap;
-    [[uniform]] sampler2D ssrDepthMap;
+    [[uniform], [unfilterable]] sampler2D ssrDepthMap;
     [[uniform]] sampler2D normalMap;
 #endif
 
