@@ -34,8 +34,11 @@ var<private> NORMAL : vec3<f32>;
 var<private> TANGENT : vec4<f32>;
 var<private> UV : vec2<f32>;
 
-fn SelectValue(x : i32, y : i32) -> i32 {
-    return select(x, x, (x > y));
+fn SelectValue(_sr_arg_x : i32, _sr_arg_y : i32) -> i32 {
+    var x : i32 = _sr_arg_x;
+    var y : i32 = _sr_arg_y;
+
+    return select(y, x, (x > y));
 
 }
 
@@ -45,8 +48,8 @@ fn compute(@builtin(global_invocation_id) global_id : vec3<u32>, @builtin(workgr
     var x : i32 = 5;
     var y : i32 = 7;
     var m : i32 = SelectValue(x, y);
-    var r0 : i32 = select((m + 1), (m + 1), (m >= threshold));
-    var r1 : i32 = select((x + y), (x + y), ((x + y) > 0));
+    var r0 : i32 = select((m - 1), (m + 1), (m >= threshold));
+    var r1 : i32 = select((-(x + y)), (x + y), ((x + y) > 0));
     outBuf.outBuf[0] = r0;
     outBuf.outBuf[1] = r1;
 }

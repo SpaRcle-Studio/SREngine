@@ -282,3 +282,46 @@ use tabs: true
 									9-f:1
 								8-v:z
 									9-f:10
+		2-k:i
+			3-o:d
+				4-v:type
+					5-s:GameObject
+				4-o:ptr
+					5-v:entityId
+						6-i:3474011784206969985
+					5-a:components
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Camera
+								8-o:ptr
+									9-v:entityId
+										10-i:4299387826229906232
+									9-o:renderParameters
+										10-a:includeLayers
+										10-a:excludeLayers
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:CameraFlyMover
+								8-o:ptr
+									9-v:entityId
+										10-i:3219511337909231732
+									9-v:lockCursor
+										10-b:true
+					5-v:name
+						6-s:Camera
+					5-o:transform
+						6-v:type
+							7-s:Transform3D
+						6-o:ptr
+							7-o:translation
+								8-v:y
+									9-f:3.56538
+								8-v:z
+									9-f:-7.00647
+							7-o:quaternion
+								8-v:x
+									9-f:0.190809
+								8-v:w
+									9-f:0.981627

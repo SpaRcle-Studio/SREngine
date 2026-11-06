@@ -45,7 +45,7 @@ fn compute(@builtin(global_invocation_id) global_id : vec3<u32>, @builtin(workgr
     let elementCount : u32 = BLOCK.elementCount;
     var gid : u32 = global_id.x;
     var tid : u32 = local_index;
-    shData[tid] = select(src.src[gid], src.src[gid], (gid < elementCount));
+    shData[tid] = select(0.0, src.src[gid], (gid < elementCount));
     workgroupBarrier();
     for (var s : u32 = 32u; (s > 0u); s = (s >> 1u)) {
         if ((tid < s)) {

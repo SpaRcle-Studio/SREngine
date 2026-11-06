@@ -28,12 +28,16 @@ var<private> NORMAL : vec3<f32>;
 var<private> TANGENT : vec4<f32>;
 var<private> UV : vec2<f32>;
 
-fn IsPositive(x : i32) -> bool {
+fn IsPositive(_sr_arg_x : i32) -> bool {
+    var x : i32 = _sr_arg_x;
+
     return (x > 0);
 
 }
 
-fn IsEven(x : i32) -> bool {
+fn IsEven(_sr_arg_x : i32) -> bool {
+    var x : i32 = _sr_arg_x;
+
     return (((x & 1)) == (0));
 
 }

@@ -31,7 +31,10 @@ var<private> NORMAL : vec3<f32>;
 var<private> TANGENT : vec4<f32>;
 var<private> UV : vec2<f32>;
 
-fn GetLut2(x : u32, y : u32) -> f32 {
+fn GetLut2(_sr_arg_x : u32, _sr_arg_y : u32) -> f32 {
+    var x : u32 = _sr_arg_x;
+    var y : u32 = _sr_arg_y;
+
     return LUT2[x][y];
 
 }

@@ -26,7 +26,10 @@ var<private> NORMAL : vec3<f32>;
 var<private> TANGENT : vec4<f32>;
 var<private> UV : vec2<f32>;
 
-fn IsMaskIncludedSubMask(mask : i32, subMask : i32) -> bool {
+fn IsMaskIncludedSubMask(_sr_arg_mask : i32, _sr_arg_subMask : i32) -> bool {
+    var mask : i32 = _sr_arg_mask;
+    var subMask : i32 = _sr_arg_subMask;
+
     (((subMask & mask)) != (subMask));
     ((subMask) != ((subMask & mask)));
     ((subMask) == ((subMask & mask)));

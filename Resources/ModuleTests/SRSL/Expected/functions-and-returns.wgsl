@@ -28,7 +28,11 @@ var<private> NORMAL : vec3<f32>;
 var<private> TANGENT : vec4<f32>;
 var<private> UV : vec2<f32>;
 
-fn ClampInt(v : i32, lo : i32, hi : i32) -> i32 {
+fn ClampInt(_sr_arg_v : i32, _sr_arg_lo : i32, _sr_arg_hi : i32) -> i32 {
+    var v : i32 = _sr_arg_v;
+    var lo : i32 = _sr_arg_lo;
+    var hi : i32 = _sr_arg_hi;
+
     if ((v < lo)) {
         return lo;
 
@@ -41,7 +45,9 @@ fn ClampInt(v : i32, lo : i32, hi : i32) -> i32 {
 
 }
 
-fn Fib(n : i32) -> i32 {
+fn Fib(_sr_arg_n : i32) -> i32 {
+    var n : i32 = _sr_arg_n;
+
     if ((n <= 1)) {
         return n;
 

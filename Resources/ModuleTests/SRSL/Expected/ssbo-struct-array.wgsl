@@ -34,7 +34,9 @@ var<private> NORMAL : vec3<f32>;
 var<private> TANGENT : vec4<f32>;
 var<private> UV : vec2<f32>;
 
-fn Accumulate(idx : u32) -> vec4<f32> {
+fn Accumulate(_sr_arg_idx : u32) -> vec4<f32> {
+    var idx : u32 = _sr_arg_idx;
+
     var it : Item = items.items[idx];
     var w : f32 = max(0.0, it.weight);
     return ((it.color * w) + (vec4<f32>(it.pos, 1.0) * (1.0 - w)));
