@@ -48,7 +48,12 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        m_shiftPressed = SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::LShift);
+        m_shiftPressed = SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::LShift) ||
+                         SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::RShift);
+        m_ctrlPressed = SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::LCtrl) ||
+                        SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::RCtrl);
+        m_previousVisibleItems.swap(m_visibleItems);
+        m_visibleItems.clear();
 
         bool isPrefabLogic = false;
 
@@ -75,21 +80,10 @@ namespace SR_CORE_GUI_NS {
         if (!isPrefabLogic && SR_GRAPH_GUI_NS::Immediate::BeginDragDropTargetWindow("Hierarchy##Payload")) {
             if (auto&& pPayload = SR_GRAPH_GUI_NS::Immediate::AcceptDragDropPayload("Hierarchy##Payload")) {
                 if (m_scene) {
-                    SR_UTILS_NS::Vector<SR_UTILS_NS::ReversibleCommand*> commands;
                     if (auto&& pData = SR_GRAPH_GUI_NS::Immediate::GetDataFromDragDropPayload(pPayload)) {
-                        commands.emplace_back(new SR_CORE_NS::Commands::ChangeHierarchySelected(m_engine, this, m_selected, { }));
-
-                        SR_GRAPH_GUI_NS::PayloadArrayData payloadData = *(SR_GRAPH_GUI_NS::PayloadArrayData*)(pData);
-                        for (size_t i = 0; i < payloadData.size; ++i) {
-                            uint64_t entityId = static_cast<uint64_t*>(payloadData.data)[i];
-                            if (auto&& pSO = m_scene->GetEntityController()->FindById(entityId).StaticCast<SR_UTILS_NS::SceneObject>()) {
-                                commands.emplace_back(new SR_CORE_NS::Commands::GameObjectMove(m_engine, pSO, SR_ID_INVALID));
-                            }
-                        }
+                        auto&& pCmd = new SR_CORE_NS::Commands::GameObjectsMove(m_engine, m_pointersHolder, SR_ID_INVALID, SR_ID_INVALID);
+                        m_engine->GetCmdManager()->Execute(pCmd, SR_UTILS_NS::SyncType::Async);
                     }
-
-                    auto&& pCmd = new SR_UTILS_NS::GroupCommand(std::move(commands));
-                    m_engine->GetCmdManager()->Execute(pCmd, SR_UTILS_NS::SyncType::Async);
                 }
             }
             SR_GRAPH_GUI_NS::Immediate::EndDragDropTarget();
@@ -150,6 +144,8 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
+        m_visibleItems.emplace_back(pRoot);
+
         const auto& name = pRoot->GetName();
         bool hasChild = false;
 
@@ -178,13 +174,25 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (SR_GRAPH_GUI_NS::Immediate::RadioButton("##", pRoot->IsEnabled(), 0.75f)) {
-            auto&& pCmd = new SR_CORE_NS::Commands::EntityEnable(m_engine, pRoot.StaticCast<SR_UTILS_NS::Entity>(), !pRoot->IsEnabled());
-            m_engine->GetCmdManager()->Execute(pCmd, SR_UTILS_NS::SyncType::Async);
+            SR_UTILS_NS::Vector<SR_UTILS_NS::ReversibleCommand*> commands;
+            if (m_selected.count(pRoot) == 1 && m_selected.size() > 1) {
+                for (auto&& pSelected : m_selected) {
+                    if (pSelected) {
+                        commands.emplace_back(new SR_CORE_NS::Commands::EntityEnable(m_engine, pSelected.StaticCast<SR_UTILS_NS::Entity>(), !pRoot->IsEnabled()));
+                    }
+                }
+            }
+            else {
+                commands.emplace_back(new SR_CORE_NS::Commands::EntityEnable(m_engine, pRoot.StaticCast<SR_UTILS_NS::Entity>(), !pRoot->IsEnabled()));
+            }
+            m_engine->GetCmdManager()->Execute(new SR_UTILS_NS::GroupCommand(std::move(commands)), SR_UTILS_NS::SyncType::Async);
         }
 
         SR_GRAPH_GUI_NS::Immediate::SameLine();
 
         const bool open = SR_GRAPH_GUI_NS::Immediate::TreeNodeEx((void*)(intptr_t)id, flags, "%s", name.c_str());
+        const auto itemMin = SR_GRAPH_GUI_NS::Immediate::GetItemRectMin();
+        const auto itemMax = SR_GRAPH_GUI_NS::Immediate::GetItemRectMax();
 
         if (pRoot->GetPrefab() || pRoot->HasSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave)) {
             SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
@@ -211,10 +219,8 @@ namespace SR_CORE_GUI_NS {
             }
 
             if (useSelected) {
-                for (auto&& ptr : m_selected) {
-                    if (ptr) {
-                        m_pointersHolder.emplace_back(ptr->GetEntityId());
-                    }
+                for (auto&& pTreeRoot : m_tree) {
+                    AppendSelectedIds(pTreeRoot, false);
                 }
             }
             else {
@@ -236,21 +242,43 @@ namespace SR_CORE_GUI_NS {
                         SelectGameObject(pRoot);
                     }
                 }
+                else if (strcmp(SR_GRAPH_GUI_NS::Immediate::GetPayloadType(pPayload), "Hierarchy##Payload") == 0) {
+                    const float_t relativeY = (SR_GRAPH_GUI_NS::Immediate::GetMousePos().y - itemMin.y) / (itemMax.y - itemMin.y);
+                    if (relativeY < 0.25f || relativeY > 0.75f) {
+                        const float_t lineY = relativeY < 0.25f ? itemMin.y : itemMax.y;
+                        SR_GRAPH_GUI_NS::Immediate::DrawListAddLine(
+                            SR_GRAPH_GUI_NS::Immediate::GetWindowDrawList(),
+                            SR_MATH_NS::FVector2(itemMin.x, lineY),
+                            SR_MATH_NS::FVector2(itemMax.x, lineY),
+                            SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::DragDropTarget),
+                            2.0f
+                        );
+                    }
+                }
             }
 
             if (auto payload = SR_GRAPH_GUI_NS::Immediate::AcceptDragDropPayload("Hierarchy##Payload")) {
                 if (auto&& pData = SR_GRAPH_GUI_NS::Immediate::GetDataFromDragDropPayload(payload)) {
                     if (m_scene) {
-                        SR_UTILS_NS::Vector<SR_UTILS_NS::ReversibleCommand*> commands;
-                        commands.emplace_back(new SR_CORE_NS::Commands::ChangeHierarchySelected(m_engine, this, m_selected, {}));
-                        SR_GRAPH_GUI_NS::PayloadArrayData payloadData = *(SR_GRAPH_GUI_NS::PayloadArrayData*)(pData);
-                        for (size_t i = 0; i < payloadData.size; ++i) {
-                            uint64_t entityId = static_cast<uint64_t*>(payloadData.data)[i];
-                            if (auto&& pSO = m_scene->GetEntityController()->FindById(entityId).StaticCast<SR_UTILS_NS::SceneObject>()) {
-                                commands.emplace_back(new SR_CORE_NS::Commands::GameObjectMove(m_engine, pSO, pRoot->GetEntityId()));
+                        const float_t relativeY = (SR_GRAPH_GUI_NS::Immediate::GetMousePos().y - itemMin.y) / (itemMax.y - itemMin.y);
+                        SR_UTILS_NS::EntityId parentId = pRoot->GetEntityId();
+                        int32_t index = SR_ID_INVALID;
+                        if (relativeY < 0.25f || relativeY > 0.75f) {
+                            parentId = pRoot->GetParent() ? pRoot->GetParent()->GetEntityId() : SR_ID_INVALID;
+                            if (pRoot->GetParent()) {
+                                index = pRoot->GetParent()->GetChildIndex(*pRoot);
+                            }
+                            else {
+                                auto&& root = m_scene->GetRootSceneObjects();
+                                auto&& pIt = std::find(root.begin(), root.end(), pRoot);
+                                index = pIt == root.end() ? SR_ID_INVALID : static_cast<int32_t>(pIt - root.begin());
+                            }
+                            if (relativeY > 0.75f && index != SR_ID_INVALID) {
+                                ++index;
                             }
                         }
-                        auto&& cmd = new SR_UTILS_NS::GroupCommand(std::move(commands));
+
+                        auto&& cmd = new SR_CORE_NS::Commands::GameObjectsMove(m_engine, m_pointersHolder, parentId, index);
                         m_engine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
                     }
                 }
@@ -269,6 +297,28 @@ namespace SR_CORE_GUI_NS {
         }
 
         SR_GRAPH_GUI_NS::Immediate::PopID();
+    }
+
+    void Hierarchy::AppendSelectedIds(const SR_UTILS_NS::SceneObject::Ptr& pRoot, bool hasSelectedParent) {
+        if (!pRoot) {
+            return;
+        }
+        const bool isSelected = m_selected.count(pRoot) == 1;
+        if (isSelected && !hasSelectedParent) {
+            m_pointersHolder.emplace_back(pRoot->GetEntityId());
+        }
+        for (auto&& pChild : pRoot->GetChildrenRef()) {
+            AppendSelectedIds(pChild, hasSelectedParent || isSelected);
+        }
+    }
+
+    bool Hierarchy::IsTopLevelSelected(const SR_UTILS_NS::SceneObject::Ptr& pSceneObject) const {
+        for (SR_UTILS_NS::SceneObject::Ptr pParent = pSceneObject ? pSceneObject->GetParent() : nullptr; pParent; pParent = pParent->GetParent()) {
+            if (m_selected.count(pParent) == 1) {
+                return false;
+            }
+        }
+        return pSceneObject;
     }
 
     void Hierarchy::ChildContextMenu(const SR_UTILS_NS::SceneObject::Ptr& pSceneObject, uint64_t id) {
@@ -367,7 +417,10 @@ namespace SR_CORE_GUI_NS {
 
     void Hierarchy::CheckSelected(const SR_UTILS_NS::SceneObject::Ptr& gm) {
         SR_TRACY_ZONE;
-        if (SR_GRAPH_GUI_NS::Immediate::IsItemHovered() && SR_GRAPH_GUI_NS::Immediate::IsMouseReleased(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left)) {
+        if (!SR_GRAPH_GUI_NS::Immediate::GetDragDropPayload() &&
+            SR_GRAPH_GUI_NS::Immediate::IsItemHovered() &&
+            SR_GRAPH_GUI_NS::Immediate::IsMouseReleased(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left))
+        {
             SelectGameObject(gm);
         }
     }
@@ -415,7 +468,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Vector<SR_UTILS_NS::SceneObject::Ptr> toCopy;
         for (auto&& pSO : m_selected) {
-            if (pSO) {
+            if (IsTopLevelSelected(pSO)) {
                 toCopy.emplace_back(pSO);
             }
         }
@@ -499,7 +552,7 @@ namespace SR_CORE_GUI_NS {
             SR_UTILS_NS::Vector<SR_UTILS_NS::ReversibleCommand*> commands;
             commands.emplace_back(new SR_CORE_NS::Commands::ChangeHierarchySelected(m_engine, this, m_selected, {}));
             for (auto&& pSelected : m_selected) {
-                if (!pSelected) {
+                if (!IsTopLevelSelected(pSelected)) {
                     continue;
                 }
                 if (pSelected->HasEditorFlags(SR_UTILS_NS::EditorFlags::DontDelete)) {
@@ -535,20 +588,43 @@ namespace SR_CORE_GUI_NS {
         }
 
         ///команда не должна срабатывать, если объект уже выделен и ни одного помимо него (либо если на нём прожат шифт), иначе такая команда бесполезна
-        if ((m_selected.count(ptr) != 0)) {
-            if ((m_shiftPressed)) {
-                return;
+        SR_UTILS_NS::Set<SR_UTILS_NS::SceneObject::Ptr> newSelected;
+        if (m_shiftPressed && m_selectionAnchor) {
+            newSelected = m_selected;
+            int32_t anchorIndex = SR_ID_INVALID;
+            int32_t targetIndex = SR_ID_INVALID;
+            auto&& visibleItems = m_previousVisibleItems.empty() ? m_visibleItems : m_previousVisibleItems;
+            for (int32_t i = 0; i < static_cast<int32_t>(visibleItems.size()); ++i) {
+                if (visibleItems[i] == m_selectionAnchor) anchorIndex = i;
+                if (visibleItems[i] == ptr) targetIndex = i;
             }
-            if ((m_selected.size() == 1)) {
-                return;
+            if (anchorIndex != SR_ID_INVALID && targetIndex != SR_ID_INVALID) {
+                if (anchorIndex > targetIndex) {
+                    std::swap(anchorIndex, targetIndex);
+                }
+                for (int32_t i = anchorIndex; i <= targetIndex; ++i) {
+                    newSelected.insert(visibleItems[i]);
+                }
             }
+        }
+        else if (m_ctrlPressed) {
+            newSelected = m_selected;
+            if (newSelected.count(ptr) == 1) {
+                newSelected.erase(ptr);
+            }
+            else {
+                newSelected.insert(ptr);
+            }
+            m_selectionAnchor = ptr;
+        }
+        else {
+            newSelected.insert(ptr);
+            m_selectionAnchor = ptr;
         }
 
-        SR_UTILS_NS::Set<SR_UTILS_NS::SceneObject::Ptr> newSelected;
-        if (m_shiftPressed) {
-            newSelected = m_selected;
+        if (newSelected == m_selected) {
+            return;
         }
-        newSelected.insert(ptr);
 
         auto&& cmd = new SR_CORE_NS::Commands::ChangeHierarchySelected(m_engine, this, m_selected, newSelected);
         m_engine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Sync);

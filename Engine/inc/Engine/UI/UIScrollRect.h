@@ -20,6 +20,11 @@ namespace SR_CORE_UI_NS {
     public:
         void Update(float_t dt) override;
 
+        void SetContent(const SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::SceneObject>& pContent) { m_content.SetEntityId(pContent->GetEntityId()); }
+        void SetViewport(const SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::SceneObject>& pViewport) { m_viewport.SetEntityId(pViewport->GetEntityId()); }
+        void SetHorizontalScrollBar(const SR_HTYPES_NS::SharedPtr<UIScrollBar>& pScrollBar) { m_horizontalScrollBar.SetEntityId(pScrollBar->GetSceneObject()->GetEntityId()); }
+        void SetVerticalScrollBar(const SR_HTYPES_NS::SharedPtr<UIScrollBar>& pScrollBar) { m_verticalScrollBar.SetEntityId(pScrollBar->GetSceneObject()->GetEntityId()); }
+
     private:
         /// @property
         SR_UTILS_NS::EntityRef<SR_UTILS_NS::SceneObject> m_content;

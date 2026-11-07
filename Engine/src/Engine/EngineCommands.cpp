@@ -599,4 +599,104 @@ namespace SR_CORE_NS::Commands {
 
         return true;
     }
+
+    //! ----------------------------------------------------------------------------------------------------------------
+
+    GameObjectsMove::GameObjectsMove(const EnginePtr& pEngine, const SR_UTILS_NS::Vector<SR_UTILS_NS::EntityId>& entityIds,
+                                     SR_UTILS_NS::EntityId newParentId, int32_t newIndex)
+        : Super(pEngine)
+    {
+        auto&& root = m_scene->GetRootSceneObjects();
+        int32_t removedBefore = 0;
+
+        for (auto&& entityId : entityIds) {
+            auto&& pSO = m_scene->GetEntityController()->FindById(entityId).DynamicCast<SR_UTILS_NS::SceneObject>();
+            if (!pSO) {
+                continue;
+            }
+
+            Position position;
+            position.entityId = entityId;
+            position.parentId = pSO->GetParent() ? pSO->GetParent()->GetEntityId() : SR_ID_INVALID;
+            if (pSO->GetParent()) {
+                position.index = pSO->GetParent()->GetChildIndex(*pSO);
+            }
+            else {
+                auto&& pIt = std::find(root.begin(), root.end(), pSO);
+                position.index = pIt == root.end() ? SR_ID_INVALID : static_cast<int32_t>(pIt - root.begin());
+            }
+            m_previousPositions.emplace_back(position);
+
+            if (position.parentId == newParentId && position.index < newIndex) {
+                ++removedBefore;
+            }
+        }
+
+        if (newIndex != SR_ID_INVALID) {
+            newIndex -= removedBefore;
+        }
+
+        for (int32_t i = 0; i < static_cast<int32_t>(m_previousPositions.size()); ++i) {
+            m_newPositions.emplace_back(Position { m_previousPositions[i].entityId, newParentId,
+                                                   newIndex == SR_ID_INVALID ? SR_ID_INVALID : newIndex + i });
+        }
+    }
+
+    bool GameObjectsMove::Apply(const SR_UTILS_NS::Vector<Position>& positions) {
+        auto&& pController = m_scene->GetEntityController();
+
+        for (auto&& position : positions) {
+            auto&& pSO = pController->FindById(position.entityId).DynamicCast<SR_UTILS_NS::SceneObject>();
+            auto&& pParent = position.parentId == SR_ID_INVALID
+                ? SR_UTILS_NS::SceneObject::Ptr()
+                : pController->FindById(position.parentId).DynamicCast<SR_UTILS_NS::SceneObject>();
+            if (!pSO || (position.parentId != SR_ID_INVALID && !pParent)) {
+                return false;
+            }
+            for (auto&& pIt = pParent; pIt; pIt = pIt->GetParent()) {
+                if (pIt == pSO) {
+                    return false;
+                }
+            }
+        }
+
+        for (auto&& position : positions) {
+            auto&& pSO = pController->FindById(position.entityId).DynamicCast<SR_UTILS_NS::SceneObject>();
+            if (!pSO) {
+                return false;
+            }
+            if (auto&& pParent = pSO->GetParent()) {
+                pParent->RemoveChild(pSO);
+            }
+            else if (!m_scene->MoveRootSceneObject(pSO, SR_ID_INVALID)) {
+                return false;
+            }
+        }
+
+        for (auto&& position : positions) {
+            auto&& pSO = pController->FindById(position.entityId).DynamicCast<SR_UTILS_NS::SceneObject>();
+            auto&& pParent = position.parentId == SR_ID_INVALID
+                ? SR_UTILS_NS::SceneObject::Ptr()
+                : pController->FindById(position.parentId).DynamicCast<SR_UTILS_NS::SceneObject>();
+
+            if (pParent) {
+                if (!pParent->AddChild(pSO, position.index)) {
+                    return false;
+                }
+            }
+            else if (!m_scene->MoveRootSceneObject(pSO, position.index)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    bool GameObjectsMove::Redo() {
+        return Apply(m_newPositions);
+    }
+
+    bool GameObjectsMove::Undo() {
+        return Apply(m_previousPositions);
+    }
 }

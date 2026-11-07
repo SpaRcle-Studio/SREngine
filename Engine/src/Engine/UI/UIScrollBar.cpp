@@ -68,6 +68,11 @@ namespace SR_CORE_UI_NS {
         RefreshHandleLayout();
     }
 
+    void UIScrollBar::SetHandle(const SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::SceneObject>& pHandle) {
+        m_handle.SetEntityId(pHandle->GetEntityId());
+        RefreshHandleLayout();
+    }
+
     void UIScrollBar::SetNumberOfSteps(uint32_t steps) {
         m_numberOfSteps = steps;
         RefreshHandleLayout();

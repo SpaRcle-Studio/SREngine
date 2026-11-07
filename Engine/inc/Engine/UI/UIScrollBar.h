@@ -42,6 +42,8 @@ namespace SR_CORE_UI_NS {
         void SetValue(float_t value);
         void SetSize(float_t size);
         void SetNumberOfSteps(uint32_t steps);
+        void SetDirection(ScrollBarDirection direction) { m_direction = direction; }
+        void SetHandle(const SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::SceneObject>& pHandle);
 
         SR_NODISCARD float_t GetValue() const noexcept;
         SR_NODISCARD float_t GetSize() const noexcept { return m_size; }

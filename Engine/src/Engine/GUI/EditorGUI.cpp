@@ -23,6 +23,7 @@
 #include <Engine/GUI/SceneTools.h>
 #include <Engine/EngineCommands.h>
 #include <Engine/UI/UIButton.h>
+#include <Engine/UI/UIScrollRect.h>
 
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Types/RenderTarget.h>
@@ -42,6 +43,7 @@
 #include <Graphics/Lighting/ProbeLight.h>
 #include <Graphics/Particles/ParticleEmitter.h>
 #include <Graphics/Font/Text.h>
+#include <Graphics/Font/TextMesh.h>
 #include <Graphics/Types/Geometry/Sprite.h>
 
 #include <Physics/3D/Rigidbody3D.h>
@@ -49,6 +51,8 @@
 #include <Scripting/Cpp/ScriptSystem.h>
 
 #include <Utils/Common/Features.h>
+#include <Utils/UI/LayoutGroup.h>
+#include <Utils/UI/LayoutElement.h>
 #include <Utils/ECS/Prefab.h>
 #include <Utils/ECS/TransformRect.h>
 #include <Utils/ECS/ComponentManager.h>
@@ -553,9 +557,109 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::Separator();
 
         if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("UI")) {
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("UI Element")) {
+            if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Elements")) {
+                static SR_UTILS_NS::StringView presets[] = {
+                    "Fill",
+                    "Top Left",
+                    "Top Center",
+                    "Top Right",
+                    "Middle Left",
+                    "Middle Center",
+                    "Middle Right",
+                    "Bottom Left",
+                    "Bottom Center",
+                    "Bottom Right"
+                };
+                for (uint32_t i = 0; i < sizeof(presets) / sizeof(presets[0]); ++i) {
+                    if (SR_GRAPH_GUI_NS::Immediate::MenuItem(presets[i].c_str())) {
+                        if (auto&& pScene = m_engine->GetScene()) {
+                            auto&& pSO = pScene->InstanceGameObject(presets[i]);
+                            auto&& pTransform = new SR_UTILS_NS::TransformRect();
+                            pTransform->SetAnchors(SR_UTILS_NS::GetRectAnchorsPresets()[i]);
+                            pSO->SetTransform(pTransform);
+                            InstantiateSO(pSO.StaticCast<SR_UTILS_NS::SceneObject>());
+                        }
+                    }
+                    SR_GRAPH_GUI_NS::Immediate::Separator();
+                }
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Custom")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        auto&& pSO = pScene->InstanceGameObject("Custom");
+                        pSO->SetTransform(new SR_UTILS_NS::TransformRect());
+                        InstantiateSO(pSO.StaticCast<SR_UTILS_NS::SceneObject>());
+                    }
+                }
+                SR_GRAPH_GUI_NS::Immediate::EndMenu();
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+
+            if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Layouts")) {
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Vertical layout group")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        auto&& pSO = pScene->InstanceGameObject("Vertical layout group"_atom);
+                        auto&& pGroup = pSO->AddComponent<SR_UTILS_NS::LayoutGroup>();
+                        pGroup->SetDirection(SR_UTILS_NS::LayoutGroupDirection::Vertical);
+                        pSO->SetTransform(new SR_UTILS_NS::TransformRect());
+                        InstantiateSO(pSO.StaticCast<SR_UTILS_NS::SceneObject>());
+                    }
+                }
+
+                SR_GRAPH_GUI_NS::Immediate::Separator();
+
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Horizontal layout group")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        auto&& pSO = pScene->InstanceGameObject("Horizontal layout group"_atom);
+                        auto&& pGroup = pSO->AddComponent<SR_UTILS_NS::LayoutGroup>();
+                        pGroup->SetDirection(SR_UTILS_NS::LayoutGroupDirection::Horizontal);
+                        pSO->SetTransform(new SR_UTILS_NS::TransformRect());
+                        InstantiateSO(pSO.StaticCast<SR_UTILS_NS::SceneObject>());
+                    }
+                }
+
+                SR_GRAPH_GUI_NS::Immediate::Separator();
+
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Layout group")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        auto&& pSO = pScene->InstanceGameObject("Layout group"_atom);
+                        auto&& pGroup = pSO->AddComponent<SR_UTILS_NS::LayoutGroup>();
+                        pSO->SetTransform(new SR_UTILS_NS::TransformRect());
+                        InstantiateSO(pSO.StaticCast<SR_UTILS_NS::SceneObject>());
+                    }
+                }
+
+                SR_GRAPH_GUI_NS::Immediate::Separator();
+
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Layout element")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        auto&& pSO = pScene->InstanceGameObject("Layout element"_atom);
+                        pSO->AddComponent<SR_UTILS_NS::LayoutElement>();
+                        pSO->SetTransform(new SR_UTILS_NS::TransformRect());
+                        InstantiateSO(pSO.StaticCast<SR_UTILS_NS::SceneObject>());
+                    }
+                }
+
+                SR_GRAPH_GUI_NS::Immediate::EndMenu();
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Canvas")) {
                 if (auto&& pScene = m_engine->GetScene()) {
-                    auto&& pSO = pScene->InstanceGameObject("UI Element"_atom).StaticCast<SR_UTILS_NS::SceneObject>();
+                    auto&& pSO = pScene->InstanceGameObject("Canvas"_atom);
+                    pSO->AddComponent<SR_GRAPH_UI_NS::Canvas>();
+                    pSO->AddComponent<SR_GRAPH_UI_NS::CanvasScaler>();
+                    pSO->SetTransform(new SR_UTILS_NS::TransformRect());
+                    pSO->SetLayer("UI"_atom);
+                    InstantiateSO(pSO.StaticCast<SR_UTILS_NS::SceneObject>());
+                }
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Scroll View")) {
+                if (auto&& pScene = m_engine->GetScene()) {
+                    auto&& pSO = pScene->InstanceFromFile("Engine/Prefabs/ScrollView.prefab").StaticCast<SR_UTILS_NS::SceneObject>();
                     InstantiateSO(pSO);
                 }
             }
@@ -573,11 +677,25 @@ namespace SR_CORE_GUI_NS {
 
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Text")) {
                 if (auto&& pScene = m_engine->GetScene()) {
-                    auto&& pSO = pScene->InstanceGameObject("Text"_atom).StaticCast<SR_UTILS_NS::SceneObject>();
+                    auto&& pSO = pScene->InstanceGameObject("Text"_atom);
                     if (auto&& pText = pSO->AddComponent<SR_GTYPES_NS::Text>()) {
                         pText->SetText("Text");
                     }
-                    InstantiateSO(pSO);
+                    pSO->SetTransform(new SR_UTILS_NS::TransformRect());
+                    InstantiateSO(pSO.StaticCast<SR_UTILS_NS::SceneObject>());
+                }
+            }
+
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Text Mesh")) {
+                if (auto&& pScene = m_engine->GetScene()) {
+                    auto&& pSO = pScene->InstanceGameObject("Text Mesh"_atom);
+                    if (auto&& pText = pSO->AddComponent<SR_GTYPES_NS::TextMesh>()) {
+                        pText->SetText("Text");
+                    }
+                    pSO->SetTransform(new SR_UTILS_NS::TransformRect());
+                    InstantiateSO(pSO.StaticCast<SR_UTILS_NS::SceneObject>());
                 }
             }
 
@@ -585,9 +703,10 @@ namespace SR_CORE_GUI_NS {
 
             if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Sprite")) {
                 if (auto&& pScene = m_engine->GetScene()) {
-                    auto&& pSO = pScene->InstanceGameObject("Sprite"_atom).StaticCast<SR_UTILS_NS::SceneObject>();
-                    auto&& pSprite = pSO->AddComponent<SR_GTYPES_NS::Sprite>();
-                    InstantiateSO(pSO);
+                    auto&& pSO = pScene->InstanceGameObject("Sprite"_atom);
+                    pSO->AddComponent<SR_GTYPES_NS::Sprite>();
+                    pSO->SetTransform(new SR_UTILS_NS::TransformRect());
+                    InstantiateSO(pSO.StaticCast<SR_UTILS_NS::SceneObject>());
                 }
             }
 

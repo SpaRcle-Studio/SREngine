@@ -67,7 +67,11 @@ namespace SR_CORE_GUI_NS {
                 auto&& filterName = context.GetEditorParams().GetCustomArg("filter name");
                 auto&& filterValue = context.GetEditorParams().GetCustomArg("filter value");
 
-                const bool relativeRes = context.GetEditorParams().GetCustomArg("relative") != "resources" || (filterName.empty() && filterValue.empty());
+                // const bool relativeRes = context.GetEditorParams().GetCustomArg("relative") != "resources" || (filterName.empty() && filterValue.empty());
+                // something strange...
+                // looks for https://github.com/SpaRcle-Studio/SREngine/commit/d127c0513013765b890941ea68511c547134cbeb if new change will break skeleton retargeting
+
+                const bool relativeRes = context.GetEditorParams().GetCustomArg("relative") == "resources";
 
                 if (auto&& pRef = dynamic_cast<SR_UTILS_NS::ResourceRefBase*>(value.GetSRClass())) {
                     if (filterName.empty()) {

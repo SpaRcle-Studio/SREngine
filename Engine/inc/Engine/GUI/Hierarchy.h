@@ -49,6 +49,8 @@ namespace SR_CORE_GUI_NS {
         void SR_INLINE ContextMenu();
         void ChildContextMenu(const SR_UTILS_NS::SceneObject::Ptr& gm, uint64_t id);
         void DrawChild(const SR_UTILS_NS::SceneObject::Ptr& root, uint32_t prefabIndex);
+        void AppendSelectedIds(const SR_UTILS_NS::SceneObject::Ptr& root, bool hasSelectedParent);
+        SR_NODISCARD bool IsTopLevelSelected(const SR_UTILS_NS::SceneObject::Ptr& sceneObject) const;
         void SR_INLINE Copy() const;
         void SR_INLINE Paste(const SR_UTILS_NS::SceneObject::Ptr& pParent, bool fromGUI);
         void SR_INLINE Delete();
@@ -60,8 +62,12 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::Vector<uint64_t> m_pointersHolder;
         SR_UTILS_NS::Set<SR_UTILS_NS::SceneObject::Ptr> m_selected;
         SR_UTILS_NS::Vector<SR_UTILS_NS::SceneObject::Ptr> m_tree;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::SceneObject::Ptr> m_visibleItems;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::SceneObject::Ptr> m_previousVisibleItems;
+        SR_UTILS_NS::SceneObject::Ptr m_selectionAnchor;
 
         std::atomic<bool> m_shiftPressed;
+        bool m_ctrlPressed = false;
         bool m_showHidden = false;
 
         SR_GRAPH_NS::GUI::Widget* m_sceneRunnerWidget = nullptr;

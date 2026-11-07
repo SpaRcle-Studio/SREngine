@@ -338,6 +338,28 @@ namespace SR_CORE_NS::Commands {
         SR_UTILS_NS::EntityId m_previousParentId = SR_ID_INVALID;
 
     };
+
+    class GameObjectsMove : public IEngineReversibleCommand {
+        using Super = IEngineReversibleCommand;
+        struct Position {
+            SR_UTILS_NS::EntityId entityId = SR_ID_INVALID;
+            SR_UTILS_NS::EntityId parentId = SR_ID_INVALID;
+            int32_t index = SR_ID_INVALID;
+        };
+    public:
+        GameObjectsMove(const EnginePtr& pEngine, const SR_UTILS_NS::Vector<SR_UTILS_NS::EntityId>& entityIds,
+                        SR_UTILS_NS::EntityId newParentId, int32_t newIndex);
+
+        bool Redo() override;
+        bool Undo() override;
+
+    private:
+        bool Apply(const SR_UTILS_NS::Vector<Position>& positions);
+
+    private:
+        SR_UTILS_NS::Vector<Position> m_previousPositions;
+        SR_UTILS_NS::Vector<Position> m_newPositions;
+    };
 }
 
 #endif //SR_ENGINE_ENGINECOMMANDS_H
