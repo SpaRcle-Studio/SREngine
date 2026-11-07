@@ -1,7 +1,12 @@
 ShaderType Canvas;
 
+#ifdef DISABLE_CULLING
+    CullMode None;
+#else
+    CullMode Back;
+#endif
+
 PolygonMode Fill;
-CullMode Back;
 DepthCompare LessOrEqual;
 PrimitiveTopology TriangleList;
 BlendEnabled true;

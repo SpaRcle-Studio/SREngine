@@ -23,6 +23,7 @@ vec4 DebugColorCascade(vec4 color, uint cascadeIndex) {
 #include <Engine/Shaders/Common/color-correction.inl.srsl>
 
 #define SR_CASCADE_USE_RADII
+// Закомментируйте, чтобы выбирать каскад по квадрату проекции shadow map.
 //#define SR_CASCADE_BLEND_ZONES
 
 [[const]] uint NUM_CASCADES = 4;
@@ -58,18 +59,21 @@ vec4 DebugColorCascade(vec4 color, uint cascadeIndex) {
 [[const]] float cascadeFadePercent[4] = { 0.05, 0.08, 0.12, 0.15 };
 
 #ifdef SR_CASCADE_USE_RADII
-    // Выбор каскада по самой карте теней: первый каскад, в проекцию которого точка попадает с запасом
-    // под радиус фильтра. Матрицы каскадов считаются на CPU в конце кадра по камере прошлого кадра,
-    // поэтому выбор по текущей камере (сфера вокруг VIEW_POSITION) при резком повороте указывал
-    // на каскад, карта которого еще не покрывает точку, и между каскадами появлялась щель без теней.
     uint SelectCascade(vec3 worldPos) {
         for (uint i = 0; i < NUM_CASCADES; ++i) {
+#ifdef SR_CASCADE_SPHERICAL_SELECTION
+            // Выбор первого каскада, чья сферическая область покрывает точку.
+            if (length(worldPos - VIEW_POSITION) <= CASCADE_RADII[i]) {
+                return i;
+            }
+#else
             vec4 lightSpace = CASCADE_LIGHT_SPACE_MATRICES[i] * vec4(worldPos, 1.0);
             vec3 proj = lightSpace.xyz / lightSpace.w;
-            // ndc xy в [-1, 1]; запас 3% - фильтр PCF не должен выходить за край карты
+            // Запас 3% не даёт фильтру PCF выйти за край карты.
             if (abs(proj.x) < 0.97 && abs(proj.y) < 0.97) {
                 return i;
             }
+#endif
         }
 
         return NUM_CASCADES + 1;
