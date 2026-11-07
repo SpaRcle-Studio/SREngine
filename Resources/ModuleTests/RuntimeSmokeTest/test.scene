@@ -81,36 +81,6 @@ use numeric depth: false
 					-s:GameObject
 				-o:ptr
 					-v:entityId
-						-i:3767589939319602372
-					-a:components
-						-k:i
-							-o:d
-								-v:type
-									-s:DirectionalLight
-								-o:ptr
-									-v:entityId
-										-i:3203235847035404772
-					-v:name
-						-s:Directional light
-					-o:transform
-						-v:type
-							-s:Transform3D
-						-o:ptr
-							-o:quaternion
-								-v:x
-									-f:0.248802
-								-v:y
-									-f:-0.694999
-								-v:z
-									-f:0.28221
-								-v:w
-									-f:0.612724
-		-k:i
-			-o:d
-				-v:type
-					-s:GameObject
-				-o:ptr
-					-v:entityId
 						-i:4083613205811989560
 					-a:components
 						-k:i
@@ -575,7 +545,7 @@ use numeric depth: false
 					-s:GameObject
 				-o:ptr
 					-v:entityId
-						-i:3948958555812908933
+						-i:3787916200415390313
 					-a:components
 						-k:i
 							-o:d
@@ -583,7 +553,7 @@ use numeric depth: false
 									-s:SkyboxComponent
 								-o:ptr
 									-v:entityId
-										-i:4491780133784761925
+										-i:3453699004970856297
 									-o:material
 										-v:type
 											-s:UniqueMaterial
@@ -595,12 +565,157 @@ use numeric depth: false
 													-a:shaderDefines
 													-o:defaultShader
 														-v:shaderPath
-															-s:Engine/Shaders/skybox.srsl
-									-v:skyboxPath
-										-s:Engine/Skyboxes/Sun.png
+															-s:Engine/Shaders/skybox-procedural.srsl
+														-a:samplers
 					-v:name
 						-s:Skybox
+					-a:children
+						-k:i
+							-o:d
+								-v:type
+									-s:GameObject
+								-o:ptr
+									-v:entityId
+										-i:2606297842837889945
+									-a:components
+										-k:i
+											-o:d
+												-v:type
+													-s:VolumetricClouds
+												-o:ptr
+													-v:entityId
+														-i:4341762759140553369
+									-v:name
+										-s:Volumetric Clouds
+									-o:transform
+										-v:type
+											-s:Transform3D
+										-o:ptr
+						-k:i
+							-o:d
+								-v:type
+									-s:GameObject
+								-o:ptr
+									-v:entityId
+										-i:2369627339008547261
+									-a:components
+										-k:i
+											-o:d
+												-v:type
+													-s:VolumetricFog
+												-o:ptr
+													-v:entityId
+														-i:2651412088699193912
+									-v:name
+										-s:Volumetric Fog
+									-o:transform
+										-v:type
+											-s:Transform3D
+										-o:ptr
 					-o:transform
 						-v:type
 							-s:Transform3D
 						-o:ptr
+		-k:i
+			-o:d
+				-v:type
+					-s:GameObject
+				-o:ptr
+					-v:entityId
+						-i:3048864562561898258
+					-a:components
+						-k:i
+							-o:d
+								-v:type
+									-s:DirectionalLight
+								-o:ptr
+									-v:entityId
+										-i:3275906424589463967
+									-v:diskIntensity
+										-f:25
+					-v:name
+						-s:Directional light
+					-a:children
+						-k:i
+							-o:d
+								-v:type
+									-s:GameObject
+								-o:ptr
+									-v:entityId
+										-i:3554499334140742217
+									-a:components
+										-k:i
+											-o:d
+												-v:type
+													-s:DirectionalLight
+												-o:ptr
+													-v:entityId
+														-i:2418844833066245141
+													-v:intensity
+														-f:0.08
+													-v:temperature
+														-f:8000
+													-o:sunsetSky
+														-v:r
+															-f:0.002
+														-v:g
+															-f:0.003
+														-v:b
+															-f:0.008
+														-v:a
+															-f:1
+													-o:daySkyColor
+														-v:r
+															-f:0.02
+														-v:g
+															-f:0.035
+														-v:b
+															-f:0.08
+														-v:a
+															-f:1
+													-o:groundSky
+														-v:r
+															-f:0.4
+														-v:g
+															-f:0.4
+														-v:b
+															-f:0.45
+														-v:a
+															-f:1
+													-v:shading
+														-s:ReflectLight
+													-v:angularDiameter
+														-f:2
+													-o:diskTint
+														-v:r
+															-f:0.9
+														-v:g
+															-f:0.92
+														-v:b
+															-f:1
+														-v:a
+															-f:1
+									-v:name
+										-s:Moon
+									-o:transform
+										-v:type
+											-s:Transform3D
+										-o:ptr
+											-o:quaternion
+												-v:x
+													-f:0.991445
+												-v:z
+													-f:-0.130526
+					-o:transform
+						-v:type
+							-s:Transform3D
+						-o:ptr
+							-o:quaternion
+								-v:x
+									-f:0.46194
+								-v:y
+									-f:-0.331414
+								-v:z
+									-f:0.191342
+								-v:w
+									-f:0.800103
