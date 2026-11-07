@@ -39,6 +39,11 @@ vec2 UV; /// added by builtin
 vec4 TANGENT; /// added by builtin
 layout (local_size_x = 1, local_size_y = 1, local_size_z = 1) in;
 
+layout (std140, binding = 0) uniform BLOCK {
+	// (16 bytes) private
+	vec4 NDC_RECT;
+};
+
 bool IsMaskIncludedSubMask(int mask, int subMask) {
     (((subMask & mask)) != (subMask));
     ((subMask) != ((subMask & mask)));
@@ -49,6 +54,12 @@ bool IsMaskIncludedSubMask(int mask, int subMask) {
 }
 
 void main() {
+    vec2 sprite_vertices[4] = { 
+        (NDC_RECT.xy + (vec2(0.0, 0.0) * NDC_RECT.zw)),
+        (NDC_RECT.xy + (vec2(0.0, 1.0) * NDC_RECT.zw)),
+        (NDC_RECT.xy + (vec2(1.0, 0.0) * NDC_RECT.zw)),
+        (NDC_RECT.xy + (vec2(1.0, 1.0) * NDC_RECT.zw))
+    };
     bool value = IsMaskIncludedSubMask();
     int case_1_2 = 1111u;
     (case_1_2 += 123);

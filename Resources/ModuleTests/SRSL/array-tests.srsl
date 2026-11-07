@@ -21,6 +21,12 @@ bool IsMaskIncludedSubMask(int mask, int subMask) {
 
 [[THREADS(1, 1, 1)]]
 void compute() {
+    vec2 sprite_vertices[4] = {
+        NDC_RECT.xy + vec2(0.0, 0.0) * NDC_RECT.zw, // левый-нижний
+        NDC_RECT.xy + vec2(0.0, 1.0) * NDC_RECT.zw, // левый-верхний
+        NDC_RECT.xy + vec2(1.0, 0.0) * NDC_RECT.zw, // правый-нижний
+        NDC_RECT.xy + vec2(1.0, 1.0) * NDC_RECT.zw  // правый-верхний
+    };
     bool value = IsMaskIncludedSubMask();
     int case_1_2 = 1111u;
     case_1_2 += 123;

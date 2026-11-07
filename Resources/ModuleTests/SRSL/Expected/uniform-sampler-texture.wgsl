@@ -46,4 +46,5 @@ fn compute(@builtin(global_invocation_id) global_id : vec3<u32>, @builtin(workgr
     var lum : f32 = max(dot(rgb, vec3<f32>(0.2126, 0.7152, 0.0722)), 1e-6);
     outv.outv[0] = vec4<f32>(rgb, 1.0);
     outv.outv[1] = vec4<f32>(lum, lum, lum, 1.0);
+    outv.outv[2] = textureSample(inputTex, inputTex_sampler, uv).rgba * vec4<f32>(lum);
 }

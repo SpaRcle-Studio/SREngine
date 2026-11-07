@@ -29,4 +29,5 @@ void main() {
     float lum = max(dot(rgb, vec3(0.2126, 0.7152, 0.0722)), 1e-6);
     outv[0] = vec4(rgb, 1.0);
     outv[1] = vec4(lum, lum, lum, 1.0);
+    (outv[2] = texture(inputTex, uv).rgba * vec4(lum));
 }
