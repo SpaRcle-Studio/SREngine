@@ -40,8 +40,39 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
 
         SR_GRAPH_NS::MaterialData& materialData = *static_cast<SR_GRAPH_NS::MaterialData*>(context.pOwner);
+        static const SR_UTILS_NS::StringAtom defaultShaderId = "m_defaultShader";
+        const auto&& pDefaultShaderProperty = materialData.GetMeta()->FindProperty(defaultShaderId);
+        auto&& defaultShaderPath = context.propertyPath;
+        const bool isOverridden = pDefaultShaderProperty && context.isPropertyOverriddenCallback &&
+            context.isPropertyOverriddenCallback(&materialData, *pDefaultShaderProperty, defaultShaderPath);
 
+        if (isOverridden) {
+            SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor::Yellow());
+        }
+
+        SR_GRAPH_GUI_NS::Immediate::BeginGroup();
         feedback.isChanged |= DrawShaderData(true, "Default", materialData.GetDefaultShaderData(), context);
+        SR_GRAPH_GUI_NS::Immediate::EndGroup();
+
+        bool isReverted = false;
+        if (isOverridden) {
+            SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
+            if (context.revertPropertyCallback && SR_GRAPH_GUI_NS::Immediate::BeginPopupContextItem("MaterialOverrideContextMenu")) {
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Revert prefab override")) {
+                    if (context.onBeforeChangeCallback) {
+                        context.onBeforeChangeCallback(false);
+                    }
+                    context.revertPropertyCallback(&materialData, *pDefaultShaderProperty, defaultShaderPath);
+                    isReverted = true;
+                    feedback.isOverrideReverted = true;
+                }
+                SR_GRAPH_GUI_NS::Immediate::EndPopup();
+            }
+        }
+
+        if (feedback.isChanged && !isReverted && context.onObjectChangedCallback) {
+            context.onObjectChangedCallback(&materialData, defaultShaderPath);
+        }
 
         SR_GRAPH_GUI_NS::Immediate::PopID();
 

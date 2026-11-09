@@ -74,7 +74,8 @@ namespace SR_CORE_NS::Commands {
     class GameObjectTransform : public IEngineReversibleCommand {
         using Super = IEngineReversibleCommand;
     public:
-        GameObjectTransform(const EnginePtr& pEngine, const SR_UTILS_NS::GameObject::Ptr& pGameObject, SR_UTILS_NS::ISerializer::UniquePtr pOld, SR_UTILS_NS::ISerializer::UniquePtr pNew = nullptr)
+        GameObjectTransform(const EnginePtr& pEngine, SR_UTILS_NS::GameObject::Ptr pGameObject, SR_UTILS_NS::ISerializer::UniquePtr pOld,
+                            const SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>& changedProperties, SR_UTILS_NS::ISerializer::UniquePtr pNew = nullptr)
             : Super(pEngine)
             , m_entityId(pGameObject->GetEntityId())
             , m_pOld(std::move(pOld))
@@ -83,6 +84,26 @@ namespace SR_CORE_NS::Commands {
             if (!m_pNew) {
                 m_pNew = SR_CORE_NS::Commands::CreateSerializer();
                 SR_UTILS_NS::Serialization::Save(*m_pNew, pGameObject->GetTransform(), SR_UTILS_NS::COMMAND_DATA_ID);
+            }
+            if (pGameObject->IsPrefab() && !pGameObject->IsPrefabOwner() && !changedProperties.empty()) {
+                if (auto&& pPrefabOwner = pGameObject->GetPrefabOwner()) {
+                    m_prefabOwnerId = pPrefabOwner->GetEntityId();
+                    m_pPrefabOld = SR_CORE_NS::Commands::CreateSerializer();
+                    m_pPrefabOld->AddDontSaveTag("Inspector");
+                    SR_UTILS_NS::Serialization::Save(*m_pPrefabOld, *pPrefabOwner, SR_UTILS_NS::COMMAND_DATA_ID);
+                    auto&& pTransformProperty = pGameObject->GetMeta()->FindProperty("m_transform");
+                    for (SR_UTILS_NS::StringAtom propertyName : changedProperties) {
+                        if (auto&& pProperty = pGameObject->GetTransform()->GetMeta()->FindProperty(propertyName); pTransformProperty && pProperty) {
+                            pGameObject->SetPrefabPropertyOverride(
+                                pGameObject.Get(), (SR_UTILS_NS::SRClass*)pGameObject->GetTransform().Get(), *pProperty,
+                                { pTransformProperty->GetSerializeName(), pProperty->GetSerializeName() }
+                            );
+                        }
+                    }
+                    m_pPrefabNew = SR_CORE_NS::Commands::CreateSerializer();
+                    m_pPrefabNew->AddDontSaveTag("Inspector");
+                    SR_UTILS_NS::Serialization::Save(*m_pPrefabNew, *pPrefabOwner, SR_UTILS_NS::COMMAND_DATA_ID);
+                }
             }
         }
 
@@ -93,6 +114,9 @@ namespace SR_CORE_NS::Commands {
         SR_UTILS_NS::EntityId m_entityId = SR_ID_INVALID;
         SR_UTILS_NS::ISerializer::UniquePtr m_pNew;
         SR_UTILS_NS::ISerializer::UniquePtr m_pOld;
+        SR_UTILS_NS::EntityId m_prefabOwnerId = SR_ID_INVALID;
+        SR_UTILS_NS::ISerializer::UniquePtr m_pPrefabNew;
+        SR_UTILS_NS::ISerializer::UniquePtr m_pPrefabOld;
 
     };
 
@@ -197,13 +221,21 @@ namespace SR_CORE_NS::Commands {
     class ComponentChange : public IEngineReversibleCommand {
         using Super = IEngineReversibleCommand;
     public:
-        ComponentChange(const EnginePtr& pEngine, const SR_UTILS_NS::Component::Ptr& pComponent, SR_UTILS_NS::ISerializer::UniquePtr pOld)
+        ComponentChange(const EnginePtr& pEngine, const SR_UTILS_NS::Component::Ptr& pComponent, SR_UTILS_NS::ISerializer::UniquePtr pOld,
+                        const SR_UTILS_NS::SceneObject::Ptr& pPrefabOwner = nullptr, SR_UTILS_NS::ISerializer::UniquePtr pPrefabOld = nullptr)
             : Super(pEngine)
             , m_entityId(pComponent->GetEntityId())
             , m_pOld(std::move(pOld))
+            , m_prefabOwnerId(pPrefabOwner ? pPrefabOwner->GetEntityId() : SR_ID_INVALID)
+            , m_pPrefabOld(std::move(pPrefabOld))
         {
             m_pNew = SR_CORE_NS::Commands::CreateSerializer();
             SR_UTILS_NS::Serialization::Save(*m_pNew, *pComponent, SR_UTILS_NS::COMMAND_DATA_ID);
+            if (pPrefabOwner && m_pPrefabOld) {
+                m_pPrefabNew = SR_CORE_NS::Commands::CreateSerializer();
+                m_pPrefabNew->AddDontSaveTag("Inspector");
+                SR_UTILS_NS::Serialization::Save(*m_pPrefabNew, *pPrefabOwner, SR_UTILS_NS::COMMAND_DATA_ID);
+            }
         }
 
         bool Redo() override;
@@ -213,6 +245,9 @@ namespace SR_CORE_NS::Commands {
         SR_UTILS_NS::EntityId m_entityId = SR_ID_INVALID;
         SR_UTILS_NS::ISerializer::UniquePtr m_pNew;
         SR_UTILS_NS::ISerializer::UniquePtr m_pOld;
+        SR_UTILS_NS::EntityId m_prefabOwnerId = SR_ID_INVALID;
+        SR_UTILS_NS::ISerializer::UniquePtr m_pPrefabNew;
+        SR_UTILS_NS::ISerializer::UniquePtr m_pPrefabOld;
 
     };
 
@@ -221,7 +256,7 @@ namespace SR_CORE_NS::Commands {
     class SceneObjectRename : public IEngineReversibleCommand {
         using Super = IEngineReversibleCommand;
     public:
-        SceneObjectRename(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& pSO, SR_UTILS_NS::SceneObject::ObjectNameT newName);
+        SceneObjectRename(const EnginePtr& pEngine, SR_UTILS_NS::SceneObject::Ptr pSO, SR_UTILS_NS::SceneObject::ObjectNameT newName);
 
         bool Redo() override;
         bool Undo() override;
@@ -230,6 +265,7 @@ namespace SR_CORE_NS::Commands {
         SR_UTILS_NS::EntityId m_entityId = SR_ID_INVALID;
         SR_UTILS_NS::GameObject::ObjectNameT m_previousName;
         SR_UTILS_NS::GameObject::ObjectNameT m_newName;
+        bool m_hadPrefabOverride = false;
 
     };
 
@@ -238,7 +274,7 @@ namespace SR_CORE_NS::Commands {
     class SceneObjectTag : public IEngineReversibleCommand {
         using Super = IEngineReversibleCommand;
     public:
-        SceneObjectTag(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& pSO, SR_UTILS_NS::StringAtom newTag);
+        SceneObjectTag(const EnginePtr& pEngine, SR_UTILS_NS::SceneObject::Ptr pSO, SR_UTILS_NS::StringAtom newTag);
 
         bool Redo() override;
         bool Undo() override;
@@ -247,6 +283,7 @@ namespace SR_CORE_NS::Commands {
         SR_UTILS_NS::EntityId m_entityId = SR_ID_INVALID;
         SR_UTILS_NS::StringAtom m_previousTag;
         SR_UTILS_NS::StringAtom m_newTag;
+        bool m_hadPrefabOverride = false;
 
     };
 
@@ -255,7 +292,7 @@ namespace SR_CORE_NS::Commands {
     class SceneObjectLayer : public IEngineReversibleCommand {
         using Super = IEngineReversibleCommand;
     public:
-        SceneObjectLayer(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& pSO, SR_UTILS_NS::StringAtom newLayer);
+        SceneObjectLayer(const EnginePtr& pEngine, SR_UTILS_NS::SceneObject::Ptr pSO, SR_UTILS_NS::StringAtom newLayer);
 
         bool Redo() override;
         bool Undo() override;
@@ -264,6 +301,7 @@ namespace SR_CORE_NS::Commands {
         SR_UTILS_NS::EntityId m_entityId = SR_ID_INVALID;
         SR_UTILS_NS::StringAtom m_previousLayer;
         SR_UTILS_NS::StringAtom m_newLayer;
+        bool m_hadPrefabOverride = false;
 
     };
 
@@ -272,7 +310,7 @@ namespace SR_CORE_NS::Commands {
     class EntityEnable : public IEngineReversibleCommand {
         using Super = IEngineReversibleCommand;
     public:
-        EntityEnable(const EnginePtr& pEngine, const SR_UTILS_NS::Entity::Ptr& pEntity, bool newEnabled);
+        EntityEnable(const EnginePtr& pEngine, SR_UTILS_NS::Entity::Ptr pEntity, bool newEnabled);
 
         bool Redo() override;
         bool Undo() override;
@@ -281,6 +319,7 @@ namespace SR_CORE_NS::Commands {
         SR_UTILS_NS::EntityId m_entityId = SR_ID_INVALID;
         bool m_newEnabled = false;
         bool m_previousEnabled = false;
+        bool m_hadPrefabOverride = false;
 
     };
 

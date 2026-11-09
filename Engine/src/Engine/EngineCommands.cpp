@@ -15,6 +15,47 @@
 #include <Engine/GUI/Hierarchy.h>
 
 namespace SR_CORE_NS::Commands {
+    static SR_UTILS_NS::SceneObject* GetPrefabSceneObject(SR_UTILS_NS::Entity* pEntity) {
+        if (auto&& pSceneObject = dynamic_cast<SR_UTILS_NS::SceneObject*>(pEntity)) {
+            return pSceneObject;
+        }
+        if (auto&& pComponent = dynamic_cast<SR_UTILS_NS::Component*>(pEntity)) {
+            return dynamic_cast<SR_UTILS_NS::SceneObject*>(pComponent->GetParent());
+        }
+        return nullptr;
+    }
+
+    static bool HasPrefabOverride(SR_UTILS_NS::Entity* pEntity, SR_UTILS_NS::StringAtom propertyName) {
+        auto&& pSceneObject = GetPrefabSceneObject(pEntity);
+        if (pSceneObject && pSceneObject == pEntity && pSceneObject->IsPrefabOwner()) {
+            return false;
+        }
+        auto&& pProperty = pEntity->GetMeta()->FindProperty(propertyName);
+        return pSceneObject && pSceneObject->IsPrefab() && pProperty &&
+            pSceneObject->HasPrefabPropertyOverride(pEntity, { pProperty->GetSerializeName() });
+    }
+
+    static void UpdatePrefabOverride(SR_UTILS_NS::Entity* pEntity, SR_UTILS_NS::StringAtom propertyName, bool setOverride) {
+        auto&& pSceneObject = GetPrefabSceneObject(pEntity);
+        if (!pSceneObject || !pSceneObject->IsPrefab()) {
+            return;
+        }
+        if (pSceneObject == pEntity && pSceneObject->IsPrefabOwner()) {
+            return;
+        }
+        auto&& pProperty = pEntity->GetMeta()->FindProperty(propertyName);
+        if (!pProperty) {
+            return;
+        }
+        SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> propertyPath = { pProperty->GetSerializeName() };
+        if (setOverride) {
+            pSceneObject->SetPrefabPropertyOverride(pEntity, pEntity, *pProperty, propertyPath);
+        }
+        else {
+            pSceneObject->RevertPrefabPropertyOverride(pEntity, propertyPath);
+        }
+    }
+
     ChangeHierarchySelected::ChangeHierarchySelected(const EnginePtr& pEngine, SR_CORE_GUI_NS::Hierarchy* pHierarchy, const Selection& oldSelected, const Selection& newSelected)
         : Super(pEngine)
         , m_hierarchy(pHierarchy)
@@ -81,6 +122,13 @@ namespace SR_CORE_NS::Commands {
             SR_UTILS_NS::Serialization::Load(*pDeserializer, pTransform, SR_UTILS_NS::COMMAND_DATA_ID);
             pObject->SetTransform(pTransform);
 
+            if (m_pPrefabNew && m_prefabOwnerId != SR_ID_INVALID) {
+                if (auto&& pPrefabOwner = m_scene->GetEntityController()->FindById(m_prefabOwnerId).DynamicCast<SR_UTILS_NS::SceneObject>()) {
+                    auto&& pPrefabDeserializer = m_pPrefabNew->CreateDeserializer();
+                    SR_UTILS_NS::Serialization::Load(*pPrefabDeserializer, *pPrefabOwner, SR_UTILS_NS::COMMAND_DATA_ID);
+                }
+            }
+
             return true;
         }
 
@@ -98,6 +146,13 @@ namespace SR_CORE_NS::Commands {
 
             if (pTransform) {
                 pObject->SetTransform(pTransform);
+            }
+
+            if (m_pPrefabOld && m_prefabOwnerId != SR_ID_INVALID) {
+                if (auto&& pPrefabOwner = m_scene->GetEntityController()->FindById(m_prefabOwnerId).DynamicCast<SR_UTILS_NS::SceneObject>()) {
+                    auto&& pPrefabDeserializer = m_pPrefabOld->CreateDeserializer();
+                    SR_UTILS_NS::Serialization::Load(*pPrefabDeserializer, *pPrefabOwner, SR_UTILS_NS::COMMAND_DATA_ID);
+                }
             }
 
             return true;
@@ -202,6 +257,12 @@ namespace SR_CORE_NS::Commands {
             pObject->GetMeta()->ForEachProperty([&](auto&& property, uint64_t index) {
                 property.OnChanged(pObject.Get());
             });
+            if (m_pPrefabNew && m_prefabOwnerId != SR_ID_INVALID) {
+                if (auto&& pPrefabOwner = m_scene->GetEntityController()->FindById(m_prefabOwnerId).DynamicCast<SR_UTILS_NS::SceneObject>()) {
+                    auto&& pPrefabDeserializer = m_pPrefabNew->CreateDeserializer();
+                    SR_UTILS_NS::Serialization::Load(*pPrefabDeserializer, *pPrefabOwner, SR_UTILS_NS::COMMAND_DATA_ID);
+                }
+            }
             return true;
         }
 
@@ -219,6 +280,12 @@ namespace SR_CORE_NS::Commands {
             pObject->GetMeta()->ForEachProperty([&](auto&& property, uint64_t index) {
                 property.OnChanged(pObject.Get());
             });
+            if (m_pPrefabOld && m_prefabOwnerId != SR_ID_INVALID) {
+                if (auto&& pPrefabOwner = m_scene->GetEntityController()->FindById(m_prefabOwnerId).DynamicCast<SR_UTILS_NS::SceneObject>()) {
+                    auto&& pPrefabDeserializer = m_pPrefabOld->CreateDeserializer();
+                    SR_UTILS_NS::Serialization::Load(*pPrefabDeserializer, *pPrefabOwner, SR_UTILS_NS::COMMAND_DATA_ID);
+                }
+            }
             return true;
         }
 
@@ -227,11 +294,12 @@ namespace SR_CORE_NS::Commands {
 
     //! ----------------------------------------------------------------------------------------------------------------
 
-    SceneObjectRename::SceneObjectRename(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& pSO, SR_UTILS_NS::SceneObject::ObjectNameT newName)
+    SceneObjectRename::SceneObjectRename(const EnginePtr& pEngine, SR_UTILS_NS::SceneObject::Ptr pSO, SR_UTILS_NS::SceneObject::ObjectNameT newName)
         : Super(pEngine)
         , m_entityId(pSO->GetEntityId())
         , m_previousName(pSO->GetName())
         , m_newName(newName)
+        , m_hadPrefabOverride(HasPrefabOverride(pSO.Get(), "m_name"))
     { }
 
     bool SceneObjectRename::Redo() {
@@ -239,6 +307,7 @@ namespace SR_CORE_NS::Commands {
 
         if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>()) {
             pObject->SetName(m_newName);
+            UpdatePrefabOverride(pObject.Get(), "m_name", true);
             return true;
         }
 
@@ -250,6 +319,7 @@ namespace SR_CORE_NS::Commands {
 
         if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>()) {
             pObject->SetName(m_previousName);
+            UpdatePrefabOverride(pObject.Get(), "m_name", m_hadPrefabOverride);
             return true;
         }
 
@@ -258,11 +328,12 @@ namespace SR_CORE_NS::Commands {
 
     //! ----------------------------------------------------------------------------------------------------------------
 
-    SceneObjectTag::SceneObjectTag(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& pSO, SR_UTILS_NS::StringAtom newTag)
+    SceneObjectTag::SceneObjectTag(const EnginePtr& pEngine, SR_UTILS_NS::SceneObject::Ptr pSO, SR_UTILS_NS::StringAtom newTag)
         : Super(pEngine)
         , m_entityId(pSO->GetEntityId())
-        , m_previousTag(pSO->GetTag())
+        , m_previousTag(pSO->GetLocalTag())
         , m_newTag(newTag)
+        , m_hadPrefabOverride(HasPrefabOverride(pSO.Get(), "m_tag"))
     { }
 
     bool SceneObjectTag::Redo() {
@@ -270,6 +341,7 @@ namespace SR_CORE_NS::Commands {
 
         if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>()) {
             pObject->SetTag(m_newTag);
+            UpdatePrefabOverride(pObject.Get(), "m_tag", true);
             return true;
         }
 
@@ -281,6 +353,7 @@ namespace SR_CORE_NS::Commands {
 
         if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>()) {
             pObject->SetTag(m_previousTag);
+            UpdatePrefabOverride(pObject.Get(), "m_tag", m_hadPrefabOverride);
             return true;
         }
 
@@ -289,11 +362,12 @@ namespace SR_CORE_NS::Commands {
 
     //! ----------------------------------------------------------------------------------------------------------------
 
-    SceneObjectLayer::SceneObjectLayer(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& pSO, SR_UTILS_NS::StringAtom newLayer)
+    SceneObjectLayer::SceneObjectLayer(const EnginePtr& pEngine, SR_UTILS_NS::SceneObject::Ptr pSO, SR_UTILS_NS::StringAtom newLayer)
         : Super(pEngine)
         , m_entityId(pSO->GetEntityId())
-        , m_previousLayer(pSO->GetLayer())
+        , m_previousLayer(pSO->GetLocalLayer())
         , m_newLayer(newLayer)
+        , m_hadPrefabOverride(HasPrefabOverride(pSO.Get(), "m_layer"))
     { }
 
     bool SceneObjectLayer::Redo() {
@@ -301,6 +375,7 @@ namespace SR_CORE_NS::Commands {
 
         if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>()) {
             pObject->SetLayer(m_newLayer);
+            UpdatePrefabOverride(pObject.Get(), "m_layer", true);
             return true;
         }
 
@@ -312,6 +387,7 @@ namespace SR_CORE_NS::Commands {
 
         if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>()) {
             pObject->SetLayer(m_previousLayer);
+            UpdatePrefabOverride(pObject.Get(), "m_layer", m_hadPrefabOverride);
             return true;
         }
 
@@ -320,10 +396,11 @@ namespace SR_CORE_NS::Commands {
 
     //! ----------------------------------------------------------------------------------------------------------------
 
-    EntityEnable::EntityEnable(const EnginePtr& pEngine, const SR_UTILS_NS::Entity::Ptr& pEntity, bool newEnabled)
+    EntityEnable::EntityEnable(const EnginePtr& pEngine, SR_UTILS_NS::Entity::Ptr pEntity, bool newEnabled)
         : Super(pEngine)
         , m_entityId(pEntity->GetEntityId())
         , m_newEnabled(newEnabled)
+        , m_hadPrefabOverride(HasPrefabOverride(pEntity.Get(), "m_isEnabled"))
     {
         if (auto&& pSO = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>())  {
             m_previousEnabled = pSO->IsEnabled();
@@ -340,10 +417,12 @@ namespace SR_CORE_NS::Commands {
         auto&& pEntity = m_scene->GetEntityController()->FindById(m_entityId);
         if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>()) {
             pObject->SetEnabled(m_newEnabled);
+            UpdatePrefabOverride(pObject.Get(), "m_isEnabled", true);
             return true;
         }
         if (auto&& pComponent = pEntity.DynamicCast<SR_UTILS_NS::Component>()) {
             pComponent->SetEnabled(m_newEnabled);
+            UpdatePrefabOverride(pComponent.Get(), "m_isEnabled", true);
             return true;
         }
 
@@ -354,10 +433,12 @@ namespace SR_CORE_NS::Commands {
         auto&& pEntity = m_scene->GetEntityController()->FindById(m_entityId);
         if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>()) {
             pObject->SetEnabled(m_previousEnabled);
+            UpdatePrefabOverride(pObject.Get(), "m_isEnabled", m_hadPrefabOverride);
             return true;
         }
         if (auto&& pComponent = pEntity.DynamicCast<SR_UTILS_NS::Component>()) {
             pComponent->SetEnabled(m_previousEnabled);
+            UpdatePrefabOverride(pComponent.Get(), "m_isEnabled", m_hadPrefabOverride);
             return true;
         }
 

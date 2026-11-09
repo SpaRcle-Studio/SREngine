@@ -283,6 +283,21 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::Vector<SR_UTILS_NS::ReversibleCommand*> commands;
         commands.reserve(m_hierarchy->GetSelected().size());
 
+        SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> changedProperties;
+        if (SR_MATH_NS::IsMaskIncludedSubMask(GetOperation(), SR_GRAPH_UI_NS::GizmoOperation::Translate)) {
+            changedProperties.emplace_back("m_translation");
+        }
+        if (SR_MATH_NS::IsMaskIncludedSubMask(GetOperation(), SR_GRAPH_UI_NS::GizmoOperation::Rotate)) {
+            changedProperties.emplace_back("m_quaternion");
+        }
+        if (SR_MATH_NS::IsMaskIncludedSubMask(GetOperation(), SR_GRAPH_UI_NS::GizmoOperation::Scale)) {
+            changedProperties.emplace_back("m_scale");
+        }
+        if (IsBoundsMode() && IsObjectBoundsEdit()) {
+            changedProperties.emplace_back("m_translation");
+            changedProperties.emplace_back("m_scale");
+        }
+
         for (auto&& pSceneObject : m_hierarchy->GetSelected()) {
             if (!pSceneObject) {
                 continue;
@@ -296,7 +311,7 @@ namespace SR_CORE_GUI_NS {
             for (auto&& [entityId, pSerializer] : m_pSerializers) {
                 if (entityId == pGameObject->GetEntityId()) {
                     commands.push_back(new SR_CORE_NS::Commands::GameObjectTransform(
-                        pEngine, pGameObject, std::move(pSerializer)
+                        pEngine, pGameObject, std::move(pSerializer), changedProperties
                     ));
                     break;
                 }

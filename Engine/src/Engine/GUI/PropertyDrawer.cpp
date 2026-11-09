@@ -146,6 +146,16 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
+        const bool isOverridden = context.isPropertyOverriddenCallback &&
+            context.isPropertyOverriddenCallback(context.pOwner, *context.pProperty, context.propertyPath);
+        if (isOverridden && context.revertPropertyCallback && SR_GRAPH_GUI_NS::Immediate::MenuItem("Revert prefab override")) {
+            if (context.onBeforeChangeCallback) {
+                context.onBeforeChangeCallback(false);
+            }
+            context.revertPropertyCallback(context.pOwner, *context.pProperty, context.propertyPath);
+            feedback.isOverrideReverted = true;
+        }
+
         CustomTitleContextMenu(context, feedback);
 
         const SR_UTILS_NS::Reflection::Value value = context.GetValue();

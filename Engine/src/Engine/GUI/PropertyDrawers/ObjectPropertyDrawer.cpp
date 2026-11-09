@@ -159,6 +159,9 @@ namespace SR_CORE_GUI_NS {
                 if (customFeedback.isChanged) {
                     feedback.isChanged = true;
                 }
+                if (customFeedback.isOverrideReverted) {
+                    feedback.isOverrideReverted = true;
+                }
             }
             else {
                 SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Failed to get meta for object!");
@@ -264,15 +267,32 @@ namespace SR_CORE_GUI_NS {
 
         propertyContext.noHeader = property.GetEditorParams().IsNoHeader();
         propertyContext.pProperty = &property;
+        propertyContext.propertyPath = context.propertyPath;
+        propertyContext.propertyPath.emplace_back(property.GetSerializeName());
 
         SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard guard(property.IsReadOnly());
+
+        const bool isOverridden = context.isPropertyOverriddenCallback && context.isPropertyOverriddenCallback(propertyContext.pOwner, property, propertyContext.propertyPath);
+        if (isOverridden) {
+            SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor::Yellow());
+        }
 
         SR_GRAPH_GUI_NS::Immediate::BeginGroup();
         PropertyDrawerFeedback propertyFeedback = m_drawers[index]->Draw(propertyContext);
         SR_GRAPH_GUI_NS::Immediate::EndGroup();
 
-        if (propertyFeedback.isChanged) {
+        if (isOverridden) {
+            SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
+        }
+
+        if (propertyFeedback.isOverrideReverted) {
+            feedback.isOverrideReverted = true;
+        }
+        else if (propertyFeedback.isChanged) {
             property.OnChanged(propertyContext.pOwner);
+            if (context.onPropertyChangedCallback && !property.Get(propertyContext.pOwner).GetSRClass()) {
+                context.onPropertyChangedCallback(propertyContext.pOwner, property, propertyContext.propertyPath);
+            }
             feedback.isChanged = true;
         }
     }

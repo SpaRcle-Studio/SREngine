@@ -115,10 +115,6 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Immediate::Text("Entity id: %llu", m_sceneObject->GetEntityId());
         }
 
-        if (m_sceneObject->IsPrefab()) {
-            SR_IMMEDIATE_GUI_NS::WarningBox("Changes won't be saved");
-        }
-
         if (m_sceneObject->IsDirty() && SR_UTILS_NS::StoreUtils::User::GetBool(editorDebugModeId, false)) {
             SR_IMMEDIATE_GUI_NS::WarningBox("Object is dirty");
         }
@@ -373,12 +369,23 @@ namespace SR_CORE_GUI_NS {
 
             auto&& value = SR_UTILS_NS::Reflection::Value::CreateRef(*pComponent);
 
-            m_onBeforeChangeCallback = [this, pStrongComponent = SR_HTYPES_NS::SharedPtr(pComponent)](bool drag) {
+            SR_UTILS_NS::SceneObject::Ptr pStrongPrefabOwner;
+            if (auto&& pComponentSceneObject = dynamic_cast<SR_UTILS_NS::SceneObject*>(pComponent->GetParent()); pComponentSceneObject && pComponentSceneObject->IsPrefab()) {
+                pStrongPrefabOwner = SR_HTYPES_NS::SharedPtr(pComponentSceneObject->GetPrefabOwner());
+            }
+
+            m_onBeforeChangeCallback = [this, pStrongComponent = SR_HTYPES_NS::SharedPtr(pComponent), pStrongPrefabOwner](bool drag) {
                 if (!m_pComponentSerializer) {
                     m_isDragMode = drag;
                     m_editableComponent = pStrongComponent;
                     m_pComponentSerializer = SR_CORE_NS::Commands::CreateSerializer();
                     SR_UTILS_NS::Serialization::Save(*m_pComponentSerializer, *pStrongComponent, SR_UTILS_NS::COMMAND_DATA_ID);
+                    if (pStrongPrefabOwner) {
+                        m_editablePrefabOwner = pStrongPrefabOwner;
+                        m_pPrefabSOSerializer = SR_CORE_NS::Commands::CreateSerializer();
+                        m_pPrefabSOSerializer->AddDontSaveTag("Inspector");
+                        SR_UTILS_NS::Serialization::Save(*m_pPrefabSOSerializer, *pStrongPrefabOwner, SR_UTILS_NS::COMMAND_DATA_ID);
+                    }
                 }
             };
 
@@ -386,15 +393,34 @@ namespace SR_CORE_GUI_NS {
             context.pUID = context.pOwner = pComponent;
             context.pComponent = pComponent;
 
+            if (auto&& pPrefabSceneObject = dynamic_cast<SR_UTILS_NS::SceneObject*>(pComponent->GetParent()); pPrefabSceneObject && pPrefabSceneObject->IsPrefab()) {
+                context.onPropertyChangedCallback = [pPrefabSceneObject, pComponent](SR_UTILS_NS::SRClass* pOwner, const SR_UTILS_NS::Reflection::Property& property, const SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>& propertyPath) {
+                    pPrefabSceneObject->SetPrefabPropertyOverride(pComponent, pOwner, property, propertyPath);
+                };
+                context.onObjectChangedCallback = [pPrefabSceneObject, pComponent](SR_UTILS_NS::SRClass* pObject, const SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>& propertyPath) {
+                    pPrefabSceneObject->SetPrefabObjectOverride(pComponent, pObject, propertyPath);
+                };
+                context.isPropertyOverriddenCallback = [pPrefabSceneObject, pComponent](SR_UTILS_NS::SRClass*, const SR_UTILS_NS::Reflection::Property&, const SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>& propertyPath) {
+                    return pPrefabSceneObject->HasPrefabPropertyOverride(pComponent, propertyPath);
+                };
+                context.revertPropertyCallback = [pPrefabSceneObject, pComponent](SR_UTILS_NS::SRClass*, const SR_UTILS_NS::Reflection::Property&, const SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>& propertyPath) {
+                    pPrefabSceneObject->RevertPrefabPropertyOverride(pComponent, propertyPath);
+                };
+            }
+
             auto&& componentContext = m_componentContexts.at(pComponent->GetEntityId());
             componentContext.lastUsage = SR_HTYPES_NS::Time::Instance().Now();
             componentContext.pObjectDrawer->Draw(context);
 
             if (m_pComponentSerializer && (!m_isDragMode || !SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseLeft))) {
                 if (m_editableComponent) {
-                    auto&& cmd = new SR_CORE_NS::Commands::ComponentChange(pEngine, m_editableComponent, std::move(m_pComponentSerializer));
+                    auto&& cmd = new SR_CORE_NS::Commands::ComponentChange(
+                        pEngine, m_editableComponent, std::move(m_pComponentSerializer),
+                        m_editablePrefabOwner, std::move(m_pPrefabSOSerializer)
+                    );
                     pEngine->GetCmdManager()->Store(cmd);
                 }
+                m_editablePrefabOwner = nullptr;
             }
         }
 
@@ -499,7 +525,7 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Immediate::PopID();
     }
 
-    void Inspector::DrawSceneObject(const SR_UTILS_NS::SceneObject::Ptr& pSceneObject) {
+    void Inspector::DrawSceneObject(SR_UTILS_NS::SceneObject::Ptr& pSceneObject) {
         m_onBeforeChangeCallback = [&](bool drag) {
             if (!m_pSOSerializer) {
                 m_isDragMode = drag;
@@ -512,6 +538,21 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::SceneObject::Ptr pStrongSceneObject = pSceneObject;
         auto&& value = SR_UTILS_NS::Reflection::Value::CreateRef(pStrongSceneObject);
         auto&& context = CreateDrawerContext(&value);
+
+        if (pSceneObject->IsPrefab()) {
+            context.onPropertyChangedCallback = [&pSceneObject](SR_UTILS_NS::SRClass* pOwner, const SR_UTILS_NS::Reflection::Property& property, const SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>& propertyPath) {
+                pSceneObject->SetPrefabPropertyOverride(pSceneObject.Get(), pOwner, property, propertyPath);
+            };
+            context.onObjectChangedCallback = [&pSceneObject](SR_UTILS_NS::SRClass* pObject, const SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>& propertyPath) {
+                pSceneObject->SetPrefabObjectOverride(pSceneObject.Get(), pObject, propertyPath);
+            };
+            context.isPropertyOverriddenCallback = [&pSceneObject](SR_UTILS_NS::SRClass*, const SR_UTILS_NS::Reflection::Property&, const SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>& propertyPath) {
+                return pSceneObject->HasPrefabPropertyOverride(pSceneObject.Get(), propertyPath);
+            };
+            context.revertPropertyCallback = [&pSceneObject](SR_UTILS_NS::SRClass*, const SR_UTILS_NS::Reflection::Property&, const SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>& propertyPath) {
+                pSceneObject->RevertPrefabPropertyOverride(pSceneObject.Get(), propertyPath);
+            };
+        }
 
         context.fieldWidth += context.fieldTitleWidth;
         context.fieldTitleWidth = 0.f;

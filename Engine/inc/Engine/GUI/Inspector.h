@@ -56,7 +56,7 @@ namespace SR_CORE_GUI_NS {
         void InitCategories();
 
     private:
-        void DrawSceneObject(const SR_UTILS_NS::SceneObject::Ptr& pSceneObject);
+        void DrawSceneObject(SR_UTILS_NS::SceneObject::Ptr& pSceneObject);
 
         void DrawComponentCategory(SR_UTILS_NS::IComponentable* pComponentable, ComponentCategory& category, SR_UTILS_NS::StringAtom categoryName);
 
@@ -92,7 +92,9 @@ namespace SR_CORE_GUI_NS {
         std::unique_ptr<SR_UTILS_NS::ISerializer> m_pTransformSerializer;
         std::unique_ptr<SR_UTILS_NS::ISerializer> m_pComponentsSerializer;
         std::unique_ptr<SR_UTILS_NS::ISerializer> m_pComponentSerializer;
+        std::unique_ptr<SR_UTILS_NS::ISerializer> m_pPrefabSOSerializer;
         SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::Component> m_editableComponent;
+        SR_UTILS_NS::SceneObject::Ptr m_editablePrefabOwner;
         SR_UTILS_NS::Subscription m_moduleReloadSubscription;
         SR_UTILS_NS::String m_comboBoxBuffer;
         SR_UTILS_NS::String m_tmpBuffer;

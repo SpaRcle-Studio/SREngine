@@ -70,6 +70,11 @@ namespace SR_CORE_GUI_NS {
         }
 
         SR_HTYPES_NS::Function<void(bool drag)> onBeforeChangeCallback;
+        SR_HTYPES_NS::Function<void(SR_UTILS_NS::SRClass*, const SR_UTILS_NS::Reflection::Property&, const SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>&)> onPropertyChangedCallback;
+        SR_HTYPES_NS::Function<void(SR_UTILS_NS::SRClass*, const SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>&)> onObjectChangedCallback;
+        SR_HTYPES_NS::Function<bool(SR_UTILS_NS::SRClass*, const SR_UTILS_NS::Reflection::Property&, const SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>&)> isPropertyOverriddenCallback;
+        SR_HTYPES_NS::Function<void(SR_UTILS_NS::SRClass*, const SR_UTILS_NS::Reflection::Property&, const SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>&)> revertPropertyCallback;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> propertyPath;
         SR_UTILS_NS::Reflection::EditorPropertyParams editorPropertyParams;
         SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::Component> pComponent;
         uint64_t propertyIndex = 0;
@@ -84,6 +89,7 @@ namespace SR_CORE_GUI_NS {
     struct PropertyDrawerFeedback {
         bool isChanged = false;
         bool isDrag = false;
+        bool isOverrideReverted = false;
     };
 
     /// @abstract @noCopyable @noMovable
