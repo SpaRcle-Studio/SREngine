@@ -35,13 +35,9 @@ namespace SR_CORE_NS {
         /// @property
         SR_UTILS_NS::Path startScene;
         /// @property
-        SR_UTILS_NS::String productName = "Game";
-        /// @property
         SR_UTILS_NS::String organization = "SpaRcle-Studio";
         /// @property
         SR_UTILS_NS::String androidPackageId = "com.organization.game";
-        /// @property
-        SR_UTILS_NS::String androidVersionName = "1.0.0";
         /// @property
         uint32_t androidVersionCode = 1;
         /// @property
@@ -56,6 +52,8 @@ namespace SR_CORE_NS {
         bool emscripten = true;
         /// @property
         bool createPlatformArchives = true;
+        /// @property
+        bool packEditor = false;
         /// @property
         bool enableWebPreview = true;
 
@@ -78,7 +76,9 @@ namespace SR_CORE_NS {
         /// @customArg(filter value: scene)
         SR_UTILS_NS::Path mainScene;
         /// @property
-        SR_UTILS_NS::Vector<SR_UTILS_NS::String> packageFolders;
+        SR_UTILS_NS::String version = "1.0.0";
+        /// @property
+        SR_UTILS_NS::Set<SR_UTILS_NS::StringAtom> packages;
         /// @property
         SR_UTILS_NS::Vector<GameBuildProfile> buildProfiles = { GameBuildProfile() };
         /// @property

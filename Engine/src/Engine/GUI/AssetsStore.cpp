@@ -4,6 +4,7 @@
 
 #include <Engine/GUI/AssetsStore.h>
 #include <Engine/GUI/EditorGUI.h>
+#include <Engine/Settings/ProjectSettings.h>
 
 #include <Graphics/Overlay/OverlayType.h>
 #include <Graphics/Overlay/Overlay.h>
@@ -37,7 +38,7 @@ namespace SR_CORE_GUI_NS {
         SR_TRACY_ZONE;
         std::atomic<bool> empty = false;
         while (!empty) {
-            std::optional<uint64_t> taskId;
+            SR_UTILS_NS::Optional<uint64_t> taskId;
             {
                 SR_LOCK_GUARD;
                 empty = m_installQueue.empty();
@@ -114,6 +115,7 @@ namespace SR_CORE_GUI_NS {
         const bool isNotAvailable = package.url.empty();
         const bool isInstalling = IsPackageInstalling(package.name);
         const bool isInstalled = m_packagesPath.Concat(package.name).Concat("Resources").IsDir();
+        const bool isAddedToProject = IsPackageAddedToProject(package.name);
 
         if (isNotAvailable) {
             SR_IMMEDIATE_GUI_NS::BeginDisabled(true);
@@ -167,13 +169,13 @@ namespace SR_CORE_GUI_NS {
         const auto cursorPos = SR_IMMEDIATE_GUI_NS::GetCursorScreenPos();
         SR_IMMEDIATE_GUI_NS::SetCursorScreenPos(buttonMin);
 
-        if (!isNotAvailable && (isInstalled || isInstalling)) {
+        if (!isNotAvailable && (isAddedToProject || isInstalling)) {
             SR_IMMEDIATE_GUI_NS::BeginDisabled(true);
         }
 
         const bool installPressed = SR_IMMEDIATE_GUI_NS::InvisibleButton("##Install", buttonSize);
 
-        if (!isNotAvailable && (isInstalled || isInstalling)) {
+        if (!isNotAvailable && (isAddedToProject || isInstalling)) {
             SR_IMMEDIATE_GUI_NS::EndDisabled();
         }
 
@@ -196,7 +198,8 @@ namespace SR_CORE_GUI_NS {
         SR_IMMEDIATE_GUI_NS::DrawListAddRectFilled(pDrawList, buttonMin, buttonMax, buttonBg, 5.0f);
         SR_IMMEDIATE_GUI_NS::DrawListAddRect(pDrawList, buttonMin, buttonMax, installHovered ? hoveredColor : defaultColor, 5.0f, SR_IMMEDIATE_GUI_NS::DrawFlags(), 1.5f);
 
-        const char* installText = isNotAvailable ? "Coming soon..." : (isInstalled ? "Installed" : (isInstalling ? "Installing..." : "Install"));
+        const char* installText = isNotAvailable ? "Coming soon..." :
+            (isAddedToProject ? "Added" : (isInstalling ? "Installing..." : (isInstalled ? "Add" : "Install")));
         const auto textSize = SR_IMMEDIATE_GUI_NS::CalcTextSize(installText);
 
         SR_IMMEDIATE_GUI_NS::AddText(pDrawList,
@@ -225,10 +228,23 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (installPressed && !isInstalling) {
-            SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> order;
-            CollectPackageInstallOrder(package.name, order);
-            for (auto&& name : order) {
-                InstallPackage(name);
+            if (isInstalled) {
+                SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> order;
+                CollectPackageInstallOrder(package.name, order);
+                bool added = true;
+                for (auto&& name : order) {
+                    added &= AddPackageToProject(name);
+                }
+                if (added) {
+                    ReMountPackages(dynamic_cast<EditorGUI*>(GetManager()));
+                }
+            }
+            else {
+                SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> order;
+                CollectPackageInstallOrder(package.name, order);
+                for (auto&& name : order) {
+                    InstallPackage(name);
+                }
             }
         }
 
@@ -289,12 +305,43 @@ namespace SR_CORE_GUI_NS {
         SR_LOCK_GUARD;
         if (success) {
             SR_LOG("AssetsStore::OnPackageInstalled() : package \"{}\" successfully installed!", name);
+            AddPackageToProject(name);
         }
         else {
             SR_ERROR("AssetsStore::OnPackageInstalled() : failed to install package \"{}\"!", name);
         }
         m_installQueue.remove_if([name](auto&& info) { return info.name == name; });
         ReMountPackages(dynamic_cast<EditorGUI*>(GetManager()));
+    }
+
+    bool AssetsStore::AddPackageToProject(SR_UTILS_NS::StringAtom name) {
+        if (!SR_UTILS_NS::VFS::Instance().IsFileExists(".srproject")) {
+            return true;
+        }
+        auto&& pProjectSettings = CoreResLoader::Load<ProjectSettings>(".srproject");
+        if (!pProjectSettings) {
+            SR_ERROR("AssetsStore::AddPackageToProject() : failed to load project settings!");
+            return false;
+        }
+        if (!pProjectSettings->packages.contains(name)) {
+            pProjectSettings->packages.insert(name.ToString());
+            if (!pProjectSettings->SaveAsset()) {
+                SR_ERROR("AssetsStore::AddPackageToProject() : failed to save project settings!");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    bool AssetsStore::IsPackageAddedToProject(SR_UTILS_NS::StringAtom name) const {
+        if (!SR_UTILS_NS::VFS::Instance().IsFileExists(".srproject")) {
+            return m_packagesPath.Concat(name).Concat("Resources").IsDir();
+        }
+        auto&& pProjectSettings = CoreResLoader::Load<ProjectSettings>(".srproject");
+        if (!pProjectSettings) {
+            return m_packagesPath.Concat(name).Concat("Resources").IsDir();
+        }
+        return pProjectSettings->packages.contains(name);
     }
 
     void AssetsStore::CollectPackageInstallOrder(SR_UTILS_NS::StringAtom name, SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>& order) {
@@ -307,6 +354,10 @@ namespace SR_CORE_GUI_NS {
     }
 
     void AssetsStore::ReMountPackages(EditorGUI* pEditor) {
+        SR_UTILS_NS::ResourceRef<ProjectSettings> pProjectSettings;
+        if (SR_UTILS_NS::VFS::Instance().IsFileExists(".srproject")) {
+            pProjectSettings = CoreResLoader::Load<ProjectSettings>(".srproject");
+        }
         std::lock_guard<std::recursive_mutex> lock(g_packagesMountMutex);
 
         SR_UTILS_NS::VFS::Instance().LockSingleton();
@@ -317,6 +368,9 @@ namespace SR_CORE_GUI_NS {
             if (SR_UTILS_NS::Path path = SR_UTILS_NS::StoreUtils::User::GetString(PackagesPathKey); !path.empty()) {
                 auto&& pSettings = pEditor->GetSettings();
                 for (auto&& package : pSettings->GetPackages()) {
+                    if (pProjectSettings && !pProjectSettings->packages.contains(package.name)) {
+                        continue;
+                    }
                     auto&& mountPath = path.Concat(package.name).Concat("Resources");
                     if (SR_PLATFORM_NS::GetPathType(mountPath) != SR_UTILS_NS::Path::Type::Folder) {
                         continue;

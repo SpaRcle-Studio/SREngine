@@ -32,6 +32,8 @@ namespace SR_CORE_GUI_NS {
 
     private:
         void InstallPackage(SR_UTILS_NS::StringAtom name);
+        bool AddPackageToProject(SR_UTILS_NS::StringAtom name);
+        SR_NODISCARD bool IsPackageAddedToProject(SR_UTILS_NS::StringAtom name) const;
         void CollectPackageInstallOrder(SR_UTILS_NS::StringAtom name, SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>& order);
         void OnPackageInstalled(SR_UTILS_NS::StringAtom name, bool success);
 
