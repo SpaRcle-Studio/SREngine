@@ -61,20 +61,20 @@ namespace SR_CORE_NS::GUI {
 
     void FileBrowser::CurrentDirectoryContextMenu(){
         SR_TRACY_ZONE;
-        if(SR_GRAPH_GUI_NS::Immediate::BeginPopupContextWindow()){
-            if (SR_GRAPH_GUI_NS::Immediate::Selectable("Paste")) {
+        if(SR_IMMEDIATE_GUI_NS::BeginPopupContextWindow()){
+            if (SR_IMMEDIATE_GUI_NS::Selectable("Paste")) {
                 SR_UTILS_NS::Platform::PasteFilesFromClipboard(m_selectedDir);
                 m_dirtySelectedDir = true;
             }
-            if (SR_GRAPH_GUI_NS::Immediate::Selectable("Open in native Explorer")) {
+            if (SR_IMMEDIATE_GUI_NS::Selectable("Open in native Explorer")) {
                 SR_UTILS_NS::Path path = m_selectedDir;
                 SR_UTILS_NS::VFS::Instance().ResolvePath(path, SR_UTILS_NS::FileMode::None);
                 SR_UTILS_NS::Platform::OpenWithAssociatedApp(path);
             }
-            if (SR_GRAPH_GUI_NS::Immediate::Selectable("Refresh")) {
+            if (SR_IMMEDIATE_GUI_NS::Selectable("Refresh")) {
                 m_dirtySelectedDir = true;
             }
-            SR_GRAPH_GUI_NS::Immediate::EndPopup();
+            SR_IMMEDIATE_GUI_NS::EndPopup();
         }
     }
 
@@ -165,10 +165,10 @@ namespace SR_CORE_NS::GUI {
 
     void FileBrowser::DrawFoldersTree(FBFolder& parentFolder) {
         SR_TRACY_ZONE;
-        const auto WITH_CHILD = SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::OpenOnArrow | SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::OpenOnDoubleClick;
-        const auto SELECTED_WITH_CHILD = SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::OpenOnArrow | SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::OpenOnDoubleClick | SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::Selected;
-        const auto WITHOUT_CHILD = SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::NoTreePushOnOpen | SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::Leaf;
-        const auto SELECTED_WITHOUT_CHILD = SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::NoTreePushOnOpen | SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::Leaf | SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::Selected;
+        const auto WITH_CHILD = SR_IMMEDIATE_GUI_NS::TreeNodeFlags::OpenOnArrow | SR_IMMEDIATE_GUI_NS::TreeNodeFlags::OpenOnDoubleClick;
+        const auto SELECTED_WITH_CHILD = SR_IMMEDIATE_GUI_NS::TreeNodeFlags::OpenOnArrow | SR_IMMEDIATE_GUI_NS::TreeNodeFlags::OpenOnDoubleClick | SR_IMMEDIATE_GUI_NS::TreeNodeFlags::Selected;
+        const auto WITHOUT_CHILD = SR_IMMEDIATE_GUI_NS::TreeNodeFlags::NoTreePushOnOpen | SR_IMMEDIATE_GUI_NS::TreeNodeFlags::Leaf;
+        const auto SELECTED_WITHOUT_CHILD = SR_IMMEDIATE_GUI_NS::TreeNodeFlags::NoTreePushOnOpen | SR_IMMEDIATE_GUI_NS::TreeNodeFlags::Leaf | SR_IMMEDIATE_GUI_NS::TreeNodeFlags::Selected;
 
         unsigned short index = 0;
         for (auto& folder : parentFolder.innerFolders) {
@@ -180,19 +180,19 @@ namespace SR_CORE_NS::GUI {
             }
 
             if (isLeaf) {
-                SR_GRAPH_GUI_NS::Immediate::TreeNodeEx((void*)(intptr_t)index, selected ? SELECTED_WITHOUT_CHILD : WITHOUT_CHILD, "%s",
+                SR_IMMEDIATE_GUI_NS::TreeNodeEx((void*)(intptr_t)index, selected ? SELECTED_WITHOUT_CHILD : WITHOUT_CHILD, "%s",
                     folder.filename.c_str());
 
-                if (SR_GRAPH_GUI_NS::Immediate::IsItemClicked()) {
+                if (SR_IMMEDIATE_GUI_NS::IsItemClicked()) {
                     m_selectedDir = folder.path;
                     m_dirtySelectedDir = true;
                     m_dirtyFoldersTree = true;
                 }
             } else {
-                bool open = SR_GRAPH_GUI_NS::Immediate::TreeNodeEx((void*)(intptr_t)index, selected ? SELECTED_WITH_CHILD : WITH_CHILD,
+                bool open = SR_IMMEDIATE_GUI_NS::TreeNodeEx((void*)(intptr_t)index, selected ? SELECTED_WITH_CHILD : WITH_CHILD,
                     "%s", folder.filename.c_str());
 
-                if (SR_GRAPH_GUI_NS::Immediate::IsItemClicked() && !SR_GRAPH_GUI_NS::Immediate::IsItemToggledOpen()) {
+                if (SR_IMMEDIATE_GUI_NS::IsItemClicked() && !SR_IMMEDIATE_GUI_NS::IsItemToggledOpen()) {
                     m_selectedDir = folder.path;
                     m_dirtySelectedDir = true;
                     m_dirtyFoldersTree = true;
@@ -201,7 +201,7 @@ namespace SR_CORE_NS::GUI {
                 if (open) {
                     LoadFolderChildren(folder);
                     DrawFoldersTree(folder);
-                    SR_GRAPH_GUI_NS::Immediate::TreePop();
+                    SR_IMMEDIATE_GUI_NS::TreePop();
                 }
             }
 
@@ -239,31 +239,31 @@ namespace SR_CORE_NS::GUI {
 
     void FileBrowser::FileContextMenu(const std::string &filename){
         SR_TRACY_ZONE;
-        if (!SR_GRAPH_GUI_NS::Immediate::BeginPopupContextItem()) {
+        if (!SR_IMMEDIATE_GUI_NS::BeginPopupContextItem()) {
             return;
         }
 
-        if (SR_GRAPH_GUI_NS::Immediate::Selectable("Open")) {
+        if (SR_IMMEDIATE_GUI_NS::Selectable("Open")) {
             SR_UTILS_NS::Path path = m_selectedDir.Concat(filename);
             OpenFileWithApp(path);
         }
-        //if (SR_GRAPH_GUI_NS::Immediate::Selectable("Extract animations")) {
+        //if (SR_IMMEDIATE_GUI_NS::Selectable("Extract animations")) {
         //    SR_UTILS_NS::Path path = m_selectedDir.Concat(filename);
         //    //auto&& animations = SR_ANIMATIONS_NS::AnimationClip::Load(path);
         //    //for (auto&& pAnimation : animations) {
         //    //   // pAnimation->Save()
         //    //}
         //}
-        if (SR_GRAPH_GUI_NS::Immediate::Selectable("Copy path")) {
+        if (SR_IMMEDIATE_GUI_NS::Selectable("Copy path")) {
             SR_UTILS_NS::Path path = m_selectedDir.Concat(filename);
             SR_UTILS_NS::Platform::TextToClipboard(path.ToString());
         }
-        if (SR_GRAPH_GUI_NS::Immediate::Selectable("Copy")) {
+        if (SR_IMMEDIATE_GUI_NS::Selectable("Copy")) {
             SR_UTILS_NS::Path path = m_selectedDir.Concat(filename);
             std::list<SR_UTILS_NS::Path> paths({path}); ///TODO: убрать, когда будет сделано выделение нескольких файлов и их передача в метод
             SR_UTILS_NS::Platform::CopyFilesToClipboard(paths);
         }
-        if (SR_GRAPH_GUI_NS::Immediate::Selectable("Cut")) {
+        if (SR_IMMEDIATE_GUI_NS::Selectable("Cut")) {
             SR_UTILS_NS::Path path = m_selectedDir.Concat(filename);
             ///SR_UTILS_NS::Platform::CopyFilesToClipboard(paths);
             ///for (auto &&path:paths) {
@@ -271,12 +271,12 @@ namespace SR_CORE_NS::GUI {
             ///}
             m_dirtySelectedDir = true;
         }
-        if (SR_GRAPH_GUI_NS::Immediate::Selectable("Paste")) {
+        if (SR_IMMEDIATE_GUI_NS::Selectable("Paste")) {
             SR_UTILS_NS::Path path = m_selectedDir.Concat(filename);
             SR_UTILS_NS::Platform::PasteFilesFromClipboard(path);
             m_dirtySelectedDir = true;
         }
-        if (SR_GRAPH_GUI_NS::Immediate::Selectable("Delete")) {
+        if (SR_IMMEDIATE_GUI_NS::Selectable("Delete")) {
             SR_UTILS_NS::Path path = m_selectedDir.Concat(filename);
             ///метод Delete является слишком опасным, поскольку проводит удаление рекурсивно и безвозвратно
             ///TODO:раскомментировать SR_UTILS_NS::Platform::Delete, если обезопасили от безвозвратного удаления файлов
@@ -284,7 +284,7 @@ namespace SR_CORE_NS::GUI {
             m_dirtySelectedDir = true;
         }
 
-        SR_GRAPH_GUI_NS::Immediate::EndPopup();
+        SR_IMMEDIATE_GUI_NS::EndPopup();
     }
 
     void FileBrowser::CurrentDirectoryPanel() {
@@ -293,47 +293,47 @@ namespace SR_CORE_NS::GUI {
         const float_t fontSize = SR_UTILS_NS::StoreUtils::User::GetFloat("EditorFontSize", SR_IMMEDIATE_GUI_NS::DEFAULT_FONT_SIZE);
         const float_t panelHeight = fontSize * 1.6f;
 
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::FrameRounding, 0.0f);
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::FramePadding, SR_MATH_NS::FVector2(1.f, 1.f) * fontSize * 0.25f);
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::FrameRounding, 0.0f);
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::FramePadding, SR_MATH_NS::FVector2(1.f, 1.f) * fontSize * 0.25f);
 
-        if (SR_GRAPH_GUI_NS::Immediate::BeginChild("current directory panel", SR_MATH_NS::FVector2(0.f, panelHeight)))
+        if (SR_IMMEDIATE_GUI_NS::BeginChild("current directory panel", SR_MATH_NS::FVector2(0.f, panelHeight)))
         {
-            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(fontSize * 6.f);
-            if (SR_GRAPH_GUI_NS::Immediate::SliderFloat("##assets-scale", &m_itemsScale, 0.0, 4.0)) {
+            SR_IMMEDIATE_GUI_NS::PushItemWidth(fontSize * 6.f);
+            if (SR_IMMEDIATE_GUI_NS::SliderFloat("##assets-scale", &m_itemsScale, 0.0, 4.0)) {
                 m_dirtySelectedDir = true;
             }
-            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+            SR_IMMEDIATE_GUI_NS::PopItemWidth();
 
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::SameLine();
 
-            if (SR_GRAPH_GUI_NS::Immediate::Button("Back", SR_MATH_NS::FVector2(fontSize * 4.f, 0.f))) {
+            if (SR_IMMEDIATE_GUI_NS::Button("Back", SR_MATH_NS::FVector2(fontSize * 4.f, 0.f))) {
                 auto&& prevPath = m_selectedDir.GetPrevious();
                 m_selectedDir = prevPath;
                 m_dirtySelectedDir = true;
             }
 
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::SameLine();
 
-            if (SR_GRAPH_GUI_NS::Immediate::Button("Home", SR_MATH_NS::FVector2(fontSize * 4.f, 0.f))) {
+            if (SR_IMMEDIATE_GUI_NS::Button("Home", SR_MATH_NS::FVector2(fontSize * 4.f, 0.f))) {
                 m_selectedDir = "";
                 m_dirtySelectedDir = true;
             }
             /// Current Directory Text
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
-            SR_GRAPH_GUI_NS::Immediate::Text("%s", m_selectedDir.empty() ? "Home" : m_selectedDir.c_str());
+            SR_IMMEDIATE_GUI_NS::SameLine();
+            SR_IMMEDIATE_GUI_NS::Text("%s", m_selectedDir.empty() ? "Home" : m_selectedDir.c_str());
             /// Refresh Button
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
-            SR_GRAPH_GUI_NS::Immediate::SetCursorPosX(SR_GRAPH_GUI_NS::Immediate::GetCursorPos().x + SR_GRAPH_GUI_NS::Immediate::GetContentRegionAvail().x - panelHeight);
+            SR_IMMEDIATE_GUI_NS::SameLine();
+            SR_IMMEDIATE_GUI_NS::SetCursorPosX(SR_IMMEDIATE_GUI_NS::GetCursorPos().x + SR_IMMEDIATE_GUI_NS::GetContentRegionAvail().x - panelHeight);
 
-            if (SR_GRAPH_GUI_NS::Immediate::ImageButton(dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::Reset), panelHeight - 10.f)){
+            if (SR_IMMEDIATE_GUI_NS::ImageButton(dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::Reset), panelHeight - 10.f)){
                 m_dirtySelectedDir = true;
                 m_dirtyFoldersTree = true;
             }
 
-            SR_GRAPH_GUI_NS::Immediate::EndChild();
+            SR_IMMEDIATE_GUI_NS::EndChild();
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PopStyleVar(2);
+        SR_IMMEDIATE_GUI_NS::PopStyleVar(2);
     }
 
     void FileBrowser::ItemViewPanel() {
@@ -342,15 +342,15 @@ namespace SR_CORE_NS::GUI {
         auto&& pOverlay = pEngine->GetRenderContext()->GetPipeline()->GetOverlay(SR_GRAPH_NS::OverlayType::ImGui);
         auto&& pSmallFont = pOverlay.DynamicCast<SR_GRAPH_NS::ImGuiOverlay>()->GetMainFont();
 
-        const float frameHeight = SR_GRAPH_GUI_NS::Immediate::GetFrameHeightWithSpacing();
+        const float frameHeight = SR_IMMEDIATE_GUI_NS::GetFrameHeightWithSpacing();
 
-        if (SR_GRAPH_GUI_NS::Immediate::BeginChild("item view", SR_MATH_NS::FVector2(0, -frameHeight * 1.2f)))
+        if (SR_IMMEDIATE_GUI_NS::BeginChild("item view", SR_MATH_NS::FVector2(0, -frameHeight * 1.2f)))
         {
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
             CurrentDirectoryContextMenu();
 
-            auto wndSize = SR_GRAPH_GUI_NS::Immediate::GetWindowSize();
+            auto wndSize = SR_IMMEDIATE_GUI_NS::GetWindowSize();
 
             uint32_t index = 1;
 
@@ -360,17 +360,17 @@ namespace SR_CORE_NS::GUI {
             for (const auto &element : m_elements) {
                 ++index;
 
-                SR_GRAPH_GUI_NS::Immediate::BeginGroup();
+                SR_IMMEDIATE_GUI_NS::BeginGroup();
 
                 if (element.isReadonly) {
-                    SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor(0.7f, 0.5f, 0.5f, 1.0f));
+                    SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::Text, SR_MATH_NS::FColor(0.7f, 0.5f, 0.5f, 1.0f));
                 }
 
-                SR_GRAPH_GUI_NS::Immediate::PushID(element.filename.c_str());
+                SR_IMMEDIATE_GUI_NS::PushID(element.filename.c_str());
                 if (element.isDir) {
                     void* descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(element.iconType);
 
-                    if (SR_GRAPH_GUI_NS::Immediate::ImageButtonDouble("", descriptor, SR_MATH_NS::FVector2(iconSize), iconSize / 3.f)) {
+                    if (SR_IMMEDIATE_GUI_NS::ImageButtonDouble("", descriptor, SR_MATH_NS::FVector2(iconSize), iconSize / 3.f)) {
                         m_selectedDir = m_selectedDir.Concat(element.filename);
                         m_dirtySelectedDir = true;
                     }
@@ -388,7 +388,7 @@ namespace SR_CORE_NS::GUI {
                         descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(element.iconType);
                     }
 
-                    if (SR_GRAPH_GUI_NS::Immediate::ImageButtonDouble("", descriptor, SR_MATH_NS::FVector2(iconSize), iconSize / 3.f)) {
+                    if (SR_IMMEDIATE_GUI_NS::ImageButtonDouble("", descriptor, SR_MATH_NS::FVector2(iconSize), iconSize / 3.f)) {
                         SR_UTILS_NS::Path path = m_selectedDir.Concat(element.filename);
                         OpenFileWithApp(path);
                     }
@@ -396,19 +396,19 @@ namespace SR_CORE_NS::GUI {
                     FileContextMenu(element.filename);
                 }
 
-                SR_GRAPH_GUI_NS::Immediate::PopID();
-                SR_GRAPH_GUI_NS::Immediate::PushFont(pSmallFont);
-                SR_GRAPH_GUI_NS::Immediate::Text("%s", element.cutName.c_str());
-                SR_GRAPH_GUI_NS::Immediate::PopFont();
+                SR_IMMEDIATE_GUI_NS::PopID();
+                SR_IMMEDIATE_GUI_NS::PushFont(pSmallFont);
+                SR_IMMEDIATE_GUI_NS::Text("%s", element.cutName.c_str());
+                SR_IMMEDIATE_GUI_NS::PopFont();
 
-                SR_GRAPH_GUI_NS::Immediate::EndGroup();
+                SR_IMMEDIATE_GUI_NS::EndGroup();
 
                 if (element.isReadonly) {
-                    SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
+                    SR_IMMEDIATE_GUI_NS::PopStyleColor();
                 }
 
-                if ((SR_GRAPH_GUI_NS::Immediate::GetItemRectSize().x * index) + m_assetWidth < wndSize.x) {
-                    SR_GRAPH_GUI_NS::Immediate::SameLine();
+                if ((SR_IMMEDIATE_GUI_NS::GetItemRectSize().x * index) + m_assetWidth < wndSize.x) {
+                    SR_IMMEDIATE_GUI_NS::SameLine();
                 }
                 else {
                     index = 1;
@@ -419,13 +419,13 @@ namespace SR_CORE_NS::GUI {
             CheckFocused();
 
         }
-        SR_GRAPH_GUI_NS::Immediate::EndChild();
+        SR_IMMEDIATE_GUI_NS::EndChild();
 
-        if (SR_GRAPH_GUI_NS::Immediate::BeginChild("create new asset"))
+        if (SR_IMMEDIATE_GUI_NS::BeginChild("create new asset"))
         {
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            auto wndSize = SR_GRAPH_GUI_NS::Immediate::GetWindowSize();
+            auto wndSize = SR_IMMEDIATE_GUI_NS::GetWindowSize();
 
             bool isAvailable = true;
 
@@ -434,7 +434,7 @@ namespace SR_CORE_NS::GUI {
 
             {
                 SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard lock(!isAvailable);
-                if (SR_GRAPH_GUI_NS::Immediate::Button("Create asset") && isAvailable) {
+                if (SR_IMMEDIATE_GUI_NS::Button("Create asset") && isAvailable) {
                     auto&& pAsset = SR_UTILS_NS::Asset::CreateNew(m_newAssetPath, m_availableAssets[m_newAssetIndex]);
                     if (pAsset) {
                         pAsset->Destroy();
@@ -448,23 +448,23 @@ namespace SR_CORE_NS::GUI {
 
             bool doUpdatePath = false;
 
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::SameLine();
 
-            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(wndSize.x * 0.25f);
-            if (SR_GRAPH_GUI_NS::Immediate::Combo("Type", &m_newAssetIndex, m_comboBoxBuffer.data())) {
+            SR_IMMEDIATE_GUI_NS::PushItemWidth(wndSize.x * 0.25f);
+            if (SR_IMMEDIATE_GUI_NS::Combo("Type", &m_newAssetIndex, m_comboBoxBuffer.data())) {
                 doUpdatePath = true;
             }
-            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+            SR_IMMEDIATE_GUI_NS::PopItemWidth();
 
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
-            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(wndSize.x * 0.25f);
-            if (SR_GRAPH_GUI_NS::Immediate::InputText("Name", &m_newAssetName)) {
+            SR_IMMEDIATE_GUI_NS::SameLine();
+            SR_IMMEDIATE_GUI_NS::PushItemWidth(wndSize.x * 0.25f);
+            if (SR_IMMEDIATE_GUI_NS::InputText("Name", &m_newAssetName)) {
                 std::erase_if(m_newAssetName, [](char c) {
                     return !SR_UTILS_NS::FileSystem::IsAllowedPathSymbol(c) || SR_UTILS_NS::FileSystem::IsPathSeparator(c);
                 });
                 doUpdatePath = true;
             }
-            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+            SR_IMMEDIATE_GUI_NS::PopItemWidth();
 
             if (doUpdatePath) {
                 m_newAssetPath = m_selectedDir.Concat(m_newAssetName);
@@ -479,26 +479,26 @@ namespace SR_CORE_NS::GUI {
                 }
             }
         }
-        SR_GRAPH_GUI_NS::Immediate::EndChild();
+        SR_IMMEDIATE_GUI_NS::EndChild();
     }
 
     void FileBrowser::FileCatalogPanel(const float_t& leftWidth) {
         SR_TRACY_ZONE;
 
-        if (SR_GRAPH_GUI_NS::Immediate::BeginChild("left panel", SR_MATH_NS::FVector2(leftWidth, 0)))
+        if (SR_IMMEDIATE_GUI_NS::BeginChild("left panel", SR_MATH_NS::FVector2(leftWidth, 0)))
         {
-            SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::IndentSpacing, SR_GRAPH_GUI_NS::Immediate::GetFontSize());
+            SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::IndentSpacing, SR_IMMEDIATE_GUI_NS::GetFontSize());
 
             DrawFoldersTree(m_foldersTree);
 
-            m_assetWidth = SR_GRAPH_GUI_NS::Immediate::GetItemRectSize().x;
+            m_assetWidth = SR_IMMEDIATE_GUI_NS::GetItemRectSize().x;
 
-            SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+            SR_IMMEDIATE_GUI_NS::PopStyleVar();
 
             CheckHovered();
             CheckFocused();
 
-            SR_GRAPH_GUI_NS::Immediate::EndChild();
+            SR_IMMEDIATE_GUI_NS::EndChild();
         }
     }
 
@@ -521,21 +521,21 @@ namespace SR_CORE_NS::GUI {
 
         FileCatalogPanel(leftWidth); //Отрисовка панели файлового древа
 
-        float_t windowWidth = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x;          //код для исключения ошибок ImGui
+        float_t windowWidth = SR_IMMEDIATE_GUI_NS::GetWindowSize().x;          //код для исключения ошибок ImGui
         if (leftWidth > windowWidth - 40)                       //проверяет ширину панели каталога файлов
             return;                                             //для прекращения отрисовки
 
-        SR_GRAPH_GUI_NS::Immediate::SameLine();
+        SR_IMMEDIATE_GUI_NS::SameLine();
 
         // right
 
-        SR_GRAPH_GUI_NS::Immediate::BeginGroup();
+        SR_IMMEDIATE_GUI_NS::BeginGroup();
 
         CurrentDirectoryPanel(); //Отрисовка панели нынешней директории
 
-        auto&& DirectoryPanelHeight = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().y; //код для исключения ошибок ImGui
+        auto&& DirectoryPanelHeight = SR_IMMEDIATE_GUI_NS::GetWindowSize().y; //код для исключения ошибок ImGui
         if (DirectoryPanelHeight < 50) {                        //проверяет высоту панели нынешней директории
-            SR_GRAPH_GUI_NS::Immediate::EndGroup();                                  //для прекращения отрисовки
+            SR_IMMEDIATE_GUI_NS::EndGroup();                                  //для прекращения отрисовки
             return;
         }
 
@@ -545,7 +545,7 @@ namespace SR_CORE_NS::GUI {
         }
         ItemViewPanel(); //Отрисовка панели файлового древа
 
-        SR_GRAPH_GUI_NS::Immediate::EndGroup();
+        SR_IMMEDIATE_GUI_NS::EndGroup();
     }
 
     void FileBrowser::OpenFileWithApp(const SR_UTILS_NS::Path& path) {

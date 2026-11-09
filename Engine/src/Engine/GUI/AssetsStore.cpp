@@ -66,7 +66,7 @@ namespace SR_CORE_GUI_NS {
             }
             SR_IMMEDIATE_GUI_NS::SameLine();
             SR_IMMEDIATE_GUI_NS::PushItemWidth(inputSize);
-            if (SR_IMMEDIATE_GUI_NS::InputText("##InputPath", &m_packagesPathTmp, SR_GRAPH_GUI_NS::Immediate::InputTextFlags::EnterReturnsTrue)) {
+            if (SR_IMMEDIATE_GUI_NS::InputText("##InputPath", &m_packagesPathTmp, SR_IMMEDIATE_GUI_NS::InputTextFlags::EnterReturnsTrue)) {
                 m_packagesPathTmp = SR_UTILS_NS::StringUtils::RemoveCharsFromString(m_packagesPathTmp, "\"");
                 pathIsPresent = true;
             }

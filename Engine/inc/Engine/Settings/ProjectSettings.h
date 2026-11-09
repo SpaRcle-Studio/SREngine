@@ -11,6 +11,59 @@
 #include <Utils/FileSystem/PathDataAccessor.h>
 
 namespace SR_CORE_NS {
+    SR_ENUM_NS_CLASS_T(GameBuildConfiguration, uint8_t,
+        Release,
+        Debug
+    )
+
+    SR_ENUM_NS_CLASS_T(DesktopBuildPackageMode, uint8_t,
+        Monolithic,
+        PortableZip
+    )
+
+    struct GameBuildProfile : public SR_UTILS_NS::Serializable {
+        SR_STRUCT()
+
+        /// @property
+        SR_UTILS_NS::String name = "Default";
+        /// @property
+        GameBuildConfiguration configuration = GameBuildConfiguration::Release;
+        /// @property
+        DesktopBuildPackageMode desktopPackageMode = DesktopBuildPackageMode::Monolithic;
+        /// @property
+        SR_UTILS_NS::Path outputPath = "Builds";
+        /// @property
+        SR_UTILS_NS::Path startScene;
+        /// @property
+        SR_UTILS_NS::String productName = "Game";
+        /// @property
+        SR_UTILS_NS::String organization = "SpaRcle-Studio";
+        /// @property
+        SR_UTILS_NS::String androidPackageId = "com.organization.game";
+        /// @property
+        SR_UTILS_NS::String androidVersionName = "1.0.0";
+        /// @property
+        uint32_t androidVersionCode = 1;
+        /// @property
+        bool windows = true;
+        /// @property
+        bool linux = true;
+        /// @property
+        bool androidArm64 = true;
+        /// @property
+        bool androidX64 = true;
+        /// @property
+        bool emscripten = true;
+        /// @property
+        bool createPlatformArchives = true;
+        /// @property
+        bool enableWebPreview = true;
+
+        SR_NODISCARD bool operator==(const GameBuildProfile& rhs) const;
+        SR_NODISCARD bool operator!=(const GameBuildProfile& rhs) const;
+
+    };
+
     /// @extension(srproject)
     class ProjectSettings : public SR_UTILS_NS::Asset {
         SR_CLASS()
@@ -26,6 +79,10 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::Path mainScene;
         /// @property
         SR_UTILS_NS::Vector<SR_UTILS_NS::String> packageFolders;
+        /// @property
+        SR_UTILS_NS::Vector<GameBuildProfile> buildProfiles = { GameBuildProfile() };
+        /// @property
+        uint32_t activeBuildProfile = 0;
 
     };
 }

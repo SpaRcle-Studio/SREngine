@@ -104,26 +104,26 @@ namespace SR_CORE_GUI_NS {
     }
 
     void AnimatorEditor::DrawNodeEditor() {
-        const float_t lineHeight = SR_GRAPH_GUI_NS::Immediate::GetFrameHeightWithSpacing();
+        const float_t lineHeight = SR_IMMEDIATE_GUI_NS::GetFrameHeightWithSpacing();
 
         const bool isGraph = m_tab == Tab::Graph;
         const bool isStateMachine = m_tab == Tab::StateMachine;
 
-        if (SR_GRAPH_GUI_NS::Immediate::ButtonColoredText("Graph", isGraph ? SR_MATH_NS::FColor(0.25f, 0.7f, 1.0f, 1.0f) : SR_MATH_NS::FColor(0.35f, 0.35f, 0.35f, 1.0f), SR_MATH_NS::FVector2(lineHeight * 4.f, 0.f))) {
+        if (SR_IMMEDIATE_GUI_NS::ButtonColoredText("Graph", isGraph ? SR_MATH_NS::FColor(0.25f, 0.7f, 1.0f, 1.0f) : SR_MATH_NS::FColor(0.35f, 0.35f, 0.35f, 1.0f), SR_MATH_NS::FVector2(lineHeight * 4.f, 0.f))) {
             m_tab = Tab::Graph;
             m_nodeGraphEditor->ClearSelection();
             m_nodeGraphEditor->ResetEditor();
         }
-        SR_GRAPH_GUI_NS::Immediate::SameLine();
-        if (SR_GRAPH_GUI_NS::Immediate::ButtonColoredText("State Machine", isStateMachine ? SR_MATH_NS::FColor(0.25f, 0.7f, 1.0f, 1.0f) : SR_MATH_NS::FColor(0.35f, 0.35f, 0.35f, 1.0f), SR_MATH_NS::FVector2(lineHeight * 7.f, 0.f))) {
+        SR_IMMEDIATE_GUI_NS::SameLine();
+        if (SR_IMMEDIATE_GUI_NS::ButtonColoredText("State Machine", isStateMachine ? SR_MATH_NS::FColor(0.25f, 0.7f, 1.0f, 1.0f) : SR_MATH_NS::FColor(0.35f, 0.35f, 0.35f, 1.0f), SR_MATH_NS::FVector2(lineHeight * 7.f, 0.f))) {
             m_tab = Tab::StateMachine;
             m_nodeGraphEditor->ClearSelection();
             m_nodeGraphEditor->ResetEditor();
         }
 
         if (m_pActiveGraph && m_live) {
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
-            if (SR_GRAPH_GUI_NS::Immediate::ButtonColoredText("Disable live mode", SR_MATH_NS::FColor(1.0f, 0.25f, 0.25f, 1.0f), SR_MATH_NS::FVector2(lineHeight * 7.f, 0.f))) {
+            SR_IMMEDIATE_GUI_NS::SameLine();
+            if (SR_IMMEDIATE_GUI_NS::ButtonColoredText("Disable live mode", SR_MATH_NS::FColor(1.0f, 0.25f, 0.25f, 1.0f), SR_MATH_NS::FVector2(lineHeight * 7.f, 0.f))) {
                 m_live = false;
                 m_animator.Reset();
                 Inspect(m_pActiveGraph->GetPath());
@@ -136,7 +136,7 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        const auto size = SR_GRAPH_GUI_NS::Immediate::GetContentRegionAvail();
+        const auto size = SR_IMMEDIATE_GUI_NS::GetContentRegionAvail();
         if (SR_IMMEDIATE_GUI_NS::BeginChild("Node Editor")) {
             m_backgroundText.clear();
             if (auto&& pAsset = m_pActiveGraph ? m_pActiveGraph->GetAsset() : nullptr) {
@@ -145,7 +145,7 @@ namespace SR_CORE_GUI_NS {
             }
             if (!IsStateMachineActive() && m_tab == Tab::StateMachine) {
                 m_nodeGraphEditor->ClearSelection();
-                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.0f, 0.25f, 0.25f, 1.0f), "State machine is not active!");
+                SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.0f, 0.25f, 0.25f, 1.0f), "State machine is not active!");
             }
             else {
                 SyncLogicToVisual();
@@ -195,12 +195,12 @@ namespace SR_CORE_GUI_NS {
 
         m_nodeGraphEditor->SetNodePopupCallback([this](SR_IMMEDIATE_GUI_NS::NodeInstance& node, const SR_MATH_NS::FVector2& pos) {
             if (IsStateMachineActive()) {
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Fast forward")) {
+                if (SR_IMMEDIATE_GUI_NS::MenuItem("Fast forward")) {
                     if (auto&& pState = static_cast<SR_ANIMATIONS_NS::AnimationState*>(node.GetUserData())) {
                         m_pActiveStateMachine.Lock()->GetMachine()->FastForwardState(pState);
                     }
                 }
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("New transition")) {
+                if (SR_IMMEDIATE_GUI_NS::MenuItem("New transition")) {
                     m_nodeGraphEditor->CreateStateMachineTransition(node);
                 }
             }
@@ -286,8 +286,8 @@ namespace SR_CORE_GUI_NS {
                     SR_ANIMATIONS_NS::AnimationGraphNode::GetClassStaticName() :
                     SR_ANIMATIONS_NS::AnimationState::GetClassStaticName()
                 );
-                SR_GRAPH_GUI_NS::Immediate::InputText("##NodeSearch", &m_createNodeSearch);
-                SR_GRAPH_GUI_NS::Immediate::Separator();
+                SR_IMMEDIATE_GUI_NS::InputText("##NodeSearch", &m_createNodeSearch);
+                SR_IMMEDIATE_GUI_NS::Separator();
                 DrawNodeMenuRecursive(m_categories, "", pos);
             }
         });
@@ -393,8 +393,8 @@ namespace SR_CORE_GUI_NS {
             m_propertyDrawer = SRNew<SR_CORE_GUI_NS::ObjectPropertyDrawer>();
         }
 
-        SR_GRAPH_GUI_NS::Immediate::Text("Properties");
-        SR_GRAPH_GUI_NS::Immediate::Separator();
+        SR_IMMEDIATE_GUI_NS::Text("Properties");
+        SR_IMMEDIATE_GUI_NS::Separator();
 
         SR_UTILS_NS::SRClass* pSelectedObject = nullptr;
 
@@ -417,10 +417,10 @@ namespace SR_CORE_GUI_NS {
 
         if (!pSelectedObject) {
             if (m_tab == Tab::Graph) {
-                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(0.7f, 0.7f, 0.7f, 1.0f), "Select a graph node or transition to edit its properties.");
+                SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(0.7f, 0.7f, 0.7f, 1.0f), "Select a graph node or transition to edit its properties.");
             }
             else {
-                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(0.7f, 0.7f, 0.7f, 1.0f), "Select a state node to edit its properties (including transitions/conditions).");
+                SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(0.7f, 0.7f, 0.7f, 1.0f), "Select a state node to edit its properties (including transitions/conditions).");
             }
             return;
         }
@@ -430,8 +430,8 @@ namespace SR_CORE_GUI_NS {
         PropertyDrawerContext context(&value);
         context.pEditor = dynamic_cast<EditorGUI*>(GetManager());
 
-        const float_t lineHeight = SR_GRAPH_GUI_NS::Immediate::GetFontSize() + SR_GRAPH_GUI_NS::Immediate::GetFramePadding().y * 2.0f;
-        float_t windowWidth = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x;
+        const float_t lineHeight = SR_IMMEDIATE_GUI_NS::GetFontSize() + SR_IMMEDIATE_GUI_NS::GetFramePadding().y * 2.0f;
+        float_t windowWidth = SR_IMMEDIATE_GUI_NS::GetWindowSize().x;
         context.lineHeight = lineHeight;
         context.fieldHeight = lineHeight;
         context.axisButtonWidth = context.lineHeight;

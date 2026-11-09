@@ -60,7 +60,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         /// Export material
-        if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Export material")) {
+        if (SR_IMMEDIATE_GUI_NS::MenuItem("Export material")) {
             auto&& resPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
             if (auto&& path = SR_UTILS_NS::FileDialog::Instance().SaveDialog(resPath.ToString(), { { "Material", "mat" } }); !path.IsEmpty()) {
                 path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetCachePath());

@@ -328,7 +328,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
             const ax::NodeEditor::PinId pinId((uintptr_t)(static_cast<PinInstance*>(this)));
             ax::NodeEditor::BeginPin(pinId, ax::NodeEditor::PinKind::Input);
             auto&& color = GetIconColor() / SR_MATH_NS::FColor(255, 255, 255, 1);
-            SR_GRAPH_GUI_NS::Immediate::DrawPinIcon(
+            SR_IMMEDIATE_GUI_NS::DrawPinIcon(
                 SR_MATH_NS::FVector2(24.0f, 24.0f),
                 GetIconType(),
                 IsLinked(),
@@ -353,7 +353,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
             }
             ax::NodeEditor::BeginPin(pinId, ax::NodeEditor::PinKind::Output);
             auto&& color = GetIconColor() / SR_MATH_NS::FColor(255, 255, 255, 1);
-            SR_GRAPH_GUI_NS::Immediate::DrawPinIcon(
+            SR_IMMEDIATE_GUI_NS::DrawPinIcon(
                 SR_MATH_NS::FVector2(24.0f, 24.0f),
                 GetIconType(),
                 IsLinked(),
@@ -527,11 +527,11 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         ax::NodeEditor::SetSavingEnabled(false);
 
         m_nodeEditorRegion = SR_MATH_NS::FRect(
-            SR_GRAPH_GUI_NS::Immediate::GetItemRectMin(),
-            SR_GRAPH_GUI_NS::Immediate::GetItemRectMax()
+            SR_IMMEDIATE_GUI_NS::GetItemRectMin(),
+            SR_IMMEDIATE_GUI_NS::GetItemRectMax()
         );
 
-        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(0.6f, 0.6f, 0.6f, 1.0f), "%s", m_backgroundText.c_str());
+        SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(0.6f, 0.6f, 0.6f, 1.0f), "%s", m_backgroundText.c_str());
 
         for (auto&& pNode : m_nodes) {
             ImGui::PushID(pNode);
@@ -588,12 +588,12 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
 
         if (m_stateMachineTransitionSourceNode) {
             const auto& srcRect = m_stateMachineTransitionSourceNode->GetNodeRect();
-            const SR_MATH_NS::FVector2 mouse = SR_GRAPH_GUI_NS::Immediate::GetMousePos();
+            const SR_MATH_NS::FVector2 mouse = SR_IMMEDIATE_GUI_NS::GetMousePos();
             const SR_MATH_NS::FVector2 srcPoint = SR_MATH_NS::ClipToRectEdge(srcRect, srcRect.Center(), mouse);
 
-            SR_GRAPH_GUI_NS::Immediate::DrawListAddLine(ImGui::GetWindowDrawList(), srcPoint, mouse, SR_COL32(255, 255, 255, 180), 2.0f);
+            SR_IMMEDIATE_GUI_NS::DrawListAddLine(ImGui::GetWindowDrawList(), srcPoint, mouse, SR_COL32(255, 255, 255, 180), 2.0f);
 
-            if (SR_GRAPH_GUI_NS::Immediate::IsMouseReleased(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left)) {
+            if (SR_IMMEDIATE_GUI_NS::IsMouseReleased(SR_IMMEDIATE_GUI_NS::MouseButton::Left)) {
                 for (auto&& pNode : m_nodes) {
                     if (pNode == m_stateMachineTransitionSourceNode) {
                         continue;
@@ -614,7 +614,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
                     }
                 }
             }
-            else if (SR_GRAPH_GUI_NS::Immediate::IsMouseReleased(SR_GRAPH_GUI_NS::Immediate::MouseButton::Right)) {
+            else if (SR_IMMEDIATE_GUI_NS::IsMouseReleased(SR_IMMEDIATE_GUI_NS::MouseButton::Right)) {
                 m_stateMachineTransitionSourceNode = nullptr;
             }
         }
@@ -653,7 +653,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
                 if (m_onLinkDroppedCallback && SR_IMMEDIATE_GUI_NS::NodeEditor::QueryNewNode(&pinId)) {
                     if (SR_IMMEDIATE_GUI_NS::NodeEditor::AcceptNewItem()) {
                         m_onLinkDroppedCallback(*reinterpret_cast<PinInstance*>(pinId));
-                        m_popupMousePos = SR_GRAPH_GUI_NS::Immediate::GetMousePos();
+                        m_popupMousePos = SR_IMMEDIATE_GUI_NS::GetMousePos();
                         m_openLinkDroppedPopup = true;
                     }
                 }
@@ -661,7 +661,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
             SR_IMMEDIATE_GUI_NS::NodeEditor::EndCreate();
         }
 
-        if (SR_GRAPH_GUI_NS::Immediate::IsMouseDoubleClicked(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left)) {
+        if (SR_IMMEDIATE_GUI_NS::IsMouseDoubleClicked(SR_IMMEDIATE_GUI_NS::MouseButton::Left)) {
             if (auto&& selectedNodes = GetSelectedNodes(); selectedNodes.size() == 1) {
                 if (m_onNodeDoubleClickedCallback) {
                     m_onNodeDoubleClickedCallback(*selectedNodes.front());
@@ -672,12 +672,12 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         if (m_onBackgroundPopupCallback) {
             SR_IMMEDIATE_GUI_NS::NodeEditor::SuspendNodeEditor();
             if (SR_IMMEDIATE_GUI_NS::NodeEditor::ShowBackgroundContextMenu()) {
-                SR_GRAPH_GUI_NS::Immediate::OpenPopup("NodeEditorGraphContext");
-                m_popupMousePos = SR_GRAPH_GUI_NS::Immediate::GetMousePos();
+                SR_IMMEDIATE_GUI_NS::OpenPopup("NodeEditorGraphContext");
+                m_popupMousePos = SR_IMMEDIATE_GUI_NS::GetMousePos();
             }
-            if (SR_GRAPH_GUI_NS::Immediate::BeginPopup("NodeEditorGraphContext")) {
+            if (SR_IMMEDIATE_GUI_NS::BeginPopup("NodeEditorGraphContext")) {
                 m_onBackgroundPopupCallback(m_popupMousePos);
-                SR_GRAPH_GUI_NS::Immediate::EndPopup();
+                SR_IMMEDIATE_GUI_NS::EndPopup();
             }
             SR_IMMEDIATE_GUI_NS::NodeEditor::ResumeNodeEditor();
         }
@@ -685,12 +685,12 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
         if (m_onLinkDroppedPopupCallback) {
             SR_IMMEDIATE_GUI_NS::NodeEditor::SuspendNodeEditor();
             if (m_openLinkDroppedPopup) {
-                SR_GRAPH_GUI_NS::Immediate::OpenPopup("NodeEditorLinkDroppedContext");
+                SR_IMMEDIATE_GUI_NS::OpenPopup("NodeEditorLinkDroppedContext");
                 m_openLinkDroppedPopup = false;
             }
-            if (SR_GRAPH_GUI_NS::Immediate::BeginPopup("NodeEditorLinkDroppedContext")) {
+            if (SR_IMMEDIATE_GUI_NS::BeginPopup("NodeEditorLinkDroppedContext")) {
                 m_onLinkDroppedPopupCallback(m_popupMousePos);
-                SR_GRAPH_GUI_NS::Immediate::EndPopup();
+                SR_IMMEDIATE_GUI_NS::EndPopup();
             }
             SR_IMMEDIATE_GUI_NS::NodeEditor::ResumeNodeEditor();
         }
@@ -699,13 +699,13 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
             SR_IMMEDIATE_GUI_NS::NodeEditor::SuspendNodeEditor();
             uintptr_t nodeId = 0;
             if (SR_IMMEDIATE_GUI_NS::NodeEditor::ShowNodeContextMenu(&nodeId)) {
-                SR_GRAPH_GUI_NS::Immediate::OpenPopup("AnimatorEditor_SM_NodeContext");
-                m_popupMousePos = SR_GRAPH_GUI_NS::Immediate::GetMousePos();
+                SR_IMMEDIATE_GUI_NS::OpenPopup("AnimatorEditor_SM_NodeContext");
+                m_popupMousePos = SR_IMMEDIATE_GUI_NS::GetMousePos();
                 m_pPopupNode = reinterpret_cast<NodeInstance*>(nodeId);
             }
-            if (SR_GRAPH_GUI_NS::Immediate::BeginPopup("AnimatorEditor_SM_NodeContext")) {
+            if (SR_IMMEDIATE_GUI_NS::BeginPopup("AnimatorEditor_SM_NodeContext")) {
                 m_onNodePopupCallback(*m_pPopupNode, m_popupMousePos);
-                SR_GRAPH_GUI_NS::Immediate::EndPopup();
+                SR_IMMEDIATE_GUI_NS::EndPopup();
             }
             SR_IMMEDIATE_GUI_NS::NodeEditor::ResumeNodeEditor();
         }
@@ -1019,8 +1019,8 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
 
         ax::NodeEditor::SetNodePosition(ax::NodeEditor::NodeId(this), F2ToImV2(m_position.Round()));
 
-        const auto nodeMin = SR_GRAPH_GUI_NS::Immediate::GetItemRectMin();
-        const auto nodeMax = SR_GRAPH_GUI_NS::Immediate::GetItemRectMax();
+        const auto nodeMin = SR_IMMEDIATE_GUI_NS::GetItemRectMin();
+        const auto nodeMax = SR_IMMEDIATE_GUI_NS::GetItemRectMax();
 
         m_nodeRect = SR_MATH_NS::FRect(
             nodeMin.x,
@@ -1091,22 +1091,22 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
             const float arrowLen = 10.0f;
 
             SR_MATH_NS::FVector2 lineDstArrowOffset = nd * arrowLen;
-            SR_GRAPH_GUI_NS::Immediate::DrawListAddLine(pDrawList, srcPoint, dstPoint - lineDstArrowOffset, col, thickness);
+            SR_IMMEDIATE_GUI_NS::DrawListAddLine(pDrawList, srcPoint, dstPoint - lineDstArrowOffset, col, thickness);
 
             if (progress > 0.f && progress < 1.f) {
                 const SR_MATH_NS::FVector2 progressPoint = srcPoint + dir * progress;
-                SR_GRAPH_GUI_NS::Immediate::DrawListAddLine(pDrawList, srcPoint, progressPoint, progressColor, thickness);
+                SR_IMMEDIATE_GUI_NS::DrawListAddLine(pDrawList, srcPoint, progressPoint, progressColor, thickness);
             }
 
             const SR_MATH_NS::FVector2 tip = dstPoint;
             const SR_MATH_NS::FVector2 base = tip - nd * arrowLen;
             const SR_MATH_NS::FVector2 left = base + perp * arrowWidth;
             const SR_MATH_NS::FVector2 right = base - perp * arrowWidth;
-            SR_GRAPH_GUI_NS::Immediate::DrawListAddTriangleFilled(pDrawList, tip, left, right, col);
+            SR_IMMEDIATE_GUI_NS::DrawListAddTriangleFilled(pDrawList, tip, left, right, col);
 
             if (ax::NodeEditor::IsActive()) {
-                if (SR_GRAPH_GUI_NS::Immediate::IsMouseReleased(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left)) {
-                    const SR_MATH_NS::FVector2 mousePos = SR_GRAPH_GUI_NS::Immediate::GetMousePos();
+                if (SR_IMMEDIATE_GUI_NS::IsMouseReleased(SR_IMMEDIATE_GUI_NS::MouseButton::Left)) {
+                    const SR_MATH_NS::FVector2 mousePos = SR_IMMEDIATE_GUI_NS::GetMousePos();
                     const float distToLine = SR_MATH_NS::DistanceToLineSegment(mousePos, srcPoint, dstPoint);
                     if (distToLine < 5.0f) {
                         pEditor->ForceSelectLink(this);
@@ -1126,7 +1126,7 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
 
 #endif
 
-namespace SR_GRAPH_GUI_NS::Immediate {
+namespace SR_IMMEDIATE_GUI_NS {
     NodeEditorInstance* NodeEditorInstance::Create() {
         SR_TRACY_ZONE;
     #if defined(SR_USE_IMGUI_NODE_FLOW) && defined(SR_USE_IMGUI)

@@ -19,25 +19,25 @@ namespace SR_CORE_GUI_NS {
     { }
 
     void About::Draw() {
-        if (SR_GRAPH_GUI_NS::Immediate::BeginTabBar("About")) {
-            SR_GRAPH_GUI_NS::Immediate::Text("SpaRcle Engine v%s", SR_ENGINE_VERSION);
+        if (SR_IMMEDIATE_GUI_NS::BeginTabBar("About")) {
+            SR_IMMEDIATE_GUI_NS::Text("SpaRcle Engine v%s", SR_ENGINE_VERSION);
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            SR_GRAPH_GUI_NS::Immediate::Text("Author: ");
-            SR_GRAPH_GUI_NS::Immediate::Text("   Monika0000");
-            SR_GRAPH_GUI_NS::Immediate::Separator();
-            SR_GRAPH_GUI_NS::Immediate::Text("Member contributors: ");
-            SR_GRAPH_GUI_NS::Immediate::Text("   * innerviewer");
-            SR_GRAPH_GUI_NS::Immediate::Text("   * Drakeme");
-            SR_GRAPH_GUI_NS::Immediate::Text("   * CaptainSlider");
-            SR_GRAPH_GUI_NS::Immediate::Text("   * GitHub Copilot");
-            SR_GRAPH_GUI_NS::Immediate::Separator();
-            SR_GRAPH_GUI_NS::Immediate::Text("Made thanks to the following libraries: ");
-            SR_GRAPH_GUI_NS::Immediate::TextWrapped("    glm, GLFW, GLEW, glad, Bullet3, PhysX, Box2D, Dear ImGui, tinyobjloader, stbi, json, Assimp");
-            SR_GRAPH_GUI_NS::Immediate::Separator();
-            SR_GRAPH_GUI_NS::Immediate::Text("Build Version: %s", SR_ENGINE_VERSION);
+            SR_IMMEDIATE_GUI_NS::Text("Author: ");
+            SR_IMMEDIATE_GUI_NS::Text("   Monika0000");
+            SR_IMMEDIATE_GUI_NS::Separator();
+            SR_IMMEDIATE_GUI_NS::Text("Member contributors: ");
+            SR_IMMEDIATE_GUI_NS::Text("   * innerviewer");
+            SR_IMMEDIATE_GUI_NS::Text("   * Drakeme");
+            SR_IMMEDIATE_GUI_NS::Text("   * CaptainSlider");
+            SR_IMMEDIATE_GUI_NS::Text("   * GitHub Copilot");
+            SR_IMMEDIATE_GUI_NS::Separator();
+            SR_IMMEDIATE_GUI_NS::Text("Made thanks to the following libraries: ");
+            SR_IMMEDIATE_GUI_NS::TextWrapped("    glm, GLFW, GLEW, glad, Bullet3, PhysX, Box2D, Dear ImGui, tinyobjloader, stbi, json, Assimp");
+            SR_IMMEDIATE_GUI_NS::Separator();
+            SR_IMMEDIATE_GUI_NS::Text("Build Version: %s", SR_ENGINE_VERSION);
 
         #ifdef SR_COMMON_GIT_METADATA
             static std::string metadata;
@@ -49,15 +49,15 @@ namespace SR_CORE_GUI_NS {
                     + git_AuthorName() + "' on\n\t" + std::asctime(timeUTC);
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Text(metadata.c_str());
+            SR_IMMEDIATE_GUI_NS::Text(metadata.c_str());
         #endif
 
             const std::string executableAndModulesHash = SR_UTILS_NS::ToString(SR_UTILS_NS::FileSystem::GetExecutableAndModulesHash());
-            SR_GRAPH_GUI_NS::Immediate::Text("Executable and modules hash: %s", executableAndModulesHash.c_str());
+            SR_IMMEDIATE_GUI_NS::Text("Executable and modules hash: %s", executableAndModulesHash.c_str());
 
-            SR_GRAPH_GUI_NS::Immediate::Text("Licensed under the MIT License");
+            SR_IMMEDIATE_GUI_NS::Text("Licensed under the MIT License");
 
-            SR_GRAPH_GUI_NS::Immediate::EndTabBar();
+            SR_IMMEDIATE_GUI_NS::EndTabBar();
         }
     }
 }

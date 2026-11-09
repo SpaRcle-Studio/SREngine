@@ -9,7 +9,7 @@
 
 #if defined(SR_USE_VULKAN) && defined(SR_USE_IMGUI)
 
-namespace SR_GRAPH_GUI_NS::Immediate {
+namespace SR_IMMEDIATE_GUI_NS {
     struct ImGui_ImplVulkanH_FrameRenderBuffers
     {
         VkDeviceMemory      VertexBufferMemory;
@@ -727,7 +727,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
 #endif // SR_USE_VULKAN && SR_USE_IMGUI
 
 #if defined(SR_USE_VULKAN) && !defined(SR_USE_IMGUI)
-namespace SR_GRAPH_GUI_NS::Immediate {
+namespace SR_IMMEDIATE_GUI_NS {
     VulkanRendererHandle VulkanCreateRenderer(const VulkanRendererCreateInfo& info, const VulkanFrameInfo* frames, uint32_t frameCount) { return nullptr; }
     void VulkanDestroyRenderer(VulkanRendererHandle renderer) { }
     bool VulkanRecreateRenderer(VulkanRendererHandle renderer, const VulkanFrameInfo* frames, uint32_t frameCount) { return false; }

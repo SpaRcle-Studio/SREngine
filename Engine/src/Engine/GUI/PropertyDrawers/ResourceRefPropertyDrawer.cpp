@@ -18,35 +18,35 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().c_str());
+        SR_IMMEDIATE_GUI_NS::PushID(context.pUID);
+        SR_IMMEDIATE_GUI_NS::PushID(context.GetPropertyName().c_str());
 
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
-        auto&& pWindow = SR_GRAPH_GUI_NS::Immediate::GetCurrentWindow();
-        auto&& pDrawList = SR_GRAPH_GUI_NS::Immediate::GetWindowDrawList(pWindow);
-        const auto cursorPos = SR_GRAPH_GUI_NS::Immediate::GetWindowCursorPos(pWindow);
+        auto&& pWindow = SR_IMMEDIATE_GUI_NS::GetCurrentWindow();
+        auto&& pDrawList = SR_IMMEDIATE_GUI_NS::GetWindowDrawList(pWindow);
+        const auto cursorPos = SR_IMMEDIATE_GUI_NS::GetWindowCursorPos(pWindow);
 
-        const auto dir = m_isOpened ? SR_GRAPH_GUI_NS::Immediate::Direction::Down : SR_GRAPH_GUI_NS::Immediate::Direction::Right;
+        const auto dir = m_isOpened ? SR_IMMEDIATE_GUI_NS::Direction::Down : SR_IMMEDIATE_GUI_NS::Direction::Right;
         const float arrowWidth = context.GetArrowWidth() * 1.15f;
         const SR_MATH_NS::FVector2 arrowButtonSize = { arrowWidth, context.fieldHeight };
 
         {
             const SR_MATH_NS::FVector2 arrowPos = cursorPos + SR_MATH_NS::FVector2(5, 5);
-            SR_GRAPH_GUI_NS::Immediate::RenderArrow(pDrawList, arrowPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f);
+            SR_IMMEDIATE_GUI_NS::RenderArrow(pDrawList, arrowPos, SR_IMMEDIATE_GUI_NS::GetColorU32(SR_IMMEDIATE_GUI_NS::StyleColor::Text), dir, 1.f);
 
-            auto&& stackSize = SR_GRAPH_GUI_NS::Immediate::BeginForceEnabled();
-            if (SR_GRAPH_GUI_NS::Immediate::Button("", arrowButtonSize)) {
+            auto&& stackSize = SR_IMMEDIATE_GUI_NS::BeginForceEnabled();
+            if (SR_IMMEDIATE_GUI_NS::Button("", arrowButtonSize)) {
                 m_isOpened = !m_isOpened;
             }
-            SR_GRAPH_GUI_NS::Immediate::EndForceEnabled(stackSize);
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::EndForceEnabled(stackSize);
+            SR_IMMEDIATE_GUI_NS::SameLine();
         }
 
         if (!context.pValue || !context.GetPropertyDisplayName().empty()) {
             const SR_MATH_NS::FVector2 buttonSize = SR_MATH_NS::FVector2(context.fieldTitleWidth * 0.75f - arrowButtonSize.x, context.fieldHeight);
 
-            if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetPropertyDisplayName().c_str(), buttonSize)) {
+            if (SR_IMMEDIATE_GUI_NS::Button(context.GetPropertyDisplayName().c_str(), buttonSize)) {
                 if (context.pProperty) {
                     if (context.onBeforeChangeCallback) {
                         context.onBeforeChangeCallback(false);
@@ -58,12 +58,12 @@ namespace SR_CORE_GUI_NS {
             }
             DrawTitleContextMenu(context, feedback);
 
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::SameLine();
         }
 
         /// picking
         {
-            if (SR_GRAPH_GUI_NS::Immediate::Button("...", SR_MATH_NS::FVector2(context.fieldTitleWidth * 0.25f, context.fieldHeight))) {
+            if (SR_IMMEDIATE_GUI_NS::Button("...", SR_MATH_NS::FVector2(context.fieldTitleWidth * 0.25f, context.fieldHeight))) {
                 auto&& filterName = context.GetEditorParams().GetCustomArg("filter name");
                 auto&& filterValue = context.GetEditorParams().GetCustomArg("filter value");
 
@@ -103,9 +103,9 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-        SR_GRAPH_GUI_NS::Immediate::SameLine();
+        SR_IMMEDIATE_GUI_NS::SameLine();
 
-        SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth);
+        SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth);
 
         if (auto&& pRef = dynamic_cast<SR_UTILS_NS::ResourceRefBase*>(value.GetSRClass())) {
             SR_UTILS_NS::StringAtom type = pRef->GetResourceType();
@@ -115,21 +115,21 @@ namespace SR_CORE_GUI_NS {
 
             if (pRef->GetId().empty()) {
                 SR_UTILS_NS::FormatTo(formatted, " Is not set ({})", type);
-                SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
-                SR_GRAPH_GUI_NS::Immediate::ButtonColoredText(formatted.c_str(), SR_MATH_NS::FColor(1.f, 1.f, 0.f, 1.f), SR_MATH_NS::FVector2(context.fieldWidth, 0));
-                SR_GRAPH_GUI_NS::Immediate::EndDisabled();
+                SR_IMMEDIATE_GUI_NS::BeginDisabled();
+                SR_IMMEDIATE_GUI_NS::ButtonColoredText(formatted.c_str(), SR_MATH_NS::FColor(1.f, 1.f, 0.f, 1.f), SR_MATH_NS::FVector2(context.fieldWidth, 0));
+                SR_IMMEDIATE_GUI_NS::EndDisabled();
             }
             else if (!pRef->GetResourceBase()) {
                 SR_UTILS_NS::FormatTo(formatted, " {} ({} is missing)", pRef->GetId(), type);
-                SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
-                SR_GRAPH_GUI_NS::Immediate::ButtonColoredText(formatted.c_str(), SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), SR_MATH_NS::FVector2(context.fieldWidth, 0));
-                SR_GRAPH_GUI_NS::Immediate::EndDisabled();
+                SR_IMMEDIATE_GUI_NS::BeginDisabled();
+                SR_IMMEDIATE_GUI_NS::ButtonColoredText(formatted.c_str(), SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), SR_MATH_NS::FVector2(context.fieldWidth, 0));
+                SR_IMMEDIATE_GUI_NS::EndDisabled();
             }
             else {
                 SR_UTILS_NS::FormatTo(formatted, " {} ({})", pRef->GetId(), type);
-                SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
-                SR_GRAPH_GUI_NS::Immediate::ButtonColoredText(formatted.c_str(), SR_MATH_NS::FColor(1.f, 1.f, 1.f, 1.f), SR_MATH_NS::FVector2(context.fieldWidth, 0));
-                SR_GRAPH_GUI_NS::Immediate::EndDisabled();
+                SR_IMMEDIATE_GUI_NS::BeginDisabled();
+                SR_IMMEDIATE_GUI_NS::ButtonColoredText(formatted.c_str(), SR_MATH_NS::FColor(1.f, 1.f, 1.f, 1.f), SR_MATH_NS::FVector2(context.fieldWidth, 0));
+                SR_IMMEDIATE_GUI_NS::EndDisabled();
             }
 
             if (auto&& pResource = pRef->GetResourceBase(); pResource && m_isOpened) {
@@ -146,8 +146,8 @@ namespace SR_CORE_GUI_NS {
                 }
 
                 if (!context.pValue && !context.noHeader) {
-                    SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(arrowWidth, 5.0f));
-                    SR_GRAPH_GUI_NS::Immediate::SameLine();
+                    SR_IMMEDIATE_GUI_NS::Dummy(SR_MATH_NS::FVector2(arrowWidth, 5.0f));
+                    SR_IMMEDIATE_GUI_NS::SameLine();
                 }
 
                 SR_UTILS_NS::SRClass* pClassValue = pResource->GetSRClass();
@@ -162,9 +162,9 @@ namespace SR_CORE_GUI_NS {
                 propertyContext.pOwner = pClassValue;
                 propertyContext.noHeader = true;
 
-                SR_GRAPH_GUI_NS::Immediate::BeginGroup();
+                SR_IMMEDIATE_GUI_NS::BeginGroup();
                 PropertyDrawerFeedback propertyFeedback = m_objectDrawer->Draw(propertyContext);
-                SR_GRAPH_GUI_NS::Immediate::EndGroup();
+                SR_IMMEDIATE_GUI_NS::EndGroup();
 
                 if (propertyFeedback.isChanged) {
                     feedback.isChanged = true;
@@ -172,17 +172,17 @@ namespace SR_CORE_GUI_NS {
             }
         }
         else {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map resource ref value!");
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map resource ref value!");
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+        SR_IMMEDIATE_GUI_NS::PopItemWidth();
 
         SetValue(context, feedback, value);
 
-        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+        SR_IMMEDIATE_GUI_NS::PopStyleVar();
 
-        SR_GRAPH_GUI_NS::Immediate::PopID();
-        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
 
         return feedback;
     }

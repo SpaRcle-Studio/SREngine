@@ -6,7 +6,7 @@
     #include <ImmediateGUI/Impl/ImGUI.h>
 #endif
 
-namespace SR_GRAPH_GUI_NS::Immediate::Experimental {
+namespace SR_IMMEDIATE_GUI_NS::Experimental {
 #ifdef SR_USE_IMGUI
     void BeginHorizontal(const char* str_id, const ImVec2& size = ImVec2(0, 0), float align = -1.0f);
     void BeginHorizontal(const void* ptr_id, const ImVec2& size = ImVec2(0, 0), float align = -1.0f);

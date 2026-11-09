@@ -142,13 +142,13 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        if (!SR_GRAPH_GUI_NS::Immediate::BeginPopupContextItem("PropertyTitleContextMenu")) {
+        if (!SR_IMMEDIATE_GUI_NS::BeginPopupContextItem("PropertyTitleContextMenu")) {
             return;
         }
 
         const bool isOverridden = context.isPropertyOverriddenCallback &&
             context.isPropertyOverriddenCallback(context.pOwner, *context.pProperty, context.propertyPath);
-        if (isOverridden && context.revertPropertyCallback && SR_GRAPH_GUI_NS::Immediate::MenuItem("Revert prefab override")) {
+        if (isOverridden && context.revertPropertyCallback && SR_IMMEDIATE_GUI_NS::MenuItem("Revert prefab override")) {
             if (context.onBeforeChangeCallback) {
                 context.onBeforeChangeCallback(false);
             }
@@ -171,11 +171,11 @@ namespace SR_CORE_GUI_NS {
         bool isPasteClicked = false;
         {
             SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard guard(!isSupported);
-            isCopyClicked = SR_GRAPH_GUI_NS::Immediate::MenuItem("Copy");
+            isCopyClicked = SR_IMMEDIATE_GUI_NS::MenuItem("Copy");
         }
         {
             SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard guard(!canPaste);
-            isPasteClicked = SR_GRAPH_GUI_NS::Immediate::MenuItem("Paste");
+            isPasteClicked = SR_IMMEDIATE_GUI_NS::MenuItem("Paste");
         }
 
         if (isCopyClicked && isSupported) {
@@ -186,7 +186,7 @@ namespace SR_CORE_GUI_NS {
             SetReflectedValue(context, feedback, clipboard.Copy());
         }
 
-        SR_GRAPH_GUI_NS::Immediate::EndPopup();
+        SR_IMMEDIATE_GUI_NS::EndPopup();
     }
 
     void PropertyDrawerBase::SetReflectedValue(const PropertyDrawerContext& context, PropertyDrawerFeedback& feedback, const SR_UTILS_NS::Reflection::Value& value, bool drag) {
@@ -217,19 +217,19 @@ namespace SR_CORE_GUI_NS {
         std::optional<uint64_t> selectedIndex = pTypeIt != types.end() ? std::make_optional(std::distance(types.begin(), pTypeIt)) : std::nullopt;
         const char* pPrevValue = selectedIndex.has_value() ? types[selectedIndex.value()].data() : defaultValue.c_str();
 
-        SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth);
+        SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth);
 
         if (types.size() < 1) {
-            SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
+            SR_IMMEDIATE_GUI_NS::BeginDisabled();
         }
 
-        if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("##Combo", pPrevValue, SR_GRAPH_GUI_NS::Immediate::ComboFlags::NoArrowButton)) {
+        if (SR_IMMEDIATE_GUI_NS::BeginCombo("##Combo", pPrevValue, SR_IMMEDIATE_GUI_NS::ComboFlags::NoArrowButton)) {
             if (!comboOpened) {
-                SR_GRAPH_GUI_NS::Immediate::SetKeyboardFocusHere();
+                SR_IMMEDIATE_GUI_NS::SetKeyboardFocusHere();
                 comboOpened = true;
             }
 
-            if (SR_GRAPH_GUI_NS::Immediate::InputText("##Search", &m_searchBuffer)) {
+            if (SR_IMMEDIATE_GUI_NS::InputText("##Search", &m_searchBuffer)) {
                 SR_NOOP;
             }
 
@@ -239,18 +239,18 @@ namespace SR_CORE_GUI_NS {
                 }
 
                 bool isSelected = (selectedIndex == i);
-                if (SR_GRAPH_GUI_NS::Immediate::Selectable(types[i].data(), isSelected))
+                if (SR_IMMEDIATE_GUI_NS::Selectable(types[i].data(), isSelected))
                 {
                     selectedIndex = i;
                     m_searchBuffer = types[i];
-                    SR_GRAPH_GUI_NS::Immediate::CloseCurrentPopup();
+                    SR_IMMEDIATE_GUI_NS::CloseCurrentPopup();
                 }
 
                 if (isSelected) {
-                    SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
+                    SR_IMMEDIATE_GUI_NS::SetItemDefaultFocus();
                 }
             }
-            SR_GRAPH_GUI_NS::Immediate::EndCombo();
+            SR_IMMEDIATE_GUI_NS::EndCombo();
         }
         else {
             comboOpened = false;
@@ -258,7 +258,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (types.size() < 1) {
-            SR_GRAPH_GUI_NS::Immediate::EndDisabled();
+            SR_IMMEDIATE_GUI_NS::EndDisabled();
         }
 
         return selectedIndex;
@@ -269,15 +269,15 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
+        SR_IMMEDIATE_GUI_NS::PushID(context.pUID);
+        SR_IMMEDIATE_GUI_NS::PushID(context.GetPropertyName().ToCStr());
 
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
         if (!context.pValue) {
             const SR_MATH_NS::FVector2 buttonSize = { context.fieldTitleWidth, context.fieldHeight };
 
-            if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetPropertyDisplayName().c_str(), buttonSize)) {
+            if (SR_IMMEDIATE_GUI_NS::Button(context.GetPropertyDisplayName().c_str(), buttonSize)) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(false);
                 }
@@ -287,12 +287,12 @@ namespace SR_CORE_GUI_NS {
             }
             DrawTitleContextMenu(context, feedback);
 
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::SameLine();
         }
 
         if (auto&& bValue = value.Cast<bool>()) {
             bool isChecked = *bValue;
-            if (SR_GRAPH_GUI_NS::Immediate::Checkbox("##Checkbox", &isChecked)) {
+            if (SR_IMMEDIATE_GUI_NS::Checkbox("##Checkbox", &isChecked)) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(false);
                 }
@@ -301,13 +301,13 @@ namespace SR_CORE_GUI_NS {
             }
         }
         else {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map bool value!");
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map bool value!");
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+        SR_IMMEDIATE_GUI_NS::PopStyleVar();
 
-        SR_GRAPH_GUI_NS::Immediate::PopID();
-        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
 
         SetValue(context, feedback, value);
 
@@ -321,15 +321,15 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
+        SR_IMMEDIATE_GUI_NS::PushID(context.pUID);
+        SR_IMMEDIATE_GUI_NS::PushID(context.GetPropertyName().ToCStr());
 
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
         if (!context.pValue) {
             const SR_MATH_NS::FVector2 buttonSize = { context.fieldTitleWidth, context.fieldHeight };
 
-            if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetPropertyDisplayName().c_str(), buttonSize)) {
+            if (SR_IMMEDIATE_GUI_NS::Button(context.GetPropertyDisplayName().c_str(), buttonSize)) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(false);
                 }
@@ -339,7 +339,7 @@ namespace SR_CORE_GUI_NS {
             }
             DrawTitleContextMenu(context, feedback);
 
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::SameLine();
         }
 
         auto&& pOptionalBase = value.GetOptionalBase();
@@ -352,7 +352,7 @@ namespace SR_CORE_GUI_NS {
 
             if (m_valueDrawer) {
                 bool hasValue = pOptionalBase->HasValue();
-                if (SR_GRAPH_GUI_NS::Immediate::Checkbox("##Checkbox", &hasValue)) {
+                if (SR_IMMEDIATE_GUI_NS::Checkbox("##Checkbox", &hasValue)) {
                     if (context.onBeforeChangeCallback) {
                         context.onBeforeChangeCallback(false);
                     }
@@ -365,43 +365,43 @@ namespace SR_CORE_GUI_NS {
                     feedback.isChanged = true;
                 }
 
-                SR_GRAPH_GUI_NS::Immediate::SameLine();
-                SR_GRAPH_GUI_NS::Immediate::PushID("Value");
+                SR_IMMEDIATE_GUI_NS::SameLine();
+                SR_IMMEDIATE_GUI_NS::PushID("Value");
 
                 SR_UTILS_NS::Reflection::Value optionalValue = pOptionalBase->GetReflectionValue();
 
                 SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard lock(!hasValue);
                 PropertyDrawerContext valueContext = context;
                 valueContext.pValue = &optionalValue;
-                valueContext.fieldWidth = context.fieldWidth - SR_GRAPH_GUI_NS::Immediate::GetFrameHeight();
+                valueContext.fieldWidth = context.fieldWidth - SR_IMMEDIATE_GUI_NS::GetFrameHeight();
                 valueContext.fieldTitleWidth = 0.f;
                 valueContext.noHeader = true;
                 valueContext.openedByDefault = false;
 
-                SR_GRAPH_GUI_NS::Immediate::BeginGroup();
+                SR_IMMEDIATE_GUI_NS::BeginGroup();
                 PropertyDrawerFeedback elementFeedback = m_valueDrawer->Draw(valueContext);
-                SR_GRAPH_GUI_NS::Immediate::EndGroup();
+                SR_IMMEDIATE_GUI_NS::EndGroup();
 
                 if (elementFeedback.isChanged) {
                     feedback.isChanged = true;
                     pOptionalBase->SetValue(optionalValue);
                 }
 
-                SR_GRAPH_GUI_NS::Immediate::PopID();
+                SR_IMMEDIATE_GUI_NS::PopID();
             }
             else {
-                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unsupported optional type!");
+                SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unsupported optional type!");
             }
         }
         else {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map optional value!");
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map optional value!");
         }
 
-        //const float checkBoxSize = SR_GRAPH_GUI_NS::Immediate::GetFrameHeight();
+        //const float checkBoxSize = SR_IMMEDIATE_GUI_NS::GetFrameHeight();
 
         /*if (auto&& pValue = value.TryCast<std::optional<float>>()) {
             bool hasValue = pValue->has_value();
-            if (SR_GRAPH_GUI_NS::Immediate::Checkbox("##Checkbox", &hasValue)) {
+            if (SR_IMMEDIATE_GUI_NS::Checkbox("##Checkbox", &hasValue)) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(false);
                 }
@@ -415,11 +415,11 @@ namespace SR_CORE_GUI_NS {
             }
 
             float dataValue = pValue->value_or(0.f);
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::SameLine();
             SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard lock(!hasValue);
-            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth - checkBoxSize);
+            SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth - checkBoxSize);
 
-            if (SR_GRAPH_GUI_NS::Immediate::DragFloat("##Value", &dataValue, context.GetEditorParams().GetDragSpeed())) {
+            if (SR_IMMEDIATE_GUI_NS::DragFloat("##Value", &dataValue, context.GetEditorParams().GetDragSpeed())) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(true);
                 }
@@ -427,11 +427,11 @@ namespace SR_CORE_GUI_NS {
                 feedback.isChanged = true;
             }
 
-            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+            SR_IMMEDIATE_GUI_NS::PopItemWidth();
         }
         else if (auto&& pValue = value.TryCast<std::optional<bool>>()) {
             bool hasValue = pValue->has_value();
-            if (SR_GRAPH_GUI_NS::Immediate::Checkbox("##Checkbox", &hasValue)) {
+            if (SR_IMMEDIATE_GUI_NS::Checkbox("##Checkbox", &hasValue)) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(false);
                 }
@@ -445,11 +445,11 @@ namespace SR_CORE_GUI_NS {
             }
 
             bool dataValue = pValue->value_or(false);
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::SameLine();
             SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard lock(!hasValue);
-            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth - checkBoxSize);
+            SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth - checkBoxSize);
 
-            if (SR_GRAPH_GUI_NS::Immediate::Checkbox("Value", &dataValue)) {
+            if (SR_IMMEDIATE_GUI_NS::Checkbox("Value", &dataValue)) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(false);
                 }
@@ -457,11 +457,11 @@ namespace SR_CORE_GUI_NS {
                 feedback.isChanged = true;
             }
 
-            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+            SR_IMMEDIATE_GUI_NS::PopItemWidth();
         }
         else if (auto&& pValue = value.TryCast<std::optional<SR_UTILS_NS::StringAtom>>()) {
             bool hasValue = pValue->has_value();
-            if (SR_GRAPH_GUI_NS::Immediate::Checkbox("##Checkbox", &hasValue)) {
+            if (SR_IMMEDIATE_GUI_NS::Checkbox("##Checkbox", &hasValue)) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(false);
                 }
@@ -475,13 +475,13 @@ namespace SR_CORE_GUI_NS {
             }
 
             SR_UTILS_NS::StringAtom dataValue = pValue->value_or(SR_UTILS_NS::StringAtom());
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::SameLine();
             SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard lock(!hasValue);
-            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth - checkBoxSize);
+            SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth - checkBoxSize);
 
             char buffer[256] = { 0 };
             std::strncpy(buffer, dataValue.c_str(), sizeof(buffer) - 1);
-            if (SR_GRAPH_GUI_NS::Immediate::InputText("##Value", buffer, sizeof(buffer))) {
+            if (SR_IMMEDIATE_GUI_NS::InputText("##Value", buffer, sizeof(buffer))) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(false);
                 }
@@ -489,16 +489,16 @@ namespace SR_CORE_GUI_NS {
                 feedback.isChanged = true;
             }
 
-            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+            SR_IMMEDIATE_GUI_NS::PopItemWidth();
         }
         else {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unsupported optional type!");
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unsupported optional type!");
         }*/
 
-        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+        SR_IMMEDIATE_GUI_NS::PopStyleVar();
 
-        SR_GRAPH_GUI_NS::Immediate::PopID();
-        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
 
         SetValue(context, feedback, value);
 
@@ -511,19 +511,19 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
         if (value.GetTypeInfo().category != SR_UTILS_NS::Reflection::ReflectedCategoryType::Arithmetic) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Property is not numeric!");
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Property is not numeric!");
             return feedback;
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
+        SR_IMMEDIATE_GUI_NS::PushID(context.pUID);
+        SR_IMMEDIATE_GUI_NS::PushID(context.GetPropertyName().ToCStr());
 
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
         const SR_MATH_NS::FVector2 buttonSize = { context.fieldTitleWidth, context.fieldHeight };
 
         if (!context.pValue) {
-            if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetPropertyDisplayName().c_str(), buttonSize)) {
+            if (SR_IMMEDIATE_GUI_NS::Button(context.GetPropertyDisplayName().c_str(), buttonSize)) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(false);
                 }
@@ -532,55 +532,55 @@ namespace SR_CORE_GUI_NS {
                 value = value.Copy();
             }
             DrawTitleContextMenu(context, feedback);
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::SameLine();
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth);
+        SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth);
 
         const float_t drag = context.GetEditorParams().GetDragSpeed();
         auto&& range = context.GetEditorParams().GetRange();
-        const auto dataType = SR_GRAPH_GUI_NS::Immediate::GetDataType(value.SizeOf(), value.IsSigned(), value.IsIntegral());
-        if (dataType == SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::COUNT) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown data type! Value detailed type: %s", value.GetTypeInfo().detailedType.c_str());
-            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
-            SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
-            SR_GRAPH_GUI_NS::Immediate::PopID();
-            SR_GRAPH_GUI_NS::Immediate::PopID();
+        const auto dataType = SR_IMMEDIATE_GUI_NS::GetDataType(value.SizeOf(), value.IsSigned(), value.IsIntegral());
+        if (dataType == SR_IMMEDIATE_GUI_NS::ImmediateDataType::COUNT) {
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown data type! Value detailed type: %s", value.GetTypeInfo().detailedType.c_str());
+            SR_IMMEDIATE_GUI_NS::PopItemWidth();
+            SR_IMMEDIATE_GUI_NS::PopStyleVar();
+            SR_IMMEDIATE_GUI_NS::PopID();
+            SR_IMMEDIATE_GUI_NS::PopID();
             return feedback;
         }
 
         if (void* pValue = value.Data()) {
-            SR_GRAPH_GUI_NS::Immediate::ImmediateDataTypeUnion dataTypeUnion = SR_GRAPH_GUI_NS::Immediate::ReadDataType(pValue, dataType);
-            SR_GRAPH_GUI_NS::Immediate::ImmediateDataTypeUnion minValue;
-            SR_GRAPH_GUI_NS::Immediate::ImmediateDataTypeUnion maxValue;
+            SR_IMMEDIATE_GUI_NS::ImmediateDataTypeUnion dataTypeUnion = SR_IMMEDIATE_GUI_NS::ReadDataType(pValue, dataType);
+            SR_IMMEDIATE_GUI_NS::ImmediateDataTypeUnion minValue;
+            SR_IMMEDIATE_GUI_NS::ImmediateDataTypeUnion maxValue;
             void* pMin = nullptr;
             void* pMax = nullptr;
 
             if (range) {
-                minValue = SR_GRAPH_GUI_NS::Immediate::FloatToDataType(range.value().first, dataType);
-                maxValue = SR_GRAPH_GUI_NS::Immediate::FloatToDataType(range.value().second, dataType);
+                minValue = SR_IMMEDIATE_GUI_NS::FloatToDataType(range.value().first, dataType);
+                maxValue = SR_IMMEDIATE_GUI_NS::FloatToDataType(range.value().second, dataType);
                 pMin = &minValue;
                 pMax = &maxValue;
             }
 
-            if (SR_GRAPH_GUI_NS::Immediate::DragScalar("", dataType, &dataTypeUnion, drag, pMin, pMax)) {
+            if (SR_IMMEDIATE_GUI_NS::DragScalar("", dataType, &dataTypeUnion, drag, pMin, pMax)) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(true);
                 }
-                SR_GRAPH_GUI_NS::Immediate::WriteDataType(pValue, dataType, dataTypeUnion);
+                SR_IMMEDIATE_GUI_NS::WriteDataType(pValue, dataType, dataTypeUnion);
                 feedback.isChanged = true;
             }
         }
         else {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map numeric value!");
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map numeric value!");
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+        SR_IMMEDIATE_GUI_NS::PopItemWidth();
 
-        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+        SR_IMMEDIATE_GUI_NS::PopStyleVar();
 
-        SR_GRAPH_GUI_NS::Immediate::PopID();
-        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
 
         SetValue(context, feedback, value);
 
@@ -593,18 +593,18 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
         if (value.GetTypeInfo().detailedType != "AABB") {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Property is not AABB!");
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Property is not AABB!");
             return feedback;
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
+        SR_IMMEDIATE_GUI_NS::PushID(context.pUID);
+        SR_IMMEDIATE_GUI_NS::PushID(context.GetPropertyName().ToCStr());
 
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
         const SR_MATH_NS::FVector2 buttonSize = { context.fieldTitleWidth, context.fieldHeight };
 
-        if (!context.pValue && SR_GRAPH_GUI_NS::Immediate::Button(context.GetPropertyDisplayName().c_str(), buttonSize)) {
+        if (!context.pValue && SR_IMMEDIATE_GUI_NS::Button(context.GetPropertyDisplayName().c_str(), buttonSize)) {
             if (context.onBeforeChangeCallback) {
                 context.onBeforeChangeCallback(false);
             }
@@ -620,13 +620,13 @@ namespace SR_CORE_GUI_NS {
             SR_MATH_NS::FVector3 min = pAABB->Min();
             SR_MATH_NS::FVector3 max = pAABB->Max();
 
-            const float_t labelWidth = SR_GRAPH_GUI_NS::Immediate::CalcTextSize("Max").x;
-            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(SR_MAX(context.fieldWidth - labelWidth, 1.f));
+            const float_t labelWidth = SR_IMMEDIATE_GUI_NS::CalcTextSize("Max").x;
+            SR_IMMEDIATE_GUI_NS::PushItemWidth(SR_MAX(context.fieldWidth - labelWidth, 1.f));
 
-            SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.fieldTitleWidth, 0.0f));
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::Dummy(SR_MATH_NS::FVector2(context.fieldTitleWidth, 0.0f));
+            SR_IMMEDIATE_GUI_NS::SameLine();
 
-            if (SR_GRAPH_GUI_NS::Immediate::DragFloat3("Min", &min.x, drag)) {
+            if (SR_IMMEDIATE_GUI_NS::DragFloat3("Min", &min.x, drag)) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(true);
                 }
@@ -634,10 +634,10 @@ namespace SR_CORE_GUI_NS {
                 feedback.isChanged = true;
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.fieldTitleWidth, 0.0f));
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::Dummy(SR_MATH_NS::FVector2(context.fieldTitleWidth, 0.0f));
+            SR_IMMEDIATE_GUI_NS::SameLine();
 
-            if (SR_GRAPH_GUI_NS::Immediate::DragFloat3("Max", &max.x, drag)) {
+            if (SR_IMMEDIATE_GUI_NS::DragFloat3("Max", &max.x, drag)) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(true);
                 }
@@ -645,18 +645,18 @@ namespace SR_CORE_GUI_NS {
                 feedback.isChanged = true;
             }
 
-            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+            SR_IMMEDIATE_GUI_NS::PopItemWidth();
         }
         else {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map AABB value!");
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map AABB value!");
         }
 
         DrawEditBoundsButton(context);
 
-        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+        SR_IMMEDIATE_GUI_NS::PopStyleVar();
 
-        SR_GRAPH_GUI_NS::Immediate::PopID();
-        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
 
         SetValue(context, feedback, value);
 
@@ -681,11 +681,11 @@ namespace SR_CORE_GUI_NS {
 
         const bool isEditing = pGizmo->IsBoundsEdit(context.pComponent.Get(), context.pProperty);
 
-        SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.fieldTitleWidth, 0.0f));
-        SR_GRAPH_GUI_NS::Immediate::SameLine();
+        SR_IMMEDIATE_GUI_NS::Dummy(SR_MATH_NS::FVector2(context.fieldTitleWidth, 0.0f));
+        SR_IMMEDIATE_GUI_NS::SameLine();
 
         const SR_MATH_NS::FColor color = isEditing ? SR_MATH_NS::FColor(0.2f, 0.6f, 0.2f, 1.f) : SR_MATH_NS::FColor(0.3f, 0.3f, 0.3f, 1.f);
-        if (SR_GRAPH_GUI_NS::Immediate::ButtonColored("Edit Bounds", color, SR_MATH_NS::FVector2(context.fieldWidth, context.fieldHeight))) {
+        if (SR_IMMEDIATE_GUI_NS::ButtonColored("Edit Bounds", color, SR_MATH_NS::FVector2(context.fieldWidth, context.fieldHeight))) {
             if (isEditing) {
                 pGizmo->StopBoundsEdit();
             }
@@ -704,28 +704,28 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::StringView vectorPartType = isQuaternion ? "float" : value.GetTypeInfo().detailedType;
         const uint8_t dimension = isQuaternion ? 4 : value.GetTypeInfo().detailedSize;
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
+        SR_IMMEDIATE_GUI_NS::PushID(context.pUID);
+        SR_IMMEDIATE_GUI_NS::PushID(context.GetPropertyName().ToCStr());
 
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
         if (!context.pValue) {
             const SR_MATH_NS::FVector2 mainButtonSize = { context.fieldTitleWidth, context.fieldHeight };
 
-            if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetPropertyDisplayName().c_str(), mainButtonSize)) {
+            if (SR_IMMEDIATE_GUI_NS::Button(context.GetPropertyDisplayName().c_str(), mainButtonSize)) {
                 value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
                 value = value.Copy();
                 SetReflectedValue(context, feedback, value);
             }
             DrawTitleContextMenu(context, feedback);
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::SameLine();
         }
 
         const float_t partItemWidth = (context.fieldWidth / static_cast<float_t>(context.maxPartsInLine)) - context.axisButtonWidth;
 
         const SR_MATH_NS::FVector2 buttonSize = { context.axisButtonWidth, context.fieldHeight };
         const float_t drag = context.GetEditorParams().GetDragSpeed();
-        auto partType = SR_GRAPH_GUI_NS::Immediate::GetDataType(vectorPartType);
+        auto partType = SR_IMMEDIATE_GUI_NS::GetDataType(vectorPartType);
 
         constexpr std::array<const char*, 6> labels = { "X", "Y", "Z", "W", "V", "U" };
         static const std::array<SR_MATH_NS::FColor, 6> colors = {
@@ -741,16 +741,16 @@ namespace SR_CORE_GUI_NS {
         };
 
         for (uint8_t i = 0; i < dimension; ++i) {
-            SR_GRAPH_GUI_NS::Immediate::PushID(i);
+            SR_IMMEDIATE_GUI_NS::PushID(i);
 
-            SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Button, colors[i]);
-            SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::ButtonHovered, colors[i] + SR_MATH_NS::FColor(0.1f, 0.1f, 0.1f, 0.0f));
-            SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::ButtonActive, colors[i] + SR_MATH_NS::FColor(0.2f, 0.2f, 0.2f, 0.0f));
+            SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::Button, colors[i]);
+            SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::ButtonHovered, colors[i] + SR_MATH_NS::FColor(0.1f, 0.1f, 0.1f, 0.0f));
+            SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::ButtonActive, colors[i] + SR_MATH_NS::FColor(0.2f, 0.2f, 0.2f, 0.0f));
 
             const uint64_t partSize = value.SizeOf() / dimension;
             const uint64_t offset = partSize * i;
 
-            if (SR_GRAPH_GUI_NS::Immediate::Button(labels[i], buttonSize)) {
+            if (SR_IMMEDIATE_GUI_NS::Button(labels[i], buttonSize)) {
                 SR_UTILS_NS::Reflection::Value copy = value.Copy();
                 if (context.pProperty && context.GetProperty().GetResetValue().SizeOf() == value.SizeOf()) {
                     if (auto&& pResetData = (char*)context.GetProperty().GetResetValue().Data()) {
@@ -764,51 +764,51 @@ namespace SR_CORE_GUI_NS {
                 SetReflectedValue(context, feedback, copy);
             }
 
-            SR_GRAPH_GUI_NS::Immediate::PopStyleColor(3);
+            SR_IMMEDIATE_GUI_NS::PopStyleColor(3);
 
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::SameLine();
 
-            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(partItemWidth);
+            SR_IMMEDIATE_GUI_NS::PushItemWidth(partItemWidth);
 
             if (partSize == 1) {
-                SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+                SR_IMMEDIATE_GUI_NS::PopItemWidth();
                 SR_UTILS_NS::Reflection::Value copy = value.Copy();
                 bool* pTemp = reinterpret_cast<bool*>(&((char*)(copy.Data()))[offset]);
-                if (SR_GRAPH_GUI_NS::Immediate::Checkbox("", pTemp)) {
+                if (SR_IMMEDIATE_GUI_NS::Checkbox("", pTemp)) {
                     SetReflectedValue(context, feedback, copy, false);
                 }
-                SR_GRAPH_GUI_NS::Immediate::SameLine();
-                SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(partItemWidth - SR_GRAPH_GUI_NS::Immediate::GetFrameHeight(), 0.0f));
-                SR_GRAPH_GUI_NS::Immediate::PushItemWidth(partItemWidth);
+                SR_IMMEDIATE_GUI_NS::SameLine();
+                SR_IMMEDIATE_GUI_NS::Dummy(SR_MATH_NS::FVector2(partItemWidth - SR_IMMEDIATE_GUI_NS::GetFrameHeight(), 0.0f));
+                SR_IMMEDIATE_GUI_NS::PushItemWidth(partItemWidth);
             }
-            else if (partType == SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::COUNT) {
-                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown part type!");
+            else if (partType == SR_IMMEDIATE_GUI_NS::ImmediateDataType::COUNT) {
+                SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown part type!");
             }
             else {
                 SR_UTILS_NS::Reflection::Value copy = value.Copy();
-                if (SR_GRAPH_GUI_NS::Immediate::DragScalar("", partType, (char*)copy.Data() + offset, drag)) {
+                if (SR_IMMEDIATE_GUI_NS::DragScalar("", partType, (char*)copy.Data() + offset, drag)) {
                     SetReflectedValue(context, feedback, copy, true);
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
-            SR_GRAPH_GUI_NS::Immediate::PopID();
+            SR_IMMEDIATE_GUI_NS::PopItemWidth();
+            SR_IMMEDIATE_GUI_NS::PopID();
 
             if (i + 1 < dimension) {
                 if ((i + 1) % context.maxPartsInLine == 0) {
-                    SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.fieldTitleWidth, 0.0f));
-                    SR_GRAPH_GUI_NS::Immediate::SameLine();
+                    SR_IMMEDIATE_GUI_NS::Dummy(SR_MATH_NS::FVector2(context.fieldTitleWidth, 0.0f));
+                    SR_IMMEDIATE_GUI_NS::SameLine();
                 }
                 else {
-                    SR_GRAPH_GUI_NS::Immediate::SameLine();
+                    SR_IMMEDIATE_GUI_NS::SameLine();
                 }
             }
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+        SR_IMMEDIATE_GUI_NS::PopStyleVar();
 
-        SR_GRAPH_GUI_NS::Immediate::PopID();
-        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
 
         return feedback;
     }
@@ -818,23 +818,23 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
+        SR_IMMEDIATE_GUI_NS::PushID(context.pUID);
+        SR_IMMEDIATE_GUI_NS::PushID(context.GetPropertyName().ToCStr());
 
         if (!context.pValue) {
             const SR_MATH_NS::FVector2 mainButtonSize = { context.fieldTitleWidth, context.fieldHeight };
 
-            if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetPropertyDisplayName().c_str(), mainButtonSize)) {
+            if (SR_IMMEDIATE_GUI_NS::Button(context.GetPropertyDisplayName().c_str(), mainButtonSize)) {
                 value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
                 value = value.Copy();
                 SetReflectedValue(context, feedback, value);
             }
             DrawTitleContextMenu(context, feedback);
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::SameLine();
         }
 
         if (SR_MATH_NS::FColor* pColor = value.Cast<SR_MATH_NS::FColor>()) {
-            if (SR_GRAPH_GUI_NS::Immediate::ColorEditAlpha("##ColorPicker", *pColor, SR_GRAPH_GUI_NS::Immediate::ColorEditFlags::DefaultOptions)) {
+            if (SR_IMMEDIATE_GUI_NS::ColorEditAlpha("##ColorPicker", *pColor, SR_IMMEDIATE_GUI_NS::ColorEditFlags::DefaultOptions)) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(true);
                 }
@@ -845,8 +845,8 @@ namespace SR_CORE_GUI_NS {
             SRHalt("FColorPropertyDrawer can only be used with FColor type!");
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PopID();
-        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
 
         return feedback;
     }
@@ -859,18 +859,18 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::StringView vectorPartType = value.GetTypeInfo().detailedType;
         const uint8_t dimension = value.GetTypeInfo().detailedSize;
 
-        const auto partType = SR_GRAPH_GUI_NS::Immediate::GetDataType(vectorPartType);
-        if (partType == SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::COUNT) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown part type!");
+        const auto partType = SR_IMMEDIATE_GUI_NS::GetDataType(vectorPartType);
+        if (partType == SR_IMMEDIATE_GUI_NS::ImmediateDataType::COUNT) {
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown part type!");
             return feedback;
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetProperty().GetName().ToCStr());
+        SR_IMMEDIATE_GUI_NS::PushID(context.pUID);
+        SR_IMMEDIATE_GUI_NS::PushID(context.GetProperty().GetName().ToCStr());
 
         if (!context.pValue) {
             const SR_MATH_NS::FVector2 mainButtonSize = { context.fieldTitleWidth, context.fieldHeight * 2.f };
-            if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetProperty().GetDisplayName().c_str(), mainButtonSize)) {
+            if (SR_IMMEDIATE_GUI_NS::Button(context.GetProperty().GetDisplayName().c_str(), mainButtonSize)) {
                 value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
                 value = value.Copy();
                 SetReflectedValue(context, feedback, value);
@@ -880,7 +880,7 @@ namespace SR_CORE_GUI_NS {
 
         SRAssert(value);
 
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
         constexpr uint32_t maxPartsInLine = 3;
         const float_t partItemWidth = (context.fieldWidth) / maxPartsInLine - context.axisButtonWidth;
@@ -894,31 +894,31 @@ namespace SR_CORE_GUI_NS {
             SR_MATH_NS::FColor(0.2f, 0.7f, 0.2f, 1.0f),
         };
 
-        SR_GRAPH_GUI_NS::Immediate::SameLine();
+        SR_IMMEDIATE_GUI_NS::SameLine();
 
-        SR_GRAPH_GUI_NS::Immediate::BeginGroup();
+        SR_IMMEDIATE_GUI_NS::BeginGroup();
         {
             SR_UTILS_NS::Reflection::Value copy = value.Copy();
 
             for (uint8_t i = 0; i < dimension; ++i) {
-                SR_GRAPH_GUI_NS::Immediate::PushID(i);
+                SR_IMMEDIATE_GUI_NS::PushID(i);
 
-                SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Button, colors[i]);
-                SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::ButtonHovered, colors[i] + SR_MATH_NS::FColor(0.1f, 0.1f, 0.1f, 0.0f));
-                SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::ButtonActive, colors[i] + SR_MATH_NS::FColor(0.2f, 0.2f, 0.2f, 0.0f));
+                SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::Button, colors[i]);
+                SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::ButtonHovered, colors[i] + SR_MATH_NS::FColor(0.1f, 0.1f, 0.1f, 0.0f));
+                SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::ButtonActive, colors[i] + SR_MATH_NS::FColor(0.2f, 0.2f, 0.2f, 0.0f));
 
                 auto&& pFSize = reinterpret_cast<SR_MATH_NS::FSize*>(&((char*)(copy.Data()))[i * sizeof(SR_MATH_NS::FSize)]);
                 auto&& pISize = reinterpret_cast<SR_MATH_NS::ISize*>(&((char*)(copy.Data()))[i * sizeof(SR_MATH_NS::ISize)]);
                 auto&& pUSize = reinterpret_cast<SR_MATH_NS::USize*>(&((char*)(copy.Data()))[i * sizeof(SR_MATH_NS::USize)]);
 
-                if (SR_GRAPH_GUI_NS::Immediate::Button(labels[i], buttonSize)) {
+                if (SR_IMMEDIATE_GUI_NS::Button(labels[i], buttonSize)) {
                     feedback.isChanged = true;
                     if (value.SizeOf() == context.GetProperty().GetResetValue().SizeOf()) {
                         auto&& pMapped = context.GetProperty().GetResetValue().Data();
                         switch (partType) {
-                            case SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::Float: pFSize->v = reinterpret_cast<SR_MATH_NS::FSize*>(&((char*)(pMapped))[i * sizeof(SR_MATH_NS::FSize)])->v; break;
-                            case SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::Int32: pISize->v = reinterpret_cast<SR_MATH_NS::ISize*>(&((char*)(pMapped))[i * sizeof(SR_MATH_NS::ISize)])->v; break;
-                            case SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::UInt32: pUSize->v = reinterpret_cast<SR_MATH_NS::USize*>(&((char*)(pMapped))[i * sizeof(SR_MATH_NS::USize)])->v; break;
+                            case SR_IMMEDIATE_GUI_NS::ImmediateDataType::Float: pFSize->v = reinterpret_cast<SR_MATH_NS::FSize*>(&((char*)(pMapped))[i * sizeof(SR_MATH_NS::FSize)])->v; break;
+                            case SR_IMMEDIATE_GUI_NS::ImmediateDataType::Int32: pISize->v = reinterpret_cast<SR_MATH_NS::ISize*>(&((char*)(pMapped))[i * sizeof(SR_MATH_NS::ISize)])->v; break;
+                            case SR_IMMEDIATE_GUI_NS::ImmediateDataType::UInt32: pUSize->v = reinterpret_cast<SR_MATH_NS::USize*>(&((char*)(pMapped))[i * sizeof(SR_MATH_NS::USize)])->v; break;
                             default:
                                 SRHalt("Unknown part type!");
                                 break;
@@ -926,9 +926,9 @@ namespace SR_CORE_GUI_NS {
                     }
                     else {
                         switch (partType) {
-                            case SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::Float:  pFSize->v = 0.f; break;
-                            case SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::Int32:  pISize->v = 0; break;
-                            case SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::UInt32: pUSize->v = 0; break;
+                            case SR_IMMEDIATE_GUI_NS::ImmediateDataType::Float:  pFSize->v = 0.f; break;
+                            case SR_IMMEDIATE_GUI_NS::ImmediateDataType::Int32:  pISize->v = 0; break;
+                            case SR_IMMEDIATE_GUI_NS::ImmediateDataType::UInt32: pUSize->v = 0; break;
                             default:
                                 SRHalt("Unknown part type!");
                                 break;
@@ -936,33 +936,33 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
 
-                SR_GRAPH_GUI_NS::Immediate::PopStyleColor(3);
-                SR_GRAPH_GUI_NS::Immediate::PushItemWidth(partItemWidth);
+                SR_IMMEDIATE_GUI_NS::PopStyleColor(3);
+                SR_IMMEDIATE_GUI_NS::PushItemWidth(partItemWidth);
 
-                SR_GRAPH_GUI_NS::Immediate::SameLine();
+                SR_IMMEDIATE_GUI_NS::SameLine();
 
                 switch (partType) {
-                    case SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::Float: {
+                    case SR_IMMEDIATE_GUI_NS::ImmediateDataType::Float: {
                         float_t temp = pFSize->v;
-                        if (SR_GRAPH_GUI_NS::Immediate::DragScalar("", partType, &temp, drag)) {
+                        if (SR_IMMEDIATE_GUI_NS::DragScalar("", partType, &temp, drag)) {
                             pFSize->v = temp;
                             feedback.isChanged = true;
                             feedback.isDrag = true;
                         }
                         break;
                     }
-                    case SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::Int32: {
+                    case SR_IMMEDIATE_GUI_NS::ImmediateDataType::Int32: {
                         int32_t temp = pISize->v;
-                        if (SR_GRAPH_GUI_NS::Immediate::DragScalar("", partType, &temp, drag)) {
+                        if (SR_IMMEDIATE_GUI_NS::DragScalar("", partType, &temp, drag)) {
                             pISize->v = temp;
                             feedback.isChanged = true;
                             feedback.isDrag = true;
                         }
                         break;
                     }
-                    case SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::UInt32: {
+                    case SR_IMMEDIATE_GUI_NS::ImmediateDataType::UInt32: {
                         uint32_t temp = pUSize->v;
-                        if (SR_GRAPH_GUI_NS::Immediate::DragScalar("", partType, &temp, drag)) {
+                        if (SR_IMMEDIATE_GUI_NS::DragScalar("", partType, &temp, drag)) {
                             pUSize->v = temp;
                             feedback.isChanged = true;
                             feedback.isDrag = true;
@@ -970,25 +970,25 @@ namespace SR_CORE_GUI_NS {
                         break;
                     }
                     default:
-                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown part type!");
+                        SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown part type!");
                         break;
                 }
 
-                SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+                SR_IMMEDIATE_GUI_NS::PopItemWidth();
 
-                SR_GRAPH_GUI_NS::Immediate::PopID();
+                SR_IMMEDIATE_GUI_NS::PopID();
 
                 if (i + 1 < dimension) {
-                    SR_GRAPH_GUI_NS::Immediate::SameLine();
+                    SR_IMMEDIATE_GUI_NS::SameLine();
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::PushID("Metric");
+            SR_IMMEDIATE_GUI_NS::PushID("Metric");
 
-            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth / maxPartsInLine);
+            SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth / maxPartsInLine);
 
             for (uint8_t i = 0; i < dimension; ++i) {
-                SR_GRAPH_GUI_NS::Immediate::PushID(i);
+                SR_IMMEDIATE_GUI_NS::PushID(i);
 
                 auto&& pFSize = reinterpret_cast<SR_MATH_NS::FSize*>(&((char*)(copy.Data()))[i * sizeof(SR_MATH_NS::FSize)]);
                 auto&& pISize = reinterpret_cast<SR_MATH_NS::ISize*>(&((char*)(copy.Data()))[i * sizeof(SR_MATH_NS::ISize)]);
@@ -996,47 +996,47 @@ namespace SR_CORE_GUI_NS {
 
                 SR_MATH_NS::SizeMetric* pSize = nullptr;
                 switch (partType) {
-                    case SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::Float: pSize = &pFSize->metric; break;
-                    case SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::Int32: pSize = &pISize->metric; break;
-                    case SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::UInt32: pSize = &pUSize->metric; break;
+                    case SR_IMMEDIATE_GUI_NS::ImmediateDataType::Float: pSize = &pFSize->metric; break;
+                    case SR_IMMEDIATE_GUI_NS::ImmediateDataType::Int32: pSize = &pISize->metric; break;
+                    case SR_IMMEDIATE_GUI_NS::ImmediateDataType::UInt32: pSize = &pUSize->metric; break;
                     default:
-                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown part type!");
+                        SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown part type!");
                         break;
                 }
 
-                if (pSize && SR_GRAPH_GUI_NS::Immediate::BeginCombo("", SR_UTILS_NS::EnumReflector::ToStringAtom(*pSize).c_str())) {
+                if (pSize && SR_IMMEDIATE_GUI_NS::BeginCombo("", SR_UTILS_NS::EnumReflector::ToStringAtom(*pSize).c_str())) {
                     auto&& names = SR_UTILS_NS::EnumReflector::GetNames<SR_MATH_NS::SizeMetric>();
                     for (auto&& name : names) {
-                        if (SR_GRAPH_GUI_NS::Immediate::Selectable(name.c_str())) {
-                            SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
+                        if (SR_IMMEDIATE_GUI_NS::Selectable(name.c_str())) {
+                            SR_IMMEDIATE_GUI_NS::SetItemDefaultFocus();
                             *pSize = SR_UTILS_NS::EnumReflector::FromString<SR_MATH_NS::SizeMetric>(name);
                             feedback.isChanged = true;
                         }
                     }
 
-                    SR_GRAPH_GUI_NS::Immediate::EndCombo();
+                    SR_IMMEDIATE_GUI_NS::EndCombo();
                 }
 
-                SR_GRAPH_GUI_NS::Immediate::PopID();
+                SR_IMMEDIATE_GUI_NS::PopID();
 
                 if (i + 1 < dimension) {
-                    SR_GRAPH_GUI_NS::Immediate::SameLine();
+                    SR_IMMEDIATE_GUI_NS::SameLine();
                 }
             }
-            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
-            SR_GRAPH_GUI_NS::Immediate::EndGroup();
+            SR_IMMEDIATE_GUI_NS::PopItemWidth();
+            SR_IMMEDIATE_GUI_NS::EndGroup();
 
             if (feedback.isChanged) {
                 SetReflectedValue(context, feedback, copy, feedback.isDrag);
             }
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
 
-        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+        SR_IMMEDIATE_GUI_NS::PopStyleVar();
 
-        SR_GRAPH_GUI_NS::Immediate::PopID();
-        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
 
         return feedback;
     }

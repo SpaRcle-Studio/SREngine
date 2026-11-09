@@ -25,16 +25,16 @@ namespace SR_CORE_GUI_NS {
         //    return feedback;
         //}
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
+        SR_IMMEDIATE_GUI_NS::PushID(context.pUID);
+        SR_IMMEDIATE_GUI_NS::PushID(context.GetPropertyName().ToCStr());
 
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
-        auto&& pWindow = SR_GRAPH_GUI_NS::Immediate::GetCurrentWindow();
-        auto&& pDrawList = SR_GRAPH_GUI_NS::Immediate::GetWindowDrawList(pWindow);
-        const auto cursorPos = SR_GRAPH_GUI_NS::Immediate::GetWindowCursorPos(pWindow);
+        auto&& pWindow = SR_IMMEDIATE_GUI_NS::GetCurrentWindow();
+        auto&& pDrawList = SR_IMMEDIATE_GUI_NS::GetWindowDrawList(pWindow);
+        const auto cursorPos = SR_IMMEDIATE_GUI_NS::GetWindowCursorPos(pWindow);
 
-        const auto dir = m_isOpened ? SR_GRAPH_GUI_NS::Immediate::Direction::Down : SR_GRAPH_GUI_NS::Immediate::Direction::Right;
+        const auto dir = m_isOpened ? SR_IMMEDIATE_GUI_NS::Direction::Down : SR_IMMEDIATE_GUI_NS::Direction::Right;
 
         if (!m_openedByDefault) {
             m_isOpened |= context.openedByDefault;
@@ -45,29 +45,29 @@ namespace SR_CORE_GUI_NS {
 
         if (context.pValue && !context.noHeader) {
             const SR_MATH_NS::FVector2 arrowPos = cursorPos + SR_MATH_NS::FVector2(5, 5);
-            SR_GRAPH_GUI_NS::Immediate::RenderArrow(pDrawList, arrowPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f);
+            SR_IMMEDIATE_GUI_NS::RenderArrow(pDrawList, arrowPos, SR_IMMEDIATE_GUI_NS::GetColorU32(SR_IMMEDIATE_GUI_NS::StyleColor::Text), dir, 1.f);
 
             const SR_MATH_NS::FVector2 mainButtonSize = { 30, context.fieldHeight };
 
-            auto&& stackSize = SR_GRAPH_GUI_NS::Immediate::BeginForceEnabled();
-            if (SR_GRAPH_GUI_NS::Immediate::Button("", mainButtonSize)) {
+            auto&& stackSize = SR_IMMEDIATE_GUI_NS::BeginForceEnabled();
+            if (SR_IMMEDIATE_GUI_NS::Button("", mainButtonSize)) {
                 m_isOpened = !m_isOpened;
             }
-            SR_GRAPH_GUI_NS::Immediate::EndForceEnabled(stackSize);
+            SR_IMMEDIATE_GUI_NS::EndForceEnabled(stackSize);
         }
         else if (!context.noHeader) {
             const SR_MATH_NS::FVector2 arrowPos = cursorPos + SR_MATH_NS::FVector2(1, 5);
-            SR_GRAPH_GUI_NS::Immediate::RenderArrow(pDrawList, arrowPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f);
+            SR_IMMEDIATE_GUI_NS::RenderArrow(pDrawList, arrowPos, SR_IMMEDIATE_GUI_NS::GetColorU32(SR_IMMEDIATE_GUI_NS::StyleColor::Text), dir, 1.f);
 
             const SR_MATH_NS::FVector2 mainButtonSize = { SR_MAX(context.fieldTitleWidth, 0), context.fieldHeight };
 
             SR_UTILS_NS::StringAtom displayName = context.GetPropertyDisplayName();
-            auto&& stackSize = SR_GRAPH_GUI_NS::Immediate::BeginForceEnabled();
-            if (SR_GRAPH_GUI_NS::Immediate::Button(displayName.c_str(), mainButtonSize)) {
+            auto&& stackSize = SR_IMMEDIATE_GUI_NS::BeginForceEnabled();
+            if (SR_IMMEDIATE_GUI_NS::Button(displayName.c_str(), mainButtonSize)) {
                 m_isOpened = !m_isOpened;
             }
             DrawTitleContextMenu(context, feedback);
-            SR_GRAPH_GUI_NS::Immediate::EndForceEnabled(stackSize);
+            SR_IMMEDIATE_GUI_NS::EndForceEnabled(stackSize);
         }
 
         SR_UTILS_NS::Reflection::Value* pValue = value.Cast<SR_UTILS_NS::Reflection::Value>();
@@ -114,21 +114,21 @@ namespace SR_CORE_GUI_NS {
             elementContext.openedByDefault = true;
 
             if (elementContext.pValue->IsValid()) {
-                SR_GRAPH_GUI_NS::Immediate::BeginGroup();
-                SR_GRAPH_GUI_NS::Immediate::PushID("ValueDrawer");
+                SR_IMMEDIATE_GUI_NS::BeginGroup();
+                SR_IMMEDIATE_GUI_NS::PushID("ValueDrawer");
                 PropertyDrawerFeedback elementFeedback = m_drawer->Draw(elementContext);
-                SR_GRAPH_GUI_NS::Immediate::PopID();
-                SR_GRAPH_GUI_NS::Immediate::EndGroup();
+                SR_IMMEDIATE_GUI_NS::PopID();
+                SR_IMMEDIATE_GUI_NS::EndGroup();
                 if (elementFeedback.isChanged) {
                     feedback.isChanged = true;
                 }
             }
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+        SR_IMMEDIATE_GUI_NS::PopStyleVar();
 
-        SR_GRAPH_GUI_NS::Immediate::PopID();
-        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
 
         const bool needForceSet = context.pValue && feedback.isChanged && value.GetTypeInfo().category != SR_UTILS_NS::Reflection::ReflectedCategoryType::Value;
         if (needForceSet) {
@@ -198,13 +198,13 @@ namespace SR_CORE_GUI_NS {
             SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth + context.fieldTitleWidth);
 
             bool& comboTypeOpened = m_comboTypeOpenedStack.at(index - 1);
-            if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("Type##Combo", pPrevValue, SR_GRAPH_GUI_NS::Immediate::ComboFlags::NoArrowButton)) {
+            if (SR_IMMEDIATE_GUI_NS::BeginCombo("Type##Combo", pPrevValue, SR_IMMEDIATE_GUI_NS::ComboFlags::NoArrowButton)) {
                 if (!comboTypeOpened) {
-                    SR_GRAPH_GUI_NS::Immediate::SetKeyboardFocusHere();
+                    SR_IMMEDIATE_GUI_NS::SetKeyboardFocusHere();
                     comboTypeOpened = true;
                 }
 
-                if (SR_GRAPH_GUI_NS::Immediate::InputText("##Search", &m_searchBuffer)) {
+                if (SR_IMMEDIATE_GUI_NS::InputText("##Search", &m_searchBuffer)) {
                     SR_NOOP;
                 }
 
@@ -214,17 +214,17 @@ namespace SR_CORE_GUI_NS {
                     }
 
                     bool isSelected = (selectedIndex == i);
-                    if (SR_GRAPH_GUI_NS::Immediate::Selectable(typeNames[i].data(), isSelected)) {
+                    if (SR_IMMEDIATE_GUI_NS::Selectable(typeNames[i].data(), isSelected)) {
                         selectedIndex = i;
                         m_searchBuffer = typeNames[i];
-                        SR_GRAPH_GUI_NS::Immediate::CloseCurrentPopup();
+                        SR_IMMEDIATE_GUI_NS::CloseCurrentPopup();
                     }
 
                     if (isSelected) {
-                        SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
+                        SR_IMMEDIATE_GUI_NS::SetItemDefaultFocus();
                     }
                 }
-                SR_GRAPH_GUI_NS::Immediate::EndCombo();
+                SR_IMMEDIATE_GUI_NS::EndCombo();
             }
             else {
                 comboTypeOpened = false;
@@ -261,13 +261,13 @@ namespace SR_CORE_GUI_NS {
             SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth + context.fieldTitleWidth);
 
             bool& comboSizeOpened = m_comboSizeOpenedStack.at(index - 1);
-            if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("Size##SizeCombo", pPrevValue, SR_GRAPH_GUI_NS::Immediate::ComboFlags::NoArrowButton)) {
+            if (SR_IMMEDIATE_GUI_NS::BeginCombo("Size##SizeCombo", pPrevValue, SR_IMMEDIATE_GUI_NS::ComboFlags::NoArrowButton)) {
                 if (!comboSizeOpened) {
-                    SR_GRAPH_GUI_NS::Immediate::SetKeyboardFocusHere();
+                    SR_IMMEDIATE_GUI_NS::SetKeyboardFocusHere();
                     comboSizeOpened = true;
                 }
 
-                if (SR_GRAPH_GUI_NS::Immediate::InputText("##SizeSearch", &m_searchBuffer)) {
+                if (SR_IMMEDIATE_GUI_NS::InputText("##SizeSearch", &m_searchBuffer)) {
                     SR_NOOP;
                 }
 
@@ -277,17 +277,17 @@ namespace SR_CORE_GUI_NS {
                     }
 
                     bool isSelected = (selectedIndex == i);
-                    if (SR_GRAPH_GUI_NS::Immediate::Selectable(detailedSizesStr[i].c_str(), isSelected)) {
+                    if (SR_IMMEDIATE_GUI_NS::Selectable(detailedSizesStr[i].c_str(), isSelected)) {
                         selectedIndex = i;
                         m_searchBuffer = detailedSizesStr[i];
-                        SR_GRAPH_GUI_NS::Immediate::CloseCurrentPopup();
+                        SR_IMMEDIATE_GUI_NS::CloseCurrentPopup();
                     }
 
                     if (isSelected) {
-                        SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
+                        SR_IMMEDIATE_GUI_NS::SetItemDefaultFocus();
                     }
                 }
-                SR_GRAPH_GUI_NS::Immediate::EndCombo();
+                SR_IMMEDIATE_GUI_NS::EndCombo();
             }
             else {
                 comboSizeOpened = false;

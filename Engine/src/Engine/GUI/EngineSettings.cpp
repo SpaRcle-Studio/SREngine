@@ -31,25 +31,25 @@ namespace SR_CORE_GUI_NS {
     void EngineSettings::Draw() {
         SR_TRACY_ZONE;
 
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::FrameRounding, 0.0f);
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::FrameRounding, 0.0f);
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
         DrawMultiSampling();
-        SR_GRAPH_GUI_NS::Immediate::Separator();
+        SR_IMMEDIATE_GUI_NS::Separator();
         DrawVSync();
-        SR_GRAPH_GUI_NS::Immediate::Separator();
+        SR_IMMEDIATE_GUI_NS::Separator();
         DrawEditorSettings();
-        SR_GRAPH_GUI_NS::Immediate::Separator();
+        SR_IMMEDIATE_GUI_NS::Separator();
         DrawGraphicsSettings();
 
-        if (SR_GRAPH_GUI_NS::Immediate::GetScrollMaxY() > 0) {
-            m_scrollBarWidth = SR_GRAPH_GUI_NS::Immediate::GetScrollbarSize();
+        if (SR_IMMEDIATE_GUI_NS::GetScrollMaxY() > 0) {
+            m_scrollBarWidth = SR_IMMEDIATE_GUI_NS::GetScrollbarSize();
         }
         else {
             m_scrollBarWidth = 0;
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PopStyleVar(2);
+        SR_IMMEDIATE_GUI_NS::PopStyleVar(2);
     }
 
     void EngineSettings::DrawMultiSampling() {
@@ -82,13 +82,13 @@ namespace SR_CORE_GUI_NS {
         auto&& pPipeline = pContext->GetPipeline();
         int32_t currentItem = SR_SAMPLE_COUNT_KEY_LIST.at(pPipeline->GetSamplesCount());
 
-        if (SR_GRAPH_GUI_NS::Immediate::Combo("Multi-sampling", &currentItem, SR_SAMPLE_COUNT_NAME_LIST)) {
+        if (SR_IMMEDIATE_GUI_NS::Combo("Multi-sampling", &currentItem, SR_SAMPLE_COUNT_NAME_LIST)) {
             pPipeline->SetSampleCount(SR_SAMPLE_COUNT_VALUE_LIST.at(currentItem));
             SR_UTILS_NS::StoreUtils::User::SetInt("MultiSampling", SR_SAMPLE_COUNT_VALUE_LIST.at(currentItem));
         }
 
         bool optimizedRenderUpdate = pContext->IsOptimizedRenderUpdateEnabled();
-        if (SR_GRAPH_GUI_NS::Immediate::Checkbox("Optimized render update", &optimizedRenderUpdate)) {
+        if (SR_IMMEDIATE_GUI_NS::Checkbox("Optimized render update", &optimizedRenderUpdate)) {
             pContext->SetOptimizedRenderUpdateEnabled(optimizedRenderUpdate);
         }
     }
@@ -101,33 +101,33 @@ namespace SR_CORE_GUI_NS {
         }
 
         bool vsync = pPipeline->IsVSyncEnabled();
-        if (SR_GRAPH_GUI_NS::Immediate::Checkbox("VSync", &vsync)) {
+        if (SR_IMMEDIATE_GUI_NS::Checkbox("VSync", &vsync)) {
             pPipeline->SetVSyncEnabled(vsync);
             SR_UTILS_NS::StoreUtils::User::SetBool("VSync", vsync);
         }
 
         if (vsync) {
-            SR_GRAPH_GUI_NS::Immediate::Text("Recommended set up: 1-2 swapchain images, for less latency.");
+            SR_IMMEDIATE_GUI_NS::Text("Recommended set up: 1-2 swapchain images, for less latency.");
         }
 
         static const SR_UTILS_NS::StringAtom swapchainImagesKey = "SwapchainImages";
         const auto suggestedSwapchainImages = pPipeline->GetSwapchainImagesCount();
         int32_t swapchainImages = SR_UTILS_NS::StoreUtils::User::GetInt(swapchainImagesKey, suggestedSwapchainImages);
 
-        if (SR_GRAPH_GUI_NS::Immediate::InputInt("Swapchain images", &swapchainImages, 1, 1, SR_GRAPH_GUI_NS::Immediate::InputTextFlags::EnterReturnsTrue)) {
+        if (SR_IMMEDIATE_GUI_NS::InputInt("Swapchain images", &swapchainImages, 1, 1, SR_IMMEDIATE_GUI_NS::InputTextFlags::EnterReturnsTrue)) {
             swapchainImages = SR_CLAMP(swapchainImages, 1, 16);
             SR_UTILS_NS::StoreUtils::User::SetInt(swapchainImagesKey, swapchainImages);
         }
 
         if (swapchainImages != suggestedSwapchainImages) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Yellow(), "Requires restart!");
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor::Yellow(), "Requires restart!");
         }
     }
 
     void EngineSettings::DrawGraphicsSettings() {
         SR_TRACY_ZONE;
 
-        SR_GRAPH_GUI_NS::Immediate::PushID("GraphicsSettings");
+        SR_IMMEDIATE_GUI_NS::PushID("GraphicsSettings");
 
         if (!m_graphicsSettingsDrawer) {
             m_graphicsSettingsDrawer = new ObjectPropertyDrawer();
@@ -136,10 +136,10 @@ namespace SR_CORE_GUI_NS {
         m_cachedGraphicsSettings = GetContext()->GetActiveGraphicsSettings();
         auto&& value = SR_UTILS_NS::Reflection::Value::CreateRef(m_cachedGraphicsSettings);
 
-        const float_t lineHeight = SR_GRAPH_GUI_NS::Immediate::GetFontSize() + SR_GRAPH_GUI_NS::Immediate::GetFramePadding().y * 2.0f;
-        float_t windowWidth = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x - m_scrollBarWidth;
+        const float_t lineHeight = SR_IMMEDIATE_GUI_NS::GetFontSize() + SR_IMMEDIATE_GUI_NS::GetFramePadding().y * 2.0f;
+        float_t windowWidth = SR_IMMEDIATE_GUI_NS::GetWindowSize().x - m_scrollBarWidth;
 
-        if (SR_GRAPH_GUI_NS::Immediate::Button("Save", { windowWidth * 0.2f, lineHeight })) {
+        if (SR_IMMEDIATE_GUI_NS::Button("Save", { windowWidth * 0.2f, lineHeight })) {
             SR_UTILS_NS::SRASerializer serializer;
             m_cachedGraphicsSettings.Save(serializer);
             auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(SR_GRAPH_NS::ActiveGraphicsSettings::SETTINGS_PATH);
@@ -148,15 +148,15 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-        SR_GRAPH_GUI_NS::Immediate::SameLine();
+        SR_IMMEDIATE_GUI_NS::SameLine();
 
-        SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
-        SR_GRAPH_GUI_NS::Immediate::Button("Graphics settings", { windowWidth * 0.6f, lineHeight });
-        SR_GRAPH_GUI_NS::Immediate::EndDisabled();
+        SR_IMMEDIATE_GUI_NS::BeginDisabled();
+        SR_IMMEDIATE_GUI_NS::Button("Graphics settings", { windowWidth * 0.6f, lineHeight });
+        SR_IMMEDIATE_GUI_NS::EndDisabled();
 
-        SR_GRAPH_GUI_NS::Immediate::SameLine();
+        SR_IMMEDIATE_GUI_NS::SameLine();
 
-        if (SR_GRAPH_GUI_NS::Immediate::Button("Reset", { windowWidth * 0.2f, lineHeight })) {
+        if (SR_IMMEDIATE_GUI_NS::Button("Reset", { windowWidth * 0.2f, lineHeight })) {
             GetContext()->ReloadGraphicsSettings();
         }
 
@@ -175,7 +175,7 @@ namespace SR_CORE_GUI_NS {
             GetContext()->SetGraphicsSettings(m_cachedGraphicsSettings);
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
     }
 
     void EngineSettings::DrawEditorSettings() {
@@ -191,23 +191,23 @@ namespace SR_CORE_GUI_NS {
         bool showHiddenEntities = SR_UTILS_NS::StoreUtils::User::GetBool(showHiddenEntitiesKey, false);
         bool editorDebugMode = SR_UTILS_NS::StoreUtils::User::GetBool(editorDebugModeKey, false);
 
-        if (SR_GRAPH_GUI_NS::Immediate::InputFloat("Font size", &fontSize, 1.0f, 1.0f, "%.1f", SR_GRAPH_GUI_NS::Immediate::InputTextFlags::EnterReturnsTrue)) {
+        if (SR_IMMEDIATE_GUI_NS::InputFloat("Font size", &fontSize, 1.0f, 1.0f, "%.1f", SR_IMMEDIATE_GUI_NS::InputTextFlags::EnterReturnsTrue)) {
             SR_UTILS_NS::StoreUtils::User::SetFloat(fontSizeKey, fontSize);
         }
 
-        if (SR_GRAPH_GUI_NS::Immediate::Checkbox("Show entity id", &showEntityId)) {
+        if (SR_IMMEDIATE_GUI_NS::Checkbox("Show entity id", &showEntityId)) {
             SR_UTILS_NS::StoreUtils::User::SetBool(showEntityIdKey, showEntityId);
         }
 
-        if (SR_GRAPH_GUI_NS::Immediate::Checkbox("Editor debug mode", &editorDebugMode)) {
+        if (SR_IMMEDIATE_GUI_NS::Checkbox("Editor debug mode", &editorDebugMode)) {
             SR_UTILS_NS::StoreUtils::User::SetBool(editorDebugModeKey, editorDebugMode);
         }
 
-        if (SR_GRAPH_GUI_NS::Immediate::Checkbox("Show hidden entities", &showHiddenEntities)) {
+        if (SR_IMMEDIATE_GUI_NS::Checkbox("Show hidden entities", &showHiddenEntities)) {
             SR_UTILS_NS::StoreUtils::User::SetBool(showHiddenEntitiesKey, showHiddenEntities);
         }
 
-        if (SR_GRAPH_GUI_NS::Immediate::Combo("Render preset", &m_activeRenderPreset, m_renderPresetsMemory.c_str())) {
+        if (SR_IMMEDIATE_GUI_NS::Combo("Render preset", &m_activeRenderPreset, m_renderPresetsMemory.c_str())) {
             uint32_t index = 0;
             for (auto&& preset : m_renderPresets) {
                 if (index == m_activeRenderPreset) {
@@ -218,13 +218,13 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-        if (SR_GRAPH_GUI_NS::Immediate::Button("Save")) {
+        if (SR_IMMEDIATE_GUI_NS::Button("Save")) {
             SR_UTILS_NS::StoreUtils::Storage::Instance().Save();
         }
 
-        SR_GRAPH_GUI_NS::Immediate::SameLine();
+        SR_IMMEDIATE_GUI_NS::SameLine();
 
-        if (SR_GRAPH_GUI_NS::Immediate::Button("Load")) {
+        if (SR_IMMEDIATE_GUI_NS::Button("Load")) {
             SR_UTILS_NS::StoreUtils::Storage::Instance().Load();
         }
     }

@@ -18,42 +18,42 @@ namespace SR_CORE_GUI_NS {
             return feedback;
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
+        SR_IMMEDIATE_GUI_NS::PushID(context.pUID);
+        SR_IMMEDIATE_GUI_NS::PushID(context.GetPropertyName().ToCStr());
 
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
         SR_UTILS_NS::StringAtom displayName = context.GetPropertyDisplayName();
 
         const SR_MATH_NS::FVector2 counterButtonWidth = { 40, context.fieldHeight };
         SR_MATH_NS::FVector2 buttonSize;
 
-        auto&& pWindow = SR_GRAPH_GUI_NS::Immediate::GetCurrentWindow();
-        auto&& pDrawList = SR_GRAPH_GUI_NS::Immediate::GetWindowDrawList(pWindow);
-        const auto cursorPos = SR_GRAPH_GUI_NS::Immediate::GetWindowCursorPos(pWindow);
+        auto&& pWindow = SR_IMMEDIATE_GUI_NS::GetCurrentWindow();
+        auto&& pDrawList = SR_IMMEDIATE_GUI_NS::GetWindowDrawList(pWindow);
+        const auto cursorPos = SR_IMMEDIATE_GUI_NS::GetWindowCursorPos(pWindow);
 
-        const auto dir = m_isOpened ? SR_GRAPH_GUI_NS::Immediate::Direction::Down : SR_GRAPH_GUI_NS::Immediate::Direction::Right;
+        const auto dir = m_isOpened ? SR_IMMEDIATE_GUI_NS::Direction::Down : SR_IMMEDIATE_GUI_NS::Direction::Right;
 
         if (context.pValue) {
             const SR_MATH_NS::FVector2 arrowPos = cursorPos + SR_MATH_NS::FVector2(5, 5);
-            SR_GRAPH_GUI_NS::Immediate::RenderArrow(pDrawList, arrowPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f);
+            SR_IMMEDIATE_GUI_NS::RenderArrow(pDrawList, arrowPos, SR_IMMEDIATE_GUI_NS::GetColorU32(SR_IMMEDIATE_GUI_NS::StyleColor::Text), dir, 1.f);
 
             const SR_MATH_NS::FVector2 mainButtonSize = { 30, context.fieldHeight };
             buttonSize = { (context.fieldWidth - (counterButtonWidth.x + mainButtonSize.x)) / 3, context.fieldHeight };
 
-            auto&& stackSize = SR_GRAPH_GUI_NS::Immediate::BeginForceEnabled();
-            if (SR_GRAPH_GUI_NS::Immediate::Button("", mainButtonSize)) {
+            auto&& stackSize = SR_IMMEDIATE_GUI_NS::BeginForceEnabled();
+            if (SR_IMMEDIATE_GUI_NS::Button("", mainButtonSize)) {
                 m_isOpened = !m_isOpened;
             }
-            SR_GRAPH_GUI_NS::Immediate::EndForceEnabled(stackSize);
+            SR_IMMEDIATE_GUI_NS::EndForceEnabled(stackSize);
         }
         else {
             const SR_MATH_NS::FVector2 arrowPos = cursorPos + SR_MATH_NS::FVector2(1, 5);
-            SR_GRAPH_GUI_NS::Immediate::RenderArrow(pDrawList, arrowPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f);
+            SR_IMMEDIATE_GUI_NS::RenderArrow(pDrawList, arrowPos, SR_IMMEDIATE_GUI_NS::GetColorU32(SR_IMMEDIATE_GUI_NS::StyleColor::Text), dir, 1.f);
 
             //const float_t arrowWidth = context.lineHeight * 0.75f;
-            //SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(arrowWidth, 0));
-            //SR_GRAPH_GUI_NS::Immediate::SameLine();
+            //SR_IMMEDIATE_GUI_NS::Dummy(SR_MATH_NS::FVector2(arrowWidth, 0));
+            //SR_IMMEDIATE_GUI_NS::SameLine();
 
             //const SR_MATH_NS::FVector2 mainButtonSize = { SR_MAX(context.fieldTitleWidth - arrowWidth, 0), context.fieldHeight };
             const SR_MATH_NS::FVector2 mainButtonSize = { SR_MAX(context.fieldTitleWidth, 0), context.fieldHeight };
@@ -61,25 +61,25 @@ namespace SR_CORE_GUI_NS {
             const float_t partItemWidth = ((context.fieldWidth + context.fieldTitleWidth) - titleTotalWidth) / 3;
             buttonSize = { partItemWidth, context.fieldHeight };
 
-            auto&& stackSize = SR_GRAPH_GUI_NS::Immediate::BeginForceEnabled();
-            if (SR_GRAPH_GUI_NS::Immediate::Button(displayName.c_str(), mainButtonSize)) {
+            auto&& stackSize = SR_IMMEDIATE_GUI_NS::BeginForceEnabled();
+            if (SR_IMMEDIATE_GUI_NS::Button(displayName.c_str(), mainButtonSize)) {
                 m_isOpened = !m_isOpened;
             }
             DrawTitleContextMenu(context, feedback);
-            SR_GRAPH_GUI_NS::Immediate::EndForceEnabled(stackSize);
+            SR_IMMEDIATE_GUI_NS::EndForceEnabled(stackSize);
         }
 
-        SR_GRAPH_GUI_NS::Immediate::SameLine();
+        SR_IMMEDIATE_GUI_NS::SameLine();
 
-        SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
+        SR_IMMEDIATE_GUI_NS::BeginDisabled();
         m_tmpBuffer.clear();
         SR_UTILS_NS::FormatTo(m_tmpBuffer, "{}", container.Size());
-        SR_GRAPH_GUI_NS::Immediate::Button(m_tmpBuffer.c_str(), counterButtonWidth);
-        SR_GRAPH_GUI_NS::Immediate::EndDisabled();
+        SR_IMMEDIATE_GUI_NS::Button(m_tmpBuffer.c_str(), counterButtonWidth);
+        SR_IMMEDIATE_GUI_NS::EndDisabled();
 
-        SR_GRAPH_GUI_NS::Immediate::SameLine();
+        SR_IMMEDIATE_GUI_NS::SameLine();
 
-        if (SR_GRAPH_GUI_NS::Immediate::Button("Add", buttonSize)) {
+        if (SR_IMMEDIATE_GUI_NS::Button("Add", buttonSize)) {
             if (context.onBeforeChangeCallback) {
                 context.onBeforeChangeCallback(false);
             }
@@ -118,9 +118,9 @@ namespace SR_CORE_GUI_NS {
             feedback.isChanged = true;
         }
 
-        SR_GRAPH_GUI_NS::Immediate::SameLine();
+        SR_IMMEDIATE_GUI_NS::SameLine();
 
-        if (SR_GRAPH_GUI_NS::Immediate::Button("Remove", buttonSize)) {
+        if (SR_IMMEDIATE_GUI_NS::Button("Remove", buttonSize)) {
             if (!container.Empty()) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(false);
@@ -130,9 +130,9 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-        SR_GRAPH_GUI_NS::Immediate::SameLine();
+        SR_IMMEDIATE_GUI_NS::SameLine();
 
-        if (SR_GRAPH_GUI_NS::Immediate::Button("Clear", buttonSize)) {
+        if (SR_IMMEDIATE_GUI_NS::Button("Clear", buttonSize)) {
             if (context.onBeforeChangeCallback) {
                 context.onBeforeChangeCallback(false);
             }
@@ -147,17 +147,17 @@ namespace SR_CORE_GUI_NS {
         if (m_isOpened) {
             for (auto pIt = container.Begin(); pIt != container.End();) {
                 uint64_t index = SR_UTILS_NS::Distance(container.Begin(), pIt);
-                SR_GRAPH_GUI_NS::Immediate::PushID(static_cast<int32_t>(index));
+                SR_IMMEDIATE_GUI_NS::PushID(static_cast<int32_t>(index));
                 SR_UTILS_NS::Reflection::Value element = *pIt;
 
                 SR_MATH_NS::FVector2 itemButtonSize = { 40, context.fieldHeight };
 
-                SR_GRAPH_GUI_NS::Immediate::Button("{}"_format(index).c_str(), itemButtonSize);
+                SR_IMMEDIATE_GUI_NS::Button("{}"_format(index).c_str(), itemButtonSize);
 
-                if (SR_GRAPH_GUI_NS::Immediate::BeginPopupContextItem("ElementContextMenu")) {
-                    bool copy = false; //SR_GRAPH_GUI_NS::Immediate::MenuItem("Copy");
-                    bool removed = SR_GRAPH_GUI_NS::Immediate::MenuItem("Remove");
-                    bool cut = false; //SR_GRAPH_GUI_NS::Immediate::MenuItem("Cut");
+                if (SR_IMMEDIATE_GUI_NS::BeginPopupContextItem("ElementContextMenu")) {
+                    bool copy = false; //SR_IMMEDIATE_GUI_NS::MenuItem("Copy");
+                    bool removed = SR_IMMEDIATE_GUI_NS::MenuItem("Remove");
+                    bool cut = false; //SR_IMMEDIATE_GUI_NS::MenuItem("Cut");
 
                     if (copy || cut) {
                         //SR_UTILS_NS::SRASerializer serializer;
@@ -175,7 +175,7 @@ namespace SR_CORE_GUI_NS {
                         removed = true;
                     }
 
-                    if (index > 0 && SR_GRAPH_GUI_NS::Immediate::MenuItem("Move up")) {
+                    if (index > 0 && SR_IMMEDIATE_GUI_NS::MenuItem("Move up")) {
                         if (context.onBeforeChangeCallback) {
                             context.onBeforeChangeCallback(false);
                         }
@@ -185,12 +185,12 @@ namespace SR_CORE_GUI_NS {
                         container.Insert(--pIt, temp);
 
                         feedback.isChanged = true;
-                        SR_GRAPH_GUI_NS::Immediate::EndPopup();
-                        SR_GRAPH_GUI_NS::Immediate::PopID();
+                        SR_IMMEDIATE_GUI_NS::EndPopup();
+                        SR_IMMEDIATE_GUI_NS::PopID();
                         break;
                     }
 
-                    if (index + 1 < container.Size() && SR_GRAPH_GUI_NS::Immediate::MenuItem("Move down")) {
+                    if (index + 1 < container.Size() && SR_IMMEDIATE_GUI_NS::MenuItem("Move down")) {
                         if (context.onBeforeChangeCallback) {
                             context.onBeforeChangeCallback(false);
                         }
@@ -200,12 +200,12 @@ namespace SR_CORE_GUI_NS {
                         container.Insert(++pIt, temp);
 
                         feedback.isChanged = true;
-                        SR_GRAPH_GUI_NS::Immediate::EndPopup();
-                        SR_GRAPH_GUI_NS::Immediate::PopID();
+                        SR_IMMEDIATE_GUI_NS::EndPopup();
+                        SR_IMMEDIATE_GUI_NS::PopID();
                         break;
                     }
 
-                    if (index > 0 && SR_GRAPH_GUI_NS::Immediate::MenuItem("Move to start")) {
+                    if (index > 0 && SR_IMMEDIATE_GUI_NS::MenuItem("Move to start")) {
                         if (context.onBeforeChangeCallback) {
                             context.onBeforeChangeCallback(false);
                         }
@@ -218,7 +218,7 @@ namespace SR_CORE_GUI_NS {
                         feedback.isChanged = true;
                     }
 
-                    if (index + 1 < container.Size() && SR_GRAPH_GUI_NS::Immediate::MenuItem("Move to end")) {
+                    if (index + 1 < container.Size() && SR_IMMEDIATE_GUI_NS::MenuItem("Move to end")) {
                         if (context.onBeforeChangeCallback) {
                             context.onBeforeChangeCallback(false);
                         }
@@ -232,14 +232,14 @@ namespace SR_CORE_GUI_NS {
                     }
 
 
-                    SR_GRAPH_GUI_NS::Immediate::EndPopup();
+                    SR_IMMEDIATE_GUI_NS::EndPopup();
                     if (removed) {
-                        SR_GRAPH_GUI_NS::Immediate::PopID();
+                        SR_IMMEDIATE_GUI_NS::PopID();
                         continue;
                     }
                 }
 
-                SR_GRAPH_GUI_NS::Immediate::SameLine();
+                SR_IMMEDIATE_GUI_NS::SameLine();
 
                 if (index >= m_drawers.size()) {
                     m_drawers.emplace_back();
@@ -252,8 +252,8 @@ namespace SR_CORE_GUI_NS {
                 }
 
                 if (!m_drawers[index]) {
-                    SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Missing inspector for element!");
-                    SR_GRAPH_GUI_NS::Immediate::PopID();
+                    SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Missing inspector for element!");
+                    SR_IMMEDIATE_GUI_NS::PopID();
                     ++pIt;
                     continue;
                 }
@@ -266,24 +266,24 @@ namespace SR_CORE_GUI_NS {
                 elementContext.noHeader = false;
                 elementContext.openedByDefault = false;
 
-                SR_GRAPH_GUI_NS::Immediate::BeginGroup();
+                SR_IMMEDIATE_GUI_NS::BeginGroup();
                 PropertyDrawerFeedback elementFeedback = m_drawers[index]->Draw(elementContext);
-                SR_GRAPH_GUI_NS::Immediate::EndGroup();
+                SR_IMMEDIATE_GUI_NS::EndGroup();
 
                 if (elementFeedback.isChanged) {
                     feedback.isChanged = true;
                 }
 
-                SR_GRAPH_GUI_NS::Immediate::PopID();
+                SR_IMMEDIATE_GUI_NS::PopID();
 
                 ++pIt;
             }
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+        SR_IMMEDIATE_GUI_NS::PopStyleVar();
 
-        SR_GRAPH_GUI_NS::Immediate::PopID();
-        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
 
         SetValue(context, feedback, value);
 

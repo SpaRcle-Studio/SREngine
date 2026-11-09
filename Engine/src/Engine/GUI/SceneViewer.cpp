@@ -120,25 +120,25 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        SR_GRAPH_GUI_NS::Immediate::BeginGroup();
+        SR_IMMEDIATE_GUI_NS::BeginGroup();
 
         for (auto&& pSubWidget : m_subWidgets) {
             pSubWidget->DrawAsSubWindow();
         }
 
-        SR_GRAPH_GUI_NS::Immediate::Separator();
+        SR_IMMEDIATE_GUI_NS::Separator();
 
         if (auto&& pFrameBuffer = GetContext()->FindFramebuffer("SceneView"_atom, pCamera.Get())) {
             m_id = pFrameBuffer->GetColorTexture(0, pFrameBuffer->GetPipeline()->GetCurrentImageIndex());
         }
         else {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Framebuffer not found!");
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Framebuffer not found!");
             m_id = SR_ID_INVALID;
         }
 
-        if (SR_GRAPH_GUI_NS::Immediate::BeginChild("ViewerTexture"))
+        if (SR_IMMEDIATE_GUI_NS::BeginChild("ViewerTexture"))
         {
-            m_windowSize = SR_MATH_NS::Vector2(static_cast<int32_t>(SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x), static_cast<int32_t>(SR_GRAPH_GUI_NS::Immediate::GetWindowSize().y));
+            m_windowSize = SR_MATH_NS::Vector2(static_cast<int32_t>(SR_IMMEDIATE_GUI_NS::GetWindowSize().x), static_cast<int32_t>(SR_IMMEDIATE_GUI_NS::GetWindowSize().y));
 
             if (!UpdateViewSize() && pCamera && m_id != SR_ID_INVALID && pCamera->IsActive())
             {
@@ -153,12 +153,12 @@ namespace SR_CORE_GUI_NS {
                 CheckHovered();
             }
             else {
-                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Invalid framebuffer or camera is not active!");
+                SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Invalid framebuffer or camera is not active!");
             }
         }
-        SR_GRAPH_GUI_NS::Immediate::EndChild();
+        SR_IMMEDIATE_GUI_NS::EndChild();
 
-        SR_GRAPH_GUI_NS::Immediate::EndGroup();
+        SR_IMMEDIATE_GUI_NS::EndGroup();
     }
 
     void SceneViewer::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {
@@ -273,16 +273,16 @@ namespace SR_CORE_GUI_NS {
         m_textureSize = texSize.Cast<float_t>();
 
         if (centralize) {
-            auto windowPosition = SR_GRAPH_GUI_NS::Immediate::GetCursorPos();
+            auto windowPosition = SR_IMMEDIATE_GUI_NS::GetCursorPos();
             auto res = (winSize - m_textureSize) * 0.5f;
             SR_MATH_NS::FVector2 centralizedCursorPos = { (float)res.x, (float)res.y };
             centralizedCursorPos = centralizedCursorPos.Clamp(windowPosition, centralizedCursorPos);
-            SR_GRAPH_GUI_NS::Immediate::SetCursorPos(centralizedCursorPos);
+            SR_IMMEDIATE_GUI_NS::SetCursorPos(centralizedCursorPos);
         }
 
         auto&& pPipeline = GetContext()->GetPipeline();
         auto&& pDescriptor = pPipeline->GetOverlay(SR_GRAPH_NS::OverlayType::ImGui)->GetTextureDescriptorSet(id);
-        m_imagePosition = SR_GRAPH_GUI_NS::Immediate::DrawTexture(pDescriptor, m_textureSize, false);
+        m_imagePosition = SR_IMMEDIATE_GUI_NS::DrawTexture(pDescriptor, m_textureSize, false);
     }
 
     void SceneViewer::SetCameraEnabled(bool enabled) {

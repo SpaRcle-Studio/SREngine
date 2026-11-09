@@ -57,7 +57,7 @@ int SREngineEntryPoint(int argc, char** argv) {
         }
     }
 
-    const int code = LauncherEntryPoint();
+    const int32_t code = LauncherEntryPoint();
 
     ShutdownApplication();
 

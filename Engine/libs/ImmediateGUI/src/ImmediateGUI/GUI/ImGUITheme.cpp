@@ -9,7 +9,7 @@
 
 #include <Codegen/ImGUITheme.generated.hpp>
 
-namespace SR_GRAPH_GUI_NS::Immediate {
+namespace SR_IMMEDIATE_GUI_NS {
     SR_MATH_NS::FColor ImVec4ToColor(ImVec4 imVec4) { return SR_MATH_NS::FColor(imVec4.x, imVec4.y, imVec4.z, imVec4.w); }
     SR_MATH_NS::FVector2 ImVec2ToFVector2(ImVec2 imVec2) { return SR_MATH_NS::FVector2(imVec2.x, imVec2.y); }
     ImVec2 FVector2ToImVec2(SR_MATH_NS::FVector2 vec2) { return ImVec2(vec2.x, vec2.y); }

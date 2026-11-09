@@ -23,10 +23,10 @@ namespace SR_CORE_GUI_NS {
         /// так что копия Path создаётся только на кадре с реальным изменением.
         std::optional<SR_UTILS_NS::Path> newPath;
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().c_str());
+        SR_IMMEDIATE_GUI_NS::PushID(context.pUID);
+        SR_IMMEDIATE_GUI_NS::PushID(context.GetPropertyName().c_str());
 
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
         SR_MATH_NS::FVector2 buttonSize;
 
@@ -38,7 +38,7 @@ namespace SR_CORE_GUI_NS {
                              SR_MATH_NS::FVector2(context.fieldTitleWidth * 0.75f, context.fieldHeight) :
                              SR_MATH_NS::FVector2(context.fieldTitleWidth, context.fieldHeight);
 
-                if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetPropertyDisplayName().c_str(), buttonSize)) {
+                if (SR_IMMEDIATE_GUI_NS::Button(context.GetPropertyDisplayName().c_str(), buttonSize)) {
                     if (context.pProperty) {
                         if (context.onBeforeChangeCallback) {
                             context.onBeforeChangeCallback(false);
@@ -53,9 +53,9 @@ namespace SR_CORE_GUI_NS {
             }
 
             if (isPickingEnabled) {
-                SR_GRAPH_GUI_NS::Immediate::SameLine();
+                SR_IMMEDIATE_GUI_NS::SameLine();
 
-                if (SR_GRAPH_GUI_NS::Immediate::Button("...", SR_MATH_NS::FVector2(context.fieldTitleWidth * 0.25f, context.fieldHeight))) {
+                if (SR_IMMEDIATE_GUI_NS::Button("...", SR_MATH_NS::FVector2(context.fieldTitleWidth * 0.25f, context.fieldHeight))) {
                     auto&& filterName = context.GetEditorParams().GetCustomArg("filter name");
                     auto&& filterValue = context.GetEditorParams().GetCustomArg("filter value");
 
@@ -81,15 +81,15 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::SameLine();
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth);
+        SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth);
 
         if (auto&& pPath = value.Cast<SR_UTILS_NS::Path>()) {
             static std::string gPathTmp;
             gPathTmp = newPath.has_value() ? newPath->ToStringRef() : pPath->ToStringRef();
-            if (SR_GRAPH_GUI_NS::Immediate::InputText("##Input", &gPathTmp, SR_GRAPH_GUI_NS::Immediate::InputTextFlags::EnterReturnsTrue)) {
+            if (SR_IMMEDIATE_GUI_NS::InputText("##Input", &gPathTmp, SR_IMMEDIATE_GUI_NS::InputTextFlags::EnterReturnsTrue)) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(false);
                 }
@@ -100,10 +100,10 @@ namespace SR_CORE_GUI_NS {
             }
         }
         else {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map path value!");
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map path value!");
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+        SR_IMMEDIATE_GUI_NS::PopItemWidth();
 
         if (newPath.has_value()) {
             if (context.pValue) {
@@ -117,10 +117,10 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+        SR_IMMEDIATE_GUI_NS::PopStyleVar();
 
-        SR_GRAPH_GUI_NS::Immediate::PopID();
-        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
 
         return feedback;
     }

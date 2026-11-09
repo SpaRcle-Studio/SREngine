@@ -10,7 +10,7 @@
     extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 #endif
 
-namespace SR_GRAPH_GUI_NS::Immediate {
+namespace SR_IMMEDIATE_GUI_NS {
 #ifdef SR_WIN32
     static LRESULT ImGui_WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
         if (ImGui::GetCurrentContext() == NULL)

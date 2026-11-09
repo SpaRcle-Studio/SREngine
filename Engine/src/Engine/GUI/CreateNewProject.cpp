@@ -60,36 +60,36 @@ namespace SR_CORE_GUI_NS {
     }
 
     void CreateNewProject::Draw() {
-        auto&& size = SR_GRAPH_GUI_NS::Immediate::GetWindowSize();
+        auto&& size = SR_IMMEDIATE_GUI_NS::GetWindowSize();
 
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::FrameRounding, 0.0f);
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::FrameRounding, 0.0f);
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
         {
-            SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
-            SR_GRAPH_GUI_NS::Immediate::Button("Project Name", SR_MATH_NS::FVector2(size.x * 0.3f, 0));
-            SR_GRAPH_GUI_NS::Immediate::EndDisabled();
+            SR_IMMEDIATE_GUI_NS::BeginDisabled();
+            SR_IMMEDIATE_GUI_NS::Button("Project Name", SR_MATH_NS::FVector2(size.x * 0.3f, 0));
+            SR_IMMEDIATE_GUI_NS::EndDisabled();
 
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::SameLine();
 
-            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(size.x * 0.7f);
+            SR_IMMEDIATE_GUI_NS::PushItemWidth(size.x * 0.7f);
             {
-                if (SR_GRAPH_GUI_NS::Immediate::InputText("##name", &m_projectName)) {
+                if (SR_IMMEDIATE_GUI_NS::InputText("##name", &m_projectName)) {
                     m_projectFinalPath = m_projectPath.Concat(m_projectName);
                     m_settingsPath = m_projectFinalPath.Concat(".{}"_format(ProjectSettings::GetMetaStatic()->GetExtension()));
                 }
             }
-            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+            SR_IMMEDIATE_GUI_NS::PopItemWidth();
         }
 
         {
-            SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
-            SR_GRAPH_GUI_NS::Immediate::Button("Location", SR_MATH_NS::FVector2(size.x * 0.2f, 0));
-            SR_GRAPH_GUI_NS::Immediate::EndDisabled();
+            SR_IMMEDIATE_GUI_NS::BeginDisabled();
+            SR_IMMEDIATE_GUI_NS::Button("Location", SR_MATH_NS::FVector2(size.x * 0.2f, 0));
+            SR_IMMEDIATE_GUI_NS::EndDisabled();
 
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::SameLine();
 
-            if (SR_GRAPH_GUI_NS::Immediate::Button("...", SR_MATH_NS::FVector2(size.x * 0.1f, 0))) {
+            if (SR_IMMEDIATE_GUI_NS::Button("...", SR_MATH_NS::FVector2(size.x * 0.1f, 0))) {
                 auto path = SR_UTILS_NS::FileDialog::Instance().PickFolder(SR_UTILS_NS::ResourceManager::Instance().GetResPathRef());
                 if (!path.IsEmpty()) {
                     SetProjectPath(path);
@@ -99,20 +99,20 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::SameLine();
 
-            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(size.x * 0.7f);
-            if (SR_GRAPH_GUI_NS::Immediate::InputText("##path", &m_projectPathInput)) {
+            SR_IMMEDIATE_GUI_NS::PushItemWidth(size.x * 0.7f);
+            if (SR_IMMEDIATE_GUI_NS::InputText("##path", &m_projectPathInput)) {
                 SetProjectPath(m_projectPathInput);
                 m_projectFinalPath = m_projectPath.Concat(m_projectName);
                 m_settingsPath = m_projectFinalPath.Concat(".{}"_format(ProjectSettings::GetMetaStatic()->GetExtension()));
             }
-            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+            SR_IMMEDIATE_GUI_NS::PopItemWidth();
         }
 
         /// bottom panes with create button
         {
-            SR_GRAPH_GUI_NS::Immediate::SetCursorPosY(size.y - 40);
+            SR_IMMEDIATE_GUI_NS::SetCursorPosY(size.y - 40);
 
             const bool isOk = !m_projectFinalPath.IsEmpty() && !m_projectName.empty()
                     && !m_projectFinalPath.IsFile()
@@ -122,62 +122,62 @@ namespace SR_CORE_GUI_NS {
 
             bool canOpen = false;
             if (isOk) {
-                SR_GRAPH_GUI_NS::Immediate::Text("Project will be created at: ");
-                SR_GRAPH_GUI_NS::Immediate::SameLine();
-                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Cyan(), m_projectFinalPath.empty() ?  "!! Invalid path !!" : m_projectFinalPath.c_str());
-                SR_GRAPH_GUI_NS::Immediate::SameLine();
+                SR_IMMEDIATE_GUI_NS::Text("Project will be created at: ");
+                SR_IMMEDIATE_GUI_NS::SameLine();
+                SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor::Cyan(), m_projectFinalPath.empty() ?  "!! Invalid path !!" : m_projectFinalPath.c_str());
+                SR_IMMEDIATE_GUI_NS::SameLine();
             }
             else {
                 if (m_settingsPath.IsFile()) {
                     canOpen = true;
-                    SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Green(), "You can open project at: ");
-                    SR_GRAPH_GUI_NS::Immediate::SameLine();
-                    SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Cyan(), m_projectFinalPath.empty() ?  "!! Invalid path !!" : m_projectFinalPath.c_str());
-                    SR_GRAPH_GUI_NS::Immediate::SameLine();
+                    SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor::Green(), "You can open project at: ");
+                    SR_IMMEDIATE_GUI_NS::SameLine();
+                    SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor::Cyan(), m_projectFinalPath.empty() ?  "!! Invalid path !!" : m_projectFinalPath.c_str());
+                    SR_IMMEDIATE_GUI_NS::SameLine();
                 }
                 else {
-                    SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Red(), "Invalid project name or path, or directory is not empty!");
-                    SR_GRAPH_GUI_NS::Immediate::SameLine();
+                    SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor::Red(), "Invalid project name or path, or directory is not empty!");
+                    SR_IMMEDIATE_GUI_NS::SameLine();
                 }
             }
 
             if (isOk || canOpen) {
-                SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Button, SR_MATH_NS::FColor(0.0f, 0.5f, 0.0f, 1.0f));
-                SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::ButtonHovered, SR_MATH_NS::FColor(0.0f, 0.6f, 0.0f, 1.0f));
-                SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::ButtonActive, SR_MATH_NS::FColor(0.0f, 0.7f, 0.0f, 1.0f));
+                SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::Button, SR_MATH_NS::FColor(0.0f, 0.5f, 0.0f, 1.0f));
+                SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::ButtonHovered, SR_MATH_NS::FColor(0.0f, 0.6f, 0.0f, 1.0f));
+                SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::ButtonActive, SR_MATH_NS::FColor(0.0f, 0.7f, 0.0f, 1.0f));
             }
             else {
-                SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Button, SR_MATH_NS::FColor(0.5f, 0.0f, 0.0f, 1.0f));
-                SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::ButtonHovered, SR_MATH_NS::FColor(0.6f, 0.0f, 0.0f, 1.0f));
-                SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::ButtonActive, SR_MATH_NS::FColor(0.7f, 0.0f, 0.0f, 1.0f));
+                SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::Button, SR_MATH_NS::FColor(0.5f, 0.0f, 0.0f, 1.0f));
+                SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::ButtonHovered, SR_MATH_NS::FColor(0.6f, 0.0f, 0.0f, 1.0f));
+                SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::ButtonActive, SR_MATH_NS::FColor(0.7f, 0.0f, 0.0f, 1.0f));
             }
 
-            SR_GRAPH_GUI_NS::Immediate::SetCursorPosX(size.x - 110);
+            SR_IMMEDIATE_GUI_NS::SetCursorPosX(size.x - 110);
 
             if (!isOk && !canOpen) {
-                SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
+                SR_IMMEDIATE_GUI_NS::BeginDisabled();
             }
 
             if (canOpen) {
-                if (SR_GRAPH_GUI_NS::Immediate::Button("Open", SR_MATH_NS::FVector2(100, 30))) {
+                if (SR_IMMEDIATE_GUI_NS::Button("Open", SR_MATH_NS::FVector2(100, 30))) {
                     SaveLastProjectPath();
                     SR_UTILS_NS::CLIManager::Instance().SetProjectPath(m_projectFinalPath);
                     dynamic_cast<EditorGUI*>(GetManager())->GetEngine()->Reload();
                 }
             }
-            else if (SR_GRAPH_GUI_NS::Immediate::Button("Create", SR_MATH_NS::FVector2(100, 30)) && isOk) {
+            else if (SR_IMMEDIATE_GUI_NS::Button("Create", SR_MATH_NS::FVector2(100, 30)) && isOk) {
                 CreateProject();
                 SaveLastProjectPath();
             }
 
             if (!isOk && !canOpen) {
-                SR_GRAPH_GUI_NS::Immediate::EndDisabled();
+                SR_IMMEDIATE_GUI_NS::EndDisabled();
             }
 
-            SR_GRAPH_GUI_NS::Immediate::PopStyleColor(3);
+            SR_IMMEDIATE_GUI_NS::PopStyleColor(3);
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PopStyleVar(2);
+        SR_IMMEDIATE_GUI_NS::PopStyleVar(2);
     }
 
     void CreateNewProject::OnOpen() {

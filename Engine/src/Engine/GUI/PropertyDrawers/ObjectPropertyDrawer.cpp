@@ -18,13 +18,13 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
+        SR_IMMEDIATE_GUI_NS::PushID(context.pUID);
+        SR_IMMEDIATE_GUI_NS::PushID(context.GetPropertyName().ToCStr());
 
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
-        auto&& pWindow = SR_GRAPH_GUI_NS::Immediate::GetCurrentWindow();
-        auto&& pDrawList = SR_GRAPH_GUI_NS::Immediate::GetWindowDrawList(pWindow);
+        auto&& pWindow = SR_IMMEDIATE_GUI_NS::GetCurrentWindow();
+        auto&& pDrawList = SR_IMMEDIATE_GUI_NS::GetWindowDrawList(pWindow);
 
         if (!m_openedByDefault) {
             m_isOpened |= context.openedByDefault;
@@ -32,38 +32,38 @@ namespace SR_CORE_GUI_NS {
         }
 
         m_isOpened |= context.noHeader;
-        const auto dir = m_isOpened ? SR_GRAPH_GUI_NS::Immediate::Direction::Down : SR_GRAPH_GUI_NS::Immediate::Direction::Right;
+        const auto dir = m_isOpened ? SR_IMMEDIATE_GUI_NS::Direction::Down : SR_IMMEDIATE_GUI_NS::Direction::Right;
 
         SR_UTILS_NS::SRClass* pClassValue = value.GetSRClass();
         if (!pClassValue) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Value is not a class!");
-            SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
-            SR_GRAPH_GUI_NS::Immediate::PopID();
-            SR_GRAPH_GUI_NS::Immediate::PopID();
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Value is not a class!");
+            SR_IMMEDIATE_GUI_NS::PopStyleVar();
+            SR_IMMEDIATE_GUI_NS::PopID();
+            SR_IMMEDIATE_GUI_NS::PopID();
             return feedback;
         }
 
         SR_MATH_NS::FVector2 buttonSize;
 
         if (context.pValue && !context.noHeader) {
-            const SR_MATH_NS::FVector2 arrowPos = SR_GRAPH_GUI_NS::Immediate::GetWindowCursorPos(pWindow) + SR_MATH_NS::FVector2(5, 5);
-            SR_GRAPH_GUI_NS::Immediate::RenderArrow(pDrawList, arrowPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f);
+            const SR_MATH_NS::FVector2 arrowPos = SR_IMMEDIATE_GUI_NS::GetWindowCursorPos(pWindow) + SR_MATH_NS::FVector2(5, 5);
+            SR_IMMEDIATE_GUI_NS::RenderArrow(pDrawList, arrowPos, SR_IMMEDIATE_GUI_NS::GetColorU32(SR_IMMEDIATE_GUI_NS::StyleColor::Text), dir, 1.f);
 
             const SR_MATH_NS::FVector2 mainButtonSize = { 30, context.fieldHeight };
             buttonSize = { context.fieldWidth - mainButtonSize.x, context.fieldHeight };
 
-            auto&& stackSize = SR_GRAPH_GUI_NS::Immediate::BeginForceEnabled();
-            if (SR_GRAPH_GUI_NS::Immediate::Button("", mainButtonSize)) {
+            auto&& stackSize = SR_IMMEDIATE_GUI_NS::BeginForceEnabled();
+            if (SR_IMMEDIATE_GUI_NS::Button("", mainButtonSize)) {
                 m_isOpened = !m_isOpened;
             }
-            SR_GRAPH_GUI_NS::Immediate::EndForceEnabled(stackSize);
+            SR_IMMEDIATE_GUI_NS::EndForceEnabled(stackSize);
         }
         else if (!context.noHeader) {
-            const SR_MATH_NS::FVector2 arrowPos = SR_GRAPH_GUI_NS::Immediate::GetWindowCursorPos(pWindow) + SR_MATH_NS::FVector2(1, 5);
-            SR_GRAPH_GUI_NS::Immediate::RenderArrow(pDrawList, arrowPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f);
+            const SR_MATH_NS::FVector2 arrowPos = SR_IMMEDIATE_GUI_NS::GetWindowCursorPos(pWindow) + SR_MATH_NS::FVector2(1, 5);
+            SR_IMMEDIATE_GUI_NS::RenderArrow(pDrawList, arrowPos, SR_IMMEDIATE_GUI_NS::GetColorU32(SR_IMMEDIATE_GUI_NS::StyleColor::Text), dir, 1.f);
 
-            //SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.GetArrowWidth(), 0));
-            //SR_GRAPH_GUI_NS::Immediate::SameLine();
+            //SR_IMMEDIATE_GUI_NS::Dummy(SR_MATH_NS::FVector2(context.GetArrowWidth(), 0));
+            //SR_IMMEDIATE_GUI_NS::SameLine();
 
             //const SR_MATH_NS::FVector2 mainButtonSize = { SR_MAX(context.fieldTitleWidth - context.GetArrowWidth(), 0), context.fieldHeight };
             const SR_MATH_NS::FVector2 mainButtonSize = { SR_MAX(context.fieldTitleWidth, 0), context.fieldHeight };
@@ -71,20 +71,20 @@ namespace SR_CORE_GUI_NS {
             buttonSize = { (context.fieldWidth + context.fieldTitleWidth) - titleTotalWidth, context.fieldHeight };
 
             SR_UTILS_NS::StringAtom displayName = context.GetPropertyDisplayName();
-            auto&& stackSize = SR_GRAPH_GUI_NS::Immediate::BeginForceEnabled();
-            if (SR_GRAPH_GUI_NS::Immediate::Button(displayName.c_str(), mainButtonSize)) {
+            auto&& stackSize = SR_IMMEDIATE_GUI_NS::BeginForceEnabled();
+            if (SR_IMMEDIATE_GUI_NS::Button(displayName.c_str(), mainButtonSize)) {
                 m_isOpened = !m_isOpened;
             }
             DrawTitleContextMenu(context, feedback);
-            SR_GRAPH_GUI_NS::Immediate::EndForceEnabled(stackSize);
+            SR_IMMEDIATE_GUI_NS::EndForceEnabled(stackSize);
         }
 
         if (!context.noHeader) {
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::SameLine();
 
-            SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
-            SR_GRAPH_GUI_NS::Immediate::Button(pClassValue->GetMeta()->GetFactoryName().c_str(), buttonSize);
-            SR_GRAPH_GUI_NS::Immediate::EndDisabled();
+            SR_IMMEDIATE_GUI_NS::BeginDisabled();
+            SR_IMMEDIATE_GUI_NS::Button(pClassValue->GetMeta()->GetFactoryName().c_str(), buttonSize);
+            SR_IMMEDIATE_GUI_NS::EndDisabled();
         }
 
         m_groups.clear();
@@ -103,15 +103,15 @@ namespace SR_CORE_GUI_NS {
                 propertyContext.noHeader = false;
 
                 pMeta->ForEachProperty([&](auto&& property, uint64_t index) {
-                    SR_GRAPH_GUI_NS::Immediate::PushID(index);
+                    SR_IMMEDIATE_GUI_NS::PushID(index);
                     DrawPropertyGroup(SR_UTILS_NS::StringAtom(), pClassValue, index, property, context, propertyContext, feedback);
-                    SR_GRAPH_GUI_NS::Immediate::PopID();
+                    SR_IMMEDIATE_GUI_NS::PopID();
                 });
 
                 pMeta->ForEachMethod([&](auto&& method, uint64_t index) {
-                    SR_GRAPH_GUI_NS::Immediate::PushID(index);
+                    SR_IMMEDIATE_GUI_NS::PushID(index);
                     DrawMethod(pClassValue, index, method, context, propertyContext, feedback);
-                    SR_GRAPH_GUI_NS::Immediate::PopID();
+                    SR_IMMEDIATE_GUI_NS::PopID();
                 });
 
                 widthNoArrow = widthNoArrow - context.GetArrowWidth();
@@ -119,15 +119,15 @@ namespace SR_CORE_GUI_NS {
                 propertyContext.fieldTitleWidth = widthNoArrow * 0.3f;
 
                 for (const auto& group : m_groups) {
-                    SR_GRAPH_GUI_NS::Immediate::PushID(group.c_str());
+                    SR_IMMEDIATE_GUI_NS::PushID(group.c_str());
 
                     bool isGroupOpened = m_openedGroups.count(group) > 0;
-                    const auto groupDir = isGroupOpened ? SR_GRAPH_GUI_NS::Immediate::Direction::Down : SR_GRAPH_GUI_NS::Immediate::Direction::Right;
-                    const SR_MATH_NS::FVector2 arrowPos = SR_GRAPH_GUI_NS::Immediate::GetWindowCursorPos(pWindow) + SR_MATH_NS::FVector2(1, 5);
-                    SR_GRAPH_GUI_NS::Immediate::RenderArrow(pDrawList, arrowPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), groupDir, 1.f);
+                    const auto groupDir = isGroupOpened ? SR_IMMEDIATE_GUI_NS::Direction::Down : SR_IMMEDIATE_GUI_NS::Direction::Right;
+                    const SR_MATH_NS::FVector2 arrowPos = SR_IMMEDIATE_GUI_NS::GetWindowCursorPos(pWindow) + SR_MATH_NS::FVector2(1, 5);
+                    SR_IMMEDIATE_GUI_NS::RenderArrow(pDrawList, arrowPos, SR_IMMEDIATE_GUI_NS::GetColorU32(SR_IMMEDIATE_GUI_NS::StyleColor::Text), groupDir, 1.f);
 
-                    auto&& stackSize = SR_GRAPH_GUI_NS::Immediate::BeginForceEnabled();
-                    if (SR_GRAPH_GUI_NS::Immediate::Button(group.c_str(), { context.fieldTitleWidth + context.fieldWidth, context.fieldHeight })) {
+                    auto&& stackSize = SR_IMMEDIATE_GUI_NS::BeginForceEnabled();
+                    if (SR_IMMEDIATE_GUI_NS::Button(group.c_str(), { context.fieldTitleWidth + context.fieldWidth, context.fieldHeight })) {
                         if (isGroupOpened) {
                             m_openedGroups.erase(group);
                         }
@@ -136,21 +136,21 @@ namespace SR_CORE_GUI_NS {
                         }
                         isGroupOpened = !isGroupOpened;
                     }
-                    SR_GRAPH_GUI_NS::Immediate::EndForceEnabled(stackSize);
+                    SR_IMMEDIATE_GUI_NS::EndForceEnabled(stackSize);
 
                     if (isGroupOpened) {
-                        SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.GetArrowWidth(), 5.0f));
-                        SR_GRAPH_GUI_NS::Immediate::SameLine();
-                        SR_GRAPH_GUI_NS::Immediate::BeginGroup();
+                        SR_IMMEDIATE_GUI_NS::Dummy(SR_MATH_NS::FVector2(context.GetArrowWidth(), 5.0f));
+                        SR_IMMEDIATE_GUI_NS::SameLine();
+                        SR_IMMEDIATE_GUI_NS::BeginGroup();
                         pMeta->ForEachProperty([&](auto&& property, uint64_t index) {
-                            SR_GRAPH_GUI_NS::Immediate::PushID(index);
+                            SR_IMMEDIATE_GUI_NS::PushID(index);
                             DrawPropertyGroup(group, pClassValue, index, property, context, propertyContext, feedback);
-                            SR_GRAPH_GUI_NS::Immediate::PopID();
+                            SR_IMMEDIATE_GUI_NS::PopID();
                         });
-                        SR_GRAPH_GUI_NS::Immediate::EndGroup();
+                        SR_IMMEDIATE_GUI_NS::EndGroup();
                     }
 
-                    SR_GRAPH_GUI_NS::Immediate::PopID();
+                    SR_IMMEDIATE_GUI_NS::PopID();
                 }
 
                 propertyContext.noHeader = false;
@@ -164,14 +164,14 @@ namespace SR_CORE_GUI_NS {
                 }
             }
             else {
-                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Failed to get meta for object!");
+                SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Failed to get meta for object!");
             }
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+        SR_IMMEDIATE_GUI_NS::PopStyleVar();
 
-        SR_GRAPH_GUI_NS::Immediate::PopID();
-        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
 
         SetValue(context, feedback, value);
 
@@ -201,11 +201,11 @@ namespace SR_CORE_GUI_NS {
         if (hasParameters) {
             SR_THREAD_LOCAL static SR_UTILS_NS::String message;
             SR_UTILS_NS::FormatTo(message, "Method {} has parameters and cannot be invoked from the editor!", method.GetDisplayName());
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), message.c_str());
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), message.c_str());
             return;
         }
 
-        if (SR_GRAPH_GUI_NS::Immediate::Button(method.GetDisplayName().c_str(), buttonSize)) {
+        if (SR_IMMEDIATE_GUI_NS::Button(method.GetDisplayName().c_str(), buttonSize)) {
             method.InvokeVoid(*context.pOwner);
         }
     }
@@ -243,7 +243,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (inspector.Empty()) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Missing inspector for \"%s\"!", property.GetName().c_str());
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Missing inspector for \"%s\"!", property.GetName().c_str());
             return;
         }
 
@@ -256,13 +256,13 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (!m_drawers[index]) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Missing inspector for \"%s\"!", property.GetName().c_str());
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Missing inspector for \"%s\"!", property.GetName().c_str());
             return;
         }
 
         if (!context.pValue && !context.noHeader) {
-            SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.GetArrowWidth(), 5.0f));
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::Dummy(SR_MATH_NS::FVector2(context.GetArrowWidth(), 5.0f));
+            SR_IMMEDIATE_GUI_NS::SameLine();
         }
 
         propertyContext.noHeader = property.GetEditorParams().IsNoHeader();
@@ -274,15 +274,15 @@ namespace SR_CORE_GUI_NS {
 
         const bool isOverridden = context.isPropertyOverriddenCallback && context.isPropertyOverriddenCallback(propertyContext.pOwner, property, propertyContext.propertyPath);
         if (isOverridden) {
-            SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor::Yellow());
+            SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::Text, SR_MATH_NS::FColor::Yellow());
         }
 
-        SR_GRAPH_GUI_NS::Immediate::BeginGroup();
+        SR_IMMEDIATE_GUI_NS::BeginGroup();
         PropertyDrawerFeedback propertyFeedback = m_drawers[index]->Draw(propertyContext);
-        SR_GRAPH_GUI_NS::Immediate::EndGroup();
+        SR_IMMEDIATE_GUI_NS::EndGroup();
 
         if (isOverridden) {
-            SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
+            SR_IMMEDIATE_GUI_NS::PopStyleColor();
         }
 
         if (propertyFeedback.isOverrideReverted) {

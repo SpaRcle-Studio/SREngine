@@ -13,7 +13,7 @@
 
 #include <vulkan/vulkan.h>
 
-namespace SR_GRAPH_GUI_NS::Immediate {
+namespace SR_IMMEDIATE_GUI_NS {
     struct SR_IMMEDIATE_GUI_DLL_API VulkanFrameInfo {
         VkImage image = VK_NULL_HANDLE;
         VkImageView imageView = VK_NULL_HANDLE;

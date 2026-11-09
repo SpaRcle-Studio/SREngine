@@ -115,19 +115,19 @@ namespace SR_CORE_GUI_NS {
 
     void AnimatorEditorStateMachine::DrawStateMachineEditor() {
         if (!m_context.pStateMachineEditor) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Red(), "State machine editor is not initialized!");
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor::Red(), "State machine editor is not initialized!");
             return;
         }
 
         if (!m_context.pGraph || m_context.openedStateMachineNodeIndex == SR_ID_INVALID) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(0.7f, 0.7f, 0.7f, 1.0f), "No state machine selected. Double-click the state machine node in Graph.");
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(0.7f, 0.7f, 0.7f, 1.0f), "No state machine selected. Double-click the state machine node in Graph.");
             return;
         }
 
         auto&& pGraphNode = m_context.pGraph->GetNode(m_context.openedStateMachineNodeIndex);
         auto&& pSMNode = pGraphNode ? dynamic_cast<SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine*>(pGraphNode) : nullptr;
         if (!pSMNode || !pSMNode->GetMachine()) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor::Red(), "Invalid state machine node!");
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor::Red(), "Invalid state machine node!");
             return;
         }
         auto&& pMachine = pSMNode->GetMachine();
@@ -137,17 +137,17 @@ namespace SR_CORE_GUI_NS {
             m_context.openStateMachineRequested = false;
         }
 
-        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(0.6f, 0.6f, 0.6f, 1.0f), "Graph > State Machine");
+        SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(0.6f, 0.6f, 0.6f, 1.0f), "Graph > State Machine");
 
 
-        SR_GRAPH_GUI_NS::Immediate::Separator();
+        SR_IMMEDIATE_GUI_NS::Separator();
 
         SR_IMMEDIATE_GUI_NS::NodeEditor::SetCurrentEditor(m_context.pStateMachineEditor);
         SR_IMMEDIATE_GUI_NS::NodeEditor::BeginNodeEditor("Animation State Machine", SR_MATH_NS::FVector2());
 
         m_nodeEditorRegion = SR_MATH_NS::FRect(
-            SR_GRAPH_GUI_NS::Immediate::GetItemRectMin(),
-            SR_GRAPH_GUI_NS::Immediate::GetItemRectMax()
+            SR_IMMEDIATE_GUI_NS::GetItemRectMin(),
+            SR_IMMEDIATE_GUI_NS::GetItemRectMax()
         );
 
         SR_IMMEDIATE_GUI_NS::NodeEditor::PushNodeEditorStyleVar(SR_IMMEDIATE_GUI_NS::NodeEditor::NodeEditorStyleVar::SourceDirection, SR_MATH_NS::FVector2(1.0f, 0.0f));
@@ -163,9 +163,9 @@ namespace SR_CORE_GUI_NS {
 
         if (editable) {
             // create/delete transitions via drag is disabled (no pins)
-            /*if (SR_GRAPH_GUI_NS::Immediate::BeginCreate()) {
+            /*if (SR_IMMEDIATE_GUI_NS::BeginCreate()) {
                 uintptr_t startPinId = 0, endPinId = 0;
-                if (SR_GRAPH_GUI_NS::Immediate::QueryNewLink(&startPinId, &endPinId)) {
+                if (SR_IMMEDIATE_GUI_NS::QueryNewLink(&startPinId, &endPinId)) {
                     if (startPinId && endPinId) {
                         SR_GRAPH_GUI_NS::Pin* pStartPin = nullptr;
                         SR_GRAPH_GUI_NS::Pin* pEndPin = nullptr;
@@ -190,7 +190,7 @@ namespace SR_CORE_GUI_NS {
                         if (pStartPin && pEndPin &&
                             pStartPin->GetKind() == SR_GRAPH_GUI_NS::PinKind::Output &&
                             pEndPin->GetKind() == SR_GRAPH_GUI_NS::PinKind::Input &&
-                            SR_GRAPH_GUI_NS::Immediate::AcceptNewItem()) {
+                            SR_IMMEDIATE_GUI_NS::AcceptNewItem()) {
 
                             auto&& pStartNode = pStartPin->GetNode();
                             auto&& pEndNode = pEndPin->GetNode();
@@ -229,7 +229,7 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
             }
-            SR_GRAPH_GUI_NS::Immediate::EndCreate();
+            SR_IMMEDIATE_GUI_NS::EndCreate();
             */
 
             // delete transition/state
@@ -247,16 +247,16 @@ namespace SR_CORE_GUI_NS {
             SR_IMMEDIATE_GUI_NS::NodeEditor::SuspendNodeEditor();
             // context menu: create state (dock-safe, anchored to node-editor background)
             if (SR_IMMEDIATE_GUI_NS::NodeEditor::ShowBackgroundContextMenu()) {
-                SR_GRAPH_GUI_NS::Immediate::OpenPopup("AnimatorEditor_SM_Context");
-                m_popupMousePos = SR_GRAPH_GUI_NS::Immediate::GetMousePos();
+                SR_IMMEDIATE_GUI_NS::OpenPopup("AnimatorEditor_SM_Context");
+                m_popupMousePos = SR_IMMEDIATE_GUI_NS::GetMousePos();
             }
-            if (SR_GRAPH_GUI_NS::Immediate::BeginPopup("AnimatorEditor_SM_Context")) {
+            if (SR_IMMEDIATE_GUI_NS::BeginPopup("AnimatorEditor_SM_Context")) {
                 //std::map<std::string, std::vector<SR_UTILS_NS::StringAtom>> categories;
                 //BuildStateMenu(categories);
-                //SR_GRAPH_GUI_NS::Immediate::InputText("##StateSearch", &m_createStateSearch);
-                //SR_GRAPH_GUI_NS::Immediate::Separator();
+                //SR_IMMEDIATE_GUI_NS::InputText("##StateSearch", &m_createStateSearch);
+                //SR_IMMEDIATE_GUI_NS::Separator();
                 //DrawStateMenuRecursive(needResync, categories, "");
-                SR_GRAPH_GUI_NS::Immediate::EndPopup();
+                SR_IMMEDIATE_GUI_NS::EndPopup();
             }
             SR_IMMEDIATE_GUI_NS::NodeEditor::ResumeNodeEditor();
         }
@@ -341,7 +341,7 @@ namespace SR_CORE_GUI_NS {
 //            auto&& displayName = pMeta->GetDisplayName();
 //            SR_UTILS_NS::StringAtom menuName = displayName.empty() ? stateTypeName : displayName;
 //
-//            if (SR_GRAPH_GUI_NS::Immediate::MenuItem(menuName.c_str())) {
+//            if (SR_IMMEDIATE_GUI_NS::MenuItem(menuName.c_str())) {
 //                if (!m_context.pGraph || m_context.openedStateMachineNodeIndex == SR_ID_INVALID) {
 //                    continue;
 //                }
@@ -375,9 +375,9 @@ namespace SR_CORE_GUI_NS {
 //                levelName = levelName.substr(0, nextSlash);
 //            }
 //
-//            if (SR_GRAPH_GUI_NS::Immediate::BeginMenu(levelName.c_str())) {
+//            if (SR_IMMEDIATE_GUI_NS::BeginMenu(levelName.c_str())) {
 //                DrawStateMenuRecursive(needResync, categories, nextLevel);
-//                SR_GRAPH_GUI_NS::Immediate::EndMenu();
+//                SR_IMMEDIATE_GUI_NS::EndMenu();
 //            }
 //        }
 //    }
@@ -392,7 +392,7 @@ namespace SR_CORE_GUI_NS {
 
     void AnimatorEditorStateMachine::DrawLinks(bool& needResync, SR_ANIMATIONS_NS::AnimationStateMachine& machine) {
         const bool editable = !(m_context.isLive && m_context.liveReadOnly);
-        void* pDrawList = SR_GRAPH_GUI_NS::Immediate::GetWindowDrawList();
+        void* pDrawList = SR_IMMEDIATE_GUI_NS::GetWindowDrawList();
         if (!pDrawList) {
             return;
         }
@@ -446,15 +446,15 @@ namespace SR_CORE_GUI_NS {
             const SR_MATH_NS::FVector2 base = tip - nd * arrowLen;
             const SR_MATH_NS::FVector2 left = base + perp * arrowWidth;
             const SR_MATH_NS::FVector2 right = base - perp * arrowWidth;
-            SR_GRAPH_GUI_NS::Immediate::DrawListAddTriangleFilled(pDrawList, tip, left, right, col);
+            SR_IMMEDIATE_GUI_NS::DrawListAddTriangleFilled(pDrawList, tip, left, right, col);
 
             SR_MATH_NS::FVector2 lineDstArrowOffset = nd * arrowLen;
-            SR_GRAPH_GUI_NS::Immediate::DrawListAddLine(pDrawList, srcPoint, dstPoint - lineDstArrowOffset, col, thickness);
+            SR_IMMEDIATE_GUI_NS::DrawListAddLine(pDrawList, srcPoint, dstPoint - lineDstArrowOffset, col, thickness);
 
             /// check mouse inside node editor background
-            if (m_nodeEditorRegion.Contains(SR_GRAPH_GUI_NS::Immediate::GetMousePos())) {
-                if (SR_GRAPH_GUI_NS::Immediate::IsMouseReleased(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left)) {
-                    const SR_MATH_NS::FVector2 mousePos = SR_GRAPH_GUI_NS::Immediate::GetMousePos();
+            if (m_nodeEditorRegion.Contains(SR_IMMEDIATE_GUI_NS::GetMousePos())) {
+                if (SR_IMMEDIATE_GUI_NS::IsMouseReleased(SR_IMMEDIATE_GUI_NS::MouseButton::Left)) {
+                    const SR_MATH_NS::FVector2 mousePos = SR_IMMEDIATE_GUI_NS::GetMousePos();
                     const float distToLine = SR_MATH_NS::DistanceToLineSegment(mousePos, srcPoint, dstPoint);
                     if (distToLine < 5.0f) {
                         m_selectedLink = pLink;
@@ -469,16 +469,16 @@ namespace SR_CORE_GUI_NS {
         // transition creation mode: click source (context menu) -> click target
         if (editable && m_fromStateNode) {
             // cancel on right click
-            if (SR_GRAPH_GUI_NS::Immediate::IsMouseReleased(SR_GRAPH_GUI_NS::Immediate::MouseButton::Right)) {
+            if (SR_IMMEDIATE_GUI_NS::IsMouseReleased(SR_IMMEDIATE_GUI_NS::MouseButton::Right)) {
                 m_fromStateNode = nullptr;
             }
             const auto& srcRect = m_fromStateNode->GetRect();
-            const SR_MATH_NS::FVector2 mouse = SR_GRAPH_GUI_NS::Immediate::GetMousePos();
+            const SR_MATH_NS::FVector2 mouse = SR_IMMEDIATE_GUI_NS::GetMousePos();
             const SR_MATH_NS::FVector2 srcPoint = SR_MATH_NS::ClipToRectEdge(srcRect, srcRect.Center(), mouse);
 
-            SR_GRAPH_GUI_NS::Immediate::DrawListAddLine(pDrawList, srcPoint, mouse, SR_COL32(255, 255, 255, 180), 2.0f);
+            SR_IMMEDIATE_GUI_NS::DrawListAddLine(pDrawList, srcPoint, mouse, SR_COL32(255, 255, 255, 180), 2.0f);
 
-            if (SR_GRAPH_GUI_NS::Immediate::IsMouseReleased(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left)) {
+            if (SR_IMMEDIATE_GUI_NS::IsMouseReleased(SR_IMMEDIATE_GUI_NS::MouseButton::Left)) {
                 // find target node under mouse
                 uint32_t dstIndex = SR_ID_INVALID;
 
@@ -519,17 +519,17 @@ namespace SR_CORE_GUI_NS {
 
             builder.Begin(pNode);
             builder.Header(headerColor);
-            SR_GRAPH_GUI_NS::Immediate::Spring(0);
+            SR_IMMEDIATE_GUI_NS::Spring(0);
             const bool isActive = machine.IsStateActive(pState->GetStateName());
             if (isActive) {
-                SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor(0.05f, 0.05f, 0.05f, 1.0f));
+                SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::Text, SR_MATH_NS::FColor(0.05f, 0.05f, 0.05f, 1.0f));
             }
-            SR_GRAPH_GUI_NS::Immediate::Text("%s", pNode->GetName().c_str());
+            SR_IMMEDIATE_GUI_NS::Text("%s", pNode->GetName().c_str());
             if (isActive) {
-                SR_GRAPH_GUI_NS::Immediate::PopStyleColor(1);
+                SR_IMMEDIATE_GUI_NS::PopStyleColor(1);
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Spring(1);
+            SR_IMMEDIATE_GUI_NS::Spring(1);
             builder.EndHeader();
 
             builder.End();
@@ -537,21 +537,21 @@ namespace SR_CORE_GUI_NS {
             if (editable) {
                 SR_IMMEDIATE_GUI_NS::NodeEditor::SuspendNodeEditor();
 
-                SR_GRAPH_GUI_NS::Immediate::PushID(pNode->GetId());
+                SR_IMMEDIATE_GUI_NS::PushID(pNode->GetId());
 
                 uintptr_t nodeId = 0;
                 if (SR_IMMEDIATE_GUI_NS::NodeEditor::ShowNodeContextMenu(&nodeId)) {
-                    SR_GRAPH_GUI_NS::Immediate::OpenPopup("AnimatorEditor_SM_NodeContext");
-                    m_popupMousePos = SR_GRAPH_GUI_NS::Immediate::GetMousePos();
+                    SR_IMMEDIATE_GUI_NS::OpenPopup("AnimatorEditor_SM_NodeContext");
+                    m_popupMousePos = SR_IMMEDIATE_GUI_NS::GetMousePos();
                 }
-                if (SR_GRAPH_GUI_NS::Immediate::BeginPopup("AnimatorEditor_SM_NodeContext")) {
-                    if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Create transition (click target)")) {
+                if (SR_IMMEDIATE_GUI_NS::BeginPopup("AnimatorEditor_SM_NodeContext")) {
+                    if (SR_IMMEDIATE_GUI_NS::MenuItem("Create transition (click target)")) {
                         m_fromStateNode = m_popupNode;
                     }
 
                     auto&& pSrcState = m_popupNode->GetUserData<SR_ANIMATIONS_NS::AnimationState>();
                     auto&& transitions = pSrcState->GetTransitions();
-                    if (!transitions.empty() && SR_GRAPH_GUI_NS::Immediate::BeginMenu("Delete transition")) {
+                    if (!transitions.empty() && SR_IMMEDIATE_GUI_NS::BeginMenu("Delete transition")) {
                         for (uint32_t i = 0; i < transitions.size(); ++i) {
                             auto&& t = transitions[i];
                             if (!t) {
@@ -560,25 +560,25 @@ namespace SR_CORE_GUI_NS {
                             const int32_t dstIndexI = t->GetTargetIndex();
                             auto&& pDstState = (dstIndexI >= 0) ? machine.GetStateOrNull(static_cast<uint32_t>(dstIndexI)) : nullptr;
                             const std::string label = pDstState ? pDstState->GetStateName().ToStringRef() : std::string("Invalid");
-                            if (SR_GRAPH_GUI_NS::Immediate::MenuItem(label.c_str())) {
+                            if (SR_IMMEDIATE_GUI_NS::MenuItem(label.c_str())) {
                                 transitions.erase(transitions.begin() + static_cast<int32_t>(i));
                                 m_context.pGraph->InvalidateCompile();
                                 needResync = true;
                                 break;
                             }
                         }
-                        SR_GRAPH_GUI_NS::Immediate::EndMenu();
+                        SR_IMMEDIATE_GUI_NS::EndMenu();
                     }
 
-                    SR_GRAPH_GUI_NS::Immediate::EndPopup();
+                    SR_IMMEDIATE_GUI_NS::EndPopup();
                 }
-                SR_GRAPH_GUI_NS::Immediate::PopID();
+                SR_IMMEDIATE_GUI_NS::PopID();
                 SR_IMMEDIATE_GUI_NS::NodeEditor::ResumeNodeEditor();
             }
 
             // кэшируем прямоугольник ноды (для рисования переходов от границы к границе)
-            const auto nodeMin = SR_GRAPH_GUI_NS::Immediate::GetItemRectMin();
-            const auto nodeMax = SR_GRAPH_GUI_NS::Immediate::GetItemRectMax();
+            const auto nodeMin = SR_IMMEDIATE_GUI_NS::GetItemRectMin();
+            const auto nodeMax = SR_IMMEDIATE_GUI_NS::GetItemRectMax();
             // Rect ctor = (x,y,w,h), не (min,max)
             pNode->SetRect(SR_MATH_NS::FRect(
                 nodeMin.x,

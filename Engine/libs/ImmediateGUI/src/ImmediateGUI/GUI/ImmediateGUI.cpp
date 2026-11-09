@@ -15,7 +15,7 @@
 #include <Enum/ChildWindowFlags.hpp>
 #include <Enum/TreeNodeFlags.hpp>
 
-namespace SR_GRAPH_GUI_NS::Immediate {
+namespace SR_IMMEDIATE_GUI_NS {
 #ifdef SR_USE_IMGUI
     namespace {
         bool g_fontsRebuildPending = false;
@@ -110,12 +110,12 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         ImGui::PushStyleVar(static_cast<ImGuiStyleVar>(idx), F2ToImV2(val));
     }
 
-    SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags GetNodeFlagsWithChild() {
-        return SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::OpenOnArrow | SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::OpenOnDoubleClick;
+    SR_IMMEDIATE_GUI_NS::TreeNodeFlags GetNodeFlagsWithChild() {
+        return SR_IMMEDIATE_GUI_NS::TreeNodeFlags::OpenOnArrow | SR_IMMEDIATE_GUI_NS::TreeNodeFlags::OpenOnDoubleClick;
     }
 
-    SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags GetNodeFlagsWithoutChild() {
-        return SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::NoTreePushOnOpen | SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::Leaf;
+    SR_IMMEDIATE_GUI_NS::TreeNodeFlags GetNodeFlagsWithoutChild() {
+        return SR_IMMEDIATE_GUI_NS::TreeNodeFlags::NoTreePushOnOpen | SR_IMMEDIATE_GUI_NS::TreeNodeFlags::Leaf;
     }
 
     void PopStyleVar(uint32_t count) {
@@ -994,7 +994,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
         //}
 
         if (!g_themePath.empty()) {
-            SR_UTILS_NS::ResourceRef<SR_GRAPH_GUI_NS::Immediate::ImGUITheme> theme(g_themePath);
+            SR_UTILS_NS::ResourceRef<SR_IMMEDIATE_GUI_NS::ImGUITheme> theme(g_themePath);
             if (auto&& pTheme = theme.GetResource()) {
                 pTheme->Apply();
             }
@@ -1849,8 +1849,8 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     SR_MATH_NS::FVector2 GetItemRectMax() { return SR_MATH_NS::FVector2(0.0f, 0.0f); }
     void DrawListAddTriangleFilled(void* pDrawList, const SR_MATH_NS::FVector2& a, const SR_MATH_NS::FVector2& b, const SR_MATH_NS::FVector2& c, uint32_t color) { }
     bool IsItemVisible() { return false; }
-    SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags GetNodeFlagsWithChild() { return SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::OpenOnArrow | SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::OpenOnDoubleClick; }
-    SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags GetNodeFlagsWithoutChild() { return SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::NoTreePushOnOpen | SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::Leaf; }
+    SR_IMMEDIATE_GUI_NS::TreeNodeFlags GetNodeFlagsWithChild() { return SR_IMMEDIATE_GUI_NS::TreeNodeFlags::OpenOnArrow | SR_IMMEDIATE_GUI_NS::TreeNodeFlags::OpenOnDoubleClick; }
+    SR_IMMEDIATE_GUI_NS::TreeNodeFlags GetNodeFlagsWithoutChild() { return SR_IMMEDIATE_GUI_NS::TreeNodeFlags::NoTreePushOnOpen | SR_IMMEDIATE_GUI_NS::TreeNodeFlags::Leaf; }
     void ShowMetricsWindow(bool* pOpen = nullptr) { }
 
     bool BeginPlot(const char* title_id, const SR_MATH_NS::IVector2& size, PlotFlags flags) { return false; }

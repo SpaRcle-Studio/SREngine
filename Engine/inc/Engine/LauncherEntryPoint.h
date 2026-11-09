@@ -12,10 +12,17 @@
 
 using LauncherEntryPointAfterInitCallback = SR_HTYPES_NS::Function<void(SR_CORE_NS::Launcher::Ptr&)>;
 
-static int LauncherEntryPoint(const LauncherEntryPointAfterInitCallback& afterInitCallback = LauncherEntryPointAfterInitCallback()) {
-    SR_TRACY_ZONE;
+enum LauncherEntryPointErrorCode : int32_t {
+    LauncherEntryPointErrorCode_Success = 0,
+    LauncherEntryPointErrorCode_ResourcesError,
+    LauncherEntryPointErrorCode_LauncherError,
+    LauncherEntryPointErrorCode_AppEarlyError,
+    LauncherEntryPointErrorCode_AppInitError,
+    LauncherEntryPointErrorCode_ExecuteError
+};
 
-    int32_t code = 0;
+static int32_t LauncherEntryPoint(const LauncherEntryPointAfterInitCallback& afterInitCallback = LauncherEntryPointAfterInitCallback()) {
+    SR_TRACY_ZONE;
 
 #ifdef SR_EMSCRIPTEN
     static SR_HTYPES_NS::SharedPtr pLauncher = new SR_CORE_NS::Launcher();
@@ -25,38 +32,35 @@ static int LauncherEntryPoint(const LauncherEntryPointAfterInitCallback& afterIn
 
     auto&& launcherInitStatus = pLauncher->InitLauncher();
 
-    if (!SR_UTILS_NS::ResourceManager::Instance().IsInitialized() && !SR_UTILS_NS::ResourceManager::Instance().Initialize()) {
-        SR_PLATFORM_NS::WriteConsoleError("Failed to initialize resources manager!");
-        code = 1;
-    }
-
     if (launcherInitStatus == SR_CORE_NS::LauncherInitStatus::Error) {
         SR_PLATFORM_NS::WriteConsoleError("Failed to initialize launcher!\n");
-        code = 2;
+        return LauncherEntryPointErrorCode_LauncherError;
     }
 
-    if (code == 0 && !pLauncher->EarlyInit()) {
-        SR_ERROR("Failed to early initialize application!");
-        code = 3;
+    if (!SR_UTILS_NS::ResourceManager::Instance().IsInitialized() && !SR_UTILS_NS::ResourceManager::Instance().Initialize()) {
+        SR_PLATFORM_NS::WriteConsoleError("Failed to initialize resources manager!");
+        return LauncherEntryPointErrorCode_ResourcesError;
     }
 
-    if (code == 0 && !pLauncher->Init()) {
-        SR_ERROR("Failed to initialize application!");
-        code = 4;
+    if (!pLauncher->EarlyInit()) {
+        SR_ERROR("LauncherEntryPoint() : failed to early initialize application!");
+        return LauncherEntryPointErrorCode_AppEarlyError;
     }
 
-    if (code == 0 && afterInitCallback) {
+    if (!pLauncher->Init()) {
+        SR_ERROR("LauncherEntryPoint() : failed to initialize application!");
+        return LauncherEntryPointErrorCode_AppInitError;
+    }
+
+    if (afterInitCallback) {
         afterInitCallback(pLauncher);
     }
 
-    if (code == 0 && !pLauncher->Execute()) {
-        SR_ERROR("Failed to execute application!");
-        code = 5;
+    if (!pLauncher->Execute()) {
+        SR_ERROR("LauncherEntryPoint() : failed to execute application!");
+        return LauncherEntryPointErrorCode_ExecuteError;
     }
-
-    pLauncher.AutoFree();
-
-    return code;
+    return LauncherEntryPointErrorCode_Success;
 }
 
 #endif //SR_ENGINE_LAUNCHER_ENTRY_POINT_H

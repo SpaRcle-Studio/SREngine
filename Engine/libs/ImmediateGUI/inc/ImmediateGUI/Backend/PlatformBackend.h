@@ -9,7 +9,7 @@
 
 #include <Utils/Math/Vector2.h>
 
-namespace SR_GRAPH_GUI_NS::Immediate {
+namespace SR_IMMEDIATE_GUI_NS {
     enum class PlatformBackend : uint8_t {
         None = 0,
         Win32,

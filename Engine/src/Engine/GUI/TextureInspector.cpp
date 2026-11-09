@@ -32,23 +32,23 @@ namespace SR_CORE_GUI_NS {
 
     void TextureInspector::Draw() {
         if (!m_texture) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "No texture selected");
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "No texture selected");
             return;
         }
 
         if (!m_texture->CanBeUsed()) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 1.f, 0.f, 1.f), "Texture still loading...");
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 1.f, 0.f, 1.f), "Texture still loading...");
             return;
         }
 
         m_imageMetaInfo = m_texture->GetImageMetaInfo();
 
-        auto&& windowsWidth = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x;
+        auto&& windowsWidth = SR_IMMEDIATE_GUI_NS::GetWindowSize().x;
 
         auto&& path = m_texture->GetResourcePath();
-        SR_GRAPH_GUI_NS::Immediate::Text("Texture: %s", path.c_str());
+        SR_IMMEDIATE_GUI_NS::Text("Texture: %s", path.c_str());
 
-        if (SR_GRAPH_GUI_NS::Immediate::Button("Save", SR_MATH_NS::FVector2(windowsWidth / 2.f, 0.f))) {
+        if (SR_IMMEDIATE_GUI_NS::Button("Save", SR_MATH_NS::FVector2(windowsWidth / 2.f, 0.f))) {
             SR_UTILS_NS::SRASerializer serializer;
             serializer.SetUseTabs(true);
             m_imageMetaInfo.Save(serializer);
@@ -63,16 +63,16 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-        SR_GRAPH_GUI_NS::Immediate::SameLine();
+        SR_IMMEDIATE_GUI_NS::SameLine();
 
-        if (SR_GRAPH_GUI_NS::Immediate::Button("Discard", SR_MATH_NS::FVector2(windowsWidth / 2.f, 0.f))) {
+        if (SR_IMMEDIATE_GUI_NS::Button("Discard", SR_MATH_NS::FVector2(windowsWidth / 2.f, 0.f))) {
             m_imageMetaInfo = m_originalImageMetaInfo;
             m_texture->SetImageMetaInfo(m_imageMetaInfo);
         }
 
-        SR_GRAPH_GUI_NS::Immediate::Separator();
+        SR_IMMEDIATE_GUI_NS::Separator();
 
-        const float_t windowWidth = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x - m_scrollBarWidth - 10.f;
+        const float_t windowWidth = SR_IMMEDIATE_GUI_NS::GetWindowSize().x - m_scrollBarWidth - 10.f;
         if (const int32_t textureId = m_texture->GetId(); textureId != SR_ID_INVALID) {
             auto&& pDescriptor = GetManager()->GetContext()->GetPipeline()->GetOverlay(SR_GRAPH_NS::OverlayType::ImGui)->GetTextureDescriptorSet(textureId);
             const auto imageWidth = static_cast<float_t>(m_texture->GetWidth());
@@ -87,8 +87,8 @@ namespace SR_CORE_GUI_NS {
                 auto&& pDrawList = SR_IMMEDIATE_GUI_NS::GetWindowDrawList();
                 auto&& borders = m_texture->GetImageMetaInfo().GetBorder();
 
-                SR_MATH_NS::FVector2 imageMin  = SR_GRAPH_GUI_NS::Immediate::GetItemRectMin();
-                SR_MATH_NS::FVector2 imageMax = SR_GRAPH_GUI_NS::Immediate::GetItemRectMax();
+                SR_MATH_NS::FVector2 imageMin  = SR_IMMEDIATE_GUI_NS::GetItemRectMin();
+                SR_MATH_NS::FVector2 imageMax = SR_IMMEDIATE_GUI_NS::GetItemRectMax();
 
                 const float_t width  = imageMax.x - imageMin.x;
                 const float_t height = imageMax.y - imageMin.y;
@@ -118,7 +118,7 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-        SR_GRAPH_GUI_NS::Immediate::Separator();
+        SR_IMMEDIATE_GUI_NS::Separator();
 
         auto&& value = SR_UTILS_NS::Reflection::Value::CreateRef(m_imageMetaInfo);
         auto&& context = CreateDrawerContext(&value);
@@ -132,8 +132,8 @@ namespace SR_CORE_GUI_NS {
 
         m_texture->SetImageMetaInfo(m_imageMetaInfo);
 
-        if (SR_GRAPH_GUI_NS::Immediate::GetScrollMaxY() > 0) {
-            m_scrollBarWidth = SR_GRAPH_GUI_NS::Immediate::GetScrollbarSize();
+        if (SR_IMMEDIATE_GUI_NS::GetScrollMaxY() > 0) {
+            m_scrollBarWidth = SR_IMMEDIATE_GUI_NS::GetScrollbarSize();
         }
         else {
             m_scrollBarWidth = 0;
@@ -165,8 +165,8 @@ namespace SR_CORE_GUI_NS {
         PropertyDrawerContext context(pValue);
         context.pEditor = dynamic_cast<EditorGUI*>(GetManager());
 
-        const float_t lineHeight = SR_GRAPH_GUI_NS::Immediate::GetFontSize() + SR_GRAPH_GUI_NS::Immediate::GetFramePadding().y * 2.0f;
-        float_t windowWidth = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x - m_scrollBarWidth;
+        const float_t lineHeight = SR_IMMEDIATE_GUI_NS::GetFontSize() + SR_IMMEDIATE_GUI_NS::GetFramePadding().y * 2.0f;
+        float_t windowWidth = SR_IMMEDIATE_GUI_NS::GetWindowSize().x - m_scrollBarWidth;
         context.lineHeight = lineHeight;
         context.axisButtonWidth = context.lineHeight;
         context.spaceWidth = windowWidth;

@@ -89,6 +89,33 @@ namespace SR_CORE_NS {
 
         SR_SYSTEM_LOG("Application::EarlyInit() : early initializing application...");
 
+        if (!SR_UTILS_NS::CLIManager::Instance().IsAppOpenedByProjectFile() && SR_UTILS_NS::VFS::Instance().IsExists(".srproject")) {
+            auto&& pSettings = CoreResLoader::Load<SR_CORE_NS::ProjectSettings>(".srproject");
+            if (!pSettings->buildProfiles.empty()) {
+                auto&& profiles = pSettings->buildProfiles;
+                const uint32_t profileIndex = pSettings->activeBuildProfile < profiles.size() ? pSettings->activeBuildProfile : 0;
+                const auto& profile = profiles[profileIndex];
+                SR_PLATFORM_NS::SetApplicationInfo({
+                   .name = profile.productName,
+                   .organization = profile.organization,
+                   .version = profile.androidVersionName,
+                   .engineVersion = SR_ENGINE_VERSION
+                });
+            }
+        }
+
+        auto&& appInfo = SR_PLATFORM_NS::GetApplicationInfo();
+        auto&& userDataAppPath = SR_PLATFORM_NS::GetUserDataDirectory().Concat(appInfo.organization).Concat(appInfo.name);
+        SR_SYSTEM_LOG("Application::EarlyInit() : application info: \n\tName: {}\n\tOrganization: {}\n\tVersion: {}\n\tEngine version: {}\n\tUser data path: {}",
+              appInfo.name, appInfo.organization, appInfo.version, appInfo.engineVersion, userDataAppPath
+        );
+        SR_UTILS_NS::VFS::Instance().Mount(userDataAppPath, new SR_UTILS_NS::DirectoryVFSBackend(userDataAppPath), 0);
+
+        if (!SR_UTILS_NS::ResourceManager::Instance().InitCache()) {
+            SR_ERROR("Application::EarlyInit() : failed to initialize cache!");
+            return false;
+        }
+
         if (SR_MATH_NS::HasSSE41()) {
             SR_SYSTEM_LOG("Application::EarlyInit() : SSE4.1 is supported.");
         }
@@ -180,11 +207,6 @@ namespace SR_CORE_NS {
         }
         else {
             SR_UTILS_NS::VFS::Instance().Mount(resourcesPath, new SR_UTILS_NS::DirectoryVFSBackend(engineResourcesPath), 0);
-        }
-
-        if (!SR_UTILS_NS::VFS::Instance().CreateDirectories(CoreResLoader::GetCachePath())) {
-            SR_ERROR("Application::InitializeResourcesFolder() : failed to create cache folder!");
-            return false;
         }
 
         return true;

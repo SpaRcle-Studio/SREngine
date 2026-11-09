@@ -377,8 +377,8 @@ namespace SR_GRAPH_GUI_NS {
             InputMask      = InputRGB | InputHSV
         )
 
-        SR_IMMEDIATE_GUI_DLL_API extern SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags GetNodeFlagsWithChild();
-        SR_IMMEDIATE_GUI_DLL_API extern SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags GetNodeFlagsWithoutChild();
+        SR_IMMEDIATE_GUI_DLL_API extern SR_IMMEDIATE_GUI_NS::TreeNodeFlags GetNodeFlagsWithChild();
+        SR_IMMEDIATE_GUI_DLL_API extern SR_IMMEDIATE_GUI_NS::TreeNodeFlags GetNodeFlagsWithoutChild();
 
         SR_ENUM_NS_STRUCT_T(Condition, uint32_t,
             None          = 0,        // No condition (always set the variable), same as _Always

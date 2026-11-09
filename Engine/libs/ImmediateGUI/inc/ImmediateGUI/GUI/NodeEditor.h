@@ -10,7 +10,7 @@
 #include <Utils/Reflection/Value.h>
 #include <Utils/Reflection/ReflectedType.h>
 
-namespace SR_GRAPH_GUI_NS::Immediate {
+namespace SR_IMMEDIATE_GUI_NS {
     class NodeInstance;
     class PinInstance;
     class InputPinInstance;
@@ -253,7 +253,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     };
 }
 
-namespace SR_GRAPH_GUI_NS::Immediate::NodeEditor {
+namespace SR_IMMEDIATE_GUI_NS::NodeEditor {
     // NodeEditor wrappers
     enum class NodeEditorStyleColor : uint8_t {
         Bg, Grid, NodeBg, NodeBorder, HovNodeBorder, SelNodeBorder,

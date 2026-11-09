@@ -73,7 +73,7 @@ namespace SR_CORE_NS {
         SR_CLASS()
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<EditorSettings>;
-        using Theme = SR_UTILS_NS::ResourceRef<SR_GRAPH_GUI_NS::Immediate::ImGUITheme>;
+        using Theme = SR_UTILS_NS::ResourceRef<SR_IMMEDIATE_GUI_NS::ImGUITheme>;
 
     public:
         SR_NODISCARD const SR_UTILS_NS::Map<EditorIcon, EditorSettingsIconInfo>& GetIcons() const noexcept { return m_icons; }

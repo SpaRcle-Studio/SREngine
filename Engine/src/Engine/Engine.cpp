@@ -373,7 +373,7 @@ namespace SR_CORE_NS {
 
         if (!SR_UTILS_NS::StoreUtils::Temp::GetBool("ApplicationIsNotAGame", false)) {
             SR_UTILS_NS::StoreUtils::Temp::SetBool("ApplicationIsNotAGame", true);
-            const bool isAppOpenedByProjectFile = SR_UTILS_NS::CLIManager::Instance().GetProjectPath().has_value();
+            const bool isAppOpenedByProjectFile = SR_UTILS_NS::CLIManager::Instance().IsAppOpenedByProjectFile();
             auto&& optionPath =  SR_UTILS_NS::CLIManager::Instance().GetOptionValue(SR_UTILS_NS::CLIOptions::RunScene);
             if (optionPath.has_value()) {
                 SR_LOG("Engine::LoadStartupScene() : command line option to run scene detected: {}", optionPath.value());

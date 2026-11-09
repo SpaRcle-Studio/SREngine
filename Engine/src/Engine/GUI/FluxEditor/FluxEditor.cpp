@@ -144,7 +144,7 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        const auto size = SR_GRAPH_GUI_NS::Immediate::GetContentRegionAvail();
+        const auto size = SR_IMMEDIATE_GUI_NS::GetContentRegionAvail();
 
         if (SR_IMMEDIATE_GUI_NS::BeginChild("Node Editor")) {
             m_backgroundText = "Flux";
@@ -319,8 +319,8 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        SR_GRAPH_GUI_NS::Immediate::InputText("##NodeSearch", &m_createNodeSearch);
-        SR_GRAPH_GUI_NS::Immediate::Separator();
+        SR_IMMEDIATE_GUI_NS::InputText("##NodeSearch", &m_createNodeSearch);
+        SR_IMMEDIATE_GUI_NS::Separator();
 
         for (auto&& name : SR_UTILS_NS::EnumReflector::GetNames<SR_FLUX_NS::FluxGraphNodeType>()) {
             if (name == SR_UTILS_NS::EnumReflector::ToStringAtom(SR_FLUX_NS::FluxGraphNodeType::Unknown)) {
@@ -331,7 +331,7 @@ namespace SR_CORE_GUI_NS {
                 continue;
             }
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem(name.c_str())) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem(name.c_str())) {
                 OnNodeTypeSelected(name, popupPos);
             }
         }
@@ -364,12 +364,12 @@ namespace SR_CORE_GUI_NS {
     void FluxEditor::DrawLinkDroppedMenu(const SR_MATH_NS::FVector2& popupPos) {
         auto&& pGraph = GetGraph();
         if (!pGraph || m_droppedLinkPin.nodeIndex >= pGraph->GetNodeCount()) {
-            SR_GRAPH_GUI_NS::Immediate::CloseCurrentPopup();
+            SR_IMMEDIATE_GUI_NS::CloseCurrentPopup();
             return;
         }
 
-        SR_GRAPH_GUI_NS::Immediate::InputText("##NodeSearch", &m_createNodeSearch);
-        SR_GRAPH_GUI_NS::Immediate::Separator();
+        SR_IMMEDIATE_GUI_NS::InputText("##NodeSearch", &m_createNodeSearch);
+        SR_IMMEDIATE_GUI_NS::Separator();
 
         auto&& isMatch = [this](SR_UTILS_NS::StringView name) {
             return m_createNodeSearch.empty() || SR_UTILS_NS::StringUtils::CheckSearchMatch(m_createNodeSearch, name);
@@ -381,7 +381,7 @@ namespace SR_CORE_GUI_NS {
                 if (!isMatch(property.GetName().ToStringView())) {
                     return;
                 }
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem(SR_FORMAT("Get {}", property.GetName()).c_str())) {
+                if (SR_IMMEDIATE_GUI_NS::MenuItem(SR_FORMAT("Get {}", property.GetName()).c_str())) {
                     SR_FLUX_NS::FluxGraphNode node;
                     node.SetType(SR_FLUX_NS::FluxGraphNodeType::ReadProperty);
                     node.SetCallable({ m_droppedLinkPin.className, property.GetName() });
@@ -390,7 +390,7 @@ namespace SR_CORE_GUI_NS {
                 if (property.IsReadOnly()) {
                     return;
                 }
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem(SR_FORMAT("Set {}", property.GetName()).c_str())) {
+                if (SR_IMMEDIATE_GUI_NS::MenuItem(SR_FORMAT("Set {}", property.GetName()).c_str())) {
                     SR_FLUX_NS::FluxGraphNode node;
                     node.SetType(SR_FLUX_NS::FluxGraphNodeType::WriteProperty);
                     node.SetCallable({ m_droppedLinkPin.className, property.GetName() });
@@ -402,7 +402,7 @@ namespace SR_CORE_GUI_NS {
                 if (!isMatch(method.GetName().ToStringView())) {
                     return;
                 }
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem(SR_FORMAT("{}()", method.GetName()).c_str())) {
+                if (SR_IMMEDIATE_GUI_NS::MenuItem(SR_FORMAT("{}()", method.GetName()).c_str())) {
                     SR_FLUX_NS::FluxGraphNode node;
                     node.SetType(method.IsEvaluate() ? SR_FLUX_NS::FluxGraphNodeType::Evaluate : SR_FLUX_NS::FluxGraphNodeType::Invoke);
                     node.SetCallable({ m_droppedLinkPin.className, method.GetName() });
@@ -410,7 +410,7 @@ namespace SR_CORE_GUI_NS {
                 }
             });
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
         }
 
         for (auto&& name : SR_UTILS_NS::EnumReflector::GetNames<SR_FLUX_NS::FluxGraphNodeType>()) {
@@ -421,7 +421,7 @@ namespace SR_CORE_GUI_NS {
             if (!isMatch(name.ToStringView())) {
                 continue;
             }
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem(name.c_str())) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem(name.c_str())) {
                 SR_FLUX_NS::FluxGraphNode node;
                 node.SetType(type);
                 CreateNodeFromDroppedLink(node, popupPos);
@@ -483,7 +483,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         m_droppedLinkPin = DroppedLinkPin();
-        SR_GRAPH_GUI_NS::Immediate::CloseCurrentPopup();
+        SR_IMMEDIATE_GUI_NS::CloseCurrentPopup();
     }
 
     void FluxEditor::OnNodeDeleted(SR_IMMEDIATE_GUI_NS::NodeInstance& node) {
@@ -621,13 +621,13 @@ namespace SR_CORE_GUI_NS {
 
         for (auto&& line : m_previewCodeLines) {
             m_previewLine = line;
-            SR_GRAPH_GUI_NS::Immediate::Text("%s", m_previewLine.c_str());
+            SR_IMMEDIATE_GUI_NS::Text("%s", m_previewLine.c_str());
         }
     }
 
     void FluxEditor::DrawInspectPanel() {
         if (!m_graphAsset) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_FLUX_HINT_COLOR, "Open a flux graph to start editing.");
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_FLUX_HINT_COLOR, "Open a flux graph to start editing.");
             return;
         }
 
@@ -639,37 +639,37 @@ namespace SR_CORE_GUI_NS {
         SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::FrameRounding, 0.0f);
         SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
-        if (SR_GRAPH_GUI_NS::Immediate::BeginTabBar("InspectorTabs")) {
-            if (SR_GRAPH_GUI_NS::Immediate::BeginTabItem("Inspector")) {
+        if (SR_IMMEDIATE_GUI_NS::BeginTabBar("InspectorTabs")) {
+            if (SR_IMMEDIATE_GUI_NS::BeginTabItem("Inspector")) {
                 if (auto&& pNode = GetSelectedNode()) {
                     DrawNodeInspector(*pNode);
                 }
                 else {
                     DrawGraphInspector();
                 }
-                SR_GRAPH_GUI_NS::Immediate::EndTabItem();
+                SR_IMMEDIATE_GUI_NS::EndTabItem();
             }
-            if (SR_GRAPH_GUI_NS::Immediate::BeginTabItem("Preview code")) {
+            if (SR_IMMEDIATE_GUI_NS::BeginTabItem("Preview code")) {
                 DrawGraphPreviewCode();
-                SR_GRAPH_GUI_NS::Immediate::EndTabItem();
+                SR_IMMEDIATE_GUI_NS::EndTabItem();
             }
-            SR_GRAPH_GUI_NS::Immediate::EndTabBar();
+            SR_IMMEDIATE_GUI_NS::EndTabBar();
         }
 
         SR_IMMEDIATE_GUI_NS::PopStyleVar(2);
     }
 
     void FluxEditor::DrawNodeInspector(SR_FLUX_NS::FluxGraphNode& node) {
-        SR_GRAPH_GUI_NS::Immediate::Text("Node properties");
-        SR_GRAPH_GUI_NS::Immediate::Separator();
+        SR_IMMEDIATE_GUI_NS::Text("Node properties");
+        SR_IMMEDIATE_GUI_NS::Separator();
 
         const auto type = node.GetType();
 
-        SR_GRAPH_GUI_NS::Immediate::Text("Type: %s", SR_UTILS_NS::EnumReflector::ToStringAtom(type).c_str());
+        SR_IMMEDIATE_GUI_NS::Text("Type: %s", SR_UTILS_NS::EnumReflector::ToStringAtom(type).c_str());
 
         if (HasName(type) && !IsVariableNode(type)) {
             m_nameBuffer = node.GetName().ToStringRef();
-            if (SR_GRAPH_GUI_NS::Immediate::InputText("Name", &m_nameBuffer)) {
+            if (SR_IMMEDIATE_GUI_NS::InputText("Name", &m_nameBuffer)) {
                 node.SetName(SR_UTILS_NS::StringAtom(m_nameBuffer));
             }
         }
@@ -698,88 +698,88 @@ namespace SR_CORE_GUI_NS {
         const auto callable = node.GetCallable();
 
         m_objectBuffer = callable.object.ToStringRef();
-        if (SR_GRAPH_GUI_NS::Immediate::InputText("Class", &m_objectBuffer)) {
+        if (SR_IMMEDIATE_GUI_NS::InputText("Class", &m_objectBuffer)) {
             node.SetCallable({ SR_UTILS_NS::StringAtom(m_objectBuffer), callable.function });
         }
 
         auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(node.GetCallable().object);
         if (!pMeta) {
             m_functionBuffer = callable.function.ToStringRef();
-            if (SR_GRAPH_GUI_NS::Immediate::InputText("Property", &m_functionBuffer)) {
+            if (SR_IMMEDIATE_GUI_NS::InputText("Property", &m_functionBuffer)) {
                 node.SetCallable({ node.GetCallable().object, SR_UTILS_NS::StringAtom(m_functionBuffer) });
             }
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_FLUX_ERROR_COLOR, "Unknown class \"%s\"!", node.GetCallable().object.c_str());
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_FLUX_ERROR_COLOR, "Unknown class \"%s\"!", node.GetCallable().object.c_str());
             return;
         }
 
-        if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("Property", callable.function.c_str())) {
+        if (SR_IMMEDIATE_GUI_NS::BeginCombo("Property", callable.function.c_str())) {
             pMeta->ForEachProperty([&](const SR_UTILS_NS::Reflection::Property& property, uint64_t) {
-                if (SR_GRAPH_GUI_NS::Immediate::Selectable(property.GetName().c_str(), property.GetName() == callable.function)) {
+                if (SR_IMMEDIATE_GUI_NS::Selectable(property.GetName().c_str(), property.GetName() == callable.function)) {
                     node.SetCallable({ node.GetCallable().object, property.GetName() });
                 }
             });
-            SR_GRAPH_GUI_NS::Immediate::EndCombo();
+            SR_IMMEDIATE_GUI_NS::EndCombo();
         }
 
         if (!node.GetCallable().function.empty() && !pMeta->FindProperty(node.GetCallable().function)) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_FLUX_ERROR_COLOR, "Property is not found!");
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_FLUX_ERROR_COLOR, "Property is not found!");
         }
     }
 
     void FluxEditor::DrawCastInspector(SR_FLUX_NS::FluxGraphNode& node) {
         /// целевой тип каста хранится в имени узла
         m_castTypeBuffer = node.GetName().ToStringRef();
-        if (SR_GRAPH_GUI_NS::Immediate::InputText("Target type", &m_castTypeBuffer)) {
+        if (SR_IMMEDIATE_GUI_NS::InputText("Target type", &m_castTypeBuffer)) {
             node.SetName(SR_UTILS_NS::StringAtom(m_castTypeBuffer));
         }
 
         if (node.GetName().empty()) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_FLUX_ERROR_COLOR, "Target type is not specified!");
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_FLUX_ERROR_COLOR, "Target type is not specified!");
             return;
         }
 
         if (!SR_UTILS_NS::Factory::Instance().GetType(node.GetName())) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_FLUX_ERROR_COLOR, "Unknown class \"%s\"!", node.GetName().c_str());
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_FLUX_ERROR_COLOR, "Unknown class \"%s\"!", node.GetName().c_str());
             return;
         }
 
-        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_FLUX_HINT_COLOR, "On success the flow goes to \"Exec\", otherwise to \"Cast Failed\".");
+        SR_IMMEDIATE_GUI_NS::TextColored(SR_FLUX_HINT_COLOR, "On success the flow goes to \"Exec\", otherwise to \"Cast Failed\".");
     }
 
     void FluxEditor::DrawCallableInspector(SR_FLUX_NS::FluxGraphNode& node) {
         const auto callable = node.GetCallable();
 
         m_objectBuffer = callable.object.ToStringRef();
-        if (SR_GRAPH_GUI_NS::Immediate::InputText("Object", &m_objectBuffer)) {
+        if (SR_IMMEDIATE_GUI_NS::InputText("Object", &m_objectBuffer)) {
             node.SetCallable({ SR_UTILS_NS::StringAtom(m_objectBuffer), callable.function });
         }
 
         auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(node.GetCallable().object);
         if (!pMeta) {
             m_functionBuffer = callable.function.ToStringRef();
-            if (SR_GRAPH_GUI_NS::Immediate::InputText("Function", &m_functionBuffer)) {
+            if (SR_IMMEDIATE_GUI_NS::InputText("Function", &m_functionBuffer)) {
                 node.SetCallable({ node.GetCallable().object, SR_UTILS_NS::StringAtom(m_functionBuffer) });
             }
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_FLUX_ERROR_COLOR, "Unknown class \"%s\"!", node.GetCallable().object.c_str());
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_FLUX_ERROR_COLOR, "Unknown class \"%s\"!", node.GetCallable().object.c_str());
             return;
         }
 
-        if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("Function", callable.function.c_str())) {
+        if (SR_IMMEDIATE_GUI_NS::BeginCombo("Function", callable.function.c_str())) {
             pMeta->ForEachMethod([&](const SR_UTILS_NS::Reflection::Method& method, uint64_t) {
-                if (SR_GRAPH_GUI_NS::Immediate::Selectable(method.GetName().c_str(), method.GetName() == callable.function)) {
+                if (SR_IMMEDIATE_GUI_NS::Selectable(method.GetName().c_str(), method.GetName() == callable.function)) {
                     node.SetCallable({ node.GetCallable().object, method.GetName() });
                 }
             });
-            SR_GRAPH_GUI_NS::Immediate::EndCombo();
+            SR_IMMEDIATE_GUI_NS::EndCombo();
         }
 
         if (auto&& pMethod = node.GetCallable().FindMethodMeta()) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_FLUX_HINT_COLOR, "Arguments: %u, returns: %s",
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_FLUX_HINT_COLOR, "Arguments: %u, returns: %s",
                 pMethod->GetParamsCount(), pMethod->HasReturn() ? "yes" : "no"
             );
         }
         else if (!node.GetCallable().function.empty()) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_FLUX_ERROR_COLOR, "Method is not found!");
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_FLUX_ERROR_COLOR, "Method is not found!");
         }
     }
 
@@ -789,25 +789,25 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("Variable", node.GetName().c_str())) {
+        if (SR_IMMEDIATE_GUI_NS::BeginCombo("Variable", node.GetName().c_str())) {
             for (auto&& [name, value] : pGraph->GetVariables()) {
-                if (SR_GRAPH_GUI_NS::Immediate::Selectable(name.c_str(), name == node.GetName())) {
+                if (SR_IMMEDIATE_GUI_NS::Selectable(name.c_str(), name == node.GetName())) {
                     node.SetName(name);
                 }
             }
-            SR_GRAPH_GUI_NS::Immediate::EndCombo();
+            SR_IMMEDIATE_GUI_NS::EndCombo();
         }
 
         if (pGraph->GetVariables().count(node.GetName()) == 0) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_FLUX_ERROR_COLOR, "Variable is not declared in the graph!");
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_FLUX_ERROR_COLOR, "Variable is not declared in the graph!");
         }
     }
 
     void FluxEditor::DrawConstantInspector(SR_FLUX_NS::FluxGraphNode& node) {
         auto&& constant = node.GetConstantMutable();
 
-        const float_t lineHeight = SR_GRAPH_GUI_NS::Immediate::GetFontSize() + SR_GRAPH_GUI_NS::Immediate::GetFramePadding().y * 2.0f;
-        const float_t windowWidth = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x;
+        const float_t lineHeight = SR_IMMEDIATE_GUI_NS::GetFontSize() + SR_IMMEDIATE_GUI_NS::GetFramePadding().y * 2.0f;
+        const float_t windowWidth = SR_IMMEDIATE_GUI_NS::GetWindowSize().x;
 
         PropertyDrawerContext context(&constant);
         context.openedByDefault = true;
@@ -886,7 +886,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         /// центр вставляемой группы попадает под курсор
-        const auto pastePosition = m_nodeGraphEditor->ScreenToCanvas(SR_GRAPH_GUI_NS::Immediate::GetMousePos());
+        const auto pastePosition = m_nodeGraphEditor->ScreenToCanvas(SR_IMMEDIATE_GUI_NS::GetMousePos());
 
         if (SR_FLUX_NS::FluxGraphClipboard::Paste(*pGraph, pastePosition).empty()) {
             if (!hadSerializer) {
@@ -906,16 +906,16 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        SR_GRAPH_GUI_NS::Immediate::Text("Graph variables");
-        SR_GRAPH_GUI_NS::Immediate::Separator();
+        SR_IMMEDIATE_GUI_NS::Text("Graph variables");
+        SR_IMMEDIATE_GUI_NS::Separator();
 
         SR_UTILS_NS::StringAtom variableToRemove;
 
         uint32_t index = 0;
         for (auto&& [name, value] : pGraph->GetVariables()) {
-            SR_GRAPH_GUI_NS::Immediate::PushID(name.c_str());
+            SR_IMMEDIATE_GUI_NS::PushID(name.c_str());
 
-            if (SR_GRAPH_GUI_NS::Immediate::Button("X")) {
+            if (SR_IMMEDIATE_GUI_NS::Button("X")) {
                 variableToRemove = name;
             }
             SR_IMMEDIATE_GUI_NS::SameLine();
@@ -955,9 +955,9 @@ namespace SR_CORE_GUI_NS {
                     continue;
                 }
                 m_valueDrawers[index]->Draw(context);
-                SR_GRAPH_GUI_NS::Immediate::EndGroup();
+                SR_IMMEDIATE_GUI_NS::EndGroup();
             }
-            SR_GRAPH_GUI_NS::Immediate::PopID();
+            SR_IMMEDIATE_GUI_NS::PopID();
             index++;
         }
 
@@ -965,19 +965,19 @@ namespace SR_CORE_GUI_NS {
             pGraph->GetVariables().erase(variableToRemove);
         }
 
-        SR_GRAPH_GUI_NS::Immediate::Separator();
+        SR_IMMEDIATE_GUI_NS::Separator();
 
-        SR_GRAPH_GUI_NS::Immediate::InputText("##NewVariable", &m_newVariableName);
-        SR_GRAPH_GUI_NS::Immediate::SameLine();
-        if (SR_GRAPH_GUI_NS::Immediate::Button("Add Variable")) {
+        SR_IMMEDIATE_GUI_NS::InputText("##NewVariable", &m_newVariableName);
+        SR_IMMEDIATE_GUI_NS::SameLine();
+        if (SR_IMMEDIATE_GUI_NS::Button("Add Variable")) {
             if (!m_newVariableName.empty()) {
                 pGraph->GetVariables().emplace(SR_UTILS_NS::StringAtom(m_newVariableName), SR_UTILS_NS::Reflection::Value());
                 m_newVariableName.clear();
             }
         }
 
-        SR_GRAPH_GUI_NS::Immediate::Separator();
-        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_FLUX_HINT_COLOR, "Select a node to edit its properties.");
+        SR_IMMEDIATE_GUI_NS::Separator();
+        SR_IMMEDIATE_GUI_NS::TextColored(SR_FLUX_HINT_COLOR, "Select a node to edit its properties.");
     }
 
     /// ================================================= Верхняя панель ================================================

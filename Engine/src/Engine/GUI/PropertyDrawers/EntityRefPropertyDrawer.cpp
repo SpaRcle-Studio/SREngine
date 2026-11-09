@@ -21,15 +21,15 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().c_str());
+        SR_IMMEDIATE_GUI_NS::PushID(context.pUID);
+        SR_IMMEDIATE_GUI_NS::PushID(context.GetPropertyName().c_str());
 
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
         if (!context.pValue || !context.GetPropertyDisplayName().empty()) {
             const SR_MATH_NS::FVector2 buttonSize = SR_MATH_NS::FVector2(context.fieldTitleWidth, context.fieldHeight);
 
-            if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetPropertyDisplayName().c_str(), buttonSize)) {
+            if (SR_IMMEDIATE_GUI_NS::Button(context.GetPropertyDisplayName().c_str(), buttonSize)) {
                 if (context.pProperty) {
                     if (context.onBeforeChangeCallback) {
                         context.onBeforeChangeCallback(false);
@@ -41,10 +41,10 @@ namespace SR_CORE_GUI_NS {
             }
             DrawTitleContextMenu(context, feedback);
 
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::SameLine();
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth);
+        SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth);
 
         if (auto&& pEntityRefDynamic = dynamic_cast<SR_UTILS_NS::EntityRefDynamic*>(value.GetSRClass())) {
             const auto currentType = pEntityRefDynamic->GetTypeName();
@@ -81,34 +81,34 @@ namespace SR_CORE_GUI_NS {
                     SR_UTILS_NS::FormatTo(formatted, " {} ({})", pEntityRef->GetEntity()->GetEntityId(), entityType.ToCStr());
                 }
 
-                SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor(1.f, 1.f, 1.f, 1.f));
-                SR_GRAPH_GUI_NS::Immediate::PushID((void*)pEntityRef);
-                if (SR_GRAPH_GUI_NS::Immediate::Button(formatted.c_str(), SR_MATH_NS::FVector2(context.fieldWidth, 0))) {
+                SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::Text, SR_MATH_NS::FColor(1.f, 1.f, 1.f, 1.f));
+                SR_IMMEDIATE_GUI_NS::PushID((void*)pEntityRef);
+                if (SR_IMMEDIATE_GUI_NS::Button(formatted.c_str(), SR_MATH_NS::FVector2(context.fieldWidth, 0))) {
                     if (pSceneObject) {
                         if (auto&& pHierarchy = context.pEditor->GetWidget<SR_CORE_GUI_NS::Hierarchy>()) {
                             pHierarchy->SelectGameObject(pSceneObject);
                         }
                     }
                 }
-                SR_GRAPH_GUI_NS::Immediate::PopID();
-                SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
+                SR_IMMEDIATE_GUI_NS::PopID();
+                SR_IMMEDIATE_GUI_NS::PopStyleColor();
             }
             else if (pEntityRef->GetEntityId() != SR_ID_INVALID) {
                 std::string formatted = " {} ({})"_format(pEntityRef->GetEntityId(), entityType.ToCStr());
-                SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
-                SR_GRAPH_GUI_NS::Immediate::ButtonColoredText(formatted.c_str(), SR_MATH_NS::FColor(0.f, 1.f, 0.f, 1.f), SR_MATH_NS::FVector2(context.fieldWidth, 0));
-                SR_GRAPH_GUI_NS::Immediate::EndDisabled();
+                SR_IMMEDIATE_GUI_NS::BeginDisabled();
+                SR_IMMEDIATE_GUI_NS::ButtonColoredText(formatted.c_str(), SR_MATH_NS::FColor(0.f, 1.f, 0.f, 1.f), SR_MATH_NS::FVector2(context.fieldWidth, 0));
+                SR_IMMEDIATE_GUI_NS::EndDisabled();
             }
             else {
                 std::string formatted = " Is not set ({})"_format(entityType.ToCStr());
-                SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
-                SR_GRAPH_GUI_NS::Immediate::ButtonColoredText(formatted.c_str(), SR_MATH_NS::FColor(1.f, 1.f, 0.f, 1.f) , SR_MATH_NS::FVector2(context.fieldWidth, 0));
-                SR_GRAPH_GUI_NS::Immediate::EndDisabled();
+                SR_IMMEDIATE_GUI_NS::BeginDisabled();
+                SR_IMMEDIATE_GUI_NS::ButtonColoredText(formatted.c_str(), SR_MATH_NS::FColor(1.f, 1.f, 0.f, 1.f) , SR_MATH_NS::FVector2(context.fieldWidth, 0));
+                SR_IMMEDIATE_GUI_NS::EndDisabled();
             }
 
-            if (SR_GRAPH_GUI_NS::Immediate::BeginDragDropTarget()) {
-                if (auto&& payload = SR_GRAPH_GUI_NS::Immediate::AcceptDragDropPayload("Hierarchy##Payload")) {
-                    if (auto&& pData = SR_GRAPH_GUI_NS::Immediate::GetDataFromDragDropPayload(payload)) {
+            if (SR_IMMEDIATE_GUI_NS::BeginDragDropTarget()) {
+                if (auto&& payload = SR_IMMEDIATE_GUI_NS::AcceptDragDropPayload("Hierarchy##Payload")) {
+                    if (auto&& pData = SR_IMMEDIATE_GUI_NS::GetDataFromDragDropPayload(payload)) {
                         SR_GRAPH_GUI_NS::PayloadArrayData payloadData = *(SR_GRAPH_GUI_NS::PayloadArrayData*)(pData);
                         std::vector<SR_UTILS_NS::SceneObject::Ptr> sceneObjects;
 
@@ -144,8 +144,8 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
 
-                if (auto&& payload = SR_GRAPH_GUI_NS::Immediate::AcceptDragDropPayload("InspectorComponent##Payload")) {
-                    if (auto&& pData = SR_GRAPH_GUI_NS::Immediate::GetDataFromDragDropPayload(payload)) {
+                if (auto&& payload = SR_IMMEDIATE_GUI_NS::AcceptDragDropPayload("InspectorComponent##Payload")) {
+                    if (auto&& pData = SR_IMMEDIATE_GUI_NS::GetDataFromDragDropPayload(payload)) {
                         SR_GRAPH_GUI_NS::PayloadArrayData payloadData = *(SR_GRAPH_GUI_NS::PayloadArrayData*)(pData);
                         std::list<SR_UTILS_NS::Component::Ptr> components;
                         for (size_t i = 0; i < payloadData.size; ++i) {
@@ -179,21 +179,21 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
 
-                SR_GRAPH_GUI_NS::Immediate::EndDragDropTarget();
+                SR_IMMEDIATE_GUI_NS::EndDragDropTarget();
             }
         }
         else {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map entity ref value!");
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map entity ref value!");
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+        SR_IMMEDIATE_GUI_NS::PopItemWidth();
 
         SetValue(context, feedback, value);
 
-        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+        SR_IMMEDIATE_GUI_NS::PopStyleVar();
 
-        SR_GRAPH_GUI_NS::Immediate::PopID();
-        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
 
         return feedback;
     }

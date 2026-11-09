@@ -20,24 +20,24 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::EnumReflector* pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().TryGetReflector(value.GetEnumType());
         if (!pReflector) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "EnumReflector not found!");
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "EnumReflector not found!");
             return feedback;
         }
 
         if (pReflector->GetEnumVariantInternal() == SR_UTILS_NS::EnumVariant::Undefined) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "EnumReflector variant is not defined!");
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "EnumReflector variant is not defined!");
             return feedback;
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
+        SR_IMMEDIATE_GUI_NS::PushID(context.pUID);
+        SR_IMMEDIATE_GUI_NS::PushID(context.GetPropertyName().ToCStr());
 
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
         if (!context.pValue) {
             const SR_MATH_NS::FVector2 buttonSize = { context.fieldTitleWidth, context.fieldHeight };
 
-            if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetProperty().GetDisplayName().c_str(), buttonSize)) {
+            if (SR_IMMEDIATE_GUI_NS::Button(context.GetProperty().GetDisplayName().c_str(), buttonSize)) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(false);
                 }
@@ -47,24 +47,24 @@ namespace SR_CORE_GUI_NS {
             }
             DrawTitleContextMenu(context, feedback);
 
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::SameLine();
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth);
+        SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth);
         if (pReflector->GetEnumVariantInternal() == SR_UTILS_NS::EnumVariant::Flags) {
             DrawFlags(context, feedback, pReflector, value.Data());
         }
         else {
             DrawSelectable(context, feedback, pReflector, value.Data());
         }
-        SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+        SR_IMMEDIATE_GUI_NS::PopItemWidth();
 
         SetValue(context, feedback, value);
 
-        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+        SR_IMMEDIATE_GUI_NS::PopStyleVar();
 
-        SR_GRAPH_GUI_NS::Immediate::PopID();
-        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
 
         return feedback;
     }
@@ -79,7 +79,7 @@ namespace SR_CORE_GUI_NS {
                 continue;
             }
             bool isSelected = (enumValue & value) != 0;
-            if (SR_GRAPH_GUI_NS::Immediate::Checkbox(names[i].c_str(), &isSelected)) {
+            if (SR_IMMEDIATE_GUI_NS::Checkbox(names[i].c_str(), &isSelected)) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(false);
                 }
@@ -116,13 +116,13 @@ namespace SR_CORE_GUI_NS {
 
         std::optional<uint64_t> selectedIndex = pReflector->GetIndexInternal(enumValue);
         const char* pPrevValue = selectedIndex ? names[selectedIndex.value()].c_str() : "";
-        if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("##Combo", pPrevValue, SR_GRAPH_GUI_NS::Immediate::ComboFlags::NoArrowButton)) {
+        if (SR_IMMEDIATE_GUI_NS::BeginCombo("##Combo", pPrevValue, SR_IMMEDIATE_GUI_NS::ComboFlags::NoArrowButton)) {
             if (!m_comboOpened) {
-                SR_GRAPH_GUI_NS::Immediate::SetKeyboardFocusHere();
+                SR_IMMEDIATE_GUI_NS::SetKeyboardFocusHere();
                 m_comboOpened = true;
             }
 
-            if (SR_GRAPH_GUI_NS::Immediate::InputText("##Search", &m_searchBuffer)) {
+            if (SR_IMMEDIATE_GUI_NS::InputText("##Search", &m_searchBuffer)) {
                 SR_NOOP;
             }
 
@@ -136,17 +136,17 @@ namespace SR_CORE_GUI_NS {
                 }
 
                 bool isSelected = (selectedIndex == i);
-                if (SR_GRAPH_GUI_NS::Immediate::Selectable(names[i].c_str(), isSelected))
+                if (SR_IMMEDIATE_GUI_NS::Selectable(names[i].c_str(), isSelected))
                 {
                     selectedIndex = i;
                     m_searchBuffer = names[i];
-                    SR_GRAPH_GUI_NS::Immediate::CloseCurrentPopup();
+                    SR_IMMEDIATE_GUI_NS::CloseCurrentPopup();
                 }
 
                 if (isSelected)
-                    SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
+                    SR_IMMEDIATE_GUI_NS::SetItemDefaultFocus();
             }
-            SR_GRAPH_GUI_NS::Immediate::EndCombo();
+            SR_IMMEDIATE_GUI_NS::EndCombo();
         }
         else {
             m_comboOpened = false;

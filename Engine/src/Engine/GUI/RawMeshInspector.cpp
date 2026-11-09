@@ -34,16 +34,16 @@ namespace SR_CORE_GUI_NS {
 
     void RawMeshInspector::Draw() {
         if (!m_rawMesh) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "No mesh selected");
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "No mesh selected");
             return;
         }
 
-        auto&& windowsWidth = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x;
+        auto&& windowsWidth = SR_IMMEDIATE_GUI_NS::GetWindowSize().x;
 
         auto&& path = m_rawMesh->GetResourcePath();
-        SR_GRAPH_GUI_NS::Immediate::Text("Mesh: %s", path.c_str());
+        SR_IMMEDIATE_GUI_NS::Text("Mesh: %s", path.c_str());
 
-        if (SR_GRAPH_GUI_NS::Immediate::Button("Save", SR_MATH_NS::FVector2(windowsWidth / 2.f, 0.f))) {
+        if (SR_IMMEDIATE_GUI_NS::Button("Save", SR_MATH_NS::FVector2(windowsWidth / 2.f, 0.f))) {
             SR_UTILS_NS::SRASerializer serializer;
             serializer.SetUseTabs(true);
             m_metaInfo.Save(serializer);
@@ -57,13 +57,13 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-        SR_GRAPH_GUI_NS::Immediate::SameLine();
+        SR_IMMEDIATE_GUI_NS::SameLine();
 
-        if (SR_GRAPH_GUI_NS::Immediate::Button("Discard", SR_MATH_NS::FVector2(windowsWidth / 2.f, 0.f))) {
+        if (SR_IMMEDIATE_GUI_NS::Button("Discard", SR_MATH_NS::FVector2(windowsWidth / 2.f, 0.f))) {
             m_metaInfo = m_rawMesh->GetMetaInfo();
         }
 
-        SR_GRAPH_GUI_NS::Immediate::Separator();
+        SR_IMMEDIATE_GUI_NS::Separator();
 
         auto&& value = SR_UTILS_NS::Reflection::Value::CreateRef(m_metaInfo);
         auto&& context = CreateDrawerContext(&value);
@@ -73,8 +73,8 @@ namespace SR_CORE_GUI_NS {
         context.editorPropertyParams.SetNotNull();
         m_drawer->Draw(context);
 
-        if (SR_GRAPH_GUI_NS::Immediate::GetScrollMaxY() > 0) {
-            m_scrollBarWidth = SR_GRAPH_GUI_NS::Immediate::GetScrollbarSize();
+        if (SR_IMMEDIATE_GUI_NS::GetScrollMaxY() > 0) {
+            m_scrollBarWidth = SR_IMMEDIATE_GUI_NS::GetScrollbarSize();
         }
         else {
             m_scrollBarWidth = 0;
@@ -103,8 +103,8 @@ namespace SR_CORE_GUI_NS {
         PropertyDrawerContext context(pValue);
         context.pEditor = dynamic_cast<EditorGUI*>(GetManager());
 
-        const float_t lineHeight = SR_GRAPH_GUI_NS::Immediate::GetFontSize() + SR_GRAPH_GUI_NS::Immediate::GetFramePadding().y * 2.0f;
-        const float_t windowWidth = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x - m_scrollBarWidth;
+        const float_t lineHeight = SR_IMMEDIATE_GUI_NS::GetFontSize() + SR_IMMEDIATE_GUI_NS::GetFramePadding().y * 2.0f;
+        const float_t windowWidth = SR_IMMEDIATE_GUI_NS::GetWindowSize().x - m_scrollBarWidth;
         context.lineHeight = lineHeight;
         context.axisButtonWidth = context.lineHeight;
         context.spaceWidth = windowWidth;

@@ -20,6 +20,7 @@
 #include <Engine/GUI/FileBrowser.h>
 #include <Engine/GUI/About.h>
 #include <Engine/GUI/CreateNewProject.h>
+#include <Engine/GUI/GameBuildExporter.h>
 #include <Engine/GUI/SceneTools.h>
 #include <Engine/EngineCommands.h>
 #include <Engine/UI/UIButton.h>
@@ -92,7 +93,7 @@ namespace SR_CORE_GUI_NS {
         m_pSettings = SR_UTILS_NS::Asset::Load<EditorSettings>("Editor/Configs/EditorSettings.sras");
         if (m_pSettings) {
             m_pSettings->AddUsePoint();
-            SR_GRAPH_GUI_NS::Immediate::SetTheme(m_pSettings->GetTheme().GetId());
+            SR_IMMEDIATE_GUI_NS::SetTheme(m_pSettings->GetTheme().GetId());
         }
 
         m_cachedScenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("User/PreviousScenePath.cache");
@@ -197,7 +198,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (m_showMetricsWindow) {
-            SR_GRAPH_GUI_NS::Immediate::ShowMetricsWindow(&m_showMetricsWindow);
+            SR_IMMEDIATE_GUI_NS::ShowMetricsWindow(&m_showMetricsWindow);
         }
 
         if (!m_installSamplesAsked && m_samplesShowDelay <= 0.f) {
@@ -245,13 +246,13 @@ namespace SR_CORE_GUI_NS {
         SR_TRACY_ZONE;
         m_dragWindow = false;
 
-        SR_GRAPH_GUI_NS::Immediate::BeginDocking();
+        SR_IMMEDIATE_GUI_NS::BeginDocking();
 
-        if (SR_GRAPH_GUI_NS::Immediate::BeginMainMenuBar()) {
-            if (SR_GRAPH_GUI_NS::Immediate::IsMouseDragging(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left) && SR_GRAPH_GUI_NS::Immediate::IsWindowHovered()) {
+        if (SR_IMMEDIATE_GUI_NS::BeginMainMenuBar()) {
+            if (SR_IMMEDIATE_GUI_NS::IsMouseDragging(SR_IMMEDIATE_GUI_NS::MouseButton::Left) && SR_IMMEDIATE_GUI_NS::IsWindowHovered()) {
                 m_click = Click::Drag;
             }
-            else if (SR_GRAPH_GUI_NS::Immediate::IsMouseReleased(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left)) {
+            else if (SR_IMMEDIATE_GUI_NS::IsMouseReleased(SR_IMMEDIATE_GUI_NS::MouseButton::Left)) {
                 m_click = Click::None;
             }
 
@@ -259,9 +260,9 @@ namespace SR_CORE_GUI_NS {
 
             SR_IMMEDIATE_GUI_NS::BeginHorizontal("EditorGUI::MainMenuBar");
 
-            SR_GRAPH_GUI_NS::Immediate::Text(" | ");
-            SR_GRAPH_GUI_NS::Immediate::Text("%s", "SpaRcle Engine");
-            SR_GRAPH_GUI_NS::Immediate::Text(" | ");
+            SR_IMMEDIATE_GUI_NS::Text(" | ");
+            SR_IMMEDIATE_GUI_NS::Text("%s", "SpaRcle Engine");
+            SR_IMMEDIATE_GUI_NS::Text(" | ");
 
             DrawMenuBar();
 
@@ -275,21 +276,21 @@ namespace SR_CORE_GUI_NS {
 
             SR_MATH_NS::FVector2 buttonSize = { SR_IMMEDIATE_GUI_NS::GetFontSize() * 3.0f, 0.f };
 
-            if (SR_GRAPH_GUI_NS::Immediate::Button("_", buttonSize)) {
+            if (SR_IMMEDIATE_GUI_NS::Button("_", buttonSize)) {
                 pWindow->Collapse();
             }
 
-            if (pWindow->GetState() == Graphics::WindowState::Default && SR_GRAPH_GUI_NS::Immediate::Button("[ ]", buttonSize)) {
+            if (pWindow->GetState() == Graphics::WindowState::Default && SR_IMMEDIATE_GUI_NS::Button("[ ]", buttonSize)) {
                 pWindow->Maximize();
             }
-            else if (pWindow->GetState() == Graphics::WindowState::Maximized && SR_GRAPH_GUI_NS::Immediate::Button("[=]", buttonSize)) {
+            else if (pWindow->GetState() == Graphics::WindowState::Maximized && SR_IMMEDIATE_GUI_NS::Button("[=]", buttonSize)) {
                 pWindow->Restore();
             }
 
             SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::Button, { 0.8f, 0.1f, 0.1f, 1.f });
             SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::ButtonHovered, { 0.9f, 0.1f, 0.1f, 1.f });
             SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::ButtonActive, { 1.f, 0.1f, 0.1f, 1.f });
-            if (SR_GRAPH_GUI_NS::Immediate::Button("×", buttonSize)) {
+            if (SR_IMMEDIATE_GUI_NS::Button("×", buttonSize)) {
                 SR_LOG("EditorGUI::DrawDockingSpace() : close button was clicked!");
                 m_engine->StopEngine();
             }
@@ -298,12 +299,12 @@ namespace SR_CORE_GUI_NS {
             SR_IMMEDIATE_GUI_NS::PopStyleVar(3);
             SR_IMMEDIATE_GUI_NS::EndHorizontal();
 
-            SR_GRAPH_GUI_NS::Immediate::EndMenuBar();
-            SR_GRAPH_GUI_NS::Immediate::FocusTopMostWindowUnderOne();
-            SR_GRAPH_GUI_NS::Immediate::End();
+            SR_IMMEDIATE_GUI_NS::EndMenuBar();
+            SR_IMMEDIATE_GUI_NS::FocusTopMostWindowUnderOne();
+            SR_IMMEDIATE_GUI_NS::End();
         }
 
-        SR_GRAPH_GUI_NS::Immediate::EndDocking();
+        SR_IMMEDIATE_GUI_NS::EndDocking();
     }
 
     void EditorGUI::Save() {
@@ -536,13 +537,13 @@ namespace SR_CORE_GUI_NS {
         ReloadWindows();
         ShowAll();
 
-        SR_GRAPH_GUI_NS::Immediate::LoadIniSettingsFromDisk();
+        SR_IMMEDIATE_GUI_NS::LoadIniSettingsFromDisk();
     }
 
     void EditorGUI::DrawEditorInstanceMenu() {
         SR_TRACY_ZONE;
 
-        if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Instance from file")) {
+        if (SR_IMMEDIATE_GUI_NS::MenuItem("Instance from file")) {
             if (auto&& pScene = m_engine->GetScene()) {
                 auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                 if (auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath.ToString(), { { "Any model", "prefab,pmx,fbx,obj,blend,dae,abc,stl,ply,glb,gltf,x3d,sfg,bvh,3ds,gltf" } }); !path.IsEmpty()) {
@@ -554,10 +555,10 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-        SR_GRAPH_GUI_NS::Immediate::Separator();
+        SR_IMMEDIATE_GUI_NS::Separator();
 
-        if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("UI")) {
-            if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Elements")) {
+        if (SR_IMMEDIATE_GUI_NS::BeginMenu("UI")) {
+            if (SR_IMMEDIATE_GUI_NS::BeginMenu("Elements")) {
                 static SR_UTILS_NS::StringView presets[] = {
                     "Fill",
                     "Top Left",
@@ -571,7 +572,7 @@ namespace SR_CORE_GUI_NS {
                     "Bottom Right"
                 };
                 for (uint32_t i = 0; i < sizeof(presets) / sizeof(presets[0]); ++i) {
-                    if (SR_GRAPH_GUI_NS::Immediate::MenuItem(presets[i].c_str())) {
+                    if (SR_IMMEDIATE_GUI_NS::MenuItem(presets[i].c_str())) {
                         if (auto&& pScene = m_engine->GetScene()) {
                             auto&& pSO = pScene->InstanceGameObject(presets[i]);
                             auto&& pTransform = new SR_UTILS_NS::TransformRect();
@@ -580,22 +581,22 @@ namespace SR_CORE_GUI_NS {
                             InstantiateSO(pSO.StaticCast<SR_UTILS_NS::SceneObject>());
                         }
                     }
-                    SR_GRAPH_GUI_NS::Immediate::Separator();
+                    SR_IMMEDIATE_GUI_NS::Separator();
                 }
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Custom")) {
+                if (SR_IMMEDIATE_GUI_NS::MenuItem("Custom")) {
                     if (auto&& pScene = m_engine->GetScene()) {
                         auto&& pSO = pScene->InstanceGameObject("Custom");
                         pSO->SetTransform(new SR_UTILS_NS::TransformRect());
                         InstantiateSO(pSO.StaticCast<SR_UTILS_NS::SceneObject>());
                     }
                 }
-                SR_GRAPH_GUI_NS::Immediate::EndMenu();
+                SR_IMMEDIATE_GUI_NS::EndMenu();
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Layouts")) {
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Vertical layout group")) {
+            if (SR_IMMEDIATE_GUI_NS::BeginMenu("Layouts")) {
+                if (SR_IMMEDIATE_GUI_NS::MenuItem("Vertical layout group")) {
                     if (auto&& pScene = m_engine->GetScene()) {
                         auto&& pSO = pScene->InstanceGameObject("Vertical layout group"_atom);
                         auto&& pGroup = pSO->AddComponent<SR_UTILS_NS::LayoutGroup>();
@@ -605,9 +606,9 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
 
-                SR_GRAPH_GUI_NS::Immediate::Separator();
+                SR_IMMEDIATE_GUI_NS::Separator();
 
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Horizontal layout group")) {
+                if (SR_IMMEDIATE_GUI_NS::MenuItem("Horizontal layout group")) {
                     if (auto&& pScene = m_engine->GetScene()) {
                         auto&& pSO = pScene->InstanceGameObject("Horizontal layout group"_atom);
                         auto&& pGroup = pSO->AddComponent<SR_UTILS_NS::LayoutGroup>();
@@ -617,9 +618,9 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
 
-                SR_GRAPH_GUI_NS::Immediate::Separator();
+                SR_IMMEDIATE_GUI_NS::Separator();
 
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Layout group")) {
+                if (SR_IMMEDIATE_GUI_NS::MenuItem("Layout group")) {
                     if (auto&& pScene = m_engine->GetScene()) {
                         auto&& pSO = pScene->InstanceGameObject("Layout group"_atom);
                         auto&& pGroup = pSO->AddComponent<SR_UTILS_NS::LayoutGroup>();
@@ -628,9 +629,9 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
 
-                SR_GRAPH_GUI_NS::Immediate::Separator();
+                SR_IMMEDIATE_GUI_NS::Separator();
 
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Layout element")) {
+                if (SR_IMMEDIATE_GUI_NS::MenuItem("Layout element")) {
                     if (auto&& pScene = m_engine->GetScene()) {
                         auto&& pSO = pScene->InstanceGameObject("Layout element"_atom);
                         pSO->AddComponent<SR_UTILS_NS::LayoutElement>();
@@ -639,12 +640,12 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
 
-                SR_GRAPH_GUI_NS::Immediate::EndMenu();
+                SR_IMMEDIATE_GUI_NS::EndMenu();
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Canvas")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Canvas")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pSO = pScene->InstanceGameObject("Canvas"_atom);
                     pSO->AddComponent<SR_GRAPH_UI_NS::Canvas>();
@@ -655,27 +656,27 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Scroll View")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Scroll View")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pSO = pScene->InstanceFromFile("Engine/Prefabs/ScrollView.prefab").StaticCast<SR_UTILS_NS::SceneObject>();
                     InstantiateSO(pSO);
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Button")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Button")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pSO = pScene->InstanceFromFile("Engine/Prefabs/Button.prefab").StaticCast<SR_UTILS_NS::SceneObject>();
                     InstantiateSO(pSO);
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Text")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Text")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pSO = pScene->InstanceGameObject("Text"_atom);
                     if (auto&& pText = pSO->AddComponent<SR_GTYPES_NS::Text>()) {
@@ -686,9 +687,9 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Text Mesh")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Text Mesh")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pSO = pScene->InstanceGameObject("Text Mesh"_atom);
                     if (auto&& pText = pSO->AddComponent<SR_GTYPES_NS::TextMesh>()) {
@@ -699,9 +700,9 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Sprite")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Sprite")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pSO = pScene->InstanceGameObject("Sprite"_atom);
                     pSO->AddComponent<SR_GTYPES_NS::Sprite>();
@@ -710,21 +711,21 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::EndMenu();
+            SR_IMMEDIATE_GUI_NS::EndMenu();
         }
 
-        SR_GRAPH_GUI_NS::Immediate::Separator();
+        SR_IMMEDIATE_GUI_NS::Separator();
 
-        if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Instantiate")) {
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Empty")) {
+        if (SR_IMMEDIATE_GUI_NS::BeginMenu("Instantiate")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Empty")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     InstantiateSO(pScene->InstanceGameObject("New GameObject"_atom).StaticCast<SR_UTILS_NS::SceneObject>());
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Cube")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Cube")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pGameObject = pScene->InstanceGameObject("Cube"_atom);
                     if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
@@ -740,9 +741,9 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Sphere")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Sphere")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pGameObject = pScene->InstanceGameObject("Sphere"_atom);
                     if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
@@ -758,9 +759,9 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Capsule")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Capsule")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pGameObject = pScene->InstanceGameObject("Capsule"_atom);
                     if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
@@ -776,9 +777,9 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Cylinder")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Cylinder")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pGameObject = pScene->InstanceGameObject("Cylinder"_atom);
                     if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
@@ -794,9 +795,9 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Plane")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Plane")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pGameObject = pScene->InstanceGameObject("Plane"_atom);
                     if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
@@ -812,9 +813,9 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Statue")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Statue")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pGameObject = pScene->InstanceGameObject("Statue"_atom);
                     pGameObject->GetTransform()->SetScale(10.f, 10.f, 10.f);
@@ -832,9 +833,9 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Monkey")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Monkey")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pGameObject = pScene->InstanceGameObject("Monkey"_atom);
                     if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
@@ -851,13 +852,13 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::EndMenu();
+            SR_IMMEDIATE_GUI_NS::EndMenu();
         }
 
-        SR_GRAPH_GUI_NS::Immediate::Separator();
+        SR_IMMEDIATE_GUI_NS::Separator();
 
-        if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Render")) {
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Camera")) {
+        if (SR_IMMEDIATE_GUI_NS::BeginMenu("Render")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Camera")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pGameObject = pScene->InstanceGameObject("Camera"_atom);
                     auto&& pCamera = pGameObject->AddComponent<SR_GTYPES_NS::Camera>();
@@ -865,9 +866,9 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Skybox")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Skybox")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pGameObject = pScene->InstanceGameObject("Skybox"_atom);
                     auto&& pSkybox = pGameObject->AddComponent<SR_GTYPES_NS::SkyboxComponent>();
@@ -876,9 +877,9 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Skybox procedural")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Skybox procedural")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pGameObject = pScene->InstanceGameObject("Skybox"_atom);
                     auto&& pSkybox = pGameObject->AddComponent<SR_GTYPES_NS::SkyboxComponent>();
@@ -887,9 +888,9 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Volumetric Clouds")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Volumetric Clouds")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pGameObject = pScene->InstanceGameObject("Volumetric Clouds"_atom);
                     pGameObject->AddComponent<SR_GRAPH_NS::VolumetricClouds>();
@@ -897,9 +898,9 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Volumetric Fog")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Volumetric Fog")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pGameObject = pScene->InstanceGameObject("Volumetric Fog"_atom);
                     pGameObject->AddComponent<SR_GRAPH_NS::VolumetricFog>();
@@ -907,9 +908,9 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Render Target")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Render Target")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pGameObject = pScene->InstanceGameObject("Render Target"_atom);
                     auto&& pRenderTarget = pGameObject->AddComponent<SR_GTYPES_NS::RenderTarget>();
@@ -917,9 +918,9 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Particle Emitter")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Particle Emitter")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pGameObject = pScene->InstanceGameObject("Particle Emitter"_atom);
                     pGameObject->SetLayer("Particles");
@@ -928,13 +929,13 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::EndMenu();
+            SR_IMMEDIATE_GUI_NS::EndMenu();
         }
 
-        SR_GRAPH_GUI_NS::Immediate::Separator();
+        SR_IMMEDIATE_GUI_NS::Separator();
 
-        if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Lights")) {
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Directional light")) {
+        if (SR_IMMEDIATE_GUI_NS::BeginMenu("Lights")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Directional light")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pGameObject = pScene->InstanceGameObject("Directional light"_atom);
                     auto&& pSun = pGameObject->AddComponent<SR_GRAPH_NS::DirectionalLight>();
@@ -959,85 +960,88 @@ namespace SR_CORE_GUI_NS {
                     InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
                 }
             }
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Point light")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Point light")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pGameObject = pScene->InstanceGameObject("Point light"_atom);
                     auto&& pLight = pGameObject->AddComponent<SR_GRAPH_NS::PointLight>();
                     InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
                 }
             }
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Spot light")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Spot light")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pGameObject = pScene->InstanceGameObject("Spot light"_atom);
                     auto&& pLight = pGameObject->AddComponent<SR_GRAPH_NS::SpotLight>();
                     InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
                 }
             }
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Area light")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Area light")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pGameObject = pScene->InstanceGameObject("Area light"_atom);
                     auto&& pLight = pGameObject->AddComponent<SR_GRAPH_NS::AreaLight>();
                     InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
                 }
             }
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Probe light")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Probe light")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pGameObject = pScene->InstanceGameObject("Probe light"_atom);
                     auto&& pLight = pGameObject->AddComponent<SR_GRAPH_NS::ProbeLight>();
                     InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
                 }
             }
-            SR_GRAPH_GUI_NS::Immediate::EndMenu();
+            SR_IMMEDIATE_GUI_NS::EndMenu();
         }
 
-        SR_GRAPH_GUI_NS::Immediate::Separator();
+        SR_IMMEDIATE_GUI_NS::Separator();
 
-        if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("World")) {
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Terrain")) {
+        if (SR_IMMEDIATE_GUI_NS::BeginMenu("World")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Terrain")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pSO = pScene->InstanceFromFile("Engine/Prefabs/Terrain.prefab").StaticCast<SR_UTILS_NS::SceneObject>();
                     InstantiateSO(pSO);
                 }
             }
-            SR_GRAPH_GUI_NS::Immediate::EndMenu();
+            SR_IMMEDIATE_GUI_NS::EndMenu();
         }
     }
 
     void EditorGUI::DrawMenuBar() {
         SR_TRACY_ZONE;
 
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::WindowPadding, SR_MATH_NS::FVector2(8, 8));
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::WindowPadding, SR_MATH_NS::FVector2(8, 8));
 
-        if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("File")) {
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("New project")) {
+        if (SR_IMMEDIATE_GUI_NS::BeginMenu("File")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("New project")) {
                 OpenWidget<CreateNewProject>();
             }
 
             if (SR_UTILS_NS::CLIManager::Instance().GetProjectPath().has_value()) {
-                SR_GRAPH_GUI_NS::Immediate::Separator();
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Close project")) {
+                SR_IMMEDIATE_GUI_NS::Separator();
+                if (SR_IMMEDIATE_GUI_NS::MenuItem("Close project")) {
                     SR_UTILS_NS::CLIManager::Instance().SetProjectPath(std::nullopt);
                     GetEngine()->Reload();
                 }
             }
 
             if (SR_UTILS_NS::VFS::Instance().IsFileExists(".srproject")) {
-                SR_GRAPH_GUI_NS::Immediate::Separator();
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Project settings")) {
+                SR_IMMEDIATE_GUI_NS::Separator();
+                if (SR_IMMEDIATE_GUI_NS::MenuItem("Project settings")) {
                     OpenWidget<AssetInspector>()->Inspect(".srproject");
+                }
+                if (SR_IMMEDIATE_GUI_NS::MenuItem("Build game")) {
+                    OpenWidget<GameBuildExporter>();
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("New scene")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("New scene")) {
                 m_engine->AddSceneToQueue(SR_WORLD_NS::Scene::NewScene(SR_WORLD_NS::SceneLogicType::Asset));
                 CacheScenePath(m_engine->GetScene()->GetPath());
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("New prefab")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("New prefab")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     //TODO: проверку на то, что нынешний префаб не сохранён, чтобы не спамить ими
                     pScene->SaveScene();
@@ -1047,9 +1051,9 @@ namespace SR_CORE_GUI_NS {
                 m_engine->AddSceneToQueue(SR_WORLD_NS::Scene::NewScene(GetNewPrefabPath(), SR_WORLD_NS::SceneLogicType::Prefab));
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Load")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Load")) {
                 auto&& scenesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
 
                 if (auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(scenesPath.ToString(), { { "Scene", "scene,prefab" } }); !path.IsEmpty()) {
@@ -1061,17 +1065,17 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Save")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Save")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     pScene->SaveScene();
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Save at")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Save at")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     const auto scenesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                     if (auto&& path = SR_UTILS_NS::FileDialog::Instance().SaveDialog(scenesPath.ToString(), { { "Scene", "scene,prefab" } }); !path.IsEmpty()) {
@@ -1094,9 +1098,9 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Close scene")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Close scene")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     pScene->SaveScene();
                 }
@@ -1104,58 +1108,64 @@ namespace SR_CORE_GUI_NS {
                 CacheScenePath("NONE");
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Clear shaders cache")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Build")) {
+                OpenWidget<GameBuildExporter>();
+            }
+
+            SR_IMMEDIATE_GUI_NS::Separator();
+
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Clear shaders cache")) {
                 SR_SRSL_NS::SRSLShader::ClearShadersCache();
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Reload scripts")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Reload scripts")) {
                 SR_SCRIPTING_NS::ScriptSystem::Instance().SetReloadRequest();
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Install/Update samples")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Install/Update samples")) {
                 InstallOrUpdateSamples();
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Reload")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Reload")) {
                 m_engine->Reload();
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Exit")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Exit")) {
                 m_engine->StopEngine();
             }
 
-            SR_GRAPH_GUI_NS::Immediate::EndMenu();
+            SR_IMMEDIATE_GUI_NS::EndMenu();
         }
 
-        if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Editor")) {
+        if (SR_IMMEDIATE_GUI_NS::BeginMenu("Editor")) {
             DrawEditorInstanceMenu();
-            SR_GRAPH_GUI_NS::Immediate::EndMenu();
+            SR_IMMEDIATE_GUI_NS::EndMenu();
         }
 
         DrawWindowPage();
 
-        if (SR_GRAPH_GUI_NS::Immediate::MenuItem("About")) {
+        if (SR_IMMEDIATE_GUI_NS::MenuItem("About")) {
             OpenWidget<About>();
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+        SR_IMMEDIATE_GUI_NS::PopStyleVar();
 
-        SR_GRAPH_GUI_NS::Immediate::PushItemWidth(200);
+        SR_IMMEDIATE_GUI_NS::PushItemWidth(200);
 
-        const float_t framerate = SR_GRAPH_GUI_NS::Immediate::GetFramerate();
-        SR_GRAPH_GUI_NS::Immediate::LabelText("##FPSLable", "|   FPS: %.2f (%.2gms)", framerate, framerate > 0.f ? 1000.0f / framerate : 0.0f);
+        const float_t framerate = SR_IMMEDIATE_GUI_NS::GetFramerate();
+        SR_IMMEDIATE_GUI_NS::LabelText("##FPSLable", "|   FPS: %.2f (%.2gms)", framerate, framerate > 0.f ? 1000.0f / framerate : 0.0f);
 
-        SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+        SR_IMMEDIATE_GUI_NS::PopItemWidth();
 
         //auto&& pBuilder = m_engine->GetSceneBuilder();
         //if (pBuilder) {
@@ -1166,39 +1176,39 @@ namespace SR_CORE_GUI_NS {
 
         //    const float_t timeLeft = (float_t)std::chrono::duration_cast<ms>(time).count() / (float_t)SR_CLOCKS_PER_SEC;
 
-        //    SR_GRAPH_GUI_NS::Immediate::Text("|   Last scene build: %.2f sec", timeLeft);
+        //    SR_IMMEDIATE_GUI_NS::Text("|   Last scene build: %.2f sec", timeLeft);
         //}
     }
 
     void EditorGUI::DrawWindowPage() {
         SR_TRACY_ZONE;
 
-        if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Window")) {
+        if (SR_IMMEDIATE_GUI_NS::BeginMenu("Window")) {
             for (auto&& [name, displayName] : m_windowPageWidgets) {
                 if (name == SR_GRAPH_GUI_NS::WidgetContainer::GetClassStaticName()) {
                     continue;
                 }
-                if (SR_GRAPH_GUI_NS::Immediate::MenuItem(displayName.c_str())) {
+                if (SR_IMMEDIATE_GUI_NS::MenuItem(displayName.c_str())) {
                     GetWidget(name)->Open();
                 }
-                SR_GRAPH_GUI_NS::Immediate::Separator();
+                SR_IMMEDIATE_GUI_NS::Separator();
             }
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Reset to default")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Reset to default")) {
                 ResetToDefault();
             }
 
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("ImGui Demo Window")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("ImGui Demo Window")) {
                 m_imGuiDemo = true;
             }
 
-            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Close all")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Close all")) {
                 CloseAllWidgets();
             }
 
-            SR_GRAPH_GUI_NS::Immediate::EndMenu();
+            SR_IMMEDIATE_GUI_NS::EndMenu();
         }
     }
 

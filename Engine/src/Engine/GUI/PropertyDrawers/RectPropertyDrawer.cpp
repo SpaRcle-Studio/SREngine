@@ -18,15 +18,15 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::StringView rectPartType = value.GetTypeInfo().detailedType;
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
+        SR_IMMEDIATE_GUI_NS::PushID(context.pUID);
+        SR_IMMEDIATE_GUI_NS::PushID(context.GetPropertyName().ToCStr());
 
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
         if (!context.pValue) {
             const SR_MATH_NS::FVector2 mainButtonSize = { context.fieldTitleWidth, context.fieldHeight };
 
-            if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetPropertyDisplayName().c_str(), mainButtonSize)) {
+            if (SR_IMMEDIATE_GUI_NS::Button(context.GetPropertyDisplayName().c_str(), mainButtonSize)) {
                 value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
                 value = value.Copy();
                 SetReflectedValue(context, feedback, value);
@@ -34,13 +34,13 @@ namespace SR_CORE_GUI_NS {
             DrawTitleContextMenu(context, feedback);
         }
 
-        SR_GRAPH_GUI_NS::Immediate::SameLine();
+        SR_IMMEDIATE_GUI_NS::SameLine();
 
         const float_t partItemWidth = (context.fieldWidth / static_cast<float_t>(context.maxPartsInLine)) - context.axisButtonWidth;
 
         const SR_MATH_NS::FVector2 buttonSize = { context.axisButtonWidth, context.fieldHeight };
         const float_t drag = context.GetEditorParams().GetDragSpeed();
-        auto partType = SR_GRAPH_GUI_NS::Immediate::GetDataType(rectPartType);
+        auto partType = SR_IMMEDIATE_GUI_NS::GetDataType(rectPartType);
 
         constexpr std::array<const char*, 4> labels = { "X", "Y", "W", "H" };
         static const std::array<SR_MATH_NS::FColor, 4> colors = {
@@ -51,16 +51,16 @@ namespace SR_CORE_GUI_NS {
         };
 
         for (uint8_t i = 0; i < 4; ++i) {
-            SR_GRAPH_GUI_NS::Immediate::PushID(i);
+            SR_IMMEDIATE_GUI_NS::PushID(i);
 
-            SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Button, colors[i]);
-            SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::ButtonHovered, colors[i] + SR_MATH_NS::FColor(0.1f, 0.1f, 0.1f, 0.0f));
-            SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::ButtonActive, colors[i] + SR_MATH_NS::FColor(0.2f, 0.2f, 0.2f, 0.0f));
+            SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::Button, colors[i]);
+            SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::ButtonHovered, colors[i] + SR_MATH_NS::FColor(0.1f, 0.1f, 0.1f, 0.0f));
+            SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::ButtonActive, colors[i] + SR_MATH_NS::FColor(0.2f, 0.2f, 0.2f, 0.0f));
 
             const uint64_t partSize = value.SizeOf() / 4;
             const uint64_t offset = partSize * i;
 
-            if (SR_GRAPH_GUI_NS::Immediate::Button(labels[i], buttonSize)) {
+            if (SR_IMMEDIATE_GUI_NS::Button(labels[i], buttonSize)) {
                 SR_UTILS_NS::Reflection::Value copy = value.Copy();
                 if (context.pProperty && context.GetProperty().GetResetValue().SizeOf() == value.SizeOf()) {
                     if (auto&& pResetData = (char*)context.GetProperty().GetResetValue().Data()) {
@@ -74,40 +74,40 @@ namespace SR_CORE_GUI_NS {
                 SetReflectedValue(context, feedback, copy);
             }
 
-            SR_GRAPH_GUI_NS::Immediate::PopStyleColor(3);
+            SR_IMMEDIATE_GUI_NS::PopStyleColor(3);
 
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::SameLine();
 
-            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(partItemWidth);
+            SR_IMMEDIATE_GUI_NS::PushItemWidth(partItemWidth);
 
-            if (partType == SR_GRAPH_GUI_NS::Immediate::ImmediateDataType::COUNT) {
-                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown part type!");
+            if (partType == SR_IMMEDIATE_GUI_NS::ImmediateDataType::COUNT) {
+                SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown part type!");
             }
             else {
                 SR_UTILS_NS::Reflection::Value copy = value.Copy();
-                if (SR_GRAPH_GUI_NS::Immediate::DragScalar("", partType, (char*)copy.Data() + offset, drag)) {
+                if (SR_IMMEDIATE_GUI_NS::DragScalar("", partType, (char*)copy.Data() + offset, drag)) {
                     SetReflectedValue(context, feedback, copy, true);
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
-            SR_GRAPH_GUI_NS::Immediate::PopID();
+            SR_IMMEDIATE_GUI_NS::PopItemWidth();
+            SR_IMMEDIATE_GUI_NS::PopID();
 
             if (i + 1 < 4) {
                 if ((i + 1) % 2 == 0) {
-                    SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.fieldTitleWidth, 0.0f));
-                    SR_GRAPH_GUI_NS::Immediate::SameLine();
+                    SR_IMMEDIATE_GUI_NS::Dummy(SR_MATH_NS::FVector2(context.fieldTitleWidth, 0.0f));
+                    SR_IMMEDIATE_GUI_NS::SameLine();
                 }
                 else {
-                    SR_GRAPH_GUI_NS::Immediate::SameLine();
+                    SR_IMMEDIATE_GUI_NS::SameLine();
                 }
             }
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+        SR_IMMEDIATE_GUI_NS::PopStyleVar();
 
-        SR_GRAPH_GUI_NS::Immediate::PopID();
-        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
 
         return feedback;
     }
@@ -117,15 +117,15 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
+        SR_IMMEDIATE_GUI_NS::PushID(context.pUID);
+        SR_IMMEDIATE_GUI_NS::PushID(context.GetPropertyName().ToCStr());
 
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
         if (!context.pValue) {
             const SR_MATH_NS::FVector2 mainButtonSize = { context.fieldTitleWidth, context.fieldHeight };
 
-            if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetPropertyDisplayName().c_str(), mainButtonSize)) {
+            if (SR_IMMEDIATE_GUI_NS::Button(context.GetPropertyDisplayName().c_str(), mainButtonSize)) {
                 value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
                 value = value.Copy();
                 SetReflectedValue(context, feedback, value);
@@ -133,7 +133,7 @@ namespace SR_CORE_GUI_NS {
             DrawTitleContextMenu(context, feedback);
         }
 
-        SR_GRAPH_GUI_NS::Immediate::SameLine();
+        SR_IMMEDIATE_GUI_NS::SameLine();
 
         const float_t partItemWidth =   context.fieldWidth - context.axisButtonWidth * 2.2f;
 
@@ -152,22 +152,22 @@ namespace SR_CORE_GUI_NS {
         auto&& pRect = reinterpret_cast<SR_MATH_NS::FRect*>(copy.Data());
 
         for (uint8_t i = 0; i < 4; ++i) {
-            SR_GRAPH_GUI_NS::Immediate::PushID(i);
+            SR_IMMEDIATE_GUI_NS::PushID(i);
 
             if (i > 0) {
-                SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.fieldTitleWidth, 0.0f));
-                SR_GRAPH_GUI_NS::Immediate::SameLine();
+                SR_IMMEDIATE_GUI_NS::Dummy(SR_MATH_NS::FVector2(context.fieldTitleWidth, 0.0f));
+                SR_IMMEDIATE_GUI_NS::SameLine();
             }
 
-            SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Button, colors[i]);
-            SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::ButtonHovered, colors[i] + SR_MATH_NS::FColor(0.1f, 0.1f, 0.1f, 0.0f));
-            SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::ButtonActive, colors[i] + SR_MATH_NS::FColor(0.2f, 0.2f, 0.2f, 0.0f));
+            SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::Button, colors[i]);
+            SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::ButtonHovered, colors[i] + SR_MATH_NS::FColor(0.1f, 0.1f, 0.1f, 0.0f));
+            SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::ButtonActive, colors[i] + SR_MATH_NS::FColor(0.2f, 0.2f, 0.2f, 0.0f));
 
             const uint64_t partSize = value.SizeOf() / 4;
             const uint64_t offset = partSize * i;
 
 
-            if (SR_GRAPH_GUI_NS::Immediate::Button(labels[i], buttonSize)) {
+            if (SR_IMMEDIATE_GUI_NS::Button(labels[i], buttonSize)) {
                 if (context.pProperty && context.GetProperty().GetResetValue().SizeOf() == value.SizeOf()) {
                     if (auto&& pResetData = (char*)context.GetProperty().GetResetValue().Data()) {
                         std::memcpy((char*)copy.Data() + offset, pResetData + offset, partSize);
@@ -180,43 +180,43 @@ namespace SR_CORE_GUI_NS {
                 SetReflectedValue(context, feedback, copy);
             }
 
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::SameLine();
 
-            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(partItemWidth);
+            SR_IMMEDIATE_GUI_NS::PushItemWidth(partItemWidth);
 
             if (i == 0) {
-                if (SR_GRAPH_GUI_NS::Immediate::DragFloat("", &pRect->left, drag)) {
+                if (SR_IMMEDIATE_GUI_NS::DragFloat("", &pRect->left, drag)) {
                     feedback.isChanged = true;
                     SetReflectedValue(context, feedback, copy, true);
                 }
             }
             else if (i == 1) {
-                if (SR_GRAPH_GUI_NS::Immediate::DragFloat("", &pRect->top, drag)) {
+                if (SR_IMMEDIATE_GUI_NS::DragFloat("", &pRect->top, drag)) {
                     feedback.isChanged = true;
                     SetReflectedValue(context, feedback, copy, true);
                 }
             }
             else if (i == 2) {
-                if (SR_GRAPH_GUI_NS::Immediate::DragFloat("", &pRect->right, drag)) {
+                if (SR_IMMEDIATE_GUI_NS::DragFloat("", &pRect->right, drag)) {
                     feedback.isChanged = true;
                     SetReflectedValue(context, feedback, copy, true);
                 }
             }
             else if (i == 3) {
-                if (SR_GRAPH_GUI_NS::Immediate::DragFloat("", &pRect->bottom, drag)) {
+                if (SR_IMMEDIATE_GUI_NS::DragFloat("", &pRect->bottom, drag)) {
                     feedback.isChanged = true;
                     SetReflectedValue(context, feedback, copy, true);
                 }
             }
 
-            SR_GRAPH_GUI_NS::Immediate::PopStyleColor(3);
-            SR_GRAPH_GUI_NS::Immediate::PopID();
+            SR_IMMEDIATE_GUI_NS::PopStyleColor(3);
+            SR_IMMEDIATE_GUI_NS::PopID();
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+        SR_IMMEDIATE_GUI_NS::PopStyleVar();
 
-        SR_GRAPH_GUI_NS::Immediate::PopID();
-        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
 
         return feedback;
     }

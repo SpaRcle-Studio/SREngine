@@ -22,7 +22,7 @@
 #endif
 
 #ifdef SR_USE_IMGUI
-namespace SR_GRAPH_GUI_NS::Immediate {
+namespace SR_IMMEDIATE_GUI_NS {
     const char* EMSCRIPTEN_CANVAS_ID = "#srengine-canvas";
     namespace {
         SR_UTILS_NS::Subscription g_inputTextSubscription;
@@ -578,7 +578,7 @@ namespace SR_GRAPH_GUI_NS::Immediate {
     }
 }
 #else
-namespace SR_GRAPH_GUI_NS::Immediate {
+namespace SR_IMMEDIATE_GUI_NS {
     bool PlatformInit(const PlatformInitInfo& info) { return false; }
     void PlatformShutdown(PlatformBackend backend) { }
     void PlatformNewFrame(PlatformBackend backend, const PlatformNewFrameInfo& info) { }

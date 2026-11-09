@@ -7,7 +7,7 @@
 
 #if defined(SR_USE_IMGUI) && defined(SR_EMSCRIPTEN)
 
-namespace SR_GRAPH_GUI_NS::Immediate {
+namespace SR_IMMEDIATE_GUI_NS {
     namespace {
         struct WebGPURenderer {
             WebGPURendererCreateInfo info;

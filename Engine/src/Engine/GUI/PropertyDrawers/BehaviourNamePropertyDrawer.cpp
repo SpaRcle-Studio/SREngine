@@ -27,25 +27,25 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetProperty().GetName().c_str());
+        SR_IMMEDIATE_GUI_NS::PushID(context.pUID);
+        SR_IMMEDIATE_GUI_NS::PushID(context.GetProperty().GetName().c_str());
 
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
         if (!context.pValue) {
             const SR_MATH_NS::FVector2 buttonSize = { context.fieldTitleWidth, context.fieldHeight };
 
-            if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetProperty().GetDisplayName().c_str(), buttonSize)) {
+            if (SR_IMMEDIATE_GUI_NS::Button(context.GetProperty().GetDisplayName().c_str(), buttonSize)) {
                 value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
                 value = value.Copy();
                 SetReflectedValue(context, feedback, value);
             }
             DrawTitleContextMenu(context, feedback);
 
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::SameLine();
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth);
+        SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth);
 
         auto&& pBehaviour = dynamic_cast<SR_SCRIPTING_NS::Behaviour*>(context.pOwner);
         SRAssert2(pBehaviour, "pOwner is not a Behaviour!");
@@ -54,23 +54,23 @@ namespace SR_CORE_GUI_NS {
             if (auto&& pStringAtom = value.Cast<SR_UTILS_NS::StringAtom>()) {
                 const bool markAsInvalid = !pBehaviour->IsInstanceValid();
                 if (markAsInvalid) {
-                    SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f));
+                    SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::Text, SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f));
                 }
 
                 std::optional<uint64_t> selectedIndex = GetSelectedIndex(*pStringAtom);
 
                 const char* pPrevValue = selectedIndex ? m_existingNames[selectedIndex.value()].c_str() : pStringAtom->c_str();
-                if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("##Combo", pPrevValue, SR_GRAPH_GUI_NS::Immediate::ComboFlags::NoArrowButton)) {
+                if (SR_IMMEDIATE_GUI_NS::BeginCombo("##Combo", pPrevValue, SR_IMMEDIATE_GUI_NS::ComboFlags::NoArrowButton)) {
                     if (markAsInvalid) {
-                        SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
+                        SR_IMMEDIATE_GUI_NS::PopStyleColor();
                     }
 
                     if (!m_comboOpened) {
-                        SR_GRAPH_GUI_NS::Immediate::SetKeyboardFocusHere();
+                        SR_IMMEDIATE_GUI_NS::SetKeyboardFocusHere();
                         m_comboOpened = true;
                     }
 
-                    if (SR_GRAPH_GUI_NS::Immediate::InputText("##Search", &m_searchBuffer)) {
+                    if (SR_IMMEDIATE_GUI_NS::InputText("##Search", &m_searchBuffer)) {
                         SR_NOOP;
                     }
 
@@ -80,21 +80,21 @@ namespace SR_CORE_GUI_NS {
                         }
 
                         bool isSelected = (selectedIndex == i);
-                        if (SR_GRAPH_GUI_NS::Immediate::Selectable(m_existingNames[i].c_str(), isSelected)) {
+                        if (SR_IMMEDIATE_GUI_NS::Selectable(m_existingNames[i].c_str(), isSelected)) {
                             selectedIndex = i;
                             m_searchBuffer = m_existingNames[i];
-                            SR_GRAPH_GUI_NS::Immediate::CloseCurrentPopup();
+                            SR_IMMEDIATE_GUI_NS::CloseCurrentPopup();
                         }
 
                         if (isSelected) {
-                            SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
+                            SR_IMMEDIATE_GUI_NS::SetItemDefaultFocus();
                         }
                     }
-                    SR_GRAPH_GUI_NS::Immediate::EndCombo();
+                    SR_IMMEDIATE_GUI_NS::EndCombo();
                 }
                 else {
                     if (markAsInvalid) {
-                        SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
+                        SR_IMMEDIATE_GUI_NS::PopStyleColor();
                     }
                     m_comboOpened = false;
                     m_searchBuffer.clear();
@@ -105,19 +105,19 @@ namespace SR_CORE_GUI_NS {
                 }
             }
             else {
-                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map string atom value!");
+                SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map string atom value!");
             }
         }
         else {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Invalid string type!");
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Invalid string type!");
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+        SR_IMMEDIATE_GUI_NS::PopItemWidth();
 
-        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+        SR_IMMEDIATE_GUI_NS::PopStyleVar();
 
-        SR_GRAPH_GUI_NS::Immediate::PopID();
-        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
 
         return feedback;
     }

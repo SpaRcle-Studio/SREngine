@@ -6,7 +6,7 @@
 
 #ifdef SR_USE_IMGUI
 
-namespace SR_GRAPH_GUI_NS::Immediate::Experimental {
+namespace SR_IMMEDIATE_GUI_NS::Experimental {
     namespace {
         enum class LayoutKind : uint8_t { Horizontal, Vertical };
 

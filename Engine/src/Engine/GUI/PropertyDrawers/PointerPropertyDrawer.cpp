@@ -23,16 +23,16 @@ namespace SR_CORE_GUI_NS {
 
         auto&& editorParams = context.GetEditorParams();
 
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.pUID);
-        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
+        SR_IMMEDIATE_GUI_NS::PushID(context.pUID);
+        SR_IMMEDIATE_GUI_NS::PushID(context.GetPropertyName().ToCStr());
 
-        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
-        auto&& pWindow = SR_GRAPH_GUI_NS::Immediate::GetCurrentWindow();
-        auto&& pDrawList = SR_GRAPH_GUI_NS::Immediate::GetWindowDrawList(pWindow);
-        const auto cursorPos = SR_GRAPH_GUI_NS::Immediate::GetWindowCursorPos(pWindow);
+        auto&& pWindow = SR_IMMEDIATE_GUI_NS::GetCurrentWindow();
+        auto&& pDrawList = SR_IMMEDIATE_GUI_NS::GetWindowDrawList(pWindow);
+        const auto cursorPos = SR_IMMEDIATE_GUI_NS::GetWindowCursorPos(pWindow);
 
-        const auto dir = m_isOpened ? SR_GRAPH_GUI_NS::Immediate::Direction::Down : SR_GRAPH_GUI_NS::Immediate::Direction::Right;
+        const auto dir = m_isOpened ? SR_IMMEDIATE_GUI_NS::Direction::Down : SR_IMMEDIATE_GUI_NS::Direction::Right;
 
         const SR_UTILS_NS::StringView typeName = value.GetTypeInfo().pNext[0] ? SR_UTILS_NS::StringView(value.GetTypeInfo().pNext[0]->detailedType.ToStringView()) : SR_UTILS_NS::StringView();
 
@@ -45,47 +45,47 @@ namespace SR_CORE_GUI_NS {
 
         if (context.pValue && !context.noHeader) {
             const SR_MATH_NS::FVector2 arrowPos = cursorPos + SR_MATH_NS::FVector2(5, 5);
-            SR_GRAPH_GUI_NS::Immediate::RenderArrow(pDrawList, arrowPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f);
+            SR_IMMEDIATE_GUI_NS::RenderArrow(pDrawList, arrowPos, SR_IMMEDIATE_GUI_NS::GetColorU32(SR_IMMEDIATE_GUI_NS::StyleColor::Text), dir, 1.f);
 
             const SR_MATH_NS::FVector2 mainButtonSize = { 30, context.fieldHeight };
 
-            auto&& stackSize = SR_GRAPH_GUI_NS::Immediate::BeginForceEnabled();
-            if (SR_GRAPH_GUI_NS::Immediate::Button("", mainButtonSize)) {
+            auto&& stackSize = SR_IMMEDIATE_GUI_NS::BeginForceEnabled();
+            if (SR_IMMEDIATE_GUI_NS::Button("", mainButtonSize)) {
                 m_isOpened = !m_isOpened;
             }
-            SR_GRAPH_GUI_NS::Immediate::EndForceEnabled(stackSize);
+            SR_IMMEDIATE_GUI_NS::EndForceEnabled(stackSize);
         }
         else if (!context.noHeader) {
             const SR_MATH_NS::FVector2 arrowPos = cursorPos + SR_MATH_NS::FVector2(1, 5);
-            SR_GRAPH_GUI_NS::Immediate::RenderArrow(pDrawList, arrowPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f);
+            SR_IMMEDIATE_GUI_NS::RenderArrow(pDrawList, arrowPos, SR_IMMEDIATE_GUI_NS::GetColorU32(SR_IMMEDIATE_GUI_NS::StyleColor::Text), dir, 1.f);
 
             //const float_t arrowWidth = context.lineHeight * 0.75f;
-            //SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(arrowWidth, 0));
+            //SR_IMMEDIATE_GUI_NS::Dummy(SR_MATH_NS::FVector2(arrowWidth, 0));
 
-            //SR_GRAPH_GUI_NS::Immediate::SameLine();
+            //SR_IMMEDIATE_GUI_NS::SameLine();
 
             //const SR_MATH_NS::FVector2 mainButtonSize = { SR_MAX(context.fieldTitleWidth - arrowWidth, 0), context.fieldHeight };
             const SR_MATH_NS::FVector2 mainButtonSize = { SR_MAX(context.fieldTitleWidth, 0), context.fieldHeight };
 
             SR_UTILS_NS::StringAtom displayName = context.GetPropertyDisplayName();
-            auto&& stackSize = SR_GRAPH_GUI_NS::Immediate::BeginForceEnabled();
-            if (SR_GRAPH_GUI_NS::Immediate::Button(displayName.c_str(), mainButtonSize)) {
+            auto&& stackSize = SR_IMMEDIATE_GUI_NS::BeginForceEnabled();
+            if (SR_IMMEDIATE_GUI_NS::Button(displayName.c_str(), mainButtonSize)) {
                 m_isOpened = !m_isOpened;
             }
-            SR_GRAPH_GUI_NS::Immediate::EndForceEnabled(stackSize);
+            SR_IMMEDIATE_GUI_NS::EndForceEnabled(stackSize);
         }
 
         SR_HTYPES_NS::SharedPtrBase* pSharedPtrBase = value.GetSharedPtrBase();
         if (!pSharedPtrBase) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "PointerPropertyDrawer::Draw() : value is not a smart pointer!");
-            SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
-            SR_GRAPH_GUI_NS::Immediate::PopID();
-            SR_GRAPH_GUI_NS::Immediate::PopID();
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "PointerPropertyDrawer::Draw() : value is not a smart pointer!");
+            SR_IMMEDIATE_GUI_NS::PopStyleVar();
+            SR_IMMEDIATE_GUI_NS::PopID();
+            SR_IMMEDIATE_GUI_NS::PopID();
             return feedback;
         }
 
         if (!context.noHeader) {
-            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_IMMEDIATE_GUI_NS::SameLine();
 
             if (m_default.empty()) {
                 m_default = "{} (nullptr)"_format(typeName);
@@ -119,19 +119,19 @@ namespace SR_CORE_GUI_NS {
 
             const char* pPrevValue = selectedIndex.has_value() ? m_typeNames[selectedIndex.value()].data() : m_default.c_str();
 
-            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth);
+            SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth);
 
             if (m_typeNames.size() < 1) {
-                SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
+                SR_IMMEDIATE_GUI_NS::BeginDisabled();
             }
 
-            if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("##Combo", pPrevValue, SR_GRAPH_GUI_NS::Immediate::ComboFlags::NoArrowButton)) {
+            if (SR_IMMEDIATE_GUI_NS::BeginCombo("##Combo", pPrevValue, SR_IMMEDIATE_GUI_NS::ComboFlags::NoArrowButton)) {
                 if (!m_comboOpened) {
-                    SR_GRAPH_GUI_NS::Immediate::SetKeyboardFocusHere();
+                    SR_IMMEDIATE_GUI_NS::SetKeyboardFocusHere();
                     m_comboOpened = true;
                 }
 
-                if (SR_GRAPH_GUI_NS::Immediate::InputText("##Search", &m_searchBuffer)) {
+                if (SR_IMMEDIATE_GUI_NS::InputText("##Search", &m_searchBuffer)) {
                     SR_NOOP;
                 }
 
@@ -141,18 +141,18 @@ namespace SR_CORE_GUI_NS {
                     }
 
                     bool isSelected = (selectedIndex == i);
-                    if (SR_GRAPH_GUI_NS::Immediate::Selectable(m_typeNames[i].data(), isSelected))
+                    if (SR_IMMEDIATE_GUI_NS::Selectable(m_typeNames[i].data(), isSelected))
                     {
                         selectedIndex = i;
                         m_searchBuffer = m_typeNames[i];
-                        SR_GRAPH_GUI_NS::Immediate::CloseCurrentPopup();
+                        SR_IMMEDIATE_GUI_NS::CloseCurrentPopup();
                     }
 
                     if (isSelected) {
-                        SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
+                        SR_IMMEDIATE_GUI_NS::SetItemDefaultFocus();
                     }
                 }
-                SR_GRAPH_GUI_NS::Immediate::EndCombo();
+                SR_IMMEDIATE_GUI_NS::EndCombo();
             }
             else {
                 m_comboOpened = false;
@@ -160,17 +160,17 @@ namespace SR_CORE_GUI_NS {
             }
 
             if (m_typeNames.size() < 1) {
-                SR_GRAPH_GUI_NS::Immediate::EndDisabled();
+                SR_IMMEDIATE_GUI_NS::EndDisabled();
             }
 
-            if (SR_GRAPH_GUI_NS::Immediate::BeginPopupContextItem("PointerPropertyContextMenu")) {
+            if (SR_IMMEDIATE_GUI_NS::BeginPopupContextItem("PointerPropertyContextMenu")) {
                 auto&& pSerializable = dynamic_cast<SR_UTILS_NS::Serializable*>(pClassValue);
 
                 static const SR_UTILS_NS::SerializationId serializeId = SR_UTILS_NS::SerializationId::Create("PointerPropertyDrawerClipboard");
 
                 CustomContextMenu(context, pClassValue);
 
-                if (pSerializable && SR_GRAPH_GUI_NS::Immediate::MenuItem("Copy")) {
+                if (pSerializable && SR_IMMEDIATE_GUI_NS::MenuItem("Copy")) {
                     SR_UTILS_NS::SRASerializer serializer;
 
                     serializer.BeginObject(serializeId);
@@ -186,7 +186,7 @@ namespace SR_CORE_GUI_NS {
                 }
 
                 if (auto&& clipboard = SR_PLATFORM_NS::GetClipboardText(); clipboard.starts_with(serializeId.GetName())) {
-                    if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Paste (replace)")) {
+                    if (SR_IMMEDIATE_GUI_NS::MenuItem("Paste (replace)")) {
                         clipboard.erase(0, strlen(serializeId.GetName()));
                         SR_UTILS_NS::SRADeserializer deserializer;
                         SR_UTILS_NS::String decoded;
@@ -219,10 +219,10 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
 
-                SR_GRAPH_GUI_NS::Immediate::EndPopup();
+                SR_IMMEDIATE_GUI_NS::EndPopup();
             }
 
-            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
+            SR_IMMEDIATE_GUI_NS::PopItemWidth();
 
             if (selectedIndex && !feedback.isChanged) {
                 SRClass* pNew = nullptr;
@@ -263,7 +263,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (!pClassValue && context.noHeader) {
-            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "PointerPropertyDrawer::Draw() : value is nullptr!");
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "PointerPropertyDrawer::Draw() : value is nullptr!");
         }
         else if (m_isOpened && pClassValue) {
             const SR_UTILS_NS::StringAtom factoryName = pClassValue->GetMeta()->GetFactoryName();
@@ -279,8 +279,8 @@ namespace SR_CORE_GUI_NS {
             }
 
             if (!context.pValue && !context.noHeader) {
-                SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.GetArrowWidth(), 5.0f));
-                SR_GRAPH_GUI_NS::Immediate::SameLine();
+                SR_IMMEDIATE_GUI_NS::Dummy(SR_MATH_NS::FVector2(context.GetArrowWidth(), 5.0f));
+                SR_IMMEDIATE_GUI_NS::SameLine();
             }
 
             PropertyDrawerContext propertyContext = context;
@@ -300,19 +300,19 @@ namespace SR_CORE_GUI_NS {
             propertyContext.pOwner = pClassValue;
             propertyContext.noHeader = true;
 
-            SR_GRAPH_GUI_NS::Immediate::BeginGroup();
+            SR_IMMEDIATE_GUI_NS::BeginGroup();
             PropertyDrawerFeedback propertyFeedback = m_objectDrawer->Draw(propertyContext);
-            SR_GRAPH_GUI_NS::Immediate::EndGroup();
+            SR_IMMEDIATE_GUI_NS::EndGroup();
 
             if (propertyFeedback.isChanged) {
                 feedback.isChanged = true;
             }
         }
 
-        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
+        SR_IMMEDIATE_GUI_NS::PopStyleVar();
 
-        SR_GRAPH_GUI_NS::Immediate::PopID();
-        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
 
         SetValue(context, feedback, value);
 

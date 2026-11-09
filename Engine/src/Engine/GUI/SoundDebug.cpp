@@ -25,50 +25,50 @@ namespace SR_CORE_GUI_NS {
 
         const auto listeners = soundManager.GetListeners();
         for (auto&& pListener : listeners) {
-            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_IMMEDIATE_GUI_NS::Separator();
             auto&& optParams = soundManager.GetListenerParams(pListener);
             if (!optParams) {
-                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to get params!");
+                SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to get params!");
                 continue;
             }
 
             const SR_AUDIO_NS::ListenerData& params = *optParams;
 
-            SR_GRAPH_GUI_NS::Immediate::Text("Gain: %.2f", params.gain);
-            SR_GRAPH_GUI_NS::Immediate::Text("Distance model: %s", SR_UTILS_NS::EnumReflector::ToStringAtom(params.distanceModel).c_str());
-            SR_GRAPH_GUI_NS::Immediate::Text("Position: %.2f %.2f %.2f", params.position.x, params.position.y, params.position.z);
-            SR_GRAPH_GUI_NS::Immediate::Text("Orientation: %.2f %.2f %.2f %.2f %.2f %.2f", params.orientation.x, params.orientation.y, params.orientation.z, params.orientation.w, params.orientation.x, params.orientation.y);
-            SR_GRAPH_GUI_NS::Immediate::Text("Velocity: %.2f %.2f %.2f", params.velocity.x, params.velocity.y, params.velocity.z);
+            SR_IMMEDIATE_GUI_NS::Text("Gain: %.2f", params.gain);
+            SR_IMMEDIATE_GUI_NS::Text("Distance model: %s", SR_UTILS_NS::EnumReflector::ToStringAtom(params.distanceModel).c_str());
+            SR_IMMEDIATE_GUI_NS::Text("Position: %.2f %.2f %.2f", params.position.x, params.position.y, params.position.z);
+            SR_IMMEDIATE_GUI_NS::Text("Orientation: %.2f %.2f %.2f %.2f %.2f %.2f", params.orientation.x, params.orientation.y, params.orientation.z, params.orientation.w, params.orientation.x, params.orientation.y);
+            SR_IMMEDIATE_GUI_NS::Text("Velocity: %.2f %.2f %.2f", params.velocity.x, params.velocity.y, params.velocity.z);
         }
 
-        SR_GRAPH_GUI_NS::Immediate::Separator();
+        SR_IMMEDIATE_GUI_NS::Separator();
 
         const auto playStack = soundManager.GetPlayStack();
         for (auto&& pPlayData : playStack) {
             auto&& optParams = soundManager.GetSourceParams(pPlayData);
-            SR_GRAPH_GUI_NS::Immediate::Separator();
-            SR_GRAPH_GUI_NS::Immediate::Text("Sound: %s", pPlayData->pSound->GetResourcePath().c_str());
+            SR_IMMEDIATE_GUI_NS::Separator();
+            SR_IMMEDIATE_GUI_NS::Text("Sound: %s", pPlayData->pSound->GetResourcePath().c_str());
             if (!optParams) {
-                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to get params!");
+                SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to get params!");
                 continue;
             }
 
             const SR_AUDIO_NS::PlayParams& params = *optParams;
 
-            SR_GRAPH_GUI_NS::Immediate::Text("Volume: %.2f", params.gain.value());
-            SR_GRAPH_GUI_NS::Immediate::Text("Pitch: %.2f", params.pitch.value());
-            SR_GRAPH_GUI_NS::Immediate::Text("Max distance: %.2f", params.maxDistance.value());
-            SR_GRAPH_GUI_NS::Immediate::Text("reference distance: %.2f", params.referenceDistance.value());
-            SR_GRAPH_GUI_NS::Immediate::Text("Rolloff factor: %.2f", params.rolloffFactor.value());
-            SR_GRAPH_GUI_NS::Immediate::Text("Cone inner angle: %.2f", params.coneInnerAngle.value());
-            SR_GRAPH_GUI_NS::Immediate::Text("Position: %.2f %.2f %.2f", params.position.value().x, params.position.value().y, params.position.value().z);
-            SR_GRAPH_GUI_NS::Immediate::Text("Direction: %.2f %.2f %.2f", params.direction.value().x, params.direction.value().y, params.direction.value().z);
-            SR_GRAPH_GUI_NS::Immediate::Text("Velocity: %.2f %.2f %.2f", params.velocity.value().x, params.velocity.value().y, params.velocity.value().z);
-            SR_GRAPH_GUI_NS::Immediate::Text("Orientation: %.2f %.2f %.2f %.2f %.2f %.2f", params.orientation.value().x, params.orientation.value().y, params.orientation.value().z, params.orientation.value().w, params.orientation.value().x, params.orientation.value().y);
-            SR_GRAPH_GUI_NS::Immediate::Text("Loop: %s", params.loop.value() ? "true" : "false");
-            SR_GRAPH_GUI_NS::Immediate::Text("Offset: %.2f", pPlayData->offset);
-            SR_GRAPH_GUI_NS::Immediate::Text("State: %s", pPlayData->isPlaying ? "Playing" : "Stopped");
-            SR_GRAPH_GUI_NS::Immediate::Text("Failed: %s", pPlayData->isFailed ? "true" : "false");
+            SR_IMMEDIATE_GUI_NS::Text("Volume: %.2f", params.gain.value());
+            SR_IMMEDIATE_GUI_NS::Text("Pitch: %.2f", params.pitch.value());
+            SR_IMMEDIATE_GUI_NS::Text("Max distance: %.2f", params.maxDistance.value());
+            SR_IMMEDIATE_GUI_NS::Text("reference distance: %.2f", params.referenceDistance.value());
+            SR_IMMEDIATE_GUI_NS::Text("Rolloff factor: %.2f", params.rolloffFactor.value());
+            SR_IMMEDIATE_GUI_NS::Text("Cone inner angle: %.2f", params.coneInnerAngle.value());
+            SR_IMMEDIATE_GUI_NS::Text("Position: %.2f %.2f %.2f", params.position.value().x, params.position.value().y, params.position.value().z);
+            SR_IMMEDIATE_GUI_NS::Text("Direction: %.2f %.2f %.2f", params.direction.value().x, params.direction.value().y, params.direction.value().z);
+            SR_IMMEDIATE_GUI_NS::Text("Velocity: %.2f %.2f %.2f", params.velocity.value().x, params.velocity.value().y, params.velocity.value().z);
+            SR_IMMEDIATE_GUI_NS::Text("Orientation: %.2f %.2f %.2f %.2f %.2f %.2f", params.orientation.value().x, params.orientation.value().y, params.orientation.value().z, params.orientation.value().w, params.orientation.value().x, params.orientation.value().y);
+            SR_IMMEDIATE_GUI_NS::Text("Loop: %s", params.loop.value() ? "true" : "false");
+            SR_IMMEDIATE_GUI_NS::Text("Offset: %.2f", pPlayData->offset);
+            SR_IMMEDIATE_GUI_NS::Text("State: %s", pPlayData->isPlaying ? "Playing" : "Stopped");
+            SR_IMMEDIATE_GUI_NS::Text("Failed: %s", pPlayData->isFailed ? "true" : "false");
         }
     }
 }

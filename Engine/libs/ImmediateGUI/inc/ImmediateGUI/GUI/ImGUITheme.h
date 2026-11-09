@@ -9,7 +9,7 @@
 
 #include <Utils/Resources/Asset.h>
 
-namespace SR_GRAPH_GUI_NS::Immediate {
+namespace SR_IMMEDIATE_GUI_NS {
     SR_ENUM_NS_CLASS_T(ImGUIThemeVec2Var, uint8_t,
         WindowPadding,
         WindowMinSize,
@@ -103,13 +103,13 @@ namespace SR_GRAPH_GUI_NS::Immediate {
 
     private:
         /// @property @onChanged(Apply)
-        SR_UTILS_NS::Map<SR_GRAPH_GUI_NS::Immediate::ImGUIThemeBoolVar, bool> m_boolSettings;
+        SR_UTILS_NS::Map<SR_IMMEDIATE_GUI_NS::ImGUIThemeBoolVar, bool> m_boolSettings;
         /// @property @onChanged(Apply)
-        SR_UTILS_NS::Map<SR_GRAPH_GUI_NS::Immediate::ImGUIThemeFloatVar, float_t> m_floatSettings;
+        SR_UTILS_NS::Map<SR_IMMEDIATE_GUI_NS::ImGUIThemeFloatVar, float_t> m_floatSettings;
         /// @property @onChanged(Apply)
-        SR_UTILS_NS::Map<SR_GRAPH_GUI_NS::Immediate::ImGUIThemeVec2Var, SR_MATH_NS::FVector2> m_vec2Settings;
+        SR_UTILS_NS::Map<SR_IMMEDIATE_GUI_NS::ImGUIThemeVec2Var, SR_MATH_NS::FVector2> m_vec2Settings;
         /// @property @onChanged(Apply)
-        SR_UTILS_NS::Map<SR_GRAPH_GUI_NS::Immediate::StyleColor, SR_MATH_NS::FColor> m_colorSettings;
+        SR_UTILS_NS::Map<SR_IMMEDIATE_GUI_NS::StyleColor, SR_MATH_NS::FColor> m_colorSettings;
 
     };
 }

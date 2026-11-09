@@ -5,7 +5,7 @@
 #include <ImmediateGUI/GUI/NodeEditor.h>
 #include <ImmediateGUI/Impl/ImGUI.h>
 
-namespace SR_GRAPH_GUI_NS::Immediate::NodeEditor {
+namespace SR_IMMEDIATE_GUI_NS::NodeEditor {
 #if defined(SR_USE_IMGUI_NODE_EDITOR) && defined(SR_USE_IMGUI)
     void* CreateEditor(const char* settingsFile) {
         ax::NodeEditor::Config config;

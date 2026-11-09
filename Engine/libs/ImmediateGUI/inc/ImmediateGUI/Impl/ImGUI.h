@@ -94,7 +94,7 @@ namespace SR_GRAPH_GUI_NS {
     #include <imgui-node-editor/imgui_node_editor.h>
 #endif
 
-namespace SR_GRAPH_GUI_NS::Immediate {
+namespace SR_IMMEDIATE_GUI_NS {
     ImColor FCToImC(const SR_MATH_NS::FColor& color);
     ImVec2 F2ToImV2(const SR_MATH_NS::FVector2& vec);
     ImVec4 F4ToImV4(const SR_MATH_NS::FVector4& vec);

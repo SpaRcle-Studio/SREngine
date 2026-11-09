@@ -11,7 +11,7 @@
 
 #include <webgpu/webgpu.h>
 
-namespace SR_GRAPH_GUI_NS::Immediate {
+namespace SR_IMMEDIATE_GUI_NS {
     struct SR_IMMEDIATE_GUI_DLL_API WebGPURendererCreateInfo {
         WGPUDevice device = nullptr;
 
