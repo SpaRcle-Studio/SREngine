@@ -124,6 +124,10 @@ else()
     SR_COPY_SHARED_MODULE_TO_EXECUTABLE_FOLDER(Engine)
 endif()
 
+if (SR_HOST_SYSTEM_LINUX)
+    target_compile_options(Engine PRIVATE -Ulinux)
+endif()
+
 SR_COPY_STATIC_LIBRARY_TO_LIBRARY_FOLDER(Engine)
 
 if (SR_ENGINE_DLL_EXPORTS)
