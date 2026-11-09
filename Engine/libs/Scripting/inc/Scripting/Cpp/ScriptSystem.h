@@ -35,7 +35,7 @@ namespace SR_SCRIPTING_NS {
 
     public:
         SR_NODISCARD bool IsInitialized() const { return m_isInit; }
-        SR_NODISCARD bool Init();
+        SR_NODISCARD bool Init(bool compilationEnabled);
 
         SR_NODISCARD const ModuleManager* GetModuleManager() const { return m_moduleManager.Get(); }
         SR_NODISCARD ModuleManager* GetModuleManager() { return m_moduleManager.Get(); }

@@ -31,4 +31,12 @@ namespace SR_CORE_NS {
     bool GameBuildProfile::operator!=(const GameBuildProfile& rhs) const {
         return !(*this == rhs);
     }
+
+    const GameBuildProfile& ProjectSettings::GetActiveProfile() const {
+        if (buildProfiles.size() <= activeBuildProfile) {
+            static GameBuildProfile empty;
+            return empty;
+        }
+        return buildProfiles.at(activeBuildProfile);
+    }
 }

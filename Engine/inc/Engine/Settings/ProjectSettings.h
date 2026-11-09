@@ -69,6 +69,8 @@ namespace SR_CORE_NS {
         using Ptr = SR_HTYPES_NS::SharedPtr<ProjectSettings>;
 
     public:
+        const GameBuildProfile& GetActiveProfile() const;
+
         /// @property
         SR_UTILS_NS::StringAtom projectName = "New Project";
         /// @property
@@ -82,6 +84,9 @@ namespace SR_CORE_NS {
         /// @property
         SR_UTILS_NS::Vector<GameBuildProfile> buildProfiles = { GameBuildProfile() };
         /// @property
+        bool enableCppScripts = true;
+
+        /// @property @hidden
         uint32_t activeBuildProfile = 0;
 
     };

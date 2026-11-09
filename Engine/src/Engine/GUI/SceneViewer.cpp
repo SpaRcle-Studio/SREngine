@@ -291,6 +291,10 @@ namespace SR_CORE_GUI_NS {
         if (enabled) {
             if (SR_UTILS_NS::Features::Instance().Enabled("EditorCamera", true) && m_scene) {
                 pCamera = m_scene->InstanceFromFile("Editor/Prefabs/EditorCamera.prefab").DynamicCast<SR_UTILS_NS::GameObject>();
+                if (!pCamera) {
+                    SR_ERROR("SceneViewer::SetCameraEnabled() : failed to instantiate editor camera!");
+                    return;
+                }
                 pCamera->AddSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave);
                 pCamera->AddEditorFlags(SR_UTILS_NS::EditorFlags::Hidden);
 

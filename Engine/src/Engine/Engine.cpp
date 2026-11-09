@@ -63,9 +63,23 @@ namespace SR_CORE_NS {
         m_cmdManager = new SR_UTILS_NS::CmdManager();
         m_input = new SR_UTILS_NS::InputDispatcher();
 
-        if (SR_UTILS_NS::Features::Instance().Enabled("Editor")) {
+        const bool isProjectPresent = SR_UTILS_NS::VFS::Instance().IsExists(".srproject");
+        const bool isAppOpenedByProjectFile = SR_UTILS_NS::CLIManager::Instance().IsAppOpenedByProjectFile();
+        const bool isGame = isProjectPresent && !isAppOpenedByProjectFile;
+        ProjectSettings::Ptr pSettings = isProjectPresent ? CoreResLoader::Load<ProjectSettings>(".srproject") : nullptr;
+
+        const bool isEditorEnabled = SR_UTILS_NS::Features::Instance().Enabled("Editor")
+            && !SR_UTILS_NS::CLIManager::Instance().IsFlagPresent(SR_UTILS_NS::CLIFlags::DisableEditor)
+            && (isAppOpenedByProjectFile || !isProjectPresent || pSettings->GetActiveProfile().packEditor)
+        ;
+        const bool editorOnStartupEnabled = isEditorEnabled && !isGame && SR_UTILS_NS::Features::Instance().Enabled("EditorOnStartup", false);
+
+        if (isEditorEnabled) {
             m_editor = new SR_CORE_GUI_NS::EditorGUI(GetThis());
             m_editor->SetRenderContext(m_renderContext.Get());
+        }
+        else {
+            SR_LOG("Engine::Create() : editor is disabled.");
         }
 
         if (m_isCreate) {
@@ -81,7 +95,7 @@ namespace SR_CORE_NS {
             m_input->Register(m_editor);
         }
 
-        SetGameMode(!SR_UTILS_NS::Features::Instance().Enabled("EditorOnStartup", false));
+        SetGameMode(!editorOnStartupEnabled);
 
         m_autoReloadResources = SR_UTILS_NS::Features::Instance().Enabled("AutoReloadResources", false);
 
@@ -167,7 +181,14 @@ namespace SR_CORE_NS {
         SR_INFO("Engine::Init() : initializing game engine...");
 
         if (!SR_SCRIPTING_NS::ScriptSystem::Instance().IsInitialized()) {
-            if (!SR_SCRIPTING_NS::ScriptSystem::Instance().Init()) {
+            const bool enabledByFeature = SR_UTILS_NS::Features::Instance().Enabled("ScriptCompilation", true);
+            const bool isProjectPresent = SR_UTILS_NS::VFS::Instance().IsExists(".srproject");
+            const bool isAppOpenedByProjectFile = SR_UTILS_NS::CLIManager::Instance().IsAppOpenedByProjectFile();
+            const bool isGame = isProjectPresent && !isAppOpenedByProjectFile;
+            ProjectSettings::Ptr pSettings = isProjectPresent ? CoreResLoader::Load<ProjectSettings>(".srproject") : nullptr;
+            const bool isCompilationEnabled = !isGame && enabledByFeature && (!pSettings || pSettings->enableCppScripts);
+
+            if (!SR_SCRIPTING_NS::ScriptSystem::Instance().Init(isCompilationEnabled)) {
                 if (SR_UTILS_NS::StoreUtils::User::GetBool("CompilerUserCanceled", false)) {
                     SR_INFO("Engine::Init() : user canceled scripts usage!");
                 }

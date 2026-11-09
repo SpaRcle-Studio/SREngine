@@ -366,21 +366,22 @@ namespace SR_CORE_GUI_NS {
 
         if (SR_UTILS_NS::StoreUtils::User::HasString(PackagesPathKey)) {
             if (SR_UTILS_NS::Path path = SR_UTILS_NS::StoreUtils::User::GetString(PackagesPathKey); !path.empty()) {
-                auto&& pSettings = pEditor->GetSettings();
-                for (auto&& package : pSettings->GetPackages()) {
-                    if (pProjectSettings && !pProjectSettings->packages.contains(package.name)) {
-                        continue;
+                if (auto&& pSettings = pEditor->GetSettings()) {
+                    for (auto&& package : pSettings->GetPackages()) {
+                        if (pProjectSettings && !pProjectSettings->packages.contains(package.name)) {
+                            continue;
+                        }
+                        auto&& mountPath = path.Concat(package.name).Concat("Resources");
+                        if (SR_PLATFORM_NS::GetPathType(mountPath) != SR_UTILS_NS::Path::Type::Folder) {
+                            continue;
+                        }
+                        SR_LOG("AssetsStore::ReMountPackages() : mounting package \"{}\"...", package.name);
+                        MountInfo& info = g_mounts.emplace_back();
+                        info.pMount = new SR_UTILS_NS::DirectoryVFSBackend(mountPath);
+                        info.pMount->AddIgnoredPath(CoreResLoader::GetCachePath());
+                        info.name = package.name;
+                        SR_UTILS_NS::VFS::Instance().Mount(CoreResLoader::GetResPath(), info.pMount, -100);
                     }
-                    auto&& mountPath = path.Concat(package.name).Concat("Resources");
-                    if (SR_PLATFORM_NS::GetPathType(mountPath) != SR_UTILS_NS::Path::Type::Folder) {
-                        continue;
-                    }
-                    SR_LOG("AssetsStore::ReMountPackages() : mounting package \"{}\"...", package.name);
-                    MountInfo& info = g_mounts.emplace_back();
-                    info.pMount = new SR_UTILS_NS::DirectoryVFSBackend(mountPath);
-                    info.pMount->AddIgnoredPath(CoreResLoader::GetCachePath());
-                    info.name = package.name;
-                    SR_UTILS_NS::VFS::Instance().Mount(CoreResLoader::GetResPath(), info.pMount, -100);
                 }
             }
         }

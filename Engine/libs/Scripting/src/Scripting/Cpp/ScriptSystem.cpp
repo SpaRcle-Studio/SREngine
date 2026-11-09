@@ -36,7 +36,7 @@ namespace SR_SCRIPTING_NS {
         m_moduleManager.AutoFree();
     }
 
-    bool ScriptSystem::Init() {
+    bool ScriptSystem::Init(bool compilationEnabled) {
         if (m_isInit) {
             SRHalt("ScriptSystem::Init() : script system already initialized!");
             return false;
@@ -47,7 +47,7 @@ namespace SR_SCRIPTING_NS {
         m_cacheFolder = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
         SR_UTILS_NS::VFS::Instance().ResolvePath(m_cacheFolder, SR_UTILS_NS::FileMode::Write);
 
-        m_isCompilationEnabled = SR_UTILS_NS::Features::Instance().Enabled("ScriptCompilation", true);
+        m_isCompilationEnabled = compilationEnabled;
         m_apiFolder = CoreResLoader::GetResPath().Concat("API");
 
         if (m_isCompilationEnabled && !InitEngineSources()) {
