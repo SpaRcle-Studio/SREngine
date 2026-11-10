@@ -67,7 +67,7 @@ Resources/**/*.so
 /Resources/Engine/Utilities/engine-code-structure.pkl
 /Resources/Engine/Utilities/codegen
 /Resources/API
-/Resources/ModuleTests/SRSL/Result
+/Resources/Engine/ModuleTests/SRSL/Result
 /Resources/Engine/SREngine.dll
 /Resources/Engine/SREngine.obj
 /Resources/Engine/SREngine.pdb

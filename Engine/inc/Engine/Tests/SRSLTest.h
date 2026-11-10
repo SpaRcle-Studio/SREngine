@@ -29,9 +29,9 @@ namespace SR_CORE_NS::Tests {
 
             SR_SRSL_NS::SRSLShader::ClearShadersCache();
 
-            const SR_UTILS_NS::Path path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("ModuleTests/SRSL");
-            auto&& expectedFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("ModuleTests/SRSL/Expected");
-            auto&& resultFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("ModuleTests/SRSL/Result");
+            const SR_UTILS_NS::Path path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/ModuleTests/SRSL");
+            auto&& expectedFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/ModuleTests/SRSL/Expected");
+            auto&& resultFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/ModuleTests/SRSL/Result");
 
             SR_UTILS_NS::Vector<SR_UTILS_NS::Path> files;
             path.GetFiles(files);

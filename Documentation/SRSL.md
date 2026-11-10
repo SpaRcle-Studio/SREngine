@@ -449,9 +449,9 @@ void vertex() {
 
 ## Тесты
 
-Модульные тесты транслятора — `Resources/ModuleTests/SRSL/*.srsl`. Тест `SRSLTest`
+Модульные тесты транслятора — `Resources/Engine/ModuleTests/SRSL/*.srsl`. Тест `SRSLTest`
 ([SRSLTest.h](../Engine/inc/Engine/Tests/SRSLTest.h)) компилирует каждый файл в GLSL, пишет результат в
-`ModuleTests/SRSL/Result/` и сравнивает с `ModuleTests/SRSL/Expected/`. Эти файлы — хорошие минимальные примеры
+`Engine/ModuleTests/SRSL/Result/` и сравнивает с `Engine/ModuleTests/SRSL/Expected/`. Эти файлы — хорошие минимальные примеры
 отдельных возможностей языка (массивы, SSBO, циклы, workgroup-память и т.д.).
 
 ## Подводные камни

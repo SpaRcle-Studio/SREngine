@@ -137,7 +137,7 @@ namespace SR_CORE_GUI_NS {
         auto&& packedFiles = resourcesPath.Concat("Packed");
         SR_UTILS_NS::Vector<SR_UTILS_NS::Path> excludeEnginePaths = {
             resourcesPath.Concat("Samples"),
-            resourcesPath.Concat("ModuleTests"),
+            resourcesPath.Concat("Engine/ModuleTests"),
             resourcesPath.Concat("Engine/Utilities")
         };
         if (!GetActiveProfile()->packEditor) {

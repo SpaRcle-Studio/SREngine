@@ -75,8 +75,10 @@ namespace SR_CORE_NS {
         const bool editorOnStartupEnabled = isEditorEnabled && !isGame && SR_UTILS_NS::Features::Instance().Enabled("EditorOnStartup", false);
 
         if (isEditorEnabled) {
+            SR_LOG("Engine::Create() : editor is enabled.");
             m_editor = new SR_CORE_GUI_NS::EditorGUI(GetThis());
             m_editor->SetRenderContext(m_renderContext.Get());
+            SR_PLATFORM_NS::RegisterApplication();
         }
         else {
             SR_LOG("Engine::Create() : editor is disabled.");

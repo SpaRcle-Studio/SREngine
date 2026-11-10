@@ -457,6 +457,15 @@ use numeric depth: false
 									-o:renderParameters
 										-a:includeLayers
 										-a:excludeLayers
+						-k:i
+							-o:d
+								-v:type
+									-s:CameraFlyMover
+								-o:ptr
+									-v:entityId
+										-i:2853447493851489508
+									-v:lockCursor
+										-b:true
 					-v:name
 						-s:Camera
 					-o:transform
