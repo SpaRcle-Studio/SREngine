@@ -686,7 +686,7 @@ namespace SR_CORE_GUI_NS {
         SR_IMMEDIATE_GUI_NS::Checkbox("Android x86_64", &pProfile->androidX64);
         SR_IMMEDIATE_GUI_NS::Checkbox("Emscripten", &pProfile->emscripten);
         SR_IMMEDIATE_GUI_NS::InputText("Android package ID", &pProfile->androidPackageId);
-        int32_t versionCode = static_cast<int32_t>(pProfile->androidVersionCode);
+        auto versionCode = static_cast<int32_t>(pProfile->androidVersionCode);
         if (SR_IMMEDIATE_GUI_NS::InputInt("Android version code", &versionCode)) {
             pProfile->androidVersionCode = static_cast<uint32_t>(versionCode > 0 ? versionCode : 1);
         }
@@ -699,8 +699,15 @@ namespace SR_CORE_GUI_NS {
             SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.7f, 0.f, 1.f), "C++ scripts are not supported and will be excluded.");
         }
 
-        if (SR_IMMEDIATE_GUI_NS::Button("Build", SR_MATH_NS::FVector2(160.f, 36.f))) {
+        if (SR_IMMEDIATE_GUI_NS::ButtonColored("Build", SR_MATH_NS::FColor::Green() * 0.65, SR_MATH_NS::FVector2(160.f, 36.f))) {
             Build();
+        }
+
+        SR_IMMEDIATE_GUI_NS::SameLine();
+
+        if (SR_IMMEDIATE_GUI_NS::ButtonColored("Delete artifacts", SR_MATH_NS::FColor::Red() * 0.65, SR_MATH_NS::FVector2(160.f, 36.f))) {
+            auto&& cachedArtifacts = GetBuildCachePath();
+            SR_UTILS_NS::VFS::Instance().Delete(cachedArtifacts);
         }
 
         if (!m_status.empty()) {

@@ -200,13 +200,16 @@ namespace SR_CORE_NS {
             projectPathMounted = true;
         }
 
-        if (projectPathMounted) {
-            SR_UTILS_NS::Path homePath = CoreResLoader::GetResPath();
-            SR_UTILS_NS::VFS::Instance().ResolvePath(homePath, SR_UTILS_NS::FileMode::Write);
-            SR_UTILS_NS::VFS::Instance().Mount(".srproject", new SR_UTILS_NS::SingleFileDirectoryVFSBackend(homePath.GetFolder().Concat(".srproject")), 150);
-        }
-        else {
+        if (!projectPathMounted) {
             SR_UTILS_NS::VFS::Instance().Mount(resourcesPath, new SR_UTILS_NS::DirectoryVFSBackend(engineResourcesPath), 0);
+        }
+
+        SR_UTILS_NS::Path homePath = CoreResLoader::GetResPath();
+        SR_UTILS_NS::VFS::Instance().ResolvePath(homePath, SR_UTILS_NS::FileMode::Write);
+        auto&& projectPath = homePath.GetFolder().Concat(".srproject");
+
+        if (SR_PLATFORM_NS::GetPathType(projectPath) == SR_UTILS_NS::FSItemType::File) {
+            SR_UTILS_NS::VFS::Instance().Mount(".srproject", new SR_UTILS_NS::SingleFileDirectoryVFSBackend(projectPath), 150);
         }
 
         return true;
