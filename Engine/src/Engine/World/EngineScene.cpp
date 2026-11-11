@@ -57,7 +57,12 @@ namespace SR_CORE_NS {
             pRenderScene = pContext->CreateScene(pScene);
 
             if (pRenderScene) {
-                pRenderScene->SetTechnique(pContext->GetSettings().overlayRenderTechnique);
+                if (CoreResLoader::GetResPath().Concat(pContext->GetSettings().overlayRenderTechnique).IsFile()) {
+                    pRenderScene->SetTechnique(pContext->GetSettings().overlayRenderTechnique);
+                }
+                else {
+                    SR_LOG("EngineScene::Init() : missing overlay render technique.");
+                }
 
                 if (pEngine->GetEditor()) {
                     pRenderScene->Register(pEngine->GetEditor());

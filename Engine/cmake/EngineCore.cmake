@@ -21,7 +21,7 @@ if (SR_TRACY_ENABLE)
 endif()
 
 option(SR_ENGINE_DLL_EXPORTS "" ON)
-option(SR_ENGINE_EXPLICIT_DLL_EXPORTS "Disable automatic Windows DLL exports to check explicit API annotations" ON)
+option(SR_ENGINE_EXPLICIT_DLL_EXPORTS "Require explicit API exports on Windows and Linux" ON)
 
 set(CORE_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 if (SR_ENGINE_EXPLICIT_DLL_EXPORTS)

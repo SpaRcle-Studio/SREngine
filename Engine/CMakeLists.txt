@@ -38,8 +38,26 @@ if (NOT SR_ENGINE_FLATPAK_BUILD AND NOT ANDROID_NDK)
     set(SR_ENGINE_EXTENDED_NAME ON)
 endif()
 
+if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    add_compile_options(
+        "$<$<CONFIG:Release>:-ffunction-sections>"
+        "$<$<CONFIG:Release>:-fdata-sections>"
+    )
+    add_link_options("$<$<CONFIG:Release>:LINKER:--strip-all>")
+    add_link_options("$<$<CONFIG:Release>:LINKER:--gc-sections>")
+endif()
+
 include(cmake/EngineCore.cmake)
 include(cmake/Executable.cmake)
+
+if (CMAKE_SYSTEM_NAME STREQUAL "Linux" AND SR_ENGINE_EXPLICIT_DLL_EXPORTS)
+    foreach(SR_VISIBILITY_MODULE IN ITEMS Utils ImmediateGUI Audio Physics Graphics Scripting Engine)
+        set_target_properties(${SR_VISIBILITY_MODULE} PROPERTIES
+            C_VISIBILITY_PRESET hidden
+            CXX_VISIBILITY_PRESET hidden
+        )
+    endforeach()
+endif()
 
 if (SR_ENGINE_USE_MODULAR_BUILD)
     # Link replacements into every shared engine module on each platform.
