@@ -1,0 +1,14 @@
+ShaderType Compute;
+[[ssbo(values)]] int[] values;
+[[THREADS(1, 1, 1)]]
+void compute() {
+    int i = 0;
+    while (i < 2) {
+        int j = 0;
+        while (j < 3) {
+            values[i] += j;
+            j += 1;
+        }
+        i += 1;
+    }
+}

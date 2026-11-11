@@ -1,0 +1,4 @@
+ShaderType Spatial;
+float SharedValue(float value) { return value * 2.0; }
+void vertex() { OUT_POSITION = vec4(SharedValue(1.0)); }
+void fragment() { COLOR = vec4(SharedValue(0.5)); }

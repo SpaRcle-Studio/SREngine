@@ -41,6 +41,20 @@ endif()
 include(cmake/EngineCore.cmake)
 include(cmake/Executable.cmake)
 
+if (SR_ENGINE_USE_MODULAR_BUILD)
+    # Link replacements into every shared engine module on each platform.
+    foreach(SR_MEMORY_MODULE IN ITEMS ImmediateGUI Audio Physics Graphics Scripting Engine)
+        if (TARGET ${SR_MEMORY_MODULE})
+            get_target_property(SR_MEMORY_MODULE_TYPE ${SR_MEMORY_MODULE} TYPE)
+            if (SR_MEMORY_MODULE_TYPE STREQUAL "SHARED_LIBRARY")
+                target_sources(${SR_MEMORY_MODULE} PRIVATE
+                    "${CMAKE_CURRENT_SOURCE_DIR}/libs/Utils/src/Utils/Memory/GlobalMemoryOperators.cpp"
+                )
+            endif()
+        endif()
+    endforeach()
+endif()
+
 option(SR_ENGINE_GENERATE_MAP "Generate MSVC linker MAP files for shared engine modules" OFF)
 
 if (MSVC AND SR_ENGINE_GENERATE_MAP)

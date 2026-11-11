@@ -2,6 +2,12 @@
 
 /// Shader type: Compute
 
+struct Item {
+    color : vec4<f32>,
+    pos : vec3<f32>,
+    weight : f32,
+};
+
 struct StorageBuffer_items {
 	itemsCount : u32,
 	items : array<Item>,

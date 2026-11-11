@@ -1,0 +1,12 @@
+ShaderType Compute;
+[[uniform]] sampler2D source;
+[[ssbo(outv)]] vec4[] outv;
+
+vec4 ReadTexture(sampler2D tex, vec2 uv) {
+    return textureLod(tex, uv, 0.0);
+}
+
+[[THREADS(1, 1, 1)]]
+void compute() {
+    outv[0] = ReadTexture(source, vec2(0.25));
+}

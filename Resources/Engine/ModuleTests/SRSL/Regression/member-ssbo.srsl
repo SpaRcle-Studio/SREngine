@@ -1,0 +1,12 @@
+ShaderType Compute;
+struct Item {
+    float weight;
+};
+[[ssbo(data)]] float weight;
+[[ssbo(outv)]] float[] outv;
+[[THREADS(1, 1, 1)]]
+void compute() {
+    Item item;
+    item.weight = weight;
+    outv[0] = item.weight;
+}

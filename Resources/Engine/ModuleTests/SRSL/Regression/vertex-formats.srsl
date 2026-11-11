@@ -1,0 +1,4 @@
+ShaderType Spatial;
+void vertex() {
+    OUT_POSITION = vec4(VERTEX.xyz, 1.0);
+}

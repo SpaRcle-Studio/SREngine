@@ -1,0 +1,8 @@
+ShaderType Compute;
+[[ssbo(values)]] mat3[] values;
+[[THREADS(1, 1, 1)]]
+void compute() {
+    mat3 m = mat3(2.0);
+    values[0] = inverse(m);
+    values[1] = inverse(mat3(mat4(1.0)));
+}

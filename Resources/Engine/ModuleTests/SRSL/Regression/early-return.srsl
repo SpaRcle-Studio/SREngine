@@ -1,0 +1,8 @@
+ShaderType Spatial;
+void vertex() {
+    OUT_POSITION = vec4(1.0);
+    if (VERTEX_INDEX == 0) {
+        return;
+    }
+    OUT_POSITION = vec4(2.0);
+}
