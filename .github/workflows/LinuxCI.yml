@@ -32,8 +32,15 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Configure APT network retries
+      - name: Configure APT mirrors and network retries
         run: |
+          # Use independent DNS domains before the default Ubuntu mirrors.
+          sudo tee /etc/apt/apt-mirrors.txt > /dev/null <<'EOF'
+          https://mirrors.edge.kernel.org/ubuntu/
+          https://mirrors.mit.edu/ubuntu/
+          https://archive.ubuntu.com/ubuntu/
+          https://security.ubuntu.com/ubuntu/
+          EOF
           sudo tee /etc/apt/apt.conf.d/80-ci-retries > /dev/null <<'EOF'
           Acquire::Retries "3";
           Acquire::http::Timeout "30";
