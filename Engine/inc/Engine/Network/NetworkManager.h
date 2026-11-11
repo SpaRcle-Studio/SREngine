@@ -29,7 +29,7 @@ namespace SR_CORE_NS {
     )
 
     /// Represents a received network message.
-    struct NetworkMessage {
+    struct SR_ENGINE_DLL_API NetworkMessage {
         uint32_t peerId = 0;
         std::vector<uint8_t> data;
 
@@ -46,7 +46,7 @@ namespace SR_CORE_NS {
     };
 
     /// @category(Network)
-    class NetworkManager : public SR_UTILS_NS::Component {
+    class SR_ENGINE_DLL_API NetworkManager : public SR_UTILS_NS::Component {
         SR_CLASS()
         using Super = SR_UTILS_NS::Component;
         using SocketPtr = SR_HTYPES_NS::SharedPtr<SR_NETWORK_NS::Socket>;

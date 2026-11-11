@@ -15,7 +15,7 @@ namespace SR_GRAPH_NS {
 }
 
 namespace SR_CORE_NS {
-    class SR_CORE_DLL_API World : public SR_WORLD_NS::Scene {
+    class SR_ENGINE_DLL_API World : public SR_WORLD_NS::Scene {
         using RenderScenePtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::RenderScene>;
     public:
         SR_UTILS_NS::SceneObject::Ptr Instance(SR_HTYPES_NS::RawMesh* rawMesh) override;

@@ -30,7 +30,7 @@ namespace SR_CORE_GUI_NS {
     class Hierarchy;
     class SceneTools;
 
-    class SR_CORE_DLL_API SceneViewer : public SR_GRAPH_GUI_NS::Widget {
+    class SR_ENGINE_DLL_API SceneViewer : public SR_GRAPH_GUI_NS::Widget {
         SR_CLASS()
         using Super = SR_GRAPH_GUI_NS::Widget;
         using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;

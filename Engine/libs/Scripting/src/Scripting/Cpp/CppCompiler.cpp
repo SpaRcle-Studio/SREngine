@@ -22,12 +22,14 @@
 #include <Codegen/CppCompiler.generated.hpp>
 
 namespace SR_SCRIPTING_NS {
-    static std::string_view CPP_COMPILER_SETTINGS_PATH = "User/CppCompilerSettings.sra";
-
     CppCompiler::~CppCompiler() = default;
 
     void CppCompiler::SaveSettings() {
-        const SR_UTILS_NS::Path settingsPath = m_cachePath.Concat(CPP_COMPILER_SETTINGS_PATH);
+        auto&& settingsPath = SR_PLATFORM_NS::GetApplicationUserDataDirectory()
+            .Concat("User")
+            .Concat(SR_PLATFORM_NS::GetApplicationInfo().project)
+            .Concat("CppCompilerSettings.sra");
+
         SR_LOG("CppCompiler::SaveSettings() : save settings to file: {}", settingsPath);
         SR_UTILS_NS::SRASerializer serializer;
         serializer.SetUseTabs(true);
@@ -100,7 +102,11 @@ namespace SR_SCRIPTING_NS {
             return false;
         }
 
-        auto&& settingsPath = m_cachePath.Concat(CPP_COMPILER_SETTINGS_PATH);
+        auto&& settingsPath = SR_PLATFORM_NS::GetApplicationUserDataDirectory()
+            .Concat("User")
+            .Concat(SR_PLATFORM_NS::GetApplicationInfo().project)
+            .Concat("CppCompilerSettings.sra");
+
         if (SR_UTILS_NS::VFS::Instance().IsFileExists(settingsPath)) {
             SR_LOG("CppCompiler::Init() : loading settings from file: {}", settingsPath);
             SR_UTILS_NS::SRADeserializer deserializer;
