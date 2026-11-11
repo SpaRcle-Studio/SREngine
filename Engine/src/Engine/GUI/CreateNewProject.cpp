@@ -14,6 +14,7 @@
 #include <Utils/TypeTraits/SRClassMeta.h>
 #include <Utils/Common/CLIManager.h>
 #include <Utils/Common/StoreUtils.h>
+#include <Utils/Platform/Platform.h>
 
 #include <Codegen/CreateNewProject.generated.hpp>
 
@@ -53,7 +54,7 @@ namespace SR_CORE_GUI_NS {
 
     void CreateNewProject::ResetSettings() {
         m_projectName = "New Project";
-        SetProjectPath(SR_UTILS_NS::ResourceManager::Instance().GetResPathRef());
+        SetProjectPath(SR_PLATFORM_NS::GetApplicationUserDataDirectory().Concat("Projects"));
         m_projectPathInput = m_projectPath.ToString();
         m_projectFinalPath = m_projectPath.Concat(m_projectName);
         m_settingsPath = m_projectFinalPath.Concat(".{}"_format(ProjectSettings::GetMetaStatic()->GetExtension()));

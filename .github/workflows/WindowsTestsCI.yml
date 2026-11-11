@@ -31,8 +31,8 @@ jobs:
           if ($executables.Count -ne 1) {
               throw 'Expected exactly one monolithic executable.'
           }
-          if (Test-Path -LiteralPath Resources) {
-              throw 'Monolithic tests must run without an external Resources folder.'
+          if ((Test-Path -LiteralPath Resources) -or (Test-Path -LiteralPath SREngine)) {
+              throw 'Monolithic tests must run without external resources or an unpacked engine.'
           }
           & $executables[0].FullName --unit-tests --headless *>&1 | Tee-Object -FilePath monolithic_test_log.txt
           $testExitCode = $LASTEXITCODE
@@ -45,8 +45,26 @@ jobs:
               $logContent -notmatch 'Debugger has been stopped with no errors and warnings!') {
               throw 'Monolithic tests did not complete the runtime smoke test successfully.'
           }
-          if ((Test-Path -LiteralPath Resources) -or (Test-Path -LiteralPath SREngine)) {
-              throw 'Monolithic executable extracted resources or engine files.'
+          foreach ($directory in @('Resources', 'SREngine')) {
+              if (Test-Path -LiteralPath $directory) {
+                  Get-ChildItem -LiteralPath $directory -Recurse -Force | Select-Object FullName, Length | Format-Table -AutoSize
+                  $files = @(Get-ChildItem -LiteralPath $directory -Recurse -Force -File)
+                  if ($files.Count -gt 0) {
+                      throw "Monolithic executable created files under $directory; see monolithic_files.txt."
+                  }
+              }
+          }
+
+      - name: Record Release Monolithic output files
+        if: ${{ always() }}
+        shell: pwsh
+        run: |
+          $outputDirectory = '${{ runner.temp }}/monolithic-release'
+          if (Test-Path -LiteralPath $outputDirectory) {
+              Get-ChildItem -LiteralPath $outputDirectory -Recurse -Force |
+                  Select-Object FullName, Length, Mode |
+                  Format-Table -AutoSize | Out-String -Width 4096 |
+                  Tee-Object -FilePath (Join-Path $outputDirectory 'monolithic_files.txt')
           }
 
       - name: Upload Release Monolithic test logs

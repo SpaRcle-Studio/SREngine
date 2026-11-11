@@ -36,8 +36,8 @@ jobs:
             echo 'Expected exactly one monolithic executable.'
             exit 1
           fi
-          if [ -e Resources ]; then
-            echo 'Monolithic tests must run without an external Resources folder.'
+          if [ -e Resources ] || [ -e SREngine ]; then
+            echo 'Monolithic tests must run without external resources or an unpacked engine.'
             exit 1
           fi
           chmod +x "${binaries[0]}"
@@ -45,9 +45,23 @@ jobs:
           grep -Fq 'EngineRuntimeSmokeTest::Run() : launcher initialized successfully.' monolithic_test_log.txt
           grep -Fq 'TestManager::RunAll() : all tests finished!' monolithic_test_log.txt
           grep -Fq 'Debugger has been stopped with no errors and warnings!' monolithic_test_log.txt
-          if [ -e Resources ] || [ -e SREngine ]; then
-            echo 'Monolithic executable extracted resources or engine files.'
-            exit 1
+          for directory in Resources SREngine; do
+            if [ -e "$directory" ]; then
+              find "$directory" -print | tee -a monolithic_files.txt
+              if [ -n "$(find "$directory" \( -type f -o -type l \) -print -quit)" ]; then
+                echo "Monolithic executable created files under $directory; see monolithic_files.txt."
+                exit 1
+              fi
+            fi
+          done
+
+      - name: Record Release Monolithic output files
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          if [ -d "${{ runner.temp }}/monolithic-release" ]; then
+            find "${{ runner.temp }}/monolithic-release" -printf '%y %p\n' > "${{ runner.temp }}/monolithic-release/monolithic_files.txt"
+            cat "${{ runner.temp }}/monolithic-release/monolithic_files.txt"
           fi
 
       - name: Upload Release Monolithic test logs
