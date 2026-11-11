@@ -16,6 +16,12 @@ jobs:
     steps:
       - name: Install runtime dependencies
         run: |
+          sudo tee /etc/apt/apt.conf.d/80-ci-retries > /dev/null <<'EOF'
+          Acquire::Retries "5";
+          Acquire::http::Timeout "30";
+          Acquire::https::Timeout "30";
+          APT::Update::Error-Mode "any";
+          EOF
           sudo apt-get update
           sudo apt-get install -y libtbb-dev
 
@@ -83,15 +89,21 @@ jobs:
 
       - name: Installing dependencies.
         run: |
-          sudo apt-get update
+          sudo tee /etc/apt/apt.conf.d/80-ci-retries > /dev/null <<'EOF'
+          Acquire::Retries "3";
+          Acquire::http::Timeout "30";
+          Acquire::https::Timeout "30";
+          APT::Update::Error-Mode "any";
+          EOF
+          bash CI/retry.sh sudo apt-get update
 
-          sudo apt-get install -y software-properties-common libtbb-dev
-          sudo add-apt-repository -y universe
+          bash CI/retry.sh sudo apt-get install -y software-properties-common libtbb-dev
+          sudo add-apt-repository -y --no-update universe
 
-          sudo apt-get update
+          bash CI/retry.sh sudo apt-get update
 
           echo "Installing build-essential..."
-          sudo apt-get install -y build-essential
+          bash CI/retry.sh sudo apt-get install -y build-essential
 
       # 1) Скачать Debug
       - name: Download Debug build

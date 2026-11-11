@@ -32,26 +32,36 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Configure APT network retries
+        run: |
+          sudo tee /etc/apt/apt.conf.d/80-ci-retries > /dev/null <<'EOF'
+          Acquire::Retries "3";
+          Acquire::http::Timeout "30";
+          Acquire::https::Timeout "30";
+          APT::Update::Error-Mode "any";
+          EOF
+
       - name: Installing dependencies.
+        timeout-minutes: 30
         run: |
           echo "Used dependencies=$DEPENDENCIES" >> "$GITHUB_ENV"
 
           # wget -qO- https://packages.lunarg.com/lunarg-signing-key-pub.asc | sudo tee /etc/apt/trusted.gpg.d/lunarg.asc
           # sudo wget -qO /etc/apt/sources.list.d/lunarg-vulkan-jammy.list http://packages.lunarg.com/vulkan/lunarg-vulkan-jammy.list
 
-          sudo apt-get update
+          bash CI/retry.sh sudo apt-get update
 
-          sudo apt-get install -y software-properties-common
-          sudo add-apt-repository -y universe
+          bash CI/retry.sh sudo apt-get install -y software-properties-common
+          sudo add-apt-repository -y --no-update universe
 
-          sudo apt-get update
+          bash CI/retry.sh sudo apt-get update
           
           echo "===== APT SOURCES ====="
           grep -r ^deb /etc/apt/
           echo "======================="
 
           echo "Installing build-essential..."
-          sudo apt-get install -y build-essential
+          bash CI/retry.sh sudo apt-get install -y build-essential
 
           # Разделяем строку на отдельные пакеты по пробелам
           IFS=' ' read -r -a DEP_ARRAY <<< "$DEPENDENCIES"
@@ -64,12 +74,12 @@ jobs:
           echo "::endgroup::"
 
           echo "::group::🚀 Installing all packages at once"
-          if ! sudo apt-get install -y "${DEP_ARRAY[@]}"; then
+          if ! bash CI/retry.sh sudo apt-get install -y "${DEP_ARRAY[@]}"; then
               echo "::endgroup::"
               echo "::group::❗ Fallback: Installing individually"
               for DEP in "${DEP_ARRAY[@]}"; do
                   echo "[TRY] Installing $DEP..."
-                  if ! sudo apt-get install -y "$DEP"; then
+                  if ! bash CI/retry.sh sudo apt-get install -y "$DEP"; then
                       echo "[FAIL] Package $DEP failed to install!"
                       echo "::endgroup::"
                       exit 1
@@ -78,8 +88,7 @@ jobs:
                   fi
               done
               echo "::endgroup::"
-              echo "[ERROR] Something went wrong, but fallback succeeded?"
-              exit 1
+              echo "[LOG] All packages installed successfully using fallback."
           else
               echo "[LOG] All packages installed successfully."
               echo "::endgroup::"
@@ -90,13 +99,14 @@ jobs:
           DEPENDENCIES: ${{ vars.UBUNTU_DEPENDENCIES }}
 
       - name: Install LLVM, libc++ and gcc-13.
+        timeout-minutes: 30
         run: |
-          sudo apt update
-          sudo apt install -y wget gnupg lsb-release
-          wget https://apt.llvm.org/llvm.sh
+          bash CI/retry.sh sudo apt-get update
+          bash CI/retry.sh sudo apt-get install -y wget gnupg lsb-release
+          bash CI/retry.sh wget --timeout=30 --tries=1 -O llvm.sh https://apt.llvm.org/llvm.sh
           chmod +x llvm.sh
-          sudo ./llvm.sh 17 all
-          sudo apt install -y libc++-17-dev libc++abi-17-dev
+          bash CI/retry.sh sudo ./llvm.sh 17 all
+          bash CI/retry.sh sudo apt-get install -y libc++-17-dev libc++abi-17-dev
 
         # sudo apt install -y libc++-17-dev libc++abi-17-dev gcc-13 g++-13
         # sudo update-alternatives --install /usr/bin/clang   clang   /usr/bin/clang-17   100
@@ -107,7 +117,8 @@ jobs:
         # clang++-17 --version
 
       - name: Updating submodules.
-        run: git submodule --quiet update --init --recursive --depth 1 --jobs 4
+        timeout-minutes: 20
+        run: bash CI/retry.sh git -c http.lowSpeedLimit=1000 -c http.lowSpeedTime=60 submodule --quiet update --init --recursive --depth 1 --jobs 4
 
       #- name: Installing Ninja.
       #  uses: ashutoshvarma/setup-ninja@v1.1
