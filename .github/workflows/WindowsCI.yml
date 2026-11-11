@@ -10,6 +10,10 @@ jobs:
     strategy:
       matrix:
         buildType: [Debug, Release]
+        modular: [ON]
+        include:
+          - buildType: Release
+            modular: OFF
 
     steps:
       - name: Fetching repository.
@@ -51,6 +55,7 @@ jobs:
           
           cmake -G "Ninja" ../ \
             -DSR_CI_BUILD=ON \
+            -DSR_ENGINE_USE_MODULAR_BUILD=${{ matrix.modular }} \
             -DCMAKE_BUILD_TYPE=${{ matrix.buildType }} \
             -DSR_COMMON_UNITY_BUILD="${{ matrix.buildType == 'Release' && 'ON' || 'OFF' }}" \
             "-DCMAKE_MAKE_PROGRAM=${{ github.workspace }}/ninja-build/ninja.exe"
@@ -66,7 +71,7 @@ jobs:
       - name: Uploading a ${{ matrix.buildType }} build trace artifact.
         uses: actions/upload-artifact@v4
         with:
-          name: "SREngine Windows ${{ matrix.buildType }} Build Trace Artifact"
+          name: "SREngine Windows ${{ matrix.buildType }}${{ matrix.modular == 'OFF' && ' Monolithic' || '' }} Build Trace Artifact"
           path: "${{github.workspace}}/CI/trace.json"
 
       - if: env.buildSuccessful == 'true'
@@ -85,6 +90,11 @@ jobs:
           echo "Нашёл exe: $EXE_FILE"
           
           # Запускаем его с аргументом
+          if [ "${{ matrix.modular }}" = "OFF" ]; then
+            mkdir -p PackedBuild
+            python "${{ github.workspace }}/CI/scripts/pack_monolithic.py" "$EXE_FILE" "${{ github.workspace }}/Resources" "PackedBuild/$(basename "${EXE_FILE%.exe}")-packed.exe" --platform Windows
+            exit 0
+          fi
           "$EXE_FILE" --pack-with-res
           
           # После выполнения ожидается файл *-packed.exe
@@ -107,5 +117,5 @@ jobs:
         name: Upload packed build
         uses: actions/upload-artifact@v4
         with:
-          name: "Windows ${{ matrix.buildType }} SpaRcle Engine"
+          name: "Windows ${{ matrix.buildType }}${{ matrix.modular == 'OFF' && ' Monolithic' || '' }} SpaRcle Engine"
           path: "${{github.workspace}}/build/Bin/PackedBuild"

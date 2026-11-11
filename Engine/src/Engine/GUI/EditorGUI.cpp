@@ -96,7 +96,10 @@ namespace SR_CORE_GUI_NS {
             SR_IMMEDIATE_GUI_NS::SetTheme(m_pSettings->GetTheme().GetId());
         }
 
-        m_cachedScenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("User/PreviousScenePath.cache");
+        m_cachedScenePath = SR_PLATFORM_NS::GetApplicationUserDataDirectory()
+            .Concat("User")
+            .Concat(SR_PLATFORM_NS::GetApplicationInfo().project)
+            .Concat("PreviousScenePath.cache");
     }
 
     EditorGUI::~EditorGUI() {
@@ -314,7 +317,11 @@ namespace SR_CORE_GUI_NS {
 
         /// widgets
         {
-            const auto path = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/EditorWidgets.xml");
+            SR_UTILS_NS::Path path = SR_PLATFORM_NS::GetApplicationUserDataDirectory()
+                .Concat("User")
+                .Concat(SR_PLATFORM_NS::GetApplicationInfo().project)
+                .Concat("Editor")
+                .Concat("EditorWidgets.xml");
 
             auto document = SR_XML_NS::Document::New();
             auto widgets = document.Root().AppendChild("Widgets");
@@ -502,7 +509,11 @@ namespace SR_CORE_GUI_NS {
     }
 
     void EditorGUI::ReloadWindows() {
-        const auto path = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/EditorWidgets.xml");
+        SR_UTILS_NS::Path path = SR_PLATFORM_NS::GetApplicationUserDataDirectory()
+            .Concat("User")
+            .Concat(SR_PLATFORM_NS::GetApplicationInfo().project)
+            .Concat("Editor")
+            .Concat("EditorWidgets.xml");
 
         if (!path.IsFile()) {
             auto document = SR_XML_NS::Document::New();
@@ -528,8 +539,17 @@ namespace SR_CORE_GUI_NS {
     }
 
     void EditorGUI::ResetToDefault() {
-        const auto&& defaultConfigPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/ImGuiEditor.config");
-        const auto&& defaultWidgetsPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/EditorWidgets.xml");
+        SR_UTILS_NS::Path defaultConfigPath = SR_PLATFORM_NS::GetApplicationUserDataDirectory()
+            .Concat("User")
+            .Concat(SR_PLATFORM_NS::GetApplicationInfo().project)
+            .Concat("Editor")
+            .Concat("ImGuiEditor.config");
+
+        SR_UTILS_NS::Path defaultWidgetsPath = SR_PLATFORM_NS::GetApplicationUserDataDirectory()
+            .Concat("User")
+            .Concat(SR_PLATFORM_NS::GetApplicationInfo().project)
+            .Concat("Editor")
+            .Concat("EditorWidgets.xml");
 
         SR_UTILS_NS::VFS::Instance().Copy(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/ImGuiEditor.config"), defaultConfigPath);
         SR_UTILS_NS::VFS::Instance().Copy(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/EditorWidgets.xml"), defaultWidgetsPath);

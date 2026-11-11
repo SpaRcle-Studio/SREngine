@@ -172,6 +172,12 @@ jobs:
           name: "Emscripten Release SpaRcle Engine"
           path: artifacts/emscripten
 
+      - name: Download monolithic desktop artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: "*Monolithic SpaRcle Engine"
+          path: artifacts/monolithic
+
       - name: Prepare release files
         run: |
           set -e
@@ -184,6 +190,12 @@ jobs:
           LINUX_BIN=$(find artifacts/linux -type f -name "*-packed" | head -n 1)
           cp "$LINUX_BIN" release/SREngine_v${VERSION}-dev_linux.x86_64
           chmod +x release/SREngine_v${VERSION}-dev_linux.x86_64
+          MONO_WIN=$(find artifacts/monolithic -type f -name '*.exe' -print -quit)
+          MONO_LINUX=$(find artifacts/monolithic -type f -name '*-packed' -print -quit)
+          test -n "$MONO_WIN" && test -n "$MONO_LINUX"
+          cp "$MONO_WIN" release/SREngine_v${VERSION}-dev_windows.x86_64_monolithic.exe
+          cp "$MONO_LINUX" release/SREngine_v${VERSION}-dev_linux.x86_64_monolithic
+          chmod +x release/SREngine_v${VERSION}-dev_linux.x86_64_monolithic
           
           # В каждом артефакте по 2 apk (arch-specific и universal) — берём только arch-specific
           ANDROID_ARM64=$(find artifacts/android/arm64-v8a -type f -name "*arm64*v8a*.apk" 2>/dev/null | head -n 1)
@@ -294,6 +306,12 @@ jobs:
           name: "Emscripten Release SpaRcle Engine"
           path: artifacts/emscripten
 
+      - name: Download monolithic desktop artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: "*Monolithic SpaRcle Engine"
+          path: artifacts/monolithic
+
       - name: Prepare release files
         shell: bash
         run: |
@@ -315,6 +333,12 @@ jobs:
           cp "$WIN_EXE" "release/SREngine_v${VERSION}_windows.x86_64.exe"
           cp "$LINUX_BIN" "release/SREngine_v${VERSION}_linux.x86_64"
           chmod +x "release/SREngine_v${VERSION}_linux.x86_64"
+          MONO_WIN=$(find artifacts/monolithic -type f -name '*.exe' -print -quit)
+          MONO_LINUX=$(find artifacts/monolithic -type f -name '*-packed' -print -quit)
+          test -n "$MONO_WIN" && test -n "$MONO_LINUX"
+          cp "$MONO_WIN" "release/SREngine_v${VERSION}_windows.x86_64_monolithic.exe"
+          cp "$MONO_LINUX" "release/SREngine_v${VERSION}_linux.x86_64_monolithic"
+          chmod +x "release/SREngine_v${VERSION}_linux.x86_64_monolithic"
           cp "$ANDROID_ARM64" "release/SREngine_v${VERSION}_android.arm64-v8a.apk"
           cp "$ANDROID_X64" "release/SREngine_v${VERSION}_android.x86_64.apk"
           cp "$EMSCRIPTEN_ZIP" "release/SREngine_v${VERSION}_emscripten.zip"

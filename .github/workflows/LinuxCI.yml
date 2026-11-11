@@ -14,7 +14,12 @@ jobs:
         buildType: [Debug, Release]
         compiler: [gcc, clang]
         unity: [OFF]
+        modular: [ON]
         include:
+          - buildType: Release
+            compiler: gcc
+            unity: OFF
+            modular: OFF
           - buildType: Debug
             compiler: gcc
             unity: ON
@@ -129,7 +134,7 @@ jobs:
         working-directory: ${{github.workspace}}/build
         run: |
           echo "buildSuccessful=false" >> "$GITHUB_ENV"
-          cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=${{ matrix.buildType }} -DSR_COMMON_UNITY_BUILD=${{ matrix.unity }} -DSR_CI_BUILD=ON
+          cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=${{ matrix.buildType }} -DSR_COMMON_UNITY_BUILD=${{ matrix.unity }} -DSR_CI_BUILD=ON -DSR_ENGINE_USE_MODULAR_BUILD=${{ matrix.modular || 'ON' }}
           cmake --build . -j $(nproc || sysctl -n hw.ncpu)
           echo "buildSuccessful=true" >> "$GITHUB_ENV"
 
@@ -141,7 +146,7 @@ jobs:
       - name: Uploading a ${{ matrix.buildType }} build trace artifact.
         uses: actions/upload-artifact@v4
         with:
-          name: "SREngine ${{ matrix.buildType }} ${{ matrix.compiler }} ${{ matrix.unity == 'ON' && 'Unity' || 'NoUnity' }} Linux Build Trace Artifact"
+          name: "SREngine ${{ matrix.buildType }} ${{ matrix.compiler }} ${{ matrix.unity == 'ON' && 'Unity' || 'NoUnity' }}${{ matrix.modular == 'OFF' && ' Monolithic' || '' }} Linux Build Trace Artifact"
           path: "${{github.workspace}}/CI/trace.json"
 
       - if: env.buildSuccessful == 'true'
@@ -160,6 +165,11 @@ jobs:
           echo "Нашёл бинарник: $BIN_FILE"
 
           # Запускаем
+          if [ "${{ matrix.modular }}" = "OFF" ]; then
+            mkdir -p PackedBuild
+            python3 "${{ github.workspace }}/CI/scripts/pack_monolithic.py" "$BIN_FILE" "${{ github.workspace }}/Resources" "PackedBuild/$(basename "$BIN_FILE")-packed" --platform Linux
+            exit 0
+          fi
           "$BIN_FILE" --pack-with-res
 
           # Ожидаемый packed файл: имя + "-packed"
@@ -181,5 +191,5 @@ jobs:
         name: Upload packed build
         uses: actions/upload-artifact@v4
         with:
-          name: "Linux ${{ matrix.buildType }} ${{ matrix.compiler }} ${{ matrix.unity == 'ON' && 'Unity' || 'NoUnity' }} SpaRcle Engine"
+          name: "Linux ${{ matrix.buildType }} ${{ matrix.compiler }} ${{ matrix.unity == 'ON' && 'Unity' || 'NoUnity' }}${{ matrix.modular == 'OFF' && ' Monolithic' || '' }} SpaRcle Engine"
           path: "${{github.workspace}}/build/Bin/PackedBuild"

@@ -20,13 +20,14 @@
 namespace SR_CORE_GUI_NS {
     static constexpr SR_UTILS_NS::StringView EngineRepository = "https://github.com/SpaRcle-Studio/SREngine";
     static constexpr SR_UTILS_NS::StringView PackedDataMagic = "MAGIC_ENGINE_MODULE_DATA";
+    static constexpr SR_UTILS_NS::StringView ResourceDataMagic = "SR_ENGINE_VFS_RESOURCES_V1";
 
     template<typename T> static void AppendBinary(SR_UTILS_NS::String& data, const T& value) {
         data.append(reinterpret_cast<const char*>(&value), sizeof(T));
     }
 
     static bool ReadBinary(SR_UTILS_NS::StringView data, SR_UTILS_NS::SizeType& position, void* pValue, SR_UTILS_NS::SizeType size) {
-        if (position + size > data.size()) {
+        if (position > data.size() || size > data.size() - position) {
             return false;
         }
         memcpy(pValue, data.data() + position, size);
@@ -96,10 +97,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     SR_UTILS_NS::Path GameBuildExporter::GetBuildCachePath() const {
-        return SR_PLATFORM_NS::GetUserDataDirectory()
-            .Concat(SR_PLATFORM_NS::GetApplicationInfo().organization)
-            .Concat(SR_PLATFORM_NS::GetApplicationInfo().name)
-            .Concat("BuildCache")
+        return SR_PLATFORM_NS::GetApplicationUserDataDirectory().Concat("BuildCache")
             .Concat(GetReleaseTag() == "dev-latest" ? "latest" : SR_ENGINE_VERSION);
     }
 
@@ -126,6 +124,7 @@ namespace SR_CORE_GUI_NS {
         auto&& cppAPI = SR_SCRIPTING_NS::ScriptSystem::Instance().GetAPIFolder();
         auto&& packedFiles = resourcesPath.Concat("Packed");
         SR_UTILS_NS::Vector<SR_UTILS_NS::Path> excludeEnginePaths = {
+            resourcesPath.Concat("Cache"),
             resourcesPath.Concat("Samples"),
             resourcesPath.Concat("Engine/ModuleTests"),
             resourcesPath.Concat("Engine/Utilities")
@@ -133,10 +132,6 @@ namespace SR_CORE_GUI_NS {
         if (!GetActiveProfile()->packEditor) {
             excludeEnginePaths.emplace_back(resourcesPath.Concat("Editor"));
         }
-        for (auto&& path : excludeEnginePaths) {
-            SR_UTILS_NS::VFS::Instance().ResolvePath(path, SR_UTILS_NS::FileMode::Read);
-        }
-
         SR_UTILS_NS::VFS::Instance().Enumerate(resourcesPath, [&](const SR_UTILS_NS::VFSEntry& entry) {
             if (entry.type != SR_UTILS_NS::FSItemType::File ||
                 entry.extension == "cpp" || entry.extension == "h" || entry.extension == "hpp" ||
@@ -148,7 +143,9 @@ namespace SR_CORE_GUI_NS {
                 return;
             }
             for (auto&& path : excludeEnginePaths) {
-                if (entry.fullPath.starts_with(path)) {
+                if (entry.relativePath == path.ToStringView() ||
+                    (entry.relativePath.starts_with(path.ToStringView()) &&
+                        entry.relativePath.size() > path.size() && entry.relativePath[path.size()] == '/')) {
                     return;
                 }
             }
@@ -178,6 +175,51 @@ namespace SR_CORE_GUI_NS {
             return false;
         }
 
+        if (GetActiveProfile()->desktopPackageMode == DesktopBuildPackageMode::Monolithic) {
+            const auto footerSize = ResourceDataMagic.size() + sizeof(uint64_t) * 2;
+            if (artifactData.size() < footerSize ||
+                SR_UTILS_NS::StringView(artifactData.data() + artifactData.size() - footerSize, ResourceDataMagic.size()) != ResourceDataMagic) {
+                SetStatus("Monolithic engine artifact has an unknown resource format.", true);
+                return false;
+            }
+            SR_UTILS_NS::SizeType position = artifactData.size() - sizeof(uint64_t);
+            uint64_t oldCompressedSize = 0;
+            if (!ReadBinary(artifactData, position, &oldCompressedSize, sizeof(oldCompressedSize)) ||
+                oldCompressedSize > artifactData.size() - footerSize) {
+                SetStatus("Monolithic engine artifact has invalid resource sizes.", true);
+                return false;
+            }
+            artifactData.resize(artifactData.size() - footerSize - oldCompressedSize);
+            if (m_desktopPackedBinary.size() > SR_UINT32_MAX) {
+                SetStatus("Monolithic resources exceed the supported archive size.", true);
+                return false;
+            }
+            uLongf compressedSize = compressBound(m_desktopPackedBinary.size());
+            SR_UTILS_NS::String compressed;
+            compressed.resize(compressedSize);
+            if (compress2(reinterpret_cast<Bytef*>(compressed.data()), &compressedSize,
+                reinterpret_cast<const Bytef*>(m_desktopPackedBinary.data()),
+                m_desktopPackedBinary.size(), Z_BEST_COMPRESSION) != Z_OK) {
+                SetStatus("Failed to compress monolithic resources.", true);
+                return false;
+            }
+            compressed.resize(compressedSize);
+            artifactFile = SR_UTILS_NS::File();
+            auto output = SR_UTILS_NS::VFS::Instance().OpenFile(artifactPath, SR_UTILS_NS::FileMode::Write);
+            const uint64_t dataSize = m_desktopPackedBinary.size();
+            const uint64_t packedSize = compressed.size();
+            if (!output || output.Write(artifactData.data(), artifactData.size()) != artifactData.size() ||
+                output.Write(compressed.data(), compressed.size()) != compressed.size() ||
+                output.Write(ResourceDataMagic.data(), ResourceDataMagic.size()) != ResourceDataMagic.size() ||
+                output.Write(&dataSize, sizeof(dataSize)) != sizeof(dataSize) ||
+                output.Write(&packedSize, sizeof(packedSize)) != sizeof(packedSize)) {
+                SetStatus("Failed to write monolithic executable.", true);
+                return false;
+            }
+            output.Flush();
+            return true;
+        }
+
         const SR_UTILS_NS::SizeType footerSize = PackedDataMagic.size() + sizeof(uint64_t) * 2;
         if (artifactData.size() < footerSize) {
             SetStatus("Desktop artifact does not contain packed data.", true);
@@ -195,7 +237,8 @@ namespace SR_CORE_GUI_NS {
         uint64_t compressedSize = 0;
         if (!ReadBinary(artifactData, footerPosition, &decompressedSize, sizeof(decompressedSize)) ||
             !ReadBinary(artifactData, footerPosition, &compressedSize, sizeof(compressedSize)) ||
-            compressedSize > footerOffset) {
+            compressedSize > footerOffset || compressedSize > SR_UINT32_MAX ||
+            decompressedSize == 0 || decompressedSize > SR_UINT32_MAX) {
             SetStatus("Desktop artifact has invalid packed data sizes.", true);
             return false;
         }
@@ -217,27 +260,25 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::SizeType packedPosition = 0;
         uint16_t executableFileCount = 0;
-        if (!ReadBinary(unpackedData, packedPosition, &executableFileCount, sizeof(executableFileCount))) {
+        if (!ReadBinary(unpackedData, packedPosition, &executableFileCount, sizeof(executableFileCount)) || executableFileCount == 0) {
             SetStatus("Desktop artifact contains invalid file entries.", true);
             return false;
         }
 
-        SR_UTILS_NS::String newPackedData;
-        const SR_UTILS_NS::SizeType executableFileCountPosition = newPackedData.size();
-        uint16_t newExecutableFileCount = 0;
-        AppendBinary(newPackedData, newExecutableFileCount);
+        SR_UTILS_NS::Vector<SR_UTILS_NS::String> zipNames;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::String> zipData;
         for (uint16_t i = 0; i < executableFileCount; ++i) {
             uint16_t nameSize = 0;
             uint64_t contentSize = 0;
             if (!ReadBinary(unpackedData, packedPosition, &nameSize, sizeof(nameSize)) ||
-                packedPosition + nameSize > unpackedData.size()) {
+                nameSize > unpackedData.size() - packedPosition) {
                 SetStatus("Desktop artifact contains an invalid file name.", true);
                 return false;
             }
             SR_UTILS_NS::StringView name(unpackedData.data() + packedPosition, nameSize);
             packedPosition += nameSize;
             if (!ReadBinary(unpackedData, packedPosition, &contentSize, sizeof(contentSize)) ||
-                packedPosition + contentSize > unpackedData.size()) {
+                contentSize > unpackedData.size() - packedPosition) {
                 SetStatus("Desktop artifact contains invalid file data.", true);
                 return false;
             }
@@ -248,21 +289,16 @@ namespace SR_CORE_GUI_NS {
             }
 
             const SR_UTILS_NS::String outputName = i == 0
-                ? SR_UTILS_NS::String(artifactPath.GetBaseNameAndExtView())
+                ? "{}{}"_format(artifactPath.GetBaseNameView(), name.ends_with(".exe") ? ".exe" : "")
                 : SR_UTILS_NS::String(name);
+            zipNames.emplace_back(outputName);
+            zipData.emplace_back(SR_UTILS_NS::StringView(unpackedData.data() + packedPosition, contentSize));
             if (outputName.size() > SR_UINT16_MAX) {
                 SetStatus("Desktop artifact contains a file name that is too long.", true);
                 return false;
             }
-            const auto outputNameSize = static_cast<uint16_t>(outputName.size());
-            AppendBinary(newPackedData, outputNameSize);
-            newPackedData.append(outputName.data(), outputName.size());
-            AppendBinary(newPackedData, contentSize);
-            newPackedData.append(unpackedData.data() + packedPosition, contentSize);
             packedPosition += contentSize;
-            ++newExecutableFileCount;
         }
-        memcpy(newPackedData.data() + executableFileCountPosition, &newExecutableFileCount, sizeof(newExecutableFileCount));
 
         SR_MAYBE_UNUSED uint16_t oldResourceCount = 0;
         if (!ReadBinary(unpackedData, packedPosition, &oldResourceCount, sizeof(oldResourceCount))) {
@@ -270,40 +306,25 @@ namespace SR_CORE_GUI_NS {
             return false;
         }
 
-        newPackedData.append(m_desktopPackedBinary.data(), m_desktopPackedBinary.size());
-
-        uLongf newCompressedSize = compressBound(newPackedData.size());
-        SR_UTILS_NS::String compressedData;
-        compressedData.resize(newCompressedSize);
-        if (compress2(
-            reinterpret_cast<Bytef*>(compressedData.data()),
-            &newCompressedSize,
-            reinterpret_cast<const Bytef*>(newPackedData.data()),
-            newPackedData.size(),
-            Z_BEST_COMPRESSION
-        ) != Z_OK) {
-            SetStatus("Failed to compress desktop resources.", true);
-            return false;
+        for (const auto& path : m_resourcePaths) {
+            SR_UTILS_NS::String data;
+            auto file = SR_UTILS_NS::VFS::Instance().OpenFile(path, SR_UTILS_NS::FileMode::Read);
+            if (!file || !file.Read(data)) {
+                SetStatus("Failed to read portable resource: {}"_format(path), true);
+                return false;
+            }
+            zipNames.emplace_back(path == ".srproject" ? SR_UTILS_NS::String(".srproject") :
+                "Resources/{}"_format(path.ToStringView().starts_with("Resources/") ? path.ToStringView().substr(10) : path.ToStringView()));
+            zipData.emplace_back(std::move(data));
         }
-        compressedData.resize(newCompressedSize);
-
-        auto outputFile = SR_UTILS_NS::VFS::Instance().OpenFile(artifactPath, SR_UTILS_NS::FileMode::Write);
-        if (!outputFile ||
-            outputFile.Write(artifactData.data(), packedDataOffset) != packedDataOffset ||
-            outputFile.Write(compressedData.data(), compressedData.size()) != compressedData.size() ||
-            outputFile.Write(PackedDataMagic.data(), PackedDataMagic.size()) != PackedDataMagic.size()) {
-            SetStatus("Failed to write repacked desktop artifact.", true);
-            return false;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::Archive::Entry> zipEntries;
+        for (uint32_t i = 0; i < zipNames.size(); ++i) {
+            zipEntries.emplace_back(SR_UTILS_NS::Archive::Entry{
+                .name = zipNames[i], .data = zipData[i], .isExecutable = i == 0
+            });
         }
-        const uint64_t newDecompressedSize = newPackedData.size();
-        const uint64_t finalCompressedSize = compressedData.size();
-        if (outputFile.Write(&newDecompressedSize, sizeof(newDecompressedSize)) != sizeof(newDecompressedSize) ||
-            outputFile.Write(&finalCompressedSize, sizeof(finalCompressedSize)) != sizeof(finalCompressedSize)) {
-            SetStatus("Failed to finalize repacked desktop artifact.", true);
-            return false;
-        }
-        outputFile.Flush();
-        return true;
+        artifactFile = SR_UTILS_NS::File();
+        return SR_UTILS_NS::Archive::SaveZip(artifactPath, zipEntries);
     }
 
     bool GameBuildExporter::RepackAndroid(const SR_UTILS_NS::Path& artifactPath) {
@@ -493,7 +514,11 @@ namespace SR_CORE_GUI_NS {
 
         const SR_UTILS_NS::String projectFileName = SR_UTILS_NS::Path(m_pProjectSettings->projectName.ToString()).ConvertToFileName();
         SR_UTILS_NS::String outputFileName;
-        if (platformName == "Windows") {
+        const bool desktop = platformName == "Windows" || platformName == "Linux";
+        if (desktop && pProfile->desktopPackageMode == DesktopBuildPackageMode::PortableZip) {
+            outputFileName = "{}.zip"_format(projectFileName);
+        }
+        else if (platformName == "Windows") {
             outputFileName = "{}.exe"_format(projectFileName);
         }
         else if (platformName == "Linux") {
@@ -520,6 +545,11 @@ namespace SR_CORE_GUI_NS {
         }
         if (platformName == "Emscripten" && !RepackEmscripten(outputArtifact)) {
             return false;
+        }
+        if (platformName == "Linux" && pProfile->desktopPackageMode == DesktopBuildPackageMode::Monolithic) {
+        #if defined(SR_LINUX)
+            SR_PLATFORM_NS::CopyPermissions(SR_PLATFORM_NS::GetApplicationPath(), outputArtifact);
+        #endif
         }
 
         return true;
@@ -566,7 +596,7 @@ namespace SR_CORE_GUI_NS {
             return false;
         }
 
-        if (pProfile->windows || pProfile->linux) {
+        if ((pProfile->windows || pProfile->linux) && pProfile->desktopPackageMode == DesktopBuildPackageMode::Monolithic) {
             SR_TRACY_ZONE_N("Desktop packing");
             m_desktopPackedBinary.clear();
             m_desktopPackedBinary.shrink_to_fit();
@@ -581,12 +611,12 @@ namespace SR_CORE_GUI_NS {
                     return false;
                 }
 
-                resourceName = m_resourcePaths[i] == ".srproject"
-                    ? SR_UTILS_NS::StringView("../.srproject")
-                    : SR_UTILS_NS::StringView(m_resourcePaths[i]);
+                resourceName = m_resourcePaths[i].ToStringView();
                 if (resourceName.starts_with("Resources/")) {
                     resourceName = resourceName.substr(10);
                 }
+                resourceName = m_resourcePaths[i] == ".srproject" ? SR_UTILS_NS::String(".srproject") :
+                    "Resources/{}"_format(resourceName);
 
                 if (resourceName.size() > SR_UINT16_MAX) {
                     SetStatus("Resource name is too long: {}"_format(m_resourcePaths[i]), true);
@@ -603,11 +633,12 @@ namespace SR_CORE_GUI_NS {
         }
 
         bool success = true;
+        const auto desktopSuffix = pProfile->desktopPackageMode == DesktopBuildPackageMode::Monolithic ? "_monolithic" : "";
         if (pProfile->windows) {
-            success &= ExportPlatform("Windows", "SREngine_v{}{}_windows.x86_64.exe"_format(version, suffix));
+            success &= ExportPlatform("Windows", "SREngine_v{}{}_windows.x86_64{}.exe"_format(version, suffix, desktopSuffix));
         }
         if (pProfile->linux) {
-            success &= ExportPlatform("Linux", "SREngine_v{}{}_linux.x86_64"_format(version, suffix));
+            success &= ExportPlatform("Linux", "SREngine_v{}{}_linux.x86_64{}"_format(version, suffix, desktopSuffix));
         }
         if (pProfile->androidArm64) {
             success &= ExportPlatform("Android", "SREngine_v{}{}_android.arm64-v8a.apk"_format(version, suffix));

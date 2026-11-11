@@ -42,6 +42,7 @@
 #include <Utils/FileSystem/AndroidVFSBackend.h>
 #include <Utils/FileSystem/GitHubVFSBackend.h>
 #include <Utils/FileSystem/Archive.h>
+#include <Utils/FileSystem/ArchiveVFSBackend.h>
 
 namespace SR_CORE_NS {
     Application::Application()
@@ -70,8 +71,7 @@ namespace SR_CORE_NS {
             path = logPath.value();
         }
         else {
-            auto&& appPath = SR_PLATFORM_NS::GetApplicationPath();
-            path = SR_UTILS_NS::StringUtils::GetDirToFileFromFullPath(appPath);
+            path = SR_PLATFORM_NS::GetApplicationUserDataDirectory().Concat("Logs");
         }
 
         SR_UTILS_NS::Path logDir = SR_UTILS_NS::CLIManager::Instance().GetOptionValue(SR_UTILS_NS::CLIOptions::LogDir).value_or(path.ToString());
@@ -89,14 +89,15 @@ namespace SR_CORE_NS {
 
         SR_SYSTEM_LOG("Application::EarlyInit() : early initializing application...");
 
-        if (!SR_UTILS_NS::CLIManager::Instance().IsAppOpenedByProjectFile() && SR_UTILS_NS::VFS::Instance().IsExists(".srproject")) {
-            auto&& pSettings = CoreResLoader::Load<SR_CORE_NS::ProjectSettings>(".srproject");
+        SR_CORE_NS::ProjectSettings::Ptr pSettings = SR_UTILS_NS::VFS::Instance().IsExists(".srproject") ? CoreResLoader::Load<SR_CORE_NS::ProjectSettings>(".srproject") : nullptr;
+        if (!SR_UTILS_NS::CLIManager::Instance().IsAppOpenedByProjectFile() && pSettings) {
             if (!pSettings->buildProfiles.empty()) {
                 auto&& profiles = pSettings->buildProfiles;
                 const uint32_t profileIndex = pSettings->activeBuildProfile < profiles.size() ? pSettings->activeBuildProfile : 0;
                 const auto& profile = profiles[profileIndex];
                 SR_PLATFORM_NS::SetApplicationInfo({
                    .name = pSettings->projectName.ToString(),
+                   .project = {},
                    .organization = profile.organization,
                    .version = pSettings->version,
                    .engineVersion = SR_ENGINE_VERSION
@@ -108,12 +109,15 @@ namespace SR_CORE_NS {
         else {
             SR_UTILS_NS::StoreUtils::Temp::SetBool("ApplicationIsGame", false);
             SR_INFO("Application::EarlyInit() : application isn't a game!");
+            SR_PLATFORM_NS::ApplicationInfo appInfo = SR_PLATFORM_NS::GetApplicationInfo();
+            appInfo.project = pSettings ? SR_UTILS_NS::String(pSettings->projectName) : appInfo.project;
+            SR_PLATFORM_NS::SetApplicationInfo(appInfo);
         }
 
         auto&& appInfo = SR_PLATFORM_NS::GetApplicationInfo();
         auto&& userDataAppPath = SR_PLATFORM_NS::GetUserDataDirectory().Concat(appInfo.organization).Concat(appInfo.name);
-        SR_SYSTEM_LOG("Application::EarlyInit() : application info: \n\tName: {}\n\tOrganization: {}\n\tVersion: {}\n\tEngine version: {}\n\tUser data path: {}",
-              appInfo.name, appInfo.organization, appInfo.version, appInfo.engineVersion, userDataAppPath
+        SR_SYSTEM_LOG("Application::EarlyInit() : application info: \n\tName: {}\n\tOrganization: {}\n\tProject: {}\n\tVersion: {}\n\tEngine version: {}\n\tUser data path: {}",
+              appInfo.name, appInfo.organization, appInfo.project, appInfo.version, appInfo.engineVersion, userDataAppPath
         );
         SR_UTILS_NS::VFS::Instance().Mount(userDataAppPath, new SR_UTILS_NS::DirectoryVFSBackend(userDataAppPath), 0);
 
@@ -155,10 +159,31 @@ namespace SR_CORE_NS {
     bool Application::InitializeResourcesFolder() {
         SR_LOG("Application::InitializeResourcesFolder() : initializing resources folder...");
 
-        auto&& engineResourcesPath = SR_PLATFORM_NS::GetApplicationResourcesPath();
         auto&& resourcesPath = CoreResLoader::GetResPath();
 
         SR_UTILS_NS::VFS::Instance().UnmountAll();
+        SR_UTILS_NS::StoreUtils::Temp::SetBool("ApplicationHasEmbeddedResources", false);
+        bool embeddedResourcesMounted = false;
+
+    #if defined(SR_DESKTOP)
+        {
+            auto* pArchive = new SR_UTILS_NS::ArchiveVFSBackend(SR_PLATFORM_NS::GetApplicationPath(), SR_UTILS_NS::ArchiveVFSBackendMode::File);
+            if (pArchive->IsValid()) {
+                if (SR_UTILS_NS::CLIManager::Instance().GetProjectPath()) {
+                    pArchive->AddIgnoredPath(".srproject");
+                }
+                SR_UTILS_NS::VFS::Instance().Mount("", pArchive, 0);
+                SR_UTILS_NS::StoreUtils::Temp::SetBool("ApplicationHasEmbeddedResources", true);
+                embeddedResourcesMounted = true;
+            }
+            else {
+                delete pArchive;
+            }
+        }
+    #endif
+
+        const auto engineResourcesPath = embeddedResourcesMounted
+            ? SR_UTILS_NS::Path() : SR_PLATFORM_NS::GetApplicationResourcesPath();
 
         bool projectPathMounted = false;
 
@@ -179,28 +204,44 @@ namespace SR_CORE_NS {
             SR_UTILS_NS::VFS::Instance().Mount("Bin", new SR_UTILS_NS::ReadOnlyDirectoryVFSBackend(appFolder), -50);
         }
 
+        if (embeddedResourcesMounted && !SR_UTILS_NS::CLIManager::Instance().GetProjectPath()) {
+            return true;
+        }
+
+        SR_UTILS_NS::Path selectedProjectFile;
         if (auto&& projectPath = SR_UTILS_NS::CLIManager::Instance().GetProjectPath()) {
+            selectedProjectFile = SR_PLATFORM_NS::GetPathType(*projectPath) == SR_UTILS_NS::FSItemType::File
+                ? *projectPath : projectPath->Concat(".srproject");
             auto&& projectResourcesPath = SR_PLATFORM_NS::GetPathType(*projectPath) == SR_UTILS_NS::FSItemType::File
                 ? projectPath->GetFolder().Concat("Resources")
                 : projectPath->Concat("Resources");
 
-            if (SR_PLATFORM_NS::IsDirectoryExists(projectResourcesPath) && projectResourcesPath != engineResourcesPath) {
-                auto&& pEngineReadOnlyBackend = new SR_UTILS_NS::ReadOnlyDirectoryVFSBackend(engineResourcesPath);
+            if (SR_PLATFORM_NS::IsDirectoryExists(projectResourcesPath) &&
+                (embeddedResourcesMounted || projectResourcesPath != engineResourcesPath)) {
+                if (!embeddedResourcesMounted) {
+                    auto&& pEngineReadOnlyBackend = new SR_UTILS_NS::ReadOnlyDirectoryVFSBackend(engineResourcesPath);
 
-                pEngineReadOnlyBackend->AddIgnoredExtension("so");
-                pEngineReadOnlyBackend->AddIgnoredExtension("pdb");
-                pEngineReadOnlyBackend->AddIgnoredExtension("dll");
+                    pEngineReadOnlyBackend->AddIgnoredExtension("so");
+                    pEngineReadOnlyBackend->AddIgnoredExtension("pdb");
+                    pEngineReadOnlyBackend->AddIgnoredExtension("dll");
 
-                SR_UTILS_NS::VFS::Instance().Mount(resourcesPath, pEngineReadOnlyBackend, 0);
+                    SR_UTILS_NS::VFS::Instance().Mount(resourcesPath, pEngineReadOnlyBackend, 0);
+                }
                 SR_UTILS_NS::VFS::Instance().Mount(resourcesPath, new SR_UTILS_NS::DirectoryVFSBackend(projectResourcesPath), 100);
                 SR_UTILS_NS::Features::Instance().Reload();
                 projectPathMounted = true;
+            }
+            else if (embeddedResourcesMounted) {
+                SR_ERROR("Application::InitializeResourcesFolder() : project resources folder does not exist: {}", projectResourcesPath);
+                return false;
             }
         }
 
         if (auto&& gameLink = SR_UTILS_NS::CLIManager::Instance().GetOptionValue(SR_UTILS_NS::CLIOptions::GameLink)) {
             SR_INFO("Application::InitializeResourcesFolder() : game link detected: \"{}\".", gameLink.value());
-            SR_UTILS_NS::VFS::Instance().Mount(resourcesPath, new SR_UTILS_NS::DirectoryVFSBackend(engineResourcesPath), 0);
+            if (!embeddedResourcesMounted) {
+                SR_UTILS_NS::VFS::Instance().Mount(resourcesPath, new SR_UTILS_NS::DirectoryVFSBackend(engineResourcesPath), 0);
+            }
             SR_UTILS_NS::VFS::Instance().Mount("", new SR_UTILS_NS::GitHubVFSBackend(gameLink.value()), 50);
             SR_UTILS_NS::Features::Instance().Reload();
             projectPathMounted = true;
@@ -214,7 +255,7 @@ namespace SR_CORE_NS {
         if (!SR_UTILS_NS::VFS::Instance().ResolvePath(homePath, SR_UTILS_NS::FileMode::Write)) {
             SRHaltTerminate("Application::InitializeResourcesFolder() : failed to resolve resources folder! Terminate because it's possible destructive launch!");
         }
-        auto&& projectPath = homePath.GetFolder().Concat(".srproject");
+        const auto projectPath = selectedProjectFile.empty() ? homePath.GetFolder().Concat(".srproject") : selectedProjectFile;
 
         if (SR_PLATFORM_NS::GetPathType(projectPath) == SR_UTILS_NS::FSItemType::File) {
             SR_UTILS_NS::VFS::Instance().Mount(".srproject", new SR_UTILS_NS::SingleFileDirectoryVFSBackend(projectPath), 150);

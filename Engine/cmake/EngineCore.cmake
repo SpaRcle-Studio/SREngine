@@ -57,7 +57,8 @@ else()
     endif()
 endif()
 
-if (NOT SR_ENGINE_FLATPAK_BUILD AND NOT ANDROID_NDK)
+set(SR_ENGINE_USE_RESOURCE_EMBEDDER OFF)
+if (SR_ENGINE_USE_RESOURCE_EMBEDDER AND NOT SR_ENGINE_FLATPAK_BUILD AND NOT ANDROID_NDK)
     include(libs/Utils/cmake/ResourceEmbedder.cmake)
 
     AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Threads.sras")
@@ -72,6 +73,8 @@ if (NOT SR_ENGINE_FLATPAK_BUILD AND NOT ANDROID_NDK)
     EmbedResources("${CMAKE_CURRENT_BINARY_DIR}/libs/Utils/include/Utils" "Resources" ${EMBED_RESOURCES_LIST})
 
     set(SR_COMMON_EMBED_RESOURCES ON)
+else()
+    message(STATUS "SpaRcle Engine: resource embedder disabled")
 endif()
 
 if (EMSCRIPTEN)

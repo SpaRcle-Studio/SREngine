@@ -9,6 +9,56 @@ on:
         required: true
 
 jobs:
+  TestsWindowsReleaseMonolithic:
+    name: Windows Release Monolithic Tests.
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - name: Download Release Monolithic build
+        uses: actions/download-artifact@v4
+        with:
+          name: "Windows Release Monolithic SpaRcle Engine"
+          path: "${{ runner.temp }}/monolithic-release"
+
+      - name: Run Release Monolithic tests directly from executable
+        shell: pwsh
+        timeout-minutes: 10
+        working-directory: "${{ runner.temp }}/monolithic-release"
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $PSNativeCommandUseErrorActionPreference = $false
+          $executables = @(Get-ChildItem -LiteralPath . -Filter 'SREngine_*.exe' -File)
+          if ($executables.Count -ne 1) {
+              throw 'Expected exactly one monolithic executable.'
+          }
+          if (Test-Path -LiteralPath Resources) {
+              throw 'Monolithic tests must run without an external Resources folder.'
+          }
+          & $executables[0].FullName --unit-tests --headless *>&1 | Tee-Object -FilePath monolithic_test_log.txt
+          $testExitCode = $LASTEXITCODE
+          if ($testExitCode -ne 0) {
+              throw "Monolithic tests exited with code $testExitCode."
+          }
+          $logContent = Get-Content -LiteralPath monolithic_test_log.txt -Raw
+          if ($logContent -notmatch 'EngineRuntimeSmokeTest::Run\(\) : launcher initialized successfully\.' -or
+              $logContent -notmatch 'TestManager::RunAll\(\) : all tests finished!' -or
+              $logContent -notmatch 'Debugger has been stopped with no errors and warnings!') {
+              throw 'Monolithic tests did not complete the runtime smoke test successfully.'
+          }
+          if ((Test-Path -LiteralPath Resources) -or (Test-Path -LiteralPath SREngine)) {
+              throw 'Monolithic executable extracted resources or engine files.'
+          }
+
+      - name: Upload Release Monolithic test logs
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Windows Release Monolithic Test Logs"
+          path: |
+            ${{ runner.temp }}/monolithic-release/*.txt
+            ${{ runner.temp }}/monolithic-release/*.log
+          if-no-files-found: ignore
+
   TestsWindows:
     name: Windows Tests.
     runs-on: windows-latest

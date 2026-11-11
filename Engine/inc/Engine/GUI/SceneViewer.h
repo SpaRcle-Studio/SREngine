@@ -36,7 +36,6 @@ namespace SR_CORE_GUI_NS {
         using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;
         using WindowPtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::Window>;
         using EnginePtr = SR_HTYPES_NS::SharedPtr<Engine>;
-        SR_INLINE_STATIC const std::string CAMERA_XML = "Editor/Camera.xml";
     public:
         SceneViewer();
         ~SceneViewer() override;

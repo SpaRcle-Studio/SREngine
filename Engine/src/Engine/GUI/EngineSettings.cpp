@@ -142,7 +142,10 @@ namespace SR_CORE_GUI_NS {
         if (SR_IMMEDIATE_GUI_NS::Button("Save", { windowWidth * 0.2f, lineHeight })) {
             SR_UTILS_NS::SRASerializer serializer;
             m_cachedGraphicsSettings.Save(serializer);
-            auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(SR_GRAPH_NS::ActiveGraphicsSettings::SETTINGS_PATH);
+            auto&& path = SR_PLATFORM_NS::GetApplicationUserDataDirectory()
+                .Concat("User")
+                .Concat(SR_PLATFORM_NS::GetApplicationInfo().project)
+                .Concat("GraphicsSettings.sra");
             if (!serializer.SaveToFile(path)) {
                 SR_ERROR("EngineSettings::DrawGraphicsSettings() : failed to save graphics settings to path: {}", path);
             }

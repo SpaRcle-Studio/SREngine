@@ -386,7 +386,12 @@ namespace SR_CORE_GUI_NS {
     void SceneViewer::LoadCameraSettings() {
         m_updateNonHoveredSceneViewer = SR_UTILS_NS::Features::Instance().Enabled("UpdateNonHoveredSceneViewer", true);
 
-        auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(CAMERA_XML);
+        SR_UTILS_NS::Path path = SR_PLATFORM_NS::GetApplicationUserDataDirectory()
+                .Concat("User")
+                .Concat(SR_PLATFORM_NS::GetApplicationInfo().project)
+                .Concat("Editor")
+                .Concat("Camera.xml");
+
         if (!path.IsFile()) {
             return;
         }
@@ -412,7 +417,13 @@ namespace SR_CORE_GUI_NS {
         settings.AppendNode("Translation").AppendAttribute<SR_MATH_NS::FVector3>(m_cameraTranslation);
         settings.AppendNode("Rotation").AppendAttribute<SR_MATH_NS::FVector3>(m_cameraRotation);
 
-        if (!xmlDocument.Save(SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(CAMERA_XML))) {
+        SR_UTILS_NS::Path path = SR_PLATFORM_NS::GetApplicationUserDataDirectory()
+            .Concat("User")
+            .Concat(SR_PLATFORM_NS::GetApplicationInfo().project)
+            .Concat("Editor")
+            .Concat("Camera.xml");
+
+        if (!xmlDocument.Save(path)) {
             SR_ERROR("SceneViewer::BackupCameraSettings() : failed to save camera settings!");
         }
     }
