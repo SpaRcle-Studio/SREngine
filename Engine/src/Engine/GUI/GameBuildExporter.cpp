@@ -12,6 +12,7 @@
 #include <Utils/FileSystem/Archive.h>
 #include <Utils/Platform/Platform.h>
 #include <Utils/Resources/ResourceManager.h>
+#include <Utils/Common/Hashes.h>
 
 #include <zlib/zlib.h>
 
@@ -469,6 +470,28 @@ namespace SR_CORE_GUI_NS {
                 javascript.substr(createFilePosition + createFile.size());
         }
         data[dataIndex] = webData;
+
+        // Repacking changes JS and data, so their cache keys must change with the exported project.
+        SR_UTILS_NS::String manifest = "{\"files\":{";
+        bool firstAsset = true;
+        for (uint32_t i = 0; i < names.size(); ++i) {
+            const char* asset = names[i].ends_with("SREngine.js") ? "SREngine.js"
+                : names[i].ends_with("SREngine.wasm") ? "SREngine.wasm"
+                : names[i].ends_with("SREngine.data") ? "SREngine.data" : nullptr;
+            if (!asset) { continue; }
+            if (!firstAsset) { manifest += ','; }
+            firstAsset = false;
+            manifest += "\"{}\":\"{:016x}\""_format(asset, SR_UTILS_NS::HashArrayRepresentation(data[i].data(), data[i].size()));
+        }
+        manifest += "}}";
+        bool manifestFound = false;
+        for (uint32_t i = 0; i < names.size(); ++i) {
+            if (names[i].ends_with("SREngine.manifest.json")) { data[i] = manifest; manifestFound = true; }
+        }
+        if (!manifestFound) {
+            names.emplace_back(names[javascriptIndex].substr(0, names[javascriptIndex].size() - SR_UTILS_NS::StringView("SREngine.js").size()) + "SREngine.manifest.json");
+            data.emplace_back(std::move(manifest));
+        }
 
         SR_UTILS_NS::Vector<SR_UTILS_NS::Archive::Entry> entries;
         entries.reserve(names.size());

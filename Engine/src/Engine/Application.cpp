@@ -194,6 +194,14 @@ namespace SR_CORE_NS {
             projectPathMounted = true;
         }
 
+    #ifdef SR_EMSCRIPTEN
+        for (const char* directory : {"/Persistent", "/Downloads"}) {
+            if (!SR_UTILS_NS::VFS::Instance().HaveMount(directory)) {
+                SR_UTILS_NS::VFS::Instance().Mount(directory, new SR_UTILS_NS::DirectoryVFSBackend(directory), 200, true);
+            }
+        }
+    #endif
+
         /// в assets писать нельзя, поэтому всё изменяемое (кеш, конфиги) уходит в папку данных
         /// приложения. Она монтируется поверх ресурсов, чтобы изменённые файлы имели приоритет
         if (auto&& dataPath = SR_PLATFORM_NS::GetApplicationDataPath(); dataPath && !dataPath->empty()) {

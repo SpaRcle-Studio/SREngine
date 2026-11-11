@@ -21,11 +21,19 @@ enum LauncherEntryPointErrorCode : int32_t {
     LauncherEntryPointErrorCode_ExecuteError
 };
 
+#ifdef SR_EMSCRIPTEN
+static SR_HTYPES_NS::SharedPtr<SR_CORE_NS::Launcher>& GetWebLauncher() {
+    static SR_HTYPES_NS::SharedPtr<SR_CORE_NS::Launcher> launcher;
+    return launcher;
+}
+#endif
+
 static int32_t LauncherEntryPoint(const LauncherEntryPointAfterInitCallback& afterInitCallback = LauncherEntryPointAfterInitCallback()) {
     SR_TRACY_ZONE;
 
 #ifdef SR_EMSCRIPTEN
-    static SR_HTYPES_NS::SharedPtr pLauncher = new SR_CORE_NS::Launcher();
+    auto& pLauncher = GetWebLauncher();
+    pLauncher = new SR_CORE_NS::Launcher();
 #else
     SR_HTYPES_NS::SharedPtr pLauncher = new SR_CORE_NS::Launcher();
 #endif

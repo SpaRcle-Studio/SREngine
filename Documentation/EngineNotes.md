@@ -46,6 +46,8 @@ AI агентам разрешено дополнять в ходе выполн
 
 ## Рендер
 
+- `Pipeline::GetPixelRangeResult` возвращает каналы байтовых color-форматов в диапазоне **0..255**, даже если результат имеет тип `FColor`. `IColorBufferPass::GetMeshByColor` декодирует из них ID меша целочисленным преобразованием. Нормализация readback до 0..1 ломает picking; нормализуется только цвет, записываемый в шейдер (`GetMeshColor`).
+
 - `RenderQueue` фиксирует VBO в момент регистрации. Изменение меша ставит объект в очередь перерегистрации (`RenderStrategy::Prepare`), и пока объект её ждёт (`IsWaitReRegister`), он не рисуется.
 - Compute: `ComputeShader::EndCompute()` вызывает `WaitComputeIdle()`, то есть compute-проход синхронный, и после него SSBO можно читать сразу.
 - `SSBOInstance::ResetCounter()` на неоткрытом (не замапленном) буфере сам открывает его, флашит и закрывает. Вызывать после этого `FlushCounter()` без `Map` нельзя: сработает ассерт `SSBO is not mapped`.

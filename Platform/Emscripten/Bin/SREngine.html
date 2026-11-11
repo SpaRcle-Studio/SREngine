@@ -19,21 +19,76 @@
             outline: none;
             touch-action: none;
         }
+        #sr-status { position: fixed; inset: 1rem auto auto 1rem; max-width: 32rem; padding: 1rem; color: #eee; background: #222e; font: 14px system-ui; z-index: 10; }
+        #sr-actions { position: fixed; right: 0; top: 0; z-index: 10; }
+        button { padding: .5rem .8rem; }
+        #sr-fullscreen { margin: 0; padding: 4px 6px; border-radius: 0; font: 14px system-ui; }
     </style>
 </head>
 <body>
     <canvas id="srengine-canvas" width="800" height="600" tabindex="0"></canvas>
-    <script src="SREngine.js"></script>
+    <div id="sr-status" role="status" aria-live="polite">Loading engine…</div>
+    <div id="sr-actions"><button id="sr-keyboard" type="button" hidden>Keyboard</button><button id="sr-fullscreen" type="button">Fullscreen</button><button id="sr-restart" type="button" hidden>Restart</button></div>
     <script>
-        // Keep focus on canvas so it can receive input.
         const canvas = document.getElementById('srengine-canvas');
+        const status = document.getElementById('sr-status');
+        const restart = document.getElementById('sr-restart');
+        let fatal = false;
+        function fail(message) {
+            fatal = true;
+            globalThis.srEngineFatalError = String(message);
+            status.hidden = false;
+            status.textContent = String(message);
+            restart.hidden = false;
+        }
+        restart.onclick = () => location.reload();
+        const keyboard = document.getElementById('sr-keyboard');
+        keyboard.hidden = !matchMedia('(pointer:coarse)').matches;
+        keyboard.onclick = () => globalThis.srEngineModule?.srShowKeyboard();
+        document.getElementById('sr-fullscreen').onclick = () => {
+            const request = document.fullscreenElement ? document.exitFullscreen() : canvas.requestFullscreen();
+            request.catch(error => { status.hidden = false; status.textContent = String(error); });
+        };
+        addEventListener('srengine-error', event => fail(event.detail));
+        addEventListener('srengine-warning', event => { status.hidden = false; status.textContent = event.detail; });
+        addEventListener('srengine-running', () => {
+            if (!fatal) status.hidden = true;
+            document.documentElement.dataset.srengine = 'running';
+        });
         canvas.addEventListener('click', () => canvas.focus());
         canvas.addEventListener('contextmenu', (e) => e.preventDefault());
-
-        // Ждём, пока модуль загрузится
-        SREngine().then(Module => {
-            console.log("WASM loaded!");
-        });
+        if (!isSecureContext || !navigator.gpu) {
+            fail('WebGPU is unavailable. Open this page over HTTPS or localhost in a browser with WebGPU support.');
+        } else {
+            (async () => {
+            const response = await fetch('SREngine.manifest.json', {cache: 'no-store'});
+            if (!response.ok) throw new Error('Could not load the build manifest');
+            const manifest = await response.json();
+            const assetURL = (file, prefix = location.href) => {
+                const url = new URL(file, prefix || location.href);
+                const hash = manifest.files[file];
+                if (hash) url.searchParams.set('v', hash);
+                return url.href;
+            };
+            await new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = assetURL('SREngine.js');
+                script.onload = resolve;
+                script.onerror = () => reject(new Error('Could not load engine JavaScript'));
+                document.head.appendChild(script);
+            });
+            return SREngine({
+                canvas,
+                locateFile: assetURL,
+                onAbort: reason => fail('Engine stopped: ' + reason),
+                onExit: code => { if (code) fail('Engine exited with code ' + code); },
+                monitorRunDependencies: count => {
+                    if (!fatal && count) status.textContent = 'Loading resources (' + count + ' remaining)…';
+                },
+                printErr: message => console.error(message)
+            });
+            })().then(module => { globalThis.srEngineModule = module; }).catch(error => fail('Could not start the engine: ' + error));
+        }
     </script>
 </body>
 </html>

@@ -94,3 +94,4 @@ Resources/**/*.so
 /CI/dumpbin.exe
 /Resources/Engine/Utilities/codegen.lock
 /.vscode
+/Platform/Emscripten/Bin/SREngine.manifest.json

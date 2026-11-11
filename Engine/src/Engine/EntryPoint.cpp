@@ -15,6 +15,10 @@
 #include <Codegen/SpaRcleModuleApplicationCore.generated.hpp>
 
 void ShutdownApplication() {
+#ifdef SR_EMSCRIPTEN
+    SR_PLATFORM_NS::SetWebApplicationShutdownCallback(nullptr);
+    GetWebLauncher().AutoFree();
+#endif
     SR_UTILS_NS::GetSingletonManager()->DestroyAll();
     if (SR_UTILS_NS::ResourceManager::Instance().IsInitialized()) {
         SR_UTILS_NS::ResourceManager::Instance().DeInitialize();
@@ -40,6 +44,9 @@ void ShutdownApplication() {
 int SREngineEntryPoint(int argc, char** argv) {
     SR_UTILS_NS::StartupEngineProfiler();
     SR_PLATFORM_NS::InitializePlatform();
+#ifdef SR_EMSCRIPTEN
+    SR_PLATFORM_NS::SetWebApplicationShutdownCallback(ShutdownApplication);
+#endif
 
     SR_UTILS_NS::Reflection::InitReflection();
     {

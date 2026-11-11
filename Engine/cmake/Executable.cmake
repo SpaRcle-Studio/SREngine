@@ -27,6 +27,9 @@ elseif(SR_EMSCRIPTEN)
     SRPackResourcesToBuild()
 
     add_executable(${SR_EXECUTABLE_NAME} "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Platform/Emscripten/main.cpp")
+    add_dependencies(${SR_EXECUTABLE_NAME} SRBrowserResources)
+    set_property(TARGET ${SR_EXECUTABLE_NAME} APPEND PROPERTY LINK_DEPENDS
+        "${SR_CMAKE_ROOT_BUILD_DIRECTORY}/PackedResources.stamp")
 
     target_link_libraries(${SR_EXECUTABLE_NAME} Engine)
     target_include_directories(${SR_EXECUTABLE_NAME} PUBLIC "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Engine/inc")
@@ -42,12 +45,25 @@ elseif(SR_EMSCRIPTEN)
     endif()
 
     # Скопировать файлы после сборки
+    target_link_options(${SR_EXECUTABLE_NAME} PRIVATE
+        "SHELL:--pre-js \"${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Platform/Emscripten/BrowserRuntime.js\""
+        "-lidbfs.js" "-sFS_DEBUG=1" "-sASYNCIFY=1"
+        "-sSTACK_SIZE=1048576" "-sASYNCIFY_STACK_SIZE=262144"
+        "-sEXPORTED_FUNCTIONS=['_main','_malloc','_free']" "-sEXPORTED_RUNTIME_METHODS=['FS']"
+    )
+    set_property(TARGET ${SR_EXECUTABLE_NAME} APPEND PROPERTY LINK_DEPENDS
+        "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Platform/Emscripten/BrowserRuntime.js"
+        "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Engine/cmake/BrowserManifest.cmake")
     add_custom_command(TARGET ${SR_EXECUTABLE_NAME} POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
         "${SR_CMAKE_ROOT_BUILD_DIRECTORY}/Engine/${SR_EXECUTABLE_NAME}.wasm"
         "${SR_CMAKE_ROOT_BUILD_DIRECTORY}/Engine/${SR_EXECUTABLE_NAME}.js"
         "${SR_CMAKE_ROOT_BUILD_DIRECTORY}/Engine/${SR_EXECUTABLE_NAME}.data"
         "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Platform/Emscripten/Bin/"
+        COMMAND ${CMAKE_COMMAND}
+            "-DSR_BROWSER_BIN=${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Platform/Emscripten/Bin"
+            "-DSR_BROWSER_NAME=${SR_EXECUTABLE_NAME}"
+            -P "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Engine/cmake/BrowserManifest.cmake"
     )
 else()
     set_property(GLOBAL APPEND PROPERTY SR_EXECUTABLE_ARGS "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Platform/Desktop/main.cpp")

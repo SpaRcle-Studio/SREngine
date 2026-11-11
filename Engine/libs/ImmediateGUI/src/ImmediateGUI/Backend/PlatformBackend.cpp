@@ -331,6 +331,7 @@ namespace SR_IMMEDIATE_GUI_NS {
 
         EM_BOOL EmscriptenKeyCallback(int eventType, const EmscriptenKeyboardEvent* e, void* userData) {
             (void)userData;
+            if (!ImGui::GetCurrentContext() || EM_ASM_INT({ return !!Module['srComposing']; })) { return EM_FALSE; }
             ImGuiIO& io = ImGui::GetIO();
 
             /// The canvas may be embedded into a regular page, so its input fields keep priority.
@@ -341,6 +342,8 @@ namespace SR_IMMEDIATE_GUI_NS {
             EmscriptenUpdateModifiers(e);
 
             const bool isDown = eventType == EMSCRIPTEN_EVENT_KEYDOWN;
+            // Native paste delivers Unicode through the hidden textarea's input event.
+            if ((e->ctrlKey || e->metaKey) && e->keyCode == 86) { return EM_FALSE; }
 
             const ImGuiKey key = DomKeyCodeToImGuiKey(e->keyCode);
             if (key != ImGuiKey_None) {
@@ -348,7 +351,8 @@ namespace SR_IMMEDIATE_GUI_NS {
             }
 
             const bool isShortcut = e->ctrlKey || e->metaKey || e->altKey;
-            const bool isTextInput = isDown && !isShortcut && IsEmscriptenTextInput(e->key);
+            const bool isTextInput = isDown && !isShortcut && IsEmscriptenTextInput(e->key)
+                && !EM_ASM_INT({ return !!Module['srTextInputActive']; });
             if (isTextInput) {
                 io.AddInputCharactersUTF8(e->key);
             }
@@ -383,6 +387,7 @@ namespace SR_IMMEDIATE_GUI_NS {
 
         EM_BOOL EmscriptenMouseCallback(int eventType, const EmscriptenMouseEvent* e, void* userData) {
             (void)userData;
+            if (!ImGui::GetCurrentContext()) { return EM_FALSE; }
             ImGuiIO& io = ImGui::GetIO();
 
             const bool isButtonEvent = eventType == EMSCRIPTEN_EVENT_MOUSEDOWN || eventType == EMSCRIPTEN_EVENT_MOUSEUP;
@@ -413,15 +418,26 @@ namespace SR_IMMEDIATE_GUI_NS {
         EM_BOOL EmscriptenWheelCallback(int eventType, const EmscriptenWheelEvent* e, void* userData) {
             (void)eventType;
             (void)userData;
+            if (!ImGui::GetCurrentContext()) { return EM_FALSE; }
             ImGuiIO& io = ImGui::GetIO();
 
             EmscriptenAddMousePos(&e->mouse);
 
-            // Emscripten wheel delta is in pixels (depending on browser), scale to ImGui "lines".
-            const float wheelX = static_cast<float>(-e->deltaX) * 0.01f;
-            const float wheelY = static_cast<float>(-e->deltaY) * 0.01f;
+            const float_t scale = e->deltaMode == DOM_DELTA_PIXEL ? 0.01f : e->deltaMode == DOM_DELTA_LINE ? 1.f / 3.f : 1.f;
+            const float_t wheelX = static_cast<float_t>(-e->deltaX) * scale;
+            const float_t wheelY = static_cast<float_t>(-e->deltaY) * scale;
             io.AddMouseWheelEvent(wheelX, wheelY);
             return EM_TRUE;
+        }
+
+        EM_BOOL EmscriptenBlurCallback(int, const EmscriptenFocusEvent*, void*) {
+            if (ImGui::GetCurrentContext()) { ImGui::GetIO().AddFocusEvent(false); }
+            return EM_FALSE;
+        }
+
+        EM_BOOL EmscriptenFocusCallback(int, const EmscriptenFocusEvent*, void*) {
+            if (ImGui::GetCurrentContext()) { ImGui::GetIO().AddFocusEvent(true); }
+            return EM_FALSE;
         }
 
         bool EnsureEmscriptenCallbacksInstalled() {
@@ -461,6 +477,8 @@ namespace SR_IMMEDIATE_GUI_NS {
         #endif
 
             g_emscriptenPrevTime = emscripten_get_now();
+            emscripten_set_blur_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW, nullptr, EM_FALSE, EmscriptenBlurCallback);
+            emscripten_set_focus_callback(EMSCRIPTEN_EVENT_TARGET_WINDOW, nullptr, EM_FALSE, EmscriptenFocusCallback);
             g_emscriptenInputInitialized = true;
             return true;
         }
@@ -490,6 +508,15 @@ namespace SR_IMMEDIATE_GUI_NS {
                 EnsureEmscriptenCallbacksInstalled();
                 ImGuiIO& io = ImGui::GetIO();
                 io.BackendPlatformName = "sr_imgui_impl_emscripten_custom";
+                ImGuiPlatformIO& platformIO = ImGui::GetPlatformIO();
+                platformIO.Platform_GetClipboardTextFn = [](ImGuiContext*) -> const char* {
+                    static SR_UTILS_NS::String text;
+                    text = SR_PLATFORM_NS::GetClipboardText();
+                    return text.c_str();
+                };
+                platformIO.Platform_SetClipboardTextFn = [](ImGuiContext*, const char* text) {
+                    SR_PLATFORM_NS::TextToClipboard(text ? text : "");
+                };
                 return true;
             }
         #endif
@@ -522,6 +549,17 @@ namespace SR_IMMEDIATE_GUI_NS {
                 break;
         #elif defined(SR_EMSCRIPTEN)
             case PlatformBackend::Emscripten:
+                emscripten_html5_remove_event_listener(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EMSCRIPTEN_EVENT_KEYDOWN, reinterpret_cast<void*>(EmscriptenKeyCallback));
+                emscripten_html5_remove_event_listener(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EMSCRIPTEN_EVENT_KEYUP, reinterpret_cast<void*>(EmscriptenKeyCallback));
+                emscripten_html5_remove_event_listener(EMSCRIPTEN_CANVAS_ID, nullptr, EMSCRIPTEN_EVENT_MOUSEDOWN, reinterpret_cast<void*>(EmscriptenMouseCallback));
+                emscripten_html5_remove_event_listener(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EMSCRIPTEN_EVENT_MOUSEUP, reinterpret_cast<void*>(EmscriptenMouseCallback));
+                emscripten_html5_remove_event_listener(EMSCRIPTEN_EVENT_TARGET_DOCUMENT, nullptr, EMSCRIPTEN_EVENT_MOUSEMOVE, reinterpret_cast<void*>(EmscriptenMouseCallback));
+                emscripten_html5_remove_event_listener(EMSCRIPTEN_CANVAS_ID, nullptr, EMSCRIPTEN_EVENT_WHEEL, reinterpret_cast<void*>(EmscriptenWheelCallback));
+                emscripten_html5_remove_event_listener(EMSCRIPTEN_EVENT_TARGET_WINDOW, nullptr, EMSCRIPTEN_EVENT_BLUR, reinterpret_cast<void*>(EmscriptenBlurCallback));
+                emscripten_html5_remove_event_listener(EMSCRIPTEN_EVENT_TARGET_WINDOW, nullptr, EMSCRIPTEN_EVENT_FOCUS, reinterpret_cast<void*>(EmscriptenFocusCallback));
+                EM_ASM({ Module['srSetTextInput']?.(false); });
+                ImGui::GetPlatformIO().Platform_GetClipboardTextFn = nullptr;
+                ImGui::GetPlatformIO().Platform_SetClipboardTextFn = nullptr;
                 g_emscriptenInputInitialized = false;
                 break;
         #endif
@@ -558,16 +596,25 @@ namespace SR_IMMEDIATE_GUI_NS {
         #elif defined(SR_EMSCRIPTEN)
             case PlatformBackend::Emscripten: {
                 EnsureEmscriptenCallbacksInstalled();
+                ImGuiIO& inputIO = ImGui::GetIO();
+                EM_ASM({ Module['srSetTextInput']?.(!!$0); }, inputIO.WantTextInput);
+                char text[256];
+                while (EM_ASM_INT({ return Module['srPollText']?.($0, $1, true) || 0; }, text, sizeof(text))) {
+                    inputIO.AddInputCharactersUTF8(text);
+                }
                 double cssW = 0.0, cssH = 0.0;
                 if (emscripten_get_element_css_size(EMSCRIPTEN_CANVAS_ID, &cssW, &cssH) == EMSCRIPTEN_RESULT_SUCCESS) {
                     ImGuiIO& io = ImGui::GetIO();
                     io.DisplaySize = ImVec2(static_cast<float>(cssW), static_cast<float>(cssH));
-                    io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
+                    int32_t pixelWidth = 1, pixelHeight = 1;
+                    emscripten_get_canvas_element_size(EMSCRIPTEN_CANVAS_ID, &pixelWidth, &pixelHeight);
+                    io.DisplayFramebufferScale = ImVec2(static_cast<float_t>(pixelWidth / std::max(1.0, cssW)),
+                        static_cast<float_t>(pixelHeight / std::max(1.0, cssH)));
 
                     const double now = emscripten_get_now();
                     const double dt = (now - g_emscriptenPrevTime) / 1000.0;
                     g_emscriptenPrevTime = now;
-                    io.DeltaTime = static_cast<float>(std::max(0.0, dt));
+                    io.DeltaTime = static_cast<float_t>(std::clamp(dt, 0.000001, 0.1));
                 }
                 break;
             }

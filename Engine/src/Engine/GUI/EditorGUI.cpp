@@ -269,6 +269,7 @@ namespace SR_CORE_GUI_NS {
 
             DrawMenuBar();
 
+        #ifndef SR_EMSCRIPTEN
             SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::FrameRounding, 0.f);
             SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, { 0.f, 0.f });
             SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::FrameBorderSize, 1.f);
@@ -300,6 +301,7 @@ namespace SR_CORE_GUI_NS {
             SR_IMMEDIATE_GUI_NS::PopStyleColor(3);
 
             SR_IMMEDIATE_GUI_NS::PopStyleVar(3);
+        #endif
             SR_IMMEDIATE_GUI_NS::EndHorizontal();
 
             SR_IMMEDIATE_GUI_NS::EndMenuBar();

@@ -1,14 +1,16 @@
 @echo off
 setlocal
+cd /d "%~dp0"
 cls
 
 rem === Настройки ===
 set EMSDK_DIR=%~dp0emsdk
+set EMSDK_VERSION=5.0.2
 for %%I in ("%~dp0..\..") do set SR_ENGINE_DIR=%%~fI
 set BUILD_DIR=%~dp0build
 set CONFIG=Release
 set PLATFORM=Emscripten
-set NINJA_URL=https://github.com/ninja-build/ninja/releases/latest/download/ninja-win.zip
+set NINJA_URL=https://github.com/ninja-build/ninja/releases/download/v1.12.1/ninja-win.zip
 set NINJA_ZIP=%~dp0ninja-win.zip
 set NINJA_EXE=%~dp0ninja.exe
 
@@ -39,7 +41,7 @@ if not exist "%NINJA_EXE%" (
     del "%NINJA_ZIP%"
     echo Ninja downloaded and unzipped.
 )
-set PATH=%NINJA_DIR%;%PATH%
+set "PATH=%~dp0;%PATH%"
 
 echo Ninja version:
 ninja --version
@@ -48,12 +50,15 @@ rem === Проверка наличия Emscripten ===
 if not exist "%EMSDK_DIR%" (
 	echo emsdk not exists. Clone it...
 	git clone https://github.com/SpaRcle-Studio/emsdk
+    if errorlevel 1 goto :error
 )
 
 echo Activate emsdk...
 cd emsdk
-call .\emsdk install latest
-call .\emsdk activate latest
+call .\emsdk install %EMSDK_VERSION%
+if errorlevel 1 goto :error
+call .\emsdk activate %EMSDK_VERSION%
+if errorlevel 1 goto :error
 cd ../
 
 set EMSDK_DIR=%~dp0emsdk
@@ -66,3 +71,7 @@ call "%EMSDK_DIR%\emsdk_env.bat"
 if errorlevel 1 goto :error
 
 pause
+exit /b 0
+
+:error
+exit /b 1

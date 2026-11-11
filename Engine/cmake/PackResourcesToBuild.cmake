@@ -1,50 +1,21 @@
-set(SR_PACK_RESOURCES_SCRIPT_PATH "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/CI/scripts/pack_resources.py")
-
-macro(SRPackResourcesToBuild)
-    message(STATUS "Compiling pack resources script: ${SR_PACK_RESOURCES_SCRIPT_PATH}")
-
-    execute_process(
-        COMMAND ${SR_PYTHON_EXECUTABLE} -m PyInstaller --onefile ${SR_PACK_RESOURCES_SCRIPT_PATH}
-        --distpath "${SR_CMAKE_RESOURCES_DIRECTORY}/Engine/Utilities"
-        --paths "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/CI/scripts"
-        --specpath ${CMAKE_CURRENT_BINARY_DIR}
-        --workpath ${CMAKE_CURRENT_BINARY_DIR}/pyi_build
-        RESULT_VARIABLE result
-        OUTPUT_VARIABLE output
-        ERROR_VARIABLE error_output
-    )
-
-    if (result EQUAL "0")
-        message(STATUS "Pack resources script compiled successfully:\n${output}")
-    else()
-        message(FATAL_ERROR "Pack resources script compilation failed with error:\n${error_output}")
-    endif()
-
-    if (SR_HOST_SYSTEM_UNIX)
-        set(SR_PACK_RESOURCES_EXECUTABLE_SCRIPT "${SR_CMAKE_RESOURCES_DIRECTORY}/Engine/Utilities/pack_resources")
-    else()
-        set(SR_PACK_RESOURCES_EXECUTABLE_SCRIPT "${SR_CMAKE_RESOURCES_DIRECTORY}/Engine/Utilities/pack_resources.exe")
-    endif()
-
-    if (NOT EXISTS "${SR_PACK_RESOURCES_EXECUTABLE_SCRIPT}")
-        message(FATAL_ERROR "Pack resources script not found at: ${SR_PACK_RESOURCES_EXECUTABLE_SCRIPT}")
-    endif()
-
-    message(STATUS "Executing pack resources script: ${SR_PACK_RESOURCES_EXECUTABLE_SCRIPT}")
-
-    execute_process(
-        COMMAND ${SR_PACK_RESOURCES_EXECUTABLE_SCRIPT}
-        --root_build_dir "${SR_CMAKE_ROOT_BUILD_DIRECTORY}"
-        --repo_dir "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}"
-        --platform "${SR_ENGINE_PLATFORM}"
-        RESULT_VARIABLE result
-        OUTPUT_VARIABLE output
-        ERROR_VARIABLE error_output
-    )
-
-    if (result EQUAL "0")
-        message(STATUS "Pack resources script executed successfully:\n${output}")
-    else()
-        message(FATAL_ERROR "Pack resources script execution failed with error:\n${error_output}\n${result}")
-    endif()
-endmacro()
+function(SRPackResourcesToBuild)
+    file(GLOB_RECURSE SR_BROWSER_RESOURCE_INPUTS CONFIGURE_DEPENDS
+        "${SR_CMAKE_RESOURCES_DIRECTORY}/*")
+    set(SR_BROWSER_RESOURCE_STAMP "${SR_CMAKE_ROOT_BUILD_DIRECTORY}/PackedResources.stamp")
+    set(SR_BROWSER_RESOURCE_MANIFEST "${CMAKE_CURRENT_BINARY_DIR}/BrowserResourceInputs.txt")
+    string(REPLACE ";" "\n" SR_BROWSER_RESOURCE_INPUT_TEXT "${SR_BROWSER_RESOURCE_INPUTS}")
+    file(GENERATE OUTPUT "${SR_BROWSER_RESOURCE_MANIFEST}" CONTENT "${SR_BROWSER_RESOURCE_INPUT_TEXT}\n")
+    add_custom_command(OUTPUT "${SR_BROWSER_RESOURCE_STAMP}"
+        COMMAND "${SR_PYTHON_EXECUTABLE}" "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/CI/scripts/pack_resources.py"
+            --root_build_dir "${SR_CMAKE_ROOT_BUILD_DIRECTORY}"
+            --repo_dir "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}"
+            --platform "${SR_ENGINE_PLATFORM}"
+        COMMAND ${CMAKE_COMMAND} -E touch "${SR_BROWSER_RESOURCE_STAMP}"
+        DEPENDS ${SR_BROWSER_RESOURCE_INPUTS}
+            "${SR_BROWSER_RESOURCE_MANIFEST}"
+            "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/CI/scripts/pack_resources.py"
+            "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/CI/scripts/create_packing_mask_file.py"
+            "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/CI/scripts/logger_utils.py"
+        VERBATIM)
+    add_custom_target(SRBrowserResources DEPENDS "${SR_BROWSER_RESOURCE_STAMP}")
+endfunction()

@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node smoke.mjs" },
+  "dependencies": { "playwright": "1.51.1" }
+}

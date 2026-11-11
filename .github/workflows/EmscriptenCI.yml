@@ -38,7 +38,7 @@ jobs:
             exit 1
           }
 
-          $required = @("SREngine.html", "SREngine.js", "SREngine.wasm", "SREngine.data")
+          $required = @("SREngine.html", "SREngine.js", "SREngine.wasm", "SREngine.data", "SREngine.manifest.json")
           foreach ($f in $required) {
             $p = Join-Path $binDir $f
             if (-not (Test-Path $p)) {
@@ -53,6 +53,28 @@ jobs:
           }
 
           Write-Host "Emscripten output validated successfully."
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install browser smoke test dependencies
+        working-directory: CI/browser
+        run: |
+          npm install --ignore-scripts
+          npx playwright install chromium
+
+      - name: Browser smoke test
+        working-directory: CI/browser
+        run: npm test
+
+      - name: Upload browser smoke report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Emscripten-browser-smoke
+          path: CI/browser/report
+          if-no-files-found: ignore
 
       - name: Publish web demo binaries (rewrite history)
         if: ${{ github.event_name == 'push' && (github.ref_name == 'dev' || github.ref_name == 'master') }}
@@ -84,8 +106,10 @@ jobs:
           cp "$BIN_DIR/SREngine.js" .
           cp "$BIN_DIR/SREngine.wasm" .
           cp "$BIN_DIR/SREngine.data" .
+          cp "$BIN_DIR/SREngine.html" .
+          cp "$BIN_DIR/SREngine.manifest.json" .
 
-          git add SREngine.js SREngine.wasm SREngine.data
+          git add SREngine.html SREngine.js SREngine.wasm SREngine.data SREngine.manifest.json
           git commit -m "Update web demo artifacts from SREngine ${GITHUB_SHA}"
 
           git remote add origin "https://x-access-token:${CITOKEN}@github.com/SpaRcle-Studio/SREngineWebDemo.git"
