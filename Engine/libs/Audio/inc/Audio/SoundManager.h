@@ -30,7 +30,7 @@ namespace SR_AUDIO_NS {
         bool isFailed = false;
     };
 
-    class SoundManager : public SR_UTILS_NS::Singleton<SoundManager> {
+    class SR_AUDIO_DLL_API SoundManager : public SR_UTILS_NS::Singleton<SoundManager> {
         SR_REGISTER_SINGLETON(SoundManager)
     public:
         enum class State : uint8_t {

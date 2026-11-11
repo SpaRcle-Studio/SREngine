@@ -19,7 +19,7 @@ namespace SR_PTYPES_NS {
 namespace SR_PHYSICS_NS {
     class LibraryImpl;
 
-    class PhysicsLibrary : public SR_UTILS_NS::Singleton<PhysicsLibrary> {
+    class SR_PHYSICS_DLL_API PhysicsLibrary : public SR_UTILS_NS::Singleton<PhysicsLibrary> {
         SR_REGISTER_SINGLETON(PhysicsLibrary)
         using Super = SR_UTILS_NS::Singleton<PhysicsLibrary>;
         using Space = SR_UTILS_NS::Measurement;

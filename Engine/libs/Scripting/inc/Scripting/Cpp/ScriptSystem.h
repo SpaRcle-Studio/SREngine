@@ -19,7 +19,7 @@ namespace SR_SCRIPTING_NS {
         InitialAnalyse, Idle, CheckModules, Codegen, Compiling, Reloading
     );
 
-    class ScriptSystem : public SR_UTILS_NS::Singleton<ScriptSystem> {
+    class SR_SCRIPTING_DLL_API ScriptSystem : public SR_UTILS_NS::Singleton<ScriptSystem> {
         SR_REGISTER_SINGLETON(ScriptSystem)
         using Super = SR_HTYPES_NS::SharedPtr<ScriptSystem>;
     public:

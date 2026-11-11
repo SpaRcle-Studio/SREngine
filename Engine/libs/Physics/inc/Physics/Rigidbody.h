@@ -74,7 +74,7 @@ namespace SR_PTYPES_NS {
     /// ----------------------------------------------------------------------------------------------------------------
 
     /// @abstract
-    class Rigidbody : public SR_UTILS_NS::Component {
+    class SR_PHYSICS_DLL_API Rigidbody : public SR_UTILS_NS::Component {
         friend class SR_PHYSICS_NS::PhysicsScene;
         SR_CLASS()
     protected:

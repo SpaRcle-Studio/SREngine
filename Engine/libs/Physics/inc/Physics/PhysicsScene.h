@@ -22,7 +22,7 @@ namespace SR_PHYSICS_NS {
     class CharacterController;
     class PhysicsWorld;
 
-    class PhysicsScene : public SR_HTYPES_NS::SharedPtr<PhysicsScene>, public SR_UTILS_NS::ISceneModule {
+    class SR_PHYSICS_DLL_API PhysicsScene : public SR_HTYPES_NS::SharedPtr<PhysicsScene>, public SR_UTILS_NS::ISceneModule {
         friend class SR_HTYPES_NS::SharedPtr<PhysicsScene>;
     public:
         using Super = SR_HTYPES_NS::SharedPtr<PhysicsScene>;

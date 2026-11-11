@@ -90,7 +90,7 @@ namespace SR_IMMEDIATE_GUI_NS {
     )
 
     /// @extension(theme)
-    class ImGUITheme : public SR_UTILS_NS::Asset {
+    class SR_IMMEDIATE_GUI_DLL_API ImGUITheme : public SR_UTILS_NS::Asset {
         SR_CLASS()
         using Super = SR_UTILS_NS::Asset;
     public:

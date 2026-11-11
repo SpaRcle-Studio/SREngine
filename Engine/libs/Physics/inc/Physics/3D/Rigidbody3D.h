@@ -32,7 +32,7 @@ namespace SR_PTYPES_NS {
     /// ----------------------------------------------------------------------------------------------------------------
 
     /// @category(Physics)
-    class Rigidbody3D final : public Rigidbody {
+    class SR_PHYSICS_DLL_API Rigidbody3D final : public Rigidbody {
         SR_CLASS()
         using Super = Rigidbody;
     public:

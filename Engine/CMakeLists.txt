@@ -40,3 +40,16 @@ endif()
 
 include(cmake/EngineCore.cmake)
 include(cmake/Executable.cmake)
+
+option(SR_ENGINE_GENERATE_MAP "Generate MSVC linker MAP files for shared engine modules" OFF)
+
+if (MSVC AND SR_ENGINE_GENERATE_MAP)
+    foreach(SR_MAP_MODULE IN ITEMS Utils ImmediateGUI Audio Physics Graphics Scripting Engine)
+        get_target_property(SR_MAP_MODULE_TYPE ${SR_MAP_MODULE} TYPE)
+        if (SR_MAP_MODULE_TYPE STREQUAL "SHARED_LIBRARY")
+            target_link_options(${SR_MAP_MODULE} PRIVATE
+                "/MAP:$<TARGET_FILE_DIR:${SR_MAP_MODULE}>/$<TARGET_FILE_BASE_NAME:${SR_MAP_MODULE}>.map"
+            )
+        endif()
+    endforeach()
+endif()

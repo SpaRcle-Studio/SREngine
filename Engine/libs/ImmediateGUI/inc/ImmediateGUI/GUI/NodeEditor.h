@@ -20,7 +20,7 @@ namespace SR_IMMEDIATE_GUI_NS {
         SR_UTILS_NS::Reflection::Value value;
     };
 
-    struct PinTypeInfo {
+    struct SR_IMMEDIATE_GUI_DLL_API PinTypeInfo {
         PinTypeInfo() = default;
         PinTypeInfo(const SR_UTILS_NS::Reflection::TypeInfo* pType, bool isFlow)
             : pType(pType)
@@ -76,7 +76,7 @@ namespace SR_IMMEDIATE_GUI_NS {
         StateMachine
     };
 
-    class NodeEditorInstance {
+    class SR_IMMEDIATE_GUI_DLL_API NodeEditorInstance {
         using OnNodeDeletedCallback = SR_HTYPES_NS::Function<void(NodeInstance&)>;
         using OnLinkDeletedCallback = SR_HTYPES_NS::Function<void(LinkInstance&)>;
         using OnLinkCreatedCallback = SR_HTYPES_NS::Function<void(LinkInstance&)>;
@@ -161,7 +161,7 @@ namespace SR_IMMEDIATE_GUI_NS {
 
     };
 
-    class NodeInstance {
+    class SR_IMMEDIATE_GUI_DLL_API NodeInstance {
         using InputPin = PinInstance*;
         using OutputPin = PinInstance*;
     public:

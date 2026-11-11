@@ -51,7 +51,7 @@ namespace SR_PTYPES_NS {
     };
 
     /// @category(Physics)
-    class CollisionShape final : public SR_UTILS_NS::Component, public SR_HTYPES_NS::IRawMeshHolder {
+    class SR_PHYSICS_DLL_API CollisionShape final : public SR_UTILS_NS::Component, public SR_HTYPES_NS::IRawMeshHolder {
         SR_CLASS()
         friend class SR_PHYSICS_NS::PhysicsScene;
         using Super = SR_UTILS_NS::Component;

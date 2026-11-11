@@ -13,7 +13,7 @@
 
 namespace SR_PHYSICS_NS {
     /// @noCopyable @noMovable
-    class RayCast3D final : public SR_UTILS_NS::Singleton<RayCast3D>, public RayCast, public SR_UTILS_NS::SRClass {
+    class SR_PHYSICS_DLL_API RayCast3D final : public SR_UTILS_NS::Singleton<RayCast3D>, public RayCast, public SR_UTILS_NS::SRClass {
         SR_REGISTER_SINGLETON(RayCast3D)
         SR_CLASS()
     public:
