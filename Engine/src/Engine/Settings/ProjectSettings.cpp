@@ -15,7 +15,6 @@ namespace SR_CORE_NS {
                configuration == rhs.configuration &&
                desktopPackageMode == rhs.desktopPackageMode &&
                outputPath == rhs.outputPath &&
-               startScene == rhs.startScene &&
                organization == rhs.organization &&
                androidPackageId == rhs.androidPackageId &&
                androidVersionCode == rhs.androidVersionCode &&

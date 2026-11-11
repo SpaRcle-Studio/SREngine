@@ -33,8 +33,6 @@ namespace SR_CORE_NS {
         /// @property
         SR_UTILS_NS::Path outputPath = "Builds";
         /// @property
-        SR_UTILS_NS::Path startScene;
-        /// @property
         SR_UTILS_NS::String organization = "SpaRcle-Studio";
         /// @property
         SR_UTILS_NS::String androidPackageId = "com.organization.game";

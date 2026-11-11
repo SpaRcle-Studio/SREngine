@@ -102,7 +102,7 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::Vector<SR_FLUX_NS::FluxGraphLink> m_pendingLinkRemoves;
         SR_HTYPES_NS::WeakPtr<SR_FLUX_NS::FluxRuntime> m_runtime;
 
-        SR_HTYPES_NS::SortedVector<uint32_t> m_executedNodes;
+        SR_UTILS_NS::SortedVector<uint32_t> m_executedNodes;
 
         /// пин, от которого протянули связь в пустое место. Пины редактора пересоздаются каждый
         /// кадр, поэтому хранится не указатель, а индексы

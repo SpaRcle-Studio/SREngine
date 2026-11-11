@@ -102,6 +102,12 @@ namespace SR_CORE_NS {
                    .engineVersion = SR_ENGINE_VERSION
                 });
             }
+            SR_UTILS_NS::StoreUtils::Temp::SetBool("ApplicationIsGame", true);
+            SR_INFO("Application::EarlyInit() : application is a game!");
+        }
+        else {
+            SR_UTILS_NS::StoreUtils::Temp::SetBool("ApplicationIsGame", false);
+            SR_INFO("Application::EarlyInit() : application isn't a game!");
         }
 
         auto&& appInfo = SR_PLATFORM_NS::GetApplicationInfo();
@@ -205,7 +211,9 @@ namespace SR_CORE_NS {
         }
 
         SR_UTILS_NS::Path homePath = CoreResLoader::GetResPath();
-        SR_UTILS_NS::VFS::Instance().ResolvePath(homePath, SR_UTILS_NS::FileMode::Write);
+        if (!SR_UTILS_NS::VFS::Instance().ResolvePath(homePath, SR_UTILS_NS::FileMode::Write)) {
+            SRHaltTerminate("Application::InitializeResourcesFolder() : failed to resolve resources folder! Terminate because it's possible destructive launch!");
+        }
         auto&& projectPath = homePath.GetFolder().Concat(".srproject");
 
         if (SR_PLATFORM_NS::GetPathType(projectPath) == SR_UTILS_NS::FSItemType::File) {

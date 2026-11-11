@@ -74,10 +74,6 @@ namespace SR_CORE_GUI_NS {
             m_pProjectSettings->buildProfiles.emplace_back();
             m_pProjectSettings->activeBuildProfile = 0;
         }
-        auto&& defaultProfile = m_pProjectSettings->buildProfiles.front();
-        if (defaultProfile.startScene.IsEmpty()) {
-            defaultProfile.startScene = m_pProjectSettings->mainScene;
-        }
         return true;
     }
 
@@ -108,7 +104,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     void GameBuildExporter::SetStatus(SR_UTILS_NS::String status, bool error) {
-        m_status = status;
+        m_status = std::move(status);
         m_statusError = error;
         if (error) {
             SR_ERROR("GameBuildExporter::SetStatus() : {}", m_status);
@@ -118,18 +114,12 @@ namespace SR_CORE_GUI_NS {
         }
     }
 
-    bool GameBuildExporter::CollectBuildResources(
-        SR_UTILS_NS::Vector<SR_UTILS_NS::Path>& resourcePaths,
-        SR_UTILS_NS::Vector<SR_UTILS_NS::String>& resourceNames) const
-    {
+    bool GameBuildExporter::CollectBuildResources(SR_UTILS_NS::SortedVector<SR_UTILS_NS::Path>& paths) const {
+        SR_TRACY_ZONE;
         SR_LOG("GameBuildExporter::CollectBuildResources() : collecting resources files to build...");
 
-        resourcePaths.clear();
-        resourceNames.clear();
-        resourcePaths.reserve(2048);
-        resourceNames.reserve(2048);
-        resourcePaths.emplace_back(".srproject");
-        resourceNames.emplace_back(".srproject");
+        paths.clear();
+        paths.reserve(2048);
 
         const auto resourcesPath = CoreResLoader::GetResPath();
         auto&& cachePath = CoreResLoader::GetCachePath();
@@ -148,14 +138,11 @@ namespace SR_CORE_GUI_NS {
         }
 
         SR_UTILS_NS::VFS::Instance().Enumerate(resourcesPath, [&](const SR_UTILS_NS::VFSEntry& entry) {
-            auto resourceName = entry.relativePath;
-            if (resourceName.starts_with("Resources/")) {
-                resourceName = resourceName.substr(10);
-            }
             if (entry.type != SR_UTILS_NS::FSItemType::File ||
                 entry.extension == "cpp" || entry.extension == "h" || entry.extension == "hpp" ||
                 entry.relativePath.ends_with(".exe") || entry.relativePath.ends_with(".dll") || entry.relativePath.ends_with(".pdb") ||
                 entry.relativePath.starts_with(cachePath) || entry.relativePath.starts_with(packedFiles) ||
+                entry.relativePath.contains("CMakeLists.txt") ||
                 entry.relativePath.starts_with(cppAPI) ||
                 entry.relativePath.contains("/.idea/") || entry.relativePath.contains("/.git/")) {
                 return;
@@ -165,13 +152,20 @@ namespace SR_CORE_GUI_NS {
                     return;
                 }
             }
-            resourcePaths.emplace_back(entry.fullPath);
-            resourceNames.emplace_back(resourceName);
+
+            if (SR_PLATFORM_NS::IsAbsolutePath(entry.relativePath)) {
+                SRHalt("GameBuildExporter::CollectBuildResources() : relative path are absolute!");
+                return;
+            }
+
+            paths.insert(entry.relativePath);
         }, true);
 
-        SR_LOG("GameBuildExporter::CollectBuildResources() : collected {} files.", resourcesPath.size());
+        SR_LOG("GameBuildExporter::CollectBuildResources() : collected {} files.", paths.size());
 
-        return resourcePaths.size() <= SR_UINT16_MAX;
+        paths.insert(".srproject");
+
+        return paths.size() <= SR_UINT16_MAX;
     }
 
     bool GameBuildExporter::RepackDesktop(const SR_UTILS_NS::Path& artifactPath) {
@@ -276,29 +270,7 @@ namespace SR_CORE_GUI_NS {
             return false;
         }
 
-        const auto resourceCount = static_cast<uint16_t>(m_resourcePaths.size());
-        AppendBinary(newPackedData, resourceCount);
-        for (uint16_t i = 0; i < resourceCount; ++i) {
-            auto resourceFile = SR_UTILS_NS::VFS::Instance().OpenFile(m_resourcePaths[i], SR_UTILS_NS::FileMode::Read);
-            SR_UTILS_NS::String resourceData;
-            if (!resourceFile || !resourceFile.Read(resourceData)) {
-                SetStatus("Failed to read resource: {}"_format(m_resourceNames[i]), true);
-                return false;
-            }
-            const SR_UTILS_NS::StringView resourceName = m_resourceNames[i] == ".srproject"
-                ? SR_UTILS_NS::StringView("../.srproject")
-                : SR_UTILS_NS::StringView(m_resourceNames[i]);
-            if (resourceName.size() > SR_UINT16_MAX) {
-                SetStatus("Resource name is too long: {}"_format(m_resourceNames[i]), true);
-                return false;
-            }
-            const auto nameSize = static_cast<uint16_t>(resourceName.size());
-            const uint64_t contentSize = resourceData.size();
-            AppendBinary(newPackedData, nameSize);
-            newPackedData.append(resourceName.data(), resourceName.size());
-            AppendBinary(newPackedData, contentSize);
-            newPackedData.append(resourceData.data(), resourceData.size());
-        }
+        newPackedData.append(m_desktopPackedBinary.data(), m_desktopPackedBinary.size());
 
         uLongf newCompressedSize = compressBound(newPackedData.size());
         SR_UTILS_NS::String compressedData;
@@ -359,10 +331,10 @@ namespace SR_CORE_GUI_NS {
             auto file = SR_UTILS_NS::VFS::Instance().OpenFile(m_resourcePaths[i], SR_UTILS_NS::FileMode::Read);
             SR_UTILS_NS::String& data = resourceData.emplace_back();
             if (!file || !file.Read(data)) {
-                SetStatus("Failed to read Android resource: {}"_format(m_resourceNames[i]), true);
+                SetStatus("Failed to read Android resource: {}"_format(m_resourcePaths[i]), true);
                 return false;
             }
-            apkNames.emplace_back("assets/Resources/{}"_format(m_resourceNames[i]));
+            apkNames.emplace_back("assets/Resources/{}"_format(m_resourcePaths[i]));
         }
         entries.reserve(entries.size() + resourceData.size());
         for (uint32_t i = 0; i < resourceData.size(); ++i) {
@@ -441,7 +413,7 @@ namespace SR_CORE_GUI_NS {
             auto file = SR_UTILS_NS::VFS::Instance().OpenFile(m_resourcePaths[i], SR_UTILS_NS::FileMode::Read);
             SR_UTILS_NS::String resourceData;
             if (!file || !file.Read(resourceData)) {
-                SetStatus("Failed to read Emscripten resource: {}"_format(m_resourceNames[i]), true);
+                SetStatus("Failed to read Emscripten resource: {}"_format(m_resourcePaths[i]), true);
                 return false;
             }
             const uint64_t start = webData.size();
@@ -450,7 +422,7 @@ namespace SR_CORE_GUI_NS {
                 metadata += ',';
             }
             metadata += "{";
-            metadata += "filename:\"/Resources/{}\",start:{},end:{}"_format(m_resourceNames[i], start, webData.size());
+            metadata += "filename:\"/Resources/{}\",start:{},end:{}"_format(m_resourcePaths[i], start, webData.size());
             metadata += "}";
         }
         metadata += "],remote_package_size:{}"_format(webData.size());
@@ -564,9 +536,6 @@ namespace SR_CORE_GUI_NS {
         const bool latest = GetReleaseTag() == "dev-latest";
         const auto suffix = latest ? "-dev" : "";
 
-        if (!pProfile->startScene.IsEmpty()) {
-            m_pProjectSettings->mainScene = pProfile->startScene;
-        }
         if (!m_pProjectSettings->SaveAsset()) {
             SetStatus("Failed to save project settings before build.", true);
             return false;
@@ -592,9 +561,45 @@ namespace SR_CORE_GUI_NS {
             }
         });
 
-        if (!CollectBuildResources(m_resourcePaths, m_resourceNames)) {
+        if (!CollectBuildResources(m_resourcePaths)) {
             SetStatus("Project contains too many resource files.", true);
             return false;
+        }
+
+        if (pProfile->windows || pProfile->linux) {
+            SR_TRACY_ZONE_N("Desktop packing");
+            m_desktopPackedBinary.clear();
+            m_desktopPackedBinary.shrink_to_fit();
+            const auto resourceCount = static_cast<uint16_t>(m_resourcePaths.size());
+            AppendBinary(m_desktopPackedBinary, resourceCount);
+            SR_UTILS_NS::String resourceData;
+            SR_UTILS_NS::String resourceName;
+            for (uint16_t i = 0; i < resourceCount; ++i) {
+                auto resourceFile = SR_UTILS_NS::VFS::Instance().OpenFile(m_resourcePaths[i], SR_UTILS_NS::FileMode::Read);
+                if (!resourceFile || !resourceFile.Read(resourceData)) {
+                    SetStatus("Failed to read resource: {}"_format(m_resourcePaths[i]), true);
+                    return false;
+                }
+
+                resourceName = m_resourcePaths[i] == ".srproject"
+                    ? SR_UTILS_NS::StringView("../.srproject")
+                    : SR_UTILS_NS::StringView(m_resourcePaths[i]);
+                if (resourceName.starts_with("Resources/")) {
+                    resourceName = resourceName.substr(10);
+                }
+
+                if (resourceName.size() > SR_UINT16_MAX) {
+                    SetStatus("Resource name is too long: {}"_format(m_resourcePaths[i]), true);
+                    return false;
+                }
+
+                const auto nameSize = static_cast<uint16_t>(resourceName.size());
+                const uint64_t contentSize = resourceData.size();
+                AppendBinary(m_desktopPackedBinary, nameSize);
+                m_desktopPackedBinary.append(resourceName.data(), resourceName.size());
+                AppendBinary(m_desktopPackedBinary, contentSize);
+                m_desktopPackedBinary.append(resourceData.data(), resourceData.size());
+            }
         }
 
         bool success = true;
@@ -671,7 +676,7 @@ namespace SR_CORE_GUI_NS {
         SR_IMMEDIATE_GUI_NS::InputText("Profile", &pProfile->name);
         SR_IMMEDIATE_GUI_NS::InputText("Organization", &pProfile->organization);
         SR_IMMEDIATE_GUI_NS::InputText("Output", &pProfile->outputPath.GetInternalUnsafeString());
-        SR_IMMEDIATE_GUI_NS::InputText("Start scene", &pProfile->startScene.GetInternalUnsafeString());
+        SR_IMMEDIATE_GUI_NS::InputText("Start scene", &m_pProjectSettings->mainScene.GetInternalUnsafeString());
         int32_t buildConfiguration = static_cast<int32_t>(pProfile->configuration);
         if (SR_IMMEDIATE_GUI_NS::Combo("Build type", &buildConfiguration, "Release\0Debug\0")) {
             pProfile->configuration = static_cast<GameBuildConfiguration>(buildConfiguration);
@@ -697,6 +702,11 @@ namespace SR_CORE_GUI_NS {
 
         if (m_cppScriptsFound) {
             SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.7f, 0.f, 1.f), "C++ scripts are not supported and will be excluded.");
+        }
+
+        if (m_pProjectSettings->mainScene.empty()) {
+            SR_IMMEDIATE_GUI_NS::WarningBox("Main scene isn't selected!");
+            return;
         }
 
         if (SR_IMMEDIATE_GUI_NS::ButtonColored("Build", SR_MATH_NS::FColor::Green() * 0.65, SR_MATH_NS::FVector2(160.f, 36.f))) {

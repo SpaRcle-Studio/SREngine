@@ -65,7 +65,7 @@ namespace SR_CORE_NS {
 
         const bool isProjectPresent = SR_UTILS_NS::VFS::Instance().IsExists(".srproject");
         const bool isAppOpenedByProjectFile = SR_UTILS_NS::CLIManager::Instance().IsAppOpenedByProjectFile();
-        const bool isGame = isProjectPresent && !isAppOpenedByProjectFile;
+        const bool isGame = SR_UTILS_NS::StoreUtils::Temp::GetBool("ApplicationIsGame");
         ProjectSettings::Ptr pSettings = isProjectPresent ? CoreResLoader::Load<ProjectSettings>(".srproject") : nullptr;
 
         const bool isEditorEnabled = SR_UTILS_NS::Features::Instance().Enabled("Editor")
@@ -73,6 +73,8 @@ namespace SR_CORE_NS {
             && (isAppOpenedByProjectFile || !isProjectPresent || pSettings->GetActiveProfile().packEditor)
         ;
         const bool editorOnStartupEnabled = isEditorEnabled && !isGame && SR_UTILS_NS::Features::Instance().Enabled("EditorOnStartup", false);
+
+        SR_UTILS_NS::StoreUtils::Temp::SetBool("ImGuiOverlayEnabled", isEditorEnabled && SR_UTILS_NS::Features::Instance().Enabled("ImGUI", false));
 
         if (isEditorEnabled) {
             SR_LOG("Engine::Create() : editor is enabled.");
@@ -184,10 +186,8 @@ namespace SR_CORE_NS {
 
         if (!SR_SCRIPTING_NS::ScriptSystem::Instance().IsInitialized()) {
             const bool enabledByFeature = SR_UTILS_NS::Features::Instance().Enabled("ScriptCompilation", true);
-            const bool isProjectPresent = SR_UTILS_NS::VFS::Instance().IsExists(".srproject");
-            const bool isAppOpenedByProjectFile = SR_UTILS_NS::CLIManager::Instance().IsAppOpenedByProjectFile();
-            const bool isGame = isProjectPresent && !isAppOpenedByProjectFile;
-            ProjectSettings::Ptr pSettings = isProjectPresent ? CoreResLoader::Load<ProjectSettings>(".srproject") : nullptr;
+            const bool isGame = SR_UTILS_NS::StoreUtils::Temp::GetBool("ApplicationIsGame");
+            ProjectSettings::Ptr pSettings = isGame ? CoreResLoader::Load<ProjectSettings>(".srproject") : nullptr;
             const bool isCompilationEnabled = !isGame && enabledByFeature && (!pSettings || pSettings->enableCppScripts);
 
             if (!SR_SCRIPTING_NS::ScriptSystem::Instance().Init(isCompilationEnabled)) {
@@ -394,21 +394,16 @@ namespace SR_CORE_NS {
 
         SR_LOG("Engine::LoadStartupScene() : loading startup scene...");
 
-        if (!SR_UTILS_NS::StoreUtils::Temp::GetBool("ApplicationIsNotAGame", false)) {
-            SR_UTILS_NS::StoreUtils::Temp::SetBool("ApplicationIsNotAGame", true);
-            const bool isAppOpenedByProjectFile = SR_UTILS_NS::CLIManager::Instance().IsAppOpenedByProjectFile();
-            auto&& optionPath =  SR_UTILS_NS::CLIManager::Instance().GetOptionValue(SR_UTILS_NS::CLIOptions::RunScene);
-            if (optionPath.has_value()) {
-                SR_LOG("Engine::LoadStartupScene() : command line option to run scene detected: {}", optionPath.value());
-                RunSceneGameMode(optionPath.value(), true);
-                SR_UTILS_NS::StoreUtils::Temp::SetBool("ApplicationIsNotAGame", false);
-            }
-            else if (!isAppOpenedByProjectFile && SR_UTILS_NS::VFS::Instance().IsExists(".srproject")) {
-                if (auto&& pSettings = CoreResLoader::Load<ProjectSettings>(".srproject")) {
-                    if (auto&& scenePath = CoreResLoader::GetResPath().Concat(pSettings->mainScene); scenePath.IsFile()) {
-                        RunSceneGameMode(pSettings->mainScene, true);
-                        SR_UTILS_NS::StoreUtils::Temp::SetBool("ApplicationIsNotAGame", false);
-                    }
+        const bool isAppOpenedByProjectFile = SR_UTILS_NS::CLIManager::Instance().IsAppOpenedByProjectFile();
+        auto&& optionPath =  SR_UTILS_NS::CLIManager::Instance().GetOptionValue(SR_UTILS_NS::CLIOptions::RunScene);
+        if (optionPath.has_value()) {
+            SR_LOG("Engine::LoadStartupScene() : command line option to run scene detected: {}", optionPath.value());
+            RunSceneGameMode(optionPath.value(), true);
+        }
+        else if (!isAppOpenedByProjectFile && SR_UTILS_NS::VFS::Instance().IsExists(".srproject")) {
+            if (auto&& pSettings = CoreResLoader::Load<ProjectSettings>(".srproject")) {
+                if (auto&& scenePath = CoreResLoader::GetResPath().Concat(pSettings->mainScene); scenePath.IsFile()) {
+                    RunSceneGameMode(scenePath, true);
                 }
             }
         }
