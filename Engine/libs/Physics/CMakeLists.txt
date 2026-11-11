@@ -172,10 +172,10 @@ else()
         target_compile_options(Physics PRIVATE -fPIC)
     endif()
 
-    target_link_libraries(Physics PUBLIC Utils)
-
     SR_COPY_SHARED_MODULE_TO_EXECUTABLE_FOLDER(Physics)
 endif()
+
+target_link_libraries(Physics PUBLIC Utils)
 
 SR_COPY_STATIC_LIBRARY_TO_LIBRARY_FOLDER(Physics)
 

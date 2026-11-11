@@ -102,10 +102,10 @@ else()
         target_compile_options(Audio PRIVATE -fPIC)
     endif()
 
-    target_link_libraries(Audio PUBLIC Utils)
-
     SR_COPY_SHARED_MODULE_TO_EXECUTABLE_FOLDER(Audio)
 endif()
+
+target_link_libraries(Audio PUBLIC Utils)
 
 SR_COPY_STATIC_LIBRARY_TO_LIBRARY_FOLDER(Audio)
 

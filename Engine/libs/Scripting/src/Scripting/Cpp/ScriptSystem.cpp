@@ -48,6 +48,12 @@ namespace SR_SCRIPTING_NS {
         SR_UTILS_NS::VFS::Instance().ResolvePath(m_cacheFolder, SR_UTILS_NS::FileMode::Write);
 
         m_isCompilationEnabled = compilationEnabled;
+    #ifdef SR_ENGINE_STATIC_LIBRARY
+        if (SR_UTILS_NS::StoreUtils::Temp::GetBool("ApplicationHasEmbeddedResources", false)) {
+            m_isCompilationEnabled = false;
+            SR_INFO("ScriptSystem::Init() : compilation disabled by embedded resources!");
+        }
+    #endif
         m_apiFolder = CoreResLoader::GetResPath().Concat("API");
 
         if (m_isCompilationEnabled && !InitEngineSources()) {
@@ -108,6 +114,7 @@ namespace SR_SCRIPTING_NS {
         }
         else {
             m_threadReady = true;
+            m_isInit = true;
             SR_LOG("ScriptSystem::Init() : script compilation is disabled!");
             return true;
         }

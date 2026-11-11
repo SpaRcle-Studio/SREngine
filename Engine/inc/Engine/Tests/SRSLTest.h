@@ -15,6 +15,7 @@
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/Tests/TestManager.h>
 #include <Utils/FileSystem/FileSystem.h>
+#include <Utils/FileSystem/VFS.h>
 #include <Utils/Memory/Allocator.h>
 #include <Utils/Memory/MemoryLiterals.h>
 
@@ -31,7 +32,10 @@ namespace SR_CORE_NS::Tests {
 
             const SR_UTILS_NS::Path path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/ModuleTests/SRSL");
             auto&& expectedFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/ModuleTests/SRSL/Expected");
-            auto&& resultFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/ModuleTests/SRSL/Result");
+            auto&& resultFolder = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Tests/SRSL/Result");
+            if (resultFolder.IsExists()) {
+                SR_UTILS_NS::VFS::Instance().Delete(resultFolder);
+            }
 
             SR_UTILS_NS::Vector<SR_UTILS_NS::Path> files;
             path.GetFiles(files);

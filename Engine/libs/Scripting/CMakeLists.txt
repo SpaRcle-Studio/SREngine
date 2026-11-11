@@ -28,10 +28,10 @@ else()
         endif()
     endif()
 
-    target_link_libraries(Scripting Utils)
-
     SR_COPY_SHARED_MODULE_TO_EXECUTABLE_FOLDER(Scripting)
 endif()
+
+target_link_libraries(Scripting Utils)
 
 SR_COPY_STATIC_LIBRARY_TO_LIBRARY_FOLDER(Scripting)
 
