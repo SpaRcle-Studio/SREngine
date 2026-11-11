@@ -33,13 +33,13 @@ It aims to establish a strong base for game creation and is currently in the ear
 
 ## Supported platforms
 - [x] Windows 10/11
-- [ ] Linux X11 (partial)
-- [x] Linux Wayland (in active development)
 - [x] Android
+- [X] Emscripten (WebGPU)
+- [x] Linux Wayland
+- [ ] Linux X11 (partial)
 - [ ] iOS - not planned in near future
 - [ ] MacOS - not planned in near future
 - [ ] Consoles - not planned in near future
-- [ ] Emscripten (Web) - partially supported
 
 ## Branches 
  * master - branch for releases

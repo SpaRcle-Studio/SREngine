@@ -1,8 +1,8 @@
 - [x] Windows 10/11
 - [x] Linux
+    * [X] Wayland
     * [x] GLFW (unstable)
     * [x] X11 (unstable)
-    * [ ] Wayland (planned)
     * [ ] Flatpak (planned)
 - [x] Android
     * [ ] VR Meta Quest (planned)
