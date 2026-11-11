@@ -80,9 +80,22 @@ namespace SR_CORE_NS::Tests {
 
         SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : first step - load demo scene");
 
-        pState->AddEngineAction([](Engine& engine) {
+        pState->AddEngineAction([this](Engine& engine) {
             SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : executing delayed action in DelayedActionsState - setting game mode.");
-            engine.AddSceneToQueue(SR_WORLD_NS::Scene::LoadScene(CoreResLoader::GetResPath().Concat("Engine/ModuleTests/RuntimeSmokeTest/test.scene")));
+            const auto source = CoreResLoader::GetResPath().Concat("Engine/ModuleTests/RuntimeSmokeTest/test.scene");
+            const auto workingScene = CoreResLoader::GetCachePath().Concat("Tests/RuntimeSmokeTest/test.scene");
+            if (!source.Copy(workingScene)) {
+                SR_ERROR("EngineRuntimeSmokeTest::Run() : failed to copy test scene to cache!");
+                m_hasErrors = true;
+                return;
+            }
+            auto pScene = SR_WORLD_NS::Scene::LoadScene(workingScene);
+            if (!pScene) {
+                SR_ERROR("EngineRuntimeSmokeTest::Run() : failed to load working test scene!");
+                m_hasErrors = true;
+                return;
+            }
+            engine.AddSceneToQueue(pScene);
         });
 
         SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : waiting five seconds...");
@@ -93,11 +106,18 @@ namespace SR_CORE_NS::Tests {
         // TODO: Refactor to use Engine::RunSceneGameMode instead.
 
         pState->AddEngineAction([this](Engine& engine) {
+            if (m_hasErrors) {
+                return;
+            }
             SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : executing delayed action in DelayedActionsState - setting game mode.");
             if (auto&& pEditor = engine.GetEditor()) {
                 if (auto&& pHierarchy = pEditor->GetWidget<SR_CORE_GUI_NS::Hierarchy>()) {
                     if (auto&& pSceneRunner = dynamic_cast<SR_CORE_GUI_NS::SceneRunner*>(pHierarchy->GetSceneRunnerWidget())) {
-                        pSceneRunner->PlayScene();
+                        if (!pSceneRunner->PlayScene()) {
+                            SR_ERROR("EngineRuntimeSmokeTest::Run() : failed to play working test scene!");
+                            m_hasErrors = true;
+                            return;
+                        }
                         engine.SetGameMode(true);
                         engine.SetActive(true);
                         return;
@@ -113,6 +133,9 @@ namespace SR_CORE_NS::Tests {
 
         SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : third step - unsetting game mode");
         pState->AddEngineAction([this](Engine& engine) {
+            if (m_hasErrors) {
+                return;
+            }
             SR_LOG_TEST("EngineRuntimeSmokeTest::Run() : executing delayed action in DelayedActionsState - unsetting game mode.");
             if (auto&& pEditor = engine.GetEditor()) {
                 if (auto&& pHierarchy = pEditor->GetWidget<SR_CORE_GUI_NS::Hierarchy>()) {
