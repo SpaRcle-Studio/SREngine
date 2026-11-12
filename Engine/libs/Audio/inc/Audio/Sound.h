@@ -14,7 +14,7 @@ namespace SR_AUDIO_NS {
     struct SoundData;
 
     /// @extension(ogg, wav, mp3)
-    class Sound : public SR_UTILS_NS::IResource {
+    class SR_AUDIO_DLL_API Sound : public SR_UTILS_NS::IResource {
         SR_CLASS();
         using Handle = void*;
         using Super = SR_UTILS_NS::IResource;

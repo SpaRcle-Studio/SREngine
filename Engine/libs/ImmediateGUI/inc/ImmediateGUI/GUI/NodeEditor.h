@@ -206,7 +206,7 @@ namespace SR_IMMEDIATE_GUI_NS {
 
     };
 
-    class PinInstance {
+    class SR_IMMEDIATE_GUI_DLL_API PinInstance {
     public:
         virtual void Draw() = 0;
         virtual ~PinInstance() = default;

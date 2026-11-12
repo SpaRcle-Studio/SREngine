@@ -59,6 +59,15 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux" AND SR_ENGINE_EXPLICIT_DLL_EXPORTS)
     endforeach()
 endif()
 
+if (CMAKE_SYSTEM_NAME STREQUAL "Linux" AND SR_ENGINE_USE_MODULAR_BUILD)
+    foreach(SR_LINK_MODULE IN ITEMS Utils ImmediateGUI Audio Physics Graphics Scripting Engine)
+        get_target_property(SR_LINK_MODULE_TYPE ${SR_LINK_MODULE} TYPE)
+        if (SR_LINK_MODULE_TYPE STREQUAL "SHARED_LIBRARY")
+            target_link_options(${SR_LINK_MODULE} PRIVATE "LINKER:--no-undefined")
+        endif()
+    endforeach()
+endif()
+
 if (SR_ENGINE_USE_MODULAR_BUILD)
     # Link replacements into every shared engine module on each platform.
     foreach(SR_MEMORY_MODULE IN ITEMS ImmediateGUI Audio Physics Graphics Scripting Engine)

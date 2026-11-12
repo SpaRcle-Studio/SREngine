@@ -60,7 +60,7 @@ namespace SR_AUDIO_NS {
         Off, On, Auto
     );
 
-    struct PlayParams {
+    struct SR_AUDIO_DLL_API PlayParams {
     public:
         static PlayParams GetDefault();
 
