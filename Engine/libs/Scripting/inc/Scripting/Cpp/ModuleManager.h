@@ -82,7 +82,7 @@ namespace SR_SCRIPTING_NS {
 
     };
 
-    class ModuleManager : public SR_HTYPES_NS::SharedPtr<ModuleManager> {
+    class SR_SCRIPTING_DLL_API ModuleManager : public SR_HTYPES_NS::SharedPtr<ModuleManager> {
         using Super = SR_HTYPES_NS::SharedPtr<ModuleManager>;
     public:
         ModuleManager(ScriptSystem* pScriptSystem)

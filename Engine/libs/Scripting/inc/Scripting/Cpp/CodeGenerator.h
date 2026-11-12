@@ -50,7 +50,7 @@ namespace SR_SCRIPTING_NS {
 
     };
 
-    class CppCodeGenerator : public SR_HTYPES_NS::SharedPtr<CppCodeGenerator> {
+    class SR_SCRIPTING_DLL_API CppCodeGenerator : public SR_HTYPES_NS::SharedPtr<CppCodeGenerator> {
         using Super = SR_HTYPES_NS::SharedPtr<CppCodeGenerator>;
         constexpr static uint32_t MAX_INCLUDE_DEPTH = 64;
     public:

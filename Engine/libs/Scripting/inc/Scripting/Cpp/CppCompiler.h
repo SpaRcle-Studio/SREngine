@@ -42,7 +42,7 @@ namespace SR_SCRIPTING_NS {
         SR_UTILS_NS::Path compilerPath;
     };
 
-    class CppCompiler : public SR_HTYPES_NS::SharedPtr<CppCompiler> {
+    class SR_SCRIPTING_DLL_API CppCompiler : public SR_HTYPES_NS::SharedPtr<CppCompiler> {
         using Super = SR_HTYPES_NS::SharedPtr<CppCompiler>;
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<CppCompiler>;
