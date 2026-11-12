@@ -25,8 +25,6 @@ namespace SR_CORE_GUI_NS {
         void OnOpen() override;
 
     private:
-        void DrawMultiSampling();
-        void DrawVSync();
         void DrawEditorSettings();
         void DrawGraphicsSettings();
 

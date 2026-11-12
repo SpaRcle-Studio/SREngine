@@ -34,10 +34,6 @@ namespace SR_CORE_GUI_NS {
         SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::FrameRounding, 0.0f);
         SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
-        DrawMultiSampling();
-        SR_IMMEDIATE_GUI_NS::Separator();
-        DrawVSync();
-        SR_IMMEDIATE_GUI_NS::Separator();
         DrawEditorSettings();
         SR_IMMEDIATE_GUI_NS::Separator();
         DrawGraphicsSettings();
@@ -50,78 +46,6 @@ namespace SR_CORE_GUI_NS {
         }
 
         SR_IMMEDIATE_GUI_NS::PopStyleVar(2);
-    }
-
-    void EngineSettings::DrawMultiSampling() {
-        SR_TRACY_ZONE;
-        static const char* SR_SAMPLE_COUNT_NAME_LIST = {
-            "Sample 1\0"
-            "Sample 2\0"
-            "Sample 4\0"
-            "Sample 8\0"
-            "Sample 16\0"
-            "Sample 32\0"
-            "Sample 64\0"
-        };
-
-        static SR_UTILS_NS::Map<uint8_t, int32_t> SR_SAMPLE_COUNT_KEY_LIST = {
-            { 1, 0 },
-            { 2, 1 },
-            { 4, 2 },
-            { 8, 3 },
-            { 16, 4 },
-            { 32, 5 },
-            { 64, 6 },
-        };
-
-        static SR_UTILS_NS::Vector<uint8_t> SR_SAMPLE_COUNT_VALUE_LIST = {
-            1, 2, 4, 8, 16, 32, 64
-        };
-
-        auto&& pContext = GetContext();
-        auto&& pPipeline = pContext->GetPipeline();
-        int32_t currentItem = SR_SAMPLE_COUNT_KEY_LIST.at(pPipeline->GetSamplesCount());
-
-        if (SR_IMMEDIATE_GUI_NS::Combo("Multi-sampling", &currentItem, SR_SAMPLE_COUNT_NAME_LIST)) {
-            pPipeline->SetSampleCount(SR_SAMPLE_COUNT_VALUE_LIST.at(currentItem));
-            SR_UTILS_NS::StoreUtils::User::SetInt("MultiSampling", SR_SAMPLE_COUNT_VALUE_LIST.at(currentItem));
-        }
-
-        bool optimizedRenderUpdate = pContext->IsOptimizedRenderUpdateEnabled();
-        if (SR_IMMEDIATE_GUI_NS::Checkbox("Optimized render update", &optimizedRenderUpdate)) {
-            pContext->SetOptimizedRenderUpdateEnabled(optimizedRenderUpdate);
-        }
-    }
-
-    void EngineSettings::DrawVSync() {
-        SR_TRACY_ZONE;
-        auto&& pPipeline = GetContext()->GetPipeline();
-        if (!pPipeline) {
-            return;
-        }
-
-        bool vsync = pPipeline->IsVSyncEnabled();
-        if (SR_IMMEDIATE_GUI_NS::Checkbox("VSync", &vsync)) {
-            pPipeline->SetVSyncEnabled(vsync);
-            SR_UTILS_NS::StoreUtils::User::SetBool("VSync", vsync);
-        }
-
-        if (vsync) {
-            SR_IMMEDIATE_GUI_NS::Text("Recommended set up: 1-2 swapchain images, for less latency.");
-        }
-
-        static const SR_UTILS_NS::StringAtom swapchainImagesKey = "SwapchainImages";
-        const auto suggestedSwapchainImages = pPipeline->GetSwapchainImagesCount();
-        int32_t swapchainImages = SR_UTILS_NS::StoreUtils::User::GetInt(swapchainImagesKey, suggestedSwapchainImages);
-
-        if (SR_IMMEDIATE_GUI_NS::InputInt("Swapchain images", &swapchainImages, 1, 1, SR_IMMEDIATE_GUI_NS::InputTextFlags::EnterReturnsTrue)) {
-            swapchainImages = SR_CLAMP(swapchainImages, 1, 16);
-            SR_UTILS_NS::StoreUtils::User::SetInt(swapchainImagesKey, swapchainImages);
-        }
-
-        if (swapchainImages != suggestedSwapchainImages) {
-            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor::Yellow(), "Requires restart!");
-        }
     }
 
     void EngineSettings::DrawGraphicsSettings() {
@@ -176,6 +100,12 @@ namespace SR_CORE_GUI_NS {
         auto&& feedback = m_graphicsSettingsDrawer->Draw(context);
         if (feedback.isChanged) {
             GetContext()->SetGraphicsSettings(m_cachedGraphicsSettings);
+        }
+
+        SR_IMMEDIATE_GUI_NS::Text("Swapchain image count changes require saving and restarting.");
+        bool optimizedRenderUpdate = GetContext()->IsOptimizedRenderUpdateEnabled();
+        if (SR_IMMEDIATE_GUI_NS::Checkbox("Optimized render update", &optimizedRenderUpdate)) {
+            GetContext()->SetOptimizedRenderUpdateEnabled(optimizedRenderUpdate);
         }
 
         SR_IMMEDIATE_GUI_NS::PopID();
