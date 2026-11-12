@@ -51,9 +51,17 @@ const server = http.createServer(async (request, response) => {
 });
 await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
 const url = `http://127.0.0.1:${server.address().port}/SREngine.html`;
-const launchArgs = JSON.parse(process.env.SR_WEBGPU_ARGS || '["--enable-unsafe-webgpu","--use-webgpu-adapter=swiftshader","--use-angle=swiftshader","--enable-unsafe-swiftshader"]');
+const defaultArgs = [
+    '--enable-unsafe-webgpu',
+    '--use-webgpu-adapter=swiftshader',
+    // Windows WebGPU initialization queries a D3D11 device from ANGLE.
+    process.platform === 'win32' ? '--use-angle=d3d11-warp' : '--use-angle=swiftshader',
+    '--enable-unsafe-swiftshader'
+];
+const launchArgs = process.env.SR_WEBGPU_ARGS ? JSON.parse(process.env.SR_WEBGPU_ARGS) : defaultArgs;
+log(`Chromium channel: chromium; host platform: ${process.platform}`);
 log(`Chromium arguments: ${JSON.stringify(launchArgs)}`);
-const browser = await chromium.launch({ args: launchArgs })
+const browser = await chromium.launch({ channel: 'chromium', headless: true, args: launchArgs })
     .catch(async error => { await new Promise(resolve => server.close(resolve)); throw error; });
 const context = await browser.newContext({ viewport: { width: 960, height: 640 }, deviceScaleFactor: 2 });
 context.setDefaultTimeout(30000);
