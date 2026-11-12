@@ -466,15 +466,12 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
 
 namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
     bool CanCreateLink(const SR_UTILS_NS::Reflection::TypeInfo* pFrom, const SR_UTILS_NS::Reflection::TypeInfo* pTo) {
-        if (!pTo) {
+        if (!pFrom || !pTo) {
             return true;
         }
 
         if (bool(pFrom) != bool(pTo)) {
             return false;
-        }
-        if (!pFrom || !pTo) {
-            return true;
         }
 
         static SR_UTILS_NS::StringAtom integerTypes[] = {

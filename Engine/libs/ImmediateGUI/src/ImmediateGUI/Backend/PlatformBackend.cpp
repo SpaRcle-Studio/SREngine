@@ -26,9 +26,9 @@ namespace SR_IMMEDIATE_GUI_NS {
     const char* EMSCRIPTEN_CANVAS_ID = "#srengine-canvas";
     namespace {
         SR_UTILS_NS::Subscription g_inputTextSubscription;
-        std::vector<SR_UTILS_NS::InputTextEvent> g_inputTextEvents;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::InputTextEvent> g_inputTextEvents;
 
-        bool g_waylandInputInitialized = false;
+        bool g_polledInputInitialized = false;
         SR_PLATFORM_NS::KeyboardState g_prevKeyboardState;
         SR_PLATFORM_NS::MouseState g_prevMouseState;
 
@@ -120,7 +120,7 @@ namespace SR_IMMEDIATE_GUI_NS {
             return ImGuiKey_None;
         }
 
-        void EnsureWaylandInputSubscribed() {
+        void EnsurePolledInputSubscribed() {
             if (g_inputTextSubscription.IsValid()) {
                 return;
             }
@@ -133,23 +133,23 @@ namespace SR_IMMEDIATE_GUI_NS {
             });
         }
 
-        void WaylandProcessInput() {
+        void ProcessPolledInput() {
             auto&& io = ImGui::GetIO();
 
             const auto& mouseState = SR_PLATFORM_NS::GetMouseState();
-            if (!g_waylandInputInitialized || g_prevMouseState.position.x != mouseState.position.x || g_prevMouseState.position.y != mouseState.position.y) {
+            if (!g_polledInputInitialized || g_prevMouseState.position.x != mouseState.position.x || g_prevMouseState.position.y != mouseState.position.y) {
                 io.AddMousePosEvent(mouseState.position.x, mouseState.position.y);
             }
 
             for (size_t i = 0; i < mouseState.COUNT; i++) {
-                if (!g_waylandInputInitialized || g_prevMouseState.GetButton(i) != mouseState.GetButton(i)) {
+                if (!g_polledInputInitialized || g_prevMouseState.GetButton(i) != mouseState.GetButton(i)) {
                     io.AddMouseButtonEvent(static_cast<int>(i), mouseState.buttonStates[i]);
                 }
             }
 
             const auto& keyboardState = SR_PLATFORM_NS::GetSystemKeyboardState();
             for (const SR_UTILS_NS::KeyCode keyCode : SR_UTILS_NS::KeyCodes) {
-                if (!g_waylandInputInitialized || g_prevKeyboardState.Get(keyCode) != keyboardState.Get(keyCode)) {
+                if (!g_polledInputInitialized || g_prevKeyboardState.Get(keyCode) != keyboardState.Get(keyCode)) {
                     if (const ImGuiKey imguiKey = KeyCodeToImGuiKey(keyCode); imguiKey != ImGuiKey_None) {
                         io.AddKeyEvent(imguiKey, keyboardState.Get(keyCode));
                     }
@@ -168,7 +168,7 @@ namespace SR_IMMEDIATE_GUI_NS {
 
             g_prevKeyboardState = keyboardState;
             g_prevMouseState = mouseState;
-            g_waylandInputInitialized = true;
+            g_polledInputInitialized = true;
         }
 
     #if defined(SR_EMSCRIPTEN)
@@ -495,10 +495,11 @@ namespace SR_IMMEDIATE_GUI_NS {
                 return ImGui_ImplGlfw_InitForVulkan((GLFWwindow*)info.window, true);
         #elif defined(SR_ANDROID)
             case PlatformBackend::Android:
+                g_polledInputInitialized = false;
                 return ImGui_ImplAndroid_Init((ANativeWindow*)info.window);
         #elif defined(SR_LINUX) && defined(SR_COMMON_USE_NATIVE_WAYLAND)
             case PlatformBackend::WaylandCustom: {
-                EnsureWaylandInputSubscribed();
+                EnsurePolledInputSubscribed();
                 ImGuiIO& io = ImGui::GetIO();
                 io.BackendPlatformName = "imgui_impl_wayland_custom";
                 return true;
@@ -540,12 +541,15 @@ namespace SR_IMMEDIATE_GUI_NS {
         #elif defined(SR_ANDROID)
             case PlatformBackend::Android:
                 ImGui_ImplAndroid_Shutdown();
+                g_inputTextSubscription = SR_UTILS_NS::Subscription();
+                g_inputTextEvents.clear();
+                g_polledInputInitialized = false;
                 break;
         #elif defined(SR_LINUX) && defined(SR_COMMON_USE_NATIVE_WAYLAND)
             case PlatformBackend::WaylandCustom:
                 g_inputTextSubscription = SR_UTILS_NS::Subscription();
                 g_inputTextEvents.clear();
-                g_waylandInputInitialized = false;
+                g_polledInputInitialized = false;
                 break;
         #elif defined(SR_EMSCRIPTEN)
             case PlatformBackend::Emscripten:
@@ -581,6 +585,8 @@ namespace SR_IMMEDIATE_GUI_NS {
         #elif defined(SR_ANDROID)
             case PlatformBackend::Android:
                 ImGui_ImplAndroid_NewFrame();
+                EnsurePolledInputSubscribed();
+                ProcessPolledInput();
                 break;
         #elif defined(SR_LINUX) && defined(SR_COMMON_USE_NATIVE_WAYLAND)
             case PlatformBackend::WaylandCustom: {
@@ -589,8 +595,8 @@ namespace SR_IMMEDIATE_GUI_NS {
                 io.DisplaySize = ImVec2(info.displaySize.x, info.displaySize.y);
                 io.DeltaTime = info.deltaTime == 0.0f ? (1.0f / 60.0f) : info.deltaTime;
 
-                EnsureWaylandInputSubscribed();
-                WaylandProcessInput();
+                EnsurePolledInputSubscribed();
+                ProcessPolledInput();
                 break;
             }
         #elif defined(SR_EMSCRIPTEN)

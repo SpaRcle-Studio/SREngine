@@ -519,6 +519,23 @@ namespace SR_IMMEDIATE_GUI_NS {
         delete r;
     }
 
+    void VulkanSuspendRenderer(VulkanRendererHandle renderer) {
+        if (!renderer) {
+            return;
+        }
+        auto* r = static_cast<VulkanRenderer*>(renderer);
+        DestroyFramebuffers(*r);
+        for (auto pool : r->cmdPools) {
+            if (pool != VK_NULL_HANDLE) {
+                vkDestroyCommandPool(r->info.device, pool, nullptr);
+            }
+        }
+        r->cmdPools.clear();
+        r->cmdBuffers.clear();
+        r->frames.clear();
+        r->imageCount = 0;
+    }
+
     bool VulkanRecreateRenderer(VulkanRendererHandle renderer, const VulkanFrameInfo* frames, uint32_t frameCount) {
         if (!renderer) {
             return false;
@@ -528,6 +545,16 @@ namespace SR_IMMEDIATE_GUI_NS {
 
         if (!SetupFrames(*r, frames, frameCount)) {
             return false;
+        }
+        if (r->cmdPools.size() != frameCount) {
+            for (auto pool : r->cmdPools) {
+                if (pool != VK_NULL_HANDLE) {
+                    vkDestroyCommandPool(r->info.device, pool, nullptr);
+                }
+            }
+            if (!CreateCommandBuffers(*r)) {
+                return false;
+            }
         }
 
         if (r->semaphore != VK_NULL_HANDLE) {
@@ -730,6 +757,7 @@ namespace SR_IMMEDIATE_GUI_NS {
 namespace SR_IMMEDIATE_GUI_NS {
     VulkanRendererHandle VulkanCreateRenderer(const VulkanRendererCreateInfo& info, const VulkanFrameInfo* frames, uint32_t frameCount) { return nullptr; }
     void VulkanDestroyRenderer(VulkanRendererHandle renderer) { }
+    void VulkanSuspendRenderer(VulkanRendererHandle renderer) { }
     bool VulkanRecreateRenderer(VulkanRendererHandle renderer, const VulkanFrameInfo* frames, uint32_t frameCount) { return false; }
     void VulkanNewFrame(VulkanRendererHandle renderer) { }
     VkCommandBuffer VulkanRecordFrame(VulkanRendererHandle renderer, uint32_t frameIndex, bool tracyEnabled) { return VK_NULL_HANDLE; }

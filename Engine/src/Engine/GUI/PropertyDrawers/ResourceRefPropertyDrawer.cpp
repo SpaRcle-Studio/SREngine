@@ -9,6 +9,7 @@
 
 #include <Utils/Resources/ResourceRef.h>
 #include <Utils/FileSystem/FileDialog.h>
+#include <Utils/FileSystem/VFS.h>
 
 #include <Codegen/ResourceRefPropertyDrawer.generated.hpp>
 
@@ -86,16 +87,16 @@ namespace SR_CORE_GUI_NS {
                         auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                         auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath, { { filterName, filterValue } });
 
-                        if (context.onBeforeChangeCallback) {
-                            context.onBeforeChangeCallback(false);
-                        }
-                        feedback.isChanged = true;
-
-                        if (relativeRes) {
-                            path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPathRef());
+                        if (relativeRes && !path.empty()) {
+                            SR_UTILS_NS::VFS::Instance().UnResolvePath(path);
+                            path = path.RemoveSubPath(CoreResLoader::GetResPathRef());
                         }
 
                         if (!path.empty()) {
+                            if (context.onBeforeChangeCallback) {
+                                context.onBeforeChangeCallback(false);
+                            }
+                            feedback.isChanged = true;
                             pRef->SetResource(SR_UTILS_NS::StringAtom(path.View()));
                         }
                     }

@@ -1,3 +1,7 @@
+//
+// Created by OpenAI Codex on 12.11.2026.
+//
+
 #include <Engine/GUI/GameBuildJob.h>
 #include <Engine/GUI/GameBuildRuntime.h>
 #include <Scripting/Cpp/ScriptSystem.h>
@@ -123,7 +127,7 @@ namespace SR_CORE_GUI_NS {
         return paths.size() <= SR_UINT16_MAX;
     }
 
-    bool GameBuildJob::ExportPlatform(SR_UTILS_NS::StringView platformName, SR_UTILS_NS::StringView assetName) {
+    bool GameBuildJob::ExportPlatform(SR_UTILS_NS::StringView platformName, SR_UTILS_NS::StringView assetName, bool downloadOnly) {
         if (isCancelled && isCancelled()) {
             return false;
         }
@@ -141,7 +145,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         const auto cachedArtifact = cachePath.Concat(assetName);
-        if (!cachedArtifact.IsFile()) {
+        if (downloadOnly || !cachedArtifact.IsFile()) {
             const auto url = "{}/releases/download/{}/{}"_format(EngineRepository, GetReleaseTag(), assetName);
             SetStatus("Downloading {}..."_format(platformName));
             SR_NETWORK_NS::DownloadRequest request;
@@ -157,6 +161,9 @@ namespace SR_CORE_GUI_NS {
 
         if (isCancelled && isCancelled()) {
             return false;
+        }
+        if (downloadOnly) {
+            return true;
         }
         SetStatus("Packing {}..."_format(platformName));
 
@@ -216,10 +223,6 @@ namespace SR_CORE_GUI_NS {
             SetStatus("No active build profile.", true);
             return false;
         }
-
-        const auto version = SR_UTILS_NS::String(SR_ENGINE_VERSION);
-        const bool latest = GetReleaseTag() == "dev-latest";
-        const auto suffix = latest ? "-dev" : "";
 
         SetStatus("Saving project configuration...");
 
@@ -295,16 +298,35 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
+        return ProcessTargets(false);
+    }
+
+    bool GameBuildJob::ReinstallArtifacts() {
+        return ProcessTargets(true);
+    }
+
+    bool GameBuildJob::ProcessTargets(bool downloadOnly) {
+        const auto pProfile = GetActiveProfile();
+        if (!pProfile) {
+            SetStatus("No active build profile.", true);
+            return false;
+        }
+        const auto version = SR_UTILS_NS::String(SR_ENGINE_VERSION);
+        const auto suffix = GetReleaseTag() == "dev-latest" ? "-dev" : "";
         bool success = true;
         const uint32_t targetCount = static_cast<uint32_t>(pProfile->windows) + static_cast<uint32_t>(pProfile->linux) +
             static_cast<uint32_t>(pProfile->androidArm64) + static_cast<uint32_t>(pProfile->androidX64) + static_cast<uint32_t>(pProfile->emscripten);
         uint32_t completed = 0;
+        if (targetCount == 0) {
+            SetStatus("Select at least one platform.", true);
+            return false;
+        }
         auto exportTarget = [&](SR_UTILS_NS::StringView platform, SR_UTILS_NS::StringView asset) {
             if (isCancelled && isCancelled()) {
                 success = false;
                 return;
             }
-            success &= ExportPlatform(platform, asset);
+            success &= ExportPlatform(platform, asset, downloadOnly);
             if (onProgress && targetCount > 0) {
                 onProgress(static_cast<float_t>(++completed) / targetCount);
             }
@@ -330,10 +352,10 @@ namespace SR_CORE_GUI_NS {
             if (onProgress) {
                 onProgress(1.f);
             }
-            SetStatus("Build completed.");
+            SetStatus(downloadOnly ? "Selected GitHub artifacts downloaded. Export the project to use them." : "Build completed.");
         }
         else if (!isCancelled || !isCancelled()) {
-            SetStatus("Export failed. See the engine log for details.", true);
+            SetStatus(downloadOnly ? "Artifact download failed. See the engine log for details." : "Export failed. See the engine log for details.", true);
         }
         return success;
     }

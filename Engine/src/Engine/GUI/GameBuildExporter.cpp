@@ -120,7 +120,7 @@ namespace SR_CORE_GUI_NS {
         return directory.Concat(fileName);
     }
 
-    bool GameBuildExporter::Build() {
+    bool GameBuildExporter::Build(bool reinstallArtifacts) {
         if (!m_projectReady || !m_pProjectSettings || !GetActiveProfile()) {
             m_runtime.Report("No active build profile.", true);
             return false;
@@ -138,8 +138,13 @@ namespace SR_CORE_GUI_NS {
         job->isCancelled = [this]() {
             return m_runtime.IsCancelled();
         };
-        return m_runtime.Submit([job]() {
-            job->Build();
+        return m_runtime.Submit([job, reinstallArtifacts]() {
+            if (reinstallArtifacts) {
+                job->ReinstallArtifacts();
+            }
+            else {
+                job->Build();
+            }
         });
     }
 
@@ -311,6 +316,26 @@ namespace SR_CORE_GUI_NS {
                 SR_IMMEDIATE_GUI_NS::Checkbox("##enabled", &profile->androidX64);
             });
         }
+        if (SR_IMMEDIATE_GUI_NS::CollapsingHeader("Android package", SR_IMMEDIATE_GUI_NS::TreeNodeFlags::DefaultOpen)) {
+            BuildField("Package ID", [&]() {
+                if (SR_IMMEDIATE_GUI_NS::InputText("##value", &profile->androidPackageId)) {
+                    m_logcatPackageInitialized = false;
+                }
+            });
+            SR_IMMEDIATE_GUI_NS::TextWrapped("Applied to the APK manifest during export. Export Android again after changing the package ID.");
+        }
+        const bool noTargets = !profile->windows && !profile->linux && !profile->emscripten && !profile->androidArm64 && !profile->androidX64;
+        if (SR_IMMEDIATE_GUI_NS::CollapsingHeader("GitHub build artifacts", SR_IMMEDIATE_GUI_NS::TreeNodeFlags::DefaultOpen)) {
+            BuildField("Release", [&]() {
+                SR_IMMEDIATE_GUI_NS::Text("%s", GetReleaseTag().c_str());
+            });
+            SR_IMMEDIATE_GUI_NS::BeginDisabled(noTargets);
+            if (SR_IMMEDIATE_GUI_NS::Button("Reinstall selected artifacts from GitHub", SR_MATH_NS::FVector2(-1.f, 0.f))) {
+                Build(true);
+            }
+            SR_IMMEDIATE_GUI_NS::EndDisabled();
+            SR_IMMEDIATE_GUI_NS::TextWrapped("Downloads fresh engine artifacts for the selected platforms into the cache. Export the project afterwards to update the game builds.");
+        }
         if (SR_IMMEDIATE_GUI_NS::CollapsingHeader("Advanced")) {
             BuildField("Web preview", [&]() {
                 SR_IMMEDIATE_GUI_NS::Checkbox("##enabled", &profile->enableWebPreview);
@@ -321,13 +346,11 @@ namespace SR_CORE_GUI_NS {
             BuildField("Release source", [&]() {
                 SR_IMMEDIATE_GUI_NS::Text("%s", GetReleaseTag().c_str());
             });
-            SR_IMMEDIATE_GUI_NS::TextWrapped("Prebuilt Android APKs retain the template package ID and version.");
         }
         SR_IMMEDIATE_GUI_NS::Separator();
         if (runtime.cppScriptsFound) {
             SR_IMMEDIATE_GUI_NS::WarningBox("C++ scripts are excluded from exported builds.");
         }
-        const bool noTargets = !profile->windows && !profile->linux && !profile->emscripten && !profile->androidArm64 && !profile->androidX64;
         if (m_pProjectSettings->mainScene.empty()) {
             SR_IMMEDIATE_GUI_NS::WarningBox("Select a start scene.");
         }

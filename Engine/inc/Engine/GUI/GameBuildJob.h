@@ -1,3 +1,7 @@
+//
+// Created by OpenAI Codex on 12.11.2026.
+//
+
 #ifndef SR_ENGINE_GAME_BUILD_JOB_H
 #define SR_ENGINE_GAME_BUILD_JOB_H
 
@@ -11,6 +15,7 @@ namespace SR_CORE_GUI_NS {
         explicit GameBuildJob(const ProjectSettings& settings);
         ~GameBuildJob() override;
         bool Build();
+        bool ReinstallArtifacts();
 
         SR_HTYPES_NS::Function<void(SR_UTILS_NS::String, bool)> onStatus;
         SR_HTYPES_NS::Function<void(float_t)> onProgress;
@@ -23,7 +28,8 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::Path GetBuildCachePath() const;
         SR_UTILS_NS::Path GetOutputPath() const;
         bool CollectBuildResources(SR_UTILS_NS::SortedVector<SR_UTILS_NS::Path>& paths) const;
-        bool ExportPlatform(SR_UTILS_NS::StringView platform, SR_UTILS_NS::StringView asset);
+        bool ProcessTargets(bool downloadOnly);
+        bool ExportPlatform(SR_UTILS_NS::StringView platform, SR_UTILS_NS::StringView asset, bool downloadOnly);
         bool RepackDesktop(const SR_UTILS_NS::Path& path);
         bool RepackAndroid(const SR_UTILS_NS::Path& path);
         bool RepackEmscripten(const SR_UTILS_NS::Path& path);

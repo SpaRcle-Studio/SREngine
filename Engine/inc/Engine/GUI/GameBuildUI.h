@@ -1,3 +1,7 @@
+//
+// Created by OpenAI Codex on 12.11.2026.
+//
+
 #ifndef SR_ENGINE_GAME_BUILD_UI_H
 #define SR_ENGINE_GAME_BUILD_UI_H
 

@@ -1,3 +1,7 @@
+//
+// Created by OpenAI Codex on 12.11.2026.
+//
+
 #include <ImmediateGUI/GUI/ImmediateGUI.h>
 
 #ifdef SR_USE_IMGUI
@@ -5,6 +9,12 @@
 #endif
 
 namespace SR_IMMEDIATE_GUI_NS {
+    void SetCurrentContext(void* context) {
+    #ifdef SR_USE_IMGUI
+        ImGui::SetCurrentContext(static_cast<ImGuiContext*>(context));
+    #endif
+    }
+
     bool IsScrolledToBottom() {
     #ifdef SR_USE_IMGUI
         return ImGui::GetScrollY() >= ImGui::GetScrollMaxY() - 1.f;

@@ -634,6 +634,7 @@ namespace SR_GRAPH_GUI_NS {
         SR_IMMEDIATE_GUI_DLL_API extern bool IsItemDeactivatedAfterEdit();
         SR_IMMEDIATE_GUI_DLL_API extern bool IsWindowFocused();
         SR_IMMEDIATE_GUI_DLL_API extern void* GetCurrentContext();
+        SR_IMMEDIATE_GUI_DLL_API extern void SetCurrentContext(void* context);
         SR_IMMEDIATE_GUI_DLL_API extern void TableNextRow();
         SR_IMMEDIATE_GUI_DLL_API extern void EndMenuBar();
         SR_IMMEDIATE_GUI_DLL_API extern void End();

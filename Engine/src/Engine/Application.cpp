@@ -44,7 +44,11 @@
 #include <Utils/FileSystem/Archive.h>
 #include <Utils/FileSystem/ArchiveVFSBackend.h>
 
+#include <Codegen/Application.generated.hpp>
+
 namespace SR_CORE_NS {
+    SR_MAYBE_UNUSED_VAR ApplicationManager::Instance();
+
     Application::Application()
         : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
     { }
@@ -56,6 +60,8 @@ namespace SR_CORE_NS {
 
     bool Application::PreInit() {
         SR_TRACY_ZONE;
+
+        ApplicationManager::Instance().RegisterApplication(*this);
 
         SR_UTILS_NS::Localization::SetLocale();
         SR_UTILS_NS::Random::Initialize();
@@ -386,6 +392,8 @@ namespace SR_CORE_NS {
 
         m_engine.AutoFree();
 
+        ApplicationManager::Instance().UnRegisterApplication(*this);
+
         SR_UTILS_NS::TagManager::DestroySettings();
         SR_UTILS_NS::LayerManager::DestroySingleton();
 
@@ -400,5 +408,29 @@ namespace SR_CORE_NS {
 
     void Application::Reload() {
         m_isNeedReload = true;
+    }
+
+    void ApplicationManager::RegisterApplication(Application& application) {
+        SR_LOCK_GUARD;
+        m_applications.emplace_back(application.GetWeakThis());
+    }
+
+    void ApplicationManager::UnRegisterApplication(Application& application) {
+        SR_LOCK_GUARD;
+        auto&& pIt = m_applications.find_if([&application](const SR_HTYPES_NS::WeakPtr<Application>& pWeak) {
+            return pWeak.GetUnchecked() == &application;
+        });
+        if (pIt == m_applications.end()) {
+            SRHalt("ApplicationManager::UnRegisterApplication() : application not found!");
+            return;
+        }
+        m_applications.erase(pIt);
+    }
+
+    SR_HTYPES_NS::SharedPtr<Application> ApplicationManager::GetApplication() const {
+        if (!m_applications.empty()) {
+            return m_applications.back().Lock();
+        }
+        return nullptr;
     }
 }

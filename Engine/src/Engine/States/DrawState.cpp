@@ -11,6 +11,7 @@
 #include <Graphics/Window/BasicWindowImpl.h>
 
 #include <Utils/Common/StoreUtils.h>
+#include <Utils/Types/Thread.h>
 
 #include <Codegen/DrawState.generated.hpp>
 
@@ -21,13 +22,20 @@ namespace SR_CORE_NS {
         Engine::Ptr pEngine = (Engine*)SR_UTILS_NS::StoreUtils::Temp::GetPointer("Engine");
         auto&& pRenderContext = pEngine->GetRenderContext();
 
-        if (pRenderContext) {
-            pRenderContext->PrepareFrame();
-        }
-
         auto&& pWindow = pEngine->GetMainWindow();
         if (!pWindow || !pWindow->IsVisible()) {
             return SR_UTILS_NS::ThreadWorkerResult::Break;
+        }
+        if (const auto implementation = pWindow->GetBaseWindow(); implementation && !implementation->IsSurfaceAvailable()) {
+            SR_HTYPES_NS::Thread::Sleep(16);
+            return SR_UTILS_NS::ThreadWorkerResult::Success;
+        }
+        if (pRenderContext) {
+            pRenderContext->PrepareFrame();
+            const auto pipeline = pRenderContext->GetPipeline();
+            if (pipeline && !pipeline->IsFrameReady()) {
+                return SR_UTILS_NS::ThreadWorkerResult::Success;
+            }
         }
 
         const bool isCollapsed = pWindow->IsWindowCollapsed();

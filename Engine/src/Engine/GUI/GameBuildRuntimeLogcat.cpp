@@ -1,3 +1,7 @@
+//
+// Created by OpenAI Codex on 12.11.2026.
+//
+
 #include <Engine/GUI/GameBuildRuntimeState.h>
 
 namespace SR_CORE_GUI_NS {

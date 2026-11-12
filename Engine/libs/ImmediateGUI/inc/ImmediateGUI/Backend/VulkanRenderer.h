@@ -45,6 +45,7 @@ namespace SR_IMMEDIATE_GUI_NS {
 
     SR_IMMEDIATE_GUI_DLL_API extern VulkanRendererHandle VulkanCreateRenderer(const VulkanRendererCreateInfo& info, const VulkanFrameInfo* frames, uint32_t frameCount);
     SR_IMMEDIATE_GUI_DLL_API extern void VulkanDestroyRenderer(VulkanRendererHandle renderer);
+    SR_IMMEDIATE_GUI_DLL_API extern void VulkanSuspendRenderer(VulkanRendererHandle renderer);
 
     SR_IMMEDIATE_GUI_DLL_API extern bool VulkanRecreateRenderer(VulkanRendererHandle renderer, const VulkanFrameInfo* frames, uint32_t frameCount);
 

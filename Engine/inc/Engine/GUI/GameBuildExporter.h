@@ -27,7 +27,7 @@ namespace SR_CORE_GUI_NS {
 
     private:
         bool LoadProjectSettings();
-        bool Build();
+        bool Build(bool reinstallArtifacts = false);
         SR_NODISCARD SR_UTILS_NS::Path GetBuildCachePath() const;
         SR_NODISCARD SR_UTILS_NS::String GetReleaseTag() const;
         SR_NODISCARD GameBuildProfile* GetActiveProfile() const;

@@ -6,6 +6,8 @@
 #include <Utils/Platform/Platform.h>
 #include <Utils/Platform/AndroidNativeAppGlue.h>
 #include <Utils/Platform/AndroidEvent.h>
+#include <Utils/Platform/AndroidInput.h>
+#include <Utils/Platform/AndroidLifecycle.h>
 #include <Utils/Debug.h>
 #include <Utils/Types/Thread.h>
 #include <Utils/Types/Time.h>
@@ -29,49 +31,12 @@
 
 // ----------------- Input Callbacks -----------------
 int32_t HandleInput(struct android_app* app, AInputEvent* event) {
-    SR_UTILS_NS::AndroidEvent evt;
-    if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_MOTION) {
-        evt.type = SR_UTILS_NS::AndroidEvent::Motion;
-        int32_t action = AMotionEvent_getAction(event) & AMOTION_EVENT_ACTION_MASK;
-        evt.motion.action = action;
-
-        size_t pointerCount = AMotionEvent_getPointerCount(event);
-        for (size_t i = 0; i < pointerCount; ++i) {
-            evt.motion.pointerId = AMotionEvent_getPointerId(event, i);
-            evt.motion.x = AMotionEvent_getX(event, i);
-            evt.motion.y = AMotionEvent_getY(event, i);
-            SR_UTILS_NS::AndroidEventQueue::Instance().PushEvent(evt);
-        }
-    }
-    else if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_KEY) {
-        evt.type = SR_UTILS_NS::AndroidEvent::Key;
-        evt.key.keyCode = AKeyEvent_getKeyCode(event);
-        evt.key.action = AKeyEvent_getAction(event);
-        SR_UTILS_NS::AndroidEventQueue::Instance().PushEvent(evt);
-    }
-    return 1; // событие обработано
+    return SR_PLATFORM_NS::QueueAndroidInputEvent(event);
 }
 
 // ----------------- Command Callbacks -----------------
 void HandleCmd(struct android_app* app, int32_t cmd) {
-    SR_UTILS_NS::AndroidEvent evt;
-    switch (cmd) {
-        case APP_CMD_INIT_WINDOW:
-        case APP_CMD_TERM_WINDOW:
-        case APP_CMD_WINDOW_RESIZED:
-        case APP_CMD_WINDOW_REDRAW_NEEDED:
-        case APP_CMD_GAINED_FOCUS:
-        case APP_CMD_LOST_FOCUS:
-        case APP_CMD_START:
-        case APP_CMD_STOP:
-        case APP_CMD_DESTROY:
-            evt.type = SR_UTILS_NS::AndroidEvent::Lifecycle;
-            evt.lifecycle.command = cmd;
-            SR_UTILS_NS::AndroidEventQueue::Instance().PushEvent(evt);
-            break;
-        default:
-            break;
-    }
+    SR_PLATFORM_NS::PublishAndroidLifecycle(cmd, app->window);
 }
 
 // ----------------- Sensor Handling -----------------
@@ -85,7 +50,7 @@ void ProcessSensorEvents(ASensorEventQueue* sensorQueue, struct android_app* app
         SR_UTILS_NS::AndroidEvent evt;
         evt.type = SR_UTILS_NS::AndroidEvent::Sensor;
         evt.sensorEvent.sensor = event;
-        SR_UTILS_NS::AndroidEventQueue::Instance().PushEvent(evt);
+        SR_PLATFORM_NS::PushAndroidInputEvent(evt);
     }
 }
 
@@ -108,7 +73,7 @@ void WaitApplicationWindowShow(struct android_app* state) {
                 return; // Прекращаем запуск, если приложение закрыли
             }
 
-            if (state->window) {
+            if (state->window && ANativeWindow_getWidth(state->window) > 0 && ANativeWindow_getHeight(state->window) > 0) {
                 window = state->window;
                 break;
             }
@@ -175,53 +140,79 @@ void SetImmersiveMode(ANativeActivity* activity) {
 
 void android_main(struct android_app* state) {
     SR_PLATFORM_NS::SetInstance(state);
-    WaitApplicationWindowShow(state);
-
-    SetImmersiveMode(state->activity);
-
     state->onAppCmd = HandleCmd;
     state->onInputEvent = HandleInput;
+    WaitApplicationWindowShow(state);
+    if (state->destroyRequested || !state->window) {
+        SR_PLATFORM_NS::NotifyAndroidEngineStopped();
+        return;
+    }
+    SetImmersiveMode(state->activity);
 
     // Настройка сенсоров
     ASensorManager* sensorManager = ASensorManager_getInstance();
-    ASensor const* accelerometer = ASensorManager_getDefaultSensor(sensorManager, ASENSOR_TYPE_ACCELEROMETER);
-    ASensorEventQueue* sensorQueue = ASensorManager_createEventQueue(sensorManager, state->looper, LOOPER_ID_USER, nullptr, nullptr);
-    if (accelerometer) {
-        ASensorEventQueue_enableSensor(sensorQueue, accelerometer);
-        ASensorEventQueue_setEventRate(sensorQueue, accelerometer, (1000L / 60) * 1000); // 60 Hz
-    }
+    ASensor const* accelerometer = sensorManager ? ASensorManager_getDefaultSensor(sensorManager, ASENSOR_TYPE_ACCELEROMETER) : nullptr;
+    ASensorEventQueue* sensorQueue = sensorManager ? ASensorManager_createEventQueue(sensorManager, state->looper, LOOPER_ID_USER, nullptr, nullptr) : nullptr;
+    bool sensorEnabled = false;
 
     SR_PLATFORM_NS::WriteConsoleLog("android_main() : running engine entry point...");
 
-    std::thread engineThread([]() {
-        char** argv = nullptr;
-        int argc = 1;
+    std::atomic<bool> engineFinished = false;
+    // This launcher thread outlives the engine Thread::Factory destroyed by the entry point.
+    std::thread engineThread([&engineFinished, state]() {
+        char program[] = "SREngine";
+        char* arguments[] = {program, nullptr};
 
-        if (const int code = SREngineEntryPoint(argc, argv); code == 0) {
+        if (const int code = SREngineEntryPoint(1, arguments); code == 0) {
             SR_PLATFORM_NS::WriteConsoleLog("android_main() : engine successfully closed!");
         }
         else {
             SR_PLATFORM_NS::WriteConsoleError("android_main() : engine closed with errors!");
         }
+        SR_PLATFORM_NS::NotifyAndroidEngineStopped();
+        engineFinished = true;
+        ALooper_wake(state->looper);
     });
 
     SR_PLATFORM_NS::WriteConsoleLog("android_main() : entering main loop...");
 
-    while (engineThread.joinable()) {
-        int ident = 0;
-        int events = 0;
+    while (!engineFinished.load()) {
+        int32_t ident = 0;
+        int32_t events = 0;
         struct android_poll_source* source = nullptr;
 
-        // 0 — не блокирует, можно поставить timeout в миллисекундах
-        while ((ident = ALooper_pollOnce(0, nullptr, &events, (void**)&source)) >= 0) {
+        // Engine completion wakes the looper; the timeout also prevents idle busy-spinning.
+        if ((ident = ALooper_pollOnce(100, nullptr, &events, (void**)&source)) >= 0) {
             if (source) {
                 source->process(state, source);
             }
 
+            const bool enableSensor = state->activityState == APP_CMD_RESUME && !state->destroyRequested;
+            if (sensorQueue && accelerometer && sensorEnabled != enableSensor) {
+                if (enableSensor) {
+                    ASensorEventQueue_enableSensor(sensorQueue, accelerometer);
+                    ASensorEventQueue_setEventRate(sensorQueue, accelerometer, (1000L / 60) * 1000);
+                }
+                else {
+                    ASensorEventQueue_disableSensor(sensorQueue, accelerometer);
+                }
+                sensorEnabled = enableSensor;
+            }
             ProcessSensorEvents(sensorQueue, state);
+        }
+    }
 
-            if (state->destroyRequested) {
-                break;
+    engineThread.join();
+    if (sensorQueue) {
+        ASensorManager_destroyEventQueue(sensorManager, sensorQueue);
+    }
+    if (!state->destroyRequested) {
+        ANativeActivity_finish(state->activity);
+        while (!state->destroyRequested) {
+            int32_t events = 0;
+            android_poll_source* source = nullptr;
+            if (ALooper_pollOnce(-1, nullptr, &events, reinterpret_cast<void**>(&source)) >= 0 && source) {
+                source->process(state, source);
             }
         }
     }

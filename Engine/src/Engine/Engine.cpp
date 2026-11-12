@@ -33,7 +33,13 @@
 #include <Utils/Common/CLIManager.h>
 #include <Utils/Common/StoreUtils.h>
 
+#include <Codegen/Engine.generated.hpp>
+
 namespace SR_CORE_NS {
+    Engine::Engine()
+        : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
+    { }
+
     Engine::Engine(Application* pApplication)
         : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
         , m_application(pApplication)

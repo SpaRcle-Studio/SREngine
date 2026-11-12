@@ -49,7 +49,9 @@ namespace SR_CORE_NS {
     class EngineScene;
     class Application;
 
-    class Engine : public SR_HTYPES_NS::SharedPtr<Engine> {
+    /// @noCopyable @noMovable
+    class Engine : public SR_HTYPES_NS::SharedPtr<Engine>, public SR_UTILS_NS::Serializable {
+        SR_CLASS()
         using Super = SR_HTYPES_NS::SharedPtr<Engine>;
         using WindowPtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::Window>;
         using RenderContextPtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::RenderContext>;
@@ -62,6 +64,7 @@ namespace SR_CORE_NS {
         using Ptr = SR_HTYPES_NS::SharedPtr<Engine>;
 
     public:
+        Engine();
         explicit Engine(Application* pApplication);
         ~Engine() override;
 
@@ -103,7 +106,10 @@ namespace SR_CORE_NS {
         SR_NODISCARD SR_CORE_GUI_NS::EditorGUI* GetEditor() const { return m_editor; }
         SR_NODISCARD SR_UTILS_NS::CmdManager* GetCmdManager() const { return m_cmdManager; }
         SR_NODISCARD EngineScene* GetEngineScene() const { return m_engineScene; }
+
+        /// @method @evaluate
         SR_NODISCARD bool IsApplicationFocused() const;
+        /// @method @evaluate
         SR_NODISCARD float_t GetFramerate() const;
 
         SR_NODISCARD SR_UTILS_NS::Debug& GetDebugger() const;
