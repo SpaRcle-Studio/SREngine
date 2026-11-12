@@ -65,7 +65,10 @@ jobs:
           npx playwright install chromium
 
       - name: Browser smoke test
+        timeout-minutes: 10
         working-directory: CI/browser
+        env:
+          DEBUG: pw:browser
         run: npm test
 
       - name: Upload browser smoke report
