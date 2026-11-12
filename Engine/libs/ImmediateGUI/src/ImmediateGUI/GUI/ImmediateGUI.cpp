@@ -385,14 +385,6 @@ namespace SR_IMMEDIATE_GUI_NS {
         }
     }
 
-    void BeginDisabled(bool disabled) {
-        ImGui::BeginDisabled();
-    }
-
-    void EndDisabled() {
-        ImGui::EndDisabled();
-    }
-
     void* GetCurrentWindow() {
         return ImGui::GetCurrentWindow();
     }
@@ -1721,8 +1713,6 @@ namespace SR_IMMEDIATE_GUI_NS {
     void SetItemDefaultFocus() { }
     uint32_t BeginForceEnabled() { return 0; }
     void EndForceEnabled(uint32_t stackSize) { }
-    void BeginDisabled(bool disabled) { }
-    void EndDisabled() { }
     void EndDragDropSource() { }
     void* GetCurrentWindow() { return nullptr; }
     SR_MATH_NS::FVector2 GetWindowCursorPos(void* pWindow) { return SR_MATH_NS::FVector2(0.0f, 0.0f); }

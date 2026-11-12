@@ -206,6 +206,12 @@ namespace SR_CORE_NS {
         /// приложения. Она монтируется поверх ресурсов, чтобы изменённые файлы имели приоритет
         if (auto&& dataPath = SR_PLATFORM_NS::GetApplicationDataPath(); dataPath && !dataPath->empty()) {
             SR_UTILS_NS::VFS::Instance().Mount("", new SR_UTILS_NS::DirectoryVFSBackend(*dataPath), -75);
+            if (SR_PLATFORM_NS::GetType() == SR_UTILS_NS::PlatformType::Android &&
+                !SR_UTILS_NS::VFS::Instance().CreateDirectories(dataPath->Concat(resourcesPath).ToStringView()))
+            {
+                SR_ERROR("Application::InitializeResourcesFolder() : failed to create writable Android resources directory!");
+                return false;
+            }
         }
 
         if (auto&& appFolder = SR_PLATFORM_NS::GetApplicationDirectory(); !appFolder.empty()) {

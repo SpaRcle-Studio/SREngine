@@ -3,74 +3,67 @@
 //
 
 #include <Engine/GUI/GameBuildExporter.h>
+#include <Engine/GUI/GameBuildJob.h>
 
-#include <Scripting/Cpp/ScriptSystem.h>
-
-#include <Utils/FileSystem/VFS.h>
-#include <Utils/FileSystem/DirectoryVFSBackend.h>
-#include <Utils/FileSystem/File.h>
-#include <Utils/FileSystem/Archive.h>
+#include <Engine/GUI/GameBuildUI.h>
 #include <Utils/Platform/Platform.h>
 #include <Utils/Resources/ResourceManager.h>
-#include <Utils/Common/Hashes.h>
-
-#include <zlib/zlib.h>
+#include <Utils/Resources/ResourceRef.h>
 
 #include <Codegen/GameBuildExporter.generated.hpp>
 
 namespace SR_CORE_GUI_NS {
-    static constexpr SR_UTILS_NS::StringView EngineRepository = "https://github.com/SpaRcle-Studio/SREngine";
-    static constexpr SR_UTILS_NS::StringView PackedDataMagic = "MAGIC_ENGINE_MODULE_DATA";
-    static constexpr SR_UTILS_NS::StringView ResourceDataMagic = "SR_ENGINE_VFS_RESOURCES_V1";
-
-    template<typename T> static void AppendBinary(SR_UTILS_NS::String& data, const T& value) {
-        data.append(reinterpret_cast<const char*>(&value), sizeof(T));
-    }
-
-    static bool ReadBinary(SR_UTILS_NS::StringView data, SR_UTILS_NS::SizeType& position, void* pValue, SR_UTILS_NS::SizeType size) {
-        if (position > data.size() || size > data.size() - position) {
-            return false;
-        }
-        memcpy(pValue, data.data() + position, size);
-        position += size;
-        return true;
-    }
-
     GameBuildExporter::GameBuildExporter()
-        : Super("Game Build Exporter", SR_MATH_NS::IVector2(680, 720))
-    { }
+        : Super("Game Build Exporter")
+    {
+        SetDefaultSize(SR_MATH_NS::IVector2(780, 760));
+    }
 
     GameBuildExporter::~GameBuildExporter() = default;
 
     void GameBuildExporter::OnOpen() {
-        if (LoadProjectSettings()) {
-            m_cppScriptsFound = false;
-            SR_UTILS_NS::VFS::Instance().Enumerate(
-                SR_UTILS_NS::ResourceManager::Instance().GetResPath(),
-                [this](const SR_UTILS_NS::VFSEntry& entry) {
-                    if (entry.extension == "cpp" || entry.extension == "h" || entry.extension == "hpp") {
-                        m_cppScriptsFound = true;
-                    }
-                },
-                true
-            );
+        if (!m_projectReady) {
+            m_runtime.Submit([this]() {
+                const bool ready = LoadProjectSettings();
+                m_projectReady.store(ready, std::memory_order_release);
+                if (ready) {
+                    m_runtime.Report("Project settings loaded.");
+                }
+            });
         }
+        m_toolsScanned = false;
+        m_devicesScanned = false;
+        m_imagesScanned = false;
     }
 
     bool GameBuildExporter::LoadProjectSettings() {
-        if (!SR_UTILS_NS::VFS::Instance().IsExists(".srproject")) {
-            return true;
-        }
-
         if (m_pProjectSettings) {
             return true;
         }
 
-        m_pProjectSettings = CoreResLoader::Load<ProjectSettings>(".srproject");
-        if (!m_pProjectSettings) {
-            SetStatus("Project settings were not found.", true);
+        SR_UTILS_NS::RawPointerHolder<ProjectSettings> snapshot;
+        SR_UTILS_NS::ResourceManager::Instance().Execute([&snapshot]() {
+            const SR_UTILS_NS::ResourceRef<ProjectSettings> source = CoreResLoader::Load<ProjectSettings>(".srproject");
+            if (!source) {
+                return;
+            }
+            snapshot = SRNew<ProjectSettings>();
+            snapshot.SetDeleter([](ProjectSettings* settings) {
+                settings->DeleteResource();
+            });
+            snapshot->projectName = source->projectName;
+            snapshot->mainScene = source->mainScene;
+            snapshot->version = source->version;
+            snapshot->packages = source->packages;
+            snapshot->buildProfiles = source->buildProfiles;
+            snapshot->enableCppScripts = source->enableCppScripts;
+            snapshot->activeBuildProfile = source->activeBuildProfile;
+        });
+        if (!snapshot) {
+            m_runtime.Report("Project settings were not found.", true);
             return false;
         }
+        m_pProjectSettings = std::move(snapshot);
 
         if (m_pProjectSettings->buildProfiles.empty()) {
             m_pProjectSettings->buildProfiles.emplace_back();
@@ -102,683 +95,246 @@ namespace SR_CORE_GUI_NS {
             .Concat(GetReleaseTag() == "dev-latest" ? "latest" : SR_ENGINE_VERSION);
     }
 
-    void GameBuildExporter::SetStatus(SR_UTILS_NS::String status, bool error) {
-        m_status = std::move(status);
-        m_statusError = error;
-        if (error) {
-            SR_ERROR("GameBuildExporter::SetStatus() : {}", m_status);
+    SR_UTILS_NS::Path GameBuildExporter::GetOutputPath() const {
+        const auto profile = GetActiveProfile();
+        if (!profile) {
+            return {};
         }
-        else {
-            SR_INFO("GameBuildExporter::SetStatus() : {}", m_status);
-        }
+        return profile->outputPath;
     }
 
-    bool GameBuildExporter::CollectBuildResources(SR_UTILS_NS::SortedVector<SR_UTILS_NS::Path>& paths) const {
-        SR_TRACY_ZONE;
-        SR_LOG("GameBuildExporter::CollectBuildResources() : collecting resources files to build...");
-
-        paths.clear();
-        paths.reserve(2048);
-
-        const auto resourcesPath = CoreResLoader::GetResPath();
-        auto&& cachePath = CoreResLoader::GetCachePath();
-        auto&& cppAPI = SR_SCRIPTING_NS::ScriptSystem::Instance().GetAPIFolder();
-        auto&& packedFiles = resourcesPath.Concat("Packed");
-        SR_UTILS_NS::Vector<SR_UTILS_NS::Path> excludeEnginePaths = {
-            resourcesPath.Concat("Cache"),
-            resourcesPath.Concat("Samples"),
-            resourcesPath.Concat("Engine/ModuleTests"),
-            resourcesPath.Concat("Engine/Utilities")
-        };
-        if (!GetActiveProfile()->packEditor) {
-            excludeEnginePaths.emplace_back(resourcesPath.Concat("Editor"));
+    SR_UTILS_NS::Path GameBuildExporter::GetArtifactPath(SR_UTILS_NS::StringView platform, SR_UTILS_NS::StringView suffix) const {
+        const auto settings = m_pProjectSettings.Get();
+        if (!settings || settings->activeBuildProfile >= settings->buildProfiles.size()) {
+            return {};
         }
-        SR_UTILS_NS::VFS::Instance().Enumerate(resourcesPath, [&](const SR_UTILS_NS::VFSEntry& entry) {
-            if (entry.type != SR_UTILS_NS::FSItemType::File ||
-                entry.extension == "cpp" || entry.extension == "h" || entry.extension == "hpp" ||
-                entry.relativePath.ends_with(".exe") || entry.relativePath.ends_with(".dll") || entry.relativePath.ends_with(".pdb") ||
-                entry.relativePath.starts_with(cachePath) || entry.relativePath.starts_with(packedFiles) ||
-                entry.relativePath.contains("CMakeLists.txt") ||
-                entry.relativePath.starts_with(cppAPI) ||
-                entry.relativePath.contains("/.idea/") || entry.relativePath.contains("/.git/")) {
-                return;
-            }
-            for (auto&& path : excludeEnginePaths) {
-                if (entry.relativePath == path.ToStringView() ||
-                    (entry.relativePath.starts_with(path.ToStringView()) &&
-                        entry.relativePath.size() > path.size() && entry.relativePath[path.size()] == '/')) {
-                    return;
-                }
-            }
-
-            if (SR_PLATFORM_NS::IsAbsolutePath(entry.relativePath)) {
-                SRHalt("GameBuildExporter::CollectBuildResources() : relative path are absolute!");
-                return;
-            }
-
-            paths.insert(entry.relativePath);
-        }, true);
-
-        SR_LOG("GameBuildExporter::CollectBuildResources() : collected {} files.", paths.size());
-
-        paths.insert(".srproject");
-
-        return paths.size() <= SR_UINT16_MAX;
-    }
-
-    bool GameBuildExporter::RepackDesktop(const SR_UTILS_NS::Path& artifactPath) {
-        SR_LOG("GameBuildExporter::RepackDesktop() : repacking \"{}\"...", artifactPath);
-
-        auto artifactFile = SR_UTILS_NS::VFS::Instance().OpenFile(artifactPath, SR_UTILS_NS::FileMode::Read);
-        SR_UTILS_NS::String artifactData;
-        if (!artifactFile || !artifactFile.Read(artifactData)) {
-            SetStatus("Failed to read desktop artifact.", true);
-            return false;
+        const auto output = settings->buildProfiles[settings->activeBuildProfile].outputPath;
+        if (output.empty() || settings->projectName.empty() || platform.empty()) {
+            return {};
         }
-
-        if (GetActiveProfile()->desktopPackageMode == DesktopBuildPackageMode::Monolithic) {
-            const auto footerSize = ResourceDataMagic.size() + sizeof(uint64_t) * 2;
-            if (artifactData.size() < footerSize ||
-                SR_UTILS_NS::StringView(artifactData.data() + artifactData.size() - footerSize, ResourceDataMagic.size()) != ResourceDataMagic) {
-                SetStatus("Monolithic engine artifact has an unknown resource format.", true);
-                return false;
-            }
-            SR_UTILS_NS::SizeType position = artifactData.size() - sizeof(uint64_t);
-            uint64_t oldCompressedSize = 0;
-            if (!ReadBinary(artifactData, position, &oldCompressedSize, sizeof(oldCompressedSize)) ||
-                oldCompressedSize > artifactData.size() - footerSize) {
-                SetStatus("Monolithic engine artifact has invalid resource sizes.", true);
-                return false;
-            }
-            artifactData.resize(artifactData.size() - footerSize - oldCompressedSize);
-            if (m_desktopPackedBinary.size() > SR_UINT32_MAX) {
-                SetStatus("Monolithic resources exceed the supported archive size.", true);
-                return false;
-            }
-            uLongf compressedSize = compressBound(m_desktopPackedBinary.size());
-            SR_UTILS_NS::String compressed;
-            compressed.resize(compressedSize);
-            if (compress2(reinterpret_cast<Bytef*>(compressed.data()), &compressedSize,
-                reinterpret_cast<const Bytef*>(m_desktopPackedBinary.data()),
-                m_desktopPackedBinary.size(), Z_BEST_COMPRESSION) != Z_OK) {
-                SetStatus("Failed to compress monolithic resources.", true);
-                return false;
-            }
-            compressed.resize(compressedSize);
-            artifactFile = SR_UTILS_NS::File();
-            auto output = SR_UTILS_NS::VFS::Instance().OpenFile(artifactPath, SR_UTILS_NS::FileMode::Write);
-            const uint64_t dataSize = m_desktopPackedBinary.size();
-            const uint64_t packedSize = compressed.size();
-            if (!output || output.Write(artifactData.data(), artifactData.size()) != artifactData.size() ||
-                output.Write(compressed.data(), compressed.size()) != compressed.size() ||
-                output.Write(ResourceDataMagic.data(), ResourceDataMagic.size()) != ResourceDataMagic.size() ||
-                output.Write(&dataSize, sizeof(dataSize)) != sizeof(dataSize) ||
-                output.Write(&packedSize, sizeof(packedSize)) != sizeof(packedSize)) {
-                SetStatus("Failed to write monolithic executable.", true);
-                return false;
-            }
-            output.Flush();
-            return true;
-        }
-
-        const SR_UTILS_NS::SizeType footerSize = PackedDataMagic.size() + sizeof(uint64_t) * 2;
-        if (artifactData.size() < footerSize) {
-            SetStatus("Desktop artifact does not contain packed data.", true);
-            return false;
-        }
-
-        const SR_UTILS_NS::SizeType footerOffset = artifactData.size() - footerSize;
-        if (SR_UTILS_NS::StringView(artifactData.data() + footerOffset, PackedDataMagic.size()) != PackedDataMagic) {
-            SetStatus("Desktop artifact has an unknown packed data format.", true);
-            return false;
-        }
-
-        SR_UTILS_NS::SizeType footerPosition = footerOffset + PackedDataMagic.size();
-        uint64_t decompressedSize = 0;
-        uint64_t compressedSize = 0;
-        if (!ReadBinary(artifactData, footerPosition, &decompressedSize, sizeof(decompressedSize)) ||
-            !ReadBinary(artifactData, footerPosition, &compressedSize, sizeof(compressedSize)) ||
-            compressedSize > footerOffset || compressedSize > SR_UINT32_MAX ||
-            decompressedSize == 0 || decompressedSize > SR_UINT32_MAX) {
-            SetStatus("Desktop artifact has invalid packed data sizes.", true);
-            return false;
-        }
-
-        const SR_UTILS_NS::SizeType packedDataOffset = footerOffset - compressedSize;
-        SR_UTILS_NS::String unpackedData;
-        unpackedData.resize(decompressedSize);
-        uLongf unpackedSize = decompressedSize;
-        if (uncompress(
-            reinterpret_cast<Bytef*>(unpackedData.data()),
-            &unpackedSize,
-            reinterpret_cast<const Bytef*>(artifactData.data() + packedDataOffset),
-            compressedSize
-        ) != Z_OK) {
-            SetStatus("Failed to decompress desktop artifact.", true);
-            return false;
-        }
-        unpackedData.resize(unpackedSize);
-
-        SR_UTILS_NS::SizeType packedPosition = 0;
-        uint16_t executableFileCount = 0;
-        if (!ReadBinary(unpackedData, packedPosition, &executableFileCount, sizeof(executableFileCount)) || executableFileCount == 0) {
-            SetStatus("Desktop artifact contains invalid file entries.", true);
-            return false;
-        }
-
-        SR_UTILS_NS::Vector<SR_UTILS_NS::String> zipNames;
-        SR_UTILS_NS::Vector<SR_UTILS_NS::String> zipData;
-        for (uint16_t i = 0; i < executableFileCount; ++i) {
-            uint16_t nameSize = 0;
-            uint64_t contentSize = 0;
-            if (!ReadBinary(unpackedData, packedPosition, &nameSize, sizeof(nameSize)) ||
-                nameSize > unpackedData.size() - packedPosition) {
-                SetStatus("Desktop artifact contains an invalid file name.", true);
-                return false;
-            }
-            SR_UTILS_NS::StringView name(unpackedData.data() + packedPosition, nameSize);
-            packedPosition += nameSize;
-            if (!ReadBinary(unpackedData, packedPosition, &contentSize, sizeof(contentSize)) ||
-                contentSize > unpackedData.size() - packedPosition) {
-                SetStatus("Desktop artifact contains invalid file data.", true);
-                return false;
-            }
-
-            if (name.ends_with(".lib")) {
-                packedPosition += contentSize;
-                continue;
-            }
-
-            const SR_UTILS_NS::String outputName = i == 0
-                ? "{}{}"_format(artifactPath.GetBaseNameView(), name.ends_with(".exe") ? ".exe" : "")
-                : SR_UTILS_NS::String(name);
-            zipNames.emplace_back(outputName);
-            zipData.emplace_back(SR_UTILS_NS::StringView(unpackedData.data() + packedPosition, contentSize));
-            if (outputName.size() > SR_UINT16_MAX) {
-                SetStatus("Desktop artifact contains a file name that is too long.", true);
-                return false;
-            }
-            packedPosition += contentSize;
-        }
-
-        SR_MAYBE_UNUSED uint16_t oldResourceCount = 0;
-        if (!ReadBinary(unpackedData, packedPosition, &oldResourceCount, sizeof(oldResourceCount))) {
-            SetStatus("Desktop artifact contains invalid resource entries.", true);
-            return false;
-        }
-
-        for (const auto& path : m_resourcePaths) {
-            SR_UTILS_NS::String data;
-            auto file = SR_UTILS_NS::VFS::Instance().OpenFile(path, SR_UTILS_NS::FileMode::Read);
-            if (!file || !file.Read(data)) {
-                SetStatus("Failed to read portable resource: {}"_format(path), true);
-                return false;
-            }
-            zipNames.emplace_back(path == ".srproject" ? SR_UTILS_NS::String(".srproject") :
-                "Resources/{}"_format(path.ToStringView().starts_with("Resources/") ? path.ToStringView().substr(10) : path.ToStringView()));
-            zipData.emplace_back(std::move(data));
-        }
-        SR_UTILS_NS::Vector<SR_UTILS_NS::Archive::Entry> zipEntries;
-        for (uint32_t i = 0; i < zipNames.size(); ++i) {
-            zipEntries.emplace_back(SR_UTILS_NS::Archive::Entry{
-                .name = zipNames[i], .data = zipData[i], .isExecutable = i == 0
-            });
-        }
-        artifactFile = SR_UTILS_NS::File();
-        return SR_UTILS_NS::Archive::SaveZip(artifactPath, zipEntries);
-    }
-
-    bool GameBuildExporter::RepackAndroid(const SR_UTILS_NS::Path& artifactPath) {
-        SR_LOG("GameBuildExporter::RepackAndroid() : repacking \"{}\"...", artifactPath);
-
-        auto apkFile = SR_UTILS_NS::VFS::Instance().OpenFile(artifactPath, SR_UTILS_NS::FileMode::Read);
-        auto&& pArchive = SR_UTILS_NS::Archive::Load(apkFile);
-        if (!pArchive) {
-            SetStatus("Failed to open Android APK.", true);
-            return false;
-        }
-
-        SR_UTILS_NS::Vector<SR_UTILS_NS::Archive::Entry> entries;
-        pArchive->Enumerate([&entries](const SR_UTILS_NS::Archive::Entry& entry) {
-            if (!entry.name.starts_with("assets/Resources/") && !entry.name.starts_with("META-INF/")) {
-                entries.emplace_back(entry);
-            }
-        });
-
-        SR_UTILS_NS::Vector<SR_UTILS_NS::String> apkNames;
-        SR_UTILS_NS::Vector<SR_UTILS_NS::String> resourceData;
-        apkNames.reserve(m_resourcePaths.size());
-        resourceData.reserve(m_resourcePaths.size());
-        for (uint32_t i = 0; i < m_resourcePaths.size(); ++i) {
-            auto file = SR_UTILS_NS::VFS::Instance().OpenFile(m_resourcePaths[i], SR_UTILS_NS::FileMode::Read);
-            SR_UTILS_NS::String& data = resourceData.emplace_back();
-            if (!file || !file.Read(data)) {
-                SetStatus("Failed to read Android resource: {}"_format(m_resourcePaths[i]), true);
-                return false;
-            }
-            apkNames.emplace_back("assets/Resources/{}"_format(m_resourcePaths[i]));
-        }
-        entries.reserve(entries.size() + resourceData.size());
-        for (uint32_t i = 0; i < resourceData.size(); ++i) {
-            entries.emplace_back(SR_UTILS_NS::Archive::Entry {
-                .name = apkNames[i],
-                .data = resourceData[i]
-            });
-        }
-
-        apkFile = SR_UTILS_NS::File();
-        if (!SR_UTILS_NS::Archive::SaveZip(artifactPath, entries)) {
-            SetStatus("Failed to rebuild Android APK.", true);
-            return false;
-        }
-
-        const auto keyStore = GetBuildCachePath().Concat("android-debug.keystore");
-        if (!keyStore.IsFile()) {
-            const SR_UTILS_NS::String result = SR_PLATFORM_NS::ExecuteCommand(
-                "keytool -genkeypair -noprompt -keystore \"{}\" -storepass android -keypass android -alias androiddebugkey -dname \"CN=Android Debug,O=Android,C=US\" -keyalg RSA -keysize 2048 -validity 10000"_format(keyStore),
-                { }
-            );
-            if (!keyStore.IsFile()) {
-                SetStatus("Failed to create Android debug key. Install a JDK with keytool available in PATH. {}"_format(result), true);
-                return false;
-            }
-        }
-
-        SR_PLATFORM_NS::ExecuteCommand(
-            "jarsigner -keystore \"{}\" -storepass android -keypass android -sigalg SHA256withRSA -digestalg SHA-256 \"{}\" androiddebugkey"_format(keyStore, artifactPath),
-            { }
-        );
-        const SR_UTILS_NS::String verifyResult = SR_PLATFORM_NS::ExecuteCommand("jarsigner -verify \"{}\""_format(artifactPath), { });
-        if (!verifyResult.contains("jar verified")) {
-            SetStatus("Failed to sign Android APK. Install a JDK with jarsigner available in PATH. {}"_format(verifyResult), true);
-            return false;
-        }
-        return true;
-    }
-
-    bool GameBuildExporter::RepackEmscripten(const SR_UTILS_NS::Path& artifactPath) {
-        SR_LOG("GameBuildExporter::RepackEmscripten() : repacking \"{}\"...", artifactPath);
-
-        auto zipFile = SR_UTILS_NS::VFS::Instance().OpenFile(artifactPath, SR_UTILS_NS::FileMode::Read);
-        auto&& pArchive = SR_UTILS_NS::Archive::Load(zipFile);
-        if (!pArchive) {
-            SetStatus("Failed to open Emscripten archive.", true);
-            return false;
-        }
-
-        SR_UTILS_NS::Vector<SR_UTILS_NS::String> names;
-        SR_UTILS_NS::Vector<SR_UTILS_NS::String> data;
-        int32_t javascriptIndex = -1;
-        int32_t dataIndex = -1;
-        pArchive->Enumerate([&](const SR_UTILS_NS::Archive::Entry& entry) {
-            if (entry.isDirectory || entry.name.ends_with(".zip")) {
-                return;
-            }
-            names.emplace_back(entry.name);
-            data.emplace_back(entry.data);
-            const int32_t index = static_cast<int32_t>(names.size() - 1);
-            if (entry.name.ends_with("SREngine.js")) {
-                javascriptIndex = index;
-            }
-            else if (entry.name.ends_with("SREngine.data")) {
-                dataIndex = index;
-            }
-        });
-        if (javascriptIndex < 0 || dataIndex < 0) {
-            SetStatus("Emscripten archive does not contain SREngine.js and SREngine.data.", true);
-            return false;
-        }
-
-        SR_UTILS_NS::String webData;
-        SR_UTILS_NS::String metadata = "loadPackage({files:[";
-        for (uint32_t i = 0; i < m_resourcePaths.size(); ++i) {
-            auto file = SR_UTILS_NS::VFS::Instance().OpenFile(m_resourcePaths[i], SR_UTILS_NS::FileMode::Read);
-            SR_UTILS_NS::String resourceData;
-            if (!file || !file.Read(resourceData)) {
-                SetStatus("Failed to read Emscripten resource: {}"_format(m_resourcePaths[i]), true);
-                return false;
-            }
-            const uint64_t start = webData.size();
-            webData.append(resourceData.data(), resourceData.size());
-            if (i != 0) {
-                metadata += ',';
-            }
-            metadata += "{";
-            metadata += "filename:\"/Resources/{}\",start:{},end:{}"_format(m_resourcePaths[i], start, webData.size());
-            metadata += "}";
-        }
-        metadata += "],remote_package_size:{}"_format(webData.size());
-        metadata += "})";
-
-        auto&& javascript = data[javascriptIndex];
-        const auto metadataBegin = javascript.find("loadPackage({files:[");
-        const auto sizeBegin = javascript.find("],remote_package_size:", metadataBegin);
-        const auto metadataEnd = sizeBegin == SR_UTILS_NS::String::npos ? SR_UTILS_NS::String::npos : javascript.find("})", sizeBegin);
-        if (metadataBegin == SR_UTILS_NS::String::npos || sizeBegin == SR_UTILS_NS::String::npos || metadataEnd == SR_UTILS_NS::String::npos) {
-            SetStatus("Emscripten JavaScript has an unknown preload metadata format.", true);
-            return false;
-        }
-        javascript = javascript.substr(0, metadataBegin) + metadata + javascript.substr(metadataEnd + 2);
-
-        const SR_UTILS_NS::String createFile = "Module[\"FS_createDataFile\"](name,null,data,true,true,true);";
-        const auto createFilePosition = javascript.find(createFile);
-        if (createFilePosition != SR_UTILS_NS::String::npos) {
-            const SR_UTILS_NS::String createDirectories =
-                "var fp=name.split(\"/\");var fd=\"/\";for(var fi=1;fi+1<fp.length;++fi){"
-                "Module[\"FS_createPath\"](fd,fp[fi],true,true);fd+=fp[fi]+\"/\";}";
-            javascript = javascript.substr(0, createFilePosition) + createDirectories + createFile +
-                javascript.substr(createFilePosition + createFile.size());
-        }
-        data[dataIndex] = webData;
-
-        // Repacking changes JS and data, so their cache keys must change with the exported project.
-        SR_UTILS_NS::String manifest = "{\"files\":{";
-        bool firstAsset = true;
-        for (uint32_t i = 0; i < names.size(); ++i) {
-            const char* asset = names[i].ends_with("SREngine.js") ? "SREngine.js"
-                : names[i].ends_with("SREngine.wasm") ? "SREngine.wasm"
-                : names[i].ends_with("SREngine.data") ? "SREngine.data" : nullptr;
-            if (!asset) { continue; }
-            if (!firstAsset) { manifest += ','; }
-            firstAsset = false;
-            manifest += "\"{}\":\"{:016x}\""_format(asset, SR_UTILS_NS::HashArrayRepresentation(data[i].data(), data[i].size()));
-        }
-        manifest += "}}";
-        bool manifestFound = false;
-        for (uint32_t i = 0; i < names.size(); ++i) {
-            if (names[i].ends_with("SREngine.manifest.json")) { data[i] = manifest; manifestFound = true; }
-        }
-        if (!manifestFound) {
-            names.emplace_back(names[javascriptIndex].substr(0, names[javascriptIndex].size() - SR_UTILS_NS::StringView("SREngine.js").size()) + "SREngine.manifest.json");
-            data.emplace_back(std::move(manifest));
-        }
-
-        SR_UTILS_NS::Vector<SR_UTILS_NS::Archive::Entry> entries;
-        entries.reserve(names.size());
-        for (uint32_t i = 0; i < names.size(); ++i) {
-            entries.emplace_back(SR_UTILS_NS::Archive::Entry { .name = names[i], .data = data[i] });
-        }
-        zipFile = SR_UTILS_NS::File();
-        if (!SR_UTILS_NS::Archive::SaveZip(artifactPath, entries)) {
-            SetStatus("Failed to rebuild Emscripten archive.", true);
-            return false;
-        }
-        return true;
-    }
-
-    bool GameBuildExporter::ExportPlatform(SR_UTILS_NS::StringView platformName, SR_UTILS_NS::StringView assetName) {
-        SR_INFO("GameBuildExporter::ExportPlatform() : exporting {} platform...", platformName);
-        auto&& pProfile = GetActiveProfile();
-        if (!pProfile) {
-            return false;
-        }
-
-        const auto cachePath = GetBuildCachePath();
-        if (!cachePath.CreateDirectories()) {
-            SetStatus("Failed to create engine build cache.", true);
-            return false;
-        }
-
-        const auto cachedArtifact = cachePath.Concat(assetName);
-        if (!cachedArtifact.IsFile()) {
-            const auto url = "{}/releases/download/{}/{}"_format(EngineRepository, GetReleaseTag(), assetName);
-            SetStatus("Downloading {}..."_format(platformName));
-            if (!SR_PLATFORM_NS::DownloadFile(url.c_str(), cachedArtifact)) {
-                SetStatus("Failed to download {} build."_format(platformName), true);
-                return false;
-            }
-        }
-
-        auto outputPath = m_outputRoot.Concat(platformName);
-        if (!outputPath.CreateDirectories()) {
-            SetStatus("Failed to create output directory for {}."_format(platformName), true);
-            return false;
-        }
-
-        const SR_UTILS_NS::String projectFileName = SR_UTILS_NS::Path(m_pProjectSettings->projectName.ToString()).ConvertToFileName();
-        SR_UTILS_NS::String outputFileName;
-        const bool desktop = platformName == "Windows" || platformName == "Linux";
-        if (desktop && pProfile->desktopPackageMode == DesktopBuildPackageMode::PortableZip) {
-            outputFileName = "{}.zip"_format(projectFileName);
-        }
-        else if (platformName == "Windows") {
-            outputFileName = "{}.exe"_format(projectFileName);
-        }
-        else if (platformName == "Linux") {
-            outputFileName = projectFileName;
-        }
-        else if (platformName == "Android") {
-            const auto architecture = assetName.find("arm64-v8a") != SR_UTILS_NS::StringView::npos ? "arm64-v8a" : "x86_64";
-            outputFileName = "{}-{}.apk"_format(projectFileName, architecture);
-        }
-        else {
-            outputFileName = "{}.zip"_format(projectFileName);
-        }
-        const auto outputArtifact = outputPath.Concat(outputFileName);
-        if (!cachedArtifact.Copy(outputArtifact)) {
-            SetStatus("Failed to stage {} build."_format(platformName), true);
-            return false;
-        }
-
-        if ((platformName == "Windows" || platformName == "Linux") && !RepackDesktop(outputArtifact)) {
-            return false;
-        }
-        if (platformName == "Android" && !RepackAndroid(outputArtifact)) {
-            return false;
-        }
-        if (platformName == "Emscripten" && !RepackEmscripten(outputArtifact)) {
-            return false;
-        }
-        if (platformName == "Linux" && pProfile->desktopPackageMode == DesktopBuildPackageMode::Monolithic) {
-        #if defined(SR_LINUX)
-            SR_PLATFORM_NS::CopyPermissions(SR_PLATFORM_NS::GetApplicationPath(), outputArtifact);
-        #endif
-        }
-
-        return true;
+        const SR_UTILS_NS::Path projectName(settings->projectName.ToStringView());
+        SR_UTILS_NS::String fileName = projectName.ConvertToFileName();
+        fileName += suffix;
+        const auto directory = output.Concat(platform);
+        return directory.Concat(fileName);
     }
 
     bool GameBuildExporter::Build() {
-        auto&& pProfile = GetActiveProfile();
-        if (!pProfile) {
-            SetStatus("No active build profile.", true);
+        if (!m_projectReady || !m_pProjectSettings || !GetActiveProfile()) {
+            m_runtime.Report("No active build profile.", true);
             return false;
         }
-
-        const auto version = SR_UTILS_NS::String(SR_ENGINE_VERSION);
-        const bool latest = GetReleaseTag() == "dev-latest";
-        const auto suffix = latest ? "-dev" : "";
-
-        if (!m_pProjectSettings->SaveAsset()) {
-            SetStatus("Failed to save project settings before build.", true);
-            return false;
-        }
-
-        m_outputRoot = CoreResLoader::GetResPath();
-        SR_UTILS_NS::VFS::Instance().ResolvePath(m_outputRoot, SR_UTILS_NS::FileMode::Write);
-        m_outputRoot = m_outputRoot.GetPrevious().Concat(pProfile->outputPath);
-
-        SR_INFO("GameBuildExported::Build() : building project for \"{}\"", m_outputRoot);
-
-        SR_UTILS_NS::RawPointerHolder<SR_UTILS_NS::IVFSBackend> pBackend = new SR_UTILS_NS::DirectoryVFSBackend(m_outputRoot);
-        SR_UTILS_NS::VFS::Instance().Mount(m_outputRoot, pBackend.Get(), 0);
-        pBackend.SetDeleter([](SR_UTILS_NS::IVFSBackend* pVFS) {
-            SR_UTILS_NS::VFS::Instance().Unmount(pVFS);
-            delete pVFS;
+        SR_HTYPES_NS::SharedPtr<GameBuildJob> job = new GameBuildJob(*m_pProjectSettings);
+        job->onStatus = [this](SR_UTILS_NS::String text, bool error) {
+            m_runtime.Report(std::move(text), error);
+        };
+        job->onProgress = [this](float_t progress) {
+            m_runtime.ReportProgress(progress);
+        };
+        job->onDownload = [this](uint64_t completed, uint64_t total) {
+            m_runtime.ReportDownload(completed, total);
+        };
+        job->isCancelled = [this]() {
+            return m_runtime.IsCancelled();
+        };
+        return m_runtime.Submit([job]() {
+            job->Build();
         });
-
-        SR_UTILS_NS::EnumReflector::ForEach<SR_UTILS_NS::PlatformType>([&](SR_UTILS_NS::PlatformType platform) {
-            const auto platformPath = m_outputRoot.Concat(SR_UTILS_NS::EnumReflector::ToStringAtom(platform));
-            if (platformPath.IsDir()) {
-                SR_UTILS_NS::VFS::Instance().Delete(platformPath);
-            }
-        });
-
-        if (!CollectBuildResources(m_resourcePaths)) {
-            SetStatus("Project contains too many resource files.", true);
-            return false;
-        }
-
-        if ((pProfile->windows || pProfile->linux) && pProfile->desktopPackageMode == DesktopBuildPackageMode::Monolithic) {
-            SR_TRACY_ZONE_N("Desktop packing");
-            m_desktopPackedBinary.clear();
-            m_desktopPackedBinary.shrink_to_fit();
-            const auto resourceCount = static_cast<uint16_t>(m_resourcePaths.size());
-            AppendBinary(m_desktopPackedBinary, resourceCount);
-            SR_UTILS_NS::String resourceData;
-            SR_UTILS_NS::String resourceName;
-            for (uint16_t i = 0; i < resourceCount; ++i) {
-                auto resourceFile = SR_UTILS_NS::VFS::Instance().OpenFile(m_resourcePaths[i], SR_UTILS_NS::FileMode::Read);
-                if (!resourceFile || !resourceFile.Read(resourceData)) {
-                    SetStatus("Failed to read resource: {}"_format(m_resourcePaths[i]), true);
-                    return false;
-                }
-
-                resourceName = m_resourcePaths[i].ToStringView();
-                if (resourceName.starts_with("Resources/")) {
-                    resourceName = resourceName.substr(10);
-                }
-                resourceName = m_resourcePaths[i] == ".srproject" ? SR_UTILS_NS::String(".srproject") :
-                    "Resources/{}"_format(resourceName);
-
-                if (resourceName.size() > SR_UINT16_MAX) {
-                    SetStatus("Resource name is too long: {}"_format(m_resourcePaths[i]), true);
-                    return false;
-                }
-
-                const auto nameSize = static_cast<uint16_t>(resourceName.size());
-                const uint64_t contentSize = resourceData.size();
-                AppendBinary(m_desktopPackedBinary, nameSize);
-                m_desktopPackedBinary.append(resourceName.data(), resourceName.size());
-                AppendBinary(m_desktopPackedBinary, contentSize);
-                m_desktopPackedBinary.append(resourceData.data(), resourceData.size());
-            }
-        }
-
-        bool success = true;
-        const auto desktopSuffix = pProfile->desktopPackageMode == DesktopBuildPackageMode::Monolithic ? "_monolithic" : "";
-        if (pProfile->windows) {
-            success &= ExportPlatform("Windows", "SREngine_v{}{}_windows.x86_64{}.exe"_format(version, suffix, desktopSuffix));
-        }
-        if (pProfile->linux) {
-            success &= ExportPlatform("Linux", "SREngine_v{}{}_linux.x86_64{}"_format(version, suffix, desktopSuffix));
-        }
-        if (pProfile->androidArm64) {
-            success &= ExportPlatform("Android", "SREngine_v{}{}_android.arm64-v8a.apk"_format(version, suffix));
-        }
-        if (pProfile->androidX64) {
-            success &= ExportPlatform("Android", "SREngine_v{}{}_android.x86_64.apk"_format(version, suffix));
-        }
-        if (pProfile->emscripten) {
-            success &= ExportPlatform("Emscripten", "SREngine_v{}{}_emscripten.zip"_format(version, suffix));
-        }
-
-        if (success) {
-            if (!m_pProjectSettings->SaveAsset()) {
-                SetStatus("Builds were exported, but project settings could not be saved.", true);
-                return false;
-            }
-            SetStatus("Build completed.");
-        }
-        return success;
     }
 
     void GameBuildExporter::Draw() {
-        if (!LoadProjectSettings()) {
-            SR_IMMEDIATE_GUI_NS::TextWrapped("%s", m_status.c_str());
-            return;
-        }
-
-        auto&& pProfile = GetActiveProfile();
-        if (!pProfile) {
-            SR_IMMEDIATE_GUI_NS::Text("Is not a valid project. Please check the .srproject file.");
-            return;
-        }
-
-        SR_IMMEDIATE_GUI_NS::Text("Engine branch: %s", SR_ENGINE_BRANCH);
-        SR_IMMEDIATE_GUI_NS::Text("Release source: %s", GetReleaseTag().c_str());
-        SR_IMMEDIATE_GUI_NS::Separator();
-
-        if (SR_IMMEDIATE_GUI_NS::BeginCombo("Configuration", pProfile->name.c_str())) {
-            for (uint32_t i = 0; i < m_pProjectSettings->buildProfiles.size(); ++i) {
-                if (SR_IMMEDIATE_GUI_NS::Selectable(
-                    m_pProjectSettings->buildProfiles[i].name.c_str(),
-                    i == m_pProjectSettings->activeBuildProfile
-                )) {
-                    m_pProjectSettings->activeBuildProfile = i;
-                    pProfile = GetActiveProfile();
+        auto runtime = m_runtime.GetStatus();
+        if (!m_projectReady.load(std::memory_order_acquire)) {
+            if (runtime.busy) {
+                SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::FrameRounding, 0.f);
+                SR_IMMEDIATE_GUI_NS::ProgressBar(-1.f, SR_MATH_NS::FVector2(-1.f, 0.f), "Loading project...");
+                SR_IMMEDIATE_GUI_NS::PopStyleVar();
+            }
+            else {
+                SR_IMMEDIATE_GUI_NS::TextWrapped("%s", runtime.message.empty() ? "Open a project to configure its builds." : runtime.message.c_str());
+                if (SR_IMMEDIATE_GUI_NS::Button("Reload project settings")) {
+                    OnOpen();
                 }
             }
-            SR_IMMEDIATE_GUI_NS::EndCombo();
+            return;
         }
-        if (SR_IMMEDIATE_GUI_NS::Button("New configuration")) {
-            auto copy = *pProfile;
-            copy.name = "New configuration";
-            m_pProjectSettings->buildProfiles.emplace_back(copy);
-            m_pProjectSettings->activeBuildProfile = m_pProjectSettings->buildProfiles.size() - 1;
-            pProfile = GetActiveProfile();
+        if (!m_toolsScanned && !runtime.busy) {
+            m_runtime.RefreshTools(CoreResLoader::GetResPath());
+            m_toolsScanned = true;
+            runtime = m_runtime.GetStatus();
         }
-        SR_IMMEDIATE_GUI_NS::SameLine();
-        if (m_pProjectSettings->buildProfiles.size() > 1 && SR_IMMEDIATE_GUI_NS::Button("Delete configuration")) {
-            m_pProjectSettings->buildProfiles.erase(
-                m_pProjectSettings->buildProfiles.begin() + m_pProjectSettings->activeBuildProfile
-            );
-            m_pProjectSettings->activeBuildProfile = 0;
-            pProfile = GetActiveProfile();
-        }
-
-        SR_IMMEDIATE_GUI_NS::InputText("Profile", &pProfile->name);
-        SR_IMMEDIATE_GUI_NS::InputText("Organization", &pProfile->organization);
-        SR_IMMEDIATE_GUI_NS::InputText("Output", &pProfile->outputPath.GetInternalUnsafeString());
-        SR_IMMEDIATE_GUI_NS::InputText("Start scene", &m_pProjectSettings->mainScene.GetInternalUnsafeString());
-        int32_t buildConfiguration = static_cast<int32_t>(pProfile->configuration);
-        if (SR_IMMEDIATE_GUI_NS::Combo("Build type", &buildConfiguration, "Release\0Debug\0")) {
-            pProfile->configuration = static_cast<GameBuildConfiguration>(buildConfiguration);
-        }
-        int32_t desktopPackageMode = static_cast<int32_t>(pProfile->desktopPackageMode);
-        if (SR_IMMEDIATE_GUI_NS::Combo("Desktop package", &desktopPackageMode, "Monolithic\0Portable ZIP\0")) {
-            pProfile->desktopPackageMode = static_cast<DesktopBuildPackageMode>(desktopPackageMode);
-        }
-        SR_IMMEDIATE_GUI_NS::Checkbox("Windows", &pProfile->windows);
-        SR_IMMEDIATE_GUI_NS::Checkbox("Linux", &pProfile->linux);
-        SR_IMMEDIATE_GUI_NS::Checkbox("Android arm64-v8a", &pProfile->androidArm64);
-        SR_IMMEDIATE_GUI_NS::Checkbox("Android x86_64", &pProfile->androidX64);
-        SR_IMMEDIATE_GUI_NS::Checkbox("Emscripten", &pProfile->emscripten);
-        SR_IMMEDIATE_GUI_NS::InputText("Android package ID", &pProfile->androidPackageId);
-        auto versionCode = static_cast<int32_t>(pProfile->androidVersionCode);
-        if (SR_IMMEDIATE_GUI_NS::InputInt("Android version code", &versionCode)) {
-            pProfile->androidVersionCode = static_cast<uint32_t>(versionCode > 0 ? versionCode : 1);
-        }
-        SR_IMMEDIATE_GUI_NS::Checkbox("Create platform archives", &pProfile->createPlatformArchives);
-        SR_IMMEDIATE_GUI_NS::Checkbox("Enable web preview", &pProfile->enableWebPreview);
-        SR_IMMEDIATE_GUI_NS::Checkbox("Pack editor", &pProfile->packEditor);
-        SR_IMMEDIATE_GUI_NS::Separator();
-
-        if (m_cppScriptsFound) {
-            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.7f, 0.f, 1.f), "C++ scripts are not supported and will be excluded.");
-        }
-
-        if (m_pProjectSettings->mainScene.empty()) {
-            SR_IMMEDIATE_GUI_NS::WarningBox("Main scene isn't selected!");
+        auto profile = GetActiveProfile();
+        if (!profile) {
+            SR_IMMEDIATE_GUI_NS::TextWrapped("No active build profile.");
             return;
         }
 
-        if (SR_IMMEDIATE_GUI_NS::ButtonColored("Build", SR_MATH_NS::FColor::Green() * 0.65, SR_MATH_NS::FVector2(160.f, 36.f))) {
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::FrameRounding, 0.f);
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ChildRounding, 0.f);
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::PopupRounding, 0.f);
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::TabRounding, 0.f);
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::GrabRounding, 0.f);
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ScrollbarRounding, 0.f);
+
+        SR_IMMEDIATE_GUI_NS::BeginDisabled(runtime.busy && !runtime.logcatRefreshing);
+        BuildField("Configuration", [&]() {
+            if (SR_IMMEDIATE_GUI_NS::BeginCombo("##configuration", profile->name.c_str())) {
+                for (uint32_t i = 0; i < m_pProjectSettings->buildProfiles.size(); ++i) {
+                    SR_IMMEDIATE_GUI_NS::PushID(static_cast<int32_t>(i));
+                    if (SR_IMMEDIATE_GUI_NS::Selectable(m_pProjectSettings->buildProfiles[i].name.c_str(),
+                        i == m_pProjectSettings->activeBuildProfile)) {
+                        m_pProjectSettings->activeBuildProfile = i;
+                        profile = GetActiveProfile();
+                    }
+                    SR_IMMEDIATE_GUI_NS::PopID();
+                }
+                SR_IMMEDIATE_GUI_NS::EndCombo();
+            }
+        });
+        BuildField("Profiles", [&]() {
+            if (SR_IMMEDIATE_GUI_NS::Button("New")) {
+                auto copy = *profile;
+                copy.name = "New configuration";
+                m_pProjectSettings->buildProfiles.emplace_back(copy);
+                m_pProjectSettings->activeBuildProfile = m_pProjectSettings->buildProfiles.size() - 1;
+                profile = GetActiveProfile();
+            }
+            SR_IMMEDIATE_GUI_NS::SameLine();
+            SR_IMMEDIATE_GUI_NS::BeginDisabled(m_pProjectSettings->buildProfiles.size() <= 1);
+            if (SR_IMMEDIATE_GUI_NS::Button("Delete")) {
+                m_pProjectSettings->buildProfiles.erase(m_pProjectSettings->buildProfiles.begin() + m_pProjectSettings->activeBuildProfile);
+                m_pProjectSettings->activeBuildProfile = 0;
+            }
+            SR_IMMEDIATE_GUI_NS::EndDisabled();
+        });
+        SR_IMMEDIATE_GUI_NS::EndDisabled();
+        SR_IMMEDIATE_GUI_NS::Separator();
+
+        if (SR_IMMEDIATE_GUI_NS::BeginTabBar("BuildAndRunTabs")) {
+            if (SR_IMMEDIATE_GUI_NS::BeginTabItem("Export")) {
+                DrawExport(runtime);
+                SR_IMMEDIATE_GUI_NS::EndTabItem();
+            }
+            if (SR_IMMEDIATE_GUI_NS::BeginTabItem("Run")) {
+                DrawLaunch(runtime);
+                SR_IMMEDIATE_GUI_NS::EndTabItem();
+            }
+            if (SR_IMMEDIATE_GUI_NS::BeginTabItem("Tools")) {
+                DrawTools(runtime);
+                SR_IMMEDIATE_GUI_NS::EndTabItem();
+            }
+            if (SR_IMMEDIATE_GUI_NS::BeginTabItem("Logcat")) {
+                DrawLogcat(runtime);
+                SR_IMMEDIATE_GUI_NS::EndTabItem();
+            }
+            SR_IMMEDIATE_GUI_NS::EndTabBar();
+        }
+
+        SR_IMMEDIATE_GUI_NS::Separator();
+        if (runtime.busy && !runtime.logcatRefreshing) {
+            const auto overlay = runtime.progress >= 0.f
+                ? "{:.0f}%"_format(runtime.progress * 100.f) : SR_UTILS_NS::String("Working...");
+            SR_IMMEDIATE_GUI_NS::ProgressBar(runtime.progress, SR_MATH_NS::FVector2(-1.f, 0.f), overlay.c_str());
+            if (runtime.downloadedBytes > 0) {
+                if (runtime.totalBytes > 0) {
+                    SR_IMMEDIATE_GUI_NS::Text("%.1f / %.1f MB", runtime.downloadedBytes / 1048576.0, runtime.totalBytes / 1048576.0);
+                }
+                else {
+                    SR_IMMEDIATE_GUI_NS::Text("%.1f MB downloaded", runtime.downloadedBytes / 1048576.0);
+                }
+            }
+            if (SR_IMMEDIATE_GUI_NS::Button("Cancel operation")) {
+                m_runtime.Stop();
+            }
+        }
+        if (!runtime.message.empty()) {
+            if (runtime.error) {
+                SR_IMMEDIATE_GUI_NS::WarningBox(runtime.message.c_str());
+            }
+            else {
+                SR_IMMEDIATE_GUI_NS::TextWrapped("%s", runtime.message.c_str());
+            }
+        }
+        if (!runtime.log.empty() && SR_IMMEDIATE_GUI_NS::CollapsingHeader("Command output")) {
+            if (SR_IMMEDIATE_GUI_NS::BeginChild("RuntimeOutput", SR_MATH_NS::FVector2(0.f, 140.f))) {
+                SR_IMMEDIATE_GUI_NS::TextWrapped("%s", runtime.log.c_str());
+            }
+            SR_IMMEDIATE_GUI_NS::EndChild();
+        }
+        SR_IMMEDIATE_GUI_NS::PopStyleVar(6);
+    }
+
+    void GameBuildExporter::DrawExport(const GameBuildRuntime::Status& runtime) {
+        auto profile = GetActiveProfile();
+        SR_IMMEDIATE_GUI_NS::BeginDisabled(runtime.busy);
+        if (SR_IMMEDIATE_GUI_NS::CollapsingHeader("Project", SR_IMMEDIATE_GUI_NS::TreeNodeFlags::DefaultOpen)) {
+            BuildField("Name", [&]() {
+                SR_IMMEDIATE_GUI_NS::InputText("##value", &profile->name);
+            });
+            BuildField("Organization", [&]() {
+                SR_IMMEDIATE_GUI_NS::InputText("##value", &profile->organization);
+            });
+            BuildField("Output directory", [&]() {
+                SR_IMMEDIATE_GUI_NS::InputText("##value", &profile->outputPath.GetInternalUnsafeString());
+            });
+            BuildField("Start scene", [&]() {
+                SR_IMMEDIATE_GUI_NS::InputText("##value", &m_pProjectSettings->mainScene.GetInternalUnsafeString());
+            });
+            BuildField("Build type", [&]() {
+                int32_t configuration = static_cast<int32_t>(profile->configuration);
+                if (SR_IMMEDIATE_GUI_NS::Combo("##value", &configuration, "Release\0Debug\0")) {
+                    profile->configuration = static_cast<GameBuildConfiguration>(configuration);
+                }
+            });
+            BuildField("Desktop package", [&]() {
+                int32_t mode = static_cast<int32_t>(profile->desktopPackageMode);
+                if (SR_IMMEDIATE_GUI_NS::Combo("##value", &mode, "Monolithic\0Portable ZIP\0")) {
+                    profile->desktopPackageMode = static_cast<DesktopBuildPackageMode>(mode);
+                }
+            });
+        }
+        if (SR_IMMEDIATE_GUI_NS::CollapsingHeader("Platforms", SR_IMMEDIATE_GUI_NS::TreeNodeFlags::DefaultOpen)) {
+            BuildField("Windows", [&]() {
+                SR_IMMEDIATE_GUI_NS::Checkbox("##enabled", &profile->windows);
+            });
+            BuildField("Linux", [&]() {
+                SR_IMMEDIATE_GUI_NS::Checkbox("##enabled", &profile->linux);
+            });
+            BuildField("Browser / WebGPU", [&]() {
+                SR_IMMEDIATE_GUI_NS::Checkbox("##enabled", &profile->emscripten);
+            });
+            BuildField("Android arm64-v8a", [&]() {
+                SR_IMMEDIATE_GUI_NS::Checkbox("##enabled", &profile->androidArm64);
+            });
+            BuildField("Android x86_64", [&]() {
+                SR_IMMEDIATE_GUI_NS::Checkbox("##enabled", &profile->androidX64);
+            });
+        }
+        if (SR_IMMEDIATE_GUI_NS::CollapsingHeader("Advanced")) {
+            BuildField("Web preview", [&]() {
+                SR_IMMEDIATE_GUI_NS::Checkbox("##enabled", &profile->enableWebPreview);
+            });
+            BuildField("Include editor", [&]() {
+                SR_IMMEDIATE_GUI_NS::Checkbox("##enabled", &profile->packEditor);
+            });
+            BuildField("Release source", [&]() {
+                SR_IMMEDIATE_GUI_NS::Text("%s", GetReleaseTag().c_str());
+            });
+            SR_IMMEDIATE_GUI_NS::TextWrapped("Prebuilt Android APKs retain the template package ID and version.");
+        }
+        SR_IMMEDIATE_GUI_NS::Separator();
+        if (runtime.cppScriptsFound) {
+            SR_IMMEDIATE_GUI_NS::WarningBox("C++ scripts are excluded from exported builds.");
+        }
+        const bool noTargets = !profile->windows && !profile->linux && !profile->emscripten && !profile->androidArm64 && !profile->androidX64;
+        if (m_pProjectSettings->mainScene.empty()) {
+            SR_IMMEDIATE_GUI_NS::WarningBox("Select a start scene.");
+        }
+        SR_IMMEDIATE_GUI_NS::BeginDisabled(m_pProjectSettings->mainScene.empty() || noTargets);
+        if (SR_IMMEDIATE_GUI_NS::Button("Export selected platforms", SR_MATH_NS::FVector2(-1.f, 0.f))) {
             Build();
         }
-
-        SR_IMMEDIATE_GUI_NS::SameLine();
-
-        if (SR_IMMEDIATE_GUI_NS::ButtonColored("Delete artifacts", SR_MATH_NS::FColor::Red() * 0.65, SR_MATH_NS::FVector2(160.f, 36.f))) {
-            auto&& cachedArtifacts = GetBuildCachePath();
-            SR_UTILS_NS::VFS::Instance().Delete(cachedArtifacts);
-        }
-
-        if (!m_status.empty()) {
-            const auto color = m_statusError
-                ? SR_MATH_NS::FColor(1.f, 0.25f, 0.25f, 1.f)
-                : SR_MATH_NS::FColor(0.35f, 1.f, 0.45f, 1.f);
-            SR_IMMEDIATE_GUI_NS::TextColored(color, "%s", m_status.c_str());
-        }
+        SR_IMMEDIATE_GUI_NS::EndDisabled();
+        SR_IMMEDIATE_GUI_NS::EndDisabled();
     }
 }
