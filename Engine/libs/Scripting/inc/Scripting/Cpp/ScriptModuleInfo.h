@@ -14,7 +14,7 @@ namespace SR_SCRIPTING_NS {
         Unknown, Dynamic, Static, Mixed
     );
 
-    struct CppScriptModuleInfo : public SR_UTILS_NS::Serializable {
+    struct SR_SCRIPTING_DLL_API CppScriptModuleInfo : public SR_UTILS_NS::Serializable {
         SR_STRUCT()
 
         /// @property

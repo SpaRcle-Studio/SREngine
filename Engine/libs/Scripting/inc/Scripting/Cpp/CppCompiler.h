@@ -27,7 +27,7 @@ namespace SR_SCRIPTING_NS {
         Unknown, MinGW, GCC, Clang, MSVC
     )
 
-    struct CppCompilerSettings : public SR_UTILS_NS::Serializable {
+    struct SR_SCRIPTING_DLL_API CppCompilerSettings : public SR_UTILS_NS::Serializable {
         SR_STRUCT()
 
         /// @property
