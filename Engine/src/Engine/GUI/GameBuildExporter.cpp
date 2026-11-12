@@ -9,6 +9,7 @@
 #include <Utils/Platform/Platform.h>
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/Resources/ResourceRef.h>
+#include <Utils/FileSystem/VFS.h>
 
 #include <Codegen/GameBuildExporter.generated.hpp>
 
@@ -41,16 +42,20 @@ namespace SR_CORE_GUI_NS {
             return true;
         }
 
-        SR_UTILS_NS::RawPointerHolder<ProjectSettings> snapshot;
-        SR_UTILS_NS::ResourceManager::Instance().Execute([&snapshot]() {
-            const SR_UTILS_NS::ResourceRef<ProjectSettings> source = CoreResLoader::Load<ProjectSettings>(".srproject");
-            if (!source) {
-                return;
-            }
-            snapshot = SRNew<ProjectSettings>();
-            snapshot.SetDeleter([](ProjectSettings* settings) {
-                settings->DeleteResource();
-            });
+        if (!SR_UTILS_NS::VFS::Instance().IsFileExists(".srproject")) {
+            m_runtime.Report("Open a project to configure its builds.");
+            return false;
+        }
+        const SR_UTILS_NS::ResourceRef<ProjectSettings> source = CoreResLoader::Load<ProjectSettings>(".srproject");
+        if (!source) {
+            m_runtime.Report("Project settings were not found.", true);
+            return false;
+        }
+        SR_UTILS_NS::RawPointerHolder<ProjectSettings> snapshot = SRNew<ProjectSettings>();
+        snapshot.SetDeleter([](ProjectSettings* settings) {
+            settings->DeleteResource();
+        });
+        SR_UTILS_NS::ResourceManager::Instance().Execute([&snapshot, &source]() {
             snapshot->projectName = source->projectName;
             snapshot->mainScene = source->mainScene;
             snapshot->version = source->version;
@@ -59,10 +64,6 @@ namespace SR_CORE_GUI_NS {
             snapshot->enableCppScripts = source->enableCppScripts;
             snapshot->activeBuildProfile = source->activeBuildProfile;
         });
-        if (!snapshot) {
-            m_runtime.Report("Project settings were not found.", true);
-            return false;
-        }
         m_pProjectSettings = std::move(snapshot);
 
         if (m_pProjectSettings->buildProfiles.empty()) {

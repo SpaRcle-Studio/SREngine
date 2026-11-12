@@ -27,12 +27,6 @@ namespace SR_CORE_GUI_NS {
             status.totalBytes = total;
             status.progress = total > 0 ? static_cast<float_t>(completed) / total : -1.f;
         };
-        if (SR_PLATFORM_NS::IsSupportThreads()) {
-            SR_HTYPES_NS::Thread::Factory::Instance().Create(worker, [this]() {
-                Work();
-                return false;
-            });
-        }
     }
 
     GameBuildRuntime::State::~State() {
@@ -59,6 +53,12 @@ namespace SR_CORE_GUI_NS {
     }
 
     bool GameBuildRuntime::State::Task(SR_HTYPES_NS::Function<void()> job, bool quiet) {
+        if (!worker && SR_PLATFORM_NS::IsSupportThreads()) {
+            SR_HTYPES_NS::Thread::Factory::Instance().Create(worker, [this]() {
+                Work();
+                return false;
+            });
+        }
         if (!worker) {
             Message("Background operations require a desktop editor.", true);
             return false;
