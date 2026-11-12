@@ -36,6 +36,8 @@ endif()
 
 set(LIBTYPE STATIC)
 
+set(BUILD_TESTING OFF CACHE BOOL "" FORCE)
+
 add_subdirectory(libs/libmodplug)
 
 if (NOT SR_EMSCRIPTEN)
@@ -77,7 +79,6 @@ if (SR_AUDIO_USE_FLAC)
     set(BUILD_CXXLIBS             OFF CACHE BOOL "" FORCE)
     set(BUILD_PROGRAMS            OFF CACHE BOOL "" FORCE)
     set(BUILD_EXAMPLES            OFF CACHE BOOL "" FORCE)
-    set(BUILD_TESTING             OFF CACHE BOOL "" FORCE)
     set(BUILD_DOCS                OFF CACHE BOOL "" FORCE)
     set(INSTALL_MANPAGES          OFF CACHE BOOL "" FORCE)
     set(INSTALL_PKGCONFIG_MODULES OFF CACHE BOOL "" FORCE)

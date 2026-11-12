@@ -58,6 +58,9 @@ const defaultArgs = [
     process.platform === 'win32' ? '--use-angle=d3d11-warp' : '--use-angle=swiftshader',
     '--enable-unsafe-swiftshader'
 ];
+if (process.platform === 'linux') {
+    defaultArgs.push('--enable-features=Vulkan', '--use-vulkan=swiftshader', '--disable-vulkan-surface');
+}
 const launchArgs = process.env.SR_WEBGPU_ARGS ? JSON.parse(process.env.SR_WEBGPU_ARGS) : defaultArgs;
 log(`Chromium channel: chromium; host platform: ${process.platform}`);
 log(`Chromium arguments: ${JSON.stringify(launchArgs)}`);

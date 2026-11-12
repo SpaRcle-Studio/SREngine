@@ -8,7 +8,7 @@ on:
 
 jobs:
   Build:
-    name: Emscripten.
+    name: Emscripten Release.
     runs-on: windows-latest
     steps:
       - name: Fetching repository.
@@ -54,30 +54,61 @@ jobs:
 
           Write-Host "Emscripten output validated successfully."
 
+      - name: Upload Emscripten test input
+        uses: actions/upload-artifact@v4
+        with:
+          name: Emscripten-test-input
+          path: Platform/Emscripten/Bin
+
+  TestsEmscriptenRelease:
+    name: Emscripten Release Tests.
+    needs: Build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: Emscripten-test-input
+          path: Platform/Emscripten/Bin
+
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
 
-      - name: Install browser smoke test dependencies
+      - name: Install Emscripten test dependencies
         working-directory: CI/browser
         run: |
           npm install --ignore-scripts
-          npx playwright install chromium
+          npx playwright install --with-deps chromium
 
-      - name: Browser smoke test
+      - name: Run Emscripten tests
         timeout-minutes: 10
         working-directory: CI/browser
         env:
           DEBUG: pw:browser
         run: npm test
 
-      - name: Upload browser smoke report
+      - name: Upload Emscripten test report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: Emscripten-browser-smoke
+          name: Emscripten-tests
           path: CI/browser/report
           if-no-files-found: ignore
+
+  Publish:
+    name: Emscripten Release Publish.
+    needs: [Build, TestsEmscriptenRelease]
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: Emscripten-test-input
+          path: Platform/Emscripten/Bin
 
       - name: Publish web demo binaries (rewrite history)
         if: ${{ github.event_name == 'push' && (github.ref_name == 'dev' || github.ref_name == 'master') }}
