@@ -20,8 +20,8 @@ namespace SR_CORE_GUI_NS {
     }
 
     PropertyDrawerFeedback BehaviourPropertyDrawer::DrawCustomProperties(const PropertyDrawerContext& context) {
-        auto&& pCppBehaviour = dynamic_cast<SR_SCRIPTING_NS::Behaviour*>(context.pOwner)->GetBehaviour();
-        if (!pCppBehaviour) {
+        auto* pPropertiesObject = dynamic_cast<SR_SCRIPTING_NS::Behaviour*>(context.pOwner)->GetPropertiesObject();
+        if (!pPropertiesObject) {
             return {};
         }
 
@@ -29,7 +29,7 @@ namespace SR_CORE_GUI_NS {
             m_pObjectPropertyDrawer = SRNew<SR_CORE_GUI_NS::ObjectPropertyDrawer>();
         }
 
-        auto&& valueRef = SR_UTILS_NS::Reflection::Value::CreateRef(*dynamic_cast<SR_UTILS_NS::SRClass*>(pCppBehaviour));
+        auto&& valueRef = SR_UTILS_NS::Reflection::Value::CreateRef(*pPropertiesObject);
 
         PropertyDrawerContext newContext = context;
         newContext.pValue = &valueRef;

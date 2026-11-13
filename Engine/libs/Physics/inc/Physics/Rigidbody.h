@@ -5,14 +5,13 @@
 #ifndef SR_ENGINE_RIGIDBODY_H
 #define SR_ENGINE_RIGIDBODY_H
 
-#include <Physics/macros.h>
+#include <Physics/stdInclude.h>
 
 #include <Physics/PhysicsLib.h>
 #include <Physics/PhysicsMaterial.h>
 #include <Physics/CollisionShape.h>
 
 #include <Utils/Common/Measurement.h>
-#include <Utils/ECS/ComponentManager.h>
 #include <Utils/ECS/Component.h>
 #include <Utils/Math/Matrix4x4.h>
 

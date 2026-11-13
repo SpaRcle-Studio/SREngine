@@ -12,7 +12,7 @@
 
 #include <Graphics/Window/Window.h>
 
-#include <Scripting/Cpp/ScriptSystem.h>
+#include <Scripting/Base/ScriptSystem.h>
 
 #include <Utils/Types/Thread.h>
 

@@ -196,15 +196,15 @@ namespace SR_SCRIPTING_NS {
         return true;
     }
 
-    std::string CppCompiler::GetCompilerVersion() const {
-        std::string version;
+    SR_UTILS_NS::String CppCompiler::GetCompilerVersion() const {
+        SR_UTILS_NS::String version;
 
         if (m_settings.compilerType == CppCompilerType::MSVC) {
-            std::string command = m_settings.compilerPath.ToString();
+            SR_UTILS_NS::String command = m_settings.compilerPath.ToString();
             version = SR_PLATFORM_NS::ExecuteCommand(command);
         }
         else {
-            std::string command = m_settings.compilerPath.ToString() + " --version";
+            SR_UTILS_NS::String command = m_settings.compilerPath.ToString() + " --version";
             version = SR_PLATFORM_NS::ExecuteCommand(command);
         }
 

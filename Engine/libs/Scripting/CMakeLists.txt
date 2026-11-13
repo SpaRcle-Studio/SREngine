@@ -6,6 +6,8 @@ endif()
 
 project(Scripting)
 
+option(SR_ENGINE_ANGELSCRIPT_SUPPORT "Enable AngelScript scripting backend" ON)
+
 SR_COMMON_GENERATE_BUILD_SOURCES(${PROJECT_SOURCE_DIR})
 SR_COMMON_GET_SOURCES(Scripting)
 
@@ -24,14 +26,31 @@ else()
         target_compile_options(Scripting PRIVATE -fPIC)
         
         if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-            target_link_libraries(Scripting atomic)
+            target_link_libraries(Scripting PUBLIC atomic)
         endif()
     endif()
 
     SR_COPY_SHARED_MODULE_TO_EXECUTABLE_FOLDER(Scripting)
 endif()
 
-target_link_libraries(Scripting Utils)
+target_link_libraries(Scripting PUBLIC Utils)
+
+target_include_directories(Scripting PRIVATE src)
+
+if (SR_ENGINE_ANGELSCRIPT_SUPPORT)
+    set(AS_DISABLE_INSTALL ON CACHE BOOL "" FORCE)
+    set(SR_ANGELSCRIPT_PREVIOUS_BUILD_SHARED_LIBS "${BUILD_SHARED_LIBS}")
+    set(BUILD_SHARED_LIBS OFF)
+    add_subdirectory(libs/angelscript/sdk/angelscript/projects/cmake angelscript)
+    set(BUILD_SHARED_LIBS "${SR_ANGELSCRIPT_PREVIOUS_BUILD_SHARED_LIBS}")
+    unset(SR_ANGELSCRIPT_PREVIOUS_BUILD_SHARED_LIBS)
+
+    set_target_properties(angelscript PROPERTIES POSITION_INDEPENDENT_CODE ON)
+    target_link_libraries(Scripting PRIVATE angelscript)
+    target_compile_definitions(Scripting PUBLIC SR_ENGINE_ANGELSCRIPT_SUPPORT)
+    target_sources(Scripting PRIVATE libs/angelscript/sdk/add_on/scriptbuilder/scriptbuilder.cpp)
+    target_include_directories(Scripting PRIVATE libs/angelscript/sdk/add_on/scriptbuilder)
+endif()
 
 SR_COPY_STATIC_LIBRARY_TO_LIBRARY_FOLDER(Scripting)
 
@@ -60,13 +79,13 @@ if (SR_ENGINE_MONO_SUPPORT)
 
     if (UNIX AND NOT ANDROID_NDK)
         target_include_directories(Scripting PUBLIC ${MONO_INCLUDE_DIRS})
-        target_link_libraries(Scripting ${MONO_LIBRARIES})
+        target_link_libraries(Scripting PUBLIC ${MONO_LIBRARIES})
     else()
-        target_link_libraries(Scripting ${Mono_LIBRARY})
+        target_link_libraries(Scripting PUBLIC ${Mono_LIBRARY})
 
         if (WIN32 OR ANDROID_NDK)
             # for mono correct link
-            target_link_libraries(Scripting version bcrypt)
+            target_link_libraries(Scripting PUBLIC version bcrypt)
         endif()
 
         target_include_directories(Scripting PUBLIC ${Mono_INCLUDE_DIR})

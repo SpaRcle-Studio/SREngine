@@ -9,59 +9,74 @@
 #include <Scripting/Cpp/CppCompiler.h>
 #include <Scripting/Cpp/ModuleManager.h>
 
-#include <Utils/Common/Singleton.h>
+#include <Scripting/Base/ScriptSystemState.h>
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Resources/FileSystemWatcher.h>
 #include <Utils/Types/SharedPtr.h>
 
 namespace SR_SCRIPTING_NS {
-    SR_ENUM_NS_CLASS_T(ScriptSystemState, uint8_t,
-        InitialAnalyse, Idle, CheckModules, Codegen, Compiling, Reloading
-    );
+    class SR_SCRIPTING_DLL_API CppScriptSystem : public SR_HTYPES_NS::SharedPtr<CppScriptSystem> {
 
-    class SR_SCRIPTING_DLL_API ScriptSystem : public SR_UTILS_NS::Singleton<ScriptSystem> {
-        SR_REGISTER_SINGLETON(ScriptSystem)
-        using Super = SR_HTYPES_NS::SharedPtr<ScriptSystem>;
     public:
-        using Ptr = SR_HTYPES_NS::SharedPtr<ScriptSystem>;
 
         const static inline SR_UTILS_NS::Set<SR_UTILS_NS::StringView> ALLOWED_CPP_EXTENSIONS = { "cpp", "h", "hpp", "cxx" };
         const static inline SR_UTILS_NS::Set<SR_UTILS_NS::StringView> ALLOWED_CPP_MODULE_EXTENSIONS = { "dll", "so" };
         const static inline SR_UTILS_NS::StringAtom ENGINE_MODULE_FILE_NAME = ".module";
 
-    private:
-        ScriptSystem() = default;
-        ~ScriptSystem() override;
+    public:
+        CppScriptSystem() : SR_HTYPES_NS::SharedPtr<CppScriptSystem>(this, SR_UTILS_NS::SharedPtrPolicy::Automatic) {
+        }
+
+        ~CppScriptSystem() override;
 
     public:
-        SR_NODISCARD bool IsInitialized() const { return m_isInit; }
+        SR_NODISCARD bool IsInitialized() const {
+            return m_isInit;
+        }
+
         SR_NODISCARD bool Init(bool compilationEnabled);
 
-        SR_NODISCARD const ModuleManager* GetModuleManager() const { return m_moduleManager.Get(); }
-        SR_NODISCARD ModuleManager* GetModuleManager() { return m_moduleManager.Get(); }
-        SR_NODISCARD const SR_UTILS_NS::Vector<SR_UTILS_NS::Path>& GetEngineSourcesIncludePaths() const { return m_engineSourcesIncludePaths; }
-        SR_NODISCARD ScriptSystemState GetState() const { return m_state; }
-        SR_NODISCARD bool HasErrors() const { return m_hasCompileErrors || m_hasModuleCopyErrors; }
-        SR_NODISCARD const SR_UTILS_NS::Path& GetAPIFolder() const { return m_apiFolder; }
+        SR_NODISCARD const ModuleManager* GetModuleManager() const {
+            return m_moduleManager.Get();
+        }
+
+        SR_NODISCARD ModuleManager* GetModuleManager() {
+            return m_moduleManager.Get();
+        }
+
+        SR_NODISCARD const SR_UTILS_NS::Vector<SR_UTILS_NS::Path>& GetEngineSourcesIncludePaths() const {
+            return m_engineSourcesIncludePaths;
+        }
+
+        SR_NODISCARD ScriptSystemState GetState() const {
+            return m_state;
+        }
+
+        SR_NODISCARD bool HasErrors() const {
+            return m_hasCompileErrors || m_hasModuleCopyErrors;
+        }
+
+        SR_NODISCARD const SR_UTILS_NS::Path& GetAPIFolder() const {
+            return m_apiFolder;
+        }
 
         void WaitForIdle();
         void ReloadModulesIfNeeded();
         void SetReloadRequest();
 
-        static std::string_view GetDynamicLibraryExtension();
+        static SR_UTILS_NS::StringView GetDynamicLibraryExtension();
+        void Start();
+        void HandleFileEvent(const SR_UTILS_NS::Path& path);
+        SR_NODISCARD SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> GetBehaviourNames() const;
 
     private:
-        void HandleFileSystemEvent(const SR_UTILS_NS::SubscriptionMessage& message, SR_UTILS_NS::FileSystemWatcher::EventType eventType);
         bool ThreadFunc();
         bool InitEngineSources();
 
-        void InitialAnalyse();
         void ThreadIdle();
         void CompileModules();
         void CopyModules();
         void ReloadModules();
-
-        void ResetSubscriptions();
 
     private:
         bool m_isInit = false;
@@ -69,10 +84,6 @@ namespace SR_SCRIPTING_NS {
 
         std::recursive_mutex m_mutex;
         SR_HTYPES_NS::Thread::Ptr m_thread = nullptr;
-
-        SR_UTILS_NS::Subscription m_fileChangedSubscription;
-        SR_UTILS_NS::Subscription m_fileCreatedSubscription;
-        SR_UTILS_NS::Subscription m_fileDeletedSubscription;
 
         /// shared parameters (read only)
 
@@ -89,7 +100,6 @@ namespace SR_SCRIPTING_NS {
         ModuleManager::Ptr m_moduleManager;
 
         std::atomic<bool> m_threadRunning = false;
-        std::atomic<bool> m_threadReady = false;
         std::atomic<bool> m_isCompiled = false;
         std::atomic<bool> m_hasCompileErrors = false;
         std::atomic<bool> m_hasModuleCopyErrors = false;

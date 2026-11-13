@@ -3,7 +3,7 @@
 //
 
 #include <Scripting/Cpp/ModuleManager.h>
-#include <Scripting/Cpp/ScriptSystem.h>
+#include <Scripting/Cpp/CppScriptSystem.h>
 
 #include <Utils/Events/Broadcaster.h>
 #include <Utils/TypeTraits/SRClassMeta.h>
@@ -13,7 +13,7 @@
 #include <Utils/FileSystem/VFS.h>
 
 namespace SR_SCRIPTING_NS {
-    void CppBehaviourInstance::OnBehaviourUnloaded(ManagerPasskey) {
+    void CppBehaviourInstance::OnBehaviourUnloaded(SR_UTILS_NS::PassKey<ModuleManager>) {
         m_pBehaviour.AutoFree();
     }
 
@@ -45,6 +45,14 @@ namespace SR_SCRIPTING_NS {
             }
         }
         m_modules.clear();
+    }
+
+    bool ModuleManager::IsRuntimeModule(SR_UTILS_NS::StringAtom name) {
+        SR_LOCK_GUARD;
+        for (const auto& module : m_modules) {
+            if (module.GetModuleName() == name) { return true; }
+        }
+        return false;
     }
 
     bool ModuleManager::ReloadModule(const SR_UTILS_NS::Path& path) {
@@ -109,7 +117,7 @@ namespace SR_SCRIPTING_NS {
         SR_TRACY_ZONE;
 
         const SR_UTILS_NS::StringAtom moduleName = modulePath.GetBaseName();
-        auto&& runtimePath = m_cachePath.Concat("Scripts/Runtime/Modules/{}.{}"_format(moduleName, ScriptSystem::GetDynamicLibraryExtension()));
+        auto&& runtimePath = m_cachePath.Concat("Scripts/Runtime/Modules/{}.{}"_format(moduleName, CppScriptSystem::GetDynamicLibraryExtension()));
         auto&& pdbRuntimePath = m_cachePath.Concat("Scripts/Runtime/Modules/{}.pdb"_format(moduleName));
 
         if (runtimePath.IsFile()) {
@@ -145,7 +153,7 @@ namespace SR_SCRIPTING_NS {
             return nullptr;
         }
 
-        std::string registerFunctionName = "RegisterModule_" + moduleName.ToString();
+        SR_UTILS_NS::String registerFunctionName = "RegisterModule_" + moduleName.ToString();
         using LoadFunctionType = void(*)();
         auto pRegisterFunction = (LoadFunctionType)(SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, registerFunctionName.c_str()));
         if (!pRegisterFunction) {
@@ -217,7 +225,7 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
-        std::string unregisterFunctionName = "UnregisterModule_" + module.GetModuleName().ToString();
+        SR_UTILS_NS::String unregisterFunctionName = "UnregisterModule_" + module.GetModuleName().ToString();
         using UnloadFunctionType = void(*)();
         auto pUnregisterFunction = (UnloadFunctionType)(SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, unregisterFunctionName.c_str()));
         if (pUnregisterFunction) {

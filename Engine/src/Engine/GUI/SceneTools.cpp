@@ -14,7 +14,7 @@
 #include <Physics/PhysicsLib.h>
 #include <Physics/LibraryImpl.h>
 
-#include <Scripting/Cpp/ScriptSystem.h>
+#include <Scripting/Base/ScriptSystem.h>
 
 #include <Utils/Common/StoreUtils.h>
 

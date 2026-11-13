@@ -3,49 +3,49 @@
 //
 
 #include <Scripting/Base/Behaviour.h>
-#include <Scripting/Cpp/ScriptSystem.h>
-#include <Scripting/Cpp/ModuleManager.h>
+#include <Scripting/Base/ScriptSystem.h>
 
 #include <Utils/Common/Bind.h>
-#include <Utils/ECS/GameObject.h>
-#include <Utils/ECS/ComponentManager.h>
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/World/Scene.h>
+#include <Utils/Serialization/SRASerialization.h>
+#include <Utils/Events/Broadcaster.h>
 
 #include <Codegen/Behaviour.generated.hpp>
 
 namespace SR_SCRIPTING_NS {
     void Behaviour::Awake() {
-        if (m_cppBehaviour) {
-            m_cppBehaviour->Awake();
+        if (m_behaviourInstance) {
+            m_behaviourInstance->Awake();
         }
         Super::Awake();
     }
 
     void Behaviour::OnEnable() {
-        if (m_cppBehaviour) {
-            m_cppBehaviour->OnEnable();
+        if (m_behaviourInstance) {
+            m_behaviourInstance->OnEnable();
         }
         Super::OnEnable();
     }
 
     void Behaviour::OnDisable() {
-        if (m_cppBehaviour) {
-            m_cppBehaviour->OnDisable();
+        if (m_behaviourInstance) {
+            m_behaviourInstance->OnDisable();
         }
         Super::OnDisable();
     }
 
     void Behaviour::Start() {
-        if (m_cppBehaviour) {
-            m_cppBehaviour->Start();
+        if (m_behaviourInstance) {
+            m_behaviourInstance->Start();
         }
         Super::Start();
     }
 
     void Behaviour::OnDestroy() {
-        if (m_cppBehaviour) {
-            m_cppBehaviour->OnDestroy();
+        m_scriptTypesSubscription.Reset();
+        if (m_behaviourInstance) {
+            m_behaviourInstance->OnDestroy();
         }
 
         SetBehaviourName(SR_UTILS_NS::StringAtom());
@@ -54,13 +54,17 @@ namespace SR_SCRIPTING_NS {
     }
 
     void Behaviour::OnAttached() {
-        if (!m_cppBehaviour) {
+        m_scriptTypesSubscription.Reset();
+        m_scriptTypesSubscription = SR_UTILS_NS::Broadcaster::Instance().Subscribe(
+            SR_UTILS_NS::Events::EVENT_ON_SCRIPT_MODULE_RELOADED_ID,
+            [this](const SR_UTILS_NS::SubscriptionMessage&) { OnScriptTypesChanged(); });
+        if (!m_behaviourInstance) {
             SetBehaviourName(m_behaviourName);
         }
 
         if (IsInstanceValid()) {
-            m_cppBehaviour->SetSceneObject(GetSceneObject());
-            m_cppBehaviour->OnAttached();
+            m_behaviourInstance->SetSceneObject(GetSceneObject());
+            m_behaviourInstance->OnAttached();
         }
 
         TryLoadBehaviourData();
@@ -69,48 +73,66 @@ namespace SR_SCRIPTING_NS {
     }
 
     void Behaviour::OnDetached() {
-        if (m_cppBehaviour) {
-            m_cppBehaviour->OnDetached();
+        if (m_behaviourInstance) {
+            m_behaviourInstance->OnDetached();
         }
         Super::OnDetached();
     }
 
     void Behaviour::Update(float_t dt) {
-        if (m_cppBehaviour) {
-            m_cppBehaviour->SetSceneObject(GetSceneObject());
-            m_cppBehaviour->Update(dt);
+        if (m_behaviourInstance) {
+            m_behaviourInstance->SetSceneObject(GetSceneObject());
+            m_behaviourInstance->Update(dt);
         }
         Super::Update(dt);
     }
 
     void Behaviour::FixedUpdate() {
-        if (m_cppBehaviour) {
-            m_cppBehaviour->FixedUpdate();
+        if (m_behaviourInstance) {
+            m_behaviourInstance->FixedUpdate();
         }
         Super::FixedUpdate();
     }
 
     void Behaviour::OnCollisionEnter(const SR_UTILS_NS::CollisionData& data) {
+        if (m_behaviourInstance) {
+            m_behaviourInstance->OnCollisionEnter(data);
+        }
         Super::OnCollisionEnter(data);
     }
 
     void Behaviour::OnCollisionExit(const SR_UTILS_NS::CollisionData& data) {
+        if (m_behaviourInstance) {
+            m_behaviourInstance->OnCollisionExit(data);
+        }
         Super::OnCollisionExit(data);
     }
 
     void Behaviour::OnCollisionStay(const SR_UTILS_NS::CollisionData& data) {
+        if (m_behaviourInstance) {
+            m_behaviourInstance->OnCollisionStay(data);
+        }
         Super::OnCollisionStay(data);
     }
 
     void Behaviour::OnTriggerEnter(const SR_UTILS_NS::CollisionData& data) {
+        if (m_behaviourInstance) {
+            m_behaviourInstance->OnTriggerEnter(data);
+        }
         Super::OnTriggerEnter(data);
     }
 
     void Behaviour::OnTriggerExit(const SR_UTILS_NS::CollisionData& data) {
+        if (m_behaviourInstance) {
+            m_behaviourInstance->OnTriggerExit(data);
+        }
         Super::OnTriggerExit(data);
     }
 
     void Behaviour::OnTriggerStay(const SR_UTILS_NS::CollisionData& data) {
+        if (m_behaviourInstance) {
+            m_behaviourInstance->OnTriggerStay(data);
+        }
         Super::OnTriggerStay(data);
     }
 
@@ -120,7 +142,7 @@ namespace SR_SCRIPTING_NS {
         if (IsInstanceValid()) {
             static const auto dataId = SR_UTILS_NS::SerializationId::Create("data");
             serializer.BeginObject(dataId);
-            m_cppBehaviour->GetBehaviour()->Save(serializer);
+            m_behaviourInstance->Save(serializer);
             serializer.EndObject();
         }
         else if (m_serializationNode) {
@@ -137,8 +159,8 @@ namespace SR_SCRIPTING_NS {
         static const auto dataId = SR_UTILS_NS::SerializationId::Create("data");
         if (deserializer.BeginObject(dataId)) {
             if (IsInstanceValid()) {
-                m_cppBehaviour->GetBehaviour()->Load(deserializer);
-                m_serializationNode = std::nullopt;
+                m_behaviourInstance->Load(deserializer);
+                m_serializationNode.Reset();
             }
             else {
                 auto&& impl = dynamic_cast<SR_UTILS_NS::IBaseSerialization&>(deserializer);
@@ -154,22 +176,35 @@ namespace SR_SCRIPTING_NS {
         auto&& scriptSystem = SR_SCRIPTING_NS::ScriptSystem::Instance();
 
         if (scriptSystem.IsInitialized()) {
-            if (m_cppBehaviour) {
-                scriptSystem.GetModuleManager()->FreeBehaviourInstance(m_cppBehaviour);
-                m_cppBehaviour = nullptr;
+            if (m_behaviourInstance) {
+                scriptSystem.FreeBehaviourInstance(m_behaviourInstance);
+                m_behaviourInstance = nullptr;
             }
 
             if (!name.empty()) {
-                m_cppBehaviour = scriptSystem.GetModuleManager()->AllocateBehaviourInstance(name);
-                m_cppBehaviour->SetPreReloadCallback(SR_UTILS_NS::Bind(&Behaviour::OnBehaviourPreReload, this));
-                m_cppBehaviour->SetLoadedCallback(SR_UTILS_NS::Bind(&Behaviour::OnBehaviourLoaded, this));
+                m_behaviourInstance = scriptSystem.AllocateBehaviourInstance(name);
+                if (!m_behaviourInstance) {
+                    m_behaviourName = name;
+                    return;
+                }
+                m_behaviourInstance->SetPreReloadCallback(SR_UTILS_NS::Bind(&Behaviour::OnBehaviourPreReload, this));
+                m_behaviourInstance->SetLoadedCallback(SR_UTILS_NS::Bind(&Behaviour::OnBehaviourLoaded, this));
             }
         }
         m_behaviourName = name;
     }
 
     bool Behaviour::IsInstanceValid() const noexcept {
-        return m_cppBehaviour && m_cppBehaviour->IsValid();
+        return m_behaviourInstance && m_behaviourInstance->IsValid();
+    }
+
+    void Behaviour::OnScriptTypesChanged() {
+        if (IsInstanceValid() || m_behaviourName.empty()) { return; }
+        auto& system = ScriptSystem::Instance();
+        const auto names = system.GetBehaviourNames();
+        if (std::find(names.begin(), names.end(), m_behaviourName) == names.end()) { return; }
+        SetBehaviourName(m_behaviourName);
+        if (IsInstanceValid()) { OnBehaviourLoaded(); }
     }
 
     void Behaviour::OnBehaviourLoaded() {
@@ -177,7 +212,7 @@ namespace SR_SCRIPTING_NS {
         m_isAwake = false;
 
         if (IsInstanceValid()) {
-            m_cppBehaviour->SetSceneObject(GetSceneObject());
+            m_behaviourInstance->SetSceneObject(GetSceneObject());
         }
 
         TryLoadBehaviourData();
@@ -188,7 +223,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     bool Behaviour::ExecuteInEditMode() const {
-        return m_cppBehaviour && m_cppBehaviour->ExecuteInEditMode();
+        return m_behaviourInstance && m_behaviourInstance->ExecuteInEditMode();
     }
 
     void Behaviour::TryLoadBehaviourData() {
@@ -197,15 +232,15 @@ namespace SR_SCRIPTING_NS {
             if (!deserializer.LoadFromNode(std::move(*m_serializationNode))) {
                 SRHalt("Impossible situation!");
             }
-            m_cppBehaviour->GetBehaviour()->Load(deserializer);
-            m_serializationNode = std::nullopt;
+            m_behaviourInstance->Load(deserializer);
+            m_serializationNode.Reset();
         }
     }
 
     void Behaviour::OnBehaviourPreReload() {
         if (IsInstanceValid()) {
             SR_UTILS_NS::SRASerializer serializer;
-            m_cppBehaviour->GetBehaviour()->Save(serializer);
+            m_behaviourInstance->Save(serializer);
             m_serializationNode = serializer.GetWalkNode().DetachAllocator();
         }
     }

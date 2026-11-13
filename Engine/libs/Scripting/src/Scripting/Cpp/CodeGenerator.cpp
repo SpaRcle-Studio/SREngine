@@ -3,7 +3,7 @@
 //
 
 #include <Scripting/Cpp/CodeGenerator.h>
-#include <Scripting/Cpp/ScriptSystem.h>
+#include <Scripting/Cpp/CppScriptSystem.h>
 
 #include <Utils/Types/Vector.h>
 #include <Utils/Types/Time.h>
@@ -28,7 +28,7 @@ namespace SR_SCRIPTING_NS {
 
         for (auto&& file : changedFiles) {
             if (file.IsFile()) {
-                if (ScriptSystem::ALLOWED_CPP_EXTENSIONS.find(file.GetExtensionView()) == ScriptSystem::ALLOWED_CPP_EXTENSIONS.end()) {
+                if (CppScriptSystem::ALLOWED_CPP_EXTENSIONS.find(file.GetExtensionView()) == CppScriptSystem::ALLOWED_CPP_EXTENSIONS.end()) {
                     SRHalt("CppCodeGenerator::ProcessChangedCodeFiles() : file is not a C++ file!\n\tPath: {}", file);
                     continue;
                 }
@@ -106,7 +106,7 @@ namespace SR_SCRIPTING_NS {
             SR_UTILS_NS::Path modulePath = module;
             SR_UTILS_NS::VFS::Instance().UnResolvePath(modulePath);
             if (modulePath.IsFile()) {
-                if (ScriptSystem::ENGINE_MODULE_FILE_NAME != module.GetBaseNameAndExt()) {
+                if (CppScriptSystem::ENGINE_MODULE_FILE_NAME != module.GetBaseNameAndExt()) {
                     SRHalt("CppCodeGenerator::ProcessChangedModules() : file is not a engine module!\n\tPath: {}", modulePath);
                     continue;
                 }
@@ -200,7 +200,7 @@ namespace SR_SCRIPTING_NS {
             SR_UTILS_NS::Path libclangFolder = CoreResLoader::GetResPath().Concat("Engine/Utilities/codegen-modules.json");
             SR_UTILS_NS::VFS::Instance().ResolvePath(libclangFolder, SR_UTILS_NS::FileMode::Read);
 
-            SR_UTILS_NS::Path apiFolder = m_pScriptSystem->GetAPIFolder().Concat("Engine");
+            SR_UTILS_NS::Path apiFolder = m_pCppScriptSystem->GetAPIFolder().Concat("Engine");
             SR_UTILS_NS::VFS::Instance().ResolvePath(apiFolder, SR_UTILS_NS::FileMode::Read);
 
             SR_UTILS_NS::Path moduleFolder = module.path;
@@ -213,7 +213,7 @@ namespace SR_SCRIPTING_NS {
 
             SR_LOG("CppCodeGenerator::RegenerateChangedModules() : generating module...\n\tModule: {}\n\tCommand: {}", module.moduleInfo.moduleName, command);
             const SR_UTILS_NS::TimePointType startTime = SR_HTYPES_NS::Time::Instance().Now();
-            std::string result = SR_PLATFORM_NS::ExecuteCommand(command);
+            SR_UTILS_NS::String result = SR_PLATFORM_NS::ExecuteCommand(command);
 
             const SR_UTILS_NS::TimePointType endTime = SR_HTYPES_NS::Time::Instance().Now();
             const auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
@@ -235,7 +235,7 @@ namespace SR_SCRIPTING_NS {
         auto&& cmakeListsCachePath = m_cacheFolder.Concat("Scripts/CMakeLists.txt");
         SR_UTILS_NS::Path modulesPath = m_cacheFolder.Concat("Scripts/Modules-{}-{}"_format(SR_PLATFORM_NS::GetType(), SR_PLATFORM_NS::GetBuildType()));
 
-        std::string cmakeContent;
+        SR_UTILS_NS::String cmakeContent;
         cmakeContent += "if (NOT EMSCRIPTEN)\n";
 
         cmakeContent += "\tcmake_minimum_required(VERSION 3.5)\n";
@@ -270,7 +270,7 @@ namespace SR_SCRIPTING_NS {
             SR_UTILS_NS::VFS::Instance().ResolvePath(moduleFolder, SR_UTILS_NS::FileMode::Read);
             cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, moduleFolder);
 
-            for (auto&& engineIncludeDir : m_pScriptSystem->GetEngineSourcesIncludePaths()) {
+            for (auto&& engineIncludeDir : m_pCppScriptSystem->GetEngineSourcesIncludePaths()) {
                 SR_UTILS_NS::Path includeDir = engineIncludeDir;
                 SR_UTILS_NS::VFS::Instance().ResolvePath(includeDir, SR_UTILS_NS::FileMode::Read);
                 cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, includeDir);
@@ -366,8 +366,8 @@ namespace SR_SCRIPTING_NS {
             if (entry.type != SR_UTILS_NS::FSItemType::File || entry.fullPath.starts_with(m_cacheFolder)) {
                 return;
             }
-            if (ScriptSystem::ALLOWED_CPP_EXTENSIONS.find(entry.extension) != ScriptSystem::ALLOWED_CPP_EXTENSIONS.end()) {
-                module.codeFiles.insert(entry.fullPath);
+            if (CppScriptSystem::ALLOWED_CPP_EXTENSIONS.find(entry.extension) != CppScriptSystem::ALLOWED_CPP_EXTENSIONS.end()) {
+                module.codeFiles.insert(entry.relativePath);
             }
         }, true);
     }
@@ -382,9 +382,13 @@ namespace SR_SCRIPTING_NS {
 
             file << "#include <Codegen/SpaRcleModule{}Core.generated.hpp>\n\n"_format(module.moduleInfo.moduleName);
 
+            SR_UTILS_NS::Path resolvedPath;
             for (auto&& codeFilePath : module.codeFiles) {
                 if (codeFilePath.GetExtensionView() == "cxx" || codeFilePath.GetExtensionView() == "cpp") {
-                    file << "#include \"" << codeFilePath.View() << "\"\n";
+                    resolvedPath = codeFilePath;
+                    if (SR_UTILS_NS::VFS::Instance().ResolvePath(resolvedPath, SR_UTILS_NS::FileMode::Read)) {
+                        file << "#include \"" << resolvedPath << "\"\n";
+                    }
                 }
             }
 

@@ -8,6 +8,7 @@
 #include <Engine/GUI/PropertyDrawer.h>
 
 #include <Utils/Common/SubscriptionHolder.h>
+#include <Utils/Types/Optional.h>
 
 namespace SR_CORE_GUI_NS {
     class BehaviourNamePropertyDrawer : public PropertyDrawerBase {
@@ -21,12 +22,12 @@ namespace SR_CORE_GUI_NS {
     private:
         void ReInitNames();
 
-        SR_NODISCARD std::optional<uint32_t> GetSelectedIndex(SR_UTILS_NS::StringAtom name) const;
+        SR_NODISCARD SR_UTILS_NS::Optional<uint32_t> GetSelectedIndex(SR_UTILS_NS::StringAtom name) const;
 
     private:
         SR_UTILS_NS::Subscription m_moduleReloadSubscription;
         SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> m_existingNames;
-        std::string m_searchBuffer;
+        SR_UTILS_NS::String m_searchBuffer;
         bool m_comboOpened = false;
 
     };

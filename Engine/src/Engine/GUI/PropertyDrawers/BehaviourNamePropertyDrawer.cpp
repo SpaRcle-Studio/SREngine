@@ -8,6 +8,7 @@
 #include <ImmediateGUI/GUI/ImmediateGUI.h>
 
 #include <Scripting/Base/Behaviour.h>
+#include <Scripting/Base/ScriptSystem.h>
 
 #include <Utils/Events/Broadcaster.h>
 #include <Utils/Common/StringUtils.h>
@@ -57,7 +58,7 @@ namespace SR_CORE_GUI_NS {
                     SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::Text, SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f));
                 }
 
-                std::optional<uint64_t> selectedIndex = GetSelectedIndex(*pStringAtom);
+                SR_UTILS_NS::Optional<uint32_t> selectedIndex = GetSelectedIndex(*pStringAtom);
 
                 const char* pPrevValue = selectedIndex ? m_existingNames[selectedIndex.value()].c_str() : pStringAtom->c_str();
                 if (SR_IMMEDIATE_GUI_NS::BeginCombo("##Combo", pPrevValue, SR_IMMEDIATE_GUI_NS::ComboFlags::NoArrowButton)) {
@@ -66,6 +67,8 @@ namespace SR_CORE_GUI_NS {
                     }
 
                     if (!m_comboOpened) {
+                        ReInitNames();
+                        selectedIndex = GetSelectedIndex(*pStringAtom);
                         SR_IMMEDIATE_GUI_NS::SetKeyboardFocusHere();
                         m_comboOpened = true;
                     }
@@ -79,7 +82,7 @@ namespace SR_CORE_GUI_NS {
                             continue;
                         }
 
-                        bool isSelected = (selectedIndex == i);
+                        bool isSelected = selectedIndex && selectedIndex.Value() == i;
                         if (SR_IMMEDIATE_GUI_NS::Selectable(m_existingNames[i].c_str(), isSelected)) {
                             selectedIndex = i;
                             m_searchBuffer = m_existingNames[i];
@@ -123,23 +126,16 @@ namespace SR_CORE_GUI_NS {
     }
 
     void BehaviourNamePropertyDrawer::ReInitNames() {
-        static const SR_UTILS_NS::StringAtom cppBehaviourName = SR_SCRIPTING_NS::CppBehaviour::GetClassStaticName();
-        auto&& factory = SR_UTILS_NS::Factory::Instance();
-
-        m_existingNames = factory.GetInheritances(cppBehaviourName);
-
-        std::erase_if(m_existingNames, [factory](const auto& name) {
-            return factory.IsAbstract(name);
-        });
+        m_existingNames = SR_SCRIPTING_NS::ScriptSystem::Instance().GetBehaviourNames();
     }
 
-    std::optional<uint32_t> BehaviourNamePropertyDrawer::GetSelectedIndex(SR_UTILS_NS::StringAtom name) const {
+    SR_UTILS_NS::Optional<uint32_t> BehaviourNamePropertyDrawer::GetSelectedIndex(SR_UTILS_NS::StringAtom name) const {
         for (uint32_t i = 0; i < m_existingNames.size(); ++i) {
             if (m_existingNames[i] == name) {
                 return i;
             }
         }
 
-        return std::nullopt;
+        return {};
     }
 }

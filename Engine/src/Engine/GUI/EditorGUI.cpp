@@ -49,14 +49,13 @@
 
 #include <Physics/3D/Rigidbody3D.h>
 
-#include <Scripting/Cpp/ScriptSystem.h>
+#include <Scripting/Base/ScriptSystem.h>
 
 #include <Utils/Common/Features.h>
 #include <Utils/UI/LayoutGroup.h>
 #include <Utils/UI/LayoutElement.h>
 #include <Utils/ECS/Prefab.h>
 #include <Utils/ECS/TransformRect.h>
-#include <Utils/ECS/ComponentManager.h>
 #include <Utils/Platform/Platform.h>
 #include <Utils/Platform/MessageBox.h>
 #include <Utils/FileSystem/FileDialog.h>

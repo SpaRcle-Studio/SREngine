@@ -5,11 +5,14 @@
 #ifndef SR_ENGINE_SCRIPTING_BEHAVIOUR_H
 #define SR_ENGINE_SCRIPTING_BEHAVIOUR_H
 
-#include <Scripting/Cpp/ModuleManager.h>
+#include <Scripting/Base/BehaviourInstance.h>
+#include <Scripting/Cpp/CppBehaviour.h>
 
 #include <Utils/ECS/Component.h>
 #include <Utils/Resources/IResource.h>
 #include <Utils/Serialization/BaseSerialization.h>
+#include <Utils/Common/Subscription.h>
+#include <Utils/Types/Optional.h>
 
 namespace SR_UTILS_NS {
     class GameObject;
@@ -36,20 +39,24 @@ namespace SR_SCRIPTING_NS {
 
         template<typename T = CppBehaviour> T* GetBehaviour() {
             SR_TRACY_ZONE;
-            if (!m_cppBehaviour) {
+            if (!m_behaviourInstance || !m_behaviourInstance->GetCppBehaviour()) {
                 return nullptr;
             }
 
             if constexpr (std::is_same_v<T, CppBehaviour>) {
-                return m_cppBehaviour->GetBehaviour().Get();
+                return m_behaviourInstance->GetCppBehaviour();
             }
             else {
-                auto&& pBehaviour = m_cppBehaviour->GetBehaviour().Get();
+                auto&& pBehaviour = m_behaviourInstance->GetCppBehaviour();
                 if (pBehaviour->GetMeta()->IsSameOrInherited(T::GetClassStaticName())) {
                     return static_cast<T*>(pBehaviour);
                 }
                 return nullptr;
             }
+        }
+
+        SR_NODISCARD SR_UTILS_NS::SRClass* GetPropertiesObject() const {
+            return m_behaviourInstance ? m_behaviourInstance->GetPropertiesObject() : nullptr;
         }
 
         void SetBehaviourName(SR_UTILS_NS::StringAtom name);
@@ -76,10 +83,12 @@ namespace SR_SCRIPTING_NS {
         void OnBehaviourPreReload();
         void OnBehaviourLoaded();
         void TryLoadBehaviourData();
+        void OnScriptTypesChanged();
 
     private:
-        CppBehaviourInstance* m_cppBehaviour = nullptr;
-        std::optional<SR_UTILS_NS::SerializationNode> m_serializationNode;
+        BehaviourInstance* m_behaviourInstance = nullptr;
+        SR_UTILS_NS::Subscription m_scriptTypesSubscription;
+        SR_UTILS_NS::Optional<SR_UTILS_NS::SerializationNode> m_serializationNode;
 
         /// @property @setter(SetBehaviourName) @inspector(BehaviourNamePropertyDrawer)
         SR_UTILS_NS::StringAtom m_behaviourName;

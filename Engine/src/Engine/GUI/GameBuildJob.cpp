@@ -4,7 +4,7 @@
 
 #include <Engine/GUI/GameBuildJob.h>
 #include <Engine/GUI/GameBuildRuntime.h>
-#include <Scripting/Cpp/ScriptSystem.h>
+#include <Scripting/Base/ScriptSystem.h>
 #include <Utils/FileSystem/VFS.h>
 #include <Utils/FileSystem/DirectoryVFSBackend.h>
 #include <Utils/FileSystem/IVFSBackend.h>

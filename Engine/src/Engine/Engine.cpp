@@ -17,7 +17,7 @@
 
 #include <Physics/LibraryImpl.h>
 
-#include <Scripting/Cpp/ScriptSystem.h>
+#include <Scripting/Base/ScriptSystem.h>
 
 #include <Utils/CommandManager/CmdManager.h>
 #include <Utils/Input/InputDispatcher.h>

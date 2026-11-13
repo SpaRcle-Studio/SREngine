@@ -10,24 +10,17 @@
 #include <Scripting/Base/Behaviour.h>
 
 #include <Physics/3D/Rigidbody3D.h>
-#include <Physics/2D/Rigidbody2D.h>
 
-#include <Audio/Types/AudioSource.h>
-
-#include <Graphics/Types/Geometry/Sprite.h>
 #include <Graphics/UI/Canvas.h>
 #include <Graphics/UI/Gizmo.h>
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
-#include <Graphics/GUI/Utils.h>
-#include <Graphics/Types/Geometry/SkinnedMesh.h>
 #include <Graphics/Animations/Animator.h>
-#include <Graphics/Animations/BoneComponent.h>
 
 #include <Utils/ECS/LayerManager.h>
 #include <Utils/ECS/Component.h>
-#include <Utils/Types/SafePtrLockGuard.h>
 #include <Utils/World/ScenePrefabLogic.h>
 #include <Utils/Common/StoreUtils.h>
+#include <Utils/Common/StringUtils.h>
 #include <Utils/Events/Broadcaster.h>
 #include <Utils/Reflection/Value.h>
 #include <Utils/Serialization/SerializationFlags.h>

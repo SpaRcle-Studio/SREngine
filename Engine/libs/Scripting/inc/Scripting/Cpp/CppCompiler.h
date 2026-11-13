@@ -12,13 +12,13 @@
 #include <Utils/FileSystem/Path.h>
 
 namespace SR_SCRIPTING_NS {
-    class ScriptSystem;
+    class CppScriptSystem;
 
     struct CppCompilerContext {
         SR_UTILS_NS::StringAtom moduleName;
         SR_UTILS_NS::Path outFolder;
-        std::vector<SR_UTILS_NS::Path> includePaths;
-        std::vector<SR_UTILS_NS::Path> sourceFiles;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::Path> includePaths;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::Path> sourceFiles;
         bool isDebug = false;
         bool isShared = false;
     };
@@ -48,9 +48,9 @@ namespace SR_SCRIPTING_NS {
         using Ptr = SR_HTYPES_NS::SharedPtr<CppCompiler>;
 
     public:
-        CppCompiler(ScriptSystem* pScriptSystem)
+        CppCompiler(CppScriptSystem* pCppScriptSystem)
             : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
-            , m_pScriptSystem(pScriptSystem)
+            , m_pCppScriptSystem(pCppScriptSystem)
         { }
 
         ~CppCompiler() override;
@@ -58,7 +58,7 @@ namespace SR_SCRIPTING_NS {
     public:
         SR_NODISCARD bool Init();
         SR_NODISCARD bool IsCompilerAvailable() const;
-        SR_NODISCARD std::string GetCompilerVersion() const;
+        SR_NODISCARD SR_UTILS_NS::String GetCompilerVersion() const;
         SR_NODISCARD bool Compile(const CppCompilerContext& context);
 
     private:
@@ -77,11 +77,11 @@ namespace SR_SCRIPTING_NS {
         SR_UTILS_NS::Path m_windowsSDKLibPath;
         SR_UTILS_NS::String m_windowsSDKVersion;
         CppCompilerSettings m_settings;
-        std::vector<SR_UTILS_NS::Path> m_engineLibs;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::Path> m_engineLibs;
         SR_UTILS_NS::Path m_cachePath;
         SR_UTILS_NS::Path m_resourcesPath;
         bool m_isInitialized = false;
-        ScriptSystem* m_pScriptSystem = nullptr;
+        CppScriptSystem* m_pCppScriptSystem = nullptr;
 
     };
 }

@@ -16,7 +16,7 @@
 #include <Audio/RawSound.h>
 
 #include <Scripting/Base/Behaviour.h>
-#include <Scripting/Cpp/ScriptSystem.h>
+#include <Scripting/Base/ScriptSystem.h>
 
 #include <Physics/PhysicsMaterial.h>
 #include <Physics/PhysicsLib.h>

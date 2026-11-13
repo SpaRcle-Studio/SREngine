@@ -9,7 +9,7 @@
 #include <Physics/3D/Raycast3D.h>
 #include <Physics/PhysicsScene.h>
 
-#include <Scripting/Cpp/ScriptSystem.h>
+#include <Scripting/Base/ScriptSystem.h>
 
 #include <Graphics/Render/RenderScene.h>
 #include <Graphics/Render/DebugRenderer.h>

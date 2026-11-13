@@ -40,3 +40,6 @@
 [submodule "Engine/libs/ImmediateGUI/libs/implot"]
 	path = Engine/libs/ImmediateGUI/libs/implot
 	url = https://github.com/SpaRcle-Studio/implot.git
+[submodule "Engine/libs/Scripting/libs/angelscript"]
+	path = Engine/libs/Scripting/libs/angelscript
+	url = https://github.com/SpaRcle-Studio/angelscript

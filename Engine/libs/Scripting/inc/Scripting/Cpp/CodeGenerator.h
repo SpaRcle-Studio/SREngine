@@ -12,14 +12,14 @@
 
 namespace SR_SCRIPTING_NS {
     class CppCompiler;
-    class ScriptSystem;
+    class CppScriptSystem;
 
     struct CppCodegenBehaviour {
         SR_UTILS_NS::StringAtom name;
-        std::vector<SR_UTILS_NS::StringAtom> namespaces;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> namespaces;
 
-        std::string MakeNameWithNamespace() const {
-            std::string result;
+        SR_UTILS_NS::String MakeNameWithNamespace() const {
+            SR_UTILS_NS::String result;
             for (const auto& ns : namespaces) {
                 result += ns.ToString() + "::";
             }
@@ -29,7 +29,7 @@ namespace SR_SCRIPTING_NS {
     };
 
     struct CppFileMetadata {
-        std::vector<CppCodegenBehaviour> behaviours;
+        SR_UTILS_NS::Vector<CppCodegenBehaviour> behaviours;
     };
 
     struct CppCodegenModule {
@@ -54,9 +54,9 @@ namespace SR_SCRIPTING_NS {
         using Super = SR_HTYPES_NS::SharedPtr<CppCodeGenerator>;
         constexpr static uint32_t MAX_INCLUDE_DEPTH = 64;
     public:
-        explicit CppCodeGenerator(ScriptSystem* pScriptSystem)
+        explicit CppCodeGenerator(CppScriptSystem* pCppScriptSystem)
             : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
-            , m_pScriptSystem(pScriptSystem)
+            , m_pCppScriptSystem(pCppScriptSystem)
         { }
 
     public:
@@ -88,7 +88,7 @@ namespace SR_SCRIPTING_NS {
         SR_NODISCARD SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> GetDependenciesRecursive(SR_UTILS_NS::StringAtom moduleName) const;
 
     private:
-        ScriptSystem* m_pScriptSystem = nullptr;
+        CppScriptSystem* m_pCppScriptSystem = nullptr;
         CppCompiler* m_compiler = nullptr;
         SR_UTILS_NS::Vector<CppCodegenModule> m_modules;
         SR_UTILS_NS::Path m_resourcesFolder;

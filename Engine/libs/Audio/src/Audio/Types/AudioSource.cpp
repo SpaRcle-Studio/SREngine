@@ -6,7 +6,6 @@
 #include <Audio/SoundManager.h>
 
 #include <Utils/ECS/Transform.h>
-#include <Utils/ECS/ComponentManager.h>
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/FileSystem/PathDataAccessor.h>
 
