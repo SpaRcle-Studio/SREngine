@@ -11,6 +11,7 @@
 
 namespace SR_SCRIPTING_NS::AngelScriptBindingHelpers {
     void Exception(const char* pMessage);
+    void RejectTemplate(asIScriptGeneric* pCall);
     bool Primitive(const SR_UTILS_NS::Reflection::TypeInfo& info);
     SR_UTILS_NS::String PrimitiveName(const SR_UTILS_NS::Reflection::TypeInfo& info);
     SR_UTILS_NS::String StorageIdentifier(const SR_UTILS_NS::Reflection::TypeInfo& info);
@@ -27,7 +28,9 @@ namespace SR_SCRIPTING_NS::AngelScriptBindingHelpers {
     void GetProperty(asIScriptGeneric* pCall);
     void SetProperty(asIScriptGeneric* pCall);
     void Container(asIScriptGeneric* pCall);
+    void Wrapper(asIScriptGeneric* pCall);
     void StringOperation(asIScriptGeneric* pCall);
+    void SingletonInstance(asIScriptGeneric* pCall);
 }
 
 #endif

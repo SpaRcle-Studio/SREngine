@@ -28,6 +28,7 @@ namespace SR_SCRIPTING_NS {
         }
 
         if (m_pEngine) {
+            SR_LOG("AngelScriptRuntime::~AngelScriptRuntime() : shutting down AngelScript.");
             m_pEngine->ShutDownAndRelease();
         }
 
@@ -48,9 +49,11 @@ namespace SR_SCRIPTING_NS {
 
         m_initializationAttempted = true;
         m_initializing = true;
+        SR_LOG("AngelScriptRuntime::EnsureInitialized() : initializing AngelScript.");
         m_pEngine = asCreateScriptEngine();
 
         if (!m_pEngine) {
+            SR_ERROR("AngelScriptRuntime::EnsureInitialized() : failed to create the AngelScript engine.");
             m_hasErrors = true;
             m_initializing = false;
             return false;
@@ -63,6 +66,7 @@ namespace SR_SCRIPTING_NS {
         m_pBindings = new AngelScriptBindings(m_pEngine);
 
         if (!m_pBindings->RegisterFactory()) {
+            SR_ERROR("AngelScriptRuntime::EnsureInitialized() : API registration failed.");
             m_pEngine->ShutDownAndRelease();
             m_pEngine = nullptr;
             delete m_pBindings;
@@ -97,6 +101,7 @@ namespace SR_SCRIPTING_NS {
         m_moduleDirty = true;
         const bool result = BuildModule();
         m_initializing = false;
+        SR_LOG("AngelScriptRuntime::EnsureInitialized() : initialization finished, gameplay module ready: {}.", result);
 
         return result;
     }
@@ -166,9 +171,12 @@ namespace SR_SCRIPTING_NS {
         m_moduleDirty = false;
         m_hasErrors = false;
         const SR_UTILS_NS::String moduleName = "Gameplay_{}"_format(++m_generation);
+        SR_LOG("AngelScriptRuntime::BuildModule() : {} module {}, source files: {}, behaviour instances: {}.",
+            m_pModule ? "reloading" : "building", moduleName, m_sourceFiles.size(), m_instances.size());
         CScriptBuilder builder;
 
         if (builder.StartNewModule(m_pEngine, moduleName.c_str()) < 0) {
+            SR_ERROR("AngelScriptRuntime::BuildModule() : failed to create module {}.", moduleName);
             m_hasErrors = true;
 
             return false;
@@ -176,6 +184,7 @@ namespace SR_SCRIPTING_NS {
 
         auto&& pCandidate = builder.GetModule();
         auto fail = [&]() {
+            SR_ERROR("AngelScriptRuntime::BuildModule() : module {} failed; previous module retained: {}.", moduleName, m_pModule != nullptr);
             pCandidate->Discard();
             m_hasErrors = true;
 
@@ -286,6 +295,8 @@ namespace SR_SCRIPTING_NS {
         }
 
         m_pEngine->GarbageCollect();
+        SR_LOG("AngelScriptRuntime::BuildModule() : module {} ready, behaviours: {}, replaced instances: {}.",
+            moduleName, m_behaviourNames.size(), replacements.size());
 
         if (!m_initializing) {
             SR_UTILS_NS::Broadcaster::Instance().Broadcast(SR_UTILS_NS::Events::EVENT_ON_SCRIPT_MODULE_RELOADED_ID);

@@ -14,6 +14,10 @@
 #include <Utils/Common/EnumReflector.h>
 #include <Utils/Memory/Allocator.h>
 #include <Utils/FileSystem/Path.h>
+#include <Utils/Types/Optional.h>
+#include <Utils/ECS/EntityRef.h>
+#include <Utils/Resources/ResourceRef.h>
+#include <Utils/Common/Singleton.h>
 
 namespace SR_SCRIPTING_NS {
     namespace AngelScriptBindingHelpers {
@@ -21,6 +25,10 @@ namespace SR_SCRIPTING_NS {
             if (auto&& pContext = asGetActiveContext()) {
                 pContext->SetException(pMessage);
             }
+        }
+
+        void RejectTemplate(asIScriptGeneric* pCall) {
+            pCall->SetReturnByte(false);
         }
 
         bool Primitive(const SR_UTILS_NS::Reflection::TypeInfo& info) {
@@ -49,7 +57,7 @@ namespace SR_SCRIPTING_NS {
             }
 
             if (info.detailedType == "SharedPtr" && info.pNext[0]) {
-                return "SharedPtr_" + StorageIdentifier(*info.pNext[0]);
+                return Identifier(*info.pNext[0]) + "@";
             }
 
             return Identifier(info);
@@ -64,12 +72,53 @@ namespace SR_SCRIPTING_NS {
         }
 
         SR_UTILS_NS::String Identifier(const SR_UTILS_NS::Reflection::TypeInfo& info) {
+            SR_TRACY_ZONE;
+            if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
+                return "Value";
+            }
             if (Primitive(info)) {
                 return PrimitiveName(info);
             }
 
             if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::String) {
                 return "string";
+            }
+
+            if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::MathVector) {
+                SR_UTILS_NS::String prefix;
+                if (info.detailedType == "float") prefix = "F";
+                else if (info.detailedType == "int32") prefix = "I";
+                else if (info.detailedType == "uint32") prefix = "U";
+                else if (info.detailedType == "bool") prefix = "B";
+
+                prefix += "Vector";
+                if (info.detailedSize == 2) return prefix + "2";
+                if (info.detailedSize == 3) return prefix + "3";
+                if (info.detailedSize == 4) return prefix + "4";
+                if (info.detailedSize == 6) return prefix + "6";
+                return {};
+            }
+
+            if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::MathRect) {
+                if (info.detailedType == "float") return "FRect";
+                if (info.detailedType == "int32") return "IRect";
+                if (info.detailedType == "uint32") return "URect";
+                if (info.detailedType == "uint16") return "USRect";
+                return {};
+            }
+
+            if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::MathSize) {
+                const SR_UTILS_NS::String suffix = info.detailedSize == 2 ? "Size2" : "Size";
+                if (info.detailedSize != 1 && info.detailedSize != 2) return {};
+                if (info.detailedType == "float") return "F" + suffix;
+                if (info.detailedType == "int32") return "I" + suffix;
+                if (info.detailedType == "uint32") return "U" + suffix;
+                return {};
+            }
+
+            if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::MathObject) {
+                if (info.detailedType == "Color") return "FColor";
+                return SR_UTILS_NS::String(info.detailedType);
             }
 
             if (info.detailedType == "SharedPtr" && info.pNext[0]) {
@@ -82,10 +131,10 @@ namespace SR_SCRIPTING_NS {
 
             if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Container && info.pNext[0]) {
                 if ((info.detailedType == "Map" || info.detailedType == "FlatHashMap") && info.pNext[0]->pNext[0] && info.pNext[0]->pNext[1]) {
-                    return SR_UTILS_NS::String(info.detailedType) + "_" + StorageIdentifier(*info.pNext[0]->pNext[0]) + "_" + StorageIdentifier(*info.pNext[0]->pNext[1]);
+                    return SR_UTILS_NS::String(info.detailedType) + "<" + StorageIdentifier(*info.pNext[0]->pNext[0]) + ", " + StorageIdentifier(*info.pNext[0]->pNext[1]) + ">";
                 }
 
-                return SR_UTILS_NS::String(info.detailedType) + "_" + StorageIdentifier(*info.pNext[0]);
+                return SR_UTILS_NS::String(info.detailedType) + "<" + StorageIdentifier(*info.pNext[0]) + ">";
             }
 
             SR_UTILS_NS::String result;
@@ -177,7 +226,12 @@ namespace SR_SCRIPTING_NS {
                 pObject->pAllocation = pAllocation;
             }
             else {
-                delete pAllocation;
+                if (auto&& pShared = dynamic_cast<SR_HTYPES_NS::SharedPtrBase*>(pAllocation)) {
+                    pShared->DecrementPointer();
+                }
+                else {
+                    delete pAllocation;
+                }
             }
 
             pCall->SetReturnAddress(pObject);
@@ -211,6 +265,21 @@ namespace SR_SCRIPTING_NS {
 
             auto value = pBinding->pOwner->pMeta->Cast(pObject->value);
             pBinding->pBindings->Return(pCall, std::move(value), pObject);
+        }
+
+        void SingletonInstance(asIScriptGeneric* pCall) {
+            auto&& pBinding = static_cast<AngelScriptBindings::Call*>(pCall->GetAuxiliary());
+            auto&& name = pBinding->pOwner->pMeta->GetFactoryName();
+            const auto hash = SR_UTILS_NS::SingletonManager::GetOrAddSingletonHashName(name.c_str());
+            auto&& pSingleton = SR_UTILS_NS::GetSingletonManager()->GetSingletonMeta(hash);
+
+            if (!pSingleton) {
+                Exception("Singleton instance is unavailable");
+                return;
+            }
+
+            auto value = pBinding->pOwner->pMeta->Cast(SR_UTILS_NS::Reflection::Value::CreateRef(*pSingleton));
+            pBinding->pBindings->Return(pCall, std::move(value));
         }
 
         void MathComponent(asIScriptGeneric* pCall) {
@@ -288,12 +357,30 @@ namespace SR_SCRIPTING_NS {
                     Exception("Incompatible native argument");
                     return;
                 }
+                if (param.IsOutput() && arguments[i].IsConst()) {
+                    Exception("Cannot pass a const native view as an output argument");
+                    return;
+                }
+                if (param.isConst && param.pTypeInfo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Value &&
+                    arguments[i].GetType() == SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
+                    // Generated const Value& parameters receive the payload, without an extra reflection box.
+                    auto payload = pBinding->pBindings->CopyValue(*arguments[i].Cast<SR_UTILS_NS::Reflection::Value>());
+                    arguments[i] = std::move(payload);
+                }
             }
 
             std::span<SR_UTILS_NS::Reflection::Value*> params(pointers.data(), pointers.size());
 
             if (pBinding->method.HasReturn()) {
                 auto result = pointers.empty() ? pBinding->method.Invoke(*pOwner) : pBinding->method.Invoke(*pOwner, params);
+                if (pBinding->method.GetReturnType()->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
+                    if (result.GetType() == SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
+                        result = pBinding->pBindings->CopyValue(result);
+                    }
+                    else {
+                        result = SR_UTILS_NS::Reflection::Value::Create(pBinding->pBindings->CopyValue(result));
+                    }
+                }
                 pBinding->pBindings->Return(pCall, std::move(result), pObject);
             }
             else {
@@ -306,7 +393,14 @@ namespace SR_SCRIPTING_NS {
             }
 
             for (uint32_t i = 0; i < arguments.size(); ++i) {
-                if (pBinding->method.IsOutputParam(i) && Primitive(arguments[i].GetTypeInfo())) {
+                if (pBinding->method.IsOutputParam(i) && !Primitive(arguments[i].GetTypeInfo())) {
+                    auto&& pArgument = static_cast<AngelScriptNativeObject*>(pCall->GetArgObject(i));
+                    if (!pArgument || pArgument->value.IsConst() || !pBinding->pBindings->CopyTo(arguments[i], pArgument->value)) {
+                        Exception("Cannot write back a native output argument");
+                        return;
+                    }
+                }
+                else if (pBinding->method.IsOutputParam(i)) {
                     if (arguments[i].GetType() == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum) {
                         auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().GetReflector(arguments[i].GetTypeInfo().detailedType);
                         const auto number = static_cast<int32_t>(pReflector->ReadEnumValueFromPointerInternal(arguments[i].Data()));
@@ -357,6 +451,191 @@ namespace SR_SCRIPTING_NS {
 
             pBinding->property.Set(pOwner, value);
             pBinding->property.OnChanged(pOwner);
+        }
+
+        void Wrapper(asIScriptGeneric* pCall) {
+            auto&& pBinding = static_cast<AngelScriptBindings::Call*>(pCall->GetAuxiliary());
+            auto&& pObject = static_cast<AngelScriptNativeObject*>(pCall->GetObject());
+            const SR_UTILS_NS::StringView operation(pCall->GetFunction()->GetName());
+
+            if (!pObject->IsAlive()) {
+                Exception("Engine object has been destroyed");
+                return;
+            }
+
+            auto&& value = pObject->value;
+            const bool dynamic = value.GetType() == SR_UTILS_NS::Reflection::ReflectedCategoryType::Value;
+            if (value.IsConst() && operation != "get" && operation != "hasValue") {
+                Exception("Cannot modify a const native view");
+                return;
+            }
+
+            if (dynamic) {
+                auto&& payload = *value.Cast<SR_UTILS_NS::Reflection::Value>();
+                if (operation == "hasValue") {
+                    pCall->SetReturnByte(static_cast<bool>(payload));
+                    return;
+                }
+                if (operation == "reset") {
+                    payload = {};
+                    return;
+                }
+
+                const auto id = pCall->GetArgTypeId(0);
+                auto&& pAddress = pCall->GetArgAddress(0);
+                if (operation == "set") {
+                    if (id & asTYPEID_SCRIPTOBJECT) {
+                        Exception("Script objects cannot be stored in a native Value");
+                        return;
+                    }
+                    if (id & asTYPEID_MASK_OBJECT) {
+                        auto&& pNative = (id & asTYPEID_OBJHANDLE) ? *static_cast<AngelScriptNativeObject**>(pAddress) : static_cast<AngelScriptNativeObject*>(pAddress);
+                        if (!pNative || !pNative->IsAlive()) {
+                            payload = {};
+                            return;
+                        }
+                        payload = pBinding->pBindings->CopyValue(pNative->value);
+                        if (!payload) {
+                            Exception("Native value cannot be copied");
+                        }
+                    }
+                    else {
+                        auto&& pType = pBinding->pBindings->FindType(id);
+                        SR_UTILS_NS::String serialized = "Arithmetic.";
+                        if (id == asTYPEID_INT32) {
+                            serialized += "int32";
+                        }
+                        else if (id == asTYPEID_UINT32) {
+                            serialized += "uint32";
+                        }
+                        else {
+                            serialized += pCall->GetEngine()->GetTypeDeclaration(id);
+                        }
+                        auto&& pInfo = pType ? SR_UTILS_NS::Reflection::CopyTypeInfo(pType->pTypeInfo) : SR_UTILS_NS::Reflection::LoadTypeInfo(serialized);
+                        if (!pInfo || !SR_UTILS_NS::Reflection::FindVTable(*pInfo)) {
+                            SR_UTILS_NS::Reflection::FreeTypeInfo(pInfo);
+                            Exception("Unsupported native Value type");
+                            return;
+                        }
+                        auto source = pBinding->pBindings->Read(pCall, 0, *pInfo);
+                        payload = std::move(source);
+                        SR_UTILS_NS::Reflection::FreeTypeInfo(pInfo);
+                    }
+                    return;
+                }
+
+                pCall->SetReturnByte(false);
+                if (!payload || (id & asTYPEID_SCRIPTOBJECT)) {
+                    return;
+                }
+                if (id & asTYPEID_MASK_OBJECT) {
+                    auto&& pType = pBinding->pBindings->FindType(id);
+                    if (!pType) {
+                        return;
+                    }
+                    SR_UTILS_NS::Reflection::Value destination;
+                    if (payload.IsSharedPtr() && pType->pMeta) {
+                        destination = pType->pMeta->Cast(payload);
+                    }
+                    else {
+                        destination = SR_UTILS_NS::Reflection::Value::CreateDefault(pType->pTypeInfo);
+                        if (!pBinding->pBindings->CopyTo(payload, destination)) {
+                            return;
+                        }
+                    }
+                    if (!destination) {
+                        return;
+                    }
+                    if (id & asTYPEID_OBJHANDLE) {
+                        auto&& pTarget = static_cast<AngelScriptNativeObject**>(pAddress);
+                        auto&& pReplacement = pBinding->pBindings->Wrap(std::move(destination));
+                        if (*pTarget) {
+                            (*pTarget)->Release();
+                        }
+                        *pTarget = pReplacement;
+                    }
+                    else if (!pBinding->pBindings->CopyTo(destination, static_cast<AngelScriptNativeObject*>(pAddress)->value)) {
+                        return;
+                    }
+                }
+                else {
+                    const auto declaration = pBinding->pBindings->Declaration(payload.GetTypeInfo());
+                    if (!Primitive(payload.GetTypeInfo()) || pCall->GetEngine()->GetTypeIdByDecl(declaration.c_str()) != id) {
+                        return;
+                    }
+                    if (payload.GetType() == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum) {
+                        auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().GetReflector(payload.GetTypeInfo().detailedType);
+                        const auto number = static_cast<int32_t>(pReflector->ReadEnumValueFromPointerInternal(payload.Data()));
+                        memcpy(pAddress, &number, sizeof(number));
+                    }
+                    else {
+                        memcpy(pAddress, payload.Data(), payload.SizeOf());
+                    }
+                }
+                pCall->SetReturnByte(true);
+                return;
+            }
+
+            if (auto&& pOptional = value.GetOptionalBase()) {
+                if (operation == "hasValue") {
+                    pCall->SetReturnByte(pOptional->HasValue());
+                }
+                else if (operation == "reset") {
+                    pOptional->Reset();
+                }
+                else if (operation == "get") {
+                    if (!pOptional->HasValue()) {
+                        Exception("Optional has no value");
+                        return;
+                    }
+                    pBinding->pBindings->Return(pCall, pOptional->GetReflectionValue());
+                }
+                else {
+                    auto source = pBinding->pBindings->Read(pCall, 0, *value.GetTypeInfo().pNext[0]);
+                    if (!source) {
+                        Exception("Invalid Optional value");
+                        return;
+                    }
+                    pOptional->SetValue(source);
+                }
+                return;
+            }
+
+            auto&& pEntity = dynamic_cast<SR_UTILS_NS::EntityRefBase*>(value.GetSRClass());
+            auto&& pResource = dynamic_cast<SR_UTILS_NS::ResourceRefBase*>(value.GetSRClass());
+            if (operation == "hasValue") {
+                pCall->SetReturnByte(pEntity ? pEntity->GetEntity().Valid() : pResource->IsValid());
+            }
+            else if (operation == "reset") {
+                if (pEntity) {
+                    pEntity->SetEntityId(SR_ID_INVALID);
+                }
+                else {
+                    pResource->ResetResource();
+                }
+            }
+            else if (operation == "setId") {
+                if (pEntity) {
+                    pEntity->SetEntityId(pCall->GetArgQWord(0));
+                }
+                else {
+                    auto&& pText = static_cast<AngelScriptNativeObject*>(pCall->GetArgObject(0));
+                    if (!pText || !pText->IsAlive()) {
+                        Exception("Invalid resource identifier");
+                        return;
+                    }
+                    pResource->SetResource(*pText->value.Cast<SR_UTILS_NS::String>());
+                }
+            }
+            else {
+                auto target = pEntity ? ShareObject(pEntity->GetEntity().Get()) : ShareObject(const_cast<SR_UTILS_NS::IResource*>(pResource->GetResourceBase().Get()));
+                if (!target) {
+                    pCall->SetReturnAddress(nullptr);
+                    return;
+                }
+                auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(value.GetTypeInfo().pNext[0]->detailedType);
+                pBinding->pBindings->Return(pCall, pMeta->Cast(target));
+            }
         }
 
         void Container(asIScriptGeneric* pCall) {

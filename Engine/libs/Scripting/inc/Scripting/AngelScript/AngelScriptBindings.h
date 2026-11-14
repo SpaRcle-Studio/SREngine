@@ -39,6 +39,7 @@ namespace SR_SCRIPTING_NS {
     public:
         struct Type {
             SR_UTILS_NS::String name;
+            int32_t scriptTypeId = 0;
             SR_UTILS_NS::Reflection::TypeInfo* pTypeInfo = nullptr;
             const SR_UTILS_NS::SRClassMeta* pMeta = nullptr;
 
@@ -52,8 +53,9 @@ namespace SR_SCRIPTING_NS {
             };
 
             Call() = default;
-            explicit Call(const SR_UTILS_NS::Reflection::Property& initial) : property(initial) {
-            }
+            explicit Call(const SR_UTILS_NS::Reflection::Property& initial)
+                : property(initial)
+            { }
 
             AngelScriptBindings* pBindings = nullptr;
             Type* pOwner = nullptr;
@@ -96,7 +98,7 @@ namespace SR_SCRIPTING_NS {
         Type* Collect(const SR_UTILS_NS::Reflection::TypeInfo& info);
         bool RegisterType(Type& type);
         bool RegisterMembers(Type& type);
-        bool Check(int32_t result, const SR_UTILS_NS::String& declaration) const;
+        bool Check(int32_t result, SR_UTILS_NS::StringView declaration) const;
         SR_UTILS_NS::String Argument(const SR_UTILS_NS::Reflection::TypeInfo& info) const;
         SR_UTILS_NS::Reflection::Value Convert(const SR_UTILS_NS::Reflection::Value& value, const SR_UTILS_NS::Reflection::TypeInfo& expected) const;
 

@@ -100,7 +100,9 @@ namespace SR_AUDIO_NS{
             return;
         }
 
-        SR_AUDIO_NS::SoundManager::Instance().SetListenerTransform(m_listenerContext, pos, q);
+        if (pos.IsFinite() && q.IsFinite()) {
+            SR_AUDIO_NS::SoundManager::Instance().SetListenerTransform(m_listenerContext, pos, q);
+        }
 
         Component::OnMatrixDirty();
     }

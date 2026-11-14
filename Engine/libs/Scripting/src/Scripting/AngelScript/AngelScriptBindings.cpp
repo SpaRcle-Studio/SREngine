@@ -15,6 +15,9 @@
 #include <Utils/Common/EnumReflector.h>
 #include <Utils/Memory/Allocator.h>
 #include <Utils/FileSystem/Path.h>
+#include <Utils/Types/UnicodeString.h>
+#include <Utils/Localization/UTF.h>
+#include <Utils/Common/Singleton.h>
 
 namespace SR_SCRIPTING_NS {
     AngelScriptNativeObject::~AngelScriptNativeObject() {
@@ -66,6 +69,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     AngelScriptBindings::Call::Frame* AngelScriptBindings::Call::AddFrame() {
+        SR_TRACY_ZONE;
         auto&& pFrame = new Frame();
         pFrame->arguments.reserve(method.GetParamsCount());
         pFrame->pointers.reserve(method.GetParamsCount());
@@ -82,7 +86,10 @@ namespace SR_SCRIPTING_NS {
 
     AngelScriptBindings::AngelScriptBindings(asIScriptEngine* pEngine)
         : m_pEngine(pEngine)
-    { }
+    {
+        m_types.reserve(2048);
+        m_calls.reserve(2048);
+    }
 
     AngelScriptBindings::~AngelScriptBindings() {
         for (auto&& pCall : m_calls) {
@@ -94,7 +101,7 @@ namespace SR_SCRIPTING_NS {
         }
     }
 
-    bool AngelScriptBindings::Check(int32_t result, const SR_UTILS_NS::String& declaration) const {
+    bool AngelScriptBindings::Check(int32_t result, SR_UTILS_NS::StringView declaration) const {
         if (result >= 0) {
             return true;
         }
@@ -104,6 +111,8 @@ namespace SR_SCRIPTING_NS {
     }
 
     AngelScriptBindings::Type* AngelScriptBindings::FindType(const SR_UTILS_NS::Reflection::TypeInfo& info) const {
+        SR_TRACY_ZONE;
+
         if (info.detailedType == "SharedPtr" && info.pNext[0]) {
             return FindType(*info.pNext[0]);
         }
@@ -124,7 +133,7 @@ namespace SR_SCRIPTING_NS {
         }
 
         for (auto&& pType : m_types) {
-            if (pType->name == pInfo->GetName()) {
+            if (pType->scriptTypeId == pInfo->GetTypeId()) {
                 return pType;
             }
         }
@@ -133,13 +142,15 @@ namespace SR_SCRIPTING_NS {
     }
 
     SR_UTILS_NS::String AngelScriptBindings::Declaration(const SR_UTILS_NS::Reflection::TypeInfo& info) const {
+        SR_TRACY_ZONE;
         if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::String && info.detailedType != "String" &&
-            info.detailedType != "StringAtom" && info.detailedType != "Path" && info.detailedType != "StringView") {
+            info.detailedType != "StringAtom" && info.detailedType != "Path" && info.detailedType != "StringView" && info.detailedType != "UnicodeString") {
             return {};
         }
 
         if (AngelScriptBindingHelpers::Primitive(info)) {
-            return FindType(info) ? AngelScriptBindingHelpers::PrimitiveName(info) : SR_UTILS_NS::String();
+            return info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Arithmetic || FindType(info) ?
+                AngelScriptBindingHelpers::PrimitiveName(info) : SR_UTILS_NS::String();
         }
 
         auto&& pType = FindType(info);
@@ -157,7 +168,9 @@ namespace SR_SCRIPTING_NS {
     }
 
     AngelScriptBindings::Type* AngelScriptBindings::Collect(const SR_UTILS_NS::Reflection::TypeInfo& info) {
-        if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Unknown || info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
+        SR_TRACY_ZONE;
+
+        if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Unknown) {
             return nullptr;
         }
 
@@ -166,7 +179,7 @@ namespace SR_SCRIPTING_NS {
         }
 
         if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::String && info.detailedType != "String" &&
-            info.detailedType != "StringAtom" && info.detailedType != "Path" && info.detailedType != "StringView") {
+            info.detailedType != "StringAtom" && info.detailedType != "Path" && info.detailedType != "StringView" && info.detailedType != "UnicodeString") {
             return nullptr;
         }
 
@@ -174,8 +187,9 @@ namespace SR_SCRIPTING_NS {
             return pFound;
         }
 
+        auto&& infoIdentifier = AngelScriptBindingHelpers::Identifier(info);
         for (auto&& pExisting : m_types) {
-            if (pExisting->name == AngelScriptBindingHelpers::Identifier(info)) {
+            if (pExisting->name == infoIdentifier) {
                 SR_ERROR("AngelScriptBindings::Collect() : AngelScript: reflected types have the same script name: {}", pExisting->name);
                 m_hasNameConflicts = true;
                 return nullptr;
@@ -184,9 +198,15 @@ namespace SR_SCRIPTING_NS {
 
         if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum) {
             auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().TryGetReflector(info.detailedType);
-
-            if (!pReflector || pReflector->GetIntegralTypeSizeInternal() > sizeof(int32_t)) {
+            if (!pReflector) {
                 return nullptr;
+            }
+
+            for (auto&& name : pReflector->GetNamesInternal()) {
+                const auto number = pReflector->FromStringInternal(name);
+                if (!number || *number < INT32_MIN || *number > UINT32_MAX) {
+                    return nullptr;
+                }
             }
         }
 
@@ -205,7 +225,8 @@ namespace SR_SCRIPTING_NS {
 
         if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Container &&
             info.detailedType != "Vector" && info.detailedType != "Map" && info.detailedType != "Set" &&
-            info.detailedType != "FlatHashMap" && info.detailedType != "FlatHashSet") {
+            info.detailedType != "FlatHashMap" && info.detailedType != "FlatHashSet" &&
+            info.detailedType != "Optional" && info.detailedType != "EntityRef" && info.detailedType != "ResourceRef") {
             return nullptr;
         }
 
@@ -215,7 +236,6 @@ namespace SR_SCRIPTING_NS {
             }
 
             auto&& pElement = info.pNext[0];
-
             if (!pElement) {
                 return nullptr;
             }
@@ -231,7 +251,7 @@ namespace SR_SCRIPTING_NS {
         }
 
         auto&& pType = new Type();
-        pType->name = AngelScriptBindingHelpers::Identifier(info);
+        pType->name = infoIdentifier;
         pType->pTypeInfo = SR_UTILS_NS::Reflection::CopyTypeInfo(const_cast<SR_UTILS_NS::Reflection::TypeInfo*>(&info));
 
         if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Object) {
@@ -257,6 +277,7 @@ namespace SR_SCRIPTING_NS {
 
     bool AngelScriptBindings::RegisterFactory() {
         SR_TRACY_ZONE;
+        SR_LOG("AngelScriptBindings::RegisterFactory() : registering reflected API.");
 
         auto&& pStringType = SR_UTILS_NS::Reflection::LoadTypeInfo("String.String");
 
@@ -302,8 +323,41 @@ namespace SR_SCRIPTING_NS {
             return false;
         }
 
+        const char* pStorageTypes[] = { "StringAtom", "Path", "UnicodeString" };
+        for (auto&& pName : pStorageTypes) {
+            if (!Check(m_pEngine->RegisterObjectType(pName, 0, asOBJ_REF | asOBJ_NOCOUNT), pName)) {
+                return false;
+            }
+        }
+
+        const char* pTemplates[] = { "Vector", "Map", "Set", "FlatHashMap", "FlatHashSet", "Optional", "EntityRef", "ResourceRef" };
+        for (auto&& pName : pTemplates) {
+            const SR_UTILS_NS::String name(pName);
+            const bool map = name == "Map" || name == "FlatHashMap";
+            const auto declaration = name + (map ? "<class K, class V>" : "<class T>");
+            if (!Check(m_pEngine->RegisterObjectType(declaration.c_str(), 0, asOBJ_REF | asOBJ_NOCOUNT | asOBJ_TEMPLATE), declaration)) {
+                return false;
+            }
+        }
+
+        // Register ordinary types before specializations that use them as subtypes.
         for (auto&& pType : m_types) {
-            if (!RegisterType(*pType)) {
+            if (pType->pTypeInfo->category != SR_UTILS_NS::Reflection::ReflectedCategoryType::Container && !RegisterType(*pType)) {
+                return false;
+            }
+        }
+
+        for (auto&& pType : m_types) {
+            if (pType->pTypeInfo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Container && !RegisterType(*pType)) {
+                return false;
+            }
+        }
+
+        // Unsupported instances must not be generated once native specializations are registered.
+        for (auto&& pName : pTemplates) {
+            const SR_UTILS_NS::String name(pName);
+            const auto instance = name + ((name == "Map" || name == "FlatHashMap") ? "<K, V>" : "<T>");
+            if (!Check(m_pEngine->RegisterObjectBehaviour(instance.c_str(), asBEHAVE_TEMPLATE_CALLBACK, "bool f(int&in, bool&out)", asFUNCTION(AngelScriptBindingHelpers::RejectTemplate), asCALL_GENERIC), instance)) {
                 return false;
             }
         }
@@ -318,10 +372,41 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
-        return Check(m_pEngine->RegisterInterface("IBehaviour"), "IBehaviour");
+        auto&& pSingletonManager = SR_UTILS_NS::GetSingletonManager();
+        for (auto&& pType : m_types) {
+            if (!pType->pMeta) {
+                continue;
+            }
+
+            auto&& factoryName = pType->pMeta->GetFactoryName();
+            const auto singletonHash = SR_UTILS_NS::SingletonManager::GetOrAddSingletonHashName(factoryName.c_str());
+            if (!pSingletonManager->GetSingletonMeta(singletonHash)) {
+                continue;
+            }
+
+            auto&& pBinding = new Call();
+            pBinding->pBindings = this;
+            pBinding->pOwner = pType;
+            m_calls.emplace_back(pBinding);
+
+            if (!Check(m_pEngine->SetDefaultNamespace(factoryName.c_str()), factoryName) ||
+                !Check(m_pEngine->RegisterGlobalFunction((pType->name + "@ Instance()").c_str(), asFUNCTION(AngelScriptBindingHelpers::SingletonInstance), asCALL_GENERIC, pBinding), pType->name + "::Instance()") ||
+                !Check(m_pEngine->SetDefaultNamespace(""), "global namespace context")) {
+                m_pEngine->SetDefaultNamespace("");
+                return false;
+            }
+        }
+
+        if (!Check(m_pEngine->RegisterInterface("IBehaviour"), "IBehaviour")) {
+            return false;
+        }
+
+        SR_LOG("AngelScriptBindings::RegisterFactory() : API registered, types: {}, call bindings: {}.", m_types.size(), m_calls.size());
+        return true;
     }
 
     bool AngelScriptBindings::RegisterType(Type& type) {
+        SR_TRACY_ZONE;
         if (type.pTypeInfo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Arithmetic) {
             return true;
         }
@@ -347,6 +432,7 @@ namespace SR_SCRIPTING_NS {
                 }
             }
 
+            type.scriptTypeId = m_pEngine->GetTypeIdByDecl(type.name.c_str());
             return true;
         }
 
@@ -354,6 +440,7 @@ namespace SR_SCRIPTING_NS {
             return false;
         }
 
+        type.scriptTypeId = m_pEngine->GetTypeIdByDecl(type.name.c_str());
         return Check(m_pEngine->RegisterObjectBehaviour(type.name.c_str(), asBEHAVE_ADDREF, "void f()", asFUNCTION(AngelScriptBindingHelpers::AddRef), asCALL_GENERIC), type.name) &&
             Check(m_pEngine->RegisterObjectBehaviour(type.name.c_str(), asBEHAVE_RELEASE, "void f()", asFUNCTION(AngelScriptBindingHelpers::Release), asCALL_GENERIC), type.name);
     }
@@ -424,7 +511,37 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
-        if (type.pTypeInfo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Container) {
+        const bool wrapper = type.pTypeInfo->detailedType == "Optional" || type.pTypeInfo->detailedType == "EntityRef" ||
+            type.pTypeInfo->detailedType == "ResourceRef";
+
+        if (wrapper || type.pTypeInfo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
+            SR_UTILS_NS::Vector<SR_UTILS_NS::String> declarations;
+
+            if (type.pTypeInfo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
+                declarations = { "bool hasValue() const", "void reset()", "void set(const ?&in)", "bool get(?&out) const" };
+            }
+            else {
+                auto&& element = *type.pTypeInfo->pNext[0];
+                declarations = { "bool hasValue() const", "void reset()" };
+
+                if (type.pTypeInfo->detailedType == "Optional") {
+                    declarations.emplace_back(Declaration(element) + " get() const");
+                    declarations.emplace_back("void set(" + Argument(element) + ")");
+                }
+                else {
+                    declarations.emplace_back(Declaration(element) + " get() const");
+                    declarations.emplace_back(type.pTypeInfo->detailedType == "EntityRef" ? "void setId(uint64)" : "void setId(const string &in)");
+                }
+            }
+
+            for (auto&& declaration : declarations) {
+                if (!Check(m_pEngine->RegisterObjectMethod(type.name.c_str(), declaration.c_str(), asFUNCTION(AngelScriptBindingHelpers::Wrapper), asCALL_GENERIC, pGeneral), declaration)) {
+                    return false;
+                }
+            }
+        }
+
+        if (type.pTypeInfo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Container && !wrapper) {
             auto&& table = type.pTypeInfo->vtable.containerVTable;
 
             if (!table.pSize || !table.pClear || !table.pBegin || !table.pEnd || !table.pInsert || !table.pErase ||
@@ -492,6 +609,22 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
+        for (auto&& pTarget : m_types) {
+            if (!pTarget->pMeta || pTarget == &type || !pTarget->pMeta->IsInherited(type.pMeta->GetFactoryName())) {
+                continue;
+            }
+
+            auto&& pBinding = new Call();
+            pBinding->pBindings = this;
+            pBinding->pOwner = pTarget;
+            m_calls.emplace_back(pBinding);
+            const auto pDeclaration = pTarget->name + "@ opCast()";
+
+            if (!Check(m_pEngine->RegisterObjectMethod(type.name.c_str(), pDeclaration.c_str(), asFUNCTION(AngelScriptBindingHelpers::Cast), asCALL_GENERIC, pBinding), pDeclaration)) {
+                return false;
+            }
+        }
+
         bool success = true;
         SR_UTILS_NS::Set<SR_UTILS_NS::String> registered;
         type.pMeta->ForEachProperty([&](const SR_UTILS_NS::Reflection::Property& property, uint64_t) {
@@ -508,21 +641,22 @@ namespace SR_SCRIPTING_NS {
                 return;
             }
 
-            auto&& pBinding = new Call(property);
+            Call* pBinding = new Call(property);
             pBinding->pBindings = this;
             pBinding->pOwner = &type;
             pBinding->pPropertyType = SR_UTILS_NS::Reflection::CopyTypeInfo(const_cast<SR_UTILS_NS::Reflection::TypeInfo*>(&info));
             m_calls.emplace_back(pBinding);
-            const auto getter = pDeclaration + " get_" + property.GetName().ToString() + "() property";
 
+            const auto getter = pDeclaration + " get_" + property.GetName().ToString() + "() property";
             if (registered.insert(getter).second) {
+                SR_TRACY_ZONE_N("Getter");
                 success &= Check(m_pEngine->RegisterObjectMethod(type.name.c_str(), getter.c_str(), asFUNCTION(AngelScriptBindingHelpers::GetProperty), asCALL_GENERIC, pBinding), getter);
             }
 
             if (!property.IsReadOnly()) {
                 const auto setter = "void set_" + property.GetName().ToString() + "(" + Argument(info) + ") property";
-
                 if (registered.insert(setter).second) {
+                    SR_TRACY_ZONE_N("Setter");
                     success &= Check(m_pEngine->RegisterObjectMethod(type.name.c_str(), setter.c_str(), asFUNCTION(AngelScriptBindingHelpers::SetProperty), asCALL_GENERIC, pBinding), setter);
                 }
             }
@@ -548,14 +682,15 @@ namespace SR_SCRIPTING_NS {
                 auto&& param = method.GetParam(i);
                 auto argument = Argument(*param.pTypeInfo);
 
-                if (argument.empty() || (param.IsOutput() && !AngelScriptBindingHelpers::Primitive(*param.pTypeInfo))) {
+                if (argument.empty() || (param.IsOutput() && AngelScriptBindingHelpers::HasBorrowedView(*param.pTypeInfo))) {
                     SR_WARN("AngelScriptBindings::RegisterMembers() : AngelScript: unsupported signature {}::{}", type.name, method.GetName());
 
                     return;
                 }
 
                 if (param.IsOutput()) {
-                    argument += " &inout";
+                    auto&& pParamType = FindType(*param.pTypeInfo);
+                    argument = AngelScriptBindingHelpers::Primitive(*param.pTypeInfo) ? argument + " &inout" : pParamType->name + " &inout";
                 }
 
                 pDeclaration += argument;
@@ -590,6 +725,10 @@ namespace SR_SCRIPTING_NS {
 
         if (value.GetTypeInfo() == expected) {
             return value.Ref();
+        }
+
+        if (expected.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
+            return SR_UTILS_NS::Reflection::Value::Create(CopyValue(value));
         }
 
         if (expected.detailedType == "SharedPtr" && expected.pNext[0]) {
@@ -636,6 +775,21 @@ namespace SR_SCRIPTING_NS {
             else if (expected.detailedType == "StringView") {
                 *result.Cast<SR_UTILS_NS::StringView>() = text;
             }
+            else if (expected.detailedType == "UnicodeString") {
+                auto&& unicode = *result.Cast<SR_UTILS_NS::UnicodeString>();
+                unicode.resize(text.size());
+                const char* pCurrent = text.data();
+                const char* pEnd = pCurrent + text.size();
+                uint64_t count = 0;
+                while (pCurrent != pEnd) {
+                    const auto code = SR_UTILS_NS::Localization::Utf::UtfTraits<char>::Decode(pCurrent, pEnd);
+                    if (!SR_UTILS_NS::Localization::Utf::IsValidCodePoint(code)) {
+                        return {};
+                    }
+                    unicode[count++] = static_cast<char32_t>(code);
+                }
+                unicode.resize(count);
+            }
             else {
                 return {};
             }
@@ -649,6 +803,10 @@ namespace SR_SCRIPTING_NS {
     bool AngelScriptBindings::CopyTo(const SR_UTILS_NS::Reflection::Value& source, SR_UTILS_NS::Reflection::Value& destination) const {
         if (destination.IsConst()) {
             return false;
+        }
+
+        if (source.GetTypeInfo() == destination.GetTypeInfo() && source.Data() == destination.Data()) {
+            return true;
         }
 
         auto converted = Convert(source, destination.GetTypeInfo());
@@ -683,6 +841,10 @@ namespace SR_SCRIPTING_NS {
         }
 
         auto&& info = source.GetTypeInfo();
+
+        if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
+            return SR_UTILS_NS::Reflection::Value::Create(CopyValue(*source.Cast<SR_UTILS_NS::Reflection::Value>()));
+        }
 
         if (source.IsSharedPtr() && !source.GetSharedPtrBase()->Valid()) {
             return SR_UTILS_NS::Reflection::Value::CreateDefault(const_cast<SR_UTILS_NS::Reflection::TypeInfo*>(&info));
@@ -888,6 +1050,19 @@ namespace SR_SCRIPTING_NS {
             else if (info.detailedType == "StringView") {
                 text = SR_UTILS_NS::String(*value.Cast<SR_UTILS_NS::StringView>());
             }
+            else if (info.detailedType == "UnicodeString") {
+                for (auto&& code : *value.Cast<SR_UTILS_NS::UnicodeString>()) {
+                    if (!SR_UTILS_NS::Localization::Utf::IsValidCodePoint(static_cast<uint32_t>(code))) {
+                        AngelScriptBindingHelpers::Exception("Invalid Unicode code point");
+                        return;
+                    }
+                    char buffer[4];
+                    auto&& pEnd = SR_UTILS_NS::Localization::Utf::UtfTraits<char>::Encode(static_cast<uint32_t>(code), buffer);
+                    for (const char* pCurrent = buffer; pCurrent != pEnd; ++pCurrent) {
+                        text.push_back(*pCurrent);
+                    }
+                }
+            }
             else {
                 AngelScriptBindingHelpers::Exception("Unsupported string representation");
                 return;
@@ -910,6 +1085,12 @@ namespace SR_SCRIPTING_NS {
         if (id & asTYPEID_MASK_OBJECT) {
             auto&& pNative = (id & asTYPEID_OBJHANDLE) ? *static_cast<AngelScriptNativeObject**>(pAddress) : static_cast<AngelScriptNativeObject*>(pAddress);
 
+            if (!pNative) {
+                auto&& pType = FindType(id);
+                if (pType && pType->pTypeInfo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Container) {
+                    return SR_UTILS_NS::Reflection::Value::CreateDefault(pType->pTypeInfo);
+                }
+            }
             return pNative && pNative->IsAlive() ? CopyValue(pNative->value) : SR_UTILS_NS::Reflection::Value();
         }
 

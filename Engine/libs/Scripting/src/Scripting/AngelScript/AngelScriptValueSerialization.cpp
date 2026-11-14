@@ -10,6 +10,8 @@
 #include <Utils/Reflection/TypeInfoSerialization.h>
 #include <Utils/Common/EnumReflector.h>
 #include <Utils/FileSystem/Path.h>
+#include <Utils/Serialization/Serializable.h>
+#include <Utils/Types/Optional.h>
 #include <Utils/Profile/TracyContext.h>
 
 namespace SR_SCRIPTING_NS {
@@ -38,6 +40,12 @@ namespace SR_SCRIPTING_NS {
             case SR_UTILS_NS::Reflection::ReflectedCategoryType::String:
                 return info.detailedType == "String" || info.detailedType == "StringAtom" || info.detailedType == "Path";
             case SR_UTILS_NS::Reflection::ReflectedCategoryType::Container: {
+                if (info.detailedType == "EntityRef" || info.detailedType == "ResourceRef") {
+                    return true;
+                }
+                if (info.detailedType == "Optional") {
+                    return info.pNext[0] && CanSerializeAngelScriptValue(*info.pNext[0]);
+                }
                 if (AngelScriptSerializationHelpers::IsMap(info)) {
                     return info.pNext[0] && info.pNext[0]->pNext[0] && info.pNext[0]->pNext[1] &&
                         CanSerializeAngelScriptValue(*info.pNext[0]->pNext[0]) && CanSerializeAngelScriptValue(*info.pNext[0]->pNext[1]);
@@ -55,6 +63,22 @@ namespace SR_SCRIPTING_NS {
         SR_TRACY_ZONE;
 
         auto&& info = value.GetTypeInfo();
+
+        if (info.detailedType == "EntityRef" || info.detailedType == "ResourceRef") {
+            auto&& pSerializable = dynamic_cast<SR_UTILS_NS::Serializable*>(value.GetSRClass());
+            if (pSerializable) {
+                pSerializable->Save(serializer);
+            }
+            return;
+        }
+
+        if (auto&& pOptional = value.GetOptionalBase()) {
+            serializer.WriteBool(pOptional->HasValue(), SR_UTILS_NS::SerializationId::Create("hasValue"));
+            if (pOptional->HasValue()) {
+                SaveAngelScriptValue(pOptional->GetReflectionValue(), serializer);
+            }
+            return;
+        }
 
         if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Container) {
             auto container = SR_UTILS_NS::Reflection::BaseContainerValueRef(const_cast<SR_UTILS_NS::Reflection::Value*>(&value));
@@ -160,6 +184,26 @@ namespace SR_SCRIPTING_NS {
         SR_TRACY_ZONE;
 
         auto&& info = value.GetTypeInfo();
+
+        if (info.detailedType == "EntityRef" || info.detailedType == "ResourceRef") {
+            auto&& pSerializable = dynamic_cast<SR_UTILS_NS::Serializable*>(value.GetSRClass());
+            return pSerializable && pSerializable->Load(deserializer);
+        }
+
+        if (auto&& pOptional = value.GetOptionalBase()) {
+            bool hasValue = false;
+            deserializer.ReadBool(hasValue, SR_UTILS_NS::SerializationId::Create("hasValue"));
+            pOptional->Reset();
+            if (!hasValue) {
+                return true;
+            }
+            auto element = SR_UTILS_NS::Reflection::Value::CreateDefault(info.pNext[0]);
+            if (!element || !LoadAngelScriptValue(element, deserializer)) {
+                return false;
+            }
+            pOptional->SetValue(element);
+            return true;
+        }
 
         if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Container) {
             auto container = SR_UTILS_NS::Reflection::BaseContainerValueRef(&value);

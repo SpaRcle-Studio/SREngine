@@ -81,6 +81,7 @@ namespace SR_SCRIPTING_NS {
 
     void Behaviour::Update(float_t dt) {
         if (m_behaviourInstance) {
+            SR_TRACY_ZONE;
             m_behaviourInstance->SetSceneObject(GetSceneObject());
             m_behaviourInstance->Update(dt);
         }
@@ -89,6 +90,7 @@ namespace SR_SCRIPTING_NS {
 
     void Behaviour::FixedUpdate() {
         if (m_behaviourInstance) {
+            SR_TRACY_ZONE;
             m_behaviourInstance->FixedUpdate();
         }
         Super::FixedUpdate();

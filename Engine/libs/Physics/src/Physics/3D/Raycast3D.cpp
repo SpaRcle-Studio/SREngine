@@ -13,11 +13,19 @@ namespace SR_PHYSICS_NS {
 
     void RayCast3D::Cast(SR_UTILS_NS::RayCastHits& hits, const SR_MATH_NS::FVector3 &origin, const SR_MATH_NS::FVector3 &direction, float_t maxDistance, uint32_t maxHits, const SR_UTILS_NS::LayerMask& layerMask) {
         SR_TRACY_ZONE;
+        if (!origin.IsFinite() || !direction.IsFinite()) {
+            hits.clear();
+            return;
+        }
         m_world->GetRayCast3DImpl()->Cast(hits, origin, direction, maxDistance, maxHits, layerMask);
     }
 
     void RayCast3D::Cast(SR_UTILS_NS::RayCastHits& hits, const SR_MATH_NS::FVector3 &origin, const SR_MATH_NS::FVector3 &direction, float_t maxDistance, const SR_UTILS_NS::LayerMask& layerMask) {
         SR_TRACY_ZONE;
+        if (!origin.IsFinite() || !direction.IsFinite()) {
+            hits.clear();
+            return;
+        }
         m_world->GetRayCast3DImpl()->Cast(hits, origin, direction, maxDistance, 1, layerMask);
     }
 
