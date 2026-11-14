@@ -20,7 +20,7 @@ namespace SR_CORE_UI_NS {
         auto&& pCanvas = FindCanvas(GetSceneObject().Get());
         auto&& pThisTransformRect = SR_UTILS_NS::ExtractTransformAs<SR_UTILS_NS::TransformRect>(GetSceneObject().Get());
 
-        if (!m_handleRect || !m_containerRect || !pThisTransformRect) {
+        if (!m_handleRect || !m_containerRect || !pThisTransformRect || !pCanvas) {
             return;
         }
 
@@ -127,7 +127,8 @@ namespace SR_CORE_UI_NS {
 
     bool UIScrollBar::OnBeginDrag(SR_GRAPH_UI_NS::Canvas& canvas, const SR_MATH_NS::FVector2& screenPosition, SR_GTYPES_NS::Camera* pCamera) {
         if (auto&& pTransform = GetTransformAs<SR_UTILS_NS::TransformRect>()) {
-            if (canvas.LayoutToCanvasRect(pTransform->GetLayoutRect()).Contains(screenPosition)) {
+            if (!pTransform->GetGlobalScale().HasZero()
+                && pTransform->GetLayoutRect().Contains(canvas.CanvasToLayoutPoint(*pTransform, screenPosition))) {
                 return true;
             }
         }
@@ -136,10 +137,13 @@ namespace SR_CORE_UI_NS {
     }
 
     void UIScrollBar::OnDrag(SR_GRAPH_UI_NS::Canvas& canvas, const SR_MATH_NS::FVector2& screenPosition, SR_GTYPES_NS::Camera* pCamera) {
-        auto&& containerRect = canvas.LayoutToCanvasRect(m_containerRect->GetLayoutRect());
-        auto&& handleRect = canvas.LayoutToCanvasRect(m_handleRect->GetLayoutRect());
+        if (m_containerRect->GetGlobalScale().HasZero()) {
+            return;
+        }
+        auto&& containerRect = m_containerRect->GetLayoutRect();
+        auto&& handleRect = m_handleRect->GetLayoutRect();
 
-        SR_MATH_NS::FVector2 localCursor = screenPosition;
+        SR_MATH_NS::FVector2 localCursor = canvas.CanvasToLayoutPoint(*m_containerRect, screenPosition);
         auto&& handleCenterRelativeToContainerCorner = localCursor - containerRect.XY();
         auto&& handleCorner = handleCenterRelativeToContainerCorner - (handleRect.Size() - m_handleRect->GetSizeDelta()) * 0.5f;
 

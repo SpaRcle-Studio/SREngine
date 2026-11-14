@@ -15,7 +15,8 @@ namespace SR_GRAPH_UI_NS {
 
 namespace SR_CORE_GUI_NS {
     SR_ENUM_NS_CLASS_T(EditorSceneViewMode, uint8_t,
-        FreeAspect, WindowSize
+        FreeAspect, WindowSize, View1920x1080, View1280x720, View1366x768,
+        View2560x1440, View1024x768, View2560x1080
     );
 
     /// @hidden

@@ -11,6 +11,8 @@
 #include <Utils/ECS/TransformRect.h>
 #include <Utils/ECS/SceneObject.h>
 #include <Utils/ECS/Component.h>
+#include <Utils/ECS/GameObject.h>
+#include <Utils/UI/LayoutUtility.h>
 #include <Utils/Common/StoreUtils.h>
 
 #include <Codegen/TransformRectPropertyDrawer.generated.hpp>
@@ -483,7 +485,7 @@ namespace SR_CORE_GUI_NS {
 
             SR_IMMEDIATE_GUI_NS::SameLine();
 
-            float_t posYTopValue = anchorsTogetherY ? anchoredPos.y : offsetMax.y;
+            float_t posYTopValue = anchorsTogetherY ? anchoredPos.y : -offsetMax.y;
             bool draggingPosY = false;
             if (TransformRectEditDragFloat(anchorsTogetherY ? "Pos Y" : "Top", buttonSize, anchorsTogetherY ? greenColor : whiteColor, posYTopValue, dragSpeed, threeSegmentWidth, draggingPosY)) {
                 if (context.onBeforeChangeCallback) {
@@ -495,7 +497,7 @@ namespace SR_CORE_GUI_NS {
                     pTransformRect->SetTranslation(anchoredPos);
                 }
                 else {
-                    offsetMax.y = posYTopValue;
+                    offsetMax.y = -posYTopValue;
                     pTransformRect->SetOffsetMax(offsetMax);
                 }
             }
@@ -514,7 +516,7 @@ namespace SR_CORE_GUI_NS {
 
             /// ========================================= Size / Right-Bottom ==========================================
 
-            float_t widthRightValue = anchorsTogetherX ? size.x : offsetMax.x;
+            float_t widthRightValue = anchorsTogetherX ? size.x : -offsetMax.x;
             bool draggingWidth = false;
             if (TransformRectEditDragFloat(anchorsTogetherX ? "Width" : "Right", buttonSize, anchorsTogetherX ? redColor : whiteColor, widthRightValue, dragSpeed, threeSegmentWidth, draggingWidth)) {
                 if (context.onBeforeChangeCallback) {
@@ -526,7 +528,7 @@ namespace SR_CORE_GUI_NS {
                     pTransformRect->SetSize(size);
                 }
                 else {
-                    offsetMax.x = widthRightValue;
+                    offsetMax.x = -widthRightValue;
                     pTransformRect->SetOffsetMax(offsetMax);
                 }
             }
@@ -660,8 +662,15 @@ namespace SR_CORE_GUI_NS {
         if (SR_UTILS_NS::StoreUtils::User::GetBool(editorDebugModeId, false)) {
             auto&& layoutRect = pTransformRect->GetLayoutRect();
             auto&& scaledLayoutRect = pTransformRect->GetScaledLayoutRect();
-            SR_IMMEDIATE_GUI_NS::Text("Layout Rect: (%.1f, %.1f, %.1f, %.1f)", layoutRect.left, layoutRect.top, layoutRect.right, layoutRect.bottom);
-            SR_IMMEDIATE_GUI_NS::Text("Scaled Layout Rect: (%.1f, %.1f, %.1f, %.1f)", scaledLayoutRect.left, scaledLayoutRect.top, scaledLayoutRect.right, scaledLayoutRect.bottom);
+            SR_IMMEDIATE_GUI_NS::Text("Layout Rect: (%.6f, %.6f, %.6f, %.6f)", layoutRect.left, layoutRect.top, layoutRect.right, layoutRect.bottom);
+            SR_IMMEDIATE_GUI_NS::Text("Scaled Layout Rect: (%.6f, %.6f, %.6f, %.6f)", scaledLayoutRect.left, scaledLayoutRect.top, scaledLayoutRect.right, scaledLayoutRect.bottom);
+            if (auto&& pObject = pTransformRect->GetGameObject()) {
+                const auto x = SR_UTILS_NS::LayoutUtility::GetMetrics(*pObject, true);
+                const auto y = SR_UTILS_NS::LayoutUtility::GetMetrics(*pObject, false);
+                SR_IMMEDIATE_GUI_NS::Text("Layout X min/preferred/flexible: %.6f / %.6f / %.6f", x.minimum, x.preferred, x.flexible);
+                SR_IMMEDIATE_GUI_NS::Text("Layout Y min/preferred/flexible: %.6f / %.6f / %.6f", y.minimum, y.preferred, y.flexible);
+                SR_IMMEDIATE_GUI_NS::Text("Ignore layout: %s", SR_UTILS_NS::LayoutUtility::IsIgnored(*pObject) ? "true" : "false");
+            }
         }
 
         return feedback;

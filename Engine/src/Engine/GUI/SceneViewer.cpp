@@ -145,8 +145,11 @@ namespace SR_CORE_GUI_NS {
                 if (GetSubWidget<SceneTools>()->GetViewMode() == EditorSceneViewMode::WindowSize) {
                     DrawTexture(m_windowSize, m_window->GetSize().Cast<int32_t>(), m_id, true);
                 }
-                else {
+                else if (GetSubWidget<SceneTools>()->GetViewMode() == EditorSceneViewMode::FreeAspect) {
                     DrawTexture(m_windowSize, m_windowSize, m_id, true);
+                }
+                else {
+                    DrawTexture(m_windowSize, pCamera->GetSize().Cast<int32_t>(), m_id, true);
                 }
 
                 CheckFocused();
@@ -453,6 +456,22 @@ namespace SR_CORE_GUI_NS {
 
             m_id = SR_ID_INVALID;
             pCamera->UpdateProjection(m_windowSize.x, m_windowSize.y);
+            return true;
+        }
+
+        SR_MATH_NS::UVector2 previewSize;
+        switch (viewMode) {
+            case EditorSceneViewMode::View1920x1080: previewSize = { 1920, 1080 }; break;
+            case EditorSceneViewMode::View1280x720: previewSize = { 1280, 720 }; break;
+            case EditorSceneViewMode::View1366x768: previewSize = { 1366, 768 }; break;
+            case EditorSceneViewMode::View2560x1440: previewSize = { 2560, 1440 }; break;
+            case EditorSceneViewMode::View1024x768: previewSize = { 1024, 768 }; break;
+            case EditorSceneViewMode::View2560x1080: previewSize = { 2560, 1080 }; break;
+            default: return false;
+        }
+        if (pCamera->GetSize() != previewSize) {
+            m_id = SR_ID_INVALID;
+            pCamera->UpdateProjection(previewSize.x, previewSize.y);
             return true;
         }
 

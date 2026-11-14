@@ -21,10 +21,7 @@ namespace SR_CORE_UI_NS {
 
         auto&& input = SR_UTILS_NS::Input::Instance();
 
-        const SR_MATH_NS::FVector2 uiMousePos = pCanvas->ScreenToCanvasSpace(input.GetMousePos());
-        SR_MATH_NS::FRect layoutRect = pCanvas->LayoutToCanvasRect(pTransformRect->GetLayoutRect());
-
-        if (layoutRect.Contains(uiMousePos)) {
+        if (pCanvas->ContainsScreenPoint(*pTransformRect, input.GetMousePos())) {
             const bool isDown = m_leftClick && input.GetMouseDown(SR_UTILS_NS::MouseCode::MouseLeft)
                                 || m_rightClick && input.GetMouseDown(SR_UTILS_NS::MouseCode::MouseRight)
                                 || m_middleClick && input.GetMouseDown(SR_UTILS_NS::MouseCode::MouseMiddle);
