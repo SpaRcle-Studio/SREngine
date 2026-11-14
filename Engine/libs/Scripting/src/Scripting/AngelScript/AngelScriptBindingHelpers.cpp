@@ -81,7 +81,7 @@ namespace SR_SCRIPTING_NS {
             }
 
             if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::String) {
-                return "string";
+                return "String";
             }
 
             if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::MathVector) {

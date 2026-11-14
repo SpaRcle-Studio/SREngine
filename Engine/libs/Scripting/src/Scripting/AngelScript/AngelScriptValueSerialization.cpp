@@ -11,6 +11,8 @@
 #include <Utils/Common/EnumReflector.h>
 #include <Utils/FileSystem/Path.h>
 #include <Utils/Serialization/Serializable.h>
+#include <Utils/TypeTraits/Factory.h>
+#include <Utils/TypeTraits/SRClassMeta.h>
 #include <Utils/Types/Optional.h>
 #include <Utils/Profile/TracyContext.h>
 
@@ -32,6 +34,10 @@ namespace SR_SCRIPTING_NS {
             case SR_UTILS_NS::Reflection::ReflectedCategoryType::Arithmetic:
             case SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum:
                 return true;
+            case SR_UTILS_NS::Reflection::ReflectedCategoryType::Object: {
+                auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(info.detailedType);
+                return pMeta && pMeta->IsSameOrInherited("Serializable");
+            }
             case SR_UTILS_NS::Reflection::ReflectedCategoryType::MathVector:
             case SR_UTILS_NS::Reflection::ReflectedCategoryType::MathRect:
             case SR_UTILS_NS::Reflection::ReflectedCategoryType::MathSize:
@@ -64,7 +70,8 @@ namespace SR_SCRIPTING_NS {
 
         auto&& info = value.GetTypeInfo();
 
-        if (info.detailedType == "EntityRef" || info.detailedType == "ResourceRef") {
+        if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Object ||
+            info.detailedType == "EntityRef" || info.detailedType == "ResourceRef") {
             auto&& pSerializable = dynamic_cast<SR_UTILS_NS::Serializable*>(value.GetSRClass());
             if (pSerializable) {
                 pSerializable->Save(serializer);
@@ -185,7 +192,8 @@ namespace SR_SCRIPTING_NS {
 
         auto&& info = value.GetTypeInfo();
 
-        if (info.detailedType == "EntityRef" || info.detailedType == "ResourceRef") {
+        if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Object ||
+            info.detailedType == "EntityRef" || info.detailedType == "ResourceRef") {
             auto&& pSerializable = dynamic_cast<SR_UTILS_NS::Serializable*>(value.GetSRClass());
             return pSerializable && pSerializable->Load(deserializer);
         }

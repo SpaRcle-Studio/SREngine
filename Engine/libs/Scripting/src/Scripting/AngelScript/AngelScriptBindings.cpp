@@ -366,7 +366,7 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
-        if (!Check(m_pEngine->RegisterStringFactory("string", this), "string literals")) {
+        if (!Check(m_pEngine->RegisterStringFactory("String", this), "String literals")) {
             return false;
         }
 
@@ -480,7 +480,7 @@ namespace SR_SCRIPTING_NS {
         }
 
         if (type.pTypeInfo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::String) {
-            const char* pDeclarations[] = { "uint length() const", "bool opEquals(const string &in) const", "string@ opAdd(const string &in) const" };
+            const char* pDeclarations[] = { "uint length() const", "bool opEquals(const String &in) const", "String@ opAdd(const String &in) const" };
 
             for (auto&& pDeclaration : pDeclarations) {
                 if (!Check(m_pEngine->RegisterObjectMethod(type.name.c_str(), pDeclaration, asFUNCTION(AngelScriptBindingHelpers::StringOperation), asCALL_GENERIC, pGeneral), pDeclaration)) {
@@ -535,7 +535,7 @@ namespace SR_SCRIPTING_NS {
                 }
                 else {
                     declarations.emplace_back(Declaration(element) + " get() const");
-                    declarations.emplace_back(type.pTypeInfo->detailedType == "EntityRef" ? "void setId(uint64)" : "void setId(const string &in)");
+                    declarations.emplace_back(type.pTypeInfo->detailedType == "EntityRef" ? "void setId(uint64)" : "void setId(const String &in)");
                 }
             }
 
@@ -632,6 +632,10 @@ namespace SR_SCRIPTING_NS {
 
         bool success = true;
         SR_UTILS_NS::Set<SR_UTILS_NS::String> registered;
+        SR_UTILS_NS::Set<SR_UTILS_NS::String> propertyNames;
+        type.pMeta->ForEachProperty([&](const SR_UTILS_NS::Reflection::Property& property, uint64_t) {
+            propertyNames.insert(property.GetName().ToString());
+        });
         type.pMeta->ForEachProperty([&](const SR_UTILS_NS::Reflection::Property& property, uint64_t) {
             if (!success || property.GetPublicity() == SR_UTILS_NS::PropertyPublicity::Hidden ||
                 property.GetPublicity() == SR_UTILS_NS::PropertyPublicity::HiddenReadOnly) {
@@ -652,14 +656,17 @@ namespace SR_SCRIPTING_NS {
             pBinding->pPropertyType = SR_UTILS_NS::Reflection::CopyTypeInfo(const_cast<SR_UTILS_NS::Reflection::TypeInfo*>(&info));
             m_calls.emplace_back(pBinding);
 
-            const auto getter = pDeclaration + " get_" + property.GetName().ToString() + "() property";
+            const auto nativeName = property.GetName().ToString();
+            const auto cleanName = nativeName.size() > 2 && nativeName.substr(0, 2) == "m_" ? nativeName.substr(2) : nativeName;
+            const auto scriptName = propertyNames.count(cleanName) == 0 ? cleanName : nativeName;
+            const auto getter = pDeclaration + " get_" + scriptName + "() property";
             if (registered.insert(getter).second) {
                 SR_TRACY_ZONE_N("Getter");
                 success &= Check(m_pEngine->RegisterObjectMethod(type.name.c_str(), getter.c_str(), asFUNCTION(AngelScriptBindingHelpers::GetProperty), asCALL_GENERIC, pBinding), getter);
             }
 
             if (!property.IsReadOnly()) {
-                const auto setter = "void set_" + property.GetName().ToString() + "(" + Argument(info) + ") property";
+                const auto setter = "void set_" + scriptName + "(" + Argument(info) + ") property";
                 if (registered.insert(setter).second) {
                     SR_TRACY_ZONE_N("Setter");
                     success &= Check(m_pEngine->RegisterObjectMethod(type.name.c_str(), setter.c_str(), asFUNCTION(AngelScriptBindingHelpers::SetProperty), asCALL_GENERIC, pBinding), setter);

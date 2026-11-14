@@ -75,6 +75,9 @@ namespace SR_SCRIPTING_NS {
         explicit AngelScriptBindings(asIScriptEngine* pEngine);
         ~AngelScriptBindings() override;
         bool RegisterFactory();
+        const SR_UTILS_NS::Vector<Type*>& GetTypes() const {
+            return m_types;
+        }
 
     public:
         SR_UTILS_NS::String Declaration(const SR_UTILS_NS::Reflection::TypeInfo& info) const;

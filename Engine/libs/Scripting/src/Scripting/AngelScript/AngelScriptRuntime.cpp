@@ -98,12 +98,27 @@ namespace SR_SCRIPTING_NS {
 
         SR_UTILS_NS::String api;
 
+        SR_UTILS_NS::Vector<asITypeInfo*> objectTypes;
+        SR_UTILS_NS::Set<int32_t> exportedTypes;
         for (uint32_t i = 0; i < m_pEngine->GetObjectTypeCount(); ++i) {
             auto&& pType = m_pEngine->GetObjectTypeByIndex(i);
-            api += "class " + SR_UTILS_NS::String(pType->GetName()) + "\n{\n";
+            objectTypes.emplace_back(pType);
+            exportedTypes.insert(pType->GetTypeId());
+        }
+        for (auto&& pBindingType : m_pBindings->GetTypes()) {
+            auto&& pType = m_pEngine->GetTypeInfoById(pBindingType->scriptTypeId);
+            if (pType && pBindingType->pTypeInfo->category != SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum &&
+                exportedTypes.insert(pType->GetTypeId()).second) {
+                objectTypes.emplace_back(pType);
+            }
+        }
+
+        for (auto&& pType : objectTypes) {
+            api += "class " + SR_UTILS_NS::String(m_pEngine->GetTypeDeclaration(pType->GetTypeId(), false)) + "\n{\n";
 
             for (uint32_t j = 0; j < pType->GetMethodCount(); ++j) {
-                api += "    " + SR_UTILS_NS::String(pType->GetMethodByIndex(j)->GetDeclaration(false)) + ";\n";
+                auto&& pMethod = pType->GetMethodByIndex(j);
+                api += "    " + SR_UTILS_NS::String(pMethod->GetDeclaration(false)) + (pMethod->IsProperty() ? " property;\n" : ";\n");
             }
 
             api += "}\n\n";
@@ -153,8 +168,22 @@ namespace SR_SCRIPTING_NS {
             closeNamespace(pType->GetNamespace());
         }
 
+        SR_UTILS_NS::Vector<asITypeInfo*> objectTypes;
+        SR_UTILS_NS::Set<int32_t> exportedTypes;
         for (uint32_t i = 0; i < m_pEngine->GetObjectTypeCount(); ++i) {
             auto&& pType = m_pEngine->GetObjectTypeByIndex(i);
+            objectTypes.emplace_back(pType);
+            exportedTypes.insert(pType->GetTypeId());
+        }
+        for (auto&& pBindingType : m_pBindings->GetTypes()) {
+            auto&& pType = m_pEngine->GetTypeInfoById(pBindingType->scriptTypeId);
+            if (pType && pBindingType->pTypeInfo->category != SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum &&
+                exportedTypes.insert(pType->GetTypeId()).second) {
+                objectTypes.emplace_back(pType);
+            }
+        }
+
+        for (auto&& pType : objectTypes) {
             openNamespace(pType->GetNamespace());
             api += "class " + SR_UTILS_NS::String(m_pEngine->GetTypeDeclaration(pType->GetTypeId(), false));
             bool hasBase = false;
@@ -183,7 +212,8 @@ namespace SR_SCRIPTING_NS {
                 }
             }
             for (uint32_t j = 0; j < pType->GetMethodCount(); ++j) {
-                api += "    " + SR_UTILS_NS::String(pType->GetMethodByIndex(j)->GetDeclaration(false, true, true)) + ";\n";
+                auto&& pMethod = pType->GetMethodByIndex(j);
+                api += "    " + SR_UTILS_NS::String(pMethod->GetDeclaration(false, true, true)) + (pMethod->IsProperty() ? " property;\n" : ";\n");
             }
             for (uint32_t j = 0; j < pType->GetPropertyCount(); ++j) {
                 api += "    " + SR_UTILS_NS::String(pType->GetPropertyDeclaration(j, true)) + ";\n";
