@@ -37,6 +37,8 @@ namespace SR_SCRIPTING_NS {
     /// One runtime dispatcher for all factory types; no per-C++-type binding instantiations.
     class SR_SCRIPTING_DLL_API AngelScriptBindings : public asIStringFactory {
     public:
+        static constexpr asPWORD NativeTypeUserData = 0x53524153;
+
         struct Type {
             SR_UTILS_NS::String name;
             int32_t scriptTypeId = 0;

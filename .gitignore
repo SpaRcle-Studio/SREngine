@@ -95,3 +95,4 @@ Resources/**/*.so
 /Resources/Engine/Utilities/codegen.lock
 /.vscode
 /Platform/Emscripten/Bin/SREngine.manifest.json
+/Resources/as.predefined

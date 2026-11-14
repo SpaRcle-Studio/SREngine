@@ -4,6 +4,8 @@
 
 #include <Engine/EntryPoint.h>
 #include <Engine/LauncherEntryPoint.h>
+#include <Utils/Platform/StdioTCPBridge.h>
+#include <Utils/Platform/Platform.h>
 
 #include <Utils/Common/CLIManager.h>
 #include <Utils/Tests/TestManager.h>
@@ -42,6 +44,36 @@ void ShutdownApplication() {
 }
 
 int SREngineEntryPoint(int argc, char** argv) {
+    for (int32_t i = 1; i < argc; ++i) {
+        if (strcmp(argv[i], "--angelscript-dap-bridge") != 0) {
+            continue;
+        }
+
+        uint32_t port = 4711;
+        for (int32_t argument = 1; argument < argc; ++argument) {
+            if (strcmp(argv[argument], "--port") != 0) {
+                continue;
+            }
+            if (++argument == argc || !*argv[argument]) {
+                SR_PLATFORM_NS::WriteConsoleError("SREngineEntryPoint() : --port requires a value.\n");
+                return 1;
+            }
+            port = 0;
+            for (const char* pDigit = argv[argument]; *pDigit; ++pDigit) {
+                if (*pDigit < '0' || *pDigit > '9' || port > 6553) {
+                    SR_PLATFORM_NS::WriteConsoleError("SREngineEntryPoint() : invalid DAP port.\n");
+                    return 1;
+                }
+                port = port * 10 + *pDigit - '0';
+            }
+        }
+        if (!port || port > 65535) {
+            SR_PLATFORM_NS::WriteConsoleError("SREngineEntryPoint() : DAP port must be between 1 and 65535.\n");
+            return 1;
+        }
+        return SR_PLATFORM_NS::RunStdioTCPBridge(static_cast<uint16_t>(port));
+    }
+
     SR_UTILS_NS::StartupEngineProfiler();
     SR_PLATFORM_NS::InitializePlatform();
 #ifdef SR_EMSCRIPTEN

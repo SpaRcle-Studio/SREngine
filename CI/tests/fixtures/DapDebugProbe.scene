@@ -1,0 +1,24 @@
+sra format
+use tabs: true
+use numeric depth: false
+-r:Root
+	-o:logic
+		-v:type
+			-s:SceneAssetLogic
+		-o:ptr
+	-a:root
+		-k:i
+			-o:d
+				-v:type
+					-s:GameObject
+				-o:ptr
+					-v:name
+						-s:DAP debug probe
+					-a:components
+						-k:i
+							-o:d
+								-v:type
+									-s:Behaviour
+								-o:ptr
+									-v:behaviourName
+										-s:DapDebugProbe

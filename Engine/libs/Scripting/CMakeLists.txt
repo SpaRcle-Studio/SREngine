@@ -7,6 +7,7 @@ endif()
 project(Scripting)
 
 option(SR_ENGINE_ANGELSCRIPT_SUPPORT "Enable AngelScript scripting backend" ON)
+option(SR_ENGINE_ANGELSCRIPT_DEBUGGER "Enable the opt-in AngelScript DAP server (CLion 2026.1+)" ON)
 
 SR_COMMON_GENERATE_BUILD_SOURCES(${PROJECT_SOURCE_DIR})
 SR_COMMON_GET_SOURCES(Scripting)
@@ -38,6 +39,9 @@ target_link_libraries(Scripting PUBLIC Utils)
 target_include_directories(Scripting PRIVATE src)
 
 if (SR_ENGINE_ANGELSCRIPT_SUPPORT)
+    if (SR_ENGINE_ANGELSCRIPT_DEBUGGER AND (WIN32 OR CMAKE_SYSTEM_NAME STREQUAL "Linux"))
+        target_compile_definitions(Scripting PRIVATE SR_ENGINE_ANGELSCRIPT_DEBUGGER)
+    endif()
     set(AS_DISABLE_INSTALL ON CACHE BOOL "" FORCE)
     set(SR_ANGELSCRIPT_PREVIOUS_BUILD_SHARED_LIBS "${BUILD_SHARED_LIBS}")
     set(BUILD_SHARED_LIBS OFF)

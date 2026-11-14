@@ -20,7 +20,16 @@ int main(int argc, char** argv) {
 #if defined(SR_ENGINE_STATIC_LIBRARY)
     return SREngineEntryPoint(argc, argv);
 #else
-    const std::string executablePath = argv[0];
+    for (int32_t i = 1; i < argc; ++i) {
+        if (strcmp(argv[i], "--angelscript-dap-bridge") == 0) {
+            auto&& pPreviousOutput = std::cout.rdbuf(std::cerr.rdbuf());
+            const int32_t result = SREngineEntryPointFromExternalModule(argc, argv, false);
+            std::cout.rdbuf(pPreviousOutput);
+            return result;
+        }
+    }
+
+    const char* pExecutablePath = argv[0];
     bool allowToUnpack = true;
 
     for (int i = 1; i < argc; ++i) {
@@ -29,16 +38,16 @@ int main(int argc, char** argv) {
 
     for (int i = 1; i < argc; ++i) {
         if (strcmp(argv[i], "--pack") == 0) {
-            return PackFiles(executablePath, GetPackFiles(executablePath), {}, false);
+            return PackFiles(pExecutablePath, GetPackFiles(pExecutablePath), {}, false);
         }
         if (strcmp(argv[i], "--unpack") == 0) {
-            return TryUnpackFiles(executablePath);
+            return TryUnpackFiles(pExecutablePath);
         }
         if (strcmp(argv[i], "--pack-with-res") == 0) {
-            return PackFiles(executablePath, GetPackFiles(executablePath), GetResourcesPackFiles(), false);
+            return PackFiles(pExecutablePath, GetPackFiles(pExecutablePath), GetResourcesPackFiles(), false);
         }
         if (strcmp(argv[i], "--pack-online-data") == 0) {
-            return PackFiles(executablePath, GetPackFiles(executablePath), GetResourcesPackFiles(), true);
+            return PackFiles(pExecutablePath, GetPackFiles(pExecutablePath), GetResourcesPackFiles(), true);
         }
         if (strcmp(argv[i], "--delete-packed") == 0) {
             allowToUnpack = false;
@@ -50,9 +59,9 @@ int main(int argc, char** argv) {
         return SREngineEntryPointFromExternalModule(argc, argv, true);
     }
 
-    const int unpackResult = TryUnpackFiles(executablePath);
+    const int unpackResult = TryUnpackFiles(pExecutablePath);
     if (unpackResult == UNPACK_SUCCESS) {
-        return RunUnpackedApplication(executablePath);
+        return RunUnpackedApplication(pExecutablePath);
     }
 
     if (unpackResult == UNPACK_NO_PACKED_DATA) {
@@ -62,14 +71,14 @@ int main(int argc, char** argv) {
         }
 
         if (runResult == ERROR_MODULE_NOT_FOUND) {
-            if (int downloadResult = DownloadEngineDataFromGithub(executablePath); downloadResult != 0) {
+            if (int downloadResult = DownloadEngineDataFromGithub(pExecutablePath); downloadResult != 0) {
                 std::cerr << "Failed to download engine data from GitHub!" << std::endl;
                 return downloadResult;
             }
         }
 
         if (runResult != ERROR_ENGINE_EXIT) {
-            return RunUnpackedApplication(executablePath);
+            return RunUnpackedApplication(pExecutablePath);
         }
         return runResult;
     }

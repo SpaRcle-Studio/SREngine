@@ -9,6 +9,10 @@
 #include <Scripting/AngelScript/AngelScriptBindings.h>
 #include <Scripting/AngelScript/AngelScriptBehaviourInstance.h>
 
+#if defined(SR_ENGINE_ANGELSCRIPT_DEBUGGER)
+	#include <Scripting/AngelScript/AngelScriptDebugger.h>
+#endif
+
 #include <Utils/Types/LockGuard.h>
 #include <Utils/TypeTraits/Factory.h>
 #include <Utils/Events/Broadcaster.h>
@@ -18,9 +22,16 @@
 #include <scriptbuilder.h>
 
 namespace SR_SCRIPTING_NS {
-    AngelScriptRuntime::AngelScriptRuntime() = default;
+    AngelScriptRuntime::AngelScriptRuntime() {
+    #if defined(SR_ENGINE_ANGELSCRIPT_DEBUGGER)
+        m_pDebugger = new AngelScriptDebugger();
+    #endif
+    }
 
     AngelScriptRuntime::~AngelScriptRuntime() {
+    #if defined(SR_ENGINE_ANGELSCRIPT_DEBUGGER)
+        m_pDebugger->Stop();
+    #endif
         SRAssert2(m_instances.empty(), "AngelScriptRuntime::~AngelScriptRuntime() : behaviours must be released before the script system!");
 
         for (auto&& pInstance : m_instances) {
@@ -33,6 +44,9 @@ namespace SR_SCRIPTING_NS {
         }
 
         delete m_pBindings;
+    #if defined(SR_ENGINE_ANGELSCRIPT_DEBUGGER)
+        delete m_pDebugger;
+    #endif
     }
 
     bool AngelScriptRuntime::EnsureInitialized() {
@@ -63,6 +77,11 @@ namespace SR_SCRIPTING_NS {
         m_pEngine->SetEngineProperty(asEP_PROPERTY_ACCESSOR_MODE, 2);
         m_pEngine->SetEngineProperty(asEP_ALLOW_UNSAFE_REFERENCES, true);
         m_pEngine->SetEngineProperty(asEP_INIT_GLOBAL_VARS_AFTER_BUILD, false);
+    #if defined(SR_ENGINE_ANGELSCRIPT_DEBUGGER)
+        if (m_pDebugger->IsListening()) {
+            m_pEngine->SetContextCallbacks(AngelScriptDebugger::RequestContext, AngelScriptDebugger::ReturnContext, m_pDebugger);
+        }
+    #endif
         m_pBindings = new AngelScriptBindings(m_pEngine);
 
         if (!m_pBindings->RegisterFactory()) {
@@ -106,9 +125,136 @@ namespace SR_SCRIPTING_NS {
         return result;
     }
 
+    void AngelScriptRuntime::GeneratePredefined(const SR_UTILS_NS::String& behaviourDeclaration) const {
+        SR_TRACY_ZONE;
+        SR_UTILS_NS::String api = "// Generated from the registered AngelScript API. Do not edit.\n\n";
+        auto openNamespace = [&api](const char* pNamespace) {
+            if (pNamespace && *pNamespace) {
+                api += "namespace " + SR_UTILS_NS::String(pNamespace) + " {\n";
+            }
+        };
+        auto closeNamespace = [&api](const char* pNamespace) {
+            if (pNamespace && *pNamespace) {
+                api += "}\n";
+            }
+            api += "\n";
+        };
+
+        for (uint32_t i = 0; i < m_pEngine->GetEnumCount(); ++i) {
+            auto&& pType = m_pEngine->GetEnumByIndex(i);
+            openNamespace(pType->GetNamespace());
+            api += "enum " + SR_UTILS_NS::String(pType->GetName()) + " {\n";
+            for (uint32_t j = 0; j < pType->GetEnumValueCount(); ++j) {
+                asINT64 value = 0;
+                const SR_UTILS_NS::String name = pType->GetEnumValueByIndex(j, &value);
+                api += "    {} = {},\n"_format(name, value);
+            }
+            api += "}\n";
+            closeNamespace(pType->GetNamespace());
+        }
+
+        for (uint32_t i = 0; i < m_pEngine->GetObjectTypeCount(); ++i) {
+            auto&& pType = m_pEngine->GetObjectTypeByIndex(i);
+            openNamespace(pType->GetNamespace());
+            api += "class " + SR_UTILS_NS::String(m_pEngine->GetTypeDeclaration(pType->GetTypeId(), false));
+            bool hasBase = false;
+            if (auto&& pBase = pType->GetBaseType()) {
+                api += " : " + SR_UTILS_NS::String(m_pEngine->GetTypeDeclaration(pBase->GetTypeId(), true));
+                hasBase = true;
+            }
+            for (uint32_t j = 0; j < pType->GetInterfaceCount(); ++j) {
+                api += hasBase ? ", " : " : ";
+                api += m_pEngine->GetTypeDeclaration(pType->GetInterface(j)->GetTypeId(), true);
+                hasBase = true;
+            }
+            api += " {\n";
+            for (uint32_t j = 0; j < pType->GetFactoryCount(); ++j) {
+                const SR_UTILS_NS::String declaration = pType->GetFactoryByIndex(j)->GetDeclaration(false, true, true);
+                const auto params = declaration.find('(');
+                if (params != SR_UTILS_NS::String::npos) {
+                    api += "    " + SR_UTILS_NS::String(pType->GetName()) + declaration.substr(params) + ";\n";
+                }
+            }
+            for (uint32_t j = 0; j < pType->GetBehaviourCount(); ++j) {
+                asEBehaviours behaviour;
+                auto&& pFunction = pType->GetBehaviourByIndex(j, &behaviour);
+                if (behaviour == asBEHAVE_CONSTRUCT || behaviour == asBEHAVE_DESTRUCT) {
+                    api += "    " + SR_UTILS_NS::String(pFunction->GetDeclaration(false, true, true)) + ";\n";
+                }
+            }
+            for (uint32_t j = 0; j < pType->GetMethodCount(); ++j) {
+                api += "    " + SR_UTILS_NS::String(pType->GetMethodByIndex(j)->GetDeclaration(false, true, true)) + ";\n";
+            }
+            for (uint32_t j = 0; j < pType->GetPropertyCount(); ++j) {
+                api += "    " + SR_UTILS_NS::String(pType->GetPropertyDeclaration(j, true)) + ";\n";
+            }
+            for (uint32_t j = 0; j < pType->GetChildFuncdefCount(); ++j) {
+                api += "    funcdef " + SR_UTILS_NS::String(pType->GetChildFuncdef(j)->GetFuncdefSignature()->GetDeclaration(false, true, true)) + ";\n";
+            }
+            api += "}\n";
+            closeNamespace(pType->GetNamespace());
+        }
+
+        for (uint32_t i = 0; i < m_pEngine->GetTypedefCount(); ++i) {
+            auto&& pType = m_pEngine->GetTypedefByIndex(i);
+            openNamespace(pType->GetNamespace());
+            api += "typedef " + SR_UTILS_NS::String(m_pEngine->GetTypeDeclaration(pType->GetUnderlyingTypeId(), true))
+                + " " + pType->GetName() + ";\n";
+            closeNamespace(pType->GetNamespace());
+        }
+        for (uint32_t i = 0; i < m_pEngine->GetFuncdefCount(); ++i) {
+            auto&& pType = m_pEngine->GetFuncdefByIndex(i);
+            if (pType->GetParentType()) {
+                continue;
+            }
+            openNamespace(pType->GetNamespace());
+            api += "funcdef " + SR_UTILS_NS::String(pType->GetFuncdefSignature()->GetDeclaration(false, true, true)) + ";\n";
+            closeNamespace(pType->GetNamespace());
+        }
+        for (uint32_t i = 0; i < m_pEngine->GetGlobalFunctionCount(); ++i) {
+            auto&& pFunction = m_pEngine->GetGlobalFunctionByIndex(i);
+            openNamespace(pFunction->GetNamespace());
+            api += SR_UTILS_NS::String(pFunction->GetDeclaration(false, false, true)) + ";\n";
+            closeNamespace(pFunction->GetNamespace());
+        }
+        for (uint32_t i = 0; i < m_pEngine->GetGlobalPropertyCount(); ++i) {
+            const char* pName = nullptr;
+            const char* pNamespace = nullptr;
+            int32_t typeId = 0;
+            bool isConst = false;
+            m_pEngine->GetGlobalPropertyByIndex(i, &pName, &pNamespace, &typeId, &isConst);
+            openNamespace(pNamespace);
+            if (isConst) {
+                api += "const ";
+            }
+            api += SR_UTILS_NS::String(m_pEngine->GetTypeDeclaration(typeId, true)) + " " + pName + ";\n";
+            closeNamespace(pNamespace);
+        }
+        api += behaviourDeclaration;
+
+        const auto path = CoreResLoader::GetResPath().Concat("as.predefined");
+        if (!path.GetFolder().CreateDirectories()) {
+            SR_WARN("AngelScriptRuntime::GeneratePredefined() : failed to create output directory for {}.", path);
+            return;
+        }
+        auto file = SR_UTILS_NS::VFS::Instance().OpenFile(path, SR_UTILS_NS::FileMode::Write);
+        if (!file || file.Write(api.data(), api.size()) != api.size()) {
+            SR_WARN("AngelScriptRuntime::GeneratePredefined() : failed to write {}.", path);
+            return;
+        }
+        SR_LOG("AngelScriptRuntime::GeneratePredefined() : generated {}.", path);
+    }
+
     bool AngelScriptRuntime::Execute(asIScriptContext* pContext) const {
         SR_TRACY_ZONE;
+    #if defined(SR_ENGINE_ANGELSCRIPT_DEBUGGER)
+        std::lock_guard lock(m_mutex);
+        m_pDebugger->PrepareContext(pContext);
+    #endif
         const auto result = pContext->Execute();
+    #if defined(SR_ENGINE_ANGELSCRIPT_DEBUGGER)
+        m_pDebugger->ExecutionFinished(pContext);
+    #endif
 
         if (result == asEXECUTION_FINISHED) {
             return true;
@@ -186,6 +332,9 @@ namespace SR_SCRIPTING_NS {
         auto fail = [&]() {
             SR_ERROR("AngelScriptRuntime::BuildModule() : module {} failed; previous module retained: {}.", moduleName, m_pModule != nullptr);
             pCandidate->Discard();
+        #if defined(SR_ENGINE_ANGELSCRIPT_DEBUGGER)
+            m_pDebugger->ModuleBuilt(m_pModule);
+        #endif
             m_hasErrors = true;
 
             return false;
@@ -205,6 +354,10 @@ namespace SR_SCRIPTING_NS {
 
         base += "}\n";
 
+        if (m_initializing) {
+            GeneratePredefined(base);
+        }
+
         if (builder.AddSectionFromMemory("<engine behaviour>", base.c_str(), static_cast<uint32_t>(base.size())) < 0) {
             return fail();
         }
@@ -218,6 +371,10 @@ namespace SR_SCRIPTING_NS {
         if (builder.BuildModule() < 0) {
             return fail();
         }
+
+    #if defined(SR_ENGINE_ANGELSCRIPT_DEBUGGER)
+        m_pDebugger->ModuleBuilt(pCandidate);
+    #endif
 
         SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> names;
         auto&& pMarker = m_pEngine->GetTypeInfoByDecl("IBehaviour");
@@ -357,6 +514,11 @@ namespace SR_SCRIPTING_NS {
     }
 
     void AngelScriptRuntime::ReloadModuleIfNeeded() {
+    #if defined(SR_ENGINE_ANGELSCRIPT_DEBUGGER)
+        if (m_pDebugger->IsPaused()) {
+            return;
+        }
+    #endif
         SR_LOCK_GUARD;
 
         if (m_initializing || !m_moduleDirty ||

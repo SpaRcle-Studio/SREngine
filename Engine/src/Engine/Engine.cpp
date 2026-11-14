@@ -80,6 +80,8 @@ namespace SR_CORE_NS {
         ;
         const bool editorOnStartupEnabled = isEditorEnabled && !isGame && SR_UTILS_NS::Features::Instance().Enabled("EditorOnStartup", false);
 
+        SR_UTILS_NS::StoreUtils::Temp::SetBool("ApplicationIsEditor", isEditorEnabled && !isGame);
+
         SR_UTILS_NS::StoreUtils::Temp::SetBool("ImGuiOverlayEnabled", isEditorEnabled && SR_UTILS_NS::Features::Instance().Enabled("ImGUI", false));
 
         if (isEditorEnabled) {

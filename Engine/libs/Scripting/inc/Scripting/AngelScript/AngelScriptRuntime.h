@@ -23,6 +23,7 @@ namespace SR_SCRIPTING_NS {
     class BehaviourInstance;
     class AngelScriptBehaviourInstance;
     class AngelScriptBindings;
+    class AngelScriptDebugger;
 
     class AngelScriptRuntime {
     public:
@@ -59,6 +60,7 @@ namespace SR_SCRIPTING_NS {
     private:
     #if defined(SR_ENGINE_ANGELSCRIPT_SUPPORT)
         bool BuildModule();
+        void GeneratePredefined(const SR_UTILS_NS::String& behaviourDeclaration) const;
         void DiscoverSourceNames() const;
         asIScriptObject* CreateObject(asIScriptModule* pModule, SR_UTILS_NS::StringAtom name);
     #endif
@@ -79,6 +81,7 @@ namespace SR_SCRIPTING_NS {
         asIScriptEngine* m_pEngine = nullptr;
         asIScriptModule* m_pModule = nullptr;
         AngelScriptBindings* m_pBindings = nullptr;
+        AngelScriptDebugger* m_pDebugger = nullptr;
     #endif
     };
 }

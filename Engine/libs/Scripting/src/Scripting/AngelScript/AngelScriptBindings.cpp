@@ -445,6 +445,7 @@ namespace SR_SCRIPTING_NS {
         }
 
         type.scriptTypeId = m_pEngine->GetTypeIdByDecl(type.name.c_str());
+        m_pEngine->GetTypeInfoById(type.scriptTypeId)->SetUserData(this, NativeTypeUserData);
         return Check(m_pEngine->RegisterObjectBehaviour(type.name.c_str(), asBEHAVE_ADDREF, "void f()", asFUNCTION(AngelScriptBindingHelpers::AddRef), asCALL_GENERIC), type.name) &&
             Check(m_pEngine->RegisterObjectBehaviour(type.name.c_str(), asBEHAVE_RELEASE, "void f()", asFUNCTION(AngelScriptBindingHelpers::Release), asCALL_GENERIC), type.name);
     }
