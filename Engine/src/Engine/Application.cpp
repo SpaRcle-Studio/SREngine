@@ -51,17 +51,18 @@ namespace SR_CORE_NS {
 
     Application::Application()
         : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
-    { }
+    {
+        ApplicationManager::Instance().RegisterApplication(*this);
+    }
 
     Application::~Application() {
         Close();
+        ApplicationManager::Instance().UnRegisterApplication(*this);
         SR_UTILS_NS::Debug::DestroySingleton();
     }
 
     bool Application::PreInit() {
         SR_TRACY_ZONE;
-
-        ApplicationManager::Instance().RegisterApplication(*this);
 
         SR_UTILS_NS::Localization::SetLocale();
         SR_UTILS_NS::Random::Initialize();
@@ -95,7 +96,22 @@ namespace SR_CORE_NS {
 
         SR_SYSTEM_LOG("Application::EarlyInit() : early initializing application...");
 
-        SR_CORE_NS::ProjectSettings::Ptr pSettings = SR_UTILS_NS::VFS::Instance().IsExists(".srproject") ? CoreResLoader::Load<SR_CORE_NS::ProjectSettings>(".srproject") : nullptr;
+        SR_CORE_NS::ProjectSettings::Ptr pSettings;
+        if (SR_UTILS_NS::VFS::Instance().IsExists(".srproject")) {
+            pSettings = SR_UTILS_NS::ResourceManager::Instance().Find<SR_CORE_NS::ProjectSettings>(".srproject"_atom, nullptr);
+            if (pSettings && !pSettings->Reload()) {
+                SR_ERROR("Application::EarlyInit() : failed to reload project settings!");
+                return false;
+            }
+            if (!pSettings) {
+                pSettings = CoreResLoader::Load<SR_CORE_NS::ProjectSettings>(".srproject");
+            }
+            if (!pSettings) {
+                SR_ERROR("Application::EarlyInit() : failed to load project settings!");
+                return false;
+            }
+        }
+
         if (!SR_UTILS_NS::CLIManager::Instance().IsAppOpenedByProjectFile() && pSettings) {
             if (!pSettings->buildProfiles.empty()) {
                 auto&& profiles = pSettings->buildProfiles;
@@ -115,9 +131,11 @@ namespace SR_CORE_NS {
         else {
             SR_UTILS_NS::StoreUtils::Temp::SetBool("ApplicationIsGame", false);
             SR_INFO("Application::EarlyInit() : application isn't a game!");
-            SR_PLATFORM_NS::ApplicationInfo appInfo = SR_PLATFORM_NS::GetApplicationInfo();
-            appInfo.project = pSettings ? SR_UTILS_NS::String(pSettings->projectName) : appInfo.project;
-            SR_PLATFORM_NS::SetApplicationInfo(appInfo);
+            if (pSettings) {
+                SR_PLATFORM_NS::ApplicationInfo appInfo = SR_PLATFORM_NS::GetApplicationInfo();
+                appInfo.project = SR_UTILS_NS::String(pSettings->projectName);
+                SR_PLATFORM_NS::SetApplicationInfo(appInfo);
+            }
         }
 
         auto&& appInfo = SR_PLATFORM_NS::GetApplicationInfo();
@@ -168,6 +186,7 @@ namespace SR_CORE_NS {
         auto&& resourcesPath = CoreResLoader::GetResPath();
 
         SR_UTILS_NS::VFS::Instance().UnmountAll();
+        SR_PLATFORM_NS::ResetApplicationInfo();
         SR_UTILS_NS::StoreUtils::Temp::SetBool("ApplicationHasEmbeddedResources", false);
         bool embeddedResourcesMounted = false;
 
@@ -353,6 +372,12 @@ namespace SR_CORE_NS {
                 return false;
             }
 
+            if (!EarlyInit()) {
+                SR_ERROR("Application::MainLoop() : failed to initialize project state!");
+                m_hasErrors = true;
+                return false;
+            }
+
             m_hasErrors |= !Init();
             m_isNeedReload = false;
             if (m_hasErrors) {
@@ -392,8 +417,6 @@ namespace SR_CORE_NS {
 
         m_engine.AutoFree();
 
-        ApplicationManager::Instance().UnRegisterApplication(*this);
-
         SR_UTILS_NS::TagManager::DestroySettings();
         SR_UTILS_NS::LayerManager::DestroySingleton();
 
@@ -412,13 +435,13 @@ namespace SR_CORE_NS {
 
     void ApplicationManager::RegisterApplication(Application& application) {
         SR_LOCK_GUARD;
-        m_applications.emplace_back(application.GetWeakThis());
+        m_applications.emplace_back(&application);
     }
 
     void ApplicationManager::UnRegisterApplication(Application& application) {
         SR_LOCK_GUARD;
-        auto&& pIt = m_applications.find_if([&application](const SR_HTYPES_NS::WeakPtr<Application>& pWeak) {
-            return pWeak.GetUnchecked() == &application;
+        auto&& pIt = m_applications.find_if([&application](const Application* pApp) {
+            return pApp == &application;
         });
         if (pIt == m_applications.end()) {
             SRHalt("ApplicationManager::UnRegisterApplication() : application not found!");
@@ -429,7 +452,7 @@ namespace SR_CORE_NS {
 
     SR_HTYPES_NS::SharedPtr<Application> ApplicationManager::GetApplication() const {
         if (!m_applications.empty()) {
-            return m_applications.back().Lock();
+            return m_applications.back()->GetThis();
         }
         return nullptr;
     }

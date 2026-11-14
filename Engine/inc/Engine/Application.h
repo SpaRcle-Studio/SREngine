@@ -62,7 +62,7 @@ namespace SR_CORE_NS {
         SR_HTYPES_NS::SharedPtr<Application> GetApplication() const;
 
     private:
-        SR_UTILS_NS::Vector<SR_HTYPES_NS::WeakPtr<Application>> m_applications;
+        SR_UTILS_NS::Vector<Application*> m_applications;
 
     };
 }
