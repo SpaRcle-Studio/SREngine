@@ -159,8 +159,12 @@ namespace SR_SCRIPTING_NS {
 
     SR_UTILS_NS::String AngelScriptBindings::Argument(const SR_UTILS_NS::Reflection::TypeInfo& info) const {
         const auto declaration = Declaration(info);
-        if (declaration.empty() || AngelScriptBindingHelpers::Primitive(info) || info.detailedType == "SharedPtr") {
+        if (declaration.empty() || AngelScriptBindingHelpers::Primitive(info)) {
             return declaration;
+        }
+
+        if (info.detailedType == "SharedPtr") {
+            return declaration + "+";
         }
 
         auto&& pType = FindType(info);
