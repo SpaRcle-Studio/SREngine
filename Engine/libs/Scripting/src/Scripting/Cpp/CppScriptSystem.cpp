@@ -57,7 +57,7 @@ namespace SR_SCRIPTING_NS {
 
         if (m_isCompilationEnabled && !InitEngineSources()) {
             SR_ERROR("CppScriptSystem::Init() : failed to initialize engine sources!");
-            return false;
+            m_isCompilationEnabled = false;
         }
 
         m_moduleManager = ModuleManager::MakeShared(this);
@@ -79,23 +79,18 @@ namespace SR_SCRIPTING_NS {
                 if (!SR_UTILS_NS::StoreUtils::User::GetBool("CompilerUserCanceled", false)) {
                     SR_ERROR("CppScriptSystem::Init() : failed to initialize c++ compiler!");
                 }
-                m_state = ScriptSystemState::Idle;
-                m_threadRunning = false;
-                return false;
+                m_isCompilationEnabled = false;
             }
-
-            if (!m_codeGenerator->Init()) {
+            else if (!m_codeGenerator->Init()) {
                 SR_ERROR("CppScriptSystem::Init() : failed to initialize code generator!");
-                m_state = ScriptSystemState::Idle;
-                m_threadRunning = false;
-                return false;
+                m_isCompilationEnabled = false;
             }
-
         }
-        else {
-            m_isInit = true;
+
+        if (!m_isCompilationEnabled) {
+            m_codeGenerator.AutoFree();
+            m_compiler.AutoFree();
             SR_LOG("CppScriptSystem::Init() : script compilation is disabled!");
-            return true;
         }
 
         SR_LOG("CppScriptSystem::Init() : script system initialized successfully!");

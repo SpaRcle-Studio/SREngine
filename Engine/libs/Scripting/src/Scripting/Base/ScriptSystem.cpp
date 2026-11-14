@@ -39,7 +39,6 @@ namespace SR_SCRIPTING_NS {
 
         if (!m_cppSystem->Init(compilationEnabled)) {
             m_cppSystem.AutoFree();
-
             return false;
         }
 
@@ -81,6 +80,7 @@ namespace SR_SCRIPTING_NS {
     void ScriptSystem::HandleFileSystemEvent(const SR_UTILS_NS::SubscriptionMessage& message, SR_UTILS_NS::FileSystemWatcher::EventType eventType) {
         SR_LOCK_GUARD;
         auto path = message.GetPathRef(SR_UTILS_NS::FileSystemWatcher::FILE_MSG_ID);
+        const SR_UTILS_NS::Path sourcePath = path;
         SR_UTILS_NS::VFS::Instance().UnResolvePath(path);
         path.Normalize();
 
@@ -117,12 +117,13 @@ namespace SR_SCRIPTING_NS {
             }, true);
         }
         else {
-            HandleFileEvent(path);
+            HandleFileEvent(sourcePath);
         }
     }
 
     void ScriptSystem::HandleFileEvent(SR_UTILS_NS::Path path) {
         SR_LOCK_GUARD;
+        const SR_UTILS_NS::Path sourcePath = path;
         SR_UTILS_NS::VFS::Instance().UnResolvePath(path);
         path.Normalize();
 
@@ -154,12 +155,13 @@ namespace SR_SCRIPTING_NS {
         }
 
         if (isCpp && m_cppSystem) {
-            m_cppSystem->HandleFileEvent(path);
+            const bool isModule = CppScriptSystem::ALLOWED_CPP_MODULE_EXTENSIONS.count(extension) > 0;
+            m_cppSystem->HandleFileEvent(isModule ? sourcePath : path);
         }
     }
 
     ScriptSystemState ScriptSystem::GetState() const {
-        return m_cppSystem ? m_cppSystem->GetState() : ScriptSystemState::InitialAnalyse;
+        return m_cppSystem ? m_cppSystem->GetState() : ScriptSystemState::Idle;
     }
 
     bool ScriptSystem::HasErrors() const {

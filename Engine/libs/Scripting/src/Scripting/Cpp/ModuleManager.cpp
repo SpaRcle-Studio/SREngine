@@ -87,7 +87,6 @@ namespace SR_SCRIPTING_NS {
         }
 
         SR_UTILS_NS::Path modulePath = path;
-        SR_UTILS_NS::VFS::Instance().UnResolvePath(modulePath);
 
         if (auto&& pLibraryHandle = LoadModule(modulePath)) {
             module.SetModuleHandle(pLibraryHandle);
