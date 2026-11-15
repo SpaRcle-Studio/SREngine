@@ -77,6 +77,9 @@ class CPPProperty:
         self.hidden = False
         self.private = False
         self.dontLoad = False
+        self.dontSave = False
+        self.dontClone = False
+        self.dontScript = False
         self.dontInitNull = False
         self.dont_save_tags = []
         self.virtual = False
@@ -148,6 +151,7 @@ class SpaRcleClass:
         self.inherited_classes = []
         self.is_help_source = False
         self.abstract = False
+        self.dontScript = False
         self.no_copyable = False
         self.no_movable = False
 

@@ -15,7 +15,7 @@
 namespace SR_CORE_GUI_NS {
     class Hierarchy;
 
-    /// @category(Editor)
+    /// @dontScript @category(Editor)
     class EditorGizmo final : public SR_GRAPH_UI_NS::Gizmo {
         SR_CLASS()
         using Super = SR_GRAPH_UI_NS::Gizmo;

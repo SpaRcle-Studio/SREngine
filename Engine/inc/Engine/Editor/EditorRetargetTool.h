@@ -14,6 +14,7 @@
 #include <Utils/ECS/EntityRef.h>
 
 namespace SR_CORE_NS {
+    /// @dontScript
     class EditorRetargetTool : public SR_UTILS_NS::Component {
         SR_CLASS()
         using Super = SR_UTILS_NS::Component;

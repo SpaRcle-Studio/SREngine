@@ -92,7 +92,7 @@ namespace SR_CORE_GUI_NS {
         bool isOverrideReverted = false;
     };
 
-    /// @abstract @noCopyable @noMovable
+    /// @abstract @noCopyable @noMovable @dontScript
     class PropertyDrawerBase : public SR_UTILS_NS::SRClass, public SR_HTYPES_NS::SharedPtr<PropertyDrawerBase> {
         SR_CLASS()
     public:

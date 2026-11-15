@@ -94,12 +94,12 @@ namespace SR_CORE_GUI_NS {
                 const float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth);
                 float_t widthNoArrow = totalWidth - ((!context.pValue && !context.noHeader) ? context.GetArrowWidth() : 0.f);
 
-                PropertyDrawerContext propertyContext = context;
+                m_tmpPropertyContext = context;
+                PropertyDrawerContext& propertyContext = *m_tmpPropertyContext;
                 propertyContext.pValue = nullptr;
                 propertyContext.fieldWidth = widthNoArrow * 0.7f;
                 propertyContext.fieldTitleWidth = widthNoArrow * 0.3f;
                 propertyContext.pOwner = pClassValue;
-                //propertyContext.pUID = value.IsRef() ? pClassValue : (static_cast<void*>(static_cast<uint64_t*>(propertyContext.pUID) + 1));
                 propertyContext.noHeader = false;
 
                 pMeta->ForEachProperty([&](auto&& property, uint64_t index) {

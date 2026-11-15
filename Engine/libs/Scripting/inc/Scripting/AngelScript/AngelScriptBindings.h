@@ -17,6 +17,8 @@
 
 #include <angelscript.h>
 
+#include <utility>
+
 namespace SR_SCRIPTING_NS {
     class AngelScriptBindings;
     struct SR_SCRIPTING_DLL_API AngelScriptNativeObject {
@@ -55,9 +57,11 @@ namespace SR_SCRIPTING_NS {
             };
 
             Call() = default;
-            explicit Call(const SR_UTILS_NS::Reflection::Property& initial)
-                : property(initial)
-            { }
+
+            explicit Call(SR_UTILS_NS::Reflection::Property initial)
+                : method()
+                , property(std::move(initial)) {
+            }
 
             AngelScriptBindings* pBindings = nullptr;
             Type* pOwner = nullptr;
@@ -71,15 +75,13 @@ namespace SR_SCRIPTING_NS {
             Frame* AddFrame();
             ~Call();
         };
-
+    public:
         explicit AngelScriptBindings(asIScriptEngine* pEngine);
         ~AngelScriptBindings() override;
-        bool RegisterFactory();
-        const SR_UTILS_NS::Vector<Type*>& GetTypes() const {
-            return m_types;
-        }
 
     public:
+        bool RegisterFactory();
+
         SR_UTILS_NS::String Declaration(const SR_UTILS_NS::Reflection::TypeInfo& info) const;
         Type* FindType(int32_t typeId) const;
         Type* FindType(const SR_UTILS_NS::Reflection::TypeInfo& info) const;
@@ -90,9 +92,9 @@ namespace SR_SCRIPTING_NS {
         bool CopyTo(const SR_UTILS_NS::Reflection::Value& source, SR_UTILS_NS::Reflection::Value& destination) const;
         SR_UTILS_NS::Reflection::Value CopyValue(const SR_UTILS_NS::Reflection::Value& source) const;
         SR_UTILS_NS::Reflection::Value ReadProperty(asIScriptObject* pObject, uint32_t index) const;
+        const SR_UTILS_NS::Vector<Type*>& GetTypes() const { return m_types; }
         bool WriteProperty(asIScriptObject* pObject, uint32_t index, const SR_UTILS_NS::Reflection::Value& value) const;
         void Forget(AngelScriptNativeObject* pObject) const;
-
 
     public:
         const void* GetStringConstant(const char* pData, asUINT length) override;

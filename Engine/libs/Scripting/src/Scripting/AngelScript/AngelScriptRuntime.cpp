@@ -17,8 +17,9 @@
 #include <Utils/TypeTraits/Factory.h>
 #include <Utils/Events/Broadcaster.h>
 #include <Utils/FileSystem/VFS.h>
-#include <Utils/Memory/Allocator.h>
 #include <Utils/Common/StringAtomLiterals.h>
+#include <Utils/Memory/MemoryLiterals.h>
+
 #include <scriptbuilder.h>
 
 namespace SR_SCRIPTING_NS {
@@ -142,10 +143,20 @@ namespace SR_SCRIPTING_NS {
 
     void AngelScriptRuntime::GeneratePredefined(const SR_UTILS_NS::String& behaviourDeclaration) const {
         SR_TRACY_ZONE;
-        SR_UTILS_NS::String api = "// Generated from the registered AngelScript API. Do not edit.\n\n";
+
+        SR_UTILS_NS::String api;
+        SR_UTILS_NS::Vector<asITypeInfo*> objectTypes;
+        SR_UTILS_NS::SortedVector<int32_t> exportedTypes;
+        SR_UTILS_NS::String tmpBuffer;
+        tmpBuffer.reserve(128);
+        api.reserve(512_KiB);
+        api += "// Generated from the registered AngelScript API. Do not edit.\n\n";
+
         auto openNamespace = [&api](const char* pNamespace) {
             if (pNamespace && *pNamespace) {
-                api += "namespace " + SR_UTILS_NS::String(pNamespace) + " {\n";
+                api += "namespace ";
+                api += pNamespace;
+                api += " {\n";
             }
         };
         auto closeNamespace = [&api](const char* pNamespace) {
@@ -158,18 +169,21 @@ namespace SR_SCRIPTING_NS {
         for (uint32_t i = 0; i < m_pEngine->GetEnumCount(); ++i) {
             auto&& pType = m_pEngine->GetEnumByIndex(i);
             openNamespace(pType->GetNamespace());
-            api += "enum " + SR_UTILS_NS::String(pType->GetName()) + " {\n";
+            api += "enum ";
+            api += pType->GetName();
+            api += " {\n";
             for (uint32_t j = 0; j < pType->GetEnumValueCount(); ++j) {
                 asINT64 value = 0;
-                const SR_UTILS_NS::String name = pType->GetEnumValueByIndex(j, &value);
-                api += "    {} = {},\n"_format(name, value);
+                const auto name = pType->GetEnumValueByIndex(j, &value);
+                SR_UTILS_NS::FormatTo(api, "    {} = {},\n", name, value);
             }
             api += "}\n";
             closeNamespace(pType->GetNamespace());
         }
 
-        SR_UTILS_NS::Vector<asITypeInfo*> objectTypes;
-        SR_UTILS_NS::Set<int32_t> exportedTypes;
+        objectTypes.reserve(m_pEngine->GetObjectTypeCount() + m_pBindings->GetTypes().size());
+        exportedTypes.reserve(objectTypes.capacity());
+
         for (uint32_t i = 0; i < m_pEngine->GetObjectTypeCount(); ++i) {
             auto&& pType = m_pEngine->GetObjectTypeByIndex(i);
             objectTypes.emplace_back(pType);
@@ -177,18 +191,19 @@ namespace SR_SCRIPTING_NS {
         }
         for (auto&& pBindingType : m_pBindings->GetTypes()) {
             auto&& pType = m_pEngine->GetTypeInfoById(pBindingType->scriptTypeId);
-            if (pType && pBindingType->pTypeInfo->category != SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum &&
-                exportedTypes.insert(pType->GetTypeId()).second) {
+            if (pType && pBindingType->pTypeInfo->category != SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum && exportedTypes.insert(pType->GetTypeId())) {
                 objectTypes.emplace_back(pType);
             }
         }
 
         for (auto&& pType : objectTypes) {
             openNamespace(pType->GetNamespace());
-            api += "class " + SR_UTILS_NS::String(m_pEngine->GetTypeDeclaration(pType->GetTypeId(), false));
+            api += "class ";
+            api += m_pEngine->GetTypeDeclaration(pType->GetTypeId(), false);
             bool hasBase = false;
             if (auto&& pBase = pType->GetBaseType()) {
-                api += " : " + SR_UTILS_NS::String(m_pEngine->GetTypeDeclaration(pBase->GetTypeId(), true));
+                api += " : ";
+                api += m_pEngine->GetTypeDeclaration(pBase->GetTypeId(), true);
                 hasBase = true;
             }
             for (uint32_t j = 0; j < pType->GetInterfaceCount(); ++j) {
@@ -198,28 +213,39 @@ namespace SR_SCRIPTING_NS {
             }
             api += " {\n";
             for (uint32_t j = 0; j < pType->GetFactoryCount(); ++j) {
-                const SR_UTILS_NS::String declaration = pType->GetFactoryByIndex(j)->GetDeclaration(false, true, true);
-                const auto params = declaration.find('(');
+                tmpBuffer = pType->GetFactoryByIndex(j)->GetDeclaration(false, true, true);
+                const auto params = tmpBuffer.find('(');
                 if (params != SR_UTILS_NS::String::npos) {
-                    api += "    " + SR_UTILS_NS::String(pType->GetName()) + declaration.substr(params) + ";\n";
+                    api += "    ";
+                    api += pType->GetName();
+                    api += tmpBuffer.ToStringView().substr(params);
+                    api += ";\n";
                 }
             }
             for (uint32_t j = 0; j < pType->GetBehaviourCount(); ++j) {
                 asEBehaviours behaviour;
                 auto&& pFunction = pType->GetBehaviourByIndex(j, &behaviour);
                 if (behaviour == asBEHAVE_CONSTRUCT || behaviour == asBEHAVE_DESTRUCT) {
-                    api += "    " + SR_UTILS_NS::String(pFunction->GetDeclaration(false, true, true)) + ";\n";
+                    api += "    ";
+                    api += pFunction->GetDeclaration(false, true, true);
+                    api += ";\n";
                 }
             }
             for (uint32_t j = 0; j < pType->GetMethodCount(); ++j) {
                 auto&& pMethod = pType->GetMethodByIndex(j);
-                api += "    " + SR_UTILS_NS::String(pMethod->GetDeclaration(false, true, true)) + (pMethod->IsProperty() ? " property;\n" : ";\n");
+                api += "    ";
+                api += pMethod->GetDeclaration(false, true, true);
+                api += pMethod->IsProperty() ? " property;\n" : ";\n";
             }
             for (uint32_t j = 0; j < pType->GetPropertyCount(); ++j) {
-                api += "    " + SR_UTILS_NS::String(pType->GetPropertyDeclaration(j, true)) + ";\n";
+                api += "    ";
+                api += pType->GetPropertyDeclaration(j, true);
+                api += ";\n";
             }
             for (uint32_t j = 0; j < pType->GetChildFuncdefCount(); ++j) {
-                api += "    funcdef " + SR_UTILS_NS::String(pType->GetChildFuncdef(j)->GetFuncdefSignature()->GetDeclaration(false, true, true)) + ";\n";
+                api += "    funcdef ";
+                api += pType->GetChildFuncdef(j)->GetFuncdefSignature()->GetDeclaration(false, true, true);
+                api += ";\n";
             }
             api += "}\n";
             closeNamespace(pType->GetNamespace());
@@ -228,8 +254,11 @@ namespace SR_SCRIPTING_NS {
         for (uint32_t i = 0; i < m_pEngine->GetTypedefCount(); ++i) {
             auto&& pType = m_pEngine->GetTypedefByIndex(i);
             openNamespace(pType->GetNamespace());
-            api += "typedef " + SR_UTILS_NS::String(m_pEngine->GetTypeDeclaration(pType->GetUnderlyingTypeId(), true))
-                + " " + pType->GetName() + ";\n";
+            api += "typedef ";
+            api += m_pEngine->GetTypeDeclaration(pType->GetUnderlyingTypeId(), true);
+            api += " ";
+            api += pType->GetName();
+            api += ";\n";
             closeNamespace(pType->GetNamespace());
         }
         for (uint32_t i = 0; i < m_pEngine->GetFuncdefCount(); ++i) {
@@ -238,13 +267,16 @@ namespace SR_SCRIPTING_NS {
                 continue;
             }
             openNamespace(pType->GetNamespace());
-            api += "funcdef " + SR_UTILS_NS::String(pType->GetFuncdefSignature()->GetDeclaration(false, true, true)) + ";\n";
+            api += "funcdef ";
+            api += pType->GetFuncdefSignature()->GetDeclaration(false, true, true);
+            api += ";\n";
             closeNamespace(pType->GetNamespace());
         }
         for (uint32_t i = 0; i < m_pEngine->GetGlobalFunctionCount(); ++i) {
             auto&& pFunction = m_pEngine->GetGlobalFunctionByIndex(i);
             openNamespace(pFunction->GetNamespace());
-            api += SR_UTILS_NS::String(pFunction->GetDeclaration(false, false, true)) + ";\n";
+            api += pFunction->GetDeclaration(false, false, true);
+            api += ";\n";
             closeNamespace(pFunction->GetNamespace());
         }
         for (uint32_t i = 0; i < m_pEngine->GetGlobalPropertyCount(); ++i) {
@@ -257,7 +289,10 @@ namespace SR_SCRIPTING_NS {
             if (isConst) {
                 api += "const ";
             }
-            api += SR_UTILS_NS::String(m_pEngine->GetTypeDeclaration(typeId, true)) + " " + pName + ";\n";
+            api += m_pEngine->GetTypeDeclaration(typeId, true);
+            api += " ";
+            api += pName;
+            api += ";\n";
             closeNamespace(pNamespace);
         }
         api += behaviourDeclaration;
@@ -291,8 +326,10 @@ namespace SR_SCRIPTING_NS {
         }
 
         auto&& pFunction = pContext->GetExceptionFunction();
+
         SR_ERROR("AngelScriptRuntime::Execute() : AngelScript execution failed ({}): {} at {}:{}",
-        result, pContext->GetExceptionString(), pFunction ? pFunction->GetDeclaration() : "<unknown>", pContext->GetExceptionLineNumber());
+            result, pContext->GetExceptionString(), pFunction ? pFunction->GetDeclaration() : "<unknown>", pContext->GetExceptionLineNumber()
+        );
 
         return false;
     }

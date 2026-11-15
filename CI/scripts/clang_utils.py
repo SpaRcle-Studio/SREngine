@@ -467,6 +467,7 @@ def process_property(property_obj: reflection_utils.CPPProperty, clang_child):
     property_obj.dontLoad = has_special_tag_comment(clang_child, 'dontLoad')
     property_obj.dontSave = has_special_tag_comment(clang_child, 'dontSave')
     property_obj.dontClone = has_special_tag_comment(clang_child, 'dontClone')
+    property_obj.dontScript = has_special_tag_comment(clang_child, 'dontScript')
 
     if property_obj.dontSave:
         property_obj.dontLoad = True
@@ -610,6 +611,7 @@ def parse_sparcle_class(logger, context: codegen_context.CodegenContext, parent_
 
         class_obj.hidden = has_special_tag_comment(parent_node, 'hidden')
         class_obj.abstract = has_special_tag_comment(parent_node, 'abstract')
+        class_obj.dontScript = has_special_tag_comment(parent_node, 'dontScript')
         class_obj.no_copyable = has_special_tag_comment(parent_node, 'noCopyable')
         class_obj.no_movable = has_special_tag_comment(parent_node, 'noMovable')
 

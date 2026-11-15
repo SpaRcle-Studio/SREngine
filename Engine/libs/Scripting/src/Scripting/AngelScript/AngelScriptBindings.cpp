@@ -261,7 +261,7 @@ namespace SR_SCRIPTING_NS {
         if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Object) {
             pType->pMeta = SR_UTILS_NS::Factory::Instance().GetType(info.detailedType);
 
-            if (!pType->pMeta) {
+            if (!pType->pMeta || pType->pMeta->IsDontScript()) {
                 delete pType;
                 return nullptr;
             }
@@ -294,6 +294,9 @@ namespace SR_SCRIPTING_NS {
         SR_UTILS_NS::Reflection::FreeTypeInfo(pStringType);
 
         SR_UTILS_NS::Factory::Instance().ForEachClass([this](const SR_UTILS_NS::SRClassMeta* pMeta) {
+            if (pMeta->IsDontScript()) {
+                return;
+            }
             // C++ gameplay DLLs can be unloaded; do not retain their function pointers in the VM.
             if (pMeta->IsSameOrInherited("CppBehaviour")) {
                 return;
@@ -638,7 +641,9 @@ namespace SR_SCRIPTING_NS {
         });
         type.pMeta->ForEachProperty([&](const SR_UTILS_NS::Reflection::Property& property, uint64_t) {
             if (!success || property.GetPublicity() == SR_UTILS_NS::PropertyPublicity::Hidden ||
-                property.GetPublicity() == SR_UTILS_NS::PropertyPublicity::HiddenReadOnly) {
+                property.GetPublicity() == SR_UTILS_NS::PropertyPublicity::HiddenReadOnly ||
+                property.IsDontScript()
+            ) {
                 return;
             }
 

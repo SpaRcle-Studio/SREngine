@@ -174,6 +174,9 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
         if prop.setter:
             f.write('\n' + '\t' * (tabs + 3) + f'.SetHasExplicitSetter({"true" if prop.setter else "false"})')
 
+        if prop.dontScript:
+            f.write('\n' + '\t' * (tabs + 3) + '.SetDontScript(true)')
+
         f.write('\n' + '\t' * (tabs + 3) + f'.SetSetter(&SRClassMetaTemplate::Set_{prop.name})')
         f.write('\n' + '\t' * (tabs + 3) + f'.SetGetter(&SRClassMetaTemplate::Get_{prop.name})')
 
@@ -615,6 +618,9 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
     abstract_str = 'true' if class_obj.abstract else f'std::is_abstract_v<{class_name}>'
     f.write('\t' * tabs + f'SR_NODISCARD bool IsAbstract() const noexcept final {{ return {abstract_str}; }}' + '\n\n')
     f.write('\t' * tabs + f'SR_NODISCARD bool IsHidden() const noexcept final {{ return { "true" if class_obj.hidden else "false" }; }}' + '\n\n')
+
+    if class_obj.dontScript:
+        f.write('\t' * tabs + f'SR_NODISCARD bool IsDontScript() const noexcept final {{ return true; }}' + '\n\n')
 
     if class_obj.version:
         f.write('\t' * tabs + f'SR_NODISCARD uint64_t GetVersionImpl() const noexcept final {{ return {class_obj.version}; }}' + '\n\n')
