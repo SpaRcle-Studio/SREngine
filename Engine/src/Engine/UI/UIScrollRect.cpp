@@ -3,72 +3,105 @@
 //
 
 #include <Engine/UI/UIScrollRect.h>
-
-#include <Utils/Input/InputSystem.h>
-
 #include <Codegen/UIScrollRect.generated.hpp>
 
 namespace SR_CORE_UI_NS {
-    void UIScrollRect::Update(float_t dt) {
-        SR_TRACY_ZONE;
-        Super::Update(dt);
-
-        auto&& pContentTransform = SR_UTILS_NS::ExtractTransformAs<SR_UTILS_NS::TransformRect>(m_content.GetRaw());
-        auto&& pViewportTransform = SR_UTILS_NS::ExtractTransformAs<SR_UTILS_NS::TransformRect>(m_viewport.GetRaw());
-        auto&& pCanvas = FindCanvas(GetSceneObject().Get());
-
-        if (!pContentTransform || !pViewportTransform || !pCanvas) {
+    void UIScrollRect::SetNormalizedPosition(const SR_MATH_NS::FVector2& position) {
+        if (!std::isfinite(position.x) || !std::isfinite(position.y)) {
+            SR_ERROR("UIScrollRect::SetNormalizedPosition() : non-finite position");
             return;
         }
+        m_normalizedPosition = { std::clamp(position.x, 0.f, 1.f), std::clamp(position.y, 0.f, 1.f) };
+        if (auto pBar = m_horizontalScrollBar.Get()) {
+            pBar->SetValue(m_normalizedPosition.x);
+        }
+        if (auto pBar = m_verticalScrollBar.Get()) {
+            pBar->SetValue(m_normalizedPosition.y);
+        }
+        AfterLayout();
+    }
 
-        UIScrollBar* pHScrollBar = m_horizontalScrollBar.GetRaw();
-        UIScrollBar* pVScrollBar = m_verticalScrollBar.GetRaw();
-
-        const auto contentSize  = pContentTransform->GetLayoutRect().Size();
-        const auto viewportSize = pViewportTransform->GetLayoutRect().Size();
-
-        const SR_MATH_NS::FVector2 scrollableSize = {
-            std::max(0.f, contentSize.x - viewportSize.x),
-            std::max(0.f, contentSize.y - viewportSize.y)
-        };
-
-        auto&& input = SR_UTILS_NS::Input::Instance();
-
-        if (const int32_t wheel = input.GetMouseWheel()) {
-            if (pVScrollBar && pCanvas->ContainsScreenPoint(*pViewportTransform, input.GetMousePos())) {
-                float value = pVScrollBar->GetValue();
-                value -= wheel * 0.1f;
-                pVScrollBar->SetValue(std::clamp(value, 0.f, 1.f));
-
-                float yOffset = scrollableSize.y * (value);
-                auto pos = pContentTransform->GetAnchoredPosition();
-                pos.y = yOffset;
-                pContentTransform->SetAnchoredPosition(pos);
+    void UIScrollRect::AfterLayout() {
+        SR_TRACY_ZONE;
+        auto&& pContent = SR_UTILS_NS::ExtractTransformAs<SR_UTILS_NS::TransformRect>(m_content.GetRaw());
+        auto&& pViewport = SR_UTILS_NS::ExtractTransformAs<SR_UTILS_NS::TransformRect>(m_viewport.GetRaw());
+        if (!pContent || !pViewport || pContent->GetGlobalScale().HasZero() || pViewport->GetGlobalScale().HasZero()) {
+            return;
+        }
+        const auto contentRect = pContent->GetLayoutRect();
+        const auto viewportRect = pViewport->GetLayoutRect();
+        const auto contentToViewport = pViewport->GetMatrix().Inverse() * pContent->GetMatrix();
+        SR_MATH_NS::FVector2 minimum(std::numeric_limits<float_t>::max());
+        SR_MATH_NS::FVector2 maximum(std::numeric_limits<float_t>::lowest());
+        for (uint32_t i = 0; i < 4; ++i) {
+            const auto point = contentToViewport.TransformPoint({ i & 1 ? contentRect.Right() : contentRect.Left(), i & 2 ? contentRect.Top() : contentRect.Bottom(), 0.f });
+            minimum.x = std::min(minimum.x, point.x);
+            minimum.y = std::min(minimum.y, point.y);
+            maximum.x = std::max(maximum.x, point.x);
+            maximum.y = std::max(maximum.y, point.y);
+        }
+        const auto contentSize = maximum - minimum;
+        const auto viewportSize = viewportRect.Size();
+        m_overflow = { std::max(0.f, contentSize.x - viewportSize.x), std::max(0.f, contentSize.y - viewportSize.y) };
+        if (auto pBar = m_horizontalScrollBar.Get()) {
+            pBar->SetSize(contentSize.x > 0.f ? std::clamp(viewportSize.x / contentSize.x, 0.f, 1.f) : 1.f);
+            m_normalizedPosition.x = pBar->GetValue();
+        }
+        if (auto pBar = m_verticalScrollBar.Get()) {
+            pBar->SetSize(contentSize.y > 0.f ? std::clamp(viewportSize.y / contentSize.y, 0.f, 1.f) : 1.f);
+            m_normalizedPosition.y = pBar->GetValue();
+        }
+        const SR_MATH_NS::FVector3 delta(
+            m_horizontal ? viewportRect.Left() - m_overflow.x * m_normalizedPosition.x - minimum.x : 0.f,
+            m_vertical ? viewportRect.Top() + m_overflow.y * m_normalizedPosition.y - maximum.y : 0.f,
+            0.f);
+        if (auto&& pParent = pContent->GetParentTransform()) {
+            const auto viewportToParent = pParent->GetMatrix().Inverse() * pViewport->GetMatrix();
+            const auto converted = viewportToParent.TransformPoint(delta) - viewportToParent.TransformPoint(SR_MATH_NS::FVector3::Zero());
+            auto position = pContent->GetAnchoredPosition();
+            position.x += converted.x;
+            position.y += converted.y;
+            if (std::abs(converted.x) > 0.001f || std::abs(converted.y) > 0.001f) {
+                pContent->SetAnchoredPosition(position);
             }
         }
+    }
 
-        if (pVScrollBar) {
-            float value = pVScrollBar->GetValue();
-            float yOffset = scrollableSize.y * (value);
-
-            auto pos = pContentTransform->GetAnchoredPosition();
-            pos.y = yOffset;
-            pContentTransform->SetAnchoredPosition(pos);
-
-            float size = viewportSize.y / contentSize.y;
-            pVScrollBar->SetSize(std::clamp(size, 0.f, 1.f));
+    void UIScrollRect::PointerDown(const SR_UTILS_NS::PointerEvent& event) {
+        auto&& pCanvas = FindCanvas(GetSceneObject().Get());
+        auto&& pViewport = SR_UTILS_NS::ExtractTransformAs<SR_UTILS_NS::TransformRect>(m_viewport.GetRaw());
+        if (pCanvas && pViewport) {
+            m_dragStart = pCanvas->CanvasToLayoutPoint(*pViewport, pCanvas->PointerToCanvasSpace(event));
+            m_dragNormalized = m_normalizedPosition;
         }
+    }
 
-        if (pHScrollBar) {
-            float value = pHScrollBar->GetValue();
-            float xOffset = scrollableSize.x * (value);
-
-            auto pos = pContentTransform->GetAnchoredPosition();
-            pos.x = xOffset;
-            pContentTransform->SetAnchoredPosition(pos);
-
-            float size = viewportSize.x / contentSize.x;
-            pHScrollBar->SetSize(std::clamp(size, 0.f, 1.f));
+    void UIScrollRect::PointerDrag(const SR_UTILS_NS::PointerEvent& event) {
+        auto&& pCanvas = FindCanvas(GetSceneObject().Get());
+        auto&& pViewport = SR_UTILS_NS::ExtractTransformAs<SR_UTILS_NS::TransformRect>(m_viewport.GetRaw());
+        if (!pCanvas || !pViewport) {
+            return;
         }
+        const auto delta = pCanvas->CanvasToLayoutPoint(*pViewport, pCanvas->PointerToCanvasSpace(event)) - m_dragStart;
+        auto normalized = m_dragNormalized;
+        if (m_horizontal && m_overflow.x > 0.f) {
+            normalized.x -= delta.x / m_overflow.x;
+        }
+        if (m_vertical && m_overflow.y > 0.f) {
+            normalized.y += delta.y / m_overflow.y;
+        }
+        SetNormalizedPosition(normalized);
+    }
+
+    bool UIScrollRect::Scroll(const SR_MATH_NS::FVector2& delta) {
+        auto normalized = m_normalizedPosition;
+        if (m_horizontal) {
+            normalized.x -= delta.x * m_scrollSensitivity;
+        }
+        if (m_vertical) {
+            normalized.y -= delta.y * m_scrollSensitivity;
+        }
+        SetNormalizedPosition(normalized);
+        return true;
     }
 }

@@ -36,7 +36,7 @@ namespace SR_AUDIO_NS {
         playParams.maxDistance = 50.f;
         playParams.referenceDistance = 1.f;
         playParams.rolloffFactor = 1.f;
-        playParams.relative = 360.f;
+        playParams.relative = 0.f;
         playParams.gain = 1.f;
         playParams.minGain = 0.f;
         playParams.pitch = 1.f;
@@ -79,7 +79,7 @@ namespace SR_AUDIO_NS {
         ApplyParam(pSource, params.orientation, PlayParamType::Orientation);
         ApplyParam(pSource, params.pitch, PlayParamType::Pitch);
         ApplyParam(pSource, params.position, PlayParamType::Position);
-        //ApplyParam(pSource, params.relative, PlayParamType::Relative);
+        ApplyParam(pSource, params.relative, PlayParamType::Relative);
         ApplyParam(pSource, params.uniqueId, PlayParamType::UniqueId);
         //ApplyParam(pSource, params.velocity, PlayParamType::Velocity);
         ApplyParam(pSource, params.maxDistance, PlayParamType::MaxDistance);

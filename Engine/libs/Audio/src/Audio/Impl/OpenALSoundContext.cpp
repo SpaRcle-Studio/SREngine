@@ -10,6 +10,20 @@
 #include <AL/alext.h>
 
 namespace SR_AUDIO_NS {
+    void OpenALSoundContext::Pause(SoundSource pSource) {
+        SR_AL_CALL(alSourcePause, *static_cast<ALuint*>(pSource));
+    }
+
+    bool OpenALSoundContext::Seek(SoundSource pSource, float_t seconds) {
+        return SR_AL_CALL(alSourcef, *static_cast<ALuint*>(pSource), AL_SEC_OFFSET, seconds);
+    }
+
+    float_t OpenALSoundContext::GetPlaybackPosition(SoundSource pSource) const {
+        float_t seconds = 0.f;
+        SR_AL_CALL(alGetSourcef, *static_cast<ALuint*>(pSource), AL_SEC_OFFSET, &seconds);
+        return seconds;
+    }
+
     OpenALSoundContext::OpenALSoundContext(SoundDevice *pDevice)
         : SoundContext(pDevice)
     { }
@@ -123,7 +137,24 @@ namespace SR_AUDIO_NS {
     void OpenALSoundContext::Play(SoundSource source) {
         ALuint* alSource = reinterpret_cast<ALuint*>(source);
 
-        alSourcePlay(*alSource);
+        if (!SR_AL_CALL(alSourcePlay, *alSource)) {
+            SR_ERROR("OpenALSoundContext::Play() : failed to start source {}", *alSource);
+            return;
+        }
+        ALint state = AL_INITIAL;
+        ALint buffer = 0;
+        ALint bytes = 0;
+        ALfloat gain = 0.f;
+        ALfloat listenerGain = 0.f;
+        ALfloat pitch = 0.f;
+        SR_AL_CALL(alGetSourcei, *alSource, AL_SOURCE_STATE, &state);
+        SR_AL_CALL(alGetSourcei, *alSource, AL_BUFFER, &buffer);
+        SR_AL_CALL(alGetBufferi, buffer, AL_SIZE, &bytes);
+        SR_AL_CALL(alGetSourcef, *alSource, AL_GAIN, &gain);
+        SR_AL_CALL(alGetSourcef, *alSource, AL_PITCH, &pitch);
+        SR_AL_CALL(alGetListenerf, AL_GAIN, &listenerGain);
+        SR_INFO("OpenALSoundContext::Play() : source={}, playing={}, bytes={}, gain={}, listenerGain={}, pitch={}",
+            *alSource, state == AL_PLAYING, bytes, gain, listenerGain, pitch);
     }
 
     bool OpenALSoundContext::MakeContextCurrent() {
@@ -157,6 +188,9 @@ namespace SR_AUDIO_NS {
         //alSourcei(*alSource, AL_DISTANCE_MODEL, AL_INVERSE_DISTANCE_CLAMPED);
 
         switch (paramType) {
+            case PlayParamType::Relative:
+                SR_AL_CALL(alSourcei, *alSource, AL_SOURCE_RELATIVE, *(const float_t*)pValue != 0.f ? AL_TRUE : AL_FALSE);
+                break;
             case PlayParamType::Pitch:
                 SR_AL_CALL(alSourcef, *alSource, AL_PITCH, *(float_t*)pValue);
                 break;
@@ -194,7 +228,7 @@ namespace SR_AUDIO_NS {
                 SR_AL_CALL(alSourcef, *alSource, AL_MAX_GAIN, *(float_t*)pValue);
                 break;
             case PlayParamType::Orientation:
-                SR_AL_CALL(alSourcefv, *alSource, AL_ORIENTATION, (float_t*)pValue);
+                // OpenAL sources use AL_DIRECTION; AL_ORIENTATION belongs to the listener.
                 break;
             case PlayParamType::ReferenceDistance:
                 SR_AL_CALL(alSourcef, *alSource, AL_REFERENCE_DISTANCE, *(float_t*)pValue);

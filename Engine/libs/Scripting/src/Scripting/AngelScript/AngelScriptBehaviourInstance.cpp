@@ -82,6 +82,7 @@ namespace SR_SCRIPTING_NS {
 
         m_contexts.clear();
         m_meta.properties.clear();
+        m_eventMethods.clear();
 
         if (m_pObject) {
             m_pObject->Release();
@@ -144,6 +145,14 @@ namespace SR_SCRIPTING_NS {
             return;
         }
 
+        auto&& pType = m_pObject->GetObjectType();
+        for (uint32_t i = 0; i < pType->GetMethodCount(); ++i) {
+            auto&& pMethod = pType->GetMethodByIndex(i);
+            if (pMethod->GetReturnTypeId() == asTYPEID_VOID && pMethod->GetParamCount() == 0) {
+                m_eventMethods.insert(SR_UTILS_NS::StringAtom(pMethod->GetName()), pMethod);
+            }
+        }
+
         const auto editIndex = static_cast<uint32_t>(Callback::ExecuteInEditMode);
 
         if (!m_pMethods[editIndex]) {
@@ -184,6 +193,28 @@ namespace SR_SCRIPTING_NS {
             return true;
         }
 
+        return ExecuteMethod(pMethod, pArgument, floating, pReturnValue);
+    }
+
+    bool AngelScriptBehaviourInstance::InvokeEvent(SR_UTILS_NS::StringAtom method) {
+        SR_TRACY_ZONE;
+        if (!m_pObject || method.empty()) {
+            SR_ERROR("AngelScriptBehaviourInstance::InvokeEvent() : unavailable target or empty method on {}", m_name);
+            return false;
+        }
+
+        const auto found = m_eventMethods.find(method);
+
+        if (found == m_eventMethods.end() || !found->second) {
+            SR_ERROR("AngelScriptBehaviourInstance::InvokeEvent() : expected void {}() on {}", method, m_name);
+            return false;
+        }
+
+        return ExecuteMethod(found->second);
+    }
+
+    bool AngelScriptBehaviourInstance::ExecuteMethod(asIScriptFunction* pMethod, const void* pArgument, bool floating, bool* pReturnValue) const {
+        SR_TRACY_ZONE;
         if (m_contextDepth == m_contexts.size()) {
             m_contexts.emplace_back(m_pRuntime->GetEngine()->CreateContext());
         }

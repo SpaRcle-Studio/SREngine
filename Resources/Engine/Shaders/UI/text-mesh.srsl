@@ -10,10 +10,15 @@ PolygonMode Fill;
 DepthCompare LessOrEqual;
 PrimitiveTopology TriangleList;
 BlendEnabled true;
-DepthWrite true;
+DepthWrite false;
 DepthTest true;
 
 [[shared]] vec2 UV;
+[[shared]] vec4 glyphColor;
+[[shared]] vec4 glyphMetadata;
+
+[[uniform]] float textVisible;
+[[uniform]] vec4 textEffect;
 
 [[uniform], [public]] vec3 color = vec3(1.0, 1.0, 1.0);
 [[uniform], [public]] sampler2D diffuse;
@@ -23,14 +28,25 @@ float median(float r, float g, float b) {
 }
 
 void fragment() {
-    vec4 tex = texture(diffuse, UV);
-
-    /// Только MSDF по RGB; смешивание с tex.a давало вторую «рамку» по периметру quad.
-    float msd = median(tex.r, tex.g, tex.b);
-
-    float w = max(fwidth(msd), 1.0 / 1024.0);
-    float alpha = smoothstep(0.5 - w, 0.5 + w, msd);
-    COLOR = vec4(color, alpha);
+    if (glyphMetadata.x >= textVisible) {
+        discard;
+    }
+    if (glyphMetadata.w == 1.0) {
+        COLOR = vec4(color * glyphColor.rgb, glyphColor.a);
+    }
+    else {
+        vec4 tex = texture(diffuse, UV);
+        float msd = glyphMetadata.w == 2.0 || glyphMetadata.w == 4.0 ? tex.r : median(tex.r, tex.g, tex.b);
+        float w = max(fwidth(msd), 1.0 / 1024.0);
+        float threshold = 0.5 - glyphMetadata.y * 0.055;
+        float alpha = glyphMetadata.w == 4.0 ? tex.r : smoothstep(threshold - w, threshold + w, msd);
+        if (glyphMetadata.w == 3.0) {
+            COLOR = tex * glyphColor * vec4(color, 1.0);
+        }
+        else {
+            COLOR = vec4(color * glyphColor.rgb, alpha * glyphColor.a);
+        }
+    }
 
 #ifdef SR_DEFINE_WIREFRAME
     COLOR = vec4(1.0, 0.0, 0.0, 1.0);
@@ -49,5 +65,14 @@ void vertex() {
 
     UV = mix(UV1, UV2, sprite_vertices[VERTEX_INDEX]);
     vec2 pos = NDC_RECT.xy + POSITION0 + sprite_vertices[VERTEX_INDEX] * (POSITION1 - POSITION0);
+    glyphColor = COLOR0;
+    glyphMetadata = CUSTOM0;
+    if (CUSTOM0.w != 1.0) {
+        pos.x += CUSTOM0.z * (sprite_vertices[VERTEX_INDEX].y - 0.5) * (POSITION1.y - POSITION0.y) * 0.2;
+        float index = CUSTOM1.x;
+        pos.y += sin(textEffect.x * textEffect.w + index * 0.7) * textEffect.y;
+        float tick = floor(textEffect.x * max(1.0, textEffect.w));
+        pos += vec2(sin(index * 12.9898 + tick * 78.233), cos(index * 39.346 + tick * 11.135)) * textEffect.z;
+    }
     OUT_POSITION = PIXEL_ORTHOGONAL_MATRIX * MODEL_MATRIX * vec4(pos, 0.0, 1.0);
 }

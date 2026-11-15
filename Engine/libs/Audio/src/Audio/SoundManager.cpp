@@ -14,6 +14,76 @@
 #include <Utils/Resources/ResourceManager.h>
 
 namespace SR_AUDIO_NS {
+    bool SoundManager::SetPaused(Handle pHandle, bool paused) {
+        SR_TRACY_ZONE;
+        return m_thread && m_thread->Execute([this, pHandle, paused]() {
+            for (auto&& pData : m_playStack) {
+                if (pData->pHandle == pHandle) {
+                    pData->isPaused = paused;
+                    if (pData->pSource) {
+                        if (paused) {
+                            pData->pData->pContext->Pause(pData->pSource);
+                        }
+                        else {
+                            pData->pData->pContext->Play(pData->pSource);
+                        }
+                    }
+                    return true;
+                }
+            }
+            return false;
+        });
+    }
+
+    bool SoundManager::Seek(Handle pHandle, float_t seconds) {
+        SR_TRACY_ZONE;
+        if (!std::isfinite(seconds) || seconds < 0.f) {
+            return false;
+        }
+        return m_thread && m_thread->Execute([this, pHandle, seconds]() {
+            for (auto&& pData : m_playStack) {
+                if (pData->pHandle == pHandle) {
+                    const auto bytesPerSecond = static_cast<double_t>(pData->pSound->GetSampleRate()) * pData->pSound->GetChannels() * pData->pSound->GetBitsPerSample() / 8.0;
+                    const auto duration = bytesPerSecond > 0.0 ? pData->pSound->GetBufferSize() / bytesPerSecond : 0.0;
+                    if (seconds >= duration) {
+                        return false;
+                    }
+                    pData->offset = seconds;
+                    return !pData->pSource || pData->pData->pContext->Seek(pData->pSource, seconds);
+                }
+            }
+            return false;
+        });
+    }
+
+    float_t SoundManager::GetPlaybackPosition(Handle pHandle) const {
+        SR_TRACY_ZONE;
+        float_t result = 0.f;
+        if (m_thread) {
+            m_thread->Execute([this, pHandle, &result]() {
+                for (auto&& pData : m_playStack) {
+                    if (pData->pHandle == pHandle) {
+                        result = pData->pSource ? pData->pData->pContext->GetPlaybackPosition(pData->pSource) : pData->offset;
+                        return true;
+                    }
+                }
+                return false;
+            });
+        }
+        return result;
+    }
+
+    bool SoundManager::IsPaused(Handle pHandle) const {
+        return m_thread && m_thread->Execute([this, pHandle]() {
+            for (auto&& pData : m_playStack) {
+                if (pData->pHandle == pHandle) {
+                    return pData->isPaused;
+                }
+            }
+            return false;
+        });
+    }
+
     void SoundManager::OnSingletonDestroy() {
         m_state = State::Stopped;
 
@@ -73,10 +143,10 @@ namespace SR_AUDIO_NS {
         });
     }
 
-    std::optional<PlayParams> SoundManager::GetSourceParams(const PlayData* pPlayData) const {
+    SR_UTILS_NS::Optional<PlayParams> SoundManager::GetSourceParams(const PlayData* pPlayData) const {
         SR_TRACY_ZONE;
 
-        std::optional<PlayParams> result;
+        SR_UTILS_NS::Optional<PlayParams> result;
 
         if (!m_thread) {
             return result;
@@ -104,10 +174,10 @@ namespace SR_AUDIO_NS {
         return result;
     }
 
-    std::optional<ListenerData> SoundManager::GetListenerParams(const SoundListener* pListener) const {
+    SR_UTILS_NS::Optional<ListenerData> SoundManager::GetListenerParams(const SoundListener* pListener) const {
         SR_TRACY_ZONE;
 
-        std::optional<ListenerData> result;
+        SR_UTILS_NS::Optional<ListenerData> result;
 
         if (!m_thread) {
             return result;
@@ -199,6 +269,12 @@ namespace SR_AUDIO_NS {
 
             pContext->ApplyParams(pPlayData->pSource, pPlayData->params);
             pContext->Play(pPlayData->pSource);
+            if (pPlayData->isPaused) {
+                pContext->Pause(pPlayData->pSource);
+            }
+            if (pPlayData->offset > 0.f) {
+                pContext->Seek(pPlayData->pSource, pPlayData->offset);
+            }
 
             pPlayData->isPlaying = true;
         }
@@ -233,7 +309,7 @@ namespace SR_AUDIO_NS {
 
             auto&& pPlayData = new PlayData();
 
-            pHandle = pPlayData;
+            pHandle = pPlayData->pHandle = reinterpret_cast<void*>(++m_nextHandleId);
 
             pPlayData->pSound = pSound;
             pPlayData->pData = pSound->GetData();
@@ -281,8 +357,8 @@ namespace SR_AUDIO_NS {
 
         return m_thread->Execute([this, pHandle]() {
             for (auto&& pPlayData : m_playStack) {
-                if (pHandle == pPlayData) {
-                    if (!pPlayData->pData->initialized) {
+                if (pHandle == pPlayData->pHandle) {
+                    if (!pPlayData->pData->initialized || !pPlayData->pSource) {
                         return false;
                     }
                     return pPlayData->pData->pContext->IsPlaying(pPlayData->pSource);
@@ -387,7 +463,7 @@ namespace SR_AUDIO_NS {
 
         return m_thread->Execute([this, pHandle]() {
             for (auto&& pPlayData: m_playStack) {
-                if (pHandle == pPlayData) {
+                if (pHandle == pPlayData->pHandle) {
                     return pPlayData->pData->initialized;
                 }
             }
@@ -401,9 +477,13 @@ namespace SR_AUDIO_NS {
     bool SoundManager::IsExists(SoundManager::Handle pHandle) const {
         SR_TRACY_ZONE;
 
+        if (!m_thread || !pHandle) {
+            return false;
+        }
+
         return m_thread->Execute([this, pHandle]() {
             for (auto&& pPlayData : m_playStack) {
-                if (pHandle == pPlayData) {
+                if (pHandle == pPlayData->pHandle) {
                     return true;
                 }
             }
@@ -417,7 +497,7 @@ namespace SR_AUDIO_NS {
 
         return m_thread->Execute([this, pHandle]() {
             for (auto&& pPlayData: m_playStack) {
-                if (pHandle == pPlayData) {
+                if (pHandle == pPlayData->pHandle) {
                     return pPlayData->isFailed;
                 }
             }
@@ -434,7 +514,7 @@ namespace SR_AUDIO_NS {
         SR_LOCK_GUARD;
 
         AudioLibrary library = params.library.has_value() ? params.library.value() : GetRelevantLibrary();
-        auto&& device = params.device.has_value() ? params.device.value() : std::string();
+        const SR_UTILS_NS::String device = params.device.has_value() ? SR_UTILS_NS::String(params.device.value()) : SR_UTILS_NS::String();
 
         if (auto&& pLibIt = m_contexts.find(library); pLibIt != m_contexts.end()) {
             auto&& deviceContexts = pLibIt->second;
@@ -499,7 +579,7 @@ namespace SR_AUDIO_NS {
         SR_PLATFORM_NS::Sleep(1);
     }
 
-    SoundManager::Handle SoundManager::Play(const std::string& path, const PlayParams& params) {
+    SoundManager::Handle SoundManager::Play(SR_UTILS_NS::StringView path, const PlayParams& params) {
         SR_TRACY_ZONE;
 
         if (path.empty()) {
@@ -514,7 +594,7 @@ namespace SR_AUDIO_NS {
         return nullptr;
     }
 
-    SoundManager::Handle SoundManager::Play(const std::string& path) {
+    SoundManager::Handle SoundManager::Play(SR_UTILS_NS::StringView path) {
         SR_TRACY_ZONE;
         return Play(path, PlayParams::GetDefault());
     }
@@ -530,15 +610,15 @@ namespace SR_AUDIO_NS {
     void SoundManager::ApplyParams(SoundManager::Handle pHandle, const PlayParams& params) {
         SR_TRACY_ZONE;
 
+        if (!m_thread || !pHandle) {
+            return;
+        }
+
         m_thread->Execute([this, pHandle, params]() {
             for (auto&& pPlayData : m_playStack) {
-                if (pHandle == pPlayData) {
-                    if (!pPlayData->pData->initialized) {
-                        break;
-                    }
-
-                    if (!pPlayData->pSource) {
-                        SRHalt("SoundManager::ApplyParams() : source is nullptr!");
+                if (pHandle == pPlayData->pHandle) {
+                    pPlayData->params = params;
+                    if (!pPlayData->pData->initialized || !pPlayData->pSource) {
                         break;
                     }
 
@@ -553,9 +633,13 @@ namespace SR_AUDIO_NS {
     void SoundManager::Stop(Handle pHandle) {
         SR_TRACY_ZONE;
 
+        if (!m_thread || !pHandle) {
+            return;
+        }
+
         m_thread->Execute([this, pHandle]() {
             for (auto pIt = m_playStack.begin(); pIt != m_playStack.end(); ) {
-                if (pHandle == *pIt) {
+                if (pHandle == (*pIt)->pHandle) {
                     DestroyPlayData(*pIt);
                     m_playing.erase(*pIt);
                     m_playStack.erase(pIt);
@@ -640,6 +724,11 @@ namespace SR_AUDIO_NS {
 
     void SoundManager::SetGlobalGain(float_t gain) noexcept {
         SR_TRACY_ZONE;
+
+        if (!m_thread) {
+            m_globalGain.store(gain);
+            return;
+        }
 
         m_thread->Execute([gain, this]() {
             m_globalGain.store(gain);

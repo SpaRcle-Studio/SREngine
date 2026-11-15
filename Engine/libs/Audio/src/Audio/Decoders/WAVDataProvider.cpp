@@ -79,7 +79,7 @@ namespace SR_AUDIO_NS::Tools {
     {
         const uint8_t* End = Src + NumBytes;
 
-        while (Src < End)
+        while (End - Src >= 3)
         {
             uint8_t b0 = *Src++;
             uint8_t b1 = *Src++;
@@ -87,7 +87,7 @@ namespace SR_AUDIO_NS::Tools {
             int v = (((b2 << 8) | b1) << 8) | b0;
 
             if (v & 0x800000) v |= ~0xFFFFFF;
-            *Dst++ = (v << 8) & 0xFFFF;
+            *Dst++ = static_cast<int16_t>(v >> 8);
         }
     }
 
@@ -98,7 +98,7 @@ namespace SR_AUDIO_NS::Tools {
         while (Src < End)
         {
             int32_t v = *Src++;
-            *Dst++ = (int16_t((v >> 16) & 0xFFFF) + (int16_t(v & 0xFFFF) << 16)) & 0xFFFF;
+            *Dst++ = static_cast<int16_t>(v >> 16);
         }
     }
 
@@ -374,20 +374,43 @@ namespace SR_AUDIO_NS::Tools {
 namespace SR_AUDIO_NS {
     WAVDataProvider::WAVDataProvider(const RawSoundDataPtr& data)
             : m_data(data)
-            , m_dataSize(data ? data->size() : 0)
+            , m_dataSize(0)
             , m_format()
     {
         if (data && data->size() > sizeof(sWAVHeader))
         {
-            const sWAVHeader* Header = reinterpret_cast<const sWAVHeader*>(data.get()->data());
+            sWAVHeader header = {};
+            memcpy(&header, data->data(), 12);
+            const sWAVHeader* Header = &header;
 
             const bool IsRIFF = memcmp(&Header->RIFF, "RIFF", 4) == 0;
             const bool IsWAVE = memcmp(&Header->WAVE, "WAVE", 4) == 0;
 
-            const bool IsJUNK = memcmp(&Header->FMT, "JUNK", 4) == 0;
-
-            if (IsJUNK) {
-                Header = reinterpret_cast<const sWAVHeader*>((uint8_t*)Header + Header->SizeFmt + 8);
+            const sWAVChunkHeader* pDataChunk = nullptr;
+            size_t formatOffset = 0;
+            const size_t riffEnd = std::min(data->size(), static_cast<size_t>(Header->FileSize) + 8);
+            for (size_t offset = 12; offset <= riffEnd && riffEnd - offset >= sizeof(sWAVChunkHeader); ) {
+                auto&& pChunk = reinterpret_cast<const sWAVChunkHeader*>(data->data() + offset);
+                const size_t payload = offset + sizeof(sWAVChunkHeader);
+                if (pChunk->Size > riffEnd - payload) {
+                    SR_ERROR("WAVDataProvider::WAVDataProvider() : truncated RIFF chunk");
+                    return;
+                }
+                if (memcmp(pChunk->ID, "fmt ", 4) == 0 && pChunk->Size >= 16) {
+                    memcpy(header.FMT, pChunk->ID, 4);
+                    header.SizeFmt = pChunk->Size;
+                    memcpy(&header.FormatTag, data->data() + payload, std::min<size_t>(pChunk->Size, 18));
+                    formatOffset = payload;
+                }
+                else if (memcmp(pChunk->ID, "data", 4) == 0) {
+                    pDataChunk = pChunk;
+                    m_dataOffset = payload;
+                }
+                offset = payload + pChunk->Size + (pChunk->Size & 1u);
+            }
+            if (!formatOffset || !pDataChunk) {
+                SR_ERROR("WAVDataProvider::WAVDataProvider() : missing fmt or data chunk");
+                return;
             }
 
             const uint16_t FORMAT_UNKNOWN = 0x000;
@@ -426,14 +449,17 @@ namespace SR_AUDIO_NS {
                 m_format.m_samplesPerSecond = Header->SampleRate;
                 m_format.m_bitsPerSample    = Header->nBitsperSample;
 
-                const size_t HeaderSize = sizeof(sWAVHeader);
-                const size_t ExtraParamSize = IsPCM ? 0 : Header->cbSize;
                 const size_t ChunkHeaderSize = sizeof(sWAVChunkHeader);
 
                 if ( IsExtFormat )
                 {
                     // http://www-mmsp.ece.mcgill.ca/documents/audioformats/wave/wave.html
-                    const uint16_t SubFormatTag = *reinterpret_cast<const uint16_t*>(data.get()->data() + HeaderSize + 6);
+                    if (header.SizeFmt < 40) {
+                        SR_ERROR("WAVDataProvider::WAVDataProvider() : truncated extensible format");
+                        return;
+                    }
+                    uint16_t SubFormatTag = 0;
+                    memcpy(&SubFormatTag, data->data() + formatOffset + 24, sizeof(SubFormatTag));
 
                     if ( SubFormatTag == FORMAT_PCM ) IsFloat = false;
                     if ( SubFormatTag == FORMAT_FLOAT ) IsFloat = true;
@@ -441,54 +467,8 @@ namespace SR_AUDIO_NS {
                     if ( SubFormatTag == FORMAT_MULAW ) IsMuLaw = true;
                 }
 
-                size_t Offset = HeaderSize + ExtraParamSize;
-
-                if (IsJUNK) {
-                    Offset = 72; // TODO
-                }
-                else if (IsPCM)
-                {
-                    // http://soundfile.sapp.org/doc/WaveFormat/
-                    const int Subchunk1Size = 16;
-                    Offset += int( Header->SizeFmt ) - Subchunk1Size - sizeof( Header->cbSize );
-                }
-
-                const sWAVChunkHeader* ChunkHeader = nullptr;
-
-                for (;;)
-                {
-                    const sWAVChunkHeader* LocalChunkHeader = reinterpret_cast<const sWAVChunkHeader*>(data.get()->data() + Offset);
-
-                    if ( memcmp( LocalChunkHeader->ID, "data", 4 ) == 0 )
-                    {
-                        ChunkHeader = LocalChunkHeader;
-                        break;
-                    }
-                    else if (
-                            memcmp( LocalChunkHeader->ID, "fact", 4 ) == 0 ||
-                            memcmp( LocalChunkHeader->ID, "LIST", 4 ) == 0 ||
-                            memcmp( LocalChunkHeader->ID, "PAD ", 4 ) == 0 ||
-                            memcmp( LocalChunkHeader->ID, "JUNK", 4 ) == 0 ||
-                            memcmp( LocalChunkHeader->ID, "junk", 4 ) == 0 ||
-                            memcmp( LocalChunkHeader->ID, "INFO", 4 ) == 0 ||
-                            memcmp( LocalChunkHeader->ID, "CSET", 4 ) == 0
-                            )
-                    {
-                        Offset += ChunkHeaderSize;
-                        Offset += LocalChunkHeader->Size;
-                    }
-                    else {
-                        std::string chunkID;
-                        for (unsigned char i : LocalChunkHeader->ID) {
-                            chunkID += static_cast<char>(i);
-                        }
-
-                        SR_ERROR("WAVDataProvider::WAVDataProvider() : unknown chunk ID: {}{}{}{}\n\tFormated chunk id: {}", LocalChunkHeader->ID[0], LocalChunkHeader->ID[1], LocalChunkHeader->ID[2], LocalChunkHeader->ID[3], chunkID);
-
-                        m_dataSize = 0;
-                        break;
-                    }
-                }
+                const size_t Offset = m_dataOffset - ChunkHeaderSize;
+                const sWAVChunkHeader* ChunkHeader = pDataChunk;
 
                 m_dataSize = ChunkHeader ? ChunkHeader->Size : 0;
                 if (m_dataSize == 0) {
@@ -523,7 +503,7 @@ namespace SR_AUDIO_NS {
                     RawSoundData NewData;
                     NewData.resize( m_dataSize * 4 + sizeof(sWAVHeader) );
                     int16_t* Dst = reinterpret_cast<int16_t*>( NewData.data() + sizeof(sWAVHeader) );
-                    const uint8_t* Src = reinterpret_cast<const uint8_t*>( m_data.get( ) + Offset + ChunkHeaderSize );
+                    const uint8_t* Src = (const uint8_t*)m_data->data() + m_dataOffset;
                     Tools::ConvertClamp_MSADPCMToInt16( Src, Dst, m_dataSize, Header->nBlockAlign, Header->Channels == 2 );
                     m_data = std::make_shared<RawSoundData>( NewData );
                     m_format.m_bitsPerSample = 16;
@@ -575,7 +555,7 @@ namespace SR_AUDIO_NS {
                     NewData.resize(m_data->size());
                     int16_t* Dst = reinterpret_cast<int16_t*>(NewData.data() + sizeof(sWAVHeader));
 
-                    const uint8_t* Src = reinterpret_cast<const uint8_t*>(m_data.get()->data() + Offset + ChunkHeaderSize - 4);
+                    const uint8_t* Src = (const uint8_t*)m_data->data() + m_dataOffset;
                     Tools::ConvertClamp_Int24ToInt16(Src, Dst, m_dataSize);
                     m_dataSize = m_dataSize / 3 * 2;
 
@@ -595,6 +575,10 @@ namespace SR_AUDIO_NS {
 
                     m_data = std::make_shared<RawSoundData>(NewData);
                     m_format.m_bitsPerSample = 16;
+                }
+
+                if (IsALaw || IsMuLaw || IsADPCM_MS || IsADPCM_IMA || IsFloat || Header->nBitsperSample == 24 || Header->nBitsperSample == 32) {
+                    m_dataOffset = sizeof(sWAVHeader);
                 }
 
                 /// if ( IsVerbose() )
@@ -619,16 +603,7 @@ namespace SR_AUDIO_NS {
 
     const uint8_t* WAVDataProvider::GetWaveData() const
     {
-        const sWAVHeader* Header = reinterpret_cast<const sWAVHeader*>(m_data.get()->data());
-
-        const bool IsJUNK = memcmp(&Header->FMT, "JUNK", 4) == 0;
-
-        if (IsJUNK) {
-            return reinterpret_cast<const uint8_t *>(m_data ? m_data.get()->data() + 80 : nullptr);
-        }
-        else {
-            return reinterpret_cast<const uint8_t *>(m_data ? m_data.get()->data() + 44 /** standard wav header size */: nullptr);
-        }
+        return (const uint8_t*)(m_data && m_dataSize ? m_data->data() + m_dataOffset : nullptr);
     }
 
     size_t WAVDataProvider::GetWaveDataSize() const

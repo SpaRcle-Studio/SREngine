@@ -75,12 +75,15 @@ namespace SR_AUDIO_NS {
         virtual bool FreeListener(SoundListener* pListener);
 
         virtual void Play(SoundSource source) = 0;
+        virtual void Pause(SoundSource pSource) = 0;
+        virtual bool Seek(SoundSource pSource, float_t seconds) = 0;
+        virtual float_t GetPlaybackPosition(SoundSource pSource) const = 0;
 
         virtual bool Init() = 0;
 
     protected:
         SoundDevice* m_device = nullptr;
-        std::list<SoundListener*> m_listeners;
+        SR_UTILS_NS::Vector<SoundListener*> m_listeners;
 
     };
 }

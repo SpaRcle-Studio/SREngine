@@ -61,6 +61,9 @@ namespace SR_SCRIPTING_NS {
 
         void SetBehaviourName(SR_UTILS_NS::StringAtom name);
 
+        /// @method
+        bool InvokeEvent(SR_UTILS_NS::StringAtom method);
+
     private:
         void Awake() override;
         void OnEnable() override;

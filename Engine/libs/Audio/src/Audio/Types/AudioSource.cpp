@@ -8,12 +8,92 @@
 #include <Utils/ECS/Transform.h>
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/FileSystem/PathDataAccessor.h>
+#include <Utils/Events/Broadcaster.h>
 
 #include <Codegen/AudioSource.generated.hpp>
 
 namespace SR_AUDIO_NS {
+    bool AudioSource::SetGroup(SR_UTILS_NS::StringAtom group) {
+        if (!AudioMixer::Instance().HasGroup(group)) {
+            SR_ERROR("AudioSource::SetGroup() : unknown group {}", group);
+            return false;
+        }
+        if (m_group != group) {
+            m_group = group;
+            UpdateParams();
+        }
+        return true;
+    }
+
+    bool AudioSource::Play() {
+        SR_TRACY_ZONE;
+        Stop();
+        if (m_path.empty()) {
+            SR_ERROR("AudioSource::Play() : empty resource path");
+            return false;
+        }
+        if (!AudioMixer::Instance().HasGroup(m_group)) {
+            SR_ERROR("AudioSource::Play() : unknown group {} for {}", m_group, m_path);
+            return false;
+        }
+        auto params = m_params;
+        params.gain = GetVolume() * AudioMixer::Instance().GetGain(m_group);
+        if (GetSpatialize() == SpatializeMode::Off) {
+            params.relative = 1.f;
+            params.position = SR_MATH_NS::FVector3::Zero();
+            params.rolloffFactor = 0.f;
+        }
+        params.MarkAsChanged();
+        m_handle = SoundManager::Instance().Play(m_path.View(), params);
+        m_startedPlayback = m_handle != nullptr;
+        if (!m_handle) {
+            SR_ERROR("AudioSource::Play() : failed resource {}", m_path);
+        }
+        return m_handle != nullptr;
+    }
+
+    void AudioSource::Stop() {
+        if (m_handle) {
+            SoundManager::Instance().Stop(m_handle);
+            m_handle = nullptr;
+        }
+        m_startedPlayback = false;
+    }
+
+    bool AudioSource::Pause() {
+        return m_handle && SoundManager::Instance().SetPaused(m_handle, true);
+    }
+
+    bool AudioSource::Resume() {
+        return m_handle && SoundManager::Instance().SetPaused(m_handle, false);
+    }
+
+    bool AudioSource::Seek(float_t seconds) {
+        if (!m_handle || !SoundManager::Instance().Seek(m_handle, seconds)) {
+            SR_ERROR("AudioSource::Seek() : invalid position {} for {}", seconds, m_path);
+            return false;
+        }
+        return true;
+    }
+
+    float_t AudioSource::GetPlaybackPosition() const {
+        return m_handle ? SoundManager::Instance().GetPlaybackPosition(m_handle) : 0.f;
+    }
+
+    bool AudioSource::IsPlaying() const {
+        return m_handle && SoundManager::Instance().IsPlaying(m_handle);
+    }
+
+    bool AudioSource::IsPaused() const {
+        return m_handle && SoundManager::Instance().IsPaused(m_handle);
+    }
+
+    bool AudioSource::HasFinished() const {
+        return m_startedPlayback && m_handle && !SoundManager::Instance().IsExists(m_handle);
+    }
+
     AudioSource::AudioSource()
-        : Super()
+        : SR_UTILS_NS::Component()
     {
         m_params = PlayParams::GetDefault();
     }
@@ -35,7 +115,7 @@ namespace SR_AUDIO_NS {
             UpdateParams();
         }
 
-        Super::OnMatrixDirty();
+        SR_UTILS_NS::Component::OnMatrixDirty();
     }
 
     float_t AudioSource::GetVolume() const {
@@ -90,7 +170,11 @@ namespace SR_AUDIO_NS {
     }
 
     void AudioSource::SetVolume(float_t volume) {
-        m_params.gain = volume;
+        if (!std::isfinite(volume)) {
+            SR_ERROR("AudioSource::SetVolume() : non-finite volume");
+            return;
+        }
+        m_params.gain = std::clamp(volume, 0.f, 1.f);
         UpdateParams();
     }
 
@@ -116,6 +200,7 @@ namespace SR_AUDIO_NS {
 
     void AudioSource::SetSpatialize(SpatializeMode spatialize) {
         m_params.spatialize = spatialize;
+        m_params.relative = spatialize == SpatializeMode::Off ? 1.f : 0.f;
         UpdateParams();
     }
 
@@ -128,12 +213,11 @@ namespace SR_AUDIO_NS {
 
         m_path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
 
-        if (IsActive() && !m_path.empty()) {
-            if (m_handle) {
-                SoundManager::Instance().Stop(m_handle);
-            }
-            m_params.MarkAsChanged();
-            m_handle = SoundManager::Instance().Play(m_path.ToString(), m_params);
+        if (IsActive() && m_playOnEnable && !m_path.empty()) {
+            Play();
+        }
+        else {
+            Stop();
         }
     }
 
@@ -141,34 +225,40 @@ namespace SR_AUDIO_NS {
         if (!m_handle) {
             return;
         }
-        SoundManager::Instance().ApplyParams(m_handle, m_params);
+        auto params = m_params;
+        params.gain = GetVolume() * AudioMixer::Instance().GetGain(m_group);
+        if (GetSpatialize() == SpatializeMode::Off) {
+            params.relative = 1.f;
+            params.position = SR_MATH_NS::FVector3::Zero();
+            params.rolloffFactor = 0.f;
+        }
+        params.MarkAsChanged();
+        SoundManager::Instance().ApplyParams(m_handle, params);
     }
 
     void AudioSource::OnEnable() {
-        if (!m_path.IsEmpty()) {
-            m_params.MarkAsChanged();
-            m_handle = SoundManager::Instance().Play(m_path.ToString(), m_params);
+        if (!m_mixerSubscription.IsValid()) {
+            m_mixerSubscription = SR_UTILS_NS::Broadcaster::Instance().Subscribe("AudioMixerChanged", [this](auto&&) {
+                UpdateParams();
+            });
+        }
+        if (!m_path.IsEmpty() && m_playOnEnable && !SoundManager::Instance().IsExists(m_handle)) {
+            Play();
         }
         Component::OnEnable();
     }
 
     void AudioSource::OnDestroy() {
-        if (m_handle) {
-            SoundManager::Instance().Stop(m_handle);
-            m_handle = nullptr;
-        }
-
-        Super::OnDestroy();
+        m_mixerSubscription.Reset();
+        Stop();
+        SR_UTILS_NS::Component::OnDestroy();
     }
 
     void AudioSource::OnDisable() {
-        if (m_handle) {
-            if (!m_continueOnDisable) {
-                SoundManager::Instance().Stop(m_handle);
-            }
-            m_handle = nullptr;
+        if (m_handle && !m_continueOnDisable) {
+            Stop();
         }
-        Super::OnDisable();
+        SR_UTILS_NS::Component::OnDisable();
     }
 
     void AudioSource::SetContinueOnDisable(bool continueOnDisable) {

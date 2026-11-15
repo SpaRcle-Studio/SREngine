@@ -5,7 +5,7 @@
 #ifndef SR_ENGINE_UI_SCROLL_BAR_H
 #define SR_ENGINE_UI_SCROLL_BAR_H
 
-#include <Engine/stdInclude.h>
+#include <Engine/UI/UIControl.h>
 
 #include <Graphics/UI/Canvas.h>
 
@@ -23,28 +23,30 @@ namespace SR_CORE_UI_NS {
     );
 
     /// @category(UI) @displayName(Scroll Bar)
-    class UIScrollBar : public SR_UTILS_NS::Component, public SR_GRAPH_NS::UI::IFindCanvasOwner {
+    class UIScrollBar : public UIControl {
         SR_CLASS()
-        using Super = SR_UTILS_NS::Component;
-        enum class State : uint8_t {
-            Idle,
-            Hovered,
-            Pressed
-        };
     public:
         enum Axis : uint8_t {
             Horizontal = 0,
             Vertical = 1
         };
     public:
-        void Update(float_t dt) override;
+        void PointerDown(const SR_UTILS_NS::PointerEvent& event) override;
+        bool CanDrag() const override { return true; }
+        bool AcceptsButton(SR_UTILS_NS::PointerButton button) const override;
+        void PointerDrag(const SR_UTILS_NS::PointerEvent& event) override;
+        bool Navigate(int32_t direction) override;
+        void AfterLayout() override;
 
+        /// @method
         void SetValue(float_t value);
+        /// @method
         void SetSize(float_t size);
         void SetNumberOfSteps(uint32_t steps);
         void SetDirection(ScrollBarDirection direction) { m_direction = direction; }
         void SetHandle(const SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::SceneObject>& pHandle);
 
+        /// @method @evaluate
         SR_NODISCARD float_t GetValue() const noexcept;
         SR_NODISCARD float_t GetSize() const noexcept { return m_size; }
         SR_NODISCARD uint32_t GetNumberOfSteps() const noexcept { return m_numberOfSteps; }
@@ -53,11 +55,10 @@ namespace SR_CORE_UI_NS {
 
     private:
         void RefreshHandleLayout();
-        bool OnBeginDrag(SR_GRAPH_UI_NS::Canvas& canvas, const SR_MATH_NS::FVector2& screenPosition, SR_GTYPES_NS::Camera* pCamera);
         void OnDrag(SR_GRAPH_UI_NS::Canvas& canvas, const SR_MATH_NS::FVector2& screenPosition, SR_GTYPES_NS::Camera* pCamera);
 
     private:
-        State m_state = State::Idle;
+        float_t m_dragOffset = 0.f;
 
         SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::TransformRect> m_handleRect;
         SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::TransformRect> m_containerRect;

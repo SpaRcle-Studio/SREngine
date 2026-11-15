@@ -10,6 +10,8 @@
 #include <Utils/ECS/SceneObject.h>
 #include <Utils/Common/CollisionData.h>
 #include <Utils/Serialization/Serializable.h>
+#include <Utils/TypeTraits/SRClassMeta.h>
+#include <Utils/Reflection/Method.h>
 
 namespace SR_SCRIPTING_NS {
     class CppBehaviour;
@@ -26,6 +28,17 @@ namespace SR_SCRIPTING_NS {
         }
 
         SR_NODISCARD virtual SR_UTILS_NS::SRClass* GetPropertiesObject() const = 0;
+        virtual bool InvokeEvent(SR_UTILS_NS::StringAtom method) {
+            auto&& pObject = GetPropertiesObject();
+            auto&& pMethod = pObject ? pObject->GetMeta()->FindMethod(method) : nullptr;
+            if (!pMethod || pMethod->HasReturn() || pMethod->GetParamsCount() != 0 || !pMethod->IsActive(*pObject)) {
+                SR_ERROR("BehaviourInstance::InvokeEvent() : expected active void {}()", method);
+                return false;
+            }
+
+            pMethod->InvokeVoid(*pObject);
+            return true;
+        }
         virtual void SetSceneObject(const SR_UTILS_NS::SceneObject::Ptr& pSceneObject) = 0;
         virtual void Save(SR_UTILS_NS::ISerializer& serializer) const = 0;
         virtual bool Load(SR_UTILS_NS::IDeserializer& deserializer) = 0;

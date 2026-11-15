@@ -24,6 +24,7 @@ namespace SR_AUDIO_NS {
     private:
         RawSoundDataPtr m_data;
         size_t m_dataSize;
+        size_t m_dataOffset = 0;
         WaveDataFormat m_format;
 
     };

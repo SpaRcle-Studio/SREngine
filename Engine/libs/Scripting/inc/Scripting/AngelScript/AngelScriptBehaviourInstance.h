@@ -60,6 +60,7 @@ namespace SR_SCRIPTING_NS {
         SR_UTILS_NS::StringAtom GetBehaviourName() const { return m_name; }
 
         bool ExecuteInEditMode() const override;
+        bool InvokeEvent(SR_UTILS_NS::StringAtom method) override;
 
         SR_UTILS_NS::SRClass* GetPropertiesObject() const override {
             return m_pObject ? const_cast<AngelScriptBehaviourInstance*>(this) : nullptr;
@@ -119,6 +120,7 @@ namespace SR_SCRIPTING_NS {
     private:
         void RefreshProperties();
         void CacheCallbacks();
+        bool ExecuteMethod(asIScriptFunction* pMethod, const void* pArgument = nullptr, bool floating = false, bool* pReturnValue = nullptr) const;
         static bool IsSceneField(const char* pName);
         static bool IsConstField(asIScriptObject* pObject, uint32_t index);
         void InvokeCollision(Callback callback, const SR_UTILS_NS::CollisionData& data);
@@ -134,6 +136,7 @@ namespace SR_SCRIPTING_NS {
 
         mutable SR_UTILS_NS::Vector<asIScriptContext*> m_contexts;
         mutable uint32_t m_contextDepth = 0;
+        SR_UTILS_NS::Map<SR_UTILS_NS::StringAtom, asIScriptFunction*> m_eventMethods;
         asIScriptFunction* m_pMethods[static_cast<uint32_t>(Callback::Count)] = {};
         bool m_typedCollisions[6] = {};
         bool m_sceneFieldsInitialized = false;

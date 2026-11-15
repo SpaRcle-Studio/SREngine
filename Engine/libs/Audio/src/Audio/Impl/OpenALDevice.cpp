@@ -19,6 +19,21 @@ namespace SR_AUDIO_NS {
     }
 
     bool OpenALDevice::Init() {
+        if (m_name.empty()) {
+            const bool enumerateAll = alcIsExtensionPresent(nullptr, "ALC_ENUMERATE_ALL_EXT") != ALC_FALSE;
+            const ALchar* pDefaultDevice = alcGetString(nullptr,
+                enumerateAll ? ALC_DEFAULT_ALL_DEVICES_SPECIFIER : ALC_DEFAULT_DEVICE_SPECIFIER);
+            m_openALDevice = alcOpenDevice(nullptr);
+            if (!m_openALDevice) {
+                SR_ERROR("OpenALDevice::Init() : failed to open the default audio device!");
+                return false;
+            }
+            if (pDefaultDevice) {
+                m_name = pDefaultDevice;
+            }
+            SR_LOG("OpenALDevice::Init() : opened default device \"{}\"", m_name);
+            return true;
+        }
         const ALchar* pDeviceNames = nullptr;
 
         if (alcIsExtensionPresent(nullptr, "ALC_ENUMERATE_ALL_EXT")) {

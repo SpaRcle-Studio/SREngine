@@ -38,7 +38,7 @@ namespace SR_AUDIO_NS{
             SR_AUDIO_NS::SoundManager::Instance().DestroyListener(m_listenerContext);
             m_listenerContext = nullptr;
         }
-        Super::OnEnable();
+        Super::OnDisable();
     }
 
     void AudioListener::OnDestroy() {

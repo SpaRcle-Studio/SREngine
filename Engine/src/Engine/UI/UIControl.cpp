@@ -1,0 +1,91 @@
+//
+// Created by Codex on 15.11.2026.
+//
+
+#include <Engine/UI/UIControl.h>
+#include <Utils/ECS/TransformRect.h>
+#include <Utils/Reflection/Method.h>
+#include <Scripting/Base/Behaviour.h>
+#include <Codegen/UIControl.generated.hpp>
+
+namespace SR_CORE_UI_NS {
+    bool UIButtonEvent::Invoke() const {
+        auto pObject = object.Get();
+        if (!pObject || !pObject->IsComponentValid()) {
+            SR_ERROR("UIButtonEvent::Invoke() : unavailable target {} for {}", object.GetEntityId(), method);
+            return false;
+        }
+        if (pObject->GetMeta()->IsSameOrInherited(SR_SCRIPTING_NS::Behaviour::GetClassStaticName())) {
+            return static_cast<SR_SCRIPTING_NS::Behaviour*>(pObject.Get())->InvokeEvent(method);
+        }
+
+        auto&& pMethod = pObject->GetMeta()->FindMethod(method);
+        if (!pMethod || pMethod->HasReturn() || pMethod->GetParamsCount() != 0 || !pMethod->IsActive(*pObject)) {
+            SR_ERROR("UIButtonEvent::Invoke() : expected active void {}() on {}", method, pObject->GetMeta()->GetFactoryName());
+            return false;
+        }
+        pMethod->InvokeVoid(*pObject);
+        return true;
+    }
+
+    void UIControl::InvokeEvents(const SR_UTILS_NS::Vector<UIButtonEvent>& events) {
+        SR_TRACY_ZONE;
+        const auto snapshot = events;
+        for (auto&& event : snapshot) {
+            event.Invoke();
+        }
+    }
+
+    bool UIControl::HitTest(const SR_UTILS_NS::PointerEvent& event) {
+        if (!m_raycastTarget) {
+            return false;
+        }
+        auto&& pRect = GetTransformAs<SR_UTILS_NS::TransformRect>();
+        auto&& pCanvas = FindCanvas(GetSceneObject().Get());
+        if (!pRect || !pCanvas || !pCanvas->IsActive() || !pCanvas->ContainsPointer(*pRect, event)) {
+            return false;
+        }
+        const auto mask = pRect->GetMaskInfo();
+        if (mask.hasMask && mask.scissor) {
+            auto point = pCanvas->PointerToCanvasSpace(event) * pCanvas->GetScaleFactor() + pCanvas->GetSize().CastToFloat() / 2.f;
+            point.y = static_cast<float_t>(mask.referenceSize.y) - point.y;
+            if (!mask.rect.Contains(point.CastToInt())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    int32_t UIControl::GetInputPriority() const {
+        auto&& pRect = GetTransformAs<SR_UTILS_NS::TransformRect>();
+        return pRect ? pRect->GetPriority() : 0;
+    }
+
+    void UIControl::SetInteractable(bool value) {
+        m_interactable = value;
+        SetInputState(false, false, false);
+    }
+
+    void UIControl::SetInputState(bool hovered, bool pressed, bool focused) {
+        m_state = !m_interactable ? UIControlState::Disabled : pressed ? UIControlState::Pressed : hovered ? UIControlState::Hovered : focused ? UIControlState::Selected : UIControlState::Idle;
+        if (auto pObject = m_idle.Get()) {
+            pObject->SetEnabled(m_state == UIControlState::Idle);
+        }
+        if (auto pObject = m_hovered.Get()) {
+            pObject->SetEnabled(m_state == UIControlState::Hovered);
+        }
+        if (auto pObject = m_pressed.Get()) {
+            pObject->SetEnabled(m_state == UIControlState::Pressed);
+        }
+        if (auto pObject = m_selected.Get()) {
+            pObject->SetEnabled(m_state == UIControlState::Selected);
+        }
+        if (auto pObject = m_disabled.Get()) {
+            pObject->SetEnabled(m_state == UIControlState::Disabled);
+        }
+    }
+
+    void UIControl::Cancel() {
+        InvokeEvents(m_onCancelEvents);
+    }
+}

@@ -14,56 +14,59 @@
 #include <Codegen/UIScrollBar.generated.hpp>
 
 namespace SR_CORE_UI_NS {
-    void UIScrollBar::Update(float_t dt) {
+    bool UIScrollBar::AcceptsButton(SR_UTILS_NS::PointerButton button) const {
+        return (m_leftClick && button == SR_UTILS_NS::PointerButton::Primary)
+            || (m_rightClick && button == SR_UTILS_NS::PointerButton::Secondary)
+            || (m_middleClick && button == SR_UTILS_NS::PointerButton::Middle);
+    }
+
+    void UIScrollBar::AfterLayout() {
+        RefreshHandleLayout();
+    }
+
+    void UIScrollBar::PointerDown(const SR_UTILS_NS::PointerEvent& event) {
         m_handleRect = SR_UTILS_NS::ExtractTransformAs<SR_UTILS_NS::TransformRect>(m_handle.GetRaw());
         m_containerRect = SR_UTILS_NS::ExtractTransformAs<SR_UTILS_NS::TransformRect>(m_handle ? m_handle.Get()->GetParent().Get() : nullptr);
+        m_dragOffset = 0.f;
         auto&& pCanvas = FindCanvas(GetSceneObject().Get());
-        auto&& pThisTransformRect = SR_UTILS_NS::ExtractTransformAs<SR_UTILS_NS::TransformRect>(GetSceneObject().Get());
-
-        if (!m_handleRect || !m_containerRect || !pThisTransformRect || !pCanvas) {
+        if (!m_handleRect || !m_containerRect || !pCanvas) {
             return;
         }
-
-        SR_UTILS_NS::TransformRect* pContainerRect = nullptr;
-        pContainerRect = SR_UTILS_NS::ExtractTransformAs<SR_UTILS_NS::TransformRect>(m_handle.Get()->GetParent().Get());
-        if (!pContainerRect) {
-            return;
+        const uint32_t axis = GetAxis();
+        const auto point = pCanvas->CanvasToLayoutPoint(*m_containerRect, pCanvas->PointerToCanvasSpace(event));
+        if (pCanvas->ContainsPointer(*m_handleRect, event)) {
+            const auto local = m_containerRect->GetLayoutRect();
+            const float_t handleStart = local.Min()[axis] + local.Size()[axis] * (IsReverseValue() ? (1.f - GetValue()) : GetValue()) * (1.f - m_size);
+            m_dragOffset = point[axis] - handleStart - local.Size()[axis] * m_size * 0.5f;
         }
+        PointerDrag(event);
+    }
 
-        auto&& input = SR_UTILS_NS::Input::Instance();
-
-        const SR_MATH_NS::FVector2 uiMousePos = pCanvas->ScreenToCanvasSpace(input.GetMousePos());
-
-        const bool isDown = m_leftClick && input.GetMouseDown(SR_UTILS_NS::MouseCode::MouseLeft)
-            || m_rightClick && input.GetMouseDown(SR_UTILS_NS::MouseCode::MouseRight)
-            || m_middleClick && input.GetMouseDown(SR_UTILS_NS::MouseCode::MouseMiddle);
-
-        if (isDown && m_state != State::Pressed && OnBeginDrag(*pCanvas, uiMousePos, pCanvas->GetCamera())) {
-            m_state = State::Pressed;
+    void UIScrollBar::PointerDrag(const SR_UTILS_NS::PointerEvent& event) {
+        auto&& pCanvas = FindCanvas(GetSceneObject().Get());
+        if (pCanvas && m_handleRect && m_containerRect) {
+            OnDrag(*pCanvas, pCanvas->PointerToCanvasSpace(event), pCanvas->GetCamera());
         }
-        else if (m_state == State::Pressed) {
-            const bool isUp = m_leftClick && input.GetMouseUp(SR_UTILS_NS::MouseCode::MouseLeft)
-                              || m_rightClick && input.GetMouseUp(SR_UTILS_NS::MouseCode::MouseRight)
-                              || m_middleClick && input.GetMouseUp(SR_UTILS_NS::MouseCode::MouseMiddle);
-            if (isUp) {
-                m_state = State::Hovered;
-            }
+    }
 
-            OnDrag(*pCanvas, uiMousePos, pCanvas->GetCamera());
-        }
-        else {
-            m_state = State::Idle;
-        }
-
-        Super::Update(dt);
+    bool UIScrollBar::Navigate(int32_t direction) {
+        const float_t step = m_numberOfSteps > 1 ? 1.f / static_cast<float_t>(m_numberOfSteps - 1) : 0.1f;
+        SetValue(GetValue() + static_cast<float_t>(IsReverseValue() ? -direction : direction) * step);
+        return true;
     }
 
     void UIScrollBar::SetValue(float_t value) {
+        if (!std::isfinite(value)) {
+            return;
+        }
         m_value = SR_CLAMP01(value);
         RefreshHandleLayout();
     }
 
     void UIScrollBar::SetSize(float_t size) {
+        if (!std::isfinite(size)) {
+            return;
+        }
         m_size = SR_CLAMP(size, 0.001f, 1.f);
         RefreshHandleLayout();
     }
@@ -108,6 +111,12 @@ namespace SR_CORE_UI_NS {
         }
 
         pHandleTransform->SetAnchors(anchors);
+        auto size = pHandleTransform->GetSizeDelta();
+        size[axis] = 0.f;
+        pHandleTransform->SetSize(size);
+        auto position = pHandleTransform->GetAnchoredPosition();
+        position[axis] = 0.f;
+        pHandleTransform->SetAnchoredPosition(position);
     }
 
     UIScrollBar::Axis UIScrollBar::GetAxis() const noexcept {
@@ -125,17 +134,6 @@ namespace SR_CORE_UI_NS {
         return m_value;
     }
 
-    bool UIScrollBar::OnBeginDrag(SR_GRAPH_UI_NS::Canvas& canvas, const SR_MATH_NS::FVector2& screenPosition, SR_GTYPES_NS::Camera* pCamera) {
-        if (auto&& pTransform = GetTransformAs<SR_UTILS_NS::TransformRect>()) {
-            if (!pTransform->GetGlobalScale().HasZero()
-                && pTransform->GetLayoutRect().Contains(canvas.CanvasToLayoutPoint(*pTransform, screenPosition))) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     void UIScrollBar::OnDrag(SR_GRAPH_UI_NS::Canvas& canvas, const SR_MATH_NS::FVector2& screenPosition, SR_GTYPES_NS::Camera* pCamera) {
         if (m_containerRect->GetGlobalScale().HasZero()) {
             return;
@@ -148,8 +146,9 @@ namespace SR_CORE_UI_NS {
         auto&& handleCorner = handleCenterRelativeToContainerCorner - (handleRect.Size() - m_handleRect->GetSizeDelta()) * 0.5f;
 
         const uint8_t axis = GetAxis();
-        float parentSize = axis == 0 ? containerRect.Width() : containerRect.Height();
-        float remainingSize = parentSize * (1.f - GetSize());
+        handleCorner[axis] -= m_dragOffset;
+        float_t parentSize = axis == 0 ? containerRect.Width() : containerRect.Height();
+        float_t remainingSize = parentSize * (1.f - GetSize());
         if (remainingSize <= 0.f) {
             return;
         }

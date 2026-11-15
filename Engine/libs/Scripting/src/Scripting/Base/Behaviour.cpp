@@ -14,6 +14,15 @@
 #include <Codegen/Behaviour.generated.hpp>
 
 namespace SR_SCRIPTING_NS {
+    bool Behaviour::InvokeEvent(SR_UTILS_NS::StringAtom method) {
+        if (!m_behaviourInstance || !m_behaviourInstance->IsValid()) {
+            SR_ERROR("Behaviour::InvokeEvent() : unavailable target {}::{}", m_behaviourName, method);
+            return false;
+        }
+
+        return m_behaviourInstance->InvokeEvent(method);
+    }
+
     void Behaviour::Awake() {
         if (m_behaviourInstance) {
             m_behaviourInstance->Awake();

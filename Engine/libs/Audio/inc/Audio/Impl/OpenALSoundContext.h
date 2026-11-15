@@ -25,6 +25,9 @@ namespace SR_AUDIO_NS {
     public:
         bool Init() override;
         void Play(SoundSource source) override;
+        void Pause(SoundSource pSource) override;
+        bool Seek(SoundSource pSource, float_t seconds) override;
+        float_t GetPlaybackPosition(SoundSource pSource) const override;
 
         bool MakeContextCurrent() override;
 

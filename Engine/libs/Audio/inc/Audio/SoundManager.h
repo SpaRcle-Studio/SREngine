@@ -10,6 +10,7 @@
 
 #include <Utils/Common/Singleton.h>
 #include <Utils/Types/Thread.h>
+#include <Utils/Types/Optional.h>
 
 namespace SR_AUDIO_NS {
     class Sound;
@@ -18,7 +19,6 @@ namespace SR_AUDIO_NS {
     class SoundContext;
     class SoundListener;
 
-    using AudioDeviceName = std::string;
 
     struct PlayData : public SR_UTILS_NS::NonCopyable {
         Sound* pSound = nullptr;
@@ -28,6 +28,8 @@ namespace SR_AUDIO_NS {
         float_t offset = 0.f;
         bool isPlaying = false;
         bool isFailed = false;
+        bool isPaused = false;
+        void* pHandle = nullptr;
     };
 
     class SR_AUDIO_DLL_API SoundManager : public SR_UTILS_NS::Singleton<SoundManager> {
@@ -44,11 +46,11 @@ namespace SR_AUDIO_NS {
     public:
         void StopAll();
 
-        SR_NODISCARD std::optional<PlayParams> GetSourceParams(const PlayData* pPlayData) const;
-        SR_NODISCARD std::optional<ListenerData> GetListenerParams(const SoundListener* pListener) const;
+        SR_NODISCARD SR_UTILS_NS::Optional<PlayParams> GetSourceParams(const PlayData* pPlayData) const;
+        SR_NODISCARD SR_UTILS_NS::Optional<ListenerData> GetListenerParams(const SoundListener* pListener) const;
 
-        Handle Play(const std::string& path);
-        Handle Play(const std::string& path, const PlayParams& params);
+        Handle Play(SR_UTILS_NS::StringView path);
+        Handle Play(SR_UTILS_NS::StringView path, const PlayParams& params);
         Handle Play(Sound* pSound, const PlayParams& params);
 
         bool IsExists(Handle pHandle) const;
@@ -58,6 +60,10 @@ namespace SR_AUDIO_NS {
 
         void ApplyParams(Handle pHandle, const PlayParams& params);
         void Stop(Handle pHandle);
+        bool SetPaused(Handle pHandle, bool paused);
+        bool Seek(Handle pHandle, float_t seconds);
+        float_t GetPlaybackPosition(Handle pHandle) const;
+        bool IsPaused(Handle pHandle) const;
 
         SoundData* Register(Sound* pSound);
         bool Unregister(SoundData** pSoundData);
@@ -70,7 +76,7 @@ namespace SR_AUDIO_NS {
         void SetGlobalGain(float_t gain) noexcept;
 
         SR_NODISCARD const SR_UTILS_NS::Set<SoundListener*>& GetListeners() const noexcept { return m_listeners; }
-        SR_NODISCARD const std::list<PlayData*>& GetPlayStack() const noexcept { return m_playStack; }
+        SR_NODISCARD const SR_UTILS_NS::Vector<PlayData*>& GetPlayStack() const noexcept { return m_playStack; }
         SR_NODISCARD bool IsEnabled() const noexcept { return m_isEnabled; }
 
         SR_NODISCARD float_t GetGlobalGain() const noexcept { return m_globalGain.load(); }
@@ -104,9 +110,10 @@ namespace SR_AUDIO_NS {
         SR_UTILS_NS::Set<SoundListener*> m_listeners;
         SR_HTYPES_NS::Thread::Ptr m_thread = nullptr;
         std::atomic<State> m_state = State::Stopped;
-        std::list<PlayData*> m_playStack;
+        SR_UTILS_NS::Vector<PlayData*> m_playStack;
+        uintptr_t m_nextHandleId = 0;
         SR_UTILS_NS::Set<PlayData*> m_playing;
-        SR_UTILS_NS::Map<AudioLibrary, SR_UTILS_NS::Map<AudioDeviceName, SoundContext*>> m_contexts;
+        SR_UTILS_NS::Map<AudioLibrary, SR_UTILS_NS::Map<SR_UTILS_NS::String, SoundContext*>> m_contexts;
 
     };
 }
