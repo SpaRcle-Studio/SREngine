@@ -495,7 +495,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (!SR_UTILS_NS::VFS::Instance().IsExists(scenePath)) {
-            SR_WARN("EditorGUI::LoadSceneFromCachedPath() : cached path is not usable! \n\tPath: {}", scenePath);
+            SR_LOG("EditorGUI::LoadSceneFromCachedPath() : cached scene no longer exists!\n\tPath: {}", scenePath);
             return false;
         }
 
