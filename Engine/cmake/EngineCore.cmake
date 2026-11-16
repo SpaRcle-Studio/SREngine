@@ -12,6 +12,10 @@ else()
     add_definitions(-DSR_USE_VULKAN)
 endif()
 
+if (SR_TRACY_ENABLE AND EVO_VULKAN_TRACY_GPU_PROFILER AND SR_RENDER_USE_VULKAN)
+    add_definitions(-DEVO_VULKAN_TRACY_GPU_PROFILER)
+endif()
+
 if (SR_TRACY_ENABLE)
     add_definitions(
         -DSR_TRACY_ENABLE

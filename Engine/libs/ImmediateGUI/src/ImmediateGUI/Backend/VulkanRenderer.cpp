@@ -9,6 +9,11 @@
 
 #if defined(SR_USE_VULKAN) && defined(SR_USE_IMGUI)
 
+#if defined(SR_TRACY_ENABLE) && defined(EVO_VULKAN_TRACY_GPU_PROFILER)
+    #include <Utils/Profile/TracyContext.h>
+    #include <tracy/TracyVulkan.hpp>
+#endif
+
 namespace SR_IMMEDIATE_GUI_NS {
     struct ImGui_ImplVulkanH_FrameRenderBuffers
     {
@@ -61,18 +66,22 @@ namespace SR_IMMEDIATE_GUI_NS {
         struct VulkanRenderer {
             VulkanRendererCreateInfo info;
 
+		#if defined(SR_TRACY_ENABLE) && defined(EVO_VULKAN_TRACY_GPU_PROFILER)
+            tracy::VkCtx* pTracyContext = nullptr;
+		#endif
+
             VkDescriptorPool descriptorPool = VK_NULL_HANDLE;
             VkRenderPass renderPass = VK_NULL_HANDLE;
 
-            std::vector<VkFramebuffer> framebuffers;
-            std::vector<VkCommandPool> cmdPools;
-            std::vector<VkCommandBuffer> cmdBuffers;
+            SR_UTILS_NS::Vector<VkFramebuffer> framebuffers;
+            SR_UTILS_NS::Vector<VkCommandPool> cmdPools;
+            SR_UTILS_NS::Vector<VkCommandBuffer> cmdBuffers;
 
             VkSemaphore semaphore = VK_NULL_HANDLE;
 
             VkCommandBufferBeginInfo cmdBeginInfo = { };
             VkRenderPassBeginInfo renderPassBeginInfo = { };
-            std::vector<VkClearValue> clearValues;
+            SR_UTILS_NS::Vector<VkClearValue> clearValues;
 
             PFN_vkCmdBeginRendering pBeginRendering = nullptr;
             PFN_vkCmdEndRendering pEndRendering = nullptr;
@@ -81,7 +90,7 @@ namespace SR_IMMEDIATE_GUI_NS {
 
             uint32_t imageCount = 0;
 
-            std::vector<VulkanFrameInfo> frames;
+            SR_UTILS_NS::Vector<VulkanFrameInfo> frames;
         };
 
         static const std::vector<VkDescriptorPoolSize> POOL_SIZES = {
@@ -595,7 +604,24 @@ namespace SR_IMMEDIATE_GUI_NS {
         VkCommandBuffer cmd = r->cmdBuffers[frameIndex];
 
         vkResetCommandPool(r->info.device, r->cmdPools[frameIndex], 0);
-        vkBeginCommandBuffer(cmd, &r->cmdBeginInfo);
+        if (vkBeginCommandBuffer(cmd, &r->cmdBeginInfo) != VK_SUCCESS) {
+            SR_ERROR("Immediate::VulkanRecordFrame() : failed to begin command buffer!");
+            return VK_NULL_HANDLE;
+        }
+
+	#if defined(SR_TRACY_ENABLE) && defined(EVO_VULKAN_TRACY_GPU_PROFILER)
+        if (tracyEnabled && !r->pTracyContext) {
+            r->pTracyContext = static_cast<tracy::VkCtx*>(SR_TRACY_GET_CONTEXT(SR_UTILS_NS::TracyType::Vulkan, nullptr));
+        }
+        alignas(tracy::VkCtxScope) uint8_t tracyStorage[sizeof(tracy::VkCtxScope)];
+        tracy::VkCtxScope* pTracyZone = nullptr;
+        if (tracyEnabled && r->pTracyContext) {
+            static constexpr tracy::SourceLocationData source = {
+                "ImGui GPU", TracyFunction, TracyFile, (uint32_t)TracyLine, 0xb070d0
+            };
+            pTracyZone = new (tracyStorage) tracy::VkCtxScope(r->pTracyContext, &source, cmd, true);
+        }
+	#endif
 
         static bool hasWarn = false;
 
@@ -692,6 +718,13 @@ namespace SR_IMMEDIATE_GUI_NS {
         else {
             vkCmdEndRenderPass(cmd);
         }
+
+	#if defined(SR_TRACY_ENABLE) && defined(EVO_VULKAN_TRACY_GPU_PROFILER)
+        if (pTracyZone) {
+            pTracyZone->~VkCtxScope();
+            r->pTracyContext->Collect(cmd);
+        }
+	#endif
 
         vkEndCommandBuffer(cmd);
         return cmd;

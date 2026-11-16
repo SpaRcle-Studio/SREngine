@@ -2,7 +2,6 @@
 <Features>
     <Unused>
         <CompilePDB Value="true"/>
-        <VulkanTracy Value="false"/>
         <SkyboxCPUUsage Value="false"/>
         <LoadSkybox Value="false"/>
         <MTRendering Value="false"/>
@@ -18,6 +17,7 @@
         <VulkanValidationErrorAsAssert Value="true"/>
         <VulkanValidation Value="false"/>
         <VulkanGPUAssist Value="false"/>
+        <VulkanTracy Value="false"/>
 
         <!-- Render -->
         <HeadlessPipeline Value="false"/>

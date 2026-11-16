@@ -261,6 +261,12 @@ namespace SR_SCRIPTING_NS {
         #ifdef SR_ENGINE_USE_MODULAR_BUILD
             customArgs += "/DSR_ENGINE_USE_MODULAR_BUILD ";
         #endif
+        #ifdef TRACY_DELAYED_INIT
+            customArgs += "/DTRACY_DELAYED_INIT ";
+        #endif
+        #ifdef TRACY_MANUAL_LIFETIME
+            customArgs += "/DTRACY_MANUAL_LIFETIME ";
+        #endif
         }
         else {
         #ifdef SR_THREADS_ALLOWED
@@ -291,6 +297,12 @@ namespace SR_SCRIPTING_NS {
         #endif
         #ifdef SR_ENGINE_USE_MODULAR_BUILD
             customArgs += "-DSR_ENGINE_USE_MODULAR_BUILD ";
+        #endif
+        #ifdef TRACY_DELAYED_INIT
+            customArgs += "-DTRACY_DELAYED_INIT ";
+        #endif
+        #ifdef TRACY_MANUAL_LIFETIME
+            customArgs += "-DTRACY_MANUAL_LIFETIME ";
         #endif
 
             customArgs += "-DFMT_HEADER_ONLY ";

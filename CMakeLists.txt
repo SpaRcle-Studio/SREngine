@@ -189,12 +189,7 @@ if (SR_DISABLE_EXCEPTIONS)
     endif()
 endif()
 
-include(Engine/cmake/ModularBuild.cmake)
-
-set(SR_PHYSICS_USE_BULLET3 OFF)
-set(SR_PHYSICS_USE_BOX2D OFF)
-
-set(EVO_VULKAN_STATIC_LIBRARY ON)
+option(EVO_VULKAN_TRACY_GPU_PROFILER "Enable Tracy Vulkan GPU profiling" ON)
 
 if (NOT SR_EMSCRIPTEN)
     set(SR_TRACY_ENABLE ON)
@@ -202,7 +197,12 @@ else()
     set(SR_TRACY_ENABLE OFF)
 endif()
 
+set(SR_PHYSICS_USE_BULLET3 OFF)
+set(SR_PHYSICS_USE_BOX2D OFF)
+set(EVO_VULKAN_STATIC_LIBRARY ON)
 set(SR_ICU ON)
+
+include(Engine/cmake/ModularBuild.cmake)
 
 set(CMAKE_BUILD_PARALLEL_LEVEL 0)
 
