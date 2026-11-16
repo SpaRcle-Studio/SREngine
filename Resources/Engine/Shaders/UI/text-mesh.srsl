@@ -16,6 +16,7 @@ DepthTest true;
 [[shared]] vec2 UV;
 [[shared]] vec4 glyphColor;
 [[shared]] vec4 glyphMetadata;
+[[shared]] float glyphSdfRange;
 
 [[uniform]] float textVisible;
 [[uniform]] vec4 textEffect;
@@ -38,6 +39,13 @@ void fragment() {
         vec4 tex = texture(diffuse, UV);
         float msd = glyphMetadata.w == 2.0 || glyphMetadata.w == 4.0 ? tex.r : median(tex.r, tex.g, tex.b);
         float w = max(fwidth(msd), 1.0 / 1024.0);
+        if (glyphMetadata.w == 0.0) {
+            // Differentiate UVs: MSDF channel transitions must not widen the antialiasing band.
+            vec2 unitRange = vec2(glyphSdfRange) / vec2(textureSize(diffuse, 0));
+            vec2 screenTexSize = vec2(1.0) / max(fwidth(UV), vec2(0.000001));
+            float screenRange = max(0.5 * dot(unitRange, screenTexSize), 1.0);
+            w = 0.5 / screenRange;
+        }
         float threshold = 0.5 - glyphMetadata.y * 0.055;
         float alpha = glyphMetadata.w == 4.0 ? tex.r : smoothstep(threshold - w, threshold + w, msd);
         if (glyphMetadata.w == 3.0) {
@@ -67,6 +75,7 @@ void vertex() {
     vec2 pos = NDC_RECT.xy + POSITION0 + sprite_vertices[VERTEX_INDEX] * (POSITION1 - POSITION0);
     glyphColor = COLOR0;
     glyphMetadata = CUSTOM0;
+    glyphSdfRange = CUSTOM1.y;
     if (CUSTOM0.w != 1.0) {
         pos.x += CUSTOM0.z * (sprite_vertices[VERTEX_INDEX].y - 0.5) * (POSITION1.y - POSITION0.y) * 0.2;
         float index = CUSTOM1.x;
