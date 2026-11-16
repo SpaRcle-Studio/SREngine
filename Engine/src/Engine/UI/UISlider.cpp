@@ -21,10 +21,15 @@ namespace SR_CORE_UI_NS {
     }
 
     void UISlider::RefreshVisual() {
+        m_visualDirty = true;
+        if (!IsActive()) {
+            return;
+        }
         auto&& pRect = SR_UTILS_NS::ExtractTransformAs<SR_UTILS_NS::TransformRect>(m_handle.GetRaw());
         if (!pRect) {
             return;
         }
+        m_visualDirty = false;
         float_t value = m_maxValue > m_minValue ? (m_value - m_minValue) / (m_maxValue - m_minValue) : 0.f;
         value = std::clamp(m_reverse ? 1.f - value : value, 0.f, 1.f);
         auto anchors = pRect->GetAnchors();
@@ -40,6 +45,13 @@ namespace SR_CORE_UI_NS {
     void UISlider::OnRangeChanged() {
         SetValue(m_value);
         RefreshVisual();
+    }
+
+    void UISlider::AfterLayout() {
+        UIControl::AfterLayout();
+        if (m_visualDirty) {
+            RefreshVisual();
+        }
     }
 
     void UISlider::OnPostLoad() {

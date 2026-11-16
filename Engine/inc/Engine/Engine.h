@@ -112,6 +112,13 @@ namespace SR_CORE_NS {
         /// @method @evaluate
         SR_NODISCARD float_t GetFramerate() const;
 
+        /// @method
+        void RequestQuit();
+        /// @method
+        void SetFullscreen(bool value);
+        /// @method @evaluate
+        SR_NODISCARD bool IsFullscreen() const;
+
         SR_NODISCARD SR_UTILS_NS::Debug& GetDebugger() const;
 
     public:
@@ -157,7 +164,7 @@ namespace SR_CORE_NS {
 
         RenderContextPtr m_renderContext = { };
 
-        std::vector<WindowPtr> m_windows;
+        SR_UTILS_NS::Vector<WindowPtr> m_windows;
         /// std::optional<Utils::CursorLock> m_cursorLockOpt = std::nullopt;
 
     };

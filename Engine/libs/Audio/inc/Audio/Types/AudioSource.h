@@ -55,6 +55,7 @@ namespace SR_AUDIO_NS
         /// @method
         void SetLoop(bool loop);
         void SetConeInnerAngle(float_t Angle);
+        /// @method
         void SetPitch(float_t pitch);
         /// @method
         void SetPath(const SR_UTILS_NS::Path& path);
@@ -70,6 +71,7 @@ namespace SR_AUDIO_NS
 
         SR_NODISCARD bool GetLoop() const;
         SR_NODISCARD float_t GetConeInnerAngle() const;
+        /// @method @evaluate
         SR_NODISCARD float_t GetPitch() const;
         SR_NODISCARD SR_UTILS_NS::Path GetPath() const;
         /// @method @evaluate

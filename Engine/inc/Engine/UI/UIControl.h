@@ -52,6 +52,8 @@ namespace SR_CORE_UI_NS {
         void SetInteractable(bool value);
         /// @method @evaluate
         UIControlState GetState() const noexcept { return m_state; }
+        /// @method
+        void Focus();
 
     protected:
         void InvokeEvents(const SR_UTILS_NS::Vector<UIButtonEvent>& events);

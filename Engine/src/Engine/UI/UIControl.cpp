@@ -6,9 +6,19 @@
 #include <Utils/ECS/TransformRect.h>
 #include <Utils/Reflection/Method.h>
 #include <Scripting/Base/Behaviour.h>
+#include <Utils/World/Scene.h>
+#include <Utils/World/SceneUpdater.h>
 #include <Codegen/UIControl.generated.hpp>
 
 namespace SR_CORE_UI_NS {
+    void UIControl::Focus() {
+        if (auto&& pScene = TryGetScene()) {
+            if (auto&& pUpdater = pScene->GetSceneUpdater()) {
+                pUpdater->RequestUIFocus(*this);
+            }
+        }
+    }
+
     bool UIButtonEvent::Invoke() const {
         auto pObject = object.Get();
         if (!pObject || !pObject->IsComponentValid()) {

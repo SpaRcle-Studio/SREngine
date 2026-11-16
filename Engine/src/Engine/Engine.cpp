@@ -538,6 +538,22 @@ namespace SR_CORE_NS {
         return GetFocusedWindow();
     }
 
+    void Engine::RequestQuit() {
+        SR_TRACY_ZONE;
+        StopEngine();
+    }
+
+    void Engine::SetFullscreen(bool value) {
+        if (auto&& pWindow = GetMainWindow()) {
+            pWindow->SetFullScreen(value);
+        }
+    }
+
+    bool Engine::IsFullscreen() const {
+        auto&& pWindow = GetMainWindow();
+        return pWindow && pWindow->IsFullScreen();
+    }
+
     float_t Engine::GetFramerate() const {
         if (m_threadsWorker) {
             static const SR_UTILS_NS::StringAtom deltaTimeKey = "DeltaTime";

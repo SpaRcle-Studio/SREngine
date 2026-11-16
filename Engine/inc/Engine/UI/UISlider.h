@@ -21,10 +21,12 @@ namespace SR_CORE_UI_NS {
         void PointerDrag(const SR_UTILS_NS::PointerEvent& event) override;
         bool Navigate(int32_t direction) override;
         void OnPostLoad() override;
+        void AfterLayout() override;
 
     private:
         void RefreshVisual();
         void OnRangeChanged();
+        bool m_visualDirty = true;
         /// @property @setter(SetValue)
         float_t m_value = 0.f;
         /// @property @onChanged(OnRangeChanged)

@@ -17,12 +17,16 @@ DepthTest true;
 [[shared]] vec4 glyphColor;
 [[shared]] vec4 glyphMetadata;
 [[shared]] float glyphSdfRange;
+[[shared]] float glyphTrueSdf;
+[[shared]] float glyphFontScale;
 
 [[uniform]] float textVisible;
 [[uniform]] vec4 textEffect;
 
 [[uniform], [public]] vec3 color = vec3(1.0, 1.0, 1.0);
 [[uniform], [public]] sampler2D diffuse;
+[[uniform], [public]] float outlineWidth = 0.0;
+[[uniform], [public]] vec4 outlineColor = vec4(0.0, 0.0, 0.0, 1.0);
 
 float median(float r, float g, float b) {
     return max(min(r, g), min(max(r, g), b));
@@ -56,7 +60,14 @@ void fragment() {
             COLOR = tex * glyphColor * vec4(color, 1.0);
         }
         else {
-            COLOR = vec4(color * glyphColor.rgb, alpha * glyphColor.a);
+            float outlineDistance = glyphTrueSdf > 0.5 ? tex.a : msd;
+            float outlineShift = max(0.0, outlineWidth) / max(0.000001, glyphSdfRange * glyphFontScale);
+            float outerThreshold = max(w, threshold - outlineShift);
+            float outerAlpha = glyphMetadata.w == 4.0 ? alpha : smoothstep(outerThreshold - w, outerThreshold + w, outlineDistance);
+            float borderAlpha = outlineWidth > 0.0 ? max(0.0, outerAlpha - alpha) * outlineColor.a : 0.0;
+            float combinedAlpha = alpha + borderAlpha;
+            vec3 combinedColor = (color * glyphColor.rgb * alpha + outlineColor.rgb * borderAlpha) / max(combinedAlpha, 0.000001);
+            COLOR = vec4(combinedColor, combinedAlpha * glyphColor.a);
         }
     }
 
@@ -80,6 +91,8 @@ void vertex() {
     glyphColor = COLOR0;
     glyphMetadata = CUSTOM0;
     glyphSdfRange = CUSTOM1.y;
+    glyphTrueSdf = CUSTOM1.z;
+    glyphFontScale = CUSTOM1.w;
     if (CUSTOM0.w != 1.0) {
         pos.x += CUSTOM0.z * (sprite_vertices[VERTEX_INDEX].y - 0.5) * (POSITION1.y - POSITION0.y) * 0.2;
         float index = CUSTOM1.x;
