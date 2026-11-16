@@ -15,6 +15,7 @@ DepthWrite true;
 DepthTest true;
 
 [[uniform], [public]] vec4 color = vec4(1.0, 1.0, 1.0, 1.0);
+[[uniform]] float uiOpacity = 1.0;
 [[uniform], [public]] sampler2D diffuse;
 [[uniform], [public]] float alphaCutoff = 0.0;
 [[uniform], [public]] float alphaMultiplier = 1.0;
@@ -238,6 +239,7 @@ void fragment() {
     if (COLOR.a < alphaThreshold) {
         COLOR.a *= alphaMultiplier;
     }
+    COLOR.a *= uiOpacity;
     COLOR_INDEX_1 = vec4(0.0);
     COLOR_INDEX_2 = vec4(0.0);
 }

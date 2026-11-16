@@ -13,11 +13,16 @@
 
 namespace SR_CORE_UI_NS {
     /// @category(UI)
-    class UICursor : public SR_UTILS_NS::Component, public SR_GRAPH_NS::UI::IFindCanvasOwner {
+    class UICursor : public SR_UTILS_NS::UIComponent, public SR_GRAPH_NS::UI::IFindCanvasOwner {
         SR_CLASS()
-        using Super = SR_UTILS_NS::Component;
     public:
-        void Update(float_t dt) override;
+        bool ExecuteInEditMode() const override { return true; }
+        void AfterLayout() override;
+        void OnDisable() override;
+        void OnDetached() override;
+
+    private:
+        bool m_positionInitialized = false;
 
     };
 }

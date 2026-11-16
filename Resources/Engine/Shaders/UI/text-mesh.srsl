@@ -22,6 +22,7 @@ DepthTest true;
 
 [[uniform]] float textVisible;
 [[uniform]] vec4 textEffect;
+[[uniform]] float uiOpacity = 1.0;
 
 [[uniform], [public]] vec3 color = vec3(1.0, 1.0, 1.0);
 [[uniform], [public]] sampler2D diffuse;
@@ -70,6 +71,8 @@ void fragment() {
             COLOR = vec4(combinedColor, combinedAlpha * glyphColor.a);
         }
     }
+
+    COLOR.a *= uiOpacity;
 
 #ifdef SR_DEFINE_WIREFRAME
     COLOR = vec4(1.0, 0.0, 0.0, 1.0);
