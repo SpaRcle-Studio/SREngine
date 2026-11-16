@@ -59,7 +59,7 @@ endif()
 SR_COPY_STATIC_LIBRARY_TO_LIBRARY_FOLDER(Scripting)
 
 if (SR_SCRIPTING_DLL_EXPORTS)
-    message("Scripting will be using DLL exports")
+    message(STATUS "[SpaRcle Engine] Scripting will be using DLL exports")
     target_compile_definitions(Scripting PUBLIC SR_SCRIPTING_DLL_EXPORTS)
 endif()
 

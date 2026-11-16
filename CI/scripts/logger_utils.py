@@ -15,7 +15,7 @@ class Logger:
 
     def __init__(self):
         self.log_file = ""
-        self.log_prefix = "[SpaRcle Codegen]"
+        self.log_prefix = "[SpaRcle Engine] [SpaRcle Codegen]"
         self.module_name = ""
 
     def set_module_name(self, module_name):

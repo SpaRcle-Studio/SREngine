@@ -17,12 +17,12 @@ if (SR_HOST_SYSTEM_UNIX)
     find_program(PYTHON_EXECUTABLE NAMES python3 python)
 
     if (PYTHON_EXECUTABLE)
-       message(STATUS "InstallPython: Python executable found: ${PYTHON_EXECUTABLE}")
+       message(STATUS "[SpaRcle Engine] InstallPython: Python executable found: ${PYTHON_EXECUTABLE}")
     else()
-        message(FATAL_ERROR "InstallPython: Python executable not found. Please install Python.")
+        message(FATAL_ERROR "[SpaRcle Engine] InstallPython: Python executable not found. Please install Python.")
     endif()
 
-    message(STATUS "InstallPython: creating virtual environment at: ${PROJECT_SOURCE_DIR}/../")
+    message(STATUS "[SpaRcle Engine] InstallPython: creating virtual environment at: ${PROJECT_SOURCE_DIR}/../")
 
     execute_process(
         COMMAND ${PYTHON_EXECUTABLE} -m venv ${PROJECT_SOURCE_DIR}/../.venv
@@ -32,12 +32,12 @@ if (SR_HOST_SYSTEM_UNIX)
     )
 
     if (NOT result EQUAL "0")
-        message(FATAL_ERROR "InstallPython: failed to create virtual environment! ${error_output}")
+        message(FATAL_ERROR "[SpaRcle Engine] InstallPython: failed to create virtual environment! ${error_output}")
     endif()
 
     set(SR_PYTHON_EXECUTABLE "${PROJECT_SOURCE_DIR}/../.venv/bin/python")
 elseif (NOT SR_PYTHON_EXECUTABLE)
-    message(STATUS "InstallPython: Python not found.")
+    message(STATUS "[SpaRcle Engine] InstallPython: Python not found.")
 
     set(SR_PYTHON_INSTALL_DIR "${SR_CMAKE_VENV_DIRECTORY}/python")
 
@@ -45,18 +45,18 @@ elseif (NOT SR_PYTHON_EXECUTABLE)
 
     string(REPLACE "/" "\\" SR_PYTHON_INSTALL_DIR "${SR_PYTHON_INSTALL_DIR}")
 
-    message(STATUS "InstallPython: Python URL: ${SR_PYTHON_URL}")
-    message(STATUS "InstallPython: Python install dir: ${SR_PYTHON_INSTALL_DIR}")
+    message(STATUS "[SpaRcle Engine] InstallPython: Python URL: ${SR_PYTHON_URL}")
+    message(STATUS "[SpaRcle Engine] InstallPython: Python install dir: ${SR_PYTHON_INSTALL_DIR}")
 
     if (NOT EXISTS "${SR_PYTHON_INSTALL_DIR}")
-        message(STATUS "InstallPythons: python not found, cloning...")
+        message(STATUS "[SpaRcle Engine] InstallPythons: python not found, cloning...")
 
         execute_process(
             COMMAND git clone ${SR_PYTHON_URL} ${SR_PYTHON_INSTALL_DIR}
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
         )
     else()
-        message(STATUS "InstallPython: python already exists, skipping clone.")
+        message(STATUS "[SpaRcle Engine] InstallPython: python already exists, skipping clone.")
     endif()
 
     if (NOT EXISTS "${SR_PYTHON_INSTALL_DIR}/python.exe")
@@ -67,13 +67,13 @@ elseif (NOT SR_PYTHON_EXECUTABLE)
 endif()
 
 if (SR_PYTHON_EXECUTABLE)
-    message(STATUS "InstallPython: Python executable: ${SR_PYTHON_EXECUTABLE}")
+    message(STATUS "[SpaRcle Engine] InstallPython: Python executable: ${SR_PYTHON_EXECUTABLE}")
 else()
-    message(FATAL_ERROR "InstallPython: Python could not be installed!")
+    message(FATAL_ERROR "[SpaRcle Engine] InstallPython: Python could not be installed!")
 endif()
 
-message(STATUS "InstallPython: installing Python packages...")
-message(STATUS "InstallPython: Python packages: ${SR_PYTHON_REQUIREMENTS}")
+message(STATUS "[SpaRcle Engine] InstallPython: installing Python packages...")
+message(STATUS "[SpaRcle Engine] InstallPython: Python packages: ${SR_PYTHON_REQUIREMENTS}")
 
 execute_process(
     COMMAND "${SR_PYTHON_EXECUTABLE}" -m pip install ${SR_PYTHON_REQUIREMENTS}
@@ -83,13 +83,13 @@ execute_process(
 )
 
 set(SR_PYTHON_PY_INSTALLER "${SR_PYTHON_EXECUTABLE} -m PyInstaller")
-message(STATUS "InstallPython: PyInstaller: ${SR_PYTHON_PY_INSTALLER}")
+message(STATUS "[SpaRcle Engine] InstallPython: PyInstaller: ${SR_PYTHON_PY_INSTALLER}")
 
 if (NOT result EQUAL "0")
-    message(FATAL_ERROR "InstallPython: failed to install Python packages! ${error_output}")
+    message(FATAL_ERROR "[SpaRcle Engine] InstallPython: failed to install Python packages! ${error_output}")
 else()
-    message(STATUS "InstallPython: python packages installed successfully.")
+    message(STATUS "[SpaRcle Engine] InstallPython: python packages installed successfully.")
 endif()
 
-message(STATUS "InstallPython: checking python version...")
+message(STATUS "[SpaRcle Engine] InstallPython: checking python version...")
 execute_process(COMMAND "${SR_PYTHON_EXECUTABLE}" --version)

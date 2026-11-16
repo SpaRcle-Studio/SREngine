@@ -50,7 +50,7 @@ target_include_directories(ImmediateGUI PRIVATE libs/ImNodeFlow/include)
 target_compile_definitions(ImmediateGUI PRIVATE SR_IMGUI_INCLUDE_CHECK)
 
 if (SR_IMMEDIATE_GUI_DLL_EXPORTS)
-    message("ImmediateGUI will be built as a shared library")
+    message(STATUS "[SpaRcle Engine] ImmediateGUI will be built as a shared library")
     target_compile_definitions(ImmediateGUI PUBLIC SR_IMMEDIATE_GUI_DLL_EXPORTS)
 endif()
 
@@ -63,7 +63,7 @@ if (SR_USE_PCH)
 endif()
 
 if (SR_RENDER_USE_VULKAN)
-    message("$ENV{VULKAN_SDK}")
+    message("[SpaRcle Engine] Immediate GUI Vulkan SDK: $ENV{VULKAN_SDK}")
     find_package(Vulkan REQUIRED)
     target_include_directories(ImmediateGUI PRIVATE ${Vulkan_INCLUDE_DIRS})
     if (NOT SR_IMMEDIATE_GUI_STATIC_LIBRARY)

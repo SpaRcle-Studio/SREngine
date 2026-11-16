@@ -180,7 +180,7 @@ target_link_libraries(Physics PUBLIC Utils)
 SR_COPY_STATIC_LIBRARY_TO_LIBRARY_FOLDER(Physics)
 
 if (SR_PHYSICS_DLL_EXPORTS)
-    message("Physics will be using DLL exports")
+    message("[SpaRcle Engine] Physics will be using DLL exports")
     target_compile_definitions(Physics PUBLIC SR_PHYSICS_DLL_EXPORTS)
 endif()
 

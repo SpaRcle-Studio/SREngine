@@ -238,7 +238,7 @@ namespace SR_SCRIPTING_NS {
         SR_UTILS_NS::String cmakeContent;
         cmakeContent += "if (NOT EMSCRIPTEN)\n";
 
-        cmakeContent += "\tcmake_minimum_required(VERSION 3.5)\n";
+        cmakeContent += "\tcmake_minimum_required(VERSION 3.10)\n";
         cmakeContent += "\tproject(SREngineScriptModules)\n";
         cmakeContent += "\tset(CMAKE_CXX_STANDARD 23)\n\n";
 

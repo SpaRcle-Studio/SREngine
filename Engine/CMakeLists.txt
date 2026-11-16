@@ -16,17 +16,17 @@ include(cmake/Codegen.cmake)
 SRCodegen()
 
 target_architecture(CURRENT_TARGET_ARCHITECTURE)
-message(STATUS "SpaRcle Engine: current build target architecture: ${CURRENT_TARGET_ARCHITECTURE}")
-message(STATUS "SpaRcle Engine: current build type: ${CMAKE_BUILD_TYPE}")
+message(STATUS "[SpaRcle Engine] Current build target architecture: ${CURRENT_TARGET_ARCHITECTURE}")
+message(STATUS "[SpaRcle Engine] Current build type: ${CMAKE_BUILD_TYPE}")
 
 get_property(SR_ENGINE_VERSION GLOBAL PROPERTY SR_ENGINE_VERSION_PROPERTY)
 get_property(SR_ENGINE_MAJOR_VERSION GLOBAL PROPERTY SR_ENGINE_MAJOR_VERSION_PROPERTY)
 get_property(SR_ENGINE_MINOR_VERSION GLOBAL PROPERTY SR_ENGINE_MINOR_VERSION_PROPERTY)
 get_property(SR_ENGINE_PATCH_VERSION GLOBAL PROPERTY SR_ENGINE_PATCH_VERSION_PROPERTY)
 
-message(STATUS "SpaRcle Engine: current version is ${SR_ENGINE_VERSION}")
-message(STATUS "SpaRcle Engine: C compiler is '${CMAKE_C_COMPILER}'")
-message(STATUS "SpaRcle Engine: C++ compiler is '${CMAKE_CXX_COMPILER}'")
+message(STATUS "[SpaRcle Engine] Current version is ${SR_ENGINE_VERSION}")
+message(STATUS "[SpaRcle Engine] C compiler is '${CMAKE_C_COMPILER}'")
+message(STATUS "[SpaRcle Engine] C++ compiler is '${CMAKE_CXX_COMPILER}'")
 
 option(SR_ENGINE_FLATPAK_BUILD "" OFF)
 

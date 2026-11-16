@@ -11,7 +11,7 @@ if __name__ == "__main__":
     is_unix = sys.platform.startswith('linux') or sys.platform.startswith('darwin')
     lib_file = ''
 
-    prefix = '[SpaRcle libclang copy script]'
+    prefix = '[SpaRcle Engine] [libclang copy script]'
 
     print(f'{prefix} Host platform: {sys.platform}')
 

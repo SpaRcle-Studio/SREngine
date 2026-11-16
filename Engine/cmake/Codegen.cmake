@@ -2,7 +2,7 @@ set(SR_CODEGEN_SCRIPT_PATH "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/CI/scripts/codegen
 set(SR_COPY_LIBCLANG_SCRIPT_PATH "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/CI/scripts/copy_libclang_to_resources.py")
 
 macro(SRCodegen)
-    message(STATUS "Copy libclang to ${SR_CMAKE_RESOURCES_DIRECTORY}/Engine/Utilities")
+    message(STATUS "[SpaRcle Engine] Copy libclang to ${SR_CMAKE_RESOURCES_DIRECTORY}/Engine/Utilities")
 
     execute_process(
         COMMAND ${SR_PYTHON_EXECUTABLE} ${SR_COPY_LIBCLANG_SCRIPT_PATH}
@@ -13,20 +13,20 @@ macro(SRCodegen)
     )
 
     if (result EQUAL "0")
-        message(STATUS "Libclang copied successfully:\n${output}")
+        message(STATUS "[SpaRcle Engine] Libclang copied successfully:\n${output}")
     else()
-        message(FATAL_ERROR "Libclang copy failed with error:\n${error_output}")
+        message(FATAL_ERROR "[SpaRcle Engine] Libclang copy failed with error:\n${error_output}")
     endif()
 
     # compile codegen script
 
     set(CODEGEN_LOCK "${SR_CMAKE_RESOURCES_DIRECTORY}/Engine/Utilities/codegen.lock")
 
-    message(STATUS "Waiting for codegen compilation lock...")
+    message(STATUS "[SpaRcle Engine] Waiting for codegen compilation lock...")
 
     file(LOCK "${CODEGEN_LOCK}" TIMEOUT 30)
 
-    message(STATUS "Compiling codegen script: ${SR_CODEGEN_SCRIPT_PATH}")
+    message(STATUS "[SpaRcle Engine] Compiling codegen script: ${SR_CODEGEN_SCRIPT_PATH}")
 
     execute_process(
         COMMAND ${SR_PYTHON_EXECUTABLE} -m PyInstaller --onefile ${SR_CODEGEN_SCRIPT_PATH}
@@ -40,9 +40,9 @@ macro(SRCodegen)
     )
 
     if (result EQUAL "0")
-        message(STATUS "Codegen script compiled successfully:\n${output}")
+        message(STATUS "[SpaRcle Engine] Codegen script compiled successfully:\n${output}")
     else()
-        message(FATAL_ERROR "Codegen script compilation failed with error:\n${error_output}")
+        message(FATAL_ERROR "[SpaRcle Engine] Codegen script compilation failed with error:\n${error_output}")
     endif()
 
     if (SR_HOST_SYSTEM_UNIX)
@@ -52,13 +52,13 @@ macro(SRCodegen)
     endif()
 
     if (NOT EXISTS "${SR_CODEGEN_EXECUTABLE_SCRIPT}")
-        message(FATAL_ERROR "Codegen script not found at: ${SR_CODEGEN_EXECUTABLE_SCRIPT}")
+        message(FATAL_ERROR "[SpaRcle Engine] Codegen script not found at: ${SR_CODEGEN_EXECUTABLE_SCRIPT}")
     endif()
 
     # code generation script
 
-    message(STATUS "Running codegen script: ${SR_CODEGEN_EXECUTABLE_SCRIPT}")
-    message(STATUS "Codegen script args: ${SR_CODEGEN_EXECUTABLE_SCRIPT}
+    message(STATUS "[SpaRcle Engine] Running codegen script: ${SR_CODEGEN_EXECUTABLE_SCRIPT}")
+    message(STATUS "[SpaRcle Engine] Codegen script args: ${SR_CODEGEN_EXECUTABLE_SCRIPT}
         --codegen_dir ${SR_CMAKE_ROOT_BUILD_DIRECTORY}
         --root_build_dir ${SR_CMAKE_ROOT_BUILD_DIRECTORY}
         --repo_dir ${SR_CMAKE_ROOT_SOURCE_DIRECTORY}
@@ -80,8 +80,8 @@ macro(SRCodegen)
     file(LOCK "${CODEGEN_LOCK}" RELEASE)
 
     if (result EQUAL "0")
-        message(STATUS "Codegen script executed successfully:\n${output}")
+        message(STATUS "[SpaRcle Engine] Codegen script executed successfully:\n${output}")
     else()
-        message(FATAL_ERROR "Codegen script execution failed with error:\n${error_output}\n${result}")
+        message(FATAL_ERROR "[SpaRcle Engine] Codegen script execution failed with error:\n${error_output}\n${result}")
     endif()
 endmacro()

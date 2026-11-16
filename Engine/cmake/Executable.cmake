@@ -73,7 +73,7 @@ else()
     endif()
 
     get_property(SR_EXECUTABLE_ARGS_CONTENT GLOBAL PROPERTY SR_EXECUTABLE_ARGS)
-    message(STATUS "SpaRcle Engine: adding executable arguments: ${SR_EXECUTABLE_ARGS_CONTENT}")
+    message(STATUS "[SpaRcle Engine] Adding executable arguments: ${SR_EXECUTABLE_ARGS_CONTENT}")
     add_executable(${SR_EXECUTABLE_NAME} ${SR_EXECUTABLE_ARGS_CONTENT})
 
     set_target_properties(${SR_EXECUTABLE_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${SR_EXECUTABLE_DIR})
