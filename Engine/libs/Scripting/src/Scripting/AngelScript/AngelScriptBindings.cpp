@@ -20,17 +20,13 @@
 #include <Utils/Common/Singleton.h>
 
 namespace SR_SCRIPTING_NS {
+    AngelScriptNativeObject::AngelScriptNativeObject(AngelScriptBindings* pBind)
+        : pBindings(pBind)
+    { }
+
     AngelScriptNativeObject::~AngelScriptNativeObject() {
-        if (pBindings) {
-            pBindings->Forget(this);
-        }
-
-        value = {};
-        delete pAllocation;
-
-        if (pAnchor) {
-            pAnchor->Release();
-        }
+        SRAssert(!pAllocation);
+        SRAssert(references == 0);
     }
 
     void AngelScriptNativeObject::AddRef() {
@@ -40,7 +36,20 @@ namespace SR_SCRIPTING_NS {
     void AngelScriptNativeObject::Release() {
         if (--references == 0) {
             SR_TRACY_ZONE;
-            delete this;
+            if (pBindings) {
+                pBindings->Forget(this);
+            }
+
+            value = {};
+            delete pAllocation;
+            pAllocation = nullptr;
+
+            pSharedControl = nullptr;
+
+            if (pAnchor) {
+                pAnchor->Release();
+                pAnchor = nullptr;
+            }
         }
     }
 
@@ -90,6 +99,10 @@ namespace SR_SCRIPTING_NS {
     {
         m_types.reserve(2048);
         m_calls.reserve(2048);
+
+        m_nativeObjectPoolAllocator = new SR_UTILS_NS::MonotonicAllocator(1000 * sizeof(AngelScriptNativeObject));
+        m_freeNativeObjectPool.reserve(1000);
+        m_allocatedNativeObjectPool.reserve(1000);
     }
 
     AngelScriptBindings::~AngelScriptBindings() {
@@ -100,6 +113,11 @@ namespace SR_SCRIPTING_NS {
         for (auto&& pType : m_types) {
             delete pType;
         }
+        for (auto&& pNative : m_allocatedNativeObjectPool) {
+            pNative->~AngelScriptNativeObject();
+        }
+        m_freeNativeObjectPool.clear();
+        m_nativeObjectPoolAllocator.Reset();
     }
 
     bool AngelScriptBindings::Check(int32_t result, SR_UTILS_NS::StringView declaration) const {
@@ -987,9 +1005,8 @@ namespace SR_SCRIPTING_NS {
             value = value.Copy();
         }
 
-        auto&& pObject = new AngelScriptNativeObject();
+        auto&& pObject = AllocateNativeObject();
         pObject->value = std::move(value);
-        pObject->pBindings = const_cast<AngelScriptBindings*>(this);
         pObject->pSharedControl = pSharedControl;
 
         if (pSharedControl) {
@@ -1008,6 +1025,7 @@ namespace SR_SCRIPTING_NS {
         if (pObject->pSharedControl) {
             m_sharedObjects.erase(pObject->pSharedControl);
         }
+        m_freeNativeObjectPool.emplace_back(pObject);
     }
 
     void AngelScriptBindings::Return(asIScriptGeneric* pCall, SR_UTILS_NS::Reflection::Value value, AngelScriptNativeObject* pAnchor) const {
@@ -1065,16 +1083,17 @@ namespace SR_SCRIPTING_NS {
             SR_UTILS_NS::String text;
 
             if (info.detailedType == "StringAtom") {
-                text = value.Cast<SR_UTILS_NS::StringAtom>()->ToString();
+                text = value.Cast<SR_UTILS_NS::StringAtom>()->ToStringView();
             }
             else if (info.detailedType == "Path") {
-                text = value.Cast<SR_UTILS_NS::Path>()->ToString();
+                text = value.Cast<SR_UTILS_NS::Path>()->View();
             }
             else if (info.detailedType == "StringView") {
-                text = SR_UTILS_NS::String(*value.Cast<SR_UTILS_NS::StringView>());
+                text = *value.Cast<SR_UTILS_NS::StringView>();
             }
             else if (info.detailedType == "UnicodeString") {
-                for (auto&& code : *value.Cast<SR_UTILS_NS::UnicodeString>()) {
+                SR_UTILS_NS::UnicodeString& unicode = *value.Cast<SR_UTILS_NS::UnicodeString>();
+                for (auto&& code : unicode) {
                     if (!SR_UTILS_NS::Localization::Utf::IsValidCodePoint(static_cast<uint32_t>(code))) {
                         AngelScriptBindingHelpers::Exception("Invalid Unicode code point");
                         return;
@@ -1232,6 +1251,21 @@ namespace SR_SCRIPTING_NS {
         memcpy(pAddress, value.Data(), static_cast<uint32_t>(size));
 
         return true;
+    }
+
+    AngelScriptNativeObject* AngelScriptBindings::AllocateNativeObject() const {
+        if (!m_freeNativeObjectPool.empty()) {
+            AngelScriptNativeObject* pNative = m_freeNativeObjectPool.back();
+            m_freeNativeObjectPool.pop_back();
+            pNative->references = 1;
+            return pNative;
+        }
+        auto&& pNative = static_cast<AngelScriptNativeObject*>(m_nativeObjectPoolAllocator->Allocate(
+            sizeof(AngelScriptNativeObject), alignof(AngelScriptNativeObject))
+        );
+        new (pNative)AngelScriptNativeObject(const_cast<AngelScriptBindings*>(this));
+        m_allocatedNativeObjectPool.emplace_back(pNative);
+        return pNative;
     }
 
     const void* AngelScriptBindings::GetStringConstant(const char* pData, asUINT length) {

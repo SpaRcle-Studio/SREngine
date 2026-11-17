@@ -14,26 +14,28 @@
 #include <Utils/Reflection/Property.h>
 #include <Utils/Types/FlatHashMap.h>
 #include <Utils/Types/SharedPtrDynamicData.h>
+#include <Utils/Memory/Allocator.h>
 
 #include <angelscript.h>
-
-#include <utility>
 
 namespace SR_SCRIPTING_NS {
     class AngelScriptBindings;
     struct SR_SCRIPTING_DLL_API AngelScriptNativeObject {
-        SR_UTILS_NS::Reflection::Value value;
+        AngelScriptBindings* pBindings = nullptr;
         AngelScriptNativeObject* pAnchor = nullptr;
         SR_UTILS_NS::SRClass* pAllocation = nullptr;
-        AngelScriptBindings* pBindings = nullptr;
+        SR_UTILS_NS::Reflection::Value value;
         const SR_HTYPES_NS::SharedPtrDynamicData* pSharedControl = nullptr;
         uint32_t references = 1;
 
+        explicit AngelScriptNativeObject(AngelScriptBindings* pBind);
         ~AngelScriptNativeObject();
+
         void AddRef();
         void Release();
-        bool IsAlive() const;
-        SR_UTILS_NS::SRClass* GetObject() const;
+
+        SR_NODISCARD bool IsAlive() const;
+        SR_NODISCARD SR_UTILS_NS::SRClass* GetObject() const;
     };
 
     /// One runtime dispatcher for all factory types; no per-C++-type binding instantiations.
@@ -94,6 +96,8 @@ namespace SR_SCRIPTING_NS {
         SR_UTILS_NS::Reflection::Value ReadProperty(asIScriptObject* pObject, uint32_t index) const;
         const SR_UTILS_NS::Vector<Type*>& GetTypes() const { return m_types; }
         bool WriteProperty(asIScriptObject* pObject, uint32_t index, const SR_UTILS_NS::Reflection::Value& value) const;
+
+        SR_NODISCARD AngelScriptNativeObject* AllocateNativeObject() const;
         void Forget(AngelScriptNativeObject* pObject) const;
 
     public:
@@ -115,6 +119,9 @@ namespace SR_SCRIPTING_NS {
         SR_UTILS_NS::Vector<Call*> m_calls;
         bool m_hasNameConflicts = false;
         mutable SR_HTYPES_NS::FlatHashMap<const SR_HTYPES_NS::SharedPtrDynamicData*, AngelScriptNativeObject*> m_sharedObjects;
+        SR_UTILS_NS::RawPointerHolder<SR_UTILS_NS::MonotonicAllocator> m_nativeObjectPoolAllocator;
+        mutable SR_UTILS_NS::Vector<AngelScriptNativeObject*> m_freeNativeObjectPool;
+        mutable SR_UTILS_NS::Vector<AngelScriptNativeObject*> m_allocatedNativeObjectPool;
     };
 }
 

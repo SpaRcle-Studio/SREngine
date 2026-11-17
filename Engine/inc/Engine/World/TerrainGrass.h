@@ -16,6 +16,7 @@
 namespace SR_CORE_NS {
     class Terrain;
     class ITerrainChunk;
+    struct TerrainGrassThreadLocal;
 
     /// Входные данные для генерации травы чанка. Позиции и нормали - в мировых осях относительно
     /// позиции объекта чанка (т.е. уже с учётом масштаба чанка, но без переноса).
@@ -43,6 +44,7 @@ namespace SR_CORE_NS {
 
     /// @noCopyable @noMovable
     class TerrainGrass : public SR_HTYPES_NS::SharedPtr<TerrainGrass>, public SR_UTILS_NS::Serializable {
+        friend TerrainGrassThreadLocal;
         using Super = SR_HTYPES_NS::SharedPtr<TerrainGrass>;
         SR_CLASS()
     public:

@@ -298,6 +298,9 @@ namespace SR_SCRIPTING_NS {
         api += behaviourDeclaration;
 
         const auto path = CoreResLoader::GetResPath().Concat("as.predefined");
+        if (!SR_UTILS_NS::VFS::Instance().IsWritable(path.GetFolder().ToStringView())) {
+            return;
+        }
         if (!path.GetFolder().CreateDirectories()) {
             SR_WARN("AngelScriptRuntime::GeneratePredefined() : failed to create output directory for {}.", path);
             return;

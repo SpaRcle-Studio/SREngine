@@ -64,7 +64,8 @@ namespace SR_SCRIPTING_NS {
             return;
         }
         result = pSection;
-        if (!result.IsAbs() && !SR_UTILS_NS::VFS::Instance().ResolvePath(result, SR_UTILS_NS::FileMode::Read)) {
+        // Packed scripts have no physical source path for the debug adapter.
+        if (!result.IsAbs() && !SR_UTILS_NS::VFS::Instance().ResolvePath(result, SR_UTILS_NS::FileMode::Read, false)) {
             result.clear();
         }
     }

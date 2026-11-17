@@ -13,6 +13,25 @@
 #include <Codegen/TerrainGrass.generated.hpp>
 
 namespace SR_CORE_NS {
+    struct TerrainGrassThreadLocal {
+        struct RawInstance {
+            TerrainGrassInstance instance;
+            uint32_t cell = 0;
+        };
+        struct Candidate {
+            TerrainGrassBenderGPU data;
+            float_t priority = 0.f;
+        };
+        SR_UTILS_NS::Vector<TerrainGrass::Result> results;
+        SR_UTILS_NS::Vector<Candidate> candidates;
+        SR_UTILS_NS::Vector<RawInstance> raw;
+        SR_UTILS_NS::Vector<float_t> materialWeights;
+        SR_UTILS_NS::Vector<uint32_t> offsets;
+        SR_UTILS_NS::Vector<uint32_t> cursors;
+        SR_UTILS_NS::Vector<float_t> vertexNoise;
+    };
+    static SR_THREAD_LOCAL TerrainGrassThreadLocal gTerrainGrass;
+
     namespace {
         SR_NODISCARD SR_FORCE_INLINE uint32_t GrassHash(uint32_t x) noexcept {
             /// lowbias32
@@ -395,13 +414,12 @@ namespace SR_CORE_NS {
 
         /// ---- применяем готовые результаты генерации
         {
-            static SR_THREAD_LOCAL SR_UTILS_NS::Vector<Result> results;
             {
                 std::lock_guard lock(m_queueMutex);
-                results.swap(m_results);
+                gTerrainGrass.results.swap(m_results);
             }
 
-            for (auto&& result : results) {
+            for (auto&& result : gTerrainGrass.results) {
                 auto&& pIt = m_generations.find(result.pRenderer.Get());
                 if (pIt == m_generations.end() || pIt->second != result.generation) {
                     continue; /// чанк успели перегенерировать или выгрузить
@@ -414,7 +432,7 @@ namespace SR_CORE_NS {
                 m_forceLodUpdate = true;
             }
 
-            results.clear();
+            gTerrainGrass.results.clear();
         }
 
         UpdateBenders(dt);
@@ -478,12 +496,7 @@ namespace SR_CORE_NS {
     void TerrainGrass::UpdateBenders(float_t dt) {
         SR_TRACY_ZONE;
 
-        struct Candidate {
-            TerrainGrassBenderGPU data;
-            float_t priority = 0.f;
-        };
-
-        static SR_THREAD_LOCAL SR_UTILS_NS::Vector<Candidate> candidates;
+        auto&& candidates = gTerrainGrass.candidates;
         candidates.clear();
 
         const SR_MATH_NS::FVector3 observer = m_lastObserverPosition;
@@ -543,7 +556,7 @@ namespace SR_CORE_NS {
             const float_t distanceSq = distanceSqToObserver(position);
             if (distanceSq <= maxDistanceSq) {
                 /// живые объекты всегда важнее следов
-                candidates.emplace_back(Candidate {
+                candidates.emplace_back(TerrainGrassThreadLocal::Candidate {
                     .data = TerrainGrassBenderGPU { .position = position, .radius = radius, .direction = direction, .strength = strength },
                     .priority = 1000000.f - distanceSq
                 });
@@ -599,7 +612,7 @@ namespace SR_CORE_NS {
                     continue;
                 }
 
-                candidates.emplace_back(Candidate {
+                candidates.emplace_back(TerrainGrassThreadLocal::Candidate {
                     .data = TerrainGrassBenderGPU { .position = point.position, .radius = point.radius, .direction = point.direction, .strength = strength },
                     .priority = strength * 1000.f - std::sqrt(distanceSq)
                 });
@@ -610,7 +623,9 @@ namespace SR_CORE_NS {
 
         const size_t count = std::min<size_t>(candidates.size(), SR_TERRAIN_GRASS_MAX_BENDERS);
         if (count < candidates.size()) {
-            std::partial_sort(candidates.begin(), candidates.begin() + static_cast<std::ptrdiff_t>(count), candidates.end(), [](const Candidate& left, const Candidate& right) {
+            std::partial_sort(candidates.begin(), candidates.begin() + static_cast<std::ptrdiff_t>(count), candidates.end(),
+                [](const TerrainGrassThreadLocal::Candidate& left, const TerrainGrassThreadLocal::Candidate& right)
+            {
                 return left.priority > right.priority;
             });
         }
@@ -672,13 +687,10 @@ namespace SR_CORE_NS {
         const auto cellsX = static_cast<uint32_t>(std::max(1.f, std::ceil((boundsMax.x - boundsMin.x) / cellSize)));
         const auto cellsZ = static_cast<uint32_t>(std::max(1.f, std::ceil((boundsMax.z - boundsMin.z) / cellSize)));
 
-        struct RawInstance {
-            TerrainGrassInstance instance;
-            uint32_t cell;
-        };
-
         /// Временные буферы переиспользуются между вызовами (генерация идёт в одном потоке), чтобы не аллоцировать на каждый чанк
-        static SR_THREAD_LOCAL SR_UTILS_NS::Vector<RawInstance> raw;
+        auto&& raw = gTerrainGrass.raw;
+        auto&& materialWeights = gTerrainGrass.materialWeights;
+
         raw.clear();
         raw.reserve(std::min<size_t>(indices.size() / 3 * 8, static_cast<size_t>(settings.maxInstancesPerChunk) * 2));
 
@@ -688,7 +700,6 @@ namespace SR_CORE_NS {
             return settings.allowedMaterials.find(material) != settings.allowedMaterials.end();
         };
 
-        static SR_THREAD_LOCAL SR_UTILS_NS::Vector<float_t> materialWeights;
         materialWeights.assign(positions.size(), 1.f);
         if (hasMaterials) {
             for (size_t i = 0; i < positions.size(); ++i) {
@@ -730,7 +741,7 @@ namespace SR_CORE_NS {
         /// Шум крупнее треугольников (ячейка 1 / scale против maxEdgeLength), поэтому считается в вершинах
         /// и интерполируется по треугольнику, а не для каждой травинки.
         const bool hasNoise = settings.noiseScale > 0.f || settings.detailNoiseScale > 0.f;
-        static SR_THREAD_LOCAL SR_UTILS_NS::Vector<float_t> vertexNoise;
+        auto&& vertexNoise = gTerrainGrass.vertexNoise;
         if (hasNoise) {
             SR_TRACY_ZONE_N("Grass vertex noise");
             vertexNoise.resize(positions.size());
@@ -915,7 +926,7 @@ namespace SR_CORE_NS {
                     const auto cellX = std::min(cellsX - 1, static_cast<uint32_t>(std::max(0.f, (position.x - boundsMin.x) / cellSize)));
                     const auto cellZ = std::min(cellsZ - 1, static_cast<uint32_t>(std::max(0.f, (position.z - boundsMin.z) / cellSize)));
 
-                    RawInstance& instance = raw.emplace_back();
+                    TerrainGrassThreadLocal::RawInstance& instance = raw.emplace_back();
                     instance.instance.position = position;
                     instance.instance.normal = normal;
                     instance.instance.rank = rank;
@@ -935,7 +946,9 @@ namespace SR_CORE_NS {
         if (settings.maxInstancesPerChunk > 0 && raw.size() > settings.maxInstancesPerChunk) {
             SR_TRACY_ZONE_N("Cull grass instances by distance");
             const SR_MATH_NS::FVector3 observer = task.observer - mesh.origin;
-            std::nth_element(raw.begin(), raw.begin() + settings.maxInstancesPerChunk, raw.end(), [&observer](const RawInstance& left, const RawInstance& right) {
+            std::nth_element(raw.begin(), raw.begin() + settings.maxInstancesPerChunk, raw.end(),
+                [&observer](const TerrainGrassThreadLocal::RawInstance& left, const TerrainGrassThreadLocal::RawInstance& right)
+            {
                 return (left.instance.position - observer).LengthSq() < (right.instance.position - observer).LengthSq();
             });
             raw.resize(settings.maxInstancesPerChunk);
@@ -949,7 +962,7 @@ namespace SR_CORE_NS {
         /// Рендерер рисует префикс ячейки с точностью до корзины, порядок внутри корзины не важен -
         /// поэтому вместо сортировки сравнением раскладываем подсчётом по ключу (ячейка, корзина).
         const uint32_t cellsCount = cellsX * cellsZ;
-        static SR_THREAD_LOCAL SR_UTILS_NS::Vector<uint32_t> offsets;
+        auto&& offsets = gTerrainGrass.offsets;
         offsets.assign(static_cast<size_t>(cellsCount) * SR_TERRAIN_GRASS_RANK_BUCKETS + 1, 0U);
 
         {
@@ -966,7 +979,7 @@ namespace SR_CORE_NS {
 
             result.instances.resize(raw.size());
 
-            static SR_THREAD_LOCAL SR_UTILS_NS::Vector<uint32_t> cursors;
+            auto&& cursors = gTerrainGrass.cursors;
             cursors.assign(offsets.begin(), offsets.end() - 1);
             for (auto&& instance : raw) {
                 result.instances[cursors[instance.cell]++] = instance.instance;
