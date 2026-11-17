@@ -29,17 +29,19 @@ namespace SR_SCRIPTING_NS {
     public:
         AngelScriptRuntime();
         ~AngelScriptRuntime();
-        bool EnsureInitialized();
 
     public:
+        bool EnsureInitialized();
         void HandleFileEvent(const SR_UTILS_NS::Path& path);
         void SetReloadRequest();
         void ReloadModuleIfNeeded();
+
     public:
         SR_NODISCARD SR_UTILS_NS::Set<SR_UTILS_NS::Path> GetSourceFiles() const;
         SR_NODISCARD bool IsModuleDirty() const;
         SR_NODISCARD bool HasErrors() const;
         SR_NODISCARD bool IsAvailable() const;
+        SR_NODISCARD bool IsInitializing() const { return m_initializing; }
         SR_NODISCARD SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> GetBehaviourNames() const;
         SR_NODISCARD BehaviourInstance* AllocateBehaviourInstance(SR_UTILS_NS::StringAtom name);
 

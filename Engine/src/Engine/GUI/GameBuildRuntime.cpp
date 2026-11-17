@@ -57,11 +57,14 @@ namespace SR_CORE_GUI_NS {
     }
 
     bool GameBuildRuntime::State::Task(SR_HTYPES_NS::Function<void()> job, bool quiet) {
+        SR_TRACY_ZONE;
         if (!worker && SR_PLATFORM_NS::IsSupportThreads()) {
             SR_HTYPES_NS::Thread::Factory::Instance().Create(worker, [this]() {
+                worker->Synchronize();
                 Work();
                 return false;
             });
+            worker->SetName("Game build runtime worker");
         }
         if (!worker) {
             Message("Background operations require a desktop editor.", true);

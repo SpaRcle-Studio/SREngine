@@ -435,8 +435,11 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
-        if (builder.BuildModule() < 0) {
-            return fail();
+        {
+            SR_TRACY_ZONE_N("CScriptBuilder");
+            if (builder.BuildModule() < 0) {
+                return fail();
+            }
         }
 
     #if defined(SR_ENGINE_ANGELSCRIPT_DEBUGGER)
@@ -444,6 +447,7 @@ namespace SR_SCRIPTING_NS {
     #endif
 
         SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> names;
+        names.reserve(pCandidate->GetObjectTypeCount());
         auto&& pMarker = m_pEngine->GetTypeInfoByDecl("IBehaviour");
 
         for (uint32_t i = 0; i < pCandidate->GetObjectTypeCount(); ++i) {
@@ -456,7 +460,6 @@ namespace SR_SCRIPTING_NS {
 
             if (SR_UTILS_NS::Factory::Instance().GetTypeInfo(name)) {
                 SR_ERROR("AngelScriptRuntime::BuildModule() : AngelScript behaviour name is already registered in the engine factory: {}", name);
-
                 return fail();
             }
 
@@ -476,6 +479,7 @@ namespace SR_SCRIPTING_NS {
         }
 
         SR_UTILS_NS::Vector<SR_UTILS_NS::Pair<AngelScriptBehaviourInstance*, asIScriptObject*>> replacements;
+        replacements.reserve(m_instances.size());
 
         for (auto&& pInstance : m_instances) {
             auto&& pObject = CreateObject(pCandidate, pInstance->GetBehaviourName());
@@ -530,6 +534,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     BehaviourInstance* AngelScriptRuntime::AllocateBehaviourInstance(SR_UTILS_NS::StringAtom name) {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD;
         EnsureInitialized();
         auto&& pInstance = new AngelScriptBehaviourInstance(this, name);
@@ -723,6 +728,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> AngelScriptRuntime::GetBehaviourNames() const {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD;
         DiscoverSourceNames();
         return m_behaviourNames;

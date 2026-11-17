@@ -9,6 +9,8 @@
 #include <Utils/Common/SubscriptionMessage.h>
 #include <Utils/FileSystem/VFS.h>
 #include <Utils/FileSystem/IVFSBackend.h>
+#include <Utils/Platform/Platform.h>
+#include <Utils/TaskManager/TaskManager.h>
 
 namespace SR_SCRIPTING_NS {
     namespace ScriptSystemHelpers {
@@ -70,11 +72,27 @@ namespace SR_SCRIPTING_NS {
 
     void ScriptSystem::InitialAnalyse() {
         SR_TRACY_ZONE;
-        SR_UTILS_NS::VFS::Instance().Enumerate(CoreResLoader::GetResPath(), [this](const SR_UTILS_NS::VFSEntry& entry) {
-            if (entry.type == SR_UTILS_NS::FSItemType::File) {
-                HandleFileEvent(entry.fullPath);
+
+        auto&& initializeFn = [this](SR_UTILS_NS::Task::AtomicState&){
+            SR_UTILS_NS::VFS::Instance().Enumerate(CoreResLoader::GetResPath(), [this](const SR_UTILS_NS::VFSEntry& entry) {
+                if (entry.type == SR_UTILS_NS::FSItemType::File) {
+                    HandleFileEvent(entry.fullPath);
+                }
+            }, true);
+            if (m_angelScriptSystem) {
+                m_angelScriptSystem->AsyncInitialize();
             }
-        }, true);
+            m_initialAnalysisTaskId = SR_ID_INVALID;
+        };
+
+        if (SR_PLATFORM_NS::IsSupportThreads()) {
+            m_initialAnalysisTaskId = SR_UTILS_NS::TaskManager::Instance().ExecuteAsync(initializeFn, SR_UTILS_NS::TaskPriority::High);
+            SR_UTILS_NS::TaskManager::Instance().SetDescription(m_initialAnalysisTaskId, "Initial scripts analyse");
+        }
+        else {
+            SR_UTILS_NS::Task::AtomicState def;
+            initializeFn(def);
+        }
     }
 
     void ScriptSystem::HandleFileSystemEvent(const SR_UTILS_NS::SubscriptionMessage& message, SR_UTILS_NS::FileSystemWatcher::EventType eventType) {
@@ -121,42 +139,44 @@ namespace SR_SCRIPTING_NS {
         }
     }
 
-    void ScriptSystem::HandleFileEvent(SR_UTILS_NS::Path path) {
+    void ScriptSystem::HandleFileEvent(SR_UTILS_NS::StringView path) {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD;
-        const SR_UTILS_NS::Path sourcePath = path;
-        SR_UTILS_NS::VFS::Instance().UnResolvePath(path);
-        path.Normalize();
 
-        if (!ScriptSystemHelpers::IsWithin(path, CoreResLoader::GetResPath()) ||
-            ScriptSystemHelpers::IsWithin(path, CoreResLoader::GetCachePath()) ||
-            ScriptSystemHelpers::IsWithin(path, m_cppSystem->GetAPIFolder()) || path.GetBaseNameView() == "libclang") {
+        m_handleFileEventPath = path;
+        m_handleFileEventSourcePath = path;
+        SR_UTILS_NS::VFS::Instance().UnResolvePath(m_handleFileEventPath);
+
+        if (!ScriptSystemHelpers::IsWithin(m_handleFileEventPath, CoreResLoader::GetResPathRef()) ||
+            ScriptSystemHelpers::IsWithin(m_handleFileEventPath, CoreResLoader::GetCachePathRef()) ||
+            ScriptSystemHelpers::IsWithin(m_handleFileEventPath, m_cppSystem->GetAPIFolder()) || m_handleFileEventPath.GetBaseNameView() == "libclang") {
             return;
         }
 
-        const auto extension = path.GetExtensionView();
+        const auto extension = m_handleFileEventPath.GetExtensionView();
         const bool isAS = extension == "as";
         const bool isCpp = CppScriptSystem::ALLOWED_CPP_EXTENSIONS.count(extension) > 0 ||
             CppScriptSystem::ALLOWED_CPP_MODULE_EXTENSIONS.count(extension) > 0 ||
-            path.GetBaseNameAndExtView() == CppScriptSystem::ENGINE_MODULE_FILE_NAME;
+            m_handleFileEventPath.GetBaseNameAndExtView() == CppScriptSystem::ENGINE_MODULE_FILE_NAME;
 
         if (!isAS && !isCpp) {
             return;
         }
 
-        if (path.IsFile()) {
-            m_knownFiles.insert(path);
+        if (m_handleFileEventPath.IsFile()) {
+            m_knownFiles.insert(m_handleFileEventPath);
         }
         else {
-            m_knownFiles.erase(path);
+            m_knownFiles.erase(m_handleFileEventPath);
         }
 
         if (isAS && m_angelScriptSystem) {
-            m_angelScriptSystem->HandleFileEvent(path);
+            m_angelScriptSystem->HandleFileEvent(m_handleFileEventPath);
         }
 
         if (isCpp && m_cppSystem) {
             const bool isModule = CppScriptSystem::ALLOWED_CPP_MODULE_EXTENSIONS.count(extension) > 0;
-            m_cppSystem->HandleFileEvent(isModule ? sourcePath : path);
+            m_cppSystem->HandleFileEvent(isModule ? m_handleFileEventSourcePath : m_handleFileEventPath);
         }
     }
 
@@ -172,8 +192,14 @@ namespace SR_SCRIPTING_NS {
     }
 
     void ScriptSystem::WaitForIdle() {
+        while (m_initialAnalysisTaskId != SR_ID_INVALID) {
+            SR_PLATFORM_NS::Sleep(5);
+        }
         if (m_cppSystem) {
             m_cppSystem->WaitForIdle();
+        }
+        if (m_angelScriptSystem) {
+            m_angelScriptSystem->WaitForIdle();
         }
     }
 
@@ -198,6 +224,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     BehaviourInstance* ScriptSystem::AllocateBehaviourInstance(SR_UTILS_NS::StringAtom name) {
+        SR_TRACY_ZONE;
         if (!m_isInit) {
             return nullptr;
         }
@@ -233,6 +260,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> ScriptSystem::GetBehaviourNames() const {
+        SR_TRACY_ZONE;
         auto names = m_cppSystem ? m_cppSystem->GetBehaviourNames() : SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>();
 
         if (m_angelScriptSystem) {

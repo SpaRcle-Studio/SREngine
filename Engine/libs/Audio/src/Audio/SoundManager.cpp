@@ -97,6 +97,7 @@ namespace SR_AUDIO_NS {
     }
 
     void SoundManager::InitSingleton() {
+        SR_TRACY_ZONE;
         SRAssert(!m_thread);
 
         if (!SR_UTILS_NS::Features::Instance().Enabled("Audio", true)) {

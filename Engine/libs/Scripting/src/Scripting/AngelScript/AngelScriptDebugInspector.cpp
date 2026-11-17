@@ -57,16 +57,16 @@ namespace SR_SCRIPTING_NS {
         return id;
     }
 
-    SR_UTILS_NS::String AngelScriptDebugInspector::SourcePath(const char* pSection) {
+    void AngelScriptDebugInspector::SourcePath(SR_UTILS_NS::Path& result, const char* pSection) {
+        SR_TRACY_ZONE;
+        result.clear();
         if (!pSection || pSection[0] == '<') {
-            return {};
+            return;
         }
-        SR_UTILS_NS::Path path(pSection);
-        if (!path.IsAbs() && !SR_UTILS_NS::VFS::Instance().ResolvePath(path, SR_UTILS_NS::FileMode::Read)) {
-            return {};
+        result = pSection;
+        if (!result.IsAbs() && !SR_UTILS_NS::VFS::Instance().ResolvePath(result, SR_UTILS_NS::FileMode::Read)) {
+            result.clear();
         }
-        path.Normalize();
-        return path.ToStringRef();
     }
 
     SR_UTILS_NS::SerializationNode AngelScriptDebugInspector::StackTrace(int64_t start, int64_t levels) {
@@ -75,6 +75,7 @@ namespace SR_SCRIPTING_NS {
         const auto total = static_cast<int64_t>(m_pContext->GetCallstackSize());
         start = SR_MIN(start, total);
         const auto end = levels > 0 ? SR_MIN(total, start + SR_MIN(levels, total)) : total;
+        SR_UTILS_NS::Path path;
         for (int64_t i = start; i < end; ++i) {
             auto&& pFunction = m_pContext->GetFunction(static_cast<uint32_t>(i));
             const char* pSection = nullptr;
@@ -85,11 +86,11 @@ namespace SR_SCRIPTING_NS {
             DebugAdapterProtocol::Set(frame, "name", pFunction ? pFunction->GetDeclaration() : "<native>");
             DebugAdapterProtocol::Set(frame, "line", SR_MAX(0, line - (m_linesStartAt1 ? 0 : 1)));
             DebugAdapterProtocol::Set(frame, "column", SR_MAX(0, column - (m_columnsStartAt1 ? 0 : 1)));
-            const auto path = SourcePath(pSection);
+            SourcePath(path, pSection);
             if (!path.empty()) {
                 auto source = DebugAdapterProtocol::Object("source");
                 DebugAdapterProtocol::Set(source, "name", pSection);
-                DebugAdapterProtocol::Set(source, "path", path);
+                DebugAdapterProtocol::Set(source, "path", path.ToStringRef());
                 frame.children.emplace_back(std::move(source));
             }
             frames.children.emplace_back(std::move(frame));

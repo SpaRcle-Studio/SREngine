@@ -25,6 +25,8 @@ namespace SR_SCRIPTING_NS {
         void HandleFileEvent(const SR_UTILS_NS::Path& path);
         void SetReloadRequest();
         void ReloadModuleIfNeeded();
+        void WaitForIdle();
+        void AsyncInitialize();
 
     public:
         SR_NODISCARD SR_UTILS_NS::Set<SR_UTILS_NS::Path> GetSourceFiles() const;
@@ -39,6 +41,8 @@ namespace SR_SCRIPTING_NS {
 
     private:
         AngelScriptRuntime* m_pRuntime = nullptr;
+        uint64_t m_asyncRuntimeInitTask = SR_ID_INVALID;
+
     };
 }
 

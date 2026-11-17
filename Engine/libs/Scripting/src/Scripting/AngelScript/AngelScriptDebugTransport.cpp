@@ -14,23 +14,26 @@ namespace SR_SCRIPTING_NS {
         SR_HTYPES_NS::Function<void(const SR_UTILS_NS::SerializationNode&)> onRequest,
         SR_HTYPES_NS::Function<void()> onDisconnect)
     {
+        SR_TRACY_ZONE;
     #if !defined(SR_THREADS_ALLOWED)
-        SR_ERROR("AngelScriptDebugTransport::Start() : DAP requires native threads.");
+        SR_INFO("AngelScriptDebugTransport::Start() : DAP requires native threads! Debugger disabled.");
         return false;
     #else
         m_listener = SR_NETWORK_NS::LocalTCP::Listen(port);
         if (m_listener == SR_NETWORK_NS::LocalTCP::InvalidHandle) {
-            SR_ERROR("AngelScriptDebugTransport::Start() : cannot listen on 127.0.0.1:{}.", port);
+            SR_INFO("AngelScriptDebugTransport::Start() : cannot listen on 127.0.0.1:{}! Debugger disabled.", port);
             return false;
         }
 
         m_onRequest = std::move(onRequest);
         m_onDisconnect = std::move(onDisconnect);
         SR_LOG("AngelScriptDebugTransport::Start() : AngelScript DAP listening on 127.0.0.1:{}.", port);
-        return SR_HTYPES_NS::Thread::Factory::Instance().Create(m_pThread, [this]() {
+        const bool result = SR_HTYPES_NS::Thread::Factory::Instance().Create(m_pThread, [this]() {
             Serve();
             return false;
         });
+        m_pThread->SetName("AngelScript DAP");
+        return result;
     #endif
     }
 
@@ -59,7 +62,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     void AngelScriptDebugTransport::Serve() {
-        m_pThread->SetName("AngelScript DAP");
+        m_pThread->Synchronize();
         while (!m_stop) {
             const auto client = SR_NETWORK_NS::LocalTCP::Accept(m_listener);
             if (client == SR_NETWORK_NS::LocalTCP::InvalidHandle) {

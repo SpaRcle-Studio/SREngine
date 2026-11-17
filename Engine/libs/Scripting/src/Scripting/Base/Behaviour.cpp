@@ -148,6 +148,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     void Behaviour::Save(SR_UTILS_NS::ISerializer& serializer) const {
+        SR_TRACY_ZONE;
         Super::Save(serializer);
 
         if (IsInstanceValid()) {
@@ -163,6 +164,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     bool Behaviour::Load(SR_UTILS_NS::IDeserializer& deserializer) {
+        SR_TRACY_ZONE;
         if (!Super::Load(deserializer)) {
             return false;
         }
@@ -184,6 +186,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     void Behaviour::SetBehaviourName(SR_UTILS_NS::StringAtom name) {
+        SR_TRACY_ZONE;
         auto&& scriptSystem = SR_SCRIPTING_NS::ScriptSystem::Instance();
 
         if (scriptSystem.IsInitialized()) {
@@ -210,6 +213,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     void Behaviour::OnScriptTypesChanged() {
+        SR_TRACY_ZONE;
         if (IsInstanceValid() || m_behaviourName.empty()) { return; }
         auto& system = ScriptSystem::Instance();
         const auto names = system.GetBehaviourNames();
@@ -219,6 +223,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     void Behaviour::OnBehaviourLoaded() {
+        SR_TRACY_ZONE;
         m_isStarted = false;
         m_isAwake = false;
 

@@ -31,12 +31,12 @@ namespace SR_SCRIPTING_NS {
         }
 
         int32_t AddSource(CScriptBuilder* pBuilder, const SR_UTILS_NS::Path& path) {
+            SR_TRACY_ZONE;
             auto file = SR_UTILS_NS::VFS::Instance().OpenFile(path, SR_UTILS_NS::FileMode::Read);
             SR_UTILS_NS::String source;
 
             if (!file || !file.Read(source)) {
                 SR_ERROR("AngelScriptSourceHelpers::AddSource() : AngelScript: cannot read {}", path);
-
                 return -1;
             }
 
@@ -44,6 +44,7 @@ namespace SR_SCRIPTING_NS {
         }
 
         int32_t Include(const char* pInclude, const char* pFrom, CScriptBuilder* pBuilder, void*) {
+            SR_TRACY_ZONE;
             SR_UTILS_NS::Path path = SR_UTILS_NS::Path(pFrom).GetFolder().Concat(pInclude);
             SR_UTILS_NS::VFS::Instance().UnResolvePath(path);
 

@@ -104,22 +104,21 @@ namespace SR_SCRIPTING_NS {
         static_cast<AngelScriptDebugger*>(pUser)->OnLine(pContext, true);
     }
 
-    SR_UTILS_NS::String AngelScriptDebugger::NormalizePath(const SR_UTILS_NS::String& path) {
-        auto result = AngelScriptDebugInspector::SourcePath(path.c_str());
-        for (auto&& character : result) {
-            if (character == '\\') {
-                character = '/';
-            }
+    void AngelScriptDebugger::NormalizePath(SR_UTILS_NS::Path& result, const SR_UTILS_NS::String& path) {
+        SR_TRACY_ZONE;
+        AngelScriptDebugInspector::SourcePath(result, path.c_str());
+        result.Normalize();
+        for (auto&& character : result.GetInternalUnsafeString()) {
         #if defined(SR_WIN32)
             if (character >= 'A' && character <= 'Z') {
                 character += 'a' - 'A';
             }
         #endif
         }
-        return result;
     }
 
     void AngelScriptDebugger::OnLine(asIScriptContext* pContext, bool exception) {
+        SR_TRACY_ZONE;
         if (!m_active) {
             return;
         }
@@ -145,7 +144,7 @@ namespace SR_SCRIPTING_NS {
         if (!exception && pSection && *pSection && pSection[0] != '<') {
             auto cached = m_sectionPaths.find(pSection);
             if (cached == m_sectionPaths.end()) {
-                m_sectionPaths[pSection] = NormalizePath(pSection);
+                NormalizePath(m_sectionPaths[pSection], pSection);
                 cached = m_sectionPaths.find(pSection);
             }
             const auto found = m_breakpoints.find(cached->second);
@@ -163,53 +162,56 @@ namespace SR_SCRIPTING_NS {
         const auto depth = pContext->GetCallstackSize();
         const bool stepHit = !exception && (m_step == Step::Into || (m_pStepContext == pContext &&
             ((m_step == Step::Over && depth <= m_stepDepth) || (m_step == Step::Out && depth < m_stepDepth))));
+
         if (!exception && !breakpointHit && !m_pauseRequested && !stepHit) {
             return;
         }
 
-        SR_TRACY_ZONE_N("AngelScript debugger stop");
-        const char* pReason = exception ? "exception" : breakpointHit ? "breakpoint" : m_pauseRequested ? "pause" : "step";
-        m_pauseRequested = false;
-        m_step = Step::Continue;
-        m_paused = true;
-        m_pPausedContext = pContext;
-        m_inspector.Begin(pContext, m_linesStartAt1, m_columnsStartAt1);
-        auto stopped = DebugAdapterProtocol::Object("body");
-        DebugAdapterProtocol::Set(stopped, "reason", pReason);
-        DebugAdapterProtocol::Set(stopped, "threadId", 1);
-        DebugAdapterProtocol::Set(stopped, "allThreadsStopped", true);
-        if (exception) {
-            DebugAdapterProtocol::Set(stopped, "text", pContext->GetExceptionString());
-        }
-        if (breakpointHit) {
-            auto hitIds = DebugAdapterProtocol::Array("hitBreakpointIds");
-            auto id = DebugAdapterProtocol::Object();
-            id.type = SR_UTILS_NS::SerializationDataType::Integer;
-            id.data.integer = hitId;
-            hitIds.children.emplace_back(std::move(id));
-            stopped.children.emplace_back(std::move(hitIds));
-        }
-        Event("stopped", std::move(stopped));
+        {
+            SR_TRACY_ZONE_N("AngelScript debugger stop");
+            const char* pReason = exception ? "exception" : breakpointHit ? "breakpoint" : m_pauseRequested ? "pause" : "step";
+            m_pauseRequested = false;
+            m_step = Step::Continue;
+            m_paused = true;
+            m_pPausedContext = pContext;
+            m_inspector.Begin(pContext, m_linesStartAt1, m_columnsStartAt1);
+            auto stopped = DebugAdapterProtocol::Object("body");
+            DebugAdapterProtocol::Set(stopped, "reason", pReason);
+            DebugAdapterProtocol::Set(stopped, "threadId", 1);
+            DebugAdapterProtocol::Set(stopped, "allThreadsStopped", true);
+            if (exception) {
+                DebugAdapterProtocol::Set(stopped, "text", pContext->GetExceptionString());
+            }
+            if (breakpointHit) {
+                auto hitIds = DebugAdapterProtocol::Array("hitBreakpointIds");
+                auto id = DebugAdapterProtocol::Object();
+                id.type = SR_UTILS_NS::SerializationDataType::Integer;
+                id.data.integer = hitId;
+                hitIds.children.emplace_back(std::move(id));
+                stopped.children.emplace_back(std::move(hitIds));
+            }
+            Event("stopped", std::move(stopped));
 
-        while (m_paused && m_active && !m_stopping) {
-            m_condition.wait(lock, [this]() {
-                return !m_requests.empty() || !m_paused || !m_active || m_stopping;
-            });
-            SR_UTILS_NS::Vector<SR_UTILS_NS::SerializationNode> requests;
-            requests.swap(m_requests);
-            for (auto&& request : requests) {
-                if (m_paused && m_active) {
-                    Inspect(request);
-                }
-                else {
-                    Reply(request, DebugAdapterProtocol::Object("body"), "Script is no longer stopped.");
+            while (m_paused && m_active && !m_stopping) {
+                m_condition.wait(lock, [this]() {
+                    return !m_requests.empty() || !m_paused || !m_active || m_stopping;
+                });
+                SR_UTILS_NS::Vector<SR_UTILS_NS::SerializationNode> requests;
+                requests.swap(m_requests);
+                for (auto&& request : requests) {
+                    if (m_paused && m_active) {
+                        Inspect(request);
+                    }
+                    else {
+                        Reply(request, DebugAdapterProtocol::Object("body"), "Script is no longer stopped.");
+                    }
                 }
             }
-        }
 
-        m_inspector.End();
-        m_pPausedContext = nullptr;
-        m_condition.notify_all();
+            m_inspector.End();
+            m_pPausedContext = nullptr;
+            m_condition.notify_all();
+        }
     }
 
     void AngelScriptDebugger::Reply(const SR_UTILS_NS::SerializationNode& request, SR_UTILS_NS::SerializationNode body, const char* pError) {
@@ -430,8 +432,12 @@ namespace SR_SCRIPTING_NS {
     }
 
     void AngelScriptDebugger::SetBreakpoints(const SR_UTILS_NS::SerializationNode& request) {
+        SR_TRACY_ZONE;
+
         auto&& arguments = DebugAdapterProtocol::Get(request, "arguments");
-        const auto path = NormalizePath(DebugAdapterProtocol::Text(DebugAdapterProtocol::Get(arguments, "source"), "path"));
+        auto&& rawPath = DebugAdapterProtocol::Text(DebugAdapterProtocol::Get(arguments, "source"), "path");
+        SR_UTILS_NS::Path path;
+        NormalizePath(path, rawPath);
         if (path.empty()) {
             Reply(request, DebugAdapterProtocol::Object("body"), "A source.path is required.");
             return;
@@ -456,18 +462,20 @@ namespace SR_SCRIPTING_NS {
     }
 
     void AngelScriptDebugger::CollectLocations(asIScriptFunction* pFunction) {
+        SR_TRACY_ZONE;
         if (!pFunction || pFunction->GetFuncType() != asFUNC_SCRIPT || m_functions.contains(pFunction)) {
             return;
         }
         m_functions.insert(pFunction);
         const auto count = pFunction->GetLineEntryCount();
+        SR_UTILS_NS::Path path;
         for (int32_t i = 0; i < count; ++i) {
             const char* pSection = nullptr;
             int32_t line = 0;
             if (pFunction->GetLineEntry(i, &line, nullptr, &pSection, nullptr) < 0 || !pSection || line <= 0) {
                 continue;
             }
-            const auto path = NormalizePath(pSection);
+            NormalizePath(path, pSection);
             if (!path.empty()) {
                 m_locations[path].insert(line);
             }
@@ -500,6 +508,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     void AngelScriptDebugger::RefreshBreakpoints() {
+        SR_TRACY_ZONE;
         for (auto&& source : m_breakpoints) {
             for (auto&& breakpoint : source.second) {
                 BindBreakpoint(breakpoint, source.first);

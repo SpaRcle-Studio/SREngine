@@ -28,6 +28,7 @@ namespace SR_CORE_NS {
     SR_UTILS_NS::ThreadWorkerResult PrepareState::ExecuteImpl() {
         SR_TRACY_ZONE;
 
+        SR_UTILS_NS::ResourceManager::Instance().Update(false);
         SR_UTILS_NS::TaskManager::Instance().Update();
 
         Engine::Ptr pEngine = (Engine*)SR_UTILS_NS::StoreUtils::Temp::GetPointer("Engine");

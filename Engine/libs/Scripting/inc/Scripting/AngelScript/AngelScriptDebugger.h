@@ -42,7 +42,7 @@ namespace SR_SCRIPTING_NS {
 
         static void LineCallback(asIScriptContext* pContext, void* pUser);
         static void ExceptionCallback(asIScriptContext* pContext, void* pUser);
-        static SR_UTILS_NS::String NormalizePath(const SR_UTILS_NS::String& path);
+        static void NormalizePath(SR_UTILS_NS::Path& result, const SR_UTILS_NS::String& path);
         void OnLine(asIScriptContext* pContext, bool exception);
         void OnRequest(const SR_UTILS_NS::SerializationNode& request);
         void OnDisconnect();
@@ -78,7 +78,7 @@ namespace SR_SCRIPTING_NS {
         int64_t m_nextBreakpoint = 1;
         SR_UTILS_NS::Map<SR_UTILS_NS::String, SR_UTILS_NS::Vector<Breakpoint>> m_breakpoints;
         SR_UTILS_NS::Map<SR_UTILS_NS::String, SR_UTILS_NS::Set<int32_t>> m_locations;
-        SR_UTILS_NS::Map<const char*, SR_UTILS_NS::String> m_sectionPaths;
+        SR_UTILS_NS::Map<const char*, SR_UTILS_NS::Path> m_sectionPaths;
         SR_UTILS_NS::Set<asIScriptFunction*> m_functions;
         SR_UTILS_NS::Vector<SR_UTILS_NS::SerializationNode> m_requests;
     };

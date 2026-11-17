@@ -136,6 +136,7 @@ namespace SR_CORE_NS {
     }
 
     void TerrainGrass::StartWorker() {
+        SR_TRACY_ZONE;
         if (m_worker) {
             return;
         }

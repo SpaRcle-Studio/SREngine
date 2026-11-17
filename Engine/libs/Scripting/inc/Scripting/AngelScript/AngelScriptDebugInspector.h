@@ -16,18 +16,19 @@ namespace SR_SCRIPTING_NS {
     class AngelScriptDebugInspector {
     public:
         ~AngelScriptDebugInspector();
+
         void Begin(asIScriptContext* pContext, bool linesStartAt1, bool columnsStartAt1);
         void End();
+
         SR_UTILS_NS::SerializationNode StackTrace(int64_t start, int64_t levels);
         SR_UTILS_NS::SerializationNode Scopes(int64_t frame);
         SR_UTILS_NS::SerializationNode Variables(int64_t reference, int64_t start = 0, int64_t count = 0);
         SR_UTILS_NS::SerializationNode Evaluate(const SR_UTILS_NS::String& expression, int64_t frame);
-        bool HasFrame(int64_t frame) const;
-        bool HasReference(int64_t reference) const;
-        int64_t GetTopFrame() const {
-            return m_frameBase;
-        }
-        static SR_UTILS_NS::String SourcePath(const char* pSection);
+        SR_NODISCARD bool HasFrame(int64_t frame) const;
+        SR_NODISCARD bool HasReference(int64_t reference) const;
+        SR_NODISCARD int64_t GetTopFrame() const { return m_frameBase; }
+
+        static void SourcePath(SR_UTILS_NS::Path& result, const char* pSection);
 
     private:
         struct Reference {

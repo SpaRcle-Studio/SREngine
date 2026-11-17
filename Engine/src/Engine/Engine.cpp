@@ -62,11 +62,6 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::StoreUtils::Temp::SetPointer("Engine", this);
         SR_UTILS_NS::StoreUtils::Temp::SetPointer("RenderContext", m_renderContext.Get());
 
-        if (!m_renderContext->PreInit()) {
-            SR_ERROR("Engine::Create() : failed to pre-initialize render context!");
-            return false;
-        }
-
         m_cmdManager = new SR_UTILS_NS::CmdManager();
         m_input = new SR_UTILS_NS::InputDispatcher();
 
@@ -82,8 +77,32 @@ namespace SR_CORE_NS {
         const bool editorOnStartupEnabled = isEditorEnabled && !isGame && SR_UTILS_NS::Features::Instance().Enabled("EditorOnStartup", false);
 
         SR_UTILS_NS::StoreUtils::Temp::SetBool("ApplicationIsEditor", isEditorEnabled && !isGame);
-
         SR_UTILS_NS::StoreUtils::Temp::SetBool("ImGuiOverlayEnabled", isEditorEnabled && SR_UTILS_NS::Features::Instance().Enabled("ImGUI", false));
+
+        m_autoReloadResources = SR_UTILS_NS::Features::Instance().Enabled("AutoReloadResources", false);
+        m_threadsWorker = SR_UTILS_NS::ThreadsWorker::Load("Engine/Configs/Threads.sras");
+        if (!m_threadsWorker) {
+            SR_ERROR("Engine::Create() : failed to load threads worker!");
+            return false;
+        }
+
+        if (!SR_SCRIPTING_NS::ScriptSystem::Instance().IsInitialized()) {
+            const bool enabledByFeature = SR_UTILS_NS::Features::Instance().Enabled("ScriptCompilation", true);
+            const bool isCompilationEnabled = !isGame && enabledByFeature && (!pSettings || pSettings->enableCppScripts);
+            if (!SR_SCRIPTING_NS::ScriptSystem::Instance().Init(isCompilationEnabled)) {
+                if (SR_UTILS_NS::StoreUtils::User::GetBool("CompilerUserCanceled", false)) {
+                    SR_INFO("Engine::Init() : user canceled scripts usage!");
+                }
+                else {
+                    SR_ERROR("Engine::Init() : failed to initialize script system!");
+                }
+            }
+        }
+
+        if (!m_renderContext->PreInit()) {
+            SR_ERROR("Engine::Create() : failed to pre-initialize render context!");
+            return false;
+        }
 
         if (isEditorEnabled) {
             SR_LOG("Engine::Create() : editor is enabled.");
@@ -109,14 +128,6 @@ namespace SR_CORE_NS {
         }
 
         SetGameMode(!editorOnStartupEnabled);
-
-        m_autoReloadResources = SR_UTILS_NS::Features::Instance().Enabled("AutoReloadResources", false);
-
-        m_threadsWorker = SR_UTILS_NS::ThreadsWorker::Load("Engine/Configs/Threads.sras");
-        if (!m_threadsWorker) {
-            SR_ERROR("Engine::Create() : failed to load threads worker!");
-            return false;
-        }
 
         m_timeStart = Clock::now();
 
@@ -192,22 +203,6 @@ namespace SR_CORE_NS {
         }
 
         SR_INFO("Engine::Init() : initializing game engine...");
-
-        if (!SR_SCRIPTING_NS::ScriptSystem::Instance().IsInitialized()) {
-            const bool enabledByFeature = SR_UTILS_NS::Features::Instance().Enabled("ScriptCompilation", true);
-            const bool isGame = SR_UTILS_NS::StoreUtils::Temp::GetBool("ApplicationIsGame");
-            ProjectSettings::Ptr pSettings = isGame ? CoreResLoader::Load<ProjectSettings>(".srproject") : nullptr;
-            const bool isCompilationEnabled = !isGame && enabledByFeature && (!pSettings || pSettings->enableCppScripts);
-
-            if (!SR_SCRIPTING_NS::ScriptSystem::Instance().Init(isCompilationEnabled)) {
-                if (SR_UTILS_NS::StoreUtils::User::GetBool("CompilerUserCanceled", false)) {
-                    SR_INFO("Engine::Init() : user canceled scripts usage!");
-                }
-                else {
-                    SR_ERROR("Engine::Init() : failed to initialize script system!");
-                }
-            }
-        }
 
         m_isInit = true;
 

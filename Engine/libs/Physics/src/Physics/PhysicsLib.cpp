@@ -167,13 +167,12 @@ namespace SR_PHYSICS_NS {
     }
 
     void PhysicsLibrary::OnSingletonDestroy() {
+        SR_TRACY_ZONE;
         if (m_defaultMaterial) {
             m_defaultMaterial->RemoveUsePoint();
             m_defaultMaterial = nullptr;
         }
-
-        SR_UTILS_NS::ResourceManager::Instance().Synchronize(true);
-
+        SR_UTILS_NS::ResourceManager::Instance().Update(true);
         Singleton::OnSingletonDestroy();
     }
 }

@@ -5,6 +5,9 @@
 #include <Scripting/AngelScript/AngelScriptSystem.h>
 #include <Scripting/AngelScript/AngelScriptRuntime.h>
 
+#include <Utils/Platform/Platform.h>
+#include <Utils/TaskManager/TaskManager.h>
+
 namespace SR_SCRIPTING_NS {
     AngelScriptSystem::AngelScriptSystem()
         : SR_HTYPES_NS::SharedPtr<AngelScriptSystem>(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
@@ -12,6 +15,8 @@ namespace SR_SCRIPTING_NS {
     { }
 
     AngelScriptSystem::~AngelScriptSystem() {
+        SR_TRACY_ZONE;
+        WaitForIdle();
         delete m_pRuntime;
     }
 
@@ -25,6 +30,26 @@ namespace SR_SCRIPTING_NS {
 
     void AngelScriptSystem::ReloadModuleIfNeeded() {
         m_pRuntime->ReloadModuleIfNeeded();
+    }
+
+    void AngelScriptSystem::WaitForIdle() {
+        while (m_pRuntime->IsInitializing() || m_asyncRuntimeInitTask != SR_ID_INVALID) {
+            SR_HTYPES_NS::Time::Instance().Update();
+            SR_PLATFORM_NS::Sleep(10);
+        }
+    }
+
+    void AngelScriptSystem::AsyncInitialize() {
+        if (SR_PLATFORM_NS::IsSupportThreads()) {
+            m_asyncRuntimeInitTask = SR_UTILS_NS::TaskManager::Instance().ExecuteAsync([this](auto&&) {
+                m_pRuntime->EnsureInitialized();
+                m_asyncRuntimeInitTask = SR_ID_INVALID;
+            }, SR_UTILS_NS::TaskPriority::High);
+            SR_UTILS_NS::TaskManager::Instance().SetDescription(m_asyncRuntimeInitTask, "Init Angel Script");
+        }
+        else {
+            m_pRuntime->EnsureInitialized();
+        }
     }
 
     SR_UTILS_NS::Set<SR_UTILS_NS::Path> AngelScriptSystem::GetSourceFiles() const {

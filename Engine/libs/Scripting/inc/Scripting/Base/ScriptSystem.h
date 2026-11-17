@@ -50,11 +50,14 @@ namespace SR_SCRIPTING_NS {
     private:
         void InitialAnalyse();
         void HandleFileSystemEvent(const SR_UTILS_NS::SubscriptionMessage& message, SR_UTILS_NS::FileSystemWatcher::EventType eventType);
-        void HandleFileEvent(SR_UTILS_NS::Path path);
+        void HandleFileEvent(SR_UTILS_NS::StringView path);
         void ResetSubscriptions();
 
     private:
         bool m_isInit = false;
+        uint64_t m_initialAnalysisTaskId = SR_ID_INVALID;
+        SR_UTILS_NS::Path m_handleFileEventPath;
+        SR_UTILS_NS::Path m_handleFileEventSourcePath;
         CppScriptSystem::Ptr m_cppSystem;
         AngelScriptSystem::Ptr m_angelScriptSystem;
         SR_UTILS_NS::Subscription m_fileChangedSubscription;

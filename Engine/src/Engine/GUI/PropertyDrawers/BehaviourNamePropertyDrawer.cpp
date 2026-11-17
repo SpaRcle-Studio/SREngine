@@ -126,6 +126,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     void BehaviourNamePropertyDrawer::ReInitNames() {
+        SR_TRACY_ZONE;
         m_existingNames = SR_SCRIPTING_NS::ScriptSystem::Instance().GetBehaviourNames();
     }
 
