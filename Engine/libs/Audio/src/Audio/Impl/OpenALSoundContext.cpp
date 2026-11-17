@@ -11,14 +11,17 @@
 
 namespace SR_AUDIO_NS {
     void OpenALSoundContext::Pause(SoundSource pSource) {
+        SR_TRACY_ZONE;
         SR_AL_CALL(alSourcePause, *static_cast<ALuint*>(pSource));
     }
 
     bool OpenALSoundContext::Seek(SoundSource pSource, float_t seconds) {
+        SR_TRACY_ZONE;
         return SR_AL_CALL(alSourcef, *static_cast<ALuint*>(pSource), AL_SEC_OFFSET, seconds);
     }
 
     float_t OpenALSoundContext::GetPlaybackPosition(SoundSource pSource) const {
+        SR_TRACY_ZONE;
         float_t seconds = 0.f;
         SR_AL_CALL(alGetSourcef, *static_cast<ALuint*>(pSource), AL_SEC_OFFSET, &seconds);
         return seconds;
@@ -40,6 +43,7 @@ namespace SR_AUDIO_NS {
     }
 
     bool OpenALSoundContext::Init() {
+        SR_TRACY_ZONE;
         auto&& openALDevice = dynamic_cast<OpenALDevice*>(GetDevice())->GetALDevice();
 
         if (!openALDevice) {
@@ -61,6 +65,7 @@ namespace SR_AUDIO_NS {
     }
 
     SoundSource OpenALSoundContext::AllocateSource(SoundBuffer buffer) {
+        SR_TRACY_ZONE;
         ALuint* alSource = new ALuint();
         ALuint* alBuffer = reinterpret_cast<ALuint*>(buffer);
 
@@ -102,6 +107,7 @@ namespace SR_AUDIO_NS {
     }
 
     SoundBuffer OpenALSoundContext::AllocateBuffer(void *data, uint64_t dataSize, int32_t sampleRate, SoundFormat format) {
+        SR_TRACY_ZONE;
         ALuint* alBuffer = new ALuint();
 
         SR_AL_CALL(alGenBuffers, 1, alBuffer);
@@ -124,6 +130,7 @@ namespace SR_AUDIO_NS {
     }
 
     bool OpenALSoundContext::FreeBuffer(SoundBuffer* buffer) {
+        SR_TRACY_ZONE;
         ALuint* alBuffer = reinterpret_cast<ALuint*>(*buffer);
 
         SR_AL_CALL(alDeleteBuffers, 1, alBuffer);
@@ -135,6 +142,7 @@ namespace SR_AUDIO_NS {
     }
 
     void OpenALSoundContext::Play(SoundSource source) {
+        SR_TRACY_ZONE;
         ALuint* alSource = reinterpret_cast<ALuint*>(source);
 
         if (!SR_AL_CALL(alSourcePlay, *alSource)) {
@@ -158,6 +166,7 @@ namespace SR_AUDIO_NS {
     }
 
     bool OpenALSoundContext::MakeContextCurrent() {
+        SR_TRACY_ZONE;
         auto&& openALDevice = dynamic_cast<OpenALDevice*>(GetDevice())->GetALDevice();
 
         if (!openALDevice) {
@@ -178,6 +187,7 @@ namespace SR_AUDIO_NS {
     }
 
     void OpenALSoundContext::ApplyParamImpl(SoundSource pSource, PlayParamType paramType, const void* pValue) {
+        SR_TRACY_ZONE;
         if (!pSource || !pValue) {
             SR_ERROR("OpenALContext::ApplyParamImpl() : invalid source or value!");
             return;
@@ -264,24 +274,28 @@ namespace SR_AUDIO_NS {
     }
 
     bool OpenALSoundContext::IsPlaying(SoundSource pSource) const {
+        SR_TRACY_ZONE;
         ALint state = AL_INVALID;
         SR_AL_CALL(alGetSourcei, *(ALint*)pSource, AL_SOURCE_STATE, &state);
         return state == AL_PLAYING;
     }
 
     bool OpenALSoundContext::IsPaused(SoundSource pSource) const {
+        SR_TRACY_ZONE;
         ALint state = AL_INVALID;
         SR_AL_CALL(alGetSourcei, *(ALint*)pSource, AL_SOURCE_STATE, &state);
         return state == AL_PAUSED;
     }
 
     bool OpenALSoundContext::IsStopped(SoundSource pSource) const {
+        SR_TRACY_ZONE;
         ALint state = AL_INVALID;
         SR_AL_CALL(alGetSourcei, *(ALint*)pSource, AL_SOURCE_STATE, &state);
         return state == AL_STOPPED;
     }
 
     bool OpenALSoundContext::FreeSource(SoundSource* pSource) {
+        SR_TRACY_ZONE;
         ALuint* alSource = reinterpret_cast<ALuint*>(*pSource);
 
         SR_AL_CALL(alDeleteSources, 1, alSource);

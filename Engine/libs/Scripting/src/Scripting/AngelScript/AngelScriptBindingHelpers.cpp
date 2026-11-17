@@ -459,6 +459,7 @@ namespace SR_SCRIPTING_NS {
         }
 
         void Wrapper(asIScriptGeneric* pCall) {
+            SR_TRACY_ZONE;
             auto&& pBinding = static_cast<AngelScriptBindings::Call*>(pCall->GetAuxiliary());
             auto&& pObject = static_cast<AngelScriptNativeObject*>(pCall->GetObject());
             const SR_UTILS_NS::StringView operation(pCall->GetFunction()->GetName());
@@ -506,7 +507,8 @@ namespace SR_SCRIPTING_NS {
                     }
                     else {
                         auto&& pType = pBinding->pBindings->FindType(id);
-                        SR_UTILS_NS::String serialized = "Arithmetic.";
+                        static SR_THREAD_LOCAL SR_UTILS_NS::String serialized;
+                        serialized = "Arithmetic.";
                         if (id == asTYPEID_INT32) {
                             serialized += "int32";
                         }

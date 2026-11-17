@@ -39,6 +39,7 @@ namespace SR_SCRIPTING_NS {
 
     void AngelScriptNativeObject::Release() {
         if (--references == 0) {
+            SR_TRACY_ZONE;
             delete this;
         }
     }
@@ -158,9 +159,10 @@ namespace SR_SCRIPTING_NS {
     }
 
     SR_UTILS_NS::String AngelScriptBindings::Argument(const SR_UTILS_NS::Reflection::TypeInfo& info) const {
-        const auto declaration = Declaration(info);
+        SR_TRACY_ZONE;
+        auto declaration = Declaration(info);
         if (declaration.empty() || AngelScriptBindingHelpers::Primitive(info)) {
-            return declaration;
+            return std::move(declaration);
         }
 
         if (info.detailedType == "SharedPtr") {
@@ -821,6 +823,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     bool AngelScriptBindings::CopyTo(const SR_UTILS_NS::Reflection::Value& source, SR_UTILS_NS::Reflection::Value& destination) const {
+        SR_TRACY_ZONE;
         if (destination.IsConst()) {
             return false;
         }
@@ -856,6 +859,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     SR_UTILS_NS::Reflection::Value AngelScriptBindings::CopyValue(const SR_UTILS_NS::Reflection::Value& source) const {
+        SR_TRACY_ZONE;
         if (!source) {
             return {};
         }
@@ -873,7 +877,6 @@ namespace SR_SCRIPTING_NS {
         if (AngelScriptBindingHelpers::Primitive(info)) {
             auto result = SR_UTILS_NS::Reflection::Value::CreateDefault(const_cast<SR_UTILS_NS::Reflection::TypeInfo*>(&info));
             CopyTo(source, result);
-
             return result;
         }
 
@@ -1008,6 +1011,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     void AngelScriptBindings::Return(asIScriptGeneric* pCall, SR_UTILS_NS::Reflection::Value value, AngelScriptNativeObject* pAnchor) const {
+        SR_TRACY_ZONE;
         if (!value) {
             AngelScriptBindingHelpers::Exception("Native call returned an unsupported value");
             return;
@@ -1018,7 +1022,6 @@ namespace SR_SCRIPTING_NS {
         if (AngelScriptBindingHelpers::Primitive(info)) {
             if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum) {
                 auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().TryGetReflector(info.detailedType);
-
                 if (!pReflector) {
                     AngelScriptBindingHelpers::Exception("Unregistered engine enum");
                     return;

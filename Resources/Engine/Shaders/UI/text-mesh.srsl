@@ -37,6 +37,10 @@ void fragment() {
     // Derivatives must be evaluated before divergent branches and discard in WGSL.
     vec4 tex = texture(diffuse, UV);
     float msd = glyphMetadata.w == 2.0 || glyphMetadata.w == 4.0 ? tex.r : median(tex.r, tex.g, tex.b);
+    // Expanding MSDF pseudo-distance at acute corners can expose channel seams.
+    if (glyphTrueSdf > 0.5 && glyphMetadata.y > 0.0) {
+        msd = tex.a;
+    }
     float sdfWidth = max(fwidth(msd), 1.0 / 1024.0);
     vec2 uvWidth = max(fwidth(UV), vec2(0.000001));
 
