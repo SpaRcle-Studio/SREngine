@@ -18,6 +18,7 @@
 #include <Utils/FileSystem/DirectoryVFSBackend.h>
 #include <Utils/TaskManager/TaskManager.h>
 #include <Utils/Network/GitHubDownloader.h>
+#include <Utils/Platform/Platform.h>
 
 #include <Codegen/AssetsStore.generated.hpp>
 

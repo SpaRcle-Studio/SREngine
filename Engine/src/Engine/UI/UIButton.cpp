@@ -6,6 +6,15 @@
 #include <Codegen/UIButton.generated.hpp>
 
 namespace SR_CORE_UI_NS {
+    void UIButton::SetClickReceiver(const SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::Component>& pReceiver, SR_UTILS_NS::StringAtom method) {
+        m_onClickEvents.clear();
+        if (pReceiver) {
+            auto&& event = m_onClickEvents.emplace_back();
+            event.object.SetEntityId(pReceiver->GetEntityId());
+            event.method = method;
+        }
+    }
+
     bool UIButton::AcceptsButton(SR_UTILS_NS::PointerButton button) const {
         return (m_leftClick && button == SR_UTILS_NS::PointerButton::Primary)
             || (m_rightClick && button == SR_UTILS_NS::PointerButton::Secondary)

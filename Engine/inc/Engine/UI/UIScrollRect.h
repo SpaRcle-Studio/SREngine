@@ -28,7 +28,9 @@ namespace SR_CORE_UI_NS {
         /// @method @evaluate
         SR_MATH_NS::FVector2 GetNormalizedPosition() const noexcept { return m_normalizedPosition; }
 
+        /// @method
         void SetContent(const SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::SceneObject>& pContent) { m_content.SetEntityId(pContent ? pContent->GetEntityId() : SR_UTILS_NS::SR_INVALID_ENTITY_ID); }
+        /// @method
         void SetViewport(const SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::SceneObject>& pViewport) { m_viewport.SetEntityId(pViewport ? pViewport->GetEntityId() : SR_UTILS_NS::SR_INVALID_ENTITY_ID); }
         void SetHorizontalScrollBar(const SR_HTYPES_NS::SharedPtr<UIScrollBar>& pScrollBar) { m_horizontalScrollBar.SetEntityId(pScrollBar ? pScrollBar->GetEntityId() : SR_UTILS_NS::SR_INVALID_ENTITY_ID); }
         void SetVerticalScrollBar(const SR_HTYPES_NS::SharedPtr<UIScrollBar>& pScrollBar) { m_verticalScrollBar.SetEntityId(pScrollBar ? pScrollBar->GetEntityId() : SR_UTILS_NS::SR_INVALID_ENTITY_ID); }

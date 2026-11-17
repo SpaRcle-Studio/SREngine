@@ -15,6 +15,8 @@ namespace SR_CORE_UI_NS {
         bool AcceptsButton(SR_UTILS_NS::PointerButton button) const override;
         void PointerUp(const SR_UTILS_NS::PointerEvent& event, bool click) override;
         void Submit() override;
+        /// @method
+        void SetClickReceiver(const SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::Component>& pReceiver, SR_UTILS_NS::StringAtom method);
 
     private:
         /// @property

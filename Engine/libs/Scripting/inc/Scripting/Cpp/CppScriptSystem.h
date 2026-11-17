@@ -8,24 +8,22 @@
 #include <Scripting/Cpp/CodeGenerator.h>
 #include <Scripting/Cpp/CppCompiler.h>
 #include <Scripting/Cpp/ModuleManager.h>
-
 #include <Scripting/Base/ScriptSystemState.h>
-#include <Utils/Common/NonCopyable.h>
+
 #include <Utils/Resources/FileSystemWatcher.h>
 #include <Utils/Types/SharedPtr.h>
 
 namespace SR_SCRIPTING_NS {
     class SR_SCRIPTING_DLL_API CppScriptSystem : public SR_HTYPES_NS::SharedPtr<CppScriptSystem> {
-
     public:
-
         const static inline SR_UTILS_NS::Set<SR_UTILS_NS::StringView> ALLOWED_CPP_EXTENSIONS = { "cpp", "h", "hpp", "cxx" };
         const static inline SR_UTILS_NS::Set<SR_UTILS_NS::StringView> ALLOWED_CPP_MODULE_EXTENSIONS = { "dll", "so" };
         const static inline SR_UTILS_NS::StringAtom ENGINE_MODULE_FILE_NAME = ".module";
 
     public:
-        CppScriptSystem() : SR_HTYPES_NS::SharedPtr<CppScriptSystem>(this, SR_UTILS_NS::SharedPtrPolicy::Automatic) {
-        }
+        CppScriptSystem()
+            : SR_HTYPES_NS::SharedPtr<CppScriptSystem>(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
+        { }
 
         ~CppScriptSystem() override;
 

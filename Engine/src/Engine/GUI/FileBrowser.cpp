@@ -33,6 +33,7 @@
 #include <Utils/Common/StringUtils.h>
 #include <Utils/FileSystem/FileSystem.h>
 #include <Utils/FileSystem/VFS.h>
+#include <Utils/Platform/Platform.h>
 
 #include <Enum/TreeNodeFlags.hpp>
 

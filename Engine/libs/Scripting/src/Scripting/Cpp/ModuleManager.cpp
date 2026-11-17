@@ -11,6 +11,7 @@
 #include <Utils/Common/StringAtomLiterals.h>
 #include <Utils/FileSystem/FileSystem.h>
 #include <Utils/FileSystem/VFS.h>
+#include <Utils/Platform/Platform.h>
 
 namespace SR_SCRIPTING_NS {
     void CppBehaviourInstance::OnBehaviourUnloaded(SR_UTILS_NS::PassKey<ModuleManager>) {

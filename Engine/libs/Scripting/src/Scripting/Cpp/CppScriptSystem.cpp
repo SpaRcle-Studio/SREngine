@@ -14,6 +14,7 @@
 #include <Utils/FileSystem/VFS.h>
 #include <Utils/Types/Time.h>
 #include <Utils/TypeTraits/Factory.h>
+#include <Utils/Platform/Platform.h>
 
 #include <Enum/PlatformType.hpp>
 #include <Enum/BuildType.hpp>

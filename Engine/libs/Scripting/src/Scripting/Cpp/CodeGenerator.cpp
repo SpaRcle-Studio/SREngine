@@ -13,6 +13,7 @@
 #include <Utils/FileSystem/VFS.h>
 #include <Utils/FileSystem/IVFSBackend.h>
 #include <Utils/Serialization/SRASerialization.h>
+#include <Utils/Platform/Platform.h>
 
 #include <Enum/PlatformType.hpp>
 #include <Enum/BuildType.hpp>

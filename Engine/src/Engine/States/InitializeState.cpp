@@ -12,6 +12,7 @@
 #include <Graphics/Pipeline/Pipeline.h>
 
 #include <Utils/Common/StoreUtils.h>
+#include <Utils/Platform/Platform.h>
 
 #include <Codegen/InitializeState.generated.hpp>
 

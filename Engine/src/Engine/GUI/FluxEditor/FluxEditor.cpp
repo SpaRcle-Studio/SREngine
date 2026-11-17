@@ -24,6 +24,7 @@
 #include <Utils/TypeTraits/Factory.h>
 #include <Utils/World/Scene.h>
 #include <Utils/TypeTraits/SRClassMeta.h>
+#include <Utils/Platform/Platform.h>
 
 #include <Codegen/FluxEditor.generated.hpp>
 #include <Engine/EngineCommands.h>

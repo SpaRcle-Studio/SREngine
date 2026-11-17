@@ -12,6 +12,7 @@
 #include <Utils/Events/Broadcaster.h>
 #include <Utils/Reflection/Value.h>
 #include <Utils/Serialization/SRASerialization.h>
+#include <Utils/Platform/Platform.h>
 
 #include <Codegen/EngineSettings.generated.hpp>
 

@@ -32,6 +32,7 @@
 #include <Utils/Localization/LocalizationManager.h>
 #include <Utils/Common/CLIManager.h>
 #include <Utils/Common/StoreUtils.h>
+#include <Utils/Platform/Platform.h>
 
 #include <Codegen/Engine.generated.hpp>
 

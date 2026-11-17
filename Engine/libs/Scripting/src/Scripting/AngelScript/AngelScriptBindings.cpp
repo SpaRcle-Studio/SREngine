@@ -483,7 +483,10 @@ namespace SR_SCRIPTING_NS {
         }
 
         if (type.pTypeInfo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::String) {
-            const char* pDeclarations[] = { "uint length() const", "bool opEquals(const String &in) const", "String@ opAdd(const String &in) const" };
+            const char* pDeclarations[] = {
+                "uint length() const", "bool opEquals(const String &in) const", "String@ opAdd(const String &in) const",
+                "uint byteAt(uint index) const", "String@ substring(uint begin, uint count) const", "uint graphemeCount() const"
+            };
 
             for (auto&& pDeclaration : pDeclarations) {
                 if (!Check(m_pEngine->RegisterObjectMethod(type.name.c_str(), pDeclaration, asFUNCTION(AngelScriptBindingHelpers::StringOperation), asCALL_GENERIC, pGeneral), pDeclaration)) {

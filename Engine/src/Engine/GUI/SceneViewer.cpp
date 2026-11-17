@@ -35,6 +35,7 @@
 #include <Utils/Common/Features.h>
 #include <Utils/Common/StringAtomLiterals.h>
 #include <Utils/World/SceneLogic.h>
+#include <Utils/Platform/Platform.h>
 #include <Utils/Serialization/SerializationFlags.h>
 
 #include <Codegen/SceneViewer.generated.hpp>

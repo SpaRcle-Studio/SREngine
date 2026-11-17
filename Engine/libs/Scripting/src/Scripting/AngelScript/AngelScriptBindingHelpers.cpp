@@ -18,6 +18,7 @@
 #include <Utils/ECS/EntityRef.h>
 #include <Utils/Resources/ResourceRef.h>
 #include <Utils/Common/Singleton.h>
+#include <Utils/Localization/Grapheme.h>
 
 namespace SR_SCRIPTING_NS {
     namespace AngelScriptBindingHelpers {
@@ -264,6 +265,10 @@ namespace SR_SCRIPTING_NS {
             }
 
             auto value = pBinding->pOwner->pMeta->Cast(pObject->value);
+            if (!value) {
+                pCall->SetReturnAddress(nullptr);
+                return;
+            }
             pBinding->pBindings->Return(pCall, std::move(value), pObject);
         }
 
@@ -784,6 +789,38 @@ namespace SR_SCRIPTING_NS {
 
             if (operation == "length") {
                 pCall->SetReturnDWord(static_cast<asDWORD>(pText->size()));
+                return;
+            }
+
+            if (operation == "byteAt") {
+                const auto index = pCall->GetArgDWord(0);
+                if (index >= pText->size()) {
+                    Exception("String byte index out of bounds");
+                    return;
+                }
+                pCall->SetReturnDWord(static_cast<uint8_t>((*pText)[index]));
+                return;
+            }
+
+            if (operation == "substring") {
+                const auto begin = pCall->GetArgDWord(0);
+                const auto count = pCall->GetArgDWord(1);
+                if (begin > pText->size() || count > pText->size() - begin) {
+                    Exception("String byte range out of bounds");
+                    return;
+                }
+                pBinding->pBindings->Return(pCall, SR_UTILS_NS::Reflection::Value::Create(SR_UTILS_NS::String(pText->substr(begin, count))));
+                return;
+            }
+
+            if (operation == "graphemeCount") {
+                SR_UTILS_NS::Vector<SR_UTILS_NS::Localization::GraphemeCodepoint> codepoints;
+                uint32_t count = 0;
+                if (!SR_UTILS_NS::Localization::DecodeGraphemes(*pText, codepoints, count)) {
+                    Exception("Invalid UTF-8 string");
+                    return;
+                }
+                pCall->SetReturnDWord(count);
                 return;
             }
 
