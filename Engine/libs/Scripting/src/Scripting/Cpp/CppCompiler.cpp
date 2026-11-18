@@ -19,6 +19,8 @@
 
 #include <Enum/CppCompilerType.hpp>
 
+#include <cstdlib>
+
 #include <Codegen/CppCompiler.generated.hpp>
 
 namespace SR_SCRIPTING_NS {
@@ -590,7 +592,17 @@ namespace SR_SCRIPTING_NS {
                 m_settings.compilerPath = builtInCompilerPath;
                 return true;
             }
-            SR_LOG("CppCompiler::FindWindowsCompiler() : headless mode detected, but built-in MSVC compiler not found!");
+            SR_LOG("CppCompiler::FindWindowsCompiler() : build-time MSVC compiler not found at {}", builtInCompilerPath);
+            if (const auto pToolsDirectory = std::getenv("VCToolsInstallDir")) {
+                const auto compilerPath = SR_UTILS_NS::Path(pToolsDirectory).Concat("bin/Hostx64/x64/cl.exe");
+                if (SR_PLATFORM_NS::IsFileExists(compilerPath)) {
+                    m_settings.compilerPath = compilerPath;
+                    SR_LOG("CppCompiler::FindWindowsCompiler() : using MSVC compiler from current environment: {}", compilerPath);
+                    return true;
+                }
+                SR_LOG("CppCompiler::FindWindowsCompiler() : environment MSVC compiler not found at {}", compilerPath);
+            }
+            SR_LOG("CppCompiler::FindWindowsCompiler() : headless mode detected, but no MSVC compiler found. Initialize the x64 MSVC developer environment.");
             return false;
         }
 
