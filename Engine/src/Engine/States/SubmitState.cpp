@@ -20,7 +20,33 @@ namespace SR_CORE_NS {
 
         auto&& pWindow = pEngine->GetMainWindow();
         if (!pWindow || !pWindow->IsVisible()) {
+            m_lastFrameTime.reset();
             return SR_UTILS_NS::ThreadWorkerResult::Break;
+        }
+
+        if (auto&& pContext = pEngine->GetRenderContext()) {
+            const uint32_t framerateLimit = pContext->GetActiveGraphicsSettings().framerateLimit.value_or(0);
+            if (framerateLimit > 0) {
+                if (m_lastFrameTime.has_value()) {
+                    const auto frameDuration = std::chrono::duration_cast<std::chrono::steady_clock::duration>(
+                        std::chrono::duration<double_t>(1.0 / static_cast<double_t>(framerateLimit)));
+                    const auto deadline = m_lastFrameTime.value() + frameDuration;
+                    if (std::chrono::steady_clock::now() < deadline) {
+                        SR_TRACY_ZONE_N("Framerate limit");
+                        SR_TRACY_ZONE_COLOR(0xFFAA33);
+                        while (std::chrono::steady_clock::now() < deadline) {
+                            std::this_thread::yield();
+                        }
+                    }
+                }
+                m_lastFrameTime = std::chrono::steady_clock::now();
+            }
+            else {
+                m_lastFrameTime.reset();
+            }
+        }
+        else {
+            m_lastFrameTime.reset();
         }
 
         {

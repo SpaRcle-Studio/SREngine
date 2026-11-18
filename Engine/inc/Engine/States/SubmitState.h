@@ -8,6 +8,7 @@
 #include <Engine/stdInclude.h>
 
 #include <Utils/TaskManager/ThreadWorker.h>
+#include <Utils/Types/Optional.h>
 
 namespace SR_CORE_NS {
     class SubmitState : public SR_UTILS_NS::ThreadWorkerStateBase {
@@ -15,6 +16,9 @@ namespace SR_CORE_NS {
         using Super = SR_UTILS_NS::ThreadWorkerStateBase;
     public:
         SR_UTILS_NS::ThreadWorkerResult ExecuteImpl() override;
+
+    private:
+        SR_UTILS_NS::Optional<std::chrono::steady_clock::time_point> m_lastFrameTime;
 
     };
 }

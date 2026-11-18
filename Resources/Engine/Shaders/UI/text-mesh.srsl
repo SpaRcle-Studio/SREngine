@@ -61,6 +61,11 @@ void fragment() {
         }
         float threshold = 0.5 - glyphMetadata.y * 0.055;
         float alpha = glyphMetadata.w == 4.0 ? tex.r : smoothstep(threshold - w, threshold + w, msd);
+        if (glyphTrueSdf > 0.5) {
+            // True distance bounds coverage where RGB pseudo-distance forms a false contour.
+            float trueAlpha = smoothstep(threshold - w, threshold + w, tex.a);
+            alpha = min(alpha, trueAlpha);
+        }
         if (glyphMetadata.w == 3.0) {
             COLOR = tex * glyphColor * vec4(color, 1.0);
         }
