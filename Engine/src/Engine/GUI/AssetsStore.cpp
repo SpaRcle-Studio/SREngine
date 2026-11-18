@@ -361,8 +361,8 @@ namespace SR_CORE_GUI_NS {
         }
         std::lock_guard<std::recursive_mutex> lock(g_packagesMountMutex);
 
-        SR_UTILS_NS::VFS::Instance().LockSingleton();
-
+        // Mount/Unmount lock the mount table internally. Holding the VFS singleton
+        // mutex here would invert OpenFile's mount table -> file handles lock order.
         UnMountPackages(pEditor);
 
         if (SR_UTILS_NS::StoreUtils::User::HasString(PackagesPathKey)) {
@@ -386,19 +386,15 @@ namespace SR_CORE_GUI_NS {
                 }
             }
         }
-
-        SR_UTILS_NS::VFS::Instance().UnlockSingleton();
     }
 
     void AssetsStore::UnMountPackages(EditorGUI* pEditor) {
         std::lock_guard<std::recursive_mutex> lock(g_packagesMountMutex);
-        SR_UTILS_NS::VFS::Instance().LockSingleton();
         for (auto&& mount : g_mounts) {
             SR_LOG("AssetsStore::UnMountPackages() : unmounting package \"{}\"...", mount.name);
             SR_UTILS_NS::VFS::Instance().Unmount(mount.pMount);
             delete mount.pMount;
         }
         g_mounts.clear();
-        SR_UTILS_NS::VFS::Instance().UnlockSingleton();
     }
 }
