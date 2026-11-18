@@ -42,6 +42,9 @@ namespace SR_CORE_UI_NS {
         SR_UTILS_NS::IUIInputTarget* GetUIInputTarget() noexcept override { return this; }
         bool HitTest(const SR_UTILS_NS::PointerEvent& event) override;
         int32_t GetInputPriority() const override;
+        bool RequiresInputPolling() const override;
+        void OnMatrixDirty() override;
+        void OnPostLoad() override;
         /// @method @evaluate
         bool IsInteractable() const override { return m_interactable; }
         bool IsFocusable() const override { return m_focusable && m_interactable; }
@@ -59,27 +62,30 @@ namespace SR_CORE_UI_NS {
         void InvokeEvents(const SR_UTILS_NS::Vector<UIButtonEvent>& events);
 
     private:
+        const SR_UTILS_NS::TransformRect* m_pHitRect = nullptr;
+        SR_MATH_NS::Matrix4x4 m_hitInverse;
+        bool m_hitMatrixDirty = true;
         /// @property @readOnly @dontSave
         UIControlState m_state = UIControlState::Idle;
         /// @property @setter(SetInteractable)
         bool m_interactable = true;
-        /// @property
+        /// @property @onChanged(InvalidateUIInput)
         bool m_focusable = true;
-        /// @property
+        /// @property @onChanged(InvalidateUIInput)
         bool m_modal = false;
-        /// @property
+        /// @property @onChanged(InvalidateUIInput)
         bool m_raycastTarget = true;
         /// @property
         SR_UTILS_NS::Vector<UIButtonEvent> m_onCancelEvents;
-        /// @property
+        /// @property @onChanged(InvalidateUIInput)
         SR_UTILS_NS::EntityRef<SR_UTILS_NS::SceneObject> m_idle;
-        /// @property
+        /// @property @onChanged(InvalidateUIInput)
         SR_UTILS_NS::EntityRef<SR_UTILS_NS::SceneObject> m_hovered;
-        /// @property
+        /// @property @onChanged(InvalidateUIInput)
         SR_UTILS_NS::EntityRef<SR_UTILS_NS::SceneObject> m_pressed;
-        /// @property
+        /// @property @onChanged(InvalidateUIInput)
         SR_UTILS_NS::EntityRef<SR_UTILS_NS::SceneObject> m_selected;
-        /// @property
+        /// @property @onChanged(InvalidateUIInput)
         SR_UTILS_NS::EntityRef<SR_UTILS_NS::SceneObject> m_disabled;
     };
 }
