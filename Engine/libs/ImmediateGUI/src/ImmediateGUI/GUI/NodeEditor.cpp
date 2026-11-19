@@ -388,7 +388,7 @@ namespace SR_IMMEDIATE_GUI_NS {
             case Utils::Reflection::ReflectedCategoryType::Object:
                 return IconType::Diamond;
             case Utils::Reflection::ReflectedCategoryType::Arithmetic:
-                if (m_type.pType->detailedType == "bool") {
+                if (m_type.pType->kind == SR_UTILS_NS::Reflection::TypeKind::Bool) {
                     return IconType::Square;
                 }
             case Utils::Reflection::ReflectedCategoryType::String:
@@ -421,7 +421,7 @@ namespace SR_IMMEDIATE_GUI_NS {
             case Utils::Reflection::ReflectedCategoryType::Object:
                 return SR_MATH_NS::FColor(100, 100, 255, 255);
             case Utils::Reflection::ReflectedCategoryType::Arithmetic:
-                if (m_type.pType->detailedType == "bool") {
+                if (m_type.pType->kind == SR_UTILS_NS::Reflection::TypeKind::Bool) {
                     return SR_MATH_NS::FColor(200, 0, 0, 255);
                 }
                 return SR_MATH_NS::FColor(87, 155, 185, 255);

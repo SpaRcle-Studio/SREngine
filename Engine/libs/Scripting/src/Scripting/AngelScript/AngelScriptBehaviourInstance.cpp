@@ -309,6 +309,7 @@ namespace SR_SCRIPTING_NS {
                 property.SetPublicity(SR_UTILS_NS::PropertyPublicity::ReadOnly);
             }
 
+            property.SetTypeInfo(&value.GetTypeInfo());
             property.SetDefaultValue(value.Copy());
             property.SetDynamicGetter([i](SR_UTILS_NS::SRClass* pOwner) {
                 auto&& pInstance = static_cast<AngelScriptBehaviourInstance*>(pOwner);
@@ -372,15 +373,14 @@ namespace SR_SCRIPTING_NS {
             }
 
             auto value = m_pRuntime->GetBindings()->ReadProperty(m_pObject, i);
-            SR_UTILS_NS::String signature, expected, scriptType;
+            SR_UTILS_NS::String signature, scriptType;
             deserializer.ReadString(signature, SR_UTILS_NS::SerializationId::Create("type"));
             deserializer.ReadString(scriptType, SR_UTILS_NS::SerializationId::Create("scriptType"));
 
-            if (value) {
-                SR_UTILS_NS::Reflection::SaveTypeInfo(expected, &value.GetTypeInfo());
-            }
+            /// сигнатура могла быть сохранена в старом формате, поэтому сравниваются разобранные типы, а не строки
+            const bool isSameType = value && SR_UTILS_NS::Reflection::LoadTypeInfo(signature) == &value.GetTypeInfo();
 
-            if (value && signature == expected && scriptType == m_pRuntime->GetEngine()->GetTypeDeclaration(m_pObject->GetPropertyTypeId(i), true)) {
+            if (isSameType && scriptType == m_pRuntime->GetEngine()->GetTypeDeclaration(m_pObject->GetPropertyTypeId(i), true)) {
                 result &= CanSerializeAngelScriptValue(value.GetTypeInfo()) && LoadAngelScriptValue(value, deserializer) && m_pRuntime->GetBindings()->WriteProperty(m_pObject, i, value);
             }
 

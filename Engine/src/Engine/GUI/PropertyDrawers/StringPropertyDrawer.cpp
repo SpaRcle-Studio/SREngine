@@ -40,7 +40,7 @@ namespace SR_CORE_GUI_NS {
 
         const bool isTextBox = context.pProperty && context.pProperty->GetEditorParams().GetCustomArg("text-box") == "enabled";
 
-        if (value.GetTypeInfo().detailedType == "String") {
+        if (value.GetTypeInfo().kind == SR_UTILS_NS::Reflection::TypeKind::String) {
             if (auto&& pString = value.Cast<SR_UTILS_NS::String>()) {
                 m_buffer = *pString;
 
@@ -59,7 +59,7 @@ namespace SR_CORE_GUI_NS {
                 SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map string value!");
             }
         }
-        else if (value.GetTypeInfo().detailedType == "StringView") {
+        else if (value.GetTypeInfo().kind == SR_UTILS_NS::Reflection::TypeKind::StringView) {
             if (auto&& pStringView = value.Cast<SR_UTILS_NS::StringView>()) {
                 /// read only
                 if (pStringView->empty()) {
@@ -74,7 +74,7 @@ namespace SR_CORE_GUI_NS {
                 SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map string view value!");
             }
         }
-        else if (value.GetTypeInfo().detailedType == "StringAtom") {
+        else if (value.GetTypeInfo().kind == SR_UTILS_NS::Reflection::TypeKind::StringAtom) {
             if (auto&& pStringAtom = value.Cast<SR_UTILS_NS::StringAtom>()) {
                 m_buffer = pStringAtom->ToStringRef();
                 SR_IMMEDIATE_GUI_NS::InputText("##Input", &m_buffer);
@@ -87,7 +87,7 @@ namespace SR_CORE_GUI_NS {
                 SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map string atom value!");
             }
         }
-        else if (value.GetTypeInfo().detailedType == "UnicodeString") {
+        else if (value.GetTypeInfo().kind == SR_UTILS_NS::Reflection::TypeKind::UnicodeString) {
             if (auto&& pUnicodeString = value.Cast<SR_UTILS_NS::UnicodeString>()) {
                 m_buffer.clear();
                 SR_UTILS_NS::Localization::UtfToUtf<char, char32_t>(m_buffer, pUnicodeString->View());

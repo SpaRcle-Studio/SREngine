@@ -36,7 +36,6 @@ void ShutdownApplication() {
         Codegen::UnregisterModule_Application();
     }
 
-    SR_UTILS_NS::Reflection::DeInitReflection();
     SR_UTILS_NS::VFS::Instance().DeInitialize();
     SR_HTYPES_NS::SharedPtrDynamicDataCounter::CheckMemoryLeaks();
     SR_UTILS_NS::ShutdownEngineProfiler();

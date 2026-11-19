@@ -25,7 +25,7 @@ namespace SR_CORE_GUI_NS {
         virtual void CustomContextMenu(const PropertyDrawerContext& context, SRClass* pClass) { }
 
     private:
-        SR_UTILS_NS::Reflection::TypeInfo* DrawTypeInfo(uint32_t& index, const SR_UTILS_NS::Reflection::TypeInfo& typeInfo, const PropertyDrawerContext& context);
+        const SR_UTILS_NS::Reflection::TypeInfo* DrawTypeInfo(uint32_t& index, const SR_UTILS_NS::Reflection::TypeInfo& typeInfo, const PropertyDrawerContext& context);
 
     private:
         SR_UTILS_NS::String m_default;

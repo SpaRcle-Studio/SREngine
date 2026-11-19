@@ -46,10 +46,8 @@ namespace SR_SCRIPTING_NS {
         struct Type {
             SR_UTILS_NS::String name;
             int32_t scriptTypeId = 0;
-            SR_UTILS_NS::Reflection::TypeInfo* pTypeInfo = nullptr;
+            const SR_UTILS_NS::Reflection::TypeInfo* pTypeInfo = nullptr;
             const SR_UTILS_NS::SRClassMeta* pMeta = nullptr;
-
-            ~Type();
         };
 
         struct Call {
@@ -69,7 +67,7 @@ namespace SR_SCRIPTING_NS {
             Type* pOwner = nullptr;
             SR_UTILS_NS::Reflection::Method method;
             SR_UTILS_NS::Reflection::Property property;
-            SR_UTILS_NS::Reflection::TypeInfo* pPropertyType = nullptr;
+            const SR_UTILS_NS::Reflection::TypeInfo* pPropertyType = nullptr;
             uint32_t component = 0;
             SR_UTILS_NS::Vector<Frame*> frames;
             uint32_t activeFrames = 0;

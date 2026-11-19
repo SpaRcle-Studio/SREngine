@@ -474,35 +474,18 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
             return false;
         }
 
-        static SR_UTILS_NS::StringAtom integerTypes[] = {
-            "int8",
-            "uint8",
-            "int16",
-            "uint16",
-            "int32",
-            "uint32",
-            "int64",
-            "uint64"
-        };
-
         if (*pFrom != *pTo) {
-            if (pFrom->category == Utils::Reflection::ReflectedCategoryType::Arithmetic) {
-                const bool isFromInteger = std::find(std::begin(integerTypes), std::end(integerTypes), pFrom->detailedType) != std::end(integerTypes);
-                const bool isToInteger = std::find(std::begin(integerTypes), std::end(integerTypes), pTo->detailedType) != std::end(integerTypes);
-                if (isFromInteger && isToInteger) {
-                    return true;
-                }
-            }
-            if (pFrom->category == Utils::Reflection::ReflectedCategoryType::Value || pTo->category == Utils::Reflection::ReflectedCategoryType::Value) {
+            if (pFrom->IsIntegral() && pTo->IsIntegral()) {
                 return true;
             }
-            if (pFrom->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Container && pFrom->detailedType == "SharedPtr") {
-                if (pTo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Object) {
-                    return pFrom->pNext[0]->detailedType == pTo->detailedType;
-                }
+            if (pFrom->kind == SR_UTILS_NS::Reflection::TypeKind::Value || pTo->kind == SR_UTILS_NS::Reflection::TypeKind::Value) {
+                return true;
             }
-            if (pFrom->category == pTo->category && pFrom->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::String) {
-                return pFrom->detailedType == "String" && pTo->detailedType == "StringView";
+            if (pFrom->kind == SR_UTILS_NS::Reflection::TypeKind::SharedPtr && pTo->kind == SR_UTILS_NS::Reflection::TypeKind::Object) {
+                return pFrom->pNext[0] == pTo;
+            }
+            if (pFrom->kind == SR_UTILS_NS::Reflection::TypeKind::String && pTo->kind == SR_UTILS_NS::Reflection::TypeKind::StringView) {
+                return true;
             }
             if (pFrom->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Arithmetic && pTo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum) {
                 return true;

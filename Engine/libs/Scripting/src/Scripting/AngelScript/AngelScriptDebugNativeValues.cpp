@@ -25,14 +25,14 @@ namespace SR_SCRIPTING_NS::AngelScriptDebugNativeValues {
         if (value.IsSharedPtr() && !value.GetSharedPtrBase()->Valid()) {
             return "null";
         }
-        if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Arithmetic) {
-            if (info.detailedType == "bool") {
+        if (info.IsArithmetic()) {
+            if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Bool) {
                 return *value.Cast<bool>() ? "true" : "false";
             }
-            if (info.detailedType == "float") {
+            if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Float) {
                 return "{}"_format(*value.Cast<float_t>());
             }
-            if (info.detailedType == "double") {
+            if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Double) {
                 return "{}"_format(*value.Cast<double_t>());
             }
             const auto size = value.SizeOf();
@@ -49,29 +49,30 @@ namespace SR_SCRIPTING_NS::AngelScriptDebugNativeValues {
             }
             return "{}"_format(bits);
         }
-        if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum) {
-            auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().TryGetReflector(info.detailedType);
+        if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Enum) {
+            auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().TryGetReflector(info.name);
             if (pReflector) {
                 const auto number = pReflector->ReadEnumValueFromPointerInternal(value.Data());
                 return "{}"_format(number);
             }
         }
-        if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::String) {
-            if (info.detailedType == "String") {
+        switch (info.kind) {
+            case SR_UTILS_NS::Reflection::TypeKind::String:
                 return "\"" + *value.Cast<SR_UTILS_NS::String>() + "\"";
-            }
-            if (info.detailedType == "StringAtom") {
+            case SR_UTILS_NS::Reflection::TypeKind::StringAtom:
                 return "\"" + SR_UTILS_NS::String(*value.Cast<SR_UTILS_NS::StringAtom>()) + "\"";
-            }
-            if (info.detailedType == "StringView") {
+            case SR_UTILS_NS::Reflection::TypeKind::StringView:
                 return "\"" + SR_UTILS_NS::String(*value.Cast<SR_UTILS_NS::StringView>()) + "\"";
-            }
-            if (info.detailedType == "Path") {
+            case SR_UTILS_NS::Reflection::TypeKind::Path:
                 return value.Cast<SR_UTILS_NS::Path>()->ToStringRef();
-            }
+            default:
+                break;
         }
-        if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Container && info.vtable.containerVTable.pSize) {
-            return "size = {}"_format(info.vtable.containerVTable.pSize(value.GetStorage()));
+        if (const auto array = value.AsArray()) {
+            return "size = {}"_format(array.Size());
+        }
+        if (const auto map = value.AsMap()) {
+            return "size = {}"_format(map.Size());
         }
         return HasChildren(value) ? "{...}" : "<native object: no reflected properties>";
     }
@@ -85,11 +86,10 @@ namespace SR_SCRIPTING_NS::AngelScriptDebugNativeValues {
             return true;
         }
         if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Container) {
-            if (info.detailedType == "Optional" || info.detailedType == "Pair") {
+            if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Optional || info.kind == SR_UTILS_NS::Reflection::TypeKind::Pair) {
                 return true;
             }
-            if (info.vtable.containerVTable.pSize && info.vtable.containerVTable.pBegin && info.vtable.containerVTable.pEnd &&
-                info.vtable.iteratorVTable.pGetValue && info.vtable.iteratorVTable.pOffset) {
+            if (value.AsArray() || value.AsMap()) {
                 return true;
             }
         }
@@ -113,13 +113,11 @@ namespace SR_SCRIPTING_NS::AngelScriptDebugNativeValues {
         const auto layout = AngelScriptMathHelpers::Describe(info);
         for (uint32_t i = 0; i < layout.count; ++i) {
             auto&& component = layout.components[i];
-            auto&& pInfo = SR_UTILS_NS::Reflection::LoadTypeInfo("Arithmetic." + SR_UTILS_NS::String(component.pScalar));
-            if (!pInfo || !SR_UTILS_NS::Reflection::FindVTable(*pInfo)) {
-                SR_UTILS_NS::Reflection::FreeTypeInfo(pInfo);
+            auto&& pInfo = component.pScalar;
+            if (!pInfo) {
                 continue;
             }
             auto scalar = SR_UTILS_NS::Reflection::Value::CreateDefault(pInfo);
-            SR_UTILS_NS::Reflection::FreeTypeInfo(pInfo);
             if (scalar && component.offset + scalar.SizeOf() <= value.SizeOf()) {
                 memcpy(scalar.Data(), static_cast<const char*>(value.Data()) + component.offset, scalar.SizeOf());
                 result.emplace_back(Child{component.pName, std::move(scalar)});
@@ -140,27 +138,36 @@ namespace SR_SCRIPTING_NS::AngelScriptDebugNativeValues {
             }
             return result;
         }
-        if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Container && info.detailedType == "Pair" && info.vtable.pairVTable.pGetPairValue) {
+        if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Pair && info.vtable.pairVTable.pGetPairValue) {
             for (uint32_t i = 0; i < 2; ++i) {
                 auto storage = info.vtable.pairVTable.pGetPairValue(value.GetStorage(), i == 0);
                 if (storage.GetData() && info.pNext[i]) {
-                    auto child = SR_UTILS_NS::Reflection::Value::CreateRef(*static_cast<char*>(storage.GetData()),
-                        SR_UTILS_NS::Reflection::CopyTypeInfo(info.pNext[i]));
+                    auto child = SR_UTILS_NS::Reflection::Value::CreateRef(*static_cast<char*>(storage.GetData()), info.pNext[i]);
                     child.GetStorage() = storage;
                     result.emplace_back(Child{i == 0 ? "first" : "second", std::move(child)});
                 }
             }
             return result;
         }
-        if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Container && info.vtable.containerVTable.pSize &&
-            info.vtable.containerVTable.pBegin && info.vtable.containerVTable.pEnd && info.vtable.iteratorVTable.pGetValue && info.vtable.iteratorVTable.pOffset) {
-            auto container = value.AsSequenceContainer();
-            result.emplace_back(Child{"size", SR_UTILS_NS::Reflection::Value::Create(uint64_t(container.Size()))});
-            auto iterator = container.Begin();
-            const auto end = container.End();
-            for (uint32_t i = 0; iterator != end && i < 256; ++i, ++iterator) {
-                result.emplace_back(Child{"[{}]"_format(i), *iterator});
+        constexpr uint32_t maxChildren = 256;
+        if (const auto array = value.AsArray()) {
+            const auto size = array.Size();
+            result.emplace_back(Child{"size", SR_UTILS_NS::Reflection::Value::Create(uint64_t(size))});
+            for (uint32_t i = 0; i < size && i < maxChildren; ++i) {
+                result.emplace_back(Child{"[{}]"_format(i), array.At(i).ToValue()});
             }
+            return result;
+        }
+        if (const auto map = value.AsMap()) {
+            result.emplace_back(Child{"size", SR_UTILS_NS::Reflection::Value::Create(uint64_t(map.Size()))});
+            uint32_t index = 0;
+            map.ForEach([&](const SR_UTILS_NS::Reflection::ValueRef& key, const SR_UTILS_NS::Reflection::ValueRef& mapped) {
+                result.emplace_back(Child{"[{}]"_format(index), key.ToValue()});
+                if (mapped) {
+                    result.emplace_back(Child{"[{}].value"_format(index), mapped.ToValue()});
+                }
+                return ++index < maxChildren;
+            });
             return result;
         }
         if (auto&& pObject = value.GetSRClass()) {

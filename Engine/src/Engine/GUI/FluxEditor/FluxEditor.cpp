@@ -226,7 +226,7 @@ namespace SR_CORE_GUI_NS {
             }
 
             auto&& layout = m_layouts[nodeIndex];
-            BuildFluxNodeLayout(*pGraph, nodeIndex, layout, m_tmpTypeInfos);
+            BuildFluxNodeLayout(*pGraph, nodeIndex, layout);
 
             auto&& pNode = pGraph->GetNode(nodeIndex);
 
@@ -290,11 +290,6 @@ namespace SR_CORE_GUI_NS {
         for (auto&& link : m_brokenLinks) {
             pGraph->RemoveLink(link.GetSourceNode(), link.GetSourcePin(), link.GetTargetNode(), link.GetTargetPin());
         }
-
-        for (auto&& pTmpTypeInfo : m_tmpTypeInfos) {
-            SR_UTILS_NS::Reflection::FreeTypeInfo(pTmpTypeInfo);
-        }
-        m_tmpTypeInfos.clear();
     }
 
     void FluxEditor::OnNodeTypeSelected(const SR_UTILS_NS::StringAtom type, const SR_MATH_NS::FVector2 pos) {
@@ -353,11 +348,11 @@ namespace SR_CORE_GUI_NS {
 
         /// класс объекта известен по типу выходного пина: сам объект либо SharedPtr на него
         if (auto&& pType = pin.GetType().pType; pType && !pin.IsInput()) {
-            if (pType->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Object) {
-                m_droppedLinkPin.className = pType->detailedType;
+            if (pType->kind == SR_UTILS_NS::Reflection::TypeKind::Object) {
+                m_droppedLinkPin.className = pType->name;
             }
-            else if (pType->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Container && pType->detailedType == "SharedPtr" && pType->pNext[0]) {
-                m_droppedLinkPin.className = pType->pNext[0]->detailedType;
+            else if (pType->kind == SR_UTILS_NS::Reflection::TypeKind::SharedPtr && pType->pNext[0]) {
+                m_droppedLinkPin.className = pType->pNext[0]->name;
             }
         }
     }
@@ -447,7 +442,7 @@ namespace SR_CORE_GUI_NS {
 
         /// у нового узла ищется первый пин противоположного направления того же вида (flow/данные)
         FluxNodeLayout layout;
-        BuildFluxNodeLayout(*pGraph, nodeIndex, layout, m_tmpTypeInfos);
+        BuildFluxNodeLayout(*pGraph, nodeIndex, layout);
 
         auto&& pins = m_droppedLinkPin.isInput ? layout.outputs : layout.inputs;
         uint32_t newPin = SR_UINT32_MAX;

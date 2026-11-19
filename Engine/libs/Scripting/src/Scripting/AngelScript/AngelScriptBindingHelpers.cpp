@@ -33,31 +33,27 @@ namespace SR_SCRIPTING_NS {
         }
 
         bool Primitive(const SR_UTILS_NS::Reflection::TypeInfo& info) {
-            return info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Arithmetic || info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum;
+            return info.IsArithmetic() || info.kind == SR_UTILS_NS::Reflection::TypeKind::Enum;
         }
 
         SR_UTILS_NS::String PrimitiveName(const SR_UTILS_NS::Reflection::TypeInfo& info) {
-            if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum) {
-                return SR_UTILS_NS::String(info.detailedType);
-            }
-
-            if (info.detailedType == "int32") {
+            if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Int32) {
                 return "int";
             }
 
-            if (info.detailedType == "uint32") {
+            if (info.kind == SR_UTILS_NS::Reflection::TypeKind::UInt32) {
                 return "uint";
             }
 
-            return SR_UTILS_NS::String(info.detailedType);
+            return SR_UTILS_NS::String(info.name.ToStringView());
         }
 
         SR_UTILS_NS::String StorageIdentifier(const SR_UTILS_NS::Reflection::TypeInfo& info) {
-            if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::String && info.detailedType != "String") {
-                return SR_UTILS_NS::String(info.detailedType);
+            if (info.IsString() && info.kind != SR_UTILS_NS::Reflection::TypeKind::String) {
+                return SR_UTILS_NS::String(info.name.ToStringView());
             }
 
-            if (info.detailedType == "SharedPtr" && info.pNext[0]) {
+            if (info.kind == SR_UTILS_NS::Reflection::TypeKind::SharedPtr && info.pNext[0]) {
                 return Identifier(*info.pNext[0]) + "@";
             }
 
@@ -65,7 +61,7 @@ namespace SR_SCRIPTING_NS {
         }
 
         bool HasBorrowedView(const SR_UTILS_NS::Reflection::TypeInfo& info) {
-            if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::String && info.detailedType == "StringView") {
+            if (info.kind == SR_UTILS_NS::Reflection::TypeKind::StringView) {
                 return true;
             }
 
@@ -74,68 +70,34 @@ namespace SR_SCRIPTING_NS {
 
         SR_UTILS_NS::String Identifier(const SR_UTILS_NS::Reflection::TypeInfo& info) {
             SR_TRACY_ZONE;
-            if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
+            if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Value) {
                 return "Value";
             }
             if (Primitive(info)) {
                 return PrimitiveName(info);
             }
 
-            if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::String) {
+            if (info.IsString()) {
                 return "String";
             }
 
-            if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::MathVector) {
-                SR_UTILS_NS::String prefix;
-                if (info.detailedType == "float") prefix = "F";
-                else if (info.detailedType == "int32") prefix = "I";
-                else if (info.detailedType == "uint32") prefix = "U";
-                else if (info.detailedType == "bool") prefix = "B";
-
-                prefix += "Vector";
-                if (info.detailedSize == 2) return prefix + "2";
-                if (info.detailedSize == 3) return prefix + "3";
-                if (info.detailedSize == 4) return prefix + "4";
-                if (info.detailedSize == 6) return prefix + "6";
-                return {};
+            /// канонические имена математических типов совпадают с именами в скриптах: FVector3, IRect, FSize2, FColor
+            if (info.IsMath() || info.kind == SR_UTILS_NS::Reflection::TypeKind::Object) {
+                return SR_UTILS_NS::String(info.name.ToStringView());
             }
 
-            if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::MathRect) {
-                if (info.detailedType == "float") return "FRect";
-                if (info.detailedType == "int32") return "IRect";
-                if (info.detailedType == "uint32") return "URect";
-                if (info.detailedType == "uint16") return "USRect";
-                return {};
-            }
-
-            if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::MathSize) {
-                const SR_UTILS_NS::String suffix = info.detailedSize == 2 ? "Size2" : "Size";
-                if (info.detailedSize != 1 && info.detailedSize != 2) return {};
-                if (info.detailedType == "float") return "F" + suffix;
-                if (info.detailedType == "int32") return "I" + suffix;
-                if (info.detailedType == "uint32") return "U" + suffix;
-                return {};
-            }
-
-            if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::MathObject) {
-                if (info.detailedType == "Color") return "FColor";
-                return SR_UTILS_NS::String(info.detailedType);
-            }
-
-            if (info.detailedType == "SharedPtr" && info.pNext[0]) {
+            if (info.kind == SR_UTILS_NS::Reflection::TypeKind::SharedPtr && info.pNext[0]) {
                 return Identifier(*info.pNext[0]);
             }
 
-            if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Object) {
-                return SR_UTILS_NS::String(info.detailedType);
-            }
+            if (info.IsContainer() && info.GetArgument(0)) {
+                const SR_UTILS_NS::String templateName(SR_UTILS_NS::Reflection::GetTypeKindTemplateName(info.kind).ToStringView());
 
-            if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Container && info.pNext[0]) {
-                if ((info.detailedType == "Map" || info.detailedType == "FlatHashMap") && info.pNext[0]->pNext[0] && info.pNext[0]->pNext[1]) {
-                    return SR_UTILS_NS::String(info.detailedType) + "<" + StorageIdentifier(*info.pNext[0]->pNext[0]) + ", " + StorageIdentifier(*info.pNext[0]->pNext[1]) + ">";
+                if (info.IsMapLike() && info.GetArgument(1)) {
+                    return templateName + "<" + StorageIdentifier(*info.GetArgument(0)) + ", " + StorageIdentifier(*info.GetArgument(1)) + ">";
                 }
 
-                return SR_UTILS_NS::String(info.detailedType) + "<" + StorageIdentifier(*info.pNext[0]) + ">";
+                return templateName + "<" + StorageIdentifier(*info.GetArgument(0)) + ">";
             }
 
             SR_UTILS_NS::String result;
@@ -148,6 +110,23 @@ namespace SR_SCRIPTING_NS {
             }
 
             return result;
+        }
+
+        const SR_UTILS_NS::Reflection::TypeInfo* GetPrimitiveTypeInfo(const int32_t typeId) {
+            switch (typeId) {
+                case asTYPEID_BOOL: return SR_UTILS_NS::Reflection::GetScalarTypeInfo(SR_UTILS_NS::Reflection::TypeKind::Bool);
+                case asTYPEID_INT8: return SR_UTILS_NS::Reflection::GetScalarTypeInfo(SR_UTILS_NS::Reflection::TypeKind::Int8);
+                case asTYPEID_INT16: return SR_UTILS_NS::Reflection::GetScalarTypeInfo(SR_UTILS_NS::Reflection::TypeKind::Int16);
+                case asTYPEID_INT32: return SR_UTILS_NS::Reflection::GetScalarTypeInfo(SR_UTILS_NS::Reflection::TypeKind::Int32);
+                case asTYPEID_INT64: return SR_UTILS_NS::Reflection::GetScalarTypeInfo(SR_UTILS_NS::Reflection::TypeKind::Int64);
+                case asTYPEID_UINT8: return SR_UTILS_NS::Reflection::GetScalarTypeInfo(SR_UTILS_NS::Reflection::TypeKind::UInt8);
+                case asTYPEID_UINT16: return SR_UTILS_NS::Reflection::GetScalarTypeInfo(SR_UTILS_NS::Reflection::TypeKind::UInt16);
+                case asTYPEID_UINT32: return SR_UTILS_NS::Reflection::GetScalarTypeInfo(SR_UTILS_NS::Reflection::TypeKind::UInt32);
+                case asTYPEID_UINT64: return SR_UTILS_NS::Reflection::GetScalarTypeInfo(SR_UTILS_NS::Reflection::TypeKind::UInt64);
+                case asTYPEID_FLOAT: return SR_UTILS_NS::Reflection::GetScalarTypeInfo(SR_UTILS_NS::Reflection::TypeKind::Float);
+                case asTYPEID_DOUBLE: return SR_UTILS_NS::Reflection::GetScalarTypeInfo(SR_UTILS_NS::Reflection::TypeKind::Double);
+                default: return nullptr;
+            }
         }
 
         void AddRef(asIScriptGeneric* pCall) {
@@ -171,20 +150,17 @@ namespace SR_SCRIPTING_NS {
                 return {};
             }
 
-            SR_UTILS_NS::Reflection::TypeInfo objectType;
-            objectType.category = SR_UTILS_NS::Reflection::ReflectedCategoryType::Object;
-            objectType.detailedType = pMeta->GetFactoryName();
-            objectType.vtable = pMeta->GetVTable();
-            SR_UTILS_NS::Reflection::TypeInfo pointerType;
-            pointerType.category = SR_UTILS_NS::Reflection::ReflectedCategoryType::Container;
-            pointerType.detailedType = "SharedPtr";
-            pointerType.pNext[0] = &objectType;
+            SR_UTILS_NS::Reflection::TypeInfoKey objectKey;
+            objectKey.kind = SR_UTILS_NS::Reflection::TypeKind::Object;
+            objectKey.name = pMeta->GetFactoryName();
 
-            if (!SR_UTILS_NS::Reflection::FindVTable(pointerType)) {
+            auto&& pPointerType = SR_UTILS_NS::Reflection::ResolveTemplateTypeInfo(SR_UTILS_NS::Reflection::TypeKind::SharedPtr,
+                SR_UTILS_NS::Reflection::ResolveTypeInfo(objectKey));
+            if (!pPointerType->IsResolved()) {
                 return {};
             }
 
-            auto result = SR_UTILS_NS::Reflection::Value::CreateDefault(&pointerType);
+            auto result = SR_UTILS_NS::Reflection::Value::CreateDefault(pPointerType);
             auto&& pDestination = result.GetSharedPtrBase();
 
             if (!pDestination) {
@@ -296,7 +272,7 @@ namespace SR_SCRIPTING_NS {
                 return;
             }
 
-            const auto size = SR_UTILS_NS::Reflection::GetReflectedTypeSize(pBinding->pPropertyType->detailedType);
+            const auto size = pBinding->pPropertyType->GetScalarSize();
             auto&& pAddress = static_cast<char*>(pObject->value.Data()) + pBinding->component;
 
             if (pCall->GetArgCount() == 0) {
@@ -407,14 +383,13 @@ namespace SR_SCRIPTING_NS {
                 }
                 else if (pBinding->method.IsOutputParam(i)) {
                     if (arguments[i].GetType() == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum) {
-                        auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().GetReflector(arguments[i].GetTypeInfo().detailedType);
+                        auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().GetReflector(arguments[i].GetTypeInfo().name);
                         const auto number = static_cast<int32_t>(pReflector->ReadEnumValueFromPointerInternal(arguments[i].Data()));
                         memcpy(pCall->GetArgAddress(i), &number, sizeof(number));
                         continue;
                     }
 
-                    const auto size = arguments[i].GetType() == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum ? sizeof(int32_t) : SR_UTILS_NS::Reflection::GetReflectedTypeSize(arguments[i].GetTypeInfo().detailedType);
-                    memcpy(pCall->GetArgAddress(i), arguments[i].Data(), size);
+                    memcpy(pCall->GetArgAddress(i), arguments[i].Data(), arguments[i].GetTypeInfo().GetScalarSize());
                 }
             }
         }
@@ -506,27 +481,18 @@ namespace SR_SCRIPTING_NS {
                         }
                     }
                     else {
-                        auto&& pType = pBinding->pBindings->FindType(id);
-                        static SR_THREAD_LOCAL SR_UTILS_NS::String serialized;
-                        serialized = "Arithmetic.";
-                        if (id == asTYPEID_INT32) {
-                            serialized += "int32";
-                        }
-                        else if (id == asTYPEID_UINT32) {
-                            serialized += "uint32";
+                        const SR_UTILS_NS::Reflection::TypeInfo* pInfo = nullptr;
+                        if (auto&& pType = pBinding->pBindings->FindType(id)) {
+                            pInfo = pType->pTypeInfo;
                         }
                         else {
-                            serialized += pCall->GetEngine()->GetTypeDeclaration(id);
+                            pInfo = GetPrimitiveTypeInfo(id);
                         }
-                        auto&& pInfo = pType ? SR_UTILS_NS::Reflection::CopyTypeInfo(pType->pTypeInfo) : SR_UTILS_NS::Reflection::LoadTypeInfo(serialized);
-                        if (!pInfo || !SR_UTILS_NS::Reflection::FindVTable(*pInfo)) {
-                            SR_UTILS_NS::Reflection::FreeTypeInfo(pInfo);
+                        if (!pInfo || !pInfo->IsResolved()) {
                             Exception("Unsupported native Value type");
                             return;
                         }
-                        auto source = pBinding->pBindings->Read(pCall, 0, *pInfo);
-                        payload = std::move(source);
-                        SR_UTILS_NS::Reflection::FreeTypeInfo(pInfo);
+                        payload = pBinding->pBindings->Read(pCall, 0, *pInfo);
                     }
                     return;
                 }
@@ -571,7 +537,7 @@ namespace SR_SCRIPTING_NS {
                         return;
                     }
                     if (payload.GetType() == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum) {
-                        auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().GetReflector(payload.GetTypeInfo().detailedType);
+                        auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().GetReflector(payload.GetTypeInfo().name);
                         const auto number = static_cast<int32_t>(pReflector->ReadEnumValueFromPointerInternal(payload.Data()));
                         memcpy(pAddress, &number, sizeof(number));
                     }
@@ -640,7 +606,7 @@ namespace SR_SCRIPTING_NS {
                     pCall->SetReturnAddress(nullptr);
                     return;
                 }
-                auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(value.GetTypeInfo().pNext[0]->detailedType);
+                auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(value.GetTypeInfo().pNext[0]->name);
                 pBinding->pBindings->Return(pCall, pMeta->Cast(target));
             }
         }
@@ -657,7 +623,6 @@ namespace SR_SCRIPTING_NS {
             }
 
             auto&& value = pObject->value;
-            auto&& table = value.GetTypeInfo().vtable.containerVTable;
             const SR_UTILS_NS::StringView operation(pCall->GetFunction()->GetName());
 
             if (value.IsConst() && operation != "size" && operation != "contains" && operation != "at") {
@@ -665,116 +630,121 @@ namespace SR_SCRIPTING_NS {
                 return;
             }
 
-            const bool map = value.GetTypeInfo().detailedType == "Map" || value.GetTypeInfo().detailedType == "FlatHashMap";
-            const bool sequence = value.GetTypeInfo().detailedType == "Vector";
+            if (const auto array = value.AsArray()) {
+                if (operation == "size") {
+                    pCall->SetReturnDWord(static_cast<asDWORD>(array.Size()));
+                    return;
+                }
 
-            if (operation == "size") {
-                pCall->SetReturnDWord(static_cast<asDWORD>(table.pSize(value.GetStorage())));
-                return;
-            }
+                if (operation == "clear") {
+                    array.Clear();
+                    return;
+                }
 
-            if (operation == "clear") {
-                table.pClear(value.GetStorage());
-                return;
-            }
+                if (operation == "resize") {
+                    array.Resize(pCall->GetArgDWord(0));
+                    return;
+                }
 
-            if (operation == "resize") {
-                table.pResize(value.GetStorage(), pCall->GetArgDWord(0), false);
-                return;
-            }
+                auto&& pElement = array.GetElementType();
 
-            auto&& pElement = value.GetTypeInfo().pNext[0];
-            auto&& pKeyType = map ? pElement->pNext[0] : pElement;
-            auto&& pMappedType = map ? pElement->pNext[1] : pElement;
-            auto container = SR_UTILS_NS::Reflection::BaseContainerValueRef(&value);
-            auto iterator = container.End();
-            SR_UTILS_NS::Reflection::Value key;
+                if (operation == "pushBack") {
+                    auto source = pBinding->pBindings->Read(pCall, 0, *pElement);
+                    if (!source) {
+                        Exception("Invalid vector element");
+                        return;
+                    }
 
-            if (sequence && operation != "pushBack") {
+                    array.PushBack(source.AsRef());
+                    return;
+                }
+
                 const auto index = pCall->GetArgDWord(0);
 
-                if (index >= container.Size()) {
+                if (index >= array.Size()) {
                     Exception("Vector index out of range");
                     return;
                 }
 
-                iterator = container.Begin() + index;
-            }
-            else if (!sequence) {
-                key = pBinding->pBindings->Read(pCall, 0, *pKeyType);
-
-                if (!key) {
-                    Exception("Invalid container key");
+                if (operation == "at") {
+                    // Return a copy: no script handle may retain a reference invalidated by resize/erase.
+                    pBinding->pBindings->Return(pCall, pBinding->pBindings->CopyValue(array.At(index).ToValue()));
                     return;
                 }
 
-                iterator = table.pFind(value.GetStorage(), key.GetStorage());
-                iterator.pContainer = &value;
+                if (operation == "set") {
+                    auto destination = array.At(index).ToValue();
+                    auto source = pBinding->pBindings->Read(pCall, 1, *pElement);
+
+                    if (!source || !pBinding->pBindings->CopyTo(source, destination)) {
+                        Exception("Invalid vector element");
+                    }
+                }
+                return;
+            }
+
+            const auto map = value.AsMap();
+            if (!map) {
+                Exception("Unsupported container");
+                return;
+            }
+
+            if (operation == "size") {
+                pCall->SetReturnDWord(static_cast<asDWORD>(map.Size()));
+                return;
+            }
+
+            if (operation == "clear") {
+                map.Clear();
+                return;
+            }
+
+            auto key = pBinding->pBindings->Read(pCall, 0, *map.GetKeyType());
+
+            if (!key) {
+                Exception("Invalid container key");
+                return;
             }
 
             if (operation == "contains") {
-                pCall->SetReturnByte(iterator != container.End());
+                pCall->SetReturnByte(map.Contains(key.AsRef()));
                 return;
             }
 
             if (operation == "erase") {
-                if (iterator != container.End()) {
-                    container.Erase(iterator);
-                }
+                map.Erase(key.AsRef());
                 return;
             }
 
             if (operation == "at") {
-                if (iterator == container.End()) {
+                const auto found = map.Find(key.AsRef());
+                if (!found) {
                     Exception("Map key not found");
                     return;
                 }
 
-                auto result = map ? iterator.Second() : *iterator;
-                // Return a copy: no script handle may retain an iterator invalidated by resize/erase.
-                pBinding->pBindings->Return(pCall, pBinding->pBindings->CopyValue(result));
+                pBinding->pBindings->Return(pCall, pBinding->pBindings->CopyValue(found.ToValue()));
                 return;
             }
 
-            if (operation == "set") {
-                auto result = *iterator;
-                auto source = pBinding->pBindings->Read(pCall, 1, *pElement);
-
-                if (!source || !pBinding->pBindings->CopyTo(source, result)) {
-                    Exception("Invalid vector element");
-                }
+            if (map.IsSet()) {
+                map.InsertOrAssign(key.AsRef(), SR_UTILS_NS::Reflection::ValueRef());
                 return;
             }
 
-            if (sequence) {
-                auto source = pBinding->pBindings->Read(pCall, 0, *pElement);
-                if (!source) {
-                    Exception("Invalid vector element");
-                    return;
-                }
-
-                value.AsSequenceContainer().PushBack(source);
+            auto source = pBinding->pBindings->Read(pCall, 1, *map.GetValueType());
+            if (!source) {
+                Exception("Invalid map value");
+                return;
             }
-            else if (map) {
-                auto source = pBinding->pBindings->Read(pCall, 1, *pMappedType);
-                if (!source) {
-                    Exception("Invalid map value");
-                    return;
-                }
 
-                if (iterator != container.End()) {
-                    auto destination = iterator.Second();
-                    if (!pBinding->pBindings->CopyTo(source, destination)) {
-                        Exception("Map value is not assignable");
-                    }
+            const bool isNewKey = !map.Contains(key.AsRef());
+            auto destination = map.FindOrAdd(key.AsRef()).ToValue();
+            if (!pBinding->pBindings->CopyTo(source, destination)) {
+                if (isNewKey) {
+                    map.Erase(key.AsRef());
                 }
-                else {
-                    value.AsAssociativeContainer().Insert(key, source);
-                }
-            }
-            else {
-                SR_UTILS_NS::Reflection::ReflectedValue unused { };
-                table.pInsert(value.GetStorage(), {}, key.GetStorage(), unused);
+                Exception("Map value is not assignable");
             }
         }
 

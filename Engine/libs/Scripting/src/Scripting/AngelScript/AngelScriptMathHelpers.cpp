@@ -19,10 +19,7 @@ namespace SR_SCRIPTING_NS::AngelScriptMathHelpers {
 
         Layout result;
 
-        if (info.category != SR_UTILS_NS::Reflection::ReflectedCategoryType::MathVector &&
-            info.category != SR_UTILS_NS::Reflection::ReflectedCategoryType::MathRect &&
-            info.category != SR_UTILS_NS::Reflection::ReflectedCategoryType::MathSize &&
-            info.category != SR_UTILS_NS::Reflection::ReflectedCategoryType::MathObject) {
+        if (!info.IsMath()) {
             return result;
         }
 
@@ -34,67 +31,74 @@ namespace SR_SCRIPTING_NS::AngelScriptMathHelpers {
         const char* pMatrix4[] = { "m00", "m01", "m02", "m03", "m10", "m11", "m12", "m13", "m20", "m21", "m22", "m23", "m30", "m31", "m32", "m33" };
 
         const char* const* pNames = nullptr;
-        const char* pScalar = info.detailedType.c_str();
-        uint32_t stride = info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::MathObject ? sizeof(float_t) :
-            SR_UTILS_NS::Reflection::GetReflectedTypeSize(info.detailedType);
+        const SR_UTILS_NS::Reflection::TypeInfo* pScalar = info.pNext[0];
+        uint32_t stride = pScalar ? static_cast<uint32_t>(pScalar->GetScalarSize()) : 0;
 
-        if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::MathVector) {
-            result.count = info.detailedSize <= 6 ? info.detailedSize : 0;
-            pNames = pAxes;
-        }
-        else if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::MathRect) {
-            result.count = 4;
-            pNames = pRect;
-        }
-        else if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::MathSize) {
-            // Size<T> contains a scalar followed by SizeMetric; Size2<T> contains two Size<T>.
-            // Derive the stride from reflected scalar size/alignment, preserving each metric byte.
-            if (info.detailedSize == 0 || info.detailedSize > 2 || stride == 0) {
+        switch (info.kind) {
+            case SR_UTILS_NS::Reflection::TypeKind::MathVector:
+                result.count = info.detailedSize <= 6 ? info.detailedSize : 0;
+                pNames = pAxes;
+                break;
+            case SR_UTILS_NS::Reflection::TypeKind::MathRect:
+                result.count = 4;
+                pNames = pRect;
+                break;
+            case SR_UTILS_NS::Reflection::TypeKind::MathSize: {
+                // Size<T> contains a scalar followed by SizeMetric; Size2<T> contains two Size<T>.
+                // Derive the stride from reflected scalar size/alignment, preserving each metric byte.
+                if (info.detailedSize == 0 || info.detailedSize > 2 || stride == 0) {
+                    return result;
+                }
+
+                auto&& pMetricType = SR_UTILS_NS::Reflection::GetScalarTypeInfo(SR_UTILS_NS::Reflection::TypeKind::UInt8);
+                const uint32_t elementStride = ((stride + static_cast<uint32_t>(sizeof(SR_MATH_NS::SizeMetric)) + stride - 1) / stride) * stride;
+                const char* pValues[] = { info.detailedSize == 1 ? "value" : "width", "height" };
+                const char* pMetrics[] = { info.detailedSize == 1 ? "metric" : "widthMetric", "heightMetric" };
+
+                for (uint32_t i = 0; i < info.detailedSize; ++i) {
+                    result.components[result.count++] = { pValues[i], pScalar, i * elementStride };
+                    result.components[result.count++] = { pMetrics[i], pMetricType, i * elementStride + stride };
+                }
+
                 return result;
             }
+            default:
+                pScalar = SR_UTILS_NS::Reflection::GetScalarTypeInfo(SR_UTILS_NS::Reflection::TypeKind::Float);
+                stride = sizeof(float_t);
 
-            const uint32_t elementStride = ((stride + static_cast<uint32_t>(sizeof(SR_MATH_NS::SizeMetric)) + stride - 1) / stride) * stride;
-            const char* pValues[] = { info.detailedSize == 1 ? "value" : "width", "height" };
-            const char* pMetrics[] = { info.detailedSize == 1 ? "metric" : "widthMetric", "heightMetric" };
-
-            for (uint32_t i = 0; i < info.detailedSize; ++i) {
-                result.components[result.count++] = { pValues[i], pScalar, i * elementStride };
-                result.components[result.count++] = { pMetrics[i], "uint8", i * elementStride + stride };
-            }
-
-            return result;
+                if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Quaternion) {
+                    result.count = 4;
+                    pNames = pAxes;
+                }
+                else if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Color) {
+                    result.count = 4;
+                    pNames = pColors;
+                    stride = sizeof(SR_MATH_NS::Unit);
+                }
+                else if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Matrix3x3) {
+                    result.count = 9;
+                    pNames = pMatrix3;
+                    stride = sizeof(SR_MATH_NS::Unit);
+                }
+                else if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Matrix4x4) {
+                    result.count = 16;
+                    pNames = pMatrix4;
+                }
+                else if (info.kind == SR_UTILS_NS::Reflection::TypeKind::AABB) {
+                    result.count = 6;
+                    pNames = pBounds;
+                }
+                break;
         }
-        else if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::MathObject) {
-            pScalar = "float";
-            stride = sizeof(float_t);
 
-            if (info.detailedType == "Quaternion") {
-                result.count = 4;
-                pNames = pAxes;
-            }
-            else if (info.detailedType == "Color") {
-                result.count = 4;
-                pNames = pColors;
-                stride = sizeof(SR_MATH_NS::Unit);
-            }
-            else if (info.detailedType == "Matrix3x3") {
-                result.count = 9;
-                pNames = pMatrix3;
-                stride = sizeof(SR_MATH_NS::Unit);
-            }
-            else if (info.detailedType == "Matrix4x4") {
-                result.count = 16;
-                pNames = pMatrix4;
-            }
-            else if (info.detailedType == "AABB") {
-                result.count = 6;
-                pNames = pBounds;
-            }
+        if (!pScalar) {
+            result.count = 0;
+            return result;
         }
 
         for (uint32_t i = 0; i < result.count; ++i) {
             uint32_t offset = i * stride;
-            if (info.detailedType == "AABB") {
+            if (info.kind == SR_UTILS_NS::Reflection::TypeKind::AABB) {
                 offset = i < 3 ? static_cast<uint32_t>(offsetof(SR_MATH_NS::AABB, min)) + i * stride :
                     static_cast<uint32_t>(offsetof(SR_MATH_NS::AABB, max)) + (i - 3) * stride;
             }

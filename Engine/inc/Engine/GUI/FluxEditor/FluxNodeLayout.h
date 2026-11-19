@@ -35,7 +35,7 @@ namespace SR_CORE_GUI_NS {
         }
     };
 
-    void BuildFluxNodeLayout(SR_FLUX_NS::FluxGraph& graph, uint32_t nodeIndex, FluxNodeLayout& layout, SR_UTILS_NS::Vector<SR_UTILS_NS::Reflection::TypeInfo*>& tmpTypeInfos);
+    void BuildFluxNodeLayout(SR_FLUX_NS::FluxGraph& graph, uint32_t nodeIndex, FluxNodeLayout& layout);
 
     /// Короткое представление значения для заголовка узла и списка переменных
     SR_NODISCARD SR_UTILS_NS::String GetFluxValuePreview(const SR_UTILS_NS::Reflection::Value& value);

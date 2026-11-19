@@ -199,7 +199,7 @@ namespace SR_SCRIPTING_NS {
         auto result = DebugAdapterProtocol::Object();
         DebugAdapterProtocol::Set(result, "name", pName);
         const auto type = pAnchor && pAnchor->pBindings ? pAnchor->pBindings->Declaration(value.GetTypeInfo()) : SR_UTILS_NS::String();
-        DebugAdapterProtocol::Set(result, "type", type.empty() ? SR_UTILS_NS::String(value.GetTypeInfo().detailedType) : type);
+        DebugAdapterProtocol::Set(result, "type", type.empty() ? SR_UTILS_NS::String(value.GetTypeInfo().name.ToStringView()) : type);
         int64_t reference = 0;
         SR_UTILS_NS::String text = "<destroyed>";
         if ((!pAnchor || pAnchor->IsAlive()) && (!pParent || IsNativeAlive(pParent))) {

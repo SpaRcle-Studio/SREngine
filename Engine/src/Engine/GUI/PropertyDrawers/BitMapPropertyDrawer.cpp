@@ -22,7 +22,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::StringAtom displayName = context.GetProperty().GetDisplayName();
 
-        auto&& container = value.AsSequenceContainer();
+        const auto container = value.AsArray();
 
         const SR_MATH_NS::FVector2 counterButtonWidth = { 40, context.fieldHeight };
         SR_MATH_NS::FVector2 buttonSize;

@@ -33,66 +33,38 @@ namespace SR_CORE_GUI_NS {
         SR_TRACY_ZONE;
 
         auto&& typeInfo = value.GetTypeInfo();
-        switch (typeInfo.category) {
-            case SR_UTILS_NS::Reflection::ReflectedCategoryType::Value:
-                return "ValuePropertyDrawer"_atom;
-            case SR_UTILS_NS::Reflection::ReflectedCategoryType::Object:
-                return "ObjectPropertyDrawer"_atom;
-            case SR_UTILS_NS::Reflection::ReflectedCategoryType::String:
-                if (typeInfo.detailedType == "Path") {
-                    return "PathPropertyDrawer"_atom;
+        if (typeInfo.IsArithmetic()) {
+            return typeInfo.kind == SR_UTILS_NS::Reflection::TypeKind::Bool ? "BoolPropertyDrawer"_atom : "NumericPropertyDrawer"_atom;
+        }
+        if (typeInfo.IsString()) {
+            return typeInfo.kind == SR_UTILS_NS::Reflection::TypeKind::Path ? "PathPropertyDrawer"_atom : "StringPropertyDrawer"_atom;
+        }
+
+        switch (typeInfo.kind) {
+            case SR_UTILS_NS::Reflection::TypeKind::Value: return "ValuePropertyDrawer"_atom;
+            case SR_UTILS_NS::Reflection::TypeKind::Object: return "ObjectPropertyDrawer"_atom;
+            case SR_UTILS_NS::Reflection::TypeKind::Enum: return "EnumPropertyDrawer"_atom;
+            case SR_UTILS_NS::Reflection::TypeKind::Quaternion: return "MathVectorPropertyDrawer"_atom;
+            case SR_UTILS_NS::Reflection::TypeKind::Color: return "FColorPropertyDrawer"_atom;
+            case SR_UTILS_NS::Reflection::TypeKind::AABB: return "AABBPropertyDrawer"_atom;
+            case SR_UTILS_NS::Reflection::TypeKind::MathSize: return "MathSizePropertyDrawer"_atom;
+            case SR_UTILS_NS::Reflection::TypeKind::MathVector: return "MathVectorPropertyDrawer"_atom;
+            case SR_UTILS_NS::Reflection::TypeKind::MathRect: return "RectPropertyDrawer"_atom;
+            case SR_UTILS_NS::Reflection::TypeKind::Optional: return "OptionalPropertyDrawer"_atom;
+            case SR_UTILS_NS::Reflection::TypeKind::SharedPtr: return "PointerPropertyDrawer"_atom;
+            case SR_UTILS_NS::Reflection::TypeKind::Pair: return "PairPropertyDrawer"_atom;
+            case SR_UTILS_NS::Reflection::TypeKind::EntityRef: return "EntityRefPropertyDrawer"_atom;
+            case SR_UTILS_NS::Reflection::TypeKind::ResourceRef: return "ResourceRefPropertyDrawer"_atom;
+            case SR_UTILS_NS::Reflection::TypeKind::Vector:
+                if (typeInfo.pNext[0] && typeInfo.pNext[0]->kind == SR_UTILS_NS::Reflection::TypeKind::Bool) {
+                    return "BitMapPropertyDrawer"_atom;
                 }
-                return "StringPropertyDrawer"_atom;
-            case SR_UTILS_NS::Reflection::ReflectedCategoryType::Arithmetic:
-                if (typeInfo.detailedType == "bool") {
-                    return "BoolPropertyDrawer"_atom;
-                }
-                return "NumericPropertyDrawer"_atom;
-            case SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum:
-                return "EnumPropertyDrawer"_atom;
-            case SR_UTILS_NS::Reflection::ReflectedCategoryType::MathObject:
-                if (typeInfo.detailedType == "Quaternion") {
-                    return "MathVectorPropertyDrawer"_atom;
-                }
-                if (typeInfo.detailedType == "Color") {
-                    return "FColorPropertyDrawer"_atom;
-                }
-                if (typeInfo.detailedType == "AABB") {
-                    return "AABBPropertyDrawer"_atom;
-                }
-                return SR_UTILS_NS::StringAtom();
-            case SR_UTILS_NS::Reflection::ReflectedCategoryType::MathSize:
-                return "MathSizePropertyDrawer"_atom;
-            case SR_UTILS_NS::Reflection::ReflectedCategoryType::MathVector:
-                return "MathVectorPropertyDrawer"_atom;
-            case SR_UTILS_NS::Reflection::ReflectedCategoryType::MathRect:
-                return "RectPropertyDrawer"_atom;
-            case SR_UTILS_NS::Reflection::ReflectedCategoryType::Container:
-                if (typeInfo.detailedType == "Optional") {
-                    return "OptionalPropertyDrawer"_atom;
-                }
-                if (typeInfo.detailedType == "SharedPtr") {
-                    return "PointerPropertyDrawer"_atom;
-                }
-                if (typeInfo.detailedType == "Pair") {
-                    return "PairPropertyDrawer"_atom;
-                }
-                if (typeInfo.detailedType == "EntityRef") {
-                    return "EntityRefPropertyDrawer"_atom;
-                }
-                if (typeInfo.detailedType == "ResourceRef") {
-                    return "ResourceRefPropertyDrawer"_atom;
-                }
-                if (typeInfo.detailedType == "Vector") {
-                    if (typeInfo.pNext[0] && typeInfo.pNext[0]->detailedType == "bool") {
-                        return "BitMapPropertyDrawer"_atom;
-                    }
-                    return "VectorPropertyDrawer"_atom;
-                }
-                if (typeInfo.detailedType == "FlatHashMap" || typeInfo.detailedType == "FlatHashSet" || typeInfo.detailedType == "Map" || typeInfo.detailedType == "Set") {
-                    return "AssociativePropertyDrawer"_atom;
-                }
-                return SR_UTILS_NS::StringAtom();
+                return "VectorPropertyDrawer"_atom;
+            case SR_UTILS_NS::Reflection::TypeKind::Map:
+            case SR_UTILS_NS::Reflection::TypeKind::FlatHashMap:
+            case SR_UTILS_NS::Reflection::TypeKind::Set:
+            case SR_UTILS_NS::Reflection::TypeKind::FlatHashSet:
+                return "AssociativePropertyDrawer"_atom;
             default:
                 return SR_UTILS_NS::StringAtom();
         }
@@ -126,7 +98,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     static bool IsClipboardSupported(const SR_UTILS_NS::Reflection::TypeInfo& typeInfo) {
-        if (typeInfo.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Container && typeInfo.detailedType == "SharedPtr") {
+        if (typeInfo.kind == SR_UTILS_NS::Reflection::TypeKind::SharedPtr) {
             return false;
         }
         for (auto&& pNext : typeInfo.pNext) {
@@ -541,7 +513,7 @@ namespace SR_CORE_GUI_NS {
         auto&& range = context.GetEditorParams().GetRange();
         const auto dataType = SR_IMMEDIATE_GUI_NS::GetDataType(value.SizeOf(), value.IsSigned(), value.IsIntegral());
         if (dataType == SR_IMMEDIATE_GUI_NS::ImmediateDataType::COUNT) {
-            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown data type! Value detailed type: %s", value.GetTypeInfo().detailedType.c_str());
+            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown data type! Value type: %s", value.GetTypeInfo().name.c_str());
             SR_IMMEDIATE_GUI_NS::PopItemWidth();
             SR_IMMEDIATE_GUI_NS::PopStyleVar();
             SR_IMMEDIATE_GUI_NS::PopID();
@@ -592,7 +564,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        if (value.GetTypeInfo().detailedType != "AABB") {
+        if (value.GetTypeInfo().kind != SR_UTILS_NS::Reflection::TypeKind::AABB) {
             SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Property is not AABB!");
             return feedback;
         }
@@ -700,8 +672,8 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        const bool isQuaternion = value.GetTypeInfo().detailedType == "Quaternion";
-        SR_UTILS_NS::StringView vectorPartType = isQuaternion ? "float" : value.GetTypeInfo().detailedType;
+        const bool isQuaternion = value.GetTypeInfo().kind == SR_UTILS_NS::Reflection::TypeKind::Quaternion;
+        auto&& pPartType = isQuaternion ? SR_UTILS_NS::Reflection::TypeOf<float_t>() : value.GetTypeInfo().pNext[0];
         const uint8_t dimension = isQuaternion ? 4 : value.GetTypeInfo().detailedSize;
 
         SR_IMMEDIATE_GUI_NS::PushID(context.pUID);
@@ -725,7 +697,8 @@ namespace SR_CORE_GUI_NS {
 
         const SR_MATH_NS::FVector2 buttonSize = { context.axisButtonWidth, context.fieldHeight };
         const float_t drag = context.GetEditorParams().GetDragSpeed();
-        auto partType = SR_IMMEDIATE_GUI_NS::GetDataType(vectorPartType);
+        auto partType = pPartType ? SR_IMMEDIATE_GUI_NS::GetDataType(pPartType->GetScalarSize(), pPartType->IsSigned(), pPartType->IsIntegral()) :
+            SR_IMMEDIATE_GUI_NS::ImmediateDataType::COUNT;
 
         constexpr std::array<const char*, 6> labels = { "X", "Y", "Z", "W", "V", "U" };
         static const std::array<SR_MATH_NS::FColor, 6> colors = {
@@ -856,10 +829,11 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        SR_UTILS_NS::StringView vectorPartType = value.GetTypeInfo().detailedType;
+        auto&& pPartType = value.GetTypeInfo().pNext[0];
         const uint8_t dimension = value.GetTypeInfo().detailedSize;
 
-        const auto partType = SR_IMMEDIATE_GUI_NS::GetDataType(vectorPartType);
+        const auto partType = pPartType ? SR_IMMEDIATE_GUI_NS::GetDataType(pPartType->GetScalarSize(), pPartType->IsSigned(), pPartType->IsIntegral()) :
+            SR_IMMEDIATE_GUI_NS::ImmediateDataType::COUNT;
         if (partType == SR_IMMEDIATE_GUI_NS::ImmediateDataType::COUNT) {
             SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown part type!");
             return feedback;

@@ -51,7 +51,7 @@ namespace SR_CORE_GUI_NS {
         auto&& pBehaviour = dynamic_cast<SR_SCRIPTING_NS::Behaviour*>(context.pOwner);
         SRAssert2(pBehaviour, "pOwner is not a Behaviour!");
 
-        if (value.GetTypeInfo().detailedType == "StringAtom") {
+        if (value.GetTypeInfo().kind == SR_UTILS_NS::Reflection::TypeKind::StringAtom) {
             if (auto&& pStringAtom = value.Cast<SR_UTILS_NS::StringAtom>()) {
                 const bool markAsInvalid = !pBehaviour->IsInstanceValid();
                 if (markAsInvalid) {

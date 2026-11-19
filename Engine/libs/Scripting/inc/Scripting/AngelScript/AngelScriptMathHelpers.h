@@ -14,7 +14,7 @@
 namespace SR_SCRIPTING_NS::AngelScriptMathHelpers {
     struct Component {
         const char* pName = nullptr;
-        const char* pScalar = nullptr;
+        const SR_UTILS_NS::Reflection::TypeInfo* pScalar = nullptr;
         uint32_t offset = 0;
     };
 

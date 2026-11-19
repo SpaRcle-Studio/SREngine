@@ -34,7 +34,7 @@ namespace SR_CORE_GUI_NS {
 
         const auto dir = m_isOpened ? SR_IMMEDIATE_GUI_NS::Direction::Down : SR_IMMEDIATE_GUI_NS::Direction::Right;
 
-        const SR_UTILS_NS::StringView typeName = value.GetTypeInfo().pNext[0] ? SR_UTILS_NS::StringView(value.GetTypeInfo().pNext[0]->detailedType.ToStringView()) : SR_UTILS_NS::StringView();
+        const SR_UTILS_NS::StringView typeName = value.GetTypeInfo().pNext[0] ? SR_UTILS_NS::StringView(value.GetTypeInfo().pNext[0]->name.ToStringView()) : SR_UTILS_NS::StringView();
 
         if (!m_openedByDefault) {
             m_isOpened |= context.openedByDefault;
@@ -285,11 +285,9 @@ namespace SR_CORE_GUI_NS {
 
             PropertyDrawerContext propertyContext = context;
 
-            SR_UTILS_NS::Reflection::TypeInfo* pTypeInfo = SR_UTILS_NS::Reflection::DetermineTypeInfoAlloc(*pClassValue);
-            pTypeInfo->detailedType = value.GetTypeInfo().pNext[0]->detailedType;
-            SRAssert(pTypeInfo->category != SR_UTILS_NS::Reflection::ReflectedCategoryType::Unknown);
-
-            auto&& valueRef = SR_UTILS_NS::Reflection::Value::CreateRef(*pClassValue, pTypeInfo);
+            /// данные Value должны указывать на объект его собственного типа, а не на подобъект SRClass
+            auto&& valueRef = pClassValue->GetMeta()->Cast(SR_UTILS_NS::Reflection::Value::CreateRef(*pClassValue));
+            SRAssert(valueRef.IsValid());
 
             propertyContext.pValue = &valueRef;
             float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth);

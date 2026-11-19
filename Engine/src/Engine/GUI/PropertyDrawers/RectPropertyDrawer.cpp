@@ -16,7 +16,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        SR_UTILS_NS::StringView rectPartType = value.GetTypeInfo().detailedType;
+        auto&& pPartType = value.GetTypeInfo().pNext[0];
 
         SR_IMMEDIATE_GUI_NS::PushID(context.pUID);
         SR_IMMEDIATE_GUI_NS::PushID(context.GetPropertyName().ToCStr());
@@ -40,7 +40,8 @@ namespace SR_CORE_GUI_NS {
 
         const SR_MATH_NS::FVector2 buttonSize = { context.axisButtonWidth, context.fieldHeight };
         const float_t drag = context.GetEditorParams().GetDragSpeed();
-        auto partType = SR_IMMEDIATE_GUI_NS::GetDataType(rectPartType);
+        auto partType = pPartType ? SR_IMMEDIATE_GUI_NS::GetDataType(pPartType->GetScalarSize(), pPartType->IsSigned(), pPartType->IsIntegral()) :
+            SR_IMMEDIATE_GUI_NS::ImmediateDataType::COUNT;
 
         constexpr std::array<const char*, 4> labels = { "X", "Y", "W", "H" };
         static const std::array<SR_MATH_NS::FColor, 4> colors = {

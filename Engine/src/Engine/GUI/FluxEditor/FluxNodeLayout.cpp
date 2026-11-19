@@ -34,18 +34,13 @@ namespace SR_CORE_GUI_NS {
             return maxPin >= firstArgumentPin ? (maxPin - firstArgumentPin) + 2 : 1;
         }
 
-        /// Временная информация о типе класса, зарегистрированного в фабрике. Нужна редактору,
-        /// чтобы подсветить совместимость пинов
-        SR_NODISCARD SR_UTILS_NS::Reflection::TypeInfo* MakeClassTypeInfo(const SR_UTILS_NS::StringAtom className, SR_UTILS_NS::Vector<SR_UTILS_NS::Reflection::TypeInfo*>& tmpTypeInfos) {
-            auto&& pType = SR_UTILS_NS::Factory::Instance().GetType(className);
-            if (!pType) {
-                return nullptr;
-            }
-            auto&& pTypeInfo = tmpTypeInfos.emplace_back(SR_UTILS_NS::Reflection::AllocateTypeInfo());
-            pTypeInfo->category = SR_UTILS_NS::Reflection::ReflectedCategoryType::Object;
-            pTypeInfo->detailedType = className;
-            pTypeInfo->vtable = pType->GetVTable();
-            return pTypeInfo;
+        /// Тип класса, зарегистрированного в фабрике. Нужен редактору, чтобы подсветить совместимость пинов
+        SR_NODISCARD const SR_UTILS_NS::Reflection::TypeInfo* GetClassTypeInfo(const SR_UTILS_NS::StringAtom className) {
+            SR_UTILS_NS::Reflection::TypeInfoKey key;
+            key.kind = SR_UTILS_NS::Reflection::TypeKind::Object;
+            key.name = className;
+            auto&& pTypeInfo = SR_UTILS_NS::Reflection::ResolveTypeInfo(key);
+            return pTypeInfo->IsResolved() ? pTypeInfo : nullptr;
         }
 
         void AddArgumentPins(SR_UTILS_NS::Vector<FluxPinLayout>& pins, const SR_UTILS_NS::Reflection::Method* pMethod) {
@@ -73,7 +68,7 @@ namespace SR_CORE_GUI_NS {
         }
     }
 
-    void BuildFluxNodeLayout(SR_FLUX_NS::FluxGraph& graph, const uint32_t nodeIndex, FluxNodeLayout& layout, SR_UTILS_NS::Vector<SR_UTILS_NS::Reflection::TypeInfo*>& tmpTypeInfos) {
+    void BuildFluxNodeLayout(SR_FLUX_NS::FluxGraph& graph, const uint32_t nodeIndex, FluxNodeLayout& layout) {
         SR_TRACY_ZONE;
 
         layout.title.clear();
@@ -115,7 +110,7 @@ namespace SR_CORE_GUI_NS {
                 }
                 SR_UTILS_NS::FormatTo(layout.title, "{}.{}", callable.object, callable.function);
                 if (!SR_UTILS_NS::GetSingletonManager()->GetSingletonMeta(callable.object.GetHash())) {
-                    AddPin(layout.inputs, "Object").pTypeInfo = MakeClassTypeInfo(callable.object, tmpTypeInfos);
+                    AddPin(layout.inputs, "Object").pTypeInfo = GetClassTypeInfo(callable.object);
                 }
                 AddArgumentPins(layout.inputs, pMethod);
 
@@ -153,7 +148,7 @@ namespace SR_CORE_GUI_NS {
             case SR_FLUX_NS::FluxGraphNodeType::Branch: {
                 layout.title = "Branch";
                 AddPin(layout.inputs, "Exec", true);
-                AddPin(layout.inputs, "Condition").pTypeInfo = tmpTypeInfos.emplace_back(SR_UTILS_NS::Reflection::DetermineTypeInfoAlloc<bool>());
+                AddPin(layout.inputs, "Condition").pTypeInfo = SR_UTILS_NS::Reflection::TypeOf<bool>();
                 AddPin(layout.outputs, "True", true);
                 AddPin(layout.outputs, "False", true);
                 break;
@@ -161,14 +156,14 @@ namespace SR_CORE_GUI_NS {
             case SR_FLUX_NS::FluxGraphNodeType::While: {
                 layout.title = "While";
                 AddPin(layout.inputs, "Exec", true);
-                AddPin(layout.inputs, "Condition").pTypeInfo = tmpTypeInfos.emplace_back(SR_UTILS_NS::Reflection::DetermineTypeInfoAlloc<bool>());
+                AddPin(layout.inputs, "Condition").pTypeInfo = SR_UTILS_NS::Reflection::TypeOf<bool>();
                 AddPin(layout.outputs, "Body", true);
                 AddPin(layout.outputs, "Completed", true);
                 break;
             }
             case SR_FLUX_NS::FluxGraphNodeType::For: {
                 layout.title = "For";
-                auto&& pIntTypeInfo = tmpTypeInfos.emplace_back(SR_UTILS_NS::Reflection::DetermineTypeInfoAlloc<int32_t>());
+                auto&& pIntTypeInfo = SR_UTILS_NS::Reflection::TypeOf<int32_t>();
                 AddPin(layout.inputs, "Exec", true);
                 AddPin(layout.inputs, "First").pTypeInfo = pIntTypeInfo;
                 AddPin(layout.inputs, "Last").pTypeInfo = pIntTypeInfo;
@@ -190,7 +185,7 @@ namespace SR_CORE_GUI_NS {
                 AddPin(layout.inputs, "Object");
                 AddPin(layout.outputs, "Exec", true);
                 AddPin(layout.outputs, "Cast Failed", true);
-                AddPin(layout.outputs, "As Object").pTypeInfo = MakeClassTypeInfo(name, tmpTypeInfos);
+                AddPin(layout.outputs, "As Object").pTypeInfo = GetClassTypeInfo(name);
                 break;
             }
             case SR_FLUX_NS::FluxGraphNodeType::ReadProperty:
@@ -208,11 +203,11 @@ namespace SR_CORE_GUI_NS {
                 if (isWrite) {
                     AddPin(layout.inputs, "Exec", true);
                 }
-                AddPin(layout.inputs, "Object").pTypeInfo = MakeClassTypeInfo(callable.object, tmpTypeInfos);
+                AddPin(layout.inputs, "Object").pTypeInfo = GetClassTypeInfo(callable.object);
                 if (isWrite) {
                     AddPin(layout.inputs, "Value").pTypeInfo = pValueType;
                     AddPin(layout.outputs, "Exec", true);
-                    AddPin(layout.outputs, "Object").pTypeInfo = MakeClassTypeInfo(callable.object, tmpTypeInfos);
+                    AddPin(layout.outputs, "Object").pTypeInfo = GetClassTypeInfo(callable.object);
                 }
                 else {
                     AddPin(layout.outputs, "Value").pTypeInfo = pValueType;
@@ -245,51 +240,35 @@ namespace SR_CORE_GUI_NS {
 
         auto&& typeInfo = value.GetTypeInfo();
 
-        switch (typeInfo.category) {
-            case SR_UTILS_NS::Reflection::ReflectedCategoryType::String: {
-                if (typeInfo.detailedType == "String") {
-                    return SR_FORMAT("\"{}\"", *value.Cast<SR_UTILS_NS::String>());
-                }
-                if (typeInfo.detailedType == "StringAtom") {
-                    return SR_FORMAT("\"{}\"", value.Cast<SR_UTILS_NS::StringAtom>()->ToStringView());
-                }
-                if (typeInfo.detailedType == "Path") {
-                    return SR_FORMAT("\"{}\"", value.Cast<SR_UTILS_NS::Path>()->View());
-                }
-                break;
-            }
-            case SR_UTILS_NS::Reflection::ReflectedCategoryType::Arithmetic: {
-                if (typeInfo.detailedType == "bool") {
-                    return *value.Cast<bool>() ? "true" : "false";
-                }
-                if (typeInfo.detailedType == "float") {
-                    return SR_FORMAT("{}", *value.Cast<float_t>());
-                }
-                if (typeInfo.detailedType == "double") {
-                    return SR_FORMAT("{}", *value.Cast<double_t>());
-                }
-                if (typeInfo.detailedType == "int32_t") {
-                    return SR_FORMAT("{}", *value.Cast<int32_t>());
-                }
-                if (typeInfo.detailedType == "int64_t") {
-                    return SR_FORMAT("{}", *value.Cast<int64_t>());
-                }
-                if (typeInfo.detailedType == "uint32_t") {
-                    return SR_FORMAT("{}", *value.Cast<uint32_t>());
-                }
-                if (typeInfo.detailedType == "uint64_t") {
-                    return SR_FORMAT("{}", *value.Cast<uint64_t>());
-                }
-                break;
-            }
+        switch (typeInfo.kind) {
+            case SR_UTILS_NS::Reflection::TypeKind::String:
+                return SR_FORMAT("\"{}\"", *value.Cast<SR_UTILS_NS::String>());
+            case SR_UTILS_NS::Reflection::TypeKind::StringAtom:
+                return SR_FORMAT("\"{}\"", value.Cast<SR_UTILS_NS::StringAtom>()->ToStringView());
+            case SR_UTILS_NS::Reflection::TypeKind::Path:
+                return SR_FORMAT("\"{}\"", value.Cast<SR_UTILS_NS::Path>()->View());
+            case SR_UTILS_NS::Reflection::TypeKind::Bool:
+                return *value.Cast<bool>() ? "true" : "false";
+            case SR_UTILS_NS::Reflection::TypeKind::Float:
+                return SR_FORMAT("{}", *value.Cast<float_t>());
+            case SR_UTILS_NS::Reflection::TypeKind::Double:
+                return SR_FORMAT("{}", *value.Cast<double_t>());
+            case SR_UTILS_NS::Reflection::TypeKind::Int32:
+                return SR_FORMAT("{}", *value.Cast<int32_t>());
+            case SR_UTILS_NS::Reflection::TypeKind::Int64:
+                return SR_FORMAT("{}", *value.Cast<int64_t>());
+            case SR_UTILS_NS::Reflection::TypeKind::UInt32:
+                return SR_FORMAT("{}", *value.Cast<uint32_t>());
+            case SR_UTILS_NS::Reflection::TypeKind::UInt64:
+                return SR_FORMAT("{}", *value.Cast<uint64_t>());
             default:
                 break;
         }
 
-        return SR_UTILS_NS::String(typeInfo.detailedType.ToStringView());
+        return SR_UTILS_NS::String(typeInfo.name.ToStringView());
     }
 
     SR_UTILS_NS::StringAtom GetFluxValueTypeName(const SR_UTILS_NS::Reflection::Value& value) {
-        return value.IsValid() ? value.GetTypeInfo().detailedType : SR_UTILS_NS::StringAtom();
+        return value.IsValid() ? value.GetTypeInfo().name : SR_UTILS_NS::StringAtom();
     }
 }

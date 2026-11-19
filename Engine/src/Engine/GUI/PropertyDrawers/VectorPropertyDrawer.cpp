@@ -13,8 +13,8 @@ namespace SR_CORE_GUI_NS {
         PropertyDrawerFeedback feedback;
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
-        auto&& container = value.AsSequenceContainer();
-        if (!value.GetTypeInfo().vtable.containerVTable.pSize) {
+        const auto array = value.AsArray();
+        if (!array) {
             return feedback;
         }
 
@@ -73,7 +73,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_IMMEDIATE_GUI_NS::BeginDisabled();
         m_tmpBuffer.clear();
-        SR_UTILS_NS::FormatTo(m_tmpBuffer, "{}", container.Size());
+        SR_UTILS_NS::FormatTo(m_tmpBuffer, "{}", array.Size());
         SR_IMMEDIATE_GUI_NS::Button(m_tmpBuffer.c_str(), counterButtonWidth);
         SR_IMMEDIATE_GUI_NS::EndDisabled();
 
@@ -83,11 +83,11 @@ namespace SR_CORE_GUI_NS {
             if (context.onBeforeChangeCallback) {
                 context.onBeforeChangeCallback(false);
             }
-            container.Resize(container.Size() + 1);
+            array.Resize(array.Size() + 1);
             if (context.GetEditorParams().IsNotNull()) {
-                if (auto&& newElementValue = container.Back(); newElementValue.IsSharedPtr()) {
+                if (const auto newElementValue = array.Back(); newElementValue.GetTypeInfo().kind == SR_UTILS_NS::Reflection::TypeKind::SharedPtr) {
                     if (auto&& pSharedPtrBase = newElementValue.GetSharedPtrBase()) {
-                        SR_UTILS_NS::StringAtom typeName = newElementValue.GetTypeInfo().pNext[0]->detailedType;
+                        SR_UTILS_NS::StringAtom typeName = newElementValue.GetTypeInfo().pNext[0]->name;
                         if (SR_UTILS_NS::Factory::Instance().IsAbstract(typeName)) {
                             auto&& inheritances = SR_UTILS_NS::Factory::Instance().GetInheritances(typeName);
                             for (auto&& inheritance : inheritances) {
@@ -121,11 +121,11 @@ namespace SR_CORE_GUI_NS {
         SR_IMMEDIATE_GUI_NS::SameLine();
 
         if (SR_IMMEDIATE_GUI_NS::Button("Remove", buttonSize)) {
-            if (!container.Empty()) {
+            if (!array.Empty()) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(false);
                 }
-                container.Resize(container.Size() - 1);
+                array.Resize(array.Size() - 1);
                 feedback.isChanged = true;
             }
         }
@@ -136,19 +136,18 @@ namespace SR_CORE_GUI_NS {
             if (context.onBeforeChangeCallback) {
                 context.onBeforeChangeCallback(false);
             }
-            container.Clear();
+            array.Clear();
             feedback.isChanged = true;
         }
 
-        if (container.Size() < m_drawers.size()) {
-            m_drawers.resize(container.Size());
+        if (array.Size() < m_drawers.size()) {
+            m_drawers.resize(array.Size());
         }
 
         if (m_isOpened) {
-            for (auto pIt = container.Begin(); pIt != container.End();) {
-                uint64_t index = SR_UTILS_NS::Distance(container.Begin(), pIt);
+            for (SR_UTILS_NS::SizeType index = 0; index < array.Size();) {
                 SR_IMMEDIATE_GUI_NS::PushID(static_cast<int32_t>(index));
-                SR_UTILS_NS::Reflection::Value element = *pIt;
+                SR_UTILS_NS::Reflection::Value element = array.At(index).ToValue();
 
                 SR_MATH_NS::FVector2 itemButtonSize = { 40, context.fieldHeight };
 
@@ -170,67 +169,38 @@ namespace SR_CORE_GUI_NS {
                         if (context.onBeforeChangeCallback) {
                             context.onBeforeChangeCallback(false);
                         }
-                        pIt = container.Erase(pIt);
+                        array.Erase(index);
                         feedback.isChanged = true;
                         removed = true;
                     }
 
-                    if (index > 0 && SR_IMMEDIATE_GUI_NS::MenuItem("Move up")) {
+                    /// после перестановки element указывает на другой элемент, поэтому отрисовка кадра прерывается
+                    SR_UTILS_NS::SizeType moveTo = index;
+                    if (!removed && index > 0 && SR_IMMEDIATE_GUI_NS::MenuItem("Move up")) {
+                        moveTo = index - 1;
+                    }
+                    if (!removed && index + 1 < array.Size() && SR_IMMEDIATE_GUI_NS::MenuItem("Move down")) {
+                        moveTo = index + 1;
+                    }
+                    if (!removed && index > 0 && SR_IMMEDIATE_GUI_NS::MenuItem("Move to start")) {
+                        moveTo = 0;
+                    }
+                    if (!removed && index + 1 < array.Size() && SR_IMMEDIATE_GUI_NS::MenuItem("Move to end")) {
+                        moveTo = array.Size() - 1;
+                    }
+
+                    if (moveTo != index) {
                         if (context.onBeforeChangeCallback) {
                             context.onBeforeChangeCallback(false);
                         }
 
-                        SR_UTILS_NS::Reflection::Value temp = (*pIt).Copy();
-                        pIt = container.Erase(pIt);
-                        container.Insert(--pIt, temp);
+                        array.Move(index, moveTo);
 
                         feedback.isChanged = true;
                         SR_IMMEDIATE_GUI_NS::EndPopup();
                         SR_IMMEDIATE_GUI_NS::PopID();
                         break;
                     }
-
-                    if (index + 1 < container.Size() && SR_IMMEDIATE_GUI_NS::MenuItem("Move down")) {
-                        if (context.onBeforeChangeCallback) {
-                            context.onBeforeChangeCallback(false);
-                        }
-
-                        SR_UTILS_NS::Reflection::Value temp = (*pIt).Copy();
-                        pIt = container.Erase(pIt);
-                        container.Insert(++pIt, temp);
-
-                        feedback.isChanged = true;
-                        SR_IMMEDIATE_GUI_NS::EndPopup();
-                        SR_IMMEDIATE_GUI_NS::PopID();
-                        break;
-                    }
-
-                    if (index > 0 && SR_IMMEDIATE_GUI_NS::MenuItem("Move to start")) {
-                        if (context.onBeforeChangeCallback) {
-                            context.onBeforeChangeCallback(false);
-                        }
-
-                        SR_UTILS_NS::Reflection::Value temp = (*pIt).Copy();
-                        container.Erase(pIt);
-                        container.PushFront(temp);
-                        pIt = container.Begin();
-
-                        feedback.isChanged = true;
-                    }
-
-                    if (index + 1 < container.Size() && SR_IMMEDIATE_GUI_NS::MenuItem("Move to end")) {
-                        if (context.onBeforeChangeCallback) {
-                            context.onBeforeChangeCallback(false);
-                        }
-
-                        SR_UTILS_NS::Reflection::Value temp = (*pIt).Copy();
-                        container.Erase(pIt);
-                        container.PushBack(temp);
-                        pIt = --container.End();
-
-                        feedback.isChanged = true;
-                    }
-
 
                     SR_IMMEDIATE_GUI_NS::EndPopup();
                     if (removed) {
@@ -254,7 +224,7 @@ namespace SR_CORE_GUI_NS {
                 if (!m_drawers[index]) {
                     SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Missing inspector for element!");
                     SR_IMMEDIATE_GUI_NS::PopID();
-                    ++pIt;
+                    ++index;
                     continue;
                 }
 
@@ -276,7 +246,7 @@ namespace SR_CORE_GUI_NS {
 
                 SR_IMMEDIATE_GUI_NS::PopID();
 
-                ++pIt;
+                ++index;
             }
         }
 

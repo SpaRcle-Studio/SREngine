@@ -12,6 +12,7 @@
 #include <Utils/Common/StringUtils.h>
 #include <Utils/Serialization/Serializable.h>
 #include <Utils/Platform/Platform.h>
+#include <Utils/Types/Optional.h>
 
 #include <Codegen/ValuePropertyDrawer.generated.hpp>
 
@@ -82,7 +83,6 @@ namespace SR_CORE_GUI_NS {
                     context.onBeforeChangeCallback(false);
                 }
                 *pValue = SR_UTILS_NS::Reflection::Value::CreateDefault(pTypeInfo);
-                SR_UTILS_NS::Reflection::FreeTypeInfo(pTypeInfo);
                 feedback.isChanged = true;
             }
         }
@@ -141,7 +141,7 @@ namespace SR_CORE_GUI_NS {
         return feedback;
     }
 
-    SR_UTILS_NS::Reflection::TypeInfo* ValuePropertyDrawer::DrawTypeInfo(uint32_t& index, const SR_UTILS_NS::Reflection::TypeInfo& typeInfo, const PropertyDrawerContext& context) {
+    const SR_UTILS_NS::Reflection::TypeInfo* ValuePropertyDrawer::DrawTypeInfo(uint32_t& index, const SR_UTILS_NS::Reflection::TypeInfo& typeInfo, const PropertyDrawerContext& context) {
         SR_TRACY_ZONE;
 
         ++index;
@@ -166,21 +166,24 @@ namespace SR_CORE_GUI_NS {
         enumContext.fieldWidth += context.fieldTitleWidth;
         enumContext.fieldTitleWidth = 0.f;
 
-        if (pEnumDrawer->Draw(enumContext).isChanged) {
-            auto&& pTypeInfo = SR_UTILS_NS::Reflection::AllocateTypeInfo();
-            pTypeInfo->category = typeInfo.category;
-            SR_UTILS_NS::Reflection::FindVTable(*pTypeInfo);
-            SR_IMMEDIATE_GUI_NS::PopID();
-            return pTypeInfo;
-        }
-
         auto&& typeNames = m_typeNames;
         auto&& detailedSizes = m_detailedSizes;
         auto&& detailedSizesStr = m_detailedSizesStr;
 
+        if (pEnumDrawer->Draw(enumContext).isChanged) {
+            /// у категории нет "пустого" типа, поэтому берётся первый тип и первый размер новой категории
+            const auto category = *enumValue.Cast<SR_UTILS_NS::Reflection::ReflectedCategoryType>();
+            SR_UTILS_NS::Reflection::GetTypeNamesByCategory(category, typeNames);
+            SR_UTILS_NS::Reflection::GetTypeDetailedSizes(category, detailedSizes);
+            SR_IMMEDIATE_GUI_NS::PopID();
+            return SR_UTILS_NS::Reflection::ResolveTypeInfoByCategory(category,
+                typeNames.empty() ? SR_UTILS_NS::StringAtom() : typeNames.front(),
+                detailedSizes.empty() ? 0 : detailedSizes.front());
+        }
+
         SR_UTILS_NS::Reflection::GetTypeNamesByCategory(typeInfo.category, typeNames);
 
-        SR_UTILS_NS::Reflection::GetTypeDetailedSizes(typeInfo.category, typeInfo.detailedType, detailedSizes);
+        SR_UTILS_NS::Reflection::GetTypeDetailedSizes(typeInfo.category, detailedSizes);
         detailedSizesStr.resize(SR_MAX(detailedSizesStr.size(), detailedSizes.size()));
         for (uint64_t i = 0; i < detailedSizes.size(); i++) {
             detailedSizesStr[i].clear();
@@ -189,10 +192,13 @@ namespace SR_CORE_GUI_NS {
 
          /// select category type
         if (!typeNames.empty()) {
-            auto&& detailedType = typeInfo.detailedType;
-            auto pTypeNameIt = std::find(typeNames.begin(), typeNames.end(), detailedType);
+            const SR_UTILS_NS::StringAtom itemName = SR_UTILS_NS::Reflection::GetTypeCategoryItemName(typeInfo);
+            auto pTypeNameIt = std::find(typeNames.begin(), typeNames.end(), itemName);
 
-            std::optional<uint64_t> selectedIndex = pTypeNameIt != typeNames.end() ? std::make_optional(typeNames.distance(pTypeNameIt)) : std::nullopt;
+            SR_UTILS_NS::Optional<uint64_t> selectedIndex;
+            if (pTypeNameIt != typeNames.end()) {
+                selectedIndex = typeNames.distance(pTypeNameIt);
+            }
             const char* pPrevValue = selectedIndex.has_value() ? typeNames[selectedIndex.value()].data() : m_default.c_str();
 
             SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth + context.fieldTitleWidth);
@@ -213,7 +219,7 @@ namespace SR_CORE_GUI_NS {
                         continue;
                     }
 
-                    bool isSelected = (selectedIndex == i);
+                    bool isSelected = selectedIndex.has_value() && selectedIndex.value() == i;
                     if (SR_IMMEDIATE_GUI_NS::Selectable(typeNames[i].data(), isSelected)) {
                         selectedIndex = i;
                         m_searchBuffer = typeNames[i];
@@ -233,20 +239,12 @@ namespace SR_CORE_GUI_NS {
 
             SR_IMMEDIATE_GUI_NS::PopItemWidth();
 
-            if (selectedIndex && typeNames[*selectedIndex] != detailedType) {
+            if (selectedIndex && typeNames[*selectedIndex] != itemName) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(false);
                 }
-                auto&& pTypeInfo = SR_UTILS_NS::Reflection::AllocateTypeInfo();
-                pTypeInfo->category = typeInfo.category;
-                pTypeInfo->detailedType = typeNames[*selectedIndex];
-                uint8_t nextInfosCount = SR_UTILS_NS::Reflection::GetReflectedTypeNextCount(typeInfo.category, pTypeInfo->detailedType);
-                for (uint8_t i = 0; i < nextInfosCount; ++i) {
-                    pTypeInfo->pNext[i] = SR_UTILS_NS::Reflection::AllocateTypeInfo();
-                }
-                SR_UTILS_NS::Reflection::FindVTable(*pTypeInfo);
                 SR_IMMEDIATE_GUI_NS::PopID();
-                return pTypeInfo;
+                return SR_UTILS_NS::Reflection::ResolveTypeInfoByCategory(typeInfo.category, typeNames[*selectedIndex], typeInfo.detailedSize);
             }
         }
 
@@ -255,7 +253,10 @@ namespace SR_CORE_GUI_NS {
             auto&& size = typeInfo.detailedSize;
             auto pSizeIt = std::find(detailedSizes.begin(), detailedSizes.end(), size);
 
-            std::optional<uint64_t> selectedIndex = pSizeIt != detailedSizes.end() ? std::make_optional(detailedSizes.distance(pSizeIt)) : std::nullopt;
+            SR_UTILS_NS::Optional<uint64_t> selectedIndex;
+            if (pSizeIt != detailedSizes.end()) {
+                selectedIndex = detailedSizes.distance(pSizeIt);
+            }
             const char* pPrevValue = selectedIndex.has_value() ? detailedSizesStr[selectedIndex.value()].c_str() : m_default.c_str();
 
             SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth + context.fieldTitleWidth);
@@ -276,7 +277,7 @@ namespace SR_CORE_GUI_NS {
                         continue;
                     }
 
-                    bool isSelected = (selectedIndex == i);
+                    bool isSelected = selectedIndex.has_value() && selectedIndex.value() == i;
                     if (SR_IMMEDIATE_GUI_NS::Selectable(detailedSizesStr[i].c_str(), isSelected)) {
                         selectedIndex = i;
                         m_searchBuffer = detailedSizesStr[i];
@@ -300,36 +301,24 @@ namespace SR_CORE_GUI_NS {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(false);
                 }
-                auto&& pTypeInfo = SR_UTILS_NS::Reflection::AllocateTypeInfo();
-                pTypeInfo->category = typeInfo.category;
-                pTypeInfo->detailedType = typeInfo.detailedType;
-                pTypeInfo->detailedSize = detailedSizes[*selectedIndex];
-                SR_UTILS_NS::Reflection::FindVTable(*pTypeInfo);
+                SR_UTILS_NS::Reflection::TypeInfoKey key = typeInfo.GetKey();
+                key.detailedSize = detailedSizes[*selectedIndex];
                 SR_IMMEDIATE_GUI_NS::PopID();
-                return pTypeInfo;
+                return SR_UTILS_NS::Reflection::ResolveTypeInfo(key);
             }
         }
 
-        uint8_t nextInfosCount = SR_UTILS_NS::Reflection::GetReflectedTypeNextCount(typeInfo.category, typeInfo.detailedType);
-        for (uint8_t i = 0; i < nextInfosCount; i++) {
-            if (!typeInfo.pNext[i]) {
+        const uint32_t argumentsCount = SR_UTILS_NS::Reflection::GetTypeKindArgumentsCount(typeInfo.kind);
+        for (uint32_t i = 0; i < argumentsCount; i++) {
+            auto&& pArgument = typeInfo.GetArgument(i);
+            if (!pArgument) {
                 continue;
             }
-            if (auto&& pNext = DrawTypeInfo(index, *typeInfo.pNext[i], context)) {
-                auto&& pTypeInfo = SR_UTILS_NS::Reflection::AllocateTypeInfo();
-                *pTypeInfo = typeInfo;
-                pTypeInfo->vtable = {};
-                for (uint8_t j = 0; j < nextInfosCount; j++) {
-                    if (j != i) {
-                        pTypeInfo->pNext[j] = SR_UTILS_NS::Reflection::CopyTypeInfo(typeInfo.pNext[j]);
-                    }
-                    else {
-                        pTypeInfo->pNext[j] = pNext;
-                    }
-                }
-                SR_UTILS_NS::Reflection::FindVTable(*pTypeInfo);
+            if (auto&& pNewArgument = DrawTypeInfo(index, *pArgument, context)) {
+                const SR_UTILS_NS::Reflection::TypeInfo* pArguments[2] = { typeInfo.GetArgument(0), typeInfo.GetArgument(1) };
+                pArguments[i] = pNewArgument;
                 SR_IMMEDIATE_GUI_NS::PopID();
-                return pTypeInfo;
+                return SR_UTILS_NS::Reflection::ResolveTemplateTypeInfo(typeInfo.kind, pArguments[0], pArguments[1]);
             }
         }
 

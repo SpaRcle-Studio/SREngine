@@ -27,9 +27,9 @@ namespace SR_CORE_GUI_NS {
         PropertyDrawerFeedback feedback;
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
-        SR_UTILS_NS::Reflection::AssociativeContainerValueRef container = value.AsAssociativeContainer();
+        const auto map = value.AsMap();
 
-        const bool isSetLike = value.GetTypeInfo().detailedType == "Set" || value.GetTypeInfo().detailedType == "FlatHashSet";
+        const bool isSetLike = value.GetTypeInfo().IsSetLike();
 
         SR_IMMEDIATE_GUI_NS::PushID(context.pUID);
         SR_IMMEDIATE_GUI_NS::PushID(context.GetPropertyDisplayName().ToCStr());
@@ -73,17 +73,12 @@ namespace SR_CORE_GUI_NS {
 
         SR_IMMEDIATE_GUI_NS::BeginDisabled();
         m_tmpBuffer.clear();
-        SR_UTILS_NS::FormatTo(m_tmpBuffer, "{}", container.Size());
+        SR_UTILS_NS::FormatTo(m_tmpBuffer, "{}", map.Size());
         SR_IMMEDIATE_GUI_NS::Button(m_tmpBuffer.c_str(), counterButtonWidth);
         SR_IMMEDIATE_GUI_NS::EndDisabled();
 
-        if (!m_keyDrawer && value.GetTypeInfo().pNext[0]) {
-            if (isSetLike) {
-                *m_keyValue = SR_UTILS_NS::Reflection::Value::CreateDefault(value.GetTypeInfo().pNext[0]);
-            }
-            else {
-                *m_keyValue = SR_UTILS_NS::Reflection::Value::CreateDefault(value.GetTypeInfo().pNext[0]->pNext[0]);
-            }
+        if (!m_keyDrawer && value.GetTypeInfo().GetArgument(0)) {
+            *m_keyValue = SR_UTILS_NS::Reflection::Value::CreateDefault(value.GetTypeInfo().GetArgument(0));
             SR_UTILS_NS::StringAtom inspectorName = GetValueInspector(*m_keyValue);
             if (!inspectorName.empty()) {
                 m_keyDrawer = SR_UTILS_NS::Factory::Instance().Create<PropertyDrawerBase>(inspectorName);
@@ -99,12 +94,7 @@ namespace SR_CORE_GUI_NS {
                 context.onBeforeChangeCallback(false);
             }
             feedback.isChanged = true;
-            if (isSetLike) {
-                container.Insert(m_keyValue->Copy(), SR_UTILS_NS::Reflection::Value());
-            }
-            else {
-                container.Insert(m_keyValue->Copy(), SR_UTILS_NS::Reflection::Value::CreateDefault(value.GetTypeInfo().pNext[1]));
-            }
+            map.FindOrAdd(m_keyValue->AsRef());
         }
 
         SR_IMMEDIATE_GUI_NS::SameLine();
@@ -125,13 +115,15 @@ namespace SR_CORE_GUI_NS {
 
             const int64_t enumValueInt = pReflector->FromStringInternal(enumValue).value();
 
-            for (auto&& pIt = container.Begin(); pIt != container.End(); ++pIt) {
-                void* pMappedRaw = pIt.First().Data();
-                if (pReflector->ReadEnumValueFromPointerInternal(pMappedRaw) == enumValueInt) {
+            bool isAvailable = true;
+            map.ForEach([&](const SR_UTILS_NS::Reflection::ValueRef& key, const SR_UTILS_NS::Reflection::ValueRef&) {
+                if (pReflector->ReadEnumValueFromPointerInternal(key.Data()) == enumValueInt) {
+                    isAvailable = false;
                     return false;
                 }
-            }
-            return true;
+                return true;
+            });
+            return isAvailable;
         };
 
         keyCtx.pValue = m_keyValue;
@@ -143,11 +135,14 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (m_isOpened) {
-            for (auto&& pIt = container.Begin(); pIt != container.End(); ++pIt) {
-                const uint64_t index = SR_UTILS_NS::Distance(container.Begin(), pIt);
+            uint64_t index = 0;
+            /// удаление откладывается до конца обхода: менять контейнер внутри ForEach нельзя
+            SR_UTILS_NS::Reflection::Value removedKey;
+
+            map.ForEach([&](const SR_UTILS_NS::Reflection::ValueRef& key, const SR_UTILS_NS::Reflection::ValueRef& mapped) {
                 SR_IMMEDIATE_GUI_NS::PushID(static_cast<int32_t>(index));
 
-                SR_UTILS_NS::Reflection::Value firstValue = pIt.First().Copy();
+                SR_UTILS_NS::Reflection::Value firstValue = key.Copy();
 
                 SR_MATH_NS::FVector2 spaceSize = { 40, context.fieldHeight };
                 if (isSetLike) {
@@ -186,16 +181,16 @@ namespace SR_CORE_GUI_NS {
                             context.onBeforeChangeCallback(false);
                         }
                         feedback.isChanged = true;
-                        container.Erase(pIt);
+                        removedKey = key.Copy();
                         SR_IMMEDIATE_GUI_NS::EndPopup();
                         SR_IMMEDIATE_GUI_NS::PopID();
-                        break;
+                        return false;
                     }
                     SR_IMMEDIATE_GUI_NS::EndPopup();
                 }
 
                 if (!isSetLike) {
-                    SR_UTILS_NS::Reflection::Value secondValue = pIt.Second();
+                    SR_UTILS_NS::Reflection::Value secondValue = mapped.ToValue();
 
                     SR_IMMEDIATE_GUI_NS::SameLine();
 
@@ -225,6 +220,12 @@ namespace SR_CORE_GUI_NS {
                 }
 
                 SR_IMMEDIATE_GUI_NS::PopID();
+                ++index;
+                return true;
+            });
+
+            if (removedKey) {
+                map.Erase(removedKey.AsRef());
             }
         }
 

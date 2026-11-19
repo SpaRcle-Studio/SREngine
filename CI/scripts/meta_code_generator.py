@@ -73,12 +73,12 @@ def generate_class_meta_methods(f, class_structures, class_obj, tabs):
         f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Reflection::Method()')
         f.write('\n' + '\t' * (tabs + 3) + f'.SetName("{method.name}")')
         if is_method_has_return:
-            f.write('\n' + '\t' * (tabs + 3) + f'.SetReturnType(SpaRcle::Utils::Reflection::DetermineTypeInfoAlloc<ReturnType_{method.name}>())')
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetReturnType(SpaRcle::Utils::Reflection::TypeOf<ReturnType_{method.name}>())')
 
         for i, param in enumerate(method.parameters):
             is_ref = 'true' if param.type.is_ref else 'false'
             is_const = 'true' if param.type.is_const else 'false'
-            f.write('\n' + '\t' * (tabs + 3) + f'.AddParam("{param.name}", SpaRcle::Utils::Reflection::DetermineTypeInfoAlloc<{param.type.get_full_type()}>(), {is_ref}, {is_const})')
+            f.write('\n' + '\t' * (tabs + 3) + f'.AddParam("{param.name}", SpaRcle::Utils::Reflection::TypeOf<{param.type.get_full_type()}>(), {is_ref}, {is_const})')
 
         if method.condition:
             f.write('\n' + '\t' * (tabs + 3) + f'.SetCondition(&SRClassMetaTemplate::IsMethodActive_{method.name})')
@@ -179,6 +179,17 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
 
         f.write('\n' + '\t' * (tabs + 3) + f'.SetSetter(&SRClassMetaTemplate::Set_{prop.name})')
         f.write('\n' + '\t' * (tabs + 3) + f'.SetGetter(&SRClassMetaTemplate::Get_{prop.name})')
+        f.write('\n' + '\t' * (tabs + 3) + f'.SetRefGetter(&SRClassMetaTemplate::GetRef_{prop.name})')
+
+        if codegen_context.CODEGEN_ENTT_ENABLED:
+            type_expression = None
+            if not prop.virtual:
+                type_expression = f'decltype({class_obj.name}::{prop.name})'
+            elif prop.getter:
+                type_expression = f'SpaRcle::Utils::RemoveQualifiersT<decltype(DefaultTypeInstance()->{prop.getter}())>'
+
+            if type_expression:
+                f.write('\n' + '\t' * (tabs + 3) + f'.SetTypeInfo(SpaRcle::Utils::Reflection::TypeOf<{type_expression}>())')
 
         if prop.change_callback:
             f.write('\n' + '\t' * (tabs + 3) + f'.SetChangeCallback(&SRClassMetaTemplate::OnChange_{prop.name})')
@@ -774,6 +785,30 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
 
         f.write('\t' * tabs + '}\n')
 
+        # ================================= ref getter =================================
+
+        f.write('\t' * tabs + f'static SpaRcle::Utils::Reflection::ValueRef GetRef_{property.name}(SpaRcle::Utils::SRClass* pClass) {{\n')
+        if codegen_context.CODEGEN_ENTT_ENABLED:
+            if property.getter:
+                # геттер, возвращающий значение, не даёт адреса: такое свойство читается только через Get.
+                # if constexpr отбрасывает ветку только в шаблонном коде, поэтому проверка внутри обобщённой лямбды
+                f.write('\t' * (tabs + 1) + 'return [](auto* pTarget) -> SpaRcle::Utils::Reflection::ValueRef {\n')
+                f.write('\t' * (tabs + 2) + f'if constexpr (std::is_lvalue_reference_v<decltype(pTarget->{property.getter}())>) {{\n')
+                f.write('\t' * (tabs + 3) + f'return SpaRcle::Utils::Reflection::ValueRef::Of(pTarget->{property.getter}());\n')
+                f.write('\t' * (tabs + 2) + '}\n')
+                f.write('\t' * (tabs + 2) + 'else {\n')
+                f.write('\t' * (tabs + 3) + 'return SpaRcle::Utils::Reflection::ValueRef();\n')
+                f.write('\t' * (tabs + 2) + '}\n')
+                f.write('\t' * (tabs + 1) + f'}}({get_class_impl_code});\n')
+            elif property.read_only:
+                f.write('\t' * (tabs + 1) + f'return SpaRcle::Utils::Reflection::ValueRef::Of(std::as_const({get_class_impl_code}->{property.name}));\n')
+            else:
+                f.write('\t' * (tabs + 1) + f'return SpaRcle::Utils::Reflection::ValueRef::Of({get_class_impl_code}->{property.name});\n')
+        else:
+            f.write('\t' * (tabs + 1) + 'return SpaRcle::Utils::Reflection::ValueRef();\n')
+
+        f.write('\t' * tabs + '}\n')
+
         if property.change_callback:
             f.write('\t' * tabs + f'static void OnChange_{property.name}(SpaRcle::Utils::SRClass* pClass) {{' + '\n')
             f.write('\t' * (tabs + 1) + f'dynamic_cast<{class_name}*>(pClass)->{property.change_callback}();\n')
@@ -786,7 +821,7 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
     f.write(f'\t' * (tabs + 1) + f'SpaRcle::Utils::Factory::Instance().Register<{class_name}>("{context.module_name}");' + '\n')
     f.write(f'\t' * tabs + f'}}\n\n')
 
-    f.write(f'\t' * tabs + f'extern "C" {dll_export_macro} void UnregisterClassMeta_{class_obj.name}() {{' + '\n')
+    f.write(f'\t' * tabs + f'extern "C" {dll_export_macro} void ClearClassMeta_{class_obj.name}() {{' + '\n')
     # free pDefaultInstance if allocated
     f.write(f'\t' * (tabs + 1) + f'auto& meta = SRClassMetaTemplate<{class_name}>::Instance();' + '\n')
 
@@ -817,6 +852,10 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
     f.write(f'\t' * (tabs + 2) + f'SRDelete(meta.pDefaultInstance);' + '\n')
     f.write(f'\t' * (tabs + 2) + f'meta.pDefaultInstance = nullptr;' + '\n')
     f.write(f'\t' * (tabs + 1) + f'}}\n')
+    f.write(f'\t' * tabs + '}\n\n')
+
+    f.write(f'\t' * tabs + f'extern "C" {dll_export_macro} void UnregisterClassMeta_{class_obj.name}() {{' + '\n')
+    f.write(f'\t' * (tabs + 1) + f'ClearClassMeta_{class_obj.name}();' + '\n')
     f.write(f'\t' * (tabs + 1) + f'SpaRcle::Utils::Factory::Instance().Unregister<{class_name}>();' + '\n')
     f.write(f'\t' * tabs + '}\n\n')
 
@@ -1198,6 +1237,7 @@ def generate_meta_module_core_code(logger: logger_utils.Logger, context: codegen
         f.write(f'#define SR_CODEGEN_SPARCLE_MODULE_{context.module_name.upper()}_CORE_HPP' + '\n\n')
 
         f.write('#include <Utils/stdInclude.h>\n')
+        f.write('#include <Utils/Reflection/ReflectedType.h>\n')
 
         already_included = set()
         already_included.add('Utils')
@@ -1222,6 +1262,7 @@ def generate_meta_module_core_code(logger: logger_utils.Logger, context: codegen
                 if class_obj.code_module_name:
                     dll_export_macro = f'SR_CODEGEN_DLL_API_EXPORT_{class_obj.code_module_name.upper()}_MODULE'
                 f.write(tabs * "\t" + f'extern "C" {dll_export_macro} void RegisterClassMeta_{class_obj.name}();' + '\n')
+                f.write(tabs * "\t" + f'extern "C" {dll_export_macro} void ClearClassMeta_{class_obj.name}();' + '\n')
                 f.write(tabs * "\t" + f'extern "C" {dll_export_macro} void UnregisterClassMeta_{class_obj.name}();' + '\n')
 
         ############################### register #################################
@@ -1244,11 +1285,18 @@ def generate_meta_module_core_code(logger: logger_utils.Logger, context: codegen
 
         tabs += 1
 
+        # Default values must be destroyed while all reflected destructors are still registered.
+        for class_obj in class_structures:
+            if not class_obj.is_help_source:
+                f.write(tabs * "\t" + f'ClearClassMeta_{class_obj.name}();' + '\n')
+
         f.write(tabs * "\t" + f'UnregisterModuleEnums_{context.module_name}();' + '\n')
 
         for class_obj in class_structures:
             if not class_obj.is_help_source:
                 f.write(tabs * "\t" + f'UnregisterClassMeta_{class_obj.name}();' + '\n')
+
+        f.write(tabs * "\t" + 'SpaRcle::Utils::Reflection::UnregisterModuleTypes(SR_REFLECTION_MODULE_ID);' + '\n')
 
         tabs -= 1
 

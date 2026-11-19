@@ -67,12 +67,7 @@ namespace SR_SCRIPTING_NS {
         return value.GetSRClass();
     }
 
-    AngelScriptBindings::Type::~Type() {
-        SR_UTILS_NS::Reflection::FreeTypeInfo(pTypeInfo);
-    }
-
     AngelScriptBindings::Call::~Call() {
-        SR_UTILS_NS::Reflection::FreeTypeInfo(pPropertyType);
         for (auto&& pFrame : frames) {
             delete pFrame;
         }
@@ -132,12 +127,12 @@ namespace SR_SCRIPTING_NS {
     AngelScriptBindings::Type* AngelScriptBindings::FindType(const SR_UTILS_NS::Reflection::TypeInfo& info) const {
         SR_TRACY_ZONE;
 
-        if (info.detailedType == "SharedPtr" && info.pNext[0]) {
+        if (info.kind == SR_UTILS_NS::Reflection::TypeKind::SharedPtr && info.pNext[0]) {
             return FindType(*info.pNext[0]);
         }
 
         for (auto&& pType : m_types) {
-            if (*pType->pTypeInfo == info || (pType->pTypeInfo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::String && info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::String)) {
+            if (*pType->pTypeInfo == info || (pType->pTypeInfo->IsString() && info.IsString())) {
                 return pType;
             }
         }
@@ -162,13 +157,8 @@ namespace SR_SCRIPTING_NS {
 
     SR_UTILS_NS::String AngelScriptBindings::Declaration(const SR_UTILS_NS::Reflection::TypeInfo& info) const {
         SR_TRACY_ZONE;
-        if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::String && info.detailedType != "String" &&
-            info.detailedType != "StringAtom" && info.detailedType != "Path" && info.detailedType != "StringView" && info.detailedType != "UnicodeString") {
-            return {};
-        }
-
         if (AngelScriptBindingHelpers::Primitive(info)) {
-            return info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Arithmetic || FindType(info) ?
+            return info.IsArithmetic() || FindType(info) ?
                 AngelScriptBindingHelpers::PrimitiveName(info) : SR_UTILS_NS::String();
         }
 
@@ -183,7 +173,7 @@ namespace SR_SCRIPTING_NS {
             return std::move(declaration);
         }
 
-        if (info.detailedType == "SharedPtr") {
+        if (info.kind == SR_UTILS_NS::Reflection::TypeKind::SharedPtr) {
             return declaration + "+";
         }
 
@@ -194,17 +184,12 @@ namespace SR_SCRIPTING_NS {
     AngelScriptBindings::Type* AngelScriptBindings::Collect(const SR_UTILS_NS::Reflection::TypeInfo& info) {
         SR_TRACY_ZONE;
 
-        if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Unknown) {
+        if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Unknown) {
             return nullptr;
         }
 
-        if (info.detailedType == "SharedPtr") {
+        if (info.kind == SR_UTILS_NS::Reflection::TypeKind::SharedPtr) {
             return info.pNext[0] ? Collect(*info.pNext[0]) : nullptr;
-        }
-
-        if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::String && info.detailedType != "String" &&
-            info.detailedType != "StringAtom" && info.detailedType != "Path" && info.detailedType != "StringView" && info.detailedType != "UnicodeString") {
-            return nullptr;
         }
 
         if (auto&& pFound = FindType(info)) {
@@ -220,8 +205,8 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
-        if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum) {
-            auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().TryGetReflector(info.detailedType);
+        if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Enum) {
+            auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().TryGetReflector(info.name);
             if (!pReflector) {
                 return nullptr;
             }
@@ -234,59 +219,41 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
-        if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::String && info.detailedType != "String") {
-            auto&& pStringType = SR_UTILS_NS::Reflection::LoadTypeInfo("String.String");
-            if (!pStringType) {
-                return nullptr;
-            }
-
-            SR_UTILS_NS::Reflection::FindVTable(*pStringType);
-            auto&& pResult = Collect(*pStringType);
-            SR_UTILS_NS::Reflection::FreeTypeInfo(pStringType);
-
-            return pResult;
+        if (info.IsString() && info.kind != SR_UTILS_NS::Reflection::TypeKind::String) {
+            return Collect(*SR_UTILS_NS::Reflection::TypeOf<SR_UTILS_NS::String>());
         }
 
-        if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Container &&
-            info.detailedType != "Vector" && info.detailedType != "Map" && info.detailedType != "Set" &&
-            info.detailedType != "FlatHashMap" && info.detailedType != "FlatHashSet" &&
-            info.detailedType != "Optional" && info.detailedType != "EntityRef" && info.detailedType != "ResourceRef") {
+        /// Pair в скриптах не поддерживается
+        if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Pair) {
             return nullptr;
         }
 
-        if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Container) {
+        if (info.IsContainer()) {
             if (AngelScriptBindingHelpers::HasBorrowedView(info)) {
                 return nullptr;
             }
 
-            auto&& pElement = info.pNext[0];
-            if (!pElement) {
-                return nullptr;
-            }
-
-            if (info.detailedType == "Map" || info.detailedType == "FlatHashMap") {
-                if (!pElement->pNext[0] || !pElement->pNext[1] || !Collect(*pElement->pNext[0]) || !Collect(*pElement->pNext[1])) {
+            for (uint32_t i = 0; i < SR_UTILS_NS::Reflection::GetTypeKindArgumentsCount(info.kind); ++i) {
+                auto&& pArgument = info.GetArgument(i);
+                if (!pArgument || !Collect(*pArgument)) {
                     return nullptr;
                 }
-            }
-            else if (!Collect(*pElement)) {
-                return nullptr;
             }
         }
 
         auto&& pType = new Type();
         pType->name = infoIdentifier;
-        pType->pTypeInfo = SR_UTILS_NS::Reflection::CopyTypeInfo(const_cast<SR_UTILS_NS::Reflection::TypeInfo*>(&info));
+        pType->pTypeInfo = &info;
 
-        if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Object) {
-            pType->pMeta = SR_UTILS_NS::Factory::Instance().GetType(info.detailedType);
+        if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Object) {
+            pType->pMeta = SR_UTILS_NS::Factory::Instance().GetType(info.name);
 
             if (!pType->pMeta || pType->pMeta->IsDontScript()) {
                 delete pType;
                 return nullptr;
             }
 
-            auto&& pRegistration = SR_UTILS_NS::Factory::Instance().GetTypeInfo(info.detailedType);
+            auto&& pRegistration = SR_UTILS_NS::Factory::Instance().GetTypeInfo(info.name);
             auto&& pCpp = ScriptSystem::Instance().GetCppSystem();
 
             if (pRegistration && pCpp && pCpp->GetModuleManager()->IsRuntimeModule(pRegistration->moduleName)) {
@@ -303,15 +270,7 @@ namespace SR_SCRIPTING_NS {
         SR_TRACY_ZONE;
         SR_LOG("AngelScriptBindings::RegisterFactory() : registering reflected API.");
 
-        auto&& pStringType = SR_UTILS_NS::Reflection::LoadTypeInfo("String.String");
-
-        if (!pStringType || !SR_UTILS_NS::Reflection::FindVTable(*pStringType)) {
-            SR_UTILS_NS::Reflection::FreeTypeInfo(pStringType);
-            return false;
-        }
-
-        Collect(*pStringType);
-        SR_UTILS_NS::Reflection::FreeTypeInfo(pStringType);
+        Collect(*SR_UTILS_NS::Reflection::TypeOf<SR_UTILS_NS::String>());
 
         SR_UTILS_NS::Factory::Instance().ForEachClass([this](const SR_UTILS_NS::SRClassMeta* pMeta) {
             if (pMeta->IsDontScript()) {
@@ -322,18 +281,17 @@ namespace SR_SCRIPTING_NS {
                 return;
             }
 
-            SR_UTILS_NS::Reflection::TypeInfo info;
-            info.category = SR_UTILS_NS::Reflection::ReflectedCategoryType::Object;
-            info.detailedType = pMeta->GetFactoryName();
-            info.vtable = pMeta->GetVTable();
+            SR_UTILS_NS::Reflection::TypeInfoKey key;
+            key.kind = SR_UTILS_NS::Reflection::TypeKind::Object;
+            key.name = pMeta->GetFactoryName();
 
-            auto&& pType = Collect(info);
+            auto&& pType = Collect(*SR_UTILS_NS::Reflection::ResolveTypeInfo(key));
             if (!pType) {
                 return;
             }
 
             pMeta->ForEachProperty([this](const SR_UTILS_NS::Reflection::Property& property, uint64_t) {
-                Collect(property.GetDefaultValue().GetTypeInfo());
+                Collect(property.GetTypeInfo());
             });
             pMeta->ForEachMethod([this](const SR_UTILS_NS::Reflection::Method& method, uint64_t) {
                 if (method.GetReturnType()) {
@@ -434,12 +392,12 @@ namespace SR_SCRIPTING_NS {
 
     bool AngelScriptBindings::RegisterType(Type& type) {
         SR_TRACY_ZONE;
-        if (type.pTypeInfo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Arithmetic) {
+        if (type.pTypeInfo->IsArithmetic()) {
             return true;
         }
 
-        if (type.pTypeInfo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum) {
-            auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().TryGetReflector(type.pTypeInfo->detailedType);
+        if (type.pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::Enum) {
+            auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().TryGetReflector(type.pTypeInfo->name);
 
             if (!pReflector || !Check(m_pEngine->RegisterEnum(type.name.c_str()), type.name)) {
                 return false;
@@ -502,7 +460,7 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
-        if (type.pTypeInfo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::String) {
+        if (type.pTypeInfo->IsString()) {
             const char* pDeclarations[] = {
                 "uint length() const", "bool opEquals(const String &in) const", "String@ opAdd(const String &in) const",
                 "uint byteAt(uint index) const", "String@ substring(uint begin, uint count) const", "uint graphemeCount() const"
@@ -519,10 +477,8 @@ namespace SR_SCRIPTING_NS {
 
         for (uint32_t i = 0; i < layout.count; ++i) {
             auto&& component = layout.components[i];
-            auto&& pScalar = SR_UTILS_NS::Reflection::LoadTypeInfo("Arithmetic." + SR_UTILS_NS::String(component.pScalar));
-
-            if (!pScalar || !SR_UTILS_NS::Reflection::FindVTable(*pScalar)) {
-                SR_UTILS_NS::Reflection::FreeTypeInfo(pScalar);
+            auto&& pScalar = component.pScalar;
+            if (!pScalar) {
                 return false;
             }
 
@@ -542,26 +498,27 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
-        const bool wrapper = type.pTypeInfo->detailedType == "Optional" || type.pTypeInfo->detailedType == "EntityRef" ||
-            type.pTypeInfo->detailedType == "ResourceRef";
+        const auto kind = type.pTypeInfo->kind;
+        const bool wrapper = kind == SR_UTILS_NS::Reflection::TypeKind::Optional || kind == SR_UTILS_NS::Reflection::TypeKind::EntityRef ||
+            kind == SR_UTILS_NS::Reflection::TypeKind::ResourceRef;
 
-        if (wrapper || type.pTypeInfo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
+        if (wrapper || kind == SR_UTILS_NS::Reflection::TypeKind::Value) {
             SR_UTILS_NS::Vector<SR_UTILS_NS::String> declarations;
 
-            if (type.pTypeInfo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
+            if (kind == SR_UTILS_NS::Reflection::TypeKind::Value) {
                 declarations = { "bool hasValue() const", "void reset()", "void set(const ?&in)", "bool get(?&out) const" };
             }
             else {
                 auto&& element = *type.pTypeInfo->pNext[0];
                 declarations = { "bool hasValue() const", "void reset()" };
 
-                if (type.pTypeInfo->detailedType == "Optional") {
+                if (kind == SR_UTILS_NS::Reflection::TypeKind::Optional) {
                     declarations.emplace_back(Declaration(element) + " get() const");
                     declarations.emplace_back("void set(" + Argument(element) + ")");
                 }
                 else {
                     declarations.emplace_back(Declaration(element) + " get() const");
-                    declarations.emplace_back(type.pTypeInfo->detailedType == "EntityRef" ? "void setId(uint64)" : "void setId(const String &in)");
+                    declarations.emplace_back(kind == SR_UTILS_NS::Reflection::TypeKind::EntityRef ? "void setId(uint64)" : "void setId(const String &in)");
                 }
             }
 
@@ -572,41 +529,43 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
-        if (type.pTypeInfo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Container && !wrapper) {
-            auto&& table = type.pTypeInfo->vtable.containerVTable;
+        if (type.pTypeInfo->IsContainer() && !wrapper) {
+            auto&& arrayTable = type.pTypeInfo->vtable.arrayVTable;
+            auto&& mapTable = type.pTypeInfo->vtable.mapVTable;
 
-            if (!table.pSize || !table.pClear || !table.pBegin || !table.pEnd || !table.pInsert || !table.pErase ||
-                !type.pTypeInfo->vtable.iteratorVTable.pOffset || !type.pTypeInfo->vtable.iteratorVTable.pGetValue) {
+            const bool isArray = kind == SR_UTILS_NS::Reflection::TypeKind::Vector &&
+                arrayTable.pSize && arrayTable.pAt && arrayTable.pInsert && arrayTable.pClear;
+            const bool isMapOrSet = (type.pTypeInfo->IsMapLike() || type.pTypeInfo->IsSetLike()) &&
+                mapTable.pSize && mapTable.pClear && mapTable.pFind && mapTable.pInsertOrAssign && mapTable.pErase && mapTable.pForEach;
+
+            if (!isArray && !isMapOrSet) {
                 return false;
             }
 
             SR_UTILS_NS::Vector<SR_UTILS_NS::String> pDeclarations = { "uint size() const", "void clear()" };
-            const bool map = type.pTypeInfo->detailedType == "Map" || type.pTypeInfo->detailedType == "FlatHashMap";
+            const bool map = type.pTypeInfo->IsMapLike();
             auto&& pElement = type.pTypeInfo->pNext[0];
 
-            if (type.pTypeInfo->detailedType == "Vector") {
+            if (isArray) {
                 const auto value = Declaration(*pElement);
                 pDeclarations.emplace_back(value + " at(uint) const");
                 pDeclarations.emplace_back("void set(uint, " + Argument(*pElement) + ")");
                 pDeclarations.emplace_back("void pushBack(" + Argument(*pElement) + ")");
 
-                if (table.pResize) {
+                if (arrayTable.pResize) {
                     pDeclarations.emplace_back("void resize(uint)");
                 }
             }
             else {
-                if (!table.pFind) {
-                    return false;
-                }
-
-                const auto key = Argument(map ? *pElement->pNext[0] : *pElement);
+                const auto key = Argument(*type.pTypeInfo->GetArgument(0));
                 pDeclarations.emplace_back("bool contains(" + key + ") const");
                 pDeclarations.emplace_back("void erase(" + key + ")");
 
                 if (map) {
-                    const auto value = Declaration(*pElement->pNext[1]);
+                    auto&& mappedType = *type.pTypeInfo->GetArgument(1);
+                    const auto value = Declaration(mappedType);
                     pDeclarations.emplace_back(value + " at(" + key + ") const");
-                    pDeclarations.emplace_back("void insert(" + key + ", " + Argument(*pElement->pNext[1]) + ")");
+                    pDeclarations.emplace_back("void insert(" + key + ", " + Argument(mappedType) + ")");
                 }
                 else {
                     pDeclarations.emplace_back("void insert(" + key + ")");
@@ -670,7 +629,7 @@ namespace SR_SCRIPTING_NS {
                 return;
             }
 
-            auto&& info = property.GetDefaultValue().GetTypeInfo();
+            auto&& info = property.GetTypeInfo();
             const auto pDeclaration = Declaration(info);
 
             if (pDeclaration.empty()) {
@@ -681,7 +640,7 @@ namespace SR_SCRIPTING_NS {
             Call* pBinding = new Call(property);
             pBinding->pBindings = this;
             pBinding->pOwner = &type;
-            pBinding->pPropertyType = SR_UTILS_NS::Reflection::CopyTypeInfo(const_cast<SR_UTILS_NS::Reflection::TypeInfo*>(&info));
+            pBinding->pPropertyType = &info;
             m_calls.emplace_back(pBinding);
 
             const auto nativeName = property.GetName().ToString();
@@ -760,19 +719,19 @@ namespace SR_SCRIPTING_NS {
         }
 
         if (value.IsSharedPtr() && !value.GetSharedPtrBase()->Valid()) {
-            return expected.detailedType == "SharedPtr" ? SR_UTILS_NS::Reflection::Value::CreateDefault(const_cast<SR_UTILS_NS::Reflection::TypeInfo*>(&expected)) : SR_UTILS_NS::Reflection::Value();
+            return expected.kind == SR_UTILS_NS::Reflection::TypeKind::SharedPtr ? SR_UTILS_NS::Reflection::Value::CreateDefault(&expected) : SR_UTILS_NS::Reflection::Value();
         }
 
         if (value.GetTypeInfo() == expected) {
             return value.Ref();
         }
 
-        if (expected.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
+        if (expected.kind == SR_UTILS_NS::Reflection::TypeKind::Value) {
             return SR_UTILS_NS::Reflection::Value::Create(CopyValue(value));
         }
 
-        if (expected.detailedType == "SharedPtr" && expected.pNext[0]) {
-            auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(expected.pNext[0]->detailedType);
+        if (expected.kind == SR_UTILS_NS::Reflection::TypeKind::SharedPtr && expected.pNext[0]) {
+            auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(expected.pNext[0]->name);
 
             if (!pMeta) {
                 return {};
@@ -791,31 +750,31 @@ namespace SR_SCRIPTING_NS {
             return pMeta->Cast(AngelScriptBindingHelpers::ShareObject(pObject));
         }
 
-        if (expected.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Object) {
-            auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(expected.detailedType);
+        if (expected.kind == SR_UTILS_NS::Reflection::TypeKind::Object) {
+            auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(expected.name);
             auto&& pObject = value.GetSRClass();
 
             return pMeta && pObject ? pMeta->Cast(SR_UTILS_NS::Reflection::Value::CreateRef(*pObject)) : SR_UTILS_NS::Reflection::Value();
         }
 
-        if (expected.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::String && value.GetTypeInfo().category == SR_UTILS_NS::Reflection::ReflectedCategoryType::String) {
-            if (value.GetTypeInfo().detailedType != "String") {
+        if (expected.IsString() && value.GetTypeInfo().IsString()) {
+            if (value.GetTypeInfo().kind != SR_UTILS_NS::Reflection::TypeKind::String) {
                 return {};
             }
 
             auto&& text = *value.Cast<SR_UTILS_NS::String>();
-            auto result = SR_UTILS_NS::Reflection::Value::CreateDefault(const_cast<SR_UTILS_NS::Reflection::TypeInfo*>(&expected));
+            auto result = SR_UTILS_NS::Reflection::Value::CreateDefault(&expected);
 
-            if (expected.detailedType == "StringAtom") {
+            if (expected.kind == SR_UTILS_NS::Reflection::TypeKind::StringAtom) {
                 *result.Cast<SR_UTILS_NS::StringAtom>() = text;
             }
-            else if (expected.detailedType == "Path") {
+            else if (expected.kind == SR_UTILS_NS::Reflection::TypeKind::Path) {
                 *result.Cast<SR_UTILS_NS::Path>() = SR_UTILS_NS::Path(text);
             }
-            else if (expected.detailedType == "StringView") {
+            else if (expected.kind == SR_UTILS_NS::Reflection::TypeKind::StringView) {
                 *result.Cast<SR_UTILS_NS::StringView>() = text;
             }
-            else if (expected.detailedType == "UnicodeString") {
+            else if (expected.kind == SR_UTILS_NS::Reflection::TypeKind::UnicodeString) {
                 auto&& unicode = *result.Cast<SR_UTILS_NS::UnicodeString>();
                 unicode.resize(text.size());
                 const char* pCurrent = text.data();
@@ -859,9 +818,9 @@ namespace SR_SCRIPTING_NS {
         auto&& info = destination.GetTypeInfo();
 
         if (AngelScriptBindingHelpers::Primitive(info)) {
-            const auto size = info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum ?
-                SR_UTILS_NS::EnumReflectorManager::Instance().GetReflector(info.detailedType)->GetIntegralTypeSizeInternal() :
-                    SR_UTILS_NS::Reflection::GetReflectedTypeSize(info.detailedType);
+            const auto size = info.kind == SR_UTILS_NS::Reflection::TypeKind::Enum ?
+                SR_UTILS_NS::EnumReflectorManager::Instance().GetReflector(info.name)->GetIntegralTypeSizeInternal() :
+                    info.GetScalarSize();
             memcpy(destination.Data(), converted.Data(), size);
             return true;
         }
@@ -884,16 +843,16 @@ namespace SR_SCRIPTING_NS {
 
         auto&& info = source.GetTypeInfo();
 
-        if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
+        if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Value) {
             return SR_UTILS_NS::Reflection::Value::Create(CopyValue(*source.Cast<SR_UTILS_NS::Reflection::Value>()));
         }
 
         if (source.IsSharedPtr() && !source.GetSharedPtrBase()->Valid()) {
-            return SR_UTILS_NS::Reflection::Value::CreateDefault(const_cast<SR_UTILS_NS::Reflection::TypeInfo*>(&info));
+            return SR_UTILS_NS::Reflection::Value::CreateDefault(&info);
         }
 
         if (AngelScriptBindingHelpers::Primitive(info)) {
-            auto result = SR_UTILS_NS::Reflection::Value::CreateDefault(const_cast<SR_UTILS_NS::Reflection::TypeInfo*>(&info));
+            auto result = SR_UTILS_NS::Reflection::Value::CreateDefault(&info);
             CopyTo(source, result);
             return result;
         }
@@ -918,8 +877,8 @@ namespace SR_SCRIPTING_NS {
         asDWORD flags = 0;
         pCall->GetArgTypeId(index, &flags);
         auto&& pAddress = (flags & asTM_INOUTREF) ? pCall->GetArgAddress(index) : pCall->GetAddressOfArg(index);
-        if (expected.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum) {
-            auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().TryGetReflector(expected.detailedType);
+        if (expected.kind == SR_UTILS_NS::Reflection::TypeKind::Enum) {
+            auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().TryGetReflector(expected.name);
             if (!pReflector) {
                 return false;
             }
@@ -930,20 +889,18 @@ namespace SR_SCRIPTING_NS {
             return true;
         }
 
-        memcpy(destination.Data(), pAddress, SR_UTILS_NS::Reflection::GetReflectedTypeSize(expected.detailedType));
+        memcpy(destination.Data(), pAddress, expected.GetScalarSize());
         return true;
     }
 
     SR_UTILS_NS::Reflection::Value AngelScriptBindings::Read(asIScriptGeneric* pCall, uint32_t index, const SR_UTILS_NS::Reflection::TypeInfo& expected) const {
         if (AngelScriptBindingHelpers::Primitive(expected)) {
-            auto result = SR_UTILS_NS::Reflection::Value::CreateDefault(const_cast<SR_UTILS_NS::Reflection::TypeInfo*>(&expected));
+            auto result = SR_UTILS_NS::Reflection::Value::CreateDefault(&expected);
             asDWORD flags = 0;
             pCall->GetArgTypeId(index, &flags);
             auto&& pAddress = (flags & asTM_INOUTREF) ? pCall->GetArgAddress(index) : pCall->GetAddressOfArg(index);
-            const auto size = expected.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum ? sizeof(int32_t) : SR_UTILS_NS::Reflection::GetReflectedTypeSize(expected.detailedType);
-
-            if (expected.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum) {
-                auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().TryGetReflector(expected.detailedType);
+            if (expected.kind == SR_UTILS_NS::Reflection::TypeKind::Enum) {
+                auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().TryGetReflector(expected.name);
                 int32_t number = 0;
                 memcpy(&number, pAddress, sizeof(number));
 
@@ -955,15 +912,15 @@ namespace SR_SCRIPTING_NS {
                 return result;
             }
 
-            memcpy(result.Data(), pAddress, size);
+            memcpy(result.Data(), pAddress, expected.GetScalarSize());
 
             return result;
         }
 
         auto&& pObject = static_cast<AngelScriptNativeObject*>(pCall->GetArgObject(index));
         if (!pObject) {
-            if (expected.detailedType == "SharedPtr") {
-                return SR_UTILS_NS::Reflection::Value::CreateDefault(const_cast<SR_UTILS_NS::Reflection::TypeInfo*>(&expected));
+            if (expected.kind == SR_UTILS_NS::Reflection::TypeKind::SharedPtr) {
+                return SR_UTILS_NS::Reflection::Value::CreateDefault(&expected);
             }
 
             return {};
@@ -1038,8 +995,8 @@ namespace SR_SCRIPTING_NS {
         auto&& info = value.GetTypeInfo();
 
         if (AngelScriptBindingHelpers::Primitive(info)) {
-            if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum) {
-                auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().TryGetReflector(info.detailedType);
+            if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Enum) {
+                auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().TryGetReflector(info.name);
                 if (!pReflector) {
                     AngelScriptBindingHelpers::Exception("Unregistered engine enum");
                     return;
@@ -1049,17 +1006,17 @@ namespace SR_SCRIPTING_NS {
                 return;
             }
 
-            if (info.detailedType == "float") {
+            if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Float) {
                 pCall->SetReturnFloat(*value.Cast<float_t>());
                 return;
             }
 
-            if (info.detailedType == "double") {
+            if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Double) {
                 pCall->SetReturnDouble(*value.Cast<double_t>());
                 return;
             }
 
-            const auto size = info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum ? sizeof(int32_t) : SR_UTILS_NS::Reflection::GetReflectedTypeSize(info.detailedType);
+            const auto size = info.GetScalarSize();
             uint64_t bits = 0;
             memcpy(&bits, value.Data(), size);
 
@@ -1079,19 +1036,19 @@ namespace SR_SCRIPTING_NS {
             return;
         }
 
-        if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::String && info.detailedType != "String") {
+        if (info.IsString() && info.kind != SR_UTILS_NS::Reflection::TypeKind::String) {
             SR_UTILS_NS::String text;
 
-            if (info.detailedType == "StringAtom") {
+            if (info.kind == SR_UTILS_NS::Reflection::TypeKind::StringAtom) {
                 text = value.Cast<SR_UTILS_NS::StringAtom>()->ToStringView();
             }
-            else if (info.detailedType == "Path") {
+            else if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Path) {
                 text = value.Cast<SR_UTILS_NS::Path>()->View();
             }
-            else if (info.detailedType == "StringView") {
+            else if (info.kind == SR_UTILS_NS::Reflection::TypeKind::StringView) {
                 text = *value.Cast<SR_UTILS_NS::StringView>();
             }
-            else if (info.detailedType == "UnicodeString") {
+            else if (info.kind == SR_UTILS_NS::Reflection::TypeKind::UnicodeString) {
                 SR_UTILS_NS::UnicodeString& unicode = *value.Cast<SR_UTILS_NS::UnicodeString>();
                 for (auto&& code : unicode) {
                     if (!SR_UTILS_NS::Localization::Utf::IsValidCodePoint(static_cast<uint32_t>(code))) {
@@ -1129,38 +1086,30 @@ namespace SR_SCRIPTING_NS {
 
             if (!pNative) {
                 auto&& pType = FindType(id);
-                if (pType && pType->pTypeInfo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Container) {
+                if (pType && pType->pTypeInfo->IsContainer()) {
                     return SR_UTILS_NS::Reflection::Value::CreateDefault(pType->pTypeInfo);
                 }
             }
             return pNative && pNative->IsAlive() ? CopyValue(pNative->value) : SR_UTILS_NS::Reflection::Value();
         }
 
-        const char* pName = m_pEngine->GetTypeDeclaration(id);
-        SR_UTILS_NS::String serialized = "Arithmetic.";
+        const SR_UTILS_NS::Reflection::TypeInfo* pInfo = AngelScriptBindingHelpers::GetPrimitiveTypeInfo(id);
 
-        if (id == asTYPEID_INT32) {
-            serialized += "int32";
-        }
-        else if (id == asTYPEID_UINT32) {
-            serialized += "uint32";
-        }
-        else if (auto&& pType = m_pEngine->GetTypeInfoById(id)) {
-            serialized = !pType->GetModule() && SR_UTILS_NS::EnumReflectorManager::Instance().TryGetReflector(pType->GetName()) ? "Enum." + SR_UTILS_NS::String(pType->GetName()) : SR_UTILS_NS::String("Arithmetic.int32");
-        }
-        else {
-            serialized += pName;
-        }
-
-        auto&& pInfo = SR_UTILS_NS::Reflection::LoadTypeInfo(serialized);
-
+        /// остальные примитивы - enum: движковый хранится своим типом, скриптовый как int32
         if (!pInfo) {
-            return {};
+            auto&& pType = m_pEngine->GetTypeInfoById(id);
+            if (pType && !pType->GetModule() && SR_UTILS_NS::EnumReflectorManager::Instance().TryGetReflector(pType->GetName())) {
+                SR_UTILS_NS::Reflection::TypeInfoKey key;
+                key.kind = SR_UTILS_NS::Reflection::TypeKind::Enum;
+                key.name = pType->GetName();
+                pInfo = SR_UTILS_NS::Reflection::ResolveTypeInfo(key);
+            }
+            else {
+                pInfo = SR_UTILS_NS::Reflection::GetScalarTypeInfo(SR_UTILS_NS::Reflection::TypeKind::Int32);
+            }
         }
 
-        SR_UTILS_NS::Reflection::FindVTable(*pInfo);
         auto result = SR_UTILS_NS::Reflection::Value::CreateDefault(pInfo);
-        SR_UTILS_NS::Reflection::FreeTypeInfo(pInfo);
         const auto size = m_pEngine->GetSizeOfPrimitiveType(id);
 
         if (size <= 0) {
@@ -1236,7 +1185,7 @@ namespace SR_SCRIPTING_NS {
         }
 
         if (value.GetType() == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum) {
-            auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().GetReflector(value.GetTypeInfo().detailedType);
+            auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().GetReflector(value.GetTypeInfo().name);
             const auto number = static_cast<int32_t>(pReflector->ReadEnumValueFromPointerInternal(value.Data()));
             memcpy(pAddress, &number, sizeof(number));
 

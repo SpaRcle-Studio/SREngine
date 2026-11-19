@@ -17,6 +17,8 @@ namespace SR_SCRIPTING_NS::AngelScriptBindingHelpers {
     SR_UTILS_NS::String StorageIdentifier(const SR_UTILS_NS::Reflection::TypeInfo& info);
     bool HasBorrowedView(const SR_UTILS_NS::Reflection::TypeInfo& info);
     SR_UTILS_NS::String Identifier(const SR_UTILS_NS::Reflection::TypeInfo& info);
+    /// Встроенный скалярный тип для примитивного typeId AngelScript, nullptr для остальных
+    const SR_UTILS_NS::Reflection::TypeInfo* GetPrimitiveTypeInfo(int32_t typeId);
     void AddRef(asIScriptGeneric* pCall);
     void Release(asIScriptGeneric* pCall);
     SR_UTILS_NS::Reflection::Value ShareObject(SR_UTILS_NS::SRClass* pObject);
