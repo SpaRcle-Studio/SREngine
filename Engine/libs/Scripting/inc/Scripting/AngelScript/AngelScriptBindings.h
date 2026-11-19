@@ -27,12 +27,14 @@ namespace SR_SCRIPTING_NS {
         SR_UTILS_NS::Reflection::Value value;
         const SR_HTYPES_NS::SharedPtrDynamicData* pSharedControl = nullptr;
         uint32_t references = 1;
+        SR_UTILS_NS::Vector<AngelScriptNativeObject*> vectorElements;
 
         explicit AngelScriptNativeObject(AngelScriptBindings* pBind);
         ~AngelScriptNativeObject();
 
         void AddRef();
         void Release();
+        void ClearVectorElements();
 
         SR_NODISCARD bool IsAlive() const;
         SR_NODISCARD SR_UTILS_NS::SRClass* GetObject() const;
@@ -48,6 +50,7 @@ namespace SR_SCRIPTING_NS {
             int32_t scriptTypeId = 0;
             const SR_UTILS_NS::Reflection::TypeInfo* pTypeInfo = nullptr;
             const SR_UTILS_NS::SRClassMeta* pMeta = nullptr;
+            bool isGeneratedVector = false;
         };
 
         struct Call {
@@ -81,6 +84,7 @@ namespace SR_SCRIPTING_NS {
 
     public:
         bool RegisterFactory();
+        Type* ResolveVectorType(asITypeInfo* pScriptType);
 
         SR_UTILS_NS::String Declaration(const SR_UTILS_NS::Reflection::TypeInfo& info) const;
         Type* FindType(int32_t typeId) const;

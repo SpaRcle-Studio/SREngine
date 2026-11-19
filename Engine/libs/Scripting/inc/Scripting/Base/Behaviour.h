@@ -55,7 +55,7 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
-        SR_NODISCARD SR_UTILS_NS::SRClass* GetPropertiesObject() const {
+        SR_NODISCARD SR_UTILS_NS::SRClass* GetPropertiesObject() const noexcept override {
             return m_behaviourInstance ? m_behaviourInstance->GetPropertiesObject() : nullptr;
         }
 

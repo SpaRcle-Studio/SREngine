@@ -78,6 +78,12 @@ namespace SR_SCRIPTING_NS {
 
         TryLoadBehaviourData();
 
+        if (auto&& pSceneObject = GetSceneObject()) {
+            if (auto&& pPrefabOwner = pSceneObject->GetPrefabOwner()) {
+                pPrefabOwner->ApplyPrefabPropertyOverrides(true);
+            }
+        }
+
         Super::OnAttached();
     }
 
@@ -232,6 +238,12 @@ namespace SR_SCRIPTING_NS {
         }
 
         TryLoadBehaviourData();
+
+        if (auto&& pSceneObject = GetSceneObject()) {
+            if (auto&& pPrefabOwner = pSceneObject->GetPrefabOwner()) {
+                pPrefabOwner->ApplyPrefabPropertyOverrides(true);
+            }
+        }
 
         if (HasParent()) {
             GetParent()->SetDirty(true);

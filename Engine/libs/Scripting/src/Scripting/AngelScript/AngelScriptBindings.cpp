@@ -7,6 +7,7 @@
 #include <Scripting/AngelScript/AngelScriptBindings.h>
 #include <Scripting/AngelScript/AngelScriptBindingHelpers.h>
 #include <Scripting/AngelScript/AngelScriptMathHelpers.h>
+#include <Scripting/AngelScript/AngelScriptVectorBindings.h>
 #include <Scripting/Base/ScriptSystem.h>
 
 #include <Utils/TypeTraits/Factory.h>
@@ -33,9 +34,19 @@ namespace SR_SCRIPTING_NS {
         ++references;
     }
 
+    void AngelScriptNativeObject::ClearVectorElements() {
+        for (auto&& pElement : vectorElements) {
+            if (pElement) {
+                pElement->Release();
+            }
+        }
+        vectorElements.clear();
+    }
+
     void AngelScriptNativeObject::Release() {
         if (--references == 0) {
             SR_TRACY_ZONE;
+            ClearVectorElements();
             if (pBindings) {
                 pBindings->Forget(this);
             }
@@ -266,6 +277,37 @@ namespace SR_SCRIPTING_NS {
         return pType;
     }
 
+    AngelScriptBindings::Type* AngelScriptBindings::ResolveVectorType(asITypeInfo* pScriptType) {
+        SR_TRACY_ZONE;
+        if (!pScriptType || pScriptType->GetSubTypeCount() != 1) {
+            return nullptr;
+        }
+        const auto subtype = pScriptType->GetSubTypeId();
+        const SR_UTILS_NS::Reflection::TypeInfo* pElement = AngelScriptBindingHelpers::GetPrimitiveTypeInfo(subtype);
+        if (!pElement) {
+            auto&& pNative = FindType(subtype);
+            if (!pNative) {
+                return nullptr;
+            }
+            pElement = pNative->pTypeInfo;
+            if (subtype & asTYPEID_OBJHANDLE) {
+                pElement = SR_UTILS_NS::Reflection::ResolveTemplateTypeInfo(SR_UTILS_NS::Reflection::TypeKind::SharedPtr, pElement);
+            }
+        }
+        auto&& pVector = SR_UTILS_NS::Reflection::ResolveTemplateTypeInfo(SR_UTILS_NS::Reflection::TypeKind::Vector, pElement);
+        if (!pVector->CanConstruct() || !pVector->CanCopy() || !pVector->vtable.arrayVTable.pInsert) {
+            return nullptr;
+        }
+        auto&& pType = Collect(*pVector);
+        if (!pType) {
+            return nullptr;
+        }
+        pType->scriptTypeId = pScriptType->GetTypeId();
+        pType->isGeneratedVector = true;
+        pScriptType->SetUserData(this, NativeTypeUserData);
+        return pType;
+    }
+
     bool AngelScriptBindings::RegisterFactory() {
         SR_TRACY_ZONE;
         SR_LOG("AngelScriptBindings::RegisterFactory() : registering reflected API.");
@@ -320,7 +362,7 @@ namespace SR_SCRIPTING_NS {
             const SR_UTILS_NS::String name(pName);
             const bool map = name == "Map" || name == "FlatHashMap";
             const auto declaration = name + (map ? "<class K, class V>" : "<class T>");
-            if (!Check(m_pEngine->RegisterObjectType(declaration.c_str(), 0, asOBJ_REF | asOBJ_NOCOUNT | asOBJ_TEMPLATE), declaration)) {
+            if (!Check(m_pEngine->RegisterObjectType(declaration.c_str(), 0, asOBJ_REF | asOBJ_TEMPLATE | (name == "Vector" ? 0 : asOBJ_NOCOUNT)), declaration)) {
                 return false;
             }
         }
@@ -338,9 +380,16 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
-        // Unsupported instances must not be generated once native specializations are registered.
+        if (!AngelScriptVectorBindings::Register(m_pEngine, this)) {
+            return false;
+        }
+
+        // Other containers still require native specializations.
         for (auto&& pName : pTemplates) {
             const SR_UTILS_NS::String name(pName);
+            if (name == "Vector") {
+                continue;
+            }
             const auto instance = name + ((name == "Map" || name == "FlatHashMap") ? "<K, V>" : "<T>");
             if (!Check(m_pEngine->RegisterObjectBehaviour(instance.c_str(), asBEHAVE_TEMPLATE_CALLBACK, "bool f(int&in, bool&out)", asFUNCTION(AngelScriptBindingHelpers::RejectTemplate), asCALL_GENERIC), instance)) {
                 return false;
@@ -352,7 +401,7 @@ namespace SR_SCRIPTING_NS {
         }
 
         for (auto&& pType : m_types) {
-            if (!RegisterMembers(*pType)) {
+            if (!pType->isGeneratedVector && !RegisterMembers(*pType)) {
                 return false;
             }
         }
@@ -444,7 +493,7 @@ namespace SR_SCRIPTING_NS {
         m_calls.emplace_back(pGeneral);
         auto&& pRegistration = type.pMeta ? SR_UTILS_NS::Factory::Instance().GetTypeInfo(type.pMeta->GetFactoryName()) : nullptr;
 
-        if ((!type.pMeta && type.pTypeInfo->vtable.pConstructor) || (pRegistration && !pRegistration->isAbstract && pRegistration->allocator)) {
+        if ((!type.pMeta && type.pTypeInfo->CanConstruct()) || (pRegistration && !pRegistration->isAbstract && pRegistration->allocator)) {
             const auto pDeclaration = type.name + "@ f()";
 
             if (!Check(m_pEngine->RegisterObjectBehaviour(type.name.c_str(), asBEHAVE_FACTORY, pDeclaration.c_str(), asFUNCTION(AngelScriptBindingHelpers::Construct), asCALL_GENERIC, pGeneral), pDeclaration)) {
@@ -452,7 +501,7 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
-        if (type.pTypeInfo->vtable.pCopy) {
+        if (type.pTypeInfo->CanAssign()) {
             const auto pDeclaration = type.name + "& opAssign(const " + type.name + " &in)";
 
             if (!Check(m_pEngine->RegisterObjectMethod(type.name.c_str(), pDeclaration.c_str(), asFUNCTION(AngelScriptBindingHelpers::Assign), asCALL_GENERIC, pGeneral), pDeclaration)) {
@@ -825,12 +874,11 @@ namespace SR_SCRIPTING_NS {
             return true;
         }
 
-        const auto copy = info.vtable.pCopy;
-        if (!copy) {
+        if (!info.CanAssign()) {
             return false;
         }
 
-        copy(converted.GetStorage(), destination.GetStorage());
+        info.CopyAssign(destination.Data(), converted.Data());
 
         return true;
     }
@@ -857,7 +905,7 @@ namespace SR_SCRIPTING_NS {
             return result;
         }
 
-        if (!info.vtable.pCopy || !info.vtable.pConstructor) {
+        if (!info.CanCopy()) {
             return {};
         }
 
@@ -917,7 +965,16 @@ namespace SR_SCRIPTING_NS {
             return result;
         }
 
-        auto&& pObject = static_cast<AngelScriptNativeObject*>(pCall->GetArgObject(index));
+        asDWORD argumentFlags = 0;
+        const auto argumentType = pCall->GetArgTypeId(index, &argumentFlags);
+        AngelScriptNativeObject* pObject = nullptr;
+        if ((argumentType & asTYPEID_OBJHANDLE) && (argumentFlags & asTM_INOUTREF)) {
+            auto&& pHandle = static_cast<AngelScriptNativeObject**>(pCall->GetArgAddress(index));
+            pObject = pHandle ? *pHandle : nullptr;
+        }
+        else {
+            pObject = static_cast<AngelScriptNativeObject*>(pCall->GetArgObject(index));
+        }
         if (!pObject) {
             if (expected.kind == SR_UTILS_NS::Reflection::TypeKind::SharedPtr) {
                 return SR_UTILS_NS::Reflection::Value::CreateDefault(&expected);
@@ -1160,7 +1217,7 @@ namespace SR_SCRIPTING_NS {
             if (id & asTYPEID_OBJHANDLE) {
                 auto&& pTarget = static_cast<AngelScriptNativeObject**>(pAddress);
 
-                if (!converted.IsSharedPtr() && !converted.GetTypeInfo().vtable.pCopy) {
+                if (!converted.IsSharedPtr() && !converted.GetTypeInfo().CanCopy()) {
                     return false;
                 }
 

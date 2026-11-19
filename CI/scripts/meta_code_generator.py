@@ -639,19 +639,11 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
     f.write('\t' * tabs + f'SR_NODISCARD SpaRcle::Utils::Reflection::TypeInfoVTable GetVTable() const noexcept final {{\n')
     f.write('\t' * (tabs + 1) + f'SpaRcle::Utils::Reflection::TypeInfoVTable vtable;\n')
     f.write('\t' * (tabs + 1) + f'vtable.pSizeOfAlign = &SpaRcle::Utils::Reflection::ReflectedTypeTemplateSizeOfAlign<{class_name}>;\n')
-    f.write('\t' * (tabs + 1) + f'vtable.pConstructor = &SpaRcle::Utils::Reflection::ReflectedTypeTemplateConstructor<{class_name}>;\n')
-    f.write('\t' * (tabs + 1) + f'vtable.pDestructor = &SpaRcle::Utils::Reflection::ReflectedTypeTemplateDestructor<{class_name}>;\n')
     f.write('\t' * (tabs + 1) + f'vtable.pGetTypeController = &SpaRcle::Utils::Reflection::ReflectedTypeGetControllerSRClass<{class_name}>;\n')
 
-    if class_obj.no_copyable:
-        f.write('\t' * (tabs + 1) + f'vtable.pCopy = nullptr;\n')
-    else:
-        f.write('\t' * (tabs + 1) + f'vtable.pCopy = &SpaRcle::Utils::Reflection::ReflectedTypeTemplateCopy<{class_name}>;\n')
-
-    if class_obj.no_movable:
-        f.write('\t' * (tabs + 1) + f'vtable.pMove = nullptr;\n')
-    else:
-        f.write('\t' * (tabs + 1) + f'vtable.pMove = &SpaRcle::Utils::Reflection::ReflectedTypeTemplateMove<{class_name}>;\n')
+    allow_copy = 'false' if class_obj.no_copyable else 'true'
+    allow_move = 'false' if class_obj.no_movable else 'true'
+    f.write('\t' * (tabs + 1) + f'SpaRcle::Utils::Reflection::FillLifecycle<{class_name}, {allow_copy}, {allow_move}>(vtable);\n')
 
     f.write('\t' * (tabs + 1) + f'return vtable;\n')
     f.write('\t' * tabs + '}\n\n')
