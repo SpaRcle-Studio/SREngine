@@ -32,7 +32,7 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::Map<SR_UTILS_NS::StringAtom, bool> m_shaderDataOpened;
         bool m_isNeedArrow = false;
 
-        MathVectorPropertyDrawer::Ptr m_vectorDrawer;
+        PropertyDrawerBase::Ptr m_vectorDrawer;
         NumericPropertyDrawer::Ptr m_numericDrawer;
         BoolPropertyDrawer::Ptr m_boolDrawer;
         PathPropertyDrawer::Ptr m_pathDrawer;

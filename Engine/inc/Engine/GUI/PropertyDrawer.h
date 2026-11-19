@@ -9,6 +9,7 @@
 
 #include <Utils/TypeTraits/SRClass.h>
 #include <Utils/Reflection/Property.h>
+#include <Utils/Types/Optional.h>
 
 namespace SR_UTILS_NS {
     class Component;
@@ -30,6 +31,7 @@ namespace SR_CORE_GUI_NS {
     };
 
     SR_MAYBE_UNUSED SR_UTILS_NS::StringAtom GetValueInspector(const SR_UTILS_NS::Reflection::Value& value);
+    void RegisterTypePropertyDrawer(const SR_UTILS_NS::Reflection::TypeInfo* pType, SR_UTILS_NS::StringAtom drawer);
 
     struct PropertyDrawerContext {
         explicit PropertyDrawerContext(const SR_UTILS_NS::Reflection::Property& property)
@@ -115,16 +117,37 @@ namespace SR_CORE_GUI_NS {
 
         SR_NODISCARD const SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::RenderContext>& GetRenderContext() const;
 
-        std::optional<uint64_t> SearchComboBox(const PropertyDrawerContext& context,
+        SR_UTILS_NS::Optional<uint64_t> SearchComboBox(const PropertyDrawerContext& context,
                             const SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>& types,
                             bool& comboOpened,
-                            std::optional<SR_UTILS_NS::StringAtom> activeType,
+                            SR_UTILS_NS::Optional<SR_UTILS_NS::StringAtom> activeType,
                             SR_UTILS_NS::StringView defaultValue);
 
     private:
         mutable SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::RenderContext> m_context;
-        std::string m_searchBuffer;
+        SR_UTILS_NS::String m_searchBuffer;
 
+    };
+
+    class StructPropertyDrawer : public PropertyDrawerBase {
+        SR_CLASS()
+    public:
+        PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
+
+    private:
+        PropertyDrawerFeedback DrawMath(const PropertyDrawerContext& context);
+
+        const SR_UTILS_NS::Reflection::TypeInfo* m_pType = nullptr;
+        SR_UTILS_NS::Vector<PropertyDrawerBase::Ptr> m_drawers;
+    };
+
+    class QuaternionPropertyDrawer : public PropertyDrawerBase {
+        SR_CLASS()
+    public:
+        PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
+
+    private:
+        PropertyDrawerBase::Ptr m_anglesDrawer;
     };
 
     class BoolPropertyDrawer : public PropertyDrawerBase {
@@ -143,19 +166,10 @@ namespace SR_CORE_GUI_NS {
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
     };
 
-    class MathVectorPropertyDrawer : public PropertyDrawerBase {
-        SR_CLASS()
-    public:
-        using Ptr = SR_HTYPES_NS::SharedPtr<MathVectorPropertyDrawer>;
-    public:
-        PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
-
-    };
-
     class AABBPropertyDrawer : public PropertyDrawerBase {
         SR_CLASS()
     public:
-        using Ptr = SR_HTYPES_NS::SharedPtr<MathVectorPropertyDrawer>;
+        using Ptr = SR_HTYPES_NS::SharedPtr<AABBPropertyDrawer>;
     public:
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
 
@@ -188,11 +202,6 @@ namespace SR_CORE_GUI_NS {
 
     };
 
-    class MathSizePropertyDrawer : public PropertyDrawerBase {
-        SR_CLASS()
-    public:
-        PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
-    };
 }
 
 #endif //SR_ENGINE_CORE_PROPERTY_DRAWER_H

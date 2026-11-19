@@ -26,7 +26,7 @@ namespace SR_CORE_GUI_NS {
     MaterialDataPropertyDrawer::MaterialDataPropertyDrawer()
         : Super()
     {
-        m_vectorDrawer = SRNew<MathVectorPropertyDrawer>();
+        m_vectorDrawer = SRNew<StructPropertyDrawer>();
         m_numericDrawer = SRNew<NumericPropertyDrawer>();
         m_boolDrawer = SRNew<BoolPropertyDrawer>();
         m_pathDrawer = SRNew<PathPropertyDrawer>();

@@ -206,14 +206,19 @@ use numeric depth: false
 							-o:constant
 								-v:typeInfo
 									-s:Quaternion
-								-v:x
-									-f:0
-								-v:y
-									-f:0
-								-v:z
-									-f:0
-								-v:w
-									-f:1
+								-o:fields
+									-o:x
+										-v:float
+											-f:0
+									-o:y
+										-v:float
+											-f:0
+									-o:z
+										-v:float
+											-f:0
+									-o:w
+										-v:float
+											-f:1
 					-k:i
 						-o:d
 							-v:type
@@ -226,12 +231,16 @@ use numeric depth: false
 							-o:constant
 								-v:typeInfo
 									-s:FVector3
-								-v:x
-									-i:1084227584
-								-v:y
-									-i:1084227584
-								-v:z
-									-i:1084227584
+								-o:fields
+									-o:x
+										-v:float
+											-f:5
+									-o:y
+										-v:float
+											-f:5
+									-o:z
+										-v:float
+											-f:5
 					-k:i
 						-o:d
 							-v:type
@@ -244,14 +253,19 @@ use numeric depth: false
 							-o:constant
 								-v:typeInfo
 									-s:FColor
-								-v:r
-									-f:0
-								-v:g
-									-f:1
-								-v:b
-									-f:0.133333
-								-v:a
-									-f:1
+								-o:fields
+									-o:r
+										-v:float
+											-f:0
+									-o:g
+										-v:float
+											-f:1
+									-o:b
+										-v:float
+											-f:0.133333
+									-o:a
+										-v:float
+											-f:1
 					-k:i
 						-o:d
 							-v:type

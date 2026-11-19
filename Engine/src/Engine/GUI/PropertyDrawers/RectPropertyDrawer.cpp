@@ -32,13 +32,15 @@ namespace SR_CORE_GUI_NS {
                 SetReflectedValue(context, feedback, value);
             }
             DrawTitleContextMenu(context, feedback);
+            SR_IMMEDIATE_GUI_NS::SameLine();
         }
 
-        SR_IMMEDIATE_GUI_NS::SameLine();
+        SR_IMMEDIATE_GUI_NS::BeginGroup();
+        const float_t partWidth = SR_MAX(context.fieldWidth, 1.f) / 2.f;
+        const float_t axisWidth = SR_MIN(context.axisButtonWidth, partWidth * 0.4f);
+        const float_t partItemWidth = partWidth - axisWidth;
 
-        const float_t partItemWidth = (context.fieldWidth / static_cast<float_t>(context.maxPartsInLine)) - context.axisButtonWidth;
-
-        const SR_MATH_NS::FVector2 buttonSize = { context.axisButtonWidth, context.fieldHeight };
+        const SR_MATH_NS::FVector2 buttonSize = { axisWidth, context.fieldHeight };
         const float_t drag = context.GetEditorParams().GetDragSpeed();
         auto partType = pPartType ? SR_IMMEDIATE_GUI_NS::GetDataType(pPartType->GetScalarSize(), pPartType->IsSigned(), pPartType->IsIntegral()) :
             SR_IMMEDIATE_GUI_NS::ImmediateDataType::COUNT;
@@ -94,17 +96,12 @@ namespace SR_CORE_GUI_NS {
             SR_IMMEDIATE_GUI_NS::PopItemWidth();
             SR_IMMEDIATE_GUI_NS::PopID();
 
-            if (i + 1 < 4) {
-                if ((i + 1) % 2 == 0) {
-                    SR_IMMEDIATE_GUI_NS::Dummy(SR_MATH_NS::FVector2(context.fieldTitleWidth, 0.0f));
-                    SR_IMMEDIATE_GUI_NS::SameLine();
-                }
-                else {
-                    SR_IMMEDIATE_GUI_NS::SameLine();
-                }
+            if (i + 1 < 4 && (i + 1) % 2 != 0) {
+                SR_IMMEDIATE_GUI_NS::SameLine();
             }
         }
 
+        SR_IMMEDIATE_GUI_NS::EndGroup();
         SR_IMMEDIATE_GUI_NS::PopStyleVar();
 
         SR_IMMEDIATE_GUI_NS::PopID();

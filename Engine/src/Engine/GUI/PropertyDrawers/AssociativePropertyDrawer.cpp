@@ -102,7 +102,7 @@ namespace SR_CORE_GUI_NS {
         PropertyDrawerContext keyCtx = context;
 
         keyCtx.isEnumValueAvailableCheckFn = [&](SR_UTILS_NS::StringAtom enumValue) {
-            if (m_keyValue->GetTypeInfo().category != SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum) {
+            if (m_keyValue->GetTypeInfo().kind != SR_UTILS_NS::Reflection::TypeKind::Enum) {
                 SRHalt("AssociativePropertyDrawer::Draw() : key value is not an enum type!");
                 return true;
             }

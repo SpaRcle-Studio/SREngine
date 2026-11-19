@@ -272,11 +272,11 @@ namespace SR_SCRIPTING_NS {
                 return;
             }
 
-            const auto size = pBinding->pPropertyType->GetScalarSize();
             auto&& pAddress = static_cast<char*>(pObject->value.Data()) + pBinding->component;
+            auto field = SR_UTILS_NS::Reflection::ValueRef(pBinding->pPropertyType, pAddress, pObject->value.IsConst()).ToValue();
 
             if (pCall->GetArgCount() == 0) {
-                memcpy(pCall->GetAddressOfReturnLocation(), pAddress, size);
+                pBinding->pBindings->Return(pCall, std::move(field), pObject);
             }
             else {
                 if (pObject->value.IsConst()) {
@@ -285,7 +285,17 @@ namespace SR_SCRIPTING_NS {
                     return;
                 }
 
-                memcpy(pAddress, pCall->GetAddressOfArg(0), size);
+                if (Primitive(*pBinding->pPropertyType)) {
+                    const auto size = pBinding->pPropertyType->kind == SR_UTILS_NS::Reflection::TypeKind::Enum ?
+                        field.SizeOf() : pBinding->pPropertyType->GetScalarSize();
+                    memcpy(pAddress, pCall->GetAddressOfArg(0), size);
+                }
+                else {
+                    auto&& pSource = static_cast<AngelScriptNativeObject*>(pCall->GetArgObject(0));
+                    if (!pSource || !pSource->IsAlive() || !pBinding->pBindings->CopyTo(pSource->value, field)) {
+                        Exception("Native field cannot be assigned");
+                    }
+                }
             }
         }
 
@@ -342,7 +352,7 @@ namespace SR_SCRIPTING_NS {
                     Exception("Cannot pass a const native view as an output argument");
                     return;
                 }
-                if (param.isConst && param.pTypeInfo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Value &&
+                if (param.isConst && param.pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::Value &&
                     arguments[i].GetType() == SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
                     // Generated const Value& parameters receive the payload, without an extra reflection box.
                     auto payload = pBinding->pBindings->CopyValue(*arguments[i].Cast<SR_UTILS_NS::Reflection::Value>());
@@ -354,7 +364,7 @@ namespace SR_SCRIPTING_NS {
 
             if (pBinding->method.HasReturn()) {
                 auto result = pointers.empty() ? pBinding->method.Invoke(*pOwner) : pBinding->method.Invoke(*pOwner, params);
-                if (pBinding->method.GetReturnType()->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
+                if (pBinding->method.GetReturnType()->kind == SR_UTILS_NS::Reflection::TypeKind::Value) {
                     if (result.GetType() == SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
                         result = pBinding->pBindings->CopyValue(result);
                     }

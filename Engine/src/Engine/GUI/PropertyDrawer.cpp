@@ -18,10 +18,30 @@
 #include <Utils/Common/LexicalCast.h>
 #include <Utils/Common/StoreUtils.h>
 #include <Utils/Reflection/Value.h>
+#include <Utils/Types/FlatHashMap.h>
 
 #include <Codegen/PropertyDrawer.generated.hpp>
 
 namespace SR_CORE_GUI_NS {
+    SR_HTYPES_NS::FlatHashMap<const SR_UTILS_NS::Reflection::TypeInfo*, SR_UTILS_NS::StringAtom>& GetTypePropertyDrawers() {
+        static SR_HTYPES_NS::FlatHashMap<const SR_UTILS_NS::Reflection::TypeInfo*, SR_UTILS_NS::StringAtom> drawers = []() {
+            SR_HTYPES_NS::FlatHashMap<const SR_UTILS_NS::Reflection::TypeInfo*, SR_UTILS_NS::StringAtom> result;
+            result[SR_UTILS_NS::Reflection::TypeOf<SR_MATH_NS::Quaternion>()] = "QuaternionPropertyDrawer"_atom;
+            result[SR_UTILS_NS::Reflection::TypeOf<SR_MATH_NS::FColor>()] = "FColorPropertyDrawer"_atom;
+            result[SR_UTILS_NS::Reflection::TypeOf<SR_MATH_NS::AABB>()] = "AABBPropertyDrawer"_atom;
+            result[SR_UTILS_NS::Reflection::TypeOf<SR_MATH_NS::FRect>()] = "RectPropertyDrawer"_atom;
+            result[SR_UTILS_NS::Reflection::TypeOf<SR_MATH_NS::IRect>()] = "RectPropertyDrawer"_atom;
+            result[SR_UTILS_NS::Reflection::TypeOf<SR_MATH_NS::URect>()] = "RectPropertyDrawer"_atom;
+            result[SR_UTILS_NS::Reflection::TypeOf<SR_MATH_NS::USRect>()] = "RectPropertyDrawer"_atom;
+            return result;
+        }();
+        return drawers;
+    }
+
+    void RegisterTypePropertyDrawer(const SR_UTILS_NS::Reflection::TypeInfo* pType, SR_UTILS_NS::StringAtom drawer) {
+        GetTypePropertyDrawers()[pType] = drawer;
+    }
+
     SR_UTILS_NS::Reflection::Value PropertyDrawerContext::GetValue() const {
         if (pValue) {
             return pValue->Ref();
@@ -33,6 +53,13 @@ namespace SR_CORE_GUI_NS {
         SR_TRACY_ZONE;
 
         auto&& typeInfo = value.GetTypeInfo();
+        auto&& drawers = GetTypePropertyDrawers();
+        if (auto&& pDrawer = drawers.find(&typeInfo); pDrawer != drawers.end()) {
+            return pDrawer->second;
+        }
+        if (typeInfo.fieldsCount > 0) {
+            return "StructPropertyDrawer"_atom;
+        }
         if (typeInfo.IsArithmetic()) {
             return typeInfo.kind == SR_UTILS_NS::Reflection::TypeKind::Bool ? "BoolPropertyDrawer"_atom : "NumericPropertyDrawer"_atom;
         }
@@ -44,15 +71,8 @@ namespace SR_CORE_GUI_NS {
             case SR_UTILS_NS::Reflection::TypeKind::Value: return "ValuePropertyDrawer"_atom;
             case SR_UTILS_NS::Reflection::TypeKind::Object: return "ObjectPropertyDrawer"_atom;
             case SR_UTILS_NS::Reflection::TypeKind::Enum: return "EnumPropertyDrawer"_atom;
-            case SR_UTILS_NS::Reflection::TypeKind::Quaternion: return "MathVectorPropertyDrawer"_atom;
-            case SR_UTILS_NS::Reflection::TypeKind::Color: return "FColorPropertyDrawer"_atom;
-            case SR_UTILS_NS::Reflection::TypeKind::AABB: return "AABBPropertyDrawer"_atom;
-            case SR_UTILS_NS::Reflection::TypeKind::MathSize: return "MathSizePropertyDrawer"_atom;
-            case SR_UTILS_NS::Reflection::TypeKind::MathVector: return "MathVectorPropertyDrawer"_atom;
-            case SR_UTILS_NS::Reflection::TypeKind::MathRect: return "RectPropertyDrawer"_atom;
             case SR_UTILS_NS::Reflection::TypeKind::Optional: return "OptionalPropertyDrawer"_atom;
             case SR_UTILS_NS::Reflection::TypeKind::SharedPtr: return "PointerPropertyDrawer"_atom;
-            case SR_UTILS_NS::Reflection::TypeKind::Pair: return "PairPropertyDrawer"_atom;
             case SR_UTILS_NS::Reflection::TypeKind::EntityRef: return "EntityRefPropertyDrawer"_atom;
             case SR_UTILS_NS::Reflection::TypeKind::ResourceRef: return "ResourceRefPropertyDrawer"_atom;
             case SR_UTILS_NS::Reflection::TypeKind::Vector:
@@ -173,12 +193,12 @@ namespace SR_CORE_GUI_NS {
         }
         else {
             SRAssert2(value.SizeOf() == context.pValue->SizeOf(), "PropertyDrawerBase::SetReflectedValue() : size mismatch!");
-            std::memcpy(context.pValue->Data(), value.Data(), value.SizeOf());
+            context.pValue->AsRef().Assign(value.AsRef());
         }
     }
 
-    std::optional<uint64_t> PropertyDrawerBase::SearchComboBox(const PropertyDrawerContext& context, const SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>& types, bool& comboOpened,
-                                            std::optional<SR_UTILS_NS::StringAtom> activeType, SR_UTILS_NS::StringView defaultValue
+    SR_UTILS_NS::Optional<uint64_t> PropertyDrawerBase::SearchComboBox(const PropertyDrawerContext& context, const SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>& types, bool& comboOpened,
+                                            SR_UTILS_NS::Optional<SR_UTILS_NS::StringAtom> activeType, SR_UTILS_NS::StringView defaultValue
     ) {
         SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>::const_iterator pTypeIt = types.end();
 
@@ -186,7 +206,10 @@ namespace SR_CORE_GUI_NS {
             pTypeIt = std::find(types.begin(), types.end(), activeType);
         }
 
-        std::optional<uint64_t> selectedIndex = pTypeIt != types.end() ? std::make_optional(std::distance(types.begin(), pTypeIt)) : std::nullopt;
+        SR_UTILS_NS::Optional<uint64_t> selectedIndex;
+        if (pTypeIt != types.end()) {
+            selectedIndex = static_cast<uint64_t>(std::distance(types.begin(), pTypeIt));
+        }
         const char* pPrevValue = selectedIndex.has_value() ? types[selectedIndex.value()].data() : defaultValue.c_str();
 
         SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth);
@@ -210,7 +233,7 @@ namespace SR_CORE_GUI_NS {
                     continue;
                 }
 
-                bool isSelected = (selectedIndex == i);
+                bool isSelected = selectedIndex && *selectedIndex == i;
                 if (SR_IMMEDIATE_GUI_NS::Selectable(types[i].data(), isSelected))
                 {
                     selectedIndex = i;
@@ -482,7 +505,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        if (value.GetTypeInfo().category != SR_UTILS_NS::Reflection::ReflectedCategoryType::Arithmetic) {
+        if (!SR_UTILS_NS::Reflection::IsTypeKindArithmetic(value.GetTypeInfo().kind)) {
             SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Property is not numeric!");
             return feedback;
         }
@@ -667,124 +690,277 @@ namespace SR_CORE_GUI_NS {
         }
     }
 
-    PropertyDrawerFeedback MathVectorPropertyDrawer::Draw(const PropertyDrawerContext& context) {
+    PropertyDrawerFeedback StructPropertyDrawer::Draw(const PropertyDrawerContext& context) {
+        SR_TRACY_ZONE;
+        const auto kind = context.GetValue().GetTypeInfo().kind;
+        if (kind == SR_UTILS_NS::Reflection::TypeKind::MathVector || kind == SR_UTILS_NS::Reflection::TypeKind::MathSize) {
+            return DrawMath(context);
+        }
         PropertyDrawerFeedback feedback;
+        auto value = context.GetValue();
+        auto&& info = value.GetTypeInfo();
+        if (m_pType != &info) {
+            m_drawers.clear();
+            m_drawers.resize(info.fieldsCount);
+            m_pType = &info;
+        }
 
-        SR_UTILS_NS::Reflection::Value value = context.GetValue();
+        const SR_UTILS_NS::StringAtom displayName = context.pValue ? context.customDisplayName : context.GetPropertyDisplayName();
+        SR_IMMEDIATE_GUI_NS::PushID(context.pUID);
+        SR_IMMEDIATE_GUI_NS::PushID(displayName.c_str());
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+        SR_UTILS_NS::Reflection::Value reset;
+        if (context.pProperty && !context.pValue) {
+            reset = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
+        }
+        if (!context.noHeader && !displayName.empty()) {
+            if (SR_IMMEDIATE_GUI_NS::Button(displayName.c_str(),
+                { context.fieldTitleWidth + context.fieldWidth, context.fieldHeight }) && reset && !value.IsConst()) {
+                value = reset.Copy();
+                SetReflectedValue(context, feedback, value);
+            }
+            DrawTitleContextMenu(context, feedback);
+            value = context.GetValue();
+        }
 
-        const bool isQuaternion = value.GetTypeInfo().kind == SR_UTILS_NS::Reflection::TypeKind::Quaternion;
-        auto&& pPartType = isQuaternion ? SR_UTILS_NS::Reflection::TypeOf<float_t>() : value.GetTypeInfo().pNext[0];
-        const uint8_t dimension = isQuaternion ? 4 : value.GetTypeInfo().detailedSize;
+        auto copy = value.Copy();
+        if (!copy) {
+            SR_IMMEDIATE_GUI_NS::PopStyleVar();
+            SR_IMMEDIATE_GUI_NS::PopID();
+            SR_IMMEDIATE_GUI_NS::PopID();
+            return feedback;
+        }
+        SR_IMMEDIATE_GUI_NS::BeginDisabled(value.IsConst());
+        for (uint32_t i = 0; i < info.fieldsCount; ++i) {
+            auto&& field = info.pFields[i];
+            auto child = SR_UTILS_NS::Reflection::ValueRef(field.pType, static_cast<uint8_t*>(copy.Data()) + field.offset, value.IsConst()).ToValue();
+            if (!m_drawers[i]) {
+                const auto inspector = GetValueInspector(child);
+                if (!inspector.empty()) {
+                    m_drawers[i] = SR_UTILS_NS::Factory::Instance().Create<PropertyDrawerBase>(inspector);
+                }
+            }
+            if (!m_drawers[i]) {
+                continue;
+            }
+
+            SR_IMMEDIATE_GUI_NS::PushID(i);
+            auto childContext = context;
+            childContext.pValue = &child;
+            childContext.pProperty = nullptr;
+            childContext.customDisplayName = field.name;
+            childContext.editorPropertyParams = context.GetEditorParams();
+            childContext.pUID = m_drawers[i].Get();
+            childContext.propertyPath.emplace_back(field.name);
+            childContext.noHeader = false;
+            const bool isNestedStruct = m_drawers[i]->GetMeta()->GetFactoryName() == "StructPropertyDrawer"_atom &&
+                field.pType->kind != SR_UTILS_NS::Reflection::TypeKind::MathVector &&
+                field.pType->kind != SR_UTILS_NS::Reflection::TypeKind::MathSize;
+            const float_t totalWidth = context.fieldTitleWidth + context.fieldWidth;
+            const float_t titleWidth = SR_MIN(context.fieldTitleWidth > 0.f ? context.fieldTitleWidth : totalWidth * 0.3f, totalWidth * 0.4f);
+            if (isNestedStruct) {
+                const float_t indent = SR_MIN(context.GetArrowWidth(), totalWidth * 0.1f);
+                SR_IMMEDIATE_GUI_NS::Dummy({ indent, context.fieldHeight });
+                SR_IMMEDIATE_GUI_NS::SameLine();
+                childContext.fieldTitleWidth = titleWidth;
+                childContext.fieldWidth = SR_MAX(totalWidth - indent - titleWidth, 1.f);
+            }
+            else {
+                if (SR_IMMEDIATE_GUI_NS::Button(field.name.c_str(), { titleWidth, context.fieldHeight })) {
+                    auto resetChild = reset && &reset.GetTypeInfo() == &info ?
+                        SR_UTILS_NS::Reflection::ValueRef(field.pType, static_cast<uint8_t*>(reset.Data()) + field.offset, true).ToValue() :
+                        SR_UTILS_NS::Reflection::Value::CreateDefault(field.pType);
+                    if (resetChild && child.AsRef().Assign(resetChild.AsRef())) {
+                        SetReflectedValue(context, feedback, copy);
+                    }
+                }
+                SR_IMMEDIATE_GUI_NS::SameLine();
+                childContext.fieldTitleWidth = 0.f;
+                childContext.fieldWidth = SR_MAX(totalWidth - titleWidth, 1.f);
+                childContext.customDisplayName = SR_UTILS_NS::StringAtom();
+                childContext.noHeader = true;
+                if (field.pType->IsContainer() || field.pType->kind == SR_UTILS_NS::Reflection::TypeKind::Object ||
+                    field.pType->kind == SR_UTILS_NS::Reflection::TypeKind::Value) {
+                    childContext.fieldTitleWidth = childContext.fieldWidth * 0.3f;
+                    childContext.fieldWidth -= childContext.fieldTitleWidth;
+                }
+            }
+            bool childDrag = false;
+            childContext.onBeforeChangeCallback = [&childDrag](bool drag) {
+                childDrag |= drag;
+            };
+            SR_IMMEDIATE_GUI_NS::BeginGroup();
+            const auto childFeedback = m_drawers[i]->Draw(childContext);
+            SR_IMMEDIATE_GUI_NS::EndGroup();
+            if (childFeedback.isChanged) {
+                childDrag |= childFeedback.isDrag;
+                feedback.isDrag |= childDrag;
+                SetReflectedValue(context, feedback, copy, childDrag);
+            }
+            SR_IMMEDIATE_GUI_NS::PopID();
+        }
+        SR_IMMEDIATE_GUI_NS::EndDisabled();
+        SR_IMMEDIATE_GUI_NS::PopStyleVar();
+        SR_IMMEDIATE_GUI_NS::PopID();
+        SR_IMMEDIATE_GUI_NS::PopID();
+        return feedback;
+    }
+
+    PropertyDrawerFeedback StructPropertyDrawer::DrawMath(const PropertyDrawerContext& context) {
+        PropertyDrawerFeedback feedback;
+        auto value = context.GetValue();
+        auto copy = value.Copy();
+        auto&& info = value.GetTypeInfo();
+        const bool isSize = info.kind == SR_UTILS_NS::Reflection::TypeKind::MathSize;
+        const uint32_t dimension = isSize ? info.detailedSize : info.fieldsCount;
+        const float_t fieldWidth = SR_MAX(context.fieldWidth, 1.f);
+        const uint32_t availableParts = SR_MAX(static_cast<uint32_t>(fieldWidth / (context.axisButtonWidth + 2.f * SR_IMMEDIATE_GUI_NS::GetFrameHeight())), 1u);
+        const uint32_t partsInLine = SR_MIN(SR_MAX(context.maxPartsInLine, 1u), availableParts);
+        const float_t partWidth = fieldWidth / static_cast<float_t>(partsInLine);
+        const float_t axisWidth = SR_MIN(context.axisButtonWidth, partWidth * 0.4f);
+        const SR_MATH_NS::FVector2 buttonSize(axisWidth, context.fieldHeight);
+        static const SR_MATH_NS::FColor colors[] = {
+            SR_MATH_NS::FColor(0.8f, 0.1f, 0.15f, 1.f),
+            SR_MATH_NS::FColor(0.2f, 0.7f, 0.2f, 1.f),
+            SR_MATH_NS::FColor(0.1f, 0.25f, 0.8f, 1.f)
+        };
+        const char* pLabels[] = { "X", "Y", "Z", "W", "V", "U" };
+        SR_UTILS_NS::Reflection::Value reset;
+        if (context.pProperty) {
+            reset = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
+        }
 
         SR_IMMEDIATE_GUI_NS::PushID(context.pUID);
-        SR_IMMEDIATE_GUI_NS::PushID(context.GetPropertyName().ToCStr());
-
+        SR_IMMEDIATE_GUI_NS::PushID(context.GetPropertyDisplayName().c_str());
         SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
-
+        SR_IMMEDIATE_GUI_NS::BeginDisabled(value.IsConst());
         if (!context.pValue) {
-            const SR_MATH_NS::FVector2 mainButtonSize = { context.fieldTitleWidth, context.fieldHeight };
-
-            if (SR_IMMEDIATE_GUI_NS::Button(context.GetPropertyDisplayName().c_str(), mainButtonSize)) {
-                value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
-                value = value.Copy();
-                SetReflectedValue(context, feedback, value);
+            if (SR_IMMEDIATE_GUI_NS::Button(context.GetPropertyDisplayName().c_str(),
+                { context.fieldTitleWidth, context.fieldHeight * (isSize ? 2.f : 1.f) }) && reset) {
+                copy = reset.Copy();
+                feedback.isChanged = true;
             }
             DrawTitleContextMenu(context, feedback);
             SR_IMMEDIATE_GUI_NS::SameLine();
         }
 
-        const float_t partItemWidth = (context.fieldWidth / static_cast<float_t>(context.maxPartsInLine)) - context.axisButtonWidth;
+        SR_IMMEDIATE_GUI_NS::BeginGroup();
+        for (uint32_t i = 0; i < dimension; ++i) {
+            auto&& field = info.pFields[isSize && dimension == 1 ? 0 : i];
+            auto&& component = isSize && dimension > 1 ? field.pType->pFields[0] : field;
+            const uint32_t offset = isSize && dimension > 1 ? field.offset + component.offset : field.offset;
+            auto&& pData = static_cast<uint8_t*>(copy.Data()) + offset;
+            auto&& pType = component.pType;
+            const auto dataType = SR_IMMEDIATE_GUI_NS::GetDataType(pType->GetScalarSize(), pType->IsSigned(), pType->IsIntegral());
 
-        const SR_MATH_NS::FVector2 buttonSize = { context.axisButtonWidth, context.fieldHeight };
-        const float_t drag = context.GetEditorParams().GetDragSpeed();
-        auto partType = pPartType ? SR_IMMEDIATE_GUI_NS::GetDataType(pPartType->GetScalarSize(), pPartType->IsSigned(), pPartType->IsIntegral()) :
-            SR_IMMEDIATE_GUI_NS::ImmediateDataType::COUNT;
-
-        constexpr std::array<const char*, 6> labels = { "X", "Y", "Z", "W", "V", "U" };
-        static const std::array<SR_MATH_NS::FColor, 6> colors = {
-            SR_MATH_NS::FColor(0.8f, 0.1f, 0.15f, 1.0f), /// red
-            SR_MATH_NS::FColor(0.2f, 0.7f, 0.2f, 1.0f), /// green
-            SR_MATH_NS::FColor(0.1f, 0.25f, 0.8f, 1.0f), /// blue
-            SR_MATH_NS::FColor(0.8f, 0.1f, 0.15f, 1.0f), /// red
-            SR_MATH_NS::FColor(0.2f, 0.7f, 0.2f, 1.0f), /// green
-            SR_MATH_NS::FColor(0.1f, 0.25f, 0.8f, 1.0f), /// blue
-            //SR_MATH_NS::FColor(0.8f, 0.8f, 0.2f, 1.0f), /// yellow
-            //SR_MATH_NS::FColor(0.2f, 0.7f, 0.7f, 1.0f), /// cyan
-            //SR_MATH_NS::FColor(0.7f, 0.2f, 0.7f, 1.0f) /// magenta
-        };
-
-        for (uint8_t i = 0; i < dimension; ++i) {
             SR_IMMEDIATE_GUI_NS::PushID(i);
-
-            SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::Button, colors[i]);
-            SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::ButtonHovered, colors[i] + SR_MATH_NS::FColor(0.1f, 0.1f, 0.1f, 0.0f));
-            SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::ButtonActive, colors[i] + SR_MATH_NS::FColor(0.2f, 0.2f, 0.2f, 0.0f));
-
-            const uint64_t partSize = value.SizeOf() / dimension;
-            const uint64_t offset = partSize * i;
-
-            if (SR_IMMEDIATE_GUI_NS::Button(labels[i], buttonSize)) {
-                SR_UTILS_NS::Reflection::Value copy = value.Copy();
-                if (context.pProperty && context.GetProperty().GetResetValue().SizeOf() == value.SizeOf()) {
-                    if (auto&& pResetData = (char*)context.GetProperty().GetResetValue().Data()) {
-                        std::memcpy((char*)copy.Data() + offset, pResetData + offset, partSize);
-                    }
-                }
-                if (!feedback.isChanged) {
-                    std::memset((char*)copy.Data() + offset, 0, partSize);
-                    feedback.isChanged = true;
-                }
-                SetReflectedValue(context, feedback, copy);
-            }
-
-            SR_IMMEDIATE_GUI_NS::PopStyleColor(3);
-
-            SR_IMMEDIATE_GUI_NS::SameLine();
-
-            SR_IMMEDIATE_GUI_NS::PushItemWidth(partItemWidth);
-
-            if (partSize == 1) {
-                SR_IMMEDIATE_GUI_NS::PopItemWidth();
-                SR_UTILS_NS::Reflection::Value copy = value.Copy();
-                bool* pTemp = reinterpret_cast<bool*>(&((char*)(copy.Data()))[offset]);
-                if (SR_IMMEDIATE_GUI_NS::Checkbox("", pTemp)) {
-                    SetReflectedValue(context, feedback, copy, false);
-                }
-                SR_IMMEDIATE_GUI_NS::SameLine();
-                SR_IMMEDIATE_GUI_NS::Dummy(SR_MATH_NS::FVector2(partItemWidth - SR_IMMEDIATE_GUI_NS::GetFrameHeight(), 0.0f));
-                SR_IMMEDIATE_GUI_NS::PushItemWidth(partItemWidth);
-            }
-            else if (partType == SR_IMMEDIATE_GUI_NS::ImmediateDataType::COUNT) {
-                SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown part type!");
-            }
-            else {
-                SR_UTILS_NS::Reflection::Value copy = value.Copy();
-                if (SR_IMMEDIATE_GUI_NS::DragScalar("", partType, (char*)copy.Data() + offset, drag)) {
-                    SetReflectedValue(context, feedback, copy, true);
-                }
-            }
-
-            SR_IMMEDIATE_GUI_NS::PopItemWidth();
-            SR_IMMEDIATE_GUI_NS::PopID();
-
-            if (i + 1 < dimension) {
-                if ((i + 1) % context.maxPartsInLine == 0) {
-                    SR_IMMEDIATE_GUI_NS::Dummy(SR_MATH_NS::FVector2(context.fieldTitleWidth, 0.0f));
-                    SR_IMMEDIATE_GUI_NS::SameLine();
+            const auto color = colors[i % 3];
+            SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::Button, color);
+            SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::ButtonHovered, color + SR_MATH_NS::FColor(0.1f, 0.1f, 0.1f, 0.f));
+            SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::ButtonActive, color + SR_MATH_NS::FColor(0.2f, 0.2f, 0.2f, 0.f));
+            if (SR_IMMEDIATE_GUI_NS::Button(pLabels[i], buttonSize)) {
+                if (reset && &reset.GetTypeInfo() == &info) {
+                    pType->CopyAssign(pData, static_cast<const uint8_t*>(reset.Data()) + offset);
                 }
                 else {
+                    auto zero = SR_UTILS_NS::Reflection::Value::CreateDefault(pType);
+                    pType->CopyAssign(pData, zero.Data());
+                }
+                feedback.isChanged = true;
+            }
+            SR_IMMEDIATE_GUI_NS::PopStyleColor(3);
+            SR_IMMEDIATE_GUI_NS::SameLine();
+            SR_IMMEDIATE_GUI_NS::PushItemWidth(partWidth - axisWidth);
+            if (pType->kind == SR_UTILS_NS::Reflection::TypeKind::Bool) {
+                if (SR_IMMEDIATE_GUI_NS::Checkbox("##Value", static_cast<bool*>(static_cast<void*>(pData)))) {
+                    feedback.isChanged = true;
+                }
+                SR_IMMEDIATE_GUI_NS::SameLine();
+                SR_IMMEDIATE_GUI_NS::Dummy({ SR_MAX(partWidth - axisWidth - SR_IMMEDIATE_GUI_NS::GetFrameHeight(), 0.f), 0.f });
+            }
+            else if (SR_IMMEDIATE_GUI_NS::DragScalar("##Value", dataType, pData, context.GetEditorParams().GetDragSpeed())) {
+                feedback.isChanged = true;
+                feedback.isDrag = true;
+            }
+            SR_IMMEDIATE_GUI_NS::PopItemWidth();
+            SR_IMMEDIATE_GUI_NS::PopID();
+            if (i + 1 < dimension && (i + 1) % partsInLine != 0) {
+                SR_IMMEDIATE_GUI_NS::SameLine();
+            }
+        }
+
+        if (isSize) {
+            for (uint32_t i = 0; i < dimension; ++i) {
+                auto&& field = info.pFields[dimension == 1 ? 1 : i];
+                auto&& metricField = dimension == 1 ? field : field.pType->pFields[1];
+                const uint32_t offset = dimension == 1 ? metricField.offset : field.offset + metricField.offset;
+                auto&& pMetric = reinterpret_cast<SR_MATH_NS::SizeMetric*>(static_cast<uint8_t*>(copy.Data()) + offset);
+                SR_IMMEDIATE_GUI_NS::PushID(i);
+                SR_IMMEDIATE_GUI_NS::PushItemWidth(partWidth);
+                if (SR_IMMEDIATE_GUI_NS::BeginCombo("##Metric", SR_UTILS_NS::EnumReflector::ToStringAtom(*pMetric).c_str())) {
+                    for (auto&& name : SR_UTILS_NS::EnumReflector::GetNames<SR_MATH_NS::SizeMetric>()) {
+                        if (SR_IMMEDIATE_GUI_NS::Selectable(name.c_str())) {
+                            *pMetric = SR_UTILS_NS::EnumReflector::FromString<SR_MATH_NS::SizeMetric>(name);
+                            feedback.isChanged = true;
+                        }
+                    }
+                    SR_IMMEDIATE_GUI_NS::EndCombo();
+                }
+                SR_IMMEDIATE_GUI_NS::PopItemWidth();
+                SR_IMMEDIATE_GUI_NS::PopID();
+                if (i + 1 < dimension && (i + 1) % partsInLine != 0) {
                     SR_IMMEDIATE_GUI_NS::SameLine();
                 }
             }
         }
-
+        SR_IMMEDIATE_GUI_NS::EndGroup();
+        SR_IMMEDIATE_GUI_NS::EndDisabled();
         SR_IMMEDIATE_GUI_NS::PopStyleVar();
-
         SR_IMMEDIATE_GUI_NS::PopID();
         SR_IMMEDIATE_GUI_NS::PopID();
-
+        if (feedback.isChanged) {
+            SetReflectedValue(context, feedback, copy, feedback.isDrag);
+        }
         return feedback;
     }
+
+    PropertyDrawerFeedback QuaternionPropertyDrawer::Draw(const PropertyDrawerContext& context) {
+        PropertyDrawerFeedback feedback;
+        auto value = context.GetValue();
+        auto angles = value.Cast<SR_MATH_NS::Quaternion>()->EulerAngle();
+        SR_IMMEDIATE_GUI_NS::PushID(context.pUID);
+        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+        SR_IMMEDIATE_GUI_NS::BeginDisabled(value.IsConst());
+        if (!context.pValue) {
+            if (SR_IMMEDIATE_GUI_NS::Button(context.GetPropertyDisplayName().c_str(), { context.fieldTitleWidth, context.fieldHeight })) {
+                auto reset = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
+                if (reset) {
+                    SetReflectedValue(context, feedback, reset);
+                    angles = reset.Cast<SR_MATH_NS::Quaternion>()->EulerAngle();
+                }
+            }
+            DrawTitleContextMenu(context, feedback);
+            SR_IMMEDIATE_GUI_NS::SameLine();
+        }
+        if (!m_anglesDrawer) {
+            m_anglesDrawer = SRNew<StructPropertyDrawer>();
+        }
+        auto anglesValue = SR_UTILS_NS::Reflection::Value::CreateRef(angles);
+        auto anglesContext = context;
+        anglesContext.pValue = &anglesValue;
+        anglesContext.onBeforeChangeCallback = nullptr;
+        const auto anglesFeedback = m_anglesDrawer->Draw(anglesContext);
+        if (anglesFeedback.isChanged) {
+            auto rotation = SR_UTILS_NS::Reflection::Value::Create(SR_MATH_NS::Quaternion::FromEuler(angles));
+            SetReflectedValue(context, feedback, rotation, anglesFeedback.isDrag);
+            feedback.isDrag = anglesFeedback.isDrag;
+        }
+        SR_IMMEDIATE_GUI_NS::EndDisabled();
+        SR_IMMEDIATE_GUI_NS::PopStyleVar();
+        SR_IMMEDIATE_GUI_NS::PopID();
+        return feedback;
+    }
+
 
     PropertyDrawerFeedback FColorPropertyDrawer::Draw(const PropertyDrawerContext& context) {
         PropertyDrawerFeedback feedback;
@@ -806,6 +982,7 @@ namespace SR_CORE_GUI_NS {
             SR_IMMEDIATE_GUI_NS::SameLine();
         }
 
+        SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth);
         if (SR_MATH_NS::FColor* pColor = value.Cast<SR_MATH_NS::FColor>()) {
             if (SR_IMMEDIATE_GUI_NS::ColorEditAlpha("##ColorPicker", *pColor, SR_IMMEDIATE_GUI_NS::ColorEditFlags::DefaultOptions)) {
                 if (context.onBeforeChangeCallback) {
@@ -818,200 +995,11 @@ namespace SR_CORE_GUI_NS {
             SRHalt("FColorPropertyDrawer can only be used with FColor type!");
         }
 
+        SR_IMMEDIATE_GUI_NS::PopItemWidth();
         SR_IMMEDIATE_GUI_NS::PopID();
         SR_IMMEDIATE_GUI_NS::PopID();
 
         return feedback;
     }
 
-    PropertyDrawerFeedback MathSizePropertyDrawer::Draw(const PropertyDrawerContext& context) {
-        PropertyDrawerFeedback feedback;
-
-        SR_UTILS_NS::Reflection::Value value = context.GetValue();
-
-        auto&& pPartType = value.GetTypeInfo().pNext[0];
-        const uint8_t dimension = value.GetTypeInfo().detailedSize;
-
-        const auto partType = pPartType ? SR_IMMEDIATE_GUI_NS::GetDataType(pPartType->GetScalarSize(), pPartType->IsSigned(), pPartType->IsIntegral()) :
-            SR_IMMEDIATE_GUI_NS::ImmediateDataType::COUNT;
-        if (partType == SR_IMMEDIATE_GUI_NS::ImmediateDataType::COUNT) {
-            SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown part type!");
-            return feedback;
-        }
-
-        SR_IMMEDIATE_GUI_NS::PushID(context.pUID);
-        SR_IMMEDIATE_GUI_NS::PushID(context.GetProperty().GetName().ToCStr());
-
-        if (!context.pValue) {
-            const SR_MATH_NS::FVector2 mainButtonSize = { context.fieldTitleWidth, context.fieldHeight * 2.f };
-            if (SR_IMMEDIATE_GUI_NS::Button(context.GetProperty().GetDisplayName().c_str(), mainButtonSize)) {
-                value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
-                value = value.Copy();
-                SetReflectedValue(context, feedback, value);
-            }
-            DrawTitleContextMenu(context, feedback);
-        }
-
-        SRAssert(value);
-
-        SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
-
-        constexpr uint32_t maxPartsInLine = 3;
-        const float_t partItemWidth = (context.fieldWidth) / maxPartsInLine - context.axisButtonWidth;
-
-        const SR_MATH_NS::FVector2 buttonSize = { context.axisButtonWidth, context.fieldHeight };
-        const float_t drag = context.GetProperty().GetEditorParams().GetDragSpeed();
-
-        constexpr std::array<const char*, 2> labels = { "X", "Y" };
-        static const std::array<SR_MATH_NS::FColor, 2> colors = {
-            SR_MATH_NS::FColor(0.8f, 0.1f, 0.15f, 1.0f),
-            SR_MATH_NS::FColor(0.2f, 0.7f, 0.2f, 1.0f),
-        };
-
-        SR_IMMEDIATE_GUI_NS::SameLine();
-
-        SR_IMMEDIATE_GUI_NS::BeginGroup();
-        {
-            SR_UTILS_NS::Reflection::Value copy = value.Copy();
-
-            for (uint8_t i = 0; i < dimension; ++i) {
-                SR_IMMEDIATE_GUI_NS::PushID(i);
-
-                SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::Button, colors[i]);
-                SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::ButtonHovered, colors[i] + SR_MATH_NS::FColor(0.1f, 0.1f, 0.1f, 0.0f));
-                SR_IMMEDIATE_GUI_NS::PushStyleColor(SR_IMMEDIATE_GUI_NS::StyleColor::ButtonActive, colors[i] + SR_MATH_NS::FColor(0.2f, 0.2f, 0.2f, 0.0f));
-
-                auto&& pFSize = reinterpret_cast<SR_MATH_NS::FSize*>(&((char*)(copy.Data()))[i * sizeof(SR_MATH_NS::FSize)]);
-                auto&& pISize = reinterpret_cast<SR_MATH_NS::ISize*>(&((char*)(copy.Data()))[i * sizeof(SR_MATH_NS::ISize)]);
-                auto&& pUSize = reinterpret_cast<SR_MATH_NS::USize*>(&((char*)(copy.Data()))[i * sizeof(SR_MATH_NS::USize)]);
-
-                if (SR_IMMEDIATE_GUI_NS::Button(labels[i], buttonSize)) {
-                    feedback.isChanged = true;
-                    if (value.SizeOf() == context.GetProperty().GetResetValue().SizeOf()) {
-                        auto&& pMapped = context.GetProperty().GetResetValue().Data();
-                        switch (partType) {
-                            case SR_IMMEDIATE_GUI_NS::ImmediateDataType::Float: pFSize->v = reinterpret_cast<SR_MATH_NS::FSize*>(&((char*)(pMapped))[i * sizeof(SR_MATH_NS::FSize)])->v; break;
-                            case SR_IMMEDIATE_GUI_NS::ImmediateDataType::Int32: pISize->v = reinterpret_cast<SR_MATH_NS::ISize*>(&((char*)(pMapped))[i * sizeof(SR_MATH_NS::ISize)])->v; break;
-                            case SR_IMMEDIATE_GUI_NS::ImmediateDataType::UInt32: pUSize->v = reinterpret_cast<SR_MATH_NS::USize*>(&((char*)(pMapped))[i * sizeof(SR_MATH_NS::USize)])->v; break;
-                            default:
-                                SRHalt("Unknown part type!");
-                                break;
-                        }
-                    }
-                    else {
-                        switch (partType) {
-                            case SR_IMMEDIATE_GUI_NS::ImmediateDataType::Float:  pFSize->v = 0.f; break;
-                            case SR_IMMEDIATE_GUI_NS::ImmediateDataType::Int32:  pISize->v = 0; break;
-                            case SR_IMMEDIATE_GUI_NS::ImmediateDataType::UInt32: pUSize->v = 0; break;
-                            default:
-                                SRHalt("Unknown part type!");
-                                break;
-                        }
-                    }
-                }
-
-                SR_IMMEDIATE_GUI_NS::PopStyleColor(3);
-                SR_IMMEDIATE_GUI_NS::PushItemWidth(partItemWidth);
-
-                SR_IMMEDIATE_GUI_NS::SameLine();
-
-                switch (partType) {
-                    case SR_IMMEDIATE_GUI_NS::ImmediateDataType::Float: {
-                        float_t temp = pFSize->v;
-                        if (SR_IMMEDIATE_GUI_NS::DragScalar("", partType, &temp, drag)) {
-                            pFSize->v = temp;
-                            feedback.isChanged = true;
-                            feedback.isDrag = true;
-                        }
-                        break;
-                    }
-                    case SR_IMMEDIATE_GUI_NS::ImmediateDataType::Int32: {
-                        int32_t temp = pISize->v;
-                        if (SR_IMMEDIATE_GUI_NS::DragScalar("", partType, &temp, drag)) {
-                            pISize->v = temp;
-                            feedback.isChanged = true;
-                            feedback.isDrag = true;
-                        }
-                        break;
-                    }
-                    case SR_IMMEDIATE_GUI_NS::ImmediateDataType::UInt32: {
-                        uint32_t temp = pUSize->v;
-                        if (SR_IMMEDIATE_GUI_NS::DragScalar("", partType, &temp, drag)) {
-                            pUSize->v = temp;
-                            feedback.isChanged = true;
-                            feedback.isDrag = true;
-                        }
-                        break;
-                    }
-                    default:
-                        SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown part type!");
-                        break;
-                }
-
-                SR_IMMEDIATE_GUI_NS::PopItemWidth();
-
-                SR_IMMEDIATE_GUI_NS::PopID();
-
-                if (i + 1 < dimension) {
-                    SR_IMMEDIATE_GUI_NS::SameLine();
-                }
-            }
-
-            SR_IMMEDIATE_GUI_NS::PushID("Metric");
-
-            SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth / maxPartsInLine);
-
-            for (uint8_t i = 0; i < dimension; ++i) {
-                SR_IMMEDIATE_GUI_NS::PushID(i);
-
-                auto&& pFSize = reinterpret_cast<SR_MATH_NS::FSize*>(&((char*)(copy.Data()))[i * sizeof(SR_MATH_NS::FSize)]);
-                auto&& pISize = reinterpret_cast<SR_MATH_NS::ISize*>(&((char*)(copy.Data()))[i * sizeof(SR_MATH_NS::ISize)]);
-                auto&& pUSize = reinterpret_cast<SR_MATH_NS::USize*>(&((char*)(copy.Data()))[i * sizeof(SR_MATH_NS::USize)]);
-
-                SR_MATH_NS::SizeMetric* pSize = nullptr;
-                switch (partType) {
-                    case SR_IMMEDIATE_GUI_NS::ImmediateDataType::Float: pSize = &pFSize->metric; break;
-                    case SR_IMMEDIATE_GUI_NS::ImmediateDataType::Int32: pSize = &pISize->metric; break;
-                    case SR_IMMEDIATE_GUI_NS::ImmediateDataType::UInt32: pSize = &pUSize->metric; break;
-                    default:
-                        SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Unknown part type!");
-                        break;
-                }
-
-                if (pSize && SR_IMMEDIATE_GUI_NS::BeginCombo("", SR_UTILS_NS::EnumReflector::ToStringAtom(*pSize).c_str())) {
-                    auto&& names = SR_UTILS_NS::EnumReflector::GetNames<SR_MATH_NS::SizeMetric>();
-                    for (auto&& name : names) {
-                        if (SR_IMMEDIATE_GUI_NS::Selectable(name.c_str())) {
-                            SR_IMMEDIATE_GUI_NS::SetItemDefaultFocus();
-                            *pSize = SR_UTILS_NS::EnumReflector::FromString<SR_MATH_NS::SizeMetric>(name);
-                            feedback.isChanged = true;
-                        }
-                    }
-
-                    SR_IMMEDIATE_GUI_NS::EndCombo();
-                }
-
-                SR_IMMEDIATE_GUI_NS::PopID();
-
-                if (i + 1 < dimension) {
-                    SR_IMMEDIATE_GUI_NS::SameLine();
-                }
-            }
-            SR_IMMEDIATE_GUI_NS::PopItemWidth();
-            SR_IMMEDIATE_GUI_NS::EndGroup();
-
-            if (feedback.isChanged) {
-                SetReflectedValue(context, feedback, copy, feedback.isDrag);
-            }
-        }
-
-        SR_IMMEDIATE_GUI_NS::PopID();
-
-        SR_IMMEDIATE_GUI_NS::PopStyleVar();
-
-        SR_IMMEDIATE_GUI_NS::PopID();
-        SR_IMMEDIATE_GUI_NS::PopID();
-
-        return feedback;
-    }
 }

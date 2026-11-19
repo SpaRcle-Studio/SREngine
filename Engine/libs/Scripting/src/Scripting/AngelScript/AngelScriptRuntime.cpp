@@ -108,7 +108,7 @@ namespace SR_SCRIPTING_NS {
         }
         for (auto&& pBindingType : m_pBindings->GetTypes()) {
             auto&& pType = m_pEngine->GetTypeInfoById(pBindingType->scriptTypeId);
-            if (pType && pBindingType->pTypeInfo->category != SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum &&
+            if (pType && pBindingType->pTypeInfo->kind != SR_UTILS_NS::Reflection::TypeKind::Enum &&
                 exportedTypes.insert(pType->GetTypeId()).second) {
                 objectTypes.emplace_back(pType);
             }
@@ -191,7 +191,7 @@ namespace SR_SCRIPTING_NS {
         }
         for (auto&& pBindingType : m_pBindings->GetTypes()) {
             auto&& pType = m_pEngine->GetTypeInfoById(pBindingType->scriptTypeId);
-            if (pType && pBindingType->pTypeInfo->category != SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum && exportedTypes.insert(pType->GetTypeId())) {
+            if (pType && pBindingType->pTypeInfo->kind != SR_UTILS_NS::Reflection::TypeKind::Enum && exportedTypes.insert(pType->GetTypeId())) {
                 objectTypes.emplace_back(pType);
             }
         }

@@ -5,7 +5,6 @@
 #if defined(SR_ENGINE_ANGELSCRIPT_SUPPORT)
 
 #include <Scripting/AngelScript/AngelScriptValueSerialization.h>
-#include <Scripting/AngelScript/AngelScriptMathHelpers.h>
 
 #include <Utils/Reflection/TypeInfoSerialization.h>
 #include <Utils/Common/EnumReflector.h>
@@ -29,6 +28,25 @@ namespace SR_SCRIPTING_NS {
                 info.kind == SR_UTILS_NS::Reflection::TypeKind::EntityRef ||
                 info.kind == SR_UTILS_NS::Reflection::TypeKind::ResourceRef;
         }
+
+        void CollectLegacyComponents(const SR_UTILS_NS::Reflection::ValueRef& value,
+            SR_UTILS_NS::Vector<SR_UTILS_NS::Reflection::ValueRef>& components) { /// NOLINT(misc-no-recursion)
+            auto&& info = value.GetTypeInfo();
+            if (info.fieldsCount == 0) {
+                if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Enum) {
+                    components.emplace_back(SR_UTILS_NS::Reflection::TypeOf<uint8_t>(), value.Data(), value.IsConst());
+                }
+                else {
+                    components.emplace_back(value);
+                }
+                return;
+            }
+            for (uint32_t i = 0; i < info.fieldsCount; ++i) {
+                auto&& field = info.pFields[i];
+                CollectLegacyComponents(SR_UTILS_NS::Reflection::ValueRef(field.pType,
+                    static_cast<uint8_t*>(value.Data()) + field.offset, value.IsConst()), components);
+            }
+        }
     }
 
     bool CanSerializeAngelScriptValue(const SR_UTILS_NS::Reflection::TypeInfo& info) {
@@ -36,8 +54,13 @@ namespace SR_SCRIPTING_NS {
             return true;
         }
 
-        if (info.IsMath()) {
-            return AngelScriptMathHelpers::Describe(info).count > 0;
+        if (info.fieldsCount > 0) {
+            for (uint32_t i = 0; i < info.fieldsCount; ++i) {
+                if (!CanSerializeAngelScriptValue(*info.pFields[i].pType)) {
+                    return false;
+                }
+            }
+            return true;
         }
 
         switch (info.kind) {
@@ -126,23 +149,8 @@ namespace SR_SCRIPTING_NS {
             return;
         }
 
-        const auto layout = AngelScriptMathHelpers::Describe(info);
-
-        if (layout.count > 0) {
-            serializer.BeginArray(layout.count, AngelScriptSerializationHelpers::itemsId);
-
-            for (uint32_t i = 0; i < layout.count; ++i) {
-                auto&& descriptor = layout.components[i];
-                auto component = SR_UTILS_NS::Reflection::Value::CreateDefault(descriptor.pScalar);
-
-                const auto size = descriptor.pScalar->GetScalarSize();
-                memcpy(component.Data(), static_cast<const char*>(value.Data()) + descriptor.offset, size);
-                serializer.BeginItem(AngelScriptSerializationHelpers::itemId);
-                SaveAngelScriptValue(component, serializer);
-                serializer.EndItem();
-            }
-
-            serializer.EndArray();
+        if (info.fieldsCount > 0) {
+            SR_UTILS_NS::Reflection::SerializeValue(value, serializer);
             return;
         }
 
@@ -282,11 +290,14 @@ namespace SR_SCRIPTING_NS {
             return success;
         }
 
-        const auto layout = AngelScriptMathHelpers::Describe(info);
-
-        if (layout.count > 0) {
+        if (info.fieldsCount > 0) {
+            if (deserializer.HasKey(SR_UTILS_NS::SerializationId::Create("fields"))) {
+                return SR_UTILS_NS::Reflection::DeserializeValue(value, deserializer);
+            }
+            SR_UTILS_NS::Vector<SR_UTILS_NS::Reflection::ValueRef> components;
+            AngelScriptSerializationHelpers::CollectLegacyComponents(value.AsRef(), components);
             const auto count = deserializer.BeginArray(AngelScriptSerializationHelpers::itemsId);
-            bool success = count == layout.count;
+            bool success = count == components.size();
 
             for (uint32_t i = 0; i < count; ++i) {
                 if (!deserializer.BeginItem(AngelScriptSerializationHelpers::itemId, i)) {
@@ -294,13 +305,10 @@ namespace SR_SCRIPTING_NS {
                     break;
                 }
 
-                if (i < layout.count) {
-                    auto&& descriptor = layout.components[i];
-                    auto component = SR_UTILS_NS::Reflection::Value::CreateDefault(descriptor.pScalar);
+                if (i < components.size()) {
+                    auto component = components[i].ToValue();
 
                     success &= LoadAngelScriptValue(component, deserializer);
-                    const auto size = descriptor.pScalar->GetScalarSize();
-                    memcpy(static_cast<char*>(value.Data()) + descriptor.offset, component.Data(), size);
                 }
 
                 deserializer.EndItem();

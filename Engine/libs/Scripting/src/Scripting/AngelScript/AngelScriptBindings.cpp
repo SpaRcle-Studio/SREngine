@@ -6,7 +6,6 @@
 
 #include <Scripting/AngelScript/AngelScriptBindings.h>
 #include <Scripting/AngelScript/AngelScriptBindingHelpers.h>
-#include <Scripting/AngelScript/AngelScriptMathHelpers.h>
 #include <Scripting/AngelScript/AngelScriptVectorBindings.h>
 #include <Scripting/Base/ScriptSystem.h>
 
@@ -252,6 +251,12 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
+        for (uint32_t i = 0; i < info.fieldsCount; ++i) {
+            if (!Collect(*info.pFields[i].pType)) {
+                return nullptr;
+            }
+        }
+
         auto&& pType = new Type();
         pType->name = infoIdentifier;
         pType->pTypeInfo = &info;
@@ -369,13 +374,13 @@ namespace SR_SCRIPTING_NS {
 
         // Register ordinary types before specializations that use them as subtypes.
         for (auto&& pType : m_types) {
-            if (pType->pTypeInfo->category != SR_UTILS_NS::Reflection::ReflectedCategoryType::Container && !RegisterType(*pType)) {
+            if (!SR_UTILS_NS::Reflection::IsTypeKindContainer(pType->pTypeInfo->kind) && !RegisterType(*pType)) {
                 return false;
             }
         }
 
         for (auto&& pType : m_types) {
-            if (pType->pTypeInfo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Container && !RegisterType(*pType)) {
+            if (SR_UTILS_NS::Reflection::IsTypeKindContainer(pType->pTypeInfo->kind) && !RegisterType(*pType)) {
                 return false;
             }
         }
@@ -522,11 +527,11 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
-        const auto layout = AngelScriptMathHelpers::Describe(*type.pTypeInfo);
+        auto&& info = *type.pTypeInfo;
 
-        for (uint32_t i = 0; i < layout.count; ++i) {
-            auto&& component = layout.components[i];
-            auto&& pScalar = component.pScalar;
+        for (uint32_t i = 0; i < info.fieldsCount; ++i) {
+            auto&& component = info.pFields[i];
+            auto&& pScalar = component.pType;
             if (!pScalar) {
                 return false;
             }
@@ -538,8 +543,8 @@ namespace SR_SCRIPTING_NS {
             pBinding->pPropertyType = pScalar;
             m_calls.emplace_back(pBinding);
 
-            const auto getter = AngelScriptBindingHelpers::PrimitiveName(*pScalar) + " get_" + SR_UTILS_NS::String(component.pName) + "() const property";
-            const auto setter = "void set_" + SR_UTILS_NS::String(component.pName) + "(" + AngelScriptBindingHelpers::PrimitiveName(*pScalar) + ") property";
+            const auto getter = Declaration(*pScalar) + " get_" + SR_UTILS_NS::String(component.name) + "() const property";
+            const auto setter = "void set_" + SR_UTILS_NS::String(component.name) + "(" + Argument(*pScalar) + ") property";
 
             if (!Check(m_pEngine->RegisterObjectMethod(type.name.c_str(), getter.c_str(), asFUNCTION(AngelScriptBindingHelpers::MathComponent), asCALL_GENERIC, pBinding), getter) ||
                 !Check(m_pEngine->RegisterObjectMethod(type.name.c_str(), setter.c_str(), asFUNCTION(AngelScriptBindingHelpers::MathComponent), asCALL_GENERIC, pBinding), setter)) {
@@ -578,7 +583,7 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
-        if (type.pTypeInfo->IsContainer() && !wrapper) {
+        if (type.pTypeInfo->IsContainer() && !wrapper && info.fieldsCount == 0) {
             auto&& arrayTable = type.pTypeInfo->vtable.arrayVTable;
             auto&& mapTable = type.pTypeInfo->vtable.mapVTable;
 

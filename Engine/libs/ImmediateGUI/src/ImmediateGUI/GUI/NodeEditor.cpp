@@ -383,7 +383,7 @@ namespace SR_IMMEDIATE_GUI_NS {
             return IconType::Diamond;
         }
 
-        switch (m_type.pType->category) {
+        switch (SR_UTILS_NS::Reflection::GetTypeKindCategory(m_type.pType->kind)) {
             case Utils::Reflection::ReflectedCategoryType::Value:
             case Utils::Reflection::ReflectedCategoryType::Object:
                 return IconType::Diamond;
@@ -416,7 +416,7 @@ namespace SR_IMMEDIATE_GUI_NS {
             return SR_MATH_NS::FColor(100, 100, 255, 255);
         }
 
-        switch (m_type.pType->category) {
+        switch (SR_UTILS_NS::Reflection::GetTypeKindCategory(m_type.pType->kind)) {
             case Utils::Reflection::ReflectedCategoryType::Value:
             case Utils::Reflection::ReflectedCategoryType::Object:
                 return SR_MATH_NS::FColor(100, 100, 255, 255);

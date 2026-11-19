@@ -487,10 +487,10 @@ namespace SR_IMMEDIATE_GUI_NS::NodeEditorImpl {
             if (pFrom->kind == SR_UTILS_NS::Reflection::TypeKind::String && pTo->kind == SR_UTILS_NS::Reflection::TypeKind::StringView) {
                 return true;
             }
-            if (pFrom->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Arithmetic && pTo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum) {
+            if (pFrom->IsArithmetic() && pTo->kind == SR_UTILS_NS::Reflection::TypeKind::Enum) {
                 return true;
             }
-            if (pFrom->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum && pTo->category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Arithmetic) {
+            if (pFrom->kind == SR_UTILS_NS::Reflection::TypeKind::Enum && pTo->IsArithmetic()) {
                 return true;
             }
             return false;

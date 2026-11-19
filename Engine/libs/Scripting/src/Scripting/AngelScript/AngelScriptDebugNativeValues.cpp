@@ -5,7 +5,6 @@
 #include <Scripting/AngelScript/AngelScriptDebugNativeValues.h>
 
 #if defined(SR_ENGINE_ANGELSCRIPT_DEBUGGER)
-#include <Scripting/AngelScript/AngelScriptMathHelpers.h>
 #include <Utils/Common/EnumReflector.h>
 #include <Utils/Reflection/Property.h>
 #include <Utils/TypeTraits/SRClass.h>
@@ -82,10 +81,10 @@ namespace SR_SCRIPTING_NS::AngelScriptDebugNativeValues {
             return false;
         }
         auto&& info = value.GetTypeInfo();
-        if (AngelScriptMathHelpers::Describe(info).count || info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
+        if (info.fieldsCount || info.kind == SR_UTILS_NS::Reflection::TypeKind::Value) {
             return true;
         }
-        if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Container) {
+        if (SR_UTILS_NS::Reflection::IsTypeKindContainer(info.kind)) {
             if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Optional || info.kind == SR_UTILS_NS::Reflection::TypeKind::Pair) {
                 return true;
             }
@@ -110,23 +109,21 @@ namespace SR_SCRIPTING_NS::AngelScriptDebugNativeValues {
             return result;
         }
         auto&& info = value.GetTypeInfo();
-        const auto layout = AngelScriptMathHelpers::Describe(info);
-        for (uint32_t i = 0; i < layout.count; ++i) {
-            auto&& component = layout.components[i];
-            auto&& pInfo = component.pScalar;
+        for (uint32_t i = 0; i < info.fieldsCount; ++i) {
+            auto&& component = info.pFields[i];
+            auto&& pInfo = component.pType;
             if (!pInfo) {
                 continue;
             }
-            auto scalar = SR_UTILS_NS::Reflection::Value::CreateDefault(pInfo);
-            if (scalar && component.offset + scalar.SizeOf() <= value.SizeOf()) {
-                memcpy(scalar.Data(), static_cast<const char*>(value.Data()) + component.offset, scalar.SizeOf());
-                result.emplace_back(Child{component.pName, std::move(scalar)});
+            auto field = SR_UTILS_NS::Reflection::ValueRef(pInfo, static_cast<uint8_t*>(value.Data()) + component.offset, value.IsConst());
+            if (component.offset + field.SizeOf() <= value.SizeOf()) {
+                result.emplace_back(Child{SR_UTILS_NS::String(component.name), field.Copy()});
             }
         }
-        if (layout.count) {
+        if (info.fieldsCount) {
             return result;
         }
-        if (info.category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
+        if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Value) {
             auto&& payload = *value.Cast<SR_UTILS_NS::Reflection::Value>();
             result.emplace_back(Child{"value", payload.Ref()});
             return result;
@@ -135,17 +132,6 @@ namespace SR_SCRIPTING_NS::AngelScriptDebugNativeValues {
             result.emplace_back(Child{"hasValue", SR_UTILS_NS::Reflection::Value::Create(pOptional->HasValue())});
             if (pOptional->HasValue()) {
                 result.emplace_back(Child{"value", pOptional->GetReflectionValue()});
-            }
-            return result;
-        }
-        if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Pair && info.vtable.pairVTable.pGetPairValue) {
-            for (uint32_t i = 0; i < 2; ++i) {
-                auto storage = info.vtable.pairVTable.pGetPairValue(value.GetStorage(), i == 0);
-                if (storage.GetData() && info.pNext[i]) {
-                    auto child = SR_UTILS_NS::Reflection::Value::CreateRef(*static_cast<char*>(storage.GetData()), info.pNext[i]);
-                    child.GetStorage() = storage;
-                    result.emplace_back(Child{i == 0 ? "first" : "second", std::move(child)});
-                }
             }
             return result;
         }

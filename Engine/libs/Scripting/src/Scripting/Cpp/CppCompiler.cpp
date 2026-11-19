@@ -692,17 +692,23 @@ namespace SR_SCRIPTING_NS {
                 return false;
             }
 
-            const std::string buildInCompilerVersion = GetBuiltInMSVCCompilerPath().GetPrevious().GetPrevious().GetPrevious().GetPrevious().GetBaseNameAndExt();
-            const std::string currentCompilerVersion = m_settings.compilerPath.GetPrevious().GetPrevious().GetPrevious().GetPrevious().GetBaseNameAndExt();
+            const SR_UTILS_NS::String buildInCompilerVersion = GetBuiltInMSVCCompilerPath().GetPrevious().GetPrevious().GetPrevious().GetPrevious().GetBaseNameAndExt();
+            const SR_UTILS_NS::String currentCompilerVersion = m_settings.compilerPath.GetPrevious().GetPrevious().GetPrevious().GetPrevious().GetBaseNameAndExt();
 
             if (buildInCompilerVersion != currentCompilerVersion) {
-                const std::string mismatchCompilerLogMessage = "CppCompiler::ValidateCompilerAndOS() : built-in compiler version is not equal to current compiler version! "
-                                                               "Undefined behaviour possible!\n\tBuilt-in: {}\n\tCurrent: {}"_format(buildInCompilerVersion, currentCompilerVersion);
+                const SR_UTILS_NS::String mismatchCompilerLogMessage =
+                    "CppCompiler::ValidateCompilerAndOS() : built-in compiler version is not equal to current compiler version! "
+                    "Undefined behaviour possible!\n\tBuilt-in: {}\n\tCurrent: {}"_format(buildInCompilerVersion, currentCompilerVersion);
 
                 if (!m_settings.ignoreCompilerVersion) {
                     SR_WARN(mismatchCompilerLogMessage);
 
-                    const std::string message = "Do you want to continue? Continuing may cause undefined behaviour. Use on your own risk. Built-in version: {}, current version: {}"_format(
+                    if (SR_UTILS_NS::CLIManager::Instance().IsHeadlessMode()) {
+                        SR_LOG("CppCompiler::ValidateCompilerAndOS() : cancel compiler by headless mode.");
+                        return false;
+                    }
+
+                    const SR_UTILS_NS::String message = "Do you want to continue? Continuing may cause undefined behaviour. Use on your own risk. Built-in version: {}, current version: {}"_format(
                         buildInCompilerVersion, currentCompilerVersion
                     );
 

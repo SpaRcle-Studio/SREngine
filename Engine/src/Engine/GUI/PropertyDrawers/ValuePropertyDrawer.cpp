@@ -21,7 +21,7 @@ namespace SR_CORE_GUI_NS {
         PropertyDrawerFeedback feedback;
 
         SR_UTILS_NS::Reflection::Value value = context.HasExplicitSetter() ? context.GetValue().Copy() : context.GetValue();
-        //if (value.GetTypeInfo().category != SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
+        //if (value.GetTypeInfo().kind != SR_UTILS_NS::Reflection::TypeKind::Value) {
         //    SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map value property!");
         //    return feedback;
         //}
@@ -72,7 +72,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         SR_UTILS_NS::Reflection::Value* pValue = value.Cast<SR_UTILS_NS::Reflection::Value>();
-        if (value.GetTypeInfo().category != SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
+        if (value.GetTypeInfo().kind != SR_UTILS_NS::Reflection::TypeKind::Value) {
             pValue = &value;
         }
 
@@ -101,7 +101,7 @@ namespace SR_CORE_GUI_NS {
 
         if (m_isOpened && m_drawer) {
             PropertyDrawerContext elementContext = context;
-            if (pValue->GetTypeInfo().category == SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
+            if (pValue->GetTypeInfo().kind == SR_UTILS_NS::Reflection::TypeKind::Value) {
                 elementContext.pValue = pValue->Cast<SR_UTILS_NS::Reflection::Value>();
             }
             else {
@@ -130,7 +130,7 @@ namespace SR_CORE_GUI_NS {
         SR_IMMEDIATE_GUI_NS::PopID();
         SR_IMMEDIATE_GUI_NS::PopID();
 
-        const bool needForceSet = context.pValue && feedback.isChanged && value.GetTypeInfo().category != SR_UTILS_NS::Reflection::ReflectedCategoryType::Value;
+        const bool needForceSet = context.pValue && feedback.isChanged && value.GetTypeInfo().kind != SR_UTILS_NS::Reflection::TypeKind::Value;
         if (needForceSet) {
             *context.pValue = value.Copy();
         }
@@ -158,7 +158,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         PropertyDrawerContext enumContext = context;
-        auto&& enumValue = SR_UTILS_NS::Reflection::Value::Create(typeInfo.category);
+        auto&& enumValue = SR_UTILS_NS::Reflection::Value::Create(SR_UTILS_NS::Reflection::GetTypeKindCategory(typeInfo.kind));
         enumContext.pValue = &enumValue;
         enumContext.pProperty = nullptr;
         enumContext.noHeader = false;
@@ -181,9 +181,9 @@ namespace SR_CORE_GUI_NS {
                 detailedSizes.empty() ? 0 : detailedSizes.front());
         }
 
-        SR_UTILS_NS::Reflection::GetTypeNamesByCategory(typeInfo.category, typeNames);
+        SR_UTILS_NS::Reflection::GetTypeNamesByCategory(SR_UTILS_NS::Reflection::GetTypeKindCategory(typeInfo.kind), typeNames);
 
-        SR_UTILS_NS::Reflection::GetTypeDetailedSizes(typeInfo.category, detailedSizes);
+        SR_UTILS_NS::Reflection::GetTypeDetailedSizes(SR_UTILS_NS::Reflection::GetTypeKindCategory(typeInfo.kind), detailedSizes);
         detailedSizesStr.resize(SR_MAX(detailedSizesStr.size(), detailedSizes.size()));
         for (uint64_t i = 0; i < detailedSizes.size(); i++) {
             detailedSizesStr[i].clear();
@@ -244,7 +244,7 @@ namespace SR_CORE_GUI_NS {
                     context.onBeforeChangeCallback(false);
                 }
                 SR_IMMEDIATE_GUI_NS::PopID();
-                return SR_UTILS_NS::Reflection::ResolveTypeInfoByCategory(typeInfo.category, typeNames[*selectedIndex], typeInfo.detailedSize);
+                return SR_UTILS_NS::Reflection::ResolveTypeInfoByCategory(SR_UTILS_NS::Reflection::GetTypeKindCategory(typeInfo.kind), typeNames[*selectedIndex], typeInfo.detailedSize);
             }
         }
 
