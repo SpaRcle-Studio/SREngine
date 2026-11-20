@@ -179,6 +179,10 @@ namespace SR_SCRIPTING_NS {
                         const auto bareType = typeId & ~(asTYPEID_OBJHANDLE | asTYPEID_HANDLETOCONST);
                         auto&& pType = pEngine->GetTypeInfoById(bareType);
                         if (pType && pType->GetUserData(AngelScriptBindings::NativeTypeUserData)) {
+                            auto&& pBindings = static_cast<AngelScriptBindings*>(pType->GetUserData(AngelScriptBindings::NativeTypeUserData));
+                            if (auto&& pNativeType = pBindings->FindType(typeId); pNativeType && pNativeType->IsValue()) {
+                                return NativeValue(pName, SR_UTILS_NS::Reflection::ValueRef(pNativeType->pTypeInfo, pAddress, true).ToValue(), nullptr);
+                            }
                             auto&& pNative = static_cast<AngelScriptNativeObject*>(pAddress);
                             return NativeValue(pName, pNative->value.Ref(), pNative);
                         }

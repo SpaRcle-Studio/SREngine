@@ -7,12 +7,15 @@
 #include <Scripting/AngelScript/AngelScriptBehaviourInstance.h>
 #include <Scripting/AngelScript/AngelScriptRuntime.h>
 #include <Scripting/AngelScript/AngelScriptValueSerialization.h>
+#include <Scripting/AngelScript/AngelScriptObjectGraph.h>
+#include <Scripting/AngelScript/AngelScriptBindingHelpers.h>
 #include <Scripting/Base/ScriptCollisionData.h>
 
 #include <Utils/ECS/GameObject.h>
 #include <Utils/Reflection/TypeInfoSerialization.h>
 #include <Utils/Serialization/Serializer.h>
 #include <Utils/Serialization/Deserializer.h>
+#include <Utils/Serialization/SRASerialization.h>
 
 namespace SR_SCRIPTING_NS {
     bool AngelScriptBehaviourInstance::IsSceneField(const char* pName) {
@@ -53,8 +56,11 @@ namespace SR_SCRIPTING_NS {
 
     void AngelScriptBehaviourInstance::SetInstance(asIScriptObject* pObject) {
         SR_TRACY_ZONE;
+        SR_UTILS_NS::SRASerializer reloadSerializer;
+        SR_UTILS_NS::RawPointerHolder<SR_UTILS_NS::IDeserializer> reloadData;
 
         if (m_pObject) {
+            AngelScriptObjectGraph graph(m_pObject);
             m_reloadValues.clear();
             m_reloadTypes.clear();
 
@@ -66,10 +72,20 @@ namespace SR_SCRIPTING_NS {
                 auto value = m_pRuntime->GetBindings()->ReadProperty(m_pObject, i);
 
                 if (value) {
-                    m_reloadValues.insert(m_pObject->GetPropertyName(i), std::move(value));
                     m_reloadTypes.insert(m_pObject->GetPropertyName(i), SR_UTILS_NS::String(m_pRuntime->GetEngine()->GetTypeDeclaration(m_pObject->GetPropertyTypeId(i), true)));
+                    if (AngelScriptBindingHelpers::ContainsScriptType(value.GetTypeInfo())) {
+                        if (CanSerializeAngelScriptValue(value.GetTypeInfo())) {
+                            reloadSerializer.BeginObject(SR_UTILS_NS::SerializationId::CreateFromCStr(m_pObject->GetPropertyName(i)));
+                            SaveAngelScriptValue(value, reloadSerializer);
+                            reloadSerializer.EndObject();
+                        }
+                    }
+                    else {
+                        m_reloadValues.insert(m_pObject->GetPropertyName(i), m_pRuntime->GetBindings()->CopyValue(value));
+                    }
                 }
             }
+            reloadData = reloadSerializer.CreateDeserializer().release();
         }
 
         SRAssert2(m_contextDepth == 0, "AngelScriptBehaviourInstance::SetInstance() : cannot replace an executing behaviour!");
@@ -93,6 +109,7 @@ namespace SR_SCRIPTING_NS {
         CacheCallbacks();
 
         if (m_pObject) {
+            AngelScriptObjectGraph graph(m_pObject);
             SetSceneObject(m_sceneObject);
             RefreshProperties();
 
@@ -103,6 +120,18 @@ namespace SR_SCRIPTING_NS {
 
                 auto found = m_reloadValues.find(m_pObject->GetPropertyName(i));
                 auto type = m_reloadTypes.find(m_pObject->GetPropertyName(i));
+
+                if (reloadData && type != m_reloadTypes.end() &&
+                    type->second == m_pRuntime->GetEngine()->GetTypeDeclaration(m_pObject->GetPropertyTypeId(i), true)) {
+                    auto value = m_pRuntime->GetBindings()->ReadProperty(m_pObject, i);
+                    if (value && AngelScriptBindingHelpers::ContainsScriptType(value.GetTypeInfo()) &&
+                        reloadData->BeginObject(SR_UTILS_NS::SerializationId::CreateFromCStr(m_pObject->GetPropertyName(i)))) {
+                        if (!LoadAngelScriptValue(value, *reloadData)) {
+                            SR_ERROR("AngelScriptBehaviourInstance::SetInstance() : failed to restore script property {}.", m_pObject->GetPropertyName(i));
+                        }
+                        reloadData->EndObject();
+                    }
+                }
 
                 if (found != m_reloadValues.end() && type != m_reloadTypes.end() &&
                     type->second == m_pRuntime->GetEngine()->GetTypeDeclaration(m_pObject->GetPropertyTypeId(i), true)) {
@@ -332,6 +361,8 @@ namespace SR_SCRIPTING_NS {
             return;
         }
 
+        AngelScriptObjectGraph graph(m_pObject);
+
         for (uint32_t i = 0; i < m_pObject->GetPropertyCount(); ++i) {
             if (IsSceneField(m_pObject->GetPropertyName(i)) || IsConstField(m_pObject, i)) {
                 continue;
@@ -359,6 +390,8 @@ namespace SR_SCRIPTING_NS {
             return false;
         }
 
+        AngelScriptObjectGraph graph(m_pObject);
+
         bool result = true;
 
         for (uint32_t i = 0; i < m_pObject->GetPropertyCount(); ++i) {
@@ -378,7 +411,8 @@ namespace SR_SCRIPTING_NS {
             deserializer.ReadString(scriptType, SR_UTILS_NS::SerializationId::Create("scriptType"));
 
             /// сигнатура могла быть сохранена в старом формате, поэтому сравниваются разобранные типы, а не строки
-            const bool isSameType = value && SR_UTILS_NS::Reflection::LoadTypeInfo(signature) == &value.GetTypeInfo();
+            const bool isSameType = value && (AngelScriptBindingHelpers::ContainsScriptType(value.GetTypeInfo()) ||
+                SR_UTILS_NS::Reflection::LoadTypeInfo(signature) == &value.GetTypeInfo());
 
             if (isSameType && scriptType == m_pRuntime->GetEngine()->GetTypeDeclaration(m_pObject->GetPropertyTypeId(i), true)) {
                 result &= CanSerializeAngelScriptValue(value.GetTypeInfo()) && LoadAngelScriptValue(value, deserializer) && m_pRuntime->GetBindings()->WriteProperty(m_pObject, i, value);

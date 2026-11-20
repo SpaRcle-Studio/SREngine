@@ -139,6 +139,8 @@ namespace SR_CORE_GUI_NS {
 
         const SR_UTILS_NS::Reflection::TypeInfo* m_pType = nullptr;
         SR_UTILS_NS::Vector<PropertyDrawerBase::Ptr> m_drawers;
+        SR_UTILS_NS::Vector<const SR_UTILS_NS::Reflection::TypeInfo*> m_drawerTypes;
+        bool m_isOpened = false;
     };
 
     class QuaternionPropertyDrawer : public PropertyDrawerBase {

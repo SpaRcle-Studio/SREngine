@@ -21,6 +21,9 @@ namespace SR_SCRIPTING_NS::AngelScriptDebugNativeValues {
             return "<unavailable>";
         }
         auto&& info = value.GetTypeInfo();
+        if (info.vtable.pIsNull && info.vtable.pIsNull(info, value.Data())) {
+            return "null";
+        }
         if (value.IsSharedPtr() && !value.GetSharedPtrBase()->Valid()) {
             return "null";
         }
@@ -81,7 +84,7 @@ namespace SR_SCRIPTING_NS::AngelScriptDebugNativeValues {
             return false;
         }
         auto&& info = value.GetTypeInfo();
-        if (info.fieldsCount || info.kind == SR_UTILS_NS::Reflection::TypeKind::Value) {
+        if (value.AsRef().FieldCount() || info.kind == SR_UTILS_NS::Reflection::TypeKind::Value) {
             return true;
         }
         if (SR_UTILS_NS::Reflection::IsTypeKindContainer(info.kind)) {
@@ -109,18 +112,13 @@ namespace SR_SCRIPTING_NS::AngelScriptDebugNativeValues {
             return result;
         }
         auto&& info = value.GetTypeInfo();
-        for (uint32_t i = 0; i < info.fieldsCount; ++i) {
-            auto&& component = info.pFields[i];
-            auto&& pInfo = component.pType;
-            if (!pInfo) {
-                continue;
-            }
-            auto field = SR_UTILS_NS::Reflection::ValueRef(pInfo, static_cast<uint8_t*>(value.Data()) + component.offset, value.IsConst());
-            if (component.offset + field.SizeOf() <= value.SizeOf()) {
-                result.emplace_back(Child{SR_UTILS_NS::String(component.name), field.Copy()});
+        for (uint32_t i = 0; i < value.AsRef().FieldCount(); ++i) {
+            auto field = value.AsRef().Field(i);
+            if (field) {
+                result.emplace_back(Child{SR_UTILS_NS::String(value.AsRef().FieldName(i)), field.ToValue()});
             }
         }
-        if (info.fieldsCount) {
+        if (info.fieldsCount || info.vtable.pFieldCount) {
             return result;
         }
         if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Value) {

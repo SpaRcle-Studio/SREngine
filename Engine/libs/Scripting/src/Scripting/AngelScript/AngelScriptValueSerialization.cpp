@@ -5,6 +5,7 @@
 #if defined(SR_ENGINE_ANGELSCRIPT_SUPPORT)
 
 #include <Scripting/AngelScript/AngelScriptValueSerialization.h>
+#include <Scripting/AngelScript/AngelScriptObjectGraph.h>
 
 #include <Utils/Reflection/TypeInfoSerialization.h>
 #include <Utils/Common/EnumReflector.h>
@@ -64,6 +65,9 @@ namespace SR_SCRIPTING_NS {
         }
 
         switch (info.kind) {
+            case SR_UTILS_NS::Reflection::TypeKind::ScriptObject:
+            case SR_UTILS_NS::Reflection::TypeKind::ScriptHandle:
+                return true;
             case SR_UTILS_NS::Reflection::TypeKind::Enum:
             case SR_UTILS_NS::Reflection::TypeKind::EntityRef:
             case SR_UTILS_NS::Reflection::TypeKind::ResourceRef:
@@ -91,8 +95,13 @@ namespace SR_SCRIPTING_NS {
 
     void SaveAngelScriptValue(const SR_UTILS_NS::Reflection::Value& value, SR_UTILS_NS::ISerializer& serializer) {
         SR_TRACY_ZONE;
+        AngelScriptObjectGraph graph;
 
         auto&& info = value.GetTypeInfo();
+        if (info.kind == SR_UTILS_NS::Reflection::TypeKind::ScriptObject || info.kind == SR_UTILS_NS::Reflection::TypeKind::ScriptHandle) {
+            SaveAngelScriptObject(value, serializer);
+            return;
+        }
 
         if (AngelScriptSerializationHelpers::IsSerializableReference(info)) {
             auto&& pSerializable = dynamic_cast<SR_UTILS_NS::Serializable*>(value.GetSRClass());
@@ -210,8 +219,12 @@ namespace SR_SCRIPTING_NS {
 
     bool LoadAngelScriptValue(SR_UTILS_NS::Reflection::Value& value, SR_UTILS_NS::IDeserializer& deserializer) {
         SR_TRACY_ZONE;
+        AngelScriptObjectGraph graph;
 
         auto&& info = value.GetTypeInfo();
+        if (info.kind == SR_UTILS_NS::Reflection::TypeKind::ScriptObject || info.kind == SR_UTILS_NS::Reflection::TypeKind::ScriptHandle) {
+            return LoadAngelScriptObject(value, deserializer);
+        }
 
         if (AngelScriptSerializationHelpers::IsSerializableReference(info)) {
             auto&& pSerializable = dynamic_cast<SR_UTILS_NS::Serializable*>(value.GetSRClass());
@@ -240,6 +253,9 @@ namespace SR_SCRIPTING_NS {
             array.Clear();
             map.Clear();
             array.Reserve(count);
+            if (array) {
+                array.Resize(count);
+            }
             bool success = true;
             auto&& pKeyType = info.GetArgument(0);
 
@@ -249,7 +265,7 @@ namespace SR_SCRIPTING_NS {
                     break;
                 }
 
-                auto key = SR_UTILS_NS::Reflection::Value::CreateDefault(pKeyType);
+                auto key = array ? array.At(i).ToValue() : SR_UTILS_NS::Reflection::Value::CreateDefault(pKeyType);
 
                 if (deserializer.BeginObject(AngelScriptSerializationHelpers::keyId)) {
                     success &= LoadAngelScriptValue(key, deserializer);
@@ -274,10 +290,7 @@ namespace SR_SCRIPTING_NS {
                 }
 
                 if (success) {
-                    if (array) {
-                        array.PushBack(key.AsRef());
-                    }
-                    else {
+                    if (!array) {
                         map.InsertOrAssign(key.AsRef(), mapped.AsRef());
                     }
                 }

@@ -13,6 +13,8 @@ namespace SR_SCRIPTING_NS::AngelScriptBindingHelpers {
     void Exception(const char* pMessage);
     void RejectTemplate(asIScriptGeneric* pCall);
     bool Primitive(const SR_UTILS_NS::Reflection::TypeInfo& info);
+    bool ContainsScriptType(const SR_UTILS_NS::Reflection::TypeInfo& info);
+    asQWORD MathScalarFlags(const SR_UTILS_NS::Reflection::TypeInfo& info);
     SR_UTILS_NS::String PrimitiveName(const SR_UTILS_NS::Reflection::TypeInfo& info);
     SR_UTILS_NS::String StorageIdentifier(const SR_UTILS_NS::Reflection::TypeInfo& info);
     bool HasBorrowedView(const SR_UTILS_NS::Reflection::TypeInfo& info);
@@ -23,6 +25,10 @@ namespace SR_SCRIPTING_NS::AngelScriptBindingHelpers {
     void Release(asIScriptGeneric* pCall);
     SR_UTILS_NS::Reflection::Value ShareObject(SR_UTILS_NS::SRClass* pObject);
     void Construct(asIScriptGeneric* pCall);
+    void ConstructValue(asIScriptGeneric* pCall);
+    void CopyConstructValue(asIScriptGeneric* pCall);
+    void DestructValue(asIScriptGeneric* pCall);
+    void AssignValue(asIScriptGeneric* pCall);
     void Assign(asIScriptGeneric* pCall);
     void Cast(asIScriptGeneric* pCall);
     void MathComponent(asIScriptGeneric* pCall);

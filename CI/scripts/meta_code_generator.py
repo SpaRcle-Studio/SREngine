@@ -153,6 +153,9 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
         f.write('\n' + '\t' * (tabs + 3) + f'.SetGetter(&SRClassMetaTemplate::Get_{prop.name})')
         f.write('\n' + '\t' * (tabs + 3) + f'.SetRefGetter(&SRClassMetaTemplate::GetRef_{prop.name})')
 
+        if codegen_context.CODEGEN_ENTT_ENABLED and not prop.virtual and not prop.getter and not prop.setter and not prop.change_callback:
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetByteOffset(DefaultTypeInstance() ? static_cast<int32_t>(reinterpret_cast<const char*>(&DefaultTypeInstance()->{prop.name}) - reinterpret_cast<const char*>(static_cast<SpaRcle::Utils::SRClass*>(DefaultTypeInstance()))) : INT32_MIN)')
+
         if codegen_context.CODEGEN_ENTT_ENABLED:
             type_expression = None
             if not prop.virtual:

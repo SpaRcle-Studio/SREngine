@@ -124,7 +124,7 @@ class PlayerController : ScriptBehaviour
         if (!input.IsPlayMode() && onlyPlayMode)
             return;
 
-        FVector2@ mouseDrag = input.GetMouseDrag();
+        FVector2 mouseDrag = input.GetMouseDrag();
         if (gameObject !is null)
             gameObject.GetTransform().RotateXYZ(0.0f, mouseDrag.x * mouseSensitivity, 0.0f);
 
@@ -163,9 +163,9 @@ class PlayerController : ScriptBehaviour
             if (cameraTransform is null || headTransform is null)
                 return;
 
-            Quaternion@ quat = math.InverseQuaternion(math.QuaternionFromEulerAngles(0.f, m_bodyYaw, 0.f));
-            FVector3@ dir = headTransform.TransformDirection(math.MakeFVector3(0.13f, -0.21f, 0.f));
-            FVector3@ offset = math.MultiplyFVector3Quat(dir, quat);
+            Quaternion quat = math.InverseQuaternion(math.QuaternionFromEulerAngles(0.f, m_bodyYaw, 0.f));
+            FVector3 dir = headTransform.TransformDirection(math.MakeFVector3(0.13f, -0.21f, 0.f));
+            FVector3 offset = math.MultiplyFVector3Quat(dir, quat);
 
             const float smoothingStep = math.ClampFloat(cameraSmoothing, 0.0f, 1000.0f)
                 * math.ClampFloat(dt, 0.0f, 1.0f);

@@ -27,6 +27,7 @@ namespace SR_SCRIPTING_NS {
         SR_UTILS_NS::SRClass* pAllocation = nullptr;
         SR_UTILS_NS::Reflection::Value value;
         const SR_HTYPES_NS::SharedPtrDynamicData* pSharedControl = nullptr;
+        const SR_UTILS_NS::SRClass* pIdentity = nullptr;
         uint32_t references = 1;
         SR_UTILS_NS::Vector<AngelScriptNativeObject*> vectorElements;
 
@@ -52,6 +53,11 @@ namespace SR_SCRIPTING_NS {
             const SR_UTILS_NS::Reflection::TypeInfo* pTypeInfo = nullptr;
             const SR_UTILS_NS::SRClassMeta* pMeta = nullptr;
             bool isGeneratedVector = false;
+
+            SR_NODISCARD bool IsValue() const {
+                return pTypeInfo->IsMath() || pTypeInfo->IsString() ||
+                    pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::Vector;
+            }
         };
 
         struct Call {
@@ -73,8 +79,11 @@ namespace SR_SCRIPTING_NS {
             SR_UTILS_NS::Reflection::Method method;
             SR_UTILS_NS::Reflection::Property property;
             const SR_UTILS_NS::Reflection::TypeInfo* pPropertyType = nullptr;
+            bool propertyReference = false;
             uint32_t component = 0;
             SR_UTILS_NS::Vector<Frame*> frames;
+            SR_UTILS_NS::Vector<bool> directArguments;
+            bool directResult = false;
             uint32_t activeFrames = 0;
             SR_UTILS_NS::Reflection::ValuePool* pResultPool = nullptr;
 
@@ -88,6 +97,9 @@ namespace SR_SCRIPTING_NS {
     public:
         bool RegisterFactory();
         Type* ResolveVectorType(asITypeInfo* pScriptType);
+        void ForgetType(int32_t typeId);
+        SR_UTILS_NS::Vector<AngelScriptNativeObject*>& VectorElements(void* pVector);
+        void ClearVectorElements(void* pVector);
 
         SR_UTILS_NS::String Declaration(const SR_UTILS_NS::Reflection::TypeInfo& info) const;
         Type* FindType(int32_t typeId) const;
@@ -121,9 +133,13 @@ namespace SR_SCRIPTING_NS {
     private:
         asIScriptEngine* m_pEngine = nullptr;
         SR_UTILS_NS::Vector<Type*> m_types;
+        SR_HTYPES_NS::FlatHashMap<int32_t, Type*> m_typesById;
+        SR_HTYPES_NS::FlatHashMap<const SR_UTILS_NS::Reflection::TypeInfo*, Type*> m_typesByInfo;
+        SR_HTYPES_NS::FlatHashMap<void*, SR_UTILS_NS::Vector<AngelScriptNativeObject*>> m_vectorElements;
         SR_UTILS_NS::Vector<Call*> m_calls;
         bool m_hasNameConflicts = false;
         mutable SR_HTYPES_NS::FlatHashMap<const SR_HTYPES_NS::SharedPtrDynamicData*, AngelScriptNativeObject*> m_sharedObjects;
+        mutable SR_HTYPES_NS::FlatHashMap<const SR_UTILS_NS::SRClass*, AngelScriptNativeObject*> m_nativeObjects;
         SR_UTILS_NS::RawPointerHolder<SR_UTILS_NS::MonotonicAllocator> m_nativeObjectPoolAllocator;
         mutable SR_UTILS_NS::Vector<AngelScriptNativeObject*> m_freeNativeObjectPool;
         mutable SR_UTILS_NS::Vector<AngelScriptNativeObject*> m_allocatedNativeObjectPool;

@@ -57,7 +57,7 @@ namespace SR_CORE_GUI_NS {
         if (auto&& pDrawer = drawers.find(&typeInfo); pDrawer != drawers.end()) {
             return pDrawer->second;
         }
-        if (typeInfo.fieldsCount > 0) {
+        if (typeInfo.fieldsCount > 0 || typeInfo.vtable.pFieldCount) {
             return "StructPropertyDrawer"_atom;
         }
         if (typeInfo.IsArithmetic()) {
@@ -699,9 +699,12 @@ namespace SR_CORE_GUI_NS {
         PropertyDrawerFeedback feedback;
         auto value = context.GetValue();
         auto&& info = value.GetTypeInfo();
-        if (m_pType != &info) {
+        const auto fieldCount = value.AsRef().FieldCount();
+        if (m_pType != &info || m_drawers.size() != fieldCount) {
             m_drawers.clear();
-            m_drawers.resize(info.fieldsCount);
+            m_drawers.resize(fieldCount);
+            m_drawerTypes.clear();
+            m_drawerTypes.resize(fieldCount);
             m_pType = &info;
         }
 
@@ -709,11 +712,49 @@ namespace SR_CORE_GUI_NS {
         SR_IMMEDIATE_GUI_NS::PushID(context.pUID);
         SR_IMMEDIATE_GUI_NS::PushID(displayName.c_str());
         SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
+        if (info.vtable.pFieldCount) {
+            if (info.vtable.pIsNull && info.vtable.pIsNull(info, value.Data())) {
+                SR_IMMEDIATE_GUI_NS::Text("null");
+                if (!value.IsConst() && SR_IMMEDIATE_GUI_NS::Button("Create")) {
+                    if (context.onBeforeChangeCallback) {
+                        context.onBeforeChangeCallback(false);
+                    }
+                    info.vtable.pCreate(info, value.Data());
+                    SetReflectedValue(context, feedback, value);
+                }
+                SR_IMMEDIATE_GUI_NS::PopStyleVar();
+                SR_IMMEDIATE_GUI_NS::PopID();
+                SR_IMMEDIATE_GUI_NS::PopID();
+                return feedback;
+            }
+            if (!context.noHeader) {
+                if (SR_IMMEDIATE_GUI_NS::Button(displayName.empty() ? info.name.c_str() : displayName.c_str())) {
+                    m_isOpened = !m_isOpened;
+                }
+            }
+            if (info.vtable.pIsNull && !value.IsConst()) {
+                SR_IMMEDIATE_GUI_NS::SameLine();
+                if (SR_IMMEDIATE_GUI_NS::Button("Reset")) {
+                    if (context.onBeforeChangeCallback) {
+                        context.onBeforeChangeCallback(false);
+                    }
+                    info.DestructAt(value.Data());
+                    info.ConstructAt(value.Data());
+                    SetReflectedValue(context, feedback, value);
+                }
+            }
+            if ((!m_isOpened && !context.noHeader) || (info.vtable.pIsNull && info.vtable.pIsNull(info, value.Data()))) {
+                SR_IMMEDIATE_GUI_NS::PopStyleVar();
+                SR_IMMEDIATE_GUI_NS::PopID();
+                SR_IMMEDIATE_GUI_NS::PopID();
+                return feedback;
+            }
+        }
         SR_UTILS_NS::Reflection::Value reset;
         if (context.pProperty && !context.pValue) {
             reset = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
         }
-        if (!context.noHeader && !displayName.empty()) {
+        if (!info.vtable.pFieldCount && !context.noHeader && !displayName.empty()) {
             if (SR_IMMEDIATE_GUI_NS::Button(displayName.c_str(),
                 { context.fieldTitleWidth + context.fieldWidth, context.fieldHeight }) && reset && !value.IsConst()) {
                 value = reset.Copy();
@@ -731,9 +772,17 @@ namespace SR_CORE_GUI_NS {
             return feedback;
         }
         SR_IMMEDIATE_GUI_NS::BeginDisabled(value.IsConst());
-        for (uint32_t i = 0; i < info.fieldsCount; ++i) {
-            auto&& field = info.pFields[i];
-            auto child = SR_UTILS_NS::Reflection::ValueRef(field.pType, static_cast<uint8_t*>(copy.Data()) + field.offset, value.IsConst()).ToValue();
+        for (uint32_t i = 0; i < fieldCount; ++i) {
+            auto child = copy.AsRef().Field(i).ToValue();
+            if (!child) {
+                continue;
+            }
+            const auto fieldName = copy.AsRef().FieldName(i);
+            auto&& fieldType = child.GetTypeInfo();
+            if (m_drawerTypes[i] != &fieldType) {
+                m_drawers[i] = {};
+                m_drawerTypes[i] = &fieldType;
+            }
             if (!m_drawers[i]) {
                 const auto inspector = GetValueInspector(child);
                 if (!inspector.empty()) {
@@ -748,14 +797,14 @@ namespace SR_CORE_GUI_NS {
             auto childContext = context;
             childContext.pValue = &child;
             childContext.pProperty = nullptr;
-            childContext.customDisplayName = field.name;
+            childContext.customDisplayName = fieldName;
             childContext.editorPropertyParams = context.GetEditorParams();
             childContext.pUID = m_drawers[i].Get();
-            childContext.propertyPath.emplace_back(field.name);
+            childContext.propertyPath.emplace_back(fieldName);
             childContext.noHeader = false;
             const bool isNestedStruct = m_drawers[i]->GetMeta()->GetFactoryName() == "StructPropertyDrawer"_atom &&
-                field.pType->kind != SR_UTILS_NS::Reflection::TypeKind::MathVector &&
-                field.pType->kind != SR_UTILS_NS::Reflection::TypeKind::MathSize;
+                fieldType.kind != SR_UTILS_NS::Reflection::TypeKind::MathVector &&
+                fieldType.kind != SR_UTILS_NS::Reflection::TypeKind::MathSize;
             const float_t totalWidth = context.fieldTitleWidth + context.fieldWidth;
             const float_t titleWidth = SR_MIN(context.fieldTitleWidth > 0.f ? context.fieldTitleWidth : totalWidth * 0.3f, totalWidth * 0.4f);
             if (isNestedStruct) {
@@ -766,10 +815,9 @@ namespace SR_CORE_GUI_NS {
                 childContext.fieldWidth = SR_MAX(totalWidth - indent - titleWidth, 1.f);
             }
             else {
-                if (SR_IMMEDIATE_GUI_NS::Button(field.name.c_str(), { titleWidth, context.fieldHeight })) {
+                if (SR_IMMEDIATE_GUI_NS::Button(fieldName.c_str(), { titleWidth, context.fieldHeight })) {
                     auto resetChild = reset && &reset.GetTypeInfo() == &info ?
-                        SR_UTILS_NS::Reflection::ValueRef(field.pType, static_cast<uint8_t*>(reset.Data()) + field.offset, true).ToValue() :
-                        SR_UTILS_NS::Reflection::Value::CreateDefault(field.pType);
+                        reset.AsRef().Field(i).ToValue() : SR_UTILS_NS::Reflection::Value::CreateDefault(&fieldType);
                     if (resetChild && child.AsRef().Assign(resetChild.AsRef())) {
                         SetReflectedValue(context, feedback, copy);
                     }
@@ -779,8 +827,8 @@ namespace SR_CORE_GUI_NS {
                 childContext.fieldWidth = SR_MAX(totalWidth - titleWidth, 1.f);
                 childContext.customDisplayName = SR_UTILS_NS::StringAtom();
                 childContext.noHeader = true;
-                if (field.pType->IsContainer() || field.pType->kind == SR_UTILS_NS::Reflection::TypeKind::Object ||
-                    field.pType->kind == SR_UTILS_NS::Reflection::TypeKind::Value) {
+                if (fieldType.IsContainer() || fieldType.kind == SR_UTILS_NS::Reflection::TypeKind::Object ||
+                    fieldType.kind == SR_UTILS_NS::Reflection::TypeKind::Value) {
                     childContext.fieldTitleWidth = childContext.fieldWidth * 0.3f;
                     childContext.fieldWidth -= childContext.fieldTitleWidth;
                 }
