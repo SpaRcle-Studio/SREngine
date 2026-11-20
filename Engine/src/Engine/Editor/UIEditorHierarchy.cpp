@@ -49,7 +49,7 @@ namespace SpaRcle::Editor::UI {
         if (cachedName != pSceneObject->GetName()) {
             cachedName = pSceneObject->GetName();
             if (auto&& pText = textComponent.Get()) {
-                pText->SetText(cachedName.ToStringRef());
+                pText->SetText(cachedName);
             }
         }
 

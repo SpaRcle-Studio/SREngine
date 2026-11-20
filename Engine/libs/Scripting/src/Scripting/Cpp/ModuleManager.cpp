@@ -153,7 +153,7 @@ namespace SR_SCRIPTING_NS {
             return nullptr;
         }
 
-        SR_UTILS_NS::String registerFunctionName = "RegisterModule_" + moduleName.ToString();
+        SR_UTILS_NS::String registerFunctionName = "RegisterModule_{}"_format(moduleName);
         using LoadFunctionType = void(*)();
         auto pRegisterFunction = (LoadFunctionType)(SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, registerFunctionName.c_str()));
         if (!pRegisterFunction) {
@@ -225,7 +225,7 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
-        SR_UTILS_NS::String unregisterFunctionName = "UnregisterModule_" + module.GetModuleName().ToString();
+        SR_UTILS_NS::String unregisterFunctionName = "UnregisterModule_{}"_format(module.GetModuleName());
         using UnloadFunctionType = void(*)();
         auto pUnregisterFunction = (UnloadFunctionType)(SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, unregisterFunctionName.c_str()));
         if (pUnregisterFunction) {

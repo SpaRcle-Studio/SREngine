@@ -185,7 +185,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         for (auto&& preset : m_renderPresets) {
-            m_renderPresetsMemory += preset.ToStringRef();
+            m_renderPresetsMemory += preset;
             m_renderPresetsMemory += '\0';
         }
     }

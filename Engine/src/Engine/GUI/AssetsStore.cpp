@@ -325,7 +325,7 @@ namespace SR_CORE_GUI_NS {
             return false;
         }
         if (!pProjectSettings->packages.contains(name)) {
-            pProjectSettings->packages.insert(name.ToString());
+            pProjectSettings->packages.insert(name);
             if (!pProjectSettings->SaveAsset()) {
                 SR_ERROR("AssetsStore::AddPackageToProject() : failed to save project settings!");
                 return false;

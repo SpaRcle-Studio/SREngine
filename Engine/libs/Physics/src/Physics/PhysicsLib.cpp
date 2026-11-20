@@ -84,8 +84,7 @@ namespace SR_PHYSICS_NS {
             return pLibrary;
         }
 
-        SR_INFO("PhysicsLibrary::GetLibrary() : initializing \"" + SR_UTILS_NS::EnumReflector::ToStringAtom(type).ToStringRef() +
-                "\" physics library...");
+        SR_INFO("PhysicsLibrary::GetLibrary() : initializing \"{}\" physics library...", SR_UTILS_NS::EnumReflector::ToStringAtom(type));
 
         switch (type) {
         #ifdef SR_PHYSICS_USE_PHYSX
@@ -104,15 +103,12 @@ namespace SR_PHYSICS_NS {
                 break;
         #endif
             default:
-                SR_ERROR("PhysicsLibrary::GetLibrary() : unsupported physics library type! \n\tType: "
-                     + SR_UTILS_NS::EnumReflector::ToStringAtom(type).ToStringRef());
+                SR_ERROR("PhysicsLibrary::GetLibrary() : unsupported physics library type! \n\tType: {}", SR_UTILS_NS::EnumReflector::ToStringAtom(type));
                 return nullptr;
         }
 
         if (!m_libraries[index]->Initialize()) {
-            SR_ERROR("PhysicsLibrary::GetLibrary() : failed to initialize physics library!\n\tType: "
-                 + SR_UTILS_NS::EnumReflector::ToStringAtom(type).ToStringRef()
-            );
+            SR_ERROR("PhysicsLibrary::GetLibrary() : failed to initialize physics library!\n\tType: {}", SR_UTILS_NS::EnumReflector::ToStringAtom(type));
             delete m_libraries[index];
             m_libraries[index] = nullptr;
             return nullptr;
@@ -128,8 +124,7 @@ namespace SR_PHYSICS_NS {
             return GetLibrary(pIt->second);
         }
 
-        SR_WARN("PhysicsLibrary::GetActiveLibrary() : not found active library for \"" +
-            SR_UTILS_NS::EnumReflector::ToStringAtom(space).ToStringRef() + "\", use default...");
+        SR_WARN("PhysicsLibrary::GetActiveLibrary() : not found active library for \"{}\", use default...", SR_UTILS_NS::EnumReflector::ToStringAtom(space));
 
         switch (space) {
             case Space::Space2D:

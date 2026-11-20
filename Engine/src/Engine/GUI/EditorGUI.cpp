@@ -701,7 +701,7 @@ namespace SR_CORE_GUI_NS {
                 if (auto&& pScene = m_engine->GetScene()) {
                     auto&& pSO = pScene->InstanceGameObject("Text"_atom);
                     if (auto&& pText = pSO->AddComponent<SR_GTYPES_NS::Text>()) {
-                        pText->SetText("Text");
+                        pText->SetText(SR_UTILS_NS::StringView("Text"));
                     }
                     pSO->SetTransform(new SR_UTILS_NS::TransformRect());
                     InstantiateSO(pSO.StaticCast<SR_UTILS_NS::SceneObject>());

@@ -17,15 +17,6 @@ namespace SR_SCRIPTING_NS {
     struct CppCodegenBehaviour {
         SR_UTILS_NS::StringAtom name;
         SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> namespaces;
-
-        SR_UTILS_NS::String MakeNameWithNamespace() const {
-            SR_UTILS_NS::String result;
-            for (const auto& ns : namespaces) {
-                result += ns.ToString() + "::";
-            }
-            result += name.ToString();
-            return result;
-        }
     };
 
     struct CppFileMetadata {

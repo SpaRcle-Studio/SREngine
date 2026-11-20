@@ -664,7 +664,7 @@ namespace SR_CORE_GUI_NS {
         SR_IMMEDIATE_GUI_NS::Text("Type: %s", SR_UTILS_NS::EnumReflector::ToStringAtom(type).c_str());
 
         if (HasName(type) && !IsVariableNode(type)) {
-            m_nameBuffer = node.GetName().ToStringRef();
+            m_nameBuffer = node.GetName();
             if (SR_IMMEDIATE_GUI_NS::InputText("Name", &m_nameBuffer)) {
                 node.SetName(SR_UTILS_NS::StringAtom(m_nameBuffer));
             }
@@ -693,14 +693,14 @@ namespace SR_CORE_GUI_NS {
         /// класс объекта хранится в callable.object, имя свойства - в callable.function
         const auto callable = node.GetCallable();
 
-        m_objectBuffer = callable.object.ToStringRef();
+        m_objectBuffer = callable.object;
         if (SR_IMMEDIATE_GUI_NS::InputText("Class", &m_objectBuffer)) {
             node.SetCallable({ SR_UTILS_NS::StringAtom(m_objectBuffer), callable.function });
         }
 
         auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(node.GetCallable().object);
         if (!pMeta) {
-            m_functionBuffer = callable.function.ToStringRef();
+            m_functionBuffer = callable.function;
             if (SR_IMMEDIATE_GUI_NS::InputText("Property", &m_functionBuffer)) {
                 node.SetCallable({ node.GetCallable().object, SR_UTILS_NS::StringAtom(m_functionBuffer) });
             }
@@ -724,7 +724,7 @@ namespace SR_CORE_GUI_NS {
 
     void FluxEditor::DrawCastInspector(SR_FLUX_NS::FluxGraphNode& node) {
         /// целевой тип каста хранится в имени узла
-        m_castTypeBuffer = node.GetName().ToStringRef();
+        m_castTypeBuffer = node.GetName();
         if (SR_IMMEDIATE_GUI_NS::InputText("Target type", &m_castTypeBuffer)) {
             node.SetName(SR_UTILS_NS::StringAtom(m_castTypeBuffer));
         }
@@ -745,14 +745,14 @@ namespace SR_CORE_GUI_NS {
     void FluxEditor::DrawCallableInspector(SR_FLUX_NS::FluxGraphNode& node) {
         const auto callable = node.GetCallable();
 
-        m_objectBuffer = callable.object.ToStringRef();
+        m_objectBuffer = callable.object;
         if (SR_IMMEDIATE_GUI_NS::InputText("Object", &m_objectBuffer)) {
             node.SetCallable({ SR_UTILS_NS::StringAtom(m_objectBuffer), callable.function });
         }
 
         auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(node.GetCallable().object);
         if (!pMeta) {
-            m_functionBuffer = callable.function.ToStringRef();
+            m_functionBuffer = callable.function;
             if (SR_IMMEDIATE_GUI_NS::InputText("Function", &m_functionBuffer)) {
                 node.SetCallable({ node.GetCallable().object, SR_UTILS_NS::StringAtom(m_functionBuffer) });
             }

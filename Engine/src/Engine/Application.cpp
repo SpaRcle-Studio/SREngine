@@ -118,7 +118,7 @@ namespace SR_CORE_NS {
                 const uint32_t profileIndex = pSettings->activeBuildProfile < profiles.size() ? pSettings->activeBuildProfile : 0;
                 const auto& profile = profiles[profileIndex];
                 SR_PLATFORM_NS::SetApplicationInfo({
-                   .name = pSettings->projectName.ToString(),
+                   .name = pSettings->projectName,
                    .project = {},
                    .organization = profile.organization,
                    .version = pSettings->version,

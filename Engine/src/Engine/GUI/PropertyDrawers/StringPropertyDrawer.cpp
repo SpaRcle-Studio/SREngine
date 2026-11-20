@@ -76,7 +76,7 @@ namespace SR_CORE_GUI_NS {
         }
         else if (value.GetTypeInfo().kind == SR_UTILS_NS::Reflection::TypeKind::StringAtom) {
             if (auto&& pStringAtom = value.Cast<SR_UTILS_NS::StringAtom>()) {
-                m_buffer = pStringAtom->ToStringRef();
+                m_buffer = *pStringAtom;
                 SR_IMMEDIATE_GUI_NS::InputText("##Input", &m_buffer);
 
                 if (SR_IMMEDIATE_GUI_NS::IsItemDeactivatedAfterEdit()) {

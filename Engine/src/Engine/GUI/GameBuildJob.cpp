@@ -173,7 +173,7 @@ namespace SR_CORE_GUI_NS {
             return false;
         }
 
-        const SR_UTILS_NS::String projectFileName = SR_UTILS_NS::Path(m_pProjectSettings->projectName.ToString()).ConvertToFileName();
+        const SR_UTILS_NS::String projectFileName = SR_UTILS_NS::Path(m_pProjectSettings->projectName).ConvertToFileName();
         SR_UTILS_NS::String outputFileName;
         const bool desktop = platformName == "Windows" || platformName == "Linux";
         if (desktop && pProfile->desktopPackageMode == DesktopBuildPackageMode::PortableZip) {

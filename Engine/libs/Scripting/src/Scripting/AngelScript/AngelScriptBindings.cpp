@@ -755,7 +755,7 @@ namespace SR_SCRIPTING_NS {
         SR_UTILS_NS::Set<SR_UTILS_NS::String> registered;
         SR_UTILS_NS::Set<SR_UTILS_NS::String> propertyNames;
         type.pMeta->ForEachProperty([&](const SR_UTILS_NS::Reflection::Property& property, uint64_t) {
-            propertyNames.insert(property.GetName().ToString());
+            propertyNames.insert(property.GetName());
         });
         type.pMeta->ForEachProperty([&](const SR_UTILS_NS::Reflection::Property& property, uint64_t) {
             if (!success || property.GetPublicity() == SR_UTILS_NS::PropertyPublicity::Hidden ||
@@ -779,7 +779,7 @@ namespace SR_SCRIPTING_NS {
             pBinding->pPropertyType = &info;
             m_calls.emplace_back(pBinding);
 
-            const auto nativeName = property.GetName().ToString();
+            const auto nativeName = property.GetName().view();
             const auto cleanName = nativeName.size() > 2 && nativeName.substr(0, 2) == "m_" ? nativeName.substr(2) : nativeName;
             const auto scriptName = propertyNames.count(cleanName) == 0 ? cleanName : nativeName;
             pBinding->propertyReference = property.GetByteOffset() != INT32_MIN &&
@@ -810,7 +810,9 @@ namespace SR_SCRIPTING_NS {
                 return;
             }
 
-            pDeclaration += " " + method.GetName().ToString() + "(";
+            pDeclaration += " ";
+            pDeclaration += method.GetName();
+            pDeclaration += "(";
 
             for (uint32_t i = 0; i < method.GetParamsCount(); ++i) {
                 if (i) {

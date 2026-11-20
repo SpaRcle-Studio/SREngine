@@ -56,7 +56,7 @@ namespace SR_CORE_NS::Tests {
                         return SR_UTILS_NS::TestExecutionResult::Error;
                     }
                     for (auto&& [stage, code] : result.second) {
-                        auto outputFile = resultFolder.Concat(file.GetBaseNameAndExt()).ConcatExt(SR_UTILS_NS::EnumReflector::ToStringAtom(stage).ToString() + ".glsl");
+                        auto outputFile = resultFolder.Concat(file.GetBaseNameAndExt()).ConcatExt("{}.glsl"_format(SR_UTILS_NS::EnumReflector::ToStringAtom(stage)));
                         if (!SR_UTILS_NS::FileSystem::WriteToFile(outputFile, code)) {
                             SR_ERROR("SRSLTest::Run() : failed to write shader stage to file: {}", outputFile);
                             return SR_UTILS_NS::TestExecutionResult::Error;
@@ -219,7 +219,7 @@ namespace SR_CORE_NS::Tests {
                         return SR_UTILS_NS::TestExecutionResult::Error;
                     }
                     const auto outputFile = outputFolder.Concat(regression.file)
-                        .ConcatExt(SR_UTILS_NS::EnumReflector::ToStringAtom(stage).ToString() + ".glsl");
+                        .ConcatExt(SR_UTILS_NS::EnumReflector::ToStringAtom(stage).ToStringView() + ".glsl");
                     if (!SR_UTILS_NS::FileSystem::WriteToFile(outputFile, source)) {
                         return SR_UTILS_NS::TestExecutionResult::Error;
                     }

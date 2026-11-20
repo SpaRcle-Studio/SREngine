@@ -13,6 +13,8 @@
 #include <Utils/Common/Features.h>
 #include <Utils/Resources/ResourceManager.h>
 
+#include <Enum/AudioLibrary.hpp>
+
 namespace SR_AUDIO_NS {
     bool SoundManager::SetPaused(Handle pHandle, bool paused) {
         SR_TRACY_ZONE;
@@ -531,7 +533,7 @@ namespace SR_AUDIO_NS {
             }
         }
         else {
-            SR_INFO("SoundManager::GetSoundContext() : initializing \"" + SR_UTILS_NS::EnumReflector::ToStringAtom(library).ToStringRef() + "\" library...");
+            SR_INFO("SoundManager::GetSoundContext() : initializing \"{}\" library...", library);
         }
 
         auto&& pDevice = SoundDevice::Allocate(library, device);
