@@ -68,12 +68,14 @@ def generate_class_meta_methods(f, class_structures, class_obj, tabs):
 
     for method in class_obj.methods:
         is_method_has_return = method.return_type.get_full_type() != 'void'
-        is_method_has_params = len(method.parameters) > 0
 
         f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Reflection::Method()')
         f.write('\n' + '\t' * (tabs + 3) + f'.SetName("{method.name}")')
         if is_method_has_return:
             f.write('\n' + '\t' * (tabs + 3) + f'.SetReturnType(SpaRcle::Utils::Reflection::TypeOf<ReturnType_{method.name}>())')
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetReturnReference(std::is_reference_v<ReturnType_{method.name}>, std::is_const_v<std::remove_reference_t<ReturnType_{method.name}>>)')
+            if method.dontPack:
+                f.write('\n' + '\t' * (tabs + 3) + '.SetDontPack()')
 
         for i, param in enumerate(method.parameters):
             is_ref = 'true' if param.type.is_ref else 'false'
@@ -89,48 +91,18 @@ def generate_class_meta_methods(f, class_structures, class_obj, tabs):
         if method.evaluate:
             f.write('\n' + '\t' * (tabs + 3) + f'.SetEvaluate()')
 
-        if not is_method_has_params:
-            if is_method_has_return:
-                f.write('\n' + '\t' * (tabs + 3) + f'.SetWithReturnNoParams([](SpaRcle::Utils::SRClass& obj) {{ ')
-                if method.dontPack:
-                    f.write(f'return static_cast<{class_obj.name}&>(obj).{method.name}(); ')
-                else:
-                    f.write(f'return SpaRcle::Utils::Reflection::Value::Create(static_cast<{class_obj.name}&>(obj).{method.name}()); ')
-                f.write('})')
-            else:
-                f.write('\n' + '\t' * (tabs + 3) + f'.SetNoReturnNoParams([](SpaRcle::Utils::SRClass& obj) {{ ')
-                f.write(f'static_cast<{class_obj.name}&>(obj).{method.name}(); ')
-                f.write('})')
-        elif is_method_has_params:
-            if is_method_has_return:
-                f.write('\n' + '\t' * (tabs + 3) + f'.SetWithReturnWithParams([](SpaRcle::Utils::SRClass& obj, const SpaRcle::Utils::Reflection::Method::Params& params) {{\n')
-            else:
-                f.write('\n' + '\t' * (tabs + 3) + f'.SetNoReturnWithParams([](SpaRcle::Utils::SRClass& obj, const SpaRcle::Utils::Reflection::Method::Params& params) {{\n')
-
-            for i, param in enumerate(method.parameters):
-                #f.write('\t' * (tabs + 4) + f'auto&& arg{i} = params[{i}]->Cast<std::remove_reference_t<Traits_{method.name}::Arg<{i}>>>();\n')
-                if param.type.get_full_type() == 'const Reflection::Value &':
-                    f.write('\t' * (tabs + 4) + f'auto&& arg{i} = params[{i}];\n')
-                else:
-                    f.write('\t' * (tabs + 4) + f'auto&& arg{i} = params[{i}]->Cast<std::remove_reference_t<{param.type.get_full_type()}>>();\n')
-
-            if is_method_has_return:
-                if method.dontPack:
-                    f.write('\t' * (tabs + 4) + f'return static_cast<{class_obj.name}&>(obj).{method.name}(')
-                else:
-                    f.write('\t' * (tabs + 4) + f'return SpaRcle::Utils::Reflection::Value::Create(static_cast<{class_obj.name}&>(obj).{method.name}(')
-            else:
-                f.write('\t' * (tabs + 4) + f'static_cast<{class_obj.name}&>(obj).{method.name}(')
-
-            for i, param in enumerate(method.parameters):
-                if i > 0:
-                    f.write(', ')
-                f.write(f'*arg{i}')
-            if is_method_has_return and not method.dontPack:
-                f.write('));\n')
-            else:
-                f.write(');\n')
-            f.write('\t' * (tabs + 3) + f'}})')
+        f.write('\n' + '\t' * (tabs + 3) + '.SetThunk([](SpaRcle::Utils::SRClass& obj, SR_MAYBE_UNUSED void* const* pArgs, SR_MAYBE_UNUSED void* pReturn) {\n')
+        arguments = []
+        for i, param in enumerate(method.parameters):
+            param_type = param.type.get_full_type()
+            f.write('\t' * (tabs + 4) + f'auto&& pArg{i} = static_cast<std::remove_reference_t<{param_type}>*>(pArgs[{i}]);\n')
+            arguments.append(f'*pArg{i}')
+        call = f'static_cast<{class_obj.name}&>(obj).{method.name}({", ".join(arguments)})'
+        if is_method_has_return:
+            f.write('\t' * (tabs + 4) + f'SpaRcle::Utils::Reflection::Method::StoreResult<ReturnType_{method.name}>(pReturn, [&]() -> decltype(auto) {{ return {call}; }});\n')
+        else:
+            f.write('\t' * (tabs + 4) + f'{call};\n')
+        f.write('\t' * (tabs + 3) + '})')
 
         f.write(',\n')
 

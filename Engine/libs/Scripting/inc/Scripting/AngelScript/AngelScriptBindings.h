@@ -10,6 +10,7 @@
 #include <Scripting/stdInclude.h>
 
 #include <Utils/Reflection/Value.h>
+#include <Utils/Reflection/ValuePool.h>
 #include <Utils/Reflection/Method.h>
 #include <Utils/Reflection/Property.h>
 #include <Utils/Types/FlatHashMap.h>
@@ -56,7 +57,8 @@ namespace SR_SCRIPTING_NS {
         struct Call {
             struct Frame {
                 SR_UTILS_NS::Vector<SR_UTILS_NS::Reflection::Value> arguments;
-                SR_UTILS_NS::Vector<SR_UTILS_NS::Reflection::Value*> pointers;
+                SR_UTILS_NS::Vector<void*> pointers;
+                SR_UTILS_NS::Reflection::Value result;
             };
 
             Call() = default;
@@ -74,6 +76,7 @@ namespace SR_SCRIPTING_NS {
             uint32_t component = 0;
             SR_UTILS_NS::Vector<Frame*> frames;
             uint32_t activeFrames = 0;
+            SR_UTILS_NS::Reflection::ValuePool* pResultPool = nullptr;
 
             Frame* AddFrame();
             ~Call();

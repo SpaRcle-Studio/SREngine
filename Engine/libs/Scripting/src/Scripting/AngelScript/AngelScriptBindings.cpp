@@ -81,6 +81,9 @@ namespace SR_SCRIPTING_NS {
         for (auto&& pFrame : frames) {
             delete pFrame;
         }
+        if (pResultPool) {
+            pResultPool->ReleaseOwner();
+        }
     }
 
     AngelScriptBindings::Call::Frame* AngelScriptBindings::Call::AddFrame() {
@@ -92,7 +95,10 @@ namespace SR_SCRIPTING_NS {
             auto&& pTypeInfo = method.GetParam(i).pTypeInfo;
             pFrame->arguments.emplace_back(AngelScriptBindingHelpers::Primitive(*pTypeInfo) ?
                 SR_UTILS_NS::Reflection::Value::CreateDefault(pTypeInfo) : SR_UTILS_NS::Reflection::Value());
-            pFrame->pointers.emplace_back(&pFrame->arguments.back());
+            pFrame->pointers.emplace_back(nullptr);
+        }
+        if (method.HasReturn() && !method.ReturnsReference() && !pResultPool) {
+            pResultPool = new SR_UTILS_NS::Reflection::ValuePool(method.GetReturnType(), 256);
         }
 
         frames.emplace_back(pFrame);
@@ -759,7 +765,9 @@ namespace SR_SCRIPTING_NS {
             pBinding->pBindings = this;
             pBinding->pOwner = &type;
             pBinding->method = method;
-            pBinding->AddFrame();
+            for (uint32_t i = 0; i < 32; ++i) {
+                pBinding->AddFrame();
+            }
             m_calls.emplace_back(pBinding);
             success &= Check(m_pEngine->RegisterObjectMethod(type.name.c_str(), pDeclaration.c_str(), asFUNCTION(AngelScriptBindingHelpers::Invoke), asCALL_GENERIC, pBinding), pDeclaration);
         });

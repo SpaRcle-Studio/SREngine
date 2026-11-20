@@ -316,9 +316,11 @@ namespace SR_SCRIPTING_NS {
                 return;
             }
 
-            auto&& pFrame = pBinding->activeFrames < pBinding->frames.size() ?
-                pBinding->frames[pBinding->activeFrames] :
-                pBinding->AddFrame();
+            if (pBinding->activeFrames >= pBinding->frames.size()) {
+                Exception("Prepared native call frames exhausted");
+                return;
+            }
+            auto&& pFrame = pBinding->frames[pBinding->activeFrames];
 
             ++pBinding->activeFrames;
 
@@ -358,12 +360,24 @@ namespace SR_SCRIPTING_NS {
                     auto payload = pBinding->pBindings->CopyValue(*arguments[i].Cast<SR_UTILS_NS::Reflection::Value>());
                     arguments[i] = std::move(payload);
                 }
+                pointers[i] = pBinding->method.GetArgumentData(arguments[i], i);
             }
 
-            std::span<SR_UTILS_NS::Reflection::Value*> params(pointers.data(), pointers.size());
-
             if (pBinding->method.HasReturn()) {
-                auto result = pointers.empty() ? pBinding->method.Invoke(*pOwner) : pBinding->method.Invoke(*pOwner, params);
+                if (!pBinding->method.ReturnsReference()) {
+                    pFrame->result = pBinding->pResultPool->Acquire();
+                    if (!pFrame->result) {
+                        Exception("Prepared native result storage exhausted");
+                        return;
+                    }
+                }
+                pBinding->method.InvokeInto(*pOwner, pointers.data(), pFrame->result);
+                auto result = Primitive(*pBinding->method.GetReturnType()) ? pFrame->result.Copy() : std::move(pFrame->result);
+                if (pBinding->method.IsDontPack() && result && result.GetTypeInfo().kind == SR_UTILS_NS::Reflection::TypeKind::Value) {
+                    auto payload = result.IsRef() ?
+                        *result.Cast<SR_UTILS_NS::Reflection::Value>() : std::move(*result.Cast<SR_UTILS_NS::Reflection::Value>());
+                    result = std::move(payload);
+                }
                 if (pBinding->method.GetReturnType()->kind == SR_UTILS_NS::Reflection::TypeKind::Value) {
                     if (result.GetType() == SR_UTILS_NS::Reflection::ReflectedCategoryType::Value) {
                         result = pBinding->pBindings->CopyValue(result);
@@ -375,12 +389,7 @@ namespace SR_SCRIPTING_NS {
                 pBinding->pBindings->Return(pCall, std::move(result), pObject);
             }
             else {
-                if (pointers.empty()) {
-                    pBinding->method.InvokeVoid(*pOwner);
-                }
-                else {
-                    pBinding->method.InvokeVoid(*pOwner, params);
-                }
+                pBinding->method.InvokeRaw(*pOwner, pointers.data(), nullptr);
             }
 
             for (uint32_t i = 0; i < arguments.size(); ++i) {
