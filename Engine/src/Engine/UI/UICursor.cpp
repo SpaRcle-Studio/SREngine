@@ -32,7 +32,8 @@ namespace SR_CORE_UI_NS {
             && pCanvas->GetViewportRect().Contains(pWindow->ScreenToClient(input.GetMousePos().CastToInt()).CastToFloat());
         SR_MATH_NS::FVector2 uiMousePos = pCanvas->ScreenToCanvasSpace(input.GetMousePos());
         if (auto&& pApplication = ApplicationManager::Instance().GetApplication()) {
-            if (auto&& pEngine = pApplication->GetEngine(); pEngine && pEngine->GetEditor()) {
+            if (auto&& pEngine = pApplication->GetEngine(); pEngine && !pEngine->IsGameMode()
+                && pEngine->GetEditor() && pEngine->GetEditor()->Enabled()) {
                 auto&& pViewer = pEngine->GetEditor()->GetWidget<SR_CORE_GUI_NS::SceneViewer>();
                 inside = input.IsAppFocused() && !input.IsCursorLocked() && pViewer && pViewer->IsOpen()
                     && pViewer->IsHovered() && !pViewer->GetTextureSize().HasZero()
