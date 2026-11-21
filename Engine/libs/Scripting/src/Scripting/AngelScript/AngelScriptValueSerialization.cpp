@@ -7,11 +7,14 @@
 #include <Scripting/AngelScript/AngelScriptValueSerialization.h>
 #include <Scripting/AngelScript/AngelScriptObjectGraph.h>
 #include <Scripting/AngelScript/AngelScriptBindings.h>
+#include <Scripting/AngelScript/AngelScriptTypeReflection.h>
+#include <Scripting/AngelScript/AngelScriptBindingHelpers.h>
 
 #include <Utils/Reflection/TypeInfoSerialization.h>
 #include <Utils/Common/EnumReflector.h>
 #include <Utils/FileSystem/Path.h>
 #include <Utils/Serialization/Serializable.h>
+#include <Utils/Serialization/JsonSerialization.h>
 #include <Utils/TypeTraits/Factory.h>
 #include <Utils/TypeTraits/SRClassMeta.h>
 #include <Utils/Types/Optional.h>
@@ -19,6 +22,57 @@
 
 namespace SR_SCRIPTING_NS {
     namespace AngelScriptSerializationHelpers {
+        SR_UTILS_NS::Reflection::Value Argument(asIScriptGeneric* pCall, uint32_t index, void*& pScriptObject) {
+            auto&& pBindings = static_cast<AngelScriptBindings*>(pCall->GetAuxiliary());
+            asDWORD flags = 0;
+            const auto typeId = pCall->GetArgTypeId(index, &flags);
+            auto&& pType = AngelScriptTypeReflection::Resolve(pBindings, pCall->GetEngine(), typeId);
+            void* pAddress = pCall->GetArgAddress(index);
+            if (!pType || !pAddress) {
+                return {};
+            }
+            const bool isConst = (flags & asTM_CONST) != 0;
+            if (pType->kind == SR_UTILS_NS::Reflection::TypeKind::ScriptObject) {
+                pScriptObject = pAddress;
+                return SR_UTILS_NS::Reflection::ValueRef(pType, &pScriptObject, isConst).ToValue();
+            }
+            if (auto&& pNativeType = pBindings->FindType(typeId); pNativeType && !pNativeType->IsValue() &&
+                !AngelScriptBindingHelpers::Primitive(*pType)) {
+                auto&& pObject = (typeId & asTYPEID_OBJHANDLE) ? *static_cast<AngelScriptNativeObject**>(pAddress) :
+                    static_cast<AngelScriptNativeObject*>(pAddress);
+                return pObject && pObject->IsAlive() ? SR_UTILS_NS::Reflection::ValueRef(&pObject->value.GetTypeInfo(),
+                    pObject->value.Data(), isConst || pObject->value.IsConst()).ToValue() : SR_UTILS_NS::Reflection::Value();
+            }
+            return SR_UTILS_NS::Reflection::ValueRef(pType, pAddress, isConst).ToValue();
+        }
+
+        void Serialize(asIScriptGeneric* pCall) {
+            SR_TRACY_ZONE;
+            void* pScriptObject = nullptr;
+            auto value = Argument(pCall, 0, pScriptObject);
+            SR_UTILS_NS::String result;
+            if (value && CanSerializeAngelScriptValue(value.GetTypeInfo())) {
+                SR_UTILS_NS::JsonSerializer serializer;
+                serializer.SetPrettyPrint(false);
+                SaveAngelScriptValue(value, serializer);
+                result = serializer.ToStringBase();
+            }
+            else {
+                AngelScriptBindingHelpers::Exception("SerializeScriptValue: unsupported value type");
+            }
+            new(pCall->GetAddressOfReturnLocation()) SR_UTILS_NS::String(std::move(result));
+        }
+
+        void Deserialize(asIScriptGeneric* pCall) {
+            SR_TRACY_ZONE;
+            void* pScriptObject = nullptr;
+            auto value = Argument(pCall, 1, pScriptObject);
+            auto&& pText = static_cast<SR_UTILS_NS::String*>(pCall->GetArgObject(0));
+            SR_UTILS_NS::JsonDeserializer deserializer;
+            pCall->SetReturnByte(value && !value.IsConst() && pText && CanSerializeAngelScriptValue(value.GetTypeInfo()) &&
+                deserializer.LoadFromStringView(*pText) && LoadAngelScriptValue(value, deserializer));
+        }
+
         const auto valueId = SR_UTILS_NS::SerializationId::Create("value");
         const auto itemsId = SR_UTILS_NS::SerializationId::Create("items");
         const auto itemId = SR_UTILS_NS::SerializationId::Create("item");
@@ -52,6 +106,9 @@ namespace SR_SCRIPTING_NS {
     }
 
     bool CanSerializeAngelScriptValue(const SR_UTILS_NS::Reflection::TypeInfo& info) {
+        if (&info == SR_UTILS_NS::Reflection::TypeOf<SR_UTILS_NS::Reflection::Value>()) {
+            return true;
+        }
         if (info.IsArithmetic()) {
             return true;
         }
@@ -101,6 +158,15 @@ namespace SR_SCRIPTING_NS {
         AngelScriptObjectGraph graph;
 
         auto&& info = value.GetTypeInfo();
+        if (&info == SR_UTILS_NS::Reflection::TypeOf<SR_UTILS_NS::Reflection::Value>()) {
+            auto&& payload = *value.Cast<SR_UTILS_NS::Reflection::Value>();
+            serializer.WriteString(payload ? payload.GetTypeInfo().name.ToStringView() : SR_UTILS_NS::StringView(),
+                SR_UTILS_NS::SerializationId::Create("payloadType"));
+            if (payload && CanSerializeAngelScriptValue(payload.GetTypeInfo())) {
+                SaveAngelScriptValue(payload, serializer);
+            }
+            return;
+        }
         if (info.kind == SR_UTILS_NS::Reflection::TypeKind::NativeHandle) {
             auto&& pObject = *static_cast<AngelScriptNativeObject* const*>(value.Data());
             if (pObject && pObject->IsAlive()) {
@@ -232,6 +298,21 @@ namespace SR_SCRIPTING_NS {
         AngelScriptObjectGraph graph;
 
         auto&& info = value.GetTypeInfo();
+        if (&info == SR_UTILS_NS::Reflection::TypeOf<SR_UTILS_NS::Reflection::Value>()) {
+            SR_UTILS_NS::String name;
+            deserializer.ReadString(name, SR_UTILS_NS::SerializationId::Create("payloadType"));
+            auto&& payload = *value.Cast<SR_UTILS_NS::Reflection::Value>();
+            payload = {};
+            if (name.empty()) {
+                return true;
+            }
+            auto&& pType = SR_UTILS_NS::Reflection::FindTypeInfoByName(name);
+            if (!pType || pType == &info || !CanSerializeAngelScriptValue(*pType)) {
+                return false;
+            }
+            payload = SR_UTILS_NS::Reflection::Value::CreateDefault(pType);
+            return payload && LoadAngelScriptValue(payload, deserializer);
+        }
         if (info.kind == SR_UTILS_NS::Reflection::TypeKind::NativeHandle) {
             auto&& pObject = *static_cast<AngelScriptNativeObject**>(value.Data());
             return pObject && pObject->IsAlive() && LoadAngelScriptValue(pObject->value, deserializer);
@@ -407,6 +488,13 @@ namespace SR_SCRIPTING_NS {
         }
 
         return true;
+    }
+
+    bool RegisterAngelScriptValueSerialization(AngelScriptBindings* pBindings, asIScriptEngine* pEngine) {
+        return pEngine->RegisterGlobalFunction("String SerializeScriptValue(const ?&in)",
+                asFUNCTION(AngelScriptSerializationHelpers::Serialize), asCALL_GENERIC, pBindings) >= 0 &&
+            pEngine->RegisterGlobalFunction("bool DeserializeScriptValue(const String&in, ?&inout)",
+                asFUNCTION(AngelScriptSerializationHelpers::Deserialize), asCALL_GENERIC, pBindings) >= 0;
     }
 }
 

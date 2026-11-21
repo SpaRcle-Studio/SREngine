@@ -79,6 +79,8 @@ namespace SR_SCRIPTING_NS {
         m_pEngine->SetEngineProperty(asEP_PROPERTY_ACCESSOR_MODE, 2);
         m_pEngine->SetEngineProperty(asEP_ALLOW_UNSAFE_REFERENCES, true);
         m_pEngine->SetEngineProperty(asEP_INIT_GLOBAL_VARS_AFTER_BUILD, false);
+        // Implicit copy constructors replace preallocated nested objects; use default construction and assignment for native value templates.
+        m_pEngine->SetEngineProperty(asEP_ALWAYS_IMPL_DEFAULT_COPY_CONSTRUCT, 2);
     #if defined(SR_ENGINE_ANGELSCRIPT_DEBUGGER)
         if (m_pDebugger->IsListening()) {
             m_pEngine->SetContextCallbacks(AngelScriptDebugger::RequestContext, AngelScriptDebugger::ReturnContext, m_pDebugger);

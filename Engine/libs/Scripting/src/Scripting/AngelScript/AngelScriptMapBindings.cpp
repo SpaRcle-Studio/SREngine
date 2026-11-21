@@ -60,7 +60,7 @@ namespace SR_SCRIPTING_NS::AngelScriptMapBindings {
             map.Clear();
             return;
         }
-        auto key = pBindings->CopyValue(pBindings->Read(pCall, 0, *map.GetKeyType()));
+        auto key = pBindings->Read(pCall, 0, *map.GetKeyType());
         if (!key) {
             AngelScriptBindingHelpers::Exception("Invalid associative container key");
             return;

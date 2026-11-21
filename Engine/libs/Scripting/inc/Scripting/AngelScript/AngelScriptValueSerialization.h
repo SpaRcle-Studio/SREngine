@@ -13,7 +13,11 @@
 #include <Utils/Serialization/Serializer.h>
 #include <Utils/Serialization/Deserializer.h>
 
+class asIScriptEngine;
+
 namespace SR_SCRIPTING_NS {
+    class AngelScriptBindings;
+    bool RegisterAngelScriptValueSerialization(AngelScriptBindings* pBindings, asIScriptEngine* pEngine);
     bool CanSerializeAngelScriptValue(const SR_UTILS_NS::Reflection::TypeInfo& type);
     void SaveAngelScriptValue(const SR_UTILS_NS::Reflection::Value& value, SR_UTILS_NS::ISerializer& serializer);
     bool LoadAngelScriptValue(SR_UTILS_NS::Reflection::Value& value, SR_UTILS_NS::IDeserializer& deserializer);

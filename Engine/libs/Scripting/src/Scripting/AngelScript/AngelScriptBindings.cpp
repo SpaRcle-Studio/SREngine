@@ -10,6 +10,7 @@
 #include <Scripting/AngelScript/AngelScriptMapBindings.h>
 #include <Scripting/AngelScript/AngelScriptTypeReflection.h>
 #include <Scripting/AngelScript/AngelScriptNativeStorage.h>
+#include <Scripting/AngelScript/AngelScriptValueSerialization.h>
 #include <Scripting/Base/ScriptSystem.h>
 
 #include <Utils/TypeTraits/Factory.h>
@@ -472,7 +473,8 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
-        if (!Check(m_pEngine->RegisterInterface("IBehaviour"), "IBehaviour")) {
+        if (!RegisterAngelScriptValueSerialization(this, m_pEngine) ||
+            !Check(m_pEngine->RegisterInterface("IBehaviour"), "IBehaviour")) {
             return false;
         }
 
