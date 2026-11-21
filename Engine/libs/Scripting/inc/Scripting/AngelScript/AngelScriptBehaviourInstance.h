@@ -56,6 +56,9 @@ namespace SR_SCRIPTING_NS {
 
     public:
         bool IsValid() const override { return m_pObject != nullptr; }
+        SR_NODISCARD asIScriptObject* GetScriptObject() const {
+            return m_pObject;
+        }
         const SR_UTILS_NS::SRClassMeta* GetMeta() const noexcept override { return &m_meta; }
         SR_UTILS_NS::StringAtom GetBehaviourName() const { return m_name; }
 

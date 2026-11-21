@@ -141,6 +141,7 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::Vector<PropertyDrawerBase::Ptr> m_drawers;
         SR_UTILS_NS::Vector<const SR_UTILS_NS::Reflection::TypeInfo*> m_drawerTypes;
         bool m_isOpened = false;
+        bool m_openedByDefault = false;
     };
 
     class QuaternionPropertyDrawer : public PropertyDrawerBase {

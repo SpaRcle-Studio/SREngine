@@ -113,6 +113,17 @@ namespace SR_SCRIPTING_NS {
             SetSceneObject(m_sceneObject);
             RefreshProperties();
 
+            if (reloadData) {
+                for (auto&& entry : m_reloadTypes) {
+                    if (reloadData->BeginObject(SR_UTILS_NS::SerializationId::CreateFromCStr(entry.first.c_str()))) {
+                        if (!PreloadAngelScriptValue(m_pRuntime->GetBindings(), m_pObject->GetObjectType()->GetModule(), entry.second, *reloadData)) {
+                            SR_ERROR("AngelScriptBehaviourInstance::SetInstance() : failed to preload script property {}.", entry.first);
+                        }
+                        reloadData->EndObject();
+                    }
+                }
+            }
+
             for (uint32_t i = 0; i < m_pObject->GetPropertyCount(); ++i) {
                 if (IsConstField(m_pObject, i)) {
                     continue;
@@ -339,7 +350,10 @@ namespace SR_SCRIPTING_NS {
             }
 
             property.SetTypeInfo(&value.GetTypeInfo());
-            property.SetDefaultValue(value.Copy());
+            // Script defaults can construct new objects and retain a graph outside the VM's GC.
+            if (!AngelScriptBindingHelpers::ContainsScriptType(value.GetTypeInfo())) {
+                property.SetDefaultValue(value.Copy());
+            }
             property.SetDynamicGetter([i](SR_UTILS_NS::SRClass* pOwner) {
                 auto&& pInstance = static_cast<AngelScriptBehaviourInstance*>(pOwner);
 
@@ -363,6 +377,8 @@ namespace SR_SCRIPTING_NS {
 
         AngelScriptObjectGraph graph(m_pObject);
 
+        SR_UTILS_NS::Vector<uint32_t> scriptProperties;
+
         for (uint32_t i = 0; i < m_pObject->GetPropertyCount(); ++i) {
             if (IsSceneField(m_pObject->GetPropertyName(i)) || IsConstField(m_pObject, i)) {
                 continue;
@@ -382,6 +398,19 @@ namespace SR_SCRIPTING_NS {
             serializer.WriteString(m_pRuntime->GetEngine()->GetTypeDeclaration(m_pObject->GetPropertyTypeId(i), true), SR_UTILS_NS::SerializationId::Create("scriptType"));
             SaveAngelScriptValue(value, serializer);
             serializer.EndObject();
+            if (AngelScriptBindingHelpers::ContainsScriptType(value.GetTypeInfo())) {
+                scriptProperties.emplace_back(i);
+            }
+        }
+        if (!scriptProperties.empty()) {
+            serializer.BeginArray(scriptProperties.size(), SR_UTILS_NS::SerializationId::Create("__sr_script_properties"));
+            for (auto&& index : scriptProperties) {
+                serializer.BeginItem(SR_UTILS_NS::SerializationId::Create("property"));
+                serializer.WriteString(m_pObject->GetPropertyName(index), SR_UTILS_NS::SerializationId::Create("name"));
+                serializer.WriteString(m_pRuntime->GetEngine()->GetTypeDeclaration(m_pObject->GetPropertyTypeId(index), true), SR_UTILS_NS::SerializationId::Create("scriptType"));
+                serializer.EndItem();
+            }
+            serializer.EndArray();
         }
     }
 
@@ -393,6 +422,31 @@ namespace SR_SCRIPTING_NS {
         AngelScriptObjectGraph graph(m_pObject);
 
         bool result = true;
+
+        if (deserializer.HasKey(SR_UTILS_NS::SerializationId::Create("__sr_script_properties"))) {
+            SR_UTILS_NS::Vector<SR_UTILS_NS::Pair<SR_UTILS_NS::String, SR_UTILS_NS::String>> properties;
+            const auto count = deserializer.BeginArray(SR_UTILS_NS::SerializationId::Create("__sr_script_properties"));
+            for (uint32_t i = 0; i < count; ++i) {
+                if (!deserializer.BeginItem(SR_UTILS_NS::SerializationId::Create("property"), i)) {
+                    result = false;
+                    break;
+                }
+                SR_UTILS_NS::String name, declaration;
+                deserializer.ReadString(name, SR_UTILS_NS::SerializationId::Create("name"));
+                deserializer.ReadString(declaration, SR_UTILS_NS::SerializationId::Create("scriptType"));
+                properties.emplace_back(std::move(name), std::move(declaration));
+                deserializer.EndItem();
+            }
+            if (count > 0) {
+                deserializer.EndArray();
+            }
+            for (auto&& entry : properties) {
+                if (deserializer.BeginObject(SR_UTILS_NS::SerializationId::CreateFromCStr(entry.first.c_str()))) {
+                    result &= PreloadAngelScriptValue(m_pRuntime->GetBindings(), m_pObject->GetObjectType()->GetModule(), entry.second, deserializer);
+                    deserializer.EndObject();
+                }
+            }
+        }
 
         for (uint32_t i = 0; i < m_pObject->GetPropertyCount(); ++i) {
             if (IsSceneField(m_pObject->GetPropertyName(i)) || IsConstField(m_pObject, i)) {
@@ -411,7 +465,7 @@ namespace SR_SCRIPTING_NS {
             deserializer.ReadString(scriptType, SR_UTILS_NS::SerializationId::Create("scriptType"));
 
             /// сигнатура могла быть сохранена в старом формате, поэтому сравниваются разобранные типы, а не строки
-            const bool isSameType = value && (AngelScriptBindingHelpers::ContainsScriptType(value.GetTypeInfo()) ||
+            const bool isSameType = value && (AngelScriptBindingHelpers::ContainsRuntimeStorage(value.GetTypeInfo()) ||
                 SR_UTILS_NS::Reflection::LoadTypeInfo(signature) == &value.GetTypeInfo());
 
             if (isSameType && scriptType == m_pRuntime->GetEngine()->GetTypeDeclaration(m_pObject->GetPropertyTypeId(i), true)) {

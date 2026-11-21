@@ -18,13 +18,15 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        SR_UTILS_NS::EnumReflector* pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().TryGetReflector(value.GetEnumType());
-        if (!pReflector) {
+        auto&& info = value.GetTypeInfo();
+        const bool dynamicEnum = info.vtable.pEnumCount && info.vtable.pEnumValue;
+        SR_UTILS_NS::EnumReflector* pReflector = dynamicEnum ? nullptr : SR_UTILS_NS::EnumReflectorManager::Instance().TryGetReflector(value.GetEnumType());
+        if (!dynamicEnum && !pReflector) {
             SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "EnumReflector not found!");
             return feedback;
         }
 
-        if (pReflector->GetEnumVariantInternal() == SR_UTILS_NS::EnumVariant::Undefined) {
+        if (pReflector && pReflector->GetEnumVariantInternal() == SR_UTILS_NS::EnumVariant::Undefined) {
             SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "EnumReflector variant is not defined!");
             return feedback;
         }
@@ -51,12 +53,17 @@ namespace SR_CORE_GUI_NS {
         }
 
         SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth);
-        if (pReflector->GetEnumVariantInternal() == SR_UTILS_NS::EnumVariant::Flags) {
+        SR_IMMEDIATE_GUI_NS::BeginDisabled(value.IsConst());
+        if (dynamicEnum) {
+            DrawDynamicSelectable(context, feedback, value);
+        }
+        else if (pReflector->GetEnumVariantInternal() == SR_UTILS_NS::EnumVariant::Flags) {
             DrawFlags(context, feedback, pReflector, value.Data());
         }
         else {
             DrawSelectable(context, feedback, pReflector, value.Data());
         }
+        SR_IMMEDIATE_GUI_NS::EndDisabled();
         SR_IMMEDIATE_GUI_NS::PopItemWidth();
 
         SetValue(context, feedback, value);
@@ -67,6 +74,73 @@ namespace SR_CORE_GUI_NS {
         SR_IMMEDIATE_GUI_NS::PopID();
 
         return feedback;
+    }
+
+    void EnumPropertyDrawer::DrawDynamicSelectable(const PropertyDrawerContext& context, PropertyDrawerFeedback& feedback,
+                                                  SR_UTILS_NS::Reflection::Value& value) {
+        auto&& info = value.GetTypeInfo();
+        const auto count = info.vtable.pEnumCount(info);
+        const auto scalarSize = info.GetScalarSize();
+        if (scalarSize == 0 || scalarSize > sizeof(uint64_t)) {
+            return;
+        }
+        uint64_t rawValue = 0;
+        memcpy(&rawValue, value.Data(), scalarSize);
+        const auto bits = scalarSize * 8;
+        if (info.IsSigned() && bits < 64 && (rawValue & (uint64_t(1) << (bits - 1))) != 0) {
+            rawValue |= UINT64_MAX << bits;
+        }
+        int64_t currentValue = 0;
+        memcpy(&currentValue, &rawValue, sizeof(currentValue));
+        SR_UTILS_NS::StringAtom selectedName;
+        for (uint32_t i = 0; i < count; ++i) {
+            int64_t number = 0;
+            const auto name = info.vtable.pEnumValue(info, i, number);
+            if (number == currentValue) {
+                selectedName = name;
+                break;
+            }
+        }
+        if (SR_IMMEDIATE_GUI_NS::BeginCombo("##Combo", selectedName.empty() ? "Unknown value" : selectedName.c_str(), SR_IMMEDIATE_GUI_NS::ComboFlags::NoArrowButton)) {
+            if (!m_comboOpened) {
+                SR_IMMEDIATE_GUI_NS::SetKeyboardFocusHere();
+                m_comboOpened = true;
+            }
+            SR_IMMEDIATE_GUI_NS::InputText("##Search", &m_searchBuffer);
+            for (uint32_t i = 0; i < count; ++i) {
+                int64_t number = 0;
+                const auto name = info.vtable.pEnumValue(info, i, number);
+                if (context.isEnumValueAvailableCheckFn && !context.isEnumValueAvailableCheckFn(name)) {
+                    continue;
+                }
+                auto&& pFilter = context.GetEditorParams().GetEnumFilter();
+                if (context.pOwner && pFilter && !(*pFilter)(context.pOwner, name)) {
+                    continue;
+                }
+                if (!m_searchBuffer.empty() && !SR_UTILS_NS::StringUtils::CheckSearchMatch(m_searchBuffer, name)) {
+                    continue;
+                }
+                const bool selected = number == currentValue;
+                if (SR_IMMEDIATE_GUI_NS::Selectable(name.c_str(), selected)) {
+                    if (!selected) {
+                        if (context.onBeforeChangeCallback) {
+                            context.onBeforeChangeCallback(false);
+                        }
+                        memcpy(value.Data(), &number, scalarSize);
+                        feedback.isChanged = true;
+                    }
+                    SR_IMMEDIATE_GUI_NS::CloseCurrentPopup();
+                }
+                if (selected) {
+                    SR_IMMEDIATE_GUI_NS::SetItemDefaultFocus();
+                }
+            }
+            SR_IMMEDIATE_GUI_NS::EndCombo();
+        }
+        else {
+            m_comboOpened = false;
+            m_searchBuffer.clear();
+        }
     }
 
     void EnumPropertyDrawer::DrawFlags(const PropertyDrawerContext& context, PropertyDrawerFeedback& feedback, SR_UTILS_NS::EnumReflector* pReflector, void* pMappedRaw) {
@@ -114,8 +188,8 @@ namespace SR_CORE_GUI_NS {
             return true;
         };
 
-        std::optional<uint64_t> selectedIndex = pReflector->GetIndexInternal(enumValue);
-        const char* pPrevValue = selectedIndex ? names[selectedIndex.value()].c_str() : "";
+        int64_t selectedIndex = pReflector->GetIndexInternal(enumValue).value_or(-1);
+        const char* pPrevValue = selectedIndex >= 0 ? names[selectedIndex].c_str() : "";
         if (SR_IMMEDIATE_GUI_NS::BeginCombo("##Combo", pPrevValue, SR_IMMEDIATE_GUI_NS::ComboFlags::NoArrowButton)) {
             if (!m_comboOpened) {
                 SR_IMMEDIATE_GUI_NS::SetKeyboardFocusHere();
@@ -139,7 +213,7 @@ namespace SR_CORE_GUI_NS {
                 if (SR_IMMEDIATE_GUI_NS::Selectable(names[i].c_str(), isSelected))
                 {
                     selectedIndex = i;
-                    m_searchBuffer = names[i];
+                    m_searchBuffer = names[i].ToStringView();
                     SR_IMMEDIATE_GUI_NS::CloseCurrentPopup();
                 }
 
@@ -153,9 +227,9 @@ namespace SR_CORE_GUI_NS {
             m_searchBuffer.clear();
         }
 
-        if (selectedIndex) { /// check selected availability
-            if (!isEnumNameAvailable(names[*selectedIndex])) {
-                selectedIndex.reset();
+        if (selectedIndex >= 0) { /// check selected availability
+            if (!isEnumNameAvailable(names[selectedIndex])) {
+                selectedIndex = -1;
                 for (uint64_t i = 0; i < names.size(); ++i) {
                     if (isEnumNameAvailable(names[i])) {
                         selectedIndex = i;
@@ -165,8 +239,8 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-        if (selectedIndex) {
-            int64_t newEnumValue = pReflector->AtInternal(selectedIndex.value()).value();
+        if (selectedIndex >= 0) {
+            int64_t newEnumValue = pReflector->AtInternal(selectedIndex).value();
             if (newEnumValue != enumValue) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(false);

@@ -8,6 +8,7 @@
 
 #include <Scripting/AngelScript/AngelScriptBindings.h>
 #include <Scripting/AngelScript/AngelScriptBehaviourInstance.h>
+#include <Scripting/AngelScript/AngelScriptObjectGraph.h>
 
 #if defined(SR_ENGINE_ANGELSCRIPT_DEBUGGER)
 	#include <Scripting/AngelScript/AngelScriptDebugger.h>
@@ -171,6 +172,10 @@ namespace SR_SCRIPTING_NS {
             openNamespace(pType->GetNamespace());
             api += "enum ";
             api += pType->GetName();
+            if (pType->GetUnderlyingTypeId() != asTYPEID_INT32) {
+                api += " : ";
+                api += m_pEngine->GetTypeDeclaration(pType->GetUnderlyingTypeId());
+            }
             api += " {\n";
             for (uint32_t j = 0; j < pType->GetEnumValueCount(); ++j) {
                 asINT64 value = 0;
@@ -513,9 +518,17 @@ namespace SR_SCRIPTING_NS {
         m_behaviourNames = std::move(names);
         m_namesDirty = false;
 
+        {
+            AngelScriptObjectGraph reloadGraph;
+            uint64_t rootId = 1;
+            for (auto&& replacement : replacements) {
+                reloadGraph.RegisterRoot(replacement.first->GetScriptObject(), replacement.second, rootId++);
+            }
+            for (auto&& replacement : replacements) {
+                replacement.first->SetInstance(replacement.second);
+            }
+        }
         for (auto&& replacement : replacements) {
-            replacement.first->SetInstance(replacement.second);
-
             if (replacement.second && replacement.first->GetLoadedCallback()) {
                 replacement.first->GetLoadedCallback()();
             }

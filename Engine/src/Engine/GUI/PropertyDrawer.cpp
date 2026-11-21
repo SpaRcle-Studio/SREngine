@@ -60,6 +60,9 @@ namespace SR_CORE_GUI_NS {
         if (typeInfo.fieldsCount > 0 || typeInfo.vtable.pFieldCount) {
             return "StructPropertyDrawer"_atom;
         }
+        if (typeInfo.vtable.pEnumCount && typeInfo.vtable.pEnumValue) {
+            return "EnumPropertyDrawer"_atom;
+        }
         if (typeInfo.IsArithmetic()) {
             return typeInfo.kind == SR_UTILS_NS::Reflection::TypeKind::Bool ? "BoolPropertyDrawer"_atom : "NumericPropertyDrawer"_atom;
         }
@@ -70,6 +73,7 @@ namespace SR_CORE_GUI_NS {
         switch (typeInfo.kind) {
             case SR_UTILS_NS::Reflection::TypeKind::Value: return "ValuePropertyDrawer"_atom;
             case SR_UTILS_NS::Reflection::TypeKind::Object: return "ObjectPropertyDrawer"_atom;
+            case SR_UTILS_NS::Reflection::TypeKind::NativeHandle: return "ObjectPropertyDrawer"_atom;
             case SR_UTILS_NS::Reflection::TypeKind::Enum: return "EnumPropertyDrawer"_atom;
             case SR_UTILS_NS::Reflection::TypeKind::Optional: return "OptionalPropertyDrawer"_atom;
             case SR_UTILS_NS::Reflection::TypeKind::SharedPtr: return "PointerPropertyDrawer"_atom;
@@ -118,7 +122,9 @@ namespace SR_CORE_GUI_NS {
     }
 
     static bool IsClipboardSupported(const SR_UTILS_NS::Reflection::TypeInfo& typeInfo) {
-        if (typeInfo.kind == SR_UTILS_NS::Reflection::TypeKind::SharedPtr) {
+        if (typeInfo.kind == SR_UTILS_NS::Reflection::TypeKind::SharedPtr || typeInfo.kind == SR_UTILS_NS::Reflection::TypeKind::NativeHandle ||
+            typeInfo.kind == SR_UTILS_NS::Reflection::TypeKind::ScriptHandle || typeInfo.kind == SR_UTILS_NS::Reflection::TypeKind::ScriptObject ||
+            typeInfo.kind == SR_UTILS_NS::Reflection::TypeKind::ScriptEnum) {
             return false;
         }
         for (auto&& pNext : typeInfo.pNext) {
@@ -713,34 +719,55 @@ namespace SR_CORE_GUI_NS {
         SR_IMMEDIATE_GUI_NS::PushID(displayName.c_str());
         SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
         if (info.vtable.pFieldCount) {
-            if (info.vtable.pIsNull && info.vtable.pIsNull(info, value.Data())) {
-                SR_IMMEDIATE_GUI_NS::Text("null");
-                if (!value.IsConst() && SR_IMMEDIATE_GUI_NS::Button("Create")) {
-                    if (context.onBeforeChangeCallback) {
-                        context.onBeforeChangeCallback(false);
-                    }
-                    info.vtable.pCreate(info, value.Data());
-                    SetReflectedValue(context, feedback, value);
-                }
-                SR_IMMEDIATE_GUI_NS::PopStyleVar();
-                SR_IMMEDIATE_GUI_NS::PopID();
-                SR_IMMEDIATE_GUI_NS::PopID();
-                return feedback;
+            if (!m_openedByDefault) {
+                m_isOpened |= context.openedByDefault;
+                m_openedByDefault = true;
             }
-            if (!context.noHeader) {
-                if (SR_IMMEDIATE_GUI_NS::Button(displayName.empty() ? info.name.c_str() : displayName.c_str())) {
-                    m_isOpened = !m_isOpened;
-                }
-            }
-            if (info.vtable.pIsNull && !value.IsConst()) {
-                SR_IMMEDIATE_GUI_NS::SameLine();
-                if (SR_IMMEDIATE_GUI_NS::Button("Reset")) {
-                    if (context.onBeforeChangeCallback) {
-                        context.onBeforeChangeCallback(false);
+            const bool nullable = info.vtable.pIsNull && info.vtable.pCreate;
+            const bool isNull = nullable && info.vtable.pIsNull(info, value.Data());
+            if (!context.noHeader || nullable) {
+                const float_t totalWidth = context.fieldTitleWidth + context.fieldWidth;
+                const float_t titleWidth = context.noHeader ? 0.f :
+                    SR_MIN(context.fieldTitleWidth > 0.f ? context.fieldTitleWidth : 30.f, totalWidth);
+                float_t valueWidth = SR_MAX(totalWidth - titleWidth, 1.f);
+                if (!context.noHeader) {
+                    auto&& pWindow = SR_IMMEDIATE_GUI_NS::GetCurrentWindow();
+                    auto&& pDrawList = SR_IMMEDIATE_GUI_NS::GetWindowDrawList(pWindow);
+                    const auto arrowPos = SR_IMMEDIATE_GUI_NS::GetWindowCursorPos(pWindow) + SR_MATH_NS::FVector2(1.f, 5.f);
+                    const auto direction = m_isOpened ? SR_IMMEDIATE_GUI_NS::Direction::Down : SR_IMMEDIATE_GUI_NS::Direction::Right;
+                    SR_IMMEDIATE_GUI_NS::RenderArrow(pDrawList, arrowPos, SR_IMMEDIATE_GUI_NS::GetColorU32(SR_IMMEDIATE_GUI_NS::StyleColor::Text), direction, 1.f);
+                    const auto enabledState = SR_IMMEDIATE_GUI_NS::BeginForceEnabled();
+                    if (SR_IMMEDIATE_GUI_NS::Button(context.fieldTitleWidth > 0.f && !displayName.empty() ? displayName.c_str() : "##Expand",
+                        { titleWidth, context.fieldHeight })) {
+                        m_isOpened = !m_isOpened;
                     }
-                    info.DestructAt(value.Data());
-                    info.ConstructAt(value.Data());
-                    SetReflectedValue(context, feedback, value);
+                    SR_IMMEDIATE_GUI_NS::EndForceEnabled(enabledState);
+                    DrawTitleContextMenu(context, feedback);
+                    SR_IMMEDIATE_GUI_NS::SameLine();
+                }
+                const float_t actionWidth = nullable ? SR_MIN(SR_IMMEDIATE_GUI_NS::CalcTextSize("Create").x + context.spaceWidth * 2.f, valueWidth * 0.4f) : 0.f;
+                const auto typeName = info.vtable.displayName.empty() ? info.name : info.vtable.displayName;
+                SR_IMMEDIATE_GUI_NS::BeginDisabled();
+                SR_IMMEDIATE_GUI_NS::Button(isNull ? "null" : typeName.c_str(), { SR_MAX(valueWidth - actionWidth, 1.f), context.fieldHeight });
+                SR_IMMEDIATE_GUI_NS::EndDisabled();
+                if (nullable) {
+                    SR_IMMEDIATE_GUI_NS::SameLine();
+                    SR_IMMEDIATE_GUI_NS::BeginDisabled(value.IsConst());
+                    if (SR_IMMEDIATE_GUI_NS::Button(isNull ? "Create" : "Reset", { actionWidth, context.fieldHeight })) {
+                        if (context.onBeforeChangeCallback) {
+                            context.onBeforeChangeCallback(false);
+                        }
+                        if (isNull) {
+                            info.vtable.pCreate(info, value.Data());
+                            m_isOpened = true;
+                        }
+                        else {
+                            info.DestructAt(value.Data());
+                            info.ConstructAt(value.Data());
+                        }
+                        SetReflectedValue(context, feedback, value);
+                    }
+                    SR_IMMEDIATE_GUI_NS::EndDisabled();
                 }
             }
             if ((!m_isOpened && !context.noHeader) || (info.vtable.pIsNull && info.vtable.pIsNull(info, value.Data()))) {
@@ -834,8 +861,13 @@ namespace SR_CORE_GUI_NS {
                 }
             }
             bool childDrag = false;
-            childContext.onBeforeChangeCallback = [&childDrag](bool drag) {
+            bool notified = false;
+            childContext.onBeforeChangeCallback = [&childDrag, &notified, &info, &context](bool drag) {
                 childDrag |= drag;
+                if (info.vtable.pFieldCount && !notified && context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(drag);
+                    notified = true;
+                }
             };
             SR_IMMEDIATE_GUI_NS::BeginGroup();
             const auto childFeedback = m_drawers[i]->Draw(childContext);
@@ -843,7 +875,11 @@ namespace SR_CORE_GUI_NS {
             if (childFeedback.isChanged) {
                 childDrag |= childFeedback.isDrag;
                 feedback.isDrag |= childDrag;
-                SetReflectedValue(context, feedback, copy, childDrag);
+                auto writeContext = context;
+                if (notified) {
+                    writeContext.onBeforeChangeCallback = {};
+                }
+                SetReflectedValue(writeContext, feedback, copy, childDrag);
             }
             SR_IMMEDIATE_GUI_NS::PopID();
         }

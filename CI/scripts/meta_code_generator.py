@@ -71,6 +71,8 @@ def generate_class_meta_methods(f, class_structures, class_obj, tabs):
 
         f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Reflection::Method()')
         f.write('\n' + '\t' * (tabs + 3) + f'.SetName("{method.name}")')
+        if method.is_const:
+            f.write('\n' + '\t' * (tabs + 3) + '.SetConstMethod(true)')
         if is_method_has_return:
             f.write('\n' + '\t' * (tabs + 3) + f'.SetReturnType(SpaRcle::Utils::Reflection::TypeOf<ReturnType_{method.name}>())')
             f.write('\n' + '\t' * (tabs + 3) + f'.SetReturnReference(std::is_reference_v<ReturnType_{method.name}>, std::is_const_v<std::remove_reference_t<ReturnType_{method.name}>>)')
@@ -97,7 +99,8 @@ def generate_class_meta_methods(f, class_structures, class_obj, tabs):
             param_type = param.type.get_full_type()
             f.write('\t' * (tabs + 4) + f'auto&& pArg{i} = static_cast<std::remove_reference_t<{param_type}>*>(pArgs[{i}]);\n')
             arguments.append(f'*pArg{i}')
-        call = f'static_cast<{class_obj.name}&>(obj).{method.name}({", ".join(arguments)})'
+        owner_const = 'const ' if method.is_const else ''
+        call = f'static_cast<{owner_const}{class_obj.name}&>(obj).{method.name}({", ".join(arguments)})'
         if is_method_has_return:
             f.write('\t' * (tabs + 4) + f'SpaRcle::Utils::Reflection::Method::StoreResult<ReturnType_{method.name}>(pReturn, [&]() -> decltype(auto) {{ return {call}; }});\n')
         else:
@@ -152,6 +155,13 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
         f.write('\n' + '\t' * (tabs + 3) + f'.SetSetter(&SRClassMetaTemplate::Set_{prop.name})')
         f.write('\n' + '\t' * (tabs + 3) + f'.SetGetter(&SRClassMetaTemplate::Get_{prop.name})')
         f.write('\n' + '\t' * (tabs + 3) + f'.SetRefGetter(&SRClassMetaTemplate::GetRef_{prop.name})')
+
+        if prop.getter:
+            getter_type = f'decltype(DefaultTypeInstance()->{prop.getter}())'
+            getter_const = 'true' if prop.read_only else f'std::is_const_v<std::remove_reference_t<{getter_type}>>'
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetReturnReference(std::is_lvalue_reference_v<{getter_type}>, {getter_const})')
+        elif not prop.virtual:
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetReturnReference(true, {"true" if prop.read_only else "false"})')
 
         if codegen_context.CODEGEN_ENTT_ENABLED and not prop.virtual and not prop.getter and not prop.setter and not prop.change_callback:
             f.write('\n' + '\t' * (tabs + 3) + f'.SetByteOffset(DefaultTypeInstance() ? static_cast<int32_t>(reinterpret_cast<const char*>(&DefaultTypeInstance()->{prop.name}) - reinterpret_cast<const char*>(static_cast<SpaRcle::Utils::SRClass*>(DefaultTypeInstance()))) : INT32_MIN)')

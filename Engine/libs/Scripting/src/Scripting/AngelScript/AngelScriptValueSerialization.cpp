@@ -6,6 +6,7 @@
 
 #include <Scripting/AngelScript/AngelScriptValueSerialization.h>
 #include <Scripting/AngelScript/AngelScriptObjectGraph.h>
+#include <Scripting/AngelScript/AngelScriptBindings.h>
 
 #include <Utils/Reflection/TypeInfoSerialization.h>
 #include <Utils/Common/EnumReflector.h>
@@ -65,6 +66,8 @@ namespace SR_SCRIPTING_NS {
         }
 
         switch (info.kind) {
+            case SR_UTILS_NS::Reflection::TypeKind::NativeHandle:
+                return !info.detailedSize && CanSerializeAngelScriptValue(*info.pNext[0]);
             case SR_UTILS_NS::Reflection::TypeKind::ScriptObject:
             case SR_UTILS_NS::Reflection::TypeKind::ScriptHandle:
                 return true;
@@ -98,6 +101,13 @@ namespace SR_SCRIPTING_NS {
         AngelScriptObjectGraph graph;
 
         auto&& info = value.GetTypeInfo();
+        if (info.kind == SR_UTILS_NS::Reflection::TypeKind::NativeHandle) {
+            auto&& pObject = *static_cast<AngelScriptNativeObject* const*>(value.Data());
+            if (pObject && pObject->IsAlive()) {
+                SaveAngelScriptValue(pObject->value, serializer);
+            }
+            return;
+        }
         if (info.kind == SR_UTILS_NS::Reflection::TypeKind::ScriptObject || info.kind == SR_UTILS_NS::Reflection::TypeKind::ScriptHandle) {
             SaveAngelScriptObject(value, serializer);
             return;
@@ -222,6 +232,10 @@ namespace SR_SCRIPTING_NS {
         AngelScriptObjectGraph graph;
 
         auto&& info = value.GetTypeInfo();
+        if (info.kind == SR_UTILS_NS::Reflection::TypeKind::NativeHandle) {
+            auto&& pObject = *static_cast<AngelScriptNativeObject**>(value.Data());
+            return pObject && pObject->IsAlive() && LoadAngelScriptValue(pObject->value, deserializer);
+        }
         if (info.kind == SR_UTILS_NS::Reflection::TypeKind::ScriptObject || info.kind == SR_UTILS_NS::Reflection::TypeKind::ScriptHandle) {
             return LoadAngelScriptObject(value, deserializer);
         }
@@ -252,9 +266,24 @@ namespace SR_SCRIPTING_NS {
             const auto count = deserializer.BeginArray(AngelScriptSerializationHelpers::itemsId);
             array.Clear();
             map.Clear();
+            if (count == 0) {
+                return true;
+            }
             array.Reserve(count);
             if (array) {
-                array.Resize(count);
+                if (info.pNext[0]->kind == SR_UTILS_NS::Reflection::TypeKind::ScriptObject) {
+                    void* pObject = nullptr;
+                    const SR_UTILS_NS::Reflection::ValueRef empty(info.pNext[0], &pObject, true);
+                    for (uint32_t i = 0; i < count; ++i) {
+                        if (!array.PushBack(empty)) {
+                            deserializer.EndArray();
+                            return false;
+                        }
+                    }
+                }
+                else {
+                    array.Resize(count);
+                }
             }
             bool success = true;
             auto&& pKeyType = info.GetArgument(0);
@@ -327,7 +356,9 @@ namespace SR_SCRIPTING_NS {
                 deserializer.EndItem();
             }
 
-            deserializer.EndArray();
+            if (count > 0) {
+                deserializer.EndArray();
+            }
 
             return success;
         }

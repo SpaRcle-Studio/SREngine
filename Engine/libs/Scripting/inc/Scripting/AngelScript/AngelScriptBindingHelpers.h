@@ -14,6 +14,7 @@ namespace SR_SCRIPTING_NS::AngelScriptBindingHelpers {
     void RejectTemplate(asIScriptGeneric* pCall);
     bool Primitive(const SR_UTILS_NS::Reflection::TypeInfo& info);
     bool ContainsScriptType(const SR_UTILS_NS::Reflection::TypeInfo& info);
+    bool ContainsRuntimeStorage(const SR_UTILS_NS::Reflection::TypeInfo& info);
     asQWORD MathScalarFlags(const SR_UTILS_NS::Reflection::TypeInfo& info);
     SR_UTILS_NS::String PrimitiveName(const SR_UTILS_NS::Reflection::TypeInfo& info);
     SR_UTILS_NS::String StorageIdentifier(const SR_UTILS_NS::Reflection::TypeInfo& info);

@@ -5,6 +5,7 @@
 #if defined(SR_ENGINE_ANGELSCRIPT_SUPPORT)
 #include <Scripting/AngelScript/AngelScriptObjectGraph.h>
 #include <Scripting/AngelScript/AngelScriptTypeReflection.h>
+#include <Scripting/AngelScript/AngelScriptBindingHelpers.h>
 
 #include <Utils/Profile/TracyContext.h>
 
@@ -12,14 +13,31 @@ namespace SR_SCRIPTING_NS {
     namespace AngelScriptGraphHelpers {
         struct State {
             uint32_t depth = 0;
+            uint32_t preloading = 0;
+            uint64_t nextId = 1;
             SR_HTYPES_NS::FlatHashMap<const void*, uint64_t> saved;
             SR_HTYPES_NS::FlatHashMap<uint64_t, asIScriptObject*> loaded;
+            SR_UTILS_NS::Vector<asIScriptObject*> retained;
         };
 
         State& Current() {
             static thread_local State state;
             return state;
         }
+
+        void Retain(asIScriptObject* pObject) {
+            pObject->AddRef();
+            Current().retained.emplace_back(pObject);
+        }
+
+        struct PreloadScope {
+            PreloadScope() {
+                ++Current().preloading;
+            }
+            ~PreloadScope() {
+                --Current().preloading;
+            }
+        };
     }
 
     AngelScriptObjectGraph::AngelScriptObjectGraph(asIScriptObject* pRoot) {
@@ -27,9 +45,11 @@ namespace SR_SCRIPTING_NS {
         if (state.depth++ == 0) {
             state.saved.clear();
             state.loaded.clear();
+            state.nextId = 1;
             if (pRoot) {
                 state.saved[pRoot] = 1;
                 state.loaded[1] = pRoot;
+                state.nextId = 2;
             }
         }
     }
@@ -39,6 +59,25 @@ namespace SR_SCRIPTING_NS {
         if (--state.depth == 0) {
             state.saved.clear();
             state.loaded.clear();
+            auto retained = std::move(state.retained);
+            for (auto&& pObject : retained) {
+                pObject->Release();
+            }
+        }
+    }
+
+    void AngelScriptObjectGraph::RegisterRoot(asIScriptObject* pSaved, asIScriptObject* pLoaded, uint64_t id) {
+        auto&& state = AngelScriptGraphHelpers::Current();
+        state.nextId = SR_MAX(state.nextId, id + 1);
+        if (pSaved) {
+            state.saved[pSaved] = id;
+        }
+        if (pLoaded) {
+            state.loaded[id] = pLoaded;
+            AngelScriptGraphHelpers::Retain(pLoaded);
+        }
+        else if (pSaved) {
+            state.loaded[id] = nullptr;
         }
     }
 
@@ -57,7 +96,7 @@ namespace SR_SCRIPTING_NS {
             serializer.WriteBool(false, definitionId);
             return;
         }
-        const auto id = static_cast<uint64_t>(state.saved.size() + 1);
+        const auto id = state.nextId++;
         state.saved[pObject] = id;
         serializer.WriteUInt(id, objectId);
         serializer.WriteBool(true, definitionId);
@@ -70,8 +109,10 @@ namespace SR_SCRIPTING_NS {
             serializer.BeginItem(SR_UTILS_NS::SerializationId::Create("property"));
             serializer.WriteString(pObject->GetPropertyName(i), SR_UTILS_NS::SerializationId::Create("name"));
             serializer.WriteString(pObject->GetEngine()->GetTypeDeclaration(pObject->GetPropertyTypeId(i), true), SR_UTILS_NS::SerializationId::Create("scriptType"));
-            auto field = AngelScriptTypeReflection::Property(pBindings, pObject, i, true).ToValue();
-            if (field && CanSerializeAngelScriptValue(field.GetTypeInfo())) {
+            bool isReadOnly = false;
+            pObject->GetObjectType()->GetProperty(i, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, &isReadOnly);
+            auto field = AngelScriptTypeReflection::Property(pBindings, pObject, i, true, true).ToValue();
+            if (field && !isReadOnly && CanSerializeAngelScriptValue(field.GetTypeInfo())) {
                 serializer.BeginObject(SR_UTILS_NS::SerializationId::Create("value"));
                 SaveAngelScriptValue(field, serializer);
                 serializer.EndObject();
@@ -108,7 +149,19 @@ namespace SR_SCRIPTING_NS {
             if (!pActual || (pActual != pExpected && !pActual->DerivesFrom(pExpected) && !pActual->Implements(pExpected))) {
                 return false;
             }
-            if (info.kind == SR_UTILS_NS::Reflection::TypeKind::ScriptObject && *pSlot) {
+            const auto existing = state.loaded.find(id);
+            if (existing != state.loaded.end()) {
+                pObject = existing->second;
+                if (!pObject || pObject->GetObjectType() != pActual) {
+                    return false;
+                }
+                if (*pSlot != pObject) {
+                    pObject->AddRef();
+                    info.DestructAt(pSlot);
+                    *pSlot = pObject;
+                }
+            }
+            else if (info.kind == SR_UTILS_NS::Reflection::TypeKind::ScriptObject && *pSlot) {
                 pObject = *pSlot;
             }
             else {
@@ -119,22 +172,30 @@ namespace SR_SCRIPTING_NS {
                 info.DestructAt(pSlot);
                 *pSlot = pObject;
             }
-            state.loaded[id] = pObject;
+            if (existing == state.loaded.end()) {
+                state.loaded[id] = pObject;
+                AngelScriptGraphHelpers::Retain(pObject);
+            }
         }
         else {
             const auto found = state.loaded.find(id);
             if (found == state.loaded.end()) {
-                return false;
+                return state.preloading != 0;
             }
             pObject = found->second;
+            if (!pObject) {
+                if (info.kind != SR_UTILS_NS::Reflection::TypeKind::ScriptHandle) {
+                    return false;
+                }
+                info.DestructAt(pSlot);
+                *pSlot = nullptr;
+                return true;
+            }
             auto&& pActual = pObject->GetObjectType();
             if (pActual != pExpected && !pActual->DerivesFrom(pExpected) && !pActual->Implements(pExpected)) {
                 return false;
             }
             if (pObject != *pSlot) {
-                if (info.kind != SR_UTILS_NS::Reflection::TypeKind::ScriptHandle) {
-                    return false;
-                }
                 pObject->AddRef();
                 info.DestructAt(pSlot);
                 *pSlot = pObject;
@@ -152,21 +213,52 @@ namespace SR_SCRIPTING_NS {
             SR_UTILS_NS::String name, declaration;
             deserializer.ReadString(name, SR_UTILS_NS::SerializationId::Create("name"));
             deserializer.ReadString(declaration, SR_UTILS_NS::SerializationId::Create("scriptType"));
+            bool restored = false;
             for (uint32_t fieldIndex = 0; fieldIndex < pObject->GetPropertyCount(); ++fieldIndex) {
                 if (name != pObject->GetPropertyName(fieldIndex) || declaration != pEngine->GetTypeDeclaration(pObject->GetPropertyTypeId(fieldIndex), true)) {
                     continue;
                 }
-                auto field = AngelScriptTypeReflection::Property(pBindings, pObject, fieldIndex, false).ToValue();
+                auto field = AngelScriptTypeReflection::Property(pBindings, pObject, fieldIndex, false, true).ToValue();
                 if (field && !field.IsConst() && CanSerializeAngelScriptValue(field.GetTypeInfo()) && deserializer.BeginObject(SR_UTILS_NS::SerializationId::Create("value"))) {
                     success &= LoadAngelScriptValue(field, deserializer);
                     deserializer.EndObject();
+                    restored = true;
                 }
                 break;
             }
+            if (!restored && deserializer.BeginObject(SR_UTILS_NS::SerializationId::Create("value"))) {
+                success &= PreloadAngelScriptValue(pBindings, pExpected->GetModule(), declaration, deserializer);
+                deserializer.EndObject();
+            }
             deserializer.EndItem();
         }
-        deserializer.EndArray();
+        if (count > 0) {
+            deserializer.EndArray();
+        }
         return success;
+    }
+
+    bool PreloadAngelScriptValue(AngelScriptBindings* pBindings, asIScriptModule* pModule,
+        const SR_UTILS_NS::String& declaration, SR_UTILS_NS::IDeserializer& deserializer)
+    {
+        const auto typeId = pModule->GetTypeIdByDecl(declaration.c_str());
+        if (typeId < 0) {
+            return true;
+        }
+        auto&& pInfo = AngelScriptTypeReflection::Resolve(pBindings, pModule->GetEngine(), typeId);
+        if (!pInfo || !AngelScriptBindingHelpers::ContainsScriptType(*pInfo)) {
+            return true;
+        }
+        AngelScriptGraphHelpers::PreloadScope scope;
+        if (pInfo->kind == SR_UTILS_NS::Reflection::TypeKind::ScriptObject) {
+            void* pObject = nullptr;
+            auto value = SR_UTILS_NS::Reflection::ValueRef(pInfo, &pObject, false).ToValue();
+            const bool success = LoadAngelScriptValue(value, deserializer);
+            pInfo->DestructAt(&pObject);
+            return success;
+        }
+        auto value = SR_UTILS_NS::Reflection::Value::CreateDefault(pInfo);
+        return value && LoadAngelScriptValue(value, deserializer);
     }
 }
 #endif // SR_ENGINE_ANGELSCRIPT_SUPPORT

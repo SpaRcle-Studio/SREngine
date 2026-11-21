@@ -8,7 +8,6 @@
 #include <Scripting/AngelScript/AngelScriptBindingHelpers.h>
 #include <Scripting/AngelScript/AngelScriptTypeReflection.h>
 
-#include <Utils/Common/EnumReflector.h>
 #include <Utils/Profile/TracyContext.h>
 
 namespace SR_SCRIPTING_NS::AngelScriptVectorBindings {
@@ -53,7 +52,6 @@ namespace SR_SCRIPTING_NS::AngelScriptVectorBindings {
     void Destruct(asIScriptGeneric* pCall) {
         auto&& pBindings = static_cast<AngelScriptBindings*>(pCall->GetAuxiliary());
         auto&& pType = pBindings->FindType(pCall->GetObjectTypeId());
-        pBindings->ClearVectorElements(pCall->GetObject());
         if (pType) {
             pType->pTypeInfo->DestructAt(pCall->GetObject());
         }
@@ -66,7 +64,6 @@ namespace SR_SCRIPTING_NS::AngelScriptVectorBindings {
             AngelScriptBindingHelpers::Exception("Vector cannot be assigned");
             return;
         }
-        pBindings->ClearVectorElements(pCall->GetObject());
         pType->pTypeInfo->CopyAssign(pCall->GetObject(), pCall->GetArgObject(0));
         pCall->SetReturnAddress(pCall->GetObject());
     }
@@ -95,62 +92,14 @@ namespace SR_SCRIPTING_NS::AngelScriptVectorBindings {
                 AngelScriptBindingHelpers::Exception("Vector index out of range");
                 return;
             }
-            if (pElement->IsArithmetic()) {
-                pCall->SetReturnAddress(array.At(index).Data());
-                return;
-            }
             if (pElement->kind == SR_UTILS_NS::Reflection::TypeKind::ScriptObject || pElement->kind == SR_UTILS_NS::Reflection::TypeKind::ScriptHandle) {
                 auto&& pSlot = array.At(index).Data();
                 pCall->SetReturnAddress(pElement->kind == SR_UTILS_NS::Reflection::TypeKind::ScriptHandle ? pSlot : *static_cast<void**>(pSlot));
                 return;
             }
-            if (auto&& pType = pBindings->FindType(*pElement); pType && pType->IsValue()) {
-                pCall->SetReturnAddress(array.At(index).Data());
-                return;
-            }
-            // Reference-returning template methods need a stable script representation.
-            // Keep independent copies so script handles survive subsequent vector mutations.
-            auto&& elements = pBindings->VectorElements(pCall->GetObject());
-            if (elements.size() != array.Size()) {
-                for (auto&& pElementObject : elements) {
-                    if (pElementObject) {
-                        pElementObject->Release();
-                    }
-                }
-                elements.clear();
-                elements.resize(array.Size());
-            }
-            auto&& pCached = elements[index];
-            if (pElement->kind == SR_UTILS_NS::Reflection::TypeKind::Enum) {
-                auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().TryGetReflector(pElement->name);
-                if (!pReflector) {
-                    AngelScriptBindingHelpers::Exception("Unregistered engine enum");
-                    return;
-                }
-                const auto number = static_cast<int32_t>(pReflector->ReadEnumValueFromPointerInternal(array.At(index).Data()));
-                if (!pCached) {
-                    pCached = pBindings->Wrap(SR_UTILS_NS::Reflection::Value::Create(int32_t()));
-                }
-                *pCached->value.Cast<int32_t>() = number;
-                pCall->SetReturnAddress(pCached->value.Data());
-                return;
-            }
-            auto value = pBindings->CopyValue(array.At(index).ToValue());
-            const bool handle = (pCall->GetReturnTypeId() & asTYPEID_OBJHANDLE) != 0;
-            if (pCached && !handle && pBindings->CopyTo(value, pCached->value)) {
-                pCall->SetReturnAddress(pCached);
-                return;
-            }
-            auto&& pReplacement = pBindings->Wrap(std::move(value));
-            if (pCached) {
-                pCached->Release();
-            }
-            pCached = pReplacement;
-            if (!pCached && !handle) {
-                AngelScriptBindingHelpers::Exception("Invalid Vector element");
-                return;
-            }
-            pCall->SetReturnAddress(handle ? static_cast<void*>(&pCached) : static_cast<void*>(pCached));
+            auto&& pElementAddress = array.At(index).Data();
+            pCall->SetReturnAddress(pElement->kind == SR_UTILS_NS::Reflection::TypeKind::NativeHandle && !pElement->detailedSize ?
+                *static_cast<void**>(pElementAddress) : pElementAddress);
             return;
         }
         if (array.IsConst()) {
@@ -158,7 +107,6 @@ namespace SR_SCRIPTING_NS::AngelScriptVectorBindings {
             return;
         }
         if (operation == "clear" || operation == "resize" || operation == "reserve") {
-            pBindings->ClearVectorElements(pCall->GetObject());
             if (operation == "clear") {
                 array.Clear();
             }
@@ -176,7 +124,6 @@ namespace SR_SCRIPTING_NS::AngelScriptVectorBindings {
             return;
         }
         if (operation == "erase") {
-            pBindings->ClearVectorElements(pCall->GetObject());
             array.Erase(index);
             return;
         }
@@ -185,7 +132,6 @@ namespace SR_SCRIPTING_NS::AngelScriptVectorBindings {
             AngelScriptBindingHelpers::Exception("Invalid Vector element");
             return;
         }
-        pBindings->ClearVectorElements(pCall->GetObject());
         if (operation == "pushBack") {
             if (!array.PushBack(source.AsRef())) {
                 AngelScriptBindingHelpers::Exception("Vector element cannot be inserted");
@@ -210,6 +156,7 @@ namespace SR_SCRIPTING_NS::AngelScriptVectorBindings {
         auto&& pBindings = static_cast<AngelScriptBindings*>(pCall->GetAuxiliary());
         auto&& pType = pBindings->FindType(pCall->GetObjectTypeId());
         if (!pType) {
+            SRHalt("AngelScriptVectorBindings::EnumReferences() : missing Vector type {} during garbage collection!", pCall->GetObjectTypeId());
             return;
         }
         const auto array = SR_UTILS_NS::Reflection::ValueRef(pType->pTypeInfo, pCall->GetObject(), true).AsArray();
@@ -231,8 +178,10 @@ namespace SR_SCRIPTING_NS::AngelScriptVectorBindings {
     void ReleaseReferences(asIScriptGeneric* pCall) {
         auto&& pBindings = static_cast<AngelScriptBindings*>(pCall->GetAuxiliary());
         if (auto&& pType = pBindings->FindType(pCall->GetObjectTypeId())) {
-            pBindings->ClearVectorElements(pCall->GetObject());
             SR_UTILS_NS::Reflection::ValueRef(pType->pTypeInfo, pCall->GetObject(), false).AsArray().Clear();
+        }
+        else {
+            SRHalt("AngelScriptVectorBindings::ReleaseReferences() : missing Vector type {} during garbage collection!", pCall->GetObjectTypeId());
         }
     }
 

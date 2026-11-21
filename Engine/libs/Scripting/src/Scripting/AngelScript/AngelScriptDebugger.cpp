@@ -55,6 +55,13 @@ namespace SR_SCRIPTING_NS {
             m_condition.notify_all();
         }
         m_transport.Stop();
+        {
+            std::lock_guard lock(m_mutex);
+            m_inspector.End();
+            m_pPausedContext = nullptr;
+            m_pStepContext = nullptr;
+            m_functions.clear();
+        }
     }
 
     bool AngelScriptDebugger::IsPaused() const {
@@ -488,6 +495,7 @@ namespace SR_SCRIPTING_NS {
         }
         SR_TRACY_ZONE;
         std::lock_guard lock(m_mutex);
+        m_inspector.End();
         m_locations.clear();
         m_sectionPaths.clear();
         m_functions.clear();

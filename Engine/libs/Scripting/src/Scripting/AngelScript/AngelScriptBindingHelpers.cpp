@@ -6,6 +6,7 @@
 
 #include <Scripting/AngelScript/AngelScriptBindingHelpers.h>
 #include <Scripting/AngelScript/AngelScriptBindings.h>
+#include <Scripting/AngelScript/AngelScriptNativeStorage.h>
 #include <Scripting/Base/ScriptSystem.h>
 
 #include <Utils/TypeTraits/Factory.h>
@@ -37,8 +38,13 @@ namespace SR_SCRIPTING_NS {
         }
 
         bool ContainsScriptType(const SR_UTILS_NS::Reflection::TypeInfo& info) {
-            return info.kind == SR_UTILS_NS::Reflection::TypeKind::ScriptObject || info.kind == SR_UTILS_NS::Reflection::TypeKind::ScriptHandle ||
+            return info.kind == SR_UTILS_NS::Reflection::TypeKind::ScriptObject || info.kind == SR_UTILS_NS::Reflection::TypeKind::ScriptHandle || info.kind == SR_UTILS_NS::Reflection::TypeKind::ScriptEnum ||
                 (info.pNext[0] && ContainsScriptType(*info.pNext[0])) || (info.pNext[1] && ContainsScriptType(*info.pNext[1]));
+        }
+
+        bool ContainsRuntimeStorage(const SR_UTILS_NS::Reflection::TypeInfo& info) {
+            return ContainsScriptType(info) || info.kind == SR_UTILS_NS::Reflection::TypeKind::NativeHandle || AngelScriptNativeStorage::IsPackedEnum(info) ||
+                (info.pNext[0] && ContainsRuntimeStorage(*info.pNext[0])) || (info.pNext[1] && ContainsRuntimeStorage(*info.pNext[1]));
         }
 
         asQWORD MathScalarFlags(const SR_UTILS_NS::Reflection::TypeInfo& info) {
@@ -53,6 +59,10 @@ namespace SR_SCRIPTING_NS {
         }
 
         SR_UTILS_NS::String PrimitiveName(const SR_UTILS_NS::Reflection::TypeInfo& info) {
+            if (info.kind == SR_UTILS_NS::Reflection::TypeKind::ScriptEnum) {
+                auto&& pType = static_cast<asITypeInfo*>(info.vtable.pRuntimeData);
+                return SR_UTILS_NS::String(pType->GetEngine()->GetTypeDeclaration(pType->GetTypeId(), true));
+            }
             if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Int32) {
                 return "int";
             }
@@ -86,9 +96,15 @@ namespace SR_SCRIPTING_NS {
 
         SR_UTILS_NS::String Identifier(const SR_UTILS_NS::Reflection::TypeInfo& info) {
             SR_TRACY_ZONE;
+            if (info.kind == SR_UTILS_NS::Reflection::TypeKind::NativeHandle) {
+                return Identifier(*info.pNext[0]) + (info.detailedSize ? "@" : "");
+            }
+            if (AngelScriptNativeStorage::IsPackedEnum(info)) {
+                return Identifier(*info.pNext[0]);
+            }
             if (info.kind == SR_UTILS_NS::Reflection::TypeKind::ScriptObject || info.kind == SR_UTILS_NS::Reflection::TypeKind::ScriptHandle) {
                 auto&& pType = static_cast<asITypeInfo*>(info.vtable.pRuntimeData);
-                return SR_UTILS_NS::String(pType->GetEngine()->GetTypeDeclaration(pType->GetTypeId(), true)) +
+                return SR_UTILS_NS::String(info.detailedSize ? "const " : "") + pType->GetEngine()->GetTypeDeclaration(pType->GetTypeId(), true) +
                     (info.kind == SR_UTILS_NS::Reflection::TypeKind::ScriptHandle ? "@" : "");
             }
             if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Value) {
@@ -346,7 +362,7 @@ namespace SR_SCRIPTING_NS {
                 return;
             }
 
-            if (pObject->value.IsConst()) {
+            if (pObject->value.IsConst() && !pBinding->method.IsConst()) {
                 Exception("Cannot invoke a mutable method on a const native view");
                 return;
             }
@@ -407,14 +423,14 @@ namespace SR_SCRIPTING_NS {
             if (pBinding->directResult) {
                 auto&& info = *pBinding->method.GetReturnType();
                 auto&& pDestination = pCall->GetAddressOfReturnLocation();
-                if (pBinding->method.ReturnsReference()) {
+                if (pBinding->method.IsReturnsReference()) {
                     const void* pSource = nullptr;
                     pBinding->method.InvokeRaw(*pOwner, pointers.data(), &pSource);
                     if (!pSource) {
                         Exception("Native method returned a null value reference");
                         return;
                     }
-                    info.CopyConstructAt(pDestination, pSource);
+                    pCall->SetReturnAddress(const_cast<void*>(pSource));
                 }
                 else {
                     info.ConstructAt(pDestination);
@@ -422,7 +438,7 @@ namespace SR_SCRIPTING_NS {
                 }
             }
             else if (pBinding->method.HasReturn()) {
-                if (!pBinding->method.ReturnsReference()) {
+                if (!pBinding->method.IsReturnsReference()) {
                     pFrame->result = pBinding->pResultPool->Acquire();
                     if (!pFrame->result) {
                         Exception("Prepared native result storage exhausted");
@@ -471,6 +487,10 @@ namespace SR_SCRIPTING_NS {
                 }
                 else if (pBinding->method.IsOutputParam(i)) {
                     if (arguments[i].GetType() == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum) {
+                        if (arguments[i].GetTypeInfo().vtable.lifecycle.size == sizeof(int64_t)) {
+                            memcpy(pCall->GetArgAddress(i), arguments[i].Data(), sizeof(int64_t));
+                            continue;
+                        }
                         auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().GetReflector(arguments[i].GetTypeInfo().name);
                         const auto number = static_cast<int32_t>(pReflector->ReadEnumValueFromPointerInternal(arguments[i].Data()));
                         memcpy(pCall->GetArgAddress(i), &number, sizeof(number));
@@ -493,11 +513,21 @@ namespace SR_SCRIPTING_NS {
             }
 
             if (pBinding->propertyReference) {
-                if (pObject->value.IsConst() && !pBinding->property.IsReadOnly()) {
+                if (pObject->value.IsConst() && !pBinding->property.IsReadOnly() && !pBinding->property.IsReturnsConstReference() && !pCall->GetFunction()->IsReadOnly()) {
                     Exception("Cannot expose a mutable field of a const native view");
                     return;
                 }
-                pCall->SetReturnAddress(static_cast<char*>(static_cast<void*>(pOwner)) + pBinding->property.GetByteOffset());
+                if (pBinding->property.GetByteOffset() != INT32_MIN) {
+                    pCall->SetReturnAddress(static_cast<char*>(static_cast<void*>(pOwner)) + pBinding->property.GetByteOffset());
+                }
+                else {
+                    const auto reference = pBinding->property.GetRef(pOwner);
+                    if (!reference) {
+                        Exception("Native property did not return a reference");
+                        return;
+                    }
+                    pCall->SetReturnAddress(reference.Data());
+                }
                 return;
             }
             auto reference = pBinding->property.GetRef(pOwner);
@@ -572,7 +602,13 @@ namespace SR_SCRIPTING_NS {
                                 Exception("Script object containers cannot be stored in a native Value");
                                 return;
                             }
-                            payload = SR_UTILS_NS::Reflection::ValueRef(pType->pTypeInfo, pAddress, false).Copy();
+                            const auto source = SR_UTILS_NS::Reflection::ValueRef(pType->pTypeInfo, pAddress, false).ToValue();
+                            auto&& pNativeType = AngelScriptNativeStorage::NativeType(*pType->pTypeInfo);
+                            payload = SR_UTILS_NS::Reflection::Value::CreateDefault(pNativeType);
+                            if (!payload || !pBinding->pBindings->CopyTo(source, payload)) {
+                                payload = {};
+                                Exception("Native Value cannot own this script storage type");
+                            }
                             return;
                         }
                         auto&& pNative = (id & asTYPEID_OBJHANDLE) ? *static_cast<AngelScriptNativeObject**>(pAddress) : static_cast<AngelScriptNativeObject*>(pAddress);

@@ -29,14 +29,12 @@ namespace SR_SCRIPTING_NS {
         const SR_HTYPES_NS::SharedPtrDynamicData* pSharedControl = nullptr;
         const SR_UTILS_NS::SRClass* pIdentity = nullptr;
         uint32_t references = 1;
-        SR_UTILS_NS::Vector<AngelScriptNativeObject*> vectorElements;
 
         explicit AngelScriptNativeObject(AngelScriptBindings* pBind);
         ~AngelScriptNativeObject();
 
         void AddRef();
         void Release();
-        void ClearVectorElements();
 
         SR_NODISCARD bool IsAlive() const;
         SR_NODISCARD SR_UTILS_NS::SRClass* GetObject() const;
@@ -96,10 +94,11 @@ namespace SR_SCRIPTING_NS {
 
     public:
         bool RegisterFactory();
+        SR_NODISCARD uint64_t GetStorageId() const {
+            return m_storageId;
+        }
         Type* ResolveVectorType(asITypeInfo* pScriptType);
         void ForgetType(int32_t typeId);
-        SR_UTILS_NS::Vector<AngelScriptNativeObject*>& VectorElements(void* pVector);
-        void ClearVectorElements(void* pVector);
 
         SR_UTILS_NS::String Declaration(const SR_UTILS_NS::Reflection::TypeInfo& info) const;
         Type* FindType(int32_t typeId) const;
@@ -132,10 +131,10 @@ namespace SR_SCRIPTING_NS {
 
     private:
         asIScriptEngine* m_pEngine = nullptr;
+        uint64_t m_storageId = 0;
         SR_UTILS_NS::Vector<Type*> m_types;
         SR_HTYPES_NS::FlatHashMap<int32_t, Type*> m_typesById;
         SR_HTYPES_NS::FlatHashMap<const SR_UTILS_NS::Reflection::TypeInfo*, Type*> m_typesByInfo;
-        SR_HTYPES_NS::FlatHashMap<void*, SR_UTILS_NS::Vector<AngelScriptNativeObject*>> m_vectorElements;
         SR_UTILS_NS::Vector<Call*> m_calls;
         bool m_hasNameConflicts = false;
         mutable SR_HTYPES_NS::FlatHashMap<const SR_HTYPES_NS::SharedPtrDynamicData*, AngelScriptNativeObject*> m_sharedObjects;
