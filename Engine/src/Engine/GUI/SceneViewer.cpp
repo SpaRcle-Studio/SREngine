@@ -137,7 +137,8 @@ namespace SR_CORE_GUI_NS {
             m_id = SR_ID_INVALID;
         }
 
-        if (SR_IMMEDIATE_GUI_NS::BeginChild("ViewerTexture"))
+        const static SR_UTILS_NS::StringAtom firstFrameKey = "IsFirstFrame";
+        if (!SR_UTILS_NS::StoreUtils::Temp::GetBool(firstFrameKey) && SR_IMMEDIATE_GUI_NS::BeginChild("ViewerTexture"))
         {
             m_windowSize = SR_MATH_NS::Vector2(static_cast<int32_t>(SR_IMMEDIATE_GUI_NS::GetWindowSize().x), static_cast<int32_t>(SR_IMMEDIATE_GUI_NS::GetWindowSize().y));
 
@@ -150,7 +151,7 @@ namespace SR_CORE_GUI_NS {
                     DrawTexture(m_windowSize, m_windowSize, m_id, true);
                 }
                 else {
-                    DrawTexture(m_windowSize, pCamera->GetSize().Cast<int32_t>(), m_id, true);
+                    DrawTexture(m_windowSize, pCamera->GetViewportSize().Cast<int32_t>(), m_id, true);
                 }
 
                 CheckFocused();
@@ -159,8 +160,8 @@ namespace SR_CORE_GUI_NS {
             else {
                 SR_IMMEDIATE_GUI_NS::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Invalid framebuffer or camera is not active!");
             }
+            SR_IMMEDIATE_GUI_NS::EndChild();
         }
-        SR_IMMEDIATE_GUI_NS::EndChild();
 
         SR_IMMEDIATE_GUI_NS::EndGroup();
     }
@@ -318,6 +319,7 @@ namespace SR_CORE_GUI_NS {
                 pCameraComponent->SetCameraType(m_isPrefab ? SR_GTYPES_NS::CameraType::EditorPrefab : SR_GTYPES_NS::CameraType::Editor);
                 /// Камера редактора имеет наивысшый закадровый приоритет
                 pCameraComponent->SetPriority(SR_INT32_MIN);
+                pCameraComponent->SetFixedSize(SR_MATH_NS::UVector2());
             }
 
             pCamera->GetTransform()->GlobalTranslate(m_cameraTranslation);
@@ -442,21 +444,21 @@ namespace SR_CORE_GUI_NS {
         EditorSceneViewMode viewMode = GetSubWidget<SceneTools>()->GetViewMode();
 
         if (viewMode == EditorSceneViewMode::WindowSize) {
-            if (pCamera->GetSize() == GetContext()->GetWindowSize()) {
+            if (pCamera->GetViewportSize() == GetContext()->GetWindowSize()) {
                 return false;
             }
 
             m_id = SR_ID_INVALID;
-            pCamera->UpdateProjection(GetContext()->GetWindowSize().x, GetContext()->GetWindowSize().y);
+            pCamera->SetFixedSize(GetContext()->GetWindowSize());
             return true;
         }
         if (viewMode == EditorSceneViewMode::FreeAspect) {
-            if (pCamera->GetSize() == m_windowSize) {
+            if (pCamera->GetViewportSize() == m_windowSize) {
                 return false;
             }
 
             m_id = SR_ID_INVALID;
-            pCamera->UpdateProjection(m_windowSize.x, m_windowSize.y);
+            pCamera->SetFixedSize(SR_MATH_NS::UVector2(m_windowSize.x, m_windowSize.y));
             return true;
         }
 
@@ -470,9 +472,9 @@ namespace SR_CORE_GUI_NS {
             case EditorSceneViewMode::View2560x1080: previewSize = { 2560, 1080 }; break;
             default: return false;
         }
-        if (pCamera->GetSize() != previewSize) {
+        if (pCamera->GetViewportSize() != previewSize) {
             m_id = SR_ID_INVALID;
-            pCamera->UpdateProjection(previewSize.x, previewSize.y);
+            pCamera->SetFixedSize(previewSize);
             return true;
         }
 

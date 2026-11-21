@@ -757,6 +757,7 @@ namespace SR_IMMEDIATE_GUI_NS {
     }
 
     void VulkanRemoveTexture(VulkanRendererHandle renderer, VkDescriptorSet descriptorSet) {
+        SR_TRACY_ZONE;
         (void)renderer;
 
         if (descriptorSet == VK_NULL_HANDLE) {

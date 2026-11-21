@@ -120,13 +120,6 @@ namespace SR_SCRIPTING_NS {
     }
 
     AngelScriptBindings::~AngelScriptBindings() {
-        for (auto&& pCall : m_calls) {
-            delete pCall;
-        }
-
-        for (auto&& pType : m_types) {
-            delete pType;
-        }
         for (auto&& pNative : m_allocatedNativeObjectPool) {
             pNative->~AngelScriptNativeObject();
         }
@@ -262,15 +255,9 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
-        auto&& pType = new Type();
-        pType->name = infoIdentifier;
-        pType->pTypeInfo = &info;
-
+        auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(info.name);
         if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Object) {
-            pType->pMeta = SR_UTILS_NS::Factory::Instance().GetType(info.name);
-
-            if (!pType->pMeta || pType->pMeta->IsDontScript()) {
-                delete pType;
+            if (!pMeta || pMeta->IsDontScript()) {
                 return nullptr;
             }
 
@@ -278,9 +265,18 @@ namespace SR_SCRIPTING_NS {
             auto&& pCpp = ScriptSystem::Instance().GetCppSystem();
 
             if (pRegistration && pCpp && pCpp->GetModuleManager()->IsRuntimeModule(pRegistration->moduleName)) {
-                delete pType;
                 return nullptr;
             }
+        }
+
+        auto&& pType = static_cast<Type*>(m_pTypesAllocator->Allocate(sizeof(Type), alignof(Type)));
+        new(pType) Type();
+
+        pType->name = infoIdentifier;
+        pType->pTypeInfo = &info;
+
+        if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Object) {
+            pType->pMeta = pMeta;
         }
 
         m_types.emplace_back(pType);
@@ -337,6 +333,9 @@ namespace SR_SCRIPTING_NS {
         SR_TRACY_ZONE;
         SR_LOG("AngelScriptBindings::RegisterFactory() : registering reflected API.");
 
+        m_pCallsAllocator = new SR_UTILS_NS::MonotonicAllocator(sizeof(Call) * 1024);
+        m_pTypesAllocator = new SR_UTILS_NS::MonotonicAllocator(sizeof(Type) * 1024);
+
         Collect(*SR_UTILS_NS::Reflection::TypeOf<SR_UTILS_NS::String>());
 
         if (!Collect(*SR_UTILS_NS::Reflection::TypeOf<SR_MATH_NS::FSize>()) ||
@@ -387,7 +386,8 @@ namespace SR_SCRIPTING_NS {
             if (!pInfo || !pInfo->CanConstruct()) {
                 return false;
             }
-            auto&& pType = new Type();
+            auto&& pType = static_cast<Type*>(m_pTypesAllocator->Allocate(sizeof(Type), alignof(Type)));
+            new(pType) Type();
             pType->name = pName;
             pType->pTypeInfo = pInfo;
             m_types.emplace_back(pType);
@@ -457,7 +457,9 @@ namespace SR_SCRIPTING_NS {
                 continue;
             }
 
-            auto&& pBinding = new Call();
+            auto&& pBinding = static_cast<Call*>(m_pCallsAllocator->Allocate(sizeof(Call), alignof(Call)));
+            new(pBinding) Call();
+
             pBinding->pBindings = this;
             pBinding->pOwner = pType;
             m_calls.emplace_back(pBinding);
@@ -564,7 +566,9 @@ namespace SR_SCRIPTING_NS {
             return true;
         }
 
-        auto&& pGeneral = new Call();
+        auto&& pGeneral = static_cast<Call*>(m_pCallsAllocator->Allocate(sizeof(Call), alignof(Call)));
+        new(pGeneral) Call();
+
         pGeneral->pBindings = this;
         pGeneral->pOwner = &type;
         m_calls.emplace_back(pGeneral);
@@ -626,7 +630,9 @@ namespace SR_SCRIPTING_NS {
                 continue;
             }
 
-            auto&& pBinding = new Call();
+            auto&& pBinding = static_cast<Call*>(m_pCallsAllocator->Allocate(sizeof(Call), alignof(Call)));
+            new(pBinding) Call();
+
             pBinding->pBindings = this;
             pBinding->pOwner = &type;
             pBinding->component = component.offset;
@@ -732,7 +738,9 @@ namespace SR_SCRIPTING_NS {
                 continue;
             }
 
-            auto&& pBinding = new Call();
+            auto&& pBinding = static_cast<Call*>(m_pCallsAllocator->Allocate(sizeof(Call), alignof(Call)));
+            new(pBinding) Call();
+
             pBinding->pBindings = this;
             pBinding->pOwner = pTarget;
             m_calls.emplace_back(pBinding);
@@ -748,7 +756,9 @@ namespace SR_SCRIPTING_NS {
                 continue;
             }
 
-            auto&& pBinding = new Call();
+            auto&& pBinding = static_cast<Call*>(m_pCallsAllocator->Allocate(sizeof(Call), alignof(Call)));
+            new(pBinding) Call();
+
             pBinding->pBindings = this;
             pBinding->pOwner = pTarget;
             m_calls.emplace_back(pBinding);
@@ -781,7 +791,9 @@ namespace SR_SCRIPTING_NS {
                 return;
             }
 
-            Call* pBinding = new Call(property);
+            auto&& pBinding = static_cast<Call*>(m_pCallsAllocator->Allocate(sizeof(Call), alignof(Call)));
+            new(pBinding) Call(property);
+
             pBinding->pBindings = this;
             pBinding->pOwner = &type;
             pBinding->pPropertyType = &info;
@@ -884,7 +896,9 @@ namespace SR_SCRIPTING_NS {
                 return;
             }
 
-            auto&& pBinding = new Call();
+            auto&& pBinding = static_cast<Call*>(m_pCallsAllocator->Allocate(sizeof(Call), alignof(Call)));
+            new(pBinding) Call();
+
             pBinding->pBindings = this;
             pBinding->pOwner = &type;
             pBinding->method = method;

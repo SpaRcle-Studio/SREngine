@@ -135,15 +135,18 @@ namespace SR_SCRIPTING_NS {
         asIScriptEngine* m_pEngine = nullptr;
         uint64_t m_storageId = 0;
         SR_UTILS_NS::Vector<Type*> m_types;
+        SR_UTILS_NS::Vector<Call*> m_calls;
         SR_HTYPES_NS::FlatHashMap<int32_t, Type*> m_typesById;
         SR_HTYPES_NS::FlatHashMap<const SR_UTILS_NS::Reflection::TypeInfo*, Type*> m_typesByInfo;
-        SR_UTILS_NS::Vector<Call*> m_calls;
         bool m_hasNameConflicts = false;
         mutable SR_HTYPES_NS::FlatHashMap<const SR_HTYPES_NS::SharedPtrDynamicData*, AngelScriptNativeObject*> m_sharedObjects;
         mutable SR_HTYPES_NS::FlatHashMap<const SR_UTILS_NS::SRClass*, AngelScriptNativeObject*> m_nativeObjects;
         SR_UTILS_NS::RawPointerHolder<SR_UTILS_NS::MonotonicAllocator> m_nativeObjectPoolAllocator;
         mutable SR_UTILS_NS::Vector<AngelScriptNativeObject*> m_freeNativeObjectPool;
         mutable SR_UTILS_NS::Vector<AngelScriptNativeObject*> m_allocatedNativeObjectPool;
+        SR_UTILS_NS::RawPointerHolder<SR_UTILS_NS::MonotonicAllocator> m_pCallsAllocator;
+        SR_UTILS_NS::RawPointerHolder<SR_UTILS_NS::MonotonicAllocator> m_pTypesAllocator;
+
     };
 }
 

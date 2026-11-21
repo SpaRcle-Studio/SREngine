@@ -19,6 +19,11 @@ namespace SR_CORE_NS {
     SR_UTILS_NS::ThreadWorkerResult DrawState::ExecuteImpl() {
         SR_TRACY_ZONE;
 
+        if (!m_isFirstFrame.has_value()) {
+            m_isFirstFrame = true;
+            SR_UTILS_NS::StoreUtils::Temp::SetBool("IsFirstFrame", true);
+        }
+
         Engine::Ptr pEngine = (Engine*)SR_UTILS_NS::StoreUtils::Temp::GetPointer("Engine");
         auto&& pRenderContext = pEngine->GetRenderContext();
 
@@ -64,6 +69,11 @@ namespace SR_CORE_NS {
                 pPipeline->EndCmdBuffer();
             }
             pPipeline->OnFrameBuildEnd();
+        }
+
+        if (m_isFirstFrame.value()) {
+            m_isFirstFrame = false;
+            SR_UTILS_NS::StoreUtils::Temp::SetBool("IsFirstFrame", false);
         }
 
         return SR_UTILS_NS::ThreadWorkerResult::Success;
