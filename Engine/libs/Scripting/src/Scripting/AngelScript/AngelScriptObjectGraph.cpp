@@ -8,8 +8,157 @@
 #include <Scripting/AngelScript/AngelScriptBindingHelpers.h>
 
 #include <Utils/Profile/TracyContext.h>
+#include <Utils/FileSystem/Path.h>
+#include <Utils/Types/Optional.h>
 
 namespace SR_SCRIPTING_NS {
+    namespace AngelScriptSnapshotHelpers {
+        template<typename Visitor> bool VisitChildren(const SR_UTILS_NS::Reflection::ValueRef& value, Visitor&& visitor) {
+            auto&& info = value.GetTypeInfo();
+            if (info.kind == SR_UTILS_NS::Reflection::TypeKind::NativeHandle) {
+                auto&& pObject = *value.Cast<AngelScriptNativeObject*>();
+                if (!pObject || !pObject->IsAlive()) {
+                    return true;
+                }
+                visitor(pObject->value.AsRef());
+                return true;
+            }
+            if (info.kind == SR_UTILS_NS::Reflection::TypeKind::ScriptObject || info.kind == SR_UTILS_NS::Reflection::TypeKind::ScriptHandle) {
+                auto&& pObject = *value.Cast<asIScriptObject*>();
+                auto&& pExpected = static_cast<asITypeInfo*>(info.vtable.pRuntimeData);
+                auto&& pBindings = static_cast<AngelScriptBindings*>(pExpected->GetUserData(AngelScriptTypeReflection::ScriptTypeUserData));
+                for (uint32_t i = 0; i < pObject->GetPropertyCount(); ++i) {
+                    bool isConst = false;
+                    pObject->GetObjectType()->GetProperty(i, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, &isConst);
+                    if (isConst) {
+                        continue;
+                    }
+                    auto field = AngelScriptTypeReflection::Property(pBindings, pObject, i, true, true);
+                    if (field && CanSerializeAngelScriptValue(field.GetTypeInfo())) {
+                        visitor(field);
+                    }
+                }
+                return true;
+            }
+            if (auto&& pOptional = value.GetOptionalBase()) {
+                if (pOptional->HasValue()) {
+                    visitor(pOptional->GetReflectionValue().AsRef());
+                }
+                return true;
+            }
+            if (const auto array = value.AsArray()) {
+                for (SR_UTILS_NS::SizeType i = 0; i < array.Size(); ++i) {
+                    visitor(array.At(i));
+                }
+                return true;
+            }
+            if (const auto map = value.AsMap()) {
+                map.ForEach([&visitor, &map](const SR_UTILS_NS::Reflection::ValueRef& key, const SR_UTILS_NS::Reflection::ValueRef& mapped) {
+                    visitor(key);
+                    if (!map.IsSet()) {
+                        visitor(mapped);
+                    }
+                });
+                return true;
+            }
+            if (info.fieldsCount > 0) {
+                for (uint32_t i = 0; i < value.FieldCount(); ++i) {
+                    visitor(value.Field(i));
+                }
+                return true;
+            }
+            return false;
+        }
+
+        bool IsScalar(const SR_UTILS_NS::Reflection::TypeInfo& info) {
+            return info.IsArithmetic() || info.kind == SR_UTILS_NS::Reflection::TypeKind::Enum || info.IsString();
+        }
+
+        bool EqualScalar(const SR_UTILS_NS::Reflection::ValueRef& value, const SR_UTILS_NS::Reflection::Value& initial) {
+            auto&& info = value.GetTypeInfo();
+            switch (info.kind) {
+                case SR_UTILS_NS::Reflection::TypeKind::Float:
+                    return SR_EQUALS(*value.Cast<float_t>(), *initial.Cast<float_t>());
+                case SR_UTILS_NS::Reflection::TypeKind::Double:
+                    return SR_EQUALS(*value.Cast<double_t>(), *initial.Cast<double_t>());
+                case SR_UTILS_NS::Reflection::TypeKind::String:
+                    return *value.Cast<SR_UTILS_NS::String>() == *initial.Cast<SR_UTILS_NS::String>();
+                case SR_UTILS_NS::Reflection::TypeKind::StringAtom:
+                    return *value.Cast<SR_UTILS_NS::StringAtom>() == *initial.Cast<SR_UTILS_NS::StringAtom>();
+                case SR_UTILS_NS::Reflection::TypeKind::Path:
+                    return *value.Cast<SR_UTILS_NS::Path>() == *initial.Cast<SR_UTILS_NS::Path>();
+                default:
+                    return (info.IsArithmetic() || info.kind == SR_UTILS_NS::Reflection::TypeKind::Enum) &&
+                        memcmp(value.Data(), initial.Data(), value.SizeOf()) == 0;
+            }
+        }
+    }
+
+    void AngelScriptValueSnapshot::Capture(const SR_UTILS_NS::Reflection::ValueRef& value,
+        SR_HTYPES_NS::FlatHashMap<const void*, uint64_t>& objects)
+    {
+        pType = &value.GetTypeInfo();
+        if (pType->kind == SR_UTILS_NS::Reflection::TypeKind::ScriptObject || pType->kind == SR_UTILS_NS::Reflection::TypeKind::ScriptHandle) {
+            auto&& pObject = *value.Cast<asIScriptObject*>();
+            if (!pObject) {
+                return;
+            }
+            pObjectType = pObject->GetObjectType();
+            if (const auto found = objects.find(pObject); found != objects.end()) {
+                objectId = found->second;
+                return;
+            }
+            objectId = objects.size() + 1;
+            objects[pObject] = objectId;
+        }
+        if (AngelScriptSnapshotHelpers::IsScalar(*pType)) {
+            scalar = value.Copy();
+            comparable = static_cast<bool>(scalar);
+            return;
+        }
+        comparable = AngelScriptSnapshotHelpers::VisitChildren(value, [this, &objects](const SR_UTILS_NS::Reflection::ValueRef& child) {
+            children.emplace_back();
+            children.back().Capture(child, objects);
+        });
+    }
+
+    bool AngelScriptValueSnapshot::Matches(const SR_UTILS_NS::Reflection::ValueRef& value,
+        SR_HTYPES_NS::FlatHashMap<const void*, uint64_t>& objects) const
+    {
+        if (!comparable || !value || pType != &value.GetTypeInfo()) {
+            return false;
+        }
+        if (pType->kind == SR_UTILS_NS::Reflection::TypeKind::ScriptObject || pType->kind == SR_UTILS_NS::Reflection::TypeKind::ScriptHandle) {
+            auto&& pObject = *value.Cast<asIScriptObject*>();
+            if (!pObject) {
+                return objectId == 0;
+            }
+            if (pObjectType != pObject->GetObjectType()) {
+                return false;
+            }
+            if (const auto found = objects.find(pObject); found != objects.end()) {
+                return objectId == found->second;
+            }
+            const auto id = objects.size() + 1;
+            objects[pObject] = id;
+            if (objectId != id) {
+                return false;
+            }
+        }
+        if (scalar) {
+            return AngelScriptSnapshotHelpers::EqualScalar(value, scalar);
+        }
+        SR_UTILS_NS::SizeType index = 0;
+        bool matches = true;
+        const bool supported = AngelScriptSnapshotHelpers::VisitChildren(value, [this, &objects, &index, &matches](const SR_UTILS_NS::Reflection::ValueRef& child) {
+            if (index >= children.size() || !children[index].Matches(child, objects)) {
+                matches = false;
+            }
+            ++index;
+        });
+        return supported && matches && index == children.size();
+    }
+
     namespace AngelScriptGraphHelpers {
         struct State {
             uint32_t depth = 0;

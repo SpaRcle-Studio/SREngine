@@ -9,6 +9,7 @@
 
 #include <Scripting/Base/BehaviourInstance.h>
 #include <Scripting/AngelScript/AngelScriptBindings.h>
+#include <Scripting/AngelScript/AngelScriptObjectGraph.h>
 #include <Utils/TypeTraits/SRClassMeta.h>
 #include <Utils/Types/Map.h>
 
@@ -122,6 +123,7 @@ namespace SR_SCRIPTING_NS {
 
     private:
         void RefreshProperties();
+        void CapturePropertyState();
         void CacheCallbacks();
         bool ExecuteMethod(asIScriptFunction* pMethod, const void* pArgument = nullptr, bool floating = false, bool* pReturnValue = nullptr) const;
         static bool IsSceneField(const char* pName);
@@ -136,6 +138,7 @@ namespace SR_SCRIPTING_NS {
         SR_UTILS_NS::Map<SR_UTILS_NS::StringAtom, SR_UTILS_NS::Reflection::Value> m_reloadValues;
         SR_UTILS_NS::Map<SR_UTILS_NS::StringAtom, SR_UTILS_NS::String> m_reloadTypes;
         Meta m_meta;
+        SR_UTILS_NS::Map<uint32_t, AngelScriptValueSnapshot> m_defaultPropertyState;
 
         mutable SR_UTILS_NS::Vector<asIScriptContext*> m_contexts;
         mutable uint32_t m_contextDepth = 0;

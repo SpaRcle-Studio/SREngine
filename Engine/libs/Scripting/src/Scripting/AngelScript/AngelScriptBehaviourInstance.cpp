@@ -38,6 +38,7 @@ namespace SR_SCRIPTING_NS {
 
     AngelScriptBehaviourInstance::~AngelScriptBehaviourInstance() {
         m_meta.properties.clear();
+        m_defaultPropertyState.clear();
 
         SRAssert2(m_contextDepth == 0, "AngelScriptBehaviourInstance::~AngelScriptBehaviourInstance() : cannot destroy an executing behaviour!");
 
@@ -56,6 +57,7 @@ namespace SR_SCRIPTING_NS {
 
     void AngelScriptBehaviourInstance::SetInstance(asIScriptObject* pObject) {
         SR_TRACY_ZONE;
+        m_defaultPropertyState.clear();
         SR_UTILS_NS::SRASerializer reloadSerializer;
         SR_UTILS_NS::RawPointerHolder<SR_UTILS_NS::IDeserializer> reloadData;
 
@@ -107,6 +109,7 @@ namespace SR_SCRIPTING_NS {
         m_pObject = pObject;
         m_sceneFieldsInitialized = false;
         CacheCallbacks();
+        CapturePropertyState();
 
         if (m_pObject) {
             AngelScriptObjectGraph graph(m_pObject);
@@ -370,9 +373,45 @@ namespace SR_SCRIPTING_NS {
         }
     }
 
+    void AngelScriptBehaviourInstance::CapturePropertyState() {
+        SR_TRACY_ZONE;
+        if (!m_pObject) {
+            return;
+        }
+
+        SR_HTYPES_NS::FlatHashMap<const void*, uint64_t> objects;
+        objects[m_pObject] = 1;
+        for (uint32_t i = 0; i < m_pObject->GetPropertyCount(); ++i) {
+            if (IsSceneField(m_pObject->GetPropertyName(i)) || IsConstField(m_pObject, i)) {
+                continue;
+            }
+
+            auto value = m_pRuntime->GetBindings()->ReadProperty(m_pObject, i);
+            if (!value || !CanSerializeAngelScriptValue(value.GetTypeInfo())) {
+                continue;
+            }
+
+            m_defaultPropertyState[i].Capture(value.AsRef(), objects);
+        }
+    }
+
     void AngelScriptBehaviourInstance::Save(SR_UTILS_NS::ISerializer& serializer) const {
         if (!m_pObject) {
             return;
+        }
+
+        SR_HTYPES_NS::FlatHashMap<const void*, uint64_t> objects;
+        SR_UTILS_NS::Vector<bool> defaultProperties(m_pObject->GetPropertyCount(), false);
+        bool scriptPropertiesChanged = serializer.IsWriteDefaults();
+        if (!serializer.IsWriteDefaults()) {
+            objects[m_pObject] = 1;
+            for (auto&& entry : m_defaultPropertyState) {
+                auto value = m_pRuntime->GetBindings()->ReadProperty(m_pObject, entry.first);
+                defaultProperties[entry.first] = value && entry.second.Matches(value.AsRef(), objects);
+                if (value && AngelScriptBindingHelpers::ContainsScriptType(value.GetTypeInfo()) && !defaultProperties[entry.first]) {
+                    scriptPropertiesChanged = true;
+                }
+            }
         }
 
         AngelScriptObjectGraph graph(m_pObject);
@@ -391,6 +430,18 @@ namespace SR_SCRIPTING_NS {
             }
 
             const auto id = SR_UTILS_NS::SerializationId::CreateFromCStr(m_pObject->GetPropertyName(i));
+            if (!serializer.IsWriteDefaults()) {
+                if (AngelScriptBindingHelpers::ContainsScriptType(value.GetTypeInfo())) {
+                    if (!scriptPropertiesChanged) {
+                        continue;
+                    }
+                }
+                else {
+                    if (defaultProperties[i]) {
+                        continue;
+                    }
+                }
+            }
             serializer.BeginObject(id);
             SR_UTILS_NS::String signature;
             SR_UTILS_NS::Reflection::SaveTypeInfo(signature, &value.GetTypeInfo());

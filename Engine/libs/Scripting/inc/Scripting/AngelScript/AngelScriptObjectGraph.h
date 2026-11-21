@@ -8,10 +8,24 @@
 #if defined(SR_ENGINE_ANGELSCRIPT_SUPPORT)
 #include <Scripting/AngelScript/AngelScriptValueSerialization.h>
 
+#include <Utils/Types/FlatHashMap.h>
+
 #include <angelscript.h>
 
 namespace SR_SCRIPTING_NS {
     class AngelScriptBindings;
+    struct AngelScriptValueSnapshot {
+        const SR_UTILS_NS::Reflection::TypeInfo* pType = nullptr;
+        SR_UTILS_NS::Reflection::Value scalar;
+        SR_UTILS_NS::Vector<AngelScriptValueSnapshot> children;
+        uint64_t objectId = 0;
+        const void* pObjectType = nullptr;
+        bool comparable = true;
+
+        void Capture(const SR_UTILS_NS::Reflection::ValueRef& value, SR_HTYPES_NS::FlatHashMap<const void*, uint64_t>& objects);
+        bool Matches(const SR_UTILS_NS::Reflection::ValueRef& value, SR_HTYPES_NS::FlatHashMap<const void*, uint64_t>& objects) const;
+    };
+
     class AngelScriptObjectGraph {
     public:
         explicit AngelScriptObjectGraph(asIScriptObject* pRoot = nullptr);
