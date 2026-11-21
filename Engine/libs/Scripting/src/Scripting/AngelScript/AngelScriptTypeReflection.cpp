@@ -175,6 +175,7 @@ namespace SR_SCRIPTING_NS::AngelScriptTypeReflection {
             key.name = SR_UTILS_NS::String("AS_") + pEnum->GetModule()->GetName() + "::" + pEngine->GetTypeDeclaration(typeId, true);
             SR_UTILS_NS::Reflection::TypeInfoVTable vtable;
             vtable.lifecycle = key.pNext[0]->vtable.lifecycle;
+            vtable.pLess = key.pNext[0]->vtable.pLess;
             vtable.pSizeOfAlign = &ScriptEnumSize;
             vtable.pRuntimeData = pEnum;
             vtable.displayName = pEngine->GetTypeDeclaration(typeId, true);

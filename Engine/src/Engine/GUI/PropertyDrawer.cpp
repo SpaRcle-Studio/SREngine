@@ -372,15 +372,15 @@ namespace SR_CORE_GUI_NS {
                 SR_UTILS_NS::Reflection::Value optionalValue = pOptionalBase->GetReflectionValue();
 
                 SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard lock(!hasValue);
-                PropertyDrawerContext valueContext = context;
-                valueContext.pValue = &optionalValue;
-                valueContext.fieldWidth = context.fieldWidth - SR_IMMEDIATE_GUI_NS::GetFrameHeight();
-                valueContext.fieldTitleWidth = 0.f;
-                valueContext.noHeader = true;
-                valueContext.openedByDefault = false;
+                m_valueContext = context;
+                m_valueContext->pValue = &optionalValue;
+                m_valueContext->fieldWidth = context.fieldWidth - SR_IMMEDIATE_GUI_NS::GetFrameHeight();
+                m_valueContext->fieldTitleWidth = 0.f;
+                m_valueContext->noHeader = true;
+                m_valueContext->openedByDefault = false;
 
                 SR_IMMEDIATE_GUI_NS::BeginGroup();
-                PropertyDrawerFeedback elementFeedback = m_valueDrawer->Draw(valueContext);
+                PropertyDrawerFeedback elementFeedback = m_valueDrawer->Draw(*m_valueContext);
                 SR_IMMEDIATE_GUI_NS::EndGroup();
 
                 if (elementFeedback.isChanged) {

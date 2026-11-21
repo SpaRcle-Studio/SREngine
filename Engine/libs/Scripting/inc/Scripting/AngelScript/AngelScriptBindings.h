@@ -50,11 +50,13 @@ namespace SR_SCRIPTING_NS {
             int32_t scriptTypeId = 0;
             const SR_UTILS_NS::Reflection::TypeInfo* pTypeInfo = nullptr;
             const SR_UTILS_NS::SRClassMeta* pMeta = nullptr;
-            bool isGeneratedVector = false;
+            bool isGeneratedContainer = false;
 
             SR_NODISCARD bool IsValue() const {
                 return pTypeInfo->IsMath() || pTypeInfo->IsString() ||
-                    pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::Vector;
+                    pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::Vector ||
+                    pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::Map ||
+                    pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::Set;
             }
         };
 
@@ -97,7 +99,7 @@ namespace SR_SCRIPTING_NS {
         SR_NODISCARD uint64_t GetStorageId() const {
             return m_storageId;
         }
-        Type* ResolveVectorType(asITypeInfo* pScriptType);
+        Type* ResolveContainerType(asITypeInfo* pScriptType);
         void ForgetType(int32_t typeId);
 
         SR_UTILS_NS::String Declaration(const SR_UTILS_NS::Reflection::TypeInfo& info) const;

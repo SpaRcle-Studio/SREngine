@@ -61,6 +61,12 @@ class ReflectionValueProbe : ScriptBehaviour
     Vector<ReflectionProbeWideMode> wideModes;
     ReflectionProbeEmpty emptyObject;
     Vector<Vector<int>> emptyGroups;
+    Set<String> uniqueLabels;
+    Set<ReflectionProbeWideMode> uniqueWideModes;
+    Map<String, int> scores;
+    Map<String, Set<int>> groupedIds;
+    Map<String, ReflectionProbeNode> namedNodes;
+    Map<String, ReflectionProbeNode@> namedLinks;
 
     void Awake()
     {
@@ -276,6 +282,158 @@ class ReflectionValueProbe : ScriptBehaviour
         holder.SetSecret(32);
         position = original;
         label = "saved";
+        return RunContainerProbe();
+    }
+
+    bool CheckConstContainers(const Set<String>&in names, const Map<String, int>&in values) const
+    {
+        return names.size() == 2 && names.contains("alpha") && names.contains("beta") &&
+            values.size() == 2 && values.contains("first") && values.at("first") == 17 && values["second"] == 29;
+    }
+
+    bool RunContainerProbe()
+    {
+        uniqueLabels.clear();
+        scores.clear();
+        if (uniqueLabels.size() != 0 || uniqueLabels.contains("missing") || uniqueLabels.erase("missing") ||
+            scores.size() != 0 || scores.contains("missing") || scores.erase("missing")) {
+            Debug::Instance().Error("RunContainerProbe() : failed empty Set/Map!");
+            return false;
+        }
+        if (!uniqueLabels.insert("alpha") || uniqueLabels.insert("alpha") || !uniqueLabels.insert("beta") || uniqueLabels.size() != 2) {
+            Debug::Instance().Error("RunContainerProbe() : failed Set insertion!");
+            return false;
+        }
+        Set<String> copiedLabels = uniqueLabels;
+        Set<String> assignedLabels;
+        assignedLabels.insert("stale");
+        assignedLabels = uniqueLabels;
+        assignedLabels = assignedLabels;
+        if (!copiedLabels.erase("alpha") || copiedLabels.erase("alpha") || !uniqueLabels.contains("alpha") ||
+            assignedLabels.size() != 2 || assignedLabels.contains("stale")) {
+            Debug::Instance().Error("RunContainerProbe() : failed Set copy/assignment/erase!");
+            return false;
+        }
+        copiedLabels.clear();
+        assignedLabels.clear();
+        if (copiedLabels.size() != 0 || assignedLabels.size() != 0 || uniqueLabels.size() != 2) {
+            Debug::Instance().Error("RunContainerProbe() : failed Set clear independence!");
+            return false;
+        }
+
+        if (scores["first"] != 0 || scores.size() != 1) {
+            Debug::Instance().Error("RunContainerProbe() : failed Map default insertion!");
+            return false;
+        }
+        scores["first"] = 11;
+        scores.set("first", 17);
+        scores.insert("second", 29);
+        if (!CheckConstContainers(uniqueLabels, scores)) {
+            Debug::Instance().Error("RunContainerProbe() : failed const Set/Map access or Map overwrite!");
+            return false;
+        }
+        Map<String, int> copiedScores = scores;
+        Map<String, int> assignedScores;
+        assignedScores["stale"] = -1;
+        assignedScores = scores;
+        assignedScores = assignedScores;
+        copiedScores.at("first") = 41;
+        if (!copiedScores.erase("second") || copiedScores.erase("second") || copiedScores.size() != 1 ||
+            scores["first"] != 17 || scores["second"] != 29 || assignedScores.size() != 2 ||
+            assignedScores.contains("stale") || assignedScores["first"] != 17) {
+            Debug::Instance().Error("RunContainerProbe() : failed Map copy/assignment/erase!");
+            return false;
+        }
+        copiedScores.clear();
+        assignedScores.clear();
+        if (copiedScores.size() != 0 || assignedScores.size() != 0 || scores.size() != 2) {
+            Debug::Instance().Error("RunContainerProbe() : failed Map clear independence!");
+            return false;
+        }
+
+        Set<int> ids;
+        Map<int, int> indexed;
+        for (int i = 31; i >= 0; --i) {
+            ids.insert(i);
+            indexed[i] = i * 3;
+        }
+        for (int i = 0; i < 32; i += 2) {
+            if (!ids.erase(i) || !indexed.erase(i)) {
+                Debug::Instance().Error("RunContainerProbe() : failed tree erasure!");
+                return false;
+            }
+        }
+        for (int i = 0; i < 32; ++i) {
+            bool expected = i % 2 != 0;
+            if (ids.contains(i) != expected || indexed.contains(i) != expected || (expected && indexed.at(i) != i * 3)) {
+                Debug::Instance().Error("RunContainerProbe() : failed tree contents after erasure!");
+                return false;
+            }
+        }
+        if (ids.size() != 16 || indexed.size() != 16) {
+            Debug::Instance().Error("RunContainerProbe() : failed tree size after erasure!");
+            return false;
+        }
+        groupedIds["odd"] = ids;
+        ids.clear();
+        Map<String, Set<int>> copiedGroups = groupedIds;
+        copiedGroups["odd"].erase(1);
+        Vector<Set<int>> sets;
+        sets.pushBack(groupedIds["odd"]);
+        sets[0].erase(3);
+        Vector<Map<String, int>> maps;
+        maps.pushBack(scores);
+        maps[0]["first"] = 99;
+        if (groupedIds["odd"].size() != 16 || !groupedIds["odd"].contains(1) || !groupedIds["odd"].contains(3) ||
+            copiedGroups["odd"].contains(1) || sets[0].contains(3) || scores["first"] != 17) {
+            Debug::Instance().Error("RunContainerProbe() : failed nested Set/Map copy independence!");
+            return false;
+        }
+
+        Set<ReflectionProbeMode> modeSet;
+        modeSet.insert(Active);
+        modeSet.insert(Dormant);
+        uniqueWideModes.insert(Far);
+        uniqueWideModes.insert(Before);
+        Map<ReflectionProbeWideMode, int> wideKeys;
+        wideKeys[Far] = 1;
+        wideKeys[Before] = 2;
+        if (modeSet.size() != 2 || !modeSet.contains(Active) || uniqueWideModes.size() != 2 ||
+            !uniqueWideModes.contains(Far) || !uniqueWideModes.contains(Before) || wideKeys[Far] != 1 || wideKeys[Before] != 2) {
+            Debug::Instance().Error("RunContainerProbe() : failed enum Set/Map!");
+            return false;
+        }
+
+        namedNodes["value"].score = 83;
+        Map<String, ReflectionProbeNode> copiedNodes = namedNodes;
+        copiedNodes["value"].score = 91;
+        if (namedLinks["null"] !is null) {
+            Debug::Instance().Error("RunContainerProbe() : failed Map default null handle!");
+            return false;
+        }
+        @namedLinks["root"] = root;
+        Map<String, ReflectionProbeNode@> copiedLinks = namedLinks;
+        namedLinks.erase("root");
+        if (namedNodes["value"].score != 83 || copiedNodes["value"].score != 91 ||
+            copiedLinks["root"] !is root || copiedLinks["null"] !is null) {
+            Debug::Instance().Error("RunContainerProbe() : failed Map object/handle copy!");
+            return false;
+        }
+        @namedLinks["root"] = copiedLinks["root"];
+
+        Value packed;
+        packed.set(uniqueLabels);
+        Set<String> restoredLabels;
+        if (!packed.get(restoredLabels) || restoredLabels.size() != 2 || !restoredLabels.contains("alpha") || !restoredLabels.contains("beta")) {
+            Debug::Instance().Error("RunContainerProbe() : failed Set Value round trip!");
+            return false;
+        }
+        packed.set(scores);
+        Map<String, int> restoredScores;
+        if (!packed.get(restoredScores) || restoredScores.size() != 2 || restoredScores["first"] != 17 || restoredScores["second"] != 29) {
+            Debug::Instance().Error("RunContainerProbe() : failed Map Value round trip!");
+            return false;
+        }
         return true;
     }
 
@@ -288,6 +446,12 @@ class ReflectionValueProbe : ScriptBehaviour
             modes.size() == 2 && modes[0] == Active && modes[1] == Dormant &&
             emptyGroups.size() == 2 && emptyGroups[0].size() == 0 &&
             emptyGroups[1].size() == 1 && emptyGroups[1][0] == 19 &&
-            wideModes.size() == 2 && wideModes[0] == Far && wideModes[1] == Before;
+            wideModes.size() == 2 && wideModes[0] == Far && wideModes[1] == Before &&
+            CheckConstContainers(uniqueLabels, scores) && uniqueWideModes.size() == 2 &&
+            uniqueWideModes.contains(Far) && uniqueWideModes.contains(Before) &&
+            groupedIds.size() == 1 && groupedIds["odd"].size() == 16 &&
+            groupedIds["odd"].contains(1) && groupedIds["odd"].contains(31) && !groupedIds["odd"].contains(0) &&
+            namedNodes.size() == 1 && namedNodes["value"].score == 83 && namedLinks.size() == 2 &&
+            namedLinks["root"] is root && namedLinks.contains("null") && namedLinks["null"] is null;
     }
 }

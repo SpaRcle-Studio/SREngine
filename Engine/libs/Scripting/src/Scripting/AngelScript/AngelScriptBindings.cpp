@@ -7,6 +7,7 @@
 #include <Scripting/AngelScript/AngelScriptBindings.h>
 #include <Scripting/AngelScript/AngelScriptBindingHelpers.h>
 #include <Scripting/AngelScript/AngelScriptVectorBindings.h>
+#include <Scripting/AngelScript/AngelScriptMapBindings.h>
 #include <Scripting/AngelScript/AngelScriptTypeReflection.h>
 #include <Scripting/AngelScript/AngelScriptNativeStorage.h>
 #include <Scripting/Base/ScriptSystem.h>
@@ -19,6 +20,7 @@
 #include <Utils/Math/Size.h>
 #include <Utils/FileSystem/Path.h>
 #include <Utils/Types/UnicodeString.h>
+#include <Utils/Types/MapCore.h>
 #include <Utils/Localization/UTF.h>
 #include <Utils/Common/Singleton.h>
 
@@ -286,36 +288,47 @@ namespace SR_SCRIPTING_NS {
         return pType;
     }
 
-    AngelScriptBindings::Type* AngelScriptBindings::ResolveVectorType(asITypeInfo* pScriptType) {
+    AngelScriptBindings::Type* AngelScriptBindings::ResolveContainerType(asITypeInfo* pScriptType) {
         SR_TRACY_ZONE;
-        if (!pScriptType || pScriptType->GetSubTypeCount() != 1) {
+        const bool map = pScriptType && SR_UTILS_NS::StringView(pScriptType->GetName()) == "Map";
+        const bool set = pScriptType && SR_UTILS_NS::StringView(pScriptType->GetName()) == "Set";
+        if (!pScriptType || pScriptType->GetSubTypeCount() != (map ? 2u : 1u)) {
             return nullptr;
         }
-        const auto subtype = pScriptType->GetSubTypeId();
-        const SR_UTILS_NS::Reflection::TypeInfo* pElement = (subtype & asTYPEID_SCRIPTOBJECT) || !(subtype & asTYPEID_MASK_OBJECT) ?
-            AngelScriptTypeReflection::Resolve(this, m_pEngine, subtype) : nullptr;
-        if (!pElement) {
-            auto&& pNative = FindType(subtype);
-            if (!pNative) {
-                return nullptr;
+        const SR_UTILS_NS::Reflection::TypeInfo* pArguments[2] = {};
+        for (uint32_t i = 0; i < pScriptType->GetSubTypeCount(); ++i) {
+            const auto subtype = pScriptType->GetSubTypeId(i);
+            auto&& pElement = pArguments[i];
+            pElement = (subtype & asTYPEID_SCRIPTOBJECT) || !(subtype & asTYPEID_MASK_OBJECT) ?
+                AngelScriptTypeReflection::Resolve(this, m_pEngine, subtype) : nullptr;
+            if (!pElement) {
+                auto&& pNative = FindType(subtype);
+                if (!pNative) {
+                    return nullptr;
+                }
+                pElement = pNative->pTypeInfo;
+                if (subtype & asTYPEID_OBJHANDLE) {
+                    pElement = SR_UTILS_NS::Reflection::ResolveTemplateTypeInfo(SR_UTILS_NS::Reflection::TypeKind::SharedPtr, pElement);
+                }
             }
-            pElement = pNative->pTypeInfo;
-            if (subtype & asTYPEID_OBJHANDLE) {
-                pElement = SR_UTILS_NS::Reflection::ResolveTemplateTypeInfo(SR_UTILS_NS::Reflection::TypeKind::SharedPtr, pElement);
-            }
+            pElement = AngelScriptNativeStorage::Resolve(this, *pElement);
         }
-        pElement = AngelScriptNativeStorage::Resolve(this, *pElement);
-        auto&& pVector = SR_UTILS_NS::Reflection::ResolveTemplateTypeInfo(SR_UTILS_NS::Reflection::TypeKind::Vector, pElement);
-        if (!pVector->CanConstruct() || !pVector->CanCopy() || !pVector->vtable.arrayVTable.pInsert) {
+        if ((map || set) && !pArguments[0]->vtable.pLess) {
             return nullptr;
         }
-        auto&& pType = Collect(*pVector);
+        auto&& pContainer = SR_UTILS_NS::Reflection::ResolveTemplateTypeInfo(map ?
+            SR_UTILS_NS::Reflection::TypeKind::Map : (set ? SR_UTILS_NS::Reflection::TypeKind::Set : SR_UTILS_NS::Reflection::TypeKind::Vector), pArguments[0], pArguments[1]);
+        if (!pContainer->CanConstruct() || !pContainer->CanCopy() ||
+            ((map || set) ? !pContainer->vtable.mapVTable.pFindOrAdd : !pContainer->vtable.arrayVTable.pInsert)) {
+            return nullptr;
+        }
+        auto&& pType = Collect(*pContainer);
         if (!pType) {
             return nullptr;
         }
         pType->scriptTypeId = pScriptType->GetTypeId();
         m_typesById[pType->scriptTypeId] = pType;
-        pType->isGeneratedVector = true;
+        pType->isGeneratedContainer = true;
         pScriptType->SetUserData(this, NativeTypeUserData);
         return pType;
     }
@@ -385,9 +398,9 @@ namespace SR_SCRIPTING_NS {
             const SR_UTILS_NS::String name(pName);
             const bool map = name == "Map" || name == "FlatHashMap";
             const auto declaration = name + (map ? "<class K, class V>" : "<class T>");
-            const bool vector = name == "Vector";
-            if (!Check(m_pEngine->RegisterObjectType(declaration.c_str(), vector ? sizeof(SR_UTILS_NS::ErasedVectorLayout) : 0,
-                vector ? asOBJ_VALUE | asOBJ_TEMPLATE | asOBJ_APP_CLASS_CDAK | asOBJ_GC : asOBJ_REF | asOBJ_TEMPLATE | asOBJ_NOCOUNT), declaration)) {
+            const bool valueTemplate = name == "Vector" || name == "Map" || name == "Set";
+            if (!Check(m_pEngine->RegisterObjectType(declaration.c_str(), valueTemplate ? ((name == "Map" || name == "Set") ? sizeof(SR_UTILS_NS::ErasedTreeMapLayout) : sizeof(SR_UTILS_NS::ErasedVectorLayout)) : 0,
+                valueTemplate ? asOBJ_VALUE | asOBJ_TEMPLATE | asOBJ_APP_CLASS_CDAK | asOBJ_GC : asOBJ_REF | asOBJ_TEMPLATE | asOBJ_NOCOUNT), declaration)) {
                 return false;
             }
         }
@@ -399,7 +412,7 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
-        if (!AngelScriptVectorBindings::Register(m_pEngine, this)) {
+        if (!AngelScriptVectorBindings::Register(m_pEngine, this) || !AngelScriptMapBindings::Register(m_pEngine, this)) {
             return false;
         }
 
@@ -413,7 +426,7 @@ namespace SR_SCRIPTING_NS {
         // Other containers still require native specializations.
         for (auto&& pName : pTemplates) {
             const SR_UTILS_NS::String name(pName);
-            if (name == "Vector") {
+            if (name == "Vector" || name == "Map" || name == "Set") {
                 continue;
             }
             const auto instance = name + ((name == "Map" || name == "FlatHashMap") ? "<K, V>" : "<T>");
@@ -427,7 +440,7 @@ namespace SR_SCRIPTING_NS {
         }
 
         for (auto&& pType : m_types) {
-            if (!pType->isGeneratedVector && pType->pTypeInfo->kind != SR_UTILS_NS::Reflection::TypeKind::NativeHandle && !RegisterMembers(*pType)) {
+            if (!pType->isGeneratedContainer && pType->pTypeInfo->kind != SR_UTILS_NS::Reflection::TypeKind::NativeHandle && !RegisterMembers(*pType)) {
                 return false;
             }
         }
@@ -467,13 +480,15 @@ namespace SR_SCRIPTING_NS {
 
     bool AngelScriptBindings::RegisterType(Type& type) {
         SR_TRACY_ZONE;
-        if (type.pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::Vector) {
-            auto&& pScript = ResolveVectorType(m_pEngine->GetTypeInfoByDecl(type.name.c_str()));
+        if (type.pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::Vector ||
+            type.pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::Map ||
+            type.pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::Set) {
+            auto&& pScript = ResolveContainerType(m_pEngine->GetTypeInfoByDecl(type.name.c_str()));
             if (!pScript) {
                 return false;
             }
             type.scriptTypeId = pScript->scriptTypeId;
-            type.isGeneratedVector = true;
+            type.isGeneratedContainer = true;
             m_typesByInfo[type.pTypeInfo] = pScript;
             return true;
         }
@@ -778,7 +793,7 @@ namespace SR_SCRIPTING_NS {
             pBinding->propertyReference = !property.HasExplicitSetter() && !property.HasChangeCallback() &&
                 (property.GetByteOffset() != INT32_MIN || property.IsReturnsReference()) &&
                 (info.IsArithmetic() || info.IsMath() || info.kind == SR_UTILS_NS::Reflection::TypeKind::String ||
-                    (info.kind == SR_UTILS_NS::Reflection::TypeKind::Vector && AngelScriptNativeStorage::Resolve(this, info) == &info) ||
+                    ((info.kind == SR_UTILS_NS::Reflection::TypeKind::Vector || info.kind == SR_UTILS_NS::Reflection::TypeKind::Map || info.kind == SR_UTILS_NS::Reflection::TypeKind::Set) && AngelScriptNativeStorage::Resolve(this, info) == &info) ||
                     (info.kind == SR_UTILS_NS::Reflection::TypeKind::Enum && info.vtable.lifecycle.size >= sizeof(int32_t)));
             const bool constReference = property.IsReadOnly() || property.IsReturnsConstReference();
             const bool objectReference = info.kind == SR_UTILS_NS::Reflection::TypeKind::Object && property.IsReturnsReference();
@@ -815,10 +830,12 @@ namespace SR_SCRIPTING_NS {
                 (method.GetReturnType()->IsArithmetic() || method.GetReturnType()->IsMath() ||
                     method.GetReturnType()->kind == SR_UTILS_NS::Reflection::TypeKind::String ||
                     (method.GetReturnType()->kind == SR_UTILS_NS::Reflection::TypeKind::Enum && method.GetReturnType()->vtable.lifecycle.size >= sizeof(int32_t)) ||
-                    (method.GetReturnType()->kind == SR_UTILS_NS::Reflection::TypeKind::Vector &&
+                    ((method.GetReturnType()->kind == SR_UTILS_NS::Reflection::TypeKind::Vector || method.GetReturnType()->kind == SR_UTILS_NS::Reflection::TypeKind::Map || method.GetReturnType()->kind == SR_UTILS_NS::Reflection::TypeKind::Set) &&
                         AngelScriptNativeStorage::Resolve(this, *method.GetReturnType()) == method.GetReturnType()));
             if (method.HasReturn() && method.IsReturnsReference() && !method.IsReturnsConstReference() && !valueReference &&
                 (AngelScriptBindingHelpers::Primitive(*method.GetReturnType()) || method.GetReturnType()->IsString() ||
+                    method.GetReturnType()->kind == SR_UTILS_NS::Reflection::TypeKind::Set ||
+                    method.GetReturnType()->kind == SR_UTILS_NS::Reflection::TypeKind::Map ||
                     method.GetReturnType()->kind == SR_UTILS_NS::Reflection::TypeKind::Vector ||
                     method.GetReturnType()->kind == SR_UTILS_NS::Reflection::TypeKind::SharedPtr)) {
                 SR_WARN("AngelScriptBindings::RegisterMembers() : cannot expose mutable reference with a different script layout: {}::{}", type.name, method.GetName());
@@ -874,12 +891,12 @@ namespace SR_SCRIPTING_NS {
             for (uint32_t i = 0; i < method.GetParamsCount(); ++i) {
                 auto&& info = *method.GetParam(i).pTypeInfo;
                 pBinding->directArguments.emplace_back(info.IsArithmetic() || info.IsMath() || info.kind == SR_UTILS_NS::Reflection::TypeKind::String ||
-                    (info.kind == SR_UTILS_NS::Reflection::TypeKind::Vector && AngelScriptNativeStorage::Resolve(this, info) == &info));
+                    ((info.kind == SR_UTILS_NS::Reflection::TypeKind::Vector || info.kind == SR_UTILS_NS::Reflection::TypeKind::Map || info.kind == SR_UTILS_NS::Reflection::TypeKind::Set) && AngelScriptNativeStorage::Resolve(this, info) == &info));
             }
             if (method.HasReturn()) {
                 auto&& info = *method.GetReturnType();
                 pBinding->directResult = valueReference || info.IsMath() || info.kind == SR_UTILS_NS::Reflection::TypeKind::String ||
-                    (info.kind == SR_UTILS_NS::Reflection::TypeKind::Vector && AngelScriptNativeStorage::Resolve(this, info) == &info);
+                    ((info.kind == SR_UTILS_NS::Reflection::TypeKind::Vector || info.kind == SR_UTILS_NS::Reflection::TypeKind::Map || info.kind == SR_UTILS_NS::Reflection::TypeKind::Set) && AngelScriptNativeStorage::Resolve(this, info) == &info);
             }
             for (uint32_t i = 0; i < 32; ++i) {
                 pBinding->AddFrame();
@@ -922,6 +939,43 @@ namespace SR_SCRIPTING_NS {
             auto result = SR_UTILS_NS::Reflection::ValueRef(&expected, &pObject, true).Copy();
             pObject->Release();
             return result;
+        }
+        if (value.GetTypeInfo().kind == SR_UTILS_NS::Reflection::TypeKind::Set && expected.kind == SR_UTILS_NS::Reflection::TypeKind::Set) {
+            auto result = SR_UTILS_NS::Reflection::Value::CreateDefault(&expected);
+            if (!result) {
+                return {};
+            }
+            const auto destination = result.AsMap();
+            bool success = true;
+            value.AsMap().ForEach([&](const SR_UTILS_NS::Reflection::ValueRef& key, const SR_UTILS_NS::Reflection::ValueRef&) {
+                auto convertedKey = Convert(key.ToValue(), *expected.GetArgument(0));
+                if (!convertedKey) {
+                    success = false;
+                    return false;
+                }
+                destination.InsertOrAssign(convertedKey.AsRef(), {});
+                return true;
+            });
+            return success ? std::move(result) : SR_UTILS_NS::Reflection::Value();
+        }
+        if (value.GetTypeInfo().kind == SR_UTILS_NS::Reflection::TypeKind::Map && expected.kind == SR_UTILS_NS::Reflection::TypeKind::Map) {
+            auto result = SR_UTILS_NS::Reflection::Value::CreateDefault(&expected);
+            if (!result) {
+                return {};
+            }
+            const auto destination = result.AsMap();
+            bool success = true;
+            value.AsMap().ForEach([&](const SR_UTILS_NS::Reflection::ValueRef& key, const SR_UTILS_NS::Reflection::ValueRef& mapped) {
+                auto convertedKey = Convert(key.ToValue(), *expected.GetArgument(0));
+                auto convertedValue = Convert(mapped.ToValue(), *expected.GetArgument(1));
+                if (!convertedKey || !convertedValue) {
+                    success = false;
+                    return false;
+                }
+                destination.InsertOrAssign(convertedKey.AsRef(), convertedValue.AsRef());
+                return true;
+            });
+            return success ? std::move(result) : SR_UTILS_NS::Reflection::Value();
         }
         if (value.GetTypeInfo().kind == SR_UTILS_NS::Reflection::TypeKind::Vector && expected.kind == SR_UTILS_NS::Reflection::TypeKind::Vector) {
             auto result = SR_UTILS_NS::Reflection::Value::CreateDefault(&expected);

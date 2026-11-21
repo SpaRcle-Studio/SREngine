@@ -202,6 +202,7 @@ namespace SR_CORE_GUI_NS {
 
     private:
         PropertyDrawerBase::Ptr m_valueDrawer;
+        std::optional<PropertyDrawerContext> m_valueContext;
 
     };
 

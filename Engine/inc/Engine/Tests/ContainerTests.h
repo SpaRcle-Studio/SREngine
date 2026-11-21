@@ -22,6 +22,8 @@ namespace SR_CORE_NS::Tests {
         SR_UTILS_NS::TestExecutionResult Run() override {
             SR_TRACY_ZONE;
 
+            SR_UTILS_NS::Map<int, int>::ValidateErasedLayout();
+
             if (!TestBasicInsertAndFind())  { return SR_UTILS_NS::TestExecutionResult::Error; }
             if (!TestDuplicateInsert())     { return SR_UTILS_NS::TestExecutionResult::Error; }
             if (!TestOperatorBracket())     { return SR_UTILS_NS::TestExecutionResult::Error; }
@@ -456,6 +458,8 @@ namespace SR_CORE_NS::Tests {
     public:
         SR_UTILS_NS::TestExecutionResult Run() override {
             SR_TRACY_ZONE;
+
+            SR_UTILS_NS::Set<int>::ValidateErasedLayout();
 
             if (!TestBasicInsertAndFind()) { return SR_UTILS_NS::TestExecutionResult::Error; }
             if (!TestDuplicateInsert())    { return SR_UTILS_NS::TestExecutionResult::Error; }

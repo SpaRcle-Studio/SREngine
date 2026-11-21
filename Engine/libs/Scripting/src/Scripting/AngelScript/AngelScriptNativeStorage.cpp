@@ -109,20 +109,26 @@ namespace SR_SCRIPTING_NS::AngelScriptNativeStorage {
     }
 
     const SR_UTILS_NS::Reflection::TypeInfo* NativeType(const SR_UTILS_NS::Reflection::TypeInfo& info) {
+        if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Map) {
+            return SR_UTILS_NS::Reflection::ResolveTemplateTypeInfo(info.kind, NativeType(*info.GetArgument(0)), NativeType(*info.GetArgument(1)));
+        }
         if (info.kind == SR_UTILS_NS::Reflection::TypeKind::NativeHandle) {
             return info.detailedSize ? SR_UTILS_NS::Reflection::ResolveTemplateTypeInfo(SR_UTILS_NS::Reflection::TypeKind::SharedPtr, info.pNext[0]) : info.pNext[0];
         }
         if (IsPackedEnum(info)) {
             return info.pNext[0];
         }
-        if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Vector) {
+        if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Vector || info.kind == SR_UTILS_NS::Reflection::TypeKind::Set) {
             return SR_UTILS_NS::Reflection::ResolveTemplateTypeInfo(info.kind, NativeType(*info.pNext[0]));
         }
         return &info;
     }
 
     const SR_UTILS_NS::Reflection::TypeInfo* Resolve(AngelScriptBindings* pBindings, const SR_UTILS_NS::Reflection::TypeInfo& info) {
-        if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Vector) {
+        if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Map) {
+            return SR_UTILS_NS::Reflection::ResolveTemplateTypeInfo(info.kind, Resolve(pBindings, *info.GetArgument(0)), Resolve(pBindings, *info.GetArgument(1)));
+        }
+        if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Vector || info.kind == SR_UTILS_NS::Reflection::TypeKind::Set) {
             return SR_UTILS_NS::Reflection::ResolveTemplateTypeInfo(info.kind, Resolve(pBindings, *info.pNext[0]));
         }
         if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Enum && info.vtable.lifecycle.size < sizeof(int32_t)) {

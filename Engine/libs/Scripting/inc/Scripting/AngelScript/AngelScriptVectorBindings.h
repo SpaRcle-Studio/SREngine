@@ -10,6 +10,10 @@
 #include <Scripting/AngelScript/AngelScriptBindings.h>
 
 namespace SR_SCRIPTING_NS::AngelScriptVectorBindings {
+    void Construct(asIScriptGeneric* pCall);
+    void CopyConstruct(asIScriptGeneric* pCall);
+    void Destruct(asIScriptGeneric* pCall);
+    void Assign(asIScriptGeneric* pCall);
     bool Register(asIScriptEngine* pEngine, AngelScriptBindings* pBindings);
 }
 

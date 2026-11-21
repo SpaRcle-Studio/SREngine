@@ -26,14 +26,14 @@ namespace SR_SCRIPTING_NS::AngelScriptVectorBindings {
             }
         }
         *static_cast<bool*>(pCall->GetArgAddress(1)) = !pElement || !(pElement->GetFlags() & (asOBJ_GC | asOBJ_SCRIPT_OBJECT));
-        pCall->SetReturnByte(pBindings->ResolveVectorType(pType) != nullptr);
+        pCall->SetReturnByte(pBindings->ResolveContainerType(pType) != nullptr);
     }
 
     void Construct(asIScriptGeneric* pCall) {
         auto&& pBindings = static_cast<AngelScriptBindings*>(pCall->GetAuxiliary());
-        auto&& pType = pBindings->ResolveVectorType(static_cast<asITypeInfo*>(pCall->GetArgAddress(0)));
+        auto&& pType = pBindings->ResolveContainerType(static_cast<asITypeInfo*>(pCall->GetArgAddress(0)));
         if (!pType) {
-            AngelScriptBindingHelpers::Exception("Unsupported Vector element type");
+            AngelScriptBindingHelpers::Exception("Unsupported container element type");
             return;
         }
         pType->pTypeInfo->ConstructAt(pCall->GetObject());
@@ -41,9 +41,9 @@ namespace SR_SCRIPTING_NS::AngelScriptVectorBindings {
 
     void CopyConstruct(asIScriptGeneric* pCall) {
         auto&& pBindings = static_cast<AngelScriptBindings*>(pCall->GetAuxiliary());
-        auto&& pType = pBindings->ResolveVectorType(static_cast<asITypeInfo*>(pCall->GetArgAddress(0)));
+        auto&& pType = pBindings->ResolveContainerType(static_cast<asITypeInfo*>(pCall->GetArgAddress(0)));
         if (!pType) {
-            AngelScriptBindingHelpers::Exception("Unsupported Vector element type");
+            AngelScriptBindingHelpers::Exception("Unsupported container element type");
             return;
         }
         pType->pTypeInfo->CopyConstructAt(pCall->GetObject(), pCall->GetArgObject(1));
@@ -61,7 +61,7 @@ namespace SR_SCRIPTING_NS::AngelScriptVectorBindings {
         auto&& pBindings = static_cast<AngelScriptBindings*>(pCall->GetAuxiliary());
         auto&& pType = pBindings->FindType(pCall->GetObjectTypeId());
         if (!pType || !pCall->GetArgObject(0)) {
-            AngelScriptBindingHelpers::Exception("Vector cannot be assigned");
+            AngelScriptBindingHelpers::Exception("Container cannot be assigned");
             return;
         }
         pType->pTypeInfo->CopyAssign(pCall->GetObject(), pCall->GetArgObject(0));
@@ -147,7 +147,7 @@ namespace SR_SCRIPTING_NS::AngelScriptVectorBindings {
         if (!pBindings) {
             return;
         }
-        if (auto&& pType = pBindings->FindType(pScriptType->GetTypeId()); pType && pType->isGeneratedVector) {
+        if (auto&& pType = pBindings->FindType(pScriptType->GetTypeId()); pType && pType->isGeneratedContainer) {
             pBindings->ForgetType(pScriptType->GetTypeId());
         }
     }
@@ -167,7 +167,7 @@ namespace SR_SCRIPTING_NS::AngelScriptVectorBindings {
                     pCall->GetEngine()->GCEnumCallback(pObject);
                 }
             }
-            else if (pElement->kind == SR_UTILS_NS::Reflection::TypeKind::Vector) {
+            else if (pElement->kind == SR_UTILS_NS::Reflection::TypeKind::Vector || pElement->kind == SR_UTILS_NS::Reflection::TypeKind::Map || pElement->kind == SR_UTILS_NS::Reflection::TypeKind::Set) {
                 if (auto&& pNested = pBindings->FindType(*pElement)) {
                     pCall->GetEngine()->ForwardGCEnumReferences(array.At(i).Data(), pCall->GetEngine()->GetTypeInfoById(pNested->scriptTypeId));
                 }
