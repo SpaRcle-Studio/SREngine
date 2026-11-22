@@ -83,6 +83,12 @@ namespace SR_CORE_GUI_NS {
             status.error = false;
             status.log.clear();
             status.message = "Working...";
+            operationStarted = std::chrono::steady_clock::now();
+            status.overallProgress = -1.f;
+            status.stageProgress = -1.f;
+            status.buildStage.clear();
+            status.elapsedSeconds = 0.0;
+            status.remainingSeconds = -1.0;
             status.progress = -1.f;
             status.downloadedBytes = 0;
             status.totalBytes = 0;
@@ -135,6 +141,9 @@ namespace SR_CORE_GUI_NS {
             {
                 std::lock_guard lock(mutex);
                 status.logcatRefreshing = false;
+                if (!status.logcatRefreshing) {
+                    status.elapsedSeconds = std::chrono::duration<double_t>(std::chrono::steady_clock::now() - operationStarted).count();
+                }
                 busy = false;
             }
         }
@@ -195,6 +204,12 @@ namespace SR_CORE_GUI_NS {
         std::lock_guard lock(m_state->mutex);
         Status result = m_state->status;
         result.busy = m_state->busy;
+        if (result.busy && !result.logcatRefreshing && result.overallProgress >= 0.f) {
+            result.elapsedSeconds = std::chrono::duration<double_t>(std::chrono::steady_clock::now() - m_state->operationStarted).count();
+            if (result.elapsedSeconds >= 3.0 && result.overallProgress >= 0.02f && result.stageProgress >= 0.f) {
+                result.remainingSeconds = result.elapsedSeconds * (1.0 - result.overallProgress) / result.overallProgress;
+            }
+        }
         return result;
     }
 

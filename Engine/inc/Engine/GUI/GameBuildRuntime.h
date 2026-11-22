@@ -29,6 +29,11 @@ namespace SR_CORE_GUI_NS {
             SR_UTILS_NS::Vector<SR_PLATFORM_NS::AndroidSDK::SystemImage> systemImages;
             SR_UTILS_NS::String selectedSystemImage;
             float_t progress = -1.f;
+            float_t overallProgress = -1.f;
+            float_t stageProgress = -1.f;
+            SR_UTILS_NS::String buildStage;
+            double_t elapsedSeconds = 0.0;
+            double_t remainingSeconds = -1.0;
             uint64_t downloadedBytes = 0;
             uint64_t totalBytes = 0;
             bool toolsReady = false;
@@ -48,6 +53,7 @@ namespace SR_CORE_GUI_NS {
         bool IsCancelled() const;
         void Report(SR_UTILS_NS::String message, bool error = false);
         void ReportProgress(float_t progress);
+        void ReportBuildProgress(float_t overall, float_t stage, SR_UTILS_NS::String label);
         void ReportDownload(uint64_t downloaded, uint64_t total);
         void RefreshTools(SR_UTILS_NS::Path resources = {}, SR_UTILS_NS::String image = {});
         void ClearEngineCache(SR_UTILS_NS::Path path);

@@ -32,6 +32,13 @@ namespace SR_CORE_GUI_NS {
         m_state->status.progress = total > 0 ? static_cast<float_t>(downloaded) / total : -1.f;
     }
 
+    void GameBuildRuntime::ReportBuildProgress(float_t overall, float_t stage, SR_UTILS_NS::String label) {
+        std::lock_guard lock(m_state->mutex);
+        m_state->status.overallProgress = std::clamp(overall, 0.f, 1.f);
+        m_state->status.stageProgress = stage;
+        m_state->status.buildStage = std::move(label);
+    }
+
     SR_UTILS_NS::Path GameBuildRuntime::ResolveArtifact(SR_UTILS_NS::Path artifact, SR_UTILS_NS::Path resources) {
         auto&& vfs = SR_UTILS_NS::VFS::Instance();
         if (!artifact.IsAbs() && !resources.empty()) {

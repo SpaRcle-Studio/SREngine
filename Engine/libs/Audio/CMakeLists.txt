@@ -49,7 +49,7 @@ if (NOT SR_EMSCRIPTEN)
 endif()
 
 if (SR_AUDIO_USE_VORBIS OR SR_AUDIO_USE_FLAC)
-    message("[SpaRcle Engine] Audio will be built with OGG support")
+    message(STATUS "[SpaRcle Engine] Audio will be built with OGG support")
     add_definitions(-DSR_AUDIO_USE_OGG)
     add_subdirectory(libs/ogg)
 
@@ -59,7 +59,7 @@ if (SR_AUDIO_USE_VORBIS OR SR_AUDIO_USE_FLAC)
 endif()
 
 if (SR_AUDIO_USE_VORBIS)
-    message("[SpaRcle Engine] Audio will be built with VORBIS support")
+    message(STATUS "[SpaRcle Engine] Audio will be built with VORBIS support")
 
     set(BUILD_SHARED_LIBS OFF CACHE BOOL "")
 
@@ -73,7 +73,7 @@ if (SR_AUDIO_USE_VORBIS)
 endif()
 
 if (SR_AUDIO_USE_FLAC)
-    message("[SpaRcle Engine] Audio will be built with FLAC support")
+    message(STATUS "[SpaRcle Engine] Audio will be built with FLAC support")
 
     # Flac
     set(BUILD_CXXLIBS             OFF CACHE BOOL "" FORCE)
@@ -111,7 +111,7 @@ target_link_libraries(Audio PUBLIC Utils)
 SR_COPY_STATIC_LIBRARY_TO_LIBRARY_FOLDER(Audio)
 
 if (SR_AUDIO_DLL_EXPORTS)
-    message("[SpaRcle Engine] Audio will be using DLL exports")
+    message(STATUS "[SpaRcle Engine] Audio will be using DLL exports")
     target_compile_definitions(Audio PUBLIC SR_AUDIO_DLL_EXPORTS)
 endif()
 

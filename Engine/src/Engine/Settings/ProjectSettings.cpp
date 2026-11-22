@@ -24,6 +24,9 @@ namespace SR_CORE_NS {
                androidX64 == rhs.androidX64 &&
                emscripten == rhs.emscripten &&
                createPlatformArchives == rhs.createPlatformArchives &&
+               webTextureProfile == rhs.webTextureProfile &&
+               textureGpuEncoding == rhs.textureGpuEncoding &&
+               desktopTextureFallback == rhs.desktopTextureFallback &&
                enableWebPreview == rhs.enableWebPreview;
     }
 

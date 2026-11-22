@@ -7,6 +7,8 @@
 
 #include <Engine/macros.h>
 
+#include <Graphics/Pipeline/TextureHelper.h>
+
 #include <Utils/Resources/Asset.h>
 #include <Utils/FileSystem/PathDataAccessor.h>
 
@@ -54,6 +56,12 @@ namespace SR_CORE_NS {
         bool packEditor = false;
         /// @property
         bool enableWebPreview = true;
+        /// @property
+        SR_GRAPH_NS::TextureExportProfile webTextureProfile = SR_GRAPH_NS::TextureExportProfile::Universal;
+        /// @property
+        bool textureGpuEncoding = true;
+        /// @property
+        bool desktopTextureFallback = false;
 
         SR_NODISCARD bool operator==(const GameBuildProfile& rhs) const;
         SR_NODISCARD bool operator!=(const GameBuildProfile& rhs) const;

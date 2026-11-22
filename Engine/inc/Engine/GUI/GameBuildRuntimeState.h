@@ -22,6 +22,7 @@ namespace SR_CORE_GUI_NS {
 
         mutable std::mutex mutex;
         Status status;
+        std::chrono::steady_clock::time_point operationStarted;
         std::atomic<bool> busy = false;
         std::atomic<bool> cancel = false;
         SR_HTYPES_NS::Thread::Ptr worker = nullptr;

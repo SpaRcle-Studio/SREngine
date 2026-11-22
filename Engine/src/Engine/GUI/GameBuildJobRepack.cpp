@@ -50,16 +50,44 @@ namespace SR_CORE_GUI_NS {
                 SetStatus("Monolithic resources exceed the supported archive size.", true);
                 return false;
             }
-            uLongf compressedSize = compressBound(m_desktopPackedBinary.size());
             SR_UTILS_NS::String compressed;
-            compressed.resize(compressedSize);
-            if (compress2(reinterpret_cast<Bytef*>(compressed.data()), &compressedSize,
-                reinterpret_cast<const Bytef*>(m_desktopPackedBinary.data()),
-                m_desktopPackedBinary.size(), Z_BEST_COMPRESSION) != Z_OK) {
+            compressed.reserve(compressBound(m_desktopPackedBinary.size()));
+            z_stream stream{};
+            if (deflateInit(&stream, Z_BEST_COMPRESSION) != Z_OK) {
                 SetStatus("Failed to compress monolithic resources.", true);
                 return false;
             }
-            compressed.resize(compressedSize);
+            uint8_t buffer[65536];
+            uint64_t inputOffset = 0;
+            int32_t result = Z_OK;
+            auto lastProgress = std::chrono::steady_clock::now();
+            while (result != Z_STREAM_END) {
+                if (isCancelled && isCancelled()) {
+                    deflateEnd(&stream);
+                    return false;
+                }
+                if (stream.avail_in == 0 && inputOffset < m_desktopPackedBinary.size()) {
+                    const auto count = static_cast<uInt>(std::min(uint64_t(1048576), static_cast<uint64_t>(m_desktopPackedBinary.size()) - inputOffset));
+                    stream.next_in = reinterpret_cast<Bytef*>(m_desktopPackedBinary.data() + inputOffset);
+                    stream.avail_in = count;
+                    inputOffset += count;
+                }
+                stream.next_out = buffer;
+                stream.avail_out = sizeof(buffer);
+                result = deflate(&stream, inputOffset == m_desktopPackedBinary.size() ? Z_FINISH : Z_NO_FLUSH);
+                if (result != Z_OK && result != Z_STREAM_END) {
+                    deflateEnd(&stream);
+                    SetStatus("Failed to compress monolithic resources.", true);
+                    return false;
+                }
+                compressed.append(reinterpret_cast<const char*>(buffer), sizeof(buffer) - stream.avail_out);
+                const auto now = std::chrono::steady_clock::now();
+                if (result == Z_STREAM_END || now - lastProgress >= std::chrono::milliseconds(100)) {
+                    SetProgress(std::min(0.99f, static_cast<float_t>(stream.total_in) / static_cast<float_t>(m_desktopPackedBinary.size())));
+                    lastProgress = now;
+                }
+            }
+            deflateEnd(&stream);
             artifactFile = SR_UTILS_NS::File();
             auto output = SR_UTILS_NS::VFS::Instance().OpenFile(artifactPath, SR_UTILS_NS::FileMode::Write);
             const uint64_t dataSize = m_desktopPackedBinary.size();
@@ -162,10 +190,9 @@ namespace SR_CORE_GUI_NS {
             return false;
         }
 
-        for (const auto& path : m_resourcePaths) {
+        for (auto&& path : m_resourcePaths) {
             SR_UTILS_NS::String data;
-            auto file = SR_UTILS_NS::VFS::Instance().OpenFile(path, SR_UTILS_NS::FileMode::Read);
-            if (!file || !file.Read(data)) {
+            if (!ReadBuildResource(path, data)) {
                 SetStatus("Failed to read portable resource: {}"_format(path), true);
                 return false;
             }
@@ -205,7 +232,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::String manifest;
         bool manifestFound = false;
-        for (auto& entry : entries) {
+        for (auto&& entry : entries) {
             if (entry.name != "AndroidManifest.xml") {
                 continue;
             }
@@ -228,9 +255,8 @@ namespace SR_CORE_GUI_NS {
         apkNames.reserve(m_resourcePaths.size());
         resourceData.reserve(m_resourcePaths.size());
         for (uint32_t i = 0; i < m_resourcePaths.size(); ++i) {
-            auto file = SR_UTILS_NS::VFS::Instance().OpenFile(m_resourcePaths[i], SR_UTILS_NS::FileMode::Read);
-            SR_UTILS_NS::String& data = resourceData.emplace_back();
-            if (!file || !file.Read(data)) {
+            auto&& data = resourceData.emplace_back();
+            if (!ReadBuildResource(m_resourcePaths[i], data)) {
                 SetStatus("Failed to read Android resource: {}"_format(m_resourcePaths[i]), true);
                 return false;
             }
@@ -260,7 +286,9 @@ namespace SR_CORE_GUI_NS {
         }
         SR_PLATFORM_NS::AndroidSDK sdk(GameBuildRuntime::GetToolsPath());
         sdk.isCancelled = isCancelled;
-        sdk.onProgress = onProgress;
+        sdk.onProgress = [this](float_t progress) {
+            SetProgress(progress);
+        };
         sdk.onDownloadProgress = onDownload;
         sdk.onMessage = [this](SR_UTILS_NS::String text, bool error) {
             SetStatus(std::move(text), error);
@@ -307,9 +335,8 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::String webData;
         SR_UTILS_NS::String metadata = "loadPackage({files:[";
         for (uint32_t i = 0; i < m_resourcePaths.size(); ++i) {
-            auto file = SR_UTILS_NS::VFS::Instance().OpenFile(m_resourcePaths[i], SR_UTILS_NS::FileMode::Read);
             SR_UTILS_NS::String resourceData;
-            if (!file || !file.Read(resourceData)) {
+            if (!ReadBuildResource(m_resourcePaths[i], resourceData)) {
                 SetStatus("Failed to read Emscripten resource: {}"_format(m_resourcePaths[i]), true);
                 return false;
             }

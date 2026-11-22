@@ -63,7 +63,7 @@ if (SR_USE_PCH)
 endif()
 
 if (SR_RENDER_USE_VULKAN)
-    message("[SpaRcle Engine] Immediate GUI Vulkan SDK: $ENV{VULKAN_SDK}")
+    message(STATUS "[SpaRcle Engine] Immediate GUI Vulkan SDK: $ENV{VULKAN_SDK}")
     find_package(Vulkan REQUIRED)
     target_include_directories(ImmediateGUI PRIVATE ${Vulkan_INCLUDE_DIRS})
     if (NOT SR_IMMEDIATE_GUI_STATIC_LIBRARY)

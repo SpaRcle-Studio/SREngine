@@ -1,0 +1,17 @@
+//
+// Created by OpenAI Codex on 22.11.2026.
+//
+
+#ifndef SR_ENGINE_TEXTURE_COMPUTE_SOURCES_H
+#define SR_ENGINE_TEXTURE_COMPUTE_SOURCES_H
+
+namespace SR_CORE_NS::TextureComputeSources {
+    static void Get(uint32_t codec, SR_UTILS_NS::Vector<const char*>& sources) {
+        switch (codec) {
+@SR_CL_CASES@
+            default: return;
+        }
+    }
+}
+
+#endif //SR_ENGINE_TEXTURE_COMPUTE_SOURCES_H

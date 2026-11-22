@@ -155,7 +155,9 @@ list(APPEND SR_CORE_LINK_LIBRARIES Audio)
 list(APPEND SR_CORE_LINK_LIBRARIES Scripting)
 list(APPEND SR_CORE_LINK_LIBRARIES ImmediateGUI)
 
-target_link_libraries(Engine ${SR_CORE_LINK_LIBRARIES})
+target_link_libraries(Engine PUBLIC ${SR_CORE_LINK_LIBRARIES})
+
+include(${CORE_ROOT_DIR}/cmake/TextureTools.cmake)
 
 target_include_directories(Engine PUBLIC ${CORE_ROOT_DIR}/inc)
 

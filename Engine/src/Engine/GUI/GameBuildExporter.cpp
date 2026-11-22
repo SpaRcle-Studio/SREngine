@@ -132,6 +132,9 @@ namespace SR_CORE_GUI_NS {
         job->onProgress = [this](float_t progress) {
             m_runtime.ReportProgress(progress);
         };
+        job->onBuildProgress = [this](float_t overall, float_t stage, SR_UTILS_NS::String label) {
+            m_runtime.ReportBuildProgress(overall, stage, std::move(label));
+        };
         job->onDownload = [this](uint64_t completed, uint64_t total) {
             m_runtime.ReportDownload(completed, total);
         };
@@ -238,9 +241,31 @@ namespace SR_CORE_GUI_NS {
 
         SR_IMMEDIATE_GUI_NS::Separator();
         if (runtime.busy && !runtime.logcatRefreshing) {
-            const auto overlay = runtime.progress >= 0.f
-                ? "{:.0f}%"_format(runtime.progress * 100.f) : SR_UTILS_NS::String("Working...");
-            SR_IMMEDIATE_GUI_NS::ProgressBar(runtime.progress, SR_MATH_NS::FVector2(-1.f, 0.f), overlay.c_str());
+            if (runtime.overallProgress >= 0.f) {
+                const auto overall = "Overall: {:.1f}%"_format(runtime.overallProgress * 100.f);
+                SR_IMMEDIATE_GUI_NS::ProgressBar(runtime.overallProgress, SR_MATH_NS::FVector2(-1.f, 0.f), overall.c_str());
+                const auto stage = runtime.stageProgress >= 0.f
+                    ? "{} — {:.1f}%"_format(runtime.buildStage, runtime.stageProgress * 100.f) : runtime.buildStage;
+                SR_IMMEDIATE_GUI_NS::ProgressBar(runtime.stageProgress, SR_MATH_NS::FVector2(-1.f, 0.f), stage.c_str());
+                const uint64_t elapsed = static_cast<uint64_t>(runtime.elapsedSeconds);
+                const auto elapsedText = "Elapsed: {}:{:02}"_format(elapsed / 60, elapsed % 60);
+                SR_IMMEDIATE_GUI_NS::Text("%s", elapsedText.c_str());
+                if (runtime.remainingSeconds >= 0.0) {
+                    const uint64_t remaining = static_cast<uint64_t>(runtime.remainingSeconds);
+                    SR_IMMEDIATE_GUI_NS::SameLine();
+                    const auto remainingText = "Remaining approximately: {}:{:02}"_format(remaining / 60, remaining % 60);
+                    SR_IMMEDIATE_GUI_NS::Text("%s", remainingText.c_str());
+                }
+                else {
+                    SR_IMMEDIATE_GUI_NS::SameLine();
+                    SR_IMMEDIATE_GUI_NS::Text("%s", "Estimating remaining time...");
+                }
+            }
+            else {
+                const auto overlay = runtime.progress >= 0.f
+                    ? "{:.0f}%"_format(runtime.progress * 100.f) : SR_UTILS_NS::String("Working...");
+                SR_IMMEDIATE_GUI_NS::ProgressBar(runtime.progress, SR_MATH_NS::FVector2(-1.f, 0.f), overlay.c_str());
+            }
             if (runtime.downloadedBytes > 0) {
                 if (runtime.totalBytes > 0) {
                     SR_IMMEDIATE_GUI_NS::Text("%.1f / %.1f MB", runtime.downloadedBytes / 1048576.0, runtime.totalBytes / 1048576.0);
@@ -260,6 +285,11 @@ namespace SR_CORE_GUI_NS {
             else {
                 SR_IMMEDIATE_GUI_NS::TextWrapped("%s", runtime.message.c_str());
             }
+        }
+        if (!runtime.busy && runtime.overallProgress >= 0.f) {
+            const uint64_t elapsed = static_cast<uint64_t>(runtime.elapsedSeconds);
+            const auto elapsedText = "Elapsed: {}:{:02}"_format(elapsed / 60, elapsed % 60);
+            SR_IMMEDIATE_GUI_NS::Text("%s", elapsedText.c_str());
         }
         if (!runtime.log.empty() && SR_IMMEDIATE_GUI_NS::CollapsingHeader("Command output")) {
             if (SR_IMMEDIATE_GUI_NS::BeginChild("RuntimeOutput", SR_MATH_NS::FVector2(0.f, 140.f))) {
@@ -298,6 +328,12 @@ namespace SR_CORE_GUI_NS {
                     profile->desktopPackageMode = static_cast<DesktopBuildPackageMode>(mode);
                 }
             });
+            BuildField("Compatibility textures", [&]() {
+                SR_IMMEDIATE_GUI_NS::Checkbox("##enabled", &profile->desktopTextureFallback);
+            });
+            SR_IMMEDIATE_GUI_NS::TextWrapped(profile->desktopTextureFallback
+                ? "Desktop builds include lossless copies for GPUs without the exported texture formats."
+                : "Smaller desktop builds: the GPU must support the exported texture formats. Lossless interface textures are preserved.");
         }
         if (SR_IMMEDIATE_GUI_NS::CollapsingHeader("Platforms", SR_IMMEDIATE_GUI_NS::TreeNodeFlags::DefaultOpen)) {
             BuildField("Windows", [&]() {
