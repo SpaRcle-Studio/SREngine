@@ -145,7 +145,7 @@ namespace SR_SCRIPTING_NS {
             return FindType(*info.pNext[0]);
         }
 
-        if (info.IsString() && info.kind != SR_UTILS_NS::Reflection::TypeKind::String) {
+        if (info.kind == SR_UTILS_NS::Reflection::TypeKind::StringAtom || info.kind == SR_UTILS_NS::Reflection::TypeKind::UnicodeString) {
             return FindType(*SR_UTILS_NS::Reflection::TypeOf<SR_UTILS_NS::String>());
         }
         const auto found = m_typesByInfo.find(&info);
@@ -228,7 +228,7 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
-        if (info.IsString() && info.kind != SR_UTILS_NS::Reflection::TypeKind::String) {
+        if (info.kind == SR_UTILS_NS::Reflection::TypeKind::StringAtom || info.kind == SR_UTILS_NS::Reflection::TypeKind::UnicodeString) {
             return Collect(*SR_UTILS_NS::Reflection::TypeOf<SR_UTILS_NS::String>());
         }
 
@@ -289,12 +289,23 @@ namespace SR_SCRIPTING_NS {
         SR_TRACY_ZONE;
         const bool map = pScriptType && SR_UTILS_NS::StringView(pScriptType->GetName()) == "Map";
         const bool set = pScriptType && SR_UTILS_NS::StringView(pScriptType->GetName()) == "Set";
+        const bool entityRef = pScriptType && SR_UTILS_NS::StringView(pScriptType->GetName()) == "EntityRef";
+        const bool resourceRef = pScriptType && SR_UTILS_NS::StringView(pScriptType->GetName()) == "ResourceRef";
         if (!pScriptType || pScriptType->GetSubTypeCount() != (map ? 2u : 1u)) {
             return nullptr;
         }
         const SR_UTILS_NS::Reflection::TypeInfo* pArguments[2] = {};
         for (uint32_t i = 0; i < pScriptType->GetSubTypeCount(); ++i) {
             const auto subtype = pScriptType->GetSubTypeId(i);
+            if (entityRef || resourceRef) {
+                auto&& pNative = FindType(subtype);
+                if ((subtype & (asTYPEID_OBJHANDLE | asTYPEID_SCRIPTOBJECT)) || !pNative ||
+                    !pNative->pMeta || !pNative->pMeta->IsSameOrInherited(entityRef ? "Entity" : "IResource")) {
+                    return nullptr;
+                }
+                pArguments[i] = pNative->pTypeInfo;
+                continue;
+            }
             auto&& pElement = pArguments[i];
             pElement = (subtype & asTYPEID_SCRIPTOBJECT) || !(subtype & asTYPEID_MASK_OBJECT) ?
                 AngelScriptTypeReflection::Resolve(this, m_pEngine, subtype) : nullptr;
@@ -313,10 +324,13 @@ namespace SR_SCRIPTING_NS {
         if ((map || set) && !pArguments[0]->vtable.pLess) {
             return nullptr;
         }
-        auto&& pContainer = SR_UTILS_NS::Reflection::ResolveTemplateTypeInfo(map ?
-            SR_UTILS_NS::Reflection::TypeKind::Map : (set ? SR_UTILS_NS::Reflection::TypeKind::Set : SR_UTILS_NS::Reflection::TypeKind::Vector), pArguments[0], pArguments[1]);
+        const auto kind = entityRef ? SR_UTILS_NS::Reflection::TypeKind::EntityRef :
+            (resourceRef ? SR_UTILS_NS::Reflection::TypeKind::ResourceRef :
+            (map ? SR_UTILS_NS::Reflection::TypeKind::Map :
+            (set ? SR_UTILS_NS::Reflection::TypeKind::Set : SR_UTILS_NS::Reflection::TypeKind::Vector)));
+        auto&& pContainer = SR_UTILS_NS::Reflection::ResolveTemplateTypeInfo(kind, pArguments[0], pArguments[1]);
         if (!pContainer->CanConstruct() || !pContainer->CanCopy() ||
-            ((map || set) ? !pContainer->vtable.mapVTable.pFindOrAdd : !pContainer->vtable.arrayVTable.pInsert)) {
+            (!entityRef && !resourceRef && ((map || set) ? !pContainer->vtable.mapVTable.pFindOrAdd : !pContainer->vtable.arrayVTable.pInsert))) {
             return nullptr;
         }
         auto&& pType = Collect(*pContainer);
@@ -338,6 +352,12 @@ namespace SR_SCRIPTING_NS {
         m_pTypesAllocator = new SR_UTILS_NS::MonotonicAllocator(sizeof(Type) * 1024);
 
         Collect(*SR_UTILS_NS::Reflection::TypeOf<SR_UTILS_NS::String>());
+
+        if (!Collect(*SR_UTILS_NS::Reflection::TypeOf<SR_UTILS_NS::Path>()) ||
+            !Collect(*SR_UTILS_NS::Reflection::TypeOf<SR_UTILS_NS::StringView>())) {
+            SR_ERROR("AngelScriptBindings::RegisterFactory() : failed to collect string value types.");
+            return false;
+        }
 
         if (!Collect(*SR_UTILS_NS::Reflection::TypeOf<SR_MATH_NS::FSize>()) ||
             !Collect(*SR_UTILS_NS::Reflection::TypeOf<SR_MATH_NS::FSize2>())) {
@@ -381,7 +401,7 @@ namespace SR_SCRIPTING_NS {
             return false;
         }
 
-        const char* pStorageTypes[] = { "StringAtom", "Path", "UnicodeString" };
+        const char* pStorageTypes[] = { "StringAtom", "UnicodeString" };
         for (auto&& pName : pStorageTypes) {
             auto&& pInfo = SR_UTILS_NS::Reflection::FindTypeInfoByName(pName);
             if (!pInfo || !pInfo->CanConstruct()) {
@@ -401,7 +421,8 @@ namespace SR_SCRIPTING_NS {
             const auto declaration = name + (map ? "<class K, class V>" : "<class T>");
             const bool valueTemplate = name == "Vector" || name == "Map" || name == "Set";
             if (!Check(m_pEngine->RegisterObjectType(declaration.c_str(), valueTemplate ? ((name == "Map" || name == "Set") ? sizeof(SR_UTILS_NS::ErasedTreeMapLayout) : sizeof(SR_UTILS_NS::ErasedVectorLayout)) : 0,
-                valueTemplate ? asOBJ_VALUE | asOBJ_TEMPLATE | asOBJ_APP_CLASS_CDAK | asOBJ_GC : asOBJ_REF | asOBJ_TEMPLATE | asOBJ_NOCOUNT), declaration)) {
+                valueTemplate ? asOBJ_VALUE | asOBJ_TEMPLATE | asOBJ_APP_CLASS_CDAK | asOBJ_GC :
+                    ((name == "EntityRef" || name == "ResourceRef") ? asOBJ_REF | asOBJ_TEMPLATE : asOBJ_REF | asOBJ_TEMPLATE | asOBJ_NOCOUNT)), declaration)) {
                 return false;
             }
         }
@@ -417,6 +438,42 @@ namespace SR_SCRIPTING_NS {
             return false;
         }
 
+        const char* pReferenceTemplates[] = { "EntityRef<T>", "ResourceRef<T>" };
+        for (auto&& pTemplate : pReferenceTemplates) {
+            const SR_UTILS_NS::String referenceType(pTemplate);
+            const auto factory = referenceType + "@ f(int&in)";
+            const auto assign = referenceType + "& opAssign(const " + referenceType + "&in)";
+            if (!Check(m_pEngine->RegisterObjectBehaviour(pTemplate, asBEHAVE_TEMPLATE_CALLBACK, "bool f(int&in, bool&out)",
+                    asFUNCTION(AngelScriptBindingHelpers::ValidateReference), asCALL_GENERIC, this), referenceType) ||
+                !Check(m_pEngine->RegisterObjectBehaviour(pTemplate, asBEHAVE_FACTORY, factory.c_str(),
+                    asFUNCTION(AngelScriptBindingHelpers::ConstructReference), asCALL_GENERIC, this), factory) ||
+                !Check(m_pEngine->RegisterObjectBehaviour(pTemplate, asBEHAVE_ADDREF, "void f()",
+                    asFUNCTION(AngelScriptBindingHelpers::AddRef), asCALL_GENERIC), referenceType) ||
+                !Check(m_pEngine->RegisterObjectBehaviour(pTemplate, asBEHAVE_RELEASE, "void f()",
+                    asFUNCTION(AngelScriptBindingHelpers::Release), asCALL_GENERIC), referenceType) ||
+                !Check(m_pEngine->RegisterObjectMethod(pTemplate, assign.c_str(),
+                    asFUNCTION(AngelScriptBindingHelpers::Assign), asCALL_GENERIC), assign)) {
+                return false;
+            }
+            const bool isRef = referenceType == "EntityRef<T>";
+            const char* pEntityMethods[] = { "bool hasValue() const", "void reset()", "T@ get() const", "void setId(uint64)" };
+            const char* pResourceMethods[] = { "bool hasValue() const", "void reset()", "T@ get() const", "void setId(const String &in)", "void ForceLoad()" };
+            if (isRef) {
+                for (auto&& pDeclaration : pEntityMethods) {
+                    if (!Check(m_pEngine->RegisterObjectMethod(pTemplate, pDeclaration, asFUNCTION(AngelScriptBindingHelpers::Wrapper), asCALL_GENERIC), pDeclaration)) {
+                        return false;
+                    }
+                }
+            }
+            else {
+                for (auto&& pDeclaration : pResourceMethods) {
+                    if (!Check(m_pEngine->RegisterObjectMethod(pTemplate, pDeclaration, asFUNCTION(AngelScriptBindingHelpers::Wrapper), asCALL_GENERIC), pDeclaration)) {
+                        return false;
+                    }
+                }
+            }
+        }
+
         for (uint32_t i = 0; i < m_types.size(); ++i) {
             auto&& pType = m_types[i];
             if (SR_UTILS_NS::Reflection::IsTypeKindContainer(pType->pTypeInfo->kind) && !RegisterType(*pType)) {
@@ -427,7 +484,7 @@ namespace SR_SCRIPTING_NS {
         // Other containers still require native specializations.
         for (auto&& pName : pTemplates) {
             const SR_UTILS_NS::String name(pName);
-            if (name == "Vector" || name == "Map" || name == "Set") {
+            if (name == "Vector" || name == "Map" || name == "Set" || name == "EntityRef" || name == "ResourceRef") {
                 continue;
             }
             const auto instance = name + ((name == "Map" || name == "FlatHashMap") ? "<K, V>" : "<T>");
@@ -486,7 +543,9 @@ namespace SR_SCRIPTING_NS {
         SR_TRACY_ZONE;
         if (type.pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::Vector ||
             type.pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::Map ||
-            type.pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::Set) {
+            type.pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::Set ||
+            type.pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::EntityRef ||
+            type.pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::ResourceRef) {
             auto&& pScript = ResolveContainerType(m_pEngine->GetTypeInfoByDecl(type.name.c_str()));
             if (!pScript) {
                 return false;
@@ -602,14 +661,67 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
-        if (type.pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::String) {
+        if (type.pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::String ||
+            type.pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::Path ||
+            type.pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::StringView) {
+            const char* pSourceTypes[] = { "String", "Path", "StringView" };
+            for (auto&& pSourceName : pSourceTypes) {
+                if (type.name == pSourceName || type.pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::StringView) {
+                    continue;
+                }
+                const auto constructor = "void f(const " + SR_UTILS_NS::String(pSourceName) + " &in)";
+                if (!Check(m_pEngine->RegisterObjectBehaviour(type.name.c_str(), asBEHAVE_CONSTRUCT, constructor.c_str(),
+                    asFUNCTION(AngelScriptBindingHelpers::ConstructStringValue), asCALL_GENERIC, pGeneral), constructor)) {
+                    return false;
+                }
+            }
+        }
+
+        if (type.pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::String ||
+            type.pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::Path) {
+            // A constructor's &in argument can be a defensive copy of a vector element.
+            // Convert on the source object so the view refers to its original storage.
+            const char* pDeclaration = "StringView opImplConv() const";
+            if (!Check(m_pEngine->RegisterObjectMethod(type.name.c_str(), pDeclaration,
+                asFUNCTION(AngelScriptBindingHelpers::ConvertToStringView), asCALL_GENERIC, pGeneral), pDeclaration)) {
+                return false;
+            }
+        }
+
+        if (type.pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::Path) {
+            const char* pDeclaration = "Path opAdd(const String &in) const";
+            if (!Check(m_pEngine->RegisterObjectMethod(type.name.c_str(), pDeclaration,
+                asFUNCTION(AngelScriptBindingHelpers::AddPath), asCALL_GENERIC), pDeclaration)) {
+                return false;
+            }
+        }
+
+        if (type.pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::String ||
+            type.pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::StringView) {
             const char* pDeclarations[] = {
-                "uint length() const", "bool opEquals(const String &in) const", "String opAdd(const String &in) const",
-                "uint byteAt(uint index) const", "String substring(uint begin, uint count) const", "uint graphemeCount() const"
+                "uint length() const", "uint size() const", "bool empty() const",
+                "uint byteAt(uint index) const", "uint opIndex(uint index) const",
+                "String substring(uint begin, uint count = uint(-1)) const",
+                "String substr(uint begin, uint count = uint(-1)) const", "uint graphemeCount() const",
+                "bool starts_with(const StringView &in) const", "bool ends_with(const StringView &in) const",
+                "bool contains(const StringView &in) const", "int64 find(const StringView &in, uint begin = 0) const",
+                "int64 find_last_of(const StringView &in, uint begin = uint(-1)) const",
+                "int opCmp(const StringView &in) const"
             };
 
             for (auto&& pDeclaration : pDeclarations) {
                 if (!Check(m_pEngine->RegisterObjectMethod(type.name.c_str(), pDeclaration, asFUNCTION(AngelScriptBindingHelpers::StringOperation), asCALL_GENERIC, pGeneral), pDeclaration)) {
+                    return false;
+                }
+            }
+
+            const SR_UTILS_NS::String operators[] = {
+                "bool opEquals(const String &in) const", "bool opEquals(const StringView &in) const",
+                "String opAdd(const String &in) const", "String opAdd(const StringView &in) const"
+            };
+            for (auto&& declaration : operators) {
+                if (!Check(m_pEngine->RegisterObjectMethod(type.name.c_str(), declaration.c_str(),
+                    asFUNCTION(AngelScriptBindingHelpers::StringOperation), asCALL_GENERIC, pGeneral), declaration)) {
                     return false;
                 }
             }
@@ -1442,17 +1554,11 @@ namespace SR_SCRIPTING_NS {
             return;
         }
 
-        if (info.IsString() && info.kind != SR_UTILS_NS::Reflection::TypeKind::String) {
+        if (info.kind == SR_UTILS_NS::Reflection::TypeKind::StringAtom || info.kind == SR_UTILS_NS::Reflection::TypeKind::UnicodeString) {
             SR_UTILS_NS::String text;
 
             if (info.kind == SR_UTILS_NS::Reflection::TypeKind::StringAtom) {
                 text = value.Cast<SR_UTILS_NS::StringAtom>()->ToStringView();
-            }
-            else if (info.kind == SR_UTILS_NS::Reflection::TypeKind::Path) {
-                text = value.Cast<SR_UTILS_NS::Path>()->View();
-            }
-            else if (info.kind == SR_UTILS_NS::Reflection::TypeKind::StringView) {
-                text = *value.Cast<SR_UTILS_NS::StringView>();
             }
             else if (info.kind == SR_UTILS_NS::Reflection::TypeKind::UnicodeString) {
                 SR_UTILS_NS::UnicodeString& unicode = *value.Cast<SR_UTILS_NS::UnicodeString>();

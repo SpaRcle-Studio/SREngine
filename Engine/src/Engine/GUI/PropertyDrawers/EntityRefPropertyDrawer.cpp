@@ -46,7 +46,8 @@ namespace SR_CORE_GUI_NS {
 
         SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth);
 
-        if (auto&& pEntityRefDynamic = dynamic_cast<SR_UTILS_NS::EntityRefDynamic*>(value.GetSRClass())) {
+        if (auto&& pEntityRefDynamic = dynamic_cast<SR_UTILS_NS::EntityRefDynamic*>(value.GetSRClass());
+            pEntityRefDynamic && value.GetTypeInfo().kind != SR_UTILS_NS::Reflection::TypeKind::EntityRef) {
             const auto currentType = pEntityRefDynamic->GetTypeName();
             if (m_typeNames.empty()) {
                 m_typeNames.emplace_back(SR_UTILS_NS::Factory::Instance().GetType(SR_UTILS_NS::Entity::GetClassStaticName())->GetFactoryName());
@@ -94,13 +95,17 @@ namespace SR_CORE_GUI_NS {
                 SR_IMMEDIATE_GUI_NS::PopStyleColor();
             }
             else if (pEntityRef->GetEntityId() != SR_ID_INVALID) {
-                std::string formatted = " {} ({})"_format(pEntityRef->GetEntityId(), entityType.ToCStr());
+                static SR_UTILS_NS::String formatted;
+                formatted.clear();
+                SR_UTILS_NS::FormatTo(formatted, " {} ({})", pEntityRef->GetEntityId(), entityType.ToCStr());
                 SR_IMMEDIATE_GUI_NS::BeginDisabled();
                 SR_IMMEDIATE_GUI_NS::ButtonColoredText(formatted.c_str(), SR_MATH_NS::FColor(0.f, 1.f, 0.f, 1.f), SR_MATH_NS::FVector2(context.fieldWidth, 0));
                 SR_IMMEDIATE_GUI_NS::EndDisabled();
             }
             else {
-                std::string formatted = " Is not set ({})"_format(entityType.ToCStr());
+                static SR_UTILS_NS::String formatted;
+                formatted.clear();
+                SR_UTILS_NS::FormatTo(formatted, " Is not set ({})", entityType.ToCStr());
                 SR_IMMEDIATE_GUI_NS::BeginDisabled();
                 SR_IMMEDIATE_GUI_NS::ButtonColoredText(formatted.c_str(), SR_MATH_NS::FColor(1.f, 1.f, 0.f, 1.f) , SR_MATH_NS::FVector2(context.fieldWidth, 0));
                 SR_IMMEDIATE_GUI_NS::EndDisabled();
@@ -110,7 +115,7 @@ namespace SR_CORE_GUI_NS {
                 if (auto&& payload = SR_IMMEDIATE_GUI_NS::AcceptDragDropPayload("Hierarchy##Payload")) {
                     if (auto&& pData = SR_IMMEDIATE_GUI_NS::GetDataFromDragDropPayload(payload)) {
                         SR_GRAPH_GUI_NS::PayloadArrayData payloadData = *(SR_GRAPH_GUI_NS::PayloadArrayData*)(pData);
-                        std::vector<SR_UTILS_NS::SceneObject::Ptr> sceneObjects;
+                        SR_UTILS_NS::Vector<SR_UTILS_NS::SceneObject::Ptr> sceneObjects;
 
                         for (size_t i = 0; i < payloadData.size; ++i) {
                             uint64_t entityId = static_cast<uint64_t*>(payloadData.data)[i];
@@ -147,7 +152,7 @@ namespace SR_CORE_GUI_NS {
                 if (auto&& payload = SR_IMMEDIATE_GUI_NS::AcceptDragDropPayload("InspectorComponent##Payload")) {
                     if (auto&& pData = SR_IMMEDIATE_GUI_NS::GetDataFromDragDropPayload(payload)) {
                         SR_GRAPH_GUI_NS::PayloadArrayData payloadData = *(SR_GRAPH_GUI_NS::PayloadArrayData*)(pData);
-                        std::list<SR_UTILS_NS::Component::Ptr> components;
+                        SR_UTILS_NS::Vector<SR_UTILS_NS::Component::Ptr> components;
                         for (size_t i = 0; i < payloadData.size; ++i) {
                             uint64_t entityId = static_cast<uint64_t*>(payloadData.data)[i];
                             if (auto&& pEntity = context.pEditor->GetEngine()->GetScene()->GetEntityController()->FindById(entityId)) {

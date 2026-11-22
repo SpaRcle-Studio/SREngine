@@ -265,11 +265,6 @@ namespace SR_CORE_NS {
             m_threadsWorker.Reset();
         }
 
-        SR_SCRIPTING_NS::ScriptSystem::Instance().WaitForIdle();
-
-        SR_UTILS_NS::TaskManager::Instance().RemoveDiscardable();
-        SR_UTILS_NS::TaskManager::Instance().WaitForIdle();
-
         SRAssert2(!m_editor, "Engine::Close() : editor is not destroyed! Call DestroyEditor() before closing the engine!");
 
         m_isRun = false;
@@ -296,8 +291,6 @@ namespace SR_CORE_NS {
             }
             pWindow.AutoFree();
         }
-
-        SR_SCRIPTING_NS::ScriptSystem::DestroySingleton();
 
         return true;
     }

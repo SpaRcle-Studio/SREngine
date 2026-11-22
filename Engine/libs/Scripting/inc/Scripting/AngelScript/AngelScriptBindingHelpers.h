@@ -12,6 +12,8 @@
 namespace SR_SCRIPTING_NS::AngelScriptBindingHelpers {
     void Exception(const char* pMessage);
     void RejectTemplate(asIScriptGeneric* pCall);
+    void ValidateReference(asIScriptGeneric* pCall);
+    void ConstructReference(asIScriptGeneric* pCall);
     bool Primitive(const SR_UTILS_NS::Reflection::TypeInfo& info);
     bool ContainsScriptType(const SR_UTILS_NS::Reflection::TypeInfo& info);
     bool ContainsRuntimeStorage(const SR_UTILS_NS::Reflection::TypeInfo& info);
@@ -28,6 +30,9 @@ namespace SR_SCRIPTING_NS::AngelScriptBindingHelpers {
     void Construct(asIScriptGeneric* pCall);
     void ConstructValue(asIScriptGeneric* pCall);
     void CopyConstructValue(asIScriptGeneric* pCall);
+    void ConstructStringValue(asIScriptGeneric* pCall);
+    void ConvertToStringView(asIScriptGeneric* pCall);
+    void AddPath(asIScriptGeneric* pCall);
     void DestructValue(asIScriptGeneric* pCall);
     void AssignValue(asIScriptGeneric* pCall);
     void Assign(asIScriptGeneric* pCall);

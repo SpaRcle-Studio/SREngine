@@ -11,8 +11,11 @@
 #include <Graphics/Window/BasicWindowImpl.h>
 #include <Graphics/Pipeline/Pipeline.h>
 
+#include <Scripting/Base/ScriptSystem.h>
+
 #include <Utils/Common/StoreUtils.h>
 #include <Utils/Platform/Platform.h>
+#include <Utils/TaskManager/TaskManager.h>
 
 #include <Codegen/InitializeState.generated.hpp>
 
@@ -126,6 +129,13 @@ namespace SR_CORE_NS {
         while (pEngine->FlushScene());
 
         pEngine->DestroyEditor();
+
+        SR_SCRIPTING_NS::ScriptSystem::Instance().WaitForIdle();
+
+        SR_UTILS_NS::TaskManager::Instance().RemoveDiscardable();
+        SR_UTILS_NS::TaskManager::Instance().WaitForIdle();
+
+        SR_SCRIPTING_NS::ScriptSystem::DestroySingleton();
 
         auto&& pRenderContext = pEngine->GetRenderContext();
         if (pRenderContext) {

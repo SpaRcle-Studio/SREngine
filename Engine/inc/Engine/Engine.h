@@ -72,6 +72,7 @@ namespace SR_CORE_NS {
 
         void Reload();
 
+        /// @method
         void RunSceneGameMode(const SR_UTILS_NS::Path& path, bool gameMode);
 
         void AddSceneToQueue(const ScenePtr& scene);
