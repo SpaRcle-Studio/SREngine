@@ -28,6 +28,9 @@ namespace SR_CORE_NS {
         SR_HTYPES_NS::Function<void(SR_UTILS_NS::String)> onStatus;
         SR_HTYPES_NS::Function<void(float_t)> onProgress;
         bool useGpu = true;
+        bool useAstc = true;
+        bool useEtc2 = true;
+        uint32_t cpuUsagePercent = 80;
         bool requireBlockAlignedTextures = false;
 
     private:

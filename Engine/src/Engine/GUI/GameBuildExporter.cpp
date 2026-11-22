@@ -334,6 +334,19 @@ namespace SR_CORE_GUI_NS {
             SR_IMMEDIATE_GUI_NS::TextWrapped(profile->desktopTextureFallback
                 ? "Desktop builds include lossless copies for GPUs without the exported texture formats."
                 : "Smaller desktop builds: the GPU must support the exported texture formats. Lossless interface textures are preserved.");
+            BuildField("ASTC compression", [&]() {
+                SR_IMMEDIATE_GUI_NS::Checkbox("##enabled", &profile->textureAstcEncoding);
+            });
+            BuildField("ETC2 / EAC compression", [&]() {
+                SR_IMMEDIATE_GUI_NS::Checkbox("##enabled", &profile->textureEtc2Encoding);
+            });
+            SR_IMMEDIATE_GUI_NS::TextWrapped("Mobile exports use lossless textures when both formats are disabled.");
+            BuildField("Texture CPU cores (%)", [&]() {
+                int32_t percentage = static_cast<int32_t>(std::clamp(profile->textureCpuUsagePercent, 1u, 100u));
+                if (SR_IMMEDIATE_GUI_NS::SliderInt("##value", &percentage, 1, 100)) {
+                    profile->textureCpuUsagePercent = static_cast<uint32_t>(percentage);
+                }
+            });
         }
         if (SR_IMMEDIATE_GUI_NS::CollapsingHeader("Platforms", SR_IMMEDIATE_GUI_NS::TreeNodeFlags::DefaultOpen)) {
             BuildField("Windows", [&]() {

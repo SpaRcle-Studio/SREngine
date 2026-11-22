@@ -26,6 +26,9 @@ namespace SR_CORE_NS {
                createPlatformArchives == rhs.createPlatformArchives &&
                webTextureProfile == rhs.webTextureProfile &&
                textureGpuEncoding == rhs.textureGpuEncoding &&
+               textureAstcEncoding == rhs.textureAstcEncoding &&
+               textureEtc2Encoding == rhs.textureEtc2Encoding &&
+               textureCpuUsagePercent == rhs.textureCpuUsagePercent &&
                desktopTextureFallback == rhs.desktopTextureFallback &&
                enableWebPreview == rhs.enableWebPreview;
     }

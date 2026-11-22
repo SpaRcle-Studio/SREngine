@@ -28,6 +28,7 @@ namespace SR_CORE_NS {
     #ifdef SR_BUILD_TEXTURE_TOOLS
         astcenc_context* pAstc = nullptr;
         uint32_t astcBlock = 0;
+        uint32_t encoderThreads = 1;
         float_t astcQuality = -1.f;
         bool astcSrgb = false;
         void* pBC7Decode = nullptr;
@@ -246,7 +247,7 @@ namespace SR_CORE_NS::TextureExportDetails {
         return mip;
     }
 
-    static bool EncodeBC(const FloatMip& mip, SR_GRAPH_NS::TextureCompression compression, float_t quality, float_t cutoff,
+    static bool EncodeBC(const FloatMip& mip, SR_GRAPH_NS::TextureCompression compression, float_t quality, float_t cutoff, uint32_t threadCount,
         SR_UTILS_NS::Vector<uint8_t>& output, const SR_HTYPES_NS::Function<bool()>& cancelled,
         const SR_HTYPES_NS::Function<void(float_t)>& progress) {
         SR_TRACY_ZONE;
@@ -258,10 +259,10 @@ namespace SR_CORE_NS::TextureExportDetails {
         std::atomic<uint32_t> completedRows = 0;
         std::mutex progressMutex;
         auto lastProgress = std::chrono::steady_clock::now();
-        const uint32_t jobs = std::min(4u, rows);
+        const uint32_t jobs = std::min(threadCount, rows);
         SR_UTILS_NS::Vector<uint64_t> tasks;
         for (uint32_t job = 0; job < jobs; ++job) {
-            tasks.emplace_back(SR_UTILS_NS::TaskManager::Instance().ExecuteAsync([&, job](auto&&) {
+            tasks.emplace_back(SR_UTILS_NS::TaskManager::Instance().ExecuteParallel([&, job](auto&&) {
                 void* pOptions = nullptr;
                 int32_t result = 1;
                 static std::mutex initializationMutex;
@@ -484,6 +485,19 @@ namespace SR_CORE_NS {
         if (isCancelled && isCancelled()) {
             return false;
         }
+        uint32_t encoderThreadCount = 1;
+    #ifdef SR_THREADS_ALLOWED
+        const uint32_t availableThreads = std::max(1u, std::thread::hardware_concurrency());
+        encoderThreadCount = static_cast<uint32_t>(std::max(uint64_t(1),
+            uint64_t(availableThreads) * std::clamp(cpuUsagePercent, 1u, 100u) / 100));
+    #endif
+        if (m_pState->encoderThreads != encoderThreadCount) {
+            if (m_pState->pAstc) {
+                astcenc_context_free(m_pState->pAstc);
+                m_pState->pAstc = nullptr;
+            }
+            m_pState->encoderThreads = encoderThreadCount;
+        }
         SR_UTILS_NS::String sourceBytes;
         if (!SR_UTILS_NS::FileSystem::ReadFile(source, sourceBytes)) {
             SR_ERROR("TextureExporter::Prepare() : cannot read {}", source);
@@ -543,6 +557,18 @@ namespace SR_CORE_NS {
                     : (metadata.imageType == SR_GRAPH_NS::ImageType::Mask ? SR_GRAPH_NS::TextureCompression::EACR11
                         : (metadata.disableAlphaChannel || sourceInfo.channels == 1 || sourceInfo.channels == 3)
                             ? SR_GRAPH_NS::TextureCompression::ETC2RGB : SR_GRAPH_NS::TextureCompression::ETC2RGBA));
+            }
+        }
+        for (auto iterator = formats.begin(); iterator != formats.end();) {
+            const bool astc = *iterator >= SR_GRAPH_NS::TextureCompression::ASTC4x4
+                && *iterator <= SR_GRAPH_NS::TextureCompression::ASTC8x8;
+            const bool etc2 = *iterator >= SR_GRAPH_NS::TextureCompression::ETC2RGB
+                && *iterator <= SR_GRAPH_NS::TextureCompression::EACRG11;
+            if ((astc && !useAstc) || (etc2 && !useEtc2)) {
+                iterator = formats.erase(iterator);
+            }
+            else {
+                ++iterator;
             }
         }
         if (formats.empty() || formats.back() != SR_GRAPH_NS::TextureCompression::None) {
@@ -717,7 +743,13 @@ namespace SR_CORE_NS {
                         ++gpuMips;
                     }
                     if (!encodedOnGpu && useGpu && compression != SR_GRAPH_NS::TextureCompression::None && !gpuFallbackReported) {
-                        SR_INFO("TextureExporter::Prepare() : GPU encoder unavailable or failed; using CPU for {}", variant);
+                        if (bc && compression != SR_GRAPH_NS::TextureCompression::BC6) {
+                            SR_INFO("TextureExporter::Prepare() : GPU encoder unavailable or failed; using CPU for {}", variant);
+                        }
+                        else {
+                            SR_INFO("TextureExporter::Prepare() : GPU encoding is not implemented for compression {}; using CPU for {}",
+                                static_cast<uint32_t>(compression), variant);
+                        }
                         gpuFallbackReported = true;
                     }
                     if (!encodedOnGpu && compression == SR_GRAPH_NS::TextureCompression::None) {
@@ -732,7 +764,8 @@ namespace SR_CORE_NS {
                         }
                     }
                     else if (!encodedOnGpu && bc) {
-                        success = TextureExportDetails::EncodeBC(mip, compression, quality, cutoff, encoded.bytes, isCancelled, mipProgress);
+                        success = TextureExportDetails::EncodeBC(mip, compression, quality, cutoff, m_pState->encoderThreads,
+                            encoded.bytes, isCancelled, mipProgress);
                     }
                     else if (!encodedOnGpu && compression >= SR_GRAPH_NS::TextureCompression::ASTC4x4 && compression <= SR_GRAPH_NS::TextureCompression::ASTC8x8) {
                         const auto block = SR_GRAPH_NS::TextureContainer::GetBlockInfo(compression, format);
@@ -746,20 +779,47 @@ namespace SR_CORE_NS {
                             success = astcenc_config_init(srgb ? ASTCENC_PRF_LDR_SRGB : ASTCENC_PRF_LDR,
                                 block.width, block.height, 1, quality * 100.f, 0, &config) == ASTCENC_SUCCESS;
                         #ifdef SR_ASTCENC_HAS_PARENT_CONTEXT
-                            success = success && astcenc_context_alloc(&config, 1, &m_pState->pAstc, nullptr) == ASTCENC_SUCCESS;
+                            success = success && astcenc_context_alloc(&config, m_pState->encoderThreads, &m_pState->pAstc, nullptr) == ASTCENC_SUCCESS;
                         #else
-                            success = success && astcenc_context_alloc(&config, 1, &m_pState->pAstc) == ASTCENC_SUCCESS;
+                            success = success && astcenc_context_alloc(&config, m_pState->encoderThreads, &m_pState->pAstc) == ASTCENC_SUCCESS;
                         #endif
                             m_pState->astcBlock = block.width;
                             m_pState->astcQuality = quality;
                             m_pState->astcSrgb = srgb;
+                            if (success) {
+                                SR_INFO("TextureExporter::Prepare() : initialized ASTC CPU encoder with {} threads", m_pState->encoderThreads);
+                            }
                         }
                         if (success) {
                             void* pSlice = const_cast<float_t*>(mip.pixels.data());
                             astcenc_image image { mip.width, mip.height, 1, ASTCENC_TYPE_F32, &pSlice };
                             const astcenc_swizzle swizzle { ASTCENC_SWZ_R, ASTCENC_SWZ_G, ASTCENC_SWZ_B, ASTCENC_SWZ_A };
-                            success = astcenc_compress_image(m_pState->pAstc, &image, &swizzle, encoded.bytes.data(), encoded.bytes.size(), 0) == ASTCENC_SUCCESS;
-                            astcenc_compress_reset(m_pState->pAstc);
+                            std::atomic<bool> failed = false;
+                            auto compress = [&](uint32_t threadIndex) {
+                                SR_TRACY_ZONE_N("ASTC compression");
+                                if (astcenc_compress_image(m_pState->pAstc, &image, &swizzle,
+                                    encoded.bytes.data(), encoded.bytes.size(), threadIndex) != ASTCENC_SUCCESS) {
+                                    failed = true;
+                                }
+                            };
+                            SR_UTILS_NS::Vector<SR_HTYPES_NS::Thread*> threads;
+                            const uint32_t threadCount = encoded.bytes.size() < 4096 ? 1
+                                : static_cast<uint32_t>(std::min(uint64_t(m_pState->encoderThreads), encoded.bytes.size() / 16));
+                            for (uint32_t threadIndex = 1; threadIndex < threadCount; ++threadIndex) {
+                                SR_HTYPES_NS::Thread* pThread = nullptr;
+                                SR_HTYPES_NS::Thread::Factory::Instance().Create(pThread, [&, threadIndex]() {
+                                    compress(threadIndex);
+                                    return false;
+                                });
+                                threads.emplace_back(pThread);
+                            }
+                            compress(0);
+                            for (auto&& pThread : threads) {
+                                pThread->Join();
+                                pThread->Free();
+                            }
+                            const auto resetResult = astcenc_compress_reset(m_pState->pAstc);
+                            success = !failed && resetResult == ASTCENC_SUCCESS;
                         }
                     }
                     else if (!encodedOnGpu) {
@@ -772,7 +832,9 @@ namespace SR_CORE_NS {
                             default: break;
                         }
                         Etc::Image image(const_cast<float_t*>(mip.pixels.data()), mip.width, mip.height, Etc::ErrorMetric::NUMERIC);
-                        const auto result = image.Encode(etcFormat, Etc::ErrorMetric::NUMERIC, quality * 100.f, 4, 4);
+                        const uint32_t threadCount = static_cast<uint32_t>(std::min(uint64_t(m_pState->encoderThreads),
+                            ((uint64_t(mip.width) + 3) / 4) * ((uint64_t(mip.height) + 3) / 4)));
+                        const auto result = image.Encode(etcFormat, Etc::ErrorMetric::NUMERIC, quality * 100.f, threadCount, threadCount);
                         success = result < Etc::Image::ERROR_THRESHOLD && image.GetEncodingBitsBytes() == encoded.bytes.size();
                         if (success) {
                             memcpy(encoded.bytes.data(), image.GetEncodingBits(), encoded.bytes.size());

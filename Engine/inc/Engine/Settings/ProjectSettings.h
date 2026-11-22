@@ -61,6 +61,12 @@ namespace SR_CORE_NS {
         /// @property
         bool textureGpuEncoding = true;
         /// @property
+        bool textureAstcEncoding = true;
+        /// @property
+        bool textureEtc2Encoding = true;
+        /// @property
+        uint32_t textureCpuUsagePercent = 80;
+        /// @property
         bool desktopTextureFallback = false;
 
         SR_NODISCARD bool operator==(const GameBuildProfile& rhs) const;

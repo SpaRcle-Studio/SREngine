@@ -326,6 +326,9 @@ namespace SR_CORE_GUI_NS {
         }
         m_textureExporter.isCancelled = isCancelled;
         m_textureExporter.useGpu = pProfile->textureGpuEncoding;
+        m_textureExporter.useAstc = pProfile->textureAstcEncoding;
+        m_textureExporter.useEtc2 = pProfile->textureEtc2Encoding;
+        m_textureExporter.cpuUsagePercent = pProfile->textureCpuUsagePercent;
         m_textureExporter.onStatus = [this](SR_UTILS_NS::String message) {
             SetStatus(std::move(message));
         };
