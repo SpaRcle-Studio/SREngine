@@ -433,6 +433,10 @@ namespace SR_CORE_NS {
         m_isNeedReload = true;
     }
 
+    SR_UTILS_NS::PlatformType Application::GetPlatformType() const {
+        return SR_PLATFORM_NS::GetType();
+    }
+
     void ApplicationManager::RegisterApplication(Application& application) {
         SR_LOCK_GUARD;
         m_applications.emplace_back(&application);

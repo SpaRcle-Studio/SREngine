@@ -10,6 +10,7 @@
 #include <Utils/Types/SharedPtr.h>
 #include <Utils/Types/WeakPtr.h>
 #include <Utils/FileSystem/Path.h>
+#include <Utils/Platform/PlatformType.h>
 
 namespace SR_CORE_NS {
     class Engine;
@@ -32,6 +33,8 @@ namespace SR_CORE_NS {
 
         void Reload();
 
+        /// @method @evaluate
+        SR_NODISCARD SR_UTILS_NS::PlatformType GetPlatformType() const;
         /// @method @evaluate
         SR_NODISCARD const SR_HTYPES_NS::SharedPtr<Engine>& GetEngine() const { return m_engine; }
         SR_NODISCARD SR_HTYPES_NS::SharedPtr<Engine>& GetEngine() { return m_engine; }
