@@ -77,6 +77,15 @@ endif()
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 sr_add_optimized_texture_dependency("${SR_TEXTURE_VENDOR_DIR}/KTX-Software"
     "${CMAKE_CURRENT_BINARY_DIR}/TextureTools/KTX" ${SR_TEXTURE_ASTC_TARGET})
+if(TARGET libzstd_static)
+    # cpptrace and KTX must use one Zstd implementation in static engine builds.
+    get_target_property(SR_BASISU_SOURCES basisu_encoder SOURCES)
+    list(FILTER SR_BASISU_SOURCES EXCLUDE REGEX "(^|/)zstd/zstd\\.c$")
+    set_property(TARGET basisu_encoder PROPERTY SOURCES "${SR_BASISU_SOURCES}")
+    target_link_libraries(basisu_encoder PRIVATE libzstd_static)
+    target_link_libraries(ktx PRIVATE libzstd_static)
+    set_target_properties(libzstd_static PROPERTIES POSITION_INDEPENDENT_CODE ON)
+endif()
 if(SR_TEXTURE_PREVIOUS_PIC_DEFINED)
     set(CMAKE_POSITION_INDEPENDENT_CODE "${SR_TEXTURE_PREVIOUS_PIC}")
 else()
@@ -84,6 +93,30 @@ else()
 endif()
 sr_add_optimized_texture_dependency("${SR_TEXTURE_VENDOR_DIR}/etc2comp/EtcLib"
     "${CMAKE_CURRENT_BINARY_DIR}/TextureTools/ETC" EtcLib)
+option(SR_TEXTURE_USE_ETCPAK "Use etcpak for fast ETC2/EAC texture export" ON)
+if(SR_TEXTURE_USE_ETCPAK)
+    set(SR_ETCPAK_DIR "${SR_TEXTURE_VENDOR_DIR}/etcpak")
+    foreach(SR_ETCPAK_SOURCE IN ITEMS ProcessRGB.cpp Dither.cpp Tables.cpp ProcessRGB.hpp)
+        if(NOT EXISTS "${SR_ETCPAK_DIR}/${SR_ETCPAK_SOURCE}")
+            message(FATAL_ERROR "[SpaRcle Engine] Missing etcpak source: ${SR_ETCPAK_DIR}/${SR_ETCPAK_SOURCE}. Add https://github.com/wolfpld/etcpak here, or disable SR_TEXTURE_USE_ETCPAK.")
+        endif()
+    endforeach()
+    # Build only the codec; upstream CMake builds a CLI and fetches Tracy/libpng.
+    function(sr_add_texture_etcpak)
+        if(MSVC)
+            string(REGEX REPLACE "/RTC[1su]+" "" CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}")
+            string(REPLACE "/Od" "/O2" CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}")
+            string(REPLACE "/Ob0" "/Ob2" CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}")
+        endif()
+        # A child directory retains these flags during generation after this function returns.
+        add_subdirectory("${CORE_ROOT_DIR}/cmake/etcpak"
+            "${CMAKE_CURRENT_BINARY_DIR}/TextureTools/Etcpak")
+    endfunction()
+    sr_add_texture_etcpak()
+    target_include_directories(Engine PRIVATE "${SR_ETCPAK_DIR}")
+    target_link_libraries(Engine PRIVATE SRTextureEtcpak)
+    target_compile_definitions(Engine PRIVATE SR_TEXTURE_ETCPAK)
+endif()
 sr_add_optimized_texture_dependency("${SR_TEXTURE_VENDOR_DIR}/cmp_core"
     "${CMAKE_CURRENT_BINARY_DIR}/TextureTools/BC" CMP_Core)
 
@@ -101,53 +134,26 @@ if(SR_ASTC_HEADER MATCHES "parent_context")
     target_compile_definitions(Engine PRIVATE SR_ASTCENC_HAS_PARENT_CONTEXT)
 endif()
 
-# Hash implementation sources, not just release names, so local encoder changes invalidate Builds/TextureCache.
-set(SR_TEXTURE_REVISION "")
-foreach(SR_TEXTURE_DEPENDENCY IN ITEMS KTX-Software etc2comp cmp_core)
-    file(GLOB_RECURSE SR_TEXTURE_ENCODER_FILES CONFIGURE_DEPENDS
-        "${SR_TEXTURE_VENDOR_DIR}/${SR_TEXTURE_DEPENDENCY}/*.h"
-        "${SR_TEXTURE_VENDOR_DIR}/${SR_TEXTURE_DEPENDENCY}/*.cpp"
-        "${SR_TEXTURE_VENDOR_DIR}/${SR_TEXTURE_DEPENDENCY}/*.c")
-    list(SORT SR_TEXTURE_ENCODER_FILES)
-    foreach(SR_TEXTURE_FILE IN LISTS SR_TEXTURE_ENCODER_FILES)
-        set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${SR_TEXTURE_FILE}")
-        file(SHA256 "${SR_TEXTURE_FILE}" SR_TEXTURE_FILE_HASH)
-        string(APPEND SR_TEXTURE_REVISION "${SR_TEXTURE_FILE_HASH}")
-    endforeach()
-endforeach()
-foreach(SR_TEXTURE_PIPELINE_SOURCE IN ITEMS
-    "${CORE_ROOT_DIR}/src/Engine/Export/TextureExporter.cpp"
-    "${CORE_ROOT_DIR}/src/Engine/Export/TextureGpuEncoder.cpp"
-    "${CORE_ROOT_DIR}/libs/Graphics/src/Graphics/Loaders/TextureLoader.cpp"
-    "${CORE_ROOT_DIR}/libs/Graphics/src/Graphics/Loaders/TextureContainer.cpp"
-    "${SR_TEXTURE_VENDOR_DIR}/inc/stbi/stb_image.c"
-    "${SR_TEXTURE_VENDOR_DIR}/inc/stbi/stb_image.h"
-    "${CORE_ROOT_DIR}/cmake/TextureTools.cmake")
-    set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${SR_TEXTURE_PIPELINE_SOURCE}")
-    file(SHA256 "${SR_TEXTURE_PIPELINE_SOURCE}" SR_TEXTURE_FILE_HASH)
-    string(APPEND SR_TEXTURE_REVISION "${SR_TEXTURE_FILE_HASH}")
-endforeach()
-string(SHA256 SR_TEXTURE_REVISION "${SR_TEXTURE_REVISION}")
-target_compile_definitions(Engine PRIVATE SR_TEXTURE_ENCODER_REVISION="${SR_TEXTURE_REVISION}")
+# Increment manually when encoder, mip generation, or container changes require re-encoding cached textures.
+set(SR_TEXTURE_ENCODER_VERSION 1)
+target_compile_definitions(Engine PRIVATE SR_TEXTURE_ENCODER_REVISION="${SR_TEXTURE_ENCODER_VERSION}")
 
-# Quality decisions have their own revision: changing thresholds must not re-encode blocks.
-set(SR_TEXTURE_QUALITY_REVISION "")
-foreach(SR_TEXTURE_QUALITY_SOURCE IN ITEMS
-    "${CORE_ROOT_DIR}/src/Engine/Export/TextureQuality.cpp"
-    "${CORE_ROOT_DIR}/inc/Engine/Export/TextureQuality.h")
-    set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${SR_TEXTURE_QUALITY_SOURCE}")
-    file(SHA256 "${SR_TEXTURE_QUALITY_SOURCE}" SR_TEXTURE_QUALITY_HASH)
-    string(APPEND SR_TEXTURE_QUALITY_REVISION "${SR_TEXTURE_QUALITY_HASH}")
-endforeach()
-string(SHA256 SR_TEXTURE_QUALITY_REVISION "${SR_TEXTURE_QUALITY_REVISION}")
-target_compile_definitions(Engine PRIVATE SR_TEXTURE_QUALITY_REVISION="${SR_TEXTURE_QUALITY_REVISION}")
+# Increment for quality-check changes; this reruns validation without re-encoding blocks.
+set(SR_TEXTURE_QUALITY_VERSION 1)
+target_compile_definitions(Engine PRIVATE SR_TEXTURE_QUALITY_REVISION="${SR_TEXTURE_QUALITY_VERSION}")
 
 option(SR_TEXTURE_USE_OPENCL "Enable host GPU BC encoders, with CPU fallback" ON)
 if(SR_TEXTURE_USE_OPENCL)
-    find_package(OpenCL QUIET)
-    if(NOT TARGET OpenCL::OpenCL)
+    option(SR_TEXTURE_STATIC_OPENCL "Link the OpenCL ICD loader into the engine" ON)
+    if(SR_TEXTURE_STATIC_OPENCL)
         include("${CMAKE_CURRENT_LIST_DIR}/OpenCLSDK.cmake")
         sr_install_texture_opencl()
+    else()
+        find_package(OpenCL QUIET)
+        if(NOT TARGET OpenCL::OpenCL)
+            include("${CMAKE_CURRENT_LIST_DIR}/OpenCLSDK.cmake")
+            sr_install_texture_opencl()
+        endif()
     endif()
 endif()
 if(SR_TEXTURE_USE_OPENCL AND TARGET OpenCL::OpenCL)
@@ -173,6 +179,8 @@ if(SR_TEXTURE_USE_OPENCL AND TARGET OpenCL::OpenCL)
         SR_TEXTURE_EXPAND_KERNEL("${SR_TEXTURE_VENDOR_DIR}/cmp_core/shaders/bc${SR_BC_CODEC}_encode_kernel.cpp" SR_CL_SOURCE)
         # OpenCL C uses ulong for 64-bit integers. Adapt the embedded copy only.
         string(REPLACE "typedef unsigned long long CGU_UINT64;" "typedef ulong CGU_UINT64;" SR_CL_SOURCE "${SR_CL_SOURCE}")
+        # Shared vendor kernels contain C++ scalar casts; OpenCL C requires C casts.
+        string(REGEX REPLACE "static_cast[ \t]*<[ \t]*([A-Za-z_][A-Za-z0-9_]*)[ \t]*>[ \t]*\\(" "(\\1)(" SR_CL_SOURCE "${SR_CL_SOURCE}")
         if(SR_BC_CODEC EQUAL 7)
             string(REPLACE "cmp_memsetBC7(&EncodeState,0,sizeof(EncodeState));"
                 "cmp_memsetBC7((CGV_BYTE*)&EncodeState, 0, sizeof(EncodeState));" SR_CL_SOURCE "${SR_CL_SOURCE}")
@@ -218,7 +226,7 @@ if(SR_TEXTURE_USE_OPENCL AND TARGET OpenCL::OpenCL)
         "${CMAKE_CURRENT_BINARY_DIR}/TextureTools/TextureComputeSources.h" @ONLY)
     target_include_directories(Engine PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/TextureTools")
     target_link_libraries(Engine PRIVATE OpenCL::OpenCL)
-    target_compile_definitions(Engine PRIVATE SR_TEXTURE_OPENCL SR_TEXTURE_GPU_REVISION="cmp-opencl-v2")
+    target_compile_definitions(Engine PRIVATE SR_TEXTURE_OPENCL SR_TEXTURE_GPU_REVISION="cmp-opencl-v3")
 else()
     target_compile_definitions(Engine PRIVATE SR_TEXTURE_GPU_REVISION="cpu-only")
     message(STATUS "[SpaRcle Engine] Texture export: OpenCL unavailable or disabled; using CPU encoders")

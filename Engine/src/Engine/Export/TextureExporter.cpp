@@ -20,6 +20,9 @@
     #include <astcenc.h>
     #include <Etc.h>
     #include <EtcBlock4x4.h>
+    #ifdef SR_TEXTURE_ETCPAK
+        #include <ProcessRGB.hpp>
+    #endif
 #endif
 
 namespace SR_CORE_NS {
@@ -364,6 +367,90 @@ namespace SR_CORE_NS::TextureExportDetails {
         }
         return !failed;
     }
+
+    #ifdef SR_TEXTURE_ETCPAK
+    static bool EncodeEtcpak(const FloatMip& mip, SR_GRAPH_NS::TextureCompression compression, float_t quality,
+        uint32_t threadCount, SR_UTILS_NS::Vector<uint8_t>& output,
+        const SR_HTYPES_NS::Function<bool()>& cancelled, const SR_HTYPES_NS::Function<void(float_t)>& progress) {
+        SR_TRACY_ZONE;
+        const uint32_t columns = (mip.width + 3) / 4;
+        const uint32_t rows = (mip.height + 3) / 4;
+        const uint32_t width = columns * 4;
+        const uint32_t wordsPerBlock = compression == SR_GRAPH_NS::TextureCompression::ETC2RGB
+            || compression == SR_GRAPH_NS::TextureCompression::EACR11 ? 1 : 2;
+        const uint64_t rowBytes = uint64_t(columns) * wordsPerBlock * sizeof(uint64_t);
+        output.resize(rowBytes * rows);
+        std::atomic<bool> stopped = false;
+        std::atomic<uint32_t> nextRow = 0;
+        uint32_t completedRows = 0;
+        std::mutex progressMutex;
+        auto lastProgress = std::chrono::steady_clock::now();
+        const uint32_t jobs = std::min(threadCount, rows);
+        auto compress = [&]() {
+            SR_TRACY_ZONE_N("ETC2/EAC etcpak compression");
+            SR_UTILS_NS::Vector<uint32_t> pixels(uint64_t(width) * 4);
+            SR_UTILS_NS::Vector<uint64_t> blocks(uint64_t(columns) * wordsPerBlock);
+            while (!stopped) {
+                const uint32_t row = nextRow.fetch_add(1);
+                if (row >= rows) {
+                    break;
+                }
+                if (cancelled && cancelled()) {
+                    stopped = true;
+                    break;
+                }
+                for (uint32_t y = 0; y < 4; ++y) {
+                    const auto pSource = mip.pixels.data() + uint64_t(std::min(row * 4 + y, mip.height - 1)) * mip.width * 4;
+                    for (uint32_t x = 0; x < width; ++x) {
+                        const auto pPixel = pSource + uint64_t(std::min(x, mip.width - 1)) * 4;
+                        // etcpak consumes BGRA words (also for EAC's R/G extraction).
+                        pixels[uint64_t(y) * width + x] = uint32_t(ToByte(pPixel[2]))
+                            | (uint32_t(ToByte(pPixel[1])) << 8) | (uint32_t(ToByte(pPixel[0])) << 16)
+                            | (uint32_t(ToByte(pPixel[3])) << 24);
+                    }
+                }
+                switch (compression) {
+                    case SR_GRAPH_NS::TextureCompression::ETC2RGB:
+                        CompressEtc2Rgb(pixels.data(), blocks.data(), columns, width, quality < 0.8f);
+                        break;
+                    case SR_GRAPH_NS::TextureCompression::ETC2RGBA:
+                        CompressEtc2Rgba(pixels.data(), blocks.data(), columns, width, quality < 0.8f);
+                        break;
+                    case SR_GRAPH_NS::TextureCompression::EACR11:
+                        CompressEacR(pixels.data(), blocks.data(), columns, width);
+                        break;
+                    case SR_GRAPH_NS::TextureCompression::EACRG11:
+                        CompressEacRg(pixels.data(), blocks.data(), columns, width);
+                        break;
+                    default:
+                        stopped = true;
+                        return;
+                }
+                memcpy(output.data() + uint64_t(row) * rowBytes, blocks.data(), rowBytes);
+                if (progress) {
+                    std::lock_guard lock(progressMutex);
+                    ++completedRows;
+                    const auto now = std::chrono::steady_clock::now();
+                    if (completedRows == rows || now - lastProgress >= std::chrono::milliseconds(100)) {
+                        progress(static_cast<float_t>(completedRows) / rows);
+                        lastProgress = now;
+                    }
+                }
+            }
+        };
+        SR_UTILS_NS::Vector<uint64_t> tasks;
+        for (uint32_t job = 1; job < jobs; ++job) {
+            tasks.emplace_back(SR_UTILS_NS::TaskManager::Instance().ExecuteParallel([&](auto&&) {
+                compress();
+            }, SR_UTILS_NS::TaskPriority::Normal));
+        }
+        compress();
+        for (const uint64_t task : tasks) {
+            SR_UTILS_NS::TaskManager::Instance().Wait(task);
+        }
+        return !stopped;
+    }
+    #endif
 
     static void ApplyBC1Alpha(const FloatMip& mip, float_t cutoff, SR_UTILS_NS::Vector<uint8_t>& output) {
         const uint32_t columns = (mip.width + 3) / 4;
@@ -822,6 +909,12 @@ namespace SR_CORE_NS {
                             success = !failed && resetResult == ASTCENC_SUCCESS;
                         }
                     }
+                #ifdef SR_TEXTURE_ETCPAK
+                    else if (!encodedOnGpu && policy != SR_GRAPH_NS::TextureCompressionPolicy::HighQuality) {
+                        success = TextureExportDetails::EncodeEtcpak(mip, compression, quality, m_pState->encoderThreads,
+                            encoded.bytes, isCancelled, mipProgress);
+                    }
+                #endif
                     else if (!encodedOnGpu) {
                         Etc::Image::Format etcFormat = Etc::Image::Format::UNKNOWN;
                         switch (compression) {

@@ -42,7 +42,7 @@ function(sr_install_texture_opencl)
     string(SUBSTRING "${SR_OPENCL_BUILD_KEY}" 0 16 SR_OPENCL_BUILD_KEY)
     set(SR_OPENCL_BINARY "${SR_OPENCL_ROOT}/build/${SR_OPENCL_BUILD_KEY}")
     set(OPENCL_ICD_LOADER_HEADERS_DIR "${SR_OPENCL_ROOT}/OpenCL-Headers" CACHE PATH "Local OpenCL headers" FORCE)
-    set(OPENCL_ICD_LOADER_BUILD_SHARED_LIBS ON CACHE BOOL "Build the local OpenCL ICD loader" FORCE)
+    set(OPENCL_ICD_LOADER_BUILD_SHARED_LIBS OFF CACHE BOOL "Build the local OpenCL ICD loader" FORCE)
     set(OPENCL_ICD_LOADER_BUILD_TESTING OFF CACHE BOOL "" FORCE)
     set(ENABLE_OPENCL_LAYERS OFF CACHE BOOL "" FORCE)
     set(ENABLE_OPENCL_LAYERINFO OFF CACHE BOOL "" FORCE)
@@ -52,11 +52,5 @@ function(sr_install_texture_opencl)
         RUNTIME_OUTPUT_DIRECTORY "${SR_OPENCL_BINARY}/sdk/$<CONFIG>/bin"
         LIBRARY_OUTPUT_DIRECTORY "${SR_OPENCL_BINARY}/sdk/$<CONFIG>/lib"
         ARCHIVE_OUTPUT_DIRECTORY "${SR_OPENCL_BINARY}/sdk/$<CONFIG>/lib")
-    if(WIN32)
-        add_custom_command(TARGET Engine POST_BUILD
-            COMMAND "${CMAKE_COMMAND}" -E make_directory "${SR_EXECUTABLE_DIR}"
-            COMMAND "${CMAKE_COMMAND}" -E copy_if_different "$<TARGET_FILE:OpenCL>" "${SR_EXECUTABLE_DIR}"
-            VERBATIM)
-    endif()
     message(STATUS "[SpaRcle Engine] Texture export: using local OpenCL SDK at ${SR_OPENCL_ROOT}")
 endfunction()

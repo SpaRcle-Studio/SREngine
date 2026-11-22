@@ -75,9 +75,6 @@ int main(int argc, char** argv) {
                 std::cerr << "Failed to download engine data from GitHub!" << std::endl;
                 return downloadResult;
             }
-        }
-
-        if (runResult != ERROR_ENGINE_EXIT) {
             return RunUnpackedApplication(pExecutablePath);
         }
         return runResult;
