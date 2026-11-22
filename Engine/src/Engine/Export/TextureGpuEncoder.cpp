@@ -17,10 +17,25 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::String identity = "cpu";
         bool reportedBackend = false;
     #ifdef SR_TEXTURE_OPENCL
-        static constexpr uint32_t TileBlocks = 64;
+        static constexpr uint32_t TileBlocks = 128;
         static constexpr uint32_t TilePixels = TileBlocks * 4;
-        SR_UTILS_NS::Vector<uint8_t> pixels;
-        SR_UTILS_NS::Vector<uint8_t> encoded;
+        struct SourceInfo {
+            uint32_t width;
+            uint32_t height;
+            uint32_t columns;
+            uint32_t rows;
+            float_t quality;
+        };
+        static_assert(sizeof(SourceInfo) == 20);
+        struct Tile {
+            SR_UTILS_NS::Vector<uint8_t> pixels;
+            SR_UTILS_NS::Vector<uint8_t> encoded;
+            SourceInfo info{};
+            uint32_t startX = 0;
+            uint32_t startY = 0;
+            cl_event ready = nullptr;
+            cl_event kernel = nullptr;
+        } tiles[2];
         cl_device_id device = nullptr;
         cl_context context = nullptr;
         cl_command_queue queue = nullptr;
@@ -65,7 +80,7 @@ namespace SR_CORE_NS {
             if (error != CL_SUCCESS || !context) {
                 return false;
             }
-            queue = clCreateCommandQueue(context, device, 0, &error);
+            queue = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &error);
             if (error != CL_SUCCESS || !queue) {
                 return false;
             }
@@ -218,17 +233,66 @@ namespace SR_CORE_NS {
         if (error != CL_SUCCESS) {
             return false;
         }
-        auto&& pixels = state.pixels;
-        auto&& encoded = state.encoded;
-        pixels.resize(State::TilePixels * State::TilePixels * 4);
-        encoded.resize(State::TilePixels * State::TilePixels);
+        const auto encodingStarted = std::chrono::steady_clock::now();
         uint64_t completedBlocks = 0;
+        cl_ulong kernelNanoseconds = 0;
+        uint32_t nextTile = 0;
+        auto cleanup = [&]() {
+            clFinish(state.queue);
+            for (auto&& tile : state.tiles) {
+                if (tile.ready) {
+                    clReleaseEvent(tile.ready);
+                    tile.ready = nullptr;
+                }
+                if (tile.kernel) {
+                    clReleaseEvent(tile.kernel);
+                    tile.kernel = nullptr;
+                }
+            }
+        };
+        auto complete = [&](State::Tile& tile) {
+            if (!tile.ready) {
+                return true;
+            }
+            if (clWaitForEvents(1, &tile.ready) != CL_SUCCESS) {
+                return false;
+            }
+            cl_ulong started = 0;
+            cl_ulong finished = 0;
+            if (clGetEventProfilingInfo(tile.kernel, CL_PROFILING_COMMAND_START, sizeof(started), &started, nullptr) == CL_SUCCESS
+                && clGetEventProfilingInfo(tile.kernel, CL_PROFILING_COMMAND_END, sizeof(finished), &finished, nullptr) == CL_SUCCESS) {
+                kernelNanoseconds += finished - started;
+            }
+            clReleaseEvent(tile.ready);
+            tile.ready = nullptr;
+            clReleaseEvent(tile.kernel);
+            tile.kernel = nullptr;
+            for (uint32_t row = 0; row < tile.info.rows; ++row) {
+                memcpy(output.data() + (uint64_t(tile.startY + row) * columns + tile.startX) * blockBytes,
+                    tile.encoded.data() + uint64_t(row) * tile.info.columns * blockBytes, tile.info.columns * blockBytes);
+            }
+            completedBlocks += uint64_t(tile.info.columns) * tile.info.rows;
+            if (progress) {
+                progress(static_cast<float_t>(completedBlocks) / static_cast<float_t>(uint64_t(columns) * rows));
+            }
+            return true;
+        };
         for (uint32_t startY = 0; startY < rows; startY += State::TileBlocks) {
             for (uint32_t startX = 0; startX < columns; startX += State::TileBlocks) {
                 if (cancelled && cancelled()) {
-                    clFinish(state.queue);
+                    cleanup();
                     return false;
                 }
+                auto&& tile = state.tiles[nextTile];
+                if (!complete(tile)) {
+                    cleanup();
+                    SR_WARN("TextureGpuEncoder::Encode() : OpenCL completion failed; retrying on CPU");
+                    return false;
+                }
+                auto&& pixels = tile.pixels;
+                auto&& encoded = tile.encoded;
+                pixels.resize(State::TilePixels * State::TilePixels * 4);
+                encoded.resize(State::TilePixels * State::TilePixels);
                 const uint32_t tileColumns = std::min(State::TileBlocks, columns - startX);
                 const uint32_t tileRows = std::min(State::TileBlocks, rows - startY);
                 const uint32_t tileWidth = tileColumns * 4;
@@ -242,41 +306,41 @@ namespace SR_CORE_NS {
                         }
                     }
                 }
-                struct SourceInfo {
-                    uint32_t width;
-                    uint32_t height;
-                    uint32_t columns;
-                    uint32_t rows;
-                    float_t quality;
-                } info { tileWidth, tileHeight, tileColumns, tileRows, quality };
-                static_assert(sizeof(SourceInfo) == 20);
-                // The in-order queue keeps uploads, kernel and readback ordered. The final
-                // blocking read is the single synchronization point and keeps host buffers alive.
+                tile.info = { tileWidth, tileHeight, tileColumns, tileRows, quality };
+                tile.startX = startX;
+                tile.startY = startY;
+                // Device buffers are reused in queue order; host buffers stay alive until
+                // their read event completes, allowing CPU preparation of the next tile.
                 error = clEnqueueWriteBuffer(state.queue, state.input, CL_FALSE, 0, tileWidth * tileHeight * 4, pixels.data(), 0, nullptr, nullptr);
-                error |= clEnqueueWriteBuffer(state.queue, state.info, CL_FALSE, 0, sizeof(info), &info, 0, nullptr, nullptr);
+                error |= clEnqueueWriteBuffer(state.queue, state.info, CL_FALSE, 0, sizeof(tile.info), &tile.info, 0, nullptr, nullptr);
                 const size_t work[] { tileColumns, tileRows };
-                error |= clEnqueueNDRangeKernel(state.queue, pCodec->encoder, 2, nullptr, work, nullptr, 0, nullptr, nullptr);
+                error |= clEnqueueNDRangeKernel(state.queue, pCodec->encoder, 2, nullptr, work, nullptr, 0, nullptr, &tile.kernel);
                 if (error != CL_SUCCESS) {
-                    clFinish(state.queue);
+                    cleanup();
                     SR_WARN("TextureGpuEncoder::Encode() : OpenCL dispatch failed ({}); retrying on CPU", error);
                     return false;
                 }
-                error = clEnqueueReadBuffer(state.queue, state.output, CL_TRUE, 0, tileColumns * tileRows * blockBytes, encoded.data(), 0, nullptr, nullptr);
+                error = clEnqueueReadBuffer(state.queue, state.output, CL_FALSE, 0, tileColumns * tileRows * blockBytes, encoded.data(), 0, nullptr, &tile.ready);
+                if (error == CL_SUCCESS) {
+                    error = clFlush(state.queue);
+                }
                 if (error != CL_SUCCESS) {
-                    clFinish(state.queue);
+                    cleanup();
                     SR_WARN("TextureGpuEncoder::Encode() : OpenCL readback failed ({}); retrying on CPU", error);
                     return false;
                 }
-                for (uint32_t row = 0; row < tileRows; ++row) {
-                    memcpy(output.data() + (uint64_t(startY + row) * columns + startX) * blockBytes,
-                        encoded.data() + uint64_t(row) * tileColumns * blockBytes, tileColumns * blockBytes);
-                }
-                completedBlocks += uint64_t(tileColumns) * tileRows;
-                if (progress) {
-                    progress(static_cast<float_t>(completedBlocks) / static_cast<float_t>(uint64_t(columns) * rows));
-                }
+                nextTile = (nextTile + 1) % 2;
             }
         }
+        for (uint32_t pending = 0; pending < 2; ++pending) {
+            if ((cancelled && cancelled()) || !complete(state.tiles[(nextTile + pending) % 2])) {
+                cleanup();
+                return false;
+            }
+        }
+        const auto encodingMilliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - encodingStarted).count();
+        SR_INFO("TextureGpuEncoder::Encode() : {}x{}, BC{}, GPU kernels {} ms, encode wall {} ms, tile {}x{}, 2 host buffers",
+            width, height, index, kernelNanoseconds / 1000000, encodingMilliseconds, State::TilePixels, State::TilePixels);
         return true;
     #endif
     }
