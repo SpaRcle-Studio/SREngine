@@ -60,6 +60,7 @@ namespace SR_CORE_GUI_NS {
             snapshot->mainScene = source->mainScene;
             snapshot->version = source->version;
             snapshot->packages = source->packages;
+            snapshot->buildExcludedPaths = source->buildExcludedPaths;
             snapshot->buildProfiles = source->buildProfiles;
             snapshot->enableCppScripts = source->enableCppScripts;
             snapshot->activeBuildProfile = source->activeBuildProfile;
