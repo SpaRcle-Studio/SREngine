@@ -438,15 +438,19 @@ namespace SR_CORE_NS::TextureExportDetails {
                 }
             }
         };
-        SR_UTILS_NS::Vector<uint64_t> tasks;
+        SR_UTILS_NS::Vector<SR_HTYPES_NS::Thread*> threads;
         for (uint32_t job = 1; job < jobs; ++job) {
-            tasks.emplace_back(SR_UTILS_NS::TaskManager::Instance().ExecuteParallel([&](auto&&) {
+            SR_HTYPES_NS::Thread* pThread = nullptr;
+            SR_HTYPES_NS::Thread::Factory::Instance().Create(pThread, [&]() {
                 compress();
-            }, SR_UTILS_NS::TaskPriority::Normal));
+                return false;
+            });
+            threads.emplace_back(pThread);
         }
         compress();
-        for (const uint64_t task : tasks) {
-            SR_UTILS_NS::TaskManager::Instance().Wait(task);
+        for (auto&& pThread : threads) {
+            pThread->Join();
+            pThread->Free();
         }
         return !stopped;
     }
@@ -697,6 +701,11 @@ namespace SR_CORE_NS {
                 return false;
             }
             if (desktopCompressedSelected && compression != SR_GRAPH_NS::TextureCompression::None) {
+                continue;
+            }
+            if (profile == SR_GRAPH_NS::TextureExportProfile::Mobile && metadata.compressed
+                && compression == SR_GRAPH_NS::TextureCompression::None) {
+                reportVariantProgress(1.f);
                 continue;
             }
             if (compression == SR_GRAPH_NS::TextureCompression::None && sourceFallback) {

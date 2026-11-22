@@ -8,6 +8,7 @@
 #include <Scripting/Base/ScriptSystem.h>
 
 #include <Graphics/Loaders/TextureLoader.h>
+#include <Graphics/Loaders/TextureContainer.h>
 
 #include <Utils/FileSystem/VFS.h>
 #include <Utils/FileSystem/DirectoryVFSBackend.h>
@@ -37,6 +38,7 @@ namespace SR_CORE_GUI_NS {
         m_pProjectSettings->mainScene = settings.mainScene;
         m_pProjectSettings->version = settings.version;
         m_pProjectSettings->packages = settings.packages;
+        m_pProjectSettings->buildExcludedPaths = settings.buildExcludedPaths;
         m_pProjectSettings->enableCppScripts = settings.enableCppScripts;
         m_pProjectSettings->buildProfiles = settings.buildProfiles;
         m_pProjectSettings->activeBuildProfile = settings.activeBuildProfile;
@@ -147,6 +149,20 @@ namespace SR_CORE_GUI_NS {
                 if (entry.relativePath == path.ToStringView() ||
                     (entry.relativePath.starts_with(path.ToStringView()) &&
                         entry.relativePath.size() > path.size() && entry.relativePath[path.size()] == '/')) {
+                    return;
+                }
+            }
+
+            const auto relative = SR_UTILS_NS::Path(entry.relativePath).RemoveSubPath(resourcesPath);
+            for (auto&& excluded : m_pProjectSettings->buildExcludedPaths) {
+                if (excluded.IsEmpty()) {
+                    continue;
+                }
+                const auto excludedPath = excluded.RemoveSubPath(resourcesPath);
+                const auto name = relative.ToStringView();
+                const auto prefix = excludedPath.ToStringView();
+                if (name == prefix || name == "{}.meta"_format(prefix)
+                    || (name.starts_with(prefix) && name.size() > prefix.size() && name[prefix.size()] == '/')) {
                     return;
                 }
             }
@@ -465,6 +481,22 @@ namespace SR_CORE_GUI_NS {
                     return false;
                 }
             }
+            bool sourceRequired = metadata.cpuUsage;
+            static constexpr SR_UTILS_NS::StringView skyboxSides[] { "right", "left", "top", "bottom", "front", "back" };
+            for (const auto side : skyboxSides) {
+                if (SR_UTILS_NS::StringView(path.GetBaseNameView()) != side) {
+                    continue;
+                }
+                bool completeSkybox = true;
+                for (const auto sibling : skyboxSides) {
+                    completeSkybox &= path.GetPrevious().Concat(sibling).ConcatExt(path.GetExtensionView()).IsFile();
+                }
+                sourceRequired |= completeSkybox;
+                break;
+            }
+            if (platform == "Android" && sourceRequired) {
+                metadata.compressionPolicy = SR_GRAPH_NS::TextureCompressionPolicy::Lossless;
+            }
             SR_UTILS_NS::Vector<TextureBuildArtifact> variants;
             m_stageLabel = "{}: textures {}/{}"_format(platform, ++textureIndex, textureCount);
             m_textureExporter.onProgress = [&, index](float_t progress) {
@@ -481,7 +513,7 @@ namespace SR_CORE_GUI_NS {
                 return false;
             }
             if (metadata.compressed) {
-                if ((platform == "Windows" || platform == "Linux") && !GetActiveProfile()->desktopTextureFallback) {
+                if (platform == "Android" || ((platform == "Windows" || platform == "Linux") && !GetActiveProfile()->desktopTextureFallback)) {
                     const auto relative = path.RemoveSubPath(resources);
                     for (uint32_t remaining = static_cast<uint32_t>(variants.size()); remaining > 0; --remaining) {
                         const uint32_t variantIndex = remaining - 1;
@@ -509,6 +541,15 @@ namespace SR_CORE_GUI_NS {
                 m_resourcePaths.insert(variant.resourcePath);
                 m_resourceOverrides.emplace_back(std::move(variant));
             }
+            if (platform == "Android" && metadata.compressed) {
+                const auto placeholder = stagedRoot.Concat(path.RemoveSubPath(resources));
+                if (!SR_UTILS_NS::VFS::Instance().WriteFileAtomic(placeholder, SR_GRAPH_NS::TextureContainer::SourcePlaceholder)) {
+                    SetStatus("Failed to stage texture placeholder: {}"_format(path), true);
+                    return false;
+                }
+                m_resourcePaths.insert(path);
+                m_resourceOverrides.emplace_back(TextureBuildArtifact { path, placeholder });
+            }
             const auto stagedMetadata = stagedRoot.Concat(metaPath.RemoveSubPath(resources));
             SR_UTILS_NS::SRASerializer serializer;
             serializer.SetUseTabs(true);
@@ -520,19 +561,6 @@ namespace SR_CORE_GUI_NS {
             }
             m_resourcePaths.insert(metaPath);
             m_resourceOverrides.emplace_back(TextureBuildArtifact { metaPath, stagedMetadata });
-            bool sourceRequired = metadata.cpuUsage;
-            static constexpr SR_UTILS_NS::StringView skyboxSides[] { "right", "left", "top", "bottom", "front", "back" };
-            for (const auto side : skyboxSides) {
-                if (SR_UTILS_NS::StringView(path.GetBaseNameView()) != side) {
-                    continue;
-                }
-                bool completeSkybox = true;
-                for (const auto sibling : skyboxSides) {
-                    completeSkybox &= path.GetPrevious().Concat(sibling).ConcatExt(path.GetExtensionView()).IsFile();
-                }
-                sourceRequired |= completeSkybox;
-                break;
-            }
             if (sourceRequired) {
                 m_resourcePaths.insert(path);
             }
@@ -543,7 +571,7 @@ namespace SR_CORE_GUI_NS {
         SetProgress(1.f);
         SR_INFO("GameBuildJob::PreparePlatformResources() : {}: {} textures with accepted GPU compression, {} lossless textures",
             platform, compressedTextureCount, losslessTextureCount);
-        SR_INFO("GameBuildJob::PreparePlatformResources() : {}: omitted {} desktop compatibility variants, {} bytes",
+        SR_INFO("GameBuildJob::PreparePlatformResources() : {}: omitted {} compatibility variants, {} bytes",
             platform, omittedFallbackCount, omittedFallbackBytes);
         return m_resourcePaths.size() <= SR_UINT16_MAX;
     }

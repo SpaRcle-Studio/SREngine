@@ -94,6 +94,8 @@ namespace SR_CORE_NS {
         /// @property
         SR_UTILS_NS::Set<SR_UTILS_NS::StringAtom> packages;
         /// @property
+        SR_UTILS_NS::Vector<SR_UTILS_NS::Path> buildExcludedPaths;
+        /// @property
         SR_UTILS_NS::Vector<GameBuildProfile> buildProfiles = { GameBuildProfile() };
         /// @property
         bool enableCppScripts = true;
