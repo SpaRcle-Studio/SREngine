@@ -7,6 +7,8 @@
 #include <Audio/Impl/OpenALTools.h>
 #include <Audio/Impl/OpenALDevice.h>
 
+#include <Utils/Debug.h>
+
 #include <AL/alext.h>
 
 namespace SR_AUDIO_NS {
@@ -161,8 +163,10 @@ namespace SR_AUDIO_NS {
         SR_AL_CALL(alGetSourcef, *alSource, AL_GAIN, &gain);
         SR_AL_CALL(alGetSourcef, *alSource, AL_PITCH, &pitch);
         SR_AL_CALL(alGetListenerf, AL_GAIN, &listenerGain);
-        SR_INFO("OpenALSoundContext::Play() : source={}, playing={}, bytes={}, gain={}, listenerGain={}, pitch={}",
-            *alSource, state == AL_PLAYING, bytes, gain, listenerGain, pitch);
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Full) {
+            SR_DEBUG_LOG("OpenALSoundContext::Play() : source={}, playing={}, bytes={}, gain={}, listenerGain={}, pitch={}",
+                *alSource, state == AL_PLAYING, bytes, gain, listenerGain, pitch);
+        }
     }
 
     bool OpenALSoundContext::MakeContextCurrent() {

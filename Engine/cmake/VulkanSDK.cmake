@@ -191,6 +191,12 @@ else()
     list(PREPEND CMAKE_PREFIX_PATH "${SR_VULKAN_SDK_HOME}/lib/VulkanLoader")
 endif()
 
+if (WIN32)
+    set(SR_VULKAN_LAYER_DIR "${Vulkan_ROOT}/Bin")
+elseif (UNIX AND NOT ANDROID)
+    set(SR_VULKAN_LAYER_DIR "${Vulkan_ROOT}/etc/vulkan/explicit_layer.d")
+endif()
+
 find_package(Vulkan REQUIRED)
 
 message(STATUS "[SpaRcle Engine] Vulkan SDK: ${SR_VULKAN_SDK_HOME}")
