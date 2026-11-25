@@ -49,7 +49,6 @@
         <Undocking Value="true"/>
 
         <!-- Core -->
-        <TextureCompression Value="true"/>
         <TextureCaching Value="true"/>
         <TextureAsyncLoad Value="true"/>
         <ModelsAsyncLoad Value="true"/>
@@ -76,7 +75,6 @@
         </Variant>
 
         <Variant Name="Emscripten">
-            <TextureCompression Value="false"/>
             <TextureCaching Value="false"/>
             <Emscripten Value="true"/>
             <Undocking Value="false"/>
@@ -85,7 +83,6 @@
         </Variant>
 
         <Variant Name="Android">
-            <TextureCompression Value="false"/>
             <TextureCaching Value="false"/>
             <FastModelsLoad Value="false"/>
             <ScriptCompilation Value="false"/>
