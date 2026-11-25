@@ -45,6 +45,9 @@ namespace SR_CORE_UI_NS {
                 }
             }
         }
+    #ifdef SR_ANDROID
+        inside = false;
+    #endif
         input.SetCustomCursorActive(this, inside);
         if (auto&& pSprite = GetGameObject()->GetComponent<SR_GTYPES_NS::Sprite>()) {
             pSprite->SetEnabled(inside);

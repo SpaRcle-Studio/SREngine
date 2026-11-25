@@ -106,6 +106,10 @@ namespace SR_CORE_UI_NS {
     }
 
     void UIControl::SetInteractable(bool value) {
+        if (m_interactable == value) {
+            return;
+        }
+
         m_interactable = value;
         InvalidateUIInput();
         SetInputState(false, false, false);

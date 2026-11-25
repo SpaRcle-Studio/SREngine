@@ -41,15 +41,41 @@ void HandleCmd(struct android_app* app, int32_t cmd) {
 
 // ----------------- Sensor Handling -----------------
 void ProcessSensorEvents(ASensorEventQueue* sensorQueue, struct android_app* app) {
-    if (!sensorQueue){
+    if (!sensorQueue || ASensorEventQueue_hasEvents(sensorQueue) <= 0) {
         return;
     }
 
     ASensorEvent event;
+    JNIEnv* pEnv = nullptr;
+    bool attached = false;
+    if (app->activity->vm->GetEnv(reinterpret_cast<void**>(&pEnv), JNI_VERSION_1_6) == JNI_EDETACHED) {
+        attached = app->activity->vm->AttachCurrentThread(&pEnv, nullptr) == JNI_OK;
+    }
+    int32_t displayRotation = 0;
+    if (pEnv) {
+        auto activityClass = pEnv->GetObjectClass(app->activity->clazz);
+        static jmethodID getWindowManager = pEnv->GetMethodID(activityClass, "getWindowManager", "()Landroid/view/WindowManager;");
+        auto windowManager = pEnv->CallObjectMethod(app->activity->clazz, getWindowManager);
+        auto managerClass = pEnv->GetObjectClass(windowManager);
+        static jmethodID getDefaultDisplay = pEnv->GetMethodID(managerClass, "getDefaultDisplay", "()Landroid/view/Display;");
+        auto display = pEnv->CallObjectMethod(windowManager, getDefaultDisplay);
+        auto displayClass = pEnv->GetObjectClass(display);
+        static jmethodID getRotation = pEnv->GetMethodID(displayClass, "getRotation", "()I");
+        displayRotation = pEnv->CallIntMethod(display, getRotation);
+        pEnv->DeleteLocalRef(displayClass);
+        pEnv->DeleteLocalRef(display);
+        pEnv->DeleteLocalRef(managerClass);
+        pEnv->DeleteLocalRef(windowManager);
+        pEnv->DeleteLocalRef(activityClass);
+    }
+    if (attached) {
+        app->activity->vm->DetachCurrentThread();
+    }
     while (ASensorEventQueue_getEvents(sensorQueue, &event, 1) > 0) {
         SR_UTILS_NS::AndroidEvent evt;
         evt.type = SR_UTILS_NS::AndroidEvent::Sensor;
         evt.sensorEvent.sensor = event;
+        evt.sensorEvent.displayRotation = displayRotation;
         SR_PLATFORM_NS::PushAndroidInputEvent(evt);
     }
 }
