@@ -31,28 +31,17 @@ namespace SR_CORE_GUI_NS {
         return extension == "png" || extension == "jpg" || extension == "jpeg" || extension == "tga" || extension == "bmp" || extension == "hdr";
     }
 
-    GameBuildJob::GameBuildJob(const ProjectSettings& settings)
-        : m_pProjectSettings(SRNew<ProjectSettings>())
-    {
-        m_pProjectSettings->projectName = settings.projectName;
-        m_pProjectSettings->mainScene = settings.mainScene;
-        m_pProjectSettings->version = settings.version;
-        m_pProjectSettings->packages = settings.packages;
-        m_pProjectSettings->buildExcludedPaths = settings.buildExcludedPaths;
-        m_pProjectSettings->enableCppScripts = settings.enableCppScripts;
-        m_pProjectSettings->buildProfiles = settings.buildProfiles;
-        m_pProjectSettings->activeBuildProfile = settings.activeBuildProfile;
-    }
+    GameBuildJob::GameBuildJob(const SR_UTILS_NS::ResourceRef<ProjectSettings>& settings)
+        : m_pProjectSettings(settings)
+    { }
 
-    GameBuildJob::~GameBuildJob() {
-        m_pProjectSettings->DeleteResource();
-    }
+    GameBuildJob::~GameBuildJob() = default;
 
     GameBuildProfile* GameBuildJob::GetActiveProfile() const {
         if (m_pProjectSettings->activeBuildProfile >= m_pProjectSettings->buildProfiles.size()) {
             return nullptr;
         }
-        return &m_pProjectSettings->buildProfiles[m_pProjectSettings->activeBuildProfile];
+        return &m_pProjectSettings.GetResource()->buildProfiles[m_pProjectSettings->activeBuildProfile];
     }
 
     SR_UTILS_NS::String GameBuildJob::GetReleaseTag() const {
@@ -326,20 +315,6 @@ namespace SR_CORE_GUI_NS {
             SetStatus("Failed to create Builds directory.", true);
             return false;
         }
-        SetStatus("Saving build project configuration...");
-        SR_UTILS_NS::SRASerializer projectSerializer;
-        projectSerializer.SetUseTabs(true);
-        projectSerializer.SetUseNumericDepth(false);
-        projectSerializer.BeginObject(SR_UTILS_NS::SerializationId::Create("asset"));
-        projectSerializer.WriteString(m_pProjectSettings->GetMeta()->GetFactoryName(), SR_UTILS_NS::SerializationId::Create("type"));
-        projectSerializer.BeginObject(SR_UTILS_NS::SerializationId::Create("ptr"));
-        m_pProjectSettings->Save(projectSerializer);
-        projectSerializer.EndObject();
-        projectSerializer.EndObject();
-        if (!SR_UTILS_NS::VFS::Instance().WriteFileAtomic(m_outputRoot.Concat("Project/.srproject"), projectSerializer.ToStringBase())) {
-            SetStatus("Failed to stage project configuration.", true);
-            return false;
-        }
         m_textureExporter.isCancelled = isCancelled;
         m_textureExporter.useGpu = pProfile->textureGpuEncoding;
         m_textureExporter.useAstc = pProfile->textureAstcEncoding;
@@ -423,7 +398,6 @@ namespace SR_CORE_GUI_NS {
         uint32_t losslessTextureCount = 0;
         uint32_t omittedFallbackCount = 0;
         uint64_t omittedFallbackBytes = 0;
-        m_resourceOverrides.emplace_back(TextureBuildArtifact { ".srproject", m_outputRoot.Concat("Project/.srproject") });
         SR_UTILS_NS::Vector<double_t> workWeights(m_sourceResourcePaths.size());
         double_t totalWork = 0.0;
         double_t completedWork = 0.0;

@@ -11,7 +11,7 @@
 #include <Graphics/GUI/Widget.h>
 
 #include <Utils/Types/SortedVector.h>
-#include <chrono>
+#include <Utils/Resources/ResourceRef.h>
 
 namespace SR_CORE_GUI_NS {
     class GameBuildExporter : public SR_GRAPH_GUI_NS::Widget {
@@ -39,7 +39,7 @@ namespace SR_CORE_GUI_NS {
         void DrawLogcat(const GameBuildRuntime::Status& runtime);
 
     private:
-        SR_UTILS_NS::RawPointerHolder<ProjectSettings> m_pProjectSettings;
+        SR_UTILS_NS::ResourceRef<ProjectSettings> m_pProjectSettings;
         std::atomic<bool> m_projectReady = false;
         bool m_toolsScanned = false;
         bool m_devicesScanned = false;

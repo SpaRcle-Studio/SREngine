@@ -9,11 +9,12 @@
 #include <Engine/Export/TextureExporter.h>
 #include <Utils/Types/SortedVector.h>
 #include <Utils/Types/Function.h>
+#include <Utils/Resources/ResourceRef.h>
 
 namespace SR_CORE_GUI_NS {
     class GameBuildJob : public SR_UTILS_NS::NonCopyable {
     public:
-        explicit GameBuildJob(const ProjectSettings& settings);
+        explicit GameBuildJob(const SR_UTILS_NS::ResourceRef<ProjectSettings>& settings);
         ~GameBuildJob() override;
         bool Build();
         bool ReinstallArtifacts();
@@ -51,7 +52,7 @@ namespace SR_CORE_GUI_NS {
         static constexpr SR_UTILS_NS::StringView EngineRepository = "https://github.com/SpaRcle-Studio/SREngine";
         static constexpr SR_UTILS_NS::StringView PackedDataMagic = "MAGIC_ENGINE_MODULE_DATA";
         static constexpr SR_UTILS_NS::StringView ResourceDataMagic = "SR_ENGINE_VFS_RESOURCES_V1";
-        ProjectSettings::Ptr m_pProjectSettings;
+        SR_UTILS_NS::ResourceRef<ProjectSettings> m_pProjectSettings;
         SR_UTILS_NS::SortedVector<SR_UTILS_NS::Path> m_resourcePaths;
         SR_UTILS_NS::SortedVector<SR_UTILS_NS::Path> m_sourceResourcePaths;
         SR_UTILS_NS::Vector<TextureBuildArtifact> m_resourceOverrides;

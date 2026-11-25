@@ -46,27 +46,11 @@ namespace SR_CORE_GUI_NS {
             m_runtime.Report("Open a project to configure its builds.");
             return false;
         }
-        const SR_UTILS_NS::ResourceRef<ProjectSettings> source = CoreResLoader::Load<ProjectSettings>(".srproject");
-        if (!source) {
+        m_pProjectSettings = CoreResLoader::Load<ProjectSettings>(".srproject");
+        if (!m_pProjectSettings) {
             m_runtime.Report("Project settings were not found.", true);
             return false;
         }
-        SR_UTILS_NS::RawPointerHolder<ProjectSettings> snapshot = SRNew<ProjectSettings>();
-        snapshot.SetDeleter([](ProjectSettings* settings) {
-            settings->DeleteResource();
-        });
-        SR_UTILS_NS::ResourceManager::Instance().Execute([&snapshot, &source]() {
-            snapshot->projectName = source->projectName;
-            snapshot->mainScene = source->mainScene;
-            snapshot->version = source->version;
-            snapshot->packages = source->packages;
-            snapshot->buildExcludedPaths = source->buildExcludedPaths;
-            snapshot->buildProfiles = source->buildProfiles;
-            snapshot->enableCppScripts = source->enableCppScripts;
-            snapshot->activeBuildProfile = source->activeBuildProfile;
-        });
-        m_pProjectSettings = std::move(snapshot);
-
         if (m_pProjectSettings->buildProfiles.empty()) {
             m_pProjectSettings->buildProfiles.emplace_back();
             m_pProjectSettings->activeBuildProfile = 0;
@@ -79,9 +63,9 @@ namespace SR_CORE_GUI_NS {
             return nullptr;
         }
         if (m_pProjectSettings->activeBuildProfile >= m_pProjectSettings->buildProfiles.size()) {
-            m_pProjectSettings->activeBuildProfile = 0;
+            m_pProjectSettings.GetResource()->activeBuildProfile = 0;
         }
-        return &m_pProjectSettings->buildProfiles[m_pProjectSettings->activeBuildProfile];
+        return &m_pProjectSettings.GetResource()->buildProfiles[m_pProjectSettings->activeBuildProfile];
     }
 
     SR_UTILS_NS::String GameBuildExporter::GetReleaseTag() const {
@@ -106,7 +90,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     SR_UTILS_NS::Path GameBuildExporter::GetArtifactPath(SR_UTILS_NS::StringView platform, SR_UTILS_NS::StringView suffix) const {
-        const auto settings = m_pProjectSettings.Get();
+        const auto settings = m_pProjectSettings.GetResource();
         if (!settings || settings->activeBuildProfile >= settings->buildProfiles.size()) {
             return {};
         }
@@ -126,7 +110,7 @@ namespace SR_CORE_GUI_NS {
             m_runtime.Report("No active build profile.", true);
             return false;
         }
-        SR_HTYPES_NS::SharedPtr<GameBuildJob> job = new GameBuildJob(*m_pProjectSettings);
+        SR_HTYPES_NS::SharedPtr<GameBuildJob> job = new GameBuildJob(m_pProjectSettings);
         job->onStatus = [this](SR_UTILS_NS::String text, bool error) {
             m_runtime.Report(std::move(text), error);
         };
