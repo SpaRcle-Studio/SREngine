@@ -35,24 +35,24 @@ namespace SR_CORE_GUI_NS {
             SR_IMMEDIATE_GUI_NS::Text("   * GitHub Copilot");
             SR_IMMEDIATE_GUI_NS::Separator();
             SR_IMMEDIATE_GUI_NS::Text("Made thanks to the following libraries: ");
-            SR_IMMEDIATE_GUI_NS::TextWrapped("    glm, GLFW, GLEW, glad, Bullet3, PhysX, Box2D, Dear ImGui, tinyobjloader, stbi, json, Assimp");
+            SR_IMMEDIATE_GUI_NS::TextWrapped("    GLFW, GLEW, glad, Bullet3, PhysX, Box2D, Dear ImGui, tinyobjloader, stbi, json, Assimp");
             SR_IMMEDIATE_GUI_NS::Separator();
             SR_IMMEDIATE_GUI_NS::Text("Build Version: %s", SR_ENGINE_VERSION);
 
         #ifdef SR_COMMON_GIT_METADATA
-            static std::string metadata;
+            static SR_UTILS_NS::String metadata;
             if (metadata.empty()) {
-                std::time_t timestamp = std::stoll(git_CommitDate());
-                std::tm* timeUTC = std::gmtime(&timestamp);
+                std::time_t timestamp = strtoll(git_CommitDate(), nullptr, 10);
+                std::tm* pTimeUTC = std::gmtime(&timestamp);
 
-                metadata += "build '" + std::string(git_CommitSHA1()).substr(0, 7) + "' in '" + git_Branch() + "by '" +
-                    + git_AuthorName() + "' on\n\t" + std::asctime(timeUTC);
+                metadata += SR_UTILS_NS::String("build '") + SR_UTILS_NS::String(git_CommitSHA1()).substr(0, 7) + "' in '" + git_Branch() + "by '" +
+                    git_AuthorName() + "' on\n\t" + std::asctime(pTimeUTC);
             }
 
             SR_IMMEDIATE_GUI_NS::Text(metadata.c_str());
         #endif
 
-            const std::string executableAndModulesHash = SR_UTILS_NS::ToString(SR_UTILS_NS::FileSystem::GetExecutableAndModulesHash());
+            const SR_UTILS_NS::String executableAndModulesHash = SR_UTILS_NS::ToString(SR_UTILS_NS::FileSystem::GetExecutableAndModulesHash());
             SR_IMMEDIATE_GUI_NS::Text("Executable and modules hash: %s", executableAndModulesHash.c_str());
 
             SR_IMMEDIATE_GUI_NS::Text("Licensed under the MIT License");

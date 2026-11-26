@@ -44,7 +44,6 @@ if (ANDROID_NDK)
     endif()
 
     add_definitions(
-        -DGLM_LANG_STL11_FORCED
         -D_LIBCPP_ENABLE_CXX17_REMOVED_FEATURES
     )
 endif()
