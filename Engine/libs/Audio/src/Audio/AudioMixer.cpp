@@ -32,6 +32,14 @@ namespace SR_AUDIO_NS {
         SR_UTILS_NS::Broadcaster::Instance().Broadcast("AudioMixerChanged");
     }
 
+    void AudioMixer::SetPlayInBackground(bool enabled) {
+        SoundManager::Instance().SetPlayInBackground(enabled);
+    }
+
+    bool AudioMixer::IsPlayInBackground() const {
+        return SoundManager::Instance().IsPlayInBackground();
+    }
+
     bool AudioMixer::AddGroup(const AudioMixerGroup& group) {
         SR_TRACY_ZONE;
         if (group.name.empty() || m_groups.contains(group.name) || !HasGroup(group.parent) || !std::isfinite(group.volume)) {

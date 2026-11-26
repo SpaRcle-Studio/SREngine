@@ -7,6 +7,8 @@
 
 #include <Graphics/Window/Window.h>
 
+#include <Audio/SoundManager.h>
+
 #include <Utils/Common/StoreUtils.h>
 
 #include <Codegen/PollEventsState.generated.hpp>
@@ -23,6 +25,10 @@ namespace SR_CORE_NS {
             }
             pWindow->PollEvents();
         }
+
+        const auto&& pFocusedWindow = pEngine->GetFocusedWindow();
+        SR_AUDIO_NS::SoundManager::Instance().SetApplicationFocused(
+            pFocusedWindow && pFocusedWindow->IsValid() && !pFocusedWindow->IsWindowCollapsed());
 
         return SR_UTILS_NS::ThreadWorkerResult::Success;
     }

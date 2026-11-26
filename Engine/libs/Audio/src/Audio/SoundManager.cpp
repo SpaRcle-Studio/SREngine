@@ -208,6 +208,8 @@ namespace SR_AUDIO_NS {
 
         m_thread->Synchronize();
 
+        UpdateGlobalGain();
+
         for (auto pIt = m_playStack.begin(); pIt != m_playStack.end(); ) {
             auto&& pPlayData = *pIt;
 
@@ -693,7 +695,7 @@ namespace SR_AUDIO_NS {
                 return false;
             }
 
-            pListener->SetGlobalGain(m_globalGain.load());
+            pListener->SetGlobalGain(GetEffectiveGlobalGain());
 
             m_listeners.insert(pListener);
 
@@ -735,10 +737,25 @@ namespace SR_AUDIO_NS {
 
         m_thread->Execute([gain, this]() {
             m_globalGain.store(gain);
-            for (auto&& pListener : m_listeners) {
-                pListener->SetGlobalGain(gain);
-            }
+            UpdateGlobalGain();
             return true;
         });
+    }
+
+    float_t SoundManager::GetEffectiveGlobalGain() const noexcept {
+        const bool focused = m_applicationFocused.load();
+        return focused || m_playInBackground.load() ? m_globalGain.load() : 0.f;
+    }
+
+    void SoundManager::UpdateGlobalGain() {
+        const float_t gain = GetEffectiveGlobalGain();
+        if (SR_EQUALS(m_appliedGlobalGain, gain)) {
+            return;
+        }
+
+        m_appliedGlobalGain = gain;
+        for (auto&& pListener : m_listeners) {
+            pListener->SetGlobalGain(gain);
+        }
     }
 }

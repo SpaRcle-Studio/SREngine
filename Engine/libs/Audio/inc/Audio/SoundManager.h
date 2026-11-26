@@ -74,6 +74,9 @@ namespace SR_AUDIO_NS {
         void SetListenerTransform(SoundListener* pListenerContext, const SR_MATH_NS::FVector3& position, const SR_MATH_NS::Quaternion& quaternion);
 
         void SetGlobalGain(float_t gain) noexcept;
+        void SetApplicationFocused(bool focused) noexcept { m_applicationFocused.store(focused); }
+        void SetPlayInBackground(bool enabled) noexcept { m_playInBackground.store(enabled); }
+        SR_NODISCARD bool IsPlayInBackground() const noexcept { return m_playInBackground.load(); }
 
         SR_NODISCARD const SR_UTILS_NS::Set<SoundListener*>& GetListeners() const noexcept { return m_listeners; }
         SR_NODISCARD const SR_UTILS_NS::Vector<PlayData*>& GetPlayStack() const noexcept { return m_playStack; }
@@ -102,10 +105,15 @@ namespace SR_AUDIO_NS {
 
     private:
         void Sleep();
+        SR_NODISCARD float_t GetEffectiveGlobalGain() const noexcept;
+        void UpdateGlobalGain();
 
     private:
         bool m_isEnabled = false;
         std::atomic<float_t> m_globalGain = 1.f;
+        std::atomic<bool> m_applicationFocused = false;
+        std::atomic<bool> m_playInBackground = false;
+        float_t m_appliedGlobalGain = -1.f;
         std::atomic<SR_HTYPES_NS::Thread::ThreadId> m_threadId = SR_HTYPES_NS::Thread::EmptyThreadId();
         SR_UTILS_NS::Set<SoundListener*> m_listeners;
         SR_HTYPES_NS::Thread::Ptr m_thread = nullptr;

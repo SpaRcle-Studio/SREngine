@@ -39,6 +39,10 @@ namespace SR_AUDIO_NS {
         /// @method @evaluate
         bool IsMuted() const noexcept { return m_muted; }
         /// @method
+        void SetPlayInBackground(bool enabled);
+        /// @method @evaluate
+        bool IsPlayInBackground() const;
+        /// @method
         bool AddGroup(const AudioMixerGroup& group);
         /// @method
         bool RemoveGroup(SR_UTILS_NS::StringAtom group);
