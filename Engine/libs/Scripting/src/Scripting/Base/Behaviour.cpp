@@ -15,6 +15,9 @@
 
 namespace SR_SCRIPTING_NS {
     bool Behaviour::InvokeEvent(SR_UTILS_NS::StringAtom method) {
+        if (ScriptSystem::Instance().IsLoading()) {
+            return false;
+        }
         if (!m_behaviourInstance || !m_behaviourInstance->IsValid()) {
             SR_ERROR("Behaviour::InvokeEvent() : unavailable target {}::{}", m_behaviourName, method);
             return false;
@@ -24,21 +27,27 @@ namespace SR_SCRIPTING_NS {
     }
 
     void Behaviour::Awake() {
-        if (m_behaviourInstance) {
-            m_behaviourInstance->Awake();
+        if (!IsInstanceValid() || ScriptSystem::Instance().IsLoading()) {
+            return;
         }
+        m_behaviourInstance->Awake();
         Super::Awake();
+        if (m_isActive && !m_instanceEnabled) {
+            OnEnable();
+        }
     }
 
     void Behaviour::OnEnable() {
-        if (m_behaviourInstance) {
+        if (IsInstanceValid() && !m_instanceEnabled) {
+            m_instanceEnabled = true;
             m_behaviourInstance->OnEnable();
         }
         Super::OnEnable();
     }
 
     void Behaviour::OnDisable() {
-        if (m_behaviourInstance) {
+        if (IsInstanceValid() && m_instanceEnabled) {
+            m_instanceEnabled = false;
             m_behaviourInstance->OnDisable();
         }
         Super::OnDisable();
@@ -73,6 +82,7 @@ namespace SR_SCRIPTING_NS {
 
         if (IsInstanceValid()) {
             m_behaviourInstance->SetSceneObject(GetSceneObject());
+            m_instanceAttached = true;
             m_behaviourInstance->OnAttached();
         }
 
@@ -88,9 +98,10 @@ namespace SR_SCRIPTING_NS {
     }
 
     void Behaviour::OnDetached() {
-        if (m_behaviourInstance) {
+        if (m_behaviourInstance && m_instanceAttached) {
             m_behaviourInstance->OnDetached();
         }
+        m_instanceAttached = false;
         Super::OnDetached();
     }
 
@@ -195,6 +206,12 @@ namespace SR_SCRIPTING_NS {
         SR_TRACY_ZONE;
         auto&& scriptSystem = SR_SCRIPTING_NS::ScriptSystem::Instance();
 
+        if (m_behaviourName != name) {
+            m_serializationNode.Reset();
+        }
+        m_instanceAttached = false;
+        m_instanceEnabled = false;
+
         if (scriptSystem.IsInitialized()) {
             if (m_behaviourInstance) {
                 scriptSystem.FreeBehaviourInstance(m_behaviourInstance);
@@ -212,6 +229,9 @@ namespace SR_SCRIPTING_NS {
             }
         }
         m_behaviourName = name;
+        if (IsAttached() && IsInstanceValid()) {
+            OnBehaviourLoaded();
+        }
     }
 
     bool Behaviour::IsInstanceValid() const noexcept {
@@ -220,21 +240,29 @@ namespace SR_SCRIPTING_NS {
 
     void Behaviour::OnScriptTypesChanged() {
         SR_TRACY_ZONE;
-        if (IsInstanceValid() || m_behaviourName.empty()) { return; }
-        auto& system = ScriptSystem::Instance();
+        if (IsInstanceValid() || m_behaviourName.empty()) {
+            return;
+        }
+        auto&& system = ScriptSystem::Instance();
         const auto names = system.GetBehaviourNames();
-        if (std::find(names.begin(), names.end(), m_behaviourName) == names.end()) { return; }
+        if (std::find(names.begin(), names.end(), m_behaviourName) == names.end()) {
+            return;
+        }
         SetBehaviourName(m_behaviourName);
-        if (IsInstanceValid()) { OnBehaviourLoaded(); }
     }
 
     void Behaviour::OnBehaviourLoaded() {
         SR_TRACY_ZONE;
         m_isStarted = false;
         m_isAwake = false;
+        m_instanceEnabled = false;
 
         if (IsInstanceValid()) {
             m_behaviourInstance->SetSceneObject(GetSceneObject());
+            if (IsAttached() && !m_instanceAttached) {
+                m_instanceAttached = true;
+                m_behaviourInstance->OnAttached();
+            }
         }
 
         TryLoadBehaviourData();
@@ -266,6 +294,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     void Behaviour::OnBehaviourPreReload() {
+        m_instanceAttached = false;
         if (IsInstanceValid()) {
             SR_UTILS_NS::SRASerializer serializer;
             m_behaviourInstance->Save(serializer);

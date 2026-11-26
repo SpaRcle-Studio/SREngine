@@ -25,6 +25,7 @@ namespace SR_SCRIPTING_NS {
 
     ScriptSystem::~ScriptSystem() {
         ResetSubscriptions();
+        WaitForIdle();
         m_angelScriptSystem.AutoFree();
         m_cppSystem.AutoFree();
     }
@@ -72,6 +73,7 @@ namespace SR_SCRIPTING_NS {
 
     void ScriptSystem::InitialAnalyse() {
         SR_TRACY_ZONE;
+        m_initialAnalyzing = true;
 
         auto&& initializeFn = [this](SR_UTILS_NS::Task::AtomicState&){
             SR_UTILS_NS::VFS::Instance().Enumerate(CoreResLoader::GetResPath(), [this](const SR_UTILS_NS::VFSEntry& entry) {
@@ -82,12 +84,12 @@ namespace SR_SCRIPTING_NS {
             if (m_angelScriptSystem) {
                 m_angelScriptSystem->AsyncInitialize();
             }
-            m_initialAnalysisTaskId = SR_ID_INVALID;
+            m_initialAnalyzing = false;
         };
 
         if (SR_PLATFORM_NS::IsSupportThreads()) {
-            m_initialAnalysisTaskId = SR_UTILS_NS::TaskManager::Instance().ExecuteAsync(initializeFn, SR_UTILS_NS::TaskPriority::High);
-            SR_UTILS_NS::TaskManager::Instance().SetDescription(m_initialAnalysisTaskId, "Initial scripts analyse");
+            const auto taskId = SR_UTILS_NS::TaskManager::Instance().ExecuteAsync(initializeFn, SR_UTILS_NS::TaskPriority::High);
+            SR_UTILS_NS::TaskManager::Instance().SetDescription(taskId, "Initial scripts analyse");
         }
         else {
             SR_UTILS_NS::Task::AtomicState def;
@@ -181,7 +183,14 @@ namespace SR_SCRIPTING_NS {
     }
 
     ScriptSystemState ScriptSystem::GetState() const {
+        if (IsLoading()) {
+            return ScriptSystemState::InitialAnalyse;
+        }
         return m_cppSystem ? m_cppSystem->GetState() : ScriptSystemState::Idle;
+    }
+
+    bool ScriptSystem::IsLoading() const {
+        return m_initialAnalyzing || (m_angelScriptSystem && m_angelScriptSystem->IsLoading());
     }
 
     bool ScriptSystem::HasErrors() const {
@@ -192,7 +201,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     void ScriptSystem::WaitForIdle() {
-        while (m_initialAnalysisTaskId != SR_ID_INVALID) {
+        while (m_initialAnalyzing) {
             SR_PLATFORM_NS::Sleep(5);
         }
         if (m_cppSystem) {
@@ -204,6 +213,9 @@ namespace SR_SCRIPTING_NS {
     }
 
     void ScriptSystem::ReloadModulesIfNeeded() {
+        if (m_initialAnalyzing) {
+            return;
+        }
         if (m_cppSystem) {
             m_cppSystem->ReloadModulesIfNeeded();
         }
@@ -225,7 +237,7 @@ namespace SR_SCRIPTING_NS {
 
     BehaviourInstance* ScriptSystem::AllocateBehaviourInstance(SR_UTILS_NS::StringAtom name) {
         SR_TRACY_ZONE;
-        if (!m_isInit) {
+        if (!m_isInit || IsLoading()) {
             return nullptr;
         }
 

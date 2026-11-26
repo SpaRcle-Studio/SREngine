@@ -178,6 +178,15 @@ namespace SR_CORE_NS {
         const bool isPaused = pEngine->IsPaused() || !pEngine->IsActive() || pEngine->HasSceneInQueue();
 
         pSceneUpdater->Build(isPaused);
+        if (SR_SCRIPTING_NS::ScriptSystem::Instance().IsLoading()) {
+            SR_TRACY_ZONE_N("Update UI while scripts are loading");
+            pSceneUpdater->Update(dt, isPaused, false);
+            pSceneUpdater->LateUpdate(isPaused, false);
+            m_accumulator = 0.f;
+            m_inputAccumulator.Reset();
+            SR_HTYPES_NS::Time::Instance().SetFixedAlpha(0.f);
+            return;
+        }
         pSceneUpdater->Update(dt * m_speed, isPaused);
 
         SR_UTILS_NS::Broadcaster::Instance().Broadcast(SR_UTILS_NS::Events::EVENT_ON_ENGINE_UPDATE_ID);

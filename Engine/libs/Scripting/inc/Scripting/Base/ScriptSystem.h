@@ -27,6 +27,7 @@ namespace SR_SCRIPTING_NS {
 
         SR_NODISCARD ScriptSystemState GetState() const;
         SR_NODISCARD bool HasErrors() const;
+        SR_NODISCARD bool IsLoading() const;
         SR_NODISCARD const SR_UTILS_NS::Path& GetAPIFolder() const {
             return m_cppSystem->GetAPIFolder();
         }
@@ -55,7 +56,7 @@ namespace SR_SCRIPTING_NS {
 
     private:
         bool m_isInit = false;
-        uint64_t m_initialAnalysisTaskId = SR_ID_INVALID;
+        std::atomic<bool> m_initialAnalyzing = false;
         SR_UTILS_NS::Path m_handleFileEventPath;
         SR_UTILS_NS::Path m_handleFileEventSourcePath;
         CppScriptSystem::Ptr m_cppSystem;

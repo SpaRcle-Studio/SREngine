@@ -27,6 +27,7 @@ namespace SR_SCRIPTING_NS {
         void ReloadModuleIfNeeded();
         void WaitForIdle();
         void AsyncInitialize();
+        SR_NODISCARD bool IsLoading() const { return m_isLoading; }
 
     public:
         SR_NODISCARD SR_UTILS_NS::Set<SR_UTILS_NS::Path> GetSourceFiles() const;
@@ -41,7 +42,12 @@ namespace SR_SCRIPTING_NS {
 
     private:
         AngelScriptRuntime* m_pRuntime = nullptr;
-        uint64_t m_asyncRuntimeInitTask = SR_ID_INVALID;
+        std::atomic<bool> m_isLoading = true;
+        std::atomic<bool> m_initializationStarted = false;
+        std::atomic<bool> m_initializationFinished = false;
+        std::atomic<bool> m_reloadRequested = false;
+        std::mutex m_pendingFilesMutex;
+        SR_UTILS_NS::Set<SR_UTILS_NS::Path> m_pendingFiles;
 
     };
 }

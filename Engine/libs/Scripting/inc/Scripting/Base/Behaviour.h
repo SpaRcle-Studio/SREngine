@@ -90,6 +90,8 @@ namespace SR_SCRIPTING_NS {
 
     private:
         BehaviourInstance* m_behaviourInstance = nullptr;
+        bool m_instanceAttached = false;
+        bool m_instanceEnabled = false;
         SR_UTILS_NS::Subscription m_scriptTypesSubscription;
         SR_UTILS_NS::Optional<SR_UTILS_NS::SerializationNode> m_serializationNode;
 

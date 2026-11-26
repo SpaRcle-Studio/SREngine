@@ -112,7 +112,9 @@ namespace SR_CORE_NS {
             }
         }
 
-        if (!SR_UTILS_NS::CLIManager::Instance().IsAppOpenedByProjectFile() && pSettings) {
+        const bool isEditorDisabled = SR_UTILS_NS::CLIManager::Instance().IsFlagPresent(SR_UTILS_NS::CLIFlags::DisableEditor);
+        const bool isOpenedByProjectFile = SR_UTILS_NS::CLIManager::Instance().IsAppOpenedByProjectFile();
+        if (pSettings && (!isOpenedByProjectFile || isEditorDisabled)) {
             if (!pSettings->buildProfiles.empty()) {
                 auto&& profiles = pSettings->buildProfiles;
                 const uint32_t profileIndex = pSettings->activeBuildProfile < profiles.size() ? pSettings->activeBuildProfile : 0;
@@ -181,6 +183,7 @@ namespace SR_CORE_NS {
     }
 
     bool Application::InitializeResourcesFolder() {
+        SR_TRACY_ZONE;
         SR_LOG("Application::InitializeResourcesFolder() : initializing resources folder...");
 
         auto&& resourcesPath = CoreResLoader::GetResPath();

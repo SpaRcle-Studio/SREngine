@@ -57,6 +57,7 @@ namespace SR_CORE_NS {
     }
 
     bool Launcher::UnpackEmbedded() {
+        SR_TRACY_ZONE;
         SR_LOG("Launcher::UnpackEmbedded() : unpacking embedded resources...");
 
         if (SR_UTILS_NS::CLIManager::Instance().GetProjectPath()) {
@@ -70,6 +71,7 @@ namespace SR_CORE_NS {
     }
 
     bool Launcher::CloneResources() {
+        SR_TRACY_ZONE;
         auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
     #if !defined(SR_ANDROID) && !defined(SR_EMSCRIPTEN)
         auto&& cachePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();

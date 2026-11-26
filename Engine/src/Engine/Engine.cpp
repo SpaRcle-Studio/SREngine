@@ -391,17 +391,19 @@ namespace SR_CORE_NS {
 
         SR_LOG("Engine::LoadStartupScene() : loading startup scene...");
 
-        const bool isAppOpenedByProjectFile = SR_UTILS_NS::CLIManager::Instance().IsAppOpenedByProjectFile();
-        auto&& optionPath =  SR_UTILS_NS::CLIManager::Instance().GetOptionValue(SR_UTILS_NS::CLIOptions::RunScene);
+        auto&& optionPath = SR_UTILS_NS::CLIManager::Instance().GetOptionValue(SR_UTILS_NS::CLIOptions::RunScene);
         if (optionPath.has_value()) {
             SR_LOG("Engine::LoadStartupScene() : command line option to run scene detected: {}", optionPath.value());
             RunSceneGameMode(optionPath.value(), true);
         }
-        else if (!isAppOpenedByProjectFile && SR_UTILS_NS::VFS::Instance().IsExists(".srproject")) {
+        else if (SR_UTILS_NS::StoreUtils::Temp::GetBool("ApplicationIsGame")) {
             if (auto&& pSettings = CoreResLoader::Load<ProjectSettings>(".srproject")) {
                 if (auto&& scenePath = CoreResLoader::GetResPath().Concat(pSettings->mainScene); scenePath.IsFile()) {
                     RunSceneGameMode(scenePath, true);
                 }
+            }
+            else {
+                SRHalt("Engine::LoadStartupScene() : application is a game, but project file isn't present!");
             }
         }
 
