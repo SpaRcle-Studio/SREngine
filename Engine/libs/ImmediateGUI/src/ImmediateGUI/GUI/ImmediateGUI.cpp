@@ -435,6 +435,18 @@ namespace SR_IMMEDIATE_GUI_NS {
         }
     }
 
+    void DrawListAddRectFilledMultiColor(void* pDrawList, const SR_MATH_NS::FVector2& min, const SR_MATH_NS::FVector2& max, uint32_t colorTopLeft, uint32_t colorTopRight, uint32_t colorBottomRight, uint32_t colorBottomLeft) {
+        if (auto&& pImGuiDrawList = static_cast<ImDrawList*>(pDrawList)) {
+            pImGuiDrawList->AddRectFilledMultiColor(F2ToImV2(min), F2ToImV2(max), colorTopLeft, colorTopRight, colorBottomRight, colorBottomLeft);
+        }
+    }
+
+    void DrawListAddCircleFilled(void* pDrawList, const SR_MATH_NS::FVector2& center, float_t radius, uint32_t color, int32_t segments) {
+        if (auto&& pImGuiDrawList = static_cast<ImDrawList*>(pDrawList)) {
+            pImGuiDrawList->AddCircleFilled(F2ToImV2(center), radius, color, segments);
+        }
+    }
+
     bool InputFloat(const char* label, float_t* v, float_t step, float_t stepFast, const char* format, InputTextFlags flags) {
         SR_TRACY_ZONE;
         return ImGui::InputFloat(label, v, step, stepFast, format, static_cast<ImGuiInputTextFlags>(flags));
@@ -713,6 +725,10 @@ namespace SR_IMMEDIATE_GUI_NS {
         ImGui::PushFont(static_cast<ImFont*>(pFont));
     }
 
+    void PushFont(void* pFont, float_t size) {
+        ImGui::PushFont(static_cast<ImFont*>(pFont), size);
+    }
+
     void SetWindowFocus(const char* name) {
         ImGui::SetWindowFocus(name);
     }
@@ -754,6 +770,11 @@ namespace SR_IMMEDIATE_GUI_NS {
     bool MenuItem(const char *label) {
         SR_TRACY_ZONE;
         return ImGui::MenuItem(label);
+    }
+
+    bool MenuItem(const char* label, const char* shortcut, bool selected, bool enabled) {
+        SR_TRACY_ZONE;
+        return ImGui::MenuItem(label, shortcut, selected, enabled);
     }
 
     void EndMenu() {
@@ -1723,6 +1744,8 @@ namespace SR_IMMEDIATE_GUI_NS {
     void DrawListAddRect(void* pDrawList, const SR_MATH_NS::FVector2& min, const SR_MATH_NS::FVector2& max, uint32_t color, float rounding, float thickness) { }
     void DrawListAddRectFilled(void* pDrawList, const SR_MATH_NS::FVector2& min, const SR_MATH_NS::FVector2& max, uint32_t color, float rounding, DrawFlags flags) { }
     void DrawListAddLine(void* pDrawList, const SR_MATH_NS::FVector2& p1, const SR_MATH_NS::FVector2& p2, uint32_t color, float thickness) { }
+    void DrawListAddRectFilledMultiColor(void* pDrawList, const SR_MATH_NS::FVector2& min, const SR_MATH_NS::FVector2& max, uint32_t colorTopLeft, uint32_t colorTopRight, uint32_t colorBottomRight, uint32_t colorBottomLeft) { }
+    void DrawListAddCircleFilled(void* pDrawList, const SR_MATH_NS::FVector2& center, float_t radius, uint32_t color, int32_t segments) { }
     bool InputFloat(const char* label, float_t* v, float_t step, float_t stepFast, const char* format, InputTextFlags flags) { return false; }
     bool InputInt(const char* label, int* v, int step, int step_fast, InputTextFlags flags) { return false; }
     bool Combo(const char* label, int* current_item, const char* items_separated_by_zeros) { return false; }
@@ -1748,6 +1771,7 @@ namespace SR_IMMEDIATE_GUI_NS {
     bool BeginTabBar(const char* str_id) { return false; }
     void EndTabBar() { }
     void PushFont(void* pFont) { }
+    void PushFont(void* pFont, float_t size) { }
     void PopFont() { }
     void SetWindowFocus(const char* str_id) { }
     bool BeginChild(const char* str_id) { return false; }
@@ -1781,6 +1805,7 @@ namespace SR_IMMEDIATE_GUI_NS {
     bool InputTextMultiline(const char* label, std::string* str, const SR_MATH_NS::FVector2& size, InputTextFlags flags) { return false; }
     bool BeginMenu(const char* label) { return false; }
     bool MenuItem(const char* label) { return false; }
+    bool MenuItem(const char* label, const char* shortcut, bool selected, bool enabled) { return false; }
     void EndMenu() { }
     void BeginDocking() { }
     void EndDocking() { }

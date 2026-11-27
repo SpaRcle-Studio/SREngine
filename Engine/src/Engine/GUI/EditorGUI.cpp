@@ -19,6 +19,7 @@
 #include <Engine/GUI/SceneViewer.h>
 #include <Engine/GUI/FileBrowser.h>
 #include <Engine/GUI/About.h>
+#include <Engine/GUI/Welcome.h>
 #include <Engine/GUI/CreateNewProject.h>
 #include <Engine/GUI/GameBuildExporter.h>
 #include <Engine/GUI/SceneTools.h>
@@ -57,7 +58,7 @@
 #include <Utils/ECS/Prefab.h>
 #include <Utils/ECS/TransformRect.h>
 #include <Utils/Platform/Platform.h>
-#include <Utils/Platform/MessageBox.h>
+#include <Utils/Platform/Process.h>
 #include <Utils/FileSystem/FileDialog.h>
 #include <Utils/Profile/TracyContext.h>
 #include <Utils/World/SceneUpdater.h>
@@ -66,13 +67,48 @@
 #include <Utils/Common/CLIManager.h>
 #include <Utils/Common/StoreUtils.h>
 #include <Utils/FileSystem/VFS.h>
-#include <Utils/Network/GitHubDownloader.h>
 #include <Utils/Resources/Xml.h>
 
 #include <Enum/EditorIcon.hpp>
 
 namespace SR_CORE_GUI_NS {
-    SR_UTILS_NS::Path SR_SAMPLES_PATH = "Samples";
+    /// Группы меню Window (имена фабрик виджетов)
+    static const std::array<SR_UTILS_NS::StringAtom, 4> g_mainWindowWidgets = {
+        "SceneViewer", "Hierarchy", "Inspector", "FileBrowser"
+    };
+
+    static const std::array<SR_UTILS_NS::StringAtom, 3> g_editorWindowWidgets = {
+        "AnimatorEditor", "AnimatorEditorStateMachine", "FluxEditor"
+    };
+
+    static const std::array<SR_UTILS_NS::StringAtom, 3> g_inspectorWindowWidgets = {
+        "AssetInspector", "TextureInspector", "RawMeshInspector"
+    };
+
+    static const std::array<SR_UTILS_NS::StringAtom, 2> g_debugWindowWidgets = {
+        "EngineStatistics", "SoundDebug"
+    };
+
+    /// Открываются из File/Tools/Help, в Window не дублируются
+    static const std::array<SR_UTILS_NS::StringAtom, 7> g_nonWindowWidgets = {
+        "About", "Welcome", "CreateNewProject", "GameBuildExporter", "AssetsStore", "EngineSettings", "WidgetContainer"
+    };
+
+    static const std::array<std::span<const SR_UTILS_NS::StringAtom>, 5> g_knownWidgetGroups = {
+        g_mainWindowWidgets, g_editorWindowWidgets, g_inspectorWindowWidgets, g_debugWindowWidgets, g_nonWindowWidgets
+    };
+
+    static bool IsWidgetInGroups(SR_UTILS_NS::StringAtom name) {
+        for (auto&& group : g_knownWidgetGroups) {
+            for (auto&& groupName : group) {
+                if (groupName == name) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
 
     static SR_UTILS_NS::Path GetNewPrefabPath() {
         auto&& scenePath = CoreResLoader::GetCachePath().Concat(SR_WORLD_NS::Scene::NewPrefabPath).ConcatExt("prefab");
@@ -144,9 +180,12 @@ namespace SR_CORE_GUI_NS {
                 SRHalt("EditorGUI::Init() : invalid widget name or pointer!");
                 continue;
             }
+            if (IsWidgetInGroups(name)) {
+                continue;
+            }
             m_windowPageWidgets.emplace_back(name, pWidget->GetName());
         }
-        std::ranges::stable_sort(m_windowPageWidgets, [](const auto& lhs, const auto& rhs) {
+        std::stable_sort(m_windowPageWidgets.begin(), m_windowPageWidgets.end(), [](const auto& lhs, const auto& rhs) {
             return lhs.second.ToStringView() < rhs.second.ToStringView();
         });
 
@@ -196,53 +235,35 @@ namespace SR_CORE_GUI_NS {
             m_dragWindow = false;
         }
 
-        if (m_imGuiDemo) {
-            //ImGui::ShowDemoWindow(&m_imGuiDemo);
-        }
-
         if (m_showMetricsWindow) {
             SR_IMMEDIATE_GUI_NS::ShowMetricsWindow(&m_showMetricsWindow);
         }
 
-        if (!m_installSamplesAsked && m_samplesShowDelay <= 0.f) {
-            m_installSamplesAsked = SR_UTILS_NS::StoreUtils::User::GetBool("InstallSamplesAsked", false);
-            m_installSamplesAsked |= SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(SR_SAMPLES_PATH).IsDir();
-            m_installSamplesAsked |= SR_UTILS_NS::CLIManager::Instance().IsHeadlessMode() || SR_UTILS_NS::CLIManager::Instance().IsFlagPresent(SR_UTILS_NS::CLIFlags::UnitTests);
-
-            SR_UTILS_NS::StoreUtils::User::SetBool("InstallSamplesAsked", true);
-
-            if (!m_installSamplesAsked) {
-                SR_LOG("EditorGUI::Draw() : asking user to install samples...");
-                const auto&& result = SR_PLATFORM_NS::ShowMessageBox(
-                    "Samples are not installed",
-                    "Do you want to install samples? It will download ~400mb of data. You can also install them later from the settings.",
-                    SR_PLATFORM_NS::MessageBoxType::YesNo,
-                    SR_PLATFORM_NS::MessageBoxIconType::Question,
-                    SR_PLATFORM_NS::MessageBoxDefaultButtonType::YesOk
-                );
-                if (result == SR_PLATFORM_NS::MessageBoxResultType::YesOk) {
-                    SR_LOG("EditorGUI::Draw() : user accepted to install samples! Installing...");
-                    InstallOrUpdateSamples();
-                    auto&& scenePath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(SR_SAMPLES_PATH).Concat("Female/demo.scene");
-                    if (scenePath.IsFile()) {
-                        if (auto&& pScene = m_engine->GetScene()) {
-                            pScene->SaveScene();
-                        }
-                        if (auto&& pScene = SR_WORLD_NS::Scene::LoadScene(scenePath)) {
-                            m_engine->AddSceneToQueue(pScene);
-                        }
-                    }
-                }
-                else {
-                    SR_LOG("EditorGUI::Draw() : user declined to install samples.");
-                }
-                m_installSamplesAsked = true;
-                SR_UTILS_NS::StoreUtils::Storage::Instance().Save();
-            }
+        if (!m_welcomeChecked) {
+            ShowWelcomeOnFirstLaunch();
         }
-        m_samplesShowDelay -= SR_HTYPES_NS::Time::Instance().DeltaTime();
 
         WidgetManager::Draw();
+    }
+
+    void EditorGUI::ShowWelcomeOnFirstLaunch() {
+        m_welcomeChecked = true;
+
+        auto&& cliManager = SR_UTILS_NS::CLIManager::Instance();
+        if (cliManager.IsHeadlessMode() || cliManager.IsFlagPresent(SR_UTILS_NS::CLIFlags::UnitTests)) {
+            return;
+        }
+
+        if (SR_UTILS_NS::StoreUtils::User::GetBool(Welcome::ShownStoreKey, false)) {
+            return;
+        }
+
+        SR_LOG("EditorGUI::ShowWelcomeOnFirstLaunch() : first launch, showing welcome window.");
+
+        SR_UTILS_NS::StoreUtils::User::SetBool(Welcome::ShownStoreKey, true);
+        SR_UTILS_NS::StoreUtils::Storage::Instance().Save();
+
+        OpenWidget<Welcome>();
     }
 
     void EditorGUI::DrawDockingSpace() {
@@ -537,6 +558,11 @@ namespace SR_CORE_GUI_NS {
                 else
                     pIt->second->Close();
             }
+        }
+
+        /// приветствие открывается только явно (первый запуск или Help), а не из сохраненной раскладки
+        if (auto&& pWelcome = GetWidget<Welcome>()) {
+            pWelcome->Close();
         }
     }
 
@@ -1031,154 +1057,16 @@ namespace SR_CORE_GUI_NS {
 
         SR_IMMEDIATE_GUI_NS::PushStyleVar(SR_IMMEDIATE_GUI_NS::StyleVar::WindowPadding, SR_MATH_NS::FVector2(8, 8));
 
-        if (SR_IMMEDIATE_GUI_NS::BeginMenu("File")) {
-            if (SR_IMMEDIATE_GUI_NS::MenuItem("New project")) {
-                OpenWidget<CreateNewProject>();
-            }
-
-            if (SR_UTILS_NS::CLIManager::Instance().GetProjectPath().has_value()) {
-                SR_IMMEDIATE_GUI_NS::Separator();
-                if (SR_IMMEDIATE_GUI_NS::MenuItem("Close project")) {
-                    SR_UTILS_NS::CLIManager::Instance().SetProjectPath(std::nullopt);
-                    GetEngine()->Reload();
-                }
-            }
-
-            if (SR_UTILS_NS::VFS::Instance().IsFileExists(".srproject")) {
-                SR_IMMEDIATE_GUI_NS::Separator();
-                if (SR_IMMEDIATE_GUI_NS::MenuItem("Project settings")) {
-                    OpenWidget<AssetInspector>()->Inspect(".srproject");
-                }
-                if (SR_IMMEDIATE_GUI_NS::MenuItem("Build game")) {
-                    OpenWidget<GameBuildExporter>();
-                }
-            }
-
-            SR_IMMEDIATE_GUI_NS::Separator();
-
-            if (SR_IMMEDIATE_GUI_NS::MenuItem("New scene")) {
-                m_engine->AddSceneToQueue(SR_WORLD_NS::Scene::NewScene(SR_WORLD_NS::SceneLogicType::Asset));
-                CacheScenePath(m_engine->GetScene()->GetPath());
-            }
-
-            SR_IMMEDIATE_GUI_NS::Separator();
-
-            if (SR_IMMEDIATE_GUI_NS::MenuItem("New prefab")) {
-                if (auto&& pScene = m_engine->GetScene()) {
-                    //TODO: проверку на то, что нынешний префаб не сохранён, чтобы не спамить ими
-                    pScene->SaveScene();
-                    CacheScenePath(m_engine->GetScene()->GetPath());
-                }
-
-                m_engine->AddSceneToQueue(SR_WORLD_NS::Scene::NewScene(GetNewPrefabPath(), SR_WORLD_NS::SceneLogicType::Prefab));
-            }
-
-            SR_IMMEDIATE_GUI_NS::Separator();
-
-            if (SR_IMMEDIATE_GUI_NS::MenuItem("Load")) {
-                auto&& scenesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-
-                if (auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(scenesPath.ToString(), { { "Scene", "scene,prefab" } }); !path.IsEmpty()) {
-                    SR_UTILS_NS::VFS::Instance().UnResolvePath(path);
-                    if (auto&& pScene = SR_WORLD_NS::Scene::LoadScene(path)) {
-                        m_engine->AddSceneToQueue(pScene);
-                        CacheScenePath(path);
-                    }
-                }
-            }
-
-            SR_IMMEDIATE_GUI_NS::Separator();
-
-            if (SR_IMMEDIATE_GUI_NS::MenuItem("Save")) {
-                if (auto&& pScene = m_engine->GetScene()) {
-                    pScene->SaveScene();
-                }
-            }
-
-            SR_IMMEDIATE_GUI_NS::Separator();
-
-            if (SR_IMMEDIATE_GUI_NS::MenuItem("Save at")) {
-                if (auto&& pScene = m_engine->GetScene()) {
-                    const auto scenesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                    if (auto&& path = SR_UTILS_NS::FileDialog::Instance().SaveDialog(scenesPath.ToString(), { { "Scene", "scene,prefab" } }); !path.IsEmpty()) {
-                        SR_UTILS_NS::VFS::Instance().UnResolvePath(path);
-                        if (pScene->SaveSceneAt(path)) {
-                            SR_SYSTEM_LOG("GUISystem::BeginMenuBar() : scene is saved as \"{}\"", path);
-
-                            if (auto&& pSavedScene = SR_WORLD_NS::Scene::LoadScene(path)) {
-                                m_engine->AddSceneToQueue(pSavedScene);
-                                CacheScenePath(path);
-                            }
-                        }
-                        else {
-                            SR_ERROR("GUISystem::BeginMenuBar() : failed to save scene! \n\tPath: \"" + path.ToString() + "\"");
-                        }
-                    }
-                }
-                else {
-                    SR_WARN("GUISystem::BeginMenuBar() : scene is not valid!");
-                }
-            }
-
-            SR_IMMEDIATE_GUI_NS::Separator();
-
-            if (SR_IMMEDIATE_GUI_NS::MenuItem("Close scene")) {
-                if (auto&& pScene = m_engine->GetScene()) {
-                    pScene->SaveScene();
-                }
-                m_engine->AddSceneToQueue(SR_WORLD_NS::Scene::CreateEmptyScene());
-                CacheScenePath("NONE");
-            }
-
-            SR_IMMEDIATE_GUI_NS::Separator();
-
-            if (SR_IMMEDIATE_GUI_NS::MenuItem("Build")) {
-                OpenWidget<GameBuildExporter>();
-            }
-
-            SR_IMMEDIATE_GUI_NS::Separator();
-
-            if (SR_IMMEDIATE_GUI_NS::MenuItem("Clear shaders cache")) {
-                SR_SRSL_NS::SRSLShader::ClearShadersCache();
-            }
-
-            SR_IMMEDIATE_GUI_NS::Separator();
-
-            if (SR_IMMEDIATE_GUI_NS::MenuItem("Reload scripts")) {
-                SR_SCRIPTING_NS::ScriptSystem::Instance().SetReloadRequest();
-            }
-
-            SR_IMMEDIATE_GUI_NS::Separator();
-
-            if (SR_IMMEDIATE_GUI_NS::MenuItem("Install/Update samples")) {
-                InstallOrUpdateSamples();
-            }
-
-            SR_IMMEDIATE_GUI_NS::Separator();
-
-            if (SR_IMMEDIATE_GUI_NS::MenuItem("Reload")) {
-                m_engine->Reload();
-            }
-
-            SR_IMMEDIATE_GUI_NS::Separator();
-
-            if (SR_IMMEDIATE_GUI_NS::MenuItem("Exit")) {
-                m_engine->StopEngine();
-            }
-
-            SR_IMMEDIATE_GUI_NS::EndMenu();
-        }
+        DrawFileMenu();
 
         if (SR_IMMEDIATE_GUI_NS::BeginMenu("Editor")) {
             DrawEditorInstanceMenu();
             SR_IMMEDIATE_GUI_NS::EndMenu();
         }
 
+        DrawToolsMenu();
         DrawWindowPage();
-
-        if (SR_IMMEDIATE_GUI_NS::MenuItem("About")) {
-            OpenWidget<About>();
-        }
+        DrawHelpMenu();
 
         SR_IMMEDIATE_GUI_NS::PopStyleVar();
 
@@ -1202,36 +1090,262 @@ namespace SR_CORE_GUI_NS {
         //}
     }
 
-    void EditorGUI::DrawWindowPage() {
+    void EditorGUI::DrawFileMenu() {
         SR_TRACY_ZONE;
 
-        if (SR_IMMEDIATE_GUI_NS::BeginMenu("Window")) {
-            for (auto&& [name, displayName] : m_windowPageWidgets) {
-                if (name == SR_GRAPH_GUI_NS::WidgetContainer::GetClassStaticName()) {
-                    continue;
-                }
-                if (SR_IMMEDIATE_GUI_NS::MenuItem(displayName.c_str())) {
-                    GetWidget(name)->Open();
-                }
-                SR_IMMEDIATE_GUI_NS::Separator();
+        if (!SR_IMMEDIATE_GUI_NS::BeginMenu("File")) {
+            return;
+        }
+
+        const bool hasScene = m_engine->GetScene().Valid();
+
+        if (SR_IMMEDIATE_GUI_NS::MenuItem("New Scene")) {
+            m_engine->AddSceneToQueue(SR_WORLD_NS::Scene::NewScene(SR_WORLD_NS::SceneLogicType::Asset));
+            CacheScenePath(m_engine->GetScene()->GetPath());
+        }
+
+        if (SR_IMMEDIATE_GUI_NS::MenuItem("New Prefab")) {
+            if (auto&& pScene = m_engine->GetScene()) {
+                //TODO: проверку на то, что нынешний префаб не сохранён, чтобы не спамить ими
+                pScene->SaveScene();
+                CacheScenePath(m_engine->GetScene()->GetPath());
             }
 
-            if (SR_IMMEDIATE_GUI_NS::MenuItem("Reset to default")) {
-                ResetToDefault();
+            m_engine->AddSceneToQueue(SR_WORLD_NS::Scene::NewScene(GetNewPrefabPath(), SR_WORLD_NS::SceneLogicType::Prefab));
+        }
+
+        if (SR_IMMEDIATE_GUI_NS::MenuItem("Open Scene...")) {
+            auto&& scenesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+
+            if (auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(scenesPath.ToString(), { { "Scene", "scene,prefab" } }); !path.IsEmpty()) {
+                SR_UTILS_NS::VFS::Instance().UnResolvePath(path);
+                if (auto&& pScene = SR_WORLD_NS::Scene::LoadScene(path)) {
+                    m_engine->AddSceneToQueue(pScene);
+                    CacheScenePath(path);
+                }
+            }
+        }
+
+        SR_IMMEDIATE_GUI_NS::Separator();
+
+        if (SR_IMMEDIATE_GUI_NS::MenuItem("Save", nullptr, false, hasScene)) {
+            if (auto&& pScene = m_engine->GetScene()) {
+                pScene->SaveScene();
+            }
+        }
+
+        if (SR_IMMEDIATE_GUI_NS::MenuItem("Save As...", nullptr, false, hasScene)) {
+            if (auto&& pScene = m_engine->GetScene()) {
+                const auto scenesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+                if (auto&& path = SR_UTILS_NS::FileDialog::Instance().SaveDialog(scenesPath.ToString(), { { "Scene", "scene,prefab" } }); !path.IsEmpty()) {
+                    SR_UTILS_NS::VFS::Instance().UnResolvePath(path);
+                    if (pScene->SaveSceneAt(path)) {
+                        SR_SYSTEM_LOG("EditorGUI::DrawFileMenu() : scene is saved as \"{}\"", path);
+
+                        if (auto&& pSavedScene = SR_WORLD_NS::Scene::LoadScene(path)) {
+                            m_engine->AddSceneToQueue(pSavedScene);
+                            CacheScenePath(path);
+                        }
+                    }
+                    else {
+                        SR_ERROR("EditorGUI::DrawFileMenu() : failed to save scene! \n\tPath: \"" + path.ToString() + "\"");
+                    }
+                }
+            }
+            else {
+                SR_WARN("EditorGUI::DrawFileMenu() : scene is not valid!");
+            }
+        }
+
+        if (SR_IMMEDIATE_GUI_NS::MenuItem("Close Scene", nullptr, false, hasScene)) {
+            if (auto&& pScene = m_engine->GetScene()) {
+                pScene->SaveScene();
+            }
+            m_engine->AddSceneToQueue(SR_WORLD_NS::Scene::CreateEmptyScene());
+            CacheScenePath("NONE");
+        }
+
+        SR_IMMEDIATE_GUI_NS::Separator();
+
+        if (SR_IMMEDIATE_GUI_NS::BeginMenu("Project")) {
+            const bool hasProjectSettings = SR_UTILS_NS::VFS::Instance().IsFileExists(".srproject");
+            const bool isProjectOpened = SR_UTILS_NS::CLIManager::Instance().GetProjectPath().has_value();
+
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("New Project...")) {
+                OpenWidget<CreateNewProject>();
+            }
+
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Project Settings", nullptr, false, hasProjectSettings)) {
+                OpenWidget<AssetInspector>()->Inspect(".srproject");
             }
 
             SR_IMMEDIATE_GUI_NS::Separator();
 
-            if (SR_IMMEDIATE_GUI_NS::MenuItem("ImGui Demo Window")) {
-                m_imGuiDemo = true;
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Close Project", nullptr, false, isProjectOpened)) {
+                SR_UTILS_NS::CLIManager::Instance().SetProjectPath(std::nullopt);
+                GetEngine()->Reload();
             }
 
-            if (SR_IMMEDIATE_GUI_NS::MenuItem("Close all")) {
+            SR_IMMEDIATE_GUI_NS::EndMenu();
+        }
+
+        if (SR_IMMEDIATE_GUI_NS::MenuItem("Build Game...")) {
+            OpenWidget<GameBuildExporter>();
+        }
+
+        SR_IMMEDIATE_GUI_NS::Separator();
+
+        if (SR_IMMEDIATE_GUI_NS::MenuItem("Exit")) {
+            m_engine->StopEngine();
+        }
+
+        SR_IMMEDIATE_GUI_NS::EndMenu();
+    }
+
+    void EditorGUI::DrawToolsMenu() {
+        SR_TRACY_ZONE;
+
+        if (!SR_IMMEDIATE_GUI_NS::BeginMenu("Tools")) {
+            return;
+        }
+
+        if (SR_IMMEDIATE_GUI_NS::MenuItem("Assets Store")) {
+            OpenWidget<AssetsStore>();
+        }
+
+        if (SR_IMMEDIATE_GUI_NS::MenuItem("Engine Settings")) {
+            OpenWidget<EngineSettings>();
+        }
+
+        SR_IMMEDIATE_GUI_NS::Separator();
+
+        if (SR_IMMEDIATE_GUI_NS::MenuItem("Reload Scripts")) {
+            SR_SCRIPTING_NS::ScriptSystem::Instance().SetReloadRequest();
+        }
+
+        if (SR_IMMEDIATE_GUI_NS::MenuItem("Clear Shaders Cache")) {
+            SR_SRSL_NS::SRSLShader::ClearShadersCache();
+        }
+
+        SR_IMMEDIATE_GUI_NS::Separator();
+
+        if (SR_IMMEDIATE_GUI_NS::MenuItem("Reload Engine")) {
+            m_engine->Reload();
+        }
+
+        SR_IMMEDIATE_GUI_NS::EndMenu();
+    }
+
+    void EditorGUI::DrawWidgetMenuItems(std::span<const SR_UTILS_NS::StringAtom> names) {
+        for (auto&& name : names) {
+            auto&& pWidget = GetWidget(name);
+            if (!pWidget) {
+                continue;
+            }
+
+            /// пункт работает как переключатель: галочка показывает, открыто ли окно
+            const bool isOpen = pWidget->IsOpen();
+            if (SR_IMMEDIATE_GUI_NS::MenuItem(pWidget->GetName().c_str(), nullptr, isOpen)) {
+                if (isOpen) {
+                    pWidget->Close();
+                }
+                else {
+                    pWidget->Open();
+                }
+            }
+        }
+    }
+
+    void EditorGUI::DrawWindowPage() {
+        SR_TRACY_ZONE;
+
+        if (!SR_IMMEDIATE_GUI_NS::BeginMenu("Window")) {
+            return;
+        }
+
+        DrawWidgetMenuItems(g_mainWindowWidgets);
+
+        SR_IMMEDIATE_GUI_NS::Separator();
+
+        if (SR_IMMEDIATE_GUI_NS::BeginMenu("Editors")) {
+            DrawWidgetMenuItems(g_editorWindowWidgets);
+            SR_IMMEDIATE_GUI_NS::EndMenu();
+        }
+
+        if (SR_IMMEDIATE_GUI_NS::BeginMenu("Inspectors")) {
+            DrawWidgetMenuItems(g_inspectorWindowWidgets);
+            SR_IMMEDIATE_GUI_NS::EndMenu();
+        }
+
+        if (SR_IMMEDIATE_GUI_NS::BeginMenu("Debug")) {
+            DrawWidgetMenuItems(g_debugWindowWidgets);
+
+            SR_IMMEDIATE_GUI_NS::Separator();
+
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("ImGui Metrics", nullptr, m_showMetricsWindow)) {
+                m_showMetricsWindow = !m_showMetricsWindow;
+            }
+
+            SR_IMMEDIATE_GUI_NS::EndMenu();
+        }
+
+        /// виджеты, которые еще не распределены по группам
+        if (!m_windowPageWidgets.empty() && SR_IMMEDIATE_GUI_NS::BeginMenu("Other")) {
+            for (auto&& widget : m_windowPageWidgets) {
+                DrawWidgetMenuItems(std::span<const SR_UTILS_NS::StringAtom>(&widget.first, 1));
+            }
+            SR_IMMEDIATE_GUI_NS::EndMenu();
+        }
+
+        SR_IMMEDIATE_GUI_NS::Separator();
+
+        if (SR_IMMEDIATE_GUI_NS::BeginMenu("Layout")) {
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Reset to Default")) {
+                ResetToDefault();
+            }
+
+            if (SR_IMMEDIATE_GUI_NS::MenuItem("Close All Windows")) {
                 CloseAllWidgets();
             }
 
             SR_IMMEDIATE_GUI_NS::EndMenu();
         }
+
+        SR_IMMEDIATE_GUI_NS::EndMenu();
+    }
+
+    void EditorGUI::DrawHelpMenu() {
+        SR_TRACY_ZONE;
+
+        if (!SR_IMMEDIATE_GUI_NS::BeginMenu("Help")) {
+            return;
+        }
+
+        if (SR_IMMEDIATE_GUI_NS::MenuItem("Welcome")) {
+            OpenWidget<Welcome>();
+        }
+
+        SR_IMMEDIATE_GUI_NS::Separator();
+
+        if (SR_IMMEDIATE_GUI_NS::MenuItem("Documentation")) {
+            SR_PLATFORM_NS::OpenAssociated("https://docs.sparcles.dev/");
+        }
+
+        if (SR_IMMEDIATE_GUI_NS::MenuItem("GitHub")) {
+            SR_PLATFORM_NS::OpenAssociated("https://github.com/SpaRcle-Studio/SREngine");
+        }
+
+        if (SR_IMMEDIATE_GUI_NS::MenuItem("Discord")) {
+            SR_PLATFORM_NS::OpenAssociated("https://discord.gg/NHuhNwFtYQ");
+        }
+
+        SR_IMMEDIATE_GUI_NS::Separator();
+
+        if (SR_IMMEDIATE_GUI_NS::MenuItem("About SpaRcle Engine")) {
+            OpenWidget<About>();
+        }
+
+        SR_IMMEDIATE_GUI_NS::EndMenu();
     }
 
     void EditorGUI::InstantiateSO(const SR_UTILS_NS::SceneObject::Ptr& pSO) {
@@ -1272,15 +1386,5 @@ namespace SR_CORE_GUI_NS {
 
         auto&& pCmd = new SR_CORE_NS::Commands::SceneObjectInstance(GetEngine(), pSO);
         GetEngine()->GetCmdManager()->Store(pCmd);
-    }
-
-    void EditorGUI::InstallOrUpdateSamples() {
-        SR_UTILS_NS::Path samplesFolder = CoreResLoader::GetResPath();
-        SR_UTILS_NS::VFS::Instance().ResolvePath(samplesFolder, SR_UTILS_NS::FileMode::Write);
-        samplesFolder = samplesFolder.Concat(SR_SAMPLES_PATH);
-
-        SR_NETWORK_NS::GitHubCloneContext context;
-        context.url = "https://github.com/SpaRcle-Studio/SREngineSampleResources";
-        SR_NETWORK_NS::GitHubDownloader::CloneOrPullRepo(context, samplesFolder);
     }
 }

@@ -84,7 +84,6 @@ namespace SR_CORE_GUI_NS {
         void ResetToDefault();
 
     private:
-        void InstallOrUpdateSamples();
         void InstantiateSO(const SR_UTILS_NS::SceneObject::Ptr& pSO);
 
         void OnMouseMove(const SR_UTILS_NS::MouseInputData* data) override;
@@ -98,10 +97,16 @@ namespace SR_CORE_GUI_NS {
 
         void DrawDockingSpace();
         void DrawMenuBar();
+        void DrawFileMenu();
+        void DrawToolsMenu();
         void DrawWindowPage();
+        void DrawHelpMenu();
+        void DrawWidgetMenuItems(std::span<const SR_UTILS_NS::StringAtom> names);
+        void ShowWelcomeOnFirstLaunch();
 
     private:
-        SR_UTILS_NS::Vector<std::pair<SR_UTILS_NS::StringAtom, SR_UTILS_NS::StringAtom>> m_windowPageWidgets;
+        /// Виджеты, не попавшие ни в одну из групп меню Window: (имя фабрики, отображаемое имя)
+        SR_UTILS_NS::Vector<SR_UTILS_NS::Pair<SR_UTILS_NS::StringAtom, SR_UTILS_NS::StringAtom>> m_windowPageWidgets;
         EditorSettings::Ptr m_pSettings;
 
         SR_UTILS_NS::Path m_cachedScenePath;
@@ -113,8 +118,7 @@ namespace SR_CORE_GUI_NS {
 
         Click m_click = Click::None;
 
-        bool m_installSamplesAsked = false;
-        float_t m_samplesShowDelay = 2.5f;
+        bool m_welcomeChecked = false;
 
         std::atomic<bool> m_isInit     = false;
         std::atomic<bool> m_hasErrors  = false;
@@ -127,8 +131,6 @@ namespace SR_CORE_GUI_NS {
         bool m_showMetricsWindow = false;
 
         SR_UTILS_NS::Reflection::Value m_propertyClipboard;
-
-        bool m_imGuiDemo = false;
 
     };
 }

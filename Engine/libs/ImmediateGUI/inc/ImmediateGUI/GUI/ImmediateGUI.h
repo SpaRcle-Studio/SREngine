@@ -567,6 +567,8 @@ namespace SR_GRAPH_GUI_NS {
         SR_IMMEDIATE_GUI_DLL_API extern void DrawListAddRect(void* pDrawList, const SR_MATH_NS::FVector2& min, const SR_MATH_NS::FVector2& max, uint32_t color, float rounding = 0.0f, DrawFlags flags = DrawFlags(), float thickness = 1.0f);
         SR_IMMEDIATE_GUI_DLL_API extern void DrawListAddRectFilled(void* pDrawList, const SR_MATH_NS::FVector2& min, const SR_MATH_NS::FVector2& max, uint32_t color, float rounding = 0.0f, DrawFlags flags = DrawFlags::None);
         SR_IMMEDIATE_GUI_DLL_API extern void DrawListAddLine(void* pDrawList, const SR_MATH_NS::FVector2& p1, const SR_MATH_NS::FVector2& p2, uint32_t color, float thickness = 1.0f);
+        SR_IMMEDIATE_GUI_DLL_API extern void DrawListAddRectFilledMultiColor(void* pDrawList, const SR_MATH_NS::FVector2& min, const SR_MATH_NS::FVector2& max, uint32_t colorTopLeft, uint32_t colorTopRight, uint32_t colorBottomRight, uint32_t colorBottomLeft);
+        SR_IMMEDIATE_GUI_DLL_API extern void DrawListAddCircleFilled(void* pDrawList, const SR_MATH_NS::FVector2& center, float_t radius, uint32_t color, int32_t segments = 0);
         SR_IMMEDIATE_GUI_DLL_API extern bool InputFloat(const char* label, float_t* v, float_t step = 0.0f, float_t stepFast = 0.0f, const char* format = "%.3f", InputTextFlags flags = InputTextFlags::None);
         SR_IMMEDIATE_GUI_DLL_API extern bool InputInt(const char* label, int* v, int step = 1, int step_fast = 100, InputTextFlags flags = InputTextFlags::None);
         SR_IMMEDIATE_GUI_DLL_API extern bool Combo(const char* label, int* current_item, const char* items_separated_by_zeros);
@@ -592,6 +594,8 @@ namespace SR_GRAPH_GUI_NS {
         SR_IMMEDIATE_GUI_DLL_API extern bool BeginTabBar(const char* str_id);
         SR_IMMEDIATE_GUI_DLL_API extern void EndTabBar();
         SR_IMMEDIATE_GUI_DLL_API extern void PushFont(void* pFont);
+        /// pFont == nullptr - оставить текущий шрифт и сменить только размер
+        SR_IMMEDIATE_GUI_DLL_API extern void PushFont(void* pFont, float_t size);
         SR_IMMEDIATE_GUI_DLL_API extern void PopFont();
         SR_IMMEDIATE_GUI_DLL_API extern void SetWindowFocus(const char* str_id);
         SR_IMMEDIATE_GUI_DLL_API extern bool BeginChild(const char* name, const SR_MATH_NS::FVector2& size = SR_MATH_NS::FVector2(), ChildWindowFlags childFlags = ChildWindowFlags::None, WindowFlags flags = WindowFlags::None);
@@ -626,6 +630,7 @@ namespace SR_GRAPH_GUI_NS {
         SR_IMMEDIATE_GUI_DLL_API extern bool InputTextMultiline(const char* label, std::string* str, const SR_MATH_NS::FVector2& size, InputTextFlags flags = InputTextFlags::None);
         SR_IMMEDIATE_GUI_DLL_API extern bool BeginMenu(const char* label);
         SR_IMMEDIATE_GUI_DLL_API extern bool MenuItem(const char* label);
+        SR_IMMEDIATE_GUI_DLL_API extern bool MenuItem(const char* label, const char* shortcut, bool selected, bool enabled = true);
         SR_IMMEDIATE_GUI_DLL_API extern void EndMenu();
         SR_IMMEDIATE_GUI_DLL_API extern void BeginDocking();
         SR_IMMEDIATE_GUI_DLL_API extern void EndDocking();
