@@ -11,9 +11,6 @@
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Pipeline/Pipeline.h>
 
-#include <Utils/Common/StoreUtils.h>
-#include <Utils/Common/StringUtils.h>
-#include <Utils/FileSystem/FileDialog.h>
 #include <Utils/FileSystem/VFS.h>
 #include <Utils/FileSystem/DirectoryVFSBackend.h>
 #include <Utils/TaskManager/TaskManager.h>
@@ -23,8 +20,6 @@
 #include <Codegen/AssetsStore.generated.hpp>
 
 namespace SR_CORE_GUI_NS {
-    const static SR_UTILS_NS::StringAtom PackagesPathKey = "PackagesPath";
-
     std::recursive_mutex AssetsStore::g_packagesMountMutex = {};
     SR_UTILS_NS::Vector<AssetsStore::MountInfo> AssetsStore::g_mounts = {};
 
@@ -33,6 +28,7 @@ namespace SR_CORE_GUI_NS {
     {
         SetDefaultSize(SR_MATH_NS::IVector2(800, 600));
         m_noIconTexture = "Editor/Textures/missing.png";
+        m_packagesPath = GetPackagesPath();
     }
 
     AssetsStore::~AssetsStore() {
@@ -55,44 +51,7 @@ namespace SR_CORE_GUI_NS {
 
     void AssetsStore::Draw() {
         if (SR_IMMEDIATE_GUI_NS::BeginChild("AssetList", SR_MATH_NS::FVector2(0, 0), SR_IMMEDIATE_GUI_NS::ChildWindowFlags::Borders)) {
-            bool pathIsPresent = SR_UTILS_NS::StoreUtils::User::HasString(PackagesPathKey);
-            m_packagesPathTmp = pathIsPresent ? SR_UTILS_NS::StoreUtils::User::GetString(PackagesPathKey) : SR_UTILS_NS::String();
-
             const float_t availX = SR_IMMEDIATE_GUI_NS::GetContentRegionAvail().x;
-            const float_t buttonSize = SR_MIN(50.f, availX * 0.2f);
-            const float_t inputSize = availX - buttonSize;
-
-            if (SR_IMMEDIATE_GUI_NS::Button("...", SR_MATH_NS::FVector2(buttonSize, 0.f))) {
-                m_packagesPathTmp = SR_UTILS_NS::FileDialog::Instance().PickFolder(CoreResLoader::GetResPath()).ToStringRef();
-                pathIsPresent = true;
-            }
-            SR_IMMEDIATE_GUI_NS::SameLine();
-            SR_IMMEDIATE_GUI_NS::PushItemWidth(inputSize);
-            if (SR_IMMEDIATE_GUI_NS::InputText("##InputPath", &m_packagesPathTmp, SR_IMMEDIATE_GUI_NS::InputTextFlags::EnterReturnsTrue)) {
-                m_packagesPathTmp = SR_UTILS_NS::StringUtils::RemoveCharsFromString(m_packagesPathTmp, "\"");
-                pathIsPresent = true;
-            }
-            SR_IMMEDIATE_GUI_NS::PopItemWidth();
-            pathIsPresent &= !m_packagesPathTmp.empty();
-            if (!pathIsPresent) {
-                SR_IMMEDIATE_GUI_NS::WarningBox("You need to select valid folder for packages!");
-                SR_IMMEDIATE_GUI_NS::BeginDisabled(true);
-            }
-
-            if (pathIsPresent && m_packagesPathTmp != m_packagesPath.ToStringRef()) {
-                m_packagesPath = m_packagesPathTmp;
-                m_pVFSBackend = new SR_UTILS_NS::DirectoryVFSBackend(m_packagesPath);
-                m_pVFSBackend.SetDeleter([](SR_UTILS_NS::IVFSBackend* pVFS) {
-                    SR_UTILS_NS::VFS::Instance().Unmount(pVFS);
-                    delete pVFS;
-                });
-                SR_UTILS_NS::VFS::Instance().Mount(m_packagesPath, m_pVFSBackend.Get(), -10000);
-
-                SR_UTILS_NS::StoreUtils::User::SetString(PackagesPathKey, m_packagesPath);
-                SR_UTILS_NS::StoreUtils::Storage::Instance().Save();
-            }
-
-            SR_IMMEDIATE_GUI_NS::Dummy(SR_MATH_NS::FVector2(0, 6.0f));
 
             auto&& pSettings = dynamic_cast<EditorGUI*>(GetManager())->GetSettings();
             uint64_t index = 0;
@@ -103,10 +62,6 @@ namespace SR_CORE_GUI_NS {
                 }
                 SR_IMMEDIATE_GUI_NS::Dummy(SR_MATH_NS::FVector2(0, 6.0f));
                 SR_IMMEDIATE_GUI_NS::PopID();
-            }
-
-            if (!pathIsPresent) {
-                SR_IMMEDIATE_GUI_NS::EndDisabled();
             }
         }
         SR_IMMEDIATE_GUI_NS::EndChild();
@@ -365,27 +320,32 @@ namespace SR_CORE_GUI_NS {
         // mutex here would invert OpenFile's mount table -> file handles lock order.
         UnMountPackages(pEditor);
 
-        if (SR_UTILS_NS::StoreUtils::User::HasString(PackagesPathKey)) {
-            if (SR_UTILS_NS::Path path = SR_UTILS_NS::StoreUtils::User::GetString(PackagesPathKey); !path.empty()) {
-                if (auto&& pSettings = pEditor->GetSettings()) {
-                    for (auto&& package : pSettings->GetPackages()) {
-                        if (pProjectSettings && !pProjectSettings->packages.contains(package.name)) {
-                            continue;
-                        }
-                        auto&& mountPath = path.Concat(package.name).Concat("Resources");
-                        if (SR_PLATFORM_NS::GetPathType(mountPath) != SR_UTILS_NS::Path::Type::Folder) {
-                            continue;
-                        }
-                        SR_LOG("AssetsStore::ReMountPackages() : mounting package \"{}\"...", package.name);
-                        MountInfo& info = g_mounts.emplace_back();
-                        info.pMount = new SR_UTILS_NS::DirectoryVFSBackend(mountPath);
-                        info.pMount->AddIgnoredPath(CoreResLoader::GetCachePath());
-                        info.name = package.name;
-                        SR_UTILS_NS::VFS::Instance().Mount(CoreResLoader::GetResPath(), info.pMount, -100);
-                    }
-                }
-            }
+        auto&& pSettings = pEditor->GetSettings();
+        if (!pSettings) {
+            return;
         }
+
+        const SR_UTILS_NS::Path packagesPath = GetPackagesPath();
+
+        for (auto&& package : pSettings->GetPackages()) {
+            if (pProjectSettings && !pProjectSettings->packages.contains(package.name)) {
+                continue;
+            }
+            auto&& mountPath = packagesPath.Concat(package.name).Concat("Resources");
+            if (SR_PLATFORM_NS::GetPathType(mountPath) != SR_UTILS_NS::Path::Type::Folder) {
+                continue;
+            }
+            SR_LOG("AssetsStore::ReMountPackages() : mounting package \"{}\"...", package.name);
+            MountInfo& info = g_mounts.emplace_back();
+            info.pMount = new SR_UTILS_NS::DirectoryVFSBackend(mountPath);
+            info.pMount->AddIgnoredPath(CoreResLoader::GetCachePath());
+            info.name = package.name;
+            SR_UTILS_NS::VFS::Instance().Mount(CoreResLoader::GetResPath(), info.pMount, -100);
+        }
+    }
+
+    SR_UTILS_NS::Path AssetsStore::GetPackagesPath() {
+        return SR_PLATFORM_NS::GetApplicationUserDataDirectory().Concat("Packages");
     }
 
     void AssetsStore::UnMountPackages(EditorGUI* pEditor) {

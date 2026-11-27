@@ -25,6 +25,7 @@ namespace SR_CORE_GUI_NS {
     public:
         static void ReMountPackages(EditorGUI* pEditor);
         static void UnMountPackages(EditorGUI* pEditor);
+        SR_NODISCARD static SR_UTILS_NS::Path GetPackagesPath();
 
     protected:
         void Draw() override;
@@ -50,9 +51,7 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::Vector<InstallInfo> m_installQueue;
         uint32_t m_selectedAsset = SR_UINT32_MAX;
         SR_UTILS_NS::ResourceRef<SR_GTYPES_NS::Texture> m_noIconTexture;
-        SR_UTILS_NS::String m_packagesPathTmp;
         SR_UTILS_NS::Path m_packagesPath;
-        SR_UTILS_NS::RawPointerHolder<SR_UTILS_NS::IVFSBackend> m_pVFSBackend;
 
         static std::recursive_mutex g_packagesMountMutex;
         struct MountInfo {
