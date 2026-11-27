@@ -112,7 +112,7 @@ SR_COPY_STATIC_LIBRARY_TO_LIBRARY_FOLDER(Audio)
 
 if (SR_AUDIO_DLL_EXPORTS)
     message(STATUS "[SpaRcle Engine] Audio will be using DLL exports")
-    target_compile_definitions(Audio PUBLIC SR_AUDIO_DLL_EXPORTS)
+    target_compile_definitions(Audio PRIVATE SR_AUDIO_DLL_EXPORTS)
 endif()
 
 if (NOT SR_EMSCRIPTEN)

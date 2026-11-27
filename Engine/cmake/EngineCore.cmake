@@ -144,7 +144,7 @@ SR_COPY_STATIC_LIBRARY_TO_LIBRARY_FOLDER(Engine)
 
 if (SR_ENGINE_DLL_EXPORTS)
     message(STATUS "[SpaRcle Engine] Engine will be using DLL exports")
-    target_compile_definitions(Engine PUBLIC SR_ENGINE_DLL_EXPORTS)
+    target_compile_definitions(Engine PRIVATE SR_ENGINE_DLL_EXPORTS)
 endif()
 
 list(APPEND SR_CORE_LINK_LIBRARIES Utils)

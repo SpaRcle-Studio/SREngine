@@ -128,10 +128,8 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
 
     f.write('\t' * (tabs + 1) + f'isPropertiesInited = true;\n\n')
 
-    f.write('\t' * (tabs + 1) + f'properties = {{ \n')
-
-    for prop in class_obj.variables:
-        f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Reflection::Property()')
+    for index, prop in enumerate(class_obj.variables):
+        f.write('\t' * (tabs + 1) + f'properties[{index}]')
         f.write('\n' + '\t' * (tabs + 3) + f'.SetName("{prop.name}")')
 
         if prop.serialize_name != prop.name:
@@ -242,9 +240,8 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
 
         f.write('\n' + '\t' * (tabs + 3) + f')')
 
-        f.write(',\n')
+        f.write(';\n\n')
 
-    f.write('\t' * (tabs + 1) + '};\n')
     f.write('\t' * (tabs + 1) + 'return properties;\n')
     f.write('\t' * tabs + '}\n\n')
 

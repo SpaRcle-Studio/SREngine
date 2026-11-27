@@ -60,7 +60,7 @@ SR_COPY_STATIC_LIBRARY_TO_LIBRARY_FOLDER(Scripting)
 
 if (SR_SCRIPTING_DLL_EXPORTS)
     message(STATUS "[SpaRcle Engine] Scripting will be using DLL exports")
-    target_compile_definitions(Scripting PUBLIC SR_SCRIPTING_DLL_EXPORTS)
+    target_compile_definitions(Scripting PRIVATE SR_SCRIPTING_DLL_EXPORTS)
 endif()
 
 if (SR_ENGINE_MONO_SUPPORT)

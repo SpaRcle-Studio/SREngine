@@ -51,7 +51,7 @@ target_compile_definitions(ImmediateGUI PRIVATE SR_IMGUI_INCLUDE_CHECK)
 
 if (SR_IMMEDIATE_GUI_DLL_EXPORTS)
     message(STATUS "[SpaRcle Engine] ImmediateGUI will be built as a shared library")
-    target_compile_definitions(ImmediateGUI PUBLIC SR_IMMEDIATE_GUI_DLL_EXPORTS)
+    target_compile_definitions(ImmediateGUI PRIVATE SR_IMMEDIATE_GUI_DLL_EXPORTS)
 endif()
 
 get_property(SR_UTILS_INCLUDE_DIRECTORIES_CONTENT GLOBAL PROPERTY SR_UTILS_INCLUDE_DIRECTORIES)
