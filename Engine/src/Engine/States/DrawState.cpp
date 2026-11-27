@@ -51,7 +51,8 @@ namespace SR_CORE_NS {
                 const bool isMaximized = pWin->IsMaximized();
                 const bool isHeaderEnabled = pWin->IsHeaderEnabled();
 
-                if (isHeaderEnabled != !isOverlay) {
+                /// В полноэкранном режиме заголовок снят намеренно; оконный стиль восстановится при выходе из него.
+                if (isHeaderEnabled != !isOverlay && !pWin->IsFullScreen()) {
                     pWin->SetHeaderEnabled(!isOverlay);
                     if (isMaximized) {
                         pWin->Maximize();
