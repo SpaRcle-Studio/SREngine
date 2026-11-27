@@ -14,8 +14,8 @@
 namespace SR_CORE_NS::GUI {
     struct FBElement {
         SR_GTYPES_NS::Texture::Ptr pTexture;
-        std::string filename;
-        std::string cutName;
+        SR_UTILS_NS::String filename;
+        SR_UTILS_NS::String cutName;
         EditorIcon iconType;
         bool isDir = false;
         bool isReadonly = false;
@@ -23,7 +23,7 @@ namespace SR_CORE_NS::GUI {
 
     struct FBFolder {
         SR_UTILS_NS::Path path;
-        std::string filename;
+        SR_UTILS_NS::String filename;
         std::list<FBFolder> innerFolders;
         bool childrenLoaded = false;   ///< true = direct children already loaded (lazy tree)
         bool hasSubfolders = true;      ///< false = no subfolders (show as leaf, no expand arrow)
@@ -49,7 +49,7 @@ namespace SR_CORE_NS::GUI {
     private:
         void OnOpen() override;
         void OnClose() override;
-        void FileContextMenu(const std::string &element);
+        void FileContextMenu(const SR_UTILS_NS::String& element);
         void CurrentDirectoryContextMenu();
         void CurrentDirectoryPanel();
         void ItemViewPanel();
@@ -82,10 +82,10 @@ namespace SR_CORE_NS::GUI {
         std::list<FBElement> m_elements;
 
         SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> m_availableAssets;
-        std::vector<char> m_comboBoxBuffer;
+        SR_UTILS_NS::Vector<char> m_comboBoxBuffer;
         int32_t m_newAssetIndex = -1;
         SR_UTILS_NS::Path m_newAssetPath;
-        std::string m_newAssetName;
+        SR_UTILS_NS::String m_newAssetName;
 
     };
 }

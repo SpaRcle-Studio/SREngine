@@ -43,6 +43,7 @@
 #include <Utils/FileSystem/GitHubVFSBackend.h>
 #include <Utils/FileSystem/Archive.h>
 #include <Utils/FileSystem/ArchiveVFSBackend.h>
+#include <Utils/ECS/TagManager.h>
 
 #include <Codegen/Application.generated.hpp>
 

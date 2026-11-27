@@ -87,7 +87,7 @@ namespace SR_CORE_GUI_NS {
         SR_IMMEDIATE_GUI_NS::PushItemWidth(context.fieldWidth);
 
         if (auto&& pPath = value.Cast<SR_UTILS_NS::Path>()) {
-            static std::string gPathTmp;
+            static SR_UTILS_NS::String gPathTmp;
             gPathTmp = newPath.has_value() ? newPath->ToStringRef() : pPath->ToStringRef();
             if (SR_IMMEDIATE_GUI_NS::InputText("##Input", &gPathTmp, SR_IMMEDIATE_GUI_NS::InputTextFlags::EnterReturnsTrue)) {
                 if (context.onBeforeChangeCallback) {

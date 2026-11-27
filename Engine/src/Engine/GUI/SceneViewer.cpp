@@ -37,6 +37,7 @@
 #include <Utils/World/SceneLogic.h>
 #include <Utils/Platform/Platform.h>
 #include <Utils/Serialization/SerializationFlags.h>
+#include <Utils/Resources/Xml.h>
 
 #include <Codegen/SceneViewer.generated.hpp>
 

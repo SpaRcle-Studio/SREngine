@@ -25,6 +25,7 @@
 #include <Utils/Reflection/Value.h>
 #include <Utils/Serialization/SerializationFlags.h>
 #include <Utils/Platform/Platform.h>
+#include <Utils/ECS/TagManager.h>
 
 #include <Enum/TreeNodeFlags.hpp>
 #include <Enum/ChildWindowFlags.hpp>

@@ -67,6 +67,7 @@
 #include <Utils/Common/StoreUtils.h>
 #include <Utils/FileSystem/VFS.h>
 #include <Utils/Network/GitHubDownloader.h>
+#include <Utils/Resources/Xml.h>
 
 #include <Enum/EditorIcon.hpp>
 
@@ -483,7 +484,7 @@ namespace SR_CORE_GUI_NS {
             SR_ERROR("EditorGUI::LoadSceneFromCachedPath() : failed to load cached scene path!");
             return false;
         }
-        SR_UTILS_NS::Path scenePath = marshal.Read<std::string>();
+        SR_UTILS_NS::Path scenePath = marshal.Read<SR_UTILS_NS::String>();
 
         if (scenePath.IsEmpty()) {
             return false;

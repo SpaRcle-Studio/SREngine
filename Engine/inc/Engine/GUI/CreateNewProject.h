@@ -32,8 +32,8 @@ namespace SR_CORE_GUI_NS {
 
     private:
         SR_UTILS_NS::IVFSBackend* m_pVFSBackend = nullptr;
-        std::string m_projectName;
-        std::string m_projectPathInput;
+        SR_UTILS_NS::String m_projectName;
+        SR_UTILS_NS::String m_projectPathInput;
         SR_UTILS_NS::Path m_projectFinalPath;
         SR_UTILS_NS::Path m_settingsPath;
         SR_UTILS_NS::Path m_projectPath;

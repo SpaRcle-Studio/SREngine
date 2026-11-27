@@ -178,6 +178,15 @@ if (WIN32)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DNOMINMAX")
 endif()
 
+option(SR_MSVC_EMBEDDED_DEBUG_INFO "Use /Z7 instead of /Zi to avoid shared PDB contention in parallel builds" ON)
+
+if (MSVC AND SR_MSVC_EMBEDDED_DEBUG_INFO)
+    foreach(SR_FLAGS_VAR CMAKE_C_FLAGS_DEBUG CMAKE_CXX_FLAGS_DEBUG CMAKE_C_FLAGS_RELWITHDEBINFO CMAKE_CXX_FLAGS_RELWITHDEBINFO)
+        string(REPLACE "/Zi" "/Z7" ${SR_FLAGS_VAR} "${${SR_FLAGS_VAR}}")
+    endforeach()
+    message(STATUS "[SpaRcle Engine] MSVC debug information is embedded into object files (/Z7)")
+endif()
+
 if (SR_DISABLE_EXCEPTIONS)
     # TODO: not working
     if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")

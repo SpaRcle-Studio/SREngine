@@ -5,6 +5,7 @@
 #include <Physics/PhysX/PhysXRaycast3DImpl.h>
 
 #include <Utils/ECS/GameObject.h>
+#include <Utils/ECS/TagManager.h>
 
 namespace SR_PHYSICS_NS {
     class RaycastTagFilterCallback : public physx::PxQueryFilterCallback {

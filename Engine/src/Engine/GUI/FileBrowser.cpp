@@ -238,7 +238,7 @@ namespace SR_CORE_NS::GUI {
         parentFolder.childrenLoaded = true;
     }
 
-    void FileBrowser::FileContextMenu(const std::string &filename){
+    void FileBrowser::FileContextMenu(const SR_UTILS_NS::String& filename){
         SR_TRACY_ZONE;
         if (!SR_IMMEDIATE_GUI_NS::BeginPopupContextItem()) {
             return;
@@ -460,9 +460,10 @@ namespace SR_CORE_NS::GUI {
             SR_IMMEDIATE_GUI_NS::SameLine();
             SR_IMMEDIATE_GUI_NS::PushItemWidth(wndSize.x * 0.25f);
             if (SR_IMMEDIATE_GUI_NS::InputText("Name", &m_newAssetName)) {
-                std::erase_if(m_newAssetName, [](char c) {
+                auto&& pNewEnd = std::remove_if(m_newAssetName.begin(), m_newAssetName.end(), [](char c) {
                     return !SR_UTILS_NS::FileSystem::IsAllowedPathSymbol(c) || SR_UTILS_NS::FileSystem::IsPathSeparator(c);
                 });
+                m_newAssetName.erase(pNewEnd, m_newAssetName.end());
                 doUpdatePath = true;
             }
             SR_IMMEDIATE_GUI_NS::PopItemWidth();

@@ -11,6 +11,7 @@
 #include <Utils/DebugDraw.h>
 #include <Utils/Common/Numeric.h>
 #include <Utils/Math/Curve.h>
+#include <Utils/ECS/TagManager.h>
 
 #include <Codegen/IKFootSolver.generated.hpp>
 

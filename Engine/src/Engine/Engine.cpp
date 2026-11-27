@@ -602,7 +602,7 @@ namespace SR_CORE_NS {
 
                 if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Y)) {
                     if (!m_cmdManager->Redo()) {
-                        SR_WARN("Engine::FixedUpdate() : failed to redo \"" + m_cmdManager->GetLastCmdName() + "\" command!");
+                        SR_WARN("Engine::FixedUpdate() : failed to redo \"{}\" command!", m_cmdManager->GetLastCmdName());
                     }
                 }
             }

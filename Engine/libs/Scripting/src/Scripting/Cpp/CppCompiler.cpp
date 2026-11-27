@@ -378,7 +378,7 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
-        if (!SR_UTILS_NS::Path(outModulePath).CreateDirectories()) {
+        if (!SR_UTILS_NS::Path(std::string_view(outModulePath)).CreateDirectories()) {
             SR_ERROR("CppCompiler::Compile() : failed to create output folder: {}", outModulePath);
             return false;
         }
@@ -496,11 +496,11 @@ namespace SR_SCRIPTING_NS {
 
         const SR_UTILS_NS::TimePointType startTime = SR_HTYPES_NS::Time::Instance().Now();
 
-        const std::string result = SR_PLATFORM_NS::ExecuteCommand(command);
+        const SR_UTILS_NS::String result = SR_PLATFORM_NS::ExecuteCommand(command);
         const bool hasErrors =
-                result.find("compilation terminated") != std::string::npos ||
-                result.find("fatal error") != std::string::npos ||
-                result.find("error") != std::string::npos;
+                result.find("compilation terminated") != SR_UTILS_NS::String::npos ||
+                result.find("fatal error") != SR_UTILS_NS::String::npos ||
+                result.find("error") != SR_UTILS_NS::String::npos;
 
         const SR_UTILS_NS::TimePointType endTime = SR_HTYPES_NS::Time::Instance().Now();
         const auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
