@@ -16,6 +16,7 @@
 #include <Utils/Common/StoreUtils.h>
 #include <Utils/Platform/Platform.h>
 #include <Utils/TaskManager/TaskManager.h>
+#include <Utils/Resources/ResourceManager.h>
 
 #include <Codegen/InitializeState.generated.hpp>
 
@@ -134,6 +135,9 @@ namespace SR_CORE_NS {
 
         SR_UTILS_NS::TaskManager::Instance().RemoveDiscardable();
         SR_UTILS_NS::TaskManager::Instance().WaitForIdle();
+
+        /// шаблоны префабов держат свои Behaviour, их нужно освободить до уничтожения скриптовой системы
+        SR_UTILS_NS::ResourceManager::Instance().Update(true);
 
         SR_SCRIPTING_NS::ScriptSystem::DestroySingleton();
 
