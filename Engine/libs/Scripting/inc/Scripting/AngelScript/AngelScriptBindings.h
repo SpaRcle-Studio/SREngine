@@ -62,16 +62,26 @@ namespace SR_SCRIPTING_NS {
 
         struct Call {
             struct Frame {
+                explicit Frame(SR_UTILS_NS::IAllocator* pAllocator)
+                    : arguments(pAllocator)
+                    , pointers(pAllocator)
+                { }
+
                 SR_UTILS_NS::Vector<SR_UTILS_NS::Reflection::Value> arguments;
                 SR_UTILS_NS::Vector<void*> pointers;
                 SR_UTILS_NS::Reflection::Value result;
             };
 
-            Call() = default;
+            explicit Call(SR_UTILS_NS::IAllocator* pAllocator)
+                : frames(pAllocator)
+                , directArguments(pAllocator)
+            { }
 
-            explicit Call(SR_UTILS_NS::Reflection::Property initial)
+            Call(SR_UTILS_NS::IAllocator* pAllocator, SR_UTILS_NS::Reflection::Property initial)
                 : method()
-                , property(std::move(initial)) {
+                , property(std::move(initial))
+                , frames(pAllocator)
+                , directArguments(pAllocator) {
             }
 
             AngelScriptBindings* pBindings = nullptr;

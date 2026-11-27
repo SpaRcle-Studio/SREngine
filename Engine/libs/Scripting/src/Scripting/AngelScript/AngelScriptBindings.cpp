@@ -82,7 +82,7 @@ namespace SR_SCRIPTING_NS {
 
     AngelScriptBindings::Call::~Call() {
         for (auto&& pFrame : frames) {
-            delete pFrame;
+            pFrame->~Frame();
         }
         if (pResultPool) {
             pResultPool->ReleaseOwner();
@@ -91,7 +91,9 @@ namespace SR_SCRIPTING_NS {
 
     AngelScriptBindings::Call::Frame* AngelScriptBindings::Call::AddFrame() {
         SR_TRACY_ZONE;
-        auto&& pFrame = new Frame();
+        auto&& pAllocator = frames.GetAllocator();
+        auto&& pFrame = static_cast<Frame*>(pAllocator->Allocate(sizeof(Frame), alignof(Frame)));
+        new(pFrame) Frame(pAllocator);
         pFrame->arguments.reserve(method.GetParamsCount());
         pFrame->pointers.reserve(method.GetParamsCount());
         for (uint32_t i = 0; i < method.GetParamsCount(); ++i) {
@@ -121,12 +123,21 @@ namespace SR_SCRIPTING_NS {
     }
 
     AngelScriptBindings::~AngelScriptBindings() {
+        SR_TRACY_ZONE;
         for (auto&& pNative : m_allocatedNativeObjectPool) {
             pNative->~AngelScriptNativeObject();
         }
         m_freeNativeObjectPool.clear();
         m_nativeObjectPoolAllocator.Reset();
         SR_UTILS_NS::Reflection::UnregisterModuleTypes(this);
+        for (auto&& pCall : m_calls) {
+            pCall->~Call();
+        }
+        for (auto&& pType : m_types) {
+            pType->~Type();
+        }
+        m_pCallsAllocator.Reset();
+        m_pTypesAllocator.Reset();
     }
 
     bool AngelScriptBindings::Check(int32_t result, SR_UTILS_NS::StringView declaration) const {
@@ -516,7 +527,7 @@ namespace SR_SCRIPTING_NS {
             }
 
             auto&& pBinding = static_cast<Call*>(m_pCallsAllocator->Allocate(sizeof(Call), alignof(Call)));
-            new(pBinding) Call();
+            new(pBinding) Call(m_pCallsAllocator.Get());
 
             pBinding->pBindings = this;
             pBinding->pOwner = pType;
@@ -628,7 +639,7 @@ namespace SR_SCRIPTING_NS {
         }
 
         auto&& pGeneral = static_cast<Call*>(m_pCallsAllocator->Allocate(sizeof(Call), alignof(Call)));
-        new(pGeneral) Call();
+        new(pGeneral) Call(m_pCallsAllocator.Get());
 
         pGeneral->pBindings = this;
         pGeneral->pOwner = &type;
@@ -745,7 +756,7 @@ namespace SR_SCRIPTING_NS {
             }
 
             auto&& pBinding = static_cast<Call*>(m_pCallsAllocator->Allocate(sizeof(Call), alignof(Call)));
-            new(pBinding) Call();
+            new(pBinding) Call(m_pCallsAllocator.Get());
 
             pBinding->pBindings = this;
             pBinding->pOwner = &type;
@@ -853,7 +864,7 @@ namespace SR_SCRIPTING_NS {
             }
 
             auto&& pBinding = static_cast<Call*>(m_pCallsAllocator->Allocate(sizeof(Call), alignof(Call)));
-            new(pBinding) Call();
+            new(pBinding) Call(m_pCallsAllocator.Get());
 
             pBinding->pBindings = this;
             pBinding->pOwner = pTarget;
@@ -871,7 +882,7 @@ namespace SR_SCRIPTING_NS {
             }
 
             auto&& pBinding = static_cast<Call*>(m_pCallsAllocator->Allocate(sizeof(Call), alignof(Call)));
-            new(pBinding) Call();
+            new(pBinding) Call(m_pCallsAllocator.Get());
 
             pBinding->pBindings = this;
             pBinding->pOwner = pTarget;
@@ -906,7 +917,7 @@ namespace SR_SCRIPTING_NS {
             }
 
             auto&& pBinding = static_cast<Call*>(m_pCallsAllocator->Allocate(sizeof(Call), alignof(Call)));
-            new(pBinding) Call(property);
+            new(pBinding) Call(m_pCallsAllocator.Get(), property);
 
             pBinding->pBindings = this;
             pBinding->pOwner = &type;
@@ -1011,11 +1022,12 @@ namespace SR_SCRIPTING_NS {
             }
 
             auto&& pBinding = static_cast<Call*>(m_pCallsAllocator->Allocate(sizeof(Call), alignof(Call)));
-            new(pBinding) Call();
+            new(pBinding) Call(m_pCallsAllocator.Get());
 
             pBinding->pBindings = this;
             pBinding->pOwner = &type;
             pBinding->method = method;
+            pBinding->directArguments.reserve(method.GetParamsCount());
             for (uint32_t i = 0; i < method.GetParamsCount(); ++i) {
                 auto&& info = *method.GetParam(i).pTypeInfo;
                 pBinding->directArguments.emplace_back(info.IsArithmetic() || info.IsMath() || info.kind == SR_UTILS_NS::Reflection::TypeKind::String ||
@@ -1026,6 +1038,7 @@ namespace SR_SCRIPTING_NS {
                 pBinding->directResult = valueReference || info.IsMath() || info.kind == SR_UTILS_NS::Reflection::TypeKind::String ||
                     ((info.kind == SR_UTILS_NS::Reflection::TypeKind::Vector || info.kind == SR_UTILS_NS::Reflection::TypeKind::Map || info.kind == SR_UTILS_NS::Reflection::TypeKind::Set) && AngelScriptNativeStorage::Resolve(this, info) == &info);
             }
+            pBinding->frames.reserve(32);
             for (uint32_t i = 0; i < 32; ++i) {
                 pBinding->AddFrame();
             }

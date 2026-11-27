@@ -100,42 +100,6 @@ namespace SR_SCRIPTING_NS {
             return false;
         }
 
-        SR_UTILS_NS::String api;
-
-        SR_UTILS_NS::Vector<asITypeInfo*> objectTypes;
-        SR_UTILS_NS::Set<int32_t> exportedTypes;
-        for (uint32_t i = 0; i < m_pEngine->GetObjectTypeCount(); ++i) {
-            auto&& pType = m_pEngine->GetObjectTypeByIndex(i);
-            objectTypes.emplace_back(pType);
-            exportedTypes.insert(pType->GetTypeId());
-        }
-        for (auto&& pBindingType : m_pBindings->GetTypes()) {
-            auto&& pType = m_pEngine->GetTypeInfoById(pBindingType->scriptTypeId);
-            if (pType && pBindingType->pTypeInfo->kind != SR_UTILS_NS::Reflection::TypeKind::Enum &&
-                exportedTypes.insert(pType->GetTypeId()).second) {
-                objectTypes.emplace_back(pType);
-            }
-        }
-
-        for (auto&& pType : objectTypes) {
-            api += "class " + SR_UTILS_NS::String(m_pEngine->GetTypeDeclaration(pType->GetTypeId(), false)) + "\n{\n";
-
-            for (uint32_t j = 0; j < pType->GetMethodCount(); ++j) {
-                auto&& pMethod = pType->GetMethodByIndex(j);
-                api += "    " + SR_UTILS_NS::String(pMethod->GetDeclaration(false)) + (pMethod->IsProperty() ? " property;\n" : ";\n");
-            }
-
-            api += "}\n\n";
-        }
-
-        const auto apiPath = CoreResLoader::GetCachePath().Concat("Scripts/AngelScriptAPI.txt");
-
-        if (apiPath.GetFolder().CreateDirectories()) {
-            if (auto file = SR_UTILS_NS::VFS::Instance().OpenFile(apiPath, SR_UTILS_NS::FileMode::Write)) {
-                file.Write(api.data(), api.size());
-            }
-        }
-
         m_moduleDirty = true;
         const bool result = BuildModule();
         m_initializing = false;
