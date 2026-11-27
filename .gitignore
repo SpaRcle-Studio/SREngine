@@ -97,3 +97,4 @@ Resources/**/*.so
 /Platform/Emscripten/Bin/SREngine.manifest.json
 /Resources/as.predefined
 /Resources/Engine/Utilities/tracy
+/cmake-build-release-monolithic
