@@ -9,6 +9,7 @@
 #include <Scripting/AngelScript/AngelScriptBindings.h>
 #include <Scripting/AngelScript/AngelScriptBehaviourInstance.h>
 #include <Scripting/AngelScript/AngelScriptObjectGraph.h>
+#include <Scripting/AngelScript/AngelScriptCoroutine.h>
 
 #if defined(SR_ENGINE_ANGELSCRIPT_DEBUGGER)
 	#include <Scripting/AngelScript/AngelScriptDebugger.h>
@@ -48,6 +49,8 @@ namespace SR_SCRIPTING_NS {
 
         if (m_pEngine) {
             SR_LOG("AngelScriptRuntime::~AngelScriptRuntime() : shutting down AngelScript.");
+            /// приостановленные корутины держат скриптовые объекты, которые сборщик мусора иначе не сможет уничтожить
+            AngelScriptCoroutine::AbortAll();
             m_pEngine->ShutDownAndRelease();
         }
 
@@ -551,6 +554,8 @@ namespace SR_SCRIPTING_NS {
         }
 
         if (pPrevious) {
+            /// корутины старого модуля держат его функции и скриптовые объекты вне видимости сборщика мусора
+            AngelScriptCoroutine::AbortAll(pPrevious);
             pPrevious->Discard();
         }
 

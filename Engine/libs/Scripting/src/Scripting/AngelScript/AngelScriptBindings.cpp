@@ -11,6 +11,7 @@
 #include <Scripting/AngelScript/AngelScriptTypeReflection.h>
 #include <Scripting/AngelScript/AngelScriptNativeStorage.h>
 #include <Scripting/AngelScript/AngelScriptValueSerialization.h>
+#include <Scripting/AngelScript/AngelScriptCoroutine.h>
 #include <Scripting/Base/ScriptSystem.h>
 
 #include <Utils/TypeTraits/Factory.h>
@@ -615,6 +616,7 @@ namespace SR_SCRIPTING_NS {
         }
 
         if (!RegisterAngelScriptValueSerialization(this, m_pEngine) ||
+            !Check(RegisterAngelScriptCoroutine(m_pEngine) ? 0 : -1, "Coroutine") ||
             !Check(m_pEngine->RegisterInterface("IBehaviour"), "IBehaviour")) {
             return false;
         }
