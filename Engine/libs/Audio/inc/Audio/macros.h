@@ -5,7 +5,9 @@
     #include <Utils/macros.h>
 #endif
 
-#ifdef SR_AUDIO_DLL_EXPORTS
+#if defined(SR_AUDIO_STATIC_LIBRARY)
+    #define SR_AUDIO_DLL_API
+#elif defined(SR_AUDIO_DLL_EXPORTS)
     #define SR_AUDIO_DLL_API SR_DLL_API_EXPORT
 #else
     #define SR_AUDIO_DLL_API SR_DLL_API_IMPORT

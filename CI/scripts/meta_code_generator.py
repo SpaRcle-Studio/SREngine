@@ -64,12 +64,11 @@ def generate_class_meta_methods(f, class_structures, class_obj, tabs):
         f.write('\n')
 
     f.write('\t' * (tabs + 1) + f'isMethodsInited = true;\n\n')
-    f.write('\t' * (tabs + 1) + f'methods = {{ \n')
 
-    for method in class_obj.methods:
+    for index, method in enumerate(class_obj.methods):
         is_method_has_return = method.return_type.get_full_type() != 'void'
 
-        f.write('\t' * (tabs + 2) + f'SpaRcle::Utils::Reflection::Method()')
+        f.write('\t' * (tabs + 1) + f'methods[{index}]')
         f.write('\n' + '\t' * (tabs + 3) + f'.SetName("{method.name}")')
         if method.is_const:
             f.write('\n' + '\t' * (tabs + 3) + '.SetConstMethod(true)')
@@ -107,9 +106,8 @@ def generate_class_meta_methods(f, class_structures, class_obj, tabs):
             f.write('\t' * (tabs + 4) + f'{call};\n')
         f.write('\t' * (tabs + 3) + '})')
 
-        f.write(',\n')
+        f.write(';\n\n')
 
-    f.write('\t' * (tabs + 1) + '};\n')
     f.write('\t' * (tabs + 1) + 'return methods;\n')
     f.write('\t' * tabs + '}\n\n')
 
@@ -202,6 +200,12 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
             f.write('\n' + '\t' * (tabs + 4) + f'.SetDisplayName("{prop.display_name}")')
 
         # editor params
+
+        if not any((prop.custom_args, prop.no_header, prop.range, prop.enum_filter,
+                    prop.debug_only, prop.not_null, prop.dontInitNull, prop.group,
+                    prop.inspector, prop.drag_value, prop.editor_width)):
+            f.write(';\n\n')
+            continue
 
         f.write('\n' + '\t' * (tabs + 3) + f'.SetEditorParams(SpaRcle::Utils::Reflection::EditorPropertyParams()')
 

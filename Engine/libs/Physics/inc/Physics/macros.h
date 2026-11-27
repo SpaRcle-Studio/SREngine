@@ -5,7 +5,9 @@
     #include <Utils/macros.h>
 #endif
 
-#ifdef SR_PHYSICS_DLL_EXPORTS
+#if defined(SR_PHYSICS_STATIC_LIBRARY)
+    #define SR_PHYSICS_DLL_API
+#elif defined(SR_PHYSICS_DLL_EXPORTS)
     #define SR_PHYSICS_DLL_API SR_DLL_API_EXPORT
 #else
     #define SR_PHYSICS_DLL_API SR_DLL_API_IMPORT

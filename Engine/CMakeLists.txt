@@ -50,6 +50,12 @@ endif()
 include(cmake/EngineCore.cmake)
 include(cmake/Executable.cmake)
 
+if (NOT SR_ENGINE_USE_MODULAR_BUILD)
+    foreach(SR_STATIC_MODULE IN ITEMS Utils ImmediateGUI Audio Physics Graphics Scripting Engine ${SR_EXECUTABLE_NAME})
+        target_compile_definitions(${SR_STATIC_MODULE} PRIVATE SR_ENGINE_CODEGEN_DLL_API_DISABLE)
+    endforeach()
+endif()
+
 if (CMAKE_SYSTEM_NAME STREQUAL "Linux" AND SR_ENGINE_EXPLICIT_DLL_EXPORTS)
     foreach(SR_VISIBILITY_MODULE IN ITEMS Utils ImmediateGUI Audio Physics Graphics Scripting Engine)
         set_target_properties(${SR_VISIBILITY_MODULE} PROPERTIES
@@ -82,12 +88,12 @@ if (SR_ENGINE_USE_MODULAR_BUILD)
     endforeach()
 endif()
 
-option(SR_ENGINE_GENERATE_MAP "Generate MSVC linker MAP files for shared engine modules" OFF)
+option(SR_ENGINE_GENERATE_MAP "Generate MSVC linker MAP files for engine binaries" OFF)
 
 if (MSVC AND SR_ENGINE_GENERATE_MAP)
-    foreach(SR_MAP_MODULE IN ITEMS Utils ImmediateGUI Audio Physics Graphics Scripting Engine)
+    foreach(SR_MAP_MODULE IN ITEMS Utils ImmediateGUI Audio Physics Graphics Scripting Engine ${SR_EXECUTABLE_NAME})
         get_target_property(SR_MAP_MODULE_TYPE ${SR_MAP_MODULE} TYPE)
-        if (SR_MAP_MODULE_TYPE STREQUAL "SHARED_LIBRARY")
+        if (SR_MAP_MODULE_TYPE STREQUAL "SHARED_LIBRARY" OR SR_MAP_MODULE_TYPE STREQUAL "EXECUTABLE")
             target_link_options(${SR_MAP_MODULE} PRIVATE
                 "/MAP:$<TARGET_FILE_DIR:${SR_MAP_MODULE}>/$<TARGET_FILE_BASE_NAME:${SR_MAP_MODULE}>.map"
             )

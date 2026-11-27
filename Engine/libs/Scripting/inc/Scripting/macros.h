@@ -9,7 +9,9 @@
     #include <Utils/macros.h>
 #endif
 
-#ifdef SR_SCRIPTING_DLL_EXPORTS
+#if defined(SR_SCRIPTING_STATIC_LIBRARY)
+    #define SR_SCRIPTING_DLL_API
+#elif defined(SR_SCRIPTING_DLL_EXPORTS)
     #define SR_SCRIPTING_DLL_API SR_DLL_API_EXPORT
 #else
     #define SR_SCRIPTING_DLL_API SR_DLL_API_IMPORT
