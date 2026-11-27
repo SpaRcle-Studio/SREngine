@@ -96,6 +96,10 @@ namespace SR_SCRIPTING_NS {
         return IsLoading() ? SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom>() : m_pRuntime->GetBehaviourNames();
     }
 
+    bool AngelScriptSystem::HasBehaviour(SR_UTILS_NS::StringAtom name) const {
+        return !IsLoading() && m_pRuntime->HasBehaviour(name);
+    }
+
     bool AngelScriptSystem::IsModuleDirty() const {
         return !IsLoading() && m_pRuntime->IsModuleDirty();
     }

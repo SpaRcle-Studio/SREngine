@@ -44,19 +44,20 @@ namespace SR_SCRIPTING_NS::AngelScriptMapBindings {
     }
 
     void Operation(asIScriptGeneric* pCall) {
-        auto&& pBindings = static_cast<AngelScriptBindings*>(pCall->GetAuxiliary());
+        auto&& pBinding = static_cast<AngelScriptBindings::Call*>(pCall->GetAuxiliary());
+        auto&& pBindings = pBinding->pBindings;
         auto&& pType = pBindings->FindType(pCall->GetObjectTypeId());
         if (!pType || !pType->pTypeInfo->CanConstruct()) {
             AngelScriptBindingHelpers::Exception("Unregistered or unresolved associative container type");
             return;
         }
         const auto map = SR_UTILS_NS::Reflection::ValueRef(pType->pTypeInfo, pCall->GetObject(), pCall->GetFunction()->IsReadOnly()).AsMap();
-        const SR_UTILS_NS::StringView operation(pCall->GetFunction()->GetName());
-        if (operation == "size") {
+        const auto operation = pBinding->operation;
+        if (operation == AngelScriptBindings::Operation::Size) {
             pCall->SetReturnDWord(static_cast<asDWORD>(map.Size()));
             return;
         }
-        if (operation == "clear") {
+        if (operation == AngelScriptBindings::Operation::Clear) {
             map.Clear();
             return;
         }
@@ -65,13 +66,13 @@ namespace SR_SCRIPTING_NS::AngelScriptMapBindings {
             AngelScriptBindingHelpers::Exception("Invalid associative container key");
             return;
         }
-        if (operation == "contains") {
+        if (operation == AngelScriptBindings::Operation::Contains) {
             pCall->SetReturnByte(map.Contains(key.AsRef()));
         }
-        else if (operation == "erase") {
+        else if (operation == AngelScriptBindings::Operation::Erase) {
             pCall->SetReturnByte(map.Erase(key.AsRef()));
         }
-        else if (operation == "set" || operation == "insert") {
+        else if (operation == AngelScriptBindings::Operation::Set || operation == AngelScriptBindings::Operation::Insert) {
             if (map.IsSet()) {
                 pCall->SetReturnByte(map.InsertOrAssign(key.AsRef(), {}));
                 return;
@@ -84,7 +85,7 @@ namespace SR_SCRIPTING_NS::AngelScriptMapBindings {
             map.InsertOrAssign(key.AsRef(), value.AsRef());
         }
         else {
-            const auto value = operation == "opIndex" && !map.IsConst() ? map.FindOrAdd(key.AsRef()) : map.Find(key.AsRef());
+            const auto value = operation == AngelScriptBindings::Operation::Index && !map.IsConst() ? map.FindOrAdd(key.AsRef()) : map.Find(key.AsRef());
             if (!value) {
                 AngelScriptBindingHelpers::Exception("Map key not found");
                 return;
@@ -166,7 +167,7 @@ namespace SR_SCRIPTING_NS::AngelScriptMapBindings {
         const auto count = set ? sizeof(pSetDeclarations) / sizeof(*pSetDeclarations) : sizeof(pMapDeclarations) / sizeof(*pMapDeclarations);
         for (SR_UTILS_NS::SizeType i = 0; i < count; ++i) {
             auto&& pDeclaration = pDeclarations[i];
-            if (pEngine->RegisterObjectMethod(pInstance, pDeclaration, asFUNCTION(Operation), asCALL_GENERIC, pBindings) < 0) {
+            if (!pBindings->RegisterOperation(pInstance, pDeclaration, Operation, nullptr)) {
                 SR_ERROR("AngelScriptMapBindings::Register() : failed to register {}!", pDeclaration);
                 return false;
             }

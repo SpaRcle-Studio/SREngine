@@ -43,6 +43,7 @@ namespace SR_SCRIPTING_NS {
         SR_NODISCARD BehaviourInstance* AllocateBehaviourInstance(SR_UTILS_NS::StringAtom name);
         void FreeBehaviourInstance(BehaviourInstance* pInstance);
         SR_NODISCARD SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> GetBehaviourNames() const;
+        SR_NODISCARD bool HasBehaviour(SR_UTILS_NS::StringAtom name) const;
 
         void WaitForIdle();
         void ReloadModulesIfNeeded();

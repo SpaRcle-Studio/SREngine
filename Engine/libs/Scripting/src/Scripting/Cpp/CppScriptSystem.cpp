@@ -457,6 +457,13 @@ namespace SR_SCRIPTING_NS {
         return names;
     }
 
+    bool CppScriptSystem::HasBehaviour(SR_UTILS_NS::StringAtom name) const {
+        auto&& factory = SR_UTILS_NS::Factory::Instance();
+        auto&& pMeta = factory.GetType(name);
+
+        return pMeta && pMeta->IsInherited(CppBehaviour::GetClassStaticName()) && !factory.IsAbstract(name);
+    }
+
     void CppScriptSystem::WaitForIdle() {
         if (GetState() == ScriptSystemState::Idle || !m_threadRunning) {
             return;

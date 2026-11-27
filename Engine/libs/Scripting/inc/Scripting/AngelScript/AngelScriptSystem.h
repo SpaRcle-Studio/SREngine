@@ -32,6 +32,7 @@ namespace SR_SCRIPTING_NS {
     public:
         SR_NODISCARD SR_UTILS_NS::Set<SR_UTILS_NS::Path> GetSourceFiles() const;
         SR_NODISCARD SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> GetBehaviourNames() const;
+        SR_NODISCARD bool HasBehaviour(SR_UTILS_NS::StringAtom name) const;
         SR_NODISCARD bool IsModuleDirty() const;
         SR_NODISCARD bool HasErrors() const;
         SR_NODISCARD bool IsAvailable() const;

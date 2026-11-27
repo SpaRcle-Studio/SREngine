@@ -69,7 +69,8 @@ namespace SR_SCRIPTING_NS::AngelScriptVectorBindings {
     }
 
     void Operation(asIScriptGeneric* pCall) {
-        auto&& pBindings = static_cast<AngelScriptBindings*>(pCall->GetAuxiliary());
+        auto&& pBinding = static_cast<AngelScriptBindings::Call*>(pCall->GetAuxiliary());
+        auto&& pBindings = pBinding->pBindings;
         auto&& pType = pBindings->FindType(pCall->GetObjectTypeId());
         if (!pType) {
             AngelScriptBindingHelpers::Exception("Unregistered Vector type");
@@ -80,13 +81,13 @@ namespace SR_SCRIPTING_NS::AngelScriptVectorBindings {
             AngelScriptBindingHelpers::Exception("Vector element type is unresolved");
             return;
         }
-        const SR_UTILS_NS::StringView operation(pCall->GetFunction()->GetName());
-        if (operation == "size") {
+        const auto operation = pBinding->operation;
+        if (operation == AngelScriptBindings::Operation::Size) {
             pCall->SetReturnDWord(static_cast<asDWORD>(array.Size()));
             return;
         }
         auto&& pElement = array.GetElementType();
-        if (operation == "at" || operation == "opIndex") {
+        if (operation == AngelScriptBindings::Operation::At || operation == AngelScriptBindings::Operation::Index) {
             const auto index = pCall->GetArgDWord(0);
             if (index >= array.Size()) {
                 AngelScriptBindingHelpers::Exception("Vector index out of range");
@@ -106,38 +107,39 @@ namespace SR_SCRIPTING_NS::AngelScriptVectorBindings {
             AngelScriptBindingHelpers::Exception("Cannot modify a const vector");
             return;
         }
-        if (operation == "clear" || operation == "resize" || operation == "reserve") {
-            if (operation == "clear") {
-                array.Clear();
-            }
-            else if (operation == "resize") {
-                array.Resize(pCall->GetArgDWord(0));
-            }
-            else {
-                array.Reserve(pCall->GetArgDWord(0));
-            }
+        if (operation == AngelScriptBindings::Operation::Clear) {
+            array.Clear();
             return;
         }
-        const auto index = operation == "pushBack" ? array.Size() : pCall->GetArgDWord(0);
-        if (operation != "pushBack" && index >= array.Size()) {
+        if (operation == AngelScriptBindings::Operation::Resize) {
+            array.Resize(pCall->GetArgDWord(0));
+            return;
+        }
+        if (operation == AngelScriptBindings::Operation::Reserve) {
+            array.Reserve(pCall->GetArgDWord(0));
+            return;
+        }
+        const bool pushBack = operation == AngelScriptBindings::Operation::PushBack;
+        const auto index = pushBack ? array.Size() : pCall->GetArgDWord(0);
+        if (!pushBack && index >= array.Size()) {
             AngelScriptBindingHelpers::Exception("Vector index out of range");
             return;
         }
-        if (operation == "erase") {
+        if (operation == AngelScriptBindings::Operation::Erase) {
             array.Erase(index);
             return;
         }
-        auto source = pBindings->CopyValue(pBindings->Read(pCall, operation == "pushBack" ? 0 : 1, *pElement));
+        auto source = pBindings->CopyValue(pBindings->Read(pCall, pushBack ? 0 : 1, *pElement));
         if (!source) {
             AngelScriptBindingHelpers::Exception("Invalid Vector element");
             return;
         }
-        if (operation == "pushBack") {
+        if (pushBack) {
             if (!array.PushBack(source.AsRef())) {
                 AngelScriptBindingHelpers::Exception("Vector element cannot be inserted");
             }
         }
-        else if (operation == "set" && !array.At(index).Assign(source.AsRef())) {
+        else if (operation == AngelScriptBindings::Operation::Set && !array.At(index).Assign(source.AsRef())) {
             AngelScriptBindingHelpers::Exception("Vector element cannot be assigned");
         }
     }
@@ -212,7 +214,7 @@ namespace SR_SCRIPTING_NS::AngelScriptVectorBindings {
             "void set(uint, const T&in)", "void pushBack(const T&in)"
         };
         for (auto&& pDeclaration : pDeclarations) {
-            if (pEngine->RegisterObjectMethod("Vector<T>", pDeclaration, asFUNCTION(Operation), asCALL_GENERIC, pBindings) < 0) {
+            if (!pBindings->RegisterOperation("Vector<T>", pDeclaration, Operation, nullptr)) {
                 SR_ERROR("AngelScriptVectorBindings::Register() : failed to register {}!", pDeclaration);
                 return false;
             }

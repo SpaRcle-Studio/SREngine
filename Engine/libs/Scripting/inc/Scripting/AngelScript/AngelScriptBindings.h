@@ -14,6 +14,7 @@
 #include <Utils/Reflection/Method.h>
 #include <Utils/Reflection/Property.h>
 #include <Utils/Types/FlatHashMap.h>
+#include <Utils/Types/Set.h>
 #include <Utils/Types/SharedPtrDynamicData.h>
 #include <Utils/Memory/Allocator.h>
 
@@ -44,6 +45,38 @@ namespace SR_SCRIPTING_NS {
     class SR_SCRIPTING_DLL_API AngelScriptBindings : public asIStringFactory {
     public:
         static constexpr asPWORD NativeTypeUserData = 0x53524153;
+
+        /// операция встроенного метода, разбирается из декларации при регистрации
+        enum class Operation : uint8_t {
+            Unknown,
+            Size,
+            Empty,
+            Clear,
+            At,
+            Set,
+            PushBack,
+            Resize,
+            Reserve,
+            Index,
+            Contains,
+            Erase,
+            Insert,
+            ByteAt,
+            Substring,
+            GraphemeCount,
+            StartsWith,
+            EndsWith,
+            Find,
+            FindLastOf,
+            Equals,
+            Add,
+            Compare,
+            HasValue,
+            Reset,
+            Get,
+            SetId,
+            ForceLoad
+        };
 
         struct Type {
             SR_UTILS_NS::String name;
@@ -91,6 +124,8 @@ namespace SR_SCRIPTING_NS {
             const SR_UTILS_NS::Reflection::TypeInfo* pPropertyType = nullptr;
             bool propertyReference = false;
             uint32_t component = 0;
+            uint64_t singletonHash = 0;
+            Operation operation = Operation::Unknown;
             SR_UTILS_NS::Vector<Frame*> frames;
             SR_UTILS_NS::Vector<bool> directArguments;
             bool directResult = false;
@@ -111,6 +146,8 @@ namespace SR_SCRIPTING_NS {
         }
         Type* ResolveContainerType(asITypeInfo* pScriptType);
         void ForgetType(int32_t typeId);
+        /// регистрирует встроенный метод, auxiliary - Call с разобранной из декларации операцией
+        bool RegisterOperation(const char* pType, const char* pDeclaration, asGENFUNC_t function, Type* pOwner);
 
         SR_UTILS_NS::String Declaration(const SR_UTILS_NS::Reflection::TypeInfo& info) const;
         Type* FindType(int32_t typeId) const;
@@ -137,6 +174,20 @@ namespace SR_SCRIPTING_NS {
         Type* Collect(const SR_UTILS_NS::Reflection::TypeInfo& info);
         bool RegisterType(Type& type);
         bool RegisterMembers(Type& type);
+        bool RegisterStringMembers(Type& type, Call* pGeneral);
+        bool RegisterFieldMembers(Type& type);
+        bool RegisterWrapperMembers(Type& type);
+        bool RegisterContainerMembers(Type& type);
+        bool RegisterCasts(Type& type);
+        bool RegisterReflectedProperties(Type& type, SR_UTILS_NS::Set<SR_UTILS_NS::String>& registered);
+        bool RegisterReflectedMethods(Type& type, SR_UTILS_NS::Set<SR_UTILS_NS::String>& registered);
+        static bool IsWrapperKind(SR_UTILS_NS::Reflection::TypeKind kind);
+        Call* AllocateCall(Type* pOwner);
+        static Operation ParseOperation(SR_UTILS_NS::StringView declaration);
+        /// контейнер, чьё нативное хранилище совпадает со скриптовым
+        bool IsNativeContainer(const SR_UTILS_NS::Reflection::TypeInfo& info);
+        /// значение можно передать в скрипт по адресу без преобразования
+        bool HasScriptLayout(const SR_UTILS_NS::Reflection::TypeInfo& info);
         bool Check(int32_t result, SR_UTILS_NS::StringView declaration) const;
         SR_UTILS_NS::String Argument(const SR_UTILS_NS::Reflection::TypeInfo& info) const;
         SR_UTILS_NS::Reflection::Value Convert(const SR_UTILS_NS::Reflection::Value& value, const SR_UTILS_NS::Reflection::TypeInfo& expected) const;

@@ -135,12 +135,13 @@ namespace SR_SCRIPTING_NS {
         SR_UTILS_NS::StringAtom m_name;
         SR_UTILS_NS::SceneObject::Ptr m_sceneObject;
         asIScriptObject* m_pObject = nullptr;
+        /// переиспользуется между событиями коллизий, пока скрипт не сохранил на него ссылку
+        AngelScriptNativeObject* m_pCollisionData = nullptr;
         SR_UTILS_NS::Map<SR_UTILS_NS::StringAtom, SR_UTILS_NS::Reflection::Value> m_reloadValues;
         SR_UTILS_NS::Map<SR_UTILS_NS::StringAtom, SR_UTILS_NS::String> m_reloadTypes;
         Meta m_meta;
         SR_UTILS_NS::Map<uint32_t, AngelScriptValueSnapshot> m_defaultPropertyState;
 
-        mutable SR_UTILS_NS::Vector<asIScriptContext*> m_contexts;
         mutable uint32_t m_contextDepth = 0;
         SR_UTILS_NS::Map<SR_UTILS_NS::StringAtom, asIScriptFunction*> m_eventMethods;
         asIScriptFunction* m_pMethods[static_cast<uint32_t>(Callback::Count)] = {};

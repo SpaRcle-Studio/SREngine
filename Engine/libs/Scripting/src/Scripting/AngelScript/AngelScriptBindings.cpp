@@ -103,7 +103,8 @@ namespace SR_SCRIPTING_NS {
             pFrame->pointers.emplace_back(nullptr);
         }
         if (method.HasReturn() && !directResult && !method.IsReturnsReference() && !pResultPool) {
-            pResultPool = new SR_UTILS_NS::Reflection::ValuePool(method.GetReturnType(), 256);
+            /// при исчерпании пула Invoke создаёт результат в куче
+            pResultPool = new SR_UTILS_NS::Reflection::ValuePool(method.GetReturnType(), 16);
         }
 
         frames.emplace_back(pFrame);
@@ -147,6 +148,82 @@ namespace SR_SCRIPTING_NS {
 
         SR_ERROR("AngelScriptBindings::Check() : AngelScript registration failed ({}): {}", result, declaration);
         return false;
+    }
+
+    AngelScriptBindings::Call* AngelScriptBindings::AllocateCall(Type* pOwner) {
+        auto&& pBinding = static_cast<Call*>(m_pCallsAllocator->Allocate(sizeof(Call), alignof(Call)));
+        new(pBinding) Call(m_pCallsAllocator.Get());
+
+        pBinding->pBindings = this;
+        pBinding->pOwner = pOwner;
+        m_calls.emplace_back(pBinding);
+
+        return pBinding;
+    }
+
+    bool AngelScriptBindings::IsNativeContainer(const SR_UTILS_NS::Reflection::TypeInfo& info) {
+        const bool container = info.kind == SR_UTILS_NS::Reflection::TypeKind::Vector ||
+            info.kind == SR_UTILS_NS::Reflection::TypeKind::Map ||
+            info.kind == SR_UTILS_NS::Reflection::TypeKind::Set;
+
+        return container && AngelScriptNativeStorage::Resolve(this, info) == &info;
+    }
+
+    bool AngelScriptBindings::HasScriptLayout(const SR_UTILS_NS::Reflection::TypeInfo& info) {
+        return info.IsArithmetic() || info.IsMath() || info.kind == SR_UTILS_NS::Reflection::TypeKind::String || IsNativeContainer(info);
+    }
+
+    AngelScriptBindings::Operation AngelScriptBindings::ParseOperation(SR_UTILS_NS::StringView declaration) {
+        const auto end = declaration.find('(');
+        if (end == SR_UTILS_NS::StringView::npos) {
+            return Operation::Unknown;
+        }
+
+        SR_UTILS_NS::SizeType begin = end;
+        while (begin > 0 && declaration[begin - 1] != ' ') {
+            --begin;
+        }
+
+        const auto name = declaration.substr(begin, end - begin);
+
+        struct OperationName {
+            SR_UTILS_NS::StringView name;
+            Operation operation = Operation::Unknown;
+        };
+
+        static const OperationName operations[] = {
+            { "size", Operation::Size }, { "length", Operation::Size }, { "empty", Operation::Empty },
+            { "clear", Operation::Clear }, { "at", Operation::At }, { "set", Operation::Set },
+            { "pushBack", Operation::PushBack }, { "resize", Operation::Resize }, { "reserve", Operation::Reserve },
+            { "contains", Operation::Contains }, { "erase", Operation::Erase }, { "insert", Operation::Insert },
+            { "byteAt", Operation::ByteAt }, { "opIndex", Operation::Index },
+            { "substring", Operation::Substring }, { "substr", Operation::Substring },
+            { "graphemeCount", Operation::GraphemeCount }, { "starts_with", Operation::StartsWith },
+            { "ends_with", Operation::EndsWith }, { "find", Operation::Find }, { "find_last_of", Operation::FindLastOf },
+            { "opEquals", Operation::Equals }, { "opAdd", Operation::Add }, { "opCmp", Operation::Compare },
+            { "hasValue", Operation::HasValue }, { "reset", Operation::Reset }, { "get", Operation::Get },
+            { "setId", Operation::SetId }, { "ForceLoad", Operation::ForceLoad },
+        };
+
+        for (auto&& entry : operations) {
+            if (entry.name == name) {
+                return entry.operation;
+            }
+        }
+
+        return Operation::Unknown;
+    }
+
+    bool AngelScriptBindings::RegisterOperation(const char* pType, const char* pDeclaration, asGENFUNC_t function, Type* pOwner) {
+        auto&& pBinding = AllocateCall(pOwner);
+        pBinding->operation = ParseOperation(pDeclaration);
+
+        if (pBinding->operation == Operation::Unknown) {
+            SR_ERROR("AngelScriptBindings::RegisterOperation() : unknown operation: {}", pDeclaration);
+            return false;
+        }
+
+        return Check(m_pEngine->RegisterObjectMethod(pType, pDeclaration, asFUNCTION(function), asCALL_GENERIC, pBinding), pDeclaration);
     }
 
     AngelScriptBindings::Type* AngelScriptBindings::FindType(const SR_UTILS_NS::Reflection::TypeInfo& info) const {
@@ -471,14 +548,14 @@ namespace SR_SCRIPTING_NS {
             const char* pResourceMethods[] = { "bool hasValue() const", "void reset()", "T@ get() const", "void setId(const String &in)", "void ForceLoad()" };
             if (isRef) {
                 for (auto&& pDeclaration : pEntityMethods) {
-                    if (!Check(m_pEngine->RegisterObjectMethod(pTemplate, pDeclaration, asFUNCTION(AngelScriptBindingHelpers::Wrapper), asCALL_GENERIC), pDeclaration)) {
+                    if (!RegisterOperation(pTemplate, pDeclaration, AngelScriptBindingHelpers::Wrapper, nullptr)) {
                         return false;
                     }
                 }
             }
             else {
                 for (auto&& pDeclaration : pResourceMethods) {
-                    if (!Check(m_pEngine->RegisterObjectMethod(pTemplate, pDeclaration, asFUNCTION(AngelScriptBindingHelpers::Wrapper), asCALL_GENERIC), pDeclaration)) {
+                    if (!RegisterOperation(pTemplate, pDeclaration, AngelScriptBindingHelpers::Wrapper, nullptr)) {
                         return false;
                     }
                 }
@@ -526,12 +603,8 @@ namespace SR_SCRIPTING_NS {
                 continue;
             }
 
-            auto&& pBinding = static_cast<Call*>(m_pCallsAllocator->Allocate(sizeof(Call), alignof(Call)));
-            new(pBinding) Call(m_pCallsAllocator.Get());
-
-            pBinding->pBindings = this;
-            pBinding->pOwner = pType;
-            m_calls.emplace_back(pBinding);
+            auto&& pBinding = AllocateCall(pType);
+            pBinding->singletonHash = singletonHash;
 
             if (!Check(m_pEngine->SetDefaultNamespace(factoryName.c_str()), factoryName) ||
                 !Check(m_pEngine->RegisterGlobalFunction((pType->name + "@ Instance()").c_str(), asFUNCTION(AngelScriptBindingHelpers::SingletonInstance), asCALL_GENERIC, pBinding), pType->name + "::Instance()") ||
@@ -638,12 +711,7 @@ namespace SR_SCRIPTING_NS {
             return true;
         }
 
-        auto&& pGeneral = static_cast<Call*>(m_pCallsAllocator->Allocate(sizeof(Call), alignof(Call)));
-        new(pGeneral) Call(m_pCallsAllocator.Get());
-
-        pGeneral->pBindings = this;
-        pGeneral->pOwner = &type;
-        m_calls.emplace_back(pGeneral);
+        auto&& pGeneral = AllocateCall(&type);
         auto&& pRegistration = type.pMeta ? SR_UTILS_NS::Factory::Instance().GetTypeInfo(type.pMeta->GetFactoryName()) : nullptr;
 
         if (type.IsValue()) {
@@ -672,6 +740,26 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
+        if (!RegisterStringMembers(type, pGeneral) || !RegisterFieldMembers(type) ||
+            !RegisterWrapperMembers(type) || !RegisterContainerMembers(type)) {
+            return false;
+        }
+
+        if (!type.pMeta) {
+            return true;
+        }
+
+        if (!RegisterCasts(type)) {
+            return false;
+        }
+
+        /// одна и та же сигнатура может прийти и от свойства, и от метода
+        SR_UTILS_NS::Set<SR_UTILS_NS::String> registered;
+
+        return RegisterReflectedProperties(type, registered) && RegisterReflectedMethods(type, registered);
+    }
+
+    bool AngelScriptBindings::RegisterStringMembers(Type& type, Call* pGeneral) {
         if (type.pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::String ||
             type.pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::Path ||
             type.pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::StringView) {
@@ -721,23 +809,26 @@ namespace SR_SCRIPTING_NS {
             };
 
             for (auto&& pDeclaration : pDeclarations) {
-                if (!Check(m_pEngine->RegisterObjectMethod(type.name.c_str(), pDeclaration, asFUNCTION(AngelScriptBindingHelpers::StringOperation), asCALL_GENERIC, pGeneral), pDeclaration)) {
+                if (!RegisterOperation(type.name.c_str(), pDeclaration, AngelScriptBindingHelpers::StringOperation, &type)) {
                     return false;
                 }
             }
 
-            const SR_UTILS_NS::String operators[] = {
+            const char* pOperators[] = {
                 "bool opEquals(const String &in) const", "bool opEquals(const StringView &in) const",
                 "String opAdd(const String &in) const", "String opAdd(const StringView &in) const"
             };
-            for (auto&& declaration : operators) {
-                if (!Check(m_pEngine->RegisterObjectMethod(type.name.c_str(), declaration.c_str(),
-                    asFUNCTION(AngelScriptBindingHelpers::StringOperation), asCALL_GENERIC, pGeneral), declaration)) {
+            for (auto&& pDeclaration : pOperators) {
+                if (!RegisterOperation(type.name.c_str(), pDeclaration, AngelScriptBindingHelpers::StringOperation, &type)) {
                     return false;
                 }
             }
         }
 
+        return true;
+    }
+
+    bool AngelScriptBindings::RegisterFieldMembers(Type& type) {
         auto&& info = *type.pTypeInfo;
 
         for (uint32_t i = 0; i < info.fieldsCount; ++i) {
@@ -755,14 +846,9 @@ namespace SR_SCRIPTING_NS {
                 continue;
             }
 
-            auto&& pBinding = static_cast<Call*>(m_pCallsAllocator->Allocate(sizeof(Call), alignof(Call)));
-            new(pBinding) Call(m_pCallsAllocator.Get());
-
-            pBinding->pBindings = this;
-            pBinding->pOwner = &type;
+            auto&& pBinding = AllocateCall(&type);
             pBinding->component = component.offset;
             pBinding->pPropertyType = pScalar;
-            m_calls.emplace_back(pBinding);
 
             const auto getter = Declaration(*pScalar) + " get_" + SR_UTILS_NS::String(component.name) + "() const property";
             const auto setter = "void set_" + SR_UTILS_NS::String(component.name) + "(" + Argument(*pScalar) + ") property";
@@ -773,11 +859,18 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
-        const auto kind = type.pTypeInfo->kind;
-        const bool wrapper = kind == SR_UTILS_NS::Reflection::TypeKind::Optional || kind == SR_UTILS_NS::Reflection::TypeKind::EntityRef ||
-            kind == SR_UTILS_NS::Reflection::TypeKind::ResourceRef;
+        return true;
+    }
 
-        if (wrapper || kind == SR_UTILS_NS::Reflection::TypeKind::Value) {
+    bool AngelScriptBindings::IsWrapperKind(SR_UTILS_NS::Reflection::TypeKind kind) {
+        return kind == SR_UTILS_NS::Reflection::TypeKind::Optional || kind == SR_UTILS_NS::Reflection::TypeKind::EntityRef ||
+            kind == SR_UTILS_NS::Reflection::TypeKind::ResourceRef;
+    }
+
+    bool AngelScriptBindings::RegisterWrapperMembers(Type& type) {
+        const auto kind = type.pTypeInfo->kind;
+
+        if (IsWrapperKind(kind) || kind == SR_UTILS_NS::Reflection::TypeKind::Value) {
             SR_UTILS_NS::Vector<SR_UTILS_NS::String> declarations;
 
             if (kind == SR_UTILS_NS::Reflection::TypeKind::Value) {
@@ -798,13 +891,20 @@ namespace SR_SCRIPTING_NS {
             }
 
             for (auto&& declaration : declarations) {
-                if (!Check(m_pEngine->RegisterObjectMethod(type.name.c_str(), declaration.c_str(), asFUNCTION(AngelScriptBindingHelpers::Wrapper), asCALL_GENERIC, pGeneral), declaration)) {
+                if (!RegisterOperation(type.name.c_str(), declaration.c_str(), AngelScriptBindingHelpers::Wrapper, &type)) {
                     return false;
                 }
             }
         }
 
-        if (type.pTypeInfo->IsContainer() && !wrapper && info.fieldsCount == 0) {
+        return true;
+    }
+
+    bool AngelScriptBindings::RegisterContainerMembers(Type& type) {
+        auto&& info = *type.pTypeInfo;
+        const auto kind = info.kind;
+
+        if (info.IsContainer() && !IsWrapperKind(kind) && info.fieldsCount == 0) {
             auto&& arrayTable = type.pTypeInfo->vtable.arrayVTable;
             auto&& mapTable = type.pTypeInfo->vtable.mapVTable;
 
@@ -847,28 +947,23 @@ namespace SR_SCRIPTING_NS {
                 }
             }
 
-            for (auto&& pDeclaration : pDeclarations) {
-                if (!Check(m_pEngine->RegisterObjectMethod(type.name.c_str(), pDeclaration.c_str(), asFUNCTION(AngelScriptBindingHelpers::Container), asCALL_GENERIC, pGeneral), pDeclaration)) {
+            for (auto&& declaration : pDeclarations) {
+                if (!RegisterOperation(type.name.c_str(), declaration.c_str(), AngelScriptBindingHelpers::Container, &type)) {
                     return false;
                 }
             }
         }
 
-        if (!type.pMeta) {
-            return true;
-        }
+        return true;
+    }
 
+    bool AngelScriptBindings::RegisterCasts(Type& type) {
         for (auto&& pTarget : m_types) {
             if (!pTarget->pMeta || pTarget == &type || !type.pMeta->IsInherited(pTarget->pMeta->GetFactoryName())) {
                 continue;
             }
 
-            auto&& pBinding = static_cast<Call*>(m_pCallsAllocator->Allocate(sizeof(Call), alignof(Call)));
-            new(pBinding) Call(m_pCallsAllocator.Get());
-
-            pBinding->pBindings = this;
-            pBinding->pOwner = pTarget;
-            m_calls.emplace_back(pBinding);
+            auto&& pBinding = AllocateCall(pTarget);
             const auto pDeclaration = pTarget->name + "@ opImplCast()";
 
             if (!Check(m_pEngine->RegisterObjectMethod(type.name.c_str(), pDeclaration.c_str(), asFUNCTION(AngelScriptBindingHelpers::Cast), asCALL_GENERIC, pBinding), pDeclaration)) {
@@ -881,12 +976,7 @@ namespace SR_SCRIPTING_NS {
                 continue;
             }
 
-            auto&& pBinding = static_cast<Call*>(m_pCallsAllocator->Allocate(sizeof(Call), alignof(Call)));
-            new(pBinding) Call(m_pCallsAllocator.Get());
-
-            pBinding->pBindings = this;
-            pBinding->pOwner = pTarget;
-            m_calls.emplace_back(pBinding);
+            auto&& pBinding = AllocateCall(pTarget);
             const auto pDeclaration = pTarget->name + "@ opCast()";
 
             if (!Check(m_pEngine->RegisterObjectMethod(type.name.c_str(), pDeclaration.c_str(), asFUNCTION(AngelScriptBindingHelpers::Cast), asCALL_GENERIC, pBinding), pDeclaration)) {
@@ -894,8 +984,12 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
+        return true;
+    }
+
+    bool AngelScriptBindings::RegisterReflectedProperties(Type& type, SR_UTILS_NS::Set<SR_UTILS_NS::String>& registered) {
+        SR_TRACY_ZONE;
         bool success = true;
-        SR_UTILS_NS::Set<SR_UTILS_NS::String> registered;
         SR_UTILS_NS::Set<SR_UTILS_NS::String> propertyNames;
         type.pMeta->ForEachProperty([&](const SR_UTILS_NS::Reflection::Property& property, uint64_t) {
             propertyNames.insert(property.GetName());
@@ -912,7 +1006,7 @@ namespace SR_SCRIPTING_NS {
             const auto pDeclaration = Declaration(info);
 
             if (pDeclaration.empty()) {
-                SR_WARN("AngelScriptBindings::RegisterMembers() : AngelScript: unsupported property {}::{}", type.name, property.GetName());
+                SR_WARN("AngelScriptBindings::RegisterReflectedProperties() : AngelScript: unsupported property {}::{}", type.name, property.GetName());
                 return;
             }
 
@@ -929,9 +1023,7 @@ namespace SR_SCRIPTING_NS {
             const auto scriptName = propertyNames.count(cleanName) == 0 ? cleanName : nativeName;
             pBinding->propertyReference = !property.HasExplicitSetter() && !property.HasChangeCallback() &&
                 (property.GetByteOffset() != INT32_MIN || property.IsReturnsReference()) &&
-                (info.IsArithmetic() || info.IsMath() || info.kind == SR_UTILS_NS::Reflection::TypeKind::String ||
-                    ((info.kind == SR_UTILS_NS::Reflection::TypeKind::Vector || info.kind == SR_UTILS_NS::Reflection::TypeKind::Map || info.kind == SR_UTILS_NS::Reflection::TypeKind::Set) && AngelScriptNativeStorage::Resolve(this, info) == &info) ||
-                    (info.kind == SR_UTILS_NS::Reflection::TypeKind::Enum && info.vtable.lifecycle.size >= sizeof(int32_t)));
+                (HasScriptLayout(info) || (info.kind == SR_UTILS_NS::Reflection::TypeKind::Enum && info.vtable.lifecycle.size >= sizeof(int32_t)));
             const bool constReference = property.IsReadOnly() || property.IsReturnsConstReference();
             const bool objectReference = info.kind == SR_UTILS_NS::Reflection::TypeKind::Object && property.IsReturnsReference();
             const auto getterType = pBinding->propertyReference ? (constReference ? "const " : "") + pDeclaration + "&" :
@@ -957,6 +1049,13 @@ namespace SR_SCRIPTING_NS {
                 }
             }
         });
+
+        return success;
+    }
+
+    bool AngelScriptBindings::RegisterReflectedMethods(Type& type, SR_UTILS_NS::Set<SR_UTILS_NS::String>& registered) {
+        SR_TRACY_ZONE;
+        bool success = true;
         type.pMeta->ForEachMethod([&](const SR_UTILS_NS::Reflection::Method& method, uint64_t) {
             if (!success) {
                 return;
@@ -964,18 +1063,15 @@ namespace SR_SCRIPTING_NS {
 
             SR_UTILS_NS::String pDeclaration = method.HasReturn() ? Declaration(*method.GetReturnType()) : SR_UTILS_NS::String("void");
             const bool valueReference = method.HasReturn() && method.IsReturnsReference() &&
-                (method.GetReturnType()->IsArithmetic() || method.GetReturnType()->IsMath() ||
-                    method.GetReturnType()->kind == SR_UTILS_NS::Reflection::TypeKind::String ||
-                    (method.GetReturnType()->kind == SR_UTILS_NS::Reflection::TypeKind::Enum && method.GetReturnType()->vtable.lifecycle.size >= sizeof(int32_t)) ||
-                    ((method.GetReturnType()->kind == SR_UTILS_NS::Reflection::TypeKind::Vector || method.GetReturnType()->kind == SR_UTILS_NS::Reflection::TypeKind::Map || method.GetReturnType()->kind == SR_UTILS_NS::Reflection::TypeKind::Set) &&
-                        AngelScriptNativeStorage::Resolve(this, *method.GetReturnType()) == method.GetReturnType()));
+                (HasScriptLayout(*method.GetReturnType()) ||
+                    (method.GetReturnType()->kind == SR_UTILS_NS::Reflection::TypeKind::Enum && method.GetReturnType()->vtable.lifecycle.size >= sizeof(int32_t)));
             if (method.HasReturn() && method.IsReturnsReference() && !method.IsReturnsConstReference() && !valueReference &&
                 (AngelScriptBindingHelpers::Primitive(*method.GetReturnType()) || method.GetReturnType()->IsString() ||
                     method.GetReturnType()->kind == SR_UTILS_NS::Reflection::TypeKind::Set ||
                     method.GetReturnType()->kind == SR_UTILS_NS::Reflection::TypeKind::Map ||
                     method.GetReturnType()->kind == SR_UTILS_NS::Reflection::TypeKind::Vector ||
                     method.GetReturnType()->kind == SR_UTILS_NS::Reflection::TypeKind::SharedPtr)) {
-                SR_WARN("AngelScriptBindings::RegisterMembers() : cannot expose mutable reference with a different script layout: {}::{}", type.name, method.GetName());
+                SR_WARN("AngelScriptBindings::RegisterReflectedMethods() : cannot expose mutable reference with a different script layout: {}::{}", type.name, method.GetName());
                 return;
             }
             if (valueReference) {
@@ -1002,7 +1098,7 @@ namespace SR_SCRIPTING_NS {
                 auto argument = Argument(*param.pTypeInfo);
 
                 if (argument.empty() || (param.IsOutput() && AngelScriptBindingHelpers::HasBorrowedView(*param.pTypeInfo))) {
-                    SR_WARN("AngelScriptBindings::RegisterMembers() : AngelScript: unsupported signature {}::{}", type.name, method.GetName());
+                    SR_WARN("AngelScriptBindings::RegisterReflectedMethods() : AngelScript: unsupported signature {}::{}", type.name, method.GetName());
 
                     return;
                 }
@@ -1021,28 +1117,19 @@ namespace SR_SCRIPTING_NS {
                 return;
             }
 
-            auto&& pBinding = static_cast<Call*>(m_pCallsAllocator->Allocate(sizeof(Call), alignof(Call)));
-            new(pBinding) Call(m_pCallsAllocator.Get());
-
-            pBinding->pBindings = this;
-            pBinding->pOwner = &type;
+            auto&& pBinding = AllocateCall(&type);
             pBinding->method = method;
             pBinding->directArguments.reserve(method.GetParamsCount());
             for (uint32_t i = 0; i < method.GetParamsCount(); ++i) {
-                auto&& info = *method.GetParam(i).pTypeInfo;
-                pBinding->directArguments.emplace_back(info.IsArithmetic() || info.IsMath() || info.kind == SR_UTILS_NS::Reflection::TypeKind::String ||
-                    ((info.kind == SR_UTILS_NS::Reflection::TypeKind::Vector || info.kind == SR_UTILS_NS::Reflection::TypeKind::Map || info.kind == SR_UTILS_NS::Reflection::TypeKind::Set) && AngelScriptNativeStorage::Resolve(this, info) == &info));
+                pBinding->directArguments.emplace_back(HasScriptLayout(*method.GetParam(i).pTypeInfo));
             }
             if (method.HasReturn()) {
                 auto&& info = *method.GetReturnType();
-                pBinding->directResult = valueReference || info.IsMath() || info.kind == SR_UTILS_NS::Reflection::TypeKind::String ||
-                    ((info.kind == SR_UTILS_NS::Reflection::TypeKind::Vector || info.kind == SR_UTILS_NS::Reflection::TypeKind::Map || info.kind == SR_UTILS_NS::Reflection::TypeKind::Set) && AngelScriptNativeStorage::Resolve(this, info) == &info);
+                /// арифметика возвращается через SetReturn*, а не по адресу
+                pBinding->directResult = valueReference || (!info.IsArithmetic() && HasScriptLayout(info));
             }
-            pBinding->frames.reserve(32);
-            for (uint32_t i = 0; i < 32; ++i) {
-                pBinding->AddFrame();
-            }
-            m_calls.emplace_back(pBinding);
+            /// остальные кадры создаются при первой рекурсии в Invoke
+            pBinding->AddFrame();
             success &= Check(m_pEngine->RegisterObjectMethod(type.name.c_str(), pDeclaration.c_str(), asFUNCTION(AngelScriptBindingHelpers::Invoke), asCALL_GENERIC, pBinding), pDeclaration);
         });
 
@@ -1310,20 +1397,7 @@ namespace SR_SCRIPTING_NS {
         pCall->GetArgTypeId(index, &flags);
         auto&& pAddress = (flags & asTM_INOUTREF) ? pCall->GetArgAddress(index) : pCall->GetAddressOfArg(index);
         if (expected.kind == SR_UTILS_NS::Reflection::TypeKind::Enum) {
-            auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().TryGetReflector(expected.name);
-            if (!pReflector) {
-                return false;
-            }
-
-            int32_t number = 0;
-            memcpy(&number, pAddress, sizeof(number));
-            if (expected.vtable.lifecycle.size == sizeof(int64_t)) {
-                memcpy(destination.Data(), pAddress, sizeof(int64_t));
-            }
-            else {
-                pReflector->WriteEnumValueToPointerInternal(destination.Data(), number);
-            }
-            return true;
+            return AngelScriptBindingHelpers::ReadEnum(expected, pAddress, destination.Data());
         }
 
         memcpy(destination.Data(), pAddress, expected.GetScalarSize());
@@ -1354,19 +1428,8 @@ namespace SR_SCRIPTING_NS {
             pCall->GetArgTypeId(index, &flags);
             auto&& pAddress = (flags & asTM_INOUTREF) ? pCall->GetArgAddress(index) : pCall->GetAddressOfArg(index);
             if (expected.kind == SR_UTILS_NS::Reflection::TypeKind::Enum) {
-                auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().TryGetReflector(expected.name);
-                int32_t number = 0;
-                memcpy(&number, pAddress, sizeof(number));
-
-                if (!pReflector) {
+                if (!AngelScriptBindingHelpers::ReadEnum(expected, pAddress, result.Data())) {
                     return {};
-                }
-
-                if (expected.vtable.lifecycle.size == sizeof(int64_t)) {
-                    memcpy(result.Data(), pAddress, sizeof(int64_t));
-                }
-                else {
-                    pReflector->WriteEnumValueToPointerInternal(result.Data(), number);
                 }
                 return result;
             }
@@ -1640,17 +1703,8 @@ namespace SR_SCRIPTING_NS {
             }
             if (pInfo->kind == SR_UTILS_NS::Reflection::TypeKind::Enum) {
                 auto result = SR_UTILS_NS::Reflection::Value::CreateDefault(pInfo);
-                auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().TryGetReflector(pInfo->name);
-                if (!pReflector) {
+                if (!AngelScriptBindingHelpers::ReadEnum(*pInfo, pAddress, result.Data())) {
                     return {};
-                }
-                int32_t number = 0;
-                memcpy(&number, pAddress, sizeof(number));
-                if (pInfo->vtable.lifecycle.size == sizeof(int64_t)) {
-                    memcpy(result.Data(), pAddress, sizeof(int64_t));
-                }
-                else {
-                    pReflector->WriteEnumValueToPointerInternal(result.Data(), number);
                 }
                 return result;
             }
@@ -1742,15 +1796,7 @@ namespace SR_SCRIPTING_NS {
         }
 
         if (converted.GetType() == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum) {
-            if (converted.GetTypeInfo().vtable.lifecycle.size == sizeof(int64_t)) {
-                memcpy(pAddress, converted.Data(), sizeof(int64_t));
-                return true;
-            }
-            auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().GetReflector(converted.GetTypeInfo().name);
-            const auto number = static_cast<int32_t>(pReflector->ReadEnumValueFromPointerInternal(converted.Data()));
-            memcpy(pAddress, &number, sizeof(number));
-
-            return true;
+            return AngelScriptBindingHelpers::WriteEnum(converted.GetTypeInfo(), converted.Data(), pAddress);
         }
 
         const auto size = m_pEngine->GetSizeOfPrimitiveType(id);

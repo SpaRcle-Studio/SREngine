@@ -40,6 +40,12 @@ namespace SR_SCRIPTING_NS {
             delete pInstance;
         }
 
+        for (auto&& pContext : m_contextPool) {
+            pContext->Release();
+        }
+
+        m_contextPool.clear();
+
         if (m_pEngine) {
             SR_LOG("AngelScriptRuntime::~AngelScriptRuntime() : shutting down AngelScript.");
             m_pEngine->ShutDownAndRelease();
@@ -287,8 +293,13 @@ namespace SR_SCRIPTING_NS {
     bool AngelScriptRuntime::Execute(asIScriptContext* pContext) const {
         SR_TRACY_ZONE;
     #if defined(SR_ENGINE_ANGELSCRIPT_DEBUGGER)
-        std::lock_guard lock(m_mutex);
-        m_pDebugger->PrepareContext(pContext);
+        /// без подключаемого отладчика блокировка рантайма на время выполнения скрипта не нужна
+        std::unique_lock lock(m_mutex, std::defer_lock);
+
+        if (m_pDebugger->IsListening()) {
+            lock.lock();
+            m_pDebugger->PrepareContext(pContext);
+        }
     #endif
         const auto result = pContext->Execute();
     #if defined(SR_ENGINE_ANGELSCRIPT_DEBUGGER)
@@ -306,6 +317,34 @@ namespace SR_SCRIPTING_NS {
         );
 
         return false;
+    }
+
+    asIScriptContext* AngelScriptRuntime::AcquireContext() {
+        {
+            std::lock_guard lock(m_contextPoolMutex);
+
+            if (!m_contextPool.empty()) {
+                auto&& pContext = m_contextPool.back();
+                m_contextPool.pop_back();
+                return pContext;
+            }
+        }
+
+        return m_pEngine ? m_pEngine->CreateContext() : nullptr;
+    }
+
+    void AngelScriptRuntime::ReleaseContext(asIScriptContext* pContext) {
+        if (!pContext) {
+            return;
+        }
+
+        if (pContext->Unprepare() < 0) {
+            pContext->Release();
+            return;
+        }
+
+        std::lock_guard lock(m_contextPoolMutex);
+        m_contextPool.emplace_back(pContext);
     }
 
     asIScriptObject* AngelScriptRuntime::CreateObject(asIScriptModule* pModule, SR_UTILS_NS::StringAtom name) {
@@ -384,12 +423,23 @@ namespace SR_SCRIPTING_NS {
 
         SR_UTILS_NS::String base = "class ScriptBehaviour : IBehaviour {\n";
 
-        for (auto&& pName : {
-            "SceneObject", "GameObject", "Transform"
-        }) {
-            if (auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(pName)) {
-                const SR_UTILS_NS::String field = SR_UTILS_NS::String(pName) == "SceneObject" ? "sceneObject" : SR_UTILS_NS::String(pName) == "GameObject" ? "gameObject" : "transform";
-                base += SR_UTILS_NS::String(pMeta->GetFactoryName()) + "@ " + field + ";\n";
+        struct SceneField {
+            const char* pType = nullptr;
+            const char* pField = nullptr;
+        };
+
+        static const SceneField sceneFields[] = {
+            { "SceneObject", "sceneObject" },
+            { "GameObject", "gameObject" },
+            { "Transform", "transform" },
+        };
+
+        for (auto&& sceneField : sceneFields) {
+            if (auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(sceneField.pType)) {
+                base += SR_UTILS_NS::String(pMeta->GetFactoryName());
+                base += "@ ";
+                base += sceneField.pField;
+                base += ";\n";
             }
         }
 
@@ -716,6 +766,12 @@ namespace SR_SCRIPTING_NS {
         return m_behaviourNames;
     }
 
+    bool AngelScriptRuntime::HasBehaviour(SR_UTILS_NS::StringAtom name) const {
+        SR_LOCK_GUARD;
+        DiscoverSourceNames();
+        return std::find(m_behaviourNames.begin(), m_behaviourNames.end(), name) != m_behaviourNames.end();
+    }
+
     SR_UTILS_NS::Set<SR_UTILS_NS::Path> AngelScriptRuntime::GetSourceFiles() const {
         SR_LOCK_GUARD;
         return m_sourceFiles;
@@ -777,6 +833,10 @@ namespace SR_SCRIPTING_NS {
 
     SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> AngelScriptRuntime::GetBehaviourNames() const {
         return {};
+    }
+
+    bool AngelScriptRuntime::HasBehaviour(SR_UTILS_NS::StringAtom name) const {
+        return false;
     }
 
     bool AngelScriptRuntime::IsModuleDirty() const {

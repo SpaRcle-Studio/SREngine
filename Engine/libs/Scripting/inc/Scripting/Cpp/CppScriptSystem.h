@@ -66,6 +66,7 @@ namespace SR_SCRIPTING_NS {
         void Start();
         void HandleFileEvent(const SR_UTILS_NS::Path& path);
         SR_NODISCARD SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> GetBehaviourNames() const;
+        SR_NODISCARD bool HasBehaviour(SR_UTILS_NS::StringAtom name) const;
 
     private:
         bool ThreadFunc();

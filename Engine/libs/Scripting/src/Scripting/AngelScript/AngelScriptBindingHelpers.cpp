@@ -186,6 +186,39 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
+        bool ReadEnum(const SR_UTILS_NS::Reflection::TypeInfo& info, const void* pScript, void* pNative) {
+            auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().TryGetReflector(info.name);
+            if (!pReflector) {
+                return false;
+            }
+
+            if (info.vtable.lifecycle.size == sizeof(int64_t)) {
+                memcpy(pNative, pScript, sizeof(int64_t));
+                return true;
+            }
+
+            int32_t number = 0;
+            memcpy(&number, pScript, sizeof(number));
+            pReflector->WriteEnumValueToPointerInternal(pNative, number);
+            return true;
+        }
+
+        bool WriteEnum(const SR_UTILS_NS::Reflection::TypeInfo& info, const void* pNative, void* pScript) {
+            auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().TryGetReflector(info.name);
+            if (!pReflector) {
+                return false;
+            }
+
+            if (info.vtable.lifecycle.size == sizeof(int64_t)) {
+                memcpy(pScript, pNative, sizeof(int64_t));
+                return true;
+            }
+
+            const auto number = static_cast<int32_t>(pReflector->ReadEnumValueFromPointerInternal(pNative));
+            memcpy(pScript, &number, sizeof(number));
+            return true;
+        }
+
         void AddRef(asIScriptGeneric* pCall) {
             static_cast<AngelScriptNativeObject*>(pCall->GetObject())->AddRef();
         }
@@ -376,9 +409,7 @@ namespace SR_SCRIPTING_NS {
 
         void SingletonInstance(asIScriptGeneric* pCall) {
             auto&& pBinding = static_cast<AngelScriptBindings::Call*>(pCall->GetAuxiliary());
-            auto&& name = pBinding->pOwner->pMeta->GetFactoryName();
-            const auto hash = SR_UTILS_NS::SingletonManager::GetOrAddSingletonHashName(name.c_str());
-            auto&& pSingleton = SR_UTILS_NS::GetSingletonManager()->GetSingletonMeta(hash);
+            auto&& pSingleton = SR_UTILS_NS::GetSingletonManager()->GetSingletonMeta(pBinding->singletonHash);
 
             if (!pSingleton) {
                 Exception("Singleton instance is unavailable");
@@ -435,11 +466,8 @@ namespace SR_SCRIPTING_NS {
                 return;
             }
 
-            if (pBinding->activeFrames >= pBinding->frames.size()) {
-                Exception("Prepared native call frames exhausted");
-                return;
-            }
-            auto&& pFrame = pBinding->frames[pBinding->activeFrames];
+            auto&& pFrame = pBinding->activeFrames < pBinding->frames.size() ?
+                pBinding->frames[pBinding->activeFrames] : pBinding->AddFrame();
 
             ++pBinding->activeFrames;
 
@@ -509,7 +537,10 @@ namespace SR_SCRIPTING_NS {
                 if (!pBinding->method.IsReturnsReference()) {
                     pFrame->result = pBinding->pResultPool->Acquire();
                     if (!pFrame->result) {
-                        Exception("Prepared native result storage exhausted");
+                        pFrame->result = SR_UTILS_NS::Reflection::Value::CreateDefault(pBinding->method.GetReturnType());
+                    }
+                    if (!pFrame->result) {
+                        Exception("Native result storage cannot be created");
                         return;
                     }
                 }
@@ -555,13 +586,10 @@ namespace SR_SCRIPTING_NS {
                 }
                 else if (pBinding->method.IsOutputParam(i)) {
                     if (arguments[i].GetType() == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum) {
-                        if (arguments[i].GetTypeInfo().vtable.lifecycle.size == sizeof(int64_t)) {
-                            memcpy(pCall->GetArgAddress(i), arguments[i].Data(), sizeof(int64_t));
-                            continue;
+                        if (!WriteEnum(arguments[i].GetTypeInfo(), arguments[i].Data(), pCall->GetArgAddress(i))) {
+                            Exception("Unregistered engine enum");
+                            return;
                         }
-                        auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().GetReflector(arguments[i].GetTypeInfo().name);
-                        const auto number = static_cast<int32_t>(pReflector->ReadEnumValueFromPointerInternal(arguments[i].Data()));
-                        memcpy(pCall->GetArgAddress(i), &number, sizeof(number));
                         continue;
                     }
 
@@ -632,7 +660,7 @@ namespace SR_SCRIPTING_NS {
             SR_TRACY_ZONE;
             auto&& pObject = static_cast<AngelScriptNativeObject*>(pCall->GetObject());
             auto&& pBindings = pObject->pBindings;
-            const SR_UTILS_NS::StringView operation(pCall->GetFunction()->GetName());
+            const auto operation = static_cast<AngelScriptBindings::Call*>(pCall->GetAuxiliary())->operation;
 
             if (!pObject->IsAlive()) {
                 Exception("Engine object has been destroyed");
@@ -641,25 +669,25 @@ namespace SR_SCRIPTING_NS {
 
             auto&& value = pObject->value;
             const bool dynamic = value.GetType() == SR_UTILS_NS::Reflection::ReflectedCategoryType::Value;
-            if (value.IsConst() && operation != "get" && operation != "hasValue") {
+            if (value.IsConst() && operation != AngelScriptBindings::Operation::Get && operation != AngelScriptBindings::Operation::HasValue) {
                 Exception("Cannot modify a const native view");
                 return;
             }
 
             if (dynamic) {
                 auto&& payload = *value.Cast<SR_UTILS_NS::Reflection::Value>();
-                if (operation == "hasValue") {
+                if (operation == AngelScriptBindings::Operation::HasValue) {
                     pCall->SetReturnByte(static_cast<bool>(payload));
                     return;
                 }
-                if (operation == "reset") {
+                if (operation == AngelScriptBindings::Operation::Reset) {
                     payload = {};
                     return;
                 }
 
                 const auto id = pCall->GetArgTypeId(0);
                 auto&& pAddress = pCall->GetArgAddress(0);
-                if (operation == "set") {
+                if (operation == AngelScriptBindings::Operation::Set) {
                     if (id & asTYPEID_SCRIPTOBJECT) {
                         Exception("Script objects cannot be stored in a native Value");
                         return;
@@ -751,9 +779,9 @@ namespace SR_SCRIPTING_NS {
                         return;
                     }
                     if (payload.GetType() == SR_UTILS_NS::Reflection::ReflectedCategoryType::Enum) {
-                        auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().GetReflector(payload.GetTypeInfo().name);
-                        const auto number = static_cast<int32_t>(pReflector->ReadEnumValueFromPointerInternal(payload.Data()));
-                        memcpy(pAddress, &number, sizeof(number));
+                        if (!WriteEnum(payload.GetTypeInfo(), payload.Data(), pAddress)) {
+                            return;
+                        }
                     }
                     else {
                         memcpy(pAddress, payload.Data(), payload.SizeOf());
@@ -764,13 +792,13 @@ namespace SR_SCRIPTING_NS {
             }
 
             if (auto&& pOptional = value.GetOptionalBase()) {
-                if (operation == "hasValue") {
+                if (operation == AngelScriptBindings::Operation::HasValue) {
                     pCall->SetReturnByte(pOptional->HasValue());
                 }
-                else if (operation == "reset") {
+                else if (operation == AngelScriptBindings::Operation::Reset) {
                     pOptional->Reset();
                 }
-                else if (operation == "get") {
+                else if (operation == AngelScriptBindings::Operation::Get) {
                     if (!pOptional->HasValue()) {
                         Exception("Optional has no value");
                         return;
@@ -790,10 +818,10 @@ namespace SR_SCRIPTING_NS {
 
             auto&& pEntity = dynamic_cast<SR_UTILS_NS::EntityRefBase*>(value.GetSRClass());
             auto&& pResource = dynamic_cast<SR_UTILS_NS::ResourceRefBase*>(value.GetSRClass());
-            if (operation == "hasValue") {
+            if (operation == AngelScriptBindings::Operation::HasValue) {
                 pCall->SetReturnByte(pEntity ? pEntity->GetEntity().Valid() : pResource->IsValid());
             }
-            else if (operation == "reset") {
+            else if (operation == AngelScriptBindings::Operation::Reset) {
                 if (pEntity) {
                     pEntity->SetEntityId(SR_ID_INVALID);
                 }
@@ -801,14 +829,12 @@ namespace SR_SCRIPTING_NS {
                     pResource->ResetResource();
                 }
             }
-            else if (operation == "ForceLoad") {
-                if (pEntity) {
-                }
-                else {
+            else if (operation == AngelScriptBindings::Operation::ForceLoad) {
+                if (pResource) {
                     pResource->ForceLoad();
                 }
             }
-            else if (operation == "setId") {
+            else if (operation == AngelScriptBindings::Operation::SetId) {
                 if (pEntity) {
                     pEntity->SetEntityId(pCall->GetArgQWord(0));
                 }
@@ -844,32 +870,35 @@ namespace SR_SCRIPTING_NS {
             }
 
             auto&& value = pObject->value;
-            const SR_UTILS_NS::StringView operation(pCall->GetFunction()->GetName());
+            const auto operation = pBinding->operation;
+            const bool readOnly = operation == AngelScriptBindings::Operation::Size ||
+                operation == AngelScriptBindings::Operation::Contains ||
+                operation == AngelScriptBindings::Operation::At;
 
-            if (value.IsConst() && operation != "size" && operation != "contains" && operation != "at") {
+            if (value.IsConst() && !readOnly) {
                 Exception("Cannot modify a const container");
                 return;
             }
 
             if (const auto array = value.AsArray()) {
-                if (operation == "size") {
+                if (operation == AngelScriptBindings::Operation::Size) {
                     pCall->SetReturnDWord(static_cast<asDWORD>(array.Size()));
                     return;
                 }
 
-                if (operation == "clear") {
+                if (operation == AngelScriptBindings::Operation::Clear) {
                     array.Clear();
                     return;
                 }
 
-                if (operation == "resize") {
+                if (operation == AngelScriptBindings::Operation::Resize) {
                     array.Resize(pCall->GetArgDWord(0));
                     return;
                 }
 
                 auto&& pElement = array.GetElementType();
 
-                if (operation == "pushBack") {
+                if (operation == AngelScriptBindings::Operation::PushBack) {
                     auto source = pBinding->pBindings->Read(pCall, 0, *pElement);
                     if (!source) {
                         Exception("Invalid vector element");
@@ -887,13 +916,13 @@ namespace SR_SCRIPTING_NS {
                     return;
                 }
 
-                if (operation == "at") {
+                if (operation == AngelScriptBindings::Operation::At) {
                     // Return a copy: no script handle may retain a reference invalidated by resize/erase.
                     pBinding->pBindings->Return(pCall, pBinding->pBindings->CopyValue(array.At(index).ToValue()));
                     return;
                 }
 
-                if (operation == "set") {
+                if (operation == AngelScriptBindings::Operation::Set) {
                     auto destination = array.At(index).ToValue();
                     auto source = pBinding->pBindings->Read(pCall, 1, *pElement);
 
@@ -910,12 +939,12 @@ namespace SR_SCRIPTING_NS {
                 return;
             }
 
-            if (operation == "size") {
+            if (operation == AngelScriptBindings::Operation::Size) {
                 pCall->SetReturnDWord(static_cast<asDWORD>(map.Size()));
                 return;
             }
 
-            if (operation == "clear") {
+            if (operation == AngelScriptBindings::Operation::Clear) {
                 map.Clear();
                 return;
             }
@@ -927,17 +956,17 @@ namespace SR_SCRIPTING_NS {
                 return;
             }
 
-            if (operation == "contains") {
+            if (operation == AngelScriptBindings::Operation::Contains) {
                 pCall->SetReturnByte(map.Contains(key.AsRef()));
                 return;
             }
 
-            if (operation == "erase") {
+            if (operation == AngelScriptBindings::Operation::Erase) {
                 map.Erase(key.AsRef());
                 return;
             }
 
-            if (operation == "at") {
+            if (operation == AngelScriptBindings::Operation::At) {
                 const auto found = map.Find(key.AsRef());
                 if (!found) {
                     Exception("Map key not found");
@@ -974,19 +1003,19 @@ namespace SR_SCRIPTING_NS {
             const SR_UTILS_NS::StringView text = pBinding->pOwner->pTypeInfo->kind == SR_UTILS_NS::Reflection::TypeKind::String ?
                 static_cast<const SR_UTILS_NS::String*>(pCall->GetObject())->ToStringView() :
                 *static_cast<const SR_UTILS_NS::StringView*>(pCall->GetObject());
-            const SR_UTILS_NS::StringView operation(pCall->GetFunction()->GetName());
+            const auto operation = pBinding->operation;
 
-            if (operation == "length" || operation == "size") {
+            if (operation == AngelScriptBindings::Operation::Size) {
                 pCall->SetReturnDWord(static_cast<asDWORD>(text.size()));
                 return;
             }
 
-            if (operation == "empty") {
+            if (operation == AngelScriptBindings::Operation::Empty) {
                 pCall->SetReturnByte(text.empty());
                 return;
             }
 
-            if (operation == "byteAt" || operation == "opIndex") {
+            if (operation == AngelScriptBindings::Operation::ByteAt || operation == AngelScriptBindings::Operation::Index) {
                 const auto index = pCall->GetArgDWord(0);
                 if (index >= text.size()) {
                     Exception("String byte index out of bounds");
@@ -996,7 +1025,7 @@ namespace SR_SCRIPTING_NS {
                 return;
             }
 
-            if (operation == "substring" || operation == "substr") {
+            if (operation == AngelScriptBindings::Operation::Substring) {
                 const auto begin = pCall->GetArgDWord(0);
                 const auto requestedCount = pCall->GetArgDWord(1);
                 if (begin > text.size()) {
@@ -1012,8 +1041,9 @@ namespace SR_SCRIPTING_NS {
                 return;
             }
 
-            if (operation == "graphemeCount") {
-                SR_UTILS_NS::Vector<SR_UTILS_NS::Localization::GraphemeCodepoint> codepoints;
+            if (operation == AngelScriptBindings::Operation::GraphemeCount) {
+                /// буфер переиспользуется: graphemeCount вызывается из покадровых скриптов
+                static thread_local SR_UTILS_NS::Vector<SR_UTILS_NS::Localization::GraphemeCodepoint> codepoints;
                 uint32_t count = 0;
                 if (!SR_UTILS_NS::Localization::DecodeGraphemes(text, codepoints, count)) {
                     Exception("Invalid UTF-8 string");
@@ -1034,32 +1064,36 @@ namespace SR_SCRIPTING_NS {
                 static_cast<const SR_UTILS_NS::String*>(pArgument)->ToStringView() :
                 *static_cast<const SR_UTILS_NS::StringView*>(pArgument);
 
-            if (operation == "opEquals") {
-                pCall->SetReturnByte(text == rhs);
-            }
-            else if (operation == "opAdd") {
-                new (pCall->GetAddressOfReturnLocation()) SR_UTILS_NS::String(SR_UTILS_NS::String(text) + rhs);
-            }
-            else if (operation == "starts_with") {
-                pCall->SetReturnByte(text.starts_with(rhs));
-            }
-            else if (operation == "ends_with") {
-                pCall->SetReturnByte(rhs.empty() || text.ends_with(rhs));
-            }
-            else if (operation == "contains") {
-                pCall->SetReturnByte(text.contains(rhs));
-            }
-            else if (operation == "opCmp") {
-                pCall->SetReturnDWord(static_cast<asDWORD>(text < rhs ? -1 : (text > rhs ? 1 : 0)));
-            }
-            else if (operation == "find" || operation == "find_last_of") {
-                const auto begin = pCall->GetArgDWord(1);
-                const auto position = operation == "find" ? text.find(rhs, begin) :
-                    text.find_last_of(rhs, begin == UINT32_MAX ? SR_UTILS_NS::StringView::npos : begin);
-                pCall->SetReturnQWord(position == SR_UTILS_NS::StringView::npos ? static_cast<asQWORD>(-1) : static_cast<asQWORD>(position));
-            }
-            else {
-                Exception("Unsupported string operation");
+            switch (operation) {
+                case AngelScriptBindings::Operation::Equals:
+                    pCall->SetReturnByte(text == rhs);
+                    break;
+                case AngelScriptBindings::Operation::Add:
+                    new (pCall->GetAddressOfReturnLocation()) SR_UTILS_NS::String(SR_UTILS_NS::String(text) + rhs);
+                    break;
+                case AngelScriptBindings::Operation::StartsWith:
+                    pCall->SetReturnByte(text.starts_with(rhs));
+                    break;
+                case AngelScriptBindings::Operation::EndsWith:
+                    pCall->SetReturnByte(rhs.empty() || text.ends_with(rhs));
+                    break;
+                case AngelScriptBindings::Operation::Contains:
+                    pCall->SetReturnByte(text.contains(rhs));
+                    break;
+                case AngelScriptBindings::Operation::Compare:
+                    pCall->SetReturnDWord(static_cast<asDWORD>(text < rhs ? -1 : (text > rhs ? 1 : 0)));
+                    break;
+                case AngelScriptBindings::Operation::Find:
+                case AngelScriptBindings::Operation::FindLastOf: {
+                    const auto begin = pCall->GetArgDWord(1);
+                    const auto position = operation == AngelScriptBindings::Operation::Find ? text.find(rhs, begin) :
+                        text.find_last_of(rhs, begin == UINT32_MAX ? SR_UTILS_NS::StringView::npos : begin);
+                    pCall->SetReturnQWord(position == SR_UTILS_NS::StringView::npos ? static_cast<asQWORD>(-1) : static_cast<asQWORD>(position));
+                    break;
+                }
+                default:
+                    Exception("Unsupported string operation");
+                    break;
             }
         }
     }

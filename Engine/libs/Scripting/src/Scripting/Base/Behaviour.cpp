@@ -243,9 +243,7 @@ namespace SR_SCRIPTING_NS {
         if (IsInstanceValid() || m_behaviourName.empty()) {
             return;
         }
-        auto&& system = ScriptSystem::Instance();
-        const auto names = system.GetBehaviourNames();
-        if (std::find(names.begin(), names.end(), m_behaviourName) == names.end()) {
+        if (!ScriptSystem::Instance().HasBehaviour(m_behaviourName)) {
             return;
         }
         SetBehaviourName(m_behaviourName);

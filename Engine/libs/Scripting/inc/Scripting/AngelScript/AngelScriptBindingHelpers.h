@@ -24,6 +24,10 @@ namespace SR_SCRIPTING_NS::AngelScriptBindingHelpers {
     SR_UTILS_NS::String Identifier(const SR_UTILS_NS::Reflection::TypeInfo& info);
     /// Встроенный скалярный тип для примитивного typeId AngelScript, nullptr для остальных
     const SR_UTILS_NS::Reflection::TypeInfo* GetPrimitiveTypeInfo(int32_t typeId);
+    /// enum из скриптового представления (int32 или int64) в нативное хранилище
+    bool ReadEnum(const SR_UTILS_NS::Reflection::TypeInfo& info, const void* pScript, void* pNative);
+    /// enum из нативного хранилища в скриптовое представление (int32 или int64)
+    bool WriteEnum(const SR_UTILS_NS::Reflection::TypeInfo& info, const void* pNative, void* pScript);
     void AddRef(asIScriptGeneric* pCall);
     void Release(asIScriptGeneric* pCall);
     SR_UTILS_NS::Reflection::Value ShareObject(SR_UTILS_NS::SRClass* pObject);

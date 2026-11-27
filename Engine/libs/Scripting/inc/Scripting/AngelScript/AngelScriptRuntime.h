@@ -43,6 +43,7 @@ namespace SR_SCRIPTING_NS {
         SR_NODISCARD bool IsAvailable() const;
         SR_NODISCARD bool IsInitializing() const { return m_initializing; }
         SR_NODISCARD SR_UTILS_NS::Vector<SR_UTILS_NS::StringAtom> GetBehaviourNames() const;
+        SR_NODISCARD bool HasBehaviour(SR_UTILS_NS::StringAtom name) const;
         SR_NODISCARD BehaviourInstance* AllocateBehaviourInstance(SR_UTILS_NS::StringAtom name);
 
         void FreeBehaviourInstance(BehaviourInstance* pInstance);
@@ -57,6 +58,10 @@ namespace SR_SCRIPTING_NS {
         }
 
         bool Execute(asIScriptContext* pContext) const;
+
+        /// контексты переиспользуются всеми поведениями, вложенные вызовы берут следующий свободный
+        SR_NODISCARD asIScriptContext* AcquireContext();
+        void ReleaseContext(asIScriptContext* pContext);
     #endif
 
     private:
@@ -84,6 +89,8 @@ namespace SR_SCRIPTING_NS {
         asIScriptModule* m_pModule = nullptr;
         AngelScriptBindings* m_pBindings = nullptr;
         AngelScriptDebugger* m_pDebugger = nullptr;
+        std::mutex m_contextPoolMutex;
+        SR_UTILS_NS::Vector<asIScriptContext*> m_contextPool;
     #endif
     };
 }

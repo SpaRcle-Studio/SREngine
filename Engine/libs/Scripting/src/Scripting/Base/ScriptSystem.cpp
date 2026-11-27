@@ -241,20 +241,14 @@ namespace SR_SCRIPTING_NS {
             return nullptr;
         }
 
-        if (m_angelScriptSystem) {
-            const auto asNames = m_angelScriptSystem->GetBehaviourNames();
+        if (m_angelScriptSystem && m_angelScriptSystem->HasBehaviour(name)) {
+            if (m_cppSystem->HasBehaviour(name)) {
+                SR_ERROR("ScriptSystem::AllocateBehaviourInstance() : behaviour name must be globally unique: {}", name);
 
-            if (std::find(asNames.begin(), asNames.end(), name) != asNames.end()) {
-                const auto cppNames = m_cppSystem->GetBehaviourNames();
-
-                if (std::find(cppNames.begin(), cppNames.end(), name) != cppNames.end()) {
-                    SR_ERROR("ScriptSystem::AllocateBehaviourInstance() : behaviour name must be globally unique: {}", name);
-
-                    return nullptr;
-                }
-
-                return m_angelScriptSystem->AllocateBehaviourInstance(name);
+                return nullptr;
             }
+
+            return m_angelScriptSystem->AllocateBehaviourInstance(name);
         }
 
         return m_cppSystem->GetModuleManager()->AllocateBehaviourInstance(name);
@@ -287,5 +281,12 @@ namespace SR_SCRIPTING_NS {
         }
 
         return names;
+    }
+
+    bool ScriptSystem::HasBehaviour(SR_UTILS_NS::StringAtom name) const {
+        SR_TRACY_ZONE;
+
+        return (m_cppSystem && m_cppSystem->HasBehaviour(name)) ||
+            (m_angelScriptSystem && m_angelScriptSystem->HasBehaviour(name));
     }
 }

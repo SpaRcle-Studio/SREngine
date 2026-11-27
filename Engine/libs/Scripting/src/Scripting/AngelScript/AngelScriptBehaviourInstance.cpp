@@ -19,7 +19,7 @@
 
 namespace SR_SCRIPTING_NS {
     bool AngelScriptBehaviourInstance::IsSceneField(const char* pName) {
-        const SR_UTILS_NS::StringAtom field(pName);
+        const SR_UTILS_NS::StringView field(pName);
 
         return field == "sceneObject" || field == "gameObject" || field == "transform";
     }
@@ -42,13 +42,10 @@ namespace SR_SCRIPTING_NS {
 
         SRAssert2(m_contextDepth == 0, "AngelScriptBehaviourInstance::~AngelScriptBehaviourInstance() : cannot destroy an executing behaviour!");
 
-        for (auto&& pContext : m_contexts) {
-            if (pContext) {
-                pContext->Release();
-            }
+        if (m_pCollisionData) {
+            m_pCollisionData->Release();
+            m_pCollisionData = nullptr;
         }
-
-        m_contexts.clear();
 
         if (m_pObject) {
             m_pObject->Release();
@@ -92,13 +89,6 @@ namespace SR_SCRIPTING_NS {
 
         SRAssert2(m_contextDepth == 0, "AngelScriptBehaviourInstance::SetInstance() : cannot replace an executing behaviour!");
 
-        for (auto&& pContext : m_contexts) {
-            if (pContext) {
-                pContext->Release();
-            }
-        }
-
-        m_contexts.clear();
         m_meta.properties.clear();
         m_eventMethods.clear();
 
@@ -219,13 +209,9 @@ namespace SR_SCRIPTING_NS {
                 m_pMethods[index] = m_pObject->GetObjectType()->GetMethodByDecl(pCollisionDeclarations[i]);
             }
         }
-
-        m_contexts.emplace_back(m_pRuntime->GetEngine()->CreateContext());
     }
 
     bool AngelScriptBehaviourInstance::Invoke(Callback callback, const void* pArgument, bool floating, bool* pReturnValue) const {
-        SR_TRACY_ZONE;
-
         if (!m_pObject) {
             return false;
         }
@@ -258,11 +244,7 @@ namespace SR_SCRIPTING_NS {
 
     bool AngelScriptBehaviourInstance::ExecuteMethod(asIScriptFunction* pMethod, const void* pArgument, bool floating, bool* pReturnValue) const {
         SR_TRACY_ZONE;
-        if (m_contextDepth == m_contexts.size()) {
-            m_contexts.emplace_back(m_pRuntime->GetEngine()->CreateContext());
-        }
-
-        asIScriptContext* pContext = m_contexts[m_contextDepth];
+        auto&& pContext = m_pRuntime->AcquireContext();
 
         if (!pContext) {
             return false;
@@ -284,7 +266,7 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
-        pContext->Unprepare();
+        m_pRuntime->ReleaseContext(pContext);
 
         --m_contextDepth;
 
@@ -312,7 +294,7 @@ namespace SR_SCRIPTING_NS {
         const auto gameObject = object ? object.DynamicCast<SR_UTILS_NS::GameObject>() : SR_UTILS_NS::GameObject::Ptr();
 
         for (uint32_t i = 0; i < m_pObject->GetPropertyCount(); ++i) {
-            const SR_UTILS_NS::StringAtom name(m_pObject->GetPropertyName(i));
+            const SR_UTILS_NS::StringView name(m_pObject->GetPropertyName(i));
 
             if (name == "sceneObject") {
                 m_pRuntime->GetBindings()->WriteProperty(m_pObject, i, SR_UTILS_NS::Reflection::Value::Create(SR_UTILS_NS::SceneObject::Ptr(object)));
@@ -539,16 +521,25 @@ namespace SR_SCRIPTING_NS {
         }
 
         if (m_typedCollisions[index - static_cast<uint32_t>(Callback::OnCollisionEnter)]) {
-            ScriptCollisionData snapshot;
-            snapshot.point = data.point;
-            snapshot.impulse = data.impulse;
-
-            auto&& pObject = m_pRuntime->GetBindings()->Wrap(SR_UTILS_NS::Reflection::Value::Create(std::move(snapshot)));
-
-            if (pObject) {
-                Invoke(callback, pObject);
-                pObject->Release();
+            /// скрипт сохранил ссылку на прошлые данные (или это вложенный вызов) - перезаписывать нельзя
+            if (m_pCollisionData && m_pCollisionData->references > 1) {
+                m_pCollisionData->Release();
+                m_pCollisionData = nullptr;
             }
+
+            if (!m_pCollisionData) {
+                m_pCollisionData = m_pRuntime->GetBindings()->Wrap(SR_UTILS_NS::Reflection::Value::Create(ScriptCollisionData()));
+            }
+
+            if (!m_pCollisionData) {
+                return;
+            }
+
+            auto&& pSnapshot = m_pCollisionData->value.Cast<ScriptCollisionData>();
+            pSnapshot->point = data.point;
+            pSnapshot->impulse = data.impulse;
+
+            Invoke(callback, m_pCollisionData);
 
             return;
         }
