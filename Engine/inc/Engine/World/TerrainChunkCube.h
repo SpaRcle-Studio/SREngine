@@ -82,7 +82,9 @@ namespace SR_CORE_NS {
         void RevealHiddenChunks();
         /// Пересобирает множества незагруженных и неготовых чанков (для IsReady/IsAreaLoaded)
         void UpdateChunkSets();
-        SR_NODISCARD uint8_t GetMaxLevel() const noexcept { return static_cast<uint8_t>(std::min<uint32_t>(m_lodLevels, 12)); }
+        SR_NODISCARD uint8_t GetMaxLevel() const noexcept {
+            return static_cast<uint8_t>(std::min<uint32_t>(m_lodLevels, 12));
+        }
         SR_NODISCARD const SR_MATH_NS::OctreeNodeSet& GetReplacedSet() const;
         /// Чанк перестал быть нужен: видимый остаётся до загрузки замены, скрытый освобождается сразу
         void RetireChunk(const TerrainChunkCube::Ptr& pChunk);

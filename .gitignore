@@ -1,100 +1,108 @@
+# ---------- IDE и редакторы ----------
+.idea
+.vs
+/.vscode
+.cache/
 Zig.iml
 CMakeLists.txt.user
-CMakeCache.txt
-CMakeFiles
-CMakeScripts
-Testing
-Makefile
-cmake_install.cmake
-install_manifest.txt
-compile_commands.json
-CTestTestfile.cmake
-cmake-build-debug
-.idea
-*.blend1
-_deps
-/cmake-build-release/
-/cmake-build-*/*
-/build/
-/Platform/Android/.gradle
-/Platform/Android/app/build
-/Platform/Android/app/.cxx
-/Platform/Android/android-sdk
-out
-.vs
-Build
 /CMakeSettings.json
-/Platform/Android/app/src/main/assets
-/Platform/Android/local.properties
-.cache/
 **/#*#
 **/GPATH
 **/GRTAGS
 **/GTAGS
-venv
-.venv
-/Platform/Android/cmdline-tools.zip
-/Platform/Android/app/src/main/jniLibs
-/Platform/Android/app/src/main/obj
-/CI/scripts/__pycache__
-site
 
-/Platform/Android/app/codegen.spec
-/Engine/appicon.aps
-/Platform/Emscripten/emsdk
+# ---------- CMake и папки сборки ----------
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+CTestTestfile.cmake
+cmake_install.cmake
+compile_commands.json
+install_manifest.txt
+Makefile
+Testing
+_deps
+out
+cmake-build-debug
+/cmake-build-*/
+/build/
 
-.flatpak-builder/
-
-/Platform/Emscripten/codegen.spec
-/Platform/Emscripten/ninja.exe
+# ---------- Кодоген (PyInstaller) ----------
 codegen.spec
 
-/Platform/Android/app/src/main/res/drawable/ic_launcher_background.xml
-/Platform/Android/app/src/main/res/drawable-v24/ic_launcher_foreground.png
-/Platform/Android/app/src/main/res/mipmap-mdpi
-/Platform/Android/app/src/main/res/mipmap-xhdpi
-/Platform/Android/app/src/main/res/mipmap-xxhdpi
-/Platform/Android/app/src/main/res/mipmap-xxxhdpi
-/Platform/Android/app/src/main/res/drawable
-/Platform/Android/app/src/main/res/drawable-v24
-/Platform/Android/app/src/main/res/mipmap-hdpi
+# ---------- Python ----------
+__pycache__/
+venv
+.venv
+
+# ---------- Claude Code (личные настройки и worktree агентов) ----------
+/.claude/settings.local.json
+/.claude/worktrees/
+
+# ---------- CI: локальные артефакты ----------
 /CI/trace.json
 /CI/clean_metadata.log
+/CI/link.exe
+/CI/dumpbin.exe
 
+# ---------- Сайт документации (mkdocs) ----------
+site
 
+# ---------- Engine ----------
+/Engine/appicon.aps
 
+# ---------- Resources: генерируется движком, кодогеном и сборкой ----------
 Resources/**/*.so
-/Resources/Engine/Utilities/engine-code-structure.pkl
-/Resources/Engine/Utilities/codegen
 /Resources/API
+/Resources/as.predefined
+/Resources/Cache/
+/Resources/CMakeLists.txt
+/Resources/Packed
+/Resources/Samples
+/Resources/Scripts/Libraries/
 /Resources/Engine/ModuleTests/SRSL/Result
 /Resources/Engine/SREngine.dll
 /Resources/Engine/SREngine.obj
 /Resources/Engine/SREngine.pdb
 /Resources/Engine/vc140.pdb
-/Resources/Samples
+/Resources/Engine/Utilities/codegen
 /Resources/Engine/Utilities/codegen.exe
+/Resources/Engine/Utilities/codegen.lock
+/Resources/Engine/Utilities/engine-code-structure.pkl
 /Resources/Engine/Utilities/libclang.dll
-/Resources/Engine/Utilities/libclang.so
-/Resources/Cache/
-/Resources/Scripts/Libraries/Standard/
-/Resources/Scripts/Libraries/
-/Resources/Cache
-/Resources/CMakeLists.txt
-/Platform/Emscripten/Bin/SREngine.js
-/Platform/Emscripten/Bin/SREngine.wasm
+/Resources/Engine/Utilities/pack_resources.exe
+/Resources/Engine/Utilities/tracy
+
+# ---------- Платформа: Android ----------
+/Platform/Android/.gradle
+/Platform/Android/android-sdk
+/Platform/Android/cmdline-tools.zip
+/Platform/Android/local.properties
+/Platform/Android/app/.cxx
+/Platform/Android/app/build
+/Platform/Android/app/src/main/assets
+/Platform/Android/app/src/main/jniLibs
+/Platform/Android/app/src/main/obj
+/Platform/Android/app/src/main/res/drawable
+/Platform/Android/app/src/main/res/drawable-v24
+/Platform/Android/app/src/main/res/mipmap-hdpi
+/Platform/Android/app/src/main/res/mipmap-mdpi
+/Platform/Android/app/src/main/res/mipmap-xhdpi
+/Platform/Android/app/src/main/res/mipmap-xxhdpi
+/Platform/Android/app/src/main/res/mipmap-xxxhdpi
+
+# ---------- Платформа: Emscripten ----------
+/Platform/Emscripten/build/
+/Platform/Emscripten/emsdk
+/Platform/Emscripten/ninja.exe
 /Platform/Emscripten/Bin/Resources
 /Platform/Emscripten/Bin/SREngine.data
-/cmake-build-debug-visual-studio
-/cmake-build-debug-emscripten
-/Resources/Engine/Utilities/pack_resources.exe
-/Resources/Packed
-/cmake-build-release-visual-studio
-/CI/link.exe
-/CI/dumpbin.exe
-/Resources/Engine/Utilities/codegen.lock
-/.vscode
+/Platform/Emscripten/Bin/SREngine.js
 /Platform/Emscripten/Bin/SREngine.manifest.json
-/Resources/as.predefined
-/Resources/Engine/Utilities/tracy
-/cmake-build-release-monolithic
+/Platform/Emscripten/Bin/SREngine.wasm
+
+# ---------- Платформа: Flatpak ----------
+.flatpak-builder/
+
+# ---------- Ассеты ----------
+*.blend1

@@ -66,11 +66,11 @@ namespace SR_PHYSICS_NS {
         virtual bool CreateDynamicWorld();
 
     private:
-        std::vector<RigidbodyPtr> m_rigidbodyToRemove;
-        std::vector<RigidbodyPtr> m_rigidbodyToRegister;
+        SR_UTILS_NS::Vector<RigidbodyPtr> m_rigidbodyToRemove;
+        SR_UTILS_NS::Vector<RigidbodyPtr> m_rigidbodyToRegister;
 
-        std::vector<CharacterControllerPtr> m_characterControllersToRemove;
-        std::vector<CharacterControllerPtr> m_characterControllersToRegister;
+        SR_UTILS_NS::Vector<CharacterControllerPtr> m_characterControllersToRemove;
+        SR_UTILS_NS::Vector<CharacterControllerPtr> m_characterControllersToRegister;
 
         ScenePtr m_scene;
 

@@ -426,7 +426,7 @@ namespace SR_CORE_NS {
         SRAssert2(slot.pHashTableSSBO && slot.pHashTableSSBO->GetCapacity() >=3ull * m_slotsDensityCountAxis * m_slotsDensityCountAxis * m_slotsDensityCountAxis * sizeof(uint32_t),
             "TerrainChunkDataMarchingCubesGenerator::DispatchSlot() : edge table is smaller than the edges count of the chunk grid!");
 
-        auto* pCubeChunk = &chunk;
+        auto&& pCubeChunk = &chunk;
         auto&& position = pCubeChunk->GetPosition();
         const int32_t lodScale = pCubeChunk->GetLodScale();
         const uint32_t groups = (m_slotsDensityCountAxis + 7) / 8;
@@ -456,7 +456,7 @@ namespace SR_CORE_NS {
                             const SR_MATH_NS::IVector3 point = origin + SR_MATH_NS::IVector3(x, y, z) * lodScale;
                             const float_t offset = terrain.GetDensityOffset(point);
                             m_densityOffsets[(static_cast<uint64_t>(z) * axis + y) * axis + x] = offset;
-                            hasDensityOffsets |= offset != 0.f;
+                            hasDensityOffsets |= !SR_EQUALS(offset, 0.f);
                         }
                     }
                 }
@@ -559,7 +559,7 @@ namespace SR_CORE_NS {
         SR_TRACY_ZONE;
 
         ITerrainChunk& chunk = cubeChunk;
-        auto* pCubeChunk = &cubeChunk;
+        auto&& pCubeChunk = &cubeChunk;
 
         auto&& pChunkGenerator = terrain.GetChunkGenerator();
         if (!pChunkGenerator || !chunk.GetData()) {

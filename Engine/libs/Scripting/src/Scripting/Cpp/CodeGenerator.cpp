@@ -267,6 +267,11 @@ namespace SR_SCRIPTING_NS {
 
             cmakeContent += "\t\tendif()\n";
 
+            /// Флаг движка задан в CMAKE_CXX_FLAGS области Engine и сюда не доходит, а fmt без него не собирается
+            cmakeContent += "\t\tif (MSVC)\n";
+            cmakeContent += "\t\t\ttarget_compile_options(SCRIPT_MODULE_{} PRIVATE /utf-8)\n"_format(module.moduleInfo.moduleName);
+            cmakeContent += "\t\tendif()\n";
+
             SR_UTILS_NS::Path moduleFolder = module.path.GetFolder();
             SR_UTILS_NS::VFS::Instance().ResolvePath(moduleFolder, SR_UTILS_NS::FileMode::Read);
             cmakeContent += "\t\ttarget_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, moduleFolder);
