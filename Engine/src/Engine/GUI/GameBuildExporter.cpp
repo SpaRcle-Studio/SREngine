@@ -110,6 +110,10 @@ namespace SR_CORE_GUI_NS {
             m_runtime.Report("No active build profile.", true);
             return false;
         }
+        /// Unsaved settings are lost when the project file is reloaded, e.g. by the asset inspector.
+        if (!m_pProjectSettings->SaveAsset()) {
+            SR_WARN("GameBuildExporter::Build() : failed to save project settings.");
+        }
         SR_HTYPES_NS::SharedPtr<GameBuildJob> job = new GameBuildJob(m_pProjectSettings);
         job->onStatus = [this](SR_UTILS_NS::String text, bool error) {
             m_runtime.Report(std::move(text), error);
@@ -295,6 +299,12 @@ namespace SR_CORE_GUI_NS {
             BuildField("Organization", [&]() {
                 SR_IMMEDIATE_GUI_NS::InputText("##value", &profile->organization);
             });
+            BuildField("Icon", [&]() {
+                SR_IMMEDIATE_GUI_NS::InputText("##value", &profile->iconPath.GetInternalUnsafeString());
+            });
+            SR_IMMEDIATE_GUI_NS::TextWrapped("Square image relative to the resources folder (512x512 or larger). "
+                "Embedded into the Windows executable (export from Windows) and replaces the Android launcher icon. "
+                "Leave empty to keep the default icon.");
             BuildField("Output directory", [&]() {
                 SR_IMMEDIATE_GUI_NS::InputText("##value", &profile->outputPath.GetInternalUnsafeString());
             });

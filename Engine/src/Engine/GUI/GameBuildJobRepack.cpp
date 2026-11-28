@@ -4,7 +4,12 @@
 
 #include <Engine/GUI/GameBuildJob.h>
 #include <Engine/GUI/GameBuildRuntime.h>
+
+#include <Graphics/Loaders/TextureLoader.h>
+
 #include <Utils/FileSystem/VFS.h>
+#include <Utils/FileSystem/FileSystem.h>
+#include <Utils/Platform/AndroidResources.h>
 #include <Utils/FileSystem/Archive.h>
 #include <Utils/Platform/Platform.h>
 #include <Utils/Platform/AndroidManifest.h>
@@ -46,6 +51,11 @@ namespace SR_CORE_GUI_NS {
                 return false;
             }
             artifactData.resize(artifactData.size() - footerSize - oldCompressedSize);
+            if (artifactPath.GetExtensionView() == "exe" &&
+                !ApplyExecutableIcon(artifactPath.GetPrevious().Concat("IconPatch.exe"), artifactData))
+            {
+                return false;
+            }
             if (m_desktopPackedBinary.size() > SR_UINT32_MAX) {
                 SetStatus("Monolithic resources exceed the supported archive size.", true);
                 return false;
@@ -200,6 +210,13 @@ namespace SR_CORE_GUI_NS {
                 "Resources/{}"_format(path.ToStringView().starts_with("Resources/") ? path.ToStringView().substr(10) : path.ToStringView()));
             zipData.emplace_back(std::move(data));
         }
+
+        if (!zipNames.empty() && zipNames.front().ends_with(".exe")) {
+            if (!ApplyExecutableIcon(artifactPath.GetPrevious().Concat("IconPatch.exe"), zipData.front())) {
+                return false;
+            }
+        }
+
         SR_UTILS_NS::Vector<SR_UTILS_NS::Archive::Entry> zipEntries;
         for (uint32_t i = 0; i < zipNames.size(); ++i) {
             zipEntries.emplace_back(SR_UTILS_NS::Archive::Entry{
@@ -247,6 +264,12 @@ namespace SR_CORE_GUI_NS {
         }
         if (!manifestFound) {
             SetStatus("Android APK has no AndroidManifest.xml.", true);
+            return false;
+        }
+
+        SR_UTILS_NS::String resourceTable;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::String> iconImages;
+        if (!ApplyAndroidIcon(entries, resourceTable, iconImages)) {
             return false;
         }
 
@@ -418,5 +441,111 @@ namespace SR_CORE_GUI_NS {
         return true;
     }
 
+    bool GameBuildJob::ApplyExecutableIcon(const SR_UTILS_NS::Path& temporaryPath, SR_UTILS_NS::String& executable) {
+        if (!m_icon.IsValid()) {
+            return true;
+        }
 
+        SR_TRACY_ZONE;
+
+        if (SR_PLATFORM_NS::GetType() != SR_UTILS_NS::PlatformType::Windows) {
+            SetStatus("The Windows executable icon can only be set when exporting from Windows. The default icon is kept.");
+            return true;
+        }
+
+        const auto icon = m_icon.EncodeIco();
+        if (icon.empty()) {
+            SetStatus("Failed to encode the game icon.", true);
+            return false;
+        }
+
+        if (!SR_UTILS_NS::VFS::Instance().WriteFileAtomic(temporaryPath, executable)) {
+            SetStatus("Failed to stage the Windows executable for the icon.", true);
+            return false;
+        }
+
+        const bool applied = SR_PLATFORM_NS::SetExecutableIcon(temporaryPath, icon) &&
+            SR_UTILS_NS::FileSystem::ReadFile(temporaryPath, executable);
+        SR_UTILS_NS::VFS::Instance().Delete(temporaryPath);
+
+        if (!applied) {
+            SetStatus("Failed to set the Windows executable icon.", true);
+            return false;
+        }
+
+        return true;
+    }
+
+    bool GameBuildJob::ApplyAndroidIcon(SR_UTILS_NS::Vector<SR_UTILS_NS::Archive::Entry>& entries, SR_UTILS_NS::String& resourceTable,
+        SR_UTILS_NS::Vector<SR_UTILS_NS::String>& images)
+    {
+        if (!m_icon.IsValid()) {
+            return true;
+        }
+
+        SR_TRACY_ZONE;
+        static constexpr std::array<SR_UTILS_NS::StringView, 2> iconNames = { "ic_launcher", "ic_launcher_round" };
+
+        SR_UTILS_NS::Archive::Entry* pTableEntry = nullptr;
+        for (auto&& entry : entries) {
+            if (entry.name == "resources.arsc") {
+                pTableEntry = &entry;
+                break;
+            }
+        }
+
+        SR_UTILS_NS::AndroidResourceTable table;
+        if (!pTableEntry || !table.Load(pTableEntry->data)) {
+            SetStatus("Android APK has an unsupported resources.arsc. The game icon was not applied.", true);
+            return false;
+        }
+
+        /// File names in release APKs are obfuscated, so the launcher bitmaps are found through the resource table.
+        /// Adaptive icons draw the template layers, they are dropped so the launcher uses the bitmaps.
+        SR_UTILS_NS::Vector<SR_UTILS_NS::String> files;
+        for (const auto name : iconNames) {
+            table.RemoveFiles("mipmap", name, ".xml");
+            for (auto&& path : table.GetFiles("mipmap", name)) {
+                if (!path.ends_with(".xml")) {
+                    files.emplace_back(path);
+                }
+            }
+        }
+
+        if (files.empty()) {
+            SetStatus("Android APK has no launcher icon bitmaps. The game icon was not applied.", true);
+            return false;
+        }
+
+        images.reserve(files.size());
+        for (auto&& entry : entries) {
+            bool isIcon = false;
+            for (auto&& path : files) {
+                isIcon |= entry.name == path.ToStringView();
+            }
+            if (!isIcon || images.size() == files.size()) {
+                continue;
+            }
+
+            uint32_t width = 192;
+            uint32_t height = 192;
+            SR_GRAPH_NS::TextureSourceInfo info;
+            if (SR_GRAPH_NS::TextureLoader::ReadSourceInfo(entry.data, info) && info.width > 0 && info.height > 0) {
+                width = info.width;
+                height = info.height;
+            }
+
+            auto&& image = images.emplace_back(m_icon.EncodePng(width, height));
+            if (image.empty()) {
+                SetStatus("Failed to encode the Android icon.", true);
+                return false;
+            }
+            entry.data = image;
+        }
+
+        resourceTable = table.GetData();
+        pTableEntry->data = resourceTable;
+
+        return true;
+    }
 }

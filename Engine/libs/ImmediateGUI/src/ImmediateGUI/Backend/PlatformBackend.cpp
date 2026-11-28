@@ -133,12 +133,13 @@ namespace SR_IMMEDIATE_GUI_NS {
             });
         }
 
-        void ProcessPolledInput() {
+        /// mousePositionScale переводит позицию мыши платформы (пиксели) в координаты ImGui
+        void ProcessPolledInput(const SR_MATH_NS::FVector2& mousePositionScale = SR_MATH_NS::FVector2(1.f, 1.f)) {
             auto&& io = ImGui::GetIO();
 
-            const auto& mouseState = SR_PLATFORM_NS::GetMouseState();
-            if (!g_polledInputInitialized || g_prevMouseState.position.x != mouseState.position.x || g_prevMouseState.position.y != mouseState.position.y) {
-                io.AddMousePosEvent(mouseState.position.x, mouseState.position.y);
+            auto&& mouseState = SR_PLATFORM_NS::GetMouseState();
+            if (!g_polledInputInitialized || !SR_EQUALS(g_prevMouseState.position.x, mouseState.position.x) || !SR_EQUALS(g_prevMouseState.position.y, mouseState.position.y)) {
+                io.AddMousePosEvent(mouseState.position.x * mousePositionScale.x, mouseState.position.y * mousePositionScale.y);
             }
 
             for (size_t i = 0; i < mouseState.COUNT; i++) {
@@ -147,7 +148,7 @@ namespace SR_IMMEDIATE_GUI_NS {
                 }
             }
 
-            const auto& keyboardState = SR_PLATFORM_NS::GetSystemKeyboardState();
+            auto&& keyboardState = SR_PLATFORM_NS::GetSystemKeyboardState();
             for (const SR_UTILS_NS::KeyCode keyCode : SR_UTILS_NS::KeyCodes) {
                 if (!g_polledInputInitialized || g_prevKeyboardState.Get(keyCode) != keyboardState.Get(keyCode)) {
                     if (const ImGuiKey imguiKey = KeyCodeToImGuiKey(keyCode); imguiKey != ImGuiKey_None) {
@@ -156,12 +157,12 @@ namespace SR_IMMEDIATE_GUI_NS {
                 }
             }
 
-            const auto& mouseScroll = SR_UTILS_NS::Input::Instance().GetMouseScroll();
+            auto&& mouseScroll = SR_UTILS_NS::Input::Instance().GetMouseScroll();
             if (mouseScroll.IsNotEmpty()) {
                 io.AddMouseWheelEvent(mouseScroll.x, mouseScroll.y);
             }
 
-            for (auto& event : g_inputTextEvents) {
+            for (auto&& event : g_inputTextEvents) {
                 io.AddInputCharactersUTF8(event.GetText().data());
             }
             g_inputTextEvents.clear();
@@ -593,10 +594,16 @@ namespace SR_IMMEDIATE_GUI_NS {
                 ImGuiIO& io = ImGui::GetIO();
                 io.DisplayFramebufferScale = ImVec2(info.framebufferScale.x, info.framebufferScale.y);
                 io.DisplaySize = ImVec2(info.displaySize.x, info.displaySize.y);
-                io.DeltaTime = info.deltaTime == 0.0f ? (1.0f / 60.0f) : info.deltaTime;
+                io.DeltaTime = SR_EQUALS(info.deltaTime, 0.0f) ? (1.0f / 60.0f) : info.deltaTime;
+
+                /// Окно отдает позицию мыши в пикселях буфера, ImGui работает в логических координатах
+                const SR_MATH_NS::FVector2 mousePositionScale(
+                    info.framebufferScale.x > 0.f ? 1.f / info.framebufferScale.x : 1.f,
+                    info.framebufferScale.y > 0.f ? 1.f / info.framebufferScale.y : 1.f
+                );
 
                 EnsurePolledInputSubscribed();
-                ProcessPolledInput();
+                ProcessPolledInput(mousePositionScale);
                 break;
             }
         #elif defined(SR_EMSCRIPTEN)

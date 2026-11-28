@@ -7,6 +7,8 @@
 
 #include <Engine/Settings/ProjectSettings.h>
 #include <Engine/Export/TextureExporter.h>
+#include <Engine/GUI/GameBuildIcon.h>
+#include <Utils/FileSystem/Archive.h>
 #include <Utils/Types/SortedVector.h>
 #include <Utils/Types/Function.h>
 #include <Utils/Resources/ResourceRef.h>
@@ -39,6 +41,10 @@ namespace SR_CORE_GUI_NS {
         bool RepackDesktop(const SR_UTILS_NS::Path& path);
         bool RepackAndroid(const SR_UTILS_NS::Path& path);
         bool RepackEmscripten(const SR_UTILS_NS::Path& path);
+        bool PrepareIcon();
+        bool ApplyExecutableIcon(const SR_UTILS_NS::Path& temporaryPath, SR_UTILS_NS::String& executable);
+        bool ApplyAndroidIcon(SR_UTILS_NS::Vector<SR_UTILS_NS::Archive::Entry>& entries, SR_UTILS_NS::String& resourceTable,
+            SR_UTILS_NS::Vector<SR_UTILS_NS::String>& images);
         void SetStatus(SR_UTILS_NS::String status, bool error = false);
         void BeginStage(SR_UTILS_NS::String label, float_t start, float_t span);
         void SetProgress(float_t progress);
@@ -57,6 +63,7 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::SortedVector<SR_UTILS_NS::Path> m_sourceResourcePaths;
         SR_UTILS_NS::Vector<TextureBuildArtifact> m_resourceOverrides;
         TextureExporter m_textureExporter;
+        GameBuildIcon m_icon;
         SR_UTILS_NS::String m_desktopPackedBinary;
         SR_UTILS_NS::Path m_outputRoot;
         SR_UTILS_NS::String m_stageLabel;

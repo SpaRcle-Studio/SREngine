@@ -37,6 +37,8 @@ namespace SR_CORE_NS {
         /// @property
         SR_UTILS_NS::String organization = "SpaRcle-Studio";
         /// @property
+        SR_UTILS_NS::Path iconPath;
+        /// @property
         SR_UTILS_NS::String androidPackageId = "com.organization.game";
         /// @property
         uint32_t androidVersionCode = 1;

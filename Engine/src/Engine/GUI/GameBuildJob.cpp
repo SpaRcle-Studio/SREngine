@@ -283,6 +283,38 @@ namespace SR_CORE_GUI_NS {
         return true;
     }
 
+    bool GameBuildJob::PrepareIcon() {
+        m_icon.Clear();
+
+        const auto&& pProfile = GetActiveProfile();
+        if (!pProfile) {
+            return true;
+        }
+
+        /// The path is edited as raw text, so it is normalized again and pasted quotes are dropped.
+        SR_UTILS_NS::StringView text = pProfile->iconPath.GetInternalUnsafeString().ToStringView();
+        while (!text.empty() && (text.front() == '"' || text.front() == ' ')) {
+            text.remove_prefix(1);
+        }
+        while (!text.empty() && (text.back() == '"' || text.back() == ' ')) {
+            text.remove_suffix(1);
+        }
+
+        const SR_UTILS_NS::Path sourcePath(text);
+        if (sourcePath.IsEmpty()) {
+            return true;
+        }
+
+        SetStatus("Loading game icon...");
+        const auto iconPath = sourcePath.IsAbs() ? sourcePath : CoreResLoader::GetResPath().Concat(sourcePath);
+        if (!m_icon.Load(iconPath)) {
+            SetStatus("Failed to load game icon: {}"_format(iconPath), true);
+            return false;
+        }
+
+        return true;
+    }
+
     bool GameBuildJob::Build() {
         if (isCancelled && isCancelled()) {
             return false;
@@ -330,6 +362,9 @@ namespace SR_CORE_GUI_NS {
             return false;
         }
 
+        if (!PrepareIcon()) {
+            return false;
+        }
 
         return ProcessTargets(false);
     }
@@ -542,6 +577,20 @@ namespace SR_CORE_GUI_NS {
             SetProgress(static_cast<float_t>(completedWork / totalWork));
         }
         m_textureExporter.onProgress = nullptr;
+
+        /// The window loads this file at startup, so it has to match the executable icon.
+        if (platform == "Windows" && m_icon.IsValid()) {
+            const auto windowIcon = resources.Concat("Engine/Textures/icon.ico");
+            const auto stagedIcon = stagedRoot.Concat("Engine/Textures/icon.ico");
+            const auto iconData = m_icon.EncodeIco();
+            if (iconData.empty() || !SR_UTILS_NS::VFS::Instance().WriteFileAtomic(stagedIcon, iconData)) {
+                SetStatus("Failed to stage the window icon.", true);
+                return false;
+            }
+            m_resourcePaths.insert(windowIcon);
+            m_resourceOverrides.emplace_back(TextureBuildArtifact { windowIcon, stagedIcon });
+        }
+
         SetProgress(1.f);
         SR_INFO("GameBuildJob::PreparePlatformResources() : {}: {} textures with accepted GPU compression, {} lossless textures",
             platform, compressedTextureCount, losslessTextureCount);
