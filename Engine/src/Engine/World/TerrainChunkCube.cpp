@@ -55,16 +55,29 @@ namespace SR_CORE_NS {
         pTransform->SetTranslation(GetChunkWorldPosition(*pCubeChunk));
     }
 
-    void TerrainChunkCubeGenerator::LoadNextChunk(const SR_HTYPES_NS::Function<void(ITerrainChunk&)>& loaderFn) {
+    void TerrainChunkCubeGenerator::LoadNextChunk(const SR_HTYPES_NS::Function<bool(ITerrainChunk&)>& loaderFn) {
         SR_TRACY_ZONE;
 
+        /// Синхронная генерация (compute + чтение с GPU) ограничена и числом, и временем: при подлёте к поверхности
+        /// чанков в очереди сотни, и фиксированное число за кадр либо грузит медленно, либо проседает FPS.
+        /// Асинхронная дополнительно ограничена числом задач в полёте (loaderFn вернёт false)
+        const auto startTime = std::chrono::steady_clock::now();
         for (uint32_t i = 0; i < m_chunksPerFrame && !m_chunksToLoad.empty(); ++i) {
-            LoadNearestChunk(loaderFn);
+            if (i > 0 && m_generationBudgetMs > 0.f) {
+                const float_t elapsedMs = std::chrono::duration<float_t, std::milli>(std::chrono::steady_clock::now() - startTime).count();
+                if (elapsedMs >= m_generationBudgetMs) {
+                    break;
+                }
+            }
+            if (!LoadNearestChunk(loaderFn)) {
+                break;
+            }
         }
 
         /// Отсчёт идёт только пока замена готова и начинается заново, если готовность пропала.
         /// При редактировании замена пересоздаётся каждый кадр - без сброса счётчик успевал дойти до нуля
         /// на предыдущей замене, и старый чанк освобождался в кадр загрузки новой (моргание).
+        UpdateChunkSets();
         for (auto&& pReplaced : m_replacedChunks) {
             if (!IsReady(pReplaced->GetNode())) {
                 pReplaced->SetReplaceFrames(m_replaceDelayFrames);
@@ -77,7 +90,7 @@ namespace SR_CORE_NS {
         ReleaseReplacedChunks();
     }
 
-    void TerrainChunkCubeGenerator::LoadNearestChunk(const SR_HTYPES_NS::Function<void(ITerrainChunk&)>& loaderFn) {
+    bool TerrainChunkCubeGenerator::LoadNearestChunk(const SR_HTYPES_NS::Function<bool(ITerrainChunk&)>& loaderFn) {
         /// Сначала ближайшие к наблюдателю, при равном расстоянии - более детальные
         uint32_t index = 0;
         float_t bestScore = SR_FLOAT_MAX;
@@ -91,10 +104,37 @@ namespace SR_CORE_NS {
         }
 
         TerrainChunkCube::Ptr pChunk = m_chunksToLoad[index];
-        m_chunksToLoad[index] = m_chunksToLoad.back();
-        m_chunksToLoad.pop_back();
+        if (!loaderFn(*pChunk)) {
+            return false;
+        }
 
-        loaderFn(*pChunk);
+        /// Ищем заново: при синхронной генерации loaderFn уже мог поменять очередь (OnChunkLoaded)
+        for (uint32_t i = 0; i < m_chunksToLoad.size(); ++i) {
+            if (m_chunksToLoad[i] == pChunk) {
+                m_chunksToLoad[i] = m_chunksToLoad.back();
+                m_chunksToLoad.pop_back();
+                break;
+            }
+        }
+
+        return true;
+    }
+
+    void TerrainChunkCubeGenerator::OnChunkLoaded(ITerrainChunk& chunk) {
+        Super::OnChunkLoaded(chunk);
+
+        auto&& pChunk = dynamic_cast<TerrainChunkCube*>(&chunk);
+        if (!pChunk) {
+            SRHalt("TerrainChunkCubeGenerator::OnChunkLoaded() : chunk is not a TerrainChunkCube!");
+            return;
+        }
+
+        /// Место ещё закрыто заменяемым чанком: новый показывается только вместе со всей заменой (RevealHiddenChunks).
+        /// Выключение в кадр получения объекта из пула - no-op для выключенного объекта, лишней перерегистрации нет
+        if (auto&& pObject = pChunk->GetObject(); pObject && IntersectsReplaced(pChunk->GetNode())) {
+            pObject->SetEnabled(false);
+            pChunk->SetHidden(true);
+        }
 
         m_physicsDirty = true;
     }
@@ -106,6 +146,8 @@ namespace SR_CORE_NS {
             SR_ERROR("TerrainChunkCubeGenerator::Update() : chunk proto is null!");
             return;
         }
+
+        m_terrain = &terrain;
 
         const SR_MATH_NS::FVector3 observerNodePosition = observer.position / m_chunkSize;
 
@@ -140,10 +182,16 @@ namespace SR_CORE_NS {
             return false;
         }
 
+        const SR_MATH_NS::FVector3 min = node.GetMin() * m_chunkSize;
+        const SR_MATH_NS::FVector3 max = node.GetMax() * m_chunkSize;
+
+        /// Узел вне объёма, где может быть поверхность (например, вне оболочки планеты) - пустой, как и все его дети
+        if (m_terrain && !m_terrain->IsVolumeIntersects(SR_MATH_NS::AABB(min, max))) {
+            return false;
+        }
+
         if (m_currentDrawDistance > 0.f) {
             /// Узел целиком дальше дальности прорисовки - не нужен ни он, ни его дети
-            const SR_MATH_NS::FVector3 min = node.GetMin() * m_chunkSize;
-            const SR_MATH_NS::FVector3 max = node.GetMax() * m_chunkSize;
             const float_t dx = std::max({ min.x - m_observerPosition.x, m_observerPosition.x - max.x, 0.f });
             const float_t dy = std::max({ min.y - m_observerPosition.y, m_observerPosition.y - max.y, 0.f });
             const float_t dz = std::max({ min.z - m_observerPosition.z, m_observerPosition.z - max.z, 0.f });
@@ -159,7 +207,7 @@ namespace SR_CORE_NS {
         SR_TRACY_ZONE;
 
         SR_MATH_NS::LodOctree::Settings settings;
-        settings.maxLevel = static_cast<uint8_t>(std::min<uint32_t>(m_lodLevels, 8));
+        settings.maxLevel = static_cast<uint8_t>(std::min<uint32_t>(m_lodLevels, 12));
         settings.splitDistance = m_splitDistance;
         settings.rootRadius = m_rootRadius;
 
@@ -181,12 +229,15 @@ namespace SR_CORE_NS {
 
             /// Узел снова стал листом, пока его ещё показывали в ожидании замены
             bool isRevived = false;
-            for (uint32_t i = 0; i < m_replacedChunks.size(); ++i) {
+            /// Сначала проверка по множеству: перебор заменяемых на каждый лист стоил листья x заменяемые
+            const bool isReplacedNode = !m_replacedChunks.empty() && GetReplacedSet().Contains(node);
+            for (uint32_t i = 0; isReplacedNode && i < m_replacedChunks.size(); ++i) {
                 if (m_replacedChunks[i]->GetNode() == node) {
                     m_replacedChunks[i]->SetReplaceFrames(0);
                     chunks[node] = m_replacedChunks[i];
                     m_replacedChunks[i] = m_replacedChunks.back();
                     m_replacedChunks.pop_back();
+                    m_isReplacedSetDirty = true;
                     isRevived = true;
                     break;
                 }
@@ -201,13 +252,7 @@ namespace SR_CORE_NS {
 
         /// Узлы, которые больше не являются листьями. Видимые остаются до загрузки замены.
         for (auto&& [node, pChunk] : m_chunks) {
-            if (pChunk->GetStatus() == ITerrainChunk::Status::Loaded && pChunk->GetObject()) {
-                pChunk->SetReplaceFrames(m_replaceDelayFrames);
-                m_replacedChunks.emplace_back(pChunk);
-            }
-            else {
-                ReleaseChunk(pChunk);
-            }
+            RetireChunk(pChunk);
         }
 
         m_chunks = std::move(chunks);
@@ -223,8 +268,7 @@ namespace SR_CORE_NS {
             if (pChunk->GetStatus() == ITerrainChunk::Status::Loaded && pChunk->GetObject()) {
                 /// Перегенерация в отдельный чанк: старый остаётся видимым до загрузки нового.
                 /// Обновление меша на месте перерегистрирует его в рендере, и чанк моргает.
-                pChunk->SetReplaceFrames(m_replaceDelayFrames);
-                m_replacedChunks.emplace_back(pChunk);
+                RetireChunk(pChunk);
                 pChunk = CreateChunk(node);
             }
             pChunk->SetLodBorders(lodBorders);
@@ -248,6 +292,12 @@ namespace SR_CORE_NS {
                 nodeMax.y < regionMin.y || nodeMin.y > regionMax.y ||
                 nodeMax.z < regionMin.z || nodeMin.z > regionMax.z)
             {
+                continue;
+            }
+
+            /// Генерация уже идёт со старыми правками плотности - перегенерировать после загрузки (см. ReleaseReplacedChunks)
+            if (pChunk->GetStatus() == ITerrainChunk::Status::Generating) {
+                pChunk->SetDirty(true);
                 continue;
             }
 
@@ -281,22 +331,121 @@ namespace SR_CORE_NS {
         const uint8_t lodBorders = pChunk->GetLodBorders();
 
         pChunk->SetDirty(false);
-        pChunk->SetReplaceFrames(m_replaceDelayFrames);
-        m_replacedChunks.emplace_back(pChunk);
+        RetireChunk(pChunk);
 
         pChunk = CreateChunk(node);
         pChunk->SetLodBorders(lodBorders);
     }
 
-    bool TerrainChunkCubeGenerator::IsCoveredByReplaced(const SR_MATH_NS::OctreeNodeId& node) const {
-        for (auto&& pReplaced : m_replacedChunks) {
-            /// Заменённый узел должен накрывать текущий целиком
-            auto&& replacedNode = pReplaced->GetNode();
-            if (replacedNode.level >= node.level && replacedNode.Intersects(node)) {
-                return true;
+    void TerrainChunkCubeGenerator::RetireChunk(const TerrainChunkCube::Ptr& pChunk) {
+        if (pChunk->GetStatus() == ITerrainChunk::Status::Loaded && pChunk->GetObject() && !pChunk->IsHidden()) {
+            pChunk->SetReplaceFrames(m_replaceDelayFrames);
+            m_replacedChunks.emplace_back(pChunk);
+            m_isReplacedSetDirty = true;
+        }
+        else {
+            /// Скрытый чанк ничего не закрывает - держать его нет смысла
+            ReleaseChunk(pChunk);
+        }
+    }
+
+    const SR_MATH_NS::OctreeNodeSet& TerrainChunkCubeGenerator::GetReplacedSet() const {
+        if (m_isReplacedSetDirty) {
+            SR_TRACY_ZONE_N("Rebuild replaced set");
+
+            m_replacedSet.Clear();
+            const uint8_t maxLevel = GetMaxLevel();
+            for (auto&& pReplaced : m_replacedChunks) {
+                /// В список попадают только видимые чанки с объектом (RetireChunk), но проверка дешёвая
+                if (pReplaced->GetObject()) {
+                    m_replacedSet.Add(pReplaced->GetNode(), maxLevel);
+                }
+            }
+            m_isReplacedSetDirty = false;
+        }
+        return m_replacedSet;
+    }
+
+    void TerrainChunkCubeGenerator::UpdateChunkSets() {
+        SR_TRACY_ZONE;
+
+        m_notLoadedSet.Clear();
+        m_notReadySet.Clear();
+
+        const uint8_t maxLevel = GetMaxLevel();
+
+        for (auto&& [node, pChunk] : m_chunks) {
+            const bool isLoaded = pChunk->GetStatus() == ITerrainChunk::Status::Loaded;
+            if (!isLoaded) {
+                m_notLoadedSet.Add(node, maxLevel);
+            }
+
+            /// Трава замены тоже должна быть готова: иначе либо место голое, либо (если держать обе) травы вдвое больше
+            bool isReady = isLoaded && pChunk->IsGrassReady();
+            if (isReady && pChunk->GetObject() && pChunk->GetData() && !pChunk->GetData()->IsRenderReady()) {
+                isReady = false;
+            }
+
+            if (!isReady) {
+                m_notReadySet.Add(node, maxLevel);
             }
         }
-        return false;
+    }
+
+    bool TerrainChunkCubeGenerator::IntersectsReplaced(const SR_MATH_NS::OctreeNodeId& node) const {
+        return GetReplacedSet().Intersects(node, GetMaxLevel());
+    }
+
+    bool TerrainChunkCubeGenerator::IsAreaLoaded(const SR_MATH_NS::OctreeNodeId& node) const {
+        return !m_notLoadedSet.Intersects(node, GetMaxLevel());
+    }
+
+    void TerrainChunkCubeGenerator::RevealHiddenChunks() {
+        SR_TRACY_ZONE;
+
+        bool hasHidden = false;
+        for (auto&& [node, pChunk] : m_chunks) {
+            if (pChunk->IsHidden()) {
+                hasHidden = true;
+                break;
+            }
+        }
+
+        if (!hasHidden) {
+            return;
+        }
+
+        const uint8_t maxLevel = GetMaxLevel();
+
+        /// Заменяемые чанки, чья замена загружена не целиком: пересекающие их скрытые чанки ждут
+        m_unrevealableSet.Clear();
+        for (auto&& pReplaced : m_replacedChunks) {
+            if (pReplaced->GetObject() && !IsAreaLoaded(pReplaced->GetNode())) {
+                m_unrevealableSet.Add(pReplaced->GetNode(), maxLevel);
+            }
+        }
+
+        for (auto&& [node, pChunk] : m_chunks) {
+            if (!pChunk->IsHidden()) {
+                continue;
+            }
+
+            /// Показываем, когда загружена вся замена каждого заменяемого чанка, который пересекает этот.
+            /// Все чанки одной замены проходят проверку в одном кадре и появляются вместе
+            if (m_unrevealableSet.Intersects(node, maxLevel)) {
+                continue;
+            }
+
+            pChunk->SetHidden(false);
+            if (auto&& pObject = pChunk->GetObject()) {
+                pObject->SetEnabled(true);
+            }
+        }
+    }
+
+    bool TerrainChunkCubeGenerator::IsCoveredByReplaced(const SR_MATH_NS::OctreeNodeId& node) const {
+        /// Заменённый узел должен накрывать текущий целиком - то есть быть им самим или его предком
+        return GetReplacedSet().ContainsSelfOrAncestor(node, GetMaxLevel());
     }
 
     TerrainChunkCube::Ptr TerrainChunkCubeGenerator::CreateChunk(const SR_MATH_NS::OctreeNodeId& node) {
@@ -313,6 +462,7 @@ namespace SR_CORE_NS {
         pChunk->SetNode(node);
         pChunk->SetLodBorders(0);
         pChunk->SetDirty(false);
+        pChunk->SetHidden(false);
         pChunk->SetStatus(ITerrainChunk::Status::Created);
         m_chunksToLoad.emplace_back(pChunk);
 
@@ -321,7 +471,7 @@ namespace SR_CORE_NS {
 
     const SR_MATH_NS::OctreeNodeId* TerrainChunkCubeGenerator::FindLeafAt(const SR_MATH_NS::IVector3& position) const {
         /// Листья не пересекаются, поэтому точку содержит не больше одного. Ищем по всем уровням, от детального к грубому.
-        const uint8_t maxLevel = static_cast<uint8_t>(std::min<uint32_t>(m_lodLevels, 8));
+        const uint8_t maxLevel = static_cast<uint8_t>(std::min<uint32_t>(m_lodLevels, 12));
         for (uint8_t level = 0; level <= maxLevel; ++level) {
             const int32_t size = 1 << level;
             SR_MATH_NS::OctreeNodeId node;
@@ -342,10 +492,8 @@ namespace SR_CORE_NS {
         uint8_t mask = 0;
         const int32_t size = node.GetSize();
 
+        /// Юбки вытягиваются против нормали поверхности, поэтому нужны на всех гранях: на сфере "боковых" граней нет
         for (int32_t axis = 0; axis < 3; ++axis) {
-            if (axis == 1) {
-                continue; /// юбки только на боковых гранях
-            }
             for (int32_t side = 0; side < 2; ++side) {
                 /// Юбки нужны с обеих сторон стыка: щель закрывает юбка того чанка, чей край выше.
                 /// Одной точки достаточно: если область соседа того же размера поделена - любая её точка лежит в более мелком листе,
@@ -362,30 +510,23 @@ namespace SR_CORE_NS {
     }
 
     bool TerrainChunkCubeGenerator::IsReady(const SR_MATH_NS::OctreeNodeId& node) const {
-        for (auto&& [otherNode, pChunk] : m_chunks) {
-            if (!otherNode.Intersects(node)) {
-                continue;
-            }
-            /// Трава замены тоже должна быть готова: иначе либо место голое, либо (если держать обе) травы вдвое больше
-            if (pChunk->GetStatus() != ITerrainChunk::Status::Loaded || !pChunk->IsGrassReady()) {
-                return false;
-            }
-            if (pChunk->GetObject() && pChunk->GetData() && !pChunk->GetData()->IsRenderReady()) {
-                return false;
-            }
-        }
-        return true;
+        /// По множеству, собранному в UpdateChunkSets
+        return !m_notReadySet.Intersects(node, GetMaxLevel());
     }
 
     void TerrainChunkCubeGenerator::ReleaseReplacedChunks() {
         SR_TRACY_ZONE;
 
+        UpdateChunkSets();
+        RevealHiddenChunks();
+
         for (uint32_t i = 0; i < m_replacedChunks.size();) {
             auto&& pReplaced = m_replacedChunks[i];
-            if (IsReady(pReplaced->GetNode()) && pReplaced->GetReplaceFrames() == 0) {
+            if (pReplaced->GetReplaceFrames() == 0 && IsReady(pReplaced->GetNode())) {
                 ReleaseChunk(pReplaced);
                 m_replacedChunks[i] = m_replacedChunks.back();
                 m_replacedChunks.pop_back();
+                m_isReplacedSetDirty = true;
             }
             else {
                 ++i;
@@ -425,6 +566,13 @@ namespace SR_CORE_NS {
             m_chunksToLoad.erase_if([&](const TerrainChunkCube::Ptr& pOther) {
                 return pOther == pChunk;
             });
+        }
+
+        /// Чанк уйдёт в пул и может достаться другому узлу - результат его генерации применять нельзя
+        if (pChunk->GetStatus() == ITerrainChunk::Status::Generating && m_terrain) {
+            if (auto&& pDataGenerator = m_terrain->GetChunkDataGenerator()) {
+                pDataGenerator->CancelChunkData(*pChunk);
+            }
         }
 
         ReleaseChunkObject(*pChunk);

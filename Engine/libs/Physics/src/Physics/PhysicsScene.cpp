@@ -250,12 +250,19 @@ namespace SR_PHYSICS_NS {
 
     void PhysicsScene::Remove(PhysicsScene::RigidbodyPtr pRigidbody) {
         SR_TRACY_ZONE;
-        m_rigidbodyToRemove.emplace_back(pRigidbody);
+        /// Удаление может прийти дважды до Flush (OnDisable, затем OnDestroy). Дубль нельзя: Flush освобождает
+        /// уничтоженное тело (AutoFree) на первой записи, и вторая становится nullptr.
+        /// В редакторе физика на паузе и Flush не зовётся, поэтому выключение и уничтожение копятся (чанки террейна)
+        if (std::find(m_rigidbodyToRemove.begin(), m_rigidbodyToRemove.end(), pRigidbody) == m_rigidbodyToRemove.end()) {
+            m_rigidbodyToRemove.emplace_back(pRigidbody);
+        }
     }
 
     void PhysicsScene::Remove(PhysicsScene::CharacterControllerPtr pController) {
         SR_TRACY_ZONE;
-        m_characterControllersToRemove.emplace_back(pController);
+        if (std::find(m_characterControllersToRemove.begin(), m_characterControllersToRemove.end(), pController) == m_characterControllersToRemove.end()) {
+            m_characterControllersToRemove.emplace_back(pController);
+        }
     }
 
     void PhysicsScene::ClearForces() {

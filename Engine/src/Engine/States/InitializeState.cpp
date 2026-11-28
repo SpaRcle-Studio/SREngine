@@ -65,7 +65,9 @@ namespace SR_CORE_NS {
                 }
             }
             else {
+                /// Первый запуск: сохранённой геометрии нет, открываем окно на весь экран.
                 pWindowImpl->Centralize();
+                pWindowImpl->Maximize();
             }
 
             pRenderContext->SwitchWindow(pWindow);

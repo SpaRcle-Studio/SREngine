@@ -24,6 +24,7 @@ namespace SR_CORE_NS {
         .SetInstanced(true);
 
     static const SR_UTILS_NS::StringAtom SHADER_GRASS_ORIGIN = "grassOrigin";
+    static const SR_UTILS_NS::StringAtom SHADER_GRASS_UP = "grassUp";
     static const SR_UTILS_NS::StringAtom SHADER_GRASS_FULL_DENSITY_DISTANCE = "grassFullDensityDistance";
     static const SR_UTILS_NS::StringAtom SHADER_GRASS_MAX_DISTANCE = "grassMaxDistance";
     static const SR_UTILS_NS::StringAtom SHADER_GRASS_FALLOFF = "grassFalloff";
@@ -347,15 +348,18 @@ namespace SR_CORE_NS {
         }
 
         TerrainGrassLodParams params;
+        SR_MATH_NS::FVector3 up;
         {
             std::lock_guard lock(m_mutex);
             params = m_lodParams;
+            up = m_up;
         }
 
         const uint32_t segments = std::clamp<uint32_t>(params.segments, 1, 7);
         const uint32_t lowSegments = std::clamp<uint32_t>(params.lowSegments, 1, segments);
 
         shader.SetVec3(SHADER_GRASS_ORIGIN, origin);
+        shader.SetVec3(SHADER_GRASS_UP, up);
         shader.SetFloat(SHADER_GRASS_FULL_DENSITY_DISTANCE, params.fullDensityDistance);
         shader.SetFloat(SHADER_GRASS_MAX_DISTANCE, params.maxDistance);
         shader.SetFloat(SHADER_GRASS_FALLOFF, params.falloff);
@@ -406,6 +410,17 @@ namespace SR_CORE_NS {
         }
         MarkMaterialDirty();
         MarkRenderDirty();
+    }
+
+    void TerrainGrassRenderer::SetUpDirection(const SR_MATH_NS::FVector3& up) {
+        {
+            std::lock_guard lock(m_mutex);
+            if (m_up == up) {
+                return;
+            }
+            m_up = up;
+        }
+        MarkUniformsDirty();
     }
 
     TerrainGrassBenders::TerrainGrassBenders()

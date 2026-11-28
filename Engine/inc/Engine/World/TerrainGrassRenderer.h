@@ -132,6 +132,8 @@ namespace SR_CORE_NS {
 
         /// Поток сцены. Общий набор приминающих точек.
         void SetBenders(const TerrainGrassBenders::Ptr& pBenders);
+        /// Поток сцены. Направление "вверх" поверхности чанка (для сферических миров не совпадает с Y)
+        void SetUpDirection(const SR_MATH_NS::FVector3& up);
 
         SR_NODISCARD uint32_t GetInstancesCount() const noexcept { return m_instancesCount; }
         SR_NODISCARD uint32_t GetDrawnInstancesCount() const noexcept { return m_drawnCount; }
@@ -180,6 +182,7 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::Vector<DrawRange> m_ranges;
         TerrainGrassLodParams m_lodParams;
         TerrainGrassBenders::Ptr m_pBenders;
+        SR_MATH_NS::FVector3 m_up = SR_MATH_NS::FVector3(0.f, 1.f, 0.f);
         bool m_isDataDirty = false;
 
         std::atomic<uint32_t> m_instancesCount = 0;

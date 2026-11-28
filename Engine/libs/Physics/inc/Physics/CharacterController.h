@@ -47,6 +47,9 @@ namespace SR_PHYSICS_NS {
 
         SR_NODISCARD virtual bool IsGrounded() const { return false; }
 
+        /// Ось капсулы и направление "вверх" для ступенек, склонов и проверки земли
+        virtual void SetUpDirection(const SR_MATH_NS::FVector3& up) { }
+
     protected:
         CharacterController* m_controller = nullptr;
 
@@ -102,6 +105,12 @@ namespace SR_PHYSICS_NS {
         /// @method @evaluate
         SR_NODISCARD bool IsGrounded() const;
 
+        /// Направление "вверх" контроллера (нормализуется). Для переменной гравитации (планеты) выставляется каждый шаг
+        /// @method
+        void SetUpDirection(const SR_MATH_NS::FVector3& up);
+        /// @method @evaluate
+        SR_NODISCARD SR_MATH_NS::FVector3 GetUpDirection() const noexcept { return m_upDirection; }
+
         bool InitController();
         void ReleaseController();
 
@@ -135,6 +144,7 @@ namespace SR_PHYSICS_NS {
         mutable PhysicsScenePtr m_physicsScene;
         SR_PTYPES_NS::PhysicsMaterial::Ptr m_materialData;
         bool m_isMatrixDirty = false;
+        SR_MATH_NS::FVector3 m_upDirection = SR_MATH_NS::FVector3(0.f, 1.f, 0.f);
 
         /// decomposed matrix
         SR_MATH_NS::FVector3 m_translation;

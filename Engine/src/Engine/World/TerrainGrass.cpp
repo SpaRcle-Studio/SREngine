@@ -310,6 +310,7 @@ namespace SR_CORE_NS {
             m_pBenders = new TerrainGrassBenders();
         }
         pRenderer->SetBenders(m_pBenders);
+        pRenderer->SetUpDirection(mesh.up);
 
         Source& source = m_sources[pRenderer.Get()];
         source.isApplied = false;
@@ -675,6 +676,21 @@ namespace SR_CORE_NS {
 
         const uint32_t seed = static_cast<uint32_t>(settings.seed) ^ static_cast<uint32_t>(settings.seed >> 32);
 
+        /// Наклон считается от "вверх" чанка. Ячейки и 2D шум лежат в плоскости из двух осей мира,
+        /// наименее совпадающих с "вверх" (для плоского мира - XZ). Оси мировые, поэтому шум соседних чанков совпадает.
+        const SR_MATH_NS::FVector3 up = mesh.up;
+        const SR_MATH_NS::FVector3 absUp = up.Abs();
+        uint32_t axisU = 0;
+        uint32_t axisV = 2;
+        if (absUp.x > absUp.y && absUp.x > absUp.z) {
+            axisU = 2;
+            axisV = 1;
+        }
+        else if (absUp.z > absUp.y) {
+            axisU = 0;
+            axisV = 1;
+        }
+
         /// ---- границы чанка, чтобы разложить травинки по ячейкам
         SR_MATH_NS::FVector3 boundsMin(SR_FLOAT_MAX);
         SR_MATH_NS::FVector3 boundsMax(-SR_FLOAT_MAX);
@@ -684,8 +700,8 @@ namespace SR_CORE_NS {
         }
 
         const float_t cellSize = settings.cellSize;
-        const auto cellsX = static_cast<uint32_t>(std::max(1.f, std::ceil((boundsMax.x - boundsMin.x) / cellSize)));
-        const auto cellsZ = static_cast<uint32_t>(std::max(1.f, std::ceil((boundsMax.z - boundsMin.z) / cellSize)));
+        const auto cellsX = static_cast<uint32_t>(std::max(1.f, std::ceil((boundsMax[axisU] - boundsMin[axisU]) / cellSize)));
+        const auto cellsZ = static_cast<uint32_t>(std::max(1.f, std::ceil((boundsMax[axisV] - boundsMin[axisV]) / cellSize)));
 
         /// Временные буферы переиспользуются между вызовами (генерация идёт в одном потоке), чтобы не аллоцировать на каждый чанк
         auto&& raw = gTerrainGrass.raw;
@@ -725,13 +741,13 @@ namespace SR_CORE_NS {
             /// крупные поляны и проплешины
             float_t mask = 1.f;
             if (settings.noiseScale > 0.f) {
-                const float_t n = GrassFbm(worldPos.x * settings.noiseScale, worldPos.z * settings.noiseScale, seed + 101U, fbmCells);
+                const float_t n = GrassFbm(worldPos[axisU] * settings.noiseScale, worldPos[axisV] * settings.noiseScale, seed + 101U, fbmCells);
                 mask = std::clamp((n - settings.noiseThreshold) * settings.noiseContrast + 0.5f, 0.f, 1.f);
             }
 
             /// мелкая неоднородность густоты внутри поляны
             if (settings.detailNoiseScale > 0.f && mask > 0.f) {
-                const float_t d = GrassValueNoise(worldPos.x * settings.detailNoiseScale, worldPos.z * settings.detailNoiseScale, seed + 202U, detailCell);
+                const float_t d = GrassValueNoise(worldPos[axisU] * settings.detailNoiseScale, worldPos[axisV] * settings.detailNoiseScale, seed + 202U, detailCell);
                 mask *= 0.55f + 0.45f * d;
             }
 
@@ -811,7 +827,8 @@ namespace SR_CORE_NS {
                 /// половине треугольников, и трава вырастала бы с нижней стороны поверхности.
 
                 /// быстрый отказ для крутых и перевёрнутых треугольников
-                if (faceNormal.y < settings.slopeMin - 0.1f) {
+                const float_t faceUp = faceNormal.Dot(up);
+                if (faceUp < settings.slopeMin - 0.1f) {
                     continue;
                 }
 
@@ -822,7 +839,7 @@ namespace SR_CORE_NS {
                 /// Верхняя оценка вероятности травинки на треугольнике: все множители маски плотности
                 /// интерполируются или монотонны, поэтому в любой точке не больше значения по максимумам.
                 const float_t maxAccept = (hasMaterials && settings.materialWeightDensity ? maxWeight : 1.f)
-                    * GrassSmoothStep(settings.slopeMin, settings.slopeMax, faceNormal.y + 0.1f)
+                    * GrassSmoothStep(settings.slopeMin, settings.slopeMax, faceUp + 0.1f)
                     * std::max(noiseA, std::max(noiseB, noiseC));
                 if (maxAccept <= 0.f) {
                     continue;
@@ -916,15 +933,15 @@ namespace SR_CORE_NS {
                     /// отбор по маске плотности - на склонах и проплешинах травинки исчезают плавно, а не порогом.
                     /// Для наклона берётся худшая из нормалей, чтобы трава не лезла на стены через сглаживание.
                     const float_t noise = noiseA * w + noiseB * u + noiseC * v;
-                    if (threshold >= materialFactor * noise * GrassSmoothStep(settings.slopeMin, settings.slopeMax, std::min(normal.y, faceNormal.y + 0.1f))) {
+                    if (threshold >= materialFactor * noise * GrassSmoothStep(settings.slopeMin, settings.slopeMax, std::min(normal.Dot(up), faceUp + 0.1f))) {
                         continue;
                     }
 
                     const uint32_t h3 = GrassHash(h2 ^ 0x1B56C4E9U);
                     const float_t rank = GrassToFloat(h3);
 
-                    const auto cellX = std::min(cellsX - 1, static_cast<uint32_t>(std::max(0.f, (position.x - boundsMin.x) / cellSize)));
-                    const auto cellZ = std::min(cellsZ - 1, static_cast<uint32_t>(std::max(0.f, (position.z - boundsMin.z) / cellSize)));
+                    const auto cellX = std::min(cellsX - 1, static_cast<uint32_t>(std::max(0.f, (position[axisU] - boundsMin[axisU]) / cellSize)));
+                    const auto cellZ = std::min(cellsZ - 1, static_cast<uint32_t>(std::max(0.f, (position[axisV] - boundsMin[axisV]) / cellSize)));
 
                     TerrainGrassThreadLocal::RawInstance& instance = raw.emplace_back();
                     instance.instance.position = position;
@@ -1017,8 +1034,10 @@ namespace SR_CORE_NS {
                 }
 
                 /// запас на высоту травинок и изгиб ветром, иначе верхушки отсекались бы фрустумом
-                cell.bounds.min -= SR_MATH_NS::FVector3(1.5f, 0.5f, 1.5f);
-                cell.bounds.max += SR_MATH_NS::FVector3(1.5f, 2.f, 1.5f);
+                /// по оси "вверх" запас больше (высота травинки), направление "вверх" может быть любым
+                const SR_MATH_NS::FVector3 margin = SR_MATH_NS::FVector3(1.5f) + absUp * 0.5f;
+                cell.bounds.min -= margin;
+                cell.bounds.max += margin;
 
                 result.cells.emplace_back(cell);
             }

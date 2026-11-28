@@ -47,14 +47,21 @@ namespace SR_PTYPES_NS {
         void SetLinearLock(const SR_MATH_NS::BVector3& lock);
         void SetAngularLock(const SR_MATH_NS::BVector3& lock);
 
+        /// @method
         void AddImpulse(const SR_MATH_NS::FVector3& impulse);
+        /// @method
         void AddForce(const SR_MATH_NS::FVector3& force);
+        /// @method
         void AddTorque(const SR_MATH_NS::FVector3& torque);
 
+        /// @method
         void AddLinearVelocity(const SR_MATH_NS::FVector3& velocity);
+        /// @method
         void AddAngularVelocity(const SR_MATH_NS::FVector3& velocity);
 
+        /// @method
         void SetLinearVelocity(const SR_MATH_NS::FVector3& velocity);
+        /// @method
         void SetAngularVelocity(const SR_MATH_NS::FVector3& velocity);
 
     protected:

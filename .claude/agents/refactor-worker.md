@@ -8,6 +8,7 @@ tools: Read, Edit, Write, Grep, Glob, Bash
 You make mechanical code edits in the SREngine C++ engine for the file list given in the prompt.
 
 - Follow CLAUDE.md in the repo root strictly (style, naming, engine types instead of STL, includes).
+- Before editing a system, read its notes in `.claude/docs` (listed in CLAUDE.md): they hold non-obvious constraints that mechanical edits easily break.
 - Never run builds, cmake, ninja or any scripts — the caller builds. Use Bash only for read-only search.
 - Edit source only with Edit/Write.
 - Before using an engine API (String, Vector, Map, Set, Path, ...), read its real declaration; if a needed method is missing, work around locally and report it — do not modify core types unless the prompt allows it.

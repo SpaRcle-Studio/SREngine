@@ -144,4 +144,17 @@ namespace SR_PHYSICS_NS {
     bool CharacterController::IsGrounded() const {
         return m_impl && m_impl->IsGrounded();
     }
+
+    void CharacterController::SetUpDirection(const SR_MATH_NS::FVector3& up) {
+        const float_t length = up.Length();
+        if (length < 1e-6f) {
+            return;
+        }
+
+        m_upDirection = up / length;
+
+        if (m_impl) {
+            m_impl->SetUpDirection(m_upDirection);
+        }
+    }
 }

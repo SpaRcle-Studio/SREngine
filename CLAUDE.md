@@ -60,4 +60,5 @@
 - шейдеры `.srsl` — [Documentation/SRSL.md](Documentation/SRSL.md) и [.claude/docs/Shaders.md](.claude/docs/Shaders.md);
 - террейн и трава — [.claude/docs/Terrain.md](.claude/docs/Terrain.md);
 - рендер, пайплайн, G-buffer, пост-эффекты — [.claude/docs/Render.md](.claude/docs/Render.md);
-- физика — [.claude/docs/Physics.md](.claude/docs/Physics.md).
+- физика — [.claude/docs/Physics.md](.claude/docs/Physics.md);
+- игровые проекты (`.srproject`, сцены sra, скрипты AngelScript, граница движок/игра) — [.claude/docs/GameProjects.md](.claude/docs/GameProjects.md).

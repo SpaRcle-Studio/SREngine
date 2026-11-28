@@ -174,12 +174,13 @@ namespace SR_PHYSICS_NS {
         auto&& position = SR_PHYSICS_UTILS_NS::PxExtendedV3ToPxV3(m_pxController->getFootPosition());
         auto&& pScene = m_pxController->getScene();
         auto&& config = m_controller->GetConfig();
+        const physx::PxVec3 up = m_pxController->getUpDirection();
 
         const float_t groundProbeRadius = config.radius * 1.0f;
         const float_t minGroundNormalY = cosf(SR_MATH_NS::ToRad(config.slopeLimit));
 
         physx::PxSphereGeometry geometry(groundProbeRadius);
-        physx::PxTransform pose(position + physx::PxVec3(0.0f, -config.groundProbeOffset, 0.0f));
+        physx::PxTransform pose(position - up * config.groundProbeOffset);
 
         physx::PxSweepHit hits[16];
         GroundSweepCallback callback(hits, 16);
@@ -192,7 +193,7 @@ namespace SR_PHYSICS_NS {
         const bool hasHit = pScene->sweep(
             geometry,
             pose,
-            physx::PxVec3(0.0f, -1.0f, 0.0f),
+            -up,
             config.groundProbeDistance,
             callback,
             physx::PxHitFlag::eDEFAULT,
@@ -204,6 +205,12 @@ namespace SR_PHYSICS_NS {
             return false;
         }
 
-        return callback.hit.normal.y >= minGroundNormalY;
+        return callback.hit.normal.dot(up) >= minGroundNormalY;
+    }
+
+    void PhysXCharacterControllerImpl::SetUpDirection(const SR_MATH_NS::FVector3& up) {
+        if (m_pxController) {
+            m_pxController->setUpDirection(SR_PHYSICS_UTILS_NS::FV3ToPxV3(up));
+        }
     }
 }

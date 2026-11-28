@@ -47,8 +47,9 @@ namespace SR_CORE_NS {
         using Super = SR_HTYPES_NS::SharedPtr<ITerrainChunk>;
         SR_CLASS()
     public:
+        /// Generating - данные генерируются асинхронно (см. ITerrainChunkDataGenerator::BeginChunkData)
         enum class Status : uint8_t {
-            Pool, Created, Loaded
+            Pool, Created, Generating, Loaded
         };
 
     public:
@@ -85,7 +86,23 @@ namespace SR_CORE_NS {
         ITerrainChunkDataGenerator();
 
     public:
+        /// Синхронная генерация: данные готовы по возврату
         virtual void GenerateChunkData(Terrain& terrain, ITerrainChunk& chunk, const TerrainObserverData& observer, float_t distance) { }
+
+        /// ---- Асинхронная генерация. По умолчанию сводится к синхронной.
+        /// Можно ли начать ещё одну генерацию (асинхронные генераторы ограничены числом задач в полёте)
+        SR_NODISCARD virtual bool CanBeginChunkData() const { return true; }
+        /// Начать генерацию. true - данные будут готовы позже и придут в onLoaded из UpdateChunkData, false - уже готовы
+        virtual bool BeginChunkData(Terrain& terrain, ITerrainChunk& chunk, const TerrainObserverData& observer) {
+            GenerateChunkData(terrain, chunk, observer, 0.f);
+            return false;
+        }
+        /// Завершает готовые асинхронные генерации, для каждого чанка вызывается onLoaded
+        virtual void UpdateChunkData(Terrain& terrain, const SR_HTYPES_NS::Function<void(ITerrainChunk&)>& onLoaded) { }
+        /// Чанк больше не нужен (ушёл в пул): результат его генерации выбрасывается
+        virtual void CancelChunkData(ITerrainChunk& chunk) { }
+        /// Дождаться и выбросить все генерации в полёте: ресурсы генератора больше не используются GPU
+        virtual void Shutdown() { }
 
     };
 
@@ -98,7 +115,10 @@ namespace SR_CORE_NS {
 
     public:
         virtual void Update(Terrain& terrain, const TerrainObserverData& observer, float_t dt) { }
-        virtual void LoadNextChunk(const SR_HTYPES_NS::Function<void(ITerrainChunk&)>& loaderFn) { }
+        /// loaderFn начинает генерацию чанка, false - начать нельзя (нет свободных задач), чанк остаётся в очереди
+        virtual void LoadNextChunk(const SR_HTYPES_NS::Function<bool(ITerrainChunk&)>& loaderFn) { }
+        /// Данные чанка готовы (синхронно или по завершении асинхронной генерации)
+        virtual void OnChunkLoaded(ITerrainChunk& chunk) { chunk.SetStatus(ITerrainChunk::Status::Loaded); }
 
         SR_NODISCARD virtual bool IsCollisionEnabledAt(const ITerrainChunk& chunk) const { return false; }
         /// Перегенерировать чанки, пересекающие область (мировые координаты)
@@ -149,6 +169,12 @@ namespace SR_CORE_NS {
         Box
     )
 
+    /// Форма мира террейна: плоский (вверх - ось Y) или сферический (планета, вверх - от центра)
+    SR_ENUM_NS_CLASS_T(TerrainShape, uint8_t,
+        Flat,
+        Sphere
+    )
+
     struct TerrainDeformation : public SR_UTILS_NS::Serializable {
         SR_STRUCT()
 
@@ -174,10 +200,14 @@ namespace SR_CORE_NS {
 
         void OnDestroy() override;
 
+        /// Мир строится и в редакторе - вокруг редакторной камеры (см. GetObserver)
+        SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
+
         SR_NODISCARD TerrainObserverData GetObserver() const;
 
         SR_NODISCARD TerrainGrass* GetGrass() const noexcept;
         SR_NODISCARD ITerrainChunkGenerator* GetChunkGenerator() const noexcept;
+        SR_NODISCARD ITerrainChunkDataGenerator* GetChunkDataGenerator() const noexcept { return const_cast<ITerrainChunkDataGenerator*>(m_chunkDataGenerator.Get()); }
 
         void LateUpdate() override;
 
@@ -190,7 +220,27 @@ namespace SR_CORE_NS {
         /// Есть ли правки плотности в области точек сетки [min, max]
         SR_NODISCARD bool HasDensityOffsets(const SR_MATH_NS::IVector3& min, const SR_MATH_NS::IVector3& max) const;
 
+        SR_NODISCARD TerrainShape GetShape() const noexcept { return m_shape; }
+        SR_NODISCARD const SR_MATH_NS::FVector3& GetSphereCenter() const noexcept { return m_sphereCenter; }
+        SR_NODISCARD float_t GetSphereInnerRadius() const noexcept { return m_sphereInnerRadius; }
+        SR_NODISCARD float_t GetSphereOuterRadius() const noexcept { return m_sphereOuterRadius; }
+
+        /// Направление "вверх" поверхности в мировой точке: Y для плоского мира, от центра для сферы
+        /// @method @evaluate
+        SR_NODISCARD SR_MATH_NS::FVector3 GetUpDirection(const SR_MATH_NS::FVector3& position) const;
+        /// Может ли в области (мировые координаты) быть поверхность. Для сферы - пересечение с оболочкой [inner, outer]
+        SR_NODISCARD bool IsVolumeIntersects(const SR_MATH_NS::AABB& bounds) const;
+
     private:
+        /// @property @group(Shape)
+        TerrainShape m_shape = TerrainShape::Flat;
+        /// @property @group(Shape) @tooltip(Центр сферы в мировых координатах)
+        SR_MATH_NS::FVector3 m_sphereCenter;
+        /// @property @group(Shape) @tooltip(Чанки глубже этого радиуса не создаются. Должен быть ниже самых глубоких пещер)
+        float_t m_sphereInnerRadius = 900.f;
+        /// @property @group(Shape) @tooltip(Чанки выше этого радиуса не создаются. Должен быть выше самых высоких гор)
+        float_t m_sphereOuterRadius = 1100.f;
+
         /// @property @tooltip(If not present, will be used main camera of the scene)
         SR_UTILS_NS::EntityRef<SR_GTYPES_NS::Camera> m_camera;
         /// @property @notNull

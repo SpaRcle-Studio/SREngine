@@ -3,6 +3,10 @@
 [[uniform], [public]] sampler2D stoneTex;
 [[uniform], [public]] sampler2D sandTex;
 [[uniform], [public]] float blendSharpness = 0.25; // ширина перехода между материалами с учётом рельефа текстур
+[[uniform], [public]] vec3 soilColor = vec3(1.0, 1.0, 1.0); // множитель цвета материалов: без текстур задаёт цвет целиком
+[[uniform], [public]] vec3 stoneColor = vec3(1.0, 1.0, 1.0);
+[[uniform], [public]] vec3 sandColor = vec3(1.0, 1.0, 1.0);
+[[uniform], [public]] float textureWrapPeriod = 1024.0; // период заворачивания мировых координат в метрах, 0 - без заворачивания
 
 float hash(vec2 p) {
     return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
@@ -38,14 +42,21 @@ vec4 triplanarMaterial() {
     blend = pow(blend, vec3(4.0));          // резкость перехода
     blend /= (blend.x + blend.y + blend.z); // нормализация
 
-    // проекции координат считаются один раз для всех материалов
-    vec2 uvX = VERTEX.zy * textureScale + getTileOffset(VERTEX.zy);
-    vec2 uvY = VERTEX.xz * textureScale + getTileOffset(VERTEX.xz);
-    vec2 uvZ = VERTEX.xy * textureScale + getTileOffset(VERTEX.xy);
+    // Мировые координаты заворачиваются с периодом textureWrapPeriod: вдали от начала координат (планеты)
+    // float теряет точность, и UV дрожат. Шов незаметен, если textureWrapPeriod * textureScale - целое и кратно размеру тайла (4 м)
+    vec3 p = VERTEX;
+    if (textureWrapPeriod > 0.0) {
+        p = mod(VERTEX, vec3(textureWrapPeriod));
+    }
 
-    vec4 soil = sampleTriplanar(soilTex, uvX, uvY, uvZ, blend);
-    vec4 stone = sampleTriplanar(stoneTex, uvX, uvY, uvZ, blend);
-    vec4 sand = sampleTriplanar(sandTex, uvX, uvY, uvZ, blend);
+    // проекции координат считаются один раз для всех материалов
+    vec2 uvX = p.zy * textureScale + getTileOffset(p.zy);
+    vec2 uvY = p.xz * textureScale + getTileOffset(p.xz);
+    vec2 uvZ = p.xy * textureScale + getTileOffset(p.xy);
+
+    vec4 soil = sampleTriplanar(soilTex, uvX, uvY, uvZ, blend) * vec4(soilColor, 1.0);
+    vec4 stone = sampleTriplanar(stoneTex, uvX, uvY, uvZ, blend) * vec4(stoneColor, 1.0);
+    vec4 sand = sampleTriplanar(sandTex, uvX, uvY, uvZ, blend) * vec4(sandColor, 1.0);
 
     // Веса всех трёх материалов интерполируются по треугольнику (раньше id материала был flat и
     // на стыке трёх материалов менялся скачком по границе треугольника)

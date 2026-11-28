@@ -191,7 +191,7 @@ namespace SR_PHYSICS_NS {
         desc.height = pController->GetConfig().height;
         desc.radius = pController->GetConfig().radius;
         desc.position = SR_PHYSICS_UTILS_NS::FV3ToPxV3Extended(pController->GetTransform()->GetTranslation() + pController->GetConfig().offset);
-        desc.upDirection = physx::PxVec3(0, 1, 0);
+        desc.upDirection = SR_PHYSICS_UTILS_NS::FV3ToPxV3(pController->GetUpDirection());
         desc.material = static_cast<physx::PxMaterial*>(pMaterialData->GetMaterialImpl(LibraryType::PhysX)->GetHandle());
         desc.stepOffset = pController->GetConfig().stepOffset;
         desc.slopeLimit = SR_COS(pController->GetConfig().slopeLimit * SR_PI / 180.0f);

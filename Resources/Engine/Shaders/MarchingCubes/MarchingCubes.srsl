@@ -23,7 +23,9 @@ struct Voxel {
 
 [[ssbo(voxels)]] Voxel[] voxels;
 
-[[const], [uniform]] int vertexHashTableSize;
+// Ёмкости буферов vertices и indices: запись за границу портит соседние буферы (в т.ч. счётчики других задач)
+[[const], [uniform]] int maxVertexCount;
+[[const], [uniform]] int maxIndicesCount;
 [[const], [uniform]] int densityCountAxis = 0;
 [[const], [uniform]] float isoLevel = 0.2;
 
@@ -145,6 +147,11 @@ void prepareHashTable(ivec3 coordA, ivec3 coordB) {
     }
 
     uint newIndex = atomicAdd(vertexCount, 1);
+    if (newIndex >= uint(maxVertexCount)) {
+        // Буфер переполнен: вершину не пишем, счётчик выйдет за ёмкость и CPU это заметит
+        hashTable[idx] = 0;
+        return;
+    }
     vertices[newIndex] = createVertex(coordA, coordB);
     hashTable[idx] = newIndex;
 }
@@ -152,6 +159,21 @@ void prepareHashTable(ivec3 coordA, ivec3 coordB) {
 [[THREADS(8, 8, 8)]]
 void compute() {
     ivec3 voxelPos = ivec3(GLOBAL_INVOCATION_ID.xyz);
+
+    /// Этап 2 - очистка таблицы рёбер на GPU (запускается первым). Поток вокселя сбрасывает три его ребра:
+    /// индексы рёбер (getEdgeIndex) покрывают ровно [0, 3 * N^3)
+    if (COMPUTE_STAGE == 2) {
+        if (!any(greaterThanEqual(voxelPos, ivec3(densityCountAxis)))) {
+            uint count = uint(densityCountAxis);
+            uint edgeBase = uint(voxelPos.z) * count * count + uint(voxelPos.y) * count + uint(voxelPos.x);
+            uint edgeStride = count * count * count;
+            hashTable[edgeBase] = uint(-1);
+            hashTable[edgeBase + edgeStride] = uint(-1);
+            hashTable[edgeBase + edgeStride * uint(2)] = uint(-1);
+        }
+        return;
+    }
+
     if (voxelPos.x < 1 || voxelPos.x >= densityCountAxis - 1 ||
         voxelPos.y < 1 || voxelPos.y >= densityCountAxis - 1 ||
         voxelPos.z < 1 || voxelPos.z >= densityCountAxis - 1) {
@@ -200,6 +222,10 @@ void compute() {
             uint indexC = getOrInsertVertexHashTable(cornerCoords[c0], cornerCoords[c1]);
 
             uint baseIndex = atomicAdd(indicesCount, 3);
+            if (baseIndex + uint(3) > uint(maxIndicesCount)) {
+                // Буфер переполнен: треугольник не пишем, счётчик выйдет за ёмкость и CPU это заметит
+                break;
+            }
             indices[baseIndex + 0] = uint(indexA);
             indices[baseIndex + 1] = uint(indexB);
             indices[baseIndex + 2] = uint(indexC);

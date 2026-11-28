@@ -6,6 +6,7 @@
 #define SR_ENGINE_WORLD_TERRAIN_CHUNK_DATA_MARCHING_CUBES_GENERATOR_H
 
 #include <Engine/World/Terrain.h>
+#include <Engine/World/TerrainChunkCube.h>
 
 #include <Graphics/Memory/SSBO.h>
 #include <Graphics/Types/ComputeShader.h>
@@ -24,6 +25,24 @@ namespace SR_CORE_NS {
     struct TerrainMarchingCubesVoxel {
         float density;
         float weights[3]; /// веса материалов (почва, камень, песок)
+    };
+
+    /// Пользовательский параметр шейдера плотности: передаётся как [[const], [uniform]] vec4 с этим именем
+    struct TerrainDensityParameter : public SR_UTILS_NS::Serializable {
+        SR_STRUCT()
+    public:
+        /// @property
+        SR_UTILS_NS::StringAtom name;
+        /// @property
+        SR_MATH_NS::FVector4 value;
+
+        bool operator==(const TerrainDensityParameter& other) const noexcept {
+            return name == other.name && value == other.value;
+        }
+
+        bool operator!=(const TerrainDensityParameter& other) const noexcept {
+            return !(*this == other);
+        }
     };
 
     class TerrainMarchingCubesChunkData : public ITerrainChunkData {
@@ -58,10 +77,55 @@ namespace SR_CORE_NS {
         using Super = ITerrainChunkDataGenerator;
         SR_CLASS()
     public:
+        ~TerrainChunkDataMarchingCubesGenerator() override;
+
+    public:
         void GenerateChunkData(Terrain& terrain, ITerrainChunk& chunk, const TerrainObserverData& observer, float_t distance) override;
 
+        SR_NODISCARD bool CanBeginChunkData() const override;
+        bool BeginChunkData(Terrain& terrain, ITerrainChunk& chunk, const TerrainObserverData& observer) override;
+        void UpdateChunkData(Terrain& terrain, const SR_HTYPES_NS::Function<void(ITerrainChunk&)>& onLoaded) override;
+        void CancelChunkData(ITerrainChunk& chunk) override;
+        void Shutdown() override;
+
     private:
+        /// Ресурсы одной генерации. Пока задача на GPU, её буферы и дескрипторы трогать нельзя, поэтому у каждой
+        /// задачи свои SSBO и свои экземпляры compute шейдеров (у экземпляра свой набор дескрипторов).
+        /// У этапов marching cubes тоже разные экземпляры: дескрипторы, привязанные в записываемом буфере, не перезаписываются
+        struct GenerationSlot {
+            SR_GTYPES_NS::ComputeShader::Ptr pDensityShader = nullptr;
+            /// Этапы MarchingCubes.srsl: 0 - вершины, 1 - индексы, 2 - очистка таблицы рёбер
+            std::array<SR_GTYPES_NS::ComputeShader::Ptr, 3> marchingShaders;
+
+            SR_GRAPH_NS::SSBOInstance::Ptr pDensitySSBO = nullptr;
+            SR_GRAPH_NS::SSBOInstance::Ptr pDensityOffsetsSSBO = nullptr;
+            SR_GRAPH_NS::SSBOInstance::Ptr pHashTableSSBO = nullptr;
+            SR_GRAPH_NS::SSBOInstance::Ptr pVerticesSSBO = nullptr;
+            SR_GRAPH_NS::SSBOInstance::Ptr pIndicesSSBO = nullptr;
+
+            /// Чанк, для которого идёт генерация. nullptr - генерация отменена, результат выбрасывается
+            ITerrainChunk::Ptr pChunk;
+            /// Задача Pipeline::BeginAsyncCompute, SR_ID_INVALID - вычисления прошли синхронно
+            int32_t computeTask = SR_ID_INVALID;
+            bool isBusy = false;
+            bool isFailed = false;
+        };
+
         bool Init();
+        SR_NODISCARD bool CreateSlotResources(GenerationSlot& slot);
+        SR_NODISCARD GenerationSlot* FindFreeSlot() const;
+        SR_NODISCARD bool HasBusySlots() const;
+        /// Настройки, от которых зависят размеры буферов и число слотов, изменились после создания слотов
+        SR_NODISCARD bool IsSlotsOutdated() const;
+        SR_NODISCARD uint64_t GetMaxVertexCount() const;
+        SR_NODISCARD uint64_t GetMaxIndicesCount() const;
+
+        /// Подготовка данных чанка и запись вычислений. true - вычисления асинхронные и ещё идут
+        bool DispatchSlot(Terrain& terrain, TerrainChunkCube& chunk, GenerationSlot& slot);
+        /// Чтение результата с GPU и построение меша, травы, коллизии. Слот освобождается
+        void FinishSlot(Terrain& terrain, GenerationSlot& slot);
+        void ReleaseSlot(GenerationSlot& slot);
+        void BuildChunk(Terrain& terrain, TerrainChunkCube& chunk, GenerationSlot& slot);
 
     private:
         /// @property
@@ -81,11 +145,15 @@ namespace SR_CORE_NS {
         int64_t m_seed = 0;
         /// @property @group(Density)
         float_t m_isoLevel = 1.f;
+        /// @property @group(Density) @tooltip(Параметры шейдера плотности. Каждый передаётся как vec4 uniform с указанным именем. Кроме них шейдер всегда получает voxelSize (vec3, метры) и terrainUp (vec4: xyz - центр сферы, w - 1 для сферы, 0 для плоского мира))
+        SR_UTILS_NS::Vector<TerrainDensityParameter> m_densityParameters;
 
-        /// @property @group(SSBO)
-        uint32_t m_numPointsPerAxis = 32;
-        /// @property @group(SSBO)
+        /// @property @group(SSBO) @tooltip(Размер таблицы рёбер. Меньше числа рёбер сетки (3 * densityCountAxis^3) не бывает)
         uint32_t m_vertexHashTableSize = 800000;
+        /// @property @group(SSBO) @range(1, 32) @tooltip(Сколько чанков может генерироваться на GPU одновременно. Каждая задача держит свой набор буферов. Без поддержки асинхронных вычислений API генерация синхронная)
+        uint32_t m_maxGenerationsInFlight = 16;
+        /// @property @group(SSBO) @range(0.f, 100.f) @tooltip(Бюджет времени на сборку готовых чанков за кадр (чтение с GPU, нормали, юбки, трава), мс. Хотя бы один чанк собирается всегда. 0 - без ограничения)
+        float_t m_finishBudgetMs = 4.f;
 
         /// @property
         SR_MATH_NS::FVector3 m_geometryScale = SR_MATH_NS::FVector3(1.f);
@@ -99,18 +167,19 @@ namespace SR_CORE_NS {
     private:
         bool m_isInitialized = false;
 
+        /// Настройки, с которыми созданы слоты. Поменялись в инспекторе - слоты пересоздаются, когда все задачи завершатся
+        /// (иначе диспатч по новой сетке пишет за границы старых буферов и портит соседние)
+        uint32_t m_slotsDensityCountAxis = 0;
+        uint32_t m_slotsHashTableSize = 0;
+        uint32_t m_slotsCount = 0;
+        SR_UTILS_NS::Path m_slotsMarchingCubesShader;
+        SR_UTILS_NS::Path m_slotsDensityShader;
+
         SR_UTILS_NS::VertexDataBuffer m_vertices;
         SR_HTYPES_NS::FastMemoryArray<uint32_t> m_indices;
         SR_HTYPES_NS::FastMemoryArray<float_t> m_densityOffsets;
 
-        SR_GTYPES_NS::ComputeShader::Ptr m_pMarchingComputeShader = nullptr;
-        SR_GTYPES_NS::ComputeShader::Ptr m_pDensityComputeShader = nullptr;
-
-        SR_GRAPH_NS::SSBOInstance::Ptr m_pDensitySSBO = nullptr;
-        SR_GRAPH_NS::SSBOInstance::Ptr m_pDensityOffsetsSSBO = nullptr;
-        SR_GRAPH_NS::SSBOInstance::Ptr m_pHashTableSSBO = nullptr;
-        SR_GRAPH_NS::SSBOInstance::Ptr m_pVerticesSSBO = nullptr;
-        SR_GRAPH_NS::SSBOInstance::Ptr m_pIndicesSSBO = nullptr;
+        SR_UTILS_NS::Vector<SR_UTILS_NS::RawPointerHolder<GenerationSlot>> m_slots;
 
     };
 }

@@ -182,7 +182,14 @@ namespace SR_SCRIPTING_NS::AngelScriptTypeReflection {
             vtable.pEnumCount = &EnumCount;
             vtable.pEnumValue = &EnumValue;
             pEnum->SetUserData(pBindings, ScriptTypeUserData);
-            return SR_UTILS_NS::Reflection::InternTypeInfo(key, vtable, pEnum);
+            auto&& pInfo = SR_UTILS_NS::Reflection::InternTypeInfo(key, vtable, pEnum);
+            /// asCEnumType не вызывает очистку user data при удалении, поэтому Forget для enum не срабатывает
+            /// и после пересборки модуля в реестре остаётся TypeInfo с указателем на удалённый тип.
+            if (pInfo->vtable.pRuntimeData != pEnum) {
+                SR_UTILS_NS::Reflection::UnregisterModuleTypes(pInfo->pOwnerModule);
+                pInfo = SR_UTILS_NS::Reflection::InternTypeInfo(key, vtable, pEnum);
+            }
+            return pInfo;
         }
         auto&& pType = pEngine->GetTypeInfoById(typeId);
         if (!pType || !(pType->GetFlags() & asOBJ_SCRIPT_OBJECT)) {

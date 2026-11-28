@@ -22,6 +22,8 @@ BlendEnabled false;
 /// ------------------------------------------ параметры, выставляемые из кода ------------------------------------------
 
 [[uniform]] vec3 grassOrigin;
+/// Направление "вверх" поверхности чанка (Y для плоского мира, от центра для планеты)
+[[uniform]] vec3 grassUp = vec3(0.0, 1.0, 0.0);
 [[uniform]] float grassFullDensityDistance = 12.0;
 [[uniform]] float grassMaxDistance = 80.0;
 [[uniform]] float grassFalloff = 1.6;
@@ -151,6 +153,31 @@ float grassFbm2(vec2 p) {
     return grassNoise(p) * 0.65 + grassNoise(p * 2.13 + vec2(17.1, 3.7)) * 0.35;
 }
 
+/// Оси мира, задающие плоскость шума и ветра: две оси, наименее совпадающие с grassUp (как в TerrainGrass::Generate).
+/// Для плоского мира - X и Z, т.е. прежние root.xz
+vec3 grassAxisU() {
+    vec3 a = abs(grassUp);
+    if (a.x > a.y && a.x > a.z) {
+        return vec3(0.0, 0.0, 1.0);
+    }
+    return vec3(1.0, 0.0, 0.0);
+}
+
+vec3 grassAxisV() {
+    vec3 a = abs(grassUp);
+    if (a.x > a.y && a.x > a.z) {
+        return vec3(0.0, 1.0, 0.0);
+    }
+    if (a.z > a.y) {
+        return vec3(0.0, 1.0, 0.0);
+    }
+    return vec3(0.0, 0.0, 1.0);
+}
+
+vec2 grassPlane(vec3 p) {
+    return vec2(dot(p, grassAxisU()), dot(p, grassAxisV()));
+}
+
 float grassKeepFraction(float distance) {
     if (distance <= grassFullDensityDistance) {
         return 1.0;
@@ -171,8 +198,8 @@ vec3 grassBendPush(GrassBender bender, vec3 root, float height, vec3 fallback) {
     }
 
     vec3 delta = root - bender.positionRadius.xyz;
-    float above = -delta.y;
-    delta.y = 0.0;
+    float above = -dot(delta, grassUp);
+    delta = delta + grassUp * above;
 
     float distSq = dot(delta, delta);
     if (distSq >= radius * radius) {
@@ -215,7 +242,7 @@ void vertex() {
     /// Значения для погашенной LOD травинки: все вершины в одной точке, вырожденные треугольники растеризатор отбросит
     VERTEX = root;
     grassWorldPos = root;
-    grassNormal = vec3(0.0, 1.0, 0.0);
+    grassNormal = grassUp;
     grassT = 0.0;
     grassWind = 0.0;
     grassAlbedo = vec3(0.0);
@@ -232,12 +259,13 @@ void vertex() {
         float r6 = grassHash11(rnd * 1000.0 + 7.0);
 
         /// ---- кланпы: соседние травинки получают общую высоту и оттенок
-        vec2 clumpCell = floor(root.xz / max(clumpSize, 0.01));
+        vec2 rootPlane = grassPlane(root);
+        vec2 clumpCell = floor(rootPlane / max(clumpSize, 0.01));
         float clumpA = grassHash21(clumpCell);
         float clumpB = grassHash21(clumpCell + vec2(17.31, 5.17));
 
         /// ---- сухость: пятна по шуму + отдельные сухие травинки
-        float dryNoise = grassNoise(root.xz * dryNoiseScale + vec2(31.7, 11.3));
+        float dryNoise = grassNoise(rootPlane * dryNoiseScale + vec2(31.7, 11.3));
         float dry = smoothstep(0.5, 0.85, dryNoise) * dryAmount;
         dry = clamp(dry + (clumpB - 0.5) * 0.3 * dryAmount, 0.0, 1.0);
         float dryBlade = 0.0;
@@ -284,10 +312,12 @@ void vertex() {
         width *= fade;
 
         /// ---- базис травинки
-        vec3 up = normalize(mix(vec3(0.0, 1.0, 0.0), normalize(terrainNormal), normalInfluence));
+        vec3 up = normalize(mix(grassUp, normalize(terrainNormal), normalInfluence));
+        vec3 axisU = grassAxisU();
+        vec3 axisV = grassAxisV();
 
         float angle = r2 * 6.2831853;
-        vec3 forward = vec3(cos(angle), 0.0, sin(angle));
+        vec3 forward = axisU * cos(angle) + axisV * sin(angle);
 
         /// разворачиваем травинку к камере, когда она видна ребром - иначе поле "мерцает" и выглядит редким
         vec3 viewH = toCamera - up * dot(toCamera, up);
@@ -313,18 +343,18 @@ void vertex() {
         /// вокруг наклона с фазой, зависящей от позиции (волна переходит от травинки к травинке),
         /// и мелко дрожат поперёк ветра. Сила раскачки растёт в порывах.
         vec2 windDir2 = normalize(windDirection);
-        vec3 windDir = vec3(windDir2.x, 0.0, windDir2.y);
+        vec3 windDir = axisU * windDir2.x + axisV * windDir2.y;
         windDir = normalize(windDir - up * dot(windDir, up) + vec3(0.00001));
         vec3 windSide = normalize(cross(up, windDir));
 
         float time = TIME * timeScale;
-        vec2 windUV = root.xz * windScale - windDir2 * (time * windSpeed * windScale);
+        vec2 windUV = rootPlane * windScale - windDir2 * (time * windSpeed * windScale);
         float gust = smoothstep(0.3, 0.8, grassFbm2(windUV));
 
         float lean = windStrength * (0.2 + 0.8 * gust);
-        float swayPhase = dot(root.xz, windDir2) * windWaveFrequency - time * windSwaySpeed + rnd * 1.7;
+        float swayPhase = dot(rootPlane, windDir2) * windWaveFrequency - time * windSwaySpeed + rnd * 1.7;
         float sway = sin(swayPhase) * windSwayStrength * (0.35 + gust);
-        float flutter = sin(time * windFlutterSpeed + rnd * 6.2831853 + root.x * 1.7 + root.z * 1.3) * windFlutterStrength * (0.3 + gust);
+        float flutter = sin(time * windFlutterSpeed + rnd * 6.2831853 + rootPlane.x * 1.7 + rootPlane.y * 1.3) * windFlutterStrength * (0.3 + gust);
 
         /// высокие травинки гнутся сильнее, короткие жёстче
         float flex = clamp(height / max(bladeHeightMax, 0.01), 0.3, 1.3) / stiffness;
@@ -434,7 +464,7 @@ void vertex() {
         grassWind = gust * (1.0 - pressed);
 
         /// ---- цвет
-        float colorNoise = grassNoise(root.xz * colorNoiseScale + vec2(5.3, 71.9));
+        float colorNoise = grassNoise(rootPlane * colorNoiseScale + vec2(5.3, 71.9));
         float hue = clamp(r1 * 0.45 + clumpB * 0.35 + (colorNoise - 0.5) * 0.8 + 0.1, 0.0, 1.0) * hueVariation;
         vec3 fresh = mix(baseColor, baseColorWarm, hue);
 
@@ -521,7 +551,7 @@ void fragment() {
     float specNorm = (specularPower + 8.0) / 25.1327;
     float spec = pow(ndoth, specularPower) * specNorm * fresnel * specularIntensity * max(ndotlRaw, 0.0) * mix(1.0, 0.4, grassDry) * grassT;
 
-    float upFactor = clamp(N.y * 0.5 + 0.5, 0.0, 1.0);
+    float upFactor = clamp(dot(N, grassUp) * 0.5 + 0.5, 0.0, 1.0);
     vec3 ambient = mix(GROUND_COLOR, SKY_COLOR, upFactor) * AMBIENT_INTENSITY * ao;
 
     vec3 lighting =

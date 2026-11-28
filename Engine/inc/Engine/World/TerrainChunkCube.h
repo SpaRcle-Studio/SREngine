@@ -33,6 +33,10 @@ namespace SR_CORE_NS {
         /// Данные чанка устарели (деформация), но перегенерировать сейчас нельзя: его место ещё закрыто заменяемым чанком
         SR_NODISCARD bool IsDirty() const noexcept { return m_isDirty; }
         void SetDirty(bool dirty) noexcept { m_isDirty = dirty; }
+        /// Чанк загружен, но его объект выключен: его место ещё закрывает заменяемый чанк, а остальная замена не загружена.
+        /// Показывается вместе со всей заменой, иначе старый и новый LOD долго видны одновременно и пересекаются
+        SR_NODISCARD bool IsHidden() const noexcept { return m_isHidden; }
+        void SetHidden(bool hidden) noexcept { m_isHidden = hidden; }
 
         SR_NODISCARD float_t GetDistanceTo(const ITerrainChunk& other) const override;
 
@@ -41,6 +45,7 @@ namespace SR_CORE_NS {
         uint8_t m_lodBorders = 0;
         uint32_t m_replaceFrames = 0;
         bool m_isDirty = false;
+        bool m_isHidden = false;
 
     };
 
@@ -49,7 +54,8 @@ namespace SR_CORE_NS {
         SR_CLASS()
     public:
         void Update(Terrain& terrain, const TerrainObserverData& observer, float_t dt) override;
-        void LoadNextChunk(const SR_HTYPES_NS::Function<void(ITerrainChunk&)>& loaderFn) override;
+        void LoadNextChunk(const SR_HTYPES_NS::Function<bool(ITerrainChunk&)>& loaderFn) override;
+        void OnChunkLoaded(ITerrainChunk& chunk) override;
 
         SR_NODISCARD bool IsCollisionEnabledAt(const ITerrainChunk& chunk) const override;
         void InvalidateRegion(const SR_MATH_NS::AABB& bounds) override;
@@ -63,12 +69,23 @@ namespace SR_CORE_NS {
         void SetupChunkObject(ITerrainChunk& chunk, SR_UTILS_NS::SceneObject& object) override;
 
     private:
-        void LoadNearestChunk(const SR_HTYPES_NS::Function<void(ITerrainChunk&)>& loaderFn);
+        /// false - генерацию начать нельзя (нет свободных задач)
+        bool LoadNearestChunk(const SR_HTYPES_NS::Function<bool(ITerrainChunk&)>& loaderFn);
         void RebuildTree();
         void UpdatePhysics();
         void ReleaseReplacedChunks();
         void RegenerateChunk(TerrainChunkCube::Ptr& pChunk);
         SR_NODISCARD bool IsCoveredByReplaced(const SR_MATH_NS::OctreeNodeId& node) const;
+        SR_NODISCARD bool IntersectsReplaced(const SR_MATH_NS::OctreeNodeId& node) const;
+        /// Все текущие чанки в области узла загружены
+        SR_NODISCARD bool IsAreaLoaded(const SR_MATH_NS::OctreeNodeId& node) const;
+        void RevealHiddenChunks();
+        /// Пересобирает множества незагруженных и неготовых чанков (для IsReady/IsAreaLoaded)
+        void UpdateChunkSets();
+        SR_NODISCARD uint8_t GetMaxLevel() const noexcept { return static_cast<uint8_t>(std::min<uint32_t>(m_lodLevels, 12)); }
+        SR_NODISCARD const SR_MATH_NS::OctreeNodeSet& GetReplacedSet() const;
+        /// Чанк перестал быть нужен: видимый остаётся до загрузки замены, скрытый освобождается сразу
+        void RetireChunk(const TerrainChunkCube::Ptr& pChunk);
         void ReleaseChunk(const TerrainChunkCube::Ptr& pChunk);
         SR_NODISCARD TerrainChunkCube::Ptr CreateChunk(const SR_MATH_NS::OctreeNodeId& node);
 
@@ -80,7 +97,7 @@ namespace SR_CORE_NS {
     private:
         /// @property @notNull
         TerrainChunkCube::Ptr m_chunkProto;
-        /// @property @range(0, 8) @tooltip(Количество уровней детализации. Корневой узел имеет размер 2^lodLevels чанков)
+        /// @property @range(0, 12) @tooltip(Количество уровней детализации. Корневой узел имеет размер 2^lodLevels чанков)
         uint32_t m_lodLevels = 3;
         /// @property @range(1.f, 8.f) @tooltip(Узел делится, пока наблюдатель ближе чем размер узла * splitDistance)
         float_t m_splitDistance = 1.5f;
@@ -96,8 +113,10 @@ namespace SR_CORE_NS {
         float_t m_drawDistance = 0.f;
         /// @property @range(0, 512) @tooltip(Коллизия строится только для чанков нулевого LOD на этом расстоянии в чанках)
         uint32_t m_physicsDistance = 1;
-        /// @property @range(1, 64) @tooltip(Сколько чанков генерировать за кадр)
+        /// @property @range(1, 64) @tooltip(Максимум чанков, генерируемых за кадр)
         uint32_t m_chunksPerFrame = 1;
+        /// @property @range(0.f, 100.f) @tooltip(Бюджет времени генерации чанков за кадр, мс. Генерация идёт, пока бюджет не исчерпан (но не больше chunksPerFrame и хотя бы один чанк). 0 - без бюджета, ровно chunksPerFrame)
+        float_t m_generationBudgetMs = 0.f;
         /// @property @range(1, 64) @tooltip(Сколько коллизий чанков можно построить за кадр)
         uint32_t m_maxPhysicsBuildsPerFrame = 1;
         /// @property @range(0.01f, 64.f) @tooltip(Перестраивать дерево, когда наблюдатель сместился на эту долю чанка)
@@ -119,6 +138,8 @@ namespace SR_CORE_NS {
         uint32_t m_chunksWithObjectCount = 0;
 
     private:
+        /// Террейн, которому принадлежит генератор (выставляется в Update). Нужен для формы мира при построении дерева
+        const Terrain* m_terrain = nullptr;
         SR_MATH_NS::FVector3 m_observerNodePosition = SR_MATH_NS::FVector3(SR_MATH_NS::UnitMAX);
         SR_MATH_NS::FVector3 m_observerPosition;
         float_t m_currentDrawDistance = 0.f;
@@ -126,6 +147,16 @@ namespace SR_CORE_NS {
         bool m_physicsDirty = true;
 
         SR_HTYPES_NS::FlatHashMap<SR_MATH_NS::OctreeNodeId, TerrainChunkCube::Ptr> m_chunks;
+
+        /// Запросы "есть ли среди чанков в области узла ..." раньше перебирали все чанки на каждый заменяемый/скрытый
+        /// чанк (сотни x тысячи за кадр). Теперь это множества узлов, пересобираемые раз за проход
+        SR_MATH_NS::OctreeNodeSet m_notLoadedSet;
+        SR_MATH_NS::OctreeNodeSet m_notReadySet;
+        /// Заменяемые чанки. Пересобирается лениво, когда m_replacedChunks изменился
+        mutable SR_MATH_NS::OctreeNodeSet m_replacedSet;
+        mutable bool m_isReplacedSetDirty = true;
+        /// Заменяемые чанки, чья замена ещё не загружена целиком (RevealHiddenChunks)
+        SR_MATH_NS::OctreeNodeSet m_unrevealableSet;
         /// Чанки, которые остаются видимыми, пока не загрузятся заменяющие их узлы (без дыр при смене LOD)
         SR_UTILS_NS::Vector<TerrainChunkCube::Ptr> m_replacedChunks;
         SR_UTILS_NS::Vector<TerrainChunkCube::Ptr> m_freeChunks;

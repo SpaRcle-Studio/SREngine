@@ -27,6 +27,8 @@ namespace SR_PHYSICS_NS {
 
         SR_NODISCARD bool IsGrounded() const override;
 
+        void SetUpDirection(const SR_MATH_NS::FVector3& up) override;
+
         void Synchronize() override;
         void Interpolate(float_t alpha) override;
 

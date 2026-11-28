@@ -117,10 +117,15 @@ namespace SR_CORE_NS {
         newVertices.clear();
         newIndices.clear();
 
+        /// Юбка уходит под поверхность против нормали: так она закрывает щель при любой ориентации поверхности (в т.ч. на сфере)
+        auto&& getSkirtOffset = [&](uint32_t index) -> SR_MATH_NS::FVector3 {
+            return pVertices[index].normal * skirtDepth;
+        };
+
         auto&& getSkirtVertex = [&](uint32_t index) -> uint32_t {
             if (skirtVertex[index] == SR_UINT32_MAX) {
                 TerrainMeshVertex vertex = pVertices[index];
-                vertex.position.y -= skirtDepth;
+                vertex.position -= getSkirtOffset(index);
                 skirtVertex[index] = static_cast<uint32_t>(vertexCount + newVertices.size());
                 newVertices.emplace_back(vertex);
             }
@@ -159,7 +164,7 @@ namespace SR_CORE_NS {
                 /// Лицевая сторона определяется так же, как нормали поверхности в ComputeSmoothNormals
                 const SR_MATH_NS::FVector3 pa = pVertices[a].position;
                 const SR_MATH_NS::FVector3 pb = pVertices[b].position;
-                const SR_MATH_NS::FVector3 psa = pa - SR_MATH_NS::FVector3(0.f, skirtDepth, 0.f);
+                const SR_MATH_NS::FVector3 psa = pa - getSkirtOffset(a);
                 const bool isFront = SR_MATH_NS::FVector3::Cross(pb - pa, psa - pa).Dot(outward) > 0.f;
 
                 const uint32_t quad[6] = { a, b, sa, sa, b, sb };
@@ -183,22 +188,98 @@ namespace SR_CORE_NS {
         std::memcpy(indices.data() + oldIndicesCount, newIndices.data(), newIndices.size() * sizeof(uint32_t));
     }
 
+    TerrainChunkDataMarchingCubesGenerator::~TerrainChunkDataMarchingCubesGenerator() {
+        Shutdown();
+    }
+
     void TerrainChunkDataMarchingCubesGenerator::GenerateChunkData(Terrain& terrain, ITerrainChunk& chunk, const TerrainObserverData& observer, float_t distance) {
         SR_TRACY_ZONE;
 
-        if (!Init()) {
+        /// Синхронный вариант: та же задача, но результат ждём сразу
+        if (!BeginChunkData(terrain, chunk, observer)) {
             return;
+        }
+
+        for (auto&& pSlot : m_slots) {
+            if (pSlot->isBusy && pSlot->pChunk.Get() == &chunk) {
+                if (pSlot->computeTask != SR_ID_INVALID) {
+                    pSlot->pDensityShader->GetPipeline()->WaitAsyncCompute(pSlot->computeTask);
+                }
+                FinishSlot(terrain, *pSlot);
+                break;
+            }
+        }
+    }
+
+    bool TerrainChunkDataMarchingCubesGenerator::CanBeginChunkData() const {
+        /// До инициализации слотов нет, но первая генерация их создаст
+        if (m_slots.empty()) {
+            return true;
+        }
+
+        /// Слоты устарели - новые задачи не начинаются, пока не завершатся текущие, потом Init пересоздаст слоты
+        if (IsSlotsOutdated()) {
+            return !HasBusySlots();
+        }
+
+        return FindFreeSlot() != nullptr;
+    }
+
+    bool TerrainChunkDataMarchingCubesGenerator::HasBusySlots() const {
+        for (auto&& pSlot : m_slots) {
+            if (pSlot->isBusy) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool TerrainChunkDataMarchingCubesGenerator::IsSlotsOutdated() const {
+        return m_slotsDensityCountAxis != m_densityCountAxis
+            || m_slotsHashTableSize != m_vertexHashTableSize
+            || m_slotsCount != std::clamp<uint32_t>(m_maxGenerationsInFlight, 1, 32)
+            || m_slotsMarchingCubesShader != m_marchingCubesShader
+            || m_slotsDensityShader != m_densityShader;
+    }
+
+    uint64_t TerrainChunkDataMarchingCubesGenerator::GetMaxVertexCount() const {
+        /// Вершины дедуплицируются по рёбрам сетки, поэтому их не больше числа рёбер (3 * N^3, см. getEdgeIndex)
+        const uint64_t axis = m_slotsDensityCountAxis;
+        return 3 * axis * axis * axis;
+    }
+
+    uint64_t TerrainChunkDataMarchingCubesGenerator::GetMaxIndicesCount() const {
+        /// MarchingCubes.srsl обходит кубы с вокселями [1, N - 2], до 5 треугольников на куб
+        const uint64_t cubesPerAxis = m_slotsDensityCountAxis > 2 ? m_slotsDensityCountAxis - 2 : 0;
+        return cubesPerAxis * cubesPerAxis * cubesPerAxis * 5 * 3;
+    }
+
+    TerrainChunkDataMarchingCubesGenerator::GenerationSlot* TerrainChunkDataMarchingCubesGenerator::FindFreeSlot() const {
+        for (auto&& pSlot : m_slots) {
+            if (!pSlot->isBusy) {
+                return pSlot.Get();
+            }
+        }
+        return nullptr;
+    }
+
+    bool TerrainChunkDataMarchingCubesGenerator::BeginChunkData(Terrain& terrain, ITerrainChunk& chunk, const TerrainObserverData& observer) {
+        SR_TRACY_ZONE;
+
+        if (!Init()) {
+            return false;
         }
 
         auto&& pCubeChunk = dynamic_cast<TerrainChunkCube*>(&chunk);
         if (!pCubeChunk) {
-            SR_ERROR("TerrainChunkDataMarchingCubesGenerator::GenerateChunkData() : marching cubes generator can only generate data for TerrainChunkCube!");
-            return;
+            SR_ERROR("TerrainChunkDataMarchingCubesGenerator::BeginChunkData() : marching cubes generator can only generate data for TerrainChunkCube!");
+            return false;
         }
 
-        auto&& pChunkGenerator = terrain.GetChunkGenerator();
-        if (!pChunkGenerator) {
-            return;
+        GenerationSlot* pSlot = FindFreeSlot();
+        if (!pSlot) {
+            SRHalt("TerrainChunkDataMarchingCubesGenerator::BeginChunkData() : no free generation slots! Check CanBeginChunkData before.");
+            return false;
         }
 
         if (!chunk.GetData()) {
@@ -206,10 +287,149 @@ namespace SR_CORE_NS {
             chunk.GetData()->SetChunk(&chunk);
         }
 
-        auto&& pChunkData = chunk.GetData().DynamicCast<TerrainMarchingCubesChunkData>();
+        /// Свободный слот не должен держать задачу: иначе две задачи пишут в одни буферы и счётчики
+        SRAssert2(pSlot->computeTask == SR_ID_INVALID, "TerrainChunkDataMarchingCubesGenerator::BeginChunkData() : free slot still holds a compute task!");
+
+        pSlot->isBusy = true;
+        pSlot->isFailed = false;
+        pSlot->pChunk = &chunk;
+
+        if (DispatchSlot(terrain, *pCubeChunk, *pSlot)) {
+            return true;
+        }
+
+        /// Вычисления прошли синхронно (API без асинхронных вычислений) - результат уже можно читать
+        FinishSlot(terrain, *pSlot);
+        return false;
+    }
+
+    void TerrainChunkDataMarchingCubesGenerator::UpdateChunkData(Terrain& terrain, const SR_HTYPES_NS::Function<void(ITerrainChunk&)>& onLoaded) {
+        SR_TRACY_ZONE;
+
+        /// Сборка чанка (чтение с GPU, нормали, юбки, трава, меш) - CPU работа. При десятках слотов все готовые за кадр
+        /// не собрать без просадки, остальные подождут следующего кадра (на GPU они уже готовы)
+        const auto startTime = std::chrono::steady_clock::now();
+        uint32_t finished = 0;
+
+        for (auto&& pSlot : m_slots) {
+            if (!pSlot->isBusy || pSlot->computeTask == SR_ID_INVALID) {
+                continue;
+            }
+
+            if (finished > 0 && m_finishBudgetMs > 0.f) {
+                const float_t elapsedMs = std::chrono::duration<float_t, std::milli>(std::chrono::steady_clock::now() - startTime).count();
+                if (elapsedMs >= m_finishBudgetMs) {
+                    break;
+                }
+            }
+
+            auto&& pPipeline = pSlot->pDensityShader->GetPipeline();
+            if (!pPipeline->IsAsyncComputeComplete(pSlot->computeTask)) {
+                continue;
+            }
+
+            /// FinishSlot освобождает слот (и обнуляет pChunk), поэтому чанк забираем заранее
+            ITerrainChunk::Ptr pChunk = pSlot->pChunk;
+            FinishSlot(terrain, *pSlot);
+
+            if (pChunk) {
+                onLoaded(*pChunk);
+                /// Отменённые задачи почти ничего не стоят и в бюджет не считаются
+                ++finished;
+            }
+        }
+    }
+
+    void TerrainChunkDataMarchingCubesGenerator::CancelChunkData(ITerrainChunk& chunk) {
+        for (auto&& pSlot : m_slots) {
+            if (pSlot->isBusy && pSlot->pChunk.Get() == &chunk) {
+                /// Задача на GPU продолжит выполняться, её результат выбросит UpdateChunkData
+                pSlot->pChunk = nullptr;
+            }
+        }
+    }
+
+    void TerrainChunkDataMarchingCubesGenerator::Shutdown() {
+        SR_TRACY_ZONE;
+
+        for (auto&& pSlot : m_slots) {
+            if (!pSlot->isBusy) {
+                continue;
+            }
+
+            pSlot->pChunk = nullptr;
+
+            if (pSlot->computeTask != SR_ID_INVALID) {
+                auto&& pPipeline = pSlot->pDensityShader->GetPipeline();
+                pPipeline->WaitAsyncCompute(pSlot->computeTask);
+            }
+
+            ReleaseSlot(*pSlot);
+        }
+    }
+
+    void TerrainChunkDataMarchingCubesGenerator::ReleaseSlot(GenerationSlot& slot) {
+        if (slot.computeTask != SR_ID_INVALID) {
+            /// Сброс счётчиков и переиспользование буферов под работающей на GPU задачей портит её результат
+            SRAssert2(slot.pDensityShader->GetPipeline()->IsAsyncComputeComplete(slot.computeTask),
+                "TerrainChunkDataMarchingCubesGenerator::ReleaseSlot() : releasing a slot while its compute task is still running!");
+            slot.pDensityShader->GetPipeline()->ReleaseAsyncCompute(slot.computeTask);
+            slot.computeTask = SR_ID_INVALID;
+        }
+
+        /// Счётчики вершин и индексов должны быть нулевыми к следующему запуску, даже если результат не читали
+        if (slot.pIndicesSSBO) {
+            slot.pIndicesSSBO->ResetCounter();
+        }
+        if (slot.pVerticesSSBO) {
+            slot.pVerticesSSBO->ResetCounter();
+        }
+
+        slot.pChunk = nullptr;
+        slot.isBusy = false;
+        slot.isFailed = false;
+    }
+
+    void TerrainChunkDataMarchingCubesGenerator::FinishSlot(Terrain& terrain, GenerationSlot& slot) {
+        SR_TRACY_ZONE;
+
+        if (slot.pChunk && !slot.isFailed) {
+            if (auto&& pCubeChunk = dynamic_cast<TerrainChunkCube*>(slot.pChunk.Get())) {
+                BuildChunk(terrain, *pCubeChunk, slot);
+            }
+        }
+        else if (slot.pChunk) {
+            /// Вычисления не удались - чанк остаётся пустым
+            if (auto&& pChunkGenerator = terrain.GetChunkGenerator()) {
+                pChunkGenerator->ReleaseChunkObject(*slot.pChunk);
+            }
+        }
+
+        ReleaseSlot(slot);
+    }
+
+    bool TerrainChunkDataMarchingCubesGenerator::DispatchSlot(Terrain& terrain, TerrainChunkCube& chunk, GenerationSlot& slot) {
+        SR_TRACY_ZONE;
+
+        auto&& pChunkGenerator = terrain.GetChunkGenerator();
+        if (!pChunkGenerator) {
+            slot.isFailed = true;
+            return false;
+        }
+
+        /// Диспатч идёт по сетке, с которой созданы буферы слота. Расхождение с настройками - запись за границы буферов
+        SRAssert2(!IsSlotsOutdated(), "TerrainChunkDataMarchingCubesGenerator::DispatchSlot() : generation slots are outdated! Init must recreate them before dispatch.");
+        SRAssert2(slot.pVerticesSSBO && slot.pVerticesSSBO->GetCapacity() >=GetMaxVertexCount() * sizeof(TerrainMarchingCubesVertex),
+            "TerrainChunkDataMarchingCubesGenerator::DispatchSlot() : vertices buffer is smaller than the chunk grid requires!");
+        SRAssert2(slot.pIndicesSSBO && slot.pIndicesSSBO->GetCapacity() >=GetMaxIndicesCount() * sizeof(uint32_t),
+            "TerrainChunkDataMarchingCubesGenerator::DispatchSlot() : indices buffer is smaller than the chunk grid requires!");
+        SRAssert2(slot.pHashTableSSBO && slot.pHashTableSSBO->GetCapacity() >=3ull * m_slotsDensityCountAxis * m_slotsDensityCountAxis * m_slotsDensityCountAxis * sizeof(uint32_t),
+            "TerrainChunkDataMarchingCubesGenerator::DispatchSlot() : edge table is smaller than the edges count of the chunk grid!");
+
+        auto* pCubeChunk = &chunk;
         auto&& position = pCubeChunk->GetPosition();
         const int32_t lodScale = pCubeChunk->GetLodScale();
-        const uint32_t groups = (m_densityCountAxis + 7) / 8;
+        const uint32_t groups = (m_slotsDensityCountAxis + 7) / 8;
 
         static SR_UTILS_NS::String positionText;
         positionText.clear();
@@ -222,7 +442,7 @@ namespace SR_CORE_NS {
         {
             SR_TRACY_ZONE_N("Collect density offsets");
 
-            const int32_t axis = static_cast<int32_t>(m_densityCountAxis);
+            const int32_t axis = static_cast<int32_t>(m_slotsDensityCountAxis);
             const SR_MATH_NS::IVector3 origin = position * (axis - 2) + SR_MATH_NS::IVector3(1) - SR_MATH_NS::IVector3(lodScale);
             const SR_MATH_NS::IVector3 last = origin + SR_MATH_NS::IVector3((axis - 1) * lodScale);
 
@@ -242,62 +462,129 @@ namespace SR_CORE_NS {
                 }
 
                 if (hasDensityOffsets) {
-                    m_pDensityOffsetsSSBO->UpdateSSBO(m_densityOffsets.data(), count * sizeof(float_t));
+                    slot.pDensityOffsetsSSBO->UpdateSSBO(m_densityOffsets.data(), count * sizeof(float_t));
                 }
             }
+        }
+
+        /// Все диспатчи пишутся в одну асинхронную задачу (если API поддерживает), между зависимыми - барьеры
+        auto&& pPipeline = slot.pDensityShader->GetPipeline();
+        slot.computeTask = pPipeline->BeginAsyncCompute();
+        const bool isAsync = slot.computeTask != SR_ID_INVALID;
+
+        auto&& dispatchMarching = [&](int32_t stage) {
+            auto&& pMarchingShader = slot.marchingShaders[stage];
+            if (!pMarchingShader->BeginCompute()) {
+                slot.isFailed = true;
+                return;
+            }
+            slot.pDensitySSBO->Bind();
+            slot.pHashTableSSBO->Bind();
+            slot.pVerticesSSBO->Bind();
+            slot.pIndicesSSBO->Bind();
+            /// Ёмкости буферов слота: шейдер не пишет за их границы (иначе портит соседние буферы, в т.ч. счётчики других слотов)
+            pMarchingShader->GetShader()->SetConstInt("maxVertexCount"_atom, static_cast<int>(GetMaxVertexCount()));
+            pMarchingShader->GetShader()->SetConstInt("maxIndicesCount"_atom, static_cast<int>(GetMaxIndicesCount()));
+            pMarchingShader->GetShader()->SetConstInt("densityCountAxis"_atom, static_cast<int>(m_slotsDensityCountAxis));
+            pMarchingShader->GetShader()->SetConstFloat("isoLevel"_atom, m_isoLevel);
+            pMarchingShader->GetShader()->SetConstInt(SR_GRAPH_NS::SHADER_COMPUTE_STAGE, stage);
+            pMarchingShader->Dispatch(groups, groups, groups);
+            pMarchingShader->EndCompute();
+        };
+
+        /// Очистка таблицы рёбер на GPU: не зависит от плотности, барьер нужен только перед этапом 0
+        {
+            SR_TRACY_ZONE_N("Clear edge table");
+            dispatchMarching(2);
         }
 
         /// Плотность живёт только на GPU: на CPU она не нужна, а хранение кеша стоило по 4 МБ на чанк
         {
             SR_TRACY_ZONE_N("Compute density");
 
-            if (m_pDensityComputeShader->BeginCompute()) {
-                m_pDensitySSBO->Bind();
-                m_pDensityOffsetsSSBO->Bind();
-                m_pDensityComputeShader->GetShader()->SetConstInt("hasDensityOffsets"_atom, hasDensityOffsets ? 1 : 0);
-                m_pDensityComputeShader->GetShader()->SetConstInt("densityCountAxis"_atom, static_cast<int>(m_densityCountAxis));
-                m_pDensityComputeShader->GetShader()->SetConstInt("seed"_atom, static_cast<int>(m_seed));
-                m_pDensityComputeShader->GetShader()->SetConstInt("lodScale"_atom, lodScale);
-                m_pDensityComputeShader->GetShader()->SetConstFloat("isoLevel"_atom, m_isoLevel);
-                m_pDensityComputeShader->GetShader()->SetConstFloat("noiseScale"_atom, m_noiseScale);
-                m_pDensityComputeShader->GetShader()->SetConstIVec3("chunkCoord"_atom, position);
-                m_pDensityComputeShader->Dispatch(groups, groups, groups);
-                m_pDensityComputeShader->EndCompute();
+            auto&& pDensityShader = slot.pDensityShader;
+            if (pDensityShader->BeginCompute()) {
+                slot.pDensitySSBO->Bind();
+                slot.pDensityOffsetsSSBO->Bind();
+                pDensityShader->GetShader()->SetConstInt("hasDensityOffsets"_atom, hasDensityOffsets ? 1 : 0);
+                pDensityShader->GetShader()->SetConstInt("densityCountAxis"_atom, static_cast<int>(m_slotsDensityCountAxis));
+                pDensityShader->GetShader()->SetConstInt("seed"_atom, static_cast<int>(m_seed));
+                pDensityShader->GetShader()->SetConstInt("lodScale"_atom, lodScale);
+                pDensityShader->GetShader()->SetConstFloat("isoLevel"_atom, m_isoLevel);
+                pDensityShader->GetShader()->SetConstFloat("noiseScale"_atom, m_noiseScale);
+                pDensityShader->GetShader()->SetConstIVec3("chunkCoord"_atom, position);
+                pDensityShader->GetShader()->SetConstVec3("voxelSize"_atom, pChunkGenerator->GetVoxelSize());
+
+                const bool isSphere = terrain.GetShape() == TerrainShape::Sphere;
+                const SR_MATH_NS::FVector3 sphereCenter = terrain.GetSphereCenter();
+                pDensityShader->GetShader()->SetConstVec4("terrainUp"_atom, SR_MATH_NS::FVector4(sphereCenter.x, sphereCenter.y, sphereCenter.z, isSphere ? 1.f : 0.f));
+
+                for (auto&& parameter : m_densityParameters) {
+                    pDensityShader->GetShader()->SetConstVec4(parameter.name, parameter.value);
+                }
+
+                pDensityShader->Dispatch(groups, groups, groups);
+                pDensityShader->EndCompute();
+            }
+            else {
+                slot.isFailed = true;
             }
         }
 
         {
             SR_TRACY_ZONE_N("Compute geometry");
 
-            m_pHashTableSSBO->Memset(-1);
-
-            for (int stage = 0; stage <= 1; ++stage) {
-                if (m_pMarchingComputeShader->BeginCompute()) {
-                    m_pDensitySSBO->Bind();
-                    m_pHashTableSSBO->Bind();
-                    m_pVerticesSSBO->Bind();
-                    m_pIndicesSSBO->Bind();
-                    m_pMarchingComputeShader->GetShader()->SetConstInt("vertexHashTableSize"_atom, static_cast<int>(m_vertexHashTableSize));
-                    m_pMarchingComputeShader->GetShader()->SetConstInt("densityCountAxis"_atom, static_cast<int>(m_densityCountAxis));
-                    m_pMarchingComputeShader->GetShader()->SetConstFloat("isoLevel"_atom, m_isoLevel);
-                    m_pMarchingComputeShader->GetShader()->SetConstInt(SR_GRAPH_NS::SHADER_COMPUTE_STAGE, stage);
-                    m_pMarchingComputeShader->Dispatch(groups, groups, groups);
-                    m_pMarchingComputeShader->EndCompute();
+            for (int32_t stage = 0; stage <= 1; ++stage) {
+                /// Этап читает результат предыдущих диспатчей той же задачи (плотность, очищенная таблица, вершины)
+                if (isAsync) {
+                    pPipeline->WriteMemoryBarrier(SR_GRAPH_NS::MemoryBarrierType::ComputeToCompute);
                 }
+                dispatchMarching(stage);
             }
         }
+
+        if (!isAsync) {
+            return false;
+        }
+
+        if (!pPipeline->SubmitAsyncCompute()) {
+            /// Задача не отправлена - результата не будет, слот освобождается в UpdateChunkData как неудачный
+            slot.isFailed = true;
+        }
+
+        return true;
+    }
+
+    void TerrainChunkDataMarchingCubesGenerator::BuildChunk(Terrain& terrain, TerrainChunkCube& cubeChunk, GenerationSlot& slot) {
+        SR_TRACY_ZONE;
+
+        ITerrainChunk& chunk = cubeChunk;
+        auto* pCubeChunk = &cubeChunk;
+
+        auto&& pChunkGenerator = terrain.GetChunkGenerator();
+        if (!pChunkGenerator || !chunk.GetData()) {
+            return;
+        }
+
+        auto&& pChunkData = chunk.GetData().DynamicCast<TerrainMarchingCubesChunkData>();
 
         {
             SR_TRACY_ZONE_N("Read indices");
 
             m_indices.clear();
-            if (void* pData = m_pIndicesSSBO->MapData()) {
-                const uint32_t indicesCount = m_pIndicesSSBO->GetCounter();
+            if (void* pData = slot.pIndicesSSBO->MapData()) {
+                uint64_t indicesCount = slot.pIndicesSSBO->GetCounter();
+
+                /// Счётчик растёт и при пропущенной (из-за переполнения) записи, а не кратный трём - признак чужой записи в него
+                SRAssert2(indicesCount <= GetMaxIndicesCount(), "TerrainChunkDataMarchingCubesGenerator::BuildChunk() : indices count {} exceeds the buffer capacity {}!", indicesCount, GetMaxIndicesCount());
+                SRAssert2(indicesCount % 3 == 0, "TerrainChunkDataMarchingCubesGenerator::BuildChunk() : indices count {} is not a multiple of 3! The counter is corrupted.", indicesCount);
+                indicesCount = std::min<uint64_t>(indicesCount, GetMaxIndicesCount()) / 3 * 3;
+
                 m_indices.resize(indicesCount);
                 std::memcpy(m_indices.data(), pData, sizeof(uint32_t) * indicesCount);
-                m_pIndicesSSBO->ResetCounter();
-                m_pIndicesSSBO->FlushCounter();
-                m_pIndicesSSBO->UnMap();
+                slot.pIndicesSSBO->ResetCounter();
+                slot.pIndicesSSBO->FlushCounter();
+                slot.pIndicesSSBO->UnMap();
             }
         }
 
@@ -318,8 +605,10 @@ namespace SR_CORE_NS {
                 return;
             }
 
-            if (auto&& pGpuVertices = reinterpret_cast<TerrainMarchingCubesVertex*>(m_pVerticesSSBO->MapData())) {
-                verticesCount = m_pVerticesSSBO->GetCounter();
+            if (auto&& pGpuVertices = reinterpret_cast<TerrainMarchingCubesVertex*>(slot.pVerticesSSBO->MapData())) {
+                verticesCount = slot.pVerticesSSBO->GetCounter();
+                SRAssert2(verticesCount <= GetMaxVertexCount(), "TerrainChunkDataMarchingCubesGenerator::BuildChunk() : vertices count {} exceeds the buffer capacity {}!", verticesCount, GetMaxVertexCount());
+                verticesCount = static_cast<uint32_t>(std::min<uint64_t>(verticesCount, GetMaxVertexCount()));
                 m_vertices.Allocate(verticesCount);
 
                 auto&& pVertices = reinterpret_cast<TerrainMeshVertex*>(m_vertices.data.data());
@@ -328,14 +617,32 @@ namespace SR_CORE_NS {
                     pVertices[i].weights = pGpuVertices[i].weights;
                 }
 
-                m_pVerticesSSBO->ResetCounter();
-                m_pVerticesSSBO->FlushCounter();
-                m_pVerticesSSBO->UnMap();
+                slot.pVerticesSSBO->ResetCounter();
+                slot.pVerticesSSBO->FlushCounter();
+                slot.pVerticesSSBO->UnMap();
             }
         }
         else {
             /// Без маппинга ResetCounter сам мапит, флашит и анмапит буфер
-            m_pVerticesSSBO->ResetCounter();
+            slot.pVerticesSSBO->ResetCounter();
+        }
+
+        {
+            /// Индекс за пределами вершин - испорченные данные (переполнение буферов, неочищенная таблица рёбер).
+            /// Такой меш ломает нормали, юбки и упрощение коллизии, поэтому чанк остаётся пустым
+            bool isIndicesValid = true;
+            for (const uint32_t index : m_indices) {
+                if (index >= verticesCount) {
+                    isIndicesValid = false;
+                    break;
+                }
+            }
+
+            if (!isIndicesValid) {
+                SRHalt("TerrainChunkDataMarchingCubesGenerator::BuildChunk() : index is out of vertices range ({} vertices)! GPU data is corrupted.", verticesCount);
+                m_indices.clear();
+                verticesCount = 0;
+            }
         }
 
         if (verticesCount == 0) {
@@ -377,12 +684,14 @@ namespace SR_CORE_NS {
 
                 TerrainGrassSourceMesh grassMesh;
                 grassMesh.origin = chunkOrigin;
+                /// Чанк LOD0 мал относительно планеты, поэтому направление "вверх" одно на весь чанк (по его центру)
+                grassMesh.up = terrain.GetUpDirection(chunkOrigin + scale * (0.5f * static_cast<float_t>(m_slotsDensityCountAxis)));
                 /// Воксель в локальных осях меша имеет размер 1, диагональ куба - sqrt(3)
                 const float_t maxScale = std::max({ std::abs(scale.x), std::abs(scale.y), std::abs(scale.z) });
                 grassMesh.maxEdgeLength = 1.8f * maxScale;
                 /// Полезная область вокселей чанка: координаты [1, densityCountAxis - 1] -> локальные [0.5, densityCountAxis - 1.5]
                 const float_t innerMin = 0.5f;
-                const float_t innerMax = static_cast<float_t>(m_densityCountAxis) - 1.5f;
+                const float_t innerMax = static_cast<float_t>(m_slotsDensityCountAxis) - 1.5f;
                 grassMesh.bounds = SR_MATH_NS::AABB(
                     SR_MATH_NS::FVector3(innerMin) * scale - SR_MATH_NS::FVector3(0.01f),
                     SR_MATH_NS::FVector3(innerMax) * scale + SR_MATH_NS::FVector3(0.01f)
@@ -431,7 +740,7 @@ namespace SR_CORE_NS {
 
         /// Юбки только в рендер-меше: трава уже скопировала меш, коллизия строится из сетки LOD0 без щелей
         const uint64_t surfaceIndicesCount = m_indices.size();
-        AddSkirts(m_vertices, m_indices, m_densityCountAxis, m_skirtDepth, pCubeChunk->GetLodBorders());
+        AddSkirts(m_vertices, m_indices, m_slotsDensityCountAxis, m_skirtDepth, pCubeChunk->GetLodBorders());
 
         /// Сначала данные, потом включение: так меш регистрируется в рендере сразу готовым, без отложенной перерегистрации
         pProceduralMesh->SetEnabled(false);
@@ -447,50 +756,87 @@ namespace SR_CORE_NS {
     bool TerrainChunkDataMarchingCubesGenerator::Init() {
         SR_TRACY_ZONE;
 
-        if (m_isInitialized) {
+        if (m_isInitialized && !IsSlotsOutdated()) {
             return true;
         }
 
-        m_pMarchingComputeShader = SR_GTYPES_NS::ComputeShader::Load(m_marchingCubesShader);
-        m_pDensityComputeShader = SR_GTYPES_NS::ComputeShader::Load(m_densityShader);
-
-        if (!m_pMarchingComputeShader || !m_pDensityComputeShader) {
-            SRHalt("Failed to load compute shaders for Marching Cubes!");
+        if (HasBusySlots()) {
+            /// Сюда не попадаем: CanBeginChunkData не даёт начать задачу, пока устаревшие слоты заняты
+            SR_ERROR("TerrainChunkDataMarchingCubesGenerator::Init() : can't recreate generation slots while they are busy!");
             return false;
         }
 
-        const uint64_t densitiesCount = static_cast<uint64_t>(m_densityCountAxis) * m_densityCountAxis * m_densityCountAxis;
+        m_isInitialized = false;
+        m_slots.clear();
+
         if (m_densityCountAxis < 3) {
             SRHalt("TerrainChunkDataMarchingCubesGenerator::Init() : densityCountAxis must be greater than 2!");
             return false;
         }
 
-        const int numVoxelsPerAxis = static_cast<int>(m_numPointsPerAxis) - 1;
-        if (numVoxelsPerAxis <= 0) {
-            SRHalt("TerrainChunkDataMarchingCubesGenerator::Init() : numPointsPerAxis must be greater than 1!");
-            return false;
+        const uint32_t slotsCount = std::clamp<uint32_t>(m_maxGenerationsInFlight, 1, 32);
+
+        m_slotsDensityCountAxis = m_densityCountAxis;
+        m_slotsHashTableSize = m_vertexHashTableSize;
+        m_slotsCount = slotsCount;
+        m_slotsMarchingCubesShader = m_marchingCubesShader;
+        m_slotsDensityShader = m_densityShader;
+
+        m_slots.reserve(slotsCount);
+
+        for (uint32_t i = 0; i < slotsCount; ++i) {
+            m_slots.emplace_back(new GenerationSlot());
+            if (!CreateSlotResources(*m_slots.back().Get())) {
+                m_slots.clear();
+                SRHalt("TerrainChunkDataMarchingCubesGenerator::Init() : failed to create generation resources!");
+                return false;
+            }
         }
-
-        const int numVoxels = numVoxelsPerAxis * numVoxelsPerAxis * numVoxelsPerAxis;
-        const int maxTriangleCount = numVoxels * 5;
-        const int maxVertexCount = maxTriangleCount * 3;
-
-        m_pDensitySSBO.reset();
-        m_pHashTableSSBO.reset();
-        m_pVerticesSSBO.reset();
-        m_pIndicesSSBO.reset();
-
-        m_pDensitySSBO = SR_GRAPH_NS::SSBOInstance::Create<TerrainMarchingCubesVoxel>(densitiesCount, SR_GRAPH_NS::SSBOUsage::AutoPreferDevice, "voxels");
-        m_pDensityOffsetsSSBO = SR_GRAPH_NS::SSBOInstance::Create<float_t>(densitiesCount, SR_GRAPH_NS::SSBOUsage::CPUToGPU, "densityOffsets");
-        m_pHashTableSSBO = SR_GRAPH_NS::SSBOInstance::Create<uint32_t>(m_vertexHashTableSize, SR_GRAPH_NS::SSBOUsage::CPUToGPU, "hashTable");
-        m_pVerticesSSBO = SR_GRAPH_NS::SSBOInstance::Create<TerrainMarchingCubesVertex>(maxVertexCount, SR_GRAPH_NS::SSBOUsage::GPUToCPU, "vertices", SR_GRAPH_NS::SSBOFlags::StructuredCounter);
-        m_pIndicesSSBO = SR_GRAPH_NS::SSBOInstance::Create<uint32_t>(maxVertexCount, SR_GRAPH_NS::SSBOUsage::GPUToCPU, "indices", SR_GRAPH_NS::SSBOFlags::Counter);
 
         m_isInitialized = true;
         return true;
     }
 
+    bool TerrainChunkDataMarchingCubesGenerator::CreateSlotResources(GenerationSlot& slot) {
+        SR_TRACY_ZONE;
+
+        /// Шейдер (ресурс) общий, у экземпляров ComputeShader - свои наборы дескрипторов
+        slot.pDensityShader = SR_GTYPES_NS::ComputeShader::Load(m_slotsDensityShader);
+        for (auto&& pMarchingShader : slot.marchingShaders) {
+            pMarchingShader = SR_GTYPES_NS::ComputeShader::Load(m_slotsMarchingCubesShader);
+            if (!pMarchingShader) {
+                SR_ERROR("TerrainChunkDataMarchingCubesGenerator::CreateSlotResources() : failed to load marching cubes shader!");
+                return false;
+            }
+        }
+
+        if (!slot.pDensityShader) {
+            SR_ERROR("TerrainChunkDataMarchingCubesGenerator::CreateSlotResources() : failed to load density shader!");
+            return false;
+        }
+
+        const uint64_t axis = m_slotsDensityCountAxis;
+        const uint64_t densitiesCount = axis * axis * axis;
+
+        const uint64_t edgesCount = 3 * densitiesCount;
+        const uint64_t maxVertexCount = GetMaxVertexCount();
+        const uint64_t maxIndicesCount = GetMaxIndicesCount();
+
+        /// Таблица рёбер адресуется напрямую индексом ребра - меньше числа рёбер нельзя
+        const uint64_t hashTableSize = std::max<uint64_t>(m_slotsHashTableSize, edgesCount);
+
+        slot.pDensitySSBO = SR_GRAPH_NS::SSBOInstance::Create<TerrainMarchingCubesVoxel>(densitiesCount, SR_GRAPH_NS::SSBOUsage::AutoPreferDevice, "voxels");
+        slot.pDensityOffsetsSSBO = SR_GRAPH_NS::SSBOInstance::Create<float_t>(densitiesCount, SR_GRAPH_NS::SSBOUsage::CPUToGPU, "densityOffsets");
+        /// Очищается на GPU (этап 2 MarchingCubes.srsl), с CPU не трогается
+        slot.pHashTableSSBO = SR_GRAPH_NS::SSBOInstance::Create<uint32_t>(hashTableSize, SR_GRAPH_NS::SSBOUsage::AutoPreferDevice, "hashTable");
+        slot.pVerticesSSBO = SR_GRAPH_NS::SSBOInstance::Create<TerrainMarchingCubesVertex>(maxVertexCount, SR_GRAPH_NS::SSBOUsage::GPUToCPU, "vertices", SR_GRAPH_NS::SSBOFlags::StructuredCounter);
+        slot.pIndicesSSBO = SR_GRAPH_NS::SSBOInstance::Create<uint32_t>(maxIndicesCount, SR_GRAPH_NS::SSBOUsage::GPUToCPU, "indices", SR_GRAPH_NS::SSBOFlags::Counter);
+
+        return slot.pDensitySSBO && slot.pDensityOffsetsSSBO && slot.pHashTableSSBO && slot.pVerticesSSBO && slot.pIndicesSSBO;
+    }
+
     void TerrainMarchingCubesChunkData::SetCollisionSettings(bool allowed, const SR_MATH_NS::FVector3& scale, float_t simplifyRatio, float_t simplifyError, uint64_t indicesCount) {
+        SRAssert2(indicesCount % 3 == 0, "TerrainMarchingCubesChunkData::SetCollisionSettings() : indices count {} is not a multiple of 3!", indicesCount);
         m_collisionIndicesCount = indicesCount;
         /// Объект мог прийти из прототипа с включённой физикой, но без меша коллизии
         if (auto&& pChunkObject = m_chunk->GetObject()) {
@@ -528,7 +874,10 @@ namespace SR_CORE_NS {
         auto&& meshIndices = pProceduralMesh->GetIndices();
         auto&& pPositionDesc = vertices.GetLayout().Find(SR_UTILS_NS::VertexAttribute::Position);
         const uint64_t verticesCount = vertices.GetVertexCount();
-        const uint64_t indicesCount = std::min<uint64_t>(m_collisionIndicesCount, meshIndices.size());
+        SRAssert2(m_collisionIndicesCount <= meshIndices.size(), "TerrainMarchingCubesChunkData::BuildCollision() : collision indices count {} exceeds the mesh indices count {}!", m_collisionIndicesCount, meshIndices.size());
+        SRAssert2(m_collisionIndicesCount % 3 == 0, "TerrainMarchingCubesChunkData::BuildCollision() : collision indices count {} is not a multiple of 3!", m_collisionIndicesCount);
+        /// meshoptimizer принимает только целые треугольники
+        const uint64_t indicesCount = std::min<uint64_t>(m_collisionIndicesCount, meshIndices.size()) / 3 * 3;
 
         if (!pPositionDesc || verticesCount == 0 || indicesCount == 0) {
             return false;

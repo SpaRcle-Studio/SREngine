@@ -4,6 +4,8 @@
 
 #include <Engine/World/Terrain.h>
 
+#include <Graphics/Render/RenderScene.h>
+
 #include <Utils/World/Scene.h>
 #include <Utils/ECS/GameObject.h>
 
@@ -52,6 +54,8 @@ namespace SR_CORE_NS {
                 return nullptr;
             }
             pObject = pProto->CloneSceneObject();
+            /// Чанки генерируются и в редакторе - в сцену их сохранять нельзя
+            pPool->SetChildrenTransient(true);
             pPool->AddChild(pObject);
         }
 
@@ -104,12 +108,31 @@ namespace SR_CORE_NS {
 
         if (m_chunkGenerator) {
             auto&& observer = GetObserver();
-            m_chunkGenerator->LoadNextChunk([this, &observer](ITerrainChunk& chunk) {
-                if (m_chunkDataGenerator) {
-                    m_chunkDataGenerator->GenerateChunkData(*this, chunk, observer, 0.f);
+
+            /// Сначала забираем готовые асинхронные генерации - освободившиеся задачи сразу берут новые чанки
+            if (m_chunkDataGenerator) {
+                m_chunkDataGenerator->UpdateChunkData(*this, [this](ITerrainChunk& chunk) {
+                    m_chunkGenerator->OnChunkLoaded(chunk);
+                });
+            }
+
+            m_chunkGenerator->LoadNextChunk([this, &observer](ITerrainChunk& chunk) -> bool {
+                if (!m_chunkDataGenerator) {
+                    m_chunkGenerator->OnChunkLoaded(chunk);
+                    return true;
                 }
-                chunk.SetStatus(ITerrainChunk::Status::Loaded);
+
+                if (!m_chunkDataGenerator->CanBeginChunkData()) {
+                    return false;
+                }
+
+                chunk.SetStatus(ITerrainChunk::Status::Generating);
+                if (!m_chunkDataGenerator->BeginChunkData(*this, chunk, observer)) {
+                    m_chunkGenerator->OnChunkLoaded(chunk);
+                }
+                return true;
             });
+
             m_chunkGenerator->Update(*this, observer, dt);
         }
 
@@ -119,6 +142,9 @@ namespace SR_CORE_NS {
     }
 
     void Terrain::OnDestroy() {
+        if (m_chunkDataGenerator) {
+            m_chunkDataGenerator->Shutdown();
+        }
         if (m_grass) {
             m_grass->Shutdown();
         }
@@ -141,12 +167,20 @@ namespace SR_CORE_NS {
 
         TerrainObserverData data;
 
-        SR_GTYPES_NS::Camera* pCamera = nullptr;
+        /// Без явной камеры: в редакторе мир грузится вокруг редакторной камеры, в игре - вокруг игровой
+        /// (окно сцены редактора может оставаться открытым и во время игры)
+        SR_GTYPES_NS::Camera::Ptr pCamera;
         if (auto&& pCameraRef = m_camera.Get()) {
-            pCamera = pCameraRef.Get();
+            pCamera = pCameraRef;
+        }
+        else if (auto&& pRenderScene = dynamic_cast<SR_GRAPH_NS::RenderScene*>(GetScene()->GetModule("Render"))) {
+            pCamera = GetScene()->IsEditorMode() ? pRenderScene->GetMainCamera() : pRenderScene->GetGameCamera();
+            if (!pCamera) {
+                pCamera = pRenderScene->GetMainCamera();
+            }
         }
         else if (auto&& pMainCamera = GetScene()->GetMainCamera()) {
-            pCamera = pMainCamera->GetComponent<SR_GTYPES_NS::Camera>().Get();
+            pCamera = pMainCamera->GetComponent<SR_GTYPES_NS::Camera>();
         }
 
         if (pCamera) {
@@ -162,6 +196,45 @@ namespace SR_CORE_NS {
         }
 
         return data;
+    }
+
+    SR_MATH_NS::FVector3 Terrain::GetUpDirection(const SR_MATH_NS::FVector3& position) const {
+        if (m_shape == TerrainShape::Sphere) {
+            const SR_MATH_NS::FVector3 delta = position - m_sphereCenter;
+            const float_t length = delta.Length();
+            if (length > 1e-4f) {
+                return delta / length;
+            }
+        }
+        return SR_MATH_NS::FVector3(0.f, 1.f, 0.f);
+    }
+
+    bool Terrain::IsVolumeIntersects(const SR_MATH_NS::AABB& bounds) const {
+        if (m_shape != TerrainShape::Sphere) {
+            return true;
+        }
+
+        /// Ближайшая и самая дальняя точки коробки от центра сферы
+        float_t nearSq = 0.f;
+        float_t farSq = 0.f;
+        for (int32_t axis = 0; axis < 3; ++axis) {
+            const float_t toMin = bounds.min[axis] - m_sphereCenter[axis];
+            const float_t toMax = bounds.max[axis] - m_sphereCenter[axis];
+
+            float_t nearest = 0.f;
+            if (toMin > 0.f) {
+                nearest = toMin;
+            }
+            else if (toMax < 0.f) {
+                nearest = toMax;
+            }
+            const float_t farthest = std::max(std::abs(toMin), std::abs(toMax));
+
+            nearSq += nearest * nearest;
+            farSq += farthest * farthest;
+        }
+
+        return nearSq <= m_sphereOuterRadius * m_sphereOuterRadius && farSq >= m_sphereInnerRadius * m_sphereInnerRadius;
     }
 
     SR_MATH_NS::AABB TerrainDeformation::GetBounds() const noexcept {
