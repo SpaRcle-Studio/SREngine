@@ -550,7 +550,8 @@ namespace SR_CORE_GUI_NS {
                 m_resourcePaths.insert(variant.resourcePath);
                 m_resourceOverrides.emplace_back(std::move(variant));
             }
-            if (platform == "Android" && metadata.compressed) {
+            /// Исходник не упакован (только подготовленные варианты) - на его месте заглушка, иначе ресурс не находит свой файл
+            if (!sourceRequired && !m_resourcePaths.Contains(path)) {
                 const auto placeholder = stagedRoot.Concat(path.RemoveSubPath(resources));
                 if (!SR_UTILS_NS::VFS::Instance().WriteFileAtomic(placeholder, SR_GRAPH_NS::TextureContainer::SourcePlaceholder)) {
                     SetStatus("Failed to stage texture placeholder: {}"_format(path), true);
