@@ -122,6 +122,11 @@ namespace SR_AUDIO_NS {
             }
 
             Update();
+
+            /// вместо холостого цикла: Execute (Play, Stop, ...) будит поток сразу,
+            /// таймаут нужен для обновления проигрываемых звуков и громкости
+            m_thread->WaitForExecute(5);
+
             return true;
         });
         m_thread->SetName("Sound manager");

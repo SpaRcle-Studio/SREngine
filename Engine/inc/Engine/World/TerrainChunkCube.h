@@ -37,6 +37,9 @@ namespace SR_CORE_NS {
         /// Показывается вместе со всей заменой, иначе старый и новый LOD долго видны одновременно и пересекаются
         SR_NODISCARD bool IsHidden() const noexcept { return m_isHidden; }
         void SetHidden(bool hidden) noexcept { m_isHidden = hidden; }
+        /// Запись в очереди может быть устаревшей - статус уже не Created
+        SR_NODISCARD bool IsInLoadQueue() const noexcept { return m_isInLoadQueue; }
+        void SetInLoadQueue(bool value) noexcept { m_isInLoadQueue = value; }
 
         SR_NODISCARD float_t GetDistanceTo(const ITerrainChunk& other) const override;
 
@@ -46,6 +49,7 @@ namespace SR_CORE_NS {
         uint32_t m_replaceFrames = 0;
         bool m_isDirty = false;
         bool m_isHidden = false;
+        bool m_isInLoadQueue = false;
 
     };
 
@@ -91,6 +95,7 @@ namespace SR_CORE_NS {
         void RetireChunk(const TerrainChunkCube::Ptr& pChunk);
         void ReleaseChunk(const TerrainChunkCube::Ptr& pChunk);
         SR_NODISCARD TerrainChunkCube::Ptr CreateChunk(const SR_MATH_NS::OctreeNodeId& node);
+        void QueueChunkLoad(const TerrainChunkCube::Ptr& pChunk);
 
         SR_NODISCARD bool IsNodeAllowed(const SR_MATH_NS::OctreeNodeId& node) const;
         SR_NODISCARD bool IsReady(const SR_MATH_NS::OctreeNodeId& node) const;

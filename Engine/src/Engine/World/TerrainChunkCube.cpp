@@ -95,16 +95,30 @@ namespace SR_CORE_NS {
     }
 
     bool TerrainChunkCubeGenerator::LoadNearestChunk(const SR_HTYPES_NS::Function<bool(ITerrainChunk&)>& loaderFn) {
-        /// Сначала ближайшие к наблюдателю, при равном расстоянии - более детальные
+        /// Сначала ближайшие к наблюдателю, при равном расстоянии - более детальные.
+        /// Освобождённые чанки (статус не Created) из очереди не удаляются сразу (ReleaseChunk), а выбрасываются здесь
         uint32_t index = 0;
         float_t bestScore = SR_FLOAT_MAX;
-        for (uint32_t i = 0; i < m_chunksToLoad.size(); ++i) {
+        for (uint32_t i = 0; i < m_chunksToLoad.size();) {
             auto&& pChunk = m_chunksToLoad[i];
+            if (pChunk->GetStatus() != ITerrainChunk::Status::Created) {
+                pChunk->SetInLoadQueue(false);
+                m_chunksToLoad[i] = m_chunksToLoad.back();
+                m_chunksToLoad.pop_back();
+                continue;
+            }
+
             const float_t score = pChunk->GetNode().DistanceTo(m_observerNodePosition) + static_cast<float_t>(pChunk->GetLod()) * 0.01f;
             if (score < bestScore) {
                 bestScore = score;
                 index = i;
             }
+
+            ++i;
+        }
+
+        if (m_chunksToLoad.empty()) {
+            return false;
         }
 
         TerrainChunkCube::Ptr pChunk = m_chunksToLoad[index];
@@ -115,6 +129,7 @@ namespace SR_CORE_NS {
         /// Ищем заново: при синхронной генерации loaderFn уже мог поменять очередь (OnChunkLoaded)
         for (uint32_t i = 0; i < m_chunksToLoad.size(); ++i) {
             if (m_chunksToLoad[i] == pChunk) {
+                pChunk->SetInLoadQueue(false);
                 m_chunksToLoad[i] = m_chunksToLoad.back();
                 m_chunksToLoad.pop_back();
                 break;
@@ -337,7 +352,7 @@ namespace SR_CORE_NS {
             /// Пустой чанк не виден, его можно перегенерировать на месте: после выкапывания у него может появиться геометрия
             if (!pChunk->GetObject()) {
                 pChunk->SetStatus(ITerrainChunk::Status::Created);
-                m_chunksToLoad.emplace_back(pChunk);
+                QueueChunkLoad(pChunk);
                 continue;
             }
 
@@ -500,9 +515,19 @@ namespace SR_CORE_NS {
         pChunk->SetDirty(false);
         pChunk->SetHidden(false);
         pChunk->SetStatus(ITerrainChunk::Status::Created);
-        m_chunksToLoad.emplace_back(pChunk);
+        QueueChunkLoad(pChunk);
 
         return pChunk;
+    }
+
+    void TerrainChunkCubeGenerator::QueueChunkLoad(const TerrainChunkCube::Ptr& pChunk) {
+        /// Чанк из пула мог остаться в очереди устаревшей записью - она снова валидна, второй не нужно
+        if (pChunk->IsInLoadQueue()) {
+            return;
+        }
+
+        pChunk->SetInLoadQueue(true);
+        m_chunksToLoad.emplace_back(pChunk);
     }
 
     const SR_MATH_NS::OctreeNodeId* TerrainChunkCubeGenerator::FindLeafAt(const SR_MATH_NS::IVector3& position) const {
@@ -586,7 +611,7 @@ namespace SR_CORE_NS {
             if (!pChunk->GetObject()) {
                 pChunk->SetDirty(false);
                 pChunk->SetStatus(ITerrainChunk::Status::Created);
-                m_chunksToLoad.emplace_back(pChunk);
+                QueueChunkLoad(pChunk);
                 continue;
             }
 
@@ -606,11 +631,8 @@ namespace SR_CORE_NS {
     void TerrainChunkCubeGenerator::ReleaseChunk(const TerrainChunkCube::Ptr& pChunk) {
         SR_TRACY_ZONE;
 
-        if (pChunk->GetStatus() == ITerrainChunk::Status::Created) {
-            m_chunksToLoad.erase_if([&](const TerrainChunkCube::Ptr& pOther) {
-                return pOther == pChunk;
-            });
-        }
+        /// Из очереди загрузки не удаляем: поиск на каждый чанк - O(чанки x очередь) при перестройке дерева.
+        /// Запись выбросит LoadNearestChunk, а если чанк снова возьмут из пула - она станет валидной
 
         /// Чанк уйдёт в пул и может достаться другому узлу - результат его генерации применять нельзя
         if (pChunk->GetStatus() == ITerrainChunk::Status::Generating && m_terrain) {
