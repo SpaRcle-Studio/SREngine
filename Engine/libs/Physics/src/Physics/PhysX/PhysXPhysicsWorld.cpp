@@ -151,6 +151,59 @@ namespace SR_PHYSICS_NS {
         }
     }
 
+    void PhysXPhysicsWorld::ShiftOrigin(const SR_MATH_NS::FVector3& delta) {
+        SR_TRACY_ZONE;
+
+        if (!m_scene) {
+            return;
+        }
+
+        /// Вызывается вне шага симуляции (после fetchResults). Контроллеры сцена сама не сдвигает
+        m_scene->shiftOrigin(SR_PHYSICS_UTILS_NS::FV3ToPxV3(delta));
+        if (m_controllerManager) {
+            m_controllerManager->shiftOrigin(SR_PHYSICS_UTILS_NS::FV3ToPxV3(delta));
+        }
+
+        /// Статические тела дальше выставляются по сдвинутым трансформам (UpdateMatrix) - та же поза.
+        /// Динамические синхронизируются по разнице с прошлой позой - её нужно сдвинуть
+        const uint32_t count = m_scene->getNbActors(physx::PxActorTypeFlag::Enum::eRIGID_DYNAMIC);
+        if (count == 0) {
+            return;
+        }
+
+        if (m_dynamicActors.size() < count) {
+            m_dynamicActors.resize(count);
+        }
+
+        auto&& pActors = m_dynamicActors.data();
+        m_scene->getActors(physx::PxActorTypeFlag::Enum::eRIGID_DYNAMIC, pActors, count);
+
+        for (uint32_t i = 0; i < count; ++i) {
+            auto&& pRigidActor = pActors[i]->is<physx::PxRigidActor>();
+            auto&& pUserData = pRigidActor ? static_cast<RigidActorUserData*>(pRigidActor->userData) : nullptr;
+            if (!pUserData || !pUserData->pUserData) {
+                continue;
+            }
+
+            switch (pUserData->type) {
+                case RigidActorUserData::Type::Rigidbody: {
+                    auto&& pRigidbody = static_cast<SR_PTYPES_NS::Rigidbody*>(pUserData->pUserData);
+                    pRigidbody->OnWorldOriginShifted(delta);
+                    break;
+                }
+                case RigidActorUserData::Type::CharacterController: {
+                    auto&& pController = static_cast<CharacterController*>(pUserData->pUserData);
+                    if (auto&& pImpl = pController->GetImpl()) {
+                        pImpl->OnOriginShifted(delta);
+                    }
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+    }
+
     bool PhysXPhysicsWorld::StepSimulation(float_t step) {
         SR_TRACY_ZONE;
 

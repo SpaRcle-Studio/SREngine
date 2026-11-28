@@ -121,7 +121,7 @@ namespace SR_CORE_NS {
         virtual void OnChunkLoaded(ITerrainChunk& chunk) { chunk.SetStatus(ITerrainChunk::Status::Loaded); }
 
         SR_NODISCARD virtual bool IsCollisionEnabledAt(const ITerrainChunk& chunk) const { return false; }
-        /// Перегенерировать чанки, пересекающие область (мировые координаты)
+        /// Перегенерировать чанки, пересекающие область (координаты террейна)
         virtual void InvalidateRegion(const SR_MATH_NS::AABB& bounds) { }
         /// Размер вокселя самого детального уровня в метрах - шаг сетки правок плотности
         SR_NODISCARD virtual SR_MATH_NS::FVector3 GetVoxelSize() const { return SR_MATH_NS::FVector3(1.f); }
@@ -129,6 +129,9 @@ namespace SR_CORE_NS {
         /// Объект сцены выдаётся только чанкам с непустой геометрией. Объекты переиспользуются через пул.
         SR_UTILS_NS::SceneObject::Ptr AcquireChunkObject(ITerrainChunk& chunk);
         void ReleaseChunkObject(ITerrainChunk& chunk);
+
+        /// Родитель объектов чанков: их локальные позиции - координаты террейна
+        SR_NODISCARD SR_UTILS_NS::SceneObject::Ptr GetPoolObject() const { return m_poolObject.Get(); }
 
     protected:
         virtual void SetupChunkObject(ITerrainChunk& chunk, SR_UTILS_NS::SceneObject& object) { }
@@ -203,7 +206,16 @@ namespace SR_CORE_NS {
         /// Мир строится и в редакторе - вокруг редакторной камеры (см. GetObserver)
         SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
 
+        void OnOriginShifted(const SR_MATH_NS::FVector3& delta) override;
+
+        /// Наблюдатель в координатах террейна (см. GetTerrainOrigin)
         SR_NODISCARD TerrainObserverData GetObserver() const;
+
+        /// Начало координат террейна в мире - позиция объекта пула чанков (без него - объекта террейна).
+        /// Октодерево, чанки, плотность, правки и трава живут в этих координатах, поэтому сдвиг мира
+        /// (FloatingOrigin) их не меняет. Поворот и масштаб пула не учитываются
+        SR_NODISCARD SR_MATH_NS::FVector3 GetTerrainOrigin() const;
+        SR_NODISCARD SR_MATH_NS::FVector3 ToTerrainSpace(const SR_MATH_NS::FVector3& worldPosition) const;
 
         SR_NODISCARD TerrainGrass* GetGrass() const noexcept;
         SR_NODISCARD ITerrainChunkGenerator* GetChunkGenerator() const noexcept;
@@ -211,7 +223,8 @@ namespace SR_CORE_NS {
 
         void LateUpdate() override;
 
-        /// Деформация копится до LateUpdate, там впекается в правки плотности и затронутые чанки перегенерируются
+        /// Деформация копится до LateUpdate, там впекается в правки плотности и затронутые чанки перегенерируются.
+        /// Позиция - мировая, переводится в координаты террейна сразу
         /// @method
         void AddDeformation(const TerrainDeformation& deformation);
 
@@ -228,13 +241,15 @@ namespace SR_CORE_NS {
         /// Направление "вверх" поверхности в мировой точке: Y для плоского мира, от центра для сферы
         /// @method @evaluate
         SR_NODISCARD SR_MATH_NS::FVector3 GetUpDirection(const SR_MATH_NS::FVector3& position) const;
-        /// Может ли в области (мировые координаты) быть поверхность. Для сферы - пересечение с оболочкой [inner, outer]
+        /// То же для точки в координатах террейна
+        SR_NODISCARD SR_MATH_NS::FVector3 GetLocalUpDirection(const SR_MATH_NS::FVector3& localPosition) const;
+        /// Может ли в области (координаты террейна) быть поверхность. Для сферы - пересечение с оболочкой [inner, outer]
         SR_NODISCARD bool IsVolumeIntersects(const SR_MATH_NS::AABB& bounds) const;
 
     private:
         /// @property @group(Shape)
         TerrainShape m_shape = TerrainShape::Flat;
-        /// @property @group(Shape) @tooltip(Центр сферы в мировых координатах)
+        /// @property @group(Shape) @tooltip(Центр сферы в координатах террейна - относительно объекта пула чанков)
         SR_MATH_NS::FVector3 m_sphereCenter;
         /// @property @group(Shape) @tooltip(Чанки глубже этого радиуса не создаются. Должен быть ниже самых глубоких пещер)
         float_t m_sphereInnerRadius = 900.f;

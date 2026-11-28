@@ -63,6 +63,7 @@ namespace SR_PHYSICS_NS {
         void OnEnable() override;
         void OnDisable() override;
         void OnDestroy() override;
+        void OnOriginShifted(const SR_MATH_NS::FVector3& delta) override;
 
         void UpdatePose(float_t dt) override;
 

@@ -191,6 +191,19 @@ namespace SR_PHYSICS_NS {
         }
     }
 
+    void PhysicsScene::OnOriginShifted(const SR_MATH_NS::FVector3& delta) {
+        SR_TRACY_ZONE;
+
+        /// Тела в очереди на добавление создадутся по уже сдвинутым трансформам
+        if (m_2DWorld) {
+            m_2DWorld->ShiftOrigin(delta);
+        }
+
+        if (m_3DWorld) {
+            m_3DWorld->ShiftOrigin(delta);
+        }
+    }
+
     void PhysicsScene::Update(float_t dt) {
         SR_TRACY_ZONE;
 

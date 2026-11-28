@@ -685,7 +685,7 @@ namespace SR_CORE_NS {
                 TerrainGrassSourceMesh grassMesh;
                 grassMesh.origin = chunkOrigin;
                 /// Чанк LOD0 мал относительно планеты, поэтому направление "вверх" одно на весь чанк (по его центру)
-                grassMesh.up = terrain.GetUpDirection(chunkOrigin + scale * (0.5f * static_cast<float_t>(m_slotsDensityCountAxis)));
+                grassMesh.up = terrain.GetLocalUpDirection(chunkOrigin +scale * (0.5f * static_cast<float_t>(m_slotsDensityCountAxis)));
                 /// Воксель в локальных осях меша имеет размер 1, диагональ куба - sqrt(3)
                 const float_t maxScale = std::max({ std::abs(scale.x), std::abs(scale.y), std::abs(scale.z) });
                 grassMesh.maxEdgeLength = 1.8f * maxScale;

@@ -36,6 +36,9 @@ namespace SR_PHYSICS_NS {
         virtual bool Synchronize() { return false; }
         /// Ставит визуальное положение тел между двумя последними шагами, alpha - доля до следующего шага
         virtual void Interpolate(float_t alpha) { }
+        /// Сдвиг начала координат (Scene::ShiftOrigin): трансформы уже на -delta. По умолчанию ничего:
+        /// тела догоняют трансформы через грязную матрицу (телепорт). PhysX сдвигает сцену целиком
+        virtual void ShiftOrigin(const SR_MATH_NS::FVector3& delta) { }
 
         virtual void Flush() { }
 

@@ -73,6 +73,7 @@ namespace SR_CORE_NS {
         bool LoadNearestChunk(const SR_HTYPES_NS::Function<bool(ITerrainChunk&)>& loaderFn);
         void RebuildTree();
         void UpdatePhysics();
+        /// Множества неготовых/незагруженных должны быть актуальны (UpdateChunkSets в этом кадре)
         void ReleaseReplacedChunks();
         void RegenerateChunk(TerrainChunkCube::Ptr& pChunk);
         SR_NODISCARD bool IsCoveredByReplaced(const SR_MATH_NS::OctreeNodeId& node) const;

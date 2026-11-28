@@ -66,6 +66,8 @@ namespace SR_CORE_NS {
         SR_NODISCARD bool IsChunkReady(const ITerrainChunk& chunk) const;
 
         void Update(Terrain& terrain, float_t dt);
+        /// Следы приминания хранятся в мировых координатах и переезжают вместе с миром
+        void OnOriginShifted(const SR_MATH_NS::FVector3& delta);
         /// Останавливает фоновый поток и снимает траву со всех чанков.
         void Shutdown();
 
@@ -137,7 +139,8 @@ namespace SR_CORE_NS {
         SR_NODISCARD Settings MakeSettings() const;
         SR_NODISCARD static Result Generate(const Settings& settings, Task&& task);
 
-        void UpdateBenders(float_t dt);
+        /// Приминатели и следы - в мировых координатах, наблюдатель травы - в координатах террейна
+        void UpdateBenders(float_t dt, const SR_MATH_NS::FVector3& terrainOrigin);
         void QueueGeneration(const SR_HTYPES_NS::SharedPtr<TerrainGrassRenderer>& pRenderer, Source& source);
         void UpdateRegeneration(const SR_MATH_NS::FVector3& observer);
 

@@ -6,9 +6,26 @@
 //     плоский мир:  w = 0, y - высота земли (мировая); нулевой uniform - земля на Y = 0 (прежнее поведение)
 //
 // offset во всех функциях - смещение точки относительно камеры (мировая позиция - VIEW_POSITION).
+//
+// WORLD_ORIGIN (те же проходы) - абсолютное начало координат (SR_UTILS_NS::FloatingOrigin), без него - ноль.
+//
+// Include текстовый и без защиты от повторов: файл подключается из pcf-utils и напрямую, поэтому guard.
+
+#ifndef SR_WORLD_SHAPE_SRSL
+#define SR_WORLD_SHAPE_SRSL
 
 bool worldIsSphere() {
     return WORLD_SHAPE.w > 0.0;
+}
+
+// Точка для процедурики (шум, текстуры, ветер), не зависящая от сдвига начала координат (FloatingOrigin):
+// на сфере - относительно центра планеты (точно и без больших чисел у поверхности), в плоском мире -
+// абсолютная (WORLD_ORIGIN + мировая). Без сдвига совпадает с мировой позицией, если планета в нуле
+vec3 worldProceduralPosition(vec3 worldPos) {
+    if (WORLD_SHAPE.w > 0.0) {
+        return (worldPos - VIEW_POSITION) - WORLD_SHAPE.xyz;
+    }
+    return worldPos + WORLD_ORIGIN;
 }
 
 vec3 worldUp(vec3 offset) {
@@ -51,3 +68,5 @@ vec3 worldAboveHorizon(vec3 dir, vec3 up) {
 vec3 worldHorizonDir(vec3 dir, vec3 up, float elevation) {
     return normalize(dir - up * dot(dir, up) + up * elevation);
 }
+
+#endif

@@ -19,6 +19,8 @@ BlendEnabled false;
     #include <Engine/Shaders/Common/pcf-utils.inl.srsl>
 #endif
 
+#include <Engine/Shaders/Common/world-shape.srsl>
+
 /// ------------------------------------------ параметры, выставляемые из кода ------------------------------------------
 
 [[uniform]] vec3 grassOrigin;
@@ -259,7 +261,8 @@ void vertex() {
         float r6 = grassHash11(rnd * 1000.0 + 7.0);
 
         /// ---- кланпы: соседние травинки получают общую высоту и оттенок
-        vec2 rootPlane = grassPlane(root);
+        /// Кланпы, ветер и шум не должны прыгать при сдвиге начала координат (FloatingOrigin)
+        vec2 rootPlane = grassPlane(worldProceduralPosition(root));
         vec2 clumpCell = floor(rootPlane / max(clumpSize, 0.01));
         float clumpA = grassHash21(clumpCell);
         float clumpB = grassHash21(clumpCell + vec2(17.31, 5.17));

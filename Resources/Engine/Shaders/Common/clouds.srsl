@@ -142,7 +142,8 @@ vec3 cloudsWrap(vec3 p, float period) {
 // дешевая плотность: погодная карта + базовая форма, без эрозии
 float cloudsBaseDensity(vec3 worldPos, float h) {
     vec3 wind = cloudsWindOffset();
-    vec3 p = worldPos + wind;
+    // шум - в координатах, не зависящих от сдвига начала (FloatingOrigin), иначе облака прыгают при сдвиге
+    vec3 p = worldProceduralPosition(worldPos) + wind;
 
     float scale = cloudsShapeParams.w;
 
@@ -173,7 +174,7 @@ float cloudsDetailDensity(vec3 worldPos, float base, float h, float lod) {
     if (lod >= 0.99) {
         return base;
     }
-    vec3 p = cloudsWrap((worldPos + cloudsWindOffset() * 1.6) * 0.0035 * cloudsDetailParams.x, CLOUDS_NOISE_PERIOD);
+    vec3 p = cloudsWrap((worldProceduralPosition(worldPos) + cloudsWindOffset() * 1.6) * 0.0035 * cloudsDetailParams.x, CLOUDS_NOISE_PERIOD);
     float detail = cloudsNoise3D(p) * 0.6 + cloudsNoise3D(p * 2.0 + 23.0) * 0.4;
     // снизу облака клочковатые, сверху - округлые
     detail = mix(detail, 1.0 - detail, clamp(h * 4.0, 0.0, 1.0));

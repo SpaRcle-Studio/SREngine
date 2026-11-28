@@ -436,7 +436,7 @@ namespace SR_CORE_NS {
             gTerrainGrass.results.clear();
         }
 
-        UpdateBenders(dt);
+        UpdateBenders(dt, terrain.GetTerrainOrigin());
 
         m_retiredRenderers.erase_if([](const SR_HTYPES_NS::SharedPtr<TerrainGrassRenderer>& pRenderer) {
             return !pRenderer || pRenderer->FreeRetired();
@@ -494,13 +494,21 @@ namespace SR_CORE_NS {
         m_drawnInstances = drawn;
     }
 
-    void TerrainGrass::UpdateBenders(float_t dt) {
+    void TerrainGrass::OnOriginShifted(const SR_MATH_NS::FVector3& delta) {
+        for (auto&& [pOwner, trail] : m_trails) {
+            for (auto&& point : trail.points) {
+                point.position -= delta;
+            }
+        }
+    }
+
+    void TerrainGrass::UpdateBenders(float_t dt, const SR_MATH_NS::FVector3& terrainOrigin) {
         SR_TRACY_ZONE;
 
         auto&& candidates = gTerrainGrass.candidates;
         candidates.clear();
 
-        const SR_MATH_NS::FVector3 observer = m_lastObserverPosition;
+        const SR_MATH_NS::FVector3 observer = m_lastObserverPosition + terrainOrigin;
         const float_t maxDistanceSq = m_bendMaxDistance * m_bendMaxDistance;
         const float_t spacing = std::max(0.05f, m_trailSpacing);
 

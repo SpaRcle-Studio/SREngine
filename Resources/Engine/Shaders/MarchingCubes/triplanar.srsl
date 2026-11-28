@@ -8,6 +8,8 @@
 [[uniform], [public]] vec3 sandColor = vec3(1.0, 1.0, 1.0);
 [[uniform], [public]] float textureWrapPeriod = 1024.0; // период заворачивания мировых координат в метрах, 0 - без заворачивания
 
+#include <Engine/Shaders/Common/world-shape.srsl>
+
 float hash(vec2 p) {
     return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
 }
@@ -44,9 +46,10 @@ vec4 triplanarMaterial() {
 
     // Мировые координаты заворачиваются с периодом textureWrapPeriod: вдали от начала координат (планеты)
     // float теряет точность, и UV дрожат. Шов незаметен, если textureWrapPeriod * textureScale - целое и кратно размеру тайла (4 м)
-    vec3 p = VERTEX;
+    // Координаты не зависят от сдвига начала (FloatingOrigin): на планете - от её центра, иначе абсолютные
+    vec3 p = worldProceduralPosition(VERTEX);
     if (textureWrapPeriod > 0.0) {
-        p = mod(VERTEX, vec3(textureWrapPeriod));
+        p = mod(p, vec3(textureWrapPeriod));
     }
 
     // проекции координат считаются один раз для всех материалов

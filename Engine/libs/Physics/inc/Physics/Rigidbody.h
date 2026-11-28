@@ -55,6 +55,14 @@ namespace SR_PTYPES_NS {
         virtual bool UpdateMatrix(bool force) { return true; }
         virtual bool UpdateShapeInternal() { return true; }
 
+        /// Физический мир и трансформ уже сдвинуты на -delta (PhysicsWorld::ShiftOrigin), сдвигается последняя
+        /// известная поза, иначе Synchronize примет сдвиг за движение тела и сдвинет трансформ второй раз
+        virtual void OnOriginShifted(const SR_MATH_NS::FVector3& delta) {
+            if (m_rigidbodyTranslation.IsFinite()) {
+                m_rigidbodyTranslation -= delta;
+            }
+        }
+
         void SetSyncAllowed(bool allowed) { m_isSyncAllowed = allowed; }
 
     protected:
@@ -91,6 +99,8 @@ namespace SR_PTYPES_NS {
     public:
         bool UpdateMatrix(bool force = false);
         void Synchronize();
+        /// Физический мир сдвинут вместе с началом координат (PhysicsWorld::ShiftOrigin)
+        void OnWorldOriginShifted(const SR_MATH_NS::FVector3& delta);
 
         void UpdateInertia();
         void ClearForces();

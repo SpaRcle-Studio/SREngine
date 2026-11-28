@@ -80,6 +80,37 @@ namespace SR_PHYSICS_NS {
         }
     }
 
+    void XPBDSolver::Translate(const SR_MATH_NS::FVector3& offset) {
+        for (auto&& particle : m_particles) {
+            particle.position += offset;
+            particle.prevPosition += offset;
+            particle.animPosition += offset;
+            particle.prevAnimPosition += offset;
+            particle.stepAnimPosition += offset;
+        }
+
+        for (auto&& shape : m_collisionShapes) {
+            TranslateShape(shape, offset);
+        }
+    }
+
+    void XPBDSolver::TranslateShape(XPBDCollisionShape& shape, const SR_MATH_NS::FVector3& offset) {
+        shape.a += offset;
+        shape.prevA += offset;
+        shape.stepA += offset;
+        shape.stepPrevA += offset;
+
+        /// У плоскости b - нормаль
+        if (shape.type == XPBDCollisionShapeType::Plane) {
+            return;
+        }
+
+        shape.b += offset;
+        shape.prevB += offset;
+        shape.stepB += offset;
+        shape.stepPrevB += offset;
+    }
+
     void XPBDSolver::Step(const float_t dt, const SR_MATH_NS::FVector3& follow) {
         SR_TRACY_ZONE;
 

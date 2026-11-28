@@ -184,7 +184,7 @@ namespace SR_CORE_NS {
         }
 
         if (pCamera) {
-            data.position = pCamera->GetPosition();
+            data.position = ToTerrainSpace(pCamera->GetPosition());
             /// Направление берётся из тех же матриц, с которыми рисуется кадр: строка w матрицы PROJECTION * VIEW -
             /// это градиент глубины, т.е. направление "вперёд" независимо от соглашений осей камеры.
             const SR_MATH_NS::Matrix4x4 viewProjection = pCamera->GetProjection() * pCamera->GetViewTranslate();
@@ -198,9 +198,40 @@ namespace SR_CORE_NS {
         return data;
     }
 
+    void Terrain::OnOriginShifted(const SR_MATH_NS::FVector3& delta) {
+        /// Сам террейн живёт в своих координатах и сдвига не замечает, кроме мировых следов травы
+        if (m_grass) {
+            m_grass->OnOriginShifted(delta);
+        }
+        Super::OnOriginShifted(delta);
+    }
+
+    SR_MATH_NS::FVector3 Terrain::GetTerrainOrigin() const {
+        auto&& pPool = m_chunkGenerator ? m_chunkGenerator->GetPoolObject() : SR_UTILS_NS::SceneObject::Ptr();
+        if (auto&& pPoolObject = dynamic_cast<SR_UTILS_NS::GameObject*>(pPool.Get())) {
+            if (auto&& pTransform = pPoolObject->TryGetTransform()) {
+                return pTransform->GetMatrix().GetTranslate();
+            }
+        }
+
+        if (auto&& pTransform = GetTransform()) {
+            return pTransform->GetMatrix().GetTranslate();
+        }
+
+        return SR_MATH_NS::FVector3();
+    }
+
+    SR_MATH_NS::FVector3 Terrain::ToTerrainSpace(const SR_MATH_NS::FVector3& worldPosition) const {
+        return worldPosition - GetTerrainOrigin();
+    }
+
     SR_MATH_NS::FVector3 Terrain::GetUpDirection(const SR_MATH_NS::FVector3& position) const {
+        return GetLocalUpDirection(ToTerrainSpace(position));
+    }
+
+    SR_MATH_NS::FVector3 Terrain::GetLocalUpDirection(const SR_MATH_NS::FVector3& localPosition) const {
         if (m_shape == TerrainShape::Sphere) {
-            const SR_MATH_NS::FVector3 delta = position - m_sphereCenter;
+            const SR_MATH_NS::FVector3 delta = localPosition - m_sphereCenter;
             const float_t length = delta.Length();
             if (length > 1e-4f) {
                 return delta / length;
@@ -246,7 +277,9 @@ namespace SR_CORE_NS {
         if (deformation.strength <= 0.f) {
             return;
         }
-        m_pendingDeformations.emplace_back(deformation);
+        /// Правки плотности - в координатах террейна, иначе после сдвига мира они уехали бы вместе с ним
+        auto&& pending = m_pendingDeformations.emplace_back(deformation);
+        pending.position = ToTerrainSpace(deformation.position);
     }
 
     void Terrain::LateUpdate() {

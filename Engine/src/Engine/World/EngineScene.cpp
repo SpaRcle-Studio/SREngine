@@ -16,6 +16,7 @@
 #include <Utils/Common/Features.h>
 #include <Utils/Common/ToString.h>
 #include <Utils/World/SceneCubeChunkLogic.h>
+#include <Utils/World/FloatingOrigin.h>
 #include <Utils/Events/Broadcaster.h>
 
 namespace SR_CORE_NS {
@@ -243,6 +244,28 @@ namespace SR_CORE_NS {
 
         pSceneUpdater->LateUpdate(isPaused);
 
+        /// После физики и LateUpdate, до подготовки рендера: кадр рисуется уже в сдвинутых координатах
+        UpdateFloatingOrigin(isPaused);
+
         pEngine->SetOneFramePauseSkip(false);
+    }
+
+    void EngineScene::UpdateFloatingOrigin(bool isPaused) {
+        auto&& pFloatingOrigin = SR_UTILS_NS::FloatingOrigin::Find(pScene.Get());
+        if (!pFloatingOrigin || !pRenderScene) {
+            return;
+        }
+
+        SR_TRACY_ZONE;
+
+        /// Наблюдатель как у Terrain::GetObserver: в режиме редактора - редакторная камера, иначе игровая
+        SR_GTYPES_NS::Camera::Ptr pCamera = pScene->IsEditorMode() ? pRenderScene->GetMainCamera() : pRenderScene->GetGameCamera();
+        if (!pCamera) {
+            pCamera = pRenderScene->GetMainCamera();
+        }
+
+        if (pCamera) {
+            pFloatingOrigin->UpdateObserver(pCamera->GetPosition(), !isPaused);
+        }
     }
 }

@@ -318,6 +318,12 @@ namespace SR_PTYPES_NS {
         }
     }
 
+    void Rigidbody::OnWorldOriginShifted(const SR_MATH_NS::FVector3& delta) {
+        if (m_impl) {
+            m_impl->OnOriginShifted(delta);
+        }
+    }
+
     bool Rigidbody::IsShapeSupported(const ShapeType type) const {
         if (!m_library || !m_library->IsShapeSupported(type)) {
             return false;

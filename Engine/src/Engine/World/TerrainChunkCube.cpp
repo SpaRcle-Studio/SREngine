@@ -77,6 +77,7 @@ namespace SR_CORE_NS {
         /// Отсчёт идёт только пока замена готова и начинается заново, если готовность пропала.
         /// При редактировании замена пересоздаётся каждый кадр - без сброса счётчик успевал дойти до нуля
         /// на предыдущей замене, и старый чанк освобождался в кадр загрузки новой (моргание).
+        /// Множества считаются раз за кадр (дорого при тысячах чанков) и тут же используются ReleaseReplacedChunks
         UpdateChunkSets();
         for (auto&& pReplaced : m_replacedChunks) {
             if (!IsReady(pReplaced->GetNode())) {
@@ -220,61 +221,85 @@ namespace SR_CORE_NS {
         SR_HTYPES_NS::FlatHashMap<SR_MATH_NS::OctreeNodeId, TerrainChunkCube::Ptr> chunks;
         chunks.reserve(leaves.size());
 
-        for (auto&& node : leaves) {
-            if (auto&& pIt = m_chunks.find(node); pIt != m_chunks.end()) {
-                chunks[node] = std::move(pIt->second);
-                m_chunks.erase(pIt);
-                continue;
-            }
+        {
+            SR_TRACY_ZONE_N("Match leaves");
 
-            /// Узел снова стал листом, пока его ещё показывали в ожидании замены
-            bool isRevived = false;
-            /// Сначала проверка по множеству: перебор заменяемых на каждый лист стоил листья x заменяемые
-            const bool isReplacedNode = !m_replacedChunks.empty() && GetReplacedSet().Contains(node);
-            for (uint32_t i = 0; isReplacedNode && i < m_replacedChunks.size(); ++i) {
-                if (m_replacedChunks[i]->GetNode() == node) {
-                    m_replacedChunks[i]->SetReplaceFrames(0);
-                    chunks[node] = m_replacedChunks[i];
-                    m_replacedChunks[i] = m_replacedChunks.back();
-                    m_replacedChunks.pop_back();
-                    m_isReplacedSetDirty = true;
-                    isRevived = true;
-                    break;
+            /// Множество заменяемых только отсеивает листья перед линейным поиском. Пока идёт цикл, оно может
+            /// содержать уже оживлённые узлы (лишнее совпадение отсеет поиск), поэтому пересобирается один раз после
+            /// цикла, а не после каждого оживления - иначе квадратичная сложность при движении туда-обратно
+            auto&& replacedSet = GetReplacedSet();
+            bool isReplacedChanged = false;
+
+            for (auto&& node : leaves) {
+                if (auto&& pIt = m_chunks.find(node); pIt != m_chunks.end()) {
+                    chunks[node] = std::move(pIt->second);
+                    m_chunks.erase(pIt);
+                    continue;
                 }
+
+                /// Узел снова стал листом, пока его ещё показывали в ожидании замены
+                bool isRevived = false;
+                /// Сначала проверка по множеству: перебор заменяемых на каждый лист стоил листья x заменяемые
+                const bool isReplacedNode = !m_replacedChunks.empty() && replacedSet.Contains(node);
+                for (uint32_t i = 0; isReplacedNode && i < m_replacedChunks.size(); ++i) {
+                    if (m_replacedChunks[i]->GetNode() == node) {
+                        m_replacedChunks[i]->SetReplaceFrames(0);
+                        chunks[node] = m_replacedChunks[i];
+                        m_replacedChunks[i] = m_replacedChunks.back();
+                        m_replacedChunks.pop_back();
+                        isReplacedChanged = true;
+                        isRevived = true;
+                        break;
+                    }
+                }
+
+                if (isRevived) {
+                    continue;
+                }
+
+                chunks[node] = CreateChunk(node);
             }
 
-            if (isRevived) {
-                continue;
+            if (isReplacedChanged) {
+                m_isReplacedSetDirty = true;
             }
-
-            chunks[node] = CreateChunk(node);
         }
 
-        /// Узлы, которые больше не являются листьями. Видимые остаются до загрузки замены.
-        for (auto&& [node, pChunk] : m_chunks) {
-            RetireChunk(pChunk);
+        {
+            SR_TRACY_ZONE_N("Retire chunks");
+
+            /// Узлы, которые больше не являются листьями. Видимые остаются до загрузки замены.
+            for (auto&& [node, pChunk] : m_chunks) {
+                RetireChunk(pChunk);
+            }
         }
 
         m_chunks = std::move(chunks);
         m_activeChunksCount = static_cast<uint32_t>(m_chunks.size());
 
-        /// Юбки строятся только на гранях с соседом другого LOD. Если набор таких граней изменился - чанк перегенерируется.
-        for (auto&& [node, pChunk] : m_chunks) {
-            const uint8_t lodBorders = CalculateLodBorders(node);
-            if (lodBorders == pChunk->GetLodBorders()) {
-                continue;
+        {
+            SR_TRACY_ZONE_N("Update LOD borders");
+
+            /// Юбки строятся только на гранях с соседом другого LOD. Если набор таких граней изменился - чанк перегенерируется.
+            for (auto&& [node, pChunk] : m_chunks) {
+                const uint8_t lodBorders = CalculateLodBorders(node);
+                if (lodBorders == pChunk->GetLodBorders()) {
+                    continue;
+                }
+                /// У пустого чанка геометрии нет - юбки ему не нужны
+                if (pChunk->GetStatus() == ITerrainChunk::Status::Loaded && pChunk->GetObject()) {
+                    /// Перегенерация в отдельный чанк: старый остаётся видимым до загрузки нового.
+                    /// Обновление меша на месте перерегистрирует его в рендере, и чанк моргает.
+                    RetireChunk(pChunk);
+                    pChunk = CreateChunk(node);
+                }
+                pChunk->SetLodBorders(lodBorders);
             }
-            /// У пустого чанка геометрии нет - юбки ему не нужны
-            if (pChunk->GetStatus() == ITerrainChunk::Status::Loaded && pChunk->GetObject()) {
-                /// Перегенерация в отдельный чанк: старый остаётся видимым до загрузки нового.
-                /// Обновление меша на месте перерегистрирует его в рендере, и чанк моргает.
-                RetireChunk(pChunk);
-                pChunk = CreateChunk(node);
-            }
-            pChunk->SetLodBorders(lodBorders);
         }
 
-        ReleaseReplacedChunks();
+        /// ReleaseReplacedChunks здесь не нужен: только что заменённые чанки ждут replaceDelayFrames и в этом кадре
+        /// не освобождаются. Освобождение, показ скрытых и перегенерация грязных - в LoadNextChunk следующего кадра,
+        /// с одним UpdateChunkSets на кадр (при движении он стоил ~2 мс на вызов)
     }
 
     void TerrainChunkCubeGenerator::InvalidateRegion(const SR_MATH_NS::AABB& bounds) {
@@ -500,6 +525,15 @@ namespace SR_CORE_NS {
                 /// иначе - в листе того же или большего размера.
                 SR_MATH_NS::IVector3 probe = node.position;
                 probe[axis] += side == 0 ? -1 : size;
+
+                /// Обычно сосед - лист того же уровня: один поиск вместо перебора всех уровней (FindLeafAt).
+                /// Его позиция выровнена по size, как у узла, который FindLeafAt нашёл бы на этом уровне
+                SR_MATH_NS::OctreeNodeId sameLevel = node;
+                sameLevel.position[axis] += side == 0 ? -size : size;
+                if (m_chunks.contains(sameLevel)) {
+                    continue;
+                }
+
                 if (auto&& pNeighbour = FindLeafAt(probe); pNeighbour && pNeighbour->level != node.level) {
                     mask |= static_cast<uint8_t>(1u << (axis * 2 + side));
                 }
@@ -517,7 +551,6 @@ namespace SR_CORE_NS {
     void TerrainChunkCubeGenerator::ReleaseReplacedChunks() {
         SR_TRACY_ZONE;
 
-        UpdateChunkSets();
         RevealHiddenChunks();
 
         for (uint32_t i = 0; i < m_replacedChunks.size();) {

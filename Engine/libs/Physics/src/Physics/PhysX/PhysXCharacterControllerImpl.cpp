@@ -164,6 +164,24 @@ namespace SR_PHYSICS_NS {
         m_writtenPosition = pTransform->GetGlobalTranslation();
     }
 
+    void PhysXCharacterControllerImpl::OnOriginShifted(const SR_MATH_NS::FVector3& delta) {
+        if (!m_hasPhysicsPosition) {
+            return;
+        }
+
+        m_prevPhysicsPosition -= delta;
+        m_physicsPosition -= delta;
+
+        /// Сравнение с трансформом точное: берём его фактическое значение после сдвига, а не m_writtenPosition - delta,
+        /// иначе ошибка округления выглядела бы как телепорт и сбивала интерполяцию
+        if (auto&& pTransform = m_controller->GetTransform()) {
+            m_writtenPosition = pTransform->GetGlobalTranslation();
+        }
+        else {
+            m_writtenPosition -= delta;
+        }
+    }
+
     bool PhysXCharacterControllerImpl::IsGrounded() const {
         SR_TRACY_ZONE;
 

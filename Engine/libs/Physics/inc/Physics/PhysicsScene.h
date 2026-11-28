@@ -44,6 +44,8 @@ namespace SR_PHYSICS_NS {
         void Interpolate(float_t alpha);
         virtual bool Init();
 
+        void OnOriginShifted(const SR_MATH_NS::FVector3& delta) override;
+
         virtual void Register(RigidbodyPtr pRigidbody);
         virtual void Register(CharacterControllerPtr pController);
 

@@ -25,6 +25,7 @@ namespace SR_PHYSICS_NS {
         bool ClearForces() override;
         bool Synchronize() override;
         void Interpolate(float_t alpha) override;
+        void ShiftOrigin(const SR_MATH_NS::FVector3& delta) override;
 
         bool StepSimulation(float_t step) override;
 

@@ -213,7 +213,8 @@ void fragment() {
         float density = fogDensityAt(rayDir * t);
 
         if (noiseStrength > 0.0) {
-            vec3 np = mod((p + windOffset) * fogNoiseParams.y, FOG_NOISE_PERIOD);
+            // шум не должен прыгать при сдвиге начала координат (FloatingOrigin)
+            vec3 np = mod((worldProceduralPosition(p) + windOffset) * fogNoiseParams.y, FOG_NOISE_PERIOD);
             float n = fogNoise3D(np) * 0.65 + fogNoise3D(np * 2.0 + 13.0) * 0.35;
             density *= mix(1.0, n * 2.0, noiseStrength);
         }

@@ -50,6 +50,9 @@ namespace SR_PHYSICS_NS {
         /// Ось капсулы и направление "вверх" для ступенек, склонов и проверки земли
         virtual void SetUpDirection(const SR_MATH_NS::FVector3& up) { }
 
+        /// Контроллер в физике и трансформ уже сдвинуты на -delta, сдвигаются запомненные позиции
+        virtual void OnOriginShifted(const SR_MATH_NS::FVector3& delta) { }
+
     protected:
         CharacterController* m_controller = nullptr;
 

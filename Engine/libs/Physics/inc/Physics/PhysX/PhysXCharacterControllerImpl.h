@@ -31,6 +31,7 @@ namespace SR_PHYSICS_NS {
 
         void Synchronize() override;
         void Interpolate(float_t alpha) override;
+        void OnOriginShifted(const SR_MATH_NS::FVector3& delta) override;
 
     private:
         physx::PxController* m_pxController = nullptr;

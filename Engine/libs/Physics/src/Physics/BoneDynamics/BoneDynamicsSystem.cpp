@@ -26,6 +26,20 @@ namespace SR_PHYSICS_NS {
         Super::OnDestroy();
     }
 
+    void BoneDynamicsSystem::OnOriginShifted(const SR_MATH_NS::FVector3& delta) {
+        /// Частицы в мировых координатах: без переноса сдвиг выглядел бы как телепорт корня (сброс симуляции)
+        const SR_MATH_NS::FVector3 offset = -delta;
+
+        m_lastRootPosition += offset;
+        m_solver.Translate(offset);
+
+        for (auto&& shape : m_prevCollisionShapes) {
+            XPBDSolver::TranslateShape(shape, offset);
+        }
+
+        Super::OnOriginShifted(delta);
+    }
+
     void BoneDynamicsSystem::Rebuild() {
         m_isBuilt = false;
         m_needReset = true;

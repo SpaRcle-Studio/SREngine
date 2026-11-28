@@ -47,6 +47,7 @@ namespace SR_CORE_NS {
     private:
         void UpdateFrequency();
         void FixedStep(bool isPaused);
+        void UpdateFloatingOrigin(bool isPaused);
 
     public:
         SR_UTILS_NS::InputAccumulator m_inputAccumulator;
