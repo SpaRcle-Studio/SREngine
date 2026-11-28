@@ -35,6 +35,8 @@ namespace SR_CORE_NS {
         float_t maxEdgeLength = 0.f;
         /// Травинки вне этих границ (в тех же осях, что и positions) отбрасываются. Пустые границы - без проверки.
         SR_MATH_NS::AABB bounds = SR_MATH_NS::AABB(SR_MATH_NS::FVector3(0.f), SR_MATH_NS::FVector3(0.f));
+        /// LOD чанка-источника: у дальних чанков (LOD > 0) трава прореживается по дистанции уже при генерации
+        uint8_t terrainLod = 0;
     };
 
     /// Опциональная система травы террейна.
@@ -58,6 +60,8 @@ namespace SR_CORE_NS {
 
     public:
         SR_NODISCARD bool IsEnabled() const noexcept { return m_enabled; }
+        /// Трава растёт на чанках с LOD не выше этого
+        SR_NODISCARD uint32_t GetMaxTerrainLod() const noexcept { return m_maxTerrainLod; }
 
         /// Поток сцены. Забирает копию меша, генерация пойдёт в фоне.
         void OnChunkGenerated(Terrain& terrain, ITerrainChunk& chunk, TerrainGrassSourceMesh&& mesh);
@@ -93,6 +97,10 @@ namespace SR_CORE_NS {
             SourceMeshPtr pMesh;
             /// Позиция наблюдателя, от которой отбираются травинки по LOD (дальние не генерируются)
             SR_MATH_NS::FVector3 observer;
+            /// Первая генерация чанка: от неё зависит смена LOD (заменяемый чанк ждёт траву замены), поэтому вне очереди
+            bool isInitial = false;
+            /// Квадрат расстояния от наблюдателя до границ чанка на момент постановки: ближние генерируются раньше
+            float_t distanceSq = 0.f;
         };
 
         struct Source {
@@ -186,6 +194,8 @@ namespace SR_CORE_NS {
         /// @property @group(Placement) @tooltip(Если доля разрешённых материалов меньше этого значения - травы нет)
         float_t m_materialWeightThreshold = 0.1f;
 
+        /// @property @group(LOD) @tooltip(Трава растёт на чанках террейна с LOD не выше этого. Чанк LOD0 виден примерно до chunkSize * 2 * splitDistance, поэтому для дальней травы нужны LOD 1-2; их трава прореживается по дистанции уже при генерации)
+        uint32_t m_maxTerrainLod = 0;
         /// @property @group(LOD)
         float_t m_fullDensityDistance = 12.f;
         /// @property @group(LOD)

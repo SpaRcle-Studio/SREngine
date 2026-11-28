@@ -14,6 +14,13 @@
 ## Текстуры
 
 - Для незаданной/незагруженной текстуры (`!Texture::CanBeUsed()`, включая асинхронную загрузку) `Shader::SetSampler2D` подставляет `RenderContext::GetNoneTexture()` — PNG 1×1 из base64 в `RenderContext::Init`. Должен быть непрозрачный белый (255, 255, 255, 255), иначе объекты с `HAS_ALPHA` становятся прозрачными. `GetDefaultTexture()` (`Engine/Textures/default_improved.png`) подставляет `SamplersPassData`.
+- Тип текстуры — в `<файл>.meta` рядом (`imageType`). Без `.meta` — `Albedo` (sRGB). Карты нормалей — `Normal` (грузятся RG8: синего канала нет, z восстанавливать), ARM/ORM — `ORM` (линейные). Нормаль, загруженная как sRGB-альбедо, тихо искажает освещение.
+
+## Хуки standard.srsl
+
+- `STANDARD_SHADER_CUSTOM_FRAGMENT` — свои `fragment_uv/diffuse/normal`. `STANDARD_SHADER_CUSTOM_WORLD_NORMAL` — `vec3 fragment_world_normal(vec2)` в мировых осях (освещение получает `transpose(TBN) * n`, TBN ортонормирован). `STANDARD_SHADER_CUSTOM_ORM` — `vec3 fragment_orm(vec2)` вместо текстуры `ORM`. Пример — `MarchingCubes/triplanar.srsl`.
+- Без `HAS_NORMAL` нормаль в пространстве TBN — `(0, 0, 1)`. Раньше там была мировая `NORMAL`, которую `CalculateShadow` ещё раз поворачивал на TBN (свет на материалах без карты нормалей был не с той стороны).
+- Изменяемые глобальные переменные в `.srsl` нигде не используются (поддержка транслятором, особенно WGSL, не проверена) — общие для хуков величины считать в каждом хуке и передавать параметрами.
 
 ## Освещение и тени
 

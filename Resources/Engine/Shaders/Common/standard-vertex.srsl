@@ -1,11 +1,22 @@
 [[shared]] mat3 TBN;
 
 void vertex() {
-#ifdef HAS_SKELETON
-    #include <Engine/Shaders/Common/bone-transform.inl.srsl>
-    mat4 modelMatrix = boneTransform;
+#ifdef SR_STANDARD_VERTEX_INSTANCED
+    /// Инстанс (TerrainScatterRenderer): CUSTOM0..2 - строки аффинной матрицы 3x4, перенос в w
+    mat4 instanceMatrix = mat4(
+        vec4(CUSTOM0.x, CUSTOM1.x, CUSTOM2.x, 0.0),
+        vec4(CUSTOM0.y, CUSTOM1.y, CUSTOM2.y, 0.0),
+        vec4(CUSTOM0.z, CUSTOM1.z, CUSTOM2.z, 0.0),
+        vec4(CUSTOM0.w, CUSTOM1.w, CUSTOM2.w, 1.0)
+    );
+    mat4 modelMatrix = MODEL_MATRIX * instanceMatrix;
 #else
-    mat4 modelMatrix = MODEL_MATRIX;
+    #ifdef HAS_SKELETON
+        #include <Engine/Shaders/Common/bone-transform.inl.srsl>
+        mat4 modelMatrix = boneTransform;
+    #else
+        mat4 modelMatrix = MODEL_MATRIX;
+    #endif
 #endif
 
 #ifdef SR_STANDARD_VERTEX_POSITION_FUNC

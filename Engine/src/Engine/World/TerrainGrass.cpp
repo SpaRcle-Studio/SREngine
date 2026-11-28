@@ -221,8 +221,25 @@ namespace SR_CORE_NS {
         {
             std::lock_guard lock(m_queueMutex);
             if (!m_tasks.empty()) {
-                task = std::move(m_tasks.front());
-                m_tasks.erase(m_tasks.begin());
+                /// Не FIFO: при движении наблюдателя в очередь встают перегенерации всех чанков, и первая генерация
+                /// нового чанка ждала бы их все (а с ней - и смена LOD). Сначала первые генерации, затем ближние.
+                uint64_t best = 0;
+                for (uint64_t i = 1; i < m_tasks.size(); ++i) {
+                    const Task& candidate = m_tasks[i];
+                    const Task& current = m_tasks[best];
+                    if (candidate.isInitial != current.isInitial) {
+                        if (candidate.isInitial) {
+                            best = i;
+                        }
+                        continue;
+                    }
+                    if (candidate.distanceSq < current.distanceSq) {
+                        best = i;
+                    }
+                }
+
+                task = std::move(m_tasks[best]);
+                m_tasks.erase(m_tasks.begin() + static_cast<int64_t>(best));
                 settings = MakeSettings();
                 hasTask = true;
             }
@@ -326,6 +343,23 @@ namespace SR_CORE_NS {
 
         StartWorker();
 
+        /// Расстояние от наблюдателя до границ чанка (в осях меша), без границ - до его начала
+        float_t distanceSq = 0.f;
+        if (source.pMesh) {
+            auto&& mesh = source.pMesh->data;
+            const SR_MATH_NS::FVector3 localObserver = source.observer - mesh.origin;
+            const SR_MATH_NS::FVector3 boundsSize = mesh.bounds.max - mesh.bounds.min;
+            SR_MATH_NS::FVector3 closest = SR_MATH_NS::FVector3(0.f);
+            if (boundsSize.x > 0.f && boundsSize.y > 0.f && boundsSize.z > 0.f) {
+                closest = SR_MATH_NS::FVector3(
+                    std::clamp(localObserver.x, mesh.bounds.min.x, mesh.bounds.max.x),
+                    std::clamp(localObserver.y, mesh.bounds.min.y, mesh.bounds.max.y),
+                    std::clamp(localObserver.z, mesh.bounds.min.z, mesh.bounds.max.z)
+                );
+            }
+            distanceSq = (localObserver - closest).LengthSq();
+        }
+
         std::lock_guard lock(m_queueMutex);
         /// Если по этому чанку уже стоит задача - она устарела
         m_tasks.erase_if([&](const Task& task) { return task.pRenderer == pRenderer; });
@@ -333,7 +367,9 @@ namespace SR_CORE_NS {
             .generation = generation,
             .pRenderer = pRenderer,
             .pMesh = source.pMesh,
-            .observer = source.observer
+            .observer = source.observer,
+            .isInitial = !source.isApplied,
+            .distanceSq = distanceSq
         });
     }
 
@@ -788,6 +824,7 @@ namespace SR_CORE_NS {
             const float_t triangleInsideDistance = std::max(0.f, instanceMaxDistance - std::max(0.f, mesh.maxEdgeLength));
             const float_t triangleInsideDistanceSq = triangleInsideDistance * triangleInsideDistance;
             const SR_MATH_NS::FVector3 localObserver = task.observer - mesh.origin;
+            const bool applyDistanceLod = mesh.terrainLod > 0;
 
             for (size_t t = 0; t + 2 < indices.size(); t += 3) {
                 const uint32_t ia = indices[t + 0];
@@ -865,6 +902,19 @@ namespace SR_CORE_NS {
                 }
                 /// Треугольник целиком ближе дальности травы - проверять каждую травинку не нужно
                 const bool checkInstanceDistance = !hasMaxEdge || centerDistanceSq >= triangleInsideDistanceSq;
+
+                /// Дальний чанк (LOD > 0): травинки, которые рендерер всё равно погасит по дистанции, не генерируются.
+                /// Кривая берётся на (дистанция - generationMargin): пока наблюдатель не подошёл ближе запаса (а раньше
+                /// сработает перегенерация по regenerateDistance или чанк заменится детальным), плотности хватает.
+                /// Для LOD0 так не делается: там наблюдатель рядом и успевает уйти, пока задача в очереди
+                float_t triangleKeep = 1.f;
+                if (applyDistanceLod) {
+                    const float_t nearest = std::max(0.f, SR_SQRT(centerDistanceSq) - std::max(0.f, mesh.maxEdgeLength) - settings.generationMargin);
+                    triangleKeep = settings.lod.GetKeepFraction(nearest);
+                    if (triangleKeep <= 0.f) {
+                        continue;
+                    }
+                }
                 const uint32_t triangleSeed = GrassHash(
                     static_cast<int32_t>(std::floor(center.x * 64.f)),
                     static_cast<int32_t>(std::floor(center.y * 64.f)),
@@ -884,6 +934,13 @@ namespace SR_CORE_NS {
 
                     const float_t threshold = GrassToFloat(h2);
                     if (threshold >= maxAccept) {
+                        continue;
+                    }
+
+                    /// ранг считается до позиции: на дальних чанках большая часть кандидатов отбрасывается по нему сразу
+                    const uint32_t h3 = GrassHash(h2 ^ 0x1B56C4E9U);
+                    const float_t rank = GrassToFloat(h3);
+                    if (applyDistanceLod && rank >= triangleKeep) {
                         continue;
                     }
 
@@ -911,6 +968,13 @@ namespace SR_CORE_NS {
                     /// плотность по дистанции применяет рендерер при отрисовке.
                     if (checkInstanceDistance && (position - localObserver).LengthSq() >= instanceMaxDistanceSq) {
                         continue;
+                    }
+
+                    if (applyDistanceLod) {
+                        const float_t distance = std::max(0.f, (position - localObserver).Length() - settings.generationMargin);
+                        if (rank >= settings.lod.GetKeepFraction(distance)) {
+                            continue;
+                        }
                     }
 
                     /// вес материала в точке травинки
@@ -944,9 +1008,6 @@ namespace SR_CORE_NS {
                     if (threshold >= materialFactor * noise * GrassSmoothStep(settings.slopeMin, settings.slopeMax, std::min(normal.Dot(up), faceUp + 0.1f))) {
                         continue;
                     }
-
-                    const uint32_t h3 = GrassHash(h2 ^ 0x1B56C4E9U);
-                    const float_t rank = GrassToFloat(h3);
 
                     const auto cellX = std::min(cellsX - 1, static_cast<uint32_t>(std::max(0.f, (position[axisU] - boundsMin[axisU]) / cellSize)));
                     const auto cellZ = std::min(cellsZ - 1, static_cast<uint32_t>(std::max(0.f, (position[axisV] - boundsMin[axisV]) / cellSize)));

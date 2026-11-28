@@ -409,8 +409,8 @@ namespace SR_CORE_NS {
                 m_notLoadedSet.Add(node, maxLevel);
             }
 
-            /// Трава замены тоже должна быть готова: иначе либо место голое, либо (если держать обе) травы вдвое больше
-            bool isReady = isLoaded && pChunk->IsGrassReady();
+            /// Трава и объекты замены тоже должны быть готовы: иначе либо место голое, либо (если держать обе) всего вдвое больше
+            bool isReady = isLoaded && pChunk->IsGrassReady() && pChunk->IsScatterReady();
             if (isReady && pChunk->GetObject() && pChunk->GetData() && !pChunk->GetData()->IsRenderReady()) {
                 isReady = false;
             }

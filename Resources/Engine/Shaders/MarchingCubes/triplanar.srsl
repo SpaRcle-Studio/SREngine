@@ -1,85 +1,180 @@
-[[uniform], [public]] float textureScale = 0.5; // масштаб текстуры
+/// Трипланарный материал террейна marching cubes: три материала (MATERIAL_WEIGHTS.xyz - почва, камень, песок),
+/// у каждого альбедо, опционально нормаль (HAS_NORMAL, OpenGL-формат) и ARM (HAS_ORM: r - AO, g - roughness, b - metallic).
+/// Против повторяемости: два масштаба текстур (ближний и дальний, плавно по дистанции) и макровариация яркости.
+
+[[uniform], [public]] float textureScale = 0.25; // повторений текстуры на метр вблизи
 [[uniform], [public]] sampler2D soilTex;
 [[uniform], [public]] sampler2D stoneTex;
 [[uniform], [public]] sampler2D sandTex;
+[[uniform], [public]] sampler2D soilNormal;
+[[uniform], [public]] sampler2D stoneNormal;
+[[uniform], [public]] sampler2D sandNormal;
+[[uniform], [public]] sampler2D soilARM;
+[[uniform], [public]] sampler2D stoneARM;
+[[uniform], [public]] sampler2D sandARM;
 [[uniform], [public]] float blendSharpness = 0.25; // ширина перехода между материалами с учётом рельефа текстур
 [[uniform], [public]] vec3 soilColor = vec3(1.0, 1.0, 1.0); // множитель цвета материалов: без текстур задаёт цвет целиком
 [[uniform], [public]] vec3 stoneColor = vec3(1.0, 1.0, 1.0);
 [[uniform], [public]] vec3 sandColor = vec3(1.0, 1.0, 1.0);
 [[uniform], [public]] float textureWrapPeriod = 1024.0; // период заворачивания мировых координат в метрах, 0 - без заворачивания
+/// Дальний масштаб - доля ближнего. Переход между ними - от farTextureStart до farTextureEnd метров
+[[uniform], [public]] float farTextureScale = 0.2;
+[[uniform], [public]] float farTextureStart = 15.0;
+[[uniform], [public]] float farTextureEnd = 60.0;
+/// Макровариация: пятна яркости размером macroSize метров, сила macroVariation (0 - выкл)
+[[uniform], [public]] float macroVariation = 0.25;
+[[uniform], [public]] float macroSize = 32.0;
+[[uniform], [public]] float terrainNormalStrength = 1.0;
 
 #include <Engine/Shaders/Common/world-shape.srsl>
 
-float hash(vec2 p) {
-    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
-}
+/// ------------------------------------------ общие величины фрагмента ------------------------------------------
+/// Глобальных переменных в SRSL нет, поэтому каждый хук standard.srsl считает их сам - это дёшево
 
-vec2 getTileOffset(vec2 pos) {
-    vec2 tile = floor(pos * 0.25); // размер тайла
-
-    float h = hash(tile);
-    float angle = h * 6.2831;
-
-    float s = sin(angle);
-    float c = cos(angle);
-
-    // небольшой сдвиг
-    vec2 offset = vec2(c, s) * 4.0; // амплитуда
-
-    return offset;
-}
-
-vec4 sampleTriplanar(sampler2D tex, vec2 uvX, vec2 uvY, vec2 uvZ, vec3 blend) {
-    vec4 x = texture(tex, uvX);
-    vec4 y = texture(tex, uvY);
-    vec4 z = texture(tex, uvZ);
-    return x * blend.x + y * blend.y + z * blend.z;
-}
-
-vec4 triplanarMaterial() {
-    vec3 n = normalize(NORMAL);
-
-    // веса для смешивания по осям
-    vec3 blend = abs(n);
-    blend = pow(blend, vec3(4.0));          // резкость перехода
-    blend /= (blend.x + blend.y + blend.z); // нормализация
-
-    // Мировые координаты заворачиваются с периодом textureWrapPeriod: вдали от начала координат (планеты)
-    // float теряет точность, и UV дрожат. Шов незаметен, если textureWrapPeriod * textureScale - целое и кратно размеру тайла (4 м)
-    // Координаты не зависят от сдвига начала (FloatingOrigin): на планете - от её центра, иначе абсолютные
+/// Мировые координаты, завёрнутые с периодом textureWrapPeriod: вдали от начала координат (планеты) float теряет
+/// точность, и UV дрожат. Шов незаметен, если textureWrapPeriod * textureScale * farTextureScale - целое,
+/// а textureWrapPeriod кратно macroSize. Координаты не зависят от сдвига начала (FloatingOrigin)
+vec3 triplanarPosition() {
     vec3 p = worldProceduralPosition(VERTEX);
     if (textureWrapPeriod > 0.0) {
         p = mod(p, vec3(textureWrapPeriod));
     }
+    return p;
+}
 
-    // проекции координат считаются один раз для всех материалов
-    vec2 uvX = p.zy * textureScale + getTileOffset(p.zy);
-    vec2 uvY = p.xz * textureScale + getTileOffset(p.xz);
-    vec2 uvZ = p.xy * textureScale + getTileOffset(p.xy);
+/// Веса проекций по осям; почти невидимые проекции отбрасываются, чтобы не читать их текстуры
+vec3 triplanarAxisWeights() {
+    vec3 blend = pow(abs(normalize(NORMAL)), vec3(4.0));
+    blend /= (blend.x + blend.y + blend.z);
+    blend = max(blend - vec3(0.02), vec3(0.0));
+    return blend / max(blend.x + blend.y + blend.z, 0.0001);
+}
 
-    vec4 soil = sampleTriplanar(soilTex, uvX, uvY, uvZ, blend) * vec4(soilColor, 1.0);
-    vec4 stone = sampleTriplanar(stoneTex, uvX, uvY, uvZ, blend) * vec4(stoneColor, 1.0);
-    vec4 sand = sampleTriplanar(sandTex, uvX, uvY, uvZ, blend) * vec4(sandColor, 1.0);
+/// 0 - ближний масштаб текстур, 1 - дальний
+float triplanarFarFactor() {
+    float viewDistance = length(VERTEX - VIEW_POSITION);
+    return smoothstep(farTextureStart, max(farTextureEnd, farTextureStart + 0.001), viewDistance);
+}
 
-    // Веса всех трёх материалов интерполируются по треугольнику (раньше id материала был flat и
-    // на стыке трёх материалов менялся скачком по границе треугольника)
+/// Веса материалов из вершин (интерполируются по треугольнику)
+vec3 triplanarVertexWeights() {
     vec3 weights = max(MATERIAL_WEIGHTS.xyz, vec3(0.0));
-    weights /= max(weights.x + weights.y + weights.z, 0.0001);
+    return weights / max(weights.x + weights.y + weights.z, 0.0001);
+}
 
-    // Height blend: в зоне перехода материал с более "высоким" рельефом проступает раньше,
-    // переход получается естественным, без мыльного полупрозрачного смешивания
-    vec3 heights = vec3(
-        dot(soil.rgb, vec3(0.333)),
-        dot(stone.rgb, vec3(0.333)),
-        dot(sand.rgb, vec3(0.333))
-    );
+/// Height blend: в зоне перехода материал с более "высоким" рельефом проступает раньше
+vec3 triplanarHeightBlend(vec3 weights, vec3 heights) {
     vec3 h = weights + heights * weights;
     float hMax = max(max(h.x, h.y), h.z) - max(blendSharpness, 0.001);
     vec3 b = max(h - vec3(hMax), vec3(0.0));
-    b /= max(b.x + b.y + b.z, 0.0001);
-
-    return soil * b.x + stone * b.y + sand * b.z;
+    return b / max(b.x + b.y + b.z, 0.0001);
 }
+
+/// ------------------------------------------ выборки ------------------------------------------
+
+vec4 triplanarSampleScale(sampler2D tex, vec3 position, vec3 axis, float scale) {
+    vec3 p = position * scale;
+    vec4 result = vec4(0.0);
+    if (axis.x > 0.0) {
+        result = result + texture(tex, p.zy) * axis.x;
+    }
+    if (axis.y > 0.0) {
+        result = result + texture(tex, p.xz) * axis.y;
+    }
+    if (axis.z > 0.0) {
+        result = result + texture(tex, p.xy) * axis.z;
+    }
+    return result;
+}
+
+/// Переход от ближнего масштаба к дальнему: в полосе перехода читаются оба
+vec4 triplanarSample(sampler2D tex, vec3 position, vec3 axis, float far) {
+    vec4 nearValue = vec4(0.0);
+    vec4 farValue = vec4(0.0);
+    if (far < 1.0) {
+        nearValue = triplanarSampleScale(tex, position, axis, textureScale);
+    }
+    if (far > 0.0) {
+        farValue = triplanarSampleScale(tex, position, axis, textureScale * farTextureScale);
+    }
+    return mix(nearValue, farValue, far);
+}
+
+/// Нормаль в пространстве текстуры. Карта нормалей (.meta imageType: Normal) грузится как RG8 - z восстанавливается.
+/// Формат OpenGL (Y вверх), силу задаёт terrainNormalStrength
+vec3 triplanarUnpackNormal(vec4 encoded) {
+    vec2 xy = (encoded.xy * 2.0 - 1.0) * terrainNormalStrength;
+    float z = sqrt(max(0.0, 1.0 - min(dot(xy, xy), 1.0)));
+    return vec3(xy, z);
+}
+
+/// Нормаль из карты в мировых осях: whiteout-смешивание с нормалью поверхности для каждой проекции, с учётом знака оси
+vec3 triplanarNormalScale(sampler2D tex, vec3 position, vec3 axis, float scale) {
+    vec3 n = normalize(NORMAL);
+    vec3 p = position * scale;
+    vec3 result = vec3(0.0);
+
+    if (axis.x > 0.0) {
+        vec3 tx = triplanarUnpackNormal(texture(tex, p.zy));
+        tx = vec3(tx.xy + n.zy, tx.z * n.x);
+        result = result + tx.zyx * axis.x;
+    }
+    if (axis.y > 0.0) {
+        vec3 ty = triplanarUnpackNormal(texture(tex, p.xz));
+        ty = vec3(ty.xy + n.xz, ty.z * n.y);
+        result = result + ty.xzy * axis.y;
+    }
+    if (axis.z > 0.0) {
+        vec3 tz = triplanarUnpackNormal(texture(tex, p.xy));
+        tz = vec3(tz.xy + n.xy, tz.z * n.z);
+        result = result + tz.xyz * axis.z;
+    }
+
+    return result;
+}
+
+vec3 triplanarNormal(sampler2D tex, vec3 position, vec3 axis, float far) {
+    vec3 nearValue = vec3(0.0);
+    vec3 farValue = vec3(0.0);
+    if (far < 1.0) {
+        nearValue = triplanarNormalScale(tex, position, axis, textureScale);
+    }
+    if (far > 0.0) {
+        farValue = triplanarNormalScale(tex, position, axis, textureScale * farTextureScale);
+    }
+    return mix(nearValue, farValue, far);
+}
+
+/// Value noise с периодом period ячеек: шум не рвётся на шве заворачивания textureWrapPeriod
+float triplanarHash(vec3 p) {
+    p = fract(p * vec3(0.1031, 0.1030, 0.0973));
+    p += dot(p, p.yxz + 33.33);
+    return fract((p.x + p.y) * p.z);
+}
+
+float triplanarPeriodicNoise(vec3 p, float period) {
+    vec3 i = floor(p);
+    vec3 f = fract(p);
+    vec3 u = f * f * (3.0 - 2.0 * f);
+
+    vec3 i0 = mod(i, vec3(period));
+    vec3 i1 = mod(i + vec3(1.0), vec3(period));
+
+    float c000 = triplanarHash(vec3(i0.x, i0.y, i0.z));
+    float c100 = triplanarHash(vec3(i1.x, i0.y, i0.z));
+    float c010 = triplanarHash(vec3(i0.x, i1.y, i0.z));
+    float c110 = triplanarHash(vec3(i1.x, i1.y, i0.z));
+    float c001 = triplanarHash(vec3(i0.x, i0.y, i1.z));
+    float c101 = triplanarHash(vec3(i1.x, i0.y, i1.z));
+    float c011 = triplanarHash(vec3(i0.x, i1.y, i1.z));
+    float c111 = triplanarHash(vec3(i1.x, i1.y, i1.z));
+
+    float z0 = mix(mix(c000, c100, u.x), mix(c010, c110, u.x), u.y);
+    float z1 = mix(mix(c001, c101, u.x), mix(c011, c111, u.x), u.y);
+    return mix(z0, z1, u.z);
+}
+
+/// ------------------------------------------ хуки standard.srsl ------------------------------------------
 
 vec2 fragment_uv() {
     // uv не подходит для трипланарного текстурирования
@@ -87,16 +182,104 @@ vec2 fragment_uv() {
 }
 
 vec4 fragment_diffuse(vec2 tiledUV) {
-    vec4 color = triplanarMaterial();
-    return color;
+    vec3 position = triplanarPosition();
+    vec3 axis = triplanarAxisWeights();
+    float far = triplanarFarFactor();
+    vec3 weights = triplanarVertexWeights();
+
+    vec4 soil = vec4(0.0);
+    vec4 stone = vec4(0.0);
+    vec4 sand = vec4(0.0);
+    if (weights.x > 0.001) {
+        soil = triplanarSample(soilTex, position, axis, far) * vec4(soilColor, 1.0);
+    }
+    if (weights.y > 0.001) {
+        stone = triplanarSample(stoneTex, position, axis, far) * vec4(stoneColor, 1.0);
+    }
+    if (weights.z > 0.001) {
+        sand = triplanarSample(sandTex, position, axis, far) * vec4(sandColor, 1.0);
+    }
+
+    vec3 heights = vec3(dot(soil.rgb, vec3(0.333)), dot(stone.rgb, vec3(0.333)), dot(sand.rgb, vec3(0.333)));
+    vec3 b = triplanarHeightBlend(weights, heights);
+    /// не "color": так называется uniform standard.srsl, а uniform-поля в GLSL глобальные
+    vec4 terrainColor = soil * b.x + stone * b.y + sand * b.z;
+
+    // макровариация: крупные пятна светлее/темнее разбивают повторение тайлов вдали
+    if (macroVariation > 0.0 && macroSize > 0.0) {
+        float cells = 1048576.0;
+        if (textureWrapPeriod > 0.0) {
+            cells = floor(textureWrapPeriod / macroSize + 0.5);
+        }
+        vec3 macroPos = position / macroSize;
+        float macro = triplanarPeriodicNoise(macroPos, cells) * 0.65 + triplanarPeriodicNoise(macroPos * 3.0, cells * 3.0) * 0.35;
+        terrainColor.rgb = terrainColor.rgb * (1.0 + (macro - 0.5) * 2.0 * macroVariation);
+    }
+
+    return terrainColor;
 }
 
 vec2 fragment_normal(vec2 uv) {
-    //return texture(normal, uv).rg;
-    return vec2(0.5, 0.5); // плоская нормаль, т.к. нормали в трипланаре не нужны
+    return vec2(0.5, 0.5);
+}
+
+/// Нормали и ARM смешиваются по весам вершин с тем же порогом blendSharpness (без рельефа альбедо -
+/// иначе пришлось бы читать альбедо всех материалов ещё раз)
+vec3 fragment_world_normal(vec2 uv) {
+#ifdef HAS_NORMAL
+    vec3 position = triplanarPosition();
+    vec3 axis = triplanarAxisWeights();
+    float far = triplanarFarFactor();
+    vec3 b = triplanarHeightBlend(triplanarVertexWeights(), vec3(0.5));
+
+    vec3 result = vec3(0.0);
+    if (b.x > 0.0) {
+        result = result + triplanarNormal(soilNormal, position, axis, far) * b.x;
+    }
+    if (b.y > 0.0) {
+        result = result + triplanarNormal(stoneNormal, position, axis, far) * b.y;
+    }
+    if (b.z > 0.0) {
+        result = result + triplanarNormal(sandNormal, position, axis, far) * b.z;
+    }
+    if (dot(result, result) < 0.000001) {
+        return normalize(NORMAL);
+    }
+    return normalize(result);
+#else
+    return normalize(NORMAL);
+#endif
+}
+
+vec3 fragment_orm(vec2 uv) {
+#ifdef HAS_ORM
+    vec3 position = triplanarPosition();
+    vec3 axis = triplanarAxisWeights();
+    float far = triplanarFarFactor();
+    vec3 b = triplanarHeightBlend(triplanarVertexWeights(), vec3(0.5));
+
+    vec3 result = vec3(0.0);
+    if (b.x > 0.0) {
+        vec4 soilOrm = triplanarSample(soilARM, position, axis, far);
+        result = result + soilOrm.rgb * b.x;
+    }
+    if (b.y > 0.0) {
+        vec4 stoneOrm = triplanarSample(stoneARM, position, axis, far);
+        result = result + stoneOrm.rgb * b.y;
+    }
+    if (b.z > 0.0) {
+        vec4 sandOrm = triplanarSample(sandARM, position, axis, far);
+        result = result + sandOrm.rgb * b.z;
+    }
+    return result;
+#else
+    return vec3(1.0, 1.0, 0.0);
+#endif
 }
 
 #define STANDARD_SHADER_CUSTOM_FRAGMENT
+#define STANDARD_SHADER_CUSTOM_WORLD_NORMAL
+#define STANDARD_SHADER_CUSTOM_ORM
 #include <Engine/Shaders/standard.srsl>
 
 VertexType TriplanarMeshVertex;

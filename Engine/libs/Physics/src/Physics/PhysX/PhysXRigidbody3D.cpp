@@ -92,6 +92,15 @@ namespace SR_PTYPES_NS {
             return false;
         }
 
+        /// Актор новый и без форм. UpdateShape прикрепляет их только если сами формы пересоздавались:
+        /// при повторном включении тела (меш уже закукан, например чанк террейна вернулся в зону физики)
+        /// актор оставался пустым - коллизии не было, а тело считалось готовым
+        if (!UpdateShapeInternal()) {
+            SR_ERROR("PhysXRigidbody3D::InitBody() : failed to attach shapes!");
+            return false;
+        }
+        m_rigidbody->UpdateMatrix(true);
+
         UpdateInertia();
 
         return true;

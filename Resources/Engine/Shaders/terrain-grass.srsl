@@ -61,6 +61,16 @@ struct GrassBender {
 [[uniform], [public]] float viewAlign = 0.45;
 [[uniform], [public]] float farWidthBoost = 1.6;
 [[uniform], [public]] float farNormalFlatten = 0.75;
+/// Вдали травинки плавно уходят в землю (с доли shrinkStart от grassMaxDistance), а не пропадают:
+/// край травы не виден, если земля под ней того же тона
+[[uniform], [public]] float shrinkStart = 0.65;
+/// Вдали цвет травинок сходится к farColor (на долях farColorStart..farColorEnd от grassMaxDistance).
+/// farColor - средний цвет земли под травой (альбедо, линейное), тогда поле переходит в террейн без границы
+[[uniform], [public]] vec3 farColor = vec3(0.06, 0.09, 0.025);
+[[uniform], [public]] float farColorStart = 0.3;
+[[uniform], [public]] float farColorEnd = 0.85;
+/// шероховатость травы в G-buffer (SSR, освещение пост-эффектами)
+[[uniform], [public]] float grassRoughness = 0.85;
 
 /// кланпы (группы травинок с общей высотой/оттенком)
 [[uniform], [public]] float clumpSize = 1.1;
@@ -311,7 +321,10 @@ void vertex() {
         /// вдали травинок меньше, поэтому оставшиеся делаются шире, чтобы поле не "лысело"
         width *= mix(1.0, farWidthBoost, 1.0 - keep);
 
-        height *= fade;
+        /// у края дальности травинки оседают в землю
+        float distanceShrink = 1.0 - smoothstep(grassMaxDistance * clamp(shrinkStart, 0.0, 0.999), grassMaxDistance, distance);
+
+        height *= fade * distanceShrink;
         width *= fade;
 
         /// ---- базис травинки
@@ -484,6 +497,10 @@ void vertex() {
         color = mix(color, dryTone, max(dry, dryTip));
         color *= 1.0 + (r1 - 0.5) * 2.0 * brightnessVariation;
 
+        /// вдали цвет сходится к цвету земли - поле переходит в террейн без видимой границы
+        float farBlend = smoothstep(grassMaxDistance * farColorStart, grassMaxDistance * max(farColorEnd, farColorStart + 0.001), distance);
+        color = mix(color, farColor, farBlend);
+
         grassAlbedo = color;
         grassDry = max(dry, dryTip);
     }
@@ -564,7 +581,8 @@ void fragment() {
     COLOR = vec4(lighting, 1.0);
 #endif
 
-    COLOR_INDEX_1 = vec4(1.0, 0.0, 0.0, 1.0);
+    /// b - roughness: 0 делал траву зеркалом для SSR
+    COLOR_INDEX_1 = vec4(1.0, 0.0, clamp(grassRoughness, 0.02, 1.0), 1.0);
     COLOR_INDEX_2 = vec4(grassWorldPos - VIEW_POSITION, 1.0);
     COLOR_INDEX_3 = vec4(grassNormal * 0.5 + 0.5, 1.0);
 }

@@ -99,18 +99,26 @@ void fragment() {
     float metallicValue = metallic;
     float aoValue = 1.0;
 
-#ifdef HAS_ORM
-    // упакованная текстура glTF: r - occlusion, g - roughness, b - metallic
-    vec3 orm = texture(ORM, tiledUV).rgb;
+#ifdef STANDARD_SHADER_CUSTOM_ORM
+    // свой источник AO/roughness/metallic (например, трипланарные текстуры террейна): vec3 fragment_orm(vec2)
+    vec3 orm = fragment_orm(tiledUV);
     aoValue = mix(1.0, orm.r, occlusionStrength);
     roughnessValue = roughnessValue * orm.g;
     metallicValue = metallicValue * orm.b;
 #else
-    #ifdef HAS_ROUGHNESS
-        roughnessValue = roughnessValue * texture(roughnessMap, tiledUV).r;
-    #endif
-    #ifdef HAS_METALIC
-        metallicValue = metallicValue * texture(metalicMap, tiledUV).r;
+    #ifdef HAS_ORM
+        // упакованная текстура glTF: r - occlusion, g - roughness, b - metallic
+        vec3 orm = texture(ORM, tiledUV).rgb;
+        aoValue = mix(1.0, orm.r, occlusionStrength);
+        roughnessValue = roughnessValue * orm.g;
+        metallicValue = metallicValue * orm.b;
+    #else
+        #ifdef HAS_ROUGHNESS
+            roughnessValue = roughnessValue * texture(roughnessMap, tiledUV).r;
+        #endif
+        #ifdef HAS_METALIC
+            metallicValue = metallicValue * texture(metalicMap, tiledUV).r;
+        #endif
     #endif
 #endif
 
@@ -137,24 +145,37 @@ void fragment() {
     vec3 emissionValue = emissionColor * emissionIntensity;
 #endif
 
-#ifdef HAS_NORMAL
-    //vec3 tangentNormal = normalize(texture(normal, UV).rgb * 2.0 - 1.0);
-
-    vec2 enc = fragment_normal(tiledUV);
-    vec3 tangentNormal;
-    tangentNormal.xy = (enc * 2.0 - 1.0) * normalStrength;
-    tangentNormal.y *= -1.0;
-    float xyLen = dot(tangentNormal.xy, tangentNormal.xy);
-    tangentNormal.z = sqrt(max(0.0, 1.0 - min(xyLen, 1.0)));
-    tangentNormal = normalize(tangentNormal);
+#ifdef STANDARD_SHADER_CUSTOM_WORLD_NORMAL
+    // свой источник нормали сразу в мировых осях (трипланар): vec3 fragment_world_normal(vec2).
+    // Освещение ждёт нормаль в пространстве TBN - TBN ортонормирован, обратная матрица = транспонированная
+    vec3 customWorldNormal = normalize(fragment_world_normal(tiledUV));
+    vec3 tangentNormal = transpose(TBN) * customWorldNormal;
 #else
-    vec3 tangentNormal = NORMAL;
+    #ifdef HAS_NORMAL
+        //vec3 tangentNormal = normalize(texture(normal, UV).rgb * 2.0 - 1.0);
+
+        vec2 enc = fragment_normal(tiledUV);
+        vec3 tangentNormal;
+        tangentNormal.xy = (enc * 2.0 - 1.0) * normalStrength;
+        tangentNormal.y *= -1.0;
+        float xyLen = dot(tangentNormal.xy, tangentNormal.xy);
+        tangentNormal.z = sqrt(max(0.0, 1.0 - min(xyLen, 1.0)));
+        tangentNormal = normalize(tangentNormal);
+    #else
+        // нормаль вершины в пространстве TBN. Раньше здесь была мировая NORMAL, которую освещение
+        // ещё раз поворачивало на TBN - у материалов без карты нормалей свет падал не с той стороны
+        vec3 tangentNormal = vec3(0.0, 0.0, 1.0);
+    #endif
 #endif
 
     // G-buffer, кодировка описана в Common/gbuffer.srsl
     vec3 gbufferNormalWS = NORMAL;
-#ifdef HAS_NORMAL
-    gbufferNormalWS = normalize(TBN * tangentNormal);
+#ifdef STANDARD_SHADER_CUSTOM_WORLD_NORMAL
+    gbufferNormalWS = customWorldNormal;
+#else
+    #ifdef HAS_NORMAL
+        gbufferNormalWS = normalize(TBN * tangentNormal);
+    #endif
 #endif
     COLOR_INDEX_1 = vec4(1.0, clamp(metallicValue, 0.0, 1.0), clamp(roughnessValue, 0.02, 1.0), alpha);
     COLOR_INDEX_2 = vec4(VERTEX - VIEW_POSITION, alpha);

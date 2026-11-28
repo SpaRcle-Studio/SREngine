@@ -7,6 +7,7 @@
 
 #include <Engine/stdInclude.h>
 #include <Engine/World/TerrainGrass.h>
+#include <Engine/World/TerrainScatter.h>
 
 #include <Graphics/Types/Camera.h>
 
@@ -69,6 +70,10 @@ namespace SR_CORE_NS {
         void SetGrass(TerrainGrass* pGrass) noexcept { m_grass = pGrass; }
         /// Трава чанка сгенерирована (или её нет). Пока нет - заменяемый чанк держит свою траву, иначе место останется голым
         SR_NODISCARD bool IsGrassReady() const;
+        /// Система объектов (TerrainScatter), которой чанк сообщит о своей деактивации
+        void SetScatter(TerrainScatter* pScatter) noexcept { m_scatter = pScatter; }
+        /// Объекты чанка сгенерированы (или их нет). Пока нет - заменяемый чанк держит свои, иначе лес моргает при смене LOD
+        SR_NODISCARD bool IsScatterReady() const;
 
         SR_NODISCARD virtual float_t GetDistanceTo(const ITerrainChunk& other) const { return 0.f; }
         void Deactivate();
@@ -78,6 +83,7 @@ namespace SR_CORE_NS {
         ITerrainChunkData::Ptr m_data;
         SR_UTILS_NS::SceneObject::Ptr m_object;
         TerrainGrass::Ptr m_grass;
+        TerrainScatter::Ptr m_scatter;
 
     };
 
@@ -221,6 +227,7 @@ namespace SR_CORE_NS {
         SR_NODISCARD SR_MATH_NS::FVector3 ToTerrainSpace(const SR_MATH_NS::FVector3& worldPosition) const;
 
         SR_NODISCARD TerrainGrass* GetGrass() const noexcept;
+        SR_NODISCARD TerrainScatter* GetScatter() const noexcept;
         SR_NODISCARD ITerrainChunkGenerator* GetChunkGenerator() const noexcept;
         SR_NODISCARD ITerrainChunkDataGenerator* GetChunkDataGenerator() const noexcept { return const_cast<ITerrainChunkDataGenerator*>(m_chunkDataGenerator.Get()); }
 
@@ -269,6 +276,8 @@ namespace SR_CORE_NS {
         TerrainLODManager m_lodManager;
         /// @property @tooltip(Опциональная система травы. Можно оставить пустым)
         TerrainGrass::Ptr m_grass;
+        /// @property @tooltip(Опциональная система объектов на поверхности: деревья, камни, кусты. Можно оставить пустым)
+        TerrainScatter::Ptr m_scatter;
 
     private:
         void ApplyDeformation(const TerrainDeformation& deformation);

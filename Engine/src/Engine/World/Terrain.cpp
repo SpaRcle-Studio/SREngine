@@ -24,10 +24,17 @@ namespace SR_CORE_NS {
         return !m_grass || m_grass->IsChunkReady(*this);
     }
 
+    bool ITerrainChunk::IsScatterReady() const {
+        return !m_scatter || m_scatter->IsChunkReady(*this);
+    }
+
     void ITerrainChunk::Deactivate() {
         SR_TRACY_ZONE;
         if (m_grass) {
             m_grass->OnChunkDeactivated(*this);
+        }
+        if (m_scatter) {
+            m_scatter->OnChunkDeactivated(*this);
         }
         if (m_data) {
             m_data->Deactivate();
@@ -85,6 +92,7 @@ namespace SR_CORE_NS {
 
         chunk.SetObject(nullptr);
         chunk.SetGrass(nullptr);
+        chunk.SetScatter(nullptr);
 
         if (m_freeObjects.size() < m_maxFreeObjects) {
             pObject->SetEnabled(false);
@@ -139,6 +147,10 @@ namespace SR_CORE_NS {
         if (m_grass) {
             m_grass->Update(*this, dt);
         }
+
+        if (m_scatter) {
+            m_scatter->Update(*this, dt);
+        }
     }
 
     void Terrain::OnDestroy() {
@@ -148,12 +160,22 @@ namespace SR_CORE_NS {
         if (m_grass) {
             m_grass->Shutdown();
         }
+        if (m_scatter) {
+            m_scatter->Shutdown();
+        }
         Super::OnDestroy();
     }
 
     TerrainGrass* Terrain::GetGrass() const noexcept {
         if (m_grass && m_grass->IsEnabled()) {
             return const_cast<TerrainGrass*>(m_grass.Get());
+        }
+        return nullptr;
+    }
+
+    TerrainScatter* Terrain::GetScatter() const noexcept {
+        if (m_scatter && m_scatter->IsEnabled()) {
+            return const_cast<TerrainScatter*>(m_scatter.Get());
         }
         return nullptr;
     }

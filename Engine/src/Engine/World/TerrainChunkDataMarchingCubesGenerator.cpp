@@ -5,6 +5,7 @@
 #include <Engine/World/TerrainChunkDataMarchingCubesGenerator.h>
 #include <Engine/World/TerrainChunkCube.h>
 #include <Engine/World/TerrainGrass.h>
+#include <Engine/World/TerrainScatter.h>
 
 #include <Utils/ECS/GameObject.h>
 
@@ -666,12 +667,28 @@ namespace SR_CORE_NS {
             return;
         }
 
-        if (auto&& pGrass = terrain.GetGrass()) {
-            /// Трава только для детальных чанков: на дальних LOD она всё равно отсекается дистанцией
-            if (pCubeChunk->GetLod() == 0) {
-                SR_TRACY_ZONE_N("Prepare grass source");
+        auto&& pGrass = terrain.GetGrass();
+        auto&& pScatter = terrain.GetScatter();
+        /// Трава - на чанках до maxTerrainLod (дальние чанки дают дальнюю, прореженную траву).
+        /// Объектам (деревья, камни) поверхность нужна и на дальних LOD - они видны издалека
+        const bool isGrassMeshNeeded = pGrass && pCubeChunk->GetLod() <= pGrass->GetMaxTerrainLod();
+        const bool isScatterMeshNeeded = pScatter && pScatter->IsLodUsed(pCubeChunk->GetLod());
 
-                /// Трава генерируется по тому же мешу, что рисуется ProceduralMesh (m_geometryScale относится только к физике),
+        if (pGrass && !isGrassMeshNeeded) {
+            /// Объект мог прийти из пула с травой и источником прошлого чанка - их нужно сбросить,
+            /// иначе перегенерация нарисует траву старого меша на новом месте (двойная трава)
+            pGrass->OnChunkGenerated(terrain, chunk, TerrainGrassSourceMesh());
+        }
+
+        if (pScatter && !isScatterMeshNeeded) {
+            pScatter->OnChunkGenerated(terrain, chunk, TerrainGrassSourceMesh(), pCubeChunk->GetLod());
+        }
+
+        if (isGrassMeshNeeded || isScatterMeshNeeded) {
+            {
+                SR_TRACY_ZONE_N("Prepare surface source");
+
+                /// Трава и объекты генерируются по тому же мешу, что рисуется ProceduralMesh (m_geometryScale относится только к физике),
                 /// в мировых осях относительно объекта чанка. Поворот объекта чанка не поддерживается.
                 SR_MATH_NS::FVector3 scale(1.f);
                 SR_MATH_NS::FVector3 chunkOrigin;
@@ -684,7 +701,8 @@ namespace SR_CORE_NS {
 
                 TerrainGrassSourceMesh grassMesh;
                 grassMesh.origin = chunkOrigin;
-                /// Чанк LOD0 мал относительно планеты, поэтому направление "вверх" одно на весь чанк (по его центру)
+                grassMesh.terrainLod = pCubeChunk->GetLod();
+                /// Чанк мал относительно планеты, поэтому направление "вверх" одно на весь чанк (по его центру)
                 grassMesh.up = terrain.GetLocalUpDirection(chunkOrigin +scale * (0.5f * static_cast<float_t>(m_slotsDensityCountAxis)));
                 /// Воксель в локальных осях меша имеет размер 1, диагональ куба - sqrt(3)
                 const float_t maxScale = std::max({ std::abs(scale.x), std::abs(scale.y), std::abs(scale.z) });
@@ -729,12 +747,13 @@ namespace SR_CORE_NS {
 
                 grassMesh.indices.assign(m_indices.begin(), m_indices.end());
 
-                pGrass->OnChunkGenerated(terrain, chunk, std::move(grassMesh));
-            }
-            else {
-                /// Объект мог прийти из пула с травой и источником прошлого чанка - их нужно сбросить,
-                /// иначе перегенерация нарисует траву старого меша на новом месте (двойная трава)
-                pGrass->OnChunkGenerated(terrain, chunk, TerrainGrassSourceMesh());
+                if (isScatterMeshNeeded) {
+                    pScatter->OnChunkGenerated(terrain, chunk, grassMesh, pCubeChunk->GetLod());
+                }
+
+                if (isGrassMeshNeeded) {
+                    pGrass->OnChunkGenerated(terrain, chunk, std::move(grassMesh));
+                }
             }
         }
 

@@ -1,0 +1,15 @@
+/// Стандартный материал для инстансированных мешей (TerrainScatterRenderer: деревья, камни, кусты).
+/// Матрица инстанса - из атрибутов CUSTOM0..2 (см. Common/standard-vertex.srsl).
+/// Листва: HAS_ALPHA + DISABLE_BLENDING (альфа-тест по alphaThreshold), DISABLE_CULLING для двусторонних карточек.
+
+#define SR_STANDARD_VERTEX_INSTANCED
+
+void fragment_depth_buffer_discard() {
+#ifdef HAS_ALPHA
+    if ((texture(diffuse, UV) * color).a <= alphaThreshold) {
+        discard;
+    }
+#endif
+}
+
+#include <Engine/Shaders/standard.srsl>
