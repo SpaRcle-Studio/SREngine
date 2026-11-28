@@ -222,7 +222,11 @@ void fragment() {
         ivec2 quad = ivec2(localUV * 2.0); // 2x2 квадранта
         int cascadeIndex = quad.x + quad.y * 2; // 0..3
         vec2 quadUV = fract(localUV * 2.0); // uv внутри квадранта
-        float depth = LinearizeDepth(texture(shadowMap, vec3(quadUV.x, quadUV.y, float(cascadeIndex))).r, 10, 100);
+        float shadowDepth = texture(shadowMap, vec3(quadUV.x, quadUV.y, float(cascadeIndex))).r;
+    #ifdef SR_REVERSE_DEPTH
+        shadowDepth = 1.0 - shadowDepth;
+    #endif
+        float depth = LinearizeDepth(shadowDepth, 10, 100);
         COLOR_INDEX_0 = vec4(vec3(depth), 1.0);
         return;
     }
@@ -262,7 +266,7 @@ void fragment() {
     // отражения до облаков и тумана - они лежат на поверхности
     if (gbufferHasGeometry(coverage)) {
         vec3 N = gbufferNormal(textureLod(normalMap, uv, 0.0), coverage);
-        vec3 V = normalize(VIEW_POSITION - gbufferPosition(gPosition, coverage));
+        vec3 V = normalize(-gbufferRelativePosition(gPosition, coverage));
         float metallic = gbufferMetallic(gCoverage);
         float roughness = gbufferRoughness(gCoverage);
 

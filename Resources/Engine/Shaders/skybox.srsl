@@ -20,5 +20,11 @@ void fragment() {
 }
 
 void vertex() {
-    OUT_POSITION = (PROJECTION_MATRIX * VIEW_NO_TRANSLATE_MATRIX * vec4(VERTEX, 1.0)).xyww;
+    vec4 skyPosition = PROJECTION_MATRIX * VIEW_NO_TRANSLATE_MATRIX * vec4(VERTEX, 1.0);
+#ifdef SR_REVERSE_DEPTH
+    // Дальняя плоскость при reverse-Z - глубина 0
+    OUT_POSITION = vec4(skyPosition.xy, 0.0, skyPosition.w);
+#else
+    OUT_POSITION = skyPosition.xyww;
+#endif
 }

@@ -18,6 +18,7 @@ DepthTest true;
 [[public], [uniform]] sampler2D moonTexture = "Engine/Textures/moon.png";
 
 #include <Engine/Shaders/Common/atmosphere.srsl>
+#include <Engine/Shaders/Common/world-shape.srsl>
 
 void fragment_color_buffer_discard() {
     discard;
@@ -63,8 +64,9 @@ mat3 skyBasis(vec3 axis) {
     return mat3(right, upOrtho, axis);
 }
 
-// Звезды: одна звезда на ячейку кубической сетки, размер и цвет случайны, мерцание у горизонта сильнее
-vec3 skyStars(vec3 dir, float time) {
+// Звезды: одна звезда на ячейку кубической сетки, размер и цвет случайны, мерцание у горизонта сильнее.
+// Сетка - в мировых направлениях (звезды неподвижны в мире), elevation - синус высоты над горизонтом.
+vec3 skyStars(vec3 dir, float elevation, float time) {
     float scale = 220.0;
     vec3 p = dir * scale;
     vec3 cell = floor(p);
@@ -83,7 +85,7 @@ vec3 skyStars(vec3 dir, float time) {
 
     float twinkleSpeed = mix(1.5, 4.0, rnd.z);
     float twinkle = 0.75 + 0.25 * sin(time * 0.001 * twinkleSpeed + rnd.z * 40.0);
-    twinkle = mix(1.0, twinkle, 1.0 - clamp(dir.y * 2.0, 0.0, 1.0) * 0.6);
+    twinkle = mix(1.0, twinkle, 1.0 - clamp(elevation * 2.0, 0.0, 1.0) * 0.6);
 
     vec3 temperature = mix(vec3(1.0, 0.75, 0.55), vec3(0.65, 0.8, 1.0), rnd.z);
     return temperature * star * twinkle * mix(0.4, 6.0, magnitude);
@@ -170,18 +172,24 @@ void fragment() {
     vec3 toPrimary = normalize(-DIRECTIONAL_LIGHT_DIRECTION);
     vec3 toSecondary = normalize(-SECONDARY_LIGHT_DIRECTION);
 
-    vec3 skyDir = vec3(viewDir.x, max(viewDir.y, 0.0), viewDir.z);
-    vec3 color = atmoSky(normalize(skyDir + vec3(0.0, 0.0001, 0.0)), PRIMARY_DISK_PARAMS, SECONDARY_DISK_PARAMS, DIRECTIONAL_LIGHT_DIRECTION, PRIMARY_SKY_ILLUMINANCE, SECONDARY_LIGHT_DIRECTION, SECONDARY_SKY_ILLUMINANCE);
+    // верх под камерой (плоский мир - Y, планета - от центра); высоты ниже - синусы углов над горизонтом
+    vec3 up = worldCameraUp();
+    float viewElevation = dot(viewDir, up);
+    float primaryElevation = dot(toPrimary, up);
+    float secondaryElevation = dot(toSecondary, up);
 
-    vec3 viewTransmittance = atmoViewTransmittance(skyDir);
+    vec3 skyDir = worldAboveHorizon(viewDir, up);
+    vec3 color = atmoSky(normalize(skyDir + up * 0.0001), up, PRIMARY_DISK_PARAMS, SECONDARY_DISK_PARAMS, DIRECTIONAL_LIGHT_DIRECTION, PRIMARY_SKY_ILLUMINANCE, SECONDARY_LIGHT_DIRECTION, SECONDARY_SKY_ILLUMINANCE);
+
+    vec3 viewTransmittance = atmoViewTransmittance(skyDir, up);
 
     // ------------------------------------------------------------
     // Ночное небо: звезды + млечный путь, гаснут днем и у горизонта
     // ------------------------------------------------------------
     float night = PRIMARY_DISK_PARAMS.w;
-    if (night > 0.001 && viewDir.y > -0.02) {
-        float horizonFade = smoothstep(-0.02, 0.15, viewDir.y);
-        vec3 night_sky = skyStars(viewDir, TIME) * starsBrightness + skyMilkyWay(viewDir) * milkyWayIntensity;
+    if (night > 0.001 && viewElevation > -0.02) {
+        float horizonFade = smoothstep(-0.02, 0.15, viewElevation);
+        vec3 night_sky = skyStars(viewDir, viewElevation, TIME) * starsBrightness + skyMilkyWay(viewDir) * milkyWayIntensity;
         color += night_sky * viewTransmittance * night * horizonFade * 0.02;
     }
 
@@ -191,22 +199,22 @@ void fragment() {
     // без ветвления по пикселю: внутри используется fwidth, производные должны быть определены
     vec3 disks = skyCelestialDisk(viewDir, toPrimary, PRIMARY_DISK_COLOR, PRIMARY_DISK_PARAMS, toSecondary);
     disks += skyCelestialDisk(viewDir, toSecondary, SECONDARY_DISK_COLOR, SECONDARY_DISK_PARAMS, toPrimary);
-    color += disks * viewTransmittance * smoothstep(-0.05, 0.0, viewDir.y);
+    color += disks * viewTransmittance * smoothstep(-0.05, 0.0, viewElevation);
 
     // ------------------------------------------------------------
     // Земля ниже горизонта: отражение неба + дымка
     // ------------------------------------------------------------
-    if (viewDir.y < 0.0) {
-        vec3 horizon = atmoSky(normalize(vec3(viewDir.x, 0.02, viewDir.z)), PRIMARY_DISK_PARAMS, SECONDARY_DISK_PARAMS, DIRECTIONAL_LIGHT_DIRECTION, PRIMARY_SKY_ILLUMINANCE, SECONDARY_LIGHT_DIRECTION, SECONDARY_SKY_ILLUMINANCE);
-        vec3 ground = GROUND_COLOR * (PRIMARY_SKY_ILLUMINANCE * atmoLightTransmittance(toPrimary.y) * max(toPrimary.y, 0.0)
-            + SECONDARY_SKY_ILLUMINANCE * atmoLightTransmittance(toSecondary.y) * max(toSecondary.y, 0.0)) * 0.05;
-        float t = smoothstep(0.0, -0.25, viewDir.y);
+    if (viewElevation < 0.0) {
+        vec3 horizon = atmoSky(worldHorizonDir(viewDir, up, 0.02), up, PRIMARY_DISK_PARAMS, SECONDARY_DISK_PARAMS, DIRECTIONAL_LIGHT_DIRECTION, PRIMARY_SKY_ILLUMINANCE, SECONDARY_LIGHT_DIRECTION, SECONDARY_SKY_ILLUMINANCE);
+        vec3 ground = GROUND_COLOR * (PRIMARY_SKY_ILLUMINANCE * atmoLightTransmittance(primaryElevation) * max(primaryElevation, 0.0)
+            + SECONDARY_SKY_ILLUMINANCE * atmoLightTransmittance(secondaryElevation) * max(secondaryElevation, 0.0)) * 0.05;
+        float t = smoothstep(0.0, -0.25, viewElevation);
         color = mix(horizon, ground + horizon * 0.25, t);
     }
 
     // дымка у горизонта
-    float haze = exp(-abs(viewDir.y) * 12.0) * horizonFog;
-    color = mix(color, atmoSky(normalize(vec3(viewDir.x, 0.05, viewDir.z)), PRIMARY_DISK_PARAMS, SECONDARY_DISK_PARAMS, DIRECTIONAL_LIGHT_DIRECTION, PRIMARY_SKY_ILLUMINANCE, SECONDARY_LIGHT_DIRECTION, SECONDARY_SKY_ILLUMINANCE), haze * 0.5);
+    float haze = exp(-abs(viewElevation) * 12.0) * horizonFog;
+    color = mix(color, atmoSky(worldHorizonDir(viewDir, up, 0.05), up, PRIMARY_DISK_PARAMS, SECONDARY_DISK_PARAMS, DIRECTIONAL_LIGHT_DIRECTION, PRIMARY_SKY_ILLUMINANCE, SECONDARY_LIGHT_DIRECTION, SECONDARY_SKY_ILLUMINANCE), haze * 0.5);
 
     COLOR = vec4(max(color, vec3(0.0)), 1.0);
 
@@ -216,5 +224,11 @@ void fragment() {
 }
 
 void vertex() {
-    OUT_POSITION = (PROJECTION_MATRIX * VIEW_NO_TRANSLATE_MATRIX * vec4(VERTEX, 1.0)).xyww;
+    vec4 skyPosition = PROJECTION_MATRIX * VIEW_NO_TRANSLATE_MATRIX * vec4(VERTEX, 1.0);
+#ifdef SR_REVERSE_DEPTH
+    // Дальняя плоскость при reverse-Z - глубина 0
+    OUT_POSITION = vec4(skyPosition.xy, 0.0, skyPosition.w);
+#else
+    OUT_POSITION = skyPosition.xyww;
+#endif
 }

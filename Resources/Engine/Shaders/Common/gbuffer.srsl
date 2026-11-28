@@ -6,13 +6,16 @@
 // деление на покрытие восстанавливает значения взвешенной ближайшей поверхности.
 //
 // слой 1 (coverageMap): r - покрытие (0 - небо), g - metallic, b - roughness (0 - поверхность не задала)
-// слой 2 (positionMap): xyz - мировая позиция
+// слой 2 (positionMap): xyz - позиция относительно камеры (мировая - VIEW_POSITION)
 // слой 3 (normalMap):   rgb - нормаль в [0, 1]
 // Значения g, b, xyz, rgb делятся на покрытие при чтении.
 //
+// Позиция относительно камеры: у RGBA16F 11 бит мантиссы, мировые координаты в километрах от начала
+// координат дают шаг в метры (20 км - 16 м), а относительные - ошибку ~0.05% дистанции до камеры.
+//
 // Запись (для BlendEnabled false alpha = 1):
 //     COLOR_INDEX_1 = vec4(1.0, metallic, roughness, alpha);
-//     COLOR_INDEX_2 = vec4(position, alpha);
+//     COLOR_INDEX_2 = vec4(position - VIEW_POSITION, alpha);
 //     COLOR_INDEX_3 = vec4(normal * 0.5 + 0.5, alpha);
 
 [[const]] float GBUFFER_MIN_COVERAGE = 0.02;
@@ -21,8 +24,14 @@ bool gbufferHasGeometry(float coverage) {
     return coverage > GBUFFER_MIN_COVERAGE;
 }
 
-vec3 gbufferPosition(vec4 p, float coverage) {
+// позиция относительно камеры - точнее мировой, для направлений и дистанций от камеры
+vec3 gbufferRelativePosition(vec4 p, float coverage) {
     return p.xyz / max(coverage, GBUFFER_MIN_COVERAGE);
+}
+
+// мировая позиция
+vec3 gbufferPosition(vec4 p, float coverage) {
+    return gbufferRelativePosition(p, coverage) + VIEW_POSITION;
 }
 
 vec3 gbufferNormal(vec4 n, float coverage) {
@@ -41,7 +50,7 @@ float gbufferRoughness(vec4 c) {
 
 // расстояние от камеры, 1e6 - небо
 float gbufferDistance(vec4 p, float coverage) {
-    return gbufferHasGeometry(coverage) ? length(gbufferPosition(p, coverage) - VIEW_POSITION) : 1e6;
+    return gbufferHasGeometry(coverage) ? length(gbufferRelativePosition(p, coverage)) : 1e6;
 }
 
 // Дистанция для прохода пониженного разрешения из готового буфера SceneDistance (половинное разрешение,

@@ -48,9 +48,14 @@ float computeDepth(vec3 pos) {
 float computeLinearDepth(vec3 pos) {
     float far = 2000.0;
     float near = 0.075;
+#ifdef SR_REVERSE_DEPTH
+    // Бесконечная проекция - формула ниже неприменима, берём расстояние вдоль взгляда
+    float linearDepth = -(VIEW_MATRIX * vec4(pos.xyz, 1.0)).z;
+#else
     vec4 clip_space_pos = PROJECTION_MATRIX * VIEW_MATRIX * vec4(pos.xyz, 1.0);
     float clip_space_depth = (clip_space_pos.z / clip_space_pos.w) * 2.0 - 1.0; // put back between -1 and 1
     float linearDepth = (2.0 * near * far) / (far + near - clip_space_depth * (far - near)); // get linear value between 0.01 and 100
+#endif
     return linearDepth / far; // normalize
 }
 
@@ -89,8 +94,14 @@ void vertex() {
 
     vec3 p = vertices[VERTEX_INDEX];
 
+#ifdef SR_REVERSE_DEPTH
+    // Ближняя плоскость - 1, глубина 0 - бесконечность (w = 0): вторая точка луча - середина
+    nearPoint = UnprojectPoint(p.x, p.y, 1.0, VIEW_MATRIX, PROJECTION_MATRIX);
+    farPoint = UnprojectPoint(p.x, p.y, 0.5, VIEW_MATRIX, PROJECTION_MATRIX);
+#else
     nearPoint = UnprojectPoint(p.x, p.y, 0.0, VIEW_MATRIX, PROJECTION_MATRIX);
     farPoint = UnprojectPoint(p.x, p.y, 1.0, VIEW_MATRIX, PROJECTION_MATRIX);
+#endif
 
     OUT_POSITION = vec4(p, 1.0);
 }

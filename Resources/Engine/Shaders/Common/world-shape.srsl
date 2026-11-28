@@ -1,0 +1,53 @@
+// Форма мира (SR_UTILS_NS::WorldShape): где верх и какая высота над поверхностью.
+// Плоский мир (по умолчанию) - верх по Y, высота над землей. Сфера - верх от центра, высота над радиусом.
+//
+// WORLD_SHAPE задают MeshDrawerPass, PostProcessPass, SkyboxPass:
+//     сфера:        xyz - центр относительно камеры, w - радиус поверхности (без больших чисел в шейдере)
+//     плоский мир:  w = 0, y - высота земли (мировая); нулевой uniform - земля на Y = 0 (прежнее поведение)
+//
+// offset во всех функциях - смещение точки относительно камеры (мировая позиция - VIEW_POSITION).
+
+bool worldIsSphere() {
+    return WORLD_SHAPE.w > 0.0;
+}
+
+vec3 worldUp(vec3 offset) {
+    if (WORLD_SHAPE.w > 0.0) {
+        return normalize(offset - WORLD_SHAPE.xyz);
+    }
+    return vec3(0.0, 1.0, 0.0);
+}
+
+float worldHeight(vec3 offset) {
+    if (WORLD_SHAPE.w > 0.0) {
+        return length(offset - WORLD_SHAPE.xyz) - WORLD_SHAPE.w;
+    }
+    return VIEW_POSITION.y + offset.y - WORLD_SHAPE.y;
+}
+
+vec3 worldCameraUp() {
+    return worldUp(vec3(0.0));
+}
+
+float worldCameraHeight() {
+    return worldHeight(vec3(0.0));
+}
+
+// Радиус кривизны поверхности. Плоскому миру - flatRadius: эффекты с "искривленным" горизонтом
+// (облака) выглядят как раньше.
+float worldCurvatureRadius(float flatRadius) {
+    if (WORLD_SHAPE.w > 0.0) {
+        return WORLD_SHAPE.w;
+    }
+    return flatRadius;
+}
+
+// dir без составляющей ниже горизонта (не нормализуется)
+vec3 worldAboveHorizon(vec3 dir, vec3 up) {
+    return dir - up * min(dot(dir, up), 0.0);
+}
+
+// направление у горизонта со стороны dir, приподнятое над ним на elevation (как vec3(dir.x, elevation, dir.z))
+vec3 worldHorizonDir(vec3 dir, vec3 up, float elevation) {
+    return normalize(dir - up * dot(dir, up) + up * elevation);
+}

@@ -20,7 +20,11 @@ void fragment() {
     int quadY = int(uv.y * 2.0);                // 0 или 1
     int cascadeIndex = quadX + quadY * 2;       // 0..3
 
-    float depth = LinearizeDepth(texture(cascadedDepthMap, vec3(quadrantUV.x, quadrantUV.y, float(cascadeIndex))).r, 1.0, 100.0);
+    float shadowDepth = texture(cascadedDepthMap, vec3(quadrantUV.x, quadrantUV.y, float(cascadeIndex))).r;
+#ifdef SR_REVERSE_DEPTH
+    shadowDepth = 1.0 - shadowDepth;
+#endif
+    float depth = LinearizeDepth(shadowDepth, 1.0, 100.0);
     COLOR_INDEX_0 = vec4(vec3(depth), 1.0);
 }
 

@@ -29,9 +29,14 @@ float LinearEyeDepth(float depth, float near, float far) {
 
 // Глубина в view space для выборки ядра: одно чтение без деления на покрытие (64 выборки на пиксель).
 // Внутри объектов покрытие = 1. На силуэтах позиция смещена, но AO там все равно размывается блюром.
-// Небо пишет позицию 0 - поведение такое же, как до перехода на покрытие.
+// Позиция в G-buffer относительно камеры: в view space достаточно поворота (без больших мировых координат).
+// Небо пишет 0 - это точка камеры, считаем её бесконечно далёкой, иначе небо затеняет края объектов.
 float sampleViewDepth(vec2 coord) {
-    return (VIEW_MATRIX * vec4(textureLod(Position, coord, 0.0).xyz, 1.0)).z;
+    vec3 relative = textureLod(Position, coord, 0.0).xyz;
+    if (dot(relative, relative) < 1e-8) {
+        return -1e6;
+    }
+    return (VIEW_MATRIX * vec4(relative, 0.0)).z;
 }
 
 void fragment() {
@@ -40,10 +45,10 @@ void fragment() {
         COLOR_INDEX_0 = vec4(1.0);
     }
     else {
-        vec3 posWS = gbufferPosition(textureLod(Position, uv, 0.0), coverage);
+        vec3 relativePos = gbufferRelativePosition(textureLod(Position, uv, 0.0), coverage);
         vec3 normalWS = gbufferNormal(textureLod(Normal, uv, 0.0), coverage);
 
-        vec3 pos = (VIEW_MATRIX * vec4(posWS, 1.0)).xyz;
+        vec3 pos = (VIEW_MATRIX * vec4(relativePos, 0.0)).xyz;
         vec3 normal = normalize((VIEW_MATRIX * vec4(normalWS, 0.0)).xyz);
 
         float occlusion = 0.0;

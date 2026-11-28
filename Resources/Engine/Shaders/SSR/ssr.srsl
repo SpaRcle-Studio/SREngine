@@ -54,7 +54,7 @@ float ssrIGN(vec2 pixel) {
     // расстояние от камеры до геометрии в точке экрана, 1e9 - небо
     float sceneDistanceAt(vec2 coord) {
         float coverage = sceneCoverageAt(coord);
-        return gbufferHasGeometry(coverage) ? length(gbufferPosition(textureLod(positionMap, coord, 0.0), coverage) - VIEW_POSITION) : 1e9;
+        return gbufferHasGeometry(coverage) ? length(gbufferRelativePosition(textureLod(positionMap, coord, 0.0), coverage)) : 1e9;
     }
 
     vec4 traceFragment() {
@@ -68,19 +68,21 @@ float ssrIGN(vec2 pixel) {
             return vec4(0.0);
         }
 
-        vec3 surfacePosition = gbufferPosition(textureLod(positionMap, uv, 0.0), coverage);
+        // всё относительно камеры - без больших мировых координат
+        vec3 surfaceRelative = gbufferRelativePosition(textureLod(positionMap, uv, 0.0), coverage);
         vec3 N = gbufferNormal(textureLod(normalMap, uv, 0.0), coverage);
-        vec3 V = normalize(surfacePosition - VIEW_POSITION);
+        vec3 V = normalize(surfaceRelative);
         vec3 R = reflect(V, N);
 
-        float cameraDistance = length(surfacePosition - VIEW_POSITION);
+        float cameraDistance = length(surfaceRelative);
         float maxDistance = ssrTraceParams.z;
         float thickness = ssrTraceParams.w;
 
         // смещение начала вдоль нормали - без самопересечений
-        vec3 origin = surfacePosition + N * (0.002 * cameraDistance + 0.01);
+        vec3 origin = surfaceRelative + N * (0.002 * cameraDistance + 0.01);
 
-        vec4 v0 = VIEW_MATRIX * vec4(origin, 1.0);
+        // поворот вида без переноса: origin уже относительно камеры
+        vec4 v0 = vec4((VIEW_MATRIX * vec4(origin, 0.0)).xyz, 1.0);
         vec3 Rv = (VIEW_MATRIX * vec4(R, 0.0)).xyz;
 
         vec4 h0 = PROJECTION_MATRIX * v0;

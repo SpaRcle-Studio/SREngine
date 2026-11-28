@@ -63,7 +63,7 @@ vec3 CalculateVertexPosition() {
 
 void fragment() {
     COLOR_INDEX_1 = vec4(1.0, 0.0, 0.0, 1.0);
-    COLOR_INDEX_2 = vec4(VERTEX, 1.0);
+    COLOR_INDEX_2 = vec4(VERTEX - VIEW_POSITION, 1.0);
     COLOR_INDEX_3 = vec4(NORMAL * 0.5 + 0.5, 1.0);
 
 #ifdef SR_DEFINE_DEBUG_NORMALS

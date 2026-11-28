@@ -157,7 +157,7 @@ void fragment() {
     gbufferNormalWS = normalize(TBN * tangentNormal);
 #endif
     COLOR_INDEX_1 = vec4(1.0, clamp(metallicValue, 0.0, 1.0), clamp(roughnessValue, 0.02, 1.0), alpha);
-    COLOR_INDEX_2 = vec4(VERTEX, alpha);
+    COLOR_INDEX_2 = vec4(VERTEX - VIEW_POSITION, alpha);
     COLOR_INDEX_3 = vec4(gbufferNormalWS * 0.5 + 0.5, alpha);
 
     vec3 unused_var0 = GROUND_COLOR;

@@ -7,10 +7,13 @@
 [[uniform(SHARED)]] vec4 cloudsLightParams;   // absorption, ambient, silverLining, powder
 [[uniform(SHARED)]] vec4 cloudsDetailParams;  // detailScale, detailStrength, primarySteps, lightSteps
 
+// Радиус кривизны слоя для плоского мира (горизонт облаков как на Земле). Сферический мир
+// (Common/world-shape.srsl) - слой на высоте над его поверхностью, пересечения точные.
 [[const]] float CLOUDS_PLANET_RADIUS = 6360000.0;
 
 
 #include <Engine/Shaders/Common/atmosphere.srsl>
+#include <Engine/Shaders/Common/world-shape.srsl>
 
 [[const]] float CLOUDS_NOISE_PERIOD = 256.0;
 
@@ -44,10 +47,38 @@ float cloudsRemap(float v, float lo, float hi, float newLo, float newHi) {
 }
 
 // Высота над поверхностью с учетом кривизны планеты, без чисел порядка радиуса планеты (float32 их не тянет).
-// offset - смещение точки относительно камеры, cameraHeight - высота камеры (VIEW_POSITION.y)
+// offset - смещение точки относительно камеры, cameraHeight - высота камеры (worldCameraHeight)
 float cloudsHeight(vec3 offset, float cameraHeight) {
+    if (worldIsSphere()) {
+        return worldHeight(offset);
+    }
     float horizontal2 = dot(offset.xz, offset.xz);
     return cameraHeight + offset.y - horizontal2 / (2.0 * CLOUDS_PLANET_RADIUS);
+}
+
+// Пересечение луча из камеры со сферой мира радиуса (R + targetHeight), h0 - высота камеры.
+// |oc|^2 - r^2 считается как (|oc| - r)(|oc| + r) через высоты - без вычитания квадратов радиусов.
+float cloudsRaySphere(float h0, vec3 rd, float targetHeight) {
+    vec3 oc = -WORLD_SHAPE.xyz;
+    float radius = WORLD_SHAPE.w;
+    float b = dot(oc, rd);
+    float c = (h0 - targetHeight) * (2.0 * radius + h0 + targetHeight);
+    // t^2 + 2 b t + c = 0
+    float d = b * b - c;
+    if (d < 0.0) {
+        return -1.0;
+    }
+    d = sqrt(d);
+    // устойчивая форма корней: q и c / q
+    float q = -(b + (b > 0.0 ? d : -d));
+    float t0 = q;
+    float t1 = abs(q) > 1e-9 ? c / q : -1.0;
+    float tMin = min(t0, t1);
+    float tMax = max(t0, t1);
+    if (tMin > 0.0) {
+        return tMin;
+    }
+    return tMax > 0.0 ? tMax : -1.0;
 }
 
 float cloudsHeightFraction(float height) {
@@ -57,6 +88,9 @@ float cloudsHeightFraction(float height) {
 // пересечение луча с "искривленной" плоскостью height = const.
 // height(t) = h0 + t*dy - t^2 * k, k = |rd.xz|^2 / 2R. Возвращает ближайшее t > 0 или -1
 float cloudsRayLayer(float h0, vec3 rd, float targetHeight) {
+    if (worldIsSphere()) {
+        return cloudsRaySphere(h0, rd, targetHeight);
+    }
     float k = dot(rd.xz, rd.xz) / (2.0 * CLOUDS_PLANET_RADIUS);
     float a = k;
     float b = -rd.y;
@@ -112,8 +146,16 @@ float cloudsBaseDensity(vec3 worldPos, float h) {
 
     float scale = cloudsShapeParams.w;
 
-    vec2 weatherUV = cloudsWrap(vec3(p.xz * 0.000035 * scale, 0.0), CLOUDS_NOISE_PERIOD).xy;
-    float weather = cloudsNoise2D(weatherUV) * 0.65 + cloudsNoise2D(weatherUV * 3.0 + 7.0) * 0.35;
+    float weather = 0.0;
+    if (worldIsSphere()) {
+        // на сфере проекция на XZ вытягивает погоду в полосы по бокам планеты - карта объемная
+        vec3 weatherP = cloudsWrap(p * 0.000035 * scale, CLOUDS_NOISE_PERIOD);
+        weather = cloudsNoise3D(weatherP) * 0.65 + cloudsNoise3D(weatherP * 3.0 + 7.0) * 0.35;
+    }
+    else {
+        vec2 weatherUV = cloudsWrap(vec3(p.xz * 0.000035 * scale, 0.0), CLOUDS_NOISE_PERIOD).xy;
+        weather = cloudsNoise2D(weatherUV) * 0.65 + cloudsNoise2D(weatherUV * 3.0 + 7.0) * 0.35;
+    }
 
     // верх облака сдвигается по ветру сильнее - наклон кучевых облаков
     vec3 shapeP = cloudsWrap((p + wind * h * 0.5) * 0.00045 * scale, CLOUDS_NOISE_PERIOD);
@@ -191,7 +233,8 @@ float cloudsLightEnergy(float od, float cosTheta, float density) {
 
 // rgb - рассеянный свет, a - пропускание
 vec4 renderClouds(vec3 rayOrigin, vec3 rayDir, float sceneDistance, float jitter) {
-    float cameraHeight = rayOrigin.y;
+    float cameraHeight = worldCameraHeight();
+    vec3 up = worldCameraUp();
     float bottom = cloudsLayerParams.x;
     float top = bottom + cloudsLayerParams.y;
 
@@ -234,12 +277,19 @@ vec4 renderClouds(vec3 rayOrigin, vec3 rayDir, float sceneDistance, float jitter
         return vec4(0.0, 0.0, 0.0, 1.0);
     }
 
-    // у горизонта луч длиннее - больше шагов, но с ограничением длины шага
-    float baseSteps = cloudsDetailParams.z;
-    float horizonFactor = 1.0 - clamp(abs(rayDir.y) * 3.0, 0.0, 1.0);
-    int steps = int(baseSteps * mix(1.0, 1.75, horizonFactor));
+    // Шаг растет с дистанцией от камеры: вблизи - доля толщины слоя (внутри облака и при влете детали
+    // не теряются), дальше - пропорционально дистанции, но не крупнее равномерного шага по лучу.
+    // Равномерный шаг внутри слоя был длина/~84: горизонтальный луч до выхода из слоя - десятки км,
+    // шаг в сотни метров при деталях ~300 м - облака вблизи рассыпались на ступени и шум джиттера.
+    float baseSteps = max(cloudsDetailParams.z, 8.0);
+    // у горизонта луч длиннее - больше шагов
+    float horizonFactor = 1.0 - clamp(abs(dot(rayDir, up)) * 3.0, 0.0, 1.0);
     float rayLength = tEnd - tStart;
-    float stepSize = max(rayLength / float(steps), cloudsLayerParams.y / baseSteps * 0.5);
+    float minStep = cloudsLayerParams.y / baseSteps * 0.25;
+    float maxStep = max(rayLength / (baseSteps * mix(1.0, 1.75, horizonFactor)), minStep);
+    float relativeStep = 2.0 / baseSteps;
+    int maxIterations = int(baseSteps * 4.0);
+    float stepSize = clamp(tStart * relativeStep, minStep, maxStep);
 
     vec3 toPrimary = normalize(-DIRECTIONAL_LIGHT_DIRECTION);
     vec3 toSecondary = normalize(-SECONDARY_LIGHT_DIRECTION);
@@ -249,12 +299,12 @@ vec4 renderClouds(vec3 rayOrigin, vec3 rayDir, float sceneDistance, float jitter
     // облака под луной заметно тусклее, чем под солнцем той же "интенсивности"
     float primaryScale = PRIMARY_DISK_PARAMS.z > 0.5 ? 0.35 : 1.0;
     float secondaryScale = SECONDARY_DISK_PARAMS.z > 0.5 ? 0.35 : 1.0;
-    vec3 primaryRadiance = atmoLightRadiance(toPrimary, PRIMARY_SKY_ILLUMINANCE) * primaryScale;
-    vec3 secondaryRadiance = atmoLightRadiance(toSecondary, SECONDARY_SKY_ILLUMINANCE) * secondaryScale;
+    vec3 primaryRadiance = atmoLightRadiance(toPrimary, up, PRIMARY_SKY_ILLUMINANCE) * primaryScale;
+    vec3 secondaryRadiance = atmoLightRadiance(toSecondary, up, SECONDARY_SKY_ILLUMINANCE) * secondaryScale;
 
     // ambient сверху - небо, снизу - отраженный от земли свет
-    vec3 ambientTop = atmoSky(vec3(0.0, 1.0, 0.0), PRIMARY_DISK_PARAMS, SECONDARY_DISK_PARAMS, DIRECTIONAL_LIGHT_DIRECTION, PRIMARY_SKY_ILLUMINANCE, SECONDARY_LIGHT_DIRECTION, SECONDARY_SKY_ILLUMINANCE) * cloudsLightParams.y;
-    vec3 ambientBottom = (primaryRadiance * max(toPrimary.y, 0.0) + secondaryRadiance * max(toSecondary.y, 0.0))
+    vec3 ambientTop = atmoSky(up, up, PRIMARY_DISK_PARAMS, SECONDARY_DISK_PARAMS, DIRECTIONAL_LIGHT_DIRECTION, PRIMARY_SKY_ILLUMINANCE, SECONDARY_LIGHT_DIRECTION, SECONDARY_SKY_ILLUMINANCE) * cloudsLightParams.y;
+    vec3 ambientBottom = (primaryRadiance * max(dot(toPrimary, up), 0.0) + secondaryRadiance * max(dot(toSecondary, up), 0.0))
         * GROUND_COLOR * 0.1 * cloudsLightParams.y;
 
     float transmittance = 1.0;
@@ -266,9 +316,11 @@ vec4 renderClouds(vec3 rayOrigin, vec3 rayDir, float sceneDistance, float jitter
     int emptySteps = 0;
 
     for (int i = 0; i < 256; i++) {
-        if (i >= steps * 2 || t >= tEnd) {
+        if (i >= maxIterations || t >= tEnd) {
             break;
         }
+
+        stepSize = clamp(t * relativeStep, minStep, maxStep);
 
         vec3 offset = rayDir * t;
         vec3 p = rayOrigin + offset;
@@ -324,7 +376,7 @@ vec4 renderClouds(vec3 rayOrigin, vec3 rayDir, float sceneDistance, float jitter
         // воздушная перспектива: далекие облака растворяются в небе
         float distance = weightedDistance / weightSum;
         float fade = exp(-distance / (maxDistance * 0.45));
-        vec3 sky = atmoSky(normalize(vec3(rayDir.x, max(rayDir.y, 0.0), rayDir.z) + vec3(0.0, 0.0001, 0.0)), PRIMARY_DISK_PARAMS, SECONDARY_DISK_PARAMS, DIRECTIONAL_LIGHT_DIRECTION, PRIMARY_SKY_ILLUMINANCE, SECONDARY_LIGHT_DIRECTION, SECONDARY_SKY_ILLUMINANCE);
+        vec3 sky = atmoSky(normalize(worldAboveHorizon(rayDir, up) + up * 0.0001), up, PRIMARY_DISK_PARAMS, SECONDARY_DISK_PARAMS, DIRECTIONAL_LIGHT_DIRECTION, PRIMARY_SKY_ILLUMINANCE, SECONDARY_LIGHT_DIRECTION, SECONDARY_SKY_ILLUMINANCE);
         scattering = mix(sky * (1.0 - transmittance), scattering, fade);
 
     }

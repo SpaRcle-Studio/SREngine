@@ -21,6 +21,7 @@ vec4 DebugColorCascade(vec4 color, uint cascadeIndex) {
 }
 
 #include <Engine/Shaders/Common/color-correction.inl.srsl>
+#include <Engine/Shaders/Common/world-shape.srsl>
 
 #define SR_CASCADE_USE_RADII
 // Закомментируйте, чтобы выбирать каскад по квадрату проекции shadow map.
@@ -87,6 +88,10 @@ float textureProj(vec3 proj, float ndotl, vec2 offset, uint cascadeIndex) {
     }
     vec2 uv = clamp(proj.xy + offset, vec2(0.001), vec2(0.999));
     vec3 newProj = vec3(proj.x, proj.y, clamp(proj.z, 0.0, 1.0));
+#ifdef SR_REVERSE_DEPTH
+    // Матрицы каскадов и shadow map в reverse-Z - сравнение ниже в обычной глубине
+    newProj.z = 1.0 - newProj.z;
+#endif
 
     // Slope-based bias + минимум (меньше acne при прямом свете)
     float slopeBias = cascadeBias[cascadeIndex] * (1.0 - ndotl);
@@ -95,6 +100,9 @@ float textureProj(vec3 proj, float ndotl, vec2 offset, uint cascadeIndex) {
     newProj.z -= bias;
 
     float depth = textureLod(shadowMap, vec3(uv.x, uv.y, float(cascadeIndex)), 0.0).r;
+#ifdef SR_REVERSE_DEPTH
+    depth = 1.0 - depth;
+#endif
     return step(newProj.z, depth);
 }
 
@@ -273,8 +281,10 @@ vec4 CalculateShadow(
     // чем шероховатее поверхность, тем ближе выборка окружения к нормали
     vec3 envDir = normalize(mix(R, N, a));
 
-    vec3 skyAmbient = mix(GROUND_COLOR, SKY_COLOR, clamp(N.y * 0.5 + 0.5, 0.0, 1.0)) * AMBIENT_INTENSITY;
-    vec3 skyReflection = mix(GROUND_COLOR, SKY_COLOR, clamp(envDir.y * 0.5 + 0.5, 0.0, 1.0)) * AMBIENT_INTENSITY;
+    // полусфера по верху мира в этой точке (плоский мир - Y, планета - от центра)
+    vec3 worldUpAtVertex = worldUp(vertexPos - VIEW_POSITION);
+    vec3 skyAmbient = mix(GROUND_COLOR, SKY_COLOR, clamp(dot(N, worldUpAtVertex) * 0.5 + 0.5, 0.0, 1.0)) * AMBIENT_INTENSITY;
+    vec3 skyReflection = mix(GROUND_COLOR, SKY_COLOR, clamp(dot(envDir, worldUpAtVertex) * 0.5 + 0.5, 0.0, 1.0)) * AMBIENT_INTENSITY;
 
     // specular occlusion по AO: дешевая аппроксимация Lagarde (без вложенных pow)
     float specularAO = mix(aoValue, 1.0, NdotV * (1.0 - a));

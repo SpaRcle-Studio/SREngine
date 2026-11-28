@@ -37,6 +37,7 @@ DepthTest false;
 
 #include <Engine/Shaders/Common/utils.srsl>
 #include <Engine/Shaders/Common/atmosphere.srsl>
+#include <Engine/Shaders/Common/world-shape.srsl>
 #include <Engine/Shaders/Common/gbuffer.srsl>
 
 [[const]] float FOG_NOISE_PERIOD = 256.0;
@@ -65,16 +66,31 @@ float fogIGN(vec2 pixel) {
     return fract(52.9829189 * fract(dot(pixel, vec2(0.06711056, 0.00583715))));
 }
 
-// экспоненциальная высотная плотность
-float fogDensityAt(vec3 p) {
-    float h = p.y - fogDensityParams.y;
+// экспоненциальная высотная плотность. offset - точка относительно камеры, высота - над поверхностью мира
+// (Common/world-shape.srsl: плоский мир - над землей по Y, сфера - над радиусом)
+float fogDensityAt(vec3 offset) {
+    float h = worldHeight(offset) - fogDensityParams.y;
     return fogDensityParams.x * exp(-max(h, -50.0) * fogDensityParams.z);
 }
 
-// аналитический интеграл плотности вдоль отрезка луча [0, dist] - гладкий туман без шагов марша
-float fogOpticalDepth(vec3 ro, vec3 rd, float dist) {
+// интеграл плотности вдоль отрезка луча [0, dist] от точки offset - гладкий туман без шагов марша
+float fogOpticalDepth(vec3 offset, vec3 rd, float dist) {
+    if (worldIsSphere()) {
+        // на сфере поверхность уходит вниз (за 5 км на планете 20 км - на ~600 м), аналитика плоскости
+        // переоценивает туман у горизонта. Численно по точной высоте, выборки сгущены к началу отрезка.
+        int samples = 12;
+        float depth = 0.0;
+        for (int i = 0; i < samples; i++) {
+            float u = (float(i) + 0.5) / float(samples);
+            float t = dist * u * u;
+            float dt = dist * 2.0 * u / float(samples);
+            depth += fogDensityAt(offset + rd * t) * dt;
+        }
+        return depth;
+    }
+
     float k = fogDensityParams.z;
-    float h0 = ro.y - fogDensityParams.y;
+    float h0 = worldHeight(offset) - fogDensityParams.y;
     float base = fogDensityParams.x * exp(-max(h0, -50.0) * k);
     float slope = rd.y * k;
 
@@ -110,11 +126,18 @@ float fogShadow(vec3 worldPos, float viewDepth) {
     }
 
     shadowCoord /= shadowCoord.w;
+#ifdef SR_REVERSE_DEPTH
+    // Матрицы каскадов и shadow map в reverse-Z - сравнение ниже в обычной глубине
+    shadowCoord.z = 1.0 - shadowCoord.z;
+#endif
     if (shadowCoord.z > 1.0) {
         return 1.0;
     }
 
     float depth = textureLod(shadowMap, vec3(shadowCoord.xy, float(cascadeIndex)), 0.0).r;
+#ifdef SR_REVERSE_DEPTH
+    depth = 1.0 - depth;
+#endif
     return shadowCoord.z - 0.002 > depth ? 0.0 : 1.0;
 }
 #endif
@@ -151,15 +174,18 @@ void fragment() {
     // отраженный свет (луна) в тумане так же приглушен, как в небе и облаках
     float primaryScale = PRIMARY_DISK_PARAMS.z > 0.5 ? 0.35 : 1.0;
     float secondaryScale = SECONDARY_DISK_PARAMS.z > 0.5 ? 0.35 : 1.0;
-    vec3 primaryRadiance = atmoLightRadiance(toPrimary, PRIMARY_SKY_ILLUMINANCE) * primaryScale;
-    vec3 secondaryRadiance = atmoLightRadiance(toSecondary, SECONDARY_SKY_ILLUMINANCE) * secondaryScale;
+    // верх под камерой: туман вблизи, освещение и небо - как видит наблюдатель
+    vec3 up = worldCameraUp();
+
+    vec3 primaryRadiance = atmoLightRadiance(toPrimary, up, PRIMARY_SKY_ILLUMINANCE) * primaryScale;
+    vec3 secondaryRadiance = atmoLightRadiance(toSecondary, up, SECONDARY_SKY_ILLUMINANCE) * secondaryScale;
 
     float phasePrimary = atmoPhaseHG(dot(rayDir, toPrimary), g);
     float phaseSecondary = atmoPhaseHG(dot(rayDir, toSecondary), g);
 
     // ambient: свет неба у горизонта в направлении взгляда - туман сливается с небом
-    vec3 horizonSky = atmoSky(normalize(vec3(rayDir.x, 0.05, rayDir.z)), PRIMARY_DISK_PARAMS, SECONDARY_DISK_PARAMS, DIRECTIONAL_LIGHT_DIRECTION, PRIMARY_SKY_ILLUMINANCE, SECONDARY_LIGHT_DIRECTION, SECONDARY_SKY_ILLUMINANCE);
-    vec3 zenithSky = atmoSky(vec3(0.0, 1.0, 0.0), PRIMARY_DISK_PARAMS, SECONDARY_DISK_PARAMS, DIRECTIONAL_LIGHT_DIRECTION, PRIMARY_SKY_ILLUMINANCE, SECONDARY_LIGHT_DIRECTION, SECONDARY_SKY_ILLUMINANCE);
+    vec3 horizonSky = atmoSky(worldHorizonDir(rayDir, up, 0.05), up, PRIMARY_DISK_PARAMS, SECONDARY_DISK_PARAMS, DIRECTIONAL_LIGHT_DIRECTION, PRIMARY_SKY_ILLUMINANCE, SECONDARY_LIGHT_DIRECTION, SECONDARY_SKY_ILLUMINANCE);
+    vec3 zenithSky = atmoSky(up, up, PRIMARY_DISK_PARAMS, SECONDARY_DISK_PARAMS, DIRECTIONAL_LIGHT_DIRECTION, PRIMARY_SKY_ILLUMINANCE, SECONDARY_LIGHT_DIRECTION, SECONDARY_SKY_ILLUMINANCE);
     vec3 ambient = mix(zenithSky, horizonSky, fogLightParams.w) * fogColorParams.a;
 
     float jitter = fogIGN(FRAG_COORD.xy);
@@ -184,7 +210,7 @@ void fragment() {
         float t = startDistance + (float(i) + jitter) * stepSize;
         vec3 p = rayOrigin + rayDir * t;
 
-        float density = fogDensityAt(p);
+        float density = fogDensityAt(rayDir * t);
 
         if (noiseStrength > 0.0) {
             vec3 np = mod((p + windOffset) * fogNoiseParams.y, FOG_NOISE_PERIOD);
@@ -219,8 +245,7 @@ void fragment() {
 
     // хвост: от конца марша до неба (если геометрии нет) - аналитически, только ambient + свет без теней
     if (!hasGeometry && transmittance > 0.005) {
-        vec3 tailOrigin = rayOrigin + rayDir * sceneDistance;
-        float tailDepth = fogOpticalDepth(tailOrigin, rayDir, maxDistance * 4.0);
+        float tailDepth = fogOpticalDepth(rayDir * sceneDistance, rayDir, maxDistance * 4.0);
         float tailTransmittance = exp(-tailDepth);
         vec3 tailLight = (primaryRadiance * phasePrimary * fogLightParams.y + secondaryRadiance * phaseSecondary + ambient) * albedo;
         scattering += transmittance * tailLight * (1.0 - tailTransmittance);
