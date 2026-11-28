@@ -36,6 +36,9 @@ namespace SR_CORE_NS {
         SR_NODISCARD virtual bool IsPhysicsEnabled() const { return false; }
         /// Меш чанка уже попал в рендер. Пока нет - заменяемый чанк должен оставаться видимым, иначе моргание
         SR_NODISCARD virtual bool IsRenderReady() const { return true; }
+        /// Коллизия чанка уже в физическом мире (или не нужна: пустой чанк, геометрия не годится).
+        /// Пока нет - заменяемый чанк держит свою коллизию, иначе под ногами дыра на время генерации и кукинга
+        SR_NODISCARD virtual bool IsPhysicsReady() const { return true; }
 
     protected:
         ITerrainChunk* m_chunk = nullptr;

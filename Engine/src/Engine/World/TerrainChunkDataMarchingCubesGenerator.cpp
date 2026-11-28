@@ -979,6 +979,26 @@ namespace SR_CORE_NS {
         return pProceduralMesh->IsActive() && pProceduralMesh->IsRenderObjectRegistered() && !pProceduralMesh->IsWaitReRegister();
     }
 
+    bool TerrainMarchingCubesChunkData::IsPhysicsReady() const {
+        auto&& pChunkObject = m_chunk->GetObject();
+        if (!pChunkObject || !m_isCollisionAllowed) {
+            return true;
+        }
+
+        if (!m_isPhysicsEnabled) {
+            return false;
+        }
+
+        auto&& pRigidBody = pChunkObject->GetComponent<SR_PTYPES_NS::Rigidbody>();
+        if (!pRigidBody) {
+            return true;
+        }
+
+        /// Включение применяется отложенно (CheckActivity), тело попадает в мир на Flush физики (InitBody),
+        /// треугольный меш кукается в SynchronizeStatic не больше одного за кадр
+        return pRigidBody->IsActive() && pRigidBody->GetHandle() && !pRigidBody->IsBodyDirty() && !pRigidBody->IsShapeDirty();
+    }
+
     void TerrainMarchingCubesChunkData::Deactivate() {
         Super::Deactivate();
 

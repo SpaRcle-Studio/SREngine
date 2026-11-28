@@ -178,6 +178,10 @@ namespace SR_CORE_NS {
 
         const bool isPaused = pEngine->IsPaused() || !pEngine->IsActive() || pEngine->HasSceneInQueue();
 
+        if (pPhysicsScene) {
+            pPhysicsScene->SetSimulating(!isPaused);
+        }
+
         pSceneUpdater->Build(isPaused);
         if (SR_SCRIPTING_NS::ScriptSystem::Instance().IsLoading()) {
             SR_TRACY_ZONE_N("Update UI while scripts are loading");

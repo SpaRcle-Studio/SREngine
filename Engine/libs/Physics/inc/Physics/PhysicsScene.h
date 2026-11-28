@@ -60,6 +60,11 @@ namespace SR_PHYSICS_NS {
 
         void SetIsGameMode(bool enabled) noexcept { m_isGameMode = enabled; }
 
+        /// Шагает ли симуляция (сцена запущена и не на паузе). Выставляет движок каждый кадр.
+        /// Без симуляции тела не попадают в мир (Flush не зовется) - ждать их коллизию бессмысленно
+        void SetSimulating(bool simulating) noexcept { m_isSimulating = simulating; }
+        SR_NODISCARD bool IsSimulating() const noexcept { return m_isSimulating; }
+
     private:
         SR_NODISCARD bool IsSceneEmpty() const noexcept;
 
@@ -85,6 +90,7 @@ namespace SR_PHYSICS_NS {
         bool m_needClearForces = false;
         bool m_debugEnabled = true;
         bool m_isGameMode = false;
+        bool m_isSimulating = false;
 
     };
 }

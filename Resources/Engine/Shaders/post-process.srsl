@@ -27,14 +27,10 @@ DepthTest false;
     [[uniform]] sampler2D SSAO;
 #endif
 
-#ifdef SR_VOLUMETRIC_CLOUDS
-    [[uniform]] sampler2D cloudsMap;
-    [[uniform], [unfilterable]] sampler2D cloudsDepthMap;
-#endif
-
-#ifdef SR_VOLUMETRIC_FOG
-    [[uniform]] sampler2D fogMap;
-    [[uniform], [unfilterable]] sampler2D fogDepthMap;
+#if defined(SR_VOLUMETRIC_CLOUDS) || defined(SR_VOLUMETRIC_FOG)
+    // облака, атмосферная перспектива и туман одним буфером (Volumetrics/volumetrics.srsl)
+    [[uniform]] sampler2D volumetricsMap;
+    [[uniform], [unfilterable]] sampler2D volumetricsDepthMap;
 #endif
 
 #ifdef SR_BLOOM
@@ -284,16 +280,11 @@ void fragment() {
     }
 #endif
 
-#ifdef SR_VOLUMETRIC_CLOUDS
-    // облака посчитаны в пониженном разрешении: rgb - рассеянный свет, a - пропускание
-    vec4 clouds = sampleLowRes(cloudsMap, cloudsDepthMap, uv, coverage, centerDistance);
-    color = color * clouds.a + max(clouds.rgb, vec3(0.0));
-#endif
-
-#ifdef SR_VOLUMETRIC_FOG
-    // туман ближе облаков - накладывается поверх: rgb - рассеянный свет, a - пропускание
-    vec4 fog = sampleLowRes(fogMap, fogDepthMap, uv, coverage, centerDistance);
-    color = color * fog.a + max(fog.rgb, vec3(0.0));
+#if defined(SR_VOLUMETRIC_CLOUDS) || defined(SR_VOLUMETRIC_FOG)
+    // облака, воздух и туман посчитаны в пониженном разрешении и уже сложены в порядке вдоль луча:
+    // rgb - рассеянный свет, a - пропускание
+    vec4 volumetrics = sampleLowRes(volumetricsMap, volumetricsDepthMap, uv, coverage, centerDistance);
+    color = color * volumetrics.a + max(volumetrics.rgb, vec3(0.0));
 #endif
 
 #ifdef SR_BLOOM

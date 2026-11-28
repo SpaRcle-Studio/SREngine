@@ -94,6 +94,8 @@ namespace SR_CORE_NS {
 
         SR_NODISCARD bool IsNodeAllowed(const SR_MATH_NS::OctreeNodeId& node) const;
         SR_NODISCARD bool IsReady(const SR_MATH_NS::OctreeNodeId& node) const;
+        /// Физика сцены шагает - коллизии замен имеет смысл ждать (PhysicsScene::IsSimulating)
+        SR_NODISCARD bool IsPhysicsSimulating() const;
         SR_NODISCARD uint8_t CalculateLodBorders(const SR_MATH_NS::OctreeNodeId& node) const;
         SR_NODISCARD const SR_MATH_NS::OctreeNodeId* FindLeafAt(const SR_MATH_NS::IVector3& position) const;
 

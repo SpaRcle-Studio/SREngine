@@ -4,8 +4,11 @@
 
 #include <Engine/World/TerrainChunkCube.h>
 
+#include <Physics/PhysicsScene.h>
+
 #include <Utils/ECS/GameObject.h>
 #include <Utils/ECS/Transform3D.h>
+#include <Utils/World/Scene.h>
 
 #include <Codegen/TerrainChunkCube.generated.hpp>
 
@@ -398,6 +401,7 @@ namespace SR_CORE_NS {
         m_notReadySet.Clear();
 
         const uint8_t maxLevel = GetMaxLevel();
+        const bool isPhysicsSimulating = IsPhysicsSimulating();
 
         for (auto&& [node, pChunk] : m_chunks) {
             const bool isLoaded = pChunk->GetStatus() == ITerrainChunk::Status::Loaded;
@@ -408,6 +412,13 @@ namespace SR_CORE_NS {
             /// Трава замены тоже должна быть готова: иначе либо место голое, либо (если держать обе) травы вдвое больше
             bool isReady = isLoaded && pChunk->IsGrassReady();
             if (isReady && pChunk->GetObject() && pChunk->GetData() && !pChunk->GetData()->IsRenderReady()) {
+                isReady = false;
+            }
+
+            /// Коллизия замены тоже: заменяемый чанк держит свою, пока новая не попадет в физический мир.
+            /// Иначе на время генерации, сборки и кукинга (по одному за кадр) под ногами дыра - персонаж проваливается.
+            /// Без симуляции (редактор) тела в мир не попадают - не ждем
+            if (isReady && isPhysicsSimulating && pChunk->GetData() && IsCollisionEnabledAt(*pChunk) && !pChunk->GetData()->IsPhysicsReady()) {
                 isReady = false;
             }
 
@@ -645,11 +656,22 @@ namespace SR_CORE_NS {
             pChunkData->SwitchPhysics(isWithinPhysicsDistance);
         }
 
+        /// Заменяемый чанк держит коллизию до освобождения: замена считается готовой только с коллизией (UpdateChunkSets)
         for (auto&& pChunk : m_replacedChunks) {
             if (auto&& pChunkData = pChunk->GetData()) {
-                pChunkData->SwitchPhysics(false);
+                pChunkData->SwitchPhysics(IsCollisionEnabledAt(*pChunk));
             }
         }
+    }
+
+    bool TerrainChunkCubeGenerator::IsPhysicsSimulating() const {
+        auto&& pScene = m_terrain ? m_terrain->TryGetScene() : nullptr;
+        if (!pScene) {
+            return false;
+        }
+
+        auto&& pPhysicsScene = dynamic_cast<SR_PHYSICS_NS::PhysicsScene*>(pScene->GetModule("Physics"));
+        return pPhysicsScene && pPhysicsScene->IsSimulating();
     }
 
     bool TerrainChunkCubeGenerator::IsCollisionEnabledAt(const ITerrainChunk& chunk) const {

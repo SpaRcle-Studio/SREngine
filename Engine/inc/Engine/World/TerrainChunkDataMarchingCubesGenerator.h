@@ -54,6 +54,7 @@ namespace SR_CORE_NS {
         void SwitchPhysics(bool enable) override;
         SR_NODISCARD bool IsPhysicsEnabled() const override { return m_isPhysicsEnabled; }
         SR_NODISCARD bool IsRenderReady() const override;
+        SR_NODISCARD bool IsPhysicsReady() const override;
 
         /// Коллизия строится лениво из меша ProceduralMesh при первом включении физики
         void SetCollisionSettings(bool allowed, const SR_MATH_NS::FVector3& scale, float_t simplifyRatio, float_t simplifyError, uint64_t indicesCount);

@@ -413,9 +413,31 @@ namespace SR_CORE_NS {
             return static_cast<int32_t>(std::floor(static_cast<float_t>(v) / blockSize));
         };
 
-        for (int32_t z = toBlock(min.z); z <= toBlock(max.z); ++z) {
-            for (int32_t y = toBlock(min.y); y <= toBlock(max.y); ++y) {
-                for (int32_t x = toBlock(min.x); x <= toBlock(max.x); ++x) {
+        const SR_MATH_NS::IVector3 minBlock(toBlock(min.x), toBlock(min.y), toBlock(min.z));
+        const SR_MATH_NS::IVector3 maxBlock(toBlock(max.x), toBlock(max.y), toBlock(max.z));
+
+        const uint64_t rangeBlocks =
+            static_cast<uint64_t>(maxBlock.x - minBlock.x + 1) *
+            static_cast<uint64_t>(maxBlock.y - minBlock.y + 1) *
+            static_cast<uint64_t>(maxBlock.z - minBlock.z + 1);
+
+        /// Перебираем меньшее из двух. Дальний LOD-чанк покрывает ~1000 блоков по оси (10^9 поисков) - его проверяем
+        /// по списку правок, иначе после первого копания каждая перегенерация крупного чанка вешала кадр
+        if (rangeBlocks > static_cast<uint64_t>(m_editBlocks.size())) {
+            for (auto&& [blockCoord, pBlock] : m_editBlocks) {
+                if (blockCoord.x >= minBlock.x && blockCoord.x <= maxBlock.x &&
+                    blockCoord.y >= minBlock.y && blockCoord.y <= maxBlock.y &&
+                    blockCoord.z >= minBlock.z && blockCoord.z <= maxBlock.z)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        for (int32_t z = minBlock.z; z <= maxBlock.z; ++z) {
+            for (int32_t y = minBlock.y; y <= maxBlock.y; ++y) {
+                for (int32_t x = minBlock.x; x <= maxBlock.x; ++x) {
                     if (m_editBlocks.find(SR_MATH_NS::IVector3(x, y, z)) != m_editBlocks.end()) {
                         return true;
                     }

@@ -3,6 +3,11 @@
 //
 // Направление света в шейдере: DIRECTIONAL_LIGHT_DIRECTION / SECONDARY_LIGHT_DIRECTION указывают ОТ источника,
 // поэтому направление НА источник = -direction.
+//
+// Include текстовый: файл подключают облака и туман в одном шейдере (Volumetrics), поэтому guard.
+
+#ifndef SR_ATMOSPHERE_SRSL
+#define SR_ATMOSPHERE_SRSL
 
 [[const]] vec3 ATMO_BETA_R = vec3(5.802e-6, 13.558e-6, 33.1e-6);
 [[const]] float ATMO_BETA_M = 3.996e-6;
@@ -80,3 +85,5 @@ vec3 atmoSky(vec3 viewDir, vec3 up, vec4 primaryDiskParams, vec4 secondaryDiskPa
 vec3 atmoLightRadiance(vec3 toLight, vec3 up, vec3 illuminance) {
     return illuminance * atmoLightTransmittance(dot(toLight, up)) * ATMO_ILLUMINANCE_SCALE;
 }
+
+#endif

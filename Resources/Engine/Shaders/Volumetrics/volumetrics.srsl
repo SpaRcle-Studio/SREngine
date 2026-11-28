@@ -1,0 +1,88 @@
+ShaderType PostProcessing;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled false;
+DepthWrite false;
+DepthTest false;
+
+// Объемные эффекты одним проходом (VolumetricsPass): облака, атмосферная перспектива и туман в общий буфер
+// пониженного разрешения. Один луч, одно чтение дистанции сцены, один апсемпл в post-process.
+// Состав - макросы настроек графики (SR_VOLUMETRIC_CLOUDS / SR_VOLUMETRIC_FOG), включение - компоненты на сцене.
+// Результат: rgb - рассеянный свет, a - пропускание; слой 1 - дистанция, для которой посчитан пиксель.
+
+[[uniform(SHARED)]] vec4 volumetricsFlags;  // x - облака, y - туман и атмосферная перспектива
+[[uniform], [unfilterable]] sampler2D sceneDistanceMap;
+
+[[shared]] vec2 uv;
+
+#define USE_COLOR_INDEX_0
+#define USE_COLOR_INDEX_1
+
+#include <Engine/Shaders/Common/utils.srsl>
+#include <Engine/Shaders/Common/gbuffer.srsl>
+
+#ifdef SR_VOLUMETRIC_CLOUDS
+    #include <Engine/Shaders/Common/clouds.srsl>
+#endif
+
+#ifdef SR_VOLUMETRIC_FOG
+    #include <Engine/Shaders/Common/fog.srsl>
+#endif
+
+// interleaved gradient noise - дешевый джиттер начала лучей, убирает бандинг
+float volumetricsIGN(vec2 pixel) {
+    return fract(52.9829189 * fract(dot(pixel, vec2(0.06711056, 0.00583715))));
+}
+
+// слой front поверх слоя back (оба: rgb - рассеянный свет, a - пропускание)
+vec4 volumetricsOver(vec4 front, vec4 back) {
+    return vec4(front.rgb + front.a * back.rgb, front.a * back.a);
+}
+
+void fragment() {
+    #ifdef SR_WEBGPU
+        vec2 rayUV = vec2(uv.x, 1.0 - uv.y);
+    #else
+        vec2 rayUV = uv;
+    #endif
+    vec3 rayDir = getRayDir(rayUV);
+
+    float geometryDistance = gbufferSceneDistance(sceneDistanceMap, uv, TARGET_RESOLUTION);
+    // дистанция, для которой посчитан пиксель - по ней апсемпл в post-process подбирает соседей
+    COLOR_INDEX_1 = vec4(geometryDistance, 0.0, 0.0, 1.0);
+
+    bool hasGeometry = geometryDistance < 999999.0;
+    float jitter = volumetricsIGN(FRAG_COORD.xy);
+
+    // Порядок вдоль луча (от дальнего к ближнему): воздух у поверхности, облака, туман у камеры
+    vec4 result = vec4(0.0, 0.0, 0.0, 1.0);
+
+#ifdef SR_VOLUMETRIC_FOG
+    if (volumetricsFlags.y > 0.5 && hasGeometry) {
+        result = renderAerialPerspective(rayDir, geometryDistance);
+    }
+#endif
+
+#ifdef SR_VOLUMETRIC_CLOUDS
+    if (volumetricsFlags.x > 0.5) {
+        float sceneDistance = hasGeometry ? geometryDistance : 1e9;
+        result = volumetricsOver(renderClouds(VIEW_POSITION, rayDir, sceneDistance, jitter), result);
+    }
+#endif
+
+#ifdef SR_VOLUMETRIC_FOG
+    if (volumetricsFlags.y > 0.5) {
+        result = volumetricsOver(renderFog(rayDir, geometryDistance, jitter), result);
+    }
+#endif
+
+    COLOR_INDEX_0 = result;
+}
+
+void vertex() {
+    uv = vec2(float((int(VERTEX_INDEX) << 1) & 2), float(int(VERTEX_INDEX) & 2));
+    OUT_POSITION = vec4(uv * 2.0 - 1.0, 0.0, 1.0);
+}

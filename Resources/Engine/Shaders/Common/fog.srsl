@@ -1,23 +1,13 @@
-ShaderType PostProcessing;
-
-PolygonMode Fill;
-CullMode Back;
-DepthCompare LessOrEqual;
-PrimitiveTopology TriangleList;
-BlendEnabled false;
-DepthWrite false;
-DepthTest false;
-
-// Объемный туман. Настройки приходят из компонента VolumetricFog (см. VolumetricFog::UseUniforms).
-// Результат: rgb - рассеянный свет, a - пропускание.
+// Объемный туман и атмосферная перспектива. Настройки приходят из компонента VolumetricFog (VolumetricFog::UseUniforms),
+// рисуются проходом Volumetrics/volumetrics.srsl. Результат функций: rgb - рассеянный свет, a - пропускание.
+// Для теней лучей - SR_FOG_SHADOWS (сэмплер shadowMap и каскады задает VolumetricsPass).
 
 [[uniform(SHARED)]] vec4 fogDensityParams;  // density, baseHeight, heightFalloff, maxDistance
 [[uniform(SHARED)]] vec4 fogColorParams;    // albedo.rgb, ambientStrength
 [[uniform(SHARED)]] vec4 fogLightParams;    // anisotropy, lightShaftsIntensity, shadows, skyColorInfluence
 [[uniform(SHARED)]] vec4 fogNoiseParams;    // noiseStrength, noiseScale, windSpeed, startDistance
 [[uniform(SHARED)]] vec4 fogWindParams;     // windDir.xy, steps, -
-
-[[uniform], [unfilterable]] sampler2D sceneDistanceMap;
+[[uniform(SHARED)]] vec4 fogAerialParams;   // airDensity (0 - выкл), heightScale, -, -
 
 #ifdef SR_FOG_SHADOWS
     [[uniform]] sampler2DArrayDepth shadowMap;
@@ -30,15 +20,8 @@ DepthTest false;
     );
 #endif
 
-[[shared]] vec2 uv;
-
-#define USE_COLOR_INDEX_0
-#define USE_COLOR_INDEX_1
-
-#include <Engine/Shaders/Common/utils.srsl>
 #include <Engine/Shaders/Common/atmosphere.srsl>
 #include <Engine/Shaders/Common/world-shape.srsl>
-#include <Engine/Shaders/Common/gbuffer.srsl>
 
 [[const]] float FOG_NOISE_PERIOD = 256.0;
 
@@ -60,10 +43,6 @@ float fogNoise3D(vec3 p) {
         mix(mix(fogHash13(i + vec3(0.0, 0.0, 1.0)), fogHash13(i + vec3(1.0, 0.0, 1.0)), u.x),
             mix(fogHash13(i + vec3(0.0, 1.0, 1.0)), fogHash13(i + vec3(1.0, 1.0, 1.0)), u.x), u.y),
         u.z);
-}
-
-float fogIGN(vec2 pixel) {
-    return fract(52.9829189 * fract(dot(pixel, vec2(0.06711056, 0.00583715))));
 }
 
 // экспоненциальная высотная плотность. offset - точка относительно камеры, высота - над поверхностью мира
@@ -142,27 +121,18 @@ float fogShadow(vec3 worldPos, float viewDepth) {
 }
 #endif
 
-void fragment() {
+// Высотный туман вдоль луча от камеры. geometryDistance - до поверхности (> 999999 - небо), jitter - [0, 1)
+vec4 renderFog(vec3 rayDir, float geometryDistance, float jitter) {
     vec3 rayOrigin = VIEW_POSITION;
-    #ifdef SR_WEBGPU
-        vec2 rayUV = vec2(uv.x, 1.0 - uv.y);
-    #else
-        vec2 rayUV = uv;
-    #endif
-    vec3 rayDir = getRayDir(rayUV);
 
     float maxDistance = fogDensityParams.w;
     float startDistance = fogNoiseParams.w;
 
-    float geometryDistance = gbufferSceneDistance(sceneDistanceMap, uv, TARGET_RESOLUTION);
     bool hasGeometry = (geometryDistance < 999999.0);
     float sceneDistance = hasGeometry ? min(geometryDistance, maxDistance) : maxDistance;
-    // дистанция, для которой посчитан пиксель - по ней апсемпл в post-process подбирает соседей
-    COLOR_INDEX_1 = vec4(geometryDistance, 0.0, 0.0, 1.0);
 
     if (sceneDistance <= startDistance || fogDensityParams.x <= 0.0) {
-        COLOR_INDEX_0 = vec4(0.0, 0.0, 0.0, 1.0);
-        return;
+        return vec4(0.0, 0.0, 0.0, 1.0);
     }
 
     vec3 albedo = fogColorParams.rgb;
@@ -187,8 +157,6 @@ void fragment() {
     vec3 horizonSky = atmoSky(worldHorizonDir(rayDir, up, 0.05), up, PRIMARY_DISK_PARAMS, SECONDARY_DISK_PARAMS, DIRECTIONAL_LIGHT_DIRECTION, PRIMARY_SKY_ILLUMINANCE, SECONDARY_LIGHT_DIRECTION, SECONDARY_SKY_ILLUMINANCE);
     vec3 zenithSky = atmoSky(up, up, PRIMARY_DISK_PARAMS, SECONDARY_DISK_PARAMS, DIRECTIONAL_LIGHT_DIRECTION, PRIMARY_SKY_ILLUMINANCE, SECONDARY_LIGHT_DIRECTION, SECONDARY_SKY_ILLUMINANCE);
     vec3 ambient = mix(zenithSky, horizonSky, fogLightParams.w) * fogColorParams.a;
-
-    float jitter = fogIGN(FRAG_COORD.xy);
 
     int steps = int(fogWindParams.z);
     float marchLength = sceneDistance - startDistance;
@@ -253,10 +221,62 @@ void fragment() {
         transmittance *= tailTransmittance;
     }
 
-    COLOR_INDEX_0 = vec4(max(scattering, vec3(0.0)), transmittance);
+    return vec4(max(scattering, vec3(0.0)), transmittance);
 }
 
-void vertex() {
-    uv = vec2(float((int(VERTEX_INDEX) << 1) & 2), float(int(VERTEX_INDEX) & 2));
-    OUT_POSITION = vec4(uv * 2.0 - 1.0, 0.0, 1.0);
+// Атмосферная перспектива: воздух между камерой и поверхностью, той же моделью, что небо (atmosphere.srsl),
+// но по реальной длине луча вместо воздушной массы до края атмосферы. Чем дальше поверхность, тем ближе
+// она к цвету неба у горизонта - прячет переходы LOD и дает глубину пейзажу. Только для геометрии: у неба
+// это рассеяние уже есть. Тени и облака на воздух не влияют.
+// fogAerialParams.x - плотность воздуха (1 - как в модели неба), y - множитель высот однородной атмосферы.
+vec4 renderAerialPerspective(vec3 rayDir, float surfaceDistance) {
+    float airDensity = fogAerialParams.x;
+    if (airDensity <= 0.0 || surfaceDistance <= 0.0) {
+        return vec4(0.0, 0.0, 0.0, 1.0);
+    }
+
+    float heightScale = max(fogAerialParams.y, 0.001);
+    float rayleighHeight = ATMO_HR * heightScale;
+    float mieHeight = ATMO_HM * heightScale;
+
+    // интегралы плотности Rayleigh и Mie по лучу, выборки сгущены к камере (вблизи высота меняется быстрее)
+    vec2 depth = vec2(0.0);
+    int samples = 8;
+    for (int i = 0; i < samples; i++) {
+        float u = (float(i) + 0.5) / float(samples);
+        float t = surfaceDistance * u * u;
+        float dt = surfaceDistance * 2.0 * u / float(samples);
+        float h = max(worldHeight(rayDir * t), 0.0);
+        depth += vec2(exp(-h / rayleighHeight), exp(-h / mieHeight)) * dt;
+    }
+    depth *= airDensity;
+
+    vec3 tauRayleigh = ATMO_BETA_R * depth.x;
+    vec3 tau = tauRayleigh + vec3(ATMO_BETA_M_EXT * depth.y);
+    vec3 transmittance = exp(-tau);
+    vec3 scatteredFraction = (1.0 - transmittance) / max(tau, vec3(1e-7));
+
+    vec3 up = worldCameraUp();
+    vec3 toPrimary = normalize(-DIRECTIONAL_LIGHT_DIRECTION);
+    vec3 toSecondary = normalize(-SECONDARY_LIGHT_DIRECTION);
+
+    // как atmoSky: отраженный свет (луна) рассеивается слабее
+    float primaryScale = PRIMARY_DISK_PARAMS.z > 0.5 ? ATMO_REFLECTED_SKY_SCALE : 1.0;
+    float secondaryScale = SECONDARY_DISK_PARAMS.z > 0.5 ? ATMO_REFLECTED_SKY_SCALE : 1.0;
+
+    float cosPrimary = dot(rayDir, toPrimary);
+    float cosSecondary = dot(rayDir, toSecondary);
+
+    vec3 scatterPrimary = tauRayleigh * atmoPhaseRayleigh(cosPrimary) + vec3(ATMO_BETA_M * depth.y * atmoPhaseHG(cosPrimary, ATMO_MIE_G));
+    vec3 scatterSecondary = tauRayleigh * atmoPhaseRayleigh(cosSecondary) + vec3(ATMO_BETA_M * depth.y * atmoPhaseHG(cosSecondary, ATMO_MIE_G));
+
+    vec3 inscatter = scatterPrimary * scatteredFraction * atmoLightRadiance(toPrimary, up, PRIMARY_SKY_ILLUMINANCE) * primaryScale;
+    inscatter += scatterSecondary * scatteredFraction * atmoLightRadiance(toSecondary, up, SECONDARY_SKY_ILLUMINANCE) * secondaryScale;
+    inscatter += ATMO_NIGHT_GLOW * (1.0 - transmittance);
+
+    // Пропускание в буфере одно на пиксель - по яркости. Синий гасится сильнее, но и рассеивается сильнее,
+    // поэтому даль всё равно синеет за счет inscatter
+    float luminanceTransmittance = dot(transmittance, vec3(0.2126, 0.7152, 0.0722));
+
+    return vec4(max(inscatter, vec3(0.0)), luminanceTransmittance);
 }
